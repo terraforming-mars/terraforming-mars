@@ -1,0 +1,452 @@
+[{
+    "cost": 9,
+    "tags": ["earth", "space", "down"],
+    "name": "Import of Advanced GHG",
+    "color": "red",
+    "text": "Increase your heat production 2 steps.",
+    "description": "Greenhouse gases (GHG) with improved effect"
+}, {
+    "cost": 9,
+    "tags": ["science", "space"],
+    "name": "Lagrange Observatory",
+    "text": "Draw 1 card.",
+    "color": "green",
+    "description": "In a stationary orbit far from the planet, enabling very precise measurements",
+    "vp": 1
+}, {
+    "cost": 0,
+    "tags": ["down"],
+    "name": "Indentured Workers",
+    "text": "The next card you play this generation costs 8 mega credits less",
+    "vp": -1,
+    "color": "red",
+    "description": "There are many who would work for us for almost no pay in exchange for a ticket to Mars"
+}, {
+    "cost": 4,
+    "tags": ["power", "steel"],
+    "name": "Power Infrastructure",
+    "text": "Action: Spend any amount of energy to gain that amount of mega credits.",
+    "description": "Efficiency through flexibility",
+    "color": "blue"
+}, {
+    "cost": 15,
+    "tags": ["plant"],
+    "name": "Plantation",
+    "text": "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.",
+    "description": "By focusing on a limited area, helpful measures can be taken to improve local conditions for plant life",
+    "color": "green"
+}, {
+    "cost": 2,
+    "tags": ["science", "down"],
+    "name": "Invention Contest",
+    "color": "red",
+    "text": "LOOK AT THE TOP 3 CARDS FROM THE DECK. TAKE 1 OF THEM INTO HAND AND DISCARD THE OTHER 2",
+    "description": "Engaging the scientific community in a field of your choice"
+}, {
+    "cost": 8,
+    "tags": ["down"],
+    "name": "Permafrost Extraction",
+    "text": "Requires -8C or warmer. Place 1 ocean tile.",
+    "description": "Thawing the subsurface",
+    "color": "red"
+}, {
+    "cost": 1,
+    "tags": ["down"],
+    "name": "Local Heat Trapping",
+    "text": "Spend 5 heat to either gain 4 plants, or to add 2 animals to ANOTHER card.",
+    "color": "red",
+    "description": "Life can benefit from local hot spots"
+}, {
+    "cost": 15,
+    "tags": ["power"],
+    "name": "Energy Saving",
+    "color": "green",
+    "text": "Increase your energy production 1 step for each city tile in play.",
+    "description": "Minimizing urban energy spending"
+}, {
+    "cost": 7,
+    "tags": ["down"],
+    "name": "Flooding",
+    "color": "red",
+    "text": "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 MEGA CREDITS FROM THE OWNER OF ONE OF THOSE TILES",
+    "vp": -1,
+    "description": "Look out for tsunamis"
+}, {
+    "cost": 6,
+    "tags": ["power", "steel"],
+    "name": "Windmills",
+    "vp": 1,
+    "color": "green",
+    "text": "Requires 7% oxygen. Increase your energy production 1 step.",
+    "description": "At last we have more useful winds"
+}, {
+    "cost": 18,
+    "tags": ["steel"],
+    "name": "Aquifer Pumping",
+    "color": "blue",
+    "text": "Action: Spend 8 mega credits to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.",
+    "description": "Underground water reservoirs may be tapped in a controlled manner, to safely build up oceans to the desired level"
+}, {
+    "cost": 6,
+    "name": "Rad-Suits",
+    "tags": [],
+    "color": "green",
+    "text": "Requires 2 cities in play. Increase your mega credit production 1 step.",
+    "vp": 1,
+    "description": "New synthetic fabrics, able to protect from cosmic radiation, are becoming high fasion"
+}, {
+    "cost": 10,
+    "tags": ["science", "earth", "steel"],
+    "color": "blue",
+    "name": "Olympus Conference",
+    "text": "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.",
+    "description": "The scientific elite, assembled on the top of Olympus Mons, the highest spot in the solar system",
+    "vp": 1
+}, {
+    "cost": 13,
+    "tags": ["animal"],
+    "color": "blue",
+    "name": "Livestock",
+    "action": "Add 1 animal to this card",
+    "text": "Requires 9% oxygen. Decrease your plant production 1 step and increase your mega credit production 2 steps.",
+    "vp": "1 VP for each animal on this card",
+    "description": "Providing meat, wool, leather, etc."
+}, {
+    "cost": 4,
+    "tags": ["power", "steel"],
+    "color": "green",
+    "name": "Biomass Combustors",
+    "vp": -1,
+    "text": "Requires 6% oxygen. Decrease any plant production 1 step and increase your energy production 2 steps.",
+    "description": "Burning wood is easy"
+}, {
+    "cost": 11,
+    "tags": ["city", "steel"],
+    "color": "green",
+    "name": "Corporate Stronghold",
+    "vp": -2,
+    "text": "Decrease your energy production 1 step and increase your mega credit production 3 steps. Place a city tile.",
+    "description": "A city exclusively devoted to your corporation"
+}, {
+    "cost": 5,
+    "tags": ["down"],
+    "color": "red",
+    "name": "Ice Cap Melting",
+    "text": "Requires +2C or warmer. Place 1 ocean tile.",
+    "description": "Getting the water back from the poles"
+}, {
+    "cost": 6,
+    "tags": ["steel"],
+    "color": "green",
+    "name": "Fuel Factory",
+    "text": "Decrease your energy production 1 step and increase your titanium and your mega credit production 1 step each.",
+    "description": "With its shallow gravity well, Mars is a good host for the space industry, and rockets need fuel"
+}, {
+    "cost": 9,
+    "tags": ["steel"],
+    "name": "Soil Factory",
+    "color": "green",
+    "text": "Decrease your energy production 1 step and increase your plant production 1 step",
+    "vp": 1,
+    "description": "There are many harmful elements to remove"
+}, {
+    "cost": 6,
+    "tags": ["power", "steel"],
+    "name": "Heat Trappers",
+    "color": "green",
+    "text": "Decrease any heat production 2 steps and increase your energy production 1 step.",
+    "vp": -1,
+    "description": "Utilizing temperature gradients for energy production"
+}, {
+    "cost": 12,
+    "tags": ["steel"],
+    "name": "Water Splitting Plant",
+    "action": "Spend 3 energy to raise oxygen 1 step.",
+    "color": "blue",
+    "text": "Requires 2 ocean tiles",
+    "description": "Electrolysis of water yields oxygen and hydrogen, both very useful gases"
+}, {
+    "cost": 10,
+    "tags": ["plant", "steel"],
+    "name": "Noctis Farming",
+    "color": "green",
+    "text": "Requires -20C or warmer. Increase your mega credit production 1 step and gain 2 plants",
+    "vp": 1,
+    "description": "Utilizing the uniquely dense and moist atmosphere in the canyons of Noctis Labyrinthus"
+}, {
+    "cost": 10,
+    "tags": ["space"],
+    "name": "Satellites",
+    "color": "green",
+    "text": "Increase your mega credit production 1 step for each space tag you have, including this",
+    "description": "Coordinating orbital traffic"
+}, {
+    "cost": 23,
+    "tags": ["plant", "steel"],
+    "name": "Protected Valley",
+    "color": "green",
+    "text": "Increase your mega credit production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCAEN, disregarding normal placement restrictions, and increase oxygen 1 step.",
+    "description": "A fertile valley with higher air density and humidity, but in need of protection when the oceans rise"
+}, {
+    "cost": 5,
+    "tags": [],
+    "name": "Protected Habitats",
+    "color": "blue",
+    "text": "OPPONENTS MAY NOT REMOVE YOUR plant, animal, or microbes",
+    "description": "The harsh environment is not the only threat to your ecological projects"
+}, {
+    "cost": 10,
+    "tags": ["earth", "animal"],
+    "color": "blue",
+    "name": "Pets",
+    "text": "ANIMALS MAY NOT BE REMOVED FROM THIS CARD. Add 1 animal to this card.",
+    "effect": "When any city tile is placed, add an animal to this card.",
+    "vp": "1 VP per 2 animals here",
+    "description": "It wouldn't be the same without them"
+}, {
+    "cost": 5,
+    "tags": ["steel"],
+    "name": "Magnetic Field Dome",
+    "color": "green",
+    "text": "Decrease your energy production 2 steps and increase your plant production 1 step. Raise your terraform rating 1 step.",
+    "description": "Protecting a limited area from cosmic radiation"
+}, {
+    "cost": 26,
+    "tags": ["science", "down"],
+    "name": "Aerobraked Ammonia Asteroid",
+    "color": "red",
+    "text": "Add 2 microbes to ANOTHER card. Increase your heat production 3 steps and your plant production 1 step.",
+    "description": "Ammonia is a greenhouse gas, as well as being a convenient nitrogen source for organisms"
+}, {
+    "cost": 16,
+    "tags": ["plant"],
+    "color": "green",
+    "name": "Tundra Farming",
+    "vp": 2,
+    "text": "Requires -6C or warmer. Increase your plant production 1 step and your mega credit production 2 steps. Gain 1 plant.",
+    "description": "Farming the thawed soil over the frozen bedrock"
+}, {
+    "cost": 10,
+    "tags": ["science"],
+    "color": "blue",
+    "name": "Shuttles",
+    "text": "Requires 5% oxygen. Decrease your energy production 1 step and increase your mega credit production 2 steps",
+    "effect": "When you play a space card, you pay 2 mega credit less for it.",
+    "vp": 1,
+    "description": "Aided by low gravity going up, and by the increasing atmosphere when gliding down for landing"
+}, {
+    "cost": 25,
+    "tags": ["steel"],
+    "color": "green",
+    "name": "Strip Mine",
+    "text": "Decrease your energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.",
+    "description": "It is not exactly environmentally friendly to just dig up the surface, but it can be profitable"
+}, {
+    "cost": 8,
+    "tags": ["earth"],
+    "name": "Cartel",
+    "color": "green",
+    "text": "Increase your mega credit production 1 step for each Earth tag you have, including this.",
+    "description": "We see it as brotherhood"
+}, {
+    "cost": 3,
+    "tags": [],
+    "name": "Micro-Mills",
+    "color": "green",
+    "text": "Increase your heat production 1 step",
+    "description": "Small, mass-produced windmills that convert some of the ever-present wind into heat"
+}, {
+    "cost": 14,
+    "tags": ["science"],
+    "name": "Anti-Gravity Technology",
+    "color": "blue",
+    "effect": "When you play a card, you pay 2 mega credit less for it",
+    "text": "Requires 7 science tags",
+    "vp": 3,
+    "description": "Finally successful, anti-gravity will revolutionize everything, from households to industry and space travel"
+}, {
+    "cost": 1,
+    "tags": ["down"],
+    "color": "red",
+    "name": "CEO's Favorite Project",
+    "text": "ADD 1 RESOURCE TO A CARD WITH AT LEAST 1 RESOURCE ON IT",
+    "description": "Having the top man's attention, the involved people are sure to do their best"
+}, {
+    "cost": 9,
+    "tags": ["microbes"],
+    "color": "green",
+    "name": "Insects",
+    "text": "Requires 6% oxygen. Increase your plant production 1 step for each plant tag you have",
+    "description": "Pollinating flowers and spreading seeds"
+}, {
+    "cost": 12,
+    "tags": ["animal"],
+    "color": "blue",
+    "name": "Herbivores",
+    "effect": "When you place a greenery tile, add an animal to this card.",
+    "text": "Requires 8% oxygen. Add 1 animal to this card. Decrease any plant production 1 step.",
+    "vp": "1 VP per 2 animals on this card",
+    "description": "Inhabiting the green hills of Mars"
+}, {
+    "cost": 8,
+    "tags": ["plant"],
+    "color": "green",
+    "name": "Nitrophilic Moss",
+    "text": "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.",
+    "description": "Specially made to thrive on the salty Martian rock"
+}, {
+    "cost": 18,
+    "tags": ["power", "steel"],
+    "name": "Tectonic Stress Power",
+    "color": "green",
+    "text": "Requires 2 science tags. Increase your energy production 3 steps",
+    "vp": 1,
+    "description": "After finding ways to predict earthquakes, it was only a matter of time before it became feasible to exploit the enormous energies involved"
+}, {
+    "cost": 7,
+    "tags": ["steel"],
+    "name": "Titanium Mine",
+    "color": "green",
+    "text": "Increase your titanium production 1 step",
+    "description": "Titanium is useful to the space industry because of its great strength"
+}, {
+    "cost": 36,
+    "tags": ["earth", "space", "down"],
+    "name": "Large Convoy",
+    "color": "red",
+    "text": "Place an ocean tile and draw 2 cards. Gain 5 plants, or add 4 animals to ANOTHER card.",
+    "vp": 2,
+    "description": "Huge delivery from Earth"
+}, {
+    "cost": 23,
+    "tags": ["earth", "space", "down"],
+    "name": "Imported Nitrogen",
+    "color": "red",
+    "text": "Raise your TR 1 step and gain 4 plants. Add 3 microbes to ANOTHER card and 2 animals to ANOTHER card.",
+    "description": "Providing nitrogen needed in the atmosphere and for biomass"
+}, {
+    "cost": 20,
+    "tags": ["steel"],
+    "name": "Magnetic Field Generators",
+    "color": "green",
+    "text": "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your TR 3 steps",
+    "description": "By generating a magnetic field, you can protect organisms from cosmic radiaation"
+}, {
+    "cost": 7,
+    "tags":" ["earth", "space", "down"],
+    "name": "Imported GHG",
+    "color": "red",
+    "text": "Increase your heat production 1 step and gain 3 heat",
+    "description": "Greenhouse gases (GHG) to retain the heat"
+}, {
+    "cost": 15,
+    "tags": ["space", "down"],
+    "name": "Convoy From Europa",
+    "color": "red",
+    "text": "Place 1 ocean tile and draw 1 card",
+    "description": "Bringing ice and other key supplies from the Jovian moon Europa"
+}, {
+    "cost": 5,
+    "tags": ["power"],
+    "name": "Power Supply Consortium",
+    "color": "green",
+    "text": "Requires 2 power tags. Decrease any energy production 1 step and increase your own 1 step.",
+    "description": "Dominating the energy market allows you to make hostile takeovers"
+}, {
+    "cost": 7,
+    "tags": ["plant"],
+    "name": "Lichen",
+    "color": "green",
+    "text": "Requires -24C or warmer. Increase your plant production 1 step.",
+    "description": "Slow growing, but very resilient"
+}, {
+    "cost": 12,
+    "tags": ["microbes", "steel"],
+    "color": "green",
+    "name": "Industrial Microbes",
+    "text": "Increase your energy production and your steel production 1 step each",
+    "description": "Fuel production and metal refining can be programmed into microorganisms"
+}, {
+    "cost": 11,
+    "tags": ["microbes"],
+    "color": "blue",
+    "name": "Nitrite Reducing Bacteria",
+    "action": "Add 1 microbe to this card, or remove 3 microbes to increase your TR 1 step.",
+    "text": "Add 3 microbes to this card",
+    "description": "Making use of the nitrites in the ground to release nitrogen into the atmosphere"
+}, {
+    "cost": 6,
+    "tags": ["science"],
+    "name": "Standard Technology",
+    "color": "blue",
+    "effect": "After you pay for a standard project, except selling patents, you gain 3 mega credits",
+    "description": "Standard solutions honed to perfection"
+}, {
+    "cost": 16,
+    "tags": ["science", "microbes"],
+    "name": "Designed Micro-organisms",
+    "color": "green",
+    "text": "It must be -14C or colder. Increase your plant production 2 steps",
+    "description": "Specializing in extremely cold conditions"
+}, {
+    "cost": 3,
+    "tags": [],
+    "color": "blue",
+    "name": "Caretaker Contract",
+    "action": "Spend 8 heat to increase your terraforming rating 1 step",
+    "text": "Requires 0C or warmer",
+    "description": "In charge of establishing comfortable temperatures"
+}, {
+    "cost": 12,
+    "tags": ["science"],
+    "name": "Adaptation Technology",
+    "color": "blue",
+    "vp": 1,
+    "effect": "Your global requirements are +2 or -2 steps, your choice in each case",
+    "description": "Pushing the limits of the possible"
+}, {
+    "cost": 2,
+    "tags": [],
+    "name": "Insulation",
+    "color": "green",
+    "text": "Decrease your heat production any number of steps and increase your mega credit production the same number of steps",
+    "description": "Better insulation means lower energy spending"
+}, {
+    "cost": 3,
+    "tags": ["earth", "down"],
+    "color": "red",
+    "name": "Investment Loan",
+    "text": "Decrease your mega credit production 1 step. Gain 10 mega credit",
+    "description": "Taking a loan to fund that urgent project"
+}, {
+    "cost": 20,
+    "tags": ["steel"],
+    "name": "Mohole Area",
+    "color": "green",
+    "tile": "up arrow out of ground",
+    "text": "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FFOR OCEAN",
+    "description": "Tunnels deep down to the molton magma, releasing heat and gases"
+}, {
+    "cost": 4,
+    "tags": ["power", "steel"],
+    "name": "Power Plant",
+    "color": "green",
+    "text": "Increase your energy production 1 step",
+    "description": "Standard equipment, normal output"
+}, {
+    "cost": 18,
+    "tags": ["down"],
+    "name": "Lava Flows",
+    "color": "red",
+    "tile": "volcano erupting",
+    "text": "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS",
+    "description": "Releasing tremendous lava flows from one of Mars' gargantuan volcanoes"
+}, {
+    "cost": 8,
+    "tags": ["power"],
+    "color": "green",
+    "name": "Wave Power",
+    "text": "Requires 3 ocean tiles. Increase your energy production 1 step.",
+    "vp": 1,
+    "description": "Well, see, first you need some waves..."
+}]

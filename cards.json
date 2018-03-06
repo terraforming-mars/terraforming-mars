@@ -333,7 +333,7 @@
     "description": "By generating a magnetic field, you can protect organisms from cosmic radiaation"
 }, {
     "cost": 7,
-    "tags":" ["earth", "space", "down"],
+    "tags": ["earth", "space", "down"],
     "name": "Imported GHG",
     "color": "red",
     "text": "Increase your heat production 1 step and gain 3 heat",

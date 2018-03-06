@@ -449,4 +449,159 @@
     "text": "Requires 3 ocean tiles. Increase your energy production 1 step.",
     "vp": 1,
     "description": "Well, see, first you need some waves..."
+}, {
+    "cost": 12,
+    "tags": ["power", "steel"],
+    "color": "green",
+    "name": "Great Dam",
+    "vp": 1,
+    "text": "Requires 4 ocean tiles. Increase your energy production 2 steps.",
+    "description": "Letting natural processes do the work"
+}, {
+    "cost": 11,
+    "tags": ["plant", "microbe", "animal"],
+    "color": "green",
+    "name": "Advanced Ecosystems",
+    "vp": 3,
+    "text": "Requires a plant tag, a microbe tag, and an animal tag.",
+    "description": "Constructing functional, dynamic ecosystems requires many ingredients"
+}, {
+    "cost": 13,
+    "tags": ["microbe"],
+    "color": "blue",
+    "name": "Extreme-Cold Fungus",
+    "action": "Gain 1 plant or add 2 microbes to ANOTHER card.",
+    "text": "It must be -10C or colder",
+    "description": "Adapted strains able to form symbiotic relationships with other organisms"
+}, {
+    "cost": 4,
+    "tags": ["microbe"],
+    "color": "blue",
+    "name": "Symbiotic Fungus",
+    "action": "Add a microbe to ANOTHER card.",
+    "text": "Requires -14C or warmer.",
+    "description": "Creating mutually beneficial conditions"
+}, {
+    "cost": 14,
+    "tags": ["science", "power", "steel"],
+    "color": "green",
+    "name": "Fusion Power",
+    "text": "Requires 2 power tags. Increase your energy production 3 steps.",
+    "description": "State of the art technology"
+}, {
+    "cost": 5,
+    "tags": ["microbe"],
+    "color": "blue",
+    "name": "Decomposers",
+    "effect": "When you play an animal, plant, or microbe tag, including this, add a microbe to this card.",
+    "text": "Requires 3% oxygen.",
+    "vp": "1 VP per 3 microbes on this card",
+    "description": "Decomposing dead organisms is essential to making sustainable soil"
+}, {
+    "cost": 8,
+    "tags": ["microbe"],
+    "color": "green",
+    "name": "Worms",
+    "text": "Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.",
+    "description": "Milling about in the soil, 'processing' it"
+}, {
+    "cost": 13,
+    "tags": [],
+    "color": "green",
+    "name": "Zeppelins",
+    "vp": 1,
+    "text": "Requires 5% oxygen. Increase your mega credit production 1 step for each city tile ON MARS.",
+    "description": "A relatively cheap way to travel between cities across the planet"
+}, {
+    "cost": 12,
+    "tags": ["animal", "plant"],
+    "color": "blue",
+    "name": "Ecological Zone",
+    "tile": "animal paw print",
+    "effect": "When you play an animal or a plant tag (including these 2), add an animal to this card.",
+    "text": "Requires that you have a greenery tile. Place this tile ADJACENT TO ANY GREENERY TILE.",
+    "vp": "1 VP per 2 animals on this card.",
+    "description": "A secluded area where a multitude of species develop an ecosystem"
+}, {
+    "cost": 11,
+    "tags": ["down"],
+    "color": "red",
+    "name": "Subterranean Reservoir",
+    "text": "Place 1 ocean tile.",
+    "description": "Also known as an aquifer. Burst one open and you've got a lot of water"
+}, {
+    "cost": 11,
+    "tags": ["steel"],
+    "color": "green",
+    "name": "GHG Factories",
+    "text": "Decrease your energy production 1 step and increase your heat production 4 steps.",
+    "description": "Synthesizing powerful greenhouse gases (GHGs), releasing them into the atmosphere"
+}, {
+    "cost": 3,
+    "tags": [],
+    "name": "Hackers",
+    "color": "green",
+    "text": "Decrease your energy production 1 step and any mega credit production 2 steps. Increase your mega credit production 2 steps.",
+    "vp": -1,
+    "description": "Very unethical, very illegal, very lucrative"
+}, {
+    "cost": 1,
+    "tags": ["down"],
+    "color": "red",
+    "name": "Hired Raiders",
+    "text": "Steal up to 2 steel, or 3 mega credit from any player",
+    "description": "We have a better use for those resources"
+}, {
+    "cost": 4,
+    "tags": ["steel"],
+    "color": "blue",
+    "name": "Industrial Center",
+    "action": "Spend 7 mega credit to increase your steel production 1 step.",
+    "text": "Place this tile ADJACENT TO A CITY TILE",
+    "tile": "Factory",
+    "description": "Assigned to heavy industry, this area is not the nicest place on Mars"
+}, {
+    "cost": 4,
+    "tags": ["plant"],
+    "color": "green",
+    "name": "Moss",
+    "text": "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.",
+    "description": "Efficient soil makers"
+}, {
+    "cost": 1,
+    "tags": ["down"],
+    "color": "red",
+    "name": "Sabotage",
+    "text": "Remove up to 3 titanium from any player, or 4 steel, or 7 mega credit",
+    "description": "Nobody will know who did it."
+}, {
+    "cost": 10,
+    "tags": ["city", "steel"],
+    "name": "Urbanized Area",
+    "color": "green",
+    "text": "Decrease your energy production 1 step and increase your mega credit production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES",
+    "description": "When the population begins to soar, cities will eventually merge into large urban areas"
+}, {
+    "cost": 2,
+    "tags": [],
+    "color": "green",
+    "name": "Dust Seals",
+    "vp": 1,
+    "text": "Requires 3 or less ocean tiles",
+    "description": "Tight seals to keep micron-sized dust out of buildings, vehicles and suits"
+}, {
+    "cost": 16,
+    "tags": ["plant"],
+    "name": "Farming",
+    "color": "green",
+    "text": "Requires +4C or warmer. Increase your mega credit production 2 steps and your plant production 2 steps. Gain 2 plants",
+    "vp": 2,
+    "description": "At last we can have a decent food production allowing for rapid population increase"
+}, {
+    "cost": 6,
+    "tags": [],
+    "name": "Great Escarpment Consortium",
+    "color": "green",
+    "text": "Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.",
+    "description": "The border between the northern plains and the southern highlands is rich in minerals. Control it, and you will control the global mining business"
 }]

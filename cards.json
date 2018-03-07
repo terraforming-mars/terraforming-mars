@@ -604,4 +604,230 @@
     "color": "green",
     "text": "Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.",
     "description": "The border between the northern plains and the southern highlands is rich in minerals. Control it, and you will control the global mining business"
+}, {
+    "cost": 6,
+    "tags": ["science", "space"],
+    "name": "Trans-Neptune Probe",
+    "color": "green",
+    "vp": 1,
+    "description": "Exploring the Kupier belt objects"
+}, {
+    "cost": 32,
+    "tags": ["jovian", "space", "power"],
+    "color": "green",
+    "name": "Beam From A Thorium Asteroid",
+    "vp": 1,
+    "text": "Required a jovian tag. Increase your heat production and energy production 3 steps each",
+    "description": "Nuclear energy is safe, especially when located on a remote asteroid rich in radioactive elements"
+}, {
+    "cost": 23,
+    "tags": ["city", "steel"],
+    "color": "green",
+    "name": "Open City",
+    "text": "Requires 12% oxygen. Decrease your energy production 1 step and increase your mega credit production 4 steps. Gain 2 plants and place a city tile.",
+    "vp": 1,
+    "description": "Not very comfortable conditions yet, but what freedom!!"
+}, {
+    "cost": 13,
+    "tags": ["jovian"],
+    "color": "green",
+    "name": "Asteroid Mining Consortium",
+    "text": "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step",
+    "vp": 1,
+    "description": "Your hold on the titanium market tightens"
+}, {
+    "cost": 12,
+    "tags": ["science"],
+    "color": "green",
+    "name": "Gene Repair",
+    "text": "Requires 3 science tags. Increase your mega credit production 2 steps.",
+    "vp": 2,
+    "description": "Counters the inevitable damage from cosmic radiation and reverses many aging symptoms"
+}, {
+    "cost": 11,
+    "tags": ["power", "steel"],
+    "color": "green",
+    "name": "Solar Power",
+    "text": "Increase your energy production 1 step",
+    "vp": 1,
+    "description": "Perhaps the most readily available energy source on Mars"
+}, {
+    "cost": 30,
+    "tags": ["jovian", "space"],
+    "color": "green",
+    "name": "Asteroid Mining",
+    "text": "Increase your titanium production 2 steps",
+    "vp": 2,
+    "description": "Where gravity is low and rare minerals abound"
+}, {
+    "cost": 9,
+    "tags": ["science", "steel"],
+    "color": "green",
+    "name": "Natural Preserve",
+    "tile": "male gender symbol",
+    "text": "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your mega credit production 1 step",
+    "vp": 1,
+    "description": "Creating a national park with original Martian landforms and environments"
+}, {
+    "cost": 8,
+    "tags": ["earth"],
+    "color": "green",
+    "name": "Media Archives",
+    "text": "Gain 1 mega credit for each event EVER PLAYED by all players",
+    "description": "Accessing information on past events for better planning of the future"
+}, {
+    "cost": 10,
+    "tags": ["plant"],
+    "color": "green",
+    "name": "Bushes",
+    "text": "Requires -10C or warmer. Increase your plant production 2 steps. Gain 2 plants",
+    "description": "Giving some wind protection for smaller species"
+}, {
+    "cost": 12,
+    "tags": ["science"],
+    "color": "green",
+    "name": "Artificial Photosynthesis",
+    "text": "Increase your plant production 1 step or your energy production 2 steps",
+    "description": "Artificial photosynthesis was achieved chemically by prof Akermark et. al. in 2021. Its application to terraforming remains to be seen"
+}, {
+    "cost": 16,
+    "tags": ["city", "steel"],
+    "color": "green",
+    "name": "Cupola City",
+    "text": "Oxygen must be 9% or less. Place a city tile. Decrease your energy production 1 step and increase your mega credit production 3 steps",
+    "description": "In a thin atmosphere, normal pressure can hold up a protective dome over the city"
+}, {
+    "cost": 4,
+    "tags": ["steel"],
+    "color": "green",
+    "name": "Mining Area",
+    "tile": "shovel and pick axe",
+    "text": "Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step",
+    "description": "It is easier to claim territories where you already have established activities"
+}, {
+    "cost": 11,
+    "tags": ["power", "steel"],
+    "color": "green",
+    "name": "Geothermal Power",
+    "text": "Increase your energy production 2 steps",
+    "description": "Utilizing heat from the core through the cracks in the crust"
+}, {
+    "cost": 7,
+    "tags": ["power", "steel"],
+    "color": "green",
+    "name": "Peroxide Power",
+    "text": "Decrease your mega credit production 1 step and increase your energy production 2 steps",
+    "description": "The Martian ground is full of oxidizing agents"
+}, {
+    "cost": 6,
+    "tags": ["microbe"],
+    "color": "green",
+    "name": "archaebacteria",
+    "text": "It must be -18C or colder. Increase your plant production 1 step",
+    "description": "Photosynthesizing bacteria specializing in extreme environments"
+}, {
+    "cost": 6,
+    "tags": ["steel"],
+    "color": "green",
+    "name": "Building Industries",
+    "text": "Decrease your energy production 1 step and increase your steel production 2 steps",
+    "description": "Accelerating building of the infrastructure"
+}, {
+    "cost": 11,
+    "tags": ["steel"],
+    "name": "Equatorial Magnetizer",
+    "color": "blue",
+    "action": "Decrease your energy production 1 step to increase your terraform rating 1 step",
+    "description": "Super-conducting wires encircling the globe to create a magnetic field"
+}, {
+    "cost": 15,
+    "tags": ["steel"],
+    "name": "Steelworks",
+    "color": "blue",
+    "action": "Spend 4 energy to gain 2 steel and increase oxygen 1 step",
+    "description": "Turning the soil into steel and oxygen sounds good. It just takes a lot of energy"
+}, {
+    "cost": 9,
+    "tags": ["science"],
+    "name": "Advanced Alloys",
+    "color": "blue",
+    "effect": "Each titanium you have is worth 1 mega credit extra. Each steel you have is worth 1 mega credit extra",
+    "description": "The latest advances in metallurgy give you an edge in the competition"
+}, {
+    "cost": 1,
+    "tags": ["earth"],
+    "name": "Earth Office",
+    "color": "blue",
+    "effect": "When you play an earth tag, you pay 3 mega credit less for it",
+    "description": "Coordinating deliveries and homeworld support"
+}, {
+    "cost": 3,
+    "tags": ["power", "space"],
+    "name": "Space Mirrors",
+    "color": "blue",
+    "action": "Spend 7 mega credit to increase your energy production 1 step",
+    "description": "Ultrathin mirrors reflecting sunlight down to receivers on the surface"
+}, {
+    "cost": 27,
+    "tags": ["space", "steel"],
+    "name": "Space Elevator",
+    "color": "blue",
+    "action": "Spend 1 steel to gain 5 mega credits",
+    "text": "Increase your titanium production 1 step.",
+    "vp": 2,
+    "description": "An ultra-strong cable car up to geo-stationary orbit, enabling reasonable export costs"
+}, {
+    "cost": 10,
+    "tags": ["space"],
+    "name": "Space Station",
+    "color": "blue",
+    "effect": "When you play a space card, you pay 2 mega credits less for it",
+    "description": "Buy it today at www.fryxgames.se",
+    "vp": 1
+}, {
+    "cost": 23,
+    "tags": ["earth"],
+    "effect": "When you play a card, you pay 2 mega credits less for it",
+    "name": "Earth Catapult",
+    "color": "blue",
+    "vp": 2,
+    "description": "When export from Earth becomes easier, everything gets cheaper"
+}, {
+    "cost": 20,
+    "tags": ["jovian", "space", "city"],
+    "color": "green",
+    "name": "Ganymede Colony",
+    "text": "Place a city tile ON THE RESERVED AREA.",
+    "vp": "1 VP per jovian tag you have",
+    "description": "Settling the biggest moon of the biggest planet"
+}, {
+    "cost": 26,
+    "tags": ["city", "steel"],
+    "color": "green",
+    "name": "Capital",
+    "text": "Requires 4 ocean tiles. Place this tile. Decrease your energy production 2 steps and increase your mega credit production 5 steps.",
+    "vp": "1 ADDITIONAL VP FOR EACH OCEAN TILE ADJACENT TO THIS CITY TILE",
+    "tile": "white city tile",
+    "description": "With its ideal placement and all its facilities, this is the true capital of Mars"
+}, {
+    "cost": 21,
+    "tags": ["space", "down"],
+    "name": "Comet",
+    "color": "red",
+    "text": "Raise temperature 1 step and place an ocean tile. Remove up to 3 plants from any player",
+    "description": "Prepare to be catered!"
+}, {
+    "cost": 7,
+    "tags": ["earth", "down"],
+    "name": "Business Contacts",
+    "color": "red",
+    "text": "LOOK AT THE TOP 4 CARDS FROM THE DECK. TAKE 2 OF THEM INTO HAND AND DISCARD THE OTHER 2",
+    "description": "Money and information are often interchangeable"
+}, {
+    "cost": 12,
+    "tags": ["down"],
+    "color": "red",
+    "name": "Mining Expedition",
+    "text": "Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel",
+    "description": "Ruthlessly excavating rich areas"
 }]

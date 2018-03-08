@@ -830,4 +830,230 @@
     "name": "Mining Expedition",
     "text": "Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel",
     "description": "Ruthlessly excavating rich areas"
+}, {
+    "cost": 14,
+    "tags": ["down"],
+    "name": "Release of Inert Gases",
+    "color": "red",
+    "text": "Raise your terraform rating 2 steps",
+    "description": "We need some nitrogen and other inert gases to increase atmospheic pressure. Let's stay away from helium, though"
+}, {
+    "cost": 5,
+    "tags": ["down"],
+    "name": "Mineral Deposit",
+    "color": "red",
+    "text": "Gain 5 steel",
+    "description": "Still mostly untouched, Mars offers easy access to many useful minerals"
+}, {
+    "cost": 13,
+    "tags": ["steel"],
+    "name": "Ore Processor",
+    "color": "blue",
+    "action": "Spend 4 energy to gain 1 titanium and increase oxygen 1 step",
+    "description": "Processing ore"
+}, {
+    "cost": 1,
+    "tags": ["down"],
+    "name": "Land Claim",
+    "color": "red",
+    "text": "PLACE YOUR MARKER ON A NON-RESERVED AREA. ONLY YOU MAY PLACE A TILE HERE",
+    "description": "Acquiring strategic land areas"
+}, {
+    "cost": 21,
+    "tags": ["science", "steel"],
+    "color": "blue",
+    "name": "AI Central",
+    "action": "Draw 2 cards",
+    "text": "Requires 3 science tags to play. Decrease your energy production 1 step",
+    "vp": 1,
+    "description": "\"42\""
+}, {
+    "cost": 13,
+    "tags": ["science", "steel"],
+    "color": "green",
+    "name": "Medical Lab",
+    "text": "Increase your mega credit production 1 step for every 2 building tags you have, including this",
+    "vp": 1,
+    "description": "Providing health care for the public can be lucrative, as well as noble"
+}, {
+    "cost": 4,
+    "tags": ["science", "down"],
+    "color": "red",
+    "name": "Special Design",
+    "text": "The next card you play this generation is +2 or -2 in global requirements, your choice",
+    "description": "If it isn't feasible, then make it so"
+}, {
+    "cost": 8,
+    "tags": ["steel"],
+    "color": "green",
+    "name": "Rad-chem Factory",
+    "text": "Decrease your energy production 1 step. Raise your terraform rating 2 steps",
+    "description": "Certain aromatic compounds can absorb dangerous radiation without breaking"
+}, {
+    "cost": 5,
+    "tags": ["science", "space", "down"],
+    "color": "red",
+    "name": "Technology Demonstration",
+    "text": "Draw 2 cards",
+    "description": "Testing launch techniques, space hardware, and whatnot"
+}, {
+    "cost": 35,
+    "tags": ["space"],
+    "color": "green",
+    "name": "Soletta",
+    "text": "Decrease your heat production 7 steps",
+    "description": "Huge ultra-thin mirrors focusing sunlight onto the red planet"
+}, {
+    "cost": 6,
+    "tags": ["steel"],
+    "name": "Underground Detonations",
+    "color": "blue",
+    "action": "Spend 10 mega credit to increase your heat production 2 steps",
+    "description": "Radiation from the nuclear blsst is shielded, but over time, we are stil getting the heat"
+}, {
+    "cost": 3,
+    "tags": ["power"],
+    "name": "Energy Tapping",
+    "color": "green",
+    "text": "Decrease any energy production 1 step and increase your own 1 step",
+    "vp": -1,
+    "description": "They need it. But we neet it more"
+}, {
+    "cost": 13,
+    "tags": ["city", "steel"],
+    "color": "blue",
+    "name": "Immigrant City",
+    "effect": "Each time a city tile is placed, including this, increase your mega credit production 1 step",
+    "text": "Decrease your energy production 1 step and decrease your mega credit production 2 steps. Place a city tile",
+    "description": "Taking care of immigrants is costly, but will begin to pay off when they start working for you in the growing society"
+}, {
+    "cost": 11,
+    "tags": ["science"],
+    "color": "blue",
+    "name": "Restricted Area",
+    "action": "Spend 2 mega credit to draw a card",
+    "text": "Place this tile",
+    "tile": "NO symbol",
+    "description": "A place to conduct secret research, preventing the wrong people from getting in. Or out"
+}, {
+    "cost": 31,
+    "tags": ["earth", "space"],
+    "name": "Immigration Shuttles",
+    "color": "green",
+    "name": "Increase your mega credit production 5 steps.",
+    "vp": "1 VP for every 3rd city in play",
+    "description": "The new world attracts ever more immigrants from the old"
+}, {
+    "cost": 33,
+    "tags": ["jovian", "space"],
+    "name": "Terraforming Ganymede",
+    "color": "green",
+    "text": "Raise your terraform rating 1 step for each jovian tag you have, including this",
+    "vp": 2,
+    "description": "Why stop at Mars?"
+}, {
+    "cost": 23,
+    "tags": ["space", "down"],
+    "color": "red",
+    "name": "Ice Asteroid",
+    "text": "Place 2 ocean tiles",
+    "description": "We need its water down here"
+}, {
+    "cost": 16,
+    "tags": ["earth", "space", "down"],
+    "name": "Imported Hydrogen",
+    "color": "red",
+    "text": "Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile",
+    "description": "A light-weight but expensive crucial element"
+}, {
+    "cost": 27,
+    "tags": ["space", "down"],
+    "color": "red",
+    "name": "Big Asteroid",
+    "text": "Raise temperature 2 steps and gain 4 timtanium. Remove up to 4 plants from any player",
+    "description": "There are many unpopulated areas to crash it on"
+}, {
+    "cost": 31,
+    "tags": ["space", "down"],
+    "name": "Nitrogen-Rich Asteroid",
+    "color": "red",
+    "text": "Raise your terraform rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags",
+    "description": "Adding nitrogen to mars will both thicken the atmosphere with N2 and provide fertilizer for plants"
+}, {
+    "cost": 1,
+    "tags": ["microbe", "down"],
+    "name": "Virus",
+    "color": "red",
+    "text": "Remove up to 2 animals or 5 plants from any player",
+    "description": "The virus is transient, changing from liquid to air-borne to blood transfusion"
+}, {
+    "cost": 31,
+    "tags": ["space", "down"],
+    "name": "Deimos Down",
+    "color": "red",
+    "text": "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player",
+    "description": "We don't use that moon anyway"
+}, {
+    "cost": 7,
+    "tags": ["earth", "down"],
+    "color": "red",
+    "name": "Bribed Committe",
+    "text": "Raise your terraform rating 2 steps",
+    "vp": -2,
+    "description": "Influencing the people in power"
+}, {
+    "cost": 12,
+    "tags": ["space"],
+    "color": "blue",
+    "name": "Security Fleet",
+    "action": "Spend 1 titanium to add 1 fighter resource to this card",
+    "vp": "1 vp for each fighter resource on this card",
+    "description": "Keeping the peace by force"
+}, {
+    "cost": 11,
+    "tags": ["science", "space", "power"],
+    "name": "Solar Wind Power",
+    "color": "green",
+    "text": "Increase your energy production 1 step and gain 2 titanium",
+    "description": "Working those solar storms to your advantage"
+}, {
+    "cost": 23,
+    "tags": ["space", "down"],
+    "color": "red",
+    "name": "Towing A Comet",
+    "text": "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile",
+    "description": "By aerobraking it we get its contents without the impact"
+}, {
+    "cost": 41,
+    "tags": ["jovian", "space"],
+    "name": "10 Mining Industries",
+    "color": "green",
+    "text": "Increase your titanium production 2 steps and your mega credit production 2 steps",
+    "vp": "1 VP per jovian tag you have",
+    "description": "Supplying fuel and valuable minerals"
+}, {
+    "cost": 24,
+    "tags": ["jovian", "space"],
+    "name": "Callisto Penal Mines",
+    "color": "green",
+    "text": "Increase your mega credit production 3 steps",
+    "vp": 2,
+    "description": "You always wanted to be a warden, didn't you?"
+}, {
+    "cost": 6,
+    "tags": ["animal"],
+    "name": "Small Animals",
+    "color": "blue",
+    "action": "Add 1 animal to this card",
+    "text": "Requires 6% oxygen. Decrease any plant production 1 step.",
+    "vp": "1 VP per 2 animals on this card",
+    "description": "Able to live in sparse conditions"
+}, {
+    "cost": 17,
+    "tags": ["plant"],
+    "name": "Kelp Farming",
+    "color": "green",
+    "text": "Requires 6 ocean tiles. Increase your mega credit production 2 steps and your plant production 3 steps. Gain 2 plants",
+    "vp": 1,
+    "description": "The newly formed oceans are very rich in minerals, perfect for food production"
 }]

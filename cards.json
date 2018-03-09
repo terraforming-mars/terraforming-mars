@@ -1056,4 +1056,228 @@
     "text": "Requires 6 ocean tiles. Increase your mega credit production 2 steps and your plant production 3 steps. Gain 2 plants",
     "vp": 1,
     "description": "The newly formed oceans are very rich in minerals, perfect for food production"
+}, {
+    "cost": 4,
+    "tags": ["microbe"],
+    "name": "Tardigrades",
+    "color": "blue",
+    "action": "Add 1 microbe to this card",
+    "vp": "1 VP per 4 microbes on this card",
+    "description": "These microscopic creatures can survive freezing, boiling, drying out, heavy radiation, and brute force"
+}, {
+    "cost": 9,
+    "tags": ["animal"],
+    "name": "Fish",
+    "color": "blue",
+    "action": "Add 1 animal to this card",
+    "text": "Requires +2C or warmer. Decrease any plant production 1 step.",
+    "vp": "1 VP for each animal on this card",
+    "description": "Martian barracudas? Why not!"
+}, {
+    "cost": 10,
+    "tags": ["plant"],
+    "name": "Algae",
+    "color": "green",
+    "text": "Requires 5 ocean tiles. Gain 1 plant and increase your plant production 2 steps",
+    "description": "Basic photosynthesizers in aqueous environments"
+}, {
+    "cost": 18,
+    "tags": ["power"],
+    "name": "Power Grid",
+    "color": "green",
+    "text": "Increase your energy production 1 step for each power tag you have, including this",
+    "description": "Making efficient use of your energy production"
+}, {
+    "cost": 4,
+    "tags": ["steel"],
+    "name": "Mine",
+    "color": "green",
+    "text": "Increase your steel production 1 step",
+    "description": "Mars' main export industry also supplies the planet with construction materials"
+}, {
+    "cost": 13,
+    "tags": ["power", "steel"],
+    "name": "Deep Well Heating",
+    "color": "green",
+    "text": "Increase your energy production 1 step. Increase temperature 1 step",
+    "description": "Digging deep to find heat from the core"
+}, {
+    "cost": 18,
+    "tags": ["city", "steel"],
+    "name": "Underground City",
+    "color": "green",
+    "text": "Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps",
+    "description": "Excavating is expensive, but gives both protection and building materials"
+}, {
+    "cost": 11,
+    "tags": ["plant"],
+    "color": "green",
+    "name": "Grass",
+    "text": "Requires -16C or warmer. Increase your plant production 1 step. Gain 3 plants",
+    "description": "Taking root in every crevice and patch of soil"
+}, {
+    "cost": 1,
+    "tags": ["power", "steel"],
+    "color": "green",
+    "name": "Fueled Generators",
+    "text": "Decrease your mega credit production 1 step and increase your energy production 1 step",
+    "description": "Simple but limited power supply" 
+}, {
+    "cost": 10,
+    "tags": ["earth"],
+    "name": "Acquired Company",
+    "color": "green",
+    "text": "Increase your mega credit production 3 steps",
+    "description": "This interplanetary company will surely pay off"
+}, {
+    "cost": 9,
+    "tags": ["plant"],
+    "color": "green",
+    "name": "Adapted Lichen",
+    "text": "Increase your plant production 1 step",
+    "description": "Suitable even for early terraforming"
+}, {
+    "cost": 13,
+    "tags": ["science", "power"],
+    "name": "Quantum Extractor",
+    "color": "blue",
+    "effect": "When you play a space card, you pay 2 mega credit less for it",
+    "text": "Requires 4 science tags. Increase your energy production 4 steps",
+    "description": "Tapping the very fabric of space"
+}, {
+    "cost": 17,
+    "tags": ["power", "space"],
+    "name": "Giant Space Mirror",
+    "color": "green",
+    "text": "Increase your energy production 3 steps",
+    "description": "Square kilometers of extra sunlight reflected down to a receiving power plant"
+}, {
+    "cost": 15,
+    "tags": ["jovian", "space"],
+    "name": "Vesta Shipyard",
+    "color": "green",
+    "text": "Increase your titanium production 1 step",
+    "description": "The pride of the asteriod belt"
+}, {
+    "cost": 14,
+    "tags": ["space", "down"],
+    "name": "Asteroid",
+    "color": "red",
+    "text": "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player",
+    "description": "What are those plants doing in our impact zone?"
+}, {
+    "cost": 11,
+    "tags": [],
+    "name": "Cloud Seeding",
+    "color": "green",
+    "text": "Requires 3 ocean tiles. Decrease your mega credit production 1 step and any heat production 1 step. Increase your plant production 2 steps",
+    "description": "Lessens solar influx, but enhances plant growth"
+}, {
+    "cost": 36,
+    "tags": ["space", "down"],
+    "name": "Giant Ice Asteroid",
+    "color": "red",
+    "text": "Raise temperature 2 steps and place 2 ocean tiles. Remove up to 6 plants from any player",
+    "description": "Crash it. The bigger, the better"
+}, {
+    "cost": 6,
+    "tags": ["earth"],
+    "name": "Sponsors",
+    "color": "green",
+    "text": "Increase your mega credit production 2 steps",
+    "description": "Willing to support your projects"
+}, {
+    "cost": 9,
+    "tags": ["science"],
+    "name": "Inventors' Guild",
+    "color": "blue",
+    "action": "LOOK AT THE TOP CARD AND EITHER BUY IT OR DISCARD IT",
+    "description": "When great minds meet, new ideas abound"
+}, {
+    "cost": 25,
+    "tags": ["jovian", "space"],
+    "name": "Water Import From Europa",
+    "color": "blue",
+    "action": "Pay 12 mega credit to place an ocean tile. TITANIUM MAY BE USED as if playing a space card",
+    "vp": "1 VP for each jovian tag you have",
+    "description": "With its low gravity, this Jovian ice moon is suitable for mass export of water"
+}, {
+    "cost": 3,
+    "tags": ["science"],
+    "color": "blue",
+    "name": "Search For Life",
+    "action": "Spend 1 mega credit to reveal and discard the top of the draw deck. If that card has a microbe tag, add a science resource here",
+    "text": "Oxygen must be 6% or less.",
+    "vp": "3 VPs if you have one or more science resources here",
+    "description": "Finding native life-forms would be the greatest discovery in history, so let's find out!" 
+}, {
+    "cost": 13,
+    "tags": ["steel"],
+    "name": "Martian Rails",
+    "color": "blue",
+    "action": "Spend 1 energy to gain 1 mega credit for each city tile ON MARS",
+    "description": "Fast and cheap transportation for goods and guys"
+}, {
+    "cost": 17,
+    "tags": ["steel"],
+    "name": "Electro Catapult",
+    "color": "blue",
+    "action": "Spend 1 plant or 1 steel to gain 7 mega credit",
+    "text": "Oxygen must be 8% or less. Decrease your energy production 1 step",
+    "vp": 1,
+    "desription": "A 200km long acceleration ramp up the side of Pavonis Mons, hurtling export goods into space"
+}, {
+    "cost": 11,
+    "tags": ["steel"],
+    "name": "Ironworks",
+    "color": "blue",
+    "action": "Spend 4 energy to gain 1 steel and increase oxygen 1 step",
+    "description": "Electrolysis of Martian soil yields both iron and oxygen, making it an important part of terraforming"
+}, {
+    "cost": 8,
+    "tags": ["steel"],
+    "name": "Rover Construction",
+    "color": "blue",
+    "effect": "When any city tile is placed, gain 2 mega credit",
+    "description": "Providing safe transport vehicles",
+    "vp": 1
+}, {
+    "cost": 24,
+    "tags": ["city", "steel"],
+    "name": "Domed Crater",
+    "color": "green",
+    "text": "Oxygen must be 7% or less. Gain 3 plants and place a city tile. Decrease your energy production 1 step and increase mega credit production 3 steps",
+    "vp": 1,
+    "description": "A spacious area for a great city"
+}, {
+    "cost": 11,
+    "tags": ["science", "steel"],
+    "name": "Development Center",
+    "color": "blue",
+    "action": "Spend 1 energy to draw a card",
+    "description": "Ensuring a constant influx of ideas"
+}, {
+    "cost": 28,
+    "tags": ["jovian", "space"],
+    "name": "Methane From Titan",
+    "color": "green",
+    "text": "Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps",
+    "vp": 2,
+    "description": "Using Titan's liquid methane as fuel will add carbon and heat to Mars"
+}, {
+    "cost": 14,
+    "tags": ["animal"],
+    "name": "Predators",
+    "color": "blue",
+    "action": "Remove 1 animal from any card any add it to this card",
+    "text": "Requires 11% oxygen",
+    "vp": "1 VP per animal on this card",
+    "description": "Lions and tigers and bears, oh my"
+}, {
+    "cost": 15,
+    "tags": [],
+    "name": "Black Polar Dust",
+    "color": "green",
+    "text": "Place an ocean tile. Decrease your mega credit production 2 steps and increase your heat production 3 steps",
+    "description": "The sprinkled dust absorbs heat from the sun. Must be renewed after each snowfall, though"
 }]

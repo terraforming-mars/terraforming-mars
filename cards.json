@@ -1280,4 +1280,89 @@
     "color": "green",
     "text": "Place an ocean tile. Decrease your mega credit production 2 steps and increase your heat production 3 steps",
     "description": "The sprinkled dust absorbs heat from the sun. Must be renewed after each snowfall, though"
+}, {
+    "cost": 18,
+    "tags": ["science", "city", "steel"],
+    "name": "Research Outpost",
+    "effect": "When you play a card, you pay 1 mega credit less for it",
+    "color": "blue",
+    "text": "Place a city tile NEXT TO NO OTHER TILE",
+    "description": "Finding new ways to do things"
+}, {
+    "cost": 18,
+    "tags": ["city", "steel"],
+    "name": "Noctis City",
+    "color": "green",
+    "text": "Decrease your energy production 1 step and increase your mega credit production 3 steps. Place a city tile ON THE RESERVED AREA, disregarding normal placement restrictions",
+    "description": "In Noctis Labyrinthus, where the mist is gray"
+}, {
+    "cost": 25,
+    "tags": ["space", "city"],
+    "name": "Phobos Space Haven",
+    "color": "green",
+    "text": "Increase your titanium production 1 step and place a city tile ON THE RESERVED AREA",
+    "vp": 3,
+    "description": "The doorway to mars"
+}, {
+    "cost": 12,
+    "tags": ["plant"],
+    "name": "Arctic Algae",
+    "color": "blue",
+    "effect": "When anyone places an ocean tile, gain 2 plants",
+    "text": "It must be -12C or colder to play. Gain 1 plant",
+    "description": "Suitable for freezing temperatures"
+}, {
+    "cost": 24,
+    "tags": ["earth", "space", "down"],
+    "color": "red",
+    "name": "Interstellar Colony Ship",
+    "text": "Requires 5 science tags",
+    "vp": 4,
+    "description": "To new horizons and an unknown galaxy"
+}, {
+    "cost": 7,
+    "tags": ["space"],
+    "color": "blue",
+    "name": "Optimal Aerobraking",
+    "effect": "When you play a space event, you gain 3 mega credit and 3 heat",
+    "description": "Perfecting the art of ballistic and material analysis can increase efficiency and save money"
+}, {
+    "cost": 13,
+    "tags": ["earth", "power"],
+    "name": "Lunar Beam",
+    "color": "green",
+    "text": "Decrease your mega credit production 2 steps and increase your heat production and energy production 2 steps each",
+    "description": "A huge energy beam. Difficult to collect, but who cares?"
+}, {
+    "cost": 16,
+    "tags": ["plant", "steel"],
+    "name": "EOS Chasma National Park",
+    "color": "green",
+    "text": "Requires -12C or warmer. Add 1 animal TO ANY ANIMAL CARD. Gain 3 plants. Increase your mega credit production 2 steps",
+    "vp": 1,
+    "description": "A wonder of the world, doing wonders for the tourism business"
+}, {
+    "cost": 9,
+    "tags": ["science"],
+    "name": "Robotic Workforce",
+    "color": "green",
+    "text": "Duplicate only the production box of one of your building cards",
+    "description": "Enhancing your production capacity"
+}, {
+    "cost": 6,
+    "tags": ["plant"],
+    "name": "Heather",
+    "color": "green",
+    "text": "Requires -14C or warmer. Increase your plant production 1 step. Gain 1 plant",
+    "description": "Stabilizing the soil"
+}, {
+    "cost": 11,
+    "tags": ["science", "science"],
+    "name": "Research",
+    "color": "green",
+    "text": "Counts as playing 2 science cards. Draw 2 cards",
+    "vp": 1,
+    "description": "Through technical excellence you will unlock many wondrous things"
+}, {
+    
 }]

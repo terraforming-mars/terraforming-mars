@@ -16,6 +16,9 @@ function Player(color) {
     this.heatProduction = 1;
     this.plants = 1;
     this.plantProduction = 1;
+    this.readyToStartGame = false;
+    this.selectableCards = [];
+    this.cards = [];
 }
 
 Player.prototype.setAvailableCorporationCards = function(corporationCards) {
@@ -23,9 +26,31 @@ Player.prototype.setAvailableCorporationCards = function(corporationCards) {
     this.availableCorporationCards = corporationCards;
 }
 
-Player.prototype.setInitialCards = function(initialCards) {
-    console.log("Player(" + this.hash + "):initialCards", initialCards.map(function(c) { return c.name;}));
-    this.initialCards = initialCards;
+Player.prototype.canPay = function(mc) {
+    return this.megaCredits >= mc;
+}
+
+Player.prototype.pay = function(mc) {
+    this.megaCredits -= mc;
+}
+
+Player.prototype.getCard = function(cardName) {
+    for (var i = 0; i < this.selectableCards.length; i++) {
+        if (this.selectableCards[i].name === cardName) {
+            this.cards.push(this.selectableCards.splice(i, 1)[0]);
+            return;
+        }
+    }
+}
+
+Player.prototype.readyToStartGame = function() {
+    this.readyToStartGame = true;
+    this.selectableCards = [];
+}
+
+Player.prototype.dealCards = function(cards) {
+    console.log("Player(" + this.hash + "):dealCards", cards.map(function(c) { return c.name;}));
+    this.selectableCards = cards;
 }
 
 Player.prototype.setCorporationCard = function(corporationCardName) {

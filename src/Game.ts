@@ -1,10 +1,10 @@
 
-var CARDS = require("../data/cards.json");
-var CORPORATION_CARDS = require("../data/corporationCards.json");
-var utilities = require("./utilities");
-var Player = require("./Player");
+var CARDS = require("../../data/cards.json");
+var CORPORATION_CARDS = require("../../data/corporationCards.json");
+import * as utilities from "./utilities";
+import { Player } from "./Player";
 
-function Game(initialPlayerColor) {
+function Game(initialPlayerColor: string) {
     this.hash = utilities.generateUUID();
     this.cards = utilities.shuffle(CARDS);
     this.corporationCards = utilities.shuffle(CORPORATION_CARDS);
@@ -26,7 +26,7 @@ function Game(initialPlayerColor) {
     console.log("Starting game " + this.hash + " with player", this.players[0]);
 }
 
-Game.prototype.getPlayer = function(playerHash) {
+Game.prototype.getPlayer = function(playerHash: string): Player {
     for (var i = 0; i < this.players.length; i++) {
         if (this.players[i].hash === playerHash) {
             return this.players[i];
@@ -54,14 +54,14 @@ Game.prototype.checkForAllCorporationsAdded = function() {
     }
 }
 
-Game.prototype.drawCards = function(num) {
+Game.prototype.drawCards = function(num: number) {
     if (num <= this.cards.length) {
         return this.cards.splice(0, num);
     }
     throw "No more cards to deal";
 }
 
-Game.prototype.selectCorporationCard = function(playerHash, cardName) {
+Game.prototype.selectCorporationCard = function(playerHash: string, cardName: string): void {
     if (this.pickingCorporation !== true) {
         throw "Can not pick cards";
         return;
@@ -79,7 +79,7 @@ Game.prototype.allPlayersAdded = function() {
     console.log("All Players Added");
     console.log("Dealing Corporation Cards");
 
-    this.firstPlayerIndex = Math.floor(Math.random(this.players.length));
+    this.firstPlayerIndex = Math.floor(Math.random() * this.players.length);
 
     console.log("Player " + this.firstPlayerIndex + " goes first");
 
@@ -91,12 +91,12 @@ Game.prototype.allPlayersAdded = function() {
     this.pickingCorporation = true;
 }
 
-Game.prototype.addPlayer = function(player) {
+Game.prototype.addPlayer = function(player: Player) {
     console.log("Adding player", player);
     this.players.push(player);
 }
 
-Game.prototype.payForCard = function(playerHash, cardName) {
+Game.prototype.payForCard = function(playerHash: string, cardName: string): void {
     var player = this.getPlayer(playerHash);
     if (player) {
         if (player.hasSelectableCard(cardName)) {
@@ -113,7 +113,7 @@ Game.prototype.payForCard = function(playerHash, cardName) {
     }
 }
 
-Game.prototype.readyToStartGame = function(playerHash) {
+Game.prototype.readyToStartGame = function(playerHash: string): void {
     var player = this.getPlayer(playerHash);
     if (player) {
         player.readyToStartGame();

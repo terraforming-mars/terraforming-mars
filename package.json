@@ -1,0 +1,25 @@
+{
+  "name": "terraforming-mars",
+  "version": "1.0.0",
+  "description": "Terraforming Mars Game",
+  "main": "index.js",
+  "dependencies": {
+    "@types/node": "^10.12.18",
+    "typescript": "^3.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bafolts/terraforming-mars.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bafolts/terraforming-mars/issues"
+  },
+  "homepage": "https://github.com/bafolts/terraforming-mars#readme"
+}

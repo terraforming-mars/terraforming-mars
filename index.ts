@@ -1,5 +1,5 @@
 
-var Game = require("./src/Game");
+import { Game } from "./src/Game";
 
 var game = new Game("blue");
 

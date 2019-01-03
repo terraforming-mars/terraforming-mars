@@ -3,7 +3,7 @@ import { CorporationCard } from "./CorporationCard";
 
 const generatedIds: {[x: string]: boolean } = {};
 
-export function shuffle(arr: Array<object>) {
+export function shuffle<T>(arr: Array<T>): Array<T> {
     var result = [];
     while (arr.length > 0) {
         result.push(arr.splice(Math.floor(Math.random() * arr.length), 1)[0]);

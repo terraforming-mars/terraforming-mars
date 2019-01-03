@@ -7,10 +7,10 @@ var utilities = require("./utilities");
 export class Player {
 
     // Hash used to identify and authenticate player
-    private hash: string = utilities.generateUUID();
+    public hash: string = utilities.generateUUID();
 
     private availableCorporationCards: Array<CorporationCard> = [];
-    private corporationCard: CorporationCard | undefined = undefined;
+    public corporationCard: CorporationCard | undefined = undefined;
 
     private megaCredits: number = 0;
     private steel: number = 0;
@@ -22,8 +22,8 @@ export class Player {
     private plants: number = 0;
     private plantProduction: number = 0;
     private readyToStartGame: boolean = false;
-    private selectableCards: Array<Card> = [];
-    private cards: Array<Card> = [];
+    public selectableCards: Array<Card> = [];
+    public cards: Array<Card> = [];
 
     constructor(private color: string) {
     }
@@ -58,6 +58,10 @@ export class Player {
     public dealCards(cards: Array<Card>): void {
         console.log("Player(" + this.hash + "):dealCards", cards.map(function(c: Card) { return c.name;}));
         this.selectableCards = cards;
+    }
+
+    public hasSelectableCard(cardName: string): boolean {
+        return this.selectableCards.filter(function(s: Card) { return s.name === cardName; }).length === 1;
     }
 
     public setCorporationCard(corporationCardName: string): void {

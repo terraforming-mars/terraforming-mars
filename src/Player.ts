@@ -1,5 +1,5 @@
 
-import { Card } from "./Card";
+import { IProjectCard } from "./cards/IProjectCard";
 import { CorporationCard } from "./CorporationCard";
 
 const utilities = require("./utilities");
@@ -21,9 +21,10 @@ export class Player {
     public heatProduction: number = 0;
     public plants: number = 0;
     public plantProduction: number = 0;
-    public cardsDealt: Array<Card> = [];
-    public cardsInHand: Array<Card> = [];
+    public cardsDealt: Array<IProjectCard> = [];
+    public cardsInHand: Array<IProjectCard> = [];
     public color: string | undefined;
     public terraformRating: number = 20;
+    public victoryPoints: number = 0;
 }
 

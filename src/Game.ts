@@ -2,10 +2,10 @@
 var CARDS = require("../../data/cards.json");
 var CORPORATION_CARDS = require("../../data/corporationCards.json");
 
-import { Card } from "./Card";
 import { CorporationCard } from "./CorporationCard";
 import * as utilities from "./utilities";
 import { Player } from "./Player";
+import { Dealer } from "./Dealer";
 
 // STARTING
 // IF PLAYER ISNT BEGINNER GIVE THEM 2 CORPORATION CARDS
@@ -48,6 +48,7 @@ STANDARD PROJECTS
 
 export class Game {
     private hash: string = utilities.generateUUID();
+    public dealer: Dealer = new Dealer();
     private players: Array<Player> = [];
 
     // which player will go first

@@ -1,19 +1,4 @@
 [{
-    "cost": 9,
-    "tags": ["earth", "space", "down"],
-    "name": "Import of Advanced GHG",
-    "color": "red",
-    "text": "Increase your heat production 2 steps.",
-    "description": "Greenhouse gases (GHG) with improved effect"
-}, {
-    "cost": 9,
-    "tags": ["science", "space"],
-    "name": "Lagrange Observatory",
-    "text": "Draw 1 card.",
-    "color": "green",
-    "description": "In a stationary orbit far from the planet, enabling very precise measurements",
-    "vp": 1
-}, {
     "cost": 0,
     "tags": ["down"],
     "name": "Indentured Workers",

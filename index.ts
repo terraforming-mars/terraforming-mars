@@ -1,5 +1,5 @@
 
 import { Game } from "./src/Game";
 
-var game = new Game("blue");
+var game = new Game();
 

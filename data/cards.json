@@ -1,19 +1,4 @@
 [{
-    "cost": 0,
-    "tags": ["down"],
-    "name": "Indentured Workers",
-    "text": "The next card you play this generation costs 8 mega credits less",
-    "vp": -1,
-    "color": "red",
-    "description": "There are many who would work for us for almost no pay in exchange for a ticket to Mars"
-}, {
-    "cost": 4,
-    "tags": ["power", "steel"],
-    "name": "Power Infrastructure",
-    "text": "Action: Spend any amount of energy to gain that amount of mega credits.",
-    "description": "Efficiency through flexibility",
-    "color": "blue"
-}, {
     "cost": 15,
     "tags": ["plant"],
     "name": "Plantation",

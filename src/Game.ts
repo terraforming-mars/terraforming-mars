@@ -50,12 +50,37 @@ export class Game {
     private hash: string = utilities.generateUUID();
     public dealer: Dealer = new Dealer();
     private players: Array<Player> = [];
+    private onGenerationEnd: Array<Function> = [];
 
     // which player will go first
     // shifts clockwise each generation
     private firstPlayerIndex: number = 0;
 
     private phase: string = "research";
-    public generation: number = 1;
+
+    private generation: number = 1;
+
+    public setGeneration(generation: number): void {
+        if (generation !== this.generation) {
+            this.onGenerationEnd.slice().forEach(function (end) {
+                end();
+            });
+        }
+        this.generation = generation;
+    }
+
+    public addGenerationEndListener(end: Function): void {
+        this.onGenerationEnd.push(end);
+    }
+    public removeGenerationEndListener(end: Function): void {
+        for (var i = 0; i < this.onGenerationEnd.length; i++) {
+            if (this.onGenerationEnd[i] === end) {
+                this.onGenerationEnd.splice(i, 1);
+                return;
+            }
+        }
+        throw "Did not find remove listener for generation end";
+    }
+
 }
 

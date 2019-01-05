@@ -1,6 +1,7 @@
 
 import { IProjectCard } from "./cards/IProjectCard";
 import { CorporationCard } from "./CorporationCard";
+import { CardDiscount } from "./CardDiscount";
 
 const utilities = require("./utilities");
 
@@ -24,7 +25,20 @@ export class Player {
     public cardsDealt: Array<IProjectCard> = [];
     public cardsInHand: Array<IProjectCard> = [];
     public color: string | undefined;
+    private cardDiscounts: Array<CardDiscount> = [];
     public terraformRating: number = 20;
     public victoryPoints: number = 0;
+    public addCardDiscount(discount: CardDiscount): void {
+        this.cardDiscounts.push(discount);
+    }
+    public removeCardDiscount(discount: CardDiscount): void {
+        for (var i = 0; i < this.cardDiscounts.length; i++) {
+            if (this.cardDiscounts[i] === discount) {
+                this.cardDiscounts.splice(i, 1);
+                return;
+            }
+        }
+        throw "Did not find card discount.";
+    }
 }
 

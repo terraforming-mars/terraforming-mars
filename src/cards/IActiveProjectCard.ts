@@ -6,6 +6,6 @@ import { IUserData } from "../IUserData";
 
 export interface IActiveProjectCard extends IProjectCard {
     needsUserData?: IUserData;
-    action: (player: Player, game: Game, userData: {[x: string]: string}) => void;
+    action: (player: Player, game: Game, userData: IUserData) => void;
 }
 

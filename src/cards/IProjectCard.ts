@@ -6,6 +6,7 @@ import { Player } from "../Player";
 import { IUserData } from "../IUserData";
 
 export interface IProjectCard {
+    animals?: number;
     cardType: CardType;
     cost: number;
     tags: Array<Tags>;

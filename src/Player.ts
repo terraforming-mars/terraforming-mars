@@ -7,9 +7,7 @@ import { Tags } from "./cards/Tags";
 const utilities = require("./utilities");
 
 export class Player {
-
-    // Hash used to identify and authenticate player
-    public hash: string = utilities.generateUUID();
+    public id: string = utilities.generateUUID();
 
     public corporationCardsDealt: Array<CorporationCard> = [];
     public corporationCard: CorporationCard | undefined = undefined;
@@ -28,10 +26,17 @@ export class Player {
     public plantProduction: number = 0;
     public cardsDealt: Array<IProjectCard> = [];
     public cardsInHand: Array<IProjectCard> = [];
+    public playedCards: Array<IProjectCard> = [];
     public color: string | undefined;
     private cardDiscounts: Array<CardDiscount> = [];
     public terraformRating: number = 20;
     public victoryPoints: number = 0;
+    public addAnimalsToCard(card: IProjectCard, count: number): void {
+        if (card.animals === undefined) {
+            card.animals = 0;
+        }
+        card.animals += count;
+    }
     public addCardDiscount(discount: CardDiscount): void {
         this.cardDiscounts.push(discount);
     }

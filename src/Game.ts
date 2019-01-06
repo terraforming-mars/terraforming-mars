@@ -126,16 +126,22 @@ export class Game {
             });
         }
     }
+    public getAdjacentSpaces(space: ISpace): Array<ISpace> {
+        // TODO Implement this method
+        return [];
+    }
     public addGreenery(player: Player, spaceId: string): void {
         this.addTile(player, SpaceType.LAND, this.getSpace(spaceId), { tileType: TileType.GREENERY });
         if (this.oxygenLevel < MAX_OXYGEN_LEVEL) {
             this.oxygenLevel++;
-            player.victoryPoints++;
+            player.terraformRating++;
         }
     }
     public addOceanTile(player: Player, spaceId: string): void {
         this.addTile(player, SpaceType.OCEAN, this.getSpace(spaceId), { tileType: TileType.OCEAN });
-        player.victoryPoints++;
+        // No one can own the oceans!
+        this.getSpace(spaceId).player = undefined;
+        player.terraformRating++;
     }
 }
 

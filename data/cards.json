@@ -1,41 +1,4 @@
 [{
-    "cost": 1,
-    "tags": ["down"],
-    "name": "Local Heat Trapping",
-    "text": "Spend 5 heat to either gain 4 plants, or to add 2 animals to ANOTHER card.",
-    "color": "red",
-    "description": "Life can benefit from local hot spots"
-}, {
-    "cost": 15,
-    "tags": ["power"],
-    "name": "Energy Saving",
-    "color": "green",
-    "text": "Increase your energy production 1 step for each city tile in play.",
-    "description": "Minimizing urban energy spending"
-}, {
-    "cost": 7,
-    "tags": ["down"],
-    "name": "Flooding",
-    "color": "red",
-    "text": "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 MEGA CREDITS FROM THE OWNER OF ONE OF THOSE TILES",
-    "vp": -1,
-    "description": "Look out for tsunamis"
-}, {
-    "cost": 6,
-    "tags": ["power", "steel"],
-    "name": "Windmills",
-    "vp": 1,
-    "color": "green",
-    "text": "Requires 7% oxygen. Increase your energy production 1 step.",
-    "description": "At last we have more useful winds"
-}, {
-    "cost": 18,
-    "tags": ["steel"],
-    "name": "Aquifer Pumping",
-    "color": "blue",
-    "text": "Action: Spend 8 mega credits to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.",
-    "description": "Underground water reservoirs may be tapped in a controlled manner, to safely build up oceans to the desired level"
-}, {
     "cost": 6,
     "name": "Rad-Suits",
     "tags": [],

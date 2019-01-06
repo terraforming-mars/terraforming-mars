@@ -2,6 +2,7 @@
 import { IProjectCard } from "./cards/IProjectCard";
 import { CorporationCard } from "./CorporationCard";
 import { CardDiscount } from "./CardDiscount";
+import { Tags } from "./cards/Tags";
 
 const utilities = require("./utilities");
 
@@ -15,11 +16,14 @@ export class Player {
 
     public megaCredits: number = 0;
     public steel: number = 0;
+    public titanium: number = 0;
     public energy: number = 0;
     public steelProduction: number = 0;
     public energyProduction: number = 0;
     public heat: number = 0;
     public heatProduction: number = 0;
+    public onCardSelected: Function | undefined;
+    public waitingFor: string | undefined;
     public plants: number = 0;
     public plantProduction: number = 0;
     public cardsDealt: Array<IProjectCard> = [];
@@ -39,6 +43,14 @@ export class Player {
             }
         }
         throw "Did not find card discount.";
+    }
+    public getTagCount(tag: Tags): number {
+        let tagCount = 0;
+        this.cardsInHand.forEach((card: IProjectCard) => {
+            tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
+        });
+        tagCount += this.corporationCard.tags.filter((cardTag) => cardTag === tag).length;
+        return tagCount;
     }
 }
 

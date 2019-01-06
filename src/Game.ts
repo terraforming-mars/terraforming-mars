@@ -6,6 +6,14 @@ import { CorporationCard } from "./CorporationCard";
 import * as utilities from "./utilities";
 import { Player } from "./Player";
 import { Dealer } from "./Dealer";
+import { ISpace } from "./ISpace";
+import { SpaceType } from "./SpaceType";
+import { TileType } from "./TileType";
+import { SpaceBonus } from "./SpaceBonus";
+import { ITile } from "./ITile";
+
+const MAX_OXYGEN_LEVEL: number = 32;
+const MAX_OCEAN_TILES: number = 9;
 
 // STARTING
 // IF PLAYER ISNT BEGINNER GIVE THEM 2 CORPORATION CARDS
@@ -49,6 +57,7 @@ STANDARD PROJECTS
 export class Game {
     private hash: string = utilities.generateUUID();
     public dealer: Dealer = new Dealer();
+    private spaces: Array<ISpace> = [];
     private players: Array<Player> = [];
     private onGenerationEnd: Array<Function> = [];
 
@@ -59,6 +68,9 @@ export class Game {
     private phase: string = "research";
 
     private generation: number = 1;
+    public oxygenLevel: number = 1;
+    public temperature: number = -100;
+    public oceansPlaced: number = 0;
 
     public setGeneration(generation: number): void {
         if (generation !== this.generation) {
@@ -81,6 +93,49 @@ export class Game {
         }
         throw "Did not find remove listener for generation end";
     }
-
+    public getSpace(id: string): ISpace {
+        const matchedSpaces = this.spaces.filter((space) => space.id === id);
+        if (matchedSpaces.length === 1) {
+            return matchedSpaces[0];
+        }
+        throw "Error with getting space";
+    }
+    public getSpaces(spaceType: SpaceType): Array<ISpace> {
+        return this.spaces.filter((space) => space.spaceType === spaceType);
+    }
+    private addTile(player: Player, spaceType: SpaceType, space: ISpace, tile: ITile): void {
+        if (space.tile !== undefined) {
+            throw "Selected space is occupied";
+        }
+        if (space.spaceType !== spaceType) {
+            throw "Select a valid location";
+        }
+        space.player = player;
+        space.tile = tile;
+        if (space.bonus) {
+            space.bonus.forEach(function (spaceBonus) {
+                if (spaceBonus === SpaceBonus.DRAW_CARD) {
+                    player.cardsInHand.push(this.dealer.getCard(1));
+                } else if (spaceBonus === SpaceBonus.PLANT) {
+                    player.plants++;
+                } else if (spaceBonus === SpaceBonus.STEEL) {
+                    player.steel++;
+                } else if (spaceBonus === SpaceBonus.TITANIUM) {
+                    player.titanium++;
+                }
+            });
+        }
+    }
+    public addGreenery(player: Player, spaceId: string): void {
+        this.addTile(player, SpaceType.LAND, this.getSpace(spaceId), { tileType: TileType.GREENERY });
+        if (this.oxygenLevel < MAX_OXYGEN_LEVEL) {
+            this.oxygenLevel++;
+            player.victoryPoints++;
+        }
+    }
+    public addOceanTile(player: Player, spaceId: string): void {
+        this.addTile(player, SpaceType.OCEAN, this.getSpace(spaceId), { tileType: TileType.OCEAN });
+        player.victoryPoints++;
+    }
 }
 

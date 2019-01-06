@@ -1,25 +1,4 @@
 [{
-    "cost": 15,
-    "tags": ["plant"],
-    "name": "Plantation",
-    "text": "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.",
-    "description": "By focusing on a limited area, helpful measures can be taken to improve local conditions for plant life",
-    "color": "green"
-}, {
-    "cost": 2,
-    "tags": ["science", "down"],
-    "name": "Invention Contest",
-    "color": "red",
-    "text": "LOOK AT THE TOP 3 CARDS FROM THE DECK. TAKE 1 OF THEM INTO HAND AND DISCARD THE OTHER 2",
-    "description": "Engaging the scientific community in a field of your choice"
-}, {
-    "cost": 8,
-    "tags": ["down"],
-    "name": "Permafrost Extraction",
-    "text": "Requires -8C or warmer. Place 1 ocean tile.",
-    "description": "Thawing the subsurface",
-    "color": "red"
-}, {
     "cost": 1,
     "tags": ["down"],
     "name": "Local Heat Trapping",

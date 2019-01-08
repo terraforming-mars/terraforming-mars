@@ -55,10 +55,11 @@ STANDARD PROJECTS
 // events card (red)
 
 export class Game {
-    private hash: string = utilities.generateUUID();
+    public id: string = utilities.generateUUID();
     public dealer: Dealer = new Dealer();
     private spaces: Array<ISpace> = [];
     private players: Array<Player> = [];
+    private onGameEnd: Array<Function> = [];
     private onGenerationEnd: Array<Function> = [];
 
     // which player will go first
@@ -81,6 +82,18 @@ export class Game {
         this.generation = generation;
     }
 
+    public addGameEndListener(end: Function): void {
+        this.onGameEnd.push(end);
+    }
+
+    public getPlayerById(playerId: string): Player {
+        const foundPlayers = this.players.filter((player) => player.id === playerId);
+        if (foundPlayers.length === 0) {
+            throw "Player not found";
+        }
+        return foundPlayers[0];
+    }
+
     public addGenerationEndListener(end: Function): void {
         this.onGenerationEnd.push(end);
     }
@@ -99,6 +112,9 @@ export class Game {
             return matchedSpaces[0];
         }
         throw "Error with getting space";
+    }
+    public getCitiesInPlay(): number {
+        return this.spaces.filter((space) => space.tile !== undefined && space.tile.tileType === TileType.CITY).length;
     }
     public getSpaces(spaceType: SpaceType): Array<ISpace> {
         return this.spaces.filter((space) => space.spaceType === spaceType);

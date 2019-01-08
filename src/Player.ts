@@ -3,6 +3,7 @@ import { IProjectCard } from "./cards/IProjectCard";
 import { CorporationCard } from "./CorporationCard";
 import { CardDiscount } from "./CardDiscount";
 import { Tags } from "./cards/Tags";
+import { PlayerInput } from "./PlayerInput";
 
 const utilities = require("./utilities");
 
@@ -13,10 +14,12 @@ export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
 
     public megaCredits: number = 0;
+    public megaCreditProduction: number = 0;
     public steel: number = 0;
     public titanium: number = 0;
     public energy: number = 0;
     public steelProduction: number = 0;
+    public titaniumProduction: number = 0;
     public energyProduction: number = 0;
     public heat: number = 0;
     public heatProduction: number = 0;
@@ -24,7 +27,6 @@ export class Player {
     public waitingFor: string | undefined;
     public plants: number = 0;
     public plantProduction: number = 0;
-    public cardsDealt: Array<IProjectCard> = [];
     public cardsInHand: Array<IProjectCard> = [];
     public playedCards: Array<IProjectCard> = [];
     public color: string | undefined;
@@ -56,6 +58,29 @@ export class Player {
         });
         tagCount += this.corporationCard.tags.filter((cardTag) => cardTag === tag).length;
         return tagCount;
+    }
+    public getCard(cardName: string): IProjectCard {
+        const foundCards = this.cardsInHand.filter((card) => card.name === cardName);
+        if (foundCards.length === 0) {
+            throw "Card not found";
+        }
+        return foundCards[0];
+    }
+    public cardPlayedEvents: Array<Function> = [];
+    public addCardPlayedHandler(handler: Function): void {
+        this.cardPlayedEvents.push(handler);
+    } 
+
+    public waitingForInput: Array<PlayerInput> = [];
+    private inputEvents: Array<Function> = [];
+    public addInputEvent(event: Function): void {
+        this.inputEvents.push(event);
+    }
+    public removeInputEvent(event: Function): void {
+        if (this.inputEvents.indexOf(event) === -1) {
+            throw "input event not found";
+        }
+        this.inputEvents.splice(this.inputEvents.indexOf(event), 1);
     }
 }
 

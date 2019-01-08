@@ -13,6 +13,6 @@ export interface IProjectCard {
     name: string;
     text: string;
     description: string;
-    play: (player: Player, game: Game, userData?: IUserData) => void;
+    play: (player: Player, game: Game, userData?: IUserData) => void | Promise<void>;
 }
 

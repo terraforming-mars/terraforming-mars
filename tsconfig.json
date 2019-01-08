@@ -1,14 +1,16 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "lib": ["ES6"],
     "noImplicitAny": true,
     "removeComments": true,
     "preserveConstEnums": true,
     "outDir": "dist",
     "sourceMap": true
   },
-  "files": [
-	  "index.ts",
-	  "src/Game.ts"
-  ]
+    "files": [
+	    "index.ts",
+        "src/Game.ts",
+        "src/PlayerRoute.ts"
+    ]
 }

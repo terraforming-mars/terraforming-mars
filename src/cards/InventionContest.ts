@@ -12,14 +12,28 @@ export class InventionContest implements IProjectCard {
     public name: string = "Invention Contest";
     public text: string = "LOOK AT THE TOP 3 CARDS FROM THE DECK. TAKE 1 OF THEM INTO HAND AND DISCARD THE OTHER 2";
     public description: string = "Engaging the scientific community in a field of your choice";
-    public play(player: Player, game: Game): void {
-        player.cardsDealt = game.dealer.getCards(3);
-        player.waitingFor = "Select a card";
-        player.onCardSelected = function (card: IProjectCard) {
-            player.cardsDealt = [];
-            player.cardsInHand.push(card);
-            player.waitingFor = undefined;
-            player.onCardSelected = undefined;
-        }
+    public play(player: Player, game: Game): Promise<void> {
+        return new Promise<void>((resolve: Function, reject: Function) => {
+            const cardsDrawn: Array<IProjectCard> = game.dealer.getCards(3);
+            player.waitingForInput.push({
+                initiator: "card",
+                cardName: "InventionContest",
+                type: "SelectACardForFree",
+                cards: cardsDrawn
+            });
+            const onInputHandler = function (actionName: string, input: string): void {
+                if (actionName === "SelectACardForFree") {
+                    const selectedCard = cardsDrawn.filter((card) => card.name === input);
+                    if (selectedCard.length === 0) {
+                        reject("Selected card wasn't one dealt");
+                        return;
+                    }
+                    player.cardsInHand.push(selectedCard[0]);
+                    player.removeInputEvent(onInputHandler);
+                    resolve();
+                }
+            }
+            player.addInputEvent(onInputHandler);
+        });
     }
 }

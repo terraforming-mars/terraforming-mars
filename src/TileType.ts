@@ -1,5 +1,6 @@
 
 export enum TileType {
     GREENERY,
-    OCEAN
+    OCEAN,
+    CITY
 }

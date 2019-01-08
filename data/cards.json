@@ -1,29 +1,4 @@
-[{
-    "cost": 6,
-    "name": "Rad-Suits",
-    "tags": [],
-    "color": "green",
-    "text": "Requires 2 cities in play. Increase your mega credit production 1 step.",
-    "vp": 1,
-    "description": "New synthetic fabrics, able to protect from cosmic radiation, are becoming high fasion"
-}, {
-    "cost": 10,
-    "tags": ["science", "earth", "steel"],
-    "color": "blue",
-    "name": "Olympus Conference",
-    "text": "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.",
-    "description": "The scientific elite, assembled on the top of Olympus Mons, the highest spot in the solar system",
-    "vp": 1
-}, {
-    "cost": 13,
-    "tags": ["animal"],
-    "color": "blue",
-    "name": "Livestock",
-    "action": "Add 1 animal to this card",
-    "text": "Requires 9% oxygen. Decrease your plant production 1 step and increase your mega credit production 2 steps.",
-    "vp": "1 VP for each animal on this card",
-    "description": "Providing meat, wool, leather, etc."
-}, {
+[{{
     "cost": 4,
     "tags": ["power", "steel"],
     "color": "green",
@@ -40,28 +15,6 @@
     "text": "Decrease your energy production 1 step and increase your mega credit production 3 steps. Place a city tile.",
     "description": "A city exclusively devoted to your corporation"
 }, {
-    "cost": 5,
-    "tags": ["down"],
-    "color": "red",
-    "name": "Ice Cap Melting",
-    "text": "Requires +2C or warmer. Place 1 ocean tile.",
-    "description": "Getting the water back from the poles"
-}, {
-    "cost": 6,
-    "tags": ["steel"],
-    "color": "green",
-    "name": "Fuel Factory",
-    "text": "Decrease your energy production 1 step and increase your titanium and your mega credit production 1 step each.",
-    "description": "With its shallow gravity well, Mars is a good host for the space industry, and rockets need fuel"
-}, {
-    "cost": 9,
-    "tags": ["steel"],
-    "name": "Soil Factory",
-    "color": "green",
-    "text": "Decrease your energy production 1 step and increase your plant production 1 step",
-    "vp": 1,
-    "description": "There are many harmful elements to remove"
-}, {
     "cost": 6,
     "tags": ["power", "steel"],
     "name": "Heat Trappers",
@@ -77,14 +30,6 @@
     "color": "blue",
     "text": "Requires 2 ocean tiles",
     "description": "Electrolysis of water yields oxygen and hydrogen, both very useful gases"
-}, {
-    "cost": 10,
-    "tags": ["plant", "steel"],
-    "name": "Noctis Farming",
-    "color": "green",
-    "text": "Requires -20C or warmer. Increase your mega credit production 1 step and gain 2 plants",
-    "vp": 1,
-    "description": "Utilizing the uniquely dense and moist atmosphere in the canyons of Noctis Labyrinthus"
 }, {
     "cost": 10,
     "tags": ["space"],
@@ -129,14 +74,6 @@
     "color": "red",
     "text": "Add 2 microbes to ANOTHER card. Increase your heat production 3 steps and your plant production 1 step.",
     "description": "Ammonia is a greenhouse gas, as well as being a convenient nitrogen source for organisms"
-}, {
-    "cost": 16,
-    "tags": ["plant"],
-    "color": "green",
-    "name": "Tundra Farming",
-    "vp": 2,
-    "text": "Requires -6C or warmer. Increase your plant production 1 step and your mega credit production 2 steps. Gain 1 plant.",
-    "description": "Farming the thawed soil over the frozen bedrock"
 }, {
     "cost": 10,
     "tags": ["science"],

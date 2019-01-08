@@ -1,5 +1,6 @@
 
 export enum Tags {
+    ANIMAL,
     EARTH,
     ENERGY,
     PLANT,

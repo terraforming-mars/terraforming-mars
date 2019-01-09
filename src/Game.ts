@@ -146,18 +146,24 @@ export class Game {
         // TODO Implement this method
         return [];
     }
-    public addGreenery(player: Player, spaceId: string): void {
-        this.addTile(player, SpaceType.LAND, this.getSpace(spaceId), { tileType: TileType.GREENERY });
+    public addGreenery(player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND): void {
+        this.addTile(player, spaceType, this.getSpace(spaceId), { tileType: TileType.GREENERY });
         if (this.oxygenLevel < MAX_OXYGEN_LEVEL) {
             this.oxygenLevel++;
             player.terraformRating++;
         }
+    }
+    public addCityTile(player: Player, spaceId: string): void {
+        this.addTile(player, SpaceType.LAND, this.getSpace(spaceId), { tileType: TileType.CITY });
     }
     public addOceanTile(player: Player, spaceId: string): void {
         this.addTile(player, SpaceType.OCEAN, this.getSpace(spaceId), { tileType: TileType.OCEAN });
         // No one can own the oceans!
         this.getSpace(spaceId).player = undefined;
         player.terraformRating++;
+    }
+    public getOceansOnBoard(): number {
+        return this.getSpaces(SpaceType.OCEAN).filter((space) => space.tile !== undefined && space.tile.tileType === TileType.OCEAN).length + this.getSpaces(SpaceType.LAND).filter((space) => space.tile !== undefined && space.tile.tileType === TileType.OCEAN).length;
     }
 }
 

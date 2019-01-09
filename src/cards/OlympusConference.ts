@@ -22,18 +22,16 @@ export class OlympusConference implements IProjectCard {
                 } else {
                     this.scienceResources++;
                 }
-                player.removeInputEvent(takeAction);
             }
         };
         const cardPlayedHandler = (playedCard: IProjectCard) => {
             if (playedCard.tags.filter((tag) => tag === Tags.SCIENCE).length > 0) {
                 if (this.scienceResources) {
-                    player.waitingForInput.push({
+                    player.setWaitingFor({
                         initiator: "card",
-                        cardName: "OlympusConference",
+                        card: this,
                         type: "AddResourceOrDrawCard"
-                    });
-                    player.addInputEvent(takeAction);
+                    }, takeAction);
                 } else {
                     this.scienceResources++;
                 }

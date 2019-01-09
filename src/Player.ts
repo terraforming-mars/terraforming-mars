@@ -24,7 +24,6 @@ export class Player {
     public heat: number = 0;
     public heatProduction: number = 0;
     public onCardSelected: Function | undefined;
-    public waitingFor: string | undefined;
     public plants: number = 0;
     public plantProduction: number = 0;
     public cardsInHand: Array<IProjectCard> = [];
@@ -53,7 +52,7 @@ export class Player {
     }
     public getTagCount(tag: Tags): number {
         let tagCount = 0;
-        this.cardsInHand.forEach((card: IProjectCard) => {
+        this.playedCards.forEach((card: IProjectCard) => {
             tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
         });
         tagCount += this.corporationCard.tags.filter((cardTag) => cardTag === tag).length;
@@ -71,16 +70,14 @@ export class Player {
         this.cardPlayedEvents.push(handler);
     } 
 
-    public waitingForInput: Array<PlayerInput> = [];
-    private inputEvents: Array<Function> = [];
-    public addInputEvent(event: Function): void {
-        this.inputEvents.push(event);
-    }
-    public removeInputEvent(event: Function): void {
-        if (this.inputEvents.indexOf(event) === -1) {
-            throw "input event not found";
+    private waitingFor?: PlayerInput;
+
+    public setWaitingFor(input: PlayerInput, inputHandler: Function): void {
+        if (this.waitingFor !== undefined) {
+            throw "Already waiting on input from player";
         }
-        this.inputEvents.splice(this.inputEvents.indexOf(event), 1);
+        this.waitingFor = input;
     }
+
 }
 

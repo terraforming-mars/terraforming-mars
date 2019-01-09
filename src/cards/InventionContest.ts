@@ -15,25 +15,21 @@ export class InventionContest implements IProjectCard {
     public play(player: Player, game: Game): Promise<void> {
         return new Promise<void>((resolve: Function, reject: Function) => {
             const cardsDrawn: Array<IProjectCard> = game.dealer.getCards(3);
-            player.waitingForInput.push({
+            const onInputHandler = function (input: string): void {
+                const selectedCard = cardsDrawn.filter((card) => card.name === input);
+                if (selectedCard.length === 0) {
+                    reject("Selected card wasn't one dealt");
+                    return;
+                }
+                player.cardsInHand.push(selectedCard[0]);
+                resolve();
+            }
+            player.setWaitingFor({
                 initiator: "card",
-                cardName: "InventionContest",
+                card: this,
                 type: "SelectACardForFree",
                 cards: cardsDrawn
-            });
-            const onInputHandler = function (actionName: string, input: string): void {
-                if (actionName === "SelectACardForFree") {
-                    const selectedCard = cardsDrawn.filter((card) => card.name === input);
-                    if (selectedCard.length === 0) {
-                        reject("Selected card wasn't one dealt");
-                        return;
-                    }
-                    player.cardsInHand.push(selectedCard[0]);
-                    player.removeInputEvent(onInputHandler);
-                    resolve();
-                }
-            }
-            player.addInputEvent(onInputHandler);
+            }, onInputHandler);
         });
     }
 }

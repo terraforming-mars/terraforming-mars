@@ -1,6 +1,5 @@
 
 import { IProjectCard } from "./IProjectCard";
-import { IUserData } from "../IUserData";
 import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
@@ -13,18 +12,34 @@ export class Flooding implements IProjectCard {
     public tags: Array<Tags> = [];
     public text: string = "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 MEGA CREDITS FROM THE OWNER OF ONE OF THOSE TILES";
     public description: string = "Look out for tsunamis";
-    public needsUserData: IUserData = {
-        playerId: "Which player to remove from ",
-        spaceId: "Where to place ocean tile"
-    };
-    public play(player: Player, game: Game, userData: IUserData): void {
-        var space = game.getSpace(userData.spaceId);
-        var adjacentPlayers = game.getAdjacentSpaces(space).filter((space) => space.player && space.player.id === userData.playerId);
-        if (adjacentPlayers.length === 0) {
-            throw "Player " + userData.playerId + " doesn't own an adjacent space";
-        }
-        game.addOceanTile(player, userData.spaceId);
-        adjacentPlayers[0].player.megaCredits -= 4;
-        player.victoryPoints--;
+    public play(player: Player, game: Game): Promise<void> {
+        return new Promise((resolve, reject) => {
+            player.setWaitingFor({
+                initiator: "card",
+                card: this,
+                type: "SelectASpace"
+            }, (spaceId: string) => {
+                const space = game.getSpace(spaceId);
+                try { game.addOceanTile(player, spaceId); }
+                catch (err) { reject(err); return; }
+                player.setWaitingFor(undefined); // we are done with the first request
+                const adjacentPlayers = game.getAdjacentSpaces(space).filter((space) => space.player).map((space) => space.player);
+                if (adjacentPlayers.length) {
+                    player.setWaitingFor({
+                        initiator: "card",
+                        card: this,
+                        type: "SelectAPlayer",
+                        players: adjacentPlayers
+                    }, (playerId: string) => {
+                        game.getPlayerById(playerId).megaCredits = Math.max(game.getPlayerById(playerId).megaCredits - 4, 0);
+                        player.victoryPoints--;
+                        resolve();
+                    });
+                } else {
+                    player.victoryPoints--;
+                    resolve();
+                }
+            });
+        });
     }
 }

@@ -4,7 +4,6 @@ import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { IUserData } from "../IUserData";
 
 export class PermafrostExtraction implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
@@ -13,13 +12,21 @@ export class PermafrostExtraction implements IProjectCard {
     public name: string = "Permafrost Extraction";
     public text: string = "Requires -8C or warmer. Place 1 ocean tile.";
     public description: string = "Thawing the subsurface";
-    public needsUserData: IUserData = {
-        spaceId: "Where to place ocean tile"
-    };
-    public play(player: Player, game: Game, userData: IUserData): void {
-        if (game.temperature < -8) {
-            throw "Temperature must be -8C or warmer";
-        }
-        game.addOceanTile(player, userData.spaceId);
+    public play(player: Player, game: Game): Promise<void> {
+        return new Promise((resolve, reject) => {
+            if (game.temperature < -8) {
+                reject("Temperature must be -8C or warmer");
+                return;
+            }
+            player.setWaitingFor({
+                initiator: "card",
+                card: this,
+                type: "SelectASpace"
+            }, (input: string) => {
+                try { game.addOceanTile(player, input); }
+                catch (err) { reject(err); return; }
+                resolve();
+            });
+        });
     }
 }

@@ -72,7 +72,11 @@ export class Player {
 
     private waitingFor?: PlayerInput;
 
-    public setWaitingFor(input: PlayerInput, inputHandler: Function): void {
+    public setWaitingFor(input: PlayerInput | undefined, inputHandler?: Function): void {
+        if (input === undefined) {
+            this.waitingFor = undefined;
+            return;
+        }
         if (this.waitingFor !== undefined) {
             throw "Already waiting on input from player";
         }

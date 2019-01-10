@@ -4,7 +4,6 @@ import { IActiveProjectCard } from "./IActiveProjectCard";
 import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { IUserData } from "../IUserData";
 
 export class PowerInfrastructure implements IActiveProjectCard {
     public name: string = "Power Infrastructure";
@@ -12,23 +11,30 @@ export class PowerInfrastructure implements IActiveProjectCard {
     public description: string = "Efficiency through flexibility."
     public cardType: CardType = CardType.ACTIVE;
     public cost: number = 4;
-    public needsUserData: IUserData = {
-        energy: "Amount of energy to transfer"
-    };
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public play(player: Player, game: Game): void {
         // Nothing happens when played
     }
 
-    public action(player: Player, game: Game, userData: IUserData): void {
+    public action(player: Player, game: Game): Promise<void> {
         if (player.energy === 0) {
             throw "Have no energy to spend";
         }
-        if (parseInt(userData.energy) > player.energy) {
-            throw "You don't have that much energy";
-        }
-        player.energy -= parseInt(userData.energy);
-        player.megaCredits += parseInt(userData.energy);
+        return new Promise((resolve, reject) => {
+            player.setWaitingFor({
+                initiator: "card",
+                card: this,
+                type: "SelectAmount"
+            }, (input: string) => {
+                if (parseInt(input) > player.energy) {
+                    reject("You don't have that much energy");
+                } else {
+                    player.energy -= parseInt(input);
+                    player.megaCredits += parseInt(input);
+                    resolve();
+                }
+            });
+        });
     }
 
 }

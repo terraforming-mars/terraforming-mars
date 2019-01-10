@@ -3,7 +3,6 @@ import { CardType } from "./CardType";
 import { Tags } from "./Tags";
 import { Game } from "../Game";
 import { Player } from "../Player";
-import { IUserData } from "../IUserData";
 
 export interface IProjectCard {
     animals?: number;
@@ -13,6 +12,6 @@ export interface IProjectCard {
     name: string;
     text: string;
     description: string;
-    play: (player: Player, game: Game, userData?: IUserData) => void | Promise<void>;
+    play: (player: Player, game: Game) => void | Promise<void>;
 }
 

@@ -27,8 +27,13 @@ export class Livestock implements IActiveProjectCard {
         };
         game.addGameEndListener(giveVPForAnimalsOnCard);
     }
-    public action(player: Player, game: Game): void {
-        this.animals++;
+    public action(player: Player, game: Game): Promise<void> {
+        return new Promise((resolve, reject) => {
+            try {
+                this.animals++;
+            } catch (err) { reject(err); return; }
+            resolve();
+        });
     }
 }
     

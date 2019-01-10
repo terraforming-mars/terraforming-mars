@@ -11,6 +11,7 @@ import { SpaceType } from "./SpaceType";
 import { TileType } from "./TileType";
 import { SpaceBonus } from "./SpaceBonus";
 import { ITile } from "./ITile";
+import { IProjectCard } from "./cards/IProjectCard";
 
 const MAX_OXYGEN_LEVEL: number = 32;
 const MAX_OCEAN_TILES: number = 9;
@@ -164,6 +165,15 @@ export class Game {
     }
     public getOceansOnBoard(): number {
         return this.getSpaces(SpaceType.OCEAN).filter((space) => space.tile !== undefined && space.tile.tileType === TileType.OCEAN).length + this.getSpaces(SpaceType.LAND).filter((space) => space.tile !== undefined && space.tile.tileType === TileType.OCEAN).length;
+    }
+    public getCard(name: string): IProjectCard | undefined {
+        for (let i = 0; i < this.players.length; i++) {
+            for (let j = 0; j < this.players[i].playedCards.length; j++) {
+                if (this.players[i].playedCards[j].name === name) {
+                    return this.players[i].playedCards[j];
+                }
+            }
+        }
     }
 }
 

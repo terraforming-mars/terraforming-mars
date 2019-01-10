@@ -17,11 +17,17 @@ export class WaterSplittingPlant implements IActiveProjectCard {
             throw "Requires 2 ocean tiles";
         }
     }
-    public action(player: Player, game: Game): void {
-        if (player.energy < 3) {
-            throw "Need 3 energy";
-        }
-        game.oxygenLevel++;
-        player.energy -= 3;
+    public action(player: Player, game: Game): Promise<void> {
+        return new Promise((resolve, reject) => {
+            if (player.energy < 3) {
+                reject("Need 3 energy");
+                return;
+            }
+            try {
+                game.oxygenLevel++;
+            } catch (err) { reject(err); return; }
+            player.energy = Math.max(0, player.energy - 3);
+            resolve();
+        });
     }
 } 

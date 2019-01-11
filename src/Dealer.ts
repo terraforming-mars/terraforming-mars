@@ -1,4 +1,5 @@
 
+import { AerobrakedAmmoniaAsteroid } from "./cards/AerobrakedAmmoniaAsteroid";
 import { AquiferPumping } from "./cards/AquiferPumping";
 import { BiomassCombustors } from "./cards/BiomassCombustors";
 import { CorporateStronghold } from "./cards/CorporateStronghold";
@@ -13,11 +14,14 @@ import { InventionContest } from "./cards/InventionContest";
 import { LagrangeObservatory } from "./cards/LagrangeObservatory";
 import { Livestock } from "./cards/Livestock";
 import { LocalHeatTrapping } from "./cards/LocalHeatTrapping";
+import { MagneticFieldDome } from "./cards/MagneticFieldDome";
 import { NoctisFarming } from "./cards/NoctisFarming";
 import { OlympusConference } from "./cards/OlympusConference";
+import { Pets } from "./cards/Pets";
 import { PermafrostExtraction } from "./cards/PermafrostExtraction";
 import { Plantation } from "./cards/Plantation";
 import { PowerInfrastructure } from "./cards/PowerInfrastructure";
+import { ProtectedHabitats } from "./cards/ProtectedHabitats";
 import { ProtectedValley } from "./cards/ProtectedValley";
 import { RadSuits } from "./cards/RadSuits";
 import { Satellites } from "./cards/Satellites";
@@ -29,6 +33,7 @@ import { Windmills } from "./cards/Windmills";
 import { IProjectCard } from "./cards/IProjectCard";
 
 const ALL_CARDS: Array<IProjectCard> = [
+    new AerobrakedAmmoniaAsteroid(),
     new AquiferPumping(),
     new BiomassCombustors(),
     new CorporateStronghold(),
@@ -43,11 +48,14 @@ const ALL_CARDS: Array<IProjectCard> = [
     new LagrangeObservatory(),
     new Livestock(),
     new LocalHeatTrapping(),
+    new MagneticFieldDome(),
     new NoctisFarming(),
     new OlympusConference(),
     new PermafrostExtraction(),
+    new Pets(),
     new Plantation(),
     new PowerInfrastructure(),
+    new ProtectedHabitats(),
     new ProtectedValley(),
     new RadSuits(),
     new Satellites(),

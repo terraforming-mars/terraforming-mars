@@ -13,6 +13,9 @@ export class Player {
     public corporationCardsDealt: Array<CorporationCard> = [];
     public corporationCard: CorporationCard | undefined = undefined;
 
+    public opponentsCanRemovePlants: boolean = true;
+    public opponentsCanRemoveAnimals: boolean = true;
+    public opponentsCanRemoveMicrobes: boolean = true;
     public megaCredits: number = 0;
     public megaCreditProduction: number = 0;
     public steel: number = 0;

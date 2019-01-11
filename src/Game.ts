@@ -60,6 +60,11 @@ export class Game {
     public dealer: Dealer = new Dealer();
     private spaces: Array<ISpace> = [];
     private players: Array<Player> = [];
+    private onCityTilePlaced: Array<Function> = [];
+    public addCityTilePlacedListener(listener: Function): void {
+        this.onCityTilePlaced.push(listener);
+    }
+
     private onGameEnd: Array<Function> = [];
     private onGenerationEnd: Array<Function> = [];
 
@@ -156,6 +161,9 @@ export class Game {
     }
     public addCityTile(player: Player, spaceId: string): void {
         this.addTile(player, SpaceType.LAND, this.getSpace(spaceId), { tileType: TileType.CITY });
+        this.onCityTilePlaced.forEach((fn: Function) => {
+            fn();
+        }); 
     }
     public addOceanTile(player: Player, spaceId: string): void {
         this.addTile(player, SpaceType.OCEAN, this.getSpace(spaceId), { tileType: TileType.OCEAN });

@@ -1,34 +1,4 @@
 [{
-    "cost": 5,
-    "tags": [],
-    "name": "Protected Habitats",
-    "color": "blue",
-    "text": "OPPONENTS MAY NOT REMOVE YOUR plant, animal, or microbes",
-    "description": "The harsh environment is not the only threat to your ecological projects"
-}, {
-    "cost": 10,
-    "tags": ["earth", "animal"],
-    "color": "blue",
-    "name": "Pets",
-    "text": "ANIMALS MAY NOT BE REMOVED FROM THIS CARD. Add 1 animal to this card.",
-    "effect": "When any city tile is placed, add an animal to this card.",
-    "vp": "1 VP per 2 animals here",
-    "description": "It wouldn't be the same without them"
-}, {
-    "cost": 5,
-    "tags": ["steel"],
-    "name": "Magnetic Field Dome",
-    "color": "green",
-    "text": "Decrease your energy production 2 steps and increase your plant production 1 step. Raise your terraform rating 1 step.",
-    "description": "Protecting a limited area from cosmic radiation"
-}, {
-    "cost": 26,
-    "tags": ["science", "down"],
-    "name": "Aerobraked Ammonia Asteroid",
-    "color": "red",
-    "text": "Add 2 microbes to ANOTHER card. Increase your heat production 3 steps and your plant production 1 step.",
-    "description": "Ammonia is a greenhouse gas, as well as being a convenient nitrogen source for organisms"
-}, {
     "cost": 10,
     "tags": ["science"],
     "color": "blue",

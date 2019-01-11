@@ -60,7 +60,11 @@ export class Game {
     public dealer: Dealer = new Dealer();
     private spaces: Array<ISpace> = [];
     private players: Array<Player> = [];
+    private onGreeneryPlaced: Array<Function> = [];
     private onCityTilePlaced: Array<Function> = [];
+    public addGreeneryPlacedListener(listener: Function): void {
+        this.onGreeneryPlaced.push(listener);
+    }
     public addCityTilePlacedListener(listener: Function): void {
         this.onCityTilePlaced.push(listener);
     }
@@ -158,6 +162,9 @@ export class Game {
             this.oxygenLevel++;
             player.terraformRating++;
         }
+        this.onGreeneryPlaced.forEach((fn: Function) => {
+            fn(player);
+        });
     }
     public addCityTile(player: Player, spaceId: string): void {
         this.addTile(player, SpaceType.LAND, this.getSpace(spaceId), { tileType: TileType.CITY });
@@ -173,6 +180,9 @@ export class Game {
     }
     public getOceansOnBoard(): number {
         return this.getSpaces(SpaceType.OCEAN).filter((space) => space.tile !== undefined && space.tile.tileType === TileType.OCEAN).length + this.getSpaces(SpaceType.LAND).filter((space) => space.tile !== undefined && space.tile.tileType === TileType.OCEAN).length;
+    }
+    public getPlayers(): Array<Player> {
+        return this.players;
     }
     public getCard(name: string): IProjectCard | undefined {
         for (let i = 0; i < this.players.length; i++) {

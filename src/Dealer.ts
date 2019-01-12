@@ -5,6 +5,7 @@ import { AquiferPumping } from "./cards/AquiferPumping";
 import { BiomassCombustors } from "./cards/BiomassCombustors";
 import { Cartel } from "./cards/Cartel";
 import { CEOsFavoriteProject } from "./cards/CEOsFavoriteProject";
+import { ConvoyFromEuropa } from "./cards/ConvoyFromEuropa";
 import { CorporateStronghold } from "./cards/CorporateStronghold";
 import { EnergySaving } from "./cards/EnergySaving";
 import { Flooding } from "./cards/Flooding";
@@ -12,14 +13,19 @@ import { FuelFactory } from "./cards/FuelFactory";
 import { HeatTrappers } from "./cards/HeatTrappers";
 import { Herbivores } from "./cards/Herbivores";
 import { IceCapMelting } from "./cards/IceCapMelting";
+import { ImportedGHG } from "./cards/ImportedGHG";
 import { ImportOfAdvancedGHG } from "./cards/ImportOfAdvancedGHG";
 import { IndenturedWorkers } from "./cards/IndenturedWorkers";
+import { IndustrialMicrobes } from "./cards/IndustrialMicrobes";
 import { Insects } from "./cards/Insects";
 import { InventionContest } from "./cards/InventionContest";
 import { LagrangeObservatory } from "./cards/LagrangeObservatory";
+import { LargeConvoy } from "./cards/LargeConvoy";
+import { Lichen } from "./cards/Lichen";
 import { Livestock } from "./cards/Livestock";
 import { LocalHeatTrapping } from "./cards/LocalHeatTrapping";
 import { MagneticFieldDome } from "./cards/MagneticFieldDome";
+import { MagneticFieldGenerators } from "./cards/MagneticFieldGenerators";
 import { MicroMills } from "./cards/MicroMills";
 import { NitrophilicMoss } from "./cards/NitrophilicMoss";
 import { NoctisFarming } from "./cards/NoctisFarming";
@@ -50,6 +56,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new BiomassCombustors(),
     new Cartel(),
     new CEOsFavoriteProject(),
+    new ConvoyFromEuropa(),
     new CorporateStronghold(),
     new EnergySaving(),
     new Flooding(),
@@ -57,14 +64,19 @@ const ALL_CARDS: Array<IProjectCard> = [
     new HeatTrappers(),
     new Herbivores(),
     new IceCapMelting(),
+    new ImportedGHG(),
     new ImportOfAdvancedGHG(),
     new IndenturedWorkers(),
+    new IndustrialMicrobes(),
     new Insects(),
     new InventionContest(),
     new LagrangeObservatory(),
+    new LargeConvoy(),
+    new Lichen(),
     new Livestock(),
     new LocalHeatTrapping(),
     new MagneticFieldDome(),
+    new MagneticFieldGenerators(),
     new MicroMills(),
     new NitrophilicMoss(),
     new NoctisFarming(),

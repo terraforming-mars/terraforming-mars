@@ -4,6 +4,7 @@ import { CorporationCard } from "./CorporationCard";
 import { CardDiscount } from "./CardDiscount";
 import { Tags } from "./cards/Tags";
 import { PlayerInput } from "./PlayerInput";
+import { CardType } from "./cards/CardType";
 
 const utilities = require("./utilities");
 
@@ -16,6 +17,7 @@ export class Player {
     public opponentsCanRemovePlants: boolean = true;
     public opponentsCanRemoveAnimals: boolean = true;
     public opponentsCanRemoveMicrobes: boolean = true;
+    public requirementsBonus: number = 0;
     public megaCredits: number = 0;
     public megaCreditProduction: number = 0;
     public steel: number = 0;
@@ -64,6 +66,9 @@ export class Player {
         tagCount += this.corporationCard.tags.filter((cardTag) => cardTag === tag).length;
         return tagCount;
     }
+    public getActiveAndAutomatedCards(): Array<IProjectCard> {
+        return this.playedCards.filter((pc) => pc.cardType === CardType.AUTOMATED || pc.cardType === CardType.ACTIVE);
+    }
     public getCard(cardName: string): IProjectCard {
         const foundCards = this.cardsInHand.filter((card) => card.name === cardName);
         if (foundCards.length === 0) {
@@ -75,6 +80,12 @@ export class Player {
     public addCardPlayedHandler(handler: Function): void {
         this.cardPlayedEvents.push(handler);
     } 
+
+    private standardProjectHandler: Array<Function> = [];
+
+    public addStandardProjectHandler(fn: Function): void {
+        this.standardProjectHandler.push(fn);
+    }
 
     private waitingFor?: PlayerInput;
 

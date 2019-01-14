@@ -15,7 +15,7 @@ export class PowerInfrastructure implements IActiveProjectCard {
     public play(player: Player, game: Game): void {
         // Nothing happens when played
     }
-
+    public actionText: string = "Spend any amount of energy to gain that many mega credit";
     public action(player: Player, game: Game): Promise<void> {
         if (player.energy === 0) {
             throw "Have no energy to spend";

@@ -10,11 +10,12 @@ export class AquiferPumping implements IActiveProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Aquifer Pumping";
     public cardType: CardType = CardType.ACTIVE;
-    public text: string = "Action: Spend 8 mega credits to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.";
+    public text: string = "";
     public description: string = "Underground water reservoirs may be tapped in a controlled manner, to safely build up oceans to the desired level";
     public play(player: Player, game: Game): void {
         // Nothing happens when played
     }
+    public actionText: string = "Spend 8 mega credits to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.";
     public action(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
             let totalPaid = 0;

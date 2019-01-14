@@ -27,6 +27,7 @@ export class Livestock implements IActiveProjectCard {
         };
         game.addGameEndListener(giveVPForAnimalsOnCard);
     }
+    public actionText: string = "Add an animal to this card";
     public action(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
             try {

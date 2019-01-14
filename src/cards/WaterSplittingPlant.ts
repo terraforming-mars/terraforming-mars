@@ -17,6 +17,7 @@ export class WaterSplittingPlant implements IActiveProjectCard {
             throw "Requires 2 ocean tiles";
         }
     }
+    public actionText: string = "Spend 3 energy to increase oxygen level by 1";
     public action(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
             if (player.energy < 3) {

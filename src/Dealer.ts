@@ -1,5 +1,6 @@
 
 import { AdaptationTechnology } from "./cards/AdaptationTechnology";
+import { AdvancedEcosystems } from "./cards/AdvancedEcosystems";
 import { AerobrakedAmmoniaAsteroid } from "./cards/AerobrakedAmmoniaAsteroid";
 import { AntiGravityTechnology } from "./cards/AntiGravityTechnology";
 import { AquiferPumping } from "./cards/AquiferPumping";
@@ -13,6 +14,8 @@ import { DesignedMicroOrganisms } from "./cards/DesignedMicroOrganisms";
 import { EnergySaving } from "./cards/EnergySaving";
 import { Flooding } from "./cards/Flooding";
 import { FuelFactory } from "./cards/FuelFactory";
+import { FusionPower } from "./cards/FusionPower";
+import { GreatDam } from "./cards/GreatDam";
 import { HeatTrappers } from "./cards/HeatTrappers";
 import { Herbivores } from "./cards/Herbivores";
 import { IceCapMelting } from "./cards/IceCapMelting";
@@ -27,6 +30,7 @@ import { InventionContest } from "./cards/InventionContest";
 import { InvestmentLoan } from "./cards/InvestmentLoan";
 import { LagrangeObservatory } from "./cards/LagrangeObservatory";
 import { LargeConvoy } from "./cards/LargeConvoy";
+import { LavaFlows } from "./cards/LavaFlows";
 import { Lichen } from "./cards/Lichen";
 import { Livestock } from "./cards/Livestock";
 import { LocalHeatTrapping } from "./cards/LocalHeatTrapping";
@@ -52,16 +56,19 @@ import { Shuttles } from "./cards/Shuttles";
 import { SoilFactory } from "./cards/SoilFactory";
 import { StandardTechnology } from "./cards/StandardTechnology";
 import { StripMine } from "./cards/StripMine";
+import { SymbioticFungus } from "./cards/SymbioticFungus";
 import { TectonicStressPower } from "./cards/TectonicStressPower";
 import { TitaniumMine } from "./cards/TitaniumMine";
 import { TundraFarming } from "./cards/TundraFarming";
 import { WaterSplittingPlant } from "./cards/WaterSplittingPlant";
+import { WavePower } from "./cards/WavePower";
 import { Windmills } from "./cards/Windmills";
 
 import { IProjectCard } from "./cards/IProjectCard";
 
 const ALL_CARDS: Array<IProjectCard> = [
     new AdaptationTechnology(),
+    new AdvancedEcosystems(),
     new AerobrakedAmmoniaAsteroid(),
     new AntiGravityTechnology(),
     new AquiferPumping(),
@@ -74,7 +81,9 @@ const ALL_CARDS: Array<IProjectCard> = [
     new DesignedMicroOrganisms(),
     new EnergySaving(),
     new Flooding(),
+    new FusionPower(),
     new FuelFactory(),
+    new GreatDam(),
     new HeatTrappers(),
     new Herbivores(),
     new IceCapMelting(),
@@ -89,6 +98,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new InvestmentLoan(),
     new LagrangeObservatory(),
     new LargeConvoy(),
+    new LavaFlows(),
     new Lichen(),
     new Livestock(),
     new LocalHeatTrapping(),
@@ -114,10 +124,12 @@ const ALL_CARDS: Array<IProjectCard> = [
     new SoilFactory(),
     new StandardTechnology(),
     new StripMine(),
+    new SymbioticFungus(),
     new TectonicStressPower(),
     new TitaniumMine(),
     new TundraFarming(),
     new WaterSplittingPlant(),
+    new WavePower(),
     new Windmills()
 ];
 

@@ -13,8 +13,8 @@ export class BiomassCombustors implements IProjectCard {
     public text: string = "Requires 6% oxygen. Decrease any plant production 1 step and increse your energy production 2 steps.";
     public description: string = "Burning wood is easy";
     public play(player: Player, game: Game): Promise<void> {
-        if (game.oxygenLevel < 6) {
-            throw "Requires 6% oxygen";
+        if (game.getOxygenLevel() < 6) {
+            return Promise.reject("Requires 6% oxygen");
         }
         return new Promise((resolve, reject) => {
             const onInput = (input: string) => {

@@ -15,7 +15,7 @@ export class SymbioticFungus implements IActiveProjectCard {
     public description: string = "Creating mutually beneficial conditions";
     public actionText: string = "Add a microbe to ANOTHER card";
     public play(player: Player, game: Game): Promise<void> {
-        if (game.temperature < -14) {
+        if (game.getTemperature() < -14) {
             return Promise.reject("Requires -14C or warmer");
         }
         return Promise.resolve();

@@ -14,7 +14,7 @@ export class Insects implements IProjectCard {
     public description: string = "Pollinating flowers and spreading seeds.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (game.oxygenLevel < 6) {
+            if (game.getOxygenLevel() < 6) {
                 reject("Requires 6% oxygen");
                 return;
             }

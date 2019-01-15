@@ -14,7 +14,7 @@ export class Shuttles implements IProjectCard {
     public description: "Aided by low gravity going up, and by the increasing atmosphere when gliding down for landing.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (game.oxygenLevel < 5) {
+            if (game.getOxygenLevel() < 5) {
                 reject("Requires 5% oxygen");
                 return;
             }

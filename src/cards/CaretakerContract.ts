@@ -14,7 +14,7 @@ export class CaretakerContract implements IActiveProjectCard {
     public actionText: string = "Spend 8 heat to increase your terraform rating 1 step";
     public description: string = "In charge of establishing comfortable temperatures";
     public play(player: Player, game: Game): Promise<void> {
-        if (game.temperature < 0) {
+        if (game.getTemperature() < 0) {
             return Promise.reject("Requires 0C or warmer");
         }
         return Promise.resolve();

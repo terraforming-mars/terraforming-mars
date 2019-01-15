@@ -14,7 +14,7 @@ export class IceCapMelting implements IProjectCard {
     public description: string = "Getting the water back from the poles.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (game.temperature < 2) {
+            if (game.getTemperature() < 2) {
                 reject("not warm enough, must be +2C or warmer");
                 return;
             }

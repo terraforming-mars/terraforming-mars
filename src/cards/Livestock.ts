@@ -13,12 +13,12 @@ export class Livestock implements IActiveProjectCard {
     public name: string = "Livestock";
     public text: string = "Requires 9% oxygen. Decrease your plant production 1 step and increase your mega credit production 2 steps.";
     public description: string = "Providing meat, wool, leather, etc.";
-    public play(player: Player, game: Game): void {
-        if (game.oxygenLevel < 9) {
-            throw "Requires 9% oxygen";
+    public play(player: Player, game: Game): Promise<void> {
+        if (game.getOxygenLevel() < 9) {
+            return Promise.reject("Requires 9% oxygen");
         }
         if (player.plantProduction < 1) {
-            throw "Must have plant production";
+            return Promise.reject("Must have plant production");
         }
         player.plantProduction--;
         player.megaCreditProduction += 2;
@@ -26,6 +26,7 @@ export class Livestock implements IActiveProjectCard {
             player.victoryPoints += this.animals;
         };
         game.addGameEndListener(giveVPForAnimalsOnCard);
+        return Promise.resolve();
     }
     public actionText: string = "Add an animal to this card";
     public action(player: Player, game: Game): Promise<void> {

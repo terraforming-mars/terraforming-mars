@@ -24,11 +24,9 @@ export class WaterSplittingPlant implements IActiveProjectCard {
                 reject("Need 3 energy");
                 return;
             }
-            try {
-                game.oxygenLevel++;
-            } catch (err) { reject(err); return; }
-            player.energy = Math.max(0, player.energy - 3);
-            resolve();
+            return game.increaseOxygenLevel(player).then(function () {
+                player.energy = Math.max(0, player.energy - 3);
+            });
         });
     }
 } 

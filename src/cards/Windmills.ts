@@ -13,7 +13,7 @@ export class Windmills implements IProjectCard {
     public text: string = "Requires 7% oxygen. Incease your energy production 1 step.";
     public description: string = "At least we have more useful winds";
     public play(player: Player, game: Game): void {
-        if (game.oxygenLevel < 7) {
+        if (game.getOxygenLevel() < 7) {
             throw "Not enough oxygen";
         }
         player.energyProduction++;

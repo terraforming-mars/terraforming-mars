@@ -14,7 +14,7 @@ export class PermafrostExtraction implements IProjectCard {
     public description: string = "Thawing the subsurface";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (game.temperature < -8) {
+            if (game.getTemperature() < -8) {
                 reject("Temperature must be -8C or warmer");
                 return;
             }

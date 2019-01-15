@@ -15,7 +15,7 @@ export class Herbivores implements IProjectCard {
     public description: string = "Inhabiting the green hills of Mars";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (game.oxygenLevel < 8) {
+            if (game.getOxygenLevel() < 8) {
                 reject("Requires 8% oxygen.");
                 return;
             }

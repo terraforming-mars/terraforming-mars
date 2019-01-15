@@ -21,8 +21,8 @@ export class StripMine implements IProjectCard {
             player.energyProduction -= 2;
             player.steelProduction += 2;
             player.titaniumProduction++;
-            game.oxygenLevel += 2;
-            resolve();
+            return game.increaseOxygenLevel(player)
+                .then(function () { return game.increaseOxygenLevel(player); });
         });
     }
 }

@@ -14,7 +14,7 @@ export class DesignedMicroOrganisms implements IProjectCard {
     public description: string = "Specializing in extremely cold conditions";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (game.temperature > -14) {
+            if (game.getTemperature() > -14) {
                 reject("It must be -14C or colder");
                 return;
             }

@@ -14,7 +14,7 @@ export class Lichen implements IProjectCard {
     public description: string = "Slow growing, but very resilient";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            if (game.temperature < -24) {
+            if (game.getTemperature() < -24) {
                 reject("Requires -24C or warmer");
                 return;
             }

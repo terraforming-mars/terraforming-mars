@@ -13,7 +13,12 @@ import { SpaceBonus } from "./SpaceBonus";
 import { ITile } from "./ITile";
 import { IProjectCard } from "./cards/IProjectCard";
 
-const MAX_OXYGEN_LEVEL: number = 32;
+const MIN_OXYGEN_LEVEL: number = 0;
+const MAX_OXYGEN_LEVEL: number = 14;
+
+const MIN_TEMPERATURE: number = -30;
+const MAX_TEMPERATURE: number = 8;
+
 const MAX_OCEAN_TILES: number = 9;
 
 // STARTING
@@ -79,8 +84,64 @@ export class Game {
     private phase: string = "research";
 
     private generation: number = 1;
-    public oxygenLevel: number = 1;
-    public temperature: number = -100;
+    private oxygenLevel: number = MIN_OXYGEN_LEVEL;
+
+    public increaseOxygenLevel(player: Player): Promise<void> {
+        if (this.oxygenLevel < MAX_OXYGEN_LEVEL) {
+            // BONUS FOR TEMPERATURE INCREASE AT 8
+            if (this.oxygenLevel + 1 === 8) {
+                return this.increaseTemperature(player).then(() => {
+                    this.oxygenLevel++;
+                    player.terraformRating++;
+                    return Promise.resolve();
+                });
+            } else {
+                this.oxygenLevel++;
+                player.terraformRating++;
+                return Promise.resolve();
+            }
+        }
+        return Promise.resolve();
+    }
+
+    public getOxygenLevel(): number {
+        return this.oxygenLevel;
+    }
+
+    private temperature: number = MIN_TEMPERATURE;
+
+    public increaseTemperature(player: Player): Promise<void> {
+        if (this.temperature < MAX_TEMPERATURE) {
+            // BONUS FOR HEAT PRODUCTION AT -20 and -24
+            // BONUS FOR OCEAN TILE AT 0
+            if (this.temperature + 2 === -24 || this.temperature + 2 === -20) {
+                player.heatProduction++;
+                this.temperature += 2;
+                return Promise.resolve();
+            } else if (this.temperature + 2 === 0) {
+                return new Promise((resolve, reject) => {
+                    player.setWaitingFor({
+                        initiator: "board",
+                        type: "SelectASpace",
+                        message: "Select a place for bonus ocean"
+                    }, (spaceName: string) => {
+                        try { this.addOceanTile(player, spaceName); }
+                        catch (err) { reject(err); return; }
+                        this.temperature += 2
+                        resolve();
+                    });
+                });
+            } else {
+                this.temperature += 2;
+            }
+        }
+        return Promise.resolve();
+    }
+
+    public getTemperature(): number {
+        return this.temperature;
+    }
+
     public oceansPlaced: number = 0;
 
     public setGeneration(generation: number): void {

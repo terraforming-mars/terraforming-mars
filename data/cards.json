@@ -1,36 +1,4 @@
 [{
-    "cost": 13,
-    "tags": ["microbe"],
-    "color": "blue",
-    "name": "Extreme-Cold Fungus",
-    "action": "Gain 1 plant or add 2 microbes to ANOTHER card.",
-    "text": "It must be -10C or colder",
-    "description": "Adapted strains able to form symbiotic relationships with other organisms"
-}, {
-    "cost": 5,
-    "tags": ["microbe"],
-    "color": "blue",
-    "name": "Decomposers",
-    "effect": "When you play an animal, plant, or microbe tag, including this, add a microbe to this card.",
-    "text": "Requires 3% oxygen.",
-    "vp": "1 VP per 3 microbes on this card",
-    "description": "Decomposing dead organisms is essential to making sustainable soil"
-}, {
-    "cost": 8,
-    "tags": ["microbe"],
-    "color": "green",
-    "name": "Worms",
-    "text": "Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.",
-    "description": "Milling about in the soil, 'processing' it"
-}, {
-    "cost": 13,
-    "tags": [],
-    "color": "green",
-    "name": "Zeppelins",
-    "vp": 1,
-    "text": "Requires 5% oxygen. Increase your mega credit production 1 step for each city tile ON MARS.",
-    "description": "A relatively cheap way to travel between cities across the planet"
-}, {
     "cost": 12,
     "tags": ["animal", "plant"],
     "color": "blue",
@@ -40,13 +8,6 @@
     "text": "Requires that you have a greenery tile. Place this tile ADJACENT TO ANY GREENERY TILE.",
     "vp": "1 VP per 2 animals on this card.",
     "description": "A secluded area where a multitude of species develop an ecosystem"
-}, {
-    "cost": 11,
-    "tags": ["down"],
-    "color": "red",
-    "name": "Subterranean Reservoir",
-    "text": "Place 1 ocean tile.",
-    "description": "Also known as an aquifer. Burst one open and you've got a lot of water"
 }, {
     "cost": 11,
     "tags": ["steel"],

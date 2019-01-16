@@ -184,6 +184,9 @@ export class Game {
         }
         throw "Error with getting space";
     }
+    public getCitiesInPlayOnMars(): number {
+        return this.spaces.filter((space) => space.tile !== undefined && space.tile.tileType === TileType.CITY && space.spaceType !== SpaceType.COLONY).length;
+    }
     public getCitiesInPlay(): number {
         return this.spaces.filter((space) => space.tile !== undefined && space.tile.tileType === TileType.CITY).length;
     }
@@ -217,14 +220,12 @@ export class Game {
         // TODO Implement this method
         return [];
     }
-    public addGreenery(player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND): void {
+    public addGreenery(player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND): Promise<void> {
         this.addTile(player, spaceType, this.getSpace(spaceId), { tileType: TileType.GREENERY });
-        if (this.oxygenLevel < MAX_OXYGEN_LEVEL) {
-            this.oxygenLevel++;
-            player.terraformRating++;
-        }
-        this.onGreeneryPlaced.forEach((fn: Function) => {
-            fn(player);
+        return this.increaseOxygenLevel(player).then(function () {
+            this.onGreeneryPlaced.forEach((fn: Function) => {
+                fn(player);
+            });
         });
     }
     public addCityTile(player: Player, spaceId: string): void {

@@ -10,8 +10,10 @@ import { Cartel } from "./cards/Cartel";
 import { CEOsFavoriteProject } from "./cards/CEOsFavoriteProject";
 import { ConvoyFromEuropa } from "./cards/ConvoyFromEuropa";
 import { CorporateStronghold } from "./cards/CorporateStronghold";
+import { Decomposers } from "./cards/Decomposers";
 import { DesignedMicroOrganisms } from "./cards/DesignedMicroOrganisms";
 import { EnergySaving } from "./cards/EnergySaving";
+import { ExtremeColdFungus } from "./cards/ExtremeColdFungus";
 import { Flooding } from "./cards/Flooding";
 import { FuelFactory } from "./cards/FuelFactory";
 import { FusionPower } from "./cards/FusionPower";
@@ -56,6 +58,7 @@ import { Shuttles } from "./cards/Shuttles";
 import { SoilFactory } from "./cards/SoilFactory";
 import { StandardTechnology } from "./cards/StandardTechnology";
 import { StripMine } from "./cards/StripMine";
+import { SubterraneanReservoir } from "./cards/SubterraneanReservoir";
 import { SymbioticFungus } from "./cards/SymbioticFungus";
 import { TectonicStressPower } from "./cards/TectonicStressPower";
 import { TitaniumMine } from "./cards/TitaniumMine";
@@ -63,6 +66,8 @@ import { TundraFarming } from "./cards/TundraFarming";
 import { WaterSplittingPlant } from "./cards/WaterSplittingPlant";
 import { WavePower } from "./cards/WavePower";
 import { Windmills } from "./cards/Windmills";
+import { Worms } from "./cards/Worms";
+import { Zeppelins } from "./cards/Zeppelins";
 
 import { IProjectCard } from "./cards/IProjectCard";
 
@@ -78,8 +83,10 @@ const ALL_CARDS: Array<IProjectCard> = [
     new CEOsFavoriteProject(),
     new ConvoyFromEuropa(),
     new CorporateStronghold(),
+    new Decomposers(),
     new DesignedMicroOrganisms(),
     new EnergySaving(),
+    new ExtremeColdFungus(),
     new Flooding(),
     new FusionPower(),
     new FuelFactory(),
@@ -124,13 +131,16 @@ const ALL_CARDS: Array<IProjectCard> = [
     new SoilFactory(),
     new StandardTechnology(),
     new StripMine(),
+    new SubterraneanReservoir(),
     new SymbioticFungus(),
     new TectonicStressPower(),
     new TitaniumMine(),
     new TundraFarming(),
     new WaterSplittingPlant(),
     new WavePower(),
-    new Windmills()
+    new Windmills(),
+    new Worms(),
+    new Zeppelins()
 ];
 
 export class Dealer {

@@ -13,6 +13,7 @@ import { ConvoyFromEuropa } from "./cards/ConvoyFromEuropa";
 import { CorporateStronghold } from "./cards/CorporateStronghold";
 import { Decomposers } from "./cards/Decomposers";
 import { DesignedMicroOrganisms } from "./cards/DesignedMicroOrganisms";
+import { DustSeals } from "./cards/DustSeals";
 import { EcologicalZone } from "./cards/EcologicalZone";
 import { EnergySaving } from "./cards/EnergySaving";
 import { ExtremeColdFungus } from "./cards/ExtremeColdFungus";
@@ -61,6 +62,7 @@ import { PowerSupplyConsortium } from "./cards/PowerSupplyConsortium";
 import { ProtectedHabitats } from "./cards/ProtectedHabitats";
 import { ProtectedValley } from "./cards/ProtectedValley";
 import { RadSuits } from "./cards/RadSuits";
+import { Sabotage } from "./cards/Sabotage";
 import { Satellites } from "./cards/Satellites";
 import { Shuttles } from "./cards/Shuttles";
 import { SoilFactory } from "./cards/SoilFactory";
@@ -95,6 +97,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new CorporateStronghold(),
     new Decomposers(),
     new DesignedMicroOrganisms(),
+    new DustSeals(),
     new EcologicalZone(),
     new EnergySaving(),
     new ExtremeColdFungus(),
@@ -141,6 +144,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new ProtectedHabitats(),
     new ProtectedValley(),
     new RadSuits(),
+    new Sabotage(),
     new Satellites(),
     new Shuttles(),
     new SoilFactory(),

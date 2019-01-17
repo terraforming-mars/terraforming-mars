@@ -1,25 +1,10 @@
 [{
-    "cost": 1,
-    "tags": ["down"],
-    "color": "red",
-    "name": "Sabotage",
-    "text": "Remove up to 3 titanium from any player, or 4 steel, or 7 mega credit",
-    "description": "Nobody will know who did it."
-}, {
     "cost": 10,
     "tags": ["city", "steel"],
     "name": "Urbanized Area",
     "color": "green",
     "text": "Decrease your energy production 1 step and increase your mega credit production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES",
     "description": "When the population begins to soar, cities will eventually merge into large urban areas"
-}, {
-    "cost": 2,
-    "tags": [],
-    "color": "green",
-    "name": "Dust Seals",
-    "vp": 1,
-    "text": "Requires 3 or less ocean tiles",
-    "description": "Tight seals to keep micron-sized dust out of buildings, vehicles and suits"
 }, {
     "cost": 16,
     "tags": ["plant"],

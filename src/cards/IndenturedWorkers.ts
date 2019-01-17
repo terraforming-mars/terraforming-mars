@@ -15,7 +15,7 @@ export class IndenturedWorkers implements IProjectCard {
     public name: string = "Indentured Workers";
     public text: string = "The next card you play this generation costs 8 mega credits less";
     public description: string = "There are many who would work for us for almost no pay in exchange for a ticket to Mars";
-    public play(player: Player, game: Game): void {
+    public play(player: Player, game: Game): Promise<void> {
         var discount: CardDiscount = function(card: IProjectCard) {
             return 8;
         }
@@ -26,5 +26,6 @@ export class IndenturedWorkers implements IProjectCard {
         player.addCardDiscount(discount);
         game.addGenerationEndListener(afterGeneration);
         player.victoryPoints--;
+        return Promise.resolve();
     } 
 }

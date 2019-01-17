@@ -1,28 +1,4 @@
 [{
-    "cost": 3,
-    "tags": [],
-    "name": "Hackers",
-    "color": "green",
-    "text": "Decrease your energy production 1 step and any mega credit production 2 steps. Increase your mega credit production 2 steps.",
-    "vp": -1,
-    "description": "Very unethical, very illegal, very lucrative"
-}, {
-    "cost": 1,
-    "tags": ["down"],
-    "color": "red",
-    "name": "Hired Raiders",
-    "text": "Steal up to 2 steel, or 3 mega credit from any player",
-    "description": "We have a better use for those resources"
-}, {
-    "cost": 4,
-    "tags": ["steel"],
-    "color": "blue",
-    "name": "Industrial Center",
-    "action": "Spend 7 mega credit to increase your steel production 1 step.",
-    "text": "Place this tile ADJACENT TO A CITY TILE",
-    "tile": "Factory",
-    "description": "Assigned to heavy industry, this area is not the nicest place on Mars"
-}, {
     "cost": 1,
     "tags": ["down"],
     "color": "red",
@@ -1007,28 +983,4 @@
     "text": "Requires 0C or warmer. Place 2 ocean tiles",
     "vp": 2,
     "description": "Filling the Valles Marineris takes a lot of water"
-}, {
-    "cost": 13,
-    "tags": ["steel"],
-    "name": "Tropical Resort",
-    "color": "green",
-    "text": "Decrease your heat production 2 steps and increase your mega credit production 3 steps",
-    "vp": 2,
-    "description": "Utilizing heat production to attract tourists"
-}, {
-    "cost": 8,
-    "tags": ["jovian", "steel"],
-    "name": "Colonizer Training Camp",
-    "color": "green",
-    "text": "Oxygen must be 5% or less",
-    "vp": 2,
-    "description": "Preparing for settlement of the moons of Jupiter"
-}, {
-    "cost": 12,
-    "tags": ["steel"],
-    "name": "Food Factory",
-    "color": "green",
-    "text": "Decrease your plant production 1 step and increase your mega credit production 4 steps",
-    "vp": 1,
-    "description": "For the growing population"
 }]

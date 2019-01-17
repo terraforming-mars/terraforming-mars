@@ -12,8 +12,9 @@ export class PowerInfrastructure implements IActiveProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
-    public play(player: Player, game: Game): void {
+    public play(player: Player, game: Game): Promise<void> {
         // Nothing happens when played
+        return Promise.resolve();
     }
     public actionText: string = "Spend any amount of energy to gain that many mega credit";
     public action(player: Player, game: Game): Promise<void> {

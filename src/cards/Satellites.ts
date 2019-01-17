@@ -12,7 +12,8 @@ export class Satellites implements IProjectCard {
     public name: string = "Satellites";
     public text: string = "Increase your mega credit production 1 step for each space tag you have, including this.";
     public description: string = "Coordinating orbital traffic.";
-    public play(player: Player, game: Game): void {
+    public play(player: Player, game: Game): Promise<void> {
         player.megaCreditProduction += 1 + player.getTagCount(Tags.SPACE);
+        return Promise.resolve();
     }
 }

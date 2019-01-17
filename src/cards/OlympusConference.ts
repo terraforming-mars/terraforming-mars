@@ -13,7 +13,7 @@ export class OlympusConference implements IProjectCard {
     public name: string = "Olympus Conference";
     public text: string = "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.";
     public description: string = "The scientific elite, assembled on the top of Olympus Mons, the highest spot in the solar system";
-    public play(player: Player, game: Game): void {
+    public play(player: Player, game: Game): Promise<void> {
         const takeAction = (actionName: string, input: string): void => {
             if (actionName === "AddResourceOrDrawCard") {
                 if (input === "DrawCard") {
@@ -40,5 +40,6 @@ export class OlympusConference implements IProjectCard {
 
         player.addCardPlayedHandler(cardPlayedHandler);
         player.victoryPoints++;
+        return Promise.resolve();
     }
 }

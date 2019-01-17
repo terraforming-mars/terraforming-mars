@@ -4,6 +4,7 @@ export enum Tags {
     CITY,
     EARTH,
     ENERGY,
+    JOVIAN,
     MICROBES,
     PLANT,
     SCIENCE,

@@ -12,12 +12,13 @@ export class FuelFactory implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease your energy production 1 step and increase your titanium and your mega credit production 1 step each.";
     public description: "With its shallow gravity well, Mars is a good host for the space industry, and rockets need fuel.";
-    public play(player: Player, game: Game): void {
+    public play(player: Player, game: Game): Promise<void> {
         if (player.energyProduction < 1) {
-            throw "must have energy production to lose";
+            return Promise.reject("must have energy production to lose");
         }
         player.energyProduction--;
         player.titaniumProduction++;
         player.megaCreditProduction++;
+        return Promise.resolve();
     }
 }

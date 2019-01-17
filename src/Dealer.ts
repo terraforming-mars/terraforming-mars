@@ -8,6 +8,7 @@ import { BiomassCombustors } from "./cards/BiomassCombustors";
 import { CaretakerContract } from "./cards/CaretakerContract";
 import { Cartel } from "./cards/Cartel";
 import { CEOsFavoriteProject } from "./cards/CEOsFavoriteProject";
+import { ColonizerTrainingCamp } from "./cards/ColonizerTrainingCamp";
 import { ConvoyFromEuropa } from "./cards/ConvoyFromEuropa";
 import { CorporateStronghold } from "./cards/CorporateStronghold";
 import { Decomposers } from "./cards/Decomposers";
@@ -16,17 +17,21 @@ import { EcologicalZone } from "./cards/EcologicalZone";
 import { EnergySaving } from "./cards/EnergySaving";
 import { ExtremeColdFungus } from "./cards/ExtremeColdFungus";
 import { Flooding } from "./cards/Flooding";
+import { FoodFactory } from "./cards/FoodFactory";
 import { FuelFactory } from "./cards/FuelFactory";
 import { FusionPower } from "./cards/FusionPower";
 import { GHGFactories } from "./cards/GHGFactories";
 import { GreatDam } from "./cards/GreatDam";
+import { Hackers } from "./cards/Hackers";
 import { HeatTrappers } from "./cards/HeatTrappers";
 import { Herbivores } from "./cards/Herbivores";
+import { HiredRaiders } from "./cards/HiredRaiders";
 import { IceCapMelting } from "./cards/IceCapMelting";
 import { ImportedGHG } from "./cards/ImportedGHG";
 import { ImportedNitrogen } from "./cards/ImportedNitrogen";
 import { ImportOfAdvancedGHG } from "./cards/ImportOfAdvancedGHG";
 import { IndenturedWorkers } from "./cards/IndenturedWorkers";
+import { IndustrialCenter } from "./cards/IndustrialCenter";
 import { IndustrialMicrobes } from "./cards/IndustrialMicrobes";
 import { Insects } from "./cards/Insects";
 import { Insulation } from "./cards/Insulation";
@@ -65,6 +70,7 @@ import { SubterraneanReservoir } from "./cards/SubterraneanReservoir";
 import { SymbioticFungus } from "./cards/SymbioticFungus";
 import { TectonicStressPower } from "./cards/TectonicStressPower";
 import { TitaniumMine } from "./cards/TitaniumMine";
+import { TropicalResort } from "./cards/TropicalResort";
 import { TundraFarming } from "./cards/TundraFarming";
 import { WaterSplittingPlant } from "./cards/WaterSplittingPlant";
 import { WavePower } from "./cards/WavePower";
@@ -84,6 +90,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new CaretakerContract(),
     new Cartel(),
     new CEOsFavoriteProject(),
+    new ColonizerTrainingCamp(),
     new ConvoyFromEuropa(),
     new CorporateStronghold(),
     new Decomposers(),
@@ -92,9 +99,11 @@ const ALL_CARDS: Array<IProjectCard> = [
     new EnergySaving(),
     new ExtremeColdFungus(),
     new Flooding(),
+    new FoodFactory(),
     new FusionPower(),
     new FuelFactory(),
     new GreatDam(),
+    new Hackers(),
     new HeatTrappers(),
     new Herbivores(),
     new IceCapMelting(),
@@ -102,6 +111,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new ImportedNitrogen(),
     new ImportOfAdvancedGHG(),
     new IndenturedWorkers(),
+    new IndustrialCenter(),
     new IndustrialMicrobes(),
     new Insects(),
     new Insulation(),
@@ -140,6 +150,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new SymbioticFungus(),
     new TectonicStressPower(),
     new TitaniumMine(),
+    new TropicalResort(),
     new TundraFarming(),
     new WaterSplittingPlant(),
     new WavePower(),

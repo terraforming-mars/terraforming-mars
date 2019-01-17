@@ -12,10 +12,11 @@ export class WaterSplittingPlant implements IActiveProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "Requires 2 ocean tiles";
     public description: string = "Electrolysis of water yields oxygen and hydrogen, both very useful gases.";
-    public play(player: Player, game: Game): void {
+    public play(player: Player, game: Game): Promise<void> {
         if (game.getOceansOnBoard() < 2) {
-            throw "Requires 2 ocean tiles";
+            return Promise.reject("Requires 2 ocean tiles");
         }
+        return Promise.resolve();
     }
     public actionText: string = "Spend 3 energy to increase oxygen level by 1";
     public action(player: Player, game: Game): Promise<void> {

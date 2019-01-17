@@ -12,13 +12,14 @@ export class TundraFarming implements IProjectCard {
     public name: string = "Tundra Farming";
     public text: string = "Requires -6C or warmer. Increase your plant production 1 step and your mega credit production 2 steps. Gain 1 plant.";
     public description: string = "Farming the thawed soil over the frozen bedrock";
-    public play(player: Player, game: Game): void {
+    public play(player: Player, game: Game): Promise<void> {
         if (game.getTemperature() < -6) {
-            throw "Requires -6C or warmer";
+            return Promise.reject("Requires -6C or warmer");
         }
         player.plantProduction++;
         player.megaCreditProduction += 2;
         player.plants++;
         player.victoryPoints += 2;
+        return Promise.resolve();
     }
 } 

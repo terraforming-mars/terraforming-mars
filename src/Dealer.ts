@@ -12,11 +12,13 @@ import { ConvoyFromEuropa } from "./cards/ConvoyFromEuropa";
 import { CorporateStronghold } from "./cards/CorporateStronghold";
 import { Decomposers } from "./cards/Decomposers";
 import { DesignedMicroOrganisms } from "./cards/DesignedMicroOrganisms";
+import { EcologicalZone } from "./cards/EcologicalZone";
 import { EnergySaving } from "./cards/EnergySaving";
 import { ExtremeColdFungus } from "./cards/ExtremeColdFungus";
 import { Flooding } from "./cards/Flooding";
 import { FuelFactory } from "./cards/FuelFactory";
 import { FusionPower } from "./cards/FusionPower";
+import { GHGFactories } from "./cards/GHGFactories";
 import { GreatDam } from "./cards/GreatDam";
 import { HeatTrappers } from "./cards/HeatTrappers";
 import { Herbivores } from "./cards/Herbivores";
@@ -40,6 +42,7 @@ import { MagneticFieldDome } from "./cards/MagneticFieldDome";
 import { MagneticFieldGenerators } from "./cards/MagneticFieldGenerators";
 import { MicroMills } from "./cards/MicroMills";
 import { MoholeArea } from "./cards/MoholeArea";
+import { Moss } from "./cards/Moss";
 import { NitriteReducingBacteria } from "./cards/NitriteReducingBacteria";
 import { NitrophilicMoss } from "./cards/NitrophilicMoss";
 import { NoctisFarming } from "./cards/NoctisFarming";
@@ -85,6 +88,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new CorporateStronghold(),
     new Decomposers(),
     new DesignedMicroOrganisms(),
+    new EcologicalZone(),
     new EnergySaving(),
     new ExtremeColdFungus(),
     new Flooding(),
@@ -113,6 +117,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new MagneticFieldGenerators(),
     new MicroMills(),
     new MoholeArea(),
+    new Moss(),
     new NitriteReducingBacteria(),
     new NitrophilicMoss(),
     new NoctisFarming(),

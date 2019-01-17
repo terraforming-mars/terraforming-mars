@@ -1,21 +1,4 @@
 [{
-    "cost": 12,
-    "tags": ["animal", "plant"],
-    "color": "blue",
-    "name": "Ecological Zone",
-    "tile": "animal paw print",
-    "effect": "When you play an animal or a plant tag (including these 2), add an animal to this card.",
-    "text": "Requires that you have a greenery tile. Place this tile ADJACENT TO ANY GREENERY TILE.",
-    "vp": "1 VP per 2 animals on this card.",
-    "description": "A secluded area where a multitude of species develop an ecosystem"
-}, {
-    "cost": 11,
-    "tags": ["steel"],
-    "color": "green",
-    "name": "GHG Factories",
-    "text": "Decrease your energy production 1 step and increase your heat production 4 steps.",
-    "description": "Synthesizing powerful greenhouse gases (GHGs), releasing them into the atmosphere"
-}, {
     "cost": 3,
     "tags": [],
     "name": "Hackers",
@@ -39,13 +22,6 @@
     "text": "Place this tile ADJACENT TO A CITY TILE",
     "tile": "Factory",
     "description": "Assigned to heavy industry, this area is not the nicest place on Mars"
-}, {
-    "cost": 4,
-    "tags": ["plant"],
-    "color": "green",
-    "name": "Moss",
-    "text": "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.",
-    "description": "Efficient soil makers"
 }, {
     "cost": 1,
     "tags": ["down"],

@@ -4,6 +4,8 @@ import { AdvancedEcosystems } from "./cards/AdvancedEcosystems";
 import { AerobrakedAmmoniaAsteroid } from "./cards/AerobrakedAmmoniaAsteroid";
 import { AntiGravityTechnology } from "./cards/AntiGravityTechnology";
 import { AquiferPumping } from "./cards/AquiferPumping";
+import { AsteroidMining } from "./cards/AsteroidMining";
+import { BeamFromAThoriumAsteroid } from "./cards/BeamFromAThoriumAsteroid";
 import { BiomassCombustors } from "./cards/BiomassCombustors";
 import { CaretakerContract } from "./cards/CaretakerContract";
 import { Cartel } from "./cards/Cartel";
@@ -17,12 +19,15 @@ import { DustSeals } from "./cards/DustSeals";
 import { EcologicalZone } from "./cards/EcologicalZone";
 import { EnergySaving } from "./cards/EnergySaving";
 import { ExtremeColdFungus } from "./cards/ExtremeColdFungus";
+import { Farming } from "./cards/Farming";
 import { Flooding } from "./cards/Flooding";
 import { FoodFactory } from "./cards/FoodFactory";
 import { FuelFactory } from "./cards/FuelFactory";
 import { FusionPower } from "./cards/FusionPower";
+import { GeneRepair } from "./cards/GeneRepair";
 import { GHGFactories } from "./cards/GHGFactories";
 import { GreatDam } from "./cards/GreatDam";
+import { GreatEscarpmentConsortium } from "./cards/GreatEscarpmentConsortium";
 import { Hackers } from "./cards/Hackers";
 import { HeatTrappers } from "./cards/HeatTrappers";
 import { Herbivores } from "./cards/Herbivores";
@@ -53,6 +58,7 @@ import { NitriteReducingBacteria } from "./cards/NitriteReducingBacteria";
 import { NitrophilicMoss } from "./cards/NitrophilicMoss";
 import { NoctisFarming } from "./cards/NoctisFarming";
 import { OlympusConference } from "./cards/OlympusConference";
+import { OpenCity } from "./cards/OpenCity";
 import { Pets } from "./cards/Pets";
 import { PermafrostExtraction } from "./cards/PermafrostExtraction";
 import { Plantation } from "./cards/Plantation";
@@ -66,14 +72,17 @@ import { Sabotage } from "./cards/Sabotage";
 import { Satellites } from "./cards/Satellites";
 import { Shuttles } from "./cards/Shuttles";
 import { SoilFactory } from "./cards/SoilFactory";
+import { SolarPower } from "./cards/SolarPower";
 import { StandardTechnology } from "./cards/StandardTechnology";
 import { StripMine } from "./cards/StripMine";
 import { SubterraneanReservoir } from "./cards/SubterraneanReservoir";
 import { SymbioticFungus } from "./cards/SymbioticFungus";
 import { TectonicStressPower } from "./cards/TectonicStressPower";
 import { TitaniumMine } from "./cards/TitaniumMine";
+import { TransNeptuneProbe } from "./cards/TransNeptuneProbe";
 import { TropicalResort } from "./cards/TropicalResort";
 import { TundraFarming } from "./cards/TundraFarming";
+import { UrbanizedArea } from "./cards/UrbanizedArea";
 import { WaterSplittingPlant } from "./cards/WaterSplittingPlant";
 import { WavePower } from "./cards/WavePower";
 import { Windmills } from "./cards/Windmills";
@@ -88,6 +97,8 @@ const ALL_CARDS: Array<IProjectCard> = [
     new AerobrakedAmmoniaAsteroid(),
     new AntiGravityTechnology(),
     new AquiferPumping(),
+    new AsteroidMining(),
+    new BeamFromAThoriumAsteroid(),
     new BiomassCombustors(),
     new CaretakerContract(),
     new Cartel(),
@@ -101,11 +112,14 @@ const ALL_CARDS: Array<IProjectCard> = [
     new EcologicalZone(),
     new EnergySaving(),
     new ExtremeColdFungus(),
+    new Farming(),
     new Flooding(),
     new FoodFactory(),
     new FusionPower(),
     new FuelFactory(),
+    new GeneRepair(),
     new GreatDam(),
+    new GreatEscarpmentConsortium(),
     new Hackers(),
     new HeatTrappers(),
     new Herbivores(),
@@ -135,6 +149,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new NitrophilicMoss(),
     new NoctisFarming(),
     new OlympusConference(),
+    new OpenCity(),
     new PermafrostExtraction(),
     new Pets(),
     new Plantation(),
@@ -148,14 +163,17 @@ const ALL_CARDS: Array<IProjectCard> = [
     new Satellites(),
     new Shuttles(),
     new SoilFactory(),
+    new SolarPower(),
     new StandardTechnology(),
     new StripMine(),
     new SubterraneanReservoir(),
     new SymbioticFungus(),
     new TectonicStressPower(),
     new TitaniumMine(),
+    new TransNeptuneProbe(),
     new TropicalResort(),
     new TundraFarming(),
+    new UrbanizedArea(),
     new WaterSplittingPlant(),
     new WavePower(),
     new Windmills(),

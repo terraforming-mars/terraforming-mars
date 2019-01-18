@@ -1,49 +1,4 @@
 [{
-    "cost": 10,
-    "tags": ["city", "steel"],
-    "name": "Urbanized Area",
-    "color": "green",
-    "text": "Decrease your energy production 1 step and increase your mega credit production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES",
-    "description": "When the population begins to soar, cities will eventually merge into large urban areas"
-}, {
-    "cost": 16,
-    "tags": ["plant"],
-    "name": "Farming",
-    "color": "green",
-    "text": "Requires +4C or warmer. Increase your mega credit production 2 steps and your plant production 2 steps. Gain 2 plants",
-    "vp": 2,
-    "description": "At last we can have a decent food production allowing for rapid population increase"
-}, {
-    "cost": 6,
-    "tags": [],
-    "name": "Great Escarpment Consortium",
-    "color": "green",
-    "text": "Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.",
-    "description": "The border between the northern plains and the southern highlands is rich in minerals. Control it, and you will control the global mining business"
-}, {
-    "cost": 6,
-    "tags": ["science", "space"],
-    "name": "Trans-Neptune Probe",
-    "color": "green",
-    "vp": 1,
-    "description": "Exploring the Kupier belt objects"
-}, {
-    "cost": 32,
-    "tags": ["jovian", "space", "power"],
-    "color": "green",
-    "name": "Beam From A Thorium Asteroid",
-    "vp": 1,
-    "text": "Required a jovian tag. Increase your heat production and energy production 3 steps each",
-    "description": "Nuclear energy is safe, especially when located on a remote asteroid rich in radioactive elements"
-}, {
-    "cost": 23,
-    "tags": ["city", "steel"],
-    "color": "green",
-    "name": "Open City",
-    "text": "Requires 12% oxygen. Decrease your energy production 1 step and increase your mega credit production 4 steps. Gain 2 plants and place a city tile.",
-    "vp": 1,
-    "description": "Not very comfortable conditions yet, but what freedom!!"
-}, {
     "cost": 13,
     "tags": ["jovian"],
     "color": "green",
@@ -51,30 +6,6 @@
     "text": "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step",
     "vp": 1,
     "description": "Your hold on the titanium market tightens"
-}, {
-    "cost": 12,
-    "tags": ["science"],
-    "color": "green",
-    "name": "Gene Repair",
-    "text": "Requires 3 science tags. Increase your mega credit production 2 steps.",
-    "vp": 2,
-    "description": "Counters the inevitable damage from cosmic radiation and reverses many aging symptoms"
-}, {
-    "cost": 11,
-    "tags": ["power", "steel"],
-    "color": "green",
-    "name": "Solar Power",
-    "text": "Increase your energy production 1 step",
-    "vp": 1,
-    "description": "Perhaps the most readily available energy source on Mars"
-}, {
-    "cost": 30,
-    "tags": ["jovian", "space"],
-    "color": "green",
-    "name": "Asteroid Mining",
-    "text": "Increase your titanium production 2 steps",
-    "vp": 2,
-    "description": "Where gravity is low and rare minerals abound"
 }, {
     "cost": 9,
     "tags": ["science", "steel"],

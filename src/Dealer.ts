@@ -13,6 +13,7 @@ import { BeamFromAThoriumAsteroid } from "./cards/BeamFromAThoriumAsteroid";
 import { BiomassCombustors } from "./cards/BiomassCombustors";
 import { BuildingIndustries } from "./cards/BuildingIndustries";
 import { Bushes } from "./cards/Bushes";
+import { Capital } from "./cards/Capital";
 import { CaretakerContract } from "./cards/CaretakerContract";
 import { Cartel } from "./cards/Cartel";
 import { CEOsFavoriteProject } from "./cards/CEOsFavoriteProject";
@@ -23,6 +24,8 @@ import { CupolaCity } from "./cards/CupolaCity";
 import { Decomposers } from "./cards/Decomposers";
 import { DesignedMicroOrganisms } from "./cards/DesignedMicroOrganisms";
 import { DustSeals } from "./cards/DustSeals";
+import { EarthCatapult } from "./cards/EarthCatapult";
+import { EarthOffice } from "./cards/EarthOffice";
 import { EcologicalZone } from "./cards/EcologicalZone";
 import { EnergySaving } from "./cards/EnergySaving";
 import { EquatorialMagnetizer } from "./cards/EquatorialMagnetizer";
@@ -32,6 +35,7 @@ import { Flooding } from "./cards/Flooding";
 import { FoodFactory } from "./cards/FoodFactory";
 import { FuelFactory } from "./cards/FuelFactory";
 import { FusionPower } from "./cards/FusionPower";
+import { GanymedeColony } from "./cards/GanymedeColony";
 import { GeneRepair } from "./cards/GeneRepair";
 import { GeothermalPower } from "./cards/GeothermalPower";
 import { GHGFactories } from "./cards/GHGFactories";
@@ -86,6 +90,9 @@ import { Satellites } from "./cards/Satellites";
 import { Shuttles } from "./cards/Shuttles";
 import { SoilFactory } from "./cards/SoilFactory";
 import { SolarPower } from "./cards/SolarPower";
+import { SpaceElevator } from "./cards/SpaceElevator";
+import { SpaceMirrors } from "./cards/SpaceMirrors";
+import { SpaceStation } from "./cards/SpaceStation";
 import { StandardTechnology } from "./cards/StandardTechnology";
 import { Steelworks } from "./cards/Steelworks";
 import { StripMine } from "./cards/StripMine";
@@ -120,6 +127,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new BiomassCombustors(),
     new BuildingIndustries(),
     new Bushes(),
+    new Capital(),
     new CaretakerContract(),
     new Cartel(),
     new CEOsFavoriteProject(),
@@ -130,6 +138,8 @@ const ALL_CARDS: Array<IProjectCard> = [
     new Decomposers(),
     new DesignedMicroOrganisms(),
     new DustSeals(),
+    new EarthCatapult(),
+    new EarthOffice(),
     new EcologicalZone(),
     new EnergySaving(),
     new EquatorialMagnetizer(),
@@ -139,6 +149,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new FoodFactory(),
     new FusionPower(),
     new FuelFactory(),
+    new GanymedeColony(),
     new GeneRepair(),
     new GeothermalPower(),
     new GreatDam(),
@@ -191,6 +202,9 @@ const ALL_CARDS: Array<IProjectCard> = [
     new Shuttles(),
     new SoilFactory(),
     new SolarPower(),
+    new SpaceElevator(),
+    new SpaceMirrors(),
+    new SpaceStation(),
     new StandardTechnology(),
     new Steelworks(),
     new StripMine(),

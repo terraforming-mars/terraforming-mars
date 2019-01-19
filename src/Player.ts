@@ -17,6 +17,8 @@ export class Player {
     public opponentsCanRemovePlants: boolean = true;
     public opponentsCanRemoveAnimals: boolean = true;
     public opponentsCanRemoveMicrobes: boolean = true;
+    public titaniumValue: number = 3;
+    public steelValue: number = 2;
     public requirementsBonus: number = 0;
     public megaCredits: number = 0;
     public megaCreditProduction: number = 0;

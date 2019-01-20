@@ -49,10 +49,12 @@ import { Hackers } from "./cards/Hackers";
 import { HeatTrappers } from "./cards/HeatTrappers";
 import { Herbivores } from "./cards/Herbivores";
 import { HiredRaiders } from "./cards/HiredRaiders";
+import { IceAsteroid } from "./cards/IceAsteroid";
 import { IceCapMelting } from "./cards/IceCapMelting";
 import { ImmigrantCity } from "./cards/ImmigrantCity";
 import { ImmigrationShuttles } from "./cards/ImmigrationShuttles";
 import { ImportedGHG } from "./cards/ImportedGHG";
+import { ImportedHydrogen } from "./cards/ImportedHydrogen";
 import { ImportedNitrogen } from "./cards/ImportedNitrogen";
 import { ImportOfAdvancedGHG } from "./cards/ImportOfAdvancedGHG";
 import { IndenturedWorkers } from "./cards/IndenturedWorkers";
@@ -117,6 +119,7 @@ import { SubterraneanReservoir } from "./cards/SubterraneanReservoir";
 import { SymbioticFungus } from "./cards/SymbioticFungus";
 import { TechnologyDemonstration } from "./cards/TechnologyDemonstration";
 import { TectonicStressPower } from "./cards/TectonicStressPower";
+import { TerraformingGanymede } from "./cards/TerraformingGanymede";
 import { TitaniumMine } from "./cards/TitaniumMine";
 import { TransNeptuneProbe } from "./cards/TransNeptuneProbe";
 import { TropicalResort } from "./cards/TropicalResort";
@@ -180,10 +183,12 @@ const ALL_CARDS: Array<IProjectCard> = [
     new Hackers(),
     new HeatTrappers(),
     new Herbivores(),
+    new IceAsteroid(),
     new IceCapMelting(),
     new ImmigrantCity(),
     new ImmigrationShuttles(),
     new ImportedGHG(),
+    new ImportedHydrogen(),
     new ImportedNitrogen(),
     new ImportOfAdvancedGHG(),
     new IndenturedWorkers(),
@@ -248,6 +253,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new SymbioticFungus(),
     new TechnologyDemonstration(),
     new TectonicStressPower(),
+    new TerraformingGanymede(),
     new TitaniumMine(),
     new TransNeptuneProbe(),
     new TropicalResort(),

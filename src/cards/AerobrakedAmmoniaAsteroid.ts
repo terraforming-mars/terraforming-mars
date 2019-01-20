@@ -18,7 +18,7 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
             player.setWaitingFor({
                 initiator: "card",
                 card: this,
-                type: "SelectACardForFree",
+                type: "SelectACard",
                 cards: cardsToPick
             }, (cardName: string) => {
                 if (cardName === this.name) {

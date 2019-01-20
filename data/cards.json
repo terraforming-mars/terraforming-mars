@@ -1,26 +1,4 @@
 [{
-    "cost": 33,
-    "tags": ["jovian", "space"],
-    "name": "Terraforming Ganymede",
-    "color": "green",
-    "text": "Raise your terraform rating 1 step for each jovian tag you have, including this",
-    "vp": 2,
-    "description": "Why stop at Mars?"
-}, {
-    "cost": 23,
-    "tags": ["space", "down"],
-    "color": "red",
-    "name": "Ice Asteroid",
-    "text": "Place 2 ocean tiles",
-    "description": "We need its water down here"
-}, {
-    "cost": 16,
-    "tags": ["earth", "space", "down"],
-    "name": "Imported Hydrogen",
-    "color": "red",
-    "text": "Gain 3 plants, or add 3 microbes or 2 animals to ANOTHER card. Place an ocean tile",
-    "description": "A light-weight but expensive crucial element"
-}, {
     "cost": 27,
     "tags": ["space", "down"],
     "color": "red",

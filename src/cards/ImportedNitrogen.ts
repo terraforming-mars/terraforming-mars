@@ -18,7 +18,7 @@ export class ImportedNitrogen implements IProjectCard {
             player.setWaitingFor({
                 initiator: "card",
                 card: this,
-                type: "SelectACardForFree",
+                type: "SelectACard",
                 message: "Select card to add 3 microbes",
                 cards: availableCards
             }, (cardName: string) => {
@@ -31,7 +31,7 @@ export class ImportedNitrogen implements IProjectCard {
                 player.setWaitingFor({
                     initiator: "card",
                     card: this,
-                    type: "SelectACardForFree",
+                    type: "SelectACard",
                     message: "Select card to add 2 animals",
                     cards: availableCards
                 }, (cardName2: string) => {

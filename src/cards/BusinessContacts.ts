@@ -18,7 +18,7 @@ export class BusinessContacts implements IProjectCard {
             player.setWaitingFor({
                 initiator: "card",
                 card: this,
-                type: "SelectACardForFree",
+                type: "SelectACard",
                 cardsToPick: 2,
                 cards: availableCards
             }, (card1: string, card2: string) => {

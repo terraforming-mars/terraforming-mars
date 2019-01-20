@@ -26,7 +26,7 @@ export class SymbioticFungus implements IActiveProjectCard {
             player.setWaitingFor({
                 initiator: "card",
                 card: this as IProjectCard,
-                type: "SelectACardForFree",
+                type: "SelectACard",
                 cards: availableCards
             }, (cardName: string) => {
                 if (cardName === this.name) {

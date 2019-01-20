@@ -18,7 +18,7 @@ export class CEOsFavoriteProject implements IProjectCard {
             player.setWaitingFor({
                 initiator: "card",
                 card: this,
-                type: "SelectACardForFree",
+                type: "SelectACard",
                 cards: availableCards
             }, (cardName: string) => {
                 const foundCard = availableCards.filter((card) => card.name === cardName)[0];

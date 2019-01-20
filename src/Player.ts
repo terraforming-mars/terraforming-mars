@@ -91,9 +91,9 @@ export class Player {
         this.standardProjectHandler.push(fn);
     }
 
-    private waitingFor?: PlayerInput;
+    private waitingFor?: Array<PlayerInput>;
 
-    public setWaitingFor(input: PlayerInput | undefined, inputHandler?: Function): void {
+    public setWaitingFor(input: Array<PlayerInput> | PlayerInput | undefined, inputHandler?: Function): void {
         if (input === undefined) {
             this.waitingFor = undefined;
             return;
@@ -101,7 +101,11 @@ export class Player {
         if (this.waitingFor !== undefined) {
             throw "Already waiting on input from player";
         }
-        this.waitingFor = input;
+        if (!Array.isArray(input)) {
+            this.waitingFor = [input];
+        } else {
+            this.waitingFor = input;
+        }
     }
 
 }

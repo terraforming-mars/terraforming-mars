@@ -27,7 +27,7 @@ export class InventionContest implements IProjectCard {
             player.setWaitingFor({
                 initiator: "card",
                 card: this,
-                type: "SelectACardForFree",
+                type: "SelectACard",
                 cards: cardsDrawn
             }, onInputHandler);
         });

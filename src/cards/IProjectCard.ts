@@ -7,6 +7,8 @@ import { Player } from "../Player";
 export interface IProjectCard {
     animals?: number;
     microbes?: number;
+    scienceResources?: number;
+    fighterResources?: number;
     cardType: CardType;
     cost: number;
     tags: Array<Tags>;

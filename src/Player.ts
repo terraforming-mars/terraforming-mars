@@ -58,7 +58,7 @@ export class Player {
         throw "Did not find card discount.";
     }
     public getCardsWithResources(): Array<IProjectCard> {
-        return this.playedCards.filter((card) => card.animals || card.microbes);
+        return this.playedCards.filter((card) => card.animals || card.microbes || card.fighterResources || card.scienceResources);
     }
     public getTagCount(tag: Tags): number {
         let tagCount = 0;

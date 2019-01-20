@@ -30,6 +30,8 @@ export class CEOsFavoriteProject implements IProjectCard {
                     foundCard.animals++;
                 } else if (foundCard.microbes) {
                     foundCard.microbes++;
+                } else if (foundCard.fighterResources) {
+                    foundCard.fighterResources++;
                 } else {
                     reject("Unsupported resource");
                     return;

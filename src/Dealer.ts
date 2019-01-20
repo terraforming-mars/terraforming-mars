@@ -13,6 +13,7 @@ import { AsteroidMiningConsortium } from "./cards/AsteroidMiningConsortium";
 import { BeamFromAThoriumAsteroid } from "./cards/BeamFromAThoriumAsteroid";
 import { BigAsteroid } from "./cards/BigAsteroid";
 import { BiomassCombustors } from "./cards/BiomassCombustors";
+import { BribedCommitte } from "./cards/BribedCommitte";
 import { BuildingIndustries } from "./cards/BuildingIndustries";
 import { Bushes } from "./cards/Bushes";
 import { BusinessContacts } from "./cards/BusinessContacts";
@@ -107,9 +108,11 @@ import { ReleaseOfInertGases } from "./cards/ReleaseOfInertGases";
 import { RestrictedArea } from "./cards/RestrictedArea";
 import { Sabotage } from "./cards/Sabotage";
 import { Satellites } from "./cards/Satellites";
+import { SecurityFleet } from "./cards/SecurityFleet";
 import { Shuttles } from "./cards/Shuttles";
 import { SoilFactory } from "./cards/SoilFactory";
 import { SolarPower } from "./cards/SolarPower";
+import { SolarWindPower } from "./cards/SolarWindPower";
 import { Soletta } from "./cards/Soletta";
 import { SpaceElevator } from "./cards/SpaceElevator";
 import { SpaceMirrors } from "./cards/SpaceMirrors";
@@ -124,6 +127,7 @@ import { TechnologyDemonstration } from "./cards/TechnologyDemonstration";
 import { TectonicStressPower } from "./cards/TectonicStressPower";
 import { TerraformingGanymede } from "./cards/TerraformingGanymede";
 import { TitaniumMine } from "./cards/TitaniumMine";
+import { TowingAComet } from "./cards/TowingAComet";
 import { TransNeptuneProbe } from "./cards/TransNeptuneProbe";
 import { TropicalResort } from "./cards/TropicalResort";
 import { TundraFarming } from "./cards/TundraFarming";
@@ -153,6 +157,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new BeamFromAThoriumAsteroid(),
     new BigAsteroid(),
     new BiomassCombustors(),
+    new BribedCommitte(),
     new BuildingIndustries(),
     new Bushes(),
     new BusinessContacts(),
@@ -245,9 +250,11 @@ const ALL_CARDS: Array<IProjectCard> = [
     new RestrictedArea(),
     new Sabotage(),
     new Satellites(),
+    new SecurityFleet(),
     new Shuttles(),
     new SoilFactory(),
     new SolarPower(),
+    new SolarWindPower(),
     new Soletta(),
     new SpaceElevator(),
     new SpaceMirrors(),
@@ -262,6 +269,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new TectonicStressPower(),
     new TerraformingGanymede(),
     new TitaniumMine(),
+    new TowingAComet(),
     new TransNeptuneProbe(),
     new TropicalResort(),
     new TundraFarming(),

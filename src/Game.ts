@@ -197,6 +197,10 @@ export class Game {
         if (space.tile !== undefined) {
             throw "Selected space is occupied";
         }
+        // Land claim a player can claim land for themselves
+        if (space.player !== undefined && space.player !== player) {
+            throw "This space is land claimed by " + space.player.id;
+        }
         if (space.spaceType !== spaceType) {
             throw "Select a valid location";
         }

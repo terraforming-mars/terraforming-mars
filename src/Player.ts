@@ -82,7 +82,9 @@ export class Player {
     public addCardPlayedHandler(handler: Function): void {
         this.cardPlayedEvents.push(handler);
     } 
-
+    public removeCardPlayedHandler(handler: Function): void {
+        this.cardPlayedEvents.splice(this.cardPlayedEvents.indexOf(handler), 1);
+    }
     private standardProjectHandler: Array<Function> = [];
 
     public addStandardProjectHandler(fn: Function): void {

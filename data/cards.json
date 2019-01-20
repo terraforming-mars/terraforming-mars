@@ -1,32 +1,4 @@
 [{
-    "cost": 27,
-    "tags": ["space", "down"],
-    "color": "red",
-    "name": "Big Asteroid",
-    "text": "Raise temperature 2 steps and gain 4 timtanium. Remove up to 4 plants from any player",
-    "description": "There are many unpopulated areas to crash it on"
-}, {
-    "cost": 31,
-    "tags": ["space", "down"],
-    "name": "Nitrogen-Rich Asteroid",
-    "color": "red",
-    "text": "Raise your terraform rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags",
-    "description": "Adding nitrogen to mars will both thicken the atmosphere with N2 and provide fertilizer for plants"
-}, {
-    "cost": 1,
-    "tags": ["microbe", "down"],
-    "name": "Virus",
-    "color": "red",
-    "text": "Remove up to 2 animals or 5 plants from any player",
-    "description": "The virus is transient, changing from liquid to air-borne to blood transfusion"
-}, {
-    "cost": 31,
-    "tags": ["space", "down"],
-    "name": "Deimos Down",
-    "color": "red",
-    "text": "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player",
-    "description": "We don't use that moon anyway"
-}, {
     "cost": 7,
     "tags": ["earth", "down"],
     "color": "red",

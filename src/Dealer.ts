@@ -11,6 +11,7 @@ import { ArtificialPhotosynthesis } from "./cards/ArtificialPhotosynthesis";
 import { AsteroidMining } from "./cards/AsteroidMining";
 import { AsteroidMiningConsortium } from "./cards/AsteroidMiningConsortium";
 import { BeamFromAThoriumAsteroid } from "./cards/BeamFromAThoriumAsteroid";
+import { BigAsteroid } from "./cards/BigAsteroid";
 import { BiomassCombustors } from "./cards/BiomassCombustors";
 import { BuildingIndustries } from "./cards/BuildingIndustries";
 import { Bushes } from "./cards/Bushes";
@@ -25,6 +26,7 @@ import { ConvoyFromEuropa } from "./cards/ConvoyFromEuropa";
 import { CorporateStronghold } from "./cards/CorporateStronghold";
 import { CupolaCity } from "./cards/CupolaCity";
 import { Decomposers } from "./cards/Decomposers";
+import { DeimosDown } from "./cards/DeimosDown";
 import { DesignedMicroOrganisms } from "./cards/DesignedMicroOrganisms";
 import { DustSeals } from "./cards/DustSeals";
 import { EarthCatapult } from "./cards/EarthCatapult";
@@ -84,6 +86,7 @@ import { MoholeArea } from "./cards/MoholeArea";
 import { Moss } from "./cards/Moss";
 import { NaturalPreserve } from "./cards/NaturalPreserve";
 import { NitriteReducingBacteria } from "./cards/NitriteReducingBacteria";
+import { NitrogenRichAsteroid } from "./cards/NitrogenRichAsteroid";
 import { NitrophilicMoss } from "./cards/NitrophilicMoss";
 import { NoctisFarming } from "./cards/NoctisFarming";
 import { OlympusConference } from "./cards/OlympusConference";
@@ -126,6 +129,7 @@ import { TropicalResort } from "./cards/TropicalResort";
 import { TundraFarming } from "./cards/TundraFarming";
 import { UndergroundDetonations } from "./cards/UndergroundDetonations";
 import { UrbanizedArea } from "./cards/UrbanizedArea";
+import { Virus } from "./cards/Virus";
 import { WaterSplittingPlant } from "./cards/WaterSplittingPlant";
 import { WavePower } from "./cards/WavePower";
 import { Windmills } from "./cards/Windmills";
@@ -147,6 +151,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new AsteroidMining(),
     new AsteroidMiningConsortium(),
     new BeamFromAThoriumAsteroid(),
+    new BigAsteroid(),
     new BiomassCombustors(),
     new BuildingIndustries(),
     new Bushes(),
@@ -161,6 +166,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new CorporateStronghold(),
     new CupolaCity(),
     new Decomposers(),
+    new DeimosDown(),
     new DesignedMicroOrganisms(),
     new DustSeals(),
     new EarthCatapult(),
@@ -218,6 +224,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new Moss(),
     new NaturalPreserve(),
     new NitriteReducingBacteria(),
+    new NitrogenRichAsteroid(),
     new NitrophilicMoss(),
     new NoctisFarming(),
     new OlympusConference(),
@@ -260,6 +267,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new TundraFarming(),
     new UndergroundDetonations(),
     new UrbanizedArea(),
+    new Virus(),
     new WaterSplittingPlant(),
     new WavePower(),
     new Windmills(),

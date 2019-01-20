@@ -1,4 +1,5 @@
 
+import { PlayerInputTypes } from "./PlayerInputTypes";
 import { IProjectCard } from "./cards/IProjectCard";
 import { Player } from "./Player";
 
@@ -11,7 +12,7 @@ import { Player } from "./Player";
 export interface PlayerInput {
     initiator: "card" | "board",
     card?: IProjectCard,
-    type: "SelectAPlayerAndOption" | "SelectACard" | "AddResourceOrDrawCard" | "SelectAPlayer" | "SelectASpace" | "SelectAmount" | "Gain4PlantsOrAnotherCard" | "Gain5PlantsOrAdd4Animals" | "OptionOrCard",
+    type: PlayerInputTypes,
     cardsToPick?: number,
     cards?: Array<IProjectCard>,
     players?: Array<Player>,

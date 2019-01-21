@@ -1,13 +1,17 @@
 
+import { AcquiredCompany } from "./cards/AcquiredCompany";
 import { AdaptationTechnology } from "./cards/AdaptationTechnology";
+import { AdaptedLichen } from "./cards/AdaptedLichen";
 import { AdvancedAlloys } from "./cards/AdvancedAlloys";
 import { AdvancedEcosystems } from "./cards/AdvancedEcosystems";
 import { AerobrakedAmmoniaAsteroid } from "./cards/AerobrakedAmmoniaAsteroid";
 import { AICentral } from "./cards/AICentral";
+import { Algae } from "./cards/Algae";
 import { AntiGravityTechnology } from "./cards/AntiGravityTechnology";
 import { AquiferPumping } from "./cards/AquiferPumping";
 import { ArchaeBacteria } from "./cards/ArchaeBacteria";
 import { ArtificialPhotosynthesis } from "./cards/ArtificialPhotosynthesis";
+import { Asteroid } from "./cards/Asteroid";
 import { AsteroidMining } from "./cards/AsteroidMining";
 import { AsteroidMiningConsortium } from "./cards/AsteroidMiningConsortium";
 import { BeamFromAThoriumAsteroid } from "./cards/BeamFromAThoriumAsteroid";
@@ -17,6 +21,7 @@ import { BribedCommitte } from "./cards/BribedCommitte";
 import { BuildingIndustries } from "./cards/BuildingIndustries";
 import { Bushes } from "./cards/Bushes";
 import { BusinessContacts } from "./cards/BusinessContacts";
+import { CallistoPenalMines } from "./cards/CallistoPenalMines";
 import { Capital } from "./cards/Capital";
 import { CaretakerContract } from "./cards/CaretakerContract";
 import { Cartel } from "./cards/Cartel";
@@ -27,6 +32,7 @@ import { ConvoyFromEuropa } from "./cards/ConvoyFromEuropa";
 import { CorporateStronghold } from "./cards/CorporateStronghold";
 import { CupolaCity } from "./cards/CupolaCity";
 import { Decomposers } from "./cards/Decomposers";
+import { DeepWellHeating } from "./cards/DeepWellHeating";
 import { DeimosDown } from "./cards/DeimosDown";
 import { DesignedMicroOrganisms } from "./cards/DesignedMicroOrganisms";
 import { DustSeals } from "./cards/DustSeals";
@@ -38,14 +44,18 @@ import { EnergyTapping } from "./cards/EnergyTapping";
 import { EquatorialMagnetizer } from "./cards/EquatorialMagnetizer";
 import { ExtremeColdFungus } from "./cards/ExtremeColdFungus";
 import { Farming } from "./cards/Farming";
+import { Fish } from "./cards/Fish";
 import { Flooding } from "./cards/Flooding";
 import { FoodFactory } from "./cards/FoodFactory";
+import { FueledGenerators } from "./cards/FueledGenerators";
 import { FuelFactory } from "./cards/FuelFactory";
 import { FusionPower } from "./cards/FusionPower";
 import { GanymedeColony } from "./cards/GanymedeColony";
 import { GeneRepair } from "./cards/GeneRepair";
 import { GeothermalPower } from "./cards/GeothermalPower";
 import { GHGFactories } from "./cards/GHGFactories";
+import { GiantSpaceMirror } from "./cards/GiantSpaceMirror";
+import { Grass } from "./cards/Grass";
 import { GreatDam } from "./cards/GreatDam";
 import { GreatEscarpmentConsortium } from "./cards/GreatEscarpmentConsortium";
 import { Hackers } from "./cards/Hackers";
@@ -67,6 +77,7 @@ import { Insects } from "./cards/Insects";
 import { Insulation } from "./cards/Insulation";
 import { InventionContest } from "./cards/InventionContest";
 import { InvestmentLoan } from "./cards/InvestmentLoan";
+import { KelpFarming } from "./cards/KelpFarming";
 import { LagrangeObservatory } from "./cards/LagrangeObservatory";
 import { LakeMarineris } from "./cards/LakeMarineris";
 import { LandClaim } from "./cards/LandClaim";
@@ -80,6 +91,7 @@ import { MagneticFieldGenerators } from "./cards/MagneticFieldGenerators";
 import { MediaArchives } from "./cards/MediaArchives";
 import { MedicalLab } from "./cards/MedicalLab";
 import { MicroMills } from "./cards/MicroMills";
+import { Mine } from "./cards/Mine";
 import { MineralDeposit } from "./cards/MineralDeposit";
 import { MiningArea } from "./cards/MiningArea";
 import { MiningExpedition } from "./cards/MiningExpedition";
@@ -97,11 +109,13 @@ import { Pets } from "./cards/Pets";
 import { PermafrostExtraction } from "./cards/PermafrostExtraction";
 import { PeroxidePower } from "./cards/PeroxidePower";
 import { Plantation } from "./cards/Plantation";
+import { PowerGrid } from "./cards/PowerGrid";
 import { PowerInfrastructure } from "./cards/PowerInfrastructure";
 import { PowerPlant } from "./cards/PowerPlant";
 import { PowerSupplyConsortium } from "./cards/PowerSupplyConsortium";
 import { ProtectedHabitats } from "./cards/ProtectedHabitats";
 import { ProtectedValley } from "./cards/ProtectedValley";
+import { QuantumExtractor } from "./cards/QuantumExtractor";
 import { RadChemFactory } from "./cards/RadChemFactory";
 import { RadSuits } from "./cards/RadSuits";
 import { ReleaseOfInertGases } from "./cards/ReleaseOfInertGases";
@@ -110,6 +124,7 @@ import { Sabotage } from "./cards/Sabotage";
 import { Satellites } from "./cards/Satellites";
 import { SecurityFleet } from "./cards/SecurityFleet";
 import { Shuttles } from "./cards/Shuttles";
+import { SmallAnimals } from "./cards/SmallAnimals";
 import { SoilFactory } from "./cards/SoilFactory";
 import { SolarPower } from "./cards/SolarPower";
 import { SolarWindPower } from "./cards/SolarWindPower";
@@ -123,16 +138,20 @@ import { Steelworks } from "./cards/Steelworks";
 import { StripMine } from "./cards/StripMine";
 import { SubterraneanReservoir } from "./cards/SubterraneanReservoir";
 import { SymbioticFungus } from "./cards/SymbioticFungus";
+import { Tardigrades } from "./cards/Tardigrades";
 import { TechnologyDemonstration } from "./cards/TechnologyDemonstration";
 import { TectonicStressPower } from "./cards/TectonicStressPower";
+import { TenMiningIndustries } from "./cards/TenMiningIndustries";
 import { TerraformingGanymede } from "./cards/TerraformingGanymede";
 import { TitaniumMine } from "./cards/TitaniumMine";
 import { TowingAComet } from "./cards/TowingAComet";
 import { TransNeptuneProbe } from "./cards/TransNeptuneProbe";
 import { TropicalResort } from "./cards/TropicalResort";
 import { TundraFarming } from "./cards/TundraFarming";
+import { UndergroundCity } from "./cards/UndergroundCity";
 import { UndergroundDetonations } from "./cards/UndergroundDetonations";
 import { UrbanizedArea } from "./cards/UrbanizedArea";
+import { VestaShipyard } from "./cards/VestaShipyard";
 import { Virus } from "./cards/Virus";
 import { WaterSplittingPlant } from "./cards/WaterSplittingPlant";
 import { WavePower } from "./cards/WavePower";
@@ -143,15 +162,19 @@ import { Zeppelins } from "./cards/Zeppelins";
 import { IProjectCard } from "./cards/IProjectCard";
 
 const ALL_CARDS: Array<IProjectCard> = [
+    new AcquiredCompany(),
     new AdaptationTechnology(),
+    new AdaptedLichen(),
     new AdvancedAlloys(),
     new AdvancedEcosystems(),
     new AerobrakedAmmoniaAsteroid(),
     new AntiGravityTechnology(),
     new AquiferPumping(),
     new AICentral(),
+    new Algae(),
     new ArchaeBacteria(),
     new ArtificialPhotosynthesis(),
+    new Asteroid(),
     new AsteroidMining(),
     new AsteroidMiningConsortium(),
     new BeamFromAThoriumAsteroid(),
@@ -161,6 +184,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new BuildingIndustries(),
     new Bushes(),
     new BusinessContacts(),
+    new CallistoPenalMines(),
     new Capital(),
     new CaretakerContract(),
     new Cartel(),
@@ -171,6 +195,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new CorporateStronghold(),
     new CupolaCity(),
     new Decomposers(),
+    new DeepWellHeating(),
     new DeimosDown(),
     new DesignedMicroOrganisms(),
     new DustSeals(),
@@ -182,13 +207,17 @@ const ALL_CARDS: Array<IProjectCard> = [
     new EquatorialMagnetizer(),
     new ExtremeColdFungus(),
     new Farming(),
+    new Fish(),
     new Flooding(),
     new FoodFactory(),
     new FusionPower(),
+    new FueledGenerators(),
     new FuelFactory(),
     new GanymedeColony(),
     new GeneRepair(),
     new GeothermalPower(),
+    new GiantSpaceMirror(),
+    new Grass(),
     new GreatDam(),
     new GreatEscarpmentConsortium(),
     new Hackers(),
@@ -209,6 +238,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new Insulation(),
     new InventionContest(),
     new InvestmentLoan(),
+    new KelpFarming(),
     new LagrangeObservatory(),
     new LakeMarineris(),
     new LandClaim(),
@@ -222,6 +252,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new MediaArchives(),
     new MedicalLab(),
     new MicroMills(),
+    new Mine(),
     new MineralDeposit(),
     new MiningArea(),
     new MiningExpedition(),
@@ -239,11 +270,13 @@ const ALL_CARDS: Array<IProjectCard> = [
     new PeroxidePower(),
     new Pets(),
     new Plantation(),
+    new PowerGrid(),
     new PowerInfrastructure(),
     new PowerPlant(),
     new PowerSupplyConsortium(),
     new ProtectedHabitats(),
     new ProtectedValley(),
+    new QuantumExtractor(),
     new RadChemFactory(),
     new RadSuits(),
     new ReleaseOfInertGases(),
@@ -252,6 +285,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new Satellites(),
     new SecurityFleet(),
     new Shuttles(),
+    new SmallAnimals(),
     new SoilFactory(),
     new SolarPower(),
     new SolarWindPower(),
@@ -265,16 +299,20 @@ const ALL_CARDS: Array<IProjectCard> = [
     new StripMine(),
     new SubterraneanReservoir(),
     new SymbioticFungus(),
+    new Tardigrades(),
     new TechnologyDemonstration(),
     new TectonicStressPower(),
+    new TenMiningIndustries(),
     new TerraformingGanymede(),
     new TitaniumMine(),
     new TowingAComet(),
     new TransNeptuneProbe(),
     new TropicalResort(),
     new TundraFarming(),
+    new UndergroundCity(),
     new UndergroundDetonations(),
     new UrbanizedArea(),
+    new VestaShipyard(),
     new Virus(),
     new WaterSplittingPlant(),
     new WavePower(),

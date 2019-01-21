@@ -14,7 +14,7 @@ export class CEOsFavoriteProject implements IProjectCard {
     public description: string = "Having the top man's attention, the involved people are sure to do their best";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            const availableCards = player.getCardsWithResources();
+            const availableCards = player.getCardsWithResources().filter((card) => card.animals || card.microbes || card.fighterResources || card.scienceResources);
             player.setWaitingFor({
                 initiator: "card",
                 card: this,

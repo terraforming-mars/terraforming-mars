@@ -16,10 +16,18 @@ export class Virus implements IProjectCard {
     public text: string = "Remove up to 2 animals or 5 plants from any player.";
     public description: string = "The virus is transient, changing from liquid to air-borne to blood transfusion.";
     public play(player: Player, game: Game): Promise<void> {
+        const allCardsWithResources: Array<IProjectCard> = [];
+        game.getPlayers().forEach((o) => {
+            if (o !== player) {
+                o.getCardsWithResources().forEach((cardWithResource) => {
+                    allCardsWithResources.push(cardWithResource);
+                });
+            }
+        });
         return new Promise((resolve, reject) => {
             player.setWaitingFor(
                 new OrOptions(
-                    new SelectCard(this, "Select card to remove 2 animals"),
+                    new SelectCard(this, "Select card to remove 2 animals", allCardsWithResources),
                     new SelectPlayer(this, "Select player to remove 5 plants")
                 ), (inputs: {[x: string]: string}) => {
                     if (inputs.option === "1") {

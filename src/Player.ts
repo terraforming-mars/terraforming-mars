@@ -57,8 +57,24 @@ export class Player {
         }
         throw "Did not find card discount.";
     }
+    public cardHasResource(card: IProjectCard): boolean {
+        return card.animals !== undefined || card.microbes !== undefined || card.fighterResources !== undefined || card.scienceResources !== undefined;
+    }
+    public addResourceTo(card: IProjectCard): void {
+        if (card.animals !== undefined) {
+            card.animals++;
+        } else if (card.microbes !== undefined) {
+            card.microbes++;
+        } else if (card.fighterResources !== undefined) {
+            card.fighterResources++;
+        } else if (card.scienceResources !== undefined) {
+            card.scienceResources++;
+        } else {
+            throw "No resource on this card";
+        }
+    }
     public getCardsWithResources(): Array<IProjectCard> {
-        return this.playedCards.filter((card) => card.animals || card.microbes || card.fighterResources || card.scienceResources);
+        return this.playedCards.filter((card) => this.cardHasResource(card));
     }
     public getTagCount(tag: Tags): number {
         let tagCount = 0;

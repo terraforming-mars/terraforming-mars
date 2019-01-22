@@ -8,6 +8,7 @@ import { AerobrakedAmmoniaAsteroid } from "./cards/AerobrakedAmmoniaAsteroid";
 import { AICentral } from "./cards/AICentral";
 import { Algae } from "./cards/Algae";
 import { AntiGravityTechnology } from "./cards/AntiGravityTechnology";
+import { Ants } from "./cards/Ants";
 import { AquiferPumping } from "./cards/AquiferPumping";
 import { ArchaeBacteria } from "./cards/ArchaeBacteria";
 import { ArtificialPhotosynthesis } from "./cards/ArtificialPhotosynthesis";
@@ -17,6 +18,7 @@ import { AsteroidMiningConsortium } from "./cards/AsteroidMiningConsortium";
 import { BeamFromAThoriumAsteroid } from "./cards/BeamFromAThoriumAsteroid";
 import { BigAsteroid } from "./cards/BigAsteroid";
 import { BiomassCombustors } from "./cards/BiomassCombustors";
+import { Birds } from "./cards/Birds";
 import { BreathingFilters } from "./cards/BreathingFilters";
 import { BribedCommitte } from "./cards/BribedCommitte";
 import { BuildingIndustries } from "./cards/BuildingIndustries";
@@ -43,6 +45,7 @@ import { DustSeals } from "./cards/DustSeals";
 import { EarthCatapult } from "./cards/EarthCatapult";
 import { EarthOffice } from "./cards/EarthOffice";
 import { EcologicalZone } from "./cards/EcologicalZone";
+import { ElectroCatapult } from "./cards/ElectroCatapult";
 import { EnergySaving } from "./cards/EnergySaving";
 import { EnergyTapping } from "./cards/EnergyTapping";
 import { EquatorialMagnetizer } from "./cards/EquatorialMagnetizer";
@@ -83,6 +86,7 @@ import { Insulation } from "./cards/Insulation";
 import { InventionContest } from "./cards/InventionContest";
 import { InventorsGuild } from "./cards/InventorsGuild";
 import { InvestmentLoan } from "./cards/InvestmentLoan";
+import { Ironworks } from "./cards/Ironworks";
 import { KelpFarming } from "./cards/KelpFarming";
 import { LagrangeObservatory } from "./cards/LagrangeObservatory";
 import { LakeMarineris } from "./cards/LakeMarineris";
@@ -133,6 +137,7 @@ import { RadChemFactory } from "./cards/RadChemFactory";
 import { RadSuits } from "./cards/RadSuits";
 import { ReleaseOfInertGases } from "./cards/ReleaseOfInertGases";
 import { RestrictedArea } from "./cards/RestrictedArea";
+import { RoverConstruction } from "./cards/RoverConstruction";
 import { Sabotage } from "./cards/Sabotage";
 import { Satellites } from "./cards/Satellites";
 import { SearchForLife } from "./cards/SearchForLife";
@@ -187,6 +192,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new AdvancedEcosystems(),
     new AerobrakedAmmoniaAsteroid(),
     new AntiGravityTechnology(),
+    new Ants(),
     new AquiferPumping(),
     new AICentral(),
     new Algae(),
@@ -198,6 +204,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new BeamFromAThoriumAsteroid(),
     new BigAsteroid(),
     new BiomassCombustors(),
+    new Birds(),
     new BreathingFilters(),
     new BribedCommitte(),
     new BuildingIndustries(),
@@ -224,6 +231,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new EarthCatapult(),
     new EarthOffice(),
     new EcologicalZone(),
+    new ElectroCatapult(),
     new EnergySaving(),
     new EnergyTapping(),
     new EquatorialMagnetizer(),
@@ -262,6 +270,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new InventionContest(),
     new InventorsGuild(),
     new InvestmentLoan(),
+    new Ironworks(),
     new KelpFarming(),
     new LagrangeObservatory(),
     new LakeMarineris(),
@@ -312,6 +321,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new RadSuits(),
     new ReleaseOfInertGases(),
     new RestrictedArea(),
+    new RoverConstruction(),
     new Sabotage(),
     new Satellites(),
     new SearchForLife(),

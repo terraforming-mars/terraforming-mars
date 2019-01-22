@@ -221,10 +221,44 @@ export class Game {
             });
         }
     }
+
     public getAdjacentSpaces(space: ISpace): Array<ISpace> {
-        // TODO Implement this method
+        if (space.y < 0 || space.y > 8) {
+            throw "Unexpected space y value";
+        }
+        if (space.x < 0 || space.x > 8) {
+            throw "Unexpected space x value";
+        } 
+        if (space.spaceType !== SpaceType.COLONY) {
+            const leftSpace: Array<number> = [space.x - 1, space.y],
+                rightSpace: Array<number> = [space.x + 1, space.y],
+                topLeftSpace: Array<number> = [space.x, space.y - 1],
+                topRightSpace: Array<number> = [space.x, space.y - 1],
+                bottomLeftSpace: Array<number> = [space.x, space.y + 1],
+                bottomRightSpace: Array<number> = [space.x, space.y + 1];
+            if (space.y < 4) {
+                bottomLeftSpace[0]--;
+                topRightSpace[0]++;
+            } else if (space.y === 4) {
+                bottomRightSpace[0]++;
+                topRightSpace[0]++;
+            } else {
+                bottomRightSpace[0]++;
+                topLeftSpace[0]--;
+            }
+            return this.spaces.filter((aSpace) => {
+                return space !== aSpace && aSpace.spaceType !== SpaceType.COLONY && (
+                    (aSpace.x === leftSpace[0] && aSpace.y === leftSpace[1]) ||
+                    (aSpace.x === rightSpace[0] && aSpace.y === rightSpace[1]) ||
+                    (aSpace.x === topLeftSpace[0] && aSpace.y === topLeftSpace[1]) ||
+                    (aSpace.x === topRightSpace[0] && aSpace.y === topRightSpace[1]) ||
+                    (aSpace.x === bottomLeftSpace[0] && aSpace.y === bottomLeftSpace[1]) ||
+                    (aSpace.x === bottomRightSpace[0] && aSpace.y === bottomRightSpace[1]));
+            });
+        }
         return [];
     }
+
     public addGreenery(player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND): Promise<void> {
         this.addTile(player, spaceType, this.getSpace(spaceId), { tileType: TileType.GREENERY });
         return this.increaseOxygenLevel(player).then(function () {

@@ -1,28 +1,4 @@
 [{
-    "cost": 17,
-    "tags": ["steel"],
-    "name": "Electro Catapult",
-    "color": "blue",
-    "action": "Spend 1 plant or 1 steel to gain 7 mega credit",
-    "text": "Oxygen must be 8% or less. Decrease your energy production 1 step",
-    "vp": 1,
-    "desription": "A 200km long acceleration ramp up the side of Pavonis Mons, hurtling export goods into space"
-}, {
-    "cost": 11,
-    "tags": ["steel"],
-    "name": "Ironworks",
-    "color": "blue",
-    "action": "Spend 4 energy to gain 1 steel and increase oxygen 1 step",
-    "description": "Electrolysis of Martian soil yields both iron and oxygen, making it an important part of terraforming"
-}, {
-    "cost": 8,
-    "tags": ["steel"],
-    "name": "Rover Construction",
-    "color": "blue",
-    "effect": "When any city tile is placed, gain 2 mega credit",
-    "description": "Providing safe transport vehicles",
-    "vp": 1
-}, {
     "cost": 24,
     "tags": ["city", "steel"],
     "name": "Domed Crater",
@@ -221,22 +197,4 @@
     "action": "Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step",
     "text": "Requires 4% oxygen",
     "description": "Working for the biosphere and the atmosphere at the same time"
-}, {
-    "cost": 9,
-    "tags": ["microbe"],
-    "name": "Ants",
-    "color": "blue",
-    "action": "Remove 1 microbe from any card to add 1 to this card",
-    "text": "Requires 4% oxygen",
-    "vp": "1 VP per 2 microbes on this card",
-    "description": "Although an important part of many ecosystems, ants can also be detrimental to other organisms"
-}, {
-    "cost": 10,
-    "tags": ["animal"],
-    "name": "Birds",
-    "color": "blue",
-    "action": "Add an animal to this card",
-    "text": "Requires 13% oxygen. Decrease any plant production 2 steps",
-    "vp": "1 VP for each animal on this card",
-    "description": "Bringing life to the skies"
 }]

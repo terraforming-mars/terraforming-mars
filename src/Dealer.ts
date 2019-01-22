@@ -41,6 +41,8 @@ import { Decomposers } from "./cards/Decomposers";
 import { DeepWellHeating } from "./cards/DeepWellHeating";
 import { DeimosDown } from "./cards/DeimosDown";
 import { DesignedMicroOrganisms } from "./cards/DesignedMicroOrganisms";
+import { DevelopmentCenter } from "./cards/DevelopmentCenter";
+import { DomedCrater } from "./cards/DomedCrater";
 import { DustSeals } from "./cards/DustSeals";
 import { EarthCatapult } from "./cards/EarthCatapult";
 import { EarthOffice } from "./cards/EarthOffice";
@@ -104,6 +106,7 @@ import { MarsUniversity } from "./cards/MarsUniversity";
 import { MartianRails } from "./cards/MartianRails";
 import { MediaArchives } from "./cards/MediaArchives";
 import { MedicalLab } from "./cards/MedicalLab";
+import { MethaneFromTitan } from "./cards/MethaneFromTitan";
 import { MicroMills } from "./cards/MicroMills";
 import { Mine } from "./cards/Mine";
 import { MineralDeposit } from "./cards/MineralDeposit";
@@ -227,6 +230,8 @@ const ALL_CARDS: Array<IProjectCard> = [
     new DeepWellHeating(),
     new DeimosDown(),
     new DesignedMicroOrganisms(),
+    new DevelopmentCenter(),
+    new DomedCrater(),
     new DustSeals(),
     new EarthCatapult(),
     new EarthOffice(),
@@ -288,6 +293,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new MartianRails(),
     new MediaArchives(),
     new MedicalLab(),
+    new MethaneFromTitan(),
     new MicroMills(),
     new Mine(),
     new MineralDeposit(),

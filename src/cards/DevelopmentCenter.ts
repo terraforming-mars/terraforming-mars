@@ -1,0 +1,27 @@
+
+import { IActiveProjectCard } from "./IActiveProjectCard";
+import { Tags } from "./Tags";
+import { CardType } from "./CardType";
+import { Player } from "../Player";
+import { Game } from "../Game";
+
+export class DevelopmentCenter implements IActiveProjectCard {
+    public cost: number = 11;
+    public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
+    public name: string = "Development Center";
+    public cardType: CardType = CardType.ACTIVE;
+    public actionText: string = "Spend 1 energy to draw a card.";
+    public text: string = "";
+    public description: string = "Ensuring a constant influx of ideas.";
+    public play(player: Player, game: Game): Promise<void> {
+        return Promise.resolve();
+    }
+    public action(player: Player, game: Game): Promise<void> {
+        if (player.energy < 1) {
+            return Promise.reject("No energy to spend");
+        }
+        player.energy--;
+        player.cardsInHand.push(game.dealer.getCards(1)[0]);
+        return Promise.resolve();
+    }
+}

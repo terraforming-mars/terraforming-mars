@@ -26,7 +26,7 @@ export class LavaFlows implements IProjectCard {
                     reject("Must select either tharsis tholus, ascraeus mons, pavonis mons or arsia mons");
                     return;
                 }
-                try { game.addTile(player, SpaceType.COLONY, game.getSpace(spaceId as string), { tileType: TileType.SPECIAL }); }
+                try { game.addTile(player, SpaceType.LAND, game.getSpace(spaceId as string), { tileType: TileType.SPECIAL }); }
                 catch (err) { reject(err); return; }
                 return game.increaseTemperature(player).then(function () { return game.increaseTemperature(player); });
             });

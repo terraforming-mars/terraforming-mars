@@ -9,5 +9,7 @@ export interface ISpace {
     spaceType: SpaceType;
     tile?: ITile;
     player?: Player;
-    bonus?: Array<SpaceBonus>;
+    bonus: Array<SpaceBonus>;
+    x: number;
+    y: number;
 }

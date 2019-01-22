@@ -12,6 +12,7 @@ import { TileType } from "./TileType";
 import { SpaceBonus } from "./SpaceBonus";
 import { ITile } from "./ITile";
 import { IProjectCard } from "./cards/IProjectCard";
+import { OriginalBoard } from "./OriginalBoard";
 
 const MIN_OXYGEN_LEVEL: number = 0;
 const MAX_OXYGEN_LEVEL: number = 14;
@@ -63,7 +64,7 @@ STANDARD PROJECTS
 export class Game {
     public id: string = utilities.generateUUID();
     public dealer: Dealer = new Dealer();
-    private spaces: Array<ISpace> = [];
+    private spaces: Array<ISpace> = new OriginalBoard().spaces;
     private players: Array<Player> = [];
     private onGreeneryPlaced: Array<Function> = [];
     private onCityTilePlaced: Array<Function> = [];

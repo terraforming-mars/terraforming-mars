@@ -1,28 +1,4 @@
 [{
-    "cost": 14,
-    "tags": ["animal"],
-    "name": "Predators",
-    "color": "blue",
-    "action": "Remove 1 animal from any card any add it to this card",
-    "text": "Requires 11% oxygen",
-    "vp": "1 VP per animal on this card",
-    "description": "Lions and tigers and bears, oh my"
-}, {
-    "cost": 15,
-    "tags": [],
-    "name": "Black Polar Dust",
-    "color": "green",
-    "text": "Place an ocean tile. Decrease your mega credit production 2 steps and increase your heat production 3 steps",
-    "description": "The sprinkled dust absorbs heat from the sun. Must be renewed after each snowfall, though"
-}, {
-    "cost": 18,
-    "tags": ["science", "city", "steel"],
-    "name": "Research Outpost",
-    "effect": "When you play a card, you pay 1 mega credit less for it",
-    "color": "blue",
-    "text": "Place a city tile NEXT TO NO OTHER TILE",
-    "description": "Finding new ways to do things"
-}, {
     "cost": 18,
     "tags": ["city", "steel"],
     "name": "Noctis City",
@@ -45,14 +21,6 @@
     "effect": "When anyone places an ocean tile, gain 2 plants",
     "text": "It must be -12C or colder to play. Gain 1 plant",
     "description": "Suitable for freezing temperatures"
-}, {
-    "cost": 24,
-    "tags": ["earth", "space", "down"],
-    "color": "red",
-    "name": "Interstellar Colony Ship",
-    "text": "Requires 5 science tags",
-    "vp": 4,
-    "description": "To new horizons and an unknown galaxy"
 }, {
     "cost": 7,
     "tags": ["space"],

@@ -19,6 +19,7 @@ import { BeamFromAThoriumAsteroid } from "./cards/BeamFromAThoriumAsteroid";
 import { BigAsteroid } from "./cards/BigAsteroid";
 import { BiomassCombustors } from "./cards/BiomassCombustors";
 import { Birds } from "./cards/Birds";
+import { BlackPolarDust } from "./cards/BlackPolarDust";
 import { BreathingFilters } from "./cards/BreathingFilters";
 import { BribedCommitte } from "./cards/BribedCommitte";
 import { BuildingIndustries } from "./cards/BuildingIndustries";
@@ -85,6 +86,7 @@ import { IndustrialCenter } from "./cards/IndustrialCenter";
 import { IndustrialMicrobes } from "./cards/IndustrialMicrobes";
 import { Insects } from "./cards/Insects";
 import { Insulation } from "./cards/Insulation";
+import { InterstellarColonyShip } from "./cards/InterstellarColonyShip";
 import { InventionContest } from "./cards/InventionContest";
 import { InventorsGuild } from "./cards/InventorsGuild";
 import { InvestmentLoan } from "./cards/InvestmentLoan";
@@ -133,12 +135,14 @@ import { PowerGrid } from "./cards/PowerGrid";
 import { PowerInfrastructure } from "./cards/PowerInfrastructure";
 import { PowerPlant } from "./cards/PowerPlant";
 import { PowerSupplyConsortium } from "./cards/PowerSupplyConsortium";
+import { Predators } from "./cards/Predators";
 import { ProtectedHabitats } from "./cards/ProtectedHabitats";
 import { ProtectedValley } from "./cards/ProtectedValley";
 import { QuantumExtractor } from "./cards/QuantumExtractor";
 import { RadChemFactory } from "./cards/RadChemFactory";
 import { RadSuits } from "./cards/RadSuits";
 import { ReleaseOfInertGases } from "./cards/ReleaseOfInertGases";
+import { ResearchOutpost } from "./cards/ResearchOutpost";
 import { RestrictedArea } from "./cards/RestrictedArea";
 import { RoverConstruction } from "./cards/RoverConstruction";
 import { Sabotage } from "./cards/Sabotage";
@@ -208,6 +212,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new BigAsteroid(),
     new BiomassCombustors(),
     new Birds(),
+    new BlackPolarDust(),
     new BreathingFilters(),
     new BribedCommitte(),
     new BuildingIndustries(),
@@ -272,6 +277,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new IndustrialMicrobes(),
     new Insects(),
     new Insulation(),
+    new InterstellarColonyShip(),
     new InventionContest(),
     new InventorsGuild(),
     new InvestmentLoan(),
@@ -320,12 +326,14 @@ const ALL_CARDS: Array<IProjectCard> = [
     new PowerInfrastructure(),
     new PowerPlant(),
     new PowerSupplyConsortium(),
+    new Predators(),
     new ProtectedHabitats(),
     new ProtectedValley(),
     new QuantumExtractor(),
     new RadChemFactory(),
     new RadSuits(),
     new ReleaseOfInertGases(),
+    new ResearchOutpost(),
     new RestrictedArea(),
     new RoverConstruction(),
     new Sabotage(),

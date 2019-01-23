@@ -22,20 +22,6 @@
     "text": "It must be -12C or colder to play. Gain 1 plant",
     "description": "Suitable for freezing temperatures"
 }, {
-    "cost": 7,
-    "tags": ["space"],
-    "color": "blue",
-    "name": "Optimal Aerobraking",
-    "effect": "When you play a space event, you gain 3 mega credit and 3 heat",
-    "description": "Perfecting the art of ballistic and material analysis can increase efficiency and save money"
-}, {
-    "cost": 13,
-    "tags": ["earth", "power"],
-    "name": "Lunar Beam",
-    "color": "green",
-    "text": "Decrease your mega credit production 2 steps and increase your heat production and energy production 2 steps each",
-    "description": "A huge energy beam. Difficult to collect, but who cares?"
-}, {
     "cost": 16,
     "tags": ["plant", "steel"],
     "name": "EOS Chasma National Park",
@@ -50,96 +36,4 @@
     "color": "green",
     "text": "Duplicate only the production box of one of your building cards",
     "description": "Enhancing your production capacity"
-}, {
-    "cost": 6,
-    "tags": ["plant"],
-    "name": "Heather",
-    "color": "green",
-    "text": "Requires -14C or warmer. Increase your plant production 1 step. Gain 1 plant",
-    "description": "Stabilizing the soil"
-}, {
-    "cost": 11,
-    "tags": ["science", "science"],
-    "name": "Research",
-    "color": "green",
-    "text": "Counts as playing 2 science cards. Draw 2 cards",
-    "vp": 1,
-    "description": "Through technical excellence you will unlock many wondrous things"
-}, {
-    "cost": 13,
-    "tags": ["science", "microbe"],
-    "name": "Regolith Eaters",
-    "color": "blue",
-    "action": "Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step",
-    "description": "Living on the rocks and excreting oxygen"
-}, {
-    "cost": 6,
-    "tags": ["earth"],
-    "name": "Media Group",
-    "color": "blue",
-    "effect": "After you play an event card, you gain 3 mega credit",
-    "description": "Profiting on every spectacular story"
-}, {
-    "cost": 10,
-    "tags": ["earth"],
-    "name": "Nuclear Zone",
-    "color": "green",
-    "text": "Place this tile and raise temperature 2 steps",
-    "vp": -2,
-    "tile": "Nuclear symbol",
-    "description": "Detonating obsolete nuclear weapons from Earth is an efficient method for raising the temperature"
-}, {
-    "cost": 12,
-    "tags": ["space"],
-    "name": "Toll Station",
-    "color": "green",
-    "text": "Increase your mega credit production 1 step for each space tag your OPPONENTS have",
-    "description": "Licensed by the 'government'"
-}, {
-    "cost": 12,
-    "tags": ["science", "steel"],
-    "name": "Physics Complex",
-    "color": "blue",
-    "action": "Spend 6 energy to add a science resource to this card",
-    "vp": "2 VP for each science resource on this card",
-    "description": "This used to cause blackouts before the invention of supercomputers"
-}, {
-    "cost": 8,
-    "tags": ["science", "power"],
-    "name": "Mass Converter",
-    "color": "blue",
-    "effect": "When you play a space card, you pay 2 mega credit less for it",
-    "text": "Requires 5 science tags. Increase your energy production 6 steps",
-    "description": "E=mc^2. 1 kg = a LOT of energy"
-}, {
-    "cost": 6,
-    "tags": ["plant", "steel"],
-    "name": "Greenhouses",
-    "color": "green",
-    "text": "Gain 1 plant for each city tile in play",
-    "description": "Places to conduct bio research and experiments"
-}, {
-    "cost": 15,
-    "tags": ["steel"],
-    "name": "Artificial Lake",
-    "color": "green",
-    "text": "Requires -6C or warmer. Place 1 ocean tile ON AN AREA NOT RESERVED FOR OCEAN",
-    "vp": 1,
-    "description": "Landscaping is as natural as terraforming"
-}, {
-    "cost": 4,
-    "tags": ["earth"],
-    "name": "Business Network",
-    "color": "blue",
-    "action": "Look at the top card and either buy it or discard it",
-    "text": "Decrease your mega credit production 1 step",
-    "description": "Investing in social events can open up new opportunities"
-}, {
-    "cost": 8,
-    "tags": ["science", "microbe"],
-    "name": "GHG Producing Bacteria",
-    "color": "blue",
-    "action": "Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step",
-    "text": "Requires 4% oxygen",
-    "description": "Working for the biosphere and the atmosphere at the same time"
 }]

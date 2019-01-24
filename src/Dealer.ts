@@ -11,6 +11,7 @@ import { AntiGravityTechnology } from "./cards/AntiGravityTechnology";
 import { Ants } from "./cards/Ants";
 import { AquiferPumping } from "./cards/AquiferPumping";
 import { ArchaeBacteria } from "./cards/ArchaeBacteria";
+import { ArcticAlgae } from "./cards/ArcticAlgae";
 import { ArtificialLake } from "./cards/ArtificialLake";
 import { ArtificialPhotosynthesis } from "./cards/ArtificialPhotosynthesis";
 import { Asteroid } from "./cards/Asteroid";
@@ -53,6 +54,7 @@ import { EcologicalZone } from "./cards/EcologicalZone";
 import { ElectroCatapult } from "./cards/ElectroCatapult";
 import { EnergySaving } from "./cards/EnergySaving";
 import { EnergyTapping } from "./cards/EnergyTapping";
+import { EOSChasmaNationalPark } from "./cards/EOSChasmaNationalPark";
 import { EquatorialMagnetizer } from "./cards/EquatorialMagnetizer";
 import { ExtremeColdFungus } from "./cards/ExtremeColdFungus";
 import { Farming } from "./cards/Farming";
@@ -130,6 +132,7 @@ import { NaturalPreserve } from "./cards/NaturalPreserve";
 import { NitriteReducingBacteria } from "./cards/NitriteReducingBacteria";
 import { NitrogenRichAsteroid } from "./cards/NitrogenRichAsteroid";
 import { NitrophilicMoss } from "./cards/NitrophilicMoss";
+import { NoctisCity } from "./cards/NoctisCity";
 import { NoctisFarming } from "./cards/NoctisFarming";
 import { NuclearPower } from "./cards/NuclearPower";
 import { NuclearZone } from "./cards/NuclearZone";
@@ -140,6 +143,7 @@ import { OreProcessor } from "./cards/OreProcessor";
 import { Pets } from "./cards/Pets";
 import { PermafrostExtraction } from "./cards/PermafrostExtraction";
 import { PeroxidePower } from "./cards/PeroxidePower";
+import { PhobosSpaceHaven } from "./cards/PhobosSpaceHaven";
 import { PhysicsComplex } from "./cards/PhysicsComplex";
 import { Plantation } from "./cards/Plantation";
 import { PowerGrid } from "./cards/PowerGrid";
@@ -157,6 +161,7 @@ import { ReleaseOfInertGases } from "./cards/ReleaseOfInertGases";
 import { Research } from "./cards/Research";
 import { ResearchOutpost } from "./cards/ResearchOutpost";
 import { RestrictedArea } from "./cards/RestrictedArea";
+import { RoboticWorkforce } from "./cards/RoboticWorkforce";
 import { RoverConstruction } from "./cards/RoverConstruction";
 import { Sabotage } from "./cards/Sabotage";
 import { Satellites } from "./cards/Satellites";
@@ -218,6 +223,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new AICentral(),
     new Algae(),
     new ArchaeBacteria(),
+    new ArcticAlgae(),
     new ArtificialLake(),
     new ArtificialPhotosynthesis(),
     new Asteroid(),
@@ -260,6 +266,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new ElectroCatapult(),
     new EnergySaving(),
     new EnergyTapping(),
+    new EOSChasmaNationalPark(),
     new EquatorialMagnetizer(),
     new ExtremeColdFungus(),
     new Farming(),
@@ -336,6 +343,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new NitriteReducingBacteria(),
     new NitrogenRichAsteroid(),
     new NitrophilicMoss(),
+    new NoctisCity(),
     new NoctisFarming(),
     new NuclearPower(),
     new NuclearZone(),
@@ -346,6 +354,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new PermafrostExtraction(),
     new PeroxidePower(),
     new Pets(),
+    new PhobosSpaceHaven(),
     new PhysicsComplex(),
     new Plantation(),
     new PowerGrid(),
@@ -363,6 +372,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new Research(),
     new ResearchOutpost(),
     new RestrictedArea(),
+    new RoboticWorkforce(),
     new RoverConstruction(),
     new Sabotage(),
     new Satellites(),

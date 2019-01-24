@@ -1,5 +1,4 @@
 
-var CARDS = require("../../data/cards.json");
 var CORPORATION_CARDS = require("../../data/corporationCards.json");
 
 import { CorporationCard } from "./CorporationCard";
@@ -68,13 +67,16 @@ export class Game {
     private players: Array<Player> = [];
     private onGreeneryPlaced: Array<Function> = [];
     private onCityTilePlaced: Array<Function> = [];
+    private onOceanTilePlaced: Array<Function> = [];
     public addGreeneryPlacedListener(listener: Function): void {
         this.onGreeneryPlaced.push(listener);
     }
     public addCityTilePlacedListener(listener: Function): void {
         this.onCityTilePlaced.push(listener);
     }
-
+    public addOceanTilePlacedListener(listener: Function): void {
+        this.onOceanTilePlaced.push(listener);
+    }
     private onGameEnd: Array<Function> = [];
     private onGenerationEnd: Array<Function> = [];
 
@@ -284,6 +286,17 @@ export class Game {
     }
     public getPlayers(): Array<Player> {
         return this.players;
+    }
+    public getPlayedCardsWithAnimals(): Array<IProjectCard> {
+        const result: Array<IProjectCard> = [];
+        this.players.forEach((player) => {
+            player.playedCards.forEach((card) => {
+                if (card.animals !== undefined) {
+                    result.push(card);
+                }
+            });
+        });
+        return result;
     }
     public getCard(name: string): IProjectCard | undefined {
         for (let i = 0; i < this.players.length; i++) {

@@ -43,6 +43,7 @@ export class MarsUniversity implements IProjectCard {
                     });
                 });
             }
+            return undefined;
         });
         return Promise.resolve();
     }

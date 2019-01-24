@@ -23,6 +23,7 @@ export class Predators implements IActiveProjectCard {
         game.addGameEndListener(() => {
             player.victoryPoints += this.animals;
         });
+        return Promise.resolve();
     }
     public action(player: Player, game: Game): Promise<void> {
         const animalCards: Array<IProjectCard> = [];

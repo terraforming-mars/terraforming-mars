@@ -23,11 +23,11 @@ export class Mangrove implements IProjectCard {
                 const foundSpace = game.getSpace(options.option1);
                 if (foundSpace === undefined) {
                     reject("Space not found");
-                    return;
+                    return undefined;
                 }
                 if (foundSpace.spaceType !== SpaceType.OCEAN) {
                     reject("Space not an ocean");
-                    return;
+                    return undefined;
                 }
                 return game.addGreenery(player, options.option1, SpaceType.OCEAN).then(function () {
                     player.victoryPoints++;

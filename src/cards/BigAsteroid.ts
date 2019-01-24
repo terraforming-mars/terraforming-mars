@@ -19,15 +19,18 @@ export class BigAsteroid implements IProjectCard {
                 const foundPlayer = game.getPlayerById(playerId);
                 if (foundPlayer === undefined) {
                     reject("Player not found");
-                    return;
+                } else {
+                    game.increaseTemperature(player)
+                        .then(function () { return game.increaseTemperature(player); })
+                        .then(function () {
+                            player.titanium += 4;
+                            foundPlayer.plants = Math.max(foundPlayer.plants - 4, 0);
+                            resolve();
+                        })
+                        .catch((err: string) => {
+                            reject(err);
+                        });
                 }
-                return game.increaseTemperature(player).then(function () {
-                    return game.increaseTemperature(player).then(function () {
-                        player.titanium += 4;
-                        foundPlayer.plants = Math.max(foundPlayer.plants - 4, 0);
-                        resolve();
-                    });
-                });
             });
         });
     }

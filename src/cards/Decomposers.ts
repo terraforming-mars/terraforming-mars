@@ -25,6 +25,7 @@ export class Decomposers implements IProjectCard {
         game.addGameEndListener(() => {
             player.victoryPoints += Math.floor(this.microbes / 3);
         });
+        return Promise.resolve();
     }
 }
 

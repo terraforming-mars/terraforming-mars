@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "lib": ["ES6"],
+    "lib": ["ES6"], 
     "noImplicitAny": true,
+    "noImplicitReturns": true,
     "removeComments": true,
     "preserveConstEnums": true,
     "outDir": "dist",

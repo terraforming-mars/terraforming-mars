@@ -23,7 +23,7 @@ export class WaterSplittingPlant implements IActiveProjectCard {
         return new Promise((resolve, reject) => {
             if (player.energy < 3) {
                 reject("Need 3 energy");
-                return;
+                return undefined;
             }
             return game.increaseOxygenLevel(player).then(function () {
                 player.energy = Math.max(0, player.energy - 3);

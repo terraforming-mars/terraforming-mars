@@ -23,6 +23,7 @@ export class Ants implements IActiveProjectCard {
         game.addGameEndListener(() => {
             player.victoryPoints += Math.floor(this.microbes / 2);
         });
+        return Promise.resolve();
     }
     public action(player: Player, game: Game): Promise<void> {
         const availableCards: Array<IProjectCard> = [];

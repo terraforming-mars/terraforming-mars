@@ -23,15 +23,17 @@ export class InventorsGuild implements IActiveProjectCard {
             player.setWaitingFor(new BuyOrDiscard(this, topCard), (options: {[x: string]: string}) => {
                 if (options.option1 === "DISCARD") {
                     game.dealer.discard(topCard);
-                    return Promise.resolve();
+                    resolve();
                 } else if (options.option1 === "BUY") {
                     if (player.megaCredits < 3) {
                         reject("Can not afford to buy card");
-                        return;
+                    } else {
+                        player.megaCredits -= 3;
+                        player.cardsInHand.push(topCard);
+                        resolve();
                     }
-                    player.megaCredits -= 3;
-                    player.cardsInHand.push(topCard);
-                    resolve();
+                } else {
+                    reject("Unknown selection");
                 }
             });
         });

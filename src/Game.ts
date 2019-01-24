@@ -306,6 +306,7 @@ export class Game {
                 }
             }
         }
+        return undefined;
     }
 }
 

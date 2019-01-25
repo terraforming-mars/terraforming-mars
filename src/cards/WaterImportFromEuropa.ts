@@ -41,7 +41,7 @@ export class WaterImportFromEuropa implements IActiveProjectCard {
                     catch (err) { reject(err); return; }
                     player.titanium -= titanium;
                     player.megaCredits -= megaCredit;
-                    
+                    resolve(); 
                 }
             );
         });

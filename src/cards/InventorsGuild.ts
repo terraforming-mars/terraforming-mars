@@ -14,7 +14,7 @@ export class InventorsGuild implements IActiveProjectCard {
     public actionText = "Look at the top card and either buy it or discard it";
     public description: string = "When great minds meet, new ideas abount";
     public text: string = "";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(_player: Player, _game: Game): Promise<void> {
         return Promise.resolve();
     }
     public action(player: Player, game: Game): Promise<void> {

@@ -1,6 +1,5 @@
 
 import { IProjectCard } from "./IProjectCard";
-import { ISpace } from "../ISpace";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
@@ -9,7 +8,6 @@ import { TileType } from "../TileType";
 
 export class Capital implements IProjectCard {
     public cost: number = 26;
-    private pickedSpace: ISpace;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Capital";
@@ -30,11 +28,11 @@ export class Capital implements IProjectCard {
             }, (spaceName: string) => {
                 try { game.addCityTile(player, spaceName); }
                 catch (err) { reject(err); return; }
-                this.pickedSpace = game.getSpace(spaceName);
+                const pickedSpace = game.getSpace(spaceName);
                 player.energyProduction -= 2;
                 player.megaCreditProduction += 5;
                 game.addGameEndListener(() => {
-                    game.getAdjacentSpaces(this.pickedSpace).forEach((space) => {
+                    game.getAdjacentSpaces(pickedSpace).forEach((space) => {
                         if (space.tile && space.tile.tileType === TileType.OCEAN) {
                             player.victoryPoints++;
                         }

@@ -12,7 +12,7 @@ export class MediaGroup implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "After you play an event card, you gain 3 mega credit";
     public description: string = "Profiting on every spectacular story";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         player.addCardPlayedHandler((card: IProjectCard) => {
             if (card.cardType === CardType.EVENT) {
                 player.megaCredits += 3;

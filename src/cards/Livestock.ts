@@ -29,13 +29,11 @@ export class Livestock implements IActiveProjectCard {
         return Promise.resolve();
     }
     public actionText: string = "Add an animal to this card";
-    public action(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            try {
-                this.animals++;
-            } catch (err) { reject(err); return; }
-            resolve();
-        });
+    public action(_player: Player, _game: Game): Promise<void> {
+        try {
+            this.animals++;
+        } catch (err) { return Promise.reject(err); }
+        return Promise.resolve();
     }
 }
     

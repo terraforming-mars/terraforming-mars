@@ -44,6 +44,7 @@ export class Herbivores implements IProjectCard {
                 game.addGameEndListener(() => {
                     player.victoryPoints += Math.floor(this.animals / 2);
                 });
+                resolve();
             });
         });
     }

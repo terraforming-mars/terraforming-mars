@@ -25,6 +25,7 @@ export class IceCapMelting implements IProjectCard {
             }, (input: string) => {
                 try { game.addOceanTile(player, input); }
                 catch (err) { reject(err); return; }
+                resolve();
             });
         });
     }

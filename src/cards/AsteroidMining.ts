@@ -12,7 +12,7 @@ export class AsteroidMining implements IProjectCard {
     public name: string = "Asteroid Mining";
     public text: string = "Increase your titanium production 2 steps. Gain 2 victory points.";
     public description: string = "Where gravity is low and rare minerals abound.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         player.titaniumProduction += 2;
         player.victoryPoints += 2;
         return Promise.resolve();

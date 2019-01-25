@@ -12,7 +12,7 @@ export class InterstellarColonyShip implements IProjectCard {
     public name: string = "Interstellar Colony Ship";
     public text: string = "Requires 5 science tags. Gain 4 victory points.";
     public description: string = "To new horizons and an unknown galaxy.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         if (player.getTagCount(Tags.SCIENCE) < 5) {
             return Promise.reject("Requires 5 science tags.");
         }

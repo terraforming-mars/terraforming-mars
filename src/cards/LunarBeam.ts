@@ -12,7 +12,7 @@ export class LunarBeam implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease your mega credit production 2 steps and increase your heat production and energy production 2 steps each.";
     public description: string = "A huge energy beam. Difficult to collect, but who cares?";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         player.megaCreditProduction -= 2;
         player.heatProduction += 2;
         player.energyProduction += 2;

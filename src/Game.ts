@@ -1,7 +1,4 @@
 
-var CORPORATION_CARDS = require("../../data/corporationCards.json");
-
-import { CorporationCard } from "./CorporationCard";
 import * as utilities from "./utilities";
 import { Player } from "./Player";
 import { Dealer } from "./Dealer";
@@ -79,12 +76,6 @@ export class Game {
     }
     private onGameEnd: Array<Function> = [];
     private onGenerationEnd: Array<Function> = [];
-
-    // which player will go first
-    // shifts clockwise each generation
-    private firstPlayerIndex: number = 0;
-
-    private phase: string = "research";
 
     private generation: number = 1;
     private oxygenLevel: number = MIN_OXYGEN_LEVEL;
@@ -210,9 +201,9 @@ export class Game {
         space.player = player;
         space.tile = tile;
         if (space.bonus) {
-            space.bonus.forEach(function (spaceBonus) {
+            space.bonus.forEach((spaceBonus) => {
                 if (spaceBonus === SpaceBonus.DRAW_CARD) {
-                    player.cardsInHand.push(this.dealer.getCard(1));
+                    player.cardsInHand.push(this.dealer.getCards(1)[0]);
                 } else if (spaceBonus === SpaceBonus.PLANT) {
                     player.plants++;
                 } else if (spaceBonus === SpaceBonus.STEEL) {
@@ -263,7 +254,7 @@ export class Game {
 
     public addGreenery(player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND): Promise<void> {
         this.addTile(player, spaceType, this.getSpace(spaceId), { tileType: TileType.GREENERY });
-        return this.increaseOxygenLevel(player).then(function () {
+        return this.increaseOxygenLevel(player).then(() => {
             this.onGreeneryPlaced.forEach((fn: Function) => {
                 fn(player);
             });
@@ -276,6 +267,9 @@ export class Game {
         }); 
     }
     public addOceanTile(player: Player, spaceId: string): void {
+        if (this.getOceansOnBoard() - 1 === MAX_OCEAN_TILES) {
+            return;
+        }
         this.addTile(player, SpaceType.OCEAN, this.getSpace(spaceId), { tileType: TileType.OCEAN });
         // No one can own the oceans!
         this.getSpace(spaceId).player = undefined;

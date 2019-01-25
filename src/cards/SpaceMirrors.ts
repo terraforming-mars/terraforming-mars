@@ -13,10 +13,10 @@ export class SpaceMirrors implements IActiveProjectCard {
     public actionText: string = "Spend 7 mega credit to increase your energy production 1 step.";
     public description: string = "Ultrathin mirrors reflecting sunlight down to receivers on the surface.";
     public text: string = "";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(_player: Player, _game: Game): Promise<void> {
         return Promise.resolve();
     }
-    public action(player: Player, game: Game): Promise<void> {
+    public action(player: Player, _game: Game): Promise<void> {
         if (player.megaCredits < 7) {
             return Promise.reject("Requires 7 mega credit");
         }

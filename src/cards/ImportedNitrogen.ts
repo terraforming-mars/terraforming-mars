@@ -12,7 +12,7 @@ export class ImportedNitrogen implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Raise your terraform rating 1 step and gain 4 plants. Add 3 microbes to ANOTHER card and 2 animals to ANOTHER card.";
     public description: string = "Providing nitrogen needed in the atmosphere and for biomass.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
             const availableCards = player.getActiveAndAutomatedCards(); 
             player.setWaitingFor({
@@ -38,6 +38,14 @@ export class ImportedNitrogen implements IProjectCard {
                     const foundCard2 = availableCards.filter((f) => f.name === cardName2)[0];
                     if (foundCard2 === undefined) {
                         reject("Card not found");
+                        return;
+                    }
+                    if (foundCard2.animals === undefined) {
+                        reject("No animals on " + foundCard2.name);
+                        return;
+                    }
+                    if (foundCard1.microbes === undefined) {
+                        reject("No microbes on " + foundCard1.name);
                         return;
                     }
                     foundCard1.microbes += 3;

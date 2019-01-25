@@ -10,9 +10,9 @@ export class EarthOffice implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = "Earth Office";
     public cardType: CardType = CardType.ACTIVE;
-    public text: "When you play an earth tag, you pay 3 mega credit less for it.";
+    public text: string = "When you play an earth tag, you pay 3 mega credit less for it.";
     public description: string = "Coordinating deliveries and homeworld support.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         player.addCardDiscount((card) => {
             if (card.tags.indexOf(Tags.EARTH) !== -1) {
                 return 3;

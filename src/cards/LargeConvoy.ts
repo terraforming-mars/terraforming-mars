@@ -34,6 +34,10 @@ export class LargeConvoy implements IProjectCard {
                             reject("card not found");
                             return;
                         }
+                        if (foundCard.animals === undefined) {
+                            reject("card does not have animals");
+                            return;
+                        }
                         foundCard.animals += 4;
                     }
                     player.cardsInHand.push(game.dealer.getCards(1)[0]);

@@ -11,17 +11,16 @@ export class NitriteReducingBacteria implements IActiveProjectCard {
     public tags: Array<Tags> = [Tags.MICROBES];
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Nitrite Reducing Bacteria";
-    public text: "Add 3 microbes to this card.";
-    public actionText: "Add 1 microbe to this card, or remove 3 microbes to increase your terraform rating 1 step.";
-    public description: "Making use of the nitrites in the ground to release nitrogen into the atmosphere.";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            this.microbes += 3;
-            resolve();
-        });
+    public text: string = "Add 3 microbes to this card.";
+    public actionText: string = "Add 1 microbe to this card, or remove 3 microbes to increase your terraform rating 1 step.";
+    public description: string = "Making use of the nitrites in the ground to release nitrogen into the atmosphere.";
+    public play(_player: Player, _game: Game): Promise<void> {
+        this.microbes += 3;
+        return Promise.resolve();
     }
-    public action(player: Player, game: Game): Promise<void> {
+    public action(player: Player, _game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
+            // TODO - this is OrOption
             player.setWaitingFor({
                 initiator: "card",
                 card: this,

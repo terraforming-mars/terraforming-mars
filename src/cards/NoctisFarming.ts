@@ -11,7 +11,7 @@ export class NoctisFarming implements IProjectCard {
     public name: string = "Noctis Farming";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires -20C or warmer. Increase your mega credit production 1 step and gain 2 plants";
-    public description: "Utilizing the uniquely dense and moist atmosphere in the canyons of Noctis Labyrinthus";
+    public description: string = "Utilizing the uniquely dense and moist atmosphere in the canyons of Noctis Labyrinthus";
     public play(player: Player, game: Game): Promise<void> {
         if (game.getTemperature() < -20) {
             return Promise.reject("Requires -20C or warmer");

@@ -4,7 +4,6 @@ import { CardType } from "./CardType";
 import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { SpaceType } from "../SpaceType";
 
 export class Plantation implements IProjectCard {
     public cost: number = 15;

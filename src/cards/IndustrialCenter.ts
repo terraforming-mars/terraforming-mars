@@ -37,7 +37,7 @@ export class IndustrialCenter implements IActiveProjectCard {
             });
         });
     }
-    public action(player: Player, game: Game): Promise<void> {
+    public action(player: Player, _game: Game): Promise<void> {
         if (player.megaCredits < 7) {
             return Promise.reject("Don't have 7 mega credit to spend");
         }

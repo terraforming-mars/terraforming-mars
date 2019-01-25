@@ -12,7 +12,7 @@ export class AcquiredCompany implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your mega credit production 3 steps";
     public description: string = "This interplanetary company will surely pay off";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         player.megaCreditProduction += 3;
         return Promise.resolve();
     }

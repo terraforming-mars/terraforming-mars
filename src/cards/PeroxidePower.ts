@@ -12,7 +12,7 @@ export class PeroxidePower implements IProjectCard {
     public name: string = "Peroxide Power";
     public text: string = "Decrease your mega credit production 1 step and increase your energy production 2 steps.";
     public description: string = "The Martian ground is full of oxidizing agents.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         player.megaCreditProduction--;
         player.energyProduction += 2;
         return Promise.resolve();

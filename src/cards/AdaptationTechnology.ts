@@ -12,7 +12,7 @@ export class AdaptationTechnology implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "Your global requirements are +2 or -2 steps, your choice in each case";
     public description: string = "Pushing the limits of the possible";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         player.victoryPoints++;
         player.requirementsBonus = 2;
         return Promise.resolve();

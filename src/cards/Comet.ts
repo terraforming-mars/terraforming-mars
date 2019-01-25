@@ -13,7 +13,7 @@ export class Comet implements IProjectCard {
     public text: string = "Raise temperature 1 step and place an ocean tile. Remove up to 3 plants from any player.";
     public description: string = "Prepare to be catered!";
     public play(player: Player, game: Game): Promise<void> {
-        return game.increaseTemperature(player).then(function () {
+        return game.increaseTemperature(player).then(() => {
             return new Promise<void>((resolve, reject) => {
                 player.setWaitingFor({
                     initiator: "card",

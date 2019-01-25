@@ -20,7 +20,7 @@ export class PhysicsComplex implements IActiveProjectCard {
         });
         return Promise.resolve();
     }
-    public action(player: Player, game: Game): Promise<void> {
+    public action(player: Player, _game: Game): Promise<void> {
         if (player.energy < 6) {
             return Promise.reject("Requires 6 energy");
         }

@@ -12,12 +12,10 @@ export class IndustrialMicrobes implements IProjectCard {
     public name: string = "Industrial Microbes";
     public text: string = "Increase your energy production and your steel production 1 step each";
     public description: string = "Fuel production and metal refining can be programmed into microorganisms";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.energyProduction++;
-            player.steelProduction++;
-            resolve();
-        });
+    public play(player: Player, _game: Game): Promise<void> {
+        player.energyProduction++;
+        player.steelProduction++;
+        return Promise.resolve();
     }
 }
  

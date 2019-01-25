@@ -51,9 +51,9 @@ export class ImportedHydrogen implements IProjectCard {
                         reject("Card not found");
                         return;
                     }
-                    if (foundCard.microbes >= 0) {
+                    if (foundCard.microbes !== undefined) {
                         foundCard.microbes += 3;
-                    } else if (foundCard.animals >= 0) {
+                    } else if (foundCard.animals !== undefined) {
                         foundCard.animals += 2;
                     }
                 }

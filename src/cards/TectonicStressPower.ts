@@ -12,15 +12,12 @@ export class TectonicStressPower implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires 2 science tags. Increase your energy production 3 steps. Gain 1 VP";
     public description: string = "After finding ways to predict earthquakes, it was only a matter of time before it became feasible to exploit the enormous energies involves.";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            if (player.getTagCount(Tags.SCIENCE) < 2) {
-                reject("Requires 2 science tags");
-                return;
-            }
-            player.energyProduction += 3;
-            player.victoryPoints++;
-            resolve(); 
-        });
+    public play(player: Player, _game: Game): Promise<void> {
+        if (player.getTagCount(Tags.SCIENCE) < 2) {
+            return Promise.reject("Requires 2 science tags");
+        }
+        player.energyProduction += 3;
+        player.victoryPoints++;
+        return Promise.resolve();
     }
 }

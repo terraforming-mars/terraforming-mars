@@ -12,10 +12,8 @@ export class Cartel implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your mega credit production 1 step for each Earth tag you have, including this.";
     public description: string = "We see it as a brotherhood.";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.megaCreditProduction += player.getTagCount(Tags.EARTH) + 1;
-            resolve();
-        });
+    public play(player: Player, _game: Game): Promise<void> {
+        player.megaCreditProduction += player.getTagCount(Tags.EARTH) + 1;
+        return Promise.resolve();
     }
 }

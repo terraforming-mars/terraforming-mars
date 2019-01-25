@@ -29,7 +29,7 @@ export class Ants implements IActiveProjectCard {
         const availableCards: Array<IProjectCard> = [];
         game.getPlayers().forEach((gamePlayer) => {
             gamePlayer.playedCards.forEach((playedCard) => {
-                if (playedCard.microbes > 0) {
+                if (playedCard.microbes !== undefined && playedCard.microbes > 0) {
                     availableCards.push(playedCard);
                 }
             });
@@ -42,6 +42,10 @@ export class Ants implements IActiveProjectCard {
                 const foundCard = availableCards.filter((card) => card.name === options.option1)[0];
                 if (foundCard === undefined) {
                     reject("Card not found");
+                    return;
+                }
+                if (foundCard.microbes === undefined) {
+                    reject("Card does not take microbes");
                     return;
                 }
                 foundCard.microbes--;

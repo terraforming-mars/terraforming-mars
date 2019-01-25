@@ -16,7 +16,7 @@ export class BusinessNetwork implements IActiveProjectCard {
     public actionText: string = "Look at the top card and either buy it or discard it.";
     public text: string = "Decrease your mega credit production 1 step.";
     public description: string = "Investing in social events can open up new opportunities.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         player.megaCreditProduction--;
         return Promise.resolve();
     }

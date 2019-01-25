@@ -12,7 +12,7 @@ export class CallistoPenalMines implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your mega credit production 3 steps. Gain 2 victory points.";
     public description: string = "You always wanted to be a warden, didn't you?";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         player.megaCreditProduction += 3;
         player.victoryPoints += 2;
         return Promise.resolve();

@@ -6,14 +6,13 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 
 export class AquiferPumping implements IActiveProjectCard {
-    public cost: 18;
+    public cost: number = 18;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Aquifer Pumping";
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "";
     public description: string = "Underground water reservoirs may be tapped in a controlled manner, to safely build up oceans to the desired level";
-    public play(player: Player, game: Game): Promise<void> {
-        // Nothing happens when played
+    public play(_player: Player, _game: Game): Promise<void> {
         return Promise.resolve();
     }
     public actionText: string = "Spend 8 mega credits to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.";

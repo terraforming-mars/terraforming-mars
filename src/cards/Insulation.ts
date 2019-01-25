@@ -12,7 +12,7 @@ export class Insulation implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease your heat production any number of steps and increase your mega credit production the same number of steps";
     public description: string = "Better insulation means lower energy spending";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
             player.setWaitingFor({
                 initiator: "card",

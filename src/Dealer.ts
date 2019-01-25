@@ -291,6 +291,7 @@ const ALL_CARDS: Array<IProjectCard> = [
     new Heather(),
     new HeatTrappers(),
     new Herbivores(),
+    new HiredRaiders(),
     new IceAsteroid(),
     new IceCapMelting(),
     new ImmigrantCity(),
@@ -421,10 +422,34 @@ const ALL_CARDS: Array<IProjectCard> = [
 ];
 
 export class Dealer {
+    constructor() {
+        this.deck = this.shuffleCards(ALL_CARDS);
+    }
+    private shuffleCards(cards: Array<IProjectCard>): Array<IProjectCard> {
+        const deck: Array<IProjectCard> = [];
+        const copy = cards.slice();
+        while (copy.length) {
+            deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
+        }
+        return deck;
+    }
+    private deck: Array<IProjectCard> = [];
+    private discarded: Array<IProjectCard> = [];
     public discard(card: IProjectCard): void {
-
+        this.discarded.push(card);
     }
     public getCards(count: number): Array<IProjectCard> {
-        return [];
+        const result: Array<IProjectCard> = [];
+        while (result.length < count) {
+            if (this.deck.length === 0) {
+                this.deck = this.shuffleCards(this.discarded);
+                this.discarded = [];
+            }
+            const card = this.deck.pop();
+            if (card !== undefined) {
+                result.push(card);
+            }
+        }
+        return result;
     }    
 }

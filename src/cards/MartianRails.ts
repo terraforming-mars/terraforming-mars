@@ -13,7 +13,7 @@ export class MartianRails implements IActiveProjectCard {
     public actionText: string = "Spend 1 energy to gain 1 mega credit for each city tile on mars.";
     public description: string = "Fast and cheap transportation for goods and guys";
     public text: string = "";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(_player: Player, _game: Game): Promise<void> {
         return Promise.resolve();
     }
     public action(player: Player, game: Game): Promise<void> {

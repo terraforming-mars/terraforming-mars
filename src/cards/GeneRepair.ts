@@ -12,7 +12,7 @@ export class GeneRepair implements IProjectCard {
     public name: string = "Gene Repair";
     public text: string = "Requires 3 science tags. Increase your mega credit production 2 steps. Gain 2 victory points.";
     public description: string = "Counters the inevitable damage from cosmis radiation and reverses many aging symptoms";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         if (player.getTagCount(Tags.SCIENCE) < 3) {
             return Promise.reject("Requires 3 science tags.");
         }

@@ -16,7 +16,7 @@ export class RegolithEaters implements IActiveProjectCard {
     public actionText: string = "Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.";
     public description: string = "Living on the rocks and excreting oxygen.";
     public microbes: number = 0;
-    public play(player: Player, game: Game): Promise<void> {
+    public play(_player: Player, _game: Game): Promise<void> {
         return Promise.resolve();
     }
     public action(player: Player, game: Game): Promise<void> {

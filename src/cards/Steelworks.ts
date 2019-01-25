@@ -22,7 +22,7 @@ export class Steelworks implements IActiveProjectCard {
             player.steel += 2;
         });
     }
-    public play(player: Player, game: Game): Promise<void> {
+    public play(_player: Player, _game: Game): Promise<void> {
         return Promise.resolve();
     }
 }

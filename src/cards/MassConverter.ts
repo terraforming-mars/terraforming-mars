@@ -12,7 +12,7 @@ export class MassConverter implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "When you play a space card, you pay 2 mega credit less for it. Requires 5 science tags. Increase your energy production 6 steps.";
     public description: string = "E=mc^2. 1 kg = a LOT of energy";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         if (player.getTagCount(Tags.SCIENCE) < 5) {
             return Promise.reject("Requires 5 science tags.");
         }

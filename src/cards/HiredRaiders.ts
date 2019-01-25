@@ -33,6 +33,7 @@ export class HiredRaiders implements IProjectCard {
                     foundPlayer.megaCredits = Math.max(0, foundPlayer.megaCredits - 3);
                     player.megaCredits += starting - foundPlayer.megaCredits;
                 }
+                resolve();
             });
         });
     }

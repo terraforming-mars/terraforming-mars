@@ -13,13 +13,12 @@ export class StandardTechnology implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public description: string = "Standard solutions honed to perfection";
     public text: string = "After you pay for a standard project, except selling patents, you gain 3 mega credits";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.addStandardProjectHandler((projectType: StandardProjectType) => {
-                if (projectType !== StandardProjectType.SELLING_PATENTS) {
-                    player.megaCredits += 3;
-                }
-            });
+    public play(player: Player, _game: Game): Promise<void> {
+        player.addStandardProjectHandler((projectType: StandardProjectType) => {
+            if (projectType !== StandardProjectType.SELLING_PATENTS) {
+                player.megaCredits += 3;
+            }
         });
+        return Promise.resolve();
     }
 }

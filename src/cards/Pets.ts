@@ -16,6 +16,7 @@ export class Pets implements IProjectCard {
     }
     public set animals(newAnimals: number) {
         if (newAnimals < this._animals) {
+            // TODO - wont scale
             throw "ANIMALS MAY NOT BE REMOVED FROM THIS CARD";
         }
         this._animals = newAnimals;
@@ -23,16 +24,14 @@ export class Pets implements IProjectCard {
     public text: string = "ANIMALS MAY NOT BE REMOVED FROM THIS CARD. Add 1 animal to this card.";
     public description: string = "It wouldn't be the same without them";
     public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            game.addCityTilePlacedListener(() => {
-                this._animals++;
-            });
-            // 1 VP per 2 animals on card
-            game.addGameEndListener(() => {
-                player.victoryPoints += Math.floor(this._animals / 2);
-            });
+        game.addCityTilePlacedListener(() => {
             this._animals++;
-            resolve();
         });
+        // 1 VP per 2 animals on card
+        game.addGameEndListener(() => {
+            player.victoryPoints += Math.floor(this._animals / 2);
+        });
+        this._animals++;
+        return Promise.resolve();
     }
 }

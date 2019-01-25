@@ -29,7 +29,7 @@ export class Predators implements IActiveProjectCard {
         const animalCards: Array<IProjectCard> = [];
         game.getPlayers().forEach((otherPlayer) => {
             otherPlayer.playedCards.forEach((card) => {
-                if (card.animals > 0) {
+                if (card.animals !== undefined && card.animals > 0) {
                     animalCards.push(card);
                 }
             });
@@ -39,6 +39,10 @@ export class Predators implements IActiveProjectCard {
                 const foundCard: IProjectCard | undefined = animalCards.filter((card) => card.name === options.option1)[0];
                 if (foundCard === undefined) {
                     reject("Card not found");
+                    return;
+                }
+                if (foundCard.animals === undefined) {
+                    reject("Card does not have animals");
                     return;
                 }
                 if (foundCard.animals < 1) {

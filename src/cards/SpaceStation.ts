@@ -12,7 +12,7 @@ export class SpaceStation implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "When you play a space card, you pay 2 mega credits less for it. Gain 1 victory point.";
     public description: string = "Buy it today at www.fryxgames.se";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         player.addCardDiscount((card) => {
             if (card.tags.indexOf(Tags.SPACE) !== -1) {
                 return 2;

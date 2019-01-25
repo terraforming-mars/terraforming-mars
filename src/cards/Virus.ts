@@ -43,6 +43,10 @@ export class Virus implements IProjectCard {
                             reject("Card not found");
                             return;
                         }
+                        if (foundCard.animals === undefined) {
+                            reject("No animals on selected card");
+                            return;
+                        }
                         foundCard.animals = Math.max(0, foundCard.animals - 2);
                     } else {
                         reject("Unknown selection");

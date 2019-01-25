@@ -20,7 +20,7 @@ export class Tardigrades implements IActiveProjectCard {
         });
         return Promise.resolve();
     }
-    public action(player: Player, game: Game): Promise<void> {
+    public action(_player: Player, _game: Game): Promise<void> {
         this.microbes++;
         return Promise.resolve();
     }

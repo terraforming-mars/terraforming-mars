@@ -13,15 +13,15 @@ export class ExtremeColdFungus implements IActiveProjectCard {
     public actionText: string = "Gain 1 plant or add 2 microbes to ANOTHER card.";
     public text: string = "It must be -10C or colder";
     public description: string = "Adapted strains able to form symbiotic relationships with other organisms";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(_player: Player, game: Game): Promise<void> {
         if (game.getTemperature() > -10) {
             return Promise.reject("It must be -10C or colder");
         }
         return Promise.resolve();
     }
-    public action(player: Player, game: Game): Promise<void> {
+    public action(player: Player, _game: Game): Promise<void> {
         const availableCards = player.playedCards.filter((card) => {
-            return card.name !== this.name && card.microbes >= 0;
+            return card.name !== this.name && card.microbes !== undefined;
         });
         return new Promise((resolve, reject) => {
             player.setWaitingFor({
@@ -38,6 +38,8 @@ export class ExtremeColdFungus implements IActiveProjectCard {
                     const foundCard = availableCards.filter((card) => card.name === option)[0];
                     if (foundCard === undefined) {
                         reject("Card not found");
+                    } else if (foundCard.microbes === undefined) {
+                        reject("Card does not have microbes");
                     } else {
                         foundCard.microbes += 2;
                         resolve();

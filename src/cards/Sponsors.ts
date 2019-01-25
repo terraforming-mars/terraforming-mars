@@ -12,7 +12,7 @@ export class Sponsors implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your mega credit production 2 steps";
     public description: string = "Willing to support your projects";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         player.megaCreditProduction += 2;
         return Promise.resolve();
     }

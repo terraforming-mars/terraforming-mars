@@ -13,7 +13,7 @@ export class DevelopmentCenter implements IActiveProjectCard {
     public actionText: string = "Spend 1 energy to draw a card.";
     public text: string = "";
     public description: string = "Ensuring a constant influx of ideas.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(_player: Player, _game: Game): Promise<void> {
         return Promise.resolve();
     }
     public action(player: Player, game: Game): Promise<void> {

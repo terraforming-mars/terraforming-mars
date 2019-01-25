@@ -12,7 +12,7 @@ export class AdaptedLichen implements IProjectCard {
     public name: string = "Adapted Lichen";
     public text: string = "Increase your plant production 1 step";
     public description: string = "Suitable even for early terraforming";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         player.plantProduction++;
         return Promise.resolve();
     }

@@ -16,7 +16,7 @@ export class GHGProducingBacteria implements IActiveProjectCard {
     public microbes: number = 0;
     public text: string = "Requires 4% oxygen";
     public description: string = "Working for the biosphere and the atmosphere at the same time.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(_player: Player, game: Game): Promise<void> {
         if (game.getOxygenLevel() < 4) {
             return Promise.reject("Requires 4% oxygen");
         }

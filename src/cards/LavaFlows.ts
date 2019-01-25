@@ -28,7 +28,10 @@ export class LavaFlows implements IProjectCard {
                 }
                 try { game.addTile(player, SpaceType.LAND, game.getSpace(spaceId as string), { tileType: TileType.SPECIAL }); }
                 catch (err) { reject(err); return undefined; }
-                return game.increaseTemperature(player).then(function () { return game.increaseTemperature(player); });
+                return game.increaseTemperature(player)
+                        .then(function () { return game.increaseTemperature(player); })
+                        .then(function () { resolve(); })
+                        .catch(function (err: string) { reject(err); });
             });
         });
     }

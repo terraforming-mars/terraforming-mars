@@ -12,7 +12,7 @@ export class GeothermalPower implements IProjectCard {
     public name: string = "Geothermal Power";
     public text: string = "Increase your energy production 2 steps.";
     public description: string = "Utilizing heat from the core through the cracks in the crust.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         player.energyProduction += 2;
         return Promise.resolve();
     }

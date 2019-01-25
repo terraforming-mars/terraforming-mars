@@ -13,7 +13,7 @@ export class Ironworks implements IActiveProjectCard {
     public actionText: string = "Spend 4 energy to gain 1 steel and increase oxygen 1 step";
     public text: string = "";
     public description: string = "Electrolysis of Martian soil yields both iron and oxygen, making it an important part of terraforming.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(_player: Player, _game: Game): Promise<void> {
         return Promise.resolve();
     }
     public action(player: Player, game: Game): Promise<void> {

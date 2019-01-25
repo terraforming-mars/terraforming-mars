@@ -81,7 +81,9 @@ export class Player {
         this.playedCards.forEach((card: IProjectCard) => {
             tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
         });
-        tagCount += this.corporationCard.tags.filter((cardTag) => cardTag === tag).length;
+        if (this.corporationCard !== undefined) {
+            tagCount += this.corporationCard.tags.filter((cardTag) => cardTag === tag).length;
+        }
         return tagCount;
     }
     public getActiveAndAutomatedCards(): Array<IProjectCard> {
@@ -109,7 +111,7 @@ export class Player {
 
     private waitingFor?: Array<PlayerInput>;
 
-    public setWaitingFor(input: Array<PlayerInput> | PlayerInput | undefined, inputHandler?: Function): void {
+    public setWaitingFor(input: Array<PlayerInput> | PlayerInput | undefined, _inputHandler?: Function): void {
         if (input === undefined) {
             this.waitingFor = undefined;
             return;

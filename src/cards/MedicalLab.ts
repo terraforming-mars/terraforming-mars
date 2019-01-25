@@ -12,7 +12,7 @@ export class MedicalLab implements IProjectCard {
     public name: string = "Medical Lab";
     public text: string = "Increase your mega credit production 1 step for every 2 building tags you have, including this. Gain 1 victory point.";
     public description: string = "Providing health care for the public can be lucrative, as well as noble.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         player.megaCreditProduction += Math.floor((player.getTagCount(Tags.STEEL) + 1) / 2);
         player.victoryPoints++;
         return Promise.resolve();

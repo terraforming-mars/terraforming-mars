@@ -12,7 +12,7 @@ export class FueledGenerators implements IProjectCard {
     public name: string = "Fueled Generators";
     public text: string = "Decrease your mega credit production 1 step and increase your energy production 1 step";
     public description: string = "Simple but limited power supply";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         player.megaCreditProduction--;
         player.energyProduction++;
         return Promise.resolve();

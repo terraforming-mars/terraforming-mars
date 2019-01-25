@@ -12,8 +12,8 @@ export class EarthCatapult implements IProjectCard {
     public text: string = "When you play a card, you pay 2 mega credits less for it. Gain 2 victory points.";
     public cardType: CardType = CardType.ACTIVE;
     public description: string = "When export from Earth becomes easier, everything gets cheaper.";
-    public play(player: Player, game: Game): Promise<void> {
-        player.addCardDiscount((card) => {
+    public play(player: Player, _game: Game): Promise<void> {
+        player.addCardDiscount(() => {
             return 2;
         });
         player.victoryPoints += 2;

@@ -34,7 +34,7 @@ export class Fish implements IActiveProjectCard {
             });
         });
     }
-    public action(player: Player, game: Game): Promise<void> {
+    public action(_player: Player, _game: Game): Promise<void> {
         this.animals++;
         return Promise.resolve();
     }

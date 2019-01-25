@@ -25,6 +25,10 @@ export class EOSChasmaNationalPark implements IProjectCard {
                     reject("Card not found");
                     return;
                 }
+                if (foundCard.animals === undefined) {
+                    reject("Card does not take animals");
+                    return;
+                }
                 foundCard.animals++;
                 player.plants += 3;
                 player.megaCreditProduction += 2;

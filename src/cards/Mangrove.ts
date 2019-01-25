@@ -31,6 +31,7 @@ export class Mangrove implements IProjectCard {
                 }
                 return game.addGreenery(player, options.option1, SpaceType.OCEAN).then(function () {
                     player.victoryPoints++;
+                    resolve();
                 });
             });
         });

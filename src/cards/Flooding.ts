@@ -23,7 +23,12 @@ export class Flooding implements IProjectCard {
                 try { game.addOceanTile(player, spaceId); }
                 catch (err) { reject(err); return; }
                 player.setWaitingFor(undefined); // we are done with the first request
-                const adjacentPlayers = game.getAdjacentSpaces(space).filter((space) => space.player).map((space) => space.player);
+                const adjacentPlayers: Array<Player> = [];
+                game.getAdjacentSpaces(space).forEach((space) => {
+                    if (space.player) {
+                        adjacentPlayers.push(space.player);
+                    }
+                });
                 if (adjacentPlayers.length) {
                     player.setWaitingFor({
                         initiator: "card",

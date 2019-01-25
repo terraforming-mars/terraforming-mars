@@ -12,7 +12,7 @@ export class CEOsFavoriteProject implements IProjectCard {
     public name: string = "CEO's Favorite Project";
     public text: string = "ADD 1 RESOURCE TO A CARD WITH AT LEAST 1 RESOURCE ON IT";
     public description: string = "Having the top man's attention, the involved people are sure to do their best";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
             const availableCards = player.getCardsWithResources().filter((card) => card.animals || card.microbes || card.fighterResources || card.scienceResources);
             player.setWaitingFor({

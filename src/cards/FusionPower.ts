@@ -12,15 +12,12 @@ export class FusionPower implements IProjectCard {
     public name: string = "Fusion Power";
     public text: string = "Requires 2 power tags. Increase your energy production 3 steps";
     public description: string = "State of the art technology";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            if (player.getTagCount(Tags.ENERGY) < 2) {
-                reject("Requires 2 power tags");
-                return;
-            }
-            player.energyProduction += 3;
-            resolve();
-        });
+    public play(player: Player, _game: Game): Promise<void> {
+        if (player.getTagCount(Tags.ENERGY) < 2) {
+            return Promise.reject("Requires 2 power tags");
+        }
+        player.energyProduction += 3;
+        return Promise.resolve();
     }
 }
 

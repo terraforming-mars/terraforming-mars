@@ -1,6 +1,7 @@
 
 import { Game } from "./src/Game";
 
-var game = new Game();
+// trial run for development
+const game = new Game();
 console.log("Oceans on board", game.getOceansOnBoard());
 

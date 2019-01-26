@@ -1,4 +1,21 @@
 
+// Corporation Cards
+import { BeginnerCorporation } from "./cards/corporation/BeginnerCorporation";
+import { CorporationCard } from "./cards/corporation/CorporationCard";
+import { CrediCor } from "./cards/corporation/CrediCor";
+import { EcoLine } from "./cards/corporation/EcoLine";
+import { Helion } from "./cards/corporation/Helion";
+import { InterplanetaryCinematics } from "./cards/corporation/InterplanetaryCinematics";
+import { Inventrix } from "./cards/corporation/Inventrix";
+import { MiningGuild } from "./cards/corporation/MiningGuild";
+import { PhoboLog } from "./cards/corporation/PhoboLog";
+import { SaturnSystems } from "./cards/corporation/SaturnSystems";
+import { Teractor } from "./cards/corporation/Teractor";
+import { TharsisRepublic } from "./cards/corporation/TharsisRepublic";
+import { Thorgate } from "./cards/corporation/Thorgate";
+import { UnitedNationsMarsInitiative } from "./cards/corporation/UnitedNationsMarsInitiative";
+
+// Project Cards
 import { AcquiredCompany } from "./cards/AcquiredCompany";
 import { AdaptationTechnology } from "./cards/AdaptationTechnology";
 import { AdaptedLichen } from "./cards/AdaptedLichen";
@@ -210,7 +227,22 @@ import { Zeppelins } from "./cards/Zeppelins";
 
 import { IProjectCard } from "./cards/IProjectCard";
 
-const ALL_CARDS: Array<IProjectCard> = [
+const ALL_CORPORATION_CARDS: Array<CorporationCard> = [
+    new CrediCor(),
+    new EcoLine(),
+    new Helion(),
+    new InterplanetaryCinematics(),
+    new Inventrix(),
+    new MiningGuild(),
+    new PhoboLog(),
+    new SaturnSystems(),
+    new Teractor(),
+    new TharsisRepublic(),
+    new Thorgate(),
+    new UnitedNationsMarsInitiative()
+];
+
+const ALL_PROJECT_CARDS: Array<IProjectCard> = [
     new AcquiredCompany(),
     new AdaptationTechnology(),
     new AdaptedLichen(),
@@ -422,11 +454,20 @@ const ALL_CARDS: Array<IProjectCard> = [
 ];
 
 export class Dealer {
+    private corporationCards: Array<CorporationCard> = [];
+    private beginnerCard: BeginnerCorporation = new BeginnerCorporation();
     constructor() {
-        this.deck = this.shuffleCards(ALL_CARDS);
+        this.corporationCards = this.shuffleCards(ALL_CORPORATION_CARDS);
+        this.deck = this.shuffleCards(ALL_PROJECT_CARDS);
     }
-    private shuffleCards(cards: Array<IProjectCard>): Array<IProjectCard> {
-        const deck: Array<IProjectCard> = [];
+    public getBeginnerCard(): CorporationCard {
+        return this.beginnerCard;
+    }
+    public getCorporationCards(count: number): Array<CorporationCard> {
+        return this.corporationCards.splice(0, count);
+    }
+    private shuffleCards(cards: Array<any>): Array<any> {
+        const deck: Array<any> = [];
         const copy = cards.slice();
         while (copy.length) {
             deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);

@@ -14,6 +14,9 @@ export class Player {
     public corporationCardsDealt: Array<CorporationCard> = [];
     public corporationCard: CorporationCard | undefined = undefined;
 
+    public canUseHeatAsMegaCredits: boolean = false;
+    public greeneryCost: number = 8;
+    public powerPlantCost: number = 11;
     public opponentsCanRemovePlants: boolean = true;
     public opponentsCanRemoveAnimals: boolean = true;
     public opponentsCanRemoveMicrobes: boolean = true;
@@ -31,6 +34,7 @@ export class Player {
     public heat: number = 0;
     public heatProduction: number = 0;
     public onCardSelected: Function | undefined;
+    public onTilePlaced: Function = () => {};
     public plants: number = 0;
     public plantProduction: number = 0;
     public cardsInHand: Array<IProjectCard> = [];

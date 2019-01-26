@@ -1,0 +1,29 @@
+
+import { Tags } from "../Tags";
+import { Player } from "../../Player";
+import { Game } from "../../Game";
+import { CorporationCard } from "./CorporationCard";
+import { IProjectCard } from "../IProjectCard";
+
+export class SaturnSystems extends CorporationCard {
+    public name: string = "Saturn Systems";
+    public tags: Array<Tags> = [Tags.JOVIAN];
+    public startingMegaCredits: number = 42;
+    public text: string = "You start with 1 titanium production";
+    public effect: string = "Each time any jovian tag is put into play, including this, increase your mega credit production 1 step.";
+    public description: string = "Having acquired the mining rights on several of Saturn's moons, Saturn Systems gained plenty of experience over the years. As a supplier of rare minerals, space ships, and fuel, the company has made itself indispensible to the outer planets. Saturn Systems is now ready to play a key role in the terraforming of Mars.";
+    public play(player: Player, game: Game): Promise<void> {
+        player.titaniumProduction = 1;
+        game.getPlayers().forEach((player) => {
+            player.addCardPlayedHandler((card: IProjectCard) => {
+                for (const tag of card.tags) {
+                    if (tag === Tags.JOVIAN) {
+                        player.megaCreditProduction++;
+                    }
+                }
+            });
+        });
+        player.megaCreditProduction++;
+        return Promise.resolve();
+    }
+}

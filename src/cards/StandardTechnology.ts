@@ -1,4 +1,5 @@
 
+import { StandardProject } from "../StandardProject";
 import { StandardProjectType } from "../StandardProjectType";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
@@ -14,8 +15,8 @@ export class StandardTechnology implements IProjectCard {
     public description: string = "Standard solutions honed to perfection";
     public text: string = "After you pay for a standard project, except selling patents, you gain 3 mega credits";
     public play(player: Player, _game: Game): Promise<void> {
-        player.addStandardProjectHandler((projectType: StandardProjectType) => {
-            if (projectType !== StandardProjectType.SELLING_PATENTS) {
+        player.addStandardProjectHandler((project: StandardProject) => {
+            if (project.projectType !== StandardProjectType.SELLING_PATENTS) {
                 player.megaCredits += 3;
             }
         });

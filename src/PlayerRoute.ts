@@ -8,7 +8,7 @@ export class PlayerRoute {
     }
     public playCard(gameId: string, playerId: string, cardName: string, howToPay: HowToPay): void {
         const game = this.application.getGameById(gameId);
-        const player = game.getPlayerById(playerId);
+        const player = game.getPlayer(playerId);
         const card = player.getCard(cardName);
         // Can pay using steel
         if (card.tags.indexOf(Tags.STEEL) !== -1) {

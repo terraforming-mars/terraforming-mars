@@ -4,6 +4,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { Tags } from "./Tags";
+import { SelectPlayer } from "../inputs/SelectPlayer";
 
 export class Hackers implements IProjectCard {
     public cost: number = 3;
@@ -17,13 +18,8 @@ export class Hackers implements IProjectCard {
             return Promise.reject("Must have energy production to decrease");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectAPlayer",
-                players: game.getPlayers()
-            }, (playerId: string) => {
-                const foundPlayer = game.getPlayerById(playerId);
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (options: {[x: string]: string}) => {
+                const foundPlayer = game.getPlayer(options.option1);
                 if (foundPlayer === undefined) {
                     reject("Player not found");
                     return;

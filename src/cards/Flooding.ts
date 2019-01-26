@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardType } from "./CardType";
+import { SelectPlayer } from "../inputs/SelectPlayer";
 
 export class Flooding implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
@@ -30,13 +31,8 @@ export class Flooding implements IProjectCard {
                     }
                 });
                 if (adjacentPlayers.length) {
-                    player.setWaitingFor({
-                        initiator: "card",
-                        card: this,
-                        type: "SelectAPlayer",
-                        players: adjacentPlayers
-                    }, (playerId: string) => {
-                        game.getPlayerById(playerId).megaCredits = Math.max(game.getPlayerById(playerId).megaCredits - 4, 0);
+                    player.setWaitingFor(new SelectPlayer(this, adjacentPlayers, "Select adjacent tile owner"), (options: {[x: string]: string}) => {
+                        game.getPlayer(options.option1).megaCredits = Math.max(game.getPlayer(options.option1).megaCredits - 4, 0);
                         player.victoryPoints--;
                         resolve();
                     });

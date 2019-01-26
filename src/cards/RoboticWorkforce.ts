@@ -132,8 +132,8 @@ export class RoboticWorkforce implements IProjectCard {
                 }
                 // this is the only card which requires additional user input
                 if (foundCard.name === new BiomassCombustors().name) {
-                    player.setWaitingFor(new SelectPlayer(this), (subOptions: {[x: string]: string}) => {
-                        const foundPlayer = game.getPlayerById(subOptions.option1);
+                    player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (subOptions: {[x: string]: string}) => {
+                        const foundPlayer = game.getPlayer(subOptions.option1);
                         if (foundPlayer === undefined) {
                             reject("Player not found");
                             return;

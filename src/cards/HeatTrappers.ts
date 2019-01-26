@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { SelectPlayer } from "../inputs/SelectPlayer";
 
 export class HeatTrappers implements IProjectCard {
     public cost: number = 6;
@@ -14,24 +15,18 @@ export class HeatTrappers implements IProjectCard {
     public description: string = "Utilizing temperature gradients for energy production";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            const inputHandler = (actionName: string, input: string) => {
-                if (actionName === "HeatTrappers") {
-                    const otherPlayer = game.getPlayerById(input);
-                    if (otherPlayer === undefined) {
-                        reject("player not found");
-                    } else {
-                        otherPlayer.heatProduction = Math.max(otherPlayer.heatProduction - 2, 0);
-                        player.energyProduction++;
-                        player.victoryPoints--;
-                        resolve();
-                    }
+            const inputHandler = (options: {[x: string]: string}) => {
+                const otherPlayer = game.getPlayer(options.option1);
+                if (otherPlayer === undefined) {
+                    reject("player not found");
+                } else {
+                    otherPlayer.heatProduction = Math.max(otherPlayer.heatProduction - 2, 0);
+                    player.energyProduction++;
+                    player.victoryPoints--;
+                    resolve();
                 }
             };
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectAPlayer"
-            }, inputHandler);
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), inputHandler);
         });
     }
 }

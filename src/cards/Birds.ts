@@ -20,8 +20,8 @@ export class Birds implements IActiveProjectCard {
             return Promise.reject("Requires 13% oxygen");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this), (options: {[x: string]: string}) => {
-                const foundPlayer = game.getPlayerById(options.option1);
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (options: {[x: string]: string}) => {
+                const foundPlayer = game.getPlayer(options.option1);
                 if (foundPlayer === undefined) {
                     reject("Player not found");
                     return;

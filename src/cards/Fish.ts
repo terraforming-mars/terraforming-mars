@@ -20,8 +20,8 @@ export class Fish implements IActiveProjectCard {
             return Promise.reject("Requires +2C or warmer");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this), (playerId: string) => {
-                const foundPlayer = game.getPlayerById(playerId);
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (options: {[x: string]: string}) => {
+                const foundPlayer = game.getPlayer(options.option1);
                 if (foundPlayer === undefined) {
                     reject("Player not found");
                     return;

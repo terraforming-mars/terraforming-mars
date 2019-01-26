@@ -1,15 +1,16 @@
 
 import { IProjectCard } from "./cards/IProjectCard";
-import { CorporationCard } from "./CorporationCard";
+import { CorporationCard } from "./cards/corporation/CorporationCard";
 import { CardDiscount } from "./CardDiscount";
 import { Tags } from "./cards/Tags";
 import { PlayerInput } from "./PlayerInput";
 import { CardType } from "./cards/CardType";
-
-const utilities = require("./utilities");
+import { Color } from "./Color";
 
 export class Player {
-    public id: string = utilities.generateUUID();
+    constructor(public name: string, public color: Color, public beginner: boolean) {
+
+    }
 
     public corporationCardsDealt: Array<CorporationCard> = [];
     public corporationCard: CorporationCard | undefined = undefined;
@@ -39,7 +40,6 @@ export class Player {
     public plantProduction: number = 0;
     public cardsInHand: Array<IProjectCard> = [];
     public playedCards: Array<IProjectCard> = [];
-    public color: string | undefined;
     private cardDiscounts: Array<CardDiscount> = [];
     public terraformRating: number = 20;
     public victoryPoints: number = 0;

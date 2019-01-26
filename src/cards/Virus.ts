@@ -28,10 +28,10 @@ export class Virus implements IProjectCard {
             player.setWaitingFor(
                 new OrOptions(
                     new SelectCard(this, "Select card to remove 2 animals", allCardsWithResources),
-                    new SelectPlayer(this, "Select player to remove 5 plants")
+                    new SelectPlayer(this, game.getPlayers(), "Select player to remove 5 plants")
                 ), (inputs: {[x: string]: string}) => {
                     if (inputs.option === "1") {
-                        const foundPlayer = game.getPlayerById(inputs.playerId);
+                        const foundPlayer = game.getPlayer(inputs.option1);
                         if (foundPlayer === undefined) {
                             reject("Player not found");
                             return;

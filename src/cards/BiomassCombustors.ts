@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardType } from "./CardType";
+import { SelectPlayer } from "../inputs/SelectPlayer";
 
 export class BiomassCombustors implements IProjectCard {
     public cost: number = 4;
@@ -17,8 +18,8 @@ export class BiomassCombustors implements IProjectCard {
             return Promise.reject("Requires 6% oxygen");
         }
         return new Promise((resolve, reject) => {
-            const onInput = (input: string) => {
-                const otherPlayer = game.getPlayerById(input);
+            const onInput = (options: {[x: string]: string}) => {
+                const otherPlayer = game.getPlayer(options.option1);
                 if (otherPlayer === undefined) {
                     reject("Player not found");
                 } else if (otherPlayer.plantProduction < 1) {
@@ -30,11 +31,7 @@ export class BiomassCombustors implements IProjectCard {
                     player.victoryPoints--;
                 }
             };
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectAPlayer"
-            }, onInput);
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), onInput);
         });
     }
 

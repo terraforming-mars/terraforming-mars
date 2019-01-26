@@ -17,8 +17,8 @@ export class GiantIceAsteroid implements IProjectCard {
     public description: string = "Crash it. The bigger, the better";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new AndOptions(new SelectPlayer(this), new SelectSpace(this, "Select first ocean space"), new SelectSpace(this, "Select second ocean space")), (options: {[x: string]: string}) => {
-                const foundPlayer = game.getPlayerById(options.option1);
+            player.setWaitingFor(new AndOptions(new SelectPlayer(this, game.getPlayers()), new SelectSpace(this, "Select first ocean space"), new SelectSpace(this, "Select second ocean space")), (options: {[x: string]: string}) => {
+                const foundPlayer = game.getPlayer(options.option1);
                 if (foundPlayer === undefined) {
                     reject("Player not found");
                     return;

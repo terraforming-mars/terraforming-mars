@@ -1,5 +1,4 @@
 
-import * as utilities from "./utilities";
 import { Player } from "./Player";
 import { Dealer } from "./Dealer";
 import { ISpace } from "./ISpace";
@@ -58,7 +57,8 @@ STANDARD PROJECTS
 // events card (red)
 
 export class Game {
-    public id: string = utilities.generateUUID();
+    constructor(public id: string) {
+    }
     public dealer: Dealer = new Dealer();
     private spaces: Array<ISpace> = new OriginalBoard().spaces;
     private players: Array<Player> = [];
@@ -151,8 +151,8 @@ export class Game {
         this.onGameEnd.push(end);
     }
 
-    public getPlayerById(playerId: string): Player {
-        const foundPlayers = this.players.filter((player) => player.id === playerId);
+    public getPlayer(name: string): Player {
+        const foundPlayers = this.players.filter((player) => player.name === name);
         if (foundPlayers.length === 0) {
             throw "Player not found";
         }
@@ -193,7 +193,7 @@ export class Game {
         }
         // Land claim a player can claim land for themselves
         if (space.player !== undefined && space.player !== player) {
-            throw "This space is land claimed by " + space.player.id;
+            throw "This space is land claimed by " + space.player.name;
         }
         if (space.spaceType !== spaceType) {
             throw "Select a valid location";

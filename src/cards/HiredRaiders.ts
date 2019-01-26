@@ -19,7 +19,7 @@ export class HiredRaiders implements IProjectCard {
                 card: this,
                 type: "SelectAPlayerAndOption"
             }, (playerId: string, option: string) => {
-                const foundPlayer = game.getPlayerById(playerId);
+                const foundPlayer = game.getPlayer(playerId);
                 if (foundPlayer === undefined) {
                     reject("Player not found");
                     return;

@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { SelectPlayer } from "../inputs/SelectPlayer";
 
 export class AsteroidMiningConsortium implements IProjectCard {
     public cost: number = 13;
@@ -17,12 +18,8 @@ export class AsteroidMiningConsortium implements IProjectCard {
             return Promise.reject("Requires that you have titanium production");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectAPlayer"
-            }, (playerId: string) => {
-                const foundPlayer = game.getPlayerById(playerId);
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (options: {[x: string]: string}) => {
+                const foundPlayer = game.getPlayer(options.option1);
                 if (foundPlayer === undefined) {
                     reject("Player not found");
                     return;

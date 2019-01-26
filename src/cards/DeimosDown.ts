@@ -15,8 +15,8 @@ export class DeimosDown implements IProjectCard {
     public description: string = "We don't use that moon anyway";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this), (playerId: string) => {
-                const foundPlayer = game.getPlayerById(playerId);
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (options: {[x: string]: string}) => {
+                const foundPlayer = game.getPlayer(options.option1);
                 if (foundPlayer === undefined) {
                     reject("Player not found");
                     return;

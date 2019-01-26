@@ -4,6 +4,7 @@ import { CardType } from "./CardType";
 import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { SelectPlayer } from "../inputs/SelectPlayer";
 
 export class MiningExpedition implements IProjectCard {
     public cost: number = 12;
@@ -14,12 +15,8 @@ export class MiningExpedition implements IProjectCard {
     public description: string = "Ruthlessly excavating rich areas.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectAPlayer"
-            }, (playerId: string) => {
-                const foundPlayer = game.getPlayerById(playerId);
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (options: {[x: string]: string}) => {
+                const foundPlayer = game.getPlayer(options.option1);
                 if (foundPlayer === undefined) {
                     reject("Player not found");
                     return;

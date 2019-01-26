@@ -18,8 +18,8 @@ export class Sabotage implements IProjectCard {
                 initiator: "card",
                 card: this,
                 type: "SelectAPlayer"
-            }, (playerId: string) => {
-                const foundPlayer = game.getPlayerById(playerId);
+            }, (options: {[x: string]: string}) => {
+                const foundPlayer = game.getPlayer(options.option1);
                 if (foundPlayer === undefined) {
                     reject("Player not found");
                     return;

@@ -19,19 +19,14 @@ export class SmallAnimals implements IActiveProjectCard {
         if (game.getOxygenLevel() < 6) {
             return Promise.reject("Requires 6% oxygen.");
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (options: {[x: string]: string}) => {
-                const foundPlayer = game.getPlayer(options.option1);
-                if (foundPlayer === undefined) {
-                    reject("Player not found");
-                    return;
-                }
+        return new Promise((resolve, _reject) => {
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
                 foundPlayer.plantProduction--;
                 game.addGameEndListener(() => {
                     player.victoryPoints += Math.floor(this.animals / 2);
                 });
                 resolve();
-            });
+            }));
         });
     }
     public action(_player: Player, _game: Game): Promise<void> {

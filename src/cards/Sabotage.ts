@@ -4,6 +4,9 @@ import { CardType } from "./CardType";
 import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { SelectPlayer } from "../inputs/SelectPlayer";
+import { SelectAmount } from "../inputs/SelectAmount";
+import { AndOptions } from "../inputs/AndOptions";
 
 export class Sabotage implements IProjectCard {
     public cost: number = 1;
@@ -14,37 +17,31 @@ export class Sabotage implements IProjectCard {
     public description: string = "Nobody will know who did it.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectAPlayer"
-            }, (options: {[x: string]: string}) => {
-                const foundPlayer = game.getPlayer(options.option1);
-                if (foundPlayer === undefined) {
-                    reject("Player not found");
-                    return;
-                }
-                player.setWaitingFor(undefined);
-                player.setWaitingFor({
-                    initiator: "card",
-                    card: this,
-                    type: "SelectAmount",
-                    message: "3 to remove titanium, 4 to remove steel, 7 to remove mega credit"
-                }, (amount: string) => {
-                    const foundAmount = parseInt(amount);
-                    if (foundAmount === 3) {
-                        foundPlayer.titanium = Math.max(0, foundPlayer.titanium - 3);
-                    } else if (foundAmount === 4) {
-                        foundPlayer.steel = Math.max(0, foundPlayer.steel - 4);
-                    } else if (foundAmount === 7) {
-                        foundPlayer.megaCredits = Math.max(0, foundPlayer.megaCredits - 7);
-                    } else {
-                        reject("Unknown option");
-                        return;
-                    }
-                    resolve();
-                });
-            });
+            let foundPlayer: Player;
+            let foundAmount: number;
+            player.setWaitingFor(
+                new AndOptions(
+                    () => {
+                        if (foundAmount === 3) {
+                            foundPlayer.titanium = Math.max(0, foundPlayer.titanium - 3);
+                        } else if (foundAmount === 4) {
+                            foundPlayer.steel = Math.max(0, foundPlayer.steel - 4);
+                        } else if (foundAmount === 7) {
+                            foundPlayer.megaCredits = Math.max(0, foundPlayer.megaCredits - 7);
+                        } else {
+                            reject("Unknown option");
+                            return;
+                        }
+                        resolve();
+                    },
+                    new SelectPlayer(this, game.getPlayers(), "Select player to remove resources from", (selectedPlayer: Player) => {
+                        foundPlayer = selectedPlayer;
+                    }),
+                    new SelectAmount(this, "3 to remove titanium, 4 to remove steel, 7 to remove mega credit", (amount: number) => {
+                        foundAmount = amount;
+                    })
+                )
+            );
         });
     }
 }

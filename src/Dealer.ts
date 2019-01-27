@@ -455,7 +455,7 @@ const ALL_PROJECT_CARDS: Array<IProjectCard> = [
 
 export class Dealer {
     private corporationCards: Array<CorporationCard> = [];
-    private beginnerCard: BeginnerCorporation = new BeginnerCorporation();
+    public beginnerCard: BeginnerCorporation = new BeginnerCorporation();
     constructor() {
         this.corporationCards = this.shuffleCards(ALL_CORPORATION_CARDS);
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS);

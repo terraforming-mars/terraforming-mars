@@ -6,6 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { SpaceType } from "../SpaceType";
+import { ISpace } from "../ISpace";
 
 export class Mangrove implements IProjectCard {
     public cost: number = 12;
@@ -19,21 +20,16 @@ export class Mangrove implements IProjectCard {
             return Promise.reject("Requires +4C or warmer");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select ocean space for greenery"), (options: {[x: string]: string}) => {
-                const foundSpace = game.getSpace(options.option1);
-                if (foundSpace === undefined) {
-                    reject("Space not found");
-                    return undefined;
-                }
+            player.setWaitingFor(new SelectSpace(this, "Select ocean space for greenery", (foundSpace: ISpace) => {
                 if (foundSpace.spaceType !== SpaceType.OCEAN) {
                     reject("Space not an ocean");
                     return undefined;
                 }
-                return game.addGreenery(player, options.option1, SpaceType.OCEAN).then(function () {
+                return game.addGreenery(player, foundSpace.id, SpaceType.OCEAN).then(function () {
                     player.victoryPoints++;
                     resolve();
                 });
-            });
+            }));
         });
     }
 }

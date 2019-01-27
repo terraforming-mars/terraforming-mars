@@ -4,6 +4,8 @@ import { IProjectCard } from "./IProjectCard";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { Tags } from "./Tags";
+import { ISpace } from "../ISpace";
+import { SelectSpace } from "../inputs/SelectSpace";
 
 export class IceCapMelting implements IProjectCard {
     public cost: number = 5;
@@ -18,15 +20,11 @@ export class IceCapMelting implements IProjectCard {
                 reject("not warm enough, must be +2C or warmer");
                 return;
             }
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectASpace"
-            }, (input: string) => {
-                try { game.addOceanTile(player, input); }
+            player.setWaitingFor(new SelectSpace(this, "Select space for ocean", (space: ISpace) => {
+                try { game.addOceanTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 resolve();
-            });
+            }));
         });
     }
 }

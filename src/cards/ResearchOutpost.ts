@@ -6,6 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { SpaceType } from "../SpaceType";
+import { ISpace } from "../ISpace";
 
 export class ResearchOutpost implements IProjectCard {
     public cost: number = 18;
@@ -16,12 +17,7 @@ export class ResearchOutpost implements IProjectCard {
     public description: string = "Finding new ways to do things.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select place next to no other tile for city"), (options: {[x: string]: string}) => {
-                const foundSpace = game.getSpace(options.option1);
-                if (foundSpace === undefined) {
-                    reject("Space not found");
-                    return;
-                }
+            player.setWaitingFor(new SelectSpace(this, "Select place next to no other tile for city", (foundSpace: ISpace) => {
                 if (foundSpace.spaceType === SpaceType.COLONY) {
                     reject("Must be places on mars");
                     return;
@@ -37,7 +33,7 @@ export class ResearchOutpost implements IProjectCard {
                     return 1;
                 });
                 resolve();
-            });
+            }));
         });
     }
 }

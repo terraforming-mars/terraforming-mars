@@ -4,6 +4,9 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { AndOptions } from "../inputs/AndOptions";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class LakeMarineris implements IProjectCard {
     public cost: number = 18;
@@ -17,25 +20,22 @@ export class LakeMarineris implements IProjectCard {
             return Promise.reject("Requires 0C or warmer");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectASpace"
-            }, (spaceId1: string) => {
-                try { game.addOceanTile(player, spaceId1); }
-                catch (err) { reject(err); return; }
-                player.setWaitingFor(undefined);
-                player.setWaitingFor({
-                    initiator: "card",
-                    card: this,
-                    type: "SelectASpace"
-                }, (spaceId2: string) => {
-                    try { game.addOceanTile(player, spaceId2); }
-                    catch (err) { reject(err); return; }
-                    player.victoryPoints += 2;
-                    resolve();
-                });
-            });
+            player.setWaitingFor(
+                new AndOptions(
+                    () => {
+                        player.victoryPoints += 2;
+                        resolve();
+                    },
+                    new SelectSpace(this, "Select space for 1st ocean tile", (space: ISpace) => {
+                        try { game.addOceanTile(player, space.id); }
+                        catch (err) { reject(err); return; }
+                    }),
+                    new SelectSpace(this, "Select space for 2nd ocean tile", (space: ISpace) => {
+                        try { game.addOceanTile(player, space.id); }
+                        catch (err) { reject(err); return; }
+                    })
+                )
+            );
         });
     }
 }

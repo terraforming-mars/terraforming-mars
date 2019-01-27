@@ -6,6 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SpaceName } from "../SpaceName";
 import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class NoctisCity implements IProjectCard {
     public cost: number = 18;
@@ -28,13 +29,13 @@ export class NoctisCity implements IProjectCard {
             return Promise.resolve();   
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select any city location, noctis taken"), (options: {[x: string]: string}) => {
-                try { game.addCityTile(player, options.option1); }
+            player.setWaitingFor(new SelectSpace(this, "Select any city location, noctis taken", (space: ISpace) => {
+                try { game.addCityTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 player.energyProduction--;
                 player.megaCreditProduction += 3;
                 resolve();
-            });
+            }));
         });
     }
 }

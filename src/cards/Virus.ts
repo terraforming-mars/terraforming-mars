@@ -27,33 +27,19 @@ export class Virus implements IProjectCard {
         return new Promise((resolve, reject) => {
             player.setWaitingFor(
                 new OrOptions(
-                    new SelectCard(this, "Select card to remove 2 animals", allCardsWithResources),
-                    new SelectPlayer(this, game.getPlayers(), "Select player to remove 5 plants")
-                ), (inputs: {[x: string]: string}) => {
-                    if (inputs.option === "1") {
-                        const foundPlayer = game.getPlayer(inputs.option1);
-                        if (foundPlayer === undefined) {
-                            reject("Player not found");
-                            return;
-                        }
-                        foundPlayer.plants = Math.max(0, foundPlayer.plants - 5);
-                    } else if (inputs.option === "0") {
-                        const foundCard = game.getCard(inputs.cardName);
-                        if (foundCard === undefined) {
-                            reject("Card not found");
-                            return;
-                        }
-                        if (foundCard.animals === undefined) {
+                    new SelectCard(this, "Select card to remove 2 animals", allCardsWithResources, (foundCard: Array<IProjectCard>) => {
+                        if (foundCard[0].animals === undefined) {
                             reject("No animals on selected card");
                             return;
                         }
-                        foundCard.animals = Math.max(0, foundCard.animals - 2);
-                    } else {
-                        reject("Unknown selection");
-                        return;
-                    }
-                    resolve();
-                }
+                        foundCard[0].animals = Math.max(0, foundCard[0].animals - 2);
+                        resolve();
+                    }),
+                    new SelectPlayer(this, game.getPlayers(), "Select player to remove 5 plants", (foundPlayer: Player) => {
+                        foundPlayer.plants = Math.max(0, foundPlayer.plants - 5);
+                        resolve();
+                    })
+                )
             );
         });
     }

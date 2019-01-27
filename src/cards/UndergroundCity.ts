@@ -5,6 +5,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class UndergroundCity implements IProjectCard {
     public cost: number = 18;
@@ -18,13 +19,13 @@ export class UndergroundCity implements IProjectCard {
             return Promise.reject("Requires 2 energy production");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this), (spaceName: string) => {
-                try { game.addCityTile(player, spaceName); }
+            player.setWaitingFor(new SelectSpace(this, "Select space for city tile", (foundSpace: ISpace) => {
+                try { game.addCityTile(player, foundSpace.id); }
                 catch (err) { reject(err); return; }
                 player.energyProduction -= 2;
                 player.steelProduction += 2;
                 resolve();
-            });
+            }));
         });
     }
 }

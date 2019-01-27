@@ -4,6 +4,8 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { AndOptions } from "../inputs/AndOptions";
+import { SelectCard } from "../inputs/SelectCard";
 
 export class ImportedNitrogen implements IProjectCard {
     public cost: number = 23;
@@ -12,49 +14,25 @@ export class ImportedNitrogen implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Raise your terraform rating 1 step and gain 4 plants. Add 3 microbes to ANOTHER card and 2 animals to ANOTHER card.";
     public description: string = "Providing nitrogen needed in the atmosphere and for biomass.";
-    public play(player: Player, _game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            const availableCards = player.getActiveAndAutomatedCards(); 
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectACard",
-                message: "Select card to add 3 microbes",
-                cards: availableCards
-            }, (cardName: string) => {
-                const foundCard1 = availableCards.filter((f) => f.name === cardName)[0];
-                if (foundCard1 === undefined) {
-                    reject("Card not found");
-                    return;
-                }
-                player.setWaitingFor(undefined);
-                player.setWaitingFor({
-                    initiator: "card",
-                    card: this,
-                    type: "SelectACard",
-                    message: "Select card to add 2 animals",
-                    cards: availableCards
-                }, (cardName2: string) => {
-                    const foundCard2 = availableCards.filter((f) => f.name === cardName2)[0];
-                    if (foundCard2 === undefined) {
-                        reject("Card not found");
-                        return;
-                    }
-                    if (foundCard2.animals === undefined) {
-                        reject("No animals on " + foundCard2.name);
-                        return;
-                    }
-                    if (foundCard1.microbes === undefined) {
-                        reject("No microbes on " + foundCard1.name);
-                        return;
-                    }
-                    foundCard1.microbes += 3;
-                    foundCard2.animals += 2;
-                    player.terraformRating++;
-                    player.plants += 4;
-                    resolve();
-                });
-            });
+    public play(player: Player, game: Game): Promise<void> {
+        return new Promise((resolve, _reject) => {
+            const otherAnimalCards = game.getOtherAnimalCards(this);
+            const otherMicrobeCards = game.getOtherMicrobeCards(this);
+            player.setWaitingFor(
+                new AndOptions(
+                    () => {
+                        player.terraformRating++;
+                        player.plants += 4;
+                        resolve();
+                    },
+                    new SelectCard(this, "Select card to add 3 microbes", otherMicrobeCards, (foundCards: Array<IProjectCard>) => {
+                        foundCards[0]!.microbes! += 3;
+                    }),
+                    new SelectCard(this, "Select card to add 2 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => {
+                        foundCards[0]!.animals! += 2;
+                    })
+                )
+            );
         });
     }
 }

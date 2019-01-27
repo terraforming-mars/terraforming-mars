@@ -22,15 +22,15 @@ export class PowerInfrastructure implements IActiveProjectCard {
             return Promise.reject("Have no energy to spend");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectAmount(this, "Select energy to spend"), (options: {[x: string]: string}) => {
-                if (parseInt(options.option1) > player.energy) {
+            player.setWaitingFor(new SelectAmount(this, "Select energy to spend", (amount: number) => {
+                if (amount > player.energy) {
                     reject("You don't have that much energy");
                 } else {
-                    player.energy -= parseInt(options.option1);
-                    player.megaCredits += parseInt(options.option1);
+                    player.energy -= amount;
+                    player.megaCredits += amount;
                     resolve();
                 }
-            });
+            }));
         });
     }
 

@@ -124,24 +124,15 @@ export class RoboticWorkforce implements IProjectCard {
             return Promise.reject("No builder cards to duplicate");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectCard(this, "Select builder card to copy", availableCards), (options: {[x: string]: string}) => {
-                const foundCard = availableCards.filter((card) => card.name === options.option1)[0];
-                if (foundCard === undefined) {
-                    reject("Card not found");
-                    return;
-                }
+            player.setWaitingFor(new SelectCard(this, "Select builder card to copy", availableCards, (selectedCards: Array<IProjectCard>) => {
+                const foundCard: IProjectCard = selectedCards[0];
                 // this is the only card which requires additional user input
                 if (foundCard.name === new BiomassCombustors().name) {
-                    player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (subOptions: {[x: string]: string}) => {
-                        const foundPlayer = game.getPlayer(subOptions.option1);
-                        if (foundPlayer === undefined) {
-                            reject("Player not found");
-                            return;
-                        }
+                    player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to remove plant production", (foundPlayer: Player) => {
                         foundPlayer.plantProduction--;
                         player.energyProduction += 2;
                         resolve();
-                    });
+                    }));
                     return;
                 }
                 // the rest can make updates synchronously
@@ -264,7 +255,7 @@ export class RoboticWorkforce implements IProjectCard {
                     return;
                 }
                 resolve();
-            });
+            }));
         });
     }
 }

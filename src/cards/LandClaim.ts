@@ -4,6 +4,8 @@ import { CardType } from "./CardType";
 import { IProjectCard } from "./IProjectCard";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class LandClaim implements IProjectCard {
     public cost: number = 1;
@@ -12,21 +14,16 @@ export class LandClaim implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Place your marker on a non-reserved area. Only you may place a tile here.";
     public description: string = "Acquiring strategic land areas";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, _game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectASpace"
-            }, (spaceId: string) => {
-                const foundSpace = game.getSpace(spaceId);
+            player.setWaitingFor(new SelectSpace(this, "Select space for claim", (foundSpace: ISpace) => {
                 if (foundSpace.tile !== undefined) {
                     reject("This tile is already taken");
                     return;
                 }
                 foundSpace.player = player;
                 resolve();
-            });
+            }));
         });
     }
 }

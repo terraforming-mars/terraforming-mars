@@ -6,6 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { TileType } from "../TileType";
+import { ISpace } from "../ISpace";
 
 export class NuclearZone implements IProjectCard {
     public cost: number = 10;
@@ -16,12 +17,7 @@ export class NuclearZone implements IProjectCard {
     public description: string = "Detonating obsolete nuclear weapons from Earth is an efficient method for raising the temperature.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this), (options: {[x: string]: string}) => {
-                const foundSpace = game.getSpace(options.option1);
-                if (foundSpace === undefined) {
-                    reject("Space not found");
-                    return;
-                }
+            player.setWaitingFor(new SelectSpace(this, "Select space for special tile", (foundSpace: ISpace) => {
                 try { game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL }); }
                 catch (err) { reject(err); return; }
                 game.increaseTemperature(player).then(function () {
@@ -32,8 +28,7 @@ export class NuclearZone implements IProjectCard {
                     resolve();
                 })
                 .catch((err: string) => reject(err));
-                
-            });
+            }));
         });
     }
 }

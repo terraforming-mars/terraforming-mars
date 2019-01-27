@@ -4,7 +4,10 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { BuyOrDiscard } from "../inputs/BuyOrDiscard";
+import { OrOptions } from "../inputs/OrOptions";
+import { DoNothing } from "../inputs/DoNothing";
+import { SelectCard } from "../inputs/SelectCard";
+import { IProjectCard } from "./IProjectCard";
 
 export class InventorsGuild implements IActiveProjectCard {
     public cost: number = 9;
@@ -20,22 +23,23 @@ export class InventorsGuild implements IActiveProjectCard {
     public action(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
             const topCard = game.dealer.getCards(1)[0];
-            player.setWaitingFor(new BuyOrDiscard(this, topCard), (options: {[x: string]: string}) => {
-                if (options.option1 === "DISCARD") {
-                    game.dealer.discard(topCard);
-                    resolve();
-                } else if (options.option1 === "BUY") {
-                    if (player.megaCredits < 3) {
-                        reject("Can not afford to buy card");
-                    } else {
-                        player.megaCredits -= 3;
-                        player.cardsInHand.push(topCard);
+            player.setWaitingFor(
+                new OrOptions(
+                    new SelectCard(this, "Buy card", [topCard], (_card: Array<IProjectCard>) => {
+                        if (player.megaCredits < 3) {
+                            reject("Can not afford to buy card");
+                        } else {
+                            player.megaCredits -= 3;
+                            player.cardsInHand.push(topCard);
+                            resolve();
+                        }
+                    }),
+                    new DoNothing(this, "Discard it", () => {
+                        game.dealer.discard(topCard);
                         resolve();
-                    }
-                } else {
-                    reject("Unknown selection");
-                }
-            });
+                    })
+                )
+            );
         });
     }
 }

@@ -7,6 +7,7 @@ import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { SpaceBonus } from "../SpaceBonus";
 import { TileType } from "../TileType";
+import { ISpace } from "../ISpace";
 
 export class MiningRights implements IProjectCard {
     public cost: number = 9;
@@ -17,12 +18,7 @@ export class MiningRights implements IProjectCard {
     public description: string = "The battles for Martian riches sometimes begin in a courtroom.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this), (options: {[x: string]: string}) => {
-                const foundSpace = game.getSpace(options.option1);
-                if (foundSpace === undefined) {
-                    reject("Space not found");
-                    return;
-                }
+            player.setWaitingFor(new SelectSpace(this, "Select space with a steel or titanium placement bonus", (foundSpace: ISpace) => {
                 const hasSteelBonus = foundSpace.bonus && foundSpace.bonus.indexOf(SpaceBonus.STEEL) !== -1;
                 const hasTitaniumBonus = foundSpace.bonus && foundSpace.bonus.indexOf(SpaceBonus.TITANIUM) !== -1;
                 if (!hasSteelBonus && !hasTitaniumBonus) {
@@ -38,7 +34,7 @@ export class MiningRights implements IProjectCard {
                     player.titaniumProduction++;
                 }
                 resolve();
-            });
+            }));
         });
     }
 }  

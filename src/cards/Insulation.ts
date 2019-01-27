@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { SelectAmount } from "../inputs/SelectAmount";
 
 export class Insulation implements IProjectCard {
     public cost: number = 2;
@@ -14,21 +15,15 @@ export class Insulation implements IProjectCard {
     public description: string = "Better insulation means lower energy spending";
     public play(player: Player, _game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectAmount",
-                message: "Select heat production to decrease"
-            }, (amount: string) => {
-                const requestedProduction = parseInt(amount);
-                if (requestedProduction > player.heatProduction) {
+            player.setWaitingFor(new SelectAmount(this, "Select amount of heat production to decrease", (amount: number) => {
+                if (amount > player.heatProduction) {
                     reject("Not enough heat production");
                     return;
                 }
-                player.heatProduction -= requestedProduction;
-                player.megaCreditProduction += requestedProduction;
+                player.heatProduction -= amount;
+                player.megaCreditProduction += amount;
                 resolve();
-            });
+            }));
         });
     }
 }

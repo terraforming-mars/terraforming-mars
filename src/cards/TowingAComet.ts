@@ -5,6 +5,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class TowingAComet implements IProjectCard {
     public cost: number = 23;
@@ -15,8 +16,8 @@ export class TowingAComet implements IProjectCard {
     public description: string = "By aerobraking it we get its contents without the impact.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select place for oean"), (spaceName: string) => {
-                try { game.addOceanTile(player, spaceName); }
+            player.setWaitingFor(new SelectSpace(this, "Select place for oean", (foundSpace: ISpace) => {
+                try { game.addOceanTile(player, foundSpace.id); }
                 catch (err) { reject(err); return; }
                 game.increaseOxygenLevel(player).then(function () {
                     player.plants += 2;
@@ -24,7 +25,7 @@ export class TowingAComet implements IProjectCard {
                 }).catch((err: string) => {
                     reject(err);
                 });
-            });
+            }));
         });
     }
 }

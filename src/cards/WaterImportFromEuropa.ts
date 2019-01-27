@@ -7,6 +7,7 @@ import { Game } from "../Game";
 import { AndOptions } from "../inputs/AndOptions";
 import { SelectAmount } from "../inputs/SelectAmount";
 import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class WaterImportFromEuropa implements IActiveProjectCard {
     public cost: number = 25;
@@ -24,25 +25,32 @@ export class WaterImportFromEuropa implements IActiveProjectCard {
     }
     public action(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
+            let titanium: number = 0;
+            let megaCredit: number = 0;
+            let selectedSpace: ISpace;
             player.setWaitingFor(
                 new AndOptions(
-                    new SelectAmount(this, "How much titanium to use?"),
-                    new SelectAmount(this, "How much mega credit to use?"),
-                    new SelectSpace(this, "Where to place ocean?")
-                ), (options: {[x: string]: string}) => {
-                    const titanium = parseInt(options.option1);
-                    const megaCredit = parseInt(options.option2);
-                    const spaceName = options.option3;
-                    if ((titanium * player.titaniumValue) + megaCredit < 12) {
-                        reject("Not enough value");
-                        return;
-                    }
-                    try { game.addOceanTile(player, spaceName); }
-                    catch (err) { reject(err); return; }
-                    player.titanium -= titanium;
-                    player.megaCredits -= megaCredit;
-                    resolve(); 
-                }
+                    () => {
+                        if ((titanium * player.titaniumValue) + megaCredit < 12) {
+                            reject("Not enough value");
+                            return;
+                        }
+                        try { game.addOceanTile(player, selectedSpace.id); }
+                        catch (err) { reject(err); return; }
+                        player.titanium -= titanium;
+                        player.megaCredits -= megaCredit;
+                        resolve(); 
+                    },
+                    new SelectAmount(this, "How much titanium to use?", (amount: number) => {
+                        titanium = amount;
+                    }),
+                    new SelectAmount(this, "How much mega credit to use?", (amount: number) => {
+                        megaCredit = amount;
+                    }),
+                    new SelectSpace(this, "Where to place ocean?", (space: ISpace) => {
+                        selectedSpace = space;
+                    })
+                )
             );
         });
     }

@@ -15,12 +15,7 @@ export class MiningExpedition implements IProjectCard {
     public description: string = "Ruthlessly excavating rich areas.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (options: {[x: string]: string}) => {
-                const foundPlayer = game.getPlayer(options.option1);
-                if (foundPlayer === undefined) {
-                    reject("Player not found");
-                    return;
-                }
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to remove 2 plants", (foundPlayer: Player) => {
                 game.increaseOxygenLevel(player)
                     .then(function () {
                         foundPlayer.plants = Math.max(0, foundPlayer.plants - 2);
@@ -30,7 +25,7 @@ export class MiningExpedition implements IProjectCard {
                     .catch(function (err: string) {
                         reject(err);
                     });
-            });
+            }));
         });
     }
 }

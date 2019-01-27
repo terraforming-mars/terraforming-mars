@@ -5,6 +5,8 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { TileType } from "../TileType";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class IndustrialCenter implements IActiveProjectCard {
     public cost: number = 4;
@@ -12,20 +14,11 @@ export class IndustrialCenter implements IActiveProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Industrial Center";
     public actionText: string = "Spend 7 mega credit to increase your steel production 1 step.";
-    public text: string = "Place a tile adjacent to a city tile.";
+    public text: string = "Place a special tile adjacent to a city tile.";
     public description: string = "Assigned to heavy industry, this area is not the nicest place on Mars";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectASpace"
-            }, (spaceId: string) => {
-                const foundSpace = game.getSpace(spaceId);
-                if (foundSpace === undefined) {
-                    reject("Space not found");
-                    return;
-                }
+            player.setWaitingFor(new SelectSpace(this, "Select space adjacent to a city tile", (foundSpace: ISpace) => {
                 const adjacentSpaces = game.getAdjacentSpaces(foundSpace);
                 if (adjacentSpaces.filter((adjacentSpace) => adjacentSpace.tile && adjacentSpace.tile.tileType === TileType.CITY).length === 0) {
                     reject("Tile must be placed by a city tile");
@@ -34,7 +27,7 @@ export class IndustrialCenter implements IActiveProjectCard {
                 try { game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL }); }
                 catch (err) { reject(err); return; }
                 resolve();
-            });
+            }));
         });
     }
     public action(player: Player, _game: Game): Promise<void> {

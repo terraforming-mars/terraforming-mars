@@ -25,21 +25,20 @@ export class RegolithEaters implements IActiveProjectCard {
             return Promise.resolve();
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new OrOptions(new SelectOption(this, "Add 1 microbe to this card"), new SelectOption(this, "Remove 2 microbes to raise oxygen level 1 step")), (options: {[x: string]: string}) => {
-                if (options.option1 === "1") {
-                    this.microbes++;
-                    resolve();
-                    return;
-                }
-                if (options.option2 === "1") {
-                    game.increaseOxygenLevel(player).then(() => {
-                        this.microbes -= 2;
+            player.setWaitingFor(
+                new OrOptions(
+                    new SelectOption(this, "Add 1 microbe to this card", () => {
+                        this.microbes++;
                         resolve();
-                    }).catch((err) => reject(err));
-                    return;
-                }
-                reject("Unknown option");
-            });
+                    }),
+                    new SelectOption(this, "Remove 2 microbes to raise oxygen level 1 step", () => {
+                        game.increaseOxygenLevel(player).then(() => {
+                            this.microbes -= 2;
+                            resolve();
+                        }).catch((err) => reject(err));
+                    })
+                )
+            );
         });
     }
 }

@@ -35,12 +35,8 @@ export class Predators implements IActiveProjectCard {
             });
         });
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectCard(this, "Select card to remove animal from", animalCards), (options: {[x: string]: string}) => {
-                const foundCard: IProjectCard | undefined = animalCards.filter((card) => card.name === options.option1)[0];
-                if (foundCard === undefined) {
-                    reject("Card not found");
-                    return;
-                }
+            player.setWaitingFor(new SelectCard(this, "Select card to remove animal from", animalCards, (foundCards: Array<IProjectCard>) => {
+                const foundCard = foundCards[0];
                 if (foundCard.animals === undefined) {
                     reject("Card does not have animals");
                     return;
@@ -52,7 +48,7 @@ export class Predators implements IActiveProjectCard {
                 foundCard.animals--;
                 this.animals++;
                 resolve();
-            });
+            }));
         });
     }
 }

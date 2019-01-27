@@ -5,6 +5,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardType } from "./CardType";
 import { SelectCard } from "../inputs/SelectCard";
+import { IProjectCard } from "./IProjectCard";
 
 export class SymbioticFungus implements IActiveProjectCard {
     public cost: number = 4;
@@ -23,23 +24,14 @@ export class SymbioticFungus implements IActiveProjectCard {
     public action(player: Player, _game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
             const availableCards = player.playedCards.filter((card) => card.microbes !== undefined && card.name !== this.name);
-            player.setWaitingFor(new SelectCard(this, "Select card for microbe", availableCards), (cardName: string) => {
-                if (cardName === this.name) {
-                    reject("Must put resource on another card");
-                    return;
-                }
-                const foundCard = availableCards.filter((card) => card.name === cardName)[0];
-                if (foundCard === undefined) {
-                    reject("Card not found");
-                    return;
-                }
-                if (foundCard.microbes === undefined) {
+            player.setWaitingFor(new SelectCard(this, "Select card for microbe", availableCards, (foundCards: Array<IProjectCard>) => {
+                if (foundCards[0].microbes === undefined) {
                     reject("No microbes on this card");
                     return;
                 }
-                foundCard.microbes++;
+                foundCards[0].microbes++;
                 resolve();
-            });
+            }));
         });
     }
 }

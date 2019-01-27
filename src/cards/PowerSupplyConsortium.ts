@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { SelectPlayer } from "../inputs/SelectPlayer";
 
 export class PowerSupplyConsortium implements IProjectCard {
     public cost: number = 5;
@@ -18,17 +19,7 @@ export class PowerSupplyConsortium implements IProjectCard {
                 reject("Requires 2 power tags.");
                 return;
             }
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectAPlayer",
-                players: game.getPlayers()
-            }, (options: {[x: string]: string}) => {
-                const foundPlayer = game.getPlayer(options.option1);
-                if (foundPlayer === undefined) {
-                    reject("Player not found");
-                    return;
-                }
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease energy", (foundPlayer: Player) => {
                 if (foundPlayer.energyProduction < 1) {
                     reject("Player must have energy production to remove");
                     return;
@@ -36,7 +27,7 @@ export class PowerSupplyConsortium implements IProjectCard {
                 foundPlayer.energyProduction--;
                 player.energyProduction++;
                 resolve();
-            });
+            }));
         });
     }
 }

@@ -20,27 +20,27 @@ export class MarsUniversity implements IProjectCard {
         player.addCardPlayedHandler((card: IProjectCard) => {
             if (card.tags.indexOf(Tags.SCIENCE) !== -1) {
                 return new Promise((resolve, reject) => {
-                    player.setWaitingFor(new OrOptions(new SelectCard(this, "Select a card to discard", player.cardsInHand), new DoNothing(this)), (options: {[x: string]: string}) => {
-                        if (options.option2 === "1") {
-                            resolve();
-                            return;
-                        }
-                        let foundCard: IProjectCard | undefined;
-                        let foundCardIndex: number = 0;
-                        for (; foundCardIndex < player.cardsInHand.length; foundCardIndex++) {
-                            if (player.cardsInHand[foundCardIndex].name === options.option1) {
-                                foundCard = player.cardsInHand[foundCardIndex];
-                                break;
-                            }
-                        }
-                        if (foundCard === undefined) {
-                            reject("Card not found");
-                            return;
-                        }
-                        player.cardsInHand.splice(foundCardIndex, 1);
-                        player.cardsInHand.push(game.dealer.getCards(1)[0]);
-                        resolve();
-                    });
+                    player.setWaitingFor(
+                        new OrOptions(
+                            new SelectCard(this, "Select a card to discard to draw a card", player.cardsInHand, (foundCards: Array<IProjectCard>) => {
+                                let foundCardIndex: number = 0;
+                                const foundCard = foundCards[0];
+                                for (; foundCardIndex < player.cardsInHand.length; foundCardIndex++) {
+                                    if (player.cardsInHand[foundCardIndex].name === foundCard.name) {
+                                        break;
+                                    }
+                                }
+                                if (foundCardIndex === player.cardsInHand.length) {
+                                    reject("Card not found");
+                                    return;
+                                }
+                                player.cardsInHand.splice(foundCardIndex, 1);
+                                player.cardsInHand.push(game.dealer.getCards(1)[0]);
+                                resolve();
+                            }),
+                            new DoNothing(this, "Don't do anything", () => { resolve(); })
+                        )
+                    );
                 });
             }
             return undefined;

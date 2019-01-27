@@ -4,6 +4,8 @@ import { CardType } from "./CardType";
 import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class OpenCity implements IProjectCard {
     public cost: number = 23;
@@ -20,19 +22,15 @@ export class OpenCity implements IProjectCard {
             return Promise.reject("Must have energy production to decrease");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectASpace"
-            }, (spaceId: string) => {
-                try { game.addCityTile(player, spaceId); }
+            player.setWaitingFor(new SelectSpace(this, "Select space for city tile", (space: ISpace) => {
+                try { game.addCityTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 player.energyProduction--;
                 player.megaCreditProduction += 4;
                 player.plants += 2;
                 player.victoryPoints++;
                 resolve();
-            });
+            }));
         });
     }
 }

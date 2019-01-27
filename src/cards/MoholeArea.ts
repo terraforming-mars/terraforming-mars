@@ -6,6 +6,8 @@ import { SpaceType } from "../SpaceType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { Tags } from "./Tags";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class MoholeArea implements IProjectCard {
     public cost: number = 20;
@@ -16,15 +18,11 @@ export class MoholeArea implements IProjectCard {
     public description: string = "Tunnels deep down to the molton magma, releasing heat and gases";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectASpace"
-            }, (spaceId: string) => {
-                try { game.addTile(player, SpaceType.OCEAN, game.getSpace(spaceId), { tileType: TileType.SPECIAL }); } catch (err) { reject(err); return; }
+            player.setWaitingFor(new SelectSpace(this, "Select an ocean space for special tile", (space: ISpace) => {
+                try { game.addTile(player, SpaceType.OCEAN, space, { tileType: TileType.SPECIAL }); } catch (err) { reject(err); return; }
                 player.heatProduction += 4;
                 resolve();
-            });
+            }));
         });
     }
 }

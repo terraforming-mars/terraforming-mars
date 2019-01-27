@@ -4,6 +4,8 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { OrOptions } from "../inputs/OrOptions";
+import { SelectOption } from "../inputs/SelectOption";
 
 export class NitriteReducingBacteria implements IActiveProjectCard {
     public cost: number = 11;
@@ -20,28 +22,23 @@ export class NitriteReducingBacteria implements IActiveProjectCard {
     }
     public action(player: Player, _game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            // TODO - this is OrOption
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectAmount",
-                message: "0 - Add 1 microbe to this card, 1 - Remove 3 microbes to increase your terraform rating 1 step."
-            }, (option: string) => {
-                if (option === "0") {
-                    this.microbes++;
-                    resolve();
-                } else if (option === "1") {
-                    if (this.microbes < 3) {
-                        reject("Need 3 microbes to remove");
-                    } else {
-                        this.microbes -= 3;
-                        player.terraformRating++;
+            player.setWaitingFor(
+                new OrOptions(
+                    new SelectOption(this, "Add 1 microbe to this card", () => {
+                        this.microbes++;
                         resolve();
-                    }
-                } else {
-                    reject("Must select option 0 or 1");
-                }
-            });
+                    }),
+                    new SelectOption(this, "Remove 3 microbes to increase your terraform rating 1 step", () => {
+                        if (this.microbes < 3) {
+                            reject("Need 3 microbes to remove");
+                        } else {
+                            this.microbes -= 3;
+                            player.terraformRating++;
+                            resolve();
+                        }
+                    })
+                )
+            );
         });
     }
 }

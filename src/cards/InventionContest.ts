@@ -4,6 +4,7 @@ import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { SelectCard } from "../inputs/SelectCard";
 
 export class InventionContest implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
@@ -13,23 +14,17 @@ export class InventionContest implements IProjectCard {
     public text: string = "LOOK AT THE TOP 3 CARDS FROM THE DECK. TAKE 1 OF THEM INTO HAND AND DISCARD THE OTHER 2";
     public description: string = "Engaging the scientific community in a field of your choice";
     public play(player: Player, game: Game): Promise<void> {
-        return new Promise<void>((resolve: Function, reject: Function) => {
+        return new Promise<void>((resolve: Function, _reject: Function) => {
             const cardsDrawn: Array<IProjectCard> = game.dealer.getCards(3);
-            const onInputHandler = function (input: string): void {
-                const selectedCard = cardsDrawn.filter((card) => card.name === input);
-                if (selectedCard.length === 0) {
-                    reject("Selected card wasn't one dealt");
-                    return;
-                }
-                player.cardsInHand.push(selectedCard[0]);
+            player.setWaitingFor(new SelectCard(this, "Select card to take into hand", cardsDrawn, (foundCards: Array<IProjectCard>) => {
+                player.cardsInHand.push(foundCards[0]);
+                cardsDrawn.forEach((c) => {
+                    if (c.name !== foundCards[0].name) {
+                        game.dealer.discard(c);
+                    }
+                });
                 resolve();
-            }
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectACard",
-                cards: cardsDrawn
-            }, onInputHandler);
+            }));
         });
     }
 }

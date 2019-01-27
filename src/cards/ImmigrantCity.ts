@@ -4,6 +4,8 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { ISpace } from "../ISpace";
+import { SelectSpace } from "../inputs/SelectSpace";
 
 export class ImmigrantCity implements IProjectCard {
     public cost: number = 13;
@@ -20,12 +22,8 @@ export class ImmigrantCity implements IProjectCard {
             return Promise.reject("Must have 2 mega credit production");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectASpace"
-            }, (spaceId: string) => {
-                try { game.addCityTile(player, spaceId); }
+            player.setWaitingFor(new SelectSpace(this, "Select space for city tile", (space: ISpace) => {
+                try { game.addCityTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 player.energyProduction--;
                 player.megaCreditProduction -= 2;
@@ -34,7 +32,7 @@ export class ImmigrantCity implements IProjectCard {
                     player.megaCreditProduction++;
                 });
                 resolve();
-            });
+            }));
         });
     }
 }

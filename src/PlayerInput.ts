@@ -20,4 +20,5 @@ export interface PlayerInput {
     title?: string
     id?: string
     options?: Array<PlayerInput>
+    cb: Function
 }

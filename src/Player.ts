@@ -113,9 +113,23 @@ export class Player {
         this.standardProjectHandler.push(fn);
     }
 
-    private waitingFor?: Array<PlayerInput>;
+    public selectCards(cards: Array<IProjectCard>): void {
+        if (this.waitingFor === undefined) {
+            throw "Not waiting for anything";
+        }
+        if (this.waitingFor.type !== "SelectACard") {
+            throw "Not waiting for card selection";
+        }
+        this.waitingFor.cb(cards);
+    }
 
-    public setWaitingFor(input: Array<PlayerInput> | PlayerInput | undefined, _inputHandler?: Function): void {
+    private waitingFor?: PlayerInput;
+
+    public getWaitingFor(): PlayerInput | undefined {
+        return this.waitingFor;
+    }
+
+    public setWaitingFor(input: PlayerInput | undefined): void {
         if (input === undefined) {
             this.waitingFor = undefined;
             return;

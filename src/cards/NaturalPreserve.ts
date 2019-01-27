@@ -6,29 +6,22 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SpaceType } from "../SpaceType";
+import { ISpace } from "../ISpace";
+import { SelectSpace } from "../inputs/SelectSpace";
 
 export class NaturalPreserve implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Natural Preserve";
-    public text: string = "Oxygen must be 4% or less. Place this tile next to not other tile. Increase your mega credit production 1 step. Gain 1 victory point";
+    public text: string = "Oxygen must be 4% or less. Place a special tile next to no other tile. Increase your mega credit production 1 step. Gain 1 victory point";
     public description: string = "Creating a national park with original Martian landforms and environments.";
     public play(player: Player, game: Game): Promise<void> {
         if (game.getOxygenLevel() > 4) {
             return Promise.reject("Oxygen must be 4% or less.");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectASpace"
-            }, (spaceId: string) => {
-                const foundSpace = game.getSpace(spaceId);
-                if (foundSpace === undefined) {
-                    reject("Space not found");
-                    return;
-                }
+            player.setWaitingFor(new SelectSpace(this, "Select space for special tile next to no other tile", (foundSpace: ISpace) => {
                 if (foundSpace.spaceType === SpaceType.COLONY) {
                     reject("Must be placed on mars.");
                     return;
@@ -43,7 +36,7 @@ export class NaturalPreserve implements IProjectCard {
                 player.megaCreditProduction++;
                 player.victoryPoints++;
                 resolve();
-            });
+            }));
         });
     }
 }

@@ -4,6 +4,12 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { AndOptions } from "../inputs/AndOptions";
+import { OrOptions } from "../inputs/OrOptions";
+import { SelectOption } from "../inputs/SelectOption";
+import { SelectCard } from "../inputs/SelectCard";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class ImportedHydrogen implements IProjectCard {
     public cost: number = 16;
@@ -14,51 +20,28 @@ export class ImportedHydrogen implements IProjectCard {
     public description: string = "A light-weight bug expensive crucial element.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor([
-                {
-                    initiator: "card",
-                    type: "SelectAmount",
-                    card: this,
-                    title: "Gain 3 plants",
-                    id: "option1"
-                }, {
-                    title: "Add 3 microbes or 2 animals to another card",
-                    initiator: "card",
-                    type: "SelectAmount",
-                    card: this,
-                    id: "option2",
-                    options: [{
-                        initiator: "card",
-                        card: this,
-                        type: "SelectACard",
-                        title: "Select a card",
-                        id: "option3"
-                    }]
-                }, {
-                    initiator: "card",
-                    type: "SelectASpace",
-                    card: this,
-                    id: "option4"
-                }
-            ], (options: {[x: string]: string}) => {
-                try { game.addOceanTile(player, options.option4); }
-                catch (err) { reject(err); return; }
-                if (options.option1) {
-                    player.plants += 3;
-                } else if (options.option2) {
-                    const foundCard = game.getCard(options.option3);
-                    if (foundCard === undefined) {
-                        reject("Card not found");
-                        return;
-                    }
-                    if (foundCard.microbes !== undefined) {
-                        foundCard.microbes += 3;
-                    } else if (foundCard.animals !== undefined) {
-                        foundCard.animals += 2;
-                    }
-                }
-                resolve();
-            });
+            player.setWaitingFor(
+                new AndOptions(
+                    () => {
+                        resolve();
+                    },
+                    new OrOptions(
+                        new SelectOption(this, "Gain 3 plants", () => {
+                            player.plants += 3;
+                        }),
+                        new SelectCard(this, "Add 3 microbes to card", game.getOtherMicrobeCards(this), (foundCards: Array<IProjectCard>) => {
+                            foundCards[0]!.microbes! += 3;
+                        }),
+                        new SelectCard(this, "Add 2 animals to card", game.getOtherAnimalCards(this), (foundCards: Array<IProjectCard>) => {
+                            foundCards[0]!.animals! += 2;
+                        })
+                    ),
+                    new SelectSpace(this, "Select space for ocean", (foundSpace: ISpace) => {
+                        try { game.addOceanTile(player, foundSpace.id); }
+                        catch (err) { reject(err); return; }
+                    })
+                )
+            );
         });
     }
 }

@@ -4,6 +4,8 @@ import { CardType } from "./CardType";
 import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class Plantation implements IProjectCard {
     public cost: number = 15;
@@ -18,15 +20,11 @@ export class Plantation implements IProjectCard {
                 reject("Requires 2 science tags to play");
                 return;
             }
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectASpace"
-            }, (input: string) => {
-                try { game.addGreenery(player, input); }
+            player.setWaitingFor(new SelectSpace(this, "Select space for greenery tile", (space: ISpace) => {
+                try { game.addGreenery(player, space.id); }
                 catch (err) { reject(err); return; }
                 resolve();
-            });
+            }));
         });
     }
 }

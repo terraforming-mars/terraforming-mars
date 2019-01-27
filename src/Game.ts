@@ -8,6 +8,7 @@ import { SpaceBonus } from "./SpaceBonus";
 import { ITile } from "./ITile";
 import { IProjectCard } from "./cards/IProjectCard";
 import { OriginalBoard } from "./OriginalBoard";
+import { SelectCard } from "./inputs/SelectCard";
 
 const MIN_OXYGEN_LEVEL: number = 0;
 const MAX_OXYGEN_LEVEL: number = 14;
@@ -50,18 +51,22 @@ STANDARD PROJECTS
     6) City:
         For  25  M€  you  get  to  place  a  city  tile  (collect  any placement bonus for the tile, and place a player marker on it). You also get to increase your M€ production 1 step.
 */
-
-// PROJECT CARDS
-// active card (blue)
-// automated card (green)
-// events card (red)
-
 export class Game {
-    constructor(public id: string) {
+    constructor(public id: string, private players: Array<Player>, private first: Player) {
+        // Give each player their corporation cards
+        for (let player of players) {
+            if (!player.beginner) {
+                player.corporationCardsDealt = this.dealer.getCorporationCards(2) 
+                player.setWaitingFor(new SelectCard(this, "Select initial cards to buy", this.dealer.getCards(10)), (options: {[x: string]: string}) => {
+                });
+            } else {
+                player.corporationCardsDealt = [this.dealer.beginnerCard]; 
+            }
+        }
+        
     }
     public dealer: Dealer = new Dealer();
     private spaces: Array<ISpace> = new OriginalBoard().spaces;
-    private players: Array<Player> = [];
     private onGreeneryPlaced: Array<Function> = [];
     private onCityTilePlaced: Array<Function> = [];
     private onOceanTilePlaced: Array<Function> = [];
@@ -281,6 +286,31 @@ export class Game {
     public getPlayers(): Array<Player> {
         return this.players;
     }
+
+    public getOtherAnimalCards(c: IProjectCard): Array<IProjectCard> {
+        const result: Array<IProjectCard> = [];
+        this.players.forEach((player) => {
+            player.playedCards.forEach((card) => {
+                if (card.name !== c.name && card.animals !== undefined) {
+                    result.push(card);
+                }
+            });
+        });
+        return result;
+    }
+
+    public getOtherMicrobeCards(c: IProjectCard): Array<IProjectCard> {
+        const result: Array<IProjectCard> = [];
+        this.players.forEach((player) => {
+            player.playedCards.forEach((card) => {
+                if (card.name !== c.name && card.microbes !== undefined) {
+                    result.push(card);
+                }
+            });
+        });
+        return result;
+    }
+
     public getPlayedCardsWithAnimals(): Array<IProjectCard> {
         const result: Array<IProjectCard> = [];
         this.players.forEach((player) => {

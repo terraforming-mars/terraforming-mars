@@ -5,6 +5,8 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SpaceType } from "../SpaceType";
 import { Tags } from "./Tags";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class ProtectedValley implements IProjectCard {
     public cost: number = 23;
@@ -15,20 +17,16 @@ export class ProtectedValley implements IProjectCard {
     public description: string = "A fertile valley with higher air density and humidity, but in need of protection when the oceans rise.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectASpace"
-            }, (input: string) => {
+            player.setWaitingFor(new SelectSpace(this, "Select space for greenery tile", (space: ISpace) => {
                 try {
-                    game.addGreenery(player, input, SpaceType.OCEAN);
+                    game.addGreenery(player, space.id, SpaceType.OCEAN);
                 } catch (err) {
                     reject(err);
                     return;
                 }
                 player.megaCreditProduction += 2;
                 resolve();
-            });
+            }));
         });
     }
 }

@@ -4,6 +4,9 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { Tags } from "./Tags";
+import { OrOptions } from "../inputs/OrOptions";
+import { SelectOption } from "../inputs/SelectOption";
+import { SelectCard } from "../inputs/SelectCard";
 
 export class LocalHeatTrapping implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
@@ -18,33 +21,23 @@ export class LocalHeatTrapping implements IProjectCard {
                 reject("Not enough heat");
                 return;
             }
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "Gain4PlantsOrAnotherCard"
-            }, (input: string) => {
-                if (input === this.name) {
-                    reject("Animals must be added to ANOTHER card.");
-                    return;
-                }
-                if (input === "0") {
-                    player.plants += 4;
-                    player.heat -= 5;
-                    resolve();
-                    return;
-                }
-                const findCard = game.getCard(this.name);
-                if (findCard === undefined) {
-                    reject("Could not find card");
-                    return;
-                }
-                try {
-                    player.addAnimalsToCard(findCard, 2);
-                } catch (err) { reject(err); return; }
-                player.heat -= 5;
-                resolve();
-                return;
-            });
+            const otherAnimalCards: Array<IProjectCard> = game.getOtherAnimalCards(this);
+            player.setWaitingFor(
+                new OrOptions(
+                    new SelectOption(this, "Gain 4 plants", () => {
+                        player.plants += 4;
+                        player.heat -= 5;
+                        resolve();
+                    }),
+                    new SelectCard(this, "Select card to add 2 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => {
+                        try {
+                            player.addAnimalsToCard(foundCards[0], 2);
+                        } catch (err) { reject(err); return; }
+                        player.heat -= 5;
+                        resolve();
+                    })
+                )
+            );
         });
     }
 }

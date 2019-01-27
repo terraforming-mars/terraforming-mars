@@ -5,6 +5,8 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { TileType } from "../TileType";
+import { ISpace } from "../ISpace";
+import { SelectSpace } from "../inputs/SelectSpace";
 
 export class UrbanizedArea implements IProjectCard {
     public cost: number = 10;
@@ -18,16 +20,7 @@ export class UrbanizedArea implements IProjectCard {
             return Promise.reject("Must have energy production");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectASpace"
-            }, (spaceId: string) => {
-                const foundSpace = game.getSpace(spaceId);
-                if (foundSpace === undefined) {
-                    reject("Space not found");
-                    return;
-                }
+            player.setWaitingFor(new SelectSpace(this, "Select space next to at least 2 other city tiles", (foundSpace: ISpace) => {
                 const adjacentSpaces = game.getAdjacentSpaces(foundSpace);
                 if (adjacentSpaces.filter((space) => space.tile && space.tile.tileType === TileType.CITY).length < 2) {
                     reject("Must place next to two city tiles");
@@ -38,7 +31,7 @@ export class UrbanizedArea implements IProjectCard {
                 player.energyProduction--;
                 player.megaCreditProduction += 2;
                 resolve();
-            });
+            }));
         });
     }
 }

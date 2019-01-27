@@ -4,6 +4,12 @@ import { Game } from "../Game";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
+import { AndOptions } from "../inputs/AndOptions";
+import { OrOptions } from "../inputs/OrOptions";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { SelectCard } from "../inputs/SelectCard";
+import { SelectOption } from "../inputs/SelectOption";
+import { ISpace } from "../ISpace";
 
 export class LargeConvoy implements IProjectCard {
     public cost: number = 36;
@@ -14,38 +20,27 @@ export class LargeConvoy implements IProjectCard {
     public description: string = "Huge delivery from Earth";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectASpace"
-            }, (spaceId: string) => {
-                try { game.addOceanTile(player, spaceId); }
-                catch (err) { reject(err); return; }
-                player.setWaitingFor({
-                    initiator: "card",
-                    card: this,
-                    type: "Gain5PlantsOrAdd4Animals"
-                }, (input: string) => {
-                    if (input === "0") {
-                        player.plants += 5;
-                    } else {
-                        const foundCard = game.getCard(input);
-                        if (foundCard === undefined) {
-                            reject("card not found");
-                            return;
-                        }
-                        if (foundCard.animals === undefined) {
-                            reject("card does not have animals");
-                            return;
-                        }
-                        foundCard.animals += 4;
-                    }
-                    player.cardsInHand.push(game.dealer.getCards(1)[0]);
-                    player.cardsInHand.push(game.dealer.getCards(1)[0]);
-                    player.victoryPoints += 2;
-                    resolve();
-                });
-            });
+            let otherAnimalCards: Array<IProjectCard> = game.getOtherAnimalCards(this);
+            player.setWaitingFor(
+                new AndOptions(
+                    () => {
+                        player.cardsInHand.push(game.dealer.getCards(1)[0]);
+                        player.cardsInHand.push(game.dealer.getCards(1)[0]);
+                        player.victoryPoints += 2;
+                        resolve();
+                    },
+                    new SelectSpace(this, "Select space for ocean tile", (space: ISpace) => {
+                        try { game.addOceanTile(player, space.id); }
+                        catch (err) { reject(err); return; }
+                    }),
+                    new OrOptions(
+                        new SelectOption(this, "Gain 5 plants", () => { player.plants += 5; }),
+                        new SelectCard(this, "Select card to add 4 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => { 
+                            foundCards[0]!.animals! += 4;
+                        })
+                    )
+                )
+            );
         });
     }
 }

@@ -4,6 +4,8 @@ import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class PermafrostExtraction implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
@@ -18,15 +20,11 @@ export class PermafrostExtraction implements IProjectCard {
                 reject("Temperature must be -8C or warmer");
                 return;
             }
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectASpace"
-            }, (input: string) => {
-                try { game.addOceanTile(player, input); }
+            player.setWaitingFor(new SelectSpace(this, "Select space for ocean tile", (space: ISpace) => {
+                try { game.addOceanTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 resolve();
-            });
+            }));
         });
     }
 }

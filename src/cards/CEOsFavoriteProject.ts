@@ -4,6 +4,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { Tags } from "./Tags";
+import { SelectCard } from "../inputs/SelectCard";
 
 export class CEOsFavoriteProject implements IProjectCard {
     public cost: number = 1;
@@ -15,17 +16,8 @@ export class CEOsFavoriteProject implements IProjectCard {
     public play(player: Player, _game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
             const availableCards = player.getCardsWithResources().filter((card) => card.animals || card.microbes || card.fighterResources || card.scienceResources);
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectACard",
-                cards: availableCards
-            }, (cardName: string) => {
-                const foundCard = availableCards.filter((card) => card.name === cardName)[0];
-                if (foundCard === undefined) {
-                    reject("Card not found");
-                    return;
-                }
+            player.setWaitingFor(new SelectCard(this, "Select card to add resource", availableCards, (foundCards: Array<IProjectCard>) => {
+                const foundCard = foundCards[0];
                 if (foundCard.animals) {
                     foundCard.animals++;
                 } else if (foundCard.microbes) {
@@ -37,7 +29,7 @@ export class CEOsFavoriteProject implements IProjectCard {
                     return;
                 }
                 resolve();
-            });
+            }));
         });
     }
 }

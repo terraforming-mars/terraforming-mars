@@ -15,23 +15,18 @@ export class BigAsteroid implements IProjectCard {
     public description: string = "There are many unpopulated areas to crash it on";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (options: {[x: string]: string}) => {
-                const foundPlayer = game.getPlayer(options.option1);
-                if (foundPlayer === undefined) {
-                    reject("Player not found");
-                } else {
-                    game.increaseTemperature(player)
-                        .then(function () { return game.increaseTemperature(player); })
-                        .then(function () {
-                            player.titanium += 4;
-                            foundPlayer.plants = Math.max(foundPlayer.plants - 4, 0);
-                            resolve();
-                        })
-                        .catch((err: string) => {
-                            reject(err);
-                        });
-                }
-            });
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to remove plants", (foundPlayer: Player) => {
+                game.increaseTemperature(player)
+                    .then(function () { return game.increaseTemperature(player); })
+                    .then(function () {
+                        player.titanium += 4;
+                        foundPlayer.plants = Math.max(foundPlayer.plants - 4, 0);
+                        resolve();
+                    })
+                    .catch((err: string) => {
+                        reject(err);
+                    });
+            }));
         });
     }
 }

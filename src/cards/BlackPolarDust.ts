@@ -5,6 +5,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class BlackPolarDust implements IProjectCard {
     public cost: number = 15;
@@ -15,13 +16,13 @@ export class BlackPolarDust implements IProjectCard {
     public description: string = "The sprinkled dust absorbs heat from the sun. Must be renewed after each snowfall, though";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select space for ocean"), (options: {[x: string]: string}) => {
-                try { game.addOceanTile(player, options.option1); }
+            player.setWaitingFor(new SelectSpace(this, "Select space for ocean", (space: ISpace) => {
+                try { game.addOceanTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 player.megaCreditProduction -= 2;
                 player.heatProduction += 3;
                 resolve();
-            });
+            }));
         });
     }
 }

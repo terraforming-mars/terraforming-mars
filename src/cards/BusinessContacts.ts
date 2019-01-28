@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { SelectCard } from "../inputs/SelectCard";
 
 export class BusinessContacts implements IProjectCard {
     public cost: number = 7;
@@ -13,29 +14,13 @@ export class BusinessContacts implements IProjectCard {
     public text: string = "Look at the top 4 cards from the deck. Take 2 of them into hand and discard the other 2.";
     public description: string = "Money and information are often interchangeable.";
     public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, _reject) => {
             const availableCards: Array<IProjectCard> = game.dealer.getCards(4);
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectACard",
-                cardsToPick: 2,
-                cards: availableCards
-            }, (card1: string, card2: string) => {
-                const foundCard1 = availableCards.filter((card) => card.name === card1)[0];
-                const foundCard2 = availableCards.filter((card) => card.name === card2)[0];
-                if (foundCard1 === undefined) {
-                    reject("Card 1 not found");
-                    return;
-                }
-                if (foundCard2 === undefined) {
-                    reject("Card 2 not found");
-                    return;
-                }
-                player.cardsInHand.push(foundCard1);
-                player.cardsInHand.push(foundCard2);
+            player.setWaitingFor(new SelectCard(this, "Select cards to keep", availableCards, (foundCards: Array<IProjectCard>) => {
+                player.cardsInHand.push(foundCards[0]);
+                player.cardsInHand.push(foundCards[1]);
                 resolve();
-            });
+            }));
         });
     }
 }

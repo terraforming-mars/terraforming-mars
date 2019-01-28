@@ -10,6 +10,8 @@ const player2 = new Player("B", Color.GREEN, true);
 console.log("Creating new game");
 const game = new Game("FA12FE", [player1, player2], player1);
 
+console.log("Players", game.getPlayers());
+
 console.log("Player 1 corporations", player1.corporationCardsDealt);
 console.log("Player 2 corporations", player2.corporationCardsDealt);
 
@@ -22,8 +24,8 @@ if (player1Waiting === undefined) {
 console.log("Player 1 is waiting for", player1.getWaitingFor());
 console.log("Player 2 is waiting for", player2.getWaitingFor());
 
-const player1Cards = player1Waiting[0];
-if (player1Cards === undefined) {
+const player1Cards = player1Waiting;
+if (player1Cards === undefined || player1Cards.cards === undefined) {
     throw "Player 1 didn't get cards";
 }
 

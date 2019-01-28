@@ -9,6 +9,7 @@ import { ITile } from "./ITile";
 import { IProjectCard } from "./cards/IProjectCard";
 import { OriginalBoard } from "./OriginalBoard";
 import { SelectCard } from "./inputs/SelectCard";
+import { SelectSpace } from "./inputs/SelectSpace";
 
 const MIN_OXYGEN_LEVEL: number = 0;
 const MAX_OXYGEN_LEVEL: number = 14;
@@ -52,13 +53,13 @@ STANDARD PROJECTS
         For  25  M€  you  get  to  place  a  city  tile  (collect  any placement bonus for the tile, and place a player marker on it). You also get to increase your M€ production 1 step.
 */
 export class Game {
-    constructor(public id: string, private players: Array<Player>, private first: Player) {
+    constructor(public id: string, private players: Array<Player>, _first: Player) {
         // Give each player their corporation cards
         for (let player of players) {
             if (!player.beginner) {
                 player.corporationCardsDealt = this.dealer.getCorporationCards(2) 
-                player.setWaitingFor(new SelectCard(this, "Select initial cards to buy", this.dealer.getCards(10)), (options: {[x: string]: string}) => {
-                });
+                player.setWaitingFor(new SelectCard(undefined, "Select initial cards to buy", this.dealer.getCards(10), (_foundCards: Array<IProjectCard>) => {
+                }));
             } else {
                 player.corporationCardsDealt = [this.dealer.beginnerCard]; 
             }
@@ -119,16 +120,12 @@ export class Game {
                 return Promise.resolve();
             } else if (this.temperature + 2 === 0) {
                 return new Promise((resolve, reject) => {
-                    player.setWaitingFor({
-                        initiator: "board",
-                        type: "SelectASpace",
-                        message: "Select a place for bonus ocean"
-                    }, (spaceName: string) => {
-                        try { this.addOceanTile(player, spaceName); }
+                    player.setWaitingFor(new SelectSpace(undefined, "Select space for ocean", (space: ISpace) => {
+                        try { this.addOceanTile(player, space.id); }
                         catch (err) { reject(err); return; }
                         this.temperature += 2
                         resolve();
-                    });
+                    }));
                 });
             } else {
                 this.temperature += 2;

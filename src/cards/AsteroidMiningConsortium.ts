@@ -17,18 +17,13 @@ export class AsteroidMiningConsortium implements IProjectCard {
         if (player.titaniumProduction < 1) {
             return Promise.reject("Requires that you have titanium production");
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (options: {[x: string]: string}) => {
-                const foundPlayer = game.getPlayer(options.option1);
-                if (foundPlayer === undefined) {
-                    reject("Player not found");
-                    return;
-                }
+        return new Promise((resolve, _reject) => {
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease", (foundPlayer: Player) => {
                 foundPlayer.titaniumProduction = Math.max(0, foundPlayer.titaniumProduction - 1);
                 player.titaniumProduction++;
                 player.victoryPoints++;
                 resolve();
-            });
+            }));
         });
     }
 }

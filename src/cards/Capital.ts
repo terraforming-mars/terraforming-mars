@@ -5,6 +5,8 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { TileType } from "../TileType";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class Capital implements IProjectCard {
     public cost: number = 26;
@@ -21,25 +23,20 @@ export class Capital implements IProjectCard {
             return Promise.reject("Requires 2 energy production.");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectASpace"
-            }, (spaceName: string) => {
-                try { game.addCityTile(player, spaceName); }
+            player.setWaitingFor(new SelectSpace(this, "Select space for special city tile", (space: ISpace) => {
+                try { game.addCityTile(player, space.id); }
                 catch (err) { reject(err); return; }
-                const pickedSpace = game.getSpace(spaceName);
                 player.energyProduction -= 2;
                 player.megaCreditProduction += 5;
                 game.addGameEndListener(() => {
-                    game.getAdjacentSpaces(pickedSpace).forEach((space) => {
-                        if (space.tile && space.tile.tileType === TileType.OCEAN) {
+                    game.getAdjacentSpaces(space).forEach((s) => {
+                        if (s.tile && s.tile.tileType === TileType.OCEAN) {
                             player.victoryPoints++;
                         }
                     });
                 });
                 resolve();
-            });
+            }));
         });
     }
 }

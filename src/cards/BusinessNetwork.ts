@@ -7,6 +7,7 @@ import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectCard } from "../inputs/SelectCard";
 import { SelectOption } from "../inputs/SelectOption";
+import { IProjectCard } from "./IProjectCard";
 
 export class BusinessNetwork implements IActiveProjectCard {
     public cost: number = 4;
@@ -23,22 +24,24 @@ export class BusinessNetwork implements IActiveProjectCard {
     public action(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
             const dealtCard = game.dealer.getCards(1)[0];
-            player.setWaitingFor(new OrOptions(new SelectCard(this, "Buy card", [dealtCard]), new SelectOption(this, "Discard")), (options: {[x: string]: string}) => {
-                if (options.option2 === "1") {
-                    game.dealer.discard(dealtCard);
-                    resolve();
-                    return;
-                } else {
-                    if (player.megaCredits < 3) {
+            player.setWaitingFor(
+                new OrOptions(
+                    new SelectCard(this, "Buy card", [dealtCard], (_foundCards: Array<IProjectCard>) => {
+                        if (player.megaCredits < 3) {
+                            game.dealer.discard(dealtCard);
+                            reject("Not enough mega credits to buy card");
+                        } else {
+                            player.megaCredits -= 3;
+                            player.cardsInHand.push(dealtCard);
+                            resolve();
+                        }
+                    }),
+                    new SelectOption(this, "Discard", () => {
                         game.dealer.discard(dealtCard);
-                        reject("Not enough mega credits to buy card");
-                        return;
-                    }
-                    player.megaCredits -= 3;
-                    player.cardsInHand.push(dealtCard);
-                    resolve();
-                }
-            });
+                        resolve();
+                    })
+                )
+            );
         });
     }
 }

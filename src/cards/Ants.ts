@@ -37,21 +37,12 @@ export class Ants implements IActiveProjectCard {
         if (availableCards.length === 0) {
             return Promise.reject("No cards to remove microbes from");
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectCard(this, "Select card to remove microbe", availableCards), (options: {[x: string]: string}) => {
-                const foundCard = availableCards.filter((card) => card.name === options.option1)[0];
-                if (foundCard === undefined) {
-                    reject("Card not found");
-                    return;
-                }
-                if (foundCard.microbes === undefined) {
-                    reject("Card does not take microbes");
-                    return;
-                }
-                foundCard.microbes--;
+        return new Promise((resolve, _reject) => {
+            player.setWaitingFor(new SelectCard(this, "Select card to remove microbe", availableCards, (foundCards: Array<IProjectCard>) => {
+                foundCards[0]!.microbes!--;
                 this.microbes++;
                 resolve();
-            });
+            }));
         });
     }
 }

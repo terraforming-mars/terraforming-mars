@@ -20,12 +20,7 @@ export class Birds implements IActiveProjectCard {
             return Promise.reject("Requires 13% oxygen");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (options: {[x: string]: string}) => {
-                const foundPlayer = game.getPlayer(options.option1);
-                if (foundPlayer === undefined) {
-                    reject("Player not found");
-                    return;
-                }
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
                 if (foundPlayer.plantProduction < 2) {
                     reject("Player needs at least 2 plant production");
                     return;
@@ -35,7 +30,7 @@ export class Birds implements IActiveProjectCard {
                     player.victoryPoints += this.animals;
                 });
                 resolve();
-            });
+            }));
         });
     }
     public action(_player: Player, _game: Game): Promise<void> {

@@ -9,9 +9,11 @@ export class OrOptions implements PlayerInput {
     public card?: IProjectCard;
     public cb: () => void;
     public title: string = "Select one option";
+    public options: Array<PlayerInput>;
     constructor(
-        public ...options: Array<PlayerInput>
+        ...options: Array<PlayerInput>
     ) {
+        this.options = options;
         this.card = options[0].card;
         this.cb = function() {};
     } 

@@ -8,7 +8,9 @@ export class AndOptions implements PlayerInput {
     public type: PlayerInputTypes = "SelectAmount";
     public title: string = "Select all";
     public card?: IProjectCard;
-    constructor(public cb: () => void, public ...options: Array<PlayerInput>) {
+    public options: Array<PlayerInput>;
+    constructor(public cb: () => void, ...options: Array<PlayerInput>) {
+        this.options = options;
         this.card = options[0].card;
     } 
 }

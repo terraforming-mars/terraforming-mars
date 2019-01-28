@@ -129,19 +129,8 @@ export class Player {
         return this.waitingFor;
     }
 
-    public setWaitingFor(input: PlayerInput | undefined): void {
-        if (input === undefined) {
-            this.waitingFor = undefined;
-            return;
-        }
-        if (this.waitingFor !== undefined) {
-            throw "Already waiting on input from player";
-        }
-        if (!Array.isArray(input)) {
-            this.waitingFor = [input];
-        } else {
-            this.waitingFor = input;
-        }
+    public setWaitingFor(input: PlayerInput): void {
+        this.waitingFor = input;
     }
 
 }

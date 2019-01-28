@@ -18,12 +18,7 @@ export class CloudSeeding implements IProjectCard {
             return Promise.reject("Requires 3 ocean tiles");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (options: {[x: string]: string}) => {
-                const foundPlayer = game.getPlayer(options.option1);
-                if (foundPlayer === undefined) {
-                    reject("Player not found");
-                    return;
-                }
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease", (foundPlayer: Player) => {
                 if (foundPlayer.heatProduction < 1) {
                     reject("Player must have heat production");
                     return;
@@ -32,7 +27,7 @@ export class CloudSeeding implements IProjectCard {
                 foundPlayer.heatProduction--;
                 player.plantProduction += 2;
                 resolve();
-            });
+            }));
         });
     }
 }

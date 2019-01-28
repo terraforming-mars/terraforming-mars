@@ -4,6 +4,10 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { OrOptions } from "../inputs/OrOptions";
+import { SelectOption } from "../inputs/SelectOption";
+import { SelectCard } from "../inputs/SelectCard";
+import { IProjectCard } from "./IProjectCard";
 
 export class ExtremeColdFungus implements IActiveProjectCard {
     public cost: number = 13;
@@ -19,33 +23,18 @@ export class ExtremeColdFungus implements IActiveProjectCard {
         }
         return Promise.resolve();
     }
-    public action(player: Player, _game: Game): Promise<void> {
-        const availableCards = player.playedCards.filter((card) => {
-            return card.name !== this.name && card.microbes !== undefined;
-        });
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "OptionOrCard",
-                message: "Gain 1 plant or add 2 microbes to ANOTHER card.",
-                cards: availableCards
-            }, (option: string) => {
-                if (option === "0") {
-                    player.plants++;
-                    resolve();
-                } else {
-                    const foundCard = availableCards.filter((card) => card.name === option)[0];
-                    if (foundCard === undefined) {
-                        reject("Card not found");
-                    } else if (foundCard.microbes === undefined) {
-                        reject("Card does not have microbes");
-                    } else {
-                        foundCard.microbes += 2;
+    public action(player: Player, game: Game): Promise<void> {
+        const otherMicrobeCards = game.getOtherMicrobeCards(this);
+        return new Promise((resolve, _reject) => {
+            player.setWaitingFor(
+                new OrOptions(
+                    new SelectOption(this, "Gain 1 plant", () => { player.plants++; resolve(); }),
+                    new SelectCard(this, "Select card to remove 2 microbes", otherMicrobeCards, (foundCards: Array<IProjectCard>) => {
+                        foundCards[0]!.microbes! += 2;
                         resolve();
-                    }
-                }
-            });
+                    })
+                )
+            );
         });
     }
 }

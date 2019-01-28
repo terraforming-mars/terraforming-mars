@@ -17,24 +17,15 @@ export class EOSChasmaNationalPark implements IProjectCard {
         if (game.getTemperature() < -12) {
             return Promise.reject("Requires -12C or warmer");
         }
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, _reject) => {
             const availableCards = game.getPlayedCardsWithAnimals();
-            player.setWaitingFor(new SelectCard(this, "Select card to add animal", availableCards), (options: {[x: string]: string}) => {
-                const foundCard = availableCards.filter((card: IProjectCard) => card.name === options.option1)[0];
-                if (foundCard === undefined) {
-                    reject("Card not found");
-                    return;
-                }
-                if (foundCard.animals === undefined) {
-                    reject("Card does not take animals");
-                    return;
-                }
-                foundCard.animals++;
+            player.setWaitingFor(new SelectCard(this, "Select card to add animal", availableCards, (foundCards: Array<IProjectCard>) => {
+                foundCards[0]!.animals!++;
                 player.plants += 3;
                 player.megaCreditProduction += 2;
                 player.victoryPoints++;
                 resolve();
-            });
+            }));
         });
     }
 }

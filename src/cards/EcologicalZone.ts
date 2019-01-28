@@ -6,6 +6,8 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SpaceType } from "../SpaceType";
 import { TileType } from "../TileType";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class EcologicalZone implements IProjectCard {
     public cost: number = 12;
@@ -20,16 +22,7 @@ export class EcologicalZone implements IProjectCard {
             return Promise.reject("Requires that you have a greenery tile");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor({
-                initiator: "card",
-                card: this,
-                type: "SelectASpace"
-            }, (spaceId: string) => {
-                const requestedSpace = game.getSpace(spaceId);
-                if (requestedSpace === undefined) {
-                    reject("Space not found");
-                    return;
-                }
+            player.setWaitingFor(new SelectSpace(this, "Select space next to greenery for special tile", (requestedSpace: ISpace) => {
                 const adjacentTiles = game.getAdjacentSpaces(requestedSpace);
                 if (adjacentTiles.filter((space) => space.tile && space.tile.tileType === TileType.GREENERY).length === 0) {
                     reject("Tile must be placed by greenery");
@@ -47,7 +40,7 @@ export class EcologicalZone implements IProjectCard {
                     player.victoryPoints += Math.floor(this.animals / 2);
                 });
                 resolve();
-            });
+            }));
         });
     }
 }

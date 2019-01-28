@@ -19,19 +19,14 @@ export class Fish implements IActiveProjectCard {
         if (game.getTemperature() < 2) {
             return Promise.reject("Requires +2C or warmer");
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (options: {[x: string]: string}) => {
-                const foundPlayer = game.getPlayer(options.option1);
-                if (foundPlayer === undefined) {
-                    reject("Player not found");
-                    return;
-                }
+        return new Promise((resolve, _reject) => {
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
                 foundPlayer.plantProduction--;
                 game.addGameEndListener(() => {
                     player.victoryPoints += this.animals;
                 });
                 resolve();
-            });
+            }));
         });
     }
     public action(_player: Player, _game: Game): Promise<void> {

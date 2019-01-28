@@ -17,26 +17,28 @@ export class ElectroCatapult implements IActiveProjectCard {
     public description: string = "A 200km long acceleration ramp up the side of Pavonis Mons, hurtling export goods into space.";
     public action(player: Player, _game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new OrOptions(new SelectOption(this, "Spend 1 plant"), new SelectOption(this, "Spend 1 steel")), (options: {[x: string]: string}) => {
-                if (options.option1 === "1") {
-                    if (player.plants < 1) {
-                        reject("Need plant to spend");
-                        return;
-                    }
-                    player.plants--;
-                } else if (options.option2 === "1") {
-                    if (player.steel < 1) {
-                        reject("Need steel to spend");
-                        return;
-                    }
-                    player.steel--;
-                } else {
-                    reject("Unknown selection");
-                    return;
-                }
-                player.megaCredits += 7;
-                resolve();
-            });
+            player.setWaitingFor(
+                new OrOptions(
+                    new SelectOption(this, "Spend 1 plant", () => {
+                        if (player.plants < 1) {
+                            reject("Need plant to spend");
+                            return;
+                        }
+                        player.plants--;
+                        player.megaCredits += 7;
+                        resolve();
+                    }),
+                    new SelectOption(this, "Spend 1 steel", () => {
+                        if (player.steel < 1) {
+                            reject("Need steel to spend");
+                            return;
+                        }
+                        player.steel--;
+                        player.megaCredits += 7;
+                        resolve();
+                    })
+                )
+            );
         });
     }
     public play(player: Player, game: Game): Promise<void> {

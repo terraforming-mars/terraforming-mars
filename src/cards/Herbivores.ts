@@ -20,12 +20,7 @@ export class Herbivores implements IProjectCard {
                 reject("Requires 8% oxygen.");
                 return;
             }
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (options: {[x: string]: string}) => {
-                const foundPlayer = game.getPlayer(options.option1);
-                if (foundPlayer === undefined) {
-                    reject("Player not found");
-                    return;
-                }
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
                 if (foundPlayer.plantProduction < 1) {
                     reject("Player must have plant production");
                     return;
@@ -41,7 +36,7 @@ export class Herbivores implements IProjectCard {
                     player.victoryPoints += Math.floor(this.animals / 2);
                 });
                 resolve();
-            });
+            }));
         });
     }
 }

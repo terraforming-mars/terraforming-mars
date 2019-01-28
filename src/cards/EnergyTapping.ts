@@ -15,12 +15,7 @@ export class EnergyTapping implements IProjectCard {
     public description: string = "They need it. But we need it more.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers()), (options: {[x: string]: string}) => {
-                const foundPlayer = game.getPlayer(options.option1);
-                if (foundPlayer === undefined) {
-                    reject("Player not found");
-                    return;
-                }
+            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease energy production", (foundPlayer: Player) => {
                 if (foundPlayer.energyProduction < 1) {
                     reject("Selected player has no energy production");
                     return;
@@ -29,7 +24,7 @@ export class EnergyTapping implements IProjectCard {
                 player.energyProduction++;
                 player.victoryPoints--;
                 resolve();
-            });
+            }));
         });
     }
 }

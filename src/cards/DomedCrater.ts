@@ -5,6 +5,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
 
 export class DomedCrater implements IProjectCard {
     public cost: number = 24;
@@ -21,15 +22,15 @@ export class DomedCrater implements IProjectCard {
             return Promise.reject("Need energy production");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this), (options: {[x: string]: string}) => {
-                try { game.addCityTile(player, options.option1); }
+            player.setWaitingFor(new SelectSpace(this, "Select space for city tile", (space: ISpace) => {
+                try { game.addCityTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 player.plants += 3;
                 player.energyProduction--;
                 player.megaCreditProduction += 3;
                 player.victoryPoints++;
                 resolve();
-            });
+            }));
         });
     }
 }

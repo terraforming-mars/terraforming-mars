@@ -21,15 +21,11 @@ export class SymbioticFungus implements IActiveProjectCard {
         }
         return Promise.resolve();
     }
-    public action(player: Player, _game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            const availableCards = player.playedCards.filter((card) => card.microbes !== undefined && card.name !== this.name);
-            player.setWaitingFor(new SelectCard(this, "Select card for microbe", availableCards, (foundCards: Array<IProjectCard>) => {
-                if (foundCards[0].microbes === undefined) {
-                    reject("No microbes on this card");
-                    return;
-                }
-                foundCards[0].microbes++;
+    public action(player: Player, game: Game): Promise<void> {
+        return new Promise((resolve, _reject) => {
+            const availableCards = game.getOtherMicrobeCards(this);
+            player.setWaitingFor(new SelectCard(this.name, "Select card for microbe", availableCards, (foundCards: Array<IProjectCard>) => {
+                foundCards[0]!.microbes!++;
                 resolve();
             }));
         });

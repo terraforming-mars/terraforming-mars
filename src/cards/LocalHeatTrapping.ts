@@ -24,12 +24,12 @@ export class LocalHeatTrapping implements IProjectCard {
             const otherAnimalCards: Array<IProjectCard> = game.getOtherAnimalCards(this);
             player.setWaitingFor(
                 new OrOptions(
-                    new SelectOption(this, "Gain 4 plants", () => {
+                    new SelectOption(this.name, "Gain 4 plants", () => {
                         player.plants += 4;
                         player.heat -= 5;
                         resolve();
                     }),
-                    new SelectCard(this, "Select card to add 2 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => {
+                    new SelectCard(this.name, "Select card to add 2 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => {
                         try {
                             player.addAnimalsToCard(foundCards[0], 2);
                         } catch (err) { reject(err); return; }

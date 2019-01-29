@@ -20,7 +20,7 @@ export class IceCapMelting implements IProjectCard {
                 reject("not warm enough, must be +2C or warmer");
                 return;
             }
-            player.setWaitingFor(new SelectSpace(this, "Select space for ocean", (space: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for ocean", (space: ISpace) => {
                 try { game.addOceanTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 resolve();

@@ -18,7 +18,7 @@ export class CloudSeeding implements IProjectCard {
             return Promise.reject("Requires 3 ocean tiles");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease", (foundPlayer: Player) => {
+            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease", (foundPlayer: Player) => {
                 if (foundPlayer.heatProduction < 1) {
                     reject("Player must have heat production");
                     return;

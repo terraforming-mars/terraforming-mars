@@ -15,7 +15,7 @@ export class DeimosDown implements IProjectCard {
     public description: string = "We don't use that moon anyway";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to remove 8 plants", (foundPlayer: Player) => {
+            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 8 plants", (foundPlayer: Player) => {
                 game.increaseTemperature(player)
                     .then(function () { return game.increaseTemperature(player); })
                     .then(function () { return game.increaseTemperature(player); })

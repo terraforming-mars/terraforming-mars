@@ -16,7 +16,7 @@ export class InventionContest implements IProjectCard {
     public play(player: Player, game: Game): Promise<void> {
         return new Promise<void>((resolve: Function, _reject: Function) => {
             const cardsDrawn: Array<IProjectCard> = game.dealer.getCards(3);
-            player.setWaitingFor(new SelectCard(this, "Select card to take into hand", cardsDrawn, (foundCards: Array<IProjectCard>) => {
+            player.setWaitingFor(new SelectCard(this.name, "Select card to take into hand", cardsDrawn, (foundCards: Array<IProjectCard>) => {
                 player.cardsInHand.push(foundCards[0]);
                 cardsDrawn.forEach((c) => {
                     if (c.name !== foundCards[0].name) {

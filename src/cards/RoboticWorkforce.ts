@@ -124,11 +124,11 @@ export class RoboticWorkforce implements IProjectCard {
             return Promise.reject("No builder cards to duplicate");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectCard(this, "Select builder card to copy", availableCards, (selectedCards: Array<IProjectCard>) => {
+            player.setWaitingFor(new SelectCard(this.name, "Select builder card to copy", availableCards, (selectedCards: Array<IProjectCard>) => {
                 const foundCard: IProjectCard = selectedCards[0];
                 // this is the only card which requires additional user input
                 if (foundCard.name === new BiomassCombustors().name) {
-                    player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to remove plant production", (foundPlayer: Player) => {
+                    player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to remove plant production", (foundPlayer: Player) => {
                         foundPlayer.plantProduction--;
                         player.energyProduction += 2;
                         resolve();

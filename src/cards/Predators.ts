@@ -35,7 +35,7 @@ export class Predators implements IActiveProjectCard {
             });
         });
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectCard(this, "Select card to remove animal from", animalCards, (foundCards: Array<IProjectCard>) => {
+            player.setWaitingFor(new SelectCard(this.name, "Select card to remove animal from", animalCards, (foundCards: Array<IProjectCard>) => {
                 const foundCard = foundCards[0];
                 if (foundCard.animals === undefined) {
                     reject("Card does not have animals");

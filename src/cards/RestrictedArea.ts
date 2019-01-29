@@ -18,7 +18,7 @@ export class RestrictedArea implements IActiveProjectCard {
     public description: string = "A place to conduct secret research, preventing the wrong people from getting in. Or out";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select space for tile", (foundSpace: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for tile", (foundSpace: ISpace) => {
                 try { game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL }); }
                 catch (err) { reject(err); return; }
                 resolve();

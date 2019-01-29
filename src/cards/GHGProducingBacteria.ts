@@ -27,11 +27,11 @@ export class GHGProducingBacteria implements IActiveProjectCard {
             return new Promise((resolve, reject) => {
                 player.setWaitingFor(
                     new OrOptions(
-                        new SelectOption(this, "Add 1 microbe", () => {
+                        new SelectOption(this.name, "Add 1 microbe", () => {
                             this.microbes++;
                             resolve();
                         }),
-                        new SelectOption(this, "Remove 2 microbes to raise temperature 1 step", () => {
+                        new SelectOption(this.name, "Remove 2 microbes to raise temperature 1 step", () => {
                             game.increaseTemperature(player).then(() => {
                                 this.microbes -= 2;
                                 resolve();

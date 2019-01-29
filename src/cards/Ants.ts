@@ -38,7 +38,7 @@ export class Ants implements IActiveProjectCard {
             return Promise.reject("No cards to remove microbes from");
         }
         return new Promise((resolve, _reject) => {
-            player.setWaitingFor(new SelectCard(this, "Select card to remove microbe", availableCards, (foundCards: Array<IProjectCard>) => {
+            player.setWaitingFor(new SelectCard(this.name, "Select card to remove microbe", availableCards, (foundCards: Array<IProjectCard>) => {
                 foundCards[0]!.microbes!--;
                 this.microbes++;
                 resolve();

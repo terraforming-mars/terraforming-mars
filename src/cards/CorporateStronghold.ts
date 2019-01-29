@@ -19,7 +19,7 @@ export class CorporateStronghold implements IProjectCard {
             throw "Must have energy to decrease";
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select space for city tile", (space: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for city tile", (space: ISpace) => {
                 try {
                     game.addCityTile(player, space.id);
                 } catch (err) {

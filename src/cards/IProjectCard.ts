@@ -1,20 +1,13 @@
 
 import { CardType } from "./CardType";
-import { Tags } from "./Tags";
-import { Game } from "../Game";
-import { Player } from "../Player";
+import { ICard } from "./ICard";
 
-export interface IProjectCard {
+export interface IProjectCard extends ICard {
     animals?: number;
     microbes?: number;
     scienceResources?: number;
     fighterResources?: number;
     cardType: CardType;
     cost: number;
-    tags: Array<Tags>;
-    name: string;
-    text: string;
-    description: string;
-    play: (player: Player, game: Game) => Promise<void>;
 }
 

@@ -23,7 +23,7 @@ export class Capital implements IProjectCard {
             return Promise.reject("Requires 2 energy production.");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select space for special city tile", (space: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for special city tile", (space: ISpace) => {
                 try { game.addCityTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 player.energyProduction -= 2;

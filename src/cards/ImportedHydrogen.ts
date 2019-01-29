@@ -26,17 +26,17 @@ export class ImportedHydrogen implements IProjectCard {
                         resolve();
                     },
                     new OrOptions(
-                        new SelectOption(this, "Gain 3 plants", () => {
+                        new SelectOption(this.name, "Gain 3 plants", () => {
                             player.plants += 3;
                         }),
-                        new SelectCard(this, "Add 3 microbes to card", game.getOtherMicrobeCards(this), (foundCards: Array<IProjectCard>) => {
+                        new SelectCard(this.name, "Add 3 microbes to card", game.getOtherMicrobeCards(this), (foundCards: Array<IProjectCard>) => {
                             foundCards[0]!.microbes! += 3;
                         }),
-                        new SelectCard(this, "Add 2 animals to card", game.getOtherAnimalCards(this), (foundCards: Array<IProjectCard>) => {
+                        new SelectCard(this.name, "Add 2 animals to card", game.getOtherAnimalCards(this), (foundCards: Array<IProjectCard>) => {
                             foundCards[0]!.animals! += 2;
                         })
                     ),
-                    new SelectSpace(this, "Select space for ocean", (foundSpace: ISpace) => {
+                    new SelectSpace(this.name, "Select space for ocean", (foundSpace: ISpace) => {
                         try { game.addOceanTile(player, foundSpace.id); }
                         catch (err) { reject(err); return; }
                     })

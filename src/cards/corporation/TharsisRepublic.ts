@@ -24,7 +24,7 @@ export class TharsisRepublic extends CorporationCard {
             }
         });
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(undefined, "Select space on mars for city tile", (space: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space on mars for city tile", (space: ISpace) => {
                 try { game.addCityTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 resolve();

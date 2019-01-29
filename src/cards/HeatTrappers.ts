@@ -21,7 +21,7 @@ export class HeatTrappers implements IProjectCard {
                 player.victoryPoints--;
                 resolve();
             };
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease heat production", inputHandler));
+            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease heat production", inputHandler));
         });
     }
 }

@@ -22,7 +22,7 @@ export class EcologicalZone implements IProjectCard {
             return Promise.reject("Requires that you have a greenery tile");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select space next to greenery for special tile", (requestedSpace: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space next to greenery for special tile", (requestedSpace: ISpace) => {
                 const adjacentTiles = game.getAdjacentSpaces(requestedSpace);
                 if (adjacentTiles.filter((space) => space.tile && space.tile.tileType === TileType.GREENERY).length === 0) {
                     reject("Tile must be placed by greenery");

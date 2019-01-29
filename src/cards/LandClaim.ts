@@ -16,7 +16,7 @@ export class LandClaim implements IProjectCard {
     public description: string = "Acquiring strategic land areas";
     public play(player: Player, _game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select space for claim", (foundSpace: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for claim", (foundSpace: ISpace) => {
                 if (foundSpace.tile !== undefined) {
                     reject("This tile is already taken");
                     return;

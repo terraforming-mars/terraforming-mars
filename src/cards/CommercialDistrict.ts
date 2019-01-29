@@ -20,7 +20,7 @@ export class CommercialDistrict implements IProjectCard {
             return Promise.reject("Must have energy production");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select space for special tile", (foundSpace: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for special tile", (foundSpace: ISpace) => {
                 try { game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL }); }
                 catch (err) { reject(err); return; }
                 player.energyProduction--;

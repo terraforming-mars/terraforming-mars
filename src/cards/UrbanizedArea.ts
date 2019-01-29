@@ -20,7 +20,7 @@ export class UrbanizedArea implements IProjectCard {
             return Promise.reject("Must have energy production");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select space next to at least 2 other city tiles", (foundSpace: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space next to at least 2 other city tiles", (foundSpace: ISpace) => {
                 const adjacentSpaces = game.getAdjacentSpaces(foundSpace);
                 if (adjacentSpaces.filter((space) => space.tile && space.tile.tileType === TileType.CITY).length < 2) {
                     reject("Must place next to two city tiles");

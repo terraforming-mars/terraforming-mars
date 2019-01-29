@@ -19,7 +19,7 @@ export class UndergroundCity implements IProjectCard {
             return Promise.reject("Requires 2 energy production");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select space for city tile", (foundSpace: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for city tile", (foundSpace: ISpace) => {
                 try { game.addCityTile(player, foundSpace.id); }
                 catch (err) { reject(err); return; }
                 player.energyProduction -= 2;

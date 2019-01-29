@@ -26,7 +26,7 @@ export class BusinessNetwork implements IActiveProjectCard {
             const dealtCard = game.dealer.getCards(1)[0];
             player.setWaitingFor(
                 new OrOptions(
-                    new SelectCard(this, "Buy card", [dealtCard], (_foundCards: Array<IProjectCard>) => {
+                    new SelectCard(this.name, "Buy card", [dealtCard], (_foundCards: Array<IProjectCard>) => {
                         if (player.megaCredits < 3) {
                             game.dealer.discard(dealtCard);
                             reject("Not enough mega credits to buy card");
@@ -36,7 +36,7 @@ export class BusinessNetwork implements IActiveProjectCard {
                             resolve();
                         }
                     }),
-                    new SelectOption(this, "Discard", () => {
+                    new SelectOption(this.name, "Discard", () => {
                         game.dealer.discard(dealtCard);
                         resolve();
                     })

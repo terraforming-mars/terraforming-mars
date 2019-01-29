@@ -20,7 +20,7 @@ export class Herbivores implements IProjectCard {
                 reject("Requires 8% oxygen.");
                 return;
             }
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
+            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
                 if (foundPlayer.plantProduction < 1) {
                     reject("Player must have plant production");
                     return;

@@ -6,13 +6,15 @@ import { Tags } from "./cards/Tags";
 import { PlayerInput } from "./PlayerInput";
 import { CardType } from "./cards/CardType";
 import { Color } from "./Color";
+import { SelectCard } from "./inputs/SelectCard";
+import { AndOptions } from "./inputs/AndOptions";
+import { ICard } from "./cards/ICard";
 
 export class Player {
     constructor(public name: string, public color: Color, public beginner: boolean) {
 
     }
 
-    public corporationCardsDealt: Array<CorporationCard> = [];
     public corporationCard: CorporationCard | undefined = undefined;
 
     public canUseHeatAsMegaCredits: boolean = false;
@@ -113,14 +115,42 @@ export class Player {
         this.standardProjectHandler.push(fn);
     }
 
-    public selectCards(cards: Array<IProjectCard>): void {
+    private runInput(input: Array<Array<string>>, pi: PlayerInput): void {
+        if (pi instanceof AndOptions) {
+            const waiting: AndOptions = pi;
+            if (input.length !== waiting.options.length) {
+                throw "Not all options provided";
+            }
+            for (let i = 0; i < input.length; i++) {
+                this.runInput([input[i]], waiting.options[i]);
+            }
+            pi.cb();
+        } else if (pi instanceof SelectCard) {
+            if (input.length !== 1) {
+                throw "Incorrect options provided";
+            }
+            const mappedCards: Array<ICard> = [];
+            for (let cardName of input[0]) {
+                for (let card of pi.cards) {
+                    if (card.name === cardName) {
+                        mappedCards.push(card);
+                    }
+                }
+            }
+            if (mappedCards.length !== input[0].length) {
+                throw "Not all cards found";
+            }
+            pi.cb(mappedCards);
+        } else {
+            throw "Unsupported waitingFor";
+        }
+    }
+
+    public process(input: Array<Array<string>>): void {
         if (this.waitingFor === undefined) {
             throw "Not waiting for anything";
         }
-        if (this.waitingFor.type !== "SelectACard") {
-            throw "Not waiting for card selection";
-        }
-        this.waitingFor.cb(cards);
+        this.runInput(input, this.waitingFor);
     }
 
     private waitingFor?: PlayerInput;

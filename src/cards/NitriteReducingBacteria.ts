@@ -24,11 +24,11 @@ export class NitriteReducingBacteria implements IActiveProjectCard {
         return new Promise((resolve, reject) => {
             player.setWaitingFor(
                 new OrOptions(
-                    new SelectOption(this, "Add 1 microbe to this card", () => {
+                    new SelectOption(this.name, "Add 1 microbe to this card", () => {
                         this.microbes++;
                         resolve();
                     }),
-                    new SelectOption(this, "Remove 3 microbes to increase your terraform rating 1 step", () => {
+                    new SelectOption(this.name, "Remove 3 microbes to increase your terraform rating 1 step", () => {
                         if (this.microbes < 3) {
                             reject("Need 3 microbes to remove");
                         } else {

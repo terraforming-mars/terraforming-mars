@@ -20,7 +20,7 @@ export class Birds implements IActiveProjectCard {
             return Promise.reject("Requires 13% oxygen");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
+            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
                 if (foundPlayer.plantProduction < 2) {
                     reject("Player needs at least 2 plant production");
                     return;

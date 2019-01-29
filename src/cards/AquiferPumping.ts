@@ -51,13 +51,13 @@ export class AquiferPumping implements IActiveProjectCard {
                         player.megaCredits -= megaCreditToUse;
                         resolve();
                     },
-                    new SelectSpace(this, "Select space for ocean tile", (space: ISpace) => {
+                    new SelectSpace(this.name, "Select space for ocean tile", (space: ISpace) => {
                         foundSpace = space;
                     }),
-                    new SelectAmount(this, "Select steel to use", (amount: number) => {
+                    new SelectAmount(this.name, "Select steel to use", (amount: number) => {
                         steelToUse = amount;
                     }),
-                    new SelectAmount(this, "Select megacredit to use", (amount: number) => {
+                    new SelectAmount(this.name, "Select megacredit to use", (amount: number) => {
                         megaCreditToUse = amount;
                     })
                 )

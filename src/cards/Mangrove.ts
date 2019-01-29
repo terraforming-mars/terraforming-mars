@@ -20,7 +20,7 @@ export class Mangrove implements IProjectCard {
             return Promise.reject("Requires +4C or warmer");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select ocean space for greenery", (foundSpace: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select ocean space for greenery", (foundSpace: ISpace) => {
                 if (foundSpace.spaceType !== SpaceType.OCEAN) {
                     reject("Space not an ocean");
                     return undefined;

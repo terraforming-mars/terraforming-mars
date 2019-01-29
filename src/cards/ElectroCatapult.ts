@@ -19,7 +19,7 @@ export class ElectroCatapult implements IActiveProjectCard {
         return new Promise((resolve, reject) => {
             player.setWaitingFor(
                 new OrOptions(
-                    new SelectOption(this, "Spend 1 plant", () => {
+                    new SelectOption(this.name, "Spend 1 plant", () => {
                         if (player.plants < 1) {
                             reject("Need plant to spend");
                             return;
@@ -28,7 +28,7 @@ export class ElectroCatapult implements IActiveProjectCard {
                         player.megaCredits += 7;
                         resolve();
                     }),
-                    new SelectOption(this, "Spend 1 steel", () => {
+                    new SelectOption(this.name, "Spend 1 steel", () => {
                         if (player.steel < 1) {
                             reject("Need steel to spend");
                             return;

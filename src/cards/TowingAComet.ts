@@ -16,7 +16,7 @@ export class TowingAComet implements IProjectCard {
     public description: string = "By aerobraking it we get its contents without the impact.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select place for oean", (foundSpace: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select place for oean", (foundSpace: ISpace) => {
                 try { game.addOceanTile(player, foundSpace.id); }
                 catch (err) { reject(err); return; }
                 game.increaseOxygenLevel(player).then(function () {

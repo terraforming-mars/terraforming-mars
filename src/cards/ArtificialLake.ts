@@ -20,7 +20,7 @@ export class ArtificialLake implements IProjectCard {
             return Promise.reject("Requires -6C or warmer");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select a land space to place an ocean", (foundSpace: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select a land space to place an ocean", (foundSpace: ISpace) => {
                 if (foundSpace.spaceType !== SpaceType.LAND) {
                     reject("Must select ocean on an area not reserved for ocean");
                     return;

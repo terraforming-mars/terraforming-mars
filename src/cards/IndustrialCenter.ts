@@ -18,7 +18,7 @@ export class IndustrialCenter implements IActiveProjectCard {
     public description: string = "Assigned to heavy industry, this area is not the nicest place on Mars";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select space adjacent to a city tile", (foundSpace: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space adjacent to a city tile", (foundSpace: ISpace) => {
                 const adjacentSpaces = game.getAdjacentSpaces(foundSpace);
                 if (adjacentSpaces.filter((adjacentSpace) => adjacentSpace.tile && adjacentSpace.tile.tileType === TileType.CITY).length === 0) {
                     reject("Tile must be placed by a city tile");

@@ -19,7 +19,7 @@ export class EOSChasmaNationalPark implements IProjectCard {
         }
         return new Promise((resolve, _reject) => {
             const availableCards = game.getPlayedCardsWithAnimals();
-            player.setWaitingFor(new SelectCard(this, "Select card to add animal", availableCards, (foundCards: Array<IProjectCard>) => {
+            player.setWaitingFor(new SelectCard(this.name, "Select card to add animal", availableCards, (foundCards: Array<IProjectCard>) => {
                 foundCards[0]!.animals!++;
                 player.plants += 3;
                 player.megaCreditProduction += 2;

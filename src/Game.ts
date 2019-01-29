@@ -7,9 +7,11 @@ import { TileType } from "./TileType";
 import { SpaceBonus } from "./SpaceBonus";
 import { ITile } from "./ITile";
 import { IProjectCard } from "./cards/IProjectCard";
+import { CorporationCard } from "./cards/corporation/CorporationCard";
 import { OriginalBoard } from "./OriginalBoard";
 import { SelectCard } from "./inputs/SelectCard";
 import { SelectSpace } from "./inputs/SelectSpace";
+import { AndOptions } from "./inputs/AndOptions";
 
 const MIN_OXYGEN_LEVEL: number = 0;
 const MAX_OXYGEN_LEVEL: number = 14;
@@ -57,11 +59,30 @@ export class Game {
         // Give each player their corporation cards
         for (let player of players) {
             if (!player.beginner) {
-                player.corporationCardsDealt = this.dealer.getCorporationCards(2) 
-                player.setWaitingFor(new SelectCard(undefined, "Select initial cards to buy", this.dealer.getCards(10), (_foundCards: Array<IProjectCard>) => {
-                }));
+                player.setWaitingFor(
+                    new AndOptions(
+                        () => {
+                            player.corporationCard!
+                                .play(player, this)
+                                .then(() => {
+
+                                });
+                        },
+                        new SelectCard<CorporationCard>("Initial Research Phase", "Select corporation", this.dealer.getCorporationCards(2), (foundCards: Array<CorporationCard>) => {
+                            player.corporationCard = foundCards[0];
+                        }),
+                        new SelectCard("Initial Research Phase", "Select initial cards to buy", this.dealer.getCards(10), (foundCards: Array<IProjectCard>) => {
+                            // Pay for cards
+                            player.megaCredits = player.corporationCard!.startingMegaCredits - (3 * foundCards.length);
+                            for (let foundCard of foundCards) {
+                                player.cardsInHand.push(foundCard);
+                            }
+                        })
+                    )
+                );
             } else {
-                player.corporationCardsDealt = [this.dealer.beginnerCard]; 
+                player.cardsInHand = this.dealer.getCards(10);
+                player.megaCredits = 42;
             }
         }
         
@@ -120,7 +141,7 @@ export class Game {
                 return Promise.resolve();
             } else if (this.temperature + 2 === 0) {
                 return new Promise((resolve, reject) => {
-                    player.setWaitingFor(new SelectSpace(undefined, "Select space for ocean", (space: ISpace) => {
+                    player.setWaitingFor(new SelectSpace("Temperature Bonus", "Select space for ocean", (space: ISpace) => {
                         try { this.addOceanTile(player, space.id); }
                         catch (err) { reject(err); return; }
                         this.temperature += 2

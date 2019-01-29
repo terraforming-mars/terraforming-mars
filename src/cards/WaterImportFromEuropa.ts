@@ -41,13 +41,13 @@ export class WaterImportFromEuropa implements IActiveProjectCard {
                         player.megaCredits -= megaCredit;
                         resolve(); 
                     },
-                    new SelectAmount(this, "How much titanium to use?", (amount: number) => {
+                    new SelectAmount(this.name, "How much titanium to use?", (amount: number) => {
                         titanium = amount;
                     }),
-                    new SelectAmount(this, "How much mega credit to use?", (amount: number) => {
+                    new SelectAmount(this.name, "How much mega credit to use?", (amount: number) => {
                         megaCredit = amount;
                     }),
-                    new SelectSpace(this, "Where to place ocean?", (space: ISpace) => {
+                    new SelectSpace(this.name, "Where to place ocean?", (space: ISpace) => {
                         selectedSpace = space;
                     })
                 )

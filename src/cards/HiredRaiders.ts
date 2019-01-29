@@ -36,12 +36,12 @@ export class HiredRaiders implements IProjectCard {
                         }
                         resolve();
                     },
-                    new SelectPlayer(this, game.getPlayers(), "Select player to steal from", (foundPlayer: Player) => {
+                    new SelectPlayer(this.name, game.getPlayers(), "Select player to steal from", (foundPlayer: Player) => {
                         selectedPlayer = foundPlayer;
                     }),
                     new OrOptions(
-                        new SelectAmount(this, "Steal up to 2 steel", (amount: number) => { stealSteel = amount; }),
-                        new SelectAmount(this, "Steal up to 3 mega credit", (amount: number) => { stealMegaCredits = amount; })
+                        new SelectAmount(this.name, "Steal up to 2 steel", (amount: number) => { stealSteel = amount; }),
+                        new SelectAmount(this.name, "Steal up to 3 mega credit", (amount: number) => { stealMegaCredits = amount; })
                     )
                 )
             );

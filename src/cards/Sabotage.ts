@@ -34,10 +34,10 @@ export class Sabotage implements IProjectCard {
                         }
                         resolve();
                     },
-                    new SelectPlayer(this, game.getPlayers(), "Select player to remove resources from", (selectedPlayer: Player) => {
+                    new SelectPlayer(this.name, game.getPlayers(), "Select player to remove resources from", (selectedPlayer: Player) => {
                         foundPlayer = selectedPlayer;
                     }),
-                    new SelectAmount(this, "3 to remove titanium, 4 to remove steel, 7 to remove mega credit", (amount: number) => {
+                    new SelectAmount(this.name, "3 to remove titanium, 4 to remove steel, 7 to remove mega credit", (amount: number) => {
                         foundAmount = amount;
                     })
                 )

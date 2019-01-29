@@ -20,11 +20,11 @@ export class IceAsteroid implements IProjectCard {
             player.setWaitingFor(
                 new AndOptions(
                     () => { resolve(); },
-                    new SelectSpace(this, "Select first ocean space", (space: ISpace) => {
+                    new SelectSpace(this.name, "Select first ocean space", (space: ISpace) => {
                         try { game.addOceanTile(player, space.id); }
                         catch (err) { reject(err); }
                     }),
-                    new SelectSpace(this, "Select second ocean space", (space: ISpace) => {
+                    new SelectSpace(this.name, "Select second ocean space", (space: ISpace) => {
                         try { game.addOceanTile(player, space.id); }
                         catch (err) { reject(err); }
                     })

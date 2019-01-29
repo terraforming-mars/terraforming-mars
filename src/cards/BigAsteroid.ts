@@ -15,7 +15,7 @@ export class BigAsteroid implements IProjectCard {
     public description: string = "There are many unpopulated areas to crash it on";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to remove plants", (foundPlayer: Player) => {
+            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to remove plants", (foundPlayer: Player) => {
                 game.increaseTemperature(player)
                     .then(function () { return game.increaseTemperature(player); })
                     .then(function () {

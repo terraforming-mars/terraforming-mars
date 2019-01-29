@@ -25,10 +25,10 @@ export class ImportedNitrogen implements IProjectCard {
                         player.plants += 4;
                         resolve();
                     },
-                    new SelectCard(this, "Select card to add 3 microbes", otherMicrobeCards, (foundCards: Array<IProjectCard>) => {
+                    new SelectCard(this.name, "Select card to add 3 microbes", otherMicrobeCards, (foundCards: Array<IProjectCard>) => {
                         foundCards[0]!.microbes! += 3;
                     }),
-                    new SelectCard(this, "Select card to add 2 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => {
+                    new SelectCard(this.name, "Select card to add 2 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => {
                         foundCards[0]!.animals! += 2;
                     })
                 )

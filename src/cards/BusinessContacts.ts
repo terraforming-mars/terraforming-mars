@@ -16,7 +16,7 @@ export class BusinessContacts implements IProjectCard {
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, _reject) => {
             const availableCards: Array<IProjectCard> = game.dealer.getCards(4);
-            player.setWaitingFor(new SelectCard(this, "Select cards to keep", availableCards, (foundCards: Array<IProjectCard>) => {
+            player.setWaitingFor(new SelectCard(this.name, "Select cards to keep", availableCards, (foundCards: Array<IProjectCard>) => {
                 player.cardsInHand.push(foundCards[0]);
                 player.cardsInHand.push(foundCards[1]);
                 resolve();

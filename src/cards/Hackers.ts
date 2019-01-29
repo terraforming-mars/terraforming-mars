@@ -18,7 +18,7 @@ export class Hackers implements IProjectCard {
             return Promise.reject("Must have energy production to decrease");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease mega credit production", (foundPlayer: Player) => {
+            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease mega credit production", (foundPlayer: Player) => {
                 if (foundPlayer.megaCreditProduction < 2) {
                     reject("Player must have 2 mega credit production to decrease");
                     return;

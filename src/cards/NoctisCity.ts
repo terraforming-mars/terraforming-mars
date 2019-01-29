@@ -29,7 +29,7 @@ export class NoctisCity implements IProjectCard {
             return Promise.resolve();   
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select any city location, noctis taken", (space: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select any city location, noctis taken", (space: ISpace) => {
                 try { game.addCityTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 player.energyProduction--;

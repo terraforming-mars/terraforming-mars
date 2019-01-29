@@ -20,7 +20,7 @@ export class Fish implements IActiveProjectCard {
             return Promise.reject("Requires +2C or warmer");
         }
         return new Promise((resolve, _reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
+            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
                 foundPlayer.plantProduction--;
                 game.addGameEndListener(() => {
                     player.victoryPoints += this.animals;

@@ -22,7 +22,7 @@ export class CupolaCity implements IProjectCard {
             return Promise.reject("Must have energy production to decrease");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select a space for city tile", (space: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select a space for city tile", (space: ISpace) => {
                 try { game.addCityTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 player.energyProduction--;

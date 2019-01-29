@@ -16,7 +16,7 @@ export class CEOsFavoriteProject implements IProjectCard {
     public play(player: Player, _game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
             const availableCards = player.getCardsWithResources().filter((card) => card.animals || card.microbes || card.fighterResources || card.scienceResources);
-            player.setWaitingFor(new SelectCard(this, "Select card to add resource", availableCards, (foundCards: Array<IProjectCard>) => {
+            player.setWaitingFor(new SelectCard(this.name, "Select card to add resource", availableCards, (foundCards: Array<IProjectCard>) => {
                 const foundCard = foundCards[0];
                 if (foundCard.animals) {
                     foundCard.animals++;

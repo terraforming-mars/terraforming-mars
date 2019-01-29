@@ -27,11 +27,11 @@ export class RegolithEaters implements IActiveProjectCard {
         return new Promise((resolve, reject) => {
             player.setWaitingFor(
                 new OrOptions(
-                    new SelectOption(this, "Add 1 microbe to this card", () => {
+                    new SelectOption(this.name, "Add 1 microbe to this card", () => {
                         this.microbes++;
                         resolve();
                     }),
-                    new SelectOption(this, "Remove 2 microbes to raise oxygen level 1 step", () => {
+                    new SelectOption(this.name, "Remove 2 microbes to raise oxygen level 1 step", () => {
                         game.increaseOxygenLevel(player).then(() => {
                             this.microbes -= 2;
                             resolve();

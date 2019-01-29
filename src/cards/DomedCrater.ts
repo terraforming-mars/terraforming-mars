@@ -22,7 +22,7 @@ export class DomedCrater implements IProjectCard {
             return Promise.reject("Need energy production");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select space for city tile", (space: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for city tile", (space: ISpace) => {
                 try { game.addCityTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 player.plants += 3;

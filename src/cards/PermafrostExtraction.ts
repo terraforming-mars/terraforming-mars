@@ -20,7 +20,7 @@ export class PermafrostExtraction implements IProjectCard {
                 reject("Temperature must be -8C or warmer");
                 return;
             }
-            player.setWaitingFor(new SelectSpace(this, "Select space for ocean tile", (space: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for ocean tile", (space: ISpace) => {
                 try { game.addOceanTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 resolve();

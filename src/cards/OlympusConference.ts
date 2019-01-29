@@ -20,10 +20,10 @@ export class OlympusConference implements IProjectCard {
             if (playedCard.tags.filter((tag) => tag === Tags.SCIENCE).length > 0) {
                 if (this.scienceResources) {
                     return new Promise((resolve) => {
-                        player.setWaitingFor(new OrOptions(new SelectOption(this, "Add a science resource to this card", () => {
+                        player.setWaitingFor(new OrOptions(new SelectOption(this.name, "Add a science resource to this card", () => {
                             this.scienceResources++;
                             resolve();
-                        }), new SelectOption(this, "Remove a science resource from this card to draw a card", () => {
+                        }), new SelectOption(this.name, "Remove a science resource from this card to draw a card", () => {
                             this.scienceResources--;
                             player.cardsInHand.push(game.dealer.getCards(1)[0]);
                         })));

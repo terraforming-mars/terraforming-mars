@@ -29,13 +29,13 @@ export class LargeConvoy implements IProjectCard {
                         player.victoryPoints += 2;
                         resolve();
                     },
-                    new SelectSpace(this, "Select space for ocean tile", (space: ISpace) => {
+                    new SelectSpace(this.name, "Select space for ocean tile", (space: ISpace) => {
                         try { game.addOceanTile(player, space.id); }
                         catch (err) { reject(err); return; }
                     }),
                     new OrOptions(
-                        new SelectOption(this, "Gain 5 plants", () => { player.plants += 5; }),
-                        new SelectCard(this, "Select card to add 4 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => { 
+                        new SelectOption(this.name, "Gain 5 plants", () => { player.plants += 5; }),
+                        new SelectCard(this.name, "Select card to add 4 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => { 
                             foundCards[0]!.animals! += 4;
                         })
                     )

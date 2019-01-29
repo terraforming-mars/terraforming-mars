@@ -22,7 +22,7 @@ export class PowerInfrastructure implements IActiveProjectCard {
             return Promise.reject("Have no energy to spend");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectAmount(this, "Select energy to spend", (amount: number) => {
+            player.setWaitingFor(new SelectAmount(this.name, "Select energy to spend", (amount: number) => {
                 if (amount > player.energy) {
                     reject("You don't have that much energy");
                 } else {

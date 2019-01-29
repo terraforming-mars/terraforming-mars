@@ -21,7 +21,7 @@ export class NaturalPreserve implements IProjectCard {
             return Promise.reject("Oxygen must be 4% or less.");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select space for special tile next to no other tile", (foundSpace: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for special tile next to no other tile", (foundSpace: ISpace) => {
                 if (foundSpace.spaceType === SpaceType.COLONY) {
                     reject("Must be placed on mars.");
                     return;

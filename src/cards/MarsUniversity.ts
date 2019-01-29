@@ -22,7 +22,7 @@ export class MarsUniversity implements IProjectCard {
                 return new Promise((resolve, reject) => {
                     player.setWaitingFor(
                         new OrOptions(
-                            new SelectCard(this, "Select a card to discard to draw a card", player.cardsInHand, (foundCards: Array<IProjectCard>) => {
+                            new SelectCard(this.name, "Select a card to discard to draw a card", player.cardsInHand, (foundCards: Array<IProjectCard>) => {
                                 let foundCardIndex: number = 0;
                                 const foundCard = foundCards[0];
                                 for (; foundCardIndex < player.cardsInHand.length; foundCardIndex++) {
@@ -38,7 +38,7 @@ export class MarsUniversity implements IProjectCard {
                                 player.cardsInHand.push(game.dealer.getCards(1)[0]);
                                 resolve();
                             }),
-                            new DoNothing(this, "Don't do anything", () => { resolve(); })
+                            new DoNothing(this.name, "Don't do anything", () => { resolve(); })
                         )
                     );
                 });

@@ -16,7 +16,7 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, _reject) => {
             const cardsToPick = game.getOtherMicrobeCards(this);
-            player.setWaitingFor(new SelectCard(this, "Select card to add 2 microbes", cardsToPick, (foundCards: Array<IProjectCard>) => {
+            player.setWaitingFor(new SelectCard(this.name, "Select card to add 2 microbes", cardsToPick, (foundCards: Array<IProjectCard>) => {
                 foundCards[0]!.microbes! += 2;
                 player.heatProduction += 3;
                 player.plantProduction++;

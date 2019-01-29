@@ -19,7 +19,7 @@ export class LavaFlows implements IProjectCard {
     public description: string = "Releasing tremendous lava flows from one of Mars' gargantuan volcanoes";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons", (space: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons", (space: ISpace) => {
                 if (space.id !== SpaceName.THARSIS_THOLUS && space.id !== SpaceName.ASCRAEUS_MONS && space.id !== SpaceName.PAVONIS_MONS && space.id !== SpaceName.ARSIA_MONS) {
                     reject("Must select either tharsis tholus, ascraeus mons, pavonis mons or arsia mons");
                     return undefined;

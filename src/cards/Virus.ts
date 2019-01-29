@@ -27,7 +27,7 @@ export class Virus implements IProjectCard {
         return new Promise((resolve, reject) => {
             player.setWaitingFor(
                 new OrOptions(
-                    new SelectCard(this, "Select card to remove 2 animals", allCardsWithResources, (foundCard: Array<IProjectCard>) => {
+                    new SelectCard(this.name, "Select card to remove 2 animals", allCardsWithResources, (foundCard: Array<IProjectCard>) => {
                         if (foundCard[0].animals === undefined) {
                             reject("No animals on selected card");
                             return;
@@ -35,7 +35,7 @@ export class Virus implements IProjectCard {
                         foundCard[0].animals = Math.max(0, foundCard[0].animals - 2);
                         resolve();
                     }),
-                    new SelectPlayer(this, game.getPlayers(), "Select player to remove 5 plants", (foundPlayer: Player) => {
+                    new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 5 plants", (foundPlayer: Player) => {
                         foundPlayer.plants = Math.max(0, foundPlayer.plants - 5);
                         resolve();
                     })

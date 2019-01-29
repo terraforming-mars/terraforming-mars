@@ -18,7 +18,7 @@ export class MiningArea implements IProjectCard {
     public description: string = "It is easier to claim territories where you already have established activities.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select a space with steel or titanium placement bonus adjacent to one of your tiles", (foundSpace: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select a space with steel or titanium placement bonus adjacent to one of your tiles", (foundSpace: ISpace) => {
                 const hasSteelBonus = foundSpace.bonus && foundSpace.bonus.indexOf(SpaceBonus.STEEL) !== -1;
                 const hasTitaniumBonus = foundSpace.bonus && foundSpace.bonus.indexOf(SpaceBonus.TITANIUM) !== -1;
                 if (!hasSteelBonus && !hasTitaniumBonus) {

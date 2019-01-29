@@ -18,7 +18,7 @@ export class GreatEscarpmentConsortium implements IProjectCard {
             return Promise.reject("Requires that you have steel production.");
         }
         return new Promise((resolve, _reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease steel production", (foundPlayer: Player) => {
+            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease steel production", (foundPlayer: Player) => {
                 foundPlayer.steelProduction = Math.max(0, foundPlayer.steelProduction - 1);
                 player.steelProduction++;
                 resolve();

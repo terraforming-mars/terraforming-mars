@@ -28,7 +28,7 @@ export class BiomassCombustors implements IProjectCard {
                     player.victoryPoints--;
                 }
             };
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease", onInput));
+            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease", onInput));
         });
     }
 }

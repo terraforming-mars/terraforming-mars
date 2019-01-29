@@ -15,7 +15,7 @@ export class Asteroid implements IProjectCard {
     public description: string = "What are those plants doing in our impact zone?";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease", (foundPlayer: Player) => {
+            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease", (foundPlayer: Player) => {
                 game.increaseTemperature(player).then(function () {
                     foundPlayer.plants = Math.max(0, foundPlayer.plants - 3);
                     player.titanium += 2;

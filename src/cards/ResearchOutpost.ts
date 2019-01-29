@@ -17,7 +17,7 @@ export class ResearchOutpost implements IProjectCard {
     public description: string = "Finding new ways to do things.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select place next to no other tile for city", (foundSpace: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select place next to no other tile for city", (foundSpace: ISpace) => {
                 if (foundSpace.spaceType === SpaceType.COLONY) {
                     reject("Must be places on mars");
                     return;

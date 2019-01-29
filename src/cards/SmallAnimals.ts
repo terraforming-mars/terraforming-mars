@@ -20,7 +20,7 @@ export class SmallAnimals implements IActiveProjectCard {
             return Promise.reject("Requires 6% oxygen.");
         }
         return new Promise((resolve, _reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
+            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
                 foundPlayer.plantProduction--;
                 game.addGameEndListener(() => {
                     player.victoryPoints += Math.floor(this.animals / 2);

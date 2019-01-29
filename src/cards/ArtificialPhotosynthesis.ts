@@ -18,11 +18,11 @@ export class ArtificialPhotosynthesis implements IProjectCard {
         return new Promise((resolve, _reject) => {
             player.setWaitingFor(
                 new OrOptions(
-                    new SelectOption(this, "Increase your plant production 1 step", () => {
+                    new SelectOption(this.name, "Increase your plant production 1 step", () => {
                         player.plantProduction++;
                         resolve();
                     }),
-                    new SelectOption(this, "Increase your energy production 2 steps", () => {
+                    new SelectOption(this.name, "Increase your energy production 2 steps", () => {
                         player.energyProduction += 2;
                         resolve();
                     })

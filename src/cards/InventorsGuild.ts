@@ -25,7 +25,7 @@ export class InventorsGuild implements IActiveProjectCard {
             const topCard = game.dealer.getCards(1)[0];
             player.setWaitingFor(
                 new OrOptions(
-                    new SelectCard(this, "Buy card", [topCard], (_card: Array<IProjectCard>) => {
+                    new SelectCard(this.name, "Buy card", [topCard], (_card: Array<IProjectCard>) => {
                         if (player.megaCredits < 3) {
                             reject("Can not afford to buy card");
                         } else {
@@ -34,7 +34,7 @@ export class InventorsGuild implements IActiveProjectCard {
                             resolve();
                         }
                     }),
-                    new DoNothing(this, "Discard it", () => {
+                    new DoNothing(this.name, "Discard it", () => {
                         game.dealer.discard(topCard);
                         resolve();
                     })

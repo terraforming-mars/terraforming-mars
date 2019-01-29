@@ -16,7 +16,7 @@ export class ConvoyFromEuropa implements IProjectCard {
     public description: string = "Bringing ice and other key supplies from the Jovian moon Europa";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this, "Select space for ocean tile", (space: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for ocean tile", (space: ISpace) => {
                 try { game.addOceanTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 player.cardsInHand.push(game.dealer.getCards(1)[0]);

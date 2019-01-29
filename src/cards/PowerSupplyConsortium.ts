@@ -19,7 +19,7 @@ export class PowerSupplyConsortium implements IProjectCard {
                 reject("Requires 2 power tags.");
                 return;
             }
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to decrease energy", (foundPlayer: Player) => {
+            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease energy", (foundPlayer: Player) => {
                 if (foundPlayer.energyProduction < 1) {
                     reject("Player must have energy production to remove");
                     return;

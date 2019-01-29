@@ -15,7 +15,7 @@ export class MiningExpedition implements IProjectCard {
     public description: string = "Ruthlessly excavating rich areas.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this, game.getPlayers(), "Select player to remove 2 plants", (foundPlayer: Player) => {
+            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 2 plants", (foundPlayer: Player) => {
                 game.increaseOxygenLevel(player)
                     .then(function () {
                         foundPlayer.plants = Math.max(0, foundPlayer.plants - 2);

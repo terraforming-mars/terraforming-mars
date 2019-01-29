@@ -15,7 +15,7 @@ export class Insulation implements IProjectCard {
     public description: string = "Better insulation means lower energy spending";
     public play(player: Player, _game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectAmount(this, "Select amount of heat production to decrease", (amount: number) => {
+            player.setWaitingFor(new SelectAmount(this.name, "Select amount of heat production to decrease", (amount: number) => {
                 if (amount > player.heatProduction) {
                     reject("Not enough heat production");
                     return;

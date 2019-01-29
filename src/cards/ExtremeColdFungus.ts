@@ -28,8 +28,8 @@ export class ExtremeColdFungus implements IActiveProjectCard {
         return new Promise((resolve, _reject) => {
             player.setWaitingFor(
                 new OrOptions(
-                    new SelectOption(this, "Gain 1 plant", () => { player.plants++; resolve(); }),
-                    new SelectCard(this, "Select card to remove 2 microbes", otherMicrobeCards, (foundCards: Array<IProjectCard>) => {
+                    new SelectOption(this.name, "Gain 1 plant", () => { player.plants++; resolve(); }),
+                    new SelectCard(this.name, "Select card to remove 2 microbes", otherMicrobeCards, (foundCards: Array<IProjectCard>) => {
                         foundCards[0]!.microbes! += 2;
                         resolve();
                     })

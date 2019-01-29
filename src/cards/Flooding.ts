@@ -43,14 +43,14 @@ export class Flooding implements IProjectCard {
                         player.victoryPoints--;
                         resolve();
                     },
-                    new SelectSpace(this, "Select space for ocean tile", (space: ISpace) => {
+                    new SelectSpace(this.name, "Select space for ocean tile", (space: ISpace) => {
                         foundSpace = space;
                     }),
                     new OrOptions(
-                        new SelectPlayer(this, game.getPlayers(), "Select adjacent player", (selectedPlayer: Player) => {
+                        new SelectPlayer(this.name, game.getPlayers(), "Select adjacent player", (selectedPlayer: Player) => {
                             foundPlayer = selectedPlayer;
                         }),
-                        new DoNothing(this, "No adjacent player or do nothing", () => {
+                        new DoNothing(this.name, "No adjacent player or do nothing", () => {
                             foundPlayer = undefined;
                         })
                     )

@@ -5,7 +5,7 @@ import { Game } from "../../Game";
 import { CorporationCard } from "./CorporationCard";
 import { IProjectCard } from "../IProjectCard";
 
-export class SaturnSystems extends CorporationCard {
+export class SaturnSystems implements CorporationCard {
     public name: string = "Saturn Systems";
     public tags: Array<Tags> = [Tags.JOVIAN];
     public startingMegaCredits: number = 42;

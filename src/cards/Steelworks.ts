@@ -1,11 +1,11 @@
 
-import { IActiveProjectCard } from "./IActiveProjectCard";
+import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 
-export class Steelworks implements IActiveProjectCard {
+export class Steelworks implements IProjectCard {
     public cost: number = 15;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Steelworks";

@@ -4,7 +4,7 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 
-export class Inventrix extends CorporationCard {
+export class Inventrix implements CorporationCard {
     public name: string = "Inventrix";
     public tags: Array<Tags> = [Tags.SCIENCE];
     public startingMegaCredits: number = 45;

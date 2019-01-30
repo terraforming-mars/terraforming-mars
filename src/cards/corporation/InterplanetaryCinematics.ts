@@ -6,7 +6,7 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CardType } from "../CardType";
 
-export class InterplanetaryCinematics extends CorporationCard {
+export class InterplanetaryCinematics implements CorporationCard {
     public name: string = "Interplanetary Cinematics";
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 30;

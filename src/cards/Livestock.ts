@@ -1,11 +1,11 @@
 
-import { IActiveProjectCard } from "./IActiveProjectCard";
+import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Game } from "../Game";
 import { Player } from "../Player";
 
-export class Livestock implements IActiveProjectCard {
+export class Livestock implements IProjectCard {
     public cost: number = 13;
     public cardType: CardType = CardType.ACTIVE;
     public animals: number = 0;

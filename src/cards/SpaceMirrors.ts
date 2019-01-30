@@ -1,11 +1,11 @@
 
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { IActiveProjectCard } from "./IActiveProjectCard";
+import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 
-export class SpaceMirrors implements IActiveProjectCard {
+export class SpaceMirrors implements IProjectCard {
     public cost: number = 3;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.SPACE];
     public name: string = "Space Mirror";

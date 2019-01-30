@@ -9,4 +9,6 @@ export interface ICard {
     text: string;
     description: string;
     play: (player: Player, game: Game) => Promise<void>;
+    actionText?: string;
+    action?: (player: Player, game: Game) => Promise<void>;
 }   

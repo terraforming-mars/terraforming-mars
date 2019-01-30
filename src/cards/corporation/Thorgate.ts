@@ -5,7 +5,7 @@ import { Game } from "../../Game";
 import { IProjectCard } from "../IProjectCard";
 import { CorporationCard } from "./CorporationCard";
 
-export class Thorgate extends CorporationCard {
+export class Thorgate implements CorporationCard {
     public name: string = "Thorgate";
     public tags: Array<Tags> = [Tags.ENERGY];
     public startingMegaCredits: number = 48;

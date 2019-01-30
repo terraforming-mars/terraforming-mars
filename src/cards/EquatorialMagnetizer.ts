@@ -3,9 +3,9 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { IActiveProjectCard } from "./IActiveProjectCard";
+import { IProjectCard } from "./IProjectCard";
 
-export class EquatorialMagnetizer implements IActiveProjectCard {
+export class EquatorialMagnetizer implements IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Equatorial Magnetizer";

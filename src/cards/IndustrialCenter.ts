@@ -1,5 +1,5 @@
 
-import { IActiveProjectCard } from "./IActiveProjectCard";
+import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
@@ -8,7 +8,7 @@ import { TileType } from "../TileType";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 
-export class IndustrialCenter implements IActiveProjectCard {
+export class IndustrialCenter implements IProjectCard {
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.STEEL];
     public cardType: CardType = CardType.ACTIVE;

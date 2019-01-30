@@ -1,13 +1,12 @@
 
 import { Tags } from "./Tags";
-import { IActiveProjectCard } from "./IActiveProjectCard";
+import { IProjectCard } from "./IProjectCard";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardType } from "./CardType";
 import { SelectCard } from "../inputs/SelectCard";
-import { IProjectCard } from "./IProjectCard";
 
-export class SymbioticFungus implements IActiveProjectCard {
+export class SymbioticFungus implements IProjectCard {
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.MICROBES];
     public cardType: CardType = CardType.ACTIVE;

@@ -41,4 +41,13 @@ player1.process([
 ]);
 
 console.log("Player 1 is", player1.corporationCard, " with ", player1.megaCredits);
+console.log("Player 2 is", player2.corporationCard, " with ", player2.megaCredits);
+
+if (player2.getWaitingFor() !== undefined) {
+    throw "Player 2 shouldn't be waiting";
+}
+
+if (player1.getWaitingFor() !== undefined) {
+    throw "Waiting for player 1 to move";
+}
 

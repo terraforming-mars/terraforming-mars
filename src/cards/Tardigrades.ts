@@ -1,11 +1,11 @@
 
-import { IActiveProjectCard } from "./IActiveProjectCard";
+import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 
-export class Tardigrades implements IActiveProjectCard {
+export class Tardigrades implements IProjectCard {
     public cost: number = 4;
     public microbes: number = 0;
     public tags: Array<Tags> = [Tags.MICROBES];

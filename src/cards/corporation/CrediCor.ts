@@ -6,7 +6,7 @@ import { Tags } from "../Tags";
 import { StandardProject } from "../../StandardProject";
 import { IProjectCard } from "../IProjectCard";
 
-export class CrediCor extends CorporationCard {
+export class CrediCor implements CorporationCard {
     public name: string = "CrediCor";
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 57;

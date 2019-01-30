@@ -1,5 +1,4 @@
 
-import { IActiveProjectCard } from "./IActiveProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
@@ -9,7 +8,7 @@ import { DoNothing } from "../inputs/DoNothing";
 import { SelectCard } from "../inputs/SelectCard";
 import { IProjectCard } from "./IProjectCard";
 
-export class InventorsGuild implements IActiveProjectCard {
+export class InventorsGuild implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Inventors' Guild";

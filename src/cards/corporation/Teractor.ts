@@ -5,7 +5,7 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { IProjectCard } from "../IProjectCard";
 
-export class Teractor extends CorporationCard {
+export class Teractor implements CorporationCard {
     public name: string = "Teractor";
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 60;

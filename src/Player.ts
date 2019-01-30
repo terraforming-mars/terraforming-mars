@@ -9,6 +9,10 @@ import { Color } from "./Color";
 import { SelectCard } from "./inputs/SelectCard";
 import { AndOptions } from "./inputs/AndOptions";
 import { ICard } from "./cards/ICard";
+import { OrOptions } from "./inputs/OrOptions";
+import { Game } from "./Game";
+import { HowToPay } from "./inputs/HowToPay";
+import { SelectHowToPay } from "./inputs/SelectHowToPay";
 
 export class Player {
     constructor(public name: string, public color: Color, public beginner: boolean) {
@@ -42,6 +46,7 @@ export class Player {
     public plantProduction: number = 0;
     public cardsInHand: Array<IProjectCard> = [];
     public playedCards: Array<IProjectCard> = [];
+    private actionsTakenThisRound: number = 0;
     private cardDiscounts: Array<CardDiscount> = [];
     public terraformRating: number = 20;
     public victoryPoints: number = 0;
@@ -146,11 +151,166 @@ export class Player {
         }
     }
 
+    private getPlayedActionCards(): Array<ICard> {
+        const result: Array<ICard> = [];
+        if (this.corporationCard && this.corporationCard.action !== undefined) {
+            result.push(this.corporationCard);
+        }
+        for (let playedCard of this.playedCards) {
+            if (playedCard.action !== undefined) {
+                result.push(playedCard);
+            }
+        }
+        return result;
+    }
+
+    private hasToTakeInitialAction(): boolean {
+        return false;
+    }
+
+    public runProductionPhase(): void {
+        this.megaCredits += this.megaCreditProduction + this.terraformRating;
+        this.heat += this.energy;
+        this.heat += this.heatProduction;
+        this.energy += this.energyProduction;
+        this.titanium += this.titaniumProduction;
+        this.steel += this.steelProduction;
+        this.plants += this.plantProduction;
+    }
+
+    private playProjectCard(game: Game): PlayerInput {
+
+        let selectedCard: IProjectCard;
+        let payMethod: HowToPay;
+
+        return new AndOptions(
+            () => {
+
+                let totalToPay: number = 0;
+
+                const canUseSteel: boolean = selectedCard.tags.indexOf(Tags.STEEL) !== -1;
+                const canUseTitanium: boolean = selectedCard.tags.indexOf(Tags.SPACE) !== -1;
+
+                if (canUseSteel && payMethod.steel) {
+                    totalToPay += payMethod.steel * this.steelValue;
+                } else if (canUseTitanium && payMethod.titanium) {
+                    totalToPay += payMethod.titanium * this.titaniumValue;
+                }
+
+                if (this.canUseHeatAsMegaCredits && payMethod.heat !== undefined) {
+                    totalToPay += payMethod.heat;
+                }
+
+                totalToPay += payMethod.megaCredits;
+
+                if (totalToPay < selectedCard.cost) {
+                    throw "Did not spend enough to pay for card";
+                }
+
+                this.steel -= payMethod.steel;
+                this.titanium -= payMethod.titanium;
+                this.megaCredits -= payMethod.megaCredits;
+                if (payMethod.heat !== undefined) {
+                    this.heat -= payMethod.heat;
+                }
+
+                // Play the card
+                selectedCard.play(this, game)
+                    .then(() => {
+                        this.actionsTakenThisRound++;
+                        this.takeAction(game);
+                    })
+                    .catch((err) => {
+                        console.warn("Error playing project card", err);
+                        this.waitingFor = undefined;
+                    });
+            },
+            new SelectCard("Take Action!", "Play a project card", this.cardsInHand, (foundCards: Array<IProjectCard>) => {
+                selectedCard = foundCards[0];
+            }),
+            new SelectHowToPay("Take Action!", "How will you pay for card?", true, true, this.canUseHeatAsMegaCredits, (howToPay: HowToPay) => {
+                payMethod = howToPay;
+                if (payMethod.steel && payMethod.steel > this.steel) {
+                    throw "Not enough steel";
+                }
+                if (payMethod.heat && !this.canUseHeatAsMegaCredits) {
+                    throw "Can't use heat as mega credits";
+                }
+                if (payMethod.heat && payMethod.heat > this.heat) {
+                    throw "Not enough heat";
+                }
+                if (payMethod.titanium && payMethod.titanium > this.titanium) {
+                    throw "Not enough titanium";
+                }
+            })
+        );
+    }
+
+    public takeAction(game: Game): void {
+
+        // You have taken all actions
+        // Notify the game
+        if (this.actionsTakenThisRound >= 2) {
+            game.playerIsFinishedTakingActions(this);
+            return undefined;
+        }
+
+        // If corporation card gave us an action
+        // to take first we must do it first.
+
+        // This would only happen on the first generation
+        // With certain corporation cards. If so we wait until that action is completed and already have a waitingFor.
+        if (this.hasToTakeInitialAction()) {
+            return undefined;
+        }
+
+        const action: OrOptions = new OrOptions();
+
+        action.options.push(
+            this.playProjectCard(game)
+        );
+ 
+        action.options.push(new SelectCard("Take Action!", "Perform an action from a played card", this.getPlayedActionCards(), (foundCards: Array<ICard>) => {
+            const foundCard = foundCards[0];
+            foundCard.action!(this, game)
+                .then(() => {
+                    this.takeAction(game);
+                })
+                .catch((err: string) => {
+                    console.warn("Error taking action from card", err);
+                    this.takeAction(game); 
+                })
+        }));
+
+        /* 
+            // If you have cards to sell
+            new SelectOption("Sell Patents"),
+
+            // If you have 11 mega credits
+            new SelectOption("Power Plant"),
+
+            // If you have money and temperature not max
+            new SelectOption("Asteroid"),
+
+            // If you have money
+            new SelectOption("Greenery"),
+            new SelectOption("City"),
+
+            // If there are still milestones to purchase
+            new SelectOption("Purchase Milestone"),
+
+            // If there are still awards to fund
+            new SelectOption("Fund Award")
+        */
+    }
+
     public process(input: Array<Array<string>>): void {
         if (this.waitingFor === undefined) {
             throw "Not waiting for anything";
         }
-        this.runInput(input, this.waitingFor);
+        const waitingFor = this.waitingFor;
+        this.waitingFor = undefined;
+        this.runInput(input, waitingFor);
     }
 
     private waitingFor?: PlayerInput;

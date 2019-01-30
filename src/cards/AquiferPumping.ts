@@ -1,5 +1,5 @@
 
-import { IActiveProjectCard } from "./IActiveProjectCard";
+import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
@@ -9,7 +9,7 @@ import { SelectAmount } from "../inputs/SelectAmount";
 import { AndOptions } from "../inputs/AndOptions";
 import { ISpace } from "../ISpace";
 
-export class AquiferPumping implements IActiveProjectCard {
+export class AquiferPumping implements IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Aquifer Pumping";

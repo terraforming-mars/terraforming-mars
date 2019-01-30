@@ -4,7 +4,7 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CorporationCard } from "./CorporationCard";
 
-export class UnitedNationsMarsInitiative extends CorporationCard {
+export class UnitedNationsMarsInitiative implements CorporationCard {
     public name: string = "United Nations Mars Initiative";
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 40;

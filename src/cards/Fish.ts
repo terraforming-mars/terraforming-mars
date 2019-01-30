@@ -1,12 +1,12 @@
 
-import { IActiveProjectCard } from "./IActiveProjectCard";
+import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { SelectPlayer } from "../inputs/SelectPlayer";
 import { Player } from "../Player";
 import { Game } from "../Game";
 
-export class Fish implements IActiveProjectCard {
+export class Fish implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.ANIMAL];
     public name: string = "Fish";

@@ -7,7 +7,7 @@ import { SelectSpace } from "../../inputs/SelectSpace";
 import { SpaceType } from "../../SpaceType";
 import { ISpace } from "../../ISpace";
 
-export class TharsisRepublic extends CorporationCard {
+export class TharsisRepublic implements CorporationCard {
     public name: string = "Tharsis Republic";
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 40;

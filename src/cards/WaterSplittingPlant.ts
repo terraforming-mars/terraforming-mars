@@ -1,11 +1,11 @@
 
 import { CardType } from "./CardType";
 import { Tags } from "./Tags";
-import { IActiveProjectCard } from "./IActiveProjectCard";
+import { IProjectCard } from "./IProjectCard";
 import { Player } from "../Player";
 import { Game } from "../Game";
 
-export class WaterSplittingPlant implements IActiveProjectCard {
+export class WaterSplittingPlant implements IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Water Splitting Plant";

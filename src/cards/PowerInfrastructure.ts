@@ -1,12 +1,12 @@
 
 import { CardType } from "./CardType";
-import { IActiveProjectCard } from "./IActiveProjectCard";
+import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectAmount } from "../inputs/SelectAmount";
 
-export class PowerInfrastructure implements IActiveProjectCard {
+export class PowerInfrastructure implements IProjectCard {
     public name: string = "Power Infrastructure";
     public text: string = "";
     public description: string = "Efficiency through flexibility."

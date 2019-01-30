@@ -40,6 +40,12 @@ const MAX_OCEAN_TILES: number = 9;
 //      Player gets megacredits equal to terraform rating plus mega credit production, reset all card actions
 
 /*
+
+GENERATION
+    RESEARCH
+    ACTION
+    PRODUCTION
+
 STANDARD PROJECTS
     1) Sell  patents:  
         You  may  discard  a  number  of  cards  from hand to gain the same number of M€.
@@ -55,7 +61,7 @@ STANDARD PROJECTS
         For  25  M€  you  get  to  place  a  city  tile  (collect  any placement bonus for the tile, and place a player marker on it). You also get to increase your M€ production 1 step.
 */
 export class Game {
-    constructor(public id: string, private players: Array<Player>, _first: Player) {
+    constructor(public id: string, private players: Array<Player>, first: Player) {
         // Give each player their corporation cards
         for (let player of players) {
             if (!player.beginner) {
@@ -65,7 +71,9 @@ export class Game {
                             player.corporationCard!
                                 .play(player, this)
                                 .then(() => {
-
+                                    if (this.allPlayersHaveCorporationCard()) {
+                                        this.startActionPhase(first); 
+                                    }
                                 });
                         },
                         new SelectCard<CorporationCard>("Initial Research Phase", "Select corporation", this.dealer.getCorporationCards(2), (foundCards: Array<CorporationCard>) => {
@@ -86,6 +94,23 @@ export class Game {
             }
         }
         
+    }
+
+    public playerIsFinishedTakingActions(_player: Player): void {
+        // Move on to the next player who has not passed
+        // If all players have passed move on to PRODUCTION phase
+    }
+
+    private startActionPhase(player: Player): void {
+        player.takeAction(this);
+    }
+    private allPlayersHaveCorporationCard(): boolean {
+        for (let player of this.getPlayers()) {
+            if (player.corporationCard === undefined) {
+                return false;
+            }
+        }
+        return true;
     }
     public dealer: Dealer = new Dealer();
     private spaces: Array<ISpace> = new OriginalBoard().spaces;

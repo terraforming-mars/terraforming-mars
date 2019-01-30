@@ -1,5 +1,4 @@
 
-import { IActiveProjectCard } from "./IActiveProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
@@ -9,7 +8,7 @@ import { SelectCard } from "../inputs/SelectCard";
 import { SelectOption } from "../inputs/SelectOption";
 import { IProjectCard } from "./IProjectCard";
 
-export class BusinessNetwork implements IActiveProjectCard {
+export class BusinessNetwork implements IProjectCard {
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = "Business Network";

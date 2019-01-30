@@ -1,5 +1,5 @@
 
-import { IActiveProjectCard } from "./IActiveProjectCard";
+import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
@@ -9,7 +9,7 @@ import { SelectAmount } from "../inputs/SelectAmount";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 
-export class WaterImportFromEuropa implements IActiveProjectCard {
+export class WaterImportFromEuropa implements IProjectCard {
     public cost: number = 25;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = "Water Import From Europa";

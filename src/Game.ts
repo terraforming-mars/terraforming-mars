@@ -7,19 +7,20 @@ import { TileType } from "./TileType";
 import { SpaceBonus } from "./SpaceBonus";
 import { ITile } from "./ITile";
 import { IProjectCard } from "./cards/IProjectCard";
+import { BeginnerCorporation } from "./cards/corporation/BeginnerCorporation";
 import { CorporationCard } from "./cards/corporation/CorporationCard";
 import { OriginalBoard } from "./OriginalBoard";
 import { SelectCard } from "./inputs/SelectCard";
 import { SelectSpace } from "./inputs/SelectSpace";
 import { AndOptions } from "./inputs/AndOptions";
+import { PlayerInput } from "./PlayerInput";
+import { Phase } from "./Phase";
+import * as constants from "./constants";
 
 const MIN_OXYGEN_LEVEL: number = 0;
 const MAX_OXYGEN_LEVEL: number = 14;
 
 const MIN_TEMPERATURE: number = -30;
-const MAX_TEMPERATURE: number = 8;
-
-const MAX_OCEAN_TILES: number = 9;
 
 // STARTING
 // IF PLAYER ISNT BEGINNER GIVE THEM 2 CORPORATION CARDS
@@ -61,57 +62,167 @@ STANDARD PROJECTS
         For  25  M€  you  get  to  place  a  city  tile  (collect  any placement bonus for the tile, and place a player marker on it). You also get to increase your M€ production 1 step.
 */
 export class Game {
-    constructor(public id: string, private players: Array<Player>, first: Player) {
+    public activePlayer: Player;
+    constructor(public id: string, private players: Array<Player>, private first: Player) {
+        this.activePlayer = first;
         // Give each player their corporation cards
         for (let player of players) {
             if (!player.beginner) {
-                player.setWaitingFor(
-                    new AndOptions(
-                        () => {
-                            player.corporationCard!
-                                .play(player, this)
-                                .then(() => {
-                                    if (this.allPlayersHaveCorporationCard()) {
-                                        this.startActionPhase(first); 
-                                    }
-                                });
-                        },
-                        new SelectCard<CorporationCard>("Initial Research Phase", "Select corporation", this.dealer.getCorporationCards(2), (foundCards: Array<CorporationCard>) => {
-                            player.corporationCard = foundCards[0];
-                        }),
-                        new SelectCard("Initial Research Phase", "Select initial cards to buy", this.dealer.getCards(10), (foundCards: Array<IProjectCard>) => {
-                            // Pay for cards
-                            player.megaCredits = player.corporationCard!.startingMegaCredits - (3 * foundCards.length);
-                            for (let foundCard of foundCards) {
-                                player.cardsInHand.push(foundCard);
-                            }
-                        })
-                    )
-                );
+                player.setWaitingFor(this.pickCorporationCard(player));
             } else {
+                player.corporationCard = new BeginnerCorporation();
                 player.cardsInHand = this.dealer.getCards(10);
                 player.megaCredits = 42;
+                this.playerIsFinishedWithResearchPhase(player);
             }
         }
         
     }
 
-    public playerIsFinishedTakingActions(_player: Player): void {
-        // Move on to the next player who has not passed
-        // If all players have passed move on to PRODUCTION phase
+    private pickCorporationCard(player: Player): PlayerInput {
+        return new AndOptions(
+            () => {
+                player.corporationCard!
+                    .play(player, this)
+                    .then(() => {
+                        this.playerIsFinishedWithResearchPhase(player);
+                    });
+            },
+            new SelectCard<CorporationCard>("Initial Research Phase", "Select corporation", this.dealer.getCorporationCards(2), (foundCards: Array<CorporationCard>) => {
+                player.corporationCard = foundCards[0];
+            }),
+            new SelectCard("Initial Research Phase", "Select initial cards to buy", this.dealer.getCards(10), (foundCards: Array<IProjectCard>) => {
+                // Pay for cards
+                player.megaCredits = player.corporationCard!.startingMegaCredits - (3 * foundCards.length);
+                for (let foundCard of foundCards) {
+                    player.cardsInHand.push(foundCard);
+                }
+            })
+        );
+    }
+ 
+    private passedPlayers: Set<Player> = new Set<Player>();
+
+    private hasPassedThisActionPhase(player: Player): boolean {
+        return this.passedPlayers.has(player);
     }
 
-    private startActionPhase(player: Player): void {
-        player.takeAction(this);
+    private incrementFirstPlayer(): void {
+        let firstIndex: number = this.players.indexOf(this.first);
+        if (firstIndex === -1) {
+            throw "Didn't even find player";
+        }
+        if (firstIndex === this.players.length - 1) {
+            firstIndex = 0;
+        } else {
+            firstIndex++;
+        }
+        this.first = this.players[firstIndex];
     }
-    private allPlayersHaveCorporationCard(): boolean {
-        for (let player of this.getPlayers()) {
-            if (player.corporationCard === undefined) {
+
+    public phase: Phase = Phase.RESEARCH;
+
+    private dealEachPlayer4Cards(): void {
+        this.players.forEach((player) => {
+            player.runResearchPhase(this);
+        });
+    }
+
+    private gotoResearchPhase(): void {
+        this.incrementFirstPlayer();
+        this.dealEachPlayer4Cards();
+    }
+
+    private gotoProductionPhase(): void {
+        this.passedPlayers.clear();
+        this.players.forEach((player) => {
+            player.runProductionPhase();
+        });
+        this.gotoResearchPhase();
+    }
+
+    private allPlayersHavePassed(): boolean {
+        for (const player of this.players) {
+            if (!this.hasPassedThisActionPhase(player)) {
                 return false;
             }
         }
         return true;
     }
+
+    public playerHasPassed(player: Player): void {
+        this.passedPlayers.add(player);
+        if (this.allPlayersHavePassed()) {
+            this.gotoProductionPhase();
+        } else {
+            this.playerIsFinishedTakingActions(player);
+        }
+    }
+
+    private hasResearched(player: Player): boolean {
+        return this.researchedPlayers.has(player);
+    }
+
+    private researchedPlayers: Set<Player> = new Set<Player>();
+
+    private allPlayersHaveFinishedResearch(): boolean {
+        for (const player of this.players) {
+            if (!this.hasResearched(player)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public playerIsFinishedWithResearchPhase(player: Player): void {
+        this.researchedPlayers.add(player);
+        if (this.allPlayersHaveFinishedResearch()) {
+            this.gotoActionPhase();
+        }
+    }
+
+    public playerIsFinishedTakingActions(player: Player): void {
+
+        let nextStartIndex: number = -1;
+
+        for (let i = 0; i < this.players.length; i++) {
+            if (this.players[i] === player) {
+                nextStartIndex = i + 1;
+                break;
+            }
+        }
+
+        if (nextStartIndex === -1) {
+            throw "Did not find player";
+        }
+
+        if (nextStartIndex + 1 >= this.players.length) {
+            nextStartIndex = 0;
+        }
+
+        for (let i = nextStartIndex; i < this.players.length; i++) {
+            if (!this.hasPassedThisActionPhase(this.players[i])) {
+                this.startActionsForPlayer(this.players[i]);
+                break;
+            }
+        }
+
+    }
+
+    private gotoActionPhase(): void {
+        this.phase = Phase.ACTION;
+        this.passedPlayers.clear();
+        this.startActionsForPlayer(this.first);
+    }
+
+    private startActionsForPlayer(player: Player) {
+        this.activePlayer = player;
+        if (this.generation === 1 && player.hasInitialActionFromCorporation()) {
+            return;
+        }
+        player.takeAction(this);
+    }
+
     public dealer: Dealer = new Dealer();
     private spaces: Array<ISpace> = new OriginalBoard().spaces;
     private onGreeneryPlaced: Array<Function> = [];
@@ -157,7 +268,7 @@ export class Game {
     private temperature: number = MIN_TEMPERATURE;
 
     public increaseTemperature(player: Player): Promise<void> {
-        if (this.temperature < MAX_TEMPERATURE) {
+        if (this.temperature < constants.MAX_TEMPERATURE) {
             // BONUS FOR HEAT PRODUCTION AT -20 and -24
             // BONUS FOR OCEAN TILE AT 0
             if (this.temperature + 2 === -24 || this.temperature + 2 === -20) {
@@ -315,7 +426,7 @@ export class Game {
         }); 
     }
     public addOceanTile(player: Player, spaceId: string): void {
-        if (this.getOceansOnBoard() - 1 === MAX_OCEAN_TILES) {
+        if (this.getOceansOnBoard() - 1 === constants.MAX_OCEAN_TILES) {
             return;
         }
         this.addTile(player, SpaceType.OCEAN, this.getSpace(spaceId), { tileType: TileType.OCEAN });

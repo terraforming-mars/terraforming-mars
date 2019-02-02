@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "lib": ["ES6"], 
+    "lib": ["dom", "ES6"], 
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
@@ -11,10 +11,12 @@
     "preserveConstEnums": true,
     "outDir": "dist",
     "sourceMap": true,
-    "target": "es6"
+    "target": "es6",
+    "types": ["node"]
   },
     "files": [
-	    "index.ts",
+        "script.ts",
+	    "server.ts",
         "src/Game.ts",
         "src/PlayerRoute.ts"
     ]

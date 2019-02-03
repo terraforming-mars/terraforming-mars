@@ -28,7 +28,6 @@ function generateRandomGameId(): string {
 }
 
 function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
-    console.log("createGame");
     let body = "";
     req.on("data", function (data) {
         body += data.toString();

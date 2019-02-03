@@ -16,6 +16,7 @@ import { SelectSpace } from "./inputs/SelectSpace";
 import { ISpace } from "./ISpace";
 import { SelectHowToPay } from "./inputs/SelectHowToPay";
 import { SelectOption } from "./inputs/SelectOption";
+import { Milestone } from "./Milestone";
 import * as constants from "./constants";
 
 export class Player {
@@ -26,7 +27,7 @@ export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
     public id: string = this.generateId();
     public canUseHeatAsMegaCredits: boolean = false;
-    public greeneryCost: number = 8;
+    public plantsNeededForGreenery: number = 8;
     public powerPlantCost: number = 11;
     public opponentsCanRemovePlants: boolean = true;
     public opponentsCanRemoveAnimals: boolean = true;
@@ -391,6 +392,36 @@ export class Player {
         });
     }
 
+    private convertPlantsIntoGreenery(game: Game): PlayerInput {
+        return new SelectSpace("Take Action!", "Convert " + this.plantsNeededForGreenery + " plants into greenery", (space: ISpace) => {
+            try { game.addGreenery(this, space.id); }
+            catch (err) {
+                console.warn("error converting plants into greenery", err);
+                return;
+            }
+            this.plants -= this.plantsNeededForGreenery;
+        });
+    }
+
+    private convertHeatIntoTemperature(game: Game): PlayerInput {
+        return new SelectOption("Take Action!", "Convert 8 heat into temperature", () => {
+            game.increaseTemperature(this)
+                .then(() => {
+                    this.heat -= 8;
+                })
+                .catch((err: string) => {
+                    console.warn("error increasing temperature", err);
+                });
+        }); 
+    }
+
+    private claimMilestone(milestone: Milestone, game: Game): PlayerInput {
+        return new SelectOption("Take Action!", "Claim Milestone: " + milestone, () => {
+            this.victoryPoints += 5;
+            game.claimedMilestones.push(milestone);
+        });
+    }
+
     private passOption(game: Game): PlayerInput {
         return new SelectOption("Take Action!", "Pass", () => {
             game.playerHasPassed(this);
@@ -452,6 +483,28 @@ export class Player {
             action.options.push(
                 this.addCity(game)
             );
+        }
+
+        if (this.plants >= this.plantsNeededForGreenery) {
+            action.options.push(
+                this.convertPlantsIntoGreenery(game)
+            );
+        }
+
+        if (this.heat >= constants.HEAT_FOR_TEMPERATURE) {
+            action.options.push(
+                this.convertHeatIntoTemperature(game)
+            );
+        }
+
+        if (!game.allMilestonesClaimed()) {
+            if (this.megaCredits >= 8) {
+                if (this.terraformRating >= 35) {
+                    action.options.push(
+                        this.claimMilestone(Milestone.TERRAFORMER, game)
+                    );
+                }
+            }
         }
 
         this.setWaitingFor(action);

@@ -14,7 +14,7 @@ export class EcoLine implements CorporationCard {
     public play(player: Player, _game: Game): Promise<void> {
         player.plantProduction = 2;
         player.plants = 3;
-        player.greeneryCost = 7;
+        player.plantsNeededForGreenery = 7;
         return Promise.resolve();
     }
 }

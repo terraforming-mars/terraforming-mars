@@ -24,7 +24,7 @@ export class Player {
     }
 
     public corporationCard: CorporationCard | undefined = undefined;
-
+    public id: string = this.generateId();
     public canUseHeatAsMegaCredits: boolean = false;
     public greeneryCost: number = 8;
     public powerPlantCost: number = 11;
@@ -62,6 +62,9 @@ export class Player {
     }
     public addCardDiscount(discount: CardDiscount): void {
         this.cardDiscounts.push(discount);
+    }
+    private generateId(): string {
+        return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
     }
     public removeCardDiscount(discount: CardDiscount): void {
         for (var i = 0; i < this.cardDiscounts.length; i++) {

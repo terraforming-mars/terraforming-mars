@@ -15,7 +15,9 @@ import { SelectSpace } from "./inputs/SelectSpace";
 import { AndOptions } from "./inputs/AndOptions";
 import { PlayerInput } from "./PlayerInput";
 import { Phase } from "./Phase";
+import { Award } from "./Award";
 import { Milestone } from "./Milestone";
+import { Tags } from "./cards/Tags";
 import * as constants from "./constants";
 
 const MIN_OXYGEN_LEVEL: number = 0;
@@ -47,6 +49,8 @@ Miner: Having the most steel and titanium resource cubes
 export class Game {
     public activePlayer: Player;
     public claimedMilestones: Array<Milestone> = [];
+    public fundedAwards: Array<Award> = [];
+    public awardFundingCost: number = 8;
     constructor(public id: string, private players: Array<Player>, private first: Player) {
         this.activePlayer = first;
         // Give each player their corporation cards
@@ -61,6 +65,76 @@ export class Game {
             }
         }
         
+    }
+
+    public fundAward(award: Award): void {
+        if (this.allAwardsFunded()) {
+            throw "All awards already funded";
+        }
+        this.fundedAwards.push(award);
+        if (this.fundedAwards.length === 1) {
+            this.awardFundingCost = 14;
+        } else if (this.fundedAwards.length === 2) {
+            this.awardFundingCost = 20;
+        }
+        this.addGameEndListener(() => {
+            this.giveAward(award);
+        });
+    }
+
+    public giveAward(award: Award): void {
+        const players: Array<Player> = this.players.slice();
+        let getScore: (player: Player) => number;
+        // Most tiles in play
+        if (award === Award.LANDLORD) {
+            getScore = (player: Player) => {
+                return this.spaces.filter((space) => space.tile !== undefined && space.player === player).length;
+            };
+        }
+        // Highest megacredit production
+        else if (award === Award.BANKER) {
+            getScore = (player: Player) => {
+                return player.megaCreditProduction;
+            };
+        }
+        // Most science tags in play
+        else if (award === Award.SCIENTIST) {
+            getScore = (player: Player) => {
+                return player.getTagCount(Tags.SCIENCE);
+            };
+        }
+        // Most heat resources
+        else if (award === Award.THERMALIST) {
+            getScore = (player: Player) => {
+                return player.heat;
+            };
+        }
+        // Most STEEL and TITANIUM resources
+        else if (award === Award.MINER) {
+            getScore = (player: Player) => {
+                return player.steel + player.titanium;
+            };
+        } else {
+            throw "Unsupported award " + award;
+        }
+        players.sort((player1, player2) => getScore(player2) - getScore(player1));
+        if (players.length <= 2) {
+            players[0].victoryPoints += 5;
+        } else if (getScore(players[0]) === getScore(players[1])) {
+            players[0].victoryPoints += 5;
+            players[1].victoryPoints += 5;
+        } else {
+            players[0].victoryPoints += 5;
+            players[1].victoryPoints += 2;
+        }
+    }
+
+    public hasBeenFunded(award: Award): boolean {
+        return this.fundedAwards.filter((fundedAward) => fundedAward === award).length > 0;
+    }
+
+    public allAwardsFunded(): boolean {
+        return this.fundedAwards.length > 2;
     }
 
     public allMilestonesClaimed(): boolean {
@@ -331,6 +405,9 @@ export class Game {
     }
     public getCitiesInPlay(): number {
         return this.spaces.filter((space) => space.tile !== undefined && space.tile.tileType === TileType.CITY).length;
+    } 
+    public getSpaceCount(tileType: TileType, player: Player): number {
+        return this.spaces.filter((space) => space.tile !== undefined && space.tile.tileType === tileType && space.player !== undefined && space.player === player).length;
     }
     public getSpaces(spaceType: SpaceType): Array<ISpace> {
         return this.spaces.filter((space) => space.spaceType === spaceType);

@@ -16,7 +16,9 @@ import { SelectSpace } from "./inputs/SelectSpace";
 import { ISpace } from "./ISpace";
 import { SelectHowToPay } from "./inputs/SelectHowToPay";
 import { SelectOption } from "./inputs/SelectOption";
+import { Award } from "./Award";
 import { Milestone } from "./Milestone";
+import { TileType } from "./TileType";
 import * as constants from "./constants";
 
 export class Player {
@@ -422,6 +424,12 @@ export class Player {
         });
     }
 
+    private fundAward(award: Award, game: Game): PlayerInput {
+        return new SelectOption("Take Action!", "Claim Award: " + award, () => {
+            game.fundAward(award);
+        });
+    }
+
     private passOption(game: Game): PlayerInput {
         return new SelectOption("Take Action!", "Pass", () => {
             game.playerHasPassed(this);
@@ -504,6 +512,38 @@ export class Player {
                         this.claimMilestone(Milestone.TERRAFORMER, game)
                     );
                 }
+                if (game.getSpaceCount(TileType.CITY, this) >= 3) {
+                    action.options.push(
+                        this.claimMilestone(Milestone.MAYOR, game)
+                    );
+                }
+                if (game.getSpaceCount(TileType.GREENERY, this) >= 3) {
+                    action.options.push(
+                        this.claimMilestone(Milestone.GARDENER, game)
+                    );
+                }
+                if (this.getTagCount(Tags.STEEL) >= 8) {
+                    action.options.push(
+                        this.claimMilestone(Milestone.BUILDER, game)
+                    );
+                }
+                if (this.cardsInHand.length >= 16) {
+                    action.options.push(
+                        this.claimMilestone(Milestone.PLANNER, game)
+                    );
+                }
+            }
+        }
+
+        if (!game.allAwardsFunded()) {
+            if (this.megaCredits >= game.awardFundingCost) {
+                [Award.LANDLORD, Award.BANKER, Award.SCIENTIST, Award.THERMALIST, Award.MINER]
+                    .filter((award: Award) => game.hasBeenFunded(award) === false)
+                    .forEach((award: Award) => {
+                        action.options.push(
+                            this.fundAward(award, game)
+                        );
+                    });
             }
         }
 

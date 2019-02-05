@@ -3,23 +3,25 @@ import * as http from "http";
 import * as fs from "fs";
 import { Game } from "./src/Game";
 import { Player } from "./src/Player";
+import { SpaceType } from "./src/SpaceType";
 
 const script = fs.readFileSync("dist/script.js");
 const favicon = fs.readFileSync("favicon.ico");
 const games: Map<string, Game> = new Map<string, Game>();
 
 const server: http.Server = http.createServer(function (req: http.IncomingMessage, res: http.ServerResponse): void {
-    
     if (req.method === "GET" && req.url === "/") {
         serveApp(res);
     } else if (req.method === "GET" && req.url === "/j.js") {
         serveScript(res);
+    } else if (req.method === "GET" && req.url && req.url.indexOf("/game/") === 0) {
+        serveGame(req, res);
     } else if (req.method === "PUT" && req.url && req.url.indexOf("/game") === 0) {
         createGame(req, res);
     } else if (req.method === "GET" && req.url === "/favicon.ico") {
         serveFavicon(res);
     } else {
-        notFound(res);
+        notFound(req, res);
     }
 });
 
@@ -64,12 +66,23 @@ function getGame(game: Game): string {
     const output = {
         id: game.id,
         activePlayer: game.activePlayer.color,
-        phase: game.phase
+        phase: game.phase,
+        spaces: game.getSpaces(SpaceType.LAND).concat(game.getSpaces(SpaceType.COLONY)).concat(game.getSpaces(SpaceType.OCEAN)).map((space) => ({
+            id: space.id,
+            spaceType: space.spaceType,
+            tile: space.tile,
+            player: space.player ? space.player.id : undefined,
+            bonus: space.bonus,
+            x: space.x,
+            y: space.y
+        })),
+        players: game.getPlayers()
     };
     return JSON.stringify(output);
 }
 
-function notFound(res: http.ServerResponse): void {
+function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {
+    console.warn("Not found", req.method, req.url);
     res.writeHead(404);
     res.write("Not found");
     res.end();
@@ -77,7 +90,40 @@ function notFound(res: http.ServerResponse): void {
 
 function serveApp(res: http.ServerResponse): void {
     res.setHeader("Content-Type", "text/html; charset=utf-8");
-    res.write("<!DOCTYPE html><html><script type='text/javascript' src='j.js'></script><head><title>Teraforming Mars</title><body></body></html>");
+    res.write("<!DOCTYPE html><html><head><script type='text/javascript' src='/j.js'></script><title>Teraforming Mars</title></head><body onload='showCreateGameForm()'></body></html>");
+    res.end();
+}
+
+function serveGame(req: http.IncomingMessage, res: http.ServerResponse): void {
+
+    const routeRegExp: RegExp = /^\/game\/([0-9abcdef]+)$/i;
+
+    if (req.url === undefined) {
+        notFound(req, res);
+        return;
+    }
+
+    if (!routeRegExp.test(req.url)) {
+        notFound(req, res);
+        return;
+    }
+
+    const matches = req.url.match(routeRegExp);
+
+    if (matches === null || matches[1] === undefined) {
+        notFound(req, res);
+        return;
+    }
+
+    const gameId: string = matches[1];
+
+    if (games.has(gameId) === false) {
+        notFound(req, res);
+        return;
+    }
+
+    res.setHeader("Content-Type", "text/html; charset=utf-8");
+    res.write("<!DOCTYPE html><html><head><script type='text/javascript' src='/j.js'></script><title>Teraforming Mars</title></head><body onload='showGameHome()'></body></html>");
     res.end();
 }
 

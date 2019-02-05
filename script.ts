@@ -85,6 +85,13 @@ function showCreateGameForm(): void {
         xhr.onerror = function () {
             alert("Error creating game");
         }
+        xhr.onload = function () {
+            if (this.status === 200) {
+                window.location.href = "/game/" + this.response.id;
+            } else {
+                alert("Unexpected server response");
+            }
+        };
         xhr.responseType = "json";
         xhr.send(JSON.stringify({
             players: players
@@ -94,6 +101,6 @@ function showCreateGameForm(): void {
     document.body.appendChild(elForm);
 }
 
-window.onload = function () {
-    showCreateGameForm();
+function showGameHome() {
+
 }

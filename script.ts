@@ -87,7 +87,8 @@ function showCreateGameForm(): void {
         }
         xhr.onload = function () {
             if (this.status === 200) {
-                window.location.href = "/game/" + this.response.id;
+                window.history.replaceState(this.response, "Teraforming Mars - Game", "/game?id=" + this.response.id);
+                showGameHome(this.response);
             } else {
                 alert("Unexpected server response");
             }
@@ -101,6 +102,43 @@ function showCreateGameForm(): void {
     document.body.appendChild(elForm);
 }
 
-function showGameHome() {
+function showGameHome(game: any): void {
+    document.body.innerHTML = "";
+    const elHeader = document.createElement("h1");
+    elHeader.innerHTML = "Teraforming Mars - Game Home";
+    const elInstructions = document.createElement("p");
+    elInstructions.innerHTML = "Send players their links below. As game administrator pick your link to use.";
+    const elPlayerList = document.createElement("ul");
+    document.body.appendChild(elHeader);
+    document.body.appendChild(elInstructions);
+    document.body.appendChild(elPlayerList);
+    game.players.forEach(function (player: any) {
+        const elPlayerItem = document.createElement("li");
+        const elPlayerLink = document.createElement("a");
+        elPlayerLink.href = "/player?id=" + player.id;
+        elPlayerItem.appendChild(elPlayerLink);
+        elPlayerList.appendChild(elPlayerItem);
+        elPlayerLink.innerHTML = player.name + " - " + player.color;
+    });
+}
+
+function showPlayerHome(player: any): void {
+    document.body.innerHTML = "";
+    const elHeader = document.createElement("h1");
+    elHeader.innerHTML = "Teraforming Mars - Player Home - " + player.name;
+    const elPlayedCardsHeader = document.createElement("h2");
+    elPlayedCardsHeader.innerHTML = "Played Cards";
+    const elCardsInHand = document.createElement("h2");
+    elCardsInHand.innerHTML = "Cards In Hand";
+    document.body.appendChild(elHeader);
+    document.body.appendChild(elPlayedCardsHeader);
+    document.body.appendChild(elCardsInHand);
+    const elResourceCount = document.createElement("div");
+    elResourceCount.innerHTML = "<h2>Resources</h2>Mega Credits: " + player.megaCredits + "<br/>Mega Credit Production: " + player.megaCreditProduction;
+    elResourceCount.innerHTML += "<br/>Steel: " + player.steel + "<br/>Steel Production: " + player.steelProduction;
+    elResourceCount.innerHTML += "<br/>Titanium: " + player.titanium + "<br/>Titanium Production: " + player.titaniumProduction;
+    elResourceCount.innerHTML += "<br/>Energy: " + player.energy + "<br/>Energy Production: " + player.energyProduction;
+    elResourceCount.innerHTML += "<br/>Heat: " + player.heat + "<br/>Heat Production: " + player.heatProduction;    
+    document.body.appendChild(elResourceCount);
 
 }

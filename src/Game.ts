@@ -393,6 +393,9 @@ export class Game {
         }
         throw "Did not find remove listener for generation end";
     }
+    public getAllSpaces(): Array<ISpace> {
+        return this.spaces;
+    }
     public getSpace(id: string): ISpace {
         const matchedSpaces = this.spaces.filter((space) => space.id === id);
         if (matchedSpaces.length === 1) {

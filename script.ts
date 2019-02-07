@@ -1,5 +1,7 @@
 
-function showCreateGameForm(): void {
+import { SpaceType } from "./src/SpaceType";
+
+export function showCreateGameForm(): void {
     const maxPlayers: number = 5;
     const elForm = document.createElement("form");
     elForm.id = "create-game";
@@ -102,7 +104,7 @@ function showCreateGameForm(): void {
     document.body.appendChild(elForm);
 }
 
-function showGameHome(game: any): void {
+export function showGameHome(game: any): void {
     document.body.innerHTML = "";
     const elHeader = document.createElement("h1");
     elHeader.innerHTML = "Teraforming Mars - Game Home";
@@ -122,7 +124,7 @@ function showGameHome(game: any): void {
     });
 }
 
-function showPlayerHome(player: any): void {
+export function showPlayerHome(player: any): void {
     document.body.innerHTML = "";
     const elHeader = document.createElement("h1");
     elHeader.innerHTML = "Teraforming Mars - Player Home - " + player.name;
@@ -138,7 +140,29 @@ function showPlayerHome(player: any): void {
     elResourceCount.innerHTML += "<br/>Steel: " + player.steel + "<br/>Steel Production: " + player.steelProduction;
     elResourceCount.innerHTML += "<br/>Titanium: " + player.titanium + "<br/>Titanium Production: " + player.titaniumProduction;
     elResourceCount.innerHTML += "<br/>Energy: " + player.energy + "<br/>Energy Production: " + player.energyProduction;
-    elResourceCount.innerHTML += "<br/>Heat: " + player.heat + "<br/>Heat Production: " + player.heatProduction;    
+    elResourceCount.innerHTML += "<br/>Heat: " + player.heat + "<br/>Heat Production: " + player.heatProduction;
     document.body.appendChild(elResourceCount);
+    const elBoardHeader = document.createElement("h2");
+    elBoardHeader.innerHTML = "Board";
+    const elColonies = document.createElement("h3");
+    elColonies.innerHTML = "Colonies";
+    document.body.appendChild(elBoardHeader);
+    document.body.appendChild(elColonies);
+    player.spaces.filter((space: any) => {
+        return space.spaceType === SpaceType.COLONY
+    }).forEach((colony: any) => {
+        const elColony = document.createElement("div");
+        elColony.innerHTML = colony.id;
+        document.body.appendChild(elColony);
+    });
+    player.spaces.filter((space: any) => space.spaceType !== "colony")
+        .forEach((space: any) => {
+            console.log(space.x + ":" + space.y);
+        });
+
+    if (player.waitingFor) {
+
+    }
+    console.log(player);
 
 }

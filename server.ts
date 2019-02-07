@@ -5,19 +5,39 @@ import { Game } from "./src/Game";
 import { Player } from "./src/Player";
 
 const script = fs.readFileSync("dist/script.js");
+const systemjs = fs.readFileSync("lib/system.min.js"); 
 const favicon = fs.readFileSync("favicon.ico");
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
 
 const server: http.Server = http.createServer(function (req: http.IncomingMessage, res: http.ServerResponse): void {
     if (req.method === "GET" && req.url === "/") {
-        serveApp(res);
+        serveApp(res, "showCreateGameForm");
     } else if (req.method === "GET" && req.url !== undefined && req.url.startsWith("/game?id=")) {
-        serveGameHome(req, res, req.url.substring("/game?id=".length));
+        const gameId: string = req.url.substring("/game?id=".length);
+        const game = games.get(gameId);
+        if (game === undefined) {
+            notFound(req, res);
+            return;
+        }
+        serveApp(res, "ShowGameHome", JSON.stringify(getGame(game)));
     } else if (req.method === "GET" && req.url !== undefined && req.url.startsWith("/player?id=")) {
-        servePlayerHome(req, res, req.url.substring("/player?id=".length));
-    } else if (req.method === "GET" && req.url === "/j.js") {
-        serveScript(res);
+        const playerId: string = req.url.substring("/player?id=".length);
+        const game = playersToGame.get(playerId);
+        if (game === undefined) {
+            notFound(req, res);
+            return;
+        }
+        const player = game.getPlayers().filter((player) => player.id === playerId)[0];
+        if (player === undefined) {
+            notFound(req, res);
+            return;
+        }
+        serveApp(res, "showPlayerHome", JSON.stringify(getPlayer(player, game)));
+    } else if (req.method === "GET" && req.url === "/script.js") {
+        serveScript(res, script);
+    } else if (req.method === "GET" && req.url === "/system.min.js") {
+        serveScript(res, systemjs);
     } else if (req.method === "GET" && req.url && req.url.indexOf("/game/") === 0) {
         serveGame(req, res);
     } else if (req.method === "PUT" && req.url && req.url.indexOf("/game") === 0) {
@@ -88,7 +108,8 @@ function getPlayer(player: Player, game: Game): string {
         heatProduction: player.heatProduction,
         spaces: game.getAllSpaces(),
         cardsInHands: player.cardsInHand.map((card) => card.name),
-        playedCards: player.playedCards.map((card) => card.name)
+        playedCards: player.playedCards.map((card) => card.name),
+        waitingFor: player.getWaitingFor()
     };
     return JSON.stringify(output);
 }
@@ -119,40 +140,9 @@ function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {
     res.end();
 }
 
-function serveApp(res: http.ServerResponse): void {
+function serveApp(res: http.ServerResponse, pageName: string, data?: string): void {
     res.setHeader("Content-Type", "text/html; charset=utf-8");
-    res.write("<!DOCTYPE html><html><head><script type='text/javascript' src='/j.js'></script><title>Teraforming Mars</title></head><body onload='showCreateGameForm()'></body></html>");
-    res.end();
-}
-
-function serveGameHome(req: http.IncomingMessage, res: http.ServerResponse, gameId: string): void {
-    const game = games.get(gameId);
-    if (game === undefined) {
-        notFound(req, res);
-        return;
-    }
-    res.setHeader("Content-Type", "text/html; charset=utf-8");
-    res.write("<!DOCTYPE html><html><head><script type='text/javascript' src='/j.js'></script><title>Teraforming Mars - Game</title></head><body>");
-    res.write("<script type='text/javascript'>window.onload=function(){showGameHome(JSON.parse(" + JSON.stringify(getGame(game)) + "));};</script>");
-    res.write("</body></html>");
-    res.end();
-}
-
-function servePlayerHome(req: http.IncomingMessage, res: http.ServerResponse, playerId: string): void {
-    const game = playersToGame.get(playerId);
-    if (game === undefined) {
-        notFound(req, res);
-        return;
-    }
-    const player = game.getPlayers().filter((player) => player.id === playerId)[0];
-    if (player === undefined) {
-        notFound(req, res);
-        return;
-    }
-    res.setHeader("Content-Type", "text/html; charset=utf-8");
-    res.write("<!DOCTYPE html><html><head><script type='text/javascript' src='/j.js'></script><title>Teraforming Mars - Player</title></head><body>");
-    res.write("<script type='text/javascript'>window.onload=function(){showPlayerHome(JSON.parse(" + JSON.stringify(getPlayer(player, game)) + "));};</script>");
-    res.write("</body></html>");
+    res.write("<!DOCTYPE html><html><head><script src='/system.min.js'></script><script src='/script.js'></script></head><body><script>SystemJS.import('script').then(function (a) { a." + pageName + "(" + (data ? "JSON.parse(" + data + ")" : "") + "); });</script></body></html>");
     res.end();
 }
 
@@ -197,8 +187,8 @@ function serveFavicon(res: http.ServerResponse): void {
     res.end();
 }
 
-function serveScript(res: http.ServerResponse): void {
-    res.write(script);
+function serveScript(res: http.ServerResponse, s: Buffer): void {
+    res.write(s);
     res.end();
 }
 

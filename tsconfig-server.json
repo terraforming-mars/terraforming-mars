@@ -15,9 +15,6 @@
     "types": ["node"]
   },
     "files": [
-        "script.ts",
-	    "server.ts",
-        "src/Game.ts",
-        "src/PlayerRoute.ts"
+	    "server.ts"
     ]
 }

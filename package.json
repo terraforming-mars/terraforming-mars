@@ -9,7 +9,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "build": "tsc",
+    "build_client": "tsc --build tsconfig-client.json",
+    "build_server": "tsc --build tsconfig-server.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

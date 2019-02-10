@@ -1,4 +1,5 @@
 
+import { PlayerInputTypes } from "./src/PlayerInputTypes";
 import { SpaceType } from "./src/SpaceType";
 
 export function showCreateGameForm(): void {
@@ -124,16 +125,113 @@ export function showGameHome(game: any): void {
     });
 }
 
+function getSelectCard(playerInput: any, cb: (out: Array<Array<string>>) => void): Element {
+    const elResult = document.createElement("div");
+    const elTitle = document.createElement("div");
+    elTitle.innerHTML = playerInput.title;
+    elResult.appendChild(elTitle);
+    const checkboxes: Array<HTMLInputElement> = [];
+    playerInput.cards.forEach((card: any) => {
+        const elCard = document.createElement("div");
+        const elSelect = document.createElement("input");
+        elSelect.type = "checkbox";     
+        elCard.innerHTML = card.name;
+        elResult.appendChild(elSelect);
+        elResult.appendChild(elCard);
+        checkboxes.push(elSelect);
+    });
+    const elSubmitChoice = document.createElement("input");
+    elSubmitChoice.type = "button";
+    elSubmitChoice.value = "Save";
+    elSubmitChoice.onclick = function () {
+        const checked = checkboxes.filter((box) => box.checked);
+        if (checked.length < playerInput.minCardsToSelect) {
+            alert("You must select at least " + playerInput.minCardsToSelect + " cards");
+        } else if (checked.length > playerInput.maxCardsToSelect) {
+            alert("You must select at most " + playerInput.maxCardsToSelect + " cards");
+        } else {
+            var res: Array<string> = [];
+            for (let i = 0; i < playerInput.cards.length; i++) {
+                if (checkboxes[i].checked) {
+                    res.push(playerInput.cards[i].name);
+                }
+            }
+            cb([res]);
+        }
+    }
+    elResult.appendChild(elSubmitChoice);
+    return elResult;
+}
+
+function getPlayerInput(playerInput: any, cb: (out: Array<Array<string>>) => void): Element {
+    if (playerInput.inputType === PlayerInputTypes.AND_OPTIONS) {
+        const elResult = document.createElement("div");
+        const elMessage = document.createElement("div");
+        elMessage.innerHTML = playerInput.message;
+        elResult.appendChild(elMessage);
+        const results: Array<Array<string>> = [];
+        let responded: number = 0;
+        playerInput.options.forEach((option: any, idx: number) => {
+            elResult.appendChild(getPlayerInput(option, (out: Array<Array<string>>) => {
+                results[idx] = out[0];
+                responded++; 
+                if (responded === playerInput.options.length) {
+                    cb(results);
+                }
+            }));
+        });
+        return elResult;
+    } else if (playerInput.inputType === PlayerInputTypes.SELECT_CARD) {
+        return getSelectCard(playerInput, cb);
+    } else {
+        throw "Unsupported input type" + playerInput.inputType;
+    }
+}
+
 export function showPlayerHome(player: any): void {
     document.body.innerHTML = "";
     const elHeader = document.createElement("h1");
     elHeader.innerHTML = "Teraforming Mars - Player Home - " + player.name;
+    document.body.appendChild(elHeader);
+    const elCorporationCardHeader = document.createElement("h2");
+    elCorporationCardHeader.innerHTML = "Corporation Card";
+    document.body.appendChild(elCorporationCardHeader);
+    if (player.corporationCard) {
+        const elCard = document.createElement("span");
+        elCard.innerHTML = player.corporationCard;
+        document.body.appendChild(elCard);
+    } else {
+        const elCard = document.createElement("span");
+        elCard.innerHTML = "NONE";
+        document.body.appendChild(elCard);
+    }
     const elPlayedCardsHeader = document.createElement("h2");
     elPlayedCardsHeader.innerHTML = "Played Cards";
-    const elCardsInHand = document.createElement("h2");
-    elCardsInHand.innerHTML = "Cards In Hand";
-    document.body.appendChild(elHeader);
+    const elCardsInHandHeader = document.createElement("h2");
+    elCardsInHandHeader.innerHTML = "Cards In Hand";
     document.body.appendChild(elPlayedCardsHeader);
+    const elPlayedCards = document.createElement("div");
+    if (player.playedCards.length) {
+        player.playedCards.forEach((cardName: string) => {
+            const elCard = document.createElement("span");
+            elCard.innerHTML = cardName;
+            elPlayedCards.appendChild(elCard);
+        });
+    } else {
+        elPlayedCards.innerHTML = "NONE";
+    }
+    document.body.appendChild(elPlayedCards);
+    document.body.appendChild(elCardsInHandHeader);
+    const elCardsInHand = document.createElement("div");
+    if (player.cardsInHand.length) {
+        player.cardsInHand.forEach((cardName: string) => {
+            const elCard = document.createElement("span");
+            elCard.innerHTML = cardName;
+            elCardsInHand.appendChild(elCard);
+        });
+    } else {
+        elCardsInHand.innerHTML = "NONE";
+    }
     document.body.appendChild(elCardsInHand);
     const elResourceCount = document.createElement("div");
     elResourceCount.innerHTML = "<h2>Resources</h2>Mega Credits: " + player.megaCredits + "<br/>Mega Credit Production: " + player.megaCreditProduction;
@@ -160,9 +258,24 @@ export function showPlayerHome(player: any): void {
             console.log(space.x + ":" + space.y);
         });
 
+    const elWaitingFor = document.createElement("div");
+    document.body.appendChild(elWaitingFor);
     if (player.waitingFor) {
-
+        elWaitingFor.appendChild(getPlayerInput(player.waitingFor, (out) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/player/input?id=" + player.id);
+            xhr.responseType = "json";
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    showPlayerHome(xhr.response);
+                } else {
+                    alert("Error sending input");
+                }
+            }
+            xhr.send(JSON.stringify(out));
+        }));
     }
+
     console.log(player);
 
 }

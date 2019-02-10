@@ -159,7 +159,7 @@ export class Game {
                 for (let foundCard of foundCards) {
                     player.cardsInHand.push(foundCard);
                 }
-            })
+            }, 10, 0)
         );
     }
  

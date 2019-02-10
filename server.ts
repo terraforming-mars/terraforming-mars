@@ -38,12 +38,25 @@ const server: http.Server = http.createServer(function (req: http.IncomingMessag
         serveScript(res, script);
     } else if (req.method === "GET" && req.url === "/system.min.js") {
         serveScript(res, systemjs);
+    } else if (req.method === "GET" && req.url === "/favicon.ico") {
+        serveFavicon(res);
     } else if (req.method === "GET" && req.url && req.url.indexOf("/game/") === 0) {
         serveGame(req, res);
     } else if (req.method === "PUT" && req.url && req.url.indexOf("/game") === 0) {
         createGame(req, res);
-    } else if (req.method === "GET" && req.url === "/favicon.ico") {
-        serveFavicon(res);
+    } else if (req.method === "POST" && req.url && req.url.indexOf("/player/input?id=") === 0) {
+        const playerId: string = req.url.substring("/player/input?id=".length);
+        const game = playersToGame.get(playerId);
+        if (game === undefined) {
+            notFound(req, res);
+            return;
+        }
+        const player = game.getPlayers().filter((player) => player.id === playerId)[0];
+        if (player === undefined) {
+            notFound(req, res);
+            return;
+        }
+        processInput(req, res, player, game);
     } else {
         notFound(req, res);
     }
@@ -51,6 +64,26 @@ const server: http.Server = http.createServer(function (req: http.IncomingMessag
 
 function generateRandomGameId(): string {
     return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
+}
+
+function processInput(req: http.IncomingMessage, res: http.ServerResponse, player: Player, game: Game): void {
+    let body = "";
+    req.on("data", function (data) {
+        body += data.toString();
+    });
+    req.once("end", function () {
+        try {
+            const entity = JSON.parse(body);
+            player.process(entity);
+            res.setHeader("Content-Type", "application/json");
+            res.write(getPlayer(player, game));
+            res.end();
+        } catch (err) {
+            res.writeHead(500);
+            res.write(err);
+            res.end();
+        }
+    });
 }
 
 function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -107,8 +140,9 @@ function getPlayer(player: Player, game: Game): string {
         heat: player.heat,
         heatProduction: player.heatProduction,
         spaces: game.getAllSpaces(),
-        cardsInHands: player.cardsInHand.map((card) => card.name),
+        cardsInHand: player.cardsInHand.map((card) => card.name),
         playedCards: player.playedCards.map((card) => card.name),
+        corporationCard: player.corporationCard ? player.corporationCard.name : undefined,
         waitingFor: player.getWaitingFor()
     };
     return JSON.stringify(output);

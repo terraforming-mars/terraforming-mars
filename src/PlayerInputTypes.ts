@@ -1,0 +1,12 @@
+
+export enum PlayerInputTypes {
+    AND_OPTIONS,
+    DO_NOTHING,
+    SELECT_SPACE,
+    SELECT_PLAYER,
+    SELECT_OPTION,
+    SELECT_HOW_TO_PAY,
+    SELECT_CARD,
+    SELECT_AMOUNT,
+    OR_OPTIONS
+}

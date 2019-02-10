@@ -9,6 +9,7 @@
   },
   "devDependencies": {},
   "scripts": {
+    "build": "rm -rf dist ; npm run build_client ; npm run build_server",
     "build_client": "tsc --build tsconfig-client.json",
     "build_server": "tsc --build tsconfig-server.json",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,0 +1,43 @@
+.board {
+    width: 453px;
+    height: 418px;
+    background-color: white;
+}
+.board > .row {
+    height: 45px;
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+}
+.board > .row > .tile {
+    width: 50px;
+    height: 60px;
+    line-height: 60px;
+    position: relative;
+}
+.board > .row > .tile > .land {
+    position: absolute;
+    font-size: 65px;
+    color: tan;
+}
+.board > .row > .tile > .aquifer {
+    position: absolute;
+    font-size: 65px;
+    color: lightblue;
+}
+.board > .row > .tile > .bonus {
+    position: absolute;
+    left: 10px;
+    font-size: 20px;
+    color: black;
+}
+.board > .row > .tile > .bonus.steel {
+    font-size: 12px;
+}
+.board > .row > .tile > .bonus.plant {
+    font-size: 15px;
+}
+.board > .row > .tile > .bonus + .bonus {
+    left: 30px;
+}
+

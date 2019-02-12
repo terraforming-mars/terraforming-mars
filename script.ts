@@ -24,7 +24,6 @@ export function showCreateGameForm(): void {
         elInputPlayer.id = "playerName" + i;
         elInputPlayer.name = "playerName" + i;
         elInputPlayer.type = "text";
-        elInputPlayer.value = "Player" + Math.floor(Math.random() * 12345151);
         const elColorPlayer = document.createElement("select");
         const elOptionRed = document.createElement("option");
         elOptionRed.innerHTML = "Red";
@@ -76,12 +75,14 @@ export function showCreateGameForm(): void {
     elCreateGameBtn.onclick = function () {
         const players: Array<{[x: string]: string | boolean}> = [];
         for (let i: number = 0; i < maxPlayers; i++) {
-            players.push({
-                name: (elForm.elements as any)["playerName" + i].value,
-                first: parseInt((elForm.elements as any)["firstPlayer"].value) === i,
-                beginner: (elForm.elements as any)["playerBeginner" + i].checked,
-                color: (elForm.elements as any)["playerColor" + i].value
-            });
+            if ((elForm.elements as any)["playerName" + i].value !== "") {
+                players.push({
+                    name: (elForm.elements as any)["playerName" + i].value,
+                    first: parseInt((elForm.elements as any)["firstPlayer"].value) === i,
+                    beginner: (elForm.elements as any)["playerBeginner" + i].checked,
+                    color: (elForm.elements as any)["playerColor" + i].value
+                });
+            }
         }
         const xhr = new XMLHttpRequest();
         xhr.open("PUT", "/game");

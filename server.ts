@@ -5,12 +5,18 @@ import { Game } from "./src/Game";
 import { Player } from "./src/Player";
 
 const script = fs.readFileSync("dist/script.js");
+const styles = fs.readFileSync("styles.css");
 const systemjs = fs.readFileSync("lib/system.min.js"); 
 const favicon = fs.readFileSync("favicon.ico");
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
 
 const server: http.Server = http.createServer(function (req: http.IncomingMessage, res: http.ServerResponse): void {
+    if (req.method === "GET" && req.url === "/test") {
+        res.write(fs.readFileSync("test.html"));
+        res.end();
+        return;
+    }
     if (req.method === "GET" && req.url === "/") {
         serveApp(res, "showCreateGameForm");
     } else if (req.method === "GET" && req.url !== undefined && req.url.startsWith("/game?id=")) {
@@ -34,6 +40,8 @@ const server: http.Server = http.createServer(function (req: http.IncomingMessag
             return;
         }
         serveApp(res, "showPlayerHome", JSON.stringify(getPlayer(player, game)));
+    } else if (req.method === "GET" && req.url === "/styles.css") {
+        serveStyle(res, styles);
     } else if (req.method === "GET" && req.url === "/script.js") {
         serveScript(res, script);
     } else if (req.method === "GET" && req.url === "/system.min.js") {
@@ -218,6 +226,11 @@ function serveGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 function serveFavicon(res: http.ServerResponse): void {
     res.setHeader("Content-Type", "image/x-icon");
     res.write(favicon);
+    res.end();
+}
+
+function serveStyle(res: http.ServerResponse, s: Buffer): void {
+    res.write(s);
     res.end();
 }
 

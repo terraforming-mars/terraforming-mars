@@ -184,7 +184,7 @@ function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {
 
 function serveApp(res: http.ServerResponse, pageName: string, data?: string): void {
     res.setHeader("Content-Type", "text/html; charset=utf-8");
-    res.write("<!DOCTYPE html><html><head><script src='/system.min.js'></script><script src='/script.js'></script></head><body><script>SystemJS.import('script').then(function (a) { a." + pageName + "(" + (data ? "JSON.parse(" + data + ")" : "") + "); });</script></body></html>");
+    res.write("<!DOCTYPE html><html><head><link rel='stylesheet' type='text/css' media='all' href='/styles.css' /><script src='/system.min.js'></script><script src='/script.js'></script></head><body><script>SystemJS.import('script').then(function (a) { a." + pageName + "(" + (data ? "JSON.parse(" + data + ")" : "") + "); });</script></body></html>");
     res.end();
 }
 

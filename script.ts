@@ -1,5 +1,7 @@
 
 import { PlayerInputTypes } from "./src/PlayerInputTypes";
+import { SpaceBonus } from "./src/SpaceBonus";
+import { SpaceName } from "./src/SpaceName";
 import { SpaceType } from "./src/SpaceType";
 
 export function showCreateGameForm(): void {
@@ -258,7 +260,71 @@ export function showPlayerHome(player: any): void {
         .forEach((space: any) => {
             console.log(space.x + ":" + space.y);
         });
-
+    const boardSpaces = player.spaces.filter((space: any) => space.x >= 0 && space.y >= 0);
+    boardSpaces.sort((s1: any, s2: any) => {
+        if (s1.y === s2.y) {
+            return s1.x - s2.x;
+        }
+        return s1.y - s2.y;
+    });
+    const elBoard = document.createElement("div");
+    elBoard.className = "board";
+    let lastY: number | undefined = undefined;
+    let elRow = document.createElement("div");
+    elRow.className = "row";
+    while (boardSpaces.length) {
+        const thisSpace = boardSpaces.shift();
+        if (lastY === undefined || thisSpace.y !== lastY) {
+            if (elRow !== undefined) {
+                elBoard.appendChild(elRow);
+                elRow = document.createElement("div");
+                elRow.className = "row";
+            }
+            elRow.style.paddingLeft = (25 * thisSpace.x) + "px";
+        }
+        const elCell = document.createElement("div");
+        elCell.className = "tile";
+        const elSpace = document.createElement("span");
+        if (thisSpace.spaceType === SpaceType.LAND) {
+            elSpace.className = "land";
+        } else if (thisSpace.spaceType === SpaceType.OCEAN) {
+            elSpace.className = "aquifer";
+        }
+        elSpace.innerHTML = "&#x2B22";
+        elCell.appendChild(elSpace);
+        thisSpace.bonus.forEach((bonus: any) => {
+            const elBonus = document.createElement("span");
+            elBonus.className = "bonus";
+            if (bonus === SpaceBonus.TITANIUM) {
+                elBonus.innerHTML = "&#x272A";
+            } else if (bonus === SpaceBonus.STEEL) {
+                elBonus.innerHTML = "&#x2692";
+                elBonus.className += " steel";
+            } else if (bonus === SpaceBonus.PLANT) {
+                elBonus.innerHTML = "&#x1F343";
+                elBonus.className += " plane";
+            } else if (bonus === SpaceBonus.DRAW_CARD) {
+                elBonus.innerHTML = "&#x1F0A0";
+            }
+            elCell.appendChild(elBonus);
+        });
+        if (thisSpace.id === SpaceName.ARSIA_MONS ||
+            thisSpace.id === SpaceName.ASCRAEUS_MONS ||
+            thisSpace.id === SpaceName.GANYMEDE_COLONY ||
+            thisSpace.id === SpaceName.NOCTIS_CITY ||
+            thisSpace.id === SpaceName.PAVONIS_MONS ||
+            thisSpace.id === SpaceName.PHOBOS_SPACE_HAVEN ||
+            thisSpace.id === SpaceName.THARSIS_THOLUS) {
+            const elName = document.createElement("span");
+            elName.className = "name";
+            elName.innerHTML = thisSpace.id;
+            elCell.appendChild(elName);
+        }
+        elRow.appendChild(elCell);
+        lastY = thisSpace.y;
+    }
+    elBoard.appendChild(elRow);
+    document.body.appendChild(elBoard);
     const elWaitingFor = document.createElement("div");
     document.body.appendChild(elWaitingFor);
     if (player.waitingFor) {

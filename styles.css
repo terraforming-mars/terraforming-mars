@@ -1,6 +1,6 @@
 .board {
     width: 453px;
-    height: 418px;
+    height: 480px;
     background-color: white;
 }
 .board > .row {
@@ -14,6 +14,13 @@
     height: 60px;
     line-height: 60px;
     position: relative;
+}
+.board > .row > .tile > .name {
+    display: block;
+    position: relative;
+    font-size: 10px;
+    width: 55px;
+    text-align: center;
 }
 .board > .row > .tile > .land {
     position: absolute;

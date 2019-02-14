@@ -2,49 +2,55 @@
     width: 453px;
     height: 480px;
     background-color: white;
+    position: relative;
 }
-.board > .row {
+.board .row {
     height: 45px;
     width: 500px;
     display: flex;
     flex-direction: row;
 }
-.board > .row > .tile {
+.board .tile {
     width: 50px;
     height: 60px;
     line-height: 60px;
     position: relative;
 }
-.board > .row > .tile > .name {
+.board .tile > .name {
     display: block;
     position: relative;
     font-size: 10px;
     width: 55px;
     text-align: center;
 }
-.board > .row > .tile > .land {
+.board .tile > .colony {
+    position: absolute;
+    font-size: 65px;
+    color: silver;
+}
+.board .tile > .land {
     position: absolute;
     font-size: 65px;
     color: tan;
 }
-.board > .row > .tile > .aquifer {
+.board .tile > .aquifer {
     position: absolute;
     font-size: 65px;
     color: lightblue;
 }
-.board > .row > .tile > .bonus {
+.board .tile > .bonus {
     position: absolute;
     left: 10px;
     font-size: 20px;
     color: black;
 }
-.board > .row > .tile > .bonus.steel {
+.board .tile > .bonus.steel {
     font-size: 12px;
 }
-.board > .row > .tile > .bonus.plant {
+.board .tile > .bonus.plant {
     font-size: 15px;
 }
-.board > .row > .tile > .bonus + .bonus {
+.board .tile > .bonus + .bonus {
     left: 30px;
 }
 

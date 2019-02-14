@@ -245,21 +245,7 @@ export function showPlayerHome(player: any): void {
     document.body.appendChild(elResourceCount);
     const elBoardHeader = document.createElement("h2");
     elBoardHeader.innerHTML = "Board";
-    const elColonies = document.createElement("h3");
-    elColonies.innerHTML = "Colonies";
     document.body.appendChild(elBoardHeader);
-    document.body.appendChild(elColonies);
-    player.spaces.filter((space: any) => {
-        return space.spaceType === SpaceType.COLONY
-    }).forEach((colony: any) => {
-        const elColony = document.createElement("div");
-        elColony.innerHTML = colony.id;
-        document.body.appendChild(elColony);
-    });
-    player.spaces.filter((space: any) => space.spaceType !== "colony")
-        .forEach((space: any) => {
-            console.log(space.x + ":" + space.y);
-        });
     const boardSpaces = player.spaces.filter((space: any) => space.x >= 0 && space.y >= 0);
     boardSpaces.sort((s1: any, s2: any) => {
         if (s1.y === s2.y) {
@@ -270,16 +256,21 @@ export function showPlayerHome(player: any): void {
     const elBoard = document.createElement("div");
     elBoard.className = "board";
     let lastY: number | undefined = undefined;
-    let elRow = document.createElement("div");
-    elRow.className = "row";
+    let elRow: HTMLDivElement | undefined = undefined;
+    const elGanymede = document.createElement("div");
+    elGanymede.style.position = "absolute";
+    elGanymede.style.left = "0px";
+    elGanymede.style.top = "10px";
+    elGanymede.innerHTML = "<span class='tile'><span class='colony'>&#x2B22</span><span class='name'>GANYMEDE_COLONY</span></span>";
+    elBoard.appendChild(elGanymede);
     while (boardSpaces.length) {
         const thisSpace = boardSpaces.shift();
         if (lastY === undefined || thisSpace.y !== lastY) {
             if (elRow !== undefined) {
                 elBoard.appendChild(elRow);
-                elRow = document.createElement("div");
-                elRow.className = "row";
             }
+            elRow = document.createElement("div");
+            elRow.className = "row";
             elRow.style.paddingLeft = (25 * thisSpace.x) + "px";
         }
         const elCell = document.createElement("div");
@@ -310,20 +301,28 @@ export function showPlayerHome(player: any): void {
         });
         if (thisSpace.id === SpaceName.ARSIA_MONS ||
             thisSpace.id === SpaceName.ASCRAEUS_MONS ||
-            thisSpace.id === SpaceName.GANYMEDE_COLONY ||
             thisSpace.id === SpaceName.NOCTIS_CITY ||
             thisSpace.id === SpaceName.PAVONIS_MONS ||
-            thisSpace.id === SpaceName.PHOBOS_SPACE_HAVEN ||
             thisSpace.id === SpaceName.THARSIS_THOLUS) {
             const elName = document.createElement("span");
             elName.className = "name";
             elName.innerHTML = thisSpace.id;
             elCell.appendChild(elName);
         }
-        elRow.appendChild(elCell);
+        if (elRow !== undefined) {
+            elRow.appendChild(elCell);
+        }
         lastY = thisSpace.y;
     }
-    elBoard.appendChild(elRow);
+    if (elRow !== undefined) {
+        elBoard.appendChild(elRow);
+    }
+    const elPhobos = document.createElement("div");
+    elPhobos.style.position = "absolute";
+    elPhobos.style.left = "0px";
+    elPhobos.style.top = "360px";
+    elPhobos.innerHTML = "<span class='tile'><span class='colony'>&#x2B22</span><span class='name'>PHOBOS_SPACE_HAVEN</span></span>";
+    elBoard.appendChild(elPhobos);
     document.body.appendChild(elBoard);
     const elWaitingFor = document.createElement("div");
     document.body.appendChild(elWaitingFor);

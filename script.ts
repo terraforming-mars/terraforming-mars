@@ -3,6 +3,7 @@ import { PlayerInputTypes } from "./src/PlayerInputTypes";
 import { SpaceBonus } from "./src/SpaceBonus";
 import { SpaceName } from "./src/SpaceName";
 import { SpaceType } from "./src/SpaceType";
+import { HowToPay } from "./src/inputs/HowToPay";
 
 export function showCreateGameForm(): void {
     const maxPlayers: number = 5;
@@ -128,6 +129,74 @@ export function showGameHome(game: any): void {
     });
 }
 
+function getSelectHowToPay(playerInput: any, cb: (out: Array<Array<string>>) => void): Element {
+    const elResult = document.createElement("div");
+    const elTitle = document.createElement("div");
+    elTitle.innerHTML = playerInput.title;
+    elResult.appendChild(elTitle);
+    let elSteelValue: HTMLInputElement | undefined = undefined;
+    let elTitaniumValue: HTMLInputElement | undefined = undefined;
+    let elHeatValue: HTMLInputElement | undefined = undefined;
+    if (playerInput.canUseSteel) {
+        const elSteelLabel = document.createElement("label");
+        elSteelLabel.innerHTML = "Steel: ";
+        elResult.appendChild(elSteelLabel);
+        elSteelValue = document.createElement("input");
+        elSteelValue.type = "text";
+        elSteelValue.value = "0";
+        elResult.appendChild(elSteelValue);
+    }
+    if (playerInput.canUseTitanium) {
+        const elTitaniumLabel = document.createElement("label");
+        elTitaniumLabel.innerHTML = "Titanium: ";
+        elResult.appendChild(elTitaniumLabel);
+        elTitaniumValue = document.createElement("input");
+        elTitaniumValue.type = "text";
+        elTitaniumValue.value = "0";
+        elResult.appendChild(elTitaniumValue);
+    }
+    if (playerInput.canUseHeat) {
+        const elHeatLabel = document.createElement("label");
+        elHeatLabel.innerHTML = "Heat: ";
+        elResult.appendChild(elHeatLabel);
+        elHeatValue = document.createElement("input");
+        elHeatValue.type = "text";
+        elHeatValue.value = "0";
+        elResult.appendChild(elHeatValue);
+    }
+    const elMegaLabel = document.createElement("label");
+    elMegaLabel.innerHTML = "Mega Credit: ";
+    elResult.appendChild(elMegaLabel);
+    const elMegaValue = document.createElement("input");
+    elMegaValue.type = "text";
+    elMegaValue.value = "0";
+    elResult.appendChild(elMegaValue);
+    const elSelect = document.createElement("input");
+    elSelect.type = "button";
+    elSelect.onclick = function () {
+        var htp: HowToPay = {
+            steel: 0,
+            titanium: 0,
+            megaCredits: 0
+        };
+        if (elSteelValue !== undefined) {
+            htp.steel = parseInt(elSteelValue.value);
+        }
+        if (elTitaniumValue !== undefined) {
+            htp.titanium = parseInt(elTitaniumValue.value);
+        }
+        if (elHeatValue !== undefined) {
+            htp.heat = parseInt(elHeatValue.value);
+        }
+        if (elMegaValue !== undefined) {
+            htp.megaCredits = parseInt(elMegaValue.value);
+        }
+        cb([[JSON.stringify(htp)]]);
+    };
+    elResult.appendChild(elSelect);
+    return elResult;
+}
+
 function getSelectCard(playerInput: any, cb: (out: Array<Array<string>>) => void): Element {
     const elResult = document.createElement("div");
     const elTitle = document.createElement("div");
@@ -186,6 +255,19 @@ function getPlayerInput(playerInput: any, cb: (out: Array<Array<string>>) => voi
         return elResult;
     } else if (playerInput.inputType === PlayerInputTypes.SELECT_CARD) {
         return getSelectCard(playerInput, cb);
+    } else if (playerInput.inputType === PlayerInputTypes.SELECT_HOW_TO_PAY) {
+        return getSelectHowToPay(playerInput, cb);
+    } else if (playerInput.inputType === PlayerInputTypes.OR_OPTIONS) {
+        const elResult = document.createElement("div");
+        const elMessage = document.createElement("div");
+        elMessage.innerHTML = playerInput.message;
+        elResult.appendChild(elMessage);
+        playerInput.options.forEach((option: any) => {
+            elResult.appendChild(getPlayerInput(option, (out: Array<Array<string>>) => {
+                cb(out);
+            }));
+        });
+        return elResult;
     } else {
         throw "Unsupported input type" + playerInput.inputType;
     }

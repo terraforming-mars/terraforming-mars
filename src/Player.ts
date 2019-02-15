@@ -140,6 +140,8 @@ export class Player {
                 this.runInput([input[i]], waiting.options[i]);
             }
             pi.cb();
+        } else if (pi instanceof SelectOption) {
+            pi.cb();
         } else if (pi instanceof OrOptions) {
             const waiting: OrOptions = pi;
             const optionIndex = parseInt(input[0][0]);
@@ -439,25 +441,31 @@ export class Player {
     public takeAction(game: Game): void {
 
         if (this.actionsTakenThisRound >= 2) {
+            this.actionsTakenThisRound = 0;
             game.playerIsFinishedTakingActions(this);
             return undefined;
         }
 
         const action: OrOptions = new OrOptions();
+        action.title = "Take action for action phase, select one available action.";
 
-        action.options.push(
-            this.playProjectCard(game)
-        );
+        if (this.cardsInHand.length > 0) {
+            action.options.push(
+                this.playProjectCard(game)
+            );
+        }
  
-        action.options.push(
-            this.playActionCard(game)
-        );
+        if (this.getPlayedActionCards().length > 0) {
+            action.options.push(
+                this.playActionCard(game)
+            );
+        }
 
         action.options.push(
             this.passOption(game)
         );
 
-        if (this.cardsInHand.length >= 0) {
+        if (this.cardsInHand.length > 0) {
             action.options.push(
                 this.sellPatents(game)
             );

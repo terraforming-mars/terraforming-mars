@@ -129,6 +129,43 @@ export function showGameHome(game: any): void {
     });
 }
 
+function getSelectSpace(playerInput: any, cb: (out: Array<Array<string>>) => void): Element {
+    const elResult = document.createElement("div");
+    const elMessage = document.createElement("div");
+    elMessage.innerHTML = playerInput.message;
+    const elTitle = document.createElement("div");
+    elTitle.innerHTML = playerInput.title;
+    elResult.appendChild(elTitle);
+    elResult.appendChild(elMessage);
+    const elButton = document.createElement("input");
+    elButton.type = "button";
+    elButton.onclick = function () {
+        alert("Need to implement this");
+        cb([["GANYMEDE_COLONY"]]);
+    };
+    elButton.value = "Select";
+    elResult.appendChild(elButton);
+    return elResult;
+}
+
+function getSelectOption(playerInput: any, cb: (out: Array<Array<string>>) => void): Element {
+    const elResult = document.createElement("div");
+    const elMessage = document.createElement("div");
+    elMessage.innerHTML = playerInput.message;
+    const elTitle = document.createElement("div");
+    elTitle.innerHTML = playerInput.title;
+    elResult.appendChild(elTitle);
+    elResult.appendChild(elMessage);
+    const elButton = document.createElement("input");
+    elButton.type = "button";
+    elButton.onclick = function () {
+        cb([["1"]]);
+    };
+    elButton.value = "Select";
+    elResult.appendChild(elButton);
+    return elResult;
+}
+
 function getSelectHowToPay(playerInput: any, cb: (out: Array<Array<string>>) => void): Element {
     const elResult = document.createElement("div");
     const elTitle = document.createElement("div");
@@ -257,15 +294,43 @@ function getPlayerInput(playerInput: any, cb: (out: Array<Array<string>>) => voi
         return getSelectCard(playerInput, cb);
     } else if (playerInput.inputType === PlayerInputTypes.SELECT_HOW_TO_PAY) {
         return getSelectHowToPay(playerInput, cb);
+    } else if (playerInput.inputType === PlayerInputTypes.SELECT_OPTION) {
+        return getSelectOption(playerInput, cb);
+    } else if (playerInput.inputType === PlayerInputTypes.SELECT_SPACE) {
+        return getSelectSpace(playerInput, cb);
     } else if (playerInput.inputType === PlayerInputTypes.OR_OPTIONS) {
         const elResult = document.createElement("div");
-        const elMessage = document.createElement("div");
-        elMessage.innerHTML = playerInput.message;
-        elResult.appendChild(elMessage);
-        playerInput.options.forEach((option: any) => {
-            elResult.appendChild(getPlayerInput(option, (out: Array<Array<string>>) => {
+        const elTitle = document.createElement("div");
+        const elOptions: Array<HTMLDivElement> = [];
+        elTitle.innerHTML = playerInput.title;
+        elResult.appendChild(elTitle);
+        playerInput.options.forEach((option: any, idx: number) => {
+            const elOptionContainer = document.createElement("div");
+            const elRadio = document.createElement("input");
+            elRadio.type = "radio";
+            elRadio.name = "or_option";
+            elRadio.value = String(idx);
+            elOptionContainer.appendChild(elRadio);
+            elRadio.onchange = function () {
+                elOptions.forEach((o) => {
+                    o.style.display = "none";
+                });
+                if (elRadio.checked) {
+                    (elOption as HTMLDivElement).style.display = "";
+                } else {
+                    (elOption as HTMLDivElement).style.display = "none";
+                }
+            }
+            const elMessage = document.createElement("span");
+            elMessage.innerHTML = option.message;
+            elOptionContainer.appendChild(elMessage);
+            const elOption = elOptionContainer.appendChild(getPlayerInput(option, (out: Array<Array<string>>) => {
+                out.unshift([String(idx)]);
                 cb(out);
             }));
+            elOptions.push(elOption as HTMLDivElement);
+            (elOption as HTMLDivElement).style.display = "none";
+            elResult.appendChild(elOptionContainer);
         });
         return elResult;
     } else {

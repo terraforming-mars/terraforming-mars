@@ -88,7 +88,7 @@ function processInput(req: http.IncomingMessage, res: http.ServerResponse, playe
             res.end();
         } catch (err) {
             res.writeHead(500);
-            res.write(err);
+            console.warn("Error processing input from player", err);
             res.end();
         }
     });

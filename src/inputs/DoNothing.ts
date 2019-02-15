@@ -4,7 +4,7 @@ import { PlayerInputTypes } from "../PlayerInputTypes";
 
 export class DoNothing implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.DO_NOTHING;
-    constructor(public message: string, public title: string, public cb: () => void) {
+    constructor(public title: string, public message: string, public cb: () => void) {
 
     }
 }

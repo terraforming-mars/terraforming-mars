@@ -227,7 +227,7 @@ import { Zeppelins } from "./cards/Zeppelins";
 
 import { IProjectCard } from "./cards/IProjectCard";
 
-const ALL_CORPORATION_CARDS: Array<CorporationCard> = [
+export const ALL_CORPORATION_CARDS: Array<CorporationCard> = [
     new CrediCor(),
     new EcoLine(),
     new Helion(),
@@ -242,7 +242,7 @@ const ALL_CORPORATION_CARDS: Array<CorporationCard> = [
     new UnitedNationsMarsInitiative()
 ];
 
-const ALL_PROJECT_CARDS: Array<IProjectCard> = [
+export const ALL_PROJECT_CARDS: Array<IProjectCard> = [
     new AcquiredCompany(),
     new AdaptationTechnology(),
     new AdaptedLichen(),

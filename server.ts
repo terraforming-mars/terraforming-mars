@@ -151,7 +151,10 @@ function getPlayer(player: Player, game: Game): string {
         cardsInHand: player.cardsInHand.map((card) => card.name),
         playedCards: player.playedCards.map((card) => card.name),
         corporationCard: player.corporationCard ? player.corporationCard.name : undefined,
-        waitingFor: player.getWaitingFor()
+        waitingFor: player.getWaitingFor(),
+        oxygenLevel: game.getOxygenLevel(),
+        temperature: game.getTemperature(),
+        oceans: game.getOceansOnBoard()   
     };
     return JSON.stringify(output);
 }

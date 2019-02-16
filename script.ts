@@ -4,6 +4,13 @@ import { SpaceBonus } from "./src/SpaceBonus";
 import { SpaceName } from "./src/SpaceName";
 import { SpaceType } from "./src/SpaceType";
 import { HowToPay } from "./src/inputs/HowToPay";
+// import { ALL_CORPORATION_CARDS } from "./src/Dealer";
+import { ALL_PROJECT_CARDS } from "./src/Dealer";
+import { IProjectCard } from "./src/cards/IProjectCard";
+
+function getProjectCardByName(cardName: string): IProjectCard | undefined {
+    return ALL_PROJECT_CARDS.find((card) => card.name === cardName);
+}
 
 export function showCreateGameForm(): void {
     const maxPlayers: number = 5;
@@ -241,13 +248,28 @@ function getSelectCard(playerInput: any, cb: (out: Array<Array<string>>) => void
     elResult.appendChild(elTitle);
     const checkboxes: Array<HTMLInputElement> = [];
     playerInput.cards.forEach((card: any) => {
-        const elCard = document.createElement("div");
+        const elRow = document.createElement("div");
+        const elCard = document.createElement("label");
         const elSelect = document.createElement("input");
         elSelect.type = "checkbox";     
         elCard.innerHTML = card.name;
-        elResult.appendChild(elSelect);
-        elResult.appendChild(elCard);
+        const elCost = document.createElement("span");
+        const foundCard = getProjectCardByName(card.name);
+        if (foundCard === undefined) {
+            return;
+        }
+        elCost.innerHTML = "" + foundCard.cost;
+        elRow.appendChild(elSelect);
+        elRow.appendChild(elCard);
+        elRow.appendChild(elCost);
+        const elDescription = document.createElement("span");
+        elDescription.innerHTML = foundCard.description;
+        elRow.appendChild(elDescription);
+        const elText = document.createElement("span");
+        elText.innerHTML = foundCard.text;
+        elRow.appendChild(elText);
         checkboxes.push(elSelect);
+        elResult.appendChild(elRow);
     });
     const elSubmitChoice = document.createElement("input");
     elSubmitChoice.type = "button";
@@ -390,6 +412,28 @@ export function showPlayerHome(player: any): void {
     elResourceCount.innerHTML += "<br/>Energy: " + player.energy + "<br/>Energy Production: " + player.energyProduction;
     elResourceCount.innerHTML += "<br/>Heat: " + player.heat + "<br/>Heat Production: " + player.heatProduction;
     document.body.appendChild(elResourceCount);
+
+    const elOxygenTitle = document.createElement("h2");
+    elOxygenTitle.innerHTML = "Oxygen";
+    const elOxygen = document.createElement("div");
+    elOxygen.innerHTML = player.oxygenLevel;
+    document.body.appendChild(elOxygenTitle);
+    document.body.appendChild(elOxygen);
+
+    const elTemperatureTitle = document.createElement("h2");
+    elTemperatureTitle.innerHTML = "Temperature";
+    const elTemperature = document.createElement("div");
+    elTemperature.innerHTML = player.temperature;
+    document.body.appendChild(elTemperatureTitle);
+    document.body.appendChild(elTemperature);
+
+    const elOceansTitle = document.createElement("h2");
+    elOceansTitle.innerHTML = "Oceans";
+    const elOceans = document.createElement("div");
+    elOceans.innerHTML = player.oceans;
+    document.body.appendChild(elOceansTitle);
+    document.body.appendChild(elOceans);
+
     const elBoardHeader = document.createElement("h2");
     elBoardHeader.innerHTML = "Board";
     document.body.appendChild(elBoardHeader);

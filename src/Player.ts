@@ -427,7 +427,8 @@ export class Player {
     }
 
     private fundAward(award: Award, game: Game): PlayerInput {
-        return new SelectOption("Take Action!", "Claim Award: " + award, () => {
+        let upperCaseAward = String(award)[0].toUpperCase() + String(award).substring(1);
+        return new SelectOption("Take Action!", "Claim Award: " + upperCaseAward, () => {
             game.fundAward(award);
         });
     }

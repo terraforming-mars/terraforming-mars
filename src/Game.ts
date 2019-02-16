@@ -360,6 +360,10 @@ export class Game {
 
     public oceansPlaced: number = 0;
 
+    public getGeneration(): number {
+        return this.generation;
+    }
+
     public setGeneration(generation: number): void {
         if (generation !== this.generation) {
             this.onGenerationEnd.slice().forEach(function (end) {

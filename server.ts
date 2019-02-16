@@ -140,6 +140,8 @@ function getPlayer(player: Player, game: Game): string {
         megaCredits: player.megaCredits,
         megaCreditProduction: player.megaCreditProduction,
         titanium: player.titanium,
+        terraformRating: player.terraformRating,
+        generation: game.getGeneration(),
         titaniumProduction: player.titaniumProduction,
         plants: player.plants,
         plantProduction: player.plantProduction,

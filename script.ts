@@ -4,9 +4,16 @@ import { SpaceBonus } from "./src/SpaceBonus";
 import { SpaceName } from "./src/SpaceName";
 import { SpaceType } from "./src/SpaceType";
 import { HowToPay } from "./src/inputs/HowToPay";
-// import { ALL_CORPORATION_CARDS } from "./src/Dealer";
+import { CardType } from "./src/cards/CardType";
+import { ALL_CORPORATION_CARDS } from "./src/Dealer";
 import { ALL_PROJECT_CARDS } from "./src/Dealer";
+import { ICard } from "./src/cards/ICard";
 import { IProjectCard } from "./src/cards/IProjectCard";
+import { Tags } from "./src/cards/Tags";
+
+function getCorporationCardByName(cardName: string): ICard | undefined {
+    return ALL_CORPORATION_CARDS.find((card) => card.name === cardName);
+}
 
 function getProjectCardByName(cardName: string): IProjectCard | undefined {
     return ALL_PROJECT_CARDS.find((card) => card.name === cardName);
@@ -241,33 +248,74 @@ function getSelectHowToPay(playerInput: any, cb: (out: Array<Array<string>>) => 
     return elResult;
 }
 
+function getCardAsString(cardName: string): string {
+    interface Card {
+        cost?: number;
+        startingMegaCredits?: number;
+        name: string;
+        tags: Array<Tags>;
+        text: string;
+        cardType?: CardType;
+        description: string;
+        actionText?: string;
+    }
+    let card: Card | undefined = getProjectCardByName(cardName) || getCorporationCardByName(cardName);
+    if (card === undefined) {
+        throw new Error("Card not found");
+    }
+    let out = "<span";
+    if (card.cardType === CardType.EVENT) {
+        out += " style='font-weight:bold;color:red'";
+    } else if (card.cardType === CardType.ACTIVE) {
+        out += " style='font-weight:bold;color:blue'";
+    } else if (card.cardType === CardType.AUTOMATED) {
+        out += " style='font-weight:bold;color:green'";
+    } else {
+        out += " style='font-weight:bold'";
+    }
+    out += ">" + cardName + "</span>";
+    if (card === undefined) {
+        throw new Error("Did not find card");
+    }
+    if (card.cost !== undefined) {
+        out += " Costs " + String(card.cost) + ".";
+    }
+    if (card.startingMegaCredits !== undefined) {
+        out += " Start with " + String(card.startingMegaCredits) + " mega credits.";
+    }
+    if (card.tags.length === 1) {
+        out += " Has " + card.tags[0] + " tag.";
+    } else if (card.tags.length > 1) {
+        out += " Has ";
+        let i = 0;
+        for (; i < card.tags.length - 1; i++) {
+            out += card.tags[i] + ", ";
+        }
+        out += "and " + card.tags[i] + " tags.";
+    }
+    if (card.actionText) {
+        out += " <b>" + card.actionText + "</b>";
+    }
+    out += " " + card.text;
+    out += " <i>" + card.description + "</i>";
+    return out;
+}
+
 function getSelectCard(playerInput: any, cb: (out: Array<Array<string>>) => void): Element {
     const elResult = document.createElement("div");
     const elTitle = document.createElement("div");
-    elTitle.innerHTML = playerInput.title;
+    elTitle.innerHTML = playerInput.title + " - " + playerInput.message;
     elResult.appendChild(elTitle);
     const checkboxes: Array<HTMLInputElement> = [];
     playerInput.cards.forEach((card: any) => {
         const elRow = document.createElement("div");
-        const elCard = document.createElement("label");
+        elRow.style.fontSize = "12px";
         const elSelect = document.createElement("input");
-        elSelect.type = "checkbox";     
-        elCard.innerHTML = card.name;
-        const elCost = document.createElement("span");
-        const foundCard = getProjectCardByName(card.name);
-        if (foundCard === undefined) {
-            return;
-        }
-        elCost.innerHTML = "" + foundCard.cost;
+        elSelect.type = "checkbox";
         elRow.appendChild(elSelect);
+        const elCard = document.createElement("span");
+        elCard.innerHTML = getCardAsString(card.name);
         elRow.appendChild(elCard);
-        elRow.appendChild(elCost);
-        const elDescription = document.createElement("span");
-        elDescription.innerHTML = foundCard.description;
-        elRow.appendChild(elDescription);
-        const elText = document.createElement("span");
-        elText.innerHTML = foundCard.text;
-        elRow.appendChild(elText);
         checkboxes.push(elSelect);
         elResult.appendChild(elRow);
     });
@@ -406,7 +454,7 @@ export function showPlayerHome(player: any): void {
     }
     document.body.appendChild(elCardsInHand);
     const elResourceCount = document.createElement("div");
-    elResourceCount.innerHTML = "<h2>Resources</h2>Mega Credits: " + player.megaCredits + "<br/>Mega Credit Production: " + player.megaCreditProduction;
+    elResourceCount.innerHTML = "<h2>Resources</h2>Generation: " + player.generation + "<br/>Terraform Rating: " + player.terraformRating + "<br/>Mega Credits: " + player.megaCredits + "<br/>Mega Credit Production: " + player.megaCreditProduction;
     elResourceCount.innerHTML += "<br/>Steel: " + player.steel + "<br/>Steel Production: " + player.steelProduction;
     elResourceCount.innerHTML += "<br/>Titanium: " + player.titanium + "<br/>Titanium Production: " + player.titaniumProduction;
     elResourceCount.innerHTML += "<br/>Energy: " + player.energy + "<br/>Energy Production: " + player.energyProduction;

@@ -291,12 +291,14 @@ export class Player {
                 // Play the card
                 selectedCard.play(this, game)
                     .then(() => {
+                        this.cardsInHand.splice(this.cardsInHand.findIndex((card) => card.name === selectedCard.name), 1);
+                        this.playedCards.push(selectedCard);
                         this.actionsTakenThisRound++;
                         this.takeAction(game);
                     })
                     .catch((err) => {
                         console.warn("Error playing project card", err);
-                        this.waitingFor = undefined;
+                        this.takeAction(game);
                     });
             },
             new SelectCard("Take Action!", "Play a project card", this.cardsInHand, (foundCards: Array<IProjectCard>) => {

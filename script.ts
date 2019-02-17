@@ -193,8 +193,10 @@ function getSelectHowToPay(playerInput: any, cb: (out: Array<Array<string>>) => 
         elSteelLabel.innerHTML = "Steel: ";
         elResult.appendChild(elSteelLabel);
         elSteelValue = document.createElement("input");
-        elSteelValue.type = "text";
+        elSteelValue.type = "number";
         elSteelValue.value = "0";
+        elSteelValue.min = "0";
+        elSteelValue.max = "100";
         elResult.appendChild(elSteelValue);
     }
     if (playerInput.canUseTitanium) {
@@ -202,8 +204,10 @@ function getSelectHowToPay(playerInput: any, cb: (out: Array<Array<string>>) => 
         elTitaniumLabel.innerHTML = "Titanium: ";
         elResult.appendChild(elTitaniumLabel);
         elTitaniumValue = document.createElement("input");
-        elTitaniumValue.type = "text";
+        elTitaniumValue.type = "number";
         elTitaniumValue.value = "0";
+        elTitaniumValue.min = "0";
+        elTitaniumValue.max = "100";
         elResult.appendChild(elTitaniumValue);
     }
     if (playerInput.canUseHeat) {
@@ -211,16 +215,20 @@ function getSelectHowToPay(playerInput: any, cb: (out: Array<Array<string>>) => 
         elHeatLabel.innerHTML = "Heat: ";
         elResult.appendChild(elHeatLabel);
         elHeatValue = document.createElement("input");
-        elHeatValue.type = "text";
+        elHeatValue.type = "number";
         elHeatValue.value = "0";
+        elHeatValue.min = "0";
+        elHeatValue.max = "100";
         elResult.appendChild(elHeatValue);
     }
     const elMegaLabel = document.createElement("label");
     elMegaLabel.innerHTML = "Mega Credit: ";
     elResult.appendChild(elMegaLabel);
     const elMegaValue = document.createElement("input");
-    elMegaValue.type = "text";
+    elMegaValue.type = "number";
     elMegaValue.value = "0";
+    elMegaValue.min = "0";
+    elMegaValue.max = "100";
     elResult.appendChild(elMegaValue);
     const elSelect = document.createElement("input");
     elSelect.type = "button";
@@ -244,6 +252,7 @@ function getSelectHowToPay(playerInput: any, cb: (out: Array<Array<string>>) => 
         }
         cb([[JSON.stringify(htp)]]);
     };
+    elSelect.value = "Save";
     elResult.appendChild(elSelect);
     return elResult;
 }
@@ -413,46 +422,38 @@ export function showPlayerHome(player: any): void {
     const elHeader = document.createElement("h1");
     elHeader.innerHTML = "Teraforming Mars - Player Home - " + player.name;
     document.body.appendChild(elHeader);
-    const elCorporationCardHeader = document.createElement("h2");
-    elCorporationCardHeader.innerHTML = "Corporation Card";
-    document.body.appendChild(elCorporationCardHeader);
     if (player.corporationCard) {
-        const elCard = document.createElement("span");
-        elCard.innerHTML = player.corporationCard;
-        document.body.appendChild(elCard);
-    } else {
-        const elCard = document.createElement("span");
-        elCard.innerHTML = "NONE";
+        const elCorporationCardHeader = document.createElement("h2");
+        elCorporationCardHeader.innerHTML = "Corporation Card";
+        document.body.appendChild(elCorporationCardHeader);
+        const elCard = document.createElement("div");
+        elCard.innerHTML = getCardAsString(player.corporationCard);
         document.body.appendChild(elCard);
     }
-    const elPlayedCardsHeader = document.createElement("h2");
-    elPlayedCardsHeader.innerHTML = "Played Cards";
-    const elCardsInHandHeader = document.createElement("h2");
-    elCardsInHandHeader.innerHTML = "Cards In Hand";
-    document.body.appendChild(elPlayedCardsHeader);
-    const elPlayedCards = document.createElement("div");
-    if (player.playedCards.length) {
+    if (player.playedCards.length > 0) {
+        const elPlayedCardsHeader = document.createElement("h2");
+        const elPlayedCards = document.createElement("div");
+        elPlayedCardsHeader.innerHTML = "Played Cards";
+        document.body.appendChild(elPlayedCardsHeader);
         player.playedCards.forEach((cardName: string) => {
-            const elCard = document.createElement("span");
-            elCard.innerHTML = cardName;
+            const elCard = document.createElement("div");
+            elCard.innerHTML = getCardAsString(cardName);
             elPlayedCards.appendChild(elCard);
         });
-    } else {
-        elPlayedCards.innerHTML = "NONE";
+        document.body.appendChild(elPlayedCards);
     }
-    document.body.appendChild(elPlayedCards);
-    document.body.appendChild(elCardsInHandHeader);
-    const elCardsInHand = document.createElement("div");
-    if (player.cardsInHand.length) {
+    if (player.cardsInHand.length > 0) {
+        const elCardsInHandHeader = document.createElement("h2");
+        elCardsInHandHeader.innerHTML = "Cards In Hand";
+        document.body.appendChild(elCardsInHandHeader);
+        const elCardsInHand = document.createElement("div");
         player.cardsInHand.forEach((cardName: string) => {
-            const elCard = document.createElement("span");
-            elCard.innerHTML = cardName;
+            const elCard = document.createElement("div");
+            elCard.innerHTML = getCardAsString(cardName);
             elCardsInHand.appendChild(elCard);
         });
-    } else {
-        elCardsInHand.innerHTML = "NONE";
+        document.body.appendChild(elCardsInHand);
     }
-    document.body.appendChild(elCardsInHand);
     const elResourceCount = document.createElement("div");
     elResourceCount.innerHTML = "<h2>Resources</h2>Generation: " + player.generation + "<br/>Terraform Rating: " + player.terraformRating + "<br/>Mega Credits: " + player.megaCredits + "<br/>Mega Credit Production: " + player.megaCreditProduction;
     elResourceCount.innerHTML += "<br/>Steel: " + player.steel + "<br/>Steel Production: " + player.steelProduction;

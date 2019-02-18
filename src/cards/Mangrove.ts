@@ -20,15 +20,11 @@ export class Mangrove implements IProjectCard {
             return Promise.reject("Requires +4C or warmer");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select ocean space for greenery", (foundSpace: ISpace) => {
-                if (foundSpace.spaceType !== SpaceType.OCEAN) {
-                    reject("Space not an ocean");
-                    return undefined;
-                }
+            player.setWaitingFor(new SelectSpace(this.name, "Select ocean space for greenery", game.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
                 return game.addGreenery(player, foundSpace.id, SpaceType.OCEAN).then(function () {
                     player.victoryPoints++;
                     resolve();
-                });
+                }).catch((err) => reject(err));
             }));
         });
     }

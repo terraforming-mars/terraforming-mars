@@ -29,11 +29,11 @@ export class GiantIceAsteroid implements IProjectCard {
                     new SelectPlayer(this.name, game.getPlayers(), "Select player to remove up to 6 plants", (foundPlayer: Player) => {
                         foundPlayer.plants = Math.max(0, foundPlayer.plants - 6);
                     }),
-                    new SelectSpace(this.name, "Select first ocean space", (space: ISpace) => {
+                    new SelectSpace(this.name, "Select first ocean space", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                         try { game.addOceanTile(player, space.id); }
                         catch (err) { reject(err); }
                     }),
-                    new SelectSpace(this.name, "Select second ocean space", (space: ISpace) => {
+                    new SelectSpace(this.name, "Select second ocean space", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                         try { game.addOceanTile(player, space.id); }
                         catch (err) { reject(err); }
                     })

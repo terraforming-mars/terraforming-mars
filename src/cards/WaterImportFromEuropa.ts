@@ -8,6 +8,7 @@ import { AndOptions } from "../inputs/AndOptions";
 import { SelectAmount } from "../inputs/SelectAmount";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
+import { SpaceType } from "../SpaceType";
 
 export class WaterImportFromEuropa implements IProjectCard {
     public cost: number = 25;
@@ -47,7 +48,7 @@ export class WaterImportFromEuropa implements IProjectCard {
                     new SelectAmount(this.name, "How much mega credit to use?", (amount: number) => {
                         megaCredit = amount;
                     }),
-                    new SelectSpace(this.name, "Where to place ocean?", (space: ISpace) => {
+                    new SelectSpace(this.name, "Where to place ocean?", game.getSpaces(SpaceType.OCEAN).filter((space) => space.tile === undefined && space.player === undefined), (space: ISpace) => {
                         selectedSpace = space;
                     })
                 )

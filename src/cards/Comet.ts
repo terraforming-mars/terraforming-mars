@@ -21,10 +21,8 @@ export class Comet implements IProjectCard {
             return new Promise<void>((resolve, reject) => {
                 player.setWaitingFor(
                     new AndOptions(
-                        () => {
-                            resolve();
-                        },
-                        new SelectSpace(this.name, "Select space for ocean tile", (space: ISpace) => {
+                        () => { resolve(); },
+                        new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                             try { game.addOceanTile(player, space.id); }
                             catch (err) { reject(err); }
                         }),

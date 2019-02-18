@@ -164,6 +164,8 @@ export class Player {
                 throw "Not all cards found";
             }
             pi.cb(mappedCards);
+        } else if (pi instanceof SelectSpace) {
+            
         } else if (pi instanceof SelectHowToPay) {
             if (input.length !== 1) {
                 throw "Incorrect options provided";
@@ -372,7 +374,7 @@ export class Player {
     }
 
     private aquifer(game: Game): PlayerInput {
-        return new SelectSpace("Take Action!", "Standard Project: Aquifer", (space: ISpace) => {
+        return new SelectSpace("Take Action!", "Standard Project: Aquifer", game.getAvailableSpacesForOcean(this), (space: ISpace) => {
             game.addOceanTile(this, space.id);
             this.megaCredits -= 14;
             this.actionsTakenThisRound++;
@@ -381,7 +383,7 @@ export class Player {
     }
 
     private addGreenery(game: Game): PlayerInput {
-        return new SelectSpace("Take Action!", "Standard Project: Greenery", (space: ISpace) => {
+        return new SelectSpace("Take Action!", "Standard Project: Greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
             game.addGreenery(this, space.id);
             this.megaCredits -= 23;
             this.actionsTakenThisRound++;
@@ -390,7 +392,7 @@ export class Player {
     }
 
     private addCity(game: Game): PlayerInput {
-        return new SelectSpace("Take Action!", "Standard Project: City", (space: ISpace) => {
+        return new SelectSpace("Take Action!", "Standard Project: City", game.getAvailableSpacesOnLand(this), (space: ISpace) => {
             game.addCityTile(this, space.id);
             this.megaCredits -= 25;
             this.actionsTakenThisRound++;
@@ -399,13 +401,15 @@ export class Player {
     }
 
     private convertPlantsIntoGreenery(game: Game): PlayerInput {
-        return new SelectSpace("Take Action!", "Convert " + this.plantsNeededForGreenery + " plants into greenery", (space: ISpace) => {
+        return new SelectSpace("Take Action!", "Convert " + this.plantsNeededForGreenery + " plants into greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
             try { game.addGreenery(this, space.id); }
             catch (err) {
                 console.warn("error converting plants into greenery", err);
                 return;
             }
             this.plants -= this.plantsNeededForGreenery;
+            this.actionsTakenThisRound++;
+            this.takeAction(game);
         });
     }
 
@@ -414,6 +418,8 @@ export class Player {
             game.increaseTemperature(this)
                 .then(() => {
                     this.heat -= 8;
+                    this.actionsTakenThisRound++;
+                    this.takeAction(game);
                 })
                 .catch((err: string) => {
                     console.warn("error increasing temperature", err);

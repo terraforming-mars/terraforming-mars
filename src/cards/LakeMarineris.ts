@@ -26,11 +26,11 @@ export class LakeMarineris implements IProjectCard {
                         player.victoryPoints += 2;
                         resolve();
                     },
-                    new SelectSpace(this.name, "Select space for 1st ocean tile", (space: ISpace) => {
+                    new SelectSpace(this.name, "Select space for 1st ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                         try { game.addOceanTile(player, space.id); }
                         catch (err) { reject(err); return; }
                     }),
-                    new SelectSpace(this.name, "Select space for 2nd ocean tile", (space: ISpace) => {
+                    new SelectSpace(this.name, "Select space for 2nd ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                         try { game.addOceanTile(player, space.id); }
                         catch (err) { reject(err); return; }
                     })

@@ -20,7 +20,7 @@ export class Plantation implements IProjectCard {
                 reject("Requires 2 science tags to play");
                 return;
             }
-            player.setWaitingFor(new SelectSpace(this.name, "Select space for greenery tile", (space: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for greenery tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
                 try { game.addGreenery(player, space.id); }
                 catch (err) { reject(err); return; }
                 resolve();

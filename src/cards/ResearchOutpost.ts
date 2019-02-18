@@ -15,9 +15,16 @@ export class ResearchOutpost implements IProjectCard {
     public text: string = "When you play a card, you pay 1 mega credit less for it. Place a city tile next to no other tile.";
     public cardType: CardType = CardType.ACTIVE;
     public description: string = "Finding new ways to do things.";
+    private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
+        return game.getAvailableSpacesOnLand(player)
+                .filter((space) => {
+                    const adjacentSpaces = game.getAdjacentSpaces(space);
+                    return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
+                });
+    }
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select place next to no other tile for city", (foundSpace: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select place next to no other tile for city", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
                 if (foundSpace.spaceType === SpaceType.COLONY) {
                     reject("Must be places on mars");
                     return;

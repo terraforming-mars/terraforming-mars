@@ -24,11 +24,11 @@ export class TharsisRepublic implements CorporationCard {
             }
         });
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space on mars for city tile", (space: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space on mars for city tile", game.getSpaces(SpaceType.LAND).filter((space) => space.player === undefined && space.tile === undefined), (space: ISpace) => {
                 try { game.addCityTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 resolve();
             }));
-        }); 
+        });
     }
 }

@@ -5,7 +5,6 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
-import { SpaceType } from "../SpaceType";
 import { ISpace } from "../ISpace";
 
 export class ArtificialLake implements IProjectCard {
@@ -20,11 +19,7 @@ export class ArtificialLake implements IProjectCard {
             return Promise.reject("Requires -6C or warmer");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select a land space to place an ocean", (foundSpace: ISpace) => {
-                if (foundSpace.spaceType !== SpaceType.LAND) {
-                    reject("Must select ocean on an area not reserved for ocean");
-                    return;
-                }
+            player.setWaitingFor(new SelectSpace(this.name, "Select a land space to place an ocean", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
                 try { game.addOceanTile(player, foundSpace.id); }
                 catch (err) { reject(err); return; }
                 player.victoryPoints++;

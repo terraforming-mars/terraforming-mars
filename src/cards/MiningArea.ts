@@ -16,25 +16,20 @@ export class MiningArea implements IProjectCard {
     public name: string = "Mining Area";
     public text: string = "Place a special tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.";
     public description: string = "It is easier to claim territories where you already have established activities.";
+    private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
+        return game.getAvailableSpacesOnLand(player)
+                .filter((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1)
+                .filter((space) => game.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.player === player));
+    }
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select a space with steel or titanium placement bonus adjacent to one of your tiles", (foundSpace: ISpace) => {
-                const hasSteelBonus = foundSpace.bonus && foundSpace.bonus.indexOf(SpaceBonus.STEEL) !== -1;
-                const hasTitaniumBonus = foundSpace.bonus && foundSpace.bonus.indexOf(SpaceBonus.TITANIUM) !== -1;
-                if (!hasSteelBonus && !hasTitaniumBonus) {
-                    reject("Space must have steel or titanium placement bonus");
-                    return;
-                }
-                if (game.getAdjacentSpaces(foundSpace).filter((space) => space.player && space.player === player).length === 0) {
-                    reject("Tile must be adjacent to one of your tiles");
-                    return;
-                }
+            player.setWaitingFor(new SelectSpace(this.name, "Select a space with steel or titanium placement bonus adjacent to one of your tiles", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
                 try { game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL }); }
                 catch (err) { reject(err); return; }
-                if (hasSteelBonus) {
+                if (foundSpace.bonus.indexOf(SpaceBonus.STEEL) !== -1) {
                     player.steelProduction++;
                 }
-                if (hasTitaniumBonus) {
+                if (foundSpace.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
                     player.titaniumProduction++;
                 }
                 resolve();

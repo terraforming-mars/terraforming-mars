@@ -16,16 +16,12 @@ export class CorporateStronghold implements IProjectCard {
     public description: string = "A city exclusively devoted to your corporation.";
     public play(player: Player, game: Game): Promise<void> {
         if (player.energyProduction < 1) {
-            throw "Must have energy to decrease";
+            return Promise.reject("Must have energy to decrease");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space for city tile", (space: ISpace) => {
-                try {
-                    game.addCityTile(player, space.id);
-                } catch (err) {
-                    reject(err);
-                    return;
-                }
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
+                try { game.addCityTile(player, space.id); }
+                catch (err) { reject(err); return; }
                 player.energyProduction--;
                 player.megaCreditProduction += 3;
                 player.victoryPoints -= 2;

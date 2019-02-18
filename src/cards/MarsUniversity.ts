@@ -6,7 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectCard } from "../inputs/SelectCard";
-import { DoNothing } from "../inputs/DoNothing";
+import { SelectOption } from "../inputs/SelectOption";
 
 export class MarsUniversity implements IProjectCard {
     public cost: number = 8;
@@ -38,7 +38,7 @@ export class MarsUniversity implements IProjectCard {
                                 player.cardsInHand.push(game.dealer.getCards(1)[0]);
                                 resolve();
                             }),
-                            new DoNothing(this.name, "Don't do anything", () => { resolve(); })
+                            new SelectOption(this.name, "Don't do anything", () => { resolve(); })
                         )
                     );
                 });

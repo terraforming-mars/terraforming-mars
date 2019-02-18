@@ -29,7 +29,7 @@ export class LargeConvoy implements IProjectCard {
                         player.victoryPoints += 2;
                         resolve();
                     },
-                    new SelectSpace(this.name, "Select space for ocean tile", (space: ISpace) => {
+                    new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                         try { game.addOceanTile(player, space.id); }
                         catch (err) { reject(err); return; }
                     }),

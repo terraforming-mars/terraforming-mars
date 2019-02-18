@@ -17,17 +17,16 @@ export class EcologicalZone implements IProjectCard {
     public name: string = "Ecological Zone";
     public text: string = "Requires that you have a greenery tile. Place a special tile adjacent to any greenery tile. When you play an animal or a plant tag (including these 2), add an animal to this card. 1 victory point per 2 animals on this card.";
     public description: string = "A secluded area where a multitude of species develop an ecosystem.";
+    private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
+        return game.getAvailableSpacesOnLand(player)
+                .filter((space) => game.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.GREENERY).length > 0);
+    }
     public play(player: Player, game: Game): Promise<void> {
         if (game.getSpaces(SpaceType.LAND).filter((space) => space.tile && space.tile.tileType === TileType.GREENERY && space.player && space.player === player).length === 0) {
             return Promise.reject("Requires that you have a greenery tile");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space next to greenery for special tile", (requestedSpace: ISpace) => {
-                const adjacentTiles = game.getAdjacentSpaces(requestedSpace);
-                if (adjacentTiles.filter((space) => space.tile && space.tile.tileType === TileType.GREENERY).length === 0) {
-                    reject("Tile must be placed by greenery");
-                    return;
-                }
+            player.setWaitingFor(new SelectSpace(this.name, "Select space next to greenery for special tile", this.getAvailableSpaces(player, game), (requestedSpace: ISpace) => {
                 try { game.addTile(player, requestedSpace.spaceType, requestedSpace, { tileType: TileType.SPECIAL }); }
                 catch (err) { reject(err); return; }
                 player.addCardPlayedHandler((card: IProjectCard) => {

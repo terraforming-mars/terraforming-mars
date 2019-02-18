@@ -4,8 +4,8 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
-import { DoNothing } from "../inputs/DoNothing";
 import { SelectCard } from "../inputs/SelectCard";
+import { SelectOption } from "../inputs/SelectOption";
 import { IProjectCard } from "./IProjectCard";
 
 export class InventorsGuild implements IProjectCard {
@@ -33,7 +33,7 @@ export class InventorsGuild implements IProjectCard {
                             resolve();
                         }
                     }),
-                    new DoNothing(this.name, "Discard it", () => {
+                    new SelectOption(this.name, "Discard it", () => {
                         game.dealer.discard(topCard);
                         resolve();
                     })

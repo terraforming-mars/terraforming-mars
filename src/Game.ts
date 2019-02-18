@@ -228,6 +228,21 @@ export class Game {
 
     private researchedPlayers: Set<Player> = new Set<Player>();
 
+    public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
+        return this.getAvailableSpacesOnLand(player)
+                                .filter((space) => this.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.player === player).length > 0);
+    }
+
+    public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
+        return this.getSpaces(SpaceType.LAND)
+                .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
+    }
+
+    public getAvailableSpacesForOcean(player: Player): Array<ISpace> {
+        return this.getSpaces(SpaceType.OCEAN)
+                .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
+    }
+
     private allPlayersHaveFinishedResearch(): boolean {
         for (const player of this.players) {
             if (!this.hasResearched(player)) {
@@ -340,7 +355,7 @@ export class Game {
                 return Promise.resolve();
             } else if (this.temperature + 2 === 0) {
                 return new Promise((resolve, reject) => {
-                    player.setWaitingFor(new SelectSpace("Temperature Bonus", "Select space for ocean", (space: ISpace) => {
+                    player.setWaitingFor(new SelectSpace("Temperature Bonus", "Select space for ocean", this.getAvailableSpacesForOcean(player), (space: ISpace) => {
                         try { this.addOceanTile(player, space.id); }
                         catch (err) { reject(err); return; }
                         this.temperature += 2

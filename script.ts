@@ -151,14 +151,28 @@ function getSelectSpace(playerInput: any, cb: (out: Array<Array<string>>) => voi
     elTitle.innerHTML = playerInput.title;
     elResult.appendChild(elTitle);
     elResult.appendChild(elMessage);
-    const elButton = document.createElement("input");
-    elButton.type = "button";
-    elButton.onclick = function () {
-        alert("Need to implement this");
-        cb([["GANYMEDE_COLONY"]]);
+    const elSelectSpaceButton = document.createElement("input");
+    elSelectSpaceButton.type = "button";
+    elSelectSpaceButton.value = "Select Space";
+    elSelectSpaceButton.onclick = function () {
+        const elTiles = document.getElementsByClassName("tile");
+        for (let i = 0; i < elTiles.length; i++) {
+            const elTile = elTiles[i] as HTMLElement;
+            elTile.onmouseover = function () {
+                elTile.style.border = "1px solid black";
+                elTile.style.cursor = "pointer";
+            }
+            elTile.onmouseout = function () {
+                elTile.style.border = "0px solid black";
+                elTile.style.cursor = "default";
+            }
+            elTile.onclick = function () {
+                alert(elTile.getAttribute("id"));
+                cb([[String(elTile.getAttribute("id"))]]);
+            }
+        }
     };
-    elButton.value = "Select";
-    elResult.appendChild(elButton);
+    elResult.appendChild(elSelectSpaceButton);
     return elResult;
 }
 
@@ -515,6 +529,7 @@ export function showPlayerHome(player: any): void {
         }
         const elCell = document.createElement("div");
         elCell.className = "tile";
+        elCell.id = thisSpace.id;
         const elSpace = document.createElement("span");
         if (thisSpace.spaceType === SpaceType.LAND) {
             elSpace.className = "land";

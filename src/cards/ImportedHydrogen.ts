@@ -36,7 +36,7 @@ export class ImportedHydrogen implements IProjectCard {
                             foundCards[0]!.animals! += 2;
                         })
                     ),
-                    new SelectSpace(this.name, "Select space for ocean", (foundSpace: ISpace) => {
+                    new SelectSpace(this.name, "Select space for ocean", game.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
                         try { game.addOceanTile(player, foundSpace.id); }
                         catch (err) { reject(err); return; }
                     })

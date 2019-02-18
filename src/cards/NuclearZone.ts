@@ -17,7 +17,7 @@ export class NuclearZone implements IProjectCard {
     public description: string = "Detonating obsolete nuclear weapons from Earth is an efficient method for raising the temperature.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space for special tile", (foundSpace: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for special tile", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
                 try { game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL }); }
                 catch (err) { reject(err); return; }
                 game.increaseTemperature(player).then(function () {

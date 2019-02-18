@@ -51,7 +51,7 @@ export class AquiferPumping implements IProjectCard {
                         player.megaCredits -= megaCreditToUse;
                         resolve();
                     },
-                    new SelectSpace(this.name, "Select space for ocean tile", (space: ISpace) => {
+                    new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                         foundSpace = space;
                     }),
                     new SelectAmount(this.name, "Select steel to use", (amount: number) => {

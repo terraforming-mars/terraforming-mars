@@ -17,7 +17,7 @@ export class ProtectedValley implements IProjectCard {
     public description: string = "A fertile valley with higher air density and humidity, but in need of protection when the oceans rise.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space for greenery tile", (space: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for greenery tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                 try {
                     game.addGreenery(player, space.id, SpaceType.OCEAN);
                 } catch (err) {

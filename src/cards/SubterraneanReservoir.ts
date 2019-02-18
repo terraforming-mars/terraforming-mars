@@ -16,7 +16,7 @@ export class SubterraneanReservoir implements IProjectCard {
     public description: string = "Also known as an aquifer. Burst one open and you've got a lot of water.";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space for ocean", (foundSpace: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for ocean", game.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
                 try { game.addOceanTile(player, foundSpace.id); }
                 catch (err) { reject(err);return; }
                 resolve();

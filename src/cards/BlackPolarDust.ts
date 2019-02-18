@@ -16,7 +16,7 @@ export class BlackPolarDust implements IProjectCard {
     public description: string = "The sprinkled dust absorbs heat from the sun. Must be renewed after each snowfall, though";
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space for ocean", (space: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for ocean", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                 try { game.addOceanTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 player.megaCreditProduction -= 2;

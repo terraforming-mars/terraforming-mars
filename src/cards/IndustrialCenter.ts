@@ -16,14 +16,13 @@ export class IndustrialCenter implements IProjectCard {
     public actionText: string = "Spend 7 mega credit to increase your steel production 1 step.";
     public text: string = "Place a special tile adjacent to a city tile.";
     public description: string = "Assigned to heavy industry, this area is not the nicest place on Mars";
+    private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
+        return game.getAvailableSpacesOnLand(player)
+                .filter((space) => game.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.CITY).length > 0);
+    }
     public play(player: Player, game: Game): Promise<void> {
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space adjacent to a city tile", (foundSpace: ISpace) => {
-                const adjacentSpaces = game.getAdjacentSpaces(foundSpace);
-                if (adjacentSpaces.filter((adjacentSpace) => adjacentSpace.tile && adjacentSpace.tile.tileType === TileType.CITY).length === 0) {
-                    reject("Tile must be placed by a city tile");
-                    return;
-                }
+            player.setWaitingFor(new SelectSpace(this.name, "Select space adjacent to a city tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
                 try { game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL }); }
                 catch (err) { reject(err); return; }
                 resolve();

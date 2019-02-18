@@ -7,7 +7,7 @@ import { CardType } from "./CardType";
 import { SelectPlayer } from "../inputs/SelectPlayer";
 import { AndOptions } from "../inputs/AndOptions";
 import { OrOptions } from "../inputs/OrOptions";
-import { DoNothing } from "../inputs/DoNothing";
+import { SelectOption } from "../inputs/SelectOption";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 
@@ -43,18 +43,18 @@ export class Flooding implements IProjectCard {
                         player.victoryPoints--;
                         resolve();
                     },
-                    new SelectSpace(this.name, "Select space for ocean tile", (space: ISpace) => {
+                    new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                         foundSpace = space;
                     }),
                     new OrOptions(
                         new SelectPlayer(this.name, game.getPlayers(), "Select adjacent player", (selectedPlayer: Player) => {
                             foundPlayer = selectedPlayer;
                         }),
-                        new DoNothing(this.name, "No adjacent player or do nothing", () => {
+                        new SelectOption(this.name, "No adjacent player or do nothing", () => {
                             foundPlayer = undefined;
                         })
                     )
-                )                
+                )         
             );
         });
     }

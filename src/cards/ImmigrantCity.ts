@@ -22,7 +22,7 @@ export class ImmigrantCity implements IProjectCard {
             return Promise.reject("Must have 2 mega credit production");
         }
         return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space for city tile", (space: ISpace) => {
+            player.setWaitingFor(new SelectSpace(this.name, "Select space for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
                 try { game.addCityTile(player, space.id); }
                 catch (err) { reject(err); return; }
                 player.energyProduction--;

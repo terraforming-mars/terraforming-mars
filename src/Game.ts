@@ -229,8 +229,13 @@ export class Game {
     private researchedPlayers: Set<Player> = new Set<Player>();
 
     public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
-        return this.getAvailableSpacesOnLand(player)
+        // Greenery must be placed by a space you own if you own a space
+        if (this.getSpaces(SpaceType.LAND).find((space) => space.tile !== undefined && space.player === player)) {
+            return this.getAvailableSpacesOnLand(player)
                                 .filter((space) => this.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.player === player).length > 0);
+        }
+        // Place anywhere
+        return this.getAvailableSpacesOnLand(player);
     }
 
     public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
@@ -295,9 +300,6 @@ export class Game {
 
     private startActionsForPlayer(player: Player) {
         this.activePlayer = player;
-        if (this.generation === 1 && player.hasInitialActionFromCorporation()) {
-            return;
-        }
         player.takeAction(this);
     }
 

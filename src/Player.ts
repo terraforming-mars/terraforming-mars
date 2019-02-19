@@ -165,7 +165,17 @@ export class Player {
             }
             pi.cb(mappedCards);
         } else if (pi instanceof SelectSpace) {
-            
+            if (input.length !== 1) {
+                throw "Incorrect options provided";
+            }
+            if (input[0].length !== 1) {
+                throw "Too many spaces provided";
+            }
+            const foundSpace = pi.availableSpaces.find((space) => space.id === input[0][0]);
+            if (foundSpace === undefined) {
+                throw "Space not found";
+            }
+            pi.cb(foundSpace);
         } else if (pi instanceof SelectHowToPay) {
             if (input.length !== 1) {
                 throw "Incorrect options provided";
@@ -214,9 +224,11 @@ export class Player {
         }
     }
 
+    private actionsThisGeneration: Set<string> = new Set<string>();
+
     private getPlayedActionCards(): Array<ICard> {
         const result: Array<ICard> = [];
-        if (this.corporationCard && this.corporationCard.action !== undefined) {
+        if (this.corporationCard !== undefined && !this.actionsThisGeneration.has(this.corporationCard.name) && this.corporationCard.action !== undefined) {
             result.push(this.corporationCard);
         }
         for (let playedCard of this.playedCards) {
@@ -227,11 +239,8 @@ export class Player {
         return result;
     }
 
-    public hasInitialActionFromCorporation(): boolean {
-        return this.corporationCard !== undefined && this.corporationCard.action !== undefined;
-    }
-
     public runProductionPhase(): void {
+        this.actionsThisGeneration.clear();
         this.megaCredits += this.megaCreditProduction + this.terraformRating;
         this.heat += this.energy;
         this.heat += this.heatProduction;
@@ -329,6 +338,7 @@ export class Player {
             const foundCard = foundCards[0];
             foundCard.action!(this, game)
                 .then(() => {
+                    this.actionsThisGeneration.add(foundCard.name);
                     this.actionsTakenThisRound++;
                     this.takeAction(game);
                 })
@@ -384,7 +394,12 @@ export class Player {
 
     private addGreenery(game: Game): PlayerInput {
         return new SelectSpace("Take Action!", "Standard Project: Greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
-            game.addGreenery(this, space.id);
+            try { game.addGreenery(this, space.id); }
+            catch (err) {
+                console.warn("error adding greenery through standard project", err);
+                this.takeAction(game);
+                return;
+            }
             this.megaCredits -= 23;
             this.actionsTakenThisRound++;
             this.takeAction(game);
@@ -448,6 +463,22 @@ export class Player {
     }
 
     public takeAction(game: Game): void {
+
+        if (
+            game.getGeneration() === 1 &&
+            this.corporationCard !== undefined &&
+            !this.actionsThisGeneration.has("INITIAL") &&
+            this.corporationCard.initialAction !== undefined) {
+            this.corporationCard.initialAction(this, game)
+                .then(() => {
+                    this.actionsThisGeneration.add("INITIAL");
+                    this.actionsTakenThisRound++;
+                    this.takeAction(game);
+                })
+                .catch(() => {
+                    this.takeAction(game);
+                });
+        }
 
         if (this.actionsTakenThisRound >= 2) {
             this.actionsTakenThisRound = 0;

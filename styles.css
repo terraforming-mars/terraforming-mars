@@ -16,6 +16,33 @@
     line-height: 60px;
     position: relative;
 }
+.board .tile .red,
+.board .tile .green,
+.board .tile .yellow,
+.board .tile .blue,
+.board .tile .black {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 25px;
+    display: block;
+    left: 17px;
+}
+.board .tile .red {
+    background-color: red;
+}
+.board .tile .green {
+    background-color: green;
+}
+.board .tile .yellow {
+    background-color: yellow;
+}
+.board .tile .blue {
+    background-color: blue;
+}
+.board .tile .black {
+    background-color: black;
+}
 .board .tile > .name {
     display: block;
     position: relative;
@@ -23,19 +50,36 @@
     width: 55px;
     text-align: center;
 }
-.board .tile > .colony {
+
+.board .tile .colony,
+.board .tile .land,
+.board .tile .special,
+.board .tile .greenery,
+.board .tile .ocean,
+.board .tile .city,
+.board .tile .aquifer {
     position: absolute;
     font-size: 65px;
+}
+.board .tile > .colony {
     color: silver;
 }
 .board .tile > .land {
-    position: absolute;
-    font-size: 65px;
     color: tan;
 }
+.board .tile > .special {
+    color: gold;
+}
+.board .tile > .greenery {
+    color: green;
+}
+.board .tile > .ocean {
+    color: aqua;
+}
+.board .tile > .city {
+    color: #2F4F4F;
+}
 .board .tile > .aquifer {
-    position: absolute;
-    font-size: 65px;
     color: lightblue;
 }
 .board .tile > .bonus {

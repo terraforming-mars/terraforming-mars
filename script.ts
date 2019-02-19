@@ -3,6 +3,7 @@ import { PlayerInputTypes } from "./src/PlayerInputTypes";
 import { SpaceBonus } from "./src/SpaceBonus";
 import { SpaceName } from "./src/SpaceName";
 import { SpaceType } from "./src/SpaceType";
+import { TileType } from "./src/TileType";
 import { HowToPay } from "./src/inputs/HowToPay";
 import { CardType } from "./src/cards/CardType";
 import { ALL_CORPORATION_CARDS } from "./src/Dealer";
@@ -10,6 +11,7 @@ import { ALL_PROJECT_CARDS } from "./src/Dealer";
 import { ICard } from "./src/cards/ICard";
 import { IProjectCard } from "./src/cards/IProjectCard";
 import { Tags } from "./src/cards/Tags";
+import { ISpace } from "./src/ISpace";
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
     return ALL_CORPORATION_CARDS.find((card) => card.name === cardName);
@@ -151,6 +153,10 @@ function getSelectSpace(playerInput: any, cb: (out: Array<Array<string>>) => voi
     elTitle.innerHTML = playerInput.title;
     elResult.appendChild(elTitle);
     elResult.appendChild(elMessage);
+    var setOfSpaces: {[x: string]: number} = {};
+    playerInput.availableSpaces.forEach((availableSpace: ISpace) => {
+        setOfSpaces[availableSpace.id] = 1;
+    });
     const elSelectSpaceButton = document.createElement("input");
     elSelectSpaceButton.type = "button";
     elSelectSpaceButton.value = "Select Space";
@@ -158,17 +164,23 @@ function getSelectSpace(playerInput: any, cb: (out: Array<Array<string>>) => voi
         const elTiles = document.getElementsByClassName("tile");
         for (let i = 0; i < elTiles.length; i++) {
             const elTile = elTiles[i] as HTMLElement;
-            elTile.onmouseover = function () {
-                elTile.style.border = "1px solid black";
-                elTile.style.cursor = "pointer";
-            }
-            elTile.onmouseout = function () {
-                elTile.style.border = "0px solid black";
-                elTile.style.cursor = "default";
-            }
-            elTile.onclick = function () {
-                alert(elTile.getAttribute("id"));
-                cb([[String(elTile.getAttribute("id"))]]);
+            if (setOfSpaces[String(elTile.getAttribute("id"))] === 1) {
+                elTile.onmouseover = function () {
+                    elTile.style.border = "1px solid black";
+                    elTile.style.cursor = "pointer";
+                }
+                elTile.onmouseout = function () {
+                    elTile.style.border = "0px solid black";
+                    elTile.style.cursor = "default";
+                }
+                elTile.onclick = function () {
+                    for (let j = 0; j < elTiles.length; j++) {
+                        (elTiles[j] as HTMLElement).onmouseover = null;
+                        (elTiles[j] as HTMLElement).onmouseout = null;
+                        (elTiles[j] as HTMLElement).onclick = null;
+                    }
+                    cb([[String(elTile.getAttribute("id"))]]);
+                }
             }
         }
     };
@@ -435,6 +447,7 @@ export function showPlayerHome(player: any): void {
     document.body.innerHTML = "";
     const elHeader = document.createElement("h1");
     elHeader.innerHTML = "Teraforming Mars - Player Home - " + player.name;
+    elHeader.style.color = player.color;
     document.body.appendChild(elHeader);
     if (player.corporationCard) {
         const elCorporationCardHeader = document.createElement("h2");
@@ -531,29 +544,39 @@ export function showPlayerHome(player: any): void {
         elCell.className = "tile";
         elCell.id = thisSpace.id;
         const elSpace = document.createElement("span");
-        if (thisSpace.spaceType === SpaceType.LAND) {
+        if (thisSpace.tile !== undefined && thisSpace.tile.tileType === TileType.GREENERY) {
+            elSpace.className = "greenery";
+        } else if (thisSpace.tile !== undefined && thisSpace.tile.tileType === TileType.CITY) {
+            elSpace.className = "city";
+        } else if (thisSpace.tile !== undefined && thisSpace.tile.tileType === TileType.OCEAN) {
+            elSpace.className = "ocean";
+        } else if (thisSpace.tile !== undefined && thisSpace.tile.tileType === TileType.SPECIAL) {
+            elSpace.className = "special";
+        } else if (thisSpace.spaceType === SpaceType.LAND) {
             elSpace.className = "land";
         } else if (thisSpace.spaceType === SpaceType.OCEAN) {
             elSpace.className = "aquifer";
         }
         elSpace.innerHTML = "&#x2B22";
         elCell.appendChild(elSpace);
-        thisSpace.bonus.forEach((bonus: any) => {
-            const elBonus = document.createElement("span");
-            elBonus.className = "bonus";
-            if (bonus === SpaceBonus.TITANIUM) {
-                elBonus.innerHTML = "&#x272A";
-            } else if (bonus === SpaceBonus.STEEL) {
-                elBonus.innerHTML = "&#x2692";
-                elBonus.className += " steel";
-            } else if (bonus === SpaceBonus.PLANT) {
-                elBonus.innerHTML = "&#x1F343";
-                elBonus.className += " plane";
-            } else if (bonus === SpaceBonus.DRAW_CARD) {
-                elBonus.innerHTML = "&#x1F0A0";
-            }
-            elCell.appendChild(elBonus);
-        });
+        if (thisSpace.tile === undefined) {
+            thisSpace.bonus.forEach((bonus: any) => {
+                const elBonus = document.createElement("span");
+                elBonus.className = "bonus";
+                if (bonus === SpaceBonus.TITANIUM) {
+                    elBonus.innerHTML = "&#x272A";
+                } else if (bonus === SpaceBonus.STEEL) {
+                    elBonus.innerHTML = "&#x2692";
+                    elBonus.className += " steel";
+                } else if (bonus === SpaceBonus.PLANT) {
+                    elBonus.innerHTML = "&#x1F343";
+                    elBonus.className += " plane";
+                } else if (bonus === SpaceBonus.DRAW_CARD) {
+                    elBonus.innerHTML = "&#x1F0A0";
+                }
+                elCell.appendChild(elBonus);
+            });
+        }
         if (thisSpace.id === SpaceName.ARSIA_MONS ||
             thisSpace.id === SpaceName.ASCRAEUS_MONS ||
             thisSpace.id === SpaceName.NOCTIS_CITY ||
@@ -563,6 +586,11 @@ export function showPlayerHome(player: any): void {
             elName.className = "name";
             elName.innerHTML = thisSpace.id;
             elCell.appendChild(elName);
+        }
+        if (thisSpace.player !== undefined) {
+            const elColor = document.createElement("span");
+            elColor.className = thisSpace.player.color;
+            elCell.appendChild(elColor); 
         }
         if (elRow !== undefined) {
             elRow.appendChild(elCell);

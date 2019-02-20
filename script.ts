@@ -577,6 +577,11 @@ export function showPlayerHome(player: any): void {
                 elCell.appendChild(elBonus);
             });
         }
+        if (thisSpace.player !== undefined) {
+            const elColor = document.createElement("span");
+            elColor.className = thisSpace.player.color;
+            elCell.appendChild(elColor); 
+        }
         if (thisSpace.id === SpaceName.ARSIA_MONS ||
             thisSpace.id === SpaceName.ASCRAEUS_MONS ||
             thisSpace.id === SpaceName.NOCTIS_CITY ||
@@ -586,11 +591,6 @@ export function showPlayerHome(player: any): void {
             elName.className = "name";
             elName.innerHTML = thisSpace.id;
             elCell.appendChild(elName);
-        }
-        if (thisSpace.player !== undefined) {
-            const elColor = document.createElement("span");
-            elColor.className = thisSpace.player.color;
-            elCell.appendChild(elColor); 
         }
         if (elRow !== undefined) {
             elRow.appendChild(elCell);

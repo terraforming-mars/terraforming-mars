@@ -306,12 +306,12 @@ export class Game {
     public dealer: Dealer = new Dealer();
     private spaces: Array<ISpace> = new OriginalBoard().spaces;
     private onGreeneryPlaced: Array<Function> = [];
-    private onCityTilePlaced: Array<Function> = [];
+    private onCityTilePlaced: Array<(space: ISpace) => void> = [];
     private onOceanTilePlaced: Array<Function> = [];
     public addGreeneryPlacedListener(listener: Function): void {
         this.onGreeneryPlaced.push(listener);
     }
-    public addCityTilePlacedListener(listener: Function): void {
+    public addCityTilePlacedListener(listener: (space: ISpace) => void): void {
         this.onCityTilePlaced.push(listener);
     }
     public addOceanTilePlacedListener(listener: Function): void {
@@ -510,10 +510,11 @@ export class Game {
         });
     }
     public addCityTile(player: Player, spaceId: string): void {
-        this.addTile(player, SpaceType.LAND, this.getSpace(spaceId), { tileType: TileType.CITY });
-        this.onCityTilePlaced.forEach((fn: Function) => {
-            fn();
-        }); 
+        const space = this.getSpace(spaceId);
+        this.addTile(player, SpaceType.LAND, space, { tileType: TileType.CITY });
+        this.onCityTilePlaced.forEach((fn: (space: ISpace) => void) => {
+            fn(space);
+        });
     }
     public addOceanTile(player: Player, spaceId: string): void {
         if (this.getOceansOnBoard() - 1 === constants.MAX_OCEAN_TILES) {

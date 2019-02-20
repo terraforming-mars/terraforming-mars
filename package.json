@@ -4,15 +4,26 @@
   "description": "Terraforming Mars Game",
   "main": "index.js",
   "dependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
     "@types/node": "^10.12.18",
     "typescript": "^3.2.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.0.0",
+    "nyc": "^13.3.0"
+  },
+  "nyc": {
+    "exclude": [
+        "dist/tests/**.spec.js"
+    ]
+  },
   "scripts": {
     "build": "rm -rf dist ; npm run build_client ; npm run build_server",
     "build_client": "tsc --build tsconfig-client.json",
     "build_server": "tsc --build tsconfig-server.json",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tsc --build tsconfig-test.json ; nyc mocha dist/tests/**.spec.js"
   },
   "repository": {
     "type": "git",

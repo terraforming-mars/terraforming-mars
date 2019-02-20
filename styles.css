@@ -43,10 +43,11 @@
 .board .tile .black {
     background-color: black;
 }
-.board .tile > .name {
+.board .tile .name {
     display: block;
     position: relative;
     font-size: 10px;
+    line-height: 10px;
     width: 55px;
     text-align: center;
 }

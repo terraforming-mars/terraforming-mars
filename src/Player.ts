@@ -251,7 +251,8 @@ export class Player {
     }
 
     public runResearchPhase(game: Game): void {
-        this.setWaitingFor(new SelectCard("Research Phase", "Select which cards to take into hand", game.dealer.getCards(4), (foundCards: Array<IProjectCard>) => {
+        const dealtCards = game.dealer.getCards(4);
+        this.setWaitingFor(new SelectCard("Research Phase", "Select which cards to take into hand", dealtCards, (foundCards: Array<IProjectCard>) => {
             if (foundCards.length * 4 > this.megaCredits) {
                 throw "Not enough money to purchase patents";
             }
@@ -259,6 +260,12 @@ export class Player {
             foundCards.forEach((card) => {
                 this.cardsInHand.push(card);
             });
+            // Discard the cards which were not purchased.
+            dealtCards
+                .filter((card) => foundCards.find((foundCard) => foundCard.name === card.name) === undefined)
+                .forEach((card) => {
+                    game.dealer.discard(card);
+                }); 
             game.playerIsFinishedWithResearchPhase(this); 
         }, 4, 0)); 
     }
@@ -353,6 +360,12 @@ export class Player {
         return new SelectCard("Take Action!", "Sell patents", this.cardsInHand, (foundCards: Array<IProjectCard>) => {
             this.megaCredits += foundCards.length;
             foundCards.forEach((card) => {
+                for (let i = 0; i < this.cardsInHand.length; i++) {
+                    if (this.cardsInHand[i].name === card.name) {
+                        this.cardsInHand.splice(i, 1);
+                        break;
+                    }
+                }
                 game.dealer.discard(card);
             });
             this.actionsTakenThisRound++;
@@ -478,6 +491,7 @@ export class Player {
                 .catch(() => {
                     this.takeAction(game);
                 });
+            return undefined;
         }
 
         if (this.actionsTakenThisRound >= 2) {

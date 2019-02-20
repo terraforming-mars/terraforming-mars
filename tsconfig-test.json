@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "lib": ["dom", "ES6"], 
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strict": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "target": "es6",
+    "types": ["node", "mocha", "chai"]
+  },
+    "files": [
+        "tests/Game.spec.ts",
+	    "tests/Player.spec.ts"
+    ]
+}

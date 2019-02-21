@@ -23,7 +23,8 @@
     "build": "rm -rf dist ; npm run build_client ; npm run build_server",
     "build_client": "tsc --build tsconfig-client.json",
     "build_server": "tsc --build tsconfig-server.json",
-    "test": "tsc --build tsconfig-test.json ; nyc mocha dist/tests/**.spec.js"
+    "test": "rm -rf dist ; tsc --build tsconfig-test.json ; mocha dist/tests/**.spec.js",
+    "cover": "tsc --build tsconfig-test.json ; nyc mocha dist/tests/**.spec.js"
   },
   "repository": {
     "type": "git",

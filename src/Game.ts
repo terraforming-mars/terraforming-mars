@@ -25,27 +25,6 @@ const MAX_OXYGEN_LEVEL: number = 14;
 
 const MIN_TEMPERATURE: number = -30;
 
-/*
-MILESTONE "Claim a Milestone"
-Milestone, pay 8 to buy, can only buy 3, gain 5 victory points
-Terraformer: Having a terraform rating of at least 35
-Mayor: Owning at least 3 city tiles
-Gardener: Owning at least 3 greenery tiles
-Builder: Having at least 8 building tags in play
-Planner: Having at least 16 cards in your hand when you claim this milestone
-
-AWARDS "Fund an Award"
-8, then 14, then 20
-if 2 players only award 5 for first
-if tie, both players get 5
-give 5 for first, 2 for second
-
-Landlord: Owning the most tiles in play
-Banker: Having the highest Megacredit production
-Scientist: Having the most science tags in play
-Thermalist: Having the most heat resource cubes
-Miner: Having the most steel and titanium resource cubes
-*/
 export class Game {
     public activePlayer: Player;
     public claimedMilestones: Array<Milestone> = [];

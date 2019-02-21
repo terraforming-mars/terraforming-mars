@@ -15,7 +15,9 @@ import { HowToPay } from "./inputs/HowToPay";
 import { SelectSpace } from "./inputs/SelectSpace";
 import { ISpace } from "./ISpace";
 import { SelectHowToPay } from "./inputs/SelectHowToPay";
+import { SelectAmount } from "./inputs/SelectAmount";
 import { SelectOption } from "./inputs/SelectOption";
+import { SelectPlayer } from "./inputs/SelectPlayer";
 import { Award } from "./Award";
 import { Milestone } from "./Milestone";
 import { TileType } from "./TileType";
@@ -164,6 +166,17 @@ export class Player {
                 throw "Not all cards found";
             }
             pi.cb(mappedCards);
+        } else if (pi instanceof SelectAmount) {
+            if (input.length !== 1) {
+                throw "Incorrect options provided";
+            }
+            if (input[0].length !== 1) {
+                throw "Too many amounts provided";
+            }
+            if (isNaN(parseInt(input[0][0]))) {
+                throw "Amount is not a number";
+            }
+            pi.cb(parseInt(input[0][0]));
         } else if (pi instanceof SelectSpace) {
             if (input.length !== 1) {
                 throw "Incorrect options provided";
@@ -173,9 +186,21 @@ export class Player {
             }
             const foundSpace = pi.availableSpaces.find((space) => space.id === input[0][0]);
             if (foundSpace === undefined) {
-                throw "Space not found";
+                throw "Space not available";
             }
             pi.cb(foundSpace);
+        } else if (pi instanceof SelectPlayer) {
+            if (input.length !== 1) {
+                throw "Incorrect options provided";
+            }
+            if (input[0].length !== 1) {
+                throw "Invalid players array provided";
+            }
+            const foundPlayer = pi.players.find((player) => player.id === input[0][0]);
+            if (foundPlayer === undefined) {
+                throw "Player not available";
+            }
+            pi.cb(foundPlayer);
         } else if (pi instanceof SelectHowToPay) {
             if (input.length !== 1) {
                 throw "Incorrect options provided";
@@ -618,7 +643,13 @@ export class Player {
         }
         const waitingFor = this.waitingFor;
         this.waitingFor = undefined;
-        this.runInput(input, waitingFor);
+        try {
+            this.runInput(input, waitingFor);
+        } catch (err) {
+            console.warn("Error running input", err);
+            this.waitingFor = waitingFor;
+            throw err;
+        }
     }
 
     private waitingFor?: PlayerInput;

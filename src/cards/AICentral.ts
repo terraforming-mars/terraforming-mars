@@ -17,13 +17,15 @@ export class AICentral implements IProjectCard {
         if (player.getTagCount(Tags.SCIENCE) < 3) {
             throw "Requires 3 science tags";
         }
+        if (player.energyProduction < 1) {
+            throw "Requires energy production";
+        }
         player.energyProduction--;
         player.victoryPoints++;
         return undefined;
     }
     public action(player: Player, game: Game) {
-        player.cardsInHand.push(game.dealer.getCards(1)[0]);
-        player.cardsInHand.push(game.dealer.getCards(1)[0]);
+        player.cardsInHand.push.apply(player.cardsInHand, game.dealer.getCards(2));
         return undefined;
     }
 }

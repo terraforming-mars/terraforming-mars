@@ -15,6 +15,7 @@
     "types": ["node", "mocha", "chai"]
   },
     "files": [
+        "tests/cards/AICentral.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

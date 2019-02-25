@@ -12,10 +12,10 @@ export class ImportedGHG implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Increase your heat production 1 step and gain 3 heat";
     public description: string = "Greenhouse gases (GHG) to retain the heat.";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         player.heatProduction++;
         player.heat += 3;
-        return Promise.resolve();
+        return undefined;
     }
 }
  

@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game"; 
+import { PlayerInput } from "../PlayerInput";
 
 export class WavePower implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY];
@@ -12,16 +13,13 @@ export class WavePower implements IProjectCard {
     public text: string = "Requires 3 ocean tiles. Increase your energy production 1 step.";
     public description: string = "Well, see, first you need some waves...";
     public cardType: CardType = CardType.AUTOMATED;
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            if (game.getOceansOnBoard() < 3) {
-                reject("Requires 3 ocean tiles");
-                return;
-            }
-            player.energyProduction++;
-            player.victoryPoints++;
-            resolve();
-        });
+    public play(player: Player, game: Game): PlayerInput | undefined {
+        if (game.getOceansOnBoard() < 3) {
+            throw "Requires 3 ocean tiles";
+        }
+        player.energyProduction++;
+        player.victoryPoints++;
+        return undefined;
     }
 }
 

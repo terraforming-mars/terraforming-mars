@@ -12,13 +12,13 @@ export class MethaneFromTitan implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires 2% oxygen. Increase your heat production 2 steps and your plant production 2 steps. Gain 2 victory points.";
     public description: string = "Using Titan's liquid methane as fuel will add carbon and heat to Mars.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getOxygenLevel() < 2) {
-            return Promise.reject("Requires 2% oxygen");
+            throw "Requires 2% oxygen";
         }
         player.heatProduction += 2;
         player.plantProduction += 2;
         player.victoryPoints += 2;
-        return Promise.resolve();
+        return undefined;
     }
 }

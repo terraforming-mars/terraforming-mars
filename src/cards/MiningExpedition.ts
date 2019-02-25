@@ -13,19 +13,11 @@ export class MiningExpedition implements IProjectCard {
     public name: string = "Mining Expedition";
     public text: string = "Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel.";
     public description: string = "Ruthlessly excavating rich areas.";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 2 plants", (foundPlayer: Player) => {
-                game.increaseOxygenLevel(player)
-                    .then(function () {
-                        foundPlayer.plants = Math.max(0, foundPlayer.plants - 2);
-                        player.steel += 2;
-                        resolve();
-                    })
-                    .catch(function (err: string) {
-                        reject(err);
-                    });
-            }));
+    public play(player: Player, game: Game) {
+        return new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 2 plants", (foundPlayer: Player) => {
+            foundPlayer.plants = Math.max(0, foundPlayer.plants - 2);
+            player.steel += 2;
+            return game.increaseOxygenLevel(player, 1);
         });
     }
 }

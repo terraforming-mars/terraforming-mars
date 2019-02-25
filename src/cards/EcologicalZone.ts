@@ -21,25 +21,22 @@ export class EcologicalZone implements IProjectCard {
         return game.getAvailableSpacesOnLand(player)
                 .filter((space) => game.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.GREENERY).length > 0);
     }
-    public play(player: Player, game: Game): Promise<void> {
-        if (game.getSpaces(SpaceType.LAND).filter((space) => space.tile && space.tile.tileType === TileType.GREENERY && space.player && space.player === player).length === 0) {
-            return Promise.reject("Requires that you have a greenery tile");
+    public play(player: Player, game: Game) {
+        if (game.getSpaces(SpaceType.OCEAN).concat(game.getSpaces(SpaceType.LAND)).filter((space) => space.tile !== undefined && space.tile.tileType === TileType.GREENERY && space.player === player).length === 0) {
+            throw "Requires that you have a greenery tile";
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space next to greenery for special tile", this.getAvailableSpaces(player, game), (requestedSpace: ISpace) => {
-                try { game.addTile(player, requestedSpace.spaceType, requestedSpace, { tileType: TileType.SPECIAL }); }
-                catch (err) { reject(err); return; }
-                player.addCardPlayedHandler((card: IProjectCard) => {
-                    if (card.tags.indexOf(Tags.ANIMAL) !== -1 ||
-                        card.tags.indexOf(Tags.PLANT) !== -1) {
-                        this.animals++;
-                    }
-                });
-                game.addGameEndListener(() => {
-                    player.victoryPoints += Math.floor(this.animals / 2);
-                });
-                resolve();
-            }));
+        return new SelectSpace(this.name, "Select space next to greenery for special tile", this.getAvailableSpaces(player, game), (requestedSpace: ISpace) => {
+            game.addTile(player, requestedSpace.spaceType, requestedSpace, { tileType: TileType.SPECIAL });
+            player.addCardPlayedHandler((card: IProjectCard) => {
+                if (card.tags.indexOf(Tags.ANIMAL) !== -1 ||
+                    card.tags.indexOf(Tags.PLANT) !== -1) {
+                    this.animals++;
+                }
+            });
+            game.addGameEndListener(() => {
+                player.victoryPoints += Math.floor(this.animals / 2);
+            });
+            return undefined;
         });
     }
 }

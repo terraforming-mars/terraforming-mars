@@ -16,24 +16,20 @@ export class ExtremeColdFungus implements IProjectCard {
     public actionText: string = "Gain 1 plant or add 2 microbes to ANOTHER card.";
     public text: string = "It must be -10C or colder";
     public description: string = "Adapted strains able to form symbiotic relationships with other organisms";
-    public play(_player: Player, game: Game): Promise<void> {
+    public play(_player: Player, game: Game) {
         if (game.getTemperature() > -10) {
-            return Promise.reject("It must be -10C or colder");
+            throw "It must be -10C or colder";
         }
-        return Promise.resolve();
+        return undefined;
     }
-    public action(player: Player, game: Game): Promise<void> {
+    public action(player: Player, game: Game) {
         const otherMicrobeCards = game.getOtherMicrobeCards(this);
-        return new Promise((resolve, _reject) => {
-            player.setWaitingFor(
-                new OrOptions(
-                    new SelectOption(this.name, "Gain 1 plant", () => { player.plants++; resolve(); }),
-                    new SelectCard(this.name, "Select card to remove 2 microbes", otherMicrobeCards, (foundCards: Array<IProjectCard>) => {
-                        foundCards[0]!.microbes! += 2;
-                        resolve();
-                    })
-                )
-            );
-        });
+        return new OrOptions(
+            new SelectOption(this.name, "Gain 1 plant", () => { player.plants++; return undefined; }),
+            new SelectCard(this.name, "Select card to remove 2 microbes", otherMicrobeCards, (foundCards: Array<IProjectCard>) => {
+                foundCards[0]!.microbes! += 2;
+                return undefined;
+            })
+        );
     }
 }

@@ -14,21 +14,18 @@ export class CupolaCity implements IProjectCard {
     public name: string = "Cupola City";
     public text: string = "Oxygen must be 9% or less. Place a city tile. Decrease your energy production 1 step and increase your mega credit production 3 steps.";
     public description: string = "In a thin atmosphere, normal pressure can hold a protective dome over the city.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getOxygenLevel() > 9) {
-            return Promise.reject("Oxygen must be 9% or less.");
+            throw "Oxygen must be 9% or less.";
         }
         if (player.energyProduction < 1) {
-            return Promise.reject("Must have energy production to decrease");
+            throw "Must have energy production to decrease";
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select a space for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
-                try { game.addCityTile(player, space.id); }
-                catch (err) { reject(err); return; }
-                player.energyProduction--;
-                player.megaCreditProduction += 3;
-                resolve();
-            }));
+        return new SelectSpace(this.name, "Select a space for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
+            game.addCityTile(player, space.id);
+            player.energyProduction--;
+            player.megaCreditProduction += 3;
+            return undefined;
         });
     }
 }

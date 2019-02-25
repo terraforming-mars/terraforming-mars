@@ -16,21 +16,18 @@ export class RestrictedArea implements IProjectCard {
     public actionText: string = "Spend 2 mega credit to draw a card";
     public text: string = "Place a special tile";
     public description: string = "A place to conduct secret research, preventing the wrong people from getting in. Or out";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space for tile", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
-                try { game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL }); }
-                catch (err) { reject(err); return; }
-                resolve();
-            }));
+    public play(player: Player, game: Game) {
+        return new SelectSpace(this.name, "Select space for tile", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
+            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
+            return undefined;
         });
     }
-    public action(player: Player, game: Game): Promise<void> {
+    public action(player: Player, game: Game) {
         if (player.megaCredits < 2) {
-            return Promise.reject("Must have 2 mega credits");
+            throw "Must have 2 mega credits";
         }
         player.megaCredits -= 2;
         player.cardsInHand.push(game.dealer.getCards(1)[0]);
-        return Promise.resolve();
+        return undefined;
     }
 }

@@ -12,16 +12,13 @@ export class GreatDam implements IProjectCard {
     public name: string = "Great Dam";
     public text: string = "Requires 4 ocean tiles. Increase your energy production 2 steps";
     public description: string = "Letting natural processes do the work";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            if (game.getOceansOnBoard() < 4) {
-                reject("Requires 4 ocean tiles");
-                return;
-            }
-            player.victoryPoints++;
-            player.energyProduction += 2;
-            resolve();
-        });
+    public play(player: Player, game: Game) {
+        if (game.getOceansOnBoard() < 4) {
+            throw "Requires 4 ocean tiles";
+        }
+        player.victoryPoints++;
+        player.energyProduction += 2;
+        return undefined;
     }
 }
 

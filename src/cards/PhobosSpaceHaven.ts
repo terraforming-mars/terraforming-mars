@@ -13,11 +13,10 @@ export class PhobosSpaceHaven implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your titanium production 1 step and place a city tile on the reserved area. Gain 3 victory points.";
     public description: string = "The doorway to mars.";
-    public play(player: Player, game: Game): Promise<void> {
-        try { game.addCityTile(player, SpaceName.PHOBOS_SPACE_HAVEN); }
-        catch (err) { return Promise.reject(err); }
+    public play(player: Player, game: Game) {
+        game.addCityTile(player, SpaceName.PHOBOS_SPACE_HAVEN);
         player.titaniumProduction++;
         player.victoryPoints += 3;
-        return Promise.resolve();
+        return undefined;
     }
 }

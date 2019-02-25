@@ -12,13 +12,13 @@ export class Farming implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires +4C or warmer. Increase your mega credit production 2 steps and your plant production 2 steps. Gain 2 plants. Gain 2 victory points.";
     public description: string = "At last we can have a decent food production allowing for rapid population increase.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getTemperature() < 4) {
-            return Promise.reject("Requires +4C or warmer");
+            throw "Requires +4C or warmer";
         }
         player.megaCreditProduction += 2;
         player.plantProduction += 2;
         player.plants += 2;
-        return Promise.resolve();
+        return undefined;
     }
 }

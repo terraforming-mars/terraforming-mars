@@ -12,7 +12,7 @@ export class TollStation implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your mega credit production 1 step for each space tag your opponents have.";
     public description: string = "Licensed by the 'government'";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         let opponentsSpaceTags: number = 0;
         game.getPlayers()
             .filter((aPlayer) => aPlayer !== player)
@@ -20,6 +20,6 @@ export class TollStation implements IProjectCard {
                 opponentsSpaceTags += opponent.getTagCount(Tags.SPACE);
             });
         player.megaCreditProduction += opponentsSpaceTags;
-        return Promise.resolve();
+        return undefined;
     }
 }

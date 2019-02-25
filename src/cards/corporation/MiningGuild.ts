@@ -13,7 +13,7 @@ export class MiningGuild implements CorporationCard {
     public text: string = "You start with 5 steel, and 1 steel production.";
     public effect: string = "Each time you place a tile on an area with steel or titanium placement bonus, increase your steel production 1 step.";
     public description: string = "The earliest private enterprises on Mars focused on mining and exporting minerals off the surface. As the mega-corporations arrive to terraform, the miners unite in the Guild to defend their interests. With their expertise and knowledge of the planet they will be a worthy contender in the race.";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         player.steel = 5;
         player.steelProduction = 1;
         player.onTilePlaced((space: ISpace) => {
@@ -21,6 +21,6 @@ export class MiningGuild implements CorporationCard {
                 player.steelProduction++;
             }
         });
-        return Promise.resolve();
+        return undefined;
     }
 }

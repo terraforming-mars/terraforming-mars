@@ -14,18 +14,18 @@ export class SecurityFleet implements IProjectCard {
     public actionText: string = "Spend 1 titanium to add 1 fighter resource to this card.";
     public text: string = "Gain 1 victory point for each fighter resource on this card.";
     public description: string = "Keeping the peace by force.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         game.addGameEndListener(() => {
             player.victoryPoints += this.fighterResources;
         });
-        return Promise.resolve();
+        return undefined;
     }
-    public action(player: Player, _game: Game): Promise<void> {
+    public action(player: Player, _game: Game) {
         if (player.titanium < 1) {
-            return Promise.reject("Need titanium");
+            throw "Need titanium";
         }
         player.titanium--;
         this.fighterResources++;
-        return Promise.resolve();
+        return undefined;
     }
 }

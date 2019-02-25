@@ -12,12 +12,12 @@ export class Grass implements IProjectCard {
     public name: string = "Grass";
     public text: string = "Requires -16C or warmer. Increase your plant production 1 step. Gain 3 plants.";
     public description: string = "Taking root in every crevice and patch of soil.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getTemperature() < -16) {
-            return Promise.reject("Requires -16C or warmer");
+            throw "Requires -16C or warmer";
         }
         player.plantProduction++;
         player.plants += 3;
-        return Promise.resolve();
+        return undefined;
     }
 }

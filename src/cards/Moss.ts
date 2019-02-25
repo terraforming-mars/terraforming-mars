@@ -12,16 +12,16 @@ export class Moss implements IProjectCard {
     public name: string = "Moss";
     public text: string = "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step. Lose 1 victory point.";
     public description: string = "Efficient soil makers";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getOceansOnBoard() < 3) {
-            return Promise.reject("Requires 3 ocean tiles");
+            throw "Requires 3 ocean tiles";
         } else if (player.plants < 1) {
-            return Promise.reject("Must have a plant to lose");
+            throw "Must have a plant to lose";
         }
         player.plants--;
         player.plantProduction++;
         player.victoryPoints--;
-        return Promise.resolve();
+        return undefined;
     }
 }
 

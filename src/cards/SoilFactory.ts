@@ -12,13 +12,13 @@ export class SoilFactory implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease your energy production 1 step and increase your plant production 1 step";
     public description: string = "There are many harmful elements to remove";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         if (player.energyProduction < 1) {
-            return Promise.reject("Must have energy production");
+            throw "Must have energy production";
         }
         player.energyProduction--;
         player.plantProduction++;
         player.victoryPoints++;
-        return Promise.resolve();
+        return undefined;
     } 
 }

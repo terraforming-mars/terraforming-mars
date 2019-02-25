@@ -12,9 +12,9 @@ export class BribedCommitte implements IProjectCard {
     public name: string = "Bribed Committe";
     public text: string = "Raise your terraform rating 2 steps. Lose 2 victory points.";
     public description: string = "Influencing the people in power.";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         player.terraformRating += 2;
         player.victoryPoints -= 2;
-        return Promise.resolve();
+        return undefined;
     }
 }

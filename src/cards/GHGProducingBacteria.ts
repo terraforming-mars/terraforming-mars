@@ -16,35 +16,26 @@ export class GHGProducingBacteria implements IProjectCard {
     public microbes: number = 0;
     public text: string = "Requires 4% oxygen";
     public description: string = "Working for the biosphere and the atmosphere at the same time.";
-    public play(_player: Player, game: Game): Promise<void> {
+    public play(_player: Player, game: Game) {
         if (game.getOxygenLevel() < 4) {
-            return Promise.reject("Requires 4% oxygen");
+            throw "Requires 4% oxygen";
         }
-        return Promise.resolve();
+        return undefined;
     }
-    public action(player: Player, game: Game): Promise<void> {
+    public action(player: Player, game: Game) {
         if (this.microbes > 1) {
-            return new Promise((resolve, reject) => {
-                player.setWaitingFor(
-                    new OrOptions(
+            return new OrOptions(
                         new SelectOption(this.name, "Add 1 microbe", () => {
                             this.microbes++;
-                            resolve();
+                            return undefined;
                         }),
                         new SelectOption(this.name, "Remove 2 microbes to raise temperature 1 step", () => {
-                            game.increaseTemperature(player).then(() => {
-                                this.microbes -= 2;
-                                resolve();
-                            }).catch((err: string) => {
-                                reject(err);
-                            });
+                            this.microbes -= 2;
+                            return game.increaseTemperature(player, 1);
                         })
-                    )
-                );
-            });
-        } else {
-            this.microbes++;
-            return Promise.resolve();
+                    );
         }
+        this.microbes++;
+        return undefined;
     }
 }

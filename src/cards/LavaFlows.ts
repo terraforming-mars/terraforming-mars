@@ -21,19 +21,13 @@ export class LavaFlows implements IProjectCard {
         return game.getSpaces(SpaceType.LAND)
                 .filter((space) => space.id === SpaceName.THARSIS_THOLUS || space.id === SpaceName.ASCRAEUS_MONS || space.id === SpaceName.ARSIA_MONS);
     }
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (this.getAvailableSpaces(game).length === 0) {
-            return Promise.reject("Spaces are not available to play card");
+            throw "Spaces are not available to play card";
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons", this.getAvailableSpaces(game), (space: ISpace) => {
-                try { game.addTile(player, SpaceType.LAND, space, { tileType: TileType.SPECIAL }); }
-                catch (err) { reject(err); return undefined; }
-                return game.increaseTemperature(player)
-                        .then(function () { return game.increaseTemperature(player); })
-                        .then(function () { resolve(); })
-                        .catch(function (err: string) { reject(err); });
-            }));
+        return new SelectSpace(this.name, "Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons", this.getAvailableSpaces(game), (space: ISpace) => {
+            game.addTile(player, SpaceType.LAND, space, { tileType: TileType.SPECIAL });
+            return game.increaseTemperature(player, 2);
         });
     }
 }

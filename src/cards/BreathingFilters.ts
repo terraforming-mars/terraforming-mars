@@ -12,11 +12,11 @@ export class BreathingFilters implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires 7% oxygen";
     public description: string = "Allowing easy access to the still quite harsh environment";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getOxygenLevel() < 7) {
-            return Promise.reject("Requires 7% oxygen");
+            throw "Requires 7% oxygen";
         }
         player.victoryPoints += 2;
-        return Promise.resolve();
+        return undefined;
     }
 }

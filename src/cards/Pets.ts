@@ -23,7 +23,7 @@ export class Pets implements IProjectCard {
     }
     public text: string = "ANIMALS MAY NOT BE REMOVED FROM THIS CARD. Add 1 animal to this card.";
     public description: string = "It wouldn't be the same without them";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         game.addCityTilePlacedListener(() => {
             this._animals++;
         });
@@ -32,6 +32,6 @@ export class Pets implements IProjectCard {
             player.victoryPoints += Math.floor(this._animals / 2);
         });
         this._animals++;
-        return Promise.resolve();
+        return undefined;
     }
 }

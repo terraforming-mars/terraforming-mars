@@ -12,14 +12,11 @@ export class Insects implements IProjectCard {
     public name: string = "Insects";
     public text: string = "Requires 6% oxygen. Increase your plant production 1 step for each plant tag you have.";
     public description: string = "Pollinating flowers and spreading seeds.";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            if (game.getOxygenLevel() < 6) {
-                reject("Requires 6% oxygen");
-                return;
-            }
-            player.plantProduction += player.getTagCount(Tags.PLANT);
-            resolve();
-        });
+    public play(player: Player, game: Game) {
+        if (game.getOxygenLevel() < 6) {
+            throw "Requires 6% oxygen";
+        }
+        player.plantProduction += player.getTagCount(Tags.PLANT);
+        return undefined;
     }
 }

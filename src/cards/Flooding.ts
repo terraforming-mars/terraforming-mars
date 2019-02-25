@@ -18,44 +18,42 @@ export class Flooding implements IProjectCard {
     public tags: Array<Tags> = [];
     public text: string = "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 MEGA CREDITS FROM THE OWNER OF ONE OF THOSE TILES. Lose 1 victory point.";
     public description: string = "Look out for tsunamis";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            let foundSpace: ISpace;
-            let foundPlayer: Player | undefined;
-            player.setWaitingFor(
-                new AndOptions(
-                    () => {
-                        if (foundPlayer !== undefined) {
-                            const adjacentPlayers: Array<Player> = [];
-                            game.getAdjacentSpaces(foundSpace).forEach((space) => {
-                                if (space.player) {
-                                    adjacentPlayers.push(space.player);
-                                }
-                            });
-                            for (let adjacentPlayer of adjacentPlayers) {
-                                if (adjacentPlayer.name === foundPlayer.name) {
-                                    adjacentPlayer.megaCredits = Math.max(adjacentPlayer.megaCredits - 4, 0);
-                                }
-                            }
+    public play(player: Player, game: Game) {
+        let foundSpace: ISpace;
+        let foundPlayer: Player | undefined;
+        return new AndOptions(
+            () => {
+                if (foundPlayer !== undefined) {
+                    const adjacentPlayers: Array<Player> = [];
+                    game.getAdjacentSpaces(foundSpace).forEach((space) => {
+                        if (space.player) {
+                            adjacentPlayers.push(space.player);
                         }
-                        try { game.addOceanTile(player, foundSpace.id); }
-                        catch (err) { reject(err); return; }
-                        player.victoryPoints--;
-                        resolve();
-                    },
-                    new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                        foundSpace = space;
-                    }),
-                    new OrOptions(
-                        new SelectPlayer(this.name, game.getPlayers(), "Select adjacent player", (selectedPlayer: Player) => {
-                            foundPlayer = selectedPlayer;
-                        }),
-                        new SelectOption(this.name, "No adjacent player or do nothing", () => {
-                            foundPlayer = undefined;
-                        })
-                    )
-                )         
-            );
-        });
+                    });
+                    for (let adjacentPlayer of adjacentPlayers) {
+                        if (adjacentPlayer.name === foundPlayer.name) {
+                            adjacentPlayer.megaCredits = Math.max(adjacentPlayer.megaCredits - 4, 0);
+                        }
+                    }
+                }
+                game.addOceanTile(player, foundSpace.id);
+                player.victoryPoints--;
+                return undefined;
+            },
+            new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+                foundSpace = space;
+                return undefined;
+            }),
+            new OrOptions(
+                new SelectPlayer(this.name, game.getPlayers(), "Select adjacent player", (selectedPlayer: Player) => {
+                    foundPlayer = selectedPlayer;
+                    return undefined;
+                }),
+                new SelectOption(this.name, "No adjacent player or do nothing", () => {
+                    foundPlayer = undefined;
+                    return undefined;
+                })
+            )
+        );
     }
 }

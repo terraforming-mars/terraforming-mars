@@ -63,7 +63,7 @@ export class RoboticWorkforce implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Duplicate only the production box of one of your building cards.";
     public description: string = "Enhancing your production capacity.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         const builderCards: Array<IProjectCard> = [
             new AICentral(),
             new BiomassCombustors(),
@@ -121,19 +121,17 @@ export class RoboticWorkforce implements IProjectCard {
             return false;
         });
         if (availableCards.length === 0) {
-            return Promise.reject("No builder cards to duplicate");
+            throw "No builder cards to duplicate";
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectCard(this.name, "Select builder card to copy", availableCards, (selectedCards: Array<IProjectCard>) => {
+        return new SelectCard(this.name, "Select builder card to copy", availableCards, (selectedCards: Array<IProjectCard>) => {
                 const foundCard: IProjectCard = selectedCards[0];
                 // this is the only card which requires additional user input
                 if (foundCard.name === new BiomassCombustors().name) {
-                    player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to remove plant production", (foundPlayer: Player) => {
+                    return new SelectPlayer(this.name, game.getPlayers(), "Select player to remove plant production", (foundPlayer: Player) => {
                         foundPlayer.plantProduction--;
                         player.energyProduction += 2;
-                        resolve();
-                    }));
-                    return;
+                        return undefined;
+                    });
                 }
                 // the rest can make updates synchronously
                 if (foundCard.name === new NoctisCity().name || foundCard.name === new DomedCrater().name) {
@@ -251,11 +249,9 @@ export class RoboticWorkforce implements IProjectCard {
                 } else if (foundCard.name === new NaturalPreserve().name) {
                     player.energyProduction++;
                 } else {
-                    reject("Production not found for selected card");
-                    return;
+                    throw "Production not found for selected card";
                 }
-                resolve();
-            }));
-        });
+                return undefined;
+            });
     }
 }

@@ -15,18 +15,10 @@ export class ProtectedValley implements IProjectCard {
     public name: string = "Protected Valley";
     public text: string = "Increase your mega credit production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.";
     public description: string = "A fertile valley with higher air density and humidity, but in need of protection when the oceans rise.";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space for greenery tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                try {
-                    game.addGreenery(player, space.id, SpaceType.OCEAN);
-                } catch (err) {
-                    reject(err);
-                    return;
-                }
-                player.megaCreditProduction += 2;
-                resolve();
-            }));
+    public play(player: Player, game: Game) {
+        return new SelectSpace(this.name, "Select space for greenery tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+            player.megaCreditProduction += 2;
+            return game.addGreenery(player, space.id, SpaceType.OCEAN);
         });
     }
 }

@@ -12,9 +12,9 @@ export class PowerPlant implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your energy production 1 step";
     public description: string = "Standard equipment, normal output";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         player.energyProduction++;
-        return Promise.resolve();
+        return undefined;
     }
 }
 

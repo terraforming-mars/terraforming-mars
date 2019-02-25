@@ -13,17 +13,15 @@ export class AsteroidMiningConsortium implements IProjectCard {
     public name: string = "Asteroid Mining Consortium";
     public text: string = "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step. Gain 1 victory point.";
     public description: string = "Your hold on the titanium market tightens.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (player.titaniumProduction < 1) {
-            return Promise.reject("Requires that you have titanium production");
+            throw "Requires that you have titanium production";
         }
-        return new Promise((resolve, _reject) => {
-            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease", (foundPlayer: Player) => {
-                foundPlayer.titaniumProduction = Math.max(0, foundPlayer.titaniumProduction - 1);
-                player.titaniumProduction++;
-                player.victoryPoints++;
-                resolve();
-            }));
+        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease", (foundPlayer: Player) => {
+            foundPlayer.titaniumProduction = Math.max(0, foundPlayer.titaniumProduction - 1);
+            player.titaniumProduction++;
+            player.victoryPoints++;
+            return undefined;
         });
     }
 }

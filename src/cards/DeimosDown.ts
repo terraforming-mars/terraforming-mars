@@ -13,21 +13,11 @@ export class DeimosDown implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.";
     public description: string = "We don't use that moon anyway";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 8 plants", (foundPlayer: Player) => {
-                game.increaseTemperature(player)
-                    .then(function () { return game.increaseTemperature(player); })
-                    .then(function () { return game.increaseTemperature(player); })
-                    .then(function () {
-                        player.steel += 4;
-                        foundPlayer.plants = Math.max(0, foundPlayer.plants - 8);
-                        resolve();
-                    })
-                    .catch((err: string) => {
-                        reject(err);
-                    });
-            }));
+    public play(player: Player, game: Game) {
+        return new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 8 plants", (foundPlayer: Player) => {
+            player.steel += 4;
+            foundPlayer.plants = Math.max(0, foundPlayer.plants - 8);
+            return game.increaseTemperature(player, 3);
         });
     }
 }

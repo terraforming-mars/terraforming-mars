@@ -10,7 +10,7 @@ export class BeginnerCorporation implements CorporationCard {
     public name: string = "Beginner Corporation";
     public text: string = "Instead of choosing from 10 cards during setup, you get 10 cards for free.";
     public description: string = "This is a standard corporation, doing standard things. There are no special effects or actions to keep track of. This is a good corporation to start with if you are terraforming a planet for the first time.";
-    public play(_player: Player, _game: Game): Promise<void> {
-        return Promise.resolve();
+    public play(_player: Player, _game: Game) {
+        return undefined;
     }
 }

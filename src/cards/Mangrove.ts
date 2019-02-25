@@ -15,17 +15,13 @@ export class Mangrove implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires +4C or warmer. Place a greenery tile on an area reserved for ocean and raise oxygen 1 step. Disregard normal placement restrictions for this. Gain 1 victory point.";
     public description: string = "A wetland forest will create an ecosystem where new species can thrive.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getTemperature() < 4) {
-            return Promise.reject("Requires +4C or warmer");
+            throw "Requires +4C or warmer";
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select ocean space for greenery", game.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
-                return game.addGreenery(player, foundSpace.id, SpaceType.OCEAN).then(function () {
-                    player.victoryPoints++;
-                    resolve();
-                }).catch((err) => reject(err));
-            }));
+        player.victoryPoints++;
+        return new SelectSpace(this.name, "Select ocean space for greenery", game.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
+            return game.addGreenery(player, foundSpace.id, SpaceType.OCEAN);
         });
     }
 }

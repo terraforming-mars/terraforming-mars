@@ -4,7 +4,7 @@ import { PlayerInputTypes } from "../PlayerInputTypes";
 
 export class SelectAmount implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_AMOUNT;
-    constructor(public message: string, public title: string, public cb: (amount: number) => void) {
+    constructor(public message: string, public title: string, public cb: (amount: number) => PlayerInput | undefined) {
 
     }
 }

@@ -22,25 +22,20 @@ export class ResearchOutpost implements IProjectCard {
                     return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
                 });
     }
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select place next to no other tile for city", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
-                if (foundSpace.spaceType === SpaceType.COLONY) {
-                    reject("Must be places on mars");
-                    return;
-                }
-                const adjacentSpaces = game.getAdjacentSpaces(foundSpace);
-                if (adjacentSpaces.filter((adjacentSpace) => adjacentSpace.tile !== undefined).length > 0) {
-                    reject("Space must be next to no other tile");
-                    return;
-                }
-                try { game.addCityTile(player, foundSpace.id); }
-                catch (err) { reject(err); return; }
-                player.addCardDiscount(() => {
-                    return 1;
-                });
-                resolve();
-            }));
+    public play(player: Player, game: Game) {
+        return new SelectSpace(this.name, "Select place next to no other tile for city", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
+            if (foundSpace.spaceType === SpaceType.COLONY) {
+                throw "Must be places on mars";
+            }
+            const adjacentSpaces = game.getAdjacentSpaces(foundSpace);
+            if (adjacentSpaces.filter((adjacentSpace) => adjacentSpace.tile !== undefined).length > 0) {
+                throw "Space must be next to no other tile";
+            }
+            game.addCityTile(player, foundSpace.id);
+            player.addCardDiscount(() => {
+                return 1;
+            });
+            return undefined;
         });
     }
 }

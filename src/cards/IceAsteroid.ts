@@ -15,21 +15,19 @@ export class IceAsteroid implements IProjectCard {
     public name: string = "Ice Asteroid";
     public text: string = "Place 2 ocean tiles";
     public description: string = "We need its water down here";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(
-                new AndOptions(
-                    () => { resolve(); },
+    public play(player: Player, game: Game) {
+        return new AndOptions(
+                    () => {
+                        return undefined;
+                    },
                     new SelectSpace(this.name, "Select first ocean space", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                        try { game.addOceanTile(player, space.id); }
-                        catch (err) { reject(err); }
+                        game.addOceanTile(player, space.id);
+                        return undefined;
                     }),
                     new SelectSpace(this.name, "Select second ocean space", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                        try { game.addOceanTile(player, space.id); }
-                        catch (err) { reject(err); }
+                        game.addOceanTile(player, space.id);
+                        return undefined;
                     })
-                )
-            );
-        });
+                );
     }
 }

@@ -16,29 +16,23 @@ export class GiantIceAsteroid implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Raise temperature 2 steps and place 2 ocean tiles. Remove up to 6 plants from any player.";
     public description: string = "Crash it. The bigger, the better";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(
-                new AndOptions(
-                    () => {
-                        game.increaseTemperature(player)
-                            .then(function () { return game.increaseTemperature(player); })
-                            .then(function () { resolve(); })
-                            .catch((err) => { reject(err); });
-                    },
-                    new SelectPlayer(this.name, game.getPlayers(), "Select player to remove up to 6 plants", (foundPlayer: Player) => {
-                        foundPlayer.plants = Math.max(0, foundPlayer.plants - 6);
-                    }),
-                    new SelectSpace(this.name, "Select first ocean space", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                        try { game.addOceanTile(player, space.id); }
-                        catch (err) { reject(err); }
-                    }),
-                    new SelectSpace(this.name, "Select second ocean space", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                        try { game.addOceanTile(player, space.id); }
-                        catch (err) { reject(err); }
-                    })
-                )
-            );
-        });
+    public play(player: Player, game: Game) {
+        return new AndOptions(
+            () => {
+                return game.increaseTemperature(player, 2);
+            },
+            new SelectPlayer(this.name, game.getPlayers(), "Select player to remove up to 6 plants", (foundPlayer: Player) => {
+                foundPlayer.plants = Math.max(0, foundPlayer.plants - 6);
+                return undefined;
+            }),
+            new SelectSpace(this.name, "Select first ocean space", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+                game.addOceanTile(player, space.id);
+                return undefined;
+            }),
+            new SelectSpace(this.name, "Select second ocean space", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+                game.addOceanTile(player, space.id);
+                return undefined;
+            })
+        );
     }
 }

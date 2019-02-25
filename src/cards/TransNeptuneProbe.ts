@@ -12,8 +12,8 @@ export class TransNeptuneProbe implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Gain 1 victory point";
     public description: string = "Exploring the Kupier belt objects";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         player.victoryPoints++;
-        return Promise.resolve();
+        return undefined;
     }
 }

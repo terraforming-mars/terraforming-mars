@@ -123,14 +123,13 @@ export class Game {
     private pickCorporationCard(player: Player): PlayerInput {
         return new AndOptions(
             () => {
-                player.corporationCard!
-                    .play(player, this)
-                    .then(() => {
-                        this.playerIsFinishedWithResearchPhase(player);
-                    });
+                player.corporationCard!.play(player, this);
+                this.playerIsFinishedWithResearchPhase(player);
+                return undefined;
             },
             new SelectCard<CorporationCard>("Initial Research Phase", "Select corporation", this.dealer.getCorporationCards(2), (foundCards: Array<CorporationCard>) => {
                 player.corporationCard = foundCards[0];
+                return undefined;
             }),
             new SelectCard("Initial Research Phase", "Select initial cards to buy", this.dealer.getCards(10), (foundCards: Array<IProjectCard>) => {
                 // Pay for cards
@@ -138,6 +137,7 @@ export class Game {
                 for (let foundCard of foundCards) {
                     player.cardsInHand.push(foundCard);
                 }
+                return undefined;
             }, 10, 0)
         );
     }
@@ -302,22 +302,15 @@ export class Game {
     private generation: number = 1;
     private oxygenLevel: number = MIN_OXYGEN_LEVEL;
 
-    public increaseOxygenLevel(player: Player): Promise<void> {
-        if (this.oxygenLevel < MAX_OXYGEN_LEVEL) {
-            // BONUS FOR TEMPERATURE INCREASE AT 8
-            if (this.oxygenLevel + 1 === 8) {
-                return this.increaseTemperature(player).then(() => {
-                    this.oxygenLevel++;
-                    player.terraformRating++;
-                    return Promise.resolve();
-                });
-            } else {
-                this.oxygenLevel++;
-                player.terraformRating++;
-                return Promise.resolve();
-            }
+    public increaseOxygenLevel(player: Player, steps: 1 | 2): SelectSpace | undefined {
+        if (this.oxygenLevel >= MAX_OXYGEN_LEVEL) {
+            return undefined;
         }
-        return Promise.resolve();
+        this.oxygenLevel += steps;
+        if (this.oxygenLevel === 8 || (steps === 2 && this.oxygenLevel === 9)) {
+            return this.increaseTemperature(player, 1);
+        }
+        return undefined;
     }
 
     public getOxygenLevel(): number {
@@ -326,28 +319,27 @@ export class Game {
 
     private temperature: number = MIN_TEMPERATURE;
 
-    public increaseTemperature(player: Player): Promise<void> {
-        if (this.temperature < constants.MAX_TEMPERATURE) {
-            // BONUS FOR HEAT PRODUCTION AT -20 and -24
-            // BONUS FOR OCEAN TILE AT 0
-            if (this.temperature + 2 === -24 || this.temperature + 2 === -20) {
-                player.heatProduction++;
-                this.temperature += 2;
-                return Promise.resolve();
-            } else if (this.temperature + 2 === 0) {
-                return new Promise((resolve, reject) => {
-                    player.setWaitingFor(new SelectSpace("Temperature Bonus", "Select space for ocean", this.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                        try { this.addOceanTile(player, space.id); }
-                        catch (err) { reject(err); return; }
-                        this.temperature += 2
-                        resolve();
-                    }));
-                });
-            } else {
-                this.temperature += 2;
-            }
+    public increaseTemperature(player: Player, steps: 1 | 2 | 3): SelectSpace | undefined {
+        if (this.temperature >= constants.MAX_TEMPERATURE) {
+            return undefined;
         }
-        return Promise.resolve();
+        this.temperature += 2 * steps;
+        // BONUS FOR HEAT PRODUCTION AT -20 and -24
+        // BONUS FOR OCEAN TILE AT 0
+        if (steps === 3 && this.temperature === -20) {
+            player.heatProduction += 2;
+        } else if (this.temperature === -24 || this.temperature === -20 ||
+            ((steps === 2 || steps === 3) && (this.temperature === -22 || this.temperature === -18)) ||
+            (steps === 3 && this.temperature === -16)
+        ) {
+            player.heatProduction++;
+        } else if (this.temperature === 0 || ((steps === 2 || steps === 3) && this.temperature === 2) || (steps === 3 && this.temperature === 4)) {
+            return new SelectSpace("Temperature Bonus", "Select space for ocean", this.getAvailableSpacesForOcean(player), (space: ISpace) => {
+                this.addOceanTile(player, space.id);
+                return undefined;
+            });
+        } 
+        return undefined;
     }
 
     public getTemperature(): number {
@@ -479,14 +471,12 @@ export class Game {
         }
         return [];
     }
-
-    public addGreenery(player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND): Promise<void> {
+    public addGreenery(player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND): SelectSpace | undefined {
         this.addTile(player, spaceType, this.getSpace(spaceId), { tileType: TileType.GREENERY });
-        return this.increaseOxygenLevel(player).then(() => {
-            this.onGreeneryPlaced.forEach((fn: Function) => {
-                fn(player);
-            });
+        this.onGreeneryPlaced.forEach((fn: Function) => {
+            fn(player);
         });
+        return this.increaseOxygenLevel(player, 1);
     }
     public addCityTile(player: Player, spaceId: string): void {
         const space = this.getSpace(spaceId);

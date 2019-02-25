@@ -12,9 +12,9 @@ export class MicroMills implements IProjectCard {
     public name: string = "Micro-Mills";
     public text: string = "Increase your heat production 1 step";
     public description: string = "Small, mass-produced windmills that convert some of the ever-present wind into heat.";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         player.heatProduction++;
-        return Promise.resolve();
+        return undefined;
     }
 }
 

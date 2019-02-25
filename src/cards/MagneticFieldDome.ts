@@ -12,13 +12,13 @@ export class MagneticFieldDome implements IProjectCard {
     public name: string = "Magnetic Field Dome";
     public text: string = "Decrease your energy production 2 steps and increase your plant production 1 step. Raise your terraform rating 1 step.";
     public description: string = "Protecting a limited area from cosmic radiation.";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         if (player.energyProduction < 2) {
-            return Promise.reject("Need 2 energy to decrease");
+            throw "Need 2 energy to decrease";
         }
         player.energyProduction -= 2;
         player.plantProduction++;
         player.terraformRating++;
-        return Promise.resolve();
+        return undefined;
     }
 }

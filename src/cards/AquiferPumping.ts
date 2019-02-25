@@ -16,52 +16,47 @@ export class AquiferPumping implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "";
     public description: string = "Underground water reservoirs may be tapped in a controlled manner, to safely build up oceans to the desired level";
-    public play(_player: Player, _game: Game): Promise<void> {
-        return Promise.resolve();
+    public play(_player: Player, _game: Game) {
+        return undefined;
     }
     public actionText: string = "Spend 8 mega credits to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.";
-    public action(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
+    public action(player: Player, game: Game) {
             let totalPaid: number = 0;
             let steelToUse: number = 0;
             let megaCreditToUse: number = 0;
             let foundSpace: ISpace;
-            player.setWaitingFor(
-                new AndOptions(
+            return new AndOptions(
                     () => {
                         if (steelToUse > player.steel) {
-                            reject("Not enough steel");
-                            return;
+                            throw "Not enough steel";
                         }
                         totalPaid += steelToUse * 2;
                         if (totalPaid < 8) {
                             if (megaCreditToUse > player.megaCredits) {
-                                reject("Not enough mega credits");
-                                return;
+                                throw "Not enough mega credits";
                             }
                             totalPaid += megaCreditToUse;
                         }
                         if (totalPaid < 8) {
-                            reject("Need to pay 8");
-                            return;
+                            throw "Need to pay 8";
                         }
-                        try { game.addOceanTile(player, foundSpace.id); }
-                        catch (err) { reject(err); return; }
+                        game.addOceanTile(player, foundSpace.id);
                         player.steel -= steelToUse;
                         player.megaCredits -= megaCreditToUse;
-                        resolve();
+                        return undefined;
                     },
                     new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                         foundSpace = space;
+                        return undefined;
                     }),
                     new SelectAmount(this.name, "Select steel to use", (amount: number) => {
                         steelToUse = amount;
+                        return undefined;
                     }),
                     new SelectAmount(this.name, "Select megacredit to use", (amount: number) => {
                         megaCreditToUse = amount;
+                        return undefined;
                     })
-                )
-            );
-        });
+                );
     }
 }

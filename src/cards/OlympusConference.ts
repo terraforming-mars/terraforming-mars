@@ -15,19 +15,21 @@ export class OlympusConference implements IProjectCard {
     public name: string = "Olympus Conference";
     public text: string = "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card.";
     public description: string = "The scientific elite, assembled on the top of Olympus Mons, the highest spot in the solar system";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         const cardPlayedHandler = (playedCard: IProjectCard) => {
             if (playedCard.tags.filter((tag) => tag === Tags.SCIENCE).length > 0) {
                 if (this.scienceResources) {
-                    return new Promise((resolve) => {
-                        player.setWaitingFor(new OrOptions(new SelectOption(this.name, "Add a science resource to this card", () => {
+                    return new OrOptions(
+                        new SelectOption(this.name, "Add a science resource to this card", () => {
                             this.scienceResources++;
-                            resolve();
-                        }), new SelectOption(this.name, "Remove a science resource from this card to draw a card", () => {
+                            return undefined;
+                        }),
+                        new SelectOption(this.name, "Remove a science resource from this card to draw a card", () => {
                             this.scienceResources--;
                             player.cardsInHand.push(game.dealer.getCards(1)[0]);
-                        })));
-                    });
+                            return undefined;
+                        })
+                    );
                 } else {
                     this.scienceResources++;
                 }
@@ -36,6 +38,6 @@ export class OlympusConference implements IProjectCard {
         };
         player.addCardPlayedHandler(cardPlayedHandler);
         player.victoryPoints++;
-        return Promise.resolve();
+        return undefined;
     }
 }

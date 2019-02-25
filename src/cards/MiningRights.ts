@@ -20,19 +20,16 @@ export class MiningRights implements IProjectCard {
         return game.getAvailableSpacesOnLand(player)
                 .filter((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1);
     }
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space with a steel or titanium placement bonus", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
-                try { game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL }); }
-                catch (err) { reject(err); return; }
-                if (foundSpace.bonus.indexOf(SpaceBonus.STEEL) !== -1) {
-                    player.steelProduction++;
-                }
-                if (foundSpace.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
-                    player.titaniumProduction++;
-                }
-                resolve();
-            }));
+    public play(player: Player, game: Game) {
+        return new SelectSpace(this.name, "Select space with a steel or titanium placement bonus", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
+            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
+            if (foundSpace.bonus.indexOf(SpaceBonus.STEEL) !== -1) {
+                player.steelProduction++;
+            }
+            if (foundSpace.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
+                player.titaniumProduction++;
+            }
+            return undefined;
         });
     }
-}  
+}

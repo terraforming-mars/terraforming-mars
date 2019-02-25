@@ -13,18 +13,18 @@ export class SpaceElevator implements IProjectCard {
     public actionText: string = "Spend 1 steel to gain 5 mega credits.";
     public text: string = "Increase your titanium production 1 step. Gain 2 victory points.";
     public description: string = "An ultra-strong cable car up to geo-stationary orbit, enabling reasonable export costs.";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         player.titaniumProduction++;
         player.victoryPoints += 2;
-        return Promise.resolve();
+        return undefined;
     }
-    public action(player: Player, _game: Game): Promise<void> {
+    public action(player: Player, _game: Game) {
         if (player.steel < 1) {
-            return Promise.reject("Must have steel");
+            throw "Must have steel";
         }
         player.steel--;
         player.megaCredits += 5;
-        return Promise.resolve();
+        return undefined;
     }
 }
 

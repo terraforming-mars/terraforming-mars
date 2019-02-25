@@ -13,18 +13,15 @@ export class EnergyTapping implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease any energy production 1 step and increase your own 1 step. Lose 1 victory point.";
     public description: string = "They need it. But we need it more.";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease energy production", (foundPlayer: Player) => {
-                if (foundPlayer.energyProduction < 1) {
-                    reject("Selected player has no energy production");
-                    return;
-                }
-                foundPlayer.energyProduction--;
-                player.energyProduction++;
-                player.victoryPoints--;
-                resolve();
-            }));
+    public play(player: Player, game: Game) {
+        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease energy production", (foundPlayer: Player) => {
+            if (foundPlayer.energyProduction < 1) {
+                throw "Selected player has no energy production";
+            }
+            foundPlayer.energyProduction--;
+            player.energyProduction++;
+            player.victoryPoints--;
+            return undefined;
         });
     }
 }

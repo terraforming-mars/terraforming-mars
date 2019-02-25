@@ -120,7 +120,7 @@ export class Player {
         return foundCards[0];
     }
     public cardPlayedEvents: Array<Function> = [];
-    public addCardPlayedHandler(handler: Function): void {
+    public addCardPlayedHandler(handler: (card: IProjectCard) => OrOptions | void): void {
         this.cardPlayedEvents.push(handler);
     } 
     public removeCardPlayedHandler(handler: Function): void {
@@ -132,7 +132,7 @@ export class Player {
         this.standardProjectHandler.push(fn);
     }
 
-    private runInput(input: Array<Array<string>>, pi: PlayerInput): void {
+    private runInput(input: Array<Array<string>>, pi: PlayerInput): PlayerInput | undefined {
         if (pi instanceof AndOptions) {
             const waiting: AndOptions = pi;
             if (input.length !== waiting.options.length) {
@@ -141,15 +141,15 @@ export class Player {
             for (let i = 0; i < input.length; i++) {
                 this.runInput([input[i]], waiting.options[i]);
             }
-            pi.cb();
+            return pi.cb();
         } else if (pi instanceof SelectOption) {
-            pi.cb();
+            return pi.cb();
         } else if (pi instanceof OrOptions) {
             const waiting: OrOptions = pi;
             const optionIndex = parseInt(input[0][0]);
             const remainingInput = input.slice();
             remainingInput.splice(0, 1);
-            this.runInput(remainingInput, waiting.options[optionIndex]);
+            return this.runInput(remainingInput, waiting.options[optionIndex]);
         } else if (pi instanceof SelectCard) {
             if (input.length !== 1) {
                 throw "Incorrect options provided";
@@ -165,7 +165,7 @@ export class Player {
             if (mappedCards.length !== input[0].length) {
                 throw "Not all cards found";
             }
-            pi.cb(mappedCards);
+            return pi.cb(mappedCards);
         } else if (pi instanceof SelectAmount) {
             if (input.length !== 1) {
                 throw "Incorrect options provided";
@@ -176,7 +176,7 @@ export class Player {
             if (isNaN(parseInt(input[0][0]))) {
                 throw "Amount is not a number";
             }
-            pi.cb(parseInt(input[0][0]));
+            return pi.cb(parseInt(input[0][0]));
         } else if (pi instanceof SelectSpace) {
             if (input.length !== 1) {
                 throw "Incorrect options provided";
@@ -188,7 +188,7 @@ export class Player {
             if (foundSpace === undefined) {
                 throw "Space not available";
             }
-            pi.cb(foundSpace);
+            return pi.cb(foundSpace);
         } else if (pi instanceof SelectPlayer) {
             if (input.length !== 1) {
                 throw "Incorrect options provided";
@@ -200,7 +200,7 @@ export class Player {
             if (foundPlayer === undefined) {
                 throw "Player not available";
             }
-            pi.cb(foundPlayer);
+            return pi.cb(foundPlayer);
         } else if (pi instanceof SelectHowToPay) {
             if (input.length !== 1) {
                 throw "Incorrect options provided";
@@ -243,7 +243,7 @@ export class Player {
             } catch (err) {
                 throw "Unable to parse input " + err;
             }
-            pi.cb(payMethod);
+            return pi.cb(payMethod);
         } else {
             throw "Unsupported waitingFor";
         }
@@ -291,7 +291,8 @@ export class Player {
                 .forEach((card) => {
                     game.dealer.discard(card);
                 }); 
-            game.playerIsFinishedWithResearchPhase(this); 
+            game.playerIsFinishedWithResearchPhase(this);
+            return undefined; 
         }, 4, 0)); 
     }
 
@@ -331,21 +332,25 @@ export class Player {
                     this.heat -= payMethod.heat;
                 }
 
+                const whenDone = () => {
+                    this.cardsInHand.splice(this.cardsInHand.findIndex((card) => card.name === selectedCard.name), 1);
+                    this.playedCards.push(selectedCard);
+                    this.actionsTakenThisRound++;
+                    this.takeAction(game);
+                }
+
                 // Play the card
-                selectedCard.play(this, game)
-                    .then(() => {
-                        this.cardsInHand.splice(this.cardsInHand.findIndex((card) => card.name === selectedCard.name), 1);
-                        this.playedCards.push(selectedCard);
-                        this.actionsTakenThisRound++;
-                        this.takeAction(game);
-                    })
-                    .catch((err) => {
-                        console.warn("Error playing project card", err);
-                        this.takeAction(game);
-                    });
+                const action = selectedCard.play(this, game);
+                if (action !== undefined) {
+                    action.onend = whenDone;
+                    return action;
+                }
+                whenDone();
+                return undefined;
             },
             new SelectCard("Take Action!", "Play a project card", this.cardsInHand, (foundCards: Array<IProjectCard>) => {
                 selectedCard = foundCards[0];
+                return undefined;
             }),
             new SelectHowToPay("Take Action!", "How will you pay for card?", true, true, this.canUseHeatAsMegaCredits, (howToPay: HowToPay) => {
                 payMethod = howToPay;
@@ -361,6 +366,7 @@ export class Player {
                 if (payMethod.titanium && payMethod.titanium > this.titanium) {
                     throw "Not enough titanium";
                 }
+                return undefined;
             })
         );
     }
@@ -368,21 +374,25 @@ export class Player {
     private playActionCard(game: Game): PlayerInput {
         return new SelectCard("Take Action!", "Perform an action from a played card", this.getPlayedActionCards(), (foundCards: Array<ICard>) => {
             const foundCard = foundCards[0];
-            foundCard.action!(this, game)
-                .then(() => {
+            const action = foundCard.action!(this, game);
+            const whenDone = (err?: string) => {
+                if (!err) {
                     this.actionsThisGeneration.add(foundCard.name);
                     this.actionsTakenThisRound++;
-                    this.takeAction(game);
-                })
-                .catch((err: string) => {
-                    console.warn("Error taking action from card", err);
-                    this.takeAction(game); 
-                })
+                }
+                this.takeAction(game);
+            };
+            if (action !== undefined) {
+                action.onend = whenDone;
+                return action;
+            }
+            whenDone();
+            return undefined;
         });
     }
 
     private sellPatents(game: Game): PlayerInput {
-        return new SelectCard("Take Action!", "Sell patents", this.cardsInHand, (foundCards: Array<IProjectCard>) => {
+        var res = new SelectCard("Take Action!", "Sell patents", this.cardsInHand, (foundCards: Array<IProjectCard>) => {
             this.megaCredits += foundCards.length;
             foundCards.forEach((card) => {
                 for (let i = 0; i < this.cardsInHand.length; i++) {
@@ -393,9 +403,15 @@ export class Player {
                 }
                 game.dealer.discard(card);
             });
-            this.actionsTakenThisRound++;
-            this.takeAction(game);
+            return undefined;
         }, this.cardsInHand.length);
+        res.onend = (err?: string) => {
+            if (!err) {
+                this.actionsTakenThisRound++;
+            }
+            this.takeAction(game);
+        };
+        return res;
     }
 
     private buildPowerPlant(game: Game): PlayerInput {
@@ -404,20 +420,26 @@ export class Player {
             this.megaCredits -= 11;
             this.actionsTakenThisRound++;
             this.takeAction(game);
+            return undefined;
         });
     }
 
     private asteroid(game: Game): PlayerInput {
         return new SelectOption("Take Action!", "Standard Project: Asteroid", () => {
-            game.increaseTemperature(this)
-                .then(() => {
+            const action = game.increaseTemperature(this, 1);
+            const whenDone = (err?: string) => {
+                if (!err) {
                     this.megaCredits -= 14;
                     this.actionsTakenThisRound++;
-                    this.takeAction(game);
-                })
-                .catch((err: string) => {
-                    throw "Error raising temperature " + err;
-                });
+                }
+                this.takeAction(game);
+            }
+            if (action !== undefined) {
+                action.onend = whenDone;
+                return action;
+            }
+            whenDone();
+            return undefined;
         });
     }
 
@@ -427,20 +449,26 @@ export class Player {
             this.megaCredits -= 14;
             this.actionsTakenThisRound++;
             this.takeAction(game);
+            return undefined;
         });
     }
 
     private addGreenery(game: Game): PlayerInput {
         return new SelectSpace("Take Action!", "Standard Project: Greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
-            try { game.addGreenery(this, space.id); }
-            catch (err) {
-                console.warn("error adding greenery through standard project", err);
+            const action = game.addGreenery(this, space.id);
+            const whenDone = (err?: string) => {
+                if (!err) {
+                    this.megaCredits -= 23;
+                    this.actionsTakenThisRound++;
+                }
                 this.takeAction(game);
-                return;
             }
-            this.megaCredits -= 23;
-            this.actionsTakenThisRound++;
-            this.takeAction(game);
+            if (action !== undefined) {
+                action.onend = whenDone;
+                return action;
+            }
+            whenDone();
+            return undefined;
         });
     }
 
@@ -450,40 +478,53 @@ export class Player {
             this.megaCredits -= 25;
             this.actionsTakenThisRound++;
             this.takeAction(game);
+            return undefined;
         });
     }
 
     private convertPlantsIntoGreenery(game: Game): PlayerInput {
         return new SelectSpace("Take Action!", "Convert " + this.plantsNeededForGreenery + " plants into greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
-            try { game.addGreenery(this, space.id); }
-            catch (err) {
-                console.warn("error converting plants into greenery", err);
-                return;
+            const action = game.addGreenery(this, space.id);
+            const whenDone = (err?: string) => {
+                if (!err) {
+                    this.plants -= this.plantsNeededForGreenery;
+                    this.actionsTakenThisRound++;
+                }
+                this.takeAction(game);
             }
-            this.plants -= this.plantsNeededForGreenery;
-            this.actionsTakenThisRound++;
-            this.takeAction(game);
+            if (action !== undefined) {
+                action.onend = whenDone;
+                return action;
+            }
+            whenDone();
+            return undefined;
         });
     }
 
     private convertHeatIntoTemperature(game: Game): PlayerInput {
         return new SelectOption("Take Action!", "Convert 8 heat into temperature", () => {
-            game.increaseTemperature(this)
-                .then(() => {
+            const action = game.increaseTemperature(this, 1);
+            const whenDone = (err?: string) => {
+                if (!err) {
                     this.heat -= 8;
                     this.actionsTakenThisRound++;
-                    this.takeAction(game);
-                })
-                .catch((err: string) => {
-                    console.warn("error increasing temperature", err);
-                });
-        }); 
+                }
+                this.takeAction(game);
+            };
+            if (action !== undefined) {
+                action.onend = whenDone;
+                return action;
+            }
+            whenDone();
+            return undefined;
+        });
     }
 
     private claimMilestone(milestone: Milestone, game: Game): PlayerInput {
         return new SelectOption("Take Action!", "Claim Milestone: " + milestone, () => {
             this.victoryPoints += 5;
             game.claimedMilestones.push(milestone);
+            return undefined;
         });
     }
 
@@ -491,12 +532,14 @@ export class Player {
         let upperCaseAward = String(award)[0].toUpperCase() + String(award).substring(1);
         return new SelectOption("Take Action!", "Claim Award: " + upperCaseAward, () => {
             game.fundAward(award);
+            return undefined;
         });
     }
 
     private passOption(game: Game): PlayerInput {
         return new SelectOption("Take Action!", "Pass", () => {
             game.playerHasPassed(this);
+            return undefined;
         });
     }
 
@@ -506,23 +549,22 @@ export class Player {
             game.getGeneration() === 1 &&
             this.corporationCard !== undefined &&
             !this.actionsThisGeneration.has("INITIAL") &&
-            this.corporationCard.initialAction !== undefined) {
-            this.corporationCard.initialAction(this, game)
-                .then(() => {
-                    this.actionsThisGeneration.add("INITIAL");
-                    this.actionsTakenThisRound++;
-                    this.takeAction(game);
-                })
-                .catch(() => {
-                    this.takeAction(game);
-                });
-            return undefined;
+            this.corporationCard.initialAction !== undefined
+        ) {
+            const input = this.corporationCard.initialAction(this, game);
+            input.onend = () => {
+                this.actionsThisGeneration.add("INITIAL");
+                this.actionsTakenThisRound++;
+                this.takeAction(game);
+            };
+            this.setWaitingFor(input);
+            return;
         }
 
         if (this.actionsTakenThisRound >= 2) {
             this.actionsTakenThisRound = 0;
             game.playerIsFinishedTakingActions(this);
-            return undefined;
+            return;
         }
 
         const action: OrOptions = new OrOptions();
@@ -642,9 +684,14 @@ export class Player {
             throw "Not waiting for anything";
         }
         const waitingFor = this.waitingFor;
-        this.waitingFor = undefined;
         try {
-            this.runInput(input, waitingFor);
+            const subsequent = this.runInput(input, waitingFor);
+            if (subsequent !== undefined) {
+                subsequent.onend = waitingFor.onend;
+            } else if (waitingFor.onend) {
+                waitingFor.onend();
+            }
+            this.waitingFor = subsequent;
         } catch (err) {
             console.warn("Error running input", err);
             this.waitingFor = waitingFor;

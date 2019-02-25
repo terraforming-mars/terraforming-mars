@@ -13,17 +13,17 @@ export class AICentral implements IProjectCard {
     public actionText: string = "Draw 2 cards";
     public text: string = "Requires 3 science tags to play. Decrease your energy production 1 step. Gain 1 victory point.";
     public description: string = "\"42\"";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         if (player.getTagCount(Tags.SCIENCE) < 3) {
-            return Promise.reject("Requires 3 science tags");
+            throw "Requires 3 science tags";
         }
         player.energyProduction--;
         player.victoryPoints++;
-        return Promise.resolve();
+        return undefined;
     }
-    public action(player: Player, game: Game): Promise<void> {
+    public action(player: Player, game: Game) {
         player.cardsInHand.push(game.dealer.getCards(1)[0]);
         player.cardsInHand.push(game.dealer.getCards(1)[0]);
-        return Promise.resolve();
+        return undefined;
     }
 }

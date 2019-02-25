@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { PlayerInput } from "../PlayerInput";
 
 export class Worms implements IProjectCard {
     public cost: number = 8;
@@ -12,11 +13,11 @@ export class Worms implements IProjectCard {
     public name: string = "Worms";
     public text: string = "Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.";
     public description: string = "Milling about in the soil, 'processing' it";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game): PlayerInput | undefined {
         if (game.getOxygenLevel() < 4) {
-            return Promise.reject("Requires 4% oxygen");
+            throw "Requires 4% oxygen";
         }
         player.plantProduction += Math.floor((player.getTagCount(Tags.MICROBES) + 1) / 2);
-        return Promise.resolve();
+        return undefined;
     }
 }

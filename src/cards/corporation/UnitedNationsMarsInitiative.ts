@@ -12,22 +12,22 @@ export class UnitedNationsMarsInitiative implements CorporationCard {
     public text: string = "";
     private generationStartRating: number = 20;
     public description: string = "UNMI is the organization carrying out the World Government's own terraforming projects. After the terraforming announcement, the UNMI got competition from different corporations, but is still a major force behind Mars' development.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         this.generationStartRating = player.terraformRating;
         game.addGenerationEndListener(() => {
             this.generationStartRating = player.terraformRating;
         });
-        return Promise.resolve();
+        return undefined;
     }
-    public action(player: Player, _game: Game): Promise<void> {
+    public action(player: Player, _game: Game) {
         if (player.terraformRating <= this.generationStartRating) {
-            return Promise.reject("Terraform rating must be raised to perform action");
+            throw "Terraform rating must be raised to perform action";
         }
         if (player.megaCredits < 3) {
-            return Promise.reject("Need 3 mega credits");
+            throw "Need 3 mega credits";
         }
         player.megaCredits -= 3;
         player.terraformRating++;
-        return Promise.resolve();
+        return undefined;
     }
 }

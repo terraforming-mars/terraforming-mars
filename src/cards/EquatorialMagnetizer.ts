@@ -13,16 +13,16 @@ export class EquatorialMagnetizer implements IProjectCard {
     public text: string = "";
     public actionText: string = "Decrease your energy production 1 step to increase your terraform rating 1 step.";
     public description: string = "Super-conducting wires encircling the globe to create a magnetic field.";
-    public play(_player: Player, _game: Game): Promise<void> {
-        return Promise.resolve();
+    public play(_player: Player, _game: Game) {
+        return undefined;
     }
-    public action(player: Player, _game: Game): Promise<void> {
+    public action(player: Player, _game: Game) {
         if (player.energyProduction < 1) {
-            return Promise.reject("Need energy production");
+            throw "Need energy production";
         }
         player.energyProduction--;
         player.terraformRating++;
-        return Promise.resolve();
+        return undefined;
     }
 }
 

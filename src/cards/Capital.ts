@@ -15,28 +15,25 @@ export class Capital implements IProjectCard {
     public name: string = "Capital";
     public text: string = "Requires 4 ocean tiles. Place a special city tile. Decrease your energy production 2 steps and increase your mega credit production 5 steps. Gain 1 additional victory point for each ocean tile adjacent to this city tile.";
     public description: string = "With its ideal placement and all its facilities, this is the true capital of Mars.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getOceansOnBoard() < 4) {
-            return Promise.reject("Requires 4 ocean tiles.");
+            throw "Requires 4 ocean tiles.";
         }
         if (player.energyProduction < 2) {
-            return Promise.reject("Requires 2 energy production.");
+            throw "Requires 2 energy production.";
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space for special city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
-                try { game.addCityTile(player, space.id); }
-                catch (err) { reject(err); return; }
-                player.energyProduction -= 2;
-                player.megaCreditProduction += 5;
-                game.addGameEndListener(() => {
-                    game.getAdjacentSpaces(space).forEach((s) => {
-                        if (s.tile !== undefined && s.tile.tileType === TileType.OCEAN) {
-                            player.victoryPoints++;
-                        }
-                    });
+        return new SelectSpace(this.name, "Select space for special city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
+            game.addCityTile(player, space.id);
+            player.energyProduction -= 2;
+            player.megaCreditProduction += 5;
+            game.addGameEndListener(() => {
+                game.getAdjacentSpaces(space).forEach((s) => {
+                    if (s.tile !== undefined && s.tile.tileType === TileType.OCEAN) {
+                        player.victoryPoints++;
+                    }
                 });
-                resolve();
-            }));
+            });
+            return undefined;
         });
     }
 }

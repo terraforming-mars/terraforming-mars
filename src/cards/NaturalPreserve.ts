@@ -19,18 +19,15 @@ export class NaturalPreserve implements IProjectCard {
         return game.getAvailableSpacesOnLand(player)
                 .filter((space) => game.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile === undefined).length === 0);
     }
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getOxygenLevel() > 4) {
-            return Promise.reject("Oxygen must be 4% or less.");
+            throw "Oxygen must be 4% or less.";
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space for special tile next to no other tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
-                try { game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL }); }
-                catch (err) { reject(err); return; }
+        return new SelectSpace(this.name, "Select space for special tile next to no other tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
+                game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
                 player.megaCreditProduction++;
                 player.victoryPoints++;
-                resolve();
-            }));
+                return undefined;
         });
     }
 }

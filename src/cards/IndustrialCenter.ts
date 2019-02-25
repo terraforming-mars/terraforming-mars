@@ -20,22 +20,19 @@ export class IndustrialCenter implements IProjectCard {
         return game.getAvailableSpacesOnLand(player)
                 .filter((space) => game.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.CITY).length > 0);
     }
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space adjacent to a city tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
-                try { game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL }); }
-                catch (err) { reject(err); return; }
-                resolve();
-            }));
+    public play(player: Player, game: Game) {
+        return new SelectSpace(this.name, "Select space adjacent to a city tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
+            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
+            return undefined;
         });
     }
-    public action(player: Player, _game: Game): Promise<void> {
+    public action(player: Player, _game: Game) {
         if (player.megaCredits < 7) {
-            return Promise.reject("Don't have 7 mega credit to spend");
+            throw "Don't have 7 mega credit to spend";
         }
         player.megaCredits -= 7;
         player.steelProduction++;
-        return Promise.resolve();
+        return undefined;
     }
 }
 

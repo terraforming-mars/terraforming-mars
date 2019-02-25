@@ -16,36 +16,33 @@ export class HiredRaiders implements IProjectCard {
     public name: string = "Hired Raiders";
     public text: string = "Steal up to 2 steel, or 3 mega credit from any player.";
     public description: string = "We have a better use for those resources.";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, _reject) => {
-            let selectedPlayer: Player;
-            let stealSteel: number = 0;
-            let stealMegaCredits: number = 0;
-            player.setWaitingFor(
-                new AndOptions(
-                    () => {
-                        if (stealSteel > 0) {
-                            const starting = selectedPlayer.steel;
-                            selectedPlayer.steel = Math.max(0, selectedPlayer.steel - 2);
-                            player.steel += starting - selectedPlayer.steel;
-                        }
-                        if (stealMegaCredits > 0) {
-                            const starting = selectedPlayer.megaCredits;
-                            selectedPlayer.megaCredits = Math.max(0, selectedPlayer.megaCredits - 3);
-                            player.megaCredits += starting - selectedPlayer.megaCredits;
-                        }
-                        resolve();
-                    },
-                    new SelectPlayer(this.name, game.getPlayers(), "Select player to steal from", (foundPlayer: Player) => {
-                        selectedPlayer = foundPlayer;
-                    }),
-                    new OrOptions(
-                        new SelectAmount(this.name, "Steal up to 2 steel", (amount: number) => { stealSteel = amount; }),
-                        new SelectAmount(this.name, "Steal up to 3 mega credit", (amount: number) => { stealMegaCredits = amount; })
-                    )
-                )
-            );
-        });
+    public play(player: Player, game: Game) {
+        let selectedPlayer: Player;
+        let stealSteel: number = 0;
+        let stealMegaCredits: number = 0;
+        return new AndOptions(
+            () => {
+                if (stealSteel > 0) {
+                    const starting = selectedPlayer.steel;
+                    selectedPlayer.steel = Math.max(0, selectedPlayer.steel - 2);
+                    player.steel += starting - selectedPlayer.steel;
+                }
+                if (stealMegaCredits > 0) {
+                    const starting = selectedPlayer.megaCredits;
+                    selectedPlayer.megaCredits = Math.max(0, selectedPlayer.megaCredits - 3);
+                    player.megaCredits += starting - selectedPlayer.megaCredits;
+                }
+                return undefined;
+            },
+            new SelectPlayer(this.name, game.getPlayers(), "Select player to steal from", (foundPlayer: Player) => {
+                selectedPlayer = foundPlayer;
+                return undefined;
+            }),
+            new OrOptions(
+                new SelectAmount(this.name, "Steal up to 2 steel", (amount: number) => { stealSteel = amount; return undefined; }),
+                new SelectAmount(this.name, "Steal up to 3 mega credit", (amount: number) => { stealMegaCredits = amount; return undefined; })
+            )
+        );
     }
 }
 

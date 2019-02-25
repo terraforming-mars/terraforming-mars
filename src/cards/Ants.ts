@@ -15,16 +15,16 @@ export class Ants implements IProjectCard {
     public actionText: string = "Remove 1 microbe from any card to add 1 to this card.";
     public text: string = "Requires 4% oxygen. Gain 1 victory point per 2 microbes on this card.";
     public description: string = "Although an important part of many ecosystems, ants can also be detrimental to other organisms.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getOxygenLevel() < 4) {
-            return Promise.reject("Requires 4% oxygen");
+            throw "Requires 4% oxygen";
         }
         game.addGameEndListener(() => {
             player.victoryPoints += Math.floor(this.microbes / 2);
         });
-        return Promise.resolve();
+        return undefined;
     }
-    public action(player: Player, game: Game): Promise<void> {
+    public action(_player: Player, game: Game) {
         const availableCards: Array<IProjectCard> = [];
         game.getPlayers().forEach((gamePlayer) => {
             gamePlayer.playedCards.forEach((playedCard) => {
@@ -34,14 +34,12 @@ export class Ants implements IProjectCard {
             });
         });
         if (availableCards.length === 0) {
-            return Promise.reject("No cards to remove microbes from");
+            throw "No cards to remove microbes from";
         }
-        return new Promise((resolve, _reject) => {
-            player.setWaitingFor(new SelectCard(this.name, "Select card to remove microbe", availableCards, (foundCards: Array<IProjectCard>) => {
-                foundCards[0]!.microbes!--;
-                this.microbes++;
-                resolve();
-            }));
+        return new SelectCard(this.name, "Select card to remove microbe", availableCards, (foundCards: Array<IProjectCard>) => {
+            foundCards[0]!.microbes!--;
+            this.microbes++;
+            return undefined;
         });
     }
 }

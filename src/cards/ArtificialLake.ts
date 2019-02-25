@@ -14,17 +14,14 @@ export class ArtificialLake implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires -6C or warmer. Place 1 ocean tile on an area not reserved for ocean. Gain 1 victory point.";
     public description: string = "Landscaping is as natural as terraforming.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getTemperature() < -6) {
-            return Promise.reject("Requires -6C or warmer");
+            throw "Requires -6C or warmer";
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select a land space to place an ocean", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
-                try { game.addOceanTile(player, foundSpace.id); }
-                catch (err) { reject(err); return; }
-                player.victoryPoints++;
-                resolve();
-            }));
+        return new SelectSpace(this.name, "Select a land space to place an ocean", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
+            game.addOceanTile(player, foundSpace.id);
+            player.victoryPoints++;
+            return undefined;
         });
     }
 }

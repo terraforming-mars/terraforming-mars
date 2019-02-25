@@ -14,18 +14,18 @@ export class PhysicsComplex implements IProjectCard {
     public text: string = "Gain 2 victory points for each science resource on this card.";
     public description: string = "This used to cause blackouts before the invention of supercomputers.";
     public scienceResources: number = 0;
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         game.addGameEndListener(() => {
             player.victoryPoints += 2 * this.scienceResources;
         });
-        return Promise.resolve();
+        return undefined;
     }
-    public action(player: Player, _game: Game): Promise<void> {
+    public action(player: Player, _game: Game) {
         if (player.energy < 6) {
-            return Promise.reject("Requires 6 energy");
+            throw "Requires 6 energy";
         }
         player.energy -= 6;
         this.scienceResources++;
-        return Promise.resolve();
+        return undefined;
     }
 }

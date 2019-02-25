@@ -7,6 +7,7 @@ import { Game } from "../Game";
 import { SelectCard } from "../inputs/SelectCard";
 import { SelectPlayer } from "../inputs/SelectPlayer";
 import { OrOptions } from "../inputs/OrOptions";
+import { PlayerInput } from "../PlayerInput";
 
 export class Virus implements IProjectCard {
     public cost: number = 1;
@@ -15,7 +16,7 @@ export class Virus implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Remove up to 2 animals or 5 plants from any player.";
     public description: string = "The virus is transient, changing from liquid to air-borne to blood transfusion.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game): PlayerInput | undefined {
         const allCardsWithResources: Array<IProjectCard> = [];
         game.getPlayers().forEach((o) => {
             if (o !== player) {
@@ -24,23 +25,18 @@ export class Virus implements IProjectCard {
                 });
             }
         });
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(
-                new OrOptions(
+        return new OrOptions(
                     new SelectCard(this.name, "Select card to remove 2 animals", allCardsWithResources, (foundCard: Array<IProjectCard>) => {
                         if (foundCard[0].animals === undefined) {
-                            reject("No animals on selected card");
-                            return;
+                            throw "No animals on selected card";
                         }
                         foundCard[0].animals = Math.max(0, foundCard[0].animals - 2);
-                        resolve();
+                        return undefined;
                     }),
                     new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 5 plants", (foundPlayer: Player) => {
                         foundPlayer.plants = Math.max(0, foundPlayer.plants - 5);
-                        resolve();
+                        return undefined;
                     })
-                )
-            );
-        });
+                );
     }
 }

@@ -12,12 +12,12 @@ export class CarbonateProcessing implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease your energy production 1 step and increase your heat production 3 steps.";
     public description: string = "Common minerals can be converted into carbon dioxide that increases the greenhouse effect.";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         if (player.energyProduction < 1) {
-            return Promise.reject("Must have energy production");
+            throw "Must have energy production";
         }
         player.energyProduction--;
         player.heatProduction += 3;
-        return Promise.resolve();
+        return undefined;
     }
 }

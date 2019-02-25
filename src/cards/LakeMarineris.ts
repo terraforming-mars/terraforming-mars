@@ -15,27 +15,23 @@ export class LakeMarineris implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires 0C or warmer. Place 2 ocean tiles. Gain 2 victory points.";
     public description: string = "Filling the Valles Marineris takes a lot of water";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getTemperature() < 0) {
-            return Promise.reject("Requires 0C or warmer");
+            throw "Requires 0C or warmer";
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(
-                new AndOptions(
-                    () => {
-                        player.victoryPoints += 2;
-                        resolve();
-                    },
-                    new SelectSpace(this.name, "Select space for 1st ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                        try { game.addOceanTile(player, space.id); }
-                        catch (err) { reject(err); return; }
-                    }),
-                    new SelectSpace(this.name, "Select space for 2nd ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                        try { game.addOceanTile(player, space.id); }
-                        catch (err) { reject(err); return; }
-                    })
-                )
-            );
-        });
+        return new AndOptions(
+            () => {
+                player.victoryPoints += 2;
+                return undefined;
+            },
+            new SelectSpace(this.name, "Select space for 1st ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+                game.addOceanTile(player, space.id);
+                return undefined;
+            }),
+            new SelectSpace(this.name, "Select space for 2nd ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+                game.addOceanTile(player, space.id);
+                return undefined;
+            })
+        );
     }
 }

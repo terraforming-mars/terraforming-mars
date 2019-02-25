@@ -18,18 +18,15 @@ export class UndergroundCity implements IProjectCard {
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.getSpaces(SpaceType.LAND).filter((space) => space.tile === undefined || (space.player === undefined || space.player === player));
     }
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (player.energyProduction < 2) {
-            return Promise.reject("Requires 2 energy production");
+            throw "Requires 2 energy production";
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space for city tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
-                try { game.addCityTile(player, foundSpace.id); }
-                catch (err) { reject(err); return; }
-                player.energyProduction -= 2;
-                player.steelProduction += 2;
-                resolve();
-            }));
+        return new SelectSpace(this.name, "Select space for city tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
+            game.addCityTile(player, foundSpace.id);
+            player.energyProduction -= 2;
+            player.steelProduction += 2;
+            return undefined;
         });
     }
 }

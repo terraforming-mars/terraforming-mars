@@ -12,12 +12,12 @@ export class RadSuits implements IProjectCard {
     public name: string = "Rad-Suits";
     public text: string = "Requires 2 cities in play. Increase your mega credit production 1 step.";
     public description: string = "New synthetic fabrics, able to protect from cosmic ratiation, are becoming high fashion";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getCitiesInPlay() < 2) {
-            return Promise.reject("Must have 2 cities in play");
+            throw "Must have 2 cities in play";
         }
         player.megaCreditProduction++;
         player.victoryPoints++;
-        return Promise.resolve();
+        return undefined;
     }
 }

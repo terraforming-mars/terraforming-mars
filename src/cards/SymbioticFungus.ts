@@ -14,19 +14,17 @@ export class SymbioticFungus implements IProjectCard {
     public text: string = "Requires -14C or warmer.";
     public description: string = "Creating mutually beneficial conditions";
     public actionText: string = "Add a microbe to ANOTHER card";
-    public play(_player: Player, game: Game): Promise<void> {
+    public play(_player: Player, game: Game) {
         if (game.getTemperature() < -14) {
-            return Promise.reject("Requires -14C or warmer");
+            throw "Requires -14C or warmer";
         }
-        return Promise.resolve();
+        return undefined;
     }
-    public action(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, _reject) => {
-            const availableCards = game.getOtherMicrobeCards(this);
-            player.setWaitingFor(new SelectCard(this.name, "Select card for microbe", availableCards, (foundCards: Array<IProjectCard>) => {
-                foundCards[0]!.microbes!++;
-                resolve();
-            }));
+    public action(_player: Player, game: Game) {
+        const availableCards = game.getOtherMicrobeCards(this);
+        return new SelectCard(this.name, "Select card for microbe", availableCards, (foundCards: Array<IProjectCard>) => {
+            foundCards[0]!.microbes!++;
+            return undefined;
         });
     }
 }

@@ -13,21 +13,17 @@ export class PowerSupplyConsortium implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires 2 power tags. Decrease any energy production 1 step and increase your own 1 step.";
     public description: string = "Dominating the energy market allows you to make hostile takeovers.";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            if (player.getTagCount(Tags.ENERGY) < 2) {
-                reject("Requires 2 power tags.");
-                return;
+    public play(player: Player, game: Game) {
+        if (player.getTagCount(Tags.ENERGY) < 2) {
+            throw "Requires 2 power tags.";
+        }
+        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease energy", (foundPlayer: Player) => {
+            if (foundPlayer.energyProduction < 1) {
+                throw "Player must have energy production to remove";
             }
-            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease energy", (foundPlayer: Player) => {
-                if (foundPlayer.energyProduction < 1) {
-                    reject("Player must have energy production to remove");
-                    return;
-                }
-                foundPlayer.energyProduction--;
-                player.energyProduction++;
-                resolve();
-            }));
+            foundPlayer.energyProduction--;
+            player.energyProduction++;
+            return undefined;
         });
     }
 }

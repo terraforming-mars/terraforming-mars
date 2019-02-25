@@ -13,15 +13,15 @@ export class DevelopmentCenter implements IProjectCard {
     public actionText: string = "Spend 1 energy to draw a card.";
     public text: string = "";
     public description: string = "Ensuring a constant influx of ideas.";
-    public play(_player: Player, _game: Game): Promise<void> {
-        return Promise.resolve();
+    public play(_player: Player, _game: Game) {
+        return undefined;
     }
-    public action(player: Player, game: Game): Promise<void> {
+    public action(player: Player, game: Game) {
         if (player.energy < 1) {
-            return Promise.reject("No energy to spend");
+            throw "No energy to spend";
         }
         player.energy--;
         player.cardsInHand.push(game.dealer.getCards(1)[0]);
-        return Promise.resolve();
+        return undefined;
     }
 }

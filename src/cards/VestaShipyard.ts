@@ -12,8 +12,8 @@ export class VestaShipyard implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your titanium production 1 step";
     public description: string = "The pride of the asteroid belt";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game): undefined {
         player.titaniumProduction++;
-        return Promise.resolve();
+        return undefined;
     }
 }

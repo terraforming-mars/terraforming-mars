@@ -12,9 +12,9 @@ export class SolarPower implements IProjectCard {
     public name: string = "Solar Power";
     public text: string = "Increase your energy production 1 step. Gain 1 victory point.";
     public description: string = "Perhaps the most readily available energy source on Mars.";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         player.energyProduction++;
         player.victoryPoints++;
-        return Promise.resolve();
+        return undefined;
     }
 }

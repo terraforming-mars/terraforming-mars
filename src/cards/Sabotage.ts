@@ -15,12 +15,10 @@ export class Sabotage implements IProjectCard {
     public name: string = "Sabotage";
     public text: string = "Remove up to 3 titanium from any player, or 4 steel, or 7 mega credit.";
     public description: string = "Nobody will know who did it.";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            let foundPlayer: Player;
-            let foundAmount: number;
-            player.setWaitingFor(
-                new AndOptions(
+    public play(_player: Player, game: Game) {
+        let foundPlayer: Player;
+        let foundAmount: number;
+        return new AndOptions(
                     () => {
                         if (foundAmount === 3) {
                             foundPlayer.titanium = Math.max(0, foundPlayer.titanium - 3);
@@ -29,20 +27,19 @@ export class Sabotage implements IProjectCard {
                         } else if (foundAmount === 7) {
                             foundPlayer.megaCredits = Math.max(0, foundPlayer.megaCredits - 7);
                         } else {
-                            reject("Unknown option");
-                            return;
+                            throw "Unknown option";
                         }
-                        resolve();
+                        return undefined;
                     },
                     new SelectPlayer(this.name, game.getPlayers(), "Select player to remove resources from", (selectedPlayer: Player) => {
                         foundPlayer = selectedPlayer;
+                        return undefined;
                     }),
                     new SelectAmount(this.name, "3 to remove titanium, 4 to remove steel, 7 to remove mega credit", (amount: number) => {
                         foundAmount = amount;
+                        return undefined;
                     })
-                )
-            );
-        });
+                );
     }
 }
 

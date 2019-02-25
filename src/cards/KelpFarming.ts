@@ -12,14 +12,14 @@ export class KelpFarming implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires 6 ocean tiles. Increase your mega credit production 2 steps and your plant production 3 steps. Gain 2 plants. Gain 1 victory point.";
     public description: string = "The newly formed oceans are very rich in minerals, perfect for food production.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getOceansOnBoard() < 6) {
-            return Promise.reject("Requires 6 ocean tiles.");
+            throw "Requires 6 ocean tiles.";
         }
         player.megaCreditProduction += 2;
         player.plantProduction += 3;
         player.plants += 2;
         player.victoryPoints++;
-        return Promise.resolve();
+        return undefined;
     }
 }

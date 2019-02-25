@@ -12,9 +12,9 @@ export class AdvancedAlloys implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "Each titanium you have is worth 1 mega credit extra. Each steel you have is worth 1 mega credit extra.";
     public description: string = "The latest advances in metallargy give you an edge in the competition.";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         player.titaniumValue++;
         player.steelValue++;
-        return Promise.resolve();
+        return undefined;
     }
 }

@@ -14,14 +14,14 @@ export class Tardigrades implements IProjectCard {
     public actionText: string = "Add 1 microbe to this card";
     public text: string = "Gain 1 victory point per 4 microbes on this card";
     public description: string = "These microscopic creatures can survive freezing, boiling, drying out, heavy radiation, and brute force";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         game.addGameEndListener(() => {
             player.victoryPoints += Math.floor(this.microbes / 4);
         });
-        return Promise.resolve();
+        return undefined;
     }
-    public action(_player: Player, _game: Game): Promise<void> {
+    public action(_player: Player, _game: Game) {
         this.microbes++;
-        return Promise.resolve();
+        return undefined;
     }
 }

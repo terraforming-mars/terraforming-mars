@@ -12,13 +12,13 @@ export class EarthOffice implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "When you play an earth tag, you pay 3 mega credit less for it.";
     public description: string = "Coordinating deliveries and homeworld support.";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         player.addCardDiscount((card) => {
             if (card.tags.indexOf(Tags.EARTH) !== -1) {
                 return 3;
             }
             return 0;
         });
-        return Promise.resolve();
+        return undefined;
     }
 }

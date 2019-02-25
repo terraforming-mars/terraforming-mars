@@ -15,26 +15,23 @@ export class Birds implements IProjectCard {
     public actionText: string = "Add an animal to this card.";
     public text: string = "Requires 13% oxygen. Decrease any plant production 2 steps. Gain 1 victory point for each animal on this card.";
     public description: string = "Bringing life to the skies.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getOxygenLevel() < 13) {
-            return Promise.reject("Requires 13% oxygen");
+            throw "Requires 13% oxygen";
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
-                if (foundPlayer.plantProduction < 2) {
-                    reject("Player needs at least 2 plant production");
-                    return;
-                }
-                foundPlayer.plantProduction -= 2;
-                game.addGameEndListener(() => {
-                    player.victoryPoints += this.animals;
-                });
-                resolve();
-            }));
+        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
+            if (foundPlayer.plantProduction < 2) {
+                throw "Player needs at least 2 plant production";
+            }
+            foundPlayer.plantProduction -= 2;
+            game.addGameEndListener(() => {
+                player.victoryPoints += this.animals;
+            });
+            return undefined;
         });
     }
-    public action(_player: Player, _game: Game): Promise<void> {
+    public action(_player: Player, _game: Game) {
         this.animals++;
-        return Promise.resolve();
+        return undefined;
     }
 }

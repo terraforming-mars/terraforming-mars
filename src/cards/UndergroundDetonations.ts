@@ -13,15 +13,15 @@ export class UndergroundDetonations implements IProjectCard {
     public actionText: string = "Spend 10 mega credit to increase your heat production 2 steps.";
     public description: string = "Radiation from the nuclear blast is shielded, but over time, we are still getting the heat.";
     public text: string = "";
-    public action(player: Player, _game: Game): Promise<void> {
+    public action(player: Player, _game: Game) {
         if (player.megaCredits < 10) {
-            return Promise.reject("Must have 10 mega credits to spend");
+            throw "Must have 10 mega credits to spend";
         }
         player.megaCredits -= 10;
         player.heatProduction += 2;
-        return Promise.resolve();
+        return undefined;
     }
-    public play(_player: Player, _game: Game): Promise<void> {
-        return Promise.resolve();
+    public play(_player: Player, _game: Game) {
+        return undefined;
     }
 }

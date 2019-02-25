@@ -13,15 +13,15 @@ export class MartianRails implements IProjectCard {
     public actionText: string = "Spend 1 energy to gain 1 mega credit for each city tile on mars.";
     public description: string = "Fast and cheap transportation for goods and guys";
     public text: string = "";
-    public play(_player: Player, _game: Game): Promise<void> {
-        return Promise.resolve();
+    public play(_player: Player, _game: Game) {
+        return undefined;
     }
-    public action(player: Player, game: Game): Promise<void> {
+    public action(player: Player, game: Game) {
         if (player.energy < 1) {
-            return Promise.reject("Must have energy");
+            throw "Must have energy";
         }
         player.energy--;
         player.megaCredits += game.getCitiesInPlayOnMars();
-        return Promise.resolve();
+        return undefined;
     }
 }

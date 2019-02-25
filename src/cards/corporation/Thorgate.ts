@@ -12,7 +12,7 @@ export class Thorgate implements CorporationCard {
     public text: string = "You start with 1 energy production";
     public effect: string = "When playing a power card or the standard project power plant, you pay 3 mega credits less for it.";
     public description: string = "As oil reserves ran out on Earth, Nordic ThorGate emerged as the new world leader in the energy field, with their cutting edge technology. Now that the colonies on Mars are growing, ThorGate leads the way in finding viable energy solutions.";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         player.addCardDiscount((card: IProjectCard) => {
             if (card.tags.indexOf(Tags.ENERGY) !== -1) {
                 return 3;
@@ -21,7 +21,7 @@ export class Thorgate implements CorporationCard {
         });
         player.powerPlantCost -= 3;
         player.energyProduction++;
-        return Promise.resolve();
+        return undefined;
     }
 }
  

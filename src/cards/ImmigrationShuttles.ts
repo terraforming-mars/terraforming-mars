@@ -12,11 +12,11 @@ export class ImmigrationShuttles implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your mega credit production 5 steps. Gain 1 victory point for every 3rd city in play";
     public description: string = "The new world attracts ever more immigrants from the old";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         player.megaCreditProduction += 5;
         game.addGameEndListener(() => {
             player.victoryPoints += Math.floor(game.getCitiesInPlay() / 3); 
         });
-        return Promise.resolve();
+        return undefined;
     }
 }

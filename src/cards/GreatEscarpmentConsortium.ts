@@ -13,16 +13,14 @@ export class GreatEscarpmentConsortium implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.";
     public description: string = "The border between the northern plains and the southern highlands is rich in minerals. Control it, and you will control the global mining business.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (player.steelProduction < 1) {
-            return Promise.reject("Requires that you have steel production.");
+            throw "Requires that you have steel production.";
         }
-        return new Promise((resolve, _reject) => {
-            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease steel production", (foundPlayer: Player) => {
-                foundPlayer.steelProduction = Math.max(0, foundPlayer.steelProduction - 1);
-                player.steelProduction++;
-                resolve();
-            }));
+        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease steel production", (foundPlayer: Player) => {
+            foundPlayer.steelProduction = Math.max(0, foundPlayer.steelProduction - 1);
+            player.steelProduction++;
+            return undefined;
         });
     }
 }

@@ -15,22 +15,20 @@ export class Fish implements IProjectCard {
     public actionText: string = "Add 1 animal to this card";
     public text: string = "Requires +2C or warmer. Decrease any plant production 1 step. Gain 1 victory point for each animal on this card.";
     public description: string = "Martian barracudas? Why not!";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getTemperature() < 2) {
-            return Promise.reject("Requires +2C or warmer");
+            throw "Requires +2C or warmer";
         }
-        return new Promise((resolve, _reject) => {
-            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
-                foundPlayer.plantProduction--;
-                game.addGameEndListener(() => {
-                    player.victoryPoints += this.animals;
-                });
-                resolve();
-            }));
+        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
+            foundPlayer.plantProduction--;
+            game.addGameEndListener(() => {
+                player.victoryPoints += this.animals;
+            });
+            return undefined;
         });
     }
-    public action(_player: Player, _game: Game): Promise<void> {
+    public action(_player: Player, _game: Game) {
         this.animals++;
-        return Promise.resolve();
+        return undefined;
     }
 }

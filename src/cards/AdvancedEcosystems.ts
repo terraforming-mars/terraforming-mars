@@ -12,13 +12,13 @@ export class AdvancedEcosystems implements IProjectCard {
     public name: string = "Advanced Ecosystems";
     public text: string = "Requires a plant tag, a microbe tag, and an animal tag. Gain 3 victory points.";
     public description: string = "Constructing functional, dynamic ecosystems requires many ingredients";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         if (player.getTagCount(Tags.PLANT) === 0 ||
             player.getTagCount(Tags.MICROBES) === 0 ||
             player.getTagCount(Tags.ANIMAL) === 0) {
-            return Promise.reject("Requires a plant tag, a microbe tag, and an animal tag");
+            throw "Requires a plant tag, a microbe tag, and an animal tag";
         }
         player.victoryPoints += 3;
-        return Promise.resolve();
+        return undefined;
     }
 }

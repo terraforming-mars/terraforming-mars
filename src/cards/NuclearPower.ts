@@ -12,9 +12,9 @@ export class NuclearPower implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your mega credit production 2 steps and increase your energy production 3 steps";
     public description: string = "A simple way to satisfy your energy needs";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         player.megaCreditProduction += 2;
         player.energyProduction += 3;
-        return Promise.resolve();
+        return undefined;
     }
 }

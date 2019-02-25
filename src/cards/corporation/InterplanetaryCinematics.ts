@@ -13,13 +13,13 @@ export class InterplanetaryCinematics implements CorporationCard {
     public text: string = "You start with 20 steel";
     public effect: string = "Each time you play an event, you gain 2 mega credits";
     public description: string = "Finding funding where nations struggles, IC, initiated the colonization of Mars by turning the process into a soap opera infused with plenty of advertising. With the media's attention and a head start in colonization, IC sets out to terraform.";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         player.addCardPlayedHandler((card: IProjectCard) => {
             if (card.cardType === CardType.EVENT) {
                 player.megaCredits += 2;
             }
         });
         player.steel = 20;
-        return Promise.resolve();
+        return undefined;
     }
 }

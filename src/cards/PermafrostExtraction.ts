@@ -14,17 +14,13 @@ export class PermafrostExtraction implements IProjectCard {
     public name: string = "Permafrost Extraction";
     public text: string = "Requires -8C or warmer. Place 1 ocean tile.";
     public description: string = "Thawing the subsurface";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            if (game.getTemperature() < -8) {
-                reject("Temperature must be -8C or warmer");
-                return;
-            }
-            player.setWaitingFor(new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                try { game.addOceanTile(player, space.id); }
-                catch (err) { reject(err); return; }
-                resolve();
-            }));
+    public play(player: Player, game: Game) {
+        if (game.getTemperature() < -8) {
+            throw "Temperature must be -8C or warmer";
+        }
+        return new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+            game.addOceanTile(player, space.id);
+            return undefined;
         });
     }
 }

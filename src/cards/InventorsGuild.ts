@@ -16,29 +16,24 @@ export class InventorsGuild implements IProjectCard {
     public actionText = "Look at the top card and either buy it or discard it";
     public description: string = "When great minds meet, new ideas abount";
     public text: string = "";
-    public play(_player: Player, _game: Game): Promise<void> {
-        return Promise.resolve();
+    public play(_player: Player, _game: Game) {
+        return undefined;
     }
-    public action(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            const topCard = game.dealer.getCards(1)[0];
-            player.setWaitingFor(
-                new OrOptions(
+    public action(player: Player, game: Game) {
+        const topCard = game.dealer.getCards(1)[0];
+        return new OrOptions(
                     new SelectCard(this.name, "Buy card", [topCard], (_card: Array<IProjectCard>) => {
                         if (player.megaCredits < 3) {
-                            reject("Can not afford to buy card");
-                        } else {
-                            player.megaCredits -= 3;
-                            player.cardsInHand.push(topCard);
-                            resolve();
+                            throw "Can not afford to buy card";
                         }
+                        player.megaCredits -= 3;
+                        player.cardsInHand.push(topCard);
+                        return undefined;
                     }),
                     new SelectOption(this.name, "Discard it", () => {
                         game.dealer.discard(topCard);
-                        resolve();
+                        return undefined;
                     })
                 )
-            );
-        });
     }
 }

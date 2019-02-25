@@ -4,11 +4,12 @@ import { PlayerInputTypes } from "../PlayerInputTypes";
 
 export class SelectCard<T> implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_CARD;
+    public onend?: () => void;
     constructor(
         public title: string,
         public message: string,
         public cards: Array<T>,
-        public cb: (cards: Array<T>) => void,
+        public cb: (cards: Array<T>) => PlayerInput | undefined,
         public maxCardsToSelect: number = 1,
         public minCardsToSelect: number = 1) {
 

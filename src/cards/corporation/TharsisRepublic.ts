@@ -14,20 +14,13 @@ export class TharsisRepublic implements CorporationCard {
     public text: string = "As your first action in the game, place a city tile.";
     public effect: string = "When any city tile is placed on mars, increase your mega credit production 1 step. When you place a city tile, gain 3 mega credits.";
     public description: string = "With the first big city came a social community that could not be controlled by the corporations. Determined to have an elected leader, workers and staff from all corporations formed Tharsis Republic.";
-    public initialAction(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space on mars for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
-                try { game.addCityTile(player, space.id); }
-                catch (err) {
-                    console.warn("Error performing initial action.", err);
-                    reject();
-                    return;
-                }
-                resolve();
-            }));
+    public initialAction(player: Player, game: Game) {
+        return new SelectSpace(this.name, "Select space on mars for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
+            game.addCityTile(player, space.id);
+            return undefined;
         });
     }
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         game.addCityTilePlacedListener((space: ISpace) => {
             if (space.player === player) {
                 player.megaCredits += 3;
@@ -36,6 +29,6 @@ export class TharsisRepublic implements CorporationCard {
                 player.megaCreditProduction++;
             }
         });
-        return Promise.resolve();
+        return undefined;
     }
 }

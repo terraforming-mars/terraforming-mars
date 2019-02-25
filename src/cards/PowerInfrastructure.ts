@@ -13,25 +13,21 @@ export class PowerInfrastructure implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
-    public play(_player: Player, _game: Game): Promise<void> {
-        return Promise.resolve();
+    public play(_player: Player, _game: Game) {
+        return undefined;
     }
     public actionText: string = "Spend any amount of energy to gain that many mega credit";
-    public action(player: Player, _game: Game): Promise<void> {
+    public action(player: Player, _game: Game) {
         if (player.energy === 0) {
-            return Promise.reject("Have no energy to spend");
+            throw "Have no energy to spend";
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectAmount(this.name, "Select energy to spend", (amount: number) => {
-                if (amount > player.energy) {
-                    reject("You don't have that much energy");
-                } else {
-                    player.energy -= amount;
-                    player.megaCredits += amount;
-                    resolve();
-                }
-            }));
+        return new SelectAmount(this.name, "Select energy to spend", (amount: number) => {
+            if (amount > player.energy) {
+                throw "You don't have that much energy";
+            }
+            player.energy -= amount;
+            player.megaCredits += amount;
+            return undefined;
         });
     }
-
 }

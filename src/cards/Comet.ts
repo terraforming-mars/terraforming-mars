@@ -16,22 +16,19 @@ export class Comet implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Raise temperature 1 step and place an ocean tile. Remove up to 3 plants from any player.";
     public description: string = "Prepare to be catered!";
-    public play(player: Player, game: Game): Promise<void> {
-        return game.increaseTemperature(player).then(() => {
-            return new Promise<void>((resolve, reject) => {
-                player.setWaitingFor(
-                    new AndOptions(
-                        () => { resolve(); },
+    public play(player: Player, game: Game) {
+        return new AndOptions(
+                        () => {
+                            return game.increaseTemperature(player, 1);
+                        },
                         new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                            try { game.addOceanTile(player, space.id); }
-                            catch (err) { reject(err); }
+                            game.addOceanTile(player, space.id);
+                            return undefined;
                         }),
                         new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 3 plants", (foundPlayer: Player) => {
                             foundPlayer.plants = Math.max(0, foundPlayer.plants - 3);
+                            return undefined;
                         })
-                    )
-                );
-            });
-        });
+                    );
     }
 }

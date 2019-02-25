@@ -14,17 +14,12 @@ export class Plantation implements IProjectCard {
     public name: string = "Plantation";
     public text: string = "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.";
     public description: string = "By focusing on a limited area, helpful measures can be taken to improve local conditions for plant life";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            if (player.getTagCount(Tags.SCIENCE) < 2) {
-                reject("Requires 2 science tags to play");
-                return;
-            }
-            player.setWaitingFor(new SelectSpace(this.name, "Select space for greenery tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
-                try { game.addGreenery(player, space.id); }
-                catch (err) { reject(err); return; }
-                resolve();
-            }));
+    public play(player: Player, game: Game) {
+        if (player.getTagCount(Tags.SCIENCE) < 2) {
+            throw "Requires 2 science tags to play";
+        }
+        return new SelectSpace(this.name, "Select space for greenery tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
+            return game.addGreenery(player, space.id);
         });
     }
 }

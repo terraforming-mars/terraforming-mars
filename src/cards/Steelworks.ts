@@ -13,16 +13,15 @@ export class Steelworks implements IProjectCard {
     public text: string = "";
     public actionText: string = "Spend 4 energy to gain 2 steel and increase oxygen 1 step.";
     public description: string = "Turning the soil into stee and oxygen sounds good. It just takes a lot of energy.";
-    public action(player: Player, game: Game): Promise<void> {
+    public action(player: Player, game: Game) {
         if (player.energy < 4) {
-            return Promise.reject("Must have 4 energy to spend");
+            throw "Must have 4 energy to spend";
         }
-        return game.increaseOxygenLevel(player).then(function () {
-            player.energy -= 4;
-            player.steel += 2;
-        });
+        player.energy -= 4;
+        player.steel += 2;
+        return game.increaseOxygenLevel(player, 1);
     }
-    public play(_player: Player, _game: Game): Promise<void> {
-        return Promise.resolve();
+    public play(_player: Player, _game: Game) {
+        return undefined;
     }
 }

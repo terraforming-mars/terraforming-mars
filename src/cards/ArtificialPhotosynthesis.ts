@@ -14,20 +14,16 @@ export class ArtificialPhotosynthesis implements IProjectCard {
     public name: string = "Artficial Photosynthesis";
     public text: string = "Increase your plant production 1 step or your energy production 2 steps.";
     public description: string = "Artificial photosynthesis was achieved chemically by prof Akermark et. al. in 2021. Its application to terraforming remains to be seen.";
-    public play(player: Player, _game: Game): Promise<void> {
-        return new Promise((resolve, _reject) => {
-            player.setWaitingFor(
-                new OrOptions(
+    public play(player: Player, _game: Game) {
+        return new OrOptions(
                     new SelectOption(this.name, "Increase your plant production 1 step", () => {
                         player.plantProduction++;
-                        resolve();
+                        return undefined;
                     }),
                     new SelectOption(this.name, "Increase your energy production 2 steps", () => {
                         player.energyProduction += 2;
-                        resolve();
+                        return undefined;
                     })
-                )
-            );
-        });
+                );
     }
 }

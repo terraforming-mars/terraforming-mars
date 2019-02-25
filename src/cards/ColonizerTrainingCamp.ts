@@ -12,11 +12,11 @@ export class ColonizerTrainingCamp implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Oxygen must be 5% or less. Gain 2 victory points.";
     public description: string = "Preparing for settlement of the moons of Jupiter.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getOxygenLevel() > 5) {
-            return Promise.reject("Oxygen must be 5% or less.");
+            throw "Oxygen must be 5% or less.";
         }
         player.victoryPoints += 2;
-        return Promise.resolve();
+        return undefined;
     }
 }

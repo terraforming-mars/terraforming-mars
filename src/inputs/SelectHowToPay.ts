@@ -11,7 +11,7 @@ export class SelectHowToPay implements PlayerInput {
         public canUseSteel: boolean,
         public canUseTitanium: boolean,
         public canUseHeat: boolean,
-        public cb: (howToPay: HowToPay) => void) {
+        public cb: (howToPay: HowToPay) => PlayerInput | undefined) {
 
     }
 }

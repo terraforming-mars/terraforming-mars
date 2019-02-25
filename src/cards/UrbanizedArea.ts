@@ -22,18 +22,15 @@ export class UrbanizedArea implements IProjectCard {
                     return adjacentSpaces.filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.CITY).length >= 2;
                 });
     }
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (player.energyProduction < 1) {
-            return Promise.reject("Must have energy production");
+            throw "Must have energy production";
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space next to at least 2 other city tiles", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
-                try { game.addCityTile(player, foundSpace.id); }
-                catch (err) { reject(err); return; }
-                player.energyProduction--;
-                player.megaCreditProduction += 2;
-                resolve();
-            }));
+        return new SelectSpace(this.name, "Select space next to at least 2 other city tiles", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
+            game.addCityTile(player, foundSpace.id);
+            player.energyProduction--;
+            player.megaCreditProduction += 2;
+            return undefined;
         });
     }
 }

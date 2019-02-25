@@ -16,29 +16,23 @@ export class RegolithEaters implements IProjectCard {
     public actionText: string = "Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.";
     public description: string = "Living on the rocks and excreting oxygen.";
     public microbes: number = 0;
-    public play(_player: Player, _game: Game): Promise<void> {
-        return Promise.resolve();
+    public play(_player: Player, _game: Game) {
+        return undefined;
     }
-    public action(player: Player, game: Game): Promise<void> {
+    public action(player: Player, game: Game) {
         if (this.microbes < 2) {
             this.microbes++;
-            return Promise.resolve();
+            return undefined;
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(
-                new OrOptions(
+        return new OrOptions(
                     new SelectOption(this.name, "Add 1 microbe to this card", () => {
                         this.microbes++;
-                        resolve();
+                        return undefined;
                     }),
                     new SelectOption(this.name, "Remove 2 microbes to raise oxygen level 1 step", () => {
-                        game.increaseOxygenLevel(player).then(() => {
-                            this.microbes -= 2;
-                            resolve();
-                        }).catch((err) => reject(err));
+                        this.microbes -= 2;
+                        return game.increaseOxygenLevel(player, 1);
                     })
-                )
-            );
-        });
+                );
     }
 }

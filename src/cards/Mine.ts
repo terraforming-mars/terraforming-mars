@@ -12,8 +12,8 @@ export class Mine implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your steel production 1 step";
     public description: string = "Mars' main export industry also supplies the planet with construction materials";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         player.steelProduction++;
-        return Promise.resolve();
+        return undefined;
     }
 }

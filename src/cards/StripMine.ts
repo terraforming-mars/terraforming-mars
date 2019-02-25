@@ -12,16 +12,13 @@ export class StripMine implements IProjectCard {
     public name: string = "Strip Mine";
     public text: string = "Decrease your energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.";
     public description: string = "It is not exactly environmentally friendly to just dig up the suface, but it can be profitable.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (player.energyProduction < 2) {
-            return Promise.reject("Must have energy to remove");
+            throw "Must have energy to remove";
         }
-        return game.increaseOxygenLevel(player)
-                    .then(function () { return game.increaseOxygenLevel(player); })
-                    .then(function () {
-                        player.energyProduction -= 2;
-                        player.steelProduction += 2;
-                        player.titaniumProduction++;
-                    });
+        player.energyProduction -= 2;
+        player.steelProduction += 2;
+        player.titaniumProduction++;
+        return game.increaseOxygenLevel(player, 2);
     }
 }

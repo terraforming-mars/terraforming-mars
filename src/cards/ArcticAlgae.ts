@@ -12,14 +12,14 @@ export class ArcticAlgae implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "It must be -12C or colder to play. Gain 1 plant. When anyone places an ocean tile, gain 2 plants.";
     public description: string = "Suitable for freezing temperatures.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getTemperature() > -12) {
-            return Promise.reject("It must be -12C or colder to play");
+            throw "It must be -12C or colder to play";
         }
         player.plants++;
         game.addOceanTilePlacedListener(() => {
             player.plants += 2;
         });
-        return Promise.resolve();
+        return undefined;
     }
 }

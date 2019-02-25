@@ -5,7 +5,9 @@ import { IProjectCard } from "../cards/IProjectCard";
 
 export class OrOptions implements PlayerInput {
     public card?: IProjectCard;
-    public cb: () => void;
+    public cb(): undefined {
+        return undefined;
+    }
     public title: string = "Select one option";
     public options: Array<PlayerInput>;
     public inputType: PlayerInputTypes = PlayerInputTypes.OR_OPTIONS;
@@ -13,8 +15,7 @@ export class OrOptions implements PlayerInput {
         ...options: Array<PlayerInput>
     ) {
         this.options = options;
-        this.cb = function() {};
-    } 
+    }
     public get message(): string {
         if (this.options.length) {
             return this.options[0].message;

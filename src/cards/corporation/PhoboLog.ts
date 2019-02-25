@@ -11,9 +11,9 @@ export class PhoboLog implements CorporationCard {
     public text: string = "You start with 10 titanium.";
     public effect: string = "Your titanium resources are each worth 1 mega credit extra.";
     public description: string = "Aiming to be the leader in space solutions for the Mars era, PhoboLog acquired several national space programs. This allowed them access to much existing infrastructure and technology, and they are not going to let that advantage be wasted.";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         player.titanium = 10;
         player.titaniumValue++;
-        return Promise.resolve();
+        return undefined;
     }
 }

@@ -14,23 +14,20 @@ export class DomedCrater implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Oxygen must be 7% or less. Gain 3 plants and place a city tile. Decrease your energy production 1 step and increase mega credit production 3 steps. Gain a victory point.";
     public description: string = "A spacious area for a great city.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         if (game.getOxygenLevel() > 7) {
-            return Promise.reject("Oxygen must be 7% or less");
+            throw "Oxygen must be 7% or less";
         }
         if (player.energyProduction < 1) {
-            return Promise.reject("Need energy production");
+            throw "Need energy production";
         }
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select space for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
-                try { game.addCityTile(player, space.id); }
-                catch (err) { reject(err); return; }
-                player.plants += 3;
-                player.energyProduction--;
-                player.megaCreditProduction += 3;
-                player.victoryPoints++;
-                resolve();
-            }));
+        return new SelectSpace(this.name, "Select space for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
+            game.addCityTile(player, space.id);
+            player.plants += 3;
+            player.energyProduction--;
+            player.megaCreditProduction += 3;
+            player.victoryPoints++;
+            return undefined;
         });
     }
 }

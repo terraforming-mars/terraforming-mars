@@ -15,29 +15,22 @@ export class LocalHeatTrapping implements IProjectCard {
     public name: string = "Local Heat Trapping";
     public text: string = "Spend 5 heat to either gain 4 plants, or to add 2 animals to ANOTHER card.";
     public description: string = "Life can benefit from local hot spots";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            if (player.heat < 5) {
-                reject("Not enough heat");
-                return;
-            }
-            const otherAnimalCards: Array<IProjectCard> = game.getOtherAnimalCards(this);
-            player.setWaitingFor(
-                new OrOptions(
-                    new SelectOption(this.name, "Gain 4 plants", () => {
-                        player.plants += 4;
-                        player.heat -= 5;
-                        resolve();
-                    }),
-                    new SelectCard(this.name, "Select card to add 2 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => {
-                        try {
-                            player.addAnimalsToCard(foundCards[0], 2);
-                        } catch (err) { reject(err); return; }
-                        player.heat -= 5;
-                        resolve();
-                    })
-                )
-            );
-        });
+    public play(player: Player, game: Game) {
+        if (player.heat < 5) {
+            throw "Not enough heat";
+        }
+        const otherAnimalCards: Array<IProjectCard> = game.getOtherAnimalCards(this);
+        return new OrOptions(
+            new SelectOption(this.name, "Gain 4 plants", () => {
+                player.plants += 4;
+                player.heat -= 5;
+                return undefined;
+            }),
+            new SelectCard(this.name, "Select card to add 2 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => {
+                player.addAnimalsToCard(foundCards[0], 2);
+                player.heat -= 5;
+                return undefined;
+            })
+        );
     }
 }

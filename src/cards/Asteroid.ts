@@ -13,17 +13,11 @@ export class Asteroid implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player";
     public description: string = "What are those plants doing in our impact zone?";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease", (foundPlayer: Player) => {
-                game.increaseTemperature(player).then(function () {
-                    foundPlayer.plants = Math.max(0, foundPlayer.plants - 3);
-                    player.titanium += 2;
-                    resolve();
-                }).catch((err: string) => {
-                    reject(err);
-                });
-            }));
+    public play(player: Player, game: Game) {
+        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease", (foundPlayer: Player) => {
+            foundPlayer.plants = Math.max(0, foundPlayer.plants - 3);
+            player.titanium += 2;
+            return game.increaseTemperature(player, 1);
         });
     }
 }

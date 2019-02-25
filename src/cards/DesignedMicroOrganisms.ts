@@ -12,14 +12,11 @@ export class DesignedMicroOrganisms implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "It must be -14C or colder. Increase your plant production 2 steps";
     public description: string = "Specializing in extremely cold conditions";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            if (game.getTemperature() > -14) {
-                reject("It must be -14C or colder");
-                return;
-            }
-            player.plantProduction += 2;
-            resolve();
-        });
+    public play(player: Player, game: Game) {
+        if (game.getTemperature() > -14) {
+            throw "It must be -14C or colder";
+        }
+        player.plantProduction += 2;
+        return undefined;
     }
 }

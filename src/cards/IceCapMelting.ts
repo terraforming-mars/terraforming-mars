@@ -14,17 +14,13 @@ export class IceCapMelting implements IProjectCard {
     public name: string = "Ice Cap Melting";
     public text: string = "Requires +2C or warmer. Place 1 ocean tile.";
     public description: string = "Getting the water back from the poles.";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            if (game.getTemperature() < 2) {
-                reject("not warm enough, must be +2C or warmer");
-                return;
-            }
-            player.setWaitingFor(new SelectSpace(this.name, "Select space for ocean", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                try { game.addOceanTile(player, space.id); }
-                catch (err) { reject(err); return; }
-                resolve();
-            }));
+    public play(player: Player, game: Game) {
+        if (game.getTemperature() < 2) {
+            throw "not warm enough, must be +2C or warmer";
+        }
+        return new SelectSpace(this.name, "Select space for ocean", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+            game.addOceanTile(player, space.id);
+            return undefined;
         });
     }
 }

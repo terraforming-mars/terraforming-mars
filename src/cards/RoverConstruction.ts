@@ -12,11 +12,11 @@ export class RoverConstruction implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "Gain 1 victory point. When any city tile is placed, gain 2 mega credit.";
     public description: string = "Providing safe transport vehicles.";
-    public play(player: Player, game: Game): Promise<void> {
+    public play(player: Player, game: Game) {
         player.victoryPoints++;
         game.addCityTilePlacedListener(() => {
             player.megaCredits += 2;
         });
-        return Promise.resolve();
+        return undefined;
     }
 }

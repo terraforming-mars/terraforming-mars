@@ -12,9 +12,9 @@ export class LagrangeObservatory implements IProjectCard {
     public name: string = "Lagrange Observatory";
     public text: string = "Draw 1 card.";
     public description: string = "In a stationary orbit far from the planet, enabling very precise measurements.";
-    public play(player: Player, game: Game): Promise<void> {
-        game.dealer.getCards(1).forEach((card: IProjectCard) => player.cardsInHand.push(card));
+    public play(player: Player, game: Game) {
+        player.cardsInHand.push(game.dealer.getCards(1)[0]);
         player.victoryPoints++;
-        return Promise.resolve();
+        return undefined;
     }
 }

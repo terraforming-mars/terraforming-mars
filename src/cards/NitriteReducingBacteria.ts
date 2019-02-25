@@ -16,29 +16,24 @@ export class NitriteReducingBacteria implements IProjectCard {
     public text: string = "Add 3 microbes to this card.";
     public actionText: string = "Add 1 microbe to this card, or remove 3 microbes to increase your terraform rating 1 step.";
     public description: string = "Making use of the nitrites in the ground to release nitrogen into the atmosphere.";
-    public play(_player: Player, _game: Game): Promise<void> {
+    public play(_player: Player, _game: Game) {
         this.microbes += 3;
-        return Promise.resolve();
+        return undefined;
     }
-    public action(player: Player, _game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(
-                new OrOptions(
-                    new SelectOption(this.name, "Add 1 microbe to this card", () => {
-                        this.microbes++;
-                        resolve();
-                    }),
-                    new SelectOption(this.name, "Remove 3 microbes to increase your terraform rating 1 step", () => {
-                        if (this.microbes < 3) {
-                            reject("Need 3 microbes to remove");
-                        } else {
-                            this.microbes -= 3;
-                            player.terraformRating++;
-                            resolve();
-                        }
-                    })
-                )
-            );
-        });
+    public action(player: Player, _game: Game) {
+        return new OrOptions(
+            new SelectOption(this.name, "Add 1 microbe to this card", () => {
+                this.microbes++;
+                return undefined;
+            }),
+            new SelectOption(this.name, "Remove 3 microbes to increase your terraform rating 1 step", () => {
+                if (this.microbes < 3) {
+                    throw "Need 3 microbes to remove";
+                }
+                this.microbes -= 3;
+                player.terraformRating++;
+                return undefined;
+            })
+        );
     }
 }

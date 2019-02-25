@@ -12,8 +12,8 @@ export class ImportOfAdvancedGHG implements IProjectCard {
     public name: string = "Import of Advanced GHG";
     public text: string = "Increase your heat production 2 steps.";
     public description: string = "Greenhouse gases (GHG) with improved effect.";
-    public play(player: Player, _game: Game): Promise<void> {
+    public play(player: Player, _game: Game) {
         player.heatProduction += 2;
-        return Promise.resolve();
+        return undefined;
     }
 }

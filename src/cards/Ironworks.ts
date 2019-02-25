@@ -13,16 +13,15 @@ export class Ironworks implements IProjectCard {
     public actionText: string = "Spend 4 energy to gain 1 steel and increase oxygen 1 step";
     public text: string = "";
     public description: string = "Electrolysis of Martian soil yields both iron and oxygen, making it an important part of terraforming.";
-    public play(_player: Player, _game: Game): Promise<void> {
-        return Promise.resolve();
+    public play(_player: Player, _game: Game) {
+        return undefined;
     }
-    public action(player: Player, game: Game): Promise<void> {
+    public action(player: Player, game: Game) {
         if (player.energy < 4) {
-            return Promise.reject("Need 4 energy to spend");
+            throw "Need 4 energy to spend";
         }
-        return game.increaseOxygenLevel(player).then(function () {
-            player.energy -= 4;
-            player.steel++;
-        });
+        player.energy -= 4;
+        player.steel++;
+        return game.increaseOxygenLevel(player, 1);
     }
 }

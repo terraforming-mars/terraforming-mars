@@ -14,18 +14,11 @@ export class TowingAComet implements IProjectCard {
     public name: string = "Towing A Comet";
     public text: string = "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.";
     public description: string = "By aerobraking it we get its contents without the impact.";
-    public play(player: Player, game: Game): Promise<void> {
-        return new Promise((resolve, reject) => {
-            player.setWaitingFor(new SelectSpace(this.name, "Select place for oean", game.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
-                try { game.addOceanTile(player, foundSpace.id); }
-                catch (err) { reject(err); return; }
-                game.increaseOxygenLevel(player).then(function () {
-                    player.plants += 2;
-                    resolve();
-                }).catch((err: string) => {
-                    reject(err);
-                });
-            }));
+    public play(player: Player, game: Game) {
+        return new SelectSpace(this.name, "Select place for oean", game.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
+            game.addOceanTile(player, foundSpace.id)
+            player.plants += 2;
+            return game.increaseOxygenLevel(player, 1);
         });
     }
 }

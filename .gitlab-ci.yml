@@ -1,0 +1,6 @@
+image: node:latest
+
+all_tests:
+  script:
+   - npm install
+   - npm run test

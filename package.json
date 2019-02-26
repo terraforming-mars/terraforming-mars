@@ -16,7 +16,7 @@
   },
   "nyc": {
     "exclude": [
-        "dist/tests/**.spec.js"
+      "dist/tests/**.spec.js"
     ]
   },
   "scripts": {

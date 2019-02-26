@@ -1,21 +1,26 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "lib": ["dom", "ES6"], 
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "strict": true,
-    "removeComments": true,
-    "preserveConstEnums": true,
-    "outDir": "dist",
-    "sourceMap": true,
-    "target": "es6",
-    "types": ["node", "mocha", "chai"]
-  },
+    "compilerOptions": {
+        "module": "commonjs",
+        "lib": ["dom", "ES6"], 
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "strict": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "outDir": "dist",
+        "sourceMap": true,
+        "target": "es6",
+        "types": ["node", "mocha", "chai"]
+    },
     "files": [
         "tests/cards/AICentral.spec.ts",
+        "tests/cards/AcquiredCompany.spec.ts",
+        "tests/cards/AdaptationTechnology.spec.ts",
+        "tests/cards/AdaptedLichen.spec.ts",
+        "tests/cards/AdvancedAlloys.spec.ts",
+        "tests/cards/AdvancedEcosystems.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

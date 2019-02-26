@@ -1,6 +1,11 @@
 image: node:latest
 
+build:
+  script:
+   - npm install
+   - npm run build
+
 all_tests:
   script:
    - npm install
-   - npm run test
+   - npm run cover

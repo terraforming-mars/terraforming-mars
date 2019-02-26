@@ -15,10 +15,10 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
     public description: string = "Ammonia is a greenhouse gas, as well as being a convenient nitrogen source for organisms.";
     public play(player: Player, game: Game) {
         const cardsToPick = game.getOtherMicrobeCards(this);
+        player.heatProduction += 3;
+        player.plantProduction++;
         return new SelectCard(this.name, "Select card to add 2 microbes", cardsToPick, (foundCards: Array<IProjectCard>) => {
             foundCards[0]!.microbes! += 2;
-            player.heatProduction += 3;
-            player.plantProduction++;
             return undefined;
         });
     }

@@ -21,6 +21,7 @@
         "tests/cards/AdaptedLichen.spec.ts",
         "tests/cards/AdvancedAlloys.spec.ts",
         "tests/cards/AdvancedEcosystems.spec.ts",
+        "tests/cards/AerobrakedAmmoniaAsteroid.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

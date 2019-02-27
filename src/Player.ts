@@ -56,7 +56,7 @@ export class Player {
     public cardsInHand: Array<IProjectCard> = [];
     public playedCards: Array<IProjectCard> = [];
     private actionsTakenThisRound: number = 0;
-    private cardDiscounts: Array<CardDiscount> = [];
+    public cardDiscounts: Array<CardDiscount> = [];
     public terraformRating: number = 20;
     public victoryPoints: number = 0;
     public addAnimalsToCard(card: IProjectCard, count: number): void {
@@ -210,6 +210,7 @@ export class Player {
             }
             let payMethod: HowToPay = {
                 steel: 0,
+                heat: 0,
                 titanium: 0,
                 megaCredits: 0
             };

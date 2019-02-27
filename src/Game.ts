@@ -296,7 +296,7 @@ export class Game {
     public addOceanTilePlacedListener(listener: Function): void {
         this.onOceanTilePlaced.push(listener);
     }
-    private onGameEnd: Array<Function> = [];
+    public onGameEnd: Array<Function> = [];
     private onGenerationEnd: Array<Function> = [];
 
     private generation: number = 1;

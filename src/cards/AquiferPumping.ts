@@ -4,10 +4,11 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { SelectSpace } from "../inputs/SelectSpace";
-import { SelectAmount } from "../inputs/SelectAmount";
+import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { AndOptions } from "../inputs/AndOptions";
 import { ISpace } from "../ISpace";
+import { HowToPay } from "../inputs/HowToPay";
+import { SelectSpace } from "../../src/inputs/SelectSpace";
 
 export class AquiferPumping implements IProjectCard {
     public cost: number = 18;
@@ -21,40 +22,25 @@ export class AquiferPumping implements IProjectCard {
     }
     public actionText: string = "Spend 8 mega credits to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.";
     public action(player: Player, game: Game) {
-            let totalPaid: number = 0;
-            let steelToUse: number = 0;
-            let megaCreditToUse: number = 0;
+            let howToPay: HowToPay;
             let foundSpace: ISpace;
             return new AndOptions(
                     () => {
-                        if (steelToUse > player.steel) {
-                            throw "Not enough steel";
-                        }
-                        totalPaid += steelToUse * 2;
-                        if (totalPaid < 8) {
-                            if (megaCreditToUse > player.megaCredits) {
-                                throw "Not enough mega credits";
-                            }
-                            totalPaid += megaCreditToUse;
-                        }
-                        if (totalPaid < 8) {
+                        if ((howToPay.steel * player.steelValue) + howToPay.megaCredits + howToPay.heat < 8) {
                             throw "Need to pay 8";
                         }
+                        player.steel -= howToPay.steel;
+                        player.heat -= howToPay.heat;
+                        player.megaCredits -= howToPay.megaCredits;
                         game.addOceanTile(player, foundSpace.id);
-                        player.steel -= steelToUse;
-                        player.megaCredits -= megaCreditToUse;
                         return undefined;
                     },
                     new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                         foundSpace = space;
                         return undefined;
                     }),
-                    new SelectAmount(this.name, "Select steel to use", (amount: number) => {
-                        steelToUse = amount;
-                        return undefined;
-                    }),
-                    new SelectAmount(this.name, "Select megacredit to use", (amount: number) => {
-                        megaCreditToUse = amount;
+                    new SelectHowToPay("Select how to pay", this.name, true, false, player.canUseHeatAsMegaCredits, (htp: HowToPay) => {
+                        howToPay = htp;
                         return undefined;
                     })
                 );

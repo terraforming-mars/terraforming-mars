@@ -22,6 +22,10 @@
         "tests/cards/AdvancedAlloys.spec.ts",
         "tests/cards/AdvancedEcosystems.spec.ts",
         "tests/cards/AerobrakedAmmoniaAsteroid.spec.ts",
+        "tests/cards/Algae.spec.ts",
+        "tests/cards/AntiGravityTechnology.spec.ts",
+        "tests/cards/Ants.spec.ts",
+        "tests/cards/AquiferPumping.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

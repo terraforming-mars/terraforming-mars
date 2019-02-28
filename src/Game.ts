@@ -485,14 +485,17 @@ export class Game {
             fn(space);
         });
     }
-    public addOceanTile(player: Player, spaceId: string): void {
+    public addOceanTile(player: Player, spaceId: string, spaceType: SpaceType = SpaceType.OCEAN): void {
         if (this.getOceansOnBoard() - 1 === constants.MAX_OCEAN_TILES) {
             return;
         }
-        this.addTile(player, SpaceType.OCEAN, this.getSpace(spaceId), { tileType: TileType.OCEAN });
+        this.addTile(player, spaceType, this.getSpace(spaceId), { tileType: TileType.OCEAN });
         // No one can own the oceans!
         this.getSpace(spaceId).player = undefined;
         player.terraformRating++;
+        this.onOceanTilePlaced.forEach((fn) => {
+            fn();
+        });
     }
     public getOceansOnBoard(): number {
         return this.getSpaces(SpaceType.OCEAN).filter((space) => space.tile !== undefined && space.tile.tileType === TileType.OCEAN).length + this.getSpaces(SpaceType.LAND).filter((space) => space.tile !== undefined && space.tile.tileType === TileType.OCEAN).length;

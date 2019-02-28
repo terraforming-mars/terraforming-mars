@@ -6,6 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
+import { SpaceType } from "../SpaceType";
 
 export class ArtificialLake implements IProjectCard {
     public cost: number = 15;
@@ -18,9 +19,9 @@ export class ArtificialLake implements IProjectCard {
         if (game.getTemperature() < -6) {
             throw "Requires -6C or warmer";
         }
+        player.victoryPoints++;
         return new SelectSpace(this.name, "Select a land space to place an ocean", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
-            game.addOceanTile(player, foundSpace.id);
-            player.victoryPoints++;
+            game.addOceanTile(player, foundSpace.id, SpaceType.LAND);
             return undefined;
         });
     }

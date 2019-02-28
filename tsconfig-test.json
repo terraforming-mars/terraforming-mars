@@ -26,6 +26,10 @@
         "tests/cards/AntiGravityTechnology.spec.ts",
         "tests/cards/Ants.spec.ts",
         "tests/cards/AquiferPumping.spec.ts",
+        "tests/cards/ArchaeBacteria.spec.ts",
+        "tests/cards/ArcticAlgae.spec.ts",
+        "tests/cards/ArtificialLake.spec.ts",
+        "tests/cards/ArtificialPhotosynthesis.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

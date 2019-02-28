@@ -33,6 +33,10 @@
         "tests/cards/Asteroid.spec.ts",
         "tests/cards/AsteroidMining.spec.ts",
         "tests/cards/AsteroidMiningConsortium.spec.ts",
+        "tests/cards/BeamFromAThoriumAsteroid.spec.ts",
+        "tests/cards/BigAsteroid.spec.ts",
+        "tests/cards/BiomassCombustors.spec.ts",
+        "tests/cards/Birds.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

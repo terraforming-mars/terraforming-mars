@@ -17,10 +17,10 @@ export class AsteroidMiningConsortium implements IProjectCard {
         if (player.titaniumProduction < 1) {
             throw "Requires that you have titanium production";
         }
+        player.victoryPoints++;
         return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease", (foundPlayer: Player) => {
             foundPlayer.titaniumProduction = Math.max(0, foundPlayer.titaniumProduction - 1);
             player.titaniumProduction++;
-            player.victoryPoints++;
             return undefined;
         });
     }

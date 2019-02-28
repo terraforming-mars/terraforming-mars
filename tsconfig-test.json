@@ -30,6 +30,9 @@
         "tests/cards/ArcticAlgae.spec.ts",
         "tests/cards/ArtificialLake.spec.ts",
         "tests/cards/ArtificialPhotosynthesis.spec.ts",
+        "tests/cards/Asteroid.spec.ts",
+        "tests/cards/AsteroidMining.spec.ts",
+        "tests/cards/AsteroidMiningConsortium.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

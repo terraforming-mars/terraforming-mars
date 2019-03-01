@@ -37,6 +37,11 @@
         "tests/cards/BigAsteroid.spec.ts",
         "tests/cards/BiomassCombustors.spec.ts",
         "tests/cards/Birds.spec.ts",
+        "tests/cards/BlackPolarDust.spec.ts",
+        "tests/cards/BreathingFilters.spec.ts",
+        "tests/cards/BribedCommitte.spec.ts",
+        "tests/cards/BuildingIndustries.spec.ts",
+        "tests/cards/Bushes.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

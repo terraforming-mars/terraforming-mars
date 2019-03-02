@@ -15,6 +15,9 @@ export class CEOsFavoriteProject implements IProjectCard {
     public description: string = "Having the top man's attention, the involved people are sure to do their best";
     public play(player: Player, _game: Game) {
         const availableCards = player.getCardsWithResources().filter((card) => card.animals || card.microbes || card.fighterResources || card.scienceResources);
+        if (availableCards.length === 0) {
+            throw "No cards with resources";
+        }
         return new SelectCard(this.name, "Select card to add resource", availableCards, (foundCards: Array<IProjectCard>) => {
             const foundCard = foundCards[0];
             if (foundCard.animals) {
@@ -25,8 +28,6 @@ export class CEOsFavoriteProject implements IProjectCard {
                 foundCard.fighterResources++;
             } else if (foundCard.scienceResources) {
                 foundCard.scienceResources++;
-            } else {
-                throw "Unsupported resource";
             }
             return undefined;
         });

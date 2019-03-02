@@ -22,16 +22,13 @@ export class Capital implements IProjectCard {
         if (player.energyProduction < 2) {
             throw "Requires 2 energy production.";
         }
+        player.energyProduction -= 2;
+        player.megaCreditProduction += 5;
         return new SelectSpace(this.name, "Select space for special city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
-            player.energyProduction -= 2;
-            player.megaCreditProduction += 5;
             game.addGameEndListener(() => {
-                game.getAdjacentSpaces(space).forEach((s) => {
-                    if (s.tile !== undefined && s.tile.tileType === TileType.OCEAN) {
-                        player.victoryPoints++;
-                    }
-                });
+                player.victoryPoints += game.getAdjacentSpaces(space)
+                    .filter((s) => s.tile !== undefined && s.tile.tileType === TileType.OCEAN).length;
             });
             return undefined;
         });

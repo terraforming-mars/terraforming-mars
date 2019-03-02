@@ -44,6 +44,9 @@
         "tests/cards/Bushes.spec.ts",
         "tests/cards/BusinessContacts.spec.ts",
         "tests/cards/BusinessNetwork.spec.ts",
+        "tests/cards/CEOsFavoriteProject.spec.ts",
+        "tests/cards/CallistoPenalMines.spec.ts",
+        "tests/cards/Capital.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

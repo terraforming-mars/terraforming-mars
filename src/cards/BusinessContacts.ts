@@ -24,6 +24,6 @@ export class BusinessContacts implements IProjectCard {
                 }
             });
             return undefined;
-        });
+        }, 2, 2);
     }
 }

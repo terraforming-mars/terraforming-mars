@@ -42,6 +42,8 @@
         "tests/cards/BribedCommitte.spec.ts",
         "tests/cards/BuildingIndustries.spec.ts",
         "tests/cards/Bushes.spec.ts",
+        "tests/cards/BusinessContacts.spec.ts",
+        "tests/cards/BusinessNetwork.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

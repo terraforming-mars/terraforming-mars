@@ -475,7 +475,7 @@ export class Dealer {
         return deck;
     }
     private deck: Array<IProjectCard> = [];
-    private discarded: Array<IProjectCard> = [];
+    public discarded: Array<IProjectCard> = [];
     public discard(card: IProjectCard): void {
         this.discarded.push(card);
     }

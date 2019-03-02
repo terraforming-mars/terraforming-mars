@@ -18,17 +18,17 @@ export class Comet implements IProjectCard {
     public description: string = "Prepare to be catered!";
     public play(player: Player, game: Game) {
         return new AndOptions(
-                        () => {
-                            return game.increaseTemperature(player, 1);
-                        },
-                        new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                            game.addOceanTile(player, space.id);
-                            return undefined;
-                        }),
-                        new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 3 plants", (foundPlayer: Player) => {
-                            foundPlayer.plants = Math.max(0, foundPlayer.plants - 3);
-                            return undefined;
-                        })
-                    );
+            () => {
+                return game.increaseTemperature(player, 1);
+            },
+            new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+                game.addOceanTile(player, space.id);
+                return undefined;
+            }),
+            new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 3 plants", (foundPlayer: Player) => {
+                foundPlayer.plants = Math.max(0, foundPlayer.plants - 3);
+                return undefined;
+            })
+        );
     }
 }

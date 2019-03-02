@@ -47,6 +47,11 @@
         "tests/cards/CEOsFavoriteProject.spec.ts",
         "tests/cards/CallistoPenalMines.spec.ts",
         "tests/cards/Capital.spec.ts",
+        "tests/cards/CarbonateProcessing.spec.ts",
+        "tests/cards/CaretakerContract.spec.ts",
+        "tests/cards/Cartel.spec.ts",
+        "tests/cards/CloudSeeding.spec.ts",
+        "tests/cards/ColonizerTrainingCamp.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

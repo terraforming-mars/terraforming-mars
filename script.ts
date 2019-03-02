@@ -262,7 +262,8 @@ function getSelectHowToPay(playerInput: any, cb: (out: Array<Array<string>>) => 
         var htp: HowToPay = {
             steel: 0,
             titanium: 0,
-            megaCredits: 0
+            megaCredits: 0,
+            heat: 0
         };
         if (elSteelValue !== undefined) {
             htp.steel = parseInt(elSteelValue.value);

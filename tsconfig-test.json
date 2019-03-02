@@ -52,6 +52,10 @@
         "tests/cards/Cartel.spec.ts",
         "tests/cards/CloudSeeding.spec.ts",
         "tests/cards/ColonizerTrainingCamp.spec.ts",
+        "tests/cards/CommercialDistrict.spec.ts",
+        "tests/cards/Comet.spec.ts",
+        "tests/cards/ConvoyFromEuropa.spec.ts",
+        "tests/cards/CorporateStronghold.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

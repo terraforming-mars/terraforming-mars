@@ -24,12 +24,7 @@ export class CommercialDistrict implements IProjectCard {
             player.energyProduction--;
             player.megaCreditProduction += 4;
             game.addGameEndListener(() => {
-                const adjacentSpaces = game.getAdjacentSpaces(foundSpace);
-                adjacentSpaces.forEach((adjacentSpace) => {
-                    if (adjacentSpace.tile && adjacentSpace.tile.tileType === TileType.CITY) {
-                        player.victoryPoints++;
-                    }
-                });
+                player.victoryPoints += game.getAdjacentSpaces(foundSpace).filter((adjacentSpace) => adjacentSpace.tile && adjacentSpace.tile.tileType === TileType.CITY).length;
             });
             return undefined;
         });

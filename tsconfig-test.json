@@ -61,6 +61,9 @@
         "tests/cards/DeepWellHeating.spec.ts",
         "tests/cards/DeimosDown.spec.ts",
         "tests/cards/DesignedMicroOrganisms.spec.ts",
+        "tests/cards/DevelopmentCenter.spec.ts",
+        "tests/cards/DomedCrater.spec.ts",
+        "tests/cards/DustSeals.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

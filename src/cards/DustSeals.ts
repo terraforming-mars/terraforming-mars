@@ -14,7 +14,7 @@ export class DustSeals implements IProjectCard {
     public description: string = "Tight seals to keep micron-sized dust out of buildings, vehicles and suits.";
     public play(player: Player, game: Game) {
         if (game.getOceansOnBoard() > 3) {
-            throw "Reqires 3 or less ocean tiles";
+            throw "Requires 3 or less ocean tiles";
         }
         player.victoryPoints++;
         return undefined;

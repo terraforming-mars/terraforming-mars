@@ -56,6 +56,11 @@
         "tests/cards/Comet.spec.ts",
         "tests/cards/ConvoyFromEuropa.spec.ts",
         "tests/cards/CorporateStronghold.spec.ts",
+        "tests/cards/CupolaCity.spec.ts",
+        "tests/cards/Decomposers.spec.ts",
+        "tests/cards/DeepWellHeating.spec.ts",
+        "tests/cards/DeimosDown.spec.ts",
+        "tests/cards/DesignedMicroOrganisms.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

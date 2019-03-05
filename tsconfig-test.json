@@ -69,6 +69,8 @@
         "tests/cards/EarthOffice.spec.ts",
         "tests/cards/EcologicalZone.spec.ts",
         "tests/cards/ElectroCatapult.spec.ts",
+        "tests/cards/EnergySaving.spec.ts",
+        "tests/cards/EnergyTapping.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

@@ -71,6 +71,7 @@
         "tests/cards/ElectroCatapult.spec.ts",
         "tests/cards/EnergySaving.spec.ts",
         "tests/cards/EnergyTapping.spec.ts",
+        "tests/cards/EquatorialMagnetizer.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

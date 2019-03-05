@@ -64,6 +64,11 @@
         "tests/cards/DevelopmentCenter.spec.ts",
         "tests/cards/DomedCrater.spec.ts",
         "tests/cards/DustSeals.spec.ts",
+        "tests/cards/EOSChasmaNationalPark.spec.ts",
+        "tests/cards/EarthCatapult.spec.ts",
+        "tests/cards/EarthOffice.spec.ts",
+        "tests/cards/EcologicalZone.spec.ts",
+        "tests/cards/ElectroCatapult.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

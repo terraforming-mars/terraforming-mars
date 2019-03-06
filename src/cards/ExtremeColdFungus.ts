@@ -26,7 +26,7 @@ export class ExtremeColdFungus implements IProjectCard {
         const otherMicrobeCards = game.getOtherMicrobeCards(this);
         return new OrOptions(
             new SelectOption(this.name, "Gain 1 plant", () => { player.plants++; return undefined; }),
-            new SelectCard(this.name, "Select card to remove 2 microbes", otherMicrobeCards, (foundCards: Array<IProjectCard>) => {
+            new SelectCard(this.name, "Select card to add microbes", otherMicrobeCards, (foundCards: Array<IProjectCard>) => {
                 foundCards[0]!.microbes! += 2;
                 return undefined;
             })

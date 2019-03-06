@@ -20,7 +20,7 @@ export class Fish implements IProjectCard {
             throw "Requires +2C or warmer";
         }
         return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
-            foundPlayer.plantProduction--;
+            foundPlayer.plantProduction = Math.max(0, foundPlayer.plantProduction - 1);
             game.addGameEndListener(() => {
                 player.victoryPoints += this.animals;
             });

@@ -76,6 +76,10 @@
         "tests/cards/Farming.spec.ts",
         "tests/cards/Fish.spec.ts",
         "tests/cards/Flooding.spec.ts",
+        "tests/cards/FoodFactory.spec.ts",
+        "tests/cards/FuelFactory.spec.ts",
+        "tests/cards/FueledGenerators.spec.ts",
+        "tests/cards/FusionPower.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

@@ -14,7 +14,7 @@ export class FuelFactory implements IProjectCard {
     public description: string = "With its shallow gravity well, Mars is a good host for the space industry, and rockets need fuel.";
     public play(player: Player, _game: Game) {
         if (player.energyProduction < 1) {
-            throw "must have energy production to lose";
+            throw "Must have energy production to lose";
         }
         player.energyProduction--;
         player.titaniumProduction++;

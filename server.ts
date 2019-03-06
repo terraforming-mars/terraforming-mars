@@ -244,6 +244,6 @@ function serveScript(res: http.ServerResponse, s: Buffer): void {
     res.end();
 }
 
-console.log("Starting server on port 8080");
-server.listen(8080);
+console.log("Starting server on port " + (process.env.PORT || 8080));
+server.listen(process.env.PORT || 8080);
 

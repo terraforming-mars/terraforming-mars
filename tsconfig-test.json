@@ -89,6 +89,10 @@
         "tests/cards/GiantSpaceMirror.spec.ts",
         "tests/cards/Grass.spec.ts",
         "tests/cards/GreatDam.spec.ts",
+        "tests/cards/GreatEscarpmentConsortium.spec.ts",
+        "tests/cards/Greenhouses.spec.ts",
+        "tests/cards/Hackers.spec.ts",
+        "tests/cards/HeatTrappers.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

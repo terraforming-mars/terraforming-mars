@@ -18,11 +18,8 @@ export class Hackers implements IProjectCard {
             throw "Must have energy production to decrease";
         }
         return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease mega credit production", (foundPlayer: Player) => {
-            if (foundPlayer.megaCreditProduction < 2) {
-                throw "Player must have 2 mega credit production to decrease";
-            }
             player.energyProduction--;
-            foundPlayer.megaCreditProduction -= 2;
+            foundPlayer.megaCreditProduction = Math.max(0, foundPlayer.megaCreditProduction - 2);
             player.megaCreditProduction += 2;
             player.victoryPoints--;
             return undefined;

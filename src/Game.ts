@@ -416,7 +416,7 @@ export class Game {
             throw "This space is land claimed by " + space.player.name;
         }
         if (space.spaceType !== spaceType) {
-            throw "Select a valid location";
+            throw "Select a valid location " + space.spaceType + " is not " + spaceType;
         }
         space.player = player;
         space.tile = tile;
@@ -478,9 +478,9 @@ export class Game {
         });
         return this.increaseOxygenLevel(player, 1);
     }
-    public addCityTile(player: Player, spaceId: string): void {
+    public addCityTile(player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND): void {
         const space = this.getSpace(spaceId);
-        this.addTile(player, SpaceType.LAND, space, { tileType: TileType.CITY });
+        this.addTile(player, spaceType, space, { tileType: TileType.CITY });
         this.onCityTilePlaced.forEach((fn: (space: ISpace) => void) => {
             fn(space);
         });

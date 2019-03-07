@@ -80,6 +80,15 @@
         "tests/cards/FuelFactory.spec.ts",
         "tests/cards/FueledGenerators.spec.ts",
         "tests/cards/FusionPower.spec.ts",
+        "tests/cards/GHGFactories.spec.ts",
+        "tests/cards/GHGProducingBacteria.spec.ts",
+        "tests/cards/GanymedeColony.spec.ts",
+        "tests/cards/GeneRepair.spec.ts",
+        "tests/cards/GeothermalPower.spec.ts",
+        "tests/cards/GiantIceAsteroid.spec.ts",
+        "tests/cards/GiantSpaceMirror.spec.ts",
+        "tests/cards/Grass.spec.ts",
+        "tests/cards/GreatDam.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

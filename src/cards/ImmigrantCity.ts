@@ -18,13 +18,9 @@ export class ImmigrantCity implements IProjectCard {
         if (player.energyProduction < 1) {
             throw "Must have energy production";
         }
-        if (player.megaCreditProduction < 2) {
-            throw "Must have 2 mega credit production";
-        }
         return new SelectSpace(this.name, "Select space for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
             player.energyProduction--;
-            player.megaCreditProduction -= 2;
             player.megaCreditProduction++;
             game.addCityTilePlacedListener(() => {
                 player.megaCreditProduction++;

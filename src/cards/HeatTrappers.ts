@@ -14,12 +14,11 @@ export class HeatTrappers implements IProjectCard {
     public text: string = "Decrease any heat production 2 steps and increase your energy production 1 step. Lose 1 victory point.";
     public description: string = "Utilizing temperature gradients for energy production";
     public play(player: Player, game: Game) {
-        const inputHandler = (otherPlayer: Player) => {
+        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease heat production", (otherPlayer: Player) => {
             otherPlayer.heatProduction = Math.max(otherPlayer.heatProduction - 2, 0);
             player.energyProduction++;
             player.victoryPoints--;
             return undefined;
-        };
-        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease heat production", inputHandler);
+        });
     }
 }

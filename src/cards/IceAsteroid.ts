@@ -17,17 +17,17 @@ export class IceAsteroid implements IProjectCard {
     public description: string = "We need its water down here";
     public play(player: Player, game: Game) {
         return new AndOptions(
-                    () => {
-                        return undefined;
-                    },
-                    new SelectSpace(this.name, "Select first ocean space", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                        game.addOceanTile(player, space.id);
-                        return undefined;
-                    }),
-                    new SelectSpace(this.name, "Select second ocean space", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                        game.addOceanTile(player, space.id);
-                        return undefined;
-                    })
-                );
+            () => {
+                return undefined;
+            },
+            new SelectSpace(this.name, "Select first ocean space", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+                game.addOceanTile(player, space.id);
+                return undefined;
+            }),
+            new SelectSpace(this.name, "Select second ocean space", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+                game.addOceanTile(player, space.id);
+                return undefined;
+            })
+        );
     }
 }

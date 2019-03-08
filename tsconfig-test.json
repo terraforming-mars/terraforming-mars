@@ -93,6 +93,12 @@
         "tests/cards/Greenhouses.spec.ts",
         "tests/cards/Hackers.spec.ts",
         "tests/cards/HeatTrappers.spec.ts",
+        "tests/cards/Heather.spec.ts",
+        "tests/cards/Herbivores.spec.ts",
+        "tests/cards/HiredRaiders.spec.ts",
+        "tests/cards/IceAsteroid.spec.ts",
+        "tests/cards/IceCapMelting.spec.ts",
+        "tests/cards/ImmigrantCity.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

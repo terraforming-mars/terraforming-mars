@@ -38,5 +38,6 @@ describe("ImportedHydrogen", function () {
         expect(tardigrades.microbes).to.eq(3);
         selectAnimal.cb([pets]);
         expect(pets.animals).to.eq(2);
+        expect(andAction.cb()).to.eq(undefined);
     });
 });

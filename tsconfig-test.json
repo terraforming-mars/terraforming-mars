@@ -99,6 +99,10 @@
         "tests/cards/IceAsteroid.spec.ts",
         "tests/cards/IceCapMelting.spec.ts",
         "tests/cards/ImmigrantCity.spec.ts",
+        "tests/cards/ImmigrationShuttles.spec.ts",
+        "tests/cards/ImportOfAdvancedGHG.spec.ts",
+        "tests/cards/ImportedGHG.spec.ts",
+        "tests/cards/ImportedHydrogen.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

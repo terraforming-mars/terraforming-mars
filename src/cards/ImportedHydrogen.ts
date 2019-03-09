@@ -21,27 +21,27 @@ export class ImportedHydrogen implements IProjectCard {
     public description: string = "A light-weight bug expensive crucial element.";
     public play(player: Player, game: Game): undefined | PlayerInput {
         return new AndOptions(
-                    () => {
-                        return undefined;
-                    },
-                    new OrOptions(
-                        new SelectOption(this.name, "Gain 3 plants", () => {
-                            player.plants += 3;
-                            return undefined;
-                        }),
-                        new SelectCard(this.name, "Add 3 microbes to card", game.getOtherMicrobeCards(this), (foundCards: Array<IProjectCard>) => {
-                            foundCards[0]!.microbes! += 3;
-                            return undefined;
-                        }),
-                        new SelectCard(this.name, "Add 2 animals to card", game.getOtherAnimalCards(this), (foundCards: Array<IProjectCard>) => {
-                            foundCards[0]!.animals! += 2;
-                            return undefined;
-                        })
-                    ),
-                    new SelectSpace(this.name, "Select space for ocean", game.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
-                        game.addOceanTile(player, foundSpace.id);
-                        return undefined;
-                    })
-                );
+            () => {
+                return undefined;
+            },
+            new OrOptions(
+                new SelectOption(this.name, "Gain 3 plants", () => {
+                    player.plants += 3;
+                    return undefined;
+                }),
+                new SelectCard(this.name, "Add 3 microbes to card", game.getOtherMicrobeCards(this), (foundCards: Array<IProjectCard>) => {
+                    foundCards[0]!.microbes! += 3;
+                    return undefined;
+                }),
+                new SelectCard(this.name, "Add 2 animals to card", game.getOtherAnimalCards(this), (foundCards: Array<IProjectCard>) => {
+                    foundCards[0]!.animals! += 2;
+                    return undefined;
+                })
+            ),
+            new SelectSpace(this.name, "Select space for ocean", game.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
+                game.addOceanTile(player, foundSpace.id);
+                return undefined;
+            })
+        );
     }
 }

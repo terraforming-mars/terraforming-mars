@@ -16,10 +16,9 @@ export class LargeConvoy implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
     public name: string = "Large Convoy";
     public cardType: CardType = CardType.EVENT;
-    public text: string = "Place an ocean tile and draw 2 cards. Gain 5 plants, or add 4 animals to ANOTHER card. 2 Victory Points.";
+    public text: string = "Place an ocean tile and draw 2 cards. Gain 5 plants, or add 4 animals to ANOTHER card. Gain 2 Victory Points.";
     public description: string = "Huge delivery from Earth";
     public play(player: Player, game: Game) {
-        let otherAnimalCards: Array<IProjectCard> = game.getOtherAnimalCards(this);
         return new AndOptions(
             () => {
                 player.cardsInHand.push(game.dealer.getCards(1)[0]);
@@ -33,7 +32,7 @@ export class LargeConvoy implements IProjectCard {
             }),
             new OrOptions(
                 new SelectOption(this.name, "Gain 5 plants", () => { player.plants += 5; return undefined; }),
-                new SelectCard(this.name, "Select card to add 4 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => { 
+                new SelectCard(this.name, "Select card to add 4 animals", game.getOtherAnimalCards(this), (foundCards: Array<IProjectCard>) => { 
                     foundCards[0]!.animals! += 4;
                     return undefined;
                 })

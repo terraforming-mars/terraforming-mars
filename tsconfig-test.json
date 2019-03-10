@@ -114,6 +114,10 @@
         "tests/cards/InventorsGuild.spec.ts",
         "tests/cards/InvestmentLoan.spec.ts",
         "tests/cards/Ironworks.spec.ts",
+        "tests/cards/KelpFarming.spec.ts",
+        "tests/cards/LagrangeObservatory.spec.ts",
+        "tests/cards/LakeMarineris.spec.ts",
+        "tests/cards/LandClaim.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

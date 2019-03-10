@@ -10,6 +10,7 @@ import { SelectSpace } from "../inputs/SelectSpace";
 import { SelectCard } from "../inputs/SelectCard";
 import { SelectOption } from "../inputs/SelectOption";
 import { ISpace } from "../ISpace";
+import { PlayerInput } from "../PlayerInput";
 
 export class LargeConvoy implements IProjectCard {
     public cost: number = 36;
@@ -18,7 +19,7 @@ export class LargeConvoy implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Place an ocean tile and draw 2 cards. Gain 5 plants, or add 4 animals to ANOTHER card. Gain 2 Victory Points.";
     public description: string = "Huge delivery from Earth";
-    public play(player: Player, game: Game) {
+    public play(player: Player, game: Game): PlayerInput {
         return new AndOptions(
             () => {
                 player.cardsInHand.push(game.dealer.getCards(1)[0]);

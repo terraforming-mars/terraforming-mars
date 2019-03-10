@@ -103,6 +103,14 @@
         "tests/cards/ImportOfAdvancedGHG.spec.ts",
         "tests/cards/ImportedGHG.spec.ts",
         "tests/cards/ImportedHydrogen.spec.ts",
+        "tests/cards/ImportedNitrogen.spec.ts",
+        "tests/cards/IndenturedWorkers.spec.ts",
+        "tests/cards/IndustrialCenter.spec.ts",
+        "tests/cards/IndustrialMicrobes.spec.ts",
+        "tests/cards/Insects.spec.ts",
+        "tests/cards/Insulation.spec.ts",
+        "tests/cards/InterstellarColonyShip.spec.ts",
+        "tests/cards/InventionContest.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

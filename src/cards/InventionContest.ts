@@ -17,11 +17,9 @@ export class InventionContest implements IProjectCard {
         const cardsDrawn: Array<IProjectCard> = game.dealer.getCards(3);
         return new SelectCard(this.name, "Select card to take into hand", cardsDrawn, (foundCards: Array<IProjectCard>) => {
             player.cardsInHand.push(foundCards[0]);
-            cardsDrawn.forEach((c) => {
-                if (c.name !== foundCards[0].name) {
-                    game.dealer.discard(c);
-                }
-            });;
+            cardsDrawn
+                .filter((c) => c !== foundCards[0])
+                .forEach((c) => game.dealer.discard(c));
             return undefined;
         });
     }

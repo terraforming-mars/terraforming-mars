@@ -180,6 +180,9 @@ export class Game {
         this.players.forEach((player) => {
             player.runProductionPhase();
         });
+        this.onGenerationEnd.slice().forEach(function (end) {
+            end();
+        });
         this.gotoResearchPhase();
     }
 
@@ -297,7 +300,7 @@ export class Game {
         this.onOceanTilePlaced.push(listener);
     }
     public onGameEnd: Array<Function> = [];
-    private onGenerationEnd: Array<Function> = [];
+    public onGenerationEnd: Array<Function> = [];
 
     private generation: number = 1;
     private oxygenLevel: number = MIN_OXYGEN_LEVEL;
@@ -350,15 +353,6 @@ export class Game {
 
     public getGeneration(): number {
         return this.generation;
-    }
-
-    public setGeneration(generation: number): void {
-        if (generation !== this.generation) {
-            this.onGenerationEnd.slice().forEach(function (end) {
-                end();
-            });
-        }
-        this.generation = generation;
     }
 
     public addGameEndListener(end: Function): void {

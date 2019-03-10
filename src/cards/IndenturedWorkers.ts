@@ -12,11 +12,12 @@ export class IndenturedWorkers implements IProjectCard {
     public cost: number = 0;
     public tags: Array<Tags> = [];
     public name: string = "Indentured Workers";
-    public text: string = "The next card you play this generation costs 8 mega credits less";
+    public text: string = "The next card you play this generation costs 8 mega credits less. Lose 1 victory point.";
     public description: string = "There are many who would work for us for almost no pay in exchange for a ticket to Mars";
     public play(player: Player, game: Game) {
         var discount: CardDiscount = function() {
             player.removeCardDiscount(discount);
+            game.removeGenerationEndListener(afterGeneration);
             return 8;
         }
         var afterGeneration = function() {

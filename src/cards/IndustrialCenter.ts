@@ -21,6 +21,9 @@ export class IndustrialCenter implements IProjectCard {
                 .filter((space) => game.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.CITY).length > 0);
     }
     public play(player: Player, game: Game) {
+        if (game.getCitiesInPlayOnMars() === 0) {
+            throw "No cities in play";
+        }
         return new SelectSpace(this.name, "Select space adjacent to a city tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
             return undefined;

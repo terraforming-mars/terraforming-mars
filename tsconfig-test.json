@@ -111,6 +111,9 @@
         "tests/cards/Insulation.spec.ts",
         "tests/cards/InterstellarColonyShip.spec.ts",
         "tests/cards/InventionContest.spec.ts",
+        "tests/cards/InventorsGuild.spec.ts",
+        "tests/cards/InvestmentLoan.spec.ts",
+        "tests/cards/Ironworks.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

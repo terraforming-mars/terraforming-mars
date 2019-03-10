@@ -22,18 +22,18 @@ export class InventorsGuild implements IProjectCard {
     public action(player: Player, game: Game) {
         const topCard = game.dealer.getCards(1)[0];
         return new OrOptions(
-                    new SelectCard(this.name, "Buy card", [topCard], (_card: Array<IProjectCard>) => {
-                        if (player.megaCredits < 3) {
-                            throw "Can not afford to buy card";
-                        }
-                        player.megaCredits -= 3;
-                        player.cardsInHand.push(topCard);
-                        return undefined;
-                    }),
-                    new SelectOption(this.name, "Discard it", () => {
-                        game.dealer.discard(topCard);
-                        return undefined;
-                    })
-                )
+            new SelectCard(this.name, "Buy card", [topCard], (_card: Array<IProjectCard>) => {
+                if (player.megaCredits < 3) {
+                    throw "Can not afford to buy card";
+                }
+                player.megaCredits -= 3;
+                player.cardsInHand.push(topCard);
+                return undefined;
+            }),
+            new SelectOption(this.name, "Discard it", () => {
+                game.dealer.discard(topCard);
+                return undefined;
+            })
+        );
     }
 }

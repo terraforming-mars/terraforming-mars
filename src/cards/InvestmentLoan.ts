@@ -13,9 +13,6 @@ export class InvestmentLoan implements IProjectCard {
     public text: string = "Decrease your mega credit production 1 step. Gain 10 mega credit";
     public description: string = "Taking a loan to fund that urgent project";
     public play(player: Player, _game: Game) {
-        if (player.megaCreditProduction < 1) {
-            throw "Need at least 1 mega credit production to decrease";
-        }
         player.megaCreditProduction--;
         player.megaCredits += 10;
         return undefined;

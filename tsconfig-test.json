@@ -118,6 +118,11 @@
         "tests/cards/LagrangeObservatory.spec.ts",
         "tests/cards/LakeMarineris.spec.ts",
         "tests/cards/LandClaim.spec.ts",
+        "tests/cards/LargeConvoy.spec.ts",
+        "tests/cards/LavaFlows.spec.ts",
+        "tests/cards/Lichen.spec.ts",
+        "tests/cards/LightningHarvest.spec.ts",
+        "tests/cards/Livestock.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

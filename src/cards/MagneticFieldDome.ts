@@ -14,7 +14,7 @@ export class MagneticFieldDome implements IProjectCard {
     public description: string = "Protecting a limited area from cosmic radiation.";
     public play(player: Player, _game: Game) {
         if (player.energyProduction < 2) {
-            throw "Need 2 energy to decrease";
+            throw "Need 2 energy production to decrease";
         }
         player.energyProduction -= 2;
         player.plantProduction++;

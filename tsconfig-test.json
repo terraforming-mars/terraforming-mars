@@ -123,6 +123,14 @@
         "tests/cards/Lichen.spec.ts",
         "tests/cards/LightningHarvest.spec.ts",
         "tests/cards/Livestock.spec.ts",
+        "tests/cards/LocalHeatTrapping.spec.ts",
+        "tests/cards/LunarBeam.spec.ts",
+        "tests/cards/MagneticFieldDome.spec.ts",
+        "tests/cards/MagneticFieldGenerators.spec.ts",
+        "tests/cards/Mangrove.spec.ts",
+        "tests/cards/MarsUniversity.spec.ts",
+        "tests/cards/MartianRails.spec.ts",
+        "tests/cards/MassConverter.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

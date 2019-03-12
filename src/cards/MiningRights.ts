@@ -21,6 +21,9 @@ export class MiningRights implements IProjectCard {
                 .filter((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1);
     }
     public play(player: Player, game: Game) {
+        if (this.getAvailableSpaces(player, game).length === 0) {
+            throw "No tiles available with placement bonus";
+        }
         return new SelectSpace(this.name, "Select space with a steel or titanium placement bonus", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
             if (foundSpace.bonus.indexOf(SpaceBonus.STEEL) !== -1) {

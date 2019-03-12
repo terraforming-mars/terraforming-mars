@@ -131,6 +131,17 @@
         "tests/cards/MarsUniversity.spec.ts",
         "tests/cards/MartianRails.spec.ts",
         "tests/cards/MassConverter.spec.ts",
+        "tests/cards/MediaArchives.spec.ts",
+        "tests/cards/MediaGroup.spec.ts",
+        "tests/cards/MedicalLab.spec.ts",
+        "tests/cards/MethaneFromTitan.spec.ts",
+        "tests/cards/MicroMills.spec.ts",
+        "tests/cards/Mine.spec.ts",
+        "tests/cards/MineralDeposit.spec.ts",
+        "tests/cards/MiningArea.spec.ts",
+        "tests/cards/MiningExpedition.spec.ts",
+        "tests/cards/MiningRights.spec.ts",
+        "tests/cards/MirandaResort.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

@@ -142,6 +142,8 @@
         "tests/cards/MiningExpedition.spec.ts",
         "tests/cards/MiningRights.spec.ts",
         "tests/cards/MirandaResort.spec.ts",
+        "tests/cards/MoholeArea.spec.ts",
+        "tests/cards/Moss.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

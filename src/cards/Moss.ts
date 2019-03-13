@@ -15,7 +15,8 @@ export class Moss implements IProjectCard {
     public play(player: Player, game: Game) {
         if (game.getOceansOnBoard() < 3) {
             throw "Requires 3 ocean tiles";
-        } else if (player.plants < 1) {
+        }
+        if (player.plants < 1) {
             throw "Must have a plant to lose";
         }
         player.plants--;

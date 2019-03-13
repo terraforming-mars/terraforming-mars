@@ -24,10 +24,10 @@ export class NaturalPreserve implements IProjectCard {
             throw "Oxygen must be 4% or less.";
         }
         return new SelectSpace(this.name, "Select space for special tile next to no other tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
-                game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
-                player.megaCreditProduction++;
-                player.victoryPoints++;
-                return undefined;
+            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
+            player.megaCreditProduction++;
+            player.victoryPoints++;
+            return undefined;
         });
     }
 }

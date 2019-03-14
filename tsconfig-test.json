@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "lib": ["dom", "ES6"], 
+        "lib": ["ES6"], 
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "noUnusedLocals": true,
@@ -154,6 +154,11 @@
         "tests/cards/NuclearZone.spec.ts",
         "tests/cards/OlympusConference.spec.ts",
         "tests/cards/OpenCity.spec.ts",
+        "tests/cards/OptimalAerobraking.spec.ts",
+        "tests/cards/OreProcessor.spec.ts",
+        "tests/cards/PermafrostExtraction.spec.ts",
+        "tests/cards/PeroxidePower.spec.ts",
+        "tests/cards/Pets.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

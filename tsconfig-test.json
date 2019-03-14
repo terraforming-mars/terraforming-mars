@@ -150,6 +150,10 @@
         "tests/cards/NitrophilicMoss.spec.ts",
         "tests/cards/NoctisCity.spec.ts",
         "tests/cards/NoctisFarming.spec.ts",
+        "tests/cards/NuclearPower.spec.ts",
+        "tests/cards/NuclearZone.spec.ts",
+        "tests/cards/OlympusConference.spec.ts",
+        "tests/cards/OpenCity.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

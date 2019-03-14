@@ -21,15 +21,16 @@ export class NitriteReducingBacteria implements IProjectCard {
         return undefined;
     }
     public action(player: Player, _game: Game) {
+        if (this.microbes < 3) {
+            this.microbes++;
+            return undefined;
+        }
         return new OrOptions(
             new SelectOption(this.name, "Add 1 microbe to this card", () => {
                 this.microbes++;
                 return undefined;
             }),
             new SelectOption(this.name, "Remove 3 microbes to increase your terraform rating 1 step", () => {
-                if (this.microbes < 3) {
-                    throw "Need 3 microbes to remove";
-                }
                 this.microbes -= 3;
                 player.terraformRating++;
                 return undefined;

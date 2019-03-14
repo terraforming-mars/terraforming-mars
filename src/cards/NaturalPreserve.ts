@@ -17,11 +17,14 @@ export class NaturalPreserve implements IProjectCard {
     public description: string = "Creating a national park with original Martian landforms and environments.";
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.getAvailableSpacesOnLand(player)
-                .filter((space) => game.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile === undefined).length === 0);
+                .filter((space) => game.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined).length === 0);
     }
     public play(player: Player, game: Game) {
         if (game.getOxygenLevel() > 4) {
             throw "Oxygen must be 4% or less.";
+        }
+        if (this.getAvailableSpaces(player, game).length === 0) {
+            throw "No spaces for tile";
         }
         return new SelectSpace(this.name, "Select space for special tile next to no other tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });

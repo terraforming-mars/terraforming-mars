@@ -144,6 +144,12 @@
         "tests/cards/MirandaResort.spec.ts",
         "tests/cards/MoholeArea.spec.ts",
         "tests/cards/Moss.spec.ts",
+        "tests/cards/NaturalPreserve.spec.ts",
+        "tests/cards/NitriteReducingBacteria.spec.ts",
+        "tests/cards/NitrogenRichAsteroid.spec.ts",
+        "tests/cards/NitrophilicMoss.spec.ts",
+        "tests/cards/NoctisCity.spec.ts",
+        "tests/cards/NoctisFarming.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

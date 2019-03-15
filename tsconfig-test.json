@@ -159,6 +159,10 @@
         "tests/cards/PermafrostExtraction.spec.ts",
         "tests/cards/PeroxidePower.spec.ts",
         "tests/cards/Pets.spec.ts",
+        "tests/cards/PhobosSpaceHaven.spec.ts",
+        "tests/cards/PhysicsComplex.spec.ts",
+        "tests/cards/Plantation.spec.ts",
+        "tests/cards/PowerGrid.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

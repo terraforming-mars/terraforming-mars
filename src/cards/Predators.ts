@@ -26,16 +26,13 @@ export class Predators implements IProjectCard {
     }
     public action(_player: Player, game: Game) {
         const animalCards: Array<IProjectCard> = game.getPlayedCardsWithAnimals()
-            .filter((card) => card.animals !== undefined && card.animals > 0);
+            .filter((card) => Number(card.animals) > 0);
+        if (animalCards.length === 0) {
+            throw "No cards to remove animal from";
+        }
         return new SelectCard(this.name, "Select card to remove animal from", animalCards, (foundCards: Array<IProjectCard>) => {
             const foundCard = foundCards[0];
-            if (foundCard.animals === undefined) {
-                throw "Card does not have animals";
-            }
-            if (foundCard.animals < 1) {
-                throw "No animals to remove from card";
-            }
-            foundCard.animals--;
+            foundCard.animals!--;
             this.animals++;
             return undefined;
         });

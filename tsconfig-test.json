@@ -163,6 +163,11 @@
         "tests/cards/PhysicsComplex.spec.ts",
         "tests/cards/Plantation.spec.ts",
         "tests/cards/PowerGrid.spec.ts",
+        "tests/cards/PowerInfrastructure.spec.ts",
+        "tests/cards/PowerPlant.spec.ts",
+        "tests/cards/PowerSupplyConsortium.spec.ts",
+        "tests/cards/Predators.spec.ts",
+        "tests/cards/ProtectedHabitats.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

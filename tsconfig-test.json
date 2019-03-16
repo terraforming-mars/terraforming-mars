@@ -168,6 +168,7 @@
         "tests/cards/PowerSupplyConsortium.spec.ts",
         "tests/cards/Predators.spec.ts",
         "tests/cards/ProtectedHabitats.spec.ts",
+        "tests/cards/ProtectedValley.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

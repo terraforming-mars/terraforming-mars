@@ -25,14 +25,14 @@ export class RegolithEaters implements IProjectCard {
             return undefined;
         }
         return new OrOptions(
-                    new SelectOption(this.name, "Add 1 microbe to this card", () => {
-                        this.microbes++;
-                        return undefined;
-                    }),
-                    new SelectOption(this.name, "Remove 2 microbes to raise oxygen level 1 step", () => {
-                        this.microbes -= 2;
-                        return game.increaseOxygenLevel(player, 1);
-                    })
-                );
+            new SelectOption(this.name, "Add 1 microbe to this card", () => {
+                this.microbes++;
+                return undefined;
+            }),
+            new SelectOption(this.name, "Remove 2 microbes to raise oxygen level 1 step", () => {
+                this.microbes -= 2;
+                return game.increaseOxygenLevel(player, 1);
+            })
+        );
     }
 }

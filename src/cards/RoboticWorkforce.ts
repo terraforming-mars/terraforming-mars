@@ -128,130 +128,98 @@ export class RoboticWorkforce implements IProjectCard {
                 // this is the only card which requires additional user input
                 if (foundCard.name === new BiomassCombustors().name) {
                     return new SelectPlayer(this.name, game.getPlayers(), "Select player to remove plant production", (foundPlayer: Player) => {
+                        if (foundPlayer.plantProduction < 1) {
+                            throw "Player must have plant production";
+                        }
                         foundPlayer.plantProduction--;
                         player.energyProduction += 2;
                         return undefined;
                     });
                 }
-                // the rest can make updates synchronously
-                if (foundCard.name === new NoctisCity().name || foundCard.name === new DomedCrater().name) {
-                    player.energyProduction--;
-                    player.megaCreditProduction += 3;
-                } else if (foundCard.name === new ElectroCatapult().name) {
-                    player.energyProduction--;
-                } else if (foundCard.name === new Windmills().name) {
-                    player.energyProduction++;
-                } else if (foundCard.name === new ImmigrantCity().name) {
-                    player.energyProduction--;
-                    player.megaCreditProduction -= 2;
-                } else if (foundCard.name === new BuildingIndustries().name) {
-                    player.energyProduction--;
-                    player.steelProduction += 2;
-                } else if (foundCard.name === new SolarPower().name) {
-                    player.energyProduction++;
-                } else if (foundCard.name === new RadChemFactory().name) {
-                    player.energyProduction--;
-                } else if (foundCard.name === new PeroxidePower().name) {
-                    player.megaCreditProduction--;
-                    player.energyProduction += 2;
-                } else if (foundCard.name === new MedicalLab().name) {
-                    player.megaCreditProduction += Math.floor(player.getTagCount(Tags.STEEL) / 2);
-                } else if (foundCard.name === new GeothermalPower().name) {
-                    player.energyProduction += 2;
-                } else if (foundCard.name === new AICentral().name) {
-                    player.energyProduction--;
-                } else if (foundCard.name === new Capital().name) {
-                    player.energyProduction -= 2;
-                    player.megaCreditProduction += 5;
-                } else if (foundCard.name === new CupolaCity().name) {
-                    player.energyProduction--;
-                    player.megaCreditProduction += 3;
-                } else if (foundCard.name === new OpenCity().name) {
-                    player.energyProduction--;
-                    player.megaCreditProduction += 4;
-                } else if (foundCard.name === new EOSChasmaNationalPark().name) {
-                    player.megaCreditProduction += 2;
-                } else if (foundCard.name === new StripMine().name) {
-                    player.energyProduction -= 2;
-                    player.steelProduction += 2;
-                    player.titaniumProduction++;
-                } else if (foundCard.name === new MagneticFieldDome().name) {
-                    player.energyProduction -= 2;
-                    player.plantProduction++;
-                } else if (foundCard.name === new MagneticFieldGenerators().name) {
-                    player.energyProduction -= 4;
-                    player.plantProduction += 2;
-                } else if (foundCard.name === new FueledGenerators().name) {
-                    player.megaCreditProduction--;
-                    player.energyProduction++;
-                } else if (foundCard.name === new UrbanizedArea().name) {
-                    player.energyProduction--;
-                    player.megaCreditProduction += 2;
-                } else if (foundCard.name === new PowerPlant().name) {
-                    player.energyProduction++;
-                } else if (foundCard.name === new HeatTrappers().name) {
-                    player.heatProduction -= 2;
-                    player.energyProduction++;
-                } else if (foundCard.name === new TectonicStressPower().name) {
-                    player.energyProduction += 3;
-                } else if (foundCard.name === new UndergroundCity().name) {
-                    player.energyProduction -= 2;
-                    player.steelProduction += 2;
-                } else if (foundCard.name === new NuclearPower().name) {
-                    player.megaCreditProduction -= 2;
-                    player.energyProduction += 3;
-                } else if (foundCard.name === new GHGFactories().name) {
-                    player.energyProduction--;
-                    player.heatProduction += 4;
-                } else if (foundCard.name === new Mine().name) {
-                    player.steelProduction++;
-                } else if (foundCard.name === new DeepWellHeating().name) {
-                    player.energyProduction++;
-                } else if (foundCard.name === new CarbonateProcessing().name) {
-                    player.energyProduction--;
-                    player.heatProduction += 3;
-                } else if (foundCard.name === new IndustrialMicrobes().name) {
-                    player.energyProduction++;
-                    player.steelProduction++;
-                } else if (foundCard.name === new CommercialDistrict().name) {
-                    player.energyProduction--;
-                    player.megaCreditProduction += 4;
-                } else if (foundCard.name === new TropicalResort().name) {
-                    player.heatProduction -= 2;
-                    player.megaCreditProduction += 3;
-                } else if (foundCard.name === new CorporateStronghold().name) {
-                    player.energyProduction--;
-                    player.megaCreditProduction += 3;
-                } else if (foundCard.name === new SpaceElevator().name) {
-                    player.titaniumProduction++;
-                } else if (foundCard.name === new GreatDam().name) {
-                    player.energyProduction += 2;
-                } else if (foundCard.name === new NoctisFarming().name) {
-                    player.megaCreditProduction++;
-                } else if (foundCard.name === new SoilFactory().name) {
-                    player.energyProduction--;
-                    player.plantProduction++;
-                } else if (foundCard.name === new FoodFactory().name) {
-                    player.plantProduction--;
-                    player.megaCreditProduction += 4;
-                } else if (foundCard.name === new TitaniumMine().name) {
-                    player.titaniumProduction--;
-                } else if (foundCard.name === new FusionPower().name) {
-                    player.energyProduction += 3;
-                } else if (foundCard.name === new FuelFactory().name) {
-                    player.energyProduction--;
-                    player.titaniumProduction++;
-                    player.megaCreditProduction++;
-                } else if (foundCard.name === new ProtectedValley().name) {
-                    player.megaCreditProduction += 2;
-                } else if (foundCard.name === new MoholeArea().name) {
-                    player.heatProduction += 4;
-                } else if (foundCard.name === new NaturalPreserve().name) {
-                    player.energyProduction++;
-                } else {
+
+                class Updater {
+                    constructor (
+                        public energyProduction: number,
+                        public megaCreditProduction: number,
+                        public steelProduction: number,
+                        public titaniumProduction: number,
+                        public plantProduction: number,
+                        public heatProduction: number) {}
+                }
+
+                const updater = {
+                    [new NoctisCity().name]: new Updater(-1, 3, 0, 0, 0, 0),
+                    [new DomedCrater().name]: new Updater(-1, 3, 0, 0, 0, 0),
+                    [new ElectroCatapult().name]: new Updater(-1, 0, 0, 0, 0, 0),
+                    [new Windmills().name]: new Updater(1, 0, 0, 0, 0, 0),
+                    [new ImmigrantCity().name]: new Updater(-1, -2, 0, 0, 0, 0),
+                    [new BuildingIndustries().name]: new Updater(-1, 0, 2, 0, 0, 0),
+                    [new SolarPower().name]: new Updater(1, 0, 0, 0, 0, 0),
+                    [new RadChemFactory().name]: new Updater(-1, 0, 0, 0, 0, 0),
+                    [new PeroxidePower().name]: new Updater(2, -1, 0, 0, 0, 0),
+                    [new MedicalLab().name]: new Updater(0, Math.floor(player.getTagCount(Tags.STEEL) / 2), 0, 0, 0, 0),
+                    [new GeothermalPower().name]: new Updater(2, 0, 0, 0, 0, 0),
+                    [new AICentral().name]: new Updater(-1, 0, 0, 0, 0, 0),
+                    [new Capital().name]: new Updater(-2, 5, 0, 0, 0, 0),
+                    [new CupolaCity().name]: new Updater(-1, 3, 0, 0, 0, 0),
+                    [new OpenCity().name]: new Updater(-1, 4, 0, 0, 0, 0),
+                    [new EOSChasmaNationalPark().name]: new Updater(2, 0, 0, 0, 0, 0),
+                    [new StripMine().name]: new Updater(-2, 0, 2, 1, 0, 0),
+                    [new MagneticFieldDome().name]: new Updater(-2, 0, 0, 0, 1, 0),
+                    [new MagneticFieldGenerators().name]: new Updater(-4, 0, 0, 0, 2, 0),
+                    [new FueledGenerators().name]: new Updater(1, -1, 0, 0, 0, 0),
+                    [new UrbanizedArea().name]: new Updater(-1, 2, 0, 0, 0, 0),
+                    [new PowerPlant().name]: new Updater(1, 0, 0, 0, 0, 0),
+                    [new HeatTrappers().name]: new Updater(1, 0, 0, 0, 0, -2),
+                    [new TectonicStressPower().name]: new Updater(3, 0, 0, 0, 0, 0),
+                    [new UndergroundCity().name]: new Updater(-2, 0, 2, 0, 0, 0),
+                    [new NuclearPower().name]: new Updater(3, -2, 0, 0, 0, 0),
+                    [new GHGFactories().name]: new Updater(-1, 0, 0, 0, 0, 4),
+                    [new Mine().name]: new Updater(0, 0, 1, 0, 0, 0),
+                    [new DeepWellHeating().name]: new Updater(1, 0, 0, 0, 0, 0),
+                    [new CarbonateProcessing().name]: new Updater(-1, 0, 0, 0, 0, 3),
+                    [new IndustrialMicrobes().name]: new Updater(1, 0, 1, 0, 0, 0),
+                    [new CommercialDistrict().name]: new Updater(-1, 4, 0, 0, 0, 0),
+                    [new TropicalResort().name]: new Updater(0, 3, 0, 0, 0, -2),
+                    [new CorporateStronghold().name]: new Updater(-1, 3, 0, 0, 0, 0),
+                    [new SpaceElevator().name]: new Updater(0, 0, 0, 1, 0, 0),
+                    [new GreatDam().name]: new Updater(2, 0, 0, 0, 0, 0),
+                    [new NoctisFarming().name]: new Updater(0, 1, 0, 0, 0, 0),
+                    [new SoilFactory().name]: new Updater(-1, 0, 0, 0, 1, 0),
+                    [new FoodFactory().name]: new Updater(0, 4, 0, 0, -1, 0),
+                    [new TitaniumMine().name]: new Updater(0, 0, 0, -1, 0, 0),
+                    [new FusionPower().name]: new Updater(3, 0, 0, 0, 0, 0),
+                    [new FuelFactory().name]: new Updater(-1, 1, 0, 1, 0, 0),
+                    [new ProtectedValley().name]: new Updater(0, 2, 0, 0, 0, 0),
+                    [new MoholeArea().name]: new Updater(0, 0, 0, 0, 0, 4),
+                    [new NaturalPreserve().name]: new Updater(1, 0, 0, 0, 0, 0)
+                 }[foundCard.name];
+
+                if (!updater) {
                     throw "Production not found for selected card";
                 }
-                return undefined;
+
+                if (player.energyProduction + updater.energyProduction < 0) {
+                    throw "not enough energy production";
+                }
+                if (player.titaniumProduction + updater.titaniumProduction < 0) {
+                    throw "not enough titanium production";
+                }
+                if (player.plantProduction + updater.plantProduction < 0) {
+                    throw "not enough plant production";
+                }
+                if (player.heatProduction + updater.heatProduction < 0) {
+                    throw "not enough heat production";
+                }
+
+                player.energyProduction += updater.energyProduction;
+                player.megaCreditProduction += updater.megaCreditProduction;
+                player.steelProduction += updater.steelProduction;
+                player.titaniumProduction += updater.titaniumProduction;
+                player.plantProduction += updater.plantProduction;
+                player.heatProduction += updater.heatProduction;
+
+               return undefined;
             });
     }
 }

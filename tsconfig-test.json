@@ -169,6 +169,15 @@
         "tests/cards/Predators.spec.ts",
         "tests/cards/ProtectedHabitats.spec.ts",
         "tests/cards/ProtectedValley.spec.ts",
+        "tests/cards/QuantumExtractor.spec.ts",
+        "tests/cards/RadChemFactory.spec.ts",
+        "tests/cards/RadSuits.spec.ts",
+        "tests/cards/RegolithEaters.spec.ts",
+        "tests/cards/ReleaseOfInertGases.spec.ts",
+        "tests/cards/ResearchOutpost.spec.ts",
+        "tests/cards/Research.spec.ts",
+        "tests/cards/RestrictedArea.spec.ts",
+        "tests/cards/RoboticWorkforce.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

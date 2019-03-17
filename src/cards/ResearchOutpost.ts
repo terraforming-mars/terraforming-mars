@@ -5,8 +5,8 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
-import { SpaceType } from "../SpaceType";
 import { ISpace } from "../ISpace";
+import { PlayerInput } from "../PlayerInput";
 
 export class ResearchOutpost implements IProjectCard {
     public cost: number = 18;
@@ -22,19 +22,13 @@ export class ResearchOutpost implements IProjectCard {
                     return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
                 });
     }
-    public play(player: Player, game: Game) {
+    public play(player: Player, game: Game): PlayerInput {
+        if (this.getAvailableSpaces(player, game).length === 0) {
+            throw "No places available for tile";
+        }
         return new SelectSpace(this.name, "Select place next to no other tile for city", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
-            if (foundSpace.spaceType === SpaceType.COLONY) {
-                throw "Must be places on mars";
-            }
-            const adjacentSpaces = game.getAdjacentSpaces(foundSpace);
-            if (adjacentSpaces.filter((adjacentSpace) => adjacentSpace.tile !== undefined).length > 0) {
-                throw "Space must be next to no other tile";
-            }
             game.addCityTile(player, foundSpace.id);
-            player.addCardDiscount(() => {
-                return 1;
-            });
+            player.addCardDiscount(() => 1);
             return undefined;
         });
     }

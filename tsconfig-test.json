@@ -178,6 +178,10 @@
         "tests/cards/Research.spec.ts",
         "tests/cards/RestrictedArea.spec.ts",
         "tests/cards/RoboticWorkforce.spec.ts",
+        "tests/cards/RoverConstruction.spec.ts",
+        "tests/cards/Sabotage.spec.ts",
+        "tests/cards/Satellites.spec.ts",
+        "tests/cards/SearchForLife.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

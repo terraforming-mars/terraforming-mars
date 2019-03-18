@@ -184,6 +184,13 @@
         "tests/cards/SearchForLife.spec.ts",
         "tests/cards/SecurityFleet.spec.ts",
         "tests/cards/Shuttles.spec.ts",
+        "tests/cards/SmallAnimals.spec.ts",
+        "tests/cards/SoilFactory.spec.ts",
+        "tests/cards/SolarPower.spec.ts",
+        "tests/cards/SolarWindPower.spec.ts",
+        "tests/cards/Soletta.spec.ts",
+        "tests/cards/SpaceElevator.spec.ts",
+        "tests/cards/SpaceMirrors.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

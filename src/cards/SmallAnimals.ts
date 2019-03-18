@@ -19,7 +19,11 @@ export class SmallAnimals implements IProjectCard {
         if (game.getOxygenLevel() < 6) {
             throw "Requires 6% oxygen.";
         }
-        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
+        const availablePlayers = game.getPlayers().filter((player) => player.plantProduction > 0);
+        if (availablePlayers.length === 0) {
+            throw "No players with plant production";
+        }
+        return new SelectPlayer(this.name, availablePlayers, "Select player to decrease plant production", (foundPlayer: Player) => {
             foundPlayer.plantProduction--;
             game.addGameEndListener(() => {
                 player.victoryPoints += Math.floor(this.animals / 2);

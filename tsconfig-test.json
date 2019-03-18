@@ -182,6 +182,8 @@
         "tests/cards/Sabotage.spec.ts",
         "tests/cards/Satellites.spec.ts",
         "tests/cards/SearchForLife.spec.ts",
+        "tests/cards/SecurityFleet.spec.ts",
+        "tests/cards/Shuttles.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

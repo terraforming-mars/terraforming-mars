@@ -10,7 +10,7 @@ export class Shuttles implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Shuttles";
-    public text: string = "Requires 5% oxygen. Decrease your energy production 1 step and increase your mega credit production 2 steps.";
+    public text: string = "Requires 5% oxygen. Decrease your energy production 1 step and increase your mega credit production 2 steps. When you play a space card, you pay 2 less for it. Gain 1 victory point.";
     public description: string = "Aided by low gravity going up, and by the increasing atmosphere when gliding down for landing.";
     public play(player: Player, game: Game) {
         if (game.getOxygenLevel() < 5) {

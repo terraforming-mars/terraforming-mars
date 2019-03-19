@@ -14,7 +14,7 @@ export class StripMine implements IProjectCard {
     public description: string = "It is not exactly environmentally friendly to just dig up the suface, but it can be profitable.";
     public play(player: Player, game: Game) {
         if (player.energyProduction < 2) {
-            throw "Must have energy to remove";
+            throw "Must have energy production";
         }
         player.energyProduction -= 2;
         player.steelProduction += 2;

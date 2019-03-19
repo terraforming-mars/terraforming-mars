@@ -21,6 +21,7 @@ import { SelectPlayer } from "./inputs/SelectPlayer";
 import { Award } from "./Award";
 import { Milestone } from "./Milestone";
 import { TileType } from "./TileType";
+import { StandardProjectType } from "./StandardProjectType";
 import * as constants from "./constants";
 
 export class Player {
@@ -126,9 +127,9 @@ export class Player {
     public removeCardPlayedHandler(handler: Function): void {
         this.cardPlayedEvents.splice(this.cardPlayedEvents.indexOf(handler), 1);
     }
-    private standardProjectHandler: Array<Function> = [];
+    public standardProjectHandler: Array<(project: StandardProjectType) => void> = [];
 
-    public addStandardProjectHandler(fn: Function): void {
+    public addStandardProjectHandler(fn: (project: StandardProjectType) => void): void {
         this.standardProjectHandler.push(fn);
     }
 
@@ -392,9 +393,16 @@ export class Player {
         });
     }
 
+    private payForStandardProject(projectType: StandardProjectType, amount: number): void {
+        this.megaCredits -= amount;
+        this.standardProjectHandler.forEach((fn) => {
+            fn(projectType);
+        });
+    }
+
     private sellPatents(game: Game): PlayerInput {
         var res = new SelectCard("Take Action!", "Sell patents", this.cardsInHand, (foundCards: Array<IProjectCard>) => {
-            this.megaCredits += foundCards.length;
+            this.payForStandardProject(StandardProjectType.SELLING_PATENTS, -foundCards.length);
             foundCards.forEach((card) => {
                 for (let i = 0; i < this.cardsInHand.length; i++) {
                     if (this.cardsInHand[i].name === card.name) {
@@ -418,7 +426,7 @@ export class Player {
     private buildPowerPlant(game: Game): PlayerInput {
         return new SelectOption("Take Action!", "Standard Project: Power Plant", () => {
             this.energyProduction++;
-            this.megaCredits -= 11;
+            this.payForStandardProject(StandardProjectType.POWER_PLANT, 11);
             this.actionsTakenThisRound++;
             this.takeAction(game);
             return undefined;
@@ -430,7 +438,7 @@ export class Player {
             const action = game.increaseTemperature(this, 1);
             const whenDone = (err?: string) => {
                 if (!err) {
-                    this.megaCredits -= 14;
+                    this.payForStandardProject(StandardProjectType.ASTEROID, 14);
                     this.actionsTakenThisRound++;
                 }
                 this.takeAction(game);
@@ -447,7 +455,8 @@ export class Player {
     private aquifer(game: Game): PlayerInput {
         return new SelectSpace("Take Action!", "Standard Project: Aquifer", game.getAvailableSpacesForOcean(this), (space: ISpace) => {
             game.addOceanTile(this, space.id);
-            this.megaCredits -= 14;
+            // TODO do these both cost 14?
+            this.payForStandardProject(StandardProjectType.AQUIFER, 14);
             this.actionsTakenThisRound++;
             this.takeAction(game);
             return undefined;
@@ -459,7 +468,7 @@ export class Player {
             const action = game.addGreenery(this, space.id);
             const whenDone = (err?: string) => {
                 if (!err) {
-                    this.megaCredits -= 23;
+                    this.payForStandardProject(StandardProjectType.GREENERY, 23);
                     this.actionsTakenThisRound++;
                 }
                 this.takeAction(game);
@@ -476,7 +485,7 @@ export class Player {
     private addCity(game: Game): PlayerInput {
         return new SelectSpace("Take Action!", "Standard Project: City", game.getAvailableSpacesOnLand(this), (space: ISpace) => {
             game.addCityTile(this, space.id);
-            this.megaCredits -= 25;
+            this.payForStandardProject(StandardProjectType.CITY, 25);
             this.actionsTakenThisRound++;
             this.takeAction(game);
             return undefined;

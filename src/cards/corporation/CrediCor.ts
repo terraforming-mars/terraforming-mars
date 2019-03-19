@@ -3,7 +3,7 @@ import { CorporationCard } from "./CorporationCard";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { Tags } from "../Tags";
-import { StandardProject } from "../../StandardProject";
+import { StandardProjectType } from "../../StandardProjectType";
 import { IProjectCard } from "../IProjectCard";
 
 export class CrediCor implements CorporationCard {
@@ -14,8 +14,8 @@ export class CrediCor implements CorporationCard {
     public text: string = "";
     public description: string = "Multibillionaire Bard Hunter likes terraforming, especially when it involves hurling asteroids at Mars. He also has a hunch that it's going to pay off. His company CrediCor has all the resources he needs to jump right into the contest.";
     public play(player: Player, _game: Game) {
-        player.addStandardProjectHandler((project: StandardProject) => {
-            if (project.cost >= 20) {
+        player.addStandardProjectHandler((project: StandardProjectType) => {
+            if (project === StandardProjectType.GREENERY || project === StandardProjectType.CITY) {
                 player.megaCredits += 4;
             }
         });

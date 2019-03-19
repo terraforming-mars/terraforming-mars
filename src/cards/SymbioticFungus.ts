@@ -22,6 +22,9 @@ export class SymbioticFungus implements IProjectCard {
     }
     public action(_player: Player, game: Game) {
         const availableCards = game.getOtherMicrobeCards(this);
+        if (availableCards.length === 0) {
+            throw "No cards available";
+        }
         return new SelectCard(this.name, "Select card for microbe", availableCards, (foundCards: Array<IProjectCard>) => {
             foundCards[0]!.microbes!++;
             return undefined;

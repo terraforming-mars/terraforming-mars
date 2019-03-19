@@ -12,7 +12,7 @@ export class SpecialDesign implements IProjectCard {
     public name: string = "Special Design";
     public text: string = "The next card you play this generation is +2 or -2 in global requirements, your choice.";
     public description: string = "If it isn't feasible, then make it so.";
-    public play(player: Player, _game: Game) {
+    public play(player: Player, game: Game) {
         const startingBonus = player.requirementsBonus;
         player.requirementsBonus = 2;
         const handler = (card: IProjectCard) => {
@@ -22,7 +22,13 @@ export class SpecialDesign implements IProjectCard {
                 player.removeCardPlayedHandler(handler);
             }
         };
+        const onGenerationEnd = () => {
+            player.requirementsBonus = startingBonus;
+            player.removeCardPlayedHandler(handler);
+            game.removeGenerationEndListener(onGenerationEnd);
+        };
         player.addCardPlayedHandler(handler);
+        game.addGenerationEndListener(onGenerationEnd);
         return undefined;
     }
 }

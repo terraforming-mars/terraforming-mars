@@ -1,4 +1,9 @@
 
 export enum StandardProjectType {
-    SELLING_PATENTS
+    SELLING_PATENTS,
+    ASTEROID,
+    GREENERY,
+    CITY,
+    POWER_PLANT,
+    AQUIFER
 }

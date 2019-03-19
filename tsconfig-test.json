@@ -192,6 +192,14 @@
         "tests/cards/SpaceElevator.spec.ts",
         "tests/cards/SpaceMirrors.spec.ts",
         "tests/cards/SpaceStation.spec.ts",
+        "tests/cards/SpecialDesign.spec.ts",
+        "tests/cards/Sponsors.spec.ts",
+        "tests/cards/StandardTechnology.spec.ts",
+        "tests/cards/Steelworks.spec.ts",
+        "tests/cards/StripMine.spec.ts",
+        "tests/cards/SubterraneanReservoir.spec.ts",
+        "tests/cards/SymbioticFungus.spec.ts",
+        "tests/cards/Tardigrades.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

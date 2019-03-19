@@ -191,6 +191,7 @@
         "tests/cards/Soletta.spec.ts",
         "tests/cards/SpaceElevator.spec.ts",
         "tests/cards/SpaceMirrors.spec.ts",
+        "tests/cards/SpaceStation.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

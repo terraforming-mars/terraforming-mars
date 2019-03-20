@@ -200,6 +200,17 @@
         "tests/cards/SubterraneanReservoir.spec.ts",
         "tests/cards/SymbioticFungus.spec.ts",
         "tests/cards/Tardigrades.spec.ts",
+        "tests/cards/TechnologyDemonstration.spec.ts",
+        "tests/cards/TectonicStressPower.spec.ts",
+        "tests/cards/TenMiningIndustries.spec.ts",
+        "tests/cards/TerraformingGanymede.spec.ts",
+        "tests/cards/TitaniumMine.spec.ts",
+        "tests/cards/TollStation.spec.ts",
+        "tests/cards/TowingAComet.spec.ts",
+        "tests/cards/TransNeptuneProbe.spec.ts",
+        "tests/cards/Trees.spec.ts",
+        "tests/cards/TropicalResort.spec.ts",
+        "tests/cards/TundraFarming.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

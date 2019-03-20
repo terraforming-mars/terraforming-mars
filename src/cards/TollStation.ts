@@ -13,13 +13,10 @@ export class TollStation implements IProjectCard {
     public text: string = "Increase your mega credit production 1 step for each space tag your opponents have.";
     public description: string = "Licensed by the 'government'";
     public play(player: Player, game: Game) {
-        let opponentsSpaceTags: number = 0;
-        game.getPlayers()
+        player.megaCreditProduction += game.getPlayers()
             .filter((aPlayer) => aPlayer !== player)
-            .forEach((opponent) => {
-                opponentsSpaceTags += opponent.getTagCount(Tags.SPACE);
-            });
-        player.megaCreditProduction += opponentsSpaceTags;
+            .map((opponent) => opponent.getTagCount(Tags.SPACE))
+            .reduce((a, c) => a + c, 0);
         return undefined;
     }
 }

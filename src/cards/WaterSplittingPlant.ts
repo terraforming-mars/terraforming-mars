@@ -23,7 +23,7 @@ export class WaterSplittingPlant implements IProjectCard {
         if (player.energy < 3) {
             throw "Need 3 energy";
         }
-        player.energy = Math.max(0, player.energy - 3);
+        player.energy -= 3;
         return game.increaseOxygenLevel(player, 1);
     }
 }

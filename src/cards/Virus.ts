@@ -16,27 +16,23 @@ export class Virus implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Remove up to 2 animals or 5 plants from any player.";
     public description: string = "The virus is transient, changing from liquid to air-borne to blood transfusion.";
-    public play(player: Player, game: Game): PlayerInput | undefined {
-        const allCardsWithResources: Array<IProjectCard> = [];
-        game.getPlayers().forEach((o) => {
-            if (o !== player) {
-                o.getCardsWithResources().forEach((cardWithResource) => {
-                    allCardsWithResources.push(cardWithResource);
-                });
-            }
-        });
+    public play(_player: Player, game: Game): PlayerInput | undefined {
+        const cards = game.getPlayedCardsWithAnimals();
+        const remove5Plants = () => {
+            return new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 5 plants", (foundPlayer: Player) => {
+                foundPlayer.plants = Math.max(0, foundPlayer.plants - 5);
+                return undefined;
+            })
+        };
+        if (cards.length === 0) {
+            return remove5Plants();
+        }
         return new OrOptions(
-                    new SelectCard(this.name, "Select card to remove 2 animals", allCardsWithResources, (foundCard: Array<IProjectCard>) => {
-                        if (foundCard[0].animals === undefined) {
-                            throw "No animals on selected card";
-                        }
-                        foundCard[0].animals = Math.max(0, foundCard[0].animals - 2);
-                        return undefined;
-                    }),
-                    new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 5 plants", (foundPlayer: Player) => {
-                        foundPlayer.plants = Math.max(0, foundPlayer.plants - 5);
-                        return undefined;
-                    })
-                );
+            new SelectCard(this.name, "Select card to remove 2 animals", cards, (foundCard: Array<IProjectCard>) => {
+                foundCard[0].animals! = Math.max(0, foundCard[0].animals! - 2);
+                return undefined;
+            }),
+            remove5Plants()
+        );
     }
 }

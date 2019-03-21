@@ -17,10 +17,7 @@ export class UrbanizedArea implements IProjectCard {
     public description: string = "When the population begins to soar, cities will eventually merge into large urban areas.";
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.getAvailableSpacesOnLand(player)
-                .filter((space) => {
-                    const adjacentSpaces = game.getAdjacentSpaces(space);
-                    return adjacentSpaces.filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.CITY).length >= 2;
-                });
+                .filter((space) => game.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.CITY).length >= 2);
     }
     public play(player: Player, game: Game) {
         if (player.energyProduction < 1) {

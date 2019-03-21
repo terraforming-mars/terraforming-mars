@@ -211,6 +211,12 @@
         "tests/cards/Trees.spec.ts",
         "tests/cards/TropicalResort.spec.ts",
         "tests/cards/TundraFarming.spec.ts",
+        "tests/cards/UndergroundCity.spec.ts",
+        "tests/cards/UndergroundDetonations.spec.ts",
+        "tests/cards/UrbanizedArea.spec.ts",
+        "tests/cards/VestaShipyard.spec.ts",
+        "tests/cards/ViralEnhancers.spec.ts",
+        "tests/cards/Virus.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

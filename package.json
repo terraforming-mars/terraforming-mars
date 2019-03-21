@@ -25,8 +25,8 @@
     "build_client": "tsc --build tsconfig-client.json",
     "build_server": "tsc --build tsconfig-server.json",
     "start": "npm run build ; node dist/server.js",
-    "test": "tsc --build tsconfig-test.json ; mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js",
-    "cover": "tsc --build tsconfig-test.json ; nyc mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js"
+    "test": "tsc --build tsconfig-test.json ; mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js dist/tests/cards/corporation/**.spec.js",
+    "cover": "tsc --build tsconfig-test.json ; nyc mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js dist/tests/cards/corporation/**.spec.js"
   },
   "repository": {
     "type": "git",

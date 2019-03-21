@@ -223,6 +223,7 @@
         "tests/cards/Windmills.spec.ts",
         "tests/cards/Worms.spec.ts",
         "tests/cards/Zeppelins.spec.ts",
+        "tests/cards/corporation/BeginnerCorporation.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

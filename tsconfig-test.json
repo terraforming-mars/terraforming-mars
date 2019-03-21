@@ -218,6 +218,11 @@
         "tests/cards/ViralEnhancers.spec.ts",
         "tests/cards/Virus.spec.ts",
         "tests/cards/WaterImportFromEuropa.spec.ts",
+        "tests/cards/WaterSplittingPlant.spec.ts",
+        "tests/cards/WavePower.spec.ts",
+        "tests/cards/Windmills.spec.ts",
+        "tests/cards/Worms.spec.ts",
+        "tests/cards/Zeppelins.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

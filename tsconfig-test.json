@@ -224,6 +224,13 @@
         "tests/cards/Worms.spec.ts",
         "tests/cards/Zeppelins.spec.ts",
         "tests/cards/corporation/BeginnerCorporation.spec.ts",
+        "tests/cards/corporation/CrediCor.spec.ts",
+        "tests/cards/corporation/EcoLine.spec.ts",
+        "tests/cards/corporation/Helion.spec.ts",
+        "tests/cards/corporation/InterplanetaryCinematics.spec.ts",
+        "tests/cards/corporation/Inventrix.spec.ts",
+        "tests/cards/corporation/MiningGuild.spec.ts",
+        "tests/cards/corporation/PhoboLog.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

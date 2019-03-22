@@ -4,7 +4,6 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CorporationCard } from "./CorporationCard";
 import { SpaceBonus } from "../../SpaceBonus";
-import { ISpace } from "../../ISpace";
 
 export class MiningGuild implements CorporationCard {
     public name: string = "Mining Guild";
@@ -16,11 +15,11 @@ export class MiningGuild implements CorporationCard {
     public play(player: Player, _game: Game) {
         player.steel = 5;
         player.steelProduction = 1;
-        player.onTilePlaced((space: ISpace) => {
-            if (space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
+        player.onTilePlaced = (bonuses: Array<SpaceBonus>) => {
+            if (bonuses.indexOf(SpaceBonus.STEEL) !== -1 || bonuses.indexOf(SpaceBonus.TITANIUM) !== -1) {
                 player.steelProduction++;
             }
-        });
+        };
         return undefined;
     }
 }

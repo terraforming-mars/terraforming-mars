@@ -427,6 +427,7 @@ export class Game {
                 }
             });
         }
+        player.onTilePlaced(space.bonus);
     }
 
     public getAdjacentSpaces(space: ISpace): Array<ISpace> {

@@ -12,8 +12,12 @@ import { ICard } from "./src/cards/ICard";
 import { IProjectCard } from "./src/cards/IProjectCard";
 import { Tags } from "./src/cards/Tags";
 import { ISpace } from "./src/ISpace";
+import { BeginnerCorporation } from "./src/cards/corporation/BeginnerCorporation";
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
+    if (cardName === (new BeginnerCorporation()).name) {
+        return new BeginnerCorporation();
+    }
     return ALL_CORPORATION_CARDS.find((card) => card.name === cardName);
 }
 
@@ -34,16 +38,33 @@ export function showCreateGameForm(): void {
     elForm.appendChild(elSubHeader);
     elCreateGameBtn.type = "button";
     elCreateGameBtn.value = "Create Game";
+    elCreateGameBtn.className = "nes-btn is-primary";
     for (let i: number = 0; i < maxPlayers; i++) {
-        const elPlayerFieldset = document.createElement("fieldset");
+        const elPlayerFieldset = document.createElement("div");
+        elPlayerFieldset.className = "nes-container with-title";
+        const elPlayerTitle = document.createElement("p");
+        elPlayerTitle.className = "title";
+        elPlayerTitle.innerHTML = "Player " + (i + 1);
+        const elPlayerNameField = document.createElement("div");
+        elPlayerNameField.className = "nes-field";
         const elLabelPlayer = document.createElement("label");
-        elLabelPlayer.innerHTML = "Player " + (i + 1) + " Name:";
+        elLabelPlayer.innerHTML = "Name:";
         elLabelPlayer.setAttribute("for", "playerName" + i);
         const elInputPlayer = document.createElement("input");
         elInputPlayer.id = "playerName" + i;
         elInputPlayer.name = "playerName" + i;
         elInputPlayer.type = "text";
+        elInputPlayer.className = "nes-input";
+        elPlayerNameField.appendChild(elLabelPlayer);
+        elPlayerNameField.appendChild(elInputPlayer);
+        const elColorLabel = document.createElement("label");
+        elColorLabel.innerHTML = "Color";
+        elColorLabel.setAttribute("for", "playerColor" + i);
+        const elColorPlayerDiv = document.createElement("div");
+        elColorPlayerDiv.className = "nes-select";
         const elColorPlayer = document.createElement("select");
+        elColorPlayer.id = "playerColor" + i;
+        elColorPlayerDiv.appendChild(elColorPlayer);
         const elOptionRed = document.createElement("option");
         elOptionRed.innerHTML = "Red";
         elOptionRed.value = "red";
@@ -69,26 +90,30 @@ export function showCreateGameForm(): void {
         const elBeginnerPlayer = document.createElement("input");
         elBeginnerPlayer.type = "checkbox";
         elBeginnerPlayer.name = "playerBeginner" + i;
-        elBeginnerPlayer.id = "playerBeginner" + i;
+        elBeginnerPlayer.className = "nes-checkbox";
         const elBeginnerLabel = document.createElement("label");
-        elBeginnerLabel.innerHTML = "Is beginner?";
-        elBeginnerLabel.setAttribute("for", "playerBeginner" + i);
+        elBeginnerLabel.appendChild(elBeginnerPlayer);
+        const elSpanBeginner = document.createElement("span");
+        elSpanBeginner.innerHTML = "Is Beginner";
+        elBeginnerLabel.appendChild(elSpanBeginner);
         const elFirstLabel = document.createElement("label");
-        elFirstLabel.innerHTML = "Goes first?";
-        elFirstLabel.setAttribute("for", "firstPlayer" + i);
         const elFirstPlayer = document.createElement("input");
+        elFirstLabel.appendChild(elFirstPlayer);
+        const elSpanFirst = document.createElement("span");
+        elSpanFirst.innerHTML = "Goes first";
+        elFirstLabel.appendChild(elSpanFirst);
         elFirstPlayer.type = "radio";
         elFirstPlayer.value = "" + i;
+        elFirstPlayer.className = "nes-radio";
         elFirstPlayer.name = "firstPlayer";
         elFirstPlayer.id = "firstPlayer" + i;
         elFirstPlayer.checked = i === 0;
-        elPlayerFieldset.appendChild(elLabelPlayer);
-        elPlayerFieldset.appendChild(elInputPlayer);
-        elPlayerFieldset.appendChild(elColorPlayer);
+        elPlayerFieldset.appendChild(elPlayerTitle);
+        elPlayerFieldset.appendChild(elPlayerNameField);
+        elPlayerFieldset.appendChild(elColorLabel);
+        elPlayerFieldset.appendChild(elColorPlayerDiv);
         elPlayerFieldset.appendChild(elFirstLabel);
-        elPlayerFieldset.appendChild(elFirstPlayer);
         elPlayerFieldset.appendChild(elBeginnerLabel);
-        elPlayerFieldset.appendChild(elBeginnerPlayer);
         elForm.appendChild(elPlayerFieldset);
     }
     elCreateGameBtn.onclick = function () {

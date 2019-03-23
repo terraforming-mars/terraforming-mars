@@ -6,7 +6,10 @@ import { Player } from "./src/Player";
 
 const script = fs.readFileSync("dist/script.js");
 const styles = fs.readFileSync("styles.css");
+const nes = fs.readFileSync("nes.min.css");
 const systemjs = fs.readFileSync("lib/system.min.js"); 
+const cursor = fs.readFileSync("assets/cursor.png");
+const cursorClick = fs.readFileSync("assets/cursor-click.png");
 const favicon = fs.readFileSync("favicon.ico");
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
@@ -40,11 +43,17 @@ const server: http.Server = http.createServer(function (req: http.IncomingMessag
             return;
         }
         serveApp(res, "showPlayerHome", JSON.stringify(getPlayer(player, game)));
+    } else if (req.method === "GET" && req.url === "/nes.min.css") {
+        serveStyle(res, nes);
     } else if (req.method === "GET" && req.url === "/styles.css") {
         serveStyle(res, styles);
     } else if (req.method === "GET" && req.url === "/script.js") {
         serveScript(res, script);
-    } else if (req.method === "GET" && req.url === "/system.min.js") {
+    } else if (req.method === "GET" && req.url === "/assets/cursor.png") {
+        servePng(res, cursor);
+    } else if (req.method === "GET" && req.url === "/assets/cursor-click.png") {
+        servePng(res, cursorClick);
+     } else if (req.method === "GET" && req.url === "/system.min.js") {
         serveScript(res, systemjs);
     } else if (req.method === "GET" && req.url === "/favicon.ico") {
         serveFavicon(res);
@@ -189,7 +198,7 @@ function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {
 
 function serveApp(res: http.ServerResponse, pageName: string, data?: string): void {
     res.setHeader("Content-Type", "text/html; charset=utf-8");
-    res.write("<!DOCTYPE html><html><head><link rel='stylesheet' type='text/css' media='all' href='/styles.css' /><script src='/system.min.js'></script><script src='/script.js'></script></head><body><script>SystemJS.import('script').then(function (a) { a." + pageName + "(" + (data ? "JSON.parse(" + data + ")" : "") + "); });</script></body></html>");
+    res.write("<!DOCTYPE html><html><head><link href=\"https://fonts.googleapis.com/css?family=Press+Start+2P\" rel=\"stylesheet\"><link rel='stylesheet' type='text/css' media='all' href='/nes.min.css' /><link rel='stylesheet' type='text/css' media='all' href='/styles.css' /><script src='/system.min.js'></script><script src='/script.js'></script></head><body><script>SystemJS.import('script').then(function (a) { a." + pageName + "(" + (data ? "JSON.parse(" + data + ")" : "") + "); });</script></body></html>");
     res.end();
 }
 
@@ -240,6 +249,12 @@ function serveStyle(res: http.ServerResponse, s: Buffer): void {
 }
 
 function serveScript(res: http.ServerResponse, s: Buffer): void {
+    res.write(s);
+    res.end();
+}
+
+function servePng(res: http.ServerResponse, s: Buffer): void {
+    res.setHeader("Content-Type", "image/png");
     res.write(s);
     res.end();
 }

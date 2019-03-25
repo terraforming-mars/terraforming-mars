@@ -13,18 +13,20 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^6.0.0",
-    "nyc": "^13.3.0"
+    "nyc": "^13.3.0",
+    "vue": "^2.6.10",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
   },
   "nyc": {
     "exclude": [
       "dist/tests/**.spec.js",
-      "dist/tests/cards/**.spec.js"
+      "dist/tests/cards/**.spec.js",
+      "dist/tests/cards/corporation/**.spec.js"
     ]
   },
   "scripts": {
-    "build": "rm -rf dist ; npm run build_client ; npm run build_server",
-    "build_client": "tsc --build tsconfig-client.json",
-    "build_server": "tsc --build tsconfig-server.json",
+    "build": "tsc --build tsconfig.json ; webpack --config webpack.config.js",
     "start": "npm run build ; node dist/server.js",
     "test": "tsc --build tsconfig-test.json ; mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js dist/tests/cards/corporation/**.spec.js",
     "cover": "tsc --build tsconfig-test.json ; nyc mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js dist/tests/cards/corporation/**.spec.js"

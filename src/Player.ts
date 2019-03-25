@@ -554,7 +554,6 @@ export class Player {
     }
 
     public takeAction(game: Game): void {
-
         if (
             game.getGeneration() === 1 &&
             this.corporationCard !== undefined &&
@@ -694,14 +693,15 @@ export class Player {
             throw "Not waiting for anything";
         }
         const waitingFor = this.waitingFor;
+        this.waitingFor = undefined;
         try {
             const subsequent = this.runInput(input, waitingFor);
             if (subsequent !== undefined) {
                 subsequent.onend = waitingFor.onend;
+                this.setWaitingFor(subsequent);
             } else if (waitingFor.onend) {
                 waitingFor.onend();
             }
-            this.waitingFor = subsequent;
         } catch (err) {
             console.warn("Error running input", err);
             this.waitingFor = waitingFor;

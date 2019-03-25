@@ -4,10 +4,8 @@ import * as fs from "fs";
 import { Game } from "./src/Game";
 import { Player } from "./src/Player";
 
-const script = fs.readFileSync("dist/script.js");
 const styles = fs.readFileSync("styles.css");
 const nes = fs.readFileSync("nes.min.css");
-const systemjs = fs.readFileSync("lib/system.min.js"); 
 const cursor = fs.readFileSync("assets/cursor.png");
 const cursorClick = fs.readFileSync("assets/cursor-click.png");
 const favicon = fs.readFileSync("favicon.ico");
@@ -15,50 +13,27 @@ const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
 
 const server: http.Server = http.createServer(function (req: http.IncomingMessage, res: http.ServerResponse): void {
-    if (req.method === "GET" && req.url === "/test") {
-        res.write(fs.readFileSync("test.html"));
-        res.end();
-        return;
-    }
-    if (req.method === "GET" && req.url === "/") {
-        serveApp(res, "showCreateGameForm");
-    } else if (req.method === "GET" && req.url !== undefined && req.url.startsWith("/game?id=")) {
-        const gameId: string = req.url.substring("/game?id=".length);
-        const game = games.get(gameId);
-        if (game === undefined) {
-            notFound(req, res);
-            return;
-        }
-        serveApp(res, "ShowGameHome", JSON.stringify(getGame(game)));
-    } else if (req.method === "GET" && req.url !== undefined && req.url.startsWith("/player?id=")) {
-        const playerId: string = req.url.substring("/player?id=".length);
-        const game = playersToGame.get(playerId);
-        if (game === undefined) {
-            notFound(req, res);
-            return;
-        }
-        const player = game.getPlayers().filter((player) => player.id === playerId)[0];
-        if (player === undefined) {
-            notFound(req, res);
-            return;
-        }
-        serveApp(res, "showPlayerHome", JSON.stringify(getPlayer(player, game)));
+    if (req.method === "GET" && req.url && (
+            req.url === "/" ||
+            req.url.startsWith("/game?id=") ||
+            req.url.startsWith("/player?id="))) {
+        serveApp(res);
+    } else if (req.method === "GET" && req.url !== undefined && req.url.startsWith("/api/player?id=")) {
+        apiGetPlayer(req, res);        
     } else if (req.method === "GET" && req.url === "/nes.min.css") {
         serveStyle(res, nes);
     } else if (req.method === "GET" && req.url === "/styles.css") {
         serveStyle(res, styles);
-    } else if (req.method === "GET" && req.url === "/script.js") {
-        serveScript(res, script);
+    } else if (req.method === "GET" && req.url === "/main.js") {
+        serveScript(res, fs.readFileSync("dist/main.js"));
     } else if (req.method === "GET" && req.url === "/assets/cursor.png") {
         servePng(res, cursor);
     } else if (req.method === "GET" && req.url === "/assets/cursor-click.png") {
         servePng(res, cursorClick);
-     } else if (req.method === "GET" && req.url === "/system.min.js") {
-        serveScript(res, systemjs);
     } else if (req.method === "GET" && req.url === "/favicon.ico") {
         serveFavicon(res);
-    } else if (req.method === "GET" && req.url && req.url.indexOf("/game/") === 0) {
-        serveGame(req, res);
+    } else if (req.method === "GET" && req.url && req.url.indexOf("/api/game") === 0) {
+        apiGetGame(req, res);
     } else if (req.method === "PUT" && req.url && req.url.indexOf("/game") === 0) {
         createGame(req, res);
     } else if (req.method === "POST" && req.url && req.url.indexOf("/player/input?id=") === 0) {
@@ -101,6 +76,63 @@ function processInput(req: http.IncomingMessage, res: http.ServerResponse, playe
             res.end();
         }
     });
+}
+
+function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
+    console.log("apiGetGame", req.url);
+    const routeRegExp: RegExp = /^\/api\/game\?id\=([0-9abcdef]+)$/i;
+
+    if (req.url === undefined) {
+        console.warn("url not defined");
+        notFound(req, res);
+        return;
+    }
+
+    if (!routeRegExp.test(req.url)) {
+        console.warn("no match with regexp");
+        notFound(req, res);
+        return;
+    }
+
+    const matches = req.url.match(routeRegExp);
+
+    if (matches === null || matches[1] === undefined) {
+        console.warn("didn't find game id");
+        notFound(req, res);
+        return;
+    }
+
+    const gameId: string = matches[1];
+
+    const game = games.get(gameId);
+
+    if (game === undefined) {
+        console.warn("game is undefined");
+        notFound(req, res);
+        return;
+    }
+
+    res.setHeader("Content-Type", "application/json");
+    res.write(getGame(game));
+    res.end();
+}
+
+function apiGetPlayer(req: http.IncomingMessage, res: http.ServerResponse): void {
+        const playerId: string = req.url!.substring("/api/player?id=".length);
+        const game = playersToGame.get(playerId);
+        if (game === undefined) {
+            notFound(req, res);
+            return;
+        }
+        const player = game.getPlayers().filter((player) => player.id === playerId)[0];
+        if (player === undefined) {
+            notFound(req, res);
+            return;
+        }
+
+    res.setHeader("Content-Type", "application/json");
+    res.write(getPlayer(player, game));
+    res.end();
 }
 
 function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -196,44 +228,9 @@ function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {
     res.end();
 }
 
-function serveApp(res: http.ServerResponse, pageName: string, data?: string): void {
+function serveApp(res: http.ServerResponse): void {
     res.setHeader("Content-Type", "text/html; charset=utf-8");
-    res.write("<!DOCTYPE html><html><head><link href=\"https://fonts.googleapis.com/css?family=Press+Start+2P\" rel=\"stylesheet\"><link rel='stylesheet' type='text/css' media='all' href='/nes.min.css' /><link rel='stylesheet' type='text/css' media='all' href='/styles.css' /><script src='/system.min.js'></script><script src='/script.js'></script></head><body><script>SystemJS.import('script').then(function (a) { a." + pageName + "(" + (data ? "JSON.parse(" + data + ")" : "") + "); });</script></body></html>");
-    res.end();
-}
-
-function serveGame(req: http.IncomingMessage, res: http.ServerResponse): void {
-
-    const routeRegExp: RegExp = /^\/game\/([0-9abcdef]+)$/i;
-
-    if (req.url === undefined) {
-        notFound(req, res);
-        return;
-    }
-
-    if (!routeRegExp.test(req.url)) {
-        notFound(req, res);
-        return;
-    }
-
-    const matches = req.url.match(routeRegExp);
-
-    if (matches === null || matches[1] === undefined) {
-        notFound(req, res);
-        return;
-    }
-
-    const gameId: string = matches[1];
-
-    const game = games.get(gameId);
-
-    if (game === undefined) {
-        notFound(req, res);
-        return;
-    }
-
-    res.setHeader("Content-Type", "application/json");
-    res.write(getGame(game));
+    res.write(fs.readFileSync("index.html"));
     res.end();
 }
 

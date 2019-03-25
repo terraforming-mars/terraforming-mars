@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Terraforming Mars</title>
+        <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
+        <link rel='stylesheet' type='text/css' media='all' href='/nes.min.css' />
+        <link rel='stylesheet' type='text/css' media='all' href='/styles.css' />
+    </head>
+    <body>
+        <div id="app">
+            <game-home inline-template v-if="screen === 'game-home'" :game="$data.game">
+                <div id="game-home">
+                    <h1>Terraforming Mars - Game Home</h1>
+                    <p>Send players their links below. As game administrator pick your link to use.</p>
+                    <ul>
+                        <li v-for="player in game.players">
+                            <a :href="'/player?id=' + player.id">{{player.name}} - {{player.color}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </game-home>
+            <player-home inline-template v-if="screen === 'player-home'" :player="$data.player">
+                <div id="player-home">
+                    <h1 :style="'color:' + player.color">Teraforming Mars - Player Home - {{player.name}}</h1>
+                    <div v-if="player.corporationCard">
+                        <h2>Corporation Card</h2>
+                        <corporation-card :card="player.corporationCard"></corporation-card>
+                    </div>
+                    <div v-if="player.playedCards.length > 0">
+                        <h2>Played Cards</h2>
+                        <project-card v-for="card in player.playedCards" :card="card"></project-card>
+                    </div>
+                    <div v-if="player.cardsInHand.length > 0">
+                        <h2>Cards In Hand</h2>
+                        <project-card v-for="card in player.cardsInHand" :card="card"></project-card>
+                    </div>
+                    <div>
+                        <h2>Resources</h2>Generation: {{player.generation}}<br/>
+                        Terraform Rating: {{player.terraformRating}}<br/>
+                        Mega Credits: {{player.megaCredits}}<br/>
+                        Mega Credit Production: {{player.megaCreditProduction}}<br/>
+                        Steel: {{player.steel}}<br/>
+                        Steel Production: {{player.steelProduction}}<br/>
+                        Titanium: {{player.titanium}}<br/>
+                        Titanium Production: {{player.titaniumProduction}}<br/>
+                        Energy: {{player.energy}}<br/>
+                        Energy Production: {{player.energyProduction}}<br/>
+                        Heat: {{player.heat}}<br/>
+                        Heat Production: {{player.heatProduction}}
+                    </div>
+                    <h2>Oxygen</h2>
+                    <div>{{player.oxygenLevel}}</div>
+                    <h2>Temperature</h2>
+                    <div>{{player.temperature}}</div>
+                    <h2>Oceans</h2>
+                    <div>{{player.oceans}}</div>
+                    <h2>Board</h2>
+                    <board :spaces="player.spaces"></board>
+                    <waiting-for :waitingfor="player.waitingFor"></waiting-for>
+                </div>
+            </player-home>
+            <create-game-form inline-template v-if="screen === 'create'">
+                <div id="create-game">
+                    <h1>Terraforming Mars</h1>
+                    <h2>Create New Game</h2>
+                    <div class="nes-container with-title" v-for="playerIndex in [1, 2, 3, 4, 5]">
+                        <p class="title">Player {{playerIndex}}</p>
+                        <div class="nes-field">
+                            <label :for="'playerName' + playerIndex">Name:</label>
+                            <input v-model="players[playerIndex - 1].name" :id="'playerName' + playerIndex" type="text" class="nes-input" />
+                        </div>
+                        <label :for="'playerColor' + playerIndex">Color:</label>
+                        <div class="nes-select">
+                            <select :id="'playerColor' + playerIndex" v-model="players[playerIndex - 1].color">
+                                <option value="red">Red</option>
+                                <option value="green">Green</option>
+                                <option value="yellow">Yellow</option>
+                                <option value="blue">Blue</option>
+                                <option value="black">Black</option>
+                            </select>
+                        </div>
+                        <label>
+                            <input type="checkbox" class="nes-checkbox" v-model="players[playerIndex - 1].beginner" />
+                            <span>Is Beginner</span>
+                        </label>
+                        <label>
+                            <input v-model="firstIndex" class="nes-radio" type="radio" v-bind:value="playerIndex - 1" />
+                            <span>Goes First</span>
+                        </label>
+                    </div>
+                    <button class="nes-btn is-primary" v-on:click="createGame">Create Game</button>
+                </div>
+            </create-game-form>
+        </div>
+        <script src="/main.js"></script>
+    </body>
+</html>

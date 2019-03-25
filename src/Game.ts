@@ -247,7 +247,6 @@ export class Game {
     }
 
     public playerIsFinishedTakingActions(player: Player): void {
-
         let nextStartIndex: number = -1;
 
         for (let i = 0; i < this.players.length; i++) {

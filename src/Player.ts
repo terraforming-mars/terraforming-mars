@@ -534,6 +534,8 @@ export class Player {
         return new SelectOption("Take Action!", "Claim Milestone: " + milestone, () => {
             this.victoryPoints += 5;
             game.claimedMilestones.push(milestone);
+            this.actionsTakenThisRound++;
+            this.takeAction(game);
             return undefined;
         });
     }
@@ -542,6 +544,8 @@ export class Player {
         let upperCaseAward = String(award)[0].toUpperCase() + String(award).substring(1);
         return new SelectOption("Take Action!", "Claim Award: " + upperCaseAward, () => {
             game.fundAward(award);
+            this.actionsTakenThisRound++;
+            this.takeAction(game);
             return undefined;
         });
     }

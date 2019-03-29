@@ -24,15 +24,15 @@
                     <h1 :style="'color:' + player.color">Teraforming Mars - Player Home - {{player.name}}</h1>
                     <div v-if="player.corporationCard">
                         <h2>Corporation Card</h2>
-                        <corporation-card :card="player.corporationCard"></corporation-card>
+                        <card :card="player.corporationCard"></card>
                     </div>
                     <div v-if="player.playedCards.length > 0">
                         <h2>Played Cards</h2>
-                        <project-card v-for="card in player.playedCards" :card="card"></project-card>
+                        <card v-for="card in player.playedCards" :card="card" :key="card"></card>
                     </div>
                     <div v-if="player.cardsInHand.length > 0">
                         <h2>Cards In Hand</h2>
-                        <project-card v-for="card in player.cardsInHand" :card="card"></project-card>
+                        <card v-for="card in player.cardsInHand" :card="card" :key="card"></card>
                     </div>
                     <div>
                         <h2>Resources</h2>Generation: {{player.generation}}<br/>

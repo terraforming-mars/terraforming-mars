@@ -557,6 +557,12 @@ export class Player {
         });
     }
 
+    public takeActionForFinalGreenery(game: Game): void {
+        if (game.canPlaceGreenery(this)) {
+
+        }
+    }
+
     public takeAction(game: Game): void {
         if (
             game.getGeneration() === 1 &&

@@ -207,6 +207,7 @@ function getGame(game: Game): string {
         id: game.id,
         activePlayer: game.activePlayer.color,
         phase: game.phase,
+        ended: game.ended,
         spaces: game.getAllSpaces().map((space) => ({
             id: space.id,
             spaceType: space.spaceType,

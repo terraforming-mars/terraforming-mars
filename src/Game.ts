@@ -20,16 +20,12 @@ import { Milestone } from "./Milestone";
 import { Tags } from "./cards/Tags";
 import * as constants from "./constants";
 
-const MIN_OXYGEN_LEVEL: number = 0;
-const MAX_OXYGEN_LEVEL: number = 14;
-
-const MIN_TEMPERATURE: number = -30;
-
 export class Game {
     public activePlayer: Player;
     public claimedMilestones: Array<Milestone> = [];
     public fundedAwards: Array<Award> = [];
     public awardFundingCost: number = 8;
+    public ended: boolean = false;
     constructor(public id: string, private players: Array<Player>, private first: Player) {
         this.activePlayer = first;
         // Give each player their corporation cards
@@ -44,6 +40,11 @@ export class Game {
             }
         }
         
+    }
+
+    private marsIsTerraformed(): boolean {
+        return this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL && this.temperature >= constants.MAX_TEMPERATURE &&
+            this.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
     }
 
     public fundAward(award: Award): void {
@@ -183,7 +184,11 @@ export class Game {
         this.onGenerationEnd.slice().forEach(function (end) {
             end();
         });
-        this.gotoResearchPhase();
+        if (this.marsIsTerraformed()) {
+            this.gotoFinalGreeneryPlacement();
+        } else {
+            this.gotoResearchPhase();
+        }
     }
 
     private allPlayersHavePassed(): boolean {
@@ -246,29 +251,32 @@ export class Game {
         }
     }
 
-    public playerIsFinishedTakingActions(player: Player): void {
-        let nextStartIndex: number = -1;
+    private getNextPlayer(players: Array<Player>, player: Player): Player | undefined {
+        const playerIndex: number = players.indexOf(player);
 
-        for (let i = 0; i < this.players.length; i++) {
-            if (this.players[i] === player) {
-                nextStartIndex = i + 1;
-                break;
-            }
+        // The player was not found
+        if (playerIndex === -1) {
+            return undefined;
         }
 
-        if (nextStartIndex === -1) {
+        // Go to the beginning of the array if we reached the end
+        return players[(playerIndex + 1 >= players.length) ? 0 : playerIndex + 1];
+    }
+
+    public playerIsFinishedTakingActions(player: Player): void {
+        const nextPlayer = this.getNextPlayer(this.players, player);
+
+        // TODO change to assert
+        if (nextPlayer === undefined) {
             throw "Did not find player";
         }
-
-        if (nextStartIndex + 1 >= this.players.length) {
-            nextStartIndex = 0;
+        // TODO change to assert
+        if (nextPlayer === player) {
+            throw "Inadvertently entered infinite loop";
         }
 
-        for (let i = nextStartIndex; i < this.players.length; i++) {
-            if (!this.hasPassedThisActionPhase(this.players[i])) {
-                this.startActionsForPlayer(this.players[i]);
-                break;
-            }
+        if (!this.hasPassedThisActionPhase(nextPlayer)) {
+            this.startActionsForPlayer(nextPlayer);
         }
 
     }
@@ -277,6 +285,39 @@ export class Game {
         this.phase = Phase.ACTION;
         this.passedPlayers.clear();
         this.startActionsForPlayer(this.first);
+    }
+
+    private gotoEndGame(): void {
+        this.ended = true;
+    }
+
+    public canPlaceGreenery(player: Player): boolean {
+        return player.plants >= player.plantsNeededForGreenery;
+    }
+
+    private gotoFinalGreeneryPlacement(): void {
+        const playersWhoCanPlaceGreeneries = this.players.filter((player) => this.canPlaceGreenery(player));
+        // If no players can place greeneries we are done
+        if (playersWhoCanPlaceGreeneries.length === 0) {
+            this.gotoEndGame();
+        }
+
+        // iterate through players in order and allow them to convert plants
+        // into greenery if possible, there needs to be spaces available for
+        // greenery and the player needs enough plants
+        let firstPlayer: Player | undefined = this.first;
+        while (firstPlayer !== undefined && playersWhoCanPlaceGreeneries.indexOf(firstPlayer) === -1) {
+            firstPlayer = this.getNextPlayer(playersWhoCanPlaceGreeneries, firstPlayer);
+        }
+        // TODO assert
+        if (firstPlayer !== undefined) {
+            this.startFinalGreeneryPlacement(firstPlayer);
+        }
+    }
+
+    private startFinalGreeneryPlacement(player: Player) {
+        this.activePlayer = player;
+        player.takeActionForFinalGreenery(this);
     }
 
     private startActionsForPlayer(player: Player) {
@@ -302,10 +343,10 @@ export class Game {
     public onGenerationEnd: Array<Function> = [];
 
     private generation: number = 1;
-    private oxygenLevel: number = MIN_OXYGEN_LEVEL;
+    private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
 
     public increaseOxygenLevel(player: Player, steps: 1 | 2): SelectSpace | undefined {
-        if (this.oxygenLevel >= MAX_OXYGEN_LEVEL) {
+        if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
             return undefined;
         }
         this.oxygenLevel += steps;
@@ -319,7 +360,7 @@ export class Game {
         return this.oxygenLevel;
     }
 
-    private temperature: number = MIN_TEMPERATURE;
+    private temperature: number = constants.MIN_TEMPERATURE;
 
     public increaseTemperature(player: Player, steps: 1 | 2 | 3): SelectSpace | undefined {
         if (this.temperature >= constants.MAX_TEMPERATURE) {

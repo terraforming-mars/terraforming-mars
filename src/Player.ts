@@ -559,8 +559,25 @@ export class Player {
 
     public takeActionForFinalGreenery(game: Game): void {
         if (game.canPlaceGreenery(this)) {
-
+            const action: OrOptions = new OrOptions();
+            action.title = "Place any final greenery from plants";
+            action.options.push(
+                new SelectOption("Don't or can't place a greenery", "Pass", () => {
+                    game.playerIsDoneWithGame(this);
+                    return undefined;
+                })
+            );
+            action.options.push(
+                new SelectSpace("Place final greenery", "Select space for greenery", game.getAvailableSpacesForGreenery(this), (space) => {
+                    game.addGreenery(this, space.id);
+                    this.takeActionForFinalGreenery(game);
+                    return undefined;
+                })
+            );
+            this.setWaitingFor(action);
+            return;
         }
+        game.playerIsDoneWithGame(this);
     }
 
     public takeAction(game: Game): void {

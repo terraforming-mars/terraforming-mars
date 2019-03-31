@@ -213,6 +213,7 @@ export class Game {
         return this.researchedPlayers.has(player);
     }
 
+    private donePlayers: Set<Player> = new Set<Player>();
     private researchedPlayers: Set<Player> = new Set<Player>();
 
     public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
@@ -289,10 +290,36 @@ export class Game {
 
     private gotoEndGame(): void {
         this.ended = true;
+        // Give players any victory points from cards
+        this.onGameEnd.forEach((gameEnd) => {
+            gameEnd();
+        });
+        const spaces = this.getAllSpaces();
+        spaces.forEach((space) => {
+            // Give victory point for each greenery tile
+            if (space.tile && space.tile.tileType === TileType.GREENERY && space.player) {
+                space.player.victoryPoints++;
+            }
+            // Give victory point for each greenery adjacent to city tile
+            if (space.tile && space.tile.tileType === TileType.CITY && space.player !== undefined) {
+                const adjacentSpaces = this.getAdjacentSpaces(space);
+                for (let adjacentSpace of adjacentSpaces) {
+                    if (adjacentSpace.tile && adjacentSpace.tile.tileType === TileType.GREENERY && adjacentSpace.player) {
+                        space.player.victoryPoints++;
+                    }
+                }
+            }
+        });
+
     }
 
     public canPlaceGreenery(player: Player): boolean {
-        return player.plants >= player.plantsNeededForGreenery;
+        return !this.donePlayers.has(player) && player.plants >= player.plantsNeededForGreenery && this.getAvailableSpacesForGreenery(player).length > 0;
+    }
+
+    public playerIsDoneWithGame(player: Player): void {
+        this.donePlayers.add(player);
+        this.gotoFinalGreeneryPlacement();
     }
 
     private gotoFinalGreeneryPlacement(): void {
@@ -300,6 +327,7 @@ export class Game {
         // If no players can place greeneries we are done
         if (playersWhoCanPlaceGreeneries.length === 0) {
             this.gotoEndGame();
+            return;
         }
 
         // iterate through players in order and allow them to convert plants

@@ -32,7 +32,7 @@
                     </div>
                     <div v-if="player.cardsInHand.length > 0">
                         <h2>Cards In Hand</h2>
-                        <card v-for="card in player.cardsInHand" :card="card" :key="card"></card>
+                        <div v-for="card in player.cardsInHand" :key="card"><card :card="card"></card></div>
                     </div>
                     <div>
                         <h2>Resources</h2>Generation: {{player.generation}}<br/>

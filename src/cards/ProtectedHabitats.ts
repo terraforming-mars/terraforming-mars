@@ -12,11 +12,7 @@ export class ProtectedHabitats implements IProjectCard {
     public name: string = "Protected Habitats";
     public text: string = "OPPONENTS MAY NOT REMOVE YOUR plant, animal, or microbes";
     public description: string = "The harsh environment is not the only threat to your ecological projects";
-    public play(player: Player, _game: Game) {
-        // TODO - this restriction must be met
-        player.opponentsCanRemovePlants = false;
-        player.opponentsCanRemoveAnimals = false;
-        player.opponentsCanRemoveMicrobes = false; 
+    public play(_player: Player, _game: Game) { 
         return undefined;
     }
 }

@@ -24,19 +24,48 @@ import { TileType } from "./TileType";
 import { StandardProjectType } from "./StandardProjectType";
 import * as constants from "./constants";
 
+import { ProtectedHabitats } from "./cards/ProtectedHabitats";
+import { Pets } from "./cards/Pets";
+
 export class Player {
     constructor(public name: string, public color: Color, public beginner: boolean) {
 
     }
-
+    private hasProtectedHabitats(): boolean {
+        return this.playedCards.find((playedCard) => playedCard.name === new ProtectedHabitats().name) !== undefined;
+    }
+    public removePlants(count: number): void {
+        if (this.hasProtectedHabitats()) {
+            throw "Can not remove plants due to protected habitats";
+        }
+        this.plants = Math.max(0, this.plants - count);
+    }
+    public removeAnimals(card: IProjectCard, count: number): void {
+        if (this.hasProtectedHabitats()) {
+            throw "Can not remove animals due to protected habitats";
+        }
+        if (card.name === new Pets().name) {
+            throw "Animals may not be removed from pets";
+        }
+        if (card.animals === undefined) {
+            throw card.name + " does not have animals to remove";
+        }
+        card.animals = Math.max(0, card.animals - count);
+    }
+    public removeMicrobes(card: IProjectCard, count: number): void {
+        if (this.hasProtectedHabitats()) {
+            throw "Can not remove microbes due to protected habitats";
+        }
+        if (card.microbes === undefined) {
+            throw card.name + " does not have microbes to remove";
+        }
+        card.microbes = Math.max(0, card.microbes - count);
+    }
     public corporationCard: CorporationCard | undefined = undefined;
     public id: string = this.generateId();
     public canUseHeatAsMegaCredits: boolean = false;
     public plantsNeededForGreenery: number = 8;
     public powerPlantCost: number = 11;
-    public opponentsCanRemovePlants: boolean = true;
-    public opponentsCanRemoveAnimals: boolean = true;
-    public opponentsCanRemoveMicrobes: boolean = true;
     public titaniumValue: number = 3;
     public steelValue: number = 2;
     public requirementsBonus: number = 0;
@@ -455,8 +484,7 @@ export class Player {
     private aquifer(game: Game): PlayerInput {
         return new SelectSpace("Take Action!", "Standard Project: Aquifer", game.getAvailableSpacesForOcean(this), (space: ISpace) => {
             game.addOceanTile(this, space.id);
-            // TODO do these both cost 14?
-            this.payForStandardProject(StandardProjectType.AQUIFER, 14);
+            this.payForStandardProject(StandardProjectType.AQUIFER, 18);
             this.actionsTakenThisRound++;
             this.takeAction(game);
             return undefined;

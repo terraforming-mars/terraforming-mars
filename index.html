@@ -35,6 +35,15 @@
                         <div v-for="card in player.cardsInHand" :key="card"><card :card="card"></card></div>
                     </div>
                     <div>
+                        <table class="nes-table is-bordered is-centered">
+                            <thead>
+                                <tr>
+                                    <th>Mega Credits</th>
+                                    <th>Steel</th>
+                                    <th>Titanium</th>
+                                </tr>
+                            </thead>
+                        </table>
                         <h2>Resources</h2>Generation: {{player.generation}}<br/>
                         Terraform Rating: {{player.terraformRating}}<br/>
                         Mega Credits: {{player.megaCredits}}<br/>
@@ -50,12 +59,17 @@
                         Plants: {{player.plants}}<br/>
                         Plant Production: {{player.plantProduction}}
                     </div>
-                    <h2>Oxygen</h2>
-                    <div>{{player.oxygenLevel}}</div>
-                    <h2>Temperature</h2>
-                    <div>{{player.temperature}}</div>
-                    <h2>Oceans</h2>
-                    <div>{{player.oceans}}</div>
+                    <h2>Oxygen Level ({{player.oxygenLevel}})</h2>
+                    <div>
+                        <progress class="nes-progress is-success" max="14" :value="player.oxygenLevel"></progress>
+                    </div>
+                    <h2>Temperature ({{player.temperature}})</h2>
+                    <div>
+                        <progress class="nes-progress is-warning" max="38" :value="player.temperature + 30"></progress></div>
+                    <h2>Oceans ({{player.oceans}})</h2>
+                    <div>
+                        <progress class="nes-progress is-primary" max="9" :value="player.oceans"></progress>
+                    </div>
                     <h2>Board</h2>
                     <board :spaces="player.spaces"></board>
                     <waiting-for :waitingfor="player.waitingFor"></waiting-for>

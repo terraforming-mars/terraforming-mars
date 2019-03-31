@@ -10,9 +10,6 @@ describe("ProtectedHabitats", function () {
         const card = new ProtectedHabitats();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        card.play(player, game);
-        expect(player.opponentsCanRemovePlants).to.eq(false);
-        expect(player.opponentsCanRemoveAnimals).to.eq(false);
-        expect(player.opponentsCanRemoveMicrobes).to.eq(false);
+        expect(card.play(player, game)).to.eq(undefined);
     });
 });

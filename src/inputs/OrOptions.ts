@@ -17,9 +17,6 @@ export class OrOptions implements PlayerInput {
         this.options = options;
     }
     public get message(): string {
-        if (this.options.length) {
-            return this.options[0].message;
-        }
         return "";
     }
 }

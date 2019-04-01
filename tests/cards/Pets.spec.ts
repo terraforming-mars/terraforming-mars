@@ -8,8 +8,9 @@ import { Game } from "../../src/Game";
 describe("Pets", function () {
     it("Should throw", function () {
         const card = new Pets();
-        card.animals = 2;
-        expect(function () { card.animals--; }).to.throw("ANIMALS MAY NOT BE REMOVED FROM THIS CARD");
+        const player = new Player("test", Color.BLUE, false);
+        player.playedCards.push(card);
+        expect(function () { player.removeAnimals(card, 5); }).to.throw("Animals may not be removed from pets");
     });
     it("Should play", function () {
         const card = new Pets();

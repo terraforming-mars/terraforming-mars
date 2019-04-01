@@ -271,10 +271,6 @@ export class Game {
         if (nextPlayer === undefined) {
             throw "Did not find player";
         }
-        // TODO change to assert
-        if (nextPlayer === player) {
-            throw "Inadvertently entered infinite loop";
-        }
 
         if (!this.hasPassedThisActionPhase(nextPlayer)) {
             this.startActionsForPlayer(nextPlayer);
@@ -378,6 +374,7 @@ export class Game {
             return undefined;
         }
         this.oxygenLevel += steps;
+        player.terraformRating += steps;
         if (this.oxygenLevel === 8 || (steps === 2 && this.oxygenLevel === 9)) {
             return this.increaseTemperature(player, 1);
         }
@@ -395,6 +392,7 @@ export class Game {
             return undefined;
         }
         this.temperature += 2 * steps;
+        player.terraformRating += steps;
         // BONUS FOR HEAT PRODUCTION AT -20 and -24
         // BONUS FOR OCEAN TILE AT 0
         if (steps === 3 && this.temperature === -20) {
@@ -601,6 +599,16 @@ export class Game {
             });
         });
         return result;
+    }
+    public getCardPlayer(name: string): Player {
+        for (let i = 0; i < this.players.length; i++) {
+            for (let j = 0; j < this.players[i].playedCards.length; j++) {
+                if (this.players[i].playedCards[j].name === name) {
+                    return this.players[i];
+                }
+            }
+        }
+        throw "No player has played requested card";
     }
     public getCard(name: string): IProjectCard | undefined {
         for (let i = 0; i < this.players.length; i++) {

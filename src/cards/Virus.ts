@@ -20,16 +20,16 @@ export class Virus implements IProjectCard {
         const cards = game.getPlayedCardsWithAnimals();
         const remove5Plants = () => {
             return new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 5 plants", (foundPlayer: Player) => {
-                foundPlayer.plants = Math.max(0, foundPlayer.plants - 5);
+                foundPlayer.removePlants(5);
                 return undefined;
-            })
+            });
         };
         if (cards.length === 0) {
             return remove5Plants();
         }
         return new OrOptions(
             new SelectCard(this.name, "Select card to remove 2 animals", cards, (foundCard: Array<IProjectCard>) => {
-                foundCard[0].animals! = Math.max(0, foundCard[0].animals! - 2);
+                game.getCardPlayer(foundCard[0].name).removeAnimals(foundCard[0], 2);
                 return undefined;
             }),
             remove5Plants()

@@ -231,6 +231,8 @@
         "tests/cards/corporation/Inventrix.spec.ts",
         "tests/cards/corporation/MiningGuild.spec.ts",
         "tests/cards/corporation/PhoboLog.spec.ts",
+        "tests/cards/corporation/SaturnSystems.spec.ts",
+        "tests/cards/corporation/Teractor.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

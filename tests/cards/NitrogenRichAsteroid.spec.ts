@@ -13,12 +13,12 @@ describe("NitrogenRichAsteroid", function () {
         const game = new Game("foobar", [player], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.terraformRating).to.eq(22);
+        expect(player.terraformRating).to.eq(23);
         expect(game.getTemperature()).to.eq(-28);
         expect(player.plantProduction).to.eq(1);
         player.playedCards.push(new Bushes(), new Bushes(), new Bushes());
         card.play(player, game);
-        expect(player.terraformRating).to.eq(24);
+        expect(player.terraformRating).to.eq(26);
         expect(game.getTemperature()).to.eq(-26);
         expect(player.plantProduction).to.eq(5);
     });

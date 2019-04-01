@@ -23,9 +23,10 @@
                 <div id="player-home">
                     <h1 :style="'color:' + player.color">Teraforming Mars - Player Home - {{player.name}}</h1>
                     <div v-if="player.corporationCard">
-                        <h2>Corporation Card</h2>
-                        <card :card="player.corporationCard"></card>
-                    </div>
+                    <div>Generation: {{player.generation}}</div>
+                    <div>Terraform Rating: {{player.terraformRating}}</div>
+                    <h2>Corporation Card</h2>
+                    <card :card="player.corporationCard"></card>
                     <div v-if="player.playedCards.length > 0">
                         <h2>Played Cards</h2>
                         <card v-for="card in player.playedCards" :card="card" :key="card"></card>
@@ -35,29 +36,61 @@
                         <div v-for="card in player.cardsInHand" :key="card"><card :card="card"></card></div>
                     </div>
                     <div>
+                        <h2>Resources</h2>
                         <table class="nes-table is-bordered is-centered">
                             <thead>
                                 <tr>
-                                    <th>Mega Credits</th>
-                                    <th>Steel</th>
-                                    <th>Titanium</th>
+                                    <th colspan="2">Mega Credits</th>
+                                    <th colspan="2">Steel</th>
+                                    <th colspan="2">Titanium</th>
+                                </tr>
+                                <tr>
+                                    <th>Stock</th>
+                                    <th>Production</th>
+                                    <th>Stock</th>
+                                    <th>Production</th>
+                                    <th>Stock</th>
+                                    <th>Production</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{player.megaCredits}}</td>
+                                    <td>{{player.megaCreditProduction}}</td>
+                                    <td>{{player.steel}}</td>
+                                    <td>{{player.steelProduction}}</td>
+                                    <td>{{player.titanium}}</td>
+                                    <td>{{player.titaniumProduction}}</td>
+                                </tr>
+                            </tbody>
                         </table>
-                        <h2>Resources</h2>Generation: {{player.generation}}<br/>
-                        Terraform Rating: {{player.terraformRating}}<br/>
-                        Mega Credits: {{player.megaCredits}}<br/>
-                        Mega Credit Production: {{player.megaCreditProduction}}<br/>
-                        Steel: {{player.steel}}<br/>
-                        Steel Production: {{player.steelProduction}}<br/>
-                        Titanium: {{player.titanium}}<br/>
-                        Titanium Production: {{player.titaniumProduction}}<br/>
-                        Energy: {{player.energy}}<br/>
-                        Energy Production: {{player.energyProduction}}<br/>
-                        Heat: {{player.heat}}<br/>
-                        Heat Production: {{player.heatProduction}}<br/>
-                        Plants: {{player.plants}}<br/>
-                        Plant Production: {{player.plantProduction}}
+                        <table class="nes-table is-bordered is-centered">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">Plants</th>
+                                    <th colspan="2">Energy</th>
+                                    <th colspan="2">Heat</th>
+                                </tr>
+                                <tr>
+                                    <th>Stock</th>
+                                    <th>Production</th>
+                                    <th>Stock</th>
+                                    <th>Production</th>
+                                    <th>Stock</th>
+                                    <th>Production</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{player.plants}}</td>
+                                    <td>{{player.plantProduction}}</td>
+                                    <td>{{player.energy}}</td>
+                                    <td>{{player.energyProduction}}</td>
+                                    <td>{{player.heat}}</td>
+                                    <td>{{player.heatProduction}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <h2>Oxygen Level ({{player.oxygenLevel}})</h2>
                     <div>
@@ -72,6 +105,7 @@
                     </div>
                     <h2>Board</h2>
                     <board :spaces="player.spaces"></board>
+                    </div>
                     <waiting-for :waitingfor="player.waitingFor"></waiting-for>
                 </div>
             </player-home>

@@ -234,6 +234,8 @@
         "tests/cards/corporation/SaturnSystems.spec.ts",
         "tests/cards/corporation/Teractor.spec.ts",
         "tests/cards/corporation/TharsisRepublic.spec.ts",
+        "tests/cards/corporation/Thorgate.spec.ts",
+        "tests/cards/corporation/UnitedNationsMarsInitiative.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

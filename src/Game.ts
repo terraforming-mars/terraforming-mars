@@ -352,7 +352,7 @@ export class Game {
     public dealer: Dealer = new Dealer();
     private spaces: Array<ISpace> = new OriginalBoard().spaces;
     private onGreeneryPlaced: Array<Function> = [];
-    private onCityTilePlaced: Array<(space: ISpace) => void> = [];
+    public onCityTilePlaced: Array<(space: ISpace) => void> = [];
     private onOceanTilePlaced: Array<Function> = [];
     public addGreeneryPlacedListener(listener: Function): void {
         this.onGreeneryPlaced.push(listener);

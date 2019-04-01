@@ -455,7 +455,7 @@ export class Player {
     private buildPowerPlant(game: Game): PlayerInput {
         return new SelectOption("Take Action!", "Standard Project: Power Plant", () => {
             this.energyProduction++;
-            this.payForStandardProject(StandardProjectType.POWER_PLANT, 11);
+            this.payForStandardProject(StandardProjectType.POWER_PLANT, this.powerPlantCost);
             this.actionsTakenThisRound++;
             this.takeAction(game);
             return undefined;
@@ -656,7 +656,7 @@ export class Player {
             );
         }
 
-        if (this.megaCredits >= 11) {
+        if (this.megaCredits >= this.powerPlantCost) {
             action.options.push(
                 this.buildPowerPlant(game)
             );

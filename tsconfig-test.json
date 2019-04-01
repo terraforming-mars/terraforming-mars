@@ -233,6 +233,7 @@
         "tests/cards/corporation/PhoboLog.spec.ts",
         "tests/cards/corporation/SaturnSystems.spec.ts",
         "tests/cards/corporation/Teractor.spec.ts",
+        "tests/cards/corporation/TharsisRepublic.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

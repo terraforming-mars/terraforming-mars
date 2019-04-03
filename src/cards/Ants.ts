@@ -24,7 +24,7 @@ export class Ants implements IProjectCard {
         });
         return undefined;
     }
-    public action(_player: Player, game: Game) {
+    public action(player: Player, game: Game) {
         const availableCards: Array<IProjectCard> = [];
         game.getPlayers().forEach((gamePlayer) => {
             gamePlayer.playedCards.forEach((playedCard) => {
@@ -37,7 +37,7 @@ export class Ants implements IProjectCard {
             throw "No cards to remove microbes from";
         }
         return new SelectCard(this.name, "Select card to remove microbe", availableCards, (foundCards: Array<IProjectCard>) => {
-            foundCards[0]!.microbes!--;
+            game.getCardPlayer(foundCards[0].name).removeMicrobes(player, foundCards[0], 1);
             this.microbes++;
             return undefined;
         });

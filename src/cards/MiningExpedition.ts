@@ -15,7 +15,7 @@ export class MiningExpedition implements IProjectCard {
     public description: string = "Ruthlessly excavating rich areas.";
     public play(player: Player, game: Game) {
         return new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 2 plants", (foundPlayer: Player) => {
-            foundPlayer.removePlants(2);
+            foundPlayer.removePlants(player, 2);
             player.steel += 2;
             return game.increaseOxygenLevel(player, 1);
         });

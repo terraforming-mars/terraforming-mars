@@ -17,23 +17,23 @@ export class ElectroCatapult implements IProjectCard {
     public description: string = "A 200km long acceleration ramp up the side of Pavonis Mons, hurtling export goods into space.";
     public action(player: Player, _game: Game) {
         return new OrOptions(
-                new SelectOption(this.name, "Spend 1 plant", () => {
-                    if (player.plants < 1) {
-                        throw "Need plant to spend";
-                    }
-                    player.plants--;
-                    player.megaCredits += 7;
-                    return undefined;
-                }),
-                new SelectOption(this.name, "Spend 1 steel", () => {
-                    if (player.steel < 1) {
-                        throw "Need steel to spend";
-                    }
-                    player.steel--;
-                    player.megaCredits += 7;
-                    return undefined;
-                })
-            );
+            new SelectOption(this.name, "Spend 1 plant", () => {
+                if (player.plants < 1) {
+                    throw "Need plant to spend";
+                }
+                player.plants--;
+                player.megaCredits += 7;
+                return undefined;
+            }),
+            new SelectOption(this.name, "Spend 1 steel", () => {
+                if (player.steel < 1) {
+                    throw "Need steel to spend";
+                }
+                player.steel--;
+                player.megaCredits += 7;
+                return undefined;
+            })
+        );
     }
     public play(player: Player, game: Game) {
         if (game.getOxygenLevel() > 8) {

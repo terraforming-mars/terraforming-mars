@@ -15,7 +15,7 @@ export class BigAsteroid implements IProjectCard {
     public description: string = "There are many unpopulated areas to crash it on";
     public play(player: Player, game: Game) {
         return new SelectPlayer(this.name, game.getPlayers(), "Select player to remove plants", (foundPlayer: Player) => {
-            foundPlayer.removePlants(4);
+            foundPlayer.removePlants(player, 4);
             player.titanium += 4;
             return game.increaseTemperature(player, 2);
         });

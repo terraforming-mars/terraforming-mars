@@ -15,7 +15,7 @@ export class DeimosDown implements IProjectCard {
     public description: string = "We don't use that moon anyway";
     public play(player: Player, game: Game) {
         return new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 8 plants", (foundPlayer: Player) => {
-            foundPlayer.removePlants(8);
+            foundPlayer.removePlants(player, 8);
             player.steel += 4;
             return game.increaseTemperature(player, 3);
         });

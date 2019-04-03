@@ -10,7 +10,7 @@ describe("Pets", function () {
         const card = new Pets();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        expect(function () { player.removeAnimals(card, 5); }).to.throw("Animals may not be removed from pets");
+        expect(function () { player.removeAnimals(player, card, 5); }).to.throw("Animals may not be removed from pets");
     });
     it("Should play", function () {
         const card = new Pets();

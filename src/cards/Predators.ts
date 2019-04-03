@@ -24,7 +24,7 @@ export class Predators implements IProjectCard {
         });
         return undefined;
     }
-    public action(_player: Player, game: Game) {
+    public action(player: Player, game: Game) {
         const animalCards: Array<IProjectCard> = game.getPlayedCardsWithAnimals()
             .filter((card) => Number(card.animals) > 0);
         if (animalCards.length === 0) {
@@ -32,7 +32,7 @@ export class Predators implements IProjectCard {
         }
         return new SelectCard(this.name, "Select card to remove animal from", animalCards, (foundCards: Array<IProjectCard>) => {
             const foundCard = foundCards[0];
-            foundCard.animals!--;
+            game.getCardPlayer(foundCard.name).removeAnimals(player, foundCard, 1);
             this.animals++;
             return undefined;
         });

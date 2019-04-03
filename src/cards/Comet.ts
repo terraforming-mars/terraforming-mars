@@ -26,7 +26,7 @@ export class Comet implements IProjectCard {
                 return undefined;
             }),
             new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 3 plants", (foundPlayer: Player) => {
-                foundPlayer.removePlants(3);
+                foundPlayer.removePlants(player, 3);
                 return undefined;
             })
         );

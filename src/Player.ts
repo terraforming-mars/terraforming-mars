@@ -34,14 +34,14 @@ export class Player {
     private hasProtectedHabitats(): boolean {
         return this.playedCards.find((playedCard) => playedCard.name === new ProtectedHabitats().name) !== undefined;
     }
-    public removePlants(count: number): void {
-        if (this.hasProtectedHabitats()) {
+    public removePlants(removingPlayer: Player, count: number): void {
+        if (removingPlayer !== this && this.hasProtectedHabitats()) {
             throw "Can not remove plants due to protected habitats";
         }
         this.plants = Math.max(0, this.plants - count);
     }
-    public removeAnimals(card: IProjectCard, count: number): void {
-        if (this.hasProtectedHabitats()) {
+    public removeAnimals(removingPlayer: Player, card: IProjectCard, count: number): void {
+        if (removingPlayer !== this && this.hasProtectedHabitats()) {
             throw "Can not remove animals due to protected habitats";
         }
         if (card.name === new Pets().name) {
@@ -52,8 +52,8 @@ export class Player {
         }
         card.animals = Math.max(0, card.animals - count);
     }
-    public removeMicrobes(card: IProjectCard, count: number): void {
-        if (this.hasProtectedHabitats()) {
+    public removeMicrobes(removingPlayer: Player, card: IProjectCard, count: number): void {
+        if (removingPlayer !== this && this.hasProtectedHabitats()) {
             throw "Can not remove microbes due to protected habitats";
         }
         if (card.microbes === undefined) {

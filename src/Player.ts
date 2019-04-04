@@ -570,7 +570,7 @@ export class Player {
 
     private fundAward(award: Award, game: Game): PlayerInput {
         let upperCaseAward = String(award)[0].toUpperCase() + String(award).substring(1);
-        return new SelectOption("Take Action!", "Claim Award: " + upperCaseAward, () => {
+        return new SelectOption("Take Action!", "Fund Award: " + upperCaseAward, () => {
             game.fundAward(award);
             this.actionsTakenThisRound++;
             this.takeAction(game);
@@ -656,6 +656,7 @@ export class Player {
             );
         }
 
+        // STANDARD PROJECTS
         if (this.megaCredits >= this.powerPlantCost) {
             action.options.push(
                 this.buildPowerPlant(game)
@@ -700,43 +701,56 @@ export class Player {
 
         if (!game.allMilestonesClaimed()) {
             if (this.megaCredits >= 8) {
+                const remainingMilestones = new OrOptions();
+                remainingMilestones.title = "Take action!";
+                remainingMilestones.message = "Select milestone to claim";
+                 
                 if (this.terraformRating >= 35) {
-                    action.options.push(
+                    remainingMilestones.options.push(
                         this.claimMilestone(Milestone.TERRAFORMER, game)
                     );
                 }
                 if (game.getSpaceCount(TileType.CITY, this) >= 3) {
-                    action.options.push(
+                    remainingMilestones.options.push(
                         this.claimMilestone(Milestone.MAYOR, game)
                     );
                 }
                 if (game.getSpaceCount(TileType.GREENERY, this) >= 3) {
-                    action.options.push(
+                    remainingMilestones.options.push(
                         this.claimMilestone(Milestone.GARDENER, game)
                     );
                 }
                 if (this.getTagCount(Tags.STEEL) >= 8) {
-                    action.options.push(
+                    remainingMilestones.options.push(
                         this.claimMilestone(Milestone.BUILDER, game)
                     );
                 }
                 if (this.cardsInHand.length >= 16) {
-                    action.options.push(
+                    remainingMilestones.options.push(
                         this.claimMilestone(Milestone.PLANNER, game)
                     );
+                }
+                if (remainingMilestones.options.length > 1) {
+                    action.options.push(remainingMilestones);
+                } else if (remainingMilestones.options.length === 1) {
+                    action.options.push(remainingMilestones.options[0]);
                 }
             }
         }
 
         if (!game.allAwardsFunded()) {
             if (this.megaCredits >= game.awardFundingCost) {
+                const remainingAwards = new OrOptions();
+                remainingAwards.title = "Take action!";
+                remainingAwards.message = "Fund an award";
                 [Award.LANDLORD, Award.BANKER, Award.SCIENTIST, Award.THERMALIST, Award.MINER]
                     .filter((award: Award) => game.hasBeenFunded(award) === false)
                     .forEach((award: Award) => {
-                        action.options.push(
+                        remainingAwards.options.push(
                             this.fundAward(award, game)
                         );
                     });
+                action.options.push(remainingAwards);
             }
         }
 

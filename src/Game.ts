@@ -267,7 +267,6 @@ export class Game {
     public playerIsFinishedTakingActions(player: Player): void {
         const nextPlayer = this.getNextPlayer(this.players, player);
 
-        // TODO change to assert
         if (nextPlayer === undefined) {
             throw "Did not find player";
         }
@@ -333,9 +332,11 @@ export class Game {
         while (firstPlayer !== undefined && playersWhoCanPlaceGreeneries.indexOf(firstPlayer) === -1) {
             firstPlayer = this.getNextPlayer(playersWhoCanPlaceGreeneries, firstPlayer);
         }
-        // TODO assert
+
         if (firstPlayer !== undefined) {
             this.startFinalGreeneryPlacement(firstPlayer);
+        } else {
+            throw "Was no player left to place final greenery";
         }
     }
 

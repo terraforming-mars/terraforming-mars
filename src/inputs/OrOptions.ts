@@ -1,10 +1,8 @@
 
 import { PlayerInput } from "../PlayerInput";
 import { PlayerInputTypes } from "../PlayerInputTypes";
-import { IProjectCard } from "../cards/IProjectCard";
 
 export class OrOptions implements PlayerInput {
-    public card?: IProjectCard;
     public cb(): undefined {
         return undefined;
     }

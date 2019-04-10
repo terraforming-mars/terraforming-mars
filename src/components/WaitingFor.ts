@@ -34,6 +34,7 @@ export const WaitingFor = Vue.component("waiting-for", {
                 if (xhr.status === 200) {
                     (this.$root as any).$data.screen = "empty";
                     (this.$root as any).$data.player = xhr.response;
+                    (this.$root as any).$data.playerkey++;
                     (this.$root as any).$data.screen = "player-home";
                 } else {
                     alert("Error sending input");

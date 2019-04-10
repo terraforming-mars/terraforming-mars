@@ -19,7 +19,7 @@
                     </ul>
                 </div>
             </game-home>
-            <player-home inline-template v-if="screen === 'player-home'" :player="$data.player">
+            <player-home inline-template v-if="screen === 'player-home'" :player="$data.player" :key="$data.playerkey">
                 <div id="player-home">
                     <h1 :style="'color:' + player.color">Teraforming Mars - Player Home - {{player.name}}</h1>
                     <div v-if="player.corporationCard">
@@ -29,7 +29,7 @@
                     <card :card="player.corporationCard"></card>
                     <div v-if="player.playedCards.length > 0">
                         <h2>Played Cards</h2>
-                        <card v-for="card in player.playedCards" :card="card" :key="card"></card>
+                        <div v-for="card in player.playedCards" :key="card"><card :card="card"></card></div>
                     </div>
                     <div v-if="player.cardsInHand.length > 0">
                         <h2>Cards In Hand</h2>

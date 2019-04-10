@@ -468,6 +468,7 @@ export class Game {
     public getSpaces(spaceType: SpaceType): Array<ISpace> {
         return this.spaces.filter((space) => space.spaceType === spaceType);
     }
+    /* TODO: Gain mega credits for each adjacent tile of some kind */
     public addTile(player: Player, spaceType: SpaceType, space: ISpace, tile: ITile): void {
         if (space.tile !== undefined) {
             throw "Selected space is occupied";

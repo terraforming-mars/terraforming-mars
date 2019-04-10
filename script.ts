@@ -9,6 +9,7 @@ const app = new Vue({
     el: "#app",
     data: {
         screen: "empty",
+        playerkey: 0,
         game: {
             players: []
         }

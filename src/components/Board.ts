@@ -5,13 +5,15 @@ import { SpaceName } from "../SpaceName";
 import { SpaceType } from "../SpaceType";
 import { TileType } from "../TileType";
 
+import { SpaceModel } from "../models/SpaceModel";
+
 export const Board = Vue.component("board", {
     props: ["spaces"],
     data: function () {
         return {}
     },
     render: function (createElement) {
-        const boardSpaces = this.spaces.filter((space: any) => space.x >= 0 && space.y >= 0);
+        const boardSpaces: Array<SpaceModel> = this.spaces.filter((space: SpaceModel) => space.x >= 0 && space.y >= 0);
         boardSpaces.sort((s1: any, s2: any) => {
             if (s1.y === s2.y) {
                 return s1.x - s2.x;
@@ -35,8 +37,7 @@ export const Board = Vue.component("board", {
         spaces.push(elGanymede);
         let cells = [];
         let leftPadding: number = 0;
-        while (boardSpaces.length) {
-            const thisSpace = boardSpaces.shift();
+        for (let thisSpace of boardSpaces) {
             if (lastY === undefined || thisSpace.y !== lastY) {
                 if (cells.length > 0) {
                     spaces.push(createElement("div", { class: "row", style: { paddingLeft: (25 * leftPadding) + "px" }}, cells));
@@ -46,13 +47,13 @@ export const Board = Vue.component("board", {
             }
             const cellChildren = [];
             function getClassName() {
-                if (thisSpace.tile !== undefined && thisSpace.tile.tileType === TileType.GREENERY) {
+                if (thisSpace.tileType === TileType.GREENERY) {
                     return "greenery";
-                } else if (thisSpace.tile !== undefined && thisSpace.tile.tileType === TileType.CITY) {
+                } else if (thisSpace.tileType === TileType.CITY) {
                     return "city";
-                } else if (thisSpace.tile !== undefined && thisSpace.tile.tileType === TileType.OCEAN) {
+                } else if (thisSpace.tileType === TileType.OCEAN) {
                     return "ocean";
-                } else if (thisSpace.tile !== undefined && thisSpace.tile.tileType === TileType.SPECIAL) {
+                } else if (thisSpace.tileType === TileType.SPECIAL) {
                     return "special";
                 } else if (thisSpace.spaceType === SpaceType.LAND) {
                     return "land";
@@ -62,8 +63,8 @@ export const Board = Vue.component("board", {
                 return "";
             }
             cellChildren.push(createElement("span", { class: getClassName(), domProps: { innerHTML: "&#x2B22"}}));
-            if (thisSpace.tile === undefined) {
-                thisSpace.bonus.forEach((bonus: any) => {
+            if (thisSpace.tileType === undefined) {
+                thisSpace.bonus.forEach((bonus) => {
                     let className: string = "bonus";
                     let innerHTML: string = "";
                     if (bonus === SpaceBonus.TITANIUM) {
@@ -80,8 +81,8 @@ export const Board = Vue.component("board", {
                     cellChildren.push(createElement("span", { class: className, domProps: { innerHTML: innerHTML }}));
                 });
             }
-            if (thisSpace.player !== undefined) {
-                cellChildren.push(createElement("span", { class: thisSpace.player.color }));
+            if (thisSpace.color !== undefined) {
+                cellChildren.push(createElement("span", { class: thisSpace.color }));
             }
             if (thisSpace.id === SpaceName.ARSIA_MONS ||
                 thisSpace.id === SpaceName.ASCRAEUS_MONS ||

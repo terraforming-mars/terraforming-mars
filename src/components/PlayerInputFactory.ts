@@ -1,10 +1,10 @@
 
 import Vue, { VNode } from "vue";
 import { PlayerInputTypes } from "../PlayerInputTypes";
+import { PlayerInputModel } from "../models/PlayerInputModel";
 
 export class PlayerInputFactory {
-
-    public  getPlayerInput(createElement: typeof Vue.prototype.$createElement, playerInput: any, cb: (out: Array<Array<string>>) => void): VNode {
+    public  getPlayerInput(createElement: typeof Vue.prototype.$createElement, playerInput: PlayerInputModel, cb: (out: Array<Array<string>>) => void): VNode {
         if (playerInput.inputType === PlayerInputTypes.AND_OPTIONS) {
             return createElement("and-options", { attrs: { playerinput: playerInput, onsave: cb }});
         } else if (playerInput.inputType === PlayerInputTypes.SELECT_CARD) {

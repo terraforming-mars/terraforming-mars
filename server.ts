@@ -3,6 +3,18 @@ import * as http from "http";
 import * as fs from "fs";
 import { Game } from "./src/Game";
 import { Player } from "./src/Player";
+import { SpaceModel } from "./src/models/SpaceModel";
+import { ISpace } from "./src/ISpace";
+import { PlayerInput } from "./src/PlayerInput";
+import { PlayerInputModel } from "./src/models/PlayerInputModel";
+import { PlayerInputTypes } from "./src/PlayerInputTypes";
+import { AndOptions } from "./src/inputs/AndOptions";
+import { OrOptions } from "./src/inputs/OrOptions";
+import { SelectCard } from "./src/inputs/SelectCard";
+import { SelectHowToPay } from "./src/inputs/SelectHowToPay";
+import { SelectPlayer } from "./src/inputs/SelectPlayer";
+import { SelectSpace } from "./src/inputs/SelectSpace";
+import { ICard } from "./src/cards/ICard";
 
 const styles = fs.readFileSync("styles.css");
 const nes = fs.readFileSync("nes.min.css");
@@ -190,16 +202,79 @@ function getPlayer(player: Player, game: Game): string {
         energyProduction: player.energyProduction,
         heat: player.heat,
         heatProduction: player.heatProduction,
-        spaces: game.getAllSpaces(),
+        spaces: getSpaces(game.getAllSpaces()),
         cardsInHand: player.cardsInHand.map((card) => card.name),
         playedCards: player.playedCards.map((card) => card.name),
         corporationCard: player.corporationCard ? player.corporationCard.name : undefined,
-        waitingFor: player.getWaitingFor(),
+        waitingFor: getWaitingFor(player.getWaitingFor()),
         oxygenLevel: game.getOxygenLevel(),
         temperature: game.getTemperature(),
         oceans: game.getOceansOnBoard()   
     };
     return JSON.stringify(output);
+}
+
+function getWaitingFor(waitingFor: PlayerInput | undefined): PlayerInputModel | undefined {
+    if (waitingFor === undefined) {
+        return undefined;
+    }
+    const result: PlayerInputModel = {
+        title: waitingFor.title,
+        message: waitingFor.message,
+        inputType: waitingFor.inputType,
+        options: undefined,
+        cards: undefined,
+        maxCardsToSelect: undefined,
+        minCardsToSelect: undefined,
+        canUseSteel: undefined,
+        canUseTitanium: undefined,
+        canUseHeat: undefined,
+        players: undefined,
+        availableSpaces: undefined
+    };
+    switch (waitingFor.inputType) {
+        case PlayerInputTypes.AND_OPTIONS:
+        case PlayerInputTypes.OR_OPTIONS:
+            result.options = [];
+            for (const option of (waitingFor as AndOptions | OrOptions).options) {
+                const subOption = getWaitingFor(option);
+                if (subOption !== undefined) {
+                    result.options.push(subOption);
+                }
+            }
+        break;
+        case PlayerInputTypes.SELECT_CARD:
+            result.cards = (waitingFor as SelectCard<ICard>).cards.map((card) => card.name);
+            result.maxCardsToSelect = (waitingFor as SelectCard<ICard>).maxCardsToSelect;
+            result.minCardsToSelect = (waitingFor as SelectCard<ICard>).minCardsToSelect;
+        break;
+        case PlayerInputTypes.SELECT_HOW_TO_PAY:
+            result.canUseSteel = (waitingFor as SelectHowToPay).canUseSteel;
+            result.canUseTitanium = (waitingFor as SelectHowToPay).canUseTitanium;
+            result.canUseHeat = (waitingFor as SelectHowToPay).canUseHeat;
+        break;
+        case PlayerInputTypes.SELECT_PLAYER:
+            result.players = (waitingFor as SelectPlayer).players.map((player) => player.name);
+        break;
+        case PlayerInputTypes.SELECT_SPACE:
+            result.availableSpaces = (waitingFor as SelectSpace).availableSpaces.map((space) => space.id);
+        break;
+    }
+    return result;
+}
+
+function getSpaces(spaces: Array<ISpace>): Array<SpaceModel> {
+    return spaces.map((space) => {
+        return {
+            x: space.x,
+            y: space.y,
+            id: space.id,
+            bonus: space.bonus,
+            spaceType: space.spaceType,
+            tileType: space.tile && space.tile.tileType,
+            color: space.player && space.player.color
+        };
+    });
 }
 
 function getGame(game: Game): string {
@@ -208,15 +283,6 @@ function getGame(game: Game): string {
         activePlayer: game.activePlayer.color,
         phase: game.phase,
         ended: game.ended,
-        spaces: game.getAllSpaces().map((space) => ({
-            id: space.id,
-            spaceType: space.spaceType,
-            tile: space.tile,
-            player: space.player ? space.player.id : undefined,
-            bonus: space.bonus,
-            x: space.x,
-            y: space.y
-        })),
         players: game.getPlayers()
     };
     return JSON.stringify(output);

@@ -441,6 +441,8 @@ export class Player {
                 }
                 game.dealer.discard(card);
             });
+            this.actionsTakenThisRound++;
+            this.takeAction(game);
             return undefined;
         }, this.cardsInHand.length);
         res.onend = (err?: string) => {
@@ -657,34 +659,44 @@ export class Player {
         }
 
         // STANDARD PROJECTS
+        const standardProjects = new OrOptions();
+        standardProjects.title = "Take action!";
+        standardProjects.message = "Pay for standard project";
+
         if (this.megaCredits >= this.powerPlantCost) {
-            action.options.push(
+            standardProjects.options.push(
                 this.buildPowerPlant(game)
             );
         }
 
         if (this.megaCredits >= 14 && game.getTemperature() < constants.MAX_TEMPERATURE) {
-            action.options.push(
+            standardProjects.options.push(
                 this.asteroid(game)
             )
         }
 
         if (this.megaCredits >= 18 && game.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
-            action.options.push(
+            standardProjects.options.push(
                 this.aquifer(game)
             );
         }
 
         if (this.megaCredits >= 23) {
-            action.options.push(
+            standardProjects.options.push(
                 this.addGreenery(game)
             );
         }
 
         if (this.megaCredits >= 25) {
-            action.options.push(
+            standardProjects.options.push(
                 this.addCity(game)
             );
+        }
+
+        if (standardProjects.options.length > 1) {
+            action.options.push(standardProjects);
+        } else if (standardProjects.options.length === 1) {
+            action.options.push(standardProjects.options[0]);
         }
 
         if (this.plants >= this.plantsNeededForGreenery) {
@@ -766,7 +778,9 @@ export class Player {
         try {
             const subsequent = this.runInput(input, waitingFor);
             if (subsequent !== undefined) {
-                subsequent.onend = waitingFor.onend;
+                if (subsequent.onend === undefined && waitingFor.onend !== undefined) {
+                    subsequent.onend = waitingFor.onend;
+                }
                 this.setWaitingFor(subsequent);
             } else if (waitingFor.onend) {
                 waitingFor.onend();

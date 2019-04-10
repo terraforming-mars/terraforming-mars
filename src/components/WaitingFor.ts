@@ -11,7 +11,7 @@ import { SelectPlayer } from "./SelectPlayer";
 import { SelectSpace } from "./SelectSpace";
 
 export const WaitingFor = Vue.component("waiting-for", {
-    props: ["waitingfor"],
+    props: ["players", "waitingfor"],
     data: function () {
         return {}
     },
@@ -28,7 +28,7 @@ export const WaitingFor = Vue.component("waiting-for", {
         if (this.waitingfor === undefined) {
             return createElement("div", "Not your turn to take any actions");
         }
-        return new PlayerInputFactory().getPlayerInput(createElement, this.waitingfor, (out: Array<Array<string>>) => {
+        return new PlayerInputFactory().getPlayerInput(createElement, this.players, this.waitingfor, (out: Array<Array<string>>) => {
             const xhr = new XMLHttpRequest();
             xhr.open("POST", "/player/input?id=" + (this.$parent as any).player.id);
             xhr.responseType = "json";

@@ -106,7 +106,7 @@
                     <h2>Board</h2>
                     <board :spaces="player.spaces"></board>
                     </div>
-                    <waiting-for :waitingfor="player.waitingFor"></waiting-for>
+                    <waiting-for :players="player.players" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
             </player-home>
             <create-game-form inline-template v-if="screen === 'create'">

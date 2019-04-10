@@ -1,13 +1,14 @@
 
 import Vue, { VNode } from "vue";
 
+import { PlayerModel } from "../models/PlayerModel";
 import { PlayerInputModel } from "../models/PlayerInputModel";
 import { Player } from "./Player";
 
 let unique: number = 0;
 
 export const SelectPlayer = Vue.component("select-player", {
-    props: ["playerinput", "onsave"],
+    props: ["players", "playerinput", "onsave"],
     data: function () {
         return {};
     },
@@ -16,6 +17,7 @@ export const SelectPlayer = Vue.component("select-player", {
     },
     render: function (createElement) {
         const playerInput: PlayerInputModel = this.playerinput as PlayerInputModel;
+        const players: Array<PlayerModel> = this.players as Array<PlayerModel>;
         unique++;
         const children: Array<VNode> = [];
         children.push(createElement("div", playerInput.title + " - " + playerInput.message));
@@ -29,7 +31,7 @@ export const SelectPlayer = Vue.component("select-player", {
                                 selectedPlayer = event.target.value;
                             }
                         }}}),
-                        createElement("player", { attrs: { player: player }})
+                        createElement("player", { attrs: { player: players.find((otherPlayer) => otherPlayer.id === player) }})
                     ])
                 );
             });

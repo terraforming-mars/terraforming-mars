@@ -6,6 +6,7 @@ import { Player } from "./src/Player";
 import { SpaceModel } from "./src/models/SpaceModel";
 import { ISpace } from "./src/ISpace";
 import { PlayerInput } from "./src/PlayerInput";
+import { PlayerModel } from "./src/models/PlayerModel";
 import { PlayerInputModel } from "./src/models/PlayerInputModel";
 import { PlayerInputTypes } from "./src/PlayerInputTypes";
 import { AndOptions } from "./src/inputs/AndOptions";
@@ -209,7 +210,8 @@ function getPlayer(player: Player, game: Game): string {
         waitingFor: getWaitingFor(player.getWaitingFor()),
         oxygenLevel: game.getOxygenLevel(),
         temperature: game.getTemperature(),
-        oceans: game.getOceansOnBoard()   
+        oceans: game.getOceansOnBoard(),
+        players: getPlayers(game.getPlayers()) 
     };
     return JSON.stringify(output);
 }
@@ -261,6 +263,16 @@ function getWaitingFor(waitingFor: PlayerInput | undefined): PlayerInputModel | 
         break;
     }
     return result;
+}
+
+function getPlayers(players: Array<Player>): Array<PlayerModel> {
+    return players.map((player) => {
+        return {
+            id: player.id,
+            name: player.name,
+            color: player.color
+        };
+    }); 
 }
 
 function getSpaces(spaces: Array<ISpace>): Array<SpaceModel> {

@@ -254,7 +254,7 @@ function getWaitingFor(waitingFor: PlayerInput | undefined): PlayerInputModel | 
             result.canUseHeat = (waitingFor as SelectHowToPay).canUseHeat;
         break;
         case PlayerInputTypes.SELECT_PLAYER:
-            result.players = (waitingFor as SelectPlayer).players.map((player) => player.name);
+            result.players = (waitingFor as SelectPlayer).players.map((player) => player.id);
         break;
         case PlayerInputTypes.SELECT_SPACE:
             result.availableSpaces = (waitingFor as SelectSpace).availableSpaces.map((space) => space.id);

@@ -7,6 +7,7 @@ import { PlayerInputFactory } from "./PlayerInputFactory";
 import { SelectCard } from "./SelectCard";
 import { SelectHowToPay } from "./SelectHowToPay";
 import { SelectOption } from "./SelectOption";
+import { SelectPlayer } from "./SelectPlayer";
 import { SelectSpace } from "./SelectSpace";
 
 export const WaitingFor = Vue.component("waiting-for", {
@@ -20,6 +21,7 @@ export const WaitingFor = Vue.component("waiting-for", {
         "select-card": SelectCard,
         "select-option": SelectOption,
         "select-how-to-pay": SelectHowToPay,
+        "select-player": SelectPlayer,
         "select-space": SelectSpace
     },
     render: function (createElement) {

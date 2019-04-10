@@ -1,57 +1,45 @@
 
 import Vue, { VNode } from "vue";
 
-interface SelectCardModel {
-    cards: {[x: string]: number};
-}
-
-import { Card } from "./Card";
 import { PlayerInputModel } from "../models/PlayerInputModel";
+import { Player } from "./Player";
 
 let unique: number = 0;
 
-export const SelectCard = Vue.component("select-card", {
+export const SelectPlayer = Vue.component("select-player", {
     props: ["playerinput", "onsave"],
     data: function () {
-        return {
-            cards: {}
-        } as SelectCardModel;
+        return {};
     },
     components: {
-        "card": Card
+        "player": Player
     },
     render: function (createElement) {
         const playerInput: PlayerInputModel = this.playerinput as PlayerInputModel;
         unique++;
         const children: Array<VNode> = [];
         children.push(createElement("div", playerInput.title + " - " + playerInput.message));
-        let inputType: string = "checkbox";
-        if (playerInput.maxCardsToSelect === 1 && playerInput.minCardsToSelect === 1) {
-            inputType = "radio";
-        }
-        if (playerInput.cards !== undefined) {
-            playerInput.cards.forEach((card) => {
+        let selectedPlayer: string | undefined;
+        if (playerInput.players !== undefined) {
+            playerInput.players.forEach((player) => {
                 children.push(
                     createElement("label", { style: { display: "block", fontSize: "12px" }}, [
-                        createElement("input", { domProps: { name: "selectCard" + unique, className: "nes-" + inputType, type: inputType, value: card }, on: { change: (event: any) => {
+                        createElement("input", { domProps: { name: "selectPlayer" + unique, className: "nes-radio", type: "radio", value: player }, on: { change: (event: any) => {
                             if (event.target.checked) {
-                                this.cards[event.target.value] = 1;
-                            } else {
-                                delete this.cards[event.target.value];
+                                selectedPlayer = event.target.value;
                             }
                         }}}),
-                        createElement("card", { attrs: { card: card }})
+                        createElement("player", { attrs: { player: player }})
                     ])
                 );
             });
         }
         children.push(
             createElement("button", { domProps: { className: "nes-btn" }, on: { click: () => {
-                this.onsave([Object.keys(this.cards)]);
+                this.onsave([[selectedPlayer]]);
             } } }, "Save")
         );
         return createElement("div", children);
     }
 });
-
 

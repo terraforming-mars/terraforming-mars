@@ -17,6 +17,8 @@ export class PlayerInputFactory {
             return createElement("select-how-to-pay", { attrs: { playerinput: playerInput, onsave: cb }});
         } else if (playerInput.inputType === PlayerInputTypes.SELECT_SPACE) {
             return createElement("select-space", { attrs: { playerinput: playerInput, onsave: cb }});
+        } else if (playerInput.inputType === PlayerInputTypes.SELECT_PLAYER) {
+            return createElement("select-player", { attrs: { playerinput: playerInput, onsave: cb }});
         }
         return createElement("div", "Unsupported input type" + playerInput.inputType);
     }

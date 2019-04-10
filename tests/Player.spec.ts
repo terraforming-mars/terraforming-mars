@@ -39,7 +39,7 @@ describe("Player", function () {
         expect(function () { player.process([]) }).to.throw("Incorrect options provided");
         expect(function () { player.process([["bar"]]) }).to.throw("Player not available");
     });
-    it("Should run select amount for ", function () {
+    it("Should run select amount for Insulation", function () {
         const card = new Insulation();
         const player = new Player("test", Color.BLUE, false);
         player.heatProduction = 2;
@@ -54,4 +54,5 @@ describe("Player", function () {
         expect(player.megaCreditProduction).to.eq(1);
         expect(player.getWaitingFor()).to.eq(undefined);
     });
+    
 });

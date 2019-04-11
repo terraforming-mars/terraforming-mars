@@ -576,7 +576,7 @@ export class Player {
     private fundAward(award: Award, game: Game): PlayerInput {
         let upperCaseAward = String(award)[0].toUpperCase() + String(award).substring(1);
         return new SelectOption("Take Action!", "Fund Award: " + upperCaseAward, () => {
-            game.fundAward(award);
+            game.fundAward(this, award);
             this.actionsTakenThisRound++;
             this.takeAction(game);
             return undefined;

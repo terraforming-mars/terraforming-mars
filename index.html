@@ -112,6 +112,19 @@
                                 <span style='font-weight:bold'>{{claimedMilestone.milestone}}</span>: {{claimedMilestone.player}}
                             </div>
                         </div>
+                        <div v-if="player.fundedAwards.length > 0">
+                            <h2>Funded Awards</h2>
+                            <div v-for="fundedAward in player.fundedAwards" :key="fundedAward.award">
+                                <span style="font-weight:bold">{{fundedAward.award}}</span>: {{fundedAward.player}}
+                            </div>
+                        </div>
+                        <div v-if="player.players.length > 1">
+                            <div v-for="otherPlayer in player.players" :key="otherPlayer.id">
+                                <div v-if="otherPlayer.id !== player.id">
+                                    {{otherPlayer.name}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <waiting-for :players="player.players" :waitingfor="player.waitingFor"></waiting-for>
                 </div>

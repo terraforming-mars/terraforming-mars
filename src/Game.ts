@@ -18,14 +18,14 @@ import { Phase } from "./Phase";
 import { Award } from "./Award";
 import { Tags } from "./cards/Tags";
 import { ClaimedMilestone } from "./ClaimedMilestone";
+import { FundedAward } from "./FundedAward";
 import { Milestone } from "./Milestone";
 import * as constants from "./constants";
 
 export class Game {
     public activePlayer: Player;
     public claimedMilestones: Array<ClaimedMilestone> = [];
-    // TODO - Show which awards have been funded and by who
-    public fundedAwards: Array<Award> = [];
+    public fundedAwards: Array<FundedAward> = [];
     public awardFundingCost: number = 8;
     public ended: boolean = false;
     constructor(public id: string, private players: Array<Player>, private first: Player) {
@@ -53,11 +53,14 @@ export class Game {
             this.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
     }
 
-    public fundAward(award: Award): void {
+    public fundAward(player: Player, award: Award): void {
         if (this.allAwardsFunded()) {
             throw "All awards already funded";
         }
-        this.fundedAwards.push(award);
+        this.fundedAwards.push({
+            award: award,
+            player: player
+        });
         if (this.fundedAwards.length === 1) {
             this.awardFundingCost = 14;
         } else if (this.fundedAwards.length === 2) {
@@ -116,7 +119,7 @@ export class Game {
     }
 
     public hasBeenFunded(award: Award): boolean {
-        return this.fundedAwards.filter((fundedAward) => fundedAward === award).length > 0;
+        return this.fundedAwards.find((fundedAward) => fundedAward.award === award) !== undefined;
     }
 
     public allAwardsFunded(): boolean {

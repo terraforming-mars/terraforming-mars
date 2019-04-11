@@ -92,7 +92,6 @@ function processInput(req: http.IncomingMessage, res: http.ServerResponse, playe
 }
 
 function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
-    console.log("apiGetGame", req.url);
     const routeRegExp: RegExp = /^\/api\/game\?id\=([0-9abcdef]+)$/i;
 
     if (req.url === undefined) {
@@ -154,7 +153,6 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         body += data.toString();
     });
     req.once("end", function () {
-        console.log("create game request", body);
         try {
             const gameReq = JSON.parse(body);
             const gameId = generateRandomGameId();
@@ -192,6 +190,7 @@ function getPlayer(player: Player, game: Game): string {
         corporationCard: player.corporationCard ? player.corporationCard.name : undefined,
         energy: player.energy,
         energyProduction: player.energyProduction,
+        fundedAwards: game.fundedAwards.map((fundedAward) => { return { player: fundedAward.player.id, award: fundedAward.award } }),
         generation: game.getGeneration(),
         heat: player.heat,
         heatProduction: player.heatProduction,

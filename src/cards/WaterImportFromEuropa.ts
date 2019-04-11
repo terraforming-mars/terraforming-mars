@@ -26,8 +26,10 @@ export class WaterImportFromEuropa implements IProjectCard {
         });
         return undefined;
     }
-    // TODO - Implement minimum needed to play
     public action(player: Player, game: Game): PlayerInput | undefined {
+        if (player.megaCredits + (player.titanium * player.titaniumValue) < 12) {
+            throw "you do not have enough to pay for this action";
+        }
         let htp: HowToPay = {
             steel: 0,
             heat: 0,

@@ -563,7 +563,10 @@ export class Player {
     private claimMilestone(milestone: Milestone, game: Game): PlayerInput {
         return new SelectOption("Take Action!", "Claim Milestone: " + milestone, () => {
             this.victoryPoints += 5;
-            game.claimedMilestones.push(milestone);
+            game.claimedMilestones.push({
+                player: this,
+                milestone: milestone
+            });
             this.actionsTakenThisRound++;
             this.takeAction(game);
             return undefined;
@@ -717,27 +720,27 @@ export class Player {
                 remainingMilestones.title = "Take action!";
                 remainingMilestones.message = "Select milestone to claim";
                  
-                if (this.terraformRating >= 35) {
+                if (!game.milestoneClaimed(Milestone.TERRAFORMER) && this.terraformRating >= 35) {
                     remainingMilestones.options.push(
                         this.claimMilestone(Milestone.TERRAFORMER, game)
                     );
                 }
-                if (game.getSpaceCount(TileType.CITY, this) >= 3) {
+                if (!game.milestoneClaimed(Milestone.MAYOR) && game.getSpaceCount(TileType.CITY, this) >= 3) {
                     remainingMilestones.options.push(
                         this.claimMilestone(Milestone.MAYOR, game)
                     );
                 }
-                if (game.getSpaceCount(TileType.GREENERY, this) >= 3) {
+                if (!game.milestoneClaimed(Milestone.GARDENER) && game.getSpaceCount(TileType.GREENERY, this) >= 3) {
                     remainingMilestones.options.push(
                         this.claimMilestone(Milestone.GARDENER, game)
                     );
                 }
-                if (this.getTagCount(Tags.STEEL) >= 8) {
+                if (!game.milestoneClaimed(Milestone.BUILDER) && this.getTagCount(Tags.STEEL) >= 8) {
                     remainingMilestones.options.push(
                         this.claimMilestone(Milestone.BUILDER, game)
                     );
                 }
-                if (this.cardsInHand.length >= 16) {
+                if (!game.milestoneClaimed(Milestone.PLANNER) && this.cardsInHand.length >= 16) {
                     remainingMilestones.options.push(
                         this.claimMilestone(Milestone.PLANNER, game)
                     );

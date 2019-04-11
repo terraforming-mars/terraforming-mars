@@ -23,88 +23,95 @@
                 <div id="player-home">
                     <h1 :style="'color:' + player.color">Teraforming Mars - Player Home - {{player.name}}</h1>
                     <div v-if="player.corporationCard">
-                    <div>Generation: {{player.generation}}</div>
-                    <div>Terraform Rating: {{player.terraformRating}}</div>
-                    <h2>Corporation Card</h2>
-                    <card :card="player.corporationCard"></card>
-                    <div v-if="player.playedCards.length > 0">
-                        <h2>Played Cards</h2>
-                        <div v-for="card in player.playedCards" :key="card"><card :card="card"></card></div>
-                    </div>
-                    <div v-if="player.cardsInHand.length > 0">
-                        <h2>Cards In Hand</h2>
-                        <div v-for="card in player.cardsInHand" :key="card"><card :card="card"></card></div>
-                    </div>
-                    <div>
-                        <h2>Resources</h2>
-                        <table class="nes-table is-bordered is-centered">
-                            <thead>
-                                <tr>
-                                    <th colspan="2">Mega Credits</th>
-                                    <th colspan="2">Steel</th>
-                                    <th colspan="2">Titanium</th>
-                                </tr>
-                                <tr>
-                                    <th>Stock</th>
-                                    <th>Production</th>
-                                    <th>Stock</th>
-                                    <th>Production</th>
-                                    <th>Stock</th>
-                                    <th>Production</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{player.megaCredits}}</td>
-                                    <td>{{player.megaCreditProduction}}</td>
-                                    <td>{{player.steel}}</td>
-                                    <td>{{player.steelProduction}}</td>
-                                    <td>{{player.titanium}}</td>
-                                    <td>{{player.titaniumProduction}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <table class="nes-table is-bordered is-centered">
-                            <thead>
-                                <tr>
-                                    <th colspan="2">Plants</th>
-                                    <th colspan="2">Energy</th>
-                                    <th colspan="2">Heat</th>
-                                </tr>
-                                <tr>
-                                    <th>Stock</th>
-                                    <th>Production</th>
-                                    <th>Stock</th>
-                                    <th>Production</th>
-                                    <th>Stock</th>
-                                    <th>Production</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{player.plants}}</td>
-                                    <td>{{player.plantProduction}}</td>
-                                    <td>{{player.energy}}</td>
-                                    <td>{{player.energyProduction}}</td>
-                                    <td>{{player.heat}}</td>
-                                    <td>{{player.heatProduction}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <h2>Oxygen Level ({{player.oxygenLevel}})</h2>
-                    <div>
-                        <progress class="nes-progress is-success" max="14" :value="player.oxygenLevel"></progress>
-                    </div>
-                    <h2>Temperature ({{player.temperature}})</h2>
-                    <div>
-                        <progress class="nes-progress is-warning" max="38" :value="player.temperature + 30"></progress></div>
-                    <h2>Oceans ({{player.oceans}})</h2>
-                    <div>
-                        <progress class="nes-progress is-primary" max="9" :value="player.oceans"></progress>
-                    </div>
-                    <h2>Board</h2>
-                    <board :spaces="player.spaces"></board>
+                        <div>Generation: {{player.generation}}</div>
+                        <div>Terraform Rating: {{player.terraformRating}}</div>
+                        <h2>Corporation Card</h2>
+                        <card :card="player.corporationCard"></card>
+                        <div v-if="player.playedCards.length > 0">
+                            <h2>Played Cards</h2>
+                            <div v-for="card in player.playedCards" :key="card"><card :card="card"></card></div>
+                        </div>
+                        <div v-if="player.cardsInHand.length > 0">
+                            <h2>Cards In Hand</h2>
+                            <div v-for="card in player.cardsInHand" :key="card"><card :card="card"></card></div>
+                        </div>
+                        <div>
+                            <h2>Resources</h2>
+                            <table class="nes-table is-bordered is-centered">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Mega Credits</th>
+                                        <th colspan="2">Steel</th>
+                                        <th colspan="2">Titanium</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Stock</th>
+                                        <th>Production</th>
+                                        <th>Stock</th>
+                                        <th>Production</th>
+                                        <th>Stock</th>
+                                        <th>Production</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{player.megaCredits}}</td>
+                                        <td>{{player.megaCreditProduction}}</td>
+                                        <td>{{player.steel}}</td>
+                                        <td>{{player.steelProduction}}</td>
+                                        <td>{{player.titanium}}</td>
+                                        <td>{{player.titaniumProduction}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="nes-table is-bordered is-centered">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">Plants</th>
+                                        <th colspan="2">Energy</th>
+                                        <th colspan="2">Heat</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Stock</th>
+                                        <th>Production</th>
+                                        <th>Stock</th>
+                                        <th>Production</th>
+                                        <th>Stock</th>
+                                        <th>Production</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{player.plants}}</td>
+                                        <td>{{player.plantProduction}}</td>
+                                        <td>{{player.energy}}</td>
+                                        <td>{{player.energyProduction}}</td>
+                                        <td>{{player.heat}}</td>
+                                        <td>{{player.heatProduction}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <h2>Oxygen Level ({{player.oxygenLevel}})</h2>
+                        <div>
+                            <progress class="nes-progress is-success" max="14" :value="player.oxygenLevel"></progress>
+                        </div>
+                        <h2>Temperature ({{player.temperature}})</h2>
+                        <div>
+                            <progress class="nes-progress is-warning" max="38" :value="player.temperature + 30"></progress>
+                        </div>
+                        <h2>Oceans ({{player.oceans}})</h2>
+                        <div>
+                            <progress class="nes-progress is-primary" max="9" :value="player.oceans"></progress>
+                        </div>
+                        <h2>Board</h2>
+                        <board :spaces="player.spaces"></board>
+                        <div v-if="player.claimedMilestones.length > 0">
+                            <h2>Claimed Milestones</h2> 
+                            <div v-for="claimedMilestone in player.claimedMilestones" :key="claimedMilestone.milestone">
+                                <span style='font-weight:bold'>{{claimedMilestone.milestone}}</span>: {{claimedMilestone.player}}
+                            </div>
+                        </div>
                     </div>
                     <waiting-for :players="player.players" :waitingfor="player.waitingFor"></waiting-for>
                 </div>

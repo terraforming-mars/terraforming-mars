@@ -16,13 +16,15 @@ import { AndOptions } from "./inputs/AndOptions";
 import { PlayerInput } from "./PlayerInput";
 import { Phase } from "./Phase";
 import { Award } from "./Award";
-import { Milestone } from "./Milestone";
 import { Tags } from "./cards/Tags";
+import { ClaimedMilestone } from "./ClaimedMilestone";
+import { Milestone } from "./Milestone";
 import * as constants from "./constants";
 
 export class Game {
     public activePlayer: Player;
-    public claimedMilestones: Array<Milestone> = [];
+    public claimedMilestones: Array<ClaimedMilestone> = [];
+    // TODO - Show which awards have been funded and by who
     public fundedAwards: Array<Award> = [];
     public awardFundingCost: number = 8;
     public ended: boolean = false;
@@ -40,6 +42,10 @@ export class Game {
             }
         }
         
+    }
+
+    public milestoneClaimed(milestone: Milestone): boolean {
+        return this.claimedMilestones.find((claimedMilestone) => claimedMilestone.milestone === milestone) !== undefined;
     }
 
     private marsIsTerraformed(): boolean {

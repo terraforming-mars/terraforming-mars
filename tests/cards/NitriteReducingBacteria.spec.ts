@@ -30,6 +30,6 @@ describe("NitriteReducingBacteria", function () {
         expect(card.microbes).to.eq(4);
         orOptions.options[1].cb();
         expect(card.microbes).to.eq(1);
-        expect(player.terraformRating).to.eq(21);
+        expect(player.terraformRating).to.eq(15);
     });
 });

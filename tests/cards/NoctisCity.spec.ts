@@ -6,7 +6,6 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SpaceName } from "../../src/SpaceName";
 import { TileType } from "../../src/TileType";
-import { SelectSpace } from "../../src/inputs/SelectSpace";
 
 describe("NoctisCity", function () {
     it("Should throw", function () {
@@ -26,14 +25,5 @@ describe("NoctisCity", function () {
         expect(player.megaCreditProduction).to.eq(3);
         const noctis = game.getSpace(SpaceName.NOCTIS_CITY);
         expect(noctis.tile && noctis.tile.tileType).to.eq(TileType.CITY);
-        noctis.tile = undefined;
-        player.energyProduction = 1;
-        card.play(player, game);
-        expect(noctis.tile && noctis.tile!.tileType).to.eq(TileType.CITY);
-        player.energyProduction = 1;
-        const spaceAction = card.play(player, game) as SelectSpace;
-        expect(spaceAction).not.to.eq(undefined);
-        spaceAction.cb(spaceAction.availableSpaces[0]);
-        expect(spaceAction.availableSpaces[0].tile && spaceAction.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);
     });
 });

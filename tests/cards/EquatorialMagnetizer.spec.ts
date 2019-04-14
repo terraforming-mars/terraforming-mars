@@ -27,6 +27,6 @@ describe("EquatorialMagnetizer", function () {
         const action = card.action(player, game);
         expect(action).to.eq(undefined);
         expect(player.energyProduction).to.eq(0);
-        expect(player.terraformRating).to.eq(21);
+        expect(player.terraformRating).to.eq(15);
     });
 });

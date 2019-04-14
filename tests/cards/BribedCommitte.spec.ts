@@ -12,6 +12,6 @@ describe("BribedCommitte", function () {
         const game = new Game("foobar", [player], player);
         card.play(player, game);
         expect(player.victoryPoints).to.eq(-2);
-        expect(player.terraformRating).to.eq(22);
+        expect(player.terraformRating).to.eq(16);
     });
 });

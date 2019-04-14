@@ -2,7 +2,7 @@
 import Vue from "vue";
 import { PlayerModel } from "../models/PlayerModel";
 
-export const Player = Vue.component("player", {
+export const SelectPlayerRow = Vue.component("select-player-row", {
     props: ["player"],
     data: function () {
         return {};

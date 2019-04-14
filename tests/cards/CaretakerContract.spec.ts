@@ -32,6 +32,6 @@ describe("CaretakerContract", function () {
         player.heat = 8;
         card.action(player, game);
         expect(player.heat).to.eq(0);
-        expect(player.terraformRating).to.eq(21);
+        expect(player.terraformRating).to.eq(15);
     });
 });

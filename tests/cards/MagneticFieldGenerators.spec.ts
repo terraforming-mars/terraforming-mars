@@ -21,6 +21,6 @@ describe("MagneticFieldGenerators", function () {
         expect(action).to.eq(undefined);
         expect(player.energyProduction).to.eq(0);
         expect(player.plantProduction).to.eq(2);
-        expect(player.terraformRating).to.eq(23);
+        expect(player.terraformRating).to.eq(17);
     });
 });

@@ -12,6 +12,7 @@ import { CorporationCard } from "./cards/corporation/CorporationCard";
 import { OriginalBoard } from "./OriginalBoard";
 import { SelectCard } from "./inputs/SelectCard";
 import { SelectSpace } from "./inputs/SelectSpace";
+import { SpaceName } from "./SpaceName";
 import { AndOptions } from "./inputs/AndOptions";
 import { PlayerInput } from "./PlayerInput";
 import { Phase } from "./Phase";
@@ -30,6 +31,10 @@ export class Game {
     public ended: boolean = false;
     constructor(public id: string, private players: Array<Player>, private first: Player) {
         this.activePlayer = first;
+        // Single player game player starts with 14TR
+        if (players.length === 1) {
+            players[0].terraformRating = 14;
+        }
         // Give each player their corporation cards
         for (let player of players) {
             if (!player.beginner) {
@@ -43,7 +48,6 @@ export class Game {
         }
         
     }
-
     public milestoneClaimed(milestone: Milestone): boolean {
         return this.claimedMilestones.find((claimedMilestone) => claimedMilestone.milestone === milestone) !== undefined;
     }
@@ -143,7 +147,7 @@ export class Game {
             }),
             new SelectCard("Initial Research Phase", "Select initial cards to buy", this.dealer.getCards(10), (foundCards: Array<IProjectCard>) => {
                 // Pay for cards
-                player.megaCredits = player.corporationCard!.startingMegaCredits - (3 * foundCards.length);
+                player.megaCredits = player.corporationCard!.startingMegaCredits - (constants.CARD_COST * foundCards.length);
                 for (let foundCard of foundCards) {
                     player.cardsInHand.push(foundCard);
                 }
@@ -185,6 +189,14 @@ export class Game {
         this.dealEachPlayer4Cards();
     }
 
+    private gameIsOver(): boolean {
+        // Single player game is done after generation 14
+        if (this.players.length === 1 && this.generation === 14) {
+            return true;
+        }
+        return this.marsIsTerraformed();
+    }
+
     private gotoProductionPhase(): void {
         this.passedPlayers.clear();
         this.players.forEach((player) => {
@@ -193,7 +205,7 @@ export class Game {
         this.onGenerationEnd.slice().forEach(function (end) {
             end();
         });
-        if (this.marsIsTerraformed()) {
+        if (this.gameIsOver()) {
             this.gotoFinalGreeneryPlacement();
         } else {
             this.gotoResearchPhase();
@@ -237,6 +249,7 @@ export class Game {
 
     public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
         return this.getSpaces(SpaceType.LAND)
+                .filter((space) => space.id !== SpaceName.NOCTIS_CITY) // Can only place noctis city on reserved space
                 .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
     }
 
@@ -477,7 +490,6 @@ export class Game {
     public getSpaces(spaceType: SpaceType): Array<ISpace> {
         return this.spaces.filter((space) => space.spaceType === spaceType);
     }
-    /* TODO: Gain mega credits for each adjacent tile of some kind */
     public addTile(player: Player, spaceType: SpaceType, space: ISpace, tile: ITile): void {
         if (space.tile !== undefined) {
             throw "Selected space is occupied";
@@ -491,30 +503,33 @@ export class Game {
         }
         space.player = player;
         space.tile = tile;
-        if (space.bonus) {
-            space.bonus.forEach((spaceBonus) => {
-                if (spaceBonus === SpaceBonus.DRAW_CARD) {
-                    player.cardsInHand.push(this.dealer.getCards(1)[0]);
-                } else if (spaceBonus === SpaceBonus.PLANT) {
-                    player.plants++;
-                } else if (spaceBonus === SpaceBonus.STEEL) {
-                    player.steel++;
-                } else if (spaceBonus === SpaceBonus.TITANIUM) {
-                    player.titanium++;
-                }
-            });
-        }
+        space.bonus.forEach((spaceBonus) => {
+            if (spaceBonus === SpaceBonus.DRAW_CARD) {
+                player.cardsInHand.push(this.dealer.getCards(1)[0]);
+            } else if (spaceBonus === SpaceBonus.PLANT) {
+                player.plants++;
+            } else if (spaceBonus === SpaceBonus.STEEL) {
+                player.steel++;
+            } else if (spaceBonus === SpaceBonus.TITANIUM) {
+                player.titanium++;
+            }
+        });
+        this.getAdjacentSpaces(space).forEach((adjacentSpace) => {
+            if (adjacentSpace.tile && adjacentSpace.tile.tileType === TileType.OCEAN) {
+                player.megaCredits += 2;
+            } 
+        });
         player.onTilePlaced(space.bonus);
     }
 
     public getAdjacentSpaces(space: ISpace): Array<ISpace> {
-        if (space.y < 0 || space.y > 8) {
-            throw "Unexpected space y value";
-        }
-        if (space.x < 0 || space.x > 8) {
-            throw "Unexpected space x value";
-        } 
         if (space.spaceType !== SpaceType.COLONY) {
+            if (space.y < 0 || space.y > 8) {
+                throw "Unexpected space y value";
+            }
+            if (space.x < 0 || space.x > 8) {
+                throw "Unexpected space x value";
+            }
             const leftSpace: Array<number> = [space.x - 1, space.y],
                 rightSpace: Array<number> = [space.x + 1, space.y],
                 topLeftSpace: Array<number> = [space.x, space.y - 1],

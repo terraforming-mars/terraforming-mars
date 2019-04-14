@@ -268,10 +268,19 @@ function getWaitingFor(waitingFor: PlayerInput | undefined): PlayerInputModel | 
 function getPlayers(players: Array<Player>): Array<PlayerModel> {
     return players.map((player) => {
         return {
+            color: player.color,
+            heat: player.heat,
+            heatProduction: player.heatProduction,
             id: player.id,
             name: player.name,
-            color: player.color
-        };
+            plants: player.plants,
+            plantProduction: player.plantProduction,
+            steel: player.steel,
+            steelProduction: player.steelProduction,
+            terraformRating: player.terraformRating,
+            titanium: player.titanium,
+            titaniumProduction: player.titaniumProduction
+        } as PlayerModel;
     }); 
 }
 

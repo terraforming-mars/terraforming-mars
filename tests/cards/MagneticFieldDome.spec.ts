@@ -21,6 +21,6 @@ describe("MagneticFieldDome", function () {
         expect(action).to.eq(undefined);
         expect(player.energyProduction).to.eq(0);
         expect(player.plantProduction).to.eq(1);
-        expect(player.terraformRating).to.eq(21);
+        expect(player.terraformRating).to.eq(15);
     });
 });

@@ -5,8 +5,6 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SpaceName } from "../SpaceName";
-import { SelectSpace } from "../inputs/SelectSpace";
-import { ISpace } from "../ISpace";
 
 export class NoctisCity implements IProjectCard {
     public cost: number = 18;
@@ -22,14 +20,7 @@ export class NoctisCity implements IProjectCard {
         }
         player.energyProduction--;
         player.megaCreditProduction += 3;
-        // make sure no tile or land grab on space
-        if (noctisSpace.tile === undefined && (noctisSpace.player === undefined || noctisSpace.player === player)) {
-            game.addCityTile(player, noctisSpace.id);
-            return undefined;
-        }
-        return new SelectSpace(this.name, "Select any city location, noctis taken", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
-            game.addCityTile(player, space.id);
-            return undefined;
-        });
+        game.addCityTile(player, noctisSpace.id);
+        return undefined;
     }
 }

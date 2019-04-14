@@ -19,12 +19,12 @@ describe("UnitedNationsMarsInitiative", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
         const action = card.play(player, game);
-        expect(card.generationStartRating).to.eq(20);
-        player.terraformRating = 21;
+        expect(card.generationStartRating).to.eq(14);
+        player.terraformRating = 15;
         expect(action).to.eq(undefined);
         expect(game.onGenerationEnd.length).to.eq(1);
         game.onGenerationEnd[0]();
-        expect(card.generationStartRating).to.eq(21);
+        expect(card.generationStartRating).to.eq(15);
     });
     it("Should act", function () {
         const card = new UnitedNationsMarsInitiative();

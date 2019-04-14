@@ -3,7 +3,7 @@ import Vue, { VNode } from "vue";
 
 import { PlayerModel } from "../models/PlayerModel";
 import { PlayerInputModel } from "../models/PlayerInputModel";
-import { Player } from "./Player";
+import { SelectPlayerRow } from "./SelectPlayerRow";
 
 let unique: number = 0;
 
@@ -13,7 +13,7 @@ export const SelectPlayer = Vue.component("select-player", {
         return {};
     },
     components: {
-        "player": Player
+        "select-player-row": SelectPlayerRow
     },
     render: function (createElement) {
         const playerInput: PlayerInputModel = this.playerinput as PlayerInputModel;
@@ -31,7 +31,7 @@ export const SelectPlayer = Vue.component("select-player", {
                                 selectedPlayer = event.target.value;
                             }
                         }}}),
-                        createElement("player", { attrs: { player: players.find((otherPlayer) => otherPlayer.id === player) }})
+                        createElement("select-player-row", { attrs: { player: players.find((otherPlayer) => otherPlayer.id === player) }})
                     ])
                 );
             });

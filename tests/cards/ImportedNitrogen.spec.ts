@@ -21,7 +21,7 @@ describe("ImportedNitrogen", function () {
         expect(action instanceof AndOptions).to.eq(true);
         const andAction = action as AndOptions;
         andAction.cb();
-        expect(player.terraformRating).to.eq(21);
+        expect(player.terraformRating).to.eq(15);
         expect(player.plants).to.eq(4);
         andAction.options[0].cb([tardigrades]);
         expect(tardigrades.microbes).to.eq(3);

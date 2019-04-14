@@ -19,7 +19,7 @@ export class Hackers implements IProjectCard {
         }
         return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease mega credit production", (foundPlayer: Player) => {
             player.energyProduction--;
-            foundPlayer.megaCreditProduction = Math.max(0, foundPlayer.megaCreditProduction - 2);
+            foundPlayer.megaCreditProduction = Math.max(-5, foundPlayer.megaCreditProduction - 2);
             player.megaCreditProduction += 2;
             player.victoryPoints--;
             return undefined;

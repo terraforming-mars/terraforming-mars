@@ -13,6 +13,9 @@ export class LunarBeam implements IProjectCard {
     public text: string = "Decrease your mega credit production 2 steps and increase your heat production and energy production 2 steps each.";
     public description: string = "A huge energy beam. Difficult to collect, but who cares?";
     public play(player: Player, _game: Game) {
+        if (player.megaCreditProduction < -3) {
+            throw "Do not have enough mega credit production";
+        }
         player.megaCreditProduction -= 2;
         player.heatProduction += 2;
         player.energyProduction += 2;

@@ -7,6 +7,8 @@ export class SelectSpace implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_SPACE;
     public onend?: () => void;
     constructor(public title: string, public message: string, public availableSpaces: Array<ISpace>, public cb: (space: ISpace) => PlayerInput | undefined) {
-
+        if (availableSpaces.length === 0) {
+            throw "No available spaces";
+        }
     }
 }

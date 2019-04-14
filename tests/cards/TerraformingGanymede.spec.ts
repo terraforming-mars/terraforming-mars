@@ -14,8 +14,8 @@ describe("TerraformingGanymede", function () {
         expect(action).to.eq(undefined);
         expect(player.victoryPoints).to.eq(2);
         player.playedCards.push(card);
-        expect(player.terraformRating).to.eq(21);
+        expect(player.terraformRating).to.eq(15);
         card.play(player, game);
-        expect(player.terraformRating).to.eq(23);
+        expect(player.terraformRating).to.eq(17);
     });
 });

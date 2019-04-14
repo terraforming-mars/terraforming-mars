@@ -35,63 +35,7 @@
                             <h2>Cards In Hand</h2>
                             <div v-for="card in player.cardsInHand" :key="card"><card :card="card"></card></div>
                         </div>
-                        <div>
-                            <h2>Resources</h2>
-                            <table class="nes-table is-bordered is-centered">
-                                <thead>
-                                    <tr>
-                                        <th colspan="2">Mega Credits</th>
-                                        <th colspan="2">Steel</th>
-                                        <th colspan="2">Titanium</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Stock</th>
-                                        <th>Production</th>
-                                        <th>Stock</th>
-                                        <th>Production</th>
-                                        <th>Stock</th>
-                                        <th>Production</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{{player.megaCredits}}</td>
-                                        <td>{{player.megaCreditProduction}}</td>
-                                        <td>{{player.steel}}</td>
-                                        <td>{{player.steelProduction}}</td>
-                                        <td>{{player.titanium}}</td>
-                                        <td>{{player.titaniumProduction}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table class="nes-table is-bordered is-centered">
-                                <thead>
-                                    <tr>
-                                        <th colspan="2">Plants</th>
-                                        <th colspan="2">Energy</th>
-                                        <th colspan="2">Heat</th>
-                                    </tr>
-                                    <tr>
-                                        <th>Stock</th>
-                                        <th>Production</th>
-                                        <th>Stock</th>
-                                        <th>Production</th>
-                                        <th>Stock</th>
-                                        <th>Production</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{{player.plants}}</td>
-                                        <td>{{player.plantProduction}}</td>
-                                        <td>{{player.energy}}</td>
-                                        <td>{{player.energyProduction}}</td>
-                                        <td>{{player.heat}}</td>
-                                        <td>{{player.heatProduction}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <player-resources :player="player"></player-resources>
                         <h2>Oxygen Level ({{player.oxygenLevel}})</h2>
                         <div>
                             <progress class="nes-progress is-success" max="14" :value="player.oxygenLevel"></progress>
@@ -108,15 +52,11 @@
                         <board :spaces="player.spaces"></board>
                         <div v-if="player.claimedMilestones.length > 0">
                             <h2>Claimed Milestones</h2> 
-                            <div v-for="claimedMilestone in player.claimedMilestones" :key="claimedMilestone.milestone">
-                                <span style='font-weight:bold'>{{claimedMilestone.milestone}}</span>: {{claimedMilestone.player}}
-                            </div>
+                            <claimed-milestone v-for="claimedMilestone in player.claimedMilestones" :key="claimedMilestone.milestone" :players="player.players" :claimedmilestone="claimedMilestone"></claimed-milestone>
                         </div>
                         <div v-if="player.fundedAwards.length > 0">
                             <h2>Funded Awards</h2>
-                            <div v-for="fundedAward in player.fundedAwards" :key="fundedAward.award">
-                                <span style="font-weight:bold">{{fundedAward.award}}</span>: {{fundedAward.player}}
-                            </div>
+                            <funded-award v-for="fundedAward in player.fundedAwards" :key="fundedAward.award" :players="player.players" :fundedaward="fundedAward"></funded-award>
                         </div>
                         <div v-if="player.players.length > 1">
                             <div v-for="otherPlayer in player.players" :key="otherPlayer.id">

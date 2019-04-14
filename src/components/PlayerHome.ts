@@ -3,7 +3,10 @@ import Vue from "vue";
 
 import { Board } from "./Board";
 import { Card } from "./Card";
-import { Player } from "./Player";
+import { ClaimedMilestone } from "./ClaimedMilestone";
+import { FundedAward } from "./FundedAward";
+import { PlayerInfo } from "./PlayerInfo";
+import { PlayerResources } from "./PlayerResources";
 import { WaitingFor } from "./WaitingFor";
 
 export const PlayerHome = Vue.component("player-home", {
@@ -11,7 +14,10 @@ export const PlayerHome = Vue.component("player-home", {
   components: {
     "board": Board,
     "card": Card,
-    "player": Player,
+    "claimed-milestone": ClaimedMilestone,
+    "funded-award": FundedAward,
+    "player-info": PlayerInfo,
+    "player-resources": PlayerResources,
     "waiting-for": WaitingFor
   },
   data: function () {

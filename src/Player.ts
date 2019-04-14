@@ -300,7 +300,7 @@ export class Player {
         this.megaCredits += this.megaCreditProduction + this.terraformRating;
         this.heat += this.energy;
         this.heat += this.heatProduction;
-        this.energy += this.energyProduction;
+        this.energy = this.energyProduction;
         this.titanium += this.titaniumProduction;
         this.steel += this.steelProduction;
         this.plants += this.plantProduction;
@@ -309,10 +309,11 @@ export class Player {
     public runResearchPhase(game: Game): void {
         const dealtCards = game.dealer.getCards(4);
         this.setWaitingFor(new SelectCard("Research Phase", "Select which cards to take into hand", dealtCards, (foundCards: Array<IProjectCard>) => {
-            if (foundCards.length * 4 > this.megaCredits) {
+            if (foundCards.length * constants.CARD_COST > this.megaCredits) {
                 throw "Not enough money to purchase patents";
             }
-            this.megaCredits -= 4 * foundCards.length;
+            // TODO - how much does this cost?
+            this.megaCredits -= constants.CARD_COST * foundCards.length;
             foundCards.forEach((card) => {
                 this.cardsInHand.push(card);
             });

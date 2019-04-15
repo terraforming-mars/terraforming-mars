@@ -16,6 +16,7 @@ import { SelectHowToPay } from "./src/inputs/SelectHowToPay";
 import { SelectPlayer } from "./src/inputs/SelectPlayer";
 import { SelectSpace } from "./src/inputs/SelectSpace";
 import { ICard } from "./src/cards/ICard";
+import { CardModel } from "./src/models/CardModel";
 
 const styles = fs.readFileSync("styles.css");
 const nes = fs.readFileSync("nes.min.css");
@@ -265,16 +266,25 @@ function getWaitingFor(waitingFor: PlayerInput | undefined): PlayerInputModel | 
     return result;
 }
 
+function getCards(_cards: Array<ICard>): Array<CardModel> {
+    return [];
+}
+
 function getPlayers(players: Array<Player>): Array<PlayerModel> {
     return players.map((player) => {
         return {
             color: player.color,
+            energy: player.energy,
+            energyProduction: player.energyProduction,
             heat: player.heat,
             heatProduction: player.heatProduction,
             id: player.id,
+            megaCredits: player.megaCredits,
+            megaCreditProduction: player.megaCreditProduction,
             name: player.name,
             plants: player.plants,
             plantProduction: player.plantProduction,
+            playedCards: getCards(player.playedCards),
             steel: player.steel,
             steelProduction: player.steelProduction,
             terraformRating: player.terraformRating,

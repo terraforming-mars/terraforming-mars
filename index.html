@@ -59,9 +59,13 @@
                             <funded-award v-for="fundedAward in player.fundedAwards" :key="fundedAward.award" :players="player.players" :fundedaward="fundedAward"></funded-award>
                         </div>
                         <div v-if="player.players.length > 1">
+                            <h2>Other Players</h2>
                             <div v-for="otherPlayer in player.players" :key="otherPlayer.id">
                                 <div v-if="otherPlayer.id !== player.id">
-                                    {{otherPlayer.name}}
+                                    <h3 :style="'color:' + otherPlayer.color">{{otherPlayer.name}}</h3>
+                                    <div style="display:none">
+                                        <player-resources :player="otherPlayer"></player-resources>
+                                    </div>
                                 </div>
                             </div>
                         </div>

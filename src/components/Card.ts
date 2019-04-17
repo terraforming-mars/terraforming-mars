@@ -19,7 +19,7 @@ function getProjectCardByName(cardName: string): IProjectCard | undefined {
     return ALL_PROJECT_CARDS.find((card) => card.name === cardName);
 }
 
-function getCardAsString(cardName: string): string {
+function getCardAsString(cardName: string, animals: number | undefined, fighterResources: number | undefined, microbes: number | undefined, scienceResources: number | undefined): string {
     interface Card {
         cost?: number;
         startingMegaCredits?: number;
@@ -69,16 +69,31 @@ function getCardAsString(cardName: string): string {
     }
     out += " " + card.text;
     out += " <i>" + card.description + "</i>";
+    if (animals !== undefined) {
+        out += "<strong>" + animals + " animals on card</strong>";
+    } else if (fighterResources !== undefined) {
+        out += "<strong>" + fighterResources + " fighter resources on card</strong>";
+    } else if (microbes !== undefined) {
+        out += "<strong>" + microbes + " microbes on card</strong>";
+    } else if (scienceResources !== undefined) {
+        out += "<strong>" + scienceResources + " science resources on card</strong>";
+    }
     return out;
 }
 
 export const Card = Vue.component("card", {
-    props: ["card"],
+    props: [
+        "animals",
+        "card",
+        "fighterResources",
+        "microbes",
+        "scienceResources"
+    ],
     data: function () {
         return {};
     },
     render: function (createElement) {
-        return createElement("span", { domProps: { innerHTML: getCardAsString(this.card) } });
+        return createElement("span", { domProps: { innerHTML: getCardAsString(this.card, this.animals, this.fighterResources, this.microbes, this.scienceResources) } });
     }
 });
 

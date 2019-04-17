@@ -1,22 +1,23 @@
 
 import * as http from "http";
 import * as fs from "fs";
+import { AndOptions } from "./src/inputs/AndOptions";
+import { CardModel } from "./src/models/CardModel";
 import { Game } from "./src/Game";
-import { Player } from "./src/Player";
-import { SpaceModel } from "./src/models/SpaceModel";
+import { ICard } from "./src/cards/ICard";
+import { IProjectCard } from "./src/cards/IProjectCard";
 import { ISpace } from "./src/ISpace";
+import { OrOptions } from "./src/inputs/OrOptions";
+import { Player } from "./src/Player";
 import { PlayerInput } from "./src/PlayerInput";
-import { PlayerModel } from "./src/models/PlayerModel";
 import { PlayerInputModel } from "./src/models/PlayerInputModel";
 import { PlayerInputTypes } from "./src/PlayerInputTypes";
-import { AndOptions } from "./src/inputs/AndOptions";
-import { OrOptions } from "./src/inputs/OrOptions";
+import { PlayerModel } from "./src/models/PlayerModel";
 import { SelectCard } from "./src/inputs/SelectCard";
 import { SelectHowToPay } from "./src/inputs/SelectHowToPay";
 import { SelectPlayer } from "./src/inputs/SelectPlayer";
 import { SelectSpace } from "./src/inputs/SelectSpace";
-import { ICard } from "./src/cards/ICard";
-import { CardModel } from "./src/models/CardModel";
+import { SpaceModel } from "./src/models/SpaceModel";
 
 const styles = fs.readFileSync("styles.css");
 const nes = fs.readFileSync("nes.min.css");
@@ -185,7 +186,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
 function getPlayer(player: Player, game: Game): string {
     const output = {
-        cardsInHand: player.cardsInHand.map((card) => card.name),
+        cardsInHand: getCards(player.cardsInHand),
         claimedMilestones: game.claimedMilestones.map((claimedMilestone) => { return { player: claimedMilestone.player.id, milestone: claimedMilestone.milestone } }),
         color: player.color,
         corporationCard: player.corporationCard ? player.corporationCard.name : undefined,
@@ -203,7 +204,7 @@ function getPlayer(player: Player, game: Game): string {
         oxygenLevel: game.getOxygenLevel(),
         plants: player.plants,
         plantProduction: player.plantProduction,
-        playedCards: player.playedCards.map((card) => card.name),
+        playedCards: getCards(player.playedCards),
         players: getPlayers(game.getPlayers()),
         spaces: getSpaces(game.getAllSpaces()),
         steel: player.steel,
@@ -266,8 +267,14 @@ function getWaitingFor(waitingFor: PlayerInput | undefined): PlayerInputModel | 
     return result;
 }
 
-function getCards(_cards: Array<ICard>): Array<CardModel> {
-    return [];
+function getCards(cards: Array<IProjectCard>): Array<CardModel> {
+    return cards.map((card) => ({
+        animals: card.animals,
+        fighterResources: card.fighterResources,
+        microbes: card.microbes,
+        name: card.name,
+        scienceResources: card.scienceResources
+    }));
 }
 
 function getPlayers(players: Array<Player>): Array<PlayerModel> {

@@ -1,9 +1,7 @@
 
 import { CardType } from "./CardType";
 import { Player } from "../Player";
-import { IProjectCard } from "./IProjectCard"
-;
-import { CardDiscount } from "../CardDiscount";
+import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { Game } from "../Game";
 
@@ -15,17 +13,22 @@ export class IndenturedWorkers implements IProjectCard {
     public text: string = "The next card you play this generation costs 8 mega credits less. Lose 1 victory point.";
     public description: string = "There are many who would work for us for almost no pay in exchange for a ticket to Mars";
     public play(player: Player, game: Game) {
-        var discount: CardDiscount = function() {
-            player.removeCardDiscount(discount);
-            game.removeGenerationEndListener(afterGeneration);
-            return 8;
-        }
-        var afterGeneration = function() {
-            player.removeCardDiscount(discount);
-            game.removeGenerationEndListener(afterGeneration);
-        }
-        player.addCardDiscount(discount);
-        game.addGenerationEndListener(afterGeneration);
+        let cardHasBeenPlayed: boolean = false;
+        let generationHasEnded: boolean = false;
+        player.addCardDiscount(() => {
+            if (!cardHasBeenPlayed && !generationHasEnded) {
+                return 8;
+            }
+            return 0;
+        });
+        player.addCardPlayedHandler((card) => {
+            if (card.name !== this.name) {
+                cardHasBeenPlayed = true;
+            }
+        });
+        game.addGenerationEndListener(() => {
+            generationHasEnded = true; 
+        });
         player.victoryPoints--;
         return undefined;
     } 

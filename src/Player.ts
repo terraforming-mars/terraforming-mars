@@ -103,15 +103,6 @@ export class Player {
     private generateId(): string {
         return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
     }
-    public removeCardDiscount(discount: CardDiscount): void {
-        for (var i = 0; i < this.cardDiscounts.length; i++) {
-            if (this.cardDiscounts[i] === discount) {
-                this.cardDiscounts.splice(i, 1);
-                return;
-            }
-        }
-        throw "Did not find card discount.";
-    }
     public cardHasResource(card: IProjectCard): boolean {
         return card.animals !== undefined || card.microbes !== undefined || card.fighterResources !== undefined || card.scienceResources !== undefined;
     }
@@ -330,6 +321,14 @@ export class Player {
         }, 4, 0)); 
     }
 
+    private getCardCost(card: IProjectCard): number {
+        let cost: number = card.cost;
+        this.cardDiscounts.forEach((cardDiscount) => {
+            cost -= cardDiscount(card);
+        });
+        return Math.max(cost, 0);
+    }
+
     private playProjectCard(game: Game): PlayerInput {
 
         let selectedCard: IProjectCard;
@@ -338,6 +337,7 @@ export class Player {
         return new AndOptions(
             () => {
 
+                const cardCost: number = this.getCardCost(selectedCard);
                 let totalToPay: number = 0;
 
                 const canUseSteel: boolean = selectedCard.tags.indexOf(Tags.STEEL) !== -1;
@@ -355,7 +355,7 @@ export class Player {
 
                 totalToPay += payMethod.megaCredits;
 
-                if (totalToPay < selectedCard.cost) {
+                if (totalToPay < cardCost) {
                     throw "Did not spend enough to pay for card";
                 }
 

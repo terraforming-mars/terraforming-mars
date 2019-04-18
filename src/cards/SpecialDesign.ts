@@ -10,6 +10,7 @@ export class SpecialDesign implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.EVENT;
     public name: string = "Special Design";
+    // TODO: Implement requirements bonus for oceans, oxygen, and temperature
     public text: string = "The next card you play this generation is +2 or -2 in global requirements, your choice.";
     public description: string = "If it isn't feasible, then make it so.";
     public play(player: Player, game: Game) {

@@ -18,6 +18,7 @@ import { SelectHowToPay } from "./inputs/SelectHowToPay";
 import { SelectAmount } from "./inputs/SelectAmount";
 import { SelectOption } from "./inputs/SelectOption";
 import { SelectPlayer } from "./inputs/SelectPlayer";
+import { SpaceBonus } from "./SpaceBonus";
 import { Award } from "./Award";
 import { Milestone } from "./Milestone";
 import { TileType } from "./TileType";
@@ -26,6 +27,8 @@ import * as constants from "./constants";
 
 import { ProtectedHabitats } from "./cards/ProtectedHabitats";
 import { Pets } from "./cards/Pets";
+
+type CardPlayedHandler = (card: IProjectCard) => OrOptions | void;
 
 export class Player {
     constructor(public name: string, public color: Color, public beginner: boolean) {
@@ -79,8 +82,7 @@ export class Player {
     public energyProduction: number = 0;
     public heat: number = 0;
     public heatProduction: number = 0;
-    public onCardSelected: Function | undefined;
-    public onTilePlaced: Function = () => {};
+    public onTilePlaced: (bonus: Array<SpaceBonus>) => void = () => {};
     public plants: number = 0;
     public plantProduction: number = 0;
     public cardsInHand: Array<IProjectCard> = [];
@@ -149,11 +151,11 @@ export class Player {
         }
         return foundCards[0];
     }
-    public cardPlayedEvents: Array<Function> = [];
-    public addCardPlayedHandler(handler: (card: IProjectCard) => OrOptions | void): void {
+    public cardPlayedEvents: Array<CardPlayedHandler> = [];
+    public addCardPlayedHandler(handler: CardPlayedHandler): void {
         this.cardPlayedEvents.push(handler);
     } 
-    public removeCardPlayedHandler(handler: Function): void {
+    public removeCardPlayedHandler(handler: CardPlayedHandler): void {
         this.cardPlayedEvents.splice(this.cardPlayedEvents.indexOf(handler), 1);
     }
     public standardProjectHandler: Array<(project: StandardProjectType) => void> = [];
@@ -367,6 +369,31 @@ export class Player {
                 const whenDone = () => {
                     this.cardsInHand.splice(this.cardsInHand.findIndex((card) => card.name === selectedCard.name), 1);
                     this.playedCards.push(selectedCard);
+                    const actionsFromPlayedCard: OrOptions[] = [];
+                    this.cardPlayedEvents.slice().forEach((cardPlayedEvent) => {
+                        const actionFromPlayedCard: OrOptions | void = cardPlayedEvent(selectedCard);
+                        if (actionFromPlayedCard !== undefined) {
+                            actionsFromPlayedCard.push(actionFromPlayedCard);
+                        }
+                    });
+                    // run through multiple inputs
+                    if (actionsFromPlayedCard.length > 1) {
+                        const multipleActions = new AndOptions(() => {
+                            this.actionsTakenThisRound++;
+                            this.takeAction(game);
+                            return undefined;
+                        });
+                        multipleActions.options = actionsFromPlayedCard;
+                        this.setWaitingFor(multipleActions);
+                        return;
+                    } else if (actionsFromPlayedCard.length === 1) {
+                        actionsFromPlayedCard[0].onend = () => {
+                            this.actionsTakenThisRound++;
+                            this.takeAction(game);
+                        };
+                        this.setWaitingFor(actionsFromPlayedCard[0]); 
+                        return;
+                    }
                     this.actionsTakenThisRound++;
                     this.takeAction(game);
                 }

@@ -4,6 +4,7 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 
+// TODO: implement this for any SelectHowToPay
 export class Helion implements CorporationCard {
     public name: string = "Helion";
     public tags: Array<Tags> = [Tags.SPACE];

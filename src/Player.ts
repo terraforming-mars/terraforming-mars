@@ -425,6 +425,9 @@ export class Player {
                 if (payMethod.titanium && payMethod.titanium > this.titanium) {
                     throw "Not enough titanium";
                 }
+                if (payMethod.megaCredits > this.megaCredits) {
+                    throw "Not enough mega credits";
+                }
                 return undefined;
             })
         );

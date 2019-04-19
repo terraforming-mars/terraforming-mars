@@ -6,10 +6,10 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
     props: ["playerinput", "onsave"],
     data: function () {
         return {
-            steel: 0,
-            titanium: 0,
+            heat: 0,
             megaCredits: 0,
-            heat: 0
+            steel: 0,
+            titanium: 0
         };
     },
     render: function (createElement) {
@@ -31,10 +31,10 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
         children.push(createElement("input", { domProps: { type: "number", value: "0", min: "0", max: "100" }, on: { change: (event: any) => { this.megaCredits = parseInt(event.target.value); } }}));
         children.push(createElement("button", { on: { click: () => {
             const htp: HowToPay = {
-                steel: this.steel,
-                titanium: this.titanium,
+                heat: this.heat,
                 megaCredits: this.megaCredits,
-                heat: this.heat
+                steel: this.steel,
+                titanium: this.titanium
             };
             this.onsave([[JSON.stringify(htp)]]);
         } } }, "Save"));

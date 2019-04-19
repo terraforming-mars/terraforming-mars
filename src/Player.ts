@@ -275,13 +275,13 @@ export class Player {
 
     private actionsThisGeneration: Set<string> = new Set<string>();
 
-    private getPlayedActionCards(): Array<ICard> {
+    private getPlayableActionCards(): Array<ICard> {
         const result: Array<ICard> = [];
         if (this.corporationCard !== undefined && !this.actionsThisGeneration.has(this.corporationCard.name) && this.corporationCard.action !== undefined) {
             result.push(this.corporationCard);
         }
         for (let playedCard of this.playedCards) {
-            if (playedCard.action !== undefined) {
+            if (playedCard.action !== undefined && !this.actionsThisGeneration.has(playedCard.name)) {
                 result.push(playedCard);
             }
         }
@@ -434,7 +434,7 @@ export class Player {
     }
 
     private playActionCard(game: Game): PlayerInput {
-        return new SelectCard("Take Action!", "Perform an action from a played card", this.getPlayedActionCards(), (foundCards: Array<ICard>) => {
+        return new SelectCard("Take Action!", "Perform an action from a played card", this.getPlayableActionCards(), (foundCards: Array<ICard>) => {
             const foundCard = foundCards[0];
             const action = foundCard.action!(this, game);
             const whenDone = (err?: string) => {
@@ -676,7 +676,7 @@ export class Player {
             );
         }
  
-        if (this.getPlayedActionCards().length > 0) {
+        if (this.getPlayableActionCards().length > 0) {
             action.options.push(
                 this.playActionCard(game)
             );

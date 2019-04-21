@@ -14,7 +14,10 @@ export class InventionContest implements IProjectCard {
     public text: string = "LOOK AT THE TOP 3 CARDS FROM THE DECK. TAKE 1 OF THEM INTO HAND AND DISCARD THE OTHER 2";
     public description: string = "Engaging the scientific community in a field of your choice";
     public play(player: Player, game: Game) {
-        const cardsDrawn: Array<IProjectCard> = game.dealer.getCards(3);
+        const cardsDrawn: Array<IProjectCard> = [];
+        for (let i = 0; i < 3; i++) {
+            cardsDrawn.push(game.dealer.dealCard());
+        }
         return new SelectCard(this.name, "Select card to take into hand", cardsDrawn, (foundCards: Array<IProjectCard>) => {
             player.cardsInHand.push(foundCards[0]);
             cardsDrawn

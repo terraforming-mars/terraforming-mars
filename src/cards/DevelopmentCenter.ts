@@ -21,7 +21,7 @@ export class DevelopmentCenter implements IProjectCard {
             throw "No energy to spend";
         }
         player.energy--;
-        player.cardsInHand.push(game.dealer.getCards(1)[0]);
+        player.cardsInHand.push(game.dealer.dealCard());
         return undefined;
     }
 }

@@ -41,7 +41,9 @@ export class Game {
                 player.setWaitingFor(this.pickCorporationCard(player));
             } else {
                 player.corporationCard = new BeginnerCorporation();
-                player.cardsInHand = this.dealer.getCards(10);
+                for (let i = 0; i < 10; i++) { 
+                    player.cardsInHand.push(this.dealer.dealCard());
+                }
                 player.megaCredits = 42;
                 this.playerIsFinishedWithResearchPhase(player);
             }
@@ -135,6 +137,10 @@ export class Game {
     }
 
     private pickCorporationCard(player: Player): PlayerInput {
+        const dealtCards: Array<IProjectCard> = [];
+        for (let i = 0; i < 10; i++) {
+            dealtCards.push(this.dealer.dealCard());
+        }
         return new AndOptions(
             () => {
                 player.corporationCard!.play(player, this);
@@ -145,7 +151,7 @@ export class Game {
                 player.corporationCard = foundCards[0];
                 return undefined;
             }),
-            new SelectCard("Initial Research Phase", "Select initial cards to buy", this.dealer.getCards(10), (foundCards: Array<IProjectCard>) => {
+            new SelectCard("Initial Research Phase", "Select initial cards to buy", dealtCards, (foundCards: Array<IProjectCard>) => {
                 // Pay for cards
                 player.megaCredits = player.corporationCard!.startingMegaCredits - (constants.CARD_COST * foundCards.length);
                 for (let foundCard of foundCards) {
@@ -505,7 +511,7 @@ export class Game {
         space.tile = tile;
         space.bonus.forEach((spaceBonus) => {
             if (spaceBonus === SpaceBonus.DRAW_CARD) {
-                player.cardsInHand.push(this.dealer.getCards(1)[0]);
+                player.cardsInHand.push(this.dealer.dealCard());
             } else if (spaceBonus === SpaceBonus.PLANT) {
                 player.plants++;
             } else if (spaceBonus === SpaceBonus.STEEL) {

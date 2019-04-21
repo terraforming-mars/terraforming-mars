@@ -479,17 +479,14 @@ export class Dealer {
     public discard(card: IProjectCard): void {
         this.discarded.push(card);
     }
-    public getCards(count: number): Array<IProjectCard> {
-        const result: Array<IProjectCard> = [];
-        while (result.length < count) {
-            if (this.deck.length === 0) {
-                this.deck = this.shuffleCards(this.discarded);
-                this.discarded = [];
-            }
-            const card = this.deck.pop();
-            if (card !== undefined) {
-                result.push(card);
-            }
+    public dealCard(): IProjectCard {
+        if (this.deck.length === 0) {
+            this.deck = this.shuffleCards(this.discarded);
+            this.discarded = [];
+        }
+        const result: IProjectCard | undefined = this.deck.pop();
+        if (result === undefined) {
+            throw "Unexpected empty deck";
         }
         return result;
     }    

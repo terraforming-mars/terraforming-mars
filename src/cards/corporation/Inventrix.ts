@@ -14,9 +14,9 @@ export class Inventrix implements CorporationCard {
     public description: string = "Inventrix uses brains, as well as muscle, when competing with other mega-corps. Its motto being: \"Do it right\", Inventrix is focused on research.";
     public initialAction(player: Player, game: Game) {
         return new SelectOption(this.name, "Draw 3 cards", () => {
-            player.cardsInHand.push(game.dealer.getCards(1)[0]);
-            player.cardsInHand.push(game.dealer.getCards(1)[0]);
-            player.cardsInHand.push(game.dealer.getCards(1)[0]);
+            for (let i = 0; i < 3; i++) {
+                player.cardsInHand.push(game.dealer.dealCard());
+            }
             return undefined;
         });
     }

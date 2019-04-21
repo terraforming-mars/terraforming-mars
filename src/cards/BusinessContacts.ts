@@ -14,7 +14,10 @@ export class BusinessContacts implements IProjectCard {
     public text: string = "Look at the top 4 cards from the deck. Take 2 of them into hand and discard the other 2.";
     public description: string = "Money and information are often interchangeable.";
     public play(player: Player, game: Game) {
-        const availableCards: Array<IProjectCard> = game.dealer.getCards(4);
+        const availableCards: Array<IProjectCard> = [];
+        for (let i = 0; i < 4; i++) {
+            availableCards.push(game.dealer.dealCard());
+        }
         return new SelectCard(this.name, "Select cards to keep", availableCards, (foundCards: Array<IProjectCard>) => {
             player.cardsInHand.push(foundCards[0]);
             player.cardsInHand.push(foundCards[1]);

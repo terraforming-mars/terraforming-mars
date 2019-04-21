@@ -13,8 +13,9 @@ export class TechnologyDemonstration implements IProjectCard {
     public text: string = "Draw 2 cards";
     public description: string = "Testing launch techniques, space hardware, and whatnot";
     public play(player: Player, game: Game) {
-        player.cardsInHand.push(game.dealer.getCards(1)[0]);
-        player.cardsInHand.push(game.dealer.getCards(1)[0]);
+        for (let i = 0; i < 2; i++) {
+            player.cardsInHand.push(game.dealer.dealCard());
+        }
         return undefined;
     }
 }

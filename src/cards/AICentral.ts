@@ -25,7 +25,9 @@ export class AICentral implements IProjectCard {
         return undefined;
     }
     public action(player: Player, game: Game) {
-        player.cardsInHand.push.apply(player.cardsInHand, game.dealer.getCards(2));
+        for (let i = 0; i < 2; i++) {
+            player.cardsInHand.push(game.dealer.dealCard());
+        }
         return undefined;
     }
 }

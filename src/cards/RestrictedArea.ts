@@ -27,7 +27,7 @@ export class RestrictedArea implements IProjectCard {
             throw "Must have 2 mega credits";
         }
         player.megaCredits -= 2;
-        player.cardsInHand.push(game.dealer.getCards(1)[0]);
+        player.cardsInHand.push(game.dealer.dealCard());
         return undefined;
     }
 }

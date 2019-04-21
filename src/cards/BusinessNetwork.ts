@@ -21,7 +21,7 @@ export class BusinessNetwork implements IProjectCard {
         return undefined;
     }
     public action(player: Player, game: Game) {
-        const dealtCard = game.dealer.getCards(1)[0];
+        const dealtCard = game.dealer.dealCard();
         return new OrOptions(
             new SelectCard(this.name, "Buy card", [dealtCard], (_foundCards: Array<IProjectCard>) => {
                 if (player.megaCredits < 3) {

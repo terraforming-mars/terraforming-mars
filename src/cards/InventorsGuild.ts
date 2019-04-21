@@ -20,7 +20,7 @@ export class InventorsGuild implements IProjectCard {
         return undefined;
     }
     public action(player: Player, game: Game) {
-        const topCard = game.dealer.getCards(1)[0];
+        const topCard = game.dealer.dealCard();
         return new OrOptions(
             new SelectCard(this.name, "Buy card", [topCard], (_card: Array<IProjectCard>) => {
                 if (player.megaCredits < 3) {

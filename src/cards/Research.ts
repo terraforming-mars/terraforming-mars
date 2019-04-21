@@ -14,8 +14,9 @@ export class Research implements IProjectCard {
     public description: string = "Through technical excellence you will unlock many wondrous things";
     public play(player: Player, game: Game) {
         player.victoryPoints++;
-        player.cardsInHand.push(game.dealer.getCards(1)[0]);
-        player.cardsInHand.push(game.dealer.getCards(1)[0]);
+        for (let i = 0; i < 2; i++) {
+            player.cardsInHand.push(game.dealer.dealCard());
+        }
         return undefined;
     }
 }

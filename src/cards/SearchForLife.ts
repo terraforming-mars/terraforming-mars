@@ -30,7 +30,7 @@ export class SearchForLife implements IProjectCard {
             throw "Must have mega credit";
         }
         player.megaCredits--;
-        const topCard = game.dealer.getCards(1)[0];
+        const topCard = game.dealer.dealCard();
         if (topCard.tags.indexOf(Tags.MICROBES) !== -1) {
             this.scienceResources++;
         }

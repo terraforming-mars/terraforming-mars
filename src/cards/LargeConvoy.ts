@@ -22,8 +22,9 @@ export class LargeConvoy implements IProjectCard {
     public play(player: Player, game: Game): PlayerInput {
         return new AndOptions(
             () => {
-                player.cardsInHand.push(game.dealer.getCards(1)[0]);
-                player.cardsInHand.push(game.dealer.getCards(1)[0]);
+                for (let i = 0; i < 2; i++) {
+                    player.cardsInHand.push(game.dealer.dealCard());
+                }
                 player.victoryPoints += 2;
                 return undefined;
             },

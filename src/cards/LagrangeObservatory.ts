@@ -13,7 +13,7 @@ export class LagrangeObservatory implements IProjectCard {
     public text: string = "Draw 1 card. Gain 1 victory point.";
     public description: string = "In a stationary orbit far from the planet, enabling very precise measurements.";
     public play(player: Player, game: Game) {
-        player.cardsInHand.push(game.dealer.getCards(1)[0]);
+        player.cardsInHand.push(game.dealer.dealCard());
         player.victoryPoints++;
         return undefined;
     }

@@ -185,6 +185,14 @@ export class Player {
                     }
                 }
             }
+            if (input[0].length < pi.minCardsToSelect) {
+                console.warn("selected cards", input[0]);
+                throw "Not enough cards selected";
+            }
+            if (input[0].length > pi.maxCardsToSelect) {
+                console.warn("selected cards", input[0]);
+                throw "Too many cards selected";
+            }
             if (mappedCards.length !== input[0].length) {
                 throw "Not all cards found";
             }
@@ -300,7 +308,10 @@ export class Player {
     }
 
     public runResearchPhase(game: Game): void {
-        const dealtCards = game.dealer.getCards(4);
+        const dealtCards: Array<IProjectCard> = [];
+        for (let i = 0; i < 4; i++) {
+            dealtCards.push(game.dealer.dealCard());
+        }
         this.setWaitingFor(new SelectCard("Research Phase", "Select which cards to take into hand", dealtCards, (foundCards: Array<IProjectCard>) => {
             if (foundCards.length * constants.CARD_COST > this.megaCredits) {
                 throw "Not enough money to purchase patents";

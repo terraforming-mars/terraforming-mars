@@ -18,7 +18,7 @@ export class Plantation implements IProjectCard {
         if (player.getTagCount(Tags.SCIENCE) < 2) {
             throw "Requires 2 science tags to play";
         }
-        return new SelectSpace(this.name, "Select space for greenery tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
+        return new SelectSpace(this.name, "Select space for greenery tile", game.getAvailableSpacesForGreenery(player), (space: ISpace) => {
             return game.addGreenery(player, space.id);
         });
     }

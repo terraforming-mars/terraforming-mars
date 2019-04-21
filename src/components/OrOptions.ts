@@ -32,8 +32,7 @@ export const OrOptions = Vue.component("or-options", {
                 createElement("span", option.message)
             ]));
             subchildren.push(createElement("div", { style: { display: "none", marginLeft: "30px" } }, [new PlayerInputFactory().getPlayerInput(createElement, this.players, option, (out: Array<Array<string>>) => {
-                out.unshift([String(idx)]);
-                this.onsave(out);
+                this.onsave([[String(idx)]].concat(out));
             })]));
             optionElements.push(subchildren[subchildren.length - 1]);
             children.push(createElement("div", subchildren));

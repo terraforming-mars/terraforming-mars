@@ -18,18 +18,8 @@ export class Sabotage implements IProjectCard {
     public description: string = "Nobody will know who did it.";
     public play(_player: Player, game: Game) {
         let foundPlayer: Player;
-        let foundAmount: number;
         return new AndOptions(
             () => {
-                if (foundAmount === 3) {
-                    foundPlayer.titanium = Math.max(0, foundPlayer.titanium - 3);
-                } else if (foundAmount === 4) {
-                    foundPlayer.steel = Math.max(0, foundPlayer.steel - 4);
-                } else if (foundAmount === 7) {
-                    foundPlayer.megaCredits = Math.max(0, foundPlayer.megaCredits - 7);
-                } else {
-                    throw "Unknown option";
-                }
                 return undefined;
             },
             new SelectPlayer(this.name, game.getPlayers(), "Select player to remove resources from", (selectedPlayer: Player) => {
@@ -37,18 +27,18 @@ export class Sabotage implements IProjectCard {
                 return undefined;
             }),
             new OrOptions(
-                new SelectAmount(this.name, "Remove 3 titanium", () => {
-                    foundAmount = 3;
+                new SelectAmount(this.name, "Remove 3 titanium", (amount: number) => {
+                    foundPlayer.titanium = Math.max(0, foundPlayer.titanium - amount);
                     return undefined;
-                }),
-                new SelectAmount(this.name, "Remove 4 steel", () => {
-                    foundAmount = 4;
+                }, 3),
+                new SelectAmount(this.name, "Remove 4 steel", (amount: number) => {
+                    foundPlayer.steel = Math.max(0, foundPlayer.steel - amount);
                     return undefined;
-                }),
-                new SelectAmount(this.name, "Remove 7 mega credits", () => {
-                    foundAmount = 7;
+                }, 4),
+                new SelectAmount(this.name, "Remove 7 mega credits", (amount: number) => {
+                    foundPlayer.megaCredits = Math.max(0, foundPlayer.megaCredits - amount);
                     return undefined;
-                })
+                }, 7)
             )
         );
     }

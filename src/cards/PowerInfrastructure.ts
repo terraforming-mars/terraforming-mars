@@ -18,16 +18,10 @@ export class PowerInfrastructure implements IProjectCard {
     }
     public actionText: string = "Spend any amount of energy to gain that many mega credit";
     public action(player: Player, _game: Game) {
-        if (player.energy === 0) {
-            throw "Have no energy to spend";
-        }
         return new SelectAmount(this.name, "Select energy to spend", (amount: number) => {
-            if (amount > player.energy) {
-                throw "You don't have that much energy";
-            }
             player.energy -= amount;
             player.megaCredits += amount;
             return undefined;
-        });
+        }, player.energy);
     }
 }

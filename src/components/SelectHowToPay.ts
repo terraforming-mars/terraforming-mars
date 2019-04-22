@@ -1,5 +1,5 @@
 
-import Vue, { VNode } from "vue";
+import Vue from "vue";
 import { HowToPay } from "../inputs/HowToPay";
 
 export const SelectHowToPay = Vue.component("select-how-to-pay", {
@@ -12,34 +12,39 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
             titanium: 0
         };
     },
-    render: function (createElement) {
-        const children: Array<VNode> = [];
-        children.push(createElement("div", this.playerinput.title));
-        if (this.playerinput.canUseSteel) {
-            children.push(createElement("label", "Steel: "));
-            children.push(createElement("input", { domProps: { type: "number", value: "0", min: "0", max: "100" }, on: { change: (event: any) => { this.steel = parseInt(event.target.value); } }}));
-        }
-        if (this.playerinput.canUseTitanium) {
-            children.push(createElement("label", "Titanium: "));
-            children.push(createElement("input", { domProps: { type: "number", value: "0", min: "0", max: "100" }, on: { change: (event: any) => { this.titanium = parseInt(event.target.value); } }}));
-        }
-        if (this.playerinput.canUseHeat) {
-            children.push(createElement("label", "Heat: "));
-            children.push(createElement("input", { domProps: { type: "number", value: "0", min: "0", max: "100" }, on: { change: (event: any) => { this.heat = parseInt(event.target.value); } }}));
-        }
-        children.push(createElement("label", "Mega Credit: "));
-        children.push(createElement("input", { domProps: { type: "number", value: "0", min: "0", max: "100" }, on: { change: (event: any) => { this.megaCredits = parseInt(event.target.value); } }}));
-        children.push(createElement("button", { on: { click: () => {
+    methods: {
+        pay: function () {
             const htp: HowToPay = {
-                heat: this.heat,
-                megaCredits: this.megaCredits,
-                steel: this.steel,
-                titanium: this.titanium
+                heat: parseInt(this.$data.heat),
+                megaCredits: parseInt(this.$data.megaCredits),
+                steel: parseInt(this.$data.steel),
+                titanium: parseInt(this.$data.titanium)
             };
             this.onsave([[JSON.stringify(htp)]]);
-        } } }, "Save"));
-        return createElement("div", children);
-    }
+        }
+    },
+    template: `
+        <div>
+            <div>{{playerinput.title}}</div>
+            <div v-if="playerinput.canUseSteel" class="nes-field">
+                <label>Steel:</label>
+                <input class="nes-input" type="number" value="0" min="0" max="100" v-model="steel" />
+            </div>
+            <div v-if="playerinput.canUseTitanium" class="nes-field">
+                <label>Titanium:</label>
+                <input class="nes-input" type="number" value="0" min="0" max="100" v-model="titanium" />
+            </div>
+            <div v-if="playerinput.canUseHeat" class="nes-field">
+                <label>Heat:</label>
+                <input class="nes-input" type="number" value="0" min="0" max="100" v-model="heat" />
+            </div>
+            <div class="nes-field">
+                <label>Mega Credit:</label>
+                <input class="nes-input" type="number" value="0" min="0" max="100" v-model="megaCredits" />
+            </div>
+            <button class="nes-btn" v-on:click="pay">Save</button>
+        </div>
+    `
 });
 
 

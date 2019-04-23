@@ -13,6 +13,7 @@ import { PlayerInput } from "./src/PlayerInput";
 import { PlayerInputModel } from "./src/models/PlayerInputModel";
 import { PlayerInputTypes } from "./src/PlayerInputTypes";
 import { PlayerModel } from "./src/models/PlayerModel";
+import { SelectAmount } from "./src/inputs/SelectAmount";
 import { SelectCard } from "./src/inputs/SelectCard";
 import { SelectHowToPay } from "./src/inputs/SelectHowToPay";
 import { SelectPlayer } from "./src/inputs/SelectPlayer";
@@ -202,6 +203,7 @@ function getPlayer(player: Player, game: Game): string {
         name: player.name,
         oceans: game.getOceansOnBoard(),
         oxygenLevel: game.getOxygenLevel(),
+        phase: game.phase,
         plants: player.plants,
         plantProduction: player.plantProduction,
         playedCards: getCards(player.playedCards),
@@ -213,6 +215,7 @@ function getPlayer(player: Player, game: Game): string {
         terraformRating: player.terraformRating,
         titanium: player.titanium,
         titaniumProduction: player.titaniumProduction,
+        victoryPoints: player.victoryPoints,
         waitingFor: getWaitingFor(player.getWaitingFor())
     };
     return JSON.stringify(output);
@@ -234,7 +237,8 @@ function getWaitingFor(waitingFor: PlayerInput | undefined): PlayerInputModel | 
         canUseTitanium: undefined,
         canUseHeat: undefined,
         players: undefined,
-        availableSpaces: undefined
+        availableSpaces: undefined,
+        max: undefined
     };
     switch (waitingFor.inputType) {
         case PlayerInputTypes.AND_OPTIONS:
@@ -262,6 +266,9 @@ function getWaitingFor(waitingFor: PlayerInput | undefined): PlayerInputModel | 
         break;
         case PlayerInputTypes.SELECT_SPACE:
             result.availableSpaces = (waitingFor as SelectSpace).availableSpaces.map((space) => space.id);
+        break;
+        case PlayerInputTypes.SELECT_AMOUNT:
+            result.max = (waitingFor as SelectAmount).max;
         break;
     }
     return result;
@@ -296,7 +303,8 @@ function getPlayers(players: Array<Player>): Array<PlayerModel> {
             steelProduction: player.steelProduction,
             terraformRating: player.terraformRating,
             titanium: player.titanium,
-            titaniumProduction: player.titaniumProduction
+            titaniumProduction: player.titaniumProduction,
+            victoryPoints: player.victoryPoints
         } as PlayerModel;
     }); 
 }
@@ -317,10 +325,9 @@ function getSpaces(spaces: Array<ISpace>): Array<SpaceModel> {
 
 function getGame(game: Game): string {
     const output = {
-        id: game.id,
         activePlayer: game.activePlayer.color,
+        id: game.id,
         phase: game.phase,
-        ended: game.ended,
         players: game.getPlayers()
     };
     return JSON.stringify(output);

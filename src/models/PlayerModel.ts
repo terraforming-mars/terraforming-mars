@@ -20,4 +20,5 @@ export interface PlayerModel {
     terraformRating: number;
     titanium: number;
     titaniumProduction: number;
+    victoryPoints: number;
 }

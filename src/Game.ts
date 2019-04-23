@@ -28,7 +28,6 @@ export class Game {
     public claimedMilestones: Array<ClaimedMilestone> = [];
     public fundedAwards: Array<FundedAward> = [];
     public awardFundingCost: number = 8;
-    public ended: boolean = false;
     constructor(public id: string, private players: Array<Player>, private first: Player) {
         this.activePlayer = first;
         // Single player game player starts with 14TR
@@ -312,7 +311,7 @@ export class Game {
     }
 
     private gotoEndGame(): void {
-        this.ended = true;
+        this.phase = Phase.END;
         // Give players any victory points from cards
         this.onGameEnd.forEach((gameEnd) => {
             gameEnd();

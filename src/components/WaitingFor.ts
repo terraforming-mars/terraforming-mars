@@ -4,6 +4,7 @@ import Vue from "vue";
 import { AndOptions } from "./AndOptions";
 import { OrOptions } from "./OrOptions";
 import { PlayerInputFactory } from "./PlayerInputFactory";
+import { SelectAmount } from "./SelectAmount";
 import { SelectCard } from "./SelectCard";
 import { SelectHowToPay } from "./SelectHowToPay";
 import { SelectOption } from "./SelectOption";
@@ -18,6 +19,7 @@ export const WaitingFor = Vue.component("waiting-for", {
     components: {
         "and-options": AndOptions,
         "or-options": OrOptions,
+        "select-amount": SelectAmount,
         "select-card": SelectCard,
         "select-option": SelectOption,
         "select-how-to-pay": SelectHowToPay,

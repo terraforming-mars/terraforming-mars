@@ -46,9 +46,9 @@ describe("Player", function () {
         const action = card.play(player, new Game("foobar", [player], player));
         player.setWaitingFor(action);
         expect(player.getWaitingFor()).not.to.eq(undefined);
-        expect(function () { player.process([[]]) }).to.throw("Too many amounts provided");
+        expect(function () { player.process([[]]) }).to.throw("Incorrect number of amounts provided");
         expect(function () { player.process([]) }).to.throw("Incorrect options provided");
-        expect(function () { player.process([["foobar"]]) }).to.throw("Amount is not a number");
+        expect(function () { player.process([["foobar"]]) }).to.throw("Number not provided for amount");
         player.process([["1"]]);
         expect(player.heatProduction).to.eq(1);
         expect(player.megaCreditProduction).to.eq(1);

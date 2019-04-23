@@ -165,6 +165,25 @@ export class Player {
                 this.runInput([input[i]], waiting.options[i]);
             }
             return pi.cb();
+        } else if (pi instanceof SelectAmount) {
+            const waiting: SelectAmount = pi;
+            if (input.length !== 1) {
+                throw "Incorrect options provided";
+            }
+            if (input[0].length !== 1) {
+                throw "Incorrect number of amounts provided";
+            }
+            const amount: number = parseInt(input[0][0]);
+            if (isNaN(amount)) {
+                throw "Number not provided for amount";
+            }
+            if (amount > waiting.max) {
+                throw "Amount provided too high";
+            }
+            if (amount < 0) {
+                throw "Amount provided too low";
+            }
+            return pi.cb(amount);
         } else if (pi instanceof SelectOption) {
             return pi.cb();
         } else if (pi instanceof OrOptions) {
@@ -557,6 +576,7 @@ export class Player {
     private addCity(game: Game): PlayerInput {
         return new SelectSpace("Take Action!", "Standard Project: City", game.getAvailableSpacesOnLand(this), (space: ISpace) => {
             game.addCityTile(this, space.id);
+            this.megaCreditProduction++;
             this.payForStandardProject(StandardProjectType.CITY, 25);
             this.actionsTakenThisRound++;
             this.takeAction(game);
@@ -609,6 +629,7 @@ export class Player {
                 player: this,
                 milestone: milestone
             });
+            this.megaCredits -= 8;
             this.actionsTakenThisRound++;
             this.takeAction(game);
             return undefined;
@@ -619,6 +640,7 @@ export class Player {
         let upperCaseAward = String(award)[0].toUpperCase() + String(award).substring(1);
         return new SelectOption("Take Action!", "Fund Award: " + upperCaseAward, () => {
             game.fundAward(this, award);
+            this.megaCredits -= game.awardFundingCost;
             this.actionsTakenThisRound++;
             this.takeAction(game);
             return undefined;
@@ -756,59 +778,55 @@ export class Player {
             );
         }
 
-        if (!game.allMilestonesClaimed()) {
-            if (this.megaCredits >= 8) {
-                const remainingMilestones = new OrOptions();
-                remainingMilestones.title = "Take action!";
-                remainingMilestones.message = "Select milestone to claim";
-                 
-                if (!game.milestoneClaimed(Milestone.TERRAFORMER) && this.terraformRating >= 35) {
-                    remainingMilestones.options.push(
-                        this.claimMilestone(Milestone.TERRAFORMER, game)
-                    );
-                }
-                if (!game.milestoneClaimed(Milestone.MAYOR) && game.getSpaceCount(TileType.CITY, this) >= 3) {
-                    remainingMilestones.options.push(
-                        this.claimMilestone(Milestone.MAYOR, game)
-                    );
-                }
-                if (!game.milestoneClaimed(Milestone.GARDENER) && game.getSpaceCount(TileType.GREENERY, this) >= 3) {
-                    remainingMilestones.options.push(
-                        this.claimMilestone(Milestone.GARDENER, game)
-                    );
-                }
-                if (!game.milestoneClaimed(Milestone.BUILDER) && this.getTagCount(Tags.STEEL) >= 8) {
-                    remainingMilestones.options.push(
-                        this.claimMilestone(Milestone.BUILDER, game)
-                    );
-                }
-                if (!game.milestoneClaimed(Milestone.PLANNER) && this.cardsInHand.length >= 16) {
-                    remainingMilestones.options.push(
-                        this.claimMilestone(Milestone.PLANNER, game)
-                    );
-                }
-                if (remainingMilestones.options.length > 1) {
-                    action.options.push(remainingMilestones);
-                } else if (remainingMilestones.options.length === 1) {
-                    action.options.push(remainingMilestones.options[0]);
-                }
+        if (this.megaCredits >= 8 && !game.allMilestonesClaimed()) {
+            const remainingMilestones = new OrOptions();
+            remainingMilestones.title = "Take action!";
+            remainingMilestones.message = "Select milestone to claim";
+             
+            if (!game.milestoneClaimed(Milestone.TERRAFORMER) && this.terraformRating >= 35) {
+                remainingMilestones.options.push(
+                    this.claimMilestone(Milestone.TERRAFORMER, game)
+                );
+            }
+            if (!game.milestoneClaimed(Milestone.MAYOR) && game.getSpaceCount(TileType.CITY, this) >= 3) {
+                remainingMilestones.options.push(
+                    this.claimMilestone(Milestone.MAYOR, game)
+                );
+            }
+            if (!game.milestoneClaimed(Milestone.GARDENER) && game.getSpaceCount(TileType.GREENERY, this) >= 3) {
+                remainingMilestones.options.push(
+                    this.claimMilestone(Milestone.GARDENER, game)
+                );
+            }
+            if (!game.milestoneClaimed(Milestone.BUILDER) && this.getTagCount(Tags.STEEL) >= 8) {
+                remainingMilestones.options.push(
+                    this.claimMilestone(Milestone.BUILDER, game)
+                );
+            }
+            if (!game.milestoneClaimed(Milestone.PLANNER) && this.cardsInHand.length >= 16) {
+                remainingMilestones.options.push(
+                    this.claimMilestone(Milestone.PLANNER, game)
+                );
+            }
+            if (remainingMilestones.options.length > 1) {
+                action.options.push(remainingMilestones);
+            } else if (remainingMilestones.options.length === 1) {
+                action.options.push(remainingMilestones.options[0]);
             }
         }
 
-        if (!game.allAwardsFunded()) {
-            if (this.megaCredits >= game.awardFundingCost) {
-                const remainingAwards = new OrOptions();
-                remainingAwards.title = "Take action!";
-                remainingAwards.message = "Fund an award";
-                [Award.LANDLORD, Award.BANKER, Award.SCIENTIST, Award.THERMALIST, Award.MINER]
-                    .filter((award: Award) => game.hasBeenFunded(award) === false)
-                    .forEach((award: Award) => {
-                        remainingAwards.options.push(
-                            this.fundAward(award, game)
-                        );
-                    });
-                action.options.push(remainingAwards);
-            }
+        if (this.megaCredits >= game.awardFundingCost && !game.allAwardsFunded()) {
+            const remainingAwards = new OrOptions();
+            remainingAwards.title = "Take action!";
+            remainingAwards.message = "Fund an award";
+            [Award.LANDLORD, Award.BANKER, Award.SCIENTIST, Award.THERMALIST, Award.MINER]
+                .filter((award: Award) => game.hasBeenFunded(award) === false)
+                .forEach((award: Award) => {
+                    remainingAwards.options.push(
+                        this.fundAward(award, game)
+                    );
+                });
+            action.options.push(remainingAwards);
         }
 
         this.setWaitingFor(action);

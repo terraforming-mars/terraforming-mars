@@ -1,6 +1,7 @@
 
 export enum Phase {
-    RESEARCH = "research",
     ACTION = "action",
-    PRODUCTION = "production"
+    END = "end",
+    PRODUCTION = "production",
+    RESEARCH = "research"
 }

@@ -14,5 +14,6 @@ export interface PlayerInputModel {
     canUseHeat: boolean | undefined;
     players: Array<string> | undefined;
     availableSpaces: Array<string> | undefined;
+    max: number | undefined;
 }
 

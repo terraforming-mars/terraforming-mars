@@ -20,6 +20,8 @@ export class PlayerInputFactory {
             return createElement("select-space", { attrs: { playerinput: playerInput, onsave: cb }});
         } else if (playerInput.inputType === PlayerInputTypes.SELECT_PLAYER) {
             return createElement("select-player", { attrs: { players: players, playerinput: playerInput, onsave: cb }});
+        } else if (playerInput.inputType === PlayerInputTypes.SELECT_AMOUNT) {
+            return createElement("select-amount", { attrs: { playerinput: playerInput, onsave: cb }});
         }
         return createElement("div", "Unsupported input type" + playerInput.inputType);
     }

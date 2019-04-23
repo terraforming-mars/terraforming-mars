@@ -389,16 +389,18 @@ export class Player {
                     throw "Did not spend enough to pay for card";
                 }
 
-                this.steel -= payMethod.steel;
-                this.titanium -= payMethod.titanium;
-                this.megaCredits -= payMethod.megaCredits;
-                if (payMethod.heat !== undefined) {
-                    this.heat -= payMethod.heat;
-                }
-
                 const whenDone = () => {
                     this.cardsInHand.splice(this.cardsInHand.findIndex((card) => card.name === selectedCard.name), 1);
                     this.playedCards.push(selectedCard);
+
+
+                    this.steel -= payMethod.steel;
+                    this.titanium -= payMethod.titanium;
+                    this.megaCredits -= payMethod.megaCredits;
+                    if (payMethod.heat !== undefined) {
+                        this.heat -= payMethod.heat;
+                    }
+
                     const actionsFromPlayedCard: OrOptions[] = [];
                     this.cardPlayedEvents.slice().forEach((cardPlayedEvent) => {
                         const actionFromPlayedCard: OrOptions | void = cardPlayedEvent(selectedCard);

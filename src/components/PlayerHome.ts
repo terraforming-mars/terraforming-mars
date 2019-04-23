@@ -36,7 +36,7 @@ export const PlayerHome = Vue.component("player-home", {
                 <div>Generation: {{player.generation}}</div>
                 <div>Terraform Rating: {{player.terraformRating}}</div>
                 <h2>Corporation Card</h2>
-                <card :card="player.corporationCard"></card>
+                <card hideCost="true" :card="player.corporationCard"></card>
                 <div v-if="player.playedCards.length > 0">
                     <h2>Played Cards</h2>
                     <div v-for="card in player.playedCards" :key="card.name">
@@ -46,7 +46,7 @@ export const PlayerHome = Vue.component("player-home", {
                 <div v-if="player.cardsInHand.length > 0">
                     <h2>Cards In Hand</h2>
                     <div v-for="card in player.cardsInHand" :key="card.name">
-                        <card :card="card.name" :animals="card.animals" :fighterResources="card.fighterResources" :microbes="card.microbes" :scienceResources="card.scienceResources"></card>
+                        <card hideCost="true" :card="card.name" :animals="card.animals" :fighterResources="card.fighterResources" :microbes="card.microbes" :scienceResources="card.scienceResources"></card>
                     </div>
                 </div>
                 <h2>Resources</h2>

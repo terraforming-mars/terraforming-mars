@@ -19,81 +19,78 @@ function getProjectCardByName(cardName: string): IProjectCard | undefined {
     return ALL_PROJECT_CARDS.find((card) => card.name === cardName);
 }
 
-function getCardAsString(cardName: string, animals: number | undefined, fighterResources: number | undefined, microbes: number | undefined, scienceResources: number | undefined): string {
-    interface Card {
-        cost?: number;
-        startingMegaCredits?: number;
-        name: string;
-        tags: Array<Tags>;
-        text: string;
-        cardType?: CardType;
-        description: string;
-        actionText?: string;
-    }
-    let card: Card | undefined = getProjectCardByName(cardName) || getCorporationCardByName(cardName);
-    if (card === undefined) {
-        throw new Error("Card not found");
-    }
-    let out = "<span";
-    if (card.cardType === CardType.EVENT) {
-        out += " style='font-weight:bold;color:red'";
-    } else if (card.cardType === CardType.ACTIVE) {
-        out += " style='font-weight:bold;color:blue'";
-    } else if (card.cardType === CardType.AUTOMATED) {
-        out += " style='font-weight:bold;color:green'";
-    } else {
-        out += " style='font-weight:bold'";
-    }
-    out += ">" + cardName + "</span>";
-    if (card === undefined) {
-        throw new Error("Did not find card");
-    }
-    if (card.cost !== undefined) {
-        out += " Costs " + String(card.cost) + ".";
-    }
-    if (card.startingMegaCredits !== undefined) {
-        out += " Start with " + String(card.startingMegaCredits) + " mega credits.";
-    }
-    if (card.tags.length === 1) {
-        out += " Has " + card.tags[0] + " tag.";
-    } else if (card.tags.length > 1) {
-        out += " Has ";
-        let i = 0;
-        for (; i < card.tags.length - 1; i++) {
-            out += card.tags[i] + ", ";
-        }
-        out += "and " + card.tags[i] + " tags.";
-    }
-    if (card.actionText) {
-        out += " <b>" + card.actionText + "</b>";
-    }
-    out += " " + card.text;
-    out += " <i>" + card.description + "</i>";
-    if (animals !== undefined) {
-        out += "<strong>" + animals + " animals on card</strong>";
-    } else if (fighterResources !== undefined) {
-        out += "<strong>" + fighterResources + " fighter resources on card</strong>";
-    } else if (microbes !== undefined) {
-        out += "<strong>" + microbes + " microbes on card</strong>";
-    } else if (scienceResources !== undefined) {
-        out += "<strong>" + scienceResources + " science resources on card</strong>";
-    }
-    return out;
-}
-
 export const Card = Vue.component("card", {
     props: [
         "animals",
         "card",
         "fighterResources",
         "microbes",
+        "hideCost",
         "scienceResources"
     ],
     data: function () {
         return {};
     },
     render: function (createElement) {
-        return createElement("span", { domProps: { innerHTML: getCardAsString(this.card, this.animals, this.fighterResources, this.microbes, this.scienceResources) } });
+        interface Card {
+            cost?: number;
+            startingMegaCredits?: number;
+            name: string;
+            tags: Array<Tags>;
+            text: string;
+            cardType?: CardType;
+            description: string;
+            actionText?: string;
+        }
+        let card: Card | undefined = getProjectCardByName(this.card) || getCorporationCardByName(this.card);
+        if (card === undefined) {
+            throw new Error("Card not found");
+        }
+        let out = "<span";
+        if (card.cardType === CardType.EVENT) {
+            out += " style='font-weight:bold;color:red'";
+        } else if (card.cardType === CardType.ACTIVE) {
+            out += " style='font-weight:bold;color:blue'";
+        } else if (card.cardType === CardType.AUTOMATED) {
+            out += " style='font-weight:bold;color:green'";
+        } else {
+            out += " style='font-weight:bold'";
+        }
+        out += ">" + this.card + "</span>";
+        if (card === undefined) {
+            throw new Error("Did not find card");
+        }
+        if (this.hideCost !== "true" && card.cost !== undefined) {
+            out += " Costs " + String(card.cost) + ".";
+        }
+        if (card.startingMegaCredits !== undefined) {
+            out += " Start with " + String(card.startingMegaCredits) + " mega credits.";
+        }
+        if (card.tags.length === 1) {
+            out += " Has " + card.tags[0] + " tag.";
+        } else if (card.tags.length > 1) {
+            out += " Has ";
+            let i = 0;
+            for (; i < card.tags.length - 1; i++) {
+                out += card.tags[i] + ", ";
+            }
+            out += "and " + card.tags[i] + " tags.";
+        }
+        if (card.actionText) {
+            out += " <b>" + card.actionText + "</b>";
+        }
+        out += " " + card.text;
+        out += " <i>" + card.description + "</i>";
+        if (this.animals !== undefined) {
+            out += "<strong>" + this.animals + " animals on card</strong>";
+        } else if (this.fighterResources !== undefined) {
+            out += "<strong>" + this.fighterResources + " fighter resources on card</strong>";
+        } else if (this.microbes !== undefined) {
+            out += "<strong>" + this.microbes + " microbes on card</strong>";
+        } else if (this.scienceResources !== undefined) {
+            out += "<strong>" + this.scienceResources + " science resources on card</strong>";
+        }
+        return createElement("span", { domProps: { innerHTML: out } });
     }
 });
 

@@ -5,8 +5,8 @@ import { IProjectCard } from "../cards/IProjectCard";
 import { ICard } from "../cards/ICard";
 import { BeginnerCorporation } from "../cards/corporation/BeginnerCorporation";
 import { ALL_CORPORATION_CARDS, ALL_PROJECT_CARDS } from "../Dealer";
-import { Tags } from "../cards/Tags";
 import { CardType } from "../cards/CardType";
+import { Tags } from "../cards/Tags";
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
     if (cardName === (new BeginnerCorporation()).name) {
@@ -31,66 +31,77 @@ export const Card = Vue.component("card", {
     data: function () {
         return {};
     },
-    render: function (createElement) {
-        interface Card {
-            cost?: number;
-            startingMegaCredits?: number;
-            name: string;
-            tags: Array<Tags>;
-            text: string;
-            cardType?: CardType;
-            description: string;
-            actionText?: string;
-        }
-        let card: Card | undefined = getProjectCardByName(this.card) || getCorporationCardByName(this.card);
-        if (card === undefined) {
-            throw new Error("Card not found");
-        }
-        let out = "<span";
-        if (card.cardType === CardType.EVENT) {
-            out += " style='font-weight:bold;color:red'";
-        } else if (card.cardType === CardType.ACTIVE) {
-            out += " style='font-weight:bold;color:blue'";
-        } else if (card.cardType === CardType.AUTOMATED) {
-            out += " style='font-weight:bold;color:green'";
-        } else {
-            out += " style='font-weight:bold'";
-        }
-        out += ">" + this.card + "</span>";
-        if (card === undefined) {
-            throw new Error("Did not find card");
-        }
-        if (this.hideCost !== "true" && card.cost !== undefined) {
-            out += " Costs " + String(card.cost) + ".";
-        }
-        if (card.startingMegaCredits !== undefined) {
-            out += " Start with " + String(card.startingMegaCredits) + " mega credits.";
-        }
-        if (card.tags.length === 1) {
-            out += " Has " + card.tags[0] + " tag.";
-        } else if (card.tags.length > 1) {
-            out += " Has ";
-            let i = 0;
-            for (; i < card.tags.length - 1; i++) {
-                out += card.tags[i] + ", ";
+    methods: {
+        getCard: function () {
+            return getProjectCardByName(this.card) || getCorporationCardByName(this.card);
+        },
+        getEventColor: function (cardType: CardType) {
+            if (cardType === CardType.EVENT) {
+                return "red";
+            } else if (cardType === CardType.ACTIVE) {
+                return "blue";
+            } else if (cardType === CardType.AUTOMATED) {
+                return "green";
+            } else {
+                return "black";
             }
-            out += "and " + card.tags[i] + " tags.";
+        },
+        isAnimalTag: function (tag: Tags) {
+            return tag === Tags.ANIMAL;
+        },
+        isBuildingTag: function (tag: Tags) {
+            return tag === Tags.STEEL;
+        },
+        isCityTag: function (tag: Tags) {
+            return tag === Tags.CITY;
+        },
+        isEarthTag: function (tag: Tags) {
+            return tag === Tags.EARTH;
+        },
+        isEnergyTag: function (tag: Tags) {
+            return tag === Tags.ENERGY;
+        },
+        isJovianTag: function (tag: Tags) {
+            return tag === Tags.JOVIAN;
+        },
+        isMicrobesTag: function (tag: Tags) {
+            return tag === Tags.MICROBES;
+        },
+        isPlantTag: function (tag: Tags) {
+            return tag === Tags.PLANT;
+        },
+        isScienceTag: function (tag: Tags) {
+            return tag === Tags.SCIENCE;
+        },
+        isSpaceTag: function (tag: Tags) {
+            return tag === Tags.SPACE;
         }
-        if (card.actionText) {
-            out += " <b>" + card.actionText + "</b>";
-        }
-        out += " " + card.text;
-        out += " <i>" + card.description + "</i>";
-        if (this.animals !== undefined) {
-            out += "<strong>" + this.animals + " animals on card</strong>";
-        } else if (this.fighterResources !== undefined) {
-            out += "<strong>" + this.fighterResources + " fighter resources on card</strong>";
-        } else if (this.microbes !== undefined) {
-            out += "<strong>" + this.microbes + " microbes on card</strong>";
-        } else if (this.scienceResources !== undefined) {
-            out += "<strong>" + this.scienceResources + " science resources on card</strong>";
-        }
-        return createElement("span", { domProps: { innerHTML: out } });
-    }
+    },
+    template: `
+        <span>
+            <span :style="'font-weight:bold;color:' + this.getEventColor(this.getCard().cardType)">{{this.card}}</span>
+            <span v-if="this.hideCode !== 'true' && this.getCard().cost !== undefined">Costs {{this.getCard().cost}}.</span>
+            <span v-if="this.getCard().startingMegaCredits !== undefined">Start with {{this.getCard().startingMegaCredits}} mega credits.</span>
+            <span v-if="this.getEventColor(this.getCard().cardType) === 'red'"><img height="20" src="/assets/event-tag.png" /></span><span v-for="tag in this.getCard().tags">
+                <img v-if="isEnergyTag(tag)" height="20" src="/assets/power-tag.png" />
+                <img v-else-if="isPlantTag(tag)" height="20" src="/assets/plant-tag.png" />
+                <img v-else-if="isBuildingTag(tag)" height="20" src="/assets/building-tag.png" />
+                <img v-else-if="isJovianTag(tag)" height="20" src="/assets/jovian-tag.png" />
+                <img v-else-if="isSpaceTag(tag)" height="20" src="/assets/space-tag.png" />
+                <img v-else-if="isScienceTag(tag)" height="20" src="/assets/science-tag.png" />
+                <img v-else-if="isMicrobesTag(tag)" height="20" src="/assets/microbes-tag.png" />
+                <img v-else-if="isEarthTag(tag)" height="20" src="/assets/earth-tag.png" />
+                <img v-else-if="isCityTag(tag)" height="20" src="/assets/city-tag.png" />
+                <img v-else-if="isAnimalTag(tag)" height="20" src="/assets/animal-tag.png" />
+                <span v-else>{{tag}}</span>
+            </span>
+            <span v-if="this.getCard().actionText" style="font-weight:bold">{{this.getCard().actionText}}</span>
+            <span>{{this.getCard().text}}</span>
+            <i>{{this.getCard().description}}</i>
+            <strong v-if="this.getCard().animals !== undefined">{{this.getCard().animals}} animals</strong>
+            <strong v-if="this.getCard().fighterResources !== undefined">{{this.getCard().fighterResources}} fighter resources</strong>
+            <strong v-if="this.getCard().microbes !== undefined">{{this.getCard().microbes}} microbes</strong>
+            <strong v-if="this.getCard().scienceResources !== undefined">{{this.getCard().scienceResources}} science resources</strong>
+        </span>`
 });
 

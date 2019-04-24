@@ -22,8 +22,19 @@ import { SpaceModel } from "./src/models/SpaceModel";
 
 const styles = fs.readFileSync("styles.css");
 const nes = fs.readFileSync("nes.min.css");
+const animalTag = fs.readFileSync("assets/animal-tag.png");
+const buildingTag = fs.readFileSync("assets/building-tag.png");
+const cityTag = fs.readFileSync("assets/city-tag.png");
 const cursor = fs.readFileSync("assets/cursor.png");
 const cursorClick = fs.readFileSync("assets/cursor-click.png");
+const earthTag = fs.readFileSync("assets/earth-tag.png");
+const eventTag = fs.readFileSync("assets/event-tag.png");
+const jovianTag = fs.readFileSync("assets/jovian-tag.png");
+const microbesTag = fs.readFileSync("assets/microbes-tag.png");
+const plantTag = fs.readFileSync("assets/plant-tag.png");
+const powerTag = fs.readFileSync("assets/power-tag.png");
+const scienceTag = fs.readFileSync("assets/science-tag.png");
+const spaceTag = fs.readFileSync("assets/space-tag.png");
 const favicon = fs.readFileSync("favicon.ico");
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
@@ -42,10 +53,32 @@ const server: http.Server = http.createServer(function (req: http.IncomingMessag
         serveStyle(res, styles);
     } else if (req.method === "GET" && req.url === "/main.js") {
         serveScript(res, fs.readFileSync("dist/main.js"));
+    } else if (req.method === "GET" && req.url === "/assets/animal-tag.png") {
+        servePng(res, animalTag);
+    } else if (req.method === "GET" && req.url === "/assets/building-tag.png") {
+        servePng(res, buildingTag);
+    } else if (req.method === "GET" && req.url === "/assets/city-tag.png") {
+        servePng(res, cityTag);
     } else if (req.method === "GET" && req.url === "/assets/cursor.png") {
         servePng(res, cursor);
     } else if (req.method === "GET" && req.url === "/assets/cursor-click.png") {
         servePng(res, cursorClick);
+    } else if (req.method === "GET" && req.url === "/assets/earth-tag.png") {
+        servePng(res, earthTag);
+    } else if (req.method === "GET" && req.url === "/assets/event-tag.png") {
+        servePng(res, eventTag);
+    } else if (req.method === "GET" && req.url === "/assets/jovian-tag.png") {
+        servePng(res, jovianTag);
+    } else if (req.method === "GET" && req.url === "/assets/microbes-tag.png") {
+        servePng(res, microbesTag);
+    }  else if (req.method === "GET" && req.url === "/assets/plant-tag.png") {
+        servePng(res, plantTag);
+    } else if (req.method === "GET" && req.url === "/assets/power-tag.png") {
+        servePng(res, powerTag);
+    } else if (req.method === "GET" && req.url === "/assets/science-tag.png") {
+        servePng(res, scienceTag);
+    } else if (req.method === "GET" && req.url === "/assets/space-tag.png") {
+        servePng(res, spaceTag);
     } else if (req.method === "GET" && req.url === "/favicon.ico") {
         serveFavicon(res);
     } else if (req.method === "GET" && req.url && req.url.indexOf("/api/game") === 0) {

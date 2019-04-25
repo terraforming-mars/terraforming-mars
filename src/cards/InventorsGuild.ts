@@ -16,6 +16,9 @@ export class InventorsGuild implements IProjectCard {
     public actionText = "Look at the top card and either buy it or discard it";
     public description: string = "When great minds meet, new ideas abount";
     public text: string = "";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(_player: Player, _game: Game) {
         return undefined;
     }

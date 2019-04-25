@@ -15,6 +15,9 @@ export class IceAsteroid implements IProjectCard {
     public name: string = "Ice Asteroid";
     public text: string = "Place 2 ocean tiles";
     public description: string = "We need its water down here";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         return new AndOptions(
             () => {

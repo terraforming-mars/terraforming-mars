@@ -12,6 +12,9 @@ export class Soletta implements IProjectCard {
     public name: string = "Soletta";
     public text: string = "Increase your heat production 7 steps";
     public description: string = "Huge ultra-thin mirrors focusing sunlight onto the red planet.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, _game: Game) {
         player.heatProduction += 7;
         return undefined;

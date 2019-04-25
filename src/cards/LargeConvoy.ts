@@ -19,6 +19,9 @@ export class LargeConvoy implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Place an ocean tile and draw 2 cards. Gain 5 plants, or add 4 animals to ANOTHER card. Gain 2 Victory Points.";
     public description: string = "Huge delivery from Earth";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game): PlayerInput {
         return new AndOptions(
             () => {

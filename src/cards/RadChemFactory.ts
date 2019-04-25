@@ -12,6 +12,9 @@ export class RadChemFactory implements IProjectCard {
     public name: string = "Rad-chem Factory";
     public text: string = "Decrease your energy production 1 step. Raise your terraform rating 2 steps.";
     public description: string = "Certain aromatic compounds can absorb dangerous radiation without breaking.";
+    public canPlay(player: Player): boolean {
+        return player.energyProduction >= 1;
+    }
     public play(player: Player, _game: Game) {
         if (player.energyProduction < 1) {
             throw "Must have energy production";

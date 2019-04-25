@@ -13,6 +13,9 @@ export class Livestock implements IProjectCard {
     public name: string = "Livestock";
     public text: string = "Requires 9% oxygen. Decrease your plant production 1 step and increase your mega credit production 2 steps. Gain 1 victory point per animal on this card";
     public description: string = "Providing meat, wool, leather, etc.";
+    public canPlay(player: Player, game: Game): boolean {
+        return game.getOxygenLevel() >= 9 && player.plantProduction >= 1;
+    }
     public play(player: Player, game: Game) {
         if (game.getOxygenLevel() < 9) {
             throw "Requires 9% oxygen";

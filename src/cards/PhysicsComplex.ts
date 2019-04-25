@@ -14,6 +14,9 @@ export class PhysicsComplex implements IProjectCard {
     public text: string = "Gain 2 victory points for each science resource on this card.";
     public description: string = "This used to cause blackouts before the invention of supercomputers.";
     public scienceResources: number = 0;
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         game.addGameEndListener(() => {
             player.victoryPoints += 2 * this.scienceResources;

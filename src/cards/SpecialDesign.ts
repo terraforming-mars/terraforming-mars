@@ -13,6 +13,9 @@ export class SpecialDesign implements IProjectCard {
     // TODO: Implement requirements bonus for oceans, oxygen, and temperature
     public text: string = "The next card you play this generation is +2 or -2 in global requirements, your choice.";
     public description: string = "If it isn't feasible, then make it so.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         const startingBonus = player.requirementsBonus;
         player.requirementsBonus = 2;

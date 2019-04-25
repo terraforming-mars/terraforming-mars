@@ -6,12 +6,14 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 
 describe("LunarBeam", function () {
-    it("Should throw", function () {
+    it("Can play", function () {
         const card = new LunarBeam();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
         player.megaCreditProduction = -4;
-        expect(function () { card.play(player, game); }).to.throw("Do not have enough mega credit production");
+        expect(card.canPlay(player, game)).to.eq(false);
+        player.megaCreditProduction = -3;
+        expect(card.canPlay(player, game)).to.eq(true);
     });
     it("Should play", function () {
         const card = new LunarBeam();

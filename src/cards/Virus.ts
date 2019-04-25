@@ -16,6 +16,9 @@ export class Virus implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Remove up to 2 animals or 5 plants from any player.";
     public description: string = "The virus is transient, changing from liquid to air-borne to blood transfusion.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game): PlayerInput | undefined {
         const cards = game.getPlayedCardsWithAnimals();
         const remove5Plants = () => {

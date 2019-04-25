@@ -12,6 +12,9 @@ export class TitaniumMine implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your titanium production 1 step";
     public description: string = "Titanium is useful to the space industry because of its great strength";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, _game: Game) {
         player.titaniumProduction++;
         return undefined;

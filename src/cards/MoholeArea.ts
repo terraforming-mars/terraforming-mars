@@ -16,6 +16,9 @@ export class MoholeArea implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your heat production 4 steps. Place a special tile on an area reserved for ocean";
     public description: string = "Tunnels deep down to the molton magma, releasing heat and gases";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         return new SelectSpace(this.name, "Select an ocean space for special tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
             game.addTile(player, SpaceType.OCEAN, space, { tileType: TileType.SPECIAL });

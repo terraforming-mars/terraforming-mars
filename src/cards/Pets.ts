@@ -13,6 +13,9 @@ export class Pets implements IProjectCard {
     public name: string = "Pets";
     public text: string = "ANIMALS MAY NOT BE REMOVED FROM THIS CARD. Add 1 animal to this card every time a city tile is placed. Gain 1 victory point for every 2 animals on this card.";
     public description: string = "It wouldn't be the same without them";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         game.addCityTilePlacedListener(() => {
             this.animals++;

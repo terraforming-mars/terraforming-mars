@@ -13,6 +13,9 @@ export class Steelworks implements IProjectCard {
     public text: string = "";
     public actionText: string = "Spend 4 energy to gain 2 steel and increase oxygen 1 step.";
     public description: string = "Turning the soil into stee and oxygen sounds good. It just takes a lot of energy.";
+    public canPlay(): boolean {
+        return true;
+    }
     public action(player: Player, game: Game) {
         if (player.energy < 4) {
             throw "Must have 4 energy to spend";

@@ -14,6 +14,9 @@ export class IceCapMelting implements IProjectCard {
     public name: string = "Ice Cap Melting";
     public text: string = "Requires +2C or warmer. Place 1 ocean tile.";
     public description: string = "Getting the water back from the poles.";
+    public canPlay(_player: Player, game: Game): boolean {
+        return game.getTemperature() >= 2;
+    }
     public play(player: Player, game: Game) {
         if (game.getTemperature() < 2) {
             throw "not warm enough, must be +2C or warmer";

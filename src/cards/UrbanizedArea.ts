@@ -19,6 +19,9 @@ export class UrbanizedArea implements IProjectCard {
         return game.getAvailableSpacesOnLand(player)
                 .filter((space) => game.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.CITY).length >= 2);
     }
+    public canPlay(player: Player, game: Game): boolean {
+        return player.energyProduction >= 1 && this.getAvailableSpaces(player, game).length > 0;
+    }
     public play(player: Player, game: Game) {
         if (player.energyProduction < 1) {
             throw "Must have energy production";

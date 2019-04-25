@@ -12,6 +12,9 @@ export class MediaArchives implements IProjectCard {
     public name: string = "Media Archives";
     public text: string = "Gain 1 mega credit for each event ever played by all players.";
     public description: string = "Accessing information on past events for better planning of the future.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         let allPlayedEvents = 0;
         game.getPlayers().forEach((player: Player) => {

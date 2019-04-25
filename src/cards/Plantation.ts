@@ -14,6 +14,9 @@ export class Plantation implements IProjectCard {
     public name: string = "Plantation";
     public text: string = "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.";
     public description: string = "By focusing on a limited area, helpful measures can be taken to improve local conditions for plant life";
+    public canPlay(player: Player): boolean {
+        return player.getTagCount(Tags.SCIENCE) >= 2;
+    }
     public play(player: Player, game: Game) {
         if (player.getTagCount(Tags.SCIENCE) < 2) {
             throw "Requires 2 science tags to play";

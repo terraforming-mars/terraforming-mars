@@ -12,6 +12,9 @@ export class NuclearPower implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease your mega credit production 2 steps and increase your energy production 3 steps";
     public description: string = "A simple way to satisfy your energy needs";
+    public canPlay(player: Player): boolean {
+        return player.megaCreditProduction >= 3;
+    }
     public play(player: Player, _game: Game) {
         if (player.megaCreditProduction < -3) {
             throw "Not enough mega credit production";

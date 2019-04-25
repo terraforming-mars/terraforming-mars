@@ -13,6 +13,9 @@ export class PowerInfrastructure implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
+    public canPlay(): boolean {
+        return true;
+    }
     public play(_player: Player, _game: Game) {
         return undefined;
     }

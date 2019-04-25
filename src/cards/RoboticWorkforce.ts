@@ -63,6 +63,9 @@ export class RoboticWorkforce implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Duplicate only the production box of one of your building cards.";
     public description: string = "Enhancing your production capacity.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         const builderCards: Array<IProjectCard> = [
             new AICentral(),

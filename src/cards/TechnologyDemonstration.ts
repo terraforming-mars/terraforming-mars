@@ -12,6 +12,9 @@ export class TechnologyDemonstration implements IProjectCard {
     public name: string = "Technology Demonstration";
     public text: string = "Draw 2 cards";
     public description: string = "Testing launch techniques, space hardware, and whatnot";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         for (let i = 0; i < 2; i++) {
             player.cardsInHand.push(game.dealer.dealCard());

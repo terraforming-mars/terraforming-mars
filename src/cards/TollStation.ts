@@ -12,6 +12,9 @@ export class TollStation implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your mega credit production 1 step for each space tag your opponents have.";
     public description: string = "Licensed by the 'government'";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         player.megaCreditProduction += game.getPlayers()
             .filter((aPlayer) => aPlayer !== player)

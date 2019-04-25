@@ -22,6 +22,9 @@ export class ResearchOutpost implements IProjectCard {
                     return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
                 });
     }
+    public canPlay(player: Player, game: Game): boolean {
+        return this.getAvailableSpaces(player, game).length > 0;
+    }
     public play(player: Player, game: Game): PlayerInput {
         if (this.getAvailableSpaces(player, game).length === 0) {
             throw "No places available for tile";

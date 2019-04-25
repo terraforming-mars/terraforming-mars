@@ -12,6 +12,9 @@ export class QuantumExtractor implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "Requires 4 science tags. Increase your energy production 4 steps. When you play a space card, you pay 2 mega credit less for it.";
     public description: string = "Tapping the very fabric of space";
+    public canPlay(player: Player): boolean {
+        return player.getTagCount(Tags.SCIENCE) >= 4;
+    }
     public play(player: Player, _game: Game) {
         if (player.getTagCount(Tags.SCIENCE) < 4) {
             throw "Requires 4 science tags";

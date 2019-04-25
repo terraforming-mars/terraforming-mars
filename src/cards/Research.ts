@@ -12,6 +12,9 @@ export class Research implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Counts as playing 2 science cards. Draw 2 cards. Gain 1 victory point.";
     public description: string = "Through technical excellence you will unlock many wondrous things";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         player.victoryPoints++;
         for (let i = 0; i < 2; i++) {

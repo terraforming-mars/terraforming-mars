@@ -12,6 +12,9 @@ export class IndenturedWorkers implements IProjectCard {
     public name: string = "Indentured Workers";
     public text: string = "The next card you play this generation costs 8 mega credits less. Lose 1 victory point.";
     public description: string = "There are many who would work for us for almost no pay in exchange for a ticket to Mars";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         let cardHasBeenPlayed: boolean = false;
         let generationHasEnded: boolean = false;

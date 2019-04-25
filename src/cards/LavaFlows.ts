@@ -22,6 +22,9 @@ export class LavaFlows implements IProjectCard {
                 .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
                 .filter((space) => space.id === SpaceName.THARSIS_THOLUS || space.id === SpaceName.ASCRAEUS_MONS || space.id === SpaceName.ARSIA_MONS);
     }
+    public canPlay(player: Player, game: Game): boolean {
+        return this.getAvailableSpaces(player, game).length > 0;
+    }
     public play(player: Player, game: Game) {
         if (this.getAvailableSpaces(player, game).length === 0) {
             throw "Spaces are not available to play card";

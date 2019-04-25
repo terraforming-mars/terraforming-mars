@@ -15,6 +15,9 @@ export class LakeMarineris implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires 0C or warmer. Place 2 ocean tiles. Gain 2 victory points.";
     public description: string = "Filling the Valles Marineris takes a lot of water";
+    public canPlay(_player: Player, game: Game): boolean {
+        return game.getTemperature() >= 0;
+    }
     public play(player: Player, game: Game) {
         if (game.getTemperature() < 0) {
             throw "Requires 0C or warmer";

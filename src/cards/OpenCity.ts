@@ -14,6 +14,9 @@ export class OpenCity implements IProjectCard {
     public name: string = "Open City";
     public text: string = "Requires 12% oxygen. Decrease your energy production 1 step and increase your mega credit production 4 steps. Gain 2 plants and place a city tile. Gain 1 victory point.";
     public description: string = "Not very comfortable conditions yet, but what freedom!!";
+    public canPlay(player: Player, game: Game): boolean {
+        return game.getOxygenLevel() >= 12 && player.energyProduction >= 1;
+    }
     public play(player: Player, game: Game) {
         if (game.getOxygenLevel() < 12) {
             throw "Requires 12% oxygen";

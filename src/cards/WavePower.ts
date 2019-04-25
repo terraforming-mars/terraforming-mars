@@ -13,6 +13,9 @@ export class WavePower implements IProjectCard {
     public text: string = "Requires 3 ocean tiles. Increase your energy production 1 step. Gain 1 victory point.";
     public description: string = "Well, see, first you need some waves...";
     public cardType: CardType = CardType.AUTOMATED;
+    public canPlay(_player: Player, game: Game): boolean {
+        return game.getOceansOnBoard() >= 3;
+    }
     public play(player: Player, game: Game): PlayerInput | undefined {
         if (game.getOceansOnBoard() < 3) {
             throw "Requires 3 ocean tiles";

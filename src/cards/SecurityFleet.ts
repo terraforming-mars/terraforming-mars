@@ -14,6 +14,9 @@ export class SecurityFleet implements IProjectCard {
     public actionText: string = "Spend 1 titanium to add 1 fighter resource to this card.";
     public text: string = "Gain 1 victory point for each fighter resource on this card.";
     public description: string = "Keeping the peace by force.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         game.addGameEndListener(() => {
             player.victoryPoints += this.fighterResources;

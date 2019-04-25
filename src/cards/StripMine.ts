@@ -12,6 +12,9 @@ export class StripMine implements IProjectCard {
     public name: string = "Strip Mine";
     public text: string = "Decrease your energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.";
     public description: string = "It is not exactly environmentally friendly to just dig up the suface, but it can be profitable.";
+    public canPlay(player: Player, _game: Game): boolean {
+        return player.energyProduction >= 2;
+    }
     public play(player: Player, game: Game) {
         if (player.energyProduction < 2) {
             throw "Must have energy production";

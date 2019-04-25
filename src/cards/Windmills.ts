@@ -13,6 +13,9 @@ export class Windmills implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires 7% oxygen. Incease your energy production 1 step. Gain 1 victory point.";
     public description: string = "At least we have more useful winds";
+    public canPlay(_player: Player, game: Game): boolean {
+        return game.getOxygenLevel() >= 7;
+    }
     public play(player: Player, game: Game): PlayerInput | undefined {
         if (game.getOxygenLevel() < 7) {
             throw "Not enough oxygen";

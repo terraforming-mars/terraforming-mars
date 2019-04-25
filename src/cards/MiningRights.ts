@@ -20,6 +20,9 @@ export class MiningRights implements IProjectCard {
         return game.getAvailableSpacesOnLand(player)
                 .filter((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1);
     }
+    public canPlay(player: Player, game: Game): boolean {
+        return this.getAvailableSpaces(player, game).length > 0
+    }
     public play(player: Player, game: Game) {
         if (this.getAvailableSpaces(player, game).length === 0) {
             throw "No tiles available with placement bonus";

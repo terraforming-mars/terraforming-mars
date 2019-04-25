@@ -15,6 +15,9 @@ export class Predators implements IProjectCard {
     public actionText: string = "Remove 1 animal from any card and add it to this card";
     public text: string = "Requires 11% oxygen. Gain 1 victory point per animal on this card.";
     public description: string = "Lions and tigers and bears, oh my.";
+    public canPlay(_player: Player, game: Game): boolean {
+        return game.getOxygenLevel() >= 11;
+    }
     public play(player: Player, game: Game) {
         if (game.getOxygenLevel() < 11) {
             throw "Requires 11% oxygen";

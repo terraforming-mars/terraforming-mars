@@ -14,6 +14,9 @@ export class LandClaim implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Place your marker on a non-reserved area. Only you may place a tile here.";
     public description: string = "Acquiring strategic land areas";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         return new SelectSpace(this.name, "Select space for claim", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
             foundSpace.player = player;

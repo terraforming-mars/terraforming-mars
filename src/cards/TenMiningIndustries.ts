@@ -12,6 +12,9 @@ export class TenMiningIndustries implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your titanium production 2 steps and your mega credit production 2 steps. Gain 1 victory point per jovian tag you have.";
     public description: string = "Supplying fuel and valuable minerals.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         player.titaniumProduction += 2;
         player.megaCreditProduction += 2;

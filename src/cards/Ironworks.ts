@@ -13,6 +13,9 @@ export class Ironworks implements IProjectCard {
     public actionText: string = "Spend 4 energy to gain 1 steel and increase oxygen 1 step";
     public text: string = "";
     public description: string = "Electrolysis of Martian soil yields both iron and oxygen, making it an important part of terraforming.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(_player: Player, _game: Game) {
         return undefined;
     }

@@ -12,6 +12,9 @@ export class TropicalResort implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease your heat production 2 steps and increase your mega credit production 3 steps. Gain 2 victory points.";
     public description: string = "Utilizing heat production to attract tourists.";
+    public canPlay(player: Player): boolean {
+        return player.heatProduction >= 2;
+    }
     public play(player: Player, _game: Game) {
         if (player.heatProduction < 2) {
             throw "Must have 2 heat production";

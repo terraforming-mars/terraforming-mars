@@ -14,6 +14,9 @@ export class SearchForLife implements IProjectCard {
     public actionText: string = "Spend 1 mega credit to reveal and discard the top of the draw deck. If that card has a microbe tag, add a science resource here.";
     public text: string = "Oxygen must be 6% or less. Gain 3 victory points if you have one or more science resources here";
     public description: string = "Finding native life-forms would be the greatest discovery in history, so let's find out!";
+    public canPlay(_player: Player, game: Game): boolean {
+        return game.getOxygenLevel() <= 6;
+    }
     public play(player: Player, game: Game) {
         if (game.getOxygenLevel() > 6) {
             throw "Oxygen must be 6% or less";

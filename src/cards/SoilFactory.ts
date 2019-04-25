@@ -12,6 +12,9 @@ export class SoilFactory implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease your energy production 1 step and increase your plant production 1 step. Gain 1 victory point.";
     public description: string = "There are many harmful elements to remove";
+    public canPlay(player: Player): boolean {
+        return player.energyProduction >= 1;
+    }
     public play(player: Player, _game: Game) {
         if (player.energyProduction < 1) {
             throw "Must have energy production";

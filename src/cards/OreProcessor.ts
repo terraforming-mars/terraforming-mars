@@ -13,6 +13,9 @@ export class OreProcessor implements IProjectCard {
     public text: string = "";
     public actionText: string = "Spend 4 energy to gain 1 titanium and increase oxygen 1 step";
     public description: string = "Processing ore";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(_player: Player, _game: Game) {
         return undefined;
     }

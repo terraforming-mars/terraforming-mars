@@ -13,6 +13,9 @@ export class MiningExpedition implements IProjectCard {
     public name: string = "Mining Expedition";
     public text: string = "Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel.";
     public description: string = "Ruthlessly excavating rich areas.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         return new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 2 plants", (foundPlayer: Player) => {
             foundPlayer.removePlants(player, 2);

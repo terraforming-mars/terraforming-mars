@@ -15,6 +15,9 @@ export class ViralEnhancers implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to that card.";
     public description: string = "Genetically engineered virus strains can be used to introduce favorable genes to other organisms.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, _game: Game): PlayerInput | undefined {
         player.addCardPlayedHandler((card: IProjectCard) => {
             if (card.tags.indexOf(Tags.ANIMAL) !== -1 || card.tags.indexOf(Tags.PLANT) !== -1 || card.tags.indexOf(Tags.MICROBES) !== -1) {

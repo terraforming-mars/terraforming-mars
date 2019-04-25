@@ -14,6 +14,9 @@ export class TowingAComet implements IProjectCard {
     public name: string = "Towing A Comet";
     public text: string = "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.";
     public description: string = "By aerobraking it we get its contents without the impact.";
+    public canPlay(_player: Player, _game: Game): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         return new SelectSpace(this.name, "Select place for oean", game.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
             game.addOceanTile(player, foundSpace.id)

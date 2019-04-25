@@ -12,6 +12,9 @@ export class SolarWindPower implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your energy production 1 step and gain 2 titanium";
     public description: string = "Working those solar storms to your advantage.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, _game: Game) {
         player.energyProduction++;
         player.titanium += 2;

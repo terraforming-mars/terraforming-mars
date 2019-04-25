@@ -14,6 +14,9 @@ export class SymbioticFungus implements IProjectCard {
     public text: string = "Requires -14C or warmer.";
     public description: string = "Creating mutually beneficial conditions";
     public actionText: string = "Add a microbe to ANOTHER card";
+    public canPlay(_player: Player, game: Game): boolean {
+        return game.getTemperature() >= -14;
+    }
     public play(_player: Player, game: Game) {
         if (game.getTemperature() < -14) {
             throw "Requires -14C or warmer";

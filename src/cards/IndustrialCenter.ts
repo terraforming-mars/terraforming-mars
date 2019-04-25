@@ -20,6 +20,9 @@ export class IndustrialCenter implements IProjectCard {
         return game.getAvailableSpacesOnLand(player)
                 .filter((space) => game.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.CITY).length > 0);
     }
+    public canPlay(player: Player, game: Game): boolean {
+        return this.getAvailableSpaces(player, game).length > 0;
+    }
     public play(player: Player, game: Game) {
         if (game.getCitiesInPlayOnMars() === 0) {
             throw "No cities in play";

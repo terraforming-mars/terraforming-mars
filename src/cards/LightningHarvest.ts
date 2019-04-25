@@ -12,6 +12,9 @@ export class LightningHarvest implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires 3 science tags. Increase your energy production and your mega credit production 1 step each. Gain 1 victory point.";
     public description: string = "Floating supercapacitors connecting clouds with a superconducting wire. The triggered and collected discharges are beamed down to a receptor. Gain 1 victory point.";
+    public canPlay(player: Player): boolean {
+        return player.getTagCount(Tags.SCIENCE) >= 3;
+    }
     public play(player: Player, _game: Game) {
         if (player.getTagCount(Tags.SCIENCE) < 3) {
             throw "Requires 3 science tags";

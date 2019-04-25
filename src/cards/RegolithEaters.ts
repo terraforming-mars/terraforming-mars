@@ -16,6 +16,9 @@ export class RegolithEaters implements IProjectCard {
     public actionText: string = "Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.";
     public description: string = "Living on the rocks and excreting oxygen.";
     public microbes: number = 0;
+    public canPlay(): boolean {
+        return true;
+    }
     public play(_player: Player, _game: Game) {
         return undefined;
     }

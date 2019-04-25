@@ -12,6 +12,9 @@ export class Sponsors implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your mega credit production 2 steps";
     public description: string = "Willing to support your projects";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, _game: Game) {
         player.megaCreditProduction += 2;
         return undefined;

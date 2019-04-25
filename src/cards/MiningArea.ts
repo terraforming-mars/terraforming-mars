@@ -21,6 +21,9 @@ export class MiningArea implements IProjectCard {
                 .filter((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1)
                 .filter((space) => game.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.player === player).length > 0);
     }
+    public canPlay(player: Player, game: Game): boolean {
+        return this.getAvailableSpaces(player, game).length > 0;
+    }
     public play(player: Player, game: Game) {
         if (this.getAvailableSpaces(player, game).length === 0) {
             throw "No adjacent tile with placement bonus";

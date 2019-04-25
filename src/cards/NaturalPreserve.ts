@@ -19,6 +19,9 @@ export class NaturalPreserve implements IProjectCard {
         return game.getAvailableSpacesOnLand(player)
                 .filter((space) => game.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined).length === 0);
     }
+    public canPlay(player: Player, game: Game): boolean {
+        return game.getOxygenLevel() <= 4 && this.getAvailableSpaces(player, game).length > 0;
+    }
     public play(player: Player, game: Game) {
         if (game.getOxygenLevel() > 4) {
             throw "Oxygen must be 4% or less.";

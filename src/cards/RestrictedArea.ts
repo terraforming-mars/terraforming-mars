@@ -16,6 +16,9 @@ export class RestrictedArea implements IProjectCard {
     public actionText: string = "Spend 2 mega credit to draw a card";
     public text: string = "Place a special tile";
     public description: string = "A place to conduct secret research, preventing the wrong people from getting in. Or out";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         return new SelectSpace(this.name, "Select space for tile", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });

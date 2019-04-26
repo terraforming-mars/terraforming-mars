@@ -6,11 +6,10 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 
 describe("Predators", function () {
-    it("Should throw", function () {
+    it("Can not play", function () {
         const card = new Predators();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Requires 11% oxygen");
         expect(function () { card.action(player, game); }).to.throw("No cards to remove animal from");
     });
     it("Should play", function () {

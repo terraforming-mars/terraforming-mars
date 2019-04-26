@@ -6,11 +6,11 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 
 describe("Zeppelins", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new Zeppelins();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Requires 5% oxygen");
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new Zeppelins();

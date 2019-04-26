@@ -15,15 +15,9 @@ export class OpenCity implements IProjectCard {
     public text: string = "Requires 12% oxygen. Decrease your energy production 1 step and increase your mega credit production 4 steps. Gain 2 plants and place a city tile. Gain 1 victory point.";
     public description: string = "Not very comfortable conditions yet, but what freedom!!";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOxygenLevel() >= 12 && player.energyProduction >= 1;
+        return game.getOxygenLevel() >= 12 - player.requirementsBonus && player.energyProduction >= 1;
     }
     public play(player: Player, game: Game) {
-        if (game.getOxygenLevel() < 12) {
-            throw "Requires 12% oxygen";
-        }
-        if (player.energyProduction < 1) {
-            throw "Must have energy production to decrease";
-        }
         return new SelectSpace(this.name, "Select space for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
             player.energyProduction--;

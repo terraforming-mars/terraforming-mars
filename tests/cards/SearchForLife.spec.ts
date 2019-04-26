@@ -12,11 +12,6 @@ describe("SearchForLife", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
         expect(function () { card.action(player, game); }).to.throw("Must have mega credit");
-        game.increaseOxygenLevel(player, 2); // 2
-        game.increaseOxygenLevel(player, 2); // 4
-        game.increaseOxygenLevel(player, 2); // 6
-        game.increaseOxygenLevel(player, 1); // 7
-        expect(function () { card.play(player, game); }).to.throw("Oxygen must be 6% or less");
     });
     it("Should play", function () {
         const card = new SearchForLife();

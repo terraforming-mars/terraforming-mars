@@ -12,6 +12,9 @@ export class FoodFactory implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease your plant production 1 step and increase your mega credit production 4 steps. Gain 1 victory point.";
     public description: string = "For the growing population.";
+    public canPlay(player: Player): boolean {
+        return player.plantProduction >= 1;
+    }
     public play(player: Player, _game: Game) {
         if (player.plantProduction < 1) {
             throw "Must have plant production";

@@ -12,6 +12,9 @@ export class DeepWellHeating implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your energy production 1 step. Increase temperature 1 step";
     public description: string = "Digging deep to find heat from the core";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         player.energyProduction++;
         return game.increaseTemperature(player, 1);

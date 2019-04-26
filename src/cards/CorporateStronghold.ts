@@ -14,6 +14,9 @@ export class CorporateStronghold implements IProjectCard {
     public name: string = "Corporate Stronghold";
     public text: string = "Decrease your energy production 1 step and increase your mega credit production 3 steps. Place a city tile. Lose 2 victory points.";
     public description: string = "A city exclusively devoted to your corporation.";
+    public canPlay(player: Player): boolean {
+        return player.energyProduction >= 1;
+    }
     public play(player: Player, game: Game) {
         if (player.energyProduction < 1) {
             throw "Must have energy production to decrease";

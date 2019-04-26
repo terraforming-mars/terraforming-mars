@@ -13,6 +13,9 @@ export class DeimosDown implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.";
     public description: string = "We don't use that moon anyway";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         return new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 8 plants", (foundPlayer: Player) => {
             foundPlayer.removePlants(player, 8);

@@ -13,6 +13,9 @@ export class AsteroidMiningConsortium implements IProjectCard {
     public name: string = "Asteroid Mining Consortium";
     public text: string = "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step. Gain 1 victory point.";
     public description: string = "Your hold on the titanium market tightens.";
+    public canPlay(player: Player): boolean {
+        return player.titaniumProduction >= 1;
+    }
     public play(player: Player, game: Game) {
         if (player.titaniumProduction < 1) {
             throw "Requires that you have titanium production";

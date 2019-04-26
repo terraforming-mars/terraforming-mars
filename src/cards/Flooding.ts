@@ -17,6 +17,9 @@ export class Flooding implements IProjectCard {
     public tags: Array<Tags> = [];
     public text: string = "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 MEGA CREDITS FROM THE OWNER OF ONE OF THOSE TILES. Lose 1 victory point.";
     public description: string = "Look out for tsunamis";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         return new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
             const adjacentPlayers: Array<Player> = [];

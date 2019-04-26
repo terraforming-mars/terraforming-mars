@@ -12,6 +12,9 @@ export class EnergySaving implements IProjectCard {
     public name: string = "Energy Saving";
     public text: string = "Increase your energy production 1 step for each city tile in play.";
     public description: string = "Minimizing urban energy spending";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         player.energyProduction += game.getCitiesInPlay();
         return undefined;

@@ -14,6 +14,9 @@ export class CupolaCity implements IProjectCard {
     public name: string = "Cupola City";
     public text: string = "Oxygen must be 9% or less. Place a city tile. Decrease your energy production 1 step and increase your mega credit production 3 steps.";
     public description: string = "In a thin atmosphere, normal pressure can hold a protective dome over the city.";
+    public canPlay(player: Player, game: Game): boolean {
+        return game.getOxygenLevel() <= 9 && player.energyProduction >= 1;
+    }
     public play(player: Player, game: Game) {
         if (game.getOxygenLevel() > 9) {
             throw "Oxygen must be 9% or less.";

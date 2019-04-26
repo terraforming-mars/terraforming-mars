@@ -13,6 +13,9 @@ export class BigAsteroid implements IProjectCard {
     public name: string = "Big Asteroid";
     public text: string = "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.";
     public description: string = "There are many unpopulated areas to crash it on";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         return new SelectPlayer(this.name, game.getPlayers(), "Select player to remove plants", (foundPlayer: Player) => {
             foundPlayer.removePlants(player, 4);

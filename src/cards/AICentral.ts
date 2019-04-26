@@ -13,6 +13,9 @@ export class AICentral implements IProjectCard {
     public actionText: string = "Draw 2 cards";
     public text: string = "Requires 3 science tags to play. Decrease your energy production 1 step. Gain 1 victory point.";
     public description: string = "\"42\"";
+    public canPlay(player: Player): boolean {
+        return player.getTagCount(Tags.SCIENCE) >= 3 && player.energyProduction >= 1;
+    }
     public play(player: Player, _game: Game) {
         if (player.getTagCount(Tags.SCIENCE) < 3) {
             throw "Requires 3 science tags";

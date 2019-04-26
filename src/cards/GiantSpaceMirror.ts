@@ -12,6 +12,9 @@ export class GiantSpaceMirror implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your energy production 3 steps.";
     public description: string = "Square kilometers of extra sunlight reflected down to a receiving power plant.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, _game: Game) {
         player.energyProduction += 3;
         return undefined;

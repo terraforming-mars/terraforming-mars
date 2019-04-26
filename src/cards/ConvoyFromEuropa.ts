@@ -14,6 +14,9 @@ export class ConvoyFromEuropa implements IProjectCard {
     public name: string = "Convoy From Europa";
     public text: string = "Place 1 ocean tile and draw 1 card";
     public description: string = "Bringing ice and other key supplies from the Jovian moon Europa";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         return new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
             game.addOceanTile(player, space.id);

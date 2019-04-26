@@ -16,6 +16,9 @@ export class BusinessNetwork implements IProjectCard {
     public actionText: string = "Look at the top card and either buy it or discard it.";
     public text: string = "Decrease your mega credit production 1 step.";
     public description: string = "Investing in social events can open up new opportunities.";
+    public canPlay(player: Player): boolean {
+        return player.megaCreditProduction >= -4;
+    }
     public play(player: Player, _game: Game) {
         player.megaCreditProduction--;
         return undefined;

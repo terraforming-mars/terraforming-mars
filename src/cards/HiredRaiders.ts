@@ -16,6 +16,9 @@ export class HiredRaiders implements IProjectCard {
     public name: string = "Hired Raiders";
     public text: string = "Steal up to 2 steel, or 3 mega credit from any player.";
     public description: string = "We have a better use for those resources.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         let selectedPlayer: Player;
         return new AndOptions(

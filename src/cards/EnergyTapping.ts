@@ -13,6 +13,9 @@ export class EnergyTapping implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease any energy production 1 step and increase your own 1 step. Lose 1 victory point.";
     public description: string = "They need it. But we need it more.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease energy production", (foundPlayer: Player) => {
             if (foundPlayer.energyProduction < 1) {

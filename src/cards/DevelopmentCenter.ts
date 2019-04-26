@@ -13,6 +13,9 @@ export class DevelopmentCenter implements IProjectCard {
     public actionText: string = "Spend 1 energy to draw a card.";
     public text: string = "";
     public description: string = "Ensuring a constant influx of ideas.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(_player: Player, _game: Game) {
         return undefined;
     }

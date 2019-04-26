@@ -13,6 +13,9 @@ export class CaretakerContract implements IProjectCard {
     public text: string = "Requires 0C or warmer";
     public actionText: string = "Spend 8 heat to increase your terraform rating 1 step";
     public description: string = "In charge of establishing comfortable temperatures";
+    public canPlay(_player: Player, game: Game): boolean {
+        return game.getTemperature() >= 0;
+    }
     public play(_player: Player, game: Game) {
         if (game.getTemperature() < 0) {
             throw "Requires 0C or warmer";

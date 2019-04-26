@@ -12,6 +12,9 @@ export class AsteroidMining implements IProjectCard {
     public name: string = "Asteroid Mining";
     public text: string = "Increase your titanium production 2 steps. Gain 2 victory points.";
     public description: string = "Where gravity is low and rare minerals abound.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, _game: Game) {
         player.titaniumProduction += 2;
         player.victoryPoints += 2;

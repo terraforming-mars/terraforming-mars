@@ -13,6 +13,9 @@ export class BiomassCombustors implements IProjectCard {
     public name: string = "Biomass Combustors";
     public text: string = "Requires 6% oxygen. Decrease any plant production 1 step and increse your energy production 2 steps. Lose 1 victory point.";
     public description: string = "Burning wood is easy";
+    public canPlay(_player: Player, game: Game): boolean {
+        return game.getOxygenLevel() >= 6;
+    }
     public play(player: Player, game: Game) {
         if (game.getOxygenLevel() < 6) {
             throw "Requires 6% oxygen";

@@ -17,6 +17,9 @@ export class AquiferPumping implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "";
     public description: string = "Underground water reservoirs may be tapped in a controlled manner, to safely build up oceans to the desired level";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(_player: Player, _game: Game) {
         return undefined;
     }

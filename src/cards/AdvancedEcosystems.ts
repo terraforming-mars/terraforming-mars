@@ -12,6 +12,9 @@ export class AdvancedEcosystems implements IProjectCard {
     public name: string = "Advanced Ecosystems";
     public text: string = "Requires a plant tag, a microbe tag, and an animal tag. Gain 3 victory points.";
     public description: string = "Constructing functional, dynamic ecosystems requires many ingredients";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, _game: Game) {
         if (player.getTagCount(Tags.PLANT) === 0 ||
             player.getTagCount(Tags.MICROBES) === 0 ||

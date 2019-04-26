@@ -16,6 +16,9 @@ export class GiantIceAsteroid implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Raise temperature 2 steps and place 2 ocean tiles. Remove up to 6 plants from any player.";
     public description: string = "Crash it. The bigger, the better";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         return new AndOptions(
             () => {

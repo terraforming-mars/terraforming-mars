@@ -12,6 +12,9 @@ export class FusionPower implements IProjectCard {
     public name: string = "Fusion Power";
     public text: string = "Requires 2 power tags. Increase your energy production 3 steps";
     public description: string = "State of the art technology";
+    public canPlay(player: Player): boolean {
+        return player.getTagCount(Tags.ENERGY) >= 2;
+    }
     public play(player: Player, _game: Game) {
         if (player.getTagCount(Tags.ENERGY) < 2) {
             throw "Requires 2 power tags";

@@ -13,6 +13,9 @@ export class EquatorialMagnetizer implements IProjectCard {
     public text: string = "";
     public actionText: string = "Decrease your energy production 1 step to increase your terraform rating 1 step.";
     public description: string = "Super-conducting wires encircling the globe to create a magnetic field.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(_player: Player, _game: Game) {
         return undefined;
     }

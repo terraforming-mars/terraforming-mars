@@ -15,6 +15,9 @@ export class ArtificialLake implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires -6C or warmer. Place 1 ocean tile on an area not reserved for ocean. Gain 1 victory point.";
     public description: string = "Landscaping is as natural as terraforming.";
+    public canPlay(_player: Player, game: Game): boolean {
+        return game.getTemperature() >= -6;
+    }
     public play(player: Player, game: Game) {
         if (game.getTemperature() < -6) {
             throw "Requires -6C or warmer";

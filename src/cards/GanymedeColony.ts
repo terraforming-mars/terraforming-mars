@@ -14,6 +14,9 @@ export class GanymedeColony implements IProjectCard {
     public name: string = "Ganymede Colony";
     public text: string = "Place a city tile on the reserved area. Gain 1 victory point per jovian tag you have.";
     public description: string = "Settling the biggest moon of the biggest plant.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         game.addCityTile(player, SpaceName.GANYMEDE_COLONY, SpaceType.COLONY);
         game.addGameEndListener(() => {

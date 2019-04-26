@@ -15,6 +15,9 @@ export class Birds implements IProjectCard {
     public actionText: string = "Add an animal to this card.";
     public text: string = "Requires 13% oxygen. Decrease any plant production 2 steps. Gain 1 victory point for each animal on this card.";
     public description: string = "Bringing life to the skies.";
+    public canPlay(_player: Player, game: Game): boolean {
+        return game.getOxygenLevel() >= 13;
+    }
     public play(player: Player, game: Game) {
         if (game.getOxygenLevel() < 13) {
             throw "Requires 13% oxygen";

@@ -13,6 +13,9 @@ export class BusinessContacts implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public text: string = "Look at the top 4 cards from the deck. Take 2 of them into hand and discard the other 2.";
     public description: string = "Money and information are often interchangeable.";
+    public canPlay(): boolean {
+        return true;
+    }
     public play(player: Player, game: Game) {
         const availableCards: Array<IProjectCard> = [];
         for (let i = 0; i < 4; i++) {

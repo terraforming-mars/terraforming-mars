@@ -12,6 +12,9 @@ export class Algae implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires 5 ocean tiles. Gain 1 plant and increase your plant production 2 steps.";
     public description: string = "Basic photosynthesizers in aqueous environments";
+    public canPlay(_player: Player, game: Game): boolean {
+        return game.getOceansOnBoard() >= 5;
+    }
     public play(player: Player, game: Game) {
         if (game.getOceansOnBoard() < 5) {
             throw "Requires 5 ocean tiles";

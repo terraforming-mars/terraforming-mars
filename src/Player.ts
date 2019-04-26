@@ -439,7 +439,7 @@ export class Player {
                 whenDone();
                 return undefined;
             },
-            new SelectCard("Take Action!", "Play a project card", this.cardsInHand, (foundCards: Array<IProjectCard>) => {
+            new SelectCard("Take Action!", "Play a project card", this.getPlayableCards(game), (foundCards: Array<IProjectCard>) => {
                 selectedCard = foundCards[0];
                 return undefined;
             }),
@@ -679,6 +679,22 @@ export class Player {
         game.playerIsDoneWithGame(this);
     }
 
+    private getPlayableCards(game: Game): Array<IProjectCard> {
+        return this.cardsInHand.filter((card) => {
+            const canUseSteel = card.tags.indexOf(Tags.STEEL) !== -1;
+            const canUseTitanium = card.tags.indexOf(Tags.SPACE) !== -1;
+            let maxPay = 0;
+            if (canUseSteel) {
+                maxPay += this.steel * this.steelValue;
+            }
+            if (canUseTitanium) {
+                maxPay += this.titanium * this.titaniumValue;
+            }
+            maxPay += this.megaCredits;
+            return maxPay >= this.getCardCost(card) && card.canPlay(this, game);
+        });
+    }
+
     public takeAction(game: Game): void {
         if (
             game.getGeneration() === 1 &&
@@ -705,7 +721,7 @@ export class Player {
         const action: OrOptions = new OrOptions();
         action.title = "Take action for action phase, select one available action.";
 
-        if (this.cardsInHand.length > 0) {
+        if (this.getPlayableCards(game).length > 0) {
             action.options.push(
                 this.playProjectCard(game)
             );

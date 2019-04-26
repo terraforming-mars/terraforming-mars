@@ -21,8 +21,14 @@ export class EcologicalZone implements IProjectCard {
         return game.getAvailableSpacesOnLand(player)
                 .filter((space) => game.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.GREENERY).length > 0);
     }
+    private hasGreeneryTile(player: Player, game: Game): boolean {
+        return game.getSpaces(SpaceType.OCEAN).concat(game.getSpaces(SpaceType.LAND)).filter((space) => space.tile !== undefined && space.tile.tileType === TileType.GREENERY && space.player === player).length > 0;
+    }
+    public canPlay(player: Player, game: Game): boolean {
+        return this.hasGreeneryTile(player, game);
+    }
     public play(player: Player, game: Game) {
-        if (game.getSpaces(SpaceType.OCEAN).concat(game.getSpaces(SpaceType.LAND)).filter((space) => space.tile !== undefined && space.tile.tileType === TileType.GREENERY && space.player === player).length === 0) {
+        if (!this.hasGreeneryTile(player, game)) {
             throw "Requires that you have a greenery tile";
         }
         return new SelectSpace(this.name, "Select space next to greenery for special tile", this.getAvailableSpaces(player, game), (requestedSpace: ISpace) => {

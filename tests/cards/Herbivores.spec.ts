@@ -7,14 +7,15 @@ import { Game } from "../../src/Game";
 import { SelectPlayer } from "../../src/inputs/SelectPlayer";
 
 describe("Herbivores", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new Herbivores();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Requires 8% oxygen.");
+        expect(card.canPlay(player, game)).to.eq(false);
         for (var i = 0; i < 4; i++) {
             game.increaseOxygenLevel(player, 2);
         }
+        expect(card.canPlay(player, game)).to.eq(true);
         const action = card.play(player, game);
         expect(function () { action.cb(player); }).to.throw("Player must have plant production");
     });

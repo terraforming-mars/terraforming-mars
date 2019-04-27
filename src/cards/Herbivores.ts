@@ -14,13 +14,10 @@ export class Herbivores implements IProjectCard {
     public animals: number = 0;
     public text: string = "Requires 8% oxygen. Add 1 animal to this card. Decrease any plant production 1 step. When you place a greenery tile, add an animal to this card. Gain 1 VP per 2 animals on this card.";
     public description: string = "Inhabiting the green hills of Mars";
-    public canPlay(_player: Player, game: Game): boolean {
-        return game.getOxygenLevel() >= 8;
+    public canPlay(player: Player, game: Game): boolean {
+        return game.getOxygenLevel() >= 8 - player.requirementsBonus;
     }
     public play(player: Player, game: Game) {
-        if (game.getOxygenLevel() < 8) {
-            throw "Requires 8% oxygen.";
-        }
         return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
             if (foundPlayer.plantProduction < 1) {
                 throw "Player must have plant production";

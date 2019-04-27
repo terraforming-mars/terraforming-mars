@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "lib": ["ES6"], 
+        "lib": [], 
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "noUnusedLocals": true,
@@ -10,10 +10,16 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "outDir": "dist",
+        "skipLibCheck": true,
         "sourceMap": true,
-        "target": "es6",
+        "target": "es5",
         "types": ["node", "mocha", "chai"]
     },
+    "include": [
+        "tests/cards/*.spec.ts",
+        "tests/cards/corporation/*.spec.ts",
+        "tests/*.spec.ts"
+    ],
     "files": [
         "tests/cards/AICentral.spec.ts",
         "tests/cards/AcquiredCompany.spec.ts",

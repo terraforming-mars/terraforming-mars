@@ -7,25 +7,24 @@ import { Game } from "../../src/Game";
 import { OrOptions } from "../../src/inputs/OrOptions";
 
 describe("ElectroCatapult", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new ElectroCatapult();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Must have energy production");
+        expect(card.canPlay(player, game)).to.eq(false);
         game.increaseOxygenLevel(player, 2); // 2
         game.increaseOxygenLevel(player, 2); // 4
         game.increaseOxygenLevel(player, 2); // 6
         game.increaseOxygenLevel(player, 2); // 8
         game.increaseOxygenLevel(player, 1); // 9
         expect(game.getOxygenLevel()).to.eq(9);
-        expect(function () { card.play(player, game); }).to.throw("Oxygen must be 8% or less"); 
+        expect(card.canPlay(player, game)).to.eq(false); 
     });
     it("Should play", function () {
         const card = new ElectroCatapult();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
         player.energyProduction = 1;
-        const action = card.play(player, game);
+        const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.energyProduction).to.eq(0);
         expect(player.victoryPoints).to.eq(1);

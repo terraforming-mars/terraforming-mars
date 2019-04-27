@@ -46,23 +46,21 @@ export const Board = Vue.component("board", {
                 leftPadding = thisSpace.x;
             }
             const cellChildren = [];
-            function getClassName() {
-                if (thisSpace.tileType === TileType.GREENERY) {
-                    return "greenery";
-                } else if (thisSpace.tileType === TileType.CITY) {
-                    return "city";
-                } else if (thisSpace.tileType === TileType.OCEAN) {
-                    return "ocean";
-                } else if (thisSpace.tileType === TileType.SPECIAL) {
-                    return "special";
-                } else if (thisSpace.spaceType === SpaceType.LAND) {
-                    return "land";
-                } else if (thisSpace.spaceType === SpaceType.OCEAN) {
-                    return "aquifer";
-                }
-                return "";
+            let className: string = "";
+            if (thisSpace.tileType === TileType.GREENERY) {
+                className = "greenery";
+            } else if (thisSpace.tileType === TileType.CITY) {
+                className = "city";
+            } else if (thisSpace.tileType === TileType.OCEAN) {
+                className = "ocean";
+            } else if (thisSpace.tileType === TileType.SPECIAL) {
+                className = "special";
+            } else if (thisSpace.spaceType === SpaceType.LAND) {
+                className = "land";
+            } else if (thisSpace.spaceType === SpaceType.OCEAN) {
+                className = "aquifer";
             }
-            cellChildren.push(createElement("span", { class: getClassName(), domProps: { innerHTML: "&#x2B22"}}));
+            cellChildren.push(createElement("span", { class: className, domProps: { innerHTML: "&#x2B22"}}));
             if (thisSpace.tileType === undefined) {
                 thisSpace.bonus.forEach((bonus) => {
                     let className: string = "bonus";

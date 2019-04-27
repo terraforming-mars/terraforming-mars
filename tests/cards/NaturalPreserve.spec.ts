@@ -8,7 +8,7 @@ import { TileType } from "../../src/TileType";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
 
 describe("NaturalPreserve", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new NaturalPreserve();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
@@ -16,11 +16,11 @@ describe("NaturalPreserve", function () {
         for (let land of lands) {
             game.addTile(player, land.spaceType, land, { tileType: TileType.SPECIAL });
         }
-        expect(function () { card.play(player, game); }).to.throw("No spaces for tile");
+        expect(card.canPlay(player, game)).to.eq(false);
         game.increaseOxygenLevel(player, 2); // 2
         game.increaseOxygenLevel(player, 2); // 4
         game.increaseOxygenLevel(player, 1); // 5
-        expect(function () { card.play(player, game); }).to.throw("Oxygen must be 4% or less.");
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new NaturalPreserve();

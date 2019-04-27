@@ -16,7 +16,7 @@ export class ElectroCatapult implements IProjectCard {
     public text: string = "Oxygen must be 8% or less. Decrease your energy production 1 step. Gain 1 victory point.";
     public description: string = "A 200km long acceleration ramp up the side of Pavonis Mons, hurtling export goods into space.";
     public canPlay(player: Player, game: Game): boolean {
-        return player.energyProduction >= 1 && game.getOxygenLevel() <= 8;
+        return player.energyProduction >= 1 && game.getOxygenLevel() <= 8 + player.requirementsBonus;
     }
     public action(player: Player, _game: Game) {
         return new OrOptions(
@@ -38,10 +38,7 @@ export class ElectroCatapult implements IProjectCard {
             })
         );
     }
-    public play(player: Player, game: Game) {
-        if (game.getOxygenLevel() > 8) {
-            throw "Oxygen must be 8% or less.";
-        }
+    public play(player: Player) {
         if (player.energyProduction < 1) {
             throw "Must have energy production";
         }

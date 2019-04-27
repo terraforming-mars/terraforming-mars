@@ -10,14 +10,14 @@ describe("MethaneFromTitan", function () {
         const card = new MethaneFromTitan();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Requires 2% oxygen");
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new MethaneFromTitan();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
         game.increaseOxygenLevel(player, 2); // 2
-        const action = card.play(player, game);
+        const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.heatProduction).to.eq(2);
         expect(player.plantProduction).to.eq(2);

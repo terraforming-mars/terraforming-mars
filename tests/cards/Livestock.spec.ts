@@ -6,17 +6,17 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 
 describe("Livestock", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new Livestock();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Requires 9% oxygen");
+        expect(card.canPlay(player, game)).to.eq(false);
         game.increaseOxygenLevel(player, 2); // 2
         game.increaseOxygenLevel(player, 2); // 4
         game.increaseOxygenLevel(player, 2); // 6
         game.increaseOxygenLevel(player, 2); // 8
         game.increaseOxygenLevel(player, 1); // 9
-        expect(function () { card.play(player, game); }).to.throw("Must have plant production");
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new Livestock();

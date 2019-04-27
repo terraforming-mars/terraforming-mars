@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "lib": ["dom", "ES6"], 
+    "lib": ["dom"], 
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
@@ -10,11 +10,22 @@
     "strict": true,
     "removeComments": true,
     "preserveConstEnums": true,
+    "skipLibCheck": true,
     "sourceMap": false,
-    "target": "es6",
+    "target": "es5",
     "types": ["node"],
     "moduleResolution": "node"
   },
+  "include": [
+    "src/*.ts",
+    "src/components/*.ts",
+    "src/cards/*.ts",
+    "src/cards/corporation/*.ts",
+    "src/inputs/*.ts",
+    "src/models/*.ts",
+    "script.ts",
+    "server.ts"
+  ],
   "files": [
     "script.ts",
     "server.ts"

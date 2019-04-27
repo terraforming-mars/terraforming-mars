@@ -16,13 +16,10 @@ export class GHGProducingBacteria implements IProjectCard {
     public microbes: number = 0;
     public text: string = "Requires 4% oxygen";
     public description: string = "Working for the biosphere and the atmosphere at the same time.";
-    public canPlay(_player: Player, game: Game): boolean {
-        return game.getOxygenLevel() >= 4;
+    public canPlay(player: Player, game: Game): boolean {
+        return game.getOxygenLevel() >= 4 - player.requirementsBonus;
     }
-    public play(_player: Player, game: Game) {
-        if (game.getOxygenLevel() < 4) {
-            throw "Requires 4% oxygen";
-        }
+    public play() {
         return undefined;
     }
     public action(player: Player, game: Game) {

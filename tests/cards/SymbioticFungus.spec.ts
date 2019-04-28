@@ -11,7 +11,7 @@ describe("SymbioticFungus", function () {
         const card = new SymbioticFungus();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Requires -14C or warmer");
+        expect(card.canPlay(player, game)).to.eq(false);
         expect(function () { card.action(player, game); }).to.throw("No cards available");
     });
     it("Should play", function () {
@@ -21,7 +21,7 @@ describe("SymbioticFungus", function () {
         game.increaseTemperature(player, 3); // -24
         game.increaseTemperature(player, 3); // -18
         game.increaseTemperature(player, 2); // -14
-        expect(card.play(player, game)).to.eq(undefined);
+        expect(card.play()).to.eq(undefined);
     });
     it("Should act", function () {
         const card = new SymbioticFungus();

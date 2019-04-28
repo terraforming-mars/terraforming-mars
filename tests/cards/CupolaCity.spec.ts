@@ -8,7 +8,7 @@ import { SelectSpace } from "../../src/inputs/SelectSpace";
 import { TileType } from "../../src/TileType";
 
 describe("CupolaCity", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new CupolaCity();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
@@ -18,7 +18,7 @@ describe("CupolaCity", function () {
         game.increaseOxygenLevel(player, 2); // 6
         game.increaseOxygenLevel(player, 2); // 8
         game.increaseOxygenLevel(player, 2); // 10
-        expect(function () { card.play(player, game); }).to.throw("Oxygen must be 9% or less.");
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new CupolaCity();

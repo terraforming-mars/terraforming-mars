@@ -8,7 +8,7 @@ import { SelectSpace } from "../../src/inputs/SelectSpace";
 import { TileType } from "../../src/TileType";
 
 describe("DomedCrater", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new DomedCrater();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
@@ -17,7 +17,7 @@ describe("DomedCrater", function () {
         game.increaseOxygenLevel(player, 2); // 4
         game.increaseOxygenLevel(player, 2); // 6
         game.increaseOxygenLevel(player, 2); // 8
-        expect(function () { card.play(player, game); }).to.throw("Oxygen must be 7% or less");
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new DomedCrater();

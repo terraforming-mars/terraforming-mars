@@ -6,11 +6,11 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 
 describe("SmallAnimals", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new SmallAnimals();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Requires 6% oxygen.");
+        expect(card.canPlay(player, game)).to.eq(false);
         game.increaseOxygenLevel(player, 2); // 2
         game.increaseOxygenLevel(player, 2); // 4
         game.increaseOxygenLevel(player, 2); // 6
@@ -27,9 +27,6 @@ describe("SmallAnimals", function () {
         const card = new SmallAnimals();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        for (let i = 0; i < 3; i++) {
-            game.increaseOxygenLevel(player, 2);
-        }
         player.plantProduction = 1;
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);

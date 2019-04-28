@@ -11,7 +11,7 @@ describe("BiomassCombustors", function () {
         const card = new BiomassCombustors();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Requires 6% oxygen");
+        expect(card.canPlay(player, game)).to.eq(false);
         game.increaseOxygenLevel(player, 2); // 2
         game.increaseOxygenLevel(player, 2); // 4
         game.increaseOxygenLevel(player, 2); // 6

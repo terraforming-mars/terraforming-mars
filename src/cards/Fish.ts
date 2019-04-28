@@ -15,13 +15,10 @@ export class Fish implements IProjectCard {
     public actionText: string = "Add 1 animal to this card";
     public text: string = "Requires +2C or warmer. Decrease any plant production 1 step. Gain 1 victory point for each animal on this card.";
     public description: string = "Martian barracudas? Why not!";
-    public canPlay(_player: Player, game: Game): boolean {
-        return game.getTemperature() >= 2;
+    public canPlay(player: Player, game: Game): boolean {
+        return game.getTemperature() >= 2 - (player.requirementsBonus * 2);
     }
     public play(player: Player, game: Game) {
-        if (game.getTemperature() < 2) {
-            throw "Requires +2C or warmer";
-        }
         return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
             foundPlayer.plantProduction = Math.max(0, foundPlayer.plantProduction - 1);
             game.addGameEndListener(() => {

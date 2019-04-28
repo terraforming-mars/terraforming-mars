@@ -12,13 +12,10 @@ export class Lichen implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires -24C or wamer. Increase your plant production 1 step";
     public description: string = "Slow growing, but very resilient";
-    public canPlay(_player: Player, game: Game): boolean {
-        return game.getTemperature() >= -24;
+    public canPlay(player: Player, game: Game): boolean {
+        return game.getTemperature() >= -24 - (2 * player.requirementsBonus);
     }
-    public play(player: Player, game: Game) {
-        if (game.getTemperature() < -24) {
-            throw "Requires -24C or warmer";
-        }
+    public play(player: Player) {
         player.plantProduction++;
         return undefined;
     }

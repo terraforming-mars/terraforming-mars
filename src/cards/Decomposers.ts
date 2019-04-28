@@ -13,13 +13,10 @@ export class Decomposers implements IProjectCard {
     public name: string = "Decomposers";
     public text: string = "Requires 3% oxygen. When you play an animal, plant, or microbe tag, including this, add a microbe to this card. 1 VP per 3 microbes on this card.";
     public description: string = "Decomposing dead organisms is essential to making sustainable soil.";
-    public canPlay(_player: Player, game: Game): boolean {
-        return game.getOxygenLevel() >= 3;
+    public canPlay(player: Player, game: Game): boolean {
+        return game.getOxygenLevel() >= 3 - player.requirementsBonus;
     }
     public play(player: Player, game: Game) {
-        if (game.getOxygenLevel() < 3) {
-            throw "Requires 3% oxygen";
-        }
         player.addCardPlayedHandler((card: IProjectCard) => {
             if (card.tags.indexOf(Tags.ANIMAL) !== -1 || card.tags.indexOf(Tags.MICROBES) !== -1 || card.tags.indexOf(Tags.PLANT) !== -1) {
                 this.microbes++;

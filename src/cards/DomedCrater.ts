@@ -15,12 +15,9 @@ export class DomedCrater implements IProjectCard {
     public text: string = "Oxygen must be 7% or less. Gain 3 plants and place a city tile. Decrease your energy production 1 step and increase mega credit production 3 steps. Gain a victory point.";
     public description: string = "A spacious area for a great city.";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOxygenLevel() <= 7 && player.energyProduction >= 1;
+        return game.getOxygenLevel() <= 7 - player.requirementsBonus && player.energyProduction >= 1;
     }
     public play(player: Player, game: Game) {
-        if (game.getOxygenLevel() > 7) {
-            throw "Oxygen must be 7% or less";
-        }
         if (player.energyProduction < 1) {
             throw "Need energy production";
         }

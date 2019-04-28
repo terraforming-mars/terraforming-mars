@@ -6,7 +6,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 
 describe("ColonizerTrainingCamp", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new ColonizerTrainingCamp();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
@@ -14,13 +14,12 @@ describe("ColonizerTrainingCamp", function () {
         game.increaseOxygenLevel(player, 2); // 4
         game.increaseOxygenLevel(player, 2); // 6
         expect(game.getOxygenLevel()).to.eq(6);
-        expect(function () { card.play(player, game); }).to.throw("Oxygen must be 5% or less.");
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new ColonizerTrainingCamp();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        const action = card.play(player, game);
+        const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.victoryPoints).to.eq(2); 
     });

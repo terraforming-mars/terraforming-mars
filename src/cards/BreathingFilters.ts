@@ -10,15 +10,12 @@ export class BreathingFilters implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Breathing Filters";
     public cardType: CardType = CardType.AUTOMATED;
-    public text: string = "Requires 7% oxygen";
+    public text: string = "Requires 7% oxygen. Gain 2 victory points";
     public description: string = "Allowing easy access to the still quite harsh environment";
-    public canPlay(_player: Player, game: Game): boolean {
-        return game.getOxygenLevel() >= 7;
+    public canPlay(player: Player, game: Game): boolean {
+        return game.getOxygenLevel() >= 7 - player.requirementsBonus;
     }
-    public play(player: Player, game: Game) {
-        if (game.getOxygenLevel() < 7) {
-            throw "Requires 7% oxygen";
-        }
+    public play(player: Player) {
         player.victoryPoints += 2;
         return undefined;
     }

@@ -10,19 +10,12 @@ describe("CaretakerContract", function () {
         const card = new CaretakerContract();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Requires 0C or warmer");
+        expect(card.canPlay(player, game)).to.eq(false);
         expect(function () { card.action(player, game); }).to.throw("Need 8 heat to spend");
     });
     it("Should play", function () { 
         const card = new CaretakerContract();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        game.increaseTemperature(player, 3); // -24
-        game.increaseTemperature(player, 3); // -18
-        game.increaseTemperature(player, 3); // -12
-        game.increaseTemperature(player, 3); //  -6
-        game.increaseTemperature(player, 3); //   0
-        const action = card.play(player, game);
+        const action = card.play();
         expect(action).to.eq(undefined);
     });
     it("Should act", function () {

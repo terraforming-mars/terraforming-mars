@@ -6,7 +6,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 
 describe("ArcticAlgae", function () {
-    it("Should throw while playing", function () {
+    it("Can't play", function () {
         const card = new ArcticAlgae();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
@@ -14,7 +14,7 @@ describe("ArcticAlgae", function () {
         game.increaseTemperature(player, 3); // -18
         game.increaseTemperature(player, 3); // -12
         game.increaseTemperature(player, 1); // -10
-        expect(function () { card.play(player, game); }).to.throw("It must be -12C or colder to play");
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new ArcticAlgae();

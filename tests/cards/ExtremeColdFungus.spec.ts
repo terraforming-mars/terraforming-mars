@@ -8,7 +8,7 @@ import { Tardigrades } from "../../src/cards/Tardigrades";
 import { OrOptions } from "../../src/inputs/OrOptions";
 
 describe("ExtremeColdFungus", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new ExtremeColdFungus();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
@@ -16,13 +16,11 @@ describe("ExtremeColdFungus", function () {
         game.increaseTemperature(player, 3); // -18
         game.increaseTemperature(player, 3); // -12
         game.increaseTemperature(player, 2); // -8 
-        expect(function () { card.play(player, game); }).to.throw("It must be -10C or colder");
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new ExtremeColdFungus();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        const action = card.play(player, game);
+        const action = card.play();
         expect(action).to.eq(undefined);
     });
     it("Should act", function () {

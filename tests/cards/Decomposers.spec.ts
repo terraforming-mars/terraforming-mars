@@ -8,11 +8,11 @@ import { Algae } from "../../src/cards/Algae";
 import { Birds } from "../../src/cards/Birds";
 
 describe("Decomposers", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new Decomposers();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Requires 3% oxygen");
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new Decomposers();

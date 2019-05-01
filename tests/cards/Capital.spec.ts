@@ -9,11 +9,11 @@ import { TileType } from "../../src/TileType";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
 
 describe("Capital", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new Capital();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Requires 4 ocean tiles");
+        expect(card.canPlay(player, game)).to.eq(false);
         const oceanSpaces = game.getAvailableSpacesForOcean(player);
         for (let i = 0; i < oceanSpaces.length; i++) {
             oceanSpaces[i].tile = { tileType: TileType.OCEAN };

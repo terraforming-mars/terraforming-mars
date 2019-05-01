@@ -8,15 +8,17 @@ import { TileType } from "../../src/TileType";
 import { SelectPlayer } from "../../src/inputs/SelectPlayer";
 
 describe("CloudSeeding", function () {
-    it("Should throw", function () { 
+    it("Can't play", function () { 
         const card = new CloudSeeding();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Requires 3 ocean tiles");
+        expect(card.canPlay(player, game)).to.eq(false);
         const oceans = game.getAvailableSpacesForOcean(player);
         for (let i = 0; i < 3; i++) {
             oceans[i].tile = { tileType: TileType.OCEAN };
         }
+        player.megaCreditProduction = -5;
+        expect(card.canPlay(player, game)).to.eq(false);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         expect(action instanceof SelectPlayer).to.eq(true);

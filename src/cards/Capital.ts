@@ -16,12 +16,9 @@ export class Capital implements IProjectCard {
     public text: string = "Requires 4 ocean tiles. Place a special city tile. Decrease your energy production 2 steps and increase your mega credit production 5 steps. Gain 1 additional victory point for each ocean tile adjacent to this city tile.";
     public description: string = "With its ideal placement and all its facilities, this is the true capital of Mars.";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOceansOnBoard() >= 4 && player.energyProduction >= 2;
+        return game.getOceansOnBoard() >= 4 - player.requirementsBonus && player.energyProduction >= 2;
     }
     public play(player: Player, game: Game) {
-        if (game.getOceansOnBoard() < 4) {
-            throw "Requires 4 ocean tiles.";
-        }
         if (player.energyProduction < 2) {
             throw "Requires 2 energy production.";
         }

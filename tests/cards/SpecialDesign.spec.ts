@@ -21,8 +21,6 @@ describe("SpecialDesign", function () {
         player.cardPlayedEvents[0](new Bushes());
         expect(player.requirementsBonus).to.eq(0);
         expect(player.cardPlayedEvents.length).to.eq(0);
-        expect(game.onGenerationEnd.length).to.eq(1);
-        game.onGenerationEnd[0]();
         expect(game.onGenerationEnd.length).to.eq(0);
         card.play(player, game);
         expect(player.cardPlayedEvents.length).to.eq(1);

@@ -13,13 +13,10 @@ export class CloudSeeding implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires 3 ocean tiles. Decrease your mega credit production 1 step and any heat production 1 step. Increase your plant production 2 steps.";
     public description: string = "Lessens solar influx, but enhances plant growth.";
-    public canPlay(_player: Player, game: Game): boolean {
-        return game.getOceansOnBoard() >= 3;
+    public canPlay(player: Player, game: Game): boolean {
+        return game.getOceansOnBoard() >= 3 - player.requirementsBonus && player.megaCreditProduction > -5;
     }
     public play(player: Player, game: Game) {
-        if (game.getOceansOnBoard() < 3) {
-            throw "Requires 3 ocean tiles";
-        }
         return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease", (foundPlayer: Player) => {
                 if (foundPlayer.heatProduction < 1) {
                     throw "Player must have heat production";

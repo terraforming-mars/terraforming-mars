@@ -12,13 +12,10 @@ export class DustSeals implements IProjectCard {
     public name: string = "Dust Seals";
     public text: string = "Requires 3 or less ocean tiles. Gain 1 victory point.";
     public description: string = "Tight seals to keep micron-sized dust out of buildings, vehicles and suits.";
-    public canPlay(_player: Player, game: Game): boolean {
-        return game.getOceansOnBoard() <= 3;
+    public canPlay(player: Player, game: Game): boolean {
+        return game.getOceansOnBoard() <= 3 + player.requirementsBonus;
     }
-    public play(player: Player, game: Game) {
-        if (game.getOceansOnBoard() > 3) {
-            throw "Requires 3 or less ocean tiles";
-        }
+    public play(player: Player) {
         player.victoryPoints++;
         return undefined;
     }

@@ -30,21 +30,17 @@ export class WaterImportFromEuropa implements IProjectCard {
         return undefined;
     }
     public action(player: Player, game: Game): PlayerInput | undefined {
-        if (player.megaCredits + (player.titanium * player.titaniumValue) < 12) {
+        if ((player.canUseHeatAsMegaCredits ? player.heat : 0) + player.megaCredits + (player.titanium * player.titaniumValue) < 12) {
             throw "you do not have enough to pay for this action";
         }
-        let htp: HowToPay = {
-            steel: 0,
-            heat: 0,
-            titanium: 0,
-            megaCredits: 0
-        };
+        let htp: HowToPay;
         let selectedSpace: ISpace;
         return new AndOptions(
             () => {
                 game.addOceanTile(player, selectedSpace.id);
                 player.titanium -= htp.titanium;
                 player.megaCredits -= htp.megaCredits;
+                player.heat -= htp.heat;
                 return undefined;
             },
             new SelectHowToPay("How will you pay for this?", this.name, false, true, player.canUseHeatAsMegaCredits, (howToPay: HowToPay) => {

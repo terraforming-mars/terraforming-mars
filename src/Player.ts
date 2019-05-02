@@ -331,24 +331,53 @@ export class Player {
         for (let i = 0; i < 4; i++) {
             dealtCards.push(game.dealer.dealCard());
         }
-        this.setWaitingFor(new SelectCard("Research Phase", "Select which cards to take into hand", dealtCards, (foundCards: Array<IProjectCard>) => {
-            if (foundCards.length * constants.CARD_COST > this.megaCredits) {
-                throw "Not enough money to purchase patents";
-            }
-            // TODO - how much does this cost?
-            this.megaCredits -= constants.CARD_COST * foundCards.length;
-            foundCards.forEach((card) => {
+        let htp: HowToPay = {
+            steel: 0,
+            titanium: 0,
+            heat: 0,
+            megaCredits: 0
+        };
+
+        let selectedCards: Array<IProjectCard> = [];
+
+        const payForCards = () => {
+            this.megaCredits -= constants.CARD_COST * selectedCards.length;
+            selectedCards.forEach((card) => {
                 this.cardsInHand.push(card);
             });
             // Discard the cards which were not purchased.
             dealtCards
-                .filter((card) => foundCards.find((foundCard) => foundCard.name === card.name) === undefined)
+                .filter((card) => selectedCards.find((foundCard) => foundCard.name === card.name) === undefined)
                 .forEach((card) => {
                     game.dealer.discard(card);
-                }); 
+                });
             game.playerIsFinishedWithResearchPhase(this);
-            return undefined; 
-        }, 4, 0)); 
+        };
+
+        if (this.canUseHeatAsMegaCredits) {
+            this.setWaitingFor(new AndOptions(() => {
+                    payForCards();
+                    return undefined;
+                },
+                new SelectHowToPay(
+                    "How will you pay for cards",
+                    "Research Phase",
+                    false,
+                    false,
+                    true, (pay) => { htp = pay; return undefined; }),
+                new SelectCard("Research Phase", "Select which cards to take into hand", dealtCards, (foundCards: Array<IProjectCard>) => {
+                    selectedCards = foundCards;
+                    return undefined;
+                }, 4, 0)
+            ));
+        } else {
+            this.setWaitingFor(new SelectCard("Research Phase", "Select which cards to take into hand", dealtCards, (foundCards: Array<IProjectCard>) => {
+                htp.megaCredits = foundCards.length * constants.CARD_COST;
+                selectedCards = foundCards;
+                payForCards();
+                return undefined;
+            }, 4, 0));
+        }
     }
 
     private getCardCost(card: IProjectCard): number {
@@ -392,7 +421,6 @@ export class Player {
                 const whenDone = () => {
                     this.cardsInHand.splice(this.cardsInHand.findIndex((card) => card.name === selectedCard.name), 1);
                     this.playedCards.push(selectedCard);
-
 
                     this.steel -= payMethod.steel;
                     this.titanium -= payMethod.titanium;

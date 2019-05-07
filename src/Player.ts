@@ -547,37 +547,32 @@ export class Player {
     }
 
     private buildPowerPlant(game: Game): PlayerInput {
-        if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-            let htp: HowToPay;
-            return new AndOptions(
-                () => {
-                    if (htp.heat + htp.megaCredits < this.powerPlantCost) {
-                        throw "Haven't spend enough for power plant";
-                    }
-                    this.energyProduction++;
-                    this.payForStandardProject(StandardProjectType.POWER_PLANT, htp.megaCredits, htp.heat);
-                    this.actionsTakenThisRound++;
-                    this.takeAction(game);
-                    return undefined;
-                },
-                new SelectHowToPay("How to fund project", "Pay for action", false, false, true, (stp) => { htp = stp; return undefined; })
-            );
-        }
-        return new SelectOption("Take Action!", "Standard Project: Power Plant", () => {
+        const fundProject = (megaCredits: number, heat: number) => {
             this.energyProduction++;
-            this.payForStandardProject(StandardProjectType.POWER_PLANT, this.powerPlantCost, 0);
+            this.payForStandardProject(StandardProjectType.POWER_PLANT, megaCredits, heat);
             this.actionsTakenThisRound++;
             this.takeAction(game);
             return undefined;
+        };
+        if (this.canUseHeatAsMegaCredits && this.heat > 0) {
+            return new SelectHowToPay("Fund Standard Project", "Power Plant", false, false, true, (htp) => {
+                if (htp.heat + htp.megaCredits < this.powerPlantCost) {
+                    throw "Haven't spend enough for power plant";
+                }
+                return fundProject(htp.megaCredits, htp.heat);
+            });
+        }
+        return new SelectOption("Fund Standard Project", "Power Plant", () => {
+            return fundProject(this.powerPlantCost, 0);
         });
     }
 
     private asteroid(game: Game): PlayerInput {
-        return new SelectOption("Take Action!", "Standard Project: Asteroid", () => {
+        const fundProject = (megaCredits: number, heat: number) => {
             const action = game.increaseTemperature(this, 1);
             const whenDone = (err?: string) => {
                 if (!err) {
-                    this.payForStandardProject(StandardProjectType.ASTEROID, 14, 0);
+                    this.payForStandardProject(StandardProjectType.ASTEROID, megaCredits, heat);
                     this.actionsTakenThisRound++;
                 }
                 this.takeAction(game);
@@ -588,25 +583,55 @@ export class Player {
             }
             whenDone();
             return undefined;
+        };
+        if (this.canUseHeatAsMegaCredits && this.heat > 0) {
+            return new SelectHowToPay("Fund Standard Project", "Asteroid", false, false, true, (htp) => {
+                if (htp.heat + htp.megaCredits < constants.ASTEROID_COST) {
+                    throw "Haven't spend enough for asteroid";
+                }
+                return fundProject(htp.megaCredits, htp.heat);
+            });
+        }
+        return new SelectOption("Fund Standard Project", "Asteroid", () => {
+            return fundProject(constants.ASTEROID_COST, 0);
         });
     }
 
     private aquifer(game: Game): PlayerInput {
-        return new SelectSpace("Take Action!", "Standard Project: Aquifer", game.getAvailableSpacesForOcean(this), (space: ISpace) => {
-            game.addOceanTile(this, space.id);
-            this.payForStandardProject(StandardProjectType.AQUIFER, 18, 0);
+        const fundProject = (megaCredits: number, heat: number, spaceId: string) => {
+            game.addOceanTile(this, spaceId);
+            this.payForStandardProject(StandardProjectType.AQUIFER, megaCredits, heat);
             this.actionsTakenThisRound++;
             this.takeAction(game);
             return undefined;
+        };
+        if (this.canUseHeatAsMegaCredits && this.heat > 0) {
+            let htp: HowToPay;
+            let ocean: ISpace;
+            return new AndOptions(() => {
+                return fundProject(htp.megaCredits, htp.heat, ocean.id);
+            }, new SelectHowToPay("Fund Standard Project", "Aquifer", false, false, true, (stp: HowToPay) => {
+                if (stp.heat + stp.megaCredits < constants.AQUIFER_COST) {
+                    throw "Haven't spend enough for aquifer";
+                }
+                htp = stp;
+                return undefined;
+            }), new SelectSpace("Fund Standard Project", "Aquifer", game.getAvailableSpacesForOcean(this), (space: ISpace) => {
+                ocean = space;
+                return undefined;
+            }));
+        }
+        return new SelectSpace("Fund Standard Project", "Aquifer", game.getAvailableSpacesForOcean(this), (space: ISpace) => {
+            return fundProject(constants.AQUIFER_COST, 0, space.id);
         });
     }
 
     private addGreenery(game: Game): PlayerInput {
-        return new SelectSpace("Take Action!", "Standard Project: Greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
-            const action = game.addGreenery(this, space.id);
+        const fundProject = (megaCredits: number, heat: number, spaceId: string) => {
+            const action = game.addGreenery(this, spaceId);
             const whenDone = (err?: string) => {
                 if (!err) {
-                    this.payForStandardProject(StandardProjectType.GREENERY, 23, 0);
+                    this.payForStandardProject(StandardProjectType.GREENERY, megaCredits, heat);
                     this.actionsTakenThisRound++;
                 }
                 this.takeAction(game);
@@ -617,6 +642,22 @@ export class Player {
             }
             whenDone();
             return undefined;
+        };
+        if (this.canUseHeatAsMegaCredits && this.heat > 0) {
+            let htp: HowToPay;
+            let greenery: ISpace;
+            return new AndOptions(() => {
+                return fundProject(htp.megaCredits, htp.heat, greenery.id);
+            }, new SelectHowToPay("Fund Standard Project", "Greenery", false, false, true, (stp) => {
+                htp = stp;
+                return undefined;
+            }), new SelectSpace("Fund Standard Project", "Greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
+                greenery = space;
+                return undefined;
+            }));
+        }
+        return new SelectSpace("Fund Standard Project", "Greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
+            return fundProject(constants.GREENERY_COST, 0, space.id);
         });
     }
 
@@ -793,31 +834,38 @@ export class Player {
         standardProjects.title = "Take action!";
         standardProjects.message = "Pay for standard project";
 
-        if ((this.canUseHeatAsMegaCredits ? this.heat : 0) + this.megaCredits >= this.powerPlantCost) {
+        const canAffordProject = (cost: number) => {
+            return (this.canUseHeatAsMegaCredits ? this.heat : 0) + this.megaCredits >= cost;
+        };
+
+        if (canAffordProject(this.powerPlantCost)) {
             standardProjects.options.push(
                 this.buildPowerPlant(game)
             );
         }
 
-        if (this.megaCredits >= 14 && game.getTemperature() < constants.MAX_TEMPERATURE) {
+        if (canAffordProject(constants.ASTEROID_COST) && game.getTemperature() < constants.MAX_TEMPERATURE) {
             standardProjects.options.push(
                 this.asteroid(game)
             )
         }
 
-        if (this.megaCredits >= 18 && game.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
+        // TODO - there needs to be available spaces for an aquifer
+        if (canAffordProject(constants.AQUIFER_COST) && game.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
             standardProjects.options.push(
                 this.aquifer(game)
             );
         }
 
-        if (this.megaCredits >= 23) {
+        // TODO - there needs to be available spaces for a greenery
+        if (canAffordProject(constants.GREENERY_COST)) {
             standardProjects.options.push(
                 this.addGreenery(game)
             );
         }
 
-        if (this.megaCredits >= 25) {
+        // TODO - there needs to be available spaces for a city
+        if (canAffordProject(25)) {
             standardProjects.options.push(
                 this.addCity(game)
             );

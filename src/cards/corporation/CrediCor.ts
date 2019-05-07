@@ -10,8 +10,7 @@ export class CrediCor implements CorporationCard {
     public name: string = "CrediCor";
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 57;
-    public effect: string = "After you pay for a card or standard project with a basic cost of 20 mega credits or more, you gain 4 mega credits.";
-    public text: string = "";
+    public text: string = "After you pay for a card or standard project with a basic cost of 20 mega credits or more, you gain 4 mega credits.";
     public description: string = "Multibillionaire Bard Hunter likes terraforming, especially when it involves hurling asteroids at Mars. He also has a hunch that it's going to pay off. His company CrediCor has all the resources he needs to jump right into the contest.";
     public play(player: Player, _game: Game) {
         player.addStandardProjectHandler((project: StandardProjectType) => {

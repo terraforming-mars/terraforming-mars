@@ -662,13 +662,33 @@ export class Player {
     }
 
     private addCity(game: Game): PlayerInput {
-        return new SelectSpace("Take Action!", "Standard Project: City", game.getAvailableSpacesOnLand(this), (space: ISpace) => {
-            game.addCityTile(this, space.id);
+        const fundProject = (megaCredits: number, heat: number, spaceId: string) => {
+            game.addCityTile(this, spaceId);
             this.megaCreditProduction++;
-            this.payForStandardProject(StandardProjectType.CITY, 25, 0);
+            this.payForStandardProject(StandardProjectType.CITY, megaCredits, heat);
             this.actionsTakenThisRound++;
             this.takeAction(game);
             return undefined;
+        };
+        if (this.canUseHeatAsMegaCredits && this.heat > 0) {
+            let city: ISpace;
+            let htp: HowToPay;
+            return new AndOptions(
+                () => {
+                    return fundProject(htp.megaCredits, htp.heat, city.id);
+                },
+                new SelectHowToPay("Fund Standard Project", "City", false, false, true, (stp) => {
+                    htp = stp;
+                    return undefined;
+                }),
+                new SelectSpace("Fund Standard Project", "City", game.getAvailableSpacesOnLand(this), (space: ISpace) => {
+                    city = space;
+                    return undefined;
+                })
+            );
+        }
+        return new SelectSpace("Fund Standard Project", "City", game.getAvailableSpacesOnLand(this), (space: ISpace) => {
+            return fundProject(constants.CITY_COST, 0, space.id);
         });
     }
 
@@ -865,7 +885,7 @@ export class Player {
         }
 
         // TODO - there needs to be available spaces for a city
-        if (canAffordProject(25)) {
+        if (canAffordProject(constants.CITY_COST)) {
             standardProjects.options.push(
                 this.addCity(game)
             );

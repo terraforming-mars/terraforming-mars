@@ -4,7 +4,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
-import { SelectCard } from "../inputs/SelectCard";
+import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { SelectOption } from "../inputs/SelectOption";
 import { IProjectCard } from "./IProjectCard";
 
@@ -24,8 +24,26 @@ export class InventorsGuild implements IProjectCard {
     }
     public action(player: Player, game: Game) {
         const topCard = game.dealer.dealCard();
+        if (player.canUseHeatAsMegaCredits && player.heat > 0) {
+            return new OrOptions(
+                new SelectHowToPay(this.name, "Buy card " + topCard.name, false, false, true, (htp) => {
+                    if (htp.heat + htp.megaCredits < 3) {
+                        game.dealer.discard(topCard);
+                        throw "Can not afford to buy card";
+                    }
+                    player.megaCredits -= htp.megaCredits;
+                    player.heat -= htp.heat;
+                    player.cardsInHand.push(topCard);
+                    return undefined;
+                }),
+                new SelectOption(this.name, "Discard it", () => {
+                    game.dealer.discard(topCard);
+                    return undefined;
+                })
+            );
+        }
         return new OrOptions(
-            new SelectCard(this.name, "Buy card", [topCard], (_card: Array<IProjectCard>) => {
+            new SelectOption(this.name, "Buy card " + topCard.name, () => {
                 if (player.megaCredits < 3) {
                     game.dealer.discard(topCard);
                     throw "Can not afford to buy card";

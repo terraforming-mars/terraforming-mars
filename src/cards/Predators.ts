@@ -5,8 +5,9 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectCard } from "../inputs/SelectCard";
+import { IActionCard } from "./ICard";
 
-export class Predators implements IProjectCard {
+export class Predators implements IProjectCard, IActionCard {
     public cost: number = 14;
     public tags: Array<Tags> = [Tags.ANIMAL];
     public name: string = "Predator";
@@ -24,12 +25,12 @@ export class Predators implements IProjectCard {
         });
         return undefined;
     }
+    public canAct(_player: Player, game: Game): boolean {
+        return game.getPlayedCardsWithAnimals().filter((card) => Number(card.animals) > 0).length > 0;
+    }
     public action(player: Player, game: Game) {
         const animalCards: Array<IProjectCard> = game.getPlayedCardsWithAnimals()
             .filter((card) => Number(card.animals) > 0);
-        if (animalCards.length === 0) {
-            throw "No cards to remove animal from";
-        }
         return new SelectCard(this.name, "Select card to remove animal from", animalCards, (foundCards: Array<IProjectCard>) => {
             const foundCard = foundCards[0];
             game.getCardPlayer(foundCard.name).removeAnimals(player, foundCard, 1);

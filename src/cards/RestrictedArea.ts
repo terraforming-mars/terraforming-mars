@@ -5,6 +5,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { TileType } from "../TileType";
+import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 
@@ -26,6 +27,17 @@ export class RestrictedArea implements IProjectCard {
         });
     }
     public action(player: Player, game: Game) {
+        if (player.canUseHeatAsMegaCredits && player.heat > 0) {
+            return new SelectHowToPay(this.name, "How to pay", false, false, true, (htp) => {
+                if (htp.heat + htp.megaCredits < 2) {
+                    throw "Not enough spent";
+                }
+                player.megaCredits -= htp.megaCredits;
+                player.heat -= htp.heat;
+                player.cardsInHand.push(game.dealer.dealCard());
+                return undefined;
+            });
+        }
         if (player.megaCredits < 2) {
             throw "Must have 2 mega credits";
         }

@@ -33,10 +33,10 @@ describe("WaterImportFromEuropa", function () {
         const action = card.action(player, game) as AndOptions;
         expect(action).not.to.eq(undefined);
         action.options[1].cb(game.getAvailableSpacesForOcean(player)[0]);
-        action.options[0].cb({ steel: 0, heat: 0, titanium: 1, megaCredits: 1 });
+        action.options[0].cb({ steel: 0, heat: 0, titanium: 1, megaCredits: 9 });
         action.cb();
         expect(game.getOceansOnBoard()).to.eq(1);
         expect(player.titanium).to.eq(0);
-        expect(player.megaCredits).to.eq(10);
+        expect(player.megaCredits).to.eq(2);
     });
 });

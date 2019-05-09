@@ -5,6 +5,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { TileType } from "../TileType";
+import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 
@@ -33,6 +34,19 @@ export class IndustrialCenter implements IProjectCard {
         });
     }
     public action(player: Player, _game: Game) {
+        if (player.canUseHeatAsMegaCredits && player.heat > 0) {
+            if (player.heat + player.megaCredits < 7) {
+                throw "Don't have 7 mega credits and heat to spend";
+            }
+            return new SelectHowToPay(this.name, "Select how to pay for action", false, false, true, (htp) => {
+                if (htp.megaCredits + htp.heat < 7) {
+                    throw "Need to spend 7";
+                }
+                player.megaCredits -= 7;
+                player.steelProduction++;
+                return undefined;
+            });
+        }
         if (player.megaCredits < 7) {
             throw "Don't have 7 mega credit to spend";
         }

@@ -22,12 +22,11 @@ describe("BusinessNetwork", function () {
         action.options[1].cb();
         expect(game.dealer.discarded.length).to.eq(1);
         expect(function () {
-            action.options[0].cb([(action.options[0] as any).cards[0]]);
+            action.options[0].cb();
         }).to.throw("Not enough mega credits to buy card");
         player.megaCredits = 3;
-        action.options[0].cb([(action.options[0] as any).cards[0]]);
+        action.options[0].cb();
         expect(player.megaCredits).to.eq(0);
         expect(player.cardsInHand.length).to.eq(1);
-        expect(player.cardsInHand[0]).to.eq((action.options[0] as any).cards[0]);
     });  
 });

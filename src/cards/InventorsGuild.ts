@@ -27,6 +27,7 @@ export class InventorsGuild implements IProjectCard {
         return new OrOptions(
             new SelectCard(this.name, "Buy card", [topCard], (_card: Array<IProjectCard>) => {
                 if (player.megaCredits < 3) {
+                    game.dealer.discard(topCard);
                     throw "Can not afford to buy card";
                 }
                 player.megaCredits -= 3;

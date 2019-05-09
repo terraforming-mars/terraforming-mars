@@ -731,27 +731,48 @@ export class Player {
     }
 
     private claimMilestone(milestone: Milestone, game: Game): PlayerInput {
-        return new SelectOption("Take Action!", "Claim Milestone: " + milestone, () => {
+        const claimer = (megaCredits: number, heat: number) => {
             this.victoryPoints += 5;
             game.claimedMilestones.push({
                 player: this,
                 milestone: milestone
             });
-            this.megaCredits -= 8;
+            this.heat -= heat;
+            this.megaCredits -= megaCredits;
             this.actionsTakenThisRound++;
             this.takeAction(game);
             return undefined;
+        };
+        if (this.canUseHeatAsMegaCredits && this.heat > 0) {
+            return new SelectHowToPay("Take Action!", "Claim Milestone", false, false, true, (stp) => {
+                if (stp.megaCredits + stp.heat < 8) {
+                    throw "Did not spend enough to claim milestone";
+                }
+                return claimer(stp.megaCredits, stp.heat);
+            });
+        }
+        return new SelectOption("Take Action!", "Claim Milestone: " + milestone, () => {
+            return claimer(8, 0);
         });
     }
 
     private fundAward(award: Award, game: Game): PlayerInput {
         let upperCaseAward = String(award)[0].toUpperCase() + String(award).substring(1);
-        return new SelectOption("Take Action!", "Fund Award: " + upperCaseAward, () => {
+        const funder = (megaCredits: number, heat: number) => {
             game.fundAward(this, award);
-            this.megaCredits -= game.awardFundingCost;
+            this.megaCredits -= megaCredits;
+            this.heat -= heat;
             this.actionsTakenThisRound++;
             this.takeAction(game);
             return undefined;
+        };
+        if (this.canUseHeatAsMegaCredits && this.heat > 0) {
+            return new SelectHowToPay("Take Action!", "Fund Award: " + upperCaseAward, false, false, true, (htp: HowToPay) => {
+                return funder(htp.megaCredits, htp.heat);
+            });
+        }
+        return new SelectOption("Take Action!", "Fund Award: " + upperCaseAward, () => {
+            return funder(game.awardFundingCost, 0);
         });
     }
 
@@ -799,6 +820,10 @@ export class Player {
             maxPay += this.megaCredits;
             return maxPay >= this.getCardCost(card) && card.canPlay(this, game);
         });
+    }
+
+    public canAfford(cost: number): boolean {
+        return (this.canUseHeatAsMegaCredits ? this.heat : 0) + this.megaCredits >= cost;
     }
 
     public takeAction(game: Game): void {
@@ -854,38 +879,34 @@ export class Player {
         standardProjects.title = "Take action!";
         standardProjects.message = "Pay for standard project";
 
-        const canAffordProject = (cost: number) => {
-            return (this.canUseHeatAsMegaCredits ? this.heat : 0) + this.megaCredits >= cost;
-        };
-
-        if (canAffordProject(this.powerPlantCost)) {
+        if (this.canAfford(this.powerPlantCost)) {
             standardProjects.options.push(
                 this.buildPowerPlant(game)
             );
         }
 
-        if (canAffordProject(constants.ASTEROID_COST) && game.getTemperature() < constants.MAX_TEMPERATURE) {
+        if (this.canAfford(constants.ASTEROID_COST) && game.getTemperature() < constants.MAX_TEMPERATURE) {
             standardProjects.options.push(
                 this.asteroid(game)
             )
         }
 
         // TODO - there needs to be available spaces for an aquifer
-        if (canAffordProject(constants.AQUIFER_COST) && game.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
+        if (this.canAfford(constants.AQUIFER_COST) && game.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
             standardProjects.options.push(
                 this.aquifer(game)
             );
         }
 
         // TODO - there needs to be available spaces for a greenery
-        if (canAffordProject(constants.GREENERY_COST)) {
+        if (this.canAfford(constants.GREENERY_COST)) {
             standardProjects.options.push(
                 this.addGreenery(game)
             );
         }
 
         // TODO - there needs to be available spaces for a city
-        if (canAffordProject(constants.CITY_COST)) {
+        if (this.canAfford(constants.CITY_COST)) {
             standardProjects.options.push(
                 this.addCity(game)
             );
@@ -909,11 +930,11 @@ export class Player {
             );
         }
 
-        if (this.megaCredits >= 8 && !game.allMilestonesClaimed()) {
+        if (this.canAfford(8) && !game.allMilestonesClaimed()) {
             const remainingMilestones = new OrOptions();
             remainingMilestones.title = "Take action!";
             remainingMilestones.message = "Select milestone to claim";
-             
+
             if (!game.milestoneClaimed(Milestone.TERRAFORMER) && this.terraformRating >= 35) {
                 remainingMilestones.options.push(
                     this.claimMilestone(Milestone.TERRAFORMER, game)
@@ -946,17 +967,13 @@ export class Player {
             }
         }
 
-        if (this.megaCredits >= game.awardFundingCost && !game.allAwardsFunded()) {
+        if (this.canAfford(game.awardFundingCost) && !game.allAwardsFunded()) {
             const remainingAwards = new OrOptions();
             remainingAwards.title = "Take action!";
             remainingAwards.message = "Fund an award";
-            [Award.LANDLORD, Award.BANKER, Award.SCIENTIST, Award.THERMALIST, Award.MINER]
+            remainingAwards.options = [Award.LANDLORD, Award.BANKER, Award.SCIENTIST, Award.THERMALIST, Award.MINER]
                 .filter((award: Award) => game.hasBeenFunded(award) === false)
-                .forEach((award: Award) => {
-                    remainingAwards.options.push(
-                        this.fundAward(award, game)
-                    );
-                });
+                .map((award: Award) => this.fundAward(award, game));
             action.options.push(remainingAwards);
         }
 

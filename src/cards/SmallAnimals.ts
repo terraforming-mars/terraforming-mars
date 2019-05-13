@@ -1,4 +1,5 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -6,7 +7,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectPlayer } from "../inputs/SelectPlayer";
 
-export class SmallAnimals implements IProjectCard {
+export class SmallAnimals implements IActionCard, IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.ANIMAL];
     public name: string = "Small Animals";
@@ -23,9 +24,6 @@ export class SmallAnimals implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         const availablePlayers = this.getAvailablePlayers(player, game);
-        if (availablePlayers.length === 0) {
-            throw "No players with plant production";
-        }
         return new SelectPlayer(this.name, availablePlayers, "Select player to decrease plant production", (foundPlayer: Player) => {
             foundPlayer.plantProduction--;
             game.addGameEndListener(() => {
@@ -33,6 +31,9 @@ export class SmallAnimals implements IProjectCard {
             });
             return undefined;
         });
+    }
+    public canAct(): boolean {
+        return true;
     }
     public action(_player: Player, _game: Game) {
         this.animals++;

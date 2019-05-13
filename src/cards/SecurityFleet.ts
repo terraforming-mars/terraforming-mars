@@ -1,11 +1,12 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 
-export class SecurityFleet implements IProjectCard {
+export class SecurityFleet implements IActionCard, IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.ACTIVE;
@@ -23,10 +24,10 @@ export class SecurityFleet implements IProjectCard {
         });
         return undefined;
     }
+    public canAct(player: Player): boolean {
+        return player.titanium > 0;
+    }
     public action(player: Player, _game: Game) {
-        if (player.titanium < 1) {
-            throw "Need titanium";
-        }
         player.titanium--;
         this.fighterResources++;
         return undefined;

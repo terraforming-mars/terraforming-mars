@@ -1,4 +1,5 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -9,7 +10,7 @@ import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 
-export class RestrictedArea implements IProjectCard {
+export class RestrictedArea implements IActionCard, IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.ACTIVE;
@@ -25,6 +26,9 @@ export class RestrictedArea implements IProjectCard {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
             return undefined;
         });
+    }
+    public canAct(player: Player): boolean {
+        return player.canAfford(2);
     }
     public action(player: Player, game: Game) {
         if (player.canUseHeatAsMegaCredits && player.heat > 0) {

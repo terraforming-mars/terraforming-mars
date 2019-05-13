@@ -1,11 +1,13 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { SelectHowToPay } from "../inputs/SelectHowToPay";
 
-export class SearchForLife implements IProjectCard {
+export class SearchForLife implements IActionCard, IProjectCard {
     public cost: number = 3;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.ACTIVE;
@@ -25,16 +27,29 @@ export class SearchForLife implements IProjectCard {
         });
         return undefined;
     }
+    public canAct(player: Player): boolean {
+        return player.canAfford(1);
+    }
     public action(player: Player, game: Game) {
-        if (player.megaCredits < 1) {
-            throw "Must have mega credit";
+        const doAction = () => {
+            const topCard = game.dealer.dealCard();
+            if (topCard.tags.indexOf(Tags.MICROBES) !== -1) {
+                this.scienceResources++;
+            }
+            game.dealer.discard(topCard);
+            return undefined;
+        };
+        if (player.canUseHeatAsMegaCredits && player.heat > 0) {
+            return new SelectHowToPay(this.name, "How to pay", false, false, true, (htp) => {
+                if (htp.heat + htp.megaCredits < 1) {
+                    throw "Need to spend at least one";
+                }
+                player.megaCredits -= htp.megaCredits;
+                player.heat -= htp.heat;
+                return doAction();
+            });
         }
         player.megaCredits--;
-        const topCard = game.dealer.dealCard();
-        if (topCard.tags.indexOf(Tags.MICROBES) !== -1) {
-            this.scienceResources++;
-        }
-        game.dealer.discard(topCard);
-        return undefined;
+        return doAction();
     }
 }

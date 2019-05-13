@@ -14,7 +14,7 @@ describe("SmallAnimals", function () {
         game.increaseOxygenLevel(player, 2); // 2
         game.increaseOxygenLevel(player, 2); // 4
         game.increaseOxygenLevel(player, 2); // 6
-        expect(function () { card.play(player, game); }).to.throw("No players with plant production");
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should act", function () {
         const card = new SmallAnimals();

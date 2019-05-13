@@ -1,12 +1,13 @@
 
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
 
-export class SpaceMirrors implements IProjectCard {
+export class SpaceMirrors implements IActionCard, IProjectCard {
     public cost: number = 3;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.SPACE];
     public name: string = "Space Mirror";
@@ -20,11 +21,11 @@ export class SpaceMirrors implements IProjectCard {
     public play(_player: Player, _game: Game) {
         return undefined;
     }
+    public canAct(player: Player): boolean {
+        return player.canAfford(7);
+    }
     public action(player: Player, _game: Game) {
         if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-            if (player.heat + player.megaCredits < 7) {
-                throw "Requires 7 mega credit or heat";
-            }
             return new SelectHowToPay(this.name, "How to pay", false, false, true, (htp) => {
                 if (htp.megaCredits + htp.heat < 7) {
                     throw "Not enough spent";
@@ -34,9 +35,6 @@ export class SpaceMirrors implements IProjectCard {
                 player.energyProduction++;
                 return undefined;
             });
-        }
-        if (player.megaCredits < 7) {
-            throw "Requires 7 mega credit";
         }
         player.megaCredits -= 7;
         player.energyProduction++;

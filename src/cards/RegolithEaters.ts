@@ -1,4 +1,5 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -7,7 +8,7 @@ import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
 
-export class RegolithEaters implements IProjectCard {
+export class RegolithEaters implements IActionCard, IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.MICROBES];
     public name: string = "Regolith Eaters";
@@ -21,6 +22,9 @@ export class RegolithEaters implements IProjectCard {
     }
     public play(_player: Player, _game: Game) {
         return undefined;
+    }
+    public canAct(): boolean {
+        return true;
     }
     public action(player: Player, game: Game) {
         if (this.microbes < 2) {

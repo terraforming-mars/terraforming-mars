@@ -1,11 +1,11 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectCard } from "../inputs/SelectCard";
-import { IActionCard } from "./ICard";
 
 export class Predators implements IProjectCard, IActionCard {
     public cost: number = 14;

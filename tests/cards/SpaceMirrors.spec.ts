@@ -6,11 +6,10 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 
 describe("SpaceMirrors", function () {
-    it("Should throw", function () {
+    it("Can't act", function () {
         const card = new SpaceMirrors();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        expect(function () { card.action(player, game); }).to.throw("Requires 7 mega credit");
+        expect(card.canAct(player)).to.eq(false);
     });
     it("Should play", function () {
         const card = new SpaceMirrors();

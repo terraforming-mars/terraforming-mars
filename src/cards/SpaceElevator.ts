@@ -1,11 +1,12 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 
-export class SpaceElevator implements IProjectCard {
+export class SpaceElevator implements IActionCard, IProjectCard {
     public cost: number = 27;
     public tags: Array<Tags> = [Tags.SPACE, Tags.STEEL];
     public name: string = "Space Elevator";
@@ -21,10 +22,10 @@ export class SpaceElevator implements IProjectCard {
         player.victoryPoints += 2;
         return undefined;
     }
+    public canAct(player: Player): boolean {
+        return player.steel > 0;
+    }
     public action(player: Player, _game: Game) {
-        if (player.steel < 1) {
-            throw "Must have steel";
-        }
         player.steel--;
         player.megaCredits += 5;
         return undefined;

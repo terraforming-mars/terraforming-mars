@@ -1,12 +1,13 @@
 
 import { CardType } from "./CardType";
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectAmount } from "../inputs/SelectAmount";
 
-export class PowerInfrastructure implements IProjectCard {
+export class PowerInfrastructure implements IActionCard, IProjectCard {
     public name: string = "Power Infrastructure";
     public text: string = "";
     public description: string = "Efficiency through flexibility."
@@ -20,6 +21,9 @@ export class PowerInfrastructure implements IProjectCard {
         return undefined;
     }
     public actionText: string = "Spend any amount of energy to gain that many mega credit";
+    public canAct(player: Player): boolean {
+        return player.energy > 0;
+    }
     public action(player: Player, _game: Game) {
         return new SelectAmount(this.name, "Select energy to spend", (amount: number) => {
             player.energy -= amount;

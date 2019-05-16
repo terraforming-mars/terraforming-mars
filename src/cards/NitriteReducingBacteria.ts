@@ -1,4 +1,5 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -7,7 +8,7 @@ import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
 
-export class NitriteReducingBacteria implements IProjectCard {
+export class NitriteReducingBacteria implements IActionCard, IProjectCard {
     public cost: number = 11;
     public microbes: number = 0;
     public tags: Array<Tags> = [Tags.MICROBES];
@@ -22,6 +23,9 @@ export class NitriteReducingBacteria implements IProjectCard {
     public play(_player: Player, _game: Game) {
         this.microbes += 3;
         return undefined;
+    }
+    public canAct(): boolean {
+        return false;
     }
     public action(player: Player, _game: Game) {
         if (this.microbes < 3) {

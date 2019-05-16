@@ -1,11 +1,12 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Game } from "../Game";
 import { Player } from "../Player";
 
-export class Livestock implements IProjectCard {
+export class Livestock implements IActionCard, IProjectCard {
     public cost: number = 13;
     public cardType: CardType = CardType.ACTIVE;
     public animals: number = 0;
@@ -17,9 +18,6 @@ export class Livestock implements IProjectCard {
         return game.getOxygenLevel() >= 9 - player.requirementsBonus && player.plantProduction >= 1;
     }
     public play(player: Player, game: Game) {
-        if (player.plantProduction < 1) {
-            throw "Must have plant production";
-        }
         player.plantProduction--;
         player.megaCreditProduction += 2;
         const giveVPForAnimalsOnCard = () => {
@@ -29,7 +27,10 @@ export class Livestock implements IProjectCard {
         return undefined;
     }
     public actionText: string = "Add an animal to this card";
-    public action(_player: Player, _game: Game) {
+    public canAct(): boolean {
+        return true;
+    }
+    public action() {
         this.animals++;
         return undefined;
     }

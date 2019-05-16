@@ -39,9 +39,7 @@ describe("Livestock", function () {
     });
     it("Should act", function () {
         const card = new Livestock();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        card.action(player, game);
+        card.action();
         expect(card.animals).to.eq(1);
     });
 });

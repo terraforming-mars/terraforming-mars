@@ -7,8 +7,9 @@ import { OrOptions } from "../inputs/OrOptions";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { SelectOption } from "../inputs/SelectOption";
 import { IProjectCard } from "./IProjectCard";
+import { IActionCard } from "./ICard";
 
-export class InventorsGuild implements IProjectCard {
+export class InventorsGuild implements IActionCard, IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Inventors' Guild";
@@ -22,17 +23,37 @@ export class InventorsGuild implements IProjectCard {
     public play(_player: Player, _game: Game) {
         return undefined;
     }
+    public canAct(): boolean {
+        return true;
+    }
     public action(player: Player, game: Game) {
         const topCard = game.dealer.dealCard();
-        if (player.canUseHeatAsMegaCredits && player.heat > 0) {
+        if (player.canAfford(3)) {
+            if (player.canUseHeatAsMegaCredits && player.heat > 0) {
+                return new OrOptions(
+                    new SelectHowToPay(this.name, "Buy card " + topCard.name, false, false, true, (htp) => {
+                        if (htp.heat + htp.megaCredits < 3) {
+                            game.dealer.discard(topCard);
+                            throw "Can not afford to buy card";
+                        }
+                        player.megaCredits -= htp.megaCredits;
+                        player.heat -= htp.heat;
+                        player.cardsInHand.push(topCard);
+                        return undefined;
+                    }),
+                    new SelectOption(this.name, "Discard it", () => {
+                        game.dealer.discard(topCard);
+                        return undefined;
+                    })
+                );
+            }
             return new OrOptions(
-                new SelectHowToPay(this.name, "Buy card " + topCard.name, false, false, true, (htp) => {
-                    if (htp.heat + htp.megaCredits < 3) {
+                new SelectOption(this.name, "Buy card " + topCard.name, () => {
+                    if (player.megaCredits < 3) {
                         game.dealer.discard(topCard);
                         throw "Can not afford to buy card";
                     }
-                    player.megaCredits -= htp.megaCredits;
-                    player.heat -= htp.heat;
+                    player.megaCredits -= 3;
                     player.cardsInHand.push(topCard);
                     return undefined;
                 }),
@@ -42,20 +63,8 @@ export class InventorsGuild implements IProjectCard {
                 })
             );
         }
-        return new OrOptions(
-            new SelectOption(this.name, "Buy card " + topCard.name, () => {
-                if (player.megaCredits < 3) {
-                    game.dealer.discard(topCard);
-                    throw "Can not afford to buy card";
-                }
-                player.megaCredits -= 3;
-                player.cardsInHand.push(topCard);
-                return undefined;
-            }),
-            new SelectOption(this.name, "Discard it", () => {
-                game.dealer.discard(topCard);
-                return undefined;
-            })
-        );
+        // Can't afford a card, will have to discard
+        game.dealer.discard(topCard);
+        return undefined; 
     }
 }

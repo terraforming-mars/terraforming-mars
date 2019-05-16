@@ -1,4 +1,5 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -9,7 +10,7 @@ import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 
-export class IndustrialCenter implements IProjectCard {
+export class IndustrialCenter implements IActionCard, IProjectCard {
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.STEEL];
     public cardType: CardType = CardType.ACTIVE;
@@ -25,19 +26,16 @@ export class IndustrialCenter implements IProjectCard {
         return this.getAvailableSpaces(player, game).length > 0;
     }
     public play(player: Player, game: Game) {
-        if (game.getCitiesInPlayOnMars() === 0) {
-            throw "No cities in play";
-        }
         return new SelectSpace(this.name, "Select space adjacent to a city tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
             return undefined;
         });
     }
+    public canAct(player: Player): boolean {
+        return player.canAfford(7);
+    }
     public action(player: Player, _game: Game) {
         if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-            if (player.heat + player.megaCredits < 7) {
-                throw "Don't have 7 mega credits and heat to spend";
-            }
             return new SelectHowToPay(this.name, "Select how to pay for action", false, false, true, (htp) => {
                 if (htp.megaCredits + htp.heat < 7) {
                     throw "Need to spend 7";
@@ -46,9 +44,6 @@ export class IndustrialCenter implements IProjectCard {
                 player.steelProduction++;
                 return undefined;
             });
-        }
-        if (player.megaCredits < 7) {
-            throw "Don't have 7 mega credit to spend";
         }
         player.megaCredits -= 7;
         player.steelProduction++;

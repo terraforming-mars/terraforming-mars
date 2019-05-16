@@ -7,12 +7,12 @@ import { Game } from "../../src/Game";
 import { TileType } from "../../src/TileType";
 
 describe("IndustrialCenter", function () {
-    it("Should throw", function () {
+    it("Can't play or act", function () {
         const card = new IndustrialCenter();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.action(player, game); }).to.throw("Don't have 7 mega credit to spend");
-        expect(function () { card.play(player, game); }).to.throw("No cities in play");
+        expect(card.canAct(player)).to.eq(false);
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should action", function () {
         const card = new IndustrialCenter();

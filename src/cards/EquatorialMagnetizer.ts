@@ -3,9 +3,10 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 
-export class EquatorialMagnetizer implements IProjectCard {
+export class EquatorialMagnetizer implements IActionCard, IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Equatorial Magnetizer";
@@ -19,10 +20,10 @@ export class EquatorialMagnetizer implements IProjectCard {
     public play(_player: Player, _game: Game) {
         return undefined;
     }
+    public canAct(player: Player): boolean {
+        return player.energyProduction >= 1;
+    }
     public action(player: Player, _game: Game) {
-        if (player.energyProduction < 1) {
-            throw "Need energy production";
-        }
         player.energyProduction--;
         player.terraformRating++;
         return undefined;

@@ -32,19 +32,16 @@ describe("ElectroCatapult", function () {
     it("Should act", function () {
         const card = new ElectroCatapult();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        const action = card.action(player, game);
-        expect(action).not.to.eq(undefined);
-        expect(action instanceof OrOptions).to.eq(true);
-        expect(action.options.length).to.eq(2);
-        expect(function () { action.options[1].cb(); }).to.throw("Need steel to spend");
-        expect(function () { action.options[0].cb(); }).to.throw("Need plant to spend");
         player.plants = 1;
         player.steel = 1;
-        action.options[0].cb();
+        const action = card.action(player);
+        expect(action).not.to.eq(undefined);
+        expect(action instanceof OrOptions).to.eq(true);
+        expect(action!.options.length).to.eq(2);
+        action!.options[0].cb();
         expect(player.plants).to.eq(0);
         expect(player.megaCredits).to.eq(7);
-        action.options[1].cb();
+        action!.options[1].cb();
         expect(player.steel).to.eq(0);
         expect(player.megaCredits).to.eq(14);
     });

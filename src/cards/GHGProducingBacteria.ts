@@ -1,4 +1,5 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -7,7 +8,7 @@ import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
 
-export class GHGProducingBacteria implements IProjectCard {
+export class GHGProducingBacteria implements IActionCard, IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.MICROBES];
     public name: string = "GHG Producing Bacteria";
@@ -21,6 +22,9 @@ export class GHGProducingBacteria implements IProjectCard {
     }
     public play() {
         return undefined;
+    }
+    public canAct(): boolean {
+        return true;
     }
     public action(player: Player, game: Game) {
         if (this.microbes > 1) {

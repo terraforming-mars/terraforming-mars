@@ -1,4 +1,5 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -7,7 +8,7 @@ import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
 
-export class ElectroCatapult implements IProjectCard {
+export class ElectroCatapult implements IActionCard, IProjectCard {
     public cost: number = 17;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Electro Catapult";
@@ -18,30 +19,33 @@ export class ElectroCatapult implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         return player.energyProduction >= 1 && game.getOxygenLevel() <= 8 + player.requirementsBonus;
     }
-    public action(player: Player, _game: Game) {
-        return new OrOptions(
-            new SelectOption(this.name, "Spend 1 plant", () => {
-                if (player.plants < 1) {
-                    throw "Need plant to spend";
-                }
-                player.plants--;
-                player.megaCredits += 7;
-                return undefined;
-            }),
-            new SelectOption(this.name, "Spend 1 steel", () => {
-                if (player.steel < 1) {
-                    throw "Need steel to spend";
-                }
-                player.steel--;
-                player.megaCredits += 7;
-                return undefined;
-            })
-        );
+    public canAct(player: Player): boolean {
+        return player.plants > 0 || player.steel > 0;
+    }
+    public action(player: Player) {
+        if (player.plants > 0 && player.steel > 0) {
+            return new OrOptions(
+                new SelectOption(this.name, "Spend 1 plant", () => {
+                    player.plants--;
+                    player.megaCredits += 7;
+                    return undefined;
+                }),
+                new SelectOption(this.name, "Spend 1 steel", () => {
+                    player.steel--;
+                    player.megaCredits += 7;
+                    return undefined;
+                })
+            );
+        } else if (player.plants > 0) {
+            player.plants--;
+            player.megaCredits += 7;
+        } else if (player.steel > 0) {
+            player.steel--;
+            player.megaCredits += 7;
+        }
+        return undefined;
     }
     public play(player: Player) {
-        if (player.energyProduction < 1) {
-            throw "Must have energy production";
-        }
         player.energyProduction--;
         player.victoryPoints++;
         return undefined;

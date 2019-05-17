@@ -1,4 +1,5 @@
 
+import { IActionCard } from "./ICard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
@@ -8,7 +9,7 @@ import { SelectOption } from "../inputs/SelectOption";
 import { SelectCard } from "../inputs/SelectCard";
 import { IProjectCard } from "./IProjectCard";
 
-export class ExtremeColdFungus implements IProjectCard {
+export class ExtremeColdFungus implements IActionCard, IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.MICROBES];
     public cardType: CardType = CardType.ACTIVE;
@@ -21,6 +22,9 @@ export class ExtremeColdFungus implements IProjectCard {
     }
     public play() {
         return undefined;
+    }
+    public canAct(): boolean {
+        return true;
     }
     public action(player: Player, game: Game) {
         const otherMicrobeCards = game.getOtherMicrobeCards(this);

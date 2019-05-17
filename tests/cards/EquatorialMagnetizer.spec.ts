@@ -6,11 +6,10 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 
 describe("EquatorialMagnetizer", function () {
-    it("Should throw", function () {
+    it("Can't act", function () {
         const card = new EquatorialMagnetizer();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        expect(function () { card.action(player, game); }).to.throw("Need energy production");
+        expect(card.canAct(player)).to.eq(false);
     });
     it("Should play", function () {
         const card = new EquatorialMagnetizer();

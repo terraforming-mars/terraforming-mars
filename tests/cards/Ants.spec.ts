@@ -29,9 +29,9 @@ describe("Ants", function () {
         const card = new Ants();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.action(player, game); }).to.throw("No cards to remove microbes from");
+        expect(card.canAct(player, game)).to.eq(false);
         player.playedCards.push(card);
-        expect(function () { card.action(player, game); }).to.throw("No cards to remove microbes from");
+        expect(card.canAct(player, game)).to.eq(false);
         card.microbes = 1;
         const action = card.action(player, game);
         expect(action).not.to.eq(undefined);

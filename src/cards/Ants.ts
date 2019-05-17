@@ -1,4 +1,5 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -6,7 +7,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectCard } from "../inputs/SelectCard";
 
-export class Ants implements IProjectCard {
+export class Ants implements IActionCard, IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.MICROBES];
     public name: string = "Ants";
@@ -24,7 +25,10 @@ export class Ants implements IProjectCard {
         });
         return undefined;
     }
-    public action(player: Player, game: Game) {
+    public canAct(_player: Player, game: Game): boolean {
+        return this.getAvailableCards(game).length > 0;
+    }
+    private getAvailableCards(game: Game): Array<IProjectCard> {
         const availableCards: Array<IProjectCard> = [];
         game.getPlayers().forEach((gamePlayer) => {
             gamePlayer.playedCards.forEach((playedCard) => {
@@ -33,9 +37,10 @@ export class Ants implements IProjectCard {
                 }
             });
         });
-        if (availableCards.length === 0) {
-            throw "No cards to remove microbes from";
-        }
+        return availableCards;
+    }
+    public action(player: Player, game: Game) {
+        const availableCards: Array<IProjectCard> = this.getAvailableCards(game);
         return new SelectCard(this.name, "Select card to remove microbe", availableCards, (foundCards: Array<IProjectCard>) => {
             game.getCardPlayer(foundCards[0].name).removeMicrobes(player, foundCards[0], 1);
             this.microbes++;

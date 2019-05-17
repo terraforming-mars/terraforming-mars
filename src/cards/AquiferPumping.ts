@@ -1,4 +1,5 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -10,7 +11,7 @@ import { ISpace } from "../ISpace";
 import { HowToPay } from "../inputs/HowToPay";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
 
-export class AquiferPumping implements IProjectCard {
+export class AquiferPumping implements IActionCard, IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Aquifer Pumping";
@@ -24,6 +25,9 @@ export class AquiferPumping implements IProjectCard {
         return undefined;
     }
     public actionText: string = "Spend 8 mega credits to place 1 ocean tile. STEEL MAY BE USED as if you were playing a building card.";
+    public canAct(player: Player): boolean {
+        return (player.steelValue * player.steel) + player.megaCredits + (player.canUseHeatAsMegaCredits ? player.heat : 0) >= 8;
+    }
     public action(player: Player, game: Game) {
             let howToPay: HowToPay;
             let foundSpace: ISpace;

@@ -1,4 +1,5 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -6,7 +7,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectPlayer } from "../inputs/SelectPlayer";
 
-export class Birds implements IProjectCard {
+export class Birds implements IActionCard, IProjectCard {
     public cost: number = 10;
     public tags: Array<Tags> = [Tags.ANIMAL];
     public name: string = "Birds";
@@ -30,7 +31,10 @@ export class Birds implements IProjectCard {
             return undefined;
         });
     }
-    public action(_player: Player, _game: Game) {
+    public canAct(): boolean {
+        return true;
+    }
+    public action() {
         this.animals++;
         return undefined;
     }

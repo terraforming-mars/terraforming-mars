@@ -1,11 +1,12 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 
-export class AICentral implements IProjectCard {
+export class AICentral implements IActionCard, IProjectCard {
     public cost: number = 21;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public cardType: CardType = CardType.ACTIVE;
@@ -17,20 +18,18 @@ export class AICentral implements IProjectCard {
         return player.getTagCount(Tags.SCIENCE) >= 3 && player.energyProduction >= 1;
     }
     public play(player: Player, _game: Game) {
-        if (player.getTagCount(Tags.SCIENCE) < 3) {
-            throw "Requires 3 science tags";
-        }
-        if (player.energyProduction < 1) {
-            throw "Requires energy production";
-        }
         player.energyProduction--;
         player.victoryPoints++;
         return undefined;
     }
+    public canAct(): boolean {
+        return true;
+    }
     public action(player: Player, game: Game) {
-        for (let i = 0; i < 2; i++) {
-            player.cardsInHand.push(game.dealer.dealCard());
-        }
+        player.cardsInHand.push(
+            game.dealer.dealCard(),
+            game.dealer.dealCard()
+        );
         return undefined;
     }
 }

@@ -918,13 +918,14 @@ export class Player {
             action.options.push(standardProjects.options[0]);
         }
 
+        // TODO - there needs to be available spaces for a greenery
         if (this.plants >= this.plantsNeededForGreenery) {
             action.options.push(
                 this.convertPlantsIntoGreenery(game)
             );
         }
 
-        if (this.heat >= constants.HEAT_FOR_TEMPERATURE) {
+        if (this.heat >= constants.HEAT_FOR_TEMPERATURE && game.getTemperature() + 2 <= constants.MAX_TEMPERATURE) {
             action.options.push(
                 this.convertHeatIntoTemperature(game)
             );

@@ -6,6 +6,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { Tardigrades } from "../../src/cards/Tardigrades";
 import { OrOptions } from "../../src/inputs/OrOptions";
+import { Ants } from "../../src/cards/Ants";
 
 describe("ExtremeColdFungus", function () {
     it("Can't play", function () {
@@ -27,14 +28,15 @@ describe("ExtremeColdFungus", function () {
         const card = new ExtremeColdFungus();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
+        player.playedCards.push(new Ants());
         const action = card.action(player, game);
         expect(action).not.to.eq(undefined);
         expect(action instanceof OrOptions).to.eq(true);
-        expect(action.options.length).to.eq(2);
+        expect(action!.options.length).to.eq(2);
         const tardigrades = new Tardigrades();
-        action.options[1].cb([tardigrades]);
+        action!.options[1].cb([tardigrades]);
         expect(tardigrades.microbes).to.eq(2);
-        action.options[0].cb();
+        action!.options[0].cb();
         expect(player.plants).to.eq(1);
     });
 });

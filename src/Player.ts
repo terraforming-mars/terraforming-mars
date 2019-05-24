@@ -392,7 +392,7 @@ export class Player {
         let selectedCard: IProjectCard;
         let payMethod: HowToPay;
 
-        return new AndOptions(
+        const result = new AndOptions(
             () => {
 
                 const cardCost: number = this.getCardCost(selectedCard);
@@ -466,7 +466,7 @@ export class Player {
                 whenDone();
                 return undefined;
             },
-            new SelectCard("Play a project card", this.getPlayableCards(game), (foundCards: Array<IProjectCard>) => {
+            new SelectCard("Select which card to play", this.getPlayableCards(game), (foundCards: Array<IProjectCard>) => {
                 selectedCard = foundCards[0];
                 return undefined;
             }),
@@ -490,6 +490,8 @@ export class Player {
                 return undefined;
             })
         );
+        result.title = "Play a project card";
+        return result;
     }
 
     private playActionCard(game: Game): PlayerInput {

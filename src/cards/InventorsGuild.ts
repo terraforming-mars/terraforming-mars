@@ -31,7 +31,7 @@ export class InventorsGuild implements IActionCard, IProjectCard {
         if (player.canAfford(3)) {
             if (player.canUseHeatAsMegaCredits && player.heat > 0) {
                 return new OrOptions(
-                    new SelectHowToPay(this.name, "Buy card " + topCard.name, false, false, true, (htp) => {
+                    new SelectHowToPay("Buy card " + topCard.name, false, false, true, (htp) => {
                         if (htp.heat + htp.megaCredits < 3) {
                             game.dealer.discard(topCard);
                             throw "Can not afford to buy card";
@@ -41,14 +41,14 @@ export class InventorsGuild implements IActionCard, IProjectCard {
                         player.cardsInHand.push(topCard);
                         return undefined;
                     }),
-                    new SelectOption(this.name, "Discard it", () => {
+                    new SelectOption("Discard " + topCard.name, () => {
                         game.dealer.discard(topCard);
                         return undefined;
                     })
                 );
             }
             return new OrOptions(
-                new SelectOption(this.name, "Buy card " + topCard.name, () => {
+                new SelectOption("Buy card " + topCard.name, () => {
                     if (player.megaCredits < 3) {
                         game.dealer.discard(topCard);
                         throw "Can not afford to buy card";
@@ -57,7 +57,7 @@ export class InventorsGuild implements IActionCard, IProjectCard {
                     player.cardsInHand.push(topCard);
                     return undefined;
                 }),
-                new SelectOption(this.name, "Discard it", () => {
+                new SelectOption("Discard " + topCard.name, () => {
                     game.dealer.discard(topCard);
                     return undefined;
                 })

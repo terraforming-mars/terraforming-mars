@@ -1,4 +1,5 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -6,7 +7,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
 
-export class UndergroundDetonations implements IProjectCard {
+export class UndergroundDetonations implements IActionCard, IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Underground Detonations";
@@ -17,12 +18,12 @@ export class UndergroundDetonations implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
+    public canAct(player: Player): boolean {
+        return player.canAfford(10);
+    }
     public action(player: Player, _game: Game) {
         if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-            if (player.heat + player.megaCredits < 10) {
-                throw "Must have 10 mega credits or heat to spend";
-            }
-            return new SelectHowToPay(this.name, "How to pay", false, false, true, (htp) => {
+            return new SelectHowToPay("Select how to pay for action", false, false, true, (htp) => {
                 if (htp.heat + htp.megaCredits < 10) {
                     throw "Need to spend 10";
                 }
@@ -31,9 +32,6 @@ export class UndergroundDetonations implements IProjectCard {
                 player.heatProduction += 2;
                 return undefined;
             });
-        }
-        if (player.megaCredits < 10) {
-            throw "Must have 10 mega credits to spend";
         }
         player.megaCredits -= 10;
         player.heatProduction += 2;

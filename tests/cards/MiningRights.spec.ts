@@ -18,7 +18,7 @@ describe("MiningRights", function () {
                 game.addTile(player, land.spaceType, land, { tileType: TileType.SPECIAL });
             }
         }
-        expect(function () { card.play(player, game); }).to.throw("No tiles available with placement bonus");
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new MiningRights();

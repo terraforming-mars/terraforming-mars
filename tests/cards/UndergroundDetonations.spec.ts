@@ -9,8 +9,7 @@ describe("UndergroundDetonations", function () {
     it("Should throw", function () {
         const card = new UndergroundDetonations();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        expect(function () { card.action(player, game); }).to.throw("Must have 10 mega credits to spend");
+        expect(card.canAct(player)).to.eq(false);
     });
     it("Should play", function () {
         const card = new UndergroundDetonations();

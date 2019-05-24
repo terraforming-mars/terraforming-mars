@@ -15,5 +15,4 @@ export class OrOptions implements PlayerInput {
     ) {
         this.options = options;
     }
-    public message: string = "";
 }

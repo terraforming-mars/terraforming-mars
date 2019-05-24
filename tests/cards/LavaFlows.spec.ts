@@ -9,7 +9,7 @@ import { SpaceName } from "../../src/SpaceName";
 import { SpaceType } from "../../src/SpaceType";
 
 describe("LavaFlows", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new LavaFlows();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
@@ -17,7 +17,7 @@ describe("LavaFlows", function () {
         const anotherPlayer = new Player("test", Color.RED, false);
         game.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
         game.addTile(player, SpaceType.LAND, game.getSpace(SpaceName.ARSIA_MONS), { tileType: TileType.SPECIAL });
-        expect(function () { card.play(player, game); }).to.throw("Spaces are not available to play card"); 
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new LavaFlows();

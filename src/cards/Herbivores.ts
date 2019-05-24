@@ -18,11 +18,8 @@ export class Herbivores implements IProjectCard {
         return game.getOxygenLevel() >= 8 - player.requirementsBonus;
     }
     public play(player: Player, game: Game) {
-        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
-            if (foundPlayer.plantProduction < 1) {
-                throw "Player must have plant production";
-            }
-            foundPlayer.plantProduction--;
+        return new SelectPlayer(game.getPlayers(), "Select player to decrease plant production 1 step", (foundPlayer: Player) => {
+            foundPlayer.plantProduction = Math.max(0, foundPlayer.plantProduction - 1);
             this.animals++;
             game.addGreeneryPlacedListener((placedPlayer: Player) => {
                 if (placedPlayer === player) {

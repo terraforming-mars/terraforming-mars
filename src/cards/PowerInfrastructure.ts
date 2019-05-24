@@ -25,7 +25,7 @@ export class PowerInfrastructure implements IActionCard, IProjectCard {
         return player.energy > 0;
     }
     public action(player: Player, _game: Game) {
-        return new SelectAmount(this.name, "Select energy to spend", (amount: number) => {
+        return new SelectAmount("Select energy to spend", (amount: number) => {
             player.energy -= amount;
             player.megaCredits += amount;
             return undefined;

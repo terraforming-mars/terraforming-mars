@@ -18,7 +18,7 @@ export class PermafrostExtraction implements IProjectCard {
         return game.getTemperature() >= -8 - (2 * player.requirementsBonus);
     }
     public play(player: Player, game: Game) {
-        return new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+        return new SelectSpace("Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
             game.addOceanTile(player, space.id);
             return undefined;
         });

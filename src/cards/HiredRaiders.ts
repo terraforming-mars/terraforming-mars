@@ -23,18 +23,18 @@ export class HiredRaiders implements IProjectCard {
         let selectedPlayer: Player;
         return new AndOptions(
             () => { return undefined; },
-            new SelectPlayer(this.name, game.getPlayers(), "Select player to steal from", (foundPlayer: Player) => {
+            new SelectPlayer(game.getPlayers(), "Select player to steal from", (foundPlayer: Player) => {
                 selectedPlayer = foundPlayer;
                 return undefined;
             }),
             new OrOptions(
-                new SelectOption(this.name, "Steal up to 2 steel", () => {
+                new SelectOption("Steal up to 2 steel", () => {
                     const starting = selectedPlayer.steel;
                     selectedPlayer.steel = Math.max(0, selectedPlayer.steel - 2);
                     player.steel += starting - selectedPlayer.steel;
                     return undefined;
                 }),
-                new SelectOption(this.name, "Steal up to 3 mega credit", () => {
+                new SelectOption("Steal up to 3 mega credit", () => {
                     const starting = selectedPlayer.megaCredits;
                     selectedPlayer.megaCredits = Math.max(0, selectedPlayer.megaCredits - 3);
                     player.megaCredits += starting - selectedPlayer.megaCredits;

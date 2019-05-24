@@ -24,11 +24,11 @@ export class Comet implements IProjectCard {
             () => {
                 return game.increaseTemperature(player, 1);
             },
-            new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+            new SelectSpace("Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                 game.addOceanTile(player, space.id);
                 return undefined;
             }),
-            new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 3 plants", (foundPlayer: Player) => {
+            new SelectPlayer(game.getPlayers(), "Select player to remove up to 3 plants from", (foundPlayer: Player) => {
                 foundPlayer.removePlants(player, 3);
                 return undefined;
             })

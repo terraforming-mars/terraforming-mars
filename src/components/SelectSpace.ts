@@ -11,7 +11,6 @@ export const SelectSpace = Vue.component("select-space", {
         const playerInput: PlayerInputModel = this.playerinput as PlayerInputModel;
         const children: Array<VNode> = [];
         children.push(createElement("div", playerInput.title));
-        children.push(createElement("div", playerInput.message));
         const setOfSpaces: {[x: string]: number} = {};
         if (playerInput.availableSpaces !== undefined) {
             playerInput.availableSpaces.forEach((spaceId: string) => {

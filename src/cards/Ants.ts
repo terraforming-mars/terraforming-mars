@@ -41,7 +41,7 @@ export class Ants implements IActionCard, IProjectCard {
     }
     public action(player: Player, game: Game) {
         const availableCards: Array<IProjectCard> = this.getAvailableCards(game);
-        return new SelectCard(this.name, "Select card to remove microbe", availableCards, (foundCards: Array<IProjectCard>) => {
+        return new SelectCard("Select card to remove microbe", availableCards, (foundCards: Array<IProjectCard>) => {
             game.getCardPlayer(foundCards[0].name).removeMicrobes(player, foundCards[0], 1);
             this.microbes++;
             return undefined;

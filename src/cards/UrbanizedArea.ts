@@ -23,10 +23,7 @@ export class UrbanizedArea implements IProjectCard {
         return player.energyProduction >= 1 && this.getAvailableSpaces(player, game).length > 0;
     }
     public play(player: Player, game: Game) {
-        if (player.energyProduction < 1) {
-            throw "Must have energy production";
-        }
-        return new SelectSpace(this.name, "Select space next to at least 2 other city tiles", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
+        return new SelectSpace("Select space next to at least 2 other city tiles", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
             game.addCityTile(player, foundSpace.id);
             player.energyProduction--;
             player.megaCreditProduction += 2;

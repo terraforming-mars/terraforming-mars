@@ -18,10 +18,7 @@ export class BlackPolarDust implements IProjectCard {
         return player.megaCreditProduction >= -3;
     }
     public play(player: Player, game: Game) {
-        if (player.megaCreditProduction < -3) {
-            throw "Not enough mega credit production";
-        }
-        return new SelectSpace(this.name, "Select space for ocean", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+        return new SelectSpace("Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
             game.addOceanTile(player, space.id);
             player.megaCreditProduction -= 2;
             player.heatProduction += 3;

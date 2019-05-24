@@ -19,7 +19,7 @@ export class ProtectedValley implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-        return new SelectSpace(this.name, "Select space for greenery tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+        return new SelectSpace("Select space for greenery tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
             player.megaCreditProduction += 2;
             return game.addGreenery(player, space.id, SpaceType.OCEAN);
         });

@@ -3,7 +3,6 @@ import { PlayerInputTypes } from "../PlayerInputTypes";
 
 export interface PlayerInputModel {
     inputType: PlayerInputTypes;
-    message: string;
     title: string;
     options: Array<PlayerInputModel> | undefined;
     cards: Array<string> | undefined;

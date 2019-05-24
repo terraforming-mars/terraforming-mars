@@ -20,7 +20,7 @@ export class Fish implements IActionCard, IProjectCard {
         return game.getTemperature() >= 2 - (player.requirementsBonus * 2);
     }
     public play(player: Player, game: Game) {
-        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
+        return new SelectPlayer(game.getPlayers(), "Select player to decrease plant production 1 step", (foundPlayer: Player) => {
             foundPlayer.plantProduction = Math.max(0, foundPlayer.plantProduction - 1);
             game.addGameEndListener(() => {
                 player.victoryPoints += this.animals;

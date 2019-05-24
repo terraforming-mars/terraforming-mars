@@ -22,7 +22,7 @@ export class RestrictedArea implements IActionCard, IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-        return new SelectSpace(this.name, "Select space for tile", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
+        return new SelectSpace("Select space for tile", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
             return undefined;
         });
@@ -32,7 +32,7 @@ export class RestrictedArea implements IActionCard, IProjectCard {
     }
     public action(player: Player, game: Game) {
         if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-            return new SelectHowToPay(this.name, "How to pay", false, false, true, (htp) => {
+            return new SelectHowToPay("Select how to pay for action", false, false, true, (htp) => {
                 if (htp.heat + htp.megaCredits < 2) {
                     throw "Not enough spent";
                 }
@@ -41,9 +41,6 @@ export class RestrictedArea implements IActionCard, IProjectCard {
                 player.cardsInHand.push(game.dealer.dealCard());
                 return undefined;
             });
-        }
-        if (player.megaCredits < 2) {
-            throw "Must have 2 mega credits";
         }
         player.megaCredits -= 2;
         player.cardsInHand.push(game.dealer.dealCard());

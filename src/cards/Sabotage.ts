@@ -25,20 +25,20 @@ export class Sabotage implements IProjectCard {
             () => {
                 return undefined;
             },
-            new SelectPlayer(this.name, game.getPlayers(), "Select player to remove resources from", (selectedPlayer: Player) => {
+            new SelectPlayer(game.getPlayers(), "Select player to remove resources from", (selectedPlayer: Player) => {
                 foundPlayer = selectedPlayer;
                 return undefined;
             }),
             new OrOptions(
-                new SelectAmount(this.name, "Remove 3 titanium", (amount: number) => {
+                new SelectAmount("Remove up to 3 titanium", (amount: number) => {
                     foundPlayer.titanium = Math.max(0, foundPlayer.titanium - amount);
                     return undefined;
                 }, 3),
-                new SelectAmount(this.name, "Remove 4 steel", (amount: number) => {
+                new SelectAmount("Remove up to 4 steel", (amount: number) => {
                     foundPlayer.steel = Math.max(0, foundPlayer.steel - amount);
                     return undefined;
                 }, 4),
-                new SelectAmount(this.name, "Remove 7 mega credits", (amount: number) => {
+                new SelectAmount("Remove up to 7 mega credits", (amount: number) => {
                     foundPlayer.megaCredits = Math.max(0, foundPlayer.megaCredits - amount);
                     return undefined;
                 }, 7)

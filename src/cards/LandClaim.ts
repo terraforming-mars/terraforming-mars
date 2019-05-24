@@ -18,7 +18,7 @@ export class LandClaim implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-        return new SelectSpace(this.name, "Select space for claim", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
+        return new SelectSpace("Select space for claim", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
             foundSpace.player = player;
             return undefined;
         });

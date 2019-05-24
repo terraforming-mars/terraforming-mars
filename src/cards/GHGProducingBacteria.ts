@@ -29,11 +29,11 @@ export class GHGProducingBacteria implements IActionCard, IProjectCard {
     public action(player: Player, game: Game) {
         if (this.microbes > 1) {
             return new OrOptions(
-                new SelectOption(this.name, "Add 1 microbe", () => {
+                new SelectOption("Add 1 microbe to this card", () => {
                     this.microbes++;
                     return undefined;
                 }),
-                new SelectOption(this.name, "Remove 2 microbes to raise temperature 1 step", () => {
+                new SelectOption("Remove 2 microbes to raise temperature 1 step", () => {
                     this.microbes -= 2;
                     return game.increaseTemperature(player, 1);
                 })

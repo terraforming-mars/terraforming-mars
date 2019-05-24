@@ -8,11 +8,10 @@ import { SelectSpace } from "../../src/inputs/SelectSpace";
 import { TileType } from "../../src/TileType";
 
 describe("CorporateStronghold", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new CorporateStronghold();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Must have energy production to decrease");
+        expect(card.canPlay(player)).to.eq(false);
     });
     it("Should play", function () {
         const card = new CorporateStronghold();

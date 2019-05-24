@@ -17,13 +17,14 @@ export class BusinessContacts implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-        const availableCards: Array<IProjectCard> = [];
-        for (let i = 0; i < 4; i++) {
-            availableCards.push(game.dealer.dealCard());
-        }
-        return new SelectCard(this.name, "Select cards to keep", availableCards, (foundCards: Array<IProjectCard>) => {
-            player.cardsInHand.push(foundCards[0]);
-            player.cardsInHand.push(foundCards[1]);
+        const availableCards: Array<IProjectCard> = [
+            game.dealer.dealCard(),
+            game.dealer.dealCard(),
+            game.dealer.dealCard(),
+            game.dealer.dealCard()
+        ];
+        return new SelectCard("Select cards to keep of top 4 cards from deck", availableCards, (foundCards: Array<IProjectCard>) => {
+            player.cardsInHand.push(foundCards[0], foundCards[1]);
             availableCards.forEach((availableCard) => {
                 if (foundCards.find((foundCard) => foundCard.name === availableCard.name) === undefined) {
                     game.dealer.discard(availableCard);

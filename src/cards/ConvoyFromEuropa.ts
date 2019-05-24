@@ -18,7 +18,7 @@ export class ConvoyFromEuropa implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-        return new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+        return new SelectSpace("Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
             game.addOceanTile(player, space.id);
             player.cardsInHand.push(game.dealer.dealCard());
             return undefined;

@@ -21,7 +21,7 @@ export class Flooding implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-        return new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+        return new SelectSpace("Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
             const adjacentPlayers: Array<Player> = [];
             game.addOceanTile(player, space.id);
             game.getAdjacentSpaces(space).forEach((space) => {
@@ -31,11 +31,11 @@ export class Flooding implements IProjectCard {
             });
             if (adjacentPlayers.length > 0) {
                 return new OrOptions(
-                    new SelectPlayer(this.name, adjacentPlayers, "Select adjacent player", (selectedPlayer: Player) => {
+                    new SelectPlayer(adjacentPlayers, "Select adjacent player to remove 4 mega credits from", (selectedPlayer: Player) => {
                         selectedPlayer.megaCredits = Math.max(0, selectedPlayer.megaCredits - 4);
                         return undefined;
                     }),
-                    new SelectOption(this.name, "Don't remove mega credits from adjacent player", () => {
+                    new SelectOption("Don't remove mega credits from adjacent player", () => {
                         return undefined;
                     })
                 );

@@ -11,11 +11,10 @@ import { Decomposers } from "../../src/cards/Decomposers";
 import { SecurityFleet } from "../../src/cards/SecurityFleet";
 
 describe("CEOsFavoriteProject", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new CEOsFavoriteProject();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("No cards with resources");
+        expect(card.canPlay(player)).to.eq(false);
     });
     it("Should play", function () {
         const card = new CEOsFavoriteProject();

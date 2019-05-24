@@ -17,7 +17,7 @@ export class Asteroid implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease", (foundPlayer: Player) => {
+        return new SelectPlayer(game.getPlayers(), "Select player to remove 3 plants from", (foundPlayer: Player) => {
             foundPlayer.removePlants(player, 3);
             player.titanium += 2;
             return game.increaseTemperature(player, 1);

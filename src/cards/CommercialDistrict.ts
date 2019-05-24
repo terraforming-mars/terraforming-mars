@@ -19,10 +19,7 @@ export class CommercialDistrict implements IProjectCard {
         return player.energyProduction >= 1;
     }
     public play(player: Player, game: Game) {
-        if (player.energyProduction < 1) {
-            throw "Must have energy production";
-        }
-        return new SelectSpace(this.name, "Select space for special tile", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
+        return new SelectSpace("Select space for special tile", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
             player.energyProduction--;
             player.megaCreditProduction += 4;

@@ -17,7 +17,7 @@ export class HeatTrappers implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease heat production", (otherPlayer: Player) => {
+        return new SelectPlayer(game.getPlayers(), "Select player to decrease heat production 2 steps", (otherPlayer: Player) => {
             otherPlayer.heatProduction = Math.max(otherPlayer.heatProduction - 2, 0);
             player.energyProduction++;
             player.victoryPoints--;

@@ -7,12 +7,11 @@ import { Game } from "../../src/Game";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
 
 describe("BlackPolarDust", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new BlackPolarDust();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
         player.megaCreditProduction = -4;
-        expect(function () { card.play(player, game); }).to.throw("Not enough mega credit production");
+        expect(card.canPlay(player)).to.eq(false);
     });
     it("Should play", function () {
         const card = new BlackPolarDust();

@@ -260,7 +260,6 @@ function getWaitingFor(waitingFor: PlayerInput | undefined): PlayerInputModel | 
     }
     const result: PlayerInputModel = {
         title: waitingFor.title,
-        message: waitingFor.message,
         inputType: waitingFor.inputType,
         options: undefined,
         cards: undefined,

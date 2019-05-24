@@ -42,11 +42,11 @@ export class AquiferPumping implements IActionCard, IProjectCard {
                         game.addOceanTile(player, foundSpace.id);
                         return undefined;
                     },
-                    new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+                    new SelectSpace("Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                         foundSpace = space;
                         return undefined;
                     }),
-                    new SelectHowToPay("Select how to pay", this.name, true, false, player.canUseHeatAsMegaCredits, (htp: HowToPay) => {
+                    new SelectHowToPay("Select how to pay for action", true, false, player.canUseHeatAsMegaCredits, (htp: HowToPay) => {
                         howToPay = htp;
                         return undefined;
                     })

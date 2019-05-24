@@ -18,10 +18,7 @@ export class DomedCrater implements IProjectCard {
         return game.getOxygenLevel() <= 7 - player.requirementsBonus && player.energyProduction >= 1;
     }
     public play(player: Player, game: Game) {
-        if (player.energyProduction < 1) {
-            throw "Need energy production";
-        }
-        return new SelectSpace(this.name, "Select space for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
+        return new SelectSpace("Select space for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
             player.plants += 3;
             player.energyProduction--;

@@ -17,7 +17,7 @@ export class Insulation implements IProjectCard {
         return true;
     }
     public play(player: Player, _game: Game) {
-        return new SelectAmount(this.name, "Select amount of heat production to decrease", (amount: number) => {
+        return new SelectAmount("Select amount of heat production to decrease", (amount: number) => {
             player.heatProduction -= amount;
             player.megaCreditProduction += amount;
             return undefined;

@@ -17,11 +17,12 @@ export class InventionContest implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-        const cardsDrawn: Array<IProjectCard> = [];
-        for (let i = 0; i < 3; i++) {
-            cardsDrawn.push(game.dealer.dealCard());
-        }
-        return new SelectCard(this.name, "Select card to take into hand", cardsDrawn, (foundCards: Array<IProjectCard>) => {
+        const cardsDrawn: Array<IProjectCard> = [
+            game.dealer.dealCard(),
+            game.dealer.dealCard(),
+            game.dealer.dealCard()
+        ];
+        return new SelectCard("Select card to take into hand", cardsDrawn, (foundCards: Array<IProjectCard>) => {
             player.cardsInHand.push(foundCards[0]);
             cardsDrawn
                 .filter((c) => c !== foundCards[0])

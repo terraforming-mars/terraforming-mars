@@ -25,19 +25,17 @@ export class LargeConvoy implements IProjectCard {
     public play(player: Player, game: Game): PlayerInput {
         return new AndOptions(
             () => {
-                for (let i = 0; i < 2; i++) {
-                    player.cardsInHand.push(game.dealer.dealCard());
-                }
+                player.cardsInHand.push(game.dealer.dealCard(), game.dealer.dealCard());
                 player.victoryPoints += 2;
                 return undefined;
             },
-            new SelectSpace(this.name, "Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+            new SelectSpace("Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                 game.addOceanTile(player, space.id);
                 return undefined;
             }),
             new OrOptions(
-                new SelectOption(this.name, "Gain 5 plants", () => { player.plants += 5; return undefined; }),
-                new SelectCard(this.name, "Select card to add 4 animals", game.getOtherAnimalCards(this), (foundCards: Array<IProjectCard>) => { 
+                new SelectOption("Gain 5 plants", () => { player.plants += 5; return undefined; }),
+                new SelectCard("Select card to add 4 animals", game.getOtherAnimalCards(this), (foundCards: Array<IProjectCard>) => { 
                     foundCards[0]!.animals! += 4;
                     return undefined;
                 })

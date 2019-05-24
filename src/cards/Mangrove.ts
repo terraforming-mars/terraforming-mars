@@ -20,7 +20,7 @@ export class Mangrove implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         player.victoryPoints++;
-        return new SelectSpace(this.name, "Select ocean space for greenery", game.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
+        return new SelectSpace("Select ocean space for greenery tile", game.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
             return game.addGreenery(player, foundSpace.id, SpaceType.OCEAN);
         });
     }

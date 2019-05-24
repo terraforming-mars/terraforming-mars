@@ -17,11 +17,8 @@ export class AsteroidMiningConsortium implements IProjectCard {
         return player.titaniumProduction >= 1;
     }
     public play(player: Player, game: Game) {
-        if (player.titaniumProduction < 1) {
-            throw "Requires that you have titanium production";
-        }
         player.victoryPoints++;
-        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease", (foundPlayer: Player) => {
+        return new SelectPlayer(game.getPlayers(), "Select player to decrease titanium production", (foundPlayer: Player) => {
             foundPlayer.titaniumProduction = Math.max(0, foundPlayer.titaniumProduction - 1);
             player.titaniumProduction++;
             return undefined;

@@ -18,7 +18,7 @@ describe("ResearchOutpost", function () {
         expect(player.cardDiscounts.length).to.eq(1);
         expect(player.cardDiscounts[0](card)).to.eq(1);
     });
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new ResearchOutpost();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
@@ -26,6 +26,6 @@ describe("ResearchOutpost", function () {
         for (let i = 0; i < lands.length; i++) {
             game.addGreenery(player, lands[i].id);
         }
-        expect(function () { card.play(player, game); }).to.throw("No places available for tile");
+        expect(card.canPlay(player, game)).to.eq(false);
     });
 });

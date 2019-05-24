@@ -360,18 +360,17 @@ export class Player {
                     return undefined;
                 },
                 new SelectHowToPay(
-                    "How will you pay for cards",
-                    "Research Phase",
+                    "Select how to pay for cards",
                     false,
                     false,
                     true, (pay) => { htp = pay; return undefined; }),
-                new SelectCard("Research Phase", "Select which cards to take into hand", dealtCards, (foundCards: Array<IProjectCard>) => {
+                new SelectCard("Select which cards to take into hand", dealtCards, (foundCards: Array<IProjectCard>) => {
                     selectedCards = foundCards;
                     return undefined;
                 }, 4, 0)
             ));
         } else {
-            this.setWaitingFor(new SelectCard("Research Phase", "Select which cards to take into hand", dealtCards, (foundCards: Array<IProjectCard>) => {
+            this.setWaitingFor(new SelectCard("Select which cards to take into hand", dealtCards, (foundCards: Array<IProjectCard>) => {
                 htp.megaCredits = foundCards.length * constants.CARD_COST;
                 selectedCards = foundCards;
                 payForCards();
@@ -467,11 +466,11 @@ export class Player {
                 whenDone();
                 return undefined;
             },
-            new SelectCard("Take Action!", "Play a project card", this.getPlayableCards(game), (foundCards: Array<IProjectCard>) => {
+            new SelectCard("Play a project card", this.getPlayableCards(game), (foundCards: Array<IProjectCard>) => {
                 selectedCard = foundCards[0];
                 return undefined;
             }),
-            new SelectHowToPay("Take Action!", "How will you pay for card?", true, true, this.canUseHeatAsMegaCredits, (howToPay: HowToPay) => {
+            new SelectHowToPay("Select how to pay for card", true, true, this.canUseHeatAsMegaCredits, (howToPay: HowToPay) => {
                 payMethod = howToPay;
                 if (payMethod.steel && payMethod.steel > this.steel) {
                     throw "Not enough steel";
@@ -494,7 +493,7 @@ export class Player {
     }
 
     private playActionCard(game: Game): PlayerInput {
-        return new SelectCard("Take Action!", "Perform an action from a played card", this.getPlayableActionCards(game), (foundCards: Array<ICard>) => {
+        return new SelectCard("Perform an action from a played card", this.getPlayableActionCards(game), (foundCards: Array<ICard>) => {
             const foundCard = foundCards[0];
             const action = foundCard.action!(this, game);
             const whenDone = (err?: string) => {
@@ -522,7 +521,7 @@ export class Player {
     }
 
     private sellPatents(game: Game): PlayerInput {
-        var res = new SelectCard("Take Action!", "Sell patents", this.cardsInHand, (foundCards: Array<IProjectCard>) => {
+        var res = new SelectCard("Sell patents", this.cardsInHand, (foundCards: Array<IProjectCard>) => {
             this.payForStandardProject(StandardProjectType.SELLING_PATENTS, -foundCards.length, 0);
             foundCards.forEach((card) => {
                 for (let i = 0; i < this.cardsInHand.length; i++) {
@@ -555,14 +554,14 @@ export class Player {
             return undefined;
         };
         if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-            return new SelectHowToPay("Fund Standard Project", "Power Plant", false, false, true, (htp) => {
+            return new SelectHowToPay("Select how to pay for power plant", false, false, true, (htp) => {
                 if (htp.heat + htp.megaCredits < this.powerPlantCost) {
                     throw "Haven't spend enough for power plant";
                 }
                 return fundProject(htp.megaCredits, htp.heat);
             });
         }
-        return new SelectOption("Fund Standard Project", "Power Plant", () => {
+        return new SelectOption("Power Plant", () => {
             return fundProject(this.powerPlantCost, 0);
         });
     }
@@ -585,14 +584,14 @@ export class Player {
             return undefined;
         };
         if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-            return new SelectHowToPay("Fund Standard Project", "Asteroid", false, false, true, (htp) => {
+            return new SelectHowToPay("Select how to pay for asteroid", false, false, true, (htp) => {
                 if (htp.heat + htp.megaCredits < constants.ASTEROID_COST) {
                     throw "Haven't spend enough for asteroid";
                 }
                 return fundProject(htp.megaCredits, htp.heat);
             });
         }
-        return new SelectOption("Fund Standard Project", "Asteroid", () => {
+        return new SelectOption("Asteroid", () => {
             return fundProject(constants.ASTEROID_COST, 0);
         });
     }
@@ -610,18 +609,18 @@ export class Player {
             let ocean: ISpace;
             return new AndOptions(() => {
                 return fundProject(htp.megaCredits, htp.heat, ocean.id);
-            }, new SelectHowToPay("Fund Standard Project", "Aquifer", false, false, true, (stp: HowToPay) => {
+            }, new SelectHowToPay("How to pay for aquifer", false, false, true, (stp: HowToPay) => {
                 if (stp.heat + stp.megaCredits < constants.AQUIFER_COST) {
                     throw "Haven't spend enough for aquifer";
                 }
                 htp = stp;
                 return undefined;
-            }), new SelectSpace("Fund Standard Project", "Aquifer", game.getAvailableSpacesForOcean(this), (space: ISpace) => {
+            }), new SelectSpace("Select space for aquifer", game.getAvailableSpacesForOcean(this), (space: ISpace) => {
                 ocean = space;
                 return undefined;
             }));
         }
-        return new SelectSpace("Fund Standard Project", "Aquifer", game.getAvailableSpacesForOcean(this), (space: ISpace) => {
+        return new SelectSpace("Select space for aquifer", game.getAvailableSpacesForOcean(this), (space: ISpace) => {
             return fundProject(constants.AQUIFER_COST, 0, space.id);
         });
     }
@@ -648,15 +647,15 @@ export class Player {
             let greenery: ISpace;
             return new AndOptions(() => {
                 return fundProject(htp.megaCredits, htp.heat, greenery.id);
-            }, new SelectHowToPay("Fund Standard Project", "Greenery", false, false, true, (stp) => {
+            }, new SelectHowToPay("Select how to pay for greenery", false, false, true, (stp) => {
                 htp = stp;
                 return undefined;
-            }), new SelectSpace("Fund Standard Project", "Greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
+            }), new SelectSpace("Select space for greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
                 greenery = space;
                 return undefined;
             }));
         }
-        return new SelectSpace("Fund Standard Project", "Greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
+        return new SelectSpace("Select space for greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
             return fundProject(constants.GREENERY_COST, 0, space.id);
         });
     }
@@ -677,23 +676,23 @@ export class Player {
                 () => {
                     return fundProject(htp.megaCredits, htp.heat, city.id);
                 },
-                new SelectHowToPay("Fund Standard Project", "City", false, false, true, (stp) => {
+                new SelectHowToPay("Select how to pay for city", false, false, true, (stp) => {
                     htp = stp;
                     return undefined;
                 }),
-                new SelectSpace("Fund Standard Project", "City", game.getAvailableSpacesOnLand(this), (space: ISpace) => {
+                new SelectSpace("Select space for city", game.getAvailableSpacesOnLand(this), (space: ISpace) => {
                     city = space;
                     return undefined;
                 })
             );
         }
-        return new SelectSpace("Fund Standard Project", "City", game.getAvailableSpacesOnLand(this), (space: ISpace) => {
+        return new SelectSpace("Select space for city", game.getAvailableSpacesOnLand(this), (space: ISpace) => {
             return fundProject(constants.CITY_COST, 0, space.id);
         });
     }
 
     private convertPlantsIntoGreenery(game: Game): PlayerInput {
-        return new SelectSpace("Take Action!", "Convert " + this.plantsNeededForGreenery + " plants into greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
+        return new SelectSpace("Convert " + this.plantsNeededForGreenery + " plants into greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
             const action = game.addGreenery(this, space.id);
             const whenDone = (err?: string) => {
                 if (!err) {
@@ -712,7 +711,7 @@ export class Player {
     }
 
     private convertHeatIntoTemperature(game: Game): PlayerInput {
-        return new SelectOption("Take Action!", "Convert 8 heat into temperature", () => {
+        return new SelectOption("Convert 8 heat into temperature", () => {
             const action = game.increaseTemperature(this, 1);
             const whenDone = (err?: string) => {
                 if (!err) {
@@ -744,14 +743,14 @@ export class Player {
             return undefined;
         };
         if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-            return new SelectHowToPay("Take Action!", "Claim Milestone", false, false, true, (stp) => {
+            return new SelectHowToPay("Select how to pay " + milestone, false, false, true, (stp) => {
                 if (stp.megaCredits + stp.heat < 8) {
                     throw "Did not spend enough to claim milestone";
                 }
                 return claimer(stp.megaCredits, stp.heat);
             });
         }
-        return new SelectOption("Take Action!", "Claim Milestone: " + milestone, () => {
+        return new SelectOption(milestone, () => {
             return claimer(8, 0);
         });
     }
@@ -767,17 +766,17 @@ export class Player {
             return undefined;
         };
         if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-            return new SelectHowToPay("Take Action!", "Fund Award: " + upperCaseAward, false, false, true, (htp: HowToPay) => {
+            return new SelectHowToPay("Select how to pay for " + upperCaseAward, false, false, true, (htp: HowToPay) => {
                 return funder(htp.megaCredits, htp.heat);
             });
         }
-        return new SelectOption("Take Action!", "Fund Award: " + upperCaseAward, () => {
+        return new SelectOption(upperCaseAward, () => {
             return funder(game.awardFundingCost, 0);
         });
     }
 
     private passOption(game: Game): PlayerInput {
-        return new SelectOption("Take Action!", "Pass", () => {
+        return new SelectOption("Pass", () => {
             game.playerHasPassed(this);
             return undefined;
         });
@@ -788,13 +787,13 @@ export class Player {
             const action: OrOptions = new OrOptions();
             action.title = "Place any final greenery from plants";
             action.options.push(
-                new SelectOption("Don't or can't place a greenery", "Pass", () => {
+                new SelectOption("Don't place a greenery", () => {
                     game.playerIsDoneWithGame(this);
                     return undefined;
                 })
             );
             action.options.push(
-                new SelectSpace("Place final greenery", "Select space for greenery", game.getAvailableSpacesForGreenery(this), (space) => {
+                new SelectSpace("Select space for greenery", game.getAvailableSpacesForGreenery(this), (space) => {
                     game.addGreenery(this, space.id);
                     this.takeActionForFinalGreenery(game);
                     return undefined;
@@ -876,8 +875,7 @@ export class Player {
 
         // STANDARD PROJECTS
         const standardProjects = new OrOptions();
-        standardProjects.title = "Take action!";
-        standardProjects.message = "Pay for standard project";
+        standardProjects.title = "Pay for a standard project";
 
         if (this.canAfford(this.powerPlantCost)) {
             standardProjects.options.push(
@@ -933,8 +931,7 @@ export class Player {
 
         if (this.canAfford(8) && !game.allMilestonesClaimed()) {
             const remainingMilestones = new OrOptions();
-            remainingMilestones.title = "Take action!";
-            remainingMilestones.message = "Select milestone to claim";
+            remainingMilestones.title = "Select a milestone to claim";
 
             if (!game.milestoneClaimed(Milestone.TERRAFORMER) && this.terraformRating >= 35) {
                 remainingMilestones.options.push(
@@ -970,8 +967,7 @@ export class Player {
 
         if (this.canAfford(game.awardFundingCost) && !game.allAwardsFunded()) {
             const remainingAwards = new OrOptions();
-            remainingAwards.title = "Take action!";
-            remainingAwards.message = "Fund an award";
+            remainingAwards.title = "Select an award to fund";
             remainingAwards.options = [Award.LANDLORD, Award.BANKER, Award.SCIENTIST, Award.THERMALIST, Award.MINER]
                 .filter((award: Award) => game.hasBeenFunded(award) === false)
                 .map((award: Award) => this.fundAward(award, game));

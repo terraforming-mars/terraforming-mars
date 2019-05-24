@@ -146,11 +146,11 @@ export class Game {
                 this.playerIsFinishedWithResearchPhase(player);
                 return undefined;
             },
-            new SelectCard<CorporationCard>("Initial Research Phase", "Select corporation", this.dealer.getCorporationCards(2), (foundCards: Array<CorporationCard>) => {
+            new SelectCard<CorporationCard>("Select corporation", this.dealer.getCorporationCards(2), (foundCards: Array<CorporationCard>) => {
                 player.corporationCard = foundCards[0];
                 return undefined;
             }),
-            new SelectCard("Initial Research Phase", "Select initial cards to buy", dealtCards, (foundCards: Array<IProjectCard>) => {
+            new SelectCard("Select initial cards to buy", dealtCards, (foundCards: Array<IProjectCard>) => {
                 // Pay for cards
                 player.megaCredits = player.corporationCard!.startingMegaCredits - (constants.CARD_COST * foundCards.length);
                 for (let foundCard of foundCards) {
@@ -431,7 +431,7 @@ export class Game {
         ) {
             player.heatProduction++;
         } else if (this.temperature === 0 || ((steps === 2 || steps === 3) && this.temperature === 2) || (steps === 3 && this.temperature === 4)) {
-            return new SelectSpace("Temperature Bonus", "Select space for ocean", this.getAvailableSpacesForOcean(player), (space: ISpace) => {
+            return new SelectSpace("Select space for ocean from temperature increase", this.getAvailableSpacesForOcean(player), (space: ISpace) => {
                 this.addOceanTile(player, space.id);
                 return undefined;
             });

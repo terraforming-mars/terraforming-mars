@@ -18,7 +18,7 @@ describe("Capital", function () {
         for (let i = 0; i < oceanSpaces.length; i++) {
             oceanSpaces[i].tile = { tileType: TileType.OCEAN };
         }
-        expect(function () { card.play(player, game); }).to.throw("Requires 2 energy production.");
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new Capital();

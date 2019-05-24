@@ -17,17 +17,17 @@ describe("RoboticWorkforce", function () {
         const card = new RoboticWorkforce();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("No builder cards to duplicate");
+        expect(card.play(player, game)).to.eq(undefined);
         player.playedCards.push(new BiomassCombustors(), card);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
-        expect(function () { action.cb([card]); }).to.throw("Production not found for selected card");
-        const selectPlayer = action.cb([player.playedCards[0]]) as SelectPlayer;
+        expect(function () { action!.cb([card]); }).to.throw("Production not found for selected card");
+        const selectPlayer = action!.cb([player.playedCards[0]]) as SelectPlayer;
         expect(function () { selectPlayer.cb(player); }).to.throw("Player must have plant production");
-        expect(function () { action.cb([new FuelFactory()]); }).to.throw("not enough energy production");
-        expect(function () { action.cb([new TitaniumMine()]); }).to.throw("not enough titanium production");
-        expect(function () { action.cb([new FoodFactory()]); }).to.throw("not enough plant production");
-        expect(function () { action.cb([new HeatTrappers()]); }).to.throw("not enough heat production");
+        expect(function () { action!.cb([new FuelFactory()]); }).to.throw("not enough energy production");
+        expect(function () { action!.cb([new TitaniumMine()]); }).to.throw("not enough titanium production");
+        expect(function () { action!.cb([new FoodFactory()]); }).to.throw("not enough plant production");
+        expect(function () { action!.cb([new HeatTrappers()]); }).to.throw("not enough heat production");
     });
     it("Should play with input", function () {
         const card = new RoboticWorkforce();
@@ -36,7 +36,7 @@ describe("RoboticWorkforce", function () {
         player.playedCards.push(new BiomassCombustors());
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
-        const selectPlayer = action.cb([player.playedCards[0]]) as SelectPlayer;
+        const selectPlayer = action!.cb([player.playedCards[0]]) as SelectPlayer;
         player.plantProduction = 1;
         selectPlayer.cb(player);
         expect(player.plantProduction).to.eq(0);
@@ -49,7 +49,7 @@ describe("RoboticWorkforce", function () {
         player.playedCards.push(new NoctisFarming());
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
-        action.cb([new NoctisFarming()]);
+        action!.cb([new NoctisFarming()]);
         expect(player.megaCreditProduction).to.eq(1);
     });
 });

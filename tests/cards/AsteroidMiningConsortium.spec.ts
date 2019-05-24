@@ -10,8 +10,7 @@ describe("AsteroidMiningConsortium", function () {
     it("Should throw", function () {
         const card = new AsteroidMiningConsortium();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Requires that you have titanium production");
+        expect(card.canPlay(player)).to.eq(false);
     });
     it("Should play", function () {
         const card = new AsteroidMiningConsortium();

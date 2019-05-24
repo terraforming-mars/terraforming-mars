@@ -27,8 +27,8 @@ export class OlympusConference implements IProjectCard {
             if (playedCard.tags.filter((tag) => tag === Tags.SCIENCE).length > 0) {
                 if (this.scienceResources > 0) {
                     return new OrOptions(
-                        new SelectOption(this.name, "Add a science resource to this card", gainAScienceResource),
-                        new SelectOption(this.name, "Remove a science resource from this card to draw a card", () => {
+                        new SelectOption("Add a science resource to this card", gainAScienceResource),
+                        new SelectOption("Remove a science resource from this card to draw a card", () => {
                             this.scienceResources--;
                             player.cardsInHand.push(game.dealer.dealCard());
                             return undefined;

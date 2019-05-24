@@ -20,7 +20,7 @@ export class ArtificialLake implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         player.victoryPoints++;
-        return new SelectSpace(this.name, "Select a land space to place an ocean", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
+        return new SelectSpace("Select a land space to place an ocean", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
             game.addOceanTile(player, foundSpace.id, SpaceType.LAND);
             return undefined;
         });

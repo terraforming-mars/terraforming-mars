@@ -7,12 +7,12 @@ import { Game } from "../../src/Game";
 import { Ants } from "../../src/cards/Ants";
 
 describe("SymbioticFungus", function () {
-    it("Should throw", function () {
+    it("Can't act or play", function () {
         const card = new SymbioticFungus();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
         expect(card.canPlay(player, game)).to.eq(false);
-        expect(function () { card.action(player, game); }).to.throw("No cards available");
+        expect(card.canAct(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new SymbioticFungus();

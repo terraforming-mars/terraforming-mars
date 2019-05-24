@@ -7,11 +7,10 @@ import { Game } from "../../src/Game";
 import { TileType } from "../../src/TileType";
 
 describe("RestrictedArea", function () {
-    it("Should throw", function () {
+    it("Can't act", function () {
         const card = new RestrictedArea();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        expect(function () { card.action(player, game); }).to.throw("Must have 2 mega credits");
+        expect(card.canAct(player)).to.eq(false);
     });
     it("Should play", function () {
         const card = new RestrictedArea();

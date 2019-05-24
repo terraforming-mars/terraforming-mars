@@ -19,9 +19,6 @@ export class LocalHeatTrapping implements IProjectCard {
         return player.heat >= 5;
     }
     public play(player: Player, game: Game) {
-        if (player.heat < 5) {
-            throw "Not enough heat";
-        }
         player.heat -= 5;
         const otherAnimalCards: Array<IProjectCard> = game.getOtherAnimalCards(this);
         const gain4Plants = function () {
@@ -33,8 +30,8 @@ export class LocalHeatTrapping implements IProjectCard {
             return undefined;
         }
         return new OrOptions(
-            new SelectOption(this.name, "Gain 4 plants", gain4Plants),
-            new SelectCard(this.name, "Select card to add 2 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => {
+            new SelectOption("Gain 4 plants", gain4Plants),
+            new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => {
                 player.addAnimalsToCard(foundCards[0], 2);
                 return undefined;
             })

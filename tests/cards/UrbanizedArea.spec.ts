@@ -8,11 +8,11 @@ import { SpaceName } from "../../src/SpaceName";
 import { SpaceType } from "../../src/SpaceType";
 
 describe("UrbanizedArea", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new UrbanizedArea();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Must have energy production");
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new UrbanizedArea();

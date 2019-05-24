@@ -18,10 +18,7 @@ export class CorporateStronghold implements IProjectCard {
         return player.energyProduction >= 1;
     }
     public play(player: Player, game: Game) {
-        if (player.energyProduction < 1) {
-            throw "Must have energy production to decrease";
-        }
-        return new SelectSpace(this.name, "Select space for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
+        return new SelectSpace("Select space for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
             player.energyProduction--;
             player.megaCreditProduction += 3;

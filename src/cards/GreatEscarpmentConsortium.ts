@@ -17,10 +17,7 @@ export class GreatEscarpmentConsortium implements IProjectCard {
         return player.steelProduction > 0;
     }
     public play(player: Player, game: Game) {
-        if (player.steelProduction < 1) {
-            throw "Requires that you have steel production.";
-        }
-        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease steel production", (foundPlayer: Player) => {
+        return new SelectPlayer(game.getPlayers(), "Select player to decrease steel production 1 step", (foundPlayer: Player) => {
             foundPlayer.steelProduction = Math.max(0, foundPlayer.steelProduction - 1);
             player.steelProduction++;
             return undefined;

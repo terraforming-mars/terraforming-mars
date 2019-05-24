@@ -33,11 +33,11 @@ export class NitriteReducingBacteria implements IActionCard, IProjectCard {
             return undefined;
         }
         return new OrOptions(
-            new SelectOption(this.name, "Add 1 microbe to this card", () => {
+            new SelectOption("Add 1 microbe to this card", () => {
                 this.microbes++;
                 return undefined;
             }),
-            new SelectOption(this.name, "Remove 3 microbes to increase your terraform rating 1 step", () => {
+            new SelectOption("Remove 3 microbes to increase your terraform rating 1 step", () => {
                 this.microbes -= 3;
                 player.terraformRating++;
                 return undefined;

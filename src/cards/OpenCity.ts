@@ -18,7 +18,7 @@ export class OpenCity implements IProjectCard {
         return game.getOxygenLevel() >= 12 - player.requirementsBonus && player.energyProduction >= 1;
     }
     public play(player: Player, game: Game) {
-        return new SelectSpace(this.name, "Select space for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
+        return new SelectSpace("Select space for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
             player.energyProduction--;
             player.megaCreditProduction += 4;

@@ -7,11 +7,10 @@ import { Game } from "../../src/Game";
 import { Pets } from "../../src/cards/Pets";
 
 describe("LocalHeatTrapping", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new LocalHeatTrapping();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Not enough heat");
+        expect(card.canPlay(player)).to.eq(false);
     });
     it("Should play", function () {
         const card = new LocalHeatTrapping();

@@ -20,7 +20,7 @@ export class Birds implements IActionCard, IProjectCard {
         return game.getOxygenLevel() >= 13 - player.requirementsBonus;
     }
     public play(player: Player, game: Game) {
-        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease plant production", (foundPlayer: Player) => {
+        return new SelectPlayer(game.getPlayers(), "Select player to decrease plant production 2 steps", (foundPlayer: Player) => {
             if (foundPlayer.plantProduction < 2) {
                 throw "Player needs at least 2 plant production";
             }

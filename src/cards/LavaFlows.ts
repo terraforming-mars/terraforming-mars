@@ -26,10 +26,7 @@ export class LavaFlows implements IProjectCard {
         return this.getAvailableSpaces(player, game).length > 0;
     }
     public play(player: Player, game: Game) {
-        if (this.getAvailableSpaces(player, game).length === 0) {
-            throw "Spaces are not available to play card";
-        }
-        return new SelectSpace(this.name, "Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons", this.getAvailableSpaces(player, game), (space: ISpace) => {
+        return new SelectSpace("Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons", this.getAvailableSpaces(player, game), (space: ISpace) => {
             game.addTile(player, SpaceType.LAND, space, { tileType: TileType.SPECIAL });
             return game.increaseTemperature(player, 2);
         });

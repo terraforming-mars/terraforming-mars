@@ -26,10 +26,7 @@ export class ResearchOutpost implements IProjectCard {
         return this.getAvailableSpaces(player, game).length > 0;
     }
     public play(player: Player, game: Game): PlayerInput {
-        if (this.getAvailableSpaces(player, game).length === 0) {
-            throw "No places available for tile";
-        }
-        return new SelectSpace(this.name, "Select place next to no other tile for city", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
+        return new SelectSpace("Select place next to no other tile for city", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
             game.addCityTile(player, foundSpace.id);
             player.addCardDiscount(() => 1);
             return undefined;

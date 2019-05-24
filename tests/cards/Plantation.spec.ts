@@ -7,11 +7,10 @@ import { Game } from "../../src/Game";
 import { InventorsGuild } from "../../src/cards/InventorsGuild";
 
 describe("Plantation", function () {
-    it("Should throw", function () {
+    it("Can't play", function () {
         const card = new Plantation();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        expect(function () { card.play(player, game); }).to.throw("Requires 2 science tags to play");
+        expect(card.canPlay(player)).to.eq(false);
     });
     it("Should play", function () {
         const card = new Plantation();

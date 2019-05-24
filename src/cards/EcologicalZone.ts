@@ -28,10 +28,7 @@ export class EcologicalZone implements IProjectCard {
         return this.hasGreeneryTile(player, game);
     }
     public play(player: Player, game: Game) {
-        if (!this.hasGreeneryTile(player, game)) {
-            throw "Requires that you have a greenery tile";
-        }
-        return new SelectSpace(this.name, "Select space next to greenery for special tile", this.getAvailableSpaces(player, game), (requestedSpace: ISpace) => {
+        return new SelectSpace("Select space next to greenery for special tile", this.getAvailableSpaces(player, game), (requestedSpace: ISpace) => {
             game.addTile(player, requestedSpace.spaceType, requestedSpace, { tileType: TileType.SPECIAL });
             player.addCardPlayedHandler((card: IProjectCard) => {
                 if (card.tags.indexOf(Tags.ANIMAL) !== -1 ||

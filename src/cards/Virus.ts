@@ -22,7 +22,7 @@ export class Virus implements IProjectCard {
     public play(player: Player, game: Game): PlayerInput | undefined {
         const cards = game.getPlayedCardsWithAnimals();
         const remove5Plants = () => {
-            return new SelectPlayer(this.name, game.getPlayers(), "Select player to remove 5 plants", (foundPlayer: Player) => {
+            return new SelectPlayer(game.getPlayers(), "Select player to remove 5 plants from", (foundPlayer: Player) => {
                 foundPlayer.removePlants(player, 5);
                 return undefined;
             });
@@ -31,7 +31,7 @@ export class Virus implements IProjectCard {
             return remove5Plants();
         }
         return new OrOptions(
-            new SelectCard(this.name, "Select card to remove 2 animals", cards, (foundCard: Array<IProjectCard>) => {
+            new SelectCard("Select card to remove 2 animals from", cards, (foundCard: Array<IProjectCard>) => {
                 game.getCardPlayer(foundCard[0].name).removeAnimals(player, foundCard[0], 2);
                 return undefined;
             }),

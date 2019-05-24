@@ -23,11 +23,11 @@ export class ViralEnhancers implements IProjectCard {
             if (card.tags.indexOf(Tags.ANIMAL) !== -1 || card.tags.indexOf(Tags.PLANT) !== -1 || card.tags.indexOf(Tags.MICROBES) !== -1) {
                 if (player.cardHasResource(card)) {
                     return new OrOptions(
-                        new SelectOption("Add resource to card", "Add resource to " + card.name, () => {
+                        new SelectOption("Add resource to card " + card.name, () => {
                             player.addResourceTo(card);
                             return undefined;
                         }),
-                        new SelectOption("Gain 1 plant", "Gain plant", () => {
+                        new SelectOption("Gain 1 plant", () => {
                             player.plants++;
                             return undefined;
                         })

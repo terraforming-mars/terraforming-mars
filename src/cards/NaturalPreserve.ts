@@ -23,10 +23,7 @@ export class NaturalPreserve implements IProjectCard {
         return game.getOxygenLevel() <= 4 + player.requirementsBonus && this.getAvailableSpaces(player, game).length > 0;
     }
     public play(player: Player, game: Game) {
-        if (this.getAvailableSpaces(player, game).length === 0) {
-            throw "No spaces for tile";
-        }
-        return new SelectSpace(this.name, "Select space for special tile next to no other tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
+        return new SelectSpace("Select space for special tile next to no other tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
             player.megaCreditProduction++;
             player.victoryPoints++;

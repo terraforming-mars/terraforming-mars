@@ -26,7 +26,7 @@ export class IndustrialCenter implements IActionCard, IProjectCard {
         return this.getAvailableSpaces(player, game).length > 0;
     }
     public play(player: Player, game: Game) {
-        return new SelectSpace(this.name, "Select space adjacent to a city tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
+        return new SelectSpace("Select space adjacent to a city tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
             return undefined;
         });
@@ -36,7 +36,7 @@ export class IndustrialCenter implements IActionCard, IProjectCard {
     }
     public action(player: Player, _game: Game) {
         if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-            return new SelectHowToPay(this.name, "Select how to pay for action", false, false, true, (htp) => {
+            return new SelectHowToPay("Select how to pay for action", false, false, true, (htp) => {
                 if (htp.megaCredits + htp.heat < 7) {
                     throw "Need to spend 7";
                 }

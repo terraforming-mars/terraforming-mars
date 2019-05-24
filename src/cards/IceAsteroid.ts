@@ -23,11 +23,12 @@ export class IceAsteroid implements IProjectCard {
             () => {
                 return undefined;
             },
-            new SelectSpace(this.name, "Select first ocean space", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+            // TODO - Need to pick tiles in sequence to avoid duplication
+            new SelectSpace("Select space for first ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                 game.addOceanTile(player, space.id);
                 return undefined;
             }),
-            new SelectSpace(this.name, "Select second ocean space", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+            new SelectSpace("Select space for second ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                 game.addOceanTile(player, space.id);
                 return undefined;
             })

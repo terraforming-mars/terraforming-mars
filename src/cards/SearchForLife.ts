@@ -40,7 +40,7 @@ export class SearchForLife implements IActionCard, IProjectCard {
             return undefined;
         };
         if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-            return new SelectHowToPay(this.name, "How to pay", false, false, true, (htp) => {
+            return new SelectHowToPay("Select how to pay for action", false, false, true, (htp) => {
                 if (htp.heat + htp.megaCredits < 1) {
                     throw "Need to spend at least one";
                 }

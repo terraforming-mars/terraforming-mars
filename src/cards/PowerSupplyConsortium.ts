@@ -17,10 +17,7 @@ export class PowerSupplyConsortium implements IProjectCard {
         return player.getTagCount(Tags.ENERGY) >= 2;
     }
     public play(player: Player, game: Game) {
-        if (player.getTagCount(Tags.ENERGY) < 2) {
-            throw "Requires 2 power tags.";
-        }
-        return new SelectPlayer(this.name, game.getPlayers(), "Select player to decrease energy", (foundPlayer: Player) => {
+        return new SelectPlayer(game.getPlayers(), "Select player to decrease energy", (foundPlayer: Player) => {
             if (foundPlayer.energyProduction < 1) {
                 throw "Player must have energy production to remove";
             }

@@ -124,13 +124,13 @@ export class RoboticWorkforce implements IProjectCard {
             return false;
         });
         if (availableCards.length === 0) {
-            throw "No builder cards to duplicate";
+            return undefined;
         }
-        return new SelectCard(this.name, "Select builder card to copy", availableCards, (selectedCards: Array<IProjectCard>) => {
+        return new SelectCard("Select builder card to copy", availableCards, (selectedCards: Array<IProjectCard>) => {
                 const foundCard: IProjectCard = selectedCards[0];
                 // this is the only card which requires additional user input
                 if (foundCard.name === new BiomassCombustors().name) {
-                    return new SelectPlayer(this.name, game.getPlayers(), "Select player to remove plant production", (foundPlayer: Player) => {
+                    return new SelectPlayer(game.getPlayers(), "Select player to remove plant production", (foundPlayer: Player) => {
                         if (foundPlayer.plantProduction < 1) {
                             throw "Player must have plant production";
                         }

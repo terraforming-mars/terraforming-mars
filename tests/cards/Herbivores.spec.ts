@@ -16,8 +16,6 @@ describe("Herbivores", function () {
             game.increaseOxygenLevel(player, 2);
         }
         expect(card.canPlay(player, game)).to.eq(true);
-        const action = card.play(player, game);
-        expect(function () { action.cb(player); }).to.throw("Player must have plant production");
     });
     it("Should play", function () {
         const card = new Herbivores();

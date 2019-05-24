@@ -24,7 +24,7 @@ export class SmallAnimals implements IActionCard, IProjectCard {
     }
     public play(player: Player, game: Game) {
         const availablePlayers = this.getAvailablePlayers(player, game);
-        return new SelectPlayer(this.name, availablePlayers, "Select player to decrease plant production", (foundPlayer: Player) => {
+        return new SelectPlayer(availablePlayers, "Select player to decrease plant production", (foundPlayer: Player) => {
             foundPlayer.plantProduction--;
             game.addGameEndListener(() => {
                 player.victoryPoints += Math.floor(this.animals / 2);

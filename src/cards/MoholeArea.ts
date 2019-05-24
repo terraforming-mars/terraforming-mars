@@ -20,7 +20,7 @@ export class MoholeArea implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-        return new SelectSpace(this.name, "Select an ocean space for special tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+        return new SelectSpace("Select an ocean space for special tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
             game.addTile(player, SpaceType.OCEAN, space, { tileType: TileType.SPECIAL });
             player.heatProduction += 4;
             return undefined;

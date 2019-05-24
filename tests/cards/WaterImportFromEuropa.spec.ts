@@ -7,11 +7,10 @@ import { Game } from "../../src/Game";
 import { AndOptions } from "../../src/inputs/AndOptions";
 
 describe("WaterImportFromEuropa", function () {
-    it("Should throw", function () {
+    it("Can't act", function () {
         const card = new WaterImportFromEuropa();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        expect(function() { card.action(player, game); }).to.throw("you do not have enough to pay for this action");
+        expect(card.canAct(player)).to.eq(false);
     });
     it("Should play", function () {
         const card = new WaterImportFromEuropa();

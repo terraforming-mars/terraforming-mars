@@ -18,10 +18,7 @@ export class UndergroundCity implements IProjectCard {
         return player.energyProduction >= 2;
     }
     public play(player: Player, game: Game) {
-        if (player.energyProduction < 2) {
-            throw "Requires 2 energy production";
-        }
-        return new SelectSpace(this.name, "Select space for city tile", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
+        return new SelectSpace("Select space for city tile", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
             game.addCityTile(player, foundSpace.id);
             player.energyProduction -= 2;
             player.steelProduction += 2;

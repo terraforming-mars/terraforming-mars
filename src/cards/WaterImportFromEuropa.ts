@@ -1,4 +1,5 @@
 
+import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -12,7 +13,7 @@ import { PlayerInput } from "../PlayerInput";
 import { HowToPay } from "../inputs/HowToPay";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
 
-export class WaterImportFromEuropa implements IProjectCard {
+export class WaterImportFromEuropa implements IActionCard, IProjectCard {
     public cost: number = 25;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = "Water Import From Europa";
@@ -29,10 +30,10 @@ export class WaterImportFromEuropa implements IProjectCard {
         });
         return undefined;
     }
+    public canAct(player: Player): boolean {
+        return (player.canUseHeatAsMegaCredits ? player.heat : 0) + player.megaCredits + (player.titanium * player.titaniumValue) >= 12;
+    }
     public action(player: Player, game: Game): PlayerInput | undefined {
-        if ((player.canUseHeatAsMegaCredits ? player.heat : 0) + player.megaCredits + (player.titanium * player.titaniumValue) < 12) {
-            throw "you do not have enough to pay for this action";
-        }
         let htp: HowToPay;
         let selectedSpace: ISpace;
         return new AndOptions(
@@ -46,11 +47,11 @@ export class WaterImportFromEuropa implements IProjectCard {
                 player.heat -= htp.heat;
                 return undefined;
             },
-            new SelectHowToPay("How will you pay for this?", this.name, false, true, player.canUseHeatAsMegaCredits, (howToPay: HowToPay) => {
+            new SelectHowToPay("Select how to pay for action", false, true, player.canUseHeatAsMegaCredits, (howToPay: HowToPay) => {
                 htp = howToPay;
                 return undefined;
             }),
-            new SelectSpace(this.name, "Where to place ocean?", game.getSpaces(SpaceType.OCEAN).filter((space) => space.tile === undefined && space.player === undefined), (space: ISpace) => {
+            new SelectSpace("Select where to place ocean", game.getSpaces(SpaceType.OCEAN).filter((space) => space.tile === undefined && space.player === undefined), (space: ISpace) => {
                 selectedSpace = space;
                 return undefined;
             })

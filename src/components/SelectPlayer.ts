@@ -3,7 +3,7 @@ import Vue from "vue";
 import { SelectPlayerRow } from "./SelectPlayerRow";
 
 export const SelectPlayer = Vue.component("select-player", {
-    props: ["players", "playerinput", "onsave"],
+    props: ["players", "playerinput", "onsave", "showtitle"],
     data: function () {
         return {
             selectedPlayer: undefined
@@ -19,7 +19,7 @@ export const SelectPlayer = Vue.component("select-player", {
     },
     template: `
         <div>
-            <div>{{playerinput.title}} - {{playerinput.message}}</div>
+            <div v-if="showtitle === true">{{playerinput.title}}</div>
             <label v-for="player in playerinput.players" :key="player" style="display:block;font-size:12px">
                 <input class="nes-radio" type="radio" v-model="selectedPlayer" :value="player" />
                 <select-player-row :player="players.find((otherPlayer) => otherPlayer.id === player)"></select-player-row>

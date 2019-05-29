@@ -8,7 +8,7 @@ interface SelectCardModel {
 import { Card } from "./Card";
 
 export const SelectCard = Vue.component("select-card", {
-    props: ["playerinput", "onsave"],
+    props: ["playerinput", "onsave", "showtitle"],
     data: function () {
         return {
             cards: []
@@ -24,7 +24,7 @@ export const SelectCard = Vue.component("select-card", {
     },
     template: `
         <div>
-            <div>{{playerinput.title}} - {{playerinput.message}}</div>
+            <div v-if="showtitle === true">{{playerinput.title}}</div>
             <label v-for="card in playerinput.cards" :key="card" style="display:block;font-size:12px">
                 <input v-if="playerinput.maxCardsToSelect === 1 && playerinput.minCardsToSelect === 1" class="nes-radio" type="radio" v-model="cards" :value="card" />
                 <input v-else class="nes-checkbox" type="checkbox" v-model="cards" :value="card" />

@@ -3,7 +3,7 @@ import Vue from "vue";
 import { HowToPay } from "../inputs/HowToPay";
 
 export const SelectHowToPay = Vue.component("select-how-to-pay", {
-    props: ["playerinput", "onsave"],
+    props: ["playerinput", "onsave", "showtitle"],
     data: function () {
         return {
             heat: 0,
@@ -25,7 +25,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
     },
     template: `
         <div>
-            <div>{{playerinput.title}}</div>
+            <div v-if="showtitle === true">{{playerinput.title}}</div>
             <div v-if="playerinput.canUseSteel" class="nes-field">
                 <label>Steel:</label>
                 <input class="nes-input" type="number" value="0" min="0" max="100" v-model="steel" />

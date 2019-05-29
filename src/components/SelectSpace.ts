@@ -3,14 +3,16 @@ import Vue, { VNode } from "vue";
 import { PlayerInputModel } from "../models/PlayerInputModel";
 
 export const SelectSpace = Vue.component("select-space", {
-    props: ["playerinput", "onsave"],
+    props: ["playerinput", "onsave", "showtitle"],
     data: function () {
         return {};
     },
     render: function (createElement) {
         const playerInput: PlayerInputModel = this.playerinput as PlayerInputModel;
         const children: Array<VNode> = [];
-        children.push(createElement("div", playerInput.title));
+        if (this.showtitle) {
+            children.push(createElement("div", playerInput.title));
+        }
         const setOfSpaces: {[x: string]: number} = {};
         if (playerInput.availableSpaces !== undefined) {
             playerInput.availableSpaces.forEach((spaceId: string) => {

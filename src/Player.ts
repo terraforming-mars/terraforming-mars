@@ -23,6 +23,7 @@ import { Award } from "./Award";
 import { Milestone } from "./Milestone";
 import { TileType } from "./TileType";
 import { StandardProjectType } from "./StandardProjectType";
+import { PowerInfrastructure } from "./cards/PowerInfrastructure";
 import * as constants from "./constants";
 
 import { ProtectedHabitats } from "./cards/ProtectedHabitats";
@@ -617,12 +618,12 @@ export class Player {
                 }
                 htp = stp;
                 return undefined;
-            }), new SelectSpace("Select space for aquifer", game.getAvailableSpacesForOcean(this), (space: ISpace) => {
+            }), new SelectSpace("Aquifer", game.getAvailableSpacesForOcean(this), (space: ISpace) => {
                 ocean = space;
                 return undefined;
             }));
         }
-        return new SelectSpace("Select space for aquifer", game.getAvailableSpacesForOcean(this), (space: ISpace) => {
+        return new SelectSpace("Aquifer", game.getAvailableSpacesForOcean(this), (space: ISpace) => {
             return fundProject(constants.AQUIFER_COST, 0, space.id);
         });
     }
@@ -652,12 +653,12 @@ export class Player {
             }, new SelectHowToPay("Select how to pay for greenery", false, false, true, (stp) => {
                 htp = stp;
                 return undefined;
-            }), new SelectSpace("Select space for greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
+            }), new SelectSpace("Greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
                 greenery = space;
                 return undefined;
             }));
         }
-        return new SelectSpace("Select space for greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
+        return new SelectSpace("Greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
             return fundProject(constants.GREENERY_COST, 0, space.id);
         });
     }
@@ -682,13 +683,13 @@ export class Player {
                     htp = stp;
                     return undefined;
                 }),
-                new SelectSpace("Select space for city", game.getAvailableSpacesOnLand(this), (space: ISpace) => {
+                new SelectSpace("City", game.getAvailableSpacesOnLand(this), (space: ISpace) => {
                     city = space;
                     return undefined;
                 })
             );
         }
-        return new SelectSpace("Select space for city", game.getAvailableSpacesOnLand(this), (space: ISpace) => {
+        return new SelectSpace("City", game.getAvailableSpacesOnLand(this), (space: ISpace) => {
             return fundProject(constants.CITY_COST, 0, space.id);
         });
     }

@@ -33,7 +33,7 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
     public canAct(player: Player): boolean {
         return (player.canUseHeatAsMegaCredits ? player.heat : 0) + player.megaCredits + (player.titanium * player.titaniumValue) >= 12;
     }
-    public action(player: Player, game: Game): PlayerInput | undefined {
+    public action(player: Player, game: Game) {
         let htp: HowToPay;
         let selectedSpace: ISpace;
         return new AndOptions(

@@ -23,7 +23,6 @@ import { Award } from "./Award";
 import { Milestone } from "./Milestone";
 import { TileType } from "./TileType";
 import { StandardProjectType } from "./StandardProjectType";
-import { PowerInfrastructure } from "./cards/PowerInfrastructure";
 import * as constants from "./constants";
 
 import { ProtectedHabitats } from "./cards/ProtectedHabitats";

@@ -21,7 +21,7 @@ export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard
         return undefined;
     }
     public canAct(player: Player): boolean {
-        return player.terraformRating >= this.generationStartRating && player.canAfford(3); 
+        return player.terraformRating > this.generationStartRating && player.canAfford(3); 
     }
     public action(player: Player, _game: Game) {
         player.megaCredits -= 3;

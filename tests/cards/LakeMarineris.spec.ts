@@ -18,10 +18,12 @@ describe("LakeMarineris", function () {
         const game = new Game("foobar", [player], player);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
-        action.cb();
-        expect(player.victoryPoints).to.eq(2);
-        action.options[0].cb(game.getAvailableSpacesForOcean(player)[0]);
-        action.options[1].cb(game.getAvailableSpacesForOcean(player)[0]);
+        const subAction = action!.cb(game.getAvailableSpacesForOcean(player)[0]);
+        expect(game.getOceansOnBoard()).to.eq(1);
+        expect(player.victoryPoints).to.eq(0);
+        expect(subAction).not.to.eq(undefined);
+        subAction!.cb(game.getAvailableSpacesForOcean(player)[0]);
         expect(game.getOceansOnBoard()).to.eq(2);
+        expect(player.victoryPoints).to.eq(2);
     });
 });

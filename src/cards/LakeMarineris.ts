@@ -4,7 +4,6 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { AndOptions } from "../inputs/AndOptions";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 
@@ -19,20 +18,23 @@ export class LakeMarineris implements IProjectCard {
         return game.getTemperature() >= 0 - (2 * player.requirementsBonus);
     }
     public play(player: Player, game: Game) {
-        return new AndOptions(
-            () => {
+        let available = game.getAvailableSpacesForOcean(player);
+        if (available.length === 0) {
+            player.victoryPoints += 2;
+            return undefined;
+        }
+        return new SelectSpace("Select space for first ocean tile", available, (space: ISpace) => {
+            game.addOceanTile(player, space.id);
+            available = game.getAvailableSpacesForOcean(player);
+            if (available.length === 0) { 
                 player.victoryPoints += 2;
                 return undefined;
-            },
-            // TODO - these need to be done in sequence to avoid duplication
-            new SelectSpace("Select space for first ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+            }
+            return new SelectSpace("Select space for second ocean tile", available, (space: ISpace) => {
                 game.addOceanTile(player, space.id);
+                player.victoryPoints += 2;
                 return undefined;
-            }),
-            new SelectSpace("Select space for second ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                game.addOceanTile(player, space.id);
-                return undefined;
-            })
-        );
+            });
+        });
     }
 }

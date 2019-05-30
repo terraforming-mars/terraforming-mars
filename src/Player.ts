@@ -891,22 +891,19 @@ export class Player {
             )
         }
 
-        // TODO - there needs to be available spaces for an aquifer
         if (this.canAfford(constants.AQUIFER_COST) && game.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
             standardProjects.options.push(
                 this.aquifer(game)
             );
         }
 
-        // TODO - there needs to be available spaces for a greenery
-        if (this.canAfford(constants.GREENERY_COST)) {
+        if (this.canAfford(constants.GREENERY_COST) && game.getAvailableSpacesForGreenery(this).length > 0) {
             standardProjects.options.push(
                 this.addGreenery(game)
             );
         }
 
-        // TODO - there needs to be available spaces for a city
-        if (this.canAfford(constants.CITY_COST)) {
+        if (this.canAfford(constants.CITY_COST) && game.getAvailableSpacesForGreenery(this).length > 0) {
             standardProjects.options.push(
                 this.addCity(game)
             );
@@ -918,8 +915,7 @@ export class Player {
             action.options.push(standardProjects.options[0]);
         }
 
-        // TODO - there needs to be available spaces for a greenery
-        if (this.plants >= this.plantsNeededForGreenery) {
+        if (this.plants >= this.plantsNeededForGreenery && game.getAvailableSpacesForGreenery(this).length > 0) {
             action.options.push(
                 this.convertPlantsIntoGreenery(game)
             );

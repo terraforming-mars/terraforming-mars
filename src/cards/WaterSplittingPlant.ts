@@ -13,7 +13,7 @@ export class WaterSplittingPlant implements IProjectCard {
     public text: string = "Requires 2 ocean tiles";
     public description: string = "Electrolysis of water yields oxygen and hydrogen, both very useful gases.";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOceansOnBoard() >= 2 - player.requirementsBonus;
+        return game.getOceansOnBoard() >= 2 - player.getRequirementsBonus(game);
     }
     public play() {
         return undefined;

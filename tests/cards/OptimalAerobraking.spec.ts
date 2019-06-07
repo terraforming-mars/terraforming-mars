@@ -11,11 +11,10 @@ describe("OptimalAerobraking", function () {
         const card = new OptimalAerobraking();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        const action = card.play(player, game);
+        const action = card.play();
         expect(action).to.eq(undefined);
-        expect(player.cardPlayedEvents.length).to.eq(1);
-        expect(player.cardPlayedEvents[0](card)).to.eq(undefined);
-        expect(player.cardPlayedEvents[0](new BigAsteroid())).to.eq(undefined);
+        expect(card.onCardPlayed(player, game, card)).to.eq(undefined);
+        expect(card.onCardPlayed(player, game, new BigAsteroid())).to.eq(undefined);
         expect(player.megaCredits).to.eq(3);
         expect(player.heat).to.eq(3);
     });

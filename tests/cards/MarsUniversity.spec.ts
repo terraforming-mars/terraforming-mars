@@ -12,12 +12,11 @@ describe("MarsUniversity", function () {
         const card = new MarsUniversity();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        const action = card.play(player, game);
+        const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.victoryPoints).to.eq(1);
-        expect(player.cardPlayedEvents.length).to.eq(1);
-        expect(player.cardPlayedEvents[0](new Pets())).to.eq(undefined);
-        const orOptions = player.cardPlayedEvents[0](card) as OrOptions;
+        expect(card.onCardPlayed(player, game, new Pets())).to.eq(undefined);
+        const orOptions = card.onCardPlayed(player, game, card) as OrOptions;
         expect(orOptions.options.length).to.eq(2);
         expect(orOptions.options[1].cb()).to.eq(undefined);
         player.cardsInHand.push(card);

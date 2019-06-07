@@ -27,15 +27,15 @@ export class EcologicalZone implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         return this.hasGreeneryTile(player, game);
     }
+    public onCardPlayed(_player: Player, _game: Game, card: IProjectCard): void {
+        if (card.tags.indexOf(Tags.ANIMAL) !== -1 ||
+            card.tags.indexOf(Tags.PLANT) !== -1) {
+            this.animals++;
+        } 
+    }
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space next to greenery for special tile", this.getAvailableSpaces(player, game), (requestedSpace: ISpace) => {
             game.addTile(player, requestedSpace.spaceType, requestedSpace, { tileType: TileType.SPECIAL });
-            player.addCardPlayedHandler((card: IProjectCard) => {
-                if (card.tags.indexOf(Tags.ANIMAL) !== -1 ||
-                    card.tags.indexOf(Tags.PLANT) !== -1) {
-                    this.animals++;
-                }
-            });
             game.addGameEndListener(() => {
                 player.victoryPoints += Math.floor(this.animals / 2);
             });

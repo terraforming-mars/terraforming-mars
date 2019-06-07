@@ -18,7 +18,7 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
     public text: string = "It must be -10C or colder";
     public description: string = "Adapted strains able to form symbiotic relationships with other organisms";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getTemperature() <= -10 + (2 * player.requirementsBonus);
+        return game.getTemperature() <= -10 + (2 * player.getRequirementsBonus(game));
     }
     public play() {
         return undefined;

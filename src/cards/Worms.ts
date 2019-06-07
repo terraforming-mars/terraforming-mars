@@ -13,7 +13,7 @@ export class Worms implements IProjectCard {
     public text: string = "Requires 4% oxygen. Increase your plant production 1 step for every 2 microbe tags you have, including this.";
     public description: string = "Milling about in the soil, 'processing' it";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOxygenLevel() >= 4 - player.requirementsBonus;
+        return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
         player.plantProduction += Math.floor((player.getTagCount(Tags.MICROBES) + 1) / 2);

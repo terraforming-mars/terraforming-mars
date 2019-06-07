@@ -10,6 +10,8 @@ import { SelectCard } from "../inputs/SelectCard";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { SelectPlayer } from "../inputs/SelectPlayer";
 import { SelectSpace } from "../inputs/SelectSpace";
+import { StandardProjectType } from "../StandardProjectType";
+import { OrOptions } from "../inputs/OrOptions";
 
 export interface IActionCard {
     actionText: string;
@@ -26,4 +28,7 @@ export interface ICard {
     actionText?: string;
     action?: (player: Player, game: Game) => AndOptions | SelectAmount | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
     canAct?: (player: Player, game: Game) => boolean;
-}   
+    getRequirementBonus?: (player: Player, game: Game) => boolean;
+    onCardPlayed?: (player: Player, game: Game, card: IProjectCard) => OrOptions | void;
+    onStandardProject?: (player: Player, projectType: StandardProjectType) => void;
+}

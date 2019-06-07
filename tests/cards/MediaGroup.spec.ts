@@ -11,12 +11,11 @@ describe("MediaGroup", function () {
         const card = new MediaGroup();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        const action = card.play(player, game);
+        const action = card.play();
         expect(action).to.eq(undefined);
-        expect(player.cardPlayedEvents.length).to.eq(1);
-        player.cardPlayedEvents[0](new Virus());        
+        card.onCardPlayed(player, game, new Virus());        
         expect(player.megaCredits).to.eq(3);
-        player.cardPlayedEvents[0](card);
+        card.onCardPlayed(player, game, card);
         expect(player.megaCredits).to.eq(3);
     });
 });

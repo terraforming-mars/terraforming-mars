@@ -4,7 +4,6 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { PlayerInput } from "../PlayerInput";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
 
@@ -18,25 +17,25 @@ export class ViralEnhancers implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public play(player: Player, _game: Game): PlayerInput | undefined {
-        player.addCardPlayedHandler((card: IProjectCard) => {
-            if (card.tags.indexOf(Tags.ANIMAL) !== -1 || card.tags.indexOf(Tags.PLANT) !== -1 || card.tags.indexOf(Tags.MICROBES) !== -1) {
-                if (player.cardHasResource(card)) {
-                    return new OrOptions(
-                        new SelectOption("Add resource to card " + card.name, () => {
-                            player.addResourceTo(card);
-                            return undefined;
-                        }),
-                        new SelectOption("Gain 1 plant", () => {
-                            player.plants++;
-                            return undefined;
-                        })
-                    );
-                }
-                player.plants++;
+    public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
+        if (card.tags.find((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES) !== undefined) {
+            if (player.cardHasResource(card)) {
+                return new OrOptions(
+                    new SelectOption("Add resource to card " + card.name, () => {
+                        player.addResourceTo(card);
+                        return undefined;
+                    }),
+                    new SelectOption("Gain 1 plant", () => {
+                        player.plants++;
+                        return undefined;
+                    })
+                );
             }
-            return undefined;
-        });
+            player.plants++;
+        }
+        return undefined;
+    }
+    public play() {
         return undefined;
     }
 }

@@ -10,13 +10,16 @@ describe("SaturnSystems", function () {
     it("Should play", function () {
         const card = new SaturnSystems();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        const action = card.play(player, game);
+        const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.titaniumProduction).to.eq(1);
         expect(player.megaCreditProduction).to.eq(1);
-        expect(player.cardPlayedEvents.length).to.eq(1);
-        player.cardPlayedEvents[0](new MirandaResort());
-        expect(player.megaCreditProduction).to.eq(2);
+    });
+    it("Runs onCardPlayed", function () {
+        const card = new SaturnSystems();
+        const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player], player);
+        card.onCardPlayed(player, game, new MirandaResort());
+        expect(player.megaCreditProduction).to.eq(1);
     });
 });

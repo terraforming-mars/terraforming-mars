@@ -1,6 +1,7 @@
 
 import { IProjectCard } from "./cards/IProjectCard";
 import { CorporationCard } from "./cards/corporation/CorporationCard";
+import { SaturnSystems } from "./cards/corporation/SaturnSystems";
 import { CardDiscount } from "./CardDiscount";
 import { Tags } from "./cards/Tags";
 import { PlayerInput } from "./PlayerInput";
@@ -27,8 +28,6 @@ import * as constants from "./constants";
 
 import { ProtectedHabitats } from "./cards/ProtectedHabitats";
 import { Pets } from "./cards/Pets";
-
-type CardPlayedHandler = (card: IProjectCard) => OrOptions | void;
 
 export class Player {
     constructor(public name: string, public color: Color, public beginner: boolean) {
@@ -71,7 +70,16 @@ export class Player {
     public powerPlantCost: number = 11;
     public titaniumValue: number = 3;
     public steelValue: number = 2;
-    public requirementsBonus: number = 0;
+    public getRequirementsBonus(game: Game): number {
+        if (this.corporationCard !== undefined && this.corporationCard.getRequirementBonus !== undefined &&
+            this.corporationCard.getRequirementBonus(this, game)) {
+            return 2;
+        }
+        if (this.playedCards.find((playedCard) => playedCard.getRequirementBonus !== undefined && playedCard.getRequirementBonus(this, game)) !== undefined) {
+            return 2;
+        }
+        return 0;
+    }
     public megaCredits: number = 0;
     public megaCreditProduction: number = 0;
     public steel: number = 0;
@@ -86,11 +94,24 @@ export class Player {
     public plants: number = 0;
     public plantProduction: number = 0;
     public cardsInHand: Array<IProjectCard> = [];
+    // TODO Generation played along with card
     public playedCards: Array<IProjectCard> = [];
+    public generationPlayed: Map<string, number> = new Map<string, number>();
     private actionsTakenThisRound: number = 0;
+    // TODO Keep these on the card and not in memory
     public cardDiscounts: Array<CardDiscount> = [];
     public terraformRating: number = 20;
     public victoryPoints: number = 0;
+    public lastCardPlayedThisGeneration(game: Game): undefined | IProjectCard {
+        const lastCardPlayed = this.playedCards[this.playedCards.length - 1];
+        if (lastCardPlayed !== undefined) {
+            const generationPlayed = this.generationPlayed.get(lastCardPlayed.name);
+            if (generationPlayed === game.generation) {
+                return lastCardPlayed;
+            }
+        }
+        return undefined;
+    }
     public addAnimalsToCard(card: IProjectCard, count: number): void {
         if (card.animals === undefined) {
             card.animals = 0;
@@ -142,19 +163,6 @@ export class Player {
         }
         return foundCards[0];
     }
-    public cardPlayedEvents: Array<CardPlayedHandler> = [];
-    public addCardPlayedHandler(handler: CardPlayedHandler): void {
-        this.cardPlayedEvents.push(handler);
-    } 
-    public removeCardPlayedHandler(handler: CardPlayedHandler): void {
-        this.cardPlayedEvents.splice(this.cardPlayedEvents.indexOf(handler), 1);
-    }
-    public standardProjectHandler: Array<(project: StandardProjectType) => void> = [];
-
-    public addStandardProjectHandler(fn: (project: StandardProjectType) => void): void {
-        this.standardProjectHandler.push(fn);
-    }
-
     private runInput(input: Array<Array<string>>, pi: PlayerInput): PlayerInput | undefined {
         if (pi instanceof AndOptions) {
             const waiting: AndOptions = pi;
@@ -328,9 +336,12 @@ export class Player {
 
     public runResearchPhase(game: Game): void {
         const dealtCards: Array<IProjectCard> = [];
-        for (let i = 0; i < 4; i++) {
-            dealtCards.push(game.dealer.dealCard());
-        }
+        dealtCards.push(
+            game.dealer.dealCard(),
+            game.dealer.dealCard(),
+            game.dealer.dealCard(),
+            game.dealer.dealCard()
+        );
         let htp: HowToPay = {
             steel: 0,
             titanium: 0,
@@ -387,6 +398,11 @@ export class Player {
         return Math.max(cost, 0);
     }
 
+    private addPlayedCard(game: Game, card: IProjectCard): void {
+        this.playedCards.push(card);
+        this.generationPlayed.set(card.name, game.generation);
+    }
+
     private playProjectCard(game: Game): PlayerInput {
 
         let selectedCard: IProjectCard;
@@ -419,7 +435,7 @@ export class Player {
 
                 const whenDone = () => {
                     this.cardsInHand.splice(this.cardsInHand.findIndex((card) => card.name === selectedCard.name), 1);
-                    this.playedCards.push(selectedCard);
+                    this.addPlayedCard(game, selectedCard);
 
                     this.steel -= payMethod.steel;
                     this.titanium -= payMethod.titanium;
@@ -429,12 +445,24 @@ export class Player {
                     }
 
                     const actionsFromPlayedCard: OrOptions[] = [];
-                    this.cardPlayedEvents.slice().forEach((cardPlayedEvent) => {
-                        const actionFromPlayedCard: OrOptions | void = cardPlayedEvent(selectedCard);
-                        if (actionFromPlayedCard !== undefined) {
-                            actionsFromPlayedCard.push(actionFromPlayedCard);
+                    for (const playedCard of this.playedCards) {
+                        if (playedCard.onCardPlayed !== undefined) {
+                            const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, game, selectedCard);
+                            if (actionFromPlayedCard !== undefined) {
+                                actionsFromPlayedCard.push(actionFromPlayedCard);
+                            }
                         }
-                    });
+                    }
+
+                    if (this.corporationCard !== undefined && this.corporationCard.onCardPlayed !== undefined) {
+                        const method = this.corporationCard.onCardPlayed;
+                        if (this.corporationCard.name === new SaturnSystems().name) {
+                            game.getPlayers().forEach((player) => method(player, game, selectedCard));
+                        } else {
+                            method(this, game, selectedCard);
+                        }
+                    }
+
                     // run through multiple inputs
                     if (actionsFromPlayedCard.length > 1) {
                         const multipleActions = new AndOptions(() => {
@@ -517,9 +545,11 @@ export class Player {
     private payForStandardProject(projectType: StandardProjectType, megaCredits: number, heat: number): void {
         this.megaCredits -= megaCredits;
         this.heat -= heat;
-        this.standardProjectHandler.forEach((fn) => {
-            fn(projectType);
-        });
+        for (const playedCard of this.playedCards) {
+            if (playedCard.onStandardProject !== undefined) {
+                playedCard.onStandardProject(this, projectType);
+            }
+        }
     }
 
     private sellPatents(game: Game): PlayerInput {
@@ -731,7 +761,7 @@ export class Player {
         });
     }
 
-    private claimMilestone(milestone: Milestone, game: Game): PlayerInput {
+    private claimMilestone(milestone: Milestone, game: Game): SelectHowToPay | SelectOption {
         const claimer = (megaCredits: number, heat: number) => {
             this.victoryPoints += 5;
             game.claimedMilestones.push({
@@ -773,7 +803,7 @@ export class Player {
             });
         }
         return new SelectOption(upperCaseAward, () => {
-            return funder(game.awardFundingCost, 0);
+            return funder(game.getAwardFundingCost(), 0);
         });
     }
 
@@ -963,7 +993,7 @@ export class Player {
             }
         }
 
-        if (this.canAfford(game.awardFundingCost) && !game.allAwardsFunded()) {
+        if (this.canAfford(game.getAwardFundingCost()) && !game.allAwardsFunded()) {
             const remainingAwards = new OrOptions();
             remainingAwards.title = "Select an award to fund";
             remainingAwards.options = [Award.LANDLORD, Award.BANKER, Award.SCIENTIST, Award.THERMALIST, Award.MINER]

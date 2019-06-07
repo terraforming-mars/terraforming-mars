@@ -17,7 +17,7 @@ export class Ants implements IActionCard, IProjectCard {
     public text: string = "Requires 4% oxygen. Gain 1 victory point per 2 microbes on this card.";
     public description: string = "Although an important part of many ecosystems, ants can also be detrimental to other organisms.";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOxygenLevel() >= 4 - player.requirementsBonus;
+        return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);
     }
     public play(player: Player, game: Game) {
         game.addGameEndListener(() => {

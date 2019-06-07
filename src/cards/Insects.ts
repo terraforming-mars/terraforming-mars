@@ -13,7 +13,7 @@ export class Insects implements IProjectCard {
     public text: string = "Requires 6% oxygen. Increase your plant production 1 step for each plant tag you have.";
     public description: string = "Pollinating flowers and spreading seeds.";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOxygenLevel() >= 6 - player.requirementsBonus;
+        return game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
         player.plantProduction += player.getTagCount(Tags.PLANT);

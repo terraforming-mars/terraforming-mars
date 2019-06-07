@@ -13,7 +13,7 @@ export class ArcticAlgae implements IProjectCard {
     public text: string = "It must be -12C or colder to play. Gain 1 plant. When anyone places an ocean tile, gain 2 plants.";
     public description: string = "Suitable for freezing temperatures.";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getTemperature() <= -12 + (player.requirementsBonus * 2);
+        return game.getTemperature() <= -12 + (player.getRequirementsBonus(game) * 2);
     }
     public play(player: Player, game: Game) {
         player.plants++;

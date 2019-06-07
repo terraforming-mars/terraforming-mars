@@ -13,7 +13,7 @@ export class DesignedMicroOrganisms implements IProjectCard {
     public text: string = "It must be -14C or colder. Increase your plant production 2 steps";
     public description: string = "Specializing in extremely cold conditions";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getTemperature() <= -14 + (2 * player.requirementsBonus);
+        return game.getTemperature() <= -14 + (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player) {
         player.plantProduction += 2;

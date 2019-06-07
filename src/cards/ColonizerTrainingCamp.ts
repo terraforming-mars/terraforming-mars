@@ -13,7 +13,7 @@ export class ColonizerTrainingCamp implements IProjectCard {
     public text: string = "Oxygen must be 5% or less. Gain 2 victory points.";
     public description: string = "Preparing for settlement of the moons of Jupiter.";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOxygenLevel() <= 5 + player.requirementsBonus;
+        return game.getOxygenLevel() <= 5 + player.getRequirementsBonus(game);
     }
     public play(player: Player) {
         player.victoryPoints += 2;

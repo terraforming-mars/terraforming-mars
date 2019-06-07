@@ -27,7 +27,6 @@ export class Game {
     public activePlayer: Player;
     public claimedMilestones: Array<ClaimedMilestone> = [];
     public fundedAwards: Array<FundedAward> = [];
-    public awardFundingCost: number = 8;
     constructor(public id: string, private players: Array<Player>, private first: Player) {
         this.activePlayer = first;
         // Single player game player starts with 14TR
@@ -49,6 +48,7 @@ export class Game {
         }
         
     }
+
     public milestoneClaimed(milestone: Milestone): boolean {
         return this.claimedMilestones.find((claimedMilestone) => claimedMilestone.milestone === milestone) !== undefined;
     }
@@ -56,6 +56,10 @@ export class Game {
     private marsIsTerraformed(): boolean {
         return this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL && this.temperature >= constants.MAX_TEMPERATURE &&
             this.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
+    }
+
+    public getAwardFundingCost(): number {
+        return 8 + (6 * this.fundedAwards.length);
     }
 
     public fundAward(player: Player, award: Award): void {
@@ -66,11 +70,6 @@ export class Game {
             award: award,
             player: player
         });
-        if (this.fundedAwards.length === 1) {
-            this.awardFundingCost = 14;
-        } else if (this.fundedAwards.length === 2) {
-            this.awardFundingCost = 20;
-        }
         this.addGameEndListener(() => {
             this.giveAward(award);
         });
@@ -394,7 +393,7 @@ export class Game {
     public onGameEnd: Array<Function> = [];
     public onGenerationEnd: Array<Function> = [];
 
-    private generation: number = 1;
+    public generation: number = 1;
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
 
     public increaseOxygenLevel(player: Player, steps: 1 | 2): SelectSpace | undefined {

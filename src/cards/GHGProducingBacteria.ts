@@ -18,7 +18,7 @@ export class GHGProducingBacteria implements IActionCard, IProjectCard {
     public text: string = "Requires 4% oxygen";
     public description: string = "Working for the biosphere and the atmosphere at the same time.";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOxygenLevel() >= 4 - player.requirementsBonus;
+        return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);
     }
     public play() {
         return undefined;

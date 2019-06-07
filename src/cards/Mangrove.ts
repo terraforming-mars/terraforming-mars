@@ -16,7 +16,7 @@ export class Mangrove implements IProjectCard {
     public text: string = "Requires +4C or warmer. Place a greenery tile on an area reserved for ocean and raise oxygen 1 step. Disregard normal placement restrictions for this. Gain 1 victory point.";
     public description: string = "A wetland forest will create an ecosystem where new species can thrive.";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getTemperature() >= 4 - (2 * player.requirementsBonus);
+        return game.getTemperature() >= 4 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player, game: Game) {
         player.victoryPoints++;

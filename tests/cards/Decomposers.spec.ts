@@ -22,13 +22,12 @@ describe("Decomposers", function () {
         game.increaseOxygenLevel(player, 1); // 3
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.cardPlayedEvents.length).to.eq(1);
         expect(game.onGameEnd.length).to.eq(1);
-        player.cardPlayedEvents[0](new Birds());
+        card.onCardPlayed(player, game, new Birds());
         expect(card.microbes).to.eq(1);
-        player.cardPlayedEvents[0](card);
+        card.onCardPlayed(player, game, card);
         expect(card.microbes).to.eq(2);
-        player.cardPlayedEvents[0](new Algae());
+        card.onCardPlayed(player, game, new Algae());
         expect(card.microbes).to.eq(3);
         game.onGameEnd[0]();
         expect(player.victoryPoints).to.eq(1);

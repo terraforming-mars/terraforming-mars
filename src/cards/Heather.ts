@@ -13,7 +13,7 @@ export class Heather implements IProjectCard {
     public text: string = "Requires -14C or warmer. Increase your plant production 1 step. Gain 1 plant.";
     public description: string = "Stabilizing the soil";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getTemperature() >= -14 - (2 * player.requirementsBonus);
+        return game.getTemperature() >= -14 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player) {
         player.plantProduction++;

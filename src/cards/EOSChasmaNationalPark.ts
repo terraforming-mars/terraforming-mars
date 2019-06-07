@@ -14,7 +14,7 @@ export class EOSChasmaNationalPark implements IProjectCard {
     public text: string = "Requires -12C or warmer. Add 1 animal to any card. Gain 3 plants. Increase your mega credit production 2 steps. Gain 1 victory point.";
     public description: string = "A wonder of the world, doing wonders for the tourism business.";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getTemperature() >= -12 - (2 * player.requirementsBonus);
+        return game.getTemperature() >= -12 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player, game: Game) {
         const availableCards = game.getPlayedCardsWithAnimals();

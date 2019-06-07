@@ -21,8 +21,10 @@ export class Inventrix implements CorporationCard {
             return undefined;
         });
     }
-    public play(player: Player, _game: Game) {
-        player.requirementsBonus = 2;
+    public getRequirementBonus(): boolean {
+        return true;
+    }
+    public play() {
         return undefined;
     }
 }

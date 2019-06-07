@@ -13,7 +13,7 @@ export class Grass implements IProjectCard {
     public text: string = "Requires -16C or warmer. Increase your plant production 1 step. Gain 3 plants.";
     public description: string = "Taking root in every crevice and patch of soil.";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getTemperature() >= -16 - (2 * player.requirementsBonus);
+        return game.getTemperature() >= -16 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player) {
         player.plantProduction++;

@@ -18,28 +18,27 @@ export class OlympusConference implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public play(player: Player, game: Game) {
+    public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
         const gainAScienceResource = () => {
             this.scienceResources++;
             return undefined;
         }
-        const cardPlayedHandler = (playedCard: IProjectCard) => {
-            if (playedCard.tags.filter((tag) => tag === Tags.SCIENCE).length > 0) {
-                if (this.scienceResources > 0) {
-                    return new OrOptions(
-                        new SelectOption("Add a science resource to this card", gainAScienceResource),
-                        new SelectOption("Remove a science resource from this card to draw a card", () => {
-                            this.scienceResources--;
-                            player.cardsInHand.push(game.dealer.dealCard());
-                            return undefined;
-                        })
-                    );
-                }
-                return gainAScienceResource();
+        if (card.tags.filter((tag) => tag === Tags.SCIENCE).length > 0) {
+            if (this.scienceResources > 0) {
+                return new OrOptions(
+                    new SelectOption("Add a science resource to this card", gainAScienceResource),
+                    new SelectOption("Remove a science resource from this card to draw a card", () => {
+                        this.scienceResources--;
+                        player.cardsInHand.push(game.dealer.dealCard());
+                        return undefined;
+                    })
+                );
             }
-            return undefined;
-        };
-        player.addCardPlayedHandler(cardPlayedHandler);
+            return gainAScienceResource();
+        }
+        return undefined;
+    }
+    public play(player: Player) {
         player.victoryPoints++;
         return undefined;
     }

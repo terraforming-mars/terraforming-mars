@@ -15,7 +15,7 @@ export class IceCapMelting implements IProjectCard {
     public text: string = "Requires +2C or warmer. Place 1 ocean tile.";
     public description: string = "Getting the water back from the poles.";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getTemperature() >= 2 - (2 * player.requirementsBonus);
+        return game.getTemperature() >= 2 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space for ocean", game.getAvailableSpacesForOcean(player), (space: ISpace) => {

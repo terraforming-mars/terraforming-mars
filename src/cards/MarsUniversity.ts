@@ -18,24 +18,24 @@ export class MarsUniversity implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public play(player: Player, game: Game) {
+    public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
+        if (card.tags.indexOf(Tags.SCIENCE) !== -1) {
+            return new OrOptions(
+                new SelectCard("Select a card to discard", player.cardsInHand, (foundCards: Array<IProjectCard>) => {
+                    player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
+                    game.dealer.discard(foundCards[0]);
+                    player.cardsInHand.push(game.dealer.dealCard());
+                    return undefined;
+                }),
+                new SelectOption("Do nothing", () => {
+                    return undefined;
+                })
+            );
+        }
+        return undefined;
+    }
+    public play(player: Player) {
         player.victoryPoints++;
-        player.addCardPlayedHandler((card: IProjectCard) => {
-            if (card.tags.indexOf(Tags.SCIENCE) !== -1) {
-                return new OrOptions(
-                    new SelectCard("Select a card to discard", player.cardsInHand, (foundCards: Array<IProjectCard>) => {
-                        player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
-                        game.dealer.discard(foundCards[0]);
-                        player.cardsInHand.push(game.dealer.dealCard());
-                        return undefined;
-                    }),
-                    new SelectOption("Do nothing", () => {
-                        return undefined;
-                    })
-                );
-            }
-            return undefined;
-        });
         return undefined;
     }
 }

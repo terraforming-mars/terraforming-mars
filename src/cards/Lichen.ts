@@ -13,7 +13,7 @@ export class Lichen implements IProjectCard {
     public text: string = "Requires -24C or wamer. Increase your plant production 1 step";
     public description: string = "Slow growing, but very resilient";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getTemperature() >= -24 - (2 * player.requirementsBonus);
+        return game.getTemperature() >= -24 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player) {
         player.plantProduction++;

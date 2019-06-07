@@ -15,7 +15,7 @@ export class Livestock implements IActionCard, IProjectCard {
     public text: string = "Requires 9% oxygen. Decrease your plant production 1 step and increase your mega credit production 2 steps. Gain 1 victory point per animal on this card";
     public description: string = "Providing meat, wool, leather, etc.";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOxygenLevel() >= 9 - player.requirementsBonus && player.plantProduction >= 1;
+        return game.getOxygenLevel() >= 9 - player.getRequirementsBonus(game) && player.plantProduction >= 1;
     }
     public play(player: Player, game: Game) {
         player.plantProduction--;

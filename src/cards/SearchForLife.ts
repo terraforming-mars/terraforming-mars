@@ -17,7 +17,7 @@ export class SearchForLife implements IActionCard, IProjectCard {
     public text: string = "Oxygen must be 6% or less. Gain 3 victory points if you have one or more science resources here";
     public description: string = "Finding native life-forms would be the greatest discovery in history, so let's find out!";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOxygenLevel() <= 6 + player.requirementsBonus;
+        return game.getOxygenLevel() <= 6 + player.getRequirementsBonus(game);
     }
     public play(player: Player, game: Game) {
         game.addGameEndListener(() => {

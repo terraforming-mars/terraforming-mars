@@ -17,7 +17,7 @@ export class ElectroCatapult implements IActionCard, IProjectCard {
     public text: string = "Oxygen must be 8% or less. Decrease your energy production 1 step. Gain 1 victory point.";
     public description: string = "A 200km long acceleration ramp up the side of Pavonis Mons, hurtling export goods into space.";
     public canPlay(player: Player, game: Game): boolean {
-        return player.energyProduction >= 1 && game.getOxygenLevel() <= 8 + player.requirementsBonus;
+        return player.energyProduction >= 1 && game.getOxygenLevel() <= 8 + player.getRequirementsBonus(game);
     }
     public canAct(player: Player): boolean {
         return player.plants > 0 || player.steel > 0;

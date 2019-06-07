@@ -16,7 +16,7 @@ export class SymbioticFungus implements IActionCard, IProjectCard {
     public description: string = "Creating mutually beneficial conditions";
     public actionText: string = "Add a microbe to ANOTHER card";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getTemperature() >= -14 - (2 * player.requirementsBonus);
+        return game.getTemperature() >= -14 - (2 * player.getRequirementsBonus(game));
     }
     public play() {
         return undefined;

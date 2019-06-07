@@ -36,6 +36,7 @@ const powerTag = fs.readFileSync("assets/power-tag.png");
 const scienceTag = fs.readFileSync("assets/science-tag.png");
 const spaceTag = fs.readFileSync("assets/space-tag.png");
 const favicon = fs.readFileSync("favicon.ico");
+
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
 

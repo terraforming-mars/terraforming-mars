@@ -14,14 +14,14 @@ export class Decomposers implements IProjectCard {
     public text: string = "Requires 3% oxygen. When you play an animal, plant, or microbe tag, including this, add a microbe to this card. 1 VP per 3 microbes on this card.";
     public description: string = "Decomposing dead organisms is essential to making sustainable soil.";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOxygenLevel() >= 3 - player.requirementsBonus;
+        return game.getOxygenLevel() >= 3 - player.getRequirementsBonus(game);
+    }
+    public onCardPlayed(_player: Player, _game: Game, card: IProjectCard): void {
+        if (card.tags.indexOf(Tags.ANIMAL) !== -1 || card.tags.indexOf(Tags.MICROBES) !== -1 || card.tags.indexOf(Tags.PLANT) !== -1) {
+            this.microbes++;
+        }
     }
     public play(player: Player, game: Game) {
-        player.addCardPlayedHandler((card: IProjectCard) => {
-            if (card.tags.indexOf(Tags.ANIMAL) !== -1 || card.tags.indexOf(Tags.MICROBES) !== -1 || card.tags.indexOf(Tags.PLANT) !== -1) {
-                this.microbes++;
-            }
-        });
         game.addGameEndListener(() => {
             player.victoryPoints += Math.floor(this.microbes / 3);
         });

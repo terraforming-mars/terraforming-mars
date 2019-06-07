@@ -15,13 +15,13 @@ export class OptimalAerobraking implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public play(player: Player, _game: Game) {
-        player.addCardPlayedHandler((card: IProjectCard) => {
-            if (card.cardType === CardType.EVENT && card.tags.indexOf(Tags.SPACE) !== -1) {
-                player.megaCredits += 3;
-                player.heat += 3;
-            }
-        });
+    public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
+        if (card.cardType === CardType.EVENT && card.tags.indexOf(Tags.SPACE) !== -1) {
+            player.megaCredits += 3;
+            player.heat += 3;
+        }
+    }
+    public play() {
         return undefined;
     }
 }

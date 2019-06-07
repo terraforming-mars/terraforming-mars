@@ -13,7 +13,7 @@ export class GreatDam implements IProjectCard {
     public text: string = "Requires 4 ocean tiles. Increase your energy production 2 steps. Gain 1 victory point.";
     public description: string = "Letting natural processes do the work";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOceansOnBoard() >= 4 - player.requirementsBonus;
+        return game.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
         player.victoryPoints++;

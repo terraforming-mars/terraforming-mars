@@ -15,7 +15,7 @@ export class CaretakerContract implements IActionCard, IProjectCard {
     public actionText: string = "Spend 8 heat to increase your terraform rating 1 step";
     public description: string = "In charge of establishing comfortable temperatures";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getTemperature() >= 0 - (2 * player.requirementsBonus);
+        return game.getTemperature() >= 0 - (2 * player.getRequirementsBonus(game));
     }
     public play() {
         return undefined;

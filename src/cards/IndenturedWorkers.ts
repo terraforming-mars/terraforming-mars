@@ -16,21 +16,12 @@ export class IndenturedWorkers implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-        let cardHasBeenPlayed: boolean = false;
-        let generationHasEnded: boolean = false;
         player.addCardDiscount(() => {
-            if (!cardHasBeenPlayed && !generationHasEnded) {
+            const lastCardPlayed = player.lastCardPlayedThisGeneration(game);
+            if (lastCardPlayed !== undefined && lastCardPlayed.name === this.name) {
                 return 8;
             }
             return 0;
-        });
-        player.addCardPlayedHandler((card) => {
-            if (card.name !== this.name) {
-                cardHasBeenPlayed = true;
-            }
-        });
-        game.addGenerationEndListener(() => {
-            generationHasEnded = true; 
         });
         player.victoryPoints--;
         return undefined;

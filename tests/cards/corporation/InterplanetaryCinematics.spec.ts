@@ -11,14 +11,17 @@ describe("InterplanetaryCinematics", function () {
     it("Should play", function () {
         const card = new InterplanetaryCinematics();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        const action = card.play(player, game);
+        const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.steel).to.eq(20);
-        expect(player.cardPlayedEvents.length).to.eq(1);
-        player.cardPlayedEvents[0](new Bushes());
+    });
+    it("Has onCardPlayed", function () {
+        const card = new InterplanetaryCinematics();
+        const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player], player);
+        card.onCardPlayed(player, game, new Bushes());
         expect(player.megaCredits).to.eq(0);
-        player.cardPlayedEvents[0](new Virus());
+        card.onCardPlayed(player, game, new Virus());
         expect(player.megaCredits).to.eq(2);       
     });
 });

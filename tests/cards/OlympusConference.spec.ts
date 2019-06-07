@@ -12,14 +12,13 @@ describe("OlympusConference", function () {
         const card = new OlympusConference();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        const action = card.play(player, game);
+        const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.victoryPoints).to.eq(1);
-        expect(player.cardPlayedEvents.length).to.eq(1);
-        expect(player.cardPlayedEvents[0](new Bushes())).to.eq(undefined) 
-        player.cardPlayedEvents[0](card);
+        expect(card.onCardPlayed(player, game, new Bushes())).to.eq(undefined) 
+        card.onCardPlayed(player, game, card);
         expect(card.scienceResources).to.eq(1);
-        const orOptions = player.cardPlayedEvents[0](card) as OrOptions;
+        const orOptions = card.onCardPlayed(player, game, card) as OrOptions;
         expect(orOptions).not.to.eq(undefined);
         expect(orOptions instanceof OrOptions).to.eq(true);
         orOptions.options[0].cb();

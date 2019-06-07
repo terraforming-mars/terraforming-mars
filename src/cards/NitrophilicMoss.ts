@@ -13,7 +13,7 @@ export class NitrophilicMoss implements IProjectCard {
     public text: string = "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.";
     public description: string = "Specially made to thrive on the salty Martian rock.";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOceansOnBoard() >= 3 - player.requirementsBonus && player.plants >= 2;
+        return game.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game) && player.plants >= 2;
     }
     public play(player: Player) {
         player.plants -= 2;

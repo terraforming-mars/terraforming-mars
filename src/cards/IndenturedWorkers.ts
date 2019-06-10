@@ -15,14 +15,14 @@ export class IndenturedWorkers implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public play(player: Player, game: Game) {
-        player.addCardDiscount(() => {
-            const lastCardPlayed = player.lastCardPlayedThisGeneration(game);
-            if (lastCardPlayed !== undefined && lastCardPlayed.name === this.name) {
-                return 8;
-            }
-            return 0;
-        });
+    public getCardDiscount(player: Player, game: Game) {
+        const lastCardPlayed = player.lastCardPlayedThisGeneration(game);
+        if (lastCardPlayed !== undefined && lastCardPlayed.name === this.name) {
+            return 8;
+        }
+        return 0;
+    }
+    public play(player: Player) {
         player.victoryPoints--;
         return undefined;
     } 

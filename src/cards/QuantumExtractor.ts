@@ -15,17 +15,14 @@ export class QuantumExtractor implements IProjectCard {
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 4;
     }
-    public play(player: Player, _game: Game) {
-        if (player.getTagCount(Tags.SCIENCE) < 4) {
-            throw "Requires 4 science tags";
+    public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
+        if (card.tags.indexOf(Tags.SCIENCE) !== -1) {
+            return 2;
         }
+        return 0;
+    }
+    public play(player: Player) {
         player.energyProduction += 4;
-        player.addCardDiscount((card) => {
-            if (card.tags.indexOf(Tags.SCIENCE) !== -1) {
-                return 2;
-            }
-            return 0;
-        }); 
         return undefined;
     }
 }

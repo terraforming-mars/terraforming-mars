@@ -15,16 +15,13 @@ export class Shuttles implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 5 - player.getRequirementsBonus(game) && player.energyProduction >= 1;
     }
-    public play(player: Player) {
-        if (player.energyProduction < 1) {
-            throw "Must have energy to decrease";
+    public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
+        if (card.tags.indexOf(Tags.SPACE) !== -1) {
+            return 2;
         }
-        player.addCardDiscount((card) => {
-            if (card.tags.indexOf(Tags.SPACE) !== -1) {
-                return 2;
-            }
-            return 0;
-        });
+        return 0;
+    }
+    public play(player: Player) {
         player.energyProduction -= 1;
         player.megaCreditProduction += 2;
         player.victoryPoints++;

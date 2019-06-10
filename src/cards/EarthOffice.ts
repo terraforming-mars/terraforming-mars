@@ -15,13 +15,13 @@ export class EarthOffice implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public play(player: Player, _game: Game) {
-        player.addCardDiscount((card) => {
-            if (card.tags.indexOf(Tags.EARTH) !== -1) {
-                return 3;
-            }
-            return 0;
-        });
+    public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
+        if (card.tags.indexOf(Tags.EARTH) !== -1) {
+            return 3;
+        }
+        return 0;
+    }
+    public play() {
         return undefined;
     }
 }

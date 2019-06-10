@@ -3,7 +3,6 @@ import { IProjectCard } from "./IProjectCard";
 import { CardType } from "./CardType";
 import { Tags } from "./Tags";
 import { Player } from "../Player";
-import { Game } from "../Game";
 
 export class AntiGravityTechnology implements IProjectCard {
     public cost: number = 14;
@@ -15,13 +14,10 @@ export class AntiGravityTechnology implements IProjectCard {
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 7;
     }
-    public play(player: Player, _game: Game) {
-        if (player.getTagCount(Tags.SCIENCE) < 7) {
-            throw "Requires 7 science tags";
-        }
-        player.addCardDiscount(() => {
-            return 2;
-        });
+    public getCardDiscount() {
+        return 2;
+    }
+    public play(player: Player) {
         player.victoryPoints += 3;
         return undefined;
     }

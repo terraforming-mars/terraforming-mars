@@ -15,8 +15,7 @@ describe("ResearchOutpost", function () {
         expect(action).not.to.eq(undefined);
         action.cb(action.availableSpaces[0]);
         expect(game.getCitiesInPlay()).to.eq(1);
-        expect(player.cardDiscounts.length).to.eq(1);
-        expect(player.cardDiscounts[0](card)).to.eq(1);
+        expect(card.getCardDiscount()).to.eq(1);
     });
     it("Can't play", function () {
         const card = new ResearchOutpost();

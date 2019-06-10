@@ -12,10 +12,9 @@ describe("Teractor", function () {
         const card = new Teractor();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        const action = card.play(player, game);
+        const action = card.play();
         expect(action).to.eq(undefined);
-        expect(player.cardDiscounts.length).to.eq(1);
-        expect(player.cardDiscounts[0](new Cartel())).to.eq(3);
-        expect(player.cardDiscounts[0](new Birds())).to.eq(0);
+        expect(card.getCardDiscount(player, game, new Cartel())).to.eq(3);
+        expect(card.getCardDiscount(player, game, new Birds())).to.eq(0);
     });
 });

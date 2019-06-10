@@ -2,7 +2,6 @@
 import { IProjectCard } from "./cards/IProjectCard";
 import { CorporationCard } from "./cards/corporation/CorporationCard";
 import { SaturnSystems } from "./cards/corporation/SaturnSystems";
-import { CardDiscount } from "./CardDiscount";
 import { Tags } from "./cards/Tags";
 import { PlayerInput } from "./PlayerInput";
 import { CardType } from "./cards/CardType";
@@ -94,12 +93,9 @@ export class Player {
     public plants: number = 0;
     public plantProduction: number = 0;
     public cardsInHand: Array<IProjectCard> = [];
-    // TODO Generation played along with card
     public playedCards: Array<IProjectCard> = [];
     public generationPlayed: Map<string, number> = new Map<string, number>();
     private actionsTakenThisRound: number = 0;
-    // TODO Keep these on the card and not in memory
-    public cardDiscounts: Array<CardDiscount> = [];
     public terraformRating: number = 20;
     public victoryPoints: number = 0;
     public lastCardPlayedThisGeneration(game: Game): undefined | IProjectCard {
@@ -117,9 +113,6 @@ export class Player {
             card.animals = 0;
         }
         card.animals += count;
-    }
-    public addCardDiscount(discount: CardDiscount): void {
-        this.cardDiscounts.push(discount);
     }
     private generateId(): string {
         return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
@@ -390,10 +383,12 @@ export class Player {
         }
     }
 
-    private getCardCost(card: IProjectCard): number {
+    private getCardCost(game: Game, card: IProjectCard): number {
         let cost: number = card.cost;
-        this.cardDiscounts.forEach((cardDiscount) => {
-            cost -= cardDiscount(card);
+        this.playedCards.forEach((playedCard) => {
+            if (playedCard.getCardDiscount !== undefined) {
+                cost -= playedCard.getCardDiscount(this, game, card);
+            }
         });
         return Math.max(cost, 0);
     }
@@ -411,7 +406,7 @@ export class Player {
         const result = new AndOptions(
             () => {
 
-                const cardCost: number = this.getCardCost(selectedCard);
+                const cardCost: number = this.getCardCost(game, selectedCard);
                 let totalToPay: number = 0;
 
                 const canUseSteel: boolean = selectedCard.tags.indexOf(Tags.STEEL) !== -1;
@@ -849,7 +844,7 @@ export class Player {
                 maxPay += this.titanium * this.titaniumValue;
             }
             maxPay += this.megaCredits;
-            return maxPay >= this.getCardCost(card) && card.canPlay(this, game);
+            return maxPay >= this.getCardCost(game, card) && card.canPlay(this, game);
         });
     }
 

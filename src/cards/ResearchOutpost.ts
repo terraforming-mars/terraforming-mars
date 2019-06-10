@@ -25,10 +25,12 @@ export class ResearchOutpost implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         return this.getAvailableSpaces(player, game).length > 0;
     }
+    public getCardDiscount() {
+        return 1;
+    }
     public play(player: Player, game: Game): PlayerInput {
         return new SelectSpace("Select place next to no other tile for city", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
             game.addCityTile(player, foundSpace.id);
-            player.addCardDiscount(() => 1);
             return undefined;
         });
     }

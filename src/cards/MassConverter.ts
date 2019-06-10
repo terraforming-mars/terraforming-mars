@@ -15,17 +15,14 @@ export class MassConverter implements IProjectCard {
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 5;
     }
-    public play(player: Player, _game: Game) {
-        if (player.getTagCount(Tags.SCIENCE) < 5) {
-            throw "Requires 5 science tags.";
+    public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
+        if (card.tags.indexOf(Tags.SPACE) !== -1) {
+            return 2;
         }
+        return 0;
+    }
+    public play(player: Player) {
         player.energyProduction += 6;
-        player.addCardDiscount((card: IProjectCard) => {
-            if (card.tags.indexOf(Tags.SPACE) !== -1) {
-                return 2;
-            }
-            return 0;
-        });
         return undefined;
     }
 }

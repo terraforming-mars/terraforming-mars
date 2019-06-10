@@ -14,8 +14,7 @@ describe("SpaceStation", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         expect(player.victoryPoints).to.eq(1);
-        expect(player.cardDiscounts.length).to.eq(1);
-        expect(player.cardDiscounts[0](card)).to.eq(2);
-        expect(player.cardDiscounts[0](new Bushes())).to.eq(0);
+        expect(card.getCardDiscount(player, game, card)).to.eq(2);
+        expect(card.getCardDiscount(player, game, new Bushes())).to.eq(0);
     });
 });

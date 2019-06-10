@@ -3,7 +3,6 @@ import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
-import { Game } from "../Game";
 
 export class EarthCatapult implements IProjectCard {
     public cost: number = 23;
@@ -15,10 +14,10 @@ export class EarthCatapult implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public play(player: Player, _game: Game) {
-        player.addCardDiscount(() => {
-            return 2;
-        });
+    public getCardDiscount() {
+        return 2;
+    }
+    public play(player: Player) {
         player.victoryPoints += 2;
         return undefined;
     }

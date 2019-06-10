@@ -31,8 +31,7 @@ describe("Shuttles", function () {
         expect(player.energyProduction).to.eq(0);
         expect(player.megaCreditProduction).to.eq(2);
         expect(player.victoryPoints).to.eq(1);
-        expect(player.cardDiscounts.length).to.eq(1);
-        expect(player.cardDiscounts[0](new Bushes())).to.eq(0);
-        expect(player.cardDiscounts[0](new TollStation())).to.eq(2);
+        expect(card.getCardDiscount(player, game, new Bushes())).to.eq(0);
+        expect(card.getCardDiscount(player, game, new TollStation())).to.eq(2);
     });
 });

@@ -31,7 +31,7 @@ export class Game {
         this.activePlayer = first;
         // Single player game player starts with 14TR
         if (players.length === 1) {
-            players[0].terraformRating = 14;
+            players[0].terraformRating = players[0].terraformRatingAtGenerationStart = 14;
         }
         // Give each player their corporation cards
         for (let player of players) {
@@ -189,6 +189,9 @@ export class Game {
 
     private gotoResearchPhase(): void {
         this.generation++;
+        this.players.forEach((player) => {
+            player.terraformRatingAtGenerationStart = player.terraformRating;
+        });
         this.incrementFirstPlayer();
         this.dealEachPlayer4Cards();
     }
@@ -205,9 +208,6 @@ export class Game {
         this.passedPlayers.clear();
         this.players.forEach((player) => {
             player.runProductionPhase();
-        });
-        this.onGenerationEnd.slice().forEach(function (end) {
-            end();
         });
         if (this.gameIsOver()) {
             this.gotoFinalGreeneryPlacement();
@@ -391,7 +391,6 @@ export class Game {
         this.onOceanTilePlaced.push(listener);
     }
     public onGameEnd: Array<Function> = [];
-    public onGenerationEnd: Array<Function> = [];
 
     public generation: number = 1;
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
@@ -458,19 +457,6 @@ export class Game {
             throw "Player not found";
         }
         return foundPlayers[0];
-    }
-
-    public addGenerationEndListener(end: Function): void {
-        this.onGenerationEnd.push(end);
-    }
-    public removeGenerationEndListener(end: Function): void {
-        for (var i = 0; i < this.onGenerationEnd.length; i++) {
-            if (this.onGenerationEnd[i] === end) {
-                this.onGenerationEnd.splice(i, 1);
-                return;
-            }
-        }
-        throw "Did not find remove listener for generation end";
     }
     public getAllSpaces(): Array<ISpace> {
         return this.spaces;

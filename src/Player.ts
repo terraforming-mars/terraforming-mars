@@ -97,6 +97,7 @@ export class Player {
     public generationPlayed: Map<string, number> = new Map<string, number>();
     private actionsTakenThisRound: number = 0;
     public terraformRating: number = 20;
+    public terraformRatingAtGenerationStart: number = 20;
     public victoryPoints: number = 0;
     public lastCardPlayedThisGeneration(game: Game): undefined | IProjectCard {
         const lastCardPlayed = this.playedCards[this.playedCards.length - 1];

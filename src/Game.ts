@@ -515,7 +515,9 @@ export class Game {
                 player.megaCredits += 2;
             } 
         });
-        player.onTilePlaced(space.bonus);
+        if (player.corporationCard !== undefined && player.corporationCard.onTilePlaced !== undefined) {
+            player.corporationCard.onTilePlaced(player, space.bonus);
+        }
     }
 
     public getAdjacentSpaces(space: ISpace): Array<ISpace> {

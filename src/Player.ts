@@ -18,7 +18,6 @@ import { SelectHowToPay } from "./inputs/SelectHowToPay";
 import { SelectAmount } from "./inputs/SelectAmount";
 import { SelectOption } from "./inputs/SelectOption";
 import { SelectPlayer } from "./inputs/SelectPlayer";
-import { SpaceBonus } from "./SpaceBonus";
 import { Award } from "./Award";
 import { Milestone } from "./Milestone";
 import { TileType } from "./TileType";
@@ -89,7 +88,6 @@ export class Player {
     public energyProduction: number = 0;
     public heat: number = 0;
     public heatProduction: number = 0;
-    public onTilePlaced: (bonus: Array<SpaceBonus>) => void = () => {};
     public plants: number = 0;
     public plantProduction: number = 0;
     public cardsInHand: Array<IProjectCard> = [];

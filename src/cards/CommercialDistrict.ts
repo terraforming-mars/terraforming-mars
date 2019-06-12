@@ -18,14 +18,17 @@ export class CommercialDistrict implements IProjectCard {
     public canPlay(player: Player): boolean {
         return player.energyProduction >= 1;
     }
+    public onGameEnd(player: Player, game: Game) {
+        const usedSpace = game.getSpaceByTileCard(this.name);
+        if (usedSpace !== undefined) {
+            player.victoryPoints += game.getAdjacentSpaces(usedSpace).filter((adjacentSpace) => adjacentSpace.tile && adjacentSpace.tile.tileType === TileType.CITY).length;
+        }
+    }
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space for special tile", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
-            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
+            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL, card: this.name });
             player.energyProduction--;
             player.megaCreditProduction += 4;
-            game.addGameEndListener(() => {
-                player.victoryPoints += game.getAdjacentSpaces(foundSpace).filter((adjacentSpace) => adjacentSpace.tile && adjacentSpace.tile.tileType === TileType.CITY).length;
-            });
             return undefined;
         });
     }

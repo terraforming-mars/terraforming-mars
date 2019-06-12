@@ -49,6 +49,10 @@ export class Game {
         
     }
 
+    public getSpaceByTileCard(cardName: string): ISpace | undefined {
+        return this.spaces.find((space) => space.tile !== undefined && space.tile.card === cardName);
+    }
+
     public milestoneClaimed(milestone: Milestone): boolean {
         return this.claimedMilestones.find((claimedMilestone) => claimedMilestone.milestone === milestone) !== undefined;
     }
@@ -69,9 +73,6 @@ export class Game {
         this.fundedAwards.push({
             award: award,
             player: player
-        });
-        this.addGameEndListener(() => {
-            this.giveAward(award);
         });
     }
 
@@ -311,10 +312,21 @@ export class Game {
 
     private gotoEndGame(): void {
         this.phase = Phase.END;
+
         // Give players any victory points from cards
-        this.onGameEnd.forEach((gameEnd) => {
-            gameEnd();
+        this.players.forEach((player) => {
+            player.playedCards.forEach((playedCard) => {
+                if (playedCard.onGameEnd !== undefined) {
+                    playedCard.onGameEnd(player, this);
+                }
+            });
         });
+
+        // Distribute awards
+        this.fundedAwards.forEach((fundedAward) => {
+            this.giveAward(fundedAward.award);
+        });
+
         const spaces = this.getAllSpaces();
         spaces.forEach((space) => {
             // Give victory point for each greenery tile
@@ -390,8 +402,6 @@ export class Game {
     public addOceanTilePlacedListener(listener: Function): void {
         this.onOceanTilePlaced.push(listener);
     }
-    public onGameEnd: Array<Function> = [];
-
     public generation: number = 1;
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
 
@@ -445,10 +455,6 @@ export class Game {
 
     public getGeneration(): number {
         return this.generation;
-    }
-
-    public addGameEndListener(end: Function): void {
-        this.onGameEnd.push(end);
     }
 
     public getPlayer(name: string): Player {
@@ -555,9 +561,9 @@ export class Game {
         });
         return this.increaseOxygenLevel(player, 1);
     }
-    public addCityTile(player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND): void {
+    public addCityTile(player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND, cardName: string | undefined = undefined): void {
         const space = this.getSpace(spaceId);
-        this.addTile(player, spaceType, space, { tileType: TileType.CITY });
+        this.addTile(player, spaceType, space, { tileType: TileType.CITY, card: cardName });
         this.onCityTilePlaced.forEach((fn: (space: ISpace) => void) => {
             fn(space);
         });

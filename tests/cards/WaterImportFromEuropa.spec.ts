@@ -15,12 +15,10 @@ describe("WaterImportFromEuropa", function () {
     it("Should play", function () {
         const card = new WaterImportFromEuropa();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        const action = card.play(player, game);
+        const action = card.play();
         expect(action).to.eq(undefined);
-        expect(game.onGameEnd.length).to.eq(1);
         player.playedCards.push(card);
-        game.onGameEnd[0]();
+        card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(1);
     });
     it("Should act", function () {

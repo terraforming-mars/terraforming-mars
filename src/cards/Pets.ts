@@ -16,13 +16,12 @@ export class Pets implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public play(player: Player, game: Game) {
+    public onGameEnd(player: Player) {
+        player.victoryPoints += Math.floor(this.animals / 2);
+    }
+    public play(_player: Player, game: Game) {
         game.addCityTilePlacedListener(() => {
             this.animals++;
-        });
-        // 1 VP per 2 animals on card
-        game.addGameEndListener(() => {
-            player.victoryPoints += Math.floor(this.animals / 2);
         });
         this.animals++;
         return undefined;

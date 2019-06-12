@@ -31,5 +31,6 @@ export interface ICard {
     getCardDiscount?: (player: Player, game: Game, card: IProjectCard) => number;
     getRequirementBonus?: (player: Player, game: Game) => boolean;
     onCardPlayed?: (player: Player, game: Game, card: IProjectCard) => OrOptions | void;
+    onGameEnd?: (player: Player, game: Game) => void;
     onStandardProject?: (player: Player, projectType: StandardProjectType) => void;
 }

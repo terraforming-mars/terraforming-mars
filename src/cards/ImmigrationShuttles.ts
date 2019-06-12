@@ -15,11 +15,11 @@ export class ImmigrationShuttles implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public play(player: Player, game: Game) {
+    public onGameEnd(player: Player, game: Game) {
+        player.victoryPoints += Math.floor(game.getCitiesInPlay() / 3); 
+    }
+    public play(player: Player) {
         player.megaCreditProduction += 5;
-        game.addGameEndListener(() => {
-            player.victoryPoints += Math.floor(game.getCitiesInPlay() / 3); 
-        });
         return undefined;
     }
 }

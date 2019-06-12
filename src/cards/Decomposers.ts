@@ -21,10 +21,10 @@ export class Decomposers implements IProjectCard {
             this.microbes++;
         }
     }
-    public play(player: Player, game: Game) {
-        game.addGameEndListener(() => {
-            player.victoryPoints += Math.floor(this.microbes / 3);
-        });
+    public onGameEnd(player: Player) {
+        player.victoryPoints += Math.floor(this.microbes / 3);
+    }
+    public play() {
         return undefined;
     }
 }

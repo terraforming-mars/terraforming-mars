@@ -22,20 +22,20 @@ export class SmallAnimals implements IActionCard, IProjectCard {
     private getAvailablePlayers(_player: Player, game: Game): Array<Player> {
         return game.getPlayers().filter((player) => player.plantProduction > 0);
     }
+    public onGameEnd(player: Player) {
+        player.victoryPoints += Math.floor(this.animals / 2);
+    }
     public play(player: Player, game: Game) {
         const availablePlayers = this.getAvailablePlayers(player, game);
         return new SelectPlayer(availablePlayers, "Select player to decrease plant production", (foundPlayer: Player) => {
             foundPlayer.plantProduction--;
-            game.addGameEndListener(() => {
-                player.victoryPoints += Math.floor(this.animals / 2);
-            });
             return undefined;
         });
     }
     public canAct(): boolean {
         return true;
     }
-    public action(_player: Player, _game: Game) {
+    public action() {
         this.animals++;
         return undefined;
     }

@@ -15,9 +15,7 @@ describe("Fish", function () {
     });
     it("Should act", function () {
         const card = new Fish();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        card.action(player, game);
+        card.action();
         expect(card.animals).to.eq(1);
     });
     it("Should play", function () {
@@ -30,9 +28,8 @@ describe("Fish", function () {
         player.plantProduction = 1;
         action.cb(player);
         expect(player.plantProduction).to.eq(0);
-        expect(game.onGameEnd.length).to.eq(1);
         card.animals = 5;
-        game.onGameEnd[0]();
+        card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(card.animals);
     });
 });

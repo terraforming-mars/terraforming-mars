@@ -9,7 +9,6 @@ import { AndOptions } from "../inputs/AndOptions";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 import { SpaceType } from "../SpaceType";
-import { PlayerInput } from "../PlayerInput";
 import { HowToPay } from "../inputs/HowToPay";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
 
@@ -24,10 +23,10 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
     public canPlay(_player: Player, _game: Game): boolean {
         return true;
     }
-    public play(player: Player, game: Game): PlayerInput | undefined {
-        game.addGameEndListener(() => {
-            player.victoryPoints += player.getTagCount(Tags.JOVIAN);
-        });
+    public onGameEnd(player: Player) {
+        player.victoryPoints += player.getTagCount(Tags.JOVIAN);
+    }
+    public play() {
         return undefined;
     }
     public canAct(player: Player): boolean {

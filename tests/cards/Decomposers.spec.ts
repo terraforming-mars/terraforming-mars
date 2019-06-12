@@ -18,18 +18,15 @@ describe("Decomposers", function () {
         const card = new Decomposers();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        game.increaseOxygenLevel(player, 2); // 2
-        game.increaseOxygenLevel(player, 1); // 3
-        const action = card.play(player, game);
+        const action = card.play();
         expect(action).to.eq(undefined);
-        expect(game.onGameEnd.length).to.eq(1);
         card.onCardPlayed(player, game, new Birds());
         expect(card.microbes).to.eq(1);
         card.onCardPlayed(player, game, card);
         expect(card.microbes).to.eq(2);
         card.onCardPlayed(player, game, new Algae());
         expect(card.microbes).to.eq(3);
-        game.onGameEnd[0]();
+        card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(1);
     });
 });

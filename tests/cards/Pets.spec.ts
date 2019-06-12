@@ -18,9 +18,8 @@ describe("Pets", function () {
         const game = new Game("foobar", [player], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(game.onGameEnd.length).to.eq(1);
         card.animals = 4;
-        game.onGameEnd[0]();
+        card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(2);
         game.addCityTile(player, game.getAvailableSpacesOnLand(player)[0].id);
         expect(card.animals).to.eq(5);

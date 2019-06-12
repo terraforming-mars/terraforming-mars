@@ -26,13 +26,12 @@ describe("EcologicalZone", function () {
         expect(action instanceof SelectSpace).to.eq(true);
         const adjacentSpace = action.availableSpaces[0];
         action.cb(adjacentSpace);
-        expect(game.onGameEnd.length).to.eq(1);
         expect(adjacentSpace.tile && adjacentSpace.tile.tileType).to.eq(TileType.SPECIAL); 
         card.onCardPlayed(player, game, card);
         expect(card.animals).to.eq(1);
         card.onCardPlayed(player, game, card);
         expect(card.animals).to.eq(2);
-        game.onGameEnd[0]();
+        card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(1);
         card.onCardPlayed(player, game, new Virus());
         expect(card.animals).to.eq(2);

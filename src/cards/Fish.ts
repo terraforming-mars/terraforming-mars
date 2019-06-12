@@ -19,19 +19,19 @@ export class Fish implements IActionCard, IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() >= 2 - (player.getRequirementsBonus(game) * 2);
     }
-    public play(player: Player, game: Game) {
+    public onGameEnd(player: Player) {
+        player.victoryPoints += this.animals;
+    }
+    public play(_player: Player, game: Game) {
         return new SelectPlayer(game.getPlayers(), "Select player to decrease plant production 1 step", (foundPlayer: Player) => {
             foundPlayer.plantProduction = Math.max(0, foundPlayer.plantProduction - 1);
-            game.addGameEndListener(() => {
-                player.victoryPoints += this.animals;
-            });
             return undefined;
         });
     }
     public canAct(): boolean {
         return true;
     }
-    public action(_player: Player, _game: Game) {
+    public action() {
         this.animals++;
         return undefined;
     }

@@ -33,12 +33,12 @@ export class EcologicalZone implements IProjectCard {
             this.animals++;
         } 
     }
+    public onGameEnd(player: Player) {
+        player.victoryPoints += Math.floor(this.animals / 2);
+    }
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space next to greenery for special tile", this.getAvailableSpaces(player, game), (requestedSpace: ISpace) => {
             game.addTile(player, requestedSpace.spaceType, requestedSpace, { tileType: TileType.SPECIAL });
-            game.addGameEndListener(() => {
-                player.victoryPoints += Math.floor(this.animals / 2);
-            });
             return undefined;
         });
     }

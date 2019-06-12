@@ -4,7 +4,6 @@ import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
-import { Game } from "../Game";
 
 export class PhysicsComplex implements IActionCard, IProjectCard {
     public cost: number = 12;
@@ -18,16 +17,16 @@ export class PhysicsComplex implements IActionCard, IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public play(player: Player, game: Game) {
-        game.addGameEndListener(() => {
-            player.victoryPoints += 2 * this.scienceResources;
-        });
+    public onGameEnd(player: Player) {
+        player.victoryPoints += 2 * this.scienceResources;
+    }
+    public play() {
         return undefined;
     }
     public canAct(player: Player): boolean {
         return player.energy >= 6;
     }
-    public action(player: Player, _game: Game) {
+    public action(player: Player) {
         player.energy -= 6;
         this.scienceResources++;
         return undefined;

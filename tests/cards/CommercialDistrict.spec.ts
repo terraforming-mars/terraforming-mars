@@ -24,11 +24,10 @@ describe("CommercialDistrict", function () {
         action.cb(action.availableSpaces[0]);
         expect(player.energyProduction).to.eq(0);
         expect(player.megaCreditProduction).to.eq(4);
-        expect(game.onGameEnd.length).to.eq(1);
         const adjacent = game.getAdjacentSpaces(action.availableSpaces[0]);
-        adjacent[0].tile = { tileType: TileType.CITY };
+        adjacent[0].tile = { tileType: TileType.CITY, card: card.name };
         adjacent[0].player = player;
-        game.onGameEnd[0]();
+        card.onGameEnd(player, game);
         expect(player.victoryPoints).to.eq(1);
     });
 });

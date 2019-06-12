@@ -18,9 +18,7 @@ describe("SmallAnimals", function () {
     });
     it("Should act", function () {
         const card = new SmallAnimals();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        card.action(player, game);
+        card.action();
         expect(card.animals).to.eq(1);
     });
     it("Should play", function () {
@@ -32,11 +30,10 @@ describe("SmallAnimals", function () {
         expect(action).not.to.eq(undefined);
         action.cb(player);
         expect(player.plantProduction).to.eq(0);
-        expect(game.onGameEnd.length).to.eq(1);
-        game.onGameEnd[0]();
+        card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(0);
         card.animals = 3;
-        game.onGameEnd[0]();
+        card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(1);
     });
 });

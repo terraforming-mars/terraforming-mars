@@ -16,13 +16,9 @@ describe("Ants", function () {
     it("Should play", function () {
         const card = new Ants();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        game.increaseOxygenLevel(player, 2);
-        game.increaseOxygenLevel(player, 2);
-        card.play(player, game);
-        expect(game.onGameEnd.length).to.eq(1);
+        card.play();
         card.microbes = 5;
-        game.onGameEnd[0]();
+        card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(2);
     });
     it("Should action", function () {

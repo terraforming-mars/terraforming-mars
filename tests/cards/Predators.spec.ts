@@ -15,18 +15,10 @@ describe("Predators", function () {
     it("Should play", function () {
         const card = new Predators();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        game.increaseOxygenLevel(player, 2); //  2
-        game.increaseOxygenLevel(player, 2); //  4
-        game.increaseOxygenLevel(player, 2); //  6
-        game.increaseOxygenLevel(player, 2); //  8
-        game.increaseOxygenLevel(player, 2); // 10
-        game.increaseOxygenLevel(player, 1); // 11
-        const action = card.play(player, game);
+        const action = card.play();
         expect(action).to.eq(undefined);
-        expect(game.onGameEnd.length).to.eq(1);
         card.animals = 5;
-        game.onGameEnd[0]();
+        card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(5);
     });
     it("Should act", function () {

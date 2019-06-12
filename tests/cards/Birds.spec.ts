@@ -34,9 +34,8 @@ describe("Birds", function () {
         player.plantProduction = 2;
         action.cb(player);
         expect(player.plantProduction).to.eq(0);
-        expect(game.onGameEnd.length).to.eq(1);
         card.animals = 2; 
-        game.onGameEnd[0]();
+        card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(2);
     });
     it("Should act", function () {

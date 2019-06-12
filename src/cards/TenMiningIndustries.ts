@@ -3,7 +3,6 @@ import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
-import { Game } from "../Game";
 
 export class TenMiningIndustries implements IProjectCard {
     public cost: number = 41;
@@ -15,12 +14,12 @@ export class TenMiningIndustries implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public play(player: Player, game: Game) {
+    public onGameEnd(player: Player) {
+        player.victoryPoints += player.getTagCount(Tags.JOVIAN);
+    }
+    public play(player: Player) {
         player.titaniumProduction += 2;
         player.megaCreditProduction += 2;
-        game.addGameEndListener(() => {
-            player.victoryPoints += player.getTagCount(Tags.JOVIAN);
-        });
         return undefined;
     }
 }

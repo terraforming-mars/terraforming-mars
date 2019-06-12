@@ -21,20 +21,13 @@ describe("Livestock", function () {
     it("Should play", function () {
         const card = new Livestock();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        game.increaseOxygenLevel(player, 2); // 2
-        game.increaseOxygenLevel(player, 2); // 4
-        game.increaseOxygenLevel(player, 2); // 6
-        game.increaseOxygenLevel(player, 2); // 8
-        game.increaseOxygenLevel(player, 1); // 9
         player.plantProduction = 1;
-        const action = card.play(player, game);
+        const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.plantProduction).to.eq(0);
         expect(player.megaCreditProduction).to.eq(2);
-        expect(game.onGameEnd.length).to.eq(1);
         card.animals = 4;
-        game.onGameEnd[0]();
+        card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(4);
     });
     it("Should act", function () {

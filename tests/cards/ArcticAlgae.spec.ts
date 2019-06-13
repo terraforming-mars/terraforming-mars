@@ -20,8 +20,9 @@ describe("ArcticAlgae", function () {
         const card = new ArcticAlgae();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        card.play(player, game);
+        card.play(player);
         expect(player.plants).to.eq(1);
+        player.playedCards.push(card);
         game.addOceanTile(player, game.getAvailableSpacesForOcean(player)[0].id);
         expect(player.plants).to.eq(3); 
     });

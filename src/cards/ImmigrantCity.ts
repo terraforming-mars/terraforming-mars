@@ -6,6 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { ISpace } from "../ISpace";
 import { SelectSpace } from "../inputs/SelectSpace";
+import { TileType } from "../TileType";
 
 export class ImmigrantCity implements IProjectCard {
     public cost: number = 13;
@@ -15,16 +16,18 @@ export class ImmigrantCity implements IProjectCard {
     public text: string = "Decrease your energy production 1 step and decrease your mega credit production 2 steps. Place a city tile. Each time a city tile is placed, including this, increase your mega credit production 1 step.";
     public description: string = "Taking care of immigrants is costly, but will begin to pay off when they start working for you in the growing society.";
     public canPlay(player: Player): boolean {
-        return player.energyProduction >= 1 && player.megaCreditProduction >= 3;
+        return player.energyProduction >= 1 && player.megaCreditProduction >= -3;
+    }
+    public onTilePlaced(player: Player, space: ISpace) {
+        if (space.tile !== undefined && space.tile.tileType === TileType.CITY) {
+            player.megaCreditProduction++;
+        }
     }
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
             player.energyProduction--;
             player.megaCreditProduction++;
-            game.addCityTilePlacedListener(() => {
-                player.megaCreditProduction++;
-            });
             return undefined;
         });
     }

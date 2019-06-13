@@ -5,26 +5,29 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { SpaceType } from "../../../src/SpaceType";
+import { TileType } from "../../../src/TileType";
 
 describe("TharsisRepublic", function () {
     it("Should play", function () {
         const card = new TharsisRepublic();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        const action = card.play(player, game);
+        const action = card.play();
         expect(action).to.eq(undefined);
-        expect(game.onCityTilePlaced.length).to.eq(1);
         const lands = game.getAvailableSpacesOnLand(player);
         lands[0].player = player;
-        game.onCityTilePlaced[0](lands[0]);
+        lands[0].tile = { tileType: TileType.CITY };
+        lands[1].tile = { tileType: TileType.CITY }; 
+        card.onTilePlaced(player, lands[0]);
         expect(player.megaCredits).to.eq(3);
         expect(player.megaCreditProduction).to.eq(1);
-        game.onCityTilePlaced[0](lands[1]);
+        card.onTilePlaced(player, lands[1]);
         expect(player.megaCredits).to.eq(3);
         expect(player.megaCreditProduction).to.eq(2);
         const colony = game.getAllSpaces().find((space) => space.spaceType === SpaceType.COLONY);
         expect(colony).not.to.eq(undefined);
-        game.onCityTilePlaced[0](colony!);
+        colony!.tile = { tileType: TileType.CITY };
+        card.onTilePlaced(player, colony!);
         expect(player.megaCreditProduction).to.eq(2); 
     });
     it("Should take initial action", function () {

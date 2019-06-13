@@ -32,6 +32,7 @@ describe("Herbivores", function () {
         action.cb(player);
         expect(player.plantProduction).to.eq(0);
         expect(card.animals).to.eq(1);
+        player.playedCards.push(card);
         game.addGreenery(player, game.getAvailableSpacesOnLand(player)[0].id);
         card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(1);

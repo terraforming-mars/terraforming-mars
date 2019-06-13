@@ -1,6 +1,7 @@
 
 import { AndOptions } from "../inputs/AndOptions";
 import { IProjectCard } from "../cards/IProjectCard";
+import { ISpace } from "../ISpace";
 import { PlayerInput } from "../PlayerInput";
 import { Player } from "../Player";
 import { Game } from "../Game";
@@ -12,7 +13,6 @@ import { SelectPlayer } from "../inputs/SelectPlayer";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { StandardProjectType } from "../StandardProjectType";
 import { OrOptions } from "../inputs/OrOptions";
-import { SpaceBonus } from "../SpaceBonus";
 
 export interface IActionCard {
     actionText: string;
@@ -34,5 +34,5 @@ export interface ICard {
     onCardPlayed?: (player: Player, game: Game, card: IProjectCard) => OrOptions | void;
     onGameEnd?: (player: Player, game: Game) => void;
     onStandardProject?: (player: Player, projectType: StandardProjectType) => void;
-    onTilePlaced?: (player: Player, bonuses: Array<SpaceBonus>) => void;
+    onTilePlaced?: (player: Player, space: ISpace) => void;
 }

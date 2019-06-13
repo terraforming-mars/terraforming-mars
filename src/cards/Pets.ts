@@ -3,7 +3,8 @@ import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
-import { Game } from "../Game";
+import { TileType } from "../TileType";
+import { ISpace } from "../ISpace";
 
 export class Pets implements IProjectCard {
     public cost: number = 10;
@@ -19,10 +20,12 @@ export class Pets implements IProjectCard {
     public onGameEnd(player: Player) {
         player.victoryPoints += Math.floor(this.animals / 2);
     }
-    public play(_player: Player, game: Game) {
-        game.addCityTilePlacedListener(() => {
+    public onTilePlaced(_player: Player, space: ISpace) {
+        if (space.tile !== undefined && space.tile.tileType === TileType.CITY) {
             this.animals++;
-        });
+        }
+    }
+    public play() {
         this.animals++;
         return undefined;
     }

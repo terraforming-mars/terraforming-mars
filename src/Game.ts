@@ -390,18 +390,6 @@ export class Game {
 
     public dealer: Dealer = new Dealer();
     private spaces: Array<ISpace> = new OriginalBoard().spaces;
-    private onGreeneryPlaced: Array<Function> = [];
-    public onCityTilePlaced: Array<(space: ISpace) => void> = [];
-    private onOceanTilePlaced: Array<Function> = [];
-    public addGreeneryPlacedListener(listener: Function): void {
-        this.onGreeneryPlaced.push(listener);
-    }
-    public addCityTilePlacedListener(listener: (space: ISpace) => void): void {
-        this.onCityTilePlaced.push(listener);
-    }
-    public addOceanTilePlacedListener(listener: Function): void {
-        this.onOceanTilePlaced.push(listener);
-    }
     public generation: number = 1;
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
 
@@ -515,9 +503,6 @@ export class Game {
                 player.megaCredits += 2;
             } 
         });
-        if (player.corporationCard !== undefined && player.corporationCard.onTilePlaced !== undefined) {
-            player.corporationCard.onTilePlaced(player, space.bonus);
-        }
     }
 
     public getAdjacentSpaces(space: ISpace): Array<ISpace> {
@@ -556,19 +541,27 @@ export class Game {
         }
         return [];
     }
+    private tilePlaced(space: ISpace) {
+        this.players.forEach((player) => {
+            if (player.corporationCard !== undefined && player.corporationCard.onTilePlaced !== undefined) {
+                player.corporationCard.onTilePlaced(player, space);
+            }
+            player.playedCards.forEach((playedCard) => {
+                if (playedCard.onTilePlaced !== undefined) {
+                    playedCard.onTilePlaced(player, space);
+                }
+            });
+        });
+    }
     public addGreenery(player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND): SelectSpace | undefined {
         this.addTile(player, spaceType, this.getSpace(spaceId), { tileType: TileType.GREENERY });
-        this.onGreeneryPlaced.forEach((fn: Function) => {
-            fn(player);
-        });
+        this.tilePlaced(this.getSpace(spaceId));
         return this.increaseOxygenLevel(player, 1);
     }
     public addCityTile(player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND, cardName: string | undefined = undefined): void {
         const space = this.getSpace(spaceId);
         this.addTile(player, spaceType, space, { tileType: TileType.CITY, card: cardName });
-        this.onCityTilePlaced.forEach((fn: (space: ISpace) => void) => {
-            fn(space);
-        });
+        this.tilePlaced(space);
     }
     public addOceanTile(player: Player, spaceId: string, spaceType: SpaceType = SpaceType.OCEAN): void {
         if (this.getOceansOnBoard() - 1 === constants.MAX_OCEAN_TILES) {
@@ -578,9 +571,7 @@ export class Game {
         // No one can own the oceans!
         this.getSpace(spaceId).player = undefined;
         player.terraformRating++;
-        this.onOceanTilePlaced.forEach((fn) => {
-            fn();
-        });
+        this.tilePlaced(this.getSpace(spaceId));
     }
     public getOceansOnBoard(): number {
         return this.getSpaces(SpaceType.OCEAN).filter((space) => space.tile !== undefined && space.tile.tileType === TileType.OCEAN).length + this.getSpaces(SpaceType.LAND).filter((space) => space.tile !== undefined && space.tile.tileType === TileType.OCEAN).length;

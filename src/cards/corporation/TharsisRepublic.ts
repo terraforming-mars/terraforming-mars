@@ -6,6 +6,7 @@ import { Game } from "../../Game";
 import { SelectSpace } from "../../inputs/SelectSpace";
 import { SpaceType } from "../../SpaceType";
 import { ISpace } from "../../ISpace";
+import { TileType } from "../../TileType";
 
 export class TharsisRepublic implements CorporationCard {
     public name: string = "Tharsis Republic";
@@ -19,15 +20,17 @@ export class TharsisRepublic implements CorporationCard {
             return undefined;
         });
     }
-    public play(player: Player, game: Game) {
-        game.addCityTilePlacedListener((space: ISpace) => {
+    public onTilePlaced(player: Player, space: ISpace) {
+        if (space.tile !== undefined && space.tile.tileType === TileType.CITY) {
             if (space.player === player) {
                 player.megaCredits += 3;
             }
             if (space.spaceType !== SpaceType.COLONY) {
                 player.megaCreditProduction++;
             }
-        });
+        }
+    }
+    public play() {
         return undefined;
     }
 }

@@ -5,6 +5,8 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectPlayer } from "../inputs/SelectPlayer";
+import { ISpace } from "../ISpace";
+import { TileType } from "../TileType";
 
 export class Herbivores implements IProjectCard {
     public cost: number = 12;
@@ -20,15 +22,15 @@ export class Herbivores implements IProjectCard {
     public onGameEnd(player: Player) {
         player.victoryPoints += Math.floor(this.animals / 2);
     }
-    public play(player: Player, game: Game) {
+    public onTilePlaced(player: Player, space: ISpace) {
+        if (space.player === player && space.tile !== undefined && space.tile.tileType === TileType.GREENERY) {
+            this.animals++;
+        }
+    }
+    public play(_player: Player, game: Game) {
         return new SelectPlayer(game.getPlayers(), "Select player to decrease plant production 1 step", (foundPlayer: Player) => {
             foundPlayer.plantProduction = Math.max(0, foundPlayer.plantProduction - 1);
             this.animals++;
-            game.addGreeneryPlacedListener((placedPlayer: Player) => {
-                if (placedPlayer === player) {
-                    this.animals++;
-                }
-            });
             return undefined;
         });
     }

@@ -1,6 +1,5 @@
 
 // Corporation Cards
-import { BeginnerCorporation } from "./cards/corporation/BeginnerCorporation";
 import { CorporationCard } from "./cards/corporation/CorporationCard";
 import { CrediCor } from "./cards/corporation/CrediCor";
 import { EcoLine } from "./cards/corporation/EcoLine";
@@ -454,19 +453,12 @@ export const ALL_PROJECT_CARDS: Array<IProjectCard> = [
 ];
 
 export class Dealer {
-    private corporationCards: Array<CorporationCard> = [];
-    public beginnerCard: BeginnerCorporation = new BeginnerCorporation();
+    public deck: Array<IProjectCard> = [];
+    public discarded: Array<IProjectCard> = [];
     constructor() {
-        this.corporationCards = this.shuffleCards(ALL_CORPORATION_CARDS);
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS);
     }
-    public getBeginnerCard(): CorporationCard {
-        return this.beginnerCard;
-    }
-    public getCorporationCards(count: number): Array<CorporationCard> {
-        return this.corporationCards.splice(0, count);
-    }
-    private shuffleCards(cards: Array<any>): Array<any> {
+    public shuffleCards(cards: Array<any>): Array<any> {
         const deck: Array<any> = [];
         const copy = cards.slice();
         while (copy.length) {
@@ -474,8 +466,6 @@ export class Dealer {
         }
         return deck;
     }
-    private deck: Array<IProjectCard> = [];
-    public discarded: Array<IProjectCard> = [];
     public discard(card: IProjectCard): void {
         this.discarded.push(card);
     }

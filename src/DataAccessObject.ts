@@ -1,17 +1,18 @@
 
+import { Dealer } from "./Dealer";
 import { Game } from "./Game";
 import * as fs from "fs";
 
-/*
- create table Game
-  id key string
-  data string
- create table Player
-  id key string
-  data string
-*/
+type SimplePOJO = {[x: string]: Array<string> | string | number};
 
 export class DataAccessObject {
+    public putDealer(dealer: Dealer): SimplePOJO {
+        return {
+            deck: dealer.deck.map((card) => card.name),
+            discarded: dealer.discarded.map((card) => card.name)
+        };
+    }
+
     public putGame(game: Game): void {
         var output = {
             activePlayer: game.activePlayer.id,
@@ -19,6 +20,7 @@ export class DataAccessObject {
                 milestone: cm.milestone,
                 player: cm.player.id
             })),
+            dealer: this.putDealer(game.dealer),
             fundedAwards: game.fundedAwards.map((fa) => ({
                 award: fa.award,
                 player: fa.player.id

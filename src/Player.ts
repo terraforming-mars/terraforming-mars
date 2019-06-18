@@ -34,6 +34,7 @@ export class Player {
     public id: string = this.generateId();
     public canUseHeatAsMegaCredits: boolean = false;
     public plantsNeededForGreenery: number = 8;
+    public dealtCorporationCards: Array<CorporationCard> = [];
     public powerPlantCost: number = 11;
     public titaniumValue: number = 3;
     public steelValue: number = 2;

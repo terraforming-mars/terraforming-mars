@@ -24,6 +24,8 @@ import { Milestone } from "./Milestone";
 import { ResourceType } from "./ResourceType";
 import * as constants from "./constants";
 
+import { ALL_CORPORATION_CARDS } from "./Dealer";
+
 export class Game {
     public activePlayer: Player;
     public claimedMilestones: Array<ClaimedMilestone> = [];
@@ -44,9 +46,14 @@ export class Game {
         if (players.length === 1) {
             players[0].terraformRating = players[0].terraformRatingAtGenerationStart = 14;
         }
+        const corporationCards = this.dealer.shuffleCards(ALL_CORPORATION_CARDS);
         // Give each player their corporation cards
         for (let player of players) {
             if (!player.beginner) {
+                player.dealtCorporationCards = [
+                    corporationCards.pop(),
+                    corporationCards.pop()
+                ];
                 player.setWaitingFor(this.pickCorporationCard(player));
             } else {
                 player.corporationCard = new BeginnerCorporation();
@@ -165,7 +172,7 @@ export class Game {
                 this.playerIsFinishedWithResearchPhase(player);
                 return undefined;
             },
-            new SelectCard<CorporationCard>("Select corporation", this.dealer.getCorporationCards(2), (foundCards: Array<CorporationCard>) => {
+            new SelectCard<CorporationCard>("Select corporation", player.dealtCorporationCards, (foundCards: Array<CorporationCard>) => {
                 player.corporationCard = foundCards[0];
                 return undefined;
             }),
@@ -174,6 +181,11 @@ export class Game {
                 player.megaCredits = player.corporationCard!.startingMegaCredits - (constants.CARD_COST * foundCards.length);
                 for (let foundCard of foundCards) {
                     player.cardsInHand.push(foundCard);
+                }
+                for (let dealtCard of dealtCards) {
+                    if (foundCards.find((foundCard) => foundCard.name === dealtCard.name) === undefined) {
+                        this.dealer.discard(dealtCard);
+                    }
                 }
                 return undefined;
             }, 10, 0)

@@ -7,6 +7,7 @@ import { BeginnerCorporation } from "../cards/corporation/BeginnerCorporation";
 import { ALL_CORPORATION_CARDS, ALL_PROJECT_CARDS } from "../Dealer";
 import { CardType } from "../cards/CardType";
 import { Tags } from "../cards/Tags";
+import { ResourceType } from "../ResourceType";
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
     if (cardName === (new BeginnerCorporation()).name) {
@@ -21,12 +22,9 @@ function getProjectCardByName(cardName: string): IProjectCard | undefined {
 
 export const Card = Vue.component("card", {
     props: [
-        "animals",
         "card",
-        "fighterResources",
-        "microbes",
         "hideCost",
-        "scienceResources"
+        "resources"
     ],
     data: function () {
         return {};
@@ -34,6 +32,9 @@ export const Card = Vue.component("card", {
     methods: {
         getCard: function () {
             return getProjectCardByName(this.card) || getCorporationCardByName(this.card);
+        },
+        getResourceType: function () {
+            return ResourceType;
         },
         getEventColor: function (cardType: CardType) {
             if (cardType === CardType.EVENT) {
@@ -98,10 +99,10 @@ export const Card = Vue.component("card", {
             <span v-if="this.getCard().actionText" style="font-weight:bold">{{this.getCard().actionText}}</span>
             <span>{{this.getCard().text}}</span>
             <i>{{this.getCard().description}}</i>
-            <strong v-if="this.getCard().animals !== undefined">{{this.getCard().animals}} animals</strong>
-            <strong v-if="this.getCard().fighterResources !== undefined">{{this.getCard().fighterResources}} fighter resources</strong>
-            <strong v-if="this.getCard().microbes !== undefined">{{this.getCard().microbes}} microbes</strong>
-            <strong v-if="this.getCard().scienceResources !== undefined">{{this.getCard().scienceResources}} science resources</strong>
+            <strong v-if="this.getCard().resourceType === getResourceType().ANIMAL">{{this.resources}} animals</strong>
+            <strong v-if="this.getCard().resourceType === getResourceType().FIGHTER">{{this.resources}} fighter resources</strong>
+            <strong v-if="this.getCard().resourceType === getResourceType().MICROBE">{{this.resources}} microbes</strong>
+            <strong v-if="this.getCard().resourceType === getResourceType().SCIENCE">{{this.resources}} science resources</strong>
         </span>`
 });
 

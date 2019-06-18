@@ -27,6 +27,8 @@ import * as constants from "./constants";
 import { ProtectedHabitats } from "./cards/ProtectedHabitats";
 import { Pets } from "./cards/Pets";
 
+const INITIAL_ACTION: string = "INITIAL";
+
 export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
     public id: string = this.generateId();
@@ -855,12 +857,12 @@ export class Player {
         if (
             game.getGeneration() === 1 &&
             this.corporationCard !== undefined &&
-            !this.actionsThisGeneration.has("INITIAL") &&
+            !this.actionsThisGeneration.has(INITIAL_ACTION) &&
             this.corporationCard.initialAction !== undefined
         ) {
             const input = this.corporationCard.initialAction(this, game);
             input.onend = () => {
-                this.actionsThisGeneration.add("INITIAL");
+                this.actionsThisGeneration.add(INITIAL_ACTION);
                 this.actionsTakenThisRound++;
                 this.takeAction(game);
             };

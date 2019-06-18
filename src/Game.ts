@@ -147,10 +147,18 @@ export class Game {
     }
 
     private pickCorporationCard(player: Player): PlayerInput {
-        const dealtCards: Array<IProjectCard> = [];
-        for (let i = 0; i < 10; i++) {
-            dealtCards.push(this.dealer.dealCard());
-        }
+        const dealtCards: Array<IProjectCard> = [
+            this.dealer.dealCard(),
+            this.dealer.dealCard(),
+            this.dealer.dealCard(),
+            this.dealer.dealCard(),
+            this.dealer.dealCard(),
+            this.dealer.dealCard(),
+            this.dealer.dealCard(),
+            this.dealer.dealCard(),
+            this.dealer.dealCard(),
+            this.dealer.dealCard()
+        ];
         return new AndOptions(
             () => {
                 player.corporationCard!.play(player, this);

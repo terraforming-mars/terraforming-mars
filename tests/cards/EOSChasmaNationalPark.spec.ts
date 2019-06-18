@@ -24,7 +24,7 @@ describe("EOSChasmaNationalPark", function () {
         expect(action instanceof SelectCard).to.eq(true);
         player.playedCards.push(birds);
         action.cb([birds]);
-        expect(birds.animals).to.eq(1);
+        expect(player.getResourcesOnCard(birds)).to.eq(1);
         expect(player.plants).to.eq(3);
         expect(player.megaCreditProduction).to.eq(2);
         expect(player.victoryPoints).to.eq(1);

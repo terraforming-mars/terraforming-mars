@@ -20,13 +20,13 @@ describe("Virus", function () {
         expect(player.plants).to.eq(0);
         const birds = new Birds();
         player.playedCards.push(birds);
-        birds.animals = 1;
+        player.addResourceTo(birds);
         const orOptions = card.play(player, game) as OrOptions;
         expect(orOptions instanceof OrOptions).to.eq(true);
         player.plants = 5;
         orOptions.options[0].cb([player.playedCards[0]]);
         expect(player.plants).to.eq(5);
-        expect(birds.animals).to.eq(0);
+        expect(player.getResourcesOnCard(birds)).to.eq(0);
         orOptions.options[1].cb(player);
         expect(player.plants).to.eq(0);
     });

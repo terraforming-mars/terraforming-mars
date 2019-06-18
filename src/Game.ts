@@ -21,12 +21,23 @@ import { Tags } from "./cards/Tags";
 import { ClaimedMilestone } from "./ClaimedMilestone";
 import { FundedAward } from "./FundedAward";
 import { Milestone } from "./Milestone";
+import { ResourceType } from "./ResourceType";
 import * as constants from "./constants";
 
 export class Game {
     public activePlayer: Player;
     public claimedMilestones: Array<ClaimedMilestone> = [];
-    public fundedAwards: Array<FundedAward> = [];
+    public fundedAwards: Array<FundedAward> = []; 
+    private passedPlayers: Set<Player> = new Set<Player>();
+    public phase: Phase = Phase.RESEARCH;
+    private donePlayers: Set<Player> = new Set<Player>();
+    private researchedPlayers: Set<Player> = new Set<Player>();
+    public dealer: Dealer = new Dealer();
+    private spaces: Array<ISpace> = new OriginalBoard().spaces;
+    public generation: number = 1;
+    private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
+    private temperature: number = constants.MIN_TEMPERATURE;
+
     constructor(public id: string, private players: Array<Player>, private first: Player) {
         this.activePlayer = first;
         // Single player game player starts with 14TR
@@ -161,8 +172,6 @@ export class Game {
         );
     }
  
-    private passedPlayers: Set<Player> = new Set<Player>();
-
     private hasPassedThisActionPhase(player: Player): boolean {
         return this.passedPlayers.has(player);
     }
@@ -179,8 +188,6 @@ export class Game {
         }
         this.first = this.players[firstIndex];
     }
-
-    public phase: Phase = Phase.RESEARCH;
 
     private dealEachPlayer4Cards(): void {
         this.players.forEach((player) => {
@@ -238,9 +245,6 @@ export class Game {
     private hasResearched(player: Player): boolean {
         return this.researchedPlayers.has(player);
     }
-
-    private donePlayers: Set<Player> = new Set<Player>();
-    private researchedPlayers: Set<Player> = new Set<Player>();
 
     public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
         // Greenery must be placed by a space you own if you own a space
@@ -388,11 +392,6 @@ export class Game {
         player.takeAction(this);
     }
 
-    public dealer: Dealer = new Dealer();
-    private spaces: Array<ISpace> = new OriginalBoard().spaces;
-    public generation: number = 1;
-    private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
-
     public increaseOxygenLevel(player: Player, steps: 1 | 2): SelectSpace | undefined {
         if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
             return undefined;
@@ -408,8 +407,6 @@ export class Game {
     public getOxygenLevel(): number {
         return this.oxygenLevel;
     }
-
-    private temperature: number = constants.MIN_TEMPERATURE;
 
     public increaseTemperature(player: Player, steps: 1 | 2 | 3): SelectSpace | undefined {
         if (this.temperature >= constants.MAX_TEMPERATURE) {
@@ -439,8 +436,6 @@ export class Game {
         return this.temperature;
     }
 
-    public oceansPlaced: number = 0;
-
     public getGeneration(): number {
         return this.generation;
     }
@@ -452,9 +447,11 @@ export class Game {
         }
         return foundPlayers[0];
     }
+
     public getAllSpaces(): Array<ISpace> {
         return this.spaces;
     }
+
     public getSpace(id: string): ISpace {
         const matchedSpaces = this.spaces.filter((space) => space.id === id);
         if (matchedSpaces.length === 1) {
@@ -584,7 +581,7 @@ export class Game {
         const result: Array<IProjectCard> = [];
         this.players.forEach((player) => {
             player.playedCards.forEach((card) => {
-                if (card.name !== c.name && card.animals !== undefined) {
+                if (card.name !== c.name && card.resourceType === ResourceType.ANIMAL) {
                     result.push(card);
                 }
             });
@@ -596,7 +593,7 @@ export class Game {
         const result: Array<IProjectCard> = [];
         this.players.forEach((player) => {
             player.playedCards.forEach((card) => {
-                if (card.name !== c.name && card.microbes !== undefined) {
+                if (card.name !== c.name && card.resourceType === ResourceType.MICROBE) {
                     result.push(card);
                 }
             });
@@ -608,7 +605,7 @@ export class Game {
         const result: Array<IProjectCard> = [];
         this.players.forEach((player) => {
             player.playedCards.forEach((card) => {
-                if (card.animals !== undefined) {
+                if (card.resourceType === ResourceType.ANIMAL) {
                     result.push(card);
                 }
             });

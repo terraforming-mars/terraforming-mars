@@ -26,6 +26,6 @@ describe("LargeConvoy", function () {
         ((action as AndOptions).options[1] as OrOptions).options[0].cb();
         expect(player.plants).to.eq(5);
         ((action as AndOptions).options[1] as OrOptions).options[1].cb([pets]);
-        expect(pets.animals).to.eq(4);
+        expect(player.getResourcesOnCard(pets)).to.eq(4);
     });
 });

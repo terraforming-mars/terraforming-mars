@@ -5,6 +5,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { ResourceType } from "../ResourceType";
 import { SelectPlayer } from "../inputs/SelectPlayer";
 
 export class SmallAnimals implements IActionCard, IProjectCard {
@@ -12,7 +13,7 @@ export class SmallAnimals implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.ANIMAL];
     public name: string = "Small Animals";
     public cardType: CardType = CardType.ACTIVE;
-    public animals: number = 0;
+    public resourceType: ResourceType = ResourceType.ANIMAL;
     public actionText: string = "Add 1 animal to this card";
     public text: string = "Requires 6% oxygen. Decrease any plant production 1 step. Gain 1 victory point per 2 animals on this card.";
     public description: string = "Able to live in sparse conditions.";
@@ -23,7 +24,7 @@ export class SmallAnimals implements IActionCard, IProjectCard {
         return game.getPlayers().filter((player) => player.plantProduction > 0);
     }
     public onGameEnd(player: Player) {
-        player.victoryPoints += Math.floor(this.animals / 2);
+        player.victoryPoints += Math.floor(player.getResourcesOnCard(this) / 2);
     }
     public play(player: Player, game: Game) {
         const availablePlayers = this.getAvailablePlayers(player, game);
@@ -35,8 +36,8 @@ export class SmallAnimals implements IActionCard, IProjectCard {
     public canAct(): boolean {
         return true;
     }
-    public action() {
-        this.animals++;
+    public action(player: Player) {
+        player.addResourceTo(this);
         return undefined;
     }
 }

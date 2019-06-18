@@ -21,18 +21,21 @@ describe("Livestock", function () {
     it("Should play", function () {
         const card = new Livestock();
         const player = new Player("test", Color.BLUE, false);
+        player.playedCards.push(card);
         player.plantProduction = 1;
         const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.plantProduction).to.eq(0);
         expect(player.megaCreditProduction).to.eq(2);
-        card.animals = 4;
+        player.addResourceTo(card, 4);
         card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(4);
     });
     it("Should act", function () {
         const card = new Livestock();
-        card.action();
-        expect(card.animals).to.eq(1);
+        const player = new Player("test", Color.BLUE, false);
+        player.playedCards.push(card);
+        card.action(player);
+        expect(player.getResourcesOnCard(card)).to.eq(1);
     });
 });

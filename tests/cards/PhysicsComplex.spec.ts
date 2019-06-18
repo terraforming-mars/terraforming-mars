@@ -13,19 +13,21 @@ describe("PhysicsComplex", function () {
     it("Should play", function () {
         const card = new PhysicsComplex();
         const player = new Player("test", Color.BLUE, false);
+        player.playedCards.push(card);
         const action = card.play();
         expect(action).to.eq(undefined);
-        card.scienceResources = 4;
+        player.addResourceTo(card, 4);
         card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(8);
     });
     it("Should act", function () {
         const card = new PhysicsComplex();
         const player = new Player("test", Color.BLUE, false);
+        player.playedCards.push(card);
         player.energy = 6;
         const action = card.action(player);
         expect(player.energy).to.eq(0);
-        expect(card.scienceResources).to.eq(1);
+        expect(player.getResourcesOnCard(card)).to.eq(1);
         expect(action).to.eq(undefined);
     });
 });

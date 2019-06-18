@@ -24,8 +24,8 @@ describe("ImportedNitrogen", function () {
         expect(player.terraformRating).to.eq(15);
         expect(player.plants).to.eq(4);
         andAction.options[0].cb([tardigrades]);
-        expect(tardigrades.microbes).to.eq(3);
+        expect(player.getResourcesOnCard(tardigrades)).to.eq(3);
         andAction.options[1].cb([pets]);
-        expect(pets.animals).to.eq(2);
+        expect(player.getResourcesOnCard(pets)).to.eq(2);
     });
 });

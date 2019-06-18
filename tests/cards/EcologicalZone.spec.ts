@@ -18,6 +18,7 @@ describe("EcologicalZone", function () {
     it("Should play", function () {
         const card = new EcologicalZone();
         const player = new Player("test", Color.BLUE, false);
+        player.playedCards.push(card);
         const game = new Game("foobar", [player], player);
         const landSpace = game.getAvailableSpacesOnLand(player)[0];
         game.addGreenery(player, landSpace.id);
@@ -28,13 +29,13 @@ describe("EcologicalZone", function () {
         action.cb(adjacentSpace);
         expect(adjacentSpace.tile && adjacentSpace.tile.tileType).to.eq(TileType.SPECIAL); 
         card.onCardPlayed(player, game, card);
-        expect(card.animals).to.eq(1);
+        expect(player.getResourcesOnCard(card)).to.eq(1);
         card.onCardPlayed(player, game, card);
-        expect(card.animals).to.eq(2);
+        expect(player.getResourcesOnCard(card)).to.eq(2);
         card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(1);
         card.onCardPlayed(player, game, new Virus());
-        expect(card.animals).to.eq(2);
+        expect(player.getResourcesOnCard(card)).to.eq(2);
     });
 });
 

@@ -34,8 +34,10 @@ describe("ExtremeColdFungus", function () {
         expect(action instanceof OrOptions).to.eq(true);
         expect(action!.options.length).to.eq(2);
         const tardigrades = new Tardigrades();
+        player.playedCards.push(tardigrades);
+        player.addResourceTo(tardigrades, 4);
         action!.options[1].cb([tardigrades]);
-        expect(tardigrades.microbes).to.eq(2);
+        expect(player.getResourcesOnCard(tardigrades)).to.eq(2);
         action!.options[0].cb();
         expect(player.plants).to.eq(1);
     });

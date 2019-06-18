@@ -221,7 +221,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
 function getPlayer(player: Player, game: Game): string {
     const output = {
-        cardsInHand: getCards(player.cardsInHand),
+        cardsInHand: getCards(player, player.cardsInHand),
         claimedMilestones: game.claimedMilestones.map((claimedMilestone) => { return { player: claimedMilestone.player.id, milestone: claimedMilestone.milestone } }),
         color: player.color,
         corporationCard: player.corporationCard ? player.corporationCard.name : undefined,
@@ -240,7 +240,7 @@ function getPlayer(player: Player, game: Game): string {
         phase: game.phase,
         plants: player.plants,
         plantProduction: player.plantProduction,
-        playedCards: getCards(player.playedCards),
+        playedCards: getCards(player, player.playedCards),
         players: getPlayers(game.getPlayers()),
         spaces: getSpaces(game.getAllSpaces()),
         steel: player.steel,
@@ -307,13 +307,10 @@ function getWaitingFor(waitingFor: PlayerInput | undefined): PlayerInputModel | 
     return result;
 }
 
-function getCards(cards: Array<IProjectCard>): Array<CardModel> {
+function getCards(player: Player, cards: Array<IProjectCard>): Array<CardModel> {
     return cards.map((card) => ({
-        animals: card.animals,
-        fighterResources: card.fighterResources,
-        microbes: card.microbes,
-        name: card.name,
-        scienceResources: card.scienceResources
+        resources: player.getResourcesOnCard(card),
+        name: card.name
     }));
 }
 
@@ -331,7 +328,7 @@ function getPlayers(players: Array<Player>): Array<PlayerModel> {
             name: player.name,
             plants: player.plants,
             plantProduction: player.plantProduction,
-            playedCards: getCards(player.playedCards),
+            playedCards: getCards(player, player.playedCards),
             steel: player.steel,
             steelProduction: player.steelProduction,
             terraformRating: player.terraformRating,

@@ -28,6 +28,36 @@ import { ProtectedHabitats } from "./cards/ProtectedHabitats";
 import { Pets } from "./cards/Pets";
 
 export class Player {
+    public corporationCard: CorporationCard | undefined = undefined;
+    public id: string = this.generateId();
+    public canUseHeatAsMegaCredits: boolean = false;
+    public plantsNeededForGreenery: number = 8;
+    public powerPlantCost: number = 11;
+    public titaniumValue: number = 3;
+    public steelValue: number = 2;
+    public megaCredits: number = 0;
+    public megaCreditProduction: number = 0;
+    public steel: number = 0;
+    public titanium: number = 0;
+    public energy: number = 0;
+    public steelProduction: number = 0;
+    public titaniumProduction: number = 0;
+    public energyProduction: number = 0;
+    public heat: number = 0;
+    public heatProduction: number = 0;
+    public plants: number = 0;
+    public plantProduction: number = 0;
+    public cardsInHand: Array<IProjectCard> = [];
+    public playedCards: Array<IProjectCard> = [];
+    public generationPlayed: Map<string, number> = new Map<string, number>();
+    private actionsTakenThisRound: number = 0;
+    public terraformRating: number = 20;
+    public terraformRatingAtGenerationStart: number = 20;
+    public resourcesOnCards: Map<string, number> = new Map<string, number>();
+    public victoryPoints: number = 0;
+    private actionsThisGeneration: Set<string> = new Set<string>();
+    private waitingFor?: PlayerInput;
+
     constructor(public name: string, public color: Color, public beginner: boolean) {
 
     }
@@ -47,27 +77,23 @@ export class Player {
         if (card.name === new Pets().name) {
             throw "Animals may not be removed from pets";
         }
-        if (card.animals === undefined) {
+        if (this.getResourcesOnCard(card) === 0) {
             throw card.name + " does not have animals to remove";
         }
-        card.animals = Math.max(0, card.animals - count);
+        this.removeResourceFrom(card, count);
     }
     public removeMicrobes(removingPlayer: Player, card: IProjectCard, count: number): void {
         if (removingPlayer !== this && this.hasProtectedHabitats()) {
             throw "Can not remove microbes due to protected habitats";
         }
-        if (card.microbes === undefined) {
+        if (this.getResourcesOnCard(card) === 0) {
             throw card.name + " does not have microbes to remove";
         }
-        card.microbes = Math.max(0, card.microbes - count);
+        this.removeResourceFrom(card, count);
     }
-    public corporationCard: CorporationCard | undefined = undefined;
-    public id: string = this.generateId();
-    public canUseHeatAsMegaCredits: boolean = false;
-    public plantsNeededForGreenery: number = 8;
-    public powerPlantCost: number = 11;
-    public titaniumValue: number = 3;
-    public steelValue: number = 2;
+    public getResourcesOnCard(card: ICard): number {
+        return this.resourcesOnCards.get(card.name) || 0;
+    }
     public getRequirementsBonus(game: Game): number {
         if (this.corporationCard !== undefined && this.corporationCard.getRequirementBonus !== undefined &&
             this.corporationCard.getRequirementBonus(this, game)) {
@@ -78,25 +104,6 @@ export class Player {
         }
         return 0;
     }
-    public megaCredits: number = 0;
-    public megaCreditProduction: number = 0;
-    public steel: number = 0;
-    public titanium: number = 0;
-    public energy: number = 0;
-    public steelProduction: number = 0;
-    public titaniumProduction: number = 0;
-    public energyProduction: number = 0;
-    public heat: number = 0;
-    public heatProduction: number = 0;
-    public plants: number = 0;
-    public plantProduction: number = 0;
-    public cardsInHand: Array<IProjectCard> = [];
-    public playedCards: Array<IProjectCard> = [];
-    public generationPlayed: Map<string, number> = new Map<string, number>();
-    private actionsTakenThisRound: number = 0;
-    public terraformRating: number = 20;
-    public terraformRatingAtGenerationStart: number = 20;
-    public victoryPoints: number = 0;
     public lastCardPlayedThisGeneration(game: Game): undefined | IProjectCard {
         const lastCardPlayed = this.playedCards[this.playedCards.length - 1];
         if (lastCardPlayed !== undefined) {
@@ -108,32 +115,27 @@ export class Player {
         return undefined;
     }
     public addAnimalsToCard(card: IProjectCard, count: number): void {
-        if (card.animals === undefined) {
-            card.animals = 0;
-        }
-        card.animals += count;
+        this.addResourceTo(card, count);
     }
     private generateId(): string {
         return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
     }
-    public cardHasResource(card: IProjectCard): boolean {
-        return card.animals !== undefined || card.microbes !== undefined || card.fighterResources !== undefined || card.scienceResources !== undefined;
+    public removeResourceFrom(card: IProjectCard, count: number = 1): void {
+        const cardValue: number | undefined = this.resourcesOnCards.get(card.name);
+        if (cardValue) {
+            this.resourcesOnCards.set(card.name, Math.max(cardValue - count, 0));
+        }
     }
-    public addResourceTo(card: IProjectCard): void {
-        if (card.animals !== undefined) {
-            card.animals++;
-        } else if (card.microbes !== undefined) {
-            card.microbes++;
-        } else if (card.fighterResources !== undefined) {
-            card.fighterResources++;
-        } else if (card.scienceResources !== undefined) {
-            card.scienceResources++;
+    public addResourceTo(card: IProjectCard, count: number = 1): void {
+        const cardValue: number | undefined = this.resourcesOnCards.get(card.name);
+        if (cardValue) {
+            this.resourcesOnCards.set(card.name, cardValue + count);
         } else {
-            throw "No resource on this card";
+            this.resourcesOnCards.set(card.name, count);
         }
     }
     public getCardsWithResources(): Array<IProjectCard> {
-        return this.playedCards.filter((card) => this.cardHasResource(card));
+        return this.playedCards.filter((card) => Number(this.resourcesOnCards.get(card.name)) > 0);
     }
     public getTagCount(tag: Tags): number {
         let tagCount = 0;
@@ -299,8 +301,6 @@ export class Player {
             throw "Unsupported waitingFor";
         }
     }
-
-    private actionsThisGeneration: Set<string> = new Set<string>();
 
     private getPlayableActionCards(game: Game): Array<ICard> {
         const result: Array<ICard> = [];
@@ -1021,8 +1021,6 @@ export class Player {
             throw err;
         }
     }
-
-    private waitingFor?: PlayerInput;
 
     public getWaitingFor(): PlayerInput | undefined {
         return this.waitingFor;

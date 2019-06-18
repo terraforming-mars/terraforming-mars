@@ -4,13 +4,13 @@ import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
-import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
+import { ResourceType } from "../ResourceType";
 import { SelectOption } from "../inputs/SelectOption";
 
 export class NitriteReducingBacteria implements IActionCard, IProjectCard {
     public cost: number = 11;
-    public microbes: number = 0;
+    public resourceType: ResourceType = ResourceType.MICROBE;
     public tags: Array<Tags> = [Tags.MICROBES];
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Nitrite Reducing Bacteria";
@@ -20,25 +20,25 @@ export class NitriteReducingBacteria implements IActionCard, IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public play(_player: Player, _game: Game) {
-        this.microbes += 3;
+    public play(player: Player) {
+        player.addResourceTo(this, 3);
         return undefined;
     }
     public canAct(): boolean {
         return false;
     }
-    public action(player: Player, _game: Game) {
-        if (this.microbes < 3) {
-            this.microbes++;
+    public action(player: Player) {
+        if (player.getResourcesOnCard(this) < 3) {
+            player.addResourceTo(this);
             return undefined;
         }
         return new OrOptions(
             new SelectOption("Add 1 microbe to this card", () => {
-                this.microbes++;
+                player.addResourceTo(this);
                 return undefined;
             }),
             new SelectOption("Remove 3 microbes to increase your terraform rating 1 step", () => {
-                this.microbes -= 3;
+                player.removeResourceFrom(this, 3);
                 player.terraformRating++;
                 return undefined;
             })

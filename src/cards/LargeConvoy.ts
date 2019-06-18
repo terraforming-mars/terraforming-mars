@@ -36,7 +36,7 @@ export class LargeConvoy implements IProjectCard {
             new OrOptions(
                 new SelectOption("Gain 5 plants", () => { player.plants += 5; return undefined; }),
                 new SelectCard("Select card to add 4 animals", game.getOtherAnimalCards(this), (foundCards: Array<IProjectCard>) => { 
-                    foundCards[0]!.animals! += 4;
+                    player.addResourceTo(foundCards[0], 4);
                     return undefined;
                 })
             )

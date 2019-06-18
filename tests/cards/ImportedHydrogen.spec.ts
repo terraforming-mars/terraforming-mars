@@ -35,9 +35,9 @@ describe("ImportedHydrogen", function () {
         expect(selectAnimal.cards.length).to.eq(1);
         expect(selectAnimal.cards[0]).to.eq(pets);
         selectMicrobe.cb([tardigrades]);
-        expect(tardigrades.microbes).to.eq(3);
+        expect(player.getResourcesOnCard(tardigrades)).to.eq(3);
         selectAnimal.cb([pets]);
-        expect(pets.animals).to.eq(2);
+        expect(player.getResourcesOnCard(pets)).to.eq(2);
         expect(andAction.cb()).to.eq(undefined);
     });
 });

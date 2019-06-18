@@ -27,11 +27,11 @@ export class ImportedNitrogen implements IProjectCard {
                 return undefined;
             },
             new SelectCard("Select card to add 3 microbes", otherMicrobeCards, (foundCards: Array<IProjectCard>) => {
-                foundCards[0]!.microbes! += 3;
+                player.addResourceTo(foundCards[0], 3);
                 return undefined;
             }),
             new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => {
-                foundCards[0]!.animals! += 2;
+                player.addResourceTo(foundCards[0], 2);
                 return undefined;
             })
         );

@@ -5,13 +5,14 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { ResourceType } from "../ResourceType";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
 
 export class SearchForLife implements IActionCard, IProjectCard {
     public cost: number = 3;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.ACTIVE;
-    public scienceResources: number = 0;
+    public resourceType: ResourceType = ResourceType.SCIENCE;
     public name: string = "Search For Life";
     public actionText: string = "Spend 1 mega credit to reveal and discard the top of the draw deck. If that card has a microbe tag, add a science resource here.";
     public text: string = "Oxygen must be 6% or less. Gain 3 victory points if you have one or more science resources here";
@@ -20,7 +21,7 @@ export class SearchForLife implements IActionCard, IProjectCard {
         return game.getOxygenLevel() <= 6 + player.getRequirementsBonus(game);
     }
     public onGameEnd(player: Player) {
-        if (this.scienceResources > 0) {
+        if (player.getResourcesOnCard(this) > 0) {
             player.victoryPoints += 3;
         }
     }
@@ -34,7 +35,7 @@ export class SearchForLife implements IActionCard, IProjectCard {
         const doAction = () => {
             const topCard = game.dealer.dealCard();
             if (topCard.tags.indexOf(Tags.MICROBES) !== -1) {
-                this.scienceResources++;
+                player.addResourceTo(this);
             }
             game.dealer.discard(topCard);
             return undefined;

@@ -13,9 +13,10 @@ describe("SecurityFleet", function () {
     it("Should play", function () {
         const card = new SecurityFleet();
         const player = new Player("test", Color.BLUE, false);
+        player.playedCards.push(card);
         const action = card.play();
         expect(action).to.eq(undefined);
-        card.fighterResources = 5;
+        player.addResourceTo(card, 5);
         card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(5);
     });
@@ -23,9 +24,10 @@ describe("SecurityFleet", function () {
         const card = new SecurityFleet();
         const player = new Player("test", Color.BLUE, false);
         player.titanium = 1;
+        player.playedCards.push(card);
         const action = card.action(player);
         expect(action).to.eq(undefined);
         expect(player.titanium).to.eq(0);
-        expect(card.fighterResources).to.eq(1);
+        expect(player.getResourcesOnCard(card)).to.eq(1);
     });
 });

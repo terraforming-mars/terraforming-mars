@@ -6,6 +6,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
+import { ResourceType } from "../ResourceType";
 import { SelectOption } from "../inputs/SelectOption";
 
 export class RegolithEaters implements IActionCard, IProjectCard {
@@ -16,7 +17,7 @@ export class RegolithEaters implements IActionCard, IProjectCard {
     public text: string = "";
     public actionText: string = "Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.";
     public description: string = "Living on the rocks and excreting oxygen.";
-    public microbes: number = 0;
+    public resourceType: ResourceType = ResourceType.MICROBE;
     public canPlay(): boolean {
         return true;
     }
@@ -27,17 +28,17 @@ export class RegolithEaters implements IActionCard, IProjectCard {
         return true;
     }
     public action(player: Player, game: Game) {
-        if (this.microbes < 2) {
-            this.microbes++;
+        if (player.getResourcesOnCard(this) < 2) {
+            player.addResourceTo(this);
             return undefined;
         }
         return new OrOptions(
             new SelectOption("Add 1 microbe to this card", () => {
-                this.microbes++;
+                player.addResourceTo(this);
                 return undefined;
             }),
             new SelectOption("Remove 2 microbes to raise oxygen level 1 step", () => {
-                this.microbes -= 2;
+                player.removeResourceFrom(this, 2);
                 return game.increaseOxygenLevel(player, 1);
             })
         );

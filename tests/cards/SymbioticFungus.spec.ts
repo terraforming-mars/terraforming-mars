@@ -16,11 +16,6 @@ describe("SymbioticFungus", function () {
     });
     it("Should play", function () {
         const card = new SymbioticFungus();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        game.increaseTemperature(player, 3); // -24
-        game.increaseTemperature(player, 3); // -18
-        game.increaseTemperature(player, 2); // -14
         expect(card.play()).to.eq(undefined);
     });
     it("Should act", function () {
@@ -31,6 +26,6 @@ describe("SymbioticFungus", function () {
         const action = card.action(player, game);
         expect(action).not.to.eq(undefined);
         action.cb([player.playedCards[0]]);
-        expect(player.playedCards[0].microbes).to.eq(1);
+        expect(player.getResourcesOnCard(player.playedCards[0])).to.eq(1);
     });
 });

@@ -33,11 +33,11 @@ export class ImportedHydrogen implements IProjectCard {
                     return undefined;
                 }),
                 new SelectCard("Add 3 microbes to card", game.getOtherMicrobeCards(this), (foundCards: Array<IProjectCard>) => {
-                    foundCards[0]!.microbes! += 3;
+                    player.addResourceTo(foundCards[0], 3);
                     return undefined;
                 }),
                 new SelectCard("Add 2 animals to card", game.getOtherAnimalCards(this), (foundCards: Array<IProjectCard>) => {
-                    foundCards[0]!.animals! += 2;
+                    player.addResourceTo(foundCards[0], 2);
                     return undefined;
                 })
             ),

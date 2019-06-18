@@ -4,10 +4,11 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { ResourceType } from "../ResourceType";
 
 export class Decomposers implements IProjectCard {
     public cost: number = 5;
-    public microbes: number = 0;
+    public resourceType: ResourceType = ResourceType.MICROBE;
     public tags: Array<Tags> = [Tags.MICROBES];
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Decomposers";
@@ -16,13 +17,13 @@ export class Decomposers implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 3 - player.getRequirementsBonus(game);
     }
-    public onCardPlayed(_player: Player, _game: Game, card: IProjectCard): void {
+    public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
         if (card.tags.indexOf(Tags.ANIMAL) !== -1 || card.tags.indexOf(Tags.MICROBES) !== -1 || card.tags.indexOf(Tags.PLANT) !== -1) {
-            this.microbes++;
+            player.addResourceTo(this);
         }
     }
     public onGameEnd(player: Player) {
-        player.victoryPoints += Math.floor(this.microbes / 3);
+        player.victoryPoints += Math.floor(player.getResourcesOnCard(this) / 3);
     }
     public play() {
         return undefined;

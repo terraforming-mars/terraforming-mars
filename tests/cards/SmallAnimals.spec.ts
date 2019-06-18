@@ -18,21 +18,24 @@ describe("SmallAnimals", function () {
     });
     it("Should act", function () {
         const card = new SmallAnimals();
-        card.action();
-        expect(card.animals).to.eq(1);
+        const player = new Player("test", Color.BLUE, false);
+        player.playedCards.push(card);
+        card.action(player);
+        expect(player.getResourcesOnCard(card)).to.eq(1);
     });
     it("Should play", function () {
         const card = new SmallAnimals();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
         player.plantProduction = 1;
+        player.playedCards.push(card);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         action.cb(player);
         expect(player.plantProduction).to.eq(0);
         card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(0);
-        card.animals = 3;
+        player.addResourceTo(card, 3);
         card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(1);
     });

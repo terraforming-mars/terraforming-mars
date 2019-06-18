@@ -17,15 +17,16 @@ describe("Decomposers", function () {
     it("Should play", function () {
         const card = new Decomposers();
         const player = new Player("test", Color.BLUE, false);
+        player.playedCards.push(card);
         const game = new Game("foobar", [player], player);
         const action = card.play();
         expect(action).to.eq(undefined);
         card.onCardPlayed(player, game, new Birds());
-        expect(card.microbes).to.eq(1);
+        expect(player.getResourcesOnCard(card)).to.eq(1);
         card.onCardPlayed(player, game, card);
-        expect(card.microbes).to.eq(2);
+        expect(player.getResourcesOnCard(card)).to.eq(2);
         card.onCardPlayed(player, game, new Algae());
-        expect(card.microbes).to.eq(3);
+        expect(player.getResourcesOnCard(card)).to.eq(3);
         card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(1);
     });

@@ -31,13 +31,13 @@ describe("Herbivores", function () {
         player.plantProduction = 1;
         action.cb(player);
         expect(player.plantProduction).to.eq(0);
-        expect(card.animals).to.eq(1);
         player.playedCards.push(card);
+        expect(player.getResourcesOnCard(card)).to.eq(1);
         game.addGreenery(player, game.getAvailableSpacesOnLand(player)[0].id);
         card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(1);
         const anotherPlayer = new Player("test", Color.RED, false);
         game.addGreenery(anotherPlayer, game.getAvailableSpacesOnLand(anotherPlayer)[0].id);
-        expect(card.animals).to.eq(2);
+        expect(player.getResourcesOnCard(card)).to.eq(2);
     });
 });

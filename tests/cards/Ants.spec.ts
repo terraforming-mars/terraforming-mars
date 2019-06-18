@@ -16,8 +16,9 @@ describe("Ants", function () {
     it("Should play", function () {
         const card = new Ants();
         const player = new Player("test", Color.BLUE, false);
+        player.playedCards.push(card);
         card.play();
-        card.microbes = 5;
+        player.addResourceTo(card, 5);
         card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(2);
     });
@@ -28,18 +29,19 @@ describe("Ants", function () {
         expect(card.canAct(player, game)).to.eq(false);
         player.playedCards.push(card);
         expect(card.canAct(player, game)).to.eq(false);
-        card.microbes = 1;
+        player.addResourceTo(card);
         const action = card.action(player, game);
         expect(action).not.to.eq(undefined);
         expect(action instanceof SelectCard).to.eq(true);
         expect(action.cards.length).to.eq(1);
         expect(action.cards[0]).to.eq(card);
         action.cb([action.cards[0]]);
-        expect(card.microbes).to.eq(1);
+        expect(player.getResourcesOnCard(card)).to.eq(1);
         const otherCard = new Ants();
-        otherCard.microbes = 1;
+        player.playedCards.push(otherCard);
+        player.addResourceTo(otherCard);
         action.cb([otherCard]);
-        expect(otherCard.microbes).to.eq(0);
-        expect(card.microbes).to.eq(2);
+        expect(player.getResourcesOnCard(otherCard)).to.eq(2);
+        expect(player.getResourcesOnCard(card)).to.eq(2);
     });
 });

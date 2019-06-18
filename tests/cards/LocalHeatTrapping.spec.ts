@@ -23,13 +23,13 @@ describe("LocalHeatTrapping", function () {
         expect(action).to.eq(undefined);
         player.heat = 5;
         const pets = new Pets();
-        player.playedCards.push(pets);
+        player.playedCards.push(card, pets);
         action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         action!.options[0].cb();
         expect(player.plants).to.eq(8);
         expect(player.heat).to.eq(0);
         action!.options[1].cb([pets]);
-        expect(pets.animals).to.eq(2);
+        expect(player.getResourcesOnCard(pets)).to.eq(2);
     });
 });

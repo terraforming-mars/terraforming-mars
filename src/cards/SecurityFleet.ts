@@ -4,13 +4,14 @@ import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
+import { ResourceType } from "../ResourceType";
 
 export class SecurityFleet implements IActionCard, IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Security Fleet";
-    public fighterResources: number = 0;
+    public resourceType: ResourceType = ResourceType.FIGHTER;
     public actionText: string = "Spend 1 titanium to add 1 fighter resource to this card.";
     public text: string = "Gain 1 victory point for each fighter resource on this card.";
     public description: string = "Keeping the peace by force.";
@@ -18,7 +19,7 @@ export class SecurityFleet implements IActionCard, IProjectCard {
         return true;
     }
     public onGameEnd(player: Player) {
-        player.victoryPoints += this.fighterResources;
+        player.victoryPoints += player.getResourcesOnCard(this);
     }
     public play() {
         return undefined;
@@ -28,7 +29,7 @@ export class SecurityFleet implements IActionCard, IProjectCard {
     }
     public action(player: Player) {
         player.titanium--;
-        this.fighterResources++;
+        player.addResourceTo(this);
         return undefined;
     }
 }

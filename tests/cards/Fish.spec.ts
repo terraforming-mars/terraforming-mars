@@ -15,12 +15,14 @@ describe("Fish", function () {
     });
     it("Should act", function () {
         const card = new Fish();
-        card.action();
-        expect(card.animals).to.eq(1);
+        const player = new Player("test", Color.BLUE, false);
+        card.action(player);
+        expect(player.getResourcesOnCard(card)).to.eq(1);
     });
     it("Should play", function () {
         const card = new Fish();
         const player = new Player("test", Color.BLUE, false);
+        player.playedCards.push(card);
         const game = new Game("foobar", [player], player);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
@@ -28,8 +30,8 @@ describe("Fish", function () {
         player.plantProduction = 1;
         action.cb(player);
         expect(player.plantProduction).to.eq(0);
-        card.animals = 5;
+        player.addResourceTo(card, 5);
         card.onGameEnd(player);
-        expect(player.victoryPoints).to.eq(card.animals);
+        expect(player.victoryPoints).to.eq(player.getResourcesOnCard(card));
     });
 });

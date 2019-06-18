@@ -6,6 +6,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
+import { ResourceType } from "../ResourceType";
 import { SelectOption } from "../inputs/SelectOption";
 
 export class GHGProducingBacteria implements IActionCard, IProjectCard {
@@ -14,7 +15,7 @@ export class GHGProducingBacteria implements IActionCard, IProjectCard {
     public name: string = "GHG Producing Bacteria";
     public cardType: CardType = CardType.ACTIVE;
     public actionText: string = "Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.";
-    public microbes: number = 0;
+    public resourceType: ResourceType = ResourceType.MICROBE;
     public text: string = "Requires 4% oxygen";
     public description: string = "Working for the biosphere and the atmosphere at the same time.";
     public canPlay(player: Player, game: Game): boolean {
@@ -27,19 +28,19 @@ export class GHGProducingBacteria implements IActionCard, IProjectCard {
         return true;
     }
     public action(player: Player, game: Game) {
-        if (this.microbes > 1) {
+        if (player.getResourcesOnCard(this) > 1) {
             return new OrOptions(
                 new SelectOption("Add 1 microbe to this card", () => {
-                    this.microbes++;
+                    player.addResourceTo(this);
                     return undefined;
                 }),
                 new SelectOption("Remove 2 microbes to raise temperature 1 step", () => {
-                    this.microbes -= 2;
+                    player.removeResourceFrom(this);
                     return game.increaseTemperature(player, 1);
                 })
             );
         }
-        this.microbes++;
+        player.addResourceTo(this);
         return undefined;
     }
 }

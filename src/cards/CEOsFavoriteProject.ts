@@ -17,21 +17,12 @@ export class CEOsFavoriteProject implements IProjectCard {
         return this.getAvailableCards(player).length > 0;
     }
     private getAvailableCards(player: Player): Array<IProjectCard> {
-        return player.getCardsWithResources().filter((card) => card.animals || card.microbes || card.fighterResources || card.scienceResources);
+        return player.getCardsWithResources().filter((card) => player.getResourcesOnCard(card));
     }
     public play(player: Player, _game: Game) {
         const availableCards = this.getAvailableCards(player);
         return new SelectCard("Select card to add resource", availableCards, (foundCards: Array<IProjectCard>) => {
-            const foundCard = foundCards[0];
-            if (foundCard.animals) {
-                foundCard.animals++;
-            } else if (foundCard.microbes) {
-                foundCard.microbes++;
-            } else if (foundCard.fighterResources) {
-                foundCard.fighterResources++;
-            } else if (foundCard.scienceResources) {
-                foundCard.scienceResources++;
-            }
+            player.addResourceTo(foundCards[0]);
             return undefined;
         });
     }

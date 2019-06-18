@@ -5,11 +5,12 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Game } from "../Game";
 import { Player } from "../Player";
+import { ResourceType } from "../ResourceType";
 
 export class Livestock implements IActionCard, IProjectCard {
     public cost: number = 13;
     public cardType: CardType = CardType.ACTIVE;
-    public animals: number = 0;
+    public resourceType: ResourceType = ResourceType.ANIMAL;
     public tags: Array<Tags> = [Tags.ANIMAL];
     public name: string = "Livestock";
     public actionText: string = "Add an animal to this card";
@@ -19,7 +20,7 @@ export class Livestock implements IActionCard, IProjectCard {
         return game.getOxygenLevel() >= 9 - player.getRequirementsBonus(game) && player.plantProduction >= 1;
     }
     public onGameEnd(player: Player) {
-        player.victoryPoints += this.animals;
+        player.victoryPoints += player.getResourcesOnCard(this);
     }
     public play(player: Player) {
         player.plantProduction--;
@@ -29,8 +30,8 @@ export class Livestock implements IActionCard, IProjectCard {
     public canAct(): boolean {
         return true;
     }
-    public action() {
-        this.animals++;
+    public action(player: Player) {
+        player.addResourceTo(this);
         return undefined;
     }
 }

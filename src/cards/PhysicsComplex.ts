@@ -4,6 +4,7 @@ import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
+import { ResourceType } from "../ResourceType";
 
 export class PhysicsComplex implements IActionCard, IProjectCard {
     public cost: number = 12;
@@ -13,12 +14,12 @@ export class PhysicsComplex implements IActionCard, IProjectCard {
     public actionText: string = "Spend 6 energy to add a science resource to this card.";
     public text: string = "Gain 2 victory points for each science resource on this card.";
     public description: string = "This used to cause blackouts before the invention of supercomputers.";
-    public scienceResources: number = 0;
+    public resourceType: ResourceType = ResourceType.SCIENCE;
     public canPlay(): boolean {
         return true;
     }
     public onGameEnd(player: Player) {
-        player.victoryPoints += 2 * this.scienceResources;
+        player.victoryPoints += 2 * player.getResourcesOnCard(this);
     }
     public play() {
         return undefined;
@@ -28,7 +29,7 @@ export class PhysicsComplex implements IActionCard, IProjectCard {
     }
     public action(player: Player) {
         player.energy -= 6;
-        this.scienceResources++;
+        player.addResourceTo(this);
         return undefined;
     }
 }

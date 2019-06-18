@@ -27,6 +27,7 @@ describe("Birds", function () {
     it("Should play", function () {
         const card = new Birds();
         const player = new Player("test", Color.BLUE, false);
+        player.playedCards.push(card);
         const game = new Game("foobar", [player], player);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
@@ -34,13 +35,15 @@ describe("Birds", function () {
         player.plantProduction = 2;
         action.cb(player);
         expect(player.plantProduction).to.eq(0);
-        card.animals = 2; 
+        player.addResourceTo(card, 2); 
         card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(2);
     });
     it("Should act", function () {
         const card = new Birds();
-        card.action();
-        expect(card.animals).to.eq(1); 
+        const player = new Player("test", Color.BLUE, false);
+        player.playedCards.push(card);
+        card.action(player);
+        expect(player.getResourcesOnCard(card)).to.eq(1); 
     });
 });

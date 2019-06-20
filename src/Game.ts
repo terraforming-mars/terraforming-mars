@@ -56,12 +56,7 @@ export class Game {
                 ];
                 player.setWaitingFor(this.pickCorporationCard(player));
             } else {
-                player.corporationCard = new BeginnerCorporation();
-                for (let i = 0; i < 10; i++) { 
-                    player.cardsInHand.push(this.dealer.dealCard());
-                }
-                player.megaCredits = 42;
-                this.playerIsFinishedWithResearchPhase(player);
+                this.playCorporationCard(player, new BeginnerCorporation());
             }
         }
         
@@ -153,6 +148,16 @@ export class Game {
         return this.claimedMilestones.length > 2;
     }
 
+    private playCorporationCard(player: Player, corporationCard: CorporationCard): void {
+        player.corporationCard = corporationCard;
+        corporationCard.play(player, this);
+        player.megaCredits = corporationCard.startingMegaCredits;
+        if (corporationCard.name !== new BeginnerCorporation().name) {
+            player.megaCredits -= player.cardsInHand.length * constants.CARD_COST;
+        }
+        this.playerIsFinishedWithResearchPhase(player);
+    }
+
     private pickCorporationCard(player: Player): PlayerInput {
         const dealtCards: Array<IProjectCard> = [
             this.dealer.dealCard(),
@@ -166,19 +171,18 @@ export class Game {
             this.dealer.dealCard(),
             this.dealer.dealCard()
         ];
+        let corporation: CorporationCard;
         return new AndOptions(
             () => {
-                player.corporationCard!.play(player, this);
-                this.playerIsFinishedWithResearchPhase(player);
+                this.playCorporationCard(player, corporation);
                 return undefined;
             },
             new SelectCard<CorporationCard>("Select corporation", player.dealtCorporationCards, (foundCards: Array<CorporationCard>) => {
-                player.corporationCard = foundCards[0];
+                corporation = foundCards[0];
                 return undefined;
             }),
             new SelectCard("Select initial cards to buy", dealtCards, (foundCards: Array<IProjectCard>) => {
                 // Pay for cards
-                player.megaCredits = player.corporationCard!.startingMegaCredits - (constants.CARD_COST * foundCards.length);
                 for (let foundCard of foundCards) {
                     player.cardsInHand.push(foundCard);
                 }

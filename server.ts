@@ -36,69 +36,74 @@ const powerTag = fs.readFileSync("assets/power-tag.png");
 const scienceTag = fs.readFileSync("assets/science-tag.png");
 const spaceTag = fs.readFileSync("assets/space-tag.png");
 const favicon = fs.readFileSync("favicon.ico");
+const mainJs = fs.readFileSync("dist/main.js");
 
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
 
 const server: http.Server = http.createServer(function (req: http.IncomingMessage, res: http.ServerResponse): void {
-    if (req.method === "GET" && req.url && (
-            req.url === "/" ||
-            req.url.startsWith("/game?id=") ||
-            req.url.startsWith("/player?id="))) {
-        serveApp(res);
-    } else if (req.method === "GET" && req.url !== undefined && req.url.startsWith("/api/player?id=")) {
-        apiGetPlayer(req, res);        
-    } else if (req.method === "GET" && req.url === "/nes.min.css") {
-        serveStyle(res, nes);
-    } else if (req.method === "GET" && req.url === "/styles.css") {
-        serveStyle(res, styles);
-    } else if (req.method === "GET" && req.url === "/main.js") {
-        serveScript(res, fs.readFileSync("dist/main.js"));
-    } else if (req.method === "GET" && req.url === "/assets/animal-tag.png") {
-        servePng(res, animalTag);
-    } else if (req.method === "GET" && req.url === "/assets/building-tag.png") {
-        servePng(res, buildingTag);
-    } else if (req.method === "GET" && req.url === "/assets/city-tag.png") {
-        servePng(res, cityTag);
-    } else if (req.method === "GET" && req.url === "/assets/cursor.png") {
-        servePng(res, cursor);
-    } else if (req.method === "GET" && req.url === "/assets/cursor-click.png") {
-        servePng(res, cursorClick);
-    } else if (req.method === "GET" && req.url === "/assets/earth-tag.png") {
-        servePng(res, earthTag);
-    } else if (req.method === "GET" && req.url === "/assets/event-tag.png") {
-        servePng(res, eventTag);
-    } else if (req.method === "GET" && req.url === "/assets/jovian-tag.png") {
-        servePng(res, jovianTag);
-    } else if (req.method === "GET" && req.url === "/assets/microbes-tag.png") {
-        servePng(res, microbesTag);
-    }  else if (req.method === "GET" && req.url === "/assets/plant-tag.png") {
-        servePng(res, plantTag);
-    } else if (req.method === "GET" && req.url === "/assets/power-tag.png") {
-        servePng(res, powerTag);
-    } else if (req.method === "GET" && req.url === "/assets/science-tag.png") {
-        servePng(res, scienceTag);
-    } else if (req.method === "GET" && req.url === "/assets/space-tag.png") {
-        servePng(res, spaceTag);
-    } else if (req.method === "GET" && req.url === "/favicon.ico") {
-        serveFavicon(res);
-    } else if (req.method === "GET" && req.url && req.url.indexOf("/api/game") === 0) {
-        apiGetGame(req, res);
-    } else if (req.method === "PUT" && req.url && req.url.indexOf("/game") === 0) {
-        createGame(req, res);
-    } else if (req.method === "POST" && req.url && req.url.indexOf("/player/input?id=") === 0) {
-        const playerId: string = req.url.substring("/player/input?id=".length);
-        const game = playersToGame.get(playerId);
-        if (game === undefined) {
-            notFound(req, res);
-            return;
+    if (req.url !== undefined) {
+        if (req.method === "GET") {
+            if (
+                req.url === "/" ||
+                req.url.startsWith("/game?id=") ||
+                req.url.startsWith("/player?id=")) {
+                serveApp(res);
+            } else if (req.url.startsWith("/api/player?id=")) {
+                apiGetPlayer(req, res);        
+            } else if (req.url === "/nes.min.css") {
+                serveStyle(res, nes);
+            } else if (req.url === "/styles.css") {
+                serveStyle(res, styles);
+            } else if (req.url === "/main.js") {
+                serveScript(res, mainJs);
+            } else if (req.url === "/assets/animal-tag.png") {
+                servePng(res, animalTag);
+            } else if (req.url === "/assets/building-tag.png") {
+                servePng(res, buildingTag);
+            } else if (req.url === "/assets/city-tag.png") {
+                servePng(res, cityTag);
+            } else if (req.url === "/assets/cursor.png") {
+                servePng(res, cursor);
+            } else if (req.url === "/assets/cursor-click.png") {
+                servePng(res, cursorClick);
+            } else if (req.url === "/assets/earth-tag.png") {
+                servePng(res, earthTag);
+            } else if (req.url === "/assets/event-tag.png") {
+                servePng(res, eventTag);
+            } else if (req.url === "/assets/jovian-tag.png") {
+                servePng(res, jovianTag);
+            } else if (req.url === "/assets/microbes-tag.png") {
+                servePng(res, microbesTag);
+            }  else if (req.url === "/assets/plant-tag.png") {
+                servePng(res, plantTag);
+            } else if (req.url === "/assets/power-tag.png") {
+                servePng(res, powerTag);
+            } else if (req.url === "/assets/science-tag.png") {
+                servePng(res, scienceTag);
+            } else if (req.url === "/assets/space-tag.png") {
+                servePng(res, spaceTag);
+            } else if (req.url === "/favicon.ico") {
+                serveFavicon(res);
+            } else if (req.url.indexOf("/api/game") === 0) {
+                apiGetGame(req, res);
+            }
+        } else if (req.method === "PUT" && req.url.indexOf("/game") === 0) {
+            createGame(req, res);
+        } else if (req.method === "POST" && req.url.indexOf("/player/input?id=") === 0) {
+            const playerId: string = req.url.substring("/player/input?id=".length);
+            const game = playersToGame.get(playerId);
+            if (game === undefined) {
+                notFound(req, res);
+                return;
+            }
+            const player = game.getPlayers().filter((player) => player.id === playerId)[0];
+            if (player === undefined) {
+                notFound(req, res);
+                return;
+            }
+            processInput(req, res, player, game);
         }
-        const player = game.getPlayers().filter((player) => player.id === playerId)[0];
-        if (player === undefined) {
-            notFound(req, res);
-            return;
-        }
-        processInput(req, res, player, game);
     } else {
         notFound(req, res);
     }

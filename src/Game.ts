@@ -29,15 +29,15 @@ import { ALL_CORPORATION_CARDS } from "./Dealer";
 export class Game {
     public activePlayer: Player;
     public claimedMilestones: Array<ClaimedMilestone> = [];
+    public dealer: Dealer = new Dealer();
     public fundedAwards: Array<FundedAward> = []; 
-    private passedPlayers: Set<Player> = new Set<Player>();
+    public generation: number = 1;
     public phase: Phase = Phase.RESEARCH;
     private donePlayers: Set<Player> = new Set<Player>();
-    private researchedPlayers: Set<Player> = new Set<Player>();
-    public dealer: Dealer = new Dealer();
-    private spaces: Array<ISpace> = new OriginalBoard().spaces;
-    public generation: number = 1;
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
+    private passedPlayers: Set<Player> = new Set<Player>();
+    private researchedPlayers: Set<Player> = new Set<Player>();
+    private spaces: Array<ISpace> = new OriginalBoard().spaces;
     private temperature: number = constants.MIN_TEMPERATURE;
 
     constructor(public id: string, private players: Array<Player>, private first: Player) {

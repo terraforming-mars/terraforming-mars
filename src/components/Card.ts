@@ -16,7 +16,7 @@ function getCorporationCardByName(cardName: string): ICard | undefined {
     return ALL_CORPORATION_CARDS.find((card) => card.name === cardName);
 }
 
-function getProjectCardByName(cardName: string): IProjectCard | undefined {
+export function getProjectCardByName(cardName: string): IProjectCard | undefined {
     return ALL_PROJECT_CARDS.find((card) => card.name === cardName);
 }
 

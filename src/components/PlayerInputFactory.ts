@@ -5,25 +5,36 @@ import { PlayerModel } from "../models/PlayerModel";
 import { PlayerInputModel } from "../models/PlayerInputModel";
 
 export class PlayerInputFactory {
-    public  getPlayerInput(createElement: typeof Vue.prototype.$createElement, players: Array<PlayerModel>, playerInput: PlayerInputModel, cb: (out: Array<Array<string>>) => void, showTitle: boolean = true): VNode {
-        if (playerInput.inputType === PlayerInputTypes.AND_OPTIONS) {
-            return createElement("and-options", { attrs: { players: players, playerinput: playerInput, showtitle: showTitle, onsave: cb }});
-        } else if (playerInput.inputType === PlayerInputTypes.SELECT_CARD) {
-            return createElement("select-card", { attrs: { playerinput: playerInput, showtitle: showTitle, onsave: cb }});
-        } else if (playerInput.inputType === PlayerInputTypes.OR_OPTIONS) {
-            return createElement("or-options", { attrs: { players: players, playerinput: playerInput, showtitle: showTitle, onsave: cb }});
-        } else if (playerInput.inputType === PlayerInputTypes.SELECT_OPTION) {
-            return createElement("select-option", { attrs: { playerinput: playerInput, showtitle: showTitle, onsave: cb }});
-        } else if (playerInput.inputType === PlayerInputTypes.SELECT_HOW_TO_PAY) {
-            return createElement("select-how-to-pay", { attrs: { playerinput: playerInput, showtitle: showTitle, onsave: cb }});
-        } else if (playerInput.inputType === PlayerInputTypes.SELECT_SPACE) {
-            return createElement("select-space", { attrs: { playerinput: playerInput, showtitle: showTitle, onsave: cb }});
-        } else if (playerInput.inputType === PlayerInputTypes.SELECT_PLAYER) {
-            return createElement("select-player", { attrs: { players: players, playerinput: playerInput, showtitle: showTitle, onsave: cb }});
-        } else if (playerInput.inputType === PlayerInputTypes.SELECT_AMOUNT) {
-            return createElement("select-amount", { attrs: { playerinput: playerInput, showtitle: showTitle, onsave: cb }});
+    private getComponentName(inputType: PlayerInputTypes): string {
+        switch (inputType) {
+            case PlayerInputTypes.AND_OPTIONS:
+                return "and-options";
+            case PlayerInputTypes.SELECT_CARD:
+                return "select-card";
+            case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD:
+                return "select-how-to-pay-for-card";
+            case PlayerInputTypes.OR_OPTIONS:
+                return "or-options";
+            case PlayerInputTypes.SELECT_OPTION:
+                return "select-option";
+            case PlayerInputTypes.SELECT_HOW_TO_PAY:
+                return "select-how-to-pay";
+            case PlayerInputTypes.SELECT_SPACE:
+                return "select-space";
+            case PlayerInputTypes.SELECT_PLAYER:
+                return "select-player";
+            case PlayerInputTypes.SELECT_AMOUNT:
+                return "select-amount";
+            default:
+                throw "Unsupported input type";
         }
-        return createElement("div", "Unsupported input type" + playerInput.inputType);
+    }
+    public  getPlayerInput(createElement: typeof Vue.prototype.$createElement, players: Array<PlayerModel>, player: PlayerModel, playerinput: PlayerInputModel, onsave: (out: Array<Array<string>>) => void, showtitle: boolean = true): VNode {
+        return createElement(this.getComponentName(playerinput.inputType), {
+            attrs: {
+                player, players, playerinput, showtitle, onsave
+            }
+        });
     }
 }
 

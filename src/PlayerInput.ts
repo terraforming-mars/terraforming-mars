@@ -4,6 +4,6 @@ import { PlayerInputTypes } from "./PlayerInputTypes";
 export interface PlayerInput {
     inputType: PlayerInputTypes;
     title: string;
-    cb: (item?: any) => PlayerInput | undefined;
+    cb: (...item: any) => PlayerInput | undefined;
     onend?: () => void;
 }

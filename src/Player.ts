@@ -14,6 +14,7 @@ import { Game } from "./Game";
 import { HowToPay } from "./inputs/HowToPay";
 import { SelectSpace } from "./inputs/SelectSpace";
 import { ISpace } from "./ISpace";
+import { SelectHowToPayForCard } from "./inputs/SelectHowToPayForCard";
 import { SelectHowToPay } from "./inputs/SelectHowToPay";
 import { SelectAmount } from "./inputs/SelectAmount";
 import { SelectOption } from "./inputs/SelectOption";
@@ -153,8 +154,8 @@ export class Player {
     public getActiveAndAutomatedCards(): Array<IProjectCard> {
         return this.playedCards.filter((pc) => pc.cardType === CardType.AUTOMATED || pc.cardType === CardType.ACTIVE);
     }
-    public getCard(cardName: string): IProjectCard {
-        const foundCards = this.cardsInHand.filter((card) => card.name === cardName);
+    public getCard(cards: Array<IProjectCard>, cardName: string): IProjectCard {
+        const foundCards = cards.filter((card) => card.name === cardName);
         if (foundCards.length === 0) {
             throw "Card not found";
         }
@@ -197,17 +198,44 @@ export class Player {
             const remainingInput = input.slice();
             remainingInput.splice(0, 1);
             return this.runInput(remainingInput, waiting.options[optionIndex]);
+        } else if (pi instanceof SelectHowToPayForCard) {
+            if (input.length !== 1 || input[0].length !== 2) {
+                throw "Incorrect options provided";
+            }
+            let foundCard: IProjectCard = this.getCard(pi.cards, input[0][0]);
+            let payMethod: HowToPay = {
+                steel: 0,
+                heat: 0,
+                titanium: 0,
+                megaCredits: 0
+            };
+            try {
+                const parsedInput: {[x: string]: number} = JSON.parse(input[0][1]);
+                if (this.canUseSteel(foundCard) && parsedInput.steel !== undefined) {
+                    payMethod.steel = parsedInput.steel;
+                }
+                if (this.canUseTitanium(foundCard) && parsedInput.titanium !== undefined) {
+                    payMethod.titanium = parsedInput.titanium;
+                }
+                if (parsedInput.megaCredits !== undefined) {
+                    payMethod.megaCredits = parsedInput.megaCredits;
+                }
+                if (this.canUseHeatAsMegaCredits) {
+                    if (parsedInput.heat !== undefined) {
+                        payMethod.heat = parsedInput.heat;
+                    }
+                }
+            } catch (err) {
+                throw "Unable to parse input " + err;
+            }
+            return pi.cb(foundCard, payMethod);
         } else if (pi instanceof SelectCard) {
             if (input.length !== 1) {
                 throw "Incorrect options provided";
             }
             const mappedCards: Array<ICard> = [];
             for (let cardName of input[0]) {
-                for (let card of pi.cards) {
-                    if (card.name === cardName) {
-                        mappedCards.push(card);
-                    }
-                }
+                mappedCards.push(this.getCard(pi.cards, cardName));
             }
             if (input[0].length < pi.minCardsToSelect) {
                 console.warn("selected cards", input[0]);
@@ -400,123 +428,97 @@ export class Player {
         this.generationPlayed.set(card.name, game.generation);
     }
 
+    private canUseSteel(card: ICard): boolean {
+        return card.tags.indexOf(Tags.STEEL) !== -1;
+    }
+
+    private canUseTitanium(card: ICard): boolean {
+        return card.tags.indexOf(Tags.SPACE) !== -1;
+    }
+
     private playProjectCard(game: Game): PlayerInput {
+        return new SelectHowToPayForCard(this.getPlayableCards(game), (selectedCard: IProjectCard, howToPay: HowToPay) => {
+            const cardCost: number = this.getCardCost(game, selectedCard);
+            let totalToPay: number = 0;
 
-        let selectedCard: IProjectCard;
-        let payMethod: HowToPay;
+            const canUseSteel: boolean = this.canUseSteel(selectedCard);
+            const canUseTitanium: boolean = this.canUseTitanium(selectedCard);
 
-        const result = new AndOptions(
-            () => {
+            if (canUseSteel && howToPay.steel > 0) {
+                totalToPay += howToPay.steel * this.steelValue;
+            } else if (canUseTitanium && howToPay.titanium > 0) {
+                totalToPay += howToPay.titanium * this.titaniumValue;
+            }
 
-                const cardCost: number = this.getCardCost(game, selectedCard);
-                let totalToPay: number = 0;
+            if (this.canUseHeatAsMegaCredits && howToPay.heat !== undefined) {
+                totalToPay += howToPay.heat;
+            }
 
-                const canUseSteel: boolean = selectedCard.tags.indexOf(Tags.STEEL) !== -1;
-                const canUseTitanium: boolean = selectedCard.tags.indexOf(Tags.SPACE) !== -1;
+            totalToPay += howToPay.megaCredits;
 
-                if (canUseSteel && payMethod.steel) {
-                    totalToPay += payMethod.steel * this.steelValue;
-                } else if (canUseTitanium && payMethod.titanium) {
-                    totalToPay += payMethod.titanium * this.titaniumValue;
-                }
+            if (totalToPay < cardCost) {
+                throw "Did not spend enough to pay for card";
+            }
 
-                if (this.canUseHeatAsMegaCredits && payMethod.heat !== undefined) {
-                    totalToPay += payMethod.heat;
-                }
+            const whenDone = () => {
+                this.cardsInHand.splice(this.cardsInHand.findIndex((card) => card.name === selectedCard.name), 1);
+                this.addPlayedCard(game, selectedCard);
 
-                totalToPay += payMethod.megaCredits;
+                this.steel -= howToPay.steel;
+                this.titanium -= howToPay.titanium;
+                this.megaCredits -= howToPay.megaCredits;
+                this.heat -= howToPay.heat;
 
-                if (totalToPay < cardCost) {
-                    throw "Did not spend enough to pay for card";
-                }
-
-                const whenDone = () => {
-                    this.cardsInHand.splice(this.cardsInHand.findIndex((card) => card.name === selectedCard.name), 1);
-                    this.addPlayedCard(game, selectedCard);
-
-                    this.steel -= payMethod.steel;
-                    this.titanium -= payMethod.titanium;
-                    this.megaCredits -= payMethod.megaCredits;
-                    if (payMethod.heat !== undefined) {
-                        this.heat -= payMethod.heat;
-                    }
-
-                    const actionsFromPlayedCard: OrOptions[] = [];
-                    for (const playedCard of this.playedCards) {
-                        if (playedCard.onCardPlayed !== undefined) {
-                            const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, game, selectedCard);
-                            if (actionFromPlayedCard !== undefined) {
-                                actionsFromPlayedCard.push(actionFromPlayedCard);
-                            }
+                const actionsFromPlayedCard: OrOptions[] = [];
+                for (const playedCard of this.playedCards) {
+                    if (playedCard.onCardPlayed !== undefined) {
+                        const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, game, selectedCard);
+                        if (actionFromPlayedCard !== undefined) {
+                            actionsFromPlayedCard.push(actionFromPlayedCard);
                         }
                     }
+                }
 
-                    if (this.corporationCard !== undefined && this.corporationCard.onCardPlayed !== undefined) {
-                        const method = this.corporationCard.onCardPlayed;
-                        if (this.corporationCard.name === new SaturnSystems().name) {
-                            game.getPlayers().forEach((player) => method(player, game, selectedCard));
-                        } else {
-                            method(this, game, selectedCard);
-                        }
+                if (this.corporationCard !== undefined && this.corporationCard.onCardPlayed !== undefined) {
+                    const method = this.corporationCard.onCardPlayed;
+                    if (this.corporationCard.name === new SaturnSystems().name) {
+                        game.getPlayers().forEach((player) => method(player, game, selectedCard));
+                    } else {
+                        method(this, game, selectedCard);
                     }
-
-                    // run through multiple inputs
-                    if (actionsFromPlayedCard.length > 1) {
-                        const multipleActions = new AndOptions(() => {
-                            this.actionsTakenThisRound++;
-                            this.takeAction(game);
-                            return undefined;
-                        });
-                        multipleActions.options = actionsFromPlayedCard;
-                        this.setWaitingFor(multipleActions);
-                        return;
-                    } else if (actionsFromPlayedCard.length === 1) {
-                        actionsFromPlayedCard[0].onend = () => {
-                            this.actionsTakenThisRound++;
-                            this.takeAction(game);
-                        };
-                        this.setWaitingFor(actionsFromPlayedCard[0]); 
-                        return;
-                    }
-                    this.actionsTakenThisRound++;
-                    this.takeAction(game);
                 }
 
-                // Play the card
-                const action = selectedCard.play(this, game);
-                if (action !== undefined) {
-                    action.onend = whenDone;
-                    return action;
+                // run through multiple inputs
+                if (actionsFromPlayedCard.length > 1) {
+                    const multipleActions = new AndOptions(() => {
+                        this.actionsTakenThisRound++;
+                        this.takeAction(game);
+                        return undefined;
+                    });
+                    multipleActions.options = actionsFromPlayedCard;
+                    this.setWaitingFor(multipleActions);
+                    return;
+                } else if (actionsFromPlayedCard.length === 1) {
+                    actionsFromPlayedCard[0].onend = () => {
+                        this.actionsTakenThisRound++;
+                        this.takeAction(game);
+                    };
+                    this.setWaitingFor(actionsFromPlayedCard[0]); 
+                    return;
                 }
-                whenDone();
-                return undefined;
-            },
-            new SelectCard("Select which card to play", this.getPlayableCards(game), (foundCards: Array<IProjectCard>) => {
-                selectedCard = foundCards[0];
-                return undefined;
-            }),
-            new SelectHowToPay("Select how to pay for card", true, true, this.canUseHeatAsMegaCredits, (howToPay: HowToPay) => {
-                payMethod = howToPay;
-                if (payMethod.steel && payMethod.steel > this.steel) {
-                    throw "Not enough steel";
-                }
-                if (payMethod.heat && !this.canUseHeatAsMegaCredits) {
-                    throw "Can't use heat as mega credits";
-                }
-                if (payMethod.heat && payMethod.heat > this.heat) {
-                    throw "Not enough heat";
-                }
-                if (payMethod.titanium && payMethod.titanium > this.titanium) {
-                    throw "Not enough titanium";
-                }
-                if (payMethod.megaCredits > this.megaCredits) {
-                    throw "Not enough mega credits";
-                }
-                return undefined;
-            })
-        );
-        result.title = "Play a project card";
-        return result;
+                this.actionsTakenThisRound++;
+                this.takeAction(game);
+            }
+
+            // Play the card
+            const action = selectedCard.play(this, game);
+            if (action !== undefined) {
+                action.onend = whenDone;
+                return action;
+            }
+            whenDone();
+            return undefined;
+        });
     }
 
     private playActionCard(game: Game): PlayerInput {

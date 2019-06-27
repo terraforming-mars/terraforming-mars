@@ -289,6 +289,12 @@ function getWaitingFor(waitingFor: PlayerInput | undefined): PlayerInputModel | 
                 }
             }
         break;
+        case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD:
+            result.cards = (waitingFor as SelectCard<ICard>).cards.map((card) => card.name);
+            result.maxCardsToSelect = 1;
+            result.minCardsToSelect = 1;
+            result.canUseHeat = (waitingFor as SelectHowToPay).canUseHeat;
+        break;
         case PlayerInputTypes.SELECT_CARD:
             result.cards = (waitingFor as SelectCard<ICard>).cards.map((card) => card.name);
             result.maxCardsToSelect = (waitingFor as SelectCard<ICard>).maxCardsToSelect;

@@ -4,7 +4,7 @@ import { PlayerInputFactory } from "./PlayerInputFactory";
 import { PlayerInputModel } from "../models/PlayerInputModel";
 
 export const AndOptions = Vue.component("and-options", {
-    props: ["players", "playerinput", "onsave", "showtitle"],
+    props: ["player", "players", "playerinput", "onsave", "showtitle"],
     data: function () {
         return {
             responded: {} as {[x: string]: Array<string>}
@@ -20,7 +20,7 @@ export const AndOptions = Vue.component("and-options", {
             const options = playerInput.options;
             options.forEach((option, idx: number) => {
                 if (this.responded[idx] === undefined) {
-                    children.push(new PlayerInputFactory().getPlayerInput(createElement, this.players, option, (out: Array<Array<string>>) => {
+                    children.push(new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, option, (out: Array<Array<string>>) => {
                         this.responded[idx] = out[0];
                         if (Object.keys(this.responded).length === options.length) {
                             let res: Array<Array<string>> = [];

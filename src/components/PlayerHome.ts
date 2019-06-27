@@ -84,7 +84,7 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
             </div>
-            <waiting-for v-if="player.phase !== 'end'" :players="player.players" :waitingfor="player.waitingFor"></waiting-for>
+            <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
         </div>
     `
 });

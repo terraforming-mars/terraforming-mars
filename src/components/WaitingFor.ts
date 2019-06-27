@@ -7,12 +7,13 @@ import { PlayerInputFactory } from "./PlayerInputFactory";
 import { SelectAmount } from "./SelectAmount";
 import { SelectCard } from "./SelectCard";
 import { SelectHowToPay } from "./SelectHowToPay";
+import { SelectHowToPayForCard } from "./SelectHowToPayForCard";
 import { SelectOption } from "./SelectOption";
 import { SelectPlayer } from "./SelectPlayer";
 import { SelectSpace } from "./SelectSpace";
 
 export const WaitingFor = Vue.component("waiting-for", {
-    props: ["players", "waitingfor"],
+    props: ["player", "players", "waitingfor"],
     data: function () {
         return {}
     },
@@ -23,6 +24,7 @@ export const WaitingFor = Vue.component("waiting-for", {
         "select-card": SelectCard,
         "select-option": SelectOption,
         "select-how-to-pay": SelectHowToPay,
+        "select-how-to-pay-for-card": SelectHowToPayForCard,
         "select-player": SelectPlayer,
         "select-space": SelectSpace
     },
@@ -30,7 +32,7 @@ export const WaitingFor = Vue.component("waiting-for", {
         if (this.waitingfor === undefined) {
             return createElement("div", "Not your turn to take any actions");
         }
-        return new PlayerInputFactory().getPlayerInput(createElement, this.players, this.waitingfor, (out: Array<Array<string>>) => {
+        return new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
             const xhr = new XMLHttpRequest();
             xhr.open("POST", "/player/input?id=" + (this.$parent as any).player.id);
             xhr.responseType = "json";

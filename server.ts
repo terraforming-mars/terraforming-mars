@@ -22,24 +22,26 @@ import { SpaceModel } from "./src/models/SpaceModel";
 
 const styles = fs.readFileSync("styles.css");
 const nes = fs.readFileSync("nes.min.css");
-const animalTag = fs.readFileSync("assets/animal-tag.png");
-const buildingTag = fs.readFileSync("assets/building-tag.png");
-const cityTag = fs.readFileSync("assets/city-tag.png");
-const cursor = fs.readFileSync("assets/cursor.png");
-const cursorClick = fs.readFileSync("assets/cursor-click.png");
-const earthTag = fs.readFileSync("assets/earth-tag.png");
-const eventTag = fs.readFileSync("assets/event-tag.png");
-const jovianTag = fs.readFileSync("assets/jovian-tag.png");
-const microbesTag = fs.readFileSync("assets/microbes-tag.png");
-const plantTag = fs.readFileSync("assets/plant-tag.png");
-const powerTag = fs.readFileSync("assets/power-tag.png");
-const scienceTag = fs.readFileSync("assets/science-tag.png");
-const spaceTag = fs.readFileSync("assets/space-tag.png");
 const favicon = fs.readFileSync("favicon.ico");
 const mainJs = fs.readFileSync("dist/main.js");
 
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
+const pngs: Map<string, Buffer> = new Map<string, Buffer>([
+    ["/assets/animal-tag.png", fs.readFileSync("assets/animal-tag.png")],
+    ["/assets/building-tag.png", fs.readFileSync("assets/building-tag.png")],
+    ["/assets/city-tag.png", fs.readFileSync("assets/city-tag.png")],
+    ["/assets/cursor.png", fs.readFileSync("assets/cursor.png")],
+    ["/assets/cursor-click.png", fs.readFileSync("assets/cursor-click.png")],
+    ["/assets/earth-tag.png", fs.readFileSync("assets/earth-tag.png")],
+    ["/assets/event-tag.png", fs.readFileSync("assets/event-tag.png")],
+    ["/assets/jovian-tag.png", fs.readFileSync("assets/jovian-tag.png")],
+    ["/assets/microbes-tag.png", fs.readFileSync("assets/microbes-tag.png")],
+    ["/assets/plant-tag.png", fs.readFileSync("assets/plant-tag.png")],
+    ["/assets/power-tag.png", fs.readFileSync("assets/power-tag.png")],
+    ["/assets/science-tag.png", fs.readFileSync("assets/science-tag.png")],
+    ["/assets/space-tag.png", fs.readFileSync("assets/space-tag.png")]
+]);
 
 const server: http.Server = http.createServer(function (req: http.IncomingMessage, res: http.ServerResponse): void {
     if (req.url !== undefined) {
@@ -57,32 +59,8 @@ const server: http.Server = http.createServer(function (req: http.IncomingMessag
                 serveStyle(res, styles);
             } else if (req.url === "/main.js") {
                 serveScript(res, mainJs);
-            } else if (req.url === "/assets/animal-tag.png") {
-                servePng(res, animalTag);
-            } else if (req.url === "/assets/building-tag.png") {
-                servePng(res, buildingTag);
-            } else if (req.url === "/assets/city-tag.png") {
-                servePng(res, cityTag);
-            } else if (req.url === "/assets/cursor.png") {
-                servePng(res, cursor);
-            } else if (req.url === "/assets/cursor-click.png") {
-                servePng(res, cursorClick);
-            } else if (req.url === "/assets/earth-tag.png") {
-                servePng(res, earthTag);
-            } else if (req.url === "/assets/event-tag.png") {
-                servePng(res, eventTag);
-            } else if (req.url === "/assets/jovian-tag.png") {
-                servePng(res, jovianTag);
-            } else if (req.url === "/assets/microbes-tag.png") {
-                servePng(res, microbesTag);
-            }  else if (req.url === "/assets/plant-tag.png") {
-                servePng(res, plantTag);
-            } else if (req.url === "/assets/power-tag.png") {
-                servePng(res, powerTag);
-            } else if (req.url === "/assets/science-tag.png") {
-                servePng(res, scienceTag);
-            } else if (req.url === "/assets/space-tag.png") {
-                servePng(res, spaceTag);
+            } else if (pngs.has(req.url)) {
+                servePng(res, pngs.get(req.url)!);
             } else if (req.url === "/favicon.ico") {
                 serveFavicon(res);
             } else if (req.url.indexOf("/api/game") === 0) {

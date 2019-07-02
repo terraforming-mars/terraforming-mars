@@ -6,7 +6,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { Tardigrades } from "../../src/cards/Tardigrades";
 import { OrOptions } from "../../src/inputs/OrOptions";
-import { Ants } from "../../src/cards/Ants";
+import { Ants } from "../../src/cards/Cards";
 
 describe("ExtremeColdFungus", function () {
     it("Can't play", function () {

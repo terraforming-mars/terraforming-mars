@@ -4,7 +4,7 @@ import { ViralEnhancers } from "../../src/cards/ViralEnhancers";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Ants } from "../../src/cards/Ants";
+import { Ants } from "../../src/cards/Cards";
 import { Birds } from "../../src/cards/Birds";
 import { Moss } from "../../src/cards/Moss";
 import { OrOptions } from "../../src/inputs/OrOptions";

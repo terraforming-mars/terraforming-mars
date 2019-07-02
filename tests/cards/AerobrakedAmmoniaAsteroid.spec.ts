@@ -1,10 +1,9 @@
 
 import { expect } from "chai";
-import { AerobrakedAmmoniaAsteroid } from "../../src/cards/AerobrakedAmmoniaAsteroid";
+import { AerobrakedAmmoniaAsteroid, Ants } from "../../src/cards/Cards";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Ants } from "../../src/cards/Ants";
 
 describe("AerobrakedAmmoniaAsteroid", function () {
     it("Should play", function () {

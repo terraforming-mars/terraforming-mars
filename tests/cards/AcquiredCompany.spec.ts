@@ -1,6 +1,6 @@
 
 import { expect } from "chai";
-import { AcquiredCompany } from "../../src/cards/AcquiredCompany";
+import { AcquiredCompany } from "../../src/cards/Cards";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";

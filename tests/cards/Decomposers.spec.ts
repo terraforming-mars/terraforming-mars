@@ -4,7 +4,7 @@ import { Decomposers } from "../../src/cards/Decomposers";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Algae } from "../../src/cards/Algae";
+import { Algae } from "../../src/cards/Cards";
 import { Birds } from "../../src/cards/Birds";
 
 describe("Decomposers", function () {

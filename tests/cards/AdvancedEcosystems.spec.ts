@@ -1,6 +1,6 @@
 
 import { expect } from "chai";
-import { AdvancedEcosystems } from "../../src/cards/AdvancedEcosystems";
+import { AdvancedEcosystems } from "../../src/cards/Cards";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";

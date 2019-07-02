@@ -15,19 +15,7 @@ import { Thorgate } from "./cards/corporation/Thorgate";
 import { UnitedNationsMarsInitiative } from "./cards/corporation/UnitedNationsMarsInitiative";
 
 // Project Cards
-import { AcquiredCompany } from "./cards/AcquiredCompany";
-import { AdaptationTechnology } from "./cards/AdaptationTechnology";
-import { AdaptedLichen } from "./cards/AdaptedLichen";
-import { AdvancedAlloys } from "./cards/AdvancedAlloys";
-import { AdvancedEcosystems } from "./cards/AdvancedEcosystems";
-import { AerobrakedAmmoniaAsteroid } from "./cards/AerobrakedAmmoniaAsteroid";
-import { AICentral } from "./cards/AICentral";
-import { Algae } from "./cards/Algae";
-import { AntiGravityTechnology } from "./cards/AntiGravityTechnology";
-import { Ants } from "./cards/Ants";
-import { AquiferPumping } from "./cards/AquiferPumping";
-import { ArchaeBacteria } from "./cards/ArchaeBacteria";
-import { ArcticAlgae } from "./cards/ArcticAlgae";
+import * as Cards from "./cards/Cards";
 import { ArtificialLake } from "./cards/ArtificialLake";
 import { ArtificialPhotosynthesis } from "./cards/ArtificialPhotosynthesis";
 import { Asteroid } from "./cards/Asteroid";
@@ -242,19 +230,19 @@ export const ALL_CORPORATION_CARDS: Array<CorporationCard> = [
 ];
 
 export const ALL_PROJECT_CARDS: Array<IProjectCard> = [
-    new AcquiredCompany(),
-    new AdaptationTechnology(),
-    new AdaptedLichen(),
-    new AdvancedAlloys(),
-    new AdvancedEcosystems(),
-    new AerobrakedAmmoniaAsteroid(),
-    new AntiGravityTechnology(),
-    new Ants(),
-    new AquiferPumping(),
-    new AICentral(),
-    new Algae(),
-    new ArchaeBacteria(),
-    new ArcticAlgae(),
+    new Cards.AcquiredCompany(),
+    new Cards.AdaptationTechnology(),
+    new Cards.AdaptedLichen(),
+    new Cards.AdvancedAlloys(),
+    new Cards.AdvancedEcosystems(),
+    new Cards.AerobrakedAmmoniaAsteroid(),
+    new Cards.AntiGravityTechnology(),
+    new Cards.Ants(),
+    new Cards.AquiferPumping(),
+    new Cards.AICentral(),
+    new Cards.Algae(),
+    new Cards.ArchaeBacteria(),
+    new Cards.ArcticAlgae(),
     new ArtificialLake(),
     new ArtificialPhotosynthesis(),
     new Asteroid(),

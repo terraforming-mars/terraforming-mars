@@ -4,7 +4,7 @@ import { SymbioticFungus } from "../../src/cards/SymbioticFungus";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { Ants } from "../../src/cards/Ants";
+import { Ants } from "../../src/cards/Cards";
 
 describe("SymbioticFungus", function () {
     it("Can't act or play", function () {

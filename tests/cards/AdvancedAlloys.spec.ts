@@ -1,6 +1,6 @@
 
 import { expect } from "chai";
-import { AdvancedAlloys } from "../../src/cards/AdvancedAlloys";
+import { AdvancedAlloys } from "../../src/cards/Cards";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";

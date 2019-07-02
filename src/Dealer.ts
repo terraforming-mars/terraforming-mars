@@ -16,13 +16,6 @@ import { UnitedNationsMarsInitiative } from "./cards/corporation/UnitedNationsMa
 
 // Project Cards
 import * as Cards from "./cards/Cards";
-import { ArtificialLake } from "./cards/ArtificialLake";
-import { ArtificialPhotosynthesis } from "./cards/ArtificialPhotosynthesis";
-import { Asteroid } from "./cards/Asteroid";
-import { AsteroidMining } from "./cards/AsteroidMining";
-import { AsteroidMiningConsortium } from "./cards/AsteroidMiningConsortium";
-import { BeamFromAThoriumAsteroid } from "./cards/BeamFromAThoriumAsteroid";
-import { BigAsteroid } from "./cards/BigAsteroid";
 import { BiomassCombustors } from "./cards/BiomassCombustors";
 import { Birds } from "./cards/Birds";
 import { BlackPolarDust } from "./cards/BlackPolarDust";
@@ -243,13 +236,13 @@ export const ALL_PROJECT_CARDS: Array<IProjectCard> = [
     new Cards.Algae(),
     new Cards.ArchaeBacteria(),
     new Cards.ArcticAlgae(),
-    new ArtificialLake(),
-    new ArtificialPhotosynthesis(),
-    new Asteroid(),
-    new AsteroidMining(),
-    new AsteroidMiningConsortium(),
-    new BeamFromAThoriumAsteroid(),
-    new BigAsteroid(),
+    new Cards.ArtificialLake(),
+    new Cards.ArtificialPhotosynthesis(),
+    new Cards.Asteroid(),
+    new Cards.AsteroidMining(),
+    new Cards.AsteroidMiningConsortium(),
+    new Cards.BeamFromAThoriumAsteroid(),
+    new Cards.BigAsteroid(),
     new BiomassCombustors(),
     new Birds(),
     new BlackPolarDust(),

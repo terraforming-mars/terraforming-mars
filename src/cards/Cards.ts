@@ -9,9 +9,13 @@ import { ResourceType } from "../ResourceType";
 import { SelectCard } from "../inputs/SelectCard";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
+import { SpaceType } from "../SpaceType";
 import { ISpace } from "../ISpace";
 import { TileType } from "../TileType";
 import { AndOptions } from "../inputs/AndOptions";
+import { OrOptions } from "../inputs/OrOptions";
+import { SelectOption } from "../inputs/SelectOption";
+import { SelectPlayer } from "../inputs/SelectPlayer";
 import { HowToPay } from "../inputs/HowToPay";
 
 export class AICentral implements IActionCard, IProjectCard {
@@ -307,5 +311,144 @@ export class ArcticAlgae implements IProjectCard {
     public play(player: Player) {
         player.plants++;
         return undefined;
+    }
+}
+
+export class ArtificialLake implements IProjectCard {
+    public cost: number = 15;
+    public tags: Array<Tags> = [Tags.STEEL];
+    public name: string = "Artificial Lake";
+    public cardType: CardType = CardType.AUTOMATED;
+    public text: string = "Requires -6C or warmer. Place 1 ocean tile on an area not reserved for ocean. Gain 1 victory point.";
+    public description: string = "Landscaping is as natural as terraforming.";
+    public canPlay(player: Player, game: Game): boolean {
+        return game.getTemperature() >= -6 - (player.getRequirementsBonus(game) * 2);
+    }
+    public play(player: Player, game: Game) {
+        player.victoryPoints++;
+        return new SelectSpace("Select a land space to place an ocean", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
+            game.addOceanTile(player, foundSpace.id, SpaceType.LAND);
+            return undefined;
+        });
+    }
+}
+
+export class ArtificialPhotosynthesis implements IProjectCard {
+    public cost: number = 12;
+    public tags: Array<Tags> = [Tags.SCIENCE];
+    public cardType: CardType = CardType.AUTOMATED;
+    public name: string = "Artficial Photosynthesis";
+    public text: string = "Increase your plant production 1 step or your energy production 2 steps.";
+    public description: string = "Artificial photosynthesis was achieved chemically by prof Akermark et. al. in 2021. Its application to terraforming remains to be seen.";
+    public canPlay(): boolean {
+        return true;
+    }
+    public play(player: Player, _game: Game) {
+        return new OrOptions(
+            new SelectOption("Increase your plant production 1 step", () => {
+                player.plantProduction++;
+                return undefined;
+            }),
+            new SelectOption("Increase your energy production 2 steps", () => {
+                player.energyProduction += 2;
+                return undefined;
+            })
+        );
+    }
+}
+
+export class Asteroid implements IProjectCard {
+    public cost: number = 14;
+    public tags: Array<Tags> = [Tags.SPACE];
+    public name: string = "Asteroid";
+    public cardType: CardType = CardType.EVENT;
+    public text: string = "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player";
+    public description: string = "What are those plants doing in our impact zone?";
+    public canPlay(): boolean {
+        return true;
+    }
+    public play(player: Player, game: Game) {
+        return new SelectPlayer(game.getPlayers(), "Select player to remove 3 plants from", (foundPlayer: Player) => {
+            foundPlayer.removePlants(player, 3);
+            player.titanium += 2;
+            return game.increaseTemperature(player, 1);
+        });
+    }
+}
+
+export class AsteroidMining implements IProjectCard {
+    public cost: number = 30;
+    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
+    public cardType: CardType = CardType.AUTOMATED;
+    public name: string = "Asteroid Mining";
+    public text: string = "Increase your titanium production 2 steps. Gain 2 victory points.";
+    public description: string = "Where gravity is low and rare minerals abound.";
+    public canPlay(): boolean {
+        return true;
+    }
+    public play(player: Player, _game: Game) {
+        player.titaniumProduction += 2;
+        player.victoryPoints += 2;
+        return undefined;
+    }
+}
+
+export class AsteroidMiningConsortium implements IProjectCard {
+    public cost: number = 13;
+    public tags: Array<Tags> = [Tags.JOVIAN];
+    public cardType: CardType = CardType.AUTOMATED;
+    public name: string = "Asteroid Mining Consortium";
+    public text: string = "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step. Gain 1 victory point.";
+    public description: string = "Your hold on the titanium market tightens.";
+    public canPlay(player: Player): boolean {
+        return player.titaniumProduction >= 1;
+    }
+    public play(player: Player, game: Game) {
+        player.victoryPoints++;
+        return new SelectPlayer(game.getPlayers(), "Select player to decrease titanium production", (foundPlayer: Player) => {
+            foundPlayer.titaniumProduction = Math.max(0, foundPlayer.titaniumProduction - 1);
+            player.titaniumProduction++;
+            return undefined;
+        });
+    }
+}
+
+export class BeamFromAThoriumAsteroid implements IProjectCard {
+    public cost: number = 32;
+    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE, Tags.ENERGY];
+    public cardType: CardType = CardType.AUTOMATED;
+    public name: string = "Beam From A Thorium Asteroid";
+    public text: string = "Requires a jovian tag. Increase your heat production and energy production 3 steps each. Gain 1 victory point.";
+    public description: string = "Nuclear energy is safe, especially when located on a remote asteroid rich in radioactive elements.";
+    public canPlay(player: Player): boolean {
+        return player.getTagCount(Tags.JOVIAN) >= 1;
+    }
+    public play(player: Player, _game: Game) {
+        if (player.getTagCount(Tags.JOVIAN) < 1) {
+            throw "Requires a jovian tag";
+        }
+        player.heatProduction += 3;
+        player.energyProduction += 3;
+        player.victoryPoints++;
+        return undefined;
+    }
+}
+
+export class BigAsteroid implements IProjectCard {
+    public cost: number = 27;
+    public tags: Array<Tags> = [Tags.SPACE];
+    public cardType: CardType = CardType.EVENT;
+    public name: string = "Big Asteroid";
+    public text: string = "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.";
+    public description: string = "There are many unpopulated areas to crash it on";
+    public canPlay(): boolean {
+        return true;
+    }
+    public play(player: Player, game: Game) {
+        return new SelectPlayer(game.getPlayers(), "Select player to remove up to 4 plants from", (foundPlayer: Player) => {
+            foundPlayer.removePlants(player, 4);
+            player.titanium += 4;
+            return game.increaseTemperature(player, 2);
+        });
     }
 }

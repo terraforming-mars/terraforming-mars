@@ -4,7 +4,7 @@ import { OptimalAerobraking } from "../../src/cards/OptimalAerobraking";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { BigAsteroid } from "../../src/cards/BigAsteroid";
+import { BigAsteroid } from "../../src/cards/Cards";
 
 describe("OptimalAerobraking", function () {
     it("Should play", function () {

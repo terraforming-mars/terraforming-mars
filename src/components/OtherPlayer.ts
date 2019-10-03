@@ -1,6 +1,8 @@
 
 import Vue from "vue";
 
+import { CardModel } from "../models/CardModel";
+import { getProjectCardByName } from "./Card";
 import { PlayerResources } from "./PlayerResources";
 
 export const OtherPlayer = Vue.component("other-player", {
@@ -14,6 +16,11 @@ export const OtherPlayer = Vue.component("other-player", {
         };
     },
     methods: {
+        getEventCards: function () {
+            return this.player.playedCards.map((card: CardModel) => {
+                return getProjectCardByName(card.name);
+            });
+        },
         toggleDisplayed: function () {
             this.displayed = !this.displayed;
         }
@@ -27,7 +34,7 @@ export const OtherPlayer = Vue.component("other-player", {
                 <h4 v-if="player.playedCards.length > 0">Played Cards</h4>
                 <div v-if="player.playedCards.length > 0">
                     <div v-for="card in getEventCards()" :key="card">
-                        <card :card="card.name" :resources="card.resources"></card>
+                        <card hideCost="true" :card="card.name" :resources="card.resources"></card>
                     </div>
                 </div>
                 <player-resources :player="player"></player-resources>

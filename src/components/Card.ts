@@ -81,7 +81,7 @@ export const Card = Vue.component("card", {
     template: `
         <span>
             <span :style="'font-weight:bold;color:' + this.getEventColor(this.getCard().cardType)">{{this.card}}</span>
-            <span v-if="this.hideCode !== 'true' && this.getCard().cost !== undefined">Costs {{this.getCard().cost}}.</span>
+            <span v-if="this.hideCost !== 'true' && this.getCard().cost !== undefined">Costs {{this.getCard().cost}}.</span>
             <span v-if="this.getCard().startingMegaCredits !== undefined">Start with {{this.getCard().startingMegaCredits}} mega credits.</span>
             <span v-if="this.getEventColor(this.getCard().cardType) === 'red'"><img height="20" src="/assets/event-tag.png" /></span><span v-for="tag in this.getCard().tags">
                 <img v-if="isEnergyTag(tag)" height="20" src="/assets/power-tag.png" />

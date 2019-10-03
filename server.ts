@@ -54,11 +54,11 @@ const server: http.Server = http.createServer(function (req: http.IncomingMessag
             } else if (req.url.startsWith("/api/player?id=")) {
                 apiGetPlayer(req, res);        
             } else if (req.url === "/nes.min.css") {
-                serveStyle(res, nes);
+                serveResource(res, nes);
             } else if (req.url === "/styles.css") {
-                serveStyle(res, styles);
+                serveResource(res, styles);
             } else if (req.url === "/main.js") {
-                serveScript(res, mainJs);
+                serveResource(res, mainJs);
             } else if (pngs.has(req.url)) {
                 servePng(res, pngs.get(req.url)!);
             } else if (req.url === "/favicon.ico") {
@@ -371,12 +371,7 @@ function serveFavicon(res: http.ServerResponse): void {
     res.end();
 }
 
-function serveStyle(res: http.ServerResponse, s: Buffer): void {
-    res.write(s);
-    res.end();
-}
-
-function serveScript(res: http.ServerResponse, s: Buffer): void {
+function serveResource(res: http.ServerResponse, s: Buffer): void {
     res.write(s);
     res.end();
 }

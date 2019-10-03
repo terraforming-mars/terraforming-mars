@@ -29,7 +29,7 @@ export class PlayerInputFactory {
                 throw "Unsupported input type";
         }
     }
-    public getPlayerInput(createElement: typeof Vue.prototype.$createElement, players: Array<PlayerModel>, player: PlayerModel, playerinput: PlayerInputModel, onsave: (out: Array<Array<string>>) => void, showtitle: boolean = true): VNode {
+    public getPlayerInput(createElement: typeof Vue.prototype.$createElement, players: Array<PlayerModel>, player: PlayerModel, playerinput: PlayerInputModel, onsave: (out: Array<Array<string>>) => void, showtitle: boolean): VNode {
         return createElement(this.getComponentName(playerinput.inputType), {
             attrs: {
                 player, players, playerinput, showtitle, onsave

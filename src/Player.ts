@@ -856,6 +856,43 @@ export class Player {
         return (this.canUseHeatAsMegaCredits ? this.heat : 0) + this.megaCredits >= cost;
     }
 
+    private getAvailableStandardProjects(game: Game): OrOptions {
+
+        const standardProjects = new OrOptions();
+        standardProjects.title = "Pay for a standard project";
+
+        if (this.canAfford(this.powerPlantCost)) {
+            standardProjects.options.push(
+                this.buildPowerPlant(game)
+            );
+        }
+
+        if (this.canAfford(constants.ASTEROID_COST) && game.getTemperature() < constants.MAX_TEMPERATURE) {
+            standardProjects.options.push(
+                this.asteroid(game)
+            )
+        }
+
+        if (this.canAfford(constants.AQUIFER_COST) && game.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
+            standardProjects.options.push(
+                this.aquifer(game)
+            );
+        }
+
+        if (this.canAfford(constants.GREENERY_COST) && game.getAvailableSpacesForGreenery(this).length > 0) {
+            standardProjects.options.push(
+                this.addGreenery(game)
+            );
+        }
+
+        if (this.canAfford(constants.CITY_COST) && game.getAvailableSpacesForGreenery(this).length > 0) {
+            standardProjects.options.push(
+                this.addCity(game)
+            );
+        }
+        return standardProjects;
+    }
+
     public takeAction(game: Game): void {
         if (
             game.getGeneration() === 1 &&
@@ -904,39 +941,7 @@ export class Player {
             );
         }
 
-        // STANDARD PROJECTS
-        const standardProjects = new OrOptions();
-        standardProjects.title = "Pay for a standard project";
-
-        if (this.canAfford(this.powerPlantCost)) {
-            standardProjects.options.push(
-                this.buildPowerPlant(game)
-            );
-        }
-
-        if (this.canAfford(constants.ASTEROID_COST) && game.getTemperature() < constants.MAX_TEMPERATURE) {
-            standardProjects.options.push(
-                this.asteroid(game)
-            )
-        }
-
-        if (this.canAfford(constants.AQUIFER_COST) && game.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
-            standardProjects.options.push(
-                this.aquifer(game)
-            );
-        }
-
-        if (this.canAfford(constants.GREENERY_COST) && game.getAvailableSpacesForGreenery(this).length > 0) {
-            standardProjects.options.push(
-                this.addGreenery(game)
-            );
-        }
-
-        if (this.canAfford(constants.CITY_COST) && game.getAvailableSpacesForGreenery(this).length > 0) {
-            standardProjects.options.push(
-                this.addCity(game)
-            );
-        }
+        const standardProjects = this.getAvailableStandardProjects(game);
 
         if (standardProjects.options.length > 1) {
             action.options.push(standardProjects);
@@ -1000,6 +1005,15 @@ export class Player {
                 .map((award: Award) => this.fundAward(award, game));
             action.options.push(remainingAwards);
         }
+
+        action.options.sort((a, b) => {
+            if (a.title > b.title) {
+                return 1;
+            } else if (a.title < b.title) {
+                return -1;
+            }
+            return 0;
+        });
 
         this.setWaitingFor(action);
     }

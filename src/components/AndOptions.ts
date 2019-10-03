@@ -29,7 +29,7 @@ export const AndOptions = Vue.component("and-options", {
                             }
                             this.onsave(res);
                         }
-                    }));
+                    }, true));
                 }
             });
         }

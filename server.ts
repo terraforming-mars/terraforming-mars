@@ -307,6 +307,7 @@ function getPlayers(players: Array<Player>): Array<PlayerModel> {
     return players.map((player) => {
         return {
             color: player.color,
+            corporationCard: player.corporationCard ? player.corporationCard.name : undefined,
             energy: player.energy,
             energyProduction: player.energyProduction,
             heat: player.heat,

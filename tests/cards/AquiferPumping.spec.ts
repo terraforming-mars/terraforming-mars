@@ -30,7 +30,7 @@ describe("AquiferPumping", function () {
         });
         action.cb();
         expect(player.megaCredits).to.eq(0);
-        expect(expectedOceanSpace.player).to.eq(undefined);
+        expect(expectedOceanSpace.player).to.eq(player);
         expect(expectedOceanSpace.tile).not.to.eq(undefined);
         expect(expectedOceanSpace.tile && expectedOceanSpace.tile.tileType).to.eq(TileType.OCEAN);
         action.options[1].cb({

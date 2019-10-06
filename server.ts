@@ -3,6 +3,7 @@ import * as http from "http";
 import * as fs from "fs";
 import { AndOptions } from "./src/inputs/AndOptions";
 import { CardModel } from "./src/models/CardModel";
+import { Color } from "./src/Color";
 import { Game } from "./src/Game";
 import { ICard } from "./src/cards/ICard";
 import { IProjectCard } from "./src/cards/IProjectCard";
@@ -19,6 +20,7 @@ import { SelectHowToPay } from "./src/inputs/SelectHowToPay";
 import { SelectPlayer } from "./src/inputs/SelectPlayer";
 import { SelectSpace } from "./src/inputs/SelectSpace";
 import { SpaceModel } from "./src/models/SpaceModel";
+import { TileType } from "./src/TileType";
 
 const styles = fs.readFileSync("styles.css");
 const nes = fs.readFileSync("nes.min.css");
@@ -329,6 +331,15 @@ function getPlayers(players: Array<Player>): Array<PlayerModel> {
     }); 
 }
 
+// Oceans can't be owned so they shouldn't have a color associated with them
+// Land claim can have a color on a space without a tile
+function getColor(space: ISpace): Color | undefined {
+    if ((space.tile === undefined || space.tile.tileType !== TileType.OCEAN) && space.player !== undefined) {
+        return space.player.color;
+    }
+    return undefined;
+}
+
 function getSpaces(spaces: Array<ISpace>): Array<SpaceModel> {
     return spaces.map((space) => {
         return {
@@ -338,7 +349,7 @@ function getSpaces(spaces: Array<ISpace>): Array<SpaceModel> {
             bonus: space.bonus,
             spaceType: space.spaceType,
             tileType: space.tile && space.tile.tileType,
-            color: space.player && space.player.color
+            color: getColor(space)
         };
     });
 }

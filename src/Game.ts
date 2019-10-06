@@ -95,7 +95,7 @@ export class Game {
         // Most tiles in play
         if (award === Award.LANDLORD) {
             getScore = (player: Player) => {
-                return this.spaces.filter((space) => space.tile !== undefined && space.player === player).length;
+                return this.spaces.filter((space) => space.tile !== undefined && space.tile.tileType !== TileType.OCEAN && space.player === player).length;
             };
         }
         // Highest megacredit production
@@ -270,13 +270,17 @@ export class Game {
         return this.researchedPlayers.has(player);
     }
 
+    private playerHasSpace(player: Player): boolean {
+        return this.getAllSpaces().find((space) => space.tile !== undefined && space.player === player && space.tile.tileType !== TileType.OCEAN) !== undefined;
+    }
+
     public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
         // Greenery must be placed by a space you own if you own a space
-        if (this.getSpaces(SpaceType.LAND).find((space) => space.tile !== undefined && space.player === player)) {
+        if (this.playerHasSpace(player)) {
             return this.getAvailableSpacesOnLand(player)
-                                .filter((space) => this.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.player === player).length > 0);
+                                .filter((space) => this.getAdjacentSpaces(space).find((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType !== TileType.OCEAN && adjacentSpace.player === player) !== undefined);
         }
-        // Place anywhere
+        // Place anywhere if no space owned
         return this.getAvailableSpacesOnLand(player);
     }
 
@@ -589,8 +593,6 @@ export class Game {
             return;
         }
         this.addTile(player, spaceType, this.getSpace(spaceId), { tileType: TileType.OCEAN });
-        // No one can own the oceans!
-        this.getSpace(spaceId).player = undefined;
         player.terraformRating++;
         this.tilePlaced(this.getSpace(spaceId));
     }

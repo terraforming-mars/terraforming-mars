@@ -42,7 +42,8 @@ const pngs: Map<string, Buffer> = new Map<string, Buffer>([
     ["/assets/plant-tag.png", fs.readFileSync("assets/plant-tag.png")],
     ["/assets/power-tag.png", fs.readFileSync("assets/power-tag.png")],
     ["/assets/science-tag.png", fs.readFileSync("assets/science-tag.png")],
-    ["/assets/space-tag.png", fs.readFileSync("assets/space-tag.png")]
+    ["/assets/space-tag.png", fs.readFileSync("assets/space-tag.png")],
+	["/assets/wildcard-tag.png", fs.readFileSync("assets/wildcard-tag.png")]
 ]);
 
 const server: http.Server = http.createServer(function (req: http.IncomingMessage, res: http.ServerResponse): void {

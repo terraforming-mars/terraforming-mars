@@ -11,11 +11,11 @@ export class SpaceHotels implements IProjectCard {
     public name: string = "Space Hotels";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires 2 Earth tags. Increase MC production 4 steps";
-    public description: string = "";
-    public canPlay(): boolean {
+    public description: string = "Space tourism was one of the most important sources of income for the space industry";
+    public canPlay(player: Player): boolean {
        return player.getTagCount(Tags.EARTH) >= 2; 
     }
-    public play(player: Player, game: Game) {
+    public play(player: Player, _game: Game) {
         player.megaCreditProduction +=4;
         return undefined;
     }

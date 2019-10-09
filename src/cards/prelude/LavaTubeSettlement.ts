@@ -4,6 +4,10 @@ import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
+import { SpaceName } from "../../SpaceName";
+import { SelectSpace } from "../../inputs/SelectSpace";
+import { SpaceType } from "../../SpaceType";
+import { ISpace } from "../../ISpace";
 
 export class LavaTubeSettlement implements IProjectCard {
     public cost: number = 15;
@@ -11,7 +15,7 @@ export class LavaTubeSettlement implements IProjectCard {
     public name: string = "Lava Tube Settlement";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease your energy production 1 step and increase your MC production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.";
-    public description: string = "";
+    public description: string = "Giant lava tubes can provide protection for early settlement on Mars";
 
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.getSpaces(SpaceType.LAND)
@@ -24,10 +28,10 @@ export class LavaTubeSettlement implements IProjectCard {
 
     public play(player: Player, game: Game) {
         return new SelectSpace("Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons", this.getAvailableSpaces(player, game), (space: ISpace) => {
-	   	game.addCityTile(player, space.id);
+			game.addCityTile(player, space.id);
        		player.megaCreditProduction +=2;
-		player.energyProduction--;    
+			player.energyProduction--;    
         	return undefined;
-    });
+		});
     }
 }

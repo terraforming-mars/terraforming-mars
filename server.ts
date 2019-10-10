@@ -189,7 +189,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                     break;
                 }
             }
-            const game = new Game(gameId, players, firstPlayer);
+            const game = new Game(gameId, players, firstPlayer, gameReq.prelude);
             games.set(gameId, game);
             game.getPlayers().forEach((player) => {
                 playersToGame.set(player.id, game);

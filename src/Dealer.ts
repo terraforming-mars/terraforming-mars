@@ -94,6 +94,7 @@ import { InterstellarColonyShip } from "./cards/InterstellarColonyShip";
 import { InventionContest } from "./cards/InventionContest";
 import { InventorsGuild } from "./cards/InventorsGuild";
 import { InvestmentLoan } from "./cards/InvestmentLoan";
+import { IoMiningIndustries } from "./cards/IoMiningIndustries";
 import { Ironworks } from "./cards/Ironworks";
 import { KelpFarming } from "./cards/KelpFarming";
 import { LagrangeObservatory } from "./cards/LagrangeObservatory";
@@ -183,7 +184,6 @@ import { SymbioticFungus } from "./cards/SymbioticFungus";
 import { Tardigrades } from "./cards/Tardigrades";
 import { TechnologyDemonstration } from "./cards/TechnologyDemonstration";
 import { TectonicStressPower } from "./cards/TectonicStressPower";
-import { TenMiningIndustries } from "./cards/TenMiningIndustries";
 import { TerraformingGanymede } from "./cards/TerraformingGanymede";
 import { TitaniumMine } from "./cards/TitaniumMine";
 import { TollStation } from "./cards/TollStation";
@@ -321,6 +321,7 @@ export const ALL_PROJECT_CARDS: Array<IProjectCard> = [
     new InventionContest(),
     new InventorsGuild(),
     new InvestmentLoan(),
+    new IoMiningIndustries(),
     new Ironworks(),
     new KelpFarming(),
     new LagrangeObservatory(),
@@ -410,7 +411,6 @@ export const ALL_PROJECT_CARDS: Array<IProjectCard> = [
     new Tardigrades(),
     new TechnologyDemonstration(),
     new TectonicStressPower(),
-    new TenMiningIndustries(),
     new TerraformingGanymede(),
     new TitaniumMine(),
     new TollStation(),

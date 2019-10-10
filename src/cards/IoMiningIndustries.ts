@@ -4,7 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 
-export class TenMiningIndustries implements IProjectCard {
+export class IoMiningIndustries implements IProjectCard {
     public cost: number = 41;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = "10 Mining Industries";

@@ -7,7 +7,7 @@ import { Player } from "../Player";
 export class IoMiningIndustries implements IProjectCard {
     public cost: number = 41;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: string = "10 Mining Industries";
+    public name: string = "Io Mining Industries";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your titanium production 2 steps and your mega credit production 2 steps. Gain 1 victory point per jovian tag you have.";
     public description: string = "Supplying fuel and valuable minerals.";

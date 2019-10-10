@@ -38,7 +38,7 @@ describe("GHGProducingBacteria", function () {
         orAction.options[0].cb();
         expect(player.getResourcesOnCard(card)).to.eq(3);
         orAction.options[1].cb();
-        expect(player.getResourcesOnCard(card)).to.eq(2);
+        expect(player.getResourcesOnCard(card)).to.eq(1);
         expect(game.getTemperature()).to.eq(-28);
     });
 });

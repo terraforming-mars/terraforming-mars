@@ -29,7 +29,7 @@ import { ALL_CORPORATION_CARDS } from "./Dealer";
 export class Game {
     public activePlayer: Player;
     public claimedMilestones: Array<ClaimedMilestone> = [];
-    public dealer: Dealer = new Dealer();
+    public dealer: Dealer;
     public fundedAwards: Array<FundedAward> = []; 
     public generation: number = 1;
     public phase: Phase = Phase.RESEARCH;
@@ -42,6 +42,8 @@ export class Game {
 
     constructor(public id: string, private players: Array<Player>, private first: Player) {
         this.activePlayer = first;
+		//this.dealer = new Dealer (this.preludeExtension);
+		this.dealer = new Dealer (false);
         // Single player game player starts with 14TR
         if (players.length === 1) {
             players[0].terraformRating = players[0].terraformRatingAtGenerationStart = 14;

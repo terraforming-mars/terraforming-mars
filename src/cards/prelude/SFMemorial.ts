@@ -11,7 +11,7 @@ export class SFMemorial implements IProjectCard {
     public name: string = "SFMemorial";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Draw 1 card. Gain 1 victory point.";
-    public description: string = "";
+    public description: string = "A tribute to those who inspired us to come";
     public canPlay(): boolean {
         return true;
     }

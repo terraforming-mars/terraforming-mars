@@ -10,7 +10,7 @@ export class Vitor implements CorporationCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 45;
     public text: string = "You start with 45 MC. As your first action, fund an award for free. Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3MC";
-    public description: string = "";
+    public description: string = "A corporation grown from crowd funding of new innovations. Always inclined to initiate projects to gain public support as well as innovation prizes";
 
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
         if (card.tags.indexOf(Tags.EARTH) !== -1) {

@@ -13,7 +13,7 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 47;
     public actionText: string = "Spend 4 MC to increase one of your LOWEST PRODUCTION 1 step.";
-    public text: string = "";
+    public text: string = "Buying into diverse businesses, Robinson Industries is soon expected to influence all aspects of Martian life";
     public description: string = "";
     public play() {
         return undefined;

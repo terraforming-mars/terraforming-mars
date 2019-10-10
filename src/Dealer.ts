@@ -1,3 +1,51 @@
+// Prelude Cards
+import { AlliedBanks } from "./cards/prelude/AlliedBanks";
+import { BiosphereSupport } from "./cards/prelude/BiosphereSupport";
+import { AquiferTurbines } from "./cards/prelude/AquiferTurbines";
+import { MoholeExcavation } from "./cards/prelude/MoholeExcavation";
+import { EarlySettlement } from "./cards/prelude/EarlySettlement";
+import { Biofuels } from "./cards/prelude/Biofuels";
+import { PowerGeneration } from "./cards/prelude/PowerGeneration";
+import { SelfSufficientSettlement } from "./cards/prelude/SelfSufficientSettlement";
+import { UNMIContractor } from "./cards/prelude/UNMIContractor";
+import { MiningOperations } from "./cards/prelude/MiningOperations";
+import { DomeFarming } from "./cards/prelude/DomeFarming";
+import { BusinessEmpire } from "./cards/prelude/BusinessEmpire";
+import { Donation } from "./cards/prelude/Donation";
+import { NitrogenDelivery } from "./cards/prelude/NitrogenDelivery";
+import { SmeltingPlant } from "./cards/prelude/SmeltingPlant";
+import { Supplier } from "./cards/prelude/Supplier";
+import { SupplyDrop } from "./cards/prelude/SupplyDrop";
+import { GreatAquifer } from "./cards/prelude/GreatAquifer";
+import { Biolab } from "./cards/prelude/Biolab";
+import { MartianIndustries } from "./cards/prelude/MartianIndustries";
+import { IoResearchOutpost } from "./cards/prelude/IoResearchOutpost";
+import { PolarIndustries } from "./cards/prelude/PolarIndustries";
+import { SocietySupport } from "./cards/prelude/SocietySupport";
+import { GalileanMining } from "./cards/prelude/GalileanMining";
+import { HugeAsteroid } from "./cards/prelude/HugeAsteroid";
+import { MetalsCompany } from "./cards/prelude/MetalsCompany";
+import { Loan } from "./cards/prelude/Loan";
+import { Mohole } from "./cards/prelude/Mohole";
+import { MetalRichAsteroid } from "./cards/prelude/MetalRichAsteroid";
+import { OrbitalConstructionYard } from "./cards/prelude/OrbitalConstructionYard";
+//import { ExperimentalForest } from "./cards/prelude/ExperimentalForest";
+//import { AcquiredSpaceAgency } from "./cards/prelude/AcquiredSpaceAgency";
+import { ResearchNetwork } from "./cards/prelude/ResearchNetwork";
+//import { EccentricSponsor } from "./cards/prelude/EccentricSponsor";
+//import { EcologyExperts } from "./cards/prelude/EcologyExperts";
+
+import { CheungShingMARS } from "./cards/prelude/CheungShingMARS";
+import { RobinsonIndustries } from "./cards/prelude/RobinsonIndustries";
+import { PointLuna } from "./cards/prelude/PointLuna";
+//import { ValleyTrust } from "./cards/prelude/ValleyTrust";
+
+import { LavaTubeSettlement } from "./cards/prelude/LavaTubeSettlement";
+//import { ResearchCoordination } from "./cards/prelude/ResearchCoordination";
+import { MartianSurvey } from "./cards/prelude/MartianSurvey";
+import { SpaceHotels  } from "./cards/prelude/SpaceHotels";
+import { HousePrinting } from "./cards/prelude/HousePrinting";
+import { SFMemorial } from "./cards/prelude/SFMemorial";
 
 // Corporation Cards
 import { CorporationCard } from "./cards/corporation/CorporationCard";
@@ -207,6 +255,45 @@ import { Zeppelins } from "./cards/Zeppelins";
 
 import { IProjectCard } from "./cards/IProjectCard";
 
+export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
+        new AlliedBanks(),
+        new BiosphereSupport(),
+        new AquiferTurbines(),
+        new MoholeExcavation(),
+        new EarlySettlement(),
+        new Biofuels(),
+        new PowerGeneration(),
+        new SelfSufficientSettlement(),
+        new MiningOperations(),
+        new UNMIContractor(),
+        new DomeFarming(),
+        new BusinessEmpire(),
+        new Donation(),
+        new NitrogenDelivery(),
+        new SmeltingPlant(),
+        new Supplier(),
+        new SupplyDrop(),
+        new GreatAquifer(),
+        new Biolab(),
+        new MartianIndustries(),
+        new IoResearchOutpost(),
+        new PolarIndustries(),
+        new SocietySupport(),
+        new GalileanMining(),
+        new HugeAsteroid(),
+        new MetalsCompany(),
+        new Loan(),
+        new Mohole(),
+        new MetalRichAsteroid(),
+        new OrbitalConstructionYard(),
+        //new AcquiredSpaceAgency(),
+        new ResearchNetwork(),
+        //new EccentricSponsor(),
+        //new ExperimentalForest()
+        //new EcologyExperts()
+];
+
+
 export const ALL_CORPORATION_CARDS: Array<CorporationCard> = [
     new CrediCor(),
     new EcoLine(),
@@ -221,6 +308,23 @@ export const ALL_CORPORATION_CARDS: Array<CorporationCard> = [
     new Thorgate(),
     new UnitedNationsMarsInitiative()
 ];
+
+export const ALL_PRELUDE_CORPORATIONS: Array<CorporationCard> = [
+        new CheungShingMARS(),
+        new RobinsonIndustries(),
+        new PointLuna()
+        //new ValleyTrust()
+];
+
+export const ALL_PRELUDE_PROJECTS_CARDS: Array<IProjectCard> = [
+        new SFMemorial(),
+        new HousePrinting(),
+        new SpaceHotels(),
+        new MartianSurvey(),
+        //new ResearchCoordination(),
+        new LavaTubeSettlement()
+];
+
 
 export const ALL_PROJECT_CARDS: Array<IProjectCard> = [
     new Cards.AcquiredCompany(),
@@ -435,9 +539,17 @@ export const ALL_PROJECT_CARDS: Array<IProjectCard> = [
 
 export class Dealer {
     public deck: Array<IProjectCard> = [];
+	public preludeDeck: Array<IProjectCard> = [];
     public discarded: Array<IProjectCard> = [];
-    constructor() {
+	private usePreludeExtension: boolean = false;
+    constructor(usePreludeExtension: boolean) {
+		this.usePreludeExtension = usePreludeExtension;
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS);
+        if (this.usePreludeExtension) {
+                this.preludeDeck = this.shuffleCards(ALL_PRELUDE_CARDS);
+                this.deck.push(...ALL_PRELUDE_PROJECTS_CARDS);
+                this.deck = this.shuffleCards(this.deck);
+        }		
     }
     public shuffleCards(cards: Array<any>): Array<any> {
         const deck: Array<any> = [];
@@ -461,4 +573,12 @@ export class Dealer {
         }
         return result;
     }    
+    // Prelude deck does not need discard and reshuffle mecanisms
+    public dealPreludeCard(): IProjectCard {
+        const result: IProjectCard | undefined = this.preludeDeck.pop();
+        if (result === undefined) {
+            throw "Unexpected empty deck";
+        }
+        return result;
+    }	
 }

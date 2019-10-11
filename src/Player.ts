@@ -806,6 +806,14 @@ export class Player {
         });
     }
 
+    private endTurnOption(game: Game): PlayerInput {
+        return new SelectOption("End Turn", () => {
+            this.actionsTakenThisRound = 0;
+            game.playerIsFinishedTakingActions(this);
+            return undefined;
+        });
+    }
+
     private passOption(game: Game): PlayerInput {
         return new SelectOption("Pass", () => {
             game.playerHasPassed(this);
@@ -938,6 +946,12 @@ export class Player {
         if (this.cardsInHand.length > 0) {
             action.options.push(
                 this.sellPatents(game)
+            );
+        }
+
+        if (game.getPlayers().length > 1 && this.actionsTakenThisRound > 0) {
+            action.options.push(
+                this.endTurnOption(game)
             );
         }
 

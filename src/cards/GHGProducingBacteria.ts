@@ -35,7 +35,7 @@ export class GHGProducingBacteria implements IActionCard, IProjectCard {
                     return undefined;
                 }),
                 new SelectOption("Remove 2 microbes to raise temperature 1 step", () => {
-                    player.removeResourceFrom(this);
+                    player.removeResourceFrom(this,2);
                     return game.increaseTemperature(player, 1);
                 })
             );

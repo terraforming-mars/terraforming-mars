@@ -37,7 +37,7 @@ describe("ExtremeColdFungus", function () {
         player.playedCards.push(tardigrades);
         player.addResourceTo(tardigrades, 4);
         action!.options[1].cb([tardigrades]);
-        expect(player.getResourcesOnCard(tardigrades)).to.eq(2);
+        expect(player.getResourcesOnCard(tardigrades)).to.eq(6);
         action!.options[0].cb();
         expect(player.plants).to.eq(1);
     });

@@ -42,7 +42,7 @@ export class Game {
     private spaces: Array<ISpace> = new OriginalBoard().spaces;
     private temperature: number = constants.MIN_TEMPERATURE;
 
-    constructor(public id: string, private players: Array<Player>, private first: Player, private preludeExtension: boolean) {
+    constructor(public id: string, private players: Array<Player>, private first: Player, private preludeExtension: boolean = false) {
         this.activePlayer = first;
         this.preludeExtension = preludeExtension;
         this.dealer = new Dealer (this.preludeExtension);
@@ -182,29 +182,30 @@ export class Game {
             this.dealer.dealCard()
         ];
 
-        const preludeDealtCards: Array<IProjectCard> = [
+	if (this.preludeExtension) {
+			
+	    const preludeDealtCards: Array<IProjectCard> = [
                 this.dealer.dealPreludeCard(),
                 this.dealer.dealPreludeCard(),
                 this.dealer.dealPreludeCard(),
                 this.dealer.dealPreludeCard()
         ];
 		
-	if (this.preludeExtension) {
         let corporation: CorporationCard;
         return new AndOptions(
             () => {
                 this.playCorporationCard(player, corporation);
                 return undefined;
             },
+	        new SelectCard<CorporationCard>("Select corporation", player.dealtCorporationCards, (foundCards: Array<CorporationCard>) => {
+                corporation = foundCards[0];
+                return undefined;
+            }),		
             new SelectCard("Select 2 Prelude cards", preludeDealtCards, (preludeCards: Array<IProjectCard>) => {
                     player.cardsInHand.push(preludeCards[0], preludeCards[1]);
                     player.megaCredits +=6;
                     return undefined;
                 }, 2, 2),			
-            new SelectCard<CorporationCard>("Select corporation", player.dealtCorporationCards, (foundCards: Array<CorporationCard>) => {
-                corporation = foundCards[0];
-                return undefined;
-            }),
             new SelectCard("Select initial cards to buy", dealtCards, (foundCards: Array<IProjectCard>) => {
                 // Pay for cards
                 for (let foundCard of foundCards) {
@@ -707,5 +708,20 @@ export class Game {
         }
         return undefined;
     }
+    public drawCardsByTag(tag: Tags, total: number): Array<IProjectCard> {
+        let cardsToDraw = 0;
+        const result: Array<IProjectCard> = [];
+            while (cardsToDraw < total) {
+                let projectCard = this.dealer.dealCard();
+                if (projectCard.tags.includes(tag)) {
+                        cardsToDraw++;
+                        result.push(projectCard);
+                } else {
+                    this.dealer.discard(projectCard);
+                }
+        }
+        return result;
+    }
+	
 }
 

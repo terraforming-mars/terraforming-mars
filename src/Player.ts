@@ -61,6 +61,7 @@ export class Player {
     public victoryPoints: number = 0;
     private actionsThisGeneration: Set<string> = new Set<string>();
     private waitingFor?: PlayerInput;
+	private noRequirementsWilcard: boolean = false;
 
     constructor(public name: string, public color: Color, public beginner: boolean) {
 
@@ -149,7 +150,12 @@ export class Player {
         if (this.corporationCard !== undefined) {
             tagCount += this.corporationCard.tags.filter((cardTag) => cardTag === tag).length;
         }
-        return tagCount;
+        if (tag = Tags.WILDCARD) {
+            return tagCount;
+        } else {
+            return tagCount + this.getTagCount(Tags.WILDCARD);
+        }
+
     }
     public getActiveAndAutomatedCards(): Array<IProjectCard> {
         return this.playedCards.filter((pc) => pc.cardType === CardType.AUTOMATED || pc.cardType === CardType.ACTIVE);
@@ -517,6 +523,11 @@ export class Player {
                 return action;
             }
             whenDone();
+			// Ecology Experts no requirements switch off
+            if (this.noRequirementsWilcard && selectedCard.name != "Ecology Experts" ) {
+                this.noRequirementsWilcard = false;
+            }
+
             return undefined;
         });
     }
@@ -856,7 +867,7 @@ export class Player {
                 maxPay += this.titanium * this.titaniumValue;
             }
             maxPay += this.megaCredits;
-            return maxPay >= this.getCardCost(game, card) && card.canPlay(this, game);
+            return maxPay >= this.getCardCost(game, card) && (card.canPlay(this, game) || this.noRequirementsWilcard);
         });
     }
 
@@ -1062,6 +1073,15 @@ export class Player {
     public setWaitingFor(input: PlayerInput): void {
         this.waitingFor = input;
     }
+	
+    public reduceActionsTakenThisRound(): void {
+        this.actionsTakenThisRound--;
+    }
+	
+    public setNoRequirementsWilcard(): void {
+        this.noRequirementsWilcard = true;
+    }
+	
 
 }
 

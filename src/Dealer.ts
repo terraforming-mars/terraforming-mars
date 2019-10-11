@@ -29,19 +29,19 @@ import { Loan } from "./cards/prelude/Loan";
 import { Mohole } from "./cards/prelude/Mohole";
 import { MetalRichAsteroid } from "./cards/prelude/MetalRichAsteroid";
 import { OrbitalConstructionYard } from "./cards/prelude/OrbitalConstructionYard";
-//import { ExperimentalForest } from "./cards/prelude/ExperimentalForest";
-//import { AcquiredSpaceAgency } from "./cards/prelude/AcquiredSpaceAgency";
+import { ExperimentalForest } from "./cards/prelude/ExperimentalForest";
+import { AcquiredSpaceAgency } from "./cards/prelude/AcquiredSpaceAgency";
 import { ResearchNetwork } from "./cards/prelude/ResearchNetwork";
-//import { EccentricSponsor } from "./cards/prelude/EccentricSponsor";
-//import { EcologyExperts } from "./cards/prelude/EcologyExperts";
+import { EccentricSponsor } from "./cards/prelude/EccentricSponsor";
+import { EcologyExperts } from "./cards/prelude/EcologyExperts";
 
 import { CheungShingMARS } from "./cards/prelude/CheungShingMARS";
 import { RobinsonIndustries } from "./cards/prelude/RobinsonIndustries";
 import { PointLuna } from "./cards/prelude/PointLuna";
-//import { ValleyTrust } from "./cards/prelude/ValleyTrust";
+import { ValleyTrust } from "./cards/prelude/ValleyTrust";
 
 import { LavaTubeSettlement } from "./cards/prelude/LavaTubeSettlement";
-//import { ResearchCoordination } from "./cards/prelude/ResearchCoordination";
+import { ResearchCoordination } from "./cards/prelude/ResearchCoordination";
 import { MartianSurvey } from "./cards/prelude/MartianSurvey";
 import { SpaceHotels  } from "./cards/prelude/SpaceHotels";
 import { HousePrinting } from "./cards/prelude/HousePrinting";
@@ -286,11 +286,11 @@ export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new Mohole(),
         new MetalRichAsteroid(),
         new OrbitalConstructionYard(),
-        //new AcquiredSpaceAgency(),
+        new AcquiredSpaceAgency(),
         new ResearchNetwork(),
-        //new EccentricSponsor(),
-        //new ExperimentalForest()
-        //new EcologyExperts()
+        new EccentricSponsor(),
+        new ExperimentalForest(),
+        new EcologyExperts()
 ];
 
 
@@ -312,8 +312,8 @@ export const ALL_CORPORATION_CARDS: Array<CorporationCard> = [
 export const ALL_PRELUDE_CORPORATIONS: Array<CorporationCard> = [
         new CheungShingMARS(),
         new RobinsonIndustries(),
-        new PointLuna()
-        //new ValleyTrust()
+        new PointLuna(),
+        new ValleyTrust()
 ];
 
 export const ALL_PRELUDE_PROJECTS_CARDS: Array<IProjectCard> = [
@@ -321,7 +321,7 @@ export const ALL_PRELUDE_PROJECTS_CARDS: Array<IProjectCard> = [
         new HousePrinting(),
         new SpaceHotels(),
         new MartianSurvey(),
-        //new ResearchCoordination(),
+        new ResearchCoordination(),
         new LavaTubeSettlement()
 ];
 
@@ -577,7 +577,7 @@ export class Dealer {
     public dealPreludeCard(): IProjectCard {
         const result: IProjectCard | undefined = this.preludeDeck.pop();
         if (result === undefined) {
-            throw "Unexpected empty deck";
+            throw "Unexpected empty prelude deck";
         }
         return result;
     }	

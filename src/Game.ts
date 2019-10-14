@@ -162,8 +162,14 @@ export class Game {
         corporationCard.play(player, this);
         player.megaCredits = corporationCard.startingMegaCredits;
         if (corporationCard.name !== new BeginnerCorporation().name) {
-            player.megaCredits -= player.cardsInHand.length * constants.CARD_COST;
-        }
+			if (this.preludeExtension) {
+			//Prelude card are not to be bought
+				player.megaCredits -= (player.cardsInHand.length - 2) * constants.CARD_COST;
+			} else {
+				player.megaCredits -= player.cardsInHand.length * constants.CARD_COST;
+			}
+		}	
+		
         this.playerIsFinishedWithResearchPhase(player);
     }
 
@@ -202,7 +208,6 @@ export class Game {
             }),		
             new SelectCard("Select 2 Prelude cards", preludeDealtCards, (preludeCards: Array<IProjectCard>) => {
                     player.cardsInHand.push(preludeCards[0], preludeCards[1]);
-                    player.megaCredits +=6;
                     return undefined;
                 }, 2, 2),			
             new SelectCard("Select initial cards to buy", dealtCards, (foundCards: Array<IProjectCard>) => {

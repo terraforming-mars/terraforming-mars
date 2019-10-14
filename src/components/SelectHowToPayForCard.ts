@@ -21,7 +21,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             heat: 0,
             megaCredits: 0,
             steel: 0,
-            titanium: 0
+            titanium: 0,
+			microbes: 0
         } as SelectHowToPayForCardModel;
     },
     components: {
@@ -61,13 +62,25 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 }
             }
             return false;
+		},	
+        canUseMicrobes: function () {
+            if (this.$data.card !== undefined && this.player.canUseMicrobesAsMegaCreditsForPlants) {
+                const card = getProjectCardByName(this.$data.card);
+                if (card !== undefined) {
+                    if (card.tags.find((tag) => tag === Tags.PLANT) !== undefined) {
+                        return true;
+                    }
+                }
+            }
+            return false;			
         },
         save: function () {
             const htp: HowToPay = {
                 heat: parseInt(this.$data.heat),
                 megaCredits: parseInt(this.$data.megaCredits),
                 steel: parseInt(this.$data.steel),
-                titanium: parseInt(this.$data.titanium)
+                titanium: parseInt(this.$data.titanium),
+				microbes: parseInt(this.$data.microbes)
             };
             this.onsave([[
                 this.$data.card,
@@ -94,6 +107,10 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 <label>Heat:</label>
                 <input class="nes-input" type="number" value="0" min="0" max="100" v-model="heat" />
             </div>
+            <div v-if="canUseMicrobes()" class="nes-field">
+                <label>Microbes:</label>
+                <input class="nes-input" type="number" value="0" min="0" max="100" v-model="microbes" />
+            </div>			
             <div class="nes-field">
                 <label>Mega Credit:</label>
                 <input class="nes-input" type="number" value="0" min="0" :max="getCardCost()" v-model="megaCredits" />

@@ -1,10 +1,12 @@
+import { IActionCard } from "../ICard";
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
+import { Game } from "../../Game";
 import { ResourceType } from "../../ResourceType";
 
-export class Psychrophiles implements IProjectCard {
+export class Psychrophiles implements IActionCard, IProjectCard {
     public cost: number = 2;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public tags: Array<Tags> = [Tags.MICROBES];
@@ -13,7 +15,7 @@ export class Psychrophiles implements IProjectCard {
     public actionText: string = "Add 1 microbe to this card";
     public text: string = "Effect: When paying for a plant card, microbes here may be used as 2 MC each. Temperature must be -20 C or lower";
     public description: string = "";
-    public canPlay(): boolean {
+    public canPlay(player: Player, game: Game): boolean {
 	    return game.getTemperature() <= -20 + (player.getRequirementsBonus(game) * 2);
     }
 	    
@@ -22,7 +24,11 @@ export class Psychrophiles implements IProjectCard {
         return undefined;
     }
 	
-    public action(player: Player) {
+    public canAct(): boolean {
+        return true; 
+    }	
+	
+    public action(player: Player, _game: Game) {
         player.addResourceTo(this);
         return undefined;
     }

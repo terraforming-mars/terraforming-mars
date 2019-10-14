@@ -9,7 +9,8 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
             heat: 0,
             megaCredits: 0,
             steel: 0,
-            titanium: 0
+            titanium: 0,
+			microbes: 0
         };
     },
     methods: {
@@ -18,7 +19,8 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                 heat: parseInt(this.$data.heat),
                 megaCredits: parseInt(this.$data.megaCredits),
                 steel: parseInt(this.$data.steel),
-                titanium: parseInt(this.$data.titanium)
+                titanium: parseInt(this.$data.titanium),
+				microbes:  parseInt(this.$data.microbes)
             };
             this.onsave([[JSON.stringify(htp)]]);
         }

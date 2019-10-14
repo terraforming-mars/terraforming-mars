@@ -2,6 +2,7 @@
 import { IProjectCard } from "./cards/IProjectCard";
 import { CorporationCard } from "./cards/corporation/CorporationCard";
 import { SaturnSystems } from "./cards/corporation/SaturnSystems";
+import { Psychrophiles } from "./cards/prelude/Psychrophiles";
 import { Tags } from "./cards/Tags";
 import { PlayerInput } from "./PlayerInput";
 import { CardType } from "./cards/CardType";
@@ -34,6 +35,7 @@ export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
     public id: string = this.generateId();
     public canUseHeatAsMegaCredits: boolean = false;
+	public canUseMicrobesAsMegaCreditsForPlants = false;
     public plantsNeededForGreenery: number = 8;
     public dealtCorporationCards: Array<CorporationCard> = [];
     public powerPlantCost: number = 11;
@@ -213,7 +215,8 @@ export class Player {
                 steel: 0,
                 heat: 0,
                 titanium: 0,
-                megaCredits: 0
+                megaCredits: 0,
+				microbes: 0
             };
             try {
                 const parsedInput: {[x: string]: number} = JSON.parse(input[0][1]);
@@ -231,6 +234,11 @@ export class Player {
                         payMethod.heat = parsedInput.heat;
                     }
                 }
+                if (this.canUseMicrobesAsMegaCreditsForPlants) {
+                    if (parsedInput.microbes !== undefined) {
+                        payMethod.microbes = parsedInput.microbes;
+                    }
+                }				
             } catch (err) {
                 throw "Unable to parse input " + err;
             }
@@ -301,7 +309,8 @@ export class Player {
                 steel: 0,
                 heat: 0,
                 titanium: 0,
-                megaCredits: 0
+                megaCredits: 0,
+				microbes: 0
             };
             if (this.canUseHeatAsMegaCredits) {
                 payMethod.heat = 0;
@@ -330,6 +339,13 @@ export class Player {
                         throw "Heat not provided, bad input";
                     }
                 }
+                if (this.canUseMicrobesAsMegaCreditsForPlants) {
+                    if (parsedInput.microbes !== undefined) {
+                        payMethod.microbes = parsedInput.microbes;
+                    } else {
+                        throw "Microbes not provided, bad input";
+                    }
+                }				
             } catch (err) {
                 throw "Unable to parse input " + err;
             }
@@ -375,7 +391,8 @@ export class Player {
             steel: 0,
             titanium: 0,
             heat: 0,
-            megaCredits: 0
+            megaCredits: 0,
+			microbes: 0
         };
 
         let selectedCards: Array<IProjectCard> = [];
@@ -459,6 +476,10 @@ export class Player {
             if (this.canUseHeatAsMegaCredits && howToPay.heat !== undefined) {
                 totalToPay += howToPay.heat;
             }
+			
+            if (this.canUseMicrobesAsMegaCreditsForPlants && howToPay.microbes !== undefined) {
+                totalToPay += howToPay.microbes * 2;
+            }			
 
             totalToPay += howToPay.megaCredits;
 
@@ -474,6 +495,12 @@ export class Player {
                 this.titanium -= howToPay.titanium;
                 this.megaCredits -= howToPay.megaCredits;
                 this.heat -= howToPay.heat;
+				
+				for (const playedCard of this.playedCards) {
+					if (playedCard.name === new Psychrophiles().name) {
+						this.removeResourceFrom(playedCard, howToPay.microbes);
+					}
+				}	
 
                 const actionsFromPlayedCard: OrOptions[] = [];
                 for (const playedCard of this.playedCards) {

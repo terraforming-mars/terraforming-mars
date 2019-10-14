@@ -1,4 +1,3 @@
-
 import { Player } from "./Player";
 import { Dealer } from "./Dealer";
 import { ISpace } from "./ISpace";
@@ -180,7 +179,7 @@ export class Game {
             this.dealer.dealCard(),
             this.dealer.dealCard(),
             this.dealer.dealCard()
-        ];
+			];
 
 	if (this.preludeExtension) {
 			
@@ -501,7 +500,7 @@ export class Game {
             (steps === 3 && this.temperature === -16)
         ) {
             player.heatProduction++;
-        } else if (this.temperature === 0 || ((steps === 2 || steps === 3) && this.temperature === 2) || (steps === 3 && this.temperature === 4)) {
+        } else if ((this.temperature === 0 || ((steps === 2 || steps === 3) && this.temperature === 2) || (steps === 3 && this.temperature === 4)) && this.getOceansOnBoard() < constants.MAX_OCEAN_TILES){
             return new SelectSpace("Select space for ocean from temperature increase", this.getAvailableSpacesForOcean(player), (space: ISpace) => {
                 this.addOceanTile(player, space.id);
                 return undefined;

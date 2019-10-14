@@ -46,6 +46,7 @@ import { MartianSurvey } from "./cards/prelude/MartianSurvey";
 import { SpaceHotels  } from "./cards/prelude/SpaceHotels";
 import { HousePrinting } from "./cards/prelude/HousePrinting";
 import { SFMemorial } from "./cards/prelude/SFMemorial";
+import { Psychrophiles } from "./cards/prelude/Psychrophiles";
 
 // Corporation Cards
 import { CorporationCard } from "./cards/corporation/CorporationCard";
@@ -322,7 +323,8 @@ export const ALL_PRELUDE_PROJECTS_CARDS: Array<IProjectCard> = [
         new SpaceHotels(),
         new MartianSurvey(),
         new ResearchCoordination(),
-        new LavaTubeSettlement()
+        new LavaTubeSettlement(),
+		new Psychrophiles()
 ];
 
 

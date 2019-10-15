@@ -23,44 +23,45 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
     }
     public action(player: Player, _game: Game) {
 	let minProduction = Math.min(player.megaCreditProduction, player.steelProduction, player.titaniumProduction, player.plantProduction, player.energyProduction, player.heatProduction);    
+
         return new OrOptions(
             new SelectOption("Increase MC production 1 step", () => {
-	        if (player.megaCreditProduction = minProduction) {
+	        if (player.megaCreditProduction == minProduction) {
 	    	     player.megaCreditProduction++;
 	             player.megaCredits -= 4;
 				}
                 return undefined;
 	    }),
             new SelectOption("Increase steel production 1 step", () => {
-	        if (player.steelProduction = minProduction) {
+	        if (player.steelProduction == minProduction) {
 	             player.steelProduction++;
 	             player.megaCredits -= 4;
 				}
                 return undefined;
 	    }),
             new SelectOption("Increase titanium production 1 step", () => {
-                if (player.titaniumProduction = minProduction) {
+                if (player.titaniumProduction == minProduction) {
                      player.titaniumProduction++;
                      player.megaCredits -= 4;
                 }
                 return undefined;
             }),
             new SelectOption("Increase plant production 1 step", () => {
-                if (player.plantProduction = minProduction) {
+                if (player.plantProduction == minProduction) {
                      player.plantProduction++;
                      player.megaCredits -= 4;
                 }
                 return undefined;
             }),
             new SelectOption("Increase energy production 1 step", () => {
-                if (player.energyProduction = minProduction) {
+                if (player.energyProduction == minProduction) {
                      player.energyProduction++;
                      player.megaCredits -= 4;
                 }
                 return undefined;
             }),
             new SelectOption("Increase heat production 1 step", () => {
-                if (player.heatProduction = minProduction) {
+                if (player.heatProduction == minProduction) {
                      player.heatProduction++;
                      player.megaCredits -= 4;
                 }

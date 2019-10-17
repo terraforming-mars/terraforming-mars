@@ -420,7 +420,8 @@ export class Player {
                     "Select how to pay for cards",
                     false,
                     false,
-                    true, (pay) => { htp = pay; return undefined; }),
+                    true,
+					false,	(pay) => { htp = pay; return undefined; }),
                 new SelectCard("Select which cards to take into hand", dealtCards, (foundCards: Array<IProjectCard>) => {
                     selectedCards = foundCards;
                     return undefined;
@@ -623,7 +624,7 @@ export class Player {
             return undefined;
         };
         if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-            return new SelectHowToPay("Select how to pay for power plant", false, false, true, (htp) => {
+            return new SelectHowToPay("Select how to pay for power plant", false, false, true, false, (htp) => {
                 if (htp.heat + htp.megaCredits < this.powerPlantCost) {
                     throw "Haven't spend enough for power plant";
                 }
@@ -653,7 +654,7 @@ export class Player {
             return undefined;
         };
         if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-            return new SelectHowToPay("Select how to pay for asteroid", false, false, true, (htp) => {
+            return new SelectHowToPay("Select how to pay for asteroid", false, false, true, false, (htp) => {
                 if (htp.heat + htp.megaCredits < constants.ASTEROID_COST) {
                     throw "Haven't spend enough for asteroid";
                 }
@@ -678,7 +679,7 @@ export class Player {
             let ocean: ISpace;
             return new AndOptions(() => {
                 return fundProject(htp.megaCredits, htp.heat, ocean.id);
-            }, new SelectHowToPay("How to pay for aquifer", false, false, true, (stp: HowToPay) => {
+            }, new SelectHowToPay("How to pay for aquifer", false, false, true, false, (stp: HowToPay) => {
                 if (stp.heat + stp.megaCredits < constants.AQUIFER_COST) {
                     throw "Haven't spend enough for aquifer";
                 }
@@ -716,7 +717,7 @@ export class Player {
             let greenery: ISpace;
             return new AndOptions(() => {
                 return fundProject(htp.megaCredits, htp.heat, greenery.id);
-            }, new SelectHowToPay("Select how to pay for greenery", false, false, true, (stp) => {
+            }, new SelectHowToPay("Select how to pay for greenery", false, false, true, false, (stp) => {
                 htp = stp;
                 return undefined;
             }), new SelectSpace("Greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
@@ -745,7 +746,7 @@ export class Player {
                 () => {
                     return fundProject(htp.megaCredits, htp.heat, city.id);
                 },
-                new SelectHowToPay("Select how to pay for city", false, false, true, (stp) => {
+                new SelectHowToPay("Select how to pay for city", false, false, true, false, (stp) => {
                     htp = stp;
                     return undefined;
                 }),
@@ -812,7 +813,7 @@ export class Player {
             return undefined;
         };
         if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-            return new SelectHowToPay("Select how to pay " + milestone, false, false, true, (stp) => {
+            return new SelectHowToPay("Select how to pay " + milestone, false, false, true, false, (stp) => {
                 if (stp.megaCredits + stp.heat < 8) {
                     throw "Did not spend enough to claim milestone";
                 }
@@ -835,7 +836,7 @@ export class Player {
             return undefined;
         };
         if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-            return new SelectHowToPay("Select how to pay for " + upperCaseAward, false, false, true, (htp: HowToPay) => {
+            return new SelectHowToPay("Select how to pay for " + upperCaseAward, false, false, true, false, (htp: HowToPay) => {
                 return funder(htp.megaCredits, htp.heat);
             });
         }

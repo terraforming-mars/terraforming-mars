@@ -7,6 +7,7 @@ interface SelectHowToPayForCardModel {
     megaCredits: number;
     steel: number;
     titanium: number;
+	microbes: number;
 }
 
 import { HowToPay } from "../inputs/HowToPay";
@@ -64,6 +65,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             return false;
 		},	
         canUseMicrobes: function () {
+			console.log("inside canUseMicrobes "+ this.player.canUseMicrobesAsMegaCreditsForPlants);
             if (this.$data.card !== undefined && this.player.canUseMicrobesAsMegaCreditsForPlants) {
                 const card = getProjectCardByName(this.$data.card);
                 if (card !== undefined) {

@@ -23,6 +23,7 @@ import { FundedAward } from "./FundedAward";
 import { Milestone } from "./Milestone";
 import { ResourceType } from "./ResourceType";
 import * as constants from "./constants";
+import { Color } from "./Color";
 
 import { ALL_CORPORATION_CARDS } from "./Dealer";
 
@@ -37,15 +38,16 @@ export class Game {
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
     private passedPlayers: Set<Player> = new Set<Player>();
     private researchedPlayers: Set<Player> = new Set<Player>();
-    private spaces: Array<ISpace> = new OriginalBoard().spaces;
+	private originalBoard = new OriginalBoard();
+	private spaces: Array<ISpace> = this.originalBoard.spaces;
     private temperature: number = constants.MIN_TEMPERATURE;
 
     constructor(public id: string, private players: Array<Player>, private first: Player) {
         this.activePlayer = first;
-        // Single player game player starts with 14TR
+        // Single player game player starts with 14TR and 2 neutral cities and forests on board		
         if (players.length === 1) {
-            players[0].terraformRating = players[0].terraformRatingAtGenerationStart = 14;
-        }
+            this.setupSolo();
+		}
         const corporationCards = this.dealer.shuffleCards(ALL_CORPORATION_CARDS);
         // Give each player their corporation cards
         for (let player of players) {
@@ -658,5 +660,19 @@ export class Game {
         }
         return undefined;
     }
+	private setupSolo() {
+			this.players[0].terraformRating = this.players[0].terraformRatingAtGenerationStart = 14;
+			// Single player add neutral player and put 2 neutrals cities on board with adjacent forest
+			let neutral = new Player("neutral", Color.NEUTRAL, true);
+			let space1 = this.originalBoard.getRandomCitySpace();
+			this.addCityTile(neutral, space1.id, SpaceType.LAND);
+			const fspace1 = this.originalBoard.getForestSpace(this.getAdjacentSpaces(space1));
+			this.addTile(neutral, SpaceType.LAND, fspace1, { tileType: TileType.GREENERY });
+			let space2 = this.originalBoard.getRandomCitySpace(30);
+			this.addCityTile(neutral, space2.id, SpaceType.LAND);
+			const fspace2 = this.originalBoard.getForestSpace(this.getAdjacentSpaces(space2));
+			this.addTile(neutral, SpaceType.LAND, fspace2, { tileType: TileType.GREENERY });
+			return undefined;
+	}			
 }
 

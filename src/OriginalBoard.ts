@@ -125,4 +125,35 @@ export class OriginalBoard {
             new Ocean(colCount++, rowCount, [SpaceBonus.TITANIUM, SpaceBonus.TITANIUM])
         );
     }
+	
+	public getRandomSpace(offset: number = 0): Space {
+		return this.spaces[Math.floor(Math.random() * 30) + offset];
+	}
+	
+    public shuffle(input: Array<any>): Array<any> {
+        const out: Array<any> = [];
+        const copy = input.slice();
+        while (copy.length) {
+            out.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
+        }
+        return out;
+    }	
+	public getRandomCitySpace(offset: number = 0): Space {
+		while (true) {
+			let space = this.getRandomSpace(offset);
+			if (space instanceof Land && space.id !==  SpaceName.NOCTIS_CITY ) {
+				return space;
+			}
+		}	
+	}	
+	public getForestSpace(spaces: Array<ISpace>): ISpace {
+		spaces = this.shuffle(spaces);
+		while (true) {
+			const space: ISpace | undefined = spaces.pop();
+			//if (space === undefined) return undefined;
+			if (space instanceof Land && space.id !==  SpaceName.NOCTIS_CITY ) {
+				return space;
+			}
+		}	
+	}
 }

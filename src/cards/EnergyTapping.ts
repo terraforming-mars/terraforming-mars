@@ -17,7 +17,7 @@ export class EnergyTapping implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-        return new SelectPlayer(game.getPlayers(), "Select player to decrease energy production 1 step", (foundPlayer: Player) => {
+        return new SelectPlayer(game.getPlayersOrNeutral(), "Select player to decrease energy production 1 step", (foundPlayer: Player) => {
             if (foundPlayer.energyProduction < 1) {
                 throw "Selected player has no energy production";
             }

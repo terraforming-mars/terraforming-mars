@@ -23,7 +23,7 @@ export class HiredRaiders implements IProjectCard {
         let selectedPlayer: Player;
         return new AndOptions(
             () => { return undefined; },
-            new SelectPlayer(game.getPlayers(), "Select player to steal from", (foundPlayer: Player) => {
+            new SelectPlayer(game.getPlayersOrNeutral(), "Select player to steal from", (foundPlayer: Player) => {
                 selectedPlayer = foundPlayer;
                 return undefined;
             }),

@@ -269,7 +269,7 @@ export class AquiferPumping implements IActionCard, IProjectCard {
                         foundSpace = space;
                         return undefined;
                     }),
-                    new SelectHowToPay("Select how to pay for action", true, false, player.canUseHeatAsMegaCredits, (htp: HowToPay) => {
+                    new SelectHowToPay("Select how to pay for action", true, false, player.canUseHeatAsMegaCredits, false, (htp: HowToPay) => {
                         howToPay = htp;
                         return undefined;
                     })
@@ -368,7 +368,7 @@ export class Asteroid implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-        return new SelectPlayer(game.getPlayers(), "Select player to remove 3 plants from", (foundPlayer: Player) => {
+        return new SelectPlayer(game.getPlayersOrNeutral(), "Select player to remove 3 plants from", (foundPlayer: Player) => {
             foundPlayer.removePlants(player, 3);
             player.titanium += 2;
             return game.increaseTemperature(player, 1);
@@ -405,7 +405,7 @@ export class AsteroidMiningConsortium implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         player.victoryPoints++;
-        return new SelectPlayer(game.getPlayers(), "Select player to decrease titanium production", (foundPlayer: Player) => {
+        return new SelectPlayer(game.getPlayersOrNeutral(), "Select player to decrease titanium production", (foundPlayer: Player) => {
             foundPlayer.titaniumProduction = Math.max(0, foundPlayer.titaniumProduction - 1);
             player.titaniumProduction++;
             return undefined;
@@ -445,7 +445,7 @@ export class BigAsteroid implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-        return new SelectPlayer(game.getPlayers(), "Select player to remove up to 4 plants from", (foundPlayer: Player) => {
+        return new SelectPlayer(game.getPlayersOrNeutral(), "Select player to remove up to 4 plants from", (foundPlayer: Player) => {
             foundPlayer.removePlants(player, 4);
             player.titanium += 4;
             return game.increaseTemperature(player, 2);

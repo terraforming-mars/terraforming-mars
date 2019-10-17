@@ -24,7 +24,7 @@ export class GiantIceAsteroid implements IProjectCard {
             () => {
                 return game.increaseTemperature(player, 2);
             },
-            new SelectPlayer(game.getPlayers(), "Select player to remove up to 6 plants from", (foundPlayer: Player) => {
+            new SelectPlayer(game.getPlayersOrNeutral(), "Select player to remove up to 6 plants from", (foundPlayer: Player) => {
                 foundPlayer.removePlants(player, 6);
                 return undefined;
             }),

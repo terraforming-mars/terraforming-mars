@@ -1,3 +1,5 @@
+import { Psychrophiles } from "./cards/prelude/Psychrophiles";
+
 import { Player } from "./Player";
 import { Dealer } from "./Dealer";
 import { ISpace } from "./ISpace";
@@ -22,6 +24,7 @@ import { FundedAward } from "./FundedAward";
 import { Milestone } from "./Milestone";
 import { ResourceType } from "./ResourceType";
 import * as constants from "./constants";
+import { Color } from "./Color";
 
 import { ALL_CORPORATION_CARDS } from "./Dealer";
 import { ALL_PRELUDE_CORPORATIONS } from "./Dealer";
@@ -38,17 +41,21 @@ export class Game {
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
     private passedPlayers: Set<Player> = new Set<Player>();
     private researchedPlayers: Set<Player> = new Set<Player>();
-    private spaces: Array<ISpace> = new OriginalBoard().spaces;
+	private originalBoard = new OriginalBoard();
+    //private spaces: Array<ISpace> = new OriginalBoard().spaces;
+	private spaces: Array<ISpace> = this.originalBoard.spaces;
     private temperature: number = constants.MIN_TEMPERATURE;
+	private neutralPlayers: Array<Player> = [];
 
     constructor(public id: string, private players: Array<Player>, private first: Player, private preludeExtension: boolean = false) {
         this.activePlayer = first;
         this.preludeExtension = preludeExtension;
         this.dealer = new Dealer (this.preludeExtension);
-        // Single player game player starts with 14TR
+        // Single player game player starts with 14TR and some neutral cities on boards		
         if (players.length === 1) {
-            players[0].terraformRating = players[0].terraformRatingAtGenerationStart = 14;
-        }
+            this.setupSolo();
+		}
+		
         let corporationCards = this.dealer.shuffleCards(ALL_CORPORATION_CARDS);
         //Add prelude corporations cards
         if (this.preludeExtension) {
@@ -184,7 +191,8 @@ export class Game {
             this.dealer.dealCard(),
             this.dealer.dealCard(),
             this.dealer.dealCard(),
-            this.dealer.dealCard()
+            this.dealer.dealCard(),
+			new Psychrophiles()
 			];
 
 	if (this.preludeExtension) {
@@ -656,6 +664,13 @@ export class Game {
     public getPlayers(): Array<Player> {
         return this.players;
     }
+	
+    public getPlayersOrNeutral(): Array<Player> {
+		if (this.players.length === 1) {
+			return this.neutralPlayers;
+		}	
+        return this.players;
+    }	
 
     public getOtherAnimalCards(c: IProjectCard): Array<IProjectCard> {
         const result: Array<IProjectCard> = [];
@@ -725,7 +740,21 @@ export class Game {
                 }
         }
         return result;
-    }
-	
+    }	
+	private setupSolo() {
+			this.players[0].terraformRating = this.players[0].terraformRatingAtGenerationStart = 14;
+			// Single player add neutral player and put 2 neutrals cities on board with adjacent forest
+			let neutral = new Player("neutral", Color.PINK, true);
+			this.neutralPlayers.push(neutral);
+			let space1 = this.originalBoard.getRandomCitySpace();
+			this.addCityTile(neutral, space1.id, SpaceType.LAND);
+			const fspace1 = this.originalBoard.getForestSpace(this.getAdjacentSpaces(space1));
+			this.addTile(neutral, SpaceType.LAND, fspace1, { tileType: TileType.GREENERY });
+			let space2 = this.originalBoard.getRandomCitySpace(30);
+			this.addCityTile(neutral, space2.id, SpaceType.LAND);
+			const fspace2 = this.originalBoard.getForestSpace(this.getAdjacentSpaces(space2));
+			this.addTile(neutral, SpaceType.LAND, fspace2, { tileType: TileType.GREENERY });
+			return undefined;
+	}	
 }
 

@@ -25,7 +25,7 @@ export class Sabotage implements IProjectCard {
             () => {
                 return undefined;
             },
-            new SelectPlayer(game.getPlayers(), "Select player to remove resources from", (selectedPlayer: Player) => {
+            new SelectPlayer(game.getPlayersOrNeutral(), "Select player to remove resources from", (selectedPlayer: Player) => {
                 foundPlayer = selectedPlayer;
                 return undefined;
             }),

@@ -28,7 +28,7 @@ export class Comet implements IProjectCard {
                 game.addOceanTile(player, space.id);
                 return undefined;
             }),
-            new SelectPlayer(game.getPlayers(), "Select player to remove up to 3 plants from", (foundPlayer: Player) => {
+            new SelectPlayer(game.getPlayersOrNeutral(), "Select player to remove up to 3 plants from", (foundPlayer: Player) => {
                 foundPlayer.removePlants(player, 3);
                 return undefined;
             })

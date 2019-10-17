@@ -24,7 +24,8 @@ export class Birds implements IActionCard, IProjectCard {
         player.victoryPoints += player.getResourcesOnCard(this);
     }
     public play(_player: Player, game: Game) {
-        return new SelectPlayer(game.getPlayersOrNeutral(), "Select player to decrease plant production 2 steps", (foundPlayer: Player) => {
+		if (game.getPlayers().length == 1)  return undefined;
+        return new SelectPlayer(game.getPlayers(), "Select player to decrease plant production 2 steps", (foundPlayer: Player) => {
             if (foundPlayer.plantProduction < 2) {
                 throw "Player needs at least 2 plant production";
             }

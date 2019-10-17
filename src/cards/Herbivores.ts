@@ -29,7 +29,11 @@ export class Herbivores implements IProjectCard {
         }
     }
     public play(player: Player, game: Game) {
-        return new SelectPlayer(game.getPlayersOrNeutral(), "Select player to decrease plant production 1 step", (foundPlayer: Player) => {
+		if (game.getPlayers().length == 1) {
+            player.addResourceTo(this);
+            return undefined;			
+		}	
+        return new SelectPlayer(game.getPlayers(), "Select player to decrease plant production 1 step", (foundPlayer: Player) => {
             foundPlayer.plantProduction = Math.max(0, foundPlayer.plantProduction - 1);
             player.addResourceTo(this);
             return undefined;

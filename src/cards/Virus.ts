@@ -20,9 +20,10 @@ export class Virus implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game): PlayerInput | undefined {
+		if (game.getPlayers().length == 1)  return undefined;
         const cards = game.getPlayedCardsWithAnimals();
         const remove5Plants = () => {
-            return new SelectPlayer(game.getPlayersOrNeutral(), "Select player to remove 5 plants from", (foundPlayer: Player) => {
+            return new SelectPlayer(game.getPlayers(), "Select player to remove 5 plants from", (foundPlayer: Player) => {
                 foundPlayer.removePlants(player, 5);
                 return undefined;
             });

@@ -20,6 +20,13 @@ export class Comet implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
+		if (game.getPlayers().length == 1) {
+            return new SelectSpace("Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+                game.addOceanTile(player, space.id);
+                return game.increaseTemperature(player, 1);
+            });
+		}		
+				
         return new AndOptions(
             () => {
                 return game.increaseTemperature(player, 1);
@@ -28,7 +35,7 @@ export class Comet implements IProjectCard {
                 game.addOceanTile(player, space.id);
                 return undefined;
             }),
-            new SelectPlayer(game.getPlayersOrNeutral(), "Select player to remove up to 3 plants from", (foundPlayer: Player) => {
+            new SelectPlayer(game.getPlayers(), "Select player to remove up to 3 plants from", (foundPlayer: Player) => {
                 foundPlayer.removePlants(player, 3);
                 return undefined;
             })

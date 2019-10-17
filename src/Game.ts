@@ -1,4 +1,4 @@
-import { Psychrophiles } from "./cards/prelude/Psychrophiles";
+import { Sabotage } from "./cards/Sabotage";
 
 import { Player } from "./Player";
 import { Dealer } from "./Dealer";
@@ -45,7 +45,6 @@ export class Game {
     //private spaces: Array<ISpace> = new OriginalBoard().spaces;
 	private spaces: Array<ISpace> = this.originalBoard.spaces;
     private temperature: number = constants.MIN_TEMPERATURE;
-	private neutralPlayers: Array<Player> = [];
 
     constructor(public id: string, private players: Array<Player>, private first: Player, private preludeExtension: boolean = false) {
         this.activePlayer = first;
@@ -192,7 +191,7 @@ export class Game {
             this.dealer.dealCard(),
             this.dealer.dealCard(),
             this.dealer.dealCard(),
-			new Psychrophiles()
+			new Sabotage()
 			];
 
 	if (this.preludeExtension) {
@@ -665,13 +664,6 @@ export class Game {
         return this.players;
     }
 	
-    public getPlayersOrNeutral(): Array<Player> {
-		if (this.players.length === 1) {
-			return this.neutralPlayers;
-		}	
-        return this.players;
-    }	
-
     public getOtherAnimalCards(c: IProjectCard): Array<IProjectCard> {
         const result: Array<IProjectCard> = [];
         this.players.forEach((player) => {
@@ -745,7 +737,6 @@ export class Game {
 			this.players[0].terraformRating = this.players[0].terraformRatingAtGenerationStart = 14;
 			// Single player add neutral player and put 2 neutrals cities on board with adjacent forest
 			let neutral = new Player("neutral", Color.PINK, true);
-			this.neutralPlayers.push(neutral);
 			let space1 = this.originalBoard.getRandomCitySpace();
 			this.addCityTile(neutral, space1.id, SpaceType.LAND);
 			const fspace1 = this.originalBoard.getForestSpace(this.getAdjacentSpaces(space1));

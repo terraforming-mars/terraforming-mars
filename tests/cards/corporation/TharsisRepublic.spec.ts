@@ -12,7 +12,7 @@ describe("TharsisRepublic", function () {
         const card = new TharsisRepublic();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
-        const action = card.play();
+        const action = card.play(player, game);
         expect(action).to.eq(undefined);
         const lands = game.getAvailableSpacesOnLand(player);
         lands[0].player = player;

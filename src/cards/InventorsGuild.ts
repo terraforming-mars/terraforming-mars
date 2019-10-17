@@ -31,7 +31,7 @@ export class InventorsGuild implements IActionCard, IProjectCard {
         if (player.canAfford(3)) {
             if (player.canUseHeatAsMegaCredits && player.heat > 0) {
                 return new OrOptions(
-                    new SelectHowToPay("Buy card " + topCard.name, false, false, true, (htp) => {
+                    new SelectHowToPay("Buy card " + topCard.name, false, false, true, false, (htp) => {
                         if (htp.heat + htp.megaCredits < 3) {
                             game.dealer.discard(topCard);
                             throw "Can not afford to buy card";

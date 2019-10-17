@@ -30,7 +30,7 @@ export class TharsisRepublic implements CorporationCard {
             }
         }
     }
-    public play(player: Player) {
+    public play(player: Player, game: Game) {
 		if (game.getPlayers().length == 1) {
 				// Get bonus for 2 neutral cities
 				player.megaCreditProduction =+ 2;

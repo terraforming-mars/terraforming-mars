@@ -17,10 +17,10 @@ export class MiningExpedition implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-		if (game.getPlayers().length == 1) {
+        if (game.getPlayers().length == 1) {
             player.steel += 2;
             return game.increaseOxygenLevel(player, 1);
-		}		
+        }		
         return new SelectPlayer(game.getPlayers(), "Select player to remove 2 plants from", (foundPlayer: Player) => {
             foundPlayer.removePlants(player, 2);
             player.steel += 2;

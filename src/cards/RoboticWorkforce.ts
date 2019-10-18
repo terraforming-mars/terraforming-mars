@@ -130,10 +130,10 @@ export class RoboticWorkforce implements IProjectCard {
                 const foundCard: IProjectCard = selectedCards[0];
                 // this is the only card which requires additional user input
                 if (foundCard.name === new BiomassCombustors().name) {
-					if (game.getPlayers().length == 1)  {
+                    if (game.getPlayers().length == 1)  {
 						player.energyProduction += 2;
 						return undefined;
-					}	
+                    }	
                     return new SelectPlayer(game.getPlayers(), "Select player to remove plant production", (foundPlayer: Player) => {
                         if (foundPlayer.plantProduction < 1) {
                             throw "Player must have plant production";

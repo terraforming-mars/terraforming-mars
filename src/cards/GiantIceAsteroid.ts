@@ -20,7 +20,7 @@ export class GiantIceAsteroid implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-		if (game.getPlayers().length == 1) {
+        if (game.getPlayers().length == 1) {
 			return new AndOptions(
 				() => {
 					return game.increaseTemperature(player, 2);
@@ -34,7 +34,7 @@ export class GiantIceAsteroid implements IProjectCard {
 					return undefined;
 				})
 			);			
-		}	
+        }	
 
         return new AndOptions(
             () => {

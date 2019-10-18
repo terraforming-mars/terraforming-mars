@@ -20,12 +20,12 @@ export class Comet implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-		if (game.getPlayers().length == 1) {
+        if (game.getPlayers().length == 1) {
             return new SelectSpace("Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
                 game.addOceanTile(player, space.id);
                 return game.increaseTemperature(player, 1);
             });
-		}		
+        }		
 				
         return new AndOptions(
             () => {

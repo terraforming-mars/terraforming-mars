@@ -19,10 +19,10 @@ describe("Hackers", function () {
         player.energyProduction = 1;
         const action = card.play(player, game);
         player.megaCreditProduction = 2;
-		if (action !== undefined) {
+        if (action !== undefined) {
             expect(action instanceof SelectPlayer);
-		    action.cb(player);
-		}
+            action.cb(player);
+        }
         expect(player.megaCreditProduction).to.eq(2);
         expect(player.victoryPoints).to.eq(-1);
         expect(player.megaCreditProduction).to.eq(2);

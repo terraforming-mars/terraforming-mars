@@ -736,7 +736,7 @@ export class Game {
     private setupSolo() {
             this.players[0].terraformRating = this.players[0].terraformRatingAtGenerationStart = 14;
             // Single player add neutral player and put 2 neutrals cities on board with adjacent forest
-            let neutral = new Player("neutral", Color.PINK, true);
+            let neutral = new Player("neutral", Color.NEUTRAL, true);
             let space1 = this.originalBoard.getRandomCitySpace();
             this.addCityTile(neutral, space1.id, SpaceType.LAND);
             const fspace1 = this.originalBoard.getForestSpace(this.getAdjacentSpaces(space1));

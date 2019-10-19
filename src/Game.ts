@@ -41,27 +41,27 @@ export class Game {
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
     private passedPlayers: Set<Player> = new Set<Player>();
     private researchedPlayers: Set<Player> = new Set<Player>();
-	private originalBoard = new OriginalBoard();
+    private originalBoard = new OriginalBoard();
     //private spaces: Array<ISpace> = new OriginalBoard().spaces;
-	private spaces: Array<ISpace> = this.originalBoard.spaces;
+    private spaces: Array<ISpace> = this.originalBoard.spaces;
     private temperature: number = constants.MIN_TEMPERATURE;
 
     constructor(public id: string, private players: Array<Player>, private first: Player, private preludeExtension: boolean = false) {
         this.activePlayer = first;
         this.preludeExtension = preludeExtension;
         this.dealer = new Dealer (this.preludeExtension);
-        // Single player game player starts with 14TR and some neutral cities on boards		
+        // Single player game player starts with 14TR and some neutral cities on boards
         if (players.length === 1) {
             this.setupSolo();
-		}
-		
+        }
+
         let corporationCards = this.dealer.shuffleCards(ALL_CORPORATION_CARDS);
         //Add prelude corporations cards
         if (this.preludeExtension) {
                 corporationCards.push(...ALL_PRELUDE_CORPORATIONS);
                 corporationCards = this.dealer.shuffleCards(corporationCards);
                     }
-		
+
         // Give each player their corporation cards
         for (let player of players) {
             if (!player.beginner) {
@@ -74,7 +74,7 @@ export class Game {
                 this.playCorporationCard(player, new BeginnerCorporation());
             }
         }
-        
+
     }
 
     public getSpaceByTileCard(cardName: string): ISpace | undefined {
@@ -168,14 +168,14 @@ export class Game {
         corporationCard.play(player, this);
         player.megaCredits = corporationCard.startingMegaCredits;
         if (corporationCard.name !== new BeginnerCorporation().name) {
-			if (this.preludeExtension) {
-			//Prelude card are not to be bought
-				player.megaCredits -= (player.cardsInHand.length - 2) * constants.CARD_COST;
-			} else {
-				player.megaCredits -= player.cardsInHand.length * constants.CARD_COST;
-			}
-		}	
-		
+            if (this.preludeExtension) {
+            //Prelude card are not to be bought
+                player.megaCredits -= (player.cardsInHand.length - 2) * constants.CARD_COST;
+            } else {
+                player.megaCredits -= player.cardsInHand.length * constants.CARD_COST;
+            }
+        }
+
         this.playerIsFinishedWithResearchPhase(player);
     }
 
@@ -191,32 +191,32 @@ export class Game {
             this.dealer.dealCard(),
             this.dealer.dealCard(),
             this.dealer.dealCard(),
-			new Sabotage()
-			];
+            new Sabotage()
+            ];
 
-	if (this.preludeExtension) {
-			
-	    const preludeDealtCards: Array<IProjectCard> = [
+    if (this.preludeExtension) {
+
+        const preludeDealtCards: Array<IProjectCard> = [
                 this.dealer.dealPreludeCard(),
                 this.dealer.dealPreludeCard(),
                 this.dealer.dealPreludeCard(),
                 this.dealer.dealPreludeCard()
         ];
-		
+
         let corporation: CorporationCard;
         return new AndOptions(
             () => {
                 this.playCorporationCard(player, corporation);
                 return undefined;
             },
-	        new SelectCard<CorporationCard>("Select corporation", player.dealtCorporationCards, (foundCards: Array<CorporationCard>) => {
+            new SelectCard<CorporationCard>("Select corporation", player.dealtCorporationCards, (foundCards: Array<CorporationCard>) => {
                 corporation = foundCards[0];
                 return undefined;
-            }),		
+            }),
             new SelectCard("Select 2 Prelude cards", preludeDealtCards, (preludeCards: Array<IProjectCard>) => {
                     player.cardsInHand.push(preludeCards[0], preludeCards[1]);
                     return undefined;
-                }, 2, 2),			
+                }, 2, 2),
             new SelectCard("Select initial cards to buy", dealtCards, (foundCards: Array<IProjectCard>) => {
                 // Pay for cards
                 for (let foundCard of foundCards) {
@@ -230,7 +230,7 @@ export class Game {
                 return undefined;
             }, 10, 0)
         ); 
-	} else {
+    } else {
         let corporation: CorporationCard;
         return new AndOptions(
             () => {
@@ -254,7 +254,7 @@ export class Game {
                 return undefined;
             }, 10, 0)
         ); 
-	}
+    }
     }
  
     private hasPassedThisActionPhase(player: Player): boolean {
@@ -663,7 +663,7 @@ export class Game {
     public getPlayers(): Array<Player> {
         return this.players;
     }
-	
+
     public getOtherAnimalCards(c: IProjectCard): Array<IProjectCard> {
         const result: Array<IProjectCard> = [];
         this.players.forEach((player) => {
@@ -732,20 +732,20 @@ export class Game {
                 }
         }
         return result;
-    }	
-	private setupSolo() {
-			this.players[0].terraformRating = this.players[0].terraformRatingAtGenerationStart = 14;
-			// Single player add neutral player and put 2 neutrals cities on board with adjacent forest
-			let neutral = new Player("neutral", Color.PINK, true);
-			let space1 = this.originalBoard.getRandomCitySpace();
-			this.addCityTile(neutral, space1.id, SpaceType.LAND);
-			const fspace1 = this.originalBoard.getForestSpace(this.getAdjacentSpaces(space1));
-			this.addTile(neutral, SpaceType.LAND, fspace1, { tileType: TileType.GREENERY });
-			let space2 = this.originalBoard.getRandomCitySpace(30);
-			this.addCityTile(neutral, space2.id, SpaceType.LAND);
-			const fspace2 = this.originalBoard.getForestSpace(this.getAdjacentSpaces(space2));
-			this.addTile(neutral, SpaceType.LAND, fspace2, { tileType: TileType.GREENERY });
-			return undefined;
-	}	
+    }
+    private setupSolo() {
+            this.players[0].terraformRating = this.players[0].terraformRatingAtGenerationStart = 14;
+            // Single player add neutral player and put 2 neutrals cities on board with adjacent forest
+            let neutral = new Player("neutral", Color.PINK, true);
+            let space1 = this.originalBoard.getRandomCitySpace();
+            this.addCityTile(neutral, space1.id, SpaceType.LAND);
+            const fspace1 = this.originalBoard.getForestSpace(this.getAdjacentSpaces(space1));
+            this.addTile(neutral, SpaceType.LAND, fspace1, { tileType: TileType.GREENERY });
+            let space2 = this.originalBoard.getRandomCitySpace(30);
+            this.addCityTile(neutral, space2.id, SpaceType.LAND);
+            const fspace2 = this.originalBoard.getForestSpace(this.getAdjacentSpaces(space2));
+            this.addTile(neutral, SpaceType.LAND, fspace2, { tileType: TileType.GREENERY });
+            return undefined;
+    }
 }
 

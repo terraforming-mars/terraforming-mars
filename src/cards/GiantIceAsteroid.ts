@@ -20,21 +20,21 @@ export class GiantIceAsteroid implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-		if (game.getPlayers().length == 1) {
-			return new AndOptions(
-				() => {
-					return game.increaseTemperature(player, 2);
-				},
-				new SelectSpace("Select first space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-					game.addOceanTile(player, space.id);
-					return undefined;
-				}),
-				new SelectSpace("Select second space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-					game.addOceanTile(player, space.id);
-					return undefined;
-				})
-			);			
-		}	
+        if (game.getPlayers().length == 1) {
+            return new AndOptions(
+                () => {
+                    return game.increaseTemperature(player, 2);
+                },
+                new SelectSpace("Select first space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+                    game.addOceanTile(player, space.id);
+                    return undefined;
+                }),
+                new SelectSpace("Select second space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+                    game.addOceanTile(player, space.id);
+                    return undefined;
+                })
+            );
+        }
 
         return new AndOptions(
             () => {

@@ -20,7 +20,7 @@ export class Sabotage implements IProjectCard {
         return true;
     }
     public play(_player: Player, game: Game) {
-		if (game.getPlayers().length == 1)  return undefined;
+        if (game.getPlayers().length == 1)  return undefined;
         let foundPlayer: Player;
         return new AndOptions(
             () => {

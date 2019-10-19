@@ -35,7 +35,7 @@ export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
     public id: string = this.generateId();
     public canUseHeatAsMegaCredits: boolean = false;
-	public canUseMicrobesAsMegaCreditsForPlants = false;
+    public canUseMicrobesAsMegaCreditsForPlants = false;
     public plantsNeededForGreenery: number = 8;
     public dealtCorporationCards: Array<CorporationCard> = [];
     public powerPlantCost: number = 11;
@@ -63,7 +63,7 @@ export class Player {
     public victoryPoints: number = 0;
     private actionsThisGeneration: Set<string> = new Set<string>();
     private waitingFor?: PlayerInput;
-	private noRequirementsWilcard: boolean = false;
+    private noRequirementsWilcard: boolean = false;
 
     constructor(public name: string, public color: Color, public beginner: boolean) {
 
@@ -216,7 +216,7 @@ export class Player {
                 heat: 0,
                 titanium: 0,
                 megaCredits: 0,
-				microbes: 0
+                microbes: 0
             };
             try {
                 const parsedInput: {[x: string]: number} = JSON.parse(input[0][1]);
@@ -238,7 +238,7 @@ export class Player {
                     if (parsedInput.microbes !== undefined) {
                         payMethod.microbes = parsedInput.microbes;
                     }
-                }				
+                }
             } catch (err) {
                 throw "Unable to parse input " + err;
             }
@@ -310,7 +310,7 @@ export class Player {
                 heat: 0,
                 titanium: 0,
                 megaCredits: 0,
-				microbes: 0
+                microbes: 0
             };
             if (this.canUseHeatAsMegaCredits) {
                 payMethod.heat = 0;
@@ -345,7 +345,7 @@ export class Player {
                     } else {
                         throw "Microbes not provided, bad input";
                     }
-                }				
+                }
             } catch (err) {
                 throw "Unable to parse input " + err;
             }
@@ -392,7 +392,7 @@ export class Player {
             titanium: 0,
             heat: 0,
             megaCredits: 0,
-			microbes: 0
+            microbes: 0
         };
 
         let selectedCards: Array<IProjectCard> = [];
@@ -421,7 +421,7 @@ export class Player {
                     false,
                     false,
                     true,
-					false,	(pay) => { htp = pay; return undefined; }),
+                    false,    (pay) => { htp = pay; return undefined; }),
                 new SelectCard("Select which cards to take into hand", dealtCards, (foundCards: Array<IProjectCard>) => {
                     selectedCards = foundCards;
                     return undefined;
@@ -477,10 +477,10 @@ export class Player {
             if (this.canUseHeatAsMegaCredits && howToPay.heat !== undefined) {
                 totalToPay += howToPay.heat;
             }
-			
+
             if (this.canUseMicrobesAsMegaCreditsForPlants && howToPay.microbes !== undefined) {
                 totalToPay += howToPay.microbes * 2;
-            }			
+            }
 
             totalToPay += howToPay.megaCredits;
 
@@ -496,12 +496,12 @@ export class Player {
                 this.titanium -= howToPay.titanium;
                 this.megaCredits -= howToPay.megaCredits;
                 this.heat -= howToPay.heat;
-				
-				for (const playedCard of this.playedCards) {
-					if (playedCard.name === new Psychrophiles().name) {
-						this.removeResourceFrom(playedCard, howToPay.microbes);
-					}
-				}	
+
+                for (const playedCard of this.playedCards) {
+                    if (playedCard.name === new Psychrophiles().name) {
+                        this.removeResourceFrom(playedCard, howToPay.microbes);
+                    }
+                }
 
                 const actionsFromPlayedCard: OrOptions[] = [];
                 for (const playedCard of this.playedCards) {
@@ -551,7 +551,7 @@ export class Player {
                 return action;
             }
             whenDone();
-			// Ecology Experts no requirements switch off
+            // Ecology Experts no requirements switch off
             if (this.noRequirementsWilcard && selectedCard.name != "Ecology Experts" ) {
                 this.noRequirementsWilcard = false;
             }
@@ -1101,15 +1101,15 @@ export class Player {
     public setWaitingFor(input: PlayerInput): void {
         this.waitingFor = input;
     }
-	
+
     public reduceActionsTakenThisRound(): void {
         this.actionsTakenThisRound--;
     }
-	
+
     public setNoRequirementsWilcard(): void {
         this.noRequirementsWilcard = true;
     }
-	
+
 
 }
 

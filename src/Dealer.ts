@@ -324,7 +324,7 @@ export const ALL_PRELUDE_PROJECTS_CARDS: Array<IProjectCard> = [
         new MartianSurvey(),
         new ResearchCoordination(),
         new LavaTubeSettlement(),
-		new Psychrophiles()
+        new Psychrophiles()
 ];
 
 
@@ -541,17 +541,17 @@ export const ALL_PROJECT_CARDS: Array<IProjectCard> = [
 
 export class Dealer {
     public deck: Array<IProjectCard> = [];
-	public preludeDeck: Array<IProjectCard> = [];
+    public preludeDeck: Array<IProjectCard> = [];
     public discarded: Array<IProjectCard> = [];
-	private usePreludeExtension: boolean = false;
+    private usePreludeExtension: boolean = false;
     constructor(usePreludeExtension: boolean) {
-		this.usePreludeExtension = usePreludeExtension;
+        this.usePreludeExtension = usePreludeExtension;
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS);
         if (this.usePreludeExtension) {
                 this.preludeDeck = this.shuffleCards(ALL_PRELUDE_CARDS);
                 this.deck.push(...ALL_PRELUDE_PROJECTS_CARDS);
                 this.deck = this.shuffleCards(this.deck);
-        }		
+        }
     }
     public shuffleCards(cards: Array<any>): Array<any> {
         const deck: Array<any> = [];
@@ -574,7 +574,7 @@ export class Dealer {
             throw "Unexpected empty deck";
         }
         return result;
-    }    
+    }
     // Prelude deck does not need discard and reshuffle mecanisms
     public dealPreludeCard(): IProjectCard {
         const result: IProjectCard | undefined = this.preludeDeck.pop();
@@ -582,5 +582,5 @@ export class Dealer {
             throw "Unexpected empty prelude deck";
         }
         return result;
-    }	
+    }
 }

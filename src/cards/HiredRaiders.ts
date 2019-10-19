@@ -20,9 +20,9 @@ export class HiredRaiders implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-		
-		if (game.getPlayers().length == 1) {
-		    return new OrOptions(
+
+        if (game.getPlayers().length == 1) {
+            return new OrOptions(
                 new SelectOption("Steal 2 steel", () => {
                     player.steel += 2;
                     return undefined;
@@ -32,8 +32,8 @@ export class HiredRaiders implements IProjectCard {
                     return undefined;
                 })
             );
-		} 
-		
+        }
+
         let selectedPlayer: Player;
         return new AndOptions(
             () => { return undefined; },

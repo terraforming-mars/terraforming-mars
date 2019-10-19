@@ -25,8 +25,8 @@ export class Comet implements IProjectCard {
                 game.addOceanTile(player, space.id);
                 return game.increaseTemperature(player, 1);
             });
-        }		
-				
+        }
+
         return new AndOptions(
             () => {
                 return game.increaseTemperature(player, 1);

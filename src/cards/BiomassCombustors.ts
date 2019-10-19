@@ -19,8 +19,8 @@ export class BiomassCombustors implements IProjectCard {
     public play(player: Player, game: Game) {
         if (game.getPlayers().length == 1) {
             player.energyProduction += 2;   
-            player.victoryPoints--;			
-			return undefined;
+            player.victoryPoints--;
+            return undefined;
         }
         return new SelectPlayer(game.getPlayers(), "Select player to decrease plant production 1 step", (otherPlayer: Player) => {
             if (otherPlayer.plantProduction < 1) {

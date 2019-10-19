@@ -19,9 +19,9 @@ export class CloudSeeding implements IProjectCard {
     public play(player: Player, game: Game) {
         if (game.getPlayers().length == 1) {
             player.megaCreditProduction--;
-            player.plantProduction += 2;		
-			return undefined;
-        }	
+            player.plantProduction += 2;
+            return undefined;
+        }
         return new SelectPlayer(game.getPlayers(), "Select player to decrease heat production 1 step", (foundPlayer: Player) => {
                 if (foundPlayer.heatProduction < 1) {
                     throw "Player must have heat production";

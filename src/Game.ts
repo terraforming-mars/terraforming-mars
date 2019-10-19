@@ -38,13 +38,13 @@ export class Game {
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
     private passedPlayers: Set<Player> = new Set<Player>();
     private researchedPlayers: Set<Player> = new Set<Player>();
-	private originalBoard = new OriginalBoard();
-	private spaces: Array<ISpace> = this.originalBoard.spaces;
+    private originalBoard = new OriginalBoard();
+    private spaces: Array<ISpace> = this.originalBoard.spaces;
     private temperature: number = constants.MIN_TEMPERATURE;
 
     constructor(public id: string, private players: Array<Player>, private first: Player) {
         this.activePlayer = first;
-        // Single player game player starts with 14TR and 2 neutral cities and forests on board		
+        // Single player game player starts with 14TR and 2 neutral cities and forests on board
         if (players.length === 1) {
             this.setupSolo();
         }
@@ -673,6 +673,6 @@ export class Game {
         const fspace2 = this.originalBoard.getForestSpace(this.getAdjacentSpaces(space2));
         this.addTile(neutral, SpaceType.LAND, fspace2, { tileType: TileType.GREENERY });
         return undefined;
-    }			
+    }
 }
 

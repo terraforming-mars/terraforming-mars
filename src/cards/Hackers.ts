@@ -19,9 +19,9 @@ export class Hackers implements IProjectCard {
     public play(player: Player, game: Game) {
         if (game.getPlayers().length == 1) {
             player.megaCreditProduction += 2;
-			player.energyProduction--;
-            player.victoryPoints--;	
-			return undefined;
+            player.energyProduction--;
+            player.victoryPoints--;
+            return undefined;
         }
         return new SelectPlayer(game.getPlayers(), "Select player to decrease mega credit production 2 steps", (foundPlayer: Player) => {
             player.energyProduction--;

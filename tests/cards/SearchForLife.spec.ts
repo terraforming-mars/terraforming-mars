@@ -28,7 +28,7 @@ describe("SearchForLife", function () {
         const card = new SearchForLife();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         while (game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] === Tags.MICROBES) === undefined ||
                game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] !== Tags.MICROBES) === undefined) {
             player.megaCredits = 1;

@@ -15,7 +15,7 @@ describe("RestrictedArea", function () {
     it("Should play", function () {
         const card = new RestrictedArea();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         action.cb(action.availableSpaces[0]);
@@ -24,7 +24,7 @@ describe("RestrictedArea", function () {
     it("Should act", function () {
         const card = new RestrictedArea();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.megaCredits = 2;
         const action = card.action(player, game);
         expect(action).to.eq(undefined);

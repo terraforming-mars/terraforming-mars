@@ -12,7 +12,7 @@ describe("LavaFlows", function () {
     it("Can't play", function () {
         const card = new LavaFlows();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         game.addTile(player, SpaceType.LAND, game.getSpace(SpaceName.THARSIS_THOLUS), { tileType: TileType.SPECIAL }); 
         const anotherPlayer = new Player("test", Color.RED, false);
         game.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
@@ -22,7 +22,7 @@ describe("LavaFlows", function () {
     it("Should play", function () {
         const card = new LavaFlows();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         action.cb(action.availableSpaces[0]);

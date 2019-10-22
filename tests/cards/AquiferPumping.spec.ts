@@ -10,13 +10,13 @@ describe("AquiferPumping", function () {
     it("Should play", function () {
         const card = new AquiferPumping();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.play(player, game)).to.eq(undefined);
     });
     it("Should action", function () {
         const card = new AquiferPumping();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.action(player, game);
         expect(action).not.to.eq(undefined);
         const expectedOceanSpace = game.getAvailableSpacesForOcean(player)[0];

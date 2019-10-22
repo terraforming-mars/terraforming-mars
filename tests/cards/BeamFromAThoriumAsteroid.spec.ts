@@ -9,13 +9,13 @@ describe("BeamFromAThoriumAsteroid", function () {
     it("Should throw", function () {
         const card = new BeamFromAThoriumAsteroid();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(function () { card.play(player, game); }).to.throw("Requires a jovian tag");
     });
     it("Should play", function () {
         const card = new BeamFromAThoriumAsteroid();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(card);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);

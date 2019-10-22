@@ -20,7 +20,7 @@ describe("AICentral", function () {
     it("Should play", function () {
         const card = new AICentral();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(card, card, card);
         player.energyProduction = 1;
         card.play(player, game);
@@ -30,7 +30,7 @@ describe("AICentral", function () {
     it("Should take action", function () {
         const card = new AICentral();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(player.cardsInHand.length).to.eq(0);
         card.action(player, game);
         expect(player.cardsInHand.length).to.eq(2);

@@ -9,7 +9,7 @@ describe("AcquiredCompany", function () {
     it("Should play", function () {
         const card = new AcquiredCompany();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         card.play(player, game);
         expect(player.megaCreditProduction).to.eq(3);
     });

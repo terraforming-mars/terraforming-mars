@@ -15,7 +15,7 @@ describe("Inventrix", function () {
     it("Should take initial action", function () {
         const card = new Inventrix();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.initialAction(player, game);
         expect(action).not.to.eq(undefined);
         expect(player.cardsInHand.length).to.eq(0);

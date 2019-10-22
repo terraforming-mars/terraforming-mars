@@ -9,7 +9,7 @@ describe("AdvancedAlloys", function () {
     it("Should play", function () {
         const card = new AdvancedAlloys();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         card.play(player, game);
         expect(player.titaniumValue).to.eq(4);
         expect(player.steelValue).to.eq(3);

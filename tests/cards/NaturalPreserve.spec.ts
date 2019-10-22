@@ -11,7 +11,7 @@ describe("NaturalPreserve", function () {
     it("Can't play", function () {
         const card = new NaturalPreserve();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const lands = game.getAvailableSpacesOnLand(player);
         for (let land of lands) {
             game.addTile(player, land.spaceType, land, { tileType: TileType.SPECIAL });
@@ -25,7 +25,7 @@ describe("NaturalPreserve", function () {
     it("Should play", function () {
         const card = new NaturalPreserve();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         expect(action instanceof SelectSpace).to.eq(true);

@@ -15,13 +15,14 @@ describe("Hackers", function () {
     it("Should play", function () {
         const card = new Hackers();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.energyProduction = 1;
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
-        expect(action instanceof SelectPlayer);
         player.megaCreditProduction = 2;
-        action.cb(player);
+        if (action !== undefined) {
+            expect(action instanceof SelectPlayer);
+            action.cb(player);
+        }
         expect(player.megaCreditProduction).to.eq(2);
         expect(player.victoryPoints).to.eq(-1);
         expect(player.megaCreditProduction).to.eq(2);

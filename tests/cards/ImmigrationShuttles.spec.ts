@@ -9,7 +9,7 @@ describe("ImmigrationShuttles", function () {
     it("Should play", function () {
         const card = new ImmigrationShuttles();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.megaCreditProduction).to.eq(5);

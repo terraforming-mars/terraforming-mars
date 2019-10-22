@@ -10,14 +10,15 @@ describe("BigAsteroid", function () {
     it("Should play", function () {
         const card = new BigAsteroid();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
-        expect(action instanceof SelectPlayer).to.eq(true);
-        player.plants = 5;
-        action.cb(player);
+        if (action instanceof SelectPlayer) {
+            expect(action instanceof SelectPlayer).to.eq(true);
+            player.plants = 5;
+            action.cb(player);
+            expect(player.plants).to.eq(1);
+        }
+        expect(game.getTemperature()).to.eq(-26);
         expect(player.titanium).to.eq(4);
-        expect(player.plants).to.eq(1);
-        expect(game.getTemperature()).to.eq(-26); 
     });
 });

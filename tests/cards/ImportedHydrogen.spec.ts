@@ -14,7 +14,8 @@ describe("ImportedHydrogen", function () {
     it("Should play", function () {
         const card = new ImportedHydrogen();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("foobar", [player,player2], player);
         const pets = new Pets();
         const tardigrades = new Tardigrades();
         player.playedCards.push(pets, tardigrades);

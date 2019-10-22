@@ -11,13 +11,13 @@ describe("UrbanizedArea", function () {
     it("Can't play", function () {
         const card = new UrbanizedArea();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new UrbanizedArea();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const tharsis = game.getSpace(SpaceName.THARSIS_THOLUS);
         const lands = game.getAdjacentSpaces(tharsis).filter((space) => space.spaceType === SpaceType.LAND);
         game.addCityTile(player, lands[0].id);

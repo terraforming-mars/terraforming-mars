@@ -10,7 +10,7 @@ describe("Ants", function () {
     it("Can't play without oxygen", function () {
         const card = new Ants();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {

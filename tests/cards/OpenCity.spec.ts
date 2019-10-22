@@ -9,7 +9,7 @@ describe("OpenCity", function () {
     it("Can play", function () {
         const card = new OpenCity();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
         for (let i = 0; i < 6; i++) {
             game.increaseOxygenLevel(player, 2);
@@ -19,7 +19,7 @@ describe("OpenCity", function () {
     it("Should play", function () {
         const card = new OpenCity();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         for (let i = 0; i < 6; i++) {
             game.increaseOxygenLevel(player, 2);
         }

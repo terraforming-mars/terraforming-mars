@@ -12,13 +12,13 @@ describe("ArtificialLake", function () {
     it("Can't play", function () {
         const card = new ArtificialLake();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new ArtificialLake();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         expect(action instanceof SelectSpace).to.eq(true);

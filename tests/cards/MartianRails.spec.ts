@@ -14,13 +14,13 @@ describe("MartianRails", function () {
     it("Should play", function () {
         const card = new MartianRails();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.play(player, game)).to.eq(undefined);
     });
     it("Should act", function () {
         const card = new MartianRails();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.energy = 1;
         game.addCityTile(player, game.getAvailableSpacesOnLand(player)[0].id);
         const action = card.action(player, game);

@@ -15,7 +15,7 @@ describe("QuantumExtractor", function () {
     it("Should play", function () {
         const card = new QuantumExtractor();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(card, card, card, card);
         const action = card.play(player);
         expect(action).to.eq(undefined);

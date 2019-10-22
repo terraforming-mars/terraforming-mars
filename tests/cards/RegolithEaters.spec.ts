@@ -10,7 +10,7 @@ describe("RegolithEaters", function () {
     it("Should act", function () {
         const card = new RegolithEaters();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
     });
@@ -18,7 +18,7 @@ describe("RegolithEaters", function () {
         const card = new RegolithEaters();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.action(player, game);
         expect(action).to.eq(undefined);
         expect(player.getResourcesOnCard(card)).to.eq(1);

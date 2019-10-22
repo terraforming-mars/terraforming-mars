@@ -18,7 +18,7 @@ describe("InterplanetaryCinematics", function () {
     it("Has onCardPlayed", function () {
         const card = new InterplanetaryCinematics();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         card.onCardPlayed(player, game, new Bushes());
         expect(player.megaCredits).to.eq(0);
         card.onCardPlayed(player, game, new Virus());

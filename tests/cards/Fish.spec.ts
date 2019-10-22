@@ -10,7 +10,7 @@ describe("Fish", function () {
     it("Can't play", function () {
         const card = new Fish();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should act", function () {
@@ -23,15 +23,17 @@ describe("Fish", function () {
         const card = new Fish();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
-        expect(action instanceof SelectPlayer).to.eq(true);
-        player.plantProduction = 1;
-        action.cb(player);
-        expect(player.plantProduction).to.eq(0);
-        player.addResourceTo(card, 5);
-        card.onGameEnd(player);
-        expect(player.victoryPoints).to.eq(player.getResourcesOnCard(card));
+        if (action !== undefined) {
+            //expect(action).not.to.eq(undefined);
+            expect(action instanceof SelectPlayer).to.eq(true);
+            player.plantProduction = 1;
+            action.cb(player);
+            expect(player.plantProduction).to.eq(0);
+            player.addResourceTo(card, 5);
+            card.onGameEnd(player);
+            expect(player.victoryPoints).to.eq(player.getResourcesOnCard(card));
+        }
     });
 });

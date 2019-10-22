@@ -14,7 +14,7 @@ describe("ViralEnhancers", function () {
     it("Should play", function () {
         const card = new ViralEnhancers();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.play();
         expect(action).to.eq(undefined);
         const ants = new Ants();

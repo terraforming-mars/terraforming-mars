@@ -9,7 +9,8 @@ describe("RoverConstruction", function () {
     it("Should play", function () {
         const card = new RoverConstruction();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("foobar", [player,player2], player);
         const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.victoryPoints).to.eq(1);

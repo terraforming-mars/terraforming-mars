@@ -9,14 +9,14 @@ describe("InventorsGuild", function () {
     it("Should play", function () {
         const card = new InventorsGuild();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
     });
     it("Discards when card can't be bought", function () {
         const card = new InventorsGuild();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.action(player, game);
         expect(action).to.eq(undefined);
         expect(game.dealer.discarded.length).to.eq(1);
@@ -24,7 +24,7 @@ describe("InventorsGuild", function () {
     it("Should act", function () {
         const card = new InventorsGuild();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.megaCredits = 3;
         const action = card.action(player, game);
         expect(action).not.to.eq(undefined);

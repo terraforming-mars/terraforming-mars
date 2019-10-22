@@ -24,7 +24,7 @@ describe("WaterImportFromEuropa", function () {
     it("Should act", function () {
         const card = new WaterImportFromEuropa();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.titanium = 1;
         player.megaCredits = 11;
         const action = card.action(player, game) as AndOptions;

@@ -9,7 +9,7 @@ describe("Predators", function () {
     it("Can not play", function () {
         const card = new Predators();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.canAct(player, game)).to.eq(false);
     });
     it("Should play", function () {
@@ -25,7 +25,7 @@ describe("Predators", function () {
     it("Should act", function () {
         const card = new Predators();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(card);
         player.addResourceTo(card);
         const action = card.action(player, game);

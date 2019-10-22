@@ -9,7 +9,7 @@ describe("SmallAnimals", function () {
     it("Can't play", function () {
         const card = new SmallAnimals();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
         game.increaseOxygenLevel(player, 2); // 2
         game.increaseOxygenLevel(player, 2); // 4
@@ -26,12 +26,14 @@ describe("SmallAnimals", function () {
     it("Should play", function () {
         const card = new SmallAnimals();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.plantProduction = 1;
         player.playedCards.push(card);
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
-        action.cb(player);
+        //expect(action).not.to.eq(undefined);
+        if (action !== undefined) {
+            action.cb(player);
+        }
         expect(player.plantProduction).to.eq(0);
         card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(0);

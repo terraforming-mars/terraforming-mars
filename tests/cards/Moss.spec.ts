@@ -9,7 +9,7 @@ describe("Moss", function () {
     it("Can't play", function () {
         const card = new Moss();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
         while (game.getOceansOnBoard() < 3) {
             game.addOceanTile(player, game.getAvailableSpacesForOcean(player)[0].id);

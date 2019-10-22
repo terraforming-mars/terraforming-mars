@@ -9,9 +9,9 @@ describe("BribedCommitte", function () {
     it("Should play", function () {
         const card = new BribedCommitte();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         card.play(player, game);
         expect(player.victoryPoints).to.eq(-2);
-        expect(player.terraformRating).to.eq(16);
+        expect(player.terraformRating).to.eq(22);
     });
 });

@@ -9,7 +9,7 @@ describe("EcoLine", function () {
     it("Should play", function () {
         const card = new EcoLine();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         expect(player.plantProduction).to.eq(2);

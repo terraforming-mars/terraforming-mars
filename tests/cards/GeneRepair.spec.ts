@@ -9,13 +9,13 @@ describe("GeneRepair", function () {
     it("Should throw", function () {
         const card = new GeneRepair();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(function () { card.play(player, game); }).to.throw("Requires 3 science tags.");
     });
     it("Should play", function () {
         const card = new GeneRepair();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(card, card, card);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);

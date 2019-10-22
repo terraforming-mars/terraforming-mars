@@ -9,18 +9,18 @@ describe("MagneticFieldDome", function () {
     it("Should throw", function () {
         const card = new MagneticFieldDome();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(function () { card.play(player, game); }).to.throw("Need 2 energy production to decrease");
     });
     it("Should play", function () {
         const card = new MagneticFieldDome();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.energyProduction = 2;
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         expect(player.energyProduction).to.eq(0);
         expect(player.plantProduction).to.eq(1);
-        expect(player.terraformRating).to.eq(15);
+        expect(player.terraformRating).to.eq(21);
     });
 });

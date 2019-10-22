@@ -10,14 +10,14 @@ describe("DeimosDown", function () {
     it("Should play", function () {
         const card = new DeimosDown();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
-        expect(action instanceof SelectPlayer).to.eq(true);
-        player.plants = 8;
-        action.cb(player);
-        expect(player.steel).to.eq(4);
-        expect(player.plants).to.eq(0);
+        if (action instanceof SelectPlayer) {
+            player.plants = 8;
+            action.cb(player);
+            expect(player.plants).to.eq(0);
+        }
         expect(game.getTemperature()).to.eq(-24);
+        expect(player.steel).to.eq(4);
     });
 });

@@ -15,7 +15,7 @@ describe("MassConverter", function () {
     it("Should play", function () {
         const card = new MassConverter();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(card, card, card, card, card);
         expect(card.play(player)).to.eq(undefined);
         expect(player.energyProduction).to.eq(6);

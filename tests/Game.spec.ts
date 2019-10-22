@@ -7,7 +7,8 @@ import { Player } from "../src/Player";
 describe("Game", function () {
     it("should initialize with right defaults", function () {
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("foobar", [player,player2], player);
         expect(game.getGeneration()).to.eq(1);
     });
 });

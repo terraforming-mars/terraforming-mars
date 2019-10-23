@@ -10,14 +10,14 @@ describe("IndustrialCenter", function () {
     it("Can't play or act", function () {
         const card = new IndustrialCenter();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.canAct(player)).to.eq(false);
         expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should action", function () {
         const card = new IndustrialCenter();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.megaCredits = 7;
         const action = card.action(player, game);
         expect(action).to.eq(undefined);
@@ -27,7 +27,7 @@ describe("IndustrialCenter", function () {
     it("Should play", function () {
         const card = new IndustrialCenter();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         game.addCityTile(player, game.getAvailableSpacesOnLand(player)[0].id);
         expect(game.getCitiesInPlayOnMars()).to.eq(1);
         const action = card.play(player, game);

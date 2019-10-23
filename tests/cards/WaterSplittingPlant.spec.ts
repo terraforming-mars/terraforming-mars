@@ -9,7 +9,7 @@ describe("WaterSplittingPlant", function () {
     it("Can't play", function () {
         const card = new WaterSplittingPlant();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
         expect(function () { card.action(player, game); }).to.throw("Need 3 energy");
     });
@@ -21,7 +21,7 @@ describe("WaterSplittingPlant", function () {
     it("Should act", function () {
         const card = new WaterSplittingPlant();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.energy = 3;
         const action = card.action(player, game);
         expect(action).to.eq(undefined);

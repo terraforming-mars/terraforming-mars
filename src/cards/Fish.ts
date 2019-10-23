@@ -24,6 +24,7 @@ export class Fish implements IActionCard, IProjectCard {
         player.victoryPoints += player.getResourcesOnCard(this);
     }
     public play(_player: Player, game: Game) {
+        if (game.getPlayers().length == 1) return undefined;
         return new SelectPlayer(game.getPlayers(), "Select player to decrease plant production 1 step", (foundPlayer: Player) => {
             foundPlayer.plantProduction = Math.max(0, foundPlayer.plantProduction - 1);
             return undefined;

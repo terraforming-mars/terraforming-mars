@@ -16,7 +16,7 @@ describe("RoboticWorkforce", function () {
     it("Should throw", function () {
         const card = new RoboticWorkforce();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.play(player, game)).to.eq(undefined);
         player.playedCards.push(new BiomassCombustors(), card);
         const action = card.play(player, game);
@@ -32,7 +32,7 @@ describe("RoboticWorkforce", function () {
     it("Should play with input", function () {
         const card = new RoboticWorkforce();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(new BiomassCombustors());
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
@@ -45,7 +45,7 @@ describe("RoboticWorkforce", function () {
     it("Should play", function () {
         const card = new RoboticWorkforce();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(new NoctisFarming());
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);

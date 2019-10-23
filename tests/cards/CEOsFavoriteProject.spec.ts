@@ -19,7 +19,7 @@ describe("CEOsFavoriteProject", function () {
     it("Should play", function () {
         const card = new CEOsFavoriteProject();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const searchForLife = new SearchForLife();
         const securityFleet = new SecurityFleet();
         player.playedCards.push(searchForLife, securityFleet);

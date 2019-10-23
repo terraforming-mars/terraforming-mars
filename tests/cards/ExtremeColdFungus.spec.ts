@@ -12,7 +12,7 @@ describe("ExtremeColdFungus", function () {
     it("Can't play", function () {
         const card = new ExtremeColdFungus();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         game.increaseTemperature(player, 3); // -24
         game.increaseTemperature(player, 3); // -18
         game.increaseTemperature(player, 3); // -12
@@ -27,7 +27,7 @@ describe("ExtremeColdFungus", function () {
     it("Should act", function () {
         const card = new ExtremeColdFungus();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(new Ants());
         const action = card.action(player, game);
         expect(action).not.to.eq(undefined);

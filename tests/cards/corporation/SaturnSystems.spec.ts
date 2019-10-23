@@ -18,7 +18,7 @@ describe("SaturnSystems", function () {
     it("Runs onCardPlayed", function () {
         const card = new SaturnSystems();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         card.onCardPlayed(player, game, new MirandaResort());
         expect(player.megaCreditProduction).to.eq(1);
     });

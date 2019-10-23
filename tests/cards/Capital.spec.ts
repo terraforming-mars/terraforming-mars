@@ -12,7 +12,7 @@ describe("Capital", function () {
     it("Can't play", function () {
         const card = new Capital();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
         const oceanSpaces = game.getAvailableSpacesForOcean(player);
         for (let i = 0; i < oceanSpaces.length; i++) {
@@ -23,7 +23,7 @@ describe("Capital", function () {
     it("Should play", function () {
         const card = new Capital();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const oceanSpaces = game.getAvailableSpacesForOcean(player);
         for (let i = 0; i < oceanSpaces.length; i++) {
             oceanSpaces[i].tile = { tileType: TileType.OCEAN };

@@ -22,7 +22,7 @@ describe("CrediCor", function () {
     it("Runs onCardPlayed", function () {
         const card = new CrediCor();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(player.megaCredits).to.eq(0);
         card.onCardPlayed(player, game, new GiantIceAsteroid());
         expect(player.megaCredits).to.eq(4);

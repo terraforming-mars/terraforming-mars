@@ -21,7 +21,7 @@ describe("UnitedNationsMarsInitiative", function () {
     it("Should act", function () {
         const card = new UnitedNationsMarsInitiative();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.terraformRating = 21;
         player.megaCredits = 3;
         const action = card.action(player, game);

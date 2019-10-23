@@ -9,7 +9,7 @@ describe("BreathingFilters", function () {
     it("Can't play", function () {
         const card = new BreathingFilters();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foo", [player], player); 
+        const game = new Game("foo", [player,player], player); 
         expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {

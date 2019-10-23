@@ -14,7 +14,8 @@ describe("ImmigrantCity", function () {
     it("Should play", function () {
         const card = new ImmigrantCity();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("foobar", [player,player2], player);
         player.energyProduction = 1;
         const action = card.play(player, game);
         action.cb(action.availableSpaces[0]);

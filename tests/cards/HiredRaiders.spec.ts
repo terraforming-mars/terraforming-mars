@@ -10,11 +10,11 @@ describe("HiredRaiders", function () {
     it("Should play", function () {
         const card = new HiredRaiders();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const anotherPlayer = new Player("test2", Color.RED, false);
+        const game = new Game("foobar", [player,anotherPlayer], player);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         expect(action.options.length).to.eq(2);
-        const anotherPlayer = new Player("test2", Color.RED, false);
         action.options[0].cb(anotherPlayer);
         anotherPlayer.steel = 2;
         anotherPlayer.megaCredits = 2;

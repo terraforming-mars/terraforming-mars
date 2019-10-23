@@ -15,7 +15,7 @@ describe("BusinessNetwork", function () {
     it("Should action", function () {
         const card = new BusinessNetwork();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.megaCredits = 3;
         const action = card.action(player, game);
         expect(action).not.to.eq(undefined);

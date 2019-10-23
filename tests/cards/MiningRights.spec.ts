@@ -12,7 +12,7 @@ describe("MiningRights", function () {
     it("Should throw", function () {
         const card = new MiningRights();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         for (let land of game.getAvailableSpacesOnLand(player)) {
             if (land.bonus.indexOf(SpaceBonus.STEEL) !== -1 || land.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
                 game.addTile(player, land.spaceType, land, { tileType: TileType.SPECIAL });
@@ -23,7 +23,7 @@ describe("MiningRights", function () {
     it("Should play", function () {
         const card = new MiningRights();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         expect(action instanceof SelectSpace).to.eq(true);

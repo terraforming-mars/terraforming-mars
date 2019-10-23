@@ -10,13 +10,13 @@ describe("GHGProducingBacteria", function () {
     it("Can't play", function () {
         const card = new GHGProducingBacteria();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new GHGProducingBacteria();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         game.increaseOxygenLevel(player, 2); // 2
         game.increaseOxygenLevel(player, 2); // 4
         const action = card.play();
@@ -26,7 +26,7 @@ describe("GHGProducingBacteria", function () {
         const card = new GHGProducingBacteria();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         let action = card.action(player, game);
         expect(action).to.eq(undefined);
         expect(player.getResourcesOnCard(card)).to.eq(1);

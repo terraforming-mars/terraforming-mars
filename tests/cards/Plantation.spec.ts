@@ -15,7 +15,7 @@ describe("Plantation", function () {
     it("Should play", function () {
         const card = new Plantation();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(new InventorsGuild(), new InventorsGuild());
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);

@@ -9,13 +9,13 @@ describe("MethaneFromTitan", function () {
     it("Should throw", function () {
         const card = new MethaneFromTitan();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new MethaneFromTitan();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         game.increaseOxygenLevel(player, 2); // 2
         const action = card.play(player);
         expect(action).to.eq(undefined);

@@ -12,14 +12,14 @@ describe("EcologicalZone", function () {
     it("Can't play", function () {
         const card = new EcologicalZone();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new EcologicalZone();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const landSpace = game.getAvailableSpacesOnLand(player)[0];
         game.addGreenery(player, landSpace.id);
         const action = card.play(player, game);

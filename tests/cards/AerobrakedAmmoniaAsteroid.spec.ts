@@ -10,7 +10,7 @@ describe("AerobrakedAmmoniaAsteroid", function () {
         const card = new AerobrakedAmmoniaAsteroid();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(player.heatProduction).to.eq(3);
         expect(player.plantProduction).to.eq(1);

@@ -12,7 +12,7 @@ describe("Virus", function () {
     it("Should play", function () {
         const card = new Virus();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.plants = 5;
         const selectPlayer = card.play(player, game) as SelectPlayer;
         expect(selectPlayer).not.to.eq(undefined);

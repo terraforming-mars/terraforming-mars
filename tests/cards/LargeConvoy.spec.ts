@@ -12,7 +12,7 @@ describe("LargeConvoy", function () {
     it("Should play", function () {
         const card = new LargeConvoy();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         const pets = new Pets();

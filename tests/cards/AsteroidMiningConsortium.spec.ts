@@ -15,13 +15,14 @@ describe("AsteroidMiningConsortium", function () {
     it("Should play", function () {
         const card = new AsteroidMiningConsortium();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("foobar", [player, player2], player);
         player.titaniumProduction = 1;
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        if (action instanceof SelectPlayer) {
+            action.cb(player2);
+        }
+        expect(player.titaniumProduction).to.eq(2);
         expect(player.victoryPoints).to.eq(1);
-        expect(action instanceof SelectPlayer).to.eq(true);
-        action.cb(player);
-        expect(player.titaniumProduction).to.eq(1);
     });
 });

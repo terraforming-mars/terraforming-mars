@@ -368,6 +368,10 @@ export class Asteroid implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
+        if (game.getPlayers().length == 1) {
+            player.titanium += 2;
+            return game.increaseTemperature(player, 1);
+        }
         return new SelectPlayer(game.getPlayers(), "Select player to remove 3 plants from", (foundPlayer: Player) => {
             foundPlayer.removePlants(player, 3);
             player.titanium += 2;
@@ -405,6 +409,10 @@ export class AsteroidMiningConsortium implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         player.victoryPoints++;
+        if (game.getPlayers().length == 1) {
+            player.titaniumProduction++;
+            return undefined;
+        }
         return new SelectPlayer(game.getPlayers(), "Select player to decrease titanium production", (foundPlayer: Player) => {
             foundPlayer.titaniumProduction = Math.max(0, foundPlayer.titaniumProduction - 1);
             player.titaniumProduction++;
@@ -445,6 +453,10 @@ export class BigAsteroid implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
+        if (game.getPlayers().length == 1) {
+            player.titanium += 4;
+            return game.increaseTemperature(player, 2);
+        }
         return new SelectPlayer(game.getPlayers(), "Select player to remove up to 4 plants from", (foundPlayer: Player) => {
             foundPlayer.removePlants(player, 4);
             player.titanium += 4;

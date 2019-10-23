@@ -9,7 +9,7 @@ describe("ArcticAlgae", function () {
     it("Can't play", function () {
         const card = new ArcticAlgae();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         game.increaseTemperature(player, 3); // -24
         game.increaseTemperature(player, 3); // -18
         game.increaseTemperature(player, 3); // -12
@@ -19,7 +19,8 @@ describe("ArcticAlgae", function () {
     it("Should play", function () {
         const card = new ArcticAlgae();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("foobar", [player,player2], player);
         card.play(player);
         expect(player.plants).to.eq(1);
         player.playedCards.push(card);

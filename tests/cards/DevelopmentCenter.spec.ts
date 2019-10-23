@@ -19,7 +19,7 @@ describe("DevelopmentCenter", function () {
     it("Should act", function () {
         const card = new DevelopmentCenter();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const game = new Game("foobar", [player,player], player);
         player.energy = 1;
         const action = card.action(player, game);
         expect(action).to.eq(undefined);

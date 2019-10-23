@@ -17,6 +17,11 @@ export class BiomassCombustors implements IProjectCard {
         return game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game);
     }
     public play(player: Player, game: Game) {
+        if (game.getPlayers().length == 1) {
+            player.energyProduction += 2;   
+            player.victoryPoints--;
+            return undefined;
+        }
         return new SelectPlayer(game.getPlayers(), "Select player to decrease plant production 1 step", (otherPlayer: Player) => {
             if (otherPlayer.plantProduction < 1) {
                 throw "No plant production to decrease for selected player";

@@ -22,28 +22,32 @@ describe("Player", function () {
         player.playedCards.push(new LunarBeam());
         player.playedCards.push(new LunarBeam());
         player.energyProduction = 1;
-        const action = card.play(player, new Game("foobar", [player], player));
-        player.setWaitingFor(action);
-        player.process([[player.id]]);
-        expect(player.energyProduction).to.eq(1);
+        const action = card.play(player, new Game("foobar", [player,player], player));
+        if (action !== undefined) {
+            player.setWaitingFor(action);
+            player.process([[player.id]]);
+            expect(player.energyProduction).to.eq(1);
+        }
     });
     it("Should error with input for run select player for PowerSupplyConsortium", function () {
         const card = new PowerSupplyConsortium();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(new LunarBeam());
         player.playedCards.push(new LunarBeam());
-        const action = card.play(player, new Game("foobar", [player], player));
-        player.setWaitingFor(action);
-        expect(player.getWaitingFor()).not.to.eq(undefined);
-        expect(function () { player.process([[]]) }).to.throw("Invalid players array provided");
-        expect(function () { player.process([]) }).to.throw("Incorrect options provided");
-        expect(function () { player.process([["bar"]]) }).to.throw("Player not available");
+        const action = card.play(player, new Game("foobar", [player,player], player));
+        if (action !== undefined) {
+            player.setWaitingFor(action);
+            expect(player.getWaitingFor()).not.to.eq(undefined);
+            expect(function () { player.process([[]]) }).to.throw("Invalid players array provided");
+            expect(function () { player.process([]) }).to.throw("Incorrect options provided");
+            expect(function () { player.process([["bar"]]) }).to.throw("Player not available");
+        }
     });
     it("Should run select amount for Insulation", function () {
         const card = new Insulation();
         const player = new Player("test", Color.BLUE, false);
         player.heatProduction = 2;
-        const action = card.play(player, new Game("foobar", [player], player));
+        const action = card.play(player, new Game("foobar", [player,player], player));
         player.setWaitingFor(action);
         expect(player.getWaitingFor()).not.to.eq(undefined);
         expect(function () { player.process([[]]) }).to.throw("Incorrect number of amounts provided");

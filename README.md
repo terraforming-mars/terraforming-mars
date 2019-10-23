@@ -7,3 +7,14 @@ Hopefully will eventually use this repository for playing terraforming mars onli
 ## Demo
 
 You can try online [here](https://terraforming-mars.herokuapp.com/). Please post any issues found.
+
+## Running
+
+You can run the game server locally if you have `npm` and `node`. To start the game server run the `start` script.
+
+```
+npm install
+npm run start
+```
+
+This will start the game server listening on the default port of 8080. If you then point a web browser to http://localhost:8080 you will be on the create game screen. 

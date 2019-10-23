@@ -1,5 +1,3 @@
-import { Sabotage } from "./cards/Sabotage";
-
 import { Player } from "./Player";
 import { Dealer } from "./Dealer";
 import { ISpace } from "./ISpace";
@@ -190,8 +188,7 @@ export class Game {
             this.dealer.dealCard(),
             this.dealer.dealCard(),
             this.dealer.dealCard(),
-            this.dealer.dealCard(),
-            new Sabotage()
+            this.dealer.dealCard()
             ];
 
     if (this.preludeExtension) {

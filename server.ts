@@ -236,7 +236,8 @@ function getPlayer(player: Player, game: Game): string {
         titanium: player.titanium,
         titaniumProduction: player.titaniumProduction,
         victoryPoints: player.victoryPoints,
-        waitingFor: getWaitingFor(player.getWaitingFor())
+        waitingFor: getWaitingFor(player.getWaitingFor()),
+        canUseMicrobesAsMegaCreditsForPlants: player.canUseMicrobesAsMegaCreditsForPlants
     };
     return JSON.stringify(output);
 }

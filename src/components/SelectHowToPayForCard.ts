@@ -23,7 +23,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             megaCredits: 0,
             steel: 0,
             titanium: 0,
-			microbes: 0
+            microbes: 0
         } as SelectHowToPayForCardModel;
     },
     components: {
@@ -65,7 +65,6 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             return false;
 		},	
         canUseMicrobes: function () {
-			console.log("inside canUseMicrobes "+ this.player.canUseMicrobesAsMegaCreditsForPlants);
             if (this.$data.card !== undefined && this.player.canUseMicrobesAsMegaCreditsForPlants) {
                 const card = getProjectCardByName(this.$data.card);
                 if (card !== undefined) {
@@ -82,7 +81,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 megaCredits: parseInt(this.$data.megaCredits),
                 steel: parseInt(this.$data.steel),
                 titanium: parseInt(this.$data.titanium),
-				microbes: parseInt(this.$data.microbes)
+                microbes: parseInt(this.$data.microbes)
             };
             this.onsave([[
                 this.$data.card,

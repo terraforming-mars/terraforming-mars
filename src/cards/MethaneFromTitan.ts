@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class MethaneFromTitan implements IProjectCard {
     public cost: number = 28;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = "Methane From Titan";
     public cardType: CardType = CardType.AUTOMATED;

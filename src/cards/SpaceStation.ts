@@ -7,6 +7,7 @@ import { CardType } from "./CardType";
 
 export class SpaceStation implements IProjectCard {
     public cost: number = 10;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SPACE];
     public name: string = "Space Station";
     public cardType: CardType = CardType.ACTIVE;

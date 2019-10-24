@@ -10,6 +10,7 @@ import { SelectSpace } from "../inputs/SelectSpace";
 
 export class NaturalPreserve implements IProjectCard {
     public cost: number = 9;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Natural Preserve";

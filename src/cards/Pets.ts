@@ -9,6 +9,7 @@ import { ResourceType } from "../ResourceType";
 
 export class Pets implements IProjectCard {
     public cost: number = 10;
+    public nonNegativeVPIcon: boolean = true;
     public resourceType: ResourceType = ResourceType.ANIMAL;
     public tags: Array<Tags> = [Tags.EARTH, Tags.ANIMAL];
     public cardType: CardType = CardType.ACTIVE;

@@ -39,6 +39,7 @@ import { CheungShingMARS } from "./cards/prelude/CheungShingMARS";
 import { RobinsonIndustries } from "./cards/prelude/RobinsonIndustries";
 import { PointLuna } from "./cards/prelude/PointLuna";
 import { ValleyTrust } from "./cards/prelude/ValleyTrust";
+import { Vitor } from "./cards/prelude/Vitor";
 
 import { LavaTubeSettlement } from "./cards/prelude/LavaTubeSettlement";
 import { ResearchCoordination } from "./cards/prelude/ResearchCoordination";
@@ -314,7 +315,8 @@ export const ALL_PRELUDE_CORPORATIONS: Array<CorporationCard> = [
         new CheungShingMARS(),
         new RobinsonIndustries(),
         new PointLuna(),
-        new ValleyTrust()
+        new ValleyTrust(),
+        new Vitor()
 ];
 
 export const ALL_PRELUDE_PROJECTS_CARDS: Array<IProjectCard> = [

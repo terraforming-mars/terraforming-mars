@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class BreathingFilters implements IProjectCard {
     public cost: number = 11;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Breathing Filters";
     public cardType: CardType = CardType.AUTOMATED;

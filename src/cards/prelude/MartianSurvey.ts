@@ -7,6 +7,7 @@ import { Game } from "../../Game";
 
 export class MartianSurvey implements IProjectCard {
     public cost: number = 9;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Martian Survey";
     public cardType: CardType = CardType.EVENT;

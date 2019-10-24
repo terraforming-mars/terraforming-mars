@@ -14,6 +14,7 @@ import { SelectHowToPay } from "../inputs/SelectHowToPay";
 
 export class WaterImportFromEuropa implements IActionCard, IProjectCard {
     public cost: number = 25;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = "Water Import From Europa";
     public cardType: CardType = CardType.ACTIVE;

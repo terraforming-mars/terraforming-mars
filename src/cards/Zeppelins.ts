@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class Zeppelins implements IProjectCard {
     public cost: number = 13;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Zeppelins";

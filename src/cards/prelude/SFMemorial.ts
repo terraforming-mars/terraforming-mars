@@ -7,6 +7,7 @@ import { Game } from "../../Game";
 
 export class SFMemorial implements IProjectCard {
     public cost: number = 7;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "SFMemorial";
     public cardType: CardType = CardType.AUTOMATED;

@@ -10,6 +10,7 @@ import { ResourceType } from "../ResourceType";
 
 export class OlympusConference implements IProjectCard {
     public cost: number = 10;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.EARTH, Tags.STEEL];
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.SCIENCE;

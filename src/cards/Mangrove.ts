@@ -10,6 +10,7 @@ import { ISpace } from "../ISpace";
 
 export class Mangrove implements IProjectCard {
     public cost: number = 12;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.PLANT];
     public name: string = "Mangrove";
     public cardType: CardType = CardType.AUTOMATED;

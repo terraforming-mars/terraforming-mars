@@ -40,7 +40,6 @@ export class Game {
     private passedPlayers: Set<Player> = new Set<Player>();
     private researchedPlayers: Set<Player> = new Set<Player>();
     private originalBoard = new OriginalBoard();
-    //private spaces: Array<ISpace> = new OriginalBoard().spaces;
     private spaces: Array<ISpace> = this.originalBoard.spaces;
     private temperature: number = constants.MIN_TEMPERATURE;
 
@@ -48,7 +47,8 @@ export class Game {
         this.activePlayer = first;
         this.preludeExtension = preludeExtension;
         this.dealer = new Dealer (this.preludeExtension);
-        // Single player game player starts with 14TR and some neutral cities on boards
+
+        // Single player game player starts with 14TR and 2 neutral cities and forests on board
         if (players.length === 1) {
             this.setupSolo();
         }
@@ -716,6 +716,7 @@ export class Game {
         }
         return undefined;
     }
+
     public drawCardsByTag(tag: Tags, total: number): Array<IProjectCard> {
         let cardsToDraw = 0;
         const result: Array<IProjectCard> = [];
@@ -730,19 +731,20 @@ export class Game {
         }
         return result;
     }
+
     private setupSolo() {
-            this.players[0].terraformRating = this.players[0].terraformRatingAtGenerationStart = 14;
-            // Single player add neutral player and put 2 neutrals cities on board with adjacent forest
-            let neutral = new Player("neutral", Color.NEUTRAL, true);
-            let space1 = this.originalBoard.getRandomCitySpace();
-            this.addCityTile(neutral, space1.id, SpaceType.LAND);
-            const fspace1 = this.originalBoard.getForestSpace(this.getAdjacentSpaces(space1));
-            this.addTile(neutral, SpaceType.LAND, fspace1, { tileType: TileType.GREENERY });
-            let space2 = this.originalBoard.getRandomCitySpace(30);
-            this.addCityTile(neutral, space2.id, SpaceType.LAND);
-            const fspace2 = this.originalBoard.getForestSpace(this.getAdjacentSpaces(space2));
-            this.addTile(neutral, SpaceType.LAND, fspace2, { tileType: TileType.GREENERY });
-            return undefined;
+        this.players[0].terraformRating = this.players[0].terraformRatingAtGenerationStart = 14;
+        // Single player add neutral player and put 2 neutrals cities on board with adjacent forest
+        let neutral = new Player("neutral", Color.NEUTRAL, true);
+        let space1 = this.originalBoard.getRandomCitySpace();
+        this.addCityTile(neutral, space1.id, SpaceType.LAND);
+        const fspace1 = this.originalBoard.getForestSpace(this.getAdjacentSpaces(space1));
+        this.addTile(neutral, SpaceType.LAND, fspace1, { tileType: TileType.GREENERY });
+        let space2 = this.originalBoard.getRandomCitySpace(30);
+        this.addCityTile(neutral, space2.id, SpaceType.LAND);
+        const fspace2 = this.originalBoard.getForestSpace(this.getAdjacentSpaces(space2));
+        this.addTile(neutral, SpaceType.LAND, fspace2, { tileType: TileType.GREENERY });
+        return undefined;
     }
 }
 

@@ -126,7 +126,7 @@ export class OriginalBoard {
         );
     }
 
-    private  getRandomSpace(offset: number = 0): Space {
+    private getRandomSpace(offset: number = 0): Space {
         return this.spaces[Math.floor(Math.random() * 30) + offset];
     }
 

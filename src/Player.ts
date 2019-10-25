@@ -469,8 +469,14 @@ export class Player {
             const canUseTitanium: boolean = this.canUseTitanium(selectedCard);
 
             if (canUseSteel && howToPay.steel > 0) {
+                if (howToPay.steel > this.steel) {
+                    throw "Do not have enough steel";
+                }
                 totalToPay += howToPay.steel * this.steelValue;
             } else if (canUseTitanium && howToPay.titanium > 0) {
+                if (howToPay.titanium > this.titanium) {
+                    throw "Do not have enough titanium";
+                }
                 totalToPay += howToPay.titanium * this.titaniumValue;
             }
 
@@ -480,6 +486,9 @@ export class Player {
 
             if (this.canUseMicrobesAsMegaCreditsForPlants && howToPay.microbes !== undefined) {
                 totalToPay += howToPay.microbes * 2;
+
+            if (howToPay.megaCredits > this.megaCredits) {
+                throw "Do not have enough mega credits";
             }
 
             totalToPay += howToPay.megaCredits;

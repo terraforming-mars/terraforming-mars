@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class TerraformingGanymede implements IProjectCard {
     public cost: number = 33;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = "Terraforming Ganymede";
     public cardType: CardType = CardType.AUTOMATED;

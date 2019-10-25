@@ -6,6 +6,7 @@ import { Player } from "../Player";
 
 export class EarthCatapult implements IProjectCard {
     public cost: number = 23;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = "Earth Catapult";
     public text: string = "When you play a card, you pay 2 mega credits less for it. Gain 2 victory points.";

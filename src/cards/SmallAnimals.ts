@@ -10,6 +10,7 @@ import { SelectPlayer } from "../inputs/SelectPlayer";
 
 export class SmallAnimals implements IActionCard, IProjectCard {
     public cost: number = 6;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.ANIMAL];
     public name: string = "Small Animals";
     public cardType: CardType = CardType.ACTIVE;

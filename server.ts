@@ -42,7 +42,8 @@ const pngs: Map<string, Buffer> = new Map<string, Buffer>([
     ["/assets/plant-tag.png", fs.readFileSync("assets/plant-tag.png")],
     ["/assets/power-tag.png", fs.readFileSync("assets/power-tag.png")],
     ["/assets/science-tag.png", fs.readFileSync("assets/science-tag.png")],
-    ["/assets/space-tag.png", fs.readFileSync("assets/space-tag.png")]
+    ["/assets/space-tag.png", fs.readFileSync("assets/space-tag.png")],
+	["/assets/wildcard-tag.png", fs.readFileSync("assets/wildcard-tag.png")]
 ]);
 
 const server: http.Server = http.createServer(function (req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -188,7 +189,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                     break;
                 }
             }
-            const game = new Game(gameId, players, firstPlayer);
+            const game = new Game(gameId, players, firstPlayer, gameReq.prelude);
             games.set(gameId, game);
             game.getPlayers().forEach((player) => {
                 playersToGame.set(player.id, game);
@@ -235,7 +236,8 @@ function getPlayer(player: Player, game: Game): string {
         titanium: player.titanium,
         titaniumProduction: player.titaniumProduction,
         victoryPoints: player.victoryPoints,
-        waitingFor: getWaitingFor(player.getWaitingFor())
+        waitingFor: getWaitingFor(player.getWaitingFor()),
+        canUseMicrobesAsMegaCreditsForPlants: player.canUseMicrobesAsMegaCreditsForPlants
     };
     return JSON.stringify(output);
 }

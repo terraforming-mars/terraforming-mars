@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class Shuttles implements IProjectCard {
     public cost: number = 10;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Shuttles";

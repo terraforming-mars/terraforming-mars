@@ -20,6 +20,7 @@ import { HowToPay } from "../inputs/HowToPay";
 
 export class AICentral implements IActionCard, IProjectCard {
     public cost: number = 21;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "AI Central";
@@ -48,6 +49,7 @@ export class AICentral implements IActionCard, IProjectCard {
 
 export class AcquiredCompany implements IProjectCard {
     public cost: number = 10;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = "Acquired Company";
     public cardType: CardType = CardType.AUTOMATED;
@@ -64,6 +66,7 @@ export class AcquiredCompany implements IProjectCard {
 
 export class AdaptationTechnology implements IProjectCard {
     public cost: number = 12;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Adaptation Technology";
     public cardType: CardType = CardType.ACTIVE;
@@ -83,6 +86,7 @@ export class AdaptationTechnology implements IProjectCard {
 
 export class AdaptedLichen implements IProjectCard {
     public cost: number = 9;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.PLANT];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Adapted Lichen";
@@ -99,6 +103,7 @@ export class AdaptedLichen implements IProjectCard {
 
 export class AdvancedAlloys implements IProjectCard {
     public cost: number = 9;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Advanced Alloys";
     public cardType: CardType = CardType.ACTIVE;
@@ -116,6 +121,7 @@ export class AdvancedAlloys implements IProjectCard {
 
 export class AdvancedEcosystems implements IProjectCard {
     public cost: number = 11;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.PLANT, Tags.MICROBES, Tags.ANIMAL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Advanced Ecosystems";
@@ -137,6 +143,7 @@ export class AdvancedEcosystems implements IProjectCard {
 
 export class AerobrakedAmmoniaAsteroid implements IProjectCard {
     public cost: number = 26;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Aerobraked Ammonia Asteroid";
     public cardType: CardType = CardType.EVENT;
@@ -158,6 +165,7 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
 
 export class AntiGravityTechnology implements IProjectCard {
     public cost: number = 14;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Anti-Gravity Technology";
     public cardType: CardType = CardType.ACTIVE;
@@ -177,6 +185,7 @@ export class AntiGravityTechnology implements IProjectCard {
 
 export class Algae implements IProjectCard {
     public cost: number = 10;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.PLANT];
     public name: string = "Algae";
     public cardType: CardType = CardType.AUTOMATED;
@@ -194,6 +203,7 @@ export class Algae implements IProjectCard {
 
 export class Ants implements IActionCard, IProjectCard {
     public cost: number = 9;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.MICROBES];
     public name: string = "Ants";
     public resourceType: ResourceType = ResourceType.MICROBE;
@@ -236,6 +246,7 @@ export class Ants implements IActionCard, IProjectCard {
 
 export class AquiferPumping implements IActionCard, IProjectCard {
     public cost: number = 18;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Aquifer Pumping";
     public cardType: CardType = CardType.ACTIVE;
@@ -269,7 +280,7 @@ export class AquiferPumping implements IActionCard, IProjectCard {
                         foundSpace = space;
                         return undefined;
                     }),
-                    new SelectHowToPay("Select how to pay for action", true, false, player.canUseHeatAsMegaCredits, (htp: HowToPay) => {
+                    new SelectHowToPay("Select how to pay for action", true, false, player.canUseHeatAsMegaCredits, false, (htp: HowToPay) => {
                         howToPay = htp;
                         return undefined;
                     })
@@ -279,6 +290,7 @@ export class AquiferPumping implements IActionCard, IProjectCard {
 
 export class ArchaeBacteria implements IProjectCard {
     public cost: number = 6;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.MICROBES];
     public name: string = "ArchaeBacteria";
     public cardType: CardType = CardType.AUTOMATED;
@@ -295,6 +307,7 @@ export class ArchaeBacteria implements IProjectCard {
 
 export class ArcticAlgae implements IProjectCard {
     public cost: number = 12;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.PLANT];
     public name: string = "Arctic Algae";
     public cardType: CardType = CardType.ACTIVE;
@@ -316,6 +329,7 @@ export class ArcticAlgae implements IProjectCard {
 
 export class ArtificialLake implements IProjectCard {
     public cost: number = 15;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Artificial Lake";
     public cardType: CardType = CardType.AUTOMATED;
@@ -335,6 +349,7 @@ export class ArtificialLake implements IProjectCard {
 
 export class ArtificialPhotosynthesis implements IProjectCard {
     public cost: number = 12;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Artficial Photosynthesis";
@@ -359,6 +374,7 @@ export class ArtificialPhotosynthesis implements IProjectCard {
 
 export class Asteroid implements IProjectCard {
     public cost: number = 14;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SPACE];
     public name: string = "Asteroid";
     public cardType: CardType = CardType.EVENT;
@@ -382,6 +398,7 @@ export class Asteroid implements IProjectCard {
 
 export class AsteroidMining implements IProjectCard {
     public cost: number = 30;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Asteroid Mining";
@@ -399,6 +416,7 @@ export class AsteroidMining implements IProjectCard {
 
 export class AsteroidMiningConsortium implements IProjectCard {
     public cost: number = 13;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.JOVIAN];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Asteroid Mining Consortium";
@@ -423,6 +441,7 @@ export class AsteroidMiningConsortium implements IProjectCard {
 
 export class BeamFromAThoriumAsteroid implements IProjectCard {
     public cost: number = 32;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE, Tags.ENERGY];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Beam From A Thorium Asteroid";
@@ -444,6 +463,7 @@ export class BeamFromAThoriumAsteroid implements IProjectCard {
 
 export class BigAsteroid implements IProjectCard {
     public cost: number = 27;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
     public name: string = "Big Asteroid";

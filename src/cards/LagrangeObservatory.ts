@@ -8,6 +8,7 @@ import { Tags } from "./Tags";
 export class LagrangeObservatory implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public cost: number = 9;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.SPACE];
     public name: string = "Lagrange Observatory";
     public text: string = "Draw 1 card. Gain 1 victory point.";

@@ -32,7 +32,7 @@ export class BusinessNetwork implements IActionCard, IProjectCard {
         if (player.canAfford(3)) {
             if (player.canUseHeatAsMegaCredits && player.heat > 0) {
                 return new OrOptions(
-                    new SelectHowToPay("Select how to pay and buy " + dealtCard.name, false, false, true, (htp) => {
+                    new SelectHowToPay("Select how to pay and buy " + dealtCard.name, false, false, true, false, (htp) => {
                         if (htp.heat + htp.megaCredits < 3) {
                             game.dealer.discard(dealtCard);
                             throw "Not enough spent to buy card";

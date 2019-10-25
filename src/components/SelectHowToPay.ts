@@ -9,7 +9,8 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
             heat: 0,
             megaCredits: 0,
             steel: 0,
-            titanium: 0
+            titanium: 0,
+            microbes: 0
         };
     },
     methods: {
@@ -18,7 +19,8 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                 heat: parseInt(this.$data.heat),
                 megaCredits: parseInt(this.$data.megaCredits),
                 steel: parseInt(this.$data.steel),
-                titanium: parseInt(this.$data.titanium)
+                titanium: parseInt(this.$data.titanium),
+                microbes:  parseInt(this.$data.microbes)
             };
             this.onsave([[JSON.stringify(htp)]]);
         }
@@ -37,6 +39,10 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
             <div v-if="playerinput.canUseHeat" class="nes-field">
                 <label>Heat:</label>
                 <input class="nes-input" type="number" value="0" min="0" max="100" v-model="heat" />
+            </div>
+            <div v-if="playerinput.canUseMicrobes" class="nes-field">
+                <label>Microbes:</label>
+                <input class="nes-input" type="number" value="0" min="0" max="100" v-model="microbes" />
             </div>
             <div class="nes-field">
                 <label>Mega Credit:</label>

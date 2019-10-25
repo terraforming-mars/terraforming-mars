@@ -10,6 +10,7 @@ import { SelectOption } from "../inputs/SelectOption";
 
 export class MarsUniversity implements IProjectCard {
     public cost: number = 8;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public name: string = "Mars University";
     public cardType: CardType = CardType.ACTIVE;

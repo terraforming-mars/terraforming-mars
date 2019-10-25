@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class CallistoPenalMines implements IProjectCard {
     public cost: number = 24;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = "Callisto Penal Mines";
     public cardType: CardType = CardType.AUTOMATED;

@@ -7,6 +7,7 @@ import { Tags } from "./Tags";
 
 export class RadSuits implements IProjectCard {
     public cost: number = 6;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Rad-Suits";

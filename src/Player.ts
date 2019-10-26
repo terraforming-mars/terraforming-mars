@@ -486,6 +486,7 @@ export class Player {
 
             if (this.canUseMicrobesAsMegaCreditsForPlants && howToPay.microbes !== undefined) {
                 totalToPay += howToPay.microbes * 2;
+            }    
 
             if (howToPay.megaCredits > this.megaCredits) {
                 throw "Do not have enough mega credits";

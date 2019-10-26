@@ -152,7 +152,7 @@ export class Player {
         if (this.corporationCard !== undefined) {
             tagCount += this.corporationCard.tags.filter((cardTag) => cardTag === tag).length;
         }
-        if (tag = Tags.WILDCARD) {
+        if (tag === Tags.WILDCARD) {
             return tagCount;
         } else {
             return tagCount + this.getTagCount(Tags.WILDCARD);

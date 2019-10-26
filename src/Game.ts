@@ -720,14 +720,14 @@ export class Game {
     public drawCardsByTag(tag: Tags, total: number): Array<IProjectCard> {
         let cardsToDraw = 0;
         const result: Array<IProjectCard> = [];
-            while (cardsToDraw < total) {
-                let projectCard = this.dealer.dealCard();
-                if (projectCard.tags.includes(tag)) {
-                        cardsToDraw++;
-                        result.push(projectCard);
-                } else {
-                    this.dealer.discard(projectCard);
-                }
+        while (cardsToDraw < total) {
+            let projectCard = this.dealer.dealCard();
+            if (projectCard.tags.includes(tag)) {
+                cardsToDraw++;
+                result.push(projectCard);
+            } else {
+                this.dealer.discard(projectCard);
+            }
         }
         return result;
     }

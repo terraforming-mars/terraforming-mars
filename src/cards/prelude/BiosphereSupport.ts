@@ -14,7 +14,7 @@ export class BiosphereSupport extends PreludeCard implements IProjectCard {
     }    
     public play(player: Player, _game: Game) {
         player.megaCreditProduction-- ;
-	    player.plantProduction +=2 ;
+        player.plantProduction +=2 ;
 	    return undefined;    
     }
 }

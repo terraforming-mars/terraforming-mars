@@ -21,8 +21,8 @@ export class Inventrix implements CorporationCard {
             return undefined;
         });
     }
-    public getRequirementBonus(): boolean {
-        return true;
+    public getRequirementBonus(): number {
+        return 2;
     }
     public play() {
         return undefined;

@@ -62,11 +62,14 @@ export class Player {
     public resourcesOnCards: Map<string, number> = new Map<string, number>();
     public victoryPoints: number = 0;
     private actionsThisGeneration: Set<string> = new Set<string>();
+    private lastCardPlayedThisTurn: IProjectCard | undefined;
     private waitingFor?: PlayerInput;
-    private noRequirementsWilcard: boolean = false;
 
     constructor(public name: string, public color: Color, public beginner: boolean) {
 
+    }
+    public getLastCardPlayedThisTurn(): IProjectCard | undefined {
+        return this.lastCardPlayedThisTurn;
     }
     private hasProtectedHabitats(): boolean {
         return this.playedCards.find((playedCard) => playedCard.name === new ProtectedHabitats().name) !== undefined;
@@ -449,6 +452,7 @@ export class Player {
 
     private addPlayedCard(game: Game, card: IProjectCard): void {
         this.playedCards.push(card);
+        this.lastCardPlayedThisTurn = card;
         this.generationPlayed.set(card.name, game.generation);
     }
 
@@ -561,10 +565,6 @@ export class Player {
                 return action;
             }
             whenDone();
-            // Ecology Experts no requirements switch off
-            if (this.noRequirementsWilcard && selectedCard.name != "Ecology Experts" ) {
-                this.noRequirementsWilcard = false;
-            }
 
             return undefined;
         });
@@ -858,6 +858,7 @@ export class Player {
     private endTurnOption(game: Game): PlayerInput {
         return new SelectOption("End Turn", () => {
             this.actionsTakenThisRound = 0;
+            this.lastCardPlayedThisTurn = undefined;
             game.playerIsFinishedTakingActions(this);
             return undefined;
         });
@@ -905,7 +906,7 @@ export class Player {
                 maxPay += this.titanium * this.titaniumValue;
             }
             maxPay += this.megaCredits;
-            return maxPay >= this.getCardCost(game, card) && (card.canPlay(this, game) || this.noRequirementsWilcard);
+            return maxPay >= this.getCardCost(game, card) && card.canPlay(this, game);
         });
     }
 
@@ -969,6 +970,7 @@ export class Player {
 
         if (this.actionsTakenThisRound >= 2) {
             this.actionsTakenThisRound = 0;
+            this.lastCardPlayedThisTurn = undefined;
             game.playerIsFinishedTakingActions(this);
             return;
         }
@@ -1115,11 +1117,5 @@ export class Player {
     public reduceActionsTakenThisRound(): void {
         this.actionsTakenThisRound--;
     }
-
-    public setNoRequirementsWilcard(): void {
-        this.noRequirementsWilcard = true;
-    }
-
-
 }
 

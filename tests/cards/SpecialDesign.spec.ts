@@ -12,6 +12,6 @@ describe("SpecialDesign", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play();
         expect(action).to.eq(undefined);
-        expect(card.getRequirementBonus(player, game)).to.eq(false);
+        expect(card.getRequirementBonus(player, game)).to.eq(0);
     });
 });

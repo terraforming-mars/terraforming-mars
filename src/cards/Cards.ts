@@ -75,8 +75,8 @@ export class AdaptationTechnology implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public getRequirementBonus(): boolean {
-        return true;
+    public getRequirementBonus(): number {
+        return 2;
     }
     public play(player: Player, _game: Game) {
         player.victoryPoints++;

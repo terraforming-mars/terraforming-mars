@@ -23,6 +23,5 @@ describe("Moss", function () {
         expect(action).to.eq(undefined);
         expect(player.plants).to.eq(-1);
         expect(player.plantProduction).to.eq(1);
-        expect(player.victoryPoints).to.eq(-1);
     });
 });

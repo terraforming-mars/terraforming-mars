@@ -127,14 +127,26 @@ export class Game {
             throw "Unsupported award " + award;
         }
         players.sort((player1, player2) => getScore(player2) - getScore(player1));
-        if (players.length <= 2) {
+        if (getScore(players[0]) > getScore(players[1])) {
             players[0].victoryPoints += 5;
-        } else if (getScore(players[0]) === getScore(players[1])) {
-            players[0].victoryPoints += 5;
-            players[1].victoryPoints += 5;
-        } else {
-            players[0].victoryPoints += 5;
-            players[1].victoryPoints += 2;
+            players.shift();
+            if (players.length > 1) {
+                if (getScore(players[0]) > getScore(players[1])) {
+                    players[0].victoryPoints += 3;
+                }  else {  // We have at least 2 rank 2 players
+                    let score = getScore(players[0]);
+                    while (getScore(players[0]) === score) {
+                        players[0].victoryPoints += 3;
+                        players.shift();
+                    }                
+                }
+            }    
+        } else { // We have at least 2 rank 1 players 
+            let score = getScore(players[0]);
+            while (getScore(players[0]) === score) {
+                players[0].victoryPoints += 5;
+                players.shift();
+            }
         }
     }
 

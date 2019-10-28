@@ -18,7 +18,6 @@ export class Moss implements IProjectCard {
     public play(player: Player) {
         player.plants--;
         player.plantProduction++;
-        player.victoryPoints--;
         return undefined;
     }
 }

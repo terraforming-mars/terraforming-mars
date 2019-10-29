@@ -1,9 +1,8 @@
-
-import { Award } from "./Award";
+import {IAward  } from "./awards/IAward";
 import { Player } from "./Player";
 
 export interface FundedAward {
-    award: Award;
+    award: IAward;
     player: Player;
 }
 

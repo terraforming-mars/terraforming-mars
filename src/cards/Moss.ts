@@ -10,7 +10,7 @@ export class Moss implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Moss";
-    public text: string = "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step. Lose 1 victory point.";
+    public text: string = "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.";
     public description: string = "Efficient soil makers";
     public canPlay(player: Player, game: Game): boolean {
         return game.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game) && player.plants >= 1;

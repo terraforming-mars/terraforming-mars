@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class FoodFactory implements IProjectCard {
     public cost: number = 12;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Food Factory";
     public cardType: CardType = CardType.AUTOMATED;

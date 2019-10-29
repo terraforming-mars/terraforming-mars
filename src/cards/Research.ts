@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class Research implements IProjectCard {
     public cost: number = 11;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.SCIENCE];
     public name: string = "Research";
     public cardType: CardType = CardType.AUTOMATED;

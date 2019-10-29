@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class TropicalResort implements IProjectCard {
     public cost: number = 13;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Tropical Resort";
     public cardType: CardType = CardType.AUTOMATED;

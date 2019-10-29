@@ -9,6 +9,7 @@ import { ISpace } from "../ISpace";
 
 export class LakeMarineris implements IProjectCard {
     public cost: number = 18;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [];
     public name: string = "Lake Marineris";
     public cardType: CardType = CardType.AUTOMATED;

@@ -12,6 +12,6 @@ describe("AdaptationTechnology", function () {
         const game = new Game("foobar", [player,player], player);
         card.play(player, game);
         expect(player.victoryPoints).to.eq(1);
-        expect(card.getRequirementBonus()).to.eq(true);
+        expect(card.getRequirementBonus()).to.eq(2);
     });
 });

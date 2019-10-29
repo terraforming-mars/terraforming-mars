@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class DustSeals implements IProjectCard {
     public cost: number = 2;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Dust Seals";

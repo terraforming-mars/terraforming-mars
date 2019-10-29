@@ -10,6 +10,7 @@ import { SelectHowToPay } from "../inputs/SelectHowToPay";
 
 export class SearchForLife implements IActionCard, IProjectCard {
     public cost: number = 3;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.SCIENCE;
@@ -41,7 +42,7 @@ export class SearchForLife implements IActionCard, IProjectCard {
             return undefined;
         };
         if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-            return new SelectHowToPay("Select how to pay for action", false, false, true, (htp) => {
+            return new SelectHowToPay("Select how to pay for action", false, false, true, false, (htp) => {
                 if (htp.heat + htp.megaCredits < 1) {
                     throw "Need to spend at least one";
                 }

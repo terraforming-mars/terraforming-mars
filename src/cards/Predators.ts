@@ -10,6 +10,7 @@ import { SelectCard } from "../inputs/SelectCard";
 
 export class Predators implements IProjectCard, IActionCard {
     public cost: number = 14;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.ANIMAL];
     public name: string = "Predator";
     public cardType: CardType = CardType.ACTIVE;

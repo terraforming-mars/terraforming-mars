@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class GeneRepair implements IProjectCard {
     public cost: number = 12;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Gene Repair";

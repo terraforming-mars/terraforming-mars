@@ -15,12 +15,12 @@ export class SpecialDesign implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public getRequirementBonus(player: Player, game: Game): boolean {
+    public getRequirementBonus(player: Player, game: Game): number {
         const lastCardPlayed = player.lastCardPlayedThisGeneration(game);
         if (lastCardPlayed !== undefined && lastCardPlayed.name === this.name) {
-            return true;
+            return 2;
         }
-        return false;
+        return 0;
     }
     public play() {
         return undefined;

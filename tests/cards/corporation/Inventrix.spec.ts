@@ -10,7 +10,7 @@ describe("Inventrix", function () {
         const card = new Inventrix();
         const action = card.play();
         expect(action).to.eq(undefined);
-        expect(card.getRequirementBonus()).to.eq(true);
+        expect(card.getRequirementBonus()).to.eq(2);
     });
     it("Should take initial action", function () {
         const card = new Inventrix();

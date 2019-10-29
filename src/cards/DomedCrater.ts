@@ -9,6 +9,7 @@ import { ISpace } from "../ISpace";
 
 export class DomedCrater implements IProjectCard {
     public cost: number = 24;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public name: string = "Domed Crater";
     public cardType: CardType = CardType.AUTOMATED;

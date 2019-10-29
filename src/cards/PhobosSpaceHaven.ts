@@ -9,6 +9,7 @@ import { SpaceType } from "../SpaceType";
 
 export class PhobosSpaceHaven implements IProjectCard {
     public cost: number = 25;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SPACE, Tags.CITY];
     public name: string = "Phobos Space Haven";
     public cardType: CardType = CardType.AUTOMATED;

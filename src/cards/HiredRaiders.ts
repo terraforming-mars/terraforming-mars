@@ -32,7 +32,7 @@ export class HiredRaiders implements IProjectCard {
                     return undefined;
                 })
             );
-        } 
+        }
 
         let selectedPlayer: Player;
         return new AndOptions(

@@ -14,6 +14,7 @@ import { SelectHowToPay } from "../inputs/SelectHowToPay";
 
 export class WaterImportFromEuropa implements IActionCard, IProjectCard {
     public cost: number = 25;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = "Water Import From Europa";
     public cardType: CardType = CardType.ACTIVE;
@@ -46,7 +47,7 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
                 player.heat -= htp.heat;
                 return undefined;
             },
-            new SelectHowToPay("Select how to pay for action", false, true, player.canUseHeatAsMegaCredits, (howToPay: HowToPay) => {
+            new SelectHowToPay("Select how to pay for action", false, true, player.canUseHeatAsMegaCredits, false, (howToPay: HowToPay) => {
                 htp = howToPay;
                 return undefined;
             }),

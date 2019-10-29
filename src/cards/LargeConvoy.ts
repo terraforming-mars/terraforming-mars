@@ -14,6 +14,7 @@ import { PlayerInput } from "../PlayerInput";
 
 export class LargeConvoy implements IProjectCard {
     public cost: number = 36;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
     public name: string = "Large Convoy";
     public cardType: CardType = CardType.EVENT;

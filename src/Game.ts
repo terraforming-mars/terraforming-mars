@@ -1,4 +1,3 @@
-
 import { Player } from "./Player";
 import { Dealer } from "./Dealer";
 import { ISpace } from "./ISpace";
@@ -26,11 +25,13 @@ import * as constants from "./constants";
 import { Color } from "./Color";
 
 import { ALL_CORPORATION_CARDS } from "./Dealer";
+import { ALL_PRELUDE_CORPORATIONS } from "./Dealer";
+
 
 export class Game {
     public activePlayer: Player;
     public claimedMilestones: Array<ClaimedMilestone> = [];
-    public dealer: Dealer = new Dealer();
+    public dealer: Dealer;
     public fundedAwards: Array<FundedAward> = []; 
     public generation: number = 1;
     public phase: Phase = Phase.RESEARCH;
@@ -42,13 +43,23 @@ export class Game {
     private spaces: Array<ISpace> = this.originalBoard.spaces;
     private temperature: number = constants.MIN_TEMPERATURE;
 
-    constructor(public id: string, private players: Array<Player>, private first: Player) {
+    constructor(public id: string, private players: Array<Player>, private first: Player, private preludeExtension: boolean = false) {
         this.activePlayer = first;
+        this.preludeExtension = preludeExtension;
+        this.dealer = new Dealer (this.preludeExtension);
+
         // Single player game player starts with 14TR and 2 neutral cities and forests on board
         if (players.length === 1) {
             this.setupSolo();
         }
-        const corporationCards = this.dealer.shuffleCards(ALL_CORPORATION_CARDS);
+
+        let corporationCards = this.dealer.shuffleCards(ALL_CORPORATION_CARDS);
+        //Add prelude corporations cards
+        if (this.preludeExtension) {
+                corporationCards.push(...ALL_PRELUDE_CORPORATIONS);
+                corporationCards = this.dealer.shuffleCards(corporationCards);
+                    }
+
         // Give each player their corporation cards
         for (let player of players) {
             if (!player.beginner) {
@@ -61,7 +72,7 @@ export class Game {
                 this.playCorporationCard(player, new BeginnerCorporation());
             }
         }
-        
+
     }
 
     public getSpaceByTileCard(cardName: string): ISpace | undefined {
@@ -155,8 +166,14 @@ export class Game {
         corporationCard.play(player, this);
         player.megaCredits = corporationCard.startingMegaCredits;
         if (corporationCard.name !== new BeginnerCorporation().name) {
-            player.megaCredits -= player.cardsInHand.length * constants.CARD_COST;
+            if (this.preludeExtension) {
+            //Prelude card are not to be bought
+                player.megaCredits -= (player.cardsInHand.length - 2) * constants.CARD_COST;
+            } else {
+                player.megaCredits -= player.cardsInHand.length * constants.CARD_COST;
+            }
         }
+
         this.playerIsFinishedWithResearchPhase(player);
     }
 
@@ -172,7 +189,45 @@ export class Game {
             this.dealer.dealCard(),
             this.dealer.dealCard(),
             this.dealer.dealCard()
+            ];
+
+    if (this.preludeExtension) {
+
+        const preludeDealtCards: Array<IProjectCard> = [
+                this.dealer.dealPreludeCard(),
+                this.dealer.dealPreludeCard(),
+                this.dealer.dealPreludeCard(),
+                this.dealer.dealPreludeCard()
         ];
+
+        let corporation: CorporationCard;
+        return new AndOptions(
+            () => {
+                this.playCorporationCard(player, corporation);
+                return undefined;
+            },
+            new SelectCard<CorporationCard>("Select corporation", player.dealtCorporationCards, (foundCards: Array<CorporationCard>) => {
+                corporation = foundCards[0];
+                return undefined;
+            }),
+            new SelectCard("Select 2 Prelude cards", preludeDealtCards, (preludeCards: Array<IProjectCard>) => {
+                    player.cardsInHand.push(preludeCards[0], preludeCards[1]);
+                    return undefined;
+                }, 2, 2),
+            new SelectCard("Select initial cards to buy", dealtCards, (foundCards: Array<IProjectCard>) => {
+                // Pay for cards
+                for (let foundCard of foundCards) {
+                    player.cardsInHand.push(foundCard);
+                }
+                for (let dealtCard of dealtCards) {
+                    if (foundCards.find((foundCard) => foundCard.name === dealtCard.name) === undefined) {
+                        this.dealer.discard(dealtCard);
+                    }
+                }
+                return undefined;
+            }, 10, 0)
+        ); 
+    } else {
         let corporation: CorporationCard;
         return new AndOptions(
             () => {
@@ -195,7 +250,8 @@ export class Game {
                 }
                 return undefined;
             }, 10, 0)
-        );
+        ); 
+    }
     }
  
     private hasPassedThisActionPhase(player: Player): boolean {
@@ -660,6 +716,22 @@ export class Game {
         }
         return undefined;
     }
+
+    public drawCardsByTag(tag: Tags, total: number): Array<IProjectCard> {
+        let cardsToDraw = 0;
+        const result: Array<IProjectCard> = [];
+        while (cardsToDraw < total) {
+            let projectCard = this.dealer.dealCard();
+            if (projectCard.tags.includes(tag)) {
+                cardsToDraw++;
+                result.push(projectCard);
+            } else {
+                this.dealer.discard(projectCard);
+            }
+        }
+        return result;
+    }
+
     private setupSolo() {
         this.players[0].terraformRating = this.players[0].terraformRatingAtGenerationStart = 14;
         // Single player add neutral player and put 2 neutrals cities on board with adjacent forest

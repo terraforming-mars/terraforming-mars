@@ -55,6 +55,9 @@ import { TropicalResort } from "./TropicalResort"
 import { UndergroundCity } from "./UndergroundCity";
 import { UrbanizedArea } from "./UrbanizedArea";
 import { Windmills } from "./Windmills";
+//Prelude cards
+import { HousePrinting } from "./prelude/HousePrinting";
+import { LavaTubeSettlement } from "./prelude/LavaTubeSettlement";
 
 export class RoboticWorkforce implements IProjectCard {
     public cost: number = 9;
@@ -113,7 +116,9 @@ export class RoboticWorkforce implements IProjectCard {
             new TropicalResort(),
             new UndergroundCity(),
             new UrbanizedArea(),
-            new Windmills()
+            new Windmills(),
+            new HousePrinting(),
+            new LavaTubeSettlement()
         ];
         const availableCards = player.playedCards.filter((card) => {
             for (let i = 0; i < builderCards.length; i++) {
@@ -199,7 +204,9 @@ export class RoboticWorkforce implements IProjectCard {
                     [new FuelFactory().name]: new Updater(-1, 1, 0, 1, 0, 0),
                     [new ProtectedValley().name]: new Updater(0, 2, 0, 0, 0, 0),
                     [new MoholeArea().name]: new Updater(0, 0, 0, 0, 0, 4),
-                    [new NaturalPreserve().name]: new Updater(1, 0, 0, 0, 0, 0)
+                    [new NaturalPreserve().name]: new Updater(1, 0, 0, 0, 0, 0),
+                    [new HousePrinting().name]: new Updater(0, 0, 1, 0, 0, 0),
+                    [new LavaTubeSettlement().name]: new Updater(-1, 2, 0, 0, 0, 0)
                  }[foundCard.name];
 
                 if (!updater) {

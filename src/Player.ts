@@ -797,7 +797,6 @@ export class Player {
     }
 
     private fundAward(award: IAward, game: Game): PlayerInput {
-        //let upperCaseAward = String(award)[0].toUpperCase() + String(award).substring(1);
         const funder = (megaCredits: number, heat: number) => {
             game.fundAward(this, award);
             this.megaCredits -= megaCredits;

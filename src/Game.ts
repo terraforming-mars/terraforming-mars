@@ -103,7 +103,7 @@ export class Game {
                     players[0].victoryPoints += 3;
                 }  else {  // We have at least 2 rank 2 players
                     let score = award.getScore(players[0], this);
-                    while (award.getScore(players[0], this) === score && players.length > 0) {
+                    while (players.length > 0 && award.getScore(players[0], this) === score) {
                         players[0].victoryPoints += 3;
                         players.shift();
                     }                
@@ -111,7 +111,7 @@ export class Game {
             }    
         } else { // We have at least 2 rank 1 players 
             let score = award.getScore(players[0], this);
-            while (award.getScore(players[0], this) === score && players.length > 0) {
+            while (players.length > 0 && award.getScore(players[0], this) === score) {
                 players[0].victoryPoints += 5;
                 players.shift();
             }

@@ -23,7 +23,8 @@ import { ResourceType } from "./ResourceType";
 import * as constants from "./constants";
 import { Color } from "./Color";
 import { ALL_CORPORATION_CARDS } from "./Dealer";
-import {IAward  } from "./awards/IAward";
+import { ALL_PRELUDE_CORPORATIONS } from "./Dealer";
+import { IAward } from "./awards/IAward";
 
 export class Game {
     public activePlayer: Player;

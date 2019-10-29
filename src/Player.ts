@@ -806,7 +806,7 @@ export class Player {
             return undefined;
         };
         if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-            return new SelectHowToPay("Select how to pay for " + award.name, false, false, true, (htp: HowToPay) => {
+            return new SelectHowToPay("Select how to pay for " + award.name, false, false, true, false, (htp: HowToPay) => {
                 return funder(htp.megaCredits, htp.heat);
             });
         }

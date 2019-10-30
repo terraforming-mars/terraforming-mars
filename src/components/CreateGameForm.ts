@@ -5,6 +5,7 @@ import { Color } from "../Color";
 interface CreateGameModel {
     firstIndex: number;
     players: Array<NewPlayerModel>;
+	prelude: boolean;
 }
 
 interface NewPlayerModel {
@@ -24,7 +25,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 { name: "", color: Color.YELLOW, beginner: false, first: false },
                 { name: "", color: Color.BLUE, beginner: false, first: false },
                 { name: "", color: Color.BLACK, beginner: false, first: false }
-            ]
+            ],
+			prelude: false
         } as CreateGameModel
     },
     methods: {
@@ -33,6 +35,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 player.first = (this.$data.firstIndex === index);
                 return player;
             }).filter((player: any) => player.name);
+			const prelude = this.$data.prelude;
             const xhr = new XMLHttpRequest();
             xhr.open("PUT", "/game");
             xhr.onerror = function () {
@@ -49,7 +52,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             };
             xhr.responseType = "json";
             xhr.send(JSON.stringify({
-                players: players
+                players: players, prelude
             }));
         }
     },
@@ -82,6 +85,10 @@ export const CreateGameForm = Vue.component("create-game-form", {
                     <span>Goes First</span>
                 </label>
             </div>
+            <label>
+                    <input type="checkbox" class="nes-checkbox" v-model="prelude" />
+                    <span>Use prelude extension ?</span>
+            </label>			
             <button class="nes-btn is-primary" v-on:click="createGame">Create Game</button>
         </div>
     `

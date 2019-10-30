@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class TectonicStressPower implements IProjectCard {
     public cost: number = 18;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public name: string = "Tectonic Stress Power";
     public cardType: CardType = CardType.AUTOMATED;

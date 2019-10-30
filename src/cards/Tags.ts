@@ -9,6 +9,7 @@ export enum Tags {
     PLANT = "plant",
     SCIENCE = "science",
     SPACE = "space",
-    STEEL = "building"
+    STEEL = "building",
+    WILDCARD = "wildcard"
 }
 

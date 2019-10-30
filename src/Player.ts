@@ -2,6 +2,7 @@
 import { IProjectCard } from "./cards/IProjectCard";
 import { CorporationCard } from "./cards/corporation/CorporationCard";
 import { SaturnSystems } from "./cards/corporation/SaturnSystems";
+import { Psychrophiles } from "./cards/prelude/Psychrophiles";
 import { Tags } from "./cards/Tags";
 import { PlayerInput } from "./PlayerInput";
 import { CardType } from "./cards/CardType";
@@ -34,6 +35,7 @@ export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
     public id: string = this.generateId();
     public canUseHeatAsMegaCredits: boolean = false;
+    public canUseMicrobesAsMegaCreditsForPlants = false;
     public plantsNeededForGreenery: number = 8;
     public dealtCorporationCards: Array<CorporationCard> = [];
     public powerPlantCost: number = 11;
@@ -60,10 +62,14 @@ export class Player {
     public resourcesOnCards: Map<string, number> = new Map<string, number>();
     public victoryPoints: number = 0;
     private actionsThisGeneration: Set<string> = new Set<string>();
+    private lastCardPlayedThisTurn: IProjectCard | undefined;
     private waitingFor?: PlayerInput;
 
     constructor(public name: string, public color: Color, public beginner: boolean) {
 
+    }
+    public getLastCardPlayedThisTurn(): IProjectCard | undefined {
+        return this.lastCardPlayedThisTurn;
     }
     private hasProtectedHabitats(): boolean {
         return this.playedCards.find((playedCard) => playedCard.name === new ProtectedHabitats().name) !== undefined;
@@ -149,7 +155,12 @@ export class Player {
         if (this.corporationCard !== undefined) {
             tagCount += this.corporationCard.tags.filter((cardTag) => cardTag === tag).length;
         }
-        return tagCount;
+        if (tag === Tags.WILDCARD) {
+            return tagCount;
+        } else {
+            return tagCount + this.getTagCount(Tags.WILDCARD);
+        }
+
     }
     public getActiveAndAutomatedCards(): Array<IProjectCard> {
         return this.playedCards.filter((pc) => pc.cardType === CardType.AUTOMATED || pc.cardType === CardType.ACTIVE);
@@ -207,7 +218,8 @@ export class Player {
                 steel: 0,
                 heat: 0,
                 titanium: 0,
-                megaCredits: 0
+                megaCredits: 0,
+                microbes: 0
             };
             try {
                 const parsedInput: {[x: string]: number} = JSON.parse(input[0][1]);
@@ -223,6 +235,11 @@ export class Player {
                 if (this.canUseHeatAsMegaCredits) {
                     if (parsedInput.heat !== undefined) {
                         payMethod.heat = parsedInput.heat;
+                    }
+                }
+                if (this.canUseMicrobesAsMegaCreditsForPlants) {
+                    if (parsedInput.microbes !== undefined) {
+                        payMethod.microbes = parsedInput.microbes;
                     }
                 }
             } catch (err) {
@@ -295,7 +312,8 @@ export class Player {
                 steel: 0,
                 heat: 0,
                 titanium: 0,
-                megaCredits: 0
+                megaCredits: 0,
+                microbes: 0
             };
             if (this.canUseHeatAsMegaCredits) {
                 payMethod.heat = 0;
@@ -322,6 +340,13 @@ export class Player {
                         payMethod.heat = parsedInput.heat;
                     } else {
                         throw "Heat not provided, bad input";
+                    }
+                }
+                if (this.canUseMicrobesAsMegaCreditsForPlants) {
+                    if (parsedInput.microbes !== undefined) {
+                        payMethod.microbes = parsedInput.microbes;
+                    } else {
+                        throw "Microbes not provided, bad input";
                     }
                 }
             } catch (err) {
@@ -369,7 +394,8 @@ export class Player {
             steel: 0,
             titanium: 0,
             heat: 0,
-            megaCredits: 0
+            megaCredits: 0,
+            microbes: 0
         };
 
         let selectedCards: Array<IProjectCard> = [];
@@ -397,7 +423,8 @@ export class Player {
                     "Select how to pay for cards",
                     false,
                     false,
-                    true, (pay) => { htp = pay; return undefined; }),
+                    true,
+                    false,    (pay) => { htp = pay; return undefined; }),
                 new SelectCard("Select which cards to take into hand", dealtCards, (foundCards: Array<IProjectCard>) => {
                     selectedCards = foundCards;
                     return undefined;
@@ -425,6 +452,7 @@ export class Player {
 
     private addPlayedCard(game: Game, card: IProjectCard): void {
         this.playedCards.push(card);
+        this.lastCardPlayedThisTurn = card;
         this.generationPlayed.set(card.name, game.generation);
     }
 
@@ -460,6 +488,10 @@ export class Player {
                 totalToPay += howToPay.heat;
             }
 
+            if (this.canUseMicrobesAsMegaCreditsForPlants && howToPay.microbes !== undefined) {
+                totalToPay += howToPay.microbes * 2;
+            }    
+
             if (howToPay.megaCredits > this.megaCredits) {
                 throw "Do not have enough mega credits";
             }
@@ -478,6 +510,12 @@ export class Player {
                 this.titanium -= howToPay.titanium;
                 this.megaCredits -= howToPay.megaCredits;
                 this.heat -= howToPay.heat;
+
+                for (const playedCard of this.playedCards) {
+                    if (playedCard.name === new Psychrophiles().name) {
+                        this.removeResourceFrom(playedCard, howToPay.microbes);
+                    }
+                }
 
                 const actionsFromPlayedCard: OrOptions[] = [];
                 for (const playedCard of this.playedCards) {
@@ -527,6 +565,7 @@ export class Player {
                 return action;
             }
             whenDone();
+
             return undefined;
         });
     }
@@ -595,7 +634,7 @@ export class Player {
             return undefined;
         };
         if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-            return new SelectHowToPay("Select how to pay for power plant", false, false, true, (htp) => {
+            return new SelectHowToPay("Select how to pay for power plant", false, false, true, false, (htp) => {
                 if (htp.heat + htp.megaCredits < this.powerPlantCost) {
                     throw "Haven't spend enough for power plant";
                 }
@@ -625,7 +664,7 @@ export class Player {
             return undefined;
         };
         if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-            return new SelectHowToPay("Select how to pay for asteroid", false, false, true, (htp) => {
+            return new SelectHowToPay("Select how to pay for asteroid", false, false, true, false, (htp) => {
                 if (htp.heat + htp.megaCredits < constants.ASTEROID_COST) {
                     throw "Haven't spend enough for asteroid";
                 }
@@ -650,7 +689,7 @@ export class Player {
             let ocean: ISpace;
             return new AndOptions(() => {
                 return fundProject(htp.megaCredits, htp.heat, ocean.id);
-            }, new SelectHowToPay("How to pay for aquifer", false, false, true, (stp: HowToPay) => {
+            }, new SelectHowToPay("How to pay for aquifer", false, false, true, false, (stp: HowToPay) => {
                 if (stp.heat + stp.megaCredits < constants.AQUIFER_COST) {
                     throw "Haven't spend enough for aquifer";
                 }
@@ -688,7 +727,7 @@ export class Player {
             let greenery: ISpace;
             return new AndOptions(() => {
                 return fundProject(htp.megaCredits, htp.heat, greenery.id);
-            }, new SelectHowToPay("Select how to pay for greenery", false, false, true, (stp) => {
+            }, new SelectHowToPay("Select how to pay for greenery", false, false, true, false, (stp) => {
                 htp = stp;
                 return undefined;
             }), new SelectSpace("Greenery", game.getAvailableSpacesForGreenery(this), (space: ISpace) => {
@@ -717,7 +756,7 @@ export class Player {
                 () => {
                     return fundProject(htp.megaCredits, htp.heat, city.id);
                 },
-                new SelectHowToPay("Select how to pay for city", false, false, true, (stp) => {
+                new SelectHowToPay("Select how to pay for city", false, false, true, false, (stp) => {
                     htp = stp;
                     return undefined;
                 }),
@@ -784,7 +823,7 @@ export class Player {
             return undefined;
         };
         if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-            return new SelectHowToPay("Select how to pay " + milestone, false, false, true, (stp) => {
+            return new SelectHowToPay("Select how to pay " + milestone, false, false, true, false, (stp) => {
                 if (stp.megaCredits + stp.heat < 8) {
                     throw "Did not spend enough to claim milestone";
                 }
@@ -818,6 +857,7 @@ export class Player {
     private endTurnOption(game: Game): PlayerInput {
         return new SelectOption("End Turn", () => {
             this.actionsTakenThisRound = 0;
+            this.lastCardPlayedThisTurn = undefined;
             game.playerIsFinishedTakingActions(this);
             return undefined;
         });
@@ -929,6 +969,7 @@ export class Player {
 
         if (this.actionsTakenThisRound >= 2) {
             this.actionsTakenThisRound = 0;
+            this.lastCardPlayedThisTurn = undefined;
             game.playerIsFinishedTakingActions(this);
             return;
         }
@@ -1072,5 +1113,8 @@ export class Player {
         this.waitingFor = input;
     }
 
+    public reduceActionsTakenThisRound(): void {
+        this.actionsTakenThisRound--;
+    }
 }
 

@@ -7,6 +7,7 @@ import { CardType } from "./CardType";
 
 export class GreatDam implements IProjectCard {
     public cost: number = 12;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Great Dam";

@@ -32,7 +32,7 @@ export class RestrictedArea implements IActionCard, IProjectCard {
     }
     public action(player: Player, game: Game) {
         if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-            return new SelectHowToPay("Select how to pay for action", false, false, true, (htp) => {
+            return new SelectHowToPay("Select how to pay for action", false, false, true, false, (htp) => {
                 if (htp.heat + htp.megaCredits < 2) {
                     throw "Not enough spent";
                 }

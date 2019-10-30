@@ -8,6 +8,7 @@ import { Game } from "../Game";
 
 export class SpaceElevator implements IActionCard, IProjectCard {
     public cost: number = 27;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SPACE, Tags.STEEL];
     public name: string = "Space Elevator";
     public cardType: CardType = CardType.ACTIVE;

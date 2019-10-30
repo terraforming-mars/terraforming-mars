@@ -26,7 +26,7 @@ export class SpaceMirrors implements IActionCard, IProjectCard {
     }
     public action(player: Player, _game: Game) {
         if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-            return new SelectHowToPay("Select how to pay for action", false, false, true, (htp) => {
+            return new SelectHowToPay("Select how to pay for action", false, false, true, false, (htp) => {
                 if (htp.megaCredits + htp.heat < 7) {
                     throw "Not enough spent";
                 }

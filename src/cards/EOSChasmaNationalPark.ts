@@ -8,6 +8,7 @@ import { SelectCard } from "../inputs/SelectCard";
 
 export class EOSChasmaNationalPark implements IProjectCard {
     public cost: number = 16;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];
     public name: string = "EOS Chasma National Park";
     public cardType: CardType = CardType.AUTOMATED;

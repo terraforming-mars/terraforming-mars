@@ -9,6 +9,7 @@ import { ISpace } from "../ISpace";
 
 export class OpenCity implements IProjectCard {
     public cost: number = 23;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Open City";

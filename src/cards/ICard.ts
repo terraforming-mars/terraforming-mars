@@ -30,7 +30,7 @@ export interface ICard {
     action?: (player: Player, game: Game) => AndOptions | SelectAmount | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
     canAct?: (player: Player, game: Game) => boolean;
     getCardDiscount?: (player: Player, game: Game, card: IProjectCard) => number;
-    getRequirementBonus?: (player: Player, game: Game) => boolean;
+    getRequirementBonus?: (player: Player, game: Game) => number;
     onCardPlayed?: (player: Player, game: Game, card: IProjectCard) => OrOptions | void;
     onGameEnd?: (player: Player, game: Game) => void;
     onStandardProject?: (player: Player, projectType: StandardProjectType) => void;

@@ -24,6 +24,7 @@ import { Color } from "./Color";
 import { ALL_CORPORATION_CARDS } from "./Dealer";
 import { ALL_PRELUDE_CORPORATIONS } from "./Dealer";
 import { IAward } from "./awards/IAward";
+import { Tags } from "./cards/Tags";
 
 export class Game {
     public activePlayer: Player;

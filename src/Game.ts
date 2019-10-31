@@ -278,6 +278,7 @@ export class Game {
     }
 
     private gotoResearchPhase(): void {
+        this.researchedPlayers.clear();
         this.generation++;
         this.players.forEach((player) => {
             player.terraformRatingAtGenerationStart = player.terraformRating;
@@ -475,6 +476,7 @@ export class Game {
 
     private startActionsForPlayer(player: Player) {
         this.activePlayer = player;
+        player.actionsTakenThisRound = 0;
         player.takeAction(this);
     }
 

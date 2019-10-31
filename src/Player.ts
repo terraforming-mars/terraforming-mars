@@ -56,7 +56,7 @@ export class Player {
     public cardsInHand: Array<IProjectCard> = [];
     public playedCards: Array<IProjectCard> = [];
     public generationPlayed: Map<string, number> = new Map<string, number>();
-    private actionsTakenThisRound: number = 0;
+    public actionsTakenThisRound: number = 0;
     public terraformRating: number = 20;
     public terraformRatingAtGenerationStart: number = 20;
     public resourcesOnCards: Map<string, number> = new Map<string, number>();

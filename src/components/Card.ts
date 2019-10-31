@@ -26,11 +26,6 @@ export const Card = Vue.component("card", {
         "hideCost",
         "resources"
     ],
-    data: function () {
-        return {
-            displayed: false
-        };
-    },
     methods: {
         getCard: function () {
             return getProjectCardByName(this.card) || getCorporationCardByName(this.card);
@@ -78,15 +73,11 @@ export const Card = Vue.component("card", {
         },
         isSpaceTag: function (tag: Tags) {
             return tag === Tags.SPACE;
-        },
-        toggleDisplayed: function () {
-            this.displayed = !this.displayed;
         }
     },
     template: `
         <span>
-            <span :style="'font-weight:bold;color:' + this.getEventColor(this.getCard().cardType)" v-on:click="toggleDisplayed()">{{this.card}}</span>
-            <span v-if="displayed === true">
+            <span :style="'font-weight:bold;color:' + this.getEventColor(this.getCard().cardType)">{{this.card}}</span>
             <span v-if="this.hideCost !== 'true' && this.getCard().cost !== undefined">Costs {{this.getCard().cost}}.</span>
             <span v-if="this.getCard().startingMegaCredits !== undefined">Start with {{this.getCard().startingMegaCredits}} mega credits.</span>
             <span v-if="this.getEventColor(this.getCard().cardType) === 'red'"><img height="20" src="/assets/event-tag.png" /></span><span v-for="tag in this.getCard().tags">
@@ -109,7 +100,6 @@ export const Card = Vue.component("card", {
             <strong v-if="this.getCard().resourceType === getResourceType().FIGHTER">{{this.resources}} fighter resources</strong>
             <strong v-if="this.getCard().resourceType === getResourceType().MICROBE">{{this.resources}} microbes</strong>
             <strong v-if="this.getCard().resourceType === getResourceType().SCIENCE">{{this.resources}} science resources</strong>
-            </span>
         </span>`
 });
 

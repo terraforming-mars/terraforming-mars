@@ -20,7 +20,7 @@ export class Vitor implements CorporationCard {
         for (let award of ORIGINAL_AWARDS) {
             freeAward.options.push(
             new SelectOption("Fund "+ award.name +" award", () => {
-                game.fundAward.bind(player, award);
+                game.fundAward.bind(game, player, award);
                 return undefined;
             }));
         }

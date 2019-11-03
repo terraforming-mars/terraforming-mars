@@ -19,6 +19,9 @@ export class WaterSplittingPlant implements IProjectCard {
         return undefined;
     }
     public actionText: string = "Spend 3 energy to increase oxygen level by 1";
+    public canAct(player: Player): boolean {
+        return player.energy >= 3;
+    }
     public action(player: Player, game: Game) {
         if (player.energy < 3) {
             throw "Need 3 energy";

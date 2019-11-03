@@ -15,18 +15,16 @@ import { SpaceName } from "./SpaceName";
 import { AndOptions } from "./inputs/AndOptions";
 import { PlayerInput } from "./PlayerInput";
 import { Phase } from "./Phase";
-import { Award } from "./Award";
-import { Tags } from "./cards/Tags";
 import { ClaimedMilestone } from "./ClaimedMilestone";
 import { FundedAward } from "./FundedAward";
 import { Milestone } from "./Milestone";
 import { ResourceType } from "./ResourceType";
 import * as constants from "./constants";
 import { Color } from "./Color";
-
 import { ALL_CORPORATION_CARDS } from "./Dealer";
 import { ALL_PRELUDE_CORPORATIONS } from "./Dealer";
-
+import { IAward } from "./awards/IAward";
+import { Tags } from "./cards/Tags";
 
 export class Game {
     public activePlayer: Player;
@@ -40,7 +38,7 @@ export class Game {
     private passedPlayers: Set<Player> = new Set<Player>();
     private researchedPlayers: Set<Player> = new Set<Player>();
     private originalBoard = new OriginalBoard();
-    private spaces: Array<ISpace> = this.originalBoard.spaces;
+    public spaces: Array<ISpace> = this.originalBoard.spaces;
     private temperature: number = constants.MIN_TEMPERATURE;
 
     constructor(public id: string, private players: Array<Player>, private first: Player, private preludeExtension: boolean = false) {
@@ -92,7 +90,7 @@ export class Game {
         return 8 + (6 * this.fundedAwards.length);
     }
 
-    public fundAward(player: Player, award: Award): void {
+    public fundAward(player: Player, award: IAward): void {
         if (this.allAwardsFunded()) {
             throw "All awards already funded";
         }
@@ -102,62 +100,50 @@ export class Game {
         });
     }
 
-    public giveAward(award: Award): void {
+    public giveAward(award: IAward): void {
+        // Awards are disabled for 1 player games
+        if (this.players.length === 1) return;
+        
         const players: Array<Player> = this.players.slice();
-        let getScore: (player: Player) => number;
-        // Most tiles in play
-        if (award === Award.LANDLORD) {
-            getScore = (player: Player) => {
-                return this.spaces.filter((space) => space.tile !== undefined && space.tile.tileType !== TileType.OCEAN && space.player === player).length;
-            };
-        }
-        // Highest megacredit production
-        else if (award === Award.BANKER) {
-            getScore = (player: Player) => {
-                return player.megaCreditProduction;
-            };
-        }
-        // Most science tags in play
-        else if (award === Award.SCIENTIST) {
-            getScore = (player: Player) => {
-                return player.getTagCount(Tags.SCIENCE);
-            };
-        }
-        // Most heat resources
-        else if (award === Award.THERMALIST) {
-            getScore = (player: Player) => {
-                return player.heat;
-            };
-        }
-        // Most STEEL and TITANIUM resources
-        else if (award === Award.MINER) {
-            getScore = (player: Player) => {
-                return player.steel + player.titanium;
-            };
-        } else {
-            throw "Unsupported award " + award;
-        }
-        players.sort((player1, player2) => getScore(player2) - getScore(player1));
-        if (players.length <= 2) {
+        players.sort((player1, player2) => award.getScore(player2, this) - award.getScore(player1, this));
+        if (award.getScore(players[0], this) > award.getScore(players[1], this)) {
             players[0].victoryPoints += 5;
-        } else if (getScore(players[0]) === getScore(players[1])) {
-            players[0].victoryPoints += 5;
-            players[1].victoryPoints += 5;
-        } else {
-            players[0].victoryPoints += 5;
-            players[1].victoryPoints += 2;
+            players.shift();
+            if (players.length > 1) {
+                if (award.getScore(players[0], this) > award.getScore(players[1], this)) {
+                    players[0].victoryPoints += 3;
+                }  else {  // We have at least 2 rank 2 players
+                    let score = award.getScore(players[0], this);
+                    while (players.length > 0 && award.getScore(players[0], this) === score) {
+                        players[0].victoryPoints += 3;
+                        players.shift();
+                    }                
+                }
+            }    
+        } else { // We have at least 2 rank 1 players 
+            let score = award.getScore(players[0], this);
+            while (players.length > 0 && award.getScore(players[0], this) === score) {
+                players[0].victoryPoints += 5;
+                players.shift();
+            }
         }
     }
 
-    public hasBeenFunded(award: Award): boolean {
+    public hasBeenFunded(award: IAward): boolean {
         return this.fundedAwards.find((fundedAward) => fundedAward.award === award) !== undefined;
     }
 
     public allAwardsFunded(): boolean {
+        // Awards are disabled for 1 player games
+        if (this.players.length === 1) return true;
+        
         return this.fundedAwards.length > 2;
     }
 
     public allMilestonesClaimed(): boolean {
+        // Milestones are disabled for 1 player games
+        if (this.players.length === 1) return true;
+        
         return this.claimedMilestones.length > 2;
     }
 

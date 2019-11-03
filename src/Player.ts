@@ -20,14 +20,14 @@ import { SelectHowToPay } from "./inputs/SelectHowToPay";
 import { SelectAmount } from "./inputs/SelectAmount";
 import { SelectOption } from "./inputs/SelectOption";
 import { SelectPlayer } from "./inputs/SelectPlayer";
-import { Award } from "./Award";
 import { Milestone } from "./Milestone";
 import { TileType } from "./TileType";
 import { StandardProjectType } from "./StandardProjectType";
 import * as constants from "./constants";
-
 import { ProtectedHabitats } from "./cards/ProtectedHabitats";
 import { Pets } from "./cards/Pets";
+import { ORIGINAL_AWARDS } from "./awards/Awards";
+import { IAward } from "./awards/IAward";
 
 const INITIAL_ACTION: string = "INITIAL";
 
@@ -835,8 +835,7 @@ export class Player {
         });
     }
 
-    private fundAward(award: Award, game: Game): PlayerInput {
-        let upperCaseAward = String(award)[0].toUpperCase() + String(award).substring(1);
+    private fundAward(award: IAward, game: Game): PlayerInput {
         const funder = (megaCredits: number, heat: number) => {
             game.fundAward(this, award);
             this.megaCredits -= megaCredits;
@@ -846,11 +845,11 @@ export class Player {
             return undefined;
         };
         if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-            return new SelectHowToPay("Select how to pay for " + upperCaseAward, false, false, true, false, (htp: HowToPay) => {
+            return new SelectHowToPay("Select how to pay for " + award.name, false, false, true, false, (htp: HowToPay) => {
                 return funder(htp.megaCredits, htp.heat);
             });
         }
-        return new SelectOption(upperCaseAward, () => {
+        return new SelectOption(award.name, () => {
             return funder(game.getAwardFundingCost(), 0);
         });
     }
@@ -1065,9 +1064,9 @@ export class Player {
         if (this.canAfford(game.getAwardFundingCost()) && !game.allAwardsFunded()) {
             const remainingAwards = new OrOptions();
             remainingAwards.title = "Select an award to fund";
-            remainingAwards.options = [Award.LANDLORD, Award.BANKER, Award.SCIENTIST, Award.THERMALIST, Award.MINER]
-                .filter((award: Award) => game.hasBeenFunded(award) === false)
-                .map((award: Award) => this.fundAward(award, game));
+            remainingAwards.options = ORIGINAL_AWARDS
+                .filter((award: IAward) => game.hasBeenFunded(award) === false)
+                .map((award: IAward) => this.fundAward(award, game));
             action.options.push(remainingAwards);
         }
 

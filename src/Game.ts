@@ -390,6 +390,11 @@ export class Game {
     private gotoEndGame(): void {
         this.phase = Phase.END;
 
+        // TR is converted in victory points
+        this.players.forEach((player) => {
+            player.victoryPoints += player.terraformRating;
+        });
+
         // Give players any victory points from cards
         this.players.forEach((player) => {
             player.playedCards.forEach((playedCard) => {

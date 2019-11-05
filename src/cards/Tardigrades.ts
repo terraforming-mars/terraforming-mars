@@ -28,4 +28,7 @@ export class Tardigrades implements IProjectCard {
         player.addResourceTo(this);
         return undefined;
     }
+    public canAct(): boolean {
+        return true;
+    }    
 }

@@ -883,6 +883,7 @@ export class Player {
             action.options.push(
                 new SelectSpace("Select space for greenery", game.getAvailableSpacesForGreenery(this), (space) => {
                     game.addGreenery(this, space.id);
+                    this.plants -= this.plantsNeededForGreenery;
                     this.takeActionForFinalGreenery(game);
                     return undefined;
                 })

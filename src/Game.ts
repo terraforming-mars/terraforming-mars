@@ -17,7 +17,6 @@ import { PlayerInput } from "./PlayerInput";
 import { Phase } from "./Phase";
 import { ClaimedMilestone } from "./ClaimedMilestone";
 import { FundedAward } from "./FundedAward";
-import { Milestone } from "./Milestone";
 import { ResourceType } from "./ResourceType";
 import * as constants from "./constants";
 import { Color } from "./Color";
@@ -25,6 +24,7 @@ import { ALL_CORPORATION_CARDS } from "./Dealer";
 import { ALL_PRELUDE_CORPORATIONS } from "./Dealer";
 import { IAward } from "./awards/IAward";
 import { Tags } from "./cards/Tags";
+import { IMilestone } from "./milestones/IMilestone";
 
 export class Game {
     public activePlayer: Player;
@@ -77,7 +77,7 @@ export class Game {
         return this.spaces.find((space) => space.tile !== undefined && space.tile.card === cardName);
     }
 
-    public milestoneClaimed(milestone: Milestone): boolean {
+    public milestoneClaimed(milestone: IMilestone): boolean {
         return this.claimedMilestones.find((claimedMilestone) => claimedMilestone.milestone === milestone) !== undefined;
     }
 

@@ -20,8 +20,8 @@ import { SelectHowToPay } from "./inputs/SelectHowToPay";
 import { SelectAmount } from "./inputs/SelectAmount";
 import { SelectOption } from "./inputs/SelectOption";
 import { SelectPlayer } from "./inputs/SelectPlayer";
-import { Milestone } from "./Milestone";
-import { TileType } from "./TileType";
+import { IMilestone } from "./milestones/IMilestone";
+import { ORIGINAL_MILESTONES } from "./milestones/Milestones";
 import { StandardProjectType } from "./StandardProjectType";
 import * as constants from "./constants";
 import { ProtectedHabitats } from "./cards/ProtectedHabitats";
@@ -809,7 +809,7 @@ export class Player {
         });
     }
 
-    private claimMilestone(milestone: Milestone, game: Game): SelectHowToPay | SelectOption {
+    private claimMilestone(milestone: IMilestone, game: Game): SelectHowToPay | SelectOption {
         const claimer = (megaCredits: number, heat: number) => {
             this.victoryPoints += 5;
             game.claimedMilestones.push({
@@ -823,14 +823,14 @@ export class Player {
             return undefined;
         };
         if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-            return new SelectHowToPay("Select how to pay " + milestone, false, false, true, false, (stp) => {
+            return new SelectHowToPay("Select how to pay " + milestone.name, false, false, true, false, (stp) => {
                 if (stp.megaCredits + stp.heat < 8) {
                     throw "Did not spend enough to claim milestone";
                 }
                 return claimer(stp.megaCredits, stp.heat);
             });
         }
-        return new SelectOption(milestone, () => {
+        return new SelectOption(milestone.name, () => {
             return claimer(8, 0);
         });
     }
@@ -1028,37 +1028,14 @@ export class Player {
         if (this.canAfford(8) && !game.allMilestonesClaimed()) {
             const remainingMilestones = new OrOptions();
             remainingMilestones.title = "Select a milestone to claim";
-
-            if (!game.milestoneClaimed(Milestone.TERRAFORMER) && this.terraformRating >= 35) {
-                remainingMilestones.options.push(
-                    this.claimMilestone(Milestone.TERRAFORMER, game)
-                );
-            }
-            if (!game.milestoneClaimed(Milestone.MAYOR) && game.getSpaceCount(TileType.CITY, this) >= 3) {
-                remainingMilestones.options.push(
-                    this.claimMilestone(Milestone.MAYOR, game)
-                );
-            }
-            if (!game.milestoneClaimed(Milestone.GARDENER) && game.getSpaceCount(TileType.GREENERY, this) >= 3) {
-                remainingMilestones.options.push(
-                    this.claimMilestone(Milestone.GARDENER, game)
-                );
-            }
-            if (!game.milestoneClaimed(Milestone.BUILDER) && this.getTagCount(Tags.STEEL) >= 8) {
-                remainingMilestones.options.push(
-                    this.claimMilestone(Milestone.BUILDER, game)
-                );
-            }
-            if (!game.milestoneClaimed(Milestone.PLANNER) && this.cardsInHand.length >= 16) {
-                remainingMilestones.options.push(
-                    this.claimMilestone(Milestone.PLANNER, game)
-                );
-            }
+            remainingMilestones.options = ORIGINAL_MILESTONES
+                .filter((milestone: IMilestone) => milestone.canClaim(this, game))
+                .map((milestone: IMilestone) => this.claimMilestone(milestone, game));
             if (remainingMilestones.options.length > 1) {
                 action.options.push(remainingMilestones);
             } else if (remainingMilestones.options.length === 1) {
                 action.options.push(remainingMilestones.options[0]);
-            }
+            }    
         }
 
         if (this.canAfford(game.getAwardFundingCost()) && !game.allAwardsFunded()) {

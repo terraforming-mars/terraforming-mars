@@ -12,6 +12,7 @@ export class TransNeptuneProbe implements IProjectCard {
     public name: string = "Trans-Neptune Probe";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Gain 1 victory point";
+    public requirements: undefined;
     public description: string = "Exploring the Kupier belt objects";
     public canPlay(): boolean {
         return true;

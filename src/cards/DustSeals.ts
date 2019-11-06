@@ -12,6 +12,7 @@ export class DustSeals implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Dust Seals";
     public text: string = "Requires 3 or less ocean tiles. Gain 1 victory point.";
+    public requirements: string = "3 or less Oceans";
     public description: string = "Tight seals to keep micron-sized dust out of buildings, vehicles and suits.";
     public canPlay(player: Player, game: Game): boolean {
         return game.getOceansOnBoard() <= 3 + player.getRequirementsBonus(game);

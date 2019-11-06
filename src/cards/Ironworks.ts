@@ -13,6 +13,7 @@ export class Ironworks implements IActionCard, IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public actionText: string = "Spend 4 energy to gain 1 steel and increase oxygen 1 step";
     public text: string = "";
+    public requirements: undefined;
     public description: string = "Electrolysis of Martian soil yields both iron and oxygen, making it an important part of terraforming.";
     public canPlay(): boolean {
         return true;

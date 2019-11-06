@@ -11,6 +11,7 @@ export class SpecialDesign implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public name: string = "Special Design";
     public text: string = "The next card you play this generation is +2 or -2 in global requirements, your choice.";
+    public requirements: undefined;
     public description: string = "If it isn't feasible, then make it so.";
     public canPlay(): boolean {
         return true;

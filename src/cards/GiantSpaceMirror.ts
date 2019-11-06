@@ -11,6 +11,7 @@ export class GiantSpaceMirror implements IProjectCard {
     public name: string = "Giant Space Mirror";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your energy production 3 steps.";
+    public requirements: undefined;
     public description: string = "Square kilometers of extra sunlight reflected down to a receiving power plant.";
     public canPlay(): boolean {
         return true;

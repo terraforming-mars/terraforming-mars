@@ -11,6 +11,7 @@ export class VestaShipyard implements IProjectCard {
     public name: string = "Vesta Shipyard";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your titanium production 1 step";
+    public requirements: undefined;
     public description: string = "The pride of the asteroid belt";
     public canPlay(): boolean {
         return true;

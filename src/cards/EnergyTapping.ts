@@ -12,6 +12,7 @@ export class EnergyTapping implements IProjectCard {
     public name: string = "Energy Tapping";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease any energy production 1 step and increase your own 1 step. Lose 1 victory point.";
+    public requirements: undefined;
     public description: string = "They need it. But we need it more.";
     public canPlay(): boolean {
         return true;

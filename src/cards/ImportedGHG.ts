@@ -11,6 +11,7 @@ export class ImportedGHG implements IProjectCard {
     public name: string = "Imported GHG";
     public cardType: CardType = CardType.EVENT;
     public text: string = "Increase your heat production 1 step and gain 3 heat";
+    public requirements: undefined;
     public description: string = "Greenhouse gases (GHG) to retain the heat.";
     public canPlay(): boolean {
         return true;

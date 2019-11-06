@@ -12,6 +12,7 @@ export class TerraformingGanymede implements IProjectCard {
     public name: string = "Terraforming Ganymede";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Raise your terraform rating 1 step for each jovian tag you have, including this. Gain 2 victory points.";
+    public requirements: undefined;
     public description: string = "Why stop at Mars?";
     public canPlay(): boolean {
         return true;

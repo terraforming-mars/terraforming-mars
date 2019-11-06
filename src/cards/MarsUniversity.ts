@@ -15,6 +15,7 @@ export class MarsUniversity implements IProjectCard {
     public name: string = "Mars University";
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "When you play a science tag, including this, you may discard a card from hand to draw a card. Gain 1 victory point.";
+    public requirements: undefined;
     public description: string = "A major step towards understanding Mars.";
     public canPlay(): boolean {
         return true;

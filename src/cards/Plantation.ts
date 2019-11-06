@@ -13,6 +13,7 @@ export class Plantation implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT];
     public name: string = "Plantation";
     public text: string = "Requires 2 science tags. Place a greenery tile and raise oxygen 1 step.";
+    public requirements: string = "2 Science";
     public description: string = "By focusing on a limited area, helpful measures can be taken to improve local conditions for plant life";
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 2;

@@ -10,6 +10,7 @@ import { SelectAmount } from "../inputs/SelectAmount";
 export class PowerInfrastructure implements IActionCard, IProjectCard {
     public name: string = "Power Infrastructure";
     public text: string = "";
+    public requirements: undefined;
     public description: string = "Efficiency through flexibility."
     public cardType: CardType = CardType.ACTIVE;
     public cost: number = 4;

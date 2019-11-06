@@ -26,6 +26,7 @@ export class AICentral implements IActionCard, IProjectCard {
     public name: string = "AI Central";
     public actionText: string = "Draw 2 cards";
     public text: string = "Requires 3 science tags to play. Decrease your energy production 1 step. Gain 1 victory point.";
+    public requirements: string = "3 Science";
     public description: string = "\"42\"";
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 3 && player.energyProduction >= 1;
@@ -54,6 +55,7 @@ export class AcquiredCompany implements IProjectCard {
     public name: string = "Acquired Company";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your mega credit production 3 steps";
+    public requirements: undefined;
     public description: string = "This interplanetary company will surely pay off";
     public canPlay(): boolean {
         return true;
@@ -71,6 +73,7 @@ export class AdaptationTechnology implements IProjectCard {
     public name: string = "Adaptation Technology";
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "Your global requirements are +2 or -2 steps, your choice in each case";
+    public requirements: undefined;
     public description: string = "Pushing the limits of the possible";
     public canPlay(): boolean {
         return true;
@@ -91,6 +94,7 @@ export class AdaptedLichen implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Adapted Lichen";
     public text: string = "Increase your plant production 1 step";
+    public requirements: undefined;
     public description: string = "Suitable even for early terraforming";
     public canPlay(): boolean {
         return true;
@@ -108,6 +112,7 @@ export class AdvancedAlloys implements IProjectCard {
     public name: string = "Advanced Alloys";
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "Each titanium you have is worth 1 mega credit extra. Each steel you have is worth 1 mega credit extra.";
+    public requirements: undefined;
     public description: string = "The latest advances in metallargy give you an edge in the competition.";
     public canPlay(): boolean {
         return true;
@@ -126,6 +131,7 @@ export class AdvancedEcosystems implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Advanced Ecosystems";
     public text: string = "Requires a plant tag, a microbe tag, and an animal tag. Gain 3 victory points.";
+    public requirements: undefined;
     public description: string = "Constructing functional, dynamic ecosystems requires many ingredients";
     public canPlay(): boolean {
         return true;
@@ -148,6 +154,7 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
     public name: string = "Aerobraked Ammonia Asteroid";
     public cardType: CardType = CardType.EVENT;
     public text: string = "Add 2 microbes to ANOTHER card. Increase your heat production 3 steps and your plant production 1 step.";
+    public requirements: undefined;
     public description: string = "Ammonia is a greenhouse gas, as well as being a convenient nitrogen source for organisms.";
     public canPlay(): boolean {
         return true;
@@ -170,6 +177,7 @@ export class AntiGravityTechnology implements IProjectCard {
     public name: string = "Anti-Gravity Technology";
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "Requires 7 science tags, when you play a card, you pay 2 mega credit less for it.";
+    public requirements: string = "7 Science";
     public description: string = "Finally successful, anti-gravity will revolutionize everything, from households to industry and space travel.";
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 7;
@@ -190,6 +198,7 @@ export class Algae implements IProjectCard {
     public name: string = "Algae";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires 5 ocean tiles. Gain 1 plant and increase your plant production 2 steps.";
+    public requirements: string = "5 Oceans";
     public description: string = "Basic photosynthesizers in aqueous environments";
     public canPlay(player: Player, game: Game): boolean {
         return game.getOceansOnBoard() >= 5 - player.getRequirementsBonus(game);
@@ -210,6 +219,7 @@ export class Ants implements IActionCard, IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public actionText: string = "Remove 1 microbe from any card to add 1 to this card.";
     public text: string = "Requires 4% oxygen. Gain 1 victory point per 2 microbes on this card.";
+    public requirements: string = "4% Oxygen";
     public description: string = "Although an important part of many ecosystems, ants can also be detrimental to other organisms.";
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);
@@ -251,6 +261,7 @@ export class AquiferPumping implements IActionCard, IProjectCard {
     public name: string = "Aquifer Pumping";
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "";
+    public requirements: undefined;
     public description: string = "Underground water reservoirs may be tapped in a controlled manner, to safely build up oceans to the desired level";
     public canPlay(): boolean {
         return true;
@@ -295,6 +306,7 @@ export class ArchaeBacteria implements IProjectCard {
     public name: string = "ArchaeBacteria";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "It must be -18C or colder. Increase your plant production 1 step.";
+    public requirements: string = "-18C or Colder";
     public description: string = "Photosynthesizing bacteria specializing in extreme environments.";
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() <= -18 + (player.getRequirementsBonus(game) * 2);
@@ -312,6 +324,7 @@ export class ArcticAlgae implements IProjectCard {
     public name: string = "Arctic Algae";
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "It must be -12C or colder to play. Gain 1 plant. When anyone places an ocean tile, gain 2 plants.";
+    public requirements: string = "-12C or Colder";
     public description: string = "Suitable for freezing temperatures.";
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() <= -12 + (player.getRequirementsBonus(game) * 2);
@@ -334,6 +347,7 @@ export class ArtificialLake implements IProjectCard {
     public name: string = "Artificial Lake";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires -6C or warmer. Place 1 ocean tile on an area not reserved for ocean. Gain 1 victory point.";
+    public requirements: string = "-6C or Warmer";
     public description: string = "Landscaping is as natural as terraforming.";
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() >= -6 - (player.getRequirementsBonus(game) * 2);
@@ -354,6 +368,7 @@ export class ArtificialPhotosynthesis implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Artficial Photosynthesis";
     public text: string = "Increase your plant production 1 step or your energy production 2 steps.";
+    public requirements: undefined;
     public description: string = "Artificial photosynthesis was achieved chemically by prof Akermark et. al. in 2021. Its application to terraforming remains to be seen.";
     public canPlay(): boolean {
         return true;
@@ -379,6 +394,7 @@ export class Asteroid implements IProjectCard {
     public name: string = "Asteroid";
     public cardType: CardType = CardType.EVENT;
     public text: string = "Raise temperature 1 step and gain 2 titanium. Remove up to 3 plants from any player";
+    public requirements: undefined;
     public description: string = "What are those plants doing in our impact zone?";
     public canPlay(): boolean {
         return true;
@@ -403,6 +419,7 @@ export class AsteroidMining implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Asteroid Mining";
     public text: string = "Increase your titanium production 2 steps. Gain 2 victory points.";
+    public requirements: undefined;
     public description: string = "Where gravity is low and rare minerals abound.";
     public canPlay(): boolean {
         return true;
@@ -421,6 +438,7 @@ export class AsteroidMiningConsortium implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Asteroid Mining Consortium";
     public text: string = "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step. Gain 1 victory point.";
+    public requirements: string = "Titanium Production";
     public description: string = "Your hold on the titanium market tightens.";
     public canPlay(player: Player): boolean {
         return player.titaniumProduction >= 1;
@@ -446,6 +464,7 @@ export class BeamFromAThoriumAsteroid implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Beam From A Thorium Asteroid";
     public text: string = "Requires a jovian tag. Increase your heat production and energy production 3 steps each. Gain 1 victory point.";
+    public requirements: string = "Jovian";
     public description: string = "Nuclear energy is safe, especially when located on a remote asteroid rich in radioactive elements.";
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.JOVIAN) >= 1;
@@ -468,6 +487,7 @@ export class BigAsteroid implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public name: string = "Big Asteroid";
     public text: string = "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 plants from any player.";
+    public requirements: undefined;
     public description: string = "There are many unpopulated areas to crash it on";
     public canPlay(): boolean {
         return true;

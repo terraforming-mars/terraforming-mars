@@ -11,6 +11,7 @@ export class ResearchCoordination implements IProjectCard {
     public name: string = "Research Coordination";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "After being played, when you perform an action, the wildcard tag counts as any tag of your choice.";
+    public requirements: undefined;
     public description: string = "By combining different competences, many projects may benefit in new ways";
     public canPlay(): boolean {
         return true;

@@ -11,6 +11,7 @@ export class Grass implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Grass";
     public text: string = "Requires -16C or warmer. Increase your plant production 1 step. Gain 3 plants.";
+    public requirements: string = "-16C or Warmer";
     public description: string = "Taking root in every crevice and patch of soil.";
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() >= -16 - (2 * player.getRequirementsBonus(game));

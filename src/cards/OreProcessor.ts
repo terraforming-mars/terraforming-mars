@@ -12,6 +12,7 @@ export class OreProcessor implements IActionCard, IProjectCard {
     public name: string = "Ore Processor";
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "";
+    public requirements: undefined;
     public actionText: string = "Spend 4 energy to gain 1 titanium and increase oxygen 1 step";
     public description: string = "Processing ore";
     public canPlay(): boolean {

@@ -13,6 +13,7 @@ export class PermafrostExtraction implements IProjectCard {
     public cost: number = 8;
     public name: string = "Permafrost Extraction";
     public text: string = "Requires -8C or warmer. Place 1 ocean tile.";
+    public requirements: string = "-8C or Warmer";
     public description: string = "Thawing the subsurface";
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() >= -8 - (2 * player.getRequirementsBonus(game));

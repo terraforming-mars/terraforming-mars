@@ -11,6 +11,7 @@ export class BribedCommitte implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public name: string = "Bribed Committe";
     public text: string = "Raise your terraform rating 2 steps. Lose 2 victory points.";
+    public requirements: undefined;
     public description: string = "Influencing the people in power.";
     public canPlay(): boolean {
         return true;

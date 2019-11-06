@@ -11,6 +11,7 @@ export class DesignedMicroOrganisms implements IProjectCard {
     public name: string = "Designed Micro-organisms";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "It must be -14C or colder. Increase your plant production 2 steps";
+    public requirements: string = "-14C or Colder";
     public description: string = "Specializing in extremely cold conditions";
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() <= -14 + (2 * player.getRequirementsBonus(game));

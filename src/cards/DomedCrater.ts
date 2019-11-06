@@ -14,6 +14,7 @@ export class DomedCrater implements IProjectCard {
     public name: string = "Domed Crater";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Oxygen must be 7% or less. Gain 3 plants and place a city tile. Decrease your energy production 1 step and increase mega credit production 3 steps. Gain a victory point.";
+    public requirements: string = "7% or less Oxygen";
     public description: string = "A spacious area for a great city.";
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() <= 7 - player.getRequirementsBonus(game) && player.energyProduction >= 1;

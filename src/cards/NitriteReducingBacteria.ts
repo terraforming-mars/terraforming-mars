@@ -15,6 +15,7 @@ export class NitriteReducingBacteria implements IActionCard, IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Nitrite Reducing Bacteria";
     public text: string = "Add 3 microbes to this card.";
+    public requirements: undefined;
     public actionText: string = "Add 1 microbe to this card, or remove 3 microbes to increase your terraform rating 1 step.";
     public description: string = "Making use of the nitrites in the ground to release nitrogen into the atmosphere.";
     public canPlay(): boolean {

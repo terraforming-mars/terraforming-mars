@@ -15,6 +15,7 @@ export class Sabotage implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public name: string = "Sabotage";
     public text: string = "Remove up to 3 titanium from any player, or 4 steel, or 7 mega credit.";
+    public requirements: undefined;
     public description: string = "Nobody will know who did it.";
     public canPlay(): boolean {
         return true;

@@ -10,6 +10,7 @@ export class EarlySettlement extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL, Tags.CITY];
     public name: string = "Early Settlement";
     public text: string = "Place a city tile. Increase your plant production 1 step.";
+    public requirements: undefined;
     public description: string = "The first Martians wrote their story of civilisation shortly after the terraforming anouncement";
     public play(player: Player, game: Game) {  
         player.plantProduction++;  	

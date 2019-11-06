@@ -12,6 +12,7 @@ export class MiningExpedition implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public name: string = "Mining Expedition";
     public text: string = "Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel.";
+    public requirements: undefined;
     public description: string = "Ruthlessly excavating rich areas.";
     public canPlay(): boolean {
         return true;

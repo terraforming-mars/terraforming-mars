@@ -11,6 +11,7 @@ export class NitrogenRichAsteroid implements IProjectCard {
     public name: string = "Nitrogen-Rich Asteroid";
     public cardType: CardType = CardType.EVENT;
     public text: string = "Raise your terraform rating 2 steps and temperature 1 step. Increase your plant production 1 step, or 4 steps if you have 3 plant tags.";
+    public requirements: undefined;
     public description: string = "Adding nitrogen to mars will both thicken the atmosphere with N2 and provide fertilizer for plants.";
     public canPlay(): boolean {
         return true;

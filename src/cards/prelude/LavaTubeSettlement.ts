@@ -15,6 +15,7 @@ export class LavaTubeSettlement implements IProjectCard {
     public name: string = "Lava Tube Settlement";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease your energy production 1 step and increase your MC production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.";
+    public requirements: undefined;
     public description: string = "Giant lava tubes can provide protection for early settlement on Mars";
 
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {

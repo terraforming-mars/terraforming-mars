@@ -11,6 +11,7 @@ export class DeepWellHeating implements IProjectCard {
     public name: string = "Deep Well Heating";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your energy production 1 step. Increase temperature 1 step";
+    public requirements: undefined;
     public description: string = "Digging deep to find heat from the core";
     public canPlay(): boolean {
         return true;

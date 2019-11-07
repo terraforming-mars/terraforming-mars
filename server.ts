@@ -213,7 +213,7 @@ function getPlayer(player: Player, game: Game): string {
         corporationCard: player.corporationCard ? player.corporationCard.name : undefined,
         energy: player.energy,
         energyProduction: player.energyProduction,
-        fundedAwards: game.fundedAwards.map((fundedAward) => { return { player: fundedAward.player.id, award: fundedAward.award.name +" " } }),
+        fundedAwards: game.fundedAwards.map((fundedAward) => { return { player: fundedAward.player.id, award: fundedAward.award.name } }),
         generation: game.getGeneration(),
         heat: player.heat,
         heatProduction: player.heatProduction,

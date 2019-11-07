@@ -4,7 +4,7 @@ import { Game } from "../Game";
 
 export class Planner implements IMilestone {
     public name: string = "Planner";
-    public canClaim(player: Player, game: Game): boolean {
-        return !game.milestoneClaimed(this) && player.cardsInHand.length >= 16;
+    public canClaim(player: Player, _game: Game): boolean {
+        return player.cardsInHand.length >= 16;
     }   
 }

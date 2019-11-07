@@ -6,6 +6,6 @@ import { TileType } from "../TileType";
 export class Gardener implements IMilestone {
     public name: string = "Gardener";
     public canClaim(player: Player, game: Game): boolean {
-        return !game.milestoneClaimed(this) && game.getSpaceCount(TileType.GREENERY, player) >= 3;
+        return game.getSpaceCount(TileType.GREENERY, player) >= 3;
     }   
 }

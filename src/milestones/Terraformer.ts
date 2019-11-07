@@ -4,7 +4,7 @@ import { Game } from "../Game";
 
 export class Terraformer implements IMilestone {
     public name: string = "Terraformer";
-    public canClaim(player: Player, game: Game): boolean {
-        return !game.milestoneClaimed(this) && player.terraformRating >= 35;
+    public canClaim(player: Player, _game: Game): boolean {
+        return player.terraformRating >= 35;
     }   
 }

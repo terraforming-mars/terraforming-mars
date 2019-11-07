@@ -5,7 +5,7 @@ import { Tags } from "../cards/Tags";
 
 export class Builder implements IMilestone {
     public name: string = "Builder";
-    public canClaim(player: Player, game: Game): boolean {
-        return !game.milestoneClaimed(this) && player.getTagCount(Tags.STEEL) >= 8
+    public canClaim(player: Player, _game: Game): boolean {
+        return player.getTagCount(Tags.STEEL) >= 8;
     }   
 }

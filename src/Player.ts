@@ -1029,7 +1029,7 @@ export class Player {
             const remainingMilestones = new OrOptions();
             remainingMilestones.title = "Select a milestone to claim";
             remainingMilestones.options = ORIGINAL_MILESTONES
-                .filter((milestone: IMilestone) => milestone.canClaim(this, game))
+                .filter((milestone: IMilestone) => !game.milestoneClaimed(milestone) && milestone.canClaim(this, game)) 
                 .map((milestone: IMilestone) => this.claimMilestone(milestone, game));
             if (remainingMilestones.options.length > 1) {
                 action.options.push(remainingMilestones);

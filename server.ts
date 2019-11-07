@@ -208,7 +208,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 function getPlayer(player: Player, game: Game): string {
     const output = {
         cardsInHand: getCards(player, player.cardsInHand),
-        claimedMilestones: game.claimedMilestones.map((claimedMilestone) => { return { player: claimedMilestone.player.id, milestone: claimedMilestone.milestone.name +" " } }),
+        claimedMilestones: game.claimedMilestones.map((claimedMilestone) => { return { player: claimedMilestone.player.id, milestone: claimedMilestone.milestone.name } }),
         color: player.color,
         corporationCard: player.corporationCard ? player.corporationCard.name : undefined,
         energy: player.energy,

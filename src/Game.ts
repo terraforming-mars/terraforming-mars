@@ -17,6 +17,7 @@ import { PlayerInput } from "./PlayerInput";
 import { Phase } from "./Phase";
 import { ClaimedMilestone } from "./ClaimedMilestone";
 import { FundedAward } from "./FundedAward";
+import { IMilestone } from "./milestones/IMilestone";
 import { ResourceType } from "./ResourceType";
 import * as constants from "./constants";
 import { Color } from "./Color";
@@ -24,7 +25,6 @@ import { ALL_CORPORATION_CARDS } from "./Dealer";
 import { ALL_PRELUDE_CORPORATIONS } from "./Dealer";
 import { IAward } from "./awards/IAward";
 import { Tags } from "./cards/Tags";
-import { IMilestone } from "./milestones/IMilestone";
 
 export class Game {
     public activePlayer: Player;

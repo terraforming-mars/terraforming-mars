@@ -12,6 +12,7 @@ export class MartianSurvey implements IProjectCard {
     public name: string = "Martian Survey";
     public cardType: CardType = CardType.EVENT;
     public text: string = "Oxygen must be 4% or lower. Draw two cards.";
+    public requirements: string = "4% or less Oxygen";
     public description: string = "A thorough investigation of the geology of Mars";
     public canPlay(player: Player, game: Game): boolean {
 		return game.getOxygenLevel() <= 4 + player.getRequirementsBonus(game);

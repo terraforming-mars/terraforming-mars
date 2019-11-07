@@ -8,6 +8,7 @@ export class Biofuels extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.MICROBES];
     public name: string = "Biofuels";
     public text: string = "Increase your energy and plant production 1 step. Gain 2 plants.";
+    public requirements: undefined;
     public description: string = "Organic production of fuels and fertilizers";
     public play(player: Player, _game: Game) {     
             player.energyProduction++;

@@ -15,6 +15,7 @@ export class Comet implements IProjectCard {
     public name: string = "Comet";
     public cardType: CardType = CardType.EVENT;
     public text: string = "Raise temperature 1 step and place an ocean tile. Remove up to 3 plants from any player.";
+    public requirements: undefined;
     public description: string = "Prepare to be catered!";
     public canPlay(): boolean {
         return true;

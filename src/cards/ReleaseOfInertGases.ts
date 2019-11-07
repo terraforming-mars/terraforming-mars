@@ -11,6 +11,7 @@ export class ReleaseOfInertGases implements IProjectCard {
     public name: string = "Release of Inert Gases";
     public cardType: CardType = CardType.EVENT;
     public text: string = "Raise your terraform rating 2 steps.";
+    public requirements: undefined;
     public description: string = "We need some nitrogen and other inert gases to increase atmospheric pressure. Let's stay away from helium, though.";
     public canPlay(): boolean {
         return true;

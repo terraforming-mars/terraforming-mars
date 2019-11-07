@@ -12,6 +12,7 @@ export class GreatEscarpmentConsortium implements IProjectCard {
     public name: string = "Great Escarpment Consortium";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.";
+    public requirements: string = "Steel Production";
     public description: string = "The border between the northern plains and the southern highlands is rich in minerals. Control it, and you will control the global mining business.";
     public canPlay(player: Player): boolean {
         return player.steelProduction > 0;

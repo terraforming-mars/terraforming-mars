@@ -11,6 +11,7 @@ export class FusionPower implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Fusion Power";
     public text: string = "Requires 2 power tags. Increase your energy production 3 steps";
+    public requirements: string = "2 Power";
     public description: string = "State of the art technology";
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.ENERGY) >= 2;

@@ -7,5 +7,4 @@ export abstract class PreludeCard  {
     public canPlay(_player: Player): boolean {
         return true;
     }
-
 }

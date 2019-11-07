@@ -12,6 +12,7 @@ export class Hackers implements IProjectCard {
     public name: string = "Hackers";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease your energy production 1 step and any mega credit production 2 steps. Increase your mega credit production 2 steps. Lose 1 victory point.";
+    public requirements: undefined;
     public description: string = "Very unethical, very illegal, very lucrative.";
     public canPlay(player: Player): boolean {
         return player.energyProduction >= 1;

@@ -14,6 +14,7 @@ export class ImmigrantCity implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Immigrant City";
     public text: string = "Decrease your energy production 1 step and decrease your mega credit production 2 steps. Place a city tile. Each time a city tile is placed, including this, increase your mega credit production 1 step.";
+    public requirements: undefined;
     public description: string = "Taking care of immigrants is costly, but will begin to pay off when they start working for you in the growing society.";
     public canPlay(player: Player): boolean {
         return player.energyProduction >= 1 && player.megaCreditProduction >= -3;

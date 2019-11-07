@@ -11,6 +11,7 @@ export class GeothermalPower implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Geothermal Power";
     public text: string = "Increase your energy production 2 steps.";
+    public requirements: undefined;
     public description: string = "Utilizing heat from the core through the cracks in the crust.";
     public canPlay(): boolean {
         return true;

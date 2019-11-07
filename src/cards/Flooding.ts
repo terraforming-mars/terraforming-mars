@@ -16,6 +16,7 @@ export class Flooding implements IProjectCard {
     public name: string = "Flooding";
     public tags: Array<Tags> = [];
     public text: string = "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 MEGA CREDITS FROM THE OWNER OF ONE OF THOSE TILES. Lose 1 victory point.";
+    public requirements: undefined;
     public description: string = "Look out for tsunamis";
     public canPlay(): boolean {
         return true;

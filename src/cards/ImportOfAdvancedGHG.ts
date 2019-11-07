@@ -11,6 +11,7 @@ export class ImportOfAdvancedGHG implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
     public name: string = "Import of Advanced GHG";
     public text: string = "Increase your heat production 2 steps.";
+    public requirements: undefined;
     public description: string = "Greenhouse gases (GHG) with improved effect.";
     public canPlay(): boolean {
         return true;

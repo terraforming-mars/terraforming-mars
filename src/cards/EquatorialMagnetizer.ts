@@ -12,6 +12,7 @@ export class EquatorialMagnetizer implements IActionCard, IProjectCard {
     public name: string = "Equatorial Magnetizer";
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "";
+    public requirements: undefined;
     public actionText: string = "Decrease your energy production 1 step to increase your terraform rating 1 step.";
     public description: string = "Super-conducting wires encircling the globe to create a magnetic field.";
     public canPlay(): boolean {

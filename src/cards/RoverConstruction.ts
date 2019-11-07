@@ -13,6 +13,7 @@ export class RoverConstruction implements IProjectCard {
     public name: string = "Rover Construction";
     public cardType: CardType = CardType.ACTIVE;
     public text: string = "Gain 1 victory point. When any city tile is placed, gain 2 mega credit.";
+    public requirements: undefined;
     public description: string = "Providing safe transport vehicles.";
     public canPlay(): boolean {
         return true;

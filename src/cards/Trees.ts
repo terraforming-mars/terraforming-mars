@@ -12,6 +12,7 @@ export class Trees implements IProjectCard {
     public name: string = "Trees";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Requires -4C or warmer. Increase your plant production 3 steps. Gain 1 plant. Gain 1 victory point";
+    public requirements: string = "-4C or warmer";
     public description: string = "Providing fruits, wood, and new habitats";
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() >= -4 - (2 * player.getRequirementsBonus(game));

@@ -11,6 +11,7 @@ export class PowerPlant implements IProjectCard {
     public name: string = "Power Plant";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your energy production 1 step";
+    public requirements: undefined;
     public description: string = "Standard equipment, normal output";
     public canPlay(): boolean {
         return true;

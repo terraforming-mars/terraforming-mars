@@ -11,6 +11,7 @@ export class GHGFactories implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "GHG Factories";
     public text: string = "Decrease your energy production 1 step and increase your heat production 4 steps";
+    public requirements: undefined;
     public description: string = "Synthesizing powerful greenhouse gases (GHGs), releasing them into the atmosphere";
     public canPlay(player: Player): boolean {
         return player.energyProduction >= 1;

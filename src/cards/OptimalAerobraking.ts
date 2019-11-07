@@ -11,6 +11,7 @@ export class OptimalAerobraking implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Optimal Aerobraking";
     public text: string = "When you play a space event, you gain 3 mega credit and 3 heat.";
+    public requirements: undefined;
     public description: string = "Perfecting the art of ballistic and material analysis can increase efficiency and save money.";
     public canPlay(): boolean {
         return true;

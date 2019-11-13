@@ -21,7 +21,6 @@ import {SelectOption} from './inputs/SelectOption';
 import {SelectPlayer} from './inputs/SelectPlayer';
 import {IMilestone} from './milestones/IMilestone';
 import {ORIGINAL_MILESTONES} from './milestones/Milestones';
-import {TileType} from './TileType';
 import {StandardProjectType} from './StandardProjectType';
 import * as constants from './constants';
 import {ProtectedHabitats} from './cards/ProtectedHabitats';
@@ -1241,15 +1240,20 @@ export class Player {
 
         if (this.canAfford(8) && !game.allMilestonesClaimed()) {
             const remainingMilestones = new OrOptions();
-            remainingMilestones.title = "Select a milestone to claim";
+            remainingMilestones.title = 'Select a milestone to claim';
             remainingMilestones.options = ORIGINAL_MILESTONES
-                .filter((milestone: IMilestone) => !game.milestoneClaimed(milestone) && milestone.canClaim(this, game)) 
-                .map((milestone: IMilestone) => this.claimMilestone(milestone, game));
+                .filter(
+                    (milestone: IMilestone) =>
+                        !game.milestoneClaimed(milestone) &&
+                        milestone.canClaim(this, game))
+                .map(
+                    (milestone: IMilestone) =>
+                        this.claimMilestone(milestone, game));
             if (remainingMilestones.options.length > 1) {
                 action.options.push(remainingMilestones);
             } else if (remainingMilestones.options.length === 1) {
                 action.options.push(remainingMilestones.options[0]);
-            }    
+            }
         }
 
         if (

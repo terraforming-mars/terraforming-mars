@@ -12,6 +12,7 @@ export class Insulation implements IProjectCard {
     public name: string = "Insulation";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease your heat production any number of steps and increase your mega credit production the same number of steps";
+    public requirements: undefined;
     public description: string = "Better insulation means lower energy spending";
     public canPlay(): boolean {
         return true;

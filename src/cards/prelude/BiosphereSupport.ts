@@ -8,6 +8,7 @@ export class BiosphereSupport extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT];
     public name: string = "Biosphere Support";
     public text: string = "Decrease MC production 1 step and increase plant production 2 steps.";
+    public requirements: undefined;
     public description: string = "The greening of the red planet has begun";
     public canPlay(player: Player): boolean {
         return player.megaCreditProduction >= -4;

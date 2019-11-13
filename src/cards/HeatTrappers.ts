@@ -12,6 +12,7 @@ export class HeatTrappers implements IProjectCard {
     public name: string = "Heat Trappers";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease any heat production 2 steps and increase your energy production 1 step. Lose 1 victory point.";
+    public requirements: undefined;
     public description: string = "Utilizing temperature gradients for energy production";
     public canPlay(): boolean {
         return true;

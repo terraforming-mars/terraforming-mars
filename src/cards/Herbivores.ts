@@ -17,6 +17,7 @@ export class Herbivores implements IProjectCard {
     public name: string = "Herbivores";
     public resourceType: ResourceType = ResourceType.ANIMAL;
     public text: string = "Requires 8% oxygen. Add 1 animal to this card. Decrease any plant production 1 step. When you place a greenery tile, add an animal to this card. Gain 1 VP per 2 animals on this card.";
+    public requirements: string = "8% Oxygen";
     public description: string = "Inhabiting the green hills of Mars";
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 8 - player.getRequirementsBonus(game);

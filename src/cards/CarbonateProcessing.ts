@@ -11,6 +11,7 @@ export class CarbonateProcessing implements IProjectCard {
     public name: string = "Carbonate Processing";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease your energy production 1 step and increase your heat production 3 steps.";
+    public requirements: undefined;
     public description: string = "Common minerals can be converted into carbon dioxide that increases the greenhouse effect.";
     public canPlay(player: Player): boolean {
         return player.energyProduction >= 1;

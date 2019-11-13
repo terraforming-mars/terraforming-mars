@@ -25,6 +25,7 @@ export interface ICard {
     tags: Array<Tags>;
     text: string;
     description: string;
+    requirements: string | undefined;
     play: (player: Player, game: Game) => PlayerInput | undefined;
     actionText?: string;
     action?: (player: Player, game: Game) => AndOptions | SelectAmount | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;

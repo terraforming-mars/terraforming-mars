@@ -17,6 +17,7 @@ export class Fish implements IActionCard, IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public actionText: string = "Add 1 animal to this card";
     public text: string = "Requires +2C or warmer. Decrease any plant production 1 step. Gain 1 victory point for each animal on this card.";
+    public requirements: string = "+2C or Warmer";
     public description: string = "Martian barracudas? Why not!";
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() >= 2 - (player.getRequirementsBonus(game) * 2);

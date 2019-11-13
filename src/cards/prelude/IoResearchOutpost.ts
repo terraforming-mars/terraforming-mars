@@ -8,11 +8,12 @@ export class IoResearchOutpost extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN];
     public name: string = "Io Research Outpost";
     public text: string = "Increase your titanium production 1 step. Draw 1 card.";
+    public requirements: undefined;
     public description: string = "Exploring the most volcanic place of the solar system";
     public play(player: Player, game: Game) {     
-			player.titaniumProduction++;
-			player.cardsInHand.push(game.dealer.dealCard());
-            return undefined;
+        player.titaniumProduction++;
+        player.cardsInHand.push(game.dealer.dealCard());
+        return undefined;
     }
 }
 

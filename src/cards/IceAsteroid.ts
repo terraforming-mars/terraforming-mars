@@ -13,6 +13,7 @@ export class IceAsteroid implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public name: string = "Ice Asteroid";
     public text: string = "Place 2 ocean tiles";
+    public requirements: undefined;
     public description: string = "We need its water down here";
     public canPlay(): boolean {
         return true;

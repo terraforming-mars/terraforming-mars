@@ -14,6 +14,7 @@ export class ProtectedValley implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];
     public name: string = "Protected Valley";
     public text: string = "Increase your mega credit production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.";
+    public requirements: undefined;
     public description: string = "A fertile valley with higher air density and humidity, but in need of protection when the oceans rise.";
     public canPlay(): boolean {
         return true;

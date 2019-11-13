@@ -11,6 +11,7 @@ export class EnergySaving implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY];
     public name: string = "Energy Saving";
     public text: string = "Increase your energy production 1 step for each city tile in play.";
+    public requirements: undefined;
     public description: string = "Minimizing urban energy spending";
     public canPlay(): boolean {
         return true;

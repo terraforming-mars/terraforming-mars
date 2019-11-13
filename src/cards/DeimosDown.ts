@@ -12,6 +12,7 @@ export class DeimosDown implements IProjectCard {
     public name: string = "Deimos Down";
     public cardType: CardType = CardType.EVENT;
     public text: string = "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.";
+    public requirements: undefined;
     public description: string = "We don't use that moon anyway";
     public canPlay(): boolean {
         return true;

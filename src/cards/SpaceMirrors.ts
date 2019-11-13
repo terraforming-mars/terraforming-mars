@@ -15,6 +15,7 @@ export class SpaceMirrors implements IActionCard, IProjectCard {
     public actionText: string = "Spend 7 mega credit to increase your energy production 1 step.";
     public description: string = "Ultrathin mirrors reflecting sunlight down to receivers on the surface.";
     public text: string = "";
+    public requirements: undefined;
     public canPlay(): boolean {
         return true;
     }

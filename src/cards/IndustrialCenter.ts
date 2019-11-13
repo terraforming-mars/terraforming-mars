@@ -17,6 +17,7 @@ export class IndustrialCenter implements IActionCard, IProjectCard {
     public name: string = "Industrial Center";
     public actionText: string = "Spend 7 mega credit to increase your steel production 1 step.";
     public text: string = "Place a special tile adjacent to a city tile.";
+    public requirements: undefined;
     public description: string = "Assigned to heavy industry, this area is not the nicest place on Mars";
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.getAvailableSpacesOnLand(player)

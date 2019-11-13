@@ -15,6 +15,7 @@ export class NuclearZone implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Place a special tile and raise temperature 2 steps. Lose 2 victory points.";
     public description: string = "Detonating obsolete nuclear weapons from Earth is an efficient method for raising the temperature.";
+    public requirements: undefined;
     public canPlay(): boolean {
         return true;
     }

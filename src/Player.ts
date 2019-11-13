@@ -1,4 +1,3 @@
-
 import {IProjectCard} from './cards/IProjectCard';
 import {CorporationCard} from './cards/corporation/CorporationCard';
 import {SaturnSystems} from './cards/corporation/SaturnSystems';
@@ -20,8 +19,8 @@ import {SelectHowToPay} from './inputs/SelectHowToPay';
 import {SelectAmount} from './inputs/SelectAmount';
 import {SelectOption} from './inputs/SelectOption';
 import {SelectPlayer} from './inputs/SelectPlayer';
-import {Milestone} from './Milestone';
-import {TileType} from './TileType';
+import {IMilestone} from './milestones/IMilestone';
+import {ORIGINAL_MILESTONES} from './milestones/Milestones';
 import {StandardProjectType} from './StandardProjectType';
 import * as constants from './constants';
 import {ProtectedHabitats} from './cards/ProtectedHabitats';
@@ -988,7 +987,7 @@ export class Player {
     }
 
     private claimMilestone(
-        milestone: Milestone,
+        milestone: IMilestone,
         game: Game): SelectHowToPay | SelectOption {
         const claimer = (megaCredits: number, heat: number) => {
             this.victoryPoints += 5;
@@ -1004,7 +1003,7 @@ export class Player {
         };
         if (this.canUseHeatAsMegaCredits && this.heat > 0) {
             return new SelectHowToPay(
-                'Select how to pay ' + milestone,
+                'Select how to pay ' + milestone.name,
                 false,
                 false,
                 true,
@@ -1019,7 +1018,7 @@ export class Player {
                 }
             );
         }
-        return new SelectOption(milestone, () => {
+        return new SelectOption(milestone.name, () => {
             return claimer(8, 0);
         });
     }
@@ -1242,42 +1241,14 @@ export class Player {
         if (this.canAfford(8) && !game.allMilestonesClaimed()) {
             const remainingMilestones = new OrOptions();
             remainingMilestones.title = 'Select a milestone to claim';
-
-            if (
-                !game.milestoneClaimed(Milestone.TERRAFORMER) &&
-                this.terraformRating >= 35) {
-                remainingMilestones.options.push(
-                    this.claimMilestone(Milestone.TERRAFORMER, game)
-                );
-            }
-            if (
-                !game.milestoneClaimed(Milestone.MAYOR) &&
-                game.getSpaceCount(TileType.CITY, this) >= 3) {
-                remainingMilestones.options.push(
-                    this.claimMilestone(Milestone.MAYOR, game)
-                );
-            }
-            if (
-                !game.milestoneClaimed(Milestone.GARDENER) &&
-                game.getSpaceCount(TileType.GREENERY, this) >= 3) {
-                remainingMilestones.options.push(
-                    this.claimMilestone(Milestone.GARDENER, game)
-                );
-            }
-            if (
-                !game.milestoneClaimed(Milestone.BUILDER) &&
-                this.getTagCount(Tags.STEEL) >= 8) {
-                remainingMilestones.options.push(
-                    this.claimMilestone(Milestone.BUILDER, game)
-                );
-            }
-            if (
-                !game.milestoneClaimed(Milestone.PLANNER) &&
-                this.cardsInHand.length >= 16) {
-                remainingMilestones.options.push(
-                    this.claimMilestone(Milestone.PLANNER, game)
-                );
-            }
+            remainingMilestones.options = ORIGINAL_MILESTONES
+                .filter(
+                    (milestone: IMilestone) =>
+                        !game.milestoneClaimed(milestone) &&
+                        milestone.canClaim(this, game))
+                .map(
+                    (milestone: IMilestone) =>
+                        this.claimMilestone(milestone, game));
             if (remainingMilestones.options.length > 1) {
                 action.options.push(remainingMilestones);
             } else if (remainingMilestones.options.length === 1) {

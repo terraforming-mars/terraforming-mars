@@ -17,7 +17,7 @@ import { PlayerInput } from "./PlayerInput";
 import { Phase } from "./Phase";
 import { ClaimedMilestone } from "./ClaimedMilestone";
 import { FundedAward } from "./FundedAward";
-import { Milestone } from "./Milestone";
+import { IMilestone } from "./milestones/IMilestone";
 import { ResourceType } from "./ResourceType";
 import * as constants from "./constants";
 import { Color } from "./Color";
@@ -77,7 +77,7 @@ export class Game {
         return this.spaces.find((space) => space.tile !== undefined && space.tile.card === cardName);
     }
 
-    public milestoneClaimed(milestone: Milestone): boolean {
+    public milestoneClaimed(milestone: IMilestone): boolean {
         return this.claimedMilestones.find((claimedMilestone) => claimedMilestone.milestone === milestone) !== undefined;
     }
 

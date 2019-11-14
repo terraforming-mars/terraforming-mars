@@ -1,6 +1,6 @@
 
 import { expect } from "chai";
-import { AntiGravityTechnology } from "../../src/cards/Cards";
+import { AntiGravityTechnology } from "../../src/cards/AntiGravityTechnology";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 

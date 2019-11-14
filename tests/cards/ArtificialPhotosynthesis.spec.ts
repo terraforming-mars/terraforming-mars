@@ -1,6 +1,6 @@
 
 import { expect } from "chai";
-import { ArtificialPhotosynthesis } from "../../src/cards/Cards";
+import { ArtificialPhotosynthesis } from "../../src/cards/ArtificialPhotosynthesis";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";

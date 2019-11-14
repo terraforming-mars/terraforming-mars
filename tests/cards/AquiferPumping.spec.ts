@@ -1,6 +1,6 @@
 
 import { expect } from "chai";
-import { AquiferPumping } from "../../src/cards/Cards";
+import { AquiferPumping } from "../../src/cards/AquiferPumping";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";

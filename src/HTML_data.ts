@@ -6357,7 +6357,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="title background-color-prelude">Allied Banks</div>
       <div class="tag tag1 tag-earth"></div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P01</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="production-box">
@@ -6375,7 +6374,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="title background-color-prelude">Aquifer Turbines</div>
       <div class="tag tag1 tag-power"></div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P02</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="tile ocean-tile"></div>
@@ -6394,7 +6392,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="title background-color-prelude">Biofuels</div>
       <div class="tag tag1 tag-microbe"></div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P03</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="production-box production-box-size2">
@@ -6412,7 +6409,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="title background-color-prelude">Biolab</div>
       <div class="tag tag1 tag-science"></div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P04</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="production-box ">
@@ -6430,7 +6426,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="title background-color-prelude">Biosphere Support</div>
       <div class="tag tag1 tag-plant"></div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P05</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="production-box production-box-size2a">
@@ -6448,7 +6443,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="title background-color-prelude">Business Empire</div>
       <div class="tag tag1 tag-earth"></div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P06</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="production-box">
@@ -6465,7 +6459,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Dome Farming</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P07</div>
       <div class="tag tag1 tag-plant"></div>
       <div class="tag tag2 tag-building"></div>
       <div class="prelude-icon preludeCard-icon"></div>
@@ -6483,7 +6476,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Donation</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P08</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="resource money">21</div>
@@ -6497,7 +6489,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Early Settlement</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P09</div>
       <div class="tag tag1 tag-building"></div>
       <div class="tag tag2 tag-city"></div>
       <div class="prelude-icon preludeCard-icon"></div>
@@ -6515,7 +6506,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Ecology Experts</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P10</div>
       <div class="tag tag1 tag-microbe"></div>
       <div class="tag tag2 tag-plant"></div>
       <div class="prelude-icon preludeCard-icon"></div>
@@ -6534,7 +6524,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Eccentric Sponsor</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P11</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="resource card"></div> : <div class="resource money">-25</div>
@@ -6548,7 +6537,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Experimental Forest</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P12</div>
       <div class="tag tag1 tag-plant"></div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
@@ -6564,7 +6552,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Galilean Mining</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P13</div>
       <div class="tag tag1 tag-jovian"></div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
@@ -6582,7 +6569,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Great Aquifer</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P14</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="tile ocean-tile"></div> <div class="tile ocean-tile"></div>
@@ -6596,7 +6582,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Huge Asteroid</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P15</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="tile temperature-tile"></div><div class="tile temperature-tile"></div><div class="tile temperature-tile"></div><br>
@@ -6611,7 +6596,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">IO Research Outpost</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P16</div>
       <div class="tag tag1 tag-jovian"></div>
       <div class="tag tag2 tag-science"></div>
       <div class="prelude-icon preludeCard-icon"></div>
@@ -6628,7 +6612,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Loan</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P17</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="production-box production-box-size1a">
@@ -6646,7 +6629,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="title background-color-prelude">Martian Industries</div>
       <div class="tag tag1 tag-building"></div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P18</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="production-box production-box-size2" style="vertical-align: bottom;">
@@ -6663,7 +6645,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Metal-rich Asteroid</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P19</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="tile temperature-tile"></div>
@@ -6679,7 +6660,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Metals Company</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P20</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="production-box production-box-size3">
@@ -6696,7 +6676,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="title background-color-prelude">Mining Operations</div>
       <div class="tag tag1 tag-building"></div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P21</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="production-box production-box-size2">
@@ -6713,7 +6692,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Mohole</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P22</div>
       <div class="tag tag1 tag-building"></div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
@@ -6731,7 +6709,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Mohole Excavation</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P23</div>
       <div class="tag tag1 tag-building"></div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
@@ -6750,7 +6727,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Nitrogen Shipment</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P24</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="production-box ">
@@ -6768,7 +6744,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="title background-color-prelude">Orbital Construction Yard</div>
       <div class="tag tag1 tag-space"></div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P25</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="production-box"><div class="production titanium"></div></div></br>
@@ -6783,7 +6758,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Polar Industries</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P26</div>
       <div class="tag tag1 tag-building"></div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
@@ -6800,7 +6774,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Power Generation</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P27</div>
       <div class="tag tag1 tag-power"></div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
@@ -6817,7 +6790,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Research Network</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P28</div>
       <div class="tag tag1 tag-wild"></div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
@@ -6835,7 +6807,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Self-Sufficient Settlement</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P29</div>
       <div class="tag tag1 tag-building"></div>
       <div class="tag tag2 tag-city"></div>
       <div class="prelude-icon preludeCard-icon"></div>
@@ -6855,7 +6826,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="title background-color-prelude">Smelting Plant</div>
       <div class="tag tag1 tag-building"></div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P30</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="tile oxygen-tile"></div><div class="tile oxygen-tile"></div><br>
@@ -6870,7 +6840,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Society Support</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P31</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="production-box production-box-size2">
@@ -6888,7 +6857,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="title background-color-prelude">Supplier</div>
       <div class="tag tag1 tag-power"></div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P32</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="production-box production-box-size2">
@@ -6905,7 +6873,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Supply Drop</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P33</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         3<div class="resource titanium"></div> 8<div class="resource steel"></div> 3<div class="resource plant"></div>
@@ -6920,7 +6887,6 @@ export const HTML_DATA: Map<string, string> =
       <div class="title background-color-prelude">UNMI Contractor</div>
       <div class="tag tag1 tag-earth"></div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P34</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="tile rating"></div><div class="tile rating"></div><div class="tile rating"></div> <div class="resource card"></div>
@@ -6934,7 +6900,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="filterDiv">
       <div class="title background-color-prelude">Acquired Space Agency</div>
       <div class="prelude-label">PRELUDE</div>
-      <div class="number" style="margin-left:99px;">#P35</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div>

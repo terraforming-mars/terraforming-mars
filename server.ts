@@ -26,6 +26,8 @@ const styles = fs.readFileSync("styles.css");
 const nes = fs.readFileSync("nes.min.css");
 const favicon = fs.readFileSync("favicon.ico");
 const mainJs = fs.readFileSync("dist/main.js");
+const prototypefont = fs.readFileSync("Prototype.ttf");
+const nasafont = fs.readFileSync("Nasa.ttf");
 
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
@@ -66,6 +68,10 @@ const server: http.Server = http.createServer(function (req: http.IncomingMessag
                 servePng(res, pngs.get(req.url)!);
             } else if (req.url === "/favicon.ico") {
                 serveFavicon(res);
+            } else if (req.url === "/Prototype.ttf") {
+                serveResource(res, prototypefont);  
+            } else if (req.url === "/Nasa.ttf") {
+                serveResource(res, nasafont);                                 
             } else if (req.url.indexOf("/api/game") === 0) {
                 apiGetGame(req, res);
             }

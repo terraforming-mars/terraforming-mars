@@ -84,10 +84,7 @@ export const Card = Vue.component("card", {
         }
     },
     template: `
-    <span>
-    <span>{{this.getCard().text}}</span>
-    <div v-html=this.getData()></div>
-    </span>
+    <span v-html=this.getData()></span>
     `
 });
 

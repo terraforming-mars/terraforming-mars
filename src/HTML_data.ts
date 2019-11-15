@@ -6641,9 +6641,9 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-["Metal-rich Asteroid",`
+["Metal-Rich Asteroid",`
     <div class="filterDiv">
-      <div class="title background-color-prelude">Metal-rich Asteroid</div>
+      <div class="title background-color-prelude">Metal-Rich Asteroid</div>
       <div class="prelude-label">PRELUDE</div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">

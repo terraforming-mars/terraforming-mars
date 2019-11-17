@@ -29,7 +29,7 @@ export const Board = Vue.component("board", {
                 top: "10px"
             }
         }, [
-            createElement("span", { class: "tile" }, [
+            createElement("span", { class: "board-tile" }, [
                 createElement("span", { class: "colony", domProps: { innerHTML: "&#x2B22" }}),
                 createElement("span", { class: "name" }, "GANYMEDE_COLONY")
             ])
@@ -69,7 +69,7 @@ export const Board = Vue.component("board", {
                         innerHTML = "&#x272A";
                     } else if (bonus === SpaceBonus.STEEL) {
                         innerHTML = "&#x2692";
-                        className += " steel";
+                        className += " board-steel";
                     } else if (bonus === SpaceBonus.PLANT) {
                         innerHTML = "&#x1F343";
                         className += " plane";
@@ -89,7 +89,7 @@ export const Board = Vue.component("board", {
                 thisSpace.id === SpaceName.THARSIS_THOLUS) {
                 cellChildren.push(createElement("span", { class: "name" }, thisSpace.id));
             }
-            cells.push(createElement("div", { class: "tile", attrs: { id: thisSpace.id } }, cellChildren));
+            cells.push(createElement("div", { class: "board-tile", attrs: { id: thisSpace.id } }, cellChildren));
             lastY = thisSpace.y;
         }
         spaces.push(createElement("div", { class: "row", style: { paddingLeft: (25 * leftPadding) + "px" }}, cells));
@@ -99,7 +99,7 @@ export const Board = Vue.component("board", {
                 left: "0px",
                 top: "360px"
             }}, [
-                createElement("span", { class: "tile" }, [
+                createElement("span", { class: "board-tile" }, [
                     createElement("span", { class: "colony", domProps: { innerHTML: "&#x2B22" }}),
                     createElement("span", { class: "name" }, "PHOBOS_SPACE_HAVEN")
                 ])

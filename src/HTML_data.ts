@@ -5525,7 +5525,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
     </div>
 `],
-["Interplanetary Cinematic",`
+["Interplanetary Cinematics",`
     <div class="filterDiv">
     <div class="tag tag1 tag-building"></div>
       <div class="corporationLabel ">CORPORATION</div>

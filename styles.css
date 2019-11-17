@@ -113,7 +113,7 @@
 /* fonts */
 @font-face {
     font-family: Prototype;
-    src: url(/Prototype.ttf);
+    src: url(./assets/Prototype.ttf);
 }
 
 
@@ -474,20 +474,20 @@ border-right: 2px solid rgb(137,137,137);
 
 
 /*********** Style the tags ************/
-.tag-wild {background-image: url("../images/tag-wild.png")}
-.tag-building {background-image: url("../images/tag-building.png")}
-.tag-space {background-image: url("../images/tag-space.png")}
-.tag-power {background-image: url("../images/tag-power.png")}
-.tag-jovian {background-image: url("../images/tag-jovian.png")}
-.tag-venus {background-image: url("../images/tag-venus.png")}
-.tag-earth { background-image: url("../images/tag-earth.png");}
-.tag-city { background-image: url("../images/tag-city.png");}
-.tag-microbe {background-image: url("../images/tag-microbe.png")}
-.tag-plant {background-image: url("../images/tag-plant.png")}
-.tag-animal {background-image: url("../images/tag-animal.png")}
-.tag-event {background-image: url("../images/tag-event.png")}
-.tag-science {background-image: url("../images/tag-science.png")}
-.tag-none {background-image: url("../images/tag-none.png")}
+.tag-wild {background-image: url("./assets/tag-wild.png")}
+.tag-building {background-image: url("./assets/tag-building.png")}
+.tag-space {background-image: url("./assets/tag-space.png")}
+.tag-power {background-image: url("./assets/tag-power.png")}
+.tag-jovian {background-image: url("./assets/tag-jovian.png")}
+.tag-venus {background-image: url("./assets/tag-venus.png")}
+.tag-earth { background-image: url("./assets/tag-earth.png");}
+.tag-city { background-image: url("./assets/tag-city.png");}
+.tag-microbe {background-image: url("./assets/tag-microbe.png")}
+.tag-plant {background-image: url("./assets/tag-plant.png")}
+.tag-animal {background-image: url("./assets/tag-animal.png")}
+.tag-event {background-image: url("./assets/tag-event.png")}
+.tag-science {background-image: url("./assets/tag-science.png")}
+.tag-none {background-image: url("./assets/tag-none.png")}
 
 /************** Style the buttons ************/
 .button, .button2 {

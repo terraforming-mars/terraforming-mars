@@ -26,8 +26,6 @@ const styles = fs.readFileSync("styles.css");
 const nes = fs.readFileSync("nes.min.css");
 const favicon = fs.readFileSync("favicon.ico");
 const mainJs = fs.readFileSync("dist/main.js");
-const prototypefont = fs.readFileSync("Prototype.ttf");
-const nasafont = fs.readFileSync("Nasa.ttf");
 
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
@@ -51,11 +49,14 @@ const pngs: Map<string, Buffer> = new Map<string, Buffer>([
 const server: http.Server = http.createServer(function (req: http.IncomingMessage, res: http.ServerResponse): void {
     if (req.url !== undefined) {
         if (req.method === "GET") {
+
             if (
                 req.url === "/" ||
                 req.url.startsWith("/game?id=") ||
                 req.url.startsWith("/player?id=")) {
                 serveApp(res);
+            } else if (req.url.startsWith("/assets/")) {       
+                serveResource(res, fs.readFileSync('.'+req.url));
             } else if (req.url.startsWith("/api/player?id=")) {
                 apiGetPlayer(req, res);        
             } else if (req.url === "/nes.min.css") {
@@ -67,11 +68,7 @@ const server: http.Server = http.createServer(function (req: http.IncomingMessag
             } else if (pngs.has(req.url)) {
                 servePng(res, pngs.get(req.url)!);
             } else if (req.url === "/favicon.ico") {
-                serveFavicon(res);
-            } else if (req.url === "/Prototype.ttf") {
-                serveResource(res, prototypefont);  
-            } else if (req.url === "/Nasa.ttf") {
-                serveResource(res, nasafont);                                 
+                serveFavicon(res);                               
             } else if (req.url.indexOf("/api/game") === 0) {
                 apiGetGame(req, res);
             }

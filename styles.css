@@ -10,17 +10,17 @@
     display: flex;
     flex-direction: row;
 }
-.board .tile {
+.board .board-tile {
     width: 50px;
     height: 60px;
     line-height: 60px;
     position: relative;
 }
-.board .tile .red,
-.board .tile .green,
-.board .tile .yellow,
-.board .tile .blue,
-.board .tile .black {
+.board .board-tile .red,
+.board .board-tile .green,
+.board .board-tile .yellow,
+.board .board-tile .blue,
+.board .board-tile .black {
     width: 20px;
     height: 20px;
     position: relative;
@@ -28,22 +28,22 @@
     display: block;
     left: 17px;
 }
-.board .tile .red {
+.board .board-tile .red {
     background-color: red;
 }
-.board .tile .green {
+.board .board-tile .green {
     background-color: green;
 }
-.board .tile .yellow {
+.board .board-tile .yellow {
     background-color: yellow;
 }
-.board .tile .blue {
+.board .board-tile .blue {
     background-color: blue;
 }
-.board .tile .black {
+.board .board-tile .black {
     background-color: black;
 }
-.board .tile .name {
+.board .board-tile .name {
     display: block;
     position: relative;
     font-size: 10px;
@@ -52,50 +52,50 @@
     text-align: center;
 }
 
-.board .tile .colony,
-.board .tile .land,
-.board .tile .special,
-.board .tile .greenery,
-.board .tile .ocean,
-.board .tile .city,
-.board .tile .aquifer {
+.board .board-tile .colony,
+.board .board-tile .land,
+.board .board-tile .special,
+.board .board-tile .greenery,
+.board .board-tile .ocean,
+.board .board-tile .city,
+.board .board-tile .aquifer {
     position: absolute;
     font-size: 65px;
 }
-.board .tile > .colony {
+.board .board-tile > .colony {
     color: silver;
 }
-.board .tile > .land {
+.board .board-tile > .land {
     color: tan;
 }
-.board .tile > .special {
+.board .board-tile > .special {
     color: gold;
 }
-.board .tile > .greenery {
+.board .board-tile > .greenery {
     color: green;
 }
-.board .tile > .ocean {
+.board .board-tile > .ocean {
     color: aqua;
 }
-.board .tile > .city {
+.board .board-tile > .city {
     color: #2F4F4F;
 }
-.board .tile > .aquifer {
+.board .board-tile > .aquifer {
     color: lightblue;
 }
-.board .tile > .bonus {
+.board .board-tile > .bonus {
     position: absolute;
     left: 10px;
     font-size: 20px;
     color: black;
 }
-.board .tile > .bonus.steel {
+.board .board-tile > .bonus.board-steel {
     font-size: 12px;
 }
-.board .tile > .bonus.plant {
+.board .board-tile > .bonus.plant {
     font-size: 15px;
 }
-.board .tile > .bonus + .bonus {
+.board .board-tile > .bonus + .bonus {
     left: 30px;
 }
 
@@ -119,7 +119,7 @@
 
 .filterDiv {
     cursor: pointer;
-    float: left;
+    /*float: left;*/
     position: relative;
     background: #eeeeee;
     background: linear-gradient(to bottom right, #ffffff, #aaaaaa, #eeeeee, #cecece, #dddddd, #eeeeee, #cccccc);

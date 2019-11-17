@@ -290,7 +290,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-["Methane from Titan",`
+["Methane From Titan",`
     <div class="filterDiv">
         <div class="title background-color-automated ">Methane from Titan</div>
         <div class="price ">28</div>
@@ -1269,7 +1269,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-["Towing a Comet",`
+["Towing A Comet",`
     <div class="filterDiv">
         <div class="title background-color-events ">Towing a Comet</div>
         <div class="price ">23</div>
@@ -4530,7 +4530,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
     </div>
 `],
-["Space hotels",`
+["Space Hotels",`
     <div class="filterDiv">
               <div class="title background-color-automated ">Space hotels</div>
               <div class="price ">12</div>
@@ -6592,7 +6592,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-["IO Research Outpost",`
+["Io Research Outpost",`
     <div class="filterDiv">
       <div class="title background-color-prelude">IO Research Outpost</div>
       <div class="prelude-label">PRELUDE</div>

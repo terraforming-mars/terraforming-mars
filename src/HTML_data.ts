@@ -4504,7 +4504,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
     </div>
 `],
-["RESEARCH COORDINATION",`
+["Research Coordination",`
     <div class="filterDiv">
               <div class="title background-color-automated ">RESEARCH COORDINATION</div>
               <div class="price ">4</div>

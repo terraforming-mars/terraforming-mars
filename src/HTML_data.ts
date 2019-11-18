@@ -2045,7 +2045,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       &nbsp;&nbsp; -  <div class="plant resource"></div>
         <div class="description">
-          (Requires 3 oean tiles and that you lose 1 plant. Increase your plant production 1 step.)
+          (Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.)
         </div>
       </div>
     </div>
@@ -4485,7 +4485,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
     </div>
 `],
-["PSYCHROPHILES",`
+["Psychrophiles",`
     <div class="filterDiv">
               <div class="title background-color-active ">PSYCHROPHILES</div>
               <div class="price ">2</div>
@@ -4515,7 +4515,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
     </div>
 `],
-["SF MEMORIAL",`
+["SF Memorial",`
     <div class="filterDiv">
               <div class="title background-color-automated ">SF MEMORIAL</div>
               <div class="price ">7</div>

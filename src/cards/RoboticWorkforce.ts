@@ -20,7 +20,7 @@ import { CupolaCity } from "./CupolaCity";
 import { DeepWellHeating } from "./DeepWellHeating";
 import { DomedCrater } from "./DomedCrater";
 import { ElectroCatapult } from "./ElectroCatapult";
-import { EosChasmaNationalPark } from "./EosChasmaNationalPark";
+import { EosChasmaNationalPark } from "./EOSChasmaNationalPark";
 import { FoodFactory } from "./FoodFactory";
 import { FueledGenerators } from "./FueledGenerators";
 import { FuelFactory } from "./FuelFactory";

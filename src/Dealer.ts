@@ -101,7 +101,7 @@ import { EcologicalZone } from "./cards/EcologicalZone";
 import { ElectroCatapult } from "./cards/ElectroCatapult";
 import { EnergySaving } from "./cards/EnergySaving";
 import { EnergyTapping } from "./cards/EnergyTapping";
-import { EosChasmaNationalPark } from "./cards/EosChasmaNationalPark";
+import { EosChasmaNationalPark } from "./cards/EOSChasmaNationalPark";
 import { EquatorialMagnetizer } from "./cards/EquatorialMagnetizer";
 import { ExtremeColdFungus } from "./cards/ExtremeColdFungus";
 import { Farming } from "./cards/Farming";

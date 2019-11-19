@@ -108,6 +108,17 @@
     margin-bottom: 20px;
 }
 
+.filterDiv,
+.filterDiv::after,
+.filterDiv::before,
+.filterDiv *::after,
+.filterDiv *::before,
+.filterDiv *,
+.filterDiv ::before,
+.filterDiv ::after {
+  box-sizing: content-box;
+}
+
 /* Simeon's css below */
 
 /* fonts */

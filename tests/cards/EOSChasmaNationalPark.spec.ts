@@ -1,6 +1,6 @@
 
 import { expect } from "chai";
-import { EosChasmaNationalPark } from "../../src/cards/EosChasmaNationalPark";
+import { EosChasmaNationalPark } from "../../src/cards/EOSChasmaNationalPark";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";

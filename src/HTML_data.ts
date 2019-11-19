@@ -6255,6 +6255,23 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
+["Beginner Corporation",`
+    <div class="filterDiv">
+      <div class="corporationLabel">CORPORATION</div>
+      <div class="contentCorporation">
+        <div style="font-size:20px;
+        padding-left:3px;width:147px;background:#eeeeee;box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 3px 3px 3px grey;margin-left:10px;border-radius:5px;
+        border-top: 2px solid rgb(221,221,221);
+        border-left: 2px solid rgb(221,221,221);
+        border-bottom: 2px solid rgb(137,137,137);
+        border-right: 2px solid rgb(137,137,137);">
+                    &nbsp;&nbsp;&nbsp;BEGINNER <br>CORPORATION&nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="resource money" style="margin-left:15px;margin-right:15px;">42</div>
+        <div class="description" style="margin-top:-5px;text-align:center;">(You start with 42 MC. Instead of choosing from 10 cards during setup, you get 10 cards for free.)</div>
+      </div>
+    </div>
+`],
 ["Recyclon",`
     <div class="filterDiv">
       <div class="tag tag1 tag-building"></div>

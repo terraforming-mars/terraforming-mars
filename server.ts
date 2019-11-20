@@ -26,24 +26,27 @@ const styles = fs.readFileSync("styles.css");
 const nes = fs.readFileSync("nes.min.css");
 const favicon = fs.readFileSync("favicon.ico");
 const mainJs = fs.readFileSync("dist/main.js");
+const prototype = fs.readFileSync("assets/Prototype.ttf");
 
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
 const pngs: Map<string, Buffer> = new Map<string, Buffer>([
-    ["/assets/animal-tag.png", fs.readFileSync("assets/animal-tag.png")],
-    ["/assets/building-tag.png", fs.readFileSync("assets/building-tag.png")],
-    ["/assets/city-tag.png", fs.readFileSync("assets/city-tag.png")],
+    ["/assets/tag-animal.png", fs.readFileSync("assets/tag-animal.png")],
+    ["/assets/tag-building-tag.png", fs.readFileSync("assets/tag-building.png")],
+    ["/assets/tag-city.png", fs.readFileSync("assets/tag-city.png")],
     ["/assets/cursor.png", fs.readFileSync("assets/cursor.png")],
     ["/assets/cursor-click.png", fs.readFileSync("assets/cursor-click.png")],
-    ["/assets/earth-tag.png", fs.readFileSync("assets/earth-tag.png")],
-    ["/assets/event-tag.png", fs.readFileSync("assets/event-tag.png")],
-    ["/assets/jovian-tag.png", fs.readFileSync("assets/jovian-tag.png")],
-    ["/assets/microbes-tag.png", fs.readFileSync("assets/microbes-tag.png")],
-    ["/assets/plant-tag.png", fs.readFileSync("assets/plant-tag.png")],
-    ["/assets/power-tag.png", fs.readFileSync("assets/power-tag.png")],
-    ["/assets/science-tag.png", fs.readFileSync("assets/science-tag.png")],
-    ["/assets/space-tag.png", fs.readFileSync("assets/space-tag.png")],
-    ["/assets/wildcard-tag.png", fs.readFileSync("assets/wildcard-tag.png")]
+    ["/assets/tag-earth.png", fs.readFileSync("assets/tag-earth.png")],
+    ["/assets/tag-event.png", fs.readFileSync("assets/tag-event.png")],
+    ["/assets/tag-jovian.png", fs.readFileSync("assets/tag-jovian.png")],
+    ["/assets/tag-microbe.png", fs.readFileSync("assets/tag-microbe.png")],
+    ["/assets/tag-plant.png", fs.readFileSync("assets/tag-plant.png")],
+    ["/assets/tag-power.png", fs.readFileSync("assets/tag-power.png")],
+    ["/assets/tag-science.png", fs.readFileSync("assets/tag-science.png")],
+    ["/assets/tag-space.png", fs.readFileSync("assets/tag-space.png")],
+    ["/assets/tag-wild.png", fs.readFileSync("assets/tag-wild.png")],
+    ["/assets/tag-venus.png", fs.readFileSync("assets/tag-venus.png")],
+    ["/assets/triangle16.png", fs.readFileSync("assets/triangle16.png")]
 ]);
 
 const server: http.Server = http.createServer(function (req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -55,14 +58,14 @@ const server: http.Server = http.createServer(function (req: http.IncomingMessag
                 req.url.startsWith("/game?id=") ||
                 req.url.startsWith("/player?id=")) {
                 serveApp(res);
-            } else if (req.url.startsWith("/assets/")) {       
-                serveResource(res, fs.readFileSync('.'+req.url));
             } else if (req.url.startsWith("/api/player?id=")) {
                 apiGetPlayer(req, res);        
             } else if (req.url === "/nes.min.css") {
                 serveResource(res, nes);
             } else if (req.url === "/styles.css") {
                 serveResource(res, styles);
+            } else if (req.url === "/assets/Prototype.ttf") {
+                serveResource(res, prototype);                
             } else if (req.url === "/main.js") {
                 serveResource(res, mainJs);
             } else if (pngs.has(req.url)) {

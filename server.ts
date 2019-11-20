@@ -32,7 +32,7 @@ const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
 const pngs: Map<string, Buffer> = new Map<string, Buffer>([
     ["/assets/tag-animal.png", fs.readFileSync("assets/tag-animal.png")],
-    ["/assets/tag-building-tag.png", fs.readFileSync("assets/tag-building.png")],
+    ["/assets/tag-building.png", fs.readFileSync("assets/tag-building.png")],
     ["/assets/tag-city.png", fs.readFileSync("assets/tag-city.png")],
     ["/assets/cursor.png", fs.readFileSync("assets/cursor.png")],
     ["/assets/cursor-click.png", fs.readFileSync("assets/cursor-click.png")],

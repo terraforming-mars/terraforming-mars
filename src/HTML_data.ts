@@ -466,8 +466,8 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Underground city",`
-        <div class="title background-color-automated ">Underground city</div>
+["Underground City",`
+        <div class="title background-color-automated ">Underground City</div>
         <div class="price ">18</div>
         <div class="tag tag1 tag-building "></div>
         <div class="tag tag2 tag-city "></div>

@@ -2185,8 +2185,8 @@ export const HTML_DATA: Map<string, string> =
           ADD 1 RESOURCE TO A CARD WITH AT LEAST 1 RESOURCE ON IT
         </div>
 `],
-["Anti-gravity Technology",`
-        <div class="title background-color-active ">Anti-gravity Technology</div>
+["Anti-Gravity Technology",`
+        <div class="title background-color-active ">Anti-Gravity Technology</div>
         <div class="price ">14</div>
         <div class="tag tag1 tag-science"></div>
         <div class="corporate-icon project-icon"></div>

@@ -153,6 +153,11 @@
   filter: grayscale(1);
 }
 
+input[type=checkbox]:checked + .filterDiv,
+input[type=radio]:checked + .filterDiv {
+  filter: brightness(125%);
+}
+
 .filterDiv3 {
     position: relative;
     background: #eeeeee;

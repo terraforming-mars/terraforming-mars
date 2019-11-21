@@ -2127,7 +2127,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-[" Nitrophilic Moss",`
+["Nitrophilic Moss",`
       <div class="title background-color-automated"> Nitrophilic Moss</div>
       <div class="price">8</div>
       <div class="tag tag1 tag-plant"></div>

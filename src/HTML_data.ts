@@ -2979,7 +2979,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
 `],
-["Rad-Chem Factory",`
+["Rad-chem Factory",`
         <div class="title background-color-automated">Rad-Chem Factory</div>
         <div class="price">8</div>
         <div class="tag tag1 tag-building"></div>

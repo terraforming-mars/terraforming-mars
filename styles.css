@@ -119,6 +119,15 @@
   box-sizing: content-box;
 }
 
+.cardbox {
+  float: left;
+}
+
+.nofloat {
+  clear: both;
+  margin-bottom: 15px;
+}
+
 /* Simeon's css below */
 
 /* fonts */

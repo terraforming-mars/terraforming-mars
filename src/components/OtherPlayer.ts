@@ -33,7 +33,7 @@ export const OtherPlayer = Vue.component("other-player", {
                 <div>Corporation: {{player.corporationCard || "None selected yet"}}</div>
                 <h4 v-if="player.playedCards.length > 0">Played Cards</h4>
                 <div v-if="player.playedCards.length > 0">
-                    <div v-for="card in getEventCards()" :key="card">
+                    <div class="cardbox" v-for="card in getEventCards()" :key="card">
                         <card hideCost="true" :card="card.name" :resources="card.resources"></card>
                     </div>
                 </div>

@@ -24,13 +24,15 @@ export const SelectCard = Vue.component("select-card", {
     },
     template: `
         <div>
-            <div v-if="showtitle === true" style="clear: both;">{{playerinput.title}}</div>
-            <label v-for="card in playerinput.cards" :key="card" style="display:block;font-size:12px" style="float: left;">
+            <div v-if="showtitle === true" class="nofloat">{{playerinput.title}}</div>
+            <label v-for="card in playerinput.cards" :key="card" style="display:block;font-size:12px" class="cardbox">
                 <input v-if="playerinput.maxCardsToSelect === 1 && playerinput.minCardsToSelect === 1" class="nes-radio" type="radio" v-model="cards" :value="card" />
                 <input v-else class="nes-checkbox" type="checkbox" v-model="cards" :value="card" />
                 <card :card="card"></card>
             </label>
-            <button style="clear: both; !important;" class="nes-btn" v-on:click="selectCards">Save</button>
+            <div class="nofloat">
+                <button class="nes-btn" v-on:click="selectCards">Save</button>
+            </div>
         </div>
     `
 });

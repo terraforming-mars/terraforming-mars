@@ -2254,8 +2254,8 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Designed Microorganisms",`
-        <div class="title background-color-automated ">Designed Microorganisms</div>
+["Designed Micro-organisms",`
+        <div class="title background-color-automated ">Designed Micro-organisms</div>
         <div class="price ">16</div>
         <div class="tag tag1 tag-microbe"></div>
         <div class="tag tag2 tag-science"></div>

@@ -11,7 +11,7 @@ import { PlayerInput } from "../PlayerInput";
 export class ResearchOutpost implements IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.CITY, Tags.STEEL];
-    public name: string = "Research Output";
+    public name: string = "Research Outpost";
     public text: string = "When you play a card, you pay 1 mega credit less for it. Place a city tile next to no other tile.";
     public requirements: undefined;
     public cardType: CardType = CardType.ACTIVE;

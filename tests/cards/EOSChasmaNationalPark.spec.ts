@@ -1,21 +1,21 @@
 
 import { expect } from "chai";
-import { EOSChasmaNationalPark } from "../../src/cards/EOSChasmaNationalPark";
+import { EosChasmaNationalPark } from "../../src/cards/EOSChasmaNationalPark";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SelectCard } from "../../src/inputs/SelectCard";
 import { Birds } from "../../src/cards/Birds";
 
-describe("EOSChasmaNationalPark", function () {
+describe("EosChasmaNationalPark", function () {
     it("Can't play", function () {
-        const card = new EOSChasmaNationalPark();
+        const card = new EosChasmaNationalPark();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
-        const card = new EOSChasmaNationalPark();
+        const card = new EosChasmaNationalPark();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const birds = new Birds();

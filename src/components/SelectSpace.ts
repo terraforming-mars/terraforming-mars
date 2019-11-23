@@ -19,7 +19,7 @@ export const SelectSpace = Vue.component("select-space", {
                 setOfSpaces[spaceId] = 1;
             });
             children.push(createElement("button", { domProps: { className: "nes-btn" }, on: { click: () => {
-                const elTiles = document.getElementsByClassName("tile");
+                const elTiles = document.getElementsByClassName("board-tile");
                 for (let i = 0; i < elTiles.length; i++) {
                     const elTile = elTiles[i] as HTMLElement;
                     if (setOfSpaces[String(elTile.getAttribute("id"))] === 1) {

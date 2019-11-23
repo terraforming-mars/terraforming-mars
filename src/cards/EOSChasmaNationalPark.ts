@@ -6,7 +6,7 @@ import {Player} from '../Player';
 import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
 
-export class EOSChasmaNationalPark implements IProjectCard {
+export class EosChasmaNationalPark implements IProjectCard {
   public cost: number = 16;
   public nonNegativeVPIcon: boolean = true;
   public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];

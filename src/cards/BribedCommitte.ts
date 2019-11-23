@@ -8,7 +8,7 @@ export class BribedCommitte implements IProjectCard {
     public cost: number = 7;
     public tags: Array<Tags> = [Tags.EARTH];
     public cardType: CardType = CardType.EVENT;
-    public name: string = 'Bribed Committe';
+    public name: string = 'Bribed Committee';
     public text: string = 'Raise your terraform rating 2 steps. ' +
       'Lose 2 victory points.';
     public requirements: undefined;

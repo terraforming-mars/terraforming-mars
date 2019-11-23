@@ -12,7 +12,7 @@ export class Predators implements IProjectCard, IActionCard {
     public cost: number = 14;
     public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.ANIMAL];
-    public name: string = "Predator";
+    public name: string = "Predators";
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.ANIMAL;
     public actionText: string = "Remove 1 animal from any card and add it to this card";

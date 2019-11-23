@@ -120,7 +120,7 @@ import { EcologicalZone } from "./cards/EcologicalZone";
 import { ElectroCatapult } from "./cards/ElectroCatapult";
 import { EnergySaving } from "./cards/EnergySaving";
 import { EnergyTapping } from "./cards/EnergyTapping";
-import { EOSChasmaNationalPark } from "./cards/EOSChasmaNationalPark";
+import { EosChasmaNationalPark } from "./cards/EOSChasmaNationalPark";
 import { EquatorialMagnetizer } from "./cards/EquatorialMagnetizer";
 import { ExtremeColdFungus } from "./cards/ExtremeColdFungus";
 import { Farming } from "./cards/Farming";
@@ -405,7 +405,7 @@ export const ALL_PROJECT_CARDS: Array<IProjectCard> = [
     new ElectroCatapult(),
     new EnergySaving(),
     new EnergyTapping(),
-    new EOSChasmaNationalPark(),
+    new EosChasmaNationalPark(),
     new EquatorialMagnetizer(),
     new ExtremeColdFungus(),
     new Farming(),

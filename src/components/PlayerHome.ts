@@ -39,17 +39,17 @@ export const PlayerHome = Vue.component("player-home", {
                 <card hideCost="true" :card="player.corporationCard"></card>
                 <div v-if="player.playedCards.length > 0">
                     <h2>Played Cards</h2>
-                    <div v-for="card in player.playedCards" :key="card.name">
+                    <div v-for="card in player.playedCards" :key="card.name" class="cardbox">
                         <card hideCost="true" :card="card.name" :resources="card.resources"></card>
                     </div>
                 </div>
-                <div v-if="player.cardsInHand.length > 0">
+                <div class="nofloat" v-if="player.cardsInHand.length > 0">
                     <h2>Cards In Hand</h2>
-                    <div v-for="card in player.cardsInHand" :key="card.name">
+                    <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
                         <card :card="card.name" :resources="card.resources"></card>
                     </div>
                 </div>
-                <h2>Resources</h2>
+                <h2 class="nofloat">Resources</h2>
                 <player-resources :player="player"></player-resources>
                 <h2>Oxygen Level ({{player.oxygenLevel}})</h2>
                 <div>

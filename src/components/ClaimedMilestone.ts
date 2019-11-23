@@ -15,7 +15,7 @@ export const ClaimedMilestone = Vue.component("claimed-milestone", {
         if (player === undefined) {
             return createElement("span", { domProps: { innerHTML: "Unknown Player" } });
         }
-        return createElement("span", { domProps: { innerHTML: claimedMilestone.milestone + " " + player.name } });
+        return createElement("span", { domProps: { innerHTML: claimedMilestone.milestone + " " + player.name + " "} });
     }
 });
 

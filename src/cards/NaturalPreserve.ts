@@ -15,6 +15,7 @@ export class NaturalPreserve implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Natural Preserve";
     public text: string = "Oxygen must be 4% or less. Place a special tile next to no other tile. Increase your mega credit production 1 step. Gain 1 victory point";
+    public requirements: string = "4% or less Oxygen";
     public description: string = "Creating a national park with original Martian landforms and environments.";
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.getAvailableSpacesOnLand(player)

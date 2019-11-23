@@ -1,30 +1,38 @@
 
-import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
-import { CardType } from "./CardType";
-import { Player } from "../Player";
-import { Game } from "../Game";
-import { SelectPlayer } from "../inputs/SelectPlayer";
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {Player} from '../Player';
+import {Game} from '../Game';
+import {SelectPlayer} from '../inputs/SelectPlayer';
 
 export class DeimosDown implements IProjectCard {
     public cost: number = 31;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = "Deimos Down";
+    public name: string = 'Deimos Down';
     public cardType: CardType = CardType.EVENT;
-    public text: string = "Raise temperature 3 steps and gain 4 steel. Remove up to 8 plants from any player.";
-    public description: string = "We don't use that moon anyway";
+    public text: string = 'Raise temperature 3 steps and gain 4 steel. ' +
+      'Remove up to 8 plants from any player.';
+    public requirements: undefined;
+    public description: string = 'We don\'t use that moon anyway';
     public canPlay(): boolean {
-        return true;
+      return true;
+    }
+    private doPlay(player: Player, game: Game) {
+      player.steel += 4;
+      return game.increaseTemperature(player, 3);
     }
     public play(player: Player, game: Game) {
-        if (game.getPlayers().length == 1) {
-            player.steel += 4;
-            return game.increaseTemperature(player, 3);
-        }
-        return new SelectPlayer(game.getPlayers(), "Select player to remove up to 8 plants from", (foundPlayer: Player) => {
+      if (game.getPlayers().length == 1) {
+        return this.doPlay(player, game);
+      }
+      return new SelectPlayer(
+          game.getPlayers(),
+          'Select player to remove up to 8 plants from',
+          (foundPlayer: Player) => {
             foundPlayer.removePlants(player, 8);
-            player.steel += 4;
-            return game.increaseTemperature(player, 3);
-        });
+            return this.doPlay(player, game);
+          }
+      );
     }
 }

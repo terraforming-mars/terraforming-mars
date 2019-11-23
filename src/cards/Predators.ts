@@ -12,11 +12,12 @@ export class Predators implements IProjectCard, IActionCard {
     public cost: number = 14;
     public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.ANIMAL];
-    public name: string = "Predator";
+    public name: string = "Predators";
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.ANIMAL;
     public actionText: string = "Remove 1 animal from any card and add it to this card";
     public text: string = "Requires 11% oxygen. Gain 1 victory point per animal on this card.";
+    public requirements: string = "11% Oxygen";
     public description: string = "Lions and tigers and bears, oh my.";
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 11 - player.getRequirementsBonus(game);

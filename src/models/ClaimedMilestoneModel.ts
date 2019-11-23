@@ -1,6 +1,6 @@
-import { Milestone } from "../Milestone";
+import { IMilestone } from "../milestones/IMilestone";
 
 export interface ClaimedMilestoneModel {
-    milestone: Milestone;
+    milestone: IMilestone;
     player: string;
 }

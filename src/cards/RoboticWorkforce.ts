@@ -9,7 +9,7 @@ import { SelectCard } from "../inputs/SelectCard";
 import { SelectPlayer } from "../inputs/SelectPlayer";
 
 // Cards with building tags and production boxes
-import { AICentral } from "./Cards";
+import { AICentral } from "./AICentral";
 import { BiomassCombustors } from "./BiomassCombustors";
 import { BuildingIndustries } from "./BuildingIndustries";
 import { Capital } from "./Capital";
@@ -20,7 +20,7 @@ import { CupolaCity } from "./CupolaCity";
 import { DeepWellHeating } from "./DeepWellHeating";
 import { DomedCrater } from "./DomedCrater";
 import { ElectroCatapult } from "./ElectroCatapult";
-import { EOSChasmaNationalPark } from "./EOSChasmaNationalPark";
+import { EosChasmaNationalPark } from "./EOSChasmaNationalPark";
 import { FoodFactory } from "./FoodFactory";
 import { FueledGenerators } from "./FueledGenerators";
 import { FuelFactory } from "./FuelFactory";
@@ -65,6 +65,7 @@ export class RoboticWorkforce implements IProjectCard {
     public name: string = "Robotic Workforce";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Duplicate only the production box of one of your building cards.";
+    public requirements: undefined;
     public description: string = "Enhancing your production capacity.";
     public canPlay(): boolean {
         return true;
@@ -82,7 +83,7 @@ export class RoboticWorkforce implements IProjectCard {
             new DeepWellHeating(),
             new DomedCrater(),
             new ElectroCatapult(),
-            new EOSChasmaNationalPark(),
+            new EosChasmaNationalPark(),
             new FoodFactory(),
             new FueledGenerators(),
             new FuelFactory(),
@@ -175,7 +176,7 @@ export class RoboticWorkforce implements IProjectCard {
                     [new Capital().name]: new Updater(-2, 5, 0, 0, 0, 0),
                     [new CupolaCity().name]: new Updater(-1, 3, 0, 0, 0, 0),
                     [new OpenCity().name]: new Updater(-1, 4, 0, 0, 0, 0),
-                    [new EOSChasmaNationalPark().name]: new Updater(2, 0, 0, 0, 0, 0),
+                    [new EosChasmaNationalPark().name]: new Updater(2, 0, 0, 0, 0, 0),
                     [new StripMine().name]: new Updater(-2, 0, 2, 1, 0, 0),
                     [new MagneticFieldDome().name]: new Updater(-2, 0, 0, 0, 1, 0),
                     [new MagneticFieldGenerators().name]: new Updater(-4, 0, 0, 0, 2, 0),

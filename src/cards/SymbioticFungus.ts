@@ -13,6 +13,7 @@ export class SymbioticFungus implements IActionCard, IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Symbiotic Fungus";
     public text: string = "Requires -14C or warmer.";
+    public requirements: string = "-14C or warmer";
     public description: string = "Creating mutually beneficial conditions";
     public actionText: string = "Add a microbe to ANOTHER card";
     public canPlay(player: Player, game: Game): boolean {

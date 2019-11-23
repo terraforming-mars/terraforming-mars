@@ -11,6 +11,7 @@ export class InterplanetaryCinematics implements CorporationCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 30;
     public text: string = "You start with 20 steel. Each time you play an event, you gain 2 mega credits";
+    public requirements: undefined;
     public description: string = "Finding funding where nations struggles, IC, initiated the colonization of Mars by turning the process into a soap opera infused with plenty of advertising. With the media's attention and a head start in colonization, IC sets out to terraform.";
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
         if (card.cardType === CardType.EVENT) {

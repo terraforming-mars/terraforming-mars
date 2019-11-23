@@ -1,8 +1,8 @@
 
 import { Player } from "./Player";
-import { Milestone } from "./Milestone";
+import { IMilestone } from "./milestones/IMilestone";
 
 export interface ClaimedMilestone {
-    milestone: Milestone;
+    milestone: IMilestone;
     player: Player;
 }

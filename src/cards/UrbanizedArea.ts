@@ -14,6 +14,7 @@ export class UrbanizedArea implements IProjectCard {
     public name: string = "Urbanized Area";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Decrease your energy production 1 step and increase your mega credit production 2 steps. Place a city tile adjacent to at least 2 other city tiles.";
+    public requirements: undefined;
     public description: string = "When the population begins to soar, cities will eventually merge into large urban areas.";
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.getAvailableSpacesOnLand(player)

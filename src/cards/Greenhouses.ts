@@ -11,6 +11,7 @@ export class Greenhouses implements IProjectCard {
     public name: string = "Greenhouses";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Gain 1 plant for each city tile in play";
+    public requirements: undefined;
     public description: string = "Places to conduct bio research and experiments.";
     public canPlay(): boolean {
         return true;

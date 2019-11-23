@@ -21,9 +21,8 @@ describe("CaretakerContract", function () {
     it("Should act", function () {
         const card = new CaretakerContract();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         player.heat = 8;
-        card.action(player, game);
+        card.action(player);
         expect(player.heat).to.eq(0);
         expect(player.terraformRating).to.eq(21);
     });

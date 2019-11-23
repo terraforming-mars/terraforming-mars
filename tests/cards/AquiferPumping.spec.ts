@@ -1,6 +1,6 @@
 
 import { expect } from "chai";
-import { AquiferPumping } from "../../src/cards/Cards";
+import { AquiferPumping } from "../../src/cards/AquiferPumping";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
@@ -9,9 +9,7 @@ import { TileType } from "../../src/TileType";
 describe("AquiferPumping", function () {
     it("Should play", function () {
         const card = new AquiferPumping();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        expect(card.play(player, game)).to.eq(undefined);
+        expect(card.play()).to.eq(undefined);
     });
     it("Should action", function () {
         const card = new AquiferPumping();

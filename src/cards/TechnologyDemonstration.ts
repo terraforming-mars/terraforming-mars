@@ -11,6 +11,7 @@ export class TechnologyDemonstration implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public name: string = "Technology Demonstration";
     public text: string = "Draw 2 cards";
+    public requirements: undefined;
     public description: string = "Testing launch techniques, space hardware, and whatnot";
     public canPlay(): boolean {
         return true;

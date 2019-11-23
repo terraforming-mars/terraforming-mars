@@ -11,6 +11,7 @@ export class PowerGrid implements IProjectCard {
     public name: string = "Power Grid";
     public cardType: CardType = CardType.AUTOMATED;
     public text: string = "Increase your energy production 1 step for each power tag you have, including this";
+    public requirements: undefined;
     public description: string = "Making efficient use of your energy production";
     public canPlay(): boolean {
         return true;

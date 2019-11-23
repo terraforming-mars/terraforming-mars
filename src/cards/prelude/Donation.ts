@@ -8,6 +8,7 @@ export class Donation extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = "Donation";
     public text: string = "Gain 21 MC.";
+    public requirements: undefined;
     public description: string = "From a rich benefactor with absolutely no hidden agenda";
     public play(player: Player, _game: Game) {     
 			player.megaCredits += 21;

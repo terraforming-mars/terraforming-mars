@@ -1,6 +1,6 @@
 
 import { expect } from "chai";
-import { ArcticAlgae } from "../../src/cards/Cards";
+import { ArcticAlgae } from "../../src/cards/ArcticAlgae";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";

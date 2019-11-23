@@ -61,7 +61,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             <h1>Terraforming Mars</h1>
             <h2>Create New Game</h2>
             <div class="nes-container with-title" v-for="playerIndex in [1, 2, 3, 4, 5]">
-                <p class="title">Player {{playerIndex}}</p>
+                <p class="nes-container.title">Player {{playerIndex}}</p>
                 <div class="nes-field">
                     <label :for="'playerName' + playerIndex">Name:</label>
                     <input v-model="players[playerIndex - 1].name" :id="'playerName' + playerIndex" type="text" class="nes-input" />

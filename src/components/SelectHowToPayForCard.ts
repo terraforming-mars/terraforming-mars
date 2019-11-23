@@ -93,27 +93,27 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         <div>
             <div v-if="showtitle === true">{{playerinput.title}}</div>
             <label v-for="availableCard in playerinput.cards" :key="availableCard" style="display:block;font-size:12px">
-                <input class="nes-radio" type="radio" v-model="card" :value="availableCard" />
-                <card :card="availableCard"></card>
+                <input class="nes-radio" type="radio" v-model="card" :value="availableCard" />  
+                    <card class="cardbox" :card="availableCard"></card> 
             </label>
-            <div v-if="canUseSteel()" class="nes-field">
-                <label>Steel:</label>
+            <div class="nofloat" v-if="canUseSteel()" class="nes-field">
+                <label class="nofloat">Steel:</label>
                 <input class="nes-input" type="number" value="0" min="0" max="100" v-model="steel" />
             </div>
             <div v-if="canUseTitanium()" class="nes-field">
-                <label>Titanium:</label>
+                <label class="nofloat">Titanium:</label>
                 <input class="nes-input" type="number" value="0" min="0" max="100" v-model="titanium" />
             </div>
             <div v-if="canUseHeat()" class="nes-field">
-                <label>Heat:</label>
+                <label class="nofloat">Heat:</label>
                 <input class="nes-input" type="number" value="0" min="0" max="100" v-model="heat" />
             </div>
             <div v-if="canUseMicrobes()" class="nes-field">
-                <label>Microbes:</label>
+                <label class="nofloat">Microbes:</label>
                 <input class="nes-input" type="number" value="0" min="0" max="100" v-model="microbes" />
             </div>			
-            <div class="nes-field">
-                <label>Mega Credit:</label>
+            <div class="nofloat" class="nes-field">
+                <label class="nofloat">Mega Credit:</label>
                 <input class="nes-input" type="number" value="0" min="0" :max="getCardCost()" v-model="megaCredits" />
             </div>
             <button class="nes-btn" v-on:click="save">Save</button>

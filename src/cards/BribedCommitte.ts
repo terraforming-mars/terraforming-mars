@@ -1,24 +1,24 @@
 
-import { IProjectCard } from "./IProjectCard";
-import { Tags } from "./Tags";
-import { CardType } from "./CardType";
-import { Player } from "../Player";
-import { Game } from "../Game";
+import {IProjectCard} from './IProjectCard';
+import {Tags} from './Tags';
+import {CardType} from './CardType';
+import {Player} from '../Player';
 
 export class BribedCommitte implements IProjectCard {
     public cost: number = 7;
     public tags: Array<Tags> = [Tags.EARTH];
     public cardType: CardType = CardType.EVENT;
-    public name: string = "Bribed Committee";
-    public text: string = "Raise your terraform rating 2 steps. Lose 2 victory points.";
+    public name: string = 'Bribed Committee';
+    public text: string = 'Raise your terraform rating 2 steps. ' +
+      'Lose 2 victory points.';
     public requirements: undefined;
-    public description: string = "Influencing the people in power.";
+    public description: string = 'Influencing the people in power.';
     public canPlay(): boolean {
-        return true;
+      return true;
     }
-    public play(player: Player, _game: Game) {
-        player.terraformRating += 2;
-        player.victoryPoints -= 2;
-        return undefined;
+    public play(player: Player) {
+      player.terraformRating += 2;
+      player.victoryPoints -= 2;
+      return undefined;
     }
 }

@@ -28,7 +28,7 @@
     "extends": "@istanbuljs/nyc-config-typescript"
   },
   "scripts": {
-    "build": "eslint src/Player.ts && tsc --build tsconfig.json && webpack --config webpack.config.js",
+    "build": "tsc --build tsconfig.json && webpack --config webpack.config.js",
     "start": "tsc --build tsconfig.json && webpack --config webpack.config.js && node dist/server.js",
     "pretest": "tsc --build tsconfig-test.json",
     "test": "mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js dist/tests/cards/corporation/**.spec.js",

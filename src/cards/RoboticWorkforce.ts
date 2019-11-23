@@ -9,7 +9,7 @@ import { SelectCard } from "../inputs/SelectCard";
 import { SelectPlayer } from "../inputs/SelectPlayer";
 
 // Cards with building tags and production boxes
-import { AICentral } from "./Cards";
+import { AICentral } from "./AICentral";
 import { BiomassCombustors } from "./BiomassCombustors";
 import { BuildingIndustries } from "./BuildingIndustries";
 import { Capital } from "./Capital";

@@ -21,6 +21,9 @@ export const OtherPlayer = Vue.component("other-player", {
                 return getProjectCardByName(card.name);
             });
         },
+        getCorporationCard: function () {
+                return this.player.corporationCard;
+        },
         toggleDisplayed: function () {
             this.displayed = !this.displayed;
         }
@@ -30,7 +33,9 @@ export const OtherPlayer = Vue.component("other-player", {
             <h3 :style="'color:' + player.color" v-on:click="toggleDisplayed()">{{player.name}}</h3>
             <div v-if="displayed === true">
                 <div>Terraform Rating: {{player.terraformRating}}</div>
-                <div>Corporation: {{player.corporationCard || "None selected yet"}}</div>
+                <div v-if="player.corporationCard !== undefined">
+                    <card :card="getCorporationCard()"></card>
+                </div>
                 <h4 v-if="player.playedCards.length > 0">Played Cards</h4>
                 <div v-if="player.playedCards.length > 0">
                     <div class="cardbox" v-for="card in getEventCards()" :key="card">

@@ -96,7 +96,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 <input class="nes-radio" type="radio" v-model="card" :value="availableCard" />  
                     <card class="cardbox" :card="availableCard"></card> 
             </label>
-            <div class="nofloat" v-if="canUseSteel()" class="nes-field">
+            <div class="nofloat nes-field" v-if="canUseSteel()">
                 <label class="nofloat">Steel:</label>
                 <input class="nes-input" type="number" value="0" min="0" max="100" v-model="steel" />
             </div>
@@ -112,7 +112,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 <label class="nofloat">Microbes:</label>
                 <input class="nes-input" type="number" value="0" min="0" max="100" v-model="microbes" />
             </div>			
-            <div class="nofloat" class="nes-field">
+            <div class="nofloat nes-field">
                 <label class="nofloat">Mega Credit:</label>
                 <input class="nes-input" type="number" value="0" min="0" :max="getCardCost()" v-model="megaCredits" />
             </div>

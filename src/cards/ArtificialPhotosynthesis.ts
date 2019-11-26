@@ -10,7 +10,7 @@ export class ArtificialPhotosynthesis implements IProjectCard {
     public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = 'Artficial Photosynthesis';
+    public name: string = 'Artificial Photosynthesis';
     public text: string = 'Increase your plant production 1 step or your' +
       ' energy production 2 steps.';
     public requirements: undefined;

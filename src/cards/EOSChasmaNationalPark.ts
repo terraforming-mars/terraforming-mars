@@ -10,7 +10,7 @@ export class EosChasmaNationalPark implements IProjectCard {
   public cost: number = 16;
   public nonNegativeVPIcon: boolean = true;
   public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];
-  public name: string = 'EOS Chasma National Park';
+  public name: string = 'Eos Chasma National Park';
   public cardType: CardType = CardType.AUTOMATED;
   public text: string = 'Requires -12C or warmer. Add 1 animal to any card. ' +
     'Gain 3 plants. Increase your mega credit production 2 steps. Gain 1 ' +

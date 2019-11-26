@@ -612,7 +612,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-["Archaebacteria",`
+["ArchaeBacteria",`
     <div class="title background-color-automated">Archaebacteria</div>
     <div class="price">6</div>
     <div class="tag tag1 tag-microbe"></div>

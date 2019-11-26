@@ -10,7 +10,7 @@ export class EcologyExperts extends PreludeCard implements IProjectCard {
     public text: string = "Ignore global requirements for the next card you play this turn. Playing this card does not count as an action. Increase your plant production 1 step.";
     public requirements: undefined;
     public description: string = "I had no idea that you could actually do that";
-    public getRequirementsBonus(player: Player): number {
+    public getRequirementBonus(player: Player, _game: Game): number {
         const lastCardPlayed = player.getLastCardPlayedThisTurn();
         if (lastCardPlayed !== undefined && lastCardPlayed.name === this.name) {
             // Magic number high enough to always ignore requirements.

@@ -117,20 +117,19 @@ export class Player {
       return this.resourcesOnCards.get(card.name) || 0;
     }
     public getRequirementsBonus(game: Game): number {
+      let requirementsBonus: number = 0;
       if (
         this.corporationCard !== undefined &&
-            this.corporationCard.getRequirementBonus !== undefined &&
-            this.corporationCard.getRequirementBonus(this, game)) {
-        return 2;
+            this.corporationCard.getRequirementBonus !== undefined) {
+              requirementsBonus = this.corporationCard.getRequirementBonus(this, game);
       }
-      if (
-        this.playedCards.find(
-            (playedCard) => playedCard.getRequirementBonus !== undefined &&
-                    playedCard.getRequirementBonus(this, game)) !== undefined
-      ) {
-        return 2;
+      for (let playedCard of this.playedCards) {
+        if (playedCard.getRequirementBonus !== undefined &&
+           playedCard.getRequirementBonus(this, game) > requirementsBonus ) {
+            requirementsBonus = playedCard.getRequirementBonus(this, game);
+          }
       }
-      return 0;
+      return requirementsBonus;
     }
     public lastCardPlayedThisGeneration(game: Game): undefined | IProjectCard {
       const lastCardPlayed = this.playedCards[this.playedCards.length - 1];
@@ -654,6 +653,11 @@ export class Player {
           return action;
         }
         whenDone();
+
+        // Shoot again prelude cards 
+        if (selectedCard.name === "Eccentric Sponsor" || selectedCard.name === "Ecology Experts") {
+          return new SelectHowToPayForCard(this.getPlayableCards(game), cb);
+        }
 
         return undefined;
       };

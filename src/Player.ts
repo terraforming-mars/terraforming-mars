@@ -53,6 +53,7 @@ export class Player {
     public plants: number = 0;
     public plantProduction: number = 0;
     public cardsInHand: Array<IProjectCard> = [];
+    public preludeCardsInHand: Array<IProjectCard> = [];    
     public playedCards: Array<IProjectCard> = [];
     public generationPlayed: Map<string, number> = new Map<string, number>();
     public actionsTakenThisRound: number = 0;
@@ -654,6 +655,65 @@ export class Player {
         }
         whenDone();
 
+        return undefined;
+      };
+      return new SelectHowToPayForCard(this.getPlayableCards(game), cb);
+    }
+
+    private playPreludeCard(game: Game): PlayerInput {
+      const cb = (selectedCard: IProjectCard) => {
+        
+        const whenDone = () => {
+          this.preludeCardsInHand
+              .splice(
+                  this.preludeCardsInHand
+                      .findIndex(
+                          (card) => card.name === selectedCard.name
+                      ), 1
+              );
+          this.addPlayedCard(game, selectedCard);
+
+          const actionsFromPlayedCard: OrOptions[] = [];
+          for (const playedCard of this.playedCards) {
+            if (playedCard.onCardPlayed !== undefined) {
+              const actionFromPlayedCard: OrOptions | void =
+                            playedCard.onCardPlayed(this, game, selectedCard);
+              if (actionFromPlayedCard !== undefined) {
+                actionsFromPlayedCard.push(actionFromPlayedCard);
+              }
+            }
+          }
+
+          // run through multiple inputs
+          if (actionsFromPlayedCard.length > 1) {
+            const multipleActions = new AndOptions(() => {
+              this.actionsTakenThisRound++;
+              this.takeAction(game);
+              return undefined;
+            });
+            multipleActions.options = actionsFromPlayedCard;
+            this.setWaitingFor(multipleActions);
+            return;
+          } else if (actionsFromPlayedCard.length === 1) {
+            actionsFromPlayedCard[0].onend = () => {
+              this.actionsTakenThisRound++;
+              this.takeAction(game);
+            };
+            this.setWaitingFor(actionsFromPlayedCard[0]);
+            return;
+          }
+          this.actionsTakenThisRound++;
+          this.takeAction(game);
+        };
+
+        // Play the card
+        const action = selectedCard.play(this, game);
+        if (action !== undefined) {
+          action.onend = whenDone;
+          return action;
+        }
+        whenDone();
+
         // Shoot again prelude cards 
         if (selectedCard.name === "Eccentric Sponsor" || selectedCard.name === "Ecology Experts") {
           return new SelectHowToPayForCard(this.getPlayableCards(game), cb);
@@ -661,8 +721,9 @@ export class Player {
 
         return undefined;
       };
-      return new SelectHowToPayForCard(this.getPlayableCards(game), cb);
-    }
+      this.actionsTakenThisRound++;
+      return new SelectHowToPayForCard(this.preludeCardsInHand, cb);
+    }    
 
     private playActionCard(game: Game): PlayerInput {
       return new SelectCard(
@@ -1163,6 +1224,27 @@ export class Player {
     }
 
     public takeAction(game: Game): void {
+
+      //Prelude cards have to be played first
+      if (this.preludeCardsInHand.length > 0) {
+        const input = this.playPreludeCard(game);
+        input.onend = () => {
+          this.actionsThisGeneration.add(INITIAL_ACTION);
+          this.actionsTakenThisRound++;
+          this.actionsTakenThisRound++;
+          this.takeAction(game);
+        };
+        this.setWaitingFor(input);
+        return;
+      }
+
+      if (this.actionsTakenThisRound >= 2) {
+        this.actionsTakenThisRound = 0;
+        this.lastCardPlayedThisTurn = undefined;
+        game.playerIsFinishedTakingActions(this);
+        return;
+      }   
+
       if (
         game.getGeneration() === 1 &&
             this.corporationCard !== undefined &&
@@ -1176,13 +1258,6 @@ export class Player {
           this.takeAction(game);
         };
         this.setWaitingFor(input);
-        return;
-      }
-
-      if (this.actionsTakenThisRound >= 2) {
-        this.actionsTakenThisRound = 0;
-        this.lastCardPlayedThisTurn = undefined;
-        game.playerIsFinishedTakingActions(this);
         return;
       }
 

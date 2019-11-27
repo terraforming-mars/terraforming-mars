@@ -5,7 +5,7 @@ import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
 
 export class BusinessEmpire extends PreludeCard implements IProjectCard {
-    public cost: number = 6;    
+
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = "Business Empire";
     public text: string = "Increase MC production 6 steps. Pay 6 MC.";

@@ -227,7 +227,7 @@ export class Game {
                 'Select 2 Prelude cards',
                 preludeDealtCards,
                 (preludeCards: Array<IProjectCard>) => {
-                  player.cardsInHand.push(preludeCards[0], preludeCards[1]);
+                  player.preludeCardsInHand.push(preludeCards[0], preludeCards[1]);
                   return undefined;
                 }, 2, 2
             ),

@@ -536,6 +536,19 @@ export class Player {
       return card.tags.indexOf(Tags.SPACE) !== -1;
     }
 
+    private playPreludeCard(game: Game): PlayerInput {
+      return new SelectCard(
+        "Select prelude card to play",
+        this.preludeCardsInHand,
+        (foundCards: Array<IProjectCard>) => {
+            this.playCard(game, foundCards[0]);
+            return undefined;
+        },
+        1,
+        1
+      );
+    }
+
     private playProjectCard(game: Game): PlayerInput {
       const cb = (selectedCard: IProjectCard, howToPay: HowToPay) => {
         const cardCost: number = this.getCardCost(game, selectedCard);
@@ -575,7 +588,13 @@ export class Player {
         if (totalToPay < cardCost) {
           throw new Error('Did not spend enough to pay for card');
         }
+        this.playCard(game, selectedCard);
+        return undefined;
+      };
+      return new SelectHowToPayForCard(this.getPlayableCards(game), cb);
+    }
 
+    public playCard(game: Game, selectedCard: IProjectCard, howToPay?: HowToPay): PlayerInput | undefined { 
         const whenDone = () => {
           this.cardsInHand
               .splice(
@@ -586,14 +605,15 @@ export class Player {
               );
           this.addPlayedCard(game, selectedCard);
 
-          this.steel -= howToPay.steel;
-          this.titanium -= howToPay.titanium;
-          this.megaCredits -= howToPay.megaCredits;
-          this.heat -= howToPay.heat;
-
-          for (const playedCard of this.playedCards) {
-            if (playedCard.name === new Psychrophiles().name) {
-              this.removeResourceFrom(playedCard, howToPay.microbes);
+          if (howToPay !== undefined) {
+            this.steel -= howToPay.steel;
+            this.titanium -= howToPay.titanium;
+            this.megaCredits -= howToPay.megaCredits;
+            this.heat -= howToPay.heat;
+            for (const playedCard of this.playedCards) {
+                if (playedCard.name === new Psychrophiles().name) {
+                    this.removeResourceFrom(playedCard, howToPay.microbes);
+                }
             }
           }
 
@@ -655,76 +675,8 @@ export class Player {
           return action;
         }
         whenDone();
-
         return undefined;
-      };
-      return new SelectHowToPayForCard(this.getPlayableCards(game), cb);
     }
-
-    public playPreludeCard(game: Game): PlayerInput {
-      const cb = (cards: Array<IProjectCard>) => {
-        
-        const whenDone = () => {
-          this.preludeCardsInHand
-              .splice(
-                  this.preludeCardsInHand
-                      .findIndex(
-                          (card) => card.name === cards[0].name
-                      ), 1
-              );
-          this.addPlayedCard(game, cards[0]);
-
-          const actionsFromPlayedCard: OrOptions[] = [];
-          for (const playedCard of this.playedCards) {
-            if (playedCard.onCardPlayed !== undefined) {
-              const actionFromPlayedCard: OrOptions | void =
-                            playedCard.onCardPlayed(this, game, cards[0]);
-              if (actionFromPlayedCard !== undefined) {
-                actionsFromPlayedCard.push(actionFromPlayedCard);
-              }
-            }
-          }
-
-          // run through multiple inputs
-          if (actionsFromPlayedCard.length > 1) {
-            const multipleActions = new AndOptions(() => {
-              this.actionsTakenThisRound++;
-              this.takeAction(game);
-              return undefined;
-            });
-            multipleActions.options = actionsFromPlayedCard;
-            this.setWaitingFor(multipleActions);
-            return;
-          } else if (actionsFromPlayedCard.length === 1) {
-            actionsFromPlayedCard[0].onend = () => {
-              this.actionsTakenThisRound++;
-              this.takeAction(game);
-            };
-            this.setWaitingFor(actionsFromPlayedCard[0]);
-            return;
-          }
-          this.actionsTakenThisRound++;
-          this.takeAction(game);
-        };
-
-        // Play the card
-        const action = cards[0].play(this, game);
-        if (action !== undefined) {
-          action.onend = whenDone;
-          return action;
-        }
-        whenDone();
-
-        // Shoot again prelude cards 
-        if (cards[0].name === "Eccentric Sponsor" || cards[0].name === "Ecology Experts") {
-          return this.playProjectCard(game);
-        }
-
-        return undefined;
-      };
-      this.actionsTakenThisRound++;
-      return new SelectCard("Select prelude card to play",this.preludeCardsInHand,cb,1,1);
-    }    
 
     private playActionCard(game: Game): PlayerInput {
       return new SelectCard(

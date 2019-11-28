@@ -29,7 +29,6 @@ import {ORIGINAL_AWARDS} from './awards/Awards';
 import {IAward} from './awards/IAward';
 
 const INITIAL_ACTION: string = 'INITIAL';
-const PRELUDE_ACTION: string = 'PRELUDE';
 
 export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
@@ -541,8 +540,7 @@ export class Player {
         "Select prelude card to play",
         this.preludeCardsInHand,
         (foundCards: Array<IProjectCard>) => {
-            this.playCard(game, foundCards[0]);
-            return undefined;
+            return this.playCard(game, foundCards[0]);
         },
         1,
         1
@@ -595,14 +593,14 @@ export class Player {
     }
 
     public playCard(game: Game, selectedCard: IProjectCard, howToPay?: HowToPay): PlayerInput | undefined { 
-        const whenDone = () => {
-          this.cardsInHand
-              .splice(
-                  this.cardsInHand
-                      .findIndex(
-                          (card) => card.name === selectedCard.name
-                      ), 1
-              );
+      const whenDone = () => {
+          var projectCardIndex = this.cardsInHand.findIndex((card) => card.name === selectedCard.name);
+          var preludeCardIndex = this.preludeCardsInHand.findIndex((card) => card.name === selectedCard.name);
+          if (projectCardIndex !== -1) {
+            this.cardsInHand.splice(projectCardIndex, 1);
+          } else if (preludeCardIndex !== -1) {
+            this.preludeCardsInHand.splice(preludeCardIndex, 1);
+          }
           this.addPlayedCard(game, selectedCard);
 
           if (howToPay !== undefined) {
@@ -1182,7 +1180,6 @@ export class Player {
       if (this.preludeCardsInHand.length > 0) {
         const input = this.playPreludeCard(game);
         input.onend = () => {
-          this.actionsThisGeneration.add(PRELUDE_ACTION);
           this.actionsTakenThisRound++;
           this.actionsTakenThisRound++;
           this.takeAction(game);

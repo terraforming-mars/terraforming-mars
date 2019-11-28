@@ -21,15 +21,19 @@ export class ValleyTrust implements CorporationCard {
         return 0;
     }
 
-    public play(player: Player, game: Game) {
+    public initialAction(player: Player, game: Game) {
         const cardsDrawn: Array<IProjectCard> = [
             game.dealer.dealPreludeCard(),
             game.dealer.dealPreludeCard(),
             game.dealer.dealPreludeCard()
         ];
-        return new SelectCard("Select card to take into hand", cardsDrawn, (foundCards: Array<IProjectCard>) => {
-            player.cardsInHand.push(foundCards[0]);
-            return undefined;
-        });
+        return new SelectCard("Choose prelude card to keep", cardsDrawn, (foundCards: Array<IProjectCard>) => {
+            player.preludeCardsInHand.push(foundCards[0]);
+            return player.playPreludeCard(game);
+        });        
+    }
+
+    public play() {
+        return undefined;
     }
 }

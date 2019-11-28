@@ -29,6 +29,7 @@ import {ORIGINAL_AWARDS} from './awards/Awards';
 import {IAward} from './awards/IAward';
 
 const INITIAL_ACTION: string = 'INITIAL';
+const PRELUDE_ACTION: string = 'PRELUDE';
 
 export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
@@ -660,24 +661,24 @@ export class Player {
       return new SelectHowToPayForCard(this.getPlayableCards(game), cb);
     }
 
-    private playPreludeCard(game: Game): PlayerInput {
-      const cb = (selectedCard: IProjectCard) => {
+    public playPreludeCard(game: Game): PlayerInput {
+      const cb = (cards: Array<IProjectCard>) => {
         
         const whenDone = () => {
           this.preludeCardsInHand
               .splice(
                   this.preludeCardsInHand
                       .findIndex(
-                          (card) => card.name === selectedCard.name
+                          (card) => card.name === cards[0].name
                       ), 1
               );
-          this.addPlayedCard(game, selectedCard);
+          this.addPlayedCard(game, cards[0]);
 
           const actionsFromPlayedCard: OrOptions[] = [];
           for (const playedCard of this.playedCards) {
             if (playedCard.onCardPlayed !== undefined) {
               const actionFromPlayedCard: OrOptions | void =
-                            playedCard.onCardPlayed(this, game, selectedCard);
+                            playedCard.onCardPlayed(this, game, cards[0]);
               if (actionFromPlayedCard !== undefined) {
                 actionsFromPlayedCard.push(actionFromPlayedCard);
               }
@@ -707,7 +708,7 @@ export class Player {
         };
 
         // Play the card
-        const action = selectedCard.play(this, game);
+        const action = cards[0].play(this, game);
         if (action !== undefined) {
           action.onend = whenDone;
           return action;
@@ -715,14 +716,14 @@ export class Player {
         whenDone();
 
         // Shoot again prelude cards 
-        if (selectedCard.name === "Eccentric Sponsor" || selectedCard.name === "Ecology Experts") {
-          return new SelectHowToPayForCard(this.getPlayableCards(game), cb);
+        if (cards[0].name === "Eccentric Sponsor" || cards[0].name === "Ecology Experts") {
+          return this.playProjectCard(game);
         }
 
         return undefined;
       };
       this.actionsTakenThisRound++;
-      return new SelectHowToPayForCard(this.preludeCardsInHand, cb);
+      return new SelectCard("Select prelude card to play",this.preludeCardsInHand,cb,1,1);
     }    
 
     private playActionCard(game: Game): PlayerInput {
@@ -1229,8 +1230,25 @@ export class Player {
       if (this.preludeCardsInHand.length > 0) {
         const input = this.playPreludeCard(game);
         input.onend = () => {
-          this.actionsThisGeneration.add(INITIAL_ACTION);
+          this.actionsThisGeneration.add(PRELUDE_ACTION);
           this.actionsTakenThisRound++;
+          this.actionsTakenThisRound++;
+          this.takeAction(game);
+        };
+        this.setWaitingFor(input);
+        return;
+      }
+
+      if (
+        game.getGeneration() === 1 &&
+            this.corporationCard !== undefined &&
+            !this.actionsThisGeneration.has(INITIAL_ACTION) &&
+            this.corporationCard.initialAction !== undefined &&
+            this.actionsTakenThisRound < 2
+      ) {
+        const input = this.corporationCard.initialAction(this, game);
+        input.onend = () => {
+          this.actionsThisGeneration.add(INITIAL_ACTION);
           this.actionsTakenThisRound++;
           this.takeAction(game);
         };
@@ -1243,23 +1261,7 @@ export class Player {
         this.lastCardPlayedThisTurn = undefined;
         game.playerIsFinishedTakingActions(this);
         return;
-      }   
-
-      if (
-        game.getGeneration() === 1 &&
-            this.corporationCard !== undefined &&
-            !this.actionsThisGeneration.has(INITIAL_ACTION) &&
-            this.corporationCard.initialAction !== undefined
-      ) {
-        const input = this.corporationCard.initialAction(this, game);
-        input.onend = () => {
-          this.actionsThisGeneration.add(INITIAL_ACTION);
-          this.actionsTakenThisRound++;
-          this.takeAction(game);
-        };
-        this.setWaitingFor(input);
-        return;
-      }
+      }         
 
       const action: OrOptions = new OrOptions();
       action.title = 'Take action for action phase, select one ' +

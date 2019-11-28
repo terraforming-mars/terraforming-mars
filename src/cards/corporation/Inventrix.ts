@@ -22,7 +22,7 @@ export class Inventrix implements CorporationCard {
             return undefined;
         });
     }
-    public getRequirementBonus(): number {
+    public getRequirementBonus(_player: Player, _game: Game): number {
         return 2;
     }
     public play() {

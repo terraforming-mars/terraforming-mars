@@ -7,10 +7,12 @@ import { Game } from "../../../src/Game";
 
 describe("Inventrix", function () {
     it("Should play", function () {
+        const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player,player], player);
         const card = new Inventrix();
         const action = card.play();
         expect(action).to.eq(undefined);
-        expect(card.getRequirementBonus()).to.eq(2);
+        expect(card.getRequirementBonus(player, game)).to.eq(2);
     });
     it("Should take initial action", function () {
         const card = new Inventrix();

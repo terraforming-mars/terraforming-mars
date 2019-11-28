@@ -32,8 +32,6 @@ import { OrbitalConstructionYard } from "./cards/prelude/OrbitalConstructionYard
 import { ExperimentalForest } from "./cards/prelude/ExperimentalForest";
 import { AcquiredSpaceAgency } from "./cards/prelude/AcquiredSpaceAgency";
 import { ResearchNetwork } from "./cards/prelude/ResearchNetwork";
-import { EccentricSponsor } from "./cards/prelude/EccentricSponsor";
-import { EcologyExperts } from "./cards/prelude/EcologyExperts";
 
 import { CheungShingMARS } from "./cards/prelude/CheungShingMARS";
 import { RobinsonIndustries } from "./cards/prelude/RobinsonIndustries";
@@ -309,9 +307,10 @@ export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new OrbitalConstructionYard(),
         new AcquiredSpaceAgency(),
         new ResearchNetwork(),
-        new EccentricSponsor(),
-        new ExperimentalForest(),
-        new EcologyExperts()
+        // TODO need a better solution for these cards
+        // new EccentricSponsor(),
+        // new EcologyExperts()
+        new ExperimentalForest()
 ];
 
 

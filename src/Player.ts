@@ -53,6 +53,7 @@ export class Player {
     public plants: number = 0;
     public plantProduction: number = 0;
     public cardsInHand: Array<IProjectCard> = [];
+    public preludeCardsInHand: Array<IProjectCard> = [];    
     public playedCards: Array<IProjectCard> = [];
     public generationPlayed: Map<string, number> = new Map<string, number>();
     public actionsTakenThisRound: number = 0;
@@ -117,20 +118,19 @@ export class Player {
       return this.resourcesOnCards.get(card.name) || 0;
     }
     public getRequirementsBonus(game: Game): number {
+      let requirementsBonus: number = 0;
       if (
         this.corporationCard !== undefined &&
-            this.corporationCard.getRequirementBonus !== undefined &&
-            this.corporationCard.getRequirementBonus(this, game)) {
-        return 2;
+            this.corporationCard.getRequirementBonus !== undefined) {
+              requirementsBonus = this.corporationCard.getRequirementBonus(this, game);
       }
-      if (
-        this.playedCards.find(
-            (playedCard) => playedCard.getRequirementBonus !== undefined &&
-                    playedCard.getRequirementBonus(this, game)) !== undefined
-      ) {
-        return 2;
+      for (let playedCard of this.playedCards) {
+        if (playedCard.getRequirementBonus !== undefined &&
+           playedCard.getRequirementBonus(this, game) > requirementsBonus ) {
+            requirementsBonus = playedCard.getRequirementBonus(this, game);
+          }
       }
-      return 0;
+      return requirementsBonus;
     }
     public lastCardPlayedThisGeneration(game: Game): undefined | IProjectCard {
       const lastCardPlayed = this.playedCards[this.playedCards.length - 1];
@@ -535,6 +535,18 @@ export class Player {
       return card.tags.indexOf(Tags.SPACE) !== -1;
     }
 
+    private playPreludeCard(game: Game): PlayerInput {
+      return new SelectCard(
+        "Select prelude card to play",
+        this.preludeCardsInHand,
+        (foundCards: Array<IProjectCard>) => {
+            return this.playCard(game, foundCards[0]);
+        },
+        1,
+        1
+      );
+    }
+
     private playProjectCard(game: Game): PlayerInput {
       const cb = (selectedCard: IProjectCard, howToPay: HowToPay) => {
         const cardCost: number = this.getCardCost(game, selectedCard);
@@ -574,25 +586,32 @@ export class Player {
         if (totalToPay < cardCost) {
           throw new Error('Did not spend enough to pay for card');
         }
+        this.playCard(game, selectedCard, howToPay);
+        return undefined;
+      };
+      return new SelectHowToPayForCard(this.getPlayableCards(game), cb);
+    }
 
-        const whenDone = () => {
-          this.cardsInHand
-              .splice(
-                  this.cardsInHand
-                      .findIndex(
-                          (card) => card.name === selectedCard.name
-                      ), 1
-              );
+    public playCard(game: Game, selectedCard: IProjectCard, howToPay?: HowToPay): PlayerInput | undefined { 
+      const whenDone = () => {
+          var projectCardIndex = this.cardsInHand.findIndex((card) => card.name === selectedCard.name);
+          var preludeCardIndex = this.preludeCardsInHand.findIndex((card) => card.name === selectedCard.name);
+          if (projectCardIndex !== -1) {
+            this.cardsInHand.splice(projectCardIndex, 1);
+          } else if (preludeCardIndex !== -1) {
+            this.preludeCardsInHand.splice(preludeCardIndex, 1);
+          }
           this.addPlayedCard(game, selectedCard);
 
-          this.steel -= howToPay.steel;
-          this.titanium -= howToPay.titanium;
-          this.megaCredits -= howToPay.megaCredits;
-          this.heat -= howToPay.heat;
-
-          for (const playedCard of this.playedCards) {
-            if (playedCard.name === new Psychrophiles().name) {
-              this.removeResourceFrom(playedCard, howToPay.microbes);
+          if (howToPay !== undefined) {
+            this.steel -= howToPay.steel;
+            this.titanium -= howToPay.titanium;
+            this.megaCredits -= howToPay.megaCredits;
+            this.heat -= howToPay.heat;
+            for (const playedCard of this.playedCards) {
+                if (playedCard.name === new Psychrophiles().name) {
+                    this.removeResourceFrom(playedCard, howToPay.microbes);
+                }
             }
           }
 
@@ -609,7 +628,7 @@ export class Player {
 
           if (
             this.corporationCard !== undefined &&
-                    this.corporationCard.onCardPlayed !== undefined
+            this.corporationCard.onCardPlayed !== undefined
           ) {
             const method = this.corporationCard.onCardPlayed;
             if (
@@ -643,6 +662,7 @@ export class Player {
             this.setWaitingFor(actionsFromPlayedCard[0]);
             return;
           }
+
           this.actionsTakenThisRound++;
           this.takeAction(game);
         };
@@ -654,10 +674,7 @@ export class Player {
           return action;
         }
         whenDone();
-
         return undefined;
-      };
-      return new SelectHowToPayForCard(this.getPlayableCards(game), cb);
     }
 
     private playActionCard(game: Game): PlayerInput {
@@ -1159,11 +1176,25 @@ export class Player {
     }
 
     public takeAction(game: Game): void {
+
+      //Prelude cards have to be played first
+      if (this.preludeCardsInHand.length > 0) {
+        const input = this.playPreludeCard(game);
+        input.onend = () => {
+          this.actionsTakenThisRound++;
+          this.actionsTakenThisRound++;
+          this.takeAction(game);
+        };
+        this.setWaitingFor(input);
+        return;
+      }
+
       if (
         game.getGeneration() === 1 &&
             this.corporationCard !== undefined &&
             !this.actionsThisGeneration.has(INITIAL_ACTION) &&
-            this.corporationCard.initialAction !== undefined
+            this.corporationCard.initialAction !== undefined &&
+            this.actionsTakenThisRound < 2
       ) {
         const input = this.corporationCard.initialAction(this, game);
         input.onend = () => {
@@ -1180,7 +1211,7 @@ export class Player {
         this.lastCardPlayedThisTurn = undefined;
         game.playerIsFinishedTakingActions(this);
         return;
-      }
+      }         
 
       const action: OrOptions = new OrOptions();
       action.title = 'Take action for action phase, select one ' +

@@ -27,7 +27,7 @@ export class ValleyTrust implements CorporationCard {
             game.dealer.dealPreludeCard(),
             game.dealer.dealPreludeCard()
         ];
-        return new SelectCard("Choose prelude card to keep", cardsDrawn, (foundCards: Array<IProjectCard>) => {
+        return new SelectCard("Choose prelude card to play", cardsDrawn, (foundCards: Array<IProjectCard>) => {
             return player.playCard(game, foundCards[0]);
         }, 1, 1);
     }

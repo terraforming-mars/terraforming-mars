@@ -628,7 +628,7 @@ export class Player {
 
           if (
             this.corporationCard !== undefined &&
-                    this.corporationCard.onCardPlayed !== undefined
+            this.corporationCard.onCardPlayed !== undefined
           ) {
             const method = this.corporationCard.onCardPlayed;
             if (
@@ -662,6 +662,7 @@ export class Player {
             this.setWaitingFor(actionsFromPlayedCard[0]);
             return;
           }
+
           this.actionsTakenThisRound++;
           this.takeAction(game);
         };

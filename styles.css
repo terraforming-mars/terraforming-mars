@@ -2336,7 +2336,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 input[type=radio] {
- visibility: hidden;
+  display: none;
 }
 
 input[type=radio]:checked + label {

@@ -586,7 +586,7 @@ export class Player {
         if (totalToPay < cardCost) {
           throw new Error('Did not spend enough to pay for card');
         }
-        this.playCard(game, selectedCard);
+        this.playCard(game, selectedCard, howToPay);
         return undefined;
       };
       return new SelectHowToPayForCard(this.getPlayableCards(game), cb);

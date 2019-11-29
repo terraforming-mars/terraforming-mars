@@ -125,8 +125,13 @@ function processInput(
       res.write(getPlayer(player, game));
       res.end();
     } catch (err) {
-      res.writeHead(500);
+      res.writeHead(400, {
+        'Content-Type': 'application/json'
+      });
       console.warn('Error processing input from player', err);
+      res.write(JSON.stringify({
+        message: err.message
+      }));
       res.end();
     }
   });

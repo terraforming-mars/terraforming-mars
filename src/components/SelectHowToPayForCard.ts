@@ -18,7 +18,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
     props: ["player", "playerinput", "onsave", "showtitle"],
     data: function () {
         return {
-            card: "",
+            card: this.playerinput.cards[0],
             heat: 0,
             megaCredits: 0,
             steel: 0,
@@ -94,7 +94,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             <div v-if="showtitle === true">{{playerinput.title}}</div>
             <label v-for="availableCard in playerinput.cards" :key="availableCard" style="display:block;font-size:12px">
                 <input class="nes-radio" type="radio" v-model="card" :value="availableCard" />  
-                    <card class="cardbox" :card="availableCard"></card> 
+                <card class="cardbox" :card="availableCard"></card>
             </label>
             <div class="nofloat nes-field" v-if="canUseSteel()">
                 <label class="nofloat">Steel:</label>

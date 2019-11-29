@@ -42,6 +42,15 @@ export const WaitingFor = Vue.component("waiting-for", {
                     (this.$root as any).$data.player = xhr.response;
                     (this.$root as any).$data.playerkey++;
                     (this.$root as any).$data.screen = "player-home";
+                } else if (xhr.status === 400 && xhr.responseType === 'json') {
+                    const element: HTMLElement | null = document.getElementById("dialog-default");
+                    const message: HTMLElement | null = document.getElementById("dialog-default-message");
+                    if (message !== null && element !== null && (element as HTMLDialogElement).showModal !== undefined) {
+                        message.innerHTML = xhr.response.message;
+                        (element as HTMLDialogElement).showModal();
+                    } else {
+                        alert(xhr.response.message);
+                    }
                 } else {
                     alert("Error sending input");
                 }

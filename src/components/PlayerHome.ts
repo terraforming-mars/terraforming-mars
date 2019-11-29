@@ -26,6 +26,17 @@ export const PlayerHome = Vue.component("player-home", {
     template: `
         <div id="player-home">
             <h1 :style="'color:' + player.color">Teraforming Mars - Player Home - {{player.name}}</h1>
+            <section>
+                <dialog class="nes-dialog" id="dialog-default">
+                    <form method="dialog">
+                        <p class="title">Error with input</p>
+                        <p id="dialog-default-message"></p>
+                        <menu class="dialog-menu">
+                            <button class="nes-btn is-primary">OK</button>
+                        </menu>
+                    </form>
+                </dialog>
+            </section>
             <div v-if="player.phase === 'end'">
                 <h2>This game is over!</h2>
                 <div v-for="otherPlayer in player.players">

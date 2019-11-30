@@ -1183,7 +1183,7 @@ export class Player {
     public takeAction(game: Game): void {
 
       //Post Action (after some specific prelude cards have been played)
-      if (this.postAction) {
+      if (this.postAction && this.getPlayableCards(game).length > 0) {
         const input = this.playProjectCard(game);
         input.onend = () => {
           this.actionsTakenThisRound++;

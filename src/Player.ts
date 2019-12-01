@@ -1192,6 +1192,8 @@ export class Player {
         this.setWaitingFor(input);
         this.postAction = false;
         return;
+      } else if (this.postAction && this.getPlayableCards(game).length === 0) {
+        this.postAction = false;
       }
       
       //Prelude cards have to be played first

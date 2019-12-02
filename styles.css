@@ -400,14 +400,9 @@ border-right: 2px solid rgb(137,137,137);
                 content: "\25b2";
           }
 
-.project-icon:after {
-  margin-left: 10px;
+.project-icon:after, .preludeCard-icon:after {
+  margin-left: -235px;
   margin-top: 284px;
-}
-
-.preludeCard-icon:after {
-  margin-left: 10px;
-  margin-top: 214px;
 }
 
 .corporation-icon:after {

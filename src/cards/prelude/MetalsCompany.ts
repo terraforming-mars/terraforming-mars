@@ -7,9 +7,6 @@ import { IProjectCard } from "../IProjectCard";
 export class MetalsCompany extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = "Metals Company";
-    public text: string = "Increase your MC, steel and titanium production 1 step.";
-    public requirements: undefined;
-    public description: string = "Your accreditation to this company connects you to the whole metal market";
     public play(player: Player, _game: Game) {     
         player.megaCreditProduction++;
         player.titaniumProduction++;

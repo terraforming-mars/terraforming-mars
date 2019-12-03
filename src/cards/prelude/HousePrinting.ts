@@ -11,9 +11,6 @@ export class HousePrinting implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "House Printing";
     public cardType: CardType = CardType.AUTOMATED;
-    public text: string = "Increase your steel production 1 step. Gain 1 victory point.";
-    public requirements: undefined;
-    public description: string = "Large scale 3D printing - on Mars";
     public canPlay(): boolean {
         return true;
     }

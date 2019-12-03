@@ -12,9 +12,6 @@ export class Vitor implements CorporationCard {
     public name: string = "Vitor";
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 45;
-    public text: string = "You start with 45 MC. As your first action, fund an award for free. Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3MC";
-    public requirements: undefined;
-    public description: string = "A corporation grown from crowd funding of new innovations. Always inclined to initiate projects to gain public support as well as innovation prizes";
 
     public initialAction(player: Player, game: Game) {        
         const freeAward = new OrOptions();

@@ -12,10 +12,6 @@ export class SpaceElevator implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE, Tags.STEEL];
     public name: string = "Space Elevator";
     public cardType: CardType = CardType.ACTIVE;
-    public actionText: string = "Spend 1 steel to gain 5 mega credits.";
-    public text: string = "Increase your titanium production 1 step. Gain 2 victory points.";
-    public requirements: undefined;
-    public description: string = "An ultra-strong cable car up to geo-stationary orbit, enabling reasonable export costs.";
     public canPlay(): boolean {
         return true;
     }

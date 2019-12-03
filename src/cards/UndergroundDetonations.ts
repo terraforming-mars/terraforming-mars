@@ -12,10 +12,6 @@ export class UndergroundDetonations implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Underground Detonations";
     public cardType: CardType = CardType.ACTIVE;
-    public actionText: string = "Spend 10 mega credit to increase your heat production 2 steps.";
-    public description: string = "Radiation from the nuclear blast is shielded, but over time, we are still getting the heat.";
-    public requirements: undefined;
-    public text: string = "";
     public canPlay(): boolean {
         return true;
     }

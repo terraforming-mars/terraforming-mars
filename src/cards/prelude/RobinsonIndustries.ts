@@ -2,7 +2,6 @@
 import { IActionCard } from "../ICard";
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
-import { Game } from "../../Game";
 import { CorporationCard } from "./../corporation/CorporationCard";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
@@ -11,62 +10,76 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
     public name: string = "Robinson Industries";
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 47;
-    public actionText: string = "Spend 4 MC to increase one of your LOWEST PRODUCTION 1 step.";
-    public text: string = "Buying into diverse businesses, Robinson Industries is soon expected to influence all aspects of Martian life";
-    public requirements: undefined;
-    public description: string = "";
     public play() {
         return undefined;
     }
     public canAct(player: Player): boolean {
         return player.canAfford(4); 
     }
-    public action(player: Player, _game: Game) {
-	let minProduction = Math.min(player.megaCreditProduction, player.steelProduction, player.titaniumProduction, player.plantProduction, player.energyProduction, player.heatProduction);    
-
-        return new OrOptions(
-            new SelectOption("Increase MC production 1 step", () => {
-	            if (player.megaCreditProduction == minProduction) {
-	    	        player.megaCreditProduction++;
-	                player.megaCredits -= 4;
-				}
+    public action(player: Player) {
+        let minimum = player.megaCreditProduction;
+        let lowest: Array<SelectOption> = [new SelectOption("Increase MC production 1 step", () => {
+            player.megaCreditProduction++;
+            player.megaCredits -= 4;
+            return undefined;
+        })];
+        if (player.steelProduction < minimum) {
+            lowest = [];
+            minimum = player.steelProduction;
+        }
+        if (player.steelProduction === minimum) {
+            lowest.push(new SelectOption("Increase steel production 1 step", () => {
+                player.steelProduction++;
+                player.megaCredits -= 4;
                 return undefined;
-            }),
-            new SelectOption("Increase steel production 1 step", () => {
-	            if (player.steelProduction == minProduction) {
-	                player.steelProduction++;
-	                player.megaCredits -= 4;
-				}
+            }));
+        }
+        if (player.titaniumProduction < minimum) {
+            lowest = [];
+            minimum = player.titaniumProduction;
+        }
+        if (player.titaniumProduction === minimum) {
+            lowest.push(new SelectOption("Increase titanium production 1 step", () => {
+                player.titaniumProduction++;
+                player.megaCredits -= 4;
                 return undefined;
-	        }),
-            new SelectOption("Increase titanium production 1 step", () => {
-                if (player.titaniumProduction == minProduction) {
-                    player.titaniumProduction++;
-                    player.megaCredits -= 4;
-                }
+            }));
+        }
+        if (player.plantProduction < minimum) {
+            lowest = [];
+            minimum = player.plantProduction;
+        }
+        if (player.plantProduction === minimum) {
+            lowest.push(new SelectOption("Increase plant production 1 step", () => {
+                player.plantProduction++;
+                player.megaCredits -= 4;
                 return undefined;
-            }),
-            new SelectOption("Increase plant production 1 step", () => {
-                if (player.plantProduction == minProduction) {
-                    player.plantProduction++;
-                    player.megaCredits -= 4;
-                }
+            }));
+        }
+        if (player.energyProduction < minimum) {
+            lowest = [];
+            minimum = player.energyProduction;
+        }
+        if (player.energyProduction === minimum) {
+            lowest.push(new SelectOption("Increase energy production 1 step", () => {
+                player.energyProduction++;
+                player.megaCredits -= 4;
                 return undefined;
-            }),
-            new SelectOption("Increase energy production 1 step", () => {
-                if (player.energyProduction == minProduction) {
-                    player.energyProduction++;
-                    player.megaCredits -= 4;
-                }
+            }));
+        }
+        if (player.heatProduction < minimum) {
+            lowest = [];
+            minimum = player.heatProduction;
+        }
+        if (player.heatProduction === minimum) {
+            lowest.push(new SelectOption("Increase heat production 1 step", () => {
+                player.heatProduction++;
+                player.megaCredits -= 4;
                 return undefined;
-            }),
-            new SelectOption("Increase heat production 1 step", () => {
-                if (player.heatProduction == minProduction) {
-                    player.heatProduction++;
-                    player.megaCredits -= 4;
-                }
-                return undefined;
-            })
-	    );
+            }));
+        }
+        const result = new OrOptions();
+        result.options = lowest;
+        return result;
     }
 }

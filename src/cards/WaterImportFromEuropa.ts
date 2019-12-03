@@ -18,10 +18,6 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = "Water Import From Europa";
     public cardType: CardType = CardType.ACTIVE;
-    public actionText: string = "Pay 12 mega credit to place an ocean tile. Titanium may be used as if playing a space card";
-    public text: string = "Gain 1 victory point for each jovian tag you have";
-    public requirements: undefined;
-    public description: string = "With its low gravity, this Jovian ice moon is suitable for mass export of water";
     public canPlay(_player: Player, _game: Game): boolean {
         return true;
     }

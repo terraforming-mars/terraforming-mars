@@ -9,10 +9,6 @@ export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard
     public name: string = "United Nations Mars Initiative";
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 40;
-    public actionText: string = "If your terraform rating was raised this generation, you may pay 3 mega credit to raise it 1 step more.";
-    public text: string = "";
-    public requirements: undefined;
-    public description: string = "UNMI is the organization carrying out the World Government's own terraforming projects. After the terraforming announcement, the UNMI got competition from different corporations, but is still a major force behind Mars' development.";
     public play() {
         return undefined;
     }

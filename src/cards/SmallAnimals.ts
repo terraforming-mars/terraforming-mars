@@ -15,10 +15,6 @@ export class SmallAnimals implements IActionCard, IProjectCard {
     public name: string = "Small Animals";
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.ANIMAL;
-    public actionText: string = "Add 1 animal to this card";
-    public text: string = "Requires 6% oxygen. Decrease any plant production 1 step. Gain 1 victory point per 2 animals on this card.";
-    public requirements: string = "6% Oxygen";
-    public description: string = "Able to live in sparse conditions.";
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game) && this.getAvailablePlayers(player, game).length > 0;
     }

@@ -11,10 +11,6 @@ export class Steelworks implements IProjectCard, IActionCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Steelworks";
     public cardType: CardType = CardType.ACTIVE;
-    public text: string = "";
-    public requirements: undefined;
-    public actionText: string = "Spend 4 energy to gain 2 steel and increase oxygen 1 step.";
-    public description: string = "Turning the soil into stee and oxygen sounds good. It just takes a lot of energy.";
     public canPlay(): boolean {
         return true;
     }

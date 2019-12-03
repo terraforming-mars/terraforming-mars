@@ -15,10 +15,6 @@ export class RestrictedArea implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Restricted Area";
-    public actionText: string = "Spend 2 mega credit to draw a card";
-    public text: string = "Place a special tile";
-    public requirements: undefined;
-    public description: string = "A place to conduct secret research, preventing the wrong people from getting in. Or out";
     public canPlay(): boolean {
         return true;
     }

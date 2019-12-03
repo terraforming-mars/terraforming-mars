@@ -14,12 +14,6 @@ export class BusinessNetwork implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = 'Business Network';
     public cardType: CardType = CardType.ACTIVE;
-    public actionText: string = 'Look at the top card and either buy ' +
-      'it or discard it.';
-    public text: string = 'Decrease your mega credit production 1 step.';
-    public requirements: undefined;
-    public description: string = 'Investing in social events can open' +
-      ' up new opportunities.';
     public canPlay(player: Player): boolean {
       return player.megaCreditProduction >= -4;
     }

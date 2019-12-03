@@ -12,10 +12,6 @@ export class Psychrophiles implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.MICROBES];
     public name: string = "Psychrophiles";
     public cardType: CardType = CardType.ACTIVE;
-    public actionText: string = "Add 1 microbe to this card";
-    public text: string = "Effect: When paying for a plant card, microbes here may be used as 2 MC each. Temperature must be -20 C or lower";
-    public requirements: string = "-20C or Lower";
-    public description: string = "";
     public canPlay(player: Player, game: Game): boolean {
 	    return game.getTemperature() <= -20 + (player.getRequirementsBonus(game) * 2);
     }

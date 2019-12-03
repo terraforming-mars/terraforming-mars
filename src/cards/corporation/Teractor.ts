@@ -9,9 +9,6 @@ export class Teractor implements CorporationCard {
     public name: string = "Teractor";
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 60;
-    public text: string = "When playing an Earth card, you pay 3 mega credits less for it.";
-    public requirements: undefined;
-    public description: string = "Influence enough to control entire nations, and an army of lawyers and businessmen, has taken Teractor all the way to the top. And now the sky is calling. The strongest corporation on Earth wants to dominate space too...";
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
         if (card.tags.indexOf(Tags.EARTH) !== -1) {
             return 3;

@@ -14,10 +14,6 @@ export class RegolithEaters implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.MICROBES];
     public name: string = "Regolith Eaters";
     public cardType: CardType = CardType.ACTIVE;
-    public text: string = "";
-    public requirements: undefined;
-    public actionText: string = "Add 1 microbe to this card, or remove 2 microbes from this card to raise oxygen level 1 step.";
-    public description: string = "Living on the rocks and excreting oxygen.";
     public resourceType: ResourceType = ResourceType.MICROBE;
     public canPlay(): boolean {
         return true;

@@ -14,11 +14,7 @@ export class GHGProducingBacteria implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.MICROBES];
     public name: string = "GHG Producing Bacteria";
     public cardType: CardType = CardType.ACTIVE;
-    public actionText: string = "Add 1 microbe to this card, or remove 2 microbes to raise temperature 1 step.";
     public resourceType: ResourceType = ResourceType.MICROBE;
-    public text: string = "Requires 4% oxygen";
-    public requirements: string = "4% Oxygen";
-    public description: string = "Working for the biosphere and the atmosphere at the same time.";
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);
     }

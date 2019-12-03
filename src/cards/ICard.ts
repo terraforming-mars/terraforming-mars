@@ -15,7 +15,6 @@ import { StandardProjectType } from "../StandardProjectType";
 import { OrOptions } from "../inputs/OrOptions";
 
 export interface IActionCard {
-    actionText: string;
     action: (player: Player, game: Game) => AndOptions | SelectAmount | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
     canAct: (player: Player, game: Game) => boolean;
 }
@@ -23,11 +22,7 @@ export interface IActionCard {
 export interface ICard {
     name: string;
     tags: Array<Tags>;
-    text: string;
-    description: string;
-    requirements: string | undefined;
     play: (player: Player, game: Game) => PlayerInput | undefined;
-    actionText?: string;
     action?: (player: Player, game: Game) => AndOptions | SelectAmount | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
     canAct?: (player: Player, game: Game) => boolean;
     getCardDiscount?: (player: Player, game: Game, card: IProjectCard) => number;

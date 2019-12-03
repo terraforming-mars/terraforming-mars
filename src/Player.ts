@@ -64,6 +64,7 @@ export class Player {
     private actionsThisGeneration: Set<string> = new Set<string>();
     private lastCardPlayedThisTurn: IProjectCard | undefined;
     private waitingFor?: PlayerInput;
+    private postAction: Boolean = false;
 
     constructor(
         public name: string,
@@ -586,8 +587,7 @@ export class Player {
         if (totalToPay < cardCost) {
           throw new Error('Did not spend enough to pay for card');
         }
-        this.playCard(game, selectedCard, howToPay);
-        return undefined;
+        return this.playCard(game, selectedCard, howToPay);
       };
       return new SelectHowToPayForCard(this.getPlayableCards(game), cb);
     }
@@ -674,6 +674,10 @@ export class Player {
           return action;
         }
         whenDone();
+
+        if (selectedCard.postPlay !== undefined && selectedCard.postPlay) {
+          this.postAction = true;
+        }
         return undefined;
     }
 
@@ -1177,6 +1181,20 @@ export class Player {
 
     public takeAction(game: Game): void {
 
+      //Post Action (after some specific prelude cards have been played)
+      if (this.postAction && this.getPlayableCards(game).length > 0) {
+        const input = this.playProjectCard(game);
+        input.onend = () => {
+          this.actionsTakenThisRound++;
+          this.takeAction(game);
+        };
+        this.setWaitingFor(input);
+        this.postAction = false;
+        return;
+      } else if (this.postAction && this.getPlayableCards(game).length === 0) {
+        this.postAction = false;
+      }
+      
       //Prelude cards have to be played first
       if (this.preludeCardsInHand.length > 0) {
         const input = this.playPreludeCard(game);

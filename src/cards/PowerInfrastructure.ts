@@ -9,9 +9,6 @@ import { SelectAmount } from "../inputs/SelectAmount";
 
 export class PowerInfrastructure implements IActionCard, IProjectCard {
     public name: string = "Power Infrastructure";
-    public text: string = "";
-    public requirements: undefined;
-    public description: string = "Efficiency through flexibility."
     public cardType: CardType = CardType.ACTIVE;
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
@@ -21,7 +18,6 @@ export class PowerInfrastructure implements IActionCard, IProjectCard {
     public play(_player: Player, _game: Game) {
         return undefined;
     }
-    public actionText: string = "Spend any amount of energy to gain that many mega credit";
     public canAct(player: Player): boolean {
         return player.energy > 0;
     }

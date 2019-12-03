@@ -17,18 +17,12 @@ export class AquiferPumping implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = 'Aquifer Pumping';
     public cardType: CardType = CardType.ACTIVE;
-    public text: string = '';
-    public requirements: undefined;
-    public description: string = 'Underground water reservoirs may be tapped' +
-      ' in a controlled manner, to safely build up oceans to the desired level';
     public canPlay(): boolean {
       return true;
     }
     public play() {
       return undefined;
     }
-    public actionText: string = 'Spend 8 mega credits to place 1 ocean tile.' +
-      ' STEEL MAY BE USED as if you were playing a building card.';
     public canAct(player: Player): boolean {
       return (player.steelValue * player.steel) +
               player.megaCredits +

@@ -13,10 +13,6 @@ export class SecurityFleet implements IActionCard, IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Security Fleet";
     public resourceType: ResourceType = ResourceType.FIGHTER;
-    public actionText: string = "Spend 1 titanium to add 1 fighter resource to this card.";
-    public text: string = "Gain 1 victory point for each fighter resource on this card.";
-    public requirements: undefined;
-    public description: string = "Keeping the peace by force.";
     public canPlay(): boolean {
         return true;
     }

@@ -14,9 +14,6 @@ export class MiningRights implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Mining Rights";
     public cardType: CardType = CardType.AUTOMATED;
-    public text: string = "Place a special tile on an area with a steel or titanium placement bonus. Increase that production 1 step.";
-    public requirements: undefined;
-    public description: string = "The battles for Martian riches sometimes begin in a courtroom.";
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.getAvailableSpacesOnLand(player)
                 .filter((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1);

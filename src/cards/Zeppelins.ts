@@ -11,9 +11,6 @@ export class Zeppelins implements IProjectCard {
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Zeppelins";
-    public text: string = "Requires 5% oxygen. Increase your mega credit production 1 step for each city tile on mars. Gain 1 victory point.";
-    public description: string = "A relatively cheap way to travel between cities across the planet.";
-    public requirements: string = "5% Oxygen";
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 5 - player.getRequirementsBonus(game);
     }

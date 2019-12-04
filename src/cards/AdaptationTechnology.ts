@@ -9,10 +9,6 @@ export class AdaptationTechnology implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = 'Adaptation Technology';
     public cardType: CardType = CardType.ACTIVE;
-    public text: string = 'Your global requirements are +2 or -2 steps, ' +
-      'your choice in each case';
-    public requirements: undefined;
-    public description: string = 'Pushing the limits of the possible';
     public canPlay(): boolean {
       return true;
     }

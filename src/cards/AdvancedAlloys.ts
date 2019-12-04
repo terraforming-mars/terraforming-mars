@@ -9,11 +9,6 @@ export class AdvancedAlloys implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = 'Advanced Alloys';
     public cardType: CardType = CardType.ACTIVE;
-    public text: string = 'Each titanium you have is worth 1 mega credit ' +
-      'extra. Each steel you have is worth 1 mega credit extra.';
-    public requirements: undefined;
-    public description: string = 'The latest advances in metallargy give you' +
-      ' an edge in the competition.';
     public canPlay(): boolean {
       return true;
     }

@@ -10,11 +10,6 @@ export class EarthOffice implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = 'Earth Office';
     public cardType: CardType = CardType.ACTIVE;
-    public text: string = 'When you play an earth tag, you pay 3 mega ' +
-      'credit less for it.';
-    public requirements: undefined;
-    public description: string = 'Coordinating deliveries and homeworld ' +
-      'support.';
     public canPlay(): boolean {
       return true;
     }

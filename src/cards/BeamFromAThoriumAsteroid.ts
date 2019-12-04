@@ -10,11 +10,6 @@ export class BeamFromAThoriumAsteroid implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE, Tags.ENERGY];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Beam From A Thorium Asteroid';
-    public text: string = 'Requires a jovian tag. Increase your heat ' +
-      'production and energy production 3 steps each. Gain 1 victory point.';
-    public requirements: string = 'Jovian';
-    public description: string = 'Nuclear energy is safe, especially when ' +
-      'located on a remote asteroid rich in radioactive elements.';
     public canPlay(player: Player): boolean {
       return player.getTagCount(Tags.JOVIAN) >= 1;
     }

@@ -11,9 +11,6 @@ export class SolarPower implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Solar Power";
-    public text: string = "Increase your energy production 1 step. Gain 1 victory point.";
-    public requirements: undefined;
-    public description: string = "Perhaps the most readily available energy source on Mars.";
     public canPlay(): boolean {
         return true;
     }

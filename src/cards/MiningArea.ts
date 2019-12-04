@@ -14,9 +14,6 @@ export class MiningArea implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Mining Area";
-    public text: string = "Place a special tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.";
-    public requirements: undefined;
-    public description: string = "It is easier to claim territories where you already have established activities.";
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.getAvailableSpacesOnLand(player)
                 .filter((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1)

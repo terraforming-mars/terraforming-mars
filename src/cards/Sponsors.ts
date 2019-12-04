@@ -10,9 +10,6 @@ export class Sponsors implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = "Sponsors";
     public cardType: CardType = CardType.AUTOMATED;
-    public text: string = "Increase your mega credit production 2 steps";
-    public requirements: undefined;
-    public description: string = "Willing to support your projects";
     public canPlay(): boolean {
         return true;
     }

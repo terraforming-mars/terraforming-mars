@@ -10,9 +10,6 @@ export class Soletta implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Soletta";
-    public text: string = "Increase your heat production 7 steps";
-    public requirements: undefined;
-    public description: string = "Huge ultra-thin mirrors focusing sunlight onto the red planet.";
     public canPlay(): boolean {
         return true;
     }

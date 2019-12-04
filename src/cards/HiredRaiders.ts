@@ -14,9 +14,6 @@ export class HiredRaiders implements IProjectCard {
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.EVENT;
     public name: string = "Hired Raiders";
-    public text: string = "Steal up to 2 steel, or 3 mega credit from any player.";
-    public requirements: undefined;
-    public description: string = "We have a better use for those resources.";
     public canPlay(): boolean {
         return true;
     }

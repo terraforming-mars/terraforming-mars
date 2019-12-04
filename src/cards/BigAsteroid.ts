@@ -12,11 +12,6 @@ export class BigAsteroid implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
     public name: string = 'Big Asteroid';
-    public text: string = 'Raise temperature 2 steps and gain 4 titanium.' +
-      ' Remove up to 4 plants from any player.';
-    public requirements: undefined;
-    public description: string = 'There are many unpopulated areas to crash' +
-      ' it on';
     public canPlay(): boolean {
       return true;
     }

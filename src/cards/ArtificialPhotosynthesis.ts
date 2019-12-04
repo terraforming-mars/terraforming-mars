@@ -11,12 +11,6 @@ export class ArtificialPhotosynthesis implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Artificial Photosynthesis';
-    public text: string = 'Increase your plant production 1 step or your' +
-      ' energy production 2 steps.';
-    public requirements: undefined;
-    public description: string = 'Artificial photosynthesis was achieved ' +
-      'chemically by prof Akermark et. al. in 2021. Its application to ' +
-      'terraforming remains to be seen.';
     public canPlay(): boolean {
       return true;
     }

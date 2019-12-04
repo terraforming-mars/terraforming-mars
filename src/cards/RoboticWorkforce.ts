@@ -64,9 +64,6 @@ export class RoboticWorkforce implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Robotic Workforce";
     public cardType: CardType = CardType.AUTOMATED;
-    public text: string = "Duplicate only the production box of one of your building cards.";
-    public requirements: undefined;
-    public description: string = "Enhancing your production capacity.";
     public canPlay(): boolean {
         return true;
     }

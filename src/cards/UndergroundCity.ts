@@ -12,9 +12,6 @@ export class UndergroundCity implements IProjectCard {
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public name: string = "Underground City";
     public cardType: CardType = CardType.AUTOMATED;
-    public text: string = "Place a city tile. Decrease your energy production 2 steps and increase your steel production 2 steps";
-    public requirements: undefined;
-    public description: string = "Excavating is expensive, but gives both protection and building materials";
     public canPlay(player: Player): boolean {
         return player.energyProduction >= 2;
     }

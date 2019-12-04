@@ -11,9 +11,6 @@ export class MedicalLab implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Medical Lab";
-    public text: string = "Increase your mega credit production 1 step for every 2 building tags you have, including this. Gain 1 victory point.";
-    public requirements: undefined;
-    public description: string = "Providing health care for the public can be lucrative, as well as noble.";
     public canPlay(): boolean {
         return true;
     }

@@ -10,11 +10,6 @@ export class CEOsFavoriteProject implements IProjectCard {
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.EVENT;
     public name: string = 'CEO\'s Favorite Project';
-    public text: string = 'ADD 1 RESOURCE TO A CARD WITH AT LEAST 1 RESOURCE' +
-      ' ON IT';
-    public requirements: undefined;
-    public description: string = 'Having the top man\'s attention, the ' +
-      'involved people are sure to do their best';
     public canPlay(player: Player): boolean {
       return this.getAvailableCards(player).length > 0;
     }

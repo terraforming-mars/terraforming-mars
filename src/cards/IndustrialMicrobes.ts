@@ -10,9 +10,6 @@ export class IndustrialMicrobes implements IProjectCard {
     public tags: Array<Tags> = [Tags.MICROBES, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Industrial Microbes";
-    public text: string = "Increase your energy production and your steel production 1 step each";
-    public requirements: undefined;
-    public description: string = "Fuel production and metal refining can be programmed into microorganisms";
     public canPlay(): boolean {
         return true;
     }

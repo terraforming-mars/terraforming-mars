@@ -10,11 +10,6 @@ export class ArchaeBacteria implements IProjectCard {
     public tags: Array<Tags> = [Tags.MICROBES];
     public name: string = 'ArchaeBacteria';
     public cardType: CardType = CardType.AUTOMATED;
-    public text: string = 'It must be -18C or colder. Increase your ' +
-      'plant production 1 step.';
-    public requirements: string = '-18C or Colder';
-    public description: string = 'Photosynthesizing bacteria specializing' +
-      ' in extreme environments.';
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() <= -18 + (
         player.getRequirementsBonus(game) * 2

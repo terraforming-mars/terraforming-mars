@@ -9,9 +9,6 @@ export class AdaptedLichen implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Adapted Lichen';
-    public text: string = 'Increase your plant production 1 step';
-    public description: string = 'Suitable even for early terraforming';
-    public requirements: undefined;
     public canPlay(): boolean {
       return true;
     }

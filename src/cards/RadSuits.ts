@@ -11,9 +11,6 @@ export class RadSuits implements IProjectCard {
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Rad-Suits";
-    public text: string = "Requires 2 cities in play. Increase your mega credit production 1 step. Gain 1 victory point.";
-    public requirements: string = "2 Cities";
-    public description: string = "New synthetic fabrics, able to protect from cosmic ratiation, are becoming high fashion";
     public canPlay(_player: Player, game: Game): boolean {
         return game.getCitiesInPlay() >= 2;
     }

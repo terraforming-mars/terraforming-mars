@@ -12,9 +12,6 @@ export class ImportedNitrogen implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
     public name: string = "Imported Nitrogen";
     public cardType: CardType = CardType.EVENT;
-    public text: string = "Raise your terraform rating 1 step and gain 4 plants. Add 3 microbes to ANOTHER card and 2 animals to ANOTHER card.";
-    public requirements: undefined;
-    public description: string = "Providing nitrogen needed in the atmosphere and for biomass.";
     public canPlay(): boolean {
         return true;
     }

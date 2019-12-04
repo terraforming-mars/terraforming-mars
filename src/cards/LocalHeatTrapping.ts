@@ -13,9 +13,6 @@ export class LocalHeatTrapping implements IProjectCard {
     public cost: number = 1;
     public tags: Array<Tags> = [];
     public name: string = "Local Heat Trapping";
-    public text: string = "Spend 5 heat to either gain 4 plants, or to add 2 animals to ANOTHER card.";
-    public requirements: undefined;
-    public description: string = "Life can benefit from local hot spots";
     public canPlay(player: Player): boolean {
         return player.heat >= 5;
     }

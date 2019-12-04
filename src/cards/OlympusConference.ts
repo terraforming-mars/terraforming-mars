@@ -15,9 +15,6 @@ export class OlympusConference implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.SCIENCE;
     public name: string = "Olympus Conference";
-    public text: string = "When you play a science tag, including this, either add a science resource to this card, or remove a science resource from this card to draw a card. Gain 1 victory point.";
-    public requirements: undefined;
-    public description: string = "The scientific elite, assembled on the top of Olympus Mons, the highest spot in the solar system";
     public canPlay(): boolean {
         return true;
     }

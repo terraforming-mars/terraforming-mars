@@ -12,9 +12,6 @@ export class SubterraneanReservoir implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public tags: Array<Tags> = [];
     public name: string = "Subterranean Reservoir";
-    public text: string = "Place 1 ocean tile.";
-    public requirements: undefined;
-    public description: string = "Also known as an aquifer. Burst one open and you've got a lot of water.";
     public canPlay(): boolean {
         return true;
     }

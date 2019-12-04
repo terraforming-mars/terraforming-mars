@@ -10,9 +10,6 @@ export class MediaGroup implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = "Media Group";
     public cardType: CardType = CardType.ACTIVE;
-    public text: string = "After you play an event card, you gain 3 mega credit";
-    public requirements: undefined;
-    public description: string = "Profiting on every spectacular story";
     public canPlay(): boolean {
         return true;
     }

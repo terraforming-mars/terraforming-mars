@@ -10,9 +10,6 @@ export class SolarWindPower implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.SPACE, Tags.ENERGY];
     public name: string = "Solar Wind Power";
     public cardType: CardType = CardType.AUTOMATED;
-    public text: string = "Increase your energy production 1 step and gain 2 titanium";
-    public requirements: undefined;
-    public description: string = "Working those solar storms to your advantage.";
     public canPlay(): boolean {
         return true;
     }

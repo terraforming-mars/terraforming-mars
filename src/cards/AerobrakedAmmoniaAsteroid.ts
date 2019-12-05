@@ -11,11 +11,6 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = 'Aerobraked Ammonia Asteroid';
     public cardType: CardType = CardType.EVENT;
-    public text: string = 'Add 2 microbes to ANOTHER card. Increase your ' +
-      'heat production 3 steps and your plant production 1 step.';
-    public requirements: undefined;
-    public description: string = 'Ammonia is a greenhouse gas, as well as ' +
-      'being a convenient nitrogen source for organisms.';
     public canPlay(): boolean {
       return true;
     }

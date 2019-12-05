@@ -11,11 +11,6 @@ export class Asteroid implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public name: string = 'Asteroid';
     public cardType: CardType = CardType.EVENT;
-    public text: string = 'Raise temperature 1 step and gain 2 titanium.' +
-      'Remove up to 3 plants from any player';
-    public requirements: undefined;
-    public description: string =
-      'What are those plants doing in our impact zone?';
     public canPlay(): boolean {
       return true;
     }

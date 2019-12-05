@@ -12,10 +12,6 @@ export class ArcticAlgae implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT];
     public name: string = 'Arctic Algae';
     public cardType: CardType = CardType.ACTIVE;
-    public text: string = 'It must be -12C or colder to play. Gain 1 plant. ' +
-      'When anyone places an ocean tile, gain 2 plants.';
-    public requirements: string = '-12C or Colder';
-    public description: string = 'Suitable for freezing temperatures.';
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() <= -12 + (
         player.getRequirementsBonus(game) * 2

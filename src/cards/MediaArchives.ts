@@ -10,9 +10,6 @@ export class MediaArchives implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Media Archives";
-    public text: string = "Gain 1 mega credit for each event ever played by all players.";
-    public requirements: undefined;
-    public description: string = "Accessing information on past events for better planning of the future.";
     public canPlay(): boolean {
         return true;
     }

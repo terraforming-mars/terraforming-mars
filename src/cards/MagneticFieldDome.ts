@@ -10,9 +10,6 @@ export class MagneticFieldDome implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Magnetic Field Dome";
-    public text: string = "Decrease your energy production 2 steps and increase your plant production 1 step. Raise your terraform rating 1 step.";
-    public requirements: undefined;
-    public description: string = "Protecting a limited area from cosmic radiation.";
     public canPlay(player: Player): boolean {
         return player.energyProduction >= 2;
     }

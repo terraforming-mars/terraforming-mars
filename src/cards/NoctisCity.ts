@@ -11,9 +11,6 @@ export class NoctisCity implements IProjectCard {
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public name: string = "Noctis City";
     public cardType: CardType = CardType.AUTOMATED;
-    public text: string = "Decrease your energy production 1 step and increase your mega credit production 3 steps. Place a city tile on the reserved area, disregarding normal placement restrictions.";
-    public requirements: undefined;
-    public description: string = "In Noctis Labyrinthus, where the mist is gray.";
     public canPlay(player: Player): boolean {
         return player.energyProduction >= 1;
     }

@@ -17,13 +17,6 @@ export class EcologicalZone implements IProjectCard {
   public tags: Array<Tags> = [Tags.ANIMAL, Tags.PLANT];
   public cardType: CardType = CardType.ACTIVE;
   public name: string = 'Ecological Zone';
-  public text: string = 'Requires that you have a greenery tile. Place ' +
-    'a special tile adjacent to any greenery tile. When you play an animal' +
-    ' or a plant tag (including these 2), add an animal to this card. 1 ' +
-    'victory point per 2 animals on this card.';
-  public requirements: string = 'Greenery';
-  public description: string = 'A secluded area where a multitude of ' +
-    'species develop an ecosystem.';
   private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
     return game.getAvailableSpacesOnLand(player)
         .filter(

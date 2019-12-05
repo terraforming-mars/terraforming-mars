@@ -11,9 +11,6 @@ export class InventionContest implements IProjectCard {
     public cost: number = 2;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Invention Contest";
-    public text: string = "LOOK AT THE TOP 3 CARDS FROM THE DECK. TAKE 1 OF THEM INTO HAND AND DISCARD THE OTHER 2";
-    public requirements: undefined;
-    public description: string = "Engaging the scientific community in a field of your choice";
     public canPlay(): boolean {
         return true;
     }

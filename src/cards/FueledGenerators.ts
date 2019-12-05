@@ -9,10 +9,6 @@ export class FueledGenerators implements IProjectCard {
   public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
   public cardType: CardType = CardType.AUTOMATED;
   public name: string = 'Fueled Generators';
-  public text: string = 'Decrease your mega credit production 1 step and ' +
-    'increase your energy production 1 step';
-  public requirements: undefined;
-  public description: string = 'Simple but limited power supply';
   public canPlay(player: Player): boolean {
     return player.megaCreditProduction >= -4;
   }

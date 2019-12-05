@@ -10,9 +10,6 @@ export class MineralDeposit implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = "Mineral Deposit";
     public cardType: CardType = CardType.EVENT;
-    public text: string = "Gain 5 steel";
-    public requirements: undefined;
-    public description: string = "Still mostly untouched, Mars offers easy access to many useful minerals";
     public canPlay(): boolean {
         return true;
     }

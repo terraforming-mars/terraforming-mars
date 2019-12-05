@@ -12,11 +12,6 @@ export class BlackPolarDust implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = 'Black Polar Dust';
     public cardType: CardType = CardType.AUTOMATED;
-    public text: string = 'Place an ocean tile. Decrease your mega credit ' +
-      'production 2 steps and increase your heat production 3 steps.';
-    public requirements: undefined;
-    public description: string = 'The sprinkled dust absorbs heat from the ' +
-      'sun. Must be renewed after each snowfall, though';
     public canPlay(player: Player): boolean {
       return player.megaCreditProduction >= -3;
     }

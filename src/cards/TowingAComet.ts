@@ -12,9 +12,6 @@ export class TowingAComet implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
     public name: string = "Towing A Comet";
-    public text: string = "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.";
-    public requirements: undefined;
-    public description: string = "By aerobraking it we get its contents without the impact.";
     public canPlay(_player: Player, _game: Game): boolean {
         return true;
     }

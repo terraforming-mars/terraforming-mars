@@ -9,10 +9,6 @@ export class Cartel implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = 'Cartel';
     public cardType: CardType = CardType.AUTOMATED;
-    public text: string = 'Increase your mega credit production 1 step' +
-      ' for each Earth tag you have, including this.';
-    public requirements: undefined;
-    public description: string = 'We see it as a brotherhood.';
     public canPlay(): boolean {
       return true;
     }

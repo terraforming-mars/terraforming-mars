@@ -13,9 +13,6 @@ export class PhobosSpaceHaven implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE, Tags.CITY];
     public name: string = "Phobos Space Haven";
     public cardType: CardType = CardType.AUTOMATED;
-    public text: string = "Increase your titanium production 1 step and place a city tile on the reserved area. Gain 3 victory points.";
-    public requirements: undefined;
-    public description: string = "The doorway to mars.";
     public canPlay(): boolean {
         return true;
     }

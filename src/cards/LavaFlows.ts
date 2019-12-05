@@ -15,9 +15,6 @@ export class LavaFlows implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = "Lava Flows";
     public cardType: CardType = CardType.EVENT;
-    public text: string = "Raise temperature 2 steps and place this tile on either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons";
-    public requirements: undefined;
-    public description: string = "Releasing tremendous lava flows from one of Mars' gargantuan volcanoes";
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.getSpaces(SpaceType.LAND)
                 .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))

@@ -11,11 +11,6 @@ export class AsteroidMiningConsortium implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Asteroid Mining Consortium';
-    public text: string = 'Requires that you have titanium production.' +
-                          'Decrease any titanium production 1 step and ' +
-                          'increase your own 1 step. Gain 1 victory point.';
-    public requirements: string = 'Titanium Production';
-    public description: string = 'Your hold on the titanium market tightens.';
     public canPlay(player: Player): boolean {
       return player.titaniumProduction >= 1;
     }

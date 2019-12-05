@@ -10,9 +10,6 @@ export class Satellites implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public tags: Array<Tags> = [Tags.SPACE];
     public name: string = "Satellites";
-    public text: string = "Increase your mega credit production 1 step for each space tag you have, including this.";
-    public requirements: undefined;
-    public description: string = "Coordinating orbital traffic.";
     public canPlay(): boolean {
         return true;
     }

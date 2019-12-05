@@ -14,9 +14,6 @@ export class GiantIceAsteroid implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public name: string = "Giant Ice Asteroid";
     public cardType: CardType = CardType.EVENT;
-    public text: string = "Raise temperature 2 steps and place 2 ocean tiles. Remove up to 6 plants from any player.";
-    public requirements: undefined;
-    public description: string = "Crash it. The bigger, the better";
     public canPlay(): boolean {
         return true;
     }

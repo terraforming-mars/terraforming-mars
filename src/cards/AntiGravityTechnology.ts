@@ -9,12 +9,6 @@ export class AntiGravityTechnology implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = 'Anti-Gravity Technology';
     public cardType: CardType = CardType.ACTIVE;
-    public text: string = 'Requires 7 science tags, when you play a card, ' +
-      'you pay 2 mega credit less for it.';
-    public requirements: string = '7 Science';
-    public description: string = 'Finally successful, anti-gravity will ' +
-      'revolutionize everything, from households to industry and space ' +
-      'travel.';
     public canPlay(player: Player): boolean {
       return player.getTagCount(Tags.SCIENCE) >= 7;
     }

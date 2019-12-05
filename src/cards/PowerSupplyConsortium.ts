@@ -11,9 +11,6 @@ export class PowerSupplyConsortium implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY];
     public name: string = "Power Supply Consortium";
     public cardType: CardType = CardType.AUTOMATED;
-    public text: string = "Requires 2 power tags. Decrease any energy production 1 step and increase your own 1 step.";
-    public requirements: string = "2 Power";
-    public description: string = "Dominating the energy market allows you to make hostile takeovers.";
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.ENERGY) >= 2;
     }

@@ -11,9 +11,6 @@ export class LagrangeObservatory implements IProjectCard {
     public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.SPACE];
     public name: string = "Lagrange Observatory";
-    public text: string = "Draw 1 card. Gain 1 victory point.";
-    public requirements: undefined;
-    public description: string = "In a stationary orbit far from the planet, enabling very precise measurements.";
     public canPlay(): boolean {
         return true;
     }

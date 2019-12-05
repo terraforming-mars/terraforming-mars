@@ -11,11 +11,6 @@ export class BusinessContacts implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = 'Business Contacts';
     public cardType: CardType = CardType.EVENT;
-    public text: string = 'Look at the top 4 cards from the deck. ' +
-      'Take 2 of them into hand and discard the other 2.';
-    public requirements: undefined;
-    public description: string = 'Money and information are often ' +
-      'interchangeable.';
     public canPlay(): boolean {
       return true;
     }

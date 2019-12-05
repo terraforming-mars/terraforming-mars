@@ -12,9 +12,6 @@ export class LandClaim implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = "Land Claim";
     public cardType: CardType = CardType.EVENT;
-    public text: string = "Place your marker on a non-reserved area. Only you may place a tile here.";
-    public requirements: undefined;
-    public description: string = "Acquiring strategic land areas";
     public canPlay(): boolean {
         return true;
     }

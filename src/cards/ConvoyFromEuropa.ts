@@ -12,10 +12,6 @@ export class ConvoyFromEuropa implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
     public name: string = 'Convoy From Europa';
-    public text: string = 'Place 1 ocean tile and draw 1 card';
-    public requirements: undefined;
-    public description: string = 'Bringing ice and other key supplies ' +
-      'from the Jovian moon Europa';
     public canPlay(): boolean {
       return true;
     }

@@ -17,9 +17,6 @@ export class ImportedHydrogen implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
     public name: string = "Imported Hydrogen";
     public cardType: CardType = CardType.EVENT;
-    public text: string = "Gain 3 plants, or add 3 microbes or 2 animals to another card. Place an ocean tile.";
-    public requirements: undefined;
-    public description: string = "A light-weight bug expensive crucial element.";
     public canPlay(): boolean {
         return true;
     }

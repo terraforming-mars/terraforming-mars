@@ -11,9 +11,6 @@ export class Research implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.SCIENCE];
     public name: string = "Research";
     public cardType: CardType = CardType.AUTOMATED;
-    public text: string = "Counts as playing 2 science cards. Draw 2 cards. Gain 1 victory point.";
-    public requirements: undefined;
-    public description: string = "Through technical excellence you will unlock many wondrous things";
     public canPlay(): boolean {
         return true;
     }

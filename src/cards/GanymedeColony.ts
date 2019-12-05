@@ -13,9 +13,6 @@ export class GanymedeColony implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE, Tags.CITY];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Ganymede Colony";
-    public text: string = "Place a city tile on the reserved area. Gain 1 victory point per jovian tag you have.";
-    public requirements: undefined;
-    public description: string = "Settling the biggest moon of the biggest plant.";
     public canPlay(): boolean {
         return true;
     }

@@ -10,9 +10,6 @@ export class StandardTechnology implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Standard Technology";
     public cardType: CardType = CardType.ACTIVE;
-    public description: string = "Standard solutions honed to perfection";
-    public text: string = "After you pay for a standard project, except selling patents, you gain 3 mega credits";
-    public requirements: undefined;
     public canPlay(): boolean {
         return true;
     }

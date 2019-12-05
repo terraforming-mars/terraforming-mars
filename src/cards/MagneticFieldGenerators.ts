@@ -10,9 +10,6 @@ export class MagneticFieldGenerators implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Magnetic Field Generators";
     public cardType: CardType = CardType.AUTOMATED;
-    public text: string = "Decrease your energy production 4 steps and increase your plant production 2 steps. Raise your terraform rating 3 steps";
-    public requirements: undefined;
-    public description: string = "By generating a magnetic field, you can protect organisms from cosmic radiation.";
     public canPlay(player: Player): boolean {
         return player.energyProduction >= 4;
     }

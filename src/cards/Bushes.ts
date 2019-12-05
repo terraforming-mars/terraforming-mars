@@ -10,11 +10,6 @@ export class Bushes implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Bushes';
-    public text: string = 'Requires -10C or warmer. Increase your plant ' +
-      'production 2 steps. Gain 2 plants.';
-    public requirements: string = '-10C or Warmer';
-    public description: string = 'Giving some wind protection for smaller ' +
-      'species.';
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() >= -10 - (
         2 * player.getRequirementsBonus(game)

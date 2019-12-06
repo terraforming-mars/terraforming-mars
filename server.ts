@@ -46,7 +46,8 @@ const pngs: Map<string, Buffer> = new Map<string, Buffer>([
   ['/assets/tag-space.png', fs.readFileSync('assets/tag-space.png')],
   ['/assets/tag-wild.png', fs.readFileSync('assets/tag-wild.png')],
   ['/assets/tag-venus.png', fs.readFileSync('assets/tag-venus.png')],
-  ['/assets/triangle16.png', fs.readFileSync('assets/triangle16.png')]
+  ['/assets/triangle16.png', fs.readFileSync('assets/triangle16.png')],
+  ['/assets/board_icons.png', fs.readFileSync('assets/board_icons.png')],
 ]);
 
 function requestHandler(

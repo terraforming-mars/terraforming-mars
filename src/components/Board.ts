@@ -66,15 +66,13 @@ export const Board = Vue.component("board", {
                     let className: string = "bonus";
                     let innerHTML: string = "";
                     if (bonus === SpaceBonus.TITANIUM) {
-                        innerHTML = "&#x272A";
+                        className += " board-titanium";
                     } else if (bonus === SpaceBonus.STEEL) {
-                        innerHTML = "&#x2692";
                         className += " board-steel";
                     } else if (bonus === SpaceBonus.PLANT) {
-                        innerHTML = "&#x1F343";
-                        className += " plane";
+                        className += " board-plant";
                     } else if (bonus === SpaceBonus.DRAW_CARD) {
-                        innerHTML = "&#x1F0A0";
+                        className += " board-card";
                     }
                     cellChildren.push(createElement("span", { class: className, domProps: { innerHTML: innerHTML }}));
                 });

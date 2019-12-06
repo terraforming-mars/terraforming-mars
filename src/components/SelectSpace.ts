@@ -13,32 +13,24 @@ export const SelectSpace = Vue.component("select-space", {
         if (this.showtitle) {
             children.push(createElement("div", playerInput.title));
         }
-        const setOfSpaces: {[x: string]: number} = {};
+        const setOfSpaces: {[x: string]: boolean} = {};
         if (playerInput.availableSpaces !== undefined) {
             playerInput.availableSpaces.forEach((spaceId: string) => {
-                setOfSpaces[spaceId] = 1;
+                setOfSpaces[spaceId] = true;
             });
             children.push(createElement("button", { domProps: { className: "nes-btn" }, on: { click: () => {
-                const elTiles = document.getElementsByClassName("board-tile");
+                const elTiles = document.getElementsByClassName("board_space");
                 for (let i = 0; i < elTiles.length; i++) {
                     const elTile = elTiles[i] as HTMLElement;
-                    if (setOfSpaces[String(elTile.getAttribute("id"))] === 1) {
-                        elTile.onmouseover = function () {
-                            elTile.style.border = "1px solid black";
-                            elTile.style.cursor = "pointer";
+                    var el_id = elTile.getAttribute("data_space_id");
+                    if ( ! el_id || ! setOfSpaces[el_id]) continue;
+
+                    elTile.onclick = () => {
+                        for (let j = 0; j < elTiles.length; j++) {
+                            (elTiles[j] as HTMLElement).onclick = null;
                         }
-                        elTile.onmouseout = function () {
-                            elTile.style.border = "0px solid black";
-                            elTile.style.cursor = "default";
-                        }
-                        elTile.onclick = () => {
-                            for (let j = 0; j < elTiles.length; j++) {
-                                (elTiles[j] as HTMLElement).onmouseover = null;
-                                (elTiles[j] as HTMLElement).onmouseout = null;
-                                (elTiles[j] as HTMLElement).onclick = null;
-                            }
-                            this.onsave([[String(elTile.getAttribute("id"))]]);
-                        }
+                        el_id = elTile.getAttribute("data_space_id");
+                        this.onsave([[el_id]]);
                     }
                 }
             } } }, "Select Space"));

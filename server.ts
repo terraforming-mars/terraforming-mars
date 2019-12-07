@@ -24,6 +24,8 @@ import {TileType} from './src/TileType';
 
 const styles = fs.readFileSync('styles.css');
 const nes = fs.readFileSync('nes.min.css');
+const board = fs.readFileSync('board.css');
+const board_positions = fs.readFileSync('board_items_positions.css');
 const favicon = fs.readFileSync('favicon.ico');
 const mainJs = fs.readFileSync('dist/main.js');
 const prototype = fs.readFileSync('assets/Prototype.ttf');
@@ -48,6 +50,7 @@ const pngs: Map<string, Buffer> = new Map<string, Buffer>([
   ['/assets/tag-venus.png', fs.readFileSync('assets/tag-venus.png')],
   ['/assets/triangle16.png', fs.readFileSync('assets/triangle16.png')],
   ['/assets/board_icons.png', fs.readFileSync('assets/board_icons.png')],
+  ['/assets/board_bg_planet.png', fs.readFileSync('assets/board_bg_planet.png')]
 ]);
 
 function requestHandler(
@@ -65,6 +68,10 @@ function requestHandler(
         apiGetPlayer(req, res);
       } else if (req.url === '/nes.min.css') {
         serveResource(res, nes);
+      } else if (req.url === '/board.css') {
+        serveResource(res, board);
+      } else if (req.url === '/board_items_positions.css') {
+        serveResource(res, board_positions);
       } else if (req.url === '/styles.css') {
         serveResource(res, styles);
       } else if (req.url === '/assets/Prototype.ttf') {

@@ -5,29 +5,34 @@ import { SpaceBonus } from "./SpaceBonus";
 import { SpaceName } from "./SpaceName";
 
 class Space implements ISpace {
-    constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number) {
+    constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
 
     }
 }
 
 class Colony extends Space {
-    constructor(public id: string, bonus: Array<SpaceBonus> = []) {
+    constructor(id: string, bonus: Array<SpaceBonus> = []) {
         super(id, SpaceType.COLONY, bonus, -1, -1);
     }
 }
 
 class Land extends Space {
-    constructor(x: number, y: number, bonus: Array<SpaceBonus> = [], id?: string) {
-        if (id === undefined) {
-            id = x + ":" + y;
+    constructor(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
+        let str_id = id.toString()
+        if (id < 10) {
+            str_id = "0"+str_id;
         }
-        super(id, SpaceType.LAND, bonus, x, y);
+        super(str_id, SpaceType.LAND, bonus, x, y);
     }
 }
 
 class Ocean extends Space {
-    constructor(x: number, y: number, bonus: Array<SpaceBonus> = []) {
-        super(x + ":" + y, SpaceType.OCEAN, bonus, x, y);
+    constructor(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
+        let str_id = id.toString()
+        if (id < 10) {
+            str_id = "0"+str_id;
+        }
+        super(str_id, SpaceType.OCEAN, bonus, x, y);
     }
 }
 
@@ -36,93 +41,103 @@ export class OriginalBoard {
     constructor() {
         this.spaces.push(new Colony(SpaceName.GANYMEDE_COLONY)); 
         this.spaces.push(new Colony(SpaceName.PHOBOS_SPACE_HAVEN));
-        let rowCount = 0, colCount = 4;
+
+        let idx = 3, pos_x = 4, pos_y=0;
+
         this.spaces.push(
-            new Land(colCount++, rowCount, [SpaceBonus.STEEL, SpaceBonus.STEEL]),
-            new Ocean(colCount++, rowCount, [SpaceBonus.STEEL, SpaceBonus.STEEL]),
-            new Land(colCount++, rowCount),
-            new Ocean(colCount++, rowCount, [SpaceBonus.DRAW_CARD]),
-            new Ocean(colCount++, rowCount)
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.STEEL, SpaceBonus.STEEL]),
+            new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.STEEL, SpaceBonus.STEEL]),
+            new Land(idx++, pos_x++, pos_y,),
+            new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.DRAW_CARD]),
+            new Ocean(idx++,  pos_x++, pos_y,)
         );
-        rowCount = 1; colCount = 3;
+
+        pos_x = 3; pos_y=1;
         this.spaces.push(
-            new Land(colCount++, rowCount),
-            new Land(colCount++, rowCount, [SpaceBonus.STEEL], SpaceName.THARSIS_THOLUS),
-            new Land(colCount++, rowCount),
-            new Land(colCount++, rowCount),
-            new Land(colCount++, rowCount),
-            new Ocean(colCount++, rowCount, [SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD])
+            new Land(idx++, pos_x++, pos_y,),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.STEEL]),
+            new Land(idx++, pos_x++, pos_y),
+            new Land(idx++, pos_x++, pos_y),
+            new Land(idx++, pos_x++, pos_y),
+            new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD])
         );
-        rowCount = 2; colCount = 2;
+
+        pos_x = 2; pos_y=2;
         this.spaces.push(
-            new Land(colCount++, rowCount, [SpaceBonus.DRAW_CARD], SpaceName.ASCRAEUS_MONS),
-            new Land(colCount++, rowCount),
-            new Land(colCount++, rowCount),
-            new Land(colCount++, rowCount),
-            new Land(colCount++, rowCount),
-            new Land(colCount++, rowCount),
-            new Land(colCount++, rowCount, [SpaceBonus.STEEL])
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.DRAW_CARD]),
+            new Land(idx++, pos_x++, pos_y),
+            new Land(idx++, pos_x++, pos_y),
+            new Land(idx++, pos_x++, pos_y),
+            new Land(idx++, pos_x++, pos_y),
+            new Land(idx++, pos_x++, pos_y),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.STEEL])
         );
-        rowCount = 3; colCount = 1;
+
+        pos_x = 1; pos_y=3;
         this.spaces.push(
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT, SpaceBonus.TITANIUM], SpaceName.PAVONIS_MONS),
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT]),
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT]),
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT]),
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT]),
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT]),
-            new Ocean(colCount++, rowCount, [SpaceBonus.PLANT, SpaceBonus.PLANT])
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.TITANIUM]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
+            new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT])
         );
-        rowCount = 4; colCount = 0;
+
+        pos_x = 0; pos_y=4;
         this.spaces.push(
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT, SpaceBonus.PLANT], SpaceName.ARSIA_MONS),
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT, SpaceBonus.PLANT], SpaceName.NOCTIS_CITY),
-            new Ocean(colCount++, rowCount, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-            new Ocean(colCount++, rowCount, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-            new Ocean(colCount++, rowCount, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT, SpaceBonus.PLANT])
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
+            new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
+            new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
+            new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT])
         );
-        rowCount = 5; colCount = 1;
+
+        pos_x = 1; pos_y=5;
         this.spaces.push(
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT]),
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT]),
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT]),
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT]),
-            new Ocean(colCount++, rowCount, [SpaceBonus.PLANT]),
-            new Ocean(colCount++, rowCount, [SpaceBonus.PLANT]),
-            new Ocean(colCount++, rowCount, [SpaceBonus.PLANT])
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
+            new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
+            new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
+            new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.PLANT])
         );
-        rowCount = 6; colCount = 2;
+
+        pos_x = 2; pos_y=6;
         this.spaces.push(
-            new Land(colCount++, rowCount),
-            new Land(colCount++, rowCount),
-            new Land(colCount++, rowCount),
-            new Land(colCount++, rowCount),
-            new Land(colCount++, rowCount),
-            new Land(colCount++, rowCount, [SpaceBonus.PLANT]),
-            new Land(colCount++, rowCount)
+            new Land(idx++, pos_x++, pos_y),
+            new Land(idx++, pos_x++, pos_y),
+            new Land(idx++, pos_x++, pos_y),
+            new Land(idx++, pos_x++, pos_y),
+            new Land(idx++, pos_x++, pos_y),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
+            new Land(idx++, pos_x++, pos_y)
         );
-        rowCount = 7; colCount = 3;
+
+        pos_x = 3; pos_y=7;
         this.spaces.push(
-            new Land(colCount++, rowCount, [SpaceBonus.STEEL, SpaceBonus.STEEL]),
-            new Land(colCount++, rowCount),
-            new Land(colCount++, rowCount, [SpaceBonus.DRAW_CARD]),
-            new Land(colCount++, rowCount, [SpaceBonus.DRAW_CARD]),
-            new Land(colCount++, rowCount),
-            new Land(colCount++, rowCount, [SpaceBonus.TITANIUM])
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.STEEL, SpaceBonus.STEEL]),
+            new Land(idx++, pos_x++, pos_y),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.DRAW_CARD]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.DRAW_CARD]),
+            new Land(idx++, pos_x++, pos_y),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.TITANIUM])
         );
-        rowCount = 8; colCount = 4;
+
+        pos_x = 4; pos_y=8;
         this.spaces.push(
-            new Land(colCount++, rowCount, [SpaceBonus.STEEL]),
-            new Land(colCount++, rowCount, [SpaceBonus.STEEL, SpaceBonus.STEEL]),
-            new Land(colCount++, rowCount),
-            new Land(colCount++, rowCount),
-            new Ocean(colCount++, rowCount, [SpaceBonus.TITANIUM, SpaceBonus.TITANIUM])
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.STEEL]),
+            new Land(idx++, pos_x++, pos_y, [SpaceBonus.STEEL, SpaceBonus.STEEL]),
+            new Land(idx++, pos_x++, pos_y),
+            new Land(idx++, pos_x++, pos_y),
+            new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.TITANIUM, SpaceBonus.TITANIUM])
         );
     }
 

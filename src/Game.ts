@@ -354,11 +354,7 @@ export class Game {
 
     public playerHasPassed(player: Player): void {
       this.passedPlayers.add(player);
-      if (this.allPlayersHavePassed()) {
-        this.gotoProductionPhase();
-      } else {
-        this.playerIsFinishedTakingActions(player);
-      }
+      this.playerIsFinishedTakingActions(player);
     }
 
     private hasResearched(player: Player): boolean {
@@ -437,14 +433,25 @@ export class Game {
     }
 
     public playerIsFinishedTakingActions(player: Player): void {
+
+      if (this.allPlayersHavePassed()) {
+        this.gotoProductionPhase();
+        return;
+      }
+
       const nextPlayer = this.getNextPlayer(this.players, player);
 
+      // Defensive coding to fail fast, if we don't find the next
+      // player we are in an unexpected game state
       if (nextPlayer === undefined) {
         throw new Error('Did not find player');
       }
 
       if (!this.hasPassedThisActionPhase(nextPlayer)) {
         this.startActionsForPlayer(nextPlayer);
+      } else {
+        // Recursively find the next player
+        this.playerIsFinishedTakingActions(nextPlayer);
       }
     }
 

@@ -11,10 +11,10 @@
 
 .board_cont {
 	vertical-align: top;
-	width: 490px;
+	width: 505px;
 	margin: 0 auto;
 	background: #111;
-	padding: 20px;
+	padding: 20px 20px 20px 25px;
 	border-radius: 20px;
 }
 

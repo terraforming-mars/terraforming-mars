@@ -1215,12 +1215,18 @@ export class Player {
             this.actionsTakenThisRound < 2
       ) {
         const input = this.corporationCard.initialAction(this, game);
-        input.onend = () => {
+        if (input !== undefined) {
+          input.onend = () => {
+            this.actionsThisGeneration.add(INITIAL_ACTION);
+            this.actionsTakenThisRound++;
+            this.takeAction(game);
+          };
+          this.setWaitingFor(input);
+        } else {
           this.actionsThisGeneration.add(INITIAL_ACTION);
           this.actionsTakenThisRound++;
           this.takeAction(game);
-        };
-        this.setWaitingFor(input);
+        }
         return;
       }
 

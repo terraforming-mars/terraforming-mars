@@ -17,6 +17,7 @@ describe("LavaFlows", function () {
         const anotherPlayer = new Player("test", Color.RED, false);
         game.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
         game.addTile(player, SpaceType.LAND, game.getSpace(SpaceName.ARSIA_MONS), { tileType: TileType.SPECIAL });
+        game.addTile(player, SpaceType.LAND, game.getSpace(SpaceName.PAVONIS_MONS), { tileType: TileType.SPECIAL });
         expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {

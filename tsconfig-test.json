@@ -242,6 +242,8 @@
         "tests/cards/corporation/TharsisRepublic.spec.ts",
         "tests/cards/corporation/Thorgate.spec.ts",
         "tests/cards/corporation/UnitedNationsMarsInitiative.spec.ts",
+        "tests/cards/prelude/Loan.spec.ts",
+        "tests/cards/prelude/Vitor.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

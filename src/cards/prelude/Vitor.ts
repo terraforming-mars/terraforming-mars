@@ -7,32 +7,39 @@ import { Game } from "../../Game";
 import { ORIGINAL_AWARDS } from "../../awards/Awards";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
+import { IAward } from "../../awards/IAward";
 
 export class Vitor implements CorporationCard {
     public name: string = "Vitor";
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 45;
 
-    public initialAction(player: Player, game: Game) {        
-        const freeAward = new OrOptions();
-        for (let award of ORIGINAL_AWARDS) {
-            freeAward.options.push(
-            new SelectOption("Fund "+ award.name +" award", () => {
-                game.fundAward.bind(game, player, award);
-                return undefined;
-            }));
+    private selectAwardToFund(player: Player, game: Game, award: IAward): SelectOption {
+        return new SelectOption("Fund " + award.name + " award", () => {
+            game.fundAward(player, award);
+            return undefined;
+        });
+    }
+
+    public initialAction(player: Player, game: Game) {
+        // Awards are disabled for 1 player games
+        if (game.getPlayers().length === 1) {
+            return;
         }
+        const freeAward = new OrOptions();
+        freeAward.title = "Select award to fund";
+        freeAward.options = ORIGINAL_AWARDS.map((award) => this.selectAwardToFund(player, game, award));
         return freeAward;
     }
 
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
-        if (card.nonNegativeVPIcon !== undefined && card.nonNegativeVPIcon) {
-            player.megaCredits +=3;
+        if (card.nonNegativeVPIcon === true) {
+            player.megaCredits += 3;
         }
     }
 
-    public play() {
-        this.startingMegaCredits = 48;
+    public play(player: Player) {
+        player.megaCredits += 3;
         return undefined;
     }
 }

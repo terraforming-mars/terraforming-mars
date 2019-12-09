@@ -1,111 +1,110 @@
 
 import Vue from "vue";
-import { SpaceBonus } from "../SpaceBonus";
-import { SpaceName } from "../SpaceName";
 import { SpaceType } from "../SpaceType";
-import { TileType } from "../TileType";
 
 import { SpaceModel } from "../models/SpaceModel";
 
+import {Bonus} from "./Bonus";
+import {Tile} from "./Tile";
+
 export const Board = Vue.component("board", {
     props: ["spaces"],
+    components: {
+        "bonus": Bonus,
+        "tile": Tile
+    },
     data: function () {
         return {}
     },
-    render: function (createElement) {
-        const boardSpaces: Array<SpaceModel> = this.spaces.filter((space: SpaceModel) => space.x >= 0 && space.y >= 0);
-        boardSpaces.sort((s1: any, s2: any) => {
-            if (s1.y === s2.y) {
-                return s1.x - s2.x;
-            }
-            return s1.y - s2.y;
-        });
-        const spaces = [];
-        let lastY: number | undefined = undefined;
-        const elGanymede = createElement("div", {
-            style: {
-                position: "absolute",
-                left: "0px",
-                top: "10px"
-            }
-        }, [
-            createElement("span", { class: "board-tile" }, [
-                createElement("span", { class: "colony", domProps: { innerHTML: "&#x2B22" }}),
-                createElement("span", { class: "name" }, "GANYMEDE_COLONY")
-            ])
-        ]);
-        spaces.push(elGanymede);
-        let cells = [];
-        let leftPadding: number = 0;
-        for (let thisSpace of boardSpaces) {
-            if (lastY === undefined || thisSpace.y !== lastY) {
-                if (cells.length > 0) {
-                    spaces.push(createElement("div", { class: "row", style: { paddingLeft: (25 * leftPadding) + "px" }}, cells));
-                    cells = [];
-                }
-                leftPadding = thisSpace.x;
-            }
-            const cellChildren = [];
-            let className: string = "";
-            if (thisSpace.tileType === TileType.GREENERY) {
-                className = "greenery";
-            } else if (thisSpace.tileType === TileType.CITY) {
-                className = "city";
-            } else if (thisSpace.tileType === TileType.OCEAN) {
-                className = "ocean";
-            } else if (thisSpace.tileType === TileType.SPECIAL) {
-                className = "special";
-            } else if (thisSpace.spaceType === SpaceType.LAND) {
-                className = "land";
-            } else if (thisSpace.spaceType === SpaceType.OCEAN) {
-                className = "aquifer";
-            }
-            cellChildren.push(createElement("span", { class: className, domProps: { innerHTML: "&#x2B22"}}));
-            if (thisSpace.tileType === undefined) {
-                thisSpace.bonus.forEach((bonus) => {
-                    let className: string = "bonus";
-                    let innerHTML: string = "";
-                    if (bonus === SpaceBonus.TITANIUM) {
-                        innerHTML = "&#x272A";
-                    } else if (bonus === SpaceBonus.STEEL) {
-                        innerHTML = "&#x2692";
-                        className += " board-steel";
-                    } else if (bonus === SpaceBonus.PLANT) {
-                        innerHTML = "&#x1F343";
-                        className += " plane";
-                    } else if (bonus === SpaceBonus.DRAW_CARD) {
-                        innerHTML = "&#x1F0A0";
-                    }
-                    cellChildren.push(createElement("span", { class: className, domProps: { innerHTML: innerHTML }}));
-                });
-            }
-            if (thisSpace.color !== undefined) {
-                cellChildren.push(createElement("span", { class: thisSpace.color }));
-            }
-            if (thisSpace.id === SpaceName.ARSIA_MONS ||
-                thisSpace.id === SpaceName.ASCRAEUS_MONS ||
-                thisSpace.id === SpaceName.NOCTIS_CITY ||
-                thisSpace.id === SpaceName.PAVONIS_MONS ||
-                thisSpace.id === SpaceName.THARSIS_THOLUS) {
-                cellChildren.push(createElement("span", { class: "name" }, thisSpace.id));
-            }
-            cells.push(createElement("div", { class: "board-tile", attrs: { id: thisSpace.id } }, cellChildren));
-            lastY = thisSpace.y;
+    methods: {
+        getSpacesWithBonus: function(): Array<SpaceModel> {
+            const boardSpaces: Array<SpaceModel> = this.spaces.filter((space: SpaceModel) => space.bonus.length > 0);
+            boardSpaces.sort((s1: any, s2: any) => {return s1.id - s2.id});
+            return boardSpaces;
+        },
+        getSpacesWithTile: function(): Array<SpaceModel> {
+            const boardSpaces: Array<SpaceModel> = this.spaces.filter((space: SpaceModel) => space.tileType != undefined);
+            boardSpaces.sort((s1: any, s2: any) => {return s1.id - s2.id});
+            return boardSpaces;
+        },
+        getAllSpaces: function(): Array<SpaceModel> {
+            const boardSpaces: Array<SpaceModel> = this.spaces;
+            boardSpaces.sort((s1: any, s2: any) => {return s1.id - s2.id});
+            return boardSpaces;
+        },
+        getStroke: function(space: SpaceModel): string {
+            return (space.spaceType == SpaceType.OCEAN) ? '#1bade0': '#fff';
+        },
+        getPosCssClass: function(space: SpaceModel): string {
+            return "board_space_pos--" + space.id.toString();
+        },
+        getKey: function(prefix: string, space: SpaceModel): string {
+            return prefix + "_component_item_" + space.id.toString();
         }
-        spaces.push(createElement("div", { class: "row", style: { paddingLeft: (25 * leftPadding) + "px" }}, cells));
-        spaces.push(createElement("div", {
-            style: {
-                position: "absolute",
-                left: "0px",
-                top: "360px"
-            }}, [
-                createElement("span", { class: "board-tile" }, [
-                    createElement("span", { class: "colony", domProps: { innerHTML: "&#x2B22" }}),
-                    createElement("span", { class: "name" }, "PHOBOS_SPACE_HAVEN")
-                ])
-            ]));
-        return createElement("div", { class: "board" }, spaces);
-  }
+    },
+    template: `
+    <div class="board_cont">
+        <div class="board" id="main_board">
+            <bonus v-for="space in getSpacesWithBonus()" :space="space" :key="getKey('bonus', space)"></bonus>
+            <tile v-for="space in getSpacesWithTile()" :space="space" :key="getKey('tile', space)"></tile>
+            <svg height="470" width="450">
+                <defs>
+                    <symbol id="hexagon">
+                        <polygon points="24,48.5 45.3,36.5 45.3,13.5 24,2 3.5,13.5 3.5,36.5" fill="#fff" fill-opacity="0.01" stroke-width="3" stroke-opacity="0.4" />
+                    </symbol>
+                </defs>
+                <g transform="translate(1, 1)" id="main_grid">
+                    <use v-for="space in getAllSpaces()" :data_space_id="space.id" class="board_space" :class="getPosCssClass(space)" :stroke="getStroke(space)" xlink:href="#hexagon" />
+                </g>
+            </svg>
+
+            <svg id="board_legend" height="470" width="450" class="board_legend">
+
+                <g id="ganymede_colony">
+                    <text x="100" y="457" class="board_caption">Ganymede colony</text>
+                </g>
+                <g id="phobos_space_heaven">
+                    <text x="2" y="15" class="board_caption">Phobos space haven</text>
+                </g>
+                <g id="ascraeus_mons" transform="translate(40, 120)">
+                    <text class="board_caption">
+                        <tspan dy="15">Ascraeus</tspan>
+                        <tspan x="4" dy="12">Mons</tspan>
+                    </text>
+                </g>
+                
+                <g id="pavonis_mons" transform="translate(15, 160)">
+                    <text class="board_caption">
+                        <tspan dy="15">Pavonis</tspan>
+                        <tspan x="4" dy="12">Mons</tspan>
+                    </text>
+                </g>
+                
+                <g id="arsia_mons" transform="translate(2, 205)">
+                    <text class="board_caption">
+                        <tspan dy="15">Arsia</tspan>
+                        <tspan x="-2" dy="12">Mons</tspan>
+                    </text>
+                </g>
+                
+                <g id="tharsis_tholus"  transform="translate(10, 100)">
+                    <text class="board_caption">Tharsis Tholus</text>
+                    <line x1="85" y1="-3" x2="160" y2="2" class="board_line"></line>
+                    <text x="158" y="5" class="board_caption board_caption--black">&#x25cf;</text>
+                </g>
+                
+                <g id="noctis_city" transform="translate(10, 258)">
+                    <text class="board_caption">
+                        <tspan dy="15">Noctis</tspan>
+                        <tspan x="7" dy="12">City</tspan>
+                    </text>
+                    <line x1="30" y1="20" x2="140" y2="-20" class="board_line"></line>
+                    <text x="136" y="-18" class="board_caption board_caption--black">&#x25cf;</text>
+                </g>
+            </svg>
+        </div>
+    </div>
+    `
 });
 
 

@@ -1,0 +1,116 @@
+.board {
+	background: url(assets/board_bg_planet.png);
+	width: 450px;
+	height: 450px;
+	margin: 0 auto;
+}
+
+#hexagon {
+	transform: translate(0, -100);
+}
+
+.board_cont {
+	vertical-align: top;
+	width: 505px;
+	margin: 0 auto;
+	background: #111;
+	padding: 20px 20px 20px 25px;
+	border-radius: 20px;
+}
+
+.board_legend {
+	position: absolute; 
+	margin-left: -470px; 
+	z-index: 5; 
+	pointer-events: none
+}
+
+.board_caption {
+	font-family: Tahoma,Verdana,Segoe,sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	fill: white;
+	fill-opacity: 0.5;
+	pointer-events: none;
+}
+
+.board_line {
+	stroke: white;
+	stroke-width: 3;
+	stroke-opacity: 0.3;
+	pointer-events: none;
+}
+
+[id^=board_tile_]:hover, .board_space:hover {
+	stroke: #9acd32;
+	cursor: pointer;
+}
+
+.board_bonus {
+	position: absolute;
+	width: 15px;
+	height: 17px;
+}
+
+.board_bonus--plant {
+	background: url(assets/board_icons.png) -31px -1px no-repeat;
+}
+.board_bonus--steel {
+	background: url(assets/board_icons.png) -16px -1px no-repeat;
+}
+.board_bonus--titanium {
+	background: url(assets/board_icons.png) -1px -1px no-repeat;
+}
+
+.board_bonus--card {
+	background: url(assets/board_icons.png) -48px -1px no-repeat;
+	width: 14px;
+	height: 18px;
+}
+
+
+.board_tile {
+	position: absolute;
+	width: 44px;
+	height: 52px;
+	z-index: 2;
+}
+
+.board_tile--ocean {
+	background: url(assets/board_icons.png) -74px -27px no-repeat;
+}
+
+.board_tile--city {
+	background: url(assets/board_icons.png) -30px -27px no-repeat;
+}
+
+.board_tile--greenery {
+	background: url(assets/board_icons.png) -119px -27px no-repeat;
+}
+
+.board_cube {
+	position: absolute;
+	width: 21px;
+	height: 21px;
+	z-index: 3;
+}
+
+.board_cube--red {
+	background: url(assets/board_icons.png) -24px -78px no-repeat;
+}
+
+.board_cube--blue {
+	background: url(assets/board_icons.png) -94px -78px no-repeat;
+}
+
+.board_cube--black {
+	background: url(assets/board_icons.png) -48px -78px no-repeat;
+}
+
+.board_cube--yellow {
+	background: url(assets/board_icons.png) -72px -78px no-repeat;
+}
+
+.board_cube--green {
+	background: url(assets/board_icons.png) -1px -78px no-repeat;
+}

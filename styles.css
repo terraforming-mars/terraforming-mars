@@ -88,13 +88,24 @@
     left: 10px;
     font-size: 20px;
     color: black;
+    width: 15px;
+    height: 19px;
+    margin-top: 35px;
+    margin-left: -3px;
 }
 .board .board-tile > .bonus.board-steel {
-    font-size: 12px;
+    background: url(assets/board_icons.png) -16px -1px no-repeat;
 }
-.board .board-tile > .bonus.plant {
-    font-size: 15px;
+.board .board-tile > .bonus.board-plant {
+    background: url(assets/board_icons.png) -31px -1px no-repeat;
 }
+.board .board-tile > .bonus.board-titanium {
+  background: url(assets/board_icons.png) -1px -1px no-repeat;
+}
+.board .board-tile > .bonus.board-card {
+  background: url(assets/board_icons.png) -48px -1px no-repeat;
+}
+
 .board .board-tile > .bonus + .bonus {
     left: 30px;
 }

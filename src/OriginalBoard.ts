@@ -141,12 +141,12 @@ export class OriginalBoard {
         );
     }
 
-    private getRandomSpace(offset: number = 0): Space {
+    private getRandomSpace(offset: number = 0): ISpace {
         return this.spaces[Math.floor(Math.random() * 30) + offset];
     }
 
     private shuffle(input: Array<ISpace>): Array<ISpace> {
-        const out: Array<ISpace> = [];
+        const out: Array<ISpace> = input;
         const copy = input.slice();
         while (copy.length) {
             out.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
@@ -157,7 +157,7 @@ export class OriginalBoard {
     public getRandomCitySpace(offset: number = 0): Space {
         while (true) {
             let space = this.getRandomSpace(offset);
-            if (space instanceof Land && space.id !==  SpaceName.NOCTIS_CITY ) {
+            if (space.tile === undefined && space instanceof Land && space.id !==  SpaceName.NOCTIS_CITY  ) {
                 return space;
             }
         }
@@ -166,8 +166,8 @@ export class OriginalBoard {
     public getForestSpace(spaces: Array<ISpace>): ISpace {
         spaces = this.shuffle(spaces);
         while (true) {
-            const space: ISpace | undefined = spaces.pop();
-            if (space instanceof Land && space.id !==  SpaceName.NOCTIS_CITY ) {
+            const space =  spaces.pop();
+            if (space !== undefined && space.tile === undefined && space instanceof Land && space.id !==  SpaceName.NOCTIS_CITY ) {
                 return space;
             }
         }

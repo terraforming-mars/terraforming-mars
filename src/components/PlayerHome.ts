@@ -62,6 +62,7 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
                 <h2 class="nofloat">Resources</h2>
                 <player-resources :player="player"></player-resources>
+
                 <h2>Oxygen Level ({{player.oxygenLevel}})</h2>
                 <div>
                     <progress class="nes-progress is-success" max="14" :value="player.oxygenLevel"></progress>
@@ -74,6 +75,14 @@ export const PlayerHome = Vue.component("player-home", {
                 <div>
                     <progress class="nes-progress is-primary" max="9" :value="player.oceans"></progress>
                 </div>
+
+                <div v-if="player.players.length > 1">
+                    <h2>Last Actions</h2>
+                    <div v-for="message in player.gameLog">
+                        {{message}}
+                    </div>
+                </div>
+
                 <h2>Board</h2>
                 <board :spaces="player.spaces"></board>
                 <div v-if="player.claimedMilestones.length > 0">

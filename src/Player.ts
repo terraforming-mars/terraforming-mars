@@ -524,6 +524,7 @@ export class Player {
 
     private addPlayedCard(game: Game, card: IProjectCard): void {
       this.playedCards.push(card);
+      game.log(this.name + " played " + card.name);
       this.lastCardPlayedThisTurn = card;
       this.generationPlayed.set(card.name, game.generation);
     }
@@ -700,6 +701,7 @@ export class Player {
               return action;
             }
             whenDone();
+            game.log(this.name + " used " + foundCard.name + " action");
             return undefined;
           }
       );
@@ -737,6 +739,7 @@ export class Player {
             });
             this.actionsTakenThisRound++;
             this.takeAction(game);
+            game.log(this.name + " used sell patents standard project");
             return undefined;
           }, this.cardsInHand.length
       );
@@ -757,6 +760,7 @@ export class Player {
         );
         this.actionsTakenThisRound++;
         this.takeAction(game);
+        game.log(this.name + " used power plant standard project");
         return undefined;
       };
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
@@ -795,6 +799,7 @@ export class Player {
           return action;
         }
         whenDone();
+        game.log(this.name + " used asteroid standard project");
         return undefined;
       };
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
@@ -825,6 +830,7 @@ export class Player {
         );
         this.actionsTakenThisRound++;
         this.takeAction(game);
+        game.log(this.name + " used aquifer standard project");
         return undefined;
       };
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
@@ -879,6 +885,7 @@ export class Player {
           return action;
         }
         whenDone();
+        game.log(this.name + " used greenery standard project");
         return undefined;
       };
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
@@ -926,6 +933,7 @@ export class Player {
         );
         this.actionsTakenThisRound++;
         this.takeAction(game);
+        game.log(this.name + " used city standard project");
         return undefined;
       };
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
@@ -983,6 +991,7 @@ export class Player {
               return action;
             }
             whenDone();
+            game.log(this.name + " converted plants into a greenery");
             return undefined;
           }
       );
@@ -1003,6 +1012,7 @@ export class Player {
           return action;
         }
         whenDone();
+        game.log(this.name + " converted heat into temperature");
         return undefined;
       });
     }
@@ -1020,6 +1030,7 @@ export class Player {
         this.megaCredits -= megaCredits;
         this.actionsTakenThisRound++;
         this.takeAction(game);
+        game.log(this.name + " claimed " + milestone + " milestone");
         return undefined;
       };
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
@@ -1051,6 +1062,7 @@ export class Player {
         this.heat -= heat;
         this.actionsTakenThisRound++;
         this.takeAction(game);
+        game.log(this.name + " funded " + award + " award");
         return undefined;
       };
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
@@ -1082,6 +1094,7 @@ export class Player {
     private passOption(game: Game): PlayerInput {
       return new SelectOption('Pass', () => {
         game.playerHasPassed(this);
+        game.log(this.name + " passed");
         return undefined;
       });
     }

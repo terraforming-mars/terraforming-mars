@@ -40,6 +40,7 @@ export class Game {
     private originalBoard = new OriginalBoard();
     public spaces: Array<ISpace>;
     private temperature: number = constants.MIN_TEMPERATURE;
+    public gameLog: Array<String> = [];
 
     constructor(
       public id: string,
@@ -864,6 +865,13 @@ export class Game {
         }
       }
       return result;
+    }
+
+    public log(message: String) {
+      this.gameLog.push(message);
+      if (this.gameLog.length > 10 ) {
+        (this.gameLog.shift());
+      }
     }
 
     private setupSolo() {

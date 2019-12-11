@@ -280,7 +280,8 @@ function getPlayer(player: Player, game: Game): string {
     victoryPoints: player.victoryPoints,
     waitingFor: getWaitingFor(player.getWaitingFor()),
     canUseMicrobesAsMegaCreditsForPlants:
-      player.canUseMicrobesAsMegaCreditsForPlants
+      player.canUseMicrobesAsMegaCreditsForPlants,
+    gameLog: game.gameLog  
   };
   return JSON.stringify(output);
 }

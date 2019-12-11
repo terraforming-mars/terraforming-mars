@@ -179,10 +179,6 @@ export class Game {
       player.megaCredits = corporationCard.startingMegaCredits;
       if (corporationCard.name !== new BeginnerCorporation().name) {
         let cardsToPayFor: number = player.cardsInHand.length;
-        if (this.preludeExtension) {
-          // Prelude card are not to be bought
-          cardsToPayFor -= 2;
-        }
         player.megaCredits -= cardsToPayFor * constants.CARD_COST;
       }
 

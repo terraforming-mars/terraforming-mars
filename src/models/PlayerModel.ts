@@ -1,5 +1,6 @@
 import { CardModel } from "./CardModel";
 import { Color } from "../Color";
+import { VictoryPointsBreakdown } from "../VictoryPointsBreakdown";
 
 export interface PlayerModel {
     corporationCard: string;
@@ -21,4 +22,5 @@ export interface PlayerModel {
     titanium: number;
     titaniumProduction: number;
     victoryPoints: number;
+    victoryPointsBreakdown: VictoryPointsBreakdown;
 }

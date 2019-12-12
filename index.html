@@ -7,12 +7,14 @@
         <link rel='stylesheet' type='text/css' media='all' href='/styles.css' />
         <link rel='stylesheet' type='text/css' media='all' href='/board.css' />
         <link rel='stylesheet' type='text/css' media='all' href='/board_items_positions.css' />
+        <link rel='stylesheet' type='text/css' media='all' href='/game_end.css' />
     </head>
     <body>
         <div id="app">
             <game-home v-if="screen === 'game-home'" :game="$data.game"></game-home>
             <player-home v-if="screen === 'player-home'" :player="$data.player" :key="$data.playerkey"></player-home>
             <create-game-form v-if="screen === 'create'"></create-game-form>
+            <game-end v-if="screen == 'the-end'" :player="$data.player" :game="$data.game"></game-end>
         </div>
         <script src="/main.js"></script>
     </body>

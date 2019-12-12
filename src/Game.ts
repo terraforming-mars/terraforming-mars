@@ -80,6 +80,20 @@ export class Game {
       }
     }
 
+    public setOxygenLevel(newOxygenLevel: number): void {
+      if (newOxygenLevel < 0 || newOxygenLevel > 14) {
+        throw "Incorrect oxygen level " + newOxygenLevel.toString();
+      }
+      this.oxygenLevel = newOxygenLevel; 
+    }
+      
+    public setTemperature(newTemperature: number): void {
+      if (newTemperature < -30 || newTemperature > 8) {
+        throw "Incorrect temperature " + newTemperature.toString();
+      }
+      this.temperature = newTemperature; 
+    }
+
     public getSpaceByTileCard(cardName: string): ISpace | undefined {
       return this.spaces.find(
           (space) => space.tile !== undefined && space.tile.card === cardName
@@ -121,6 +135,7 @@ export class Game {
           (p1, p2) => award.getScore(p2, this) - award.getScore(p1, this)
       );
       if (award.getScore(players[0], this) > award.getScore(players[1], this)) {
+        players[0].victoryPointsBreakdown.awards += 5;
         players[0].victoryPoints += 5;
         players.shift();
         if (players.length > 1) {
@@ -134,6 +149,7 @@ export class Game {
               players.length > 0 &&
               award.getScore(players[0], this) === score
             ) {
+              players[0].victoryPointsBreakdown.awards += 3;
               players[0].victoryPoints += 3;
               players.shift();
             }
@@ -145,6 +161,7 @@ export class Game {
           players.length > 0 &&
           award.getScore(players[0], this) === score
         ) {
+          players[0].victoryPointsBreakdown.awards += 3;
           players[0].victoryPoints += 5;
           players.shift();
         }
@@ -467,6 +484,7 @@ export class Game {
 
       // TR is converted in victory points
       this.players.forEach((player) => {
+        player.victoryPointsBreakdown.terraformRating = player.terraformRating;
         player.victoryPoints += player.terraformRating;
       });
 
@@ -484,6 +502,12 @@ export class Game {
         this.giveAward(fundedAward.award);
       });
 
+      // Give 5 victory points for each claimed millestone
+      for (const millestone of this.claimedMilestones) {
+        millestone.player.victoryPointsBreakdown.milestones += 5;
+        millestone.player.victoryPoints += 5;
+      }
+
       const spaces = this.getAllSpaces();
       spaces.forEach((space) => {
         // Give victory point for each greenery tile
@@ -491,7 +515,8 @@ export class Game {
           space.tile &&
           space.tile.tileType === TileType.GREENERY &&
           space.player !== undefined) {
-          space.player.victoryPoints++;
+            space.player.victoryPointsBreakdown.city += 1;
+            space.player.victoryPoints++;
         }
         // Give victory point for each greenery adjacent to city tile
         if (
@@ -502,11 +527,17 @@ export class Game {
           const adjacent = this.getAdjacentSpaces(space);
           for (const adj of adjacent) {
             if (adj.tile && adj.tile.tileType === TileType.GREENERY) {
+              space.player.victoryPointsBreakdown.city += 1;
               space.player.victoryPoints++;
             }
           }
         }
       });
+
+      this.players.forEach((player) => {
+        player.victoryPointsBreakdown.updateTotal();
+      });
+        
     }
 
     public canPlaceGreenery(player: Player): boolean {

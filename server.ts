@@ -25,7 +25,8 @@ import {TileType} from './src/TileType';
 const styles = fs.readFileSync('styles.css');
 const nes = fs.readFileSync('nes.min.css');
 const board = fs.readFileSync('board.css');
-const board_positions = fs.readFileSync('board_items_positions.css');
+const boardPositionsCSS = fs.readFileSync('board_items_positions.css');
+const gameEndCSS = fs.readFileSync('game_end.css');
 const favicon = fs.readFileSync('favicon.ico');
 const mainJs = fs.readFileSync('dist/main.js');
 const prototype = fs.readFileSync('assets/Prototype.ttf');
@@ -50,7 +51,8 @@ const pngs: Map<string, Buffer> = new Map<string, Buffer>([
   ['/assets/tag-venus.png', fs.readFileSync('assets/tag-venus.png')],
   ['/assets/triangle16.png', fs.readFileSync('assets/triangle16.png')],
   ['/assets/board_icons.png', fs.readFileSync('assets/board_icons.png')],
-  ['/assets/board_bg_planet.png', fs.readFileSync('assets/board_bg_planet.png')]
+  ['/assets/board_bg_planet.png', fs.readFileSync('assets/board_bg_planet.png')],
+  ['/assets/solo_win.png', fs.readFileSync('assets/solo_win.png')]
 ]);
 
 function requestHandler(
@@ -61,9 +63,13 @@ function requestHandler(
     if (req.method === 'GET') {
       if (
         req.url === '/' ||
-                req.url.startsWith('/game?id=') ||
-                req.url.startsWith('/player?id=')) {
+        req.url.startsWith('/game?id=') ||
+        req.url.startsWith('/player?id=') ||
+        req.url.startsWith('/the-end?player_id=')
+      ) {
         serveApp(res);
+      } else if (req.url.startsWith('/fast-start-solo')) {
+        serveFastStartSolo(res);
       } else if (req.url.startsWith('/api/player?id=')) {
         apiGetPlayer(req, res);
       } else if (req.url === '/nes.min.css') {
@@ -71,7 +77,9 @@ function requestHandler(
       } else if (req.url === '/board.css') {
         serveResource(res, board);
       } else if (req.url === '/board_items_positions.css') {
-        serveResource(res, board_positions);
+        serveResource(res, boardPositionsCSS);
+      } else if (req.url === '/game_end.css') {
+        serveResource(res, gameEndCSS);
       } else if (req.url === '/styles.css') {
         serveResource(res, styles);
       } else if (req.url === '/assets/Prototype.ttf') {
@@ -278,10 +286,11 @@ function getPlayer(player: Player, game: Game): string {
     titanium: player.titanium,
     titaniumProduction: player.titaniumProduction,
     victoryPoints: player.victoryPoints,
+    victoryPointsBreakdown: player.victoryPointsBreakdown,
     waitingFor: getWaitingFor(player.getWaitingFor()),
+    gameLog: game.gameLog,
     canUseMicrobesAsMegaCreditsForPlants:
-      player.canUseMicrobesAsMegaCreditsForPlants,
-    gameLog: game.gameLog  
+      player.canUseMicrobesAsMegaCreditsForPlants
   };
   return JSON.stringify(output);
 }
@@ -384,6 +393,7 @@ function getPlayers(players: Array<Player>): Array<PlayerModel> {
       terraformRating: player.terraformRating,
       titanium: player.titanium,
       titaniumProduction: player.titaniumProduction,
+      victoryPointsBreakdown: player.victoryPointsBreakdown,
       victoryPoints: player.victoryPoints
     } as PlayerModel;
   });
@@ -434,6 +444,23 @@ function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {
 function serveApp(res: http.ServerResponse): void {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.write(fs.readFileSync('index.html'));
+  res.end();
+}
+
+function serveFastStartSolo(res: http.ServerResponse): void {
+ 
+  const gameId = generateRandomGameId();
+  const playerName = "P" + gameId;
+  const player = new Player(playerName, Color.BLUE, true);
+  player.plants = 6;
+  const game = new Game(gameId, [player], player);
+  game.generation = 14;
+  game.setOxygenLevel(14);
+  game.setTemperature(7);
+  games.set(gameId, game);
+  playersToGame.set(player.id, game);
+
+  res.writeHead(302, {'Location': '/player?id='+player.id});
   res.end();
 }
 

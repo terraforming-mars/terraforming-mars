@@ -12,7 +12,7 @@ import { IAward } from "../../awards/IAward";
 export class Vitor implements CorporationCard {
     public name: string = "Vitor";
     public tags: Array<Tags> = [Tags.EARTH];
-    public startingMegaCredits: number = 45;
+    public startingMegaCredits: number = 48; // It's 45 + 3 when this corp is played
 
     private selectAwardToFund(player: Player, game: Game, award: IAward): SelectOption {
         return new SelectOption("Fund " + award.name + " award", () => {
@@ -37,9 +37,8 @@ export class Vitor implements CorporationCard {
             player.megaCredits += 3;
         }
     }
-
-    public play(player: Player) {
-        player.megaCredits += 3;
+    
+    public play(_player: Player) {
         return undefined;
     }
 }

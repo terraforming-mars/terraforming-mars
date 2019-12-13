@@ -8,6 +8,7 @@ import { FundedAward } from "./FundedAward";
 import { OtherPlayer } from "./OtherPlayer";
 import { PlayerResources } from "./PlayerResources";
 import { WaitingFor } from "./WaitingFor";
+import {GlobalParameters} from "./GlobalParameters"
 
 export const PlayerHome = Vue.component("player-home", {
     props: ["player"],
@@ -18,7 +19,8 @@ export const PlayerHome = Vue.component("player-home", {
         "funded-award": FundedAward,
         "other-player": OtherPlayer,
         "player-resources": PlayerResources,
-        "waiting-for": WaitingFor
+        "waiting-for": WaitingFor,
+        "global-parameters": GlobalParameters
     },
     data: function () {
         return {}
@@ -63,19 +65,6 @@ export const PlayerHome = Vue.component("player-home", {
                 <h2 class="nofloat">Resources</h2>
                 <player-resources :player="player"></player-resources>
 
-                <h2>Oxygen Level ({{player.oxygenLevel}})</h2>
-                <div>
-                    <progress class="nes-progress is-success" max="14" :value="player.oxygenLevel"></progress>
-                </div>
-                <h2>Temperature ({{player.temperature}})</h2>
-                <div>
-                    <progress class="nes-progress is-warning" max="38" :value="player.temperature + 30"></progress>
-                </div>
-                <h2>Oceans ({{player.oceans}})</h2>
-                <div>
-                    <progress class="nes-progress is-primary" max="9" :value="player.oceans"></progress>
-                </div>
-
                 <div v-if="player.players.length > 1">
                     <h2>Last Actions</h2>
                     <div v-for="message in player.gameLog">
@@ -85,6 +74,10 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <h2>Board</h2>
                 <board :spaces="player.spaces"></board>
+
+
+                <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature"></global-parameters>
+
                 <div v-if="player.claimedMilestones.length > 0">
                     <h2>Claimed Milestones</h2>
                     <div>

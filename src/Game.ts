@@ -84,20 +84,6 @@ export class Game {
       return this.preludeExtension;
     }
 
-    public setOxygenLevel(newOxygenLevel: number): void {
-      if (newOxygenLevel < constants.MIN_OXYGEN_LEVEL || newOxygenLevel > constants.MAX_OXYGEN_LEVEL) {
-        throw "Incorrect oxygen level " + newOxygenLevel.toString();
-      }
-      this.oxygenLevel = newOxygenLevel; 
-    }
-      
-    public setTemperature(newTemperature: number): void {
-      if (newTemperature < constants.MIN_TEMPERATURE || newTemperature > constants.MAX_TEMPERATURE) {
-        throw "Incorrect temperature " + newTemperature.toString();
-      }
-      this.temperature = newTemperature; 
-    }
-
     public getSpaceByTileCard(cardName: string): ISpace | undefined {
       return this.spaces.find(
           (space) => space.tile !== undefined && space.tile.card === cardName

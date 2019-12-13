@@ -71,8 +71,6 @@ function requestHandler(
         req.url.startsWith('/the-end?player_id=')
       ) {
         serveApp(res);
-      } else if (req.url.startsWith('/fast-start-solo')) {
-        serveFastStartSolo(res);
       } else if (req.url.startsWith('/api/player?id=')) {
         apiGetPlayer(req, res);
       } else if (req.url === '/nes.min.css') {
@@ -450,23 +448,6 @@ function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {
 function serveApp(res: http.ServerResponse): void {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.write(fs.readFileSync('index.html'));
-  res.end();
-}
-
-function serveFastStartSolo(res: http.ServerResponse): void {
- 
-  const gameId = generateRandomGameId();
-  const playerName = "P" + gameId;
-  const player = new Player(playerName, Color.BLUE, true);
-  player.plants = 6;
-  const game = new Game(gameId, [player], player);
-  game.generation = 14;
-  game.setOxygenLevel(14);
-  game.setTemperature(7);
-  games.set(gameId, game);
-  playersToGame.set(player.id, game);
-
-  res.writeHead(302, {'Location': '/player?id='+player.id});
   res.end();
 }
 

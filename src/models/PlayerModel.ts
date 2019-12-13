@@ -23,4 +23,5 @@ export interface PlayerModel {
     titaniumProduction: number;
     victoryPoints: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;
+    preludeExtension: boolean;
 }

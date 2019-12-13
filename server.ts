@@ -290,7 +290,8 @@ function getPlayer(player: Player, game: Game): string {
     waitingFor: getWaitingFor(player.getWaitingFor()),
     gameLog: game.gameLog,
     canUseMicrobesAsMegaCreditsForPlants:
-      player.canUseMicrobesAsMegaCreditsForPlants
+      player.canUseMicrobesAsMegaCreditsForPlants,
+    preludeExtension: game.getPreludeExtension()
   };
   return JSON.stringify(output);
 }

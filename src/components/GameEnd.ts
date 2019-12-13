@@ -1,5 +1,6 @@
 import Vue from "vue";
 import { PlayerModel } from "../models/PlayerModel";
+import * as constants from "../constants";
 
 export const GameEnd = Vue.component("game-end", {
     props: ["player", "game"],
@@ -11,11 +12,11 @@ export const GameEnd = Vue.component("game-end", {
             return this.player.players.length === 1;
         },
         isSoloVictory: function (): boolean {
-            var max_gen: number = 14; // Todo get prelude extension and set max_gen to 12
+            var max_gen: number = this.player.preludeExtension ? 12 : 14;
 
             if (this.player.generation != max_gen ) return false;
-            if (this.player.temperature < 8) return false;
-            if (this.player.oxygenLevel < 14) return false;
+            if (this.player.temperature < constants.MAX_TEMPERATURE) return false;
+            if (this.player.oxygenLevel < constants.MAX_OXYGEN_LEVEL) return false;
 
             return true;
         },

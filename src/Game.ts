@@ -80,15 +80,19 @@ export class Game {
       }
     }
 
+    public getPreludeExtension(): boolean {
+      return this.preludeExtension;
+    }
+
     public setOxygenLevel(newOxygenLevel: number): void {
-      if (newOxygenLevel < 0 || newOxygenLevel > 14) {
+      if (newOxygenLevel < constants.MIN_OXYGEN_LEVEL || newOxygenLevel > constants.MAX_OXYGEN_LEVEL) {
         throw "Incorrect oxygen level " + newOxygenLevel.toString();
       }
       this.oxygenLevel = newOxygenLevel; 
     }
       
     public setTemperature(newTemperature: number): void {
-      if (newTemperature < -30 || newTemperature > 8) {
+      if (newTemperature < constants.MIN_TEMPERATURE || newTemperature > constants.MAX_TEMPERATURE) {
         throw "Incorrect temperature " + newTemperature.toString();
       }
       this.temperature = newTemperature; 

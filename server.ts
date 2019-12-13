@@ -26,6 +26,7 @@ const styles = fs.readFileSync('styles.css');
 const nes = fs.readFileSync('nes.min.css');
 const board = fs.readFileSync('board.css');
 const board_positions = fs.readFileSync('board_items_positions.css');
+const globsCSS = fs.readFileSync('globs.css');
 const favicon = fs.readFileSync('favicon.ico');
 const mainJs = fs.readFileSync('dist/main.js');
 const prototype = fs.readFileSync('assets/Prototype.ttf');
@@ -50,7 +51,8 @@ const pngs: Map<string, Buffer> = new Map<string, Buffer>([
   ['/assets/tag-venus.png', fs.readFileSync('assets/tag-venus.png')],
   ['/assets/triangle16.png', fs.readFileSync('assets/triangle16.png')],
   ['/assets/board_icons.png', fs.readFileSync('assets/board_icons.png')],
-  ['/assets/board_bg_planet.png', fs.readFileSync('assets/board_bg_planet.png')]
+  ['/assets/board_bg_planet.png', fs.readFileSync('assets/board_bg_planet.png')],
+  ['/assets/globs.png', fs.readFileSync('assets/globs.png')]
 ]);
 
 function requestHandler(
@@ -72,6 +74,8 @@ function requestHandler(
         serveResource(res, board);
       } else if (req.url === '/board_items_positions.css') {
         serveResource(res, board_positions);
+      } else if (req.url === '/globs.css') {
+        serveResource(res, globsCSS);
       } else if (req.url === '/styles.css') {
         serveResource(res, styles);
       } else if (req.url === '/assets/Prototype.ttf') {

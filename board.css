@@ -10,6 +10,7 @@
 }
 
 .board_cont {
+	display: inline-block;
 	vertical-align: top;
 	width: 505px;
 	margin: 0 auto;

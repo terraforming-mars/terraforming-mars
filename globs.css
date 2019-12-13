@@ -1,0 +1,83 @@
+/* UI to display global parameters (oxygen, temperature, oceans count) */
+
+.globs_cont {
+    background: black;
+    border-radius: 20px;
+    padding: 15px 20px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+
+.globs {
+    width: 200px;
+    height: 462px;
+    margin: 0 auto;
+    line-height: 1.23;
+    background: url("assets/globs.png")
+}
+
+.globs_oceans_count {
+    text-align: left;
+    font-family: Tahoma,Verdana,Segoe,sans-serif;
+    font-size: 26px;
+    font-weight: bold;
+    color: #ffffffab;
+    margin: 55px 0 0 110px;
+}
+
+.globs_columns_cont {
+    padding: 22px 0 0 56px;
+    height: 365px;
+}
+
+.globs_column {
+    display: inline-block;
+    vertical-align: top;
+    width: 26px;
+    text-align: center;
+    font-family: Tahoma,Verdana,Segoe,sans-serif;
+    font-size: 9px;
+    font-weight: bold;
+    color: #ffffffab;
+}
+
+.globs_column--temperature {
+    margin: 0;
+}
+
+.globs_column--oxygen {
+    margin: 0 0 0 49px;
+}
+
+.globs_column--temperature .globs_value {
+    line-height: 17px;
+    font-size: 12px;
+    position: relative;
+    z-index: 10;
+}
+
+.globs_column--oxygen .globs_value {
+    line-height: 23px;
+    font-size: 12px;
+    position: relative;
+    z-index: 10;
+}
+
+.globs_column_scale {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    z-index: 1;
+    margin-top: 335px;
+}
+
+.globs_column_scale--temperature {
+    background: #ed1b34;
+    margin-left: 7px;
+}
+
+.globs_column_scale--oxygen {
+    background: #609627;
+    margin-left: 7px;
+}

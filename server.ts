@@ -27,6 +27,7 @@ const nes = fs.readFileSync('nes.min.css');
 const board = fs.readFileSync('board.css');
 const boardPositionsCSS = fs.readFileSync('board_items_positions.css');
 const gameEndCSS = fs.readFileSync('game_end.css');
+const globsCSS = fs.readFileSync('globs.css');
 const favicon = fs.readFileSync('favicon.ico');
 const mainJs = fs.readFileSync('dist/main.js');
 const prototype = fs.readFileSync('assets/Prototype.ttf');
@@ -52,7 +53,9 @@ const pngs: Map<string, Buffer> = new Map<string, Buffer>([
   ['/assets/triangle16.png', fs.readFileSync('assets/triangle16.png')],
   ['/assets/board_icons.png', fs.readFileSync('assets/board_icons.png')],
   ['/assets/board_bg_planet.png', fs.readFileSync('assets/board_bg_planet.png')],
-  ['/assets/solo_win.png', fs.readFileSync('assets/solo_win.png')]
+  ['/assets/solo_win.png', fs.readFileSync('assets/solo_win.png')],
+  ['/assets/globs.png', fs.readFileSync('assets/globs.png')]
+
 ]);
 
 function requestHandler(
@@ -80,6 +83,8 @@ function requestHandler(
         serveResource(res, boardPositionsCSS);
       } else if (req.url === '/game_end.css') {
         serveResource(res, gameEndCSS);
+      } else if (req.url === '/globs.css') {
+        serveResource(res, globsCSS);
       } else if (req.url === '/styles.css') {
         serveResource(res, styles);
       } else if (req.url === '/assets/Prototype.ttf') {

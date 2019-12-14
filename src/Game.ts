@@ -551,22 +551,7 @@ export class Game {
         this.gotoEndGame();
         return;
       }
-
-      // iterate through players in order and allow them to convert plants
-      // into greenery if possible, there needs to be spaces available for
-      // greenery and the player needs enough plants
-      let firstPlayer: Player | undefined = this.first;
-      while (
-        firstPlayer !== undefined && players.indexOf(firstPlayer) === -1
-      ) {
-        firstPlayer = this.getNextPlayer(players, firstPlayer);
-      }
-
-      if (firstPlayer !== undefined) {
-        this.startFinalGreeneryPlacement(firstPlayer);
-      } else {
-        throw new Error('Was no player left to place final greenery');
-      }
+      this.startFinalGreeneryPlacement(players[0]);
     }
 
     private startFinalGreeneryPlacement(player: Player) {

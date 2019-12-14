@@ -15,7 +15,7 @@ export const FundedAward = Vue.component("claimed-milestone", {
         if (player === undefined) {
             return createElement("span", { domProps: { innerHTML: "Unknown Player" } });
         }
-        return createElement("span", { domProps: { innerHTML: fundedAward.award + " " + player.name } });
+        return createElement("span", { domProps: { innerHTML: fundedAward.award + " " + player.name + " " } });
     }
 });
 

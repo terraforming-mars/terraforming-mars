@@ -1031,7 +1031,7 @@ export class Player {
         this.megaCredits -= megaCredits;
         this.actionsTakenThisRound++;
         this.takeAction(game);
-        game.log(this.name + " claimed " + milestone + " milestone");
+        game.log(this.name + " claimed " + milestone.name + " milestone");
         return undefined;
       };
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
@@ -1063,7 +1063,7 @@ export class Player {
         this.heat -= heat;
         this.actionsTakenThisRound++;
         this.takeAction(game);
-        game.log(this.name + " funded " + award + " award");
+        game.log(this.name + " funded " + award.name + " award");
         return undefined;
       };
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {

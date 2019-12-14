@@ -42,7 +42,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             // We should always find a card
             // It may make more sense to throw
             // an error here that the card wasn't found
-            return 36; // max card cost
+            return 41; // max card cost
         },
         canUseHeat: function () {
             return this.playerinput.canUseHeatAsMegaCredits;
@@ -146,7 +146,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
   </div>
   <div class="nofloat nes-field">
     <label class="nofloat">Mega Credit:</label>
-    <input class="nes-input" type="number" value="0" min="0" :max="getCardCost()" v-model.number="megaCredits" />
+    <input class="nes-input" type="number" :value="getCardCost()" min="0" :max="getCardCost()" v-model.number="megaCredits" />
   </div>
   <div v-if="hasWarning()" class="nes-container is-rounded">
     <span class="nes-text is-warning">{{ warning }}</span>

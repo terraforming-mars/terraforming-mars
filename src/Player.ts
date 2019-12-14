@@ -27,6 +27,7 @@ import {ProtectedHabitats} from './cards/ProtectedHabitats';
 import {Pets} from './cards/Pets';
 import {ORIGINAL_AWARDS} from './awards/Awards';
 import {IAward} from './awards/IAward';
+import { VictoryPointsBreakdown } from './VictoryPointsBreakdown';
 
 const INITIAL_ACTION: string = 'INITIAL';
 
@@ -61,6 +62,7 @@ export class Player {
     public terraformRatingAtGenerationStart: number = 20;
     public resourcesOnCards: Map<string, number> = new Map<string, number>();
     public victoryPoints: number = 0;
+    public victoryPointsBreakdown = new VictoryPointsBreakdown();
     private actionsThisGeneration: Set<string> = new Set<string>();
     private lastCardPlayedThisTurn: IProjectCard | undefined;
     private waitingFor?: PlayerInput;
@@ -1021,7 +1023,6 @@ export class Player {
         milestone: IMilestone,
         game: Game): SelectHowToPay | SelectOption {
       const claimer = (megaCredits: number, heat: number) => {
-        this.victoryPoints += 5;
         game.claimedMilestones.push({
           player: this,
           milestone: milestone

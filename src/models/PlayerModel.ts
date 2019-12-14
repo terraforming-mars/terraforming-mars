@@ -1,5 +1,6 @@
 import { CardModel } from "./CardModel";
 import { Color } from "../Color";
+import { VictoryPointsBreakdown } from "../VictoryPointsBreakdown";
 
 export interface PlayerModel {
     corporationCard: string;
@@ -17,8 +18,12 @@ export interface PlayerModel {
     plantProduction: number;
     steel: number;
     steelProduction: number;
+    steelValue: number;
     terraformRating: number;
     titanium: number;
     titaniumProduction: number;
+    titaniumValue: number;
     victoryPoints: number;
+    victoryPointsBreakdown: VictoryPointsBreakdown;
+    isSoloModeWin: boolean;
 }

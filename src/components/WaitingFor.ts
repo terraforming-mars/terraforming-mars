@@ -38,10 +38,16 @@ export const WaitingFor = Vue.component("waiting-for", {
             xhr.responseType = "json";
             xhr.onload = () => {
                 if (xhr.status === 200) {
-                    (this.$root as any).$data.screen = "empty";
-                    (this.$root as any).$data.player = xhr.response;
-                    (this.$root as any).$data.playerkey++;
-                    (this.$root as any).$data.screen = "player-home";
+                    const root = (this.$root as any);
+                    root.$data.screen = "empty";
+                    root.$data.player = xhr.response;
+                    root.$data.playerkey++;
+                    root.$data.screen = "player-home";
+                    if (root.$data.player.phase == "end" && window.location.pathname !== "/the-end") {
+                        console.log(window.location.pathname);
+                        (window as any).location = (window as any).location;
+                    }
+
                 } else if (xhr.status === 400 && xhr.responseType === 'json') {
                     const element: HTMLElement | null = document.getElementById("dialog-default");
                     const message: HTMLElement | null = document.getElementById("dialog-default-message");

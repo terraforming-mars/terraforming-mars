@@ -25,5 +25,5 @@ export interface PlayerModel {
     titaniumValue: number;
     victoryPoints: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;
-    preludeExtension: boolean;
+    isSoloModeWin: boolean;
 }

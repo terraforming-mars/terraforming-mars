@@ -102,6 +102,11 @@ export class Game {
              this.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
     }
 
+    public isSoloModeWin(): boolean {
+      if ( ! this.marsIsTerraformed()) return false;
+      return this.preludeExtension ? this.generation <= 12 : this.generation <= 14;
+    }
+
     public getAwardFundingCost(): number {
       return 8 + (6 * this.fundedAwards.length);
     }

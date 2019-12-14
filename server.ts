@@ -55,7 +55,6 @@ const pngs: Map<string, Buffer> = new Map<string, Buffer>([
   ['/assets/board_bg_planet.png', fs.readFileSync('assets/board_bg_planet.png')],
   ['/assets/solo_win.png', fs.readFileSync('assets/solo_win.png')],
   ['/assets/globs.png', fs.readFileSync('assets/globs.png')]
-
 ]);
 
 function requestHandler(
@@ -284,10 +283,12 @@ function getPlayer(player: Player, game: Game): string {
     spaces: getSpaces(game.getAllSpaces()),
     steel: player.steel,
     steelProduction: player.steelProduction,
+    steelValue: player.steelValue,
     temperature: game.getTemperature(),
     terraformRating: player.terraformRating,
     titanium: player.titanium,
     titaniumProduction: player.titaniumProduction,
+    titaniumValue: player.titaniumValue,
     victoryPoints: player.victoryPoints,
     victoryPointsBreakdown: player.victoryPointsBreakdown,
     waitingFor: getWaitingFor(player.getWaitingFor()),
@@ -295,7 +296,7 @@ function getPlayer(player: Player, game: Game): string {
     canUseMicrobesAsMegaCreditsForPlants:
       player.canUseMicrobesAsMegaCreditsForPlants,
     preludeExtension: game.getPreludeExtension()
-  };
+  } as PlayerModel;
   return JSON.stringify(output);
 }
 
@@ -394,11 +395,13 @@ function getPlayers(players: Array<Player>): Array<PlayerModel> {
       playedCards: getCards(player, player.playedCards),
       steel: player.steel,
       steelProduction: player.steelProduction,
+      steelValue: player.steelValue,
       terraformRating: player.terraformRating,
       titanium: player.titanium,
       titaniumProduction: player.titaniumProduction,
-      victoryPointsBreakdown: player.victoryPointsBreakdown,
-      victoryPoints: player.victoryPoints
+      titaniumValue: player.titaniumValue,
+      victoryPoints: player.victoryPoints,
+      victoryPointsBreakdown: player.victoryPointsBreakdown
     } as PlayerModel;
   });
 }

@@ -18,9 +18,11 @@ export interface PlayerModel {
     plantProduction: number;
     steel: number;
     steelProduction: number;
+    steelValue: number;
     terraformRating: number;
     titanium: number;
     titaniumProduction: number;
+    titaniumValue: number;
     victoryPoints: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;
     preludeExtension: boolean;

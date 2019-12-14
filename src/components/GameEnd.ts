@@ -1,6 +1,5 @@
 import Vue from "vue";
 import { PlayerModel } from "../models/PlayerModel";
-import * as constants from "../constants";
 
 export const GameEnd = Vue.component("game-end", {
     props: ["player", "game"],
@@ -11,16 +10,6 @@ export const GameEnd = Vue.component("game-end", {
         isSoloGame: function (): boolean {
             return this.player.players.length === 1;
         },
-        isSoloVictory: function (): boolean {
-            var max_gen: number = this.player.preludeExtension ? 12 : 14;
-
-            if (this.player.generation > max_gen ) return false;
-            if (this.player.temperature < constants.MAX_TEMPERATURE) return false;
-            if (this.player.oxygenLevel < constants.MAX_OXYGEN_LEVEL) return false;
-            if (this.player.oceans < constants.MAX_OCEAN_TILES) return false;
-
-            return true;
-        },
         getPlayerColorStyle: function (player: PlayerModel): string {
             return "color: " + player.color;
         }
@@ -30,13 +19,15 @@ export const GameEnd = Vue.component("game-end", {
             <h1>Terraforming Mars - Game finished!</h1>
             <div class="game_end">
                 <div v-if="isSoloGame()">
-                    <div v-if="isSoloVictory()">
+                    <div v-if="player.isSoloModeWin">
                         <div class="game_end_success">
                             <h2>You win!</h2>
                             <div class="game_end_solo_img">
                                 <img src="/assets/solo_win.png" />
                             </div>
-                            <div class="game_end_notice">But it isn't the reason to stop making Mars better.</div>
+                            <div class="game_end_notice">
+                                But it isn't the reason to stop making Mars better.
+                            </div>
                             <ul class="game_end_list">
                                 <li>Try to win with extensions enabled</li>
                                 <li>Try to win faster then last generation comes</li>
@@ -59,7 +50,7 @@ export const GameEnd = Vue.component("game-end", {
                                 <li>Try to start with Beginner corporation</li>
                             </ul>
                         </div>
-                    </dev>
+                    </div>
                 </div>
                 <div class="game_end_victory_points">
                     <h2>Victory points breakdown</h2>

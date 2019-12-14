@@ -294,7 +294,7 @@ function getPlayer(player: Player, game: Game): string {
     gameLog: game.gameLog,
     canUseMicrobesAsMegaCreditsForPlants:
       player.canUseMicrobesAsMegaCreditsForPlants,
-    preludeExtension: game.getPreludeExtension()
+    isSoloModeWin: game.isSoloModeWin()
   };
   return JSON.stringify(output);
 }

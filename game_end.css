@@ -1,0 +1,18 @@
+.game_end_success, .game_end_fail {
+    max-width: 820px;
+    margin: 30px auto;
+}
+
+.game_end_success h2, .game_end_fail h2 {
+    text-align: center;
+}
+
+.game_end_solo_img {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.game_end_notice {
+    margin-bottom: 25px;
+}
+

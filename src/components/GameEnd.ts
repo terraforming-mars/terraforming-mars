@@ -14,9 +14,10 @@ export const GameEnd = Vue.component("game-end", {
         isSoloVictory: function (): boolean {
             var max_gen: number = this.player.preludeExtension ? 12 : 14;
 
-            if (this.player.generation != max_gen ) return false;
+            if (this.player.generation > max_gen ) return false;
             if (this.player.temperature < constants.MAX_TEMPERATURE) return false;
             if (this.player.oxygenLevel < constants.MAX_OXYGEN_LEVEL) return false;
+            if (this.player.oceans < constants.MAX_OCEAN_TILES) return false;
 
             return true;
         },

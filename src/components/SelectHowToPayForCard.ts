@@ -31,6 +31,9 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
     components: {
         "card": Card
     },
+    mounted: function () {
+        this.$data.megaCredits = this.getCardCost();
+    },
     methods: {
         getCardCost: function () {
             if (this.$data.card !== undefined) {
@@ -80,6 +83,9 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             }
             return false;			
         },
+        cardChanged: function () {
+            this.$data.megaCredits = this.getCardCost();
+        },
         hasWarning: function () {
             return this.$data.warning !== undefined;
         },
@@ -125,7 +131,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
 <div>
   <div v-if="showtitle === true">{{playerinput.title}}</div>
   <label v-for="availableCard in playerinput.cards" :key="availableCard" style="display:block;font-size:12px">
-    <input class="nes-radio" type="radio" v-model="card" :value="availableCard" />
+    <input class="nes-radio" type="radio" v-model="card" v-on:change="cardChanged()" :value="availableCard" />
     <card class="cardbox" :card="availableCard"></card>
   </label>
   <div class="nofloat nes-field" v-if="canUseSteel()">
@@ -146,7 +152,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
   </div>
   <div class="nofloat nes-field">
     <label class="nofloat">Mega Credit:</label>
-    <input class="nes-input" type="number" :value="getCardCost()" min="0" :max="getCardCost()" v-model.number="megaCredits" />
+    <input class="nes-input" type="number" min="0" :max="getCardCost()" v-model.number="megaCredits" />
   </div>
   <div v-if="hasWarning()" class="nes-container is-rounded">
     <span class="nes-text is-warning">{{ warning }}</span>

@@ -33,6 +33,7 @@
     "pretest": "tsc --build tsconfig-test.json",
     "test": "mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js dist/tests/cards/corporation/**.spec.js dist/tests/cards/prelude/**.spec.js",
     "precover": "tsc --build tsconfig-test.json",
+    "testgame": "tsc --build tsconfig-test.json && mocha dist/tests/Game.spec.js",
     "cover": "nyc mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js dist/tests/cards/corporation/**.spec.js dist/tests/cards/prelude/**.spec.js"
   },
   "repository": {

@@ -25,7 +25,7 @@ describe("Game", function () {
         game.addCityTile(player, SpaceName.ARSIA_MONS);
         game.addGreenery(player, SpaceName.PAVONIS_MONS);
 
-        // Add a card for some VPs
+        // Add some initial VPs
         player.victoryPoints += 70;
         
         // claim millestone

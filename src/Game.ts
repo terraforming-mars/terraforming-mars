@@ -561,7 +561,7 @@ export class Game {
       while (
         firstPlayer !== undefined && players.indexOf(firstPlayer) === -1
       ) {
-        firstPlayer = this.getNextPlayer(players, firstPlayer);
+        firstPlayer = this.getNextPlayer(this.players, firstPlayer);
       }
 
       if (firstPlayer !== undefined) {

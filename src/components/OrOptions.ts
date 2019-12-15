@@ -15,7 +15,7 @@ export const OrOptions = Vue.component("or-options", {
         unique++;
         const children: Array<VNode> = [];
         if (this.showtitle) {
-            children.push(createElement("div", this.playerinput.title));
+            children.push(createElement('label', [createElement("div", this.playerinput.title)]))
         }
         const optionElements: Array<VNode> = [];
         this.playerinput.options.forEach((option: any, idx: number) => {

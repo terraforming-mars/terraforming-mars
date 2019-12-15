@@ -49,6 +49,7 @@
 
 .board_bonus {
 	position: absolute;
+	pointer-events: none;
 	width: 15px;
 	height: 17px;
 }

@@ -2349,3 +2349,7 @@ input[type=radio]:checked + label {
   margin-top: -23px;
   margin-left: 90px;
 }
+
+.player_home_block {
+  margin-bottom: 20px;
+}

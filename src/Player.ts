@@ -558,13 +558,15 @@ export class Player {
 
         const canUseSteel: boolean = this.canUseSteel(selectedCard);
         const canUseTitanium: boolean = this.canUseTitanium(selectedCard);
-
+        
         if (canUseSteel && howToPay.steel > 0) {
           if (howToPay.steel > this.steel) {
             throw new Error('Do not have enough steel');
           }
           totalToPay += howToPay.steel * this.steelValue;
-        } else if (canUseTitanium && howToPay.titanium > 0) {
+        } 
+        
+        if (canUseTitanium && howToPay.titanium > 0) {
           if (howToPay.titanium > this.titanium) {
             throw new Error('Do not have enough titanium');
           }

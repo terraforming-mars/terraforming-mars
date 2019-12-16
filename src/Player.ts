@@ -521,6 +521,11 @@ export class Player {
           cost -= playedCard.getCardDiscount(this, game, card);
         }
       });
+      
+      // Check corporation too
+      if (this.corporationCard !== undefined && this.corporationCard.getCardDiscount !== undefined) {
+        cost -= this.corporationCard.getCardDiscount(this, game, card);
+      }
       return Math.max(cost, 0);
     }
 

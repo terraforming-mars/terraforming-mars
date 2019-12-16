@@ -514,7 +514,7 @@ export class Player {
       }
     }
 
-    private getCardCost(game: Game, card: IProjectCard): number {
+    public getCardCost(game: Game, card: IProjectCard): number {
       let cost: number = card.cost;
       this.playedCards.forEach((playedCard) => {
         if (playedCard.getCardDiscount !== undefined) {

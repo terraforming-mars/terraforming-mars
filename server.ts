@@ -251,7 +251,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
 function getPlayer(player: Player, game: Game): string {
   const output = {
-    cardsInHand: getCards(player, player.cardsInHand),
+    cardsInHand: getCards(player, player.cardsInHand, game),
     claimedMilestones: game.claimedMilestones.map((claimedMilestone) => {
       return {
         player: claimedMilestone.player.id,
@@ -278,8 +278,8 @@ function getPlayer(player: Player, game: Game): string {
     phase: game.phase,
     plants: player.plants,
     plantProduction: player.plantProduction,
-    playedCards: getCards(player, player.playedCards),
-    players: getPlayers(game.getPlayers()),
+    playedCards: getCards(player, player.playedCards, game),
+    players: getPlayers(game.getPlayers(), game),
     spaces: getSpaces(game.getAllSpaces()),
     steel: player.steel,
     steelProduction: player.steelProduction,
@@ -368,15 +368,17 @@ function getWaitingFor(
 
 function getCards(
     player: Player,
-    cards: Array<IProjectCard>
+    cards: Array<IProjectCard>,
+    game: Game
 ): Array<CardModel> {
   return cards.map((card) => ({
     resources: player.getResourcesOnCard(card),
-    name: card.name
+    name: card.name,
+    calculatedCost: player.getCardCost(game, card)
   }));
 }
 
-function getPlayers(players: Array<Player>): Array<PlayerModel> {
+function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
   return players.map((player) => {
     return {
       color: player.color,
@@ -392,7 +394,7 @@ function getPlayers(players: Array<Player>): Array<PlayerModel> {
       name: player.name,
       plants: player.plants,
       plantProduction: player.plantProduction,
-      playedCards: getCards(player, player.playedCards),
+      playedCards: getCards(player, player.playedCards, game),
       steel: player.steel,
       steelProduction: player.steelProduction,
       steelValue: player.steelValue,

@@ -36,12 +36,19 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
     },
     methods: {
         getCardCost: function () {
+            for (const icard of this.player.cardsInHand) {
+                if (this.$data.card === icard.name) {
+                    return icard.calculatedCost
+                }
+            }
+            /*
             if (this.$data.card !== undefined) {
                 const card = getProjectCardByName(this.$data.card);
                 if (card !== undefined) {
                     return card.cost;
                 }
             }
+            */
             // We should always find a card
             // It may make more sense to throw
             // an error here that the card wasn't found

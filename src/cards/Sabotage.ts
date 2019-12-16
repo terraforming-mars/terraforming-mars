@@ -5,8 +5,6 @@ import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectPlayer } from "../inputs/SelectPlayer";
-import { SelectAmount } from "../inputs/SelectAmount";
-import { AndOptions } from "../inputs/AndOptions";
 import { OrOptions } from "../inputs/OrOptions";
 
 export class Sabotage implements IProjectCard {
@@ -19,29 +17,19 @@ export class Sabotage implements IProjectCard {
     }
     public play(_player: Player, game: Game) {
         if (game.getPlayers().length == 1)  return undefined;
-        let foundPlayer: Player;
-        return new AndOptions(
-            () => {
-                return undefined;
-            },
-            new SelectPlayer(game.getPlayers(), "Select player to remove resources from", (selectedPlayer: Player) => {
-                foundPlayer = selectedPlayer;
-                return undefined;
-            }),
-            new OrOptions(
-                new SelectAmount("Remove up to 3 titanium", (amount: number) => {
-                    foundPlayer.titanium = Math.max(0, foundPlayer.titanium - amount);
+        return new OrOptions(
+                new SelectPlayer(game.getPlayers(), "Select player to remove up to 3 titanium", (selectedPlayer: Player) => {
+                    selectedPlayer.titanium = Math.max(0, selectedPlayer.titanium - 3);
                     return undefined;
-                }, 3),
-                new SelectAmount("Remove up to 4 steel", (amount: number) => {
-                    foundPlayer.steel = Math.max(0, foundPlayer.steel - amount);
+                }),
+                new SelectPlayer(game.getPlayers(), "Select player to remove up to 4 steel", (selectedPlayer: Player) => {
+                    selectedPlayer.steel = Math.max(0, selectedPlayer.steel - 4);
                     return undefined;
-                }, 4),
-                new SelectAmount("Remove up to 7 mega credits", (amount: number) => {
-                    foundPlayer.megaCredits = Math.max(0, foundPlayer.megaCredits - amount);
+                }),
+                new SelectPlayer(game.getPlayers(), "Select player to remove up to 7 mega credits", (selectedPlayer: Player) => {
+                    selectedPlayer.megaCredits = Math.max(0, selectedPlayer.megaCredits - 7);
                     return undefined;
-                }, 7)
-            )
+                })
         );
     }
 }

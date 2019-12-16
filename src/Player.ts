@@ -1134,6 +1134,9 @@ export class Player {
         const canUseSteel = card.tags.indexOf(Tags.STEEL) !== -1;
         const canUseTitanium = card.tags.indexOf(Tags.SPACE) !== -1;
         let maxPay = 0;
+        if (this.canUseHeatAsMegaCredits) {
+          maxPay += this.heat;
+        }
         if (canUseSteel) {
           maxPay += this.steel * this.steelValue;
         }

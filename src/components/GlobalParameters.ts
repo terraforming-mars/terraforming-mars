@@ -27,7 +27,7 @@ export const GlobalParameters = Vue.component("globs", {
             const val:string = (for_param == "oxygen") ? this.oxygen_level : this.temperature;
             const num_val = parseInt(val);
             const TEMPERATURE_SCALE_HEIGHT = 17;
-            const OXYGEN_SCALE_HEIGHT = 24;
+            const OXYGEN_SCALE_HEIGHT = 23;
             const INITIAL_SCALE_MARGIN = 331;
             if (for_param == "temperature") {
                 const diff = Math.abs(constants.MIN_TEMPERATURE - 2 - num_val) / 2;
@@ -37,7 +37,7 @@ export const GlobalParameters = Vue.component("globs", {
             } else {
                 const diff = num_val + 1;
                 const height = diff * OXYGEN_SCALE_HEIGHT;
-                const margin_top = INITIAL_SCALE_MARGIN + OXYGEN_SCALE_HEIGHT - height  + 2;
+                const margin_top = INITIAL_SCALE_MARGIN + OXYGEN_SCALE_HEIGHT - height;
                 ret = "margin-top: " + margin_top.toString() + "px; height: " + height + "px;";
             }
             return ret

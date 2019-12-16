@@ -137,7 +137,8 @@ export class Game {
           if (
             award.getScore(players[0], this) > award.getScore(players[1], this)
           ) {
-            players[0].victoryPoints += 3;
+            players[0].victoryPointsBreakdown.awards += 2;
+            players[0].victoryPoints += 2;
           } else { // We have at least 2 rank 2 players
             const score = award.getScore(players[0], this);
             while (
@@ -471,10 +472,11 @@ export class Game {
     }
 
     private gotoEndGame(): void {
+      if (this.phase == Phase.END) return;
       this.phase = Phase.END;
-
       // TR is converted in victory points
       this.players.forEach((player) => {
+        player.victoryPointsBreakdown.victoryPoints = player.victoryPoints;
         player.victoryPointsBreakdown.terraformRating = player.terraformRating;
         player.victoryPoints += player.terraformRating;
       });
@@ -506,7 +508,7 @@ export class Game {
           space.tile &&
           space.tile.tileType === TileType.GREENERY &&
           space.player !== undefined) {
-            space.player.victoryPointsBreakdown.city += 1;
+            space.player.victoryPointsBreakdown.greenery += 1;
             space.player.victoryPoints++;
         }
         // Give victory point for each greenery adjacent to city tile

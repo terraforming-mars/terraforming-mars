@@ -54,6 +54,7 @@ export class Player {
     public plants: number = 0;
     public plantProduction: number = 0;
     public cardsInHand: Array<IProjectCard> = [];
+    public cardsInHandNbr: number = 0;
     public preludeCardsInHand: Array<IProjectCard> = [];    
     public playedCards: Array<IProjectCard> = [];
     public generationPlayed: Map<string, number> = new Map<string, number>();

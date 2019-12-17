@@ -96,6 +96,10 @@ export class Game {
       ) !== undefined;
     }
 
+    public noOceansAvailabe(): boolean {
+      return this.getOceansOnBoard() >= constants.MAX_OCEAN_TILES;
+    }
+
     private marsIsTerraformed(): boolean {
       return this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL &&
              this.temperature >= constants.MAX_TEMPERATURE &&

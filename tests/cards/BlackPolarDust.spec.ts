@@ -20,7 +20,9 @@ describe("BlackPolarDust", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
-        expect(action instanceof SelectSpace).to.eq(true);
+        if (action == undefined) return;
+
+        expect(action instanceof SelectSpace).to.eq(true); 
         action.cb(action.availableSpaces[0]);
         expect(action.availableSpaces[0].tile).not.to.eq(undefined);
         expect(player.megaCreditProduction).to.eq(-2);

@@ -23,7 +23,7 @@ export const Board = Vue.component("board", {
             return boardSpaces;
         },
         getSpacesWithTile: function(): Array<SpaceModel> {
-            const boardSpaces: Array<SpaceModel> = this.spaces.filter((space: SpaceModel) => space.tileType != undefined);
+            const boardSpaces: Array<SpaceModel> = this.spaces.filter((space: SpaceModel) => space.tileType != undefined || space.color != undefined);
             boardSpaces.sort((s1: any, s2: any) => {return s1.id - s2.id});
             return boardSpaces;
         },

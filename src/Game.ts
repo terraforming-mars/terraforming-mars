@@ -96,6 +96,10 @@ export class Game {
       ) !== undefined;
     }
 
+    public noOceansAvailabe(): boolean {
+      return this.getOceansOnBoard() >= constants.MAX_OCEAN_TILES;
+    }
+
     private marsIsTerraformed(): boolean {
       return this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL &&
              this.temperature >= constants.MAX_TEMPERATURE &&
@@ -378,6 +382,13 @@ export class Game {
                    space.tile.tileType !== TileType.OCEAN
       ) !== undefined;
     }
+
+    public getAvailableSpacesForCity(player: Player): Array<ISpace> {
+      // A city cannot be adjacent to another city
+      return this.getAvailableSpacesOnLand(player).filter(
+        (space) => this.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.CITY).length === 0
+      );
+    } 
 
     public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
       // Greenery must be placed by a space you own if you own a space

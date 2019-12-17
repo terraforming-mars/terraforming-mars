@@ -18,7 +18,7 @@ export class Capital implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
       return player.energyProduction >= 2 &&
         game.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game) &&
-        game.getAvailableSpacesOnLand(player).length >= 0;
+        game.getAvailableSpacesForCity(player).length >= 0;
     }
     public onGameEnd(player: Player, game: Game) {
       const usedSpace = game.getSpaceByTileCard(this.name);
@@ -35,7 +35,7 @@ export class Capital implements IProjectCard {
       player.megaCreditProduction += 5;
       return new SelectSpace(
           'Select space for special city tile',
-          game.getAvailableSpacesOnLand(player),
+          game.getAvailableSpacesForCity(player),
           (space: ISpace) => {
             game.addCityTile(player, space.id, SpaceType.LAND, this.name);
             return undefined;

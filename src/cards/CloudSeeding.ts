@@ -11,7 +11,18 @@ export class CloudSeeding implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = 'Cloud Seeding';
     public cardType: CardType = CardType.AUTOMATED;
+    
+    private playersWithHeatProduction(game: Game): boolean {
+      for (const player of game.getPlayers()) {
+        if (player.heatProduction >= 1) return true;
+      }
+      return false;
+    }
+    
     public canPlay(player: Player, game: Game): boolean {
+
+      if ( ! this.playersWithHeatProduction(game)) return false;
+      
       return player.megaCreditProduction > -5 &&
         game.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game);
     }

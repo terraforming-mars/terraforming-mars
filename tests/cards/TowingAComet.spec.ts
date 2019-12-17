@@ -11,9 +11,10 @@ describe("TowingAComet", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
-        action.cb(action.availableSpaces[0]);
-        expect(game.getOceansOnBoard()).to.eq(1);
+        if (action !== undefined) {
+          action.cb(action.availableSpaces[0]);
+          expect(game.getOceansOnBoard()).to.eq(1);
+        }  
         expect(player.plants).to.eq(2);
         expect(game.getOxygenLevel()).to.eq(1);
     });

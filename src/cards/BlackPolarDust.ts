@@ -16,6 +16,9 @@ export class BlackPolarDust implements IProjectCard {
       return player.megaCreditProduction >= -3;
     }
     public play(player: Player, game: Game) {
+      // Do not provide an option to place ocean if there no oceans available
+      if (game.noOceansAvailabe()) return undefined;
+
       return new SelectSpace(
           'Select space for ocean tile',
           game.getAvailableSpacesForOcean(player),

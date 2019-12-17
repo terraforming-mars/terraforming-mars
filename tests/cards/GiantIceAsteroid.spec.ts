@@ -10,13 +10,16 @@ describe("GiantIceAsteroid", function () {
     it("Should play", function () {
         const card = new GiantIceAsteroid();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
+        const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("foobar", [player,player2], player);
+        player2.plants = 6;
+
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         expect(action instanceof AndOptions).to.eq(true);
-        player.plants = 6;
-        action.options[0].cb(player);
-        expect(player.plants).to.eq(0);
+       
+        action.options[0].cb(player2);
+        expect(player2.plants).to.eq(0);
         action.options[1].cb(game.getAvailableSpacesForOcean(player)[0]);
         action.options[2].cb(game.getAvailableSpacesForOcean(player)[0]);
         expect(game.getOceansOnBoard()).to.eq(2);

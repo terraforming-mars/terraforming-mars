@@ -4,9 +4,13 @@ import * as constants from "./constants"
 import { SpaceType } from "./SpaceType";
 
 
-export const maxOutOceans = function(player: Player, game: Game): void {
+export const maxOutOceans = function(player: Player, game: Game, toValue: number = 0): void {
+    if (toValue < 1) {
+        toValue = constants.MAX_OCEAN_TILES;
+    }
+    
     for (const space of game.getSpaces(SpaceType.OCEAN)) {
-        if (game.getOceansOnBoard() >= constants.MAX_OCEAN_TILES) break;
+        if (game.getOceansOnBoard() >= toValue) break;
         game.addOceanTile(player, space.id)
     }
 };

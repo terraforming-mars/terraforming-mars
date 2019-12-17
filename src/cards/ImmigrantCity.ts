@@ -13,8 +13,8 @@ export class ImmigrantCity implements IProjectCard {
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Immigrant City";
-    public canPlay(player: Player): boolean {
-        return player.energyProduction >= 1 && player.megaCreditProduction >= -3;
+    public canPlay(player: Player,game: Game): boolean {
+        return player.energyProduction >= 1 && player.megaCreditProduction >= -3 && game.getAvailableSpacesForCity(player).length >= 0;
     }
     public onTilePlaced(player: Player, space: ISpace) {
         if (space.tile !== undefined && space.tile.tileType === TileType.CITY) {
@@ -22,7 +22,7 @@ export class ImmigrantCity implements IProjectCard {
         }
     }
     public play(player: Player, game: Game) {
-        return new SelectSpace("Select space for city tile", game.getAvailableSpacesOnLand(player), (space: ISpace) => {
+        return new SelectSpace("Select space for city tile", game.getAvailableSpacesForCity(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
             player.energyProduction--;
             player.megaCreditProduction++;

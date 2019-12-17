@@ -973,7 +973,7 @@ export class Player {
             ),
             new SelectSpace(
                 'City',
-                game.getAvailableSpacesOnLand(this),
+                game.getAvailableSpacesForCity(this),
                 (space: ISpace) => {
                   city = space;
                   return undefined;
@@ -983,7 +983,7 @@ export class Player {
       }
       return new SelectSpace(
           'City',
-          game.getAvailableSpacesOnLand(this),
+          game.getAvailableSpacesForCity(this),
           (space: ISpace) => {
             return fundProject(constants.CITY_COST, 0, space.id);
           }

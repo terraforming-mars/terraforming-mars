@@ -383,6 +383,13 @@ export class Game {
       ) !== undefined;
     }
 
+    public getAvailableSpacesForCity(player: Player): Array<ISpace> {
+      // A city cannot be adjacent to another city
+      return this.getAvailableSpacesOnLand(player).filter(
+        (space) => this.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.CITY).length === 0
+      );
+    } 
+
     public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
       // Greenery must be placed by a space you own if you own a space
       if (this.playerHasSpace(player)) {

@@ -20,7 +20,10 @@ export class BigAsteroid implements IProjectCard {
       return game.increaseTemperature(player, 2);
     }
     public play(player: Player, game: Game) {
-      if (game.getPlayers().length === 1) return this.doPlay(player, game);
+      if (game.getPlayers().length === 1 || ! player.isAnyOtherPlayerHasPlants(game)) {
+        return this.doPlay(player, game);
+      }
+      
       return new SelectPlayer(
           game.getPlayers(),
           'Select player to remove up to 4 plants from',

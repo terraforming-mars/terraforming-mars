@@ -18,6 +18,11 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
       const cardsToPick = game.getOtherMicrobeCards(this);
       player.heatProduction += 3;
       player.plantProduction++;
+
+      // It's not required to have card to place microbes
+      // Rules pg. 9
+      if (cardsToPick.length < 1) return undefined;
+
       return new SelectCard(
           'Select card to add 2 microbes', cardsToPick,
           (foundCards: Array<IProjectCard>) => {

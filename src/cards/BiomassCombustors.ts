@@ -12,6 +12,13 @@ export class BiomassCombustors implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public name: string = 'Biomass Combustors';
     public canPlay(player: Player, game: Game): boolean {
+      if (game.getPlayers().length > 1) {
+        // It's required to reduce someone plants production
+        // If it is impossible we can't play this card
+        if (game.getPlayers().find((p: Player) => p.plantProduction > 0 ) === undefined) {
+          return false;
+        }
+      }
       return game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game);
     }
     private doPlay(player: Player): undefined {

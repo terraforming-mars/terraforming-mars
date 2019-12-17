@@ -6,6 +6,7 @@ import {Game} from '../Game';
 import {ISpace} from '../ISpace';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceType} from '../SpaceType';
+import * as constants from '../constants';
 
 export class ArtificialLake implements IProjectCard {
     public cost: number = 15;
@@ -20,6 +21,9 @@ export class ArtificialLake implements IProjectCard {
     }
     public play(player: Player, game: Game) {
       player.victoryPoints++;
+
+      if (game.getOceansOnBoard() >= constants.MAX_OCEAN_TILES) return undefined;
+
       return new SelectSpace(
           'Select a land space to place an ocean',
           game.getAvailableSpacesOnLand(player),

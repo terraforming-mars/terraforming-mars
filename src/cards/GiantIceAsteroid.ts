@@ -19,20 +19,10 @@ export class GiantIceAsteroid implements IProjectCard {
         return true;
     }
 
-    private isAnyOtherPlayerHasPlants(currentPlayer: Player, game: Game): boolean {
-        if (game.getPlayers().length < 2) return false;
-
-        for (const player of game.getPlayers()) {
-          if (player.id === currentPlayer.id) continue;
-          if (player.plants > 0) return true;
-        }
-        return false;
-    }
-
     public play(player: Player, game: Game) {
         var opts: Array<SelectPlayer | SelectSpace> = [];
 
-        if (this.isAnyOtherPlayerHasPlants(player, game)) {
+        if (player.isAnyOtherPlayerHasPlants(game)) {
             opts.push(
                 new SelectPlayer(game.getPlayers(), "Select player to remove up to 6 plants from", (foundPlayer: Player) => {
                     foundPlayer.removePlants(player, 6);

@@ -5,6 +5,8 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { TileType } from "../../src/TileType";
+import { SpaceType } from "../../src/SpaceType";
+import * as constants from '../../src/constants';
 
 describe("AquiferPumping", function () {
     it("Should play", function () {
@@ -38,5 +40,19 @@ describe("AquiferPumping", function () {
             megaCredits: 7
         });
         expect(function () { action.cb(); }).to.throw("Need to pay 8");
+    });
+    it("Can't place oceans", function () {
+        const card = new AquiferPumping();
+        const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player,player], player);
+        
+        // Set oceans count to the max value
+        for (const space of game.getSpaces(SpaceType.OCEAN)) {
+            if (game.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
+                game.addOceanTile(player, space.id)
+            }
+        }
+
+        expect(card.canAct(player, game)).to.eq(false);
     });
 });

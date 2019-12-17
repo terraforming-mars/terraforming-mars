@@ -27,3 +27,4 @@ describe("GiantIceAsteroid", function () {
         expect(game.getTemperature()).to.eq(-26);
     });
 });
+

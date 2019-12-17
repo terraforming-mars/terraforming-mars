@@ -9,6 +9,7 @@ import {ISpace} from '../ISpace';
 import {AndOptions} from '../inputs/AndOptions';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
+import * as constants from '../constants';
 
 
 export class AquiferPumping implements IActionCard, IProjectCard {
@@ -23,7 +24,10 @@ export class AquiferPumping implements IActionCard, IProjectCard {
     public play() {
       return undefined;
     }
-    public canAct(player: Player): boolean {
+    public canAct(player: Player, game: Game): boolean {
+      // No oceans available anymore
+      if (game.getOceansOnBoard() >= constants.MAX_OCEAN_TILES) return false;
+
       return (player.steelValue * player.steel) +
               player.megaCredits +
               (player.canUseHeatAsMegaCredits ? player.heat : 0) >= 8;

@@ -11,6 +11,7 @@ import { ISpace } from "../ISpace";
 import { SpaceType } from "../SpaceType";
 import { HowToPay } from "../inputs/HowToPay";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
+import { MAX_OCEAN_TILES } from '../constants';
 
 export class WaterImportFromEuropa implements IActionCard, IProjectCard {
     public cost: number = 25;
@@ -27,8 +28,8 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
     public play() {
         return undefined;
     }
-    public canAct(player: Player): boolean {
-        return (player.canUseHeatAsMegaCredits ? player.heat : 0) + player.megaCredits + (player.titanium * player.titaniumValue) >= 12;
+    public canAct(player: Player, game: Game): boolean {
+        return (player.canUseHeatAsMegaCredits ? player.heat : 0) + player.megaCredits + (player.titanium * player.titaniumValue) >= 12 && game.getOceansOnBoard() < MAX_OCEAN_TILES;
     }
     public action(player: Player, game: Game) {
         let htp: HowToPay;

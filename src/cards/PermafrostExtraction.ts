@@ -6,6 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
+import { MAX_OCEAN_TILES } from '../constants';
 
 export class PermafrostExtraction implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
@@ -16,6 +17,11 @@ export class PermafrostExtraction implements IProjectCard {
         return game.getTemperature() >= -8 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player, game: Game) {
+
+        if (game.getOceansOnBoard() === MAX_OCEAN_TILES) {
+            return undefined;
+        }
+
         return new SelectSpace("Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
             game.addOceanTile(player, space.id);
             return undefined;

@@ -521,13 +521,18 @@ export class Player {
       }
     }
 
-    private getCardCost(game: Game, card: IProjectCard): number {
+    public getCardCost(game: Game, card: IProjectCard): number {
       let cost: number = card.cost;
       this.playedCards.forEach((playedCard) => {
         if (playedCard.getCardDiscount !== undefined) {
           cost -= playedCard.getCardDiscount(this, game, card);
         }
       });
+      
+      // Check corporation too
+      if (this.corporationCard !== undefined && this.corporationCard.getCardDiscount !== undefined) {
+        cost -= this.corporationCard.getCardDiscount(this, game, card);
+      }
       return Math.max(cost, 0);
     }
 
@@ -1141,6 +1146,9 @@ export class Player {
         const canUseSteel = card.tags.indexOf(Tags.STEEL) !== -1;
         const canUseTitanium = card.tags.indexOf(Tags.SPACE) !== -1;
         let maxPay = 0;
+        if (this.canUseHeatAsMegaCredits) {
+          maxPay += this.heat;
+        }
         if (canUseSteel) {
           maxPay += this.steel * this.steelValue;
         }

@@ -796,7 +796,7 @@ export class Game {
     public addOceanTile(
         player: Player, spaceId: string,
         spaceType: SpaceType = SpaceType.OCEAN): void {
-      if (this.getOceansOnBoard() - 1 === constants.MAX_OCEAN_TILES) {
+      if (this.getOceansOnBoard() === constants.MAX_OCEAN_TILES) {
         return;
       }
       this.addTile(player, spaceType, this.getSpace(spaceId), {

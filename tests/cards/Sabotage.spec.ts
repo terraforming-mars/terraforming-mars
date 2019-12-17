@@ -4,7 +4,6 @@ import { Sabotage } from "../../src/cards/Sabotage";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { OrOptions } from "../../src/inputs/OrOptions";
 
 describe("Sabotage", function () {
     it("Should play", function () {
@@ -17,12 +16,7 @@ describe("Sabotage", function () {
         player.megaCredits = 7;
         if (action !== undefined) {
             action.options[0].cb(player);
-            (action.options[1] as OrOptions).options[0].cb(3);
             expect(player.titanium).to.eq(0);
-            (action.options[1] as OrOptions).options[1].cb(4);
-            expect(player.steel).to.eq(0);
-            (action.options[1] as OrOptions).options[2].cb(7);
-            expect(player.megaCredits).to.eq(0);
         }
     });
 });

@@ -182,9 +182,10 @@ export class Player {
           (card) => Number(this.resourcesOnCards.get(card.name)) > 0
       );
     }
-    public getTagCount(tag: Tags): number {
+    public getTagCount(tag: Tags, includeEventsTags:boolean = false): number {
       let tagCount = 0;
       this.playedCards.forEach((card: IProjectCard) => {
+        if ( ! includeEventsTags && card.cardType === CardType.EVENT) return;
         tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
       });
       if (this.corporationCard !== undefined) {

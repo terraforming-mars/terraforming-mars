@@ -12,15 +12,28 @@ describe("Asteroid", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
+
+        expect(action).to.eq(undefined);
+    });
+
+    it("Removes plants from traget player", function () {
+        const card = new Asteroid();
+        const player = new Player("test", Color.BLUE, false);
+        const targetPlayer = new Player("victim", Color.YELLOW, false);
+        targetPlayer.plants = 8;
+        const game = new Game("foobar", [player,targetPlayer], player);
+
+        const action = card.play(player, game);
+        expect(action).not.to.eq(undefined);
+        if (action === undefined) return;
+
         if (action instanceof SelectPlayer) {
-            player.plants = 4;
-            action.cb(player);
-            expect(player.plants).to.eq(1);
+            action.cb(targetPlayer);
             expect(player.titanium).to.eq(2);
             expect(game.getTemperature()).to.eq(-28);
-            action.cb(player);
-            expect(player.plants).to.eq(0);
-            expect(game.getTemperature()).to.eq(-26);
+
+            // Target player should lose some plants
+            expect(targetPlayer.plants).to.eq(8-3);
         }
     });
 });

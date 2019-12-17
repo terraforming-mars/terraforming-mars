@@ -77,7 +77,14 @@ export class Player {
     public getLastCardPlayedThisTurn(): IProjectCard | undefined {
       return this.lastCardPlayedThisTurn;
     }
-    private hasProtectedHabitats(): boolean {
+    public isAnyOtherPlayerHasPlants(game: Game): boolean {
+      for (const player of game.getPlayers()) {
+        if (player.id === this.id) continue;
+        if (player.plants > 0) return true;
+      }
+      return false;
+    }
+    public hasProtectedHabitats(): boolean {
       return this.playedCards.find(
           (playedCard) => playedCard.name === new ProtectedHabitats().name
       ) !== undefined;
@@ -514,13 +521,18 @@ export class Player {
       }
     }
 
-    private getCardCost(game: Game, card: IProjectCard): number {
+    public getCardCost(game: Game, card: IProjectCard): number {
       let cost: number = card.cost;
       this.playedCards.forEach((playedCard) => {
         if (playedCard.getCardDiscount !== undefined) {
           cost -= playedCard.getCardDiscount(this, game, card);
         }
       });
+      
+      // Check corporation too
+      if (this.corporationCard !== undefined && this.corporationCard.getCardDiscount !== undefined) {
+        cost -= this.corporationCard.getCardDiscount(this, game, card);
+      }
       return Math.max(cost, 0);
     }
 

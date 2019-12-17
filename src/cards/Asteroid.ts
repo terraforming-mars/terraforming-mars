@@ -15,10 +15,11 @@ export class Asteroid implements IProjectCard {
       return true;
     }
     public play(player: Player, game: Game) {
-      if (game.getPlayers().length == 1) {
+      if (game.getPlayers().length == 1 || ! player.isAnyOtherPlayerHasPlants(game)) {
         player.titanium += 2;
         return game.increaseTemperature(player, 1);
       }
+
       return new SelectPlayer(
           game.getPlayers(),
           'Select player to remove 3 plants from',

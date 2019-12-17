@@ -25,5 +25,16 @@ describe("BusinessNetwork", function () {
         action!.options[0].cb();
         expect(player.megaCredits).to.eq(0);
         expect(player.cardsInHand.length).to.eq(1);
-    });  
+    });
+    it("Does not provide an option to buy the card for poor player", function () {
+        const card = new BusinessNetwork();
+        const player = new Player("test", Color.BLUE, false);
+        const player2 = new Player("test", Color.RED, false);
+        const game = new Game("poor_poor_player_game", [player, player2], player);
+        player.megaCredits = 0;
+        player.playedCards.push(card);
+
+        const action = card.action(player, game);
+        expect(action).to.eq(undefined);
+    });
 });

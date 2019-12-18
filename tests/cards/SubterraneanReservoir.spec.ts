@@ -12,6 +12,7 @@ describe("SubterraneanReservoir", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
+        if (action === undefined) return;
         action.cb(action.availableSpaces[0]);
         expect(game.getOceansOnBoard()).to.eq(1);
     });

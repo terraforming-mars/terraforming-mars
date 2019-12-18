@@ -182,9 +182,10 @@ export class Player {
           (card) => Number(this.resourcesOnCards.get(card.name)) > 0
       );
     }
-    public getTagCount(tag: Tags): number {
+    public getTagCount(tag: Tags, includeEventsTags:boolean = false): number {
       let tagCount = 0;
       this.playedCards.forEach((card: IProjectCard) => {
+        if ( ! includeEventsTags && card.cardType === CardType.EVENT) return;
         tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
       });
       if (this.corporationCard !== undefined) {
@@ -972,7 +973,7 @@ export class Player {
             ),
             new SelectSpace(
                 'City',
-                game.getAvailableSpacesOnLand(this),
+                game.getAvailableSpacesForCity(this),
                 (space: ISpace) => {
                   city = space;
                   return undefined;
@@ -982,7 +983,7 @@ export class Player {
       }
       return new SelectSpace(
           'City',
-          game.getAvailableSpacesOnLand(this),
+          game.getAvailableSpacesForCity(this),
           (space: ISpace) => {
             return fundProject(constants.CITY_COST, 0, space.id);
           }

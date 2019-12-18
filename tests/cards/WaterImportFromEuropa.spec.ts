@@ -10,7 +10,8 @@ describe("WaterImportFromEuropa", function () {
     it("Can't act", function () {
         const card = new WaterImportFromEuropa();
         const player = new Player("test", Color.BLUE, false);
-        expect(card.canAct(player)).to.eq(false);
+        const game = new Game("foobar", [player,player], player);
+        expect(card.canAct(player,game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new WaterImportFromEuropa();

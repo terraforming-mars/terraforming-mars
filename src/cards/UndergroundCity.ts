@@ -12,11 +12,11 @@ export class UndergroundCity implements IProjectCard {
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public name: string = "Underground City";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(player: Player): boolean {
-        return player.energyProduction >= 2;
+    public canPlay(player: Player, game: Game): boolean {
+        return player.energyProduction >= 2 && game.getAvailableSpacesForCity(player).length >= 0;
     }
     public play(player: Player, game: Game) {
-        return new SelectSpace("Select space for city tile", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
+        return new SelectSpace("Select space for city tile", game.getAvailableSpacesForCity(player), (foundSpace: ISpace) => {
             game.addCityTile(player, foundSpace.id);
             player.energyProduction -= 2;
             player.steelProduction += 2;

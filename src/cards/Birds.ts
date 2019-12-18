@@ -15,7 +15,20 @@ export class Birds implements IActionCard, IProjectCard {
     public name: string = 'Birds';
     public resourceType: ResourceType = ResourceType.ANIMAL;
     public cardType: CardType = CardType.ACTIVE;
+
+    private playersWithPlantProduction(game: Game): boolean {
+      // We must reduce someone plant production 2 times
+      // so target must be available
+      for (const player of game.getPlayers()) {
+        if (player.plantProduction >= 2) return true;
+      }
+      return false;
+    }
+
     public canPlay(player: Player, game: Game): boolean {
+      if (game.getPlayers().length > 1 && ! this.playersWithPlantProduction(game)) {
+        return false;
+      }
       return game.getOxygenLevel() >= 13 - player.getRequirementsBonus(game);
     }
     public onGameEnd(player: Player) {

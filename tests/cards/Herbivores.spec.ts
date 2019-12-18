@@ -83,4 +83,35 @@ describe("Herbivores", function () {
         card.onGameEnd(player);
         expect(player.victoryPoints).to.eq(1);
     });
+
+    it("Should be playable in solo mode", function () {
+        const card = new Herbivores();
+        const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar_solo", [player], player);
+
+        expect(card.canPlay(player, game)).to.eq(false, "Unexpetedely can play card without oxygen");
+
+        (game as any).oxygenLevel = 8;
+
+        expect(card.canPlay(player, game)).to.eq(true, "Can't play for some reason");
+
+        player.plantProduction = 1;
+
+        const action = card.play(player, game);
+        expect(action).to.eq(undefined);
+        
+        player.playedCards.push(card);
+        player.victoryPoints = 0
+
+        expect(player.plantProduction).to.eq(1, "Somehow plantProduction is changed"); // Not changed
+
+        game.addGreenery(player, game.getAvailableSpacesOnLand(player)[0].id);
+        game.addGreenery(player, game.getAvailableSpacesOnLand(player)[0].id);
+
+        expect(player.getResourcesOnCard(card)).to.eq(3);
+
+        console.log("Here we go again");
+        card.onGameEnd(player);
+        expect(player.victoryPoints).to.eq(1);
+    });
 });

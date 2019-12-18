@@ -32,6 +32,7 @@ export class Herbivores implements IProjectCard {
 
     public canPlay(player: Player, game: Game): boolean {
         if ( ! (game.getOxygenLevel() >= 8 - player.getRequirementsBonus(game))) return false;
+        if (game.getPlayers().length === 1) return true;
         return this.getPlayersWithPlantProduction(player, game).length > 0;
     }
 

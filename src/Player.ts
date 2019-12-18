@@ -1203,7 +1203,7 @@ export class Player {
 
       if (
         this.canAfford(constants.CITY_COST) &&
-            game.getAvailableSpacesForGreenery(this).length > 0) {
+            game.getAvailableSpacesForCity(this).length > 0) {
         standardProjects.options.push(
             this.addCity(game)
         );

@@ -95,8 +95,10 @@ export const PlayerHome = Vue.component("player-home", {
                     <board :spaces="player.spaces"></board>
 
                     <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature"></global-parameters>
-                    <milestone />
-                    <award />
+                    <div v-if="player.players.length > 1">
+                        <milestone/>
+                        <award/>
+                    </div>
                 </div>
 
                 <div class="player_home_block" v-if="player.claimedMilestones.length > 0">

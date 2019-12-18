@@ -80,6 +80,15 @@ export class Game {
       }
     }
 
+    public getCardOwner(card: IProjectCard): Player {
+      for (const p of this.getPlayers()) {
+        for (const c of p.playedCards) {
+          if (c.name === card.name) return p;
+        }
+      }
+      throw new Error('No card owner found')
+    }
+
     public getPreludeExtension(): boolean {
       return this.preludeExtension;
     }

@@ -21,8 +21,20 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
     return ALL_PROJECT_CARDS.find((card) => card.name === cardName) || ALL_PRELUDE_CARDS.find((card) => card.name === cardName) || ALL_PRELUDE_PROJECTS_CARDS.find((card) => card.name === cardName);
 }
 
-function getData(cardName: string): string | undefined {
-    return HTML_DATA.get(cardName);
+function getData(cardName: string, resources: string): string | undefined {
+    let htmlData : string | undefined = '';
+    htmlData = HTML_DATA.get(cardName);
+    if (htmlData !== undefined && (resources === undefined || resources === '0')) {
+        htmlData = htmlData.replace('##RESOURCES##', '');
+    }    
+    if (htmlData !== undefined && resources !== undefined) {
+        if (resources === '0') {
+          htmlData = htmlData.replace('##RESOURCES##', '');
+        } else {
+          htmlData = htmlData.replace('##RESOURCES##', 'This card has ' + resources +' resource(s).');
+        }
+    }
+    return htmlData;
 }
 
 export const Card = Vue.component("card", {
@@ -33,7 +45,7 @@ export const Card = Vue.component("card", {
     ],
     methods: {
         getData: function() {
-            return getData(this.card);
+            return getData(this.card, this.resources);
         },
         getCard: function () {
             return getProjectCardByName(this.card) || getCorporationCardByName(this.card);

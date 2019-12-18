@@ -785,11 +785,11 @@ export class Game {
       this.players.forEach((player) => {
         if (player.corporationCard !== undefined &&
             player.corporationCard.onTilePlaced !== undefined) {
-          player.corporationCard.onTilePlaced(player, space);
+          player.corporationCard.onTilePlaced(player, space, this);
         }
         player.playedCards.forEach((playedCard) => {
           if (playedCard.onTilePlaced !== undefined) {
-            playedCard.onTilePlaced(player, space);
+            playedCard.onTilePlaced(player, space, this);
           }
         });
       });

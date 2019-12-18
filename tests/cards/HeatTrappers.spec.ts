@@ -43,6 +43,7 @@ describe("HeatTrappers", function () {
         expect(player2.heatProduction).to.eq(5); // Reduced two steps
     });
     
+    
     it("Should ask for target", function () {
         const card = new HeatTrappers();
         const player = new Player("test", Color.BLUE, false);

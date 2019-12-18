@@ -16,15 +16,32 @@ export class Herbivores implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Herbivores";
     public resourceType: ResourceType = ResourceType.ANIMAL;
-    public canPlay(player: Player, game: Game): boolean {
-        return game.getOxygenLevel() >= 8 - player.getRequirementsBonus(game);
+
+    private getPlayersWithPlantProduction(currentPlayer: Player, game: Game): Array<Player> {
+        var players = game.getPlayers().filter((p) => p.plantProduction > 0);
+        if (players.length === 2) {
+          players = players.filter((p) => p.id != currentPlayer.id)
+        }
+        return players
     }
+
+    private doPlay(currentPlayer: Player, targetPlayer: Player): void {
+        targetPlayer.plantProduction = Math.max(0, targetPlayer.plantProduction - 1);
+        currentPlayer.addResourceTo(this);
+    }
+
+    public canPlay(player: Player, game: Game): boolean {
+        if ( ! (game.getOxygenLevel() >= 8 - player.getRequirementsBonus(game))) return false;
+        return this.getPlayersWithPlantProduction(player, game).length > 0;
+    }
+
     public onGameEnd(player: Player) {
         player.victoryPoints += Math.floor(player.getResourcesOnCard(this) / 2);
     }
-    public onTilePlaced(player: Player, space: ISpace) {
-        if (space.player === player && space.tile !== undefined && space.tile.tileType === TileType.GREENERY) {
-            player.addResourceTo(this);
+
+    public onTilePlaced(cardOwner: Player, space: ISpace) {
+        if (space.player === cardOwner && space.tile !== undefined && space.tile.tileType === TileType.GREENERY) {
+            cardOwner.addResourceTo(this);
         }
     }
     public play(player: Player, game: Game) {
@@ -32,10 +49,21 @@ export class Herbivores implements IProjectCard {
             player.addResourceTo(this);
             return undefined;
         }
-        return new SelectPlayer(game.getPlayers(), "Select player to decrease plant production 1 step", (foundPlayer: Player) => {
-            foundPlayer.plantProduction = Math.max(0, foundPlayer.plantProduction - 1);
-            player.addResourceTo(this);
+
+        const players = this.getPlayersWithPlantProduction(player, game);
+
+        if (players.length === 1) {
+            this.doPlay(player, players[0]);
             return undefined;
-        });
+        }
+
+        return new SelectPlayer(
+            players, 
+            "Select player to decrease plant production 1 step", 
+            (foundPlayer: Player) => {
+                this.doPlay(player, foundPlayer)
+                return undefined;
+            }
+        );
     }
 }

@@ -30,5 +30,5 @@ export interface ICard {
     onCardPlayed?: (player: Player, game: Game, card: IProjectCard) => OrOptions | void;
     onGameEnd?: (player: Player, game: Game) => void;
     onStandardProject?: (player: Player, projectType: StandardProjectType) => void;
-    onTilePlaced?: (player: Player, space: ISpace) => void;
+    onTilePlaced?: (player: Player, space: ISpace, game?: Game) => void;
 }

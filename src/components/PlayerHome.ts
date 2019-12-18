@@ -3,6 +3,7 @@ import Vue from "vue";
 
 import { Board } from "./Board";
 import { Card } from "./Card";
+import { Milestone } from "./Milestone";
 import { ClaimedMilestone } from "./ClaimedMilestone";
 import { FundedAward } from "./FundedAward";
 import { OtherPlayer } from "./OtherPlayer";
@@ -20,7 +21,8 @@ export const PlayerHome = Vue.component("player-home", {
         "other-player": OtherPlayer,
         "player-resources": PlayerResources,
         "waiting-for": WaitingFor,
-        "global-parameters": GlobalParameters
+        "global-parameters": GlobalParameters,
+        "milestone": Milestone
     },
     data: function () {
         return {}
@@ -91,6 +93,7 @@ export const PlayerHome = Vue.component("player-home", {
                     <board :spaces="player.spaces"></board>
 
                     <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature"></global-parameters>
+                    <milestone />
                 </div>
 
                 <div class="player_home_block" v-if="player.claimedMilestones.length > 0">

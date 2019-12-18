@@ -3,5 +3,6 @@ import { Game } from "../Game";
 
 export interface IMilestone {
     name: string;
+    description: string;
     canClaim: (player: Player, game: Game) => boolean;   
 }

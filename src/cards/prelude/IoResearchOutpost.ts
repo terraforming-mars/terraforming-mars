@@ -5,7 +5,7 @@ import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
 
 export class IoResearchOutpost extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [Tags.JOVIAN];
+    public tags: Array<Tags> = [Tags.JOVIAN, Tags.SCIENCE];
     public name: string = "Io Research Outpost";
     public play(player: Player, game: Game) {     
         player.titaniumProduction++;

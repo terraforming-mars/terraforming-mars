@@ -13,6 +13,7 @@ describe("Insulation", function () {
         player.heatProduction = 1;
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
+        if (action === undefined) return;
         action.cb(1);
         expect(player.heatProduction).to.eq(0);
         expect(player.megaCreditProduction).to.eq(1);

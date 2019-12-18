@@ -12,13 +12,17 @@ export class LandClaim implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = "Land Claim";
     public cardType: CardType = CardType.EVENT;
-    public canPlay(): boolean {
-        return true;
+    public canPlay(player: Player, game: Game): boolean {
+        return game.getAvailableSpacesOnLand(player).length > 0;
     }
     public play(player: Player, game: Game) {
-        return new SelectSpace("Select space for claim", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
-            foundSpace.player = player;
-            return undefined;
-        });
+        return new SelectSpace(
+            "Select space for claim", 
+            game.getAvailableSpacesOnLand(player), 
+            (foundSpace: ISpace) => {
+                foundSpace.player = player;
+                return undefined;
+            }
+        );
     }
 }

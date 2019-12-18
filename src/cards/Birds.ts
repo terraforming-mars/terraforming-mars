@@ -36,9 +36,6 @@ export class Birds implements IActionCard, IProjectCard {
     }
     public play(_player: Player, game: Game) {
       if (game.getPlayers().length == 1) return undefined;
-      if ( ! this.canPlay(_player, game)) {
-        throw new Error("Card requirements are not satisfied")
-      }
       return new SelectPlayer(
           game.getPlayers(),
           'Select player to decrease plant production 2 steps',

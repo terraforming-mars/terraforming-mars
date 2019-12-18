@@ -14,8 +14,6 @@ describe("Birds", function () {
         const game = new Game("foobar", [player, player2], player);
 
         expect(card.canPlay(player, game)).to.eq(false);
-
-        expect(function () { card.play(player, game); }).to.throw("Card requirements are not satisfied");
     });
     it("Should play", function () {
         const card = new Birds();

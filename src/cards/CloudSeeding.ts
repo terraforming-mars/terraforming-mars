@@ -12,17 +12,12 @@ export class CloudSeeding implements IProjectCard {
     public name: string = 'Cloud Seeding';
     public cardType: CardType = CardType.AUTOMATED;
     
-    private playersWithHeatProduction(game: Game): boolean {
-      for (const player of game.getPlayers()) {
-        if (player.heatProduction >= 1) return true;
-      }
-      return false;
+    private playersWithHeatProduction(game: Game): Array<Player> {
+      return game.getPlayers().filter((player) => player.heatProduction >= 1);
     }
-    
-    public canPlay(player: Player, game: Game): boolean {
 
-      if ( ! this.playersWithHeatProduction(game)) return false;
-      
+    public canPlay(player: Player, game: Game): boolean {
+      if (this.playersWithHeatProduction(game).length === 0) return false;
       return player.megaCreditProduction > -5 &&
         game.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game);
     }
@@ -34,12 +29,9 @@ export class CloudSeeding implements IProjectCard {
     public play(player: Player, game: Game) {
       if (game.getPlayers().length === 1) return this.doPlay(player);
       return new SelectPlayer(
-          game.getPlayers(),
+          this.playersWithHeatProduction(game),
           'Select player to decrease heat production 1 step',
           (foundPlayer: Player) => {
-            if (foundPlayer.heatProduction < 1) {
-              throw new Error('Player must have heat production');
-            }
             foundPlayer.heatProduction--;
             return this.doPlay(player);
           }

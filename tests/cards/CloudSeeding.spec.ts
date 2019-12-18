@@ -5,7 +5,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SelectPlayer } from "../../src/inputs/SelectPlayer";
-import { maxOutOceans } from "../../src/TestingUtils"
+import { maxOutOceans } from "../TestingUtils"
 
 describe("CloudSeeding", function () {
     it("Can't play", function () { 
@@ -24,7 +24,6 @@ describe("CloudSeeding", function () {
         if (action === undefined) return;
 
         expect(action instanceof SelectPlayer).to.eq(true);
-        expect(function () { action.cb(player); }).to.throw("Player must have heat production");
     });
 
     it("Can't be played without heat production", function () {

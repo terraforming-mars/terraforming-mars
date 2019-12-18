@@ -48,6 +48,8 @@ describe("Player", function () {
         const player = new Player("test", Color.BLUE, false);
         player.heatProduction = 2;
         const action = card.play(player, new Game("foobar", [player,player], player));
+        expect(action).not.to.eq(undefined);
+        if (action === undefined) return;
         player.setWaitingFor(action);
         expect(player.getWaitingFor()).not.to.eq(undefined);
         expect(function () { player.process([[]]) }).to.throw("Incorrect number of amounts provided");

@@ -1,7 +1,7 @@
-import { Player } from "./Player";
-import { Game } from "./Game";
-import * as constants from "./constants"
-import { SpaceType } from "./SpaceType";
+import { Player } from "../src/Player";
+import { Game } from "../src/Game";
+import * as constants from "../src/constants"
+import { SpaceType } from "../src/SpaceType";
 
 
 export const maxOutOceans = function(player: Player, game: Game, toValue: number = 0): void {

@@ -5,7 +5,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
-import { maxOutOceans } from "../../src/TestingUtils";
+import { maxOutOceans } from "../TestingUtils";
 
 describe("BlackPolarDust", function () {
     it("Can't play", function () {

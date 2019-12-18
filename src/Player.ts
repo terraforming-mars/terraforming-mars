@@ -711,6 +711,7 @@ export class Player {
                 this.actionsThisGeneration.add(foundCard.name);
                 this.actionsTakenThisRound++;
               }
+              game.log(this.name + " used " + foundCard.name + " action");
               this.takeAction(game);
             };
             if (action !== undefined) {
@@ -718,7 +719,6 @@ export class Player {
               return action;
             }
             whenDone();
-            game.log(this.name + " used " + foundCard.name + " action");
             return undefined;
           }
       );

@@ -69,7 +69,7 @@ export const HTML_DATA: Map<string, string> =
             <div class=" "><span class=" money resource ">1</span> <span class="red-arrow "></span> <span class="microbe resource "></span>*  :  <div class="resource science"></div> </div>
             <div class="description ">
                 (Action: Spend 1 MC to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.)<br><br>
-                (3 VPs if you have one or more Science resources here.)
+                (3 VPs if you have one or more Science resources here.) <br>##RESOURCES##
             </div>
         </div>
 `],
@@ -360,7 +360,7 @@ export const HTML_DATA: Map<string, string> =
                 (Action: Remove 1 Animal from any card and add it to this card.)
             </div><br>
             <div class="description ">
-                (Requires 11% oxygen. 1 VP per Animal on this card.)
+                (Requires 11% oxygen. 1 VP per Animal on this card.) <br>##RESOURCES##
             </div>
         </div>
 `],
@@ -418,7 +418,7 @@ export const HTML_DATA: Map<string, string> =
                 (Action: Spend 1 titanium to add 1 fighter resource to this card.)
             </div>
             <div class="description ">
-                (1 VP for each fighter resource on this card.)
+                (1 VP for each fighter resource on this card.) <br>##RESOURCES##
             </div>
         </div>
 `],
@@ -491,7 +491,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="red-arrow "></div> <div class="microbe resource "></div><br>
             OR <div class="microbe resource "></div><div class="microbe resource "></div> <div class="red-arrow "></div> <div class="tile oxygen-tile "></div>
             <div class="description ">
-                (Action: Add 1 Microbe to this card, or remove 2 Microbes from this card to raise oxygen level 1 step.)
+                (Action: Add 1 Microbe to this card, or remove 2 Microbes from this card to raise oxygen level 1 step.) <br>##RESOURCES##
             </div>
         </div>
 `],
@@ -506,7 +506,7 @@ export const HTML_DATA: Map<string, string> =
             OR <div class="microbe resource "></div><div class="microbe resource "></div> <div class="red-arrow "></div> <div class="tile temperature-tile "></div>
             <div class="description ">
                 (Action: Add 1 Microbe to this card, or remove 2 Microbes to raise temperature 1 step.)<br><br>
-                (Requires 4% oxygen.)
+                (Requires 4% oxygen.) <br>##RESOURCES##
             </div>
         </div>
 `],
@@ -521,7 +521,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="description ">
                 (Action: Remove 1 Microbe from any card to add 1 to this card.)
                 <br><br>
-                (Requires 4% oxygen. 1 VP per 2 Microbes on this card.)
+                (Requires 4% oxygen. 1 VP per 2 Microbes on this card.) <br>##RESOURCES##
             </div>
         </div>
 `],
@@ -728,7 +728,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="microbe resource"></div><br>
         <div class="description">
           (Action: Add 1 Microbe to this card.)
-          <br><br> (1 VP per 4 Microbes on this card.)
+          <br><br> (1 VP per 4 Microbes on this card.) <br>##RESOURCES##
         </div>
       </div>
 `],
@@ -772,7 +772,7 @@ export const HTML_DATA: Map<string, string> =
         <span class="red-arrow"></span>
         <div class="animal resource"></div>
         <div class="description">
-          (Action: Add 1 Animal to this card.)
+          (Action: Add 1 Animal to this card.)<br>##RESOURCES##
         </div><br>
         <div class="production-box production-box-size1a" style="margin-top:-10px;">
           <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div>
@@ -806,7 +806,7 @@ export const HTML_DATA: Map<string, string> =
         <span class="red-arrow"></span>
         <div class="animal resource"></div>
         <div class="description" style="margin-bottom:5px;">
-          (Action: Add 1 Animal to this card.)
+          (Action: Add 1 Animal to this card.)<br>##RESOURCES##
         </div>
         <div class="production-box production-box-size1a">
           <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div>
@@ -1079,7 +1079,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div><div class="plant production red-outline"></div>
             </div>
             <div class="description"  style="margin-top:-5px;">
-                (Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card.)
+                (Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card.)<br>##RESOURCES##
             </div>
         </div>
 `],
@@ -1423,7 +1423,7 @@ export const HTML_DATA: Map<string, string> =
                 (Action: Spend 6 Energy to add a science resource to this card.)
             </div><br><br><br>
             <div class="description ">
-                (2 VP for each science resource on this card.)
+                (2 VP for each science resource on this card.)<br>##RESOURCES##
             </div>
         </div>
 `],
@@ -1920,7 +1920,7 @@ export const HTML_DATA: Map<string, string> =
           (Effect: When you play an Animal, Plant, or Microbe tag, including this, add a Microbe to this card.)
         </div>
         <div class="description">
-          (Requires 3% oxygen. 1 VP per 3 Microbes on this card.)
+          (Requires 3% oxygen. 1 VP per 3 Microbes on this card.)<br>##RESOURCES##
         </div>
       </div>
 `],
@@ -2151,7 +2151,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="requirements">8% O2</div>
             <div class="tile greenery-tile" style="margin-top:-3px;"></div> : </span> <div class="animal resource "></div>
             <div class="description " style="margin-top:-8px;">
-              (Effect: When you place a greenery tile, add an Animal to this card.)
+              (Effect: When you place a greenery tile, add an Animal to this card.)<br>##RESOURCES##
             </div>
             <div class="animal resource " style="margin-left:105px;"></div>
             <div class="production-box production-box-size1a" style="margin-top:2px;">
@@ -2289,7 +2289,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="red-arrow "></div> <div class="microbe resource "></div><br>
             OR 3 <div class="microbe resource "></div> <div class="red-arrow "></div> <div class="tile rating "></div>
             <div class="description ">
-              (Action: Add 1 Microbe to this card, or remove 3 Microbes to increase your TR 1 step.
+              (Action: Add 1 Microbe to this card, or remove 3 Microbes to increase your TR 1 step.<br>##RESOURCES##
             </div><br>
             <div class="microbe resource "></div><div class="microbe resource "></div><div class="microbe resource "></div>
             <div class="description ">
@@ -2522,7 +2522,7 @@ export const HTML_DATA: Map<string, string> =
           </div><br>
           <div class="animal resource"></div>
           <div class="description" style="text-align:left;margin-top:10px;" >
-            (Add 1 Animal to this card.<br> 1 VP per 2 Animals here.)
+            (Add 1 Animal to this card.<br> 1 VP per 2 Animals here.)<br>##RESOURCES##
           </div>
         </div>
 `],
@@ -2698,7 +2698,7 @@ export const HTML_DATA: Map<string, string> =
           <span class="red-arrow"></span>
           <div class="animal resource"></div>
           <div class="description" style="margin-bottom:5px;">
-            (Action: Add 1 Animal to this card.)
+            (Action: Add 1 Animal to this card.)<br>##RESOURCES##
           </div>
           <div class="production-box production-box-size1a" style="margin-top:10px;margin-right:150px;">
             <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production"></div>
@@ -2720,7 +2720,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="points points-big">1</div>
               <div class="resource-tag science"></div> : <div class="resource science"></div> OR -<div class="resource science"></div>+<div class="card resource "></div>
               <div class="description ">
-                (When you play a Science tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.)
+                (When you play a Science tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.)<br>##RESOURCES##
               </div>
           </div>
 `],
@@ -3068,8 +3068,8 @@ export const HTML_DATA: Map<string, string> =
             <div class="production" style="background:white;color:black;vertical-align:middle">X</div> x2
             <div class="description">
               (Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.) <br>
-              (Effect: Cards here may be played as if from hand with its cost reduced by the number of resources on it.)<br><br>
-              (Requires 2 Science tags.)
+              (Effect: Cards here may be played as if from hand with its cost reduced by the number of resources on it.)<br>
+              (Requires 2 Science tags.)<br>##RESOURCES##
             </div>
           </div>
 `],
@@ -3101,7 +3101,7 @@ export const HTML_DATA: Map<string, string> =
                     (Action: Add 1 animal to this card.)
                 </div><br><br>
                 <div class="description ">
-                    (Requires 8 oceans. 1 VP for each animal on this card.)
+                    (Requires 8 oceans. 1 VP for each animal on this card.)<br>##RESOURCES##
                 </div>
             </div>
 `],
@@ -3115,7 +3115,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="red-arrow"></div>
             <div class="floater resource"></div>* OR <div class="floater resource"></div> <div class="red-arrow"></div> <div class="card resource"></div><br>
             <div class="description">
-              (Action: Add 1 Floater to ANY card or spend 1 Floater here to draw 1 card).
+              (Action: Add 1 Floater to ANY card or spend 1 Floater here to draw 1 card).<br>##RESOURCES##
             </div>
           </div>
 `],
@@ -3950,7 +3950,7 @@ export const HTML_DATA: Map<string, string> =
                 <div class="red-arrow "></div> <div class="microbe resource "></div><br>
                 <div class="resource-tag tag-plant"></div>  : <div class="microbe resource "></div> = <div class="money resource ">2</div>
                   <div class="description">
-                  (Action: Add 1 microbe to this card.)<br><br>
+                  (Action: Add 1 microbe to this card.)<br>##RESOURCES##<br>
                   (Effect: When paying for a plant card, microbes here may be used as 2 MC each.)
                   <br><br>
                   (Temperature must be -20 C or lower.)

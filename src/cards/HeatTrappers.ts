@@ -14,6 +14,7 @@ export class HeatTrappers implements IProjectCard {
 
     private getPlayersWithHeatProduction(currentPlayer: Player, game: Game): Array<Player> {
         var players = game.getPlayers().filter((p) => p.heatProduction > 1);
+
         if (players.length > 1) {
           players = players.filter((p) => p.id != currentPlayer.id)
         }

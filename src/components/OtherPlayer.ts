@@ -33,6 +33,7 @@ export const OtherPlayer = Vue.component("other-player", {
             <h3 :style="'color:' + player.color" v-on:click="toggleDisplayed()">{{player.name}}</h3>
             <div v-if="displayed === true">
                 <div>Terraform Rating: {{player.terraformRating}}</div>
+                <div>Cards In Hand: {{player.cardsInHandNbr}}</div>
                 <div v-if="player.corporationCard !== undefined">
                     <card :card="getCorporationCard()"></card>
                 </div>

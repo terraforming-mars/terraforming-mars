@@ -132,13 +132,13 @@ export class Player {
       if (
         this.corporationCard !== undefined &&
             this.corporationCard.getRequirementBonus !== undefined) {
-              requirementsBonus = this.corporationCard.getRequirementBonus(this, game);
+              requirementsBonus += this.corporationCard.getRequirementBonus(this, game);
       }
       for (let playedCard of this.playedCards) {
         if (playedCard.getRequirementBonus !== undefined &&
-           playedCard.getRequirementBonus(this, game) > requirementsBonus ) {
-            requirementsBonus = playedCard.getRequirementBonus(this, game);
-          }
+           playedCard.getRequirementBonus(this, game)) {
+            requirementsBonus += playedCard.getRequirementBonus(this, game);
+        }
       }
       return requirementsBonus;
     }

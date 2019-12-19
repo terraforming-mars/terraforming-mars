@@ -19,6 +19,7 @@ export class Herbivores implements IProjectCard {
 
     private getPlayersWithPlantProduction(currentPlayer: Player, game: Game): Array<Player> {
         var players = game.getPlayers().filter((p) => p.plantProduction > 0);
+
         if (players.length > 1) {
           players = players.filter((p) => p.id != currentPlayer.id)
         }

@@ -4,7 +4,6 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { AndOptions } from "../inputs/AndOptions";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
 import { SelectCard } from "../inputs/SelectCard";
@@ -21,28 +20,32 @@ export class ImportedHydrogen implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game): undefined | PlayerInput {
-        return new AndOptions(
-            () => {
-                return undefined;
-            },
-            new OrOptions(
-                new SelectOption("Gain 3 plants", () => {
-                    player.plants += 3;
+
+        const addOcean = () => {
+            if (game.noOceansAvailabe()) return undefined;
+            return new SelectSpace(
+                "Select space for ocean tile", 
+                game.getAvailableSpacesForOcean(player), 
+                (foundSpace: ISpace) => {
+                    game.addOceanTile(player, foundSpace.id);
                     return undefined;
-                }),
-                new SelectCard("Add 3 microbes to card", game.getOtherMicrobeCards(this), (foundCards: Array<IProjectCard>) => {
-                    player.addResourceTo(foundCards[0], 3);
-                    return undefined;
-                }),
-                new SelectCard("Add 2 animals to card", game.getOtherAnimalCards(this), (foundCards: Array<IProjectCard>) => {
-                    player.addResourceTo(foundCards[0], 2);
-                    return undefined;
-                })
-            ),
-            new SelectSpace("Select space for ocean tile", game.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
-                game.addOceanTile(player, foundSpace.id);
-                return undefined;
+                }
+            )
+        }
+
+        return new OrOptions(
+            new SelectOption("Gain 3 plants", () => {
+                player.plants += 3;
+                return addOcean();
+            }),
+            new SelectCard("Add 3 microbes to card", game.getOtherMicrobeCards(this), (foundCards: Array<IProjectCard>) => {
+                player.addResourceTo(foundCards[0], 3);
+                return addOcean();
+            }),
+            new SelectCard("Add 2 animals to card", game.getOtherAnimalCards(this), (foundCards: Array<IProjectCard>) => {
+                player.addResourceTo(foundCards[0], 2);
+                return addOcean();
             })
-        );
+        )
     }
 }

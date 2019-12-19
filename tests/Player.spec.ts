@@ -19,13 +19,16 @@ describe("Player", function () {
     it("Should run select player for PowerSupplyConsortium", function () {
         const card = new PowerSupplyConsortium();
         const player = new Player("test", Color.BLUE, false);
+        const player2 = new Player("test2", Color.RED, false);
+        const player3 = new Player("test3", Color.YELLOW, false);
+        player2.energyProduction = 2;
+        player3.energyProduction = 2;
         player.playedCards.push(new LunarBeam());
         player.playedCards.push(new LunarBeam());
-        player.energyProduction = 1;
-        const action = card.play(player, new Game("foobar", [player,player], player));
+        const action = card.play(player, new Game("foobar", [player, player2, player3], player));
         if (action !== undefined) {
             player.setWaitingFor(action);
-            player.process([[player.id]]);
+            player.process([[player2.id]]);
             expect(player.energyProduction).to.eq(1);
         }
     });

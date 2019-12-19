@@ -5,6 +5,7 @@ import { VictoryPointsBreakdown } from "../VictoryPointsBreakdown";
 export interface PlayerModel {
     corporationCard: string;
     playedCards: Array<CardModel>;
+    cardsInHandNbr: number;
     color: Color;
     energy: number;
     energyProduction: number;

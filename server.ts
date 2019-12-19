@@ -72,6 +72,8 @@ function requestHandler(
         serveApp(res);
       } else if (req.url.startsWith('/api/player?id=')) {
         apiGetPlayer(req, res);
+      } else if (req.url.startsWith('/api/waitingfor?id=')) {
+        apiGetWaitingFor(req, res);
       } else if (req.url === '/nes.min.css') {
         serveResource(res, nes);
       } else if (req.url === '/board.css') {
@@ -190,6 +192,34 @@ function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
   res.setHeader('Content-Type', 'application/json');
   res.write(getGame(game));
+  res.end();
+}
+
+function apiGetWaitingFor(
+  req: http.IncomingMessage,
+  res: http.ServerResponse
+): void {
+  const playerId: string = req.url!.substring('/api/waitingfor?id='.length);
+  const game = playersToGame.get(playerId);
+  if (game === undefined) {
+    notFound(req, res);
+    return;
+  }
+  const player = game.getPlayers().find((player) => player.id === playerId);
+  if (player === undefined) {
+    notFound(req, res);
+    return;
+  }
+
+  res.setHeader('Content-Type', 'application/json');
+  const answer = {
+    "result": "WAIT",
+    "player": game.activePlayer.name
+  }
+  if (player.getWaitingFor() !== undefined ) {
+    answer["result"] = "GO";
+  }
+  res.write(JSON.stringify(answer));
   res.end();
 }
 

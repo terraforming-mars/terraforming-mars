@@ -20,13 +20,10 @@ export class BusinessNetwork implements IActionCard, IProjectCard {
       player.megaCreditProduction--;
       return undefined;
     }
-    public canAct(): boolean {
-      return true;
+    public canAct(player: Player): boolean {
+      return player.canAfford(3);
     }
     public action(player: Player, game: Game) {
-      if (!player.canAfford(3)) {
-          return undefined;
-      }
       const dealtCard = game.dealer.dealCard();
       return new SelectCard(
         "Select card to keep or none to discard",

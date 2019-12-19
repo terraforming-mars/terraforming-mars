@@ -4,7 +4,6 @@ import { Game } from "../Game";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
-import { AndOptions } from "../inputs/AndOptions";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { SelectCard } from "../inputs/SelectCard";
@@ -21,23 +20,44 @@ export class LargeConvoy implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public play(player: Player, game: Game): PlayerInput {
-        return new AndOptions(
-            () => {
-                player.cardsInHand.push(game.dealer.dealCard(), game.dealer.dealCard());
-                player.victoryPoints += 2;
-                return undefined;
-            },
-            new SelectSpace("Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                game.addOceanTile(player, space.id);
-                return undefined;
-            }),
-            new OrOptions(
-                new SelectOption("Gain 5 plants", () => { player.plants += 5; return undefined; }),
-                new SelectCard("Select card to add 4 animals", game.getOtherAnimalCards(this), (foundCards: Array<IProjectCard>) => { 
-                    player.addResourceTo(foundCards[0], 4);
+    public play(player: Player, game: Game): PlayerInput | undefined {
+        player.cardsInHand.push(game.dealer.dealCard(), game.dealer.dealCard());
+        player.victoryPoints += 2;
+
+        const addOcean = () => {
+            if (game.noOceansAvailabe()) return undefined;
+            return new SelectSpace(
+                "Select space for ocean tile", 
+                game.getAvailableSpacesForOcean(player), 
+                (foundSpace: ISpace) => {
+                    game.addOceanTile(player, foundSpace.id);
                     return undefined;
-                })
+                }
+            )
+        }
+
+        const cards = game.getOtherAnimalCards(this);
+
+        if (cards.length === 0 ) {
+            player.plants += 5; 
+            return addOcean();
+        }
+
+        return new OrOptions(
+            new SelectOption(
+                "Gain 5 plants", 
+                () => { 
+                    player.plants += 5; 
+                    return addOcean(); 
+                }
+            ),
+            new SelectCard(
+                "Select card to add 4 animals", 
+                cards, 
+                (foundCards: Array<IProjectCard>) => { 
+                    player.addResourceTo(foundCards[0], 4);
+                    return addOcean();
+                }
             )
         );
     }

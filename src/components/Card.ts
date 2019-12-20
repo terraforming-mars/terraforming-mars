@@ -31,7 +31,9 @@ function getData(cardName: string, resources: string): string | undefined {
         if (resources === '0') {
           htmlData = htmlData.replace('##RESOURCES##', '');
         } else {
-          htmlData = htmlData.replace('##RESOURCES##', 'This card has ' + resources +' resource(s).');
+          htmlData = htmlData.replace(
+              '##RESOURCES##', 
+              '<div class="card_resources_counter">RES:<span class="card_resources_counter--number">' + resources + '</span></div>');
         }
     }
     return htmlData;

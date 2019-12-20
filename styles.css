@@ -2353,3 +2353,26 @@ input[type=radio]:checked + label {
 .player_home_block {
   margin-bottom: 20px;
 }
+
+.card_resources_counter {
+  position: absolute;
+  font-family: Prototype;
+  width: 62px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  margin-top: 7px;
+  margin-left: 53px;
+  font-size: 14px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
+  background: #f5e500;
+  border-radius: 2px;
+  border-top: 2px solid rgb(221,221,221);
+  border-left: 2px solid rgb(221,221,221);
+  border-bottom: 2px solid rgb(137,137,137);
+  border-right: 2px solid rgb(137,137,137);
+}
+
+.card_resources_counter--number {
+  padding-left: 5px;
+}

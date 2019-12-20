@@ -23,11 +23,6 @@ import {SpaceModel} from './src/models/SpaceModel';
 import {TileType} from './src/TileType';
 
 const styles = fs.readFileSync('styles.css');
-const nes = fs.readFileSync('nes.min.css');
-const board = fs.readFileSync('board.css');
-const boardPositionsCSS = fs.readFileSync('board_items_positions.css');
-const gameEndCSS = fs.readFileSync('game_end.css');
-const globsCSS = fs.readFileSync('globs.css');
 const favicon = fs.readFileSync('favicon.ico');
 const mainJs = fs.readFileSync('dist/main.js');
 const prototype = fs.readFileSync('assets/Prototype.ttf');
@@ -74,16 +69,6 @@ function requestHandler(
         apiGetPlayer(req, res);
       } else if (req.url.startsWith('/api/waitingfor?id=')) {
         apiGetWaitingFor(req, res);
-      } else if (req.url === '/nes.min.css') {
-        serveResource(res, nes);
-      } else if (req.url === '/board.css') {
-        serveResource(res, board);
-      } else if (req.url === '/board_items_positions.css') {
-        serveResource(res, boardPositionsCSS);
-      } else if (req.url === '/game_end.css') {
-        serveResource(res, gameEndCSS);
-      } else if (req.url === '/globs.css') {
-        serveResource(res, globsCSS);
       } else if (req.url === '/styles.css') {
         serveResource(res, styles);
       } else if (req.url === '/assets/Prototype.ttf') {

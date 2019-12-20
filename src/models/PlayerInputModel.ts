@@ -2,6 +2,7 @@
 import { PlayerInputTypes } from "../PlayerInputTypes";
 
 export interface PlayerInputModel {
+    amount: number | undefined;
     availableSpaces: Array<string> | undefined;
     canUseHeat: boolean | undefined;
     canUseSteel: boolean | undefined;

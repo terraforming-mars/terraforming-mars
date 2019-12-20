@@ -785,13 +785,8 @@ export class Player {
             'Select how to pay for power plant',
             false, false, true, false,
             (htp) => {
-              if (htp.heat + htp.megaCredits < this.powerPlantCost) {
-                throw new Error(
-                    'Haven\'t spend enough for power plant'
-                );
-              }
               return fundProject(htp.megaCredits, htp.heat);
-            }
+            }, this.powerPlantCost
         );
       }
       return new SelectOption('Power Plant', () => {

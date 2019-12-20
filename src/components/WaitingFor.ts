@@ -44,7 +44,6 @@ export const WaitingFor = Vue.component("waiting-for", {
                     root.$data.playerkey++;
                     root.$data.screen = "player-home";
                     if (root.$data.player.phase == "end" && window.location.pathname !== "/the-end") {
-                        console.log(window.location.pathname);
                         (window as any).location = (window as any).location;
                     }
 

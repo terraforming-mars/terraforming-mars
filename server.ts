@@ -310,6 +310,7 @@ function getWaitingFor(
   const result: PlayerInputModel = {
     title: waitingFor.title,
     inputType: waitingFor.inputType,
+    amount: undefined,
     options: undefined,
     cards: undefined,
     maxCardsToSelect: undefined,
@@ -348,6 +349,7 @@ function getWaitingFor(
           .minCardsToSelect;
       break;
     case PlayerInputTypes.SELECT_HOW_TO_PAY:
+      result.amount = (waitingFor as SelectHowToPay).amount;
       result.canUseSteel = (waitingFor as SelectHowToPay).canUseSteel;
       result.canUseTitanium = (waitingFor as SelectHowToPay).canUseTitanium;
       result.canUseHeat = (waitingFor as SelectHowToPay).canUseHeat;

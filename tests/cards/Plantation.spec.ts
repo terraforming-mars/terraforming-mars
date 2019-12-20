@@ -10,7 +10,8 @@ describe("Plantation", function () {
     it("Can't play", function () {
         const card = new Plantation();
         const player = new Player("test", Color.BLUE, false);
-        expect(card.canPlay(player)).to.eq(false);
+        const game = new Game("foobar", [player,player], player);
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new Plantation();

@@ -4,7 +4,6 @@ import { Player } from "../Player";
 import { IProjectCard } from "./IProjectCard";
 import { CardType } from "./CardType";
 import { Tags } from "./Tags";
-import { AndOptions } from "../inputs/AndOptions";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectPlayer } from "../inputs/SelectPlayer";
 import { SelectOption } from "../inputs/SelectOption";
@@ -32,27 +31,17 @@ export class HiredRaiders implements IProjectCard {
             );
         }
 
-        let selectedPlayer: Player;
-        return new AndOptions(
-            () => { return undefined; },
-            new SelectPlayer(game.getPlayers(), "Select player to steal from", (foundPlayer: Player) => {
-                selectedPlayer = foundPlayer;
+        return new OrOptions(
+            new SelectPlayer(game.getPlayers(), "Select player to steal up to 2 steel", (selectedPlayer: Player) => {
+                player.steel += Math.min(2, selectedPlayer.steel);
+                selectedPlayer.steel = Math.max(0, selectedPlayer.steel - 2);
                 return undefined;
             }),
-            new OrOptions(
-                new SelectOption("Steal up to 2 steel", () => {
-                    const starting = selectedPlayer.steel;
-                    selectedPlayer.steel = Math.max(0, selectedPlayer.steel - 2);
-                    player.steel += starting - selectedPlayer.steel;
-                    return undefined;
-                }),
-                new SelectOption("Steal up to 3 mega credit", () => {
-                    const starting = selectedPlayer.megaCredits;
-                    selectedPlayer.megaCredits = Math.max(0, selectedPlayer.megaCredits - 3);
-                    player.megaCredits += starting - selectedPlayer.megaCredits;
-                    return undefined;
-                })
-            )
+            new SelectPlayer(game.getPlayers(), "Select player to steal up to 3 mega credits", (selectedPlayer: Player) => {
+                player.megaCredits += Math.min(3, selectedPlayer.megaCredits);
+                selectedPlayer.megaCredits = Math.max(0, selectedPlayer.megaCredits - 3);
+                return undefined;
+            })
         );
     }
 }

@@ -20,20 +20,52 @@ export class Virus implements IProjectCard {
     public play(player: Player, game: Game): PlayerInput | undefined {
         if (game.getPlayers().length == 1)  return undefined;
         const cards = game.getPlayedCardsWithAnimals();
+        const playersWithPlants = game.getPlayers().filter(
+            (p) => p.plants > 0 && p.id != player.id
+        )
         const remove5Plants = () => {
-            return new SelectPlayer(game.getPlayers(), "Select player to remove 5 plants from", (foundPlayer: Player) => {
+            return new SelectPlayer(
+                playersWithPlants, 
+                "Select player to remove up to 5 plants from", (foundPlayer: Player) => {
                 foundPlayer.removePlants(player, 5);
                 return undefined;
             });
         };
-        if (cards.length === 0) {
-            return remove5Plants();
-        }
-        return new OrOptions(
-            new SelectCard("Select card to remove 2 animals from", cards, (foundCard: Array<IProjectCard>) => {
+
+        const removeAnimals = () => {
+            return new SelectCard(
+                "Select card to remove up to 2 animals from", 
+                cards, (foundCard: Array<IProjectCard>) => {
                 game.getCardPlayer(foundCard[0].name).removeAnimals(player, foundCard[0], 2);
                 return undefined;
-            }),
+            })
+        };
+
+        if (cards.length === 0) {
+            if (playersWithPlants.length > 1) {
+              return remove5Plants();
+            }
+            if (playersWithPlants.length === 1) {
+                playersWithPlants[0].removePlants(player, 5);
+                return undefined;
+            }
+            return undefined;
+        }
+
+        if (playersWithPlants.length === 0) {
+            if (cards.length > 1) {
+                return removeAnimals()
+            }
+
+            if (cards.length === 1) {
+                game.getCardPlayer(cards[0].name).removeAnimals(player, cards[0], 2);
+                return undefined;
+            }
+            return undefined;
+        }
+
+        return new OrOptions(
+            removeAnimals(),
             remove5Plants()
         );
     }

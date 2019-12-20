@@ -19,29 +19,29 @@ describe("Birds", function () {
         const card = new Birds();
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("victim", Color.RED, false);
+        const player3 = new Player("safe", Color.RED, false);
 
-        const game = new Game("foobar", [player,player2], player);
+        const game = new Game("foobar", [player, player2, player3], player);
 
         // requirements
         player2.plantProduction = 2;
+        player3.plantProduction = 7;
         (game as any).oxygenLevel = 13;
 
         // Play card
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
+        expect(action instanceof SelectPlayer).to.eq(true);
+        if (action === undefined) return;
         player.playedCards.push(card);
 
-        if (action !== undefined) {
-            // Check action to reduce plant production
-            expect(action instanceof SelectPlayer).to.eq(true);
-            action.cb(player2);
-            expect(player2.plantProduction).to.eq(0);
+        // Check action to reduce plant production
+        action.cb(player2);
+        expect(player2.plantProduction).to.eq(0);
 
-            // Check victory points assignment
-            player.addResourceTo(card, 2); 
-            card.onGameEnd(player);
-            expect(player.victoryPoints).to.eq(2);
-        }
+        // Check victory points assignment
+        player.addResourceTo(card, 2); 
+        card.onGameEnd(player);
+        expect(player.victoryPoints).to.eq(2);
     });
     it("Should act", function () {
         const card = new Birds();

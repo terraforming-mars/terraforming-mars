@@ -22,18 +22,31 @@ describe("Fish", function () {
     it("Should play", function () {
         const card = new Fish();
         const player = new Player("test", Color.BLUE, false);
-        player.playedCards.push(card);
-        const game = new Game("foobar", [player,player], player);
+        const player2 = new Player("test2", Color.RED, false);
+        const player3 = new Player("test3", Color.YELLOW, false);
+        const game = new Game("foobar", [player,player2, player3], player);
+
+        // Fit minimal requirements
+        (game as any).temperature = 2;
+
+        player2.plantProduction = 3;
+        player3.plantProduction = 7;
+
+        expect(card.canPlay(player, game)).to.eq(true);
+
         const action = card.play(player, game);
-        if (action !== undefined) {
-            //expect(action).not.to.eq(undefined);
-            expect(action instanceof SelectPlayer).to.eq(true);
-            player.plantProduction = 1;
-            action.cb(player);
-            expect(player.plantProduction).to.eq(0);
-            player.addResourceTo(card, 5);
-            card.onGameEnd(player);
-            expect(player.victoryPoints).to.eq(player.getResourcesOnCard(card));
-        }
+        expect(action instanceof SelectPlayer).to.eq(true);
+        if (action === undefined) return;
+
+        action.cb(player3);
+
+        expect(player3.plantProduction).to.eq(6); // reduced one step
+        expect(player2.plantProduction).to.eq(3); // no side effects on other than target players
+        expect(player.plantProduction).to.eq(0); // no negative values etc.
+
+        player.addResourceTo(card, 5);
+        card.onGameEnd(player);
+        
+        expect(player.victoryPoints).to.eq(player.getResourcesOnCard(card));
     });
 });

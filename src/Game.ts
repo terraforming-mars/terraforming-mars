@@ -80,6 +80,15 @@ export class Game {
       }
     }
 
+    public getCardOwner(card: IProjectCard): Player {
+      for (const p of this.getPlayers()) {
+        for (const c of p.playedCards) {
+          if (c.name === card.name) return p;
+        }
+      }
+      throw new Error('No card owner found')
+    }
+
     public getPreludeExtension(): boolean {
       return this.preludeExtension;
     }
@@ -776,11 +785,11 @@ export class Game {
       this.players.forEach((player) => {
         if (player.corporationCard !== undefined &&
             player.corporationCard.onTilePlaced !== undefined) {
-          player.corporationCard.onTilePlaced(player, space);
+          player.corporationCard.onTilePlaced(player, space, this);
         }
         player.playedCards.forEach((playedCard) => {
           if (playedCard.onTilePlaced !== undefined) {
-            playedCard.onTilePlaced(player, space);
+            playedCard.onTilePlaced(player, space, this);
           }
         });
       });

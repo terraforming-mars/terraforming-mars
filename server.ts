@@ -1,6 +1,7 @@
 
 import * as http from 'http';
 import * as fs from 'fs';
+import * as path from 'path';
 import {AndOptions} from './src/inputs/AndOptions';
 import {CardModel} from './src/models/CardModel';
 import {Color} from './src/Color';
@@ -23,34 +24,8 @@ import {SpaceModel} from './src/models/SpaceModel';
 import {TileType} from './src/TileType';
 
 const styles = fs.readFileSync('styles.css');
-const favicon = fs.readFileSync('favicon.ico');
-const mainJs = fs.readFileSync('dist/main.js');
-const prototype = fs.readFileSync('assets/Prototype.ttf');
-
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
-const pngs: Map<string, Buffer> = new Map<string, Buffer>([
-  ['/assets/tag-animal.png', fs.readFileSync('assets/tag-animal.png')],
-  ['/assets/tag-building.png', fs.readFileSync('assets/tag-building.png')],
-  ['/assets/tag-city.png', fs.readFileSync('assets/tag-city.png')],
-  ['/assets/cursor.png', fs.readFileSync('assets/cursor.png')],
-  ['/assets/cursor-click.png', fs.readFileSync('assets/cursor-click.png')],
-  ['/assets/tag-earth.png', fs.readFileSync('assets/tag-earth.png')],
-  ['/assets/tag-event.png', fs.readFileSync('assets/tag-event.png')],
-  ['/assets/tag-jovian.png', fs.readFileSync('assets/tag-jovian.png')],
-  ['/assets/tag-microbe.png', fs.readFileSync('assets/tag-microbe.png')],
-  ['/assets/tag-plant.png', fs.readFileSync('assets/tag-plant.png')],
-  ['/assets/tag-power.png', fs.readFileSync('assets/tag-power.png')],
-  ['/assets/tag-science.png', fs.readFileSync('assets/tag-science.png')],
-  ['/assets/tag-space.png', fs.readFileSync('assets/tag-space.png')],
-  ['/assets/tag-wild.png', fs.readFileSync('assets/tag-wild.png')],
-  ['/assets/tag-venus.png', fs.readFileSync('assets/tag-venus.png')],
-  ['/assets/triangle16.png', fs.readFileSync('assets/triangle16.png')],
-  ['/assets/board_icons.png', fs.readFileSync('assets/board_icons.png')],
-  ['/assets/board_bg_planet.png', fs.readFileSync('assets/board_bg_planet.png')],
-  ['/assets/solo_win.png', fs.readFileSync('assets/solo_win.png')],
-  ['/assets/globs.png', fs.readFileSync('assets/globs.png')]
-]);
 
 function requestHandler(
     req: http.IncomingMessage,
@@ -71,16 +46,16 @@ function requestHandler(
         apiGetWaitingFor(req, res);
       } else if (req.url === '/styles.css') {
         serveResource(res, styles);
-      } else if (req.url === '/assets/Prototype.ttf') {
-        serveResource(res, prototype);
-      } else if (req.url === '/main.js') {
-        serveResource(res, mainJs);
-      } else if (pngs.has(req.url)) {
-        servePng(res, pngs.get(req.url)!);
-      } else if (req.url === '/favicon.ico') {
-        serveFavicon(res);
+      } else if (
+          req.url.startsWith('/assets/') ||
+          req.url === '/favicon.ico' ||
+          req.url === '/main.js'
+      ) {
+        serveAsset(req, res);
       } else if (req.url.indexOf('/api/game') === 0) {
         apiGetGame(req, res);
+      } else {
+        notFound(req, res);
       }
     } else if (req.method === 'PUT' && req.url.indexOf('/game') === 0) {
       createGame(req, res);
@@ -100,6 +75,8 @@ function requestHandler(
         return;
       }
       processInput(req, res, player, game);
+    } else {
+      notFound(req, res);
     }
   } else {
     notFound(req, res);
@@ -475,19 +452,34 @@ function serveApp(res: http.ServerResponse): void {
   res.end();
 }
 
-function serveFavicon(res: http.ServerResponse): void {
-  res.setHeader('Content-Type', 'image/x-icon');
-  res.write(favicon);
-  res.end();
+
+function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
+  if (req.url === undefined) throw new Error("Empty url");
+
+  if (req.url === '/favicon.ico') {
+    res.setHeader('Content-Type', 'image/x-icon');
+    res.write(fs.readFileSync('favicon.ico'));
+  } else if (req.url === '/main.js') {
+    res.setHeader('Content-Type', 'text/javascript');
+    res.write(fs.readFileSync('dist/main.js'));
+  } else if (req.url === '/assets/Prototype.ttf') {
+    res.write(fs.readFileSync('assets/Prototype.ttf'));
+  } else if (req.url.endsWith('.png')) {
+    const assetsRoot = path.resolve('./assets');
+    const reqFile = path.resolve(path.normalize(req.url).slice(1));
+
+    // Disallow to go outside of assets directory
+    if ( ! reqFile.startsWith(assetsRoot) || ! fs.existsSync(reqFile)) {
+      return notFound(req, res);
+    }
+    res.setHeader('Content-Type', 'image/png');
+    res.write(fs.readFileSync(reqFile))
+  }
+
+  res.end()
 }
 
 function serveResource(res: http.ServerResponse, s: Buffer): void {
-  res.write(s);
-  res.end();
-}
-
-function servePng(res: http.ServerResponse, s: Buffer): void {
-  res.setHeader('Content-Type', 'image/png');
   res.write(s);
   res.end();
 }

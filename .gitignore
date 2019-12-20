@@ -3,3 +3,4 @@ dist/
 node_modules/
 *.swp
 .nyc_output/
+styles.css

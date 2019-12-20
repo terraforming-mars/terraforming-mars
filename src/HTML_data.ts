@@ -1876,6 +1876,7 @@ export const HTML_DATA: Map<string, string> =
 ["Ecological Zone",`
       <div class="title background-color-active">Ecological Zone</div>
       <div class="price">12</div>
+      ##RESOURCES##
       <div class="tag tag1 tag-plant"></div>
       <div class="tag tag2 tag-animal"></div>
       <div class="content">

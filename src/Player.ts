@@ -476,6 +476,7 @@ export class Player {
             .forEach((card) => {
               game.dealer.discard(card);
             });
+        game.log(this.name + " bought " + selectedCards.length + " cards");   
         game.playerIsFinishedWithResearchPhase(this);
       };
 

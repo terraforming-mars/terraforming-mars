@@ -607,6 +607,10 @@ export class Game {
       if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
         return undefined;
       }
+      if (this.oxygenLevel + steps > constants.MAX_OXYGEN_LEVEL) {
+        if (steps == 1) return undefined;
+        return this.increaseOxygenLevel(player, 1);
+      }
       this.oxygenLevel += steps;
       player.terraformRating += steps;
       if (this.oxygenLevel === 8 || (steps === 2 && this.oxygenLevel === 9)) {
@@ -623,6 +627,11 @@ export class Game {
         player: Player, steps: 1 | 2 | 3): SelectSpace | undefined {
       if (this.temperature >= constants.MAX_TEMPERATURE) {
         return undefined;
+      }
+      if (this.temperature + 2 * steps > constants.MAX_TEMPERATURE) {
+        if (steps == 1) return undefined;
+        steps = (steps == 3) ? 2 : 1; // typing disallows decrement
+        return this.increaseTemperature(player, steps);
       }
       this.temperature += 2 * steps;
       player.terraformRating += steps;

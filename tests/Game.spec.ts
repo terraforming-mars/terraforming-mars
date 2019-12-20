@@ -7,6 +7,7 @@ import { SpaceName } from "../src/SpaceName";
 import { Mayor } from "../src/milestones/Mayor";
 import { Banker } from "../src/awards/Banker";
 import { Thermalist } from "../src/awards/Thermalist";
+import * as constants from "../src/constants";
 
 describe("Game", function () {
     it("should initialize with right defaults", function () {
@@ -68,5 +69,39 @@ describe("Game", function () {
         expect(player2.victoryPointsBreakdown.awards).to.eq(8); // 1st place + one shared 1st place
         expect(player3.victoryPointsBreakdown.awards).to.eq(3); // one shared 1st place
 
+    });
+
+    it("Disallows to set temperature more than allowed maximum", function () {
+        const player = new Player("temp_test", Color.BLUE, false);
+        const player2 = new Player("temp_test2", Color.RED, false);
+        const game = new Game("vp_game", [player,player2], player);
+
+        (game as any).temperature = 6;
+        var initialTR = player.terraformRating;
+        game.increaseTemperature(player, 2);
+
+        expect(game.getTemperature()).to.eq(constants.MAX_TEMPERATURE);
+        expect(player.terraformRating).to.eq(initialTR + 1);
+
+        initialTR = player.terraformRating;
+        (game as any).temperature = 6;
+
+        // Try 3 steps increase
+        game.increaseTemperature(player, 3);
+        expect(game.getTemperature()).to.eq(constants.MAX_TEMPERATURE);
+        expect(player.terraformRating).to.eq(initialTR + 1);
+    });
+
+    it("Disallows to set oxygenLevel more than allowed maximum", function () {
+        const player = new Player("temp_test", Color.BLUE, false);
+        const player2 = new Player("temp_test2", Color.RED, false);
+        const game = new Game("vp_game", [player,player2], player);
+
+        (game as any).oxygenLevel = 13;
+        const initialTR = player.terraformRating;
+        game.increaseOxygenLevel(player, 2);
+
+        expect(game.getOxygenLevel()).to.eq(constants.MAX_OXYGEN_LEVEL);
+        expect(player.terraformRating).to.eq(initialTR + 1);
     });
 });

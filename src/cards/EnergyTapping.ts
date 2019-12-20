@@ -11,8 +11,10 @@ export class EnergyTapping implements IProjectCard {
   public tags: Array<Tags> = [Tags.ENERGY];
   public name: string = 'Energy Tapping';
   public cardType: CardType = CardType.AUTOMATED;
-  public canPlay(): boolean {
-    return true;
+  
+  public canPlay(_player: Player, game: Game): boolean {
+    if (game.getPlayers().length === 1) return true;
+    return game.getPlayers().filter((p) => p.energyProduction > 0).length > 0;
   }
   private doPlay(player: Player) {
     player.energyProduction++;
@@ -23,8 +25,15 @@ export class EnergyTapping implements IProjectCard {
     if (game.getPlayers().length == 1) {
       return this.doPlay(player);
     }
+    const playersToReduceEnergy = game.getPlayers().filter((p) => p.energyProduction > 0);
+
+    if (playersToReduceEnergy.length === 1) {
+      playersToReduceEnergy[0].energyProduction--;
+      return this.doPlay(player);
+    }
+
     return new SelectPlayer(
-        game.getPlayers(),
+        playersToReduceEnergy,
         'Select player to decrease energy production 1 step',
         (foundPlayer: Player) => {
           if (foundPlayer.energyProduction < 1) {

@@ -22,7 +22,7 @@ export class NitriteReducingBacteria implements IActionCard, IProjectCard {
         return undefined;
     }
     public canAct(): boolean {
-        return false;
+        return true;
     }
     public action(player: Player) {
         if (player.getResourcesOnCard(this) < 3) {

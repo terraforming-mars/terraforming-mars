@@ -22,8 +22,24 @@ export class DeimosDown implements IProjectCard {
       if (game.getPlayers().length == 1) {
         return this.doPlay(player, game);
       }
+
+      const playersToRemovePlantsFrom = game.getPlayers().filter(
+        (p) => p.id != player.id && p.plants > 0
+      )
+
+      if ( playersToRemovePlantsFrom.length === 0) {
+        return this.doPlay(player, game);
+      }
+
+      // Just one target player, we remove plants from him without asking
+      if (playersToRemovePlantsFrom.length === 1) {
+        playersToRemovePlantsFrom[0].removePlants(player, 8);
+        return this.doPlay(player, game);
+      }
+
+      // Player have to choose target
       return new SelectPlayer(
-          game.getPlayers(),
+        playersToRemovePlantsFrom,
           'Select player to remove up to 8 plants from',
           (foundPlayer: Player) => {
             foundPlayer.removePlants(player, 8);

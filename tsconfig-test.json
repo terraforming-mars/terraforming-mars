@@ -18,7 +18,8 @@
     "include": [
         "tests/cards/*.spec.ts",
         "tests/cards/corporation/*.spec.ts",
-        "tests/*.spec.ts"
+        "tests/*.spec.ts",
+        "tests/TestingUtils.ts"
     ],
     "files": [
         "tests/cards/AICentral.spec.ts",

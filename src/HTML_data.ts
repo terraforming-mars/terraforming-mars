@@ -62,6 +62,7 @@ export const HTML_DATA: Map<string, string> =
 ["Search For Life",`
         <div class="title background-color-active ">Search for Life</div>
         <div class="price ">3</div>
+        ##RESOURCES##
         <div class="tag tag1 tag-science "></div>
         <div class="content ">
             <div class="points points-big">3/<div class="resource science"></div></div>
@@ -69,7 +70,7 @@ export const HTML_DATA: Map<string, string> =
             <div class=" "><span class=" money resource ">1</span> <span class="red-arrow "></span> <span class="microbe resource "></span>*  :  <div class="resource science"></div> </div>
             <div class="description ">
                 (Action: Spend 1 MC to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.)<br><br>
-                (3 VPs if you have one or more Science resources here.) <br>##RESOURCES##
+                (3 VPs if you have one or more Science resources here.)
             </div>
         </div>
 `],
@@ -351,6 +352,7 @@ export const HTML_DATA: Map<string, string> =
 ["Predators",`
         <div class="title background-color-active ">Predators</div>
         <div class="price ">14</div>
+        ##RESOURCES##
         <div class="tag tag1 tag-animal "></div>
         <div class="content ">
             <div class="points ">1/<div class="animal resource "></div></div>
@@ -360,7 +362,7 @@ export const HTML_DATA: Map<string, string> =
                 (Action: Remove 1 Animal from any card and add it to this card.)
             </div><br>
             <div class="description ">
-                (Requires 11% oxygen. 1 VP per Animal on this card.) <br>##RESOURCES##
+                (Requires 11% oxygen. 1 VP per Animal on this card.)
             </div>
         </div>
 `],
@@ -409,6 +411,7 @@ export const HTML_DATA: Map<string, string> =
 ["Security Fleet",`
         <div class="title background-color-active ">Security Fleet</div>
         <div class="price ">12</div>
+        ##RESOURCES##
         <div class="tag tag1 tag-space "></div>
         <div class="corporate-icon project-icon"></div>
         <div class="content ">
@@ -418,7 +421,7 @@ export const HTML_DATA: Map<string, string> =
                 (Action: Spend 1 titanium to add 1 fighter resource to this card.)
             </div>
             <div class="description ">
-                (1 VP for each fighter resource on this card.) <br>##RESOURCES##
+                (1 VP for each fighter resource on this card.) <br>
             </div>
         </div>
 `],
@@ -485,19 +488,21 @@ export const HTML_DATA: Map<string, string> =
 ["Regolith Eaters",`
         <div class="title background-color-active ">Regolith Eaters</div>
         <div class="price ">13</div>
+        ##RESOURCES##
         <div class="tag tag1 tag-microbe "></div>
         <div class="tag tag2 tag-science "></div>
         <div class="content ">
             <div class="red-arrow "></div> <div class="microbe resource "></div><br>
             OR <div class="microbe resource "></div><div class="microbe resource "></div> <div class="red-arrow "></div> <div class="tile oxygen-tile "></div>
             <div class="description ">
-                (Action: Add 1 Microbe to this card, or remove 2 Microbes from this card to raise oxygen level 1 step.) <br>##RESOURCES##
+                (Action: Add 1 Microbe to this card, or remove 2 Microbes from this card to raise oxygen level 1 step.)
             </div>
         </div>
 `],
 ["GHG Producing Bacteria",`
         <div class="title background-color-active ">GHG Producing Bacteria</div>
         <div class="price ">8</div>
+        ##RESOURCES##
         <div class="tag tag1 tag-microbe "></div>
         <div class="tag tag2 tag-science "></div>
         <div class="content ">
@@ -506,13 +511,14 @@ export const HTML_DATA: Map<string, string> =
             OR <div class="microbe resource "></div><div class="microbe resource "></div> <div class="red-arrow "></div> <div class="tile temperature-tile "></div>
             <div class="description ">
                 (Action: Add 1 Microbe to this card, or remove 2 Microbes to raise temperature 1 step.)<br><br>
-                (Requires 4% oxygen.) <br>##RESOURCES##
+                (Requires 4% oxygen.)
             </div>
         </div>
 `],
 ["Ants",`
         <div class="title background-color-active ">Ants</div>
         <div class="price ">9</div>
+        ##RESOURCES##
         <div class="tag tag1 tag-microbe "></div>
         <div class="content ">
             <div class="points ">1/2<div class="resource microbe "></div></div>
@@ -521,7 +527,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="description ">
                 (Action: Remove 1 Microbe from any card to add 1 to this card.)
                 <br><br>
-                (Requires 4% oxygen. 1 VP per 2 Microbes on this card.) <br>##RESOURCES##
+                (Requires 4% oxygen. 1 VP per 2 Microbes on this card.)
             </div>
         </div>
 `],
@@ -719,6 +725,7 @@ export const HTML_DATA: Map<string, string> =
 ["Tardigrades",`
       <div class="title background-color-active">Tardigrades</div>
       <div class="price">4</div>
+      ##RESOURCES##
       <div class="tag tag1 tag-microbe"></div>
       <div class="corporate-icon project-icon"></div>
       <div class="content">
@@ -728,7 +735,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="microbe resource"></div><br>
         <div class="description">
           (Action: Add 1 Microbe to this card.)
-          <br><br> (1 VP per 4 Microbes on this card.) <br>##RESOURCES##
+          <br><br> (1 VP per 4 Microbes on this card.)
         </div>
       </div>
 `],
@@ -764,6 +771,7 @@ export const HTML_DATA: Map<string, string> =
 ["Fish",`
       <div class="title background-color-active">Fish</div>
       <div class="price">9</div>
+      ##RESOURCES##
       <div class="tag tag1 tag-animal"></div>
       <div class="content">
         <div class="points">1/<div class="animal resource"></div>
@@ -772,7 +780,7 @@ export const HTML_DATA: Map<string, string> =
         <span class="red-arrow"></span>
         <div class="animal resource"></div>
         <div class="description">
-          (Action: Add 1 Animal to this card.)<br>##RESOURCES##
+          (Action: Add 1 Animal to this card.)
         </div><br>
         <div class="production-box production-box-size1a" style="margin-top:-10px;">
           <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div>
@@ -798,6 +806,7 @@ export const HTML_DATA: Map<string, string> =
 ["Small Animals",`
       <div class="title background-color-active">Small Animals</div>
       <div class="price">6</div>
+      ##RESOURCES##
       <div class="tag tag1 tag-animal"></div>
       <div class="content">
         <div class="points">1/2<div class="animal resource"></div>
@@ -806,7 +815,7 @@ export const HTML_DATA: Map<string, string> =
         <span class="red-arrow"></span>
         <div class="animal resource"></div>
         <div class="description" style="margin-bottom:5px;">
-          (Action: Add 1 Animal to this card.)<br>##RESOURCES##
+          (Action: Add 1 Animal to this card.)
         </div>
         <div class="production-box production-box-size1a">
           <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div>
@@ -1067,6 +1076,7 @@ export const HTML_DATA: Map<string, string> =
 ["Birds",`
         <div class="title background-color-active ">Birds</div>
         <div class="price ">10</div>
+        ##RESOURCES##
         <div class="tag tag1 tag-animal "></div>
         <div class="content ">
             <div class="points ">1/<div class="animal resource "></div></div>
@@ -1079,7 +1089,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div><div class="plant production red-outline"></div>
             </div>
             <div class="description"  style="margin-top:-5px;">
-                (Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card.)<br>##RESOURCES##
+                (Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card.)
             </div>
         </div>
 `],
@@ -1413,6 +1423,7 @@ export const HTML_DATA: Map<string, string> =
 ["Physics Complex",`
         <div class="title background-color-active ">Physics Complex</div>
         <div class="price ">12</div>
+        ##RESOURCES##
         <div class="tag tag1 tag-building "></div>
         <div class="tag tag2 tag-science "></div>
         <div class="corporate-icon project-icon"></div>
@@ -1423,7 +1434,7 @@ export const HTML_DATA: Map<string, string> =
                 (Action: Spend 6 Energy to add a science resource to this card.)
             </div><br><br><br>
             <div class="description ">
-                (2 VP for each science resource on this card.)<br>##RESOURCES##
+                (2 VP for each science resource on this card.)
             </div>
         </div>
 `],
@@ -1911,6 +1922,7 @@ export const HTML_DATA: Map<string, string> =
 ["Decomposers",`
       <div class="title background-color-active">Decomposers</div>
       <div class="price">5</div>
+      ##RESOURCES##
       <div class="tag tag1 tag-microbe"></div>
       <div class="content">
         <div class="points">1/3<div class="resource microbe"></div></div>
@@ -1920,7 +1932,7 @@ export const HTML_DATA: Map<string, string> =
           (Effect: When you play an Animal, Plant, or Microbe tag, including this, add a Microbe to this card.)
         </div>
         <div class="description">
-          (Requires 3% oxygen. 1 VP per 3 Microbes on this card.)<br>##RESOURCES##
+          (Requires 3% oxygen. 1 VP per 3 Microbes on this card.)
         </div>
       </div>
 `],
@@ -2145,13 +2157,14 @@ export const HTML_DATA: Map<string, string> =
 ["Herbivores",`
         <div class="title background-color-active ">Herbivores</div>
         <div class="price ">12</div>
+        ##RESOURCES##
         <div class="tag tag1 tag-animal "></div>
         <div class="content ">
             <div class="points ">1/2<div class="animal resource "></div></div>
             <div class="requirements">8% O2</div>
             <div class="tile greenery-tile" style="margin-top:-3px;"></div> : </span> <div class="animal resource "></div>
             <div class="description " style="margin-top:-8px;">
-              (Effect: When you place a greenery tile, add an Animal to this card.)<br>##RESOURCES##
+              (Effect: When you place a greenery tile, add an Animal to this card.)
             </div>
             <div class="animal resource " style="margin-left:105px;"></div>
             <div class="production-box production-box-size1a" style="margin-top:2px;">
@@ -2284,12 +2297,13 @@ export const HTML_DATA: Map<string, string> =
 ["Nitrite Reducing Bacteria",`
         <div class="title background-color-active ">Nitrite Reducing Bacteria</div>
         <div class="price ">11</div>
+        ##RESOURCES##
         <div class="tag tag1 tag-microbe "></div>
         <div class="content ">
             <div class="red-arrow "></div> <div class="microbe resource "></div><br>
             OR 3 <div class="microbe resource "></div> <div class="red-arrow "></div> <div class="tile rating "></div>
             <div class="description ">
-              (Action: Add 1 Microbe to this card, or remove 3 Microbes to increase your TR 1 step.<br>##RESOURCES##
+              (Action: Add 1 Microbe to this card, or remove 3 Microbes to increase your TR 1 step.<br>
             </div><br>
             <div class="microbe resource "></div><div class="microbe resource "></div><div class="microbe resource "></div>
             <div class="description ">
@@ -2510,6 +2524,7 @@ export const HTML_DATA: Map<string, string> =
 ["Pets",`
         <div class="title background-color-active">Pets</div>
         <div class="price">10</div>
+        ##RESOURCES##
         <div class="tag tag1 tag-animal"></div>
         <div class="tag tag2 tag-earth"></div>
         <div class="content">
@@ -2522,7 +2537,7 @@ export const HTML_DATA: Map<string, string> =
           </div><br>
           <div class="animal resource"></div>
           <div class="description" style="text-align:left;margin-top:10px;" >
-            (Add 1 Animal to this card.<br> 1 VP per 2 Animals here.)<br>##RESOURCES##
+            (Add 1 Animal to this card.<br> 1 VP per 2 Animals here.)
           </div>
         </div>
 `],
@@ -2690,6 +2705,7 @@ export const HTML_DATA: Map<string, string> =
 ["Livestock",`
         <div class="title background-color-active">Livestock</div>
         <div class="price">13</div>
+        ##RESOURCES##
         <div class="tag tag1 tag-animal"></div>
         <div class="content">
           <div class="points">1/<div class="animal resource"></div>
@@ -2698,7 +2714,7 @@ export const HTML_DATA: Map<string, string> =
           <span class="red-arrow"></span>
           <div class="animal resource"></div>
           <div class="description" style="margin-bottom:5px;">
-            (Action: Add 1 Animal to this card.)<br>##RESOURCES##
+            (Action: Add 1 Animal to this card.)
           </div>
           <div class="production-box production-box-size1a" style="margin-top:10px;margin-right:150px;">
             <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production"></div>
@@ -2712,6 +2728,7 @@ export const HTML_DATA: Map<string, string> =
 ["Olympus Conference",`
           <div class="title background-color-active ">Olympus Conference</div>
           <div class="price ">10</div>
+          ##RESOURCES##
           <div class="tag tag1 tag-building "></div>
           <div class="tag tag2 tag-earth "></div>
           <div class="tag tag3 tag-science "></div>
@@ -2720,7 +2737,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="points points-big">1</div>
               <div class="resource-tag science"></div> : <div class="resource science"></div> OR -<div class="resource science"></div>+<div class="card resource "></div>
               <div class="description ">
-                (When you play a Science tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.)<br>##RESOURCES##
+                (When you play a Science tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.)
               </div>
           </div>
 `],
@@ -3058,6 +3075,7 @@ export const HTML_DATA: Map<string, string> =
 ["Self-replicating Robots",`
           <div class="title background-color-active ">Self-replicating robots</div>
           <div class="price ">7</div>
+          ##RESOURCES##
           <div class="promo-icon project-icon"></div>
           <div class="content ">
             <div class="requirements">2 Science</div>
@@ -3069,7 +3087,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="description">
               (Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.) <br>
               (Effect: Cards here may be played as if from hand with its cost reduced by the number of resources on it.)<br>
-              (Requires 2 Science tags.)<br>##RESOURCES##
+              (Requires 2 Science tags.)
             </div>
           </div>
 `],
@@ -3091,6 +3109,7 @@ export const HTML_DATA: Map<string, string> =
 ["Penguins",`
             <div class="title background-color-active ">Penguins</div>
             <div class="price ">7</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-animal "></div>
             <div class="promo-icon project-icon"></div>
             <div class="content ">
@@ -3101,13 +3120,14 @@ export const HTML_DATA: Map<string, string> =
                     (Action: Add 1 animal to this card.)
                 </div><br><br>
                 <div class="description ">
-                    (Requires 8 oceans. 1 VP for each animal on this card.)<br>##RESOURCES##
+                    (Requires 8 oceans. 1 VP for each animal on this card.)
                 </div>
             </div>
 `],
 ["Aerial Mappers",`
           <div class="title background-color-active">Aerial Mappers</div>
           <div class="price">11</div>
+          ##RESOURCES##
           <div class="tag tag1 tag-venus"></div>
           <div class="venus-icon project-icon"></div>
           <div class="content">
@@ -3115,7 +3135,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="red-arrow"></div>
             <div class="floater resource"></div>* OR <div class="floater resource"></div> <div class="red-arrow"></div> <div class="card resource"></div><br>
             <div class="description">
-              (Action: Add 1 Floater to ANY card or spend 1 Floater here to draw 1 card).<br>##RESOURCES##
+              (Action: Add 1 Floater to ANY card or spend 1 Floater here to draw 1 card).
             </div>
           </div>
 `],
@@ -3943,6 +3963,7 @@ export const HTML_DATA: Map<string, string> =
 ["Psychrophiles",`
               <div class="title background-color-active ">PSYCHROPHILES</div>
               <div class="price ">2</div>
+              ##RESOURCES##
               <div class="tag tag1 tag-microbe"></div>
               <div class="prelude-icon project-icon"></div>
               <div class="content ">
@@ -3950,7 +3971,7 @@ export const HTML_DATA: Map<string, string> =
                 <div class="red-arrow "></div> <div class="microbe resource "></div><br>
                 <div class="resource-tag tag-plant"></div>  : <div class="microbe resource "></div> = <div class="money resource ">2</div>
                   <div class="description">
-                  (Action: Add 1 microbe to this card.)<br>##RESOURCES##<br>
+                  (Action: Add 1 microbe to this card.)
                   (Effect: When paying for a plant card, microbes here may be used as 2 MC each.)
                   <br><br>
                   (Temperature must be -20 C or lower.)

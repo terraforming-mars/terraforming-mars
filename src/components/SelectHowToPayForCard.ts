@@ -47,7 +47,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             return 41; // max card cost
         },
         canUseHeat: function () {
-            return this.playerinput.canUseHeatAsMegaCredits;
+            return this.playerinput.canUseHeatAsMegaCredits && this.player.heat > 0;
         },
         canUseSteel: function () {
             if (this.$data.card !== undefined && this.player.steel > 0) {
@@ -72,7 +72,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             return false;
 		},	
         canUseMicrobes: function () {
-            if (this.$data.card !== undefined && this.player.canUseMicrobesAsMegaCreditsForPlants) {
+            if (this.$data.card !== undefined && this.playerinput.microbes > 0) {
                 const card = getProjectCardByName(this.$data.card);
                 if (card !== undefined) {
                     if (card.tags.find((tag) => tag === Tags.PLANT) !== undefined) {
@@ -100,7 +100,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 this.$data.warning = "You don't have that many mega credits";
                 return;
             }
-            if (htp.microbes > this.player.microbes) {
+            if (htp.microbes > this.playerinput.microbes) {
                 this.$data.warning = "You don't have enough microbes";
                 return;
             }
@@ -116,7 +116,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 this.$data.warning = "You don't have enough steel";
                 return;
             }
-            if (htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) < this.getCardCost()) {
+            if ((2 * htp.microbes) + htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) < this.getCardCost()) {
                 this.$data.warning = "Haven't spent enough";
                 return;
             }
@@ -147,7 +147,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
   </div>
   <div v-if="canUseMicrobes()" class="nes-field">
     <label class="nofloat">Microbes:</label>
-    <input class="nes-input" type="number" value="0" min="0" :max="player.microbes" v-model.number="microbes" />
+    <input class="nes-input" type="number" value="0" min="0" :max="playerinput.microbes" v-model.number="microbes" />
   </div>
   <div class="nofloat nes-field">
     <label class="nofloat">Mega Credit:</label>

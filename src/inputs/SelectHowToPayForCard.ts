@@ -10,6 +10,7 @@ export class SelectHowToPayForCard implements PlayerInput {
     public title: string = "Play project card";
     constructor(
         public cards: Array<IProjectCard>,
+        public microbes: number,
         public cb: (cardToPlay: IProjectCard, howToPay: HowToPay) => PlayerInput | undefined) {
     }
 }

@@ -43,7 +43,7 @@ describe("Game", function () {
 
         // Set second player to win Banker award
         player2.megaCreditProduction = 10;
-
+  
         // Our testing player will be 2nd Banker in the game
         player.megaCreditProduction = 7;
 
@@ -66,8 +66,8 @@ describe("Game", function () {
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(70);
         expect(player.victoryPointsBreakdown.total).to.eq(100);
 
-        expect(player2.victoryPointsBreakdown.awards).to.eq(8); // 1st place + one shared 1st place
-        expect(player3.victoryPointsBreakdown.awards).to.eq(3); // one shared 1st place
+        expect(player2.victoryPointsBreakdown.awards).to.eq(10); // 1st place + one shared 1st place
+        expect(player3.victoryPointsBreakdown.awards).to.eq(5); // one shared 1st place
 
     });
 

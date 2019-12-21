@@ -158,8 +158,8 @@ export class Game {
               players.length > 0 &&
               award.getScore(players[0], this) === score
             ) {
-              players[0].victoryPointsBreakdown.awards += 3;
-              players[0].victoryPoints += 3;
+              players[0].victoryPointsBreakdown.awards += 2;
+              players[0].victoryPoints += 2;
               players.shift();
             }
           }
@@ -170,7 +170,7 @@ export class Game {
           players.length > 0 &&
           award.getScore(players[0], this) === score
         ) {
-          players[0].victoryPointsBreakdown.awards += 3;
+          players[0].victoryPointsBreakdown.awards += 5;
           players[0].victoryPoints += 5;
           players.shift();
         }

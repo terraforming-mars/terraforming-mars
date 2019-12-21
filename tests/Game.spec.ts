@@ -67,7 +67,7 @@ describe("Game", function () {
         expect(player.victoryPointsBreakdown.total).to.eq(100);
 
         expect(player2.victoryPointsBreakdown.awards).to.eq(10); // 1st place + one shared 1st place
-        expect(player3.victoryPointsBreakdown.awards).to.eq(7); // one shared 1st place + one second place
+        expect(player3.victoryPointsBreakdown.awards).to.eq(5); // one shared 1st place
 
     });
 

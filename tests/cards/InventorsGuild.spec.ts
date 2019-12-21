@@ -15,14 +15,6 @@ describe("InventorsGuild", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
     });
-    it("Discards when card can't be bought", function () {
-        const card = new InventorsGuild();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        const action = card.action(player, game);
-        expect(action).to.eq(undefined);
-        expect(game.dealer.discarded.length).to.eq(1);
-    });
     it("Should act", function () {
         const card = new InventorsGuild();
         const player = new Player("test", Color.BLUE, false);

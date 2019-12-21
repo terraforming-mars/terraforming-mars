@@ -607,8 +607,7 @@ export class Game {
       if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
         return undefined;
       }
-      if (this.oxygenLevel + steps > constants.MAX_OXYGEN_LEVEL) {
-        if (steps == 1) return undefined;
+      if (steps === 2 && this.oxygenLevel + steps > constants.MAX_OXYGEN_LEVEL) {
         return this.increaseOxygenLevel(player, 1);
       }
       this.oxygenLevel += steps;
@@ -628,8 +627,7 @@ export class Game {
       if (this.temperature >= constants.MAX_TEMPERATURE) {
         return undefined;
       }
-      if (this.temperature + 2 * steps > constants.MAX_TEMPERATURE) {
-        if (steps == 1) return undefined;
+      if (steps > 1 && this.temperature + 2 * steps > constants.MAX_TEMPERATURE) {
         steps = (steps == 3) ? 2 : 1; // typing disallows decrement
         return this.increaseTemperature(player, steps);
       }

@@ -18,6 +18,7 @@ import {PlayerModel} from './src/models/PlayerModel';
 import {SelectAmount} from './src/inputs/SelectAmount';
 import {SelectCard} from './src/inputs/SelectCard';
 import {SelectHowToPay} from './src/inputs/SelectHowToPay';
+import {SelectHowToPayForCard} from './src/inputs/SelectHowToPayForCard';
 import {SelectPlayer} from './src/inputs/SelectPlayer';
 import {SelectSpace} from './src/inputs/SelectSpace';
 import {SpaceModel} from './src/models/SpaceModel';
@@ -286,8 +287,6 @@ function getPlayer(player: Player, game: Game): string {
     victoryPointsBreakdown: player.victoryPointsBreakdown,
     waitingFor: getWaitingFor(player.getWaitingFor()),
     gameLog: game.gameLog,
-    canUseMicrobesAsMegaCreditsForPlants:
-      player.canUseMicrobesAsMegaCreditsForPlants,
     isSoloModeWin: game.isSoloModeWin()
   } as PlayerModel;
   return JSON.stringify(output);
@@ -312,7 +311,8 @@ function getWaitingFor(
     canUseHeat: undefined,
     players: undefined,
     availableSpaces: undefined,
-    max: undefined
+    max: undefined,
+    microbes: undefined
   };
   switch (waitingFor.inputType) {
     case PlayerInputTypes.AND_OPTIONS:
@@ -326,11 +326,9 @@ function getWaitingFor(
       }
       break;
     case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD:
-      result.cards = (waitingFor as SelectCard<ICard>)
+      result.cards = (waitingFor as SelectHowToPayForCard)
           .cards.map((card) => card.name);
-      result.maxCardsToSelect = 1;
-      result.minCardsToSelect = 1;
-      result.canUseHeat = (waitingFor as SelectHowToPay).canUseHeat;
+      result.microbes = (waitingFor as SelectHowToPayForCard).microbes;
       break;
     case PlayerInputTypes.SELECT_CARD:
       result.cards = (waitingFor as SelectCard<ICard>)

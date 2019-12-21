@@ -60,7 +60,7 @@ export class AquiferPumping implements IActionCard, IProjectCard {
           ),
           new SelectHowToPay(
               'Select how to pay for action', true, false,
-              player.canUseHeatAsMegaCredits, false,
+              player.canUseHeatAsMegaCredits,
               (htp: HowToPay) => {
                 howToPay = htp;
                 return undefined;

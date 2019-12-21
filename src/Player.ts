@@ -35,7 +35,6 @@ export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
     public id: string;
     public canUseHeatAsMegaCredits: boolean = false;
-    public canUseMicrobesAsMegaCreditsForPlants = false;
     public plantsNeededForGreenery: number = 8;
     public dealtCorporationCards: Array<CorporationCard> = [];
     public powerPlantCost: number = 11;
@@ -283,10 +282,8 @@ export class Player {
               payMethod.heat = parsedInput.heat;
             }
           }
-          if (this.canUseMicrobesAsMegaCreditsForPlants) {
-            if (parsedInput.microbes !== undefined) {
-              payMethod.microbes = parsedInput.microbes;
-            }
+          if (parsedInput.microbes !== undefined) {
+            payMethod.microbes = parsedInput.microbes;
           }
         } catch (err) {
           throw new Error('Unable to parse input ' + err);
@@ -393,12 +390,8 @@ export class Player {
               throw new Error('Heat not provided, bad input');
             }
           }
-          if (this.canUseMicrobesAsMegaCreditsForPlants) {
-            if (parsedInput.microbes !== undefined) {
+          if (parsedInput.microbes !== undefined) {
               payMethod.microbes = parsedInput.microbes;
-            } else {
-              throw new Error('Microbes not provided, bad input');
-            }
           }
         } catch (err) {
           throw new Error('Unable to parse input ' + err);
@@ -491,7 +484,7 @@ export class Player {
                 false,
                 false,
                 true,
-                false, (pay) => {
+                (pay) => {
                   htp = pay;
                   return undefined;
                 }
@@ -591,9 +584,7 @@ export class Player {
           totalToPay += howToPay.heat;
         }
 
-        if (
-          this.canUseMicrobesAsMegaCreditsForPlants &&
-                howToPay.microbes !== undefined) {
+        if (howToPay.microbes !== undefined) {
           totalToPay += howToPay.microbes * 2;
         }
 
@@ -608,7 +599,16 @@ export class Player {
         }
         return this.playCard(game, selectedCard, howToPay);
       };
-      return new SelectHowToPayForCard(this.getPlayableCards(game), cb);
+      return new SelectHowToPayForCard(this.getPlayableCards(game), this.getMicrobesCanSpend(), cb);
+    }
+
+    public getMicrobesCanSpend(): number {
+        for (const playedCard of this.playedCards) {
+            if (playedCard.name === new Psychrophiles().name) {
+                return this.getResourcesOnCard(playedCard);
+            }
+        }
+        return 0;
     }
 
     public playCard(game: Game, selectedCard: IProjectCard, howToPay?: HowToPay): PlayerInput | undefined { 
@@ -630,6 +630,7 @@ export class Player {
             for (const playedCard of this.playedCards) {
                 if (playedCard.name === new Psychrophiles().name) {
                     this.removeResourceFrom(playedCard, howToPay.microbes);
+                    break;
                 }
             }
           }
@@ -784,7 +785,7 @@ export class Player {
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
         return new SelectHowToPay(
             'Select how to pay for power plant',
-            false, false, true, false,
+            false, false, true,
             (htp) => {
               return fundProject(htp.megaCredits, htp.heat);
             }, this.powerPlantCost
@@ -818,7 +819,7 @@ export class Player {
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
         return new SelectHowToPay(
             'Select how to pay for asteroid',
-            false, false, true, false,
+            false, false, true,
             (htp) => {
               if (htp.heat + htp.megaCredits < constants.ASTEROID_COST) {
                 throw new Error('Haven\'t spend enough for asteroid');
@@ -852,7 +853,7 @@ export class Player {
         return new AndOptions(() => {
           return fundProject(htp.megaCredits, htp.heat, ocean.id);
         }, new SelectHowToPay(
-            'How to pay for aquifer', false, false, true, false,
+            'How to pay for aquifer', false, false, true,
             (stp: HowToPay) => {
               if (stp.heat + stp.megaCredits < constants.AQUIFER_COST) {
                 throw new Error('Haven\'t spend enough for aquifer');
@@ -908,7 +909,7 @@ export class Player {
           return fundProject(htp.megaCredits, htp.heat, greenery.id);
         }, new SelectHowToPay(
             'Select how to pay for greenery',
-            false, false, true, false,
+            false, false, true,
             (stp) => {
               htp = stp;
               return undefined;
@@ -961,7 +962,6 @@ export class Player {
                 false,
                 false,
                 true,
-                false,
                 (stp) => {
                   htp = stp;
                   return undefined;
@@ -1051,7 +1051,6 @@ export class Player {
             false,
             false,
             true,
-            false,
             (stp) => {
               if (stp.megaCredits + stp.heat < 8) {
                 throw new Error(
@@ -1083,7 +1082,6 @@ export class Player {
             false,
             false,
             true,
-            false,
             (htp: HowToPay) => {
               return funder(htp.megaCredits, htp.heat);
             }

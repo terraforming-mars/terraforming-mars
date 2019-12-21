@@ -16,8 +16,7 @@ export class Psychrophiles implements IActionCard, IProjectCard {
 	    return game.getTemperature() <= -20 + (player.getRequirementsBonus(game) * 2);
     }
 	    
-    public play(player: Player, _game: Game) {
-		player.canUseMicrobesAsMegaCreditsForPlants = true;
+    public play() {
         return undefined;
     }
 	
@@ -25,7 +24,7 @@ export class Psychrophiles implements IActionCard, IProjectCard {
         return true; 
     }	
 	
-    public action(player: Player, _game: Game) {
+    public action(player: Player) {
         player.addResourceTo(this);
         return undefined;
     }

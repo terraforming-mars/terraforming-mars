@@ -33,14 +33,10 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                 megaCredits: this.$data.megaCredits,
                 steel: this.$data.steel,
                 titanium: this.$data.titanium,
-                microbes: this.$data.microbes
+                microbes: 0
             };
             if (htp.megaCredits > this.player.megaCredits) {
                 this.$data.warning = "You don't have that many mega credits";
-                return;
-            }
-            if (htp.microbes > this.player.microbes) {
-                this.$data.warning = "You don't have enough microbes";
                 return;
             }
             if (htp.heat > this.player.heat) {
@@ -76,10 +72,6 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
   <div v-if="playerinput.canUseHeat" class="nes-field">
     <label>Heat:</label>
     <input class="nes-input" type="number" value="0" min="0" max="100" v-model.number="heat" />
-  </div>
-  <div v-if="playerinput.canUseMicrobes" class="nes-field">
-    <label>Microbes:</label>
-    <input class="nes-input" type="number" value="0" min="0" max="100" v-model.number="microbes" />
   </div>
   <div class="nes-field">
     <label>Mega Credit:</label>

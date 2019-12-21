@@ -42,7 +42,6 @@ function getData(cardName: string, resources: string): string | undefined {
 export const Card = Vue.component("card", {
     props: [
         "card",
-        "hideCost",
         "resources"
     ],
     methods: {

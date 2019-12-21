@@ -40,7 +40,7 @@ export const OtherPlayer = Vue.component("other-player", {
                 <h4 v-if="player.playedCards.length > 0">Played Cards</h4>
                 <div v-if="player.playedCards.length > 0">
                     <div class="cardbox" v-for="card in getEventCards()" :key="card">
-                        <card hideCost="true" :card="card.name" :resources="card.resources"></card>
+                        <card :card="card.name" :resources="card.resources"></card>
                     </div>
                 </div>
                 <player-resources :player="player"></player-resources>

@@ -61,13 +61,13 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <div class="player_home_block">
                     <h2>Corporation Card</h2>
-                    <card hideCost="true" :card="player.corporationCard"></card>
+                    <card :card="player.corporationCard"></card>
                 </div>
                 
                 <div v-if="player.playedCards.length > 0" class="player_home_block">
                     <h2>Played Cards</h2>
                     <div v-for="card in player.playedCards" :key="card.name" class="cardbox">
-                        <card hideCost="true" :card="card.name" :resources="card.resources"></card>
+                        <card :card="card.name" :resources="card.resources"></card>
                     </div>
                 </div>
 
@@ -91,7 +91,6 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
 
                 <div class="player_home_block nofloat">
-                    <h2>Board</h2>
                     <board :spaces="player.spaces"></board>
 
                     <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature"></global-parameters>

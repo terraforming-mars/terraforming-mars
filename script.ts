@@ -21,9 +21,9 @@ const app = new Vue({
         "player-home": PlayerHome,
         "player-end": GameEnd
     },
-    mounted: function () {
-        const currentPathname: string = window.location.pathname;
-        if (currentPathname === "/player" || currentPathname === "/the-end") {
+    methods: {
+        updatePlayer: function() {
+            const currentPathname: string = window.location.pathname;
             const xhr = new XMLHttpRequest();
             xhr.open("GET", "/api/player" + window.location.search);
             xhr.onerror = function () {
@@ -32,6 +32,7 @@ const app = new Vue({
             xhr.onload = () => {
                 if (xhr.status === 200) {
                     app.$data.player = xhr.response;
+                    app.playerkey ++;
                     if (app.$data.player.phase == "end") {
                         app.$data.screen = "the-end";
                         if (currentPathname != "/the-end") {
@@ -49,6 +50,12 @@ const app = new Vue({
             }
             xhr.responseType = "json";
             xhr.send();
+        }
+    }, 
+    mounted: function () {
+        const currentPathname: string = window.location.pathname;
+        if (currentPathname === "/player" || currentPathname === "/the-end") {
+            this.updatePlayer();
         } else if (currentPathname === "/game") {
             (this.$data as any).screen = "game-home";
             const xhr = new XMLHttpRequest();

@@ -28,8 +28,45 @@ export const WaitingFor = Vue.component("waiting-for", {
         "select-player": SelectPlayer,
         "select-space": SelectSpace
     },
+    methods: {
+        waitForUpdate: function () {
+            const vueApp = this;
+            const askForUpdate = () => {
+                const xhr = new XMLHttpRequest();
+                xhr.open("GET", "/api/waitingfor" + window.location.search);
+                xhr.onerror = function () {
+                    alert("Error getting waitingfor data");
+                };
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        const result = xhr.response;
+                        if (result["result"] === "GO") {
+                            (vueApp as any).$root.updatePlayer();
+                            if (Notification.permission !== 'granted') {
+                                Notification.requestPermission();
+                            }
+                            if (Notification.permission === "granted") {
+                                new Notification('Terraforming Mars Online', {
+                                    icon: "/favicon.ico",
+                                    body: "It's your turn!",
+                                });
+                            }
+                            return
+                        }
+                        (vueApp as any).waitForUpdate();
+                    } else {
+                        alert("Unexpected server response");
+                    }
+                }
+                xhr.responseType = "json";
+                xhr.send();
+            }
+            setTimeout(askForUpdate, 5000);
+        }
+    },
     render: function (createElement) {
         if (this.waitingfor === undefined) {
+            (this as any).waitForUpdate();
             return createElement("div", "Not your turn to take any actions");
         }
         return new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {

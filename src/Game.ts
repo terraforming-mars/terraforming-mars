@@ -32,15 +32,18 @@ export class Game {
     public dealer: Dealer;
     public fundedAwards: Array<FundedAward> = [];
     public generation: number = 1;
+    private draftRound: number = 1;
     public phase: Phase = Phase.RESEARCH;
     private donePlayers: Set<Player> = new Set<Player>();
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
     private passedPlayers: Set<Player> = new Set<Player>();
     private researchedPlayers: Set<Player> = new Set<Player>();
+    private draftedPlayers: Set<Player> = new Set<Player>();
     private originalBoard = new OriginalBoard();
     public spaces: Array<ISpace>;
     private temperature: number = constants.MIN_TEMPERATURE;
     public gameLog: Array<String> = [];
+    private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
 
     constructor(
       public id: string,
@@ -329,20 +332,35 @@ export class Game {
       this.first = this.players[firstIndex];
     }
 
-    private dealEachPlayer4Cards(): void {
+    private runDraftRound(): void {
+      this.draftedPlayers.clear();
       this.players.forEach((player) => {
-        player.runResearchPhase(this);
+        if (this.draftRound === 1) {
+          player.runDraftPhase(this,this.getNextDraft(player).name);
+        } else {
+          let cards = this.unDraftedCards.get(this.getNextDraft(player));
+          this.unDraftedCards.delete(this.getNextDraft(player));
+          player.runDraftPhase(this, this.getNextDraft(player).name, cards);
+        }
       });
     }
 
     private gotoResearchPhase(): void {
       this.researchedPlayers.clear();
+      this.players.forEach((player) => {
+        player.runResearchPhase(this);
+      });
+    }  
+
+    private gotoDraftingPhase(): void {
+      this.draftedPlayers.clear();
+      this.draftRound = 1;
       this.generation++;
       this.players.forEach((player) => {
         player.terraformRatingAtGenerationStart = player.terraformRating;
       });
       this.incrementFirstPlayer();
-      this.dealEachPlayer4Cards();
+      this.runDraftRound();
     }
 
     private gameIsOver(): boolean {
@@ -362,7 +380,7 @@ export class Game {
       if (this.gameIsOver()) {
         this.gotoFinalGreeneryPlacement();
       } else {
-        this.gotoResearchPhase();
+        this.gotoDraftingPhase();
       }
     }
 
@@ -382,6 +400,10 @@ export class Game {
 
     private hasResearched(player: Player): boolean {
       return this.researchedPlayers.has(player);
+    }
+
+    private hasDrafted(player: Player): boolean {
+      return this.draftedPlayers.has(player);
     }
 
     private playerHasSpace(player: Player): boolean {
@@ -441,11 +463,70 @@ export class Game {
       return true;
     }
 
+    private allPlayersHaveFinishedDraft(): boolean {
+      for (const player of this.players) {
+        if (!this.hasDrafted(player)) {
+          return false;
+        }
+      }
+      return true;
+    }
+
     public playerIsFinishedWithResearchPhase(player: Player): void {
       this.researchedPlayers.add(player);
       if (this.allPlayersHaveFinishedResearch()) {
         this.gotoActionPhase();
       }
+    }
+
+    public playerIsFinishedWithDraftingPhase(player: Player, cards : Array<IProjectCard>): void {
+      this.draftedPlayers.add(player);
+      // Store cards for next player
+      this.unDraftedCards.set(player,cards);
+      //cards.forEach((card) => console.log("Phase "+ this.draftRound + " unDraftedCards for player " + player.name + " "+card.name));
+     
+      if (this.allPlayersHaveFinishedDraft() && this.draftRound < 3) {
+        this.draftRound++;
+        this.runDraftRound();
+      }      
+
+      if (this.allPlayersHaveFinishedDraft() && this.draftRound === 3) {
+        // Push last card for each player
+        if (cards.length === 1) {
+          this.players.forEach((player) => {
+            let lastCards  = this.unDraftedCards.get(this.getNextDraft(player));
+            if (lastCards !== undefined && lastCards[0] !== undefined) {
+              player.draftedCards.push(lastCards[0]);
+            }
+          });
+        }
+        this.gotoResearchPhase();
+      }
+    }
+
+    public getNextDraft(player: Player): Player {
+      let nextPlayer = this.getNextPlayer(this.players, player);
+      if (this.generation%2 === 1) {
+        nextPlayer = this.getPreviousPlayer(this.players, player);
+      }  
+      if (nextPlayer !== undefined) {
+        return nextPlayer;
+      }
+      return player;
+    }  
+
+    private getPreviousPlayer(
+      players: Array<Player>, player: Player
+      ): Player | undefined {
+        const playerIndex: number = players.indexOf(player);
+  
+        // The player was not found
+        if (playerIndex === -1) {
+          return undefined;
+        }
+  
+        // Go to the end of the array if stand at the start
+        return players[(playerIndex === 0) ? players.length - 1 : playerIndex - 1];
     }
 
     private getNextPlayer(

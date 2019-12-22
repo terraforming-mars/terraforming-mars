@@ -850,7 +850,7 @@ export class Player {
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
         let htp: HowToPay;
         let ocean: ISpace;
-        return new AndOptions(() => {
+        let helionAquiferProject = new AndOptions(() => {
           return fundProject(htp.megaCredits, htp.heat, ocean.id);
         }, new SelectHowToPay(
             'How to pay for aquifer', false, false, true,
@@ -869,6 +869,8 @@ export class Player {
               return undefined;
             }
         ));
+      helionAquiferProject.title = 'Aquifer';
+      return helionAquiferProject;
       }
       return new SelectSpace(
           'Aquifer',
@@ -905,7 +907,7 @@ export class Player {
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
         let htp: HowToPay;
         let greenery: ISpace;
-        return new AndOptions(() => {
+        let helionGreeneryProject = new AndOptions(() => {
           return fundProject(htp.megaCredits, htp.heat, greenery.id);
         }, new SelectHowToPay(
             'Select how to pay for greenery',
@@ -922,6 +924,8 @@ export class Player {
               return undefined;
             }
         ));
+        helionGreeneryProject.title = 'Greenery';
+        return helionGreeneryProject;
       }
       return new SelectSpace(
           'Greenery',
@@ -953,7 +957,8 @@ export class Player {
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
         let city: ISpace;
         let htp: HowToPay;
-        return new AndOptions(
+
+        let helionCityProject = new AndOptions(
             () => {
               return fundProject(htp.megaCredits, htp.heat, city.id);
             },
@@ -976,6 +981,8 @@ export class Player {
                 }
             )
         );
+      helionCityProject.title = 'City';
+      return helionCityProject;
       }
       return new SelectSpace(
           'City',

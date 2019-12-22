@@ -17,7 +17,7 @@ export class ConvoyFromEuropa implements IProjectCard {
     }
     public play(player: Player, game: Game) {
 
-      if (game.noOceansAvailabe()) return undefined;
+      if (game.noOceansAvailable()) return undefined;
 
       return new SelectSpace(
           'Select space for ocean tile',

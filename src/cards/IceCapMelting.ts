@@ -16,7 +16,7 @@ export class IceCapMelting implements IProjectCard {
         return game.getTemperature() >= 2 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player, game: Game) {
-        if (game.noOceansAvailabe()) return undefined;
+        if (game.noOceansAvailable()) return undefined;
 
         return new SelectSpace(
             "Select space for ocean", 

@@ -25,7 +25,7 @@ export class LargeConvoy implements IProjectCard {
         player.victoryPoints += 2;
 
         const addOcean = () => {
-            if (game.noOceansAvailabe()) return undefined;
+            if (game.noOceansAvailable()) return undefined;
             return new SelectSpace(
                 "Select space for ocean tile", 
                 game.getAvailableSpacesForOcean(player), 

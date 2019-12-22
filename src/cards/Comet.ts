@@ -33,7 +33,7 @@ export class Comet implements IProjectCard {
       if (game.getPlayers().length === 1) {
         game.increaseTemperature(player, 1);
         
-        if (game.noOceansAvailabe()) return undefined;
+        if (game.noOceansAvailable()) return undefined;
         
         return this.getSelectOceanSpace(player, game);
       }
@@ -41,7 +41,7 @@ export class Comet implements IProjectCard {
       var opts: Array<SelectSpace | SelectPlayer> = [];
 
       // Can we place an ocean?
-      if ( ! game.noOceansAvailabe()) {
+      if ( ! game.noOceansAvailable()) {
         opts.push(
           this.getSelectOceanSpace(player, game)
         )

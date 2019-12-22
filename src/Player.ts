@@ -460,16 +460,20 @@ export class Player {
       );  
   }  
 
-    public runResearchPhase(game: Game): void {
-      //const dealtCards: Array<IProjectCard> = [];
-      let dealtCards = this.draftedCards;
-      this.draftedCards = [];
-      //dealtCards.push(
-      //    game.dealer.dealCard(),
-      //    game.dealer.dealCard(),
-      //    game.dealer.dealCard(),
-      //    game.dealer.dealCard()
-      //);
+    public runResearchPhase(game: Game, draftVariant: Boolean): void {
+      let dealtCards: Array<IProjectCard> = [];
+      if (!draftVariant) {
+        dealtCards.push(
+          game.dealer.dealCard(),
+          game.dealer.dealCard(),
+          game.dealer.dealCard(),
+          game.dealer.dealCard()
+        );
+      } else {
+        dealtCards = this.draftedCards;
+        this.draftedCards = [];
+      }
+
       let htp: HowToPay = {
         steel: 0,
         titanium: 0,

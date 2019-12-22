@@ -226,7 +226,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
           break;
         }
       }
-      const game = new Game(gameId, players, firstPlayer, gameReq.prelude);
+      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant);
       games.set(gameId, game);
       game.getPlayers().forEach((player) => {
         playersToGame.set(player.id, game);

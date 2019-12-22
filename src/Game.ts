@@ -49,11 +49,13 @@ export class Game {
       public id: string,
       private players: Array<Player>,
       private first: Player,
-      private preludeExtension: boolean = false
+      private preludeExtension: boolean = false,
+      private draftVariant: boolean = false
     ) {
       this.spaces = this.originalBoard.spaces;
       this.activePlayer = first;
       this.preludeExtension = preludeExtension;
+      this.draftVariant = draftVariant;
       this.dealer = new Dealer(this.preludeExtension);
 
       // Single player game player starts with 14TR
@@ -348,7 +350,7 @@ export class Game {
     private gotoResearchPhase(): void {
       this.researchedPlayers.clear();
       this.players.forEach((player) => {
-        player.runResearchPhase(this);
+        player.runResearchPhase(this, this.draftVariant);
       });
     }  
 
@@ -380,7 +382,11 @@ export class Game {
       if (this.gameIsOver()) {
         this.gotoFinalGreeneryPlacement();
       } else {
-        this.gotoDraftingPhase();
+        if (this.draftVariant) {
+          this.gotoDraftingPhase();
+        } else {
+          this.gotoResearchPhase();
+        }
       }
     }
 

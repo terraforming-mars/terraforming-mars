@@ -55,6 +55,7 @@ export class Player {
     public cardsInHand: Array<IProjectCard> = [];
     public preludeCardsInHand: Array<IProjectCard> = [];    
     public playedCards: Array<IProjectCard> = [];
+    public draftedCards: Array<IProjectCard> = [];
     public generationPlayed: Map<string, number> = new Map<string, number>();
     public actionsTakenThisRound: number = 0;
     public terraformRating: number = 20;
@@ -435,14 +436,44 @@ export class Player {
       this.plants += this.plantProduction;
     }
 
-    public runResearchPhase(game: Game): void {
-      const dealtCards: Array<IProjectCard> = [];
-      dealtCards.push(
+    public runDraftPhase(game: Game, playerName: String, passedCards?: Array<IProjectCard>): void {
+      let cards: Array<IProjectCard> = [];
+      if (passedCards === undefined) {
+        cards.push(
           game.dealer.dealCard(),
           game.dealer.dealCard(),
           game.dealer.dealCard(),
           game.dealer.dealCard()
-      );
+      ) } else { cards = passedCards}      
+
+      this.setWaitingFor(
+        new SelectCard(
+          'Select a card to keep and pass the rest to ' + playerName,
+          cards,
+          (foundCards: Array<IProjectCard>) => {
+            this.draftedCards.push(foundCards[0]);
+            cards = cards.filter((card) => card !== foundCards[0]);
+            game.playerIsFinishedWithDraftingPhase(this,cards);
+            return undefined;
+          }, 1, 1
+        )
+      );  
+  }  
+
+    public runResearchPhase(game: Game, draftVariant: boolean): void {
+      let dealtCards: Array<IProjectCard> = [];
+      if (!draftVariant) {
+        dealtCards.push(
+          game.dealer.dealCard(),
+          game.dealer.dealCard(),
+          game.dealer.dealCard(),
+          game.dealer.dealCard()
+        );
+      } else {
+        dealtCards = this.draftedCards;
+        this.draftedCards = [];
+      }
+
       let htp: HowToPay = {
         steel: 0,
         titanium: 0,

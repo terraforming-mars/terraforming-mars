@@ -487,10 +487,12 @@ export class Game {
 
     public playerIsFinishedWithDraftingPhase(player: Player, cards : Array<IProjectCard>): void {
       this.draftedPlayers.add(player);
-      // Store cards for next player
       this.unDraftedCards.set(player,cards);
-      //cards.forEach((card) => console.log("Phase "+ this.draftRound + " unDraftedCards for player " + player.name + " "+card.name));
      
+      if (!this.allPlayersHaveFinishedDraft()) {
+        return;
+      }
+
       if (this.allPlayersHaveFinishedDraft() && this.draftRound < 3) {
         this.draftRound++;
         this.runDraftRound();

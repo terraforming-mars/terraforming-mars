@@ -460,7 +460,7 @@ export class Player {
       );  
   }  
 
-    public runResearchPhase(game: Game, draftVariant: Boolean): void {
+    public runResearchPhase(game: Game, draftVariant: boolean): void {
       let dealtCards: Array<IProjectCard> = [];
       if (!draftVariant) {
         dealtCards.push(

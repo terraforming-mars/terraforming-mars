@@ -31,7 +31,7 @@ export const PlayerHome = Vue.component("player-home", {
     },
     template: `
         <div id="player-home">
-            <h1 :style="'color:' + player.color">Teraforming Mars - {{player.name}}</h1>
+            <h1 :style="'color:' + player.color">Terraforming Mars - {{player.name}}</h1>
             <section>
                 <dialog class="nes-dialog" id="dialog-default">
                     <form method="dialog">

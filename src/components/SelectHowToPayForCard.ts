@@ -47,7 +47,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             return 41; // max card cost
         },
         canUseHeat: function () {
-            return this.playerinput.canUseHeatAsMegaCredits && this.player.heat > 0;
+            return this.playerinput.canUseHeat && this.player.heat > 0;
         },
         canUseSteel: function () {
             if (this.$data.card !== undefined && this.player.steel > 0) {

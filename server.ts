@@ -329,6 +329,7 @@ function getWaitingFor(
       result.cards = (waitingFor as SelectHowToPayForCard)
           .cards.map((card) => card.name);
       result.microbes = (waitingFor as SelectHowToPayForCard).microbes;
+      result.canUseHeat = (waitingFor as SelectHowToPayForCard).canUseHeat;
       break;
     case PlayerInputTypes.SELECT_CARD:
       result.cards = (waitingFor as SelectCard<ICard>)

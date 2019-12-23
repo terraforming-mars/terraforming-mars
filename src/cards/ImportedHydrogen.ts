@@ -22,7 +22,7 @@ export class ImportedHydrogen implements IProjectCard {
     public play(player: Player, game: Game): undefined | PlayerInput {
 
         const addOcean = () => {
-            if (game.noOceansAvailabe()) return undefined;
+            if (game.noOceansAvailable()) return undefined;
             return new SelectSpace(
                 "Select space for ocean tile", 
                 game.getAvailableSpacesForOcean(player), 

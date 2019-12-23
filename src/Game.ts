@@ -110,7 +110,7 @@ export class Game {
       ) !== undefined;
     }
 
-    public noOceansAvailabe(): boolean {
+    public noOceansAvailable(): boolean {
       return this.getOceansOnBoard() >= constants.MAX_OCEAN_TILES;
     }
 

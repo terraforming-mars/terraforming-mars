@@ -8,6 +8,8 @@ import { Mayor } from "../src/milestones/Mayor";
 import { Banker } from "../src/awards/Banker";
 import { Thermalist } from "../src/awards/Thermalist";
 import * as constants from "../src/constants";
+import { Birds } from "../src/cards/Birds";
+import { WaterImportFromEuropa } from "../src/cards/WaterImportFromEuropa";
 
 describe("Game", function () {
     it("should initialize with right defaults", function () {
@@ -20,14 +22,14 @@ describe("Game", function () {
     it("correctly calculates victory points", function () {
         const player = new Player("vp_test", Color.BLUE, false);
         const player2 = new Player("vp_test2", Color.RED, false);
-        const player3 = new Player("test3", Color.YELLOW, false);
+        const player3 = new Player("vp_test3", Color.YELLOW, false);
         const game = new Game("vp_game", [player,player2,player3], player);
 
         game.addCityTile(player, SpaceName.ARSIA_MONS);
         game.addGreenery(player, SpaceName.PAVONIS_MONS);
 
         // Add some initial VPs
-        player.victoryPoints += 70;
+        player.victoryPoints += 64;
         
         // claim millestone
         let milestone = new Mayor();
@@ -53,6 +55,13 @@ describe("Game", function () {
 
         player2.heat = 23;
         player3.heat = 23;
+
+        // Add some cards with VPs
+        const birdsCard = new Birds()
+        player.addResourceTo(birdsCard, 6)
+        player.playedCards.push(birdsCard);
+
+        player2.playedCards.push(new WaterImportFromEuropa())
 
         // Finish the game
         game.playerIsDoneWithGame(player3);

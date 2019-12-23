@@ -583,12 +583,6 @@ export class Game {
     private gotoEndGame(): void {
       if (this.phase == Phase.END) return;
       this.phase = Phase.END;
-      // TR is converted in victory points
-      this.players.forEach((player) => {
-        player.victoryPointsBreakdown.victoryPoints = player.victoryPoints;
-        player.victoryPointsBreakdown.terraformRating = player.terraformRating;
-        player.victoryPoints += player.terraformRating;
-      });
 
       // Give players any victory points from cards
       this.players.forEach((player) => {
@@ -597,6 +591,13 @@ export class Game {
             playedCard.onGameEnd(player, this);
           }
         });
+        player.victoryPointsBreakdown.victoryPoints = player.victoryPoints;
+      });
+
+      // TR is converted in victory points
+      this.players.forEach((player) => {
+        player.victoryPointsBreakdown.terraformRating = player.terraformRating;
+        player.victoryPoints += player.terraformRating;
       });
 
       // Distribute awards

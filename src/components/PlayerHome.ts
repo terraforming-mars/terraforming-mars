@@ -52,16 +52,17 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
             </div>
+
             <div v-if="player.corporationCard">
-                
-                <div class="player_home_block">
-                    <div>Generation: {{player.generation}}</div>
-                    <div>Terraform Rating: {{player.terraformRating}}</div>
-                </div>
 
                 <div class="player_home_block">
                     <h2>Corporation Card</h2>
                     <card :card="player.corporationCard"></card>
+                </div>
+
+                <div class="player_home_block player_home_block--resources nofloat">
+                    <h2 class="nofloat">Resources</h2>
+                    <player-resources :player="player"></player-resources>
                 </div>
                 
                 <div v-if="player.playedCards.length > 0" class="player_home_block">
@@ -76,11 +77,6 @@ export const PlayerHome = Vue.component("player-home", {
                     <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
                         <card :card="card.name" :resources="card.resources"></card>
                     </div>
-                </div>
-
-                <div class="player_home_block nofloat">
-                    <h2 class="nofloat">Resources</h2>
-                    <player-resources :player="player"></player-resources>
                 </div>
 
                 <div class="player_home_block nofloat" v-if="player.players.length > 1 && player.gameLog">
@@ -120,8 +116,13 @@ export const PlayerHome = Vue.component("player-home", {
                         <other-player v-if="otherPlayer.id !== player.id" :player="otherPlayer"></other-player>
                     </div>
                 </div>
+
+                <div class="player_home_block player_home_block--actions nofloat">
+                    <h2>Actions</h2>
+                    <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
+                </div>
             </div>
-            <div class="player_home_block player_home_block--actions nofloat">
+            <div class="player_home_block player_home_block--actions nofloat"  v-if="!player.corporationCard">
                 <h2>Actions</h2>
                 <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
             </div>

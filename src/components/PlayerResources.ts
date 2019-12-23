@@ -1,68 +1,24 @@
 
 import Vue from "vue";
+import {PlayerResource} from "./PlayerResource";
 
 export const PlayerResources = Vue.component("player-resources", {
     props: ["player"],
     data: function () {
         return {};
     },
+    components: {
+        "player-resource": PlayerResource
+    },
     template: `
-        <div>
-            <table class="nes-table is-bordered is-centered">
-                <thead>
-                    <tr>
-                        <th colspan="2">Mega Credits</th>
-                        <th colspan="2">Steel</th>
-                        <th colspan="2">Titanium</th>
-                    </tr>
-                    <tr>
-                        <th>Stock</th>
-                        <th>Production</th>
-                        <th>Stock</th>
-                        <th>Production</th>
-                        <th>Stock</th>
-                        <th>Production</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{player.megaCredits}}</td>
-                        <td>{{player.megaCreditProduction}}</td>
-                        <td>{{player.steel}}</td>
-                        <td>{{player.steelProduction}}</td>
-                        <td>{{player.titanium}}</td>
-                        <td>{{player.titaniumProduction}}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <table class="nes-table is-bordered is-centered">
-                <thead>
-                    <tr>
-                        <th colspan="2">Plants</th>
-                        <th colspan="2">Energy</th>
-                        <th colspan="2">Heat</th>
-                    </tr>
-                    <tr>
-                        <th>Stock</th>
-                        <th>Production</th>
-                        <th>Stock</th>
-                        <th>Production</th>
-                        <th>Stock</th>
-                        <th>Production</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{player.plants}}</td>
-                        <td>{{player.plantProduction}}</td>
-                        <td>{{player.energy}}</td>
-                        <td>{{player.energyProduction}}</td>
-                        <td>{{player.heat}}</td>
-                        <td>{{player.heatProduction}}</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="resource_items_cont">
+            <player-resource type="rating" prod_label="generation" :count="player.terraformRating" :production="player.generation"></player-resource>
+            <player-resource type="megacredits" prod_label="prod" :count="player.megaCredits" :production="player.megaCreditProduction"></player-resource>
+            <player-resource type="steel" prod_label="prod" :count="player.steel" :production="player.steelProduction"></player-resource>
+            <player-resource type="titanium" prod_label="prod" :count="player.titanium" :production="player.titaniumProduction"></player-resource>
+            <player-resource type="plants" prod_label="prod" :count="player.plants" :production="player.plantProduction"></player-resource>
+            <player-resource type="energy" prod_label="prod" :count="player.energy" :production="player.energyProduction"></player-resource>
+            <player-resource type="heat" prod_label="prod" :count="player.heat" :production="player.heatProduction"></player-resource>
         </div>
     `
 });
-

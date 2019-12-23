@@ -12,6 +12,16 @@ export const GameEnd = Vue.component("game-end", {
         },
         getPlayerColorStyle: function (player: PlayerModel): string {
             return "color: " + player.color;
+        },
+        getSortedPlayers: function () {
+            this.player.players.sort(function (a:PlayerModel, b:PlayerModel){
+                if (a.victoryPoints < b.victoryPoints) return -1;
+                if (a.victoryPoints > b.victoryPoints) return 1;
+                if (a.megaCredits < b.megaCredits) return -1;
+                if (a.megaCredits > b.megaCredits) return 1;
+                return 0;
+            });
+            return this.player.players.reverse();
         }
     },
     template: `
@@ -65,11 +75,12 @@ export const GameEnd = Vue.component("game-end", {
                                 <th>Greenery</th>
                                 <th>City</th>
                                 <th>VP</th>
+                                <th>M€</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="p in player.players">
+                            <tr v-for="p in getSortedPlayers()">
                                 <td><span :style="getPlayerColorStyle(p)">{{ p.name }}</span></td>
                                 <td>{{ p.corporationCard }}</td>
                                 <td>{{ p.victoryPointsBreakdown.terraformRating }}</td>
@@ -78,6 +89,7 @@ export const GameEnd = Vue.component("game-end", {
                                 <td>{{ p.victoryPointsBreakdown.greenery }}</td>
                                 <td>{{ p.victoryPointsBreakdown.city }}</td>
                                 <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
+                                <td>{{ p.megaCredits }}</td>
                                 <td>{{ p.victoryPointsBreakdown.total }}</td>
                             </tr>
                         </tbody>

@@ -630,7 +630,7 @@ export class Player {
         }
         return this.playCard(game, selectedCard, howToPay);
       };
-      return new SelectHowToPayForCard(this.getPlayableCards(game), this.getMicrobesCanSpend(), cb);
+      return new SelectHowToPayForCard(this.getPlayableCards(game), this.getMicrobesCanSpend(), this.canUseHeatAsMegaCredits, cb);
     }
 
     public getMicrobesCanSpend(): number {

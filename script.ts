@@ -6,6 +6,19 @@ import { PlayerHome } from "./src/components/PlayerHome";
 import Vue from "vue";
 import { GameEnd } from "./src/components/GameEnd";
 
+function trimEmptyTextNodes (el: any) {
+    for (let node of el.childNodes) {
+        if (node.nodeType === Node.TEXT_NODE && node.data.trim() === '') {
+        node.remove()
+        }
+    }
+}
+  
+Vue.directive('trim-whitespace', {
+    inserted: trimEmptyTextNodes,
+    componentUpdated: trimEmptyTextNodes
+});
+
 const app = new Vue({
     el: "#app",
     data: {

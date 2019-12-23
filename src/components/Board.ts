@@ -51,6 +51,14 @@ export const Board = Vue.component("board", {
                 <defs>
                     <symbol id="hexagon">
                         <polygon points="24,48.5 45.3,36.5 45.3,13.5 24,2 3.5,13.5 3.5,36.5" fill="#fff" fill-opacity="0.01" stroke-width="3" stroke-opacity="0.4" />
+                        <polygon style="visibility: var(--board_space_visibility, hidden)" transform="scale(0.9, 0.9) translate(3, 3)" points="24,48.5 45.3,36.5 45.3,13.5 24,2 3.5,13.5 3.5,36.5" fill="none" stroke="#4f4" stroke-width="4" stroke-opacity="0.4">
+                            <animate
+                                attributeType="XML"
+                                attributeName="stroke"
+                                values="#e95c2e;#f9c4b3;#e95c2e;#e95c2e"
+                                dur="1.2s"
+                                repeatCount="indefinite"/>
+                        </polygon>
                     </symbol>
                 </defs>
                 <g transform="translate(1, 1)" id="main_grid">

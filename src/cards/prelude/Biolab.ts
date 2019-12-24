@@ -5,7 +5,7 @@ import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
 
 export class Biolab extends PreludeCard implements IProjectCard {
-    public tags: Array<Tags> = [];
+    public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Biolab";
     public play(player: Player, game: Game) {
         player.plantProduction++;

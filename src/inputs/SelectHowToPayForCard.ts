@@ -11,6 +11,7 @@ export class SelectHowToPayForCard implements PlayerInput {
     constructor(
         public cards: Array<IProjectCard>,
         public microbes: number,
+        public canUseHeat: boolean,
         public cb: (cardToPlay: IProjectCard, howToPay: HowToPay) => PlayerInput | undefined) {
     }
 }

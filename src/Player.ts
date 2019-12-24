@@ -485,7 +485,12 @@ export class Player {
       let selectedCards: Array<IProjectCard> = [];
 
       const payForCards = () => {
-        this.megaCredits -= constants.CARD_COST * selectedCards.length;
+        if (htp.heat > 0 && this.canUseHeatAsMegaCredits) {
+          this.heat -= htp.heat;
+          this.megaCredits -= (constants.CARD_COST * selectedCards.length - htp.heat);
+        } else {
+          this.megaCredits -= constants.CARD_COST * selectedCards.length;
+        }  
         selectedCards.forEach((card) => {
           this.cardsInHand.push(card);
         });
@@ -630,7 +635,7 @@ export class Player {
         }
         return this.playCard(game, selectedCard, howToPay);
       };
-      return new SelectHowToPayForCard(this.getPlayableCards(game), this.getMicrobesCanSpend(), cb);
+      return new SelectHowToPayForCard(this.getPlayableCards(game), this.getMicrobesCanSpend(), this.canUseHeatAsMegaCredits, cb);
     }
 
     public getMicrobesCanSpend(): number {

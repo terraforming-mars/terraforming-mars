@@ -28,8 +28,7 @@ describe("Livestock", function () {
         expect(player.plantProduction).to.eq(0);
         expect(player.megaCreditProduction).to.eq(2);
         player.addResourceTo(card, 4);
-        card.onGameEnd(player);
-        expect(player.victoryPoints).to.eq(4);
+        expect(card.getVictoryPoints(player)).to.eq(4);
     });
     it("Should act", function () {
         const card = new Livestock();

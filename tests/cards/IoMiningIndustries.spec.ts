@@ -13,7 +13,6 @@ describe("IoMiningIndustries", function () {
         expect(player.titaniumProduction).to.eq(2);
         expect(player.megaCreditProduction).to.eq(2);
         player.playedCards.push(card);
-        card.onGameEnd(player);
-        expect(player.victoryPoints).to.eq(1);
+        expect(card.getVictoryPoints(player)).to.eq(1);
     });
 });

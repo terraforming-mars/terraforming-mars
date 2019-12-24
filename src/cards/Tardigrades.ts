@@ -15,8 +15,8 @@ export class Tardigrades implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public onGameEnd(player: Player) {
-        player.victoryPoints += Math.floor(player.getResourcesOnCard(this) / 4);
+    public getVictoryPoints(player: Player) {
+        return Math.floor(player.getResourcesOnCard(this) / 4);
     }
     public play() {
         return undefined;

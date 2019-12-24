@@ -22,8 +22,8 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
     public canPlay(_player: Player, _game: Game): boolean {
         return true;
     }
-    public onGameEnd(player: Player) {
-        player.victoryPoints += player.getTagCount(Tags.JOVIAN);
+    public getVictoryPoints(player: Player) {
+        return player.getTagCount(Tags.JOVIAN);
     }
     public play() {
         return undefined;

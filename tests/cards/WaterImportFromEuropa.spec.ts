@@ -19,8 +19,7 @@ describe("WaterImportFromEuropa", function () {
         const action = card.play();
         expect(action).to.eq(undefined);
         player.playedCards.push(card);
-        card.onGameEnd(player);
-        expect(player.victoryPoints).to.eq(1);
+        expect(card.getVictoryPoints(player)).to.eq(1);
     });
     it("Should act", function () {
         const card = new WaterImportFromEuropa();

@@ -13,7 +13,6 @@ describe("GanymedeColony", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         player.playedCards.push(card);
-        card.onGameEnd(player);
-        expect(player.victoryPoints).to.eq(1); 
+        expect(card.getVictoryPoints(player)).to.eq(1);
     });
 });

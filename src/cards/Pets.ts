@@ -17,8 +17,8 @@ export class Pets implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public onGameEnd(player: Player) {
-        player.victoryPoints += Math.floor(player.getResourcesOnCard(this) / 2);
+    public getVictoryPoints(player: Player) {
+        return Math.floor(player.getResourcesOnCard(this) / 2);
     }
     public onTilePlaced(player: Player, space: ISpace) {
         if (space.tile !== undefined && space.tile.tileType === TileType.CITY) {

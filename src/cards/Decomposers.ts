@@ -25,8 +25,8 @@ export class Decomposers implements IProjectCard {
         player.addResourceTo(this);
       }
     }
-    public onGameEnd(player: Player) {
-      player.victoryPoints += Math.floor(player.getResourcesOnCard(this) / 3);
+    public getVictoryPoints(player: Player) {
+      return Math.floor(player.getResourcesOnCard(this) / 3);
     }
     public play() {
       return undefined;

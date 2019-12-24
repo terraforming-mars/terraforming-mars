@@ -19,8 +19,7 @@ describe("Predators", function () {
         const action = card.play();
         expect(action).to.eq(undefined);
         player.addResourceTo(card, 5);
-        card.onGameEnd(player);
-        expect(player.victoryPoints).to.eq(5);
+        expect(card.getVictoryPoints(player)).to.eq(5);
     });
     it("Should act", function () {
         const card = new Predators();

@@ -18,8 +18,8 @@ export class Predators implements IProjectCard, IActionCard {
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 11 - player.getRequirementsBonus(game);
     }
-    public onGameEnd(player: Player) {
-        player.victoryPoints += player.getResourcesOnCard(this);
+    public getVictoryPoints(player: Player) {
+        return player.getResourcesOnCard(this);
     }
     public play() {
         return undefined;

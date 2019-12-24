@@ -17,8 +17,8 @@ export class Ants implements IActionCard, IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
       return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);
     }
-    public onGameEnd(player: Player) {
-      player.victoryPoints += Math.floor(player.getResourcesOnCard(this) / 2);
+    public getVictoryPoints(player: Player) {
+      return Math.floor(player.getResourcesOnCard(this) / 2);
     }
     public play() {
       return undefined;

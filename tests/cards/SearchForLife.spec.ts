@@ -18,11 +18,9 @@ describe("SearchForLife", function () {
         player.playedCards.push(card);
         const action = card.play();
         expect(action).to.eq(undefined);
-        card.onGameEnd(player);
-        expect(player.victoryPoints).to.eq(0);
+        expect(card.getVictoryPoints(player)).to.eq(0);
         player.addResourceTo(card);
-        card.onGameEnd(player);
-        expect(player.victoryPoints).to.eq(3);
+        expect(card.getVictoryPoints(player)).to.eq(3);
     });
     it("Should act", function () {
         const card = new SearchForLife();

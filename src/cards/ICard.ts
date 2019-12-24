@@ -27,8 +27,8 @@ export interface ICard {
     canAct?: (player: Player, game: Game) => boolean;
     getCardDiscount?: (player: Player, game: Game, card: IProjectCard) => number;
     getRequirementBonus?: (player: Player, game: Game) => number;
+    getVictoryPoints?: (player: Player, game: Game) => number;
     onCardPlayed?: (player: Player, game: Game, card: IProjectCard) => OrOptions | void;
-    onGameEnd?: (player: Player, game: Game) => void;
     onStandardProject?: (player: Player, projectType: StandardProjectType) => void;
     onTilePlaced?: (player: Player, space: ISpace, game?: Game) => void;
 }

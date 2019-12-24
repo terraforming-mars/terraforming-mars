@@ -45,8 +45,6 @@ describe("Fish", function () {
         expect(player.plantProduction).to.eq(0); // no negative values etc.
 
         player.addResourceTo(card, 5);
-        card.onGameEnd(player);
-        
-        expect(player.victoryPoints).to.eq(player.getResourcesOnCard(card));
+        expect(card.getVictoryPoints(player)).to.eq(player.getResourcesOnCard(card));
     });
 });

@@ -27,7 +27,6 @@ describe("Decomposers", function () {
         expect(player.getResourcesOnCard(card)).to.eq(2);
         card.onCardPlayed(player, game, new Algae());
         expect(player.getResourcesOnCard(card)).to.eq(3);
-        card.onGameEnd(player);
-        expect(player.victoryPoints).to.eq(1);
+        expect(card.getVictoryPoints(player)).to.eq(1);
     });
 });

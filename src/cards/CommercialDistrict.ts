@@ -17,14 +17,15 @@ export class CommercialDistrict implements IProjectCard {
     public canPlay(player: Player): boolean {
       return player.energyProduction >= 1;
     }
-    public onGameEnd(player: Player, game: Game) {
+    public getVictoryPoints(_player: Player, game: Game) {
       const usedSpace = game.getSpaceByTileCard(this.name);
       if (usedSpace !== undefined) {
-        player.victoryPoints += game.getAdjacentSpaces(usedSpace).filter(
+        return game.getAdjacentSpaces(usedSpace).filter(
             (adjacentSpace) => adjacentSpace.tile &&
             adjacentSpace.tile.tileType === TileType.CITY
         ).length;
       }
+      return 0;
     }
     public play(player: Player, game: Game) {
       return new SelectSpace(

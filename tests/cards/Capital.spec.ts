@@ -41,7 +41,6 @@ describe("Capital", function () {
         expect(citySpace.player).to.eq(player);
         expect(citySpace.tile && citySpace.tile.tileType).to.eq(TileType.CITY);
         expect(player.victoryPoints).to.eq(0);
-        card.onGameEnd(player, game);
-        expect(player.victoryPoints).to.eq(1);
+        expect(card.getVictoryPoints(player, game)).to.eq(1);
     });
 });

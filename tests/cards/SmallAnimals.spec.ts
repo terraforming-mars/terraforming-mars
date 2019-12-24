@@ -35,10 +35,8 @@ describe("SmallAnimals", function () {
             action.cb(player);
         }
         expect(player.plantProduction).to.eq(0);
-        card.onGameEnd(player);
-        expect(player.victoryPoints).to.eq(0);
+        expect(card.getVictoryPoints(player)).to.eq(0);
         player.addResourceTo(card, 3);
-        card.onGameEnd(player);
-        expect(player.victoryPoints).to.eq(1);
+        expect(card.getVictoryPoints(player)).to.eq(1);
     });
 });

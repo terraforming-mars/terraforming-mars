@@ -14,8 +14,8 @@ export class ImmigrationShuttles implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public onGameEnd(player: Player, game: Game) {
-        player.victoryPoints += Math.floor(game.getCitiesInPlay() / 3); 
+    public getVictoryPoints(_player: Player, game: Game) {
+        return Math.floor(game.getCitiesInPlay() / 3);
     }
     public play(player: Player) {
         player.megaCreditProduction += 5;

@@ -45,7 +45,7 @@ export const Preferences = Vue.component("preferences", {
     },
     methods: {
         setPreferencesCSS: function(val: boolean | undefined, cssClassSuffix: string): void {
-            let target = document.getElementById("player-home");
+            let target = document.getElementById("ts-preferences-target");
             if ( ! target) return;
             if (val) {
                 target.classList.add("preferences_" + cssClassSuffix);

@@ -5,7 +5,7 @@
         <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" />
         <link rel='stylesheet' type='text/css' media='all' href='/styles.css' />
     </head>
-    <body>
+    <body id="ts-preferences-target">
         <div id="app">
             <game-home v-if="screen === 'game-home'" :game="$data.game"></game-home>
             <player-home v-if="screen === 'player-home'" :player="$data.player" :key="$data.playerkey"></player-home>

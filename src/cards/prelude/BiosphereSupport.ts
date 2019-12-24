@@ -1,6 +1,5 @@
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
-import { Game } from "../../Game";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
 
@@ -10,7 +9,7 @@ export class BiosphereSupport extends PreludeCard implements IProjectCard {
     public canPlay(player: Player): boolean {
         return player.megaCreditProduction >= -4;
     }    
-    public play(player: Player, _game: Game) {
+    public play(player: Player) {
         player.megaCreditProduction-- ;
         player.plantProduction +=2 ;
 	    return undefined;    

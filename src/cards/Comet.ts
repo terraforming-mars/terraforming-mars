@@ -50,9 +50,7 @@ export class Comet implements IProjectCard {
         )
       }
 
-      const playersToRemovePlantsFrom = game.getPlayers().filter(
-        (p) => p.id != player.id && p.plants > 0 && ! p.hasProtectedHabitats()
-      )
+      const playersToRemovePlantsFrom = player.getOtherPlayersWithPlantsToRemove(game);
       // Can we remove a plants?
       if (playersToRemovePlantsFrom.length > 0) {
         if (playersToRemovePlantsFrom.length === 1) {

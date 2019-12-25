@@ -77,13 +77,8 @@ export class Player {
     public getLastCardPlayedThisTurn(): IProjectCard | undefined {
       return this.lastCardPlayedThisTurn;
     }
-    public isAnyOtherPlayerHasPlants(game: Game): boolean {
-      for (const player of game.getPlayers()) {
-        if (player.id === this.id) continue;
-        if (player.hasProtectedHabitats()) continue;
-        if (player.plants > 0) return true;
-      }
-      return false;
+    public getOtherPlayersWithPlantsToRemove(game: Game): Array<Player> {
+      return game.getPlayers().filter((player) => player.id !== this.id && !player.hasProtectedHabitats() && player.plants > 0);
     }
     public hasProtectedHabitats(): boolean {
       return this.playedCards.find(

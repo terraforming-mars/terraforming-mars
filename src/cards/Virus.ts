@@ -36,9 +36,7 @@ export class Virus implements IProjectCard {
     public play(player: Player, game: Game): PlayerInput | undefined {
         if (game.getPlayers().length == 1)  return undefined;
         const cards = this.getPossibleTargetCards(player, game);
-        const playersWithPlants = game.getPlayers().filter(
-            (p) => p.plants > 0 && p.id != player.id && ! p.hasProtectedHabitats()
-        )
+        const playersWithPlants = player.getOtherPlayersWithPlantsToRemove(game);
         const remove5Plants = () => {
             return new SelectPlayer(
                 playersWithPlants, 

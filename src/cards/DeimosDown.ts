@@ -24,7 +24,7 @@ export class DeimosDown implements IProjectCard {
       }
 
       const playersToRemovePlantsFrom = game.getPlayers().filter(
-        (p) => p.id != player.id && p.plants > 0
+        (p) => p.id != player.id && p.plants > 0 && ! player.hasProtectedHabitats()
       )
 
       if ( playersToRemovePlantsFrom.length === 0) {

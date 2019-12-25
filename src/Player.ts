@@ -80,6 +80,7 @@ export class Player {
     public isAnyOtherPlayerHasPlants(game: Game): boolean {
       for (const player of game.getPlayers()) {
         if (player.id === this.id) continue;
+        if (player.hasProtectedHabitats()) continue;
         if (player.plants > 0) return true;
       }
       return false;

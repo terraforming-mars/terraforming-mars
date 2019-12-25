@@ -20,12 +20,22 @@ export class BigAsteroid implements IProjectCard {
       return game.increaseTemperature(player, 2);
     }
     public play(player: Player, game: Game) {
-      if (game.getPlayers().length === 1 || ! player.isAnyOtherPlayerHasPlants(game)) {
+
+      const playersToRemovePlantsFrom = game.getPlayers().filter(
+        (p) => p.id != player.id && p.plants > 0 && ! p.hasProtectedHabitats()
+      )
+
+      if (game.getPlayers().length === 1 || playersToRemovePlantsFrom.length == 0) {
+        return this.doPlay(player, game);
+      }
+
+      if (playersToRemovePlantsFrom.length == 1) {
+        playersToRemovePlantsFrom[0].removePlants(player, 4);
         return this.doPlay(player, game);
       }
       
       return new SelectPlayer(
-          game.getPlayers(),
+          playersToRemovePlantsFrom,
           'Select player to remove up to 4 plants from',
           (foundPlayer: Player) => {
             foundPlayer.removePlants(player, 4);

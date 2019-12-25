@@ -22,7 +22,7 @@ export class MiningExpedition implements IProjectCard {
         }
 
         const otherPlayersWithPlants = game.getPlayers().filter(
-            (p) => p.plants > 0 && p.id != player.id
+            (p) => p.plants > 0 && p.id != player.id && ! p.hasProtectedHabitats()
         );
 
         if (otherPlayersWithPlants.length === 1) {

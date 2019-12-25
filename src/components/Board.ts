@@ -62,7 +62,13 @@ export const Board = Vue.component("board", {
                     </symbol>
                 </defs>
                 <g transform="translate(1, 1)" id="main_grid">
-                    <use v-for="space in getAllSpaces()" :data_space_id="space.id" class="board_space" :class="getPosCssClass(space)" :stroke="getStroke(space)" xlink:href="#hexagon" />
+                    <use v-for="space in getAllSpaces()"
+                        v-if="space.tileType === undefined"
+                        :data_space_id="space.id" 
+                        class="board_space" 
+                        :class="getPosCssClass(space)" 
+                        :stroke="getStroke(space)" 
+                        xlink:href="#hexagon" />
                 </g>
             </svg>
 

@@ -33,7 +33,7 @@ export const WaitingFor = Vue.component("waiting-for", {
             const vueApp = this;
             const askForUpdate = () => {
                 const xhr = new XMLHttpRequest();
-                xhr.open("GET", "/api/waitingfor" + window.location.search);
+                xhr.open("GET", "/api/waitingfor" + window.location.search + "&prev-game-age=" + this.player.gameAge.toString());
                 xhr.onerror = function () {
                     alert("Error getting waitingfor data");
                 };
@@ -51,7 +51,12 @@ export const WaitingFor = Vue.component("waiting-for", {
                                     body: "It's your turn!",
                                 });
                             }
-                            return
+
+                            // We don't need to wait anymore - it's our turn
+                            return;
+                        } else if (result["result"] === "REFRESH") {
+                            // Something changed, let's refresh UI
+                            (vueApp as any).$root.updatePlayer();
                         }
                         (vueApp as any).waitForUpdate();
                     } else {

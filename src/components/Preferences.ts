@@ -4,30 +4,20 @@ import Vue from "vue";
 
 class PreferencesManager {
     static keys: Array<string> = ["hide_corporation", "hide_hand", "hide_cards", "hide_awards_and_milestones", "small_cards"];
-    static preferencesValues: Map<string, boolean> = new Map<string, boolean>(); 
+    static preferencesValues: Map<string, boolean> = new Map<string, boolean>();
+    static localStorageSupported: boolean = typeof window['localStorage'] != "undefined" && window['localStorage'] != null;
 
     static saveValue(name: string, val: string): void {
-        const date = new Date();
-        const value = val;
-    
-        // Set it expire in 1 year
-        date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000));
-    
-        // Set it
-        document.cookie = name+"="+value+"; expires="+date.toUTCString()+"; path=/";
+        if ( ! PreferencesManager.localStorageSupported) return;
+        localStorage.setItem(name, val);
     }
 
     static loadValue(name: string): string {
-        const value = "; " + document.cookie;
-        const parts = value.split("; " + name + "=");
-        if (parts === undefined) return ""
-        if (parts.length === 2) {
-            const ret=(parts as any).pop().split(";").shift();
-            return ret;
-        }
-        return ""
+        if ( ! PreferencesManager.localStorageSupported) return "";
+        const value = localStorage.getItem(name);
+        if (value === null) return "";
+        return value
     }
-    
 }
 
 export const Preferences = Vue.component("preferences", {
@@ -67,7 +57,7 @@ export const Preferences = Vue.component("preferences", {
                 let val = PreferencesManager.preferencesValues.get(k);
                 if (val !== this.$data[k] || initial) {
                     if ( ! initial) {
-                        let strVal = this.$data[k] ? "1": "2";
+                        let strVal = this.$data[k] ? "1": "0";
                         PreferencesManager.saveValue(k, strVal);
                         PreferencesManager.preferencesValues.set(k, this.$data[k]);
                     }

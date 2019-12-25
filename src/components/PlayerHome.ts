@@ -94,13 +94,6 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
   
                 <a name="cards" class="player_home_anchor"></a>
-                <div v-if="player.playedCards.length > 0" class="player_home_block player_home_block--cards">
-                    <h2>Played Cards</h2>
-                    <div v-for="card in player.playedCards" :key="card.name" class="cardbox">
-                        <card :card="card.name" :resources="card.resources"></card>
-                    </div>
-                </div>
-
                 <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
                     <h2>Cards In Hand</h2>
                     <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
@@ -108,6 +101,12 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
 
+                <div v-if="player.playedCards.length > 0" class="player_home_block player_home_block--cards">
+                    <h2>Played Cards</h2>
+                    <div v-for="card in player.playedCards" :key="card.name" class="cardbox">
+                        <card :card="card.name" :resources="card.resources"></card>
+                    </div>
+                </div>
 
                 <div class="player_home_block player_home_block--milestones" v-if="player.claimedMilestones.length > 0">
                     <h2>Claimed Milestones</h2>
@@ -123,7 +122,7 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
 
-                <div class="player_home_block nofloat" v-if="player.players.length > 1">
+                <div class="player_home_block player_home_block--others" v-if="player.players.length > 1">
                     <h2>Other Players</h2>
                     <div v-for="otherPlayer in player.players" :key="otherPlayer.id">
                         <other-player v-if="otherPlayer.id !== player.id" :player="otherPlayer"></other-player>

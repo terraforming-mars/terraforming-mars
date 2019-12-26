@@ -11,6 +11,7 @@ import { OtherPlayer } from "./OtherPlayer";
 import { PlayerResources } from "./PlayerResources";
 import { WaitingFor } from "./WaitingFor";
 import { GlobalParameters } from "./GlobalParameters"
+import { Preferences } from "./Preferences"
 
 export const PlayerHome = Vue.component("player-home", {
     props: ["player"],
@@ -24,7 +25,8 @@ export const PlayerHome = Vue.component("player-home", {
         "waiting-for": WaitingFor,
         "global-parameters": GlobalParameters,
         "milestone": Milestone,
-        "award": Award
+        "award": Award,
+        "preferences": Preferences
     },
     data: function () {
         return {}
@@ -53,22 +55,27 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
             </div>
 
+            <preferences v-if="player.corporationCard" v-trim-whitespace></preferences>
+
             <div v-if="player.corporationCard">
+
                 <div class="player_home_block player_home_block--resources nofloat">
                     <player-resources :player="player" v-trim-whitespace></player-resources>
                 </div>
 
-                <div class="player_home_block nofloat">
+                <div class="player_home_block">
+                    <a name="board" class="player_home_anchor"></a>
                     <board :spaces="player.spaces"></board>
 
                     <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature"></global-parameters>
-                    <div v-if="player.players.length > 1">
+                    <div v-if="player.players.length > 1" class="player_home_block--millestones-and-awards">
                         <milestone/>
                         <award/>
                     </div>
                 </div>
 
                 <div class="player_home_block player_home_block--actions nofloat">
+                    <a name="actions" class="player_home_anchor"></a>
                     <h2>Actions</h2>
                     <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
@@ -81,41 +88,41 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
 
-                <div class="player_home_block">
+                <div class="player_home_block player_home_block--corporation">
                     <h2>Corporation Card</h2>
                     <card :card="player.corporationCard"></card>
                 </div>
   
-                <div v-if="player.playedCards.length > 0" class="player_home_block">
-                    <h2>Played Cards</h2>
-                    <div v-for="card in player.playedCards" :key="card.name" class="cardbox">
-                        <card :card="card.name" :resources="card.resources"></card>
-                    </div>
-                </div>
-
-                <div class="player_home_block nofloat" v-if="player.cardsInHand.length > 0">
+                <a name="cards" class="player_home_anchor"></a>
+                <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
                     <h2>Cards In Hand</h2>
                     <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
                         <card :card="card.name" :resources="card.resources"></card>
                     </div>
                 </div>
 
+                <div v-if="player.playedCards.length > 0" class="player_home_block player_home_block--cards">
+                    <h2>Played Cards</h2>
+                    <div v-for="card in player.playedCards" :key="card.name" class="cardbox">
+                        <card :card="card.name" :resources="card.resources"></card>
+                    </div>
+                </div>
 
-                <div class="player_home_block" v-if="player.claimedMilestones.length > 0">
+                <div class="player_home_block player_home_block--milestones" v-if="player.claimedMilestones.length > 0">
                     <h2>Claimed Milestones</h2>
-                    <div class="player_home_block--claimed_milesones">
+                    <div class="player_home_block--claimed_milestones">
                         <claimed-milestone v-for="claimedMilestone in player.claimedMilestones" :key="claimedMilestone.milestone" :players="player.players" :claimedmilestone="claimedMilestone"></claimed-milestone>
                     </div>
                 </div>
 
-                <div class="player_home_block" v-if="player.fundedAwards.length > 0">
+                <div class="player_home_block player_home_block--awards" v-if="player.fundedAwards.length > 0">
                     <h2>Funded Awards</h2>
                     <div>
                         <funded-award v-for="fundedAward in player.fundedAwards" :key="fundedAward.award" :players="player.players" :fundedaward="fundedAward"></funded-award>
                     </div>
                 </div>
 
-                <div class="player_home_block nofloat" v-if="player.players.length > 1">
+                <div class="player_home_block player_home_block--others" v-if="player.players.length > 1">
                     <h2>Other Players</h2>
                     <div v-for="otherPlayer in player.players" :key="otherPlayer.id">
                         <other-player v-if="otherPlayer.id !== player.id" :player="otherPlayer"></other-player>

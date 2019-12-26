@@ -13,10 +13,12 @@ describe("Comet", function () {
     it("Should play", function () {
         const card = new Comet();
         const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("victim", Color.BLUE, false);
+        const player2 = new Player("victim", Color.GREEN, false);
+        const player3 = new Player("notarget", Color.YELLOW, false);
         player2.plants = 3;
+        player3.plants = 2;
 
-        const game = new Game("foobar", [player, player2], player);
+        const game = new Game("foobar", [player, player2, player3], player);
 
         const action = card.play(player, game);
         expect(action instanceof AndOptions).to.eq(true);

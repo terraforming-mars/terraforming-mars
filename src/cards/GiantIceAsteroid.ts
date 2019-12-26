@@ -22,33 +22,58 @@ export class GiantIceAsteroid implements IProjectCard {
     public play(player: Player, game: Game) {
         var opts: Array<SelectPlayer | SelectSpace> = [];
 
-        if (player.isAnyOtherPlayerHasPlants(game)) {
-            opts.push(
-                new SelectPlayer(game.getPlayers(), "Select player to remove up to 6 plants from", (foundPlayer: Player) => {
-                    foundPlayer.removePlants(player, 6);
-                    return undefined;
-                })
-            )
+        const playersToRemovePlantsFrom = player.getOtherPlayersWithPlantsToRemove(game);
+
+        if (playersToRemovePlantsFrom.length > 0) {
+            if (playersToRemovePlantsFrom.length === 1) {
+                playersToRemovePlantsFrom[0].removePlants(
+                    player, 
+                    Math.min(8, playersToRemovePlantsFrom[0].plants)
+                );
+            } else {
+                opts.push(
+                    new SelectPlayer(
+                        playersToRemovePlantsFrom, 
+                        "Select player to remove up to 6 plants from", 
+                        (foundPlayer: Player) => {
+                            foundPlayer.removePlants(player, 6);
+                            return undefined;
+                        }
+                    )
+                )
+            }
         }
 
         let oceansCount = game.getOceansOnBoard();
 
         if (oceansCount + 1 <= constants.MAX_OCEAN_TILES) {
             opts.push(
-                new SelectSpace("Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                    game.addOceanTile(player, space.id);
-                    return undefined;
-                })
+                new SelectSpace(
+                    "Select space for ocean tile", 
+                    game.getAvailableSpacesForOcean(player), 
+                    (space: ISpace) => {
+                        game.addOceanTile(player, space.id);
+                        return undefined;
+                    }
+                )
             )
         }
 
         if (oceansCount + 2 <= constants.MAX_OCEAN_TILES) {
             opts.push(
-                new SelectSpace("Select space for second ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
-                    game.addOceanTile(player, space.id);
-                    return undefined;
-                })
+                new SelectSpace(
+                    "Select space for second ocean tile", 
+                    game.getAvailableSpacesForOcean(player), 
+                    (space: ISpace) => {
+                        game.addOceanTile(player, space.id);
+                        return undefined;
+                    }
+                )
             )
+        }
+
+        if (opts.length == 0) {
+            return game.increaseTemperature(player, 2);
         }
 
         return new AndOptions(

@@ -43,6 +43,7 @@ export class Game {
     public spaces: Array<ISpace>;
     private temperature: number = constants.MIN_TEMPERATURE;
     public gameLog: Array<String> = [];
+    public gameAge: number = 0; // Each log event increases it
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
 
     constructor(
@@ -1010,6 +1011,7 @@ export class Game {
 
     public log(message: String) {
       this.gameLog.push(message);
+      this.gameAge++;
       if (this.gameLog.length > 10 ) {
         (this.gameLog.shift());
       }

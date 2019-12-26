@@ -8,6 +8,7 @@ import { SelectCard } from "../inputs/SelectCard";
 import { SelectPlayer } from "../inputs/SelectPlayer";
 import { OrOptions } from "../inputs/OrOptions";
 import { PlayerInput } from "../PlayerInput";
+import { Pets } from "./Pets";
 
 export class Virus implements IProjectCard {
     public cost: number = 1;
@@ -17,12 +18,25 @@ export class Virus implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
+
+    private getPossibleTargetCards(player: Player, game: Game): Array<IProjectCard> {
+        let possibleCards = new Array<IProjectCard>(); 
+        const petsCard = new Pets();
+        for (let card of game.getPlayedCardsWithAnimals()) {  
+            let owner = game.getCardPlayer(card.name);
+            if (player.id != owner.id && owner.hasProtectedHabitats()) continue;
+            if (owner.getResourcesOnCard(card) < 1) continue;
+            if (this.name === card.name) continue;
+            if (card.name === petsCard.name) continue;
+            possibleCards.push(card);
+        }
+        return possibleCards;
+    }
+
     public play(player: Player, game: Game): PlayerInput | undefined {
         if (game.getPlayers().length == 1)  return undefined;
-        const cards = game.getPlayedCardsWithAnimals();
-        const playersWithPlants = game.getPlayers().filter(
-            (p) => p.plants > 0 && p.id != player.id
-        )
+        const cards = this.getPossibleTargetCards(player, game);
+        const playersWithPlants = player.getOtherPlayersWithPlantsToRemove(game);
         const remove5Plants = () => {
             return new SelectPlayer(
                 playersWithPlants, 

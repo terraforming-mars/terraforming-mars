@@ -15,19 +15,21 @@ export class Asteroid implements IProjectCard {
       return true;
     }
     public play(player: Player, game: Game) {
-      if (game.getPlayers().length == 1 || ! player.isAnyOtherPlayerHasPlants(game)) {
+      const playersToRemovePlantsFrom = player.getOtherPlayersWithPlantsToRemove(game);
+
+      if (game.getPlayers().length === 1 || playersToRemovePlantsFrom.length === 0) {
         player.titanium += 2;
         return game.increaseTemperature(player, 1);
       }
 
       return new SelectPlayer(
-          game.getPlayers(),
-          'Select player to remove 3 plants from',
-          (foundPlayer: Player) => {
-            foundPlayer.removePlants(player, 3);
-            player.titanium += 2;
-            return game.increaseTemperature(player, 1);
-          }
+        playersToRemovePlantsFrom,
+        'Select player to remove up to 3 plants from',
+        (foundPlayer: Player) => {
+          foundPlayer.removePlants(player, 3);
+          player.titanium += 2;
+          return game.increaseTemperature(player, 1);
+        }
       );
     }
 }

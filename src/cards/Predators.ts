@@ -1,4 +1,3 @@
-
 import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
@@ -7,6 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
 import { SelectCard } from "../inputs/SelectCard";
+import { Pets } from "./Pets";
 
 export class Predators implements IProjectCard, IActionCard {
     public cost: number = 14;
@@ -24,17 +24,44 @@ export class Predators implements IProjectCard, IActionCard {
     public play() {
         return undefined;
     }
-    public canAct(player: Player, game: Game): boolean {
-        return game.getPlayedCardsWithAnimals().find((card) => player.getResourcesOnCard(card) > 0) !== undefined;
+
+    private getPossibleTargetCards(player: Player, game: Game): Array<IProjectCard> {
+        let possibleCards = new Array<IProjectCard>(); 
+        const petsCard = new Pets();
+        for (let card of game.getPlayedCardsWithAnimals()) {  
+            let owner = game.getCardPlayer(card.name);
+            if (player.id != owner.id && owner.hasProtectedHabitats()) continue;
+            if (owner.getResourcesOnCard(card) < 1) continue;
+            if (this.name === card.name) continue;
+            if (card.name === petsCard.name) continue;
+            possibleCards.push(card);
+        }
+        return possibleCards;
     }
+
+    private doAction(targetCard:IProjectCard, player: Player, game: Game): void {
+        game.getCardPlayer(targetCard.name).removeAnimals(player, targetCard, 1);
+        player.addResourceTo(this);
+    }
+
+    public canAct(player: Player, game: Game): boolean {
+        return this.getPossibleTargetCards(player, game).length > 0;
+    }
+
     public action(player: Player, game: Game) {
-        const animalCards: Array<IProjectCard> = game.getPlayedCardsWithAnimals()
-            .filter((card) => player.getResourcesOnCard(card) > 0);
-        return new SelectCard("Select card to remove animal from", animalCards, (foundCards: Array<IProjectCard>) => {
-            const foundCard = foundCards[0];
-            game.getCardPlayer(foundCard.name).removeAnimals(player, foundCard, 1);
-            player.addResourceTo(this);
+        const animalCards = this.getPossibleTargetCards(player, game);
+        if (animalCards.length === 1) {
+            this.doAction(animalCards[0], player, game)
             return undefined;
-        });
+        }
+
+        return new SelectCard(
+            "Select card to remove animal from", 
+            animalCards, 
+            (foundCards: Array<IProjectCard>) => {
+                this.doAction(foundCards[0], player, game)
+                return undefined;
+            }
+        );
     }
 }

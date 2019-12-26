@@ -2,6 +2,7 @@
 import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as querystring from 'querystring';
 import {AndOptions} from './src/inputs/AndOptions';
 import {CardModel} from './src/models/CardModel';
 import {Color} from './src/Color';
@@ -162,7 +163,10 @@ function apiGetWaitingFor(
   req: http.IncomingMessage,
   res: http.ServerResponse
 ): void {
-  const playerId: string = req.url!.substring('/api/waitingfor?id='.length);
+  const qs: string = req.url!.substring('/api/waitingfor?'.length);
+  let queryParams = querystring.parse(qs);
+  const playerId = (queryParams as any)['id'];
+  const prevGameAge = parseInt((queryParams as any)['prev-game-age']);
   const game = playersToGame.get(playerId);
   if (game === undefined) {
     notFound(req, res);
@@ -181,6 +185,8 @@ function apiGetWaitingFor(
   }
   if (player.getWaitingFor() !== undefined ) {
     answer["result"] = "GO";
+  } else if (game.gameAge > prevGameAge) {
+    answer["result"] = "REFRESH";
   }
   res.write(JSON.stringify(answer));
   res.end();
@@ -287,7 +293,8 @@ function getPlayer(player: Player, game: Game): string {
     victoryPointsBreakdown: player.victoryPointsBreakdown,
     waitingFor: getWaitingFor(player.getWaitingFor()),
     gameLog: game.gameLog,
-    isSoloModeWin: game.isSoloModeWin()
+    isSoloModeWin: game.isSoloModeWin(),
+    gameAge: game.gameAge
   } as PlayerModel;
   return JSON.stringify(output);
 }

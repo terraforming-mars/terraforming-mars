@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class Research implements IProjectCard {
     public cost: number = 11;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.SCIENCE];
     public name: string = "Research";
     public cardType: CardType = CardType.AUTOMATED;
@@ -14,12 +15,10 @@ export class Research implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
+        player.victoryPoints++;
         for (let i = 0; i < 2; i++) {
             player.cardsInHand.push(game.dealer.dealCard());
         }
         return undefined;
-    }
-    public getVictoryPoints() {
-        return 1;
     }
 }

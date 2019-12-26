@@ -5,6 +5,7 @@ import {Player} from '../Player';
 
 export class AdvancedEcosystems implements IProjectCard {
     public cost: number = 11;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.PLANT, Tags.MICROBES, Tags.ANIMAL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Advanced Ecosystems';
@@ -19,9 +20,7 @@ export class AdvancedEcosystems implements IProjectCard {
             'Requires a plant tag, a microbe tag, and an animal tag'
         );
       }
+      player.victoryPoints += 3;
       return undefined;
-    }
-    public getVictoryPoints() {
-      return 3;
     }
 }

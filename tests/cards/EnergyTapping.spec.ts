@@ -46,7 +46,6 @@ describe("EnergyTapping", function () {
         expect(action).to.eq(undefined);
         
         expect(player.energyProduction).to.eq(2);
-        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(-1);
     });
 
@@ -70,7 +69,7 @@ describe("EnergyTapping", function () {
         expect(player.energyProduction).to.eq(2); // increased
         expect(player2.energyProduction).to.eq(3); // not changed
         expect(player3.energyProduction).to.eq(4); // reduced
-        player.victoryPoints += card.getVictoryPoints();
+
         expect(player.victoryPoints).to.eq(-1);
     });
     it("Playable in solo mode", function () {
@@ -84,7 +83,6 @@ describe("EnergyTapping", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         
-        player.victoryPoints += card.getVictoryPoints();
         expect(player.energyProduction).to.eq(1);
         expect(player.victoryPoints).to.eq(-1);
     });

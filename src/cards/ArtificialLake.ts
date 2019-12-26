@@ -10,6 +10,7 @@ import * as constants from '../constants';
 
 export class ArtificialLake implements IProjectCard {
     public cost: number = 15;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = 'Artificial Lake';
     public cardType: CardType = CardType.AUTOMATED;
@@ -19,6 +20,7 @@ export class ArtificialLake implements IProjectCard {
       );
     }
     public play(player: Player, game: Game) {
+      player.victoryPoints++;
 
       if (game.getOceansOnBoard() >= constants.MAX_OCEAN_TILES) return undefined;
 
@@ -30,8 +32,5 @@ export class ArtificialLake implements IProjectCard {
             return undefined;
           }
       );
-    }
-    public getVictoryPoints() {
-      return 1;
     }
 }

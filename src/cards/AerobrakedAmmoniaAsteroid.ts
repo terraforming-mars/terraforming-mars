@@ -7,6 +7,7 @@ import {SelectCard} from '../inputs/SelectCard';
 
 export class AerobrakedAmmoniaAsteroid implements IProjectCard {
     public cost: number = 26;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = 'Aerobraked Ammonia Asteroid';
     public cardType: CardType = CardType.EVENT;

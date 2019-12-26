@@ -8,6 +8,7 @@ import {ResourceType} from '../ResourceType';
 
 export class Decomposers implements IProjectCard {
     public cost: number = 5;
+    public nonNegativeVPIcon: boolean = true;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public tags: Array<Tags> = [Tags.MICROBES];
     public cardType: CardType = CardType.ACTIVE;

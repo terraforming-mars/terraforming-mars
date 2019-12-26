@@ -8,6 +8,7 @@ import { Game } from "../Game";
 
 export class SpaceElevator implements IActionCard, IProjectCard {
     public cost: number = 27;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SPACE, Tags.STEEL];
     public name: string = "Space Elevator";
     public cardType: CardType = CardType.ACTIVE;
@@ -16,6 +17,7 @@ export class SpaceElevator implements IActionCard, IProjectCard {
     }
     public play(player: Player, _game: Game) {
         player.titaniumProduction++;
+        player.victoryPoints += 2;
         return undefined;
     }
     public canAct(player: Player): boolean {
@@ -25,9 +27,6 @@ export class SpaceElevator implements IActionCard, IProjectCard {
         player.steel--;
         player.megaCredits += 5;
         return undefined;
-    }
-    public getVictoryPoints() {
-        return 2;
     }
 }
 

@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class MirandaResort implements IProjectCard {
     public cost: number = 12;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = "Miranda Resort";
     public cardType: CardType = CardType.AUTOMATED;
@@ -14,10 +15,8 @@ export class MirandaResort implements IProjectCard {
         return true;
     }
     public play(player: Player, _game: Game) {
+        player.victoryPoints++;
         player.megaCreditProduction += player.getTagCount(Tags.EARTH);
         return undefined;
-    }
-    public getVictoryPoints() {
-        return 1;
     }
 }

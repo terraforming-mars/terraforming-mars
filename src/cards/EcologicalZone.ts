@@ -12,6 +12,7 @@ import {ISpace} from '../ISpace';
 
 export class EcologicalZone implements IProjectCard {
   public cost: number = 12;
+  public nonNegativeVPIcon: boolean = true;
   public resourceType: ResourceType = ResourceType.ANIMAL;
   public tags: Array<Tags> = [Tags.ANIMAL, Tags.PLANT];
   public cardType: CardType = CardType.ACTIVE;

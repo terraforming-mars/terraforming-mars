@@ -22,7 +22,6 @@ describe("LargeConvoy", function () {
         expect(action).not.to.eq(undefined);
         if (action === undefined) return;
 
-        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(2);
         expect(player.cardsInHand.length).to.eq(2);
         expect(player.plants).to.eq(5);
@@ -45,7 +44,6 @@ describe("LargeConvoy", function () {
         expect(action).not.to.eq(undefined);
         if (action === undefined) return;
 
-        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(2);
         expect(player.cardsInHand.length).to.eq(2);
         expect(player.plants).to.eq(0);
@@ -74,7 +72,6 @@ describe("LargeConvoy", function () {
         expect(action).not.to.eq(undefined);
         if (action === undefined) return;
 
-        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(2);
         expect(player.cardsInHand.length).to.eq(2);
         expect(player.plants).to.eq(0);

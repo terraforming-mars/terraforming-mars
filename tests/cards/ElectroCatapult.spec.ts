@@ -27,7 +27,6 @@ describe("ElectroCatapult", function () {
         const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.energyProduction).to.eq(0);
-        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
     });
     it("Should act", function () {

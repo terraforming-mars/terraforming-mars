@@ -13,7 +13,6 @@ describe("PhobosSpaceHaven", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         expect(player.titaniumProduction).to.eq(1);
-        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(3);
         expect(game.getCitiesInPlay()).to.eq(1);
     });

@@ -8,6 +8,7 @@ import { ResourceType } from "../ResourceType";
 
 export class PhysicsComplex implements IActionCard, IProjectCard {
     public cost: number = 12;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public name: string = "Physics Complex";
     public cardType: CardType = CardType.ACTIVE;

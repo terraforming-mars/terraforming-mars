@@ -10,6 +10,7 @@ export interface IProjectCard extends ICard {
     cardType: CardType;
     cost: number;
     resourceType?: ResourceType;
+    nonNegativeVPIcon?: boolean;
     postPlay?: boolean;
 }
 

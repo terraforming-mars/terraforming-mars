@@ -21,7 +21,6 @@ describe("SoilFactory", function () {
         expect(action).to.eq(undefined);
         expect(player.energyProduction).to.eq(0);
         expect(player.plantProduction).to.eq(1);
-        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
     });
 });

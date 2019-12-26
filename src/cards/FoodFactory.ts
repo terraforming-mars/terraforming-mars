@@ -6,6 +6,7 @@ import {Player} from '../Player';
 
 export class FoodFactory implements IProjectCard {
   public cost: number = 12;
+  public nonNegativeVPIcon: boolean = true;
   public tags: Array<Tags> = [Tags.STEEL];
   public name: string = 'Food Factory';
   public cardType: CardType = CardType.AUTOMATED;
@@ -15,9 +16,7 @@ export class FoodFactory implements IProjectCard {
   public play(player: Player) {
     player.plantProduction--;
     player.megaCreditProduction += 4;
+    player.victoryPoints++;
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }

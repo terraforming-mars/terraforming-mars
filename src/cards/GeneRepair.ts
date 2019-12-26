@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class GeneRepair implements IProjectCard {
     public cost: number = 12;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Gene Repair";
@@ -18,9 +19,7 @@ export class GeneRepair implements IProjectCard {
             throw "Requires 3 science tags.";
         }
         player.megaCreditProduction += 2;
+        player.victoryPoints += 2;
         return undefined;
-    }
-    public getVictoryPoints() {
-      return 2;
     }
 }

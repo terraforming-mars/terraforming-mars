@@ -7,7 +7,8 @@ import { Game } from "../Game";
 
 export class TectonicStressPower implements IProjectCard {
     public cost: number = 18;
-     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
+    public nonNegativeVPIcon: boolean = true;
+    public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public name: string = "Tectonic Stress Power";
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, _game: Game): boolean {
@@ -18,9 +19,7 @@ export class TectonicStressPower implements IProjectCard {
             throw "Requires 2 science tags";
         }
         player.energyProduction += 3;
+        player.victoryPoints++;
         return undefined;
-    }
-    public getVictoryPoints() {
-        return 1;
     }
 }

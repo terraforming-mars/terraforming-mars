@@ -24,7 +24,6 @@ describe("AICentral", function () {
         player.energyProduction = 1;
         card.play(player);
         expect(player.energyProduction).to.eq(0);
-        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
     });
     it("Should take action", function () {

@@ -10,6 +10,7 @@ import { ResourceType } from "../ResourceType";
 
 export class OlympusConference implements IProjectCard {
     public cost: number = 10;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.EARTH, Tags.STEEL];
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.SCIENCE;
@@ -37,10 +38,8 @@ export class OlympusConference implements IProjectCard {
         }
         return undefined;
     }
-    public play() {
+    public play(player: Player) {
+        player.victoryPoints++;
         return undefined;
-    }
-    public getVictoryPoints() {
-        return 1;
     }
 }

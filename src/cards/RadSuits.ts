@@ -7,6 +7,7 @@ import { Tags } from "./Tags";
 
 export class RadSuits implements IProjectCard {
     public cost: number = 6;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Rad-Suits";
@@ -18,9 +19,7 @@ export class RadSuits implements IProjectCard {
             throw "Must have 2 cities in play";
         }
         player.megaCreditProduction++;
+        player.victoryPoints++;
         return undefined;
-    }
-    public getVictoryPoints() {
-        return 1;
     }
 }

@@ -8,6 +8,7 @@ import {SelectSpace} from '../inputs/SelectSpace';
 
 export class BigAsteroid implements IProjectCard {
     public cost: number = 27;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
     public name: string = 'Big Asteroid';

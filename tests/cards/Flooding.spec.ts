@@ -38,7 +38,5 @@ describe("Flooding", function () {
         player.megaCredits = 4;
         subActionSelectPlayer.cb(player);
         expect(player.megaCredits).to.eq(0);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(-1);
     });
 });

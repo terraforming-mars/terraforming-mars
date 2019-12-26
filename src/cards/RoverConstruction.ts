@@ -8,6 +8,7 @@ import { TileType } from "../TileType";
 
 export class RoverConstruction implements IProjectCard {
     public cost: number = 8;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Rover Construction";
     public cardType: CardType = CardType.ACTIVE;
@@ -19,10 +20,8 @@ export class RoverConstruction implements IProjectCard {
             player.megaCredits += 2;
         }
     }
-    public play() {
+    public play(player: Player) {
+        player.victoryPoints++;
         return undefined;
-    }
-    public getVictoryPoints() {
-        return 1;
     }
 }

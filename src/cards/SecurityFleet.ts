@@ -8,6 +8,7 @@ import { ResourceType } from "../ResourceType";
 
 export class SecurityFleet implements IActionCard, IProjectCard {
     public cost: number = 12;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Security Fleet";

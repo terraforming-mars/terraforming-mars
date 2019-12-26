@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class NoctisFarming implements IProjectCard {
     public cost: number = 10;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];
     public name: string = "Noctis Farming";
     public cardType: CardType = CardType.AUTOMATED;
@@ -16,9 +17,7 @@ export class NoctisFarming implements IProjectCard {
     public play(player: Player) {
         player.megaCreditProduction++;
         player.plants += 2;
+        player.victoryPoints++;
         return undefined;
-    }
-    public getVictoryPoints() {
-        return 1;
     }
 }

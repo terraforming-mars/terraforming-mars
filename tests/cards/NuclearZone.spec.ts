@@ -15,7 +15,6 @@ describe("NuclearZone", function () {
         if (action !== undefined) {
           action.cb(action.availableSpaces[0]);
           expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.SPECIAL);
-          player.victoryPoints += card.getVictoryPoints();
           expect(player.victoryPoints).to.eq(-2);
         }  
         expect(game.getTemperature()).to.eq(-26);

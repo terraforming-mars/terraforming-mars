@@ -8,6 +8,7 @@ import { PlayerInput } from "../PlayerInput";
 
 export class Windmills implements IProjectCard {
     public cost: number = 6;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public name: string = "Windmills";
     public cardType: CardType = CardType.AUTOMATED;
@@ -16,9 +17,7 @@ export class Windmills implements IProjectCard {
     }
     public play(player: Player): PlayerInput | undefined {
         player.energyProduction++;
+        player.victoryPoints++;
         return undefined;
-    }
-    public getVictoryPoints() {
-        return 1;
     }
 }

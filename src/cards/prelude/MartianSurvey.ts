@@ -7,6 +7,7 @@ import { Game } from "../../Game";
 
 export class MartianSurvey implements IProjectCard {
     public cost: number = 9;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Martian Survey";
     public cardType: CardType = CardType.EVENT;
@@ -17,10 +18,8 @@ export class MartianSurvey implements IProjectCard {
     public play(player: Player, game: Game) {
 		for (let i = 0; i < 2; i++) {
             player.cardsInHand.push(game.dealer.dealCard());
-        } 
+        }
+		player.victoryPoints++;    
         return undefined;
     }
-    public getVictoryPoints() {
-      return 1;
-  }
 }

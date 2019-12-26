@@ -23,11 +23,9 @@ export class CorporateStronghold implements IProjectCard {
             game.addCityTile(player, space.id);
             player.energyProduction--;
             player.megaCreditProduction += 3;
+            player.victoryPoints -= 2;
             return undefined;
           }
       );
-    }
-    public getVictoryPoints() {
-      return -2;
     }
 }

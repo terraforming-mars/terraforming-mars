@@ -6,6 +6,7 @@ import { Player } from "../Player";
 
 export class IoMiningIndustries implements IProjectCard {
     public cost: number = 41;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = "Io Mining Industries";
     public cardType: CardType = CardType.AUTOMATED;

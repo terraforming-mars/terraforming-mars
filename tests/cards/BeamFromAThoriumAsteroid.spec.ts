@@ -16,7 +16,6 @@ describe("BeamFromAThoriumAsteroid", function () {
         player.playedCards.push(card);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
         expect(player.heatProduction).to.eq(3);
         expect(player.energyProduction).to.eq(3);

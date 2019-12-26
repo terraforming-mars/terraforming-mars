@@ -15,8 +15,7 @@ describe("BreathingFilters", function () {
     it("Should play", function () {
         const card = new BreathingFilters();
         const player = new Player("test", Color.BLUE, false);
-        card.play();
-        player.victoryPoints += card.getVictoryPoints();
+        card.play(player);
         expect(player.victoryPoints).to.eq(2);
     });
 });

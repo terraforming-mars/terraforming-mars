@@ -6,6 +6,7 @@ import {Game} from '../Game';
 
 export class ArchaeBacteria implements IProjectCard {
     public cost: number = 6;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.MICROBES];
     public name: string = 'ArchaeBacteria';
     public cardType: CardType = CardType.AUTOMATED;

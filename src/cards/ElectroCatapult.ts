@@ -10,6 +10,7 @@ import {SelectOption} from '../inputs/SelectOption';
 
 export class ElectroCatapult implements IActionCard, IProjectCard {
     public cost: number = 17;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = 'Electro Catapult';
     public cardType: CardType = CardType.ACTIVE;
@@ -45,9 +46,7 @@ export class ElectroCatapult implements IActionCard, IProjectCard {
     }
     public play(player: Player) {
       player.energyProduction--;
+      player.victoryPoints++;
       return undefined;
-    }
-    public getVictoryPoints() {
-      return 1;
     }
 }

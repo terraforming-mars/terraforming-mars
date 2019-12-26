@@ -18,6 +18,7 @@ export class EnergyTapping implements IProjectCard {
   }
   private doPlay(player: Player) {
     player.energyProduction++;
+    player.victoryPoints--;
     return undefined;
   }
   public play(player: Player, game: Game) {
@@ -42,8 +43,5 @@ export class EnergyTapping implements IProjectCard {
           return this.doPlay(player);
         }
     );
-  }
-  public getVictoryPoints() {
-    return -1;
   }
 }

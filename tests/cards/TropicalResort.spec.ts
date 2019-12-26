@@ -21,7 +21,6 @@ describe("TropicalResort", function () {
         expect(action).to.eq(undefined);
         expect(player.heatProduction).to.eq(0);
         expect(player.megaCreditProduction).to.eq(3);
-        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(2);
     });
 });

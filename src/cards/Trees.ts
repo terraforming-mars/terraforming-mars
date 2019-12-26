@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class Trees implements IProjectCard {
     public cost: number = 13;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.PLANT];
     public name: string = "Trees";
     public cardType: CardType = CardType.AUTOMATED;
@@ -16,9 +17,7 @@ export class Trees implements IProjectCard {
     public play(player: Player) {
         player.plantProduction += 3;
         player.plants++;
+        player.victoryPoints++;
         return undefined;
-    }
-    public getVictoryPoints() {
-        return 1;
     }
 }

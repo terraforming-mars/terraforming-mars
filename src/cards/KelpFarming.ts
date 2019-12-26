@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class KelpFarming implements IProjectCard {
     public cost: number = 17;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.PLANT];
     public name: string = "Kelp Farming";
     public cardType: CardType = CardType.AUTOMATED;
@@ -17,9 +18,7 @@ export class KelpFarming implements IProjectCard {
         player.megaCreditProduction += 2;
         player.plantProduction += 3;
         player.plants += 2;
+        player.victoryPoints++;
         return undefined;
-    }
-    public getVictoryPoints() {
-        return 1;
     }
 }

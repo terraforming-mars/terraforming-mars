@@ -7,6 +7,7 @@ import { Game } from "../Game";
 
 export class MedicalLab implements IProjectCard {
     public cost: number = 13;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Medical Lab";
@@ -15,9 +16,7 @@ export class MedicalLab implements IProjectCard {
     }
     public play(player: Player, _game: Game) {
         player.megaCreditProduction += Math.floor((player.getTagCount(Tags.STEEL) + 1) / 2);
+        player.victoryPoints++;
         return undefined;
-    }
-    public getVictoryPoints() {
-        return 1;
     }
 }

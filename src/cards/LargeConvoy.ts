@@ -13,6 +13,7 @@ import { PlayerInput } from "../PlayerInput";
 
 export class LargeConvoy implements IProjectCard {
     public cost: number = 36;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
     public name: string = "Large Convoy";
     public cardType: CardType = CardType.EVENT;
@@ -21,6 +22,7 @@ export class LargeConvoy implements IProjectCard {
     }
     public play(player: Player, game: Game): PlayerInput | undefined {
         player.cardsInHand.push(game.dealer.dealCard(), game.dealer.dealCard());
+        player.victoryPoints += 2;
 
         const addOcean = () => {
             if (game.noOceansAvailable()) return undefined;
@@ -58,8 +60,5 @@ export class LargeConvoy implements IProjectCard {
                 }
             )
         );
-    }
-    public getVictoryPoints() {
-        return 2;
     }
 }

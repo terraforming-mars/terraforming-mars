@@ -11,7 +11,6 @@ describe("CallistoPenalMines", function () {
         const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.megaCreditProduction).to.eq(3);
-        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(2);
     });
 });

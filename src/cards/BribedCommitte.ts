@@ -14,10 +14,7 @@ export class BribedCommitte implements IProjectCard {
     }
     public play(player: Player) {
       player.terraformRating += 2;
+      player.victoryPoints -= 2;
       return undefined;
-    }
-
-    public getVictoryPoints() {
-      return -2;
     }
 }

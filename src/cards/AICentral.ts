@@ -7,6 +7,7 @@ import {IActionCard} from './ICard';
 
 export class AICentral implements IActionCard, IProjectCard {
     public cost: number = 21;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public cardType: CardType = CardType.ACTIVE;
     public name: string = 'AI Central';
@@ -16,13 +17,11 @@ export class AICentral implements IActionCard, IProjectCard {
     }
     public play(player: Player) {
       player.energyProduction--;
+      player.victoryPoints++;
       return undefined;
     }
     public canAct(): boolean {
       return true;
-    }
-    public getVictoryPoints() {
-      return 1;
     }
     public action(player: Player, game: Game) {
       player.cardsInHand.push(

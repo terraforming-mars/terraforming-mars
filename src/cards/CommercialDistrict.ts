@@ -10,6 +10,7 @@ import {ISpace} from '../ISpace';
 
 export class CommercialDistrict implements IProjectCard {
     public cost: number = 16;
+    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = 'Commercial District';
     public cardType: CardType = CardType.AUTOMATED;

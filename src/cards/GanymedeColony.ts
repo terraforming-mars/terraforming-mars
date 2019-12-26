@@ -16,8 +16,8 @@ export class GanymedeColony implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public onGameEnd(player: Player) {
-        player.victoryPoints += player.getTagCount(Tags.JOVIAN);
+    public getVictoryPoints(player: Player) {
+        return player.getTagCount(Tags.JOVIAN);
     }
     public play(player: Player, game: Game) {
         game.addCityTile(player, SpaceName.GANYMEDE_COLONY, SpaceType.COLONY);

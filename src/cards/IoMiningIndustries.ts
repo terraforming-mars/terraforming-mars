@@ -13,8 +13,8 @@ export class IoMiningIndustries implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public onGameEnd(player: Player) {
-        player.victoryPoints += player.getTagCount(Tags.JOVIAN);
+    public getVictoryPoints(player: Player) {
+        return player.getTagCount(Tags.JOVIAN);
     }
     public play(player: Player) {
         player.titaniumProduction += 2;

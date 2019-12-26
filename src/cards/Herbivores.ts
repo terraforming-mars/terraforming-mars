@@ -37,8 +37,8 @@ export class Herbivores implements IProjectCard {
         return this.getPlayersWithPlantProduction(player, game).length > 0;
     }
 
-    public onGameEnd(player: Player) {
-        player.victoryPoints += Math.floor(player.getResourcesOnCard(this) / 2);
+    public getVictoryPoints(player: Player) {
+        return Math.floor(player.getResourcesOnCard(this) / 2);
     }
 
     public onTilePlaced(cardOwner: Player, space: ISpace) {

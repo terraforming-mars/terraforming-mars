@@ -21,8 +21,8 @@ export class SmallAnimals implements IActionCard, IProjectCard {
     private getAvailablePlayers(_player: Player, game: Game): Array<Player> {
         return game.getPlayers().filter((player) => player.plantProduction > 0);
     }
-    public onGameEnd(player: Player) {
-        player.victoryPoints += Math.floor(player.getResourcesOnCard(this) / 2);
+    public getVictoryPoints(player: Player) {
+        return Math.floor(player.getResourcesOnCard(this) / 2);
     }
     public play(player: Player, game: Game) {
         if (game.getPlayers().length == 1) return undefined;

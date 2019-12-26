@@ -23,8 +23,7 @@ describe("Ants", function () {
         player.playedCards.push(card);
         card.play();
         player.addResourceTo(card, 5);
-        card.onGameEnd(player);
-        expect(player.victoryPoints).to.eq(2);
+        expect(card.getVictoryPoints(player)).to.eq(2);
     });
     it("Should action", function () {
         const card = new Ants();

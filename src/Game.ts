@@ -587,11 +587,11 @@ export class Game {
 
       // Give players any victory points from cards
       this.players.forEach((player) => {
-        player.playedCards.forEach((playedCard) => {
-          if (playedCard.onGameEnd !== undefined) {
-            playedCard.onGameEnd(player, this);
+        for (let playedCard of player.playedCards) {
+          if (playedCard.getVictoryPoints !== undefined) {
+            player.victoryPoints += playedCard.getVictoryPoints(player, this);
           }
-        });
+        }
         player.victoryPointsBreakdown.victoryPoints = player.victoryPoints;
       });
 

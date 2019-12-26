@@ -40,8 +40,7 @@ describe("Birds", function () {
 
         // Check victory points assignment
         player.addResourceTo(card, 2); 
-        card.onGameEnd(player);
-        expect(player.victoryPoints).to.eq(2);
+        expect(card.getVictoryPoints(player)).to.eq(2);
     });
     it("Should act", function () {
         const card = new Birds();

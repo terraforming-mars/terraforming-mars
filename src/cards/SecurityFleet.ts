@@ -16,8 +16,8 @@ export class SecurityFleet implements IActionCard, IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public onGameEnd(player: Player) {
-        player.victoryPoints += player.getResourcesOnCard(this);
+    public getVictoryPoints(player: Player) {
+        return player.getResourcesOnCard(this);
     }
     public play() {
         return undefined;

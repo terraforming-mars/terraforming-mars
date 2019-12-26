@@ -80,8 +80,7 @@ describe("Herbivores", function () {
         game.addGreenery(player2, game.getAvailableSpacesOnLand(player2)[0].id);
         expect(player.getResourcesOnCard(card)).to.eq(2); // i.e. not changed
 
-        card.onGameEnd(player);
-        expect(player.victoryPoints).to.eq(1);
+        expect(card.getVictoryPoints(player)).to.eq(1);
     });
 
     it("Should be playable in solo mode", function () {
@@ -110,8 +109,6 @@ describe("Herbivores", function () {
 
         expect(player.getResourcesOnCard(card)).to.eq(3);
 
-        console.log("Here we go again");
-        card.onGameEnd(player);
-        expect(player.victoryPoints).to.eq(1);
+        expect(card.getVictoryPoints(player)).to.eq(1);
     });
 });

@@ -18,10 +18,11 @@ export class SearchForLife implements IActionCard, IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() <= 6 + player.getRequirementsBonus(game);
     }
-    public onGameEnd(player: Player) {
+    public getVictoryPoints(player: Player) {
         if (player.getResourcesOnCard(this) > 0) {
-            player.victoryPoints += 3;
+            return  3;
         }
+        return 0;
     }
     public play() {
         return undefined;

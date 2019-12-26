@@ -72,7 +72,7 @@ export class GiantIceAsteroid implements IProjectCard {
             )
         }
 
-        if (opts.length == 0) {
+        if (opts.length === 0) {
             return game.increaseTemperature(player, 2);
         }
 

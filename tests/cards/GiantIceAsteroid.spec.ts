@@ -9,6 +9,10 @@ import { ProtectedHabitats } from "../../src/cards/ProtectedHabitats";
 import { maxOutOceans } from "../TestingUtils";
 
 describe("GiantIceAsteroid", function () {
+    it("Can play", function () {
+        const card = new GiantIceAsteroid();
+        expect(card.canPlay()).to.eq(true);
+    });
     it("Should play", function () {
         const card = new GiantIceAsteroid();
         const player = new Player("test", Color.BLUE, false);
@@ -18,10 +22,9 @@ describe("GiantIceAsteroid", function () {
         player2.plants = 6;
         player3.plants = 16;
 
-        const action = card.play(player, game);
+        const action = card.play(player, game) as AndOptions;
         expect(action).not.to.eq(undefined);
         expect(action instanceof AndOptions).to.eq(true);
-        if (! (action instanceof AndOptions)) return;
         action.options[0].cb(player2);
         expect(player2.plants).to.eq(0);
         action.options[1].cb(game.getAvailableSpacesForOcean(player)[0]);

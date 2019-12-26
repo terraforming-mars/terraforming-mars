@@ -8,6 +8,10 @@ import { SelectSpace } from "../../src/inputs/SelectSpace";
 import { TileType } from "../../src/TileType";
 
 describe("MoholeArea", function () {
+    it("Can play", function () {
+        const card = new MoholeArea();
+        expect(card.canPlay()).to.eq(true);
+    });
     it("Should play", function () {
         const card = new MoholeArea();
         const player = new Player("test", Color.BLUE, false);

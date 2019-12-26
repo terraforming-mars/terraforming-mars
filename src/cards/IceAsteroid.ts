@@ -15,7 +15,7 @@ export class IceAsteroid implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public play(player: Player, game: Game) {
+    public static placeTwoOceans(player: Player, game: Game): SelectSpace | undefined {
         let available = game.getAvailableSpacesForOcean(player);
         if (available.length === 0 || game.noOceansAvailable()) {
             return undefined;
@@ -32,4 +32,5 @@ export class IceAsteroid implements IProjectCard {
             });
         });
     }
+    public play: (player: Player, game: Game) => SelectSpace | undefined = IceAsteroid.placeTwoOceans;
 }

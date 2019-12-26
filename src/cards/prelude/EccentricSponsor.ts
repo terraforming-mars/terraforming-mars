@@ -17,9 +17,9 @@ export class EccentricSponsor extends PreludeCard implements IProjectCard {
         return 0;
     }
 
-    public play(player: Player, _game: Game) {  
+    public play(player: Player) {
         player.reduceActionsTakenThisRound();	
-        return undefined;    
+        return undefined;
     }
 }
 

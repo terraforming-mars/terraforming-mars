@@ -20,6 +20,7 @@ describe("InterstellarColonyShip", function () {
         player.playedCards.push(new GeneRepair(), new GeneRepair(), new GeneRepair(), new GeneRepair(), new GeneRepair());
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(4);
     });
 });

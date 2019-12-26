@@ -24,6 +24,7 @@ describe("LakeMarineris", function () {
         expect(subAction).not.to.eq(undefined);
         subAction!.cb(game.getAvailableSpacesForOcean(player)[0]);
         expect(game.getOceansOnBoard()).to.eq(2);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(2);
     });
 });

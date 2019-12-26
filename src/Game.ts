@@ -588,8 +588,10 @@ export class Game {
       // Give players any victory points from cards
       this.players.forEach((player) => {
         for (let playedCard of player.playedCards) {
+          player.victoryPointsBreakdown.VPdetails.push("All static VP : " + player.victoryPoints);
           if (playedCard.getVictoryPoints !== undefined) {
             player.victoryPoints += playedCard.getVictoryPoints(player, this);
+            player.victoryPointsBreakdown.VPdetails.push(playedCard.name + " : " + playedCard.getVictoryPoints(player, this));
           }
         }
         player.victoryPointsBreakdown.victoryPoints = player.victoryPoints;

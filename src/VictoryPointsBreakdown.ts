@@ -6,6 +6,7 @@ export class VictoryPointsBreakdown {
     public city: number = 0;
     public victoryPoints = 0;
     public total = 0;
+    public VPdetails: Array<string> = [];
 
     public updateTotal(): void {
         this.total = 0;

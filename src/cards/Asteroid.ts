@@ -15,12 +15,9 @@ export class Asteroid implements IProjectCard {
       return true;
     }
     public play(player: Player, game: Game) {
-      const playersToRemovePlantsFrom = game.getPlayers().filter(
-        (p) => p.id != player.id && p.plants > 0 && ! p.hasProtectedHabitats()
-      )
+      const playersToRemovePlantsFrom = player.getOtherPlayersWithPlantsToRemove(game);
 
-
-      if (game.getPlayers().length == 1 || playersToRemovePlantsFrom.length == 0) {
+      if (game.getPlayers().length === 1 || playersToRemovePlantsFrom.length === 0) {
         player.titanium += 2;
         return game.increaseTemperature(player, 1);
       }

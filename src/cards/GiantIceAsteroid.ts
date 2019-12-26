@@ -22,12 +22,10 @@ export class GiantIceAsteroid implements IProjectCard {
     public play(player: Player, game: Game) {
         var opts: Array<SelectPlayer | SelectSpace> = [];
 
-        const playersToRemovePlantsFrom = game.getPlayers().filter(
-            (p) => p.id != player.id && p.plants > 0 && ! p.hasProtectedHabitats()
-        )
+        const playersToRemovePlantsFrom = player.getOtherPlayersWithPlantsToRemove(game);
 
         if (playersToRemovePlantsFrom.length > 0) {
-            if (playersToRemovePlantsFrom.length == 1) {
+            if (playersToRemovePlantsFrom.length === 1) {
                 playersToRemovePlantsFrom[0].removePlants(
                     player, 
                     Math.min(8, playersToRemovePlantsFrom[0].plants)

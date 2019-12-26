@@ -10,7 +10,6 @@ import { SelectSpace } from "../inputs/SelectSpace";
 
 export class NaturalPreserve implements IProjectCard {
     public cost: number = 9;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Natural Preserve";
@@ -25,8 +24,10 @@ export class NaturalPreserve implements IProjectCard {
         return new SelectSpace("Select space for special tile next to no other tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
             player.megaCreditProduction++;
-            player.victoryPoints++;
             return undefined;
         });
+    }
+    public getVictoryPoints() {
+        return 1;
     }
 }

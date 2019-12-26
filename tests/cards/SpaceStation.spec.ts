@@ -11,8 +11,9 @@ describe("SpaceStation", function () {
         const card = new SpaceStation();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        const action = card.play(player, game);
+        const action = card.play();
         expect(action).to.eq(undefined);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
         expect(card.getCardDiscount(player, game, card)).to.eq(2);
         expect(card.getCardDiscount(player, game, new Bushes())).to.eq(0);

@@ -10,7 +10,6 @@ import {Game} from '../Game';
 
 export class Fish implements IActionCard, IProjectCard {
   public cost: number = 9;
-  public nonNegativeVPIcon: boolean = true;
   public tags: Array<Tags> = [Tags.ANIMAL];
   public name: string = 'Fish';
   public resourceType: ResourceType = ResourceType.ANIMAL;

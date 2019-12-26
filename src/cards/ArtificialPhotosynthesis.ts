@@ -7,7 +7,6 @@ import {SelectOption} from '../inputs/SelectOption';
 
 export class ArtificialPhotosynthesis implements IProjectCard {
     public cost: number = 12;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Artificial Photosynthesis';

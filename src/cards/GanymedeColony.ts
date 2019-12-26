@@ -9,7 +9,6 @@ import { SpaceType } from "../SpaceType";
 
 export class GanymedeColony implements IProjectCard {
     public cost: number = 20;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE, Tags.CITY];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Ganymede Colony";

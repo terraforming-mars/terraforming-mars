@@ -30,6 +30,7 @@ describe("OpenCity", function () {
         expect(player.energyProduction).to.eq(0);
         expect(player.megaCreditProduction).to.eq(4);
         expect(player.plants).to.eq(2);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
         expect(game.getCitiesInPlayOnMars()).to.eq(1); 
     });

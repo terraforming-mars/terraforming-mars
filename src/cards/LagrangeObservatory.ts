@@ -8,7 +8,6 @@ import { Tags } from "./Tags";
 export class LagrangeObservatory implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public cost: number = 9;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.SPACE];
     public name: string = "Lagrange Observatory";
     public canPlay(): boolean {
@@ -16,7 +15,9 @@ export class LagrangeObservatory implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         player.cardsInHand.push(game.dealer.dealCard());
-        player.victoryPoints++;
         return undefined;
+    }
+    public getVictoryPoints() {
+        return 1;
     }
 }

@@ -6,7 +6,6 @@ import {Player} from '../Player';
 
 export class CallistoPenalMines implements IProjectCard {
     public cost: number = 24;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = 'Callisto Penal Mines';
     public cardType: CardType = CardType.AUTOMATED;
@@ -15,7 +14,9 @@ export class CallistoPenalMines implements IProjectCard {
     }
     public play(player: Player) {
       player.megaCreditProduction += 3;
-      player.victoryPoints += 2;
       return undefined;
+    }
+    public getVictoryPoints() {
+      return 2;
     }
 }

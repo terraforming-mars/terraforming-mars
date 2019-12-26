@@ -11,6 +11,7 @@ describe("AsteroidMining", function () {
         const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.titaniumProduction).to.eq(2);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(2);
     });
 });

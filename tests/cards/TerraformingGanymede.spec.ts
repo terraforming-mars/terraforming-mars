@@ -13,6 +13,7 @@ describe("TerraformingGanymede", function () {
         const game = new Game("foobar", [player,player2], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(2);
         player.playedCards.push(card);
         expect(player.terraformRating).to.eq(21);

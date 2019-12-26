@@ -17,6 +17,7 @@ describe("FoodFactory", function () {
         card.play(player);
         expect(player.plantProduction).to.eq(0);
         expect(player.megaCreditProduction).to.eq(4);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
     });
 });

@@ -14,10 +14,10 @@ describe("MedicalLab", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         expect(player.megaCreditProduction).to.eq(0);
-        expect(player.victoryPoints).to.eq(1);
         player.playedCards.push(new Capital());
         card.play(player, game);
         expect(player.megaCreditProduction).to.eq(1);
-        expect(player.victoryPoints).to.eq(2);
+        player.victoryPoints += card.getVictoryPoints();
+        expect(player.victoryPoints).to.eq(1);
     });
 });

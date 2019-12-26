@@ -7,7 +7,6 @@ import { Game } from "../Game";
 
 export class LightningHarvest implements IProjectCard {
     public cost: number = 8;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.ENERGY];
     public name: string = "Lightning Harvest";
     public cardType: CardType = CardType.AUTOMATED;
@@ -20,7 +19,9 @@ export class LightningHarvest implements IProjectCard {
         }
         player.energyProduction++;
         player.megaCreditProduction++;
-        player.victoryPoints++;
         return undefined;
+    }
+    public getVictoryPoints() {
+        return 1;
     }
 }

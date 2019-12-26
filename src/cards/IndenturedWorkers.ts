@@ -20,8 +20,10 @@ export class IndenturedWorkers implements IProjectCard {
         }
         return 0;
     }
-    public play(player: Player) {
-        player.victoryPoints--;
+    public play() {
         return undefined;
     } 
+    public getVictoryPoints() {
+        return -1;
+    }
 }

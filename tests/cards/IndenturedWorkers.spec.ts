@@ -10,8 +10,9 @@ describe("IndenturedWorkers", function () {
         const card = new IndenturedWorkers();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        const action = card.play(player);
+        const action = card.play();
         expect(action).to.eq(undefined);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(-1);
         expect(card.getCardDiscount(player, game)).to.eq(0);
     });

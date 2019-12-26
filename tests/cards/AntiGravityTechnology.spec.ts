@@ -14,7 +14,8 @@ describe("AntiGravityTechnology", function () {
         const card = new AntiGravityTechnology();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card, card, card, card, card, card, card);
-        card.play(player);
+        card.play();
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(3);
         expect(card.getCardDiscount()).to.eq(2); 
     });

@@ -5,7 +5,6 @@ import {Player} from '../Player';
 
 export class AdvancedAlloys implements IProjectCard {
     public cost: number = 9;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = 'Advanced Alloys';
     public cardType: CardType = CardType.ACTIVE;

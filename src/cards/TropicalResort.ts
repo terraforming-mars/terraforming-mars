@@ -7,7 +7,6 @@ import { Game } from "../Game";
 
 export class TropicalResort implements IProjectCard {
     public cost: number = 13;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Tropical Resort";
     public cardType: CardType = CardType.AUTOMATED;
@@ -20,7 +19,9 @@ export class TropicalResort implements IProjectCard {
         }
         player.heatProduction -= 2;
         player.megaCreditProduction += 3;
-        player.victoryPoints += 2;
         return undefined;
+    }
+    public getVictoryPoints() {
+        return 2;
     }
 }

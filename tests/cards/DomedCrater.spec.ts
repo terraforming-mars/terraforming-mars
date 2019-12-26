@@ -32,6 +32,7 @@ describe("DomedCrater", function () {
         expect(player.plants).to.eq(3);
         expect(player.energyProduction).to.eq(0);
         expect(player.megaCreditProduction).to.eq(3);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
     });
 });

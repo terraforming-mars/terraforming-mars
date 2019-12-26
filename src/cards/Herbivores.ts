@@ -11,7 +11,6 @@ import { TileType } from "../TileType";
 
 export class Herbivores implements IProjectCard {
     public cost: number = 12;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.ANIMAL];
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Herbivores";

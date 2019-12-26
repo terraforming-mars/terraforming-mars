@@ -23,6 +23,7 @@ describe("AsteroidMiningConsortium", function () {
             action.cb(player2);
         }
         expect(player.titaniumProduction).to.eq(2);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
     });
 });

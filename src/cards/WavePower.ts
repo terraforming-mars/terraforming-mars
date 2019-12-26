@@ -8,7 +8,6 @@ import { Game } from "../Game";
 export class WavePower implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY];
     public cost: number = 8;
-    public nonNegativeVPIcon: boolean = true;
     public name: string = "Wave Power";
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
@@ -16,8 +15,10 @@ export class WavePower implements IProjectCard {
     }
     public play(player: Player) {
         player.energyProduction++;
-        player.victoryPoints++;
         return undefined;
+    }
+    public getVictoryPoints() {
+        return 1;
     }
 }
 

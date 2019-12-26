@@ -13,8 +13,9 @@ describe("OlympusConference", function () {
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
         const game = new Game("foobar", [player,player], player);
-        const action = card.play(player);
+        const action = card.play();
         expect(action).to.eq(undefined);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
         expect(card.onCardPlayed(player, game, new Bushes())).to.eq(undefined) 
         card.onCardPlayed(player, game, card);

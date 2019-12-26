@@ -30,6 +30,7 @@ describe("Shuttles", function () {
         expect(action).to.eq(undefined);
         expect(player.energyProduction).to.eq(0);
         expect(player.megaCreditProduction).to.eq(2);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
         expect(card.getCardDiscount(player, game, new Bushes())).to.eq(0);
         expect(card.getCardDiscount(player, game, new TollStation())).to.eq(2);

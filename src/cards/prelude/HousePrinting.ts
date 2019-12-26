@@ -7,7 +7,6 @@ import { Game } from "../../Game";
 
 export class HousePrinting implements IProjectCard {
     public cost: number = 10;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "House Printing";
     public cardType: CardType = CardType.AUTOMATED;
@@ -15,8 +14,10 @@ export class HousePrinting implements IProjectCard {
         return true;
     }
     public play(player: Player, _game: Game) {
-        player.victoryPoints++;
         player.steelProduction++;
         return undefined;
+    }
+    public getVictoryPoints() {
+        return 1;
     }
 }

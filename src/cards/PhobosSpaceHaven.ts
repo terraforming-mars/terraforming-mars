@@ -9,7 +9,6 @@ import { SpaceType } from "../SpaceType";
 
 export class PhobosSpaceHaven implements IProjectCard {
     public cost: number = 25;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SPACE, Tags.CITY];
     public name: string = "Phobos Space Haven";
     public cardType: CardType = CardType.AUTOMATED;
@@ -19,7 +18,9 @@ export class PhobosSpaceHaven implements IProjectCard {
     public play(player: Player, game: Game) {
         game.addCityTile(player, SpaceName.PHOBOS_SPACE_HAVEN, SpaceType.COLONY);
         player.titaniumProduction++;
-        player.victoryPoints += 3;
         return undefined;
+    }
+    public getVictoryPoints() {
+        return 3;
     }
 }

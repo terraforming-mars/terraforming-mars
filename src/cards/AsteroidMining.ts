@@ -5,7 +5,6 @@ import {Player} from '../Player';
 
 export class AsteroidMining implements IProjectCard {
     public cost: number = 30;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Asteroid Mining';
@@ -14,7 +13,9 @@ export class AsteroidMining implements IProjectCard {
     }
     public play(player: Player) {
       player.titaniumProduction += 2;
-      player.victoryPoints += 2;
       return undefined;
+    }
+    public getVictoryPoints() {
+      return 2;
     }
 }

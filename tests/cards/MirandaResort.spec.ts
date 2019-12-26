@@ -14,6 +14,7 @@ describe("MirandaResort", function () {
         player.playedCards.push(new BusinessNetwork());
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
         expect(player.megaCreditProduction).to.eq(1);
     });

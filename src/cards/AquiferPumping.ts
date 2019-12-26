@@ -14,7 +14,6 @@ import * as constants from '../constants';
 
 export class AquiferPumping implements IActionCard, IProjectCard {
     public cost: number = 18;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = 'Aquifer Pumping';
     public cardType: CardType = CardType.ACTIVE;

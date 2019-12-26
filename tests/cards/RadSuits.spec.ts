@@ -22,6 +22,7 @@ describe("RadSuits", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         expect(player.megaCreditProduction).to.eq(1);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
     });
 });

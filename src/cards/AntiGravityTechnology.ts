@@ -5,7 +5,6 @@ import {Player} from '../Player';
 
 export class AntiGravityTechnology implements IProjectCard {
     public cost: number = 14;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = 'Anti-Gravity Technology';
     public cardType: CardType = CardType.ACTIVE;
@@ -15,8 +14,10 @@ export class AntiGravityTechnology implements IProjectCard {
     public getCardDiscount() {
       return 2;
     }
-    public play(player: Player) {
-      player.victoryPoints += 3;
+    public play() {
       return undefined;
+    }
+    public getVictoryPoints() {
+      return 3;
     }
 }

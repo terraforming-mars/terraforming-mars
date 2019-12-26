@@ -7,7 +7,6 @@ import {SelectPlayer} from '../inputs/SelectPlayer';
 
 export class AsteroidMiningConsortium implements IProjectCard {
     public cost: number = 13;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.JOVIAN];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Asteroid Mining Consortium';
@@ -15,7 +14,6 @@ export class AsteroidMiningConsortium implements IProjectCard {
       return player.titaniumProduction >= 1;
     }
     public play(player: Player, game: Game) {
-      player.victoryPoints++;
       if (game.getPlayers().length == 1) {
         player.titaniumProduction++;
         return undefined;
@@ -32,5 +30,8 @@ export class AsteroidMiningConsortium implements IProjectCard {
             return undefined;
           }
       );
+    }
+    public getVictoryPoints() {
+      return 1;
     }
 }

@@ -10,7 +10,6 @@ import { SelectOption } from "../inputs/SelectOption";
 
 export class MarsUniversity implements IProjectCard {
     public cost: number = 8;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public name: string = "Mars University";
     public cardType: CardType = CardType.ACTIVE;
@@ -33,8 +32,10 @@ export class MarsUniversity implements IProjectCard {
         }
         return undefined;
     }
-    public play(player: Player) {
-        player.victoryPoints++;
+    public play() {
         return undefined;
+    }
+    public getVictoryPoints() {
+        return 1;
     }
 }

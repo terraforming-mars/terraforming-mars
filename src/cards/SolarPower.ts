@@ -7,7 +7,6 @@ import { Game } from "../Game";
 
 export class SolarPower implements IProjectCard {
     public cost: number = 11;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Solar Power";
@@ -16,7 +15,9 @@ export class SolarPower implements IProjectCard {
     }
     public play(player: Player, _game: Game) {
         player.energyProduction++;
-        player.victoryPoints++;
         return undefined;
+    }
+    public getVictoryPoints() {
+        return 1;
     }
 }

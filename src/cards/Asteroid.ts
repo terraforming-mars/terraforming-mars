@@ -7,7 +7,6 @@ import {SelectPlayer} from '../inputs/SelectPlayer';
 
 export class Asteroid implements IProjectCard {
     public cost: number = 14;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SPACE];
     public name: string = 'Asteroid';
     public cardType: CardType = CardType.EVENT;

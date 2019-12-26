@@ -18,6 +18,7 @@ describe("AdvancedEcosystems", function () {
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(new Tardigrades(), new TundraFarming, new Pets());
         card.play(player);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(3);
     });
 });

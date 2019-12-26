@@ -10,7 +10,6 @@ import { SelectHowToPay } from "../inputs/SelectHowToPay";
 
 export class SearchForLife implements IActionCard, IProjectCard {
     public cost: number = 3;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.SCIENCE;

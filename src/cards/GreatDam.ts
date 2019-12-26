@@ -7,7 +7,6 @@ import { CardType } from "./CardType";
 
 export class GreatDam implements IProjectCard {
     public cost: number = 12;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Great Dam";
@@ -15,9 +14,11 @@ export class GreatDam implements IProjectCard {
         return game.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
-        player.victoryPoints++;
         player.energyProduction += 2;
         return undefined;
+    }
+    public getVictoryPoints() {
+        return 1;
     }
 }
 

@@ -20,8 +20,9 @@ describe("DustSeals", function () {
     it("Should play", function () {
         const card = new DustSeals();
         const player = new Player("test", Color.BLUE, false);
-        const action = card.play(player);
+        const action = card.play();
         expect(action).to.eq(undefined);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
     });
 });

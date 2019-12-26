@@ -14,8 +14,10 @@ export class ColonizerTrainingCamp implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
       return game.getOxygenLevel() <= 5 + player.getRequirementsBonus(game);
     }
-    public play(player: Player) {
-      player.victoryPoints += 2;
+    public play() {
       return undefined;
+    }
+    public getVictoryPoints() {
+      return 2;
     }
 }

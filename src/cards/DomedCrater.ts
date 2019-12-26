@@ -9,7 +9,6 @@ import {ISpace} from '../ISpace';
 
 export class DomedCrater implements IProjectCard {
     public cost: number = 24;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public name: string = 'Domed Crater';
     public cardType: CardType = CardType.AUTOMATED;
@@ -27,9 +26,11 @@ export class DomedCrater implements IProjectCard {
             player.plants += 3;
             player.energyProduction--;
             player.megaCreditProduction += 3;
-            player.victoryPoints++;
             return undefined;
           }
       );
+    }
+    public getVictoryPoints() {
+      return 1;
     }
 }

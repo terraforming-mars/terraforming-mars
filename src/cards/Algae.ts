@@ -6,7 +6,6 @@ import {Game} from '../Game';
 
 export class Algae implements IProjectCard {
     public cost: number = 10;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.PLANT];
     public name: string = 'Algae';
     public cardType: CardType = CardType.AUTOMATED;

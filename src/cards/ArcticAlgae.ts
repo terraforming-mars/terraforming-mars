@@ -8,7 +8,6 @@ import {TileType} from '../TileType';
 
 export class ArcticAlgae implements IProjectCard {
     public cost: number = 12;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.PLANT];
     public name: string = 'Arctic Algae';
     public cardType: CardType = CardType.ACTIVE;

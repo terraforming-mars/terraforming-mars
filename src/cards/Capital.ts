@@ -11,7 +11,6 @@ import {ISpace} from '../ISpace';
 
 export class Capital implements IProjectCard {
     public cost: number = 26;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Capital';

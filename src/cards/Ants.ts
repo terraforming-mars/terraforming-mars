@@ -9,7 +9,6 @@ import {ResourceType} from '../ResourceType';
 
 export class Ants implements IActionCard, IProjectCard {
     public cost: number = 9;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.MICROBES];
     public name: string = 'Ants';
     public resourceType: ResourceType = ResourceType.MICROBE;

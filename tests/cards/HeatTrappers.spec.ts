@@ -21,6 +21,7 @@ describe("HeatTrappers", function () {
         expect(action).to.eq(undefined);
 
         expect(player.heatProduction).to.eq(1); // Not changed
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(-1);
         expect(player.energyProduction).to.eq(1); // Incremented
     });
@@ -38,6 +39,7 @@ describe("HeatTrappers", function () {
         expect(action).to.eq(undefined);
 
         expect(player.heatProduction).to.eq(0); // Not changed
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(-1);
         expect(player.energyProduction).to.eq(1); // Incremented
         expect(player2.heatProduction).to.eq(5); // Reduced two steps
@@ -63,6 +65,7 @@ describe("HeatTrappers", function () {
 
         expect(player3.heatProduction).to.eq(2); // Not changed
         expect(player.heatProduction).to.eq(0); // Not changed
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(-1);
         expect(player.energyProduction).to.eq(1); // Incremented
         expect(player2.heatProduction).to.eq(5); // Reduced two steps

@@ -23,7 +23,6 @@ export class BiomassCombustors implements IProjectCard {
     }
     private doPlay(player: Player): undefined {
       player.energyProduction += 2;
-      player.victoryPoints--;
       return undefined;
     }
     public play(player: Player, game: Game) {
@@ -41,5 +40,8 @@ export class BiomassCombustors implements IProjectCard {
             return this.doPlay(player);
           }
       );
+    }
+    public getVictoryPoints() {
+      return -1;
     }
 }

@@ -1,6 +1,5 @@
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
-import { Game } from "../../Game";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
 
@@ -8,7 +7,7 @@ export class EcologyExperts extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT, Tags.MICROBES];
     public name: string = "Ecology Experts";
     public postPlay: boolean = true;
-    public getRequirementBonus(player: Player, _game: Game): number {
+    public getRequirementBonus(player: Player): number {
         const lastCardPlayed = player.getLastCardPlayedThisTurn();
         if (lastCardPlayed !== undefined && lastCardPlayed.name === this.name) {
             // Magic number high enough to always ignore requirements.
@@ -16,7 +15,7 @@ export class EcologyExperts extends PreludeCard implements IProjectCard {
         }
         return 0;
     }
-    public play(player: Player, _game: Game) {  
+    public play(player: Player) {
         player.reduceActionsTakenThisRound();
         player.plantProduction++;
         return undefined;

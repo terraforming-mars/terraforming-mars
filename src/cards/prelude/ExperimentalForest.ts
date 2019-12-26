@@ -11,9 +11,9 @@ export class ExperimentalForest extends PreludeCard implements IProjectCard {
     public name: string = "Experimental Forest";
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space for greenery tile", game.getAvailableSpacesForGreenery(player), (space: ISpace) => {
-	        for (let foundCard of game.drawCardsByTag(Tags.PLANT,2)) {
-                    player.cardsInHand.push(foundCard);
-                }
+	        for (let foundCard of game.drawCardsByTag(Tags.PLANT, 2)) {
+                player.cardsInHand.push(foundCard);
+            }
             return game.addGreenery(player, space.id);
         });
     }

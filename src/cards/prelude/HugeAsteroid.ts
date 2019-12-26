@@ -7,9 +7,12 @@ import { IProjectCard } from "../IProjectCard";
 export class HugeAsteroid extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = "Huge Asteroid";
+    public canPlay(player: Player) {
+        return player.canAfford(5);
+    }
     public play(player: Player, game: Game) {
-      player.megaCredits -=5;	
-		  return game.increaseTemperature(player, 3);
+        player.megaCredits -= 5;
+        return game.increaseTemperature(player, 3);
     }
 }
 

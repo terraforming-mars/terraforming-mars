@@ -18,6 +18,7 @@ describe("Windmills", function () {
         const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.energyProduction).to.eq(1);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
     });
 });

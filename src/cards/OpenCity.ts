@@ -9,7 +9,6 @@ import { ISpace } from "../ISpace";
 
 export class OpenCity implements IProjectCard {
     public cost: number = 23;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Open City";
@@ -22,8 +21,10 @@ export class OpenCity implements IProjectCard {
             player.energyProduction--;
             player.megaCreditProduction += 4;
             player.plants += 2;
-            player.victoryPoints++;
             return undefined;
         });
+    }
+    public getVictoryPoints() {
+        return 1;
     }
 }

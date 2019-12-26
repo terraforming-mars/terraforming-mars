@@ -7,7 +7,6 @@ import { Game } from "../Game";
 
 export class TundraFarming implements IProjectCard {
     public cost: number = 16;
-    public nonNegativeVPIcon: boolean = true;
     public cardType: CardType = CardType.AUTOMATED;
     public tags: Array<Tags> = [Tags.PLANT];
     public name: string = "Tundra Farming";
@@ -18,7 +17,9 @@ export class TundraFarming implements IProjectCard {
         player.plantProduction++;
         player.megaCreditProduction += 2;
         player.plants++;
-        player.victoryPoints += 2;
         return undefined;
+    }
+    public getVictoryPoints() {
+        return 2;
     }
 } 

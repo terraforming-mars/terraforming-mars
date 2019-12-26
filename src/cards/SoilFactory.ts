@@ -7,7 +7,6 @@ import { Game } from "../Game";
 
 export class SoilFactory implements IProjectCard {
     public cost: number = 9;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Soil Factory"
     public cardType: CardType = CardType.AUTOMATED;
@@ -20,7 +19,9 @@ export class SoilFactory implements IProjectCard {
         }
         player.energyProduction--;
         player.plantProduction++;
-        player.victoryPoints++;
         return undefined;
+    }
+    public getVictoryPoints() {
+        return 1;
     } 
 }

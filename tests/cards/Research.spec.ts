@@ -12,6 +12,7 @@ describe("Research", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
         expect(player.cardsInHand.length).to.eq(2);
         expect(player.cardsInHand[0]).not.to.eq(player.cardsInHand[1]);

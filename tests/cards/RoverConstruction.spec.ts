@@ -11,8 +11,9 @@ describe("RoverConstruction", function () {
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
-        const action = card.play(player);
+        const action = card.play();
         expect(action).to.eq(undefined);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
         player.playedCards.push(card);
         game.addCityTile(player, game.getAvailableSpacesOnLand(player)[0].id);

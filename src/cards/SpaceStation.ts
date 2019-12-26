@@ -7,7 +7,6 @@ import { CardType } from "./CardType";
 
 export class SpaceStation implements IProjectCard {
     public cost: number = 10;
-    public nonNegativeVPIcon: boolean = true;
     public tags: Array<Tags> = [Tags.SPACE];
     public name: string = "Space Station";
     public cardType: CardType = CardType.ACTIVE;
@@ -20,9 +19,11 @@ export class SpaceStation implements IProjectCard {
         }
         return 0;
     }
-    public play(player: Player, _game: Game) {
-        player.victoryPoints++;
+    public play() {
         return undefined;
+    }
+    public getVictoryPoints() {
+        return 1;
     }
 }
     

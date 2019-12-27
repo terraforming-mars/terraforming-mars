@@ -84,6 +84,11 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         },
         cardChanged: function () {
             this.$data.megaCredits = this.getCardCost();
+            
+            this.titanium = 0;
+            this.steel = 0;
+            this.heat = 0;
+            this.microbes = 0;
         },
         hasWarning: function () {
             return this.$data.warning !== undefined;
@@ -124,39 +129,108 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 this.$data.card,
                 JSON.stringify(htp)
             ]]);
+        },
+        getCssClassFor: function (action: string, target: string): string {
+            let currentValue: number = (this as any)[target];
+            let maxValue: number = (this.player as any)[target];
+            let disablingLimit = (action === "<") ? 0 : maxValue
+
+            if (currentValue === disablingLimit) return "is-disabled";
+            return "is-primary"
+        },
+        getRersourceRate: function (resourceName: string): number {
+            let rate = 1; // one resource == one money
+            if (resourceName === "titanium") {
+                rate = this.player.titaniumValue;
+            } else if (resourceName === "steel") {
+                rate = this.player.steelValue;
+            }
+            return rate;
+        },
+        reduceValue: function (target: string, to: number): void {
+            let currentValue: number = (this as any)[target];
+
+            if (currentValue === 0) return;
+
+            const realTo = Math.min(to, currentValue);
+            (this as any)[target] -= realTo;
+
+            if (target === "megaCredits" || realTo === 0) return;
+
+            let rate = this.getRersourceRate(target)
+            this.addValue("megaCredits", rate * realTo);
+
+        },
+        addValue: function (target: string, to: number): void {
+            let currentValue: number = (this as any)[target];
+            let maxValue: number = (this.player as any)[target];
+            if (target === "megaCredits") maxValue = this.getCardCost();
+
+            if (currentValue === maxValue) return;
+            
+            const realTo = (currentValue + to <= maxValue) ? to : maxValue - currentValue;
+            (this as any)[target] += realTo;
+
+            if (target === "megaCredits" || realTo === 0) return;
+
+            let rate = this.getRersourceRate(target)
+            this.reduceValue("megaCredits", rate * realTo);
         }
     },
     template: `
-<div>
-  <div v-if="showtitle === true">{{playerinput.title}}</div>
-  <label v-for="availableCard in playerinput.cards" :key="availableCard">
-    <input class="nes-radio" type="radio" v-model="card" v-on:change="cardChanged()" :value="availableCard" />
-    <card class="cardbox" :card="availableCard"></card>
-  </label>
-  <div class="nofloat nes-field" v-if="canUseSteel()">
-    <label class="nofloat">Steel:</label>
-    <input class="nes-input" type="number" value="0" min="0" :max="player.steel" v-model.number="steel" />
-  </div>
-  <div v-if="canUseTitanium()" class="nes-field">
-    <label class="nofloat">Titanium:</label>
-    <input class="nes-input" type="number" value="0" min="0" :max="player.titanium" v-model.number="titanium" />
-  </div>
-  <div v-if="canUseHeat()" class="nes-field">
-    <label class="nofloat">Heat:</label>
-    <input class="nes-input" type="number" value="0" min="0" :max="player.heat" v-model.number="heat" />
-  </div>
-  <div v-if="canUseMicrobes()" class="nes-field">
-    <label class="nofloat">Microbes:</label>
-    <input class="nes-input" type="number" value="0" min="0" :max="playerinput.microbes" v-model.number="microbes" />
-  </div>
-  <div class="nofloat nes-field">
-    <label class="nofloat">Mega Credit:</label>
-    <input class="nes-input" type="number" min="0" :max="getCardCost()" v-model.number="megaCredits" />
-  </div>
-  <div v-if="hasWarning()" class="nes-container is-rounded">
-    <span class="nes-text is-warning">{{ warning }}</span>
-  </div>
-  <button class="nes-btn" v-on:click="save">Save</button>
+<div class="payments_cont">
+
+    <div v-if="showtitle === true">{{playerinput.title}}</div>
+
+    <label v-for="availableCard in playerinput.cards" :key="availableCard" class="payments_cards">
+        <input class="nes-radio" type="radio" v-model="card" v-on:change="cardChanged()" :value="availableCard" />
+        <card class="cardbox" :card="availableCard"></card>
+    </label>
+  
+    <section class="nes-container with-title" v-trim-whitespace>
+
+        <h3 class="payments_title">How to play?</h3>
+
+        <div class="payments_type" v-if="canUseSteel()">
+            <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
+            <button class="nes-btn" v-on:click="reduceValue('steel', 1)" :class="getCssClassFor('<', 'steel')"><</button>
+            <input class="nes-input payments_input" v-model.number="steel" />
+            <button class="nes-btn" v-on:click="addValue('steel', 1)" :class="getCssClassFor('>', 'steel')">></button>
+        </div>
+
+        <div class="payments_type" v-if="canUseTitanium()">
+            <i class="resource_icon resource_icon--titanium payments_type_icon" title="Pay by Titanium"></i>
+            <button class="nes-btn" v-on:click="reduceValue('titanium', 1)" :class="getCssClassFor('<', 'titanium')"><</button>
+            <input class="nes-input payments_input" v-model.number="titanium" />
+            <button class="nes-btn" v-on:click="addValue('titanium', 1)" :class="getCssClassFor('>', 'titanium')">></button>
+        </div>
+
+        <div class="payments_type" v-if="canUseHeat()">
+            <i class="resource_icon resource_icon--heat payments_type_icon" title="Pay by Heat"></i>
+            <button class="nes-btn" v-on:click="reduceValue('heat', 1)" :class="getCssClassFor('<', 'heat')"><</button>
+            <input class="nes-input payments_input" v-model.number="heat" />
+            <button class="nes-btn" v-on:click="addValue('heat', 1)" :class="getCssClassFor('>', 'heat')">></button>
+        </div>
+
+
+        <div class="payments_type" v-if="canUseMicrobes()">
+            <i class="resource_icon resource_icon--microbe payments_type_icon" title="Pay by Microbes"></i>
+            <button class="nes-btn" v-on:click="reduceValue('microbes', 1)" :class="getCssClassFor('<', 'microbes')"><</button>
+            <input class="nes-input payments_input" v-model.number="microbes" />
+            <button class="nes-btn" v-on:click="addValue('microbes', 1)" :class="getCssClassFor('>', 'microbes')">></button>
+        </div>
+
+        <div class="payments_type">
+            <i class="resource_icon resource_icon--megacredits payments_type_icon" title="Pay by Megacredits"></i>
+            <button class="nes-btn" v-on:click="reduceValue('megaCredits', 1)" :class="getCssClassFor('<', 'megaCredits')"><</button>
+            <input class="nes-input payments_input" v-model.number="megaCredits" />
+            <button class="nes-btn" v-on:click="addValue('megaCredits', 1)" :class="getCssClassFor('>', 'megaCredits')">></button>
+        </div>
+
+        <div class="payments_save">
+            <button class="nes-btn" v-on:click="save">Save</button>
+        </div>
+    </section>
 </div>
 `
 });

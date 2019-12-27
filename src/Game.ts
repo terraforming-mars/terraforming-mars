@@ -358,7 +358,6 @@ export class Game {
     private gotoDraftingPhase(): void {
       this.draftedPlayers.clear();
       this.draftRound = 1;
-      this.generation++;
       this.players.forEach((player) => {
         player.terraformRatingAtGenerationStart = player.terraformRating;
       });
@@ -380,6 +379,7 @@ export class Game {
       this.players.forEach((player) => {
         player.runProductionPhase();
       });
+      this.generation++;
       if (this.gameIsOver()) {
         this.gotoFinalGreeneryPlacement();
       } else {

@@ -243,9 +243,10 @@ export class Player {
       } else if (pi instanceof OrOptions) {
         const waiting: OrOptions = pi;
         const optionIndex = parseInt(input[0][0]);
-        const remainingInput = input.slice();
-        remainingInput.splice(0, 1);
-        return this.runInput(remainingInput, waiting.options[optionIndex]);
+        const remainingInput = input[0].slice();
+        // Remove option index to process option
+        remainingInput.shift();
+        return this.runInput([remainingInput], waiting.options[optionIndex]);
       } else if (pi instanceof SelectHowToPayForCard) {
         if (input.length !== 1 || input[0].length !== 2) {
           throw new Error('Incorrect options provided');

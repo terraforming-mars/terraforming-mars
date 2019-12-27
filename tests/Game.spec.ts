@@ -113,4 +113,33 @@ describe("Game", function () {
         expect(game.getOxygenLevel()).to.eq(constants.MAX_OXYGEN_LEVEL);
         expect(player.terraformRating).to.eq(initialTR + 1);
     });
+
+    it ("Draft round for 2 players", function () {
+        const player = new Player("temp_test", Color.BLUE, false);
+        const player2 = new Player("temp_test2", Color.RED, false);
+        const game = new Game("draft_game", [player,player2], player, false, true);
+        game.generation = 4;
+        game.playerHasPassed(player);
+        game.playerHasPassed(player2);
+        expect(game.getGeneration()).to.eq(5);
+    });    
+
+    it ("No draft round for 2 players", function () {
+        const player = new Player("temp_test", Color.BLUE, false);
+        const player2 = new Player("temp_test2", Color.RED, false);
+        const game = new Game("classic_game", [player,player2], player, false, false);
+        game.generation = 2;
+        game.playerHasPassed(player);
+        game.playerHasPassed(player2);
+        expect(game.getGeneration()).to.eq(3);
+    });
+    
+    it ("Solo play next generation", function () {
+        const player = new Player("temp_test", Color.BLUE, false);
+        const game = new Game("draft_game", [player], player, false, false);
+        game.playerHasPassed(player);
+        expect(game.getGeneration()).to.eq(2);
+    });    
+
+
 });

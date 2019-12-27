@@ -12,6 +12,8 @@ import { SelectOption } from "./SelectOption";
 import { SelectPlayer } from "./SelectPlayer";
 import { SelectSpace } from "./SelectSpace";
 
+var ui_update_timeout_id: number | undefined = undefined;
+
 export const WaitingFor = Vue.component("waiting-for", {
     props: ["player", "players", "waitingfor"],
     data: function () {
@@ -31,6 +33,7 @@ export const WaitingFor = Vue.component("waiting-for", {
     methods: {
         waitForUpdate: function () {
             const vueApp = this;
+            clearTimeout(ui_update_timeout_id);
             const askForUpdate = () => {
                 const xhr = new XMLHttpRequest();
                 xhr.open("GET", "/api/waitingfor" + window.location.search + "&prev-game-age=" + this.player.gameAge.toString());
@@ -57,6 +60,7 @@ export const WaitingFor = Vue.component("waiting-for", {
                         } else if (result["result"] === "REFRESH") {
                             // Something changed, let's refresh UI
                             (vueApp as any).$root.updatePlayer();
+                            return;
                         }
                         (vueApp as any).waitForUpdate();
                     } else {
@@ -66,7 +70,7 @@ export const WaitingFor = Vue.component("waiting-for", {
                 xhr.responseType = "json";
                 xhr.send();
             }
-            setTimeout(askForUpdate, 5000);
+            ui_update_timeout_id = (setTimeout(askForUpdate, 5000) as any);
         }
     },
     render: function (createElement) {

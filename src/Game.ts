@@ -385,9 +385,9 @@ export class Game {
       if (this.gameIsOver()) {
         this.gotoFinalGreeneryPlacement();
       } else {
-
-        this.generation++;
         
+        this.generation++;
+       
         if (this.draftVariant) {
           this.gotoDraftingPhase();
         } else {

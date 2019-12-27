@@ -19,6 +19,8 @@ export const PaymentWidgetMixin = {
                 rate = (this as any).player.titaniumValue;
             } else if (resourceName === "steel") {
                 rate = (this as any).player.steelValue;
+            } else if (resourceName === "microbes") {
+                rate = 2;
             }
             return rate;
         },

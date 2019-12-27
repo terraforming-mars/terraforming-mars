@@ -14,6 +14,7 @@ interface SelectHowToPayForCardModel {
 import { HowToPay } from "../inputs/HowToPay";
 import { getProjectCardByName, Card } from "./Card";
 import { Tags } from "../cards/Tags";
+import { PaymentWidgetMixin } from "./PaymentWidgetMixin";
 
 export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card", {
     props: ["player", "playerinput", "onsave", "showtitle"],
@@ -31,6 +32,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
     components: {
         "card": Card
     },
+    mixins: [PaymentWidgetMixin],
     mounted: function () {
         this.$data.megaCredits = this.getCardCost();
     },
@@ -129,52 +131,6 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 this.$data.card,
                 JSON.stringify(htp)
             ]]);
-        },
-        getCssClassFor: function (action: string, target: string): string {
-            let currentValue: number = (this as any)[target];
-            let maxValue: number = (this.player as any)[target];
-            let disablingLimit = (action === "<") ? 0 : maxValue
-
-            if (currentValue === disablingLimit) return "is-disabled";
-            return "is-primary"
-        },
-        getRersourceRate: function (resourceName: string): number {
-            let rate = 1; // one resource == one money
-            if (resourceName === "titanium") {
-                rate = this.player.titaniumValue;
-            } else if (resourceName === "steel") {
-                rate = this.player.steelValue;
-            }
-            return rate;
-        },
-        reduceValue: function (target: string, to: number): void {
-            let currentValue: number = (this as any)[target];
-
-            if (currentValue === 0) return;
-
-            const realTo = Math.min(to, currentValue);
-            (this as any)[target] -= realTo;
-
-            if (target === "megaCredits" || realTo === 0) return;
-
-            let rate = this.getRersourceRate(target)
-            this.addValue("megaCredits", rate * realTo);
-
-        },
-        addValue: function (target: string, to: number): void {
-            let currentValue: number = (this as any)[target];
-            let maxValue: number = (this.player as any)[target];
-            if (target === "megaCredits") maxValue = this.getCardCost();
-
-            if (currentValue === maxValue) return;
-            
-            const realTo = (currentValue + to <= maxValue) ? to : maxValue - currentValue;
-            (this as any)[target] += realTo;
-
-            if (target === "megaCredits" || realTo === 0) return;
-
-            let rate = this.getRersourceRate(target)
-            this.reduceValue("megaCredits", rate * realTo);
         }
     },
     template: `
@@ -225,6 +181,10 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             <button class="nes-btn" v-on:click="reduceValue('megaCredits', 1)" :class="getCssClassFor('<', 'megaCredits')"><</button>
             <input class="nes-input payments_input" v-model.number="megaCredits" />
             <button class="nes-btn" v-on:click="addValue('megaCredits', 1)" :class="getCssClassFor('>', 'megaCredits')">></button>
+        </div>
+
+        <div v-if="hasWarning()" class="nes-container is-rounded">
+            <span class="nes-text is-warning">{{ warning }}</span>
         </div>
 
         <div class="payments_save">

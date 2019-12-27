@@ -1,6 +1,7 @@
 
 import Vue from "vue";
 import { HowToPay } from "../inputs/HowToPay";
+import { PaymentWidgetMixin } from "./PaymentWidgetMixin";
 
 interface SelectHowToPayModel {
     heat: number;
@@ -22,6 +23,10 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
             microbes: 0,
             warning: undefined
         } as SelectHowToPayModel;
+    },
+    mixins: [PaymentWidgetMixin],
+    mounted: function () {
+        this.$data.megaCredits = this.playerinput.amount;
     },
     methods: {
         hasWarning: function () {
@@ -59,29 +64,48 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
         }
     },
     template: `
-<div>
-  <div v-if="showtitle === true">{{playerinput.title}}</div>
-  <div v-if="playerinput.canUseSteel" class="nes-field">
-    <label>Steel:</label>
-    <input class="nes-input" type="number" value="0" min="0" max="100" v-model.number="steel" />
-  </div>
-  <div v-if="playerinput.canUseTitanium" class="nes-field">
-    <label>Titanium:</label>
-    <input class="nes-input" type="number" value="0" min="0" max="100" v-model.number="titanium" />
-  </div>
-  <div v-if="playerinput.canUseHeat" class="nes-field">
-    <label>Heat:</label>
-    <input class="nes-input" type="number" value="0" min="0" max="100" v-model.number="heat" />
-  </div>
-  <div class="nes-field">
-    <label>Mega Credit:</label>
-    <input class="nes-input" type="number" value="0" min="0" max="100" v-model.number="megaCredits" />
-  </div>
-  <div v-if="hasWarning()" class="nes-container is-rounded">
-    <span class="nes-text is-warning">{{ warning }}</span>
-  </div>
-  <button class="nes-btn" v-on:click="pay">Save</button>
-</div>
+    <div class="payments_cont"> 
+        <section class="nes-container with-title" v-trim-whitespace>
+
+            <h3 class="payments_title">"How to play?"</h3>
+
+            <div class="payments_type" v-if="playerinput.canUseSteel">
+                <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
+                <button class="nes-btn" v-on:click="reduceValue('steel', 1)" :class="getCssClassFor('<', 'steel')"><</button>
+                <input class="nes-input payments_input" v-model.number="steel" />
+                <button class="nes-btn" v-on:click="addValue('steel', 1)" :class="getCssClassFor('>', 'steel')">></button>
+            </div>
+
+            <div class="payments_type" v-if="playerinput.canUseTitanium">
+                <i class="resource_icon resource_icon--titanium payments_type_icon" title="Pay by Titanium"></i>
+                <button class="nes-btn" v-on:click="reduceValue('titanium', 1)" :class="getCssClassFor('<', 'titanium')"><</button>
+                <input class="nes-input payments_input" v-model.number="titanium" />
+                <button class="nes-btn" v-on:click="addValue('titanium', 1)" :class="getCssClassFor('>', 'titanium')">></button>
+            </div>
+
+            <div class="payments_type" v-if="playerinput.canUseHeat">
+                <i class="resource_icon resource_icon--heat payments_type_icon" title="Pay by Heat"></i>
+                <button class="nes-btn" v-on:click="reduceValue('heat', 1)" :class="getCssClassFor('<', 'heat')"><</button>
+                <input class="nes-input payments_input" v-model.number="heat" />
+                <button class="nes-btn" v-on:click="addValue('heat', 1)" :class="getCssClassFor('>', 'heat')">></button>
+            </div>
+
+            <div class="payments_type">
+                <i class="resource_icon resource_icon--megacredits payments_type_icon" title="Pay by Megacredits"></i>
+                <button class="nes-btn" v-on:click="reduceValue('megaCredits', 1)" :class="getCssClassFor('<', 'megaCredits')"><</button>
+                <input class="nes-input payments_input" v-model.number="megaCredits" />
+                <button class="nes-btn" v-on:click="addValue('megaCredits', 1)" :class="getCssClassFor('>', 'megaCredits')">></button>
+            </div>
+
+            <div v-if="hasWarning()" class="nes-container is-rounded">
+                <span class="nes-text is-warning">{{ warning }}</span>
+            </div>
+
+            <div class="payments_save">
+                <button class="nes-btn" v-on:click="pay">Save</button>
+            </div>
+        </section>
+    </div>
 `
 });
 

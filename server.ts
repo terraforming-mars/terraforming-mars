@@ -24,6 +24,7 @@ import {SelectPlayer} from './src/inputs/SelectPlayer';
 import {SelectSpace} from './src/inputs/SelectSpace';
 import {SpaceModel} from './src/models/SpaceModel';
 import {TileType} from './src/TileType';
+import { Phase } from './src/Phase';
 
 const styles = fs.readFileSync('styles.css');
 const games: Map<string, Game> = new Map<string, Game>();
@@ -183,7 +184,7 @@ function apiGetWaitingFor(
     "result": "WAIT",
     "player": game.activePlayer.name
   }
-  if (player.getWaitingFor() !== undefined ) {
+  if (player.getWaitingFor() !== undefined || game.phase === Phase.END) {
     answer["result"] = "GO";
   } else if (game.gameAge > prevGameAge) {
     answer["result"] = "REFRESH";

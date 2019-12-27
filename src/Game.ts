@@ -381,10 +381,13 @@ export class Game {
       this.players.forEach((player) => {
         player.runProductionPhase();
       });
-      this.generation++;
+
       if (this.gameIsOver()) {
         this.gotoFinalGreeneryPlacement();
       } else {
+
+        this.generation++;
+        
         if (this.draftVariant) {
           this.gotoDraftingPhase();
         } else {

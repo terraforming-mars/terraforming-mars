@@ -116,10 +116,10 @@ describe("Game", function () {
         expect(player.terraformRating).to.eq(initialTR + 1);
     });
 
-    it("Should finish solo game in last generation", function() {
+    it("Should finish solo game in the end of last generation", function() {
         const player = new Player("temp_test", Color.BLUE, false);
         const game = new Game("solo1", [player], player);
-        game.generation = 13;
+        game.generation = 14;
 
         // Pass last turn
         game.playerHasPassed(player);

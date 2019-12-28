@@ -25,6 +25,7 @@ import {ALL_CORPORATION_CARDS} from './Dealer';
 import {ALL_PRELUDE_CORPORATIONS} from './Dealer';
 import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
+import {MaxwellBase} from './cards/venusNext/MaxwellBase';
 
 export class Game {
     public activePlayer: Player;
@@ -237,7 +238,8 @@ export class Game {
         this.dealer.dealCard(),
         this.dealer.dealCard(),
         this.dealer.dealCard(),
-        this.dealer.dealCard()
+        this.dealer.dealCard(),
+        new MaxwellBase()
       ];
 
       if (this.preludeExtension) {

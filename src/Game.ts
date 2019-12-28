@@ -361,7 +361,6 @@ export class Game {
       this.players.forEach((player) => {
         player.terraformRatingAtGenerationStart = player.terraformRating;
       });
-      this.incrementFirstPlayer();
       this.runDraftRound();
     }
 
@@ -387,6 +386,7 @@ export class Game {
       } else {
         
         this.generation++;
+        this.incrementFirstPlayer();
        
         if (this.draftVariant) {
           this.gotoDraftingPhase();

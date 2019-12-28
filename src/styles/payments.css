@@ -1,0 +1,10 @@
+.payments_cont .nes-container.with-title > .payment-title {
+    display: table; padding: 0 0.5rem; margin: -1.8rem 0 1rem; font-size: 1rem; background-color: #fff;
+}
+
+.payments_input {
+    display: inline-block;
+    width: 87px;
+    vertical-align: middle;
+}
+

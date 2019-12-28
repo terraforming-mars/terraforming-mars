@@ -10,6 +10,8 @@ import { Thermalist } from "../src/awards/Thermalist";
 import * as constants from "../src/constants";
 import { Birds } from "../src/cards/Birds";
 import { WaterImportFromEuropa } from "../src/cards/WaterImportFromEuropa";
+import { Phase } from "../src/Phase";
+import { maxOutOceans } from "./TestingUtils";
 
 describe("Game", function () {
     it("should initialize with right defaults", function () {
@@ -112,5 +114,68 @@ describe("Game", function () {
 
         expect(game.getOxygenLevel()).to.eq(constants.MAX_OXYGEN_LEVEL);
         expect(player.terraformRating).to.eq(initialTR + 1);
+    });
+
+    it ("Draft round for 2 players", function () {
+        const player = new Player("temp_test", Color.BLUE, false);
+        const player2 = new Player("temp_test2", Color.RED, false);
+        const game = new Game("draft_game", [player,player2], player, false, true);
+        game.generation = 4;
+        game.playerHasPassed(player);
+        game.playerHasPassed(player2);
+        expect(game.getGeneration()).to.eq(5);
+    });    
+
+    it ("No draft round for 2 players", function () {
+        const player = new Player("temp_test", Color.BLUE, false);
+        const player2 = new Player("temp_test2", Color.RED, false);
+        const game = new Game("classic_game", [player,player2], player, false, false);
+        game.generation = 2;
+        game.playerHasPassed(player);
+        game.playerHasPassed(player2);
+        expect(game.getGeneration()).to.eq(3);
+    });
+    
+    it ("Solo play next generation", function () {
+        const player = new Player("temp_test", Color.BLUE, false);
+        const game = new Game("draft_game", [player], player, false, false);
+        game.playerHasPassed(player);
+        expect(game.getGeneration()).to.eq(2);
+    });    
+
+
+    it("Should finish solo game in the end of last generation", function() {
+        const player = new Player("temp_test", Color.BLUE, false);
+        const game = new Game("solo1", [player], player);
+        game.generation = 14;
+
+        // Pass last turn
+        game.playerHasPassed(player);
+
+        // Now game should be in finished state
+        expect(game.phase).to.eq(Phase.END);
+
+        expect(game.isSoloModeWin()).to.eq(false);
+    });
+
+    it("Should finish solo game before last generation if Mars is already terraformed", function() {
+        const player = new Player("temp_test", Color.BLUE, false);
+        const game = new Game("solo2", [player], player);
+        game.generation = 10;
+
+        // Terraform
+        (game as any).temperature = constants.MAX_TEMPERATURE;
+        (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL;
+        maxOutOceans(player, game);
+
+        player.plants = 0; // Skip final greenery Phase
+
+        // Pass last turn
+        game.playerHasPassed(player);
+
+        // Now game should be in finished state
+        expect(game.phase).to.eq(Phase.END);
+
+        expect(game.isSoloModeWin()).to.eq(true);
     });
 });

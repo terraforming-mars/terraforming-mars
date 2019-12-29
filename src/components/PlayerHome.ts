@@ -82,7 +82,7 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
 
-                <div class="player_home_block player_home_block--turnorder nofloat">
+                <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
                     <h3>Turn order</h3>
                     <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
                         <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, false)">

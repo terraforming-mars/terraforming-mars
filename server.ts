@@ -295,7 +295,8 @@ function getPlayer(player: Player, game: Game): string {
     waitingFor: getWaitingFor(player.getWaitingFor()),
     gameLog: game.gameLog,
     isSoloModeWin: game.isSoloModeWin(),
-    gameAge: game.gameAge
+    gameAge: game.gameAge,
+    isActive: player.id === game.activePlayer.id
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -406,7 +407,8 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       titaniumProduction: player.titaniumProduction,
       titaniumValue: player.titaniumValue,
       victoryPoints: player.victoryPoints,
-      victoryPointsBreakdown: player.victoryPointsBreakdown
+      victoryPointsBreakdown: player.victoryPointsBreakdown,
+      isActive: player.id === game.activePlayer.id
     } as PlayerModel;
   });
 }

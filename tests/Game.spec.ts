@@ -181,4 +181,33 @@ describe("Game", function () {
 
         expect(game.isSoloModeWin()).to.eq(true);
     });
+
+    it("Should return players in turn order", function () {
+        const player1 = new Player("p1", Color.BLUE, false);
+        const player2 = new Player("p2", Color.GREEN, false);
+        const player3 = new Player("p3", Color.YELLOW, false);
+        const player4 = new Player("p4", Color.RED, false);
+        const game = new Game("gto", [player1, player2, player3, player4], player3);
+
+        var players = game.getPlayers();
+        expect(players[0].name).to.eq("p3");
+        expect(players[1].name).to.eq("p4");
+        expect(players[2].name).to.eq("p1");
+        expect(players[3].name).to.eq("p2");
+
+
+        (game as any).incrementFirstPlayer();
+        players = game.getPlayers();
+        expect(players[0].name).to.eq("p4");
+        expect(players[1].name).to.eq("p1");
+        expect(players[2].name).to.eq("p2");
+        expect(players[3].name).to.eq("p3");
+
+        (game as any).incrementFirstPlayer();
+        players = game.getPlayers();
+        expect(players[0].name).to.eq("p1");
+        expect(players[1].name).to.eq("p2");
+        expect(players[2].name).to.eq("p3");
+        expect(players[3].name).to.eq("p4");
+    });
 });

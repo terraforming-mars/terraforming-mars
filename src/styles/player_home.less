@@ -2,11 +2,7 @@
     padding-left: 20px;
     border-left: 1px solid #dfdddd;
 }
-
-.player_home_block {
-    margin-bottom: 20px;
-}
-  
+ 
 .player_home_block--resources {
     position: sticky;
     top: -13px;
@@ -18,5 +14,53 @@
     position: relative;
     top: -100px;
     visibility: hidden;
+}
+
+.player_home_block {
+    margin-bottom: 20px;
+
+    .player_color_red {
+        color: #c20000;
+    }
+    .player_color_yellow {
+        color: #caca03;
+    }
+    .player_color_green {
+        color: #01b301;
+    }
+    .player_color_black {
+        color: #2d2d2d;
+    }
+    .player_color_blue {
+        color: #0202d5;
+    }
+
+    .player_item {
+        display: inline-block;
+        vertical-align: middle;
+        white-space: nowrap;
+        margin-right: 15px;
+    }
+
+    .player_name_cont {
+        display: inline-block;
+        vertical-align: middle;
+
+        .player_number {
+            margin-right: 5px;
+        }
+    }
+
+    .player_separator {
+        display: inline-block;
+        vertical-align: top;
+        font-size: 20px;
+        margin: -5px 0 0 10px;
+        color:#7e7c7c;
+    }
+
+    .player_is_active {
+        text-decoration: underline;
+    }
 }
 

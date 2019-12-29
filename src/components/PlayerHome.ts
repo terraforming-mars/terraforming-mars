@@ -12,6 +12,7 @@ import { PlayerResources } from "./PlayerResources";
 import { WaitingFor } from "./WaitingFor";
 import { GlobalParameters } from "./GlobalParameters"
 import { Preferences } from "./Preferences"
+import { PlayerModel } from "../models/PlayerModel";
 
 export const PlayerHome = Vue.component("player-home", {
     props: ["player"],
@@ -30,6 +31,13 @@ export const PlayerHome = Vue.component("player-home", {
     },
     data: function () {
         return {}
+    },
+    methods: {
+        getPlayerCssForTurnOrder: (player: PlayerModel, hilightActive: boolean): string => {
+            var ret: string = "player_color_" + player.color;
+            if (hilightActive && player.isActive) ret += " player_is_active";
+            return ret;
+        }
     },
     template: `
         <div id="player-home">
@@ -71,6 +79,16 @@ export const PlayerHome = Vue.component("player-home", {
                     <div v-if="player.players.length > 1" class="player_home_block--millestones-and-awards">
                         <milestone/>
                         <award/>
+                    </div>
+                </div>
+
+                <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
+                    <h3>Turn order</h3>
+                    <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
+                        <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, false)">
+                            <span class="player_number">{{ idx+1 }}.</span><span class="player_name" :class="getPlayerCssForTurnOrder(p, true)">{{ p.name }}</span>
+                        </div>
+                        <div class="player_separator" v-if="idx !== player.players.length - 1">→</div>
                     </div>
                 </div>
 

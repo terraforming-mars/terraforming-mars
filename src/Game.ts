@@ -443,12 +443,6 @@ export class Game {
             this.first.megaCredits += 2;
       }
 
-      this.players.forEach((player) => {
-        if (player.corporationCard !== undefined && player.corporationCard.name === new Aphrodite().name ) {
-          player.megaCredits += 2 * steps;
-        }
-      });
-
       //Carry on to next phase
       this.gotoDraftOrResearch();
     }  

@@ -42,6 +42,11 @@ export class OriginalBoard {
         this.spaces.push(new Colony(SpaceName.GANYMEDE_COLONY)); 
         this.spaces.push(new Colony(SpaceName.PHOBOS_SPACE_HAVEN));
 
+        this.spaces.push(new Colony(SpaceName.DAWN_CITY));
+        this.spaces.push(new Colony(SpaceName.LUNA_METROPOLIS));
+        this.spaces.push(new Colony(SpaceName.MAXWELL_BASE));
+        this.spaces.push(new Colony(SpaceName.STRATOPOLIS));                        
+
         let idx = 3, pos_x = 4, pos_y=0;
 
         this.spaces.push(

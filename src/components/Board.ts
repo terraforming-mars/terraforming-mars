@@ -77,6 +77,11 @@ export const Board = Vue.component("board", {
                 <g id="ganymede_colony">
                     <text x="67" y="462" class="board_caption">Ganymede colony</text>
                 </g>
+
+                <g id="maxwell_base">
+                    <text x="390" y="462" class="board_caption">Maxwell base</text>
+                </g>
+
                 <g id="phobos_space_heaven">
                     <text x="2" y="15" class="board_caption">Phobos space haven</text>
                 </g>

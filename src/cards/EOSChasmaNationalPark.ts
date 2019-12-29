@@ -29,7 +29,7 @@ export class EosChasmaNationalPark implements IProjectCard {
     }
 
     if (availableCards.length === 1) {
-      game.getCardOwner(availableCards[0]).addResourceTo(availableCards[0]);
+      game.getCardPlayer(availableCards[0].name).addResourceTo(availableCards[0]);
       player.plants += 3;
       player.megaCreditProduction += 2;
       player.victoryPoints++;
@@ -40,7 +40,7 @@ export class EosChasmaNationalPark implements IProjectCard {
         'Select card to add 1 animal',
         availableCards,
         (foundCards: Array<IProjectCard>) => {
-          game.getCardOwner(foundCards[0]).addResourceTo(foundCards[0]);
+          game.getCardPlayer(foundCards[0].name).addResourceTo(foundCards[0]);
           player.plants += 3;
           player.megaCreditProduction += 2;
           player.victoryPoints++;

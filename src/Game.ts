@@ -55,6 +55,8 @@ export class Game {
     private tempPlants: number = 0;
     private tempHeat: number = 0;
     private tempTR: number = 0;
+    private tempCards: Array<IProjectCard> = [];
+    private tempHeatProduction: number = 0;
 
     constructor(
       public id: string,
@@ -423,6 +425,8 @@ export class Game {
       this.tempPlants = this.first.plants;
       this.tempHeat = this.first.heat;
       this.tempTR = this.first.terraformRating;
+      this.tempCards = this.first.cardsInHand;
+      this.tempHeatProduction = this.first.heatProduction;
 
       this.first.worldGovernmentTerraforming(this);
     }
@@ -435,6 +439,8 @@ export class Game {
       this.first.plants = this.tempPlants;
       this.first.heat = this.tempHeat;
       this.first.terraformRating = this.tempTR;
+      this.first.cardsInHand = this.tempCards;
+      this.first.heatProduction = this.tempHeatProduction;
 
       //Carry on to next phase
       this.gotoDraftOrResearch();

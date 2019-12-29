@@ -28,4 +28,5 @@ export interface PlayerModel {
     victoryPointsBreakdown: VictoryPointsBreakdown;
     isSoloModeWin: boolean;
     gameAge: number;
+    isActive: boolean;
 }

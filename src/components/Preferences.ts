@@ -3,7 +3,7 @@ import Vue from "vue";
 
 
 class PreferencesManager {
-    static keys: Array<string> = ["hide_corporation", "hide_hand", "hide_cards", "hide_awards_and_milestones", "small_cards"];
+    static keys: Array<string> = ["hide_corporation", "hide_hand", "hide_cards", "hide_awards_and_milestones", "hide_turnorder", "small_cards"];
     static preferencesValues: Map<string, boolean> = new Map<string, boolean>();
     static localStorageSupported: boolean = typeof window['localStorage'] != "undefined" && window['localStorage'] != null;
 
@@ -30,6 +30,7 @@ export const Preferences = Vue.component("preferences", {
             "hide_hand": false,
             "hide_cards": false,
             "hide_awards_and_milestones": false,
+            "hide_turnorder": false,
             "small_cards": false
         };
     },
@@ -101,6 +102,12 @@ export const Preferences = Vue.component("preferences", {
                         <label>
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_corporation" />
                             <span>Hide corporation card</span>
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label>
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="hide_turnorder" />
+                            <span>Hide turn order</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">

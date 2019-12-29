@@ -98,15 +98,6 @@ export class Game {
       }
     }
 
-    public getCardOwner(card: IProjectCard): Player {
-      for (const p of this.getPlayers()) {
-        for (const c of p.playedCards) {
-          if (c.name === card.name) return p;
-        }
-      }
-      throw new Error('No card owner found')
-    }
-
     public getPreludeExtension(): boolean {
       return this.preludeExtension;
     }
@@ -1021,8 +1012,20 @@ export class Game {
                    space.tile.tileType === TileType.OCEAN
       ).length;
     }
+
     public getPlayers(): Array<Player> {
-      return this.players;
+      // We always return them in turn order
+      let ret: Array<Player> = [];
+      let insertIdx: number = 0;
+      for (let p of this.players) {
+        if (p.id === this.first.id || insertIdx > 0) {
+          ret.splice(insertIdx, 0, p);
+          insertIdx ++;
+        } else {
+          ret.push(p);
+        }
+      } 
+      return ret;
     }
 
     public getOtherAnimalCards(c: IProjectCard): Array<IProjectCard> {

@@ -26,6 +26,7 @@ import {ALL_PRELUDE_CORPORATIONS} from './Dealer';
 import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
 import {MaxwellBase} from './cards/venusNext/MaxwellBase';
+import { Aphrodite } from './cards/venusNext/Aphrodite';
 
 export class Game {
     public activePlayer: Player;
@@ -57,6 +58,7 @@ export class Game {
     private tempTR: number = 0;
     private tempCards: Array<IProjectCard> = [];
     private tempHeatProduction: number = 0;
+    private tempVenusScaleLevel: number = 0;
 
     constructor(
       public id: string,
@@ -418,6 +420,7 @@ export class Game {
       this.tempTR = this.first.terraformRating;
       this.tempCards = this.first.cardsInHand;
       this.tempHeatProduction = this.first.heatProduction;
+      this.tempVenusScaleLevel = this.venusScaleLevel;
 
       this.first.worldGovernmentTerraforming(this);
     }
@@ -432,6 +435,19 @@ export class Game {
       this.first.terraformRating = this.tempTR;
       this.first.cardsInHand = this.tempCards;
       this.first.heatProduction = this.tempHeatProduction;
+
+      // Check for Aphrodite corporation
+      if (this.tempVenusScaleLevel < this.venusScaleLevel 
+          && this.first.corporationCard !== undefined
+          && this.first.corporationCard.name === new Aphrodite().name) {
+            this.first.megaCredits += 2;
+      }
+
+      this.players.forEach((player) => {
+        if (player.corporationCard !== undefined && player.corporationCard.name === new Aphrodite().name ) {
+          player.megaCredits += 2 * steps;
+        }
+      });
 
       //Carry on to next phase
       this.gotoDraftOrResearch();
@@ -771,6 +787,13 @@ export class Game {
     }
     this.venusScaleLevel += 2 * steps;
     player.terraformRating += steps;
+
+    // Check for Aphrodite corporation
+    this.players.forEach((player) => {
+      if (player.corporationCard !== undefined && player.corporationCard.name === new Aphrodite().name ) {
+        player.megaCredits += 2 * steps;
+      }
+    });
 
     if (this.venusScaleLevel === 8 
         || (steps === 2 && this.venusScaleLevel === 10) 

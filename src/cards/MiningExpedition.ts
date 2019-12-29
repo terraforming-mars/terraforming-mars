@@ -25,8 +25,10 @@ export class MiningExpedition implements IProjectCard {
 
         if (otherPlayersWithPlants.length === 1) {
             otherPlayersWithPlants[0].removePlants(player, 2);
+            player.steel += 2;
             return game.increaseOxygenLevel(player, 1);
         } else if (otherPlayersWithPlants.length === 0) {
+            player.steel += 2;
             return game.increaseOxygenLevel(player, 1);
         }
         

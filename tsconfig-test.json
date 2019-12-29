@@ -18,6 +18,7 @@
     "include": [
         "tests/cards/*.spec.ts",
         "tests/cards/corporation/*.spec.ts",
+        "tests/cards/venusNext/*.spec.ts",
         "tests/*.spec.ts",
         "tests/TestingUtils.ts"
     ],
@@ -274,6 +275,8 @@
         "tests/cards/prelude/NitrogenDelivery.spec.ts",
         "tests/cards/prelude/OrbitalConstructionYard.spec.ts",
         "tests/cards/prelude/Vitor.spec.ts",
+        "tests/cards/venusNext/Aphrodite.spec.ts",
+        "tests/cards/venusNext/GiantSolarShade.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

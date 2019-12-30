@@ -5,7 +5,9 @@ import { Player } from "../src/Player";
 import { LunarBeam } from "../src/cards/LunarBeam";
 import { Game } from "../src/Game";
 import { Insulation } from "../src/cards/Insulation";
+import { IoMiningIndustries } from  "../src/cards/IoMiningIndustries";
 import { PowerSupplyConsortium } from "../src/cards/PowerSupplyConsortium";
+import { SaturnSystems } from "../src/cards/corporation/SaturnSystems";
 
 describe("Player", function () {
     it("should initialize with right defaults", function () {
@@ -63,5 +65,16 @@ describe("Player", function () {
         expect(player.megaCreditProduction).to.eq(1);
         expect(player.getWaitingFor()).to.eq(undefined);
     });
-    
+
+    it("Runs SaturnSystems when other player plays card", function () {
+        const player1 = new Player("p1", Color.BLUE, false);
+        const player2 = new Player("p2", Color.RED, false);
+        const game = new Game("gto", [player1, player2], player1);
+        const card = new IoMiningIndustries();
+        const corporationCard = new SaturnSystems();
+        expect(player1.megaCreditProduction).to.eq(0);
+        player1.corporationCard = corporationCard;
+        player2.playCard(game, card, undefined);
+        expect(player1.megaCreditProduction).to.eq(1);
+    });
 });

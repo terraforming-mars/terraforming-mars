@@ -11,7 +11,7 @@ export class InterplanetaryCinematics implements CorporationCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 30;
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
-        if (card.cardType === CardType.EVENT) {
+        if (player.corporationCard !== undefined && player.corporationCard.name === this.name && card.cardType === CardType.EVENT) {
             player.megaCredits += 2;
         }
     }

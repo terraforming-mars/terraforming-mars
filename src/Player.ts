@@ -74,6 +74,16 @@ export class Player {
         public beginner: boolean) {
       this.id = this.generateId();
     }
+
+    public getActionsThisGeneration(): Set<string> {
+      return this.actionsThisGeneration;
+    }
+
+    public setActionsThisGeneration(cardName: string): void {
+      this.actionsThisGeneration.add(cardName);
+      return;
+    }
+
     public getLastCardPlayedThisTurn(): IProjectCard | undefined {
       return this.lastCardPlayedThisTurn;
     }

@@ -158,7 +158,7 @@ describe("Game", function () {
         expect(game.isSoloModeWin()).to.eq(false);
     });
 
-    it("Should finish solo game before last generation if Mars is already terraformed", function() {
+    it("Should not finish solo game before last generation if Mars is already terraformed", function() {
         const player = new Player("temp_test", Color.BLUE, false);
         const game = new Game("solo2", [player], player);
         game.generation = 10;
@@ -174,9 +174,7 @@ describe("Game", function () {
         game.playerHasPassed(player);
 
         // Now game should be in finished state
-        expect(game.phase).to.eq(Phase.END);
-
-        expect(game.isSoloModeWin()).to.eq(true);
+        expect(game.phase).to.eq(Phase.RESEARCH);
     });
 
     it("Should return players in turn order", function () {

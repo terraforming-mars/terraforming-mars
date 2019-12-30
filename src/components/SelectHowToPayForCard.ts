@@ -16,6 +16,7 @@ import { getProjectCardByName, Card } from "./Card";
 import { Tags } from "../cards/Tags";
 import { PaymentWidgetMixin } from "./PaymentWidgetMixin";
 
+
 export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card", {
     props: ["player", "playerinput", "onsave", "showtitle"],
     data: function () {

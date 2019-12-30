@@ -1245,7 +1245,6 @@ export class Player {
       //Post Action (after some specific prelude cards have been played)
       if (this.postAction && this.getPlayableCards(game).length > 0) {
         const input = this.playProjectCard(game);
-        input.onend = () => {};
         this.setWaitingFor(input);
         this.postAction = false;
         return;

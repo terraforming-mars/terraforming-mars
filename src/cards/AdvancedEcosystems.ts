@@ -13,12 +13,7 @@ export class AdvancedEcosystems implements IProjectCard {
       player.getTagCount(Tags.MICROBES) > 0 &&
       player.getTagCount(Tags.ANIMAL) > 0);
     }
-    public play(player: Player) {
-      if ( ! this.canPlay(player)) {
-        throw new Error(
-            'Requires a plant tag, a microbe tag, and an animal tag'
-        );
-      }
+    public play() {
       return undefined;
     }
     public getVictoryPoints() {

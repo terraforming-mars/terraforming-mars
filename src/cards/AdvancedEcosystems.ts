@@ -8,17 +8,12 @@ export class AdvancedEcosystems implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT, Tags.MICROBES, Tags.ANIMAL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Advanced Ecosystems';
-    public canPlay(): boolean {
-      return true;
+    public canPlay(player: Player): boolean {
+      return (player.getTagCount(Tags.PLANT) > 0 &&
+      player.getTagCount(Tags.MICROBES) > 0 &&
+      player.getTagCount(Tags.ANIMAL) > 0);
     }
-    public play(player: Player) {
-      if (player.getTagCount(Tags.PLANT) === 0 ||
-            player.getTagCount(Tags.MICROBES) === 0 ||
-            player.getTagCount(Tags.ANIMAL) === 0) {
-        throw new Error(
-            'Requires a plant tag, a microbe tag, and an animal tag'
-        );
-      }
+    public play() {
       return undefined;
     }
     public getVictoryPoints() {

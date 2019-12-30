@@ -17,8 +17,14 @@ describe("AdvancedEcosystems", function () {
         const card = new AdvancedEcosystems();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(new Tardigrades(), new TundraFarming, new Pets());
+        expect(card.canPlay(player)).to.eq(true);
         card.play(player);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(3);
+    });
+    it("Can't play if tag requirements is unmet", function () {
+        const card = new AdvancedEcosystems();
+        const player = new Player("test", Color.BLUE, false);
+        expect(card.canPlay(player)).to.eq(false);
     });
 });

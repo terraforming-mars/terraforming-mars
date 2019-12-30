@@ -3253,6 +3253,7 @@ export const HTML_DATA: Map<string, string> =
 ["Deuterium Export",`
             <div class="title background-color-active ">Deuterium Export</div>
             <div class="price ">11</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-space "></div>
             <div class="tag tag2 tag-power "></div>
             <div class="tag tag3 tag-venus "></div>

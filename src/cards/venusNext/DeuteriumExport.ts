@@ -3,7 +3,6 @@ import {IActionCard} from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { Game } from "../../Game";
 import { ResourceType } from "../../ResourceType";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
@@ -23,7 +22,7 @@ export class DeuteriumExport implements IActionCard,IProjectCard {
     public canAct(): boolean {
         return true;
     }    
-    public action(player: Player, game: Game) {
+    public action(player: Player) {
         if (player.getResourcesOnCard(this) < 1) {
             player.addResourceTo(this);
             return undefined;

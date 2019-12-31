@@ -94,7 +94,7 @@ export class Player {
       if (resource === Resources.HEAT) this.heatProduction += amount;
       
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-        game.log(this.name + " " + resource + " production modified by " + amount + " by " + fromPlayer.name);
+        game.log(this.name + "'s " + resource + " production modified by " + amount + " by " + fromPlayer.name);
       }
     }
 

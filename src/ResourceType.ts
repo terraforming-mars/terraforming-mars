@@ -3,6 +3,7 @@ export enum ResourceType {
     ANIMAL,
     MICROBE,
     FIGHTER,
-    SCIENCE
+    SCIENCE,
+    FLOATER
 }
 

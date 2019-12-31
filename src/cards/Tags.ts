@@ -10,6 +10,7 @@ export enum Tags {
     SCIENCE = "science",
     SPACE = "space",
     STEEL = "building",
-    WILDCARD = "wildcard"
+    WILDCARD = "wildcard",
+    VENUS = "venus"
 }
 

@@ -25,6 +25,8 @@ import {ALL_CORPORATION_CARDS} from './Dealer';
 import {ALL_PRELUDE_CORPORATIONS} from './Dealer';
 import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
+import {MaxwellBase} from './cards/venusNext/MaxwellBase';
+import { Aphrodite } from './cards/venusNext/Aphrodite';
 
 export class Game {
     public activePlayer: Player;
@@ -36,6 +38,7 @@ export class Game {
     public phase: Phase = Phase.RESEARCH;
     private donePlayers: Set<Player> = new Set<Player>();
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
+    private venusScaleLevel: number = constants.MIN_VENUS_SCALE;
     private passedPlayers: Set<Player> = new Set<Player>();
     private researchedPlayers: Set<Player> = new Set<Player>();
     private draftedPlayers: Set<Player> = new Set<Player>();
@@ -45,6 +48,17 @@ export class Game {
     public gameLog: Array<String> = [];
     public gameAge: number = 0; // Each log event increases it
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
+    public venusNextExtension: boolean = true;
+
+    private tempMC: number = 0;
+    private tempSteel: number = 0;
+    private tempTitanium: number = 0;
+    private tempPlants: number = 0;
+    private tempHeat: number = 0;
+    private tempTR: number = 0;
+    private tempCards: Array<IProjectCard> = [];
+    private tempHeatProduction: number = 0;
+    private tempVenusScaleLevel: number = 0;
 
     constructor(
       public id: string,
@@ -219,7 +233,8 @@ export class Game {
         this.dealer.dealCard(),
         this.dealer.dealCard(),
         this.dealer.dealCard(),
-        this.dealer.dealCard()
+        this.dealer.dealCard(),
+        new MaxwellBase()
       ];
 
       if (this.preludeExtension) {
@@ -373,18 +388,63 @@ export class Game {
 
       if (this.gameIsOver()) {
         this.gotoFinalGreeneryPlacement();
+        return;
+      } 
+      // Venus Next Solar phase
+      console.log('venusNextExtension');
+      if (this.venusNextExtension) {
+        this.gotoWorldGovernmentTerraforming();
+        return;
+      }
+      this.gotoDraftOrResearch();
+    }
+
+    private gotoDraftOrResearch() {
+      this.generation++;
+      this.incrementFirstPlayer();
+      if (this.draftVariant) {
+        this.gotoDraftingPhase();
       } else {
-        
-        this.generation++;
-        this.incrementFirstPlayer();
-       
-        if (this.draftVariant) {
-          this.gotoDraftingPhase();
-        } else {
-          this.gotoResearchPhase();
-        }
+        this.gotoResearchPhase();
       }
     }
+
+    private gotoWorldGovernmentTerraforming() {
+      //Snapshot player's resources
+      this.tempMC = this.first.megaCredits;
+      this.tempSteel = this.first.steel;
+      this.tempTitanium = this.first.titanium;
+      this.tempPlants = this.first.plants;
+      this.tempHeat = this.first.heat;
+      this.tempTR = this.first.terraformRating;
+      this.tempCards = this.first.cardsInHand;
+      this.tempHeatProduction = this.first.heatProduction;
+      this.tempVenusScaleLevel = this.venusScaleLevel;
+
+      this.first.worldGovernmentTerraforming(this);
+    }
+
+    public doneWorldGovernmentTerraforming() {
+      //Revert snapshoted player's resources
+      this.first.megaCredits = this.tempMC;
+      this.first.steel = this.tempSteel;
+      this.first.titanium = this.tempTitanium;
+      this.first.plants = this.tempPlants;
+      this.first.heat = this.tempHeat;
+      this.first.terraformRating = this.tempTR;
+      this.first.cardsInHand = this.tempCards;
+      this.first.heatProduction = this.tempHeatProduction;
+
+      // Check for Aphrodite corporation
+      if (this.tempVenusScaleLevel < this.venusScaleLevel 
+          && this.first.corporationCard !== undefined
+          && this.first.corporationCard.name === new Aphrodite().name) {
+            this.first.megaCredits += 2;
+      }
+
+      //Carry on to next phase
+      this.gotoDraftOrResearch();
+    }  
 
     private allPlayersHavePassed(): boolean {
       for (const player of this.players) {
@@ -708,6 +768,46 @@ export class Game {
     public getOxygenLevel(): number {
       return this.oxygenLevel;
     }
+
+    public increaseVenusScaleLevel(
+      player: Player, steps: 1 | 2 | 3): SelectSpace | undefined {
+    if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
+      return undefined;
+    }
+    if (steps > 1 && this.venusScaleLevel + 2 * steps > constants.MAX_VENUS_SCALE) {
+      steps = (steps == 3) ? 2 : 1; // typing disallows decrement
+      return this.increaseVenusScaleLevel(player, steps);
+    }
+    this.venusScaleLevel += 2 * steps;
+    player.terraformRating += steps;
+
+    // Check for Aphrodite corporation
+    this.players.forEach((player) => {
+      if (player.corporationCard !== undefined && player.corporationCard.name === new Aphrodite().name ) {
+        player.megaCredits += 2 * steps;
+      }
+    });
+
+    if (this.venusScaleLevel === 8 
+        || (steps === 2 && this.venusScaleLevel === 10) 
+        || (steps === 3 && this.venusScaleLevel === 12)
+    ) {
+      player.cardsInHand.push(this.dealer.dealCard());
+    }
+
+    if (this.venusScaleLevel === 16 
+        || (steps === 2 && this.venusScaleLevel === 18) 
+        || (steps === 3 && this.venusScaleLevel === 20)
+    ) {
+      player.terraformRating++;
+    }    
+
+    return undefined;
+  }
+
+  public getVenusScaleLevel(): number {
+    return this.venusScaleLevel;
+  }
 
     public increaseTemperature(
         player: Player, steps: 1 | 2 | 3): SelectSpace | undefined {

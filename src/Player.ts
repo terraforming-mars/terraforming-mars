@@ -27,6 +27,7 @@ import {Pets} from './cards/Pets';
 import {ORIGINAL_AWARDS} from './awards/Awards';
 import {IAward} from './awards/IAward';
 import { VictoryPointsBreakdown } from './VictoryPointsBreakdown';
+import {Resources} from './Resources';
 
 const INITIAL_ACTION: string = 'INITIAL';
 
@@ -73,6 +74,30 @@ export class Player {
         public beginner: boolean) {
       this.id = this.generateId();
     }
+
+    public getProduction(resource: Resources): number {
+      if (resource === Resources.MEGACREDITS) return this.megaCreditProduction;
+      if (resource === Resources.STEEL) return this.steelProduction;
+      if (resource === Resources.TITANIUM) return this.titaniumProduction;
+      if (resource === Resources.PLANTS) return this.plantProduction;
+      if (resource === Resources.ENERGY) return this.energyProduction;
+      if (resource === Resources.HEAT) return this.heatProduction;
+      return 0;
+    }
+
+    public setProduction(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player) {
+      if (resource === Resources.MEGACREDITS) this.megaCreditProduction += amount;
+      if (resource === Resources.STEEL) this.steelProduction += amount;
+      if (resource === Resources.TITANIUM) this.titaniumProduction += amount;
+      if (resource === Resources.PLANTS) this.plantProduction += amount;
+      if (resource === Resources.ENERGY) this.energyProduction += amount;
+      if (resource === Resources.HEAT) this.heatProduction += amount;
+      
+      if (game !== undefined && fromPlayer !== undefined && amount < 0) {
+        game.log(this.name + " " + resource + " production modified by " + amount + " by " + fromPlayer.name);
+      }
+    }
+
     public getLastCardPlayedThisTurn(): IProjectCard | undefined {
       return this.lastCardPlayedThisTurn;
     }

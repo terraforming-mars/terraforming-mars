@@ -25,6 +25,7 @@ import {ALL_CORPORATION_CARDS} from './Dealer';
 import {ALL_PRELUDE_CORPORATIONS} from './Dealer';
 import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
+import { Resources } from "./Resources";
 
 export class Game {
     public activePlayer: Player;
@@ -723,7 +724,7 @@ export class Game {
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
       // BONUS FOR OCEAN TILE AT 0
       if (steps === 3 && this.temperature === -20) {
-        player.heatProduction += 2;
+        player.setProduction(Resources.HEAT,2);
       } else if (this.temperature === -24 || this.temperature === -20 ||
             (
               (steps === 2 || steps === 3) &&
@@ -731,7 +732,7 @@ export class Game {
             ) ||
             (steps === 3 && this.temperature === -16)
       ) {
-        player.heatProduction++;
+        player.setProduction(Resources.HEAT);;
       } else if (
         (
           this.temperature === 0 ||

@@ -6,6 +6,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
 import { maxOutOceans } from "../TestingUtils";
+import { Resources } from '../../src/Resources';
 
 describe("BlackPolarDust", function () {
     it("Can't play", function () {
@@ -26,7 +27,7 @@ describe("BlackPolarDust", function () {
         action.cb(action.availableSpaces[0]);
         expect(action.availableSpaces[0].tile).not.to.eq(undefined);
         expect(player.megaCreditProduction).to.eq(-2);
-        expect(player.heatProduction).to.eq(3);
+        expect(player.getProduction(Resources.HEAT)).to.eq(3);
     });
     it("Does not provide ocean tile placement option", function () {
         const card = new BlackPolarDust();

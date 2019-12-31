@@ -5,6 +5,7 @@ import {CardType} from './CardType';
 import {Player} from '../Player';
 import {Game} from '../Game';
 import {SelectPlayer} from '../inputs/SelectPlayer';
+import { Resources } from "../Resources";
 
 export class CloudSeeding implements IProjectCard {
     public cost: number = 11;
@@ -13,7 +14,7 @@ export class CloudSeeding implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     
     private playersWithHeatProduction(game: Game): Array<Player> {
-      return game.getPlayers().filter((player) => player.heatProduction >= 1);
+      return game.getPlayers().filter((player) => player.getProduction(Resources.HEAT) >= 1);
     }
 
     public canPlay(player: Player, game: Game): boolean {
@@ -32,7 +33,7 @@ export class CloudSeeding implements IProjectCard {
           this.playersWithHeatProduction(game),
           'Select player to decrease heat production 1 step',
           (foundPlayer: Player) => {
-            foundPlayer.heatProduction--;
+            foundPlayer.setProduction(Resources.HEAT,-1,game,player);;
             return this.doPlay(player);
           }
       );

@@ -3,6 +3,7 @@ import { expect } from "chai";
 import { MoholeExcavation } from "../../../src/cards/prelude/MoholeExcavation";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
+import { Resources } from '../../../src/Resources';
 
 describe("MoholeExcavation", function () {
     it("Should play", function () {
@@ -10,7 +11,7 @@ describe("MoholeExcavation", function () {
         const player = new Player("test", Color.BLUE, false);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.heatProduction).to.eq(2);
+        expect(player.getProduction(Resources.HEAT)).to.eq(2);
         expect(player.heat).to.eq(2);
         expect(player.steelProduction).to.eq(1);
     });

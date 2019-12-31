@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardType } from "./CardType";
+import { Resources } from "../Resources";
 
 export class MicroMills implements IProjectCard {
     public cost: number = 3;
@@ -14,7 +15,7 @@ export class MicroMills implements IProjectCard {
         return true;
     }
     public play(player: Player, _game: Game) {
-        player.heatProduction++;
+        player.setProduction(Resources.HEAT);
         return undefined;
     }
 }

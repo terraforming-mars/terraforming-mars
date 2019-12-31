@@ -4,6 +4,7 @@ import { UndergroundDetonations } from "../../src/cards/UndergroundDetonations";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("UndergroundDetonations", function () {
     it("Should throw", function () {
@@ -26,6 +27,6 @@ describe("UndergroundDetonations", function () {
         const action = card.action(player, game);
         expect(action).to.eq(undefined);
         expect(player.megaCredits).to.eq(0);
-        expect(player.heatProduction).to.eq(2);
+        expect(player.getProduction(Resources.HEAT)).to.eq(2);
     });
 });

@@ -4,6 +4,8 @@ import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardType } from "./CardType";
+import { Resources } from "../Resources";
+
 
 export class GHGFactories implements IProjectCard {
     public cost: number = 11;
@@ -18,7 +20,7 @@ export class GHGFactories implements IProjectCard {
             throw "Must have energy production to decrease";
         }
         player.energyProduction--;
-        player.heatProduction += 4;
+        player.setProduction(Resources.HEAT,4);
         return undefined;
     }
 }

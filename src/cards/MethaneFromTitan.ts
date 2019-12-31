@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class MethaneFromTitan implements IProjectCard {
     public cost: number = 28;
@@ -14,7 +15,7 @@ export class MethaneFromTitan implements IProjectCard {
         return game.getOxygenLevel() >= 2 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
-        player.heatProduction += 2;
+        player.setProduction(Resources.HEAT,2);
         player.plantProduction += 2;
         return undefined;
     }

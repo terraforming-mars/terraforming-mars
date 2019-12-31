@@ -6,6 +6,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
+import { Resources } from '../Resources';
 
 export class UndergroundDetonations implements IActionCard, IProjectCard {
     public cost: number = 6;
@@ -26,12 +27,12 @@ export class UndergroundDetonations implements IActionCard, IProjectCard {
                 }
                 player.heat -= htp.heat;
                 player.megaCredits -= htp.megaCredits;
-                player.heatProduction += 2;
+                player.setProduction(Resources.HEAT,2);
                 return undefined;
             });
         }
         player.megaCredits -= 10;
-        player.heatProduction += 2;
+        player.setProduction(Resources.HEAT,2);
         return undefined;
     }
     public play(_player: Player, _game: Game) {

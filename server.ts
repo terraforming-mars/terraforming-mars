@@ -25,6 +25,7 @@ import {SelectSpace} from './src/inputs/SelectSpace';
 import {SpaceModel} from './src/models/SpaceModel';
 import {TileType} from './src/TileType';
 import { Phase } from './src/Phase';
+import { Resources } from "./src/Resources";
 
 const styles = fs.readFileSync('styles.css');
 const games: Map<string, Game> = new Map<string, Game>();
@@ -268,7 +269,7 @@ function getPlayer(player: Player, game: Game): string {
     }),
     generation: game.getGeneration(),
     heat: player.heat,
-    heatProduction: player.heatProduction,
+    heatProduction: player.getProduction(Resources.HEAT),
     id: player.id,
     megaCredits: player.megaCredits,
     megaCreditProduction: player.megaCreditProduction,
@@ -390,7 +391,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       energy: player.energy,
       energyProduction: player.energyProduction,
       heat: player.heat,
-      heatProduction: player.heatProduction,
+      heatProduction: player.getProduction(Resources.HEAT),
       id: player.id,
       megaCredits: player.megaCredits,
       megaCreditProduction: player.megaCreditProduction,

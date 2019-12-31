@@ -8,6 +8,7 @@ import { Game } from "../Game";
 import { Tags } from "./Tags";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
+import { Resources } from '../Resources';
 
 export class MoholeArea implements IProjectCard {
     public cost: number = 20;
@@ -20,7 +21,7 @@ export class MoholeArea implements IProjectCard {
     public play(player: Player, game: Game) {
         return new SelectSpace("Select an ocean space for special tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
             game.addTile(player, SpaceType.OCEAN, space, { tileType: TileType.SPECIAL });
-            player.heatProduction += 4;
+            player.setProduction(Resources.HEAT,4);
             return undefined;
         });
     }

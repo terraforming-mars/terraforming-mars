@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class TropicalResort implements IProjectCard {
     public cost: number = 13;
@@ -11,13 +12,10 @@ export class TropicalResort implements IProjectCard {
     public name: string = "Tropical Resort";
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player): boolean {
-        return player.heatProduction >= 2;
+        return player.getProduction(Resources.HEAT) >= 2;
     }
     public play(player: Player, _game: Game) {
-        if (player.heatProduction < 2) {
-            throw "Must have 2 heat production";
-        }
-        player.heatProduction -= 2;
+        player.setProduction(Resources.HEAT,-2);
         player.megaCreditProduction += 3;
         return undefined;
     }

@@ -5,6 +5,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SelectPlayer } from "../../src/inputs/SelectPlayer";
+import { Resources } from '../../src/Resources';
 
 describe("HeatTrappers", function () {
     it("Should be playable in solo mode", function () {
@@ -14,13 +15,13 @@ describe("HeatTrappers", function () {
 
         // Not enough according to card requirements
         // but it's not important in solo mode
-        player.heatProduction = 1;
+        player.setProduction(Resources.HEAT);
 
         expect(card.canPlay(player, game)).to.eq(true);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
 
-        expect(player.heatProduction).to.eq(1); // Not changed
+        expect(player.getProduction(Resources.HEAT)).to.eq(1); // Not changed
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(-1);
         expect(player.energyProduction).to.eq(1); // Incremented
@@ -32,17 +33,17 @@ describe("HeatTrappers", function () {
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar2", [player, player2], player);
 
-        player2.heatProduction = 7;
+        player2.setProduction(Resources.HEAT,7);
 
         expect(card.canPlay(player, game)).to.eq(true);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
 
-        expect(player.heatProduction).to.eq(0); // Not changed
+        expect(player.getProduction(Resources.HEAT)).to.eq(0); // Not changed
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(-1);
         expect(player.energyProduction).to.eq(1); // Incremented
-        expect(player2.heatProduction).to.eq(5); // Reduced two steps
+        expect(player2.getProduction(Resources.HEAT)).to.eq(5); // Reduced two steps
     });
 
     it("Should ask for target", function () {
@@ -52,8 +53,8 @@ describe("HeatTrappers", function () {
         const player3 = new Player("test3", Color.YELLOW, false);
         const game = new Game("foobar3", [player, player2, player3], player);
 
-        player2.heatProduction = 7;
-        player3.heatProduction = 2;
+        player2.setProduction(Resources.HEAT,7);
+        player3.setProduction(Resources.HEAT,2);
 
         expect(card.canPlay(player, game)).to.eq(true, "Cant play");
         const action = card.play(player, game);
@@ -63,12 +64,12 @@ describe("HeatTrappers", function () {
 
         action.cb(player2)
 
-        expect(player3.heatProduction).to.eq(2); // Not changed
-        expect(player.heatProduction).to.eq(0); // Not changed
+        expect(player3.getProduction(Resources.HEAT)).to.eq(2); // Not changed
+        expect(player.getProduction(Resources.HEAT)).to.eq(0); // Not changed
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(-1);
         expect(player.energyProduction).to.eq(1); // Incremented
-        expect(player2.heatProduction).to.eq(5); // Reduced two steps
+        expect(player2.getProduction(Resources.HEAT)).to.eq(5); // Reduced two steps
     });
 
     it("Can't play", function () {

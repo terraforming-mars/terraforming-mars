@@ -117,13 +117,11 @@ describe("Game", function () {
         expect(player.terraformRating).to.eq(initialTR + 1);
     });
 
-    // Disable these test for Venus Next development
-
-    /*
     it ("Draft round for 2 players", function () {
         const player = new Player("temp_test", Color.BLUE, false);
         const player2 = new Player("temp_test2", Color.RED, false);
         const game = new Game("draft_game", [player,player2], player, false, true);
+        game.venusNextExtension = false;
         game.generation = 4;
         game.playerHasPassed(player);
         game.playerHasPassed(player2);
@@ -134,6 +132,7 @@ describe("Game", function () {
         const player = new Player("temp_test", Color.BLUE, false);
         const player2 = new Player("temp_test2", Color.RED, false);
         const game = new Game("classic_game", [player,player2], player, false, false);
+        game.venusNextExtension = false;
         game.generation = 2;
         game.playerHasPassed(player);
         game.playerHasPassed(player2);
@@ -143,10 +142,10 @@ describe("Game", function () {
     it("Solo play next generation", function () {
         const player = new Player("temp_test", Color.BLUE, false);
         const game = new Game("draft_game", [player], player, false, false);
+        game.venusNextExtension = false;
         game.playerHasPassed(player);
         expect(game.getGeneration()).to.eq(2);
     });    
-    */
 
     it("Should finish solo game in the end of last generation", function() {
         const player = new Player("temp_test", Color.BLUE, false);

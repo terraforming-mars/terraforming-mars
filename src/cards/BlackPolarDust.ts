@@ -6,6 +6,7 @@ import {Player} from '../Player';
 import {Game} from '../Game';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
+import { Resources } from "../Resources";
 
 export class BlackPolarDust implements IProjectCard {
     public cost: number = 15;
@@ -25,7 +26,7 @@ export class BlackPolarDust implements IProjectCard {
           (space: ISpace) => {
             game.addOceanTile(player, space.id);
             player.megaCreditProduction -= 2;
-            player.heatProduction += 3;
+            player.setProduction(Resources.HEAT,3);
             return undefined;
           }
       );

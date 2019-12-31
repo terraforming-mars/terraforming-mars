@@ -5,6 +5,7 @@ import { Player } from "../../Player";
 import { CorporationCard } from "./../corporation/CorporationCard";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
+import { Resources } from "../../Resources";
 
 export class RobinsonIndustries implements IActionCard, CorporationCard {
     public name: string = "Robinson Industries";
@@ -67,13 +68,13 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
                 return undefined;
             }));
         }
-        if (player.heatProduction < minimum) {
+        if (player.getProduction(Resources.HEAT) < minimum) {
             lowest = [];
-            minimum = player.heatProduction;
+            minimum = player.getProduction(Resources.HEAT);
         }
-        if (player.heatProduction === minimum) {
+        if (player.getProduction(Resources.HEAT) === minimum) {
             lowest.push(new SelectOption("Increase heat production 1 step", () => {
-                player.heatProduction++;
+                player.setProduction(Resources.HEAT);
                 player.megaCredits -= 4;
                 return undefined;
             }));

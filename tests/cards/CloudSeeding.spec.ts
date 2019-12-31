@@ -6,6 +6,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SelectPlayer } from "../../src/inputs/SelectPlayer";
 import { maxOutOceans } from "../TestingUtils"
+import { Resources } from '../../src/Resources';
 
 describe("CloudSeeding", function () {
     it("Can't play", function () { 
@@ -44,8 +45,8 @@ describe("CloudSeeding", function () {
         const game = new Game("foobar", [player,player2], player);
 
         // Satisfy requirements
-        player.heatProduction = 3;
-        player2.heatProduction = 1;
+        player.setProduction(Resources.HEAT,3);
+        player2.setProduction(Resources.HEAT);
 
         maxOutOceans(player, game, 3);
         player.megaCreditProduction = 0;
@@ -59,8 +60,8 @@ describe("CloudSeeding", function () {
 
         action.cb(player2);
         
-        expect(player2.heatProduction).to.eq(0); // Reduced 1 step
-        expect(player.heatProduction).to.eq(3); // Not reduced!
+        expect(player2.getProduction(Resources.HEAT)).to.eq(0); // Reduced 1 step
+        expect(player.getProduction(Resources.HEAT)).to.eq(3); // Not reduced!
         expect(player.megaCreditProduction).to.eq(-1);
         expect(player.plantProduction).to.eq(2);
     });

@@ -8,6 +8,7 @@ import { Insulation } from "../src/cards/Insulation";
 import { IoMiningIndustries } from  "../src/cards/IoMiningIndustries";
 import { PowerSupplyConsortium } from "../src/cards/PowerSupplyConsortium";
 import { SaturnSystems } from "../src/cards/corporation/SaturnSystems";
+import { Resources } from '../src/Resources';
 
 describe("Player", function () {
     it("should initialize with right defaults", function () {
@@ -51,7 +52,7 @@ describe("Player", function () {
     it("Should run select amount for Insulation", function () {
         const card = new Insulation();
         const player = new Player("test", Color.BLUE, false);
-        player.heatProduction = 2;
+        player.setProduction(Resources.HEAT,2)
         const action = card.play(player, new Game("foobar", [player,player], player));
         expect(action).not.to.eq(undefined);
         if (action === undefined) return;
@@ -61,7 +62,7 @@ describe("Player", function () {
         expect(function () { player.process([]) }).to.throw("Incorrect options provided");
         expect(function () { player.process([["foobar"]]) }).to.throw("Number not provided for amount");
         player.process([["1"]]);
-        expect(player.heatProduction).to.eq(1);
+        expect(player.getProduction(Resources.HEAT)).to.eq(1);
         expect(player.megaCreditProduction).to.eq(1);
         expect(player.getWaitingFor()).to.eq(undefined);
     });

@@ -49,7 +49,7 @@ export class Player {
     public titaniumProduction: number = 0;
     public energyProduction: number = 0;
     public heat: number = 0;
-    public heatProduction: number = 0;
+    private heatProduction: number = 0;
     public plants: number = 0;
     public plantProduction: number = 0;
     public cardsInHand: Array<IProjectCard> = [];
@@ -86,6 +86,16 @@ export class Player {
     }
 
     public setProduction(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player) {
+
+      //Production cannot go negative except MC
+      if (amount < 0) {
+        if ((resource === Resources.STEEL) && (this.steelProduction + amount < 0)) amount = -this.steelProduction;
+        if ((resource === Resources.TITANIUM) && (this.titaniumProduction + amount < 0)) amount = -this.titaniumProduction;
+        if ((resource === Resources.PLANTS) && (this.plantProduction + amount < 0)) amount = -this.plantProduction;
+        if ((resource === Resources.ENERGY) && (this.energyProduction + amount < 0)) amount = -this.energyProduction;
+        if ((resource === Resources.HEAT) && (this.heatProduction + amount < 0)) amount = -this.heatProduction;
+      }
+
       if (resource === Resources.MEGACREDITS) this.megaCreditProduction += amount;
       if (resource === Resources.STEEL) this.steelProduction += amount;
       if (resource === Resources.TITANIUM) this.titaniumProduction += amount;

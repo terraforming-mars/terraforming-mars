@@ -3,6 +3,7 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
+import { Resources } from "../../Resources";
 
 export class SocietySupport extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];
@@ -11,7 +12,7 @@ export class SocietySupport extends PreludeCard implements IProjectCard {
         player.megaCreditProduction--;
         player.plantProduction++;
         player.energyProduction++;
-        player.heatProduction++;			
+        player.setProduction(Resources.HEAT);			
         return undefined;
     }
 }

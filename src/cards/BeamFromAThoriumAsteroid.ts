@@ -3,6 +3,7 @@ import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
+import { Resources } from "../Resources";
 
 export class BeamFromAThoriumAsteroid implements IProjectCard {
     public cost: number = 32;
@@ -13,7 +14,7 @@ export class BeamFromAThoriumAsteroid implements IProjectCard {
       return player.getTagCount(Tags.JOVIAN) >= 1;
     }
     public play(player: Player) {
-      player.heatProduction += 3;
+      player.setProduction(Resources.HEAT,3);
       player.energyProduction += 3;
       return undefined;
     }

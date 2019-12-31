@@ -6,6 +6,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
 import { TileType } from "../../src/TileType";
+import { Resources } from '../../src/Resources';
 
 describe("MoholeArea", function () {
     it("Can play", function () {
@@ -21,6 +22,6 @@ describe("MoholeArea", function () {
         expect(action instanceof SelectSpace).to.eq(true);
         action.cb(action.availableSpaces[0]);
         expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.SPECIAL);
-        expect(player.heatProduction).to.eq(4);
+        expect(player.getProduction(Resources.HEAT)).to.eq(4);
     });
 });

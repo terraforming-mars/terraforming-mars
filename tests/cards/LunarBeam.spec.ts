@@ -4,6 +4,7 @@ import { LunarBeam } from "../../src/cards/LunarBeam";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("LunarBeam", function () {
     it("Can play", function () {
@@ -22,7 +23,7 @@ describe("LunarBeam", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         expect(player.megaCreditProduction).to.eq(-2);
-        expect(player.heatProduction).to.eq(2);
+        expect(player.getProduction(Resources.HEAT)).to.eq(2);
         expect(player.energyProduction).to.eq(2);
     });
 });

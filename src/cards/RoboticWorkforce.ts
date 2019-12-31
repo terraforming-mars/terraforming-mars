@@ -58,6 +58,7 @@ import { Windmills } from "./Windmills";
 //Prelude cards
 import { HousePrinting } from "./prelude/HousePrinting";
 import { LavaTubeSettlement } from "./prelude/LavaTubeSettlement";
+import { Resources } from '../Resources';
 
 export class RoboticWorkforce implements IProjectCard {
     public cost: number = 9;
@@ -220,7 +221,7 @@ export class RoboticWorkforce implements IProjectCard {
                 if (player.plantProduction + updater.plantProduction < 0) {
                     throw "not enough plant production";
                 }
-                if (player.heatProduction + updater.heatProduction < 0) {
+                if (player.getProduction(Resources.HEAT) + updater.heatProduction < 0) {
                     throw "not enough heat production";
                 }
 
@@ -229,7 +230,7 @@ export class RoboticWorkforce implements IProjectCard {
                 player.steelProduction += updater.steelProduction;
                 player.titaniumProduction += updater.titaniumProduction;
                 player.plantProduction += updater.plantProduction;
-                player.heatProduction += updater.heatProduction;
+                player.setProduction(Resources.HEAT,updater.heatProduction);
 
                return undefined;
             });

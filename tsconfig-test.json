@@ -279,6 +279,7 @@
         "tests/cards/venusNext/Viron.spec.ts",
         "tests/cards/venusNext/GiantSolarShade.spec.ts",
         "tests/cards/venusNext/DeuteriumExport.spec.ts",
+        "tests/cards/venusNext/AerialMappers.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

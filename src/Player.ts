@@ -27,6 +27,7 @@ import {Pets} from './cards/Pets';
 import {ORIGINAL_AWARDS} from './awards/Awards';
 import {IAward} from './awards/IAward';
 import { VictoryPointsBreakdown } from './VictoryPointsBreakdown';
+import { ResourceType } from './ResourceType';
 
 const INITIAL_ACTION: string = 'INITIAL';
 
@@ -187,6 +188,18 @@ export class Player {
           (card) => Number(this.resourcesOnCards.get(card.name)) > 0
       );
     }
+
+    public getOtherResourceCards(c: IProjectCard, resource: ResourceType): Array<IProjectCard> {
+      const result: Array<IProjectCard> = [];
+        this.playedCards.forEach((card) => {
+          if (card.name !== c.name &&
+              card.resourceType === resource) {
+            result.push(card);
+          }
+        });
+      return result;
+    }  
+
     public getTagCount(tag: Tags, includeEventsTags:boolean = false): number {
       let tagCount = 0;
       this.playedCards.forEach((card: IProjectCard) => {

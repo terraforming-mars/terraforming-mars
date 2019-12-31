@@ -4,6 +4,7 @@ import { ImportOfAdvancedGHG } from "../../src/cards/ImportOfAdvancedGHG";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("ImportOfAdvancedGHG", function () {
     it("Should play", function () {
@@ -12,6 +13,6 @@ describe("ImportOfAdvancedGHG", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.heatProduction).to.eq(2);
+        expect(player.getProduction(Resources.HEAT)).to.eq(2);
     });
 });

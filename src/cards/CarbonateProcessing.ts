@@ -3,6 +3,7 @@ import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
+import { Resources } from "../Resources";
 
 export class CarbonateProcessing implements IProjectCard {
     public cost: number = 6;
@@ -14,7 +15,7 @@ export class CarbonateProcessing implements IProjectCard {
     }
     public play(player: Player) {
       player.energyProduction--;
-      player.heatProduction += 3;
+      player.setProduction(Resources.HEAT,3);
       return undefined;
     }
 }

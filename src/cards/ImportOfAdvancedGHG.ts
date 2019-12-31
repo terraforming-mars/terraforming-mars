@@ -4,6 +4,7 @@ import { Player } from "../Player";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { Game } from "../Game";
+import { Resources } from "../Resources";
 
 export class ImportOfAdvancedGHG implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
@@ -14,7 +15,7 @@ export class ImportOfAdvancedGHG implements IProjectCard {
         return true;
     }
     public play(player: Player, _game: Game) {
-        player.heatProduction += 2;
+        player.setProduction(Resources.HEAT,2);
         return undefined;
     }
 }

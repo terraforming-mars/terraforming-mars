@@ -6,6 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardType } from "./CardType";
 import { SelectCard } from "../inputs/SelectCard";
+import { ResourceType } from '../ResourceType';
 
 export class SymbioticFungus implements IActionCard, IProjectCard {
     public cost: number = 4;
@@ -18,11 +19,11 @@ export class SymbioticFungus implements IActionCard, IProjectCard {
     public play() {
         return undefined;
     }
-    public canAct(_player: Player, game: Game): boolean {
-        return game.getOtherMicrobeCards(this).length > 0;
+    public canAct(player: Player): boolean {
+        return player.getOtherResourceCards(this, ResourceType.MICROBE).length > 0;
     }
-    public action(player: Player, game: Game) {
-        const availableCards = game.getOtherMicrobeCards(this);
+    public action(player: Player) {
+        const availableCards = player.getOtherResourceCards(this, ResourceType.MICROBE);
         return new SelectCard("Select card to add microbe", availableCards, (foundCards: Array<IProjectCard>) => {
             player.addResourceTo(foundCards[0]);
             return undefined;

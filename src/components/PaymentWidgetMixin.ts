@@ -42,6 +42,7 @@ export const PaymentWidgetMixin = {
             let currentValue: number = (this as any)[target];
             let maxValue: number = (this as any).player[target];
             if (target === "megaCredits") maxValue = this.getCardCost();
+            if (target === "microbes") maxValue = (this as any).playerinput.microbes;
 
             if (currentValue === maxValue) return;
             

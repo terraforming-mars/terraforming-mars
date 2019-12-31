@@ -8,11 +8,11 @@ import { IProjectCard } from "../IProjectCard";
 export class SaturnSystems implements CorporationCard {
     public name: string = "Saturn Systems";
     public tags: Array<Tags> = [Tags.JOVIAN];
-    public startingMegaCredits: number = 42;
-    public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
+    public startingMegaCredits: number = 42; 
+    public onCardPlayed(_player: Player, game: Game, card: IProjectCard) {
         for (const tag of card.tags) {
             if (tag === Tags.JOVIAN) {
-                player.megaCreditProduction++;
+                game.getCardPlayer(this.name).megaCreditProduction++;
             }
         }
     }

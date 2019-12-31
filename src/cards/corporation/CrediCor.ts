@@ -12,7 +12,7 @@ export class CrediCor implements CorporationCard {
     public startingMegaCredits: number = 57;
     public requirements: undefined;
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
-        if (card.cost >= 20) {
+        if (player.corporationCard !== undefined && player.corporationCard.name === this.name && card.cost >= 20) {
             player.megaCredits += 4;
         }
     }

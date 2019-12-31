@@ -371,14 +371,13 @@ export class Game {
     }
 
     private gameIsOver(): boolean {
-      if (this.marsIsTerraformed()) return true;
-
       // Single player game is done after generation 14 or 12 with prelude
       if (this.players.length === 1) {
         if (this.generation === 14 || (this.generation === 12 && this.preludeExtension)) return true;
+      } else {
+        return this.marsIsTerraformed();
       }
-      
-      return false;
+      return false;      
     }
 
     private gotoProductionPhase(): void {
@@ -1083,11 +1082,16 @@ export class Game {
       return result;
     }
     public getCardPlayer(name: string): Player {
-      for (let i = 0; i < this.players.length; i++) {
-        for (let j = 0; j < this.players[i].playedCards.length; j++) {
-          if (this.players[i].playedCards[j].name === name) {
-            return this.players[i];
+      for (let player of this.players) {
+        // Check cards player has played
+        for (let card of player.playedCards) {
+          if (card.name === name) {
+            return player;
           }
+        }
+        // Check player corporation
+        if (player.corporationCard !== undefined && player.corporationCard.name === name) {
+          return player;
         }
       }
       throw new Error('No player has played requested card');

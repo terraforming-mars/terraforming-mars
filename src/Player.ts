@@ -1,6 +1,5 @@
 import {IProjectCard} from './cards/IProjectCard';
 import {CorporationCard} from './cards/corporation/CorporationCard';
-import {SaturnSystems} from './cards/corporation/SaturnSystems';
 import {Psychrophiles} from './cards/prelude/Psychrophiles';
 import {Tags} from './cards/Tags';
 import {PlayerInput} from './PlayerInput';
@@ -740,21 +739,11 @@ export class Player {
             }
           }
 
-          if (
-            this.corporationCard !== undefined &&
-            this.corporationCard.onCardPlayed !== undefined
-          ) {
-            const method = this.corporationCard.onCardPlayed;
-            if (
-              this.corporationCard.name === new SaturnSystems().name
+          for (let somePlayer of game.getPlayers()) {
+            if (somePlayer.corporationCard !== undefined &&
+                somePlayer.corporationCard.onCardPlayed !== undefined
             ) {
-              game
-                  .getPlayers()
-                  .forEach((player) => {
-                    method(player, game, selectedCard);
-                  });
-            } else {
-              method(this, game, selectedCard);
+              somePlayer.corporationCard.onCardPlayed(somePlayer, game, selectedCard);
             }
           }
 
@@ -1342,24 +1331,21 @@ export class Player {
       //Post Action (after some specific prelude cards have been played)
       if (this.postAction && this.getPlayableCards(game).length > 0) {
         const input = this.playProjectCard(game);
-        input.onend = () => {
-          this.actionsTakenThisRound++;
-          this.takeAction(game);
-        };
         this.setWaitingFor(input);
         this.postAction = false;
         return;
       } else if (this.postAction && this.getPlayableCards(game).length === 0) {
         this.postAction = false;
+        return;
       }
       
       //Prelude cards have to be played first
       if (this.preludeCardsInHand.length > 0) {
         const input = this.playPreludeCard(game);
         input.onend = () => {
-          this.actionsTakenThisRound++;
-          this.actionsTakenThisRound++;
-          this.takeAction(game);
+          if (this.postAction) {
+            this.takeAction(game);
+          }  
         };
         this.setWaitingFor(input);
         return;

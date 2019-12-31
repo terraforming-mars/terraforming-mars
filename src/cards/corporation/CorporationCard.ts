@@ -12,5 +12,6 @@ export interface CorporationCard extends ICard {
     startingMegaCredits: number;
 	play: (player: Player, game: Game) => SelectCard<IProjectCard> | OrOptions | undefined;
     action?: (player: Player, game: Game) => OrOptions | undefined;
+    onCardPlayed?: (player: Player, game: Game, card: IProjectCard) => void;
 }
 

@@ -1,6 +1,5 @@
 import {IProjectCard} from './cards/IProjectCard';
 import {CorporationCard} from './cards/corporation/CorporationCard';
-import {SaturnSystems} from './cards/corporation/SaturnSystems';
 import {Psychrophiles} from './cards/prelude/Psychrophiles';
 import {Tags} from './cards/Tags';
 import {PlayerInput} from './PlayerInput';
@@ -679,21 +678,11 @@ export class Player {
             }
           }
 
-          if (
-            this.corporationCard !== undefined &&
-            this.corporationCard.onCardPlayed !== undefined
-          ) {
-            const method = this.corporationCard.onCardPlayed;
-            if (
-              this.corporationCard.name === new SaturnSystems().name
+          for (let somePlayer of game.getPlayers()) {
+            if (somePlayer.corporationCard !== undefined &&
+                somePlayer.corporationCard.onCardPlayed !== undefined
             ) {
-              game
-                  .getPlayers()
-                  .forEach((player) => {
-                    method(player, game, selectedCard);
-                  });
-            } else {
-              method(this, game, selectedCard);
+              somePlayer.corporationCard.onCardPlayed(somePlayer, game, selectedCard);
             }
           }
 

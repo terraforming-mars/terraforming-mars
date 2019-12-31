@@ -12,6 +12,7 @@ import { Birds } from "../src/cards/Birds";
 import { WaterImportFromEuropa } from "../src/cards/WaterImportFromEuropa";
 import { Phase } from "../src/Phase";
 import { maxOutOceans } from "./TestingUtils";
+import { SaturnSystems } from "../src/cards/corporation/SaturnSystems";
 
 describe("Game", function () {
     it("should initialize with right defaults", function () {
@@ -116,7 +117,7 @@ describe("Game", function () {
         expect(player.terraformRating).to.eq(initialTR + 1);
     });
 
-    it ("Draft round for 2 players", function () {
+    it("Draft round for 2 players", function () {
         const player = new Player("temp_test", Color.BLUE, false);
         const player2 = new Player("temp_test2", Color.RED, false);
         const game = new Game("draft_game", [player,player2], player, false, true);
@@ -126,7 +127,7 @@ describe("Game", function () {
         expect(game.getGeneration()).to.eq(5);
     });    
 
-    it ("No draft round for 2 players", function () {
+    it("No draft round for 2 players", function () {
         const player = new Player("temp_test", Color.BLUE, false);
         const player2 = new Player("temp_test2", Color.RED, false);
         const game = new Game("classic_game", [player,player2], player, false, false);
@@ -135,14 +136,13 @@ describe("Game", function () {
         game.playerHasPassed(player2);
         expect(game.getGeneration()).to.eq(3);
     });
-    
-    it ("Solo play next generation", function () {
+ 
+    it("Solo play next generation", function () {
         const player = new Player("temp_test", Color.BLUE, false);
         const game = new Game("draft_game", [player], player, false, false);
         game.playerHasPassed(player);
         expect(game.getGeneration()).to.eq(2);
-    });    
-
+    });
 
     it("Should finish solo game in the end of last generation", function() {
         const player = new Player("temp_test", Color.BLUE, false);
@@ -204,5 +204,13 @@ describe("Game", function () {
         expect(players[1].name).to.eq("p2");
         expect(players[2].name).to.eq("p3");
         expect(players[3].name).to.eq("p4");
+    });
+
+    it("Gets card player for corporation card", function () {
+        const player1 = new Player("p1", Color.BLUE, false);
+        const game = new Game("gto", [player1], player1);
+        const card = new SaturnSystems();
+        player1.corporationCard = card;
+        expect(game.getCardPlayer(card.name)).to.eq(player1);
     });
 });

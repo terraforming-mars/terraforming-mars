@@ -982,11 +982,16 @@ export class Game {
       return result;
     }
     public getCardPlayer(name: string): Player {
-      for (let i = 0; i < this.players.length; i++) {
-        for (let j = 0; j < this.players[i].playedCards.length; j++) {
-          if (this.players[i].playedCards[j].name === name) {
-            return this.players[i];
+      for (let player of this.players) {
+        // Check cards player has played
+        for (let card of player.playedCards) {
+          if (card.name === name) {
+            return player;
           }
+        }
+        // Check player corporation
+        if (player.corporationCard !== undefined && player.corporationCard.name === name) {
+          return player;
         }
       }
       throw new Error('No player has played requested card');

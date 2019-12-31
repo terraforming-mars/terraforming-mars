@@ -1,10 +1,10 @@
 
 export enum Resources {
-    MEGACREDITS,
-    STEEL,
-    TITANIUM,
-    PLANTS,
-    ENERGY,
-    HEAT
+    MEGACREDITS = 'megacredits',
+    STEEL = 'steel',
+    TITANIUM = 'titanium',
+    PLANTS = 'plants',
+    ENERGY = 'energy',
+    HEAT = 'heat'
 }
 

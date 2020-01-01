@@ -34,7 +34,7 @@ describe("Capital", function () {
         expect(action).not.to.eq(undefined);
         expect(action instanceof SelectSpace).to.eq(true);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-        expect(player.megaCreditProduction).to.eq(5);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
         const citySpace = game.getAdjacentSpaces(oceanSpaces[0])[0];
         expect(citySpace.spaceType).to.eq(SpaceType.LAND); 
         action.cb(citySpace);

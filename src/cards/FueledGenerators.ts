@@ -11,10 +11,10 @@ export class FueledGenerators implements IProjectCard {
   public cardType: CardType = CardType.AUTOMATED;
   public name: string = 'Fueled Generators';
   public canPlay(player: Player): boolean {
-    return player.megaCreditProduction >= -4;
+    return player.getProduction(Resources.MEGACREDITS) >= -4;
   }
   public play(player: Player) {
-    player.megaCreditProduction--;
+    player.setProduction(Resources.MEGACREDITS,-1);
     player.setProduction(Resources.ENERGY);
     return undefined;
   }

@@ -4,6 +4,7 @@ import { IProjectCard } from "./IProjectCard";
 import { CardType } from "./CardType";
 import { Game } from "../Game";
 import { Player } from "../Player";
+import { Resources } from '../Resources';
 
 export class InvestmentLoan implements IProjectCard {
     public cost: number = 3;
@@ -11,10 +12,10 @@ export class InvestmentLoan implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public name: string = "Investment Loan";
     public canPlay(player: Player): boolean {
-        return player.megaCreditProduction >= -4;
+        return player.getProduction(Resources.MEGACREDITS) >= -4;
     }
     public play(player: Player, _game: Game) {
-        player.megaCreditProduction--;
+        player.setProduction(Resources.MEGACREDITS,-1);
         player.megaCredits += 10;
         return undefined;
     }

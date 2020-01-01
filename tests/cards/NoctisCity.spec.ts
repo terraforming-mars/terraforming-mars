@@ -23,7 +23,7 @@ describe("NoctisCity", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-        expect(player.megaCreditProduction).to.eq(3);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
         const noctis = game.getSpace(SpaceName.NOCTIS_CITY);
         expect(noctis.tile && noctis.tile.tileType).to.eq(TileType.CITY);
     });

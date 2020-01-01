@@ -3,6 +3,7 @@ import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
+import { Resources } from '../Resources';
 
 export class FoodFactory implements IProjectCard {
   public cost: number = 12;
@@ -14,7 +15,7 @@ export class FoodFactory implements IProjectCard {
   }
   public play(player: Player) {
     player.plantProduction--;
-    player.megaCreditProduction += 4;
+    player.setProduction(Resources.MEGACREDITS,4);
     return undefined;
   }
   public getVictoryPoints() {

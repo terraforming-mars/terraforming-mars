@@ -19,7 +19,7 @@ export class LightningHarvest implements IProjectCard {
             throw "Requires 3 science tags";
         }
         player.setProduction(Resources.ENERGY);
-        player.megaCreditProduction++;
+        player.setProduction(Resources.MEGACREDITS);
         return undefined;
     }
     public getVictoryPoints() {

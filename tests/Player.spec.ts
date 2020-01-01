@@ -63,7 +63,7 @@ describe("Player", function () {
         expect(function () { player.process([["foobar"]]) }).to.throw("Number not provided for amount");
         player.process([["1"]]);
         expect(player.getProduction(Resources.HEAT)).to.eq(1);
-        expect(player.megaCreditProduction).to.eq(1);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
         expect(player.getWaitingFor()).to.eq(undefined);
     });
 
@@ -73,9 +73,9 @@ describe("Player", function () {
         const game = new Game("gto", [player1, player2], player1);
         const card = new IoMiningIndustries();
         const corporationCard = new SaturnSystems();
-        expect(player1.megaCreditProduction).to.eq(0);
+        expect(player1.getProduction(Resources.MEGACREDITS)).to.eq(0);
         player1.corporationCard = corporationCard;
         player2.playCard(game, card, undefined);
-        expect(player1.megaCreditProduction).to.eq(1);
+        expect(player1.getProduction(Resources.MEGACREDITS)).to.eq(1);
     });
 });

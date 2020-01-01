@@ -11,7 +11,7 @@ describe("FueledGenerators", function () {
         const player = new Player("test", Color.BLUE, false);
         player.plantProduction = 1;
         card.play(player);
-        expect(player.megaCreditProduction).to.eq(-1);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     });
 });

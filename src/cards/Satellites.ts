@@ -3,7 +3,7 @@ import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
-import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class Satellites implements IProjectCard {
     public cost: number = 10;
@@ -13,8 +13,8 @@ export class Satellites implements IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public play(player: Player, _game: Game) {
-        player.megaCreditProduction += 1 + player.getTagCount(Tags.SPACE);
+    public play(player: Player) {
+        player.setProduction(Resources.MEGACREDITS, 1 + player.getTagCount(Tags.SPACE));
         return undefined;
     }
 }

@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class KelpFarming implements IProjectCard {
     public cost: number = 17;
@@ -14,7 +15,7 @@ export class KelpFarming implements IProjectCard {
         return game.getOceansOnBoard() >= 6 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
-        player.megaCreditProduction += 2;
+        player.setProduction(Resources.MEGACREDITS,2);
         player.plantProduction += 3;
         player.plants += 2;
         return undefined;

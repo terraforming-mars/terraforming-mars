@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class NoctisFarming implements IProjectCard {
     public cost: number = 10;
@@ -14,7 +15,7 @@ export class NoctisFarming implements IProjectCard {
         return game.getTemperature() >= -20 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player) {
-        player.megaCreditProduction++;
+        player.setProduction(Resources.MEGACREDITS);
         player.plants += 2;
         return undefined;
     }

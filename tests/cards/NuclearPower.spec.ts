@@ -11,7 +11,7 @@ describe("NuclearPower", function () {
         const card = new NuclearPower();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        player.megaCreditProduction = -4;
+        player.setProduction(Resources.MEGACREDITS,-4);
         expect(function () { card.play(player, game); }).to.throw("Not enough mega credit production");
     });
     it("Should play", function () {
@@ -20,7 +20,7 @@ describe("NuclearPower", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.megaCreditProduction).to.eq(-2);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-2);
         expect(player.getProduction(Resources.ENERGY)).to.eq(3);
     });
 });

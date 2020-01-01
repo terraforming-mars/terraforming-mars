@@ -21,7 +21,7 @@ export class NoctisCity implements IProjectCard {
             throw "Must have energy production";
         }
         player.setProduction(Resources.ENERGY,-1);
-        player.megaCreditProduction += 3;
+        player.setProduction(Resources.MEGACREDITS,3);
         game.addCityTile(player, noctisSpace.id);
         return undefined;
     }

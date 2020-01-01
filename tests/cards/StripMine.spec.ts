@@ -21,7 +21,7 @@ describe("StripMine", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         expect(player.energyProduction).to.eq(0);
-        expect(player.steelProduction).to.eq(2);
+        expect(player.getProduction(Resources.STEEL)).to.eq(2);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
         expect(game.getOxygenLevel()).to.eq(2);
     });

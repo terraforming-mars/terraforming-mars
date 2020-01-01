@@ -6,6 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
+import { Resources } from '../Resources';
 
 export class UndergroundCity implements IProjectCard {
     public cost: number = 18;
@@ -18,8 +19,8 @@ export class UndergroundCity implements IProjectCard {
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space for city tile", game.getAvailableSpacesForCity(player), (foundSpace: ISpace) => {
             game.addCityTile(player, foundSpace.id);
-            player.energyProduction -= 2;
-            player.steelProduction += 2;
+            player.setProduction(Resources.ENERGY,-2);
+            player.setProduction(Resources.STEEL,2);
             return undefined;
         });
     }

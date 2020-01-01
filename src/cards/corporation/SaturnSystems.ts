@@ -13,13 +13,13 @@ export class SaturnSystems implements CorporationCard {
     public onCardPlayed(_player: Player, game: Game, card: IProjectCard) {
         for (const tag of card.tags) {
             if (tag === Tags.JOVIAN) {
-                game.getCardPlayer(this.name).megaCreditProduction++;
+                game.getCardPlayer(this.name).setProduction(Resources.MEGACREDITS);
             }
         }
     }
     public play(player: Player) {
         player.setProduction(Resources.TITANIUM);
-        player.megaCreditProduction++;
+        player.setProduction(Resources.MEGACREDITS);
         return undefined;
     }
 }

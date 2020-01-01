@@ -4,6 +4,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { Tags } from "./Tags";
+import { Resources } from '../Resources';
 
 export class RadSuits implements IProjectCard {
     public cost: number = 6;
@@ -17,7 +18,7 @@ export class RadSuits implements IProjectCard {
         if (game.getCitiesInPlay() < 2) {
             throw "Must have 2 cities in play";
         }
-        player.megaCreditProduction++;
+        player.setProduction(Resources.MEGACREDITS);
         return undefined;
     }
     public getVictoryPoints() {

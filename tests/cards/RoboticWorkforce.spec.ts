@@ -51,6 +51,6 @@ describe("RoboticWorkforce", function () {
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         action!.cb([new NoctisFarming()]);
-        expect(player.megaCreditProduction).to.eq(1);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     });
 });

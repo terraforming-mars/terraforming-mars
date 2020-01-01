@@ -7,19 +7,20 @@ import { IProjectCard } from "../../src/cards/IProjectCard";
 import { Game } from "../../src/Game";
 import { SelectCard } from "../../src/inputs/SelectCard";
 import { SelectHowToPay } from "../../src/inputs/SelectHowToPay";
+import { Resources } from '../../src/Resources';
 
 describe("BusinessNetwork", function () {
     it("Should play", function () {
         const card = new BusinessNetwork();
         const player = new Player("test", Color.BLUE, false);
         card.play(player);
-        expect(player.megaCreditProduction).to.eq(-1);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
     });
     it("Can't play", function () {
         const card = new BusinessNetwork();
         const player = new Player("test", Color.BLUE, false);
         expect(card.canPlay(player)).to.eq(true);
-        player.megaCreditProduction = -5;
+        player.setProduction(Resources.MEGACREDITS,-5);
         expect(card.canPlay(player)).to.eq(false);
     });
     it("Can act", function () {

@@ -12,13 +12,13 @@ export class NuclearPower implements IProjectCard {
     public name: string = "Nuclear Power";
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player): boolean {
-        return player.megaCreditProduction >= -3;
+        return player.getProduction(Resources.MEGACREDITS) >= -3;
     }
     public play(player: Player, _game: Game) {
-        if (player.megaCreditProduction < -3) {
+        if (player.getProduction(Resources.MEGACREDITS) < -3) {
             throw "Not enough mega credit production";
         }
-        player.megaCreditProduction -= 2;
+        player.setProduction(Resources.MEGACREDITS,-2);
         player.setProduction(Resources.ENERGY,3);
         return undefined;
     }

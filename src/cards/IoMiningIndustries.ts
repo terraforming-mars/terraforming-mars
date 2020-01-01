@@ -18,7 +18,7 @@ export class IoMiningIndustries implements IProjectCard {
     }
     public play(player: Player) {
         player.setProduction(Resources.TITANIUM,2);
-        player.megaCreditProduction += 2;
+        player.setProduction(Resources.MEGACREDITS,2);
         return undefined;
     }
 }

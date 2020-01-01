@@ -17,7 +17,7 @@ describe("CloudSeeding", function () {
         
         maxOutOceans(player, game, 3);
 
-        player.megaCreditProduction = -5;
+        player.setProduction(Resources.MEGACREDITS,-5);
         expect(card.canPlay(player, game)).to.eq(false);
 
         const action = card.play(player, game);
@@ -49,7 +49,6 @@ describe("CloudSeeding", function () {
         player2.setProduction(Resources.HEAT);
 
         maxOutOceans(player, game, 3);
-        player.megaCreditProduction = 0;
 
         const action = card.play(player, game);
 
@@ -62,7 +61,7 @@ describe("CloudSeeding", function () {
         
         expect(player2.getProduction(Resources.HEAT)).to.eq(0); // Reduced 1 step
         expect(player.getProduction(Resources.HEAT)).to.eq(3); // Not reduced!
-        expect(player.megaCreditProduction).to.eq(-1);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
         expect(player.plantProduction).to.eq(2);
     });
 });

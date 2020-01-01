@@ -22,7 +22,7 @@ export class Shuttles implements IProjectCard {
     }
     public play(player: Player) {
         player.setProduction(Resources.ENERGY,-1);
-        player.megaCreditProduction += 2;
+        player.setProduction(Resources.MEGACREDITS,2);
         return undefined;
     }
     public getVictoryPoints() {

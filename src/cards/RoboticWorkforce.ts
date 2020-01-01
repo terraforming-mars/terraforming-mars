@@ -226,7 +226,7 @@ export class RoboticWorkforce implements IProjectCard {
                 }
 
                 player.setProduction(Resources.ENERGY,updater.energyProduction);
-                player.megaCreditProduction += updater.megaCreditProduction;
+                player.setProduction(Resources.MEGACREDITS,updater.megaCreditProduction);
                 player.setProduction(Resources.STEEL,updater.steelProduction);
                 player.setProduction(Resources.TITANIUM,updater.titaniumProduction);
                 player.plantProduction += updater.plantProduction;

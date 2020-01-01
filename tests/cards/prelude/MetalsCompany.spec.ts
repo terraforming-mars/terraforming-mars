@@ -13,6 +13,6 @@ describe("MetalsCompany", function () {
         expect(action).to.eq(undefined);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
         expect(player.getProduction(Resources.STEEL)).to.eq(1);
-        expect(player.megaCreditProduction).to.eq(1);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     });
 });

@@ -8,7 +8,7 @@ export class MetalsCompany extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = "Metals Company";
     public play(player: Player) {     
-        player.megaCreditProduction++;
+        player.setProduction(Resources.MEGACREDITS);
         player.setProduction(Resources.TITANIUM);
         player.setProduction(Resources.STEEL);			
         return undefined;

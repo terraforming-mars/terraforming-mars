@@ -3,6 +3,7 @@ import { expect } from "chai";
 import { BusinessEmpire } from "../../../src/cards/prelude/BusinessEmpire";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
+import { Resources } from '../../../src/Resources';
 
 describe("BusinessEmpire", function () {
     it("Can play", function () {
@@ -18,6 +19,6 @@ describe("BusinessEmpire", function () {
         const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.megaCredits).to.eq(-6);
-        expect(player.megaCreditProduction).to.eq(6);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(6);
     });
 });

@@ -7,6 +7,7 @@ import { Game } from "../../src/Game";
 import { SelectCard } from "../../src/inputs/SelectCard";
 import { Birds } from "../../src/cards/Birds";
 import { Fish } from "../../src/cards/Fish";
+import { Resources } from '../../src/Resources';
 
 describe("EosChasmaNationalPark", function () {
     it("Can't play", function () {
@@ -40,7 +41,7 @@ describe("EosChasmaNationalPark", function () {
 
         expect(player.getResourcesOnCard(birds)).to.eq(1);
         expect(player.plants).to.eq(3);
-        expect(player.megaCreditProduction).to.eq(2);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
         expect(player.victoryPoints).to.eq(1);
     });
 
@@ -63,7 +64,7 @@ describe("EosChasmaNationalPark", function () {
 
         expect(player2.getResourcesOnCard(birds)).to.eq(1);
         expect(player.plants).to.eq(3);
-        expect(player.megaCreditProduction).to.eq(2);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
         expect(player.victoryPoints).to.eq(1);
     });
 });

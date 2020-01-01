@@ -19,11 +19,11 @@ export class CloudSeeding implements IProjectCard {
 
     public canPlay(player: Player, game: Game): boolean {
       if (this.playersWithHeatProduction(game).length === 0) return false;
-      return player.megaCreditProduction > -5 &&
+      return player.getProduction(Resources.MEGACREDITS) > -5 &&
         game.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game);
     }
     private doPlay(player: Player): undefined {
-      player.megaCreditProduction--;
+      player.setProduction(Resources.MEGACREDITS,-1);
       player.plantProduction += 2;
       return undefined;
     }

@@ -15,18 +15,18 @@ export class ImmigrantCity implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Immigrant City";
     public canPlay(player: Player,game: Game): boolean {
-        return player.getProduction(Resources.ENERGY) >= 1 && player.megaCreditProduction >= -3 && game.getAvailableSpacesForCity(player).length >= 0;
+        return player.getProduction(Resources.ENERGY) >= 1 && player.getProduction(Resources.MEGACREDITS) >= -3 && game.getAvailableSpacesForCity(player).length >= 0;
     }
     public onTilePlaced(player: Player, space: ISpace) {
         if (space.tile !== undefined && space.tile.tileType === TileType.CITY) {
-            player.megaCreditProduction++;
+            player.setProduction(Resources.MEGACREDITS);
         }
     }
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space for city tile", game.getAvailableSpacesForCity(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
             player.setProduction(Resources.ENERGY,-1);
-            player.megaCreditProduction++;
+            player.setProduction(Resources.MEGACREDITS);
             return undefined;
         });
     }

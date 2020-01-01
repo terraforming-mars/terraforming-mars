@@ -12,10 +12,10 @@ export class PeroxidePower implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Peroxide Power";
     public canPlay(player: Player): boolean {
-        return player.megaCreditProduction >= -4;
+        return player.getProduction(Resources.MEGACREDITS) >= -4;
     }
     public play(player: Player, _game: Game) {
-        player.megaCreditProduction--;
+        player.setProduction(Resources.MEGACREDITS,-1);
         player.setProduction(Resources.ENERGY,2);
         return undefined;
     }

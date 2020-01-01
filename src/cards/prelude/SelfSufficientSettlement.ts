@@ -5,6 +5,7 @@ import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
 import { SelectSpace } from "../../inputs/SelectSpace";
 import { ISpace } from "../../ISpace";
+import { Resources } from '../../Resources';
 
 export class SelfSufficientSettlement extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL, Tags.CITY];
@@ -12,7 +13,7 @@ export class SelfSufficientSettlement extends PreludeCard implements IProjectCar
     public play(player: Player, game: Game) {     
         return new SelectSpace("Select space for city tile", game.getAvailableSpacesForCity(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
-            player.megaCreditProduction += 2;
+            player.setProduction(Resources.MEGACREDITS,2);
             return undefined;
         }); 
     }

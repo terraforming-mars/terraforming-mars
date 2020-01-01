@@ -24,7 +24,7 @@ describe("HeatTrappers", function () {
         expect(player.getProduction(Resources.HEAT)).to.eq(1); // Not changed
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(-1);
-        expect(player.energyProduction).to.eq(1); // Incremented
+        expect(player.getProduction(Resources.ENERGY)).to.eq(1); // Incremented
     });
 
     it("Should be fast-playable with one default target", function () {
@@ -42,7 +42,7 @@ describe("HeatTrappers", function () {
         expect(player.getProduction(Resources.HEAT)).to.eq(0); // Not changed
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(-1);
-        expect(player.energyProduction).to.eq(1); // Incremented
+        expect(player.getProduction(Resources.ENERGY)).to.eq(1); // Incremented
         expect(player2.getProduction(Resources.HEAT)).to.eq(5); // Reduced two steps
     });
 
@@ -68,7 +68,7 @@ describe("HeatTrappers", function () {
         expect(player.getProduction(Resources.HEAT)).to.eq(0); // Not changed
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(-1);
-        expect(player.energyProduction).to.eq(1); // Incremented
+        expect(player.getProduction(Resources.ENERGY)).to.eq(1); // Incremented
         expect(player2.getProduction(Resources.HEAT)).to.eq(5); // Reduced two steps
     });
 

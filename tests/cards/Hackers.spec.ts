@@ -5,6 +5,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SelectPlayer } from "../../src/inputs/SelectPlayer";
+import { Resources } from '../../src/Resources';
 
 describe("Hackers", function () {
     it("Can't play", function () {
@@ -16,7 +17,7 @@ describe("Hackers", function () {
         const card = new Hackers();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        player.energyProduction = 1;
+        player.setProduction(Resources.ENERGY);
         const action = card.play(player, game);
         player.megaCreditProduction = 2;
         if (action !== undefined) {
@@ -27,6 +28,6 @@ describe("Hackers", function () {
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(-1);
         expect(player.megaCreditProduction).to.eq(2);
-        expect(player.energyProduction).to.eq(0);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     });
 });

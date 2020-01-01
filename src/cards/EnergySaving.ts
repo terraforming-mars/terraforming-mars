@@ -4,6 +4,7 @@ import {Tags} from './Tags';
 import {IProjectCard} from './IProjectCard';
 import {Player} from '../Player';
 import {Game} from '../Game';
+import { Resources } from '../Resources';
 
 export class EnergySaving implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
@@ -14,7 +15,7 @@ export class EnergySaving implements IProjectCard {
       return true;
     }
     public play(player: Player, game: Game) {
-      player.energyProduction += game.getCitiesInPlay();
+      player.setProduction(Resources.ENERGY,game.getCitiesInPlay());
       return undefined;
     }
 }

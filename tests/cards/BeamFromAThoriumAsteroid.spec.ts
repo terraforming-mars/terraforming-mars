@@ -20,6 +20,6 @@ describe("BeamFromAThoriumAsteroid", function () {
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
         expect(player.getProduction(Resources.HEAT)).to.eq(3);
-        expect(player.energyProduction).to.eq(3);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(3);
     });
 });

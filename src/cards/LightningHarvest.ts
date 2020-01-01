@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class LightningHarvest implements IProjectCard {
     public cost: number = 8;
@@ -17,7 +18,7 @@ export class LightningHarvest implements IProjectCard {
         if (player.getTagCount(Tags.SCIENCE) < 3) {
             throw "Requires 3 science tags";
         }
-        player.energyProduction++;
+        player.setProduction(Resources.ENERGY);
         player.megaCreditProduction++;
         return undefined;
     }

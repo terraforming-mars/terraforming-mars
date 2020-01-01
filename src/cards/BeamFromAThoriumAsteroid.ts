@@ -15,7 +15,7 @@ export class BeamFromAThoriumAsteroid implements IProjectCard {
     }
     public play(player: Player) {
       player.setProduction(Resources.HEAT,3);
-      player.energyProduction += 3;
+      player.setProduction(Resources.ENERGY,3);
       return undefined;
     }
     public getVictoryPoints() {

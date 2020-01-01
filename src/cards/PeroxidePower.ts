@@ -4,6 +4,7 @@ import { IProjectCard } from "./IProjectCard";
 import { CardType } from "./CardType";
 import { Game } from "../Game";
 import { Player } from "../Player";
+import { Resources } from '../Resources';
 
 export class PeroxidePower implements IProjectCard {
     public cost: number = 7;
@@ -15,7 +16,7 @@ export class PeroxidePower implements IProjectCard {
     }
     public play(player: Player, _game: Game) {
         player.megaCreditProduction--;
-        player.energyProduction += 2;
+        player.setProduction(Resources.ENERGY,2);
         return undefined;
     }
 }

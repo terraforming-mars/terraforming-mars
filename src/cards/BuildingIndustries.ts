@@ -11,10 +11,10 @@ export class BuildingIndustries implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Building Industries';
     public canPlay(player: Player): boolean {
-      return player.energyProduction >= 1;
+      return player.getProduction(Resources.ENERGY) >= 1;
     }
     public play(player: Player) {
-      player.energyProduction--;
+      player.setProduction(Resources.ENERGY,-1);
       player.setProduction(Resources.STEEL,2);
       return undefined;
     }

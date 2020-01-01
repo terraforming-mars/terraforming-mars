@@ -12,13 +12,13 @@ export class StripMine implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Strip Mine";
     public canPlay(player: Player, _game: Game): boolean {
-        return player.energyProduction >= 2;
+        return player.getProduction(Resources.ENERGY) >= 2;
     }
     public play(player: Player, game: Game) {
-        if (player.energyProduction < 2) {
+        if (player.getProduction(Resources.ENERGY) < 2) {
             throw "Must have energy production";
         }
-        player.energyProduction -= 2;
+        player.setProduction(Resources.ENERGY,-2);
         player.setProduction(Resources.STEEL,2);
         player.setProduction(Resources.TITANIUM);
         return game.increaseOxygenLevel(player, 2);

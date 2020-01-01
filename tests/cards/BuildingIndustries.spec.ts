@@ -14,9 +14,9 @@ describe("BuildingIndustries", function () {
     it("Should play", function () {
         const card = new BuildingIndustries();
         const player = new Player("test", Color.BLUE, false);
-        player.energyProduction = 1;
+        player.setProduction(Resources.ENERGY);
         card.play(player);
-        expect(player.energyProduction).to.eq(0);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(0);
         expect(player.getProduction(Resources.STEEL)).to.eq(2);
     });
 });

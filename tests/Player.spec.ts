@@ -24,15 +24,15 @@ describe("Player", function () {
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
         const player3 = new Player("test3", Color.YELLOW, false);
-        player2.energyProduction = 2;
-        player3.energyProduction = 2;
+        player2.setProduction(Resources.ENERGY,2);
+        player3.setProduction(Resources.ENERGY,2);
         player.playedCards.push(new LunarBeam());
         player.playedCards.push(new LunarBeam());
         const action = card.play(player, new Game("foobar", [player, player2, player3], player));
         if (action !== undefined) {
             player.setWaitingFor(action);
             player.process([[player2.id]]);
-            expect(player.energyProduction).to.eq(1);
+            expect(player.getProduction(Resources.ENERGY)).to.eq(1);
         }
     });
     it("Should error with input for run select player for PowerSupplyConsortium", function () {

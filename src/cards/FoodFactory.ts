@@ -11,10 +11,10 @@ export class FoodFactory implements IProjectCard {
   public name: string = 'Food Factory';
   public cardType: CardType = CardType.AUTOMATED;
   public canPlay(player: Player): boolean {
-    return player.plantProduction >= 1;
+    return player.getProduction(Resources.PLANTS) >= 1;
   }
   public play(player: Player) {
-    player.plantProduction--;
+    player.setProduction(Resources.PLANTS,-1);
     player.setProduction(Resources.MEGACREDITS,4);
     return undefined;
   }

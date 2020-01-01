@@ -19,7 +19,7 @@ export class MagneticFieldGenerators implements IProjectCard {
             throw "Must have 4 energy production";
         }
         player.setProduction(Resources.ENERGY,-4);
-        player.plantProduction += 2;
+        player.setProduction(Resources.PLANTS,2);
         player.terraformRating += 3;
         return undefined;
     }

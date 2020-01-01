@@ -4,6 +4,7 @@ import { Moss } from "../../src/cards/Moss";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("Moss", function () {
     it("Can't play", function () {
@@ -22,6 +23,6 @@ describe("Moss", function () {
         const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.plants).to.eq(-1);
-        expect(player.plantProduction).to.eq(1);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     });
 });

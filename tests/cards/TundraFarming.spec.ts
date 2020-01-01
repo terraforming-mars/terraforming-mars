@@ -18,7 +18,7 @@ describe("TundraFarming", function () {
         const player = new Player("test", Color.BLUE, false);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.plantProduction).to.eq(1);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
         expect(player.plants).to.eq(1);
         player.victoryPoints += card.getVictoryPoints();

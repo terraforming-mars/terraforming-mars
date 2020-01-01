@@ -139,10 +139,10 @@ export class RoboticWorkforce implements IProjectCard {
                         return undefined;
                     }
                     return new SelectPlayer(game.getPlayers(), "Select player to remove plant production", (foundPlayer: Player) => {
-                        if (foundPlayer.plantProduction < 1) {
+                        if (foundPlayer.getProduction(Resources.PLANTS) < 1) {
                             throw "Player must have plant production";
                         }
-                        foundPlayer.plantProduction--;
+                        foundPlayer.setProduction(Resources.PLANTS,-1,game,player);
                         player.setProduction(Resources.ENERGY,2);
                         return undefined;
                     });
@@ -218,7 +218,7 @@ export class RoboticWorkforce implements IProjectCard {
                 if (player.getProduction(Resources.TITANIUM) + updater.titaniumProduction < 0) {
                     throw "not enough titanium production";
                 }
-                if (player.plantProduction + updater.plantProduction < 0) {
+                if (player.getProduction(Resources.PLANTS) + updater.plantProduction < 0) {
                     throw "not enough plant production";
                 }
                 if (player.getProduction(Resources.HEAT) + updater.heatProduction < 0) {
@@ -229,7 +229,7 @@ export class RoboticWorkforce implements IProjectCard {
                 player.setProduction(Resources.MEGACREDITS,updater.megaCreditProduction);
                 player.setProduction(Resources.STEEL,updater.steelProduction);
                 player.setProduction(Resources.TITANIUM,updater.titaniumProduction);
-                player.plantProduction += updater.plantProduction;
+                player.setProduction(Resources.PLANTS,updater.plantProduction);
                 player.setProduction(Resources.HEAT,updater.heatProduction);
 
                return undefined;

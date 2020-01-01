@@ -8,6 +8,7 @@ import { SelectPlayer } from "../inputs/SelectPlayer";
 import { ISpace } from "../ISpace";
 import { ResourceType } from "../ResourceType";
 import { TileType } from "../TileType";
+import { Resources } from '../Resources';
 
 export class Herbivores implements IProjectCard {
     public cost: number = 12;
@@ -17,7 +18,7 @@ export class Herbivores implements IProjectCard {
     public resourceType: ResourceType = ResourceType.ANIMAL;
 
     private getPlayersWithPlantProduction(currentPlayer: Player, game: Game): Array<Player> {
-        var players = game.getPlayers().filter((p) => p.plantProduction > 0);
+        var players = game.getPlayers().filter((p) => p.getProduction(Resources.PLANTS) > 0);
 
         if (players.length > 1) {
           players = players.filter((p) => p.id != currentPlayer.id)
@@ -25,8 +26,8 @@ export class Herbivores implements IProjectCard {
         return players
     }
 
-    private doPlay(currentPlayer: Player, targetPlayer: Player): void {
-        targetPlayer.plantProduction = Math.max(0, targetPlayer.plantProduction - 1);
+    private doPlay(currentPlayer: Player, targetPlayer: Player, game: Game): void {
+        targetPlayer.setProduction(Resources.PLANTS,-1,game,currentPlayer);
         currentPlayer.addResourceTo(this);
     }
 
@@ -54,7 +55,7 @@ export class Herbivores implements IProjectCard {
         const players = this.getPlayersWithPlantProduction(player, game);
 
         if (players.length === 1) {
-            this.doPlay(player, players[0]);
+            this.doPlay(player, players[0],game);
             return undefined;
         }
 
@@ -62,7 +63,7 @@ export class Herbivores implements IProjectCard {
             players, 
             "Select player to decrease plant production 1 step", 
             (foundPlayer: Player) => {
-                this.doPlay(player, foundPlayer)
+                this.doPlay(player, foundPlayer,game)
                 return undefined;
             }
         );

@@ -19,7 +19,7 @@ describe("Farming", function () {
         const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
-        expect(player.plantProduction).to.eq(2);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(2);
         expect(player.plants).to.eq(2);
     });
 });

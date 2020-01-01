@@ -5,6 +5,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SelectPlayer } from "../../src/inputs/SelectPlayer";
+import { Resources } from '../../src/Resources';
 
 describe("Herbivores", function () {
     it("Should be fast-playable with one default target", function () {
@@ -14,14 +15,14 @@ describe("Herbivores", function () {
         const game = new Game("foobar2", [player, player2], player);
 
         (game as any).oxygenLevel = 8;
-        player2.plantProduction = 1;
+        player2.setProduction(Resources.PLANTS);
 
         expect(card.canPlay(player, game)).to.eq(true);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
 
-        expect(player2.plantProduction).to.eq(0); // Reduced
-        expect(player.plantProduction).to.eq(0); // Not changed
+        expect(player2.getProduction(Resources.PLANTS)).to.eq(0); // Reduced
+        expect(player.getProduction(Resources.PLANTS)).to.eq(0); // Not changed
         expect(player.getResourcesOnCard(card)).to.eq(1);
 
     });
@@ -34,8 +35,8 @@ describe("Herbivores", function () {
         const game = new Game("foobar3", [player, player2, player3], player);
 
         (game as any).oxygenLevel = 8;
-        player2.plantProduction = 1;
-        player3.plantProduction = 7;
+        player2.setProduction(Resources.PLANTS);
+        player3.setProduction(Resources.PLANTS,7);
 
         expect(card.canPlay(player, game)).to.eq(true, "Cant play");
         const action = card.play(player, game);
@@ -45,9 +46,9 @@ describe("Herbivores", function () {
 
         action.cb(player2)
 
-        expect(player3.plantProduction).to.eq(7); // Not changed
-        expect(player2.plantProduction).to.eq(0); // Reduced
-        expect(player.plantProduction).to.eq(0);
+        expect(player3.getProduction(Resources.PLANTS)).to.eq(7); // Not changed
+        expect(player2.getProduction(Resources.PLANTS)).to.eq(0); // Reduced
+        expect(player.getProduction(Resources.PLANTS)).to.eq(0);
         expect(player.getResourcesOnCard(card)).to.eq(1);
     });
 
@@ -61,7 +62,7 @@ describe("Herbivores", function () {
         expect(card.canPlay(player, game)).to.eq(false);
 
         (game as any).oxygenLevel = 7;
-        player2.plantProduction = 2;
+        player2.setProduction(Resources.PLANTS,2);
         expect(card.canPlay(player, game)).to.eq(false);
     });
 
@@ -94,7 +95,7 @@ describe("Herbivores", function () {
 
         expect(card.canPlay(player, game)).to.eq(true, "Can't play for some reason");
 
-        player.plantProduction = 1;
+        player.setProduction(Resources.PLANTS);
 
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
@@ -102,7 +103,7 @@ describe("Herbivores", function () {
         player.playedCards.push(card);
         player.victoryPoints = 0
 
-        expect(player.plantProduction).to.eq(1, "Somehow plantProduction is changed"); // Not changed
+        expect(player.getProduction(Resources.PLANTS)).to.eq(1, "Somehow plantProduction is changed"); // Not changed
 
         game.addGreenery(player, game.getAvailableSpacesOnLand(player)[0].id);
         game.addGreenery(player, game.getAvailableSpacesOnLand(player)[0].id);

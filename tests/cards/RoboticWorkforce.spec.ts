@@ -38,9 +38,9 @@ describe("RoboticWorkforce", function () {
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         const selectPlayer = action!.cb([player.playedCards[0]]) as SelectPlayer;
-        player.plantProduction = 1;
+        player.setProduction(Resources.PLANTS);
         selectPlayer.cb(player);
-        expect(player.plantProduction).to.eq(0);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(0);
         expect(player.getProduction(Resources.ENERGY)).to.eq(2);
     });
     it("Should play", function () {

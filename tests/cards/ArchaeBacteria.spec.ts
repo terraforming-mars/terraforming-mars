@@ -4,6 +4,7 @@ import { ArchaeBacteria } from "../../src/cards/ArchaeBacteria";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("ArchaeBacteria", function () {
     it("Can't play", function () {
@@ -19,6 +20,6 @@ describe("ArchaeBacteria", function () {
         const card = new ArchaeBacteria();
         const player = new Player("test", Color.BLUE, false);
         card.play(player);
-        expect(player.plantProduction).to.eq(1);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     });
 });

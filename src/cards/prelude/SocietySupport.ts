@@ -9,7 +9,7 @@ export class SocietySupport extends PreludeCard implements IProjectCard {
     public name: string = "Society Support";
     public play(player: Player) {     
         player.setProduction(Resources.MEGACREDITS,-1);
-        player.plantProduction++;
+        player.setProduction(Resources.PLANTS);
         player.setProduction(Resources.ENERGY);
         player.setProduction(Resources.HEAT);			
         return undefined;

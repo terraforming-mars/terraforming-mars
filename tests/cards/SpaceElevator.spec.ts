@@ -4,6 +4,7 @@ import { SpaceElevator } from "../../src/cards/SpaceElevator";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("SpaceElevator", function () {
     it("Can't act", function () {
@@ -17,7 +18,7 @@ describe("SpaceElevator", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.titaniumProduction).to.eq(1);
+        expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(2);
     });

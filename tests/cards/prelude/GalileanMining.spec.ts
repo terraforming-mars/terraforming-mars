@@ -3,6 +3,7 @@ import { expect } from "chai";
 import { GalileanMining } from "../../../src/cards/prelude/GalileanMining";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
+import { Resources } from '../../../src/Resources';
 
 describe("GalileanMining", function () {
     it("Can play", function () {
@@ -18,6 +19,6 @@ describe("GalileanMining", function () {
         const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.megaCredits).to.eq(-5);
-        expect(player.titaniumProduction).to.eq(2);
+        expect(player.getProduction(Resources.TITANIUM)).to.eq(2);
     });
 });

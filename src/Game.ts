@@ -26,8 +26,6 @@ import {ALL_PRELUDE_CORPORATIONS} from './Dealer';
 import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
 import { Resources } from "./Resources";
-import {MaxwellBase} from './cards/venusNext/MaxwellBase';
-import { Aphrodite } from './cards/venusNext/Aphrodite';
 
 export class Game {
     public activePlayer: Player;

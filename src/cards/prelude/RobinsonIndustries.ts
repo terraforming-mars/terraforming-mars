@@ -24,13 +24,13 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
             player.megaCredits -= 4;
             return undefined;
         })];
-        if (player.steelProduction < minimum) {
+        if (player.getProduction(Resources.STEEL) < minimum) {
             lowest = [];
-            minimum = player.steelProduction;
+            minimum = player.getProduction(Resources.STEEL);
         }
-        if (player.steelProduction === minimum) {
+        if (player.getProduction(Resources.STEEL) === minimum) {
             lowest.push(new SelectOption("Increase steel production 1 step", () => {
-                player.steelProduction++;
+                player.setProduction(Resources.STEEL);
                 player.megaCredits -= 4;
                 return undefined;
             }));

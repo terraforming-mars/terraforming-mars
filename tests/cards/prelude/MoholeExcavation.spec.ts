@@ -13,6 +13,6 @@ describe("MoholeExcavation", function () {
         expect(action).to.eq(undefined);
         expect(player.getProduction(Resources.HEAT)).to.eq(2);
         expect(player.heat).to.eq(2);
-        expect(player.steelProduction).to.eq(1);
+        expect(player.getProduction(Resources.STEEL)).to.eq(1);
     });
 });

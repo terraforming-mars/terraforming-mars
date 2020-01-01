@@ -3,6 +3,7 @@ import { expect } from "chai";
 import { MiningOperations } from "../../../src/cards/prelude/MiningOperations";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
+import { Resources } from '../../../src/Resources';
 
 describe("MiningOperations", function () {
     it("Should play", function () {
@@ -10,7 +11,7 @@ describe("MiningOperations", function () {
         const player = new Player("test", Color.BLUE, false);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.steelProduction).to.eq(2);
+        expect(player.getProduction(Resources.STEEL)).to.eq(2);
         expect(player.steel).to.eq(4);
     });
 });

@@ -8,7 +8,7 @@ export class MoholeExcavation extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Mohole Excavation";
     public play(player: Player) {     
-        player.steelProduction++;
+        player.setProduction(Resources.STEEL);
         player.setProduction(Resources.HEAT,2);
         player.heat += 2;
         return undefined;

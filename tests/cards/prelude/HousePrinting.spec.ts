@@ -3,6 +3,7 @@ import { expect } from "chai";
 import { HousePrinting } from "../../../src/cards/prelude/HousePrinting";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
+import { Resources } from '../../../src/Resources';
 
 describe("HousePrinting", function () {
     it("Can play", function () {
@@ -16,6 +17,6 @@ describe("HousePrinting", function () {
         expect(action).to.eq(undefined);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
-        expect(player.steelProduction).to.eq(1);
+        expect(player.getProduction(Resources.STEEL)).to.eq(1);
     });
 });

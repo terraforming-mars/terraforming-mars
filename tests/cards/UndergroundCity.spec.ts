@@ -4,6 +4,7 @@ import { UndergroundCity } from "../../src/cards/UndergroundCity";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("UndergroundCity", function () {
     it("Can't play", function () {
@@ -22,6 +23,6 @@ describe("UndergroundCity", function () {
         action.cb(action.availableSpaces[0]);
         expect(game.getCitiesInPlay()).to.eq(1);
         expect(player.energyProduction).to.eq(0);
-        expect(player.steelProduction).to.eq(2);
+        expect(player.getProduction(Resources.STEEL)).to.eq(2);
     });
 });

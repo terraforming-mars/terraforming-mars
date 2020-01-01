@@ -62,6 +62,6 @@ describe("CloudSeeding", function () {
         expect(player2.getProduction(Resources.HEAT)).to.eq(0); // Reduced 1 step
         expect(player.getProduction(Resources.HEAT)).to.eq(3); // Not reduced!
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
-        expect(player.plantProduction).to.eq(2);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(2);
     });
 });

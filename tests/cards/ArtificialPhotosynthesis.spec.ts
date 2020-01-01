@@ -15,7 +15,7 @@ describe("ArtificialPhotosynthesis", function () {
         expect(action instanceof OrOptions).to.eq(true);
         expect(action.options.length).to.eq(2);
         action.options[0].cb();
-        expect(player.plantProduction).to.eq(1);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
         action.options[1].cb();
         expect(player.getProduction(Resources.ENERGY)).to.eq(2);
     });

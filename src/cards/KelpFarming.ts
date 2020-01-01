@@ -16,7 +16,7 @@ export class KelpFarming implements IProjectCard {
     }
     public play(player: Player) {
         player.setProduction(Resources.MEGACREDITS,2);
-        player.plantProduction += 3;
+        player.setProduction(Resources.PLANTS,3);
         player.plants += 2;
         return undefined;
     }

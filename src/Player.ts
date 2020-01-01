@@ -51,7 +51,7 @@ export class Player {
     public heat: number = 0;
     private heatProduction: number = 0;
     public plants: number = 0;
-    public plantProduction: number = 0;
+    private plantProduction: number = 0;
     public cardsInHand: Array<IProjectCard> = [];
     public preludeCardsInHand: Array<IProjectCard> = [];    
     public playedCards: Array<IProjectCard> = [];

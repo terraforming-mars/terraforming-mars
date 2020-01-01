@@ -23,10 +23,10 @@ describe("Livestock", function () {
         const card = new Livestock();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        player.plantProduction = 1;
+        player.setProduction(Resources.PLANTS);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.plantProduction).to.eq(0);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(0);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
         player.addResourceTo(card, 4);
         expect(card.getVictoryPoints(player)).to.eq(4);

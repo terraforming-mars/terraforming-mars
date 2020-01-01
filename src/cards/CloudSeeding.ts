@@ -24,7 +24,7 @@ export class CloudSeeding implements IProjectCard {
     }
     private doPlay(player: Player): undefined {
       player.setProduction(Resources.MEGACREDITS,-1);
-      player.plantProduction += 2;
+      player.setProduction(Resources.PLANTS,2);
       return undefined;
     }
     public play(player: Player, game: Game) {

@@ -19,7 +19,7 @@ export class MagneticFieldDome implements IProjectCard {
             throw "Need 2 energy production to decrease";
         }
         player.setProduction(Resources.ENERGY,-2);
-        player.plantProduction++;
+        player.setProduction(Resources.PLANTS);
         player.terraformRating++;
         return undefined;
     }

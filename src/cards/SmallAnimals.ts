@@ -7,6 +7,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
 import { SelectPlayer } from "../inputs/SelectPlayer";
+import { Resources } from '../Resources';
 
 export class SmallAnimals implements IActionCard, IProjectCard {
     public cost: number = 6;
@@ -18,7 +19,7 @@ export class SmallAnimals implements IActionCard, IProjectCard {
         return game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game) && this.getAvailablePlayers(player, game).length > 0;
     }
     private getAvailablePlayers(_player: Player, game: Game): Array<Player> {
-        return game.getPlayers().filter((player) => player.plantProduction > 0);
+        return game.getPlayers().filter((player) => player.getProduction(Resources.PLANTS) > 0);
     }
     public getVictoryPoints(player: Player) {
         return Math.floor(player.getResourcesOnCard(this) / 2);
@@ -27,7 +28,7 @@ export class SmallAnimals implements IActionCard, IProjectCard {
         if (game.getPlayers().length == 1) return undefined;
         const availablePlayers = this.getAvailablePlayers(player, game);
         return new SelectPlayer(availablePlayers, "Select player to decrease plant production", (foundPlayer: Player) => {
-            foundPlayer.plantProduction--;
+            foundPlayer.setProduction(Resources.PLANTS,-1,game,player);
             return undefined;
         });
     }

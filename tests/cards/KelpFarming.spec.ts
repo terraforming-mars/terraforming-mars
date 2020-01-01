@@ -19,7 +19,7 @@ describe("KelpFarming", function () {
         const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
-        expect(player.plantProduction).to.eq(3);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(3);
         expect(player.plants).to.eq(2);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);

@@ -6,6 +6,7 @@ import { CardType } from "./CardType";
 import { Game } from "../Game";
 import { Player } from "../Player";
 import { ResourceType } from "../ResourceType";
+import { Resources } from '../Resources';
 
 export class Livestock implements IActionCard, IProjectCard {
     public cost: number = 13;
@@ -21,7 +22,7 @@ export class Livestock implements IActionCard, IProjectCard {
     }
     public play(player: Player) {
         player.plantProduction--;
-        player.megaCreditProduction += 2;
+        player.setProduction(Resources.MEGACREDITS,2);
         return undefined;
     }
     public canAct(): boolean {

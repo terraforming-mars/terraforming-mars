@@ -15,7 +15,7 @@ describe("TropicalResort", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         expect(player.getProduction(Resources.HEAT)).to.eq(0);
-        expect(player.megaCreditProduction).to.eq(3);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(2);
     });

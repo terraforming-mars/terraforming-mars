@@ -20,7 +20,7 @@ export class LavaTubeSettlement implements IProjectCard {
     public play(player: Player, game: Game) {
         return new SelectSpace("Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons", LavaFlows.getVolcanicSpaces(player, game), (space: ISpace) => {
             game.addCityTile(player, space.id);
-            player.megaCreditProduction += 2;
+            player.setProduction(Resources.MEGACREDITS,2);
             player.setProduction(Resources.ENERGY,-1);
             return undefined;
         });

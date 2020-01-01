@@ -26,7 +26,7 @@ describe("CorporateStronghold", function () {
         action.cb(action.availableSpaces[0]);
         expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-        expect(player.megaCreditProduction).to.eq(3);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(-2);
     });

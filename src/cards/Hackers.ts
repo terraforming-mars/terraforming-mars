@@ -17,14 +17,14 @@ export class Hackers implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         if (game.getPlayers().length == 1) {
-            player.megaCreditProduction += 2;
+            player.setProduction(Resources.MEGACREDITS,2);
             player.setProduction(Resources.ENERGY,-1);
             return undefined;
         }
         return new SelectPlayer(game.getPlayers(), "Select player to decrease mega credit production 2 steps", (foundPlayer: Player) => {
             player.setProduction(Resources.ENERGY,-1);
-            foundPlayer.megaCreditProduction = Math.max(-5, foundPlayer.megaCreditProduction - 2);
-            player.megaCreditProduction += 2;
+            foundPlayer.setProduction(Resources.MEGACREDITS,-2,game,player);
+            player.setProduction(Resources.MEGACREDITS,2);
             return undefined;
         });
     }

@@ -25,7 +25,7 @@ export class UrbanizedArea implements IProjectCard {
         return new SelectSpace("Select space next to at least 2 other city tiles", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
             game.addCityTile(player, foundSpace.id);
             player.setProduction(Resources.ENERGY,-1);
-            player.megaCreditProduction += 2;
+            player.setProduction(Resources.MEGACREDITS,2);
             return undefined;
         });
     }

@@ -18,9 +18,9 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
         return player.canAfford(4); 
     }
     public action(player: Player) {
-        let minimum = player.megaCreditProduction;
+        let minimum = player.getProduction(Resources.MEGACREDITS);
         let lowest: Array<SelectOption> = [new SelectOption("Increase MC production 1 step", () => {
-            player.megaCreditProduction++;
+            player.setProduction(Resources.MEGACREDITS);
             player.megaCredits -= 4;
             return undefined;
         })];

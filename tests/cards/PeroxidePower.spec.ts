@@ -13,7 +13,7 @@ describe("PeroxidePower", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.megaCreditProduction).to.eq(-1);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
         expect(player.getProduction(Resources.ENERGY)).to.eq(2);
     });
 });

@@ -37,7 +37,7 @@ export class CommercialDistrict implements IProjectCard {
               card: this.name
             });
             player.setProduction(Resources.ENERGY,-1);
-            player.megaCreditProduction += 4;
+            player.setProduction(Resources.MEGACREDITS,4);
             return undefined;
           }
       );

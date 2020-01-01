@@ -4,6 +4,7 @@ import { TollStation } from "../../src/cards/TollStation";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("TollStation", function () {
     it("Should play", function () {
@@ -14,8 +15,8 @@ describe("TollStation", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         anotherPlayer.playedCards.push(card);
-        expect(player.megaCreditProduction).to.eq(0);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
         card.play(player, game);
-        expect(player.megaCreditProduction).to.eq(1);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     });
 });

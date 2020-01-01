@@ -29,7 +29,7 @@ describe("OpenCity", function () {
         expect(action).not.to.eq(undefined);
         action.cb(action.availableSpaces[0]);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-        expect(player.megaCreditProduction).to.eq(4);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
         expect(player.plants).to.eq(2);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);

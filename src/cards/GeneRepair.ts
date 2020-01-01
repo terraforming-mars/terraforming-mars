@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class GeneRepair implements IProjectCard {
     public cost: number = 12;
@@ -17,7 +18,7 @@ export class GeneRepair implements IProjectCard {
         if (player.getTagCount(Tags.SCIENCE) < 3) {
             throw "Requires 3 science tags.";
         }
-        player.megaCreditProduction += 2;
+        player.setProduction(Resources.MEGACREDITS,2);
         return undefined;
     }
     public getVictoryPoints() {

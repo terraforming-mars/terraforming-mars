@@ -3,6 +3,7 @@ import { Zeppelins } from "../../src/cards/Zeppelins";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("Zeppelins", function () {
     it("Can't play", function () {
@@ -22,7 +23,7 @@ describe("Zeppelins", function () {
         game.addCityTile(player, lands[0].id);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.megaCreditProduction).to.eq(1);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
     });

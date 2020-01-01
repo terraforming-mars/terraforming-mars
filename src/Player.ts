@@ -41,7 +41,7 @@ export class Player {
     public titaniumValue: number = 3;
     public steelValue: number = 2;
     public megaCredits: number = 0;
-    public megaCreditProduction: number = 0;
+    private megaCreditProduction: number = 0;
     public steel: number = 0;
     public titanium: number = 0;
     public energy: number = 0;
@@ -991,7 +991,7 @@ export class Player {
           spaceId: string
       ) => {
         game.addCityTile(this, spaceId);
-        this.megaCreditProduction++;
+        this.setProduction(Resources.MEGACREDITS);
         this.payForStandardProject(
             StandardProjectType.CITY,
             megaCredits,

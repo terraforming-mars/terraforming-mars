@@ -4,6 +4,7 @@ import { GeneRepair } from "../../src/cards/GeneRepair";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("GeneRepair", function () {
     it("Should throw", function () {
@@ -19,7 +20,7 @@ describe("GeneRepair", function () {
         player.playedCards.push(card, card, card);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.megaCreditProduction).to.eq(2);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(2);
     });

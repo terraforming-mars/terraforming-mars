@@ -7,6 +7,7 @@ import { SpaceType } from "../SpaceType";
 import { Tags } from "./Tags";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
+import { Resources } from '../Resources';
 
 export class ProtectedValley implements IProjectCard {
     public cost: number = 23;
@@ -21,7 +22,7 @@ export class ProtectedValley implements IProjectCard {
             "Select space reserved for ocean to place greenery tile", 
             game.getAvailableSpacesForOcean(player), 
             (space: ISpace) => {
-                player.megaCreditProduction += 2;
+                player.setProduction(Resources.MEGACREDITS,2);
                 return game.addGreenery(player, space.id, SpaceType.OCEAN);
             }
         );

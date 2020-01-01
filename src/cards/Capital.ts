@@ -33,7 +33,7 @@ export class Capital implements IProjectCard {
     }
     public play(player: Player, game: Game) {
       player.setProduction(Resources.ENERGY,-2);
-      player.megaCreditProduction += 5;
+      player.setProduction(Resources.MEGACREDITS,5);
       return new SelectSpace(
           'Select space for special city tile',
           game.getAvailableSpacesForCity(player),

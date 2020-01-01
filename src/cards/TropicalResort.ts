@@ -16,7 +16,7 @@ export class TropicalResort implements IProjectCard {
     }
     public play(player: Player, _game: Game) {
         player.setProduction(Resources.HEAT,-2);
-        player.megaCreditProduction += 3;
+        player.setProduction(Resources.MEGACREDITS,3);
         return undefined;
     }
     public getVictoryPoints() {

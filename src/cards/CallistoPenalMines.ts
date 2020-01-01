@@ -3,6 +3,7 @@ import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
+import { Resources } from '../Resources';
 
 export class CallistoPenalMines implements IProjectCard {
     public cost: number = 24;
@@ -13,7 +14,7 @@ export class CallistoPenalMines implements IProjectCard {
       return true;
     }
     public play(player: Player) {
-      player.megaCreditProduction += 3;
+      player.setProduction(Resources.MEGACREDITS,3);
       return undefined;
     }
     public getVictoryPoints() {

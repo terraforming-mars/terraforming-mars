@@ -24,7 +24,7 @@ describe("CommercialDistrict", function () {
         expect(action instanceof SelectSpace);
         action.cb(action.availableSpaces[0]);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-        expect(player.megaCreditProduction).to.eq(4);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
         const adjacent = game.getAdjacentSpaces(action.availableSpaces[0]);
         adjacent[0].tile = { tileType: TileType.CITY, card: card.name };
         adjacent[0].player = player;

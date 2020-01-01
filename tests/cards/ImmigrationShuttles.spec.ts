@@ -4,6 +4,7 @@ import { ImmigrationShuttles } from "../../src/cards/ImmigrationShuttles";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("ImmigrationShuttles", function () {
     it("Should play", function () {
@@ -12,7 +13,7 @@ describe("ImmigrationShuttles", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.megaCreditProduction).to.eq(5);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
         for (var i = 0; i < 5; i++) {
             game.addCityTile(player, game.getAvailableSpacesOnLand(player)[0].id);
         }

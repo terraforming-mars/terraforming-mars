@@ -7,6 +7,7 @@ import { SelectSpace } from "../../inputs/SelectSpace";
 import { SpaceType } from "../../SpaceType";
 import { ISpace } from "../../ISpace";
 import { TileType } from "../../TileType";
+import { Resources } from '../../Resources';
 
 export class TharsisRepublic implements CorporationCard {
     public name: string = "Tharsis Republic";
@@ -24,14 +25,14 @@ export class TharsisRepublic implements CorporationCard {
                 player.megaCredits += 3;
             }
             if (space.spaceType !== SpaceType.COLONY) {
-                player.megaCreditProduction++;
+                player.setProduction(Resources.MEGACREDITS);
             }
         }
     }
     public play(player: Player, game: Game) {
         if (game.getPlayers().length == 1) {
             // Get bonus for 2 neutral cities
-            player.megaCreditProduction =+ 2;
+            player.setProduction(Resources.MEGACREDITS,2);
         }
         return undefined;
     }

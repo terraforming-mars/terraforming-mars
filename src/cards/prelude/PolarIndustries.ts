@@ -12,7 +12,7 @@ export class PolarIndustries extends PreludeCard implements IProjectCard {
     public name: string = "Polar Industries";
     public play(player: Player, game: Game) {
         if (game.noOceansAvailable()) {
-            player.heatProduction += 2;
+            player.setProduction(Resources.HEAT,2);
             return undefined;
         }
         return new SelectSpace("Select space for ocean", game.getAvailableSpacesForOcean(player), (space: ISpace) => {

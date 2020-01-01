@@ -4,6 +4,7 @@ import {CardType} from './CardType';
 import {Player} from '../Player';
 import {Game} from '../Game';
 import {SelectPlayer} from '../inputs/SelectPlayer';
+import { Resources } from '../Resources';
 
 export class AsteroidMiningConsortium implements IProjectCard {
     public cost: number = 13;
@@ -11,22 +12,19 @@ export class AsteroidMiningConsortium implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Asteroid Mining Consortium';
     public canPlay(player: Player): boolean {
-      return player.titaniumProduction >= 1;
+      return player.getProduction(Resources.TITANIUM) >= 1;
     }
     public play(player: Player, game: Game) {
       if (game.getPlayers().length == 1) {
-        player.titaniumProduction++;
+        player.setProduction(Resources.TITANIUM);
         return undefined;
       }
       return new SelectPlayer(
           game.getPlayers(),
           'Select player to decrease titanium production',
           (foundPlayer: Player) => {
-            foundPlayer.titaniumProduction = Math.max(
-                0,
-                foundPlayer.titaniumProduction - 1
-            );
-            player.titaniumProduction++;
+            foundPlayer.setProduction(Resources.TITANIUM,-1);
+            player.setProduction(Resources.TITANIUM);
             return undefined;
           }
       );

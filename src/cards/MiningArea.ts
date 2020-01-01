@@ -8,6 +8,7 @@ import { TileType } from "../TileType";
 import { SpaceBonus } from "../SpaceBonus";
 import { ISpace } from "../ISpace";
 import { SelectSpace } from "../inputs/SelectSpace";
+import { Resources } from '../Resources';
 
 export class MiningArea implements IProjectCard {
     public cost: number = 4;
@@ -26,10 +27,10 @@ export class MiningArea implements IProjectCard {
         return new SelectSpace("Select a space with steel or titanium placement bonus adjacent to one of your tiles", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
             if (foundSpace.bonus.indexOf(SpaceBonus.STEEL) !== -1) {
-                player.steelProduction++;
+                player.setProduction(Resources.STEEL);
             }
             if (foundSpace.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
-                player.titaniumProduction++;
+                player.setProduction(Resources.TITANIUM);
             }
             return undefined;
         });

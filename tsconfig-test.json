@@ -273,6 +273,11 @@
         "tests/cards/prelude/MoholeExcavation.spec.ts",
         "tests/cards/prelude/NitrogenDelivery.spec.ts",
         "tests/cards/prelude/OrbitalConstructionYard.spec.ts",
+        "tests/cards/prelude/PointLuna.spec.ts",
+        "tests/cards/prelude/PolarIndustries.spec.ts",
+        "tests/cards/prelude/PowerGeneration.spec.ts",
+        "tests/cards/prelude/Psychrophiles.spec.ts",
+        "tests/cards/prelude/ResearchCoordination.spec.ts",
         "tests/cards/prelude/Vitor.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"

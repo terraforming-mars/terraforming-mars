@@ -3,6 +3,7 @@ import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
+import { Resources } from '../Resources';
 
 export class FueledGenerators implements IProjectCard {
   public cost: number = 1;
@@ -14,7 +15,7 @@ export class FueledGenerators implements IProjectCard {
   }
   public play(player: Player) {
     player.megaCreditProduction--;
-    player.energyProduction++;
+    player.setProduction(Resources.ENERGY);
     return undefined;
   }
 }

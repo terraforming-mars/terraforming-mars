@@ -135,7 +135,7 @@ export class RoboticWorkforce implements IProjectCard {
                 // this is the only card which requires additional user input
                 if (foundCard.name === new BiomassCombustors().name) {
                     if (game.getPlayers().length == 1)  {
-                        player.energyProduction += 2;
+                        player.setProduction(Resources.ENERGY,2);
                         return undefined;
                     }
                     return new SelectPlayer(game.getPlayers(), "Select player to remove plant production", (foundPlayer: Player) => {
@@ -143,7 +143,7 @@ export class RoboticWorkforce implements IProjectCard {
                             throw "Player must have plant production";
                         }
                         foundPlayer.plantProduction--;
-                        player.energyProduction += 2;
+                        player.setProduction(Resources.ENERGY,2);
                         return undefined;
                     });
                 }
@@ -212,7 +212,7 @@ export class RoboticWorkforce implements IProjectCard {
                     throw "Production not found for selected card";
                 }
 
-                if (player.energyProduction + updater.energyProduction < 0) {
+                if (player.getProduction(Resources.ENERGY) + updater.energyProduction < 0) {
                     throw "not enough energy production";
                 }
                 if (player.getProduction(Resources.TITANIUM) + updater.titaniumProduction < 0) {
@@ -225,7 +225,7 @@ export class RoboticWorkforce implements IProjectCard {
                     throw "not enough heat production";
                 }
 
-                player.energyProduction += updater.energyProduction;
+                player.setProduction(Resources.ENERGY,updater.energyProduction);
                 player.megaCreditProduction += updater.megaCreditProduction;
                 player.setProduction(Resources.STEEL,updater.steelProduction);
                 player.setProduction(Resources.TITANIUM,updater.titaniumProduction);

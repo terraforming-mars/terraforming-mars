@@ -263,7 +263,7 @@ function getPlayer(player: Player, game: Game): string {
     corporationCard: player.corporationCard ?
       player.corporationCard.name : undefined,
     energy: player.energy,
-    energyProduction: player.energyProduction,
+    energyProduction: player.getProduction(Resources.ENERGY),
     fundedAwards: game.fundedAwards.map((fundedAward) => {
       return {player: fundedAward.player.id, award: fundedAward.award.name};
     }),
@@ -389,7 +389,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       corporationCard: player.corporationCard ?
         player.corporationCard.name : undefined,
       energy: player.energy,
-      energyProduction: player.energyProduction,
+      energyProduction: player.getProduction(Resources.ENERGY),
       heat: player.heat,
       heatProduction: player.getProduction(Resources.HEAT),
       id: player.id,

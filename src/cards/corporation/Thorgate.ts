@@ -4,6 +4,7 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { IProjectCard } from "../IProjectCard";
 import { CorporationCard } from "./CorporationCard";
+import { Resources } from '../../Resources';
 
 export class Thorgate implements CorporationCard {
     public name: string = "Thorgate";
@@ -17,7 +18,7 @@ export class Thorgate implements CorporationCard {
     }
     public play(player: Player, _game: Game) {
         player.powerPlantCost -= 3;
-        player.energyProduction++;
+        player.setProduction(Resources.ENERGY);
         return undefined;
     }
 }

@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class MassConverter implements IProjectCard {
     public cost: number = 8;
@@ -20,7 +21,7 @@ export class MassConverter implements IProjectCard {
         return 0;
     }
     public play(player: Player) {
-        player.energyProduction += 6;
+        player.setProduction(Resources.ENERGY,6);
         return undefined;
     }
 }

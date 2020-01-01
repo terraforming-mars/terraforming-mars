@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class NuclearPower implements IProjectCard {
     public cost: number = 10;
@@ -18,7 +19,7 @@ export class NuclearPower implements IProjectCard {
             throw "Not enough mega credit production";
         }
         player.megaCreditProduction -= 2;
-        player.energyProduction += 3;
+        player.setProduction(Resources.ENERGY,3);
         return undefined;
     }
 }

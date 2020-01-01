@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class QuantumExtractor implements IProjectCard {
     public cost: number = 13;
@@ -20,7 +21,7 @@ export class QuantumExtractor implements IProjectCard {
         return 0;
     }
     public play(player: Player) {
-        player.energyProduction += 4;
+        player.setProduction(Resources.ENERGY,4);
         return undefined;
     }
 }

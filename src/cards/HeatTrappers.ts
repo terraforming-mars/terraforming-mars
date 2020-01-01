@@ -24,7 +24,7 @@ export class HeatTrappers implements IProjectCard {
 
     private doPlay(currentPlayer: Player, targetPlayer: Player, game: Game): void {
         targetPlayer.setProduction(Resources.HEAT,-2, game, currentPlayer);
-        currentPlayer.energyProduction++;
+        currentPlayer.setProduction(Resources.ENERGY);
     }
 
     public canPlay(player: Player, game: Game): boolean {
@@ -34,7 +34,7 @@ export class HeatTrappers implements IProjectCard {
     
     public play(player: Player, game: Game) {
         if (game.getPlayers().length == 1) {
-            player.energyProduction++;
+            player.setProduction(Resources.ENERGY);
             return undefined;
         }
         const players = this.getPlayersWithHeatProduction(player, game);

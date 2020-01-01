@@ -4,6 +4,7 @@ import {CardType} from './CardType';
 import {Player} from '../Player';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
+import { Resources } from '../Resources';
 
 export class ArtificialPhotosynthesis implements IProjectCard {
     public cost: number = 12;
@@ -20,7 +21,7 @@ export class ArtificialPhotosynthesis implements IProjectCard {
             return undefined;
           }),
           new SelectOption('Increase your energy production 2 steps', () => {
-            player.energyProduction += 2;
+            player.setProduction(Resources.ENERGY,2);
             return undefined;
           })
       );

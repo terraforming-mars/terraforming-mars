@@ -4,6 +4,7 @@ import {CardType} from './CardType';
 import {Player} from '../Player';
 import {Game} from '../Game';
 import {IActionCard} from './ICard';
+import { Resources } from '../Resources';
 
 export class AICentral implements IActionCard, IProjectCard {
     public cost: number = 21;
@@ -12,10 +13,10 @@ export class AICentral implements IActionCard, IProjectCard {
     public name: string = 'AI Central';
     public canPlay(player: Player): boolean {
       return player.getTagCount(Tags.SCIENCE) >= 3 &&
-            player.energyProduction >= 1;
+      player.getProduction(Resources.ENERGY) >= 1;
     }
     public play(player: Player) {
-      player.energyProduction--;
+      player.setProduction(Resources.ENERGY,-1);
       return undefined;
     }
     public canAct(): boolean {

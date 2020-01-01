@@ -3,14 +3,13 @@ import { expect } from "chai";
 import { PowerPlant } from "../../src/cards/PowerPlant";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("PowerPlant", function () {
     it("Should play", function () {
         const card = new PowerPlant();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        expect(card.play(player, game)).to.eq(undefined);
-        expect(player.energyProduction).to.eq(1);
+        expect(card.play(player)).to.eq(undefined);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     });
 });

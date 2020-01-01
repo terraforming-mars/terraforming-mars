@@ -3,6 +3,7 @@ import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
+import { Resources } from '../Resources';
 
 export class FusionPower implements IProjectCard {
   public cost: number = 14;
@@ -13,7 +14,7 @@ export class FusionPower implements IProjectCard {
     return player.getTagCount(Tags.ENERGY) >= 2;
   }
   public play(player: Player) {
-    player.energyProduction += 3;
+    player.setProduction(Resources.ENERGY,3);
     return undefined;
   }
 }

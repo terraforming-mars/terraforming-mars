@@ -5,6 +5,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { OrOptions } from "../../src/inputs/OrOptions";
+import { Resources } from '../../src/Resources';
 
 describe("ElectroCatapult", function () {
     it("Can't play", function () {
@@ -23,10 +24,10 @@ describe("ElectroCatapult", function () {
     it("Should play", function () {
         const card = new ElectroCatapult();
         const player = new Player("test", Color.BLUE, false);
-        player.energyProduction = 1;
+        player.setProduction(Resources.ENERGY);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.energyProduction).to.eq(0);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(0);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
     });

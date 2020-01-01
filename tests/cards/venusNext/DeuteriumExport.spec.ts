@@ -4,6 +4,7 @@ import { DeuteriumExport } from "../../../src/cards/venusNext/DeuteriumExport";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { OrOptions } from "../../../src/inputs/OrOptions";
+import { Resources } from '../../../src/Resources';
 
 describe("DeuteriumExport", function () {
     it("Should play", function () {
@@ -25,6 +26,6 @@ describe("DeuteriumExport", function () {
         expect(player.getResourcesOnCard(card)).to.eq(2);
         orOptions.options[1].cb();
         expect(player.getResourcesOnCard(card)).to.eq(0);
-        expect(player.energyProduction).to.eq(1);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     });
 });

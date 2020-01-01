@@ -419,7 +419,7 @@ export class Game {
       this.tempHeat = this.first.heat;
       this.tempTR = this.first.terraformRating;
       this.tempCards = this.first.cardsInHand;
-      this.tempHeatProduction = this.first.heatProduction;
+      this.tempHeatProduction = this.first.getProduction(Resources.HEAT);
       this.tempVenusScaleLevel = this.venusScaleLevel;
 
       this.first.worldGovernmentTerraforming(this);
@@ -434,7 +434,10 @@ export class Game {
       this.first.heat = this.tempHeat;
       this.first.terraformRating = this.tempTR;
       this.first.cardsInHand = this.tempCards;
-      this.first.heatProduction = this.tempHeatProduction;
+
+      if (this.first.getProduction(Resources.HEAT) > this.tempHeatProduction) {
+        this.first.setProduction(Resources.HEAT, this.tempHeatProduction - this.first.getProduction(Resources.HEAT));
+      }
 
       // Check for Aphrodite corporation
       if (this.tempVenusScaleLevel < this.venusScaleLevel 

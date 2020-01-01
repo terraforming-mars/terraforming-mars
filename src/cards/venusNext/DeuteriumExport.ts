@@ -6,6 +6,7 @@ import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
+import { Resources } from '../../Resources';
 
 export class DeuteriumExport implements IActionCard,IProjectCard {
     public cost: number = 11;
@@ -34,7 +35,7 @@ export class DeuteriumExport implements IActionCard,IProjectCard {
             }),
             new SelectOption("Remove 1 floater to raise energy production 1 step", () => {
                 player.removeResourceFrom(this, 1);
-                player.energyProduction++;
+                player.setProduction(Resources.ENERGY);
                 return undefined;
             })
         );

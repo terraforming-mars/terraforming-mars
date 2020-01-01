@@ -98,6 +98,7 @@ export class Player {
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
         game.log(this.name + "'s " + resource + " production modified by " + amount + " by " + fromPlayer.name);
       }
+    };  
 
     public getActionsThisGeneration(): Set<string> {
       return this.actionsThisGeneration;

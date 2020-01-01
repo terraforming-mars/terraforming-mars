@@ -5,6 +5,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { Trees } from "../../src/cards/Trees";
+import { Resources } from '../../src/Resources';
 
 describe("Insects", function () {
     it("Can't play", function () {
@@ -22,9 +23,9 @@ describe("Insects", function () {
         game.increaseOxygenLevel(player, 2); // 6
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.plantProduction).to.eq(0);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(0);
         player.playedCards.push(new Trees());
         card.play(player);
-        expect(player.plantProduction).to.eq(1);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     });
 });

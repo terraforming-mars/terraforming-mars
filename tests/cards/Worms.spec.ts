@@ -4,6 +4,7 @@ import { Worms } from "../../src/cards/Worms";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("Worms", function () {
     it("Can't play", function () {
@@ -21,6 +22,6 @@ describe("Worms", function () {
         player.playedCards.push(card);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.plantProduction).to.eq(1);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     });
 });

@@ -19,7 +19,7 @@ describe("BiosphereSupport", function () {
         const player = new Player("test", Color.BLUE, false);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.plantProduction).to.eq(2);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(2);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
     });
 });

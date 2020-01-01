@@ -9,7 +9,7 @@ export class Biofuels extends PreludeCard implements IProjectCard {
     public name: string = "Biofuels";
     public play(player: Player) {     
         player.setProduction(Resources.ENERGY);
-        player.plantProduction++;
+        player.setProduction(Resources.PLANTS);
         player.plants += 2;
         return undefined;
     }

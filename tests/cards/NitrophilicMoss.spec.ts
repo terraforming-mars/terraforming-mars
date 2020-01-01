@@ -4,6 +4,7 @@ import { NitrophilicMoss } from "../../src/cards/NitrophilicMoss";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("NitrophilicMoss", function () {
     it("Can't play", function () {
@@ -23,6 +24,6 @@ describe("NitrophilicMoss", function () {
         const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.plants).to.eq(-2);
-        expect(player.plantProduction).to.eq(2);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(2);
     });
 });

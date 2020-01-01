@@ -12,7 +12,7 @@ export class BiosphereSupport extends PreludeCard implements IProjectCard {
     }    
     public play(player: Player) {
         player.setProduction(Resources.MEGACREDITS,-1);
-        player.plantProduction +=2 ;
+        player.setProduction(Resources.PLANTS,2);
 	    return undefined;    
     }
 }

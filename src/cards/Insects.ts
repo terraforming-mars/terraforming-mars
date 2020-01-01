@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class Insects implements IProjectCard {
     public cost: number = 9;
@@ -14,7 +15,7 @@ export class Insects implements IProjectCard {
         return game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
-        player.plantProduction += player.getTagCount(Tags.PLANT);
+        player.setProduction(Resources.PLANTS, player.getTagCount(Tags.PLANT));
         return undefined;
     }
 }

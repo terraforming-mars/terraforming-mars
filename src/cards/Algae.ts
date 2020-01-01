@@ -3,6 +3,7 @@ import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
 import {Game} from '../Game';
+import { Resources } from '../Resources';
 
 export class Algae implements IProjectCard {
     public cost: number = 10;
@@ -14,7 +15,7 @@ export class Algae implements IProjectCard {
     }
     public play(player: Player) {
       player.plants++;
-      player.plantProduction += 2;
+      player.setProduction(Resources.PLANTS,2);
       return undefined;
     }
 }

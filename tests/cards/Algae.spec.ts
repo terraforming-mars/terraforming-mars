@@ -4,6 +4,7 @@ import { Algae } from "../../src/cards/Algae";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("Algae", function () {
     it("Can't play", function () {
@@ -17,6 +18,6 @@ describe("Algae", function () {
         const player = new Player("test", Color.BLUE, false);
         card.play(player);
         expect(player.plants).to.eq(1);
-        expect(player.plantProduction).to.eq(2);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(2);
     });
 });

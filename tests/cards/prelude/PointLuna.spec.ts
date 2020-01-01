@@ -6,6 +6,7 @@ import { PointLuna } from "../../../src/cards/prelude/PointLuna";
 import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
+import { Resources } from '../../../src/Resources';
 
 describe("PointLuna", function () {
     it("Gets card when earth tag played", function () {
@@ -24,7 +25,7 @@ describe("PointLuna", function () {
         const game = new Game("foobar", [player], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.titaniumProduction).to.eq(1);
+        expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
         expect(player.cardsInHand.length).to.eq(1);
     });
 });

@@ -17,10 +17,10 @@ describe("StripMine", function () {
         const card = new StripMine();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        player.energyProduction = 2;
+        player.setProduction(Resources.ENERGY,2);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.energyProduction).to.eq(0);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(0);
         expect(player.getProduction(Resources.STEEL)).to.eq(2);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
         expect(game.getOxygenLevel()).to.eq(2);

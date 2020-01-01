@@ -13,7 +13,7 @@ describe("IndustrialMicrobes", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.energyProduction).to.eq(1);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(1);
         expect(player.getProduction(Resources.STEEL)).to.eq(1);
     });
 });

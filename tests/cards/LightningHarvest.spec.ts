@@ -5,6 +5,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { GeneRepair } from "../../src/cards/GeneRepair";
+import { Resources } from '../../src/Resources';
 
 describe("LightningHarvest", function () {
     it("Should throw", function () {
@@ -20,7 +21,7 @@ describe("LightningHarvest", function () {
         player.playedCards.push(new GeneRepair(), new GeneRepair(), new GeneRepair());
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.energyProduction).to.eq(1);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(1);
         expect(player.megaCreditProduction).to.eq(1);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);

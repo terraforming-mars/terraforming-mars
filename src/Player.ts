@@ -47,7 +47,7 @@ export class Player {
     public energy: number = 0;
     private steelProduction: number = 0;
     private titaniumProduction: number = 0;
-    public energyProduction: number = 0;
+    private energyProduction: number = 0;
     public heat: number = 0;
     private heatProduction: number = 0;
     public plants: number = 0;

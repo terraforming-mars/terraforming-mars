@@ -14,10 +14,10 @@ describe("FuelFactory", function () {
     it("Should play", function () {
         const card = new FuelFactory();
         const player = new Player("test", Color.BLUE, false);
-        player.energyProduction = 1;
+        player.setProduction(Resources.ENERGY);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.energyProduction).to.eq(0);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(0);
         expect(player.megaCreditProduction).to.eq(1);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
     });

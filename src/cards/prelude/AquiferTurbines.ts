@@ -5,6 +5,7 @@ import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
 import { ISpace } from "../../ISpace";
 import { SelectSpace } from "../../inputs/SelectSpace";
+import { Resources } from '../../Resources';
 
 export class AquiferTurbines extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY];
@@ -14,13 +15,13 @@ export class AquiferTurbines extends PreludeCard implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         if (game.noOceansAvailable()) {
-            player.energyProduction += 2;
+            player.setProduction(Resources.ENERGY,2);
             player.megaCredits -= 3;
             return undefined;
         }
         return new SelectSpace("Select space for ocean", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
             game.addOceanTile(player, space.id);
-            player.energyProduction += 2;
+            player.setProduction(Resources.ENERGY,2);
             player.megaCredits -= 3;
             return undefined;
         });

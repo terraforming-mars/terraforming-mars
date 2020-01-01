@@ -6,6 +6,7 @@ import {CardType} from './CardType';
 import {Tags} from './Tags';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
+import { Resources } from '../Resources';
 
 export class CorporateStronghold implements IProjectCard {
     public cost: number = 11;
@@ -13,7 +14,7 @@ export class CorporateStronghold implements IProjectCard {
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public name: string = 'Corporate Stronghold';
     public canPlay(player: Player, game: Game): boolean {
-      return player.energyProduction >= 1 && game.getAvailableSpacesForCity(player).length >= 0;
+      return player.getProduction(Resources.ENERGY) >= 1 && game.getAvailableSpacesForCity(player).length >= 0;
     }
     public play(player: Player, game: Game) {
       return new SelectSpace(
@@ -21,7 +22,7 @@ export class CorporateStronghold implements IProjectCard {
           game.getAvailableSpacesForCity(player),
           (space: ISpace) => {
             game.addCityTile(player, space.id);
-            player.energyProduction--;
+            player.setProduction(Resources.ENERGY,-1);
             player.megaCreditProduction += 3;
             return undefined;
           }

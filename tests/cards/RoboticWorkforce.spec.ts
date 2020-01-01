@@ -11,6 +11,7 @@ import { FuelFactory } from "../../src/cards/FuelFactory";
 import { TitaniumMine } from "../../src/cards/TitaniumMine";
 import { FoodFactory } from "../../src/cards/FoodFactory";
 import { HeatTrappers } from "../../src/cards/HeatTrappers";
+import { Resources } from '../../src/Resources';
 
 describe("RoboticWorkforce", function () {
     it("Should throw", function () {
@@ -40,7 +41,7 @@ describe("RoboticWorkforce", function () {
         player.plantProduction = 1;
         selectPlayer.cb(player);
         expect(player.plantProduction).to.eq(0);
-        expect(player.energyProduction).to.eq(2);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(2);
     });
     it("Should play", function () {
         const card = new RoboticWorkforce();

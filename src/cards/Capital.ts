@@ -8,6 +8,7 @@ import {TileType} from '../TileType';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceType} from '../SpaceType';
 import {ISpace} from '../ISpace';
+import { Resources } from '../Resources';
 
 export class Capital implements IProjectCard {
     public cost: number = 26;
@@ -15,7 +16,7 @@ export class Capital implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Capital';
     public canPlay(player: Player, game: Game): boolean {
-      return player.energyProduction >= 2 &&
+      return player.getProduction(Resources.ENERGY) >= 2 &&
         game.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game) &&
         game.getAvailableSpacesForCity(player).length >= 0;
     }
@@ -31,7 +32,7 @@ export class Capital implements IProjectCard {
       return 0;
     }
     public play(player: Player, game: Game) {
-      player.energyProduction -= 2;
+      player.setProduction(Resources.ENERGY,-2);
       player.megaCreditProduction += 5;
       return new SelectSpace(
           'Select space for special city tile',

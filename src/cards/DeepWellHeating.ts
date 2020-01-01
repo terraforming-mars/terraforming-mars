@@ -4,6 +4,7 @@ import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
 import {Game} from '../Game';
+import { Resources } from '../Resources';
 
 export class DeepWellHeating implements IProjectCard {
     public cost: number = 13;
@@ -14,7 +15,7 @@ export class DeepWellHeating implements IProjectCard {
       return true;
     }
     public play(player: Player, game: Game) {
-      player.energyProduction++;
+      player.setProduction(Resources.ENERGY);
       return game.increaseTemperature(player, 1);
     }
 }

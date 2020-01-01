@@ -5,6 +5,7 @@ import {Player} from '../Player';
 import {Game} from '../Game';
 import {CardType} from './CardType';
 import {SelectPlayer} from '../inputs/SelectPlayer';
+import { Resources } from '../Resources';
 
 export class BiomassCombustors implements IProjectCard {
     public cost: number = 4;
@@ -22,7 +23,7 @@ export class BiomassCombustors implements IProjectCard {
       return game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game);
     }
     private doPlay(player: Player): undefined {
-      player.energyProduction += 2;
+      player.setProduction(Resources.ENERGY,2);
       return undefined;
     }
     public play(player: Player, game: Game) {

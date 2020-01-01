@@ -7,6 +7,7 @@ import { Game } from "../../src/Game";
 import { SpaceType } from "../../src/SpaceType";
 import { TileType } from "../../src/TileType";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
+import { Resources } from '../../src/Resources';
 
 describe("Capital", function () {
     it("Can't play", function () {
@@ -28,11 +29,11 @@ describe("Capital", function () {
         for (let i = 0; i < oceanSpaces.length; i++) {
             oceanSpaces[i].tile = { tileType: TileType.OCEAN };
         }
-        player.energyProduction = 2;
+        player.setProduction(Resources.ENERGY,2);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         expect(action instanceof SelectSpace).to.eq(true);
-        expect(player.energyProduction).to.eq(0);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(0);
         expect(player.megaCreditProduction).to.eq(5);
         const citySpace = game.getAdjacentSpaces(oceanSpaces[0])[0];
         expect(citySpace.spaceType).to.eq(SpaceType.LAND); 

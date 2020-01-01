@@ -6,6 +6,7 @@ import {Player} from '../Player';
 import {Game} from '../Game';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
+import { Resources } from '../Resources';
 
 export class DomedCrater implements IProjectCard {
     public cost: number = 24;
@@ -13,7 +14,7 @@ export class DomedCrater implements IProjectCard {
     public name: string = 'Domed Crater';
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
-      return player.energyProduction >= 1 &&
+      return player.getProduction(Resources.ENERGY) >= 1 &&
         game.getOxygenLevel() <= 7 - player.getRequirementsBonus(game) &&
         game.getAvailableSpacesForCity(player).length >= 0;
     }
@@ -24,7 +25,7 @@ export class DomedCrater implements IProjectCard {
           (space: ISpace) => {
             game.addCityTile(player, space.id);
             player.plants += 3;
-            player.energyProduction--;
+            player.setProduction(Resources.ENERGY,-1);
             player.megaCreditProduction += 3;
             return undefined;
           }

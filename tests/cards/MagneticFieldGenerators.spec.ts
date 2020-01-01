@@ -4,6 +4,7 @@ import { MagneticFieldGenerators } from "../../src/cards/MagneticFieldGenerators
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("MagneticFieldGenerators", function () {
     it("Should throw", function () {
@@ -16,10 +17,10 @@ describe("MagneticFieldGenerators", function () {
         const card = new MagneticFieldGenerators();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        player.energyProduction = 4;
+        player.setProduction(Resources.ENERGY,4);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.energyProduction).to.eq(0);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(0);
         expect(player.plantProduction).to.eq(2);
         expect(player.terraformRating).to.eq(23);
     });

@@ -4,6 +4,7 @@ import {CardType} from './CardType';
 import {Player} from '../Player';
 import {IActionCard} from './ICard';
 import {IProjectCard} from './IProjectCard';
+import { Resources } from '../Resources';
 
 export class EquatorialMagnetizer implements IActionCard, IProjectCard {
     public cost: number = 11;
@@ -17,10 +18,10 @@ export class EquatorialMagnetizer implements IActionCard, IProjectCard {
       return undefined;
     }
     public canAct(player: Player): boolean {
-      return player.energyProduction >= 1;
+      return player.getProduction(Resources.ENERGY) >= 1;
     }
     public action(player: Player) {
-      player.energyProduction--;
+      player.setProduction(Resources.ENERGY,-1);
       player.terraformRating++;
       return undefined;
     }

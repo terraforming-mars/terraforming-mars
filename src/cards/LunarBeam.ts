@@ -17,7 +17,7 @@ export class LunarBeam implements IProjectCard {
     public play(player: Player, _game: Game) {
         player.megaCreditProduction -= 2;
         player.setProduction(Resources.HEAT,2);
-        player.energyProduction += 2;
+        player.setProduction(Resources.ENERGY,2);
         return undefined;
     }
 }

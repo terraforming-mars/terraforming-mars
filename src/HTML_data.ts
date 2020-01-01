@@ -3253,6 +3253,7 @@ export const HTML_DATA: Map<string, string> =
 ["Deuterium Export",`
             <div class="title background-color-active ">Deuterium Export</div>
             <div class="price ">11</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-space "></div>
             <div class="tag tag2 tag-power "></div>
             <div class="tag tag3 tag-venus "></div>
@@ -5045,10 +5046,10 @@ export const HTML_DATA: Map<string, string> =
                       width:100px;
                       color: white;
                       margin-left:19px;
-                      margin-bottom:10px;
+                      margin-bottom:2px;
                       padding:5px;
-                      padding-top:10px;
-                      padding-bottom:10px;
+                      padding-top:5px;
+                      padding-bottom:5px;
                       text-align:center;
                       font-weight:normal;
                       box-shadow:3px 3px 6px grey;
@@ -5253,7 +5254,7 @@ export const HTML_DATA: Map<string, string> =
         text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white, 6px 3px 5px  grey;
                         ">
                     VIRON
-                </div><br>
+                </div>
         <div class="resource money" style="margin-left:65px;">48</div>
         <div class="description" style="text-align:center;">
           (You start with 48 MC.)

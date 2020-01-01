@@ -8,6 +8,7 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {SelectCard} from '../inputs/SelectCard';
 import {IProjectCard} from './IProjectCard';
+import { ResourceType } from '../ResourceType';
 
 export class ExtremeColdFungus implements IActionCard, IProjectCard {
     public cost: number = 13;
@@ -25,8 +26,8 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
     public canAct(): boolean {
       return true;
     }
-    public action(player: Player, game: Game) {
-      const otherMicrobeCards = game.getOtherMicrobeCards(this);
+    public action(player: Player) {
+      const otherMicrobeCards = player.getOtherResourceCards(this, ResourceType.MICROBE);
       if (otherMicrobeCards.length > 0) {
         return new OrOptions(
             new SelectOption('Gain 1 plant', () => {

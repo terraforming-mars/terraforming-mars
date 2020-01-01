@@ -12,7 +12,7 @@ describe("SymbioticFungus", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player)).to.eq(false);
     });
     it("Should play", function () {
         const card = new SymbioticFungus();
@@ -21,9 +21,8 @@ describe("SymbioticFungus", function () {
     it("Should act", function () {
         const card = new SymbioticFungus();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(new Ants());
-        const action = card.action(player, game);
+        const action = card.action(player);
         expect(action).not.to.eq(undefined);
         action.cb([player.playedCards[0]]);
         expect(player.getResourcesOnCard(player.playedCards[0])).to.eq(1);

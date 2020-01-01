@@ -27,9 +27,8 @@ describe("ExtremeColdFungus", function () {
     it("Should act", function () {
         const card = new ExtremeColdFungus();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(new Ants());
-        const action = card.action(player, game);
+        const action = card.action(player);
         expect(action).not.to.eq(undefined);
         expect(action instanceof OrOptions).to.eq(true);
         expect(action!.options.length).to.eq(2);

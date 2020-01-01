@@ -215,7 +215,7 @@ export class RoboticWorkforce implements IProjectCard {
                 if (player.energyProduction + updater.energyProduction < 0) {
                     throw "not enough energy production";
                 }
-                if (player.titaniumProduction + updater.titaniumProduction < 0) {
+                if (player.getProduction(Resources.TITANIUM) + updater.titaniumProduction < 0) {
                     throw "not enough titanium production";
                 }
                 if (player.plantProduction + updater.plantProduction < 0) {
@@ -228,7 +228,7 @@ export class RoboticWorkforce implements IProjectCard {
                 player.energyProduction += updater.energyProduction;
                 player.megaCreditProduction += updater.megaCreditProduction;
                 player.steelProduction += updater.steelProduction;
-                player.titaniumProduction += updater.titaniumProduction;
+                player.setProduction(Resources.TITANIUM,updater.titaniumProduction);
                 player.plantProduction += updater.plantProduction;
                 player.setProduction(Resources.HEAT,updater.heatProduction);
 

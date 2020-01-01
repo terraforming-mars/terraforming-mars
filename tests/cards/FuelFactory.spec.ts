@@ -3,6 +3,7 @@ import { expect } from "chai";
 import { FuelFactory } from "../../src/cards/FuelFactory";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
+import { Resources } from '../../src/Resources';
 
 describe("FuelFactory", function () {
     it("Should throw", function () {
@@ -18,6 +19,6 @@ describe("FuelFactory", function () {
         expect(action).to.eq(undefined);
         expect(player.energyProduction).to.eq(0);
         expect(player.megaCreditProduction).to.eq(1);
-        expect(player.titaniumProduction).to.eq(1);
+        expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
     });
 });

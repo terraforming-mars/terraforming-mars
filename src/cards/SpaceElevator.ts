@@ -5,6 +5,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class SpaceElevator implements IActionCard, IProjectCard {
     public cost: number = 27;
@@ -15,7 +16,7 @@ export class SpaceElevator implements IActionCard, IProjectCard {
         return true;
     }
     public play(player: Player, _game: Game) {
-        player.titaniumProduction++;
+        player.setProduction(Resources.TITANIUM);
         return undefined;
     }
     public canAct(player: Player): boolean {

@@ -6,6 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SpaceName } from "../SpaceName";
 import { SpaceType } from "../SpaceType";
+import { Resources } from '../Resources';
 
 export class PhobosSpaceHaven implements IProjectCard {
     public cost: number = 25;
@@ -17,7 +18,7 @@ export class PhobosSpaceHaven implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         game.addCityTile(player, SpaceName.PHOBOS_SPACE_HAVEN, SpaceType.COLONY);
-        player.titaniumProduction++;
+        player.setProduction(Resources.TITANIUM);
         return undefined;
     }
     public getVictoryPoints() {

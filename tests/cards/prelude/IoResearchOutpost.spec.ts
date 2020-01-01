@@ -4,6 +4,7 @@ import { IoResearchOutpost } from "../../../src/cards/prelude/IoResearchOutpost"
 import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
+import { Resources } from '../../../src/Resources';
 
 describe("IoResearchOutpost", function () {
     it("Should play", function () {
@@ -12,7 +13,7 @@ describe("IoResearchOutpost", function () {
         const game = new Game("foobar", [player], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.titaniumProduction).to.eq(1);
+        expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
         expect(player.cardsInHand.length).to.eq(1);
     });
 });

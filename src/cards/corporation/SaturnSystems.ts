@@ -4,6 +4,7 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CorporationCard } from "./CorporationCard";
 import { IProjectCard } from "../IProjectCard";
+import { Resources } from '../../Resources';
 
 export class SaturnSystems implements CorporationCard {
     public name: string = "Saturn Systems";
@@ -17,7 +18,7 @@ export class SaturnSystems implements CorporationCard {
         }
     }
     public play(player: Player) {
-        player.titaniumProduction = 1;
+        player.setProduction(Resources.TITANIUM);
         player.megaCreditProduction++;
         return undefined;
     }

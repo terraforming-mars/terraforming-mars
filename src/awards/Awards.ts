@@ -4,11 +4,13 @@ import { Scientist } from "./Scientist";
 import { Thermalist } from "./Thermalist";
 import { Miner } from "./Miner";
 import { IAward } from "./IAward";
+import { Venuphile } from './Venuphile';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
     new Landlord(),
     new Banker(),
     new Scientist(),
     new Thermalist(),
-    new Miner()
+    new Miner(),
+    new Venuphile()
 ]

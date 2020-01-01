@@ -27,6 +27,7 @@ import {Pets} from './cards/Pets';
 import {ORIGINAL_AWARDS} from './awards/Awards';
 import {IAward} from './awards/IAward';
 import { VictoryPointsBreakdown } from './VictoryPointsBreakdown';
+import {Resources} from './Resources';
 import { ResourceType } from './ResourceType';
 
 const INITIAL_ACTION: string = 'INITIAL';
@@ -41,17 +42,17 @@ export class Player {
     public titaniumValue: number = 3;
     public steelValue: number = 2;
     public megaCredits: number = 0;
-    public megaCreditProduction: number = 0;
+    private megaCreditProduction: number = 0;
     public steel: number = 0;
     public titanium: number = 0;
     public energy: number = 0;
-    public steelProduction: number = 0;
-    public titaniumProduction: number = 0;
-    public energyProduction: number = 0;
+    private steelProduction: number = 0;
+    private titaniumProduction: number = 0;
+    private energyProduction: number = 0;
     public heat: number = 0;
-    public heatProduction: number = 0;
+    private heatProduction: number = 0;
     public plants: number = 0;
-    public plantProduction: number = 0;
+    private plantProduction: number = 0;
     public cardsInHand: Array<IProjectCard> = [];
     public preludeCardsInHand: Array<IProjectCard> = [];    
     public playedCards: Array<IProjectCard> = [];
@@ -74,6 +75,29 @@ export class Player {
         public beginner: boolean) {
       this.id = this.generateId();
     }
+
+    public getProduction(resource: Resources): number {
+      if (resource === Resources.MEGACREDITS) return this.megaCreditProduction;
+      if (resource === Resources.STEEL) return this.steelProduction;
+      if (resource === Resources.TITANIUM) return this.titaniumProduction;
+      if (resource === Resources.PLANTS) return this.plantProduction;
+      if (resource === Resources.ENERGY) return this.energyProduction;
+      if (resource === Resources.HEAT) return this.heatProduction;
+      return 0;
+    }
+
+    public setProduction(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player) {
+
+      if (resource === Resources.MEGACREDITS) this.megaCreditProduction = Math.max(-5, this.megaCreditProduction + amount);
+      if (resource === Resources.STEEL) this.steelProduction = Math.max(0, this.steelProduction + amount);
+      if (resource === Resources.TITANIUM) this.titaniumProduction = Math.max(0, this.titaniumProduction + amount);
+      if (resource === Resources.PLANTS) this.plantProduction = Math.max(0, this.plantProduction + amount);
+      if (resource === Resources.ENERGY) this.energyProduction = Math.max(0, this.energyProduction + amount);
+      if (resource === Resources.HEAT) this.heatProduction = Math.max(0, this.heatProduction + amount);
+      
+      if (game !== undefined && fromPlayer !== undefined && amount < 0) {
+        game.log(this.name + "'s " + resource + " production modified by " + amount + " by " + fromPlayer.name);
+      }
 
     public getActionsThisGeneration(): Set<string> {
       return this.actionsThisGeneration;
@@ -1066,7 +1090,7 @@ export class Player {
           spaceId: string
       ) => {
         game.addCityTile(this, spaceId);
-        this.megaCreditProduction++;
+        this.setProduction(Resources.MEGACREDITS);
         this.payForStandardProject(
             StandardProjectType.CITY,
             megaCredits,

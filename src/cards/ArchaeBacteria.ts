@@ -3,6 +3,7 @@ import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
 import {Game} from '../Game';
+import { Resources } from '../Resources';
 
 export class ArchaeBacteria implements IProjectCard {
     public cost: number = 6;
@@ -15,7 +16,7 @@ export class ArchaeBacteria implements IProjectCard {
       );
     }
     public play(player: Player) {
-      player.plantProduction++;
+      player.setProduction(Resources.PLANTS);
       return undefined;
     }
 }

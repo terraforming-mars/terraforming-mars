@@ -2,6 +2,7 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
+import { Resources } from '../../Resources';
 
 export class EcologyExperts extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT, Tags.MICROBES];
@@ -17,7 +18,7 @@ export class EcologyExperts extends PreludeCard implements IProjectCard {
     }
     public play(player: Player) {
         player.reduceActionsTakenThisRound();
-        player.plantProduction++;
+        player.setProduction(Resources.PLANTS);
         return undefined;
     }
 }

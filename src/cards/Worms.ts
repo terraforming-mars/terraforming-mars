@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class Worms implements IProjectCard {
     public cost: number = 8;
@@ -14,7 +15,7 @@ export class Worms implements IProjectCard {
         return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
-        player.plantProduction += Math.floor((player.getTagCount(Tags.MICROBES) + 1) / 2);
+        player.setProduction(Resources.PLANTS, Math.floor((player.getTagCount(Tags.MICROBES) + 1) / 2));
         return undefined;
     }
 }

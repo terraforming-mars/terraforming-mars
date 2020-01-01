@@ -3,6 +3,7 @@ import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
+import { Resources } from '../Resources';
 
 export class AdaptedLichen implements IProjectCard {
     public cost: number = 9;
@@ -13,7 +14,7 @@ export class AdaptedLichen implements IProjectCard {
       return true;
     }
     public play(player: Player) {
-      player.plantProduction++;
+      player.setProduction(Resources.PLANTS);
       return undefined;
     }
 }

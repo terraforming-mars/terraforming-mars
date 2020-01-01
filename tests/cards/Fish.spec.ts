@@ -5,6 +5,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SelectPlayer } from "../../src/inputs/SelectPlayer";
+import { Resources } from '../../src/Resources';
 
 describe("Fish", function () {
     it("Can't play", function () {
@@ -29,8 +30,8 @@ describe("Fish", function () {
         // Fit minimal requirements
         (game as any).temperature = 2;
 
-        player2.plantProduction = 3;
-        player3.plantProduction = 7;
+        player2.setProduction(Resources.PLANTS,2);
+        player3.setProduction(Resources.PLANTS,7);
 
         expect(card.canPlay(player, game)).to.eq(true);
 
@@ -40,9 +41,9 @@ describe("Fish", function () {
 
         action.cb(player3);
 
-        expect(player3.plantProduction).to.eq(6); // reduced one step
-        expect(player2.plantProduction).to.eq(3); // no side effects on other than target players
-        expect(player.plantProduction).to.eq(0); // no negative values etc.
+        expect(player3.getProduction(Resources.PLANTS)).to.eq(6); // reduced one step
+        expect(player2.getProduction(Resources.PLANTS)).to.eq(2); // no side effects on other than target players
+        expect(player.getProduction(Resources.PLANTS)).to.eq(0); // no negative values etc.
 
         player.addResourceTo(card, 5);
         expect(card.getVictoryPoints(player)).to.eq(player.getResourcesOnCard(card));

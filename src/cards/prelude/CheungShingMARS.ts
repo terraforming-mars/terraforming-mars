@@ -4,6 +4,7 @@ import { Player } from "../../Player";
 import { CorporationCard } from "./../corporation/CorporationCard";
 import { IProjectCard } from "../IProjectCard";
 import { Game } from "../../Game";
+import { Resources } from '../../Resources';
 
 export class CheungShingMARS implements CorporationCard {
     public name: string = "Cheung Shing MARS";
@@ -18,7 +19,7 @@ export class CheungShingMARS implements CorporationCard {
     }
 	    
     public play(player: Player) {
-        player.megaCreditProduction = 3;
+        player.setProduction(Resources.MEGACREDITS,3);
         return undefined;
     }
 }

@@ -13,6 +13,7 @@ import { WaterImportFromEuropa } from "../src/cards/WaterImportFromEuropa";
 import { Phase } from "../src/Phase";
 import { maxOutOceans } from "./TestingUtils";
 import { SaturnSystems } from "../src/cards/corporation/SaturnSystems";
+import { Resources } from '../src/Resources';
 
 describe("Game", function () {
     it("should initialize with right defaults", function () {
@@ -47,10 +48,10 @@ describe("Game", function () {
         game.fundAward(player, award);
 
         // Set second player to win Banker award
-        player2.megaCreditProduction = 10;
+        player2.setProduction(Resources.MEGACREDITS,10);
   
         // Our testing player will be 2nd Banker in the game
-        player.megaCreditProduction = 7;
+        player.setProduction(Resources.MEGACREDITS,7);
 
         // Two other players will share Thermalist award
         award = new Thermalist();

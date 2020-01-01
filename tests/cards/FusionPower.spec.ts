@@ -3,6 +3,7 @@ import { expect } from "chai";
 import { FusionPower } from "../../src/cards/FusionPower";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
+import { Resources } from '../../src/Resources';
 
 describe("FusionPower", function () {
     it("Can't play", function () {
@@ -16,6 +17,6 @@ describe("FusionPower", function () {
         player.playedCards.push(card, card);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.energyProduction).to.eq(3);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(3);
     });
 });

@@ -4,6 +4,7 @@ import { ArtificialPhotosynthesis } from "../../src/cards/ArtificialPhotosynthes
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { OrOptions } from "../../src/inputs/OrOptions";
+import { Resources } from '../../src/Resources';
 
 describe("ArtificialPhotosynthesis", function () {
     it("Should play", function () {
@@ -14,8 +15,8 @@ describe("ArtificialPhotosynthesis", function () {
         expect(action instanceof OrOptions).to.eq(true);
         expect(action.options.length).to.eq(2);
         action.options[0].cb();
-        expect(player.plantProduction).to.eq(1);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
         action.options[1].cb();
-        expect(player.energyProduction).to.eq(2);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(2);
     });
 });

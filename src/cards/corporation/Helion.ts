@@ -2,6 +2,7 @@
 import { CorporationCard } from "./CorporationCard";
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
+import { Resources } from "../../Resources";
 
 export class Helion implements CorporationCard {
     public name: string = "Helion";
@@ -9,7 +10,7 @@ export class Helion implements CorporationCard {
     public startingMegaCredits: number = 42;
     public play(player: Player) {
         player.canUseHeatAsMegaCredits = true;
-        player.heatProduction = 3;
+        player.setProduction(Resources.HEAT,3);
         return undefined;
     }
 }

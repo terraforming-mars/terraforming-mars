@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class Moss implements IProjectCard {
     public cost: number = 4;
@@ -15,7 +16,7 @@ export class Moss implements IProjectCard {
     }
     public play(player: Player) {
         player.plants--;
-        player.plantProduction++;
+        player.setProduction(Resources.PLANTS);
         return undefined;
     }
 }

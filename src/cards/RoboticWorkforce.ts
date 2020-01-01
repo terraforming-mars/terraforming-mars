@@ -58,6 +58,7 @@ import { Windmills } from "./Windmills";
 //Prelude cards
 import { HousePrinting } from "./prelude/HousePrinting";
 import { LavaTubeSettlement } from "./prelude/LavaTubeSettlement";
+import { Resources } from '../Resources';
 
 export class RoboticWorkforce implements IProjectCard {
     public cost: number = 9;
@@ -134,15 +135,15 @@ export class RoboticWorkforce implements IProjectCard {
                 // this is the only card which requires additional user input
                 if (foundCard.name === new BiomassCombustors().name) {
                     if (game.getPlayers().length == 1)  {
-                        player.energyProduction += 2;
+                        player.setProduction(Resources.ENERGY,2);
                         return undefined;
                     }
                     return new SelectPlayer(game.getPlayers(), "Select player to remove plant production", (foundPlayer: Player) => {
-                        if (foundPlayer.plantProduction < 1) {
+                        if (foundPlayer.getProduction(Resources.PLANTS) < 1) {
                             throw "Player must have plant production";
                         }
-                        foundPlayer.plantProduction--;
-                        player.energyProduction += 2;
+                        foundPlayer.setProduction(Resources.PLANTS,-1,game,player);
+                        player.setProduction(Resources.ENERGY,2);
                         return undefined;
                     });
                 }
@@ -211,25 +212,25 @@ export class RoboticWorkforce implements IProjectCard {
                     throw "Production not found for selected card";
                 }
 
-                if (player.energyProduction + updater.energyProduction < 0) {
+                if (player.getProduction(Resources.ENERGY) + updater.energyProduction < 0) {
                     throw "not enough energy production";
                 }
-                if (player.titaniumProduction + updater.titaniumProduction < 0) {
+                if (player.getProduction(Resources.TITANIUM) + updater.titaniumProduction < 0) {
                     throw "not enough titanium production";
                 }
-                if (player.plantProduction + updater.plantProduction < 0) {
+                if (player.getProduction(Resources.PLANTS) + updater.plantProduction < 0) {
                     throw "not enough plant production";
                 }
-                if (player.heatProduction + updater.heatProduction < 0) {
+                if (player.getProduction(Resources.HEAT) + updater.heatProduction < 0) {
                     throw "not enough heat production";
                 }
 
-                player.energyProduction += updater.energyProduction;
-                player.megaCreditProduction += updater.megaCreditProduction;
-                player.steelProduction += updater.steelProduction;
-                player.titaniumProduction += updater.titaniumProduction;
-                player.plantProduction += updater.plantProduction;
-                player.heatProduction += updater.heatProduction;
+                player.setProduction(Resources.ENERGY,updater.energyProduction);
+                player.setProduction(Resources.MEGACREDITS,updater.megaCreditProduction);
+                player.setProduction(Resources.STEEL,updater.steelProduction);
+                player.setProduction(Resources.TITANIUM,updater.titaniumProduction);
+                player.setProduction(Resources.PLANTS,updater.plantProduction);
+                player.setProduction(Resources.HEAT,updater.heatProduction);
 
                return undefined;
             });

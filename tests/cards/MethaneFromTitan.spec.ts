@@ -4,6 +4,7 @@ import { MethaneFromTitan } from "../../src/cards/MethaneFromTitan";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("MethaneFromTitan", function () {
     it("Should throw", function () {
@@ -19,8 +20,8 @@ describe("MethaneFromTitan", function () {
         game.increaseOxygenLevel(player, 2); // 2
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.heatProduction).to.eq(2);
-        expect(player.plantProduction).to.eq(2);
+        expect(player.getProduction(Resources.HEAT)).to.eq(2);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(2);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(2);
     });

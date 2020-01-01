@@ -4,6 +4,7 @@ import { AICentral } from "../../src/cards/AICentral";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("AICentral", function () {
     it("Can't play if not enough science tags to play", function () {
@@ -21,9 +22,9 @@ describe("AICentral", function () {
         const card = new AICentral();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card, card, card);
-        player.energyProduction = 1;
+        player.setProduction(Resources.ENERGY);
         card.play(player);
-        expect(player.energyProduction).to.eq(0);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(0);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
     });

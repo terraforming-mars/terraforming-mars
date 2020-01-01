@@ -3,6 +3,7 @@ import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
+import { Resources } from '../../Resources';
 
 export class HousePrinting implements IProjectCard {
     public cost: number = 10;
@@ -14,7 +15,7 @@ export class HousePrinting implements IProjectCard {
     }
 
     public play(player: Player) {
-        player.steelProduction++;
+        player.setProduction(Resources.STEEL);
         return undefined;
     }
     public getVictoryPoints() {

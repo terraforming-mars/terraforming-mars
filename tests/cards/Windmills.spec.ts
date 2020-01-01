@@ -4,6 +4,7 @@ import { Windmills } from "../../src/cards/Windmills";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("Windmills", function () {
     it("Can't play", function () {
@@ -17,7 +18,7 @@ describe("Windmills", function () {
         const player = new Player("test", Color.BLUE, false);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.energyProduction).to.eq(1);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(1);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
     });

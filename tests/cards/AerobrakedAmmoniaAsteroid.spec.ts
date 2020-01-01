@@ -5,6 +5,7 @@ import { Ants } from "../../src/cards/Ants";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("AerobrakedAmmoniaAsteroid", function () {
     it("Should play", function () {
@@ -13,8 +14,8 @@ describe("AerobrakedAmmoniaAsteroid", function () {
         player.playedCards.push(card);
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
-        expect(player.heatProduction).to.eq(3);
-        expect(player.plantProduction).to.eq(1);
+        expect(player.getProduction(Resources.HEAT)).to.eq(3);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
 
          // It's okay to not have a card to collect Microbes on
         expect(action).to.eq(undefined); 
@@ -31,8 +32,8 @@ describe("AerobrakedAmmoniaAsteroid", function () {
         player.playedCards.push(selectedCard);
 
         const action = card.play(player, game);
-        expect(player.heatProduction).to.eq(3);
-        expect(player.plantProduction).to.eq(1);
+        expect(player.getProduction(Resources.HEAT)).to.eq(3);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
 
         expect(action).not.to.eq(undefined); 
         if (action === undefined) return; // Compiller issue, sorry

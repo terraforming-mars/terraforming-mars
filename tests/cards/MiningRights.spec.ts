@@ -7,6 +7,7 @@ import { Game } from "../../src/Game";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
 import { SpaceBonus } from "../../src/SpaceBonus";
 import { TileType } from "../../src/TileType";
+import { Resources } from '../../src/Resources';
 
 describe("MiningRights", function () {
     it("Should throw", function () {
@@ -32,12 +33,12 @@ describe("MiningRights", function () {
         action.cb(titaniumSpace!);
         expect(titaniumSpace!.player).to.eq(player);
         expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.SPECIAL);
-        expect(player.titaniumProduction).to.eq(1); 
+        expect(player.getProduction(Resources.TITANIUM)).to.eq(1); 
         const steelSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) === -1 && space.bonus.indexOf(SpaceBonus.STEEL) !== -1);
         expect(steelSpace).not.to.eq(undefined);
         action.cb(steelSpace!);
         expect(steelSpace!.player).to.eq(player);
         expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(TileType.SPECIAL);
-        expect(player.titaniumProduction).to.eq(1); 
+        expect(player.getProduction(Resources.TITANIUM)).to.eq(1); 
     });
 });

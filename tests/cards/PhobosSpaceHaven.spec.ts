@@ -4,6 +4,7 @@ import { PhobosSpaceHaven } from "../../src/cards/PhobosSpaceHaven";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("PhobosSpaceHaven", function () {
     it("Should play", function () {
@@ -12,7 +13,7 @@ describe("PhobosSpaceHaven", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.titaniumProduction).to.eq(1);
+        expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(3);
         expect(game.getCitiesInPlay()).to.eq(1);

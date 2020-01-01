@@ -5,6 +5,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { PlayerInput } from "../PlayerInput";
+import { Resources } from '../Resources';
 
 export class Windmills implements IProjectCard {
     public cost: number = 6;
@@ -15,7 +16,7 @@ export class Windmills implements IProjectCard {
         return game.getOxygenLevel() >= 7 - player.getRequirementsBonus(game);
     }
     public play(player: Player): PlayerInput | undefined {
-        player.energyProduction++;
+        player.setProduction(Resources.ENERGY);
         return undefined;
     }
     public getVictoryPoints() {

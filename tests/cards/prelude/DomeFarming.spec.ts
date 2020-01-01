@@ -3,6 +3,7 @@ import { expect } from "chai";
 import { DomeFarming } from "../../../src/cards/prelude/DomeFarming";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
+import { Resources } from '../../../src/Resources';
 
 describe("DomeFarming", function () {
     it("Should play", function () {
@@ -10,7 +11,7 @@ describe("DomeFarming", function () {
         const player = new Player("test", Color.BLUE, false);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.plantProduction).to.eq(1);
-        expect(player.megaCreditProduction).to.eq(2);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
     });
 });

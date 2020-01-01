@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class Zeppelins implements IProjectCard {
     public cost: number = 13;
@@ -14,7 +15,7 @@ export class Zeppelins implements IProjectCard {
         return game.getOxygenLevel() >= 5 - player.getRequirementsBonus(game);
     }
     public play(player: Player, game: Game) {
-        player.megaCreditProduction += game.getCitiesInPlayOnMars();
+        player.setProduction(Resources.MEGACREDITS, game.getCitiesInPlayOnMars());
         return undefined; 
     }
     public getVictoryPoints() {

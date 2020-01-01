@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class Heather implements IProjectCard {
     public cost: number = 6;
@@ -14,7 +15,7 @@ export class Heather implements IProjectCard {
         return game.getTemperature() >= -14 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player) {
-        player.plantProduction++;
+        player.setProduction(Resources.PLANTS);
         player.plants++;
         return undefined;
     }

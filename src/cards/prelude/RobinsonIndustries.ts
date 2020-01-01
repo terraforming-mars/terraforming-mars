@@ -5,6 +5,7 @@ import { Player } from "../../Player";
 import { CorporationCard } from "./../corporation/CorporationCard";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
+import { Resources } from "../../Resources";
 
 export class RobinsonIndustries implements IActionCard, CorporationCard {
     public name: string = "Robinson Industries";
@@ -17,63 +18,63 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
         return player.canAfford(4); 
     }
     public action(player: Player) {
-        let minimum = player.megaCreditProduction;
+        let minimum = player.getProduction(Resources.MEGACREDITS);
         let lowest: Array<SelectOption> = [new SelectOption("Increase MC production 1 step", () => {
-            player.megaCreditProduction++;
+            player.setProduction(Resources.MEGACREDITS);
             player.megaCredits -= 4;
             return undefined;
         })];
-        if (player.steelProduction < minimum) {
+        if (player.getProduction(Resources.STEEL) < minimum) {
             lowest = [];
-            minimum = player.steelProduction;
+            minimum = player.getProduction(Resources.STEEL);
         }
-        if (player.steelProduction === minimum) {
+        if (player.getProduction(Resources.STEEL) === minimum) {
             lowest.push(new SelectOption("Increase steel production 1 step", () => {
-                player.steelProduction++;
+                player.setProduction(Resources.STEEL);
                 player.megaCredits -= 4;
                 return undefined;
             }));
         }
-        if (player.titaniumProduction < minimum) {
+        if (player.getProduction(Resources.TITANIUM) < minimum) {
             lowest = [];
-            minimum = player.titaniumProduction;
+            minimum = player.getProduction(Resources.TITANIUM);
         }
-        if (player.titaniumProduction === minimum) {
+        if (player.getProduction(Resources.TITANIUM) === minimum) {
             lowest.push(new SelectOption("Increase titanium production 1 step", () => {
-                player.titaniumProduction++;
+                player.setProduction(Resources.TITANIUM);
                 player.megaCredits -= 4;
                 return undefined;
             }));
         }
-        if (player.plantProduction < minimum) {
+        if (player.getProduction(Resources.PLANTS) < minimum) {
             lowest = [];
-            minimum = player.plantProduction;
+            minimum = player.getProduction(Resources.PLANTS);
         }
-        if (player.plantProduction === minimum) {
+        if (player.getProduction(Resources.PLANTS) === minimum) {
             lowest.push(new SelectOption("Increase plant production 1 step", () => {
-                player.plantProduction++;
+                player.setProduction(Resources.PLANTS);
                 player.megaCredits -= 4;
                 return undefined;
             }));
         }
-        if (player.energyProduction < minimum) {
+        if (player.getProduction(Resources.ENERGY) < minimum) {
             lowest = [];
-            minimum = player.energyProduction;
+            minimum = player.getProduction(Resources.ENERGY);
         }
-        if (player.energyProduction === minimum) {
+        if (player.getProduction(Resources.ENERGY) === minimum) {
             lowest.push(new SelectOption("Increase energy production 1 step", () => {
-                player.energyProduction++;
+                player.setProduction(Resources.ENERGY);
                 player.megaCredits -= 4;
                 return undefined;
             }));
         }
-        if (player.heatProduction < minimum) {
+        if (player.getProduction(Resources.HEAT) < minimum) {
             lowest = [];
-            minimum = player.heatProduction;
+            minimum = player.getProduction(Resources.HEAT);
         }
-        if (player.heatProduction === minimum) {
+        if (player.getProduction(Resources.HEAT) === minimum) {
             lowest.push(new SelectOption("Increase heat production 1 step", () => {
-                player.heatProduction++;
+                player.setProduction(Resources.HEAT);
                 player.megaCredits -= 4;
                 return undefined;
             }));

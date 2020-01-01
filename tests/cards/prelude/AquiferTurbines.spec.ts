@@ -6,6 +6,7 @@ import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
 import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import * as TestingUtils from "../../TestingUtils";
+import { Resources } from '../../../src/Resources';
 
 describe("AquiferTurbines", function () {
     it("Can play", function () {
@@ -22,12 +23,12 @@ describe("AquiferTurbines", function () {
         const action = card.play(player, game) as SelectSpace;
         expect(action).not.to.eq(undefined);
         action.cb(game.getAvailableSpacesForOcean(player)[0]);
-        expect(player.energyProduction).to.eq(2);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(2);
         expect(player.megaCredits).to.eq(0);
         TestingUtils.maxOutOceans(player, game);
         player.megaCredits = 3;
         expect(card.play(player, game)).to.eq(undefined);
         expect(player.megaCredits).to.eq(0);
-        expect(player.energyProduction).to.eq(4);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(4);
     });
 });

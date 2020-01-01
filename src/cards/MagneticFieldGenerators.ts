@@ -4,6 +4,7 @@ import { Player } from "../Player";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
+import { Resources } from '../Resources';
 
 export class MagneticFieldGenerators implements IProjectCard {
     public cost: number = 20;
@@ -11,14 +12,14 @@ export class MagneticFieldGenerators implements IProjectCard {
     public name: string = "Magnetic Field Generators";
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player): boolean {
-        return player.energyProduction >= 4;
+        return player.getProduction(Resources.ENERGY) >= 4;
     }
     public play(player: Player, _game: Game) {
-        if (player.energyProduction < 4) {
+        if (player.getProduction(Resources.ENERGY) < 4) {
             throw "Must have 4 energy production";
         }
-        player.energyProduction -= 4;
-        player.plantProduction += 2;
+        player.setProduction(Resources.ENERGY,-4);
+        player.setProduction(Resources.PLANTS,2);
         player.terraformRating += 3;
         return undefined;
     }

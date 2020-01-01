@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Game } from "../Game";
 import { Player } from "../Player";
+import { Resources } from '../Resources';
 
 export class IndustrialMicrobes implements IProjectCard {
     public cost: number = 12;
@@ -14,8 +15,8 @@ export class IndustrialMicrobes implements IProjectCard {
         return true;
     }
     public play(player: Player, _game: Game) {
-        player.energyProduction++;
-        player.steelProduction++;
+        player.setProduction(Resources.ENERGY);
+        player.setProduction(Resources.STEEL);
         return undefined;
     }
 }

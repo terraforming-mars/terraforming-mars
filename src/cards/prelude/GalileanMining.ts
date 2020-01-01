@@ -2,6 +2,7 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
+import { Resources } from '../../Resources';
 
 export class GalileanMining extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN];
@@ -10,7 +11,7 @@ export class GalileanMining extends PreludeCard implements IProjectCard {
         return player.canAfford(5);
     }
     public play(player: Player) {
-        player.titaniumProduction += 2;
+        player.setProduction(Resources.TITANIUM,2);
         player.megaCredits -= 5;
         return undefined;
     }

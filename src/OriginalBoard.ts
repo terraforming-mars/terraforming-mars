@@ -157,7 +157,10 @@ export class OriginalBoard {
     public getRandomCitySpace(offset: number = 0): Space {
         while (true) {
             let space = this.getRandomSpace(offset);
-            if (space.tile === undefined && space instanceof Land && space.id !==  SpaceName.NOCTIS_CITY  ) {
+            if (space.tile === undefined 
+                && space instanceof Land 
+                && space.id !==  SpaceName.NOCTIS_CITY
+                && space.spaceType !== SpaceType.COLONY ) {
                 return space;
             }
         }

@@ -13,6 +13,6 @@ describe("GiantSolarShade", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         expect(game.getVenusScaleLevel()).to.eq(6);
-        expect(player.terraformRating).to.eq(3);
+        expect(player.terraformRating).to.eq(23);
     });
 });

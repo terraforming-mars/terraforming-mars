@@ -18,8 +18,8 @@
     "include": [
         "tests/cards/*.spec.ts",
         "tests/cards/corporation/*.spec.ts",
-        "tests/cards/venusNext/*.spec.ts",
         "tests/cards/prelude/*.spec.ts",
+        "tests/cards/venusNext/*.spec.ts",
         "tests/*.spec.ts",
         "tests/TestingUtils.ts"
     ],
@@ -288,6 +288,8 @@
         "tests/cards/venusNext/AerialMappers.spec.ts",
         "tests/cards/venusNext/Manutech.spec.ts",  
         "tests/cards/venusNext/Celestic.spec.ts",       
+        "tests/cards/venusNext/IshtarMining.spec.ts",    
+        "tests/cards/venusNext/MorningStarInc.spec.ts",       
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

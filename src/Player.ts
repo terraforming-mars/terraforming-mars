@@ -167,6 +167,7 @@ export class Player {
       }
       this.removeResourceFrom(card, count);
     }
+
     public getResourcesOnCard(card: ICard): number {
       return this.resourcesOnCards.get(card.name) || 0;
     }

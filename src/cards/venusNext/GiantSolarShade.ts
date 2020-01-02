@@ -14,6 +14,6 @@ export class GiantSolarShade implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-            return game.increaseVenusScaleLevel(player, 3);
+        return game.increaseVenusScaleLevel(player, 3);
     }
 }

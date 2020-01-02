@@ -27,7 +27,7 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
       return true;
     }
     public action(player: Player) {
-      const otherMicrobeCards = player.getOtherResourceCards(this, ResourceType.MICROBE);
+      const otherMicrobeCards = player.getOtherResourceCards(ResourceType.MICROBE, this);
       if (otherMicrobeCards.length > 0) {
         return new OrOptions(
             new SelectOption('Gain 1 plant', () => {

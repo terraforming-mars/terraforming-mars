@@ -5156,6 +5156,7 @@ export const HTML_DATA: Map<string, string> =
 ["Celestic",`
       <div class="tag tag1 tag-venus"></div>
       <div class="corporationLabel">CORPORATION</div>
+      ##RESOURCES##
       <div class="venus-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="points" style="z-index:1;margin-top:231px;margin-left:124px;">1/3<div class="resource floater"></div></div>

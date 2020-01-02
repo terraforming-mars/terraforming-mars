@@ -28,7 +28,7 @@ export class AerialMappers implements IActionCard,IProjectCard {
         return 1;
     }       
     public action(player: Player, game: Game) {
-        const otherFloaterCards = player.getOtherResourceCards(this, ResourceType.FLOATER);
+        const otherFloaterCards = player.getOtherResourceCards(ResourceType.FLOATER, this);
         if (player.getResourcesOnCard(this) < 1 && otherFloaterCards.length < 1) {
             player.addResourceTo(this);
             return undefined;

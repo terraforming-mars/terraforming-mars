@@ -1,5 +1,5 @@
 import {IProjectCard} from './cards/IProjectCard';
-import {CorporationCard} from './cards/corporation/CorporationCard';
+import { CorporationCard } from './cards/corporation/CorporationCard';
 import {Psychrophiles} from './cards/prelude/Psychrophiles';
 import {Tags} from './cards/Tags';
 import {PlayerInput} from './PlayerInput';
@@ -29,6 +29,7 @@ import {IAward} from './awards/IAward';
 import { VictoryPointsBreakdown } from './VictoryPointsBreakdown';
 import {Resources} from './Resources';
 import { ResourceType } from './ResourceType';
+import { Manutech } from './cards/venusNext/Manutech';
 
 const INITIAL_ACTION: string = 'INITIAL';
 
@@ -98,6 +99,17 @@ export class Player {
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
         game.log(this.name + "'s " + resource + " production modified by " + amount + " by " + fromPlayer.name);
       }
+
+      //Manutech hook
+      if (amount > 0 && this.corporationCard !== undefined && this.corporationCard.name === new Manutech().name) {
+        if (resource === Resources.MEGACREDITS) this.megaCredits += amount;
+        if (resource === Resources.STEEL) this.steel += amount;
+        if (resource === Resources.TITANIUM) this.titanium += amount;
+        if (resource === Resources.PLANTS) this.plants += amount;
+        if (resource === Resources.ENERGY) this.energy += amount;
+        if (resource === Resources.HEAT) this.heat += amount;
+      }
+
     };  
 
     public getActionsThisGeneration(): Set<string> {
@@ -214,10 +226,10 @@ export class Player {
       );
     }
 
-    public getOtherResourceCards(c: IProjectCard, resource: ResourceType): Array<IProjectCard> {
+    public getOtherResourceCards(resource: ResourceType, c?: IProjectCard, ): Array<IProjectCard> {
       const result: Array<IProjectCard> = [];
         this.playedCards.forEach((card) => {
-          if (card.name !== c.name &&
+          if (c !== undefined && card.name !== c.name &&
               card.resourceType === resource) {
             result.push(card);
           }

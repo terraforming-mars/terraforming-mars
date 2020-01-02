@@ -644,8 +644,12 @@ export class Game {
       if (this.phase == Phase.END) return;
       this.phase = Phase.END;
 
-      // Give players any victory points from cards
+      // Give players any victory points from cards and corporations
       this.players.forEach((player) => {
+        if (player.corporationCard !== undefined && player.corporationCard.getVictoryPoints !== undefined) {
+          player.victoryPoints += player.corporationCard.getVictoryPoints(player, this);
+          player.victoryPointsBreakdown.VPdetails.push(player.corporationCard.name + " : " + player.corporationCard.getVictoryPoints(player, this));
+        }
         for (let playedCard of player.playedCards) {
           if (playedCard.getVictoryPoints !== undefined) {
             player.victoryPoints += playedCard.getVictoryPoints(player, this);
@@ -1125,6 +1129,21 @@ export class Game {
       }
       return result;
     }
+
+    public drawCardsByResource(resource: ResourceType, total: number): Array<IProjectCard> {
+      let cardsToDraw = 0;
+      const result: Array<IProjectCard> = [];
+      while (cardsToDraw < total) {
+        const projectCard = this.dealer.dealCard();
+        if (projectCard.resourceType !== undefined && projectCard.resourceType === resource ) {
+          cardsToDraw++;
+          result.push(projectCard);
+        } else {
+          this.dealer.discard(projectCard);
+        }
+      }
+      return result;
+    }   
 
     public log(message: String) {
       this.gameLog.push(message);

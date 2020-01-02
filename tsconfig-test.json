@@ -19,6 +19,7 @@
         "tests/cards/*.spec.ts",
         "tests/cards/corporation/*.spec.ts",
         "tests/cards/venusNext/*.spec.ts",
+        "tests/cards/prelude/*.spec.ts",
         "tests/*.spec.ts",
         "tests/TestingUtils.ts"
     ],
@@ -280,6 +281,8 @@
         "tests/cards/venusNext/GiantSolarShade.spec.ts",
         "tests/cards/venusNext/DeuteriumExport.spec.ts",
         "tests/cards/venusNext/AerialMappers.spec.ts",
+        "tests/cards/venusNext/Manutech.spec.ts",  
+        "tests/cards/venusNext/Celestic.spec.ts",       
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

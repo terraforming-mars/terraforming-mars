@@ -171,12 +171,12 @@ export class Player {
     public getResourcesOnCard(card: ICard): number {
       return this.resourcesOnCards.get(card.name) || 0;
     }
-    public getRequirementsBonus(game: Game): number {
+    public getRequirementsBonus(game: Game, venusOnly?: boolean): number {
       let requirementsBonus: number = 0;
       if (
         this.corporationCard !== undefined &&
             this.corporationCard.getRequirementBonus !== undefined) {
-              requirementsBonus += this.corporationCard.getRequirementBonus(this, game);
+              requirementsBonus += this.corporationCard.getRequirementBonus(this, game, venusOnly);
       }
       for (let playedCard of this.playedCards) {
         if (playedCard.getRequirementBonus !== undefined &&

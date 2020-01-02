@@ -9,6 +9,7 @@ import { TileType } from "../TileType";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
+import { Resources } from '../Resources';
 
 export class IndustrialCenter implements IActionCard, IProjectCard {
     public cost: number = 4;
@@ -38,12 +39,12 @@ export class IndustrialCenter implements IActionCard, IProjectCard {
                     throw "Need to spend 7";
                 }
                 player.megaCredits -= 7;
-                player.steelProduction++;
+                player.setProduction(Resources.STEEL);
                 return undefined;
             });
         }
         player.megaCredits -= 7;
-        player.steelProduction++;
+        player.setProduction(Resources.STEEL);
         return undefined;
     }
 }

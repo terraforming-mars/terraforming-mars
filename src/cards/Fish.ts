@@ -7,6 +7,7 @@ import {ResourceType} from '../ResourceType';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {Player} from '../Player';
 import {Game} from '../Game';
+import { Resources } from '../Resources';
 
 export class Fish implements IActionCard, IProjectCard {
   public cost: number = 9;
@@ -16,7 +17,7 @@ export class Fish implements IActionCard, IProjectCard {
   public cardType: CardType = CardType.ACTIVE;
 
   private getPlayersWithPlantProduction(currentPlayer: Player, game: Game): Array<Player> {
-    var players = game.getPlayers().filter((p) => p.plantProduction > 0);
+    var players = game.getPlayers().filter((p) => p.getProduction(Resources.PLANTS) > 0);
     if (players.length > 1) {
       players = players.filter((p) => p.id != currentPlayer.id)
     }
@@ -24,7 +25,7 @@ export class Fish implements IActionCard, IProjectCard {
   }
 
   private doPlantsReduction(player: Player) {
-    player.plantProduction = Math.max(0, player.plantProduction - 1);
+    player.setProduction(Resources.PLANTS,-1);
   }
 
   public canPlay(player: Player, game: Game): boolean {

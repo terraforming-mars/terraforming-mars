@@ -3,6 +3,7 @@ import { expect } from "chai";
 import { EcologyExperts } from "../../../src/cards/prelude/EcologyExperts";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
+import { Resources } from '../../../src/Resources';
 
 describe("EcologyExperts", function () {
     it("Gets requirement bonus", function () {
@@ -19,6 +20,6 @@ describe("EcologyExperts", function () {
         const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.actionsTakenThisRound).to.eq(0);
-        expect(player.plantProduction).to.eq(1);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     });
 });

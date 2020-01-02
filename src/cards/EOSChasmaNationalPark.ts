@@ -5,6 +5,7 @@ import {CardType} from './CardType';
 import {Player} from '../Player';
 import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
+import { Resources } from '../Resources';
 
 export class EosChasmaNationalPark implements IProjectCard {
   public cost: number = 16;
@@ -23,7 +24,7 @@ export class EosChasmaNationalPark implements IProjectCard {
     const availableCards = game.getPlayedCardsWithAnimals();
     if (availableCards.length < 1) {
       player.plants += 3;
-      player.megaCreditProduction += 2;
+      player.setProduction(Resources.MEGACREDITS,2);
       player.victoryPoints++;
       return undefined;
     }
@@ -31,7 +32,7 @@ export class EosChasmaNationalPark implements IProjectCard {
     if (availableCards.length === 1) {
       game.getCardPlayer(availableCards[0].name).addResourceTo(availableCards[0]);
       player.plants += 3;
-      player.megaCreditProduction += 2;
+      player.setProduction(Resources.MEGACREDITS,2);
       player.victoryPoints++;
       return undefined;
     }
@@ -42,7 +43,7 @@ export class EosChasmaNationalPark implements IProjectCard {
         (foundCards: Array<IProjectCard>) => {
           game.getCardPlayer(foundCards[0].name).addResourceTo(foundCards[0]);
           player.plants += 3;
-          player.megaCreditProduction += 2;
+          player.setProduction(Resources.MEGACREDITS,2);
           player.victoryPoints++;
           return undefined;
         }

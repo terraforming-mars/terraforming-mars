@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class TollStation implements IProjectCard {
     public cost: number = 12;
@@ -14,10 +15,11 @@ export class TollStation implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-        player.megaCreditProduction += game.getPlayers()
-            .filter((aPlayer) => aPlayer !== player)
-            .map((opponent) => opponent.getTagCount(Tags.SPACE))
-            .reduce((a, c) => a + c, 0);
+        let amount = game.getPlayers()
+        .filter((aPlayer) => aPlayer !== player)
+        .map((opponent) => opponent.getTagCount(Tags.SPACE))
+        .reduce((a, c) => a + c, 0);
+        player.setProduction(Resources.MEGACREDITS, amount);
         return undefined;
     }
 }

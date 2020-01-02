@@ -3,6 +3,7 @@ import { expect } from "chai";
 import { BeamFromAThoriumAsteroid } from "../../src/cards/BeamFromAThoriumAsteroid";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
+import { Resources } from '../../src/Resources';
 
 describe("BeamFromAThoriumAsteroid", function () {
     it("Should throw", function () {
@@ -18,7 +19,7 @@ describe("BeamFromAThoriumAsteroid", function () {
         expect(action).to.eq(undefined);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
-        expect(player.heatProduction).to.eq(3);
-        expect(player.energyProduction).to.eq(3);
+        expect(player.getProduction(Resources.HEAT)).to.eq(3);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(3);
     });
 });

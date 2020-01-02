@@ -7,6 +7,7 @@ import {Player} from '../Player';
 import {Game} from '../Game';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
+import { Resources } from '../Resources';
 
 export class ElectroCatapult implements IActionCard, IProjectCard {
     public cost: number = 17;
@@ -14,7 +15,7 @@ export class ElectroCatapult implements IActionCard, IProjectCard {
     public name: string = 'Electro Catapult';
     public cardType: CardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
-      return player.energyProduction >= 1 &&
+      return player.getProduction(Resources.ENERGY) >= 1 &&
         game.getOxygenLevel() <= 8 + player.getRequirementsBonus(game);
     }
     public canAct(player: Player): boolean {
@@ -44,7 +45,7 @@ export class ElectroCatapult implements IActionCard, IProjectCard {
       return undefined;
     }
     public play(player: Player) {
-      player.energyProduction--;
+      player.setProduction(Resources.ENERGY,-1);
       return undefined;
     }
     public getVictoryPoints() {

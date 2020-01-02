@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Game } from "../Game";
 import { Player } from "../Player";
+import { Resources } from '../Resources';
 
 export class Lichen implements IProjectCard {
     public cost: number = 7;
@@ -14,7 +15,7 @@ export class Lichen implements IProjectCard {
         return game.getTemperature() >= -24 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player) {
-        player.plantProduction++;
+        player.setProduction(Resources.PLANTS);
         return undefined;
     }
 }

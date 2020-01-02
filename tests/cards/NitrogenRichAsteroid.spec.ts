@@ -5,6 +5,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { Bushes } from "../../src/cards/Bushes";
+import { Resources } from '../../src/Resources';
 
 describe("NitrogenRichAsteroid", function () {
     it("Should play", function () {
@@ -15,11 +16,11 @@ describe("NitrogenRichAsteroid", function () {
         expect(action).to.eq(undefined);
         expect(player.terraformRating).to.eq(23);
         expect(game.getTemperature()).to.eq(-28);
-        expect(player.plantProduction).to.eq(1);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
         player.playedCards.push(new Bushes(), new Bushes(), new Bushes());
         card.play(player, game);
         expect(player.terraformRating).to.eq(26);
         expect(game.getTemperature()).to.eq(-26);
-        expect(player.plantProduction).to.eq(5);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(5);
     });
 });

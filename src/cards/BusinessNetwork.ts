@@ -7,6 +7,7 @@ import {SelectCard} from '../inputs/SelectCard';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
 import {IActionCard} from './ICard';
 import {IProjectCard} from './IProjectCard';
+import { Resources } from '../Resources';
 
 export class BusinessNetwork implements IActionCard, IProjectCard {
     public cost: number = 4;
@@ -14,10 +15,10 @@ export class BusinessNetwork implements IActionCard, IProjectCard {
     public name: string = 'Business Network';
     public cardType: CardType = CardType.ACTIVE;
     public canPlay(player: Player): boolean {
-      return player.megaCreditProduction >= -4;
+      return player.getProduction(Resources.MEGACREDITS) >= -4;
     }
     public play(player: Player) {
-      player.megaCreditProduction--;
+      player.setProduction(Resources.MEGACREDITS,-1);
       return undefined;
     }
     public canAct(player: Player): boolean {

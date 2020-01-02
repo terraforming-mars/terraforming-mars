@@ -4,6 +4,7 @@ import { GreatDam } from "../../src/cards/GreatDam";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("GreatDam", function () {
     it("Can't play", function () {
@@ -17,7 +18,7 @@ describe("GreatDam", function () {
         const player = new Player("test", Color.BLUE, false);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.energyProduction).to.eq(2);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(2);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
     });

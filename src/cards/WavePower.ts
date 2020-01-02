@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game"; 
+import { Resources } from '../Resources';
 
 export class WavePower implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY];
@@ -14,7 +15,7 @@ export class WavePower implements IProjectCard {
         return game.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
-        player.energyProduction++;
+        player.setProduction(Resources.ENERGY);
         return undefined;
     }
     public getVictoryPoints() {

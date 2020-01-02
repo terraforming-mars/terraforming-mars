@@ -6,6 +6,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { SelectPlayer } from "../../src/inputs/SelectPlayer";
 import { maxOutOceans } from "../TestingUtils"
+import { Resources } from '../../src/Resources';
 
 describe("CloudSeeding", function () {
     it("Can't play", function () { 
@@ -16,7 +17,7 @@ describe("CloudSeeding", function () {
         
         maxOutOceans(player, game, 3);
 
-        player.megaCreditProduction = -5;
+        player.setProduction(Resources.MEGACREDITS,-5);
         expect(card.canPlay(player, game)).to.eq(false);
 
         const action = card.play(player, game);
@@ -44,11 +45,10 @@ describe("CloudSeeding", function () {
         const game = new Game("foobar", [player,player2], player);
 
         // Satisfy requirements
-        player.heatProduction = 3;
-        player2.heatProduction = 1;
+        player.setProduction(Resources.HEAT,3);
+        player2.setProduction(Resources.HEAT);
 
         maxOutOceans(player, game, 3);
-        player.megaCreditProduction = 0;
 
         const action = card.play(player, game);
 
@@ -59,9 +59,9 @@ describe("CloudSeeding", function () {
 
         action.cb(player2);
         
-        expect(player2.heatProduction).to.eq(0); // Reduced 1 step
-        expect(player.heatProduction).to.eq(3); // Not reduced!
-        expect(player.megaCreditProduction).to.eq(-1);
-        expect(player.plantProduction).to.eq(2);
+        expect(player2.getProduction(Resources.HEAT)).to.eq(0); // Reduced 1 step
+        expect(player.getProduction(Resources.HEAT)).to.eq(3); // Not reduced!
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(2);
     });
 });

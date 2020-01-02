@@ -6,6 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
+import { Resources } from '../Resources';
 
 export class OpenCity implements IProjectCard {
     public cost: number = 23;
@@ -13,13 +14,13 @@ export class OpenCity implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Open City";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOxygenLevel() >= 12 - player.getRequirementsBonus(game) && player.energyProduction >= 1 && game.getAvailableSpacesForCity(player).length >= 0;
+        return game.getOxygenLevel() >= 12 - player.getRequirementsBonus(game) && player.getProduction(Resources.ENERGY) >= 1 && game.getAvailableSpacesForCity(player).length >= 0;
     }
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space for city tile", game.getAvailableSpacesForCity(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
-            player.energyProduction--;
-            player.megaCreditProduction += 4;
+            player.setProduction(Resources.ENERGY,-1);
+            player.setProduction(Resources.MEGACREDITS,4);
             player.plants += 2;
             return undefined;
         });

@@ -2,6 +2,7 @@ import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
+import { Resources } from '../Resources';
 
 export class AsteroidMining implements IProjectCard {
     public cost: number = 30;
@@ -12,7 +13,7 @@ export class AsteroidMining implements IProjectCard {
       return true;
     }
     public play(player: Player) {
-      player.titaniumProduction += 2;
+      player.setProduction(Resources.TITANIUM,2);
       return undefined;
     }
     public getVictoryPoints() {

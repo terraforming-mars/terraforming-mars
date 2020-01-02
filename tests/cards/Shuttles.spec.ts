@@ -6,6 +6,7 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { Bushes } from "../../src/cards/Bushes";
 import { TollStation } from "../../src/cards/TollStation";
+import { Resources } from '../../src/Resources';
 
 describe("Shuttles", function () {
     it("Can't play", function () {
@@ -25,11 +26,11 @@ describe("Shuttles", function () {
         game.increaseOxygenLevel(player, 2); // 2
         game.increaseOxygenLevel(player, 2); // 4
         game.increaseOxygenLevel(player, 1); // 5
-        player.energyProduction = 1;
+        player.setProduction(Resources.ENERGY);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.energyProduction).to.eq(0);
-        expect(player.megaCreditProduction).to.eq(2);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(0);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
         expect(card.getCardDiscount(player, game, new Bushes())).to.eq(0);

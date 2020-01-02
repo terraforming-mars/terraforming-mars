@@ -8,6 +8,7 @@ import { Insulation } from "../src/cards/Insulation";
 import { IoMiningIndustries } from  "../src/cards/IoMiningIndustries";
 import { PowerSupplyConsortium } from "../src/cards/PowerSupplyConsortium";
 import { SaturnSystems } from "../src/cards/corporation/SaturnSystems";
+import { Resources } from '../src/Resources';
 
 describe("Player", function () {
     it("should initialize with right defaults", function () {
@@ -23,15 +24,15 @@ describe("Player", function () {
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
         const player3 = new Player("test3", Color.YELLOW, false);
-        player2.energyProduction = 2;
-        player3.energyProduction = 2;
+        player2.setProduction(Resources.ENERGY,2);
+        player3.setProduction(Resources.ENERGY,2);
         player.playedCards.push(new LunarBeam());
         player.playedCards.push(new LunarBeam());
         const action = card.play(player, new Game("foobar", [player, player2, player3], player));
         if (action !== undefined) {
             player.setWaitingFor(action);
             player.process([[player2.id]]);
-            expect(player.energyProduction).to.eq(1);
+            expect(player.getProduction(Resources.ENERGY)).to.eq(1);
         }
     });
     it("Should error with input for run select player for PowerSupplyConsortium", function () {
@@ -51,7 +52,7 @@ describe("Player", function () {
     it("Should run select amount for Insulation", function () {
         const card = new Insulation();
         const player = new Player("test", Color.BLUE, false);
-        player.heatProduction = 2;
+        player.setProduction(Resources.HEAT,2)
         const action = card.play(player, new Game("foobar", [player,player], player));
         expect(action).not.to.eq(undefined);
         if (action === undefined) return;
@@ -61,8 +62,8 @@ describe("Player", function () {
         expect(function () { player.process([]) }).to.throw("Incorrect options provided");
         expect(function () { player.process([["foobar"]]) }).to.throw("Number not provided for amount");
         player.process([["1"]]);
-        expect(player.heatProduction).to.eq(1);
-        expect(player.megaCreditProduction).to.eq(1);
+        expect(player.getProduction(Resources.HEAT)).to.eq(1);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
         expect(player.getWaitingFor()).to.eq(undefined);
     });
 
@@ -72,9 +73,9 @@ describe("Player", function () {
         const game = new Game("gto", [player1, player2], player1);
         const card = new IoMiningIndustries();
         const corporationCard = new SaturnSystems();
-        expect(player1.megaCreditProduction).to.eq(0);
+        expect(player1.getProduction(Resources.MEGACREDITS)).to.eq(0);
         player1.corporationCard = corporationCard;
         player2.playCard(game, card, undefined);
-        expect(player1.megaCreditProduction).to.eq(1);
+        expect(player1.getProduction(Resources.MEGACREDITS)).to.eq(1);
     });
 });

@@ -4,6 +4,7 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CorporationCard } from "./CorporationCard";
 import { IProjectCard } from "../IProjectCard";
+import { Resources } from '../../Resources';
 
 export class SaturnSystems implements CorporationCard {
     public name: string = "Saturn Systems";
@@ -12,13 +13,13 @@ export class SaturnSystems implements CorporationCard {
     public onCardPlayed(_player: Player, game: Game, card: IProjectCard) {
         for (const tag of card.tags) {
             if (tag === Tags.JOVIAN) {
-                game.getCardPlayer(this.name).megaCreditProduction++;
+                game.getCardPlayer(this.name).setProduction(Resources.MEGACREDITS);
             }
         }
     }
     public play(player: Player) {
-        player.titaniumProduction = 1;
-        player.megaCreditProduction++;
+        player.setProduction(Resources.TITANIUM);
+        player.setProduction(Resources.MEGACREDITS);
         return undefined;
     }
 }

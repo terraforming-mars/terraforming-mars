@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class TundraFarming implements IProjectCard {
     public cost: number = 16;
@@ -14,8 +15,8 @@ export class TundraFarming implements IProjectCard {
         return game.getTemperature() >= -6 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player) {
-        player.plantProduction++;
-        player.megaCreditProduction += 2;
+        player.setProduction(Resources.PLANTS);
+        player.setProduction(Resources.MEGACREDITS,2);
         player.plants++;
         return undefined;
     }

@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardType } from "./CardType";
+import { Resources } from '../Resources';
 
 export class GreatDam implements IProjectCard {
     public cost: number = 12;
@@ -14,7 +15,7 @@ export class GreatDam implements IProjectCard {
         return game.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
-        player.energyProduction += 2;
+        player.setProduction(Resources.ENERGY,2);
         return undefined;
     }
     public getVictoryPoints() {

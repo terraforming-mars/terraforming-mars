@@ -6,6 +6,7 @@ import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { SpaceType } from "../../../src/SpaceType";
 import { TileType } from "../../../src/TileType";
+import { Resources } from '../../../src/Resources';
 
 describe("TharsisRepublic", function () {
     it("Should play", function () {
@@ -21,15 +22,15 @@ describe("TharsisRepublic", function () {
         lands[1].tile = { tileType: TileType.CITY }; 
         card.onTilePlaced(player, lands[0]);
         expect(player.megaCredits).to.eq(3);
-        expect(player.megaCreditProduction).to.eq(1);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
         card.onTilePlaced(player, lands[1]);
         expect(player.megaCredits).to.eq(3);
-        expect(player.megaCreditProduction).to.eq(2);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
         const colony = game.getAllSpaces().find((space) => space.spaceType === SpaceType.COLONY);
         expect(colony).not.to.eq(undefined);
         colony!.tile = { tileType: TileType.CITY };
         card.onTilePlaced(player, colony!);
-        expect(player.megaCreditProduction).to.eq(2); 
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2); 
     });
     it("Should take initial action", function () {
         const card = new TharsisRepublic();

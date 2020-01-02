@@ -2,6 +2,7 @@ import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
+import { Resources } from '../Resources';
 
 export class AcquiredCompany implements IProjectCard {
     public cost: number = 10;
@@ -12,7 +13,7 @@ export class AcquiredCompany implements IProjectCard {
       return true;
     }
     public play(player: Player) {
-      player.megaCreditProduction += 3;
+      player.setProduction(Resources.MEGACREDITS,3);
       return undefined;
     }
 }

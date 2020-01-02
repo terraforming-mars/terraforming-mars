@@ -4,6 +4,7 @@ import { DesignedMicroOrganisms } from "../../src/cards/DesignedMicroOrganisms";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("DesignedMicroOrganisms", function () {
     it("Can't play", function () {
@@ -20,6 +21,6 @@ describe("DesignedMicroOrganisms", function () {
         const player = new Player("test", Color.BLUE, false);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.plantProduction).to.eq(2);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(2);
     });
 });

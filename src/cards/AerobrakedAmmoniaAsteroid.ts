@@ -4,6 +4,7 @@ import {CardType} from './CardType';
 import {Player} from '../Player';
 import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
+import { Resources } from "../Resources";
 
 export class AerobrakedAmmoniaAsteroid implements IProjectCard {
     public cost: number = 26;
@@ -15,8 +16,8 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
     }
     public play(player: Player, game: Game) {
       const cardsToPick = game.getOtherMicrobeCards(this);
-      player.heatProduction += 3;
-      player.plantProduction++;
+      player.setProduction(Resources.HEAT,3);
+      player.setProduction(Resources.PLANTS);
 
       // It's not required to have card to place microbes
       // Rules pg. 9

@@ -4,6 +4,7 @@ import { Player } from "../../Player";
 import { CorporationCard } from "./../corporation/CorporationCard";
 import { IProjectCard } from "../IProjectCard";
 import { Game } from "../../Game";
+import { Resources } from '../../Resources';
 
 export class PointLuna implements CorporationCard {
     public name: string = "Point Luna";
@@ -15,7 +16,7 @@ export class PointLuna implements CorporationCard {
         }
     }
     public play(player: Player, game: Game) {
-        player.titaniumProduction++;
+        player.setProduction(Resources.TITANIUM);
 		player.cardsInHand.push(game.dealer.dealCard());
         return undefined;
     }

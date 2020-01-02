@@ -5,6 +5,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectPlayer } from "../inputs/SelectPlayer";
+import { Resources } from "../Resources";
 
 export class HeatTrappers implements IProjectCard {
     public cost: number = 6;
@@ -13,7 +14,7 @@ export class HeatTrappers implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     private getPlayersWithHeatProduction(currentPlayer: Player, game: Game): Array<Player> {
-        var players = game.getPlayers().filter((p) => p.heatProduction > 1);
+        var players = game.getPlayers().filter((p) => p.getProduction(Resources.HEAT) > 1);
 
         if (players.length > 1) {
           players = players.filter((p) => p.id != currentPlayer.id)
@@ -21,9 +22,9 @@ export class HeatTrappers implements IProjectCard {
         return players
     }
 
-    private doPlay(currentPlayer: Player, targetPlayer: Player): void {
-        targetPlayer.heatProduction = Math.max(targetPlayer.heatProduction - 2, 0);
-        currentPlayer.energyProduction++;
+    private doPlay(currentPlayer: Player, targetPlayer: Player, game: Game): void {
+        targetPlayer.setProduction(Resources.HEAT,-2, game, currentPlayer);
+        currentPlayer.setProduction(Resources.ENERGY);
     }
 
     public canPlay(player: Player, game: Game): boolean {
@@ -33,13 +34,13 @@ export class HeatTrappers implements IProjectCard {
     
     public play(player: Player, game: Game) {
         if (game.getPlayers().length == 1) {
-            player.energyProduction++;
+            player.setProduction(Resources.ENERGY);
             return undefined;
         }
         const players = this.getPlayersWithHeatProduction(player, game);
 
         if (players.length === 1) {
-            this.doPlay(player, players[0]);
+            this.doPlay(player, players[0],game);
             return undefined;
         }
         
@@ -47,7 +48,7 @@ export class HeatTrappers implements IProjectCard {
             players, 
             "Select player to decrease heat production 2 steps", 
             (otherPlayer: Player) => {
-                this.doPlay(player, otherPlayer);
+                this.doPlay(player, otherPlayer,game);
                 return undefined;
             }
         );

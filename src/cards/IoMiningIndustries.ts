@@ -3,6 +3,7 @@ import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
+import { Resources } from '../Resources';
 
 export class IoMiningIndustries implements IProjectCard {
     public cost: number = 41;
@@ -16,8 +17,8 @@ export class IoMiningIndustries implements IProjectCard {
         return player.getTagCount(Tags.JOVIAN);
     }
     public play(player: Player) {
-        player.titaniumProduction += 2;
-        player.megaCreditProduction += 2;
+        player.setProduction(Resources.TITANIUM,2);
+        player.setProduction(Resources.MEGACREDITS,2);
         return undefined;
     }
 }

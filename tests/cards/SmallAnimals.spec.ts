@@ -4,6 +4,7 @@ import { SmallAnimals } from "../../src/cards/SmallAnimals";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("SmallAnimals", function () {
     it("Can't play", function () {
@@ -27,14 +28,14 @@ describe("SmallAnimals", function () {
         const card = new SmallAnimals();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        player.plantProduction = 1;
+        player.setProduction(Resources.PLANTS);
         player.playedCards.push(card);
         const action = card.play(player, game);
         //expect(action).not.to.eq(undefined);
         if (action !== undefined) {
             action.cb(player);
         }
-        expect(player.plantProduction).to.eq(0);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(0);
         expect(card.getVictoryPoints(player)).to.eq(0);
         player.addResourceTo(card, 3);
         expect(card.getVictoryPoints(player)).to.eq(1);

@@ -4,6 +4,7 @@ import { RadSuits } from "../../src/cards/RadSuits";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("RadSuits", function () {
     it("Should throw", function () {
@@ -21,7 +22,7 @@ describe("RadSuits", function () {
         game.addCityTile(player, lands[1].id);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.megaCreditProduction).to.eq(1);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
     });

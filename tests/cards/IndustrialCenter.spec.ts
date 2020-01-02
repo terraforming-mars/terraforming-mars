@@ -5,6 +5,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { TileType } from "../../src/TileType";
+import { Resources } from '../../src/Resources';
 
 describe("IndustrialCenter", function () {
     it("Can't play or act", function () {
@@ -22,7 +23,7 @@ describe("IndustrialCenter", function () {
         const action = card.action(player, game);
         expect(action).to.eq(undefined);
         expect(player.megaCredits).to.eq(0);
-        expect(player.steelProduction).to.eq(1);
+        expect(player.getProduction(Resources.STEEL)).to.eq(1);
     });
     it("Should play", function () {
         const card = new IndustrialCenter();

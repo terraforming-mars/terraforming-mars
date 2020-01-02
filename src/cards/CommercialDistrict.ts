@@ -7,6 +7,7 @@ import {Game} from '../Game';
 import {TileType} from '../TileType';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
+import { Resources } from '../Resources';
 
 export class CommercialDistrict implements IProjectCard {
     public cost: number = 16;
@@ -14,7 +15,7 @@ export class CommercialDistrict implements IProjectCard {
     public name: string = 'Commercial District';
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player): boolean {
-      return player.energyProduction >= 1;
+      return player.getProduction(Resources.ENERGY) >= 1;
     }
     public getVictoryPoints(_player: Player, game: Game) {
       const usedSpace = game.getSpaceByTileCard(this.name);
@@ -35,8 +36,8 @@ export class CommercialDistrict implements IProjectCard {
               tileType: TileType.SPECIAL,
               card: this.name
             });
-            player.energyProduction--;
-            player.megaCreditProduction += 4;
+            player.setProduction(Resources.ENERGY,-1);
+            player.setProduction(Resources.MEGACREDITS,4);
             return undefined;
           }
       );

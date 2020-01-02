@@ -4,6 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { Resources } from '../Resources';
 
 export class ImmigrationShuttles implements IProjectCard {
     public cost: number = 31;
@@ -17,7 +18,7 @@ export class ImmigrationShuttles implements IProjectCard {
         return Math.floor(game.getCitiesInPlay() / 3);
     }
     public play(player: Player) {
-        player.megaCreditProduction += 5;
+        player.setProduction(Resources.MEGACREDITS,5);
         return undefined;
     }
 }

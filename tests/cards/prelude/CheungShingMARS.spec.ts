@@ -6,6 +6,7 @@ import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
 import { Ants } from "../../../src/cards/Ants";
 import { BuildingIndustries } from "../../../src/cards/BuildingIndustries";
+import { Resources } from '../../../src/Resources';
 
 describe("CheungShingMARS", function () {
     it("Gets card discount", function () {
@@ -22,6 +23,6 @@ describe("CheungShingMARS", function () {
         const player = new Player("test", Color.BLUE, false);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.megaCreditProduction).to.eq(3);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
     });
 });

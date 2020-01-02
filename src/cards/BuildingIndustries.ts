@@ -3,6 +3,7 @@ import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
+import { Resources } from '../Resources';
 
 export class BuildingIndustries implements IProjectCard {
     public cost: number = 6;
@@ -10,11 +11,11 @@ export class BuildingIndustries implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Building Industries';
     public canPlay(player: Player): boolean {
-      return player.energyProduction >= 1;
+      return player.getProduction(Resources.ENERGY) >= 1;
     }
     public play(player: Player) {
-      player.energyProduction--;
-      player.steelProduction += 2;
+      player.setProduction(Resources.ENERGY,-1);
+      player.setProduction(Resources.STEEL,2);
       return undefined;
     }
 }

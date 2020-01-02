@@ -3,6 +3,7 @@ import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
+import { Resources } from '../Resources';
 
 export class Cartel implements IProjectCard {
     public cost: number = 8;
@@ -13,7 +14,7 @@ export class Cartel implements IProjectCard {
       return true;
     }
     public play(player: Player) {
-      player.megaCreditProduction += player.getTagCount(Tags.EARTH) + 1;
+      player.setProduction(Resources.MEGACREDITS, player.getTagCount(Tags.EARTH) + 1);
       return undefined;
     }
 }

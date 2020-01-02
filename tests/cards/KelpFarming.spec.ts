@@ -4,6 +4,7 @@ import { KelpFarming } from "../../src/cards/KelpFarming";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { Resources } from '../../src/Resources';
 
 describe("KelpFarming", function () {
     it("Can't play", function () {
@@ -17,8 +18,8 @@ describe("KelpFarming", function () {
         const player = new Player("test", Color.BLUE, false);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(player.megaCreditProduction).to.eq(2);
-        expect(player.plantProduction).to.eq(3);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(3);
         expect(player.plants).to.eq(2);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);

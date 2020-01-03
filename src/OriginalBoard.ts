@@ -3,6 +3,7 @@ import { ISpace } from "./ISpace";
 import { SpaceType } from "./SpaceType";
 import { SpaceBonus } from "./SpaceBonus";
 import { SpaceName } from "./SpaceName";
+import { Game } from './Game';
 
 class Space implements ISpace {
     constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
@@ -154,13 +155,20 @@ export class OriginalBoard {
         return out;
     }
 
-    public getRandomCitySpace(offset: number = 0): Space {
+    public getRandomCitySpace(offset: number = 0, game: Game): Space {
         while (true) {
             let space = this.getRandomSpace(offset);
             if (space.tile === undefined 
                 && space instanceof Land 
                 && space.id !==  SpaceName.NOCTIS_CITY
-                && space.spaceType !== SpaceType.COLONY ) {
+                && space.spaceType !== SpaceType.COLONY 
+                && game.getAdjacentSpaces(space)
+                    .filter(sp => sp !== undefined && 
+                                  sp.tile === undefined && 
+                                  sp instanceof Land && 
+                                  sp.id !==  SpaceName.NOCTIS_CITY)
+                    .length > 0
+                ) {
                 return space;
             }
         }

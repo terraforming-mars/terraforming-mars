@@ -1037,7 +1037,7 @@ export class Game {
       // Single player add neutral player
       // put 2 neutrals cities on board with adjacent forest
       const neutral = new Player('neutral', Color.NEUTRAL, true);
-      const space1 = this.originalBoard.getRandomCitySpace();
+      const space1 = this.originalBoard.getRandomCitySpace(0, this);
       this.addCityTile(neutral, space1.id, SpaceType.LAND);
       const fspace1 = this.originalBoard.getForestSpace(
           this.getAdjacentSpaces(space1)
@@ -1045,7 +1045,7 @@ export class Game {
       this.addTile(neutral, SpaceType.LAND, fspace1, {
         tileType: TileType.GREENERY
       });
-      const space2 = this.originalBoard.getRandomCitySpace(30);
+      const space2 = this.originalBoard.getRandomCitySpace(30, this);
       this.addCityTile(neutral, space2.id, SpaceType.LAND);
       const fspace2 = this.originalBoard.getForestSpace(
           this.getAdjacentSpaces(space2)

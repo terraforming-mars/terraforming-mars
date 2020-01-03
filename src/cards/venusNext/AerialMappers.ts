@@ -28,19 +28,16 @@ export class AerialMappers implements IActionCard,IProjectCard {
         return 1;
     }       
     public action(player: Player, game: Game) {
-        const otherFloaterCards = player.getOtherResourceCards(ResourceType.FLOATER, this);
-        if (player.getResourcesOnCard(this) < 1 && otherFloaterCards.length < 1) {
+        const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+        if (player.getResourcesOnCard(this) < 1 && floaterCards.length === 1) {
             player.addResourceTo(this);
             return undefined;
         }
 
-        //Add this card to candidates
-        otherFloaterCards.push(this);
-
         if (player.getResourcesOnCard(this) < 1) {
             return new SelectCard(
                 'Select card to add 1 floater',
-                otherFloaterCards,
+                floaterCards,
                 (foundCards: Array<IProjectCard>) => {
                   player.addResourceTo(foundCards[0], 1);
                   return undefined;
@@ -51,7 +48,7 @@ export class AerialMappers implements IActionCard,IProjectCard {
         return new OrOptions(
             new SelectCard(
                 'Select card to add 1 floater',
-                otherFloaterCards,
+                floaterCards,
                 (foundCards: Array<IProjectCard>) => {
                   player.addResourceTo(foundCards[0], 1);
                   return undefined;

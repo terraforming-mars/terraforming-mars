@@ -41,18 +41,15 @@ export class Celestic implements IActionCard, CorporationCard {
     }
 
     public action(player: Player) {
-        const otherFloaterCards = player.getOtherResourceCards(ResourceType.FLOATER);
-        if (otherFloaterCards.length < 1) {
+        const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+        if (floaterCards.length === 1) {
             player.addResourceTo(this);
             return undefined;
         }
 
-        //Add this card to candidates
-        otherFloaterCards.push(this);
-
         return new SelectCard(
             'Select card to add 1 floater',
-            otherFloaterCards,
+            floaterCards,
             (foundCards: Array<IProjectCard>) => {
                 player.addResourceTo(foundCards[0], 1);
             return undefined;

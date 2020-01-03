@@ -9,6 +9,9 @@ describe("Celestic", function () {
         const player = new Player("test", Color.BLUE, false);
         const play = card.play();
         expect(play).to.eq(undefined);
+
+        player.corporationCard = card;
+
         const action = card.action(player);
         expect(action).to.eq(undefined);
         expect(player.getResourcesOnCard(card)).to.eq(1);

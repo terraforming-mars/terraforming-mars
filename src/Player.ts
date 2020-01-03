@@ -30,6 +30,7 @@ import { VictoryPointsBreakdown } from './VictoryPointsBreakdown';
 import {Resources} from './Resources';
 import { ResourceType } from './ResourceType';
 import { Manutech } from './cards/venusNext/Manutech';
+import { Celestic } from './cards/venusNext/Celestic';
 
 const INITIAL_ACTION: string = 'INITIAL';
 
@@ -227,16 +228,33 @@ export class Player {
       );
     }
 
-    public getOtherResourceCards(resource: ResourceType, c?: IProjectCard, ): Array<IProjectCard> {
+    public getResourceCards(resource: ResourceType, exclude?: IProjectCard, ): Array<IProjectCard> {
       const result: Array<IProjectCard> = [];
         this.playedCards.forEach((card) => {
-          if (c !== undefined && card.name !== c.name &&
-              card.resourceType === resource) {
+          if (card.resourceType === resource && ((exclude === undefined) 
+               || (exclude !== undefined && card.name !== exclude.name))
+             ) {
             result.push(card);
           }
         });
+      if (this.corporationCard !== undefined && this.corporationCard.name === new Celestic().name &&  resource === ResourceType.FLOATER) {
+        result.push(new Celestic());
+      }
       return result;
     }  
+
+    public getResourceCount(resource: ResourceType): number {
+      let count: number = 0;
+      this.playedCards.forEach((card) => {
+        if (card.resourceType === resource) {
+          count += this.getResourcesOnCard(card);
+        }
+      });
+      if (this.corporationCard !== undefined && this.corporationCard.name === new Celestic().name &&  resource === ResourceType.FLOATER) {
+        count += this.getResourcesOnCard(new Celestic());
+      }
+      return count;
+    }
 
     public getTagCount(tag: Tags, includeEventsTags:boolean = false): number {
       let tagCount = 0;

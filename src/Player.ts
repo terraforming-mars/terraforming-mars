@@ -363,6 +363,10 @@ export class Player {
           if (parsedInput.microbes !== undefined) {
             payMethod.microbes = parsedInput.microbes;
           }
+          if (parsedInput.floaters !== undefined) {
+            payMethod.floaters = parsedInput.floaters;
+          }
+
         } catch (err) {
           throw new Error('Unable to parse input ' + err);
         }
@@ -752,12 +756,10 @@ export class Player {
 
         if (howToPay.microbes !== undefined) {
           totalToPay += howToPay.microbes * 2;
-          console.log("howToPay.microbes: " + howToPay.microbes  );
         }
 
         if (howToPay.floaters !== undefined) {
           totalToPay += howToPay.floaters * 3;
-          console.log("howToPay.floaters: " + howToPay.floaters  );
         }
 
         if (howToPay.megaCredits > this.megaCredits) {

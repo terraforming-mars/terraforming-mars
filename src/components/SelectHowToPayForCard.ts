@@ -151,7 +151,6 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 this.$data.card,
                 JSON.stringify(htp)
             ]]);
-            console.log(htp);
         }
     },
     template: `

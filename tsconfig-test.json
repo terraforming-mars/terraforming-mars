@@ -291,7 +291,8 @@
         "tests/cards/venusNext/IshtarMining.spec.ts",    
         "tests/cards/venusNext/MorningStarInc.spec.ts",      
         "tests/cards/venusNext/AerosportTournament.spec.ts", 
-        "tests/cards/venusNext/AirScrappingExpedition.spec.ts",        
+        "tests/cards/venusNext/AirScrappingExpedition.spec.ts",       
+        "tests/cards/venusNext/CometForVenus.spec.ts",            
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

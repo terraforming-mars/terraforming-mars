@@ -8,6 +8,7 @@ interface SelectHowToPayForCardModel {
     steel: number;
     titanium: number;
     microbes: number;
+    floaters: number;
     warning: string | undefined;
 }
 
@@ -26,6 +27,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             steel: 0,
             titanium: 0,
             microbes: 0,
+            floaters: 0,
             warning: undefined
         } as SelectHowToPayForCardModel;
     },
@@ -84,6 +86,18 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             }
             return false;			
         },
+        canUseFloaters: function () {
+            if (this.$data.card !== undefined && this.playerinput.floaters > 0) {
+                const card = getProjectCardByName(this.$data.card);
+                if (card !== undefined) {
+                    if (card.tags.find((tag) => tag === Tags.VENUS) !== undefined) {
+                        return true;
+                    }
+                }
+            }
+            return false;			
+        },
+
         cardChanged: function () {
             this.$data.megaCredits = this.getCardCost();
             
@@ -91,6 +105,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             this.steel = 0;
             this.heat = 0;
             this.microbes = 0;
+            this.floaters = 0;
         },
         hasWarning: function () {
             return this.$data.warning !== undefined;
@@ -101,7 +116,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 megaCredits: this.$data.megaCredits,
                 steel: this.$data.steel,
                 titanium: this.$data.titanium,
-                microbes: this.$data.microbes
+                microbes: this.$data.microbes,
+                floaters: this.$data.floaters
             };
             if (htp.megaCredits > this.player.megaCredits) {
                 this.$data.warning = "You don't have that many mega credits";
@@ -109,6 +125,10 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             }
             if (htp.microbes > this.playerinput.microbes) {
                 this.$data.warning = "You don't have enough microbes";
+                return;
+            }
+            if (htp.floaters > this.playerinput.floaters) {
+                this.$data.warning = "You don't have enough floaters";
                 return;
             }
             if (htp.heat > this.player.heat) {
@@ -123,7 +143,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 this.$data.warning = "You don't have enough steel";
                 return;
             }
-            if ((2 * htp.microbes) + htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) < this.getCardCost()) {
+            if ( (3 * htp.floaters) + (2 * htp.microbes) + htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) < this.getCardCost()) {
                 this.$data.warning = "Haven't spent enough";
                 return;
             }
@@ -131,6 +151,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 this.$data.card,
                 JSON.stringify(htp)
             ]]);
+            console.log(htp);
         }
     },
     template: `
@@ -145,7 +166,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
   
     <section class="nes-container with-title" v-trim-whitespace>
 
-        <h3 class="payments_title">How to play?</h3>
+        <h3 class="payments_title">How to pay?</h3>
 
         <div class="payments_type" v-if="canUseSteel()">
             <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
@@ -174,6 +195,13 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             <button class="nes-btn" v-on:click="reduceValue('microbes', 1)" :class="getCssClassFor('<', 'microbes')"><</button>
             <input class="nes-input payments_input" v-model.number="microbes" />
             <button class="nes-btn" v-on:click="addValue('microbes', 1)" :class="getCssClassFor('>', 'microbes')">></button>
+        </div>
+
+        <div class="payments_type" v-if="canUseFloaters()">
+            <i class="resource_icon resource_icon--floater payments_type_icon" title="Pay by Floaters"></i>
+            <button class="nes-btn" v-on:click="reduceValue('floaters', 1)" :class="getCssClassFor('<', 'floaters')"><</button>
+            <input class="nes-input payments_input" v-model.number="floaters" />
+            <button class="nes-btn" v-on:click="addValue('floaters', 1)" :class="getCssClassFor('>', 'floaters')">></button>
         </div>
 
         <div class="payments_type">

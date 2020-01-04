@@ -28,6 +28,10 @@ import {Tags} from './cards/Tags';
 import { Resources } from "./Resources";
 import {MaxwellBase} from './cards/venusNext/MaxwellBase';
 import { Aphrodite } from './cards/venusNext/Aphrodite';
+import { Dirigibles } from './cards/venusNext/Dirigibles';
+import { AerialMappers } from './cards/venusNext/AerialMappers';
+import { Psychrophiles } from './cards/prelude/Psychrophiles';
+import { AdaptedLichen } from './cards/AdaptedLichen';
 
 export class Game {
     public activePlayer: Player;
@@ -235,7 +239,11 @@ export class Game {
         this.dealer.dealCard(),
         this.dealer.dealCard(),
         this.dealer.dealCard(),
-        new MaxwellBase()
+        new MaxwellBase(),
+        new Dirigibles(),
+        new AerialMappers(),
+        new Psychrophiles(),
+        new AdaptedLichen()
       ];
 
       if (this.preludeExtension) {

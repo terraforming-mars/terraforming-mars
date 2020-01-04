@@ -275,6 +275,20 @@ import { Worms } from "./cards/Worms";
 import { Zeppelins } from "./cards/Zeppelins";
 
 import { IProjectCard } from "./cards/IProjectCard";
+import { Dirigibles } from './cards/venusNext/Dirigibles';
+import { IshtarMining } from './cards/venusNext/IshtarMining';
+import { MaxwellBase } from './cards/venusNext/MaxwellBase';
+import { AerialMappers } from './cards/venusNext/AerialMappers';
+import { AerosportTournament } from './cards/venusNext/AerosportTournament';
+import { CometForVenus } from './cards/venusNext/CometForVenus';
+import { AirScrappingExpedition } from './cards/venusNext/AirScrappingExpedition';
+import { DeuteriumExport } from './cards/venusNext/DeuteriumExport';
+import { GiantSolarShade } from './cards/venusNext/GiantSolarShade';
+import { Aphrodite } from './cards/venusNext/Aphrodite';
+import { Celestic } from './cards/venusNext/Celestic';
+import { Manutech } from './cards/venusNext/Manutech';
+import { MorningStarInc } from './cards/venusNext/MorningStarInc';
+import { Viron } from './cards/venusNext/Viron';
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -347,6 +361,26 @@ export const ALL_PRELUDE_PROJECTS_CARDS: Array<IProjectCard> = [
         new LavaTubeSettlement(),
         new Psychrophiles()
 ];
+
+export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
+        new AerialMappers(),
+        new AerosportTournament(),
+        new AirScrappingExpedition(),
+        new CometForVenus(),
+        new DeuteriumExport(),
+        new Dirigibles(),
+        new GiantSolarShade(),
+        new IshtarMining(),
+        new MaxwellBase()
+];    
+
+export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [
+        new Aphrodite(),
+        new Celestic(),
+        new Manutech(),
+        new MorningStarInc(),
+        new Viron()
+];    
 
 
 export const ALL_PROJECT_CARDS: Array<IProjectCard> = [

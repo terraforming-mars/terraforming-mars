@@ -31,6 +31,7 @@ import {Resources} from './Resources';
 import { ResourceType } from './ResourceType';
 import { Manutech } from './cards/venusNext/Manutech';
 import { Celestic } from './cards/venusNext/Celestic';
+import { Dirigibles } from './cards/venusNext/Dirigibles';
 
 const INITIAL_ACTION: string = 'INITIAL';
 
@@ -335,7 +336,8 @@ export class Player {
           heat: 0,
           titanium: 0,
           megaCredits: 0,
-          microbes: 0
+          microbes: 0,
+          floaters: 0
         };
         try {
           const parsedInput: {[x: string]: number} =
@@ -436,7 +438,8 @@ export class Player {
           heat: 0,
           titanium: 0,
           megaCredits: 0,
-          microbes: 0
+          microbes: 0, 
+          floaters: 0
         };
         if (this.canUseHeatAsMegaCredits) {
           payMethod.heat = 0;
@@ -605,7 +608,8 @@ export class Player {
         titanium: 0,
         heat: 0,
         megaCredits: 0,
-        microbes: 0
+        microbes: 0,
+        floaters: 0
       };
 
       let selectedCards: Array<IProjectCard> = [];
@@ -748,6 +752,12 @@ export class Player {
 
         if (howToPay.microbes !== undefined) {
           totalToPay += howToPay.microbes * 2;
+          console.log("howToPay.microbes: " + howToPay.microbes  );
+        }
+
+        if (howToPay.floaters !== undefined) {
+          totalToPay += howToPay.floaters * 3;
+          console.log("howToPay.floaters: " + howToPay.floaters  );
         }
 
         if (howToPay.megaCredits > this.megaCredits) {
@@ -761,7 +771,8 @@ export class Player {
         }
         return this.playCard(game, selectedCard, howToPay);
       };
-      return new SelectHowToPayForCard(this.getPlayableCards(game), this.getMicrobesCanSpend(), this.canUseHeatAsMegaCredits, cb);
+
+      return new SelectHowToPayForCard(this.getPlayableCards(game), this.getMicrobesCanSpend(), this.getFloatersCanSpend(), this.canUseHeatAsMegaCredits, cb);
     }
 
     public getMicrobesCanSpend(): number {
@@ -772,6 +783,15 @@ export class Player {
         }
         return 0;
     }
+
+    public getFloatersCanSpend(): number {
+      for (const playedCard of this.playedCards) {
+          if (playedCard.name === new Dirigibles().name) {
+              return this.getResourcesOnCard(playedCard);
+          }
+      }
+      return 0;
+    }    
 
     public playCard(game: Game, selectedCard: IProjectCard, howToPay?: HowToPay): PlayerInput | undefined { 
       const whenDone = () => {
@@ -792,8 +812,10 @@ export class Player {
             for (const playedCard of this.playedCards) {
                 if (playedCard.name === new Psychrophiles().name) {
                     this.removeResourceFrom(playedCard, howToPay.microbes);
-                    break;
                 }
+                if (playedCard.name === new Dirigibles().name) {
+                    this.removeResourceFrom(playedCard, howToPay.floaters);
+                } 
             }
           }
 
@@ -1331,6 +1353,17 @@ export class Player {
         if (canUseTitanium) {
           maxPay += this.titanium * this.titaniumValue;
         }
+        if (this.playedCards.find(
+          (playedCard) => playedCard.name === new Psychrophiles().name) !== undefined 
+           && card.tags.indexOf(Tags.PLANT) !== -1) {
+            maxPay += this.getResourcesOnCard(new Psychrophiles()) * 2;
+        }
+        if (this.playedCards.find(
+          (playedCard) => playedCard.name === new Dirigibles().name) !== undefined 
+           && card.tags.indexOf(Tags.VENUS) !== -1) {
+            maxPay += this.getResourcesOnCard(new Dirigibles()) * 3;
+        }
+
         maxPay += this.megaCredits;
         return maxPay >= this.getCardCost(game, card) &&
                    card.canPlay(this, game);

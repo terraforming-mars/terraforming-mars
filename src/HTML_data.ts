@@ -3269,6 +3269,7 @@ export const HTML_DATA: Map<string, string> =
 ["Dirigibles",`
             <div class="title background-color-active ">Dirigibles</div>
             <div class="price ">11</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-venus "></div>
             <div class="venus-icon project-icon"></div>
             <div class="content ">

@@ -8,7 +8,7 @@ import { Resources } from "../Resources";
 
 export class AerobrakedAmmoniaAsteroid implements IProjectCard {
     public cost: number = 26;
-    public tags: Array<Tags> = [Tags.SCIENCE, Tags.SPACE];
+    public tags: Array<Tags> = [Tags.SPACE];
     public name: string = 'Aerobraked Ammonia Asteroid';
     public cardType: CardType = CardType.EVENT;
     public canPlay(): boolean {

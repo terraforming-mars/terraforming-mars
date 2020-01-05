@@ -15,7 +15,7 @@ export class QuantumExtractor implements IProjectCard {
         return player.getTagCount(Tags.SCIENCE) >= 4;
     }
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
-        if (card.tags.indexOf(Tags.SCIENCE) !== -1) {
+        if (card.tags.indexOf(Tags.SPACE) !== -1) {
             return 2;
         }
         return 0;

@@ -18,4 +18,8 @@ export class AerosportTournament implements IProjectCard {
         player.megaCredits += game.getCitiesInPlay();
         return undefined;
     }
+    
+    public getVictoryPoints() {
+        return 1;
+    } 
 }

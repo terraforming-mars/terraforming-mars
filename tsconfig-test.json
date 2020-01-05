@@ -294,6 +294,7 @@
         "tests/cards/venusNext/AirScrappingExpedition.spec.ts",       
         "tests/cards/venusNext/CometForVenus.spec.ts",  
         "tests/cards/venusNext/Dirigibles.spec.ts",  
+        "tests/cards/venusNext/Atmoscoop.spec.ts",  
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

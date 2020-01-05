@@ -837,6 +837,9 @@ export class Game {
           player.megaCredits += 2;
         }
       });
+      
+      this.tilePlaced(space);
+
     }
 
     public getAdjacentSpaces(space: ISpace): Array<ISpace> {
@@ -895,7 +898,6 @@ export class Game {
       this.addTile(player, spaceType, this.getSpace(spaceId), {
         tileType: TileType.GREENERY
       });
-      this.tilePlaced(this.getSpace(spaceId));
       return this.increaseOxygenLevel(player, 1);
     }
     public addCityTile(
@@ -906,7 +908,6 @@ export class Game {
         tileType: TileType.CITY,
         card: cardName
       });
-      this.tilePlaced(space);
     }
     public addOceanTile(
         player: Player, spaceId: string,
@@ -918,7 +919,6 @@ export class Game {
         tileType: TileType.OCEAN
       });
       player.terraformRating++;
-      this.tilePlaced(this.getSpace(spaceId));
     }
     public getOceansOnBoard(): number {
       return this.getSpaces(SpaceType.OCEAN).filter(

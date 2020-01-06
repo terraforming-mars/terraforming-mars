@@ -295,7 +295,11 @@
         "tests/cards/venusNext/CometForVenus.spec.ts",  
         "tests/cards/venusNext/Dirigibles.spec.ts",  
         "tests/cards/venusNext/Atmoscoop.spec.ts", 
-        "tests/cards/venusNext/MaxwellBase.spec.ts",         
+        "tests/cards/venusNext/MaxwellBase.spec.ts", 
+        "tests/cards/venusNext/DawnCity.spec.ts",    
+        "tests/cards/venusNext/AtalantaPlanitiaLab.spec.ts",    
+        "tests/cards/venusNext/GHGImportFromVenus.spec.ts",
+        "tests/cards/venusNext/CorroderSuits.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

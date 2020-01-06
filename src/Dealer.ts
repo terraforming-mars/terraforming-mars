@@ -289,6 +289,10 @@ import { Celestic } from './cards/venusNext/Celestic';
 import { Manutech } from './cards/venusNext/Manutech';
 import { MorningStarInc } from './cards/venusNext/MorningStarInc';
 import { Viron } from './cards/venusNext/Viron';
+import { CorroderSuits } from './cards/venusNext/CorroderSuits';
+import { DawnCity } from './cards/venusNext/DawnCity';
+import { GHGImportFromVenus } from './cards/venusNext/GHGImportFromVenus';
+import { AtalantaPlanitiaLab } from './cards/venusNext/AtalantaPlanitiaLab';
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -371,7 +375,11 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
         new Dirigibles(),
         new GiantSolarShade(),
         new IshtarMining(),
-        new MaxwellBase()
+        new MaxwellBase(),
+        new CorroderSuits(),
+        new DawnCity(),
+        new GHGImportFromVenus(),
+        new AtalantaPlanitiaLab()
 ];    
 
 export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [

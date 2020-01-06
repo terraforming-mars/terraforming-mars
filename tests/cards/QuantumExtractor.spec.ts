@@ -5,6 +5,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { Bushes } from "../../src/cards/Bushes";
+import { TollStation } from '../../src/cards/TollStation';
 
 describe("QuantumExtractor", function () {
     it("Can't play", function () {
@@ -19,7 +20,7 @@ describe("QuantumExtractor", function () {
         player.playedCards.push(card, card, card, card);
         const action = card.play(player);
         expect(action).to.eq(undefined);
-        expect(card.getCardDiscount(player, game, card)).to.eq(2);
+        expect(card.getCardDiscount(player, game, new TollStation())).to.eq(2);
         expect(card.getCardDiscount(player, game, new Bushes())).to.eq(0);
     });
 });

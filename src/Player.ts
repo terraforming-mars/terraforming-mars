@@ -1,5 +1,5 @@
 import {IProjectCard} from './cards/IProjectCard';
-import {CorporationCard} from './cards/corporation/CorporationCard';
+import { CorporationCard } from './cards/corporation/CorporationCard';
 import {Psychrophiles} from './cards/prelude/Psychrophiles';
 import {Tags} from './cards/Tags';
 import {PlayerInput} from './PlayerInput';
@@ -28,7 +28,10 @@ import {ORIGINAL_AWARDS} from './awards/Awards';
 import {IAward} from './awards/IAward';
 import { VictoryPointsBreakdown } from './VictoryPointsBreakdown';
 import {Resources} from './Resources';
-import {ResourceType} from './ResourceType';
+import { ResourceType } from './ResourceType';
+import { Manutech } from './cards/venusNext/Manutech';
+import { Celestic } from './cards/venusNext/Celestic';
+import { Dirigibles } from './cards/venusNext/Dirigibles';
 
 const INITIAL_ACTION: string = 'INITIAL';
 
@@ -98,6 +101,26 @@ export class Player {
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
         game.log(this.name + "'s " + resource + " production modified by " + amount + " by " + fromPlayer.name);
       }
+
+      //Manutech hook
+      if (amount > 0 && this.corporationCard !== undefined && this.corporationCard.name === new Manutech().name) {
+        if (resource === Resources.MEGACREDITS) this.megaCredits += amount;
+        if (resource === Resources.STEEL) this.steel += amount;
+        if (resource === Resources.TITANIUM) this.titanium += amount;
+        if (resource === Resources.PLANTS) this.plants += amount;
+        if (resource === Resources.ENERGY) this.energy += amount;
+        if (resource === Resources.HEAT) this.heat += amount;
+      }
+
+    };  
+
+    public getActionsThisGeneration(): Set<string> {
+      return this.actionsThisGeneration;
+    }
+
+    public setActionsThisGeneration(cardName: string): void {
+      this.actionsThisGeneration.add(cardName);
+      return;
     }
 
     public getLastCardPlayedThisTurn(): IProjectCard | undefined {
@@ -146,15 +169,16 @@ export class Player {
       }
       this.removeResourceFrom(card, count);
     }
+
     public getResourcesOnCard(card: ICard): number {
       return this.resourcesOnCards.get(card.name) || 0;
     }
-    public getRequirementsBonus(game: Game): number {
+    public getRequirementsBonus(game: Game, venusOnly?: boolean): number {
       let requirementsBonus: number = 0;
       if (
         this.corporationCard !== undefined &&
             this.corporationCard.getRequirementBonus !== undefined) {
-              requirementsBonus += this.corporationCard.getRequirementBonus(this, game);
+              requirementsBonus += this.corporationCard.getRequirementBonus(this, game, venusOnly);
       }
       for (let playedCard of this.playedCards) {
         if (playedCard.getRequirementBonus !== undefined &&
@@ -212,7 +236,24 @@ export class Player {
             result.push(card);
           }
         });
+      if (this.corporationCard !== undefined && this.corporationCard.name === new Celestic().name &&  resource === ResourceType.FLOATER) {
+        result.push(new Celestic());
+      }
       return result;
+    }  
+
+    public getResourceCount(resource: ResourceType): number {
+      let count: number = 0;
+      this.playedCards.forEach((card) => {
+        if (card.resourceType === resource) {
+          count += this.getResourcesOnCard(card);
+        }
+      });
+      if (this.corporationCard !== undefined && this.corporationCard.name === new Celestic().name &&  resource === ResourceType.FLOATER) {
+        count += this.getResourcesOnCard(new Celestic());
+      }
+      return count;
+
     }
 
     public getTagCount(tag: Tags, includeEventsTags:boolean = false): number {
@@ -294,7 +335,8 @@ export class Player {
           heat: 0,
           titanium: 0,
           megaCredits: 0,
-          microbes: 0
+          microbes: 0,
+          floaters: 0
         };
         try {
           const parsedInput: {[x: string]: number} =
@@ -320,6 +362,10 @@ export class Player {
           if (parsedInput.microbes !== undefined) {
             payMethod.microbes = parsedInput.microbes;
           }
+          if (parsedInput.floaters !== undefined) {
+            payMethod.floaters = parsedInput.floaters;
+          }
+
         } catch (err) {
           throw new Error('Unable to parse input ' + err);
         }
@@ -395,7 +441,8 @@ export class Player {
           heat: 0,
           titanium: 0,
           megaCredits: 0,
-          microbes: 0
+          microbes: 0, 
+          floaters: 0
         };
         if (this.canUseHeatAsMegaCredits) {
           payMethod.heat = 0;
@@ -470,6 +517,57 @@ export class Player {
       this.plants += this.plantProduction;
     }
 
+    public worldGovernmentTerraforming(game: Game) {
+      const action: OrOptions = new OrOptions();
+      action.title = 'Select action for World Government Terraforming';
+      if (game.getTemperature() < constants.MAX_TEMPERATURE) {
+        action.options.push(
+          new SelectOption('Increase temperature', () => {
+            game.increaseTemperature(this,1);
+            game.log(this.name + " acted as World Government and increased temperature");
+            game.doneWorldGovernmentTerraforming();
+            return undefined;
+          })
+        );
+      }
+      if (game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL) {
+        action.options.push(
+          new SelectOption('Increase oxygen', () => {
+            game.increaseOxygenLevel(this,1);
+            game.log(this.name + " acted as World Government and increased oxygen level");
+            game.doneWorldGovernmentTerraforming();
+            return undefined;
+          })
+        );
+      }
+      if (game.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
+        action.options.push(
+          new SelectSpace(
+            'Add an ocean',
+            game.getAvailableSpacesForOcean(this), (space) => {
+              game.addOceanTile(this, space.id);
+              game.log(this.name + " acted as World Government and increased oceans");
+              game.doneWorldGovernmentTerraforming();
+              return undefined;
+            }
+          )
+        );
+      }
+      if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
+        action.options.push(
+          new SelectOption('Increase Venus scale', () => {
+            game.increaseVenusScaleLevel(this,1);
+            game.log(this.name + " acted as World Government and increased Venus scale");
+            game.doneWorldGovernmentTerraforming();
+            return undefined;
+          })
+        );
+      }
+
+      this.setWaitingFor(action);
+      return;
+  }    
+
     public runDraftPhase(game: Game, playerName: String, passedCards?: Array<IProjectCard>): void {
       let cards: Array<IProjectCard> = [];
       if (passedCards === undefined) {
@@ -513,7 +611,8 @@ export class Player {
         titanium: 0,
         heat: 0,
         megaCredits: 0,
-        microbes: 0
+        microbes: 0,
+        floaters: 0
       };
 
       let selectedCards: Array<IProjectCard> = [];
@@ -658,6 +757,10 @@ export class Player {
           totalToPay += howToPay.microbes * 2;
         }
 
+        if (howToPay.floaters !== undefined) {
+          totalToPay += howToPay.floaters * 3;
+        }
+
         if (howToPay.megaCredits > this.megaCredits) {
           throw new Error('Do not have enough mega credits');
         }
@@ -669,7 +772,8 @@ export class Player {
         }
         return this.playCard(game, selectedCard, howToPay);
       };
-      return new SelectHowToPayForCard(this.getPlayableCards(game), this.getMicrobesCanSpend(), this.canUseHeatAsMegaCredits, cb);
+
+      return new SelectHowToPayForCard(this.getPlayableCards(game), this.getMicrobesCanSpend(), this.getFloatersCanSpend(), this.canUseHeatAsMegaCredits, cb);
     }
 
     public getMicrobesCanSpend(): number {
@@ -680,6 +784,15 @@ export class Player {
         }
         return 0;
     }
+
+    public getFloatersCanSpend(): number {
+      for (const playedCard of this.playedCards) {
+          if (playedCard.name === new Dirigibles().name) {
+              return this.getResourcesOnCard(playedCard);
+          }
+      }
+      return 0;
+    }    
 
     public playCard(game: Game, selectedCard: IProjectCard, howToPay?: HowToPay): PlayerInput | undefined { 
       const whenDone = () => {
@@ -700,8 +813,10 @@ export class Player {
             for (const playedCard of this.playedCards) {
                 if (playedCard.name === new Psychrophiles().name) {
                     this.removeResourceFrom(playedCard, howToPay.microbes);
-                    break;
                 }
+                if (playedCard.name === new Dirigibles().name) {
+                    this.removeResourceFrom(playedCard, howToPay.floaters);
+                } 
             }
           }
 
@@ -830,6 +945,33 @@ export class Player {
       };
       return res;
     }
+
+    private airScraping(game: Game): PlayerInput {
+      const fundProject = (megaCredits: number, heat: number) => {
+        game.increaseVenusScaleLevel(this, 1);
+        this.payForStandardProject(
+            StandardProjectType.AIR_SCRAPING, megaCredits, heat
+        );
+        this.actionsTakenThisRound++;
+        this.takeAction(game);
+        game.log(this.name + " used air scraping standard project");
+        return undefined;
+      };
+      if (this.canUseHeatAsMegaCredits && this.heat > 0) {
+        return new SelectHowToPay(
+            'Air scraping (' + constants.AIR_SCRAPING_COST + ' MC)',
+            false, false, true,
+            (htp) => {
+              return fundProject(htp.megaCredits, htp.heat);
+            }, constants.AIR_SCRAPING_COST
+        );
+      }
+      return new SelectOption(
+        'Air scraping (' + constants.AIR_SCRAPING_COST + ' MC)', 
+        () => {return fundProject(constants.AIR_SCRAPING_COST, 0);}
+      );
+    }
+
 
     private buildPowerPlant(game: Game): PlayerInput {
       const fundProject = (megaCredits: number, heat: number) => {
@@ -1212,6 +1354,17 @@ export class Player {
         if (canUseTitanium) {
           maxPay += this.titanium * this.titaniumValue;
         }
+        if (this.playedCards.find(
+          (playedCard) => playedCard.name === new Psychrophiles().name) !== undefined 
+           && card.tags.indexOf(Tags.PLANT) !== -1) {
+            maxPay += this.getResourcesOnCard(new Psychrophiles()) * 2;
+        }
+        if (this.playedCards.find(
+          (playedCard) => playedCard.name === new Dirigibles().name) !== undefined 
+           && card.tags.indexOf(Tags.VENUS) !== -1) {
+            maxPay += this.getResourcesOnCard(new Dirigibles()) * 3;
+        }
+
         maxPay += this.megaCredits;
         return maxPay >= this.getCardCost(game, card) &&
                    card.canPlay(this, game);
@@ -1264,6 +1417,15 @@ export class Player {
             this.addCity(game)
         );
       }
+
+      if ( game.venusNextExtension &&
+        this.canAfford(constants.AIR_SCRAPING_COST) &&
+            game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
+        standardProjects.options.push(
+            this.airScraping(game)
+        );
+      }
+
       return standardProjects;
     }
 

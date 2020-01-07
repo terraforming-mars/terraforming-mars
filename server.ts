@@ -322,7 +322,8 @@ function getWaitingFor(
     players: undefined,
     availableSpaces: undefined,
     max: undefined,
-    microbes: undefined
+    microbes: undefined,
+    floaters: undefined
   };
   switch (waitingFor.inputType) {
     case PlayerInputTypes.AND_OPTIONS:
@@ -339,6 +340,7 @@ function getWaitingFor(
       result.cards = (waitingFor as SelectHowToPayForCard)
           .cards.map((card) => card.name);
       result.microbes = (waitingFor as SelectHowToPayForCard).microbes;
+      result.floaters = (waitingFor as SelectHowToPayForCard).floaters;
       result.canUseHeat = (waitingFor as SelectHowToPayForCard).canUseHeat;
       break;
     case PlayerInputTypes.SELECT_CARD:

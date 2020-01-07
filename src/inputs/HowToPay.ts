@@ -5,5 +5,6 @@ export interface HowToPay {
     steel: number;
     titanium: number;
     microbes: number;
+    floaters: number;
 }
 

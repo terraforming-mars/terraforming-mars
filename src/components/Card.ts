@@ -4,7 +4,14 @@ import Vue from "vue";
 import { IProjectCard } from "../cards/IProjectCard";
 import { ICard } from "../cards/ICard";
 import { BeginnerCorporation } from "../cards/corporation/BeginnerCorporation";
-import { ALL_PRELUDE_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PROJECT_CARDS, ALL_PRELUDE_CARDS, ALL_PRELUDE_PROJECTS_CARDS } from "../Dealer";
+import { ALL_PRELUDE_CORPORATIONS,
+         ALL_CORPORATION_CARDS,
+         ALL_PROJECT_CARDS,
+         ALL_PRELUDE_CARDS,
+         ALL_PRELUDE_PROJECTS_CARDS,
+         ALL_VENUS_CORPORATIONS,
+         ALL_VENUS_PROJECTS_CARDS
+         } from "../Dealer";
 import { CardType } from "../cards/CardType";
 import { Tags } from "../cards/Tags";
 import { ResourceType } from "../ResourceType";
@@ -14,11 +21,16 @@ function getCorporationCardByName(cardName: string): ICard | undefined {
     if (cardName === (new BeginnerCorporation()).name) {
         return new BeginnerCorporation();
     }
-    return ALL_CORPORATION_CARDS.find((card) => card.name === cardName) || ALL_PRELUDE_CORPORATIONS.find((card) => card.name === cardName) ;
+    return ALL_CORPORATION_CARDS.find((card) => card.name === cardName) 
+    || ALL_PRELUDE_CORPORATIONS.find((card) => card.name === cardName) 
+    || ALL_VENUS_CORPORATIONS.find((card) => card.name === cardName) ;
 }
 
 export function getProjectCardByName(cardName: string): IProjectCard | undefined {
-    return ALL_PROJECT_CARDS.find((card) => card.name === cardName) || ALL_PRELUDE_CARDS.find((card) => card.name === cardName) || ALL_PRELUDE_PROJECTS_CARDS.find((card) => card.name === cardName);
+    return ALL_PROJECT_CARDS.find((card) => card.name === cardName) 
+    || ALL_PRELUDE_CARDS.find((card) => card.name === cardName) 
+    || ALL_PRELUDE_PROJECTS_CARDS.find((card) => card.name === cardName)
+    || ALL_VENUS_PROJECTS_CARDS.find((card) => card.name === cardName);
 }
 
 function getData(cardName: string, resources: string): string | undefined {

@@ -21,6 +21,8 @@
     "src/components/*.ts",
     "src/cards/*.ts",
     "src/cards/corporation/*.ts",
+    "src/cards/prelude/*.ts",
+    "src/cards/venusNext/*.ts",    
     "src/inputs/*.ts",
     "src/models/*.ts",
     "script.ts",

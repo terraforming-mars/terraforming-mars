@@ -944,33 +944,6 @@ export class Game {
       } 
       return ret;
     }
-
-    public getOtherAnimalCards(c: IProjectCard): Array<IProjectCard> {
-      const result: Array<IProjectCard> = [];
-      this.players.forEach((player) => {
-        player.playedCards.forEach((card) => {
-          if (card.name !== c.name &&
-              card.resourceType === ResourceType.ANIMAL) {
-            result.push(card);
-          }
-        });
-      });
-      return result;
-    }
-
-    public getOtherMicrobeCards(c: IProjectCard): Array<IProjectCard> {
-      const result: Array<IProjectCard> = [];
-      this.players.forEach((player) => {
-        player.playedCards.forEach((card) => {
-          if (card.name !== c.name &&
-              card.resourceType === ResourceType.MICROBE) {
-            result.push(card);
-          }
-        });
-      });
-      return result;
-    }
-
     public getPlayedCardsWithAnimals(): Array<IProjectCard> {
       const result: Array<IProjectCard> = [];
       this.players.forEach((player) => {

@@ -10,6 +10,7 @@ import { SelectCard } from "../inputs/SelectCard";
 import { SelectOption } from "../inputs/SelectOption";
 import { ISpace } from "../ISpace";
 import { PlayerInput } from "../PlayerInput";
+import { ResourceType } from '../ResourceType';
 
 export class LargeConvoy implements IProjectCard {
     public cost: number = 36;
@@ -34,7 +35,7 @@ export class LargeConvoy implements IProjectCard {
             )
         }
 
-        const cards = game.getOtherAnimalCards(this);
+        const cards = player.getResourceCards(ResourceType.ANIMAL);
 
         if (cards.length === 0 ) {
             player.plants += 5; 

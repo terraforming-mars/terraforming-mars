@@ -2,9 +2,9 @@ import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
-import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
 import { Resources } from "../Resources";
+import { ResourceType } from '../ResourceType';
 
 export class AerobrakedAmmoniaAsteroid implements IProjectCard {
     public cost: number = 26;
@@ -14,8 +14,8 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
     public canPlay(): boolean {
       return true;
     }
-    public play(player: Player, game: Game) {
-      const cardsToPick = game.getOtherMicrobeCards(this);
+    public play(player: Player) {
+      const cardsToPick = player.getResourceCards(ResourceType.MICROBE);
       player.setProduction(Resources.HEAT,3);
       player.setProduction(Resources.PLANTS);
 

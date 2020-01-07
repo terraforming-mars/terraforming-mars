@@ -229,12 +229,10 @@ export class Player {
       );
     }
 
-    public getResourceCards(resource: ResourceType, exclude?: IProjectCard, ): Array<IProjectCard> {
+    public getResourceCards(resource: ResourceType): Array<IProjectCard> {
       const result: Array<IProjectCard> = [];
         this.playedCards.forEach((card) => {
-          if (card.resourceType === resource && ((exclude === undefined) 
-               || (exclude !== undefined && card.name !== exclude.name))
-             ) {
+          if (card.resourceType !== undefined && card.resourceType === resource) {
             result.push(card);
           }
         });

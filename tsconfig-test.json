@@ -300,6 +300,9 @@
         "tests/cards/venusNext/AtalantaPlanitiaLab.spec.ts",    
         "tests/cards/venusNext/GHGImportFromVenus.spec.ts",
         "tests/cards/venusNext/CorroderSuits.spec.ts",
+        "tests/cards/venusNext/FloatingHabs.spec.ts",
+        "tests/cards/venusNext/Extremophiles.spec.ts",
+        "tests/cards/venusNext/ExtractorBalloons.spec.ts",
         "tests/Game.spec.ts",
 	    "tests/Player.spec.ts"
     ]

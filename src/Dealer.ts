@@ -293,6 +293,9 @@ import { CorroderSuits } from './cards/venusNext/CorroderSuits';
 import { DawnCity } from './cards/venusNext/DawnCity';
 import { GHGImportFromVenus } from './cards/venusNext/GHGImportFromVenus';
 import { AtalantaPlanitiaLab } from './cards/venusNext/AtalantaPlanitiaLab';
+import { ExtractorBalloons } from './cards/venusNext/ExtractorBalloons';
+import { Extremophiles } from './cards/venusNext/Extremophiles';
+import { FloatingHabs } from './cards/venusNext/FloatingHabs';
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -379,7 +382,10 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
         new CorroderSuits(),
         new DawnCity(),
         new GHGImportFromVenus(),
-        new AtalantaPlanitiaLab()
+        new AtalantaPlanitiaLab(),
+        new ExtractorBalloons(),
+        new Extremophiles(),
+        new FloatingHabs()
 ];    
 
 export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [

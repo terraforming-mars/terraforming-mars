@@ -1,0 +1,57 @@
+import { IProjectCard } from "../IProjectCard";
+import {IActionCard} from '../ICard';
+import { Tags } from "../Tags";
+import { CardType } from "../CardType";
+import { Player } from "../../Player";
+import { ResourceType } from "../../ResourceType";
+import { SelectCard } from '../../inputs/SelectCard';
+import { SelectHowToPay } from '../../inputs/SelectHowToPay';
+
+export class FloatingHabs implements IActionCard,IProjectCard {
+    public cost: number = 5;
+    public tags: Array<Tags> = [Tags.VENUS];
+    public name: string = "Floating Habs";
+    public cardType: CardType = CardType.ACTIVE;
+    public resourceType: ResourceType = ResourceType.FLOATER;
+    public canPlay(player: Player): boolean {
+        return player.getTagCount(Tags.SCIENCE) >= 2 ;
+    }
+    public play() {
+        return undefined;
+    }
+    public canAct(player: Player): boolean {
+        return player.canAfford(2);
+    }  
+
+    public getVictoryPoints(player: Player): number {
+        return Math.floor(player.getResourcesOnCard(this) / 2);
+    }
+    
+    public action(player: Player) {
+        const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+        return new SelectCard(
+            "Select card to add 1 floater",
+            floaterCards,
+            (foundCards: Array<IProjectCard>) => {
+              if (player.canUseHeatAsMegaCredits && player.heat > 0) {
+                return new SelectHowToPay(
+                  'Select how to pay ', false, false,
+                  true,
+                  (htp) => {
+                    if (htp.heat + htp.megaCredits < 2) {
+                        throw new Error('Not enough spent to buy card');
+                    }
+                    player.megaCredits -= htp.megaCredits;
+                    player.heat -= htp.heat;
+                    player.addResourceTo(foundCards[0], 1);
+                    return undefined;
+                  },2
+                );
+              }
+              player.addResourceTo(foundCards[0], 1);
+              player.megaCredits -= 2;
+              return undefined;
+            }
+        );
+    }
+}

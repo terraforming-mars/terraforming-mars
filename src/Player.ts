@@ -540,11 +540,11 @@ export class Player {
           })
         );
       }
-      if (game.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
+      if (game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
         action.options.push(
           new SelectSpace(
             'Add an ocean',
-            game.getAvailableSpacesForOcean(this), (space) => {
+            game.board.getAvailableSpacesForOcean(this), (space) => {
               game.addOceanTile(this, space.id);
               game.log(this.name + " acted as World Government and increased oceans");
               game.doneWorldGovernmentTerraforming();

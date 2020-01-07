@@ -10,6 +10,7 @@ import { SelectCard } from "../inputs/SelectCard";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 import { PlayerInput } from "../PlayerInput";
+import { ResourceType } from '../ResourceType';
 
 export class ImportedHydrogen implements IProjectCard {
     public cost: number = 16;
@@ -25,7 +26,7 @@ export class ImportedHydrogen implements IProjectCard {
             if (game.noOceansAvailable()) return undefined;
             return new SelectSpace(
                 "Select space for ocean tile", 
-                game.getAvailableSpacesForOcean(player), 
+                game.board.getAvailableSpacesForOcean(player), 
                 (foundSpace: ISpace) => {
                     game.addOceanTile(player, foundSpace.id);
                     return undefined;
@@ -38,11 +39,11 @@ export class ImportedHydrogen implements IProjectCard {
                 player.plants += 3;
                 return addOcean();
             }),
-            new SelectCard("Add 3 microbes to card", game.getOtherMicrobeCards(this), (foundCards: Array<IProjectCard>) => {
+            new SelectCard("Add 3 microbes to card", player.getResourceCards(ResourceType.MICROBE), (foundCards: Array<IProjectCard>) => {
                 player.addResourceTo(foundCards[0], 3);
                 return addOcean();
             }),
-            new SelectCard("Add 2 animals to card", game.getOtherAnimalCards(this), (foundCards: Array<IProjectCard>) => {
+            new SelectCard("Add 2 animals to card", player.getResourceCards(ResourceType.ANIMAL), (foundCards: Array<IProjectCard>) => {
                 player.addResourceTo(foundCards[0], 2);
                 return addOcean();
             })

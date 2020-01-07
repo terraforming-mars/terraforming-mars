@@ -11,7 +11,7 @@ export class DustSeals implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Dust Seals';
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOceansOnBoard() <= 3 + player.getRequirementsBonus(game);
+      return game.board.getOceansOnBoard() <= 3 + player.getRequirementsBonus(game);
     }
     public play() {
       return undefined;

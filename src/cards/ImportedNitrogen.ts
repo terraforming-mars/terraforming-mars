@@ -3,9 +3,9 @@ import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
-import { Game } from "../Game";
 import { AndOptions } from "../inputs/AndOptions";
 import { SelectCard } from "../inputs/SelectCard";
+import { ResourceType } from '../ResourceType';
 
 export class ImportedNitrogen implements IProjectCard {
     public cost: number = 23;
@@ -20,9 +20,9 @@ export class ImportedNitrogen implements IProjectCard {
         player.plants += 4;
         return undefined;
     }
-    public play(player: Player, game: Game) {
-        const otherAnimalCards = game.getOtherAnimalCards(this);
-        const otherMicrobeCards = game.getOtherMicrobeCards(this);
+    public play(player: Player) {
+        const otherAnimalCards = player.getResourceCards(ResourceType.ANIMAL);
+        const otherMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
 
         if (otherAnimalCards.length === 0 && otherMicrobeCards.length === 0) {
             return this.giveResources(player);

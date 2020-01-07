@@ -17,10 +17,10 @@ export class NuclearZone implements IProjectCard {
         return true;
     }
     public play(player: Player, game: Game) {
-        if (game.getAvailableSpacesOnLand(player).length < 1) {
+        if (game.board.getAvailableSpacesOnLand(player).length < 1) {
             return game.increaseTemperature(player, 2);
         }
-        return new SelectSpace("Select space for special tile", game.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
+        return new SelectSpace("Select space for special tile", game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
             return game.increaseTemperature(player, 2);
         });

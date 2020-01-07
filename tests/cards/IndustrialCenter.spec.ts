@@ -29,7 +29,7 @@ describe("IndustrialCenter", function () {
         const card = new IndustrialCenter();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        game.addCityTile(player, game.getAvailableSpacesOnLand(player)[0].id);
+        game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
         expect(game.getCitiesInPlayOnMars()).to.eq(1);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);

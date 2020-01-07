@@ -21,7 +21,7 @@ describe("ResearchOutpost", function () {
         const card = new ResearchOutpost();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        const lands = game.getAvailableSpacesOnLand(player);
+        const lands = game.board.getAvailableSpacesOnLand(player);
         for (let i = 0; i < lands.length; i++) {
             game.addGreenery(player, lands[i].id);
         }

@@ -17,7 +17,7 @@ describe("RadSuits", function () {
         const card = new RadSuits();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        const lands = game.getAvailableSpacesOnLand(player);
+        const lands = game.board.getAvailableSpacesOnLand(player);
         game.addCityTile(player, lands[0].id);
         game.addCityTile(player, lands[1].id);
         const action = card.play(player, game);

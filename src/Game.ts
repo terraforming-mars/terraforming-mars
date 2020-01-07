@@ -11,7 +11,6 @@ import {CorporationCard} from './cards/corporation/CorporationCard';
 import {OriginalBoard} from './OriginalBoard';
 import {SelectCard} from './inputs/SelectCard';
 import {SelectSpace} from './inputs/SelectSpace';
-import {SpaceName} from './SpaceName';
 import {AndOptions} from './inputs/AndOptions';
 import {PlayerInput} from './PlayerInput';
 import {Phase} from './Phase';
@@ -40,8 +39,7 @@ export class Game {
     private passedPlayers: Set<Player> = new Set<Player>();
     private researchedPlayers: Set<Player> = new Set<Player>();
     private draftedPlayers: Set<Player> = new Set<Player>();
-    private originalBoard = new OriginalBoard();
-    public spaces: Array<ISpace>;
+    public board = new OriginalBoard();
     private temperature: number = constants.MIN_TEMPERATURE;
     public gameLog: Array<String> = [];
     public gameAge: number = 0; // Each log event increases it
@@ -54,7 +52,6 @@ export class Game {
       private preludeExtension: boolean = false,
       private draftVariant: boolean = false
     ) {
-      this.spaces = this.originalBoard.spaces;
       this.activePlayer = first;
       this.preludeExtension = preludeExtension;
       this.draftVariant = draftVariant;
@@ -91,12 +88,6 @@ export class Game {
       return this.preludeExtension;
     }
 
-    public getSpaceByTileCard(cardName: string): ISpace | undefined {
-      return this.spaces.find(
-          (space) => space.tile !== undefined && space.tile.card === cardName
-      );
-    }
-
     public milestoneClaimed(milestone: IMilestone): boolean {
       return this.claimedMilestones.find(
           (claimedMilestone) => claimedMilestone.milestone === milestone
@@ -104,13 +95,13 @@ export class Game {
     }
 
     public noOceansAvailable(): boolean {
-      return this.getOceansOnBoard() >= constants.MAX_OCEAN_TILES;
+      return this.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES;
     }
 
     private marsIsTerraformed(): boolean {
       return this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL &&
              this.temperature >= constants.MAX_TEMPERATURE &&
-             this.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
+             this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
     }
 
     public isSoloModeWin(): boolean {
@@ -409,54 +400,6 @@ export class Game {
       return this.draftedPlayers.has(player);
     }
 
-    private playerHasSpace(player: Player): boolean {
-      return this.getAllSpaces().find(
-          (space) => space.tile !== undefined &&
-                   space.player === player &&
-                   space.tile.tileType !== TileType.OCEAN
-      ) !== undefined;
-    }
-
-    public getAvailableSpacesForCity(player: Player): Array<ISpace> {
-      // A city cannot be adjacent to another city
-      return this.getAvailableSpacesOnLand(player).filter(
-        (space) => this.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.CITY).length === 0
-      );
-    } 
-
-    public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
-      // Greenery must be placed by a space you own if you own a space
-      if (this.playerHasSpace(player)) {
-        return this.getAvailableSpacesOnLand(player)
-            .filter(
-                (space) => this.getAdjacentSpaces(space).find(
-                    (adj) => adj.tile !== undefined &&
-                                 adj.tile.tileType !== TileType.OCEAN &&
-                                 adj.player === player
-                ) !== undefined
-            );
-      }
-      // Place anywhere if no space owned
-      return this.getAvailableSpacesOnLand(player);
-    }
-
-    public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
-      return this.getSpaces(SpaceType.LAND)
-          .filter(
-              (space) => space.id !== SpaceName.NOCTIS_CITY &&
-                       space.tile === undefined &&
-                       (space.player === undefined || space.player === player)
-          );
-    }
-
-    public getAvailableSpacesForOcean(player: Player): Array<ISpace> {
-      return this.getSpaces(SpaceType.OCEAN)
-          .filter(
-              (space) => space.tile === undefined &&
-                       (space.player === undefined || space.player === player)
-          );
-    }
-
     private allPlayersHaveFinishedResearch(): boolean {
       for (const player of this.players) {
         if (!this.hasResearched(player)) {
@@ -609,7 +552,7 @@ export class Game {
         millestone.player.victoryPoints += 5;
       }
 
-      const spaces = this.getAllSpaces();
+      const spaces = this.board.spaces;
       spaces.forEach((space) => {
         // Give victory point for each greenery tile
         if (
@@ -625,7 +568,7 @@ export class Game {
           space.tile.tileType === TileType.CITY &&
           space.player !== undefined
         ) {
-          const adjacent = this.getAdjacentSpaces(space);
+          const adjacent = this.board.getAdjacentSpaces(space);
           for (const adj of adjacent) {
             if (adj.tile && adj.tile.tileType === TileType.GREENERY) {
               space.player.victoryPointsBreakdown.city += 1;
@@ -644,7 +587,7 @@ export class Game {
     public canPlaceGreenery(player: Player): boolean {
       return !this.donePlayers.has(player) &&
              player.plants >= player.plantsNeededForGreenery &&
-             this.getAvailableSpacesForGreenery(player).length > 0;
+             this.board.getAvailableSpacesForGreenery(player).length > 0;
     }
 
     public playerIsDoneWithGame(player: Player): void {
@@ -738,11 +681,11 @@ export class Game {
           this.temperature === 0 ||
           ((steps === 2 || steps === 3) && this.temperature === 2) ||
           (steps === 3 && this.temperature === 4)
-        ) && this.getOceansOnBoard() < constants.MAX_OCEAN_TILES
+        ) && this.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES
       ) {
         return new SelectSpace(
             'Select space for ocean from temperature increase',
-            this.getAvailableSpacesForOcean(player),
+            this.board.getAvailableSpacesForOcean(player),
             (space: ISpace) => {
               this.addOceanTile(player, space.id);
               return undefined;
@@ -768,40 +711,33 @@ export class Game {
       return found[0];
     }
 
-    public getAllSpaces(): Array<ISpace> {
-      return this.spaces;
-    }
-
     public getSpace(id: string): ISpace {
-      const matchedSpaces = this.spaces.filter((space) => space.id === id);
+      const matchedSpaces = this.board.spaces.filter((space) => space.id === id);
       if (matchedSpaces.length === 1) {
         return matchedSpaces[0];
       }
       throw new Error('Error with getting space');
     }
     public getCitiesInPlayOnMars(): number {
-      return this.spaces.filter(
+      return this.board.spaces.filter(
           (space) => space.tile !== undefined &&
                    space.tile.tileType === TileType.CITY &&
                    space.spaceType !== SpaceType.COLONY
       ).length;
     }
     public getCitiesInPlay(): number {
-      return this.spaces.filter(
+      return this.board.spaces.filter(
           (space) => space.tile !== undefined &&
                    space.tile.tileType === TileType.CITY
       ).length;
     }
     public getSpaceCount(tileType: TileType, player: Player): number {
-      return this.spaces.filter(
+      return this.board.spaces.filter(
           (space) => space.tile !== undefined &&
                    space.tile.tileType === tileType &&
                    space.player !== undefined &&
                    space.player === player
       ).length;
-    }
-    public getSpaces(spaceType: SpaceType): Array<ISpace> {
-      return this.spaces.filter((space) => space.spaceType === spaceType);
     }
     public addTile(
         player: Player, spaceType: SpaceType,
@@ -831,7 +767,7 @@ export class Game {
           player.titanium++;
         }
       });
-      this.getAdjacentSpaces(space).forEach((adjacentSpace) => {
+      this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
         if (adjacentSpace.tile &&
             adjacentSpace.tile.tileType === TileType.OCEAN) {
           player.megaCredits += 2;
@@ -840,44 +776,6 @@ export class Game {
       
       this.tilePlaced(space);
 
-    }
-
-    public getAdjacentSpaces(space: ISpace): Array<ISpace> {
-      if (space.spaceType !== SpaceType.COLONY) {
-        if (space.y < 0 || space.y > 8) {
-          throw new Error('Unexpected space y value');
-        }
-        if (space.x < 0 || space.x > 8) {
-          throw new Error('Unexpected space x value');
-        }
-        const leftSpace: Array<number> = [space.x - 1, space.y];
-        const rightSpace: Array<number> = [space.x + 1, space.y];
-        const topLeftSpace: Array<number> = [space.x, space.y - 1];
-        const topRightSpace: Array<number> = [space.x, space.y - 1];
-        const bottomLeftSpace: Array<number> = [space.x, space.y + 1];
-        const bottomRightSpace: Array<number> = [space.x, space.y + 1];
-        if (space.y < 4) {
-          bottomLeftSpace[0]--;
-          topRightSpace[0]++;
-        } else if (space.y === 4) {
-          bottomRightSpace[0]++;
-          topRightSpace[0]++;
-        } else {
-          bottomRightSpace[0]++;
-          topLeftSpace[0]--;
-        }
-        return this.spaces.filter((adj) => {
-          return space !== adj && adj.spaceType !== SpaceType.COLONY && (
-            (adj.x === leftSpace[0] && adj.y === leftSpace[1]) ||
-            (adj.x === rightSpace[0] && adj.y === rightSpace[1]) ||
-            (adj.x === topLeftSpace[0] && adj.y === topLeftSpace[1]) ||
-            (adj.x === topRightSpace[0] && adj.y === topRightSpace[1]) ||
-            (adj.x === bottomLeftSpace[0] && adj.y === bottomLeftSpace[1]) ||
-            (adj.x === bottomRightSpace[0] && adj.y === bottomRightSpace[1])
-          );
-        });
-      }
-      return [];
     }
     private tilePlaced(space: ISpace) {
       this.players.forEach((player) => {
@@ -912,7 +810,7 @@ export class Game {
     public addOceanTile(
         player: Player, spaceId: string,
         spaceType: SpaceType = SpaceType.OCEAN): void {
-      if (this.getOceansOnBoard() === constants.MAX_OCEAN_TILES) {
+      if (this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES) {
         return;
       }
       this.addTile(player, spaceType, this.getSpace(spaceId), {
@@ -920,16 +818,6 @@ export class Game {
       });
       player.terraformRating++;
     }
-    public getOceansOnBoard(): number {
-      return this.getSpaces(SpaceType.OCEAN).filter(
-          (space) => space.tile !== undefined &&
-                   space.tile.tileType === TileType.OCEAN
-      ).length + this.getSpaces(SpaceType.LAND).filter(
-          (space) => space.tile !== undefined &&
-                   space.tile.tileType === TileType.OCEAN
-      ).length;
-    }
-
     public getPlayers(): Array<Player> {
       // We always return them in turn order
       let ret: Array<Player> = [];
@@ -944,33 +832,6 @@ export class Game {
       } 
       return ret;
     }
-
-    public getOtherAnimalCards(c: IProjectCard): Array<IProjectCard> {
-      const result: Array<IProjectCard> = [];
-      this.players.forEach((player) => {
-        player.playedCards.forEach((card) => {
-          if (card.name !== c.name &&
-              card.resourceType === ResourceType.ANIMAL) {
-            result.push(card);
-          }
-        });
-      });
-      return result;
-    }
-
-    public getOtherMicrobeCards(c: IProjectCard): Array<IProjectCard> {
-      const result: Array<IProjectCard> = [];
-      this.players.forEach((player) => {
-        player.playedCards.forEach((card) => {
-          if (card.name !== c.name &&
-              card.resourceType === ResourceType.MICROBE) {
-            result.push(card);
-          }
-        });
-      });
-      return result;
-    }
-
     public getPlayedCardsWithAnimals(): Array<IProjectCard> {
       const result: Array<IProjectCard> = [];
       this.players.forEach((player) => {
@@ -1037,18 +898,18 @@ export class Game {
       // Single player add neutral player
       // put 2 neutrals cities on board with adjacent forest
       const neutral = new Player('neutral', Color.NEUTRAL, true);
-      const space1 = this.originalBoard.getRandomCitySpace(0, this);
+      const space1 = this.board.getRandomCitySpace(0);
       this.addCityTile(neutral, space1.id, SpaceType.LAND);
-      const fspace1 = this.originalBoard.getForestSpace(
-          this.getAdjacentSpaces(space1)
+      const fspace1 = this.board.getForestSpace(
+          this.board.getAdjacentSpaces(space1)
       );
       this.addTile(neutral, SpaceType.LAND, fspace1, {
         tileType: TileType.GREENERY
       });
-      const space2 = this.originalBoard.getRandomCitySpace(30, this);
+      const space2 = this.board.getRandomCitySpace(30);
       this.addCityTile(neutral, space2.id, SpaceType.LAND);
-      const fspace2 = this.originalBoard.getForestSpace(
-          this.getAdjacentSpaces(space2)
+      const fspace2 = this.board.getForestSpace(
+          this.board.getAdjacentSpaces(space2)
       );
       this.addTile(neutral, SpaceType.LAND, fspace2, {
         tileType: TileType.GREENERY

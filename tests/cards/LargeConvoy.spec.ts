@@ -28,8 +28,8 @@ describe("LargeConvoy", function () {
         expect(player.plants).to.eq(5);
 
 
-        action.cb(game.getAvailableSpacesForOcean(player)[0]);
-        expect(game.getOceansOnBoard()).to.eq(1);
+        action.cb(game.board.getAvailableSpacesForOcean(player)[0]);
+        expect(game.board.getOceansOnBoard()).to.eq(1);
     });
 
     it("Should play with animals placement", function () {
@@ -55,8 +55,8 @@ describe("LargeConvoy", function () {
 
         expect(newAction instanceof SelectSpace).to.eq(true);
         if (newAction === undefined) return;
-        newAction.cb(game.getAvailableSpacesForOcean(player)[0]);
-        expect(game.getOceansOnBoard()).to.eq(1);
+        newAction.cb(game.board.getAvailableSpacesForOcean(player)[0]);
+        expect(game.board.getOceansOnBoard()).to.eq(1);
     });
 
     it("Should play without oceans", function () {

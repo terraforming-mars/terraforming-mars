@@ -18,11 +18,11 @@ export class PermafrostExtraction implements IProjectCard {
     }
     public play(player: Player, game: Game) {
 
-        if (game.getOceansOnBoard() === MAX_OCEAN_TILES) {
+        if (game.board.getOceansOnBoard() === MAX_OCEAN_TILES) {
             return undefined;
         }
 
-        return new SelectSpace("Select space for ocean tile", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+        return new SelectSpace("Select space for ocean tile", game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
             game.addOceanTile(player, space.id);
             return undefined;
         });

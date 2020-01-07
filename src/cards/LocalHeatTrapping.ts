@@ -2,11 +2,11 @@
 import { IProjectCard } from "./IProjectCard";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
-import { Game } from "../Game";
 import { Tags } from "./Tags";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
 import { SelectCard } from "../inputs/SelectCard";
+import { ResourceType } from '../ResourceType';
 
 export class LocalHeatTrapping implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
@@ -16,9 +16,9 @@ export class LocalHeatTrapping implements IProjectCard {
     public canPlay(player: Player): boolean {
         return player.heat >= 5;
     }
-    public play(player: Player, game: Game) {
+    public play(player: Player) {
         player.heat -= 5;
-        const otherAnimalCards: Array<IProjectCard> = game.getOtherAnimalCards(this);
+        const otherAnimalCards: Array<IProjectCard> = player.getResourceCards(ResourceType.ANIMAL);
         const gain4Plants = function () {
             player.plants += 4;
             return undefined;

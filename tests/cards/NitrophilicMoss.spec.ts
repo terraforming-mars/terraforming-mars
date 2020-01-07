@@ -12,7 +12,7 @@ describe("NitrophilicMoss", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
-        const oceans = game.getAvailableSpacesForOcean(player);
+        const oceans = game.board.getAvailableSpacesForOcean(player);
         for (let i = 0; i < 3; i++) {
             game.addOceanTile(player, oceans[i].id);
         }

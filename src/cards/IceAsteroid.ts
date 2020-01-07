@@ -16,13 +16,13 @@ export class IceAsteroid implements IProjectCard {
         return true;
     }
     public static placeTwoOceans(player: Player, game: Game): SelectSpace | undefined {
-        let available = game.getAvailableSpacesForOcean(player);
+        let available = game.board.getAvailableSpacesForOcean(player);
         if (available.length === 0 || game.noOceansAvailable()) {
             return undefined;
         }
         return new SelectSpace("Select space for first ocean tile", available, (space: ISpace) => {
             game.addOceanTile(player, space.id);
-            available = game.getAvailableSpacesForOcean(player);
+            available = game.board.getAvailableSpacesForOcean(player);
             if (available.length === 0 || game.noOceansAvailable()) {
                 return undefined;
             }

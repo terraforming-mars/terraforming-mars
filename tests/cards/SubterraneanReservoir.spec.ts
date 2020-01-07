@@ -14,6 +14,6 @@ describe("SubterraneanReservoir", function () {
         expect(action).not.to.eq(undefined);
         if (action === undefined) return;
         action.cb(action.availableSpaces[0]);
-        expect(game.getOceansOnBoard()).to.eq(1);
+        expect(game.board.getOceansOnBoard()).to.eq(1);
     });
 });

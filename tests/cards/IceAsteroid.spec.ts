@@ -18,11 +18,11 @@ describe("IceAsteroid", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
-        const subAction = action!.cb(game.getAvailableSpacesForOcean(player)[0]);
+        const subAction = action!.cb(game.board.getAvailableSpacesForOcean(player)[0]);
         expect(subAction).not.to.eq(undefined);
-        expect(game.getOceansOnBoard()).to.eq(1);
-        subAction!.cb(game.getAvailableSpacesForOcean(player)[0]);
-        expect(game.getOceansOnBoard()).to.eq(2);
+        expect(game.board.getOceansOnBoard()).to.eq(1);
+        subAction!.cb(game.board.getAvailableSpacesForOcean(player)[0]);
+        expect(game.board.getOceansOnBoard()).to.eq(2);
     });
     it("Places no oceans", function () {
         const card = new IceAsteroid();
@@ -39,7 +39,7 @@ describe("IceAsteroid", function () {
         maxOutOceans(player, game, constants.MAX_OCEAN_TILES - 1);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
-        const subAction = action!.cb(game.getAvailableSpacesForOcean(player)[0]);
+        const subAction = action!.cb(game.board.getAvailableSpacesForOcean(player)[0]);
         expect(subAction).to.eq(undefined);
         expect(game.noOceansAvailable()).to.eq(true);
     });

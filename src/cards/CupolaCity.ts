@@ -20,7 +20,7 @@ export class CupolaCity implements IProjectCard {
     public play(player: Player, game: Game) {
       return new SelectSpace(
           'Select a space for city tile',
-          game.getAvailableSpacesOnLand(player),
+          game.board.getAvailableSpacesOnLand(player),
           (space: ISpace) => {
             game.addCityTile(player, space.id);
             player.setProduction(Resources.ENERGY,-1);

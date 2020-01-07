@@ -11,7 +11,7 @@ export class Algae implements IProjectCard {
     public name: string = 'Algae';
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getOceansOnBoard() >= 5 - player.getRequirementsBonus(game);
+      return game.board.getOceansOnBoard() >= 5 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
       player.plants++;

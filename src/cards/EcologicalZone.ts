@@ -17,17 +17,17 @@ export class EcologicalZone implements IProjectCard {
   public cardType: CardType = CardType.ACTIVE;
   public name: string = 'Ecological Zone';
   private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
-    return game.getAvailableSpacesOnLand(player)
+    return game.board.getAvailableSpacesOnLand(player)
         .filter(
-            (space) => game.getAdjacentSpaces(space).filter(
+            (space) => game.board.getAdjacentSpaces(space).filter(
                 (adjacentSpace) => adjacentSpace.tile !== undefined &&
               adjacentSpace.tile.tileType === TileType.GREENERY
             ).length > 0
         );
   }
   private hasGreeneryTile(player: Player, game: Game): boolean {
-    return game.getSpaces(SpaceType.OCEAN)
-        .concat(game.getSpaces(SpaceType.LAND))
+    return game.board.getSpaces(SpaceType.OCEAN)
+        .concat(game.board.getSpaces(SpaceType.LAND))
         .filter(
             (space) => space.tile !== undefined &&
           space.tile.tileType === TileType.GREENERY &&

@@ -22,7 +22,7 @@ describe("MartianRails", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         player.energy = 1;
-        game.addCityTile(player, game.getAvailableSpacesOnLand(player)[0].id);
+        game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
         const action = card.action(player, game);
         expect(action).to.eq(undefined);
         expect(player.energy).to.eq(0);

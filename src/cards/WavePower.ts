@@ -12,7 +12,7 @@ export class WavePower implements IProjectCard {
     public name: string = "Wave Power";
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game);
+        return game.board.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
         player.setProduction(Resources.ENERGY);

@@ -17,8 +17,8 @@ export class IndustrialCenter implements IActionCard, IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Industrial Center";
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
-        return game.getAvailableSpacesOnLand(player)
-                .filter((space) => game.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.CITY).length > 0);
+        return game.board.getAvailableSpacesOnLand(player)
+                .filter((space) => game.board.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.CITY).length > 0);
     }
     public canPlay(player: Player, game: Game): boolean {
         return this.getAvailableSpaces(player, game).length > 0;

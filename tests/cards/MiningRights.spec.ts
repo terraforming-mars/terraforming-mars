@@ -14,7 +14,7 @@ describe("MiningRights", function () {
         const card = new MiningRights();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        for (let land of game.getAvailableSpacesOnLand(player)) {
+        for (let land of game.board.getAvailableSpacesOnLand(player)) {
             if (land.bonus.indexOf(SpaceBonus.STEEL) !== -1 || land.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
                 game.addTile(player, land.spaceType, land, { tileType: TileType.SPECIAL });
             }

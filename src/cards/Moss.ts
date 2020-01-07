@@ -12,7 +12,7 @@ export class Moss implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Moss";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game) && player.plants >= 1;
+        return game.board.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game) && player.plants >= 1;
     }
     public play(player: Player) {
         player.plants--;

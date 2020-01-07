@@ -20,7 +20,7 @@ export class IceCapMelting implements IProjectCard {
 
         return new SelectSpace(
             "Select space for ocean", 
-            game.getAvailableSpacesForOcean(player), 
+            game.board.getAvailableSpacesForOcean(player), 
             (space: ISpace) => {
                 game.addOceanTile(player, space.id);
                 return undefined;

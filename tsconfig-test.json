@@ -280,6 +280,7 @@
         "tests/cards/prelude/ResearchCoordination.spec.ts",
         "tests/cards/prelude/Vitor.spec.ts",
         "tests/Game.spec.ts",
-	    "tests/Player.spec.ts"
+        "tests/OriginalBoard.spec.ts",
+        "tests/Player.spec.ts"
     ]
 }

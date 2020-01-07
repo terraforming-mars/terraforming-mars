@@ -17,7 +17,7 @@ export class Mangrove implements IProjectCard {
         return game.getTemperature() >= 4 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player, game: Game) {
-        return new SelectSpace("Select ocean space for greenery tile", game.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
+        return new SelectSpace("Select ocean space for greenery tile", game.board.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
             return game.addGreenery(player, foundSpace.id, SpaceType.OCEAN);
         });
     }

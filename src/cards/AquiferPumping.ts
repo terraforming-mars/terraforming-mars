@@ -25,7 +25,7 @@ export class AquiferPumping implements IActionCard, IProjectCard {
     }
     public canAct(player: Player, game: Game): boolean {
       // No oceans available anymore
-      if (game.getOceansOnBoard() >= constants.MAX_OCEAN_TILES) return false;
+      if (game.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES) return false;
 
       return (player.steelValue * player.steel) +
               player.megaCredits +
@@ -51,7 +51,7 @@ export class AquiferPumping implements IActionCard, IProjectCard {
           },
           new SelectSpace(
               'Select space for ocean tile',
-              game.getAvailableSpacesForOcean(player),
+              game.board.getAvailableSpacesForOcean(player),
               (space: ISpace) => {
                 foundSpace = space;
                 return undefined;

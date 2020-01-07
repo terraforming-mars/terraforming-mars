@@ -22,7 +22,7 @@ describe("AquiferTurbines", function () {
         const game = new Game("foobar", [player], player);
         const action = card.play(player, game) as SelectSpace;
         expect(action).not.to.eq(undefined);
-        action.cb(game.getAvailableSpacesForOcean(player)[0]);
+        action.cb(game.board.getAvailableSpacesForOcean(player)[0]);
         expect(player.getProduction(Resources.ENERGY)).to.eq(2);
         expect(player.megaCredits).to.eq(0);
         TestingUtils.maxOutOceans(player, game);

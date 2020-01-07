@@ -11,7 +11,7 @@ describe("DustSeals", function () {
         const card = new DustSeals();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        const oceanSpaces = game.getAvailableSpacesForOcean(player);
+        const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
         for (let i = 0; i < 4; i++) {
             oceanSpaces[i].tile = { tileType: TileType.OCEAN };
         }

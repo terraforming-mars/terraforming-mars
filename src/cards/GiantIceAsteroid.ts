@@ -44,13 +44,13 @@ export class GiantIceAsteroid implements IProjectCard {
             }
         }
 
-        let oceansCount = game.getOceansOnBoard();
+        let oceansCount = game.board.getOceansOnBoard();
 
         if (oceansCount + 1 <= constants.MAX_OCEAN_TILES) {
             opts.push(
                 new SelectSpace(
                     "Select space for ocean tile", 
-                    game.getAvailableSpacesForOcean(player), 
+                    game.board.getAvailableSpacesForOcean(player), 
                     (space: ISpace) => {
                         game.addOceanTile(player, space.id);
                         return undefined;
@@ -63,7 +63,7 @@ export class GiantIceAsteroid implements IProjectCard {
             opts.push(
                 new SelectSpace(
                     "Select space for second ocean tile", 
-                    game.getAvailableSpacesForOcean(player), 
+                    game.board.getAvailableSpacesForOcean(player), 
                     (space: ISpace) => {
                         game.addOceanTile(player, space.id);
                         return undefined;

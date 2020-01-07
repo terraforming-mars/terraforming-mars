@@ -22,7 +22,7 @@ describe("IceCapMelting", function () {
         expect(action).not.to.eq(undefined);
         if (action === undefined) return;
         expect(action instanceof SelectSpace).to.eq(true);
-        action.cb(game.getAvailableSpacesForOcean(player)[0]);
-        expect(game.getOceansOnBoard()).to.eq(1);
+        action.cb(game.board.getAvailableSpacesForOcean(player)[0]);
+        expect(game.board.getOceansOnBoard()).to.eq(1);
     });
 });

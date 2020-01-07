@@ -19,7 +19,7 @@ describe("AquiferPumping", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.action(player, game);
         expect(action).not.to.eq(undefined);
-        const expectedOceanSpace = game.getAvailableSpacesForOcean(player)[0];
+        const expectedOceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
         player.megaCredits = 8;
         action.options[0].cb(expectedOceanSpace);
         action.options[1].cb({
@@ -47,8 +47,8 @@ describe("AquiferPumping", function () {
         const game = new Game("foobar", [player,player], player);
         
         // Set oceans count to the max value
-        for (const space of game.getSpaces(SpaceType.OCEAN)) {
-            if (game.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
+        for (const space of game.board.getSpaces(SpaceType.OCEAN)) {
+            if (game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
                 game.addOceanTile(player, space.id)
             }
         }

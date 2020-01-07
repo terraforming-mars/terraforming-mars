@@ -12,7 +12,7 @@ export class EarlySettlement extends PreludeCard implements IProjectCard {
     public name: string = "Early Settlement";
     public play(player: Player, game: Game) {  
         player.setProduction(Resources.PLANTS);  	
-        return new SelectSpace("Select space for city tile", game.getAvailableSpacesForCity(player), (space: ISpace) => {
+        return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
             return undefined;
         }); 

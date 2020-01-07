@@ -19,7 +19,7 @@ export class AquiferTurbines extends PreludeCard implements IProjectCard {
             player.megaCredits -= 3;
             return undefined;
         }
-        return new SelectSpace("Select space for ocean", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+        return new SelectSpace("Select space for ocean", game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
             game.addOceanTile(player, space.id);
             player.setProduction(Resources.ENERGY,2);
             player.megaCredits -= 3;

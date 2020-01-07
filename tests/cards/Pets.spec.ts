@@ -22,7 +22,7 @@ describe("Pets", function () {
         expect(action).to.eq(undefined);
         player.addResourceTo(card, 4);
         expect(card.getVictoryPoints(player)).to.eq(2);
-        game.addCityTile(player, game.getAvailableSpacesOnLand(player)[0].id);
+        game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
         expect(player.getResourcesOnCard(card)).to.eq(6);
     });
 });

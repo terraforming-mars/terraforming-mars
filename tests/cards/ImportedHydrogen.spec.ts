@@ -28,9 +28,6 @@ describe("ImportedHydrogen", function () {
 
         expect((action as OrOptions).options.length).to.eq(3);
 
-        //andAction.options[1].cb(game.getAvailableSpacesForOcean(player)[0]);
-        //expect(game.getOceansOnBoard()).to.eq(1);
-
         (action as OrOptions).options[0].cb();
         expect(player.plants).to.eq(3);
 
@@ -48,7 +45,7 @@ describe("ImportedHydrogen", function () {
 
         expect(nextAction instanceof SelectSpace).to.eq(true);
         if (nextAction === undefined) return;
-        nextAction.cb(game.getAvailableSpacesForOcean(player)[0]);
-        expect(game.getOceansOnBoard()).to.eq(1);
+        nextAction.cb(game.board.getAvailableSpacesForOcean(player)[0]);
+        expect(game.board.getOceansOnBoard()).to.eq(1);
     });
 });

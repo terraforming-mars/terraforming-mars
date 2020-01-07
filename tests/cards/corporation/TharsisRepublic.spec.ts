@@ -16,7 +16,7 @@ describe("TharsisRepublic", function () {
         const game = new Game("foobar", [player, player2], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        const lands = game.getAvailableSpacesOnLand(player);
+        const lands = game.board.getAvailableSpacesOnLand(player);
         lands[0].player = player;
         lands[0].tile = { tileType: TileType.CITY };
         lands[1].tile = { tileType: TileType.CITY }; 
@@ -26,7 +26,7 @@ describe("TharsisRepublic", function () {
         card.onTilePlaced(player, lands[1]);
         expect(player.megaCredits).to.eq(3);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
-        const colony = game.getAllSpaces().find((space) => space.spaceType === SpaceType.COLONY);
+        const colony = game.board.spaces.find((space) => space.spaceType === SpaceType.COLONY);
         expect(colony).not.to.eq(undefined);
         colony!.tile = { tileType: TileType.CITY };
         card.onTilePlaced(player, colony!);

@@ -21,11 +21,11 @@ export class Flooding implements IProjectCard {
   public play(player: Player, game: Game) {
     return new SelectSpace(
         'Select space for ocean tile',
-        game.getAvailableSpacesForOcean(player),
+        game.board.getAvailableSpacesForOcean(player),
         (space: ISpace) => {
           const adjacentPlayers: Array<Player> = [];
           game.addOceanTile(player, space.id);
-          game.getAdjacentSpaces(space).forEach((space) => {
+          game.board.getAdjacentSpaces(space).forEach((space) => {
             if (space.player) {
               adjacentPlayers.push(space.player);
             }

@@ -17,7 +17,7 @@ export class SubterraneanReservoir implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         if (game.noOceansAvailable()) return undefined;
-        return new SelectSpace("Select space for ocean tile", game.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
+        return new SelectSpace("Select space for ocean tile", game.board.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
             game.addOceanTile(player, foundSpace.id);
             return undefined;
         });

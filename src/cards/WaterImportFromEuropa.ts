@@ -28,7 +28,7 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
         return undefined;
     }
     public canAct(player: Player, game: Game): boolean {
-        return (player.canUseHeatAsMegaCredits ? player.heat : 0) + player.megaCredits + (player.titanium * player.titaniumValue) >= 12 && game.getOceansOnBoard() < MAX_OCEAN_TILES;
+        return (player.canUseHeatAsMegaCredits ? player.heat : 0) + player.megaCredits + (player.titanium * player.titaniumValue) >= 12 && game.board.getOceansOnBoard() < MAX_OCEAN_TILES;
     }
     public action(player: Player, game: Game) {
         let htp: HowToPay;
@@ -48,7 +48,7 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
                 htp = howToPay;
                 return undefined;
             }),
-            new SelectSpace("Select where to place ocean", game.getSpaces(SpaceType.OCEAN).filter((space) => space.tile === undefined && space.player === undefined), (space: ISpace) => {
+            new SelectSpace("Select where to place ocean", game.board.getSpaces(SpaceType.OCEAN).filter((space) => space.tile === undefined && space.player === undefined), (space: ISpace) => {
                 selectedSpace = space;
                 return undefined;
             })

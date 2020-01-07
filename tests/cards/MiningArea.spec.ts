@@ -20,10 +20,10 @@ describe("MiningArea", function () {
         const card = new MiningArea();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        const lands = game.getAvailableSpacesOnLand(player);
+        const lands = game.board.getAvailableSpacesOnLand(player);
         for (let land of lands) {
             if (land.bonus.indexOf(SpaceBonus.STEEL) !== -1 || land.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
-                const adjacents = game.getAdjacentSpaces(land);
+                const adjacents = game.board.getAdjacentSpaces(land);
                 for (let adjacent of adjacents) {
                     if (adjacent.tile === undefined && adjacent.bonus.length === 0) {
                         game.addTile(player, adjacent.spaceType, adjacent, { tileType: TileType.SPECIAL });

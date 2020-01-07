@@ -16,13 +16,13 @@ export class LakeMarineris implements IProjectCard {
         return game.getTemperature() >= 0 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player, game: Game) {
-        let available = game.getAvailableSpacesForOcean(player);
+        let available = game.board.getAvailableSpacesForOcean(player);
         if (available.length === 0) {
             return undefined;
         }
         return new SelectSpace("Select space for first ocean tile", available, (space: ISpace) => {
             game.addOceanTile(player, space.id);
-            available = game.getAvailableSpacesForOcean(player);
+            available = game.board.getAvailableSpacesForOcean(player);
             if (available.length === 0) { 
                 return undefined;
             }

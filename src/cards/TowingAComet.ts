@@ -18,12 +18,12 @@ export class TowingAComet implements IProjectCard {
     }
     public play(player: Player, game: Game) {
 
-        if (game.getOceansOnBoard() === MAX_OCEAN_TILES) {
+        if (game.board.getOceansOnBoard() === MAX_OCEAN_TILES) {
             player.plants += 2;
             return game.increaseOxygenLevel(player, 1);
         }
 
-        return new SelectSpace("Select place for oean tile", game.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
+        return new SelectSpace("Select place for oean tile", game.board.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
             game.addOceanTile(player, foundSpace.id)
             player.plants += 2;
             return game.increaseOxygenLevel(player, 1);

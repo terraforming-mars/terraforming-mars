@@ -15,7 +15,7 @@ export class PolarIndustries extends PreludeCard implements IProjectCard {
             player.setProduction(Resources.HEAT,2);
             return undefined;
         }
-        return new SelectSpace("Select space for ocean", game.getAvailableSpacesForOcean(player), (space: ISpace) => {
+        return new SelectSpace("Select space for ocean", game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
             game.addOceanTile(player, space.id);
             player.setProduction(Resources.HEAT,2);
             return undefined;

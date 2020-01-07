@@ -16,7 +16,7 @@ export class MiningRights implements IProjectCard {
     public name: string = "Mining Rights";
     public cardType: CardType = CardType.AUTOMATED;
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
-        return game.getAvailableSpacesOnLand(player)
+        return game.board.getAvailableSpacesOnLand(player)
                 .filter((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1);
     }
     public canPlay(player: Player, game: Game): boolean {

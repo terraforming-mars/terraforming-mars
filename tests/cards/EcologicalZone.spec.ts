@@ -20,7 +20,7 @@ describe("EcologicalZone", function () {
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
         const game = new Game("foobar", [player,player], player);
-        const landSpace = game.getAvailableSpacesOnLand(player)[0];
+        const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
         game.addGreenery(player, landSpace.id);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);

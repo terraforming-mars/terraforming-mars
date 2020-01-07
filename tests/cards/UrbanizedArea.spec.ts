@@ -20,7 +20,7 @@ describe("UrbanizedArea", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const tharsis = game.getSpace(SpaceName.THARSIS_THOLUS);
-        const lands = game.getAdjacentSpaces(tharsis).filter((space) => space.spaceType === SpaceType.LAND);
+        const lands = game.board.getAdjacentSpaces(tharsis).filter((space) => space.spaceType === SpaceType.LAND);
         game.addCityTile(player, lands[0].id);
         game.addCityTile(player, lands[1].id);
         player.setProduction(Resources.ENERGY);

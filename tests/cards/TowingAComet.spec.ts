@@ -13,7 +13,7 @@ describe("TowingAComet", function () {
         const action = card.play(player, game);
         if (action !== undefined) {
           action.cb(action.availableSpaces[0]);
-          expect(game.getOceansOnBoard()).to.eq(1);
+          expect(game.board.getOceansOnBoard()).to.eq(1);
         }  
         expect(player.plants).to.eq(2);
         expect(game.getOxygenLevel()).to.eq(1);

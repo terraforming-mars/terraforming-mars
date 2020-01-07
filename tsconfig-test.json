@@ -304,6 +304,7 @@
         "tests/cards/venusNext/Extremophiles.spec.ts",
         "tests/cards/venusNext/ExtractorBalloons.spec.ts",
         "tests/Game.spec.ts",
-	    "tests/Player.spec.ts"
+        "tests/OriginalBoard.spec.ts",
+        "tests/Player.spec.ts"
     ]
 }

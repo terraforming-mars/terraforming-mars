@@ -11,7 +11,7 @@ export class SelfSufficientSettlement extends PreludeCard implements IProjectCar
     public tags: Array<Tags> = [Tags.STEEL, Tags.CITY];
     public name: string = "Self-Sufficient Settlement";
     public play(player: Player, game: Game) {     
-        return new SelectSpace("Select space for city tile", game.getAvailableSpacesForCity(player), (space: ISpace) => {
+        return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
             player.setProduction(Resources.MEGACREDITS,2);
             return undefined;

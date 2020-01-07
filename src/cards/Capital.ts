@@ -17,13 +17,13 @@ export class Capital implements IProjectCard {
     public name: string = 'Capital';
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 2 &&
-        game.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game) &&
-        game.getAvailableSpacesForCity(player).length >= 0;
+        game.board.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game) &&
+        game.board.getAvailableSpacesForCity(player).length >= 0;
     }
     public getVictoryPoints(_player: Player, game: Game) {
-      const usedSpace = game.getSpaceByTileCard(this.name);
+      const usedSpace = game.board.getSpaceByTileCard(this.name);
       if (usedSpace !== undefined) {
-        return game.getAdjacentSpaces(usedSpace)
+        return game.board.getAdjacentSpaces(usedSpace)
             .filter(
                 (s) => s.tile !== undefined &&
                 s.tile.tileType === TileType.OCEAN
@@ -36,7 +36,7 @@ export class Capital implements IProjectCard {
       player.setProduction(Resources.MEGACREDITS,5);
       return new SelectSpace(
           'Select space for special city tile',
-          game.getAvailableSpacesForCity(player),
+          game.board.getAvailableSpacesForCity(player),
           (space: ISpace) => {
             game.addCityTile(player, space.id, SpaceType.LAND, this.name);
             return undefined;

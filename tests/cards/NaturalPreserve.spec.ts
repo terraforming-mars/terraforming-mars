@@ -13,7 +13,7 @@ describe("NaturalPreserve", function () {
         const card = new NaturalPreserve();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        const lands = game.getAvailableSpacesOnLand(player);
+        const lands = game.board.getAvailableSpacesOnLand(player);
         for (let land of lands) {
             game.addTile(player, land.spaceType, land, { tileType: TileType.SPECIAL });
         }

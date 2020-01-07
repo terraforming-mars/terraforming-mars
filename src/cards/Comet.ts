@@ -21,7 +21,7 @@ export class Comet implements IProjectCard {
     private getSelectOceanSpace(player: Player, game: Game, placeBonusOcean :SelectSpace | undefined): SelectSpace {
       return new SelectSpace(
         'Select space for ocean tile',
-        game.getAvailableSpacesForOcean(player),
+        game.board.getAvailableSpacesForOcean(player),
         (space: ISpace) => {
           game.addOceanTile(player, space.id);
           if (placeBonusOcean === undefined || game.noOceansAvailable()) return undefined;

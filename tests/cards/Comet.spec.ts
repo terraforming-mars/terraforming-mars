@@ -93,7 +93,7 @@ describe("Comet", function () {
         if (space === undefined) return;
 
         action.cb(space);
-        expect(game.getOceansOnBoard()).to.eq(1);
+        expect(game.board.getOceansOnBoard()).to.eq(1);
         expect(game.getTemperature()).to.eq(-28);
 
         // No oceans to place case

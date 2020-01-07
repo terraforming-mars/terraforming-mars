@@ -13,7 +13,7 @@ describe("Greenhouses", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         expect(player.plants).to.eq(0);
-        game.addCityTile(player, game.getAvailableSpacesOnLand(player)[0].id);
+        game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
         card.play(player, game);
         expect(player.plants).to.eq(1);
     });

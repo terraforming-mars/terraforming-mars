@@ -14,9 +14,9 @@ export class ResearchOutpost implements IProjectCard {
     public name: string = "Research Outpost";
     public cardType: CardType = CardType.ACTIVE;
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
-        return game.getAvailableSpacesOnLand(player)
+        return game.board.getAvailableSpacesOnLand(player)
                 .filter((space) => {
-                    const adjacentSpaces = game.getAdjacentSpaces(space);
+                    const adjacentSpaces = game.board.getAdjacentSpaces(space);
                     return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
                 });
     }

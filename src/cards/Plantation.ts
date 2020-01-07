@@ -13,10 +13,10 @@ export class Plantation implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT];
     public name: string = "Plantation";
     public canPlay(player: Player, game: Game): boolean {
-        return player.getTagCount(Tags.SCIENCE) >= 2 && game.getAvailableSpacesOnLand(player).length > 0;
+        return player.getTagCount(Tags.SCIENCE) >= 2 && game.board.getAvailableSpacesOnLand(player).length > 0;
     }
     public play(player: Player, game: Game) {
-        return new SelectSpace("Select space for greenery tile", game.getAvailableSpacesForGreenery(player), (space: ISpace) => {
+        return new SelectSpace("Select space for greenery tile", game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
             return game.addGreenery(player, space.id);
         });
     }

@@ -12,7 +12,7 @@ export class GreatDam implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Great Dam";
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game);
+        return game.board.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
         player.setProduction(Resources.ENERGY,2);

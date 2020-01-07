@@ -1065,7 +1065,7 @@ export class Player {
             htp = stp;
             return new SelectSpace(
               'Select where to place an ocean',
-              game.getAvailableSpacesForOcean(this),
+              game.board.getAvailableSpacesForOcean(this),
               (space: ISpace) => {
                 return fundProject(htp.megaCredits, htp.heat, space.id);
               }
@@ -1078,7 +1078,7 @@ export class Player {
 
       return new SelectSpace(
         'Aquifer (' + constants.AQUIFER_COST + ' MC)',
-        game.getAvailableSpacesForOcean(this),
+        game.board.getAvailableSpacesForOcean(this),
         (space: ISpace) => {
           return fundProject(constants.AQUIFER_COST, 0, space.id);
         }
@@ -1119,7 +1119,7 @@ export class Player {
               htp = stp;
               return new SelectSpace(
                 'Select where to place your greenery',
-                game.getAvailableSpacesForGreenery(this),
+                game.board.getAvailableSpacesForGreenery(this),
                 (space: ISpace) => {
                   return fundProject(htp.megaCredits, htp.heat, space.id);
                 }
@@ -1131,7 +1131,7 @@ export class Player {
       }
       return new SelectSpace(
         'Greenery (' + constants.GREENERY_COST + ' MC)',
-          game.getAvailableSpacesForGreenery(this),
+          game.board.getAvailableSpacesForGreenery(this),
           (space: ISpace) => {
             return fundProject(constants.GREENERY_COST, 0, space.id);
           }
@@ -1168,7 +1168,7 @@ export class Player {
             htp = stp;
             return new SelectSpace(
               'Select where to place your city',
-              game.getAvailableSpacesForCity(this),
+              game.board.getAvailableSpacesForCity(this),
               (space: ISpace) => {
                 return fundProject(htp.megaCredits, htp.heat, space.id);
               }
@@ -1181,7 +1181,7 @@ export class Player {
       }
       return new SelectSpace(
           'City (' + constants.CITY_COST + ' MC)',
-          game.getAvailableSpacesForCity(this),
+          game.board.getAvailableSpacesForCity(this),
           (space: ISpace) => {
             return fundProject(constants.CITY_COST, 0, space.id);
           }
@@ -1191,7 +1191,7 @@ export class Player {
     private convertPlantsIntoGreenery(game: Game): PlayerInput {
       return new SelectSpace(
           `Convert ${this.plantsNeededForGreenery} plants into greenery`,
-          game.getAvailableSpacesForGreenery(this),
+          game.board.getAvailableSpacesForGreenery(this),
           (space: ISpace) => {
             const action = game.addGreenery(this, space.id);
             const whenDone = (err?: string) => {
@@ -1326,7 +1326,7 @@ export class Player {
         action.options.push(
             new SelectSpace(
                 'Select space for greenery',
-                game.getAvailableSpacesForGreenery(this), (space) => {
+                game.board.getAvailableSpacesForGreenery(this), (space) => {
                   game.addGreenery(this, space.id);
                   this.plants -= this.plantsNeededForGreenery;
                   this.takeActionForFinalGreenery(game);
@@ -1396,7 +1396,7 @@ export class Player {
 
       if (
         this.canAfford(constants.AQUIFER_COST) &&
-            game.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
+            game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
         standardProjects.options.push(
             this.aquifer(game)
         );
@@ -1404,7 +1404,7 @@ export class Player {
 
       if (
         this.canAfford(constants.GREENERY_COST) &&
-            game.getAvailableSpacesForGreenery(this).length > 0) {
+            game.board.getAvailableSpacesForGreenery(this).length > 0) {
         standardProjects.options.push(
             this.addGreenery(game)
         );
@@ -1412,7 +1412,7 @@ export class Player {
 
       if (
         this.canAfford(constants.CITY_COST) &&
-            game.getAvailableSpacesForCity(this).length > 0) {
+            game.board.getAvailableSpacesForCity(this).length > 0) {
         standardProjects.options.push(
             this.addCity(game)
         );
@@ -1526,7 +1526,7 @@ export class Player {
 
       if (
         this.plants >= this.plantsNeededForGreenery &&
-            game.getAvailableSpacesForGreenery(this).length > 0) {
+            game.board.getAvailableSpacesForGreenery(this).length > 0) {
         action.options.push(
             this.convertPlantsIntoGreenery(game)
         );

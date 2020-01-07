@@ -146,16 +146,6 @@ export class Player {
       }
       this.removeResourceFrom(card, count);
     }
-    public getOtherResourceCards(c: IProjectCard, resource: ResourceType): Array<IProjectCard> {
-      const result: Array<IProjectCard> = [];
-      this.playedCards.forEach((card) => {
-        if (card.name !== c.name &&
-            card.resourceType === resource) {
-          result.push(card);
-        }
-      });
-      return result;
-    }
     public getResourcesOnCard(card: ICard): number {
       return this.resourcesOnCards.get(card.name) || 0;
     }
@@ -214,6 +204,17 @@ export class Player {
           (card) => Number(this.resourcesOnCards.get(card.name)) > 0
       );
     }
+
+    public getResourceCards(resource: ResourceType): Array<IProjectCard> {
+      const result: Array<IProjectCard> = [];
+        this.playedCards.forEach((card) => {
+          if (card.resourceType !== undefined && card.resourceType === resource) {
+            result.push(card);
+          }
+        });
+      return result;
+    }
+
     public getTagCount(tag: Tags, includeEventsTags:boolean = false): number {
       let tagCount = 0;
       this.playedCards.forEach((card: IProjectCard) => {

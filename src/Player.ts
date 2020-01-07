@@ -253,6 +253,7 @@ export class Player {
         count += this.getResourcesOnCard(new Celestic());
       }
       return count;
+
     }
 
     public getTagCount(tag: Tags, includeEventsTags:boolean = false): number {

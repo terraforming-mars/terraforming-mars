@@ -3,7 +3,6 @@ import { expect } from "chai";
 import { LocalHeatTrapping } from "../../src/cards/LocalHeatTrapping";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Game } from "../../src/Game";
 import { Pets } from "../../src/cards/Pets";
 
 describe("LocalHeatTrapping", function () {
@@ -15,16 +14,15 @@ describe("LocalHeatTrapping", function () {
     it("Should play", function () {
         const card = new LocalHeatTrapping();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         player.heat = 5;
-        let action = card.play(player, game);
+        let action = card.play(player);
         expect(player.plants).to.eq(4);
         expect(player.heat).to.eq(0);
         expect(action).to.eq(undefined);
         player.heat = 5;
         const pets = new Pets();
         player.playedCards.push(card, pets);
-        action = card.play(player, game);
+        action = card.play(player);
         expect(action).not.to.eq(undefined);
         action!.options[0].cb();
         expect(player.plants).to.eq(8);

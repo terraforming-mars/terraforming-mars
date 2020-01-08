@@ -296,6 +296,10 @@ import { AtalantaPlanitiaLab } from './cards/venusNext/AtalantaPlanitiaLab';
 import { ExtractorBalloons } from './cards/venusNext/ExtractorBalloons';
 import { Extremophiles } from './cards/venusNext/Extremophiles';
 import { FloatingHabs } from './cards/venusNext/FloatingHabs';
+import { ForcedPrecipitation } from './cards/venusNext/ForcedPrecipitation';
+import { FreyjaBiodomes } from './cards/venusNext/FreyjaBiodomes';
+import { Gyropolis } from './cards/venusNext/Gyropolis';
+import { HydrogenToVenus } from './cards/venusNext/HydrogenToVenus';
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -385,7 +389,11 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
         new AtalantaPlanitiaLab(),
         new ExtractorBalloons(),
         new Extremophiles(),
-        new FloatingHabs()
+        new FloatingHabs(),
+        new ForcedPrecipitation(),
+        new FreyjaBiodomes(),
+        new Gyropolis(),
+        new HydrogenToVenus()
 ];    
 
 export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [

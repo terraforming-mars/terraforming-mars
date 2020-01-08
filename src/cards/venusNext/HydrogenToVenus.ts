@@ -1,0 +1,34 @@
+import { IProjectCard } from "../IProjectCard";
+import { Tags } from "../Tags";
+import { CardType } from "../CardType";
+import { Player } from "../../Player";
+import { Game } from '../../Game';
+import { ResourceType } from '../../ResourceType';
+import { SelectCard } from '../../inputs/SelectCard';
+
+export class HydrogenToVenus implements IProjectCard {
+    public cost: number = 11;
+    public tags: Array<Tags> = [Tags.SPACE];
+    public name: string = "Hydrogen To Venus";
+    public cardType: CardType = CardType.EVENT;
+    public canPlay(): boolean {
+        return true;
+    }
+    public play(player: Player, game: Game) {
+        const jovianTags: number = player.getTagCount(Tags.JOVIAN);
+        const floatersCards = player.getResourceCards(ResourceType.FLOATER);
+        if (jovianTags > 0 && floatersCards.length > 0) {
+            return new SelectCard(
+                'Select card to add ' + jovianTags + ' floater(s)',
+                floatersCards,
+                (foundCards: Array<IProjectCard>) => {
+                    player.addResourceTo(foundCards[0], jovianTags);
+                game.increaseVenusScaleLevel(player,1);
+                return undefined;
+                }
+            );
+        }
+        game.increaseVenusScaleLevel(player,1);
+        return undefined;
+    }
+}

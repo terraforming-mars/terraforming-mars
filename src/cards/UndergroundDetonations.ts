@@ -21,7 +21,7 @@ export class UndergroundDetonations implements IActionCard, IProjectCard {
     }
     public action(player: Player, _game: Game) {
         if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-            return new SelectHowToPay("Select how to pay for action", false, false, true, (htp) => {
+            return new SelectHowToPay("Select how to pay for action", false, false, true, 10, (htp) => {
                 if (htp.heat + htp.megaCredits < 10) {
                     throw "Need to spend 10";
                 }

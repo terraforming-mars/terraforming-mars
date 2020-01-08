@@ -44,7 +44,7 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
                 player.heat -= htp.heat;
                 return undefined;
             },
-            new SelectHowToPay("Select how to pay for action", false, true, player.canUseHeatAsMegaCredits, (howToPay: HowToPay) => {
+            new SelectHowToPay("Select how to pay for action", false, true, player.canUseHeatAsMegaCredits, 12, (howToPay: HowToPay) => {
                 htp = howToPay;
                 return undefined;
             }),

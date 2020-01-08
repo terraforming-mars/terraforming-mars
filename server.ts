@@ -234,7 +234,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
           break;
         }
       }
-      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant);
+      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.venusNext);
       games.set(gameId, game);
       game.getPlayers().forEach((player) => {
         playersToGame.set(player.id, game);
@@ -297,7 +297,9 @@ function getPlayer(player: Player, game: Game): string {
     gameLog: game.gameLog,
     isSoloModeWin: game.isSoloModeWin(),
     gameAge: game.gameAge,
-    isActive: player.id === game.activePlayer.id
+    isActive: player.id === game.activePlayer.id,
+    venusNextExtension: game.venusNextExtension,
+    venusScaleLevel: game.getVenusScaleLevel()
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -411,7 +413,9 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       titaniumValue: player.titaniumValue,
       victoryPoints: player.victoryPoints,
       victoryPointsBreakdown: player.victoryPointsBreakdown,
-      isActive: player.id === game.activePlayer.id
+      isActive: player.id === game.activePlayer.id,
+      venusNextExtension: game.venusNextExtension,
+      venusScaleLevel: game.getVenusScaleLevel()
     } as PlayerModel;
   });
 }

@@ -51,7 +51,6 @@ export class Game {
     public gameLog: Array<String> = [];
     public gameAge: number = 0; // Each log event increases it
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
-    public venusNextExtension: boolean = true;
 
     private tempMC: number = 0;
     private tempSteel: number = 0;
@@ -68,12 +67,15 @@ export class Game {
       private players: Array<Player>,
       private first: Player,
       private preludeExtension: boolean = false,
-      private draftVariant: boolean = false
+      private draftVariant: boolean = false,
+      public venusNextExtension: boolean = false
     ) {
       this.activePlayer = first;
+      this.venusNextExtension = venusNextExtension;
       this.preludeExtension = preludeExtension;
       this.draftVariant = draftVariant;
       this.dealer = new Dealer(this.preludeExtension);
+    
 
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board

@@ -27,7 +27,7 @@ export class JetStreamMicroscrappers implements IActionCard,IProjectCard {
     }    
     public action(player: Player, game: Game) {
         var opts: Array<SelectOption> = [];
-        const addResource = new SelectOption("Spend one titanium to add 2 floater to this card", () => {
+        const addResource = new SelectOption("Spend one titanium to add 2 floaters to this card", () => {
             player.addResourceTo(this,2);
             player.titanium--;
             return undefined;

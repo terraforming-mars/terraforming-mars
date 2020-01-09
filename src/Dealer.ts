@@ -302,6 +302,12 @@ import { Gyropolis } from './cards/venusNext/Gyropolis';
 import { HydrogenToVenus } from './cards/venusNext/HydrogenToVenus';
 import { IoSulphurResearch } from './cards/venusNext/IoSulphurResearch';
 import { LunaMetropolis } from './cards/venusNext/LunaMetropolis';
+import { JetStreamMicroscrappers } from './cards/venusNext/JetStreamMicroscrappers';
+import { LocalShading } from './cards/venusNext/LocalShading';
+import { VenusianInsects } from './cards/venusNext/VenusianInsects';
+import { Thermophiles } from './cards/venusNext/Thermophiles';
+import { VenusMagnetizer } from './cards/venusNext/VenusMagnetizer';
+import { SulphurEatingBacteria } from './cards/venusNext/SulphurEatingBacteria';
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -379,25 +385,31 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
         new AerialMappers(),
         new AerosportTournament(),
         new AirScrappingExpedition(),
+        new AtalantaPlanitiaLab(),
         new CometForVenus(),
-        new DeuteriumExport(),
-        new Dirigibles(),
-        new GiantSolarShade(),
-        new IshtarMining(),
-        new MaxwellBase(),
         new CorroderSuits(),
         new DawnCity(),
-        new GHGImportFromVenus(),
-        new AtalantaPlanitiaLab(),
+        new DeuteriumExport(),
+        new Dirigibles(),
         new ExtractorBalloons(),
         new Extremophiles(),
         new FloatingHabs(),
         new ForcedPrecipitation(),
         new FreyjaBiodomes(),
+        new GiantSolarShade(),
+        new GHGImportFromVenus(),
         new Gyropolis(),
         new HydrogenToVenus(),
         new IoSulphurResearch(),
-        new LunaMetropolis()
+        new IshtarMining(),
+        new JetStreamMicroscrappers(),
+        new LunaMetropolis(),
+        new LocalShading(),
+        new MaxwellBase(),
+        new SulphurEatingBacteria(),
+        new Thermophiles(),
+        new VenusianInsects(),
+        new VenusMagnetizer()
 ];    
 
 export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [

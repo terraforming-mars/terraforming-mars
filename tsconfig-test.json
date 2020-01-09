@@ -303,6 +303,10 @@
         "tests/cards/venusNext/FloatingHabs.spec.ts",
         "tests/cards/venusNext/Extremophiles.spec.ts",
         "tests/cards/venusNext/ExtractorBalloons.spec.ts",
+        "tests/cards/venusNext/ForcedPrecipitation.spec.ts",
+        "tests/cards/venusNext/FreyjaBiodomes.spec.ts",
+        "tests/cards/venusNext/Gyropolis.spec.ts",
+        "tests/cards/venusNext/HydrogenToVenus.spec.ts",
         "tests/Game.spec.ts",
         "tests/OriginalBoard.spec.ts",
         "tests/Player.spec.ts"

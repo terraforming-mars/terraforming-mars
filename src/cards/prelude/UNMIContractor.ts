@@ -9,8 +9,8 @@ export class UNMIContractor extends PreludeCard implements IProjectCard {
     public name: string = "UNMI Contractor";
     public play(player: Player, game: Game) {
         player.terraformRating += 3;
-	    player.cardsInHand.push(game.dealer.dealCard());
-	    return undefined;   
+	      player.cardsInHand.push(game.dealer.dealCard());
+	      return undefined;   
     }
 }
 

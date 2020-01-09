@@ -300,6 +300,8 @@ import { ForcedPrecipitation } from './cards/venusNext/ForcedPrecipitation';
 import { FreyjaBiodomes } from './cards/venusNext/FreyjaBiodomes';
 import { Gyropolis } from './cards/venusNext/Gyropolis';
 import { HydrogenToVenus } from './cards/venusNext/HydrogenToVenus';
+import { IoSulphurResearch } from './cards/venusNext/IoSulphurResearch';
+import { LunaMetropolis } from './cards/venusNext/LunaMetropolis';
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -393,7 +395,9 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
         new ForcedPrecipitation(),
         new FreyjaBiodomes(),
         new Gyropolis(),
-        new HydrogenToVenus()
+        new HydrogenToVenus(),
+        new IoSulphurResearch(),
+        new LunaMetropolis()
 ];    
 
 export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [

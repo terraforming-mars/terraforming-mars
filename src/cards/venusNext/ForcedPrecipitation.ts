@@ -8,6 +8,7 @@ import { SelectHowToPay } from '../../inputs/SelectHowToPay';
 import { OrOptions } from '../../inputs/OrOptions';
 import { SelectOption } from '../../inputs/SelectOption';
 import { Game } from '../../Game';
+import { MAX_VENUS_SCALE } from '../../constants';
 
 export class ForcedPrecipitation implements IActionCard,IProjectCard {
     public cost: number = 8;
@@ -21,8 +22,9 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard {
     public play() {
         return undefined;
     }
-    public canAct(player: Player): boolean {
-        return player.canAfford(2) || player.getResourcesOnCard(this) > 1;
+    public canAct(player: Player, game: Game): boolean {
+        return player.canAfford(2) || 
+          (player.getResourcesOnCard(this) > 1 &&  game.getVenusScaleLevel() < MAX_VENUS_SCALE);
     }  
     
     public action(player: Player, game: Game) {

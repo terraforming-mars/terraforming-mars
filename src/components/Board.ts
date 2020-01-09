@@ -20,21 +20,20 @@ export const Board = Vue.component("board", {
     },
     mixins: [BoardMixin],
     methods: {
+        getSpacesWithTile: function(): Array<SpaceModel> {
+            const boardSpaces: Array<SpaceModel> = (this as any).getMainSpaces().filter(
+                (space: SpaceModel) => space.tileType != undefined || space.color != undefined
+            );
+            boardSpaces.sort((s1: any, s2: any) => {return s1.id - s2.id});
+            return boardSpaces;
+        },
         getSpacesWithBonus: function(): Array<SpaceModel> {
             const boardSpaces: Array<SpaceModel> = this.spaces.filter((space: SpaceModel) => space.bonus.length > 0);
             boardSpaces.sort((s1: any, s2: any) => {return s1.id - s2.id});
             return boardSpaces;
         },
-        getAllSpaces: function(): Array<SpaceModel> {
-            const boardSpaces: Array<SpaceModel> = this.spaces;
-            boardSpaces.sort((s1: any, s2: any) => {return s1.id - s2.id});
-            return boardSpaces;
-        },
         getMainSpaces: function (): Array<SpaceModel> {
-            return this.getAllSpaces().filter((s) => {return parseInt(s.id) < 70})
-        }, 
-        getVenusSpaces: function (): Array<SpaceModel> {
-            return this.getAllSpaces().filter((s) => {return parseInt(s.id) >= 70})
+            return (this as any).getAllSpaces().filter((s: SpaceModel) => {return parseInt(s.id) < 70})
         }
     },
     template: `

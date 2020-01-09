@@ -35,7 +35,7 @@ export class InventorsGuild implements IActionCard, IProjectCard {
             if (player.canUseHeatAsMegaCredits && player.heat > 0) {
               return new SelectHowToPay(
                 'Select how to pay and buy ' + dealtCard.name, false, false,
-                true,
+                true, 3,
                 (htp) => {
                   if (htp.heat + htp.megaCredits < 3) {
                     game.dealer.discard(dealtCard);

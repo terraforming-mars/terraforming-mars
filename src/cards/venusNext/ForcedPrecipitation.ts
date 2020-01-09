@@ -33,6 +33,7 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard {
                 return new SelectHowToPay(
                   'Select how to pay ', false, false,
                   true,
+                  2,
                   (htp) => {
                     if (htp.heat + htp.megaCredits < 2) {
                         throw new Error('Not enough spent to buy card');
@@ -41,7 +42,7 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard {
                     player.heat -= htp.heat;
                     player.addResourceTo(this);
                     return undefined;
-                  },2
+                  }
                 );
             }
             player.megaCredits -= 2;
@@ -55,6 +56,7 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard {
                         return new SelectHowToPay(
                         'Select how to pay ', false, false,
                         true,
+                        2,
                         (htp) => {
                             if (htp.heat + htp.megaCredits < 2) {
                                 throw new Error('Not enough spent to buy card');
@@ -63,7 +65,7 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard {
                             player.heat -= htp.heat;
                             player.addResourceTo(this);
                             return undefined;
-                        },2
+                        }
                         );
                     }
                     player.megaCredits -= 2;

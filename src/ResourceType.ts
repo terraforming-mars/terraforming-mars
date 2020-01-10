@@ -4,6 +4,7 @@ export enum ResourceType {
     MICROBE,
     FIGHTER,
     SCIENCE,
-    FLOATER
+    FLOATER,
+    ASTEROID
 }
 

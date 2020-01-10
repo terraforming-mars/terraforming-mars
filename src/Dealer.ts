@@ -308,6 +308,9 @@ import { VenusianInsects } from './cards/venusNext/VenusianInsects';
 import { Thermophiles } from './cards/venusNext/Thermophiles';
 import { VenusMagnetizer } from './cards/venusNext/VenusMagnetizer';
 import { SulphurEatingBacteria } from './cards/venusNext/SulphurEatingBacteria';
+import { RotatorImpacts } from './cards/venusNext/RotatorImpacts';
+import { SponsoredAcademies } from './cards/venusNext/SponsoredAcademies';
+import { VenusWaystation } from './cards/venusNext/VenusWaystation';
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -406,10 +409,13 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
         new LunaMetropolis(),
         new LocalShading(),
         new MaxwellBase(),
+        new RotatorImpacts(),
+        new SponsoredAcademies(),
         new SulphurEatingBacteria(),
         new Thermophiles(),
         new VenusianInsects(),
-        new VenusMagnetizer()
+        new VenusMagnetizer(),
+        new VenusWaystation()
 ];    
 
 export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [

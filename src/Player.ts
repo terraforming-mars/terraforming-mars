@@ -1370,8 +1370,10 @@ export class Player {
       });
     }
 
-    public canAfford(cost: number): boolean {
+    public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false): boolean {
       return (this.canUseHeatAsMegaCredits ? this.heat : 0) +
+              (canUseSteel ? this.steel * this.steelValue : 0) +
+              (canUseTitanium ? this.titanium * this.titaniumValue : 0) +
                 this.megaCredits >= cost;
     }
 

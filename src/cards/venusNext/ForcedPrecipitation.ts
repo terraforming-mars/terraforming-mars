@@ -28,62 +28,43 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard {
     }  
     
     public action(player: Player, game: Game) {
-        if (player.getResourcesOnCard(this) < 2 &&  player.canAfford(2) ){
+        var opts: Array<SelectOption> = []; 
+        const addResource = new SelectOption("Pay 2 to add 1 floater to this card", () => {
             if (player.canUseHeatAsMegaCredits && player.heat > 0) {
                 return new SelectHowToPay(
-                  'Select how to pay ', false, false,
-                  true,
-                  2,
-                  (htp) => {
-                    if (htp.heat + htp.megaCredits < 2) {
-                        throw new Error('Not enough spent to buy card');
+                    'Select how to pay ', false, false,
+                    player.canUseHeatAsMegaCredits,
+                    2,
+                    (htp) => {
+                        if (htp.heat + htp.megaCredits < 2) {
+                            throw new Error('Not enough for action');
+                        }
+                        player.megaCredits -= htp.megaCredits;
+                        player.heat -= htp.heat;
+                        player.addResourceTo(this);
+                        return undefined;
                     }
-                    player.megaCredits -= htp.megaCredits;
-                    player.heat -= htp.heat;
-                    player.addResourceTo(this);
-                    return undefined;
-                  }
                 );
             }
             player.megaCredits -= 2;
             player.addResourceTo(this);
             return undefined;
-        }
-        if (player.canAfford(2) && player.getResourcesOnCard(this) > 1) {
-            return new OrOptions(
-                new SelectOption("Add 1 floater to this card", () => {
-                    if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-                        return new SelectHowToPay(
-                        'Select how to pay ', false, false,
-                        true,
-                        2,
-                        (htp) => {
-                            if (htp.heat + htp.megaCredits < 2) {
-                                throw new Error('Not enough spent to buy card');
-                            }
-                            player.megaCredits -= htp.megaCredits;
-                            player.heat -= htp.heat;
-                            player.addResourceTo(this);
-                            return undefined;
-                        }
-                        );
-                    }
-                    player.megaCredits -= 2;
-                    player.addResourceTo(this);
-                    return undefined;
-                }),
-                new SelectOption("Remove 2 floaters to raise Venus 1 step", () => {
-                    player.removeResourceFrom(this, 2);
-                    game.increaseVenusScaleLevel(player,1);
-                    return undefined;
-                })
-            );
-        } 
-        if (player.getResourcesOnCard(this) > 1) {
-            player.removeResourceFrom(this, 2);
-            game.increaseVenusScaleLevel(player,1);
+        });
+
+        const spendResource = new SelectOption("Remove 2 floaters to raise Venus 1 step", () => {
+            player.removeResourceFrom(this,2);
+            game.increaseVenusScaleLevel(player, 1);
             return undefined;
-        }
-        return undefined;
+        });
+
+        if (player.canAfford(2)) {
+            opts.push(addResource);
+        } else return spendResource;
+
+        if (player.getResourcesOnCard(this) > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
+            opts.push(spendResource);
+        } else return addResource;
+
+        return new OrOptions(...opts);
     }
 }

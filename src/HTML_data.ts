@@ -3284,6 +3284,7 @@ export const HTML_DATA: Map<string, string> =
 ["Extractor Balloons",`
             <div class="title background-color-active ">Extractor Balloons</div>
             <div class="price ">21</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-venus "></div>
             <div class="venus-icon project-icon"></div>
             <div class="content ">
@@ -3302,6 +3303,7 @@ export const HTML_DATA: Map<string, string> =
 ["Extremophiles",`
             <div class="title background-color-active ">Extremophiles</div>
             <div class="price ">3</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-microbe "></div>
             <div class="tag tag2 tag-venus "></div>
             <div class="venus-icon project-icon"></div>
@@ -3320,6 +3322,7 @@ export const HTML_DATA: Map<string, string> =
 ["Floating Habs",`
             <div class="title background-color-active ">Floating Habs</div>
             <div class="price ">5</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-venus "></div>
             <div class="venus-icon project-icon"></div>
             <div class="content ">
@@ -3337,6 +3340,7 @@ export const HTML_DATA: Map<string, string> =
 ["Forced Precipitation",`
             <div class="title background-color-active ">Forced Precipitation</div>
             <div class="price ">8</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-venus "></div>
             <div class="venus-icon project-icon"></div>
             <div class="content ">
@@ -3469,6 +3473,7 @@ export const HTML_DATA: Map<string, string> =
 ["Jet Stream Microscrappers",`
             <div class="title background-color-active ">Jet Stream Microscrappers</div>
             <div class="price ">12</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-venus "></div>
             <div class="venus-icon project-icon"></div>
             <div class="content ">
@@ -3482,6 +3487,7 @@ export const HTML_DATA: Map<string, string> =
 ["Local Shading",`
             <div class="title background-color-active ">Local Shading</div>
             <div class="price ">4</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-venus "></div>
             <div class="venus-icon project-icon"></div>
             <div class="content ">
@@ -3604,6 +3610,7 @@ export const HTML_DATA: Map<string, string> =
 ["Rotator Impacts",`
             <div class="title background-color-active ">Rotator Impacts</div>
             <div class="price ">6</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-space "></div>
             <div class="venus-icon project-icon"></div>
             <div class="content ">
@@ -3678,6 +3685,7 @@ export const HTML_DATA: Map<string, string> =
 ["Stratopolis",`
             <div class="title background-color-active ">Stratopolis</div>
             <div class="price ">22</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-city "></div>
             <div class="tag tag2 tag-venus "></div>
             <div class="venus-icon project-icon"></div>
@@ -3703,6 +3711,7 @@ export const HTML_DATA: Map<string, string> =
 ["Stratospheric Birds",`
             <div class="title background-color-active ">Stratospheric Birds</div>
             <div class="price ">12</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-animal "></div>
             <div class="tag tag2 tag-venus "></div>
             <div class="venus-icon project-icon"></div>
@@ -3739,6 +3748,7 @@ export const HTML_DATA: Map<string, string> =
 ["Sulphur-eating Bacteria",`
             <div class="title background-color-active ">Sulphur-eating Bacteria</div>
             <div class="price ">6</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-microbe "></div>
             <div class="tag tag2 tag-venus "></div>
             <div class="venus-icon project-icon"></div>
@@ -3771,6 +3781,7 @@ export const HTML_DATA: Map<string, string> =
 ["Thermophiles",`
             <div class="title background-color-active ">Thermophiles</div>
             <div class="price ">9</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-microbe "></div>
             <div class="tag tag2 tag-venus "></div>
             <div class="venus-icon project-icon"></div>
@@ -3868,6 +3879,7 @@ export const HTML_DATA: Map<string, string> =
 ["Venusian Animals",`
             <div class="title background-color-active ">Venusian Animals</div>
             <div class="price ">15</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-animal "></div>
             <div class="tag tag2 tag-science "></div>
             <div class="tag tag3 tag-venus "></div>
@@ -3884,6 +3896,7 @@ export const HTML_DATA: Map<string, string> =
 ["Venusian Insects",`
             <div class="title background-color-active ">Venusian Insects</div>
             <div class="price ">5</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-microbe "></div>
             <div class="tag tag2 tag-venus "></div>
             <div class="venus-icon project-icon"></div>

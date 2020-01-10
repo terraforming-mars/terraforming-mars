@@ -28,31 +28,31 @@ export class FloatingHabs implements IActionCard,IProjectCard {
     }
     
     public action(player: Player) {
-        const floaterCards = player.getResourceCards(ResourceType.FLOATER);
-        return new SelectCard(
-            "Select card to add 1 floater",
-            floaterCards,
-            (foundCards: Array<IProjectCard>) => {
-              if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-                return new SelectHowToPay(
-                  'Select how to pay ', false, false,
-                  true,
-                  2,
-                  (htp) => {
-                    if (htp.heat + htp.megaCredits < 2) {
-                        throw new Error('Not enough spent to buy card');
-                    }
-                    player.megaCredits -= htp.megaCredits;
-                    player.heat -= htp.heat;
-                    player.addResourceTo(foundCards[0], 1);
-                    return undefined;
+      const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+      return new SelectCard(
+          "Spend 2 MC and select card to add 1 floater",
+          floaterCards,
+          (foundCards: Array<IProjectCard>) => {
+            if (player.canUseHeatAsMegaCredits && player.heat > 0) {
+              return new SelectHowToPay(
+                'Select how to pay ', false, false,
+                true,
+                2,
+                (htp) => {
+                  if (htp.heat + htp.megaCredits < 2) {
+                      throw new Error('Not enough spent to buy card');
                   }
-                );
-              }
-              player.addResourceTo(foundCards[0], 1);
-              player.megaCredits -= 2;
-              return undefined;
+                  player.megaCredits -= htp.megaCredits;
+                  player.heat -= htp.heat;
+                  player.addResourceTo(foundCards[0], 1);
+                  return undefined;
+                }
+              );
             }
-        );
-    }
+            player.addResourceTo(foundCards[0], 1);
+            player.megaCredits -= 2;
+            return undefined;
+          }
+      );
+  }
 }

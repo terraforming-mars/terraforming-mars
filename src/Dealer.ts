@@ -311,6 +311,8 @@ import { SulphurEatingBacteria } from './cards/venusNext/SulphurEatingBacteria';
 import { RotatorImpacts } from './cards/venusNext/RotatorImpacts';
 import { SponsoredAcademies } from './cards/venusNext/SponsoredAcademies';
 import { VenusWaystation } from './cards/venusNext/VenusWaystation';
+import { SpinInducingAsteroid } from './cards/venusNext/SpinInducingAsteroid';
+import { WaterToVenus } from './cards/venusNext/WaterToVenus';
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -410,12 +412,15 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
         new LocalShading(),
         new MaxwellBase(),
         new RotatorImpacts(),
+        new SpinInducingAsteroid(),
         new SponsoredAcademies(),
         new SulphurEatingBacteria(),
         new Thermophiles(),
         new VenusianInsects(),
         new VenusMagnetizer(),
-        new VenusWaystation()
+        new VenusWaystation(),
+        new WaterToVenus()
+
 ];    
 
 export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [

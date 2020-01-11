@@ -326,6 +326,7 @@
         "tests/cards/venusNext/Stratopolis.spec.ts",          
         "tests/cards/venusNext/StratosphericBirds.spec.ts",         
         "tests/cards/venusNext/SulphurEatingBacteria.spec.ts",
+        "tests/cards/venusNext/SulphurExports.spec.ts",
         "tests/cards/venusNext/TerraformingContract.spec.ts",
         "tests/cards/venusNext/Thermophiles.spec.ts",  
         "tests/cards/venusNext/VenusGovernor.spec.ts",          

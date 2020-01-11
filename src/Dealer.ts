@@ -319,6 +319,8 @@ import { VenusSoils } from './cards/venusNext/VenusSoils';
 import { VenusianAnimals } from "./cards/venusNext/VenusianAnimals";
 import { VenusianPlants } from './cards/venusNext/VenusianPlants';
 import { VenusGovernor } from './cards/venusNext/VenusGovernor';
+import { SisterPlanetSupport } from './cards/venusNext/SisterPlanetSupport';
+import { TerraformingContract } from './cards/venusNext/TerraformingContract';
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -418,11 +420,13 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
         new LocalShading(),
         new MaxwellBase(),
         new RotatorImpacts(),
+        new SisterPlanetSupport(),
         new SpinInducingAsteroid(),
         new SponsoredAcademies(),
         new Stratopolis(),
         new StratosphericBirds(),
         new SulphurEatingBacteria(),
+        new TerraformingContract(),
         new Thermophiles(),
         new VenusGovernor(),
         new VenusianAnimals(),

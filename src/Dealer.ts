@@ -318,6 +318,7 @@ import { StratosphericBirds } from './cards/venusNext/StratosphericBirds';
 import { VenusSoils } from './cards/venusNext/VenusSoils';
 import { VenusianAnimals } from "./cards/venusNext/VenusianAnimals";
 import { VenusianPlants } from './cards/venusNext/VenusianPlants';
+import { VenusGovernor } from './cards/venusNext/VenusGovernor';
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -423,6 +424,7 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
         new StratosphericBirds(),
         new SulphurEatingBacteria(),
         new Thermophiles(),
+        new VenusGovernor(),
         new VenusianAnimals(),
         new VenusianInsects(),
         new VenusianPlants(),

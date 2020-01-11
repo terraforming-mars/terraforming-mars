@@ -658,14 +658,20 @@ export class Dealer {
     public preludeDeck: Array<IProjectCard> = [];
     public discarded: Array<IProjectCard> = [];
     private usePreludeExtension: boolean = false;
-    constructor(usePreludeExtension: boolean) {
+    private useVenusNextExtension: boolean = false;   
+    constructor(usePreludeExtension: boolean, useVenusNextExtension: boolean) {
         this.usePreludeExtension = usePreludeExtension;
+        this.useVenusNextExtension = useVenusNextExtension;
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS);
         if (this.usePreludeExtension) {
                 this.preludeDeck = this.shuffleCards(ALL_PRELUDE_CARDS);
                 this.deck.push(...ALL_PRELUDE_PROJECTS_CARDS);
                 this.deck = this.shuffleCards(this.deck);
         }
+        if (this.useVenusNextExtension) {
+            this.deck.push(...ALL_VENUS_PROJECTS_CARDS);
+            this.deck = this.shuffleCards(this.deck);
+    }
     }
     public shuffleCards(cards: Array<any>): Array<any> {
         const deck: Array<any> = [];

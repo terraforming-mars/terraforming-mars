@@ -1,5 +1,5 @@
 import {Player} from './Player';
-import {Dealer} from './Dealer';
+import { Dealer, ALL_VENUS_CORPORATIONS } from './Dealer';
 import {ISpace} from './ISpace';
 import {SpaceType} from './SpaceType';
 import {TileType} from './TileType';
@@ -69,7 +69,7 @@ export class Game {
       this.venusNextExtension = venusNextExtension;
       this.preludeExtension = preludeExtension;
       this.draftVariant = draftVariant;
-      this.dealer = new Dealer(this.preludeExtension);
+      this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension);
     
 
       // Single player game player starts with 14TR
@@ -82,6 +82,12 @@ export class Game {
       // Add prelude corporations cards
       if (this.preludeExtension) {
         corporationCards.push(...ALL_PRELUDE_CORPORATIONS);
+        corporationCards = this.dealer.shuffleCards(corporationCards);
+      }
+
+      // Add Venus Next corporations cards
+      if (this.venusNextExtension) {
+        corporationCards.push(...ALL_VENUS_CORPORATIONS);
         corporationCards = this.dealer.shuffleCards(corporationCards);
       }
 
@@ -114,6 +120,12 @@ export class Game {
     }
 
     private marsIsTerraformed(): boolean {
+      if (this.players.length === 1 && this.venusNextExtension) {
+        return  this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL &&
+                this.temperature >= constants.MAX_TEMPERATURE &&
+                this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES &&
+                this.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
+      }
       return this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL &&
              this.temperature >= constants.MAX_TEMPERATURE &&
              this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
@@ -337,7 +349,6 @@ export class Game {
         return;
       } 
       // Venus Next Solar phase
-      console.log('venusNextExtension');
       if (this.venusNextExtension) {
         this.gotoWorldGovernmentTerraforming();
         return;

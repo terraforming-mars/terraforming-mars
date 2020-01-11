@@ -3745,8 +3745,8 @@ export const HTML_DATA: Map<string, string> =
             </div>
           </div>
 `],
-["Sulphur-eating Bacteria",`
-            <div class="title background-color-active ">Sulphur-eating Bacteria</div>
+["Sulphur-Eating Bacteria",`
+            <div class="title background-color-active ">Sulphur-Eating Bacteria</div>
             <div class="price ">6</div>
             ##RESOURCES##
             <div class="tag tag1 tag-microbe "></div>

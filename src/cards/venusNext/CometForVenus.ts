@@ -9,7 +9,7 @@ import { Game } from '../../Game';
 export class CometForVenus implements IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = "Comet For Venus";
+    public name: string = "Comet for Venus";
     public cardType: CardType = CardType.EVENT;
     public canPlay(): boolean {
         return true;

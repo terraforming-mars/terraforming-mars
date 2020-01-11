@@ -450,7 +450,6 @@ export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [
         new Viron()
 ];    
 
-
 export const ALL_PROJECT_CARDS: Array<IProjectCard> = [
     new AcquiredCompany(),
     new AdaptationTechnology(),

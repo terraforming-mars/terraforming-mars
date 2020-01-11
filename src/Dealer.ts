@@ -313,6 +313,11 @@ import { SponsoredAcademies } from './cards/venusNext/SponsoredAcademies';
 import { VenusWaystation } from './cards/venusNext/VenusWaystation';
 import { SpinInducingAsteroid } from './cards/venusNext/SpinInducingAsteroid';
 import { WaterToVenus } from './cards/venusNext/WaterToVenus';
+import { Stratopolis } from './cards/venusNext/Stratopolis';
+import { StratosphericBirds } from './cards/venusNext/StratosphericBirds';
+import { VenusSoils } from './cards/venusNext/VenusSoils';
+import { VenusianAnimals } from "./cards/venusNext/VenusianAnimals";
+import { VenusianPlants } from './cards/venusNext/VenusianPlants';
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -414,10 +419,15 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
         new RotatorImpacts(),
         new SpinInducingAsteroid(),
         new SponsoredAcademies(),
+        new Stratopolis(),
+        new StratosphericBirds(),
         new SulphurEatingBacteria(),
         new Thermophiles(),
+        new VenusianAnimals(),
         new VenusianInsects(),
+        new VenusianPlants(),
         new VenusMagnetizer(),
+        new VenusSoils(),
         new VenusWaystation(),
         new WaterToVenus()
 

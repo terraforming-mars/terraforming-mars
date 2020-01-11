@@ -321,6 +321,7 @@ import { VenusianPlants } from './cards/venusNext/VenusianPlants';
 import { VenusGovernor } from './cards/venusNext/VenusGovernor';
 import { SisterPlanetSupport } from './cards/venusNext/SisterPlanetSupport';
 import { TerraformingContract } from './cards/venusNext/TerraformingContract';
+import { Solarnet } from './cards/venusNext/Solarnet';
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -421,6 +422,7 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
         new MaxwellBase(),
         new RotatorImpacts(),
         new SisterPlanetSupport(),
+        new Solarnet(),
         new SpinInducingAsteroid(),
         new SponsoredAcademies(),
         new Stratopolis(),
@@ -436,7 +438,6 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
         new VenusSoils(),
         new VenusWaystation(),
         new WaterToVenus()
-
 ];    
 
 export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [

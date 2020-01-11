@@ -216,104 +216,58 @@ export class Game {
     }
 
     private pickCorporationCard(player: Player): PlayerInput {
-      const dealtCards: Array<IProjectCard> = [
-        this.dealer.dealCard(),
-        this.dealer.dealCard(),
-        this.dealer.dealCard(),
-        this.dealer.dealCard(),
-        this.dealer.dealCard(),
-        this.dealer.dealCard(),
-        this.dealer.dealCard(),
-        this.dealer.dealCard(),
-        this.dealer.dealCard(),
-        this.dealer.dealCard()
-      ];
+      let dealtCards: Array<IProjectCard> = [];
+      let corporation: CorporationCard;
+      const result: AndOptions = new AndOptions(() => { this.playCorporationCard(player, corporation); return undefined; });
+      for (let i = 0; i < 10; i++) {
+        dealtCards.push(this.dealer.dealCard());
+      }
+
+      result.title = "Select corporation and initial cards";
+      result.options.push(
+        new SelectCard<CorporationCard>(
+          'Select corporation', player.dealtCorporationCards,
+          (foundCards: Array<CorporationCard>) => {
+            corporation = foundCards[0];
+            return undefined;
+          }
+        )
+      );
 
       if (this.preludeExtension) {
-        const preludeDealtCards: Array<IProjectCard> = [
-          this.dealer.dealPreludeCard(),
-          this.dealer.dealPreludeCard(),
-          this.dealer.dealPreludeCard(),
-          this.dealer.dealPreludeCard()
-        ];
+        let preludeDealtCards: Array<IProjectCard> = [];
 
-        let corporation: CorporationCard;
-        return new AndOptions(
-            () => {
-              this.playCorporationCard(player, corporation);
+        for (let i = 0; i < 4; i++) {
+          preludeDealtCards.push(this.dealer.dealPreludeCard());
+        }
+
+        result.options.push(
+          new SelectCard(
+            'Select 2 Prelude cards', preludeDealtCards,
+            (preludeCards: Array<IProjectCard>) => {
+              player.preludeCardsInHand.push(preludeCards[0], preludeCards[1]);
               return undefined;
-            },
-            new SelectCard<CorporationCard>(
-                'Select corporation', player.dealtCorporationCards,
-                (foundCards: Array<CorporationCard>) => {
-                  corporation = foundCards[0];
-                  return undefined;
-                }
-            ),
-            new SelectCard(
-                'Select 2 Prelude cards',
-                preludeDealtCards,
-                (preludeCards: Array<IProjectCard>) => {
-                  player.preludeCardsInHand.push(preludeCards[0], preludeCards[1]);
-                  return undefined;
-                }, 2, 2
-            ),
-            new SelectCard(
-                'Select initial cards to buy',
-                dealtCards,
-                (foundCards: Array<IProjectCard>) => {
-                // Pay for cards
-                  for (const foundCard of foundCards) {
-                    player.cardsInHand.push(foundCard);
-                  }
-                  for (const dealt of dealtCards) {
-                    if (
-                      foundCards.find(
-                          (foundCard) => foundCard.name === dealt.name
-                      ) === undefined
-                    ) {
-                      this.dealer.discard(dealt);
-                    }
-                  }
-                  return undefined;
-                }, 10, 0
-            )
-        );
-      } else {
-        let corporation: CorporationCard;
-        return new AndOptions(
-            () => {
-              this.playCorporationCard(player, corporation);
-              return undefined;
-            },
-            new SelectCard<CorporationCard>(
-                'Select corporation',
-                player.dealtCorporationCards,
-                (foundCards: Array<CorporationCard>) => {
-                  corporation = foundCards[0];
-                  return undefined;
-                }
-            ),
-            new SelectCard(
-                'Select initial cards to buy',
-                dealtCards,
-                (foundCards: Array<IProjectCard>) => {
-                // Pay for cards
-                  for (const foundCard of foundCards) {
-                    player.cardsInHand.push(foundCard);
-                  }
-                  for (const dealtCard of dealtCards) {
-                    if (foundCards.find(
-                        (foundCard) => foundCard.name === dealtCard.name
-                    ) === undefined) {
-                      this.dealer.discard(dealtCard);
-                    }
-                  }
-                  return undefined;
-                }, 10, 0
-            )
+            }, 2, 2
+          )
         );
       }
+
+      result.options.push(
+        new SelectCard(
+          'Select initial cards to buy', dealtCards,
+          (foundCards: Array<IProjectCard>) => {
+            for (const dealt of dealtCards) {
+              if (foundCards.find((foundCard) => foundCard.name === dealt.name)) {
+                player.cardsInHand.push(dealt);
+              } else {
+                this.dealer.discard(dealt);
+              }
+            }
+            return undefined;
+          }, 10, 0
+        )
+      );
+      return result;
     }
 
     private hasPassedThisActionPhase(player: Player): boolean {

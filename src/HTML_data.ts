@@ -3439,8 +3439,8 @@ export const HTML_DATA: Map<string, string> =
                 </div>
             </div>
 `],
-["IO Sulphur Research",`
-            <div class="title background-color-automated ">IO Sulphur Research</div>
+["Io Sulphur Research",`
+            <div class="title background-color-automated ">Io Sulphur Research</div>
             <div class="price ">17</div>
             <div class="tag tag1 tag-jovian "></div>
             <div class="tag tag2 tag-science "></div>

@@ -323,7 +323,7 @@ import { SisterPlanetSupport } from './cards/venusNext/SisterPlanetSupport';
 import { TerraformingContract } from './cards/venusNext/TerraformingContract';
 import { Solarnet } from './cards/venusNext/Solarnet';
 import { SulphurExports } from './cards/venusNext/SulphurExports';
-import { LuxuaryFoods } from './cards/venusNext/LuxuaryFoods';
+import { LuxuryFoods } from './cards/venusNext/LuxuryFoods';
 import { NeutralizerFactory } from './cards/venusNext/NeutralizerFactory';
 import { OrbitalReflectors } from './cards/venusNext/OrbitalReflectors';
 import { MiningQuota } from './cards/venusNext/MiningQuota';
@@ -445,7 +445,7 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
         new VenusSoils(),
         new VenusWaystation(),
         new WaterToVenus(),
-        new LuxuaryFoods(),
+        new LuxuryFoods(),
         new NeutralizerFactory(),
         new OrbitalReflectors(),
         new Omnicourt(),

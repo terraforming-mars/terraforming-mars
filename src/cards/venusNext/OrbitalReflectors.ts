@@ -7,7 +7,7 @@ import { Game } from '../../Game';
 import { Resources } from '../../Resources';
 
 export class OrbitalReflectors  implements IProjectCard {
-    public cost: number = 7;
+    public cost: number = 26;
     public tags: Array<Tags> = [Tags.VENUS, Tags.SPACE];
     public name: string = "Orbital Reflectors";
     public cardType: CardType = CardType.AUTOMATED;

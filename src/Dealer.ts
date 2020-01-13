@@ -323,6 +323,11 @@ import { SisterPlanetSupport } from './cards/venusNext/SisterPlanetSupport';
 import { TerraformingContract } from './cards/venusNext/TerraformingContract';
 import { Solarnet } from './cards/venusNext/Solarnet';
 import { SulphurExports } from './cards/venusNext/SulphurExports';
+import { LuxuryFoods } from './cards/venusNext/LuxuryFoods';
+import { NeutralizerFactory } from './cards/venusNext/NeutralizerFactory';
+import { OrbitalReflectors } from './cards/venusNext/OrbitalReflectors';
+import { MiningQuota } from './cards/venusNext/MiningQuota';
+import { Omnicourt } from './cards/venusNext/Omnicourt';
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -439,7 +444,12 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
         new VenusMagnetizer(),
         new VenusSoils(),
         new VenusWaystation(),
-        new WaterToVenus()
+        new WaterToVenus(),
+        new LuxuryFoods(),
+        new NeutralizerFactory(),
+        new OrbitalReflectors(),
+        new Omnicourt(),
+        new MiningQuota()
 ];    
 
 export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [

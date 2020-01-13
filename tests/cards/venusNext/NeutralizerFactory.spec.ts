@@ -9,8 +9,8 @@ describe("NeutralizerFactory", function () {
         const card = new NeutralizerFactory();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        expect(card.canPlay()).to.eq(false);
-        const action = card.play();
+        expect(card.canPlay(player, game)).to.eq(false);
+        const action = card.play(player, game);
         expect(action).to.eq(undefined);
         expect(game.getVenusScaleLevel()).to.eq(2);
     });

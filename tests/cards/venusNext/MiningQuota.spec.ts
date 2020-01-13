@@ -1,15 +1,15 @@
 import { expect } from "chai";
-import { MinningQuota } from "../../../src/cards/venusNext/MinningQuota";
+import { MiningQuota } from "../../../src/cards/venusNext/MiningQuota";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Resources } from "../../../src/Resources";
 
-describe("MinningQuota", function () {
+describe("MiningQuota", function () {
     it("Should play", function () {
-        const card = new MinningQuota();
+        const card = new MiningQuota();
         const player = new Player("test", Color.BLUE, false);
-        expect(card.canPlay()).to.eq(false);
-        const action = card.play();
+        expect(card.canPlay(player)).to.eq(false);
+        const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.getProduction(Resources.STEEL)).to.eq(2);
     });

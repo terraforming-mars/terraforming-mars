@@ -7,8 +7,8 @@ describe("Omnicourt", function () {
     it("Should play", function () {
         const card = new Omnicourt();
         const player = new Player("test", Color.BLUE, false);
-        expect(card.canPlay()).to.eq(false);
-        const action = card.play();
+        expect(card.canPlay(player)).to.eq(false);
+        const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.terraformRating).to.eq(22);
     });

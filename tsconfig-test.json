@@ -319,7 +319,7 @@
         "tests/cards/venusNext/LocalShading.spec.ts",
         "tests/cards/venusNext/LunaMetropolis.spec.ts",
         "tests/cards/venusNext/LuxuryFoods.spec.ts",
-        "tests/cards/venusNext/MinningQuota.spec.ts",
+        "tests/cards/venusNext/MiningQuota.spec.ts",
         "tests/cards/venusNext/NeutralizerFactory.spec.ts",
         "tests/cards/venusNext/Omnicourt.spec.ts",       
         "tests/cards/venusNext/OrbitalReflectors.spec.ts",    

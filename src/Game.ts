@@ -16,6 +16,8 @@ import {PlayerInput} from './PlayerInput';
 import {Phase} from './Phase';
 import {ClaimedMilestone} from './ClaimedMilestone';
 import {FundedAward} from './FundedAward';
+import {ORIGINAL_AWARDS} from './awards/Awards';
+import { ORIGINAL_MILESTONES } from './milestones/Milestones';
 import {IMilestone} from './milestones/IMilestone';
 import {ResourceType} from './ResourceType';
 import * as constants from './constants';
@@ -26,6 +28,8 @@ import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
 import { Resources } from "./Resources";
 import { Aphrodite } from './cards/venusNext/Aphrodite';
+import { Hoverlord } from './milestones/Hoverlord';
+import { Venuphile } from './awards/Venuphile';
 
 export class Game {
     public activePlayer: Player;
@@ -46,6 +50,8 @@ export class Game {
     public gameLog: Array<String> = [];
     public gameAge: number = 0; // Each log event increases it
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
+    public awards = ORIGINAL_AWARDS;
+    public milestones = ORIGINAL_MILESTONES;
 
     private tempMC: number = 0;
     private tempSteel: number = 0;
@@ -85,10 +91,12 @@ export class Game {
         corporationCards = this.dealer.shuffleCards(corporationCards);
       }
 
-      // Add Venus Next corporations cards
+      // Add Venus Next corporations cards and milestone / award
       if (this.venusNextExtension) {
         corporationCards.push(...ALL_VENUS_CORPORATIONS);
         corporationCards = this.dealer.shuffleCards(corporationCards);
+        this.milestones.push(new Hoverlord());
+        this.awards.push(new Venuphile());
       }
 
       // Give each player their corporation cards

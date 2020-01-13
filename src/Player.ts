@@ -19,12 +19,10 @@ import {SelectAmount} from './inputs/SelectAmount';
 import {SelectOption} from './inputs/SelectOption';
 import {SelectPlayer} from './inputs/SelectPlayer';
 import {IMilestone} from './milestones/IMilestone';
-import {ORIGINAL_MILESTONES} from './milestones/Milestones';
 import {StandardProjectType} from './StandardProjectType';
 import * as constants from './constants';
 import {ProtectedHabitats} from './cards/ProtectedHabitats';
 import {Pets} from './cards/Pets';
-import {ORIGINAL_AWARDS} from './awards/Awards';
 import {IAward} from './awards/IAward';
 import { VictoryPointsBreakdown } from './VictoryPointsBreakdown';
 import {Resources} from './Resources';
@@ -1544,7 +1542,7 @@ export class Player {
       if (this.canAfford(8) && !game.allMilestonesClaimed()) {
         const remainingMilestones = new OrOptions();
         remainingMilestones.title = 'Select a milestone to claim';
-        remainingMilestones.options = ORIGINAL_MILESTONES
+        remainingMilestones.options = game.milestones
             .filter(
                 (milestone: IMilestone) =>
                   !game.milestoneClaimed(milestone) &&
@@ -1564,7 +1562,7 @@ export class Player {
             !game.allAwardsFunded()) {
         const remainingAwards = new OrOptions();
         remainingAwards.title = 'Select an award to fund';
-        remainingAwards.options = ORIGINAL_AWARDS
+        remainingAwards.options = game.awards
             .filter((award: IAward) => game.hasBeenFunded(award) === false)
             .map((award: IAward) => this.fundAward(award, game));
         action.options.push(remainingAwards);

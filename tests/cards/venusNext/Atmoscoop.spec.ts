@@ -3,7 +3,6 @@ import { Atmoscoop } from "../../../src/cards/venusNext/Atmoscoop";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from '../../../src/Game';
-import { AndOptions } from '../../../src/inputs/AndOptions';
 import { OrOptions } from '../../../src/inputs/OrOptions';
 
 describe("Atmoscoop", function () {
@@ -16,13 +15,13 @@ describe("Atmoscoop", function () {
         expect(card.canPlay(player)).to.eq(false);
 
         const action = card.play(player, game);
-        expect(action instanceof AndOptions).to.eq(true);
-        if ( ! (action instanceof AndOptions)) return;
+        expect(action instanceof OrOptions).to.eq(true);
+        if ( ! (action instanceof OrOptions)) return;
 
-        expect(action.options.length).to.eq(1);
-        const orOptions = action.options[0] as OrOptions;
+        expect(action.options.length).to.eq(2);
+        const orOptions = action.options[1] as OrOptions;
 
-        orOptions.options[1].cb();
+        orOptions.cb();
 
         expect(game.getVenusScaleLevel()).to.eq(4);
     });

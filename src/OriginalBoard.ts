@@ -12,7 +12,7 @@ class Space implements ISpace {
     }
 }
 
-class Colony extends Space {
+export class Colony extends Space {
     constructor(id: string) {
         super(id, SpaceType.COLONY, [], -1, -1);
     }
@@ -42,12 +42,7 @@ export class OriginalBoard {
     public spaces: Array<ISpace> = [];
     constructor() {
         this.spaces.push(new Colony(SpaceName.GANYMEDE_COLONY)); 
-        this.spaces.push(new Colony(SpaceName.PHOBOS_SPACE_HAVEN));
-
-        this.spaces.push(new Colony(SpaceName.DAWN_CITY));
-        this.spaces.push(new Colony(SpaceName.LUNA_METROPOLIS));
-        this.spaces.push(new Colony(SpaceName.MAXWELL_BASE));
-        this.spaces.push(new Colony(SpaceName.STRATOPOLIS));                        
+        this.spaces.push(new Colony(SpaceName.PHOBOS_SPACE_HAVEN));                    
 
         let idx = 3, pos_x = 4, pos_y=0;
 

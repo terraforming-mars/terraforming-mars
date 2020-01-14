@@ -5,11 +5,8 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { OrOptions } from '../../inputs/OrOptions';
 import { SelectOption } from '../../inputs/SelectOption';
-import { MAX_TEMPERATURE, MAX_VENUS_SCALE } from "../../constants";
 import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
-import { AndOptions } from '../../inputs/AndOptions';
-
 
 export class Atmoscoop implements IProjectCard {
     public cost: number = 22;
@@ -20,46 +17,35 @@ export class Atmoscoop implements IProjectCard {
         return player.getTagCount(Tags.SCIENCE) >= 3 ;
       }
     public play(player: Player, game: Game) {
-        var opts: Array<OrOptions | SelectCard<IProjectCard>> = [];
         const floaterCards = player.getResourceCards(ResourceType.FLOATER);
-        const raiseTemp = new SelectOption("Raise temperature 2 steps", () => {
-            return game.increaseTemperature(player,2);
-        });
-        const raiseVenus = new SelectOption("Raise Venus 2 steps", () => {
-            return game.increaseVenusScaleLevel(player,2);
-        });
-
-        const tempOrVenus = new OrOptions(raiseTemp, raiseVenus);
-        
-        const chooseCard = new SelectCard(
-            'Select card to add 2 floaters',
+        const raiseTemp = new SelectCard(
+            'Select card to add 2 floaters and raise temperature 2 steps',
             floaterCards,
             (foundCards: Array<IProjectCard>) => {
               player.addResourceTo(foundCards[0], 2);
-              return undefined;
+              return game.increaseTemperature(player,2);
             }
         );
-
-        if (game.getTemperature() < MAX_TEMPERATURE && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
-            opts.push(tempOrVenus);
-        } else if (game.getTemperature() < MAX_TEMPERATURE) {
-            opts.push(new OrOptions(raiseTemp));
-        } else if (game.getVenusScaleLevel() < MAX_VENUS_SCALE){
-            opts.push(new OrOptions(raiseVenus));
-        } 
+        const raiseVenus = new SelectCard(
+            'Select card to add 2 floaters and raise Venus 2 steps',
+            floaterCards,
+            (foundCards: Array<IProjectCard>) => {
+              player.addResourceTo(foundCards[0], 2);
+              return game.increaseVenusScaleLevel(player,2);
+            }
+        );
+        const raiseTempOnly = new SelectOption("Raise temperature 2 steps", () => {
+            return game.increaseTemperature(player,2);
+        });
+        const raiseVenusOnly = new SelectOption("Raise Venus 2 steps", () => {
+            return game.increaseVenusScaleLevel(player,2);
+        });
 
         if (floaterCards.length > 0) {
-            opts.push(chooseCard);
+            return new OrOptions(raiseTemp, raiseVenus);
+        } else {
+            return new OrOptions(raiseTempOnly, raiseVenusOnly);
         }
-
-        if (opts.length === 0) return undefined;
-
-        return new AndOptions(
-            () => {
-                return undefined;
-            },
-            ...opts
-        );
     }
     
     public getVictoryPoints() {

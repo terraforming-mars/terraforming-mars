@@ -20,6 +20,10 @@ describe("SponsoredAcademies", function () {
 
         const action = card.play(player, game) as SelectCard<IProjectCard>;
         expect(action instanceof SelectCard).to.eq(true);
+
+        // No SponsoredAcademies itself suggested to discard
+        expect(action.cards.filter((c) => c.name === card.name).length).to.eq(0);
+
         action.cb([card2]);
         expect(player.cardsInHand.length).to.eq(4);
         expect(player2.cardsInHand.length).to.eq(1);

@@ -30,6 +30,7 @@ import { ORIGINAL_MILESTONES, VENUS_MILESTONES } from './milestones/Milestones';
 import { ORIGINAL_AWARDS, VENUS_AWARDS } from './awards/Awards';
 import { SpaceName } from './SpaceName';
 import { Colony } from './OriginalBoard';
+import { ArcticAlgae } from './cards/ArcticAlgae';
 
 
 export class Game {
@@ -63,6 +64,7 @@ export class Game {
     private tempCards: Array<IProjectCard> = [];
     private tempHeatProduction: number = 0;
     private tempVenusScaleLevel: number = 0;
+    private tempOceans: number = 0;
 
     constructor(
       public id: string,
@@ -392,6 +394,7 @@ export class Game {
       this.tempCards = this.first.cardsInHand;
       this.tempHeatProduction = this.first.getProduction(Resources.HEAT);
       this.tempVenusScaleLevel = this.venusScaleLevel;
+      this.tempOceans = this.board.getOceansOnBoard();
 
       this.first.worldGovernmentTerraforming(this);
     }
@@ -416,6 +419,13 @@ export class Game {
           && this.first.corporationCard.name === new Aphrodite().name) {
             this.first.megaCredits += 2;
       }
+
+      //Check for arctic algae
+      if (this.tempOceans < this.board.getOceansOnBoard() 
+        && this.first.playedCards.find(
+          (playedCard) => playedCard.name === new ArcticAlgae().name) !== undefined) {
+          this.first.plants += 2;
+      }     
 
       //Carry on to next phase
       this.gotoDraftOrResearch();

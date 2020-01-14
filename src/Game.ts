@@ -16,8 +16,6 @@ import {PlayerInput} from './PlayerInput';
 import {Phase} from './Phase';
 import {ClaimedMilestone} from './ClaimedMilestone';
 import {FundedAward} from './FundedAward';
-import {ORIGINAL_AWARDS} from './awards/Awards';
-import { ORIGINAL_MILESTONES } from './milestones/Milestones';
 import {IMilestone} from './milestones/IMilestone';
 import {ResourceType} from './ResourceType';
 import * as constants from './constants';
@@ -28,16 +26,19 @@ import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
 import { Resources } from "./Resources";
 import { Aphrodite } from './cards/venusNext/Aphrodite';
-import { Hoverlord } from './milestones/Hoverlord';
-import { Venuphile } from './awards/Venuphile';
+import { ORIGINAL_MILESTONES, VENUS_MILESTONES } from './milestones/Milestones';
+import { ORIGINAL_AWARDS, VENUS_AWARDS } from './awards/Awards';
 import { SpaceName } from './SpaceName';
 import { Colony } from './OriginalBoard';
+
 
 export class Game {
     public activePlayer: Player;
     public claimedMilestones: Array<ClaimedMilestone> = [];
+    public milestones: Array<IMilestone> = [];
     public dealer: Dealer;
     public fundedAwards: Array<FundedAward> = [];
+    public awards: Array<IAward> = [];
     public generation: number = 1;
     private draftRound: number = 1;
     public phase: Phase = Phase.RESEARCH;
@@ -52,8 +53,6 @@ export class Game {
     public gameLog: Array<String> = [];
     public gameAge: number = 0; // Each log event increases it
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
-    public awards = ORIGINAL_AWARDS;
-    public milestones = ORIGINAL_MILESTONES;
 
     private tempMC: number = 0;
     private tempSteel: number = 0;
@@ -78,8 +77,10 @@ export class Game {
       this.preludeExtension = preludeExtension;
       this.draftVariant = draftVariant;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension);
-    
 
+      this.milestones.push(...ORIGINAL_MILESTONES);
+      this.awards.push(...ORIGINAL_AWARDS);
+    
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
       if (players.length === 1) {
@@ -97,8 +98,8 @@ export class Game {
       if (this.venusNextExtension) {
         corporationCards.push(...ALL_VENUS_CORPORATIONS);
         corporationCards = this.dealer.shuffleCards(corporationCards);
-        this.milestones.push(new Hoverlord());
-        this.awards.push(new Venuphile());
+        this.milestones.push(...VENUS_MILESTONES);
+        this.awards.push(...VENUS_AWARDS);
         this.board.spaces.push(new Colony(SpaceName.DAWN_CITY));
         this.board.spaces.push(new Colony(SpaceName.LUNA_METROPOLIS));
         this.board.spaces.push(new Colony(SpaceName.MAXWELL_BASE));

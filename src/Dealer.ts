@@ -689,7 +689,7 @@ export class Dealer {
         if (this.useVenusNextExtension) {
             this.deck.push(...ALL_VENUS_PROJECTS_CARDS);
             this.deck = this.shuffleCards(this.deck);
-    }
+        }
     }
     public shuffleCards(cards: Array<any>): Array<any> {
         const deck: Array<any> = [];

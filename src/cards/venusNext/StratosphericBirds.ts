@@ -14,12 +14,12 @@ export class StratosphericBirds implements IActionCard,IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.ANIMAL;
     public canPlay(player: Player, game: Game): boolean {
-        const cardsWithFloater = player.getResourceCards(ResourceType.FLOATER);
+        const cardsWithFloater = player.getCardsWithResources().filter(card => card.resourceType === ResourceType.FLOATER);
         if (cardsWithFloater.length === 0) return false;
         return game.getVenusScaleLevel() >= 12 - (2 * player.getRequirementsBonus(game, true));
     }
     public play(player: Player) {
-        const cardsWithFloater = player.getResourceCards(ResourceType.FLOATER);
+       const cardsWithFloater = player.getCardsWithResources().filter(card => card.resourceType === ResourceType.FLOATER);
         if (cardsWithFloater.length === 1) {
             player.removeResourceFrom(cardsWithFloater[0], 1)
             return undefined;

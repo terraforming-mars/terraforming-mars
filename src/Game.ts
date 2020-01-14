@@ -30,6 +30,8 @@ import { Resources } from "./Resources";
 import { Aphrodite } from './cards/venusNext/Aphrodite';
 import { Hoverlord } from './milestones/Hoverlord';
 import { Venuphile } from './awards/Venuphile';
+import { SpaceName } from './SpaceName';
+import { Colony } from './OriginalBoard';
 
 export class Game {
     public activePlayer: Player;
@@ -91,12 +93,16 @@ export class Game {
         corporationCards = this.dealer.shuffleCards(corporationCards);
       }
 
-      // Add Venus Next corporations cards and milestone / award
+      // Add Venus Next corporations cards, board colonies and milestone / award
       if (this.venusNextExtension) {
         corporationCards.push(...ALL_VENUS_CORPORATIONS);
         corporationCards = this.dealer.shuffleCards(corporationCards);
         this.milestones.push(new Hoverlord());
         this.awards.push(new Venuphile());
+        this.board.spaces.push(new Colony(SpaceName.DAWN_CITY));
+        this.board.spaces.push(new Colony(SpaceName.LUNA_METROPOLIS));
+        this.board.spaces.push(new Colony(SpaceName.MAXWELL_BASE));
+        this.board.spaces.push(new Colony(SpaceName.STRATOPOLIS));
       }
 
       // Give each player their corporation cards

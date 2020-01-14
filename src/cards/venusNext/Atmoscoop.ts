@@ -9,7 +9,6 @@ import { MAX_TEMPERATURE, MAX_VENUS_SCALE } from "../../constants";
 import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
 import { AndOptions } from '../../inputs/AndOptions';
-import { SelectSpace } from '../../components/SelectSpace';
 
 
 export class Atmoscoop implements IProjectCard {
@@ -21,7 +20,7 @@ export class Atmoscoop implements IProjectCard {
         return player.getTagCount(Tags.SCIENCE) >= 3 ;
       }
     public play(player: Player, game: Game) {
-        var opts: Array<OrOptions | SelectCard<IProjectCard> | SelectOption> = [];
+        var opts: Array<OrOptions | SelectCard<IProjectCard>> = [];
         const floaterCards = player.getResourceCards(ResourceType.FLOATER);
         const raiseTemp = new SelectOption("Raise temperature 2 steps", () => {
             return game.increaseTemperature(player,2);
@@ -44,9 +43,9 @@ export class Atmoscoop implements IProjectCard {
         if (game.getTemperature() < MAX_TEMPERATURE && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
             opts.push(tempOrVenus);
         } else if (game.getTemperature() < MAX_TEMPERATURE) {
-            opts.push(raiseTemp);
+            opts.push(new OrOptions(raiseTemp));
         } else if (game.getVenusScaleLevel() < MAX_VENUS_SCALE){
-            opts.push(raiseVenus);
+            opts.push(new OrOptions(raiseVenus));
         } 
 
         if (floaterCards.length > 0) {

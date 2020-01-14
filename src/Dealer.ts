@@ -275,6 +275,59 @@ import { Worms } from "./cards/Worms";
 import { Zeppelins } from "./cards/Zeppelins";
 
 import { IProjectCard } from "./cards/IProjectCard";
+import { Dirigibles } from './cards/venusNext/Dirigibles';
+import { IshtarMining } from './cards/venusNext/IshtarMining';
+import { MaxwellBase } from './cards/venusNext/MaxwellBase';
+import { AerialMappers } from './cards/venusNext/AerialMappers';
+import { AerosportTournament } from './cards/venusNext/AerosportTournament';
+import { CometForVenus } from './cards/venusNext/CometForVenus';
+import { AirScrappingExpedition } from './cards/venusNext/AirScrappingExpedition';
+import { DeuteriumExport } from './cards/venusNext/DeuteriumExport';
+import { GiantSolarShade } from './cards/venusNext/GiantSolarShade';
+import { Aphrodite } from './cards/venusNext/Aphrodite';
+import { Celestic } from './cards/venusNext/Celestic';
+import { Manutech } from './cards/venusNext/Manutech';
+import { MorningStarInc } from './cards/venusNext/MorningStarInc';
+import { Viron } from './cards/venusNext/Viron';
+import { CorroderSuits } from './cards/venusNext/CorroderSuits';
+import { DawnCity } from './cards/venusNext/DawnCity';
+import { GHGImportFromVenus } from './cards/venusNext/GHGImportFromVenus';
+import { AtalantaPlanitiaLab } from './cards/venusNext/AtalantaPlanitiaLab';
+import { ExtractorBalloons } from './cards/venusNext/ExtractorBalloons';
+import { Extremophiles } from './cards/venusNext/Extremophiles';
+import { FloatingHabs } from './cards/venusNext/FloatingHabs';
+import { ForcedPrecipitation } from './cards/venusNext/ForcedPrecipitation';
+import { FreyjaBiodomes } from './cards/venusNext/FreyjaBiodomes';
+import { Gyropolis } from './cards/venusNext/Gyropolis';
+import { HydrogenToVenus } from './cards/venusNext/HydrogenToVenus';
+import { IoSulphurResearch } from './cards/venusNext/IoSulphurResearch';
+import { LunaMetropolis } from './cards/venusNext/LunaMetropolis';
+import { JetStreamMicroscrappers } from './cards/venusNext/JetStreamMicroscrappers';
+import { LocalShading } from './cards/venusNext/LocalShading';
+import { VenusianInsects } from './cards/venusNext/VenusianInsects';
+import { Thermophiles } from './cards/venusNext/Thermophiles';
+import { VenusMagnetizer } from './cards/venusNext/VenusMagnetizer';
+import { SulphurEatingBacteria } from './cards/venusNext/SulphurEatingBacteria';
+import { RotatorImpacts } from './cards/venusNext/RotatorImpacts';
+import { SponsoredAcademies } from './cards/venusNext/SponsoredAcademies';
+import { VenusWaystation } from './cards/venusNext/VenusWaystation';
+import { SpinInducingAsteroid } from './cards/venusNext/SpinInducingAsteroid';
+import { WaterToVenus } from './cards/venusNext/WaterToVenus';
+import { Stratopolis } from './cards/venusNext/Stratopolis';
+import { StratosphericBirds } from './cards/venusNext/StratosphericBirds';
+import { VenusSoils } from './cards/venusNext/VenusSoils';
+import { VenusianAnimals } from "./cards/venusNext/VenusianAnimals";
+import { VenusianPlants } from './cards/venusNext/VenusianPlants';
+import { VenusGovernor } from './cards/venusNext/VenusGovernor';
+import { SisterPlanetSupport } from './cards/venusNext/SisterPlanetSupport';
+import { TerraformingContract } from './cards/venusNext/TerraformingContract';
+import { Solarnet } from './cards/venusNext/Solarnet';
+import { SulphurExports } from './cards/venusNext/SulphurExports';
+import { LuxuryFoods } from './cards/venusNext/LuxuryFoods';
+import { NeutralizerFactory } from './cards/venusNext/NeutralizerFactory';
+import { OrbitalReflectors } from './cards/venusNext/OrbitalReflectors';
+import { MiningQuota } from './cards/venusNext/MiningQuota';
+import { Omnicourt } from './cards/venusNext/Omnicourt';
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -348,6 +401,64 @@ export const ALL_PRELUDE_PROJECTS_CARDS: Array<IProjectCard> = [
         new Psychrophiles()
 ];
 
+export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
+        new AerialMappers(),
+        new AerosportTournament(),
+        new AirScrappingExpedition(),
+        new AtalantaPlanitiaLab(),
+        new CometForVenus(),
+        new CorroderSuits(),
+        new DawnCity(),
+        new DeuteriumExport(),
+        new Dirigibles(),
+        new ExtractorBalloons(),
+        new Extremophiles(),
+        new FloatingHabs(),
+        new ForcedPrecipitation(),
+        new FreyjaBiodomes(),
+        new GiantSolarShade(),
+        new GHGImportFromVenus(),
+        new Gyropolis(),
+        new HydrogenToVenus(),
+        new IoSulphurResearch(),
+        new IshtarMining(),
+        new JetStreamMicroscrappers(),
+        new LunaMetropolis(),
+        new LocalShading(),
+        new MaxwellBase(),
+        new RotatorImpacts(),
+        new SisterPlanetSupport(),
+        new Solarnet(),
+        new SpinInducingAsteroid(),
+        new SponsoredAcademies(),
+        new Stratopolis(),
+        new StratosphericBirds(),
+        new SulphurEatingBacteria(),
+        new SulphurExports(),
+        new TerraformingContract(),
+        new Thermophiles(),
+        new VenusGovernor(),
+        new VenusianAnimals(),
+        new VenusianInsects(),
+        new VenusianPlants(),
+        new VenusMagnetizer(),
+        new VenusSoils(),
+        new VenusWaystation(),
+        new WaterToVenus(),
+        new LuxuryFoods(),
+        new NeutralizerFactory(),
+        new OrbitalReflectors(),
+        new Omnicourt(),
+        new MiningQuota()
+];    
+
+export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [
+        new Aphrodite(),
+        new Celestic(),
+        new Manutech(),
+        new MorningStarInc(),
+        new Viron()
+];    
 
 export const ALL_PROJECT_CARDS: Array<IProjectCard> = [
     new AcquiredCompany(),
@@ -565,13 +676,19 @@ export class Dealer {
     public preludeDeck: Array<IProjectCard> = [];
     public discarded: Array<IProjectCard> = [];
     private usePreludeExtension: boolean = false;
-    constructor(usePreludeExtension: boolean) {
+    private useVenusNextExtension: boolean = false;   
+    constructor(usePreludeExtension: boolean, useVenusNextExtension: boolean) {
         this.usePreludeExtension = usePreludeExtension;
+        this.useVenusNextExtension = useVenusNextExtension;
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS);
         if (this.usePreludeExtension) {
                 this.preludeDeck = this.shuffleCards(ALL_PRELUDE_CARDS);
                 this.deck.push(...ALL_PRELUDE_PROJECTS_CARDS);
                 this.deck = this.shuffleCards(this.deck);
+        }
+        if (this.useVenusNextExtension) {
+            this.deck.push(...ALL_VENUS_PROJECTS_CARDS);
+            this.deck = this.shuffleCards(this.deck);
         }
     }
     public shuffleCards(cards: Array<any>): Array<any> {

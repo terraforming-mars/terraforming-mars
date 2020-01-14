@@ -3,13 +3,12 @@
   */
 
 import Vue from "vue";
-import { ORIGINAL_AWARDS } from "../awards/Awards";
 
 export const Award = Vue.component("award", {
+    props: ["awards_list"],
     data: function () {
         return {
             displayed: false,
-            "awards_list": ORIGINAL_AWARDS
         };
     },
     methods: {

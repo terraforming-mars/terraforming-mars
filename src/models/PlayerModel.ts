@@ -29,4 +29,6 @@ export interface PlayerModel {
     isSoloModeWin: boolean;
     gameAge: number;
     isActive: boolean;
+    venusNextExtension: boolean;
+    venusScaleLevel: number;
 }

@@ -21,6 +21,8 @@ export const PaymentWidgetMixin = {
                 rate = (this as any).player.steelValue;
             } else if (resourceName === "microbes") {
                 rate = 2;
+            } else if (resourceName === "floaters") {
+                rate = 3;
             }
             return rate;
         },
@@ -43,7 +45,7 @@ export const PaymentWidgetMixin = {
             let maxValue: number = (this as any).player[target];
             if (target === "megaCredits") maxValue = this.getCardCost();
             if (target === "microbes") maxValue = (this as any).playerinput.microbes;
-
+            if (target === "floaters") maxValue = (this as any).playerinput.floaters;
             if (currentValue === maxValue) return;
             
             const realTo = (currentValue + to <= maxValue) ? to : maxValue - currentValue;

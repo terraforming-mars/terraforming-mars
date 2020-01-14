@@ -3,13 +3,12 @@
   */
 
 import Vue from "vue";
-import { ORIGINAL_MILESTONES } from "../milestones/Milestones";
 
 export const Milestone = Vue.component("milestone", {
+    props: ["milestones_list"],
     data: function () {
         return {
-            displayed: false,
-            "milestones_list": ORIGINAL_MILESTONES
+            displayed: false
         };
     },
     methods: {

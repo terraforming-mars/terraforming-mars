@@ -1,0 +1,16 @@
+import { expect } from "chai";
+import { VenusGovernor } from "../../../src/cards/venusNext/VenusGovernor";
+import { Color } from "../../../src/Color";
+import { Player } from "../../../src/Player";
+import { Resources } from "../../../src/Resources";
+
+describe("VenusGovernor", function () {
+    it("Should play", function () {
+        const card = new VenusGovernor();
+        const player = new Player("test", Color.BLUE, false);
+        expect(card.canPlay(player)).to.eq(false);
+        const action = card.play(player);
+        expect(action).to.eq(undefined);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    });
+});

@@ -234,7 +234,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
           break;
         }
       }
-      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant);
+      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.venusNext);
       games.set(gameId, game);
       game.getPlayers().forEach((player) => {
         playersToGame.set(player.id, game);
@@ -259,6 +259,8 @@ function getPlayer(player: Player, game: Game): string {
         milestone: claimedMilestone.milestone.name
       };
     }),
+    milestones: game.milestones,
+    awards: game.awards,
     color: player.color,
     corporationCard: player.corporationCard ?
       player.corporationCard.name : undefined,
@@ -297,7 +299,9 @@ function getPlayer(player: Player, game: Game): string {
     gameLog: game.gameLog,
     isSoloModeWin: game.isSoloModeWin(),
     gameAge: game.gameAge,
-    isActive: player.id === game.activePlayer.id
+    isActive: player.id === game.activePlayer.id,
+    venusNextExtension: game.venusNextExtension,
+    venusScaleLevel: game.getVenusScaleLevel()
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -322,7 +326,8 @@ function getWaitingFor(
     players: undefined,
     availableSpaces: undefined,
     max: undefined,
-    microbes: undefined
+    microbes: undefined,
+    floaters: undefined
   };
   switch (waitingFor.inputType) {
     case PlayerInputTypes.AND_OPTIONS:
@@ -339,6 +344,7 @@ function getWaitingFor(
       result.cards = (waitingFor as SelectHowToPayForCard)
           .cards.map((card) => card.name);
       result.microbes = (waitingFor as SelectHowToPayForCard).microbes;
+      result.floaters = (waitingFor as SelectHowToPayForCard).floaters;
       result.canUseHeat = (waitingFor as SelectHowToPayForCard).canUseHeat;
       break;
     case PlayerInputTypes.SELECT_CARD:
@@ -409,7 +415,9 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       titaniumValue: player.titaniumValue,
       victoryPoints: player.victoryPoints,
       victoryPointsBreakdown: player.victoryPointsBreakdown,
-      isActive: player.id === game.activePlayer.id
+      isActive: player.id === game.activePlayer.id,
+      venusNextExtension: game.venusNextExtension,
+      venusScaleLevel: game.getVenusScaleLevel()
     } as PlayerModel;
   });
 }

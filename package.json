@@ -32,10 +32,10 @@
     "build": "lessc src/styles/common.less styles.css && tsc --build tsconfig.json && webpack --config webpack.config.js",
     "start": "lessc src/styles/common.less styles.css && tsc --build tsconfig.json && webpack --config webpack.config.js && node dist/server.js",
     "pretest": "tsc --build tsconfig-test.json",
-    "test": "mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js dist/tests/cards/corporation/**.spec.js dist/tests/cards/prelude/**.spec.js",
+    "test": "mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js dist/tests/cards/corporation/**.spec.js dist/tests/cards/prelude/**.spec.js dist/tests/cards/venusNext/**.spec.js",
     "testgiven": "tsc --build tsconfig-test.json && mocha",
     "precover": "tsc --build tsconfig-test.json",
-    "cover": "nyc mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js dist/tests/cards/corporation/**.spec.js dist/tests/cards/prelude/**.spec.js"
+    "cover": "nyc mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js dist/tests/cards/corporation/**.spec.js dist/tests/cards/prelude/**.spec.js dist/tests/cards/venusNext/**.spec.js"
   },
   "repository": {
     "type": "git",

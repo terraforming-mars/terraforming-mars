@@ -1,5 +1,5 @@
 import {Player} from './Player';
-import {Dealer} from './Dealer';
+import { Dealer, ALL_VENUS_CORPORATIONS } from './Dealer';
 import {ISpace} from './ISpace';
 import {SpaceType} from './SpaceType';
 import {TileType} from './TileType';
@@ -25,17 +25,26 @@ import {ALL_PRELUDE_CORPORATIONS} from './Dealer';
 import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
 import { Resources } from "./Resources";
+import { Aphrodite } from './cards/venusNext/Aphrodite';
+import { ORIGINAL_MILESTONES, VENUS_MILESTONES } from './milestones/Milestones';
+import { ORIGINAL_AWARDS, VENUS_AWARDS } from './awards/Awards';
+import { SpaceName } from './SpaceName';
+import { Colony } from './OriginalBoard';
+
 
 export class Game {
     public activePlayer: Player;
     public claimedMilestones: Array<ClaimedMilestone> = [];
+    public milestones: Array<IMilestone> = [];
     public dealer: Dealer;
     public fundedAwards: Array<FundedAward> = [];
+    public awards: Array<IAward> = [];
     public generation: number = 1;
     private draftRound: number = 1;
     public phase: Phase = Phase.RESEARCH;
     private donePlayers: Set<Player> = new Set<Player>();
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
+    private venusScaleLevel: number = constants.MIN_VENUS_SCALE;
     private passedPlayers: Set<Player> = new Set<Player>();
     private researchedPlayers: Set<Player> = new Set<Player>();
     private draftedPlayers: Set<Player> = new Set<Player>();
@@ -45,18 +54,33 @@ export class Game {
     public gameAge: number = 0; // Each log event increases it
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
 
+    private tempMC: number = 0;
+    private tempSteel: number = 0;
+    private tempTitanium: number = 0;
+    private tempPlants: number = 0;
+    private tempHeat: number = 0;
+    private tempTR: number = 0;
+    private tempCards: Array<IProjectCard> = [];
+    private tempHeatProduction: number = 0;
+    private tempVenusScaleLevel: number = 0;
+
     constructor(
       public id: string,
       private players: Array<Player>,
       private first: Player,
       private preludeExtension: boolean = false,
-      private draftVariant: boolean = false
+      private draftVariant: boolean = false,
+      public venusNextExtension: boolean = false
     ) {
       this.activePlayer = first;
+      this.venusNextExtension = venusNextExtension;
       this.preludeExtension = preludeExtension;
       this.draftVariant = draftVariant;
-      this.dealer = new Dealer(this.preludeExtension);
+      this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension);
 
+      this.milestones.push(...ORIGINAL_MILESTONES);
+      this.awards.push(...ORIGINAL_AWARDS);
+    
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
       if (players.length === 1) {
@@ -68,6 +92,18 @@ export class Game {
       if (this.preludeExtension) {
         corporationCards.push(...ALL_PRELUDE_CORPORATIONS);
         corporationCards = this.dealer.shuffleCards(corporationCards);
+      }
+
+      // Add Venus Next corporations cards, board colonies and milestone / award
+      if (this.venusNextExtension) {
+        corporationCards.push(...ALL_VENUS_CORPORATIONS);
+        corporationCards = this.dealer.shuffleCards(corporationCards);
+        this.milestones.push(...VENUS_MILESTONES);
+        this.awards.push(...VENUS_AWARDS);
+        this.board.spaces.push(new Colony(SpaceName.DAWN_CITY));
+        this.board.spaces.push(new Colony(SpaceName.LUNA_METROPOLIS));
+        this.board.spaces.push(new Colony(SpaceName.MAXWELL_BASE));
+        this.board.spaces.push(new Colony(SpaceName.STRATOPOLIS));
       }
 
       // Give each player their corporation cards
@@ -99,6 +135,12 @@ export class Game {
     }
 
     private marsIsTerraformed(): boolean {
+      if (this.players.length === 1 && this.venusNextExtension) {
+        return  this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL &&
+                this.temperature >= constants.MAX_TEMPERATURE &&
+                this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES &&
+                this.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
+      }
       return this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL &&
              this.temperature >= constants.MAX_TEMPERATURE &&
              this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
@@ -201,104 +243,58 @@ export class Game {
     }
 
     private pickCorporationCard(player: Player): PlayerInput {
-      const dealtCards: Array<IProjectCard> = [
-        this.dealer.dealCard(),
-        this.dealer.dealCard(),
-        this.dealer.dealCard(),
-        this.dealer.dealCard(),
-        this.dealer.dealCard(),
-        this.dealer.dealCard(),
-        this.dealer.dealCard(),
-        this.dealer.dealCard(),
-        this.dealer.dealCard(),
-        this.dealer.dealCard()
-      ];
+      let dealtCards: Array<IProjectCard> = [];
+      let corporation: CorporationCard;
+      const result: AndOptions = new AndOptions(() => { this.playCorporationCard(player, corporation); return undefined; });
+      for (let i = 0; i < 10; i++) {
+        dealtCards.push(this.dealer.dealCard());
+      }
+
+      result.title = "Select corporation and initial cards";
+      result.options.push(
+        new SelectCard<CorporationCard>(
+          'Select corporation', player.dealtCorporationCards,
+          (foundCards: Array<CorporationCard>) => {
+            corporation = foundCards[0];
+            return undefined;
+          }
+        )
+      );
 
       if (this.preludeExtension) {
-        const preludeDealtCards: Array<IProjectCard> = [
-          this.dealer.dealPreludeCard(),
-          this.dealer.dealPreludeCard(),
-          this.dealer.dealPreludeCard(),
-          this.dealer.dealPreludeCard()
-        ];
+        let preludeDealtCards: Array<IProjectCard> = [];
 
-        let corporation: CorporationCard;
-        return new AndOptions(
-            () => {
-              this.playCorporationCard(player, corporation);
+        for (let i = 0; i < 4; i++) {
+          preludeDealtCards.push(this.dealer.dealPreludeCard());
+        }
+
+        result.options.push(
+          new SelectCard(
+            'Select 2 Prelude cards', preludeDealtCards,
+            (preludeCards: Array<IProjectCard>) => {
+              player.preludeCardsInHand.push(preludeCards[0], preludeCards[1]);
               return undefined;
-            },
-            new SelectCard<CorporationCard>(
-                'Select corporation', player.dealtCorporationCards,
-                (foundCards: Array<CorporationCard>) => {
-                  corporation = foundCards[0];
-                  return undefined;
-                }
-            ),
-            new SelectCard(
-                'Select 2 Prelude cards',
-                preludeDealtCards,
-                (preludeCards: Array<IProjectCard>) => {
-                  player.preludeCardsInHand.push(preludeCards[0], preludeCards[1]);
-                  return undefined;
-                }, 2, 2
-            ),
-            new SelectCard(
-                'Select initial cards to buy',
-                dealtCards,
-                (foundCards: Array<IProjectCard>) => {
-                // Pay for cards
-                  for (const foundCard of foundCards) {
-                    player.cardsInHand.push(foundCard);
-                  }
-                  for (const dealt of dealtCards) {
-                    if (
-                      foundCards.find(
-                          (foundCard) => foundCard.name === dealt.name
-                      ) === undefined
-                    ) {
-                      this.dealer.discard(dealt);
-                    }
-                  }
-                  return undefined;
-                }, 10, 0
-            )
-        );
-      } else {
-        let corporation: CorporationCard;
-        return new AndOptions(
-            () => {
-              this.playCorporationCard(player, corporation);
-              return undefined;
-            },
-            new SelectCard<CorporationCard>(
-                'Select corporation',
-                player.dealtCorporationCards,
-                (foundCards: Array<CorporationCard>) => {
-                  corporation = foundCards[0];
-                  return undefined;
-                }
-            ),
-            new SelectCard(
-                'Select initial cards to buy',
-                dealtCards,
-                (foundCards: Array<IProjectCard>) => {
-                // Pay for cards
-                  for (const foundCard of foundCards) {
-                    player.cardsInHand.push(foundCard);
-                  }
-                  for (const dealtCard of dealtCards) {
-                    if (foundCards.find(
-                        (foundCard) => foundCard.name === dealtCard.name
-                    ) === undefined) {
-                      this.dealer.discard(dealtCard);
-                    }
-                  }
-                  return undefined;
-                }, 10, 0
-            )
+            }, 2, 2
+          )
         );
       }
+
+      result.options.push(
+        new SelectCard(
+          'Select initial cards to buy', dealtCards,
+          (foundCards: Array<IProjectCard>) => {
+            for (const dealt of dealtCards) {
+              if (foundCards.find((foundCard) => foundCard.name === dealt.name)) {
+                player.cardsInHand.push(dealt);
+              } else {
+                this.dealer.discard(dealt);
+              }
+            }
+            return undefined;
+          }, 10, 0
+        )
+      );
+      return result;
     }
 
     private hasPassedThisActionPhase(player: Player): boolean {
@@ -365,18 +361,65 @@ export class Game {
 
       if (this.gameIsOver()) {
         this.gotoFinalGreeneryPlacement();
+        return;
+      } 
+      // Venus Next Solar phase
+      if (this.venusNextExtension) {
+        this.gotoWorldGovernmentTerraforming();
+        return;
+      }
+      this.gotoDraftOrResearch();
+    }
+
+    private gotoDraftOrResearch() {
+      this.generation++;
+      this.incrementFirstPlayer();
+      if (this.draftVariant) {
+        this.gotoDraftingPhase();
       } else {
-        
-        this.generation++;
-        this.incrementFirstPlayer();
-       
-        if (this.draftVariant) {
-          this.gotoDraftingPhase();
-        } else {
-          this.gotoResearchPhase();
-        }
+        this.gotoResearchPhase();
       }
     }
+
+    private gotoWorldGovernmentTerraforming() {
+      //Snapshot player's resources
+      this.tempMC = this.first.megaCredits;
+      this.tempSteel = this.first.steel;
+      this.tempTitanium = this.first.titanium;
+      this.tempPlants = this.first.plants;
+      this.tempHeat = this.first.heat;
+      this.tempTR = this.first.terraformRating;
+      this.tempCards = this.first.cardsInHand;
+      this.tempHeatProduction = this.first.getProduction(Resources.HEAT);
+      this.tempVenusScaleLevel = this.venusScaleLevel;
+
+      this.first.worldGovernmentTerraforming(this);
+    }
+
+    public doneWorldGovernmentTerraforming() {
+      //Revert snapshoted player's resources
+      this.first.megaCredits = this.tempMC;
+      this.first.steel = this.tempSteel;
+      this.first.titanium = this.tempTitanium;
+      this.first.plants = this.tempPlants;
+      this.first.heat = this.tempHeat;
+      this.first.terraformRating = this.tempTR;
+      this.first.cardsInHand = this.tempCards;
+
+      if (this.first.getProduction(Resources.HEAT) > this.tempHeatProduction) {
+        this.first.setProduction(Resources.HEAT, this.tempHeatProduction - this.first.getProduction(Resources.HEAT));
+      }
+
+      // Check for Aphrodite corporation
+      if (this.tempVenusScaleLevel < this.venusScaleLevel 
+          && this.first.corporationCard !== undefined
+          && this.first.corporationCard.name === new Aphrodite().name) {
+            this.first.megaCredits += 2;
+      }
+
+      //Carry on to next phase
+      this.gotoDraftOrResearch();
+    }  
 
     private allPlayersHavePassed(): boolean {
       for (const player of this.players) {
@@ -524,8 +567,12 @@ export class Game {
       if (this.phase == Phase.END) return;
       this.phase = Phase.END;
 
-      // Give players any victory points from cards
+      // Give players any victory points from cards and corporations
       this.players.forEach((player) => {
+        if (player.corporationCard !== undefined && player.corporationCard.getVictoryPoints !== undefined) {
+          player.victoryPoints += player.corporationCard.getVictoryPoints(player, this);
+          player.victoryPointsBreakdown.VPdetails.push(player.corporationCard.name + " : " + player.corporationCard.getVictoryPoints(player, this));
+        }
         for (let playedCard of player.playedCards) {
           if (playedCard.getVictoryPoints !== undefined) {
             player.victoryPoints += playedCard.getVictoryPoints(player, this);
@@ -652,6 +699,46 @@ export class Game {
     public getOxygenLevel(): number {
       return this.oxygenLevel;
     }
+
+    public increaseVenusScaleLevel(
+      player: Player, steps: 1 | 2 | 3): SelectSpace | undefined {
+    if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
+      return undefined;
+    }
+    if (steps > 1 && this.venusScaleLevel + 2 * steps > constants.MAX_VENUS_SCALE) {
+      steps = (steps == 3) ? 2 : 1; // typing disallows decrement
+      return this.increaseVenusScaleLevel(player, steps);
+    }
+    this.venusScaleLevel += 2 * steps;
+    player.terraformRating += steps;
+
+    // Check for Aphrodite corporation
+    this.players.forEach((player) => {
+      if (player.corporationCard !== undefined && player.corporationCard.name === new Aphrodite().name ) {
+        player.megaCredits += 2 * steps;
+      }
+    });
+
+    if (this.venusScaleLevel === 8 
+        || (steps === 2 && this.venusScaleLevel === 10) 
+        || (steps === 3 && this.venusScaleLevel === 12)
+    ) {
+      player.cardsInHand.push(this.dealer.dealCard());
+    }
+
+    if (this.venusScaleLevel === 16 
+        || (steps === 2 && this.venusScaleLevel === 18) 
+        || (steps === 3 && this.venusScaleLevel === 20)
+    ) {
+      player.terraformRating++;
+    }    
+
+    return undefined;
+  }
+
+  public getVenusScaleLevel(): number {
+    return this.venusScaleLevel;
+  }
 
     public increaseTemperature(
         player: Player, steps: 1 | 2 | 3): SelectSpace | undefined {
@@ -883,6 +970,21 @@ export class Game {
       }
       return result;
     }
+
+    public drawCardsByResource(resource: ResourceType, total: number): Array<IProjectCard> {
+      let cardsToDraw = 0;
+      const result: Array<IProjectCard> = [];
+      while (cardsToDraw < total) {
+        const projectCard = this.dealer.dealCard();
+        if (projectCard.resourceType !== undefined && projectCard.resourceType === resource ) {
+          cardsToDraw++;
+          result.push(projectCard);
+        } else {
+          this.dealer.discard(projectCard);
+        }
+      }
+      return result;
+    }   
 
     public log(message: String) {
       this.gameLog.push(message);

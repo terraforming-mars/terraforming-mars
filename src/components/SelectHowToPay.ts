@@ -9,6 +9,7 @@ interface SelectHowToPayModel {
     steel: number;
     titanium: number;
     microbes: number;
+    floaters: number;
     warning: string | undefined;
 }
 
@@ -21,6 +22,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
             steel: 0,
             titanium: 0,
             microbes: 0,
+            floaters: 0,
             warning: undefined
         } as SelectHowToPayModel;
     },
@@ -38,7 +40,8 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                 megaCredits: this.$data.megaCredits,
                 steel: this.$data.steel,
                 titanium: this.$data.titanium,
-                microbes: 0
+                microbes: 0,
+                floaters: 0
             };
             if (htp.megaCredits > this.player.megaCredits) {
                 this.$data.warning = "You don't have that many mega credits";
@@ -56,7 +59,14 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                 this.$data.warning = "You don't have enough steel";
                 return;
             }
-            if (this.playerinput.amount > 0 && htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) < this.playerinput.amount) {
+            if (this.playerinput.amount > 0 && 
+                htp.heat + 
+                htp.megaCredits + 
+                (htp.steel * this.player.steelValue) + 
+                (htp.titanium * this.player.titaniumValue) +
+                (htp.microbes * 2) +
+                (htp.floaters * 3)
+                < this.playerinput.amount) {
                 this.$data.warning = "Haven't spent enough";
                 return;
             }
@@ -67,7 +77,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
     <div class="payments_cont"> 
         <section class="nes-container with-title" v-trim-whitespace>
 
-            <h3 class="payments_title">"How to play?"</h3>
+            <h3 class="payments_title">"How to pay?"</h3>
 
             <div class="payments_type" v-if="playerinput.canUseSteel">
                 <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>

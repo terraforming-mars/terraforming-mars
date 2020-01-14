@@ -12,7 +12,7 @@ class Space implements ISpace {
     }
 }
 
-class Colony extends Space {
+export class Colony extends Space {
     constructor(id: string) {
         super(id, SpaceType.COLONY, [], -1, -1);
     }
@@ -42,7 +42,7 @@ export class OriginalBoard {
     public spaces: Array<ISpace> = [];
     constructor() {
         this.spaces.push(new Colony(SpaceName.GANYMEDE_COLONY)); 
-        this.spaces.push(new Colony(SpaceName.PHOBOS_SPACE_HAVEN));
+        this.spaces.push(new Colony(SpaceName.PHOBOS_SPACE_HAVEN));                    
 
         let idx = 3, pos_x = 4, pos_y=0;
 
@@ -265,7 +265,7 @@ export class OriginalBoard {
                 return space;
             }
         }
-    }
+    }    
 
     private canPlaceTile(space: ISpace): boolean {
         return space !== undefined && space.tile === undefined && space instanceof Land && space.id !== SpaceName.NOCTIS_CITY;

@@ -3,6 +3,7 @@ import { Mayor } from "./Mayor";
 import { Gardener } from "./Gardener";
 import { Builder } from "./Builder";
 import { Planner } from "./Planner";
+import { Hoverlord } from "./Hoverlord"
 import { IMilestone } from "./IMilestone";
 
 export const ORIGINAL_MILESTONES: Array<IMilestone> = [
@@ -10,5 +11,9 @@ export const ORIGINAL_MILESTONES: Array<IMilestone> = [
     new Mayor(),
     new Gardener(),
     new Builder(),
-    new Planner()
+    new Planner(),
+]
+
+export const VENUS_MILESTONES: Array<IMilestone> = [
+    new Hoverlord()
 ]

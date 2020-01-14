@@ -7,6 +7,7 @@ interface CreateGameModel {
     players: Array<NewPlayerModel>;
     prelude: boolean;
     draftVariant: boolean;
+    venusNext: boolean;
 }
 
 interface NewPlayerModel {
@@ -28,7 +29,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 { name: "", color: Color.BLACK, beginner: false, first: false }
             ],
             prelude: false,
-            draftVariant: false
+            draftVariant: false,
+            venusNext: false
         } as CreateGameModel
     },
     methods: {
@@ -39,6 +41,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             }).filter((player: any) => player.name);
             const prelude = this.$data.prelude;
             const draftVariant = this.$data.draftVariant;
+            const venusNext = this.$data.venusNext;
             const xhr = new XMLHttpRequest();
             xhr.open("PUT", "/game");
             xhr.onerror = function () {
@@ -54,8 +57,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 }
             };
             xhr.responseType = "json";
+            console.log(JSON.stringify({
+                players: players, prelude, draftVariant, venusNext
+            }));
             xhr.send(JSON.stringify({
-                players: players, prelude, draftVariant
+                players: players, prelude, draftVariant, venusNext
             }));
         }
     },
@@ -88,14 +94,20 @@ export const CreateGameForm = Vue.component("create-game-form", {
                     <span>Goes First</span>
                 </label>
             </div>
-            <label>
-                    <input type="checkbox" class="nes-checkbox" v-model="prelude" />
-                    <span>Use prelude extension ?</span>
-            </label>
-            <label>
-                    <input type="checkbox" class="nes-checkbox" v-model="draftVariant" />
-                    <span>Use draft variant ?</span>
-            </label>			
+            <div>
+                <label>
+                        <input type="checkbox" class="nes-checkbox" v-model="prelude" />
+                        <span>Use prelude extension?</span>
+                </label>
+                <label>
+                        <input type="checkbox" class="nes-checkbox" v-model="venusNext" />
+                        <span>Use Venus Next extension?</span>
+                </label>			
+                <label>
+                        <input type="checkbox" class="nes-checkbox" v-model="draftVariant" />
+                        <span>Use draft variant?</span>
+                </label>
+            </div>			
             <button class="nes-btn is-primary" v-on:click="createGame">Create Game</button>
         </div>
     `

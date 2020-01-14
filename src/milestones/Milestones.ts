@@ -12,5 +12,8 @@ export const ORIGINAL_MILESTONES: Array<IMilestone> = [
     new Gardener(),
     new Builder(),
     new Planner(),
+]
+
+export const VENUS_MILESTONES: Array<IMilestone> = [
     new Hoverlord()
 ]

@@ -259,6 +259,8 @@ function getPlayer(player: Player, game: Game): string {
         milestone: claimedMilestone.milestone.name
       };
     }),
+    milestones: game.milestones,
+    awards: game.awards,
     color: player.color,
     corporationCard: player.corporationCard ?
       player.corporationCard.name : undefined,

@@ -26,12 +26,16 @@ import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
 import { Resources } from "./Resources";
 import { Aphrodite } from './cards/venusNext/Aphrodite';
+import {ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import { ORIGINAL_AWARDS, VENUS_AWARDS } from './awards/Awards';
 
 export class Game {
     public activePlayer: Player;
     public claimedMilestones: Array<ClaimedMilestone> = [];
+    public milestones: Array<IMilestone> = [];
     public dealer: Dealer;
     public fundedAwards: Array<FundedAward> = [];
+    public awards: Array<IAward> = [];
     public generation: number = 1;
     private draftRound: number = 1;
     public phase: Phase = Phase.RESEARCH;
@@ -70,8 +74,10 @@ export class Game {
       this.preludeExtension = preludeExtension;
       this.draftVariant = draftVariant;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension);
-    
 
+      this.milestones.push(...ORIGINAL_MILESTONES);
+      this.awards.push(...ORIGINAL_AWARDS);
+    
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
       if (players.length === 1) {
@@ -89,6 +95,8 @@ export class Game {
       if (this.venusNextExtension) {
         corporationCards.push(...ALL_VENUS_CORPORATIONS);
         corporationCards = this.dealer.shuffleCards(corporationCards);
+        this.milestones.push(...VENUS_MILESTONES);
+        this.awards.push(...VENUS_AWARDS);
       }
 
       // Give each player their corporation cards

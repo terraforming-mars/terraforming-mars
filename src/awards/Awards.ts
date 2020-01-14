@@ -11,6 +11,9 @@ export const ORIGINAL_AWARDS: Array<IAward> = [
     new Banker(),
     new Scientist(),
     new Thermalist(),
-    new Miner(),
+    new Miner()
+]
+
+export const VENUS_AWARDS: Array<IAward> = [
     new Venuphile()
 ]

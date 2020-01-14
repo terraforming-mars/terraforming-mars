@@ -13,7 +13,7 @@ describe("Gyropolis", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         player.setProduction(Resources.ENERGY,2);
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player, game)).to.eq(true);
         const action = card.play(player, game) as SelectSpace;
         expect(action).not.to.eq(undefined);
         expect(action.cb(action.availableSpaces[0])).to.eq(undefined);

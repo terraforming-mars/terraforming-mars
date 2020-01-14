@@ -5,6 +5,7 @@ import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { Game } from '../../Game';
+import { SelectCard } from "../../inputs/SelectCard";
 
 export class StratosphericBirds implements IActionCard,IProjectCard {
     public cost: number = 12;
@@ -13,10 +14,24 @@ export class StratosphericBirds implements IActionCard,IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.ANIMAL;
     public canPlay(player: Player, game: Game): boolean {
+        const cardsWithFloater = player.getResourceCards(ResourceType.FLOATER);
+        if (cardsWithFloater.length === 0) return false;
         return game.getVenusScaleLevel() >= 12 - (2 * player.getRequirementsBonus(game, true));
     }
-    public play() {
-        return undefined;
+    public play(player: Player) {
+        const cardsWithFloater = player.getResourceCards(ResourceType.FLOATER);
+        if (cardsWithFloater.length === 1) {
+            player.removeResourceFrom(cardsWithFloater[0], 1)
+            return undefined;
+        }
+        return new SelectCard(
+            "Select card to remove 1 floater from", 
+            cardsWithFloater,
+            (foundCards) => {
+                player.removeResourceFrom(foundCards[0], 1)
+                return undefined;
+            }
+        );
     }
     public canAct(): boolean {
         return true;

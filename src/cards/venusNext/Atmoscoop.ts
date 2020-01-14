@@ -11,7 +11,6 @@ import { SelectCard } from '../../inputs/SelectCard';
 import { AndOptions } from '../../inputs/AndOptions';
 
 
-
 export class Atmoscoop implements IProjectCard {
     public cost: number = 22;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
@@ -22,19 +21,15 @@ export class Atmoscoop implements IProjectCard {
       }
     public play(player: Player, game: Game) {
         var opts: Array<OrOptions | SelectCard<IProjectCard>> = [];
-        let addTempOrVenus: boolean = false;
-        let addSelectcard: boolean = false;
         const floaterCards = player.getResourceCards(ResourceType.FLOATER);
-        const tempOrVenus = new  OrOptions(
-            new SelectOption("Raise temperature 2 steps", () => {
-                game.increaseTemperature(player,2);
-                return undefined;
-            }),
-            new SelectOption("Raise Venus 2 steps", () => {
-                game.increaseVenusScaleLevel(player,2);
-                return undefined;
-            })
-        );
+        const raiseTemp = new SelectOption("Raise temperature 2 steps", () => {
+            return game.increaseTemperature(player,2);
+        });
+        const raiseVenus = new SelectOption("Raise Venus 2 steps", () => {
+            return game.increaseVenusScaleLevel(player,2);
+        });
+
+        const tempOrVenus = new OrOptions(raiseTemp, raiseVenus);
         
         const chooseCard = new SelectCard(
             'Select card to add 2 floaters',
@@ -46,26 +41,18 @@ export class Atmoscoop implements IProjectCard {
         );
 
         if (game.getTemperature() < MAX_TEMPERATURE && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
-            addTempOrVenus = true;
+            opts.push(tempOrVenus);
         } else if (game.getTemperature() < MAX_TEMPERATURE) {
-            addTempOrVenus = false;
-            game.increaseTemperature(player,2);
+            opts.push(new OrOptions(raiseTemp));
         } else if (game.getVenusScaleLevel() < MAX_VENUS_SCALE){
-            addTempOrVenus = false;
-            game.increaseVenusScaleLevel(player,2);
-        } else {
-            addTempOrVenus = false;
-        }
+            opts.push(new OrOptions(raiseVenus));
+        } 
 
-        
         if (floaterCards.length > 0) {
-            addSelectcard = true;
+            opts.push(chooseCard);
         }
 
-        if (!addSelectcard && !addTempOrVenus) return undefined;
-
-        if (addTempOrVenus) opts.push(tempOrVenus);
-        if (addSelectcard) opts.push(chooseCard);
+        if (opts.length === 0) return undefined;
 
         return new AndOptions(
             () => {

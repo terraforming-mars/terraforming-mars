@@ -26,7 +26,7 @@ import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
 import { Resources } from "./Resources";
 import { Aphrodite } from './cards/venusNext/Aphrodite';
-import {ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import { ORIGINAL_MILESTONES, VENUS_MILESTONES } from './milestones/Milestones';
 import { ORIGINAL_AWARDS, VENUS_AWARDS } from './awards/Awards';
 
 export class Game {
@@ -91,7 +91,7 @@ export class Game {
         corporationCards = this.dealer.shuffleCards(corporationCards);
       }
 
-      // Add Venus Next corporations cards
+      // Add Venus Next corporations cards and milestone / award
       if (this.venusNextExtension) {
         corporationCards.push(...ALL_VENUS_CORPORATIONS);
         corporationCards = this.dealer.shuffleCards(corporationCards);

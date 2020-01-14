@@ -23,7 +23,7 @@ export class SponsoredAcademies implements IProjectCard {
     public play(player: Player, game: Game) {
         return new  SelectCard(
             'Select 1 card to discard',
-            player.cardsInHand,
+            player.cardsInHand.filter((c) => c.name !== this.name),
             (foundCards: Array<IProjectCard>) => {
               player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
               game.dealer.discard(foundCards[0]);

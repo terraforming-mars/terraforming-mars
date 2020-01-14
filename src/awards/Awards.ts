@@ -3,8 +3,8 @@ import { Banker } from "./Banker";
 import { Scientist } from "./Scientist";
 import { Thermalist } from "./Thermalist";
 import { Miner } from "./Miner";
+import { Venuphile } from "./Venuphile"
 import { IAward } from "./IAward";
-import { Venuphile } from './Venuphile';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
     new Landlord(),

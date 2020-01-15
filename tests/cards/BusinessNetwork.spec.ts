@@ -59,8 +59,8 @@ describe("BusinessNetwork", function () {
         const subAction: SelectHowToPay = (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]) as SelectHowToPay;
         expect(subAction).not.to.eq(undefined);
         expect(subAction.canUseHeat).to.eq(true);
-        expect(function () { subAction.cb({heat: 0, megaCredits: 0, steel: 0, titanium: 0, microbes: 0 }); }).to.throw();
-        subAction.cb({heat: 1, megaCredits: 2, steel: 0, titanium: 0, microbes: 0 });
+        expect(function () { subAction.cb({heat: 0, megaCredits: 0, steel: 0, titanium: 0, microbes: 0 , floaters: 0}); }).to.throw();
+        subAction.cb({heat: 1, megaCredits: 2, steel: 0, titanium: 0, microbes: 0 , floaters: 0});
         expect(player.cardsInHand.length).to.eq(1);
         expect(player.heat).to.eq(0);
         expect(player.megaCredits).to.eq(1);

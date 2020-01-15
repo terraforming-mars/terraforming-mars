@@ -4,7 +4,6 @@ import { Player } from "../../Player";
 import { CorporationCard } from "./../corporation/CorporationCard";
 import { IProjectCard } from "../IProjectCard";
 import { Game } from "../../Game";
-import { ORIGINAL_AWARDS } from "../../awards/Awards";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 import { IAward } from "../../awards/IAward";
@@ -28,7 +27,7 @@ export class Vitor implements CorporationCard {
         }
         const freeAward = new OrOptions();
         freeAward.title = "Select award to fund";
-        freeAward.options = ORIGINAL_AWARDS.map((award) => this.selectAwardToFund(player, game, award));
+        freeAward.options = game.awards.map((award) => this.selectAwardToFund(player, game, award));
         return freeAward;
     }
 

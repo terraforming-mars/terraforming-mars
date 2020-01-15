@@ -73,12 +73,13 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <div class="player_home_block">
                     <a name="board" class="player_home_anchor"></a>
-                    <board :spaces="player.spaces"></board>
+                    <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel"></board>
 
                     <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature"></global-parameters>
+
                     <div v-if="player.players.length > 1" class="player_home_block--millestones-and-awards">
-                        <milestone/>
-                        <award/>
+                        <milestone :milestones_list="player.milestones" />
+                        <award :awards_list="player.awards" />
                     </div>
                 </div>
 

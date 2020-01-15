@@ -1,45 +1,39 @@
 
 import Vue from "vue";
-import { SpaceType } from "../SpaceType";
 
 import { SpaceModel } from "../models/SpaceModel";
 
 import {Bonus} from "./Bonus";
 import {Tile} from "./Tile";
+import { Venus } from "./Venus";
+import { BoardMixin } from "./BoardMixin";
 
 export const Board = Vue.component("board", {
-    props: ["spaces"],
+    props: ["spaces", "venusNextExtension", "venusScaleLevel"],
     components: {
         "bonus": Bonus,
-        "tile": Tile
+        "tile": Tile,
+        "venus": Venus
     },
     data: function () {
         return {}
     },
+    mixins: [BoardMixin],
     methods: {
+        getSpacesWithTile: function(): Array<SpaceModel> {
+            const boardSpaces: Array<SpaceModel> = (this as any).getMainSpaces().filter(
+                (space: SpaceModel) => space.tileType != undefined || space.color != undefined
+            );
+            boardSpaces.sort((s1: any, s2: any) => {return s1.id - s2.id});
+            return boardSpaces;
+        },
         getSpacesWithBonus: function(): Array<SpaceModel> {
             const boardSpaces: Array<SpaceModel> = this.spaces.filter((space: SpaceModel) => space.bonus.length > 0);
             boardSpaces.sort((s1: any, s2: any) => {return s1.id - s2.id});
             return boardSpaces;
         },
-        getSpacesWithTile: function(): Array<SpaceModel> {
-            const boardSpaces: Array<SpaceModel> = this.spaces.filter((space: SpaceModel) => space.tileType != undefined || space.color != undefined);
-            boardSpaces.sort((s1: any, s2: any) => {return s1.id - s2.id});
-            return boardSpaces;
-        },
-        getAllSpaces: function(): Array<SpaceModel> {
-            const boardSpaces: Array<SpaceModel> = this.spaces;
-            boardSpaces.sort((s1: any, s2: any) => {return s1.id - s2.id});
-            return boardSpaces;
-        },
-        getStroke: function(space: SpaceModel): string {
-            return (space.spaceType == SpaceType.OCEAN) ? '#1bade0': '#fff';
-        },
-        getPosCssClass: function(space: SpaceModel): string {
-            return "board_space_pos--" + space.id.toString();
-        },
-        getKey: function(prefix: string, space: SpaceModel): string {
-            return prefix + "_component_item_" + space.id.toString();
+        getMainSpaces: function (): Array<SpaceModel> {
+            return (this as any).getAllSpaces().filter((s: SpaceModel) => {return parseInt(s.id) < 70})
         }
     },
     template: `
@@ -62,7 +56,7 @@ export const Board = Vue.component("board", {
                     </symbol>
                 </defs>
                 <g transform="translate(1, 1)" id="main_grid">
-                    <use v-for="space in getAllSpaces()"
+                    <use v-for="space in getMainSpaces()"
                         v-if="space.tileType === undefined"
                         :data_space_id="space.id" 
                         class="board_space" 
@@ -77,6 +71,7 @@ export const Board = Vue.component("board", {
                 <g id="ganymede_colony">
                     <text x="67" y="462" class="board_caption">Ganymede colony</text>
                 </g>
+
                 <g id="phobos_space_heaven">
                     <text x="2" y="15" class="board_caption">Phobos space haven</text>
                 </g>
@@ -117,6 +112,8 @@ export const Board = Vue.component("board", {
                 </g>
             </svg>
         </div>
+
+        <venus v-if="venusNextExtension" :spaces="getVenusSpaces()" :venusScaleLevel="venusScaleLevel"></venus>
     </div>
     `
 });

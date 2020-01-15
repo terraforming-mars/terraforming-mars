@@ -24,12 +24,7 @@ export class AquiferPumping implements IActionCard, IProjectCard {
       return undefined;
     }
     public canAct(player: Player, game: Game): boolean {
-      // No oceans available anymore
-      if (game.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES) return false;
-
-      return (player.steelValue * player.steel) +
-              player.megaCredits +
-              (player.canUseHeatAsMegaCredits ? player.heat : 0) >= 8;
+      return player.canAfford(8,true, false) && game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES;
     }
     public action(player: Player, game: Game) {
       let howToPay: HowToPay;

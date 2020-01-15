@@ -10,3 +10,6 @@ export const MAX_TEMPERATURE: number = 8;
 export const MAX_OXYGEN_LEVEL: number = 14;
 export const MIN_TEMPERATURE: number = -30;
 export const MIN_OXYGEN_LEVEL: number = 0;
+export const MIN_VENUS_SCALE: number = 0;
+export const MAX_VENUS_SCALE: number = 30;
+export const AIR_SCRAPING_COST: number = 15;

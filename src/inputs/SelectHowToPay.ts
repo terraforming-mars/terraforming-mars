@@ -13,7 +13,8 @@ export class SelectHowToPay implements PlayerInput {
         public canUseTitanium: boolean,
         public canUseHeat: boolean,
         public amount: number,
-        public cb: (howToPay: HowToPay) => SelectSpace | undefined) {
+        public cb: (howToPay: HowToPay) => SelectSpace | undefined,
+        ) {
     }
 }
 

@@ -238,7 +238,7 @@ export class Game {
       player.megaCredits = corporationCard.startingMegaCredits;
       if (corporationCard.name !== new BeginnerCorporation().name) {
         let cardsToPayFor: number = player.cardsInHand.length;
-        player.megaCredits -= cardsToPayFor * constants.CARD_COST;
+        player.megaCredits -= cardsToPayFor * player.cardCost;
       }
 
       this.playerIsFinishedWithResearchPhase(player);

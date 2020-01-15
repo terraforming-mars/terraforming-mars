@@ -30,6 +30,7 @@ import { ResourceType } from './ResourceType';
 import { Manutech } from './cards/venusNext/Manutech';
 import { Celestic } from './cards/venusNext/Celestic';
 import { Dirigibles } from './cards/venusNext/Dirigibles';
+import { CARD_COST } from './constants';
 
 const INITIAL_ACTION: string = 'INITIAL';
 
@@ -69,6 +70,7 @@ export class Player {
     private lastCardPlayedThisTurn: IProjectCard | undefined;
     private waitingFor?: PlayerInput;
     private postAction: Boolean = false;
+    public cardCost: number = CARD_COST;
 
     constructor(
         public name: string,
@@ -618,9 +620,9 @@ export class Player {
       const payForCards = () => {
         if (htp.heat > 0 && this.canUseHeatAsMegaCredits) {
           this.heat -= htp.heat;
-          this.megaCredits -= (constants.CARD_COST * selectedCards.length - htp.heat);
+          this.megaCredits -= (this.cardCost * selectedCards.length - htp.heat);
         } else {
-          this.megaCredits -= constants.CARD_COST * selectedCards.length;
+          this.megaCredits -= this.cardCost * selectedCards.length;
         }  
         selectedCards.forEach((card) => {
           this.cardsInHand.push(card);
@@ -673,8 +675,7 @@ export class Player {
                 'Select which cards to take into hand',
                 dealtCards,
                 (foundCards: Array<IProjectCard>) => {
-                  htp.megaCredits = foundCards.length *
-                                            constants.CARD_COST;
+                  htp.megaCredits = foundCards.length * this.cardCost;
                   selectedCards = foundCards;
                   payForCards();
                   return undefined;

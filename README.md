@@ -17,4 +17,29 @@ npm install
 npm run start
 ```
 
-This will start the game server listening on the default port of 8080. If you then point a web browser to http://localhost:8080 you will be on the create game screen. 
+This will start the game server listening on the default port of 8080. If you then point a web browser to http://localhost:8080 you will be on the create game screen.
+
+## Contributors ✨
+
+Thanks goes to these wonderful people:
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/bafolts"><img src="https://avatars1.githubusercontent.com/u/2707843?v=3" width="100px;" alt=""/><br />
+        <sub><b>Brian Folts</b></sub><br />All the things</a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/vincentneko"><img src="https://avatars1.githubusercontent.com/u/56086992?v=3" width="100px;" alt=""/><br />
+        <sub><b>Vincent Moreau</b></sub><br />Venus and Prelude</a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/alrusdi"><img src="https://avatars2.githubusercontent.com/u/394311?v=3" width="100px;" alt=""/><br />
+        <sub><b>alrusdi</b></sub><br />Front End</a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/pierrehilbert"><img src="https://avatars0.githubusercontent.com/u/806950?v=3" width="100px;" alt=""/><br />
+        <sub><b>Pierre HILBERT</b></sub><br />Helps with the things</a>
+    </td>
+  </tr>
+</table>

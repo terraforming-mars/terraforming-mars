@@ -35,9 +35,9 @@ export class InventorsGuild implements IActionCard, IProjectCard {
             if (player.canUseHeatAsMegaCredits && player.heat > 0) {
               return new SelectHowToPay(
                 'Select how to pay and buy ' + dealtCard.name, false, false,
-                true, 3,
+                true, player.cardCost,
                 (htp) => {
-                  if (htp.heat + htp.megaCredits < 3) {
+                  if (htp.heat + htp.megaCredits < player.cardCost) {
                     game.dealer.discard(dealtCard);
                     throw new Error('Not enough spent to buy card');
                   }
@@ -49,7 +49,7 @@ export class InventorsGuild implements IActionCard, IProjectCard {
               );
             }
             player.cardsInHand.push(dealtCard);
-            player.megaCredits -= 3;
+            player.megaCredits -= player.cardCost;
             return undefined;
           }, 1, 0
         );

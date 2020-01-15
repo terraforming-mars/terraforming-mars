@@ -6,17 +6,19 @@ import { Player } from "../Player";
 import { TileType } from "../TileType";
 import { ISpace } from "../ISpace";
 import { ResourceType } from "../ResourceType";
+import { cardsList} from "../cardsList";
+
 
 export class Pets implements IProjectCard {
     public cost: number = 10;
     public resourceType: ResourceType = ResourceType.ANIMAL;
     public tags: Array<Tags> = [Tags.EARTH, Tags.ANIMAL];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = "Pets";
+    public name: string = cardsList.PETS;
     public canPlay(): boolean {
         return true;
     }
-    public getVictoryPoints(player: Player) {
+    public getVictoryPoints(player: Player): number {
         return Math.floor(player.getResourcesOnCard(this) / 2);
     }
     public onTilePlaced(player: Player, space: ISpace) {

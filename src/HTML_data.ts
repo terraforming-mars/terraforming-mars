@@ -1,3 +1,5 @@
+import { cardsList } from "./cardsList";
+
 export const HTML_DATA: Map<string, string> =
   new Map ([
     ["Colonizer Training Camp",`
@@ -2522,7 +2524,7 @@ export const HTML_DATA: Map<string, string> =
           </div>
         </div>
 `],
-["Pets",`
+[cardsList.PETS,`
         <div class="title background-color-active">Pets</div>
         <div class="price">10</div>
         ##RESOURCES##
@@ -2542,7 +2544,7 @@ export const HTML_DATA: Map<string, string> =
           </div>
         </div>
 `],
-["Protected Habitats",`
+[cardsList.PROTECTED_HABITATS,`
           <div class="title background-color-active ">Protected Habitats</div>
           <div class="price ">5</div>
           <div class="corporate-icon project-icon"></div>

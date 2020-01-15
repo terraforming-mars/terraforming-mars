@@ -21,8 +21,8 @@ import {SelectPlayer} from './inputs/SelectPlayer';
 import {IMilestone} from './milestones/IMilestone';
 import {StandardProjectType} from './StandardProjectType';
 import * as constants from './constants';
-import {ProtectedHabitats} from './cards/ProtectedHabitats';
-import {Pets} from './cards/Pets';
+//import {ProtectedHabitats} from './cards/ProtectedHabitats';
+//import {Pets} from './cards/Pets';
 import {IAward} from './awards/IAward';
 import { VictoryPointsBreakdown } from './VictoryPointsBreakdown';
 import {Resources} from './Resources';
@@ -31,6 +31,7 @@ import { Manutech } from './cards/venusNext/Manutech';
 import { Celestic } from './cards/venusNext/Celestic';
 import { Dirigibles } from './cards/venusNext/Dirigibles';
 import { CARD_COST } from './constants';
+import { cardsList } from "./cardsList";
 
 const INITIAL_ACTION: string = 'INITIAL';
 
@@ -129,11 +130,16 @@ export class Player {
     public getOtherPlayersWithPlantsToRemove(game: Game): Array<Player> {
       return game.getPlayers().filter((player) => player.id !== this.id && !player.hasProtectedHabitats() && player.plants > 0);
     }
-    public hasProtectedHabitats(): boolean {
+
+    public cardIsInEffect(cardName: cardsList): boolean {
       return this.playedCards.find(
-          (playedCard) => playedCard.name === new ProtectedHabitats().name
-      ) !== undefined;
+        (playedCard) => playedCard.name === cardName) !== undefined;      
     }
+
+    public hasProtectedHabitats(): boolean {
+      return this.cardIsInEffect(cardsList.PROTECTED_HABITATS);
+    }
+    
     public removePlants(removingPlayer: Player, count: number): void {
       if (removingPlayer !== this && this.hasProtectedHabitats()) {
         throw new Error('Can not remove plants due to protected habitats');
@@ -147,7 +153,7 @@ export class Player {
       if (removingPlayer !== this && this.hasProtectedHabitats()) {
         throw new Error('Can not remove animals due to protected habitats');
       }
-      if (card.name === new Pets().name) {
+      if (card.name === cardsList.PETS) {
         throw new Error('Animals may not be removed from pets');
       }
       if (this.getResourcesOnCard(card) === 0) {

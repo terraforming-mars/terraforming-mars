@@ -72,13 +72,17 @@ export class Game {
       private first: Player,
       private preludeExtension: boolean = false,
       private draftVariant: boolean = false,
-      public venusNextExtension: boolean = false
+      public venusNextExtension: boolean = false,
+      public customCorporationsList: boolean = false,
+      public corporationList: Array<CorporationCard> = []
     ) {
       this.activePlayer = first;
       this.venusNextExtension = venusNextExtension;
       this.preludeExtension = preludeExtension;
       this.draftVariant = draftVariant;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension);
+      this.customCorporationsList = customCorporationsList;
+      this.corporationList = corporationList;
 
       this.milestones.push(...ORIGINAL_MILESTONES);
       this.awards.push(...ORIGINAL_AWARDS);
@@ -106,6 +110,11 @@ export class Game {
         this.board.spaces.push(new Colony(SpaceName.LUNA_METROPOLIS));
         this.board.spaces.push(new Colony(SpaceName.MAXWELL_BASE));
         this.board.spaces.push(new Colony(SpaceName.STRATOPOLIS));
+      }
+
+      // Setup custom corporation list
+      if (this.customCorporationsList && this.corporationList.length >= players.length * 2) {
+        corporationCards = this.dealer.shuffleCards(this.corporationList);
       }
 
       // Give each player their corporation cards

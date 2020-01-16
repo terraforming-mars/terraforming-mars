@@ -328,6 +328,7 @@ import { NeutralizerFactory } from './cards/venusNext/NeutralizerFactory';
 import { OrbitalReflectors } from './cards/venusNext/OrbitalReflectors';
 import { MiningQuota } from './cards/venusNext/MiningQuota';
 import { Omnicourt } from './cards/venusNext/Omnicourt';
+import { Polyphemos } from './cards/colonies/Polyphemos';
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -458,6 +459,10 @@ export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [
         new Manutech(),
         new MorningStarInc(),
         new Viron()
+];    
+
+export const ALL_COLONIES_CORPORATIONS: Array<CorporationCard> = [
+    new Polyphemos()
 ];    
 
 export const ALL_PROJECT_CARDS: Array<IProjectCard> = [

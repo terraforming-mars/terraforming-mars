@@ -1,0 +1,17 @@
+import { CorporationCard } from "../corporation/CorporationCard";
+import { Player } from "../../Player";
+import { Tags } from "../Tags";
+import { Resources } from '../../Resources';
+
+export class Polyphemos implements CorporationCard {
+    public name: string = "Polyphemos";
+    public tags: Array<Tags> = [];
+    public startingMegaCredits: number = 50;
+
+    public play(player: Player) {
+        player.setProduction(Resources.MEGACREDITS, 5);
+        player.titanium = 5;
+        player.cardCost = 5;
+        return undefined;
+    }
+}

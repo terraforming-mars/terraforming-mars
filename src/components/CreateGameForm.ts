@@ -2,12 +2,18 @@
 import Vue from "vue";
 import { Color } from "../Color";
 
+import { CorporationCard } from '../cards/corporation/CorporationCard';
+import { ALL_VENUS_CORPORATIONS, ALL_PRELUDE_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_COLONIES_CORPORATIONS } from '../Dealer';
+
 interface CreateGameModel {
     firstIndex: number;
     players: Array<NewPlayerModel>;
     prelude: boolean;
     draftVariant: boolean;
     venusNext: boolean;
+    customCorporationsList: boolean;
+    corporations: Array<CorporationCard>;
+    displayed: boolean;
 }
 
 interface NewPlayerModel {
@@ -30,10 +36,28 @@ export const CreateGameForm = Vue.component("create-game-form", {
             ],
             prelude: false,
             draftVariant: false,
-            venusNext: false
+            venusNext: false,
+            customCorporationsList: false,
+            corporations: [...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS],
+            displayed: false
         } as CreateGameModel
     },
     methods: {
+        toggleDisplayed: function () {
+            this.displayed = !this.displayed;
+        },
+        getOriginalCorps: function () {
+            return ALL_CORPORATION_CARDS;
+        },
+        getPreludeCorps: function () {
+            return ALL_PRELUDE_CORPORATIONS;
+        },
+        getVenusCorps: function () {
+            return ALL_VENUS_CORPORATIONS;
+        },    
+        getColoniesCorps: function () {
+            return ALL_COLONIES_CORPORATIONS;
+        },            
         createGame: function () {
             const players = this.$data.players.slice().map((player: any, index: number) => {
                 player.first = (this.$data.firstIndex === index);
@@ -42,6 +66,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const prelude = this.$data.prelude;
             const draftVariant = this.$data.draftVariant;
             const venusNext = this.$data.venusNext;
+            const corporations = this.$data.corporations;
+            const customCorporationsList = this.$data.customCorporationsList;
             const xhr = new XMLHttpRequest();
             xhr.open("PUT", "/game");
             xhr.onerror = function () {
@@ -61,7 +87,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 players: players, prelude, draftVariant, venusNext
             }));
             xhr.send(JSON.stringify({
-                players: players, prelude, draftVariant, venusNext
+                players: players, prelude, draftVariant, venusNext, customCorporationsList, corporations
             }));
         }
     },
@@ -107,8 +133,37 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         <input type="checkbox" class="nes-checkbox" v-model="draftVariant" />
                         <span>Use draft variant?</span>
                 </label>
+                <label>
+                        <input type="checkbox" class="nes-checkbox" v-model="customCorporationsList"  v-on:click="toggleDisplayed()" />
+                        <span>Custom Corporation list ?</span>
+                </label>
             </div>			
             <button class="nes-btn is-primary" v-on:click="createGame">Create Game</button>
+
+            <div v-if="displayed === true">
+                <br>
+                <h2>Original Corporations</h2>
+                <div v-for="corporation in getOriginalCorps()">
+                    <label>{{corporation.name}}</label>
+                    <input type="checkbox" v-model="corporations" :value="corporation"/>
+                </div>
+                <h2>Prelude Corporations</h2>
+                <div v-for="corporation in getPreludeCorps()">
+                    <label>{{corporation.name}}</label>
+                    <input type="checkbox" v-model="corporations" :value="corporation"/>
+                </div>
+                <h2>Venus Next Corporations</h2>
+                <div v-for="corporation in getVenusCorps()">
+                    <label>{{corporation.name}}</label>
+                    <input type="checkbox" v-model="corporations" :value="corporation"/>
+                </div>
+                <h2>Colonies Corporations</h2>   
+                <div v-for="corporation in getColoniesCorps()">
+                    <label>{{corporation.name}}</label>
+                    <input type="checkbox" v-model="corporations" :value="corporation"/>
+                </div>  
+            </div>          
+
         </div>
     `
 });

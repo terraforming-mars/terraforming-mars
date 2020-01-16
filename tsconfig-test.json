@@ -20,6 +20,7 @@
         "tests/cards/corporation/*.spec.ts",
         "tests/cards/prelude/*.spec.ts",
         "tests/cards/venusNext/*.spec.ts",
+        "tests/cards/colonies/*.spec.ts",
         "tests/*.spec.ts",
         "tests/TestingUtils.ts"
     ],

@@ -1,3 +1,5 @@
+import { CardName } from "./CardName";
+
 export const HTML_DATA: Map<string, string> =
   new Map ([
     ["Colonizer Training Camp",`
@@ -333,7 +335,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Arctic Algae",`
+[CardName.ARCTIC_ALGAE,`
         <div class="title background-color-active ">Arctic Algae</div>
         <div class="price ">12</div>
         <div class="tag tag1 tag-plant "></div>
@@ -2522,7 +2524,7 @@ export const HTML_DATA: Map<string, string> =
           </div>
         </div>
 `],
-["Pets",`
+[CardName.PETS,`
         <div class="title background-color-active">Pets</div>
         <div class="price">10</div>
         ##RESOURCES##
@@ -2542,7 +2544,7 @@ export const HTML_DATA: Map<string, string> =
           </div>
         </div>
 `],
-["Protected Habitats",`
+[CardName.PROTECTED_HABITATS,`
           <div class="title background-color-active ">Protected Habitats</div>
           <div class="price ">5</div>
           <div class="corporate-icon project-icon"></div>
@@ -3266,7 +3268,7 @@ export const HTML_DATA: Map<string, string> =
                 </div>
             </div>
 `],
-["Dirigibles",`
+[CardName.DIRIGIBLES,`
             <div class="title background-color-active ">Dirigibles</div>
             <div class="price ">11</div>
             ##RESOURCES##
@@ -3976,7 +3978,7 @@ export const HTML_DATA: Map<string, string> =
                 </div>
               </div>
 `],
-["Psychrophiles",`
+[CardName.PSYCHROPHILES,`
               <div class="title background-color-active ">PSYCHROPHILES</div>
               <div class="price ">2</div>
               ##RESOURCES##

@@ -25,12 +25,12 @@ import {ALL_PRELUDE_CORPORATIONS} from './Dealer';
 import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
 import { Resources } from "./Resources";
-import { Aphrodite } from './cards/venusNext/Aphrodite';
 import { ORIGINAL_MILESTONES, VENUS_MILESTONES } from './milestones/Milestones';
 import { ORIGINAL_AWARDS, VENUS_AWARDS } from './awards/Awards';
 import { SpaceName } from './SpaceName';
 import { Colony } from './OriginalBoard';
-import { ArcticAlgae } from './cards/ArcticAlgae';
+import { CorporationName } from './CorporationName';
+import { CardName } from './CardName';
 
 
 export class Game {
@@ -415,15 +415,12 @@ export class Game {
 
       // Check for Aphrodite corporation
       if (this.tempVenusScaleLevel < this.venusScaleLevel 
-          && this.first.corporationCard !== undefined
-          && this.first.corporationCard.name === new Aphrodite().name) {
+          && this.first.isCorporation(CorporationName.APHRODITE)) {
             this.first.megaCredits += 2;
       }
 
       //Check for arctic algae
-      if (this.tempOceans < this.board.getOceansOnBoard() 
-        && this.first.playedCards.find(
-          (playedCard) => playedCard.name === new ArcticAlgae().name) !== undefined) {
+      if (this.tempOceans < this.board.getOceansOnBoard() && this.first.cardIsInEffect(CardName.ARCTIC_ALGAE)) {
           this.first.plants += 2;
       }     
 
@@ -724,7 +721,7 @@ export class Game {
 
     // Check for Aphrodite corporation
     this.players.forEach((player) => {
-      if (player.corporationCard !== undefined && player.corporationCard.name === new Aphrodite().name ) {
+      if (player.isCorporation(CorporationName.APHRODITE)) {
         player.megaCredits += 2 * steps;
       }
     });

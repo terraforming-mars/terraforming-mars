@@ -1,5 +1,5 @@
 import {Player} from './Player';
-import { Dealer, ALL_VENUS_CORPORATIONS } from './Dealer';
+import { Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_COLONIES_CORPORATIONS, ALL_PRELUDE_CORPORATIONS } from './Dealer';
 import {ISpace} from './ISpace';
 import {SpaceType} from './SpaceType';
 import {TileType} from './TileType';
@@ -7,7 +7,7 @@ import {SpaceBonus} from './SpaceBonus';
 import {ITile} from './ITile';
 import {IProjectCard} from './cards/IProjectCard';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
-import {CorporationCard} from './cards/corporation/CorporationCard';
+import { CorporationCard } from './cards/corporation/CorporationCard';
 import {OriginalBoard} from './OriginalBoard';
 import {SelectCard} from './inputs/SelectCard';
 import {SelectSpace} from './inputs/SelectSpace';
@@ -20,8 +20,6 @@ import {IMilestone} from './milestones/IMilestone';
 import {ResourceType} from './ResourceType';
 import * as constants from './constants';
 import {Color} from './Color';
-import {ALL_CORPORATION_CARDS} from './Dealer';
-import {ALL_PRELUDE_CORPORATIONS} from './Dealer';
 import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
 import { Resources } from "./Resources";
@@ -242,6 +240,12 @@ export class Game {
     private playCorporationCard(
         player: Player, corporationCard: CorporationCard
     ): void {
+
+      for (let corporation of [...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS]) {
+        if (corporation.name === corporationCard.name) {
+          corporationCard = corporation;
+        }
+      }
       player.corporationCard = corporationCard;
       corporationCard.play(player, this);
       player.megaCredits = corporationCard.startingMegaCredits;

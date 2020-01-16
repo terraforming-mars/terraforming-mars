@@ -6,7 +6,7 @@ import { Player } from "../Player";
 import { TileType } from "../TileType";
 import { ISpace } from "../ISpace";
 import { ResourceType } from "../ResourceType";
-import { cardsList} from "../cardsList";
+import { CardName} from "../CardName";
 
 
 export class Pets implements IProjectCard {
@@ -14,7 +14,7 @@ export class Pets implements IProjectCard {
     public resourceType: ResourceType = ResourceType.ANIMAL;
     public tags: Array<Tags> = [Tags.EARTH, Tags.ANIMAL];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = cardsList.PETS;
+    public name: string = CardName.PETS;
     public canPlay(): boolean {
         return true;
     }

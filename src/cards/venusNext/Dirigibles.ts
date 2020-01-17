@@ -5,11 +5,14 @@ import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { SelectCard } from '../../inputs/SelectCard';
+import { CardName } from '../../CardName';
+
 
 export class Dirigibles implements IActionCard,IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = "Dirigibles";
+
+    public name: string = CardName.DIRIGIBLES;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
     public canPlay(): boolean {

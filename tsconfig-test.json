@@ -20,6 +20,8 @@
         "tests/cards/corporation/*.spec.ts",
         "tests/cards/prelude/*.spec.ts",
         "tests/cards/venusNext/*.spec.ts",
+        "tests/cards/colonies/*.spec.ts",
+        "tests/cards/turmoil/*.spec.ts",        
         "tests/*.spec.ts",
         "tests/TestingUtils.ts"
     ],
@@ -342,6 +344,8 @@
         "tests/cards/venusNext/VenusSoils.spec.ts",
         "tests/cards/venusNext/VenusWaystation.spec.ts",
         "tests/cards/venusNext/WaterToVenus.spec.ts",
+        "tests/cards/colonies/Polyphemos.spec.ts",     
+        "tests/cards/turmoil/UtopiaInvest.spec.ts",   
         "tests/Game.spec.ts",
         "tests/OriginalBoard.spec.ts",
         "tests/Player.spec.ts"

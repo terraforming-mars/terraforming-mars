@@ -1,5 +1,5 @@
 import {Player} from './Player';
-import { Dealer, ALL_VENUS_CORPORATIONS } from './Dealer';
+import { Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_COLONIES_CORPORATIONS, ALL_PRELUDE_CORPORATIONS } from './Dealer';
 import {ISpace} from './ISpace';
 import {SpaceType} from './SpaceType';
 import {TileType} from './TileType';
@@ -7,7 +7,7 @@ import {SpaceBonus} from './SpaceBonus';
 import {ITile} from './ITile';
 import {IProjectCard} from './cards/IProjectCard';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
-import {CorporationCard} from './cards/corporation/CorporationCard';
+import { CorporationCard } from './cards/corporation/CorporationCard';
 import {OriginalBoard} from './OriginalBoard';
 import {SelectCard} from './inputs/SelectCard';
 import {SelectSpace} from './inputs/SelectSpace';
@@ -20,16 +20,16 @@ import {IMilestone} from './milestones/IMilestone';
 import {ResourceType} from './ResourceType';
 import * as constants from './constants';
 import {Color} from './Color';
-import {ALL_CORPORATION_CARDS} from './Dealer';
-import {ALL_PRELUDE_CORPORATIONS} from './Dealer';
 import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
 import { Resources } from "./Resources";
-import { Aphrodite } from './cards/venusNext/Aphrodite';
 import { ORIGINAL_MILESTONES, VENUS_MILESTONES } from './milestones/Milestones';
 import { ORIGINAL_AWARDS, VENUS_AWARDS } from './awards/Awards';
 import { SpaceName } from './SpaceName';
 import { Colony } from './OriginalBoard';
+import { CorporationName } from './CorporationName';
+import { CardName } from './CardName';
+
 
 
 export class Game {
@@ -63,6 +63,8 @@ export class Game {
     private tempCards: Array<IProjectCard> = [];
     private tempHeatProduction: number = 0;
     private tempVenusScaleLevel: number = 0;
+    private tempOceans: number = 0;
+
 
     constructor(
       public id: string,
@@ -70,13 +72,19 @@ export class Game {
       private first: Player,
       private preludeExtension: boolean = false,
       private draftVariant: boolean = false,
-      public venusNextExtension: boolean = false
+      public venusNextExtension: boolean = false,
+      public customCorporationsList: boolean = false,
+      public corporationList: Array<CorporationCard> = []
+
     ) {
       this.activePlayer = first;
       this.venusNextExtension = venusNextExtension;
       this.preludeExtension = preludeExtension;
       this.draftVariant = draftVariant;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension);
+      this.customCorporationsList = customCorporationsList;
+      this.corporationList = corporationList;
+
 
       this.milestones.push(...ORIGINAL_MILESTONES);
       this.awards.push(...ORIGINAL_AWARDS);
@@ -104,6 +112,11 @@ export class Game {
         this.board.spaces.push(new Colony(SpaceName.LUNA_METROPOLIS));
         this.board.spaces.push(new Colony(SpaceName.MAXWELL_BASE));
         this.board.spaces.push(new Colony(SpaceName.STRATOPOLIS));
+      }
+
+      // Setup custom corporation list
+      if (this.customCorporationsList && this.corporationList.length >= players.length * 2) {
+        corporationCards = this.dealer.shuffleCards(this.corporationList);
       }
 
       // Give each player their corporation cards
@@ -231,12 +244,18 @@ export class Game {
     private playCorporationCard(
         player: Player, corporationCard: CorporationCard
     ): void {
+
+      for (let corporation of [...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS]) {
+        if (corporation.name === corporationCard.name) {
+          corporationCard = corporation;
+        }
+      }
       player.corporationCard = corporationCard;
       corporationCard.play(player, this);
       player.megaCredits = corporationCard.startingMegaCredits;
       if (corporationCard.name !== new BeginnerCorporation().name) {
         let cardsToPayFor: number = player.cardsInHand.length;
-        player.megaCredits -= cardsToPayFor * constants.CARD_COST;
+        player.megaCredits -= cardsToPayFor * player.cardCost;
       }
 
       this.playerIsFinishedWithResearchPhase(player);
@@ -392,6 +411,8 @@ export class Game {
       this.tempCards = this.first.cardsInHand;
       this.tempHeatProduction = this.first.getProduction(Resources.HEAT);
       this.tempVenusScaleLevel = this.venusScaleLevel;
+      this.tempOceans = this.board.getOceansOnBoard();
+
 
       this.first.worldGovernmentTerraforming(this);
     }
@@ -412,10 +433,14 @@ export class Game {
 
       // Check for Aphrodite corporation
       if (this.tempVenusScaleLevel < this.venusScaleLevel 
-          && this.first.corporationCard !== undefined
-          && this.first.corporationCard.name === new Aphrodite().name) {
+          && this.first.isCorporation(CorporationName.APHRODITE)) {
             this.first.megaCredits += 2;
       }
+
+      //Check for arctic algae
+      if (this.tempOceans < this.board.getOceansOnBoard() && this.first.cardIsInEffect(CardName.ARCTIC_ALGAE)) {
+          this.first.plants += 2;
+      }     
 
       //Carry on to next phase
       this.gotoDraftOrResearch();
@@ -714,7 +739,7 @@ export class Game {
 
     // Check for Aphrodite corporation
     this.players.forEach((player) => {
-      if (player.corporationCard !== undefined && player.corporationCard.name === new Aphrodite().name ) {
+      if (player.isCorporation(CorporationName.APHRODITE)) {
         player.megaCredits += 2 * steps;
       }
     });

@@ -1,6 +1,5 @@
 import {IProjectCard} from './cards/IProjectCard';
 import { CorporationCard } from './cards/corporation/CorporationCard';
-import {Psychrophiles} from './cards/prelude/Psychrophiles';
 import {Tags} from './cards/Tags';
 import {PlayerInput} from './PlayerInput';
 import {CardType} from './cards/CardType';
@@ -21,15 +20,15 @@ import {SelectPlayer} from './inputs/SelectPlayer';
 import {IMilestone} from './milestones/IMilestone';
 import {StandardProjectType} from './StandardProjectType';
 import * as constants from './constants';
-import {ProtectedHabitats} from './cards/ProtectedHabitats';
-import {Pets} from './cards/Pets';
 import {IAward} from './awards/IAward';
 import { VictoryPointsBreakdown } from './VictoryPointsBreakdown';
 import {Resources} from './Resources';
 import { ResourceType } from './ResourceType';
-import { Manutech } from './cards/venusNext/Manutech';
 import { Celestic } from './cards/venusNext/Celestic';
-import { Dirigibles } from './cards/venusNext/Dirigibles';
+import { CARD_COST } from './constants';
+import { CardName } from "./CardName";
+import { CorporationName } from './CorporationName';
+
 
 const INITIAL_ACTION: string = 'INITIAL';
 
@@ -69,12 +68,17 @@ export class Player {
     private lastCardPlayedThisTurn: IProjectCard | undefined;
     private waitingFor?: PlayerInput;
     private postAction: Boolean = false;
+    public cardCost: number = CARD_COST;
 
     constructor(
         public name: string,
         public color: Color,
         public beginner: boolean) {
       this.id = this.generateId();
+    }
+
+    public isCorporation(corporationName: CorporationName): boolean {
+      return this.corporationCard !== undefined && this.corporationCard.name === corporationName;
     }
 
     public getProduction(resource: Resources): number {
@@ -101,7 +105,7 @@ export class Player {
       }
 
       //Manutech hook
-      if (amount > 0 && this.corporationCard !== undefined && this.corporationCard.name === new Manutech().name) {
+      if (amount > 0 && this.corporationCard !== undefined && this.corporationCard.name ===  CorporationName.MANUTECH) {
         if (resource === Resources.MEGACREDITS) this.megaCredits += amount;
         if (resource === Resources.STEEL) this.steel += amount;
         if (resource === Resources.TITANIUM) this.titanium += amount;
@@ -127,11 +131,16 @@ export class Player {
     public getOtherPlayersWithPlantsToRemove(game: Game): Array<Player> {
       return game.getPlayers().filter((player) => player.id !== this.id && !player.hasProtectedHabitats() && player.plants > 0);
     }
-    public hasProtectedHabitats(): boolean {
+
+    public cardIsInEffect(cardName: CardName): boolean {
       return this.playedCards.find(
-          (playedCard) => playedCard.name === new ProtectedHabitats().name
-      ) !== undefined;
+        (playedCard) => playedCard.name === cardName) !== undefined;      
     }
+
+    public hasProtectedHabitats(): boolean {
+      return this.cardIsInEffect(CardName.PROTECTED_HABITATS);
+    }
+    
     public removePlants(removingPlayer: Player, count: number): void {
       if (removingPlayer !== this && this.hasProtectedHabitats()) {
         throw new Error('Can not remove plants due to protected habitats');
@@ -145,7 +154,7 @@ export class Player {
       if (removingPlayer !== this && this.hasProtectedHabitats()) {
         throw new Error('Can not remove animals due to protected habitats');
       }
-      if (card.name === new Pets().name) {
+      if (card.name === CardName.PETS) {
         throw new Error('Animals may not be removed from pets');
       }
       if (this.getResourcesOnCard(card) === 0) {
@@ -171,6 +180,11 @@ export class Player {
     public getResourcesOnCard(card: ICard): number {
       return this.resourcesOnCards.get(card.name) || 0;
     }
+
+    public getResourcesOnCardname(cardname: CardName):number {
+      return this.resourcesOnCards.get(cardname) || 0;
+    }
+
     public getRequirementsBonus(game: Game, venusOnly?: boolean): number {
       let requirementsBonus: number = 0;
       if (
@@ -234,7 +248,7 @@ export class Player {
             result.push(card);
           }
         });
-      if (this.corporationCard !== undefined && this.corporationCard.name === new Celestic().name &&  resource === ResourceType.FLOATER) {
+      if (this.isCorporation(CorporationName.CELESTIC) &&  resource === ResourceType.FLOATER) {
         result.push(new Celestic());
       }
       return result;
@@ -247,7 +261,7 @@ export class Player {
           count += this.getResourcesOnCard(card);
         }
       });
-      if (this.corporationCard !== undefined && this.corporationCard.name === new Celestic().name &&  resource === ResourceType.FLOATER) {
+      if (this.isCorporation(CorporationName.CELESTIC) &&  resource === ResourceType.FLOATER) {
         count += this.getResourcesOnCard(new Celestic());
       }
       return count;
@@ -618,9 +632,9 @@ export class Player {
       const payForCards = () => {
         if (htp.heat > 0 && this.canUseHeatAsMegaCredits) {
           this.heat -= htp.heat;
-          this.megaCredits -= (constants.CARD_COST * selectedCards.length - htp.heat);
+          this.megaCredits -= (this.cardCost * selectedCards.length - htp.heat);
         } else {
-          this.megaCredits -= constants.CARD_COST * selectedCards.length;
+          this.megaCredits -= this.cardCost * selectedCards.length;
         }  
         selectedCards.forEach((card) => {
           this.cardsInHand.push(card);
@@ -673,8 +687,7 @@ export class Player {
                 'Select which cards to take into hand',
                 dealtCards,
                 (foundCards: Array<IProjectCard>) => {
-                  htp.megaCredits = foundCards.length *
-                                            constants.CARD_COST;
+                  htp.megaCredits = foundCards.length * this.cardCost;
                   selectedCards = foundCards;
                   payForCards();
                   return undefined;
@@ -777,7 +790,7 @@ export class Player {
 
     public getMicrobesCanSpend(): number {
         for (const playedCard of this.playedCards) {
-            if (playedCard.name === new Psychrophiles().name) {
+            if (playedCard.name === CardName.PSYCHROPHILES) {
                 return this.getResourcesOnCard(playedCard);
             }
         }
@@ -786,7 +799,8 @@ export class Player {
 
     public getFloatersCanSpend(): number {
       for (const playedCard of this.playedCards) {
-          if (playedCard.name === new Dirigibles().name) {
+
+          if (playedCard.name === CardName.DIRIGIBLES) {
               return this.getResourcesOnCard(playedCard);
           }
       }
@@ -810,10 +824,11 @@ export class Player {
             this.megaCredits -= howToPay.megaCredits;
             this.heat -= howToPay.heat;
             for (const playedCard of this.playedCards) {
-                if (playedCard.name === new Psychrophiles().name) {
+                if (playedCard.name === CardName.PSYCHROPHILES) {
                     this.removeResourceFrom(playedCard, howToPay.microbes);
                 }
-                if (playedCard.name === new Dirigibles().name) {
+
+                if (playedCard.name === CardName.DIRIGIBLES) {
                     this.removeResourceFrom(playedCard, howToPay.floaters);
                 } 
             }
@@ -1352,14 +1367,14 @@ export class Player {
           maxPay += this.titanium * this.titaniumValue;
         }
         if (this.playedCards.find(
-          (playedCard) => playedCard.name === new Psychrophiles().name) !== undefined 
+          (playedCard) => playedCard.name === CardName.PSYCHROPHILES) !== undefined 
            && card.tags.indexOf(Tags.PLANT) !== -1) {
-            maxPay += this.getResourcesOnCard(new Psychrophiles()) * 2;
+            maxPay += this.getResourcesOnCardname(CardName.PSYCHROPHILES) * 2;
         }
         if (this.playedCards.find(
-          (playedCard) => playedCard.name === new Dirigibles().name) !== undefined 
+          (playedCard) => playedCard.name === CardName.DIRIGIBLES) !== undefined 
            && card.tags.indexOf(Tags.VENUS) !== -1) {
-            maxPay += this.getResourcesOnCard(new Dirigibles()) * 3;
+            maxPay += this.getResourcesOnCardname(CardName.DIRIGIBLES) * 3;
         }
 
         maxPay += this.megaCredits;

@@ -1,4 +1,5 @@
 import { CardName } from "./CardName";
+import { CorporationName } from './CorporationName';
 
 export const HTML_DATA: Map<string, string> =
   new Map ([
@@ -5514,6 +5515,35 @@ export const HTML_DATA: Map<string, string> =
           (You start with 50MC. Increase your MC production 5 steps. Gain 5 titanium.)
         </div>
       </div>
+`],
+[CorporationName.UTOPIA_INVEST,`
+<div class="tag tag1 tag-building"></div>
+<div class="corporationLabel">CORPORATION</div>
+<div class="turmoil-icon corporation-icon"></div>
+<div class="contentCorporation">
+  <div class="corporationEffectBox">
+    <div class="corporationEffectBoxLabel">ACTION</div>
+    <div class="production-box">
+      <div class="production" style="background:white;">?</div>
+    </div>
+    <div class="red-arrow"></div>
+    4<div class="resource" style="background:white;">?</div>
+    <div class="description" style="text-align:center;margin-top:0px;">
+      (Action: Decrease any production to gain 4 resources of that kind.)
+    </div>
+  </div>
+  <div class="utopia">
+    <div class="utopia1">UTOPIA</div>
+    <div class="utopia2">INVEST</div>
+  </div>
+  <div class="resource money" style="margin-left:35px;margin-right:20px;margin-top:20px;">40</div>
+  <div class="production-box production-box-size2">
+    <div class="production steel"></div><div class="production titanium"></div>
+  </div>
+  <div class="description" style="margin-top:-5px;text-align:center;">
+    (You start with 40 MC. Increase your steel and titanium production 1 step each.)
+  </div>
+</div>
 `],
 ["Poseidon",`
       <div class="corporationLabel">CORPORATION</div>

@@ -29,6 +29,7 @@ import { CARD_COST } from './constants';
 import { CardName } from "./CardName";
 import { CorporationName } from './CorporationName';
 
+
 const INITIAL_ACTION: string = 'INITIAL';
 
 export class Player {
@@ -798,6 +799,7 @@ export class Player {
 
     public getFloatersCanSpend(): number {
       for (const playedCard of this.playedCards) {
+
           if (playedCard.name === CardName.DIRIGIBLES) {
               return this.getResourcesOnCard(playedCard);
           }
@@ -825,6 +827,7 @@ export class Player {
                 if (playedCard.name === CardName.PSYCHROPHILES) {
                     this.removeResourceFrom(playedCard, howToPay.microbes);
                 }
+
                 if (playedCard.name === CardName.DIRIGIBLES) {
                     this.removeResourceFrom(playedCard, howToPay.floaters);
                 } 

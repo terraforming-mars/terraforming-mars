@@ -36,6 +36,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             ],
             prelude: false,
             draftVariant: false,
+
             venusNext: false,
             customCorporationsList: false,
             corporations: [...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS, ...ALL_TURMOIL_CORPORATIONS],

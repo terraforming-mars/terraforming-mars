@@ -331,6 +331,7 @@ import { Omnicourt } from './cards/venusNext/Omnicourt';
 import { Polyphemos } from './cards/colonies/Polyphemos';
 import { UtopiaInvest } from './cards/turmoil/UtopiaInvest';
 
+
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
         new BiosphereSupport(),
@@ -460,7 +461,7 @@ export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [
         new Manutech(),
         new MorningStarInc(),
         new Viron()
-];    
+];   
 
 export const ALL_COLONIES_CORPORATIONS: Array<CorporationCard> = [
     new Polyphemos()

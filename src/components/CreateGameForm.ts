@@ -127,7 +127,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             <div>
                 <label>
                         <input type="checkbox" class="nes-checkbox" v-model="prelude" />
-                        <span>Use prelude extension ?</span>
+                        <span>Use Prelude extension ?</span>
                 </label>
                 <label>
                         <input type="checkbox" class="nes-checkbox" v-model="venusNext" />
@@ -149,26 +149,31 @@ export const CreateGameForm = Vue.component("create-game-form", {
                     <input type="checkbox" v-model="corporations" :value="corporation"/>
                     <span>{{corporation.name}}<span>
                 </div>
+                <br>
                 <h2>Prelude Corporations</h2>
                 <div v-for="corporation in getPreludeCorps()">
                     <input type="checkbox" v-model="corporations" :value="corporation"/>
                     <span>{{corporation.name}}<span>
                 </div>
+                <br>
                 <h2>Venus Next Corporations</h2>
                 <div v-for="corporation in getVenusCorps()">
                     <input type="checkbox" v-model="corporations" :value="corporation"/>
                     <span>{{corporation.name}}<span>
                 </div>
+                <br>
                 <h2>Colonies Corporations</h2>   
                 <div v-for="corporation in getColoniesCorps()">
                     <input type="checkbox" v-model="corporations" :value="corporation"/>
                     <span>{{corporation.name}}<span>
-                </div>  
+                </div>
+                <br>  
                 <h2>Turmoil Corporations</h2>   
                 <div v-for="corporation in getTurmoilCorps()">
                     <input type="checkbox" v-model="corporations" :value="corporation"/>
                     <span>{{corporation.name}}<span>
                 </div> 
+                <br>
             </div>
 
             </div>			

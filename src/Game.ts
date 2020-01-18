@@ -1,5 +1,5 @@
 import {Player} from './Player';
-import { Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_COLONIES_CORPORATIONS, ALL_PRELUDE_CORPORATIONS } from './Dealer';
+import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_COLONIES_CORPORATIONS, ALL_PRELUDE_CORPORATIONS} from './Dealer';
 import {ISpace} from './ISpace';
 import {SpaceType} from './SpaceType';
 import {TileType} from './TileType';
@@ -22,15 +22,13 @@ import * as constants from './constants';
 import {Color} from './Color';
 import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
-import { Resources } from "./Resources";
-import { ORIGINAL_MILESTONES, VENUS_MILESTONES } from './milestones/Milestones';
-import { ORIGINAL_AWARDS, VENUS_AWARDS } from './awards/Awards';
-import { SpaceName } from './SpaceName';
-import { Colony } from './OriginalBoard';
-import { CorporationName } from './CorporationName';
-import { CardName } from './CardName';
-
-
+import {Resources} from "./Resources";
+import {ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {SpaceName} from './SpaceName';
+import {Colony} from './OriginalBoard';
+import {CorporationName} from './CorporationName';
+import {CardName} from './CardName';
 
 export class Game {
     public activePlayer: Player;

@@ -22,7 +22,7 @@ export class UtopiaInvest implements IActionCard, CorporationCard {
                 + player.getProduction(Resources.TITANIUM)
                 + player.getProduction(Resources.PLANTS)
                 + player.getProduction(Resources.ENERGY)
-                + player.getProduction(Resources.HEAT) > 0;
+                + player.getProduction(Resources.HEAT) > -5;
     }
     public action(player: Player) {
         let result = new OrOptions();
@@ -66,7 +66,7 @@ export class UtopiaInvest implements IActionCard, CorporationCard {
             return undefined;
         });
 
-        if (player.getProduction(Resources.MEGACREDITS) > 0) {
+        if (player.getProduction(Resources.MEGACREDITS) > -5) {
             options.push(reduceMegacredits);
         }
         if (player.getProduction(Resources.STEEL) > 0) {

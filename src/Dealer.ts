@@ -388,8 +388,8 @@ export const ALL_CORPORATION_CARDS: Array<CorporationCard> = [
 
 export const ALL_PRELUDE_CORPORATIONS: Array<CorporationCard> = [
         new CheungShingMARS(),
-        new RobinsonIndustries(),
         new PointLuna(),
+        new RobinsonIndustries(),
         new ValleyTrust(),
         new Vitor()
 ];

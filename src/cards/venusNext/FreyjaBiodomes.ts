@@ -19,8 +19,7 @@ export class FreyjaBiodomes implements IProjectCard {
     public getResCards(player: Player): IProjectCard[] {
         let resourceCards = player.getResourceCards(ResourceType.ANIMAL);
         resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.MICROBE));
-        resourceCards.filter(card => card.tags.filter((cardTag) => cardTag === Tags.VENUS));
-        return resourceCards;
+        return resourceCards.filter(card => card.tags.indexOf(Tags.VENUS) !== -1);
     }
 
     public play(player: Player) {

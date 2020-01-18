@@ -7,7 +7,7 @@ import {SpaceBonus} from './SpaceBonus';
 import {ITile} from './ITile';
 import {IProjectCard} from './cards/IProjectCard';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
-import { CorporationCard } from './cards/corporation/CorporationCard';
+import {CorporationCard} from './cards/corporation/CorporationCard';
 import {OriginalBoard} from './OriginalBoard';
 import {SelectCard} from './inputs/SelectCard';
 import {SelectSpace} from './inputs/SelectSpace';

@@ -16,7 +16,7 @@ describe("UtopiaInvest", function () {
         const action = card.action(player);
         expect(action).not.to.eq(undefined);
         expect(action instanceof OrOptions).to.eq(true);
-        action.options[1].cb();
+        action.options[2].cb();
         expect(player.titanium).to.eq(4);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(0);
 

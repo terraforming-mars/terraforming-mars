@@ -1,5 +1,5 @@
 import {Player} from './Player';
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_COLONIES_CORPORATIONS, ALL_PRELUDE_CORPORATIONS} from './Dealer';
+import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_COLONIES_CORPORATIONS, ALL_PRELUDE_CORPORATIONS, ALL_TURMOIL_CORPORATIONS} from './Dealer';
 import {ISpace} from './ISpace';
 import {SpaceType} from './SpaceType';
 import {TileType} from './TileType';
@@ -243,7 +243,7 @@ export class Game {
         player: Player, corporationCard: CorporationCard
     ): void {
 
-      for (let corporation of [...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS]) {
+      for (let corporation of [...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS, ...ALL_TURMOIL_CORPORATIONS]) {
         if (corporation.name === corporationCard.name) {
           corporationCard = corporation;
         }
@@ -880,7 +880,7 @@ export class Game {
       this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
         if (adjacentSpace.tile &&
             adjacentSpace.tile.tileType === TileType.OCEAN) {
-          player.megaCredits += 2;
+          player.megaCredits += player.oceanBonus;
         }
       });
       

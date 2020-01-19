@@ -18,7 +18,7 @@ import { Tags } from "../cards/Tags";
 import { PaymentWidgetMixin } from "./PaymentWidgetMixin";
 
 export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card", {
-    props: ["player", "playerinput", "onsave", "showtitle"],
+    props: ["player", "playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
             card: this.playerinput.cards[0],
@@ -214,7 +214,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             <span class="nes-text is-warning">{{ warning }}</span>
         </div>
 
-        <div class="payments_save">
+        <div v-if="showsave === true" class="payments_save">
             <button class="nes-btn" v-on:click="save">Save</button>
         </div>
     </section>

@@ -8,7 +8,7 @@ interface SelectCardModel {
 import { Card } from "./Card";
 
 export const SelectCard = Vue.component("select-card", {
-    props: ["playerinput", "onsave", "showtitle"],
+    props: ["playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
             cards: []
@@ -30,7 +30,7 @@ export const SelectCard = Vue.component("select-card", {
                 <input v-else class="nes-checkbox" type="checkbox" v-model="cards" :value="card" :disabled="cards.length >= playerinput.maxCardsToSelect && cards.indexOf(card) === -1" />
                 <card :card="card"></card>
             </label>
-            <div class="nofloat">
+            <div v-if="showsave === true" class="nofloat">
                 <button class="nes-btn" v-on:click="selectCards">Save</button>
             </div>
         </div>

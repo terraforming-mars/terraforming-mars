@@ -3,7 +3,7 @@ import Vue from "vue";
 import { SelectPlayerRow } from "./SelectPlayerRow";
 
 export const SelectPlayer = Vue.component("select-player", {
-    props: ["players", "playerinput", "onsave", "showtitle"],
+    props: ["players", "playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
             selectedPlayer: undefined
@@ -24,7 +24,7 @@ export const SelectPlayer = Vue.component("select-player", {
                 <input class="nes-radio" type="radio" v-model="selectedPlayer" :value="player" />
                 <select-player-row :player="players.find((otherPlayer) => otherPlayer.id === player)"></select-player-row>
             </label>
-            <button class="nes-btn" v-on:click="selectPlayers">Save</button>
+            <button v-if="showsave === true" class="nes-btn" v-on:click="selectPlayers">Save</button>
         </div>
     `
 });

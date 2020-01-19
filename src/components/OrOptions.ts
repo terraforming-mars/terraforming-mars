@@ -5,7 +5,7 @@ import { PlayerInputFactory } from "./PlayerInputFactory";
 let unique: number = 0;
 
 export const OrOptions = Vue.component("or-options", {
-    props: ["player", "players", "playerinput", "onsave", "showtitle"],
+    props: ["player", "players", "playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
             selectedOption: 0
@@ -37,7 +37,7 @@ export const OrOptions = Vue.component("or-options", {
                 const copy = out[0].slice();
                 copy.unshift(String(idx));
                 this.onsave([copy]);
-            }, false)]));
+            }, this.showsave, false)]));
             optionElements.push(subchildren[subchildren.length - 1]);
             children.push(createElement("div", subchildren));
         });

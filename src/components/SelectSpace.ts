@@ -2,9 +2,8 @@
 import Vue, { VNode } from "vue";
 import { PlayerInputModel } from "../models/PlayerInputModel";
 
-
 export const SelectSpace = Vue.component("select-space", {
-    props: ["playerinput", "onsave", "showtitle"],
+    props: ["playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {};
     },
@@ -44,6 +43,7 @@ export const SelectSpace = Vue.component("select-space", {
                             (elTiles[j] as HTMLElement).onclick = null;
                         }
                         el_id = elTile.getAttribute("data_space_id");
+                        // TODO - Store this property for when showsave === false
                         this.onsave([[el_id]]);
                     }
                 }

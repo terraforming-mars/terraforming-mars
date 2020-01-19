@@ -10,9 +10,22 @@ export const AndOptions = Vue.component("and-options", {
             responded: {} as {[x: string]: Array<string>}
         };
     },
+    methods: {
+        saveData: function (inputChildren: Array<VNode>) {
+            for (var i = 0; i < inputChildren.length; i++) {
+                const componentInstance = inputChildren[i].componentInstance;
+                if (componentInstance !== undefined) {
+                    if ((componentInstance as any).selectCards instanceof Function) {
+                        (componentInstance as any).selectCards();
+                    }
+                }
+            }
+        }
+    },
     render: function(createElement) {
         const playerInput: PlayerInputModel = this.playerinput as PlayerInputModel;
         const children: Array<VNode> = [];
+        const inputChildren: Array<VNode> = [];
         if (this.showtitle) {
             children.push(createElement("div", playerInput.title));
         }
@@ -29,10 +42,12 @@ export const AndOptions = Vue.component("and-options", {
                             }
                             this.onsave(res);
                         }
-                    }, true));
+                    }, false, true));
+                    inputChildren.push(children[children.length - 1]);
                 }
             });
         }
+        children.push(createElement("div", [createElement("button", { domProps: { className: "nes-btn" }, on: { click: () => { this.saveData(inputChildren); } } }, "Save")]));
         return createElement("div", children);
     }
 });

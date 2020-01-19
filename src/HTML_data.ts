@@ -5667,29 +5667,30 @@ export const HTML_DATA: Map<string, string> =
         <div class="description" style="margin-top:-8px;text-align:center;">(You start with 44 MC. As your first action, reveal cards until you have revealed a microbe tag. Take that card into hand, and discard the rest.)</div>
       </div>
 `],
-["Lakefront Resorts",`
-      <div class="tag tag1 tag-building"></div>
-        <div class="corporationLabel ">CORPORATION</div>
-        <div class="turmoil-icon corporation-icon"></div>
-        <div class="contentCorporation ">
-            <div class="corporationEffectBox ">
-                <div class="corporationEffectBoxLabel" style="margin-bottom:0px;">EFFECT</div>
-                <div class="resource ocean-resource red-outline"></div>*: <div class="production-box"><div class="production money">1</div></div>&nbsp;&nbsp;
-                  <div class="resource" style="height:29px;width:32px;background:#eee"></div>
-                  <div class="resource ocean-resource" style="position:absolute;margin-left:-39px;margin-top:36px;"></div>
-                  :<div class="resource money">3</div>
-                <div class="description " style="text-align:center;margin-top:0px; ">
-                    (Effect: When any ocean tile is placed, increase your MC production 1 step. Your bonus for placing adjacent to oceans in 3MC instead of 2MC.)
+[CorporationName.LAKEFRONT_RESORTS,`
+            <div class="tag tag1 tag-building"></div>
+            <div class="corporationLabel ">CORPORATION</div>
+            <div class="turmoil-icon corporation-icon"></div>
+            <div class="contentCorporation ">
+                <div class="corporationEffectBox ">
+                    <div class="corporationEffectBoxLabel" style="margin-bottom:0px;">EFFECT</div>
+                    <div class="resource ocean-resource red-outline"></div>*: <div class="production-box"><div class="production money">1</div></div>&nbsp;&nbsp;
+                      <div class="resource" style="height:29px;width:30px;background:#eee"></div>
+                      <div class="resource ocean-resource" style="position:absolute;margin-left:-39px;margin-top:36px;"></div>
+                      :<div class="resource money">3</div>
+                    <div class="description " style="text-align:center;margin-top:0px; ">
+                        (Effect: When any ocean tile is placed, increase your MC production 1 step. Your bonus for placing adjacent to oceans is 3MC instead of 2MC.)
+                    </div>
+                </div>
+                <div style="font-size:22px;margin-top:10px;margin-left:10px;font-family:Times;color:white;
+                text-shadow:0 1px 0px #444, 0px -1px 0px #444, -1px 0px 0px #444, 1px 0px 0px #444;letter-spacing:4px;">
+                  LAKEFRONT <br> &nbsp;&nbsp;RESORTS
+                  </div>
+                <div class="resource money " style="margin-left:75px;margin-top:10px;">54</div>
+                <div class="description " style="text-align:center;margin-left:15px;">
+                    (You start with 54 MC.)
                 </div>
             </div>
-            <div style="font-size:30px;font-style: italic;margin-top:10px;margin-left:30px;font-family:Times;color:#222;">
-              Lakefront <br> &nbsp;&nbsp;Resorts
-              </div>
-            <div class="resource money " style="margin-left:75px;">52</div>
-            <div class="description " style="text-align:center;margin-left:15px;">
-                (You start with 52 MC.)
-            </div>
-        </div>
 `],
 ["Terralabs",`
       <div class="tag tag1 tag-earth"></div>

@@ -330,6 +330,7 @@ import { MiningQuota } from './cards/venusNext/MiningQuota';
 import { Omnicourt } from './cards/venusNext/Omnicourt';
 import { Polyphemos } from './cards/colonies/Polyphemos';
 import { UtopiaInvest } from './cards/turmoil/UtopiaInvest';
+import { LakefrontResorts } from './cards/turmoil/LakefrontResorts';
 
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
@@ -468,6 +469,7 @@ export const ALL_COLONIES_CORPORATIONS: Array<CorporationCard> = [
 ];   
 
 export const ALL_TURMOIL_CORPORATIONS: Array<CorporationCard> = [
+    new LakefrontResorts(),
     new UtopiaInvest()
 ]; 
 

@@ -25,7 +25,6 @@ import { VictoryPointsBreakdown } from './VictoryPointsBreakdown';
 import {Resources} from './Resources';
 import { ResourceType } from './ResourceType';
 import { Celestic } from './cards/venusNext/Celestic';
-import { CARD_COST } from './constants';
 import { CardName } from "./CardName";
 import { CorporationName } from './CorporationName';
 
@@ -68,7 +67,8 @@ export class Player {
     private lastCardPlayedThisTurn: IProjectCard | undefined;
     private waitingFor?: PlayerInput;
     private postAction: Boolean = false;
-    public cardCost: number = CARD_COST;
+    public cardCost: number = constants.CARD_COST;
+    public oceanBonus: number = constants.OCEAN_BONUS;
 
     constructor(
         public name: string,

@@ -31,7 +31,6 @@ export class CorroderSuits implements IProjectCard {
         let resourceCards = player.getResourceCards(ResourceType.FLOATER);
         resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.MICROBE));
         resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));
-        resourceCards.filter(card => card.tags.filter((cardTag) => cardTag === Tags.VENUS));
-        return resourceCards;
+        return resourceCards.filter(card => card.tags.indexOf(Tags.VENUS) !== -1);
     }
 }

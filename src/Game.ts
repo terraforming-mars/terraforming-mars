@@ -114,7 +114,12 @@ export class Game {
 
       // Setup custom corporation list
       if (this.customCorporationsList && this.corporationList.length >= players.length * 2) {
-        corporationCards = this.dealer.shuffleCards(this.corporationList);
+        corporationCards = [];
+        let allCorporations = [];
+        allCorporations.push(...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_TURMOIL_CORPORATIONS);
+        for (let corp of corporationList) {
+          corporationCards.push(allCorporations.find((card) => card.name === corp.name));
+        }
       }
 
       // Give each player their corporation cards
@@ -242,12 +247,6 @@ export class Game {
     private playCorporationCard(
         player: Player, corporationCard: CorporationCard
     ): void {
-
-      for (let corporation of [...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS, ...ALL_TURMOIL_CORPORATIONS]) {
-        if (corporation.name === corporationCard.name) {
-          corporationCard = corporation;
-        }
-      }
       player.corporationCard = corporationCard;
       corporationCard.play(player, this);
       player.megaCredits = corporationCard.startingMegaCredits;

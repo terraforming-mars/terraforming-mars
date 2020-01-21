@@ -1,0 +1,47 @@
+import { CorporationCard } from "../corporation/CorporationCard";
+import { Player } from "../../Player";
+import { Tags } from "../Tags";
+import { ResourceType } from '../../ResourceType';
+import { IActionCard } from '../ICard';
+import { SelectCard } from '../../inputs/SelectCard';
+import { IProjectCard } from '../IProjectCard';
+import { CardType } from '../CardType';
+import { CorporationName } from '../../CorporationName';
+
+export class StormCraftIncorporated implements IActionCard, CorporationCard {
+    public name: string =  CorporationName.STORMCRAFT_INCORPORATED;
+    public tags: Array<Tags> = [Tags.JOVIAN];
+    public startingMegaCredits: number = 48;
+    public resourceType: ResourceType = ResourceType.FLOATER;
+
+    // Hack to mimic project card
+    public cost: number = 0;
+    public canPlay() {return true;}
+    public cardType: CardType = CardType.ACTIVE;
+    // End of hack
+
+    public play() {
+        return undefined;
+    }
+
+    public canAct(): boolean {
+        return true; 
+    }
+
+    public action(player: Player) {
+        const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+        if (floaterCards.length === 1) {
+            player.addResourceTo(this);
+            return undefined;
+        }
+
+        return new SelectCard(
+            'Select card to add 1 floater',
+            floaterCards,
+            (foundCards: Array<IProjectCard>) => {
+                player.addResourceTo(foundCards[0], 1);
+            return undefined;
+            }
+        );
+    }
+}

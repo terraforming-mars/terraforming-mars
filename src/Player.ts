@@ -14,7 +14,7 @@ import {SelectSpace} from './inputs/SelectSpace';
 import {ISpace} from './ISpace';
 import {SelectHowToPayForCard} from './inputs/SelectHowToPayForCard';
 import {SelectHowToPay} from './inputs/SelectHowToPay';
-import {SelectAmount} from './inputs/SelectAmount';
+import { SelectAmount } from './inputs/SelectAmount';
 import {SelectOption} from './inputs/SelectOption';
 import {SelectPlayer} from './inputs/SelectPlayer';
 import {IMilestone} from './milestones/IMilestone';
@@ -25,9 +25,10 @@ import { VictoryPointsBreakdown } from './VictoryPointsBreakdown';
 import {Resources} from './Resources';
 import { ResourceType } from './ResourceType';
 import { Celestic } from './cards/venusNext/Celestic';
-import { CARD_COST } from './constants';
 import { CardName } from "./CardName";
 import { CorporationName } from './CorporationName';
+import { StormCraftIncorporated } from './cards/colonies/StormCraftIncorporated';
+
 
 const INITIAL_ACTION: string = 'INITIAL';
 
@@ -67,7 +68,8 @@ export class Player {
     private lastCardPlayedThisTurn: IProjectCard | undefined;
     private waitingFor?: PlayerInput;
     private postAction: Boolean = false;
-    public cardCost: number = CARD_COST;
+    public cardCost: number = constants.CARD_COST;
+    public oceanBonus: number = constants.OCEAN_BONUS;
 
     constructor(
         public name: string,
@@ -250,6 +252,9 @@ export class Player {
       if (this.isCorporation(CorporationName.CELESTIC) &&  resource === ResourceType.FLOATER) {
         result.push(new Celestic());
       }
+      if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) &&  resource === ResourceType.FLOATER) {
+        result.push(new StormCraftIncorporated());
+      }
       return result;
     }  
 
@@ -261,10 +266,12 @@ export class Player {
         }
       });
       if (this.isCorporation(CorporationName.CELESTIC) &&  resource === ResourceType.FLOATER) {
-        count += this.getResourcesOnCard(new Celestic());
+        count += this.getResourcesOnCardname(CardName.CELESTIC);
+      }
+      if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) &&  resource === ResourceType.FLOATER) {
+        count += this.getResourcesOnCardname(CardName.STORMCRAFT_INCORPORATED);
       }
       return count;
-
     }
 
     public getTagCount(tag: Tags, includeEventsTags:boolean = false): number {
@@ -798,6 +805,7 @@ export class Player {
 
     public getFloatersCanSpend(): number {
       for (const playedCard of this.playedCards) {
+
           if (playedCard.name === CardName.DIRIGIBLES) {
               return this.getResourcesOnCard(playedCard);
           }
@@ -825,6 +833,7 @@ export class Player {
                 if (playedCard.name === CardName.PSYCHROPHILES) {
                     this.removeResourceFrom(playedCard, howToPay.microbes);
                 }
+
                 if (playedCard.name === CardName.DIRIGIBLES) {
                     this.removeResourceFrom(playedCard, howToPay.floaters);
                 } 
@@ -1222,6 +1231,50 @@ export class Player {
     }
 
     private convertHeatIntoTemperature(game: Game): PlayerInput {
+      let heatAmount: number;
+      let floaterAmount: number;
+      if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCardname(CardName.STORMCRAFT_INCORPORATED) > 0 ) {
+        let raiseTempOptions = new AndOptions (
+          () => {
+            const whenDone = (err?: string) => {
+              if (
+                heatAmount + (floaterAmount * 2) < 8
+              ) {
+                throw new Error('Need to pay 8 heat');
+              }  
+              if (!err) {
+                this.removeResourceFrom(new StormCraftIncorporated, floaterAmount);
+                this.heat -= heatAmount;
+                this.actionsTakenThisRound++;
+              }
+              this.takeAction(game);
+            };
+            const action = game.increaseTemperature(this, 1);
+            if (action !== undefined) {
+              action.onend = whenDone;
+              return action;
+            }
+            whenDone();
+            game.log(this.name + " converted heat into temperature");
+            return undefined;
+          },
+          new SelectAmount("Select amount of heat to spend", (amount: number) => {
+            heatAmount = amount;
+            return undefined;
+          }, this.heat),
+          new SelectAmount("Select amount of floater on corporation to spend", (amount: number) => {
+            floaterAmount = amount;
+            return undefined;
+          }, this.getResourcesOnCardname(CardName.STORMCRAFT_INCORPORATED))
+        );
+        raiseTempOptions.title = 'Select resource amounts to raise temp';
+
+        return new SelectOption('Convert 8 heat into temperature', () => {
+          return raiseTempOptions;
+        });
+
+      } else {
+
       return new SelectOption('Convert 8 heat into temperature', () => {
         const action = game.increaseTemperature(this, 1);
         const whenDone = (err?: string) => {
@@ -1239,6 +1292,7 @@ export class Player {
         game.log(this.name + " converted heat into temperature");
         return undefined;
       });
+    }
     }
 
     private claimMilestone(
@@ -1544,7 +1598,10 @@ export class Player {
       }
 
       if (
-        this.heat >= constants.HEAT_FOR_TEMPERATURE &&
+        (this.heat >= constants.HEAT_FOR_TEMPERATURE || 
+          (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) &&
+           (this.getResourcesOnCardname(CardName.STORMCRAFT_INCORPORATED) * 2) + this.heat >= constants.HEAT_FOR_TEMPERATURE)
+           ) &&
             game.getTemperature() + 2 <= constants.MAX_TEMPERATURE) {
         action.options.push(
             this.convertHeatIntoTemperature(game)

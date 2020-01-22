@@ -328,6 +328,11 @@ import { NeutralizerFactory } from './cards/venusNext/NeutralizerFactory';
 import { OrbitalReflectors } from './cards/venusNext/OrbitalReflectors';
 import { MiningQuota } from './cards/venusNext/MiningQuota';
 import { Omnicourt } from './cards/venusNext/Omnicourt';
+import { Polyphemos } from './cards/colonies/Polyphemos';
+import { UtopiaInvest } from './cards/turmoil/UtopiaInvest';
+import { LakefrontResorts } from './cards/turmoil/LakefrontResorts';
+import { StormCraftIncorporated } from './cards/colonies/StormCraftIncorporated';
+
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -385,8 +390,8 @@ export const ALL_CORPORATION_CARDS: Array<CorporationCard> = [
 
 export const ALL_PRELUDE_CORPORATIONS: Array<CorporationCard> = [
         new CheungShingMARS(),
-        new RobinsonIndustries(),
         new PointLuna(),
+        new RobinsonIndustries(),
         new ValleyTrust(),
         new Vitor()
 ];
@@ -458,7 +463,17 @@ export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [
         new Manutech(),
         new MorningStarInc(),
         new Viron()
-];    
+];   
+
+export const ALL_COLONIES_CORPORATIONS: Array<CorporationCard> = [
+    new Polyphemos(),
+    new StormCraftIncorporated()
+];   
+
+export const ALL_TURMOIL_CORPORATIONS: Array<CorporationCard> = [
+    new LakefrontResorts(),
+    new UtopiaInvest()
+]; 
 
 export const ALL_PROJECT_CARDS: Array<IProjectCard> = [
     new AcquiredCompany(),

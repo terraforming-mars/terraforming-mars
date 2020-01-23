@@ -1,3 +1,4 @@
+import {ICard} from './ICard';
 import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
@@ -25,7 +26,7 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
 
       return new SelectCard(
           'Select card to add 2 microbes', cardsToPick,
-          (foundCards: Array<IProjectCard>) => {
+          (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0], 2);
             return undefined;
           }

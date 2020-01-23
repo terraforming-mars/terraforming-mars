@@ -1,3 +1,4 @@
+import {ICard} from './ICard';
 
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
@@ -39,11 +40,11 @@ export class ImportedHydrogen implements IProjectCard {
                 player.plants += 3;
                 return addOcean();
             }),
-            new SelectCard("Add 3 microbes to card", player.getResourceCards(ResourceType.MICROBE), (foundCards: Array<IProjectCard>) => {
+            new SelectCard("Add 3 microbes to card", player.getResourceCards(ResourceType.MICROBE), (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 3);
                 return addOcean();
             }),
-            new SelectCard("Add 2 animals to card", player.getResourceCards(ResourceType.ANIMAL), (foundCards: Array<IProjectCard>) => {
+            new SelectCard("Add 2 animals to card", player.getResourceCards(ResourceType.ANIMAL), (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 2);
                 return addOcean();
             })

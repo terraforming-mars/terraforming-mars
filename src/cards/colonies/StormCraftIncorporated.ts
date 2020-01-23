@@ -1,24 +1,23 @@
-
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
 import { ResourceType } from '../../ResourceType';
-import { Game } from '../../Game';
-import { IActionCard, ICard } from '../ICard';
+import {ICard, IActionCard} from '../ICard';
 import { SelectCard } from '../../inputs/SelectCard';
+import { CardType } from '../CardType';
+import { CorporationName } from '../../CorporationName';
 
-export class Celestic implements IActionCard, CorporationCard {
-    public name: string = "Celestic";
-    public tags: Array<Tags> = [Tags.VENUS];
-    public startingMegaCredits: number = 42;
+export class StormCraftIncorporated implements IActionCard, CorporationCard {
+    public name: string =  CorporationName.STORMCRAFT_INCORPORATED;
+    public tags: Array<Tags> = [Tags.JOVIAN];
+    public startingMegaCredits: number = 48;
     public resourceType: ResourceType = ResourceType.FLOATER;
 
-    public initialAction(player: Player, game: Game) {
-        for (let foundCard of game.drawCardsByResource(ResourceType.FLOATER, 2)) {
-            player.cardsInHand.push(foundCard);
-        }
-        return undefined;
-    }
+    // Hack to mimic project card
+    public cost: number = 0;
+    public canPlay() {return true;}
+    public cardType: CardType = CardType.ACTIVE;
+    // End of hack
 
     public play() {
         return undefined;
@@ -26,10 +25,6 @@ export class Celestic implements IActionCard, CorporationCard {
 
     public canAct(): boolean {
         return true; 
-    }
-
-    public getVictoryPoints(player: Player): number {
-        return Math.floor(player.getResourcesOnCard(this) / 3);
     }
 
     public action(player: Player) {

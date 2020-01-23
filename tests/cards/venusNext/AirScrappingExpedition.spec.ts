@@ -4,7 +4,7 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Celestic } from '../../../src/cards/venusNext/Celestic';
 import { SelectCard } from "../../../src/inputs/SelectCard";
-import { IProjectCard } from '../../../src/cards/IProjectCard';
+import { ICard } from '../../../src/cards/ICard';
 
 describe("AirScrappingExpedition", function () {
     it("Should play", function () {
@@ -14,7 +14,7 @@ describe("AirScrappingExpedition", function () {
         player.corporationCard = corp;
         expect(card.canPlay()).to.eq(true);
 
-        const selectCard = card.play(player) as SelectCard<IProjectCard>;
+        const selectCard = card.play(player) as SelectCard<ICard>;
         expect(selectCard).not.to.eq(undefined);
         expect(selectCard instanceof SelectCard).to.eq(true);
 

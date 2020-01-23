@@ -5563,9 +5563,10 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Stormcraft",`
+[CorporationName.STORMCRAFT_INCORPORATED,`
       <div class="tag tag1 tag-jovian"></div>
       <div class="corporationLabel">CORPORATION</div>
+      ##RESOURCES##
       <div class="colonies-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">

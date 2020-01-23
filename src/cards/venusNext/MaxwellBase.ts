@@ -7,7 +7,7 @@ import { Game } from "../../Game";
 import { SpaceName } from "../../SpaceName";
 import { SpaceType } from "../../SpaceType";
 import { Resources } from '../../Resources';
-import { IActionCard } from '../ICard';
+import { IActionCard, ICard } from '../ICard';
 import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
 
@@ -29,7 +29,7 @@ export class MaxwellBase implements IActionCard, IProjectCard {
         return 3;
     } 
 
-    public getResCards(player: Player): IProjectCard[] {
+    public getResCards(player: Player): ICard[] {
         let resourceCards = player.getResourceCards(ResourceType.FLOATER);
         resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.MICROBE));
         resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));
@@ -44,7 +44,7 @@ export class MaxwellBase implements IActionCard, IProjectCard {
         return new SelectCard(
             'Select card to add 1 resource',
             this.getResCards(player),
-            (foundCards: Array<IProjectCard>) => {
+            (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 1);
               return undefined;
             }

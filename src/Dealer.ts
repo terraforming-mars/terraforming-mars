@@ -332,6 +332,7 @@ import { Polyphemos } from './cards/colonies/Polyphemos';
 import { UtopiaInvest } from './cards/turmoil/UtopiaInvest';
 import { LakefrontResorts } from './cards/turmoil/LakefrontResorts';
 import { StormCraftIncorporated } from './cards/colonies/StormCraftIncorporated';
+import { Arklight } from './cards/colonies/Arklight';
 
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
@@ -466,6 +467,7 @@ export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [
 ];   
 
 export const ALL_COLONIES_CORPORATIONS: Array<CorporationCard> = [
+    new Arklight(),
     new Polyphemos(),
     new StormCraftIncorporated()
 ];   

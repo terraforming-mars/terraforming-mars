@@ -265,6 +265,7 @@ export class Player {
       if (this.corporationCard !== undefined && this.corporationCard.resourceType !== undefined && this.corporationCard.resourceType === resource) {
         count += this.getResourcesOnCard(this.corporationCard);
       }    
+
       return count;
     }
 

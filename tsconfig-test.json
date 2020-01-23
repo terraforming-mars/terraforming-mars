@@ -344,6 +344,7 @@
         "tests/cards/venusNext/VenusSoils.spec.ts",
         "tests/cards/venusNext/VenusWaystation.spec.ts",
         "tests/cards/venusNext/WaterToVenus.spec.ts",
+        "tests/cards/colonies/Arklight.spec.ts",
         "tests/cards/colonies/Polyphemos.spec.ts",     
         "tests/cards/colonies/StormCraftIncorporated.spec.ts",
         "tests/cards/turmoil/UtopiaInvest.spec.ts",   

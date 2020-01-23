@@ -28,6 +28,7 @@ import { Celestic } from './cards/venusNext/Celestic';
 import { CardName } from "./CardName";
 import { CorporationName } from './CorporationName';
 import { StormCraftIncorporated } from './cards/colonies/StormCraftIncorporated';
+import { Arklight } from './cards/colonies/Arklight';
 
 
 const INITIAL_ACTION: string = 'INITIAL';
@@ -255,6 +256,9 @@ export class Player {
       if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) &&  resource === ResourceType.FLOATER) {
         result.push(new StormCraftIncorporated());
       }
+      if (this.isCorporation(CorporationName.ARKLIGHT) &&  resource === ResourceType.ANIMAL) {
+        result.push(new Arklight());
+      }
       return result;
     }  
 
@@ -271,6 +275,10 @@ export class Player {
       if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) &&  resource === ResourceType.FLOATER) {
         count += this.getResourcesOnCardname(CardName.STORMCRAFT_INCORPORATED);
       }
+      if (this.isCorporation(CorporationName.ARKLIGHT) &&  resource === ResourceType.ANIMAL) {
+        count += this.getResourcesOnCardname(CardName.ARKLIGHT);
+      }
+      
       return count;
     }
 

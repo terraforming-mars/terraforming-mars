@@ -2,9 +2,8 @@ import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
 import { ResourceType } from '../../ResourceType';
-import { IActionCard } from '../ICard';
+import {ICard, IActionCard} from '../ICard';
 import { SelectCard } from '../../inputs/SelectCard';
-import { IProjectCard } from '../IProjectCard';
 import { CardType } from '../CardType';
 import { CorporationName } from '../../CorporationName';
 
@@ -38,7 +37,7 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard {
         return new SelectCard(
             'Select card to add 1 floater',
             floaterCards,
-            (foundCards: Array<IProjectCard>) => {
+            (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 1);
             return undefined;
             }

@@ -29,6 +29,7 @@ import {SpaceName} from './SpaceName';
 import {Colony} from './OriginalBoard';
 import {CorporationName} from './CorporationName';
 import {CardName} from './CardName';
+import { ICard } from './cards/ICard';
 
 export class Game {
     public activePlayer: Player;
@@ -298,7 +299,7 @@ export class Game {
       result.options.push(
         new SelectCard(
           'Select initial cards to buy', dealtCards,
-          (foundCards: Array<IProjectCard>) => {
+          (foundCards: Array<ICard>) => {
             for (const dealt of dealtCards) {
               if (foundCards.find((foundCard) => foundCard.name === dealt.name)) {
                 player.cardsInHand.push(dealt);

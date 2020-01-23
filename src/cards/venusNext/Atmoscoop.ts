@@ -7,6 +7,7 @@ import { OrOptions } from '../../inputs/OrOptions';
 import { SelectOption } from '../../inputs/SelectOption';
 import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
+import { ICard } from '../ICard';
 
 export class Atmoscoop implements IProjectCard {
     public cost: number = 22;
@@ -21,7 +22,7 @@ export class Atmoscoop implements IProjectCard {
         const raiseTemp = new SelectCard(
             'Select card to add 2 floaters and raise temperature 2 steps',
             floaterCards,
-            (foundCards: Array<IProjectCard>) => {
+            (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 2);
               return game.increaseTemperature(player,2);
             }
@@ -29,7 +30,7 @@ export class Atmoscoop implements IProjectCard {
         const raiseVenus = new SelectCard(
             'Select card to add 2 floaters and raise Venus 2 steps',
             floaterCards,
-            (foundCards: Array<IProjectCard>) => {
+            (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 2);
               return game.increaseVenusScaleLevel(player,2);
             }

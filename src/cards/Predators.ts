@@ -1,4 +1,4 @@
-import { IActionCard } from "./ICard";
+import { IActionCard, ICard } from './ICard';
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -17,15 +17,15 @@ export class Predators implements IProjectCard, IActionCard {
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 11 - player.getRequirementsBonus(game);
     }
-    public getVictoryPoints(player: Player) {
+    public getVictoryPoints(player: Player): number {
         return player.getResourcesOnCard(this);
     }
     public play() {
         return undefined;
     }
 
-    private getPossibleTargetCards(player: Player, game: Game): Array<IProjectCard> {
-        let possibleCards = new Array<IProjectCard>(); 
+    private getPossibleTargetCards(player: Player, game: Game): Array<ICard> {
+        let possibleCards = new Array<ICard>(); 
         const petsCard = new Pets();
         for (let card of game.getPlayedCardsWithAnimals()) {  
             let owner = game.getCardPlayer(card.name);
@@ -38,7 +38,7 @@ export class Predators implements IProjectCard, IActionCard {
         return possibleCards;
     }
 
-    private doAction(targetCard:IProjectCard, player: Player, game: Game): void {
+    private doAction(targetCard:ICard, player: Player, game: Game): void {
         game.getCardPlayer(targetCard.name).removeAnimals(player, targetCard, 1);
         player.addResourceTo(this);
     }
@@ -57,7 +57,7 @@ export class Predators implements IProjectCard, IActionCard {
         return new SelectCard(
             "Select card to remove animal from", 
             animalCards, 
-            (foundCards: Array<IProjectCard>) => {
+            (foundCards: Array<ICard>) => {
                 this.doAction(foundCards[0], player, game)
                 return undefined;
             }

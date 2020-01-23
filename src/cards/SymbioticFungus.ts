@@ -1,6 +1,6 @@
 
 import { Tags } from "./Tags";
-import { IActionCard } from "./ICard";
+import { IActionCard, ICard } from './ICard';
 import { IProjectCard } from "./IProjectCard";
 import { Player } from "../Player";
 import { Game } from "../Game";
@@ -24,7 +24,7 @@ export class SymbioticFungus implements IActionCard, IProjectCard {
     }
     public action(player: Player) {
         const availableCards = player.getResourceCards(ResourceType.MICROBE);
-        return new SelectCard("Select card to add microbe", availableCards, (foundCards: Array<IProjectCard>) => {
+        return new SelectCard("Select card to add microbe", availableCards, (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0]);
             return undefined;
         });

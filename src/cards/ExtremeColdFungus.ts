@@ -1,5 +1,5 @@
 
-import {IActionCard} from './ICard';
+import {ICard, IActionCard} from './ICard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
@@ -36,7 +36,7 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
             new SelectCard(
                 'Select card to add 2 microbes',
                 otherMicrobeCards,
-                (foundCards: Array<IProjectCard>) => {
+                (foundCards: Array<ICard>) => {
                   player.addResourceTo(foundCards[0], 2);
                   return undefined;
                 }

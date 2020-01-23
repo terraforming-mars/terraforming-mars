@@ -1,3 +1,4 @@
+import {ICard} from '../ICard';
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
@@ -21,7 +22,7 @@ export class HydrogenToVenus implements IProjectCard {
             return new SelectCard(
                 'Select card to add ' + jovianTags + ' floater(s)',
                 floatersCards,
-                (foundCards: Array<IProjectCard>) => {
+                (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], jovianTags);
                 game.increaseVenusScaleLevel(player,1);
                 return undefined;

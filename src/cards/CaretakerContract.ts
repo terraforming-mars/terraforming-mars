@@ -1,5 +1,5 @@
 
-import {IActionCard} from './ICard';
+import { IActionCard, ICard } from './ICard';
 import {IProjectCard} from './IProjectCard';
 import {CardType} from './CardType';
 import {Tags} from './Tags';
@@ -8,7 +8,6 @@ import {Game} from '../Game';
 import { CorporationName } from '../CorporationName';
 import { CardName } from '../CardName';
 import { AndOptions } from '../inputs/AndOptions';
-import { StormCraftIncorporated } from './colonies/StormCraftIncorporated';
 import { SelectAmount } from '../inputs/SelectAmount';
 
 export class CaretakerContract implements IActionCard, IProjectCard {
@@ -39,7 +38,7 @@ export class CaretakerContract implements IActionCard, IProjectCard {
               ) {
                 throw new Error('Need to pay 8 heat');
               }
-              player.removeResourceFrom(new StormCraftIncorporated, floaterAmount);
+              player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
               player.heat -= heatAmount;
               player.terraformRating++;
               return undefined;

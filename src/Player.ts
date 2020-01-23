@@ -24,12 +24,8 @@ import {IAward} from './awards/IAward';
 import { VictoryPointsBreakdown } from './VictoryPointsBreakdown';
 import {Resources} from './Resources';
 import { ResourceType } from './ResourceType';
-import { Celestic } from './cards/venusNext/Celestic';
 import { CardName } from "./CardName";
 import { CorporationName } from './CorporationName';
-import { StormCraftIncorporated } from './cards/colonies/StormCraftIncorporated';
-import { Arklight } from './cards/colonies/Arklight';
-
 
 const INITIAL_ACTION: string = 'INITIAL';
 
@@ -151,7 +147,7 @@ export class Player {
     }
     public removeAnimals(
         removingPlayer: Player,
-        card: IProjectCard,
+        card: ICard,
         count: number): void {
       if (removingPlayer !== this && this.hasProtectedHabitats()) {
         throw new Error('Can not remove animals due to protected habitats');
@@ -166,7 +162,7 @@ export class Player {
     }
     public removeMicrobes(
         removingPlayer: Player,
-        card: IProjectCard,
+        card: ICard,
         count: number): void {
       if (removingPlayer !== this && this.hasProtectedHabitats()) {
         throw new Error(
@@ -213,13 +209,13 @@ export class Player {
       }
       return undefined;
     }
-    public addAnimalsToCard(card: IProjectCard, count: number): void {
+    public addAnimalsToCard(card: ICard, count: number): void {
       this.addResourceTo(card, count);
     }
     private generateId(): string {
       return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
     }
-    public removeResourceFrom(card: IProjectCard, count: number = 1): void {
+    public removeResourceFrom(card: ICard, count: number = 1): void {
       const cardValue: number | undefined =
             this.resourcesOnCards.get(card.name);
       if (cardValue) {
@@ -228,7 +224,7 @@ export class Player {
         );
       }
     }
-    public addResourceTo(card: IProjectCard, count: number = 1): void {
+    public addResourceTo(card: ICard, count: number = 1): void {
       const cardValue: number | undefined =
             this.resourcesOnCards.get(card.name);
       if (cardValue) {
@@ -237,29 +233,25 @@ export class Player {
         this.resourcesOnCards.set(card.name, count);
       }
     }
-    public getCardsWithResources(): Array<IProjectCard> {
+    public getCardsWithResources(): Array<ICard> {
       return this.playedCards.filter(
           (card) => Number(this.resourcesOnCards.get(card.name)) > 0
       );
     }
 
-    public getResourceCards(resource: ResourceType): Array<IProjectCard> {
-      const result: Array<IProjectCard> = [];
+    public getResourceCards(resource: ResourceType): Array<ICard> {
+      const result: Array<ICard> = [];
         this.playedCards.forEach((card) => {
           if (card.resourceType !== undefined && card.resourceType === resource) {
             result.push(card);
           }
         });
-      if (this.isCorporation(CorporationName.CELESTIC) &&  resource === ResourceType.FLOATER) {
-        result.push(new Celestic());
-      }
-      if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) &&  resource === ResourceType.FLOATER) {
-        result.push(new StormCraftIncorporated());
-      }
-      if (this.isCorporation(CorporationName.ARKLIGHT) &&  resource === ResourceType.ANIMAL) {
-        result.push(new Arklight());
-      }
-      return result;
+
+        if (this.corporationCard !== undefined && this.corporationCard.resourceType !== undefined && this.corporationCard.resourceType === resource) {
+          result.push(this.corporationCard);
+        }  
+
+        return result;
     }  
 
     public getResourceCount(resource: ResourceType): number {
@@ -269,16 +261,11 @@ export class Player {
           count += this.getResourcesOnCard(card);
         }
       });
-      if (this.isCorporation(CorporationName.CELESTIC) &&  resource === ResourceType.FLOATER) {
-        count += this.getResourcesOnCardname(CardName.CELESTIC);
-      }
-      if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) &&  resource === ResourceType.FLOATER) {
-        count += this.getResourcesOnCardname(CardName.STORMCRAFT_INCORPORATED);
-      }
-      if (this.isCorporation(CorporationName.ARKLIGHT) &&  resource === ResourceType.ANIMAL) {
-        count += this.getResourcesOnCardname(CardName.ARKLIGHT);
-      }
-      
+
+      if (this.corporationCard !== undefined && this.corporationCard.resourceType !== undefined && this.corporationCard.resourceType === resource) {
+        count += this.getResourcesOnCard(this.corporationCard);
+      }    
+
       return count;
     }
 
@@ -1251,7 +1238,7 @@ export class Player {
                 throw new Error('Need to pay 8 heat');
               }  
               if (!err) {
-                this.removeResourceFrom(new StormCraftIncorporated, floaterAmount);
+                this.removeResourceFrom(this.corporationCard as ICard, floaterAmount);
                 this.heat -= heatAmount;
                 this.actionsTakenThisRound++;
               }

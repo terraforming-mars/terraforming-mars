@@ -1,3 +1,4 @@
+import {ICard} from './ICard';
 
 import { Player } from "../Player";
 import { Game } from "../Game";
@@ -53,7 +54,7 @@ export class LargeConvoy implements IProjectCard {
             new SelectCard(
                 "Select card to add 4 animals", 
                 cards, 
-                (foundCards: Array<IProjectCard>) => { 
+                (foundCards: Array<ICard>) => { 
                     player.addResourceTo(foundCards[0], 4);
                     return addOcean();
                 }

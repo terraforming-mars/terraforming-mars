@@ -1,3 +1,4 @@
+import {ICard} from './ICard';
 
 import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
@@ -40,7 +41,7 @@ export class EosChasmaNationalPark implements IProjectCard {
     return new SelectCard(
         'Select card to add 1 animal',
         availableCards,
-        (foundCards: Array<IProjectCard>) => {
+        (foundCards: Array<ICard>) => {
           game.getCardPlayer(foundCards[0].name).addResourceTo(foundCards[0]);
           player.plants += 3;
           player.setProduction(Resources.MEGACREDITS,2);

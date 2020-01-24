@@ -1,3 +1,4 @@
+import {ICard} from './ICard';
 
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
@@ -29,22 +30,22 @@ export class ImportedNitrogen implements IProjectCard {
         } else if (otherAnimalCards.length > 0 && otherMicrobeCards.length > 0) {
             return new AndOptions(
                 () => this.giveResources(player),
-                new SelectCard("Select card to add 3 microbes", otherMicrobeCards, (foundCards: Array<IProjectCard>) => {
+                new SelectCard("Select card to add 3 microbes", otherMicrobeCards, (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], 3);
                     return undefined;
                 }),
-                new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => {
+                new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], 2);
                     return undefined;
                 })
             );
         } else if (otherAnimalCards.length > 0) {
-            return new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<IProjectCard>) => {
+            return new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 2);
                 return this.giveResources(player);
             });
         }
-        return new SelectCard("Select card to add 3 microbes", otherMicrobeCards, (foundCards: Array<IProjectCard>) => {
+        return new SelectCard("Select card to add 3 microbes", otherMicrobeCards, (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0], 3);
             return this.giveResources(player);
         });

@@ -1,3 +1,4 @@
+import {ICard} from './ICard';
 
 import {IProjectCard} from './IProjectCard';
 import {CardType} from './CardType';
@@ -13,7 +14,7 @@ export class CEOsFavoriteProject implements IProjectCard {
     public canPlay(player: Player): boolean {
       return this.getAvailableCards(player).length > 0;
     }
-    private getAvailableCards(player: Player): Array<IProjectCard> {
+    private getAvailableCards(player: Player): Array<ICard> {
       return player.getCardsWithResources().filter(
           (card) => player.getResourcesOnCard(card)
       );
@@ -23,7 +24,7 @@ export class CEOsFavoriteProject implements IProjectCard {
       return new SelectCard(
           'Select card to add resource',
           availableCards,
-          (foundCards: Array<IProjectCard>) => {
+          (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0]);
             return undefined;
           }

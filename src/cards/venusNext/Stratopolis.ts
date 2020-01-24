@@ -6,7 +6,7 @@ import { Game } from "../../Game";
 import { SpaceName } from "../../SpaceName";
 import { SpaceType } from "../../SpaceType";
 import { Resources } from '../../Resources';
-import { IActionCard } from '../ICard';
+import { IActionCard, ICard } from '../ICard';
 import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
 
@@ -29,7 +29,7 @@ export class Stratopolis implements IActionCard, IProjectCard {
         return Math.floor(player.getResourcesOnCard(this) / 3);
     }
 
-    public getResCards(player: Player): IProjectCard[] {
+    public getResCards(player: Player): ICard[] {
         let resourceCards = player.getResourceCards(ResourceType.FLOATER);
         resourceCards.filter(card => card.tags.filter((cardTag) => cardTag === Tags.VENUS));
         return resourceCards;
@@ -43,7 +43,7 @@ export class Stratopolis implements IActionCard, IProjectCard {
         return new SelectCard(
             'Select card to add 2 floaters',
             this.getResCards(player),
-            (foundCards: Array<IProjectCard>) => {
+            (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 2);
               return undefined;
             }

@@ -7,7 +7,7 @@ import { AndOptions } from "../../src/inputs/AndOptions";
 import { SelectCard } from "../../src/inputs/SelectCard";
 import { Tardigrades } from "../../src/cards/Tardigrades";
 import { Pets } from "../../src/cards/Pets";
-import { IProjectCard } from "../../src/cards/IProjectCard";
+import { ICard } from '../../src/cards/ICard';
 
 describe("ImportedNitrogen", function () {
     it("Can play", function () {
@@ -30,7 +30,7 @@ describe("ImportedNitrogen", function () {
         const action = card.play(player);
         expect(action).not.to.eq(undefined);
         expect(action instanceof SelectCard).to.eq(true);
-        const andAction = action as SelectCard<IProjectCard>;
+        const andAction = action as SelectCard<ICard>;
         andAction.cb([pets]);
         expect(player.terraformRating).to.eq(21);
         expect(player.plants).to.eq(4);
@@ -44,7 +44,7 @@ describe("ImportedNitrogen", function () {
         const action = card.play(player);
         expect(action).not.to.eq(undefined);
         expect(action instanceof SelectCard).to.eq(true);
-        const andAction = action as SelectCard<IProjectCard>;
+        const andAction = action as SelectCard<ICard>;
         andAction.cb([tardigrades]);
         expect(player.terraformRating).to.eq(21);
         expect(player.plants).to.eq(4);

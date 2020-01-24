@@ -7,6 +7,7 @@ import { Resources } from "../../Resources";
 import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
 import { Game } from '../../Game';
+import { ICard } from '../ICard';
 
 
 export class VenusSoils implements IProjectCard {
@@ -24,7 +25,7 @@ export class VenusSoils implements IProjectCard {
         return new SelectCard(
             'Select card to add 1 resource',
             player.getResourceCards(ResourceType.MICROBE),
-            (foundCards: Array<IProjectCard>) => {
+            (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 2);
               return undefined;
             }

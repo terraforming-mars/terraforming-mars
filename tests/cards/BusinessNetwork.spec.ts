@@ -3,11 +3,11 @@ import { expect } from "chai";
 import { BusinessNetwork } from "../../src/cards/BusinessNetwork";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { IProjectCard } from "../../src/cards/IProjectCard";
 import { Game } from "../../src/Game";
 import { SelectCard } from "../../src/inputs/SelectCard";
 import { SelectHowToPay } from "../../src/inputs/SelectHowToPay";
 import { Resources } from '../../src/Resources';
+import { IProjectCard } from '../../src/cards/IProjectCard';
 
 describe("BusinessNetwork", function () {
     it("Should play", function () {

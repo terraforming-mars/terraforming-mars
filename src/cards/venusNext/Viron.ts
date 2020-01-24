@@ -4,7 +4,6 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { Tags } from "../Tags";
 import { ICard } from "../ICard";
-import { IProjectCard } from "../IProjectCard";
 import {SelectCard} from '../../inputs/SelectCard';
 
 export class Viron implements ICard, CorporationCard {
@@ -17,7 +16,7 @@ export class Viron implements ICard, CorporationCard {
     }
 
     public action(player: Player, game: Game) {
-        const result: Array<IProjectCard> = [];
+        const result: Array<ICard> = [];
         for (const playedCard of player.playedCards) {
             if (
               playedCard.action !== undefined &&
@@ -30,7 +29,7 @@ export class Viron implements ICard, CorporationCard {
         return new SelectCard(
             'Perform again an action from a played card',
             result,
-            (foundCards: Array<IProjectCard>) => {
+            (foundCards: Array<ICard>) => {
               const foundCard = foundCards[0];
               const action = foundCard.action!(player, game);
               const whenDone = (err?: string) => {

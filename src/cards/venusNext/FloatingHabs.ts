@@ -1,5 +1,5 @@
 import { IProjectCard } from "../IProjectCard";
-import {IActionCard} from '../ICard';
+import {ICard, IActionCard} from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -32,7 +32,7 @@ export class FloatingHabs implements IActionCard,IProjectCard {
       return new SelectCard(
           "Spend 2 MC and select card to add 1 floater",
           floaterCards,
-          (foundCards: Array<IProjectCard>) => {
+          (foundCards: Array<ICard>) => {
             if (player.canUseHeatAsMegaCredits && player.heat > 0) {
               return new SelectHowToPay(
                 'Select how to pay ', false, false,

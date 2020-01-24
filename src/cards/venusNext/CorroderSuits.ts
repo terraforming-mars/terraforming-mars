@@ -5,6 +5,7 @@ import { Player } from "../../Player";
 import { Resources } from "../../Resources";
 import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
+import { ICard } from '../ICard';
 
 
 export class CorroderSuits implements IProjectCard {
@@ -21,13 +22,13 @@ export class CorroderSuits implements IProjectCard {
         return new SelectCard(
             'Select card to add 1 resource',
             this.getResCards(player),
-            (foundCards: Array<IProjectCard>) => {
+            (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 1);
               return undefined;
             }
         );
     }
-    public getResCards(player: Player): IProjectCard[] {
+    public getResCards(player: Player): ICard[] {
         let resourceCards = player.getResourceCards(ResourceType.FLOATER);
         resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.MICROBE));
         resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));

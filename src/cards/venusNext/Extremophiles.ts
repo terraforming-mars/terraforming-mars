@@ -1,5 +1,5 @@
 import { IProjectCard } from "../IProjectCard";
-import {IActionCard} from '../ICard';
+import {ICard, IActionCard} from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -36,7 +36,7 @@ export class Extremophiles implements IActionCard,IProjectCard {
         return new SelectCard(
             'Select card to add 1 microbe',
             microbeCards,
-            (foundCards: Array<IProjectCard>) => {
+            (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 1);
                 return undefined;
             }

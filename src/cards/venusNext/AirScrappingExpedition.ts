@@ -1,3 +1,4 @@
+import {ICard} from '../ICard';
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
@@ -23,7 +24,7 @@ export class AirScrappingExpedition implements IProjectCard {
         return new SelectCard(
             'Select card to add 3 floaters',
             floaterCards,
-            (foundCards: Array<IProjectCard>) => {
+            (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 3);
             return undefined;
             }

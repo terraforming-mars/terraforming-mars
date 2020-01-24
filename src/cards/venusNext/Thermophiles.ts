@@ -1,5 +1,5 @@
 import { IProjectCard } from "../IProjectCard";
-import {IActionCard} from '../ICard';
+import { IActionCard, ICard } from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -27,11 +27,11 @@ export class Thermophiles implements IActionCard,IProjectCard {
     }   
     public action(player: Player, game: Game) {
         const microbeCards = player.getResourceCards(ResourceType.MICROBE).filter(card => card.tags.indexOf(Tags.VENUS) !== -1);
-        var opts: Array<SelectOption | SelectCard<IProjectCard>> = [];
+        var opts: Array<SelectOption | SelectCard<ICard>> = [];
         const addResource = new SelectCard(
             'Select a Venus card to add 1 microbe',
             microbeCards,
-            (foundCards: Array<IProjectCard>) => {
+            (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 1);
               return undefined;
             }

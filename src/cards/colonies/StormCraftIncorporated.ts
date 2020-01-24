@@ -4,7 +4,6 @@ import { Tags } from "../Tags";
 import { ResourceType } from '../../ResourceType';
 import {ICard, IActionCard} from '../ICard';
 import { SelectCard } from '../../inputs/SelectCard';
-import { CardType } from '../CardType';
 import { CorporationName } from '../../CorporationName';
 
 export class StormCraftIncorporated implements IActionCard, CorporationCard {
@@ -12,12 +11,6 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard {
     public tags: Array<Tags> = [Tags.JOVIAN];
     public startingMegaCredits: number = 48;
     public resourceType: ResourceType = ResourceType.FLOATER;
-
-    // Hack to mimic project card
-    public cost: number = 0;
-    public canPlay() {return true;}
-    public cardType: CardType = CardType.ACTIVE;
-    // End of hack
 
     public play() {
         return undefined;

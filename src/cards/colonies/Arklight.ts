@@ -3,7 +3,6 @@ import { Player } from "../../Player";
 import { Tags } from "../Tags";
 import { ResourceType } from '../../ResourceType';
 import { IProjectCard } from '../IProjectCard';
-import { CardType } from '../CardType';
 import { CorporationName } from '../../CorporationName';
 import { Resources } from '../../Resources';
 import { Game } from '../../Game';
@@ -13,11 +12,6 @@ export class Arklight implements CorporationCard {
     public tags: Array<Tags> = [Tags.ANIMAL];
     public startingMegaCredits: number = 45;
     public resourceType: ResourceType = ResourceType.ANIMAL;
-    // Hack to mimic project card
-    public cost: number = 0;
-    public canPlay() {return true;}
-    public cardType: CardType = CardType.ACTIVE;
-    // End of hack
 
     public play(player: Player) {
         player.setProduction(Resources.MEGACREDITS, 2);

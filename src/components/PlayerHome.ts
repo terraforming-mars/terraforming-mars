@@ -109,7 +109,7 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <div class="player_home_block player_home_block--corporation">
                     <h2>Corporation Card</h2>
-                    <card :card="player.corporationCard"></card>
+                    <card :card="player.corporationCard" :resources="player.corporationCardResources"></card>
                 </div>
   
                 <a name="cards" class="player_home_anchor"></a>

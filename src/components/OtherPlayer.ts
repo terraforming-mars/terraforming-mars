@@ -1,8 +1,6 @@
 
 import Vue from "vue";
 
-import { CardModel } from "../models/CardModel";
-import { getProjectCardByName } from "./Card";
 import { PlayerResources } from "./PlayerResources";
 
 export const OtherPlayer = Vue.component("other-player", {
@@ -16,14 +14,6 @@ export const OtherPlayer = Vue.component("other-player", {
         };
     },
     methods: {
-        getEventCards: function () {
-            return this.player.playedCards.map((card: CardModel) => {
-                return getProjectCardByName(card.name);
-            });
-        },
-        getCorporationCard: function () {
-                return this.player.corporationCard;
-        },
         toggleDisplayed: function () {
             this.displayed = !this.displayed;
         }
@@ -43,14 +33,14 @@ export const OtherPlayer = Vue.component("other-player", {
                 <div v-if="player.playedCards.length > 0" class="player_home_block">
                     <h4>Played Cards</h4>
                     <div>
-                        <div class="cardbox" v-for="card in getEventCards()" :key="card">
+                        <div v-for="card in player.playedCards" :key="card.name" class="cardbox">
                             <card :card="card.name" :resources="card.resources"></card>
                         </div>
                     </div>
                 </div> 
 
                 <div v-if="player.corporationCard !== undefined" class="player_home_block">
-                    <card :card="getCorporationCard()"></card>
+                    <card :card="player.corporationCard" :resources="player.corporationCardResources"></card>
                 </div>
             </div>
         </div>

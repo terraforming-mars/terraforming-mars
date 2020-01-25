@@ -23,7 +23,7 @@ export class TowingAComet implements IProjectCard {
             return game.increaseOxygenLevel(player, 1);
         }
 
-        return new SelectSpace("Select place for oean tile", game.board.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
+        return new SelectSpace("Select place for ocean tile", game.board.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
             game.addOceanTile(player, foundSpace.id)
             player.plants += 2;
             return game.increaseOxygenLevel(player, 1);

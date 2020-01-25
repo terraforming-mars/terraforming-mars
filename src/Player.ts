@@ -179,8 +179,8 @@ export class Player {
       return this.resourcesOnCards.get(card.name) || 0;
     }
 
-    public getResourcesOnCardname(cardname: CardName):number {
-      return this.resourcesOnCards.get(cardname) || 0;
+    public getResourcesOnCardname(cardname: CardName | CorporationName):number {
+      return this.resourcesOnCards.get(cardname as string) || 0;
     }
 
     public getRequirementsBonus(game: Game, venusOnly?: boolean): number {
@@ -1227,7 +1227,7 @@ export class Player {
     private convertHeatIntoTemperature(game: Game): PlayerInput {
       let heatAmount: number;
       let floaterAmount: number;
-      if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCardname(CardName.STORMCRAFT_INCORPORATED) > 0 ) {
+      if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED) > 0 ) {
         let raiseTempOptions = new AndOptions (
           () => {
             const whenDone = (err?: string) => {
@@ -1259,7 +1259,7 @@ export class Player {
           new SelectAmount("Select amount of floater on corporation to spend", (amount: number) => {
             floaterAmount = amount;
             return undefined;
-          }, this.getResourcesOnCardname(CardName.STORMCRAFT_INCORPORATED))
+          }, this.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED))
         );
         raiseTempOptions.title = 'Select resource amounts to raise temp';
 
@@ -1594,7 +1594,7 @@ export class Player {
       if (
         (this.heat >= constants.HEAT_FOR_TEMPERATURE || 
           (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) &&
-           (this.getResourcesOnCardname(CardName.STORMCRAFT_INCORPORATED) * 2) + this.heat >= constants.HEAT_FOR_TEMPERATURE)
+           (this.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED) * 2) + this.heat >= constants.HEAT_FOR_TEMPERATURE)
            ) &&
             game.getTemperature() + 2 <= constants.MAX_TEMPERATURE) {
         action.options.push(

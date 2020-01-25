@@ -391,11 +391,9 @@ export class Player {
           mappedCards.push(this.getCard(pi.cards, cardName));
         }
         if (input[0].length < pi.minCardsToSelect) {
-          console.warn('selected cards', input[0]);
           throw new Error('Not enough cards selected');
         }
         if (input[0].length > pi.maxCardsToSelect) {
-          console.warn('selected cards', input[0]);
           throw new Error('Too many cards selected');
         }
         if (mappedCards.length !== input[0].length) {
@@ -1675,7 +1673,6 @@ export class Player {
           waitingFor.onend();
         }
       } catch (err) {
-        console.warn('Error running input', err);
         this.waitingFor = waitingFor;
         throw err;
       }

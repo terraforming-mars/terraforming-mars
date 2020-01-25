@@ -5,7 +5,19 @@ import { PlayerInputModel } from "../models/PlayerInputModel";
 export const SelectSpace = Vue.component("select-space", {
     props: ["playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
-        return {};
+        return {
+            spaceId: undefined,
+            warning: undefined
+        };
+    },
+    methods: {
+        saveData: function () {
+            if (this.$data.spaceId === undefined) {
+                this.$data.warning = "Must select a space";
+                return;
+            }
+            this.onsave([[this.$data.spaceId]]);
+        }
     },
     render: function (createElement) {
         const playerInput: PlayerInputModel = this.playerinput as PlayerInputModel;
@@ -13,7 +25,9 @@ export const SelectSpace = Vue.component("select-space", {
         if (this.showtitle) {
             children.push(createElement("div", playerInput.title));
         }
-
+        if (this.$data.warning) {
+            children.push(createElement("div", { domProps: { className: "nes-container is-rounded" } }, [createElement("span", { domProps: { className: "nes-text is-warning" } }, this.$data.warning)]));
+        }
         const clearAllAvailableSpaces = function() {
             const elTiles = document.getElementsByClassName("board_space");
             for (let i = 0; i < elTiles.length; i++) {
@@ -42,9 +56,10 @@ export const SelectSpace = Vue.component("select-space", {
                         for (let j = 0; j < elTiles.length; j++) {
                             (elTiles[j] as HTMLElement).onclick = null;
                         }
-                        el_id = elTile.getAttribute("data_space_id");
-                        // TODO - Store this property for when showsave === false
-                        this.onsave([[el_id]]);
+                        this.$data.spaceId = elTile.getAttribute("data_space_id");
+                        if (this.showsave) {
+                            this.saveData();
+                        }
                     }
                 }
             } } }, "Select Space"));

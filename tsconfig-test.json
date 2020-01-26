@@ -22,6 +22,7 @@
         "tests/cards/venusNext/*.spec.ts",
         "tests/cards/colonies/*.spec.ts",
         "tests/cards/turmoil/*.spec.ts",        
+        "tests/cards/promo/*.spec.ts",       
         "tests/*.spec.ts",
         "tests/TestingUtils.ts"
     ],

@@ -333,6 +333,8 @@ import { UtopiaInvest } from './cards/turmoil/UtopiaInvest';
 import { LakefrontResorts } from './cards/turmoil/LakefrontResorts';
 import { StormCraftIncorporated } from './cards/colonies/StormCraftIncorporated';
 import { Arklight } from './cards/colonies/Arklight';
+import { TerralabsResearch } from './cards/turmoil/TerralabsResearch';
+import { Factorum } from './cards/promo/Factorum';
 
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
@@ -474,7 +476,12 @@ export const ALL_COLONIES_CORPORATIONS: Array<CorporationCard> = [
 
 export const ALL_TURMOIL_CORPORATIONS: Array<CorporationCard> = [
     new LakefrontResorts(),
+    new TerralabsResearch(),
     new UtopiaInvest()
+]; 
+
+export const ALL_PROMO_CORPORATIONS: Array<CorporationCard> = [
+    new Factorum()
 ]; 
 
 export const ALL_PROJECT_CARDS: Array<IProjectCard> = [

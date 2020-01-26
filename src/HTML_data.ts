@@ -5694,28 +5694,59 @@ export const HTML_DATA: Map<string, string> =
                 </div>
             </div>
 `],
-["Terralabs",`
-      <div class="tag tag1 tag-earth"></div>
-      <div class="tag tag2 tag-science"></div>
-        <div class="corporationLabel ">CORPORATION</div>
-        <div class="turmoil-icon corporation-icon"></div>
-        <div class="contentCorporation ">
-            <div class="corporationEffectBox ">
-                <div class="corporationEffectBoxLabel">EFFECT</div>
-                  <div class="resource card"></div> : <div class="resource money">1</div>
-                <div class="description " style="text-align:center;margin-top:0px; ">
-                    (Effect: Buying cards to hand costs 1MC.)
-                </div>
-            </div>
-            <div style="font-size:24px;margin-top:33px;margin-left:5px;margin-bottom:5px; font-family:Prototype;letter-spacing:5px;color:#222;">
-              TERRALABS
-              </div>
-            <div class="resource money " style="margin-left:25px;margin-right:20px;">20</div> -1 <div class="tile rating"></div>
-            <div class="description " style="text-align:center;">
-                (You start with 20 MC. Lower your TR 1 step.)
-            </div>
+[CorporationName.TERRALABS_RESEARCH,`
+<div class="tag tag1 tag-earth"></div>
+<div class="tag tag2 tag-science"></div>
+  <div class="corporationLabel ">CORPORATION</div>
+  <div class="turmoil-icon corporation-icon"></div>
+  <div class="contentCorporation ">
+      <div class="corporationEffectBox ">
+          <div class="corporationEffectBoxLabel">EFFECT</div>
+            <div class="resource card"></div> : <div class="resource money">1</div>
+          <div class="description " style="text-align:center;margin-top:0px; ">
+              (Effect: Buying cards to hand costs 1MC.)
+          </div>
+      </div>
+      <div style="font-size:16px;margin-top:33px;margin-left:75px;margin-bottom:5px; font-family:Prototype;color:#222;transform:scale(2,1)">
+        TERRALABS
         </div>
+        <div style="font-size:8px;letter-spacing:2px;font-family:Prototype;margin-left:100px;margin-top:-5px;transform:scale(2,1)">RESEARCH</div>
+      <div class="resource money " style="margin-left:25px;margin-right:20px;">14</div> - <div class="tile rating"></div>
+      <div class="description " style="text-align:center;">
+          (You start with 14 MC. Lower your TR 1 step.)
+      </div>
+  </div>
 `],
+[CorporationName.FACTORUM,`
+          <div class="tag tag1 tag-building"></div>
+          <div class="tag tag2 tag-power"></div>
+          <div class="corporationLabel">CORPORATION</div>
+          <div class="promo-icon corporation-icon"></div>
+          <div class="contentCorporation">
+            <div class="corporationEffectBox">
+              <div class="corporationEffectBoxLabel">ACTION</div>
+              <div class="red-arrow"></div><div class="production-box">
+                <div class="production energy"></div>
+              </div> * OR
+              <div class="resource money">3</div><div class="red-arrow"></div><div class="resource card">
+                <div class="card-icon card-icon-building" style="margin-top:-17px;">&#x2617;</div>
+              </div>
+              <div class="description" style="text-align:center;margin-top:0px;">
+                (Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.)
+              </div>
+            </div>
+            <div class="factorum">
+              FACTORUM
+            </div>
+            <div class="resource money" style="margin-left:35px;margin-right:20px;margin-top:20px;">37</div>
+            <div class="production-box">
+              <div class="production steel"></div>
+            </div>
+            <div class="description" style="margin-top:-5px;text-align:center;">
+              (You start with 37 MC. Increase your steel production 1 step.)
+            </div>
+          </div>
+          `],
 ["Allied Banks",`
       <div class="title background-color-prelude">Allied Banks</div>
       <div class="tag tag1 tag-earth"></div>

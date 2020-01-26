@@ -22,6 +22,7 @@
         "tests/cards/venusNext/*.spec.ts",
         "tests/cards/colonies/*.spec.ts",
         "tests/cards/turmoil/*.spec.ts",        
+        "tests/cards/promo/*.spec.ts",       
         "tests/*.spec.ts",
         "tests/TestingUtils.ts"
     ],
@@ -349,6 +350,8 @@
         "tests/cards/colonies/StormCraftIncorporated.spec.ts",
         "tests/cards/turmoil/UtopiaInvest.spec.ts",   
         "tests/cards/turmoil/LakefrontResorts.spec.ts",
+        "tests/cards/turmoil/TerralabsResearch.spec.ts",
+        "tests/cards/promo/Factorum.spec.ts",
         "tests/Game.spec.ts",
         "tests/OriginalBoard.spec.ts",
         "tests/Player.spec.ts"

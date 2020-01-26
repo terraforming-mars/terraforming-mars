@@ -30,7 +30,7 @@ export class Birds implements IActionCard, IProjectCard {
       }
       return game.getOxygenLevel() >= 13 - player.getRequirementsBonus(game);
     }
-    public getVictoryPoints(player: Player) {
+    public getVictoryPoints(player: Player): number {
       return player.getResourcesOnCard(this);
     }
     public play(player: Player, game: Game) {

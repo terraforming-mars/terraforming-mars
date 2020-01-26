@@ -8,6 +8,7 @@ import { Insulation } from "../src/cards/Insulation";
 import { IoMiningIndustries } from  "../src/cards/IoMiningIndustries";
 import { PowerSupplyConsortium } from "../src/cards/PowerSupplyConsortium";
 import { SaturnSystems } from "../src/cards/corporation/SaturnSystems";
+import { SelectOption } from "../src/inputs/SelectOption";
 import { Resources } from '../src/Resources';
 
 describe("Player", function () {
@@ -66,7 +67,6 @@ describe("Player", function () {
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
         expect(player.getWaitingFor()).to.eq(undefined);
     });
-
     it("Runs SaturnSystems when other player plays card", function () {
         const player1 = new Player("p1", Color.BLUE, false);
         const player2 = new Player("p2", Color.RED, false);
@@ -77,5 +77,28 @@ describe("Player", function () {
         player1.corporationCard = corporationCard;
         player2.playCard(game, card, undefined);
         expect(player1.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    });
+    it("Chains onend functions from player inputs", function (done) {
+        const player = new Player("p1", Color.BLUE, false);
+        const mockOption3 = new SelectOption("Mock select option 3", () => {
+            return undefined;
+        });
+        const mockOption2 = new SelectOption("Mock select option 2", () => {
+            return mockOption3;
+        });
+        mockOption2.onend = () => {};
+        const mockOption = new SelectOption("Mock select option", () => {
+            return mockOption2;
+        });
+        mockOption.onend = () => {
+            done();
+        };
+        player.setWaitingFor(mockOption);
+        player.process([["1"]]);
+        expect(player.getWaitingFor()).not.to.be.undefined;
+        player.process([["1"]]);
+        expect(player.getWaitingFor()).not.to.be.undefined;
+        player.process([["1"]]);
+        expect(player.getWaitingFor()).to.be.undefined;
     });
 });

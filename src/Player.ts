@@ -1652,10 +1652,15 @@ export class Player {
       try {
         const subsequent = this.runInput(input, waitingFor);
         if (subsequent !== undefined) {
-          if (
-            subsequent.onend === undefined &&
-                    waitingFor.onend !== undefined) {
+          if (subsequent.onend === undefined && waitingFor.onend !== undefined) {
             subsequent.onend = waitingFor.onend;
+          } else if (subsequent.onend !== undefined && waitingFor.onend !== undefined) {
+            const lastOnEnd: () => void = waitingFor.onend;
+            const nextOnEnd: () => void = subsequent.onend;
+            subsequent.onend = function () {
+                nextOnEnd();
+                lastOnEnd();
+            };
           }
           this.setWaitingFor(subsequent);
         } else if (waitingFor.onend) {

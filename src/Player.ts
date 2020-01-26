@@ -64,7 +64,7 @@ export class Player {
     private actionsThisGeneration: Set<string> = new Set<string>();
     private lastCardPlayedThisTurn: IProjectCard | undefined;
     private waitingFor?: PlayerInput;
-    private postAction: Boolean = false;
+    private postAction: boolean = false;
     public cardCost: number = constants.CARD_COST;
     public oceanBonus: number = constants.OCEAN_BONUS;
 

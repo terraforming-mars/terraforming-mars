@@ -32,5 +32,6 @@ describe("Factorum", function () {
         const orOptions2 = action.options[0] as OrOptions;
         orOptions2.cb();
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+        
     });
 });

@@ -23,6 +23,8 @@
     "src/cards/corporation/*.ts",
     "src/cards/prelude/*.ts",
     "src/cards/venusNext/*.ts",    
+    "src/cards/turmoil/*.ts",  
+    "src/cards/promo/*.ts",           
     "src/inputs/*.ts",
     "src/models/*.ts",
     "script.ts",

@@ -1,5 +1,5 @@
 import {Player} from './Player';
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_COLONIES_CORPORATIONS, ALL_PRELUDE_CORPORATIONS, ALL_TURMOIL_CORPORATIONS} from './Dealer';
+import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_COLONIES_CORPORATIONS, ALL_PRELUDE_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from './Dealer';
 import {ISpace} from './ISpace';
 import {SpaceType} from './SpaceType';
 import {TileType} from './TileType';
@@ -116,7 +116,7 @@ export class Game {
       if (this.customCorporationsList && this.corporationList.length >= players.length * 2) {
         corporationCards = [];
         let allCorporations = [];
-        allCorporations.push(...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_TURMOIL_CORPORATIONS);
+        allCorporations.push(...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_TURMOIL_CORPORATIONS, ...ALL_PROMO_CORPORATIONS);
         for (let corp of corporationList) {
           corporationCards.push(allCorporations.find((card) => card.name === corp.name));
         }

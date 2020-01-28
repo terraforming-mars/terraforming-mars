@@ -31,7 +31,7 @@ export const SelectSpace = Vue.component("select-space", {
         const clearAllAvailableSpaces = function() {
             const elTiles = document.getElementsByClassName("board_space");
             for (let i = 0; i < elTiles.length; i++) {
-                elTiles[0].classList.remove("board_space--available");
+                elTiles[i].classList.remove("board_space--available");
             }
         };
 
@@ -59,6 +59,8 @@ export const SelectSpace = Vue.component("select-space", {
                         this.$data.spaceId = elTile.getAttribute("data_space_id");
                         if (this.showsave) {
                             this.saveData();
+                        } else {
+                            elTile.classList.add("board_space--selected")
                         }
                     }
                 }

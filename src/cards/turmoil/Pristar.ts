@@ -9,7 +9,7 @@ export class Pristar implements CorporationCard {
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 53;
     public resourceType: ResourceType = ResourceType.PRESERVATION;
-    public lastGenerationTR: number = 0;
+    private lastGenerationTR: number = 0;
 
     public play(player: Player) {
         player.terraformRating -= 2;

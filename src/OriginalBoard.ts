@@ -217,12 +217,14 @@ export class OriginalBoard {
     }
 
     public getAvailableSpacesForMarker(player: Player): Array<ISpace> {
-      return this.getAvailableSpacesOnLand(player)
+      let spaces =  this.getAvailableSpacesOnLand(player)
       .filter(
           (space) => this.getAdjacentSpaces(space).find(
               (adj) => adj.player === player
           ) !== undefined
       );
+      //Remove duplicates
+      return spaces.filter((space,index) => spaces.indexOf(space) === index);
     }  
 
     public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {

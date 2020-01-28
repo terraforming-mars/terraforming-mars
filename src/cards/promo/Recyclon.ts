@@ -22,7 +22,7 @@ export class Recyclon implements CorporationCard {
         return undefined;
     }
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
-        if (card.tags.indexOf(Tags.STEEL) === -1) {return undefined;}
+        if (card.tags.indexOf(Tags.STEEL) === -1 || !player.isCorporation(this.name)) {return undefined;}
         if (player.getResourcesOnCard(this) < 2) {
             player.addResourceTo(this);
             return undefined;

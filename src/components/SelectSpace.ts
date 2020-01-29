@@ -32,6 +32,7 @@ export const SelectSpace = Vue.component("select-space", {
             const elTiles = document.getElementsByClassName("board_space");
             for (let i = 0; i < elTiles.length; i++) {
                 elTiles[i].classList.remove("board_space--available");
+                elTiles[i].classList.remove("board_space--selected");
             }
         };
 
@@ -57,11 +58,8 @@ export const SelectSpace = Vue.component("select-space", {
                             (elTiles[j] as HTMLElement).onclick = null;
                         }
                         this.$data.spaceId = elTile.getAttribute("data_space_id");
-                        if (this.showsave) {
-                            this.saveData();
-                        } else {
-                            elTile.classList.add("board_space--selected")
-                        }
+                        elTile.classList.add("board_space--selected")
+                        this.saveData();
                     }
                 }
             } } }, "Select Space"));

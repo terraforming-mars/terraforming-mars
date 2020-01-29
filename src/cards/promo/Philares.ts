@@ -2,7 +2,7 @@ import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
 import { CorporationName } from '../../CorporationName';
-import { Game, PlayerInterrupt } from '../../Game';
+import { Game } from '../../Game';
 import { SelectSpace } from "../../inputs/SelectSpace";
 import { ISpace } from '../../ISpace';
 import { TileType } from '../../TileType';

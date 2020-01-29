@@ -5650,6 +5650,32 @@ export const HTML_DATA: Map<string, string> =
         <div class="description" style="text-align:center;">(You start with 42 MC. Instead of choosing from 10 cards during setup, you get 10 cards for free.)</div>
       </div>
 `],
+[CorporationName.PHILARES,`
+      <div class="tag tag1 tag-building"></div>
+      <div class="corporationLabel">CORPORATION</div>
+      <div class="promo-icon corporation-icon"></div>
+      <div class="contentCorporation">
+        <div class="corporationEffectBox">
+          <div class="corporationEffectBoxLabel">EFFECT</div>
+          <div class="tile empty-tile-small red-outline" style="
+            padding: 6px; margin-right: -3px;
+          "></div><div class="tile empty-tile-small"></div>
+          : <div class="resource" style="background:white;">?</div>
+          <div class="description" style="text-align:center;margin-top:0px;">
+            (Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice (regardless of who just placed a tile).)
+          </div>
+        </div>
+        <div class="philares">
+          PHIL<span style="color:#ff5858">A</span>RES
+        </div>
+        <div class="resource money" style="margin-left:35px;margin-right:20px;margin-top:20px;">47</div>
+        <div class="tile greenery-tile">
+        </div>
+        <div class="description" style="margin-top:-5px;text-align:center;">
+          (You start with 47 MC. As your first action, place a greenery tile and raise the oxygen 1 step.)
+        </div>
+      </div>
+`],
 [CorporationName.RECYCLON,`
       <div class="tag tag1 tag-building"></div>
       <div class="tag tag2 tag-microbe"></div>

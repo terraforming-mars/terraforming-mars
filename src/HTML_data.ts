@@ -5499,6 +5499,30 @@ export const HTML_DATA: Map<string, string> =
           (You start with 45 MC. Increase your MC production 2 steps. 1 VP per 2 animals on this card.)
         </div>
 `],
+[CorporationName.PRISTAR,`
+            <div class="corporationLabel ">CORPORATION</div>
+            <div class="turmoil-icon corporation-icon"></div>
+            ##RESOURCES##
+            <div class="contentCorporation ">
+              <div class="points" style="z-index:1;margin-top:231px;margin-left:124px;">1/<div class="resource pristar"></div></div>
+                <div class="corporationEffectBox ">
+                    <div class="corporationEffectBoxLabel" style="margin-bottom:5px;">EFFECT</div>
+
+                      <div class="tile rating"><div class="left-line"></div><div class="right-line"></div></div> : <div class="resource pristar"></div> <div class="resource money">6</div>
+                    <div class="description " style="text-align:center;margin-top:-7px; text-align:left;">
+                        (Effect: During production phase, if you did not get TR so far this <br> generation, add one <br> preservation resource<br> here and gain 6MC.)
+                    </div>
+                </div>
+                <div style="color:#ff5d21;text-shadow: 3px 3px 3px black;font-size:30px;transform:scaleX(0.8);letter-spacing:1px;">
+                  PRISTAR
+                  </div>
+                <div class="resource money " style="margin-left:10px;margin-right:20px;">53</div> - <div class="tile rating"></div><div class="tile rating"></div>
+                <div class="description " style="text-align:center;">
+                    (You start with 53 MC. Decrease your TR 2 steps.<br>
+                    1 VP per preservation resource here.)
+                </div>
+            </div>
+`],
 ["Polyphemos",`
       <div class="corporationLabel">CORPORATION</div>
       <div class="colonies-icon corporation-icon"></div>
@@ -5586,7 +5610,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Arcadian Communities",`
+[CorporationName.ARCADIAN_COMMUNITIES,`
       <div class="corporationLabel">CORPORATION</div>
       <div class="promo-icon corporation-icon"></div>
       <div class="contentCorporation">
@@ -5626,10 +5650,11 @@ export const HTML_DATA: Map<string, string> =
         <div class="description" style="text-align:center;">(You start with 42 MC. Instead of choosing from 10 cards during setup, you get 10 cards for free.)</div>
       </div>
 `],
-["Recyclon",`
+[CorporationName.RECYCLON,`
       <div class="tag tag1 tag-building"></div>
       <div class="tag tag2 tag-microbe"></div>
       <div class="corporationLabel">CORPORATION</div>
+      ##RESOURCES##
       <div class="promo-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">
@@ -5648,7 +5673,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="description" style="margin-top:0px;text-align:center;">(You start with 38 MC and 1 steel production.)</div>
       </div>
 `],
-["Tactical Genomics",`
+[CorporationName.SPLICE,`
       <div class="tag tag1 tag-microbe"></div>
       <div class="corporationLabel">CORPORATION</div>
       <div class="promo-icon corporation-icon"></div>

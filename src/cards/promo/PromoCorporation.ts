@@ -1,3 +1,6 @@
 export enum PromoCorporation {
-    FACTORUM = "Factorum"
+    ARCADIAN_COMMUNITIES = "Arcadian Communities",
+    FACTORUM = "Factorum",
+    RECYCLON = "Recyclon",
+    SPLICE = "Splice"
 }

@@ -527,6 +527,11 @@ export class Player {
       this.titanium += this.titaniumProduction;
       this.steel += this.steelProduction;
       this.plants += this.plantProduction;
+
+      if (this.corporationCard !== undefined && this.corporationCard.onProductionPhase !== undefined) {
+        this.corporationCard.onProductionPhase(this);
+      }
+
     }
 
     public worldGovernmentTerraforming(game: Game) {
@@ -849,7 +854,10 @@ export class Player {
             if (somePlayer.corporationCard !== undefined &&
                 somePlayer.corporationCard.onCardPlayed !== undefined
             ) {
-              somePlayer.corporationCard.onCardPlayed(somePlayer, game, selectedCard);
+              const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, game, selectedCard);
+              if (actionFromPlayedCard !== undefined) {
+                actionsFromPlayedCard.push(actionFromPlayedCard);
+              }
             }
           }
 

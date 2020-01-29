@@ -858,6 +858,10 @@ export class Game {
       if (space.player !== undefined && space.player !== player) {
         throw new Error('This space is land claimed by ' + space.player.name);
       }
+      // Arcadian Communities
+      if (space.player !== undefined && space.player === player && player.isCorporation(CorporationName.ARCADIAN_COMMUNITIES)) {
+        player.megaCredits += 3;
+      }
       if (space.spaceType !== spaceType) {
         throw new Error(
             `Select a valid location ${space.spaceType} is not ${spaceType}`

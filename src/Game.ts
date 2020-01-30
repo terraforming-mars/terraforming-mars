@@ -51,6 +51,8 @@ export class Game {
     public gameLog: Array<String> = [];
     public gameAge: number = 0; // Each log event increases it
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
+    //public interrupt: PlayerInterrupt | undefined = {} as any;
+    public monsInsuranceOwner: Player | undefined = undefined;
 
     private tempMC: number = 0;
     private tempSteel: number = 0;

@@ -27,7 +27,7 @@ export class BigAsteroid implements IProjectCard {
       }
 
       if (playersToRemovePlantsFrom.length === 1) {
-        playersToRemovePlantsFrom[0].removePlants(player, 4);
+        playersToRemovePlantsFrom[0].removePlants(player, 4, game);
         return this.doPlay(player, game);
       }
 
@@ -35,7 +35,7 @@ export class BigAsteroid implements IProjectCard {
           playersToRemovePlantsFrom,
           'Select player to remove up to 4 plants from',
           (foundPlayer: Player) => {
-            foundPlayer.removePlants(player, 4);
+            foundPlayer.removePlants(player, 4, game);
             return this.doPlay(player, game);
           }
       );

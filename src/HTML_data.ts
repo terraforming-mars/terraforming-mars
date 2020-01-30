@@ -5461,6 +5461,43 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
+[CorporationName.MONS_INSURANCE,`
+      <div class="corporationLabel">CORPORATION</div>
+      <div class="promo-icon corporation-icon"></div>
+      <div class="contentCorporation">
+        <div class="corporationEffectBox">
+          <div class="corporationEffectBoxLabel">EFFECT</div>
+          <div class="production-box" style="width:50px;">
+            -<div class="production red-outline" style="background:white;">?</div>
+          </div>
+          OR -<div class="resource red-outline" style="background:white;">?</div>:
+          PAY<div class="resource money">3</div>
+          <div class="description" style="text-align:center;margin-top:0px;">
+            (Effect: When a player causes another player to decrease production or lose resources, pay 3MC to the victim,
+            or as much as possible.)
+          </div>
+        </div>
+        <div class="mons">
+          <div class="mons0">&#x25b2;</div>
+          <div class="mons1">mons</div>
+          <div class="mons2">INSURANCE</div>
+        </div>
+        <div class="resource money" style="margin-left: 145px;
+              margin-right: 20px;
+              margin-top: -84px;
+              position: absolute;">48</div>
+        <div class="production-box production-box-size2a" style="
+              position: absolute;
+              margin-top: -53px;
+              margin-left: 92px;">
+          <div class="production money">4</div> <div class="production money red-outline">-2</div>*
+        </div>
+        <div class="description" style="margin-top:2px;text-align:center;">
+          (You start with 48 MC. Increase your MC production 4 steps. ALL OPPONENTS DECREASE THEIR MC PRODUCTION 2 STEPS.
+          THIS DOES NOT TRIGGER THE EFFECT BELOW.)
+        </div>
+      </div>
+`],
 [CorporationName.ARKLIGHT,`
       <div class="tag tag1 tag-animal"></div>
       <div class="corporationLabel">CORPORATION</div>

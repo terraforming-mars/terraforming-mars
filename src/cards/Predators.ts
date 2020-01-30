@@ -39,7 +39,7 @@ export class Predators implements IProjectCard, IActionCard {
     }
 
     private doAction(targetCard:ICard, player: Player, game: Game): void {
-        game.getCardPlayer(targetCard.name).removeAnimals(player, targetCard, 1);
+        game.getCardPlayer(targetCard.name).removeAnimals(player, targetCard, 1, game);
         player.addResourceTo(this);
     }
 

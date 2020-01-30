@@ -50,7 +50,7 @@ export class Ants implements IActionCard, IProjectCard {
           (foundCards: Array<ICard>) => {
             // TODO Log here
             game.getCardPlayer(foundCards[0].name).
-                removeMicrobes(player, foundCards[0], 1);
+                removeMicrobes(player, foundCards[0], 1, game);
             player.addResourceTo(this);
             return undefined;
           }

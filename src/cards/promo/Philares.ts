@@ -14,6 +14,8 @@ export class Philares implements CorporationCard {
     public name: string = CorporationName.PHILARES;
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 47;
+    private pendingResourcesToAdd : number = 0;
+
 
     public initialAction(player: Player, game: Game) {
         return new SelectSpace("Select space for greenery tile", 
@@ -23,11 +25,8 @@ export class Philares implements CorporationCard {
         });
     }
 
-    private selectResources(player: Player, resourceAmount: number, game: Game) {
-        // Check if interrupt is already set, and if so, update it
-        if(game.interrupt !== undefined) {
-            resourceAmount += game.interrupt.resourceAmount;
-        }
+    private selectResources(player: Player, game: Game) {
+
         let megacreditsAmount: number = 0;
         let steelAmount: number = 0;
         let titaniumAmount: number = 0;
@@ -38,27 +37,27 @@ export class Philares implements CorporationCard {
         const selectMegacredit = new SelectAmount("Megacredits", (amount: number) => {
             megacreditsAmount = amount;
             return undefined;
-          }, resourceAmount); 
+          }, this.pendingResourcesToAdd); 
           const selectSteel = new SelectAmount("Steel", (amount: number) => {
             steelAmount = amount;
             return undefined;
-          }, resourceAmount); 
+          }, this.pendingResourcesToAdd); 
           const selectTitanium = new SelectAmount("Titanium", (amount: number) => {
             titaniumAmount = amount;
             return undefined;
-          }, resourceAmount);
+          }, this.pendingResourcesToAdd);
           const selectPlants = new SelectAmount("Plants", (amount: number) => {
             plantsAmount = amount;
             return undefined;
-          }, resourceAmount);
+          }, this.pendingResourcesToAdd);
           const selectEnergy = new SelectAmount("Energy", (amount: number) => {
             energyAmount = amount;
             return undefined;
-          }, resourceAmount);
+          }, this.pendingResourcesToAdd);
           const selectHeat = new SelectAmount("Heat", (amount: number) => {
             heatAmount = amount;
             return undefined;
-          }, resourceAmount);
+          }, this.pendingResourcesToAdd);
         selectResources = new AndOptions(
             () => {
                 if (
@@ -67,9 +66,9 @@ export class Philares implements CorporationCard {
                     titaniumAmount +
                     plantsAmount +
                     energyAmount +
-                    heatAmount > resourceAmount
+                    heatAmount > this.pendingResourcesToAdd
                   ) {
-                    throw new Error("Need to select "+ resourceAmount +" resource(s)");
+                    throw new Error("Need to select "+ this.pendingResourcesToAdd +" resource(s)");
                   }
                   player.megaCredits += megacreditsAmount;
                   player.steel += steelAmount;
@@ -79,10 +78,11 @@ export class Philares implements CorporationCard {
                   player.heat += heatAmount;
                   return undefined;
             }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
-        selectResources.title = "Philares effect : select "+ resourceAmount +" resource(s)";
+        selectResources.title = "Philares effect : select "+ this.pendingResourcesToAdd +" resource(s)";
         let philaresPlayer = game.getPlayers().filter((player) => player.isCorporation(CorporationName.PHILARES))[0];
         selectResources.onend = () => { 
             game.interrupt = undefined;
+            this.pendingResourcesToAdd = 0;
             if (philaresPlayer !== player) {
                 game.playerIsFinishedTakingActions(player);   
             } else {
@@ -91,8 +91,7 @@ export class Philares implements CorporationCard {
         };
         game.interrupt = {
             player: philaresPlayer,
-            playerInput: selectResources,
-            resourceAmount: resourceAmount
+            playerInput: selectResources
         };
     }
 
@@ -102,7 +101,8 @@ export class Philares implements CorporationCard {
           .filter((space) => space.tile !== undefined && space.player !== undefined && space.player !== player 
           && (space.player.isCorporation(CorporationName.PHILARES) || player.isCorporation(CorporationName.PHILARES))
           ).length;
-          this.selectResources(player,bonusResource, game);
+          this.pendingResourcesToAdd += bonusResource;
+          this.selectResources(player, game);
         }
     }
 

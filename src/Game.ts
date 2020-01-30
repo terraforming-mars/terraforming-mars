@@ -32,8 +32,7 @@ import {CardName} from './CardName';
 
 export interface PlayerInterrupt {
   player: Player,
-  playerInput: PlayerInput,
-  resourceAmount: number
+  playerInput: PlayerInput
 }
 
 export class Game {
@@ -57,7 +56,7 @@ export class Game {
     public gameLog: Array<String> = [];
     public gameAge: number = 0; // Each log event increases it
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
-    public interrupt: PlayerInterrupt | undefined = {} as any;
+    public interrupt: PlayerInterrupt | undefined = undefined;
 
     private tempMC: number = 0;
     private tempSteel: number = 0;
@@ -565,6 +564,7 @@ export class Game {
       // Interrupt hook
       if (this.interrupt !== undefined) {
         this.interrupt.player.setWaitingFor(this.interrupt.playerInput);
+        return;
       }
 
       if (this.allPlayersHavePassed()) {

@@ -1535,6 +1535,12 @@ export class Player {
 
     public takeAction(game: Game): void {
 
+      //Interrupt action
+      if (game.interrupt !== undefined && game.interrupt.player === this) {
+        this.setWaitingFor(game.interrupt.playerInput);
+        return;
+      }
+
       //Post Action (after some specific prelude cards have been played)
       if (this.postAction && this.getPlayableCards(game).length > 0) {
         const input = this.playProjectCard(game);

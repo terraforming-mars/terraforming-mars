@@ -30,6 +30,11 @@ import {Colony} from './OriginalBoard';
 import {CorporationName} from './CorporationName';
 import {CardName} from './CardName';
 
+export interface PlayerInterrupt {
+  player: Player,
+  playerInput: PlayerInput
+}
+
 export class Game {
     public activePlayer: Player;
     public claimedMilestones: Array<ClaimedMilestone> = [];
@@ -51,7 +56,7 @@ export class Game {
     public gameLog: Array<String> = [];
     public gameAge: number = 0; // Each log event increases it
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
-    //public interrupt: PlayerInterrupt | undefined = {} as any;
+    public interrupt: PlayerInterrupt | undefined = undefined;
     public monsInsuranceOwner: Player | undefined = undefined;
 
     private tempMC: number = 0;
@@ -65,7 +70,6 @@ export class Game {
     private tempVenusScaleLevel: number = 0;
     private tempOceans: number = 0;
 
-
     constructor(
       public id: string,
       private players: Array<Player>,
@@ -75,7 +79,6 @@ export class Game {
       public venusNextExtension: boolean = false,
       public customCorporationsList: boolean = false,
       public corporationList: Array<CorporationCard> = []
-
     ) {
       this.activePlayer = first;
       this.venusNextExtension = venusNextExtension;
@@ -84,7 +87,6 @@ export class Game {
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension);
       this.customCorporationsList = customCorporationsList;
       this.corporationList = corporationList;
-
 
       this.milestones.push(...ORIGINAL_MILESTONES);
       this.awards.push(...ORIGINAL_AWARDS);
@@ -559,6 +561,12 @@ export class Game {
     }
 
     public playerIsFinishedTakingActions(player: Player): void {
+
+      // Interrupt hook
+      if (this.interrupt !== undefined) {
+        this.interrupt.player.setWaitingFor(this.interrupt.playerInput);
+        return;
+      }
 
       if (this.allPlayersHavePassed()) {
         this.gotoProductionPhase();

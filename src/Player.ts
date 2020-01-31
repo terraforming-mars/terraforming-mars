@@ -391,11 +391,9 @@ export class Player {
           mappedCards.push(this.getCard(pi.cards, cardName));
         }
         if (input[0].length < pi.minCardsToSelect) {
-          console.warn('selected cards', input[0]);
           throw new Error('Not enough cards selected');
         }
         if (input[0].length > pi.maxCardsToSelect) {
-          console.warn('selected cards', input[0]);
           throw new Error('Too many cards selected');
         }
         if (mappedCards.length !== input[0].length) {
@@ -1666,17 +1664,21 @@ export class Player {
       try {
         const subsequent = this.runInput(input, waitingFor);
         if (subsequent !== undefined) {
-          if (
-            subsequent.onend === undefined &&
-                    waitingFor.onend !== undefined) {
+          if (subsequent.onend === undefined && waitingFor.onend !== undefined) {
             subsequent.onend = waitingFor.onend;
+          } else if (subsequent.onend !== undefined && waitingFor.onend !== undefined) {
+            const lastOnEnd: () => void = waitingFor.onend;
+            const nextOnEnd: () => void = subsequent.onend;
+            subsequent.onend = function () {
+                nextOnEnd();
+                lastOnEnd();
+            };
           }
           this.setWaitingFor(subsequent);
         } else if (waitingFor.onend) {
           waitingFor.onend();
         }
       } catch (err) {
-        console.warn('Error running input', err);
         this.waitingFor = waitingFor;
         throw err;
       }

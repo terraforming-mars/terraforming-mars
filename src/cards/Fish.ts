@@ -32,7 +32,7 @@ export class Fish implements IActionCard, IProjectCard {
     if (game.getPlayers().length > 1 && this.getPlayersWithPlantProduction(player, game).length === 0) return false;
     return game.getTemperature() >= 2 - (player.getRequirementsBonus(game) * 2);
   }
-  public getVictoryPoints(player: Player) {
+  public getVictoryPoints(player: Player): number {
     return player.getResourcesOnCard(this);
   }
   public play(player: Player, game: Game) {

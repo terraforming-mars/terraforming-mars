@@ -43,7 +43,7 @@ export class EcologicalZone implements IProjectCard {
       player.addResourceTo(this);
     }
   }
-  public getVictoryPoints(player: Player) {
+  public getVictoryPoints(player: Player): number {
     return Math.floor(player.getResourcesOnCard(this) / 2);
   }
   public play(player: Player, game: Game) {

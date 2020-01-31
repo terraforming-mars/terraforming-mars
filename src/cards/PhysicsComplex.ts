@@ -15,7 +15,7 @@ export class PhysicsComplex implements IActionCard, IProjectCard {
     public canPlay(): boolean {
         return true;
     }
-    public getVictoryPoints(player: Player) {
+    public getVictoryPoints(player: Player): number {
         return 2 * player.getResourcesOnCard(this);
     }
     public play() {

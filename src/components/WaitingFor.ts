@@ -107,7 +107,7 @@ export const WaitingFor = Vue.component("waiting-for", {
                 }
             }
             xhr.send(JSON.stringify(out));  
-        }, true);
+        }, true, true);
     }
 });
 

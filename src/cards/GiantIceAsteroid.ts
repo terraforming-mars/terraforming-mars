@@ -26,17 +26,14 @@ export class GiantIceAsteroid implements IProjectCard {
 
         if (playersToRemovePlantsFrom.length > 0) {
             if (playersToRemovePlantsFrom.length === 1) {
-                playersToRemovePlantsFrom[0].removePlants(
-                    player, 
-                    Math.min(8, playersToRemovePlantsFrom[0].plants)
-                );
+                playersToRemovePlantsFrom[0].removePlants(player, 6, game);
             } else {
                 opts.push(
                     new SelectPlayer(
                         playersToRemovePlantsFrom, 
                         "Select player to remove up to 6 plants from", 
                         (foundPlayer: Player) => {
-                            foundPlayer.removePlants(player, 6);
+                            foundPlayer.removePlants(player, 6, game);
                             return undefined;
                         }
                     )

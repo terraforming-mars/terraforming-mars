@@ -24,7 +24,7 @@ export class MiningExpedition implements IProjectCard {
         const otherPlayersWithPlants = player.getOtherPlayersWithPlantsToRemove(game);
 
         if (otherPlayersWithPlants.length === 1) {
-            otherPlayersWithPlants[0].removePlants(player, 2);
+            otherPlayersWithPlants[0].removePlants(player, 2, game);
             player.steel += 2;
             return game.increaseOxygenLevel(player, 1);
         } else if (otherPlayersWithPlants.length === 0) {
@@ -36,7 +36,7 @@ export class MiningExpedition implements IProjectCard {
             otherPlayersWithPlants, 
             "Select player to remove 2 plants from", 
             (foundPlayer: Player) => {
-                foundPlayer.removePlants(player, 2);
+                foundPlayer.removePlants(player, 2, game);
                 player.steel += 2;
             return game.increaseOxygenLevel(player, 1);
         });

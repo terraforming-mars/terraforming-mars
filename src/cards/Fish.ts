@@ -24,10 +24,6 @@ export class Fish implements IActionCard, IProjectCard {
     return players
   }
 
-  private doPlantsReduction(player: Player) {
-    player.setProduction(Resources.PLANTS,-1);
-  }
-
   public canPlay(player: Player, game: Game): boolean {
     if (game.getPlayers().length > 1 && this.getPlayersWithPlantProduction(player, game).length === 0) return false;
     return game.getTemperature() >= 2 - (player.getRequirementsBonus(game) * 2);
@@ -40,7 +36,7 @@ export class Fish implements IActionCard, IProjectCard {
 
     const players = this.getPlayersWithPlantProduction(player, game);
     if (players.length === 1) {
-      this.doPlantsReduction(players[0]);
+      players[0].setProduction(Resources.PLANTS,-1, game, player);
       return undefined;
     }
 
@@ -48,7 +44,7 @@ export class Fish implements IActionCard, IProjectCard {
         players,
         'Select player to decrease plant production 1 step',
         (found: Player) => {
-          this.doPlantsReduction(found);
+          found.setProduction(Resources.PLANTS,-1, game, player);
           return undefined;
         }
     );

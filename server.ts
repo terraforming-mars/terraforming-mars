@@ -6,6 +6,15 @@ import * as querystring from 'querystring';
 import {AndOptions} from './src/inputs/AndOptions';
 import {CardModel} from './src/models/CardModel';
 import {Color} from './src/Color';
+import {CorporationCard} from './src/cards/corporation/CorporationCard';
+import {
+    ALL_CORPORATION_CARDS,
+    ALL_PRELUDE_CORPORATIONS,
+    ALL_COLONIES_CORPORATIONS,
+    ALL_VENUS_CORPORATIONS,
+    ALL_TURMOIL_CORPORATIONS,
+    ALL_PROMO_CORPORATIONS
+} from './src/Dealer';
 import {Game} from './src/Game';
 import {ICard} from './src/cards/ICard';
 import {IProjectCard} from './src/cards/IProjectCard';
@@ -30,7 +39,13 @@ import { Resources } from "./src/Resources";
 const styles = fs.readFileSync('styles.css');
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
-
+const allCorporationCards: Array<CorporationCard> = ALL_CORPORATION_CARDS.concat(
+    ALL_PRELUDE_CORPORATIONS,
+    ALL_COLONIES_CORPORATIONS,
+    ALL_VENUS_CORPORATIONS,
+    ALL_TURMOIL_CORPORATIONS,
+    ALL_PROMO_CORPORATIONS
+);
 function requestHandler(
     req: http.IncomingMessage,
     res: http.ServerResponse
@@ -234,7 +249,17 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
           break;
         }
       }
-      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.venusNext, gameReq.customCorporationsList, gameReq.corporations);
+      const selectedCorporations: Array<CorporationCard> = [];
+      for (let corp of gameReq.corporations) {
+        const foundCard: CorporationCard | undefined = allCorporationCards.find((card) => card.name === corp.name);
+        if (foundCard !== undefined) {
+          selectedCorporations.push(foundCard);
+        } else {
+          throw new Error("Custom corporation card " + corp + " not found");
+        }
+      }
+
+      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.venusNext, gameReq.customCorporationsList, selectedCorporations);
       games.set(gameId, game);
       game.getPlayers().forEach((player) => {
         playersToGame.set(player.id, game);

@@ -1,5 +1,5 @@
 import {Player} from './Player';
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_COLONIES_CORPORATIONS, ALL_PRELUDE_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from './Dealer';
+import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS} from './Dealer';
 import {ISpace} from './ISpace';
 import {SpaceType} from './SpaceType';
 import {TileType} from './TileType';
@@ -71,18 +71,11 @@ export class Game {
       private preludeExtension: boolean = false,
       private draftVariant: boolean = false,
       public venusNextExtension: boolean = false,
-      public customCorporationsList: boolean = false,
-      public corporationList: Array<CorporationCard> = []
-
+      customCorporationsList: boolean = false,
+      corporationList: Array<CorporationCard> = []
     ) {
       this.activePlayer = first;
-      this.venusNextExtension = venusNextExtension;
-      this.preludeExtension = preludeExtension;
-      this.draftVariant = draftVariant;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension);
-      this.customCorporationsList = customCorporationsList;
-      this.corporationList = corporationList;
-
 
       this.milestones.push(...ORIGINAL_MILESTONES);
       this.awards.push(...ORIGINAL_AWARDS);
@@ -93,42 +86,41 @@ export class Game {
         this.setupSolo();
       }
 
-      let corporationCards = this.dealer.shuffleCards(ALL_CORPORATION_CARDS);
+      let corporationCards = ALL_CORPORATION_CARDS;
       // Add prelude corporations cards
       if (this.preludeExtension) {
         corporationCards.push(...ALL_PRELUDE_CORPORATIONS);
-        corporationCards = this.dealer.shuffleCards(corporationCards);
       }
 
       // Add Venus Next corporations cards, board colonies and milestone / award
       if (this.venusNextExtension) {
         corporationCards.push(...ALL_VENUS_CORPORATIONS);
-        corporationCards = this.dealer.shuffleCards(corporationCards);
         this.milestones.push(...VENUS_MILESTONES);
         this.awards.push(...VENUS_AWARDS);
-        this.board.spaces.push(new Colony(SpaceName.DAWN_CITY));
-        this.board.spaces.push(new Colony(SpaceName.LUNA_METROPOLIS));
-        this.board.spaces.push(new Colony(SpaceName.MAXWELL_BASE));
-        this.board.spaces.push(new Colony(SpaceName.STRATOPOLIS));
+        this.board.spaces.push(
+            new Colony(SpaceName.DAWN_CITY),
+            new Colony(SpaceName.LUNA_METROPOLIS),
+            new Colony(SpaceName.MAXWELL_BASE),
+            new Colony(SpaceName.STRATOPOLIS)
+        );
       }
 
       // Setup custom corporation list
-      if (this.customCorporationsList && this.corporationList.length >= players.length * 2) {
-        corporationCards = [];
-        let allCorporations = [];
-        allCorporations.push(...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_TURMOIL_CORPORATIONS, ...ALL_PROMO_CORPORATIONS);
-        for (let corp of corporationList) {
-          corporationCards.push(allCorporations.find((card) => card.name === corp.name));
-        }
+      if (customCorporationsList && corporationList.length >= players.length * 2) {
+        corporationCards = corporationList;
       }
+
+      corporationCards = this.dealer.shuffleCards(corporationCards);
 
       // Give each player their corporation cards
       for (const player of players) {
         if (!player.beginner) {
-          player.dealtCorporationCards = [
-            corporationCards.pop(),
-            corporationCards.pop()
-          ];
+          const firstCard: CorporationCard | undefined = corporationCards.pop();
+          const secondCard: CorporationCard | undefined = corporationCards.pop();
+          if (firstCard === undefined || secondCard === undefined) {
+            throw new Error("No corporation card dealt for player");
+          }
+          player.dealtCorporationCards = [firstCard, secondCard];
           player.setWaitingFor(this.pickCorporationCard(player));
         } else {
           this.playCorporationCard(player, new BeginnerCorporation());

@@ -90,9 +90,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 }
             };
             xhr.responseType = "json";
-            console.log(JSON.stringify({
-                players: players, prelude, draftVariant, venusNext
-            }));
             xhr.send(JSON.stringify({
                 players: players, prelude, draftVariant, venusNext, customCorporationsList, corporations
             }));

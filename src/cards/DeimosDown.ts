@@ -31,7 +31,7 @@ export class DeimosDown implements IProjectCard {
 
       // Just one target player, we remove plants from him without asking
       if (playersToRemovePlantsFrom.length === 1) {
-        playersToRemovePlantsFrom[0].removePlants(player, 8);
+        playersToRemovePlantsFrom[0].removePlants(player, 8, game);
         return this.doPlay(player, game);
       }
 
@@ -40,7 +40,7 @@ export class DeimosDown implements IProjectCard {
         playersToRemovePlantsFrom,
           'Select player to remove up to 8 plants from',
           (foundPlayer: Player) => {
-            foundPlayer.removePlants(player, 8);
+            foundPlayer.removePlants(player, 8, game);
             return this.doPlay(player, game);
           }
       );

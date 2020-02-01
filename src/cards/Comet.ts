@@ -54,14 +54,14 @@ export class Comet implements IProjectCard {
       // Can we remove a plants?
       if (playersToRemovePlantsFrom.length > 0) {
         if (playersToRemovePlantsFrom.length === 1) {
-          playersToRemovePlantsFrom[0].removePlants(player, 3);
+          playersToRemovePlantsFrom[0].removePlants(player, 3, game);
         } else {
           opts.push(
             new SelectPlayer(
               playersToRemovePlantsFrom,
               'Select player to remove up to 3 plants from',
               (foundPlayer: Player) => {
-                foundPlayer.removePlants(player, 3);
+                foundPlayer.removePlants(player, 3, game);
                 return undefined;
               }
             )

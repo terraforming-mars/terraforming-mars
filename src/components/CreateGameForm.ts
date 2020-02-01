@@ -90,9 +90,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 }
             };
             xhr.responseType = "json";
-            console.log(JSON.stringify({
-                players: players, prelude, draftVariant, venusNext
-            }));
             xhr.send(JSON.stringify({
                 players: players, prelude, draftVariant, venusNext, customCorporationsList, corporations
             }));
@@ -151,7 +148,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <div v-for="corporation in getOriginalCorps()">
                 <label>
                     <input type="checkbox" class="nes-checkbox" v-model="corporations" :value="corporation"/>
-                    <span>{{corporation.name}}<span>
+                    <span>{{corporation.name}}</span>
                 </label>    
                 </div>
                 <br>
@@ -159,7 +156,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <div v-for="corporation in getPreludeCorps()">
                 <label>
                     <input type="checkbox" class="nes-checkbox" v-model="corporations" :value="corporation"/>
-                    <span>{{corporation.name}}<span>
+                    <span>{{corporation.name}}</span>
                 </label>    
                 </div>
                 <br>
@@ -167,7 +164,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <div v-for="corporation in getVenusCorps()">
                 <label>
                     <input type="checkbox" class="nes-checkbox" v-model="corporations" :value="corporation"/>
-                    <span>{{corporation.name}}<span>
+                    <span>{{corporation.name}}</span>
                 </label>    
                 </div>
                 <br>
@@ -175,7 +172,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <div v-for="corporation in getColoniesCorps()">
                 <label>
                     <input type="checkbox" class="nes-checkbox" v-model="corporations" :value="corporation"/>
-                    <span>{{corporation.name}}<span>
+                    <span>{{corporation.name}}</span>
                 </label>    
                 </div>
                 <br>  
@@ -183,7 +180,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <div v-for="corporation in getTurmoilCorps()">
                 <label>
                     <input type="checkbox" class="nes-checkbox" v-model="corporations" :value="corporation"/>
-                    <span>{{corporation.name}}<span>
+                    <span>{{corporation.name}}</span>
                 </label>
                 </div> 
                 <br>
@@ -191,7 +188,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <div v-for="corporation in getPromoCorps()">
                 <label>
                     <input type="checkbox" class="nes-checkbox" v-model="corporations" :value="corporation"/>
-                    <span>{{corporation.name}}<span>
+                    <span>{{corporation.name}}</span>
                 </label>
                 </div> 
                 <br>                

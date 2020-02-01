@@ -26,6 +26,8 @@ export class ImmigrantCity implements IProjectCard {
         return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
             player.setProduction(Resources.ENERGY,-1);
+            player.setProduction(Resources.MEGACREDITS, -2);
+            // Resolve onTilePlaced
             player.setProduction(Resources.MEGACREDITS);
             return undefined;
         });

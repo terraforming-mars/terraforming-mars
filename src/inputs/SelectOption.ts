@@ -8,7 +8,7 @@ import { AndOptions } from './AndOptions';
 export class SelectOption implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_OPTION;
     public onend?: () => void;
-    constructor(public title: string, public cb: () => SelectSpace | SelectHowToPay | AndOptions | undefined) {
+    constructor(public title: string, public cb: () => SelectSpace | SelectHowToPay | AndOptions | SelectOption | undefined) {
     }
 }
 

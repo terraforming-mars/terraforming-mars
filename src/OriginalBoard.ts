@@ -216,6 +216,17 @@ export class OriginalBoard {
       ) !== undefined;
     }
 
+    public getAvailableSpacesForMarker(player: Player): Array<ISpace> {
+      let spaces =  this.getAvailableSpacesOnLand(player)
+      .filter(
+          (space) => this.getAdjacentSpaces(space).find(
+              (adj) => adj.player === player
+          ) !== undefined
+      );
+      //Remove duplicates
+      return spaces.filter((space,index) => spaces.indexOf(space) === index);
+    }  
+
     public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
       // Greenery must be placed by a space you own if you own a space
       if (this.playerHasSpace(player)) {

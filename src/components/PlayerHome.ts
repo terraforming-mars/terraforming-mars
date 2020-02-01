@@ -1,7 +1,7 @@
 
 import Vue from "vue";
 
-import { Board } from "./Board";
+import { OriginalBoard } from "./OriginalBoard";
 import { Card } from "./Card";
 import { Milestone } from "./Milestone";
 import { Award } from "./Award";
@@ -17,7 +17,7 @@ import { PlayerModel } from "../models/PlayerModel";
 export const PlayerHome = Vue.component("player-home", {
     props: ["player"],
     components: {
-        "board": Board,
+        "board": OriginalBoard,
         "card": Card,
         "claimed-milestone": ClaimedMilestone,
         "funded-award": FundedAward,

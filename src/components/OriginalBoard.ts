@@ -1,14 +1,12 @@
 
 import Vue from "vue";
 
-import { SpaceModel } from "../models/SpaceModel";
-
 import {Bonus} from "./Bonus";
 import {Tile} from "./Tile";
 import { Venus } from "./Venus";
 import { BoardMixin } from "./BoardMixin";
 
-export const Board = Vue.component("board", {
+export const OriginalBoard = Vue.component("board", {
     props: ["spaces", "venusNextExtension", "venusScaleLevel"],
     components: {
         "bonus": Bonus,
@@ -19,28 +17,11 @@ export const Board = Vue.component("board", {
         return {}
     },
     mixins: [BoardMixin],
-    methods: {
-        getSpacesWithTile: function(): Array<SpaceModel> {
-            const boardSpaces: Array<SpaceModel> = (this as any).getMainSpaces().filter(
-                (space: SpaceModel) => space.tileType != undefined || space.color != undefined
-            );
-            boardSpaces.sort((s1: any, s2: any) => {return s1.id - s2.id});
-            return boardSpaces;
-        },
-        getSpacesWithBonus: function(): Array<SpaceModel> {
-            const boardSpaces: Array<SpaceModel> = this.spaces.filter((space: SpaceModel) => space.bonus.length > 0);
-            boardSpaces.sort((s1: any, s2: any) => {return s1.id - s2.id});
-            return boardSpaces;
-        },
-        getMainSpaces: function (): Array<SpaceModel> {
-            return (this as any).getAllSpaces().filter((s: SpaceModel) => {return parseInt(s.id) < 70})
-        }
-    },
     template: `
     <div class="board_cont">
         <div class="board" id="main_board">
             <tile v-for="space in getSpacesWithTile()" :space="space" :key="getKey('tile', space)"></tile>
-            <bonus v-for="space in getSpacesWithBonus()" :space="space" :key="getKey('bonus', space)"></bonus>
+            <bonus v-for="space in getSpacesWithBonus(spaces)" :space="space" :key="getKey('bonus', space)"></bonus>
             <svg height="470" width="450">
                 <defs>
                     <symbol id="hexagon">

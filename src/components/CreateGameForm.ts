@@ -13,6 +13,7 @@ interface CreateGameModel {
     venusNext: boolean;
     customCorporationsList: boolean;
     corporations: Array<CorporationCard>;
+    board: string,
     displayed: boolean;
 }
 
@@ -40,6 +41,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             venusNext: false,
             customCorporationsList: false,
             corporations: [...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS, ...ALL_TURMOIL_CORPORATIONS, ...ALL_PROMO_CORPORATIONS],
+            board: "original",
             displayed: false
         } as CreateGameModel
     },
@@ -75,6 +77,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const venusNext = this.$data.venusNext;
             const corporations = this.$data.corporations;
             const customCorporationsList = this.$data.customCorporationsList;
+            const board =  this.$data.board;
             const xhr = new XMLHttpRequest();
             xhr.open("PUT", "/game");
             xhr.onerror = function () {
@@ -91,7 +94,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             };
             xhr.responseType = "json";
             xhr.send(JSON.stringify({
-                players: players, prelude, draftVariant, venusNext, customCorporationsList, corporations
+                players: players, prelude, draftVariant, venusNext, customCorporationsList, corporations, board
             }));
         }
     },
@@ -135,12 +138,23 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 </label>			
                 <label>
                         <input type="checkbox" class="nes-checkbox" v-model="draftVariant" />
-                        <span>Use draft variant ?<span>
+                        <span>Use draft variant ?</span>
                 </label>
                 <label>
                         <input type="checkbox" class="nes-checkbox" v-model="customCorporationsList"  v-on:click="toggleDisplayed()" />
                         <span>Use custom Corporation list ?</span>
                 </label>
+                
+                <br>
+                <label>Board:</label>
+                <div class="nes-select">
+                    <select :id="board" v-model="board">
+                        <option value="original">Original board</option>
+                        <option value="elysium">Elysium board</option>
+                        <option value="hellas">Hellas board</option>
+                    </select>
+                </div>
+                <br>
 
                 <div v-if="displayed === true">
                 <br>

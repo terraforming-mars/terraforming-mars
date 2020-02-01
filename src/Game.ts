@@ -26,9 +26,10 @@ import {Resources} from "./Resources";
 import {ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {SpaceName} from './SpaceName';
-import {Colony} from './Board';
+import {Colony, Board} from './Board';
 import {CorporationName} from './CorporationName';
 import {CardName} from './CardName';
+import { ElysiumBoard } from './ElysiumBoard';
 
 export interface PlayerInterrupt {
   player: Player,
@@ -51,7 +52,7 @@ export class Game {
     private passedPlayers: Set<Player> = new Set<Player>();
     private researchedPlayers: Set<Player> = new Set<Player>();
     private draftedPlayers: Set<Player> = new Set<Player>();
-    public board = new OriginalBoard();
+    public board: Board;
     private temperature: number = constants.MIN_TEMPERATURE;
     public gameLog: Array<String> = [];
     public gameAge: number = 0; // Each log event increases it
@@ -78,8 +79,18 @@ export class Game {
       private draftVariant: boolean = false,
       public venusNextExtension: boolean = false,
       customCorporationsList: boolean = false,
-      corporationList: Array<CorporationCard> = []
+      corporationList: Array<CorporationCard> = [],
+      public boardName: string = "original"
     ) {
+
+      if (boardName === "original") {
+        this.board = new OriginalBoard();
+      } else if (boardName === "elysium") {
+        this.board = new ElysiumBoard();
+      } else {
+        this.board = new ElysiumBoard();
+      }
+
       this.activePlayer = first;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension);
 

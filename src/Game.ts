@@ -26,7 +26,7 @@ import {Resources} from "./Resources";
 import {ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {SpaceName} from './SpaceName';
-import {Colony} from './OriginalBoard';
+import {Colony} from './Board';
 import {CorporationName} from './CorporationName';
 import {CardName} from './CardName';
 

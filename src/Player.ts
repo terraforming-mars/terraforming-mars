@@ -89,6 +89,35 @@ export class Player {
       return 0;
     }
 
+    private resolveMonsInsurance(game: Game) {
+      if (game.monsInsuranceOwner !== undefined) {
+        let retribution: number = Math.min(game.monsInsuranceOwner.megaCredits, 3);
+        this.megaCredits += retribution;
+        game.monsInsuranceOwner.setResource(Resources.MEGACREDITS,-3);
+        if (retribution > 0) {
+          game.log(this.name + " received " + retribution + " MC from Mons Insurance owner (" + game.monsInsuranceOwner.name +")");
+        }
+      }  
+    }
+
+    public setResource(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player) {
+      if (resource === Resources.MEGACREDITS) this.megaCredits = Math.max(0, this.megaCredits + amount);
+      if (resource === Resources.STEEL) this.steel = Math.max(0, this.steel + amount);
+      if (resource === Resources.TITANIUM) this.titanium = Math.max(0, this.titanium + amount);
+      if (resource === Resources.PLANTS) this.plants = Math.max(0, this.plants + amount);
+      if (resource === Resources.ENERGY) this.energy = Math.max(0, this.energy + amount);
+      if (resource === Resources.HEAT) this.heat = Math.max(0, this.heat + amount);
+      
+      if (game !== undefined && fromPlayer !== undefined && amount < 0) {
+        game.log(this.name + "'s " + resource + " production modified by " + amount + " by " + fromPlayer.name);
+      }
+
+      // Mons Insurance hook
+      if (game !== undefined && game.monsInsuranceOwner !== undefined && amount < 0 && fromPlayer !== undefined) {
+        this.resolveMonsInsurance(game);
+      }
+    }
+
     public setProduction(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player) {
 
       if (resource === Resources.MEGACREDITS) this.megaCreditProduction = Math.max(-5, this.megaCreditProduction + amount);
@@ -110,6 +139,11 @@ export class Player {
         if (resource === Resources.PLANTS) this.plants += amount;
         if (resource === Resources.ENERGY) this.energy += amount;
         if (resource === Resources.HEAT) this.heat += amount;
+      }
+
+      // Mons Insurance hook  
+      if (game !== undefined && game.monsInsuranceOwner !== undefined && amount < 0 && fromPlayer !== undefined) {
+        this.resolveMonsInsurance(game);
       }
 
     };  
@@ -139,16 +173,17 @@ export class Player {
       return this.cardIsInEffect(CardName.PROTECTED_HABITATS);
     }
     
-    public removePlants(removingPlayer: Player, count: number): void {
+    public removePlants(removingPlayer: Player, count: number, game: Game): void {
       if (removingPlayer !== this && this.hasProtectedHabitats()) {
         throw new Error('Can not remove plants due to protected habitats');
       }
-      this.plants = Math.max(0, this.plants - count);
+      this.setResource(Resources.PLANTS, -count, game, removingPlayer);
     }
     public removeAnimals(
         removingPlayer: Player,
         card: ICard,
-        count: number): void {
+        count: number,
+        game: Game): void {
       if (removingPlayer !== this && this.hasProtectedHabitats()) {
         throw new Error('Can not remove animals due to protected habitats');
       }
@@ -158,12 +193,13 @@ export class Player {
       if (this.getResourcesOnCard(card) === 0) {
         throw new Error(card.name + ' does not have animals to remove');
       }
-      this.removeResourceFrom(card, count);
+      this.removeResourceFrom(card, count, game, removingPlayer);
     }
     public removeMicrobes(
         removingPlayer: Player,
         card: ICard,
-        count: number): void {
+        count: number,
+        game: Game): void {
       if (removingPlayer !== this && this.hasProtectedHabitats()) {
         throw new Error(
             'Can not remove microbes due to protected habitats'
@@ -172,7 +208,7 @@ export class Player {
       if (this.getResourcesOnCard(card) === 0) {
         throw new Error(card.name + ' does not have microbes to remove');
       }
-      this.removeResourceFrom(card, count);
+      this.removeResourceFrom(card, count, game, removingPlayer);
     }
 
     public getResourcesOnCard(card: ICard): number {
@@ -215,13 +251,16 @@ export class Player {
     private generateId(): string {
       return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
     }
-    public removeResourceFrom(card: ICard, count: number = 1): void {
+    public removeResourceFrom(card: ICard, count: number = 1, game? : Game, removingPlayer? : Player): void {
       const cardValue: number | undefined =
             this.resourcesOnCards.get(card.name);
       if (cardValue) {
-        this.resourcesOnCards.set(
-            card.name, Math.max(cardValue - count, 0)
-        );
+        this.resourcesOnCards.set(card.name, Math.max(cardValue - count, 0));
+        // Mons Insurance hook
+        if (game !== undefined && removingPlayer !== undefined) {
+          this.resolveMonsInsurance(game);
+          game.log(this.name + " loose " + count + " resource(s) on  " + card.name + " from " + removingPlayer.name);
+        }
       }
     }
     public addResourceTo(card: ICard, count: number = 1): void {
@@ -1495,6 +1534,12 @@ export class Player {
     }
 
     public takeAction(game: Game): void {
+
+      //Interrupt action
+      if (game.interrupt !== undefined && game.interrupt.player === this) {
+        this.setWaitingFor(game.interrupt.playerInput);
+        return;
+      }
 
       //Post Action (after some specific prelude cards have been played)
       if (this.postAction && this.getPlayableCards(game).length > 0) {

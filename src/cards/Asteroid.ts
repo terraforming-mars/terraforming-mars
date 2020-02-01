@@ -25,7 +25,7 @@ export class Asteroid implements IProjectCard {
         playersToRemovePlantsFrom,
         'Select player to remove up to 3 plants from',
         (foundPlayer: Player) => {
-          foundPlayer.removePlants(player, 3);
+          foundPlayer.removePlants(player, 3, game);
           player.titanium += 2;
           return game.increaseTemperature(player, 1);
         }

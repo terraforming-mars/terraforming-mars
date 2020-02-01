@@ -30,6 +30,11 @@ import {Colony} from './OriginalBoard';
 import {CorporationName} from './CorporationName';
 import {CardName} from './CardName';
 
+export interface PlayerInterrupt {
+  player: Player,
+  playerInput: PlayerInput
+}
+
 export class Game {
     public activePlayer: Player;
     public claimedMilestones: Array<ClaimedMilestone> = [];
@@ -51,6 +56,8 @@ export class Game {
     public gameLog: Array<String> = [];
     public gameAge: number = 0; // Each log event increases it
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
+    public interrupt: PlayerInterrupt | undefined = undefined;
+    public monsInsuranceOwner: Player | undefined = undefined;
 
     private tempMC: number = 0;
     private tempSteel: number = 0;
@@ -62,7 +69,6 @@ export class Game {
     private tempHeatProduction: number = 0;
     private tempVenusScaleLevel: number = 0;
     private tempOceans: number = 0;
-
 
     constructor(
       public id: string,
@@ -549,6 +555,12 @@ export class Game {
     }
 
     public playerIsFinishedTakingActions(player: Player): void {
+
+      // Interrupt hook
+      if (this.interrupt !== undefined) {
+        this.interrupt.player.setWaitingFor(this.interrupt.playerInput);
+        return;
+      }
 
       if (this.allPlayersHavePassed()) {
         this.gotoProductionPhase();

@@ -339,6 +339,9 @@ import { Pristar } from './cards/turmoil/Pristar';
 import { Recyclon } from './cards/promo/Recyclon';
 import { Splice } from './cards/promo/Splice';
 import { ArcadianCommunities } from "./cards/promo/ArcadianCommunities";
+import { Philares } from './cards/promo/Philares';
+import { MonsInsurance } from './cards/promo/MonsInsurance';
+
 
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
@@ -488,6 +491,8 @@ export const ALL_TURMOIL_CORPORATIONS: Array<CorporationCard> = [
 export const ALL_PROMO_CORPORATIONS: Array<CorporationCard> = [
     new ArcadianCommunities(),
     new Factorum(),
+    new Philares(),
+    new MonsInsurance(),
     new Recyclon(),
     new Splice()
 ]; 

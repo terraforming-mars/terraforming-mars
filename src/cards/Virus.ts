@@ -41,7 +41,7 @@ export class Virus implements IProjectCard {
             return new SelectPlayer(
                 playersWithPlants, 
                 "Select player to remove up to 5 plants from", (foundPlayer: Player) => {
-                foundPlayer.removePlants(player, 5);
+                foundPlayer.removePlants(player, 5, game);
                 return undefined;
             });
         };
@@ -50,7 +50,7 @@ export class Virus implements IProjectCard {
             return new SelectCard(
                 "Select card to remove up to 2 animals from", 
                 cards, (foundCard: Array<IProjectCard>) => {
-                game.getCardPlayer(foundCard[0].name).removeAnimals(player, foundCard[0], 2);
+                game.getCardPlayer(foundCard[0].name).removeAnimals(player, foundCard[0], 2, game);
                 return undefined;
             })
         };
@@ -60,7 +60,7 @@ export class Virus implements IProjectCard {
               return remove5Plants();
             }
             if (playersWithPlants.length === 1) {
-                playersWithPlants[0].removePlants(player, 5);
+                playersWithPlants[0].removePlants(player, 5, game);
                 return undefined;
             }
             return undefined;
@@ -72,7 +72,7 @@ export class Virus implements IProjectCard {
             }
 
             if (cards.length === 1) {
-                game.getCardPlayer(cards[0].name).removeAnimals(player, cards[0], 2);
+                game.getCardPlayer(cards[0].name).removeAnimals(player, cards[0], 2, game);
                 return undefined;
             }
             return undefined;

@@ -32,6 +32,6 @@ export interface ICard {
     getVictoryPoints?: (player: Player, game: Game) => number;
     onCardPlayed?: (player: Player, game: Game, card: IProjectCard) => OrOptions | void;
     onStandardProject?: (player: Player, projectType: StandardProjectType) => void;
-    onTilePlaced?: (player: Player, space: ISpace, game?: Game) => void;
+    onTilePlaced?: (player: Player, space: ISpace, game: Game) => void;
     resourceType?: ResourceType;
 }

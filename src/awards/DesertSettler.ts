@@ -8,6 +8,6 @@ export class DesertSettler implements IAward {
     public getScore(player: Player, game: Game): number {
         return game.board.spaces
           .filter((space) => (space.player !== undefined && space.player === player) 
-                               && (space.y > 4 || space.y < 9)).length;
+                               && space.y >= 5 && space.y <= 8).length;
     }   
 }

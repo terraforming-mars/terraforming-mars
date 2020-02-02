@@ -6,6 +6,10 @@ import { Planner } from "./Planner";
 import { Hoverlord } from "./Hoverlord"
 import { IMilestone } from "./IMilestone";
 import { Generalist } from './Generalist';
+import { Specialist } from './Specialist';
+import { Ecologist } from './Ecologist';
+import { Tycoon } from './Tycoon';
+import { Legend } from './Legend';
 
 export const ORIGINAL_MILESTONES: Array<IMilestone> = [
     new Terraformer(),
@@ -20,5 +24,9 @@ export const VENUS_MILESTONES: Array<IMilestone> = [
 ]
 
 export const ELYSIUM_MILESTONES: Array<IMilestone> = [
-    new Generalist()
+    new Generalist(),
+    new Specialist(),
+    new Ecologist(),
+    new Tycoon(),
+    new Legend()
 ]    

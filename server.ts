@@ -328,7 +328,8 @@ function getPlayer(player: Player, game: Game): string {
     gameAge: game.gameAge,
     isActive: player.id === game.activePlayer.id,
     venusNextExtension: game.venusNextExtension,
-    venusScaleLevel: game.getVenusScaleLevel()
+    venusScaleLevel: game.getVenusScaleLevel(),
+    boardName: game.boardName
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -446,7 +447,8 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       victoryPointsBreakdown: player.victoryPointsBreakdown,
       isActive: player.id === game.activePlayer.id,
       venusNextExtension: game.venusNextExtension,
-      venusScaleLevel: game.getVenusScaleLevel()
+      venusScaleLevel: game.getVenusScaleLevel(),
+      boardName: game.boardName
     } as PlayerModel;
   });
 }

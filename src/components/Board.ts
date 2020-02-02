@@ -6,8 +6,8 @@ import {Tile} from "./Tile";
 import { Venus } from "./Venus";
 import { BoardMixin } from "./BoardMixin";
 
-export const OriginalBoard = Vue.component("board", {
-    props: ["spaces", "venusNextExtension", "venusScaleLevel"],
+export const Board = Vue.component("board", {
+    props: ["spaces", "venusNextExtension", "venusScaleLevel","boardName"],
     components: {
         "bonus": Bonus,
         "tile": Tile,
@@ -74,34 +74,35 @@ export const OriginalBoard = Vue.component("board", {
                 <g id="phobos_space_heaven">
                     <text x="2" y="15" class="board_caption">Phobos space haven</text>
                 </g>
-                <g id="ascraeus_mons" transform="translate(40, 120)">
+
+                <g v-if="boardName === 'original'" id="ascraeus_mons" transform="translate(40, 120)">
                     <text class="board_caption">
                         <tspan dy="15">Ascraeus</tspan>
                         <tspan x="4" dy="12">Mons</tspan>
                     </text>
                 </g>
                 
-                <g id="pavonis_mons" transform="translate(15, 160)">
+                <g v-if="boardName === 'original'" id="pavonis_mons" transform="translate(15, 160)">
                     <text class="board_caption">
                         <tspan dy="15">Pavonis</tspan>
                         <tspan x="4" dy="12">Mons</tspan>
                     </text>
                 </g>
                 
-                <g id="arsia_mons" transform="translate(2, 205)">
+                <g v-if="boardName === 'original'" id="arsia_mons" transform="translate(2, 205)">
                     <text class="board_caption">
                         <tspan dy="15">Arsia</tspan>
                         <tspan x="-2" dy="12">Mons</tspan>
                     </text>
                 </g>
                 
-                <g id="tharsis_tholus"  transform="translate(10, 100)">
+                <g v-if="boardName === 'original'" id="tharsis_tholus"  transform="translate(10, 100)">
                     <text class="board_caption">Tharsis Tholus</text>
                     <line x1="85" y1="-3" x2="160" y2="2" class="board_line"></line>
                     <text x="158" y="5" class="board_caption board_caption--black">&#x25cf;</text>
                 </g>
                 
-                <g id="noctis_city" transform="translate(10, 258)">
+                <g v-if="boardName === 'original'" id="noctis_city" transform="translate(10, 258)">
                     <text class="board_caption">
                         <tspan dy="15">Noctis</tspan>
                         <tspan x="7" dy="12">City</tspan>
@@ -109,6 +110,32 @@ export const OriginalBoard = Vue.component("board", {
                     <line x1="30" y1="20" x2="140" y2="-20" class="board_line"></line>
                     <text x="136" y="-18" class="board_caption board_caption--black">&#x25cf;</text>
                 </g>
+
+                <g v-if="boardName === 'elysium'" id="elysium_mons" transform="translate(40, 120)">
+                <text class="board_caption">
+                    <tspan dy="15">Elysium</tspan>
+                    <tspan x="4" dy="12">Mons</tspan>
+                </text>
+                </g>
+
+                <g v-if="boardName === 'elysium'" id="hecates_tholus"  transform="translate(20, 100)">
+                    <text class="board_caption">Hecates Tholus</text>
+                </g>
+
+                <g v-if="boardName === 'elysium'" id="arsia_mons" transform="translate(420, 221)">
+                <text class="board_caption">
+                    <tspan dy="15">Arsia</tspan>
+                    <tspan x="4" dy="12">Mons</tspan>
+                </text>
+                </g>
+
+                <g v-if="boardName === 'elysium'" id="olympus_mons" transform="translate(410, 110)">
+                <text class="board_caption">
+                    <tspan x="-5" dy="15">Olympus</tspan>
+                    <tspan x="4" dy="12">Mons</tspan>
+                </text>
+                </g>
+
             </svg>
         </div>
 

@@ -1,7 +1,7 @@
 
 import Vue from "vue";
 
-import { OriginalBoard } from "./OriginalBoard";
+import { Board } from "./Board";
 import { Card } from "./Card";
 import { Milestone } from "./Milestone";
 import { Award } from "./Award";
@@ -17,7 +17,7 @@ import { PlayerModel } from "../models/PlayerModel";
 export const PlayerHome = Vue.component("player-home", {
     props: ["player"],
     components: {
-        "board": OriginalBoard,
+        "board": Board,
         "card": Card,
         "claimed-milestone": ClaimedMilestone,
         "funded-award": FundedAward,
@@ -73,7 +73,7 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <div class="player_home_block">
                     <a name="board" class="player_home_anchor"></a>
-                    <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel"></board>
+                    <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.boardName"></board>
 
                     <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature"></global-parameters>
 

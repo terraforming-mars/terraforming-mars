@@ -23,8 +23,8 @@ import {Color} from './Color';
 import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
 import {Resources} from "./Resources";
-import {ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
-import {ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import { ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES } from './milestones/Milestones';
+import { ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS } from './awards/Awards';
 import {SpaceName} from './SpaceName';
 import {Colony, Board} from './Board';
 import {CorporationName} from './CorporationName';
@@ -85,17 +85,18 @@ export class Game {
 
       if (boardName === "original") {
         this.board = new OriginalBoard();
+        this.milestones.push(...ORIGINAL_MILESTONES);
+        this.awards.push(...ORIGINAL_AWARDS);
       } else if (boardName === "elysium") {
         this.board = new ElysiumBoard();
+        this.milestones.push(...ELYSIUM_MILESTONES);
+        this.awards.push(...ELYSIUM_AWARDS);
       } else {
         this.board = new ElysiumBoard();
       }
 
       this.activePlayer = first;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension);
-
-      this.milestones.push(...ORIGINAL_MILESTONES);
-      this.awards.push(...ORIGINAL_AWARDS);
     
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board

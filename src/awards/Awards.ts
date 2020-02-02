@@ -5,6 +5,7 @@ import { Thermalist } from "./Thermalist";
 import { Miner } from "./Miner";
 import { Venuphile } from "./Venuphile"
 import { IAward } from "./IAward";
+import { Industrialist } from './Industrialist';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
     new Landlord(),
@@ -17,3 +18,8 @@ export const ORIGINAL_AWARDS: Array<IAward> = [
 export const VENUS_AWARDS: Array<IAward> = [
     new Venuphile()
 ]
+
+export const ELYSIUM_AWARDS: Array<IAward> = [
+    new Industrialist()
+]  
+

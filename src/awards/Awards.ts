@@ -6,6 +6,10 @@ import { Miner } from "./Miner";
 import { Venuphile } from "./Venuphile"
 import { IAward } from "./IAward";
 import { Industrialist } from './Industrialist';
+import { Celebrity } from './Celebrity';
+import { DesertSettler } from './DesertSettler';
+import { EstateDealer } from './EstateDealer';
+import { Benefactor } from './Benefactor';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
     new Landlord(),
@@ -20,6 +24,10 @@ export const VENUS_AWARDS: Array<IAward> = [
 ]
 
 export const ELYSIUM_AWARDS: Array<IAward> = [
-    new Industrialist()
+    new Celebrity(),
+    new Industrialist(),
+    new DesertSettler(),
+    new EstateDealer(),
+    new Benefactor()
 ]  
 

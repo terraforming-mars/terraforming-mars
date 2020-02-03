@@ -17,8 +17,7 @@ export class Diversifier implements IMilestone {
             allTags.push(...card.tags);  
           }
         ); 
-        allTags.filter((tag, index) => index === allTags.indexOf(tag));
         
-        return allTags.length >= 8;
+        return allTags.filter((tag, index, array) => index === array.indexOf(tag)).length >= 8;
     }   
 }

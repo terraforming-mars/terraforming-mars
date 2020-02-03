@@ -3,5 +3,7 @@ export enum SpaceBonus {
     TITANIUM,
     STEEL,
     PLANT,
-    DRAW_CARD
+    DRAW_CARD,
+    HEAT,
+    OCEAN
 }

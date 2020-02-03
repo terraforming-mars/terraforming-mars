@@ -870,6 +870,35 @@ export class Game {
       if (space.tile !== undefined) {
         throw new Error('Selected space is occupied');
       }
+      // Hellas special requirements ocean tile
+      if (space.id === SpaceName.HELLAS_OCEAN_TILE 
+          && this.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES
+          && this.boardName === "Hellas") {
+        if (!player.canAfford(6)) {
+          throw new Error('You must be able to pay 6 to place a tile here');
+        } else {
+          let selectOcean = new SelectSpace(
+            'Select space for ocean tile',
+            this.board.getAvailableSpacesForOcean(player),
+            (space: ISpace) => {
+              this.addOceanTile(player, space.id);
+              player.megaCredits -= 6;
+              return undefined;
+            }
+          );
+
+          selectOcean.onend = () => { 
+            this.interrupt = undefined;
+            player.takeAction(this);
+          }
+
+          this.interrupt = {
+            player: player,
+            playerInput: selectOcean
+          };
+        }
+      }
+
       // Land claim a player can claim land for themselves
       if (space.player !== undefined && space.player !== player) {
         throw new Error('This space is land claimed by ' + space.player.name);
@@ -894,6 +923,8 @@ export class Game {
           player.steel++;
         } else if (spaceBonus === SpaceBonus.TITANIUM) {
           player.titanium++;
+        } else if (spaceBonus === SpaceBonus.HEAT) {
+          player.heat++;  
         }
       });
       this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {

@@ -65,7 +65,7 @@ export const Board = Vue.component("board", {
                         xlink:href="#hexagon" />
                 </g>
             </svg>
-            <svg id="board_legend" height="470" width="450" class="board_legend">
+            <svg id="board_legend" height="470" width="470" class="board_legend">
 
                 <g id="ganymede_colony">
                     <text x="67" y="462" class="board_caption">Ganymede colony</text>

@@ -10,6 +10,11 @@ import { Specialist } from './Specialist';
 import { Ecologist } from './Ecologist';
 import { Tycoon } from './Tycoon';
 import { Legend } from './Legend';
+import { Diversifier } from './Diversifier';
+import { Tactitian } from './Tactitian';
+import { PolarExplorer } from './PolarExplorer';
+import { Energizer } from './Energizer';
+import { RimSettler } from './RimSettler';
 
 export const ORIGINAL_MILESTONES: Array<IMilestone> = [
     new Terraformer(),
@@ -29,4 +34,12 @@ export const ELYSIUM_MILESTONES: Array<IMilestone> = [
     new Ecologist(),
     new Tycoon(),
     new Legend()
+]    
+
+export const HELLAS_MILESTONES: Array<IMilestone> = [
+    new Diversifier(),
+    new Tactitian(),
+    new PolarExplorer(),
+    new Energizer(),
+    new RimSettler()
 ]    

@@ -150,6 +150,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <div class="nes-select">
                     <select :id="board" v-model="board">
                         <option value="original">Original board</option>
+                        <option value="hellas">Hellas board</option>
                         <option value="elysium">Elysium board</option>
                     </select>
                 </div>

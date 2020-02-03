@@ -23,13 +23,15 @@ import {Color} from './Color';
 import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
 import {Resources} from "./Resources";
-import { ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES } from './milestones/Milestones';
-import { ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS } from './awards/Awards';
+import { ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES } from './milestones/Milestones';
+import { ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS } from './awards/Awards';
 import {SpaceName} from './SpaceName';
 import {Colony, Board} from './Board';
 import {CorporationName} from './CorporationName';
 import {CardName} from './CardName';
 import { ElysiumBoard } from './ElysiumBoard';
+import { HellasBoard } from './HellasBoard';
+import { BoardName } from './BoardName';
 
 export interface PlayerInterrupt {
   player: Player,
@@ -83,16 +85,18 @@ export class Game {
       public boardName: string = "original"
     ) {
 
-      if (boardName === "original") {
-        this.board = new OriginalBoard();
-        this.milestones.push(...ORIGINAL_MILESTONES);
-        this.awards.push(...ORIGINAL_AWARDS);
-      } else if (boardName === "elysium") {
+      if (boardName === BoardName.ELYSIUM) {
         this.board = new ElysiumBoard();
         this.milestones.push(...ELYSIUM_MILESTONES);
         this.awards.push(...ELYSIUM_AWARDS);
-      } else {
-        this.board = new ElysiumBoard();
+      } else if (boardName === BoardName.HELLAS) {
+        this.board = new HellasBoard();
+        this.milestones.push(...HELLAS_MILESTONES);
+        this.awards.push(...HELLAS_AWARDS);
+      } else {        
+        this.board = new OriginalBoard();
+        this.milestones.push(...ORIGINAL_MILESTONES);
+        this.awards.push(...ORIGINAL_AWARDS);
       }
 
       this.activePlayer = first;
@@ -873,7 +877,7 @@ export class Game {
       // Hellas special requirements ocean tile
       if (space.id === SpaceName.HELLAS_OCEAN_TILE 
           && this.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES
-          && this.boardName === "Hellas") {
+          && this.boardName === BoardName.HELLAS) {
         if (!player.canAfford(6)) {
           throw new Error('You must be able to pay 6 to place a tile here');
         } else {

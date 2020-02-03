@@ -10,6 +10,11 @@ import { Celebrity } from './Celebrity';
 import { DesertSettler } from './DesertSettler';
 import { EstateDealer } from './EstateDealer';
 import { Benefactor } from './Benefactor';
+import { Cultivator } from './Cultivator';
+import { Magnate } from './Magnate';
+import { SpaceBaron } from './SpaceBaron';
+import { Excentric } from './Excentric';
+import { Contractor } from './Contractor';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
     new Landlord(),
@@ -30,4 +35,12 @@ export const ELYSIUM_AWARDS: Array<IAward> = [
     new EstateDealer(),
     new Benefactor()
 ]  
+
+export const HELLAS_AWARDS: Array<IAward> = [
+    new Cultivator(),
+    new Magnate(),
+    new SpaceBaron(),
+    new Excentric(),
+    new Contractor()
+] 
 

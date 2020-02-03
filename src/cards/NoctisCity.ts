@@ -6,6 +6,8 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SpaceName } from "../SpaceName";
 import { Resources } from '../Resources';
+import { SelectSpace } from '../inputs/SelectSpace';
+import { ISpace } from '../ISpace';
 
 export class NoctisCity implements IProjectCard {
     public cost: number = 18;
@@ -22,7 +24,14 @@ export class NoctisCity implements IProjectCard {
         }
         player.setProduction(Resources.ENERGY,-1);
         player.setProduction(Resources.MEGACREDITS,3);
-        game.addCityTile(player, noctisSpace.id);
-        return undefined;
+        if (game.boardName === "original") {
+          game.addCityTile(player, noctisSpace.id);
+          return undefined;
+        } else {
+            return new SelectSpace("Select space for Noctis city", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
+                game.addCityTile(player, space.id);
+                return undefined;
+            }); 
+        }  
     }
 }

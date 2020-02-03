@@ -21,6 +21,10 @@ export const Bonus = Vue.component("bonus", {
                 ret += "plant";
             } else if (bonus == SpaceBonus.DRAW_CARD) {
                 ret += "card";
+            } else if (bonus == SpaceBonus.HEAT) {
+                ret += "heat";
+             }else if (bonus == SpaceBonus.OCEAN) {
+                ret += "bonusocean";
             }
 
             ret += " board_bonus_pos--" + app.space.id.toString() + "_" + idx.toString();

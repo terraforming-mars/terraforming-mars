@@ -36,7 +36,10 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
     },
     mixins: [PaymentWidgetMixin],
     mounted: function () {
-        this.$data.megaCredits = this.getCardCost();
+        let app = this;
+        Vue.nextTick(function () {
+            app.$data.megaCredits = app.getCardCost();
+        });
     },
     methods: {
         getCardCost: function () {

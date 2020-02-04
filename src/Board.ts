@@ -5,7 +5,7 @@ import { SpaceBonus } from "./SpaceBonus";
 import { SpaceName } from "./SpaceName";
 import { TileType } from "./TileType";
 
-export class Space implements ISpace {
+export abstract class Space implements ISpace {
     constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
 
     }

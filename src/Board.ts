@@ -103,7 +103,7 @@ export abstract class Board {
         );
     } 
 
-    private playerHasSpace(player: Player): boolean {
+    public playerHasSpace(player: Player): boolean {
         return this.spaces.find(
             (space) => space.tile !== undefined &&
                     space.player === player &&

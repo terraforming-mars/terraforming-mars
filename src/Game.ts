@@ -878,9 +878,6 @@ export class Game {
       if (space.id === SpaceName.HELLAS_OCEAN_TILE 
           && this.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES
           && this.boardName === BoardName.HELLAS) {
-        if (!player.canAfford(6)) {
-          throw new Error('You must be able to pay 6 to place a tile here');
-        } else {
           let selectOcean = new SelectSpace(
             'Select space for ocean tile',
             this.board.getAvailableSpacesForOcean(player),
@@ -900,7 +897,6 @@ export class Game {
             player: player,
             playerInput: selectOcean
           };
-        }
       }
 
       // Land claim a player can claim land for themselves

@@ -49,6 +49,15 @@ export const CreateGameForm = Vue.component("create-game-form", {
         toggleDisplayed: function () {
             this.displayed = !this.displayed;
         },
+        getOriginalBoard: function () {
+            return BoardName.ORIGINAL;
+        },
+        getHellasBoard: function () {
+            return BoardName.HELLAS;
+        },
+        getElysiumBoard: function () {
+            return BoardName.ELYSIUM;
+        },
         getOriginalCorps: function () {
             return ALL_CORPORATION_CARDS;
         },
@@ -149,9 +158,9 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <label>Board:</label>
                 <div class="nes-select">
                     <select :id="board" v-model="board">
-                        <option value="original">Original board</option>
-                        <option value="hellas">Hellas board</option>
-                        <option value="elysium">Elysium board</option>
+                        <option :value=getOriginalBoard()>Original board</option>
+                        <option :value=getHellasBoard()>Hellas board</option>
+                        <option :value=getElysiumBoard()>Elysium board</option>
                     </select>
                 </div>
                 <br>

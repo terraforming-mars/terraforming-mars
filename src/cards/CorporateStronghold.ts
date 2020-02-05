@@ -13,6 +13,7 @@ export class CorporateStronghold implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public name: string = 'Corporate Stronghold';
+    public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 1 && game.board.getAvailableSpacesForCity(player).length >= 0;
     }

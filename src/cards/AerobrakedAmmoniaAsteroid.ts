@@ -12,9 +12,7 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public name: string = 'Aerobraked Ammonia Asteroid';
     public cardType: CardType = CardType.EVENT;
-    public canPlay(): boolean {
-      return true;
-    }
+
     public play(player: Player) {
       const cardsToPick = player.getResourceCards(ResourceType.MICROBE);
       player.setProduction(Resources.HEAT,3);

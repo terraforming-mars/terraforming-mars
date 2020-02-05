@@ -10,6 +10,7 @@ export class FuelFactory implements IProjectCard {
   public name: string = 'Fuel Factory';
   public tags: Array<Tags> = [Tags.STEEL];
   public cardType: CardType = CardType.AUTOMATED;
+  public hasRequirements = false;
   public canPlay(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) >= 1;
   }

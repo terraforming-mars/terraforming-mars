@@ -10,9 +10,7 @@ export class SpecialDesign implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.EVENT;
     public name: string = "Special Design";
-    public canPlay(): boolean {
-        return true;
-    }
+
     public getRequirementBonus(player: Player, game: Game): number {
         const lastCardPlayed = player.lastCardPlayedThisGeneration(game);
         if (lastCardPlayed !== undefined && lastCardPlayed.name === this.name) {

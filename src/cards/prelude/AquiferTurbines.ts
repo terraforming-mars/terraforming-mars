@@ -10,6 +10,7 @@ import { Resources } from '../../Resources';
 export class AquiferTurbines extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY];
     public name: string = "Aquifer Turbines";
+    public hasRequirements = false;
     public canPlay(player: Player) {
         return player.canAfford(3);
     }

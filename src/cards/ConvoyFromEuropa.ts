@@ -12,9 +12,7 @@ export class ConvoyFromEuropa implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
     public name: string = 'Convoy From Europa';
-    public canPlay(): boolean {
-      return true;
-    }
+
     public play(player: Player, game: Game) {
 
       if (game.noOceansAvailable()) return undefined;

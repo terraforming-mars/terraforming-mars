@@ -13,9 +13,7 @@ export class UndergroundDetonations implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Underground Detonations";
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public canAct(player: Player): boolean {
         return player.canAfford(10);
     }

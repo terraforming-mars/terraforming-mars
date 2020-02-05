@@ -11,9 +11,7 @@ export class VestaShipyard implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = "Vesta Shipyard";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, _game: Game): undefined {
         player.setProduction(Resources.TITANIUM);
         return undefined;

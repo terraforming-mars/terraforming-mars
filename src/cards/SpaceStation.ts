@@ -10,9 +10,7 @@ export class SpaceStation implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public name: string = "Space Station";
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
         if (card.tags.indexOf(Tags.SPACE) !== -1) {
             return 2;

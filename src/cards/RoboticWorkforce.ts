@@ -65,9 +65,7 @@ export class RoboticWorkforce implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Robotic Workforce";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
         const builderCards: Array<IProjectCard> = [
             new AICentral(),

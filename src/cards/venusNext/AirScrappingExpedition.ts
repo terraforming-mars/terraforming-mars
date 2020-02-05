@@ -12,9 +12,7 @@ export class AirScrappingExpedition implements IProjectCard {
     public tags: Array<Tags> = [Tags.VENUS];
     public name: string = "Air-Scrapping Expedition";
     public cardType: CardType = CardType.EVENT;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player) {
         const floaterCards = player.getResourceCards(ResourceType.FLOATER);
         if (floaterCards.length === 0) {

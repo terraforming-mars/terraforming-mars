@@ -12,9 +12,7 @@ export class ViralEnhancers implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.MICROBES];
     public name: string = "Viral Enhancers";
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
         if (card.tags.find((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES) !== undefined && card.resourceType !== undefined) {
             return new OrOptions(

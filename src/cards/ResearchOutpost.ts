@@ -13,6 +13,7 @@ export class ResearchOutpost implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.CITY, Tags.STEEL];
     public name: string = "Research Outpost";
     public cardType: CardType = CardType.ACTIVE;
+    public hasRequirements = false;
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.board.getAvailableSpacesOnLand(player)
                 .filter((space) => {

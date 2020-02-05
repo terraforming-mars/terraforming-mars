@@ -14,6 +14,7 @@ export class LavaTubeSettlement implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL, Tags.CITY];
     public name: string = "Lava Tube Settlement";
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         return LavaFlows.getVolcanicSpaces(player, game).length > 0 && player.getProduction(Resources.ENERGY) >= 1;
     }

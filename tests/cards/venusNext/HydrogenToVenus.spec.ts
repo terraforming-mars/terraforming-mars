@@ -16,7 +16,7 @@ describe("HydrogenToVenus", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         player.playedCards.push(card2, card3);
-        expect(card.canPlay()).to.eq(true);
+
         const action = card.play(player, game)  as SelectCard<ICard>;
         expect(action instanceof SelectCard).to.eq(true);
         action.cb([card2]);

@@ -15,6 +15,7 @@ export class LavaFlows implements IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [];
     public name: string = "Lava Flows";
+    public hasRequirements = false;
     public cardType: CardType = CardType.EVENT;
     public static getVolcanicSpaces(player: Player, game: Game): Array<ISpace> {
         if (game.boardName === BoardName.ORIGINAL) {

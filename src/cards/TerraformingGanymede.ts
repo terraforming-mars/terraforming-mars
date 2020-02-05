@@ -10,9 +10,7 @@ export class TerraformingGanymede implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = "Terraforming Ganymede";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, _game: Game) {
         player.terraformRating += 1 + player.getTagCount(Tags.JOVIAN);
         return undefined;

@@ -15,9 +15,7 @@ export class GiantIceAsteroid implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public name: string = "Giant Ice Asteroid";
     public cardType: CardType = CardType.EVENT;
-    public canPlay(): boolean {
-        return true;
-    }
+
 
     public play(player: Player, game: Game) {
         var opts: Array<SelectPlayer | SelectSpace> = [];

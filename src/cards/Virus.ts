@@ -15,9 +15,7 @@ export class Virus implements IProjectCard {
     public tags: Array<Tags> = [Tags.MICROBES];
     public name: string = "Virus";
     public cardType: CardType = CardType.EVENT;
-    public canPlay(): boolean {
-        return true;
-    }
+
 
     private getPossibleTargetCards(player: Player, game: Game): Array<IProjectCard> {
         let possibleCards = new Array<IProjectCard>(); 

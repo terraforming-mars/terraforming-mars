@@ -10,9 +10,7 @@ export class EarthOffice implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = 'Earth Office';
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-      return true;
-    }
+
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
       if (card.tags.indexOf(Tags.EARTH) !== -1) {
         return 3;

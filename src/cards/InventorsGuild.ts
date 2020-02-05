@@ -13,9 +13,7 @@ export class InventorsGuild implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Inventors' Guild";
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(_player: Player, _game: Game) {
         return undefined;
     }

@@ -12,6 +12,7 @@ export class Hackers implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = "Hackers";
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.ENERGY) >= 1;
     }

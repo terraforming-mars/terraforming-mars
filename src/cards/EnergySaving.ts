@@ -11,9 +11,7 @@ export class EnergySaving implements IProjectCard {
     public cost: number = 15;
     public tags: Array<Tags> = [Tags.ENERGY];
     public name: string = 'Energy Saving';
-    public canPlay(): boolean {
-      return true;
-    }
+
     public play(player: Player, game: Game) {
       player.setProduction(Resources.ENERGY,game.getCitiesInPlay());
       return undefined;

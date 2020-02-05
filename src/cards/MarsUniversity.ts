@@ -13,9 +13,7 @@ export class MarsUniversity implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public name: string = "Mars University";
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
         if (card.tags.indexOf(Tags.SCIENCE) !== -1) {
             return new OrOptions(

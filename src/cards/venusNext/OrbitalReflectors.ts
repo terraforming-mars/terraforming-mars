@@ -12,9 +12,7 @@ export class OrbitalReflectors  implements IProjectCard {
     public name: string = "Orbital Reflectors";
     public cardType: CardType = CardType.AUTOMATED;
 
-    public canPlay(): boolean {
-        return true;
-    }
+
 
     public play(player: Player, game: Game) {
         game.increaseVenusScaleLevel(player,2);

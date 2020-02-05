@@ -10,9 +10,7 @@ export class StandardTechnology implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Standard Technology";
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public onStandardProject(player: Player, projectType: StandardProjectType) { 
         if (projectType !== StandardProjectType.SELLING_PATENTS) {
             player.megaCredits += 3;

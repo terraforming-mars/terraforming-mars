@@ -18,9 +18,7 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = "Water Import From Europa";
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public getVictoryPoints(player: Player) {
         return player.getTagCount(Tags.JOVIAN);
     }

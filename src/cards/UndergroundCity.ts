@@ -13,6 +13,7 @@ export class UndergroundCity implements IProjectCard {
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public name: string = "Underground City";
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         return player.getProduction(Resources.ENERGY) >= 2 && game.board.getAvailableSpacesForCity(player).length >= 0;
     }

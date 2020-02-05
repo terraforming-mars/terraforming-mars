@@ -12,9 +12,7 @@ export class GanymedeColony implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE, Tags.CITY];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Ganymede Colony";
-    public canPlay(): boolean {
-        return true;
-    }
+
     public getVictoryPoints(player: Player) {
         return player.getTagCount(Tags.JOVIAN);
     }

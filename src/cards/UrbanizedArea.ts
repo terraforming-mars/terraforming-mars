@@ -14,6 +14,7 @@ export class UrbanizedArea implements IProjectCard {
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public name: string = "Urbanized Area";
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.board.getAvailableSpacesOnLand(player)
                 .filter((space) => game.board.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.CITY).length >= 2);

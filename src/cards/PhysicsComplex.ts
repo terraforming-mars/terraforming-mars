@@ -12,9 +12,7 @@ export class PhysicsComplex implements IActionCard, IProjectCard {
     public name: string = "Physics Complex";
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.SCIENCE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public getVictoryPoints(player: Player): number {
         return 2 * player.getResourcesOnCard(this);
     }

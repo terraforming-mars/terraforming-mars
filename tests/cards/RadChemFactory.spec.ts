@@ -9,7 +9,7 @@ describe("RadChemFactory", function () {
     it("Should throw", function () {
         const card = new RadChemFactory();
         const player = new Player("test", Color.BLUE, false);
-        expect(function () { card.play(player); }).to.throw("Must have energy production");
+        expect(card.canPlay(player)).to.eq(false);
     });
     it("Should play", function () {
         const card = new RadChemFactory();

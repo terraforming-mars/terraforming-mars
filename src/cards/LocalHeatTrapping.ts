@@ -17,6 +17,7 @@ export class LocalHeatTrapping implements IProjectCard {
     public cost: number = 1;
     public tags: Array<Tags> = [];
     public name: string = "Local Heat Trapping";
+    public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.heat >= 5 || (player.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED) * 2) + player.heat >= 5 );
     }

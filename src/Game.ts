@@ -82,7 +82,7 @@ export class Game {
       public venusNextExtension: boolean = false,
       customCorporationsList: boolean = false,
       corporationList: Array<CorporationCard> = [],
-      public boardName: string = BoardName.ORIGINAL
+      public boardName: BoardName = BoardName.ORIGINAL
     ) {
 
       if (boardName === BoardName.ELYSIUM) {

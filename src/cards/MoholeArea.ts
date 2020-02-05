@@ -15,9 +15,7 @@ export class MoholeArea implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Mohole Area";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
         return new SelectSpace("Select an ocean space for special tile", game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
             game.addTile(player, SpaceType.OCEAN, space, { tileType: TileType.SPECIAL });

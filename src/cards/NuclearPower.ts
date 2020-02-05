@@ -11,6 +11,7 @@ export class NuclearPower implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public name: string = "Nuclear Power";
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.MEGACREDITS) >= -3;
     }

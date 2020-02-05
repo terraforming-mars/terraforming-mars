@@ -9,10 +9,6 @@ import { ProtectedHabitats } from "../../src/cards/ProtectedHabitats";
 import { maxOutOceans } from "../TestingUtils";
 
 describe("GiantIceAsteroid", function () {
-    it("Can play", function () {
-        const card = new GiantIceAsteroid();
-        expect(card.canPlay()).to.eq(true);
-    });
     it("Should play", function () {
         const card = new GiantIceAsteroid();
         const player = new Player("test", Color.BLUE, false);

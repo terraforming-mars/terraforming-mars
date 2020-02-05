@@ -3,8 +3,6 @@ import { SpaceName } from "./SpaceName";
 import { Board, Land, Ocean, Colony } from './Board';
 import { Player } from './Player';
 import { ISpace } from './ISpace';
-import { TileType } from './TileType';
-import { SpaceType } from './SpaceType';
 
 export class HellasBoard extends Board{
     constructor() {
@@ -114,38 +112,22 @@ export class HellasBoard extends Board{
     public getAvailableSpacesForCity(player: Player): Array<ISpace> {
         // Check for special tile
         if (player.canAfford(6)) return super.getAvailableSpacesForCity(player);
-        // A city cannot be adjacent to another city
-        return this.getAvailableSpacesOnLand(player).filter(
-        (space) => this.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined 
-          && adjacentSpace.tile.tileType === TileType.CITY).length === 0 && space.id !== SpaceName.HELLAS_OCEAN_TILE);
+
+        return super.getAvailableSpacesForCity(player).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
     }
 
     public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
         // Check for special tile
         if (player.canAfford(6)) return super.getAvailableSpacesOnLand(player);
-        return this.getSpaces(SpaceType.LAND)
-            .filter(
-                (space) => space.id !== SpaceName.NOCTIS_CITY &&
-                        space.tile === undefined &&
-                        (space.player === undefined || space.player === player) &&
-                        space.id !== SpaceName.HELLAS_OCEAN_TILE
-            );
+
+        return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
     }
 
     public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
-        // Greenery must be placed by a space you own if you own a space
-        if (super.playerHasSpace(player)) {
-        return this.getAvailableSpacesOnLand(player)
-            .filter(
-                (space) => this.getAdjacentSpaces(space).find(
-                    (adj) => adj.tile !== undefined &&
-                                adj.tile.tileType !== TileType.OCEAN &&
-                                adj.player === player
-                ) !== undefined
-            );
-        }
-        // Place anywhere if no space owned
-        return this.getAvailableSpacesOnLand(player);
+        // Check for special tile
+        if (player.canAfford(6)) return super.getAvailableSpacesForGreenery(player);
+
+        return super.getAvailableSpacesForGreenery(player).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
     }
 
 }

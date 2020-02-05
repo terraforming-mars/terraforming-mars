@@ -11,9 +11,7 @@ export class BigAsteroid implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
     public name: string = 'Big Asteroid';
-    public canPlay(): boolean {
-      return true;
-    }
+
     private doPlay(player: Player, game: Game): SelectSpace | undefined {
       player.titanium += 4;
       return game.increaseTemperature(player, 2);

@@ -8,10 +8,6 @@ import { maxOutOceans } from "../TestingUtils";
 import * as constants from "../../src/constants";
 
 describe("IceAsteroid", function () {
-    it("Can play", function () {
-        const card = new IceAsteroid();
-        expect(card.canPlay()).to.eq(true);
-    });
     it("Should play", function () {
         const card = new IceAsteroid();
         const player = new Player("test", Color.BLUE, false);

@@ -10,9 +10,7 @@ export class SolarPower implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Solar Power";
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player) {
         player.setProduction(Resources.ENERGY);
         return undefined;

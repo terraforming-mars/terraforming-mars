@@ -11,9 +11,7 @@ export class VenusWaystation implements IProjectCard {
     public name: string = "Venus Waystation";
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.MICROBE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play() {
         return undefined;
     }

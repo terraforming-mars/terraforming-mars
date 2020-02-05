@@ -11,9 +11,7 @@ export class DevelopmentCenter implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public name: string = 'Development Center';
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-      return true;
-    }
+
     public play() {
       return undefined;
     }

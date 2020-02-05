@@ -10,13 +10,11 @@ export class RadChemFactory implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Rad-chem Factory";
+    public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.ENERGY) >= 1;
     }
     public play(player: Player) {
-        if (player.getProduction(Resources.ENERGY) < 1) {
-            throw "Must have energy production";
-        }
         player.setProduction(Resources.ENERGY,-1);
         player.terraformRating += 2;
         return undefined;

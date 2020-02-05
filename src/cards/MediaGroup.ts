@@ -10,9 +10,7 @@ export class MediaGroup implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = "Media Group";
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
         if (card.cardType === CardType.EVENT) {
             player.megaCredits += 3;

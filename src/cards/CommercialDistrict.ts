@@ -14,6 +14,7 @@ export class CommercialDistrict implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = 'Commercial District';
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
     public canPlay(player: Player): boolean {
       return player.getProduction(Resources.ENERGY) >= 1;
     }

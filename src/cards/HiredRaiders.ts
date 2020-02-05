@@ -14,9 +14,7 @@ export class HiredRaiders implements IProjectCard {
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.EVENT;
     public name: string = "Hired Raiders";
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
 
         if (game.getPlayers().length == 1) {

@@ -11,9 +11,7 @@ export class ArtificialPhotosynthesis implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Artificial Photosynthesis';
-    public canPlay(): boolean {
-      return true;
-    }
+
     public play(player: Player) {
       return new OrOptions(
           new SelectOption('Increase your plant production 1 step', () => {

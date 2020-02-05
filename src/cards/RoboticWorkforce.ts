@@ -65,8 +65,11 @@ export class RoboticWorkforce implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Robotic Workforce";
     public cardType: CardType = CardType.AUTOMATED;
+    public canPlay(player: Player): boolean {
+        return this.getAvailableCards(player).length > 0;
+    }
 
-    public play(player: Player, game: Game) {
+    private getAvailableCards(player: Player): Array<IProjectCard> {
         const builderCards: Array<IProjectCard> = [
             new AICentral(),
             new BiomassCombustors(),
@@ -125,6 +128,11 @@ export class RoboticWorkforce implements IProjectCard {
             }
             return false;
         });
+        return availableCards;
+    }
+
+    public play(player: Player, game: Game) {
+        const availableCards = this.getAvailableCards(player);
         if (availableCards.length === 0) {
             return undefined;
         }

@@ -135,7 +135,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 </label>			
                 <label>
                         <input type="checkbox" class="nes-checkbox" v-model="draftVariant" />
-                        <span>Use draft variant ?<span>
+                        <span>Use draft variant ?</span>
                 </label>
                 <label>
                         <input type="checkbox" class="nes-checkbox" v-model="customCorporationsList"  v-on:click="toggleDisplayed()" />

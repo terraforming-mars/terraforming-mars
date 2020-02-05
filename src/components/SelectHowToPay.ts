@@ -28,7 +28,10 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
     },
     mixins: [PaymentWidgetMixin],
     mounted: function () {
-        this.$data.megaCredits = this.playerinput.amount;
+      let app = this;
+      Vue.nextTick(function () {
+        app.$data.megaCredits = app.playerinput.amount;
+      });
     },
     methods: {
         hasWarning: function () {

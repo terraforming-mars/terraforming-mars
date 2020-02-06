@@ -9,7 +9,7 @@ describe("ExtractorBalloons", function () {
     it("Should play", function () {
         const card = new ExtractorBalloons();
         const player = new Player("test", Color.BLUE, false);
-        expect(card.canPlay()).to.eq(true);
+
         const action = card.play(player);
         expect(action).to.eq(undefined);
     });

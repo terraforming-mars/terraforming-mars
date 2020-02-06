@@ -17,9 +17,7 @@ export class AquiferPumping implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = 'Aquifer Pumping';
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-      return true;
-    }
+
     public play() {
       return undefined;
     }

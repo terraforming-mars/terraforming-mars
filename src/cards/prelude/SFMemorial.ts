@@ -10,9 +10,7 @@ export class SFMemorial implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "SF Memorial";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
         player.cardsInHand.push(game.dealer.dealCard());
         return undefined;

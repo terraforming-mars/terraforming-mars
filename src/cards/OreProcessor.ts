@@ -11,9 +11,7 @@ export class OreProcessor implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Ore Processor";
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(_player: Player, _game: Game) {
         return undefined;
     }

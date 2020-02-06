@@ -18,9 +18,7 @@ export class LargeConvoy implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
     public name: string = "Large Convoy";
     public cardType: CardType = CardType.EVENT;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game): PlayerInput | undefined {
         player.cardsInHand.push(game.dealer.dealCard(), game.dealer.dealCard());
 

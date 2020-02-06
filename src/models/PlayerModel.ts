@@ -32,4 +32,5 @@ export interface PlayerModel {
     isActive: boolean;
     venusNextExtension: boolean;
     venusScaleLevel: number;
+    boardName: string;
 }

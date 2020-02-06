@@ -10,9 +10,7 @@ export class Asteroid implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public name: string = 'Asteroid';
     public cardType: CardType = CardType.EVENT;
-    public canPlay(): boolean {
-      return true;
-    }
+
     public play(player: Player, game: Game) {
       const playersToRemovePlantsFrom = player.getOtherPlayersWithPlantsToRemove(game);
 

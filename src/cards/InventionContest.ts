@@ -11,9 +11,7 @@ export class InventionContest implements IProjectCard {
     public cost: number = 2;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Invention Contest";
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
         const cardsDrawn: Array<IProjectCard> = [
             game.dealer.dealCard(),

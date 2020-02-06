@@ -12,9 +12,7 @@ export class SpaceElevator implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE, Tags.STEEL];
     public name: string = "Space Elevator";
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, _game: Game) {
         player.setProduction(Resources.TITANIUM);
         return undefined;

@@ -12,9 +12,7 @@ export class IceAsteroid implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
     public name: string = "Ice Asteroid";
-    public canPlay(): boolean {
-        return true;
-    }
+
     public static placeTwoOceans(player: Player, game: Game): SelectSpace | undefined {
         let available = game.board.getAvailableSpacesForOcean(player);
         if (available.length === 0 || game.noOceansAvailable()) {

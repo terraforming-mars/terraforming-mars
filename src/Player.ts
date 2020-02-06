@@ -324,11 +324,7 @@ export class Player {
         return tagCount + this.getTagCount(Tags.WILDCARD);
       }
     }
-    public getActiveAndAutomatedCards(): Array<IProjectCard> {
-      return this.playedCards.filter(
-          (pc) => pc.cardType === CardType.AUTOMATED ||
-                    pc.cardType === CardType.ACTIVE);
-    }
+
     public getCard(cards: Array<IProjectCard>, cardName: string): IProjectCard {
       const foundCards = cards.filter((card) => card.name === cardName);
       if (foundCards.length === 0) {
@@ -1469,7 +1465,7 @@ export class Player {
 
         maxPay += this.megaCredits;
         return maxPay >= this.getCardCost(game, card) &&
-                   card.canPlay(this, game);
+                   (card.canPlay === undefined || card.canPlay(this, game));
       });
     }
 

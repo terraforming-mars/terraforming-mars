@@ -12,9 +12,7 @@ export class SecurityFleet implements IActionCard, IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Security Fleet";
     public resourceType: ResourceType = ResourceType.FIGHTER;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public getVictoryPoints(player: Player): number {
         return player.getResourcesOnCard(this);
     }

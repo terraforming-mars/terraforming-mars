@@ -10,9 +10,7 @@ export class CallistoPenalMines implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = 'Callisto Penal Mines';
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-      return true;
-    }
+
     public play(player: Player) {
       player.setProduction(Resources.MEGACREDITS,3);
       return undefined;

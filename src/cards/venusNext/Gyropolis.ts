@@ -13,6 +13,7 @@ export class Gyropolis implements IProjectCard {
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public name: string = "Gyropolis";
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         if (game.board.getAvailableSpacesForCity(player).length === 0) return false;
         return player.getProduction(Resources.ENERGY) >= 2;

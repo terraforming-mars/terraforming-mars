@@ -10,9 +10,7 @@ export class MediaArchives implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Media Archives";
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
         let allPlayedEvents = 0;
         game.getPlayers().forEach((player: Player) => {

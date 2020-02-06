@@ -10,6 +10,7 @@ export class SponsoredAcademies implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH, Tags.SCIENCE];
     public name: string = "Sponsored Academies";
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.cardsInHand.length > 1; //this card and at least another
     }

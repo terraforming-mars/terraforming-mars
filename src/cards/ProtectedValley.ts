@@ -14,9 +14,7 @@ export class ProtectedValley implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];
     public name: string = "Protected Valley";
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
         return new SelectSpace(
             "Select space reserved for ocean to place greenery tile", 

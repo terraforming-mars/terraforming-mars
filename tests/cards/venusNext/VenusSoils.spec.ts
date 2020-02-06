@@ -13,7 +13,7 @@ describe("VenusSoils", function () {
         const card2 = new Thermophiles();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        expect(card.canPlay()).to.eq(true);
+
         player.playedCards.push(card2);
         const action = card.play(player,game);
         expect(action instanceof SelectCard).to.eq(true);

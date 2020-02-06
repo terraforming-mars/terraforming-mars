@@ -9,10 +9,6 @@ import { TileType } from "../../src/TileType";
 import { Resources } from '../../src/Resources';
 
 describe("MoholeArea", function () {
-    it("Can play", function () {
-        const card = new MoholeArea();
-        expect(card.canPlay()).to.eq(true);
-    });
     it("Should play", function () {
         const card = new MoholeArea();
         const player = new Player("test", Color.BLUE, false);

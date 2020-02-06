@@ -11,9 +11,7 @@ export class ImportedGHG implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
     public name: string = "Imported GHG";
     public cardType: CardType = CardType.EVENT;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, _game: Game) {
         player.setProduction(Resources.HEAT);
         player.heat += 3;

@@ -9,7 +9,7 @@ describe("IoSulphurResearch", function () {
         const card = new IoSulphurResearch();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        expect(card.canPlay()).to.eq(true);
+
         const action = card.play(player,game);
         expect(action).to.eq(undefined);
         expect(player.cardsInHand.length).to.eq(1);

@@ -23,12 +23,15 @@ import {Color} from './Color';
 import {IAward} from './awards/IAward';
 import {Tags} from './cards/Tags';
 import {Resources} from "./Resources";
-import {ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
-import {ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import { ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES } from './milestones/Milestones';
+import { ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS } from './awards/Awards';
 import {SpaceName} from './SpaceName';
-import {Colony} from './OriginalBoard';
+import {Colony, Board} from './Board';
 import {CorporationName} from './CorporationName';
 import {CardName} from './CardName';
+import { ElysiumBoard } from './ElysiumBoard';
+import { HellasBoard } from './HellasBoard';
+import { BoardName } from './BoardName';
 
 export interface PlayerInterrupt {
   player: Player,
@@ -51,7 +54,7 @@ export class Game {
     private passedPlayers: Set<Player> = new Set<Player>();
     private researchedPlayers: Set<Player> = new Set<Player>();
     private draftedPlayers: Set<Player> = new Set<Player>();
-    public board = new OriginalBoard();
+    public board: Board;
     private temperature: number = constants.MIN_TEMPERATURE;
     public gameLog: Array<String> = [];
     public gameAge: number = 0; // Each log event increases it
@@ -78,13 +81,26 @@ export class Game {
       private draftVariant: boolean = false,
       public venusNextExtension: boolean = false,
       customCorporationsList: boolean = false,
-      corporationList: Array<CorporationCard> = []
+      corporationList: Array<CorporationCard> = [],
+      public boardName: BoardName = BoardName.ORIGINAL
     ) {
+
+      if (boardName === BoardName.ELYSIUM) {
+        this.board = new ElysiumBoard();
+        this.milestones.push(...ELYSIUM_MILESTONES);
+        this.awards.push(...ELYSIUM_AWARDS);
+      } else if (boardName === BoardName.HELLAS) {
+        this.board = new HellasBoard();
+        this.milestones.push(...HELLAS_MILESTONES);
+        this.awards.push(...HELLAS_AWARDS);
+      } else {        
+        this.board = new OriginalBoard();
+        this.milestones.push(...ORIGINAL_MILESTONES);
+        this.awards.push(...ORIGINAL_AWARDS);
+      }
+
       this.activePlayer = first;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension);
-
-      this.milestones.push(...ORIGINAL_MILESTONES);
-      this.awards.push(...ORIGINAL_AWARDS);
     
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
@@ -858,6 +874,31 @@ export class Game {
       if (space.tile !== undefined) {
         throw new Error('Selected space is occupied');
       }
+      // Hellas special requirements ocean tile
+      if (space.id === SpaceName.HELLAS_OCEAN_TILE 
+          && this.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES
+          && this.boardName === BoardName.HELLAS) {
+          let selectOcean = new SelectSpace(
+            'Select space for ocean tile',
+            this.board.getAvailableSpacesForOcean(player),
+            (space: ISpace) => {
+              this.addOceanTile(player, space.id);
+              player.megaCredits -= 6;
+              return undefined;
+            }
+          );
+
+          selectOcean.onend = () => { 
+            this.interrupt = undefined;
+            player.takeAction(this);
+          }
+
+          this.interrupt = {
+            player: player,
+            playerInput: selectOcean
+          };
+      }
+
       // Land claim a player can claim land for themselves
       if (space.player !== undefined && space.player !== player) {
         throw new Error('This space is land claimed by ' + space.player.name);
@@ -882,6 +923,8 @@ export class Game {
           player.steel++;
         } else if (spaceBonus === SpaceBonus.TITANIUM) {
           player.titanium++;
+        } else if (spaceBonus === SpaceBonus.HEAT) {
+          player.heat++;  
         }
       });
       this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {

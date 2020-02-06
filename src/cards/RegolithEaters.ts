@@ -15,9 +15,7 @@ export class RegolithEaters implements IActionCard, IProjectCard {
     public name: string = "Regolith Eaters";
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.MICROBE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(_player: Player, _game: Game) {
         return undefined;
     }

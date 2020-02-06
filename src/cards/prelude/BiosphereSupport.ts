@@ -7,6 +7,7 @@ import { Resources } from '../../Resources';
 export class BiosphereSupport extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT];
     public name: string = "Biosphere Support";
+    public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.MEGACREDITS) >= -4;
     }    

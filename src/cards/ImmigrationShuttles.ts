@@ -11,9 +11,7 @@ export class ImmigrationShuttles implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
     public name: string = "Immigration Shuttles";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public getVictoryPoints(_player: Player, game: Game) {
         return Math.floor(game.getCitiesInPlay() / 3);
     }

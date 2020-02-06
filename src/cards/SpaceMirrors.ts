@@ -12,9 +12,7 @@ export class SpaceMirrors implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY, Tags.SPACE];
     public name: string = "Space Mirrors";
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play() {
         return undefined;
     }

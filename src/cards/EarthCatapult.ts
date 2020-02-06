@@ -8,9 +8,6 @@ export class EarthCatapult implements IProjectCard {
   public tags: Array<Tags> = [Tags.EARTH];
   public name: string = 'Earth Catapult';
   public cardType: CardType = CardType.ACTIVE;
-  public canPlay(): boolean {
-    return true;
-  }
   public getCardDiscount() {
     return 2;
   }

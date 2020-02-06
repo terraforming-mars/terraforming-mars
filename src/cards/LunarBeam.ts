@@ -10,6 +10,7 @@ export class LunarBeam implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH, Tags.ENERGY];
     public name: string = "Lunar Beam";
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.MEGACREDITS) >= -3;
     }

@@ -4,6 +4,7 @@ import { Color } from "../Color";
 
 import { CorporationCard } from '../cards/corporation/CorporationCard';
 import { ALL_VENUS_CORPORATIONS, ALL_PRELUDE_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS } from '../Dealer';
+import { BoardName } from '../BoardName';
 
 interface CreateGameModel {
     firstIndex: number;
@@ -14,6 +15,7 @@ interface CreateGameModel {
     customCorporationsList: boolean;
     corporations: Array<CorporationCard>;
     displayed: boolean;
+    board: BoardName;
 }
 
 interface NewPlayerModel {
@@ -36,16 +38,25 @@ export const CreateGameForm = Vue.component("create-game-form", {
             ],
             prelude: false,
             draftVariant: false,
-
             venusNext: false,
             customCorporationsList: false,
             corporations: [...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS, ...ALL_TURMOIL_CORPORATIONS, ...ALL_PROMO_CORPORATIONS],
-            displayed: false
+            displayed: false,
+            board: BoardName.ORIGINAL
         } as CreateGameModel
     },
     methods: {
         toggleDisplayed: function () {
             this.displayed = !this.displayed;
+        },
+        getOriginalBoard: function () {
+            return BoardName.ORIGINAL;
+        },
+        getHellasBoard: function () {
+            return BoardName.HELLAS;
+        },
+        getElysiumBoard: function () {
+            return BoardName.ELYSIUM;
         },
         getOriginalCorps: function () {
             return ALL_CORPORATION_CARDS;
@@ -75,6 +86,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const venusNext = this.$data.venusNext;
             const corporations = this.$data.corporations;
             const customCorporationsList = this.$data.customCorporationsList;
+            const board =  this.$data.board;
             const xhr = new XMLHttpRequest();
             xhr.open("PUT", "/game");
             xhr.onerror = function () {
@@ -91,7 +103,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             };
             xhr.responseType = "json";
             xhr.send(JSON.stringify({
-                players: players, prelude, draftVariant, venusNext, customCorporationsList, corporations
+                players: players, prelude, draftVariant, venusNext, customCorporationsList, corporations, board
             }));
         }
     },
@@ -141,6 +153,17 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         <input type="checkbox" class="nes-checkbox" v-model="customCorporationsList"  v-on:click="toggleDisplayed()" />
                         <span>Use custom Corporation list ?</span>
                 </label>
+                
+                <br>
+                <label>Board:</label>
+                <div class="nes-select">
+                    <select :id="board" v-model="board">
+                        <option :value=getOriginalBoard()>Original board</option>
+                        <option :value=getHellasBoard()>Hellas board</option>
+                        <option :value=getElysiumBoard()>Elysium board</option>
+                    </select>
+                </div>
+                <br>
 
                 <div v-if="displayed === true">
                 <br>

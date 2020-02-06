@@ -13,9 +13,7 @@ export class ImportedNitrogen implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
     public name: string = "Imported Nitrogen";
     public cardType: CardType = CardType.EVENT;
-    public canPlay(): boolean {
-        return true;
-    }
+
     private giveResources(player: Player): undefined {
         player.terraformRating++;
         player.plants += 4;

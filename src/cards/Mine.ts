@@ -10,9 +10,7 @@ export class Mine implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Mine";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player) {
         player.setProduction(Resources.STEEL);
         return undefined;

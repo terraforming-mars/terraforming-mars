@@ -15,9 +15,6 @@ export class Flooding implements IProjectCard {
   public cost: number = 7;
   public name: string = 'Flooding';
   public tags: Array<Tags> = [];
-  public canPlay(): boolean {
-    return true;
-  }
   public play(player: Player, game: Game) {
     return new SelectSpace(
         'Select space for ocean tile',

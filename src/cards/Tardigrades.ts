@@ -11,9 +11,7 @@ export class Tardigrades implements IProjectCard {
     public tags: Array<Tags> = [Tags.MICROBES];
     public name: string = "Tardigrades";
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public getVictoryPoints(player: Player): number {
         return Math.floor(player.getResourcesOnCard(this) / 4);
     }

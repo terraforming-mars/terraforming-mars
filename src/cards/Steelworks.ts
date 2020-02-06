@@ -11,9 +11,7 @@ export class Steelworks implements IProjectCard, IActionCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Steelworks";
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public canAct(player: Player): boolean {
         return player.energy >= 4;
     }

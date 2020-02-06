@@ -12,9 +12,7 @@ export class CometForVenus implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public name: string = "Comet for Venus";
     public cardType: CardType = CardType.EVENT;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
         const venusTagPlayers = game.getPlayers().filter((otherPlayer) => otherPlayer.id !== player.id && otherPlayer.getTagCount(Tags.VENUS) > 0);
 

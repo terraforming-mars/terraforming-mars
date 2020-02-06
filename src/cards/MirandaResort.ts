@@ -10,9 +10,7 @@ export class MirandaResort implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = "Miranda Resort";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player) {
         player.setProduction(Resources.MEGACREDITS, player.getTagCount(Tags.EARTH));
         return undefined;

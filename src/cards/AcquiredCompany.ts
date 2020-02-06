@@ -9,9 +9,7 @@ export class AcquiredCompany implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = 'Acquired Company';
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-      return true;
-    }
+
     public play(player: Player) {
       player.setProduction(Resources.MEGACREDITS,3);
       return undefined;

@@ -12,7 +12,7 @@ export class HeatTrappers implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public name: string = "Heat Trappers";
     public cardType: CardType = CardType.AUTOMATED;
-
+    public hasRequirements = false;
     private getPlayersWithHeatProduction(currentPlayer: Player, game: Game): Array<Player> {
         var players = game.getPlayers().filter((p) => p.getProduction(Resources.HEAT) > 1);
 

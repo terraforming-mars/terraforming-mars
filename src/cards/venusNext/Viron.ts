@@ -37,7 +37,7 @@ export class Viron implements ICard, CorporationCard {
                     player.setActionsThisGeneration(this.name);
                     player.actionsTakenThisRound++;
                 }
-                game.log(this.name + " used " + foundCard.name + " action");
+                game.log(player.name + " used " + foundCard.name + " action with " + this.name);
                 return undefined;
               };
               if (action !== undefined) {

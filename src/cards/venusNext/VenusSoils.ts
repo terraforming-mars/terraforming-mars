@@ -15,9 +15,7 @@ export class VenusSoils implements IProjectCard {
     public tags: Array<Tags> = [Tags.VENUS, Tags.PLANT];
     public name: string = "Venus Soils";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
         player.setProduction(Resources.PLANTS);
         game.increaseVenusScaleLevel(player,1);

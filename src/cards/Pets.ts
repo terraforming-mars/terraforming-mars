@@ -15,9 +15,7 @@ export class Pets implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH, Tags.ANIMAL];
     public cardType: CardType = CardType.ACTIVE;
     public name: string = CardName.PETS;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public getVictoryPoints(player: Player): number {
         return Math.floor(player.getResourcesOnCard(this) / 2);
     }

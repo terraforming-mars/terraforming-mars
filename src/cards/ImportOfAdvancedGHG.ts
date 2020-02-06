@@ -11,9 +11,7 @@ export class ImportOfAdvancedGHG implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
     public name: string = "Import of Advanced GHG";
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, _game: Game) {
         player.setProduction(Resources.HEAT,2);
         return undefined;

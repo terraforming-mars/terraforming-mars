@@ -8,9 +8,7 @@ export class AdvancedAlloys implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = 'Advanced Alloys';
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-      return true;
-    }
+
     public play(player: Player) {
       player.titaniumValue++;
       player.steelValue++;

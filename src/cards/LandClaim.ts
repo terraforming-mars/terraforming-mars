@@ -12,6 +12,7 @@ export class LandClaim implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = "Land Claim";
     public cardType: CardType = CardType.EVENT;
+    public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         return game.board.getAvailableSpacesOnLand(player).length > 0;
     }

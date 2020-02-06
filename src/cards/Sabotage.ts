@@ -13,9 +13,7 @@ export class Sabotage implements IProjectCard {
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.EVENT;
     public name: string = "Sabotage";
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
         if (game.getPlayers().length == 1)  return undefined;
         return new OrOptions(

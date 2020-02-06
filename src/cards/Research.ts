@@ -10,9 +10,7 @@ export class Research implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.SCIENCE];
     public name: string = "Research";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
         for (let i = 0; i < 2; i++) {
             player.cardsInHand.push(game.dealer.dealCard());

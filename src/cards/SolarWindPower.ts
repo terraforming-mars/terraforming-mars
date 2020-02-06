@@ -10,9 +10,7 @@ export class SolarWindPower implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.SPACE, Tags.ENERGY];
     public name: string = "Solar Wind Power";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player) {
         player.setProduction(Resources.ENERGY);
         player.titanium += 2;

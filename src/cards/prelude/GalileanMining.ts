@@ -7,6 +7,7 @@ import { Resources } from '../../Resources';
 export class GalileanMining extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN];
     public name: string = "Galilean Mining";
+    public hasRequirements = false;
     public canPlay(player: Player) {
         return player.canAfford(5);
     }

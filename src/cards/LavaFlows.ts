@@ -9,21 +9,23 @@ import { TileType } from "../TileType";
 import { Tags } from "./Tags";
 import { ISpace } from "../ISpace";
 import { SelectSpace } from "../inputs/SelectSpace";
+import { BoardName } from '../BoardName';
 
 export class LavaFlows implements IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [];
     public name: string = "Lava Flows";
+    public hasRequirements = false;
     public cardType: CardType = CardType.EVENT;
     public static getVolcanicSpaces(player: Player, game: Game): Array<ISpace> {
-        if (game.boardName === "original") {
+        if (game.boardName === BoardName.ORIGINAL) {
         return game.board.getSpaces(SpaceType.LAND)
                 .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
                 .filter((space) => space.id === SpaceName.THARSIS_THOLUS ||
                                    space.id === SpaceName.ASCRAEUS_MONS ||
                                    space.id === SpaceName.ARSIA_MONS ||
                                    space.id === SpaceName.PAVONIS_MONS);
-        } else if (game.boardName === "elysium") {
+        } else if (game.boardName === BoardName.ELYSIUM) {
             return game.board.getSpaces(SpaceType.LAND)
             .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
             .filter((space) => space.id === SpaceName.HECATES_THOLUS ||

@@ -13,9 +13,7 @@ export class Insulation implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = "Insulation";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, _game: Game) {
         if (player.getProduction(Resources.HEAT) < 1) return undefined;
         return new SelectAmount("Select amount of heat production to decrease", (amount: number) => {

@@ -8,9 +8,7 @@ export class ResearchCoordination implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public tags: Array<Tags> = [Tags.WILDCARD];
     public name: string = "Research Coordination";
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play() {
         return undefined;
     }

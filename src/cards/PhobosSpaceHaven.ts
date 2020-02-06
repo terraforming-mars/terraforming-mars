@@ -13,9 +13,7 @@ export class PhobosSpaceHaven implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE, Tags.CITY];
     public name: string = "Phobos Space Haven";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
         game.addCityTile(player, SpaceName.PHOBOS_SPACE_HAVEN, SpaceType.COLONY);
         player.setProduction(Resources.TITANIUM);

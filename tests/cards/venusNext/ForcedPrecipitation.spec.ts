@@ -9,7 +9,7 @@ import { SelectOption } from '../../../src/inputs/SelectOption';
 describe("ForcedPrecipitation", function () {
     it("Should play", function () {
         const card = new ForcedPrecipitation();
-        expect(card.canPlay()).to.eq(true);
+
         const action = card.play();
         expect(action).to.eq(undefined);
     });

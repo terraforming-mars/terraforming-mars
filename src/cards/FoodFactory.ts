@@ -10,6 +10,7 @@ export class FoodFactory implements IProjectCard {
   public tags: Array<Tags> = [Tags.STEEL];
   public name: string = 'Food Factory';
   public cardType: CardType = CardType.AUTOMATED;
+  public hasRequirements = false;
   public canPlay(player: Player): boolean {
     return player.getProduction(Resources.PLANTS) >= 1;
   }

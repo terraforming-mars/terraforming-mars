@@ -13,6 +13,7 @@ export class BlackPolarDust implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = 'Black Polar Dust';
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
     public canPlay(player: Player): boolean {
       return player.getProduction(Resources.MEGACREDITS) >= -3;
     }

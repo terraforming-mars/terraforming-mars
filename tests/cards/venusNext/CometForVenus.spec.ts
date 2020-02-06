@@ -16,7 +16,7 @@ describe("CometForVenus", function () {
         player2.megaCredits = 10;
         player2.playedCards.push(card2);
 
-        expect(card.canPlay()).to.eq(true);
+
 
         const play = card.play(player, game);
         expect(play).to.eq(undefined);

@@ -1,6 +1,8 @@
 import { SpaceBonus } from "./SpaceBonus";
 import { SpaceName } from "./SpaceName";
 import { Board, Land, Ocean, Colony } from './Board';
+import { Player } from './Player';
+import { ISpace } from './ISpace';
 
 export class HellasBoard extends Board{
     constructor() {
@@ -106,4 +108,26 @@ export class HellasBoard extends Board{
             new Land(idx++, pos_x++, pos_y)
         );
     }    
+
+    public getAvailableSpacesForCity(player: Player): Array<ISpace> {
+        // Check for special tile
+        if (player.canAfford(6)) return super.getAvailableSpacesForCity(player);
+
+        return super.getAvailableSpacesForCity(player).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+    }
+
+    public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
+        // Check for special tile
+        if (player.canAfford(6)) return super.getAvailableSpacesOnLand(player);
+
+        return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+    }
+
+    public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
+        // Check for special tile
+        if (player.canAfford(6)) return super.getAvailableSpacesForGreenery(player);
+
+        return super.getAvailableSpacesForGreenery(player).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+    }
+
 }

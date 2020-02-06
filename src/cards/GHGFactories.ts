@@ -11,13 +11,11 @@ export class GHGFactories implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "GHG Factories";
+    public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.ENERGY) >= 1;
     }
     public play(player: Player) {
-        if (player.getProduction(Resources.ENERGY) < 1) {
-            throw "Must have energy production to decrease";
-        }
         player.setProduction(Resources.ENERGY,-1);
         player.setProduction(Resources.HEAT,4);
         return undefined;

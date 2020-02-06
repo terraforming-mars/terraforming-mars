@@ -11,6 +11,7 @@ export class CEOsFavoriteProject implements IProjectCard {
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.EVENT;
     public name: string = 'CEO\'s Favorite Project';
+    public hasRequirements = false;
     public canPlay(player: Player): boolean {
       return this.getAvailableCards(player).length > 0;
     }

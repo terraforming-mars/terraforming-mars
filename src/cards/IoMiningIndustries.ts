@@ -10,9 +10,7 @@ export class IoMiningIndustries implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: string = "Io Mining Industries";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public getVictoryPoints(player: Player) {
         return player.getTagCount(Tags.JOVIAN);
     }

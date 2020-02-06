@@ -11,9 +11,7 @@ export class MicroMills implements IProjectCard {
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Micro-Mills";
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, _game: Game) {
         player.setProduction(Resources.HEAT);
         return undefined;

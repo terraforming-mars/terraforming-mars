@@ -9,9 +9,7 @@ export class WaterToVenus implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public name: string = "Water to Venus";
     public cardType: CardType = CardType.EVENT;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
         game.increaseVenusScaleLevel(player,1);
         return undefined;

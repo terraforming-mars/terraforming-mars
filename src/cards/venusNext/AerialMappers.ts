@@ -15,9 +15,7 @@ export class AerialMappers implements IActionCard,IProjectCard {
     public name: string = "Aerial Mappers";
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play() {
         return undefined;
     }

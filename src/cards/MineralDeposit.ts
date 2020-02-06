@@ -10,9 +10,7 @@ export class MineralDeposit implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = "Mineral Deposit";
     public cardType: CardType = CardType.EVENT;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, _game: Game) {
         player.steel += 5;
         return undefined;

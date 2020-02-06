@@ -7,6 +7,7 @@ import { Resources } from '../../Resources';
 export class BusinessEmpire extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = "Business Empire";
+    public hasRequirements = false;
     public canPlay(player: Player) {
         return player.canAfford(6);
     }

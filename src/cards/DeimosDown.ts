@@ -11,9 +11,7 @@ export class DeimosDown implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public name: string = 'Deimos Down';
     public cardType: CardType = CardType.EVENT;
-    public canPlay(): boolean {
-      return true;
-    }
+
     private doPlay(player: Player, game: Game) {
       player.steel += 4;
       return game.increaseTemperature(player, 3);

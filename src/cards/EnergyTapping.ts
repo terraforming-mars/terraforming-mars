@@ -12,7 +12,7 @@ export class EnergyTapping implements IProjectCard {
   public tags: Array<Tags> = [Tags.ENERGY];
   public name: string = 'Energy Tapping';
   public cardType: CardType = CardType.AUTOMATED;
-  
+  public hasRequirements = false;
   public canPlay(_player: Player, game: Game): boolean {
     if (game.getPlayers().length === 1) return true;
     return game.getPlayers().filter((p) => p.getProduction(Resources.ENERGY) > 0).length > 0;

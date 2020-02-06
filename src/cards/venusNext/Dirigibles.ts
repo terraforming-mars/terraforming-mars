@@ -15,9 +15,7 @@ export class Dirigibles implements IActionCard,IProjectCard {
     public name: string = CardName.DIRIGIBLES;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play() {
         return undefined;
     }

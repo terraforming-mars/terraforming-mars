@@ -13,9 +13,7 @@ export class TowingAComet implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
     public name: string = "Towing A Comet";
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
 
         if (game.board.getOceansOnBoard() === MAX_OCEAN_TILES) {

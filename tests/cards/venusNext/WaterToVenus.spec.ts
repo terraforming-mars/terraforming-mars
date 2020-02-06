@@ -9,7 +9,7 @@ describe("WaterToVenus", function () {
         const card = new WaterToVenus();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        expect(card.canPlay()).to.eq(true);
+
         const play = card.play(player, game);
         expect(play).to.eq(undefined);
         expect(game.getVenusScaleLevel()).to.eq(2);

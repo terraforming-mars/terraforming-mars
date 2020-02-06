@@ -10,10 +10,6 @@ import { Pets } from "../../src/cards/Pets";
 import { ICard } from '../../src/cards/ICard';
 
 describe("ImportedNitrogen", function () {
-    it("Can play", function () {
-        const card = new ImportedNitrogen();
-        expect(card.canPlay()).to.eq(true);
-    });
     it("Should play without animals and microbes", function () {
         const player = new Player("test", Color.BLUE, false);
         const card = new ImportedNitrogen();

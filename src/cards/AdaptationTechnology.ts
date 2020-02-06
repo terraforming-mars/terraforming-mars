@@ -7,9 +7,7 @@ export class AdaptationTechnology implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = 'Adaptation Technology';
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-      return true;
-    }
+
     public getRequirementBonus(): number {
       return 2;
     }

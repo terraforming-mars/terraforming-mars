@@ -14,6 +14,7 @@ export class MiningArea implements IProjectCard {
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
     public name: string = "Mining Area";
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.board.getAvailableSpacesOnLand(player)

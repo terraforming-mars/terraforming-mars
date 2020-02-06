@@ -10,8 +10,7 @@ describe("MagneticFieldDome", function () {
     it("Should throw", function () {
         const card = new MagneticFieldDome();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        expect(function () { card.play(player, game); }).to.throw("Need 2 energy production to decrease");
+        expect(card.canPlay(player)).to.eq(false);
     });
     it("Should play", function () {
         const card = new MagneticFieldDome();

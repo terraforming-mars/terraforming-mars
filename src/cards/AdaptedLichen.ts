@@ -10,9 +10,7 @@ export class AdaptedLichen implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = 'Adapted Lichen';
-    public canPlay(): boolean {
-      return true;
-    }
+
     public play(player: Player) {
       player.setProduction(Resources.PLANTS);
       return undefined;

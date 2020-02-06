@@ -14,6 +14,7 @@ export class BusinessNetwork implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = 'Business Network';
     public cardType: CardType = CardType.ACTIVE;
+    public hasRequirements = false;
     public canPlay(player: Player): boolean {
       return player.getProduction(Resources.MEGACREDITS) >= -4;
     }

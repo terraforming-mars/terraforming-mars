@@ -11,9 +11,7 @@ export class ProtectedHabitats implements IProjectCard {
     public cost: number = 5;
     public tags: Array<Tags> = [];
     public name: string = CardName.PROTECTED_HABITATS;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(_player: Player, _game: Game) { 
         return undefined;
     }

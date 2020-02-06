@@ -9,7 +9,7 @@ describe("GHGFactories", function () {
     it("Should throw", function () {
         const card = new GHGFactories();
         const player = new Player("test", Color.BLUE, false);
-        expect(function () { card.play(player); }).to.throw("Must have energy production to decrease");
+        expect(card.canPlay(player)).to.eq(false);
     });
     it("Should play", function () {
         const card = new GHGFactories();

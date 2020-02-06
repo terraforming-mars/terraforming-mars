@@ -14,6 +14,7 @@ export class ImmigrantCity implements IProjectCard {
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Immigrant City";
+    public hasRequirements = false;
     public canPlay(player: Player,game: Game): boolean {
         return player.getProduction(Resources.ENERGY) >= 1 && player.getProduction(Resources.MEGACREDITS) >= -3 && game.board.getAvailableSpacesForCity(player).length >= 0;
     }

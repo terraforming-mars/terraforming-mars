@@ -11,9 +11,7 @@ export class IndustrialMicrobes implements IProjectCard {
     public tags: Array<Tags> = [Tags.MICROBES, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: string = "Industrial Microbes";
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, _game: Game) {
         player.setProduction(Resources.ENERGY);
         player.setProduction(Resources.STEEL);

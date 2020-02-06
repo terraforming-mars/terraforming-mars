@@ -12,9 +12,7 @@ export class MiningExpedition implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public name: string = "Mining Expedition";
 
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
         if (game.getPlayers().length === 1) {
             player.steel += 2;

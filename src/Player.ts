@@ -1465,7 +1465,7 @@ export class Player {
 
         maxPay += this.megaCredits;
         return maxPay >= this.getCardCost(game, card) &&
-                   card.canPlay(this, game);
+                   (card.canPlay === undefined || card.canPlay(this, game));
       });
     }
 

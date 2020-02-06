@@ -11,7 +11,7 @@ describe("VenusWaystation", function () {
         const card2 = new LocalShading();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        expect(card.canPlay()).to.eq(true);
+
         const action = card.play();
         expect(action).to.eq(undefined);
         player.victoryPoints += card.getVictoryPoints();

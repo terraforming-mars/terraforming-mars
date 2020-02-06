@@ -14,9 +14,7 @@ export class Comet implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public name: string = 'Comet';
     public cardType: CardType = CardType.EVENT;
-    public canPlay(): boolean {
-      return true;
-    }
+
 
     private getSelectOceanSpace(player: Player, game: Game, placeBonusOcean :SelectSpace | undefined): SelectSpace {
       return new SelectSpace(

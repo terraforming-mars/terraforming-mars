@@ -11,9 +11,7 @@ export class BusinessContacts implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = 'Business Contacts';
     public cardType: CardType = CardType.EVENT;
-    public canPlay(): boolean {
-      return true;
-    }
+
     public play(player: Player, game: Game) {
       const cards: Array<IProjectCard> = [
         game.dealer.dealCard(),

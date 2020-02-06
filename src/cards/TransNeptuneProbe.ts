@@ -8,9 +8,7 @@ export class TransNeptuneProbe implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.SPACE];
     public name: string = "Trans-Neptune Probe";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play() {
         return undefined;
     }

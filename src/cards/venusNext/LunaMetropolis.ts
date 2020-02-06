@@ -12,9 +12,6 @@ export class LunaMetropolis implements IProjectCard {
     public tags: Array<Tags> = [Tags.CITY, Tags.SPACE, Tags.EARTH];
     public name: string = "Luna Metropolis";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-      }
     public play(player: Player, game: Game) {
         player.setProduction(Resources.MEGACREDITS, player.getTagCount(Tags.EARTH) + 1);
         game.addCityTile(player, SpaceName.LUNA_METROPOLIS, SpaceType.COLONY);

@@ -13,9 +13,7 @@ export class CorroderSuits implements IProjectCard {
     public tags: Array<Tags> = [Tags.VENUS];
     public name: string = "Corroder Suits";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player) {
         player.setProduction(Resources.MEGACREDITS,2);
         if (this.getResCards(player).length === 0) return undefined;

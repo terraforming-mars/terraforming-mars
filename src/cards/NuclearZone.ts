@@ -13,9 +13,7 @@ export class NuclearZone implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = "Nuclear Zone";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
         if (game.board.getAvailableSpacesOnLand(player).length < 1) {
             return game.increaseTemperature(player, 2);

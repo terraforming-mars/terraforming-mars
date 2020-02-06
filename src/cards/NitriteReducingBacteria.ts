@@ -14,9 +14,7 @@ export class NitriteReducingBacteria implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.MICROBES];
     public cardType: CardType = CardType.ACTIVE;
     public name: string = "Nitrite Reducing Bacteria";
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player) {
         player.addResourceTo(this, 3);
         return undefined;

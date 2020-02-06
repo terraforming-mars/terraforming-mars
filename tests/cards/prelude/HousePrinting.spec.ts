@@ -6,10 +6,6 @@ import { Player } from "../../../src/Player";
 import { Resources } from '../../../src/Resources';
 
 describe("HousePrinting", function () {
-    it("Can play", function () {
-        const card = new HousePrinting();
-        expect(card.canPlay()).to.eq(true);
-    });
     it("Should play", function () {
         const card = new HousePrinting();
         const player = new Player("test", Color.BLUE, false);

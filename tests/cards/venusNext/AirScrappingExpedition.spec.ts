@@ -12,7 +12,7 @@ describe("AirScrappingExpedition", function () {
         const corp = new Celestic();
         const player = new Player("test", Color.BLUE, false);
         player.corporationCard = corp;
-        expect(card.canPlay()).to.eq(true);
+
 
         const selectCard = card.play(player) as SelectCard<ICard>;
         expect(selectCard).not.to.eq(undefined);

@@ -10,9 +10,7 @@ export class Sponsors implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = "Sponsors";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player) {
         player.setProduction(Resources.MEGACREDITS,2);
         return undefined;

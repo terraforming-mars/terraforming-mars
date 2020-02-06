@@ -2,7 +2,6 @@ import { ISpace } from "./ISpace";
 import { Player } from "./Player";
 import { SpaceType } from "./SpaceType";
 import { SpaceBonus } from "./SpaceBonus";
-import { SpaceName } from "./SpaceName";
 import { TileType } from "./TileType";
 
 export abstract class Space implements ISpace {
@@ -92,7 +91,7 @@ export abstract class Board {
     public getSpaces(spaceType: SpaceType): Array<ISpace> {
         return this.spaces.filter((space) => space.spaceType === spaceType);
     }
-    private getRandomSpace(offset: number): ISpace {
+    protected getRandomSpace(offset: number): ISpace {
         return this.spaces[Math.floor(Math.random() * 30) + offset];
     }
 
@@ -150,13 +149,12 @@ export abstract class Board {
     public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
         return this.getSpaces(SpaceType.LAND)
             .filter(
-                (space) => space.id !== SpaceName.NOCTIS_CITY &&
-                        space.tile === undefined &&
+                (space) => space.tile === undefined &&
                         (space.player === undefined || space.player === player)
             );
     }
 
-    private shuffle(input: Array<ISpace>): Array<ISpace> {
+    protected shuffle(input: Array<ISpace>): Array<ISpace> {
         const out: Array<ISpace> = [];
         const copy = input.slice();
         while (copy.length) {
@@ -174,8 +172,8 @@ export abstract class Board {
         }
     }    
 
-    private canPlaceTile(space: ISpace): boolean {
-        return space !== undefined && space.tile === undefined && space instanceof Land && space.id !== SpaceName.NOCTIS_CITY;
+    protected canPlaceTile(space: ISpace): boolean {
+        return space !== undefined && space.tile === undefined && space instanceof Land;
     }
 
     public getForestSpace(spaces: Array<ISpace>): ISpace {

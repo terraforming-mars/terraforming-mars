@@ -1,6 +1,8 @@
 import { SpaceBonus } from "./SpaceBonus";
 import { SpaceName } from "./SpaceName";
-import { Board, Land, Ocean, Colony } from './Board';
+import { Board, Land, Ocean, Colony, Space } from './Board';
+import { Player } from './Player';
+import { ISpace } from './ISpace';
 
 export class OriginalBoard extends Board{
     constructor() {
@@ -105,5 +107,28 @@ export class OriginalBoard extends Board{
             new Land(idx++, pos_x++, pos_y),
             new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.TITANIUM, SpaceBonus.TITANIUM])
         );
+    }
+    public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
+        return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.NOCTIS_CITY);
+    }
+    public getRandomCitySpace(offset: number): Space {
+        while (true) {
+            let space = super.getRandomSpace(offset);
+            if (this.canPlaceTile(space) && this.getAdjacentSpaces(space).find(sp => this.canPlaceTile(sp)) !== undefined) {
+                return space;
+            }
+        }
+    }    
+
+    protected canPlaceTile(space: ISpace): boolean {
+        return space !== undefined && space.tile === undefined && space instanceof Land && space.id !== SpaceName.NOCTIS_CITY;
+    }
+
+    public getForestSpace(spaces: Array<ISpace>): ISpace {
+        const space = super.shuffle(spaces).find((s) => this.canPlaceTile(s));
+        if (space === undefined) {
+            throw new Error("Did not find space for forest");
+        }
+        return space;
     }
 }

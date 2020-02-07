@@ -109,7 +109,7 @@ export class Player {
       if (resource === Resources.HEAT) this.heat = Math.max(0, this.heat + amount);
       
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-        game.log(this.name + "'s " + resource + " production modified by " + amount + " by " + fromPlayer.name);
+        game.log(this.name + "'s " + resource + " amount modified by " + amount + " by " + fromPlayer.name);
       }
 
       // Mons Insurance hook

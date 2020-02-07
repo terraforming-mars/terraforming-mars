@@ -2,7 +2,6 @@ import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { ResourceType } from "../../ResourceType";
 import { Game } from '../../Game';
 
 export class VenusWaystation implements IProjectCard {
@@ -10,7 +9,6 @@ export class VenusWaystation implements IProjectCard {
     public tags: Array<Tags> = [Tags.VENUS, Tags.SPACE];
     public name: string = "Venus Waystation";
     public cardType: CardType = CardType.ACTIVE;
-    public resourceType: ResourceType = ResourceType.MICROBE;
 
     public play() {
         return undefined;

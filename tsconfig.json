@@ -28,7 +28,7 @@
     "src/inputs/*.ts",
     "src/models/*.ts",
     "script.ts",
-    "server.ts"
+    "server.ts", "src/colonies/Colony.ts"
   ],
   "files": [
     "script.ts",

@@ -1,5 +1,5 @@
 import {Player} from './Player';
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS} from './Dealer';
+import { Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS } from './Dealer';
 import {ISpace} from './ISpace';
 import {SpaceType} from './SpaceType';
 import {TileType} from './TileType';
@@ -80,6 +80,7 @@ export class Game {
       private preludeExtension: boolean = false,
       private draftVariant: boolean = false,
       public venusNextExtension: boolean = false,
+      public coloniesExtension: boolean = false,
       customCorporationsList: boolean = false,
       corporationList: Array<CorporationCard> = [],
       public boardName: BoardName = BoardName.ORIGINAL
@@ -127,6 +128,10 @@ export class Game {
         );
       }
 
+      // Add colonies stuff
+      if (this.coloniesExtension) {
+        corporationCards.push(...ALL_COLONIES_CORPORATIONS);
+      }
       // Setup custom corporation list
       if (customCorporationsList && corporationList.length >= players.length * 2) {
         corporationCards = corporationList;

@@ -42,7 +42,7 @@ export class Player {
     public megaCredits: number = 0;
     private megaCreditProduction: number = 0;
     public steel: number = 0;
-    public titanium: number = 8;
+    public titanium: number = 0;
     public energy: number = 0;
     private steelProduction: number = 0;
     private titaniumProduction: number = 0;

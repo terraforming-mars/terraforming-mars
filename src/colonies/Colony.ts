@@ -10,7 +10,7 @@ export interface IColony {
     trackPosition: number;
     colonies: Array<Player>;
     trade: (player: Player) => void;
-    onColonyPlaced: (player: Player, game?: Game) => undefined | SelectSpace;
+    onColonyPlaced: (player: Player, game: Game) => undefined | SelectSpace;
     giveTradeBonus: (player: Player) => void;
 }
 

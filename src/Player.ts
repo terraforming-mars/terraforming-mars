@@ -26,6 +26,7 @@ import {Resources} from './Resources';
 import { ResourceType } from './ResourceType';
 import { CardName } from "./CardName";
 import { CorporationName } from './CorporationName';
+import { IColony } from './colonies/Colony';
 
 const INITIAL_ACTION: string = 'INITIAL';
 
@@ -1001,6 +1002,64 @@ export class Player {
       return res;
     }
 
+    private buildColony(game: Game, openColonies: Array<IColony>): PlayerInput {
+      const fundProject = (
+        megaCredits: number,
+        heat: number,
+        colony: IColony) => {
+      colony.onColonyPlaced(this, game);
+      this.payForStandardProject(
+          StandardProjectType.BUILD_COLONY, megaCredits, heat
+      );
+      this.actionsTakenThisRound++;
+      this.takeAction(game);
+      game.log(this.name + " built a colony on " + colony.name);
+      return undefined;
+    };
+
+    if (this.canUseHeatAsMegaCredits && this.heat > 0) {
+      let htp: HowToPay;
+      let helionColonyProject = new SelectHowToPay(
+        'Colony (' + constants.BUILD_COLONY_COST + ' MC)', 
+        false, false, true, constants.BUILD_COLONY_COST,
+        (stp: HowToPay) => {
+          if (stp.heat + stp.megaCredits < constants.BUILD_COLONY_COST) {
+            throw new Error('Haven\'t spend enough for colony');
+          }
+          htp = stp;
+          let buildColony = new OrOptions();
+          buildColony.title = "Build colony (" + constants.BUILD_COLONY_COST + " MC)";
+          openColonies.forEach(colony => {
+            const colonySelect =  new SelectOption(
+              colony.name, 
+              () => {
+                return fundProject(constants.BUILD_COLONY_COST, htp.heat, colony);
+              }
+            );
+            buildColony.options.push(colonySelect);
+          });
+      
+          return buildColony;
+        }
+      );
+      return helionColonyProject;
+    }
+
+    let buildColony = new OrOptions();
+    buildColony.title = "Build colony (" + constants.BUILD_COLONY_COST + " MC)";
+    openColonies.forEach(colony => {
+      const colonySelect =  new SelectOption(
+        colony.name, 
+        () => {
+          return fundProject(constants.BUILD_COLONY_COST, 0, colony);
+        }
+      );
+      buildColony.options.push(colonySelect);
+    });
+
+    return buildColony;
+    }  
+
     private airScraping(game: Game): PlayerInput {
       const fundProject = (megaCredits: number, heat: number) => {
         game.increaseVenusScaleLevel(this, 1);
@@ -1524,6 +1583,16 @@ export class Player {
         standardProjects.options.push(
             this.airScraping(game)
         );
+      }
+
+      if ( game.coloniesExtension &&
+        this.canAfford(constants.BUILD_COLONY_COST)) {
+        let openColonies = game.colonies.filter(colony => colony.colonies.length < 3 && colony.colonies.indexOf(this) === -1);      
+          if (openColonies.length > 0) {
+            standardProjects.options.push(
+                this.buildColony(game, openColonies)
+            );
+          }
       }
 
       return standardProjects;

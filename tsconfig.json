@@ -27,8 +27,9 @@
     "src/cards/promo/*.ts",           
     "src/inputs/*.ts",
     "src/models/*.ts",
+    "src/colonies/*.ts",
     "script.ts",
-    "server.ts", "src/colonies/Colony.ts"
+    "server.ts"
   ],
   "files": [
     "script.ts",

@@ -4,7 +4,6 @@ import { Resources } from '../Resources';
 import { SelectSpace } from '../inputs/SelectSpace';
 import { Game } from '../Game';
 import { ISpace } from '../ISpace';
-import { SpaceType } from '../SpaceType';
 import * as constants from '../constants';
 import { ColonyName } from './ColonyName';
 
@@ -20,18 +19,29 @@ export class Europa extends Colony implements IColony {
         }
         this.afterTrade(this);
     }
-    public onColonyPlaced(player: Player, game: Game): SelectSpace | undefined {
+    public onColonyPlaced(player: Player, game: Game): undefined {
         this.colonies.push(player);
         if (game.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES) return undefined;
 
-        return new SelectSpace(
-            'Select a land space to place an ocean',
-            game.board.getAvailableSpacesOnLand(player),
-            (foundSpace: ISpace) => {
-              game.addOceanTile(player, foundSpace.id, SpaceType.LAND);
+        let selectOcean = new SelectSpace(
+            'Select space for Europa ocean tile',
+            game.board.getAvailableSpacesForOcean(player),
+            (space: ISpace) => {
+                game.addOceanTile(player, space.id);
               return undefined;
             }
         );
+
+        selectOcean.onend = () => { 
+            game.interrupt = undefined;
+            player.takeAction(game);
+        }
+
+        game.interrupt = {
+            player: player,
+            playerInput: selectOcean
+        };
+        return undefined;
     }
     public giveTradeBonus(player: Player): void {
         player.megaCredits++;

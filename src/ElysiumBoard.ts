@@ -1,12 +1,12 @@
 import { SpaceBonus } from "./SpaceBonus";
 import { SpaceName } from "./SpaceName";
-import { Board, Land, Ocean, Colony } from './Board';
+import { Board, Land, Ocean, BoardColony } from './Board';
 
 export class ElysiumBoard extends Board{
     constructor() {
         super();
-        this.spaces.push(new Colony(SpaceName.GANYMEDE_COLONY)); 
-        this.spaces.push(new Colony(SpaceName.PHOBOS_SPACE_HAVEN));                    
+        this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY)); 
+        this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));                    
 
         let idx = 3, pos_x = 4, pos_y=0;
 

@@ -1,8 +1,10 @@
 import { Player } from '../Player';
 import { SelectSpace } from '../inputs/SelectSpace';
 import { Game } from '../Game';
+import { ColonyName } from './ColonyName';
 
 export interface IColony {
+    name: ColonyName;
     isActive: boolean;
     isVisited: boolean;
     trackPosition: number;

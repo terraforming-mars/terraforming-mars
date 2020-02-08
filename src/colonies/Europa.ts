@@ -6,8 +6,10 @@ import { Game } from '../Game';
 import { ISpace } from '../ISpace';
 import { SpaceType } from '../SpaceType';
 import * as constants from '../constants';
+import { ColonyName } from './ColonyName';
 
 export class Europa extends Colony implements IColony {
+    public name = ColonyName.EUROPA;
     public trade(player: Player): void {
         if (this.trackPosition < 2) {
             player.setProduction(Resources.MEGACREDITS);

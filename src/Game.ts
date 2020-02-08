@@ -26,12 +26,14 @@ import {Resources} from "./Resources";
 import { ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES } from './milestones/Milestones';
 import { ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS } from './awards/Awards';
 import {SpaceName} from './SpaceName';
-import {Colony, Board} from './Board';
+import {BoardColony, Board} from './Board';
 import {CorporationName} from './CorporationName';
 import {CardName} from './CardName';
 import { ElysiumBoard } from './ElysiumBoard';
 import { HellasBoard } from './HellasBoard';
 import { BoardName } from './BoardName';
+import { Ganymede } from './colonies/Ganymede';
+import { Colony } from './colonies/Colony';
 
 export interface PlayerInterrupt {
   player: Player,
@@ -61,6 +63,7 @@ export class Game {
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
     public interrupt: PlayerInterrupt | undefined = undefined;
     public monsInsuranceOwner: Player | undefined = undefined;
+    public colonies: Array<Colony> = [];
 
     private tempMC: number = 0;
     private tempSteel: number = 0;
@@ -121,16 +124,17 @@ export class Game {
         this.milestones.push(...VENUS_MILESTONES);
         this.awards.push(...VENUS_AWARDS);
         this.board.spaces.push(
-            new Colony(SpaceName.DAWN_CITY),
-            new Colony(SpaceName.LUNA_METROPOLIS),
-            new Colony(SpaceName.MAXWELL_BASE),
-            new Colony(SpaceName.STRATOPOLIS)
+            new BoardColony(SpaceName.DAWN_CITY),
+            new BoardColony(SpaceName.LUNA_METROPOLIS),
+            new BoardColony(SpaceName.MAXWELL_BASE),
+            new BoardColony(SpaceName.STRATOPOLIS)
         );
       }
 
       // Add colonies stuff
       if (this.coloniesExtension) {
         corporationCards.push(...ALL_COLONIES_CORPORATIONS);
+        this.colonies.push(new Ganymede());
       }
       // Setup custom corporation list
       if (customCorporationsList && corporationList.length >= players.length * 2) {

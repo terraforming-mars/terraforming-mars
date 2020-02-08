@@ -1,14 +1,14 @@
 import { SpaceBonus } from "./SpaceBonus";
 import { SpaceName } from "./SpaceName";
-import { Board, Land, Ocean, Colony, Space } from './Board';
+import { Board, Land, Ocean, BoardColony, Space } from './Board';
 import { Player } from './Player';
 import { ISpace } from './ISpace';
 
 export class OriginalBoard extends Board{
     constructor() {
         super();
-        this.spaces.push(new Colony(SpaceName.GANYMEDE_COLONY)); 
-        this.spaces.push(new Colony(SpaceName.PHOBOS_SPACE_HAVEN));                    
+        this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY)); 
+        this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));                    
 
         let idx = 3, pos_x = 4, pos_y=0;
 

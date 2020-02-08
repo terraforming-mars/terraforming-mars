@@ -10,7 +10,7 @@ export abstract class Space implements ISpace {
     }
 }
 
-export class Colony extends Space {
+export class BoardColony extends Space {
     constructor(id: string) {
         super(id, SpaceType.COLONY, [], -1, -1);
     }

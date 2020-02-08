@@ -12,6 +12,7 @@ export interface IColony {
     trade: (player: Player) => void;
     onColonyPlaced: (player: Player, game: Game) => undefined | SelectSpace;
     giveTradeBonus: (player: Player) => void;
+    endGeneration: () => void;
 }
 
 export abstract class Colony  {

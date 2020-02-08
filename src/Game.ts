@@ -35,6 +35,7 @@ import { BoardName } from './BoardName';
 import { Ganymede } from './colonies/Ganymede';
 import { IColony } from './colonies/Colony';
 import { Europa } from './colonies/Europa';
+import { Helion } from './cards/corporation/Helion';
 
 export interface PlayerInterrupt {
   player: Player,
@@ -153,7 +154,7 @@ export class Game {
           if (firstCard === undefined || secondCard === undefined) {
             throw new Error("No corporation card dealt for player");
           }
-          player.dealtCorporationCards = [firstCard, secondCard];
+          player.dealtCorporationCards = [firstCard, secondCard, new Helion()];
           player.setWaitingFor(this.pickCorporationCard(player));
         } else {
           this.playCorporationCard(player, new BeginnerCorporation());
@@ -413,6 +414,11 @@ export class Game {
     }
 
     private gotoDraftOrResearch() {
+      if (this.coloniesExtension) {
+        this.colonies.forEach(colony => {
+          colony.endGeneration();
+        });
+      }
       this.generation++;
       this.incrementFirstPlayer();
       if (this.draftVariant) {

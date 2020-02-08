@@ -7,7 +7,7 @@ import {Color} from './Color';
 import {SelectCard} from './inputs/SelectCard';
 import {AndOptions} from './inputs/AndOptions';
 import {ICard} from './cards/ICard';
-import {OrOptions} from './inputs/OrOptions';
+import { OrOptions } from './inputs/OrOptions';
 import {Game} from './Game';
 import {HowToPay} from './inputs/HowToPay';
 import {SelectSpace} from './inputs/SelectSpace';
@@ -42,7 +42,7 @@ export class Player {
     public megaCredits: number = 0;
     private megaCreditProduction: number = 0;
     public steel: number = 0;
-    public titanium: number = 0;
+    public titanium: number = 8;
     public energy: number = 0;
     private steelProduction: number = 0;
     private titaniumProduction: number = 0;
@@ -68,6 +68,8 @@ export class Player {
     private postAction: boolean = false;
     public cardCost: number = constants.CARD_COST;
     public oceanBonus: number = constants.OCEAN_BONUS;
+    private fleetSize: number = 1;
+    private tradesThisTurn: number = 0;
 
     constructor(
         public name: string,
@@ -554,6 +556,7 @@ export class Player {
 
     public runProductionPhase(): void {
       this.actionsThisGeneration.clear();
+      this.tradesThisTurn = 0;
       this.megaCredits += this.megaCreditProduction + this.terraformRating;
       this.heat += this.energy;
       this.heat += this.heatProduction;
@@ -1300,6 +1303,65 @@ export class Player {
       );
     }
 
+    private tradeWithColony(openColonies: Array<IColony>, game: Game): PlayerInput {
+      let selectColony = new OrOptions();
+      openColonies.forEach(colony => {
+        const colonySelect =  new SelectOption(
+          colony.name, 
+          () => {
+            colony.trade(this);
+            this.actionsTakenThisRound++;
+            this.tradesThisTurn++;
+            this.takeAction(game);
+            game.log(this.name + " traded with " + colony.name);
+            return undefined;
+          }
+        );
+        selectColony.options.push(colonySelect);
+      });      
+      let howToPayForTrade = new OrOptions();
+      howToPayForTrade.title = "Trade with a colony";
+      const payWithMC = new SelectOption("Pay 9 MC", () => {
+        this.megaCredits -= 9;
+        return selectColony;
+      });
+
+      if (this.canAfford(9) && this.canUseHeatAsMegaCredits && this.heat > 0) {
+        let htp: HowToPay;
+        let helionTrade = new SelectHowToPay(
+          'Select how to spend 9 MC',
+          false,
+          false,
+          true,
+          9,
+          (stp) => {
+            htp = stp;
+            this.megaCredits -= htp.megaCredits;
+            this.heat -= htp.heat;
+            return selectColony;
+          }
+        )
+        howToPayForTrade.options.push(helionTrade);
+        //return helionTrade;
+      } else if (this.canAfford(9)) {
+        howToPayForTrade.options.push(payWithMC);
+      }
+
+      const payWithEnergy = new SelectOption("Pay 3 Energy", () => {
+        this.energy -= 3;
+        return selectColony;
+      });  
+      const payWithTitanium = new SelectOption("Pay 3 Titanium", () => {
+        this.titanium -= 3;
+        return selectColony;  
+      });
+
+      if (this.energy >=3) howToPayForTrade.options.push(payWithEnergy);
+      if (this.titanium >=3) howToPayForTrade.options.push(payWithTitanium);
+
+      return howToPayForTrade;
+    }
+
     private convertPlantsIntoGreenery(game: Game): PlayerInput {
       return new SelectSpace(
           `Convert ${this.plantsNeededForGreenery} plants into greenery`,
@@ -1587,7 +1649,9 @@ export class Player {
 
       if ( game.coloniesExtension &&
         this.canAfford(constants.BUILD_COLONY_COST)) {
-        let openColonies = game.colonies.filter(colony => colony.colonies.length < 3 && colony.colonies.indexOf(this) === -1);      
+        let openColonies = game.colonies.filter(colony => colony.colonies.length < 3 
+          && colony.colonies.indexOf(this) === -1
+          && colony.isActive);      
           if (openColonies.length > 0) {
             standardProjects.options.push(
                 this.buildColony(game, openColonies)
@@ -1689,6 +1753,17 @@ export class Player {
         action.options.push(
             this.endTurnOption(game)
         );
+      }
+
+      if (game.coloniesExtension) {
+        let openColonies = game.colonies.filter(colony => colony.isActive && !colony.isVisited);
+        if (openColonies.length > 0 
+          && this.fleetSize > this.tradesThisTurn
+          && (this.canAfford(9) || this.energy >=3 || this.titanium >= 3 )) {
+          action.options.push(
+            this.tradeWithColony(openColonies, game)
+          );
+        }
       }
 
       const standardProjects = this.getAvailableStandardProjects(game);

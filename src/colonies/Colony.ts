@@ -24,7 +24,9 @@ export abstract class Colony  {
     public trackPosition: number = 1;
 
     public endGeneration(): void {
-        this.increaseTrack();
+        if (this.isActive) {
+          this.increaseTrack();
+        }
         this.isVisited = false;
     }
     public increaseTrack(): void {
@@ -40,4 +42,10 @@ export abstract class Colony  {
             colony.giveTradeBonus(player);
         });
     }
+    public addColony(colony: IColony, player: Player): void {
+        colony.colonies.push(player);
+        if (colony.trackPosition < colony.colonies.length) {
+            colony.trackPosition = colony.colonies.length;
+        }
+    }    
 }    

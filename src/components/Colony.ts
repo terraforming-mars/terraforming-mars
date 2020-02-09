@@ -1,11 +1,22 @@
 import Vue from "vue";
+import { IColony } from '../colonies/Colony';
 
 export const Colony = Vue.component("colony", {
     props: [
         "colony"
     ],
+    methods: {
+        getCubeXPosition: (colony: IColony): number => {
+            return colony.trackPosition * 56 + 26;
+        },
+        getCubeYPosition: (colony: IColony): number => {
+            if (colony.name === 'Europa') return 165;
+            return 185;
+        },
+    },
     template: `
     <div class="filterDiv colony-card colonies" :class="colony.name + '-background'">
+    <div v-if="colony.isActive" :style="'margin-left:' + getCubeXPosition(colony) + 'px; margin-top:' + getCubeYPosition(colony) + 'px;'" class="colony_cube"></div>
     <div class="colony-card-title-div">
       <span class="colony-card-title-span" :class="colony.name + '-title'">{{colony.name}}</span>
     </div>
@@ -68,14 +79,17 @@ export const Colony = Vue.component("colony", {
   <div><div class="resource floater resource-stacked " style="positon:absolute;margin-bottom:0px;margin-top:6px;z-index:1;"></div>
       <div class="resource floater resource-stacked " style="positon:absolute;margin-top:-20px;"></div>
       <div class="resource floater resource-stacked " style="positon:absolute;margin-top:-20px;margin-left:-5px;"></div>
+      <div v-if="colony.trackPosition === 0" class="colony_cube"></div>
   </div>
   <div><div class="resource floater resource-stacked " style="positon:absolute;margin-bottom:0px;margin-top:6px;z-index:1;"></div>
       <div class="resource floater resource-stacked " style="positon:absolute;margin-top:-20px;"></div>
       <div class="resource floater resource-stacked " style="positon:absolute;margin-top:-20px;margin-left:-5px;"></div>
+      <div v-if="colony.trackPosition === 1" class="colony_cube"></div>
   </div>
   <div><div class="resource floater resource-stacked " style="positon:absolute;margin-bottom:0px;margin-top:6px;z-index:1;"></div>
       <div class="resource floater resource-stacked " style="positon:absolute;margin-top:-20px;"></div>
       <div class="resource floater resource-stacked " style="positon:absolute;margin-top:-20px;margin-left:-5px;"></div>
+      <div v-if="colony.trackPosition === 2" class="colony_cube"></div>
   </div>
   <div></div>
   <div></div>

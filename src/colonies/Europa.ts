@@ -20,7 +20,7 @@ export class Europa extends Colony implements IColony {
         this.afterTrade(this);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
-        this.colonies.push(player);
+        super.addColony(this, player);
         if (game.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES) return undefined;
 
         let selectOcean = new SelectSpace(

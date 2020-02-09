@@ -9,7 +9,6 @@ import { ColonyName } from './ColonyName';
 
 export class Europa extends Colony implements IColony {
     public name = ColonyName.EUROPA;
-    public imageFile ="./assets/europa.png";
     public trade(player: Player): void {
         if (this.trackPosition < 2) {
             player.setProduction(Resources.MEGACREDITS);

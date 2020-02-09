@@ -7,7 +7,6 @@ import { ResourceType } from '../ResourceType';
 export class Titan extends Colony implements IColony {
     public name = ColonyName.TITAN;
     public isActive = false;
-    public imageFile ="./assets/titan.jpg";
     public resourceType = ResourceType.FLOATER;
     public trade(player: Player): void {
         player.plants += this.trackPosition;

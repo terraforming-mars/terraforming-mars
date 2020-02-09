@@ -10,7 +10,6 @@ export interface IColony {
     isVisited: boolean;
     trackPosition: number;
     colonies: Array<Player>;
-    imageFile: string;
     resourceType?: ResourceType;
     trade: (player: Player) => void;
     onColonyPlaced: (player: Player, game: Game) => undefined | SelectSpace;

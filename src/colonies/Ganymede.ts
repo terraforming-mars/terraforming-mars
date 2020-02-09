@@ -5,7 +5,6 @@ import { ColonyName } from './ColonyName';
 
 export class Ganymede extends Colony implements IColony {
     public name = ColonyName.GANYMEDE;
-    public imageFile ="./assets/ganymede.jpg";
     public trade(player: Player): void {
         player.plants += this.trackPosition;
         this.afterTrade(this);

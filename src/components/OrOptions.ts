@@ -33,22 +33,20 @@ export const OrOptions = Vue.component("or-options", {
         }
         const optionElements: Array<VNode> = [];
         this.playerinput.options.forEach((option: any, idx: number) => {
-            const domProps: any = {
+            const domProps: {[key: string]: any} = {
                 className: "nes-radio",
                 name: "selectOption" + unique,
                 type: "radio",
                 value: String(idx)
             };
+            const displayStyle: string = this.$data.selectedOption === idx ? "block" : "none";
             const subchildren: Array<VNode> = [];
             if (this.$data.selectedOption === idx) {
                 domProps.checked = true;
             }
             subchildren.push(createElement("label", [
-                createElement("input", { style: { display: this.$data.selectedOption === idx ? "block": "none" }, domProps, on: { change: (event: any) => {
+                createElement("input", { style: { display: displayStyle }, domProps, on: { change: (event: any) => {
                     this.selectedOption = Number(event.target.value);
-                    optionElements.forEach((optionElement, optionIdx) => {
-                        (optionElement.elm as HTMLElement).style.display = (optionIdx === this.selectedOption ? "block" : "none");
-                    });
                 }}}),
                 createElement("span", option.title)
             ]));
@@ -57,7 +55,7 @@ export const OrOptions = Vue.component("or-options", {
                 copy.unshift(String(idx));
                 this.onsave([copy]);
             }, false, false));
-            subchildren.push(createElement("div", { style: { display: "none", marginLeft: "30px" } }, [this.$data.childComponents[this.$data.childComponents.length - 1]]));
+            subchildren.push(createElement("div", { style: { display: displayStyle, marginLeft: "30px" } }, [this.$data.childComponents[this.$data.childComponents.length - 1]]));
             optionElements.push(subchildren[subchildren.length - 1]);
             children.push(createElement("div", subchildren));
         });

@@ -2,6 +2,7 @@ import { Player } from '../Player';
 import { SelectSpace } from '../inputs/SelectSpace';
 import { Game } from '../Game';
 import { ColonyName } from './ColonyName';
+import { ResourceType } from '../ResourceType';
 
 export interface IColony {
     name: ColonyName;
@@ -10,6 +11,7 @@ export interface IColony {
     trackPosition: number;
     colonies: Array<Player>;
     imageFile: string;
+    resourceType?: ResourceType;
     trade: (player: Player) => void;
     onColonyPlaced: (player: Player, game: Game) => undefined | SelectSpace;
     giveTradeBonus: (player: Player) => void;

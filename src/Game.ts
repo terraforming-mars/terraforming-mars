@@ -35,6 +35,7 @@ import { BoardName } from './BoardName';
 import { Ganymede } from './colonies/Ganymede';
 import { IColony } from './colonies/Colony';
 import { Europa } from './colonies/Europa';
+import { Titan } from './colonies/Titan';
 
 export interface PlayerInterrupt {
   player: Player,
@@ -137,6 +138,7 @@ export class Game {
         corporationCards.push(...ALL_COLONIES_CORPORATIONS);
         this.colonies.push(new Ganymede());
         this.colonies.push(new Europa());
+        this.colonies.push(new Titan());
       }
       // Setup custom corporation list
       if (customCorporationsList && corporationList.length >= players.length * 2) {
@@ -278,6 +280,12 @@ export class Game {
       if (corporationCard.name !== new BeginnerCorporation().name) {
         let cardsToPayFor: number = player.cardsInHand.length;
         player.megaCredits -= cardsToPayFor * player.cardCost;
+      }
+      //Activate some colonies
+      if (this.coloniesExtension && corporationCard.resourceType !== undefined) {
+        this.colonies.filter(colony => colony.resourceType !== undefined && colony.resourceType === corporationCard.resourceType).forEach(colony => {
+          colony.isActive = true;
+        });
       }
 
       this.playerIsFinishedWithResearchPhase(player);

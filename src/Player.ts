@@ -921,6 +921,13 @@ export class Player {
           this.takeAction(game);
         };
 
+        //Activate some colonies
+        if (game.coloniesExtension && selectedCard.resourceType !== undefined) {
+          game.colonies.filter(colony => colony.resourceType !== undefined && colony.resourceType === selectedCard.resourceType).forEach(colony => {
+            colony.isActive = true;
+          });
+        }
+
         // Play the card
         const action = selectedCard.play(this, game);
         if (action !== undefined) {

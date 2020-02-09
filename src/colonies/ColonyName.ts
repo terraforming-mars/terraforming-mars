@@ -1,4 +1,5 @@
 export enum ColonyName {
     EUROPA = "Europa",
-    GANYMEDE = "Ganymede"
+    GANYMEDE = "Ganymede",
+    TITAN = "Titan"
 }

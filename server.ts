@@ -329,7 +329,8 @@ function getPlayer(player: Player, game: Game): string {
     isActive: player.id === game.activePlayer.id,
     venusNextExtension: game.venusNextExtension,
     venusScaleLevel: game.getVenusScaleLevel(),
-    boardName: game.boardName
+    boardName: game.boardName,
+    colonies: game.colonies
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -448,7 +449,8 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       isActive: player.id === game.activePlayer.id,
       venusNextExtension: game.venusNextExtension,
       venusScaleLevel: game.getVenusScaleLevel(),
-      boardName: game.boardName
+      boardName: game.boardName,
+      colonies: game.colonies
     } as PlayerModel;
   });
 }
@@ -513,7 +515,7 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
     res.write(fs.readFileSync('dist/main.js'));
   } else if (req.url === '/assets/Prototype.ttf') {
     res.write(fs.readFileSync('assets/Prototype.ttf'));
-  } else if (req.url.endsWith('.png')) {
+  } else if (req.url.endsWith('.png') || req.url.endsWith('.jpg') ) {
     const assetsRoot = path.resolve('./assets');
     const reqFile = path.resolve(path.normalize(req.url).slice(1));
 

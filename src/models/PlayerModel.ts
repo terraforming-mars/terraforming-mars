@@ -1,6 +1,7 @@
 import { CardModel } from "./CardModel";
 import { Color } from "../Color";
 import { VictoryPointsBreakdown } from "../VictoryPointsBreakdown";
+import { IColony } from "../colonies/Colony";
 
 export interface PlayerModel {
     corporationCard: string;
@@ -33,4 +34,5 @@ export interface PlayerModel {
     venusNextExtension: boolean;
     venusScaleLevel: number;
     boardName: string;
+    colonies: Array<IColony>;
 }

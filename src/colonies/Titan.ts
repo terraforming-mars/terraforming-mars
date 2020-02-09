@@ -13,7 +13,7 @@ export class Titan extends Colony implements IColony {
         this.afterTrade(this);
     }
     public onColonyPlaced(player: Player): undefined {
-        this.colonies.push(player);
+        super.addColony(this, player);
         player.setProduction(Resources.PLANTS);
         return undefined;
     }

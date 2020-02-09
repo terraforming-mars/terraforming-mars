@@ -13,6 +13,7 @@ import { WaitingFor } from "./WaitingFor";
 import { GlobalParameters } from "./GlobalParameters"
 import { Preferences } from "./Preferences"
 import { PlayerModel } from "../models/PlayerModel";
+import { Colony } from './Colony';
 
 export const PlayerHome = Vue.component("player-home", {
     props: ["player"],
@@ -27,7 +28,8 @@ export const PlayerHome = Vue.component("player-home", {
         "global-parameters": GlobalParameters,
         "milestone": Milestone,
         "award": Award,
-        "preferences": Preferences
+        "preferences": Preferences,
+        "colony": Colony
     },
     data: function () {
         return {}
@@ -153,6 +155,14 @@ export const PlayerHome = Vue.component("player-home", {
                 <h2>Actions</h2>
                 <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
             </div>
+
+            <div>
+                <h2>Colonies</h2>
+                <div v-for="colony in player.colonies" :key="colony.name">
+                    <colony :colony="colony"></colony>
+                </div>
+            </div>
+
         </div>
     `
 });

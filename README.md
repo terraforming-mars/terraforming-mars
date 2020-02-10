@@ -19,6 +19,84 @@ npm run start
 
 This will start the game server listening on the default port of 8080. If you then point a web browser to http://localhost:8080 you will be on the create game screen.
 
+### docker
+
+Build the docker image and run it
+
+```
+docker build . -t terraforming-mars
+docker run -p 8080:8080 terraforming-mars
+```
+
+This will start the game server listening on the default port of 8080. If you then point a web browser to http://localhost:8080 you will be on the create game screen.
+
+### docker-compose
+
+If traefik and watchtower are running on your docker host, you can use the docker-compose.yml template of this repo.
+
+It is starting the game from a public image hosted on hub.docker.com
+
+```
+terraforming-mars:
+  image: lotooo/terraforming-mars
+  container_name: terraforming-mars
+  labels:
+    - "traefik.frontend.rule=Host:terraforming-mars.mydomain.com"
+    - "traefik.port=8080"
+    - "traefik.protocol=http"
+    - "traefik.backend=terraforming-mars"
+    - "com.centurylinklabs.watchtower.enable=true"
+```
+
+Start the service
+
+```
+docker-compose up
+```
+
+This will start the game server. If you then point a web browser to https://terraforming-mars.mydomain.com you will be on the create game screen.
+
+### docker-compose + systemd
+
+Copy your docker-compose file in a /data/docker/terraforming-mars folder, then create a systemd unit to stop/start/restart your service
+
+Create a  file `/lib/systemd/system/terraforming-mars.service` with this content:
+
+```
+[Unit]
+Description=Terraforming Mars service with docker compose
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+WorkingDirectory=/data/docker/terraforming-mars
+
+# Remove old containers, images and volumes
+ExecStartPre=/usr/bin/docker-compose down -v
+ExecStartPre=/usr/bin/docker-compose rm -fv
+ExecStartPre=-/bin/bash -c 'docker ps -aqf "name=terraforming-mars*" | xargs -r docker rm'
+
+# Compose up
+ExecStart=/usr/bin/docker-compose up
+
+# Compose down, remove containers and volumes
+ExecStop=/usr/bin/docker-compose down -v
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Reload systemd + enable and start terraforming mars
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable terraforming-mars.service
+sudo systemctl start terraforming-mars.service
+```
+
+
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people:

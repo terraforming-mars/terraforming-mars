@@ -64,6 +64,7 @@ function requestHandler(
       } else if (req.url.startsWith('/api/waitingfor?id=')) {
         apiGetWaitingFor(req, res);
       } else if (req.url === '/styles.css') {
+        res.setHeader('Content-Type', 'text/css');
         serveResource(res, styles);
       } else if (
           req.url.startsWith('/assets/') ||

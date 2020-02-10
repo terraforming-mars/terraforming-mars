@@ -32,10 +32,8 @@ import {CardName} from './CardName';
 import { ElysiumBoard } from './ElysiumBoard';
 import { HellasBoard } from './HellasBoard';
 import { BoardName } from './BoardName';
-import { Ganymede } from './colonies/Ganymede';
 import { IColony } from './colonies/Colony';
-import { Europa } from './colonies/Europa';
-import { Titan } from './colonies/Titan';
+import { ColonyDealer } from './colonies/ColonyDealer';
 
 export interface PlayerInterrupt {
   player: Player,
@@ -66,6 +64,7 @@ export class Game {
     public interrupt: PlayerInterrupt | undefined = undefined;
     public monsInsuranceOwner: Player | undefined = undefined;
     public colonies: Array<IColony> = [];
+    public colonyDealer: ColonyDealer = new ColonyDealer();
 
     private tempMC: number = 0;
     private tempSteel: number = 0;
@@ -136,9 +135,7 @@ export class Game {
       // Add colonies stuff
       if (this.coloniesExtension) {
         corporationCards.push(...ALL_COLONIES_CORPORATIONS);
-        this.colonies.push(new Ganymede());
-        this.colonies.push(new Europa());
-        this.colonies.push(new Titan());
+        this.colonies = this.colonyDealer.drawColonies(players.length);
       }
       // Setup custom corporation list
       if (customCorporationsList && corporationList.length >= players.length * 2) {

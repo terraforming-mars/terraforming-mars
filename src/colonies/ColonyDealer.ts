@@ -1,0 +1,47 @@
+import { IColony } from './Colony';
+import { Europa } from './Europa';
+import { Ganymede } from './Ganymede';
+import { Titan } from './Titan';
+import { Callisto } from './Callisto';
+
+export const ALL_COLONIES_TILES: Array<IColony> = [
+    new Europa(),
+    new Ganymede(),
+    new Titan(),
+    new Callisto(),
+    new Ganymede(),
+    new Titan(),
+    new Europa(),
+    new Callisto(),
+    new Titan()
+]
+
+export class ColonyDealer {
+    public coloniesDeck: Array<IColony> = [];
+    public discardedColonies: Array<IColony> = [];
+
+    public shuffle(cards: Array<any>): Array<any> {
+        const deck: Array<any> = [];
+        const copy = cards.slice();
+        while (copy.length) {
+            deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
+        }
+        return deck;
+    }
+    public discard(card: IColony): void {
+        this.discardedColonies.push(card);
+    }
+    public drawColonies(players: number): Array<IColony> {
+        let count: number = players + 2;
+        if (players === 1) count = 4;
+        let i: number = 0;
+        let tempDeck = this.shuffle(ALL_COLONIES_TILES);
+        while (i < count) {
+            this.coloniesDeck.push(tempDeck.pop());
+            i++;
+        }
+        this.discardedColonies.push(...tempDeck);
+        return this.coloniesDeck;
+    }
+
+}    

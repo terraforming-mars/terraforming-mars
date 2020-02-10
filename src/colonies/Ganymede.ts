@@ -7,7 +7,7 @@ export class Ganymede extends Colony implements IColony {
     public name = ColonyName.GANYMEDE;
     public trade(player: Player): void {
         player.plants += this.trackPosition;
-        this.afterTrade(this);
+        this.afterTrade(this, player);
     }
     public onColonyPlaced(player: Player): undefined {
         super.addColony(this, player);

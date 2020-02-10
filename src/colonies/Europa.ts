@@ -17,7 +17,7 @@ export class Europa extends Colony implements IColony {
         } else {
             player.setProduction(Resources.PLANTS);
         }
-        this.afterTrade(this);
+        this.afterTrade(this, player);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player);

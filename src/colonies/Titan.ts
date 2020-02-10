@@ -10,7 +10,7 @@ export class Titan extends Colony implements IColony {
     public resourceType = ResourceType.FLOATER;
     public trade(player: Player): void {
         player.plants += this.trackPosition;
-        this.afterTrade(this);
+        this.afterTrade(this, player);
     }
     public onColonyPlaced(player: Player): undefined {
         super.addColony(this, player);

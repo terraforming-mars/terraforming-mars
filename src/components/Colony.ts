@@ -43,12 +43,20 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === 'Europa'" class="resource money">1</div>
       <div v-if="colony.name === 'Titan'" class="resource floater"></div>
       <div v-if="colony.name === 'Callisto'" class="resource energy"></div>
+      <div v-if="colony.name === 'Triton'" class="resource titanium"></div>
+      <div v-if="colony.name === 'Ceres'" class="resource steel"></div>
+      <div v-if="colony.name === 'Ceres'" class="resource steel"></div>
+      <div v-if="colony.name === 'Luna'" class="resource money">2</div>
       <span class="colony-background-color">
         Colony Bonus
         </span><br>
       <div v-if="colony.name === 'Ganymede'" class="resource plant" style="margin-left:20px;"></div>
       <div v-if="colony.name === 'Titan'" class="resource floater" style="margin-left:20px;"></div>
       <div v-if="colony.name === 'Callisto'" class="resource energy" style="margin-left:20px;"></div>
+      <div v-if="colony.name === 'Triton'" class="resource titanium" style="margin-left:20px;"></div>
+      <div v-if="colony.name === 'Ceres'" class="resource steel" style="margin-left:20px;"></div>
+      <div v-if="colony.name === 'Luna'" class="resource money" style="margin-left:20px;"></div>
+      
       <div v-if="colony.name !== 'Europa'" class="white-x"></div>
       <span v-if="colony.name !== 'Europa'" class="colony-background-color">
         Trade Income
@@ -56,6 +64,72 @@ export const Colony = Vue.component("colony", {
       <span v-if="colony.name === 'Europa'" class="colony-background-color" style="margin-left: 3px;">
         Trade Income: Gain the indicated production
       </span>
+
+    <div v-if="colony.name === 'Luna'" class="colony-grid-container">
+      <div><div class="production-box"><div class="production money">2</div></div></div>
+      <div><div class="production-box"><div class="production money">2</div></div></div>
+      <div><div class="production-box"><div class="production money">2</div></div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div v-if="colony.name === 'Luna'" class="colony-grid-container2">
+      <div>1</div>
+      <div>2</div>
+      <div>4</div>
+      <div>7</div>
+      <div>10</div>
+      <div>13</div>
+      <div>17</div>
+    </div>
+
+      <div v-if="colony.name === 'Ceres'" class="colony-grid-container">
+      <div><div class="production-box"><div class="production steel"></div></div></div>
+      <div><div class="production-box"><div class="production steel"></div></div></div>
+      <div><div class="production-box"><div class="production steel"></div></div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div v-if="colony.name === 'Ceres'" class="colony-grid-container2">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>6</div>
+      <div>8</div>
+      <div>10</div>
+    </div>
+
+    <div v-if="colony.name === 'Triton'" class="colony-grid-container">
+      <div><div class="resource titanium resource-stacked " style="positon:absolute;margin-bottom:0px;margin-top:6px;z-index:1;"></div>
+          <div class="resource titanium resource-stacked " style="positon:absolute;margin-top:-20px;"></div>
+          <div class="resource titanium resource-stacked " style="positon:absolute;margin-top:-20px;margin-left:-5px;"></div>
+      </div>
+      <div><div class="resource titanium resource-stacked " style="positon:absolute;margin-bottom:0px;margin-top:6px;z-index:1;"></div>
+          <div class="resource titanium resource-stacked " style="positon:absolute;margin-top:-20px;"></div>
+          <div class="resource titanium resource-stacked " style="positon:absolute;margin-top:-20px;margin-left:-5px;"></div>
+      </div>
+      <div><div class="resource titanium resource-stacked " style="positon:absolute;margin-bottom:0px;margin-top:6px;z-index:1;"></div>
+          <div class="resource titanium resource-stacked " style="positon:absolute;margin-top:-20px;"></div>
+          <div class="resource titanium resource-stacked " style="positon:absolute;margin-top:-20px;margin-left:-5px;"></div>
+      </div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div v-if="colony.name === 'Triton'" class="colony-grid-container2">
+      <div>0</div>
+      <div>1</div>
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+    </div>
 
     <div v-if="colony.name === 'Ganymede'" class="colony-grid-container">
       <div><div class="production-box"><div class="production plant"></div></div></div>

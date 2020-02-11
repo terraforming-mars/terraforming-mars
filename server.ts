@@ -535,5 +535,6 @@ function serveResource(res: http.ServerResponse, s: Buffer): void {
 }
 
 console.log('Starting server on port ' + (process.env.PORT || 8080));
+console.log('version 0.X');
 server.listen(process.env.PORT || 8080);
 

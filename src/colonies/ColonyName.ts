@@ -1,6 +1,9 @@
 export enum ColonyName {
     CALLISTO = "Callisto",
+    CERES = "Ceres",
     EUROPA = "Europa",
     GANYMEDE = "Ganymede",
-    TITAN = "Titan"
+    LUNA = "Luna",
+    TITAN = "Titan",
+    TRITON = "Triton"
 }

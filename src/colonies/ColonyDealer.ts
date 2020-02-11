@@ -3,17 +3,18 @@ import { Europa } from './Europa';
 import { Ganymede } from './Ganymede';
 import { Titan } from './Titan';
 import { Callisto } from './Callisto';
+import { Triton } from './Triton';
+import { Ceres } from './Ceres';
+import { Luna } from './Luna';
 
 export const ALL_COLONIES_TILES: Array<IColony> = [
+    new Ceres(),
     new Europa(),
     new Ganymede(),
+    new Luna(),
     new Titan(),
     new Callisto(),
-    new Ganymede(),
-    new Titan(),
-    new Europa(),
-    new Callisto(),
-    new Titan()
+    new Triton()
 ]
 
 export class ColonyDealer {
@@ -36,6 +37,8 @@ export class ColonyDealer {
         if (players === 1) count = 4;
         let i: number = 0;
         let tempDeck = this.shuffle(ALL_COLONIES_TILES);
+        // TO BE REMOVED, USED FOR TESTING, ADD ALL COLONIES
+        count = ALL_COLONIES_TILES.length;
         while (i < count) {
             this.coloniesDeck.push(tempDeck.pop());
             i++;

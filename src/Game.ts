@@ -574,7 +574,7 @@ export class Game {
 
       // Interrupt hook
       if (this.interrupts.length > 0) {
-        let interrupt = this.interrupts.pop();
+        let interrupt = this.interrupts.shift();
         if (interrupt !== undefined) {
           interrupt.player.setWaitingFor(interrupt.playerInput);
           return;

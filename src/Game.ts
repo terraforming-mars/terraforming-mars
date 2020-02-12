@@ -32,6 +32,8 @@ import {CardName} from './CardName';
 import { ElysiumBoard } from './ElysiumBoard';
 import { HellasBoard } from './HellasBoard';
 import { BoardName } from './BoardName';
+import { Pets } from './cards/Pets';
+import { ImmigrantCity } from './cards/ImmigrantCity';
 
 export interface PlayerInterrupt {
   player: Player,
@@ -101,12 +103,14 @@ export class Game {
 
       this.activePlayer = first;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension);
-    
+      
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
       if (players.length === 1) {
         this.setupSolo();
       }
+      first.cardsInHand.push(new Pets())
+      first.cardsInHand.push(new ImmigrantCity())
 
       let corporationCards = ALL_CORPORATION_CARDS;
       // Add prelude corporations cards

@@ -70,6 +70,8 @@ export class Player {
     public oceanBonus: number = constants.OCEAN_BONUS;
     private fleetSize: number = 1;
     private tradesThisTurn: number = 0;
+    public colonyTradeOffset: number = 0;
+    public colonyTradeDiscount: number = 0;
 
     constructor(
         public name: string,
@@ -1316,7 +1318,7 @@ export class Player {
         const colonySelect =  new SelectOption(
           colony.name, 
           () => {
-            colony.trade(this);
+            colony.trade(this, game);
             this.actionsTakenThisRound++;
             this.tradesThisTurn++;
             this.takeAction(game);
@@ -1328,19 +1330,19 @@ export class Player {
       });      
       let howToPayForTrade = new OrOptions();
       howToPayForTrade.title = "Trade with a colony";
-      const payWithMC = new SelectOption("Pay 9 MC", () => {
-        this.megaCredits -= 9;
+      const payWithMC = new SelectOption("Pay " + (9 - this.colonyTradeDiscount) +" MC", () => {
+        this.megaCredits -= (9 - this.colonyTradeDiscount);
         return selectColony;
       });
 
       if (this.canAfford(9) && this.canUseHeatAsMegaCredits && this.heat > 0) {
         let htp: HowToPay;
         let helionTrade = new SelectHowToPay(
-          'Select how to spend 9 MC',
+          "Select how to spend " + (9 - this.colonyTradeDiscount) +" MC",
           false,
           false,
           true,
-          9,
+          (9 - this.colonyTradeDiscount),
           (stp) => {
             htp = stp;
             this.megaCredits -= htp.megaCredits;
@@ -1349,22 +1351,22 @@ export class Player {
           }
         )
         howToPayForTrade.options.push(helionTrade);
-        //return helionTrade;
-      } else if (this.canAfford(9)) {
+
+      } else if (this.canAfford((9 - this.colonyTradeDiscount))) {
         howToPayForTrade.options.push(payWithMC);
       }
 
-      const payWithEnergy = new SelectOption("Pay 3 Energy", () => {
-        this.energy -= 3;
+      const payWithEnergy = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Energy", () => {
+        this.energy -= (3 - this.colonyTradeDiscount);
         return selectColony;
       });  
-      const payWithTitanium = new SelectOption("Pay 3 Titanium", () => {
-        this.titanium -= 3;
+      const payWithTitanium = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Titanium", () => {
+        this.titanium -= (3 - this.colonyTradeDiscount);
         return selectColony;  
       });
 
-      if (this.energy >=3) howToPayForTrade.options.push(payWithEnergy);
-      if (this.titanium >=3) howToPayForTrade.options.push(payWithTitanium);
+      if (this.energy >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithEnergy);
+      if (this.titanium >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithTitanium);
 
       return howToPayForTrade;
     }

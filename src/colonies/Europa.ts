@@ -9,7 +9,8 @@ import { ColonyName } from './ColonyName';
 
 export class Europa extends Colony implements IColony {
     public name = ColonyName.EUROPA;
-    public trade(player: Player): void {
+    public trade(player: Player, game: Game): void {
+        this.beforeTrade(this, player);
         if (this.trackPosition < 2) {
             player.setProduction(Resources.MEGACREDITS);
         } else if (this.trackPosition < 4) {
@@ -17,7 +18,7 @@ export class Europa extends Colony implements IColony {
         } else {
             player.setProduction(Resources.PLANTS);
         }
-        this.afterTrade(this, player);
+        this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player);

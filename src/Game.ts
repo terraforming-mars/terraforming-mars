@@ -32,8 +32,6 @@ import {CardName} from './CardName';
 import { ElysiumBoard } from './ElysiumBoard';
 import { HellasBoard } from './HellasBoard';
 import { BoardName } from './BoardName';
-import { Pets } from './cards/Pets';
-import { ImmigrantCity } from './cards/ImmigrantCity';
 
 export interface PlayerInterrupt {
   player: Player,
@@ -109,8 +107,6 @@ export class Game {
       if (players.length === 1) {
         this.setupSolo();
       }
-      first.cardsInHand.push(new Pets())
-      first.cardsInHand.push(new ImmigrantCity())
 
       let corporationCards = ALL_CORPORATION_CARDS;
       // Add prelude corporations cards

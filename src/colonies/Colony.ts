@@ -11,10 +11,11 @@ export interface IColony {
     trackPosition: number;
     colonies: Array<Player>;
     resourceType?: ResourceType;
-    trade: (player: Player) => void;
+    trade: (player: Player, game: Game) => void;
     onColonyPlaced: (player: Player, game: Game) => undefined | SelectSpace;
-    giveTradeBonus: (player: Player) => void;
+    giveTradeBonus: (player: Player, game: Game) => void;
     endGeneration: () => void;
+    increaseTrack(value?: number): void;
 }
 
 export abstract class Colony  {
@@ -29,17 +30,30 @@ export abstract class Colony  {
         }
         this.isVisited = undefined;
     }
-    public increaseTrack(): void {
-        if (this.trackPosition < 6) this.trackPosition++;
+    public increaseTrack(value?: number): void {
+        if (value === undefined) {
+            this.trackPosition++;
+        } else {
+            this.trackPosition += value;
+        }    
+        if (this.trackPosition > 6) this.trackPosition = 6;
     }
     public isColonyFull(): boolean {
         return this.colonies.length >= 3;
     }
-    public afterTrade(colony: IColony, player: Player): void {
+
+    public beforeTrade(colony: IColony, player: Player): void {
+        if (player.colonyTradeOffset > 0) {
+            colony.increaseTrack(player.colonyTradeOffset);
+        }
+    }    
+
+
+    public afterTrade(colony: IColony, player: Player, game: Game): void {
         colony.trackPosition = this.colonies.length;
         colony.isVisited = player;
         colony.colonies.forEach(player => {
-            colony.giveTradeBonus(player);
+            colony.giveTradeBonus(player, game);
         });
     }
     public addColony(colony: IColony, player: Player): void {

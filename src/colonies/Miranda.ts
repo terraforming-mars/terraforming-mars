@@ -4,23 +4,24 @@ import { ColonyName } from './ColonyName';
 import { Resources } from '../Resources';
 import { Game } from '../Game';
 
-export class Ceres extends Colony implements IColony {
-    public name = ColonyName.CERES;
+export class Miranda extends Colony implements IColony {
+    public name = ColonyName.IO;
     public trade(player: Player, game: Game): void {
         this.beforeTrade(this, player);
-        if (this.trackPosition = 2) {
-            player.steel += 3;
+        if (this.trackPosition === 1 || this.trackPosition === 6) {
+            player.heat += (this.trackPosition * 2) + 1;
         } else {
-            player.steel += Math.max(this.trackPosition * 2  - 2, 2);
+            player.heat += (this.trackPosition * 2);
         }    
         this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player): undefined {
         super.addColony(this, player);
-        player.setProduction(Resources.STEEL);
+        player.setProduction(Resources.HEAT);
         return undefined;
     }
-    public giveTradeBonus(player: Player): void {
-        player.steel += 2;
+    public giveTradeBonus(player: Player, game: Game): void {
+        player.cardsInHand.push(
+            game.dealer.dealCard());
     }    
 }

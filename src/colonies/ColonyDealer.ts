@@ -6,12 +6,16 @@ import { Callisto } from './Callisto';
 import { Triton } from './Triton';
 import { Ceres } from './Ceres';
 import { Luna } from './Luna';
+import { Io } from './Io';
+import { Miranda } from './Miranda';
 
 export const ALL_COLONIES_TILES: Array<IColony> = [
     new Ceres(),
     new Europa(),
     new Ganymede(),
+    new Io(),
     new Luna(),
+    new Miranda(),
     new Titan(),
     new Callisto(),
     new Triton()

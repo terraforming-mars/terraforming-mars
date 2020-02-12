@@ -44,8 +44,11 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === 'Titan'" class="resource floater"></div>
       <div v-if="colony.name === 'Callisto'" class="resource energy"></div>
       <div v-if="colony.name === 'Triton'" class="resource titanium"></div>
+      <div v-if="colony.name === 'Miranda'" style="transform:scale(0.8)" class="resource card"></div>
       <div v-if="colony.name === 'Ceres'" class="resource steel"></div>
       <div v-if="colony.name === 'Ceres'" class="resource steel"></div>
+      <div v-if="colony.name === 'Io'" class="resource heat"></div>
+      <div v-if="colony.name === 'Io'" class="resource heat"></div>      
       <div v-if="colony.name === 'Luna'" class="resource money">2</div>
       <span class="colony-background-color">
         Colony Bonus
@@ -55,8 +58,9 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === 'Callisto'" class="resource energy" style="margin-left:20px;"></div>
       <div v-if="colony.name === 'Triton'" class="resource titanium" style="margin-left:20px;"></div>
       <div v-if="colony.name === 'Ceres'" class="resource steel" style="margin-left:20px;"></div>
-      <div v-if="colony.name === 'Luna'" class="resource money" style="margin-left:20px;"></div>
-      
+      <div v-if="colony.name === 'Luna'" class="resource money" style="margin-left:20px;">&nbsp;</div>
+      <div v-if="colony.name === 'Io'" class="resource heat" style="margin-left:20px;"></div>
+      <div v-if="colony.name === 'Miranda'" class="resource animal" style="margin-left:20px;margin-top:-10px;"></div>
       <div v-if="colony.name !== 'Europa'" class="white-x"></div>
       <span v-if="colony.name !== 'Europa'" class="colony-background-color">
         Trade Income
@@ -64,6 +68,44 @@ export const Colony = Vue.component("colony", {
       <span v-if="colony.name === 'Europa'" class="colony-background-color" style="margin-left: 3px;">
         Trade Income: Gain the indicated production
       </span>
+
+    <div v-if="colony.name === 'Miranda'" class="colony-grid-container">
+      <div><div class="resource animal" style="margin-top:11px;"></div></div>
+      <div><div class="resource animal" style="margin-top:11px;"></div></div>
+      <div><div class="resource animal" style="margin-top:11px;"></div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div v-if="colony.name === 'Miranda'" class="colony-grid-container2">
+      <div>0</div>
+      <div>1</div>
+      <div>1</div>
+      <div>2</div>
+      <div>2</div>
+      <div>3</div>
+      <div>3</div>
+    </div>
+
+    <div v-if="colony.name === 'Io'" class="colony-grid-container">
+      <div><div class="production-box"><div class="production heat"></div></div></div>
+      <div><div class="production-box"><div class="production heat"></div></div></div>
+      <div><div class="production-box"><div class="production heat"></div></div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <div v-if="colony.name === 'Io'" class="colony-grid-container2">
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>6</div>
+      <div>8</div>
+      <div>10</div>
+      <div>13</div>
+    </div>
 
     <div v-if="colony.name === 'Luna'" class="colony-grid-container">
       <div><div class="production-box"><div class="production money">2</div></div></div>

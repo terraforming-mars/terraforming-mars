@@ -81,7 +81,6 @@ export class Philares implements CorporationCard {
         selectResources.title = "Philares effect : select "+ this.pendingResourcesToAdd +" resource(s)";
         let philaresPlayer = game.getPlayers().filter((player) => player.isCorporation(CorporationName.PHILARES))[0];
         selectResources.onend = () => { 
-            game.interrupt = undefined;
             this.pendingResourcesToAdd = 0;
             if (philaresPlayer !== player) {
                 game.playerIsFinishedTakingActions(player);   
@@ -89,10 +88,12 @@ export class Philares implements CorporationCard {
                 player.takeAction(game);
             }
         };
-        game.interrupt = {
+
+        let interrupt = {
             player: philaresPlayer,
             playerInput: selectResources
         };
+        game.interrupts.push(interrupt);
     }
 
     public onTilePlaced(player: Player, space: ISpace, game: Game) {

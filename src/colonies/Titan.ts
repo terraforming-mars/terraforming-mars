@@ -1,6 +1,5 @@
 import { Colony, IColony } from './Colony';
 import { Player } from '../Player';
-import { Resources } from '../Resources';
 import { ColonyName } from './ColonyName';
 import { ResourceType } from '../ResourceType';
 import { Game } from '../Game';
@@ -11,15 +10,21 @@ export class Titan extends Colony implements IColony {
     public resourceType = ResourceType.FLOATER;
     public trade(player: Player, game: Game): void {
         this.beforeTrade(this, player);
-        player.plants += this.trackPosition;
+        let floaters: number = 0;
+        if (this.trackPosition < 5) {
+            floaters = Math.max(this.trackPosition - 1, 1);
+        } else {
+            floaters = this.trackPosition - 2;
+        }
+        player.addResourceToSelector(ResourceType.FLOATER, floaters, game);
         this.afterTrade(this, player, game);
     }
-    public onColonyPlaced(player: Player): undefined {
+    public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player);
-        player.setProduction(Resources.PLANTS);
+        player.addResourceToSelector(ResourceType.FLOATER, 3, game);
         return undefined;
     }
-    public giveTradeBonus(player: Player): void {
-        player.plants++;
+    public giveTradeBonus(player: Player, game: Game): void {
+        player.addResourceToSelector(ResourceType.FLOATER, 1, game);
     }    
 }

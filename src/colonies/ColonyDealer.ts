@@ -8,9 +8,12 @@ import { Ceres } from './Ceres';
 import { Luna } from './Luna';
 import { Io } from './Io';
 import { Miranda } from './Miranda';
+import { Pluto } from './Pluto';
+import { Enceladus } from './Enceladus';
 
 export const ALL_COLONIES_TILES: Array<IColony> = [
     new Ceres(),
+    new Enceladus(),
     new Europa(),
     new Ganymede(),
     new Io(),
@@ -18,6 +21,7 @@ export const ALL_COLONIES_TILES: Array<IColony> = [
     new Miranda(),
     new Titan(),
     new Callisto(),
+    new Pluto(),
     new Triton()
 ]
 

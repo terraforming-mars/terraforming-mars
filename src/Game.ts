@@ -65,6 +65,7 @@ export class Game {
     public monsInsuranceOwner: Player | undefined = undefined;
     public colonies: Array<IColony> = [];
     public colonyDealer: ColonyDealer = new ColonyDealer();
+    public pendingOceans: number = 0;
 
     private tempMC: number = 0;
     private tempSteel: number = 0;
@@ -1001,6 +1002,9 @@ export class Game {
       this.addTile(player, spaceType, this.getSpace(spaceId), {
         tileType: TileType.OCEAN
       });
+      if (this.pendingOceans > 0) {
+        this.pendingOceans--;
+      }
       player.terraformRating++;
     }
     public getPlayers(): Array<Player> {

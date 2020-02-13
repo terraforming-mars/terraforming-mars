@@ -277,6 +277,84 @@ export class Player {
         this.resourcesOnCards.set(card.name, count);
       }
     }
+
+    public addResourceToSelector(resourceType: ResourceType, count: number = 1, game: Game): void {
+      let resourceCards = this.getResourceCards(resourceType);
+      if (resourceCards.length === 0) {
+        return;
+      }
+      let selectCard = new SelectCard(
+        'Select card to add ' + count + ' ' + resourceType + ' resource',
+        resourceCards,
+        (foundCards: Array<ICard>) => {
+          this.addResourceTo(foundCards[0], count);
+          return undefined;
+        }
+      );
+      let interrupt = {
+        player: this,
+        playerInput: selectCard
+      };
+
+      selectCard.onend = () => { 
+        if (game.activePlayer !== this) {
+            game.playerIsFinishedTakingActions(this);   
+        } else {
+            this.takeAction(game);
+        }
+      };
+      game.interrupts.push(interrupt);
+    }  
+
+    public oceanSelector(game: Game): void {
+      if (game.board.getOceansOnBoard() + game.pendingOceans  >= constants.MAX_OCEAN_TILES) return undefined;
+      game.pendingOceans++;
+      let selectOcean = new SelectSpace(
+        'Select space for ocean tile',
+        game.board.getAvailableSpacesForOcean(this),
+        (space: ISpace) => {
+            game.addOceanTile(this, space.id);
+          return undefined;
+        }
+      );
+
+      let interrupt = {
+        player: this,
+        playerInput: selectOcean
+      };
+
+      selectOcean.onend = () => { 
+        if (game.activePlayer !== this) {
+            game.playerIsFinishedTakingActions(this);   
+        } else {
+            this.takeAction(game);
+        }
+      };
+      game.interrupts.push(interrupt); 
+    }
+
+    public discardCardSelector(game: Game): void {
+      let selectCard = new SelectCard("Select a card to discard", this.cardsInHand, (foundCards: Array<IProjectCard>) => {
+        this.cardsInHand.splice(this.cardsInHand.indexOf(foundCards[0]), 1);
+        game.dealer.discard(foundCards[0]);
+        return undefined;
+      });
+      let interrupt = {
+        player: this,
+        playerInput: selectCard
+      };
+
+      selectCard.onend = () => { 
+        if (game.activePlayer !== this || this.actionsTakenThisRound === 2) {
+            game.playerIsFinishedTakingActions(this);   
+        } else {
+            this.takeAction(game);
+        }
+      };
+      game.interrupts.push(interrupt);      
+    }
+
+
     public getCardsWithResources(): Array<ICard> {
       return this.playedCards.filter(
           (card) => Number(this.resourcesOnCards.get(card.name)) > 0

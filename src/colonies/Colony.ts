@@ -48,7 +48,6 @@ export abstract class Colony  {
         }
     }    
 
-
     public afterTrade(colony: IColony, player: Player, game: Game): void {
         colony.trackPosition = this.colonies.length;
         colony.isVisited = player;

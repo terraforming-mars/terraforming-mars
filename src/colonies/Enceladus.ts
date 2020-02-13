@@ -4,30 +4,27 @@ import { ColonyName } from './ColonyName';
 import { Game } from '../Game';
 import { ResourceType } from '../ResourceType';
 
-export class Miranda extends Colony implements IColony {
-    public name = ColonyName.MIRANDA;
+export class Enceladus extends Colony implements IColony {
+    public name = ColonyName.ENCELADUS;
     public isActive = false;
-    public resourceType = ResourceType.ANIMAL;
+    public resourceType = ResourceType.MICROBE;
     public trade(player: Player, game: Game): void {
         this.beforeTrade(this, player);
-        let animals: number = 0;
-        if (this.trackPosition < 3) {
-            animals = 1;
-        } else if (this.trackPosition < 5) {
-            animals = 2;
+        let microbes: number = 0;
+        if (this.trackPosition > 4) {
+            microbes = this.trackPosition - 1;
         } else {
-            animals = 3;
+            microbes = this.trackPosition;
         }
-        player.addResourceToSelector(ResourceType.ANIMAL, animals, game);
+        player.addResourceToSelector(ResourceType.MICROBE, microbes, game);
         this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player);
-        player.addResourceToSelector(ResourceType.ANIMAL, 1, game);
+        player.addResourceToSelector(ResourceType.MICROBE, 3, game);
         return undefined;
     }
     public giveTradeBonus(player: Player, game: Game): void {
-        player.cardsInHand.push(
-            game.dealer.dealCard());
+        player.addResourceToSelector(ResourceType.MICROBE, 1, game);
     }    
 }

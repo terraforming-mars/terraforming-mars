@@ -1532,9 +1532,10 @@ export class Player {
     public takeAction(game: Game): void {
 
       //Interrupt action
-      if (game.interrupt !== undefined && game.interrupt.player === this) {
-        this.setWaitingFor(game.interrupt.playerInput);
-        return;
+      const interruptIndex = game.interrupts.findIndex(interrupt => interrupt.player === this);
+      if (interruptIndex !== -1) {
+          this.setWaitingFor(game.interrupts.splice(interruptIndex, 1)[0].playerInput);
+          return;
       }
 
       //Post Action (after some specific prelude cards have been played)

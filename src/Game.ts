@@ -59,7 +59,7 @@ export class Game {
     public gameLog: Array<String> = [];
     public gameAge: number = 0; // Each log event increases it
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
-    public interrupt: PlayerInterrupt | undefined = undefined;
+    public interrupts: Array<PlayerInterrupt> = [];
     public monsInsuranceOwner: Player | undefined = undefined;
 
     private tempMC: number = 0;
@@ -573,9 +573,12 @@ export class Game {
     public playerIsFinishedTakingActions(player: Player): void {
 
       // Interrupt hook
-      if (this.interrupt !== undefined) {
-        this.interrupt.player.setWaitingFor(this.interrupt.playerInput);
-        return;
+      if (this.interrupts.length > 0) {
+        let interrupt = this.interrupts.shift();
+        if (interrupt !== undefined) {
+          interrupt.player.setWaitingFor(interrupt.playerInput);
+          return;
+        }
       }
 
       if (this.allPlayersHavePassed()) {
@@ -888,15 +891,16 @@ export class Game {
             }
           );
 
+
           selectOcean.onend = () => { 
-            this.interrupt = undefined;
             player.takeAction(this);
           }
 
-          this.interrupt = {
+          let interrupt = {
             player: player,
             playerInput: selectOcean
           };
+          this.interrupts.push(interrupt);
       }
 
       // Land claim a player can claim land for themselves

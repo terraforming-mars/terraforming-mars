@@ -101,7 +101,7 @@ export class Game {
 
       this.activePlayer = first;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension);
-    
+      
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
       if (players.length === 1) {

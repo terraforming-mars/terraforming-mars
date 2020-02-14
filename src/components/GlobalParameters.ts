@@ -46,7 +46,7 @@ export const GlobalParameters = Vue.component("globs", {
                 <div class="globs_column globs_column--oxygen">
                     <div class="globs_item" v-for="lvl in getValuesForParameter('oxygen')">
                         <div class="globs_figure" :class="getScaleCSS(lvl)"></div>
-                        <div class="globs_value" :class="'glob_value_oxygen--'+lvl.number">{{ lvl.value }}</div>
+                        <div class="globs_value" :class="'glob_value_oxygen--'+lvl.value">{{ lvl.value }}</div>
                     </div>
                 </div>
             </div>

@@ -273,11 +273,11 @@ export class Player {
       }
     }
 
-    public oceanSelector(game: Game): void {
+    public oceanSelector(game: Game, title : string = 'Select space for ocean tile'): void {
       if (game.board.getOceansOnBoard() + game.pendingOceans  >= constants.MAX_OCEAN_TILES) return undefined;
       game.pendingOceans++;
       let selectOcean = new SelectSpace(
-        'Select space for ocean tile',
+        title,
         game.board.getAvailableSpacesForOcean(this),
         (space: ISpace) => {
             game.addOceanTile(this, space.id);

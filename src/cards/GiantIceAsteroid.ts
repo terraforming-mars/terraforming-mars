@@ -17,8 +17,8 @@ export class GiantIceAsteroid implements IProjectCard {
 
     public play(player: Player, game: Game) {
 
-        player.oceanSelector(game);
-        player.oceanSelector(game);
+        player.oceanSelector(game,'Select space for first ocean');
+        player.oceanSelector(game,'Select space for second ocean');
 
         var opts: Array<SelectPlayer | SelectSpace> = [];
 

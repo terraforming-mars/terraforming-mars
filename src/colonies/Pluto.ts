@@ -5,6 +5,7 @@ import { Game } from '../Game';
 
 export class Pluto extends Colony implements IColony {
     public name = ColonyName.PLUTO;
+    public description: string = "Cards";
     public trade(player: Player, game: Game): void {
         let extraCards: number = 0;
         this.beforeTrade(this, player);
@@ -21,7 +22,7 @@ export class Pluto extends Colony implements IColony {
         this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
-        super.addColony(this, player);
+        super.addColony(this, player, game);
         player.cardsInHand.push(game.dealer.dealCard());
         player.cardsInHand.push(game.dealer.dealCard());
         return undefined;

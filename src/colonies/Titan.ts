@@ -6,6 +6,7 @@ import { Game } from '../Game';
 
 export class Titan extends Colony implements IColony {
     public name = ColonyName.TITAN;
+    public description: string = "Floaters";
     public isActive = false;
     public resourceType = ResourceType.FLOATER;
     public trade(player: Player, game: Game): void {
@@ -20,7 +21,7 @@ export class Titan extends Colony implements IColony {
         this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
-        super.addColony(this, player);
+        super.addColony(this, player, game);
         player.addResourceToSelector(ResourceType.FLOATER, 3, game);
         return undefined;
     }

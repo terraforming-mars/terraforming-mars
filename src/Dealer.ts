@@ -341,6 +341,8 @@ import { Splice } from './cards/promo/Splice';
 import { ArcadianCommunities } from "./cards/promo/ArcadianCommunities";
 import { Philares } from './cards/promo/Philares';
 import { MonsInsurance } from './cards/promo/MonsInsurance';
+import { Poseidon } from './cards/colonies/Poseidon';
+import { Aridor } from './cards/colonies/Aridor';
 
 
 
@@ -476,8 +478,10 @@ export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [
 ];   
 
 export const ALL_COLONIES_CORPORATIONS: Array<CorporationCard> = [
+    new Aridor(),
     new Arklight(),
     new Polyphemos(),
+    new Poseidon(),
     new StormCraftIncorporated()
 ];   
 

@@ -6,6 +6,7 @@ import { ResourceType } from '../ResourceType';
 
 export class Enceladus extends Colony implements IColony {
     public name = ColonyName.ENCELADUS;
+    public description: string = "Microbes";
     public isActive = false;
     public resourceType = ResourceType.MICROBE;
     public trade(player: Player, game: Game): void {
@@ -20,7 +21,7 @@ export class Enceladus extends Colony implements IColony {
         this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
-        super.addColony(this, player);
+        super.addColony(this, player, game);
         player.addResourceToSelector(ResourceType.MICROBE, 3, game);
         return undefined;
     }

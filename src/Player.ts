@@ -1121,7 +1121,7 @@ export class Player {
           buildColony.title = "Build colony (" + constants.BUILD_COLONY_COST + " MC)";
           openColonies.forEach(colony => {
             const colonySelect =  new SelectOption(
-              colony.name, 
+              colony.name + " - (" + colony.description + ")", 
               () => {
                 return fundProject(constants.BUILD_COLONY_COST, htp.heat, colony);
               }
@@ -1139,7 +1139,7 @@ export class Player {
     buildColony.title = "Build colony (" + constants.BUILD_COLONY_COST + " MC)";
     openColonies.forEach(colony => {
       const colonySelect =  new SelectOption(
-        colony.name, 
+        colony.name + " - (" + colony.description + ")", 
         () => {
           return fundProject(constants.BUILD_COLONY_COST, 0, colony);
         }
@@ -1394,7 +1394,7 @@ export class Player {
       let selectColony = new OrOptions();
       openColonies.forEach(colony => {
         const colonySelect =  new SelectOption(
-          colony.name, 
+          colony.name + " - (" + colony.description + ")", 
           () => {
             colony.trade(this, game);
             this.actionsTakenThisRound++;

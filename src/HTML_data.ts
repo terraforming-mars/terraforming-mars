@@ -5438,7 +5438,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Aridor",`
+[CorporationName.ARIDOR,`
       <div class="corporationLabel">CORPORATION</div>
       <div class="colonies-icon corporation-icon"></div>
       <div class="contentCorporation">
@@ -5607,7 +5607,7 @@ export const HTML_DATA: Map<string, string> =
   </div>
 </div>
 `],
-["Poseidon",`
+[CorporationName.POSEIDON,`
       <div class="corporationLabel">CORPORATION</div>
       <div class="colonies-icon corporation-icon"></div>
       <div class="contentCorporation">

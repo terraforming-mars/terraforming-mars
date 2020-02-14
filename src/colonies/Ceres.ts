@@ -6,6 +6,7 @@ import { Game } from '../Game';
 
 export class Ceres extends Colony implements IColony {
     public name = ColonyName.CERES;
+    public description: string = "Steel";
     public trade(player: Player, game: Game): void {
         this.beforeTrade(this, player);
         if (this.trackPosition = 2) {
@@ -15,8 +16,8 @@ export class Ceres extends Colony implements IColony {
         }    
         this.afterTrade(this, player, game);
     }
-    public onColonyPlaced(player: Player): undefined {
-        super.addColony(this, player);
+    public onColonyPlaced(player: Player, game: Game): undefined {
+        super.addColony(this, player, game);
         player.setProduction(Resources.STEEL);
         return undefined;
     }

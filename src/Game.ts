@@ -32,6 +32,7 @@ import {CardName} from './CardName';
 import { ElysiumBoard } from './ElysiumBoard';
 import { HellasBoard } from './HellasBoard';
 import { BoardName } from './BoardName';
+import { GiantIceAsteroid } from './cards/GiantIceAsteroid';
 
 export interface PlayerInterrupt {
   player: Player,
@@ -61,6 +62,7 @@ export class Game {
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
     public interrupts: Array<PlayerInterrupt> = [];
     public monsInsuranceOwner: Player | undefined = undefined;
+    public pendingOceans: number = 0;
 
     private tempMC: number = 0;
     private tempSteel: number = 0;
@@ -279,6 +281,7 @@ export class Game {
       for (let i = 0; i < 10; i++) {
         dealtCards.push(this.dealer.dealCard());
       }
+      dealtCards.push(new GiantIceAsteroid());
 
       result.title = "Select corporation and initial cards";
       result.options.push(
@@ -570,7 +573,7 @@ export class Game {
       return players[(playerIndex + 1 >= players.length) ? 0 : playerIndex + 1];
     }
 
-    public playerIsFinishedTakingActions(player: Player): void {
+    public playerIsFinishedTakingActions(_player: Player): void {
 
       // Interrupt hook
       if (this.interrupts.length > 0) {
@@ -586,7 +589,7 @@ export class Game {
         return;
       }
 
-      const nextPlayer = this.getNextPlayer(this.players, player);
+      const nextPlayer = this.getNextPlayer(this.players, this.activePlayer);
 
       // Defensive coding to fail fast, if we don't find the next
       // player we are in an unexpected game state
@@ -980,6 +983,9 @@ export class Game {
       this.addTile(player, spaceType, this.getSpace(spaceId), {
         tileType: TileType.OCEAN
       });
+      if (this.pendingOceans > 0) {
+        this.pendingOceans--;
+      }
       player.terraformRating++;
     }
     public getPlayers(): Array<Player> {

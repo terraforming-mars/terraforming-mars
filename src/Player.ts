@@ -272,6 +272,34 @@ export class Player {
         this.resourcesOnCards.set(card.name, count);
       }
     }
+
+    public oceanSelector(game: Game): void {
+      if (game.board.getOceansOnBoard() + game.pendingOceans  >= constants.MAX_OCEAN_TILES) return undefined;
+      game.pendingOceans++;
+      let selectOcean = new SelectSpace(
+        'Select space for ocean tile',
+        game.board.getAvailableSpacesForOcean(this),
+        (space: ISpace) => {
+            game.addOceanTile(this, space.id);
+          return undefined;
+        }
+      );
+
+      let interrupt = {
+        player: this,
+        playerInput: selectOcean
+      };
+
+      selectOcean.onend = () => { 
+        if (game.activePlayer !== this) {
+            game.playerIsFinishedTakingActions(this);   
+        } else {
+            this.takeAction(game);
+        }
+      };
+      game.interrupts.push(interrupt); 
+    }
+    
     public getCardsWithResources(): Array<ICard> {
       return this.playedCards.filter(
           (card) => Number(this.resourcesOnCards.get(card.name)) > 0

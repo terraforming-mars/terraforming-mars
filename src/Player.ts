@@ -284,7 +284,7 @@ export class Player {
         return;
       }
       let selectCard = new SelectCard(
-        'Select card to add ' + count + ' ' + resourceType + ' resource',
+        'Select card to add ' + count + ' ' + resourceType.toString + ' resource',
         resourceCards,
         (foundCards: Array<ICard>) => {
           this.addResourceTo(foundCards[0], count);
@@ -345,7 +345,7 @@ export class Player {
       };
 
       selectCard.onend = () => { 
-        if (game.activePlayer !== this || this.actionsTakenThisRound === 2) {
+        if (game.activePlayer !== this) {
             game.playerIsFinishedTakingActions(this);   
         } else {
             this.takeAction(game);

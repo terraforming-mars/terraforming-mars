@@ -592,7 +592,7 @@ export class Game {
       return players[(playerIndex + 1 >= players.length) ? 0 : playerIndex + 1];
     }
 
-    public playerIsFinishedTakingActions(player: Player): void {
+    public playerIsFinishedTakingActions(_player: Player): void {
 
       // Interrupt hook
       if (this.interrupts.length > 0) {
@@ -608,7 +608,8 @@ export class Game {
         return;
       }
 
-      const nextPlayer = this.getNextPlayer(this.players, player);
+      const nextPlayer = this.getNextPlayer(this.players, this.activePlayer);
+      // CURRENT const nextPlayer = this.getNextPlayer(this.players, player);
 
       // Defensive coding to fail fast, if we don't find the next
       // player we are in an unexpected game state

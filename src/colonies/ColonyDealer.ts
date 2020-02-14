@@ -43,15 +43,13 @@ export class ColonyDealer {
     public drawColonies(players: number): Array<IColony> {
         let count: number = players + 2;
         if (players === 1) count = 4;
-        let i: number = 0;
         let tempDeck = this.shuffle(ALL_COLONIES_TILES);
-        // TO BE REMOVED, USED FOR TESTING, ADD ALL COLONIES
-        count = ALL_COLONIES_TILES.length;
-        while (i < count) {
+        for (let i = 0; i < count; i++) {
             this.coloniesDeck.push(tempDeck.pop());
-            i++;
-        }
+        }    
         this.discardedColonies.push(...tempDeck);
+        this.coloniesDeck.sort((a,b) => (a.name > b.name) ? 1 : -1);
+
         return this.coloniesDeck;
     }
 

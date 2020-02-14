@@ -6,13 +6,14 @@ import { Game } from '../Game';
 
 export class Callisto extends Colony implements IColony {
     public name = ColonyName.CALLISTO;
+    public description: string = "Energy";
     public trade(player: Player, game: Game): void {
         this.beforeTrade(this, player);
         player.energy += Math.max(2, (2 * this.trackPosition) -1 + Math.max( this.trackPosition - 4, 0) );
         this.afterTrade(this, player, game);
     }
-    public onColonyPlaced(player: Player): undefined {
-        super.addColony(this, player);
+    public onColonyPlaced(player: Player, game: Game): undefined {
+        super.addColony(this, player, game);
         player.setProduction(Resources.ENERGY);
         return undefined;
     }

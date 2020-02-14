@@ -6,6 +6,7 @@ import { ResourceType } from '../ResourceType';
 
 export class Miranda extends Colony implements IColony {
     public name = ColonyName.MIRANDA;
+    public description: string = "Animals";
     public isActive = false;
     public resourceType = ResourceType.ANIMAL;
     public trade(player: Player, game: Game): void {
@@ -22,7 +23,7 @@ export class Miranda extends Colony implements IColony {
         this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
-        super.addColony(this, player);
+        super.addColony(this, player, game);
         player.addResourceToSelector(ResourceType.ANIMAL, 1, game);
         return undefined;
     }

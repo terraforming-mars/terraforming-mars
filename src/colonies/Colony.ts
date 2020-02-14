@@ -3,9 +3,12 @@ import { SelectSpace } from '../inputs/SelectSpace';
 import { Game } from '../Game';
 import { ColonyName } from './ColonyName';
 import { ResourceType } from '../ResourceType';
+import { CorporationName } from '../CorporationName';
+import { Resources } from '../Resources';
 
 export interface IColony {
     name: ColonyName;
+    description: string;
     isActive: boolean;
     isVisited: undefined | Player;
     trackPosition: number;
@@ -59,10 +62,15 @@ export abstract class Colony  {
             colony.giveTradeBonus(player, game);
         });
     }
-    public addColony(colony: IColony, player: Player): void {
+    public addColony(colony: IColony, player: Player, game: Game): void {
         colony.colonies.push(player);
         if (colony.trackPosition < colony.colonies.length) {
             colony.trackPosition = colony.colonies.length;
+        }
+        // Poseidon hook
+        let poseidon = game.getPlayers().filter(player => player.isCorporation(CorporationName.POSEIDON));
+        if (poseidon.length > 0) {
+          poseidon[0].setResource(Resources.MEGACREDITS);
         }
     }    
 }    

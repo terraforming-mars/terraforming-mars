@@ -156,7 +156,7 @@ export const PlayerHome = Vue.component("player-home", {
                 <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
             </div>
 
-            <div>
+            <div v-if="player.colonies.length > 0">
                 <h2>Colonies</h2>
                 <div v-for="colony in player.colonies" :key="colony.name">
                     <colony :colony="colony" :player="player"></colony>

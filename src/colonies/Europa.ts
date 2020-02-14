@@ -6,6 +6,7 @@ import { ColonyName } from './ColonyName';
 
 export class Europa extends Colony implements IColony {
     public name = ColonyName.EUROPA;
+    public description: string = "Production";
     public trade(player: Player, game: Game): void {
         this.beforeTrade(this, player);
         if (this.trackPosition < 2) {
@@ -18,7 +19,7 @@ export class Europa extends Colony implements IColony {
         this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
-        super.addColony(this, player);
+        super.addColony(this, player, game);
         player.oceanSelector(game);
         return undefined;
     }

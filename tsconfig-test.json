@@ -357,6 +357,7 @@
         "tests/cards/promo/MonsInsurance.spec.ts",
         "tests/cards/promo/Recyclon.spec.ts",
         "tests/cards/promo/Splice.spec.ts",
+        "tests/Board.spec.ts",
         "tests/Game.spec.ts",
         "tests/OriginalBoard.spec.ts",
         "tests/Player.spec.ts"

@@ -77,7 +77,7 @@ export const PlayerHome = Vue.component("player-home", {
                     <a name="board" class="player_home_anchor"></a>
                     <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.boardName"></board>
 
-                    <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature"></global-parameters>
+                    <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature" v-trim-whitespace></global-parameters>
 
                     <div v-if="player.players.length > 1" class="player_home_block--millestones-and-awards">
                         <milestone :milestones_list="player.milestones" />

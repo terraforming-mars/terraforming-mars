@@ -44,7 +44,6 @@ export class EcologicalZone implements IProjectCard {
     return Math.floor(player.getResourcesOnCard(this) / 2);
   }
   public play(player: Player, game: Game) {
-    player.addResourceTo(this, 2);
     return new SelectSpace(
         'Select space next to greenery for special tile',
         this.getAvailableSpaces(player, game),

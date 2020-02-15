@@ -48,6 +48,7 @@ export class ColonyDealer {
             this.coloniesDeck.push(tempDeck.pop());
         }    
         this.discardedColonies.push(...tempDeck);
+        this.discardedColonies.sort((a,b) => (a.name > b.name) ? 1 : -1);
         this.coloniesDeck.sort((a,b) => (a.name > b.name) ? 1 : -1);
 
         return this.coloniesDeck;

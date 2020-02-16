@@ -68,7 +68,7 @@ export class Player {
     private postAction: boolean = false;
     public cardCost: number = constants.CARD_COST;
     public oceanBonus: number = constants.OCEAN_BONUS;
-    private fleetSize: number = 1;
+    public fleetSize: number = 1;
     private tradesThisTurn: number = 0;
     public colonyTradeOffset: number = 0;
     public colonyTradeDiscount: number = 0;

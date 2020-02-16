@@ -352,6 +352,8 @@
         "tests/cards/colonies/StormCraftIncorporated.spec.ts",
         "tests/cards/colonies/RimFreighters.spec.ts",  
         "tests/cards/colonies/CryoSleep.spec.ts",
+        "tests/cards/colonies/SkyDocks.spec.ts",
+        "tests/cards/colonies/TradeEnvoys.spec.ts",
         "tests/cards/turmoil/UtopiaInvest.spec.ts",   
         "tests/cards/turmoil/LakefrontResorts.spec.ts",
         "tests/cards/turmoil/Pristar.spec.ts",

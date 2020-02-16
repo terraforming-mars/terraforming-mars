@@ -9,11 +9,12 @@ describe("CryoSleep", function () {
     it("Should play", function () {
         const card = new CryoSleep();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
+        const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("foobar", [player,player2], player);
         const action = card.play(player);
         expect(action).to.eq(undefined);
         const ceres = new Ceres();
         ceres.trade(player, game);
-        expect(player.steel).to.eq(3);
+        expect(player.steel).to.eq(2);
     });
 });

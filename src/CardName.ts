@@ -5,5 +5,7 @@ export enum CardName {
     PSYCHROPHILES = "Psychrophiles",
     ARCTIC_ALGAE = "Arctic Algae",
     CRYO_SLEEP = "Cryo Sleep",
-    RIM_FREIGHTERS = "Rim Freighters"
+    RIM_FREIGHTERS = "Rim Freighters",
+    SKY_DOCKS = "Sky Docks",
+    TRADE_ENVOYS = "Trade Envoys"
 }

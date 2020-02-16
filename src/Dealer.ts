@@ -345,6 +345,7 @@ import { Poseidon } from './cards/colonies/Poseidon';
 import { Aridor } from './cards/colonies/Aridor';
 import { CryoSleep } from './cards/colonies/CryoSleep';
 import { RimFreighters } from './cards/colonies/RimFreighters';
+import { SkyDocks } from './cards/colonies/SkyDocks';
 
 
 
@@ -473,7 +474,8 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
 
 export const ALL_COLONIES_PROJECTS_CARDS: Array<IProjectCard> = [
         new CryoSleep(),
-        new RimFreighters()
+        new RimFreighters(),
+        new SkyDocks()
 ]; 
 
 export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [

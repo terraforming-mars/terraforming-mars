@@ -4856,7 +4856,7 @@ export const HTML_DATA: Map<string, string> =
                   </div>
               </div>
 `],
-["Sky Docks",`
+[CardName.SKY_DOCKS,`
               <div class="title background-color-active ">Sky Docks</div>
               <div class="price ">18</div>
               <div class="tag tag1 tag-space"></div>
@@ -5037,7 +5037,7 @@ export const HTML_DATA: Map<string, string> =
                 </div>
               </div>
 `],
-["Trade Envoys",`
+[CardName.TRADE_ENVOYS,`
               <div class="title background-color-active ">Trade Envoys</div>
               <div class="price ">6</div>
               <div class="colonies-icon project-icon"></div>

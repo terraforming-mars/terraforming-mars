@@ -9,7 +9,7 @@ export class Ceres extends Colony implements IColony {
     public description: string = "Steel";
     public trade(player: Player, game: Game): void {
         this.beforeTrade(this, player);
-        if (this.trackPosition = 2) {
+        if (this.trackPosition === 2) {
             player.steel += 3;
         } else {
             player.steel += Math.max(this.trackPosition * 2  - 2, 2);

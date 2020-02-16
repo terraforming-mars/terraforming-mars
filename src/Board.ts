@@ -102,15 +102,6 @@ export abstract class Board {
         );
     } 
 
-    public playerHasSpace(player: Player): boolean {
-        return this.spaces.find(
-            (space) => space.tile !== undefined &&
-                    space.player === player &&
-                    space.spaceType !== SpaceType.COLONY &&
-                    space.tile.tileType !== TileType.OCEAN
-        ) !== undefined;
-    }
-
     public getAvailableSpacesForMarker(player: Player): Array<ISpace> {
         let spaces =  this.getAvailableSpacesOnLand(player)
         .filter(
@@ -123,16 +114,12 @@ export abstract class Board {
     }  
 
     public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
-        // Greenery must be placed by a space you own if you own a space
-        if (this.playerHasSpace(player)) {
-        return this.getAvailableSpacesOnLand(player)
-            .filter(
-                (space) => this.getAdjacentSpaces(space).find(
-                    (adj) => adj.tile !== undefined &&
-                                adj.tile.tileType !== TileType.OCEAN &&
-                                adj.player === player
-                ) !== undefined
-            );
+        const spacesForGreenery = this.getAvailableSpacesOnLand(player)
+            .filter((space) => this.getAdjacentSpaces(space).find((adj) => adj.tile !== undefined && adj.player === player && (adj.tile.tileType === TileType.GREENERY || adj.tile.tileType === TileType.SPECIAL || adj.tile.tileType === TileType.CITY)) !== undefined);
+
+        // Spaces next to tiles you own
+        if (spacesForGreenery.length > 0) {
+            return spacesForGreenery;
         }
         // Place anywhere if no space owned
         return this.getAvailableSpacesOnLand(player);
@@ -170,7 +157,7 @@ export abstract class Board {
                 return space;
             }
         }
-    }    
+    }
 
     protected canPlaceTile(space: ISpace): boolean {
         return space !== undefined && space.tile === undefined && space instanceof Land;

@@ -3,5 +3,7 @@ export enum CardName {
     PROTECTED_HABITATS = "Protected Habitats",
     DIRIGIBLES = "Dirigibles",
     PSYCHROPHILES = "Psychrophiles",
-    ARCTIC_ALGAE = "Arctic Algae"
+    ARCTIC_ALGAE = "Arctic Algae",
+    CRYO_SLEEP = "Cryo Sleep",
+    RIM_FREIGHTERS = "Rim Freighters"
 }

@@ -343,6 +343,8 @@ import { Philares } from './cards/promo/Philares';
 import { MonsInsurance } from './cards/promo/MonsInsurance';
 import { Poseidon } from './cards/colonies/Poseidon';
 import { Aridor } from './cards/colonies/Aridor';
+import { CryoSleep } from './cards/colonies/CryoSleep';
+import { RimFreighters } from './cards/colonies/RimFreighters';
 
 
 
@@ -468,6 +470,11 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
         new Omnicourt(),
         new MiningQuota()
 ];    
+
+export const ALL_COLONIES_PROJECTS_CARDS: Array<IProjectCard> = [
+        new CryoSleep(),
+        new RimFreighters()
+]; 
 
 export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [
         new Aphrodite(),
@@ -718,17 +725,23 @@ export class Dealer {
     public discarded: Array<IProjectCard> = [];
     private usePreludeExtension: boolean = false;
     private useVenusNextExtension: boolean = false;   
-    constructor(usePreludeExtension: boolean, useVenusNextExtension: boolean) {
+    private useColoniesNextExtension: boolean = false;
+    constructor(usePreludeExtension: boolean, useVenusNextExtension: boolean, useColoniesNextExtension : boolean) {
         this.usePreludeExtension = usePreludeExtension;
         this.useVenusNextExtension = useVenusNextExtension;
+        this.useColoniesNextExtension = useColoniesNextExtension;
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS);
         if (this.usePreludeExtension) {
-                this.preludeDeck = this.shuffleCards(ALL_PRELUDE_CARDS);
-                this.deck.push(...ALL_PRELUDE_PROJECTS_CARDS);
-                this.deck = this.shuffleCards(this.deck);
+            this.preludeDeck = this.shuffleCards(ALL_PRELUDE_CARDS);
+            this.deck.push(...ALL_PRELUDE_PROJECTS_CARDS);
+            this.deck = this.shuffleCards(this.deck);
         }
         if (this.useVenusNextExtension) {
             this.deck.push(...ALL_VENUS_PROJECTS_CARDS);
+            this.deck = this.shuffleCards(this.deck);
+        }
+        if (this.useColoniesNextExtension) {
+            this.deck.push(...ALL_COLONIES_PROJECTS_CARDS);
             this.deck = this.shuffleCards(this.deck);
         }
     }

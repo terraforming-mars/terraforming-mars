@@ -4400,7 +4400,7 @@ export const HTML_DATA: Map<string, string> =
                   </div>
               </div>
 `],
-["Cryo Sleep",`
+[CardName.CRYO_SLEEP,`
               <div class="title background-color-active ">Cryo Sleep</div>
               <div class="price ">10</div>
               <div class="tag tag1 tag-science"></div>
@@ -4843,7 +4843,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
             </div>
 `],
-["Rim Freighters",`
+[CardName.RIM_FREIGHTERS,`
               <div class="title background-color-active ">Rim Freighters</div>
               <div class="price ">4</div>
               <div class="tag tag1 tag-space"></div>

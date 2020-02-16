@@ -33,11 +33,7 @@ import { ElysiumBoard } from './ElysiumBoard';
 import { HellasBoard } from './HellasBoard';
 import { BoardName } from './BoardName';
 import { GiantIceAsteroid } from './cards/GiantIceAsteroid';
-
-export interface PlayerInterrupt {
-  player: Player,
-  playerInput: PlayerInput
-}
+import { PlayerInterrupt } from './interrupts/PlayerInterrupt';
 
 export class Game {
     public activePlayer: Player;
@@ -150,6 +146,10 @@ export class Game {
           this.playCorporationCard(player, new BeginnerCorporation());
         }
       }
+    }
+
+    public addInterrupt(interrupt: PlayerInterrupt): void {
+      this.interrupts.push(interrupt);
     }
 
     public getPreludeExtension(): boolean {

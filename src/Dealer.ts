@@ -346,6 +346,10 @@ import { Aridor } from './cards/colonies/Aridor';
 import { CryoSleep } from './cards/colonies/CryoSleep';
 import { RimFreighters } from './cards/colonies/RimFreighters';
 import { SkyDocks } from './cards/colonies/SkyDocks';
+import { Conscription } from "./cards/colonies/Conscription";
+import { CommunityServices } from './cards/colonies/CommunityServices';
+import { CoronaExtractor } from './cards/colonies/CoronaExtractor';
+import { LunaGovernor } from './cards/colonies/LunaGovernor';
 
 
 
@@ -473,7 +477,11 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
 ];    
 
 export const ALL_COLONIES_PROJECTS_CARDS: Array<IProjectCard> = [
+        new CommunityServices(),
+        new Conscription(),
+        new CoronaExtractor(),
         new CryoSleep(),
+        new LunaGovernor(),
         new RimFreighters(),
         new SkyDocks()
 ]; 

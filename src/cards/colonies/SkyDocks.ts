@@ -12,7 +12,7 @@ export class SkyDocks implements IProjectCard {
 
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.EARTH) >= 2;
-      }
+    }
 
     public play(player: Player) {
         player.fleetSize++;

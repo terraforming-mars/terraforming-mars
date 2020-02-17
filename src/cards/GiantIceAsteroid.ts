@@ -7,7 +7,6 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { SelectOcean } from '../interrupts/SelectOcean';
 
 export class GiantIceAsteroid implements IProjectCard {
     public cost: number = 36;
@@ -18,8 +17,8 @@ export class GiantIceAsteroid implements IProjectCard {
 
     public play(player: Player, game: Game) {
 
-        game.addInterrupt(new SelectOcean(player, game, "Select space for first ocean"));
-        game.addInterrupt(new SelectOcean(player, game, "Select space for second ocean"));
+        game.addOceanInterrupt(player, "Select space for first ocean");
+        game.addOceanInterrupt(player, "Select space for second ocean");
 
         var opts: Array<SelectPlayer | SelectSpace> = [];
 

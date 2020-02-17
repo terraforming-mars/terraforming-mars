@@ -83,7 +83,7 @@ export class Philares implements CorporationCard {
         selectResources.onend = () => { 
             this.pendingResourcesToAdd = 0;
             if (philaresPlayer !== player) {
-                game.playerIsFinishedTakingActions(player);   
+                game.playerIsFinishedTakingActions();   
             } else {
                 player.takeAction(game);
             }

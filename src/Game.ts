@@ -32,8 +32,8 @@ import {CardName} from './CardName';
 import { ElysiumBoard } from './ElysiumBoard';
 import { HellasBoard } from './HellasBoard';
 import { BoardName } from './BoardName';
-import { GiantIceAsteroid } from './cards/GiantIceAsteroid';
 import { PlayerInterrupt } from './interrupts/PlayerInterrupt';
+import { SelectOcean } from './interrupts/SelectOcean';
 
 export class Game {
     public activePlayer: Player;
@@ -148,8 +148,16 @@ export class Game {
       }
     }
 
+    public addOceanInterrupt(player: Player, title: string): void {
+      if (this.board.getOceansOnBoard() + this.pendingOceans  >= constants.MAX_OCEAN_TILES) {
+        return;
+      }
+      this.pendingOceans++;
+      this.addInterrupt(new SelectOcean(player, this,title));
+    }
+
     public addInterrupt(interrupt: PlayerInterrupt): void {
-      this.interrupts.push(interrupt);
+        this.interrupts.push(interrupt);
     }
 
     public getPreludeExtension(): boolean {
@@ -281,7 +289,6 @@ export class Game {
       for (let i = 0; i < 10; i++) {
         dealtCards.push(this.dealer.dealCard());
       }
-      dealtCards.push(new GiantIceAsteroid());
 
       result.title = "Select corporation and initial cards";
       result.options.push(
@@ -471,7 +478,7 @@ export class Game {
 
     public playerHasPassed(player: Player): void {
       this.passedPlayers.add(player);
-      this.playerIsFinishedTakingActions(player);
+      this.playerIsFinishedTakingActions();
     }
 
     private hasResearched(player: Player): boolean {
@@ -573,12 +580,12 @@ export class Game {
       return players[(playerIndex + 1 >= players.length) ? 0 : playerIndex + 1];
     }
 
-    public playerIsFinishedTakingActions(_player: Player): void {
+    public playerIsFinishedTakingActions(): void {
 
       // Interrupt hook
       if (this.interrupts.length > 0) {
         let interrupt = this.interrupts.shift();
-        if (interrupt !== undefined) {
+        if (interrupt !== undefined && interrupt.playerInput !== undefined) {
           interrupt.player.setWaitingFor(interrupt.playerInput);
           return;
         }
@@ -601,7 +608,7 @@ export class Game {
         this.startActionsForPlayer(nextPlayer);
       } else {
         // Recursively find the next player
-        this.playerIsFinishedTakingActions(nextPlayer);
+        this.playerIsFinishedTakingActions();
       }
     }
 
@@ -983,9 +990,6 @@ export class Game {
       this.addTile(player, spaceType, this.getSpace(spaceId), {
         tileType: TileType.OCEAN
       });
-      if (this.pendingOceans > 0) {
-        this.pendingOceans--;
-      }
       player.terraformRating++;
     }
     public getPlayers(): Array<Player> {

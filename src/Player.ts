@@ -1399,7 +1399,7 @@ export class Player {
       return new SelectOption('End Turn', () => {
         this.actionsTakenThisRound = 0;
         this.lastCardPlayedThisTurn = undefined;
-        game.playerIsFinishedTakingActions(this);
+        game.playerIsFinishedTakingActions();
         return undefined;
       });
     }
@@ -1588,7 +1588,7 @@ export class Player {
       if (this.actionsTakenThisRound >= 2) {
         this.actionsTakenThisRound = 0;
         this.lastCardPlayedThisTurn = undefined;
-        game.playerIsFinishedTakingActions(this);
+        game.playerIsFinishedTakingActions();
         return;
       }         
 

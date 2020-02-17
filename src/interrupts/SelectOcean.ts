@@ -20,15 +20,16 @@ export class SelectOcean implements PlayerInterrupt {
             game.board.getAvailableSpacesForOcean(player),
             (space: ISpace) => {
                 game.addOceanTile(player, space.id);
-              return undefined;
+                game.pendingOceans--;
+                return undefined;
             }
         );
         this.playerInput.onend = () => { 
             if (game.activePlayer !== player) {
-                game.playerIsFinishedTakingActions(player);   
+                game.playerIsFinishedTakingActions();   
             } else {
                 player.takeAction(game);
             }
-          };
+        };
     };
 }    

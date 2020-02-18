@@ -962,6 +962,11 @@ export class Player {
         heat: number): void {
       this.megaCredits -= megaCredits;
       this.heat -= heat;
+
+      if (this.corporationCard !== undefined && this.corporationCard.onStandardProject!== undefined) {
+        this.corporationCard.onStandardProject(this, projectType);
+      }
+
       for (const playedCard of this.playedCards) {
         if (playedCard.onStandardProject !== undefined) {
           playedCard.onStandardProject(this, projectType);

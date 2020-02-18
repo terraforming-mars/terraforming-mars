@@ -350,6 +350,13 @@ import { Conscription } from "./cards/colonies/Conscription";
 import { CommunityServices } from './cards/colonies/CommunityServices';
 import { CoronaExtractor } from './cards/colonies/CoronaExtractor';
 import { LunaGovernor } from './cards/colonies/LunaGovernor';
+import { EarthElevator } from './cards/colonies/EarthElevator';
+import { LunarMining } from './cards/colonies/LunarMining';
+import { GalileanWaystation } from './cards/colonies/GalileanWaystation';
+import { ProductiveOutpost } from './cards/colonies/ProductiveOutpost';
+import { HeavyTaxation } from './cards/colonies/HeavyTaxation';
+import { SolarProbe } from './cards/colonies/SolarProbe';
+import { SolarReflectors } from './cards/colonies/SolarReflectors';
 
 
 
@@ -481,8 +488,15 @@ export const ALL_COLONIES_PROJECTS_CARDS: Array<IProjectCard> = [
         new Conscription(),
         new CoronaExtractor(),
         new CryoSleep(),
+        new EarthElevator(),
+        new HeavyTaxation(),
+        new LunarMining(),
+        new GalileanWaystation(),
+        new ProductiveOutpost(),
         new LunaGovernor(),
         new RimFreighters(),
+        new SolarProbe(),
+        new SolarReflectors(),
         new SkyDocks()
 ]; 
 

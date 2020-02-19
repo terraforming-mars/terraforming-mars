@@ -608,6 +608,7 @@ export class Game {
         this.startActionsForPlayer(nextPlayer);
       } else {
         // Recursively find the next player
+        this.activePlayer = nextPlayer;
         this.playerIsFinishedTakingActions();
       }
     }

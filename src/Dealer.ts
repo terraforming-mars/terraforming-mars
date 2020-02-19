@@ -357,6 +357,9 @@ import { ProductiveOutpost } from './cards/colonies/ProductiveOutpost';
 import { HeavyTaxation } from './cards/colonies/HeavyTaxation';
 import { SolarProbe } from './cards/colonies/SolarProbe';
 import { SolarReflectors } from './cards/colonies/SolarReflectors';
+import { WarpDrive } from './cards/colonies/WarpDrive';
+import { QuantumCommunications } from './cards/colonies/QuantumCommunications';
+import { SpinoffDepartment } from './cards/colonies/SpinoffDepartment';
 
 
 
@@ -493,11 +496,14 @@ export const ALL_COLONIES_PROJECTS_CARDS: Array<IProjectCard> = [
         new LunarMining(),
         new GalileanWaystation(),
         new ProductiveOutpost(),
+        new QuantumCommunications(),
         new LunaGovernor(),
         new RimFreighters(),
         new SolarProbe(),
         new SolarReflectors(),
-        new SkyDocks()
+        new SkyDocks(),
+        new SpinoffDepartment(),
+        new WarpDrive()
 ]; 
 
 export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [

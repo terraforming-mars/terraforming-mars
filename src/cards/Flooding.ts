@@ -9,7 +9,6 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
-import { SpaceType } from '../SpaceType';
 
 export class Flooding implements IProjectCard {
   public cardType: CardType = CardType.EVENT;
@@ -24,7 +23,7 @@ export class Flooding implements IProjectCard {
           const adjacentPlayers: Array<Player> = [];
           game.addOceanTile(player, space.id);
           game.board.getAdjacentSpaces(space).forEach((space) => {
-            if (space.player && space.player != player && space.spaceType != SpaceType.OCEAN) {
+            if (space.player && space.player != player) {
               adjacentPlayers.push(space.player);
             }
           });

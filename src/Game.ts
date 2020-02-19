@@ -108,7 +108,7 @@ export class Game {
         this.setupSolo();
       }
 
-      let corporationCards = ALL_CORPORATION_CARDS;
+      let corporationCards = ALL_CORPORATION_CARDS.slice();
       // Add prelude corporations cards
       if (this.preludeExtension) {
         corporationCards.push(...ALL_PRELUDE_CORPORATIONS);

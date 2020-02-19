@@ -8,7 +8,6 @@ import { BiomassCombustors } from "../../src/cards/BiomassCombustors";
 import { SelectPlayer } from "../../src/inputs/SelectPlayer";
 import { NoctisFarming } from "../../src/cards/NoctisFarming";
 import { FuelFactory } from "../../src/cards/FuelFactory";
-import { TitaniumMine } from "../../src/cards/TitaniumMine";
 import { FoodFactory } from "../../src/cards/FoodFactory";
 import { HeatTrappers } from "../../src/cards/HeatTrappers";
 import { Resources } from '../../src/Resources';
@@ -26,7 +25,6 @@ describe("RoboticWorkforce", function () {
         const selectPlayer = action!.cb([player.playedCards[0]]) as SelectPlayer;
         expect(function () { selectPlayer.cb(player); }).to.throw("Player must have plant production");
         expect(function () { action!.cb([new FuelFactory()]); }).to.throw("not enough energy production");
-        expect(function () { action!.cb([new TitaniumMine()]); }).to.throw("not enough titanium production");
         expect(function () { action!.cb([new FoodFactory()]); }).to.throw("not enough plant production");
         expect(function () { action!.cb([new HeatTrappers()]); }).to.throw("not enough heat production");
     });

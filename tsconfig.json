@@ -28,7 +28,8 @@
     "src/inputs/*.ts",
     "src/models/*.ts",
     "script.ts",
-    "server.ts"
+    "server.ts",
+    "src/interrupts/*.ts"
   ],
   "files": [
     "script.ts",

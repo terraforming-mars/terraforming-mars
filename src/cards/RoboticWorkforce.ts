@@ -204,7 +204,7 @@ export class RoboticWorkforce implements IProjectCard {
                     [new NoctisFarming().name]: new Updater(0, 1, 0, 0, 0, 0),
                     [new SoilFactory().name]: new Updater(-1, 0, 0, 0, 1, 0),
                     [new FoodFactory().name]: new Updater(0, 4, 0, 0, -1, 0),
-                    [new TitaniumMine().name]: new Updater(0, 0, 0, -1, 0, 0),
+                    [new TitaniumMine().name]: new Updater(0, 0, 0, 1, 0, 0),
                     [new FusionPower().name]: new Updater(3, 0, 0, 0, 0, 0),
                     [new FuelFactory().name]: new Updater(-1, 1, 0, 1, 0, 0),
                     [new ProtectedValley().name]: new Updater(0, 2, 0, 0, 0, 0),

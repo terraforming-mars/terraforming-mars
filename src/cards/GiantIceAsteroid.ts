@@ -7,8 +7,6 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { ISpace } from "../ISpace";
-import * as constants from "../constants";
 
 export class GiantIceAsteroid implements IProjectCard {
     public cost: number = 36;
@@ -18,6 +16,10 @@ export class GiantIceAsteroid implements IProjectCard {
 
 
     public play(player: Player, game: Game) {
+
+        game.addOceanInterrupt(player, "Select space for first ocean");
+        game.addOceanInterrupt(player, "Select space for second ocean");
+
         var opts: Array<SelectPlayer | SelectSpace> = [];
 
         const playersToRemovePlantsFrom = player.getOtherPlayersWithPlantsToRemove(game);
@@ -37,34 +39,6 @@ export class GiantIceAsteroid implements IProjectCard {
                     )
                 )
             }
-        }
-
-        let oceansCount = game.board.getOceansOnBoard();
-
-        if (oceansCount + 1 <= constants.MAX_OCEAN_TILES) {
-            opts.push(
-                new SelectSpace(
-                    "Select space for ocean tile", 
-                    game.board.getAvailableSpacesForOcean(player), 
-                    (space: ISpace) => {
-                        game.addOceanTile(player, space.id);
-                        return undefined;
-                    }
-                )
-            )
-        }
-
-        if (oceansCount + 2 <= constants.MAX_OCEAN_TILES) {
-            opts.push(
-                new SelectSpace(
-                    "Select space for second ocean tile", 
-                    game.board.getAvailableSpacesForOcean(player), 
-                    (space: ISpace) => {
-                        game.addOceanTile(player, space.id);
-                        return undefined;
-                    }
-                )
-            )
         }
 
         if (opts.length === 0) {

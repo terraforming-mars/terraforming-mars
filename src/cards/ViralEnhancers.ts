@@ -14,19 +14,20 @@ export class ViralEnhancers implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
 
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
-        if (card.tags.find((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES) !== undefined && card.resourceType !== undefined) {
+        let resourceCount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES).length;
+        if (resourceCount > 0 && card.resourceType !== undefined) {
             return new OrOptions(
-                new SelectOption("Add resource to card " + card.name, () => {
-                    player.addResourceTo(card);
+                new SelectOption("Add " + resourceCount + " resource(s) to card " + card.name, () => {
+                    player.addResourceTo(card, resourceCount);
                     return undefined;
                 }),
-                new SelectOption("Gain 1 plant", () => {
-                    player.plants++;
+                new SelectOption("Gain " + resourceCount + " plant(s)", () => {
+                    player.plants += resourceCount;
                     return undefined;
                 })
             );
         }
-        player.plants++;
+        player.plants += resourceCount;
         return undefined;
     }
     public play() {

@@ -272,6 +272,7 @@ export class Player {
         this.resourcesOnCards.set(card.name, count);
       }
     }
+   
     public getCardsWithResources(): Array<ICard> {
       return this.playedCards.filter(
           (card) => Number(this.resourcesOnCards.get(card.name)) > 0
@@ -962,6 +963,11 @@ export class Player {
         heat: number): void {
       this.megaCredits -= megaCredits;
       this.heat -= heat;
+
+      if (this.corporationCard !== undefined && this.corporationCard.onStandardProject!== undefined) {
+        this.corporationCard.onStandardProject(this, projectType);
+      }
+
       for (const playedCard of this.playedCards) {
         if (playedCard.onStandardProject !== undefined) {
           playedCard.onStandardProject(this, projectType);
@@ -1398,7 +1404,7 @@ export class Player {
       return new SelectOption('End Turn', () => {
         this.actionsTakenThisRound = 0;
         this.lastCardPlayedThisTurn = undefined;
-        game.playerIsFinishedTakingActions(this);
+        game.playerIsFinishedTakingActions();
         return undefined;
       });
     }
@@ -1587,7 +1593,7 @@ export class Player {
       if (this.actionsTakenThisRound >= 2) {
         this.actionsTakenThisRound = 0;
         this.lastCardPlayedThisTurn = undefined;
-        game.playerIsFinishedTakingActions(this);
+        game.playerIsFinishedTakingActions();
         return;
       }         
 

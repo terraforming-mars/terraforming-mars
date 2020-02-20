@@ -23,7 +23,7 @@ export class Flooding implements IProjectCard {
           const adjacentPlayers: Array<Player> = [];
           game.addOceanTile(player, space.id);
           game.board.getAdjacentSpaces(space).forEach((space) => {
-            if (space.player) {
+            if (space.player && space.player != player) {
               adjacentPlayers.push(space.player);
             }
           });

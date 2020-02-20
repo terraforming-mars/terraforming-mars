@@ -21,7 +21,7 @@ import {ResourceType} from './ResourceType';
 import * as constants from './constants';
 import {Color} from './Color';
 import {IAward} from './awards/IAward';
-import {Tags} from './cards/Tags';
+import { Tags } from './cards/Tags';
 import {Resources} from "./Resources";
 import { ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES } from './milestones/Milestones';
 import { ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS } from './awards/Awards';
@@ -36,6 +36,8 @@ import { IColony } from './colonies/Colony';
 import { ColonyDealer } from './colonies/ColonyDealer';
 import { PlayerInterrupt } from './interrupts/PlayerInterrupt';
 import { SelectOcean } from './interrupts/SelectOcean';
+import { SelectResourceCard } from './interrupts/SelectResourceCard';
+import { SelectColony } from './interrupts/SelectColony';
 
 
 export class Game {
@@ -165,6 +167,26 @@ export class Game {
       }
       this.pendingOceans++;
       this.addInterrupt(new SelectOcean(player, this,title));
+    }
+
+    public addColonyInterrupt(player: Player, allowDuplicate: boolean = false, title: string): void {
+      let openColonies = this.colonies.filter(colony => colony.colonies.length < 3 
+        && (colony.colonies.indexOf(player) === -1 || allowDuplicate)
+        && colony.isActive);
+      if (openColonies.length >0 ) {
+        this.addInterrupt(new SelectColony(player, this, openColonies, title));
+      }  
+    }  
+
+    public addResourceInterrupt(player: Player, resourceType: ResourceType, count: number = 1, restrictedTag?: Tags, title?: string): void {
+      let resourceCards = player.getResourceCards(resourceType);
+      if (restrictedTag !== undefined) {
+        resourceCards = resourceCards.filter(card => card.tags.filter((cardTag) => cardTag === restrictedTag).length > 0 );
+      }
+      if (resourceCards.length === 0) {
+        return;
+      }
+      this.addInterrupt(new SelectResourceCard(player, this, resourceType, title, count));
     }
 
     public addInterrupt(interrupt: PlayerInterrupt): void {
@@ -569,6 +591,7 @@ export class Game {
         nextPlayer = this.getPreviousPlayer(this.players, player);
       }  
       if (nextPlayer !== undefined) {
+        console.log("Generation " + this.generation +" Current player is :" + player.name + "Cards passed to " + nextPlayer.name);
         return nextPlayer;
       }
       return player;

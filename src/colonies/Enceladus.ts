@@ -17,15 +17,15 @@ export class Enceladus extends Colony implements IColony {
         } else {
             microbes = this.trackPosition;
         }
-        player.addResourceToSelector(ResourceType.MICROBE, microbes, game);
+        game.addResourceInterrupt(player, ResourceType.MICROBE, microbes);
         this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);
-        player.addResourceToSelector(ResourceType.MICROBE, 3, game);
+        game.addResourceInterrupt(player, ResourceType.MICROBE, 3);
         return undefined;
     }
     public giveTradeBonus(player: Player, game: Game): void {
-        player.addResourceToSelector(ResourceType.MICROBE, 1, game);
+        game.addResourceInterrupt(player, ResourceType.MICROBE);
     }    
 }

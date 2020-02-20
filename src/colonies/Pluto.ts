@@ -2,6 +2,7 @@ import { Colony, IColony } from './Colony';
 import { Player } from '../Player';
 import { ColonyName } from './ColonyName';
 import { Game } from '../Game';
+import { SelectDiscard } from '../interrupts/SelectDiscard';
 
 export class Pluto extends Colony implements IColony {
     public name = ColonyName.PLUTO;
@@ -29,6 +30,6 @@ export class Pluto extends Colony implements IColony {
     }
     public giveTradeBonus(player: Player, game: Game): void {
         player.cardsInHand.push(game.dealer.dealCard());
-        player.discardCardSelector(game);
+        game.addInterrupt(new SelectDiscard(player, game, 'Pluto colony bonus. Select a card to discard'));
     }    
 }

@@ -360,6 +360,19 @@ import { SolarReflectors } from './cards/colonies/SolarReflectors';
 import { WarpDrive } from './cards/colonies/WarpDrive';
 import { QuantumCommunications } from './cards/colonies/QuantumCommunications';
 import { SpinoffDepartment } from './cards/colonies/SpinoffDepartment';
+import { IceMoonColony } from './cards/colonies/IceMoonColony';
+import { InterplanetaryColonyShip } from './cards/colonies/InterplanetaryColonyShip';
+import { MiningColony } from './cards/colonies/MiningColony';
+import { MinorityRefuge } from './cards/colonies/MinorityRefuge';
+import { PioneerSettlement } from './cards/colonies/PioneerSettlement';
+import { ResearchColony } from './cards/colonies/ResearchColony';
+import { SpacePortColony } from './cards/colonies/SpacePortColony';
+import { TradingColony } from './cards/colonies/TradingColony';
+import { Airliners } from './cards/colonies/Airliners';
+import { FloaterPrototypes } from './cards/colonies/FloaterPrototypes';
+import { FloaterLeasing } from './cards/colonies/FloaterLeasing';
+import { FloaterTechnology } from './cards/colonies/FloaterTechnology';
+import { NitrogenFromTitan } from './cards/colonies/NitrogenFromTitan';
 
 
 
@@ -487,22 +500,35 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
 ];    
 
 export const ALL_COLONIES_PROJECTS_CARDS: Array<IProjectCard> = [
+        new Airliners(),
         new CommunityServices(),
         new Conscription(),
         new CoronaExtractor(),
         new CryoSleep(),
         new EarthElevator(),
+        new FloaterLeasing(),
+        new FloaterPrototypes(),
+        new FloaterTechnology(),
         new HeavyTaxation(),
+        new IceMoonColony(),
+        new InterplanetaryColonyShip(),
         new LunarMining(),
         new GalileanWaystation(),
+        new MiningColony(),
+        new MinorityRefuge(),
+        new NitrogenFromTitan(),
+        new PioneerSettlement(),
         new ProductiveOutpost(),
         new QuantumCommunications(),
         new LunaGovernor(),
+        new ResearchColony(),
         new RimFreighters(),
         new SolarProbe(),
         new SolarReflectors(),
         new SkyDocks(),
+        new SpacePortColony(),
         new SpinoffDepartment(),
+        new TradingColony(),
         new WarpDrive()
 ]; 
 

@@ -20,7 +20,7 @@ export class Europa extends Colony implements IColony {
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);
-        player.oceanSelector(game);
+        game.addOceanInterrupt(player, 'Select ocean for Europa colony')
         return undefined;
     }
     public giveTradeBonus(player: Player): void {

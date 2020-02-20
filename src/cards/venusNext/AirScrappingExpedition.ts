@@ -14,7 +14,8 @@ export class AirScrappingExpedition implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player) {
-        const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+        let floaterCards = player.getResourceCards(ResourceType.FLOATER);
+        floaterCards = floaterCards.filter(card => card.tags.filter((cardTag) => cardTag === Tags.VENUS).length > 0 );
         if (floaterCards.length === 0) {
             return undefined;
         }   

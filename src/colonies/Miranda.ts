@@ -19,12 +19,12 @@ export class Miranda extends Colony implements IColony {
         } else {
             animals = 3;
         }
-        player.addResourceToSelector(ResourceType.ANIMAL, animals, game);
+        game.addResourceInterrupt(player, ResourceType.ANIMAL, animals);
         this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);
-        player.addResourceToSelector(ResourceType.ANIMAL, 1, game);
+        game.addResourceInterrupt(player, ResourceType.ANIMAL);
         return undefined;
     }
     public giveTradeBonus(player: Player, game: Game): void {

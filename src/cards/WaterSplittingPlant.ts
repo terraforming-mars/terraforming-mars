@@ -10,7 +10,6 @@ export class WaterSplittingPlant implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: string = "Water Splitting Plant";
     public cardType: CardType = CardType.ACTIVE;
-    public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         return game.board.getOceansOnBoard() >= 2 - player.getRequirementsBonus(game);
     }

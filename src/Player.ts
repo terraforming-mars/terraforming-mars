@@ -298,7 +298,7 @@ export class Player {
 
       selectCard.onend = () => { 
         if (game.activePlayer !== this) {
-            game.playerIsFinishedTakingActions(this);   
+            game.playerIsFinishedTakingActions();   
         } else {
             this.takeAction(game);
         }
@@ -325,7 +325,7 @@ export class Player {
 
       selectOcean.onend = () => { 
         if (game.activePlayer !== this) {
-            game.playerIsFinishedTakingActions(this);   
+            game.playerIsFinishedTakingActions();   
         } else {
             this.takeAction(game);
         }
@@ -346,7 +346,7 @@ export class Player {
 
       selectCard.onend = () => { 
         if (game.activePlayer !== this) {
-            game.playerIsFinishedTakingActions(this);   
+            game.playerIsFinishedTakingActions();   
         } else {
             this.takeAction(game);
         }
@@ -1053,6 +1053,11 @@ export class Player {
         heat: number): void {
       this.megaCredits -= megaCredits;
       this.heat -= heat;
+
+      if (this.corporationCard !== undefined && this.corporationCard.onStandardProject!== undefined) {
+        this.corporationCard.onStandardProject(this, projectType);
+      }
+
       for (const playedCard of this.playedCards) {
         if (playedCard.onStandardProject !== undefined) {
           playedCard.onStandardProject(this, projectType);
@@ -1606,7 +1611,7 @@ export class Player {
       return new SelectOption('End Turn', () => {
         this.actionsTakenThisRound = 0;
         this.lastCardPlayedThisTurn = undefined;
-        game.playerIsFinishedTakingActions(this);
+        game.playerIsFinishedTakingActions();
         return undefined;
       });
     }
@@ -1807,7 +1812,7 @@ export class Player {
       if (this.actionsTakenThisRound >= 2) {
         this.actionsTakenThisRound = 0;
         this.lastCardPlayedThisTurn = undefined;
-        game.playerIsFinishedTakingActions(this);
+        game.playerIsFinishedTakingActions();
         return;
       }         
 

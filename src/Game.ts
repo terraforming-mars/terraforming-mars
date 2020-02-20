@@ -34,11 +34,9 @@ import { HellasBoard } from './HellasBoard';
 import { BoardName } from './BoardName';
 import { IColony } from './colonies/Colony';
 import { ColonyDealer } from './colonies/ColonyDealer';
+import { PlayerInterrupt } from './interrupts/PlayerInterrupt';
+import { SelectOcean } from './interrupts/SelectOcean';
 
-export interface PlayerInterrupt {
-  player: Player,
-  playerInput: PlayerInput
-}
 
 export class Game {
     public activePlayer: Player;
@@ -114,7 +112,7 @@ export class Game {
         this.setupSolo();
       }
 
-      let corporationCards = ALL_CORPORATION_CARDS;
+      let corporationCards = ALL_CORPORATION_CARDS.slice();
       // Add prelude corporations cards
       if (this.preludeExtension) {
         corporationCards.push(...ALL_PRELUDE_CORPORATIONS);
@@ -159,6 +157,18 @@ export class Game {
           this.playCorporationCard(player, new BeginnerCorporation());
         }
       }
+    }
+
+    public addOceanInterrupt(player: Player, title: string): void {
+      if (this.board.getOceansOnBoard() + this.pendingOceans  >= constants.MAX_OCEAN_TILES) {
+        return;
+      }
+      this.pendingOceans++;
+      this.addInterrupt(new SelectOcean(player, this,title));
+    }
+
+    public addInterrupt(interrupt: PlayerInterrupt): void {
+        this.interrupts.push(interrupt);
     }
 
     public getPreludeExtension(): boolean {
@@ -490,7 +500,7 @@ export class Game {
 
     public playerHasPassed(player: Player): void {
       this.passedPlayers.add(player);
-      this.playerIsFinishedTakingActions(player);
+      this.playerIsFinishedTakingActions();
     }
 
     private hasResearched(player: Player): boolean {
@@ -592,12 +602,13 @@ export class Game {
       return players[(playerIndex + 1 >= players.length) ? 0 : playerIndex + 1];
     }
 
-    public playerIsFinishedTakingActions(_player: Player): void {
+
+    public playerIsFinishedTakingActions(): void {
 
       // Interrupt hook
       if (this.interrupts.length > 0) {
         let interrupt = this.interrupts.shift();
-        if (interrupt !== undefined) {
+        if (interrupt !== undefined && interrupt.playerInput !== undefined) {
           interrupt.player.setWaitingFor(interrupt.playerInput);
           return;
         }
@@ -609,7 +620,6 @@ export class Game {
       }
 
       const nextPlayer = this.getNextPlayer(this.players, this.activePlayer);
-      // CURRENT const nextPlayer = this.getNextPlayer(this.players, player);
 
       // Defensive coding to fail fast, if we don't find the next
       // player we are in an unexpected game state
@@ -621,7 +631,8 @@ export class Game {
         this.startActionsForPlayer(nextPlayer);
       } else {
         // Recursively find the next player
-        this.playerIsFinishedTakingActions(nextPlayer);
+        this.activePlayer = nextPlayer;
+        this.playerIsFinishedTakingActions();
       }
     }
 
@@ -939,7 +950,11 @@ export class Game {
             `Select a valid location ${space.spaceType} is not ${spaceType}`
         );
       }
-      space.player = player;
+
+      if (tile.tileType !== TileType.OCEAN) {
+        space.player = player;
+      }
+
       space.tile = tile;
       space.bonus.forEach((spaceBonus) => {
         if (spaceBonus === SpaceBonus.DRAW_CARD) {

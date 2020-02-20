@@ -29,8 +29,6 @@ describe("EcologicalZone", function () {
         action.cb(adjacentSpace);
         expect(adjacentSpace.tile && adjacentSpace.tile.tileType).to.eq(TileType.SPECIAL); 
         card.onCardPlayed(player, game, card);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
-        card.onCardPlayed(player, game, card);
         expect(player.getResourcesOnCard(card)).to.eq(2);
         expect(card.getVictoryPoints(player)).to.eq(1);
         card.onCardPlayed(player, game, new Virus());

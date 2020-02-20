@@ -38,10 +38,7 @@ export class EcologicalZone implements IProjectCard {
     return this.hasGreeneryTile(player, game);
   }
   public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
-    if (card.tags.indexOf(Tags.ANIMAL) !== -1 ||
-          card.tags.indexOf(Tags.PLANT) !== -1) {
-      player.addResourceTo(this);
-    }
+      player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT).length);
   }
   public getVictoryPoints(player: Player): number {
     return Math.floor(player.getResourcesOnCard(this) / 2);

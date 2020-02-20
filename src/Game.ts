@@ -360,8 +360,8 @@ export class Game {
         if (this.draftRound === 1) {
           player.runDraftPhase(this,this.getNextDraft(player).name);
         } else {
-          let cards = this.unDraftedCards.get(this.getNextDraft(player));
-          this.unDraftedCards.delete(this.getNextDraft(player));
+          let cards = this.unDraftedCards.get(this.getDraftCardsFrom(player));
+          this.unDraftedCards.delete(this.getDraftCardsFrom(player));
           player.runDraftPhase(this, this.getNextDraft(player).name, cards);
         }
       });

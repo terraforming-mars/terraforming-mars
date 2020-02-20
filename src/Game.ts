@@ -916,7 +916,11 @@ export class Game {
             `Select a valid location ${space.spaceType} is not ${spaceType}`
         );
       }
-      space.player = player;
+
+      if (tile.tileType !== TileType.OCEAN) {
+        space.player = player;
+      }
+
       space.tile = tile;
       space.bonus.forEach((spaceBonus) => {
         if (spaceBonus === SpaceBonus.DRAW_CARD) {

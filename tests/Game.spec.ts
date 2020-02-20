@@ -14,6 +14,7 @@ import { Phase } from "../src/Phase";
 import { maxOutOceans } from "./TestingUtils";
 import { SaturnSystems } from "../src/cards/corporation/SaturnSystems";
 import { Resources } from '../src/Resources';
+import { ISpace } from "../src/ISpace";
 
 describe("Game", function () {
     it("should initialize with right defaults", function () {
@@ -216,5 +217,15 @@ describe("Game", function () {
         const card = new SaturnSystems();
         player1.corporationCard = card;
         expect(game.getCardPlayer(card.name)).to.eq(player1);
+    });
+
+    it("Does not assign player to ocean after placement", function() {
+        const player1 = new Player("oc_p1", Color.BLUE, false);
+        const game = new Game("oceanz", [player1], player1);
+        const spaceId: string = game.board.getAvailableSpacesForOcean(player1)[0].id;
+        game.addOceanTile(player1, spaceId);
+
+        const space: ISpace = game.getSpace(spaceId);
+        expect(space.player).to.eq(undefined);
     });
 });

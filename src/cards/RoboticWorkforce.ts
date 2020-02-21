@@ -59,6 +59,7 @@ import { Windmills } from "./Windmills";
 import { HousePrinting } from "./prelude/HousePrinting";
 import { LavaTubeSettlement } from "./prelude/LavaTubeSettlement";
 import { Resources } from '../Resources';
+import { SpacePort } from './colonies/SpacePort';
 
 export class RoboticWorkforce implements IProjectCard {
     public cost: number = 9;
@@ -118,7 +119,8 @@ export class RoboticWorkforce implements IProjectCard {
             new UrbanizedArea(),
             new Windmills(),
             new HousePrinting(),
-            new LavaTubeSettlement()
+            new LavaTubeSettlement(),
+            new SpacePort()
         ];
         const availableCards = player.playedCards.filter((card) => {
             for (let i = 0; i < builderCards.length; i++) {
@@ -211,7 +213,8 @@ export class RoboticWorkforce implements IProjectCard {
                     [new MoholeArea().name]: new Updater(0, 0, 0, 0, 0, 4),
                     [new NaturalPreserve().name]: new Updater(1, 0, 0, 0, 0, 0),
                     [new HousePrinting().name]: new Updater(0, 0, 1, 0, 0, 0),
-                    [new LavaTubeSettlement().name]: new Updater(-1, 2, 0, 0, 0, 0)
+                    [new LavaTubeSettlement().name]: new Updater(-1, 2, 0, 0, 0, 0),
+                    [new SpacePort().name]: new Updater(-1, 4, 0, 0, 0, 0)
                  }[foundCard.name];
 
                 if (!updater) {

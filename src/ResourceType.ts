@@ -6,6 +6,7 @@ export enum ResourceType {
     SCIENCE,
     FLOATER,
     ASTEROID,
-    PRESERVATION
+    PRESERVATION,
+    CAMP
 }
 

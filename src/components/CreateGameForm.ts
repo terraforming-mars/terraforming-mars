@@ -12,6 +12,7 @@ interface CreateGameModel {
     prelude: boolean;
     draftVariant: boolean;
     venusNext: boolean;
+    colonies: boolean;
     customCorporationsList: boolean;
     corporations: Array<CorporationCard>;
     displayed: boolean;
@@ -39,6 +40,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             prelude: false,
             draftVariant: false,
             venusNext: false,
+            colonies: false,
             customCorporationsList: false,
             corporations: [...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS, ...ALL_TURMOIL_CORPORATIONS, ...ALL_PROMO_CORPORATIONS],
             displayed: false,
@@ -84,6 +86,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const prelude = this.$data.prelude;
             const draftVariant = this.$data.draftVariant;
             const venusNext = this.$data.venusNext;
+            const colonies = this.$data.colonies;
             const corporations = this.$data.corporations;
             const customCorporationsList = this.$data.customCorporationsList;
             const board =  this.$data.board;
@@ -103,7 +106,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             };
             xhr.responseType = "json";
             xhr.send(JSON.stringify({
-                players: players, prelude, draftVariant, venusNext, customCorporationsList, corporations, board
+                players: players, prelude, draftVariant, venusNext, colonies, customCorporationsList, corporations, board
             }));
         }
     },
@@ -144,7 +147,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <label>
                         <input type="checkbox" class="nes-checkbox" v-model="venusNext" />
                         <span>Use Venus Next extension ?</span>
-                </label>			
+                </label>	
+                <label>
+                        <input type="checkbox" class="nes-checkbox" v-model="colonies" />
+                        <span>Use Colonies extension ?</span>
+                 </label>		
                 <label>
                         <input type="checkbox" class="nes-checkbox" v-model="draftVariant" />
                         <span>Use draft variant ?</span>

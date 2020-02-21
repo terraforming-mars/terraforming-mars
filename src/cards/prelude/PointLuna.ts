@@ -12,7 +12,9 @@ export class PointLuna implements CorporationCard {
     public startingMegaCredits: number = 41; //Should be 38 but the drawed card when played is payed 3 MC
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
         if (player.corporationCard !== undefined && player.corporationCard.name === this.name && card.tags.indexOf(Tags.EARTH) !== -1) {
-			player.cardsInHand.push(game.dealer.dealCard());
+            for (let i = 0; i < card.tags.filter(tag => tag === Tags.EARTH).length; i++) {
+                player.cardsInHand.push(game.dealer.dealCard());
+            }
         }
     }
     public play(player: Player, game: Game) {

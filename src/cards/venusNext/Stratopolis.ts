@@ -31,8 +31,7 @@ export class Stratopolis implements IActionCard, IProjectCard {
 
     public getResCards(player: Player): ICard[] {
         let resourceCards = player.getResourceCards(ResourceType.FLOATER);
-        resourceCards.filter(card => card.tags.filter((cardTag) => cardTag === Tags.VENUS));
-        return resourceCards;
+        return resourceCards.filter(card => card.tags.filter((cardTag) => cardTag === Tags.VENUS).length > 0);
     }
 
     public canAct(): boolean {

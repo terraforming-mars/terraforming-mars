@@ -31,7 +31,7 @@ Thanks goes to these wonderful people:
     </td>
     <td align="center">
       <a href="https://github.com/vincentneko"><img src="https://avatars1.githubusercontent.com/u/56086992?v=3" width="100px;" alt=""/><br />
-        <sub><b>Vincent Moreau</b></sub><br />Venus and Prelude</a>
+        <sub><b>Vincent Moreau</b></sub><br />Venus, Prelude, Hellas & Elysium, Colonies</a>
     </td>
     <td align="center">
       <a href="https://github.com/alrusdi"><img src="https://avatars2.githubusercontent.com/u/394311?v=3" width="100px;" alt=""/><br />

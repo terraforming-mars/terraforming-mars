@@ -23,8 +23,8 @@ export class MartianZoo implements IProjectCard {
         return game.getCitiesInPlay() >= 2;
     }
 
-    public canAct(): boolean {
-        return true;
+    public canAct(player: Player): boolean {
+        return player.getResourcesOnCard(this) > 0;
     }
 
     public action(player: Player, _game: Game) {

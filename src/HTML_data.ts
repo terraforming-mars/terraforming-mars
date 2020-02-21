@@ -4337,6 +4337,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.ATMO_COLLECTORS,`
             <div class="title background-color-active ">Atmo Collectors</div>
             <div class="price ">15</div>
+            ##RESOURCES##
             <div class="colonies-icon project-icon"></div>
             <div class="card-number">C03</div>
             <div class="content ">
@@ -4571,6 +4572,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.JOVIAN_LANTERNS,`
             <div class="title background-color-active ">Jovian Lanterns</div>
             <div class="price ">20</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-jovian "></div>
             <div class="colonies-icon project-icon"></div>
             <div class="card-number">C18</div>
@@ -4590,6 +4592,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.JUPITER_FLOATING_STATION,`
             <div class="title background-color-active ">Jupiter Floating Station</div>
             <div class="price ">9</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-jovian "></div>
             <div class="colonies-icon project-icon"></div>
             <div class="card-number">C19</div>
@@ -4666,6 +4669,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.MARTIAN_ZOO,`
               <div class="title background-color-active ">Martian Zoo</div>
               <div class="price ">12</div>
+              ##RESOURCES##
               <div class="tag tag1 tag-building"></div>
               <div class="tag tag2 tag-animal"></div>
               <div class="colonies-icon project-icon"></div>
@@ -4792,6 +4796,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.RED_SPOT_OBSERVATORY,`
             <div class="title background-color-active ">Red Spot Observatory</div>
             <div class="price ">17</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-jovian "></div>
             <div class="tag tag2 tag-science "></div>
             <div class="colonies-icon project-icon"></div>
@@ -4813,6 +4818,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.REFUGEE_CAMP,`
               <div class="title background-color-active ">Refugee Camps</div>
               <div class="price ">10</div>
+              ##RESOURCES##
               <div class="tag tag1 tag-earth"></div>
               <div class="colonies-icon project-icon"></div>
               <div class="card-number">C33</div>
@@ -4963,6 +4969,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.SUBZERO_SALT_FISH,`
             <div class="title background-color-active">Sub-Zero Salt Fish</div>
             <div class="price">5</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-animal"></div>
             <div class="colonies-icon project-icon"></div>
             <div class="card-number">C42</div>
@@ -4986,6 +4993,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.TITAN_AIRSCRAPPING,`
             <div class="title background-color-active ">Titan Air-scrapping</div>
             <div class="price ">21</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-jovian "></div>
             <div class="colonies-icon project-icon"></div>
             <div class="card-number">C43</div>
@@ -5001,6 +5009,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.TITAN_FLOATER_LAUNCHPAD,`
             <div class="title background-color-active ">Titan Floating Launch-Pad</div>
             <div class="price ">18</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-jovian "></div>
             <div class="colonies-icon project-icon"></div>
             <div class="card-number">C44</div>
@@ -5022,6 +5031,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.TITAN_SHUTTLES,`
             <div class="title background-color-active ">Titan Shuttles</div>
             <div class="price ">23</div>
+            ##RESOURCES##
             <div class="tag tag1 tag-space "></div>
             <div class="tag tag2 tag-jovian "></div>
             <div class="colonies-icon project-icon"></div>

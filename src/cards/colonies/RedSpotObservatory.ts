@@ -19,6 +19,10 @@ export class RedSpotObservatory implements IProjectCard {
         return true;
     }
 
+    public canPlay(player: Player): boolean {
+        return player.getTagCount(Tags.SCIENCE) >= 3;
+    }
+
     public action(player: Player, game: Game) {
         var opts: Array<SelectOption> = [];
         const addResource = new SelectOption("Add 1 floater on this card", () => {

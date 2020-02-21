@@ -360,8 +360,8 @@ export class Game {
         if (this.draftRound === 1) {
           player.runDraftPhase(this,this.getNextDraft(player).name);
         } else {
-          let cards = this.unDraftedCards.get(this.getNextDraft(player));
-          this.unDraftedCards.delete(this.getNextDraft(player));
+          let cards = this.unDraftedCards.get(this.getDraftCardsFrom(player));
+          this.unDraftedCards.delete(this.getDraftCardsFrom(player));
           player.runDraftPhase(this, this.getNextDraft(player).name, cards);
         }
       });
@@ -531,7 +531,7 @@ export class Game {
         // Push last card for each player
         if (cards.length === 1) {
           this.players.forEach((player) => {
-            let lastCards  = this.unDraftedCards.get(this.getNextDraft(player));
+            let lastCards  = this.unDraftedCards.get(this.getDraftCardsFrom(player));
             if (lastCards !== undefined && lastCards[0] !== undefined) {
               player.draftedCards.push(lastCards[0]);
             }
@@ -539,6 +539,17 @@ export class Game {
         }
         this.gotoResearchPhase();
       }
+    }
+
+    public getDraftCardsFrom(player: Player): Player {
+      let nextPlayer = this.getPreviousPlayer(this.players, player);
+      if (this.generation%2 === 1) {
+        nextPlayer = this.getNextPlayer(this.players, player);
+      }  
+      if (nextPlayer !== undefined) {
+        return nextPlayer;
+      }
+      return player;
     }
 
     public getNextDraft(player: Player): Player {

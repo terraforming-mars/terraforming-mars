@@ -16,7 +16,7 @@ export class SelectResourceCard implements PlayerInterrupt {
         public count: number = 1
     ){
         if (title === undefined) {
-            title = 'Select card to add ' + count + ' ' + resourceType.toString + ' resource';
+            title = 'Select card to add ' + count + ' ' + resourceType + ' resource';
         }
         let resourceCards = player.getResourceCards(resourceType);
         this.playerInput = new SelectCard(

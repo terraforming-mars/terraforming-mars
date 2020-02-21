@@ -19,6 +19,7 @@ export interface IColony {
     giveTradeBonus: (player: Player, game: Game) => void;
     endGeneration: () => void;
     increaseTrack(value?: number): void;
+    decreaseTrack(value?: number): void;
 }
 
 export abstract class Colony  {
@@ -41,6 +42,16 @@ export abstract class Colony  {
         }    
         if (this.trackPosition > 6) this.trackPosition = 6;
     }
+
+    public decreaseTrack(value?: number): void {
+        if (value === undefined) {
+            this.trackPosition--;
+        } else {
+            this.trackPosition -= value;
+        }    
+        if (this.trackPosition < this.colonies.length) this.trackPosition = this.colonies.length;
+    }
+
     public isColonyFull(): boolean {
         return this.colonies.length >= 3;
     }

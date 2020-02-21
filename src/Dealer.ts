@@ -373,6 +373,24 @@ import { FloaterPrototypes } from './cards/colonies/FloaterPrototypes';
 import { FloaterLeasing } from './cards/colonies/FloaterLeasing';
 import { FloaterTechnology } from './cards/colonies/FloaterTechnology';
 import { NitrogenFromTitan } from './cards/colonies/NitrogenFromTitan';
+import { AirRaid } from './cards/colonies/AirRaid';
+import { AtmoCollectors } from './cards/colonies/AtmoCollectors';
+import { EcologyResearch } from './cards/colonies/EcologyResearch';
+import { ImpactorSwarm } from './cards/colonies/ImpactorSwarm';
+import { JovianLanterns } from './cards/colonies/JovianLanterns';
+import { JupiterFloatingStation } from './cards/colonies/JupiterFloatingStation';
+import { LunarExports } from './cards/colonies/LunarExports';
+import { TradeEnvoys } from './cards/colonies/TradeEnvoys';
+import { TitanAirScrapping } from './cards/colonies/TitanAirScrapping';
+import { TitanFloatingLaunchPad } from './cards/colonies/TitanFloatingLaunchPad';
+import { TitanShuttles } from './cards/colonies/TitanShuttles';
+import { SubZeroSaltFish } from './cards/colonies/SubZeroSaltFish';
+import { SpacePort } from './cards/colonies/SpacePort';
+import { UrbanDecomposers } from './cards/colonies/UrbanDecomposers';
+import { RefugeeCamps } from './cards/colonies/RefugeeCamps';
+import { RedSpotObservatory } from "./cards/colonies/RedSpotObservatory";
+import { MarketManipulation } from './cards/colonies/MarketManipulation';
+import { MartianZoo } from './cards/colonies/MartianZoo';
 
 
 
@@ -501,34 +519,52 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
 
 export const ALL_COLONIES_PROJECTS_CARDS: Array<IProjectCard> = [
         new Airliners(),
+        new AirRaid(),
+        new AtmoCollectors(),
         new CommunityServices(),
         new Conscription(),
         new CoronaExtractor(),
         new CryoSleep(),
         new EarthElevator(),
+        new EcologyResearch(),
         new FloaterLeasing(),
         new FloaterPrototypes(),
         new FloaterTechnology(),
+        new GalileanWaystation(),
         new HeavyTaxation(),
         new IceMoonColony(),
+        new ImpactorSwarm(),
         new InterplanetaryColonyShip(),
+        new JovianLanterns(),
+        new JupiterFloatingStation(),
+        new LunaGovernor(),
+        new LunarExports(),
         new LunarMining(),
-        new GalileanWaystation(),
+        new MartianZoo(),
+        new MarketManipulation(),
         new MiningColony(),
         new MinorityRefuge(),
         new NitrogenFromTitan(),
         new PioneerSettlement(),
         new ProductiveOutpost(),
         new QuantumCommunications(),
-        new LunaGovernor(),
+        new RedSpotObservatory(),
         new ResearchColony(),
         new RimFreighters(),
+        new RefugeeCamps(),
         new SolarProbe(),
         new SolarReflectors(),
         new SkyDocks(),
+        new SpacePort(),
         new SpacePortColony(),
         new SpinoffDepartment(),
+        new SubZeroSaltFish(),
+        new TitanAirScrapping(),
+        new TitanFloatingLaunchPad(),
+        new TitanShuttles(),
         new TradingColony(),
+        new TradeEnvoys(),
+        new UrbanDecomposers(),
         new WarpDrive()
 ]; 
 

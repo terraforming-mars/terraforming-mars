@@ -35,7 +35,7 @@ export class TitanFloatingLaunchPad implements IProjectCard {
 
         opts.push(addResource);
 
-        let openColonies = game.colonies.filter(colony => colony.isActive && !colony.isVisited);
+        let openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor !== undefined);
         if (openColonies.length > 0 
           && player.fleetSize > player.tradesThisTurn && player.getResourcesOnCard(this) > 0 ){
             opts.push(spendResource);

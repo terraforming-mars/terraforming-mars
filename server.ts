@@ -515,7 +515,7 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
     res.write(fs.readFileSync('dist/main.js'));
   } else if (req.url === '/assets/Prototype.ttf') {
     res.write(fs.readFileSync('assets/Prototype.ttf'));
-  } else if (req.url.endsWith('.png') || req.url.endsWith('.jpg') ) {
+  } else if (req.url.endsWith('.png')) {
     const assetsRoot = path.resolve('./assets');
     const reqFile = path.resolve(path.normalize(req.url).slice(1));
 
@@ -524,6 +524,16 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
       return notFound(req, res);
     }
     res.setHeader('Content-Type', 'image/png');
+    res.write(fs.readFileSync(reqFile))
+  } else if (req.url.endsWith('.jpg') ) {
+    const assetsRoot = path.resolve('./assets');
+    const reqFile = path.resolve(path.normalize(req.url).slice(1));
+
+    // Disallow to go outside of assets directory
+    if ( ! reqFile.startsWith(assetsRoot) || ! fs.existsSync(reqFile)) {
+      return notFound(req, res);
+    }
+    res.setHeader('Content-Type', 'image/jpg');
     res.write(fs.readFileSync(reqFile))
   }
 

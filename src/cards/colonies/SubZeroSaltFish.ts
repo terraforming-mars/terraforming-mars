@@ -39,7 +39,7 @@ export class SubZeroSaltFish implements IProjectCard {
       }
 
     public play(player: Player, game: Game) {
-        if (game.getPlayers().length == 1) return undefined;
+        if (game.getPlayers().length === 1) return undefined;
     
         const players = this.getPlayersWithPlantProduction(player, game);
         if (players.length === 1) {

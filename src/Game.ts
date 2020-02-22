@@ -1041,9 +1041,6 @@ export class Game {
       this.addTile(player, spaceType, this.getSpace(spaceId), {
         tileType: TileType.OCEAN
       });
-      if (this.pendingOceans > 0) {
-        this.pendingOceans--;
-      }
       player.terraformRating++;
     }
     public getPlayers(): Array<Player> {

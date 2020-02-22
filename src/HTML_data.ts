@@ -6303,7 +6303,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Ecology Experts",`
+[CardName.ECOLOGY_EXPERTS,`
       <div class="title background-color-prelude">Ecology Experts</div>
       <div class="prelude-label">PRELUDE</div>
       <div class="tag tag1 tag-microbe"></div>
@@ -6320,7 +6320,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Eccentric Sponsor",`
+[CardName.ECCENTRIC_SPONSOR,`
       <div class="title background-color-prelude">Eccentric Sponsor</div>
       <div class="prelude-label">PRELUDE</div>
       <div class="prelude-icon preludeCard-icon"></div>

@@ -13,7 +13,7 @@ export class SelectResourceCard implements PlayerInterrupt {
         public game: Game,
         public resourceType: ResourceType,
         public resourceCards: Array<ICard>,
-        public title?: string,
+        public title: string | undefined,
         public count: number = 1
     ){
         if (title === undefined) {
@@ -27,12 +27,5 @@ export class SelectResourceCard implements PlayerInterrupt {
               return undefined;
             }
           );
-        this.playerInput.onend = () => { 
-            if (game.activePlayer !== player) {
-                game.playerIsFinishedTakingActions();   
-            } else {
-                player.takeAction(game);
-            }
-        };
     };
 }    

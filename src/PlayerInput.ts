@@ -5,5 +5,4 @@ export interface PlayerInput {
     inputType: PlayerInputTypes;
     title: string;
     cb: (...item: any) => PlayerInput | undefined;
-    onend?: () => void;
 }

@@ -31,25 +31,12 @@ export class Viron implements ICard, CorporationCard {
             result,
             (foundCards: Array<ICard>) => {
               const foundCard = foundCards[0];
-              const action = foundCard.action!(player, game);
-              const whenDone = (err?: string) => {
-                if (!err) {
-                    player.setActionsThisGeneration(this.name);
-                    player.actionsTakenThisRound++;
-                }
-                game.log(player.name + " used " + foundCard.name + " action with " + this.name);
-                return undefined;
-              };
-              if (action !== undefined) {
-                action.onend = whenDone;
-                return action;
-              }
-              whenDone();
-              return undefined;
+              game.log(player.name + " used " + foundCard.name + " action with " + this.name);
+              return foundCard.action!(player, game);
             }
         );
         return undefined;
-    }    
+    }
 
     public play() {
         return undefined;

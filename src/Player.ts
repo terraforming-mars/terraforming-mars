@@ -28,8 +28,6 @@ import { CardName } from "./CardName";
 import { CorporationName } from './CorporationName';
 import { IColony } from './colonies/Colony';
 
-const INITIAL_ACTION: string = 'INITIAL';
-
 export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
     public id: string;
@@ -65,7 +63,7 @@ export class Player {
     private actionsThisGeneration: Set<string> = new Set<string>();
     private lastCardPlayedThisTurn: IProjectCard | undefined;
     private waitingFor?: PlayerInput;
-    private postAction: boolean = false;
+    private waitingForCb?: () => void;
     public cardCost: number = constants.CARD_COST;
     public oceanBonus: number = constants.OCEAN_BONUS;
     public fleetSize: number = 1;
@@ -352,18 +350,27 @@ export class Player {
       }
       return foundCards[0];
     }
+    private runInputCb(game: Game, result: PlayerInput | undefined): void {
+        if (result !== undefined) {
+            game.interrupts.push({
+                player: this,
+                playerInput: result
+            });
+        }    
+    }
     private runInput(
+        game: Game,
         input: Array<Array<string>>,
-        pi: PlayerInput): PlayerInput | undefined {
+        pi: PlayerInput): void {
       if (pi instanceof AndOptions) {
         const waiting: AndOptions = pi;
         if (input.length !== waiting.options.length) {
           throw new Error('Not all options provided');
         }
         for (let i = 0; i < input.length; i++) {
-          this.runInput([input[i]], waiting.options[i]);
+          this.runInput(game, [input[i]], waiting.options[i]);
         }
-        return pi.cb();
+        this.runInputCb(game, pi.cb());
       } else if (pi instanceof SelectAmount) {
         const waiting: SelectAmount = pi;
         if (input.length !== 1) {
@@ -382,16 +389,16 @@ export class Player {
         if (amount < 0) {
           throw new Error('Amount provided too low');
         }
-        return pi.cb(amount);
+        this.runInputCb(game, pi.cb(amount));
       } else if (pi instanceof SelectOption) {
-        return pi.cb();
+        this.runInputCb(game, pi.cb());
       } else if (pi instanceof OrOptions) {
         const waiting: OrOptions = pi;
         const optionIndex = parseInt(input[0][0]);
         const remainingInput = input[0].slice();
         // Remove option index to process option
         remainingInput.shift();
-        return this.runInput([remainingInput], waiting.options[optionIndex]);
+        this.runInput(game, [remainingInput], waiting.options[optionIndex]);
       } else if (pi instanceof SelectHowToPayForCard) {
         if (input.length !== 1 || input[0].length !== 2) {
           throw new Error('Incorrect options provided');
@@ -436,7 +443,7 @@ export class Player {
         } catch (err) {
           throw new Error('Unable to parse input ' + err);
         }
-        return pi.cb(foundCard, payMethod);
+        this.runInputCb(game, pi.cb(foundCard, payMethod));
       } else if (pi instanceof SelectCard) {
         if (input.length !== 1) {
           throw new Error('Incorrect options provided');
@@ -454,7 +461,7 @@ export class Player {
         if (mappedCards.length !== input[0].length) {
           throw new Error('Not all cards found');
         }
-        return pi.cb(mappedCards);
+        this.runInputCb(game, pi.cb(mappedCards));
       } else if (pi instanceof SelectAmount) {
         if (input.length !== 1) {
           throw new Error('Incorrect options provided');
@@ -465,7 +472,7 @@ export class Player {
         if (isNaN(parseInt(input[0][0]))) {
           throw new Error('Amount is not a number');
         }
-        return pi.cb(parseInt(input[0][0]));
+        this.runInputCb(game, pi.cb(parseInt(input[0][0])));
       } else if (pi instanceof SelectSpace) {
         if (input.length !== 1) {
           throw new Error('Incorrect options provided');
@@ -479,7 +486,7 @@ export class Player {
         if (foundSpace === undefined) {
           throw new Error('Space not available');
         }
-        return pi.cb(foundSpace);
+        this.runInputCb(game, pi.cb(foundSpace));
       } else if (pi instanceof SelectPlayer) {
         if (input.length !== 1) {
           throw new Error('Incorrect options provided');
@@ -493,7 +500,7 @@ export class Player {
         if (foundPlayer === undefined) {
           throw new Error('Player not available');
         }
-        return pi.cb(foundPlayer);
+        this.runInputCb(game, pi.cb(foundPlayer));
       } else if (pi instanceof SelectHowToPay) {
         if (input.length !== 1) {
           throw new Error('Incorrect options provided');
@@ -543,7 +550,7 @@ export class Player {
         } catch (err) {
           throw new Error('Unable to parse input ' + err);
         }
-        return pi.cb(payMethod);
+        this.runInputCb(game, pi.cb(payMethod));
       } else {
         throw new Error('Unsupported waitingFor');
       }
@@ -596,7 +603,6 @@ export class Player {
           new SelectOption('Increase temperature', () => {
             game.increaseTemperature(this,1);
             game.log(this.name + " acted as World Government and increased temperature");
-            game.doneWorldGovernmentTerraforming();
             return undefined;
           })
         );
@@ -606,7 +612,6 @@ export class Player {
           new SelectOption('Increase oxygen', () => {
             game.increaseOxygenLevel(this,1);
             game.log(this.name + " acted as World Government and increased oxygen level");
-            game.doneWorldGovernmentTerraforming();
             return undefined;
           })
         );
@@ -618,7 +623,6 @@ export class Player {
             game.board.getAvailableSpacesForOcean(this), (space) => {
               game.addOceanTile(this, space.id);
               game.log(this.name + " acted as World Government and increased oceans");
-              game.doneWorldGovernmentTerraforming();
               return undefined;
             }
           )
@@ -629,15 +633,16 @@ export class Player {
           new SelectOption('Increase Venus scale', () => {
             game.increaseVenusScaleLevel(this,1);
             game.log(this.name + " acted as World Government and increased Venus scale");
-            game.doneWorldGovernmentTerraforming();
             return undefined;
           })
         );
       }
 
-      this.setWaitingFor(action);
+      this.setWaitingFor(action, () => {
+        game.doneWorldGovernmentTerraforming();
+      });
       return;
-  }    
+  }
 
     public runDraftPhase(game: Game, playerName: String, passedCards?: Array<IProjectCard>): void {
       let cards: Array<IProjectCard> = [];
@@ -659,7 +664,7 @@ export class Player {
             game.playerIsFinishedWithDraftingPhase(this,cards);
             return undefined;
           }, 1, 1
-        )
+        ), () => { }
       );  
   }  
 
@@ -716,7 +721,6 @@ export class Player {
       if (this.canUseHeatAsMegaCredits) {
         this.setWaitingFor(
             new AndOptions(() => {
-              payForCards();
               return undefined;
             },
             new SelectHowToPay(
@@ -738,7 +742,7 @@ export class Player {
                   return undefined;
                 }, 4, 0
             )
-            )
+            ), () => { payForCards(); }
         );
       } else {
         this.setWaitingFor(
@@ -748,10 +752,9 @@ export class Player {
                 (foundCards: Array<IProjectCard>) => {
                   htp.megaCredits = foundCards.length * this.cardCost;
                   selectedCards = foundCards;
-                  payForCards();
                   return undefined;
                 }, 4, 0
-            )
+            ), () => { payForCards(); }
         );
       }
     }
@@ -866,18 +869,34 @@ export class Player {
       return 0;
     }    
 
-    public playCard(game: Game, selectedCard: IProjectCard, howToPay?: HowToPay): PlayerInput | undefined { 
-      const whenDone = () => {
-          var projectCardIndex = this.cardsInHand.findIndex((card) => card.name === selectedCard.name);
-          var preludeCardIndex = this.preludeCardsInHand.findIndex((card) => card.name === selectedCard.name);
-          if (projectCardIndex !== -1) {
-            this.cardsInHand.splice(projectCardIndex, 1);
-          } else if (preludeCardIndex !== -1) {
-            this.preludeCardsInHand.splice(preludeCardIndex, 1);
-          }
-          this.addPlayedCard(game, selectedCard);
+    public playCard(game: Game, selectedCard: IProjectCard, howToPay?: HowToPay): undefined { 
 
-          if (howToPay !== undefined) {
+        //Activate some colonies
+        if (game.coloniesExtension && selectedCard.resourceType !== undefined) {
+          game.colonies.filter(colony => colony.resourceType !== undefined && colony.resourceType === selectedCard.resourceType).forEach(colony => {
+            colony.isActive = true;
+          });
+        }
+
+        // Play the card
+        const action = selectedCard.play(this, game);
+        if (action !== undefined) {
+            game.interrupts.push({
+                player: this,
+                playerInput: action
+            });
+        }
+
+        const projectCardIndex = this.cardsInHand.findIndex((card) => card.name === selectedCard.name);
+        const preludeCardIndex = this.preludeCardsInHand.findIndex((card) => card.name === selectedCard.name);
+        if (projectCardIndex !== -1) {
+          this.cardsInHand.splice(projectCardIndex, 1);
+        } else if (preludeCardIndex !== -1) {
+          this.preludeCardsInHand.splice(preludeCardIndex, 1);
+        }
+        this.addPlayedCard(game, selectedCard);
+
+        if (howToPay !== undefined) {
             this.steel -= howToPay.steel;
             this.titanium -= howToPay.titanium;
             this.megaCredits -= howToPay.megaCredits;
@@ -893,13 +912,15 @@ export class Player {
             }
           }
 
-          const actionsFromPlayedCard: OrOptions[] = [];
           for (const playedCard of this.playedCards) {
             if (playedCard.onCardPlayed !== undefined) {
               const actionFromPlayedCard: OrOptions | void =
                             playedCard.onCardPlayed(this, game, selectedCard);
               if (actionFromPlayedCard !== undefined) {
-                actionsFromPlayedCard.push(actionFromPlayedCard);
+                game.interrupts.push({
+                    player: this,
+                    playerInput: actionFromPlayedCard
+                });
               }
             }
           }
@@ -910,51 +931,21 @@ export class Player {
             ) {
               const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, game, selectedCard);
               if (actionFromPlayedCard !== undefined) {
-                actionsFromPlayedCard.push(actionFromPlayedCard);
+                game.interrupts.push({
+                    player: this,
+                    playerInput: actionFromPlayedCard
+                });
               }
             }
           }
 
-          // run through multiple inputs
-          if (actionsFromPlayedCard.length > 1) {
-            const multipleActions = new AndOptions(() => {
-              this.actionsTakenThisRound++;
-              this.takeAction(game);
-              return undefined;
-            });
-            multipleActions.options = actionsFromPlayedCard;
-            this.setWaitingFor(multipleActions);
-            return;
-          } else if (actionsFromPlayedCard.length === 1) {
-            actionsFromPlayedCard[0].onend = () => {
-              this.actionsTakenThisRound++;
-              this.takeAction(game);
-            };
-            this.setWaitingFor(actionsFromPlayedCard[0]);
-            return;
-          }
-
-          this.actionsTakenThisRound++;
-          this.takeAction(game);
-        };
-
-        //Activate some colonies
-        if (game.coloniesExtension && selectedCard.resourceType !== undefined) {
-          game.colonies.filter(colony => colony.resourceType !== undefined && colony.resourceType === selectedCard.resourceType).forEach(colony => {
-            colony.isActive = true;
-          });
-        }
-
-        // Play the card
-        const action = selectedCard.play(this, game);
-        if (action !== undefined) {
-          action.onend = whenDone;
-          return action;
-        }
-        whenDone();
-
-        if (selectedCard.postPlay !== undefined && selectedCard.postPlay) {
-          this.postAction = true;
+        if (selectedCard.name === CardName.ECOLOGY_EXPERTS || selectedCard.name === CardName.ECCENTRIC_SPONSOR) {
+            if (this.getPlayableCards(game).length > 0) {
+                game.interrupts.push({
+                    player: this,
+                    playerInput: this.playProjectCard(game)
+                });
+            }
         }
         return undefined;
     }
@@ -966,19 +957,14 @@ export class Player {
           (foundCards: Array<ICard>) => {
             const foundCard = foundCards[0];
             const action = foundCard.action!(this, game);
-            const whenDone = (err?: string) => {
-              if (!err) {
-                this.actionsThisGeneration.add(foundCard.name);
-                this.actionsTakenThisRound++;
-              }
-              game.log(this.name + " used " + foundCard.name + " action");
-              this.takeAction(game);
-            };
             if (action !== undefined) {
-              action.onend = whenDone;
-              return action;
+                game.interrupts.push({
+                    player: this,
+                    playerInput: action
+                });
             }
-            whenDone();
+            this.actionsThisGeneration.add(foundCard.name);
+            game.log(this.name + " used " + foundCard.name + " action");
             return undefined;
           }
       );
@@ -1003,7 +989,7 @@ export class Player {
     }
 
     private sellPatents(game: Game): PlayerInput {
-      const res = new SelectCard(
+      return new SelectCard(
           'Sell patents',
           this.cardsInHand,
           (foundCards: Array<IProjectCard>) => {
@@ -1019,19 +1005,10 @@ export class Player {
               }
               game.dealer.discard(card);
             });
-            this.actionsTakenThisRound++;
-            this.takeAction(game);
             game.log(this.name + " used sell patents standard project");
             return undefined;
           }, this.cardsInHand.length
       );
-      res.onend = (err?: string) => {
-        if (!err) {
-          this.actionsTakenThisRound++;
-        }
-        this.takeAction(game);
-      };
-      return res;
     }
 
     private buildColony(game: Game, openColonies: Array<IColony>): PlayerInput {
@@ -1043,8 +1020,6 @@ export class Player {
       this.payForStandardProject(
           StandardProjectType.BUILD_COLONY, megaCredits, heat
       );
-      this.actionsTakenThisRound++;
-      this.takeAction(game);
       game.log(this.name + " built a colony on " + colony.name);
       return undefined;
     };
@@ -1098,8 +1073,6 @@ export class Player {
         this.payForStandardProject(
             StandardProjectType.AIR_SCRAPING, megaCredits, heat
         );
-        this.actionsTakenThisRound++;
-        this.takeAction(game);
         game.log(this.name + " used air scraping standard project");
         return undefined;
       };
@@ -1126,8 +1099,6 @@ export class Player {
         this.payForStandardProject(
             StandardProjectType.POWER_PLANT, megaCredits, heat
         );
-        this.actionsTakenThisRound++;
-        this.takeAction(game);
         game.log(this.name + " used power plant standard project");
         return undefined;
       };
@@ -1148,21 +1119,10 @@ export class Player {
 
     private asteroid(game: Game): PlayerInput {
       const fundProject = (megaCredits: number, heat: number) => {
-        const action = game.increaseTemperature(this, 1);
-        const whenDone = (err?: string) => {
-          if (!err) {
-            this.payForStandardProject(
-                StandardProjectType.ASTEROID, megaCredits, heat
-            );
-            this.actionsTakenThisRound++;
-          }
-          this.takeAction(game);
-        };
-        if (action !== undefined) {
-          action.onend = whenDone;
-          return action;
-        }
-        whenDone();
+        game.increaseTemperature(this, 1);
+        this.payForStandardProject(
+            StandardProjectType.ASTEROID, megaCredits, heat
+        );
         game.log(this.name + " used asteroid standard project");
         return undefined;
       };
@@ -1193,8 +1153,6 @@ export class Player {
         this.payForStandardProject(
             StandardProjectType.AQUIFER, megaCredits, heat
         );
-        this.actionsTakenThisRound++;
-        this.takeAction(game);
         game.log(this.name + " used aquifer standard project");
         return undefined;
       };
@@ -1235,21 +1193,10 @@ export class Player {
           megaCredits: number,
           heat: number,
           spaceId: string) => {
-        const action = game.addGreenery(this, spaceId);
-        const whenDone = (err?: string) => {
-          if (!err) {
-            this.payForStandardProject(
-                StandardProjectType.GREENERY, megaCredits, heat
-            );
-            this.actionsTakenThisRound++;
-          }
-          this.takeAction(game);
-        };
-        if (action !== undefined) {
-          action.onend = whenDone;
-          return action;
-        }
-        whenDone();
+        game.addGreenery(this, spaceId);
+        this.payForStandardProject(
+            StandardProjectType.GREENERY, megaCredits, heat
+        );
         game.log(this.name + " used greenery standard project");
         return undefined;
       };
@@ -1295,8 +1242,6 @@ export class Player {
             megaCredits,
             heat
         );
-        this.actionsTakenThisRound++;
-        this.takeAction(game);
         game.log(this.name + " used city standard project");
         return undefined;
       };
@@ -1339,9 +1284,7 @@ export class Player {
           colony.name + " - (" + colony.description + ")", 
           () => {
             colony.trade(this, game);
-            this.actionsTakenThisRound++;
             this.tradesThisTurn++;
-            this.takeAction(game);
             game.log(this.name + " traded with " + colony.name);
             return undefined;
           }
@@ -1396,19 +1339,8 @@ export class Player {
           `Convert ${this.plantsNeededForGreenery} plants into greenery`,
           game.board.getAvailableSpacesForGreenery(this),
           (space: ISpace) => {
-            const action = game.addGreenery(this, space.id);
-            const whenDone = (err?: string) => {
-              if (!err) {
-                this.plants -= this.plantsNeededForGreenery;
-                this.actionsTakenThisRound++;
-              }
-              this.takeAction(game);
-            };
-            if (action !== undefined) {
-              action.onend = whenDone;
-              return action;
-            }
-            whenDone();
+            game.addGreenery(this, space.id);
+            this.plants -= this.plantsNeededForGreenery;
             game.log(this.name + " converted plants into a greenery");
             return undefined;
           }
@@ -1421,25 +1353,12 @@ export class Player {
       if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED) > 0 ) {
         let raiseTempOptions = new AndOptions (
           () => {
-            const whenDone = (err?: string) => {
-              if (
-                heatAmount + (floaterAmount * 2) < 8
-              ) {
+            if (heatAmount + (floaterAmount * 2) < 8) {
                 throw new Error('Need to pay 8 heat');
-              }  
-              if (!err) {
-                this.removeResourceFrom(this.corporationCard as ICard, floaterAmount);
-                this.heat -= heatAmount;
-                this.actionsTakenThisRound++;
-              }
-              this.takeAction(game);
-            };
-            const action = game.increaseTemperature(this, 1);
-            if (action !== undefined) {
-              action.onend = whenDone;
-              return action;
             }
-            whenDone();
+            this.removeResourceFrom(this.corporationCard as ICard, floaterAmount);
+            this.heat -= heatAmount;
+            game.increaseTemperature(this, 1);
             game.log(this.name + " converted heat into temperature");
             return undefined;
           },
@@ -1461,19 +1380,8 @@ export class Player {
       } else {
 
       return new SelectOption('Convert 8 heat into temperature', () => {
-        const action = game.increaseTemperature(this, 1);
-        const whenDone = (err?: string) => {
-          if (!err) {
-            this.heat -= 8;
-            this.actionsTakenThisRound++;
-          }
-          this.takeAction(game);
-        };
-        if (action !== undefined) {
-          action.onend = whenDone;
-          return action;
-        }
-        whenDone();
+        game.increaseTemperature(this, 1);
+        this.heat -= 8;
         game.log(this.name + " converted heat into temperature");
         return undefined;
       });
@@ -1490,8 +1398,6 @@ export class Player {
         });
         this.heat -= heat;
         this.megaCredits -= megaCredits;
-        this.actionsTakenThisRound++;
-        this.takeAction(game);
         game.log(this.name + " claimed " + milestone.name + " milestone");
         return undefined;
       };
@@ -1522,8 +1428,6 @@ export class Player {
         game.fundAward(this, award);
         this.megaCredits -= megaCredits;
         this.heat -= heat;
-        this.actionsTakenThisRound++;
-        this.takeAction(game);
         game.log(this.name + " funded " + award.name + " award");
         return undefined;
       };
@@ -1544,11 +1448,9 @@ export class Player {
       });
     }
 
-    private endTurnOption(game: Game): PlayerInput {
+    private endTurnOption(): PlayerInput {
       return new SelectOption('End Turn', () => {
-        this.actionsTakenThisRound = 0;
-        this.lastCardPlayedThisTurn = undefined;
-        game.playerIsFinishedTakingActions();
+        this.actionsTakenThisRound = 1;
         return undefined;
       });
     }
@@ -1582,7 +1484,7 @@ export class Player {
                 }
             )
         );
-        this.setWaitingFor(action);
+        this.setWaitingFor(action, () => {});
         return;
       }
       game.playerIsDoneWithGame(this);
@@ -1696,57 +1598,41 @@ export class Player {
       //Interrupt action
       const interruptIndex = game.interrupts.findIndex(interrupt => interrupt.player === this);
       if (interruptIndex !== -1) {
-          this.setWaitingFor(game.interrupts.splice(interruptIndex, 1)[0].playerInput);
+          this.setWaitingFor(game.interrupts.splice(interruptIndex, 1)[0].playerInput, () => {
+            this.takeAction(game);
+          });
           return;
       }
-
-      //Post Action (after some specific prelude cards have been played)
-      if (this.postAction && this.getPlayableCards(game).length > 0) {
-        const input = this.playProjectCard(game);
-        this.setWaitingFor(input);
-        this.postAction = false;
-        return;
-      } else if (this.postAction && this.getPlayableCards(game).length === 0) {
-        this.postAction = false;
-        return;
-      }
-      
-      //Prelude cards have to be played first
+ 
+      // Prelude cards have to be played first
       if (this.preludeCardsInHand.length > 0) {
-        const input = this.playPreludeCard(game);
-        input.onend = () => {
-          if (this.postAction) {
+        this.setWaitingFor(this.playPreludeCard(game), () => {
             this.takeAction(game);
-          }  
-        };
-        this.setWaitingFor(input);
+        });
         return;
       }
 
       if (
         game.getGeneration() === 1 &&
             this.corporationCard !== undefined &&
-            !this.actionsThisGeneration.has(INITIAL_ACTION) &&
             this.corporationCard.initialAction !== undefined &&
-            this.actionsTakenThisRound < 2
+            !this.actionsThisGeneration.has(this.corporationCard.name) &&
+            this.actionsTakenThisRound === 0
       ) {
         const input = this.corporationCard.initialAction(this, game);
         if (input !== undefined) {
-          input.onend = () => {
-            this.actionsThisGeneration.add(INITIAL_ACTION);
-            this.actionsTakenThisRound++;
-            this.takeAction(game);
-          };
-          this.setWaitingFor(input);
-        } else {
-          this.actionsThisGeneration.add(INITIAL_ACTION);
-          this.actionsTakenThisRound++;
-          this.takeAction(game);
+          game.interrupts.push({
+            player: this,
+            playerInput: input
+          });
         }
+        this.actionsThisGeneration.add(this.corporationCard.name);
+        this.actionsTakenThisRound++;
+        this.takeAction(game);
         return;
       }
 
-      if (this.actionsTakenThisRound >= 2) {
+      if (game.hasPassedThisActionPhase(this) || this.actionsTakenThisRound >= 2) {
         this.actionsTakenThisRound = 0;
         this.lastCardPlayedThisTurn = undefined;
         game.playerIsFinishedTakingActions();
@@ -1781,7 +1667,7 @@ export class Player {
 
       if (game.getPlayers().length > 1 && this.actionsTakenThisRound > 0) {
         action.options.push(
-            this.endTurnOption(game)
+            this.endTurnOption()
         );
       }
 
@@ -1864,34 +1750,26 @@ export class Player {
         return 0;
       });
 
-      this.setWaitingFor(action);
+      this.setWaitingFor(action, () => {
+        this.actionsTakenThisRound++;
+        this.takeAction(game);
+      });
     }
 
-    public process(input: Array<Array<string>>): void {
-      if (this.waitingFor === undefined) {
+    public process(game: Game, input: Array<Array<string>>): void {
+      if (this.waitingFor === undefined || this.waitingForCb === undefined) {
         throw new Error('Not waiting for anything');
       }
       const waitingFor = this.waitingFor;
+      const waitingForCb = this.waitingForCb;
       this.waitingFor = undefined;
+      this.waitingForCb = undefined;
       try {
-        const subsequent = this.runInput(input, waitingFor);
-        if (subsequent !== undefined) {
-          if (subsequent.onend === undefined && waitingFor.onend !== undefined) {
-            subsequent.onend = waitingFor.onend;
-          } else if (subsequent.onend !== undefined && waitingFor.onend !== undefined) {
-            const lastOnEnd: () => void = waitingFor.onend;
-            const nextOnEnd: () => void = subsequent.onend;
-            subsequent.onend = function () {
-                nextOnEnd();
-                lastOnEnd();
-            };
-          }
-          this.setWaitingFor(subsequent);
-        } else if (waitingFor.onend) {
-          waitingFor.onend();
-        }
+        this.runInput(game, input, waitingFor);
+        waitingForCb();
       } catch (err) {
         this.waitingFor = waitingFor;
+        this.waitingForCb = waitingForCb;
         throw err;
       }
     }
@@ -1900,12 +1778,9 @@ export class Player {
       return this.waitingFor;
     }
 
-    public setWaitingFor(input: PlayerInput): void {
+    public setWaitingFor(input: PlayerInput, cb: () => void): void {
       this.waitingFor = input;
-    }
-
-    public reduceActionsTakenThisRound(): void {
-      this.actionsTakenThisRound--;
+      this.waitingForCb = cb;
     }
 }
 

@@ -122,7 +122,7 @@ function processInput(
   req.once('end', function() {
     try {
       const entity = JSON.parse(body);
-      player.process(entity);
+      player.process(game, entity);
       res.setHeader('Content-Type', 'application/json');
       res.write(getPlayer(player, game));
       res.end();

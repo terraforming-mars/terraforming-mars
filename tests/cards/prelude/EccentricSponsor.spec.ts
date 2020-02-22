@@ -17,10 +17,7 @@ describe("EccentricSponsor", function () {
     });
     it("Should play", function () {
         const card = new EccentricSponsor();
-        const player = new Player("test", Color.BLUE, false);
-        player.actionsTakenThisRound = 1;
-        const action = card.play(player);
+        const action = card.play();
         expect(action).to.eq(undefined);
-        expect(player.actionsTakenThisRound).to.eq(0);
     });
 });

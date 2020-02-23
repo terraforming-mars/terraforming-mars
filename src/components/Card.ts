@@ -10,12 +10,14 @@ import { ALL_PRELUDE_CORPORATIONS,
          ALL_PRELUDE_CARDS,
          ALL_PRELUDE_PROJECTS_CARDS,
          ALL_VENUS_CORPORATIONS,
-         ALL_VENUS_PROJECTS_CARDS
+         ALL_VENUS_PROJECTS_CARDS,
+         ALL_COLONIES_PROJECTS_CARDS
          } from "../Dealer";
 import { CardType } from "../cards/CardType";
 import { Tags } from "../cards/Tags";
 import { ResourceType } from "../ResourceType";
 import { HTML_DATA } from "../HTML_data";
+
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
     if (cardName === (new BeginnerCorporation()).name) {
@@ -30,7 +32,8 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
     return ALL_PROJECT_CARDS.find((card) => card.name === cardName) 
     || ALL_PRELUDE_CARDS.find((card) => card.name === cardName) 
     || ALL_PRELUDE_PROJECTS_CARDS.find((card) => card.name === cardName)
-    || ALL_VENUS_PROJECTS_CARDS.find((card) => card.name === cardName);
+    || ALL_VENUS_PROJECTS_CARDS.find((card) => card.name === cardName)
+    || ALL_COLONIES_PROJECTS_CARDS.find((card) => card.name === cardName);
 }
 
 function getData(cardName: string, resources: string): string | undefined {

@@ -516,6 +516,8 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
     res.write(fs.readFileSync('dist/main.js'));
   } else if (req.url === '/assets/Prototype.ttf') {
     res.write(fs.readFileSync('assets/Prototype.ttf'));
+  } else if (req.url === '/assets/futureforces.ttf') {
+    res.write(fs.readFileSync('assets/futureforces.ttf'));
   } else if (req.url.endsWith('.png')) {
     const assetsRoot = path.resolve('./assets');
     const reqFile = path.resolve(path.normalize(req.url).slice(1));

@@ -533,7 +533,7 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
     if ( ! reqFile.startsWith(assetsRoot) || ! fs.existsSync(reqFile)) {
       return notFound(req, res);
     }
-    res.setHeader('Content-Type', 'image/jpg');
+    res.setHeader('Content-Type', 'image/jpeg');
     res.write(fs.readFileSync(reqFile))
   }
 

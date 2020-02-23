@@ -7,7 +7,7 @@ import {Color} from './Color';
 import {SelectCard} from './inputs/SelectCard';
 import {AndOptions} from './inputs/AndOptions';
 import {ICard} from './cards/ICard';
-import {OrOptions} from './inputs/OrOptions';
+import { OrOptions } from './inputs/OrOptions';
 import {Game} from './Game';
 import {HowToPay} from './inputs/HowToPay';
 import {SelectSpace} from './inputs/SelectSpace';
@@ -26,6 +26,7 @@ import {Resources} from './Resources';
 import { ResourceType } from './ResourceType';
 import { CardName } from "./CardName";
 import { CorporationName } from './CorporationName';
+import { IColony } from './colonies/Colony';
 
 const INITIAL_ACTION: string = 'INITIAL';
 
@@ -67,6 +68,10 @@ export class Player {
     private postAction: boolean = false;
     public cardCost: number = constants.CARD_COST;
     public oceanBonus: number = constants.OCEAN_BONUS;
+    public fleetSize: number = 1;
+    public  tradesThisTurn: number = 0;
+    public colonyTradeOffset: number = 0;
+    public colonyTradeDiscount: number = 0;
 
     constructor(
         public name: string,
@@ -272,7 +277,7 @@ export class Player {
         this.resourcesOnCards.set(card.name, count);
       }
     }
-   
+
     public getCardsWithResources(): Array<ICard> {
       return this.playedCards.filter(
           (card) => Number(this.resourcesOnCards.get(card.name)) > 0
@@ -554,6 +559,7 @@ export class Player {
 
     public runProductionPhase(): void {
       this.actionsThisGeneration.clear();
+      this.tradesThisTurn = 0;
       this.megaCredits += this.megaCreditProduction + this.terraformRating;
       this.heat += this.energy;
       this.heat += this.heatProduction;
@@ -918,6 +924,13 @@ export class Player {
           this.takeAction(game);
         };
 
+        //Activate some colonies
+        if (game.coloniesExtension && selectedCard.resourceType !== undefined) {
+          game.colonies.filter(colony => colony.resourceType !== undefined && colony.resourceType === selectedCard.resourceType).forEach(colony => {
+            colony.isActive = true;
+          });
+        }
+
         // Play the card
         const action = selectedCard.play(this, game);
         if (action !== undefined) {
@@ -1006,6 +1019,64 @@ export class Player {
       };
       return res;
     }
+
+    private buildColony(game: Game, openColonies: Array<IColony>): PlayerInput {
+      const fundProject = (
+        megaCredits: number,
+        heat: number,
+        colony: IColony) => {
+      colony.onColonyPlaced(this, game);
+      this.payForStandardProject(
+          StandardProjectType.BUILD_COLONY, megaCredits, heat
+      );
+      this.actionsTakenThisRound++;
+      this.takeAction(game);
+      game.log(this.name + " built a colony on " + colony.name);
+      return undefined;
+    };
+
+    if (this.canUseHeatAsMegaCredits && this.heat > 0) {
+      let htp: HowToPay;
+      let helionColonyProject = new SelectHowToPay(
+        'Colony (' + constants.BUILD_COLONY_COST + ' MC)', 
+        false, false, true, constants.BUILD_COLONY_COST,
+        (stp: HowToPay) => {
+          if (stp.heat + stp.megaCredits < constants.BUILD_COLONY_COST) {
+            throw new Error('Haven\'t spend enough for colony');
+          }
+          htp = stp;
+          let buildColony = new OrOptions();
+          buildColony.title = "Build colony (" + constants.BUILD_COLONY_COST + " MC)";
+          openColonies.forEach(colony => {
+            const colonySelect =  new SelectOption(
+              colony.name + " - (" + colony.description + ")", 
+              () => {
+                return fundProject(constants.BUILD_COLONY_COST, htp.heat, colony);
+              }
+            );
+            buildColony.options.push(colonySelect);
+          });
+      
+          return buildColony;
+        }
+      );
+      return helionColonyProject;
+    }
+
+    let buildColony = new OrOptions();
+    buildColony.title = "Build colony (" + constants.BUILD_COLONY_COST + " MC)";
+    openColonies.forEach(colony => {
+      const colonySelect =  new SelectOption(
+        colony.name + " - (" + colony.description + ")", 
+        () => {
+          return fundProject(constants.BUILD_COLONY_COST, 0, colony);
+        }
+      );
+      buildColony.options.push(colonySelect);
+    });
+
+    return buildColony;
+    }  
 
     private airScraping(game: Game): PlayerInput {
       const fundProject = (megaCredits: number, heat: number) => {
@@ -1245,6 +1316,65 @@ export class Player {
             return fundProject(constants.CITY_COST, 0, space.id);
           }
       );
+    }
+
+    private tradeWithColony(openColonies: Array<IColony>, game: Game): PlayerInput {
+      let selectColony = new OrOptions();
+      openColonies.forEach(colony => {
+        const colonySelect =  new SelectOption(
+          colony.name + " - (" + colony.description + ")", 
+          () => {
+            colony.trade(this, game);
+            this.actionsTakenThisRound++;
+            this.tradesThisTurn++;
+            this.takeAction(game);
+            game.log(this.name + " traded with " + colony.name);
+            return undefined;
+          }
+        );
+        selectColony.options.push(colonySelect);
+      });      
+      let howToPayForTrade = new OrOptions();
+      howToPayForTrade.title = "Trade with a colony";
+      const payWithMC = new SelectOption("Pay " + (9 - this.colonyTradeDiscount) +" MC", () => {
+        this.megaCredits -= (9 - this.colonyTradeDiscount);
+        return selectColony;
+      });
+
+      if (this.canAfford(9) && this.canUseHeatAsMegaCredits && this.heat > 0) {
+        let htp: HowToPay;
+        let helionTrade = new SelectHowToPay(
+          "Select how to spend " + (9 - this.colonyTradeDiscount) +" MC",
+          false,
+          false,
+          true,
+          (9 - this.colonyTradeDiscount),
+          (stp) => {
+            htp = stp;
+            this.megaCredits -= htp.megaCredits;
+            this.heat -= htp.heat;
+            return selectColony;
+          }
+        )
+        howToPayForTrade.options.push(helionTrade);
+
+      } else if (this.canAfford((9 - this.colonyTradeDiscount))) {
+        howToPayForTrade.options.push(payWithMC);
+      }
+
+      const payWithEnergy = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Energy", () => {
+        this.energy -= (3 - this.colonyTradeDiscount);
+        return selectColony;
+      });  
+      const payWithTitanium = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Titanium", () => {
+        this.titanium -= (3 - this.colonyTradeDiscount);
+        return selectColony;  
+      });
+
+      if (this.energy >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithEnergy);
+      if (this.titanium >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithTitanium);
+
+      return howToPayForTrade;
     }
 
     private convertPlantsIntoGreenery(game: Game): PlayerInput {
@@ -1532,6 +1662,18 @@ export class Player {
         );
       }
 
+      if ( game.coloniesExtension &&
+        this.canAfford(constants.BUILD_COLONY_COST)) {
+        let openColonies = game.colonies.filter(colony => colony.colonies.length < 3 
+          && colony.colonies.indexOf(this) === -1
+          && colony.isActive);      
+          if (openColonies.length > 0) {
+            standardProjects.options.push(
+                this.buildColony(game, openColonies)
+            );
+          }
+      }
+
       return standardProjects;
     }
 
@@ -1627,6 +1769,17 @@ export class Player {
         action.options.push(
             this.endTurnOption(game)
         );
+      }
+
+      if (game.coloniesExtension) {
+        let openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor !== undefined);
+        if (openColonies.length > 0 
+          && this.fleetSize > this.tradesThisTurn
+          && (this.canAfford(9) || this.energy >=3 || this.titanium >= 3 )) {
+          action.options.push(
+            this.tradeWithColony(openColonies, game)
+          );
+        }
       }
 
       const standardProjects = this.getAvailableStandardProjects(game);

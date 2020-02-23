@@ -1,11 +1,12 @@
 
 export enum ResourceType {
-    ANIMAL,
-    MICROBE,
-    FIGHTER,
-    SCIENCE,
-    FLOATER,
-    ASTEROID,
-    PRESERVATION
+    ANIMAL = "Animal",
+    MICROBE = "Microbe",
+    FIGHTER = "Fighter",
+    SCIENCE = "Science",
+    FLOATER = "Floater",
+    ASTEROID = "Asteroid",
+    PRESERVATION = "Preservation",
+    CAMP= "Camp"
 }
 

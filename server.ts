@@ -259,7 +259,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         }
       }
 
-      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.venusNext, gameReq.customCorporationsList, selectedCorporations, gameReq.board);
+      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.venusNext, gameReq.colonies, gameReq.customCorporationsList, selectedCorporations, gameReq.board);
       games.set(gameId, game);
       game.getPlayers().forEach((player) => {
         playersToGame.set(player.id, game);
@@ -329,7 +329,8 @@ function getPlayer(player: Player, game: Game): string {
     isActive: player.id === game.activePlayer.id,
     venusNextExtension: game.venusNextExtension,
     venusScaleLevel: game.getVenusScaleLevel(),
-    boardName: game.boardName
+    boardName: game.boardName,
+    colonies: game.colonies
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -448,7 +449,8 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       isActive: player.id === game.activePlayer.id,
       venusNextExtension: game.venusNextExtension,
       venusScaleLevel: game.getVenusScaleLevel(),
-      boardName: game.boardName
+      boardName: game.boardName,
+      colonies: game.colonies
     } as PlayerModel;
   });
 }
@@ -522,6 +524,16 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
       return notFound(req, res);
     }
     res.setHeader('Content-Type', 'image/png');
+    res.write(fs.readFileSync(reqFile))
+  } else if (req.url.endsWith('.jpg') ) {
+    const assetsRoot = path.resolve('./assets');
+    const reqFile = path.resolve(path.normalize(req.url).slice(1));
+
+    // Disallow to go outside of assets directory
+    if ( ! reqFile.startsWith(assetsRoot) || ! fs.existsSync(reqFile)) {
+      return notFound(req, res);
+    }
+    res.setHeader('Content-Type', 'image/jpeg');
     res.write(fs.readFileSync(reqFile))
   }
 

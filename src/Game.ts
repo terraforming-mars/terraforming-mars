@@ -1,5 +1,5 @@
 import {Player} from './Player';
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS} from './Dealer';
+import { Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS } from './Dealer';
 import {ISpace} from './ISpace';
 import {SpaceType} from './SpaceType';
 import {TileType} from './TileType';
@@ -21,19 +21,24 @@ import {ResourceType} from './ResourceType';
 import * as constants from './constants';
 import {Color} from './Color';
 import {IAward} from './awards/IAward';
-import {Tags} from './cards/Tags';
+import { Tags } from './cards/Tags';
 import {Resources} from "./Resources";
 import { ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES } from './milestones/Milestones';
 import { ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS } from './awards/Awards';
 import {SpaceName} from './SpaceName';
-import {Colony, Board} from './Board';
+import {BoardColony, Board} from './Board';
 import {CorporationName} from './CorporationName';
 import {CardName} from './CardName';
 import { ElysiumBoard } from './ElysiumBoard';
 import { HellasBoard } from './HellasBoard';
 import { BoardName } from './BoardName';
+import { IColony } from './colonies/Colony';
+import { ColonyDealer } from './colonies/ColonyDealer';
 import { PlayerInterrupt } from './interrupts/PlayerInterrupt';
 import { SelectOcean } from './interrupts/SelectOcean';
+import { SelectResourceCard } from './interrupts/SelectResourceCard';
+import { SelectColony } from './interrupts/SelectColony';
+
 
 export class Game {
     public activePlayer: Player;
@@ -58,6 +63,8 @@ export class Game {
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
     public interrupts: Array<PlayerInterrupt> = [];
     public monsInsuranceOwner: Player | undefined = undefined;
+    public colonies: Array<IColony> = [];
+    public colonyDealer: ColonyDealer = new ColonyDealer();
     public pendingOceans: number = 0;
 
     private tempMC: number = 0;
@@ -78,6 +85,7 @@ export class Game {
       private preludeExtension: boolean = false,
       private draftVariant: boolean = false,
       public venusNextExtension: boolean = false,
+      public coloniesExtension: boolean = false,
       customCorporationsList: boolean = false,
       corporationList: Array<CorporationCard> = [],
       public boardName: BoardName = BoardName.ORIGINAL
@@ -98,7 +106,7 @@ export class Game {
       }
 
       this.activePlayer = first;
-      this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension);
+      this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension);
       
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
@@ -118,13 +126,18 @@ export class Game {
         this.milestones.push(...VENUS_MILESTONES);
         this.awards.push(...VENUS_AWARDS);
         this.board.spaces.push(
-            new Colony(SpaceName.DAWN_CITY),
-            new Colony(SpaceName.LUNA_METROPOLIS),
-            new Colony(SpaceName.MAXWELL_BASE),
-            new Colony(SpaceName.STRATOPOLIS)
+            new BoardColony(SpaceName.DAWN_CITY),
+            new BoardColony(SpaceName.LUNA_METROPOLIS),
+            new BoardColony(SpaceName.MAXWELL_BASE),
+            new BoardColony(SpaceName.STRATOPOLIS)
         );
       }
 
+      // Add colonies stuff
+      if (this.coloniesExtension) {
+        corporationCards.push(...ALL_COLONIES_CORPORATIONS);
+        this.colonies = this.colonyDealer.drawColonies(players.length);
+      }
       // Setup custom corporation list
       if (customCorporationsList && corporationList.length >= players.length * 2) {
         corporationCards = corporationList;
@@ -154,6 +167,26 @@ export class Game {
       }
       this.pendingOceans++;
       this.addInterrupt(new SelectOcean(player, this,title));
+    }
+
+    public addColonyInterrupt(player: Player, allowDuplicate: boolean = false, title: string): void {
+      let openColonies = this.colonies.filter(colony => colony.colonies.length < 3 
+        && (colony.colonies.indexOf(player) === -1 || allowDuplicate)
+        && colony.isActive);
+      if (openColonies.length >0 ) {
+        this.addInterrupt(new SelectColony(player, this, openColonies, title));
+      }  
+    }  
+
+    public addResourceInterrupt(player: Player, resourceType: ResourceType, count: number = 1, restrictedTag?: Tags, title?: string): void {
+      let resourceCards = player.getResourceCards(resourceType);
+      if (restrictedTag !== undefined) {
+        resourceCards = resourceCards.filter(card => card.tags.filter((cardTag) => cardTag === restrictedTag).length > 0 );
+      }
+      if (resourceCards.length === 0) {
+        return;
+      }
+      this.addInterrupt(new SelectResourceCard(player, this, resourceType, title, count));
     }
 
     public addInterrupt(interrupt: PlayerInterrupt): void {
@@ -277,6 +310,12 @@ export class Game {
       if (corporationCard.name !== new BeginnerCorporation().name) {
         let cardsToPayFor: number = player.cardsInHand.length;
         player.megaCredits -= cardsToPayFor * player.cardCost;
+      }
+      //Activate some colonies
+      if (this.coloniesExtension && corporationCard.resourceType !== undefined) {
+        this.colonies.filter(colony => colony.resourceType !== undefined && colony.resourceType === corporationCard.resourceType).forEach(colony => {
+          colony.isActive = true;
+        });
       }
 
       this.playerIsFinishedWithResearchPhase(player);
@@ -412,6 +451,11 @@ export class Game {
     }
 
     private gotoDraftOrResearch() {
+      if (this.coloniesExtension) {
+        this.colonies.forEach(colony => {
+          colony.endGeneration();
+        });
+      }
       this.generation++;
       this.incrementFirstPlayer();
       if (this.draftVariant) {
@@ -558,6 +602,7 @@ export class Game {
         nextPlayer = this.getPreviousPlayer(this.players, player);
       }  
       if (nextPlayer !== undefined) {
+        console.log("Generation " + this.generation +" Current player is :" + player.name + "Cards passed to " + nextPlayer.name);
         return nextPlayer;
       }
       return player;
@@ -590,6 +635,7 @@ export class Game {
       // Go to the beginning of the array if we reached the end
       return players[(playerIndex + 1 >= players.length) ? 0 : playerIndex + 1];
     }
+
 
     public playerIsFinishedTakingActions(): void {
 

@@ -14,3 +14,4 @@ export const MIN_VENUS_SCALE: number = 0;
 export const MAX_VENUS_SCALE: number = 30;
 export const AIR_SCRAPING_COST: number = 15;
 export const OCEAN_BONUS: number = 2;
+export const BUILD_COLONY_COST: number = 17;

@@ -12,7 +12,7 @@ export class Poseidon implements CorporationCard {
     public startingMegaCredits: number = 45;
 
     public initialAction(player: Player, game: Game) {
-        let openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor !== undefined);
+        let openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor === undefined);
         let buildColony = new OrOptions();
         buildColony.title = "Poseidon first action - Select where to build colony";
         openColonies.forEach(colony => {

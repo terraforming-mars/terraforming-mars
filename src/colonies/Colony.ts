@@ -10,7 +10,7 @@ export interface IColony {
     name: ColonyName;
     description: string;
     isActive: boolean;
-    isVisited: undefined | Player;
+    visitor: undefined | Player;
     trackPosition: number;
     colonies: Array<Player>;
     resourceType?: ResourceType;
@@ -24,7 +24,7 @@ export interface IColony {
 
 export abstract class Colony  {
     public isActive: boolean = true;
-    public isVisited: undefined | Player = undefined;
+    public visitor: undefined | Player = undefined;
     public colonies: Array<Player> = [];
     public trackPosition: number = 1;
 
@@ -32,7 +32,7 @@ export abstract class Colony  {
         if (this.isActive) {
           this.increaseTrack();
         }
-        this.isVisited = undefined;
+        this.visitor = undefined;
     }
     public increaseTrack(value?: number): void {
         if (value === undefined) {
@@ -64,7 +64,7 @@ export abstract class Colony  {
 
     public afterTrade(colony: IColony, player: Player, game: Game): void {
         colony.trackPosition = this.colonies.length;
-        colony.isVisited = player;
+        colony.visitor = player;
         // Trigger current player interrupts first
         colony.colonies.filter(colonyPlayer => colonyPlayer === player).forEach(player => {
             colony.giveTradeBonus(player, game);

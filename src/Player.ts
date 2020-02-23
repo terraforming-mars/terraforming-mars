@@ -1772,7 +1772,7 @@ export class Player {
       }
 
       if (game.coloniesExtension) {
-        let openColonies = game.colonies.filter(colony => colony.isActive && !colony.isVisited);
+        let openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor !== undefined);
         if (openColonies.length > 0 
           && this.fleetSize > this.tradesThisTurn
           && (this.canAfford(9) || this.energy >=3 || this.titanium >= 3 )) {

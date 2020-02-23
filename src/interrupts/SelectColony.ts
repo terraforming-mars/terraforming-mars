@@ -12,11 +12,8 @@ export class SelectColony implements PlayerInterrupt {
         public player: Player,
         public game: Game,
         public openColonies: Array<IColony>,
-        public title?: string
+        public tile: string = "Select where to build a colony"
     ){
-        if (title === undefined) {
-            title = 'Select where to build a colony';
-        }
         let buildColony = new OrOptions();
         openColonies.forEach(colony => {
             const colonySelect =  new SelectOption(

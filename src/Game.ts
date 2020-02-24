@@ -40,9 +40,6 @@ import { SelectResourceCard } from './interrupts/SelectResourceCard';
 import { SelectColony } from './interrupts/SelectColony';
 import { SelectRemoveColony } from './interrupts/SelectRemoveColony';
 import { SelectPlantProductionDecrease } from './interrupts/SelectPlantProductionDecrease';
-import { BiomassCombustors } from './cards/BiomassCombustors';
-import { RoboticWorkforce } from './cards/RoboticWorkforce';
-
 
 export class Game {
     public activePlayer: Player;
@@ -343,8 +340,6 @@ export class Game {
       for (let i = 0; i < 10; i++) {
         dealtCards.push(this.dealer.dealCard());
       }
-      dealtCards.push(new BiomassCombustors());
-      dealtCards.push(new RoboticWorkforce());
 
       result.title = "Select corporation and initial cards";
       result.options.push(

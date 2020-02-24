@@ -38,6 +38,10 @@ import { PlayerInterrupt } from './interrupts/PlayerInterrupt';
 import { SelectOcean } from './interrupts/SelectOcean';
 import { SelectResourceCard } from './interrupts/SelectResourceCard';
 import { SelectColony } from './interrupts/SelectColony';
+import { SelectRemoveColony } from './interrupts/SelectRemoveColony';
+import { SelectPlantProductionDecrease } from './interrupts/SelectPlantProductionDecrease';
+import { BiomassCombustors } from './cards/BiomassCombustors';
+import { RoboticWorkforce } from './cards/RoboticWorkforce';
 
 
 export class Game {
@@ -137,6 +141,10 @@ export class Game {
       if (this.coloniesExtension) {
         corporationCards.push(...ALL_COLONIES_CORPORATIONS);
         this.colonies = this.colonyDealer.drawColonies(players.length);
+        if (this.players.length === 1) {
+          players[0].setProduction(Resources.MEGACREDITS, -2);
+          this.addInterrupt(new SelectRemoveColony(players[0], this));
+        }
       }
       // Setup custom corporation list
       if (customCorporationsList && corporationList.length >= players.length * 2) {
@@ -187,6 +195,13 @@ export class Game {
         return;
       }
       this.addInterrupt(new SelectResourceCard(player, this, resourceType, title, count));
+    }
+
+    public addPlantProductionDecreaseInterrupt(player: Player, count: number = 1, title?: string): void {
+      if (this.players.length === 1) {
+        return;
+      }
+      this.addInterrupt(new SelectPlantProductionDecrease(player, this, count, title));
     }
 
     public addInterrupt(interrupt: PlayerInterrupt): void {
@@ -328,6 +343,8 @@ export class Game {
       for (let i = 0; i < 10; i++) {
         dealtCards.push(this.dealer.dealCard());
       }
+      dealtCards.push(new BiomassCombustors());
+      dealtCards.push(new RoboticWorkforce());
 
       result.title = "Select corporation and initial cards";
       result.options.push(

@@ -17,7 +17,7 @@ export class FloaterTechnology implements IProjectCard {
     } 
 
     public action(player: Player, game: Game) {
-        game.addResourceInterrupt(player, ResourceType.FLOATER);
+        game.addResourceInterrupt(player, ResourceType.FLOATER, 1, undefined);
         return undefined;
     } 
 

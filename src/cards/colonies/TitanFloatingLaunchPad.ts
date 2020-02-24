@@ -23,7 +23,7 @@ export class TitanFloatingLaunchPad implements IProjectCard {
     public action(player: Player, game: Game) {
         var opts: Array<SelectOption> = [];
         const addResource = new SelectOption("Add 1 floater to a Jovian card", () => {
-            game.addResourceInterrupt(player, ResourceType.FLOATER, 1, Tags.JOVIAN);
+            game.addResourceInterrupt(player, ResourceType.FLOATER, 1, undefined, Tags.JOVIAN);
             return undefined;
         });
 
@@ -45,7 +45,7 @@ export class TitanFloatingLaunchPad implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, Tags.JOVIAN);
+      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, this, Tags.JOVIAN);
       return undefined;
     }
 

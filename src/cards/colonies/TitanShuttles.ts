@@ -24,7 +24,7 @@ export class TitanShuttles implements IProjectCard {
     public action(player: Player, game: Game) {
         var opts: Array<SelectOption | SelectAmount> = [];
         const addResource = new SelectOption("Add 2 floaters to a Jovian card", () => {
-            game.addResourceInterrupt(player, ResourceType.FLOATER, 2, Tags.JOVIAN);
+            game.addResourceInterrupt(player, ResourceType.FLOATER, 2, undefined, Tags.JOVIAN);
             return undefined;
         });
 
@@ -43,8 +43,7 @@ export class TitanShuttles implements IProjectCard {
         return new OrOptions(...opts);
     }
 
-    public play(player: Player, game: Game) {
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, Tags.JOVIAN);
+    public play() {
       return undefined;
     }
 

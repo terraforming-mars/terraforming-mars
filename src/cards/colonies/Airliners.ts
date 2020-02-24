@@ -19,7 +19,7 @@ export class Airliners implements IProjectCard {
 
     public play(player: Player, game: Game) {
       player.setProduction(Resources.MEGACREDITS, 2);
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2);
+      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, undefined);
       return undefined;
     }
     public getVictoryPoints() {

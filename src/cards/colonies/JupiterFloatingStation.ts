@@ -26,7 +26,7 @@ export class JupiterFloatingStation implements IProjectCard {
     public action(player: Player, game: Game) {
         return new OrOptions(
             new SelectOption("Add 1 floater to a Jovian card", () => {
-                game.addResourceInterrupt(player, ResourceType.FLOATER, 1, Tags.JOVIAN);
+                game.addResourceInterrupt(player, ResourceType.FLOATER, 1, undefined, Tags.JOVIAN, );
                 return undefined;
             }),
             new SelectOption("Get 1 MC per floater here (max 4) ", () => {

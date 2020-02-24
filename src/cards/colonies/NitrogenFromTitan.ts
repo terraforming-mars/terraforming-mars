@@ -14,7 +14,7 @@ export class NitrogenFromTitan implements IProjectCard {
 
     public play(player: Player, game: Game) {
       player.terraformRating += 2;
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, Tags.JOVIAN);
+      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, undefined, Tags.JOVIAN);
       return undefined;
     }
     public getVictoryPoints() {

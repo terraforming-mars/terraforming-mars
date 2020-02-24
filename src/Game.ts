@@ -40,6 +40,7 @@ import { SelectResourceCard } from './interrupts/SelectResourceCard';
 import { SelectColony } from './interrupts/SelectColony';
 import { SelectRemoveColony } from './interrupts/SelectRemoveColony';
 import { SelectPlantProductionDecrease } from './interrupts/SelectPlantProductionDecrease';
+import { ICard } from './cards/ICard';
 
 export class Game {
     public activePlayer: Player;
@@ -183,15 +184,19 @@ export class Game {
       }  
     }  
 
-    public addResourceInterrupt(player: Player, resourceType: ResourceType, count: number = 1, restrictedTag?: Tags, title?: string): void {
+    public addResourceInterrupt(player: Player, resourceType: ResourceType, count: number = 1, optionalCard : ICard | undefined, restrictedTag?: Tags, title?: string): void {
       let resourceCards = player.getResourceCards(resourceType);
+      // Played card is not into playedCards array yet
+      if (optionalCard !== undefined) {
+        resourceCards.push(optionalCard);
+      }
       if (restrictedTag !== undefined) {
-        resourceCards = resourceCards.filter(card => card.tags.filter((cardTag) => cardTag === restrictedTag).length > 0 );
+        resourceCards = resourceCards.filter(card => card.tags.indexOf(restrictedTag) !== -1);
       }
       if (resourceCards.length === 0) {
         return;
       }
-      this.addInterrupt(new SelectResourceCard(player, this, resourceType, title, count));
+      this.addInterrupt(new SelectResourceCard(player, this, resourceType, resourceCards, title, count));
     }
 
     public addPlantProductionDecreaseInterrupt(player: Player, count: number = 1, title?: string): void {

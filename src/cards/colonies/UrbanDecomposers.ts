@@ -25,7 +25,7 @@ export class UrbanDecomposers implements IProjectCard {
 
     public play(player: Player, game: Game) {
         player.setProduction(Resources.PLANTS, 1);  
-        game.addResourceInterrupt(player, ResourceType.MICROBE, 2);
+        game.addResourceInterrupt(player, ResourceType.MICROBE, 2, undefined);
         return undefined;
     }
 }

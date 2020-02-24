@@ -47,7 +47,7 @@ export class AtmoCollectors implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2);
+      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, this);
       return undefined;
     }
 }

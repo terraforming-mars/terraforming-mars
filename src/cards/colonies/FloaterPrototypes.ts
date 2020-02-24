@@ -13,7 +13,7 @@ export class FloaterPrototypes implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2);
+      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, undefined);
       return undefined;
     }
 }

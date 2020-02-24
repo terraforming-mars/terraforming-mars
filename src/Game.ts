@@ -38,7 +38,8 @@ import { PlayerInterrupt } from './interrupts/PlayerInterrupt';
 import { SelectOcean } from './interrupts/SelectOcean';
 import { SelectResourceCard } from './interrupts/SelectResourceCard';
 import { SelectColony } from './interrupts/SelectColony';
-
+import { SelectRemoveColony } from './interrupts/SelectRemoveColony';
+import { SelectPlantProductionDecrease } from './interrupts/SelectPlantProductionDecrease';
 
 export class Game {
     public activePlayer: Player;
@@ -137,6 +138,10 @@ export class Game {
       if (this.coloniesExtension) {
         corporationCards.push(...ALL_COLONIES_CORPORATIONS);
         this.colonies = this.colonyDealer.drawColonies(players.length);
+        if (this.players.length === 1) {
+          players[0].setProduction(Resources.MEGACREDITS, -2);
+          this.addInterrupt(new SelectRemoveColony(players[0], this));
+        }
       }
       // Setup custom corporation list
       if (customCorporationsList && corporationList.length >= players.length * 2) {
@@ -187,6 +192,13 @@ export class Game {
         return;
       }
       this.addInterrupt(new SelectResourceCard(player, this, resourceType, title, count));
+    }
+
+    public addPlantProductionDecreaseInterrupt(player: Player, count: number = 1, title?: string): void {
+      if (this.players.length === 1) {
+        return;
+      }
+      this.addInterrupt(new SelectPlantProductionDecrease(player, this, count, title));
     }
 
     public addInterrupt(interrupt: PlayerInterrupt): void {

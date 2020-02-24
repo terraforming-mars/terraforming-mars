@@ -4,7 +4,6 @@ import { Fish } from "../../src/cards/Fish";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { SelectPlayer } from "../../src/inputs/SelectPlayer";
 import { Resources } from '../../src/Resources';
 
 describe("Fish", function () {
@@ -35,15 +34,7 @@ describe("Fish", function () {
 
         expect(card.canPlay(player, game)).to.eq(true);
 
-        const action = card.play(player, game);
-        expect(action instanceof SelectPlayer).to.eq(true);
-        if (action === undefined) return;
-
-        action.cb(player3);
-
-        expect(player3.getProduction(Resources.PLANTS)).to.eq(6); // reduced one step
-        expect(player2.getProduction(Resources.PLANTS)).to.eq(2); // no side effects on other than target players
-        expect(player.getProduction(Resources.PLANTS)).to.eq(0); // no negative values etc.
+        card.play(player, game);
 
         player.addResourceTo(card, 5);
         expect(card.getVictoryPoints(player)).to.eq(player.getResourcesOnCard(card));

@@ -364,6 +364,7 @@ export const Colony = Vue.component("colony", {
     <div>4</div>
   </div>
 
+  </div>
 </div>
     `
 });

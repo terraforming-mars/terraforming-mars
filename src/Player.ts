@@ -1775,7 +1775,10 @@ export class Player {
         let openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor === undefined);
         if (openColonies.length > 0 
           && this.fleetSize > this.tradesThisTurn
-          && (this.canAfford(9) || this.energy >=3 || this.titanium >= 3 )) {
+          && (this.canAfford(9 - this.colonyTradeDiscount) 
+            || this.energy >= (3 - this.colonyTradeDiscount) 
+            || this.titanium >= (3 - this.colonyTradeDiscount)) 
+          ) {
           action.options.push(
             this.tradeWithColony(openColonies, game)
           );

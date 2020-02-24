@@ -822,7 +822,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Fish",`
+[CardName.FISH,`
       <div class="title background-color-active">Fish</div>
       <div class="price">9</div>
       ##RESOURCES##
@@ -859,7 +859,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Small Animals",`
+[CardName.SMALL_ANIMALS,`
       <div class="title background-color-active">Small Animals</div>
       <div class="price">6</div>
       ##RESOURCES##
@@ -1147,7 +1147,7 @@ export const HTML_DATA: Map<string, string> =
           </div>
         </div>
 `],
-["Birds",`
+[CardName.BIRDS,`
         <div class="title background-color-active ">Birds</div>
         <div class="price ">10</div>
         ##RESOURCES##
@@ -2304,7 +2304,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Herbivores",`
+[CardName.HERBIVORES,`
         <div class="title background-color-active ">Herbivores</div>
         <div class="price ">12</div>
         ##RESOURCES##
@@ -2871,7 +2871,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
 `],
-["Biomass Combustors",`
+[CardName.BIOMASS_COMBUSTORS,`
         <div class="title background-color-automated">Biomass Combustors</div>
         <div class="price">4</div>
         <div class="tag tag1 tag-building"></div>

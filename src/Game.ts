@@ -619,7 +619,6 @@ export class Game {
         nextPlayer = this.getPreviousPlayer(this.players, player);
       }  
       if (nextPlayer !== undefined) {
-        console.log("Generation " + this.generation +" Current player is :" + player.name + "Cards passed to " + nextPlayer.name);
         return nextPlayer;
       }
       return player;

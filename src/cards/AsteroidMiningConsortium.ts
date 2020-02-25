@@ -19,8 +19,18 @@ export class AsteroidMiningConsortium implements IProjectCard {
         player.setProduction(Resources.TITANIUM);
         return undefined;
       }
+      const targetPlayers = game.getPlayers().filter(p => p.getProduction(Resources.TITANIUM) > 0);
+
+      if (targetPlayers.length === 0) return undefined;
+
+      if (targetPlayers.length === 1) {
+        targetPlayers[0].setProduction(Resources.TITANIUM,-1, game, player);
+        player.setProduction(Resources.TITANIUM);
+        return undefined;
+      }
+
       return new SelectPlayer(
-          game.getPlayers(),
+          targetPlayers,
           'Select player to decrease titanium production',
           (foundPlayer: Player) => {
             foundPlayer.setProduction(Resources.TITANIUM,-1, game, player);

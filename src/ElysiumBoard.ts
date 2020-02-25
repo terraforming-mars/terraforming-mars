@@ -15,7 +15,7 @@ export class ElysiumBoard extends Board{
             new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.TITANIUM]),
             new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.DRAW_CARD]),
             new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.STEEL]),
-            new Ocean(idx++,  pos_x++, pos_y, [SpaceBonus.DRAW_CARD])
+            new Land(idx++,  pos_x++, pos_y, [SpaceBonus.DRAW_CARD])
         );
 
         pos_x = 3; pos_y=1;
@@ -34,8 +34,8 @@ export class ElysiumBoard extends Board{
             new Land(idx++, pos_x++, pos_y),
             new Land(idx++, pos_x++, pos_y, [SpaceBonus.DRAW_CARD]),
             new Land(idx++, pos_x++, pos_y),
+            new Ocean(idx++, pos_x++, pos_y,[SpaceBonus.PLANT]),
             new Ocean(idx++, pos_x++, pos_y),
-            new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
             new Land(idx++, pos_x++, pos_y, [SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD,  SpaceBonus.DRAW_CARD])
         );
 

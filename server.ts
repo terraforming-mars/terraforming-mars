@@ -35,6 +35,7 @@ import {SpaceModel} from './src/models/SpaceModel';
 import {TileType} from './src/TileType';
 import { Phase } from './src/Phase';
 import { Resources } from "./src/Resources";
+import { CardType } from "./src/cards/CardType";
 
 const styles = fs.readFileSync('styles.css');
 const games: Map<string, Game> = new Map<string, Game>();
@@ -406,12 +407,32 @@ function getWaitingFor(
   return result;
 }
 
+function compareCards(card1: IProjectCard, card2: IProjectCard): number
+{
+  const tagWeights: Map<CardType, number> = new Map();
+  tagWeights.set(CardType.ACTIVE, 0);
+  tagWeights.set(CardType.AUTOMATED, 1);
+  tagWeights.set(CardType.PRELUDE, 2);
+  tagWeights.set(CardType.EVENT, 3);
+
+  const w1: number | undefined = tagWeights.get(card1.cardType);
+  const w2: number | undefined = tagWeights.get(card2.cardType);
+
+  // It's ok to how unknown card types last
+  if (w1 === undefined || w2 === undefined) return -1;
+
+  if (w1 > w2) return 1;
+  if (w1 < w2) return -1
+  return 0;
+  
+}
+
 function getCards(
     player: Player,
     cards: Array<IProjectCard>,
     game: Game
 ): Array<CardModel> {
-  return cards.map((card) => ({
+  return cards.sort(compareCards).map((card) => ({
     resources: player.getResourcesOnCard(card),
     name: card.name,
     calculatedCost: player.getCardCost(game, card)

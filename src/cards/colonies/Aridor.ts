@@ -33,7 +33,7 @@ export class Aridor implements CorporationCard {
     }
     
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
-        if (card.cardType === CardType.EVENT || card.tags.length === 0) return undefined;
+        if (card.cardType === CardType.EVENT || card.tags.length === 0 || !player.isCorporation(this.name)) return undefined;
 
         for (const tag of card.tags) {
             let currentSize = this.allTags.size;

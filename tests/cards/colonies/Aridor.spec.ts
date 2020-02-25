@@ -5,6 +5,7 @@ import { Player } from "../../../src/Player";
 import { Predators } from "../../../src/cards/Predators";
 import { Game } from '../../../src/Game';
 import { Resources } from "../../../src/Resources";
+import { ResearchOutpost } from '../../../src/cards/ResearchOutpost';
 
 describe("Aridor", function () {
     it("Should play", function () {
@@ -17,5 +18,9 @@ describe("Aridor", function () {
         player.corporationCard = card;
         card.onCardPlayed(player, game, new Predators());
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+        card.onCardPlayed(player2, game, new ResearchOutpost());
+        expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(0);
+        card.onCardPlayed(player, game, new ResearchOutpost());
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
     });
 });

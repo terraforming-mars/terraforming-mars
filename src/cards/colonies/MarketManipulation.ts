@@ -9,7 +9,7 @@ import { SelectOption } from "../../inputs/SelectOption";
 import { AndOptions } from "../../inputs/AndOptions";
 
 export class MarketManipulation implements IProjectCard {
-    public cost: number = 0;
+    public cost: number = 1;
     public tags: Array<Tags> = [Tags.EARTH];
     public name: string = CardName.MARKET_MANIPULATION;
     public cardType: CardType = CardType.EVENT;

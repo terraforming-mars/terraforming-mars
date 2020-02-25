@@ -331,6 +331,20 @@ export class Player {
       }
     }
 
+    public getMultipleTagCount(tags: Array<Tags>, includeEventsTags:boolean = false): number {
+      let tagCount = 0;
+      this.playedCards.forEach((card: IProjectCard) => {
+        if ( ! includeEventsTags && card.cardType === CardType.EVENT) return;
+        tagCount += card.tags.filter((cardTag) => tags.indexOf(cardTag) !== -1).length;
+      });
+      if (this.corporationCard !== undefined) {
+        tagCount += this.corporationCard.tags.filter(
+            (cardTag) => tags.indexOf(cardTag) !== -1
+        ).length;
+      }
+      return tagCount + this.getTagCount(Tags.WILDCARD);
+    }  
+
     public getCard(cards: Array<IProjectCard>, cardName: string): IProjectCard {
       const foundCards = cards.filter((card) => card.name === cardName);
       if (foundCards.length === 0) {

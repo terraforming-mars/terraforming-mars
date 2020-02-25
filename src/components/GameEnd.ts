@@ -1,10 +1,14 @@
 import Vue from "vue";
 import { PlayerModel } from "../models/PlayerModel";
+import { Board } from "./Board";
 
 export const GameEnd = Vue.component("game-end", {
     props: ["player", "game"],
     data: function () {
         return {}
+    },
+    components: {
+        "board": Board,
     },
     methods: {
         isSoloGame: function (): boolean {
@@ -63,7 +67,7 @@ export const GameEnd = Vue.component("game-end", {
                     </div>
                 </div>
                 <div class="game_end_victory_points">
-                    <h2>Victory points breakdown</h2>
+                    <h2>Victory points breakdown after {{player.generation}} generations</h2>
                     <table class="nes-table is-bordered is-centered">
                         <thead>
                             <tr>
@@ -102,6 +106,10 @@ export const GameEnd = Vue.component("game-end", {
                         </div>
                       <br>  
                     </div>
+                </div>
+                <div class="game-end--board">
+                    <h2>Final situation on the board</h2>
+                    <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName="player.boardName"></board>
                 </div>
             </div>
         </div>

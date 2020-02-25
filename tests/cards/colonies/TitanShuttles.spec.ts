@@ -7,11 +7,8 @@ import { Game } from '../../../src/Game';
 
 describe("TitanShuttles", function () {
     it("Should play", function () {
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test2", Color.RED, false);
-        const game = new Game("foobar", [player,player2], player);
         const card = new TitanShuttles();
-        const action = card.play(player, game);
+        const action = card.play();
         expect(action).to.eq(undefined);
     });
     it("Should act", function () {

@@ -19,8 +19,8 @@ export class EcologyResearch implements IProjectCard {
           coloniesCount += colony.colonies.filter(owner => owner === player).length;
         });  
         player.setProduction(Resources.PLANTS, coloniesCount);
-        game.addResourceInterrupt(player, ResourceType.ANIMAL, 1);
-        game.addResourceInterrupt(player, ResourceType.MICROBE, 2);
+        game.addResourceInterrupt(player, ResourceType.ANIMAL, 1, undefined);
+        game.addResourceInterrupt(player, ResourceType.MICROBE, 2, undefined);
         return undefined;
     }
 

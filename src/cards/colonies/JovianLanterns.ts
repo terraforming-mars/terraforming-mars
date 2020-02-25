@@ -28,7 +28,7 @@ export class JovianLanterns implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      game.addResourceInterrupt(player, ResourceType.FLOATER, 2);
+      game.addResourceInterrupt(player, ResourceType.FLOATER, 2, this);
       player.terraformRating++;
       return undefined;
     }

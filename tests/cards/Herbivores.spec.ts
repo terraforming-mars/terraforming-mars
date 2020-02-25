@@ -4,7 +4,6 @@ import { Herbivores } from "../../src/cards/Herbivores";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { SelectPlayer } from "../../src/inputs/SelectPlayer";
 import { Resources } from '../../src/Resources';
 
 describe("Herbivores", function () {
@@ -21,8 +20,6 @@ describe("Herbivores", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
 
-        expect(player2.getProduction(Resources.PLANTS)).to.eq(0); // Reduced
-        expect(player.getProduction(Resources.PLANTS)).to.eq(0); // Not changed
         expect(player.getResourcesOnCard(card)).to.eq(1);
 
     });
@@ -39,16 +36,8 @@ describe("Herbivores", function () {
         player3.setProduction(Resources.PLANTS,7);
 
         expect(card.canPlay(player, game)).to.eq(true, "Cant play");
-        const action = card.play(player, game);
+        card.play(player, game);
 
-        expect(action instanceof SelectPlayer).to.eq(true, "Didn't ask for target");
-        if (action === undefined) return;
-
-        action.cb(player2)
-
-        expect(player3.getProduction(Resources.PLANTS)).to.eq(7); // Not changed
-        expect(player2.getProduction(Resources.PLANTS)).to.eq(0); // Reduced
-        expect(player.getProduction(Resources.PLANTS)).to.eq(0);
         expect(player.getResourcesOnCard(card)).to.eq(1);
     });
 
@@ -97,9 +86,8 @@ describe("Herbivores", function () {
 
         player.setProduction(Resources.PLANTS);
 
-        const action = card.play(player, game);
-        expect(action).to.eq(undefined);
-        
+        card.play(player, game);
+            
         player.playedCards.push(card);
         player.victoryPoints = 0
 

@@ -4,9 +4,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-
 import { SelectCard } from "../inputs/SelectCard";
-import { SelectPlayer } from "../inputs/SelectPlayer";
 
 // Cards with building tags and production boxes
 import { AICentral } from "./AICentral";
@@ -60,17 +58,18 @@ import { HousePrinting } from "./prelude/HousePrinting";
 import { LavaTubeSettlement } from "./prelude/LavaTubeSettlement";
 import { Resources } from '../Resources';
 import { SpacePort } from './colonies/SpacePort';
+import { CardName } from '../CardName';
 
 export class RoboticWorkforce implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: string = "Robotic Workforce";
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(player: Player): boolean {
-        return this.getAvailableCards(player).length > 0;
+    public canPlay(player: Player, game: Game): boolean {
+        return this.getAvailableCards(player, game).length > 0;
     }
 
-    private getAvailableCards(player: Player): Array<IProjectCard> {
+    private getAvailableCards(player: Player, game: Game): Array<IProjectCard> {
         const builderCards: Array<IProjectCard> = [
             new AICentral(),
             new BiomassCombustors(),
@@ -124,8 +123,12 @@ export class RoboticWorkforce implements IProjectCard {
         ];
         const availableCards = player.playedCards.filter((card) => {
             for (let i = 0; i < builderCards.length; i++) {
-                if (builderCards[i].name === card.name) {
+                if (builderCards[i].name === card.name  && card.name !== CardName.BIOMASS_COMBUSTORS) {
                     return true;
+                } else if (builderCards[i].name === card.name  && card.name === CardName.BIOMASS_COMBUSTORS) {
+                    if (game.getPlayers().length == 1 || game.getPlayers().filter((p) => p.getProduction(Resources.PLANTS) > 0).length > 0) {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -134,26 +137,17 @@ export class RoboticWorkforce implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        const availableCards = this.getAvailableCards(player);
+        const availableCards = this.getAvailableCards(player, game);
         if (availableCards.length === 0) {
             return undefined;
         }
         return new SelectCard("Select builder card to copy", availableCards, (selectedCards: Array<IProjectCard>) => {
                 const foundCard: IProjectCard = selectedCards[0];
                 // this is the only card which requires additional user input
-                if (foundCard.name === new BiomassCombustors().name) {
-                    if (game.getPlayers().length == 1)  {
-                        player.setProduction(Resources.ENERGY,2);
-                        return undefined;
-                    }
-                    return new SelectPlayer(game.getPlayers(), "Select player to remove plant production", (foundPlayer: Player) => {
-                        if (foundPlayer.getProduction(Resources.PLANTS) < 1) {
-                            throw "Player must have plant production";
-                        }
-                        foundPlayer.setProduction(Resources.PLANTS,-1,game,player);
-                        player.setProduction(Resources.ENERGY,2);
-                        return undefined;
-                    });
+                if (foundCard.name === CardName.BIOMASS_COMBUSTORS) {
+                    player.setProduction(Resources.ENERGY,2);
+                    game.addPlantProductionDecreaseInterrupt(player, 1);
+                    return undefined;
                 }
 
                 class Updater {

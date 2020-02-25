@@ -12,13 +12,13 @@ export class SelectResourceCard implements PlayerInterrupt {
         public player: Player,
         public game: Game,
         public resourceType: ResourceType,
+        public resourceCards: Array<ICard>,
         public title?: string,
         public count: number = 1
     ){
         if (title === undefined) {
             title = 'Select card to add ' + count + ' ' + resourceType + ' resource';
         }
-        let resourceCards = player.getResourceCards(resourceType);
         this.playerInput = new SelectCard(
             title,
             resourceCards,

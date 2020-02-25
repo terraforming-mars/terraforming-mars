@@ -17,15 +17,15 @@ export class Titan extends Colony implements IColony {
         } else {
             floaters = this.trackPosition - 2;
         }
-        game.addResourceInterrupt(player, ResourceType.FLOATER, floaters);
+        game.addResourceInterrupt(player, ResourceType.FLOATER, floaters, undefined);
         this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);
-        game.addResourceInterrupt(player, ResourceType.FLOATER, 3);
+        game.addResourceInterrupt(player, ResourceType.FLOATER, 3, undefined);
         return undefined;
     }
     public giveTradeBonus(player: Player, game: Game): void {
-        game.addResourceInterrupt(player, ResourceType.FLOATER);
+        game.addResourceInterrupt(player, ResourceType.FLOATER, 1, undefined);
     }    
 }

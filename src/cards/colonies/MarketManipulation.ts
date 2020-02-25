@@ -20,7 +20,7 @@ export class MarketManipulation implements IProjectCard {
 
         let selectColonyIncrease = new OrOptions();
         selectColonyIncrease.title = "Select colony to increase tile track";
-        let increaseColonies = game.colonies.filter(colony => colony.trackPosition < 6);
+        let increaseColonies = game.colonies.filter(colony => colony.trackPosition < 6 && colony.isActive);
         increaseColonies.forEach(colony => {
           const colonySelect =  new SelectOption(
             colony.name + " - (" + colony.description + ")", 
@@ -38,7 +38,7 @@ export class MarketManipulation implements IProjectCard {
 
         let selectColonyDecrease = new OrOptions();
         selectColonyDecrease.title = "Select colony to decrease tile track"
-        let decreaseColonies = game.colonies.filter(colony => colony.trackPosition > colony.colonies.length);
+        let decreaseColonies = game.colonies.filter(colony => colony.trackPosition > colony.colonies.length && colony.isActive);
         decreaseColonies.forEach(colony => {
           const colonySelect =  new SelectOption(
             colony.name + " - (" + colony.description + ")", 

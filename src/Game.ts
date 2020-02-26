@@ -849,14 +849,14 @@ export class Game {
     });
 
     if (this.venusScaleLevel === 8 
-        || (steps === 2 && this.venusScaleLevel === 10) 
+        || ((steps === 2 || steps === 3) && this.venusScaleLevel === 10) 
         || (steps === 3 && this.venusScaleLevel === 12)
     ) {
       player.cardsInHand.push(this.dealer.dealCard());
     }
 
     if (this.venusScaleLevel === 16 
-        || (steps === 2 && this.venusScaleLevel === 18) 
+        || ((steps === 2 || steps === 3) && this.venusScaleLevel === 18) 
         || (steps === 3 && this.venusScaleLevel === 20)
     ) {
       player.terraformRating++;

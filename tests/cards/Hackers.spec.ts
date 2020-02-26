@@ -16,18 +16,19 @@ describe("Hackers", function () {
     it("Should play", function () {
         const card = new Hackers();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
+        const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("foobar", [player,player2], player);
         player.setProduction(Resources.ENERGY);
         const action = card.play(player, game);
         player.setProduction(Resources.MEGACREDITS,2);
         if (action !== undefined) {
             expect(action instanceof SelectPlayer);
-            action.cb(player);
+            action.cb(player2);
         }
-        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(-1);
-        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+        expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(-2);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     });
 });

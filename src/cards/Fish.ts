@@ -24,7 +24,7 @@ export class Fish implements IActionCard, IProjectCard {
     return player.getResourcesOnCard(this);
   }
   public play(player: Player, game: Game) {
-    game.addPlantProductionDecreaseInterrupt(player, 1);
+    game.addResourceProductionDecreaseInterrupt(player, Resources.PLANTS, 1);
     return undefined;
   }
   public canAct(): boolean {

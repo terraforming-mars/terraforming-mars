@@ -6,10 +6,11 @@ import { IProjectCard } from "../IProjectCard";
 import { ISpace } from "../../ISpace";
 import { SelectSpace } from "../../inputs/SelectSpace";
 import { Resources } from '../../Resources';
+import { CardName } from '../../CardName';
 
 export class PolarIndustries extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = "Polar Industries";
+    public name: string = CardName.POLAR_INDUSTRIES;
     public play(player: Player, game: Game) {
         if (game.noOceansAvailable()) {
             player.setProduction(Resources.HEAT,2);

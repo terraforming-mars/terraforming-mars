@@ -8,11 +8,12 @@ import { SelectSpace } from "../../inputs/SelectSpace";
 import { LavaFlows } from "../LavaFlows";
 import { ISpace } from "../../ISpace";
 import { Resources } from '../../Resources';
+import { CardName } from '../../CardName';
 
 export class LavaTubeSettlement implements IProjectCard {
     public cost: number = 15;
     public tags: Array<Tags> = [Tags.STEEL, Tags.CITY];
-    public name: string = "Lava Tube Settlement";
+    public name: string = CardName.LAVA_TUBE_SETTLEMENT;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {

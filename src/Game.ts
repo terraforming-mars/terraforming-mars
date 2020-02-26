@@ -39,7 +39,7 @@ import { SelectOcean } from './interrupts/SelectOcean';
 import { SelectResourceCard } from './interrupts/SelectResourceCard';
 import { SelectColony } from './interrupts/SelectColony';
 import { SelectRemoveColony } from './interrupts/SelectRemoveColony';
-import { SelectPlantProductionDecrease } from './interrupts/SelectPlantProductionDecrease';
+import { SelectResourceProductionDecrease } from './interrupts/SelectResourceProductionDecrease';
 import { ICard } from './cards/ICard';
 
 export class Game {
@@ -199,11 +199,11 @@ export class Game {
       this.addInterrupt(new SelectResourceCard(player, this, resourceType, resourceCards, title, count));
     }
 
-    public addPlantProductionDecreaseInterrupt(player: Player, count: number = 1, title?: string): void {
+    public addResourceProductionDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {
       if (this.players.length === 1) {
         return;
       }
-      this.addInterrupt(new SelectPlantProductionDecrease(player, this, count, title));
+      this.addInterrupt(new SelectResourceProductionDecrease(player, this, resource, count, title));
     }
 
     public addInterrupt(interrupt: PlayerInterrupt): void {

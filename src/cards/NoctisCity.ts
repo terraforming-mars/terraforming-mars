@@ -9,11 +9,12 @@ import { Resources } from '../Resources';
 import { SelectSpace } from '../inputs/SelectSpace';
 import { ISpace } from '../ISpace';
 import { BoardName } from '../BoardName';
+import { CardName } from '../CardName';
 
 export class NoctisCity implements IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public name: string = "Noctis City";
+    public name: string = CardName.NOCTIS_CITY;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {

@@ -4,11 +4,12 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class TropicalResort implements IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = "Tropical Resort";
+    public name: string = CardName.TROPICAL_RESORT;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {

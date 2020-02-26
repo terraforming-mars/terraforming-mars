@@ -21,7 +21,6 @@ export const GlobalParameters = Vue.component("globs", {
             const endValue = targetParameter == "oxygen" ? constants.MAX_OXYGEN_LEVEL : constants.MAX_TEMPERATURE;
             const step =  targetParameter == "oxygen" ? 1 : 2;
             let curValue = targetParameter == "oxygen" ? this.oxygen_level : this.temperature;
-            console.log(targetParameter, startValue, endValue, step);
             for (let value: number = endValue; value >= startValue; value -= step) {
                 values.push(
                     new GlobalParamLevel(value, value <= curValue)

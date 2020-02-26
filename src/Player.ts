@@ -1284,7 +1284,6 @@ export class Player {
           colony.name + " - (" + colony.description + ")", 
           () => {
             colony.trade(this, game);
-            this.tradesThisTurn++;
             game.log(this.name + " traded with " + colony.name);
             return undefined;
           }

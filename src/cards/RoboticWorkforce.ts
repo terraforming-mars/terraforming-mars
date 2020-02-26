@@ -153,10 +153,45 @@ export class RoboticWorkforce implements IProjectCard {
                     if (game.getPlayers().length == 1 || game.getPlayers().filter((p) => p.getProduction(Resources.PLANTS) > 0).length > 0) {
                         return true;
                     }
-                } else if (builderCards[i].name === card.name  && card.name === CardName.GYROPOLIS) {
+                } else if (builderCards[i].name === card.name  && card.name === CardName.MAGNETIC_FIELD_GENERATORS) {
+                    if (player.getProduction(Resources.ENERGY) >= 4) {
+                        return true;
+                    }
+                } else if (builderCards[i].name === card.name  
+                    && (card.name === CardName.GYROPOLIS
+                        || card.name === CardName.STRIP_MINE
+                        || card.name === CardName.CAPITAL
+                        || card.name === CardName.MAGNETIC_FIELD_DOME
+                        || card.name === CardName.UNDERGROUND_CITY
+                        )
+                ) {
                     if (player.getProduction(Resources.ENERGY) >= 2) {
                         return true;
                     }
+                } else if (builderCards[i].name === card.name  
+                    && (card.name === CardName.AI_CENTRAL
+                        || card.name === CardName.BUILDING_INDUSTRIES
+                        || card.name === CardName.CABONATE_PROCESSING
+                        || card.name === CardName.COMMERCIAL_DISTRICT
+                        || card.name === CardName.CORPORATE_STRONGHOLD
+                        || card.name === CardName.DOMED_CREATER
+                        || card.name === CardName.ELECTRO_CATAPULT
+                        || card.name === CardName.FUEL_FACTORY
+                        || card.name === CardName.GHG_FACTORIES
+                        || card.name === CardName.IMMIGRANT_CITY
+                        || card.name === CardName.NOCTIS_CITY
+                        || card.name === CardName.OPEN_CITY
+                        || card.name === CardName.RAD_CHEM_FACTORY
+                        || card.name === CardName.SOIL_FACTORY
+                        || card.name === CardName.UNDERGROUND_CITY
+                        || card.name === CardName.URBANIZED_AREA
+                        || card.name === CardName.LAVA_TUBE_SETTLEMENT
+                        )
+                ) {
+                    if (player.getProduction(Resources.ENERGY) >= 1) {
+                        return true;
+                    }
+
                 } else if (builderCards[i].name === card.name  && card.name === CardName.HEAT_TRAPPERS) {
                     if (game.getPlayers().length == 1 || game.getPlayers().filter((p) => p.getProduction(Resources.HEAT) >= 2).length > 0) {
                         return true;
@@ -245,7 +280,6 @@ export class RoboticWorkforce implements IProjectCard {
                     [new FueledGenerators().name]: new Updater(1, -1, 0, 0, 0, 0),
                     [new UrbanizedArea().name]: new Updater(-1, 2, 0, 0, 0, 0),
                     [new PowerPlant().name]: new Updater(1, 0, 0, 0, 0, 0),
-                    [new HeatTrappers().name]: new Updater(1, 0, 0, 0, 0, 0),
                     [new TectonicStressPower().name]: new Updater(3, 0, 0, 0, 0, 0),
                     [new UndergroundCity().name]: new Updater(-2, 0, 2, 0, 0, 0),
                     [new NuclearPower().name]: new Updater(3, -2, 0, 0, 0, 0),

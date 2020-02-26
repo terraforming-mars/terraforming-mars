@@ -4,11 +4,12 @@ import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
 import { Resources } from "../Resources";
+import { CardName } from '../CardName';
 
 export class CarbonateProcessing implements IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = 'Carbonate Processing';
+    public name: string = CardName.CABONATE_PROCESSING;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {

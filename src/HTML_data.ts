@@ -105,7 +105,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Capital",`
+[CardName.CAPITAL,`
         <div class="title background-color-automated ">Capital</div>
         <div class="price ">26</div>
         <div class="tag tag1 tag-building "></div>
@@ -238,7 +238,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Domed Crater",`
+[CardName.DOMED_CREATER,`
         <div class="title background-color-automated ">Domed Crater</div>
         <div class="price ">24</div>
         <div class="tag tag1 tag-building "></div>
@@ -259,7 +259,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Noctis City",`
+[CardName.NOCTIS_CITY,`
         <div class="title background-color-automated ">Noctis City</div>
         <div class="price ">18</div>
         <div class="tag tag1 tag-building "></div>
@@ -503,7 +503,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Underground City",`
+[CardName.UNDERGROUND_CITY,`
         <div class="title background-color-automated ">Underground City</div>
         <div class="price ">18</div>
         <div class="tag tag1 tag-building "></div>
@@ -677,7 +677,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-["Carbonate Processing",`
+[CardName.CABONATE_PROCESSING,`
     <div class="title background-color-automated">Carbonate Processing</div>
     <div class="price">6</div>
     <div class="tag tag1 tag-building"></div>
@@ -1042,7 +1042,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Building Industries",`
+[CardName.BUILDING_INDUSTRIES,`
       <div class="title background-color-automated">Building Industries</div>
       <div class="price">6</div>
       <div class="tag tag1 tag-building"></div>
@@ -1098,7 +1098,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Electro Catapult",`
+[CardName.ELECTRO_CATAPULT,`
       <div class="title background-color-active">Electro Catapult</div>
       <div class="price">17</div>
       <div class="tag tag1 tag-building"></div>
@@ -1351,7 +1351,7 @@ export const HTML_DATA: Map<string, string> =
           <div class="points points-big">1</div>
         </div>
 `],
-["Commercial District",`
+[CardName.COMMERCIAL_DISTRICT,`
         <div class="title background-color-automated ">Commercial District</div>
         <div class="price ">16</div>
         <div class="tag tag1 tag-building "></div>
@@ -1705,7 +1705,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Open City",`
+[CardName.OPEN_CITY,`
         <div class="title background-color-automated ">Open City</div>
         <div class="price ">23</div>
         <div class="tag tag1 tag-building "></div>
@@ -1883,7 +1883,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Urbanized Area",`
+[CardName.URBANIZED_AREA,`
         <div class="title background-color-automated ">Urbanized Area</div>
         <div class="price ">10</div>
         <div class="tag tag1 tag-building "></div>
@@ -1976,7 +1976,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["GHG Factories",`
+[CardName.GHG_FACTORIES,`
       <div class="title background-color-automated">GHG Factories</div>
       <div class="price">11</div>
       <div class="tag tag1 tag-building"></div>
@@ -2166,7 +2166,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Strip Mine",`
+[CardName.STRIP_MINE,`
         <div class="title background-color-automated ">Strip Mine</div>
         <div class="price ">25</div>
         <div class="tag tag1 tag-building "></div>
@@ -2576,7 +2576,7 @@ export const HTML_DATA: Map<string, string> =
           </div>
         </div>
 `],
-["Magnetic Field Generators",`
+[CardName.MAGNETIC_FIELD_GENERATORS,`
         <div class="title background-color-automated">Magnetic Field Generators</div>
         <div class="price">20</div>
         <div class="tag tag1 tag-building"></div>
@@ -2807,7 +2807,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
 `],
-["Soil Factory",`
+[CardName.SOIL_FACTORY,`
           <div class="title background-color-automated ">Soil Factory</div>
           <div class="price ">9</div>
           <div class="tag tag1 tag-building "></div>
@@ -2823,7 +2823,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
 `],
-["Fuel Factory",`
+[CardName.FUEL_FACTORY,`
           <div class="title background-color-automated ">Fuel Factory</div>
           <div class="price ">6</div>
           <div class="tag tag1 tag-building "></div>
@@ -2852,7 +2852,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
 `],
-["Corporate Stronghold",`
+[CardName.CORPORATE_STRONGHOLD,`
           <div class="title background-color-automated ">Corporate Stronghold</div>
           <div class="price ">11</div>
           <div class="tag tag1 tag-building "></div>
@@ -3124,7 +3124,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
 `],
-["Immigrant City",`
+[CardName.IMMIGRANT_CITY,`
           <div class="title background-color-active ">Immigrant City</div>
           <div class="price ">13</div>
           <div class="tag tag1 tag-building "></div>
@@ -3204,7 +3204,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
 `],
-["Rad-chem Factory",`
+[CardName.RAD_CHEM_FACTORY,`
         <div class="title background-color-automated">Rad-Chem Factory</div>
         <div class="price">8</div>
         <div class="tag tag1 tag-building"></div>
@@ -3248,7 +3248,7 @@ export const HTML_DATA: Map<string, string> =
           </div>
         </div>
 `],
-["AI Central",`
+[CardName.AI_CENTRAL,`
           <div class="title background-color-active ">AI Central</div>
           <div class="price ">21</div>
           <div class="tag tag1 tag-building "></div>
@@ -4209,7 +4209,7 @@ export const HTML_DATA: Map<string, string> =
                 </div>
               </div>
 `],
-["Lava Tube Settlement",`
+[CardName.LAVA_TUBE_SETTLEMENT,`
               <div class="title background-color-automated ">Lava Tube Settlement</div>
               <div class="price ">15</div>
               <div class="tag tag1 tag-building"></div>

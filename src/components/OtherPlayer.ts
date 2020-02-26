@@ -8,20 +8,19 @@ export const OtherPlayer = Vue.component("other-player", {
     components: {
         "player-resources": PlayerResources
     },
-    data: function () {
-        return {
-            displayed: false
-        };
-    },
     methods: {
-        toggleDisplayed: function () {
-            this.displayed = !this.displayed;
+        toggleVisible: function () {
+            (this.$root as any).otherPlayersVisibility[this.player.id] = !(this.$root as any).otherPlayersVisibility[this.player.id];
+            this.$forceUpdate();
+        },
+        isVisible: function () {
+            return (this.$root as any).otherPlayersVisibility[this.player.id] === true;
         }
     },
     template: `
         <div>
-            <h3 :style="'color:' + player.color" v-on:click="toggleDisplayed()">{{player.name}}</h3>
-            <div v-if="displayed === true">
+            <h3 :style="'color:' + player.color" v-on:click="toggleVisible()">{{player.name}}</h3>
+            <div v-show="isVisible()">
                 <div class="player_home_block">
                     Cards In Hand: {{player.cardsInHandNbr}}
                 </div>

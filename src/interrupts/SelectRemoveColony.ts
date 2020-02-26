@@ -13,25 +13,15 @@ export class SelectRemoveColony implements PlayerInterrupt {
     ){
         let removeColony = new OrOptions();
         removeColony.title = "Select colony to remove";
-        game.colonies.forEach(colony => {
-          const colonySelect =  new SelectOption(
+        removeColony.options = game.colonies.map(colony => new SelectOption(
             colony.name + " - (" + colony.description + ")", 
             () => {
                 game.colonies.splice(game.colonies.indexOf(colony),1);
                 game.colonyDealer.discardedColonies.push(colony);
                 return undefined;
             }
-          );
-          removeColony.options.push(colonySelect);
-        });
+          ));
         this.playerInput = removeColony;
-        this.playerInput.onend = () => { 
-            if (game.activePlayer !== player) {
-                game.playerIsFinishedTakingActions();   
-            } else {
-                player.takeAction(game);
-            }
-        };
     };
 }    
 

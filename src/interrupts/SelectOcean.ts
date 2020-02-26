@@ -24,12 +24,5 @@ export class SelectOcean implements PlayerInterrupt {
                 return undefined;
             }
         );
-        this.playerInput.onend = () => { 
-            if (game.activePlayer !== player) {
-                game.playerIsFinishedTakingActions();   
-            } else {
-                player.takeAction(game);
-            }
-        };
     };
 }    

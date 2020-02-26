@@ -160,7 +160,7 @@ export class Game {
             throw new Error("No corporation card dealt for player");
           }
           player.dealtCorporationCards = [firstCard, secondCard];
-          player.setWaitingFor(this.pickCorporationCard(player));
+          player.setWaitingFor(this.pickCorporationCard(player), () => {});
         } else {
           this.playCorporationCard(player, new BeginnerCorporation());
         }
@@ -393,7 +393,7 @@ export class Game {
       return result;
     }
 
-    private hasPassedThisActionPhase(player: Player): boolean {
+    public hasPassedThisActionPhase(player: Player): boolean {
       return this.passedPlayers.has(player);
     }
 
@@ -539,7 +539,6 @@ export class Game {
 
     public playerHasPassed(player: Player): void {
       this.passedPlayers.add(player);
-      this.playerIsFinishedTakingActions();
     }
 
     private hasResearched(player: Player): boolean {
@@ -659,7 +658,9 @@ export class Game {
       if (this.interrupts.length > 0) {
         let interrupt = this.interrupts.shift();
         if (interrupt !== undefined && interrupt.playerInput !== undefined) {
-          interrupt.player.setWaitingFor(interrupt.playerInput);
+          interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+            this.playerIsFinishedTakingActions();
+          });
           return;
         }
       }
@@ -810,7 +811,7 @@ export class Game {
     }
 
     public increaseOxygenLevel(
-        player: Player, steps: 1 | 2): SelectSpace | undefined {
+        player: Player, steps: 1 | 2): undefined {
       if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
         return undefined;
       }
@@ -849,14 +850,14 @@ export class Game {
     });
 
     if (this.venusScaleLevel === 8 
-        || (steps === 2 && this.venusScaleLevel === 10) 
+        || ((steps === 2 || steps === 3) && this.venusScaleLevel === 10) 
         || (steps === 3 && this.venusScaleLevel === 12)
     ) {
       player.cardsInHand.push(this.dealer.dealCard());
     }
 
     if (this.venusScaleLevel === 16 
-        || (steps === 2 && this.venusScaleLevel === 18) 
+        || ((steps === 2 || steps === 3) && this.venusScaleLevel === 18) 
         || (steps === 3 && this.venusScaleLevel === 20)
     ) {
       player.terraformRating++;
@@ -870,20 +871,21 @@ export class Game {
   }
 
     public increaseTemperature(
-        player: Player, steps: 1 | 2 | 3): SelectSpace | undefined {
+        player: Player, steps: 1 | 2 | 3): undefined {
       if (this.temperature >= constants.MAX_TEMPERATURE) {
-        return undefined;
+        return;
       }
       if (steps > 1 && this.temperature + 2 * steps > constants.MAX_TEMPERATURE) {
-        steps = (steps == 3) ? 2 : 1; // typing disallows decrement
-        return this.increaseTemperature(player, steps);
+        steps = (steps === 3) ? 2 : 1; // typing disallows decrement
+        this.increaseTemperature(player, steps);
+        return;
       }
       this.temperature += 2 * steps;
       player.terraformRating += steps;
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
       // BONUS FOR OCEAN TILE AT 0
       if (steps === 3 && this.temperature === -20) {
-        player.setProduction(Resources.HEAT,2);
+        player.setProduction(Resources.HEAT, 2);
       } else if (this.temperature === -24 || this.temperature === -20 ||
             (
               (steps === 2 || steps === 3) &&
@@ -899,14 +901,7 @@ export class Game {
           (steps === 3 && this.temperature === 4)
         ) && this.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES
       ) {
-        return new SelectSpace(
-            'Select space for ocean from temperature increase',
-            this.board.getAvailableSpacesForOcean(player),
-            (space: ISpace) => {
-              this.addOceanTile(player, space.id);
-              return undefined;
-            }
-        );
+        this.addOceanInterrupt(player, "Select space for ocean from temperature increase");
       }
       return undefined;
     }
@@ -965,26 +960,8 @@ export class Game {
       if (space.id === SpaceName.HELLAS_OCEAN_TILE 
           && this.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES
           && this.boardName === BoardName.HELLAS) {
-          let selectOcean = new SelectSpace(
-            'Select space for ocean tile',
-            this.board.getAvailableSpacesForOcean(player),
-            (space: ISpace) => {
-              this.addOceanTile(player, space.id);
-              player.megaCredits -= 6;
-              return undefined;
-            }
-          );
-
-
-          selectOcean.onend = () => { 
-            player.takeAction(this);
-          }
-
-          let interrupt = {
-            player: player,
-            playerInput: selectOcean
-          };
-          this.interrupts.push(interrupt);
+          player.megaCredits -= 6;
+          this.addOceanInterrupt(player, "Select space for ocean from placement bonus");
       }
 
       // Land claim a player can claim land for themselves
@@ -1044,7 +1021,7 @@ export class Game {
     }
     public addGreenery(
         player: Player, spaceId: string,
-        spaceType: SpaceType = SpaceType.LAND): SelectSpace | undefined {
+        spaceType: SpaceType = SpaceType.LAND): undefined {
       this.addTile(player, spaceType, this.getSpace(spaceId), {
         tileType: TileType.GREENERY
       });

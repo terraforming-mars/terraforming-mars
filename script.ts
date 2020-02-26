@@ -24,6 +24,7 @@ const app = new Vue({
     data: {
         screen: "empty",
         playerkey: 0,
+        otherPlayersVisibility: {},
         game: {
             players: []
         }

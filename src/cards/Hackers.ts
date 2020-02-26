@@ -17,12 +17,12 @@ export class Hackers implements IProjectCard {
         return player.getProduction(Resources.ENERGY) >= 1;
     }
     public play(player: Player, game: Game) {
-        if (game.getPlayers().length == 1) {
+        if (game.getPlayers().length === 1) {
             player.setProduction(Resources.MEGACREDITS,2);
             player.setProduction(Resources.ENERGY,-1);
             return undefined;
         }
-        return new SelectPlayer(game.getPlayers(), "Select player to decrease mega credit production 2 steps", (foundPlayer: Player) => {
+        return new SelectPlayer(game.getPlayers(), "Select player to decrease megacredits production 2 steps", (foundPlayer: Player) => {
             player.setProduction(Resources.ENERGY,-1);
             foundPlayer.setProduction(Resources.MEGACREDITS,-2,game,player);
             player.setProduction(Resources.MEGACREDITS,2);

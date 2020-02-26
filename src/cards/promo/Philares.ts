@@ -14,8 +14,6 @@ export class Philares implements CorporationCard {
     public name: string = CorporationName.PHILARES;
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 47;
-    private pendingResourcesToAdd : number = 0;
-
 
     public initialAction(player: Player, game: Game) {
         return new SelectSpace("Select space for greenery tile", 
@@ -25,8 +23,7 @@ export class Philares implements CorporationCard {
         });
     }
 
-    private selectResources(player: Player, game: Game) {
-
+    private selectResources(player: Player, game: Game, resourceCount: number) {
         let megacreditsAmount: number = 0;
         let steelAmount: number = 0;
         let titaniumAmount: number = 0;
@@ -37,27 +34,27 @@ export class Philares implements CorporationCard {
         const selectMegacredit = new SelectAmount("Megacredits", (amount: number) => {
             megacreditsAmount = amount;
             return undefined;
-          }, this.pendingResourcesToAdd); 
+          }, resourceCount);
           const selectSteel = new SelectAmount("Steel", (amount: number) => {
             steelAmount = amount;
             return undefined;
-          }, this.pendingResourcesToAdd); 
+          }, resourceCount); 
           const selectTitanium = new SelectAmount("Titanium", (amount: number) => {
             titaniumAmount = amount;
             return undefined;
-          }, this.pendingResourcesToAdd);
+          }, resourceCount);
           const selectPlants = new SelectAmount("Plants", (amount: number) => {
             plantsAmount = amount;
             return undefined;
-          }, this.pendingResourcesToAdd);
+          }, resourceCount);
           const selectEnergy = new SelectAmount("Energy", (amount: number) => {
             energyAmount = amount;
             return undefined;
-          }, this.pendingResourcesToAdd);
+          }, resourceCount);
           const selectHeat = new SelectAmount("Heat", (amount: number) => {
             heatAmount = amount;
             return undefined;
-          }, this.pendingResourcesToAdd);
+          }, resourceCount);
         selectResources = new AndOptions(
             () => {
                 if (
@@ -66,9 +63,9 @@ export class Philares implements CorporationCard {
                     titaniumAmount +
                     plantsAmount +
                     energyAmount +
-                    heatAmount > this.pendingResourcesToAdd
+                    heatAmount > resourceCount
                   ) {
-                    throw new Error("Need to select "+ this.pendingResourcesToAdd +" resource(s)");
+                    throw new Error("Need to select " + resourceCount + " resource(s)");
                   }
                   player.megaCredits += megacreditsAmount;
                   player.steel += steelAmount;
@@ -78,37 +75,33 @@ export class Philares implements CorporationCard {
                   player.heat += heatAmount;
                   return undefined;
             }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
-        selectResources.title = "Philares effect : select "+ this.pendingResourcesToAdd +" resource(s)";
-        let philaresPlayer = game.getPlayers().filter((player) => player.isCorporation(CorporationName.PHILARES))[0];
-        selectResources.onend = () => { 
-            this.pendingResourcesToAdd = 0;
-            if (philaresPlayer !== player) {
-                game.playerIsFinishedTakingActions();   
-            } else {
-                player.takeAction(game);
-            }
-        };
-
-        let interrupt = {
-            player: philaresPlayer,
+        selectResources.title = "Philares effect: select " + resourceCount + " resource(s)";
+        game.interrupts.push({
+            player: player,
             playerInput: selectResources
-        };
-        game.interrupts.push(interrupt);
+        });
     }
 
-    public onTilePlaced(player: Player, space: ISpace, game: Game) {
+    public onTilePlaced(player: Player, space: ISpace, game: Game): void {
         if (space.tile !== undefined && space.tile.tileType !== TileType.OCEAN) {
-          let bonusResource: number = game.board.getAdjacentSpaces(space)
-          .filter((space) => space.tile !== undefined && space.player !== undefined && space.player !== player 
-          && (space.player.isCorporation(CorporationName.PHILARES) || player.isCorporation(CorporationName.PHILARES))
-          ).length;
-          this.pendingResourcesToAdd += bonusResource;
-          this.selectResources(player, game);
+          let bonusResource: number = 0;
+          if (space.player !== undefined && space.player.isCorporation(CorporationName.PHILARES)) {
+            bonusResource = game.board.getAdjacentSpaces(space)
+                .filter((space) => space.tile !== undefined && space.player !== undefined && space.player !== player)
+                .length;
+          } else if (space.player !== undefined && !space.player.isCorporation(CorporationName.PHILARES)) {
+            bonusResource = game.board.getAdjacentSpaces(space)
+                .filter((space) => space.tile !== undefined && space.player !== undefined && space.player.isCorporation(CorporationName.PHILARES))
+                .length;
+          }
+          if (bonusResource > 0) {
+            const philaresPlayer = game.getPlayers().filter((player) => player.isCorporation(CorporationName.PHILARES))[0];
+            this.selectResources(philaresPlayer, game, bonusResource);
+          }
         }
     }
 
     public play() {
         return undefined;
     }
-
 }

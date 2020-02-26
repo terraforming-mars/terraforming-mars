@@ -41,7 +41,6 @@ import { SelectColony } from './interrupts/SelectColony';
 import { SelectRemoveColony } from './interrupts/SelectRemoveColony';
 import { SelectResourceProductionDecrease } from './interrupts/SelectResourceProductionDecrease';
 import { ICard } from './cards/ICard';
-import { GreatEscarpmentConsortium } from './cards/GreatEscarpmentConsortium';
 
 export class Game {
     public activePlayer: Player;
@@ -346,7 +345,6 @@ export class Game {
       for (let i = 0; i < 10; i++) {
         dealtCards.push(this.dealer.dealCard());
       }
-      dealtCards.push(new GreatEscarpmentConsortium());
 
       result.title = "Select corporation and initial cards";
       result.options.push(

@@ -17,7 +17,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Asteroid Mining Consortium",`
+[CardName.ASTEROID_MINING_CONSORTIUM,`
         <div class="title background-color-automated ">Asteroid Mining Consortium</div>
         <div class="price">13</div>
         <div class="tag tag1 tag-jovian"></div>
@@ -983,7 +983,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Great Escarpment Consortium",`
+[CardName.GREAT_ESCARPMENT_CONSORTIUM,`
       <div class="title background-color-automated" style="font-size:14px;">Great Escarpment Consortium</div>
       <div class="price">6</div>
       <div class="corporate-icon project-icon"></div>
@@ -1026,7 +1026,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Mining Area",`
+[CardName.MINING_AREA,`
       <div class="title background-color-automated">Mining Area</div>
       <div class="price">4</div>
       <div class="tag tag1 tag-building"></div>
@@ -1068,7 +1068,7 @@ export const HTML_DATA: Map<string, string> =
             PLACE YOUR MARKER ON A NON-RESERVED AREA. ONLY YOU MAY PLACE A TILE HERE.
         </div>
 `],
-["Mining Rights",`
+[CardName.MINING_RIGHTS,`
       <div class="title background-color-automated">Mining Rights</div>
       <div class="price">9</div>
       <div class="tag tag1 tag-building"></div>
@@ -2503,7 +2503,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Power Supply Consortium",`
+[CardName.POWER_SUPPLY_CONSORTIUM,`
         <div class="title background-color-automated">Power Supply Consortium</div>
         <div class="price">5</div>
         <div class="tag tag1 tag-power"></div>
@@ -2790,7 +2790,7 @@ export const HTML_DATA: Map<string, string> =
                </div>
           </div>
 `],
-["Heat Trappers",`
+[CardName.HEAT_TRAPPERS,`
           <div class="title background-color-automated ">Heat Trappers</div>
           <div class="price ">6</div>
           <div class="tag tag1 tag-building "></div>
@@ -3640,7 +3640,7 @@ export const HTML_DATA: Map<string, string> =
                  (Raise Venus 3 steps).
             </div>
 `],
-["Gyropolis",`
+[CardName.GYROPOLIS,`
             <div class="title background-color-automated ">Gyropolis</div>
             <div class="price ">20</div>
             <div class="tag tag1 tag-building "></div>
@@ -3791,7 +3791,7 @@ export const HTML_DATA: Map<string, string> =
                 </div>
             </div>
 `],
-["Mining Quota",`
+[CardName.MINING_QUOTA,`
             <div class="title background-color-automated ">Mining Quota</div>
             <div class="price ">5</div>
             <div class="tag tag1 tag-building"></div>

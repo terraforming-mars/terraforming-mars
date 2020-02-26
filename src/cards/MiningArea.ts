@@ -9,13 +9,15 @@ import { SpaceBonus } from "../SpaceBonus";
 import { ISpace } from "../ISpace";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class MiningArea implements IProjectCard {
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
-    public name: string = "Mining Area";
+    public name: string = CardName.MINING_AREA;
+    public bonusResource: Resources | undefined = undefined;
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.board.getAvailableSpacesOnLand(player)
                 .filter((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1)
@@ -29,9 +31,11 @@ export class MiningArea implements IProjectCard {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
             if (foundSpace.bonus.indexOf(SpaceBonus.STEEL) !== -1) {
                 player.setProduction(Resources.STEEL);
+                this.bonusResource = Resources.STEEL;
             }
             if (foundSpace.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
                 player.setProduction(Resources.TITANIUM);
+                this.bonusResource = Resources.TITANIUM;
             }
             return undefined;
         });

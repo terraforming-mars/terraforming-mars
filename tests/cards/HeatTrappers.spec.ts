@@ -4,7 +4,6 @@ import { HeatTrappers } from "../../src/cards/HeatTrappers";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { SelectPlayer } from "../../src/inputs/SelectPlayer";
 import { Resources } from '../../src/Resources';
 
 describe("HeatTrappers", function () {
@@ -43,33 +42,6 @@ describe("HeatTrappers", function () {
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(-1);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1); // Incremented
-        expect(player2.getProduction(Resources.HEAT)).to.eq(5); // Reduced two steps
-    });
-
-    it("Should ask for target", function () {
-        const card = new HeatTrappers();
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test2", Color.RED, false);
-        const player3 = new Player("test3", Color.YELLOW, false);
-        const game = new Game("foobar3", [player, player2, player3], player);
-
-        player2.setProduction(Resources.HEAT,7);
-        player3.setProduction(Resources.HEAT,2);
-
-        expect(card.canPlay(player, game)).to.eq(true, "Cant play");
-        const action = card.play(player, game);
-
-        expect(action instanceof SelectPlayer).to.eq(true, "Didn't ask for target");
-        if (action === undefined) return;
-
-        action.cb(player2)
-
-        expect(player3.getProduction(Resources.HEAT)).to.eq(2); // Not changed
-        expect(player.getProduction(Resources.HEAT)).to.eq(0); // Not changed
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(-1);
-        expect(player.getProduction(Resources.ENERGY)).to.eq(1); // Incremented
-        expect(player2.getProduction(Resources.HEAT)).to.eq(5); // Reduced two steps
     });
 
     it("Can't play", function () {

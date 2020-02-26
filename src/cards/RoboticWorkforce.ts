@@ -59,6 +59,18 @@ import { LavaTubeSettlement } from "./prelude/LavaTubeSettlement";
 import { Resources } from '../Resources';
 import { SpacePort } from './colonies/SpacePort';
 import { CardName } from '../CardName';
+import { MiningArea } from './MiningArea';
+import { MiningRights } from './MiningRights';
+import { MiningQuota } from './venusNext/MiningQuota';
+import { Gyropolis } from './venusNext/Gyropolis';
+import { DomeFarming } from './prelude/DomeFarming';
+import { EarlySettlement } from './prelude/EarlySettlement';
+import { MartianIndustries } from './prelude/MartianIndustries';
+import { MiningOperations } from './prelude/MiningOperations';
+import { Mohole } from './prelude/Mohole';
+import { MoholeExcavation } from './prelude/MoholeExcavation';
+import { PolarIndustries } from './prelude/PolarIndustries';
+import { SelfSufficientSettlement } from './prelude/SelfSufficientSettlement';
 
 export class RoboticWorkforce implements IProjectCard {
     public cost: number = 9;
@@ -68,6 +80,8 @@ export class RoboticWorkforce implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         return this.getAvailableCards(player, game).length > 0;
     }
+    private miningSteelProduction: number = 0;
+    private miningTitaniumProduction: number = 0;
 
     private getAvailableCards(player: Player, game: Game): Array<IProjectCard> {
         const builderCards: Array<IProjectCard> = [
@@ -75,6 +89,14 @@ export class RoboticWorkforce implements IProjectCard {
             new BiomassCombustors(),
             new BuildingIndustries(),
             new Capital(),
+            new DomeFarming(),
+            new EarlySettlement(),
+            new MartianIndustries(),
+            new MiningOperations(),
+            new Mohole(),
+            new MoholeExcavation(),
+            new PolarIndustries(),
+            new SelfSufficientSettlement(),
             new CarbonateProcessing(),
             new CommercialDistrict(),
             new CorporateStronghold(),
@@ -90,6 +112,7 @@ export class RoboticWorkforce implements IProjectCard {
             new GeothermalPower(),
             new GHGFactories(),
             new GreatDam(),
+            new Gyropolis(),
             new HeatTrappers(),
             new ImmigrantCity(),
             new IndustrialMicrobes(),
@@ -97,6 +120,9 @@ export class RoboticWorkforce implements IProjectCard {
             new MagneticFieldGenerators(),
             new MedicalLab(),
             new Mine(),
+            new MiningArea(),
+            new MiningQuota(),
+            new MiningRights(),
             new MoholeArea(),
             new NaturalPreserve(),
             new NoctisCity(),
@@ -123,12 +149,20 @@ export class RoboticWorkforce implements IProjectCard {
         ];
         const availableCards = player.playedCards.filter((card) => {
             for (let i = 0; i < builderCards.length; i++) {
-                if (builderCards[i].name === card.name  && card.name !== CardName.BIOMASS_COMBUSTORS) {
-                    return true;
-                } else if (builderCards[i].name === card.name  && card.name === CardName.BIOMASS_COMBUSTORS) {
+                if (builderCards[i].name === card.name  && card.name === CardName.BIOMASS_COMBUSTORS) {
                     if (game.getPlayers().length == 1 || game.getPlayers().filter((p) => p.getProduction(Resources.PLANTS) > 0).length > 0) {
                         return true;
                     }
+                } else if (builderCards[i].name === card.name  && card.name === CardName.GYROPOLIS) {
+                    if (player.getProduction(Resources.ENERGY) >= 2) {
+                        return true;
+                    }
+                } else if (builderCards[i].name === card.name  && card.name === CardName.HEAT_TRAPPERS) {
+                    if (game.getPlayers().length == 1 || game.getPlayers().filter((p) => p.getProduction(Resources.HEAT) >= 2).length > 0) {
+                        return true;
+                    }    
+                } else if (builderCards[i].name === card.name) {
+                    return true;
                 }
             }
             return false;
@@ -141,14 +175,30 @@ export class RoboticWorkforce implements IProjectCard {
         if (availableCards.length === 0) {
             return undefined;
         }
+
         return new SelectCard("Select builder card to copy", availableCards, (selectedCards: Array<IProjectCard>) => {
                 const foundCard: IProjectCard = selectedCards[0];
-                // this is the only card which requires additional user input
+                // this cards require additional user input
                 if (foundCard.name === CardName.BIOMASS_COMBUSTORS) {
                     player.setProduction(Resources.ENERGY,2);
-                    game.addPlantProductionDecreaseInterrupt(player, 1);
+                    game.addResourceProductionDecreaseInterrupt(player, Resources.PLANTS, 1);
                     return undefined;
                 }
+                if (foundCard.name === CardName.HEAT_TRAPPERS) {
+                    player.setProduction(Resources.ENERGY,1);
+                    game.addResourceProductionDecreaseInterrupt(player, Resources.HEAT, 2);
+                    return undefined;
+                }
+
+                // Mining resource definition
+                if (foundCard.name === CardName.MINING_AREA || foundCard.name === CardName.MINING_RIGHTS ) {
+                    if (foundCard.bonusResource !== undefined && foundCard.bonusResource === Resources.STEEL) {
+                        this.miningSteelProduction++;
+                    }
+                    if (foundCard.bonusResource !== undefined && foundCard.bonusResource === Resources.TITANIUM) {
+                        this.miningTitaniumProduction++;
+                    }
+                }    
 
                 class Updater {
                     constructor (
@@ -161,6 +211,14 @@ export class RoboticWorkforce implements IProjectCard {
                 }
 
                 const updater = {
+                    [new DomeFarming().name]: new Updater(2, 0, 0, 0, 1, 0),
+                    [new EarlySettlement().name]: new Updater(0, 0, 0, 0, 1, 0),
+                    [new MartianIndustries().name]: new Updater(1, 0, 1, 0, 0, 0),
+                    [new MiningOperations().name]: new Updater(0, 0, 2, 0, 0, 0),
+                    [new Mohole().name]: new Updater(0, 0, 0, 0, 0, 3),
+                    [new MoholeExcavation().name]: new Updater(0, 0, 1, 0, 0, 2),
+                    [new PolarIndustries().name]: new Updater(0, 0, 0, 0, 0, 2),
+                    [new SelfSufficientSettlement().name]: new Updater(2, 0, 0, 0, 0, 0),
                     [new NoctisCity().name]: new Updater(-1, 3, 0, 0, 0, 0),
                     [new DomedCrater().name]: new Updater(-1, 3, 0, 0, 0, 0),
                     [new ElectroCatapult().name]: new Updater(-1, 0, 0, 0, 0, 0),
@@ -172,6 +230,7 @@ export class RoboticWorkforce implements IProjectCard {
                     [new PeroxidePower().name]: new Updater(2, -1, 0, 0, 0, 0),
                     [new MedicalLab().name]: new Updater(0, Math.floor(player.getTagCount(Tags.STEEL) / 2), 0, 0, 0, 0),
                     [new GeothermalPower().name]: new Updater(2, 0, 0, 0, 0, 0),
+                    [new Gyropolis().name]: new Updater(-2, player.getMultipleTagCount([Tags.VENUS, Tags.EARTH]), 0, 0, 0, 0),
                     [new AICentral().name]: new Updater(-1, 0, 0, 0, 0, 0),
                     [new Capital().name]: new Updater(-2, 5, 0, 0, 0, 0),
                     [new CupolaCity().name]: new Updater(-1, 3, 0, 0, 0, 0),
@@ -180,10 +239,13 @@ export class RoboticWorkforce implements IProjectCard {
                     [new StripMine().name]: new Updater(-2, 0, 2, 1, 0, 0),
                     [new MagneticFieldDome().name]: new Updater(-2, 0, 0, 0, 1, 0),
                     [new MagneticFieldGenerators().name]: new Updater(-4, 0, 0, 0, 2, 0),
+                    [new MiningRights().name]: new Updater(0, 0, this.miningSteelProduction, this.miningTitaniumProduction, 0, 0),
+                    [new MiningQuota().name]: new Updater(0, 0, 2, 0, 0, 0),
+                    [new MiningArea().name]: new Updater(0, 0, this.miningSteelProduction, this.miningTitaniumProduction, 0, 0),
                     [new FueledGenerators().name]: new Updater(1, -1, 0, 0, 0, 0),
                     [new UrbanizedArea().name]: new Updater(-1, 2, 0, 0, 0, 0),
                     [new PowerPlant().name]: new Updater(1, 0, 0, 0, 0, 0),
-                    [new HeatTrappers().name]: new Updater(1, 0, 0, 0, 0, -2),
+                    [new HeatTrappers().name]: new Updater(1, 0, 0, 0, 0, 0),
                     [new TectonicStressPower().name]: new Updater(3, 0, 0, 0, 0, 0),
                     [new UndergroundCity().name]: new Updater(-2, 0, 2, 0, 0, 0),
                     [new NuclearPower().name]: new Updater(3, -2, 0, 0, 0, 0),

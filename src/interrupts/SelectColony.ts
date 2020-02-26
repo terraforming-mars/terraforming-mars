@@ -14,25 +14,15 @@ export class SelectColony implements PlayerInterrupt {
         public openColonies: Array<IColony>,
         public tile: string = "Select where to build a colony"
     ){
-        let buildColony = new OrOptions();
-        openColonies.forEach(colony => {
-            const colonySelect =  new SelectOption(
+        const buildColony = new OrOptions();
+        buildColony.options = openColonies.map(colony => new SelectOption(
               colony.name + " - (" + colony.description + ")", 
               () => {
                 colony.onColonyPlaced(player, game);
                 game.log(player.name + " built a colony on " + colony.name);
                 return undefined;
               }
-            );
-            buildColony.options.push(colonySelect);
-          });
+            ));
         this.playerInput = buildColony;
-        this.playerInput.onend = () => { 
-            if (game.activePlayer !== player) {
-                game.playerIsFinishedTakingActions();   
-            } else {
-                player.takeAction(game);
-            }
-        };
     };
 }    

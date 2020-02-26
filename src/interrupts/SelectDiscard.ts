@@ -10,22 +10,12 @@ export class SelectDiscard implements PlayerInterrupt {
     constructor(
         public player: Player,
         public game: Game,
-        public title?: string
+        public title: string = "Select a card to discard"
     ){
-        if (title === undefined) {
-            title = 'Select a card to discard';
-        }
         this.playerInput = new SelectCard(title, player.cardsInHand, (foundCards: Array<IProjectCard>) => {
             player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
             game.dealer.discard(foundCards[0]);
             return undefined;
           });
-        this.playerInput.onend = () => { 
-            if (game.activePlayer !== player) {
-                game.playerIsFinishedTakingActions();   
-            } else {
-                player.takeAction(game);
-            }
-        };
     };
 }    

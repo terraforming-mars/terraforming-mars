@@ -1,13 +1,13 @@
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
+import { CardName } from "../../CardName";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
 
 export class EccentricSponsor extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];
-    public name: string = "Eccentric Sponsor";
-    public postPlay: boolean = true;
+    public name: string = CardName.ECCENTRIC_SPONSOR;
 
     public getCardDiscount(player: Player, game: Game) {
         const lastCardPlayed = player.lastCardPlayedThisGeneration(game);
@@ -17,8 +17,7 @@ export class EccentricSponsor extends PreludeCard implements IProjectCard {
         return 0;
     }
 
-    public play(player: Player) {
-        player.reduceActionsTakenThisRound();	
+    public play() {
         return undefined;
     }
 }

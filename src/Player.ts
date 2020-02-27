@@ -67,7 +67,7 @@ export class Player {
     public cardCost: number = constants.CARD_COST;
     public oceanBonus: number = constants.OCEAN_BONUS;
     public fleetSize: number = 1;
-    public  tradesThisTurn: number = 0;
+    public tradesThisTurn: number = 0;
     public colonyTradeOffset: number = 0;
     public colonyTradeDiscount: number = 0;
 
@@ -91,6 +91,17 @@ export class Player {
       if (resource === Resources.HEAT) return this.heatProduction;
       return 0;
     }
+
+    public getResource(resource: Resources): number {
+      if (resource === Resources.MEGACREDITS) return this.megaCredits;
+      if (resource === Resources.STEEL) return this.steel;
+      if (resource === Resources.TITANIUM) return this.titanium;
+      if (resource === Resources.PLANTS) return this.plants;
+      if (resource === Resources.ENERGY) return this.energy;
+      if (resource === Resources.HEAT) return this.heat;
+      return 0;
+    }
+
 
     private resolveMonsInsurance(game: Game) {
       if (game.monsInsuranceOwner !== undefined) {
@@ -163,9 +174,6 @@ export class Player {
     public getLastCardPlayedThisTurn(): IProjectCard | undefined {
       return this.lastCardPlayedThisTurn;
     }
-    public getOtherPlayersWithPlantsToRemove(game: Game): Array<Player> {
-      return game.getPlayers().filter((player) => player.id !== this.id && !player.hasProtectedHabitats() && player.plants > 0);
-    }
 
     public cardIsInEffect(cardName: CardName): boolean {
       return this.playedCards.find(
@@ -176,12 +184,6 @@ export class Player {
       return this.cardIsInEffect(CardName.PROTECTED_HABITATS);
     }
     
-    public removePlants(removingPlayer: Player, count: number, game: Game): void {
-      if (removingPlayer !== this && this.hasProtectedHabitats()) {
-        throw new Error('Can not remove plants due to protected habitats');
-      }
-      this.setResource(Resources.PLANTS, -count, game, removingPlayer);
-    }
     public removeAnimals(
         removingPlayer: Player,
         card: ICard,
@@ -198,6 +200,7 @@ export class Player {
       }
       this.removeResourceFrom(card, count, game, removingPlayer);
     }
+    
     public removeMicrobes(
         removingPlayer: Player,
         card: ICard,

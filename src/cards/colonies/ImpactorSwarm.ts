@@ -4,8 +4,7 @@ import { CardType } from '../CardType';
 import { Player } from "../../Player";
 import { CardName } from '../../CardName';
 import { Game } from '../../Game';
-import { SelectPlayer } from "../../inputs/SelectPlayer";
-
+import { Resources } from '../../Resources';
 
 export class ImpactorSwarm implements IProjectCard {
     public cost: number = 11;
@@ -18,25 +17,8 @@ export class ImpactorSwarm implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-
-        const otherPlayersWithPlants = player.getOtherPlayersWithPlantsToRemove(game);
-
-        if (otherPlayersWithPlants.length === 1) {
-            otherPlayersWithPlants[0].removePlants(player, 2, game);
-            player.heat += 12;
-            return undefined;
-        } else if (otherPlayersWithPlants.length === 0) {
-            player.heat += 12;
-            return undefined;
-        }
-        
-        return new SelectPlayer(
-            otherPlayersWithPlants, 
-            "Select player to remove 2 plants from", 
-            (foundPlayer: Player) => {
-                foundPlayer.removePlants(player, 2, game);
-                player.heat += 12;
-            return undefined;
-        });
+        game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 2);
+        player.heat += 12;
+        return undefined;
     }
 }

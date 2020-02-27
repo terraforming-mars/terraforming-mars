@@ -171,11 +171,6 @@ export class Player {
       return;
     }
 
-    public getLastCardPlayedThisTurn(): IProjectCard | undefined {
-      return this.lastCardPlayedThisTurn;
-
-    }
-
     public cardIsInEffect(cardName: CardName): boolean {
       return this.playedCards.find(
         (playedCard) => playedCard.name === cardName) !== undefined;      

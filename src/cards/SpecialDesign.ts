@@ -11,9 +11,8 @@ export class SpecialDesign implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public name: string = "Special Design";
 
-    public getRequirementBonus(player: Player, game: Game): number {
-        const lastCardPlayed = player.lastCardPlayedThisGeneration(game);
-        if (lastCardPlayed !== undefined && lastCardPlayed.name === this.name) {
+    public getRequirementBonus(player: Player, _game: Game): number {
+        if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
             return 2;
         }
         return 0;

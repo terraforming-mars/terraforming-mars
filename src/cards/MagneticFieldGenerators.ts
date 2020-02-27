@@ -4,11 +4,12 @@ import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class MagneticFieldGenerators implements IProjectCard {
     public cost: number = 20;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = "Magnetic Field Generators";
+    public name: string = CardName.MAGNETIC_FIELD_GENERATORS;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {

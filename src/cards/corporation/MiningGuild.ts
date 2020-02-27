@@ -11,7 +11,9 @@ export class MiningGuild implements CorporationCard {
     public tags: Array<Tags> = [Tags.STEEL, Tags.STEEL];
     public startingMegaCredits: number = 30;
     public onTilePlaced(player: Player, space: ISpace) {
-        if (space.player === player && (space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1)) {
+        if (
+            player.isCorporation(this.name)
+            && (space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1)) {
             player.setProduction(Resources.STEEL);
         }
     }

@@ -9,12 +9,13 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceType} from '../SpaceType';
 import {ISpace} from '../ISpace';
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class Capital implements IProjectCard {
     public cost: number = 26;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = 'Capital';
+    public name: string = CardName.CAPITAL;
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 2 &&
         game.board.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game) &&

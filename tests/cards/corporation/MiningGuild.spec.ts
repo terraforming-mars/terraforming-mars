@@ -11,6 +11,7 @@ describe("MiningGuild", function () {
     it("Should play", function () {
         const card = new MiningGuild();
         const player = new Player("test", Color.BLUE, false);
+        player.corporationCard = card;
         const action = card.play(player);
         expect(action).to.eq(undefined);
         expect(player.steel).to.eq(5);

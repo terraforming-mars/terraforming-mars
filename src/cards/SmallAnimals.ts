@@ -23,7 +23,7 @@ export class SmallAnimals implements IActionCard, IProjectCard {
         return Math.floor(player.getResourcesOnCard(this) / 2);
     }
     public play(player: Player, game: Game) {
-        game.addPlantProductionDecreaseInterrupt(player, 1);
+        game.addResourceProductionDecreaseInterrupt(player, Resources.PLANTS, 1);
         return undefined;
     }
     public canAct(): boolean {

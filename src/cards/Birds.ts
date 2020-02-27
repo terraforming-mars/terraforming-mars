@@ -24,7 +24,7 @@ export class Birds implements IActionCard, IProjectCard {
       return player.getResourcesOnCard(this);
     }
     public play(player: Player, game: Game) {
-      game.addPlantProductionDecreaseInterrupt(player, 2);
+      game.addResourceProductionDecreaseInterrupt(player, Resources.PLANTS, 2);
       return undefined;
     }
     public canAct(): boolean {

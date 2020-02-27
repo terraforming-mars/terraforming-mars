@@ -30,8 +30,7 @@ export class MiningRights implements IProjectCard {
             if (foundSpace.bonus.indexOf(SpaceBonus.STEEL) !== -1) {
                 player.setProduction(Resources.STEEL);
                 this.bonusResource = Resources.STEEL;
-            }
-            if (foundSpace.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
+            } else if (foundSpace.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
                 player.setProduction(Resources.TITANIUM);
                 this.bonusResource = Resources.TITANIUM;
             }

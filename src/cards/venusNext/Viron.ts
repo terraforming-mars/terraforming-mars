@@ -11,12 +11,8 @@ export class Viron implements ICard, CorporationCard {
     public tags: Array<Tags> = [Tags.MICROBES];
     public startingMegaCredits: number = 48;
 
-    public canAct(player: Player): boolean {
-        return player.getActionsThisGeneration().size > 0 && !player.getActionsThisGeneration().has(this.name); 
-    }
-
-    public action(player: Player, game: Game) {
-        const result: Array<ICard> = [];
+    private getActionCards(player: Player, game: Game):Array<ICard> {
+        let result: Array<ICard> = [];
         for (const playedCard of player.playedCards) {
             if (
               playedCard.action !== undefined &&
@@ -26,16 +22,27 @@ export class Viron implements ICard, CorporationCard {
               result.push(playedCard);
             }
         }
+        return result;
+    }
+
+    public canAct(player: Player, game: Game): boolean {
+        return this.getActionCards(player, game).length > 0 && !player.getActionsThisGeneration().has(this.name); 
+    }
+
+    public action(player: Player, game: Game) {
+        if (this.getActionCards(player, game).length === 0 ) {
+            return undefined;
+        }
+ 
         return new SelectCard(
             'Perform again an action from a played card',
-            result,
+            this.getActionCards(player, game),
             (foundCards: Array<ICard>) => {
               const foundCard = foundCards[0];
               game.log(player.name + " used " + foundCard.name + " action with " + this.name);
               return foundCard.action!(player, game);
             }
         );
-        return undefined;
     }
 
     public play() {

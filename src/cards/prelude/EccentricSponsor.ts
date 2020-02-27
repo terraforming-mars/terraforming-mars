@@ -9,9 +9,8 @@ export class EccentricSponsor extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = CardName.ECCENTRIC_SPONSOR;
 
-    public getCardDiscount(player: Player, game: Game) {
-        const lastCardPlayed = player.lastCardPlayedThisGeneration(game);
-        if (lastCardPlayed !== undefined && lastCardPlayed.name === this.name) {
+    public getCardDiscount(player: Player, _game: Game) {
+        if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
             return 25;
         }
         return 0;

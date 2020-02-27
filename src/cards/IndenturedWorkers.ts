@@ -11,9 +11,8 @@ export class IndenturedWorkers implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: string = "Indentured Workers";
 
-    public getCardDiscount(player: Player, game: Game) {
-        const lastCardPlayed = player.lastCardPlayedThisGeneration(game);
-        if (lastCardPlayed !== undefined && lastCardPlayed.name === this.name) {
+    public getCardDiscount(player: Player, _game: Game) {
+        if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
             return 8;
         }
         return 0;

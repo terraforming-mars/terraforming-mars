@@ -53,7 +53,7 @@ export class Player {
     public preludeCardsInHand: Array<IProjectCard> = [];    
     public playedCards: Array<IProjectCard> = [];
     public draftedCards: Array<IProjectCard> = [];
-    public generationPlayed: Map<string, number> = new Map<string, number>();
+    private generationPlayed: Map<string, number> = new Map<string, number>();
     public actionsTakenThisRound: number = 0;
     public terraformRating: number = 20;
     public terraformRatingAtGenerationStart: number = 20;
@@ -61,7 +61,7 @@ export class Player {
     public victoryPoints: number = 0;
     public victoryPointsBreakdown = new VictoryPointsBreakdown();
     private actionsThisGeneration: Set<string> = new Set<string>();
-    private lastCardPlayedThisTurn: IProjectCard | undefined;
+    public lastCardPlayed: IProjectCard | undefined;
     private waitingFor?: PlayerInput;
     private waitingForCb?: () => void;
     public cardCost: number = constants.CARD_COST;
@@ -173,6 +173,7 @@ export class Player {
 
     public getLastCardPlayedThisTurn(): IProjectCard | undefined {
       return this.lastCardPlayedThisTurn;
+
     }
 
     public cardIsInEffect(cardName: CardName): boolean {
@@ -240,20 +241,7 @@ export class Player {
       }
       return requirementsBonus;
     }
-    public lastCardPlayedThisGeneration(game: Game): undefined | IProjectCard {
-      const lastCardPlayed = this.playedCards[this.playedCards.length - 1];
-      if (lastCardPlayed !== undefined) {
-        const generationPlayed =
-                this.generationPlayed.get(lastCardPlayed.name);
-        if (generationPlayed === game.generation) {
-          return lastCardPlayed;
-        }
-      }
-      return undefined;
-    }
-    public addAnimalsToCard(card: ICard, count: number): void {
-      this.addResourceTo(card, count);
-    }
+
     private generateId(): string {
       return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
     }
@@ -780,7 +768,7 @@ export class Player {
     private addPlayedCard(game: Game, card: IProjectCard): void {
       this.playedCards.push(card);
       game.log(this.name + " played " + card.name);
-      this.lastCardPlayedThisTurn = card;
+      this.lastCardPlayed = card;
       this.generationPlayed.set(card.name, game.generation);
     }
 
@@ -1461,6 +1449,7 @@ export class Player {
       return new SelectOption('Pass', () => {
         game.playerHasPassed(this);
         game.log(this.name + " passed");
+        this.lastCardPlayed = undefined;
         return undefined;
       });
     }
@@ -1640,7 +1629,6 @@ export class Player {
 
       if (game.hasPassedThisActionPhase(this) || this.actionsTakenThisRound >= 2) {
         this.actionsTakenThisRound = 0;
-        this.lastCardPlayedThisTurn = undefined;
         game.playerIsFinishedTakingActions();
         return;
       }         

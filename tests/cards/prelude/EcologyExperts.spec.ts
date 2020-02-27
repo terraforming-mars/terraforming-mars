@@ -10,7 +10,7 @@ describe("EcologyExperts", function () {
         const card = new EcologyExperts();
         const player = new Player("test", Color.BLUE, false);
         expect(card.getRequirementBonus(player)).to.eq(0);
-        (player as any).lastCardPlayedThisTurn = card;
+        player.lastCardPlayed = card;
         expect(card.getRequirementBonus(player)).to.eq(50);
     });
     it("Should play", function () {

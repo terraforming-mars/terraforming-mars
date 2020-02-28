@@ -65,6 +65,7 @@ function requestHandler(
       } else if (req.url.startsWith('/api/waitingfor?id=')) {
         apiGetWaitingFor(req, res);
       } else if (req.url === '/styles.css') {
+        res.setHeader('Content-Type', 'text/css');
         serveResource(res, styles);
       } else if (
           req.url.startsWith('/assets/') ||
@@ -536,6 +537,8 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
     res.write(fs.readFileSync('dist/main.js'));
   } else if (req.url === '/assets/Prototype.ttf') {
     res.write(fs.readFileSync('assets/Prototype.ttf'));
+  } else if (req.url === '/assets/futureforces.ttf') {
+    res.write(fs.readFileSync('assets/futureforces.ttf'));
   } else if (req.url.endsWith('.png')) {
     const assetsRoot = path.resolve('./assets');
     const reqFile = path.resolve(path.normalize(req.url).slice(1));
@@ -567,5 +570,6 @@ function serveResource(res: http.ServerResponse, s: Buffer): void {
 }
 
 console.log('Starting server on port ' + (process.env.PORT || 8080));
+console.log('version 0.X');
 server.listen(process.env.PORT || 8080);
 

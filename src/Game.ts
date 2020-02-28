@@ -41,6 +41,7 @@ import { SelectColony } from './interrupts/SelectColony';
 import { SelectRemoveColony } from './interrupts/SelectRemoveColony';
 import { SelectResourceProductionDecrease } from './interrupts/SelectResourceProductionDecrease';
 import { ICard } from './cards/ICard';
+import { SelectResourceDecrease } from './interrupts/SelectResourceDecrease';
 
 export class Game {
     public activePlayer: Player;
@@ -167,12 +168,12 @@ export class Game {
       }
     }
 
-    public addOceanInterrupt(player: Player, title: string): void {
+    public addOceanInterrupt(player: Player, title?: string): void {
       if (this.board.getOceansOnBoard() + this.pendingOceans  >= constants.MAX_OCEAN_TILES) {
         return;
       }
       this.pendingOceans++;
-      this.addInterrupt(new SelectOcean(player, this,title));
+      this.addInterrupt(new SelectOcean(player, this, title));
     }
 
     public addColonyInterrupt(player: Player, allowDuplicate: boolean = false, title: string): void {
@@ -204,6 +205,27 @@ export class Game {
         return;
       }
       this.addInterrupt(new SelectResourceProductionDecrease(player, this, resource, count, title));
+    }
+
+    public addResourceDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {
+      if (this.players.length === 1) {
+        return;
+      }
+      let candidates: Array<Player> = [];
+      if (resource === Resources.PLANTS) {
+        candidates = this.getPlayers().filter((p) => p.id != player.id && !p.hasProtectedHabitats() && p.getResource(resource) > 0);
+      } else {
+        candidates = this.getPlayers().filter((p) => p.id != player.id && p.getResource(resource) > 0);
+      }
+
+      if (candidates.length === 0) {
+        return;
+      } else if (candidates.length === 1) {
+        candidates[0].setResource(resource, -count, this, player);
+        return;
+      }
+
+      this.addInterrupt(new SelectResourceDecrease(player, candidates, this, resource, count, title));
     }
 
     public addInterrupt(interrupt: PlayerInterrupt): void {

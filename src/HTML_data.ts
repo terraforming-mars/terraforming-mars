@@ -845,7 +845,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Lake Marineris",`
+[CardName.LAKE_MARINERIS,`
       <div class="title background-color-automated">Lake Marineris</div>
       <div class="price">18</div>
       <div class="card-number">053</div>
@@ -1247,7 +1247,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Ice Asteroid",`
+[CardName.ICE_ASTEROID,`
         <div class="title background-color-events ">Ice Asteroid</div>
         <div class="price ">23</div>
         <div class="tag tag1 tag-event "></div>
@@ -6362,7 +6362,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Great Aquifer",`
+[CardName.GREAT_AQUIFER,`
       <div class="title background-color-prelude">Great Aquifer</div>
       <div class="prelude-label">PRELUDE</div>
       <div class="prelude-icon preludeCard-icon"></div>

@@ -131,33 +131,33 @@ export const CreateGameForm = Vue.component("create-game-form", {
                     </select>
                 </div>
                 <label>
-                    <input type="checkbox" class="nes-checkbox" v-model="players[playerIndex - 1].beginner" />
+                    <input type="checkbox"  v-model="players[playerIndex - 1].beginner" />
                     <span>Is Beginner</span>
                 </label>
                 <label>
-                    <input v-model="firstIndex" class="nes-radio" type="radio" v-bind:value="playerIndex - 1" />
+                    <input v-model="firstIndex" type="radio" v-bind:value="playerIndex - 1" />
                     <span>Goes First</span>
                 </label>
             </div>
             <div>
                 <label>
-                        <input type="checkbox" class="nes-checkbox" v-model="prelude" />
+                        <input type="checkbox"  v-model="prelude" />
                         <span>Use Prelude extension ?</span>
                 </label>
                 <label>
-                        <input type="checkbox" class="nes-checkbox" v-model="venusNext" />
+                        <input type="checkbox"  v-model="venusNext" />
                         <span>Use Venus Next extension ?</span>
                 </label>	
                 <label>
-                        <input type="checkbox" class="nes-checkbox" v-model="colonies" />
+                        <input type="checkbox"  v-model="colonies" />
                         <span>Use Colonies extension ?</span>
                  </label>		
                 <label>
-                        <input type="checkbox" class="nes-checkbox" v-model="draftVariant" />
+                        <input type="checkbox"  v-model="draftVariant" />
                         <span>Use draft variant ?</span>
                 </label>
                 <label>
-                        <input type="checkbox" class="nes-checkbox" v-model="customCorporationsList"  v-on:click="toggleDisplayed()" />
+                        <input type="checkbox"  v-model="customCorporationsList"  v-on:click="toggleDisplayed()" />
                         <span>Use custom Corporation list ?</span>
                 </label>
                 
@@ -177,7 +177,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <h2>Original Corporations</h2>
                 <div v-for="corporation in getOriginalCorps()">
                 <label>
-                    <input type="checkbox" class="nes-checkbox" v-model="corporations" :value="corporation"/>
+                    <input type="checkbox"  v-model="corporations" :value="corporation"/>
                     <span>{{corporation.name}}</span>
                 </label>    
                 </div>
@@ -185,7 +185,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <h2>Prelude Corporations</h2>
                 <div v-for="corporation in getPreludeCorps()">
                 <label>
-                    <input type="checkbox" class="nes-checkbox" v-model="corporations" :value="corporation"/>
+                    <input type="checkbox"  v-model="corporations" :value="corporation"/>
                     <span>{{corporation.name}}</span>
                 </label>    
                 </div>
@@ -193,7 +193,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <h2>Venus Next Corporations</h2>
                 <div v-for="corporation in getVenusCorps()">
                 <label>
-                    <input type="checkbox" class="nes-checkbox" v-model="corporations" :value="corporation"/>
+                    <input type="checkbox"  v-model="corporations" :value="corporation"/>
                     <span>{{corporation.name}}</span>
                 </label>    
                 </div>
@@ -201,7 +201,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <h2>Colonies Corporations</h2>   
                 <div v-for="corporation in getColoniesCorps()">
                 <label>
-                    <input type="checkbox" class="nes-checkbox" v-model="corporations" :value="corporation"/>
+                    <input type="checkbox"  v-model="corporations" :value="corporation"/>
                     <span>{{corporation.name}}</span>
                 </label>    
                 </div>
@@ -209,7 +209,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <h2>Turmoil Corporations</h2>   
                 <div v-for="corporation in getTurmoilCorps()">
                 <label>
-                    <input type="checkbox" class="nes-checkbox" v-model="corporations" :value="corporation"/>
+                    <input type="checkbox"  v-model="corporations" :value="corporation"/>
                     <span>{{corporation.name}}</span>
                 </label>
                 </div> 
@@ -217,7 +217,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <h2>Promo Corporations</h2>   
                 <div v-for="corporation in getPromoCorps()">
                 <label>
-                    <input type="checkbox" class="nes-checkbox" v-model="corporations" :value="corporation"/>
+                    <input type="checkbox"  v-model="corporations" :value="corporation"/>
                     <span>{{corporation.name}}</span>
                 </label>
                 </div> 

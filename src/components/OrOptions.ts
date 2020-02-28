@@ -34,7 +34,7 @@ export const OrOptions = Vue.component("or-options", {
         const optionElements: Array<VNode> = [];
         this.playerinput.options.forEach((option: any, idx: number) => {
             const domProps: {[key: string]: any} = {
-                className: "nes-radio",
+                //className: "nes-radio",
                 name: "selectOption" + unique,
                 type: "radio",
                 value: String(idx)
@@ -44,8 +44,10 @@ export const OrOptions = Vue.component("or-options", {
             if (this.$data.selectedOption === idx) {
                 domProps.checked = true;
             }
+            //STYLE CHANGE
             subchildren.push(createElement("label", [
-                createElement("input", { style: { display: displayStyle }, domProps, on: { change: (event: any) => {
+                //createElement("input", { style: { display: displayStyle }, domProps, on: { change: (event: any) => {
+                    createElement("input", { domProps, on: { change: (event: any) => {
                     this.selectedOption = Number(event.target.value);
                 }}}),
                 createElement("span", option.title)
@@ -56,6 +58,7 @@ export const OrOptions = Vue.component("or-options", {
                 this.onsave([copy]);
             }, false, false));
             subchildren.push(createElement("div", { style: { display: displayStyle, marginLeft: "30px" } }, [this.$data.childComponents[this.$data.childComponents.length - 1]]));
+            //subchildren.push(createElement("div", { style: { marginLeft: "30px" } }, [this.$data.childComponents[this.$data.childComponents.length - 1]]));
             optionElements.push(subchildren[subchildren.length - 1]);
             children.push(createElement("div", subchildren));
         });

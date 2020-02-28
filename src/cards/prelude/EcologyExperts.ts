@@ -9,8 +9,7 @@ export class EcologyExperts extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT, Tags.MICROBES];
     public name: string = CardName.ECOLOGY_EXPERTS;
     public getRequirementBonus(player: Player): number {
-        const lastCardPlayed = player.getLastCardPlayedThisTurn();
-        if (lastCardPlayed !== undefined && lastCardPlayed.name === this.name) {
+        if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
             // Magic number high enough to always ignore requirements.
             return 50;
         }

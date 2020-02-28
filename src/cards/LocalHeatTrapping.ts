@@ -34,7 +34,7 @@ export class LocalHeatTrapping implements IProjectCard {
             options = new OrOptions(
                 new SelectOption("Gain 4 plants", gain4Plants),
                 new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<ICard>) => {
-                    player.addAnimalsToCard(foundCards[0], 2);
+                    player.addResourceTo(foundCards[0], 2);
                     return undefined;
                 }));
         };

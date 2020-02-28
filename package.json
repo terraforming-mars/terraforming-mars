@@ -8,6 +8,7 @@
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
     "@types/node": "^10.14.4",
+    "dialog-polyfill": "^0.5.0",
     "less": "^3.10.3",
     "nes.css": "^2.1.1",
     "typescript": "^3.5.0",

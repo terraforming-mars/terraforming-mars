@@ -8,7 +8,6 @@ import { OrOptions } from "../../src/inputs/OrOptions";
 import { Tardigrades } from "../../src/cards/Tardigrades";
 import { Pets } from "../../src/cards/Pets";
 import { SelectCard } from "../../src/inputs/SelectCard";
-import { SelectSpace } from "../../src/inputs/SelectSpace";
 
 describe("ImportedHydrogen", function () {
     it("Should play", function () {
@@ -40,12 +39,7 @@ describe("ImportedHydrogen", function () {
         expect(selectAnimal.cards[0]).to.eq(pets);
         selectMicrobe.cb([tardigrades]);
         expect(player.getResourcesOnCard(tardigrades)).to.eq(3);
-        const nextAction = selectAnimal.cb([pets]);
+        selectAnimal.cb([pets]);
         expect(player.getResourcesOnCard(pets)).to.eq(2);
-
-        expect(nextAction instanceof SelectSpace).to.eq(true);
-        if (nextAction === undefined) return;
-        nextAction.cb(game.board.getAvailableSpacesForOcean(player)[0]);
-        expect(game.board.getOceansOnBoard()).to.eq(1);
     });
 });

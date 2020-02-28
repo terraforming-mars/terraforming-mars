@@ -9,11 +9,12 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
+import { CardName } from '../CardName';
 
 export class Flooding implements IProjectCard {
   public cardType: CardType = CardType.EVENT;
   public cost: number = 7;
-  public name: string = 'Flooding';
+  public name: string = CardName.FLOODING;
   public tags: Array<Tags> = [];
   public play(player: Player, game: Game) {
     return new SelectSpace(

@@ -1,4 +1,4 @@
-import { CardName } from "./CardName";
+import { CardName } from './CardName';
 import { CorporationName } from './CorporationName';
 
 export const HTML_DATA: Map<string, string> =
@@ -173,7 +173,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Water Import From Europa",`
+[CardName.WATER_IMPORT_FROM_EUROPA,`
         <div class="title background-color-active ">Water Import from Europa</div>
         <div class="price ">25</div>
         <div class="tag tag1 tag-space "></div>
@@ -295,7 +295,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Imported Hydrogen",`
+[CardName.IMPORTED_HYDROGEN,`
         <div class="title background-color-events ">Imported Hydrogen</div>
         <div class="price ">16</div>
         <div class="tag tag1 tag-event "></div>
@@ -343,7 +343,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Black Polar Dust",`
+[CardName.BLACK_POLAR_DUST,`
         <div class="title background-color-automated ">Black Polar Dust</div>
         <div class="price ">15</div>
         <div class="card-number">022</div>
@@ -2240,7 +2240,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Large Convoy",`
+[CardName.LARGE_CONVOY,`
         <div class="title background-color-events ">Large Convoy</div>
         <div class="price ">36</div>
         <div class="tag tag1 tag-event "></div>
@@ -2944,7 +2944,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
           </div>
 `],
-["Aquifer Pumping",`
+[CardName.AQUIFER_PUMPING,`
           <div class="title background-color-active ">Aquifer Pumping</div>
           <div class="price ">18</div>
           <div class="tag tag1 tag-building "></div>
@@ -2957,7 +2957,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
 `],
-["Flooding",`
+[CardName.FLOODING,`
           <div class="title background-color-events ">Flooding</div>
           <div class="price ">7</div>
           <div class="tag tag1 tag-event "></div>
@@ -6178,7 +6178,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Aquifer Turbines",`
+[CardName.AQUIFER_TURBINES,`
       <div class="title background-color-prelude">Aquifer Turbines</div>
       <div class="tag tag1 tag-power"></div>
       <div class="prelude-label">PRELUDE</div>

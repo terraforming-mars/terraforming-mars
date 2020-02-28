@@ -5,17 +5,16 @@ import {CardType} from './CardType';
 import {Player} from '../Player';
 import {Game} from '../Game';
 import {HowToPay} from '../inputs/HowToPay';
-import {ISpace} from '../ISpace';
 import {AndOptions} from '../inputs/AndOptions';
-import {SelectSpace} from '../inputs/SelectSpace';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
 import * as constants from '../constants';
+import { CardName } from '../CardName';
 
 
 export class AquiferPumping implements IActionCard, IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = 'Aquifer Pumping';
+    public name: string = CardName.AQUIFER_PUMPING;
     public cardType: CardType = CardType.ACTIVE;
 
     public play() {
@@ -26,7 +25,6 @@ export class AquiferPumping implements IActionCard, IProjectCard {
     }
     public action(player: Player, game: Game) {
       let howToPay: HowToPay;
-      let foundSpace: ISpace;
       return new AndOptions(
           () => {
             if (
@@ -39,17 +37,9 @@ export class AquiferPumping implements IActionCard, IProjectCard {
             player.steel -= howToPay.steel;
             player.heat -= howToPay.heat;
             player.megaCredits -= howToPay.megaCredits;
-            game.addOceanTile(player, foundSpace.id);
+            game.addOceanInterrupt(player);
             return undefined;
           },
-          new SelectSpace(
-              'Select space for ocean tile',
-              game.board.getAvailableSpacesForOcean(player),
-              (space: ISpace) => {
-                foundSpace = space;
-                return undefined;
-              }
-          ),
           new SelectHowToPay(
               'Select how to pay for action', true, false,
               player.canUseHeatAsMegaCredits, 8,

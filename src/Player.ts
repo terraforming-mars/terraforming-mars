@@ -89,8 +89,19 @@ export class Player {
       if (resource === Resources.PLANTS) return this.plantProduction;
       if (resource === Resources.ENERGY) return this.energyProduction;
       if (resource === Resources.HEAT) return this.heatProduction;
-      return 0;
+      throw new Error("Resource " + resource + " not found");
     }
+
+    public getResource(resource: Resources): number {
+      if (resource === Resources.MEGACREDITS) return this.megaCredits;
+      if (resource === Resources.STEEL) return this.steel;
+      if (resource === Resources.TITANIUM) return this.titanium;
+      if (resource === Resources.PLANTS) return this.plants;
+      if (resource === Resources.ENERGY) return this.energy;
+      if (resource === Resources.HEAT) return this.heat;
+      throw new Error("Resource " + resource + " not found");
+    }
+
 
     private resolveMonsInsurance(game: Game) {
       if (game.monsInsuranceOwner !== undefined) {
@@ -160,10 +171,6 @@ export class Player {
       return;
     }
 
-    public getOtherPlayersWithPlantsToRemove(game: Game): Array<Player> {
-      return game.getPlayers().filter((player) => player.id !== this.id && !player.hasProtectedHabitats() && player.plants > 0);
-    }
-
     public cardIsInEffect(cardName: CardName): boolean {
       return this.playedCards.find(
         (playedCard) => playedCard.name === cardName) !== undefined;      
@@ -173,12 +180,6 @@ export class Player {
       return this.cardIsInEffect(CardName.PROTECTED_HABITATS);
     }
     
-    public removePlants(removingPlayer: Player, count: number, game: Game): void {
-      if (removingPlayer !== this && this.hasProtectedHabitats()) {
-        throw new Error('Can not remove plants due to protected habitats');
-      }
-      this.setResource(Resources.PLANTS, -count, game, removingPlayer);
-    }
     public removeAnimals(
         removingPlayer: Player,
         card: ICard,
@@ -195,6 +196,7 @@ export class Player {
       }
       this.removeResourceFrom(card, count, game, removingPlayer);
     }
+    
     public removeMicrobes(
         removingPlayer: Player,
         card: ICard,

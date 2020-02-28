@@ -14,8 +14,8 @@ describe("LakefrontResorts", function () {
         const play = card2.play(player);
         expect(play).to.eq(undefined);
         player.corporationCard = card2;
-        game.addOceanTile(player, game.board.getAvailableSpacesForOcean(player)[0].id);
-        game.addOceanTile(player, game.board.getAvailableSpacesForOcean(player)[1].id);
+        game.addOceanTile(player, '06');
+        game.addOceanTile(player, '07');
         
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
         // The 2 oceans are adjacent

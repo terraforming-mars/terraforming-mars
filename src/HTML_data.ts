@@ -1198,7 +1198,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Towing A Comet",`
+[CardName.TOWING_A_COMET,`
         <div class="title background-color-events ">Towing a Comet</div>
         <div class="price ">23</div>
         <div class="tag tag1 tag-event "></div>
@@ -1991,7 +1991,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Subterranean Reservoir",`
+[CardName.SUBTERRANEAN_RESERVOIR,`
         <div class="title background-color-events ">Subterranean Reservoir</div>
         <div class="price ">11</div>
         <div class="tag tag1 tag-event "></div>
@@ -2520,7 +2520,7 @@ export const HTML_DATA: Map<string, string> =
           </div>
         </div>
 `],
-["Convoy From Europa",`
+[CardName.CONVOY_FROM_EUROPA,`
           <div class="title background-color-events ">Convoy From Europa</div>
           <div class="price ">15</div>
           <div class="tag tag1 tag-event "></div>
@@ -2839,7 +2839,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
 `],
-["Ice Cap Melting",`
+[CardName.ICE_CAP_MELTING,`
           <div class="title background-color-events ">Ice Cap Melting</div>
           <div class="price ">5</div>
           <div class="tag tag1 tag-event "></div>

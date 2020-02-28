@@ -89,7 +89,7 @@ export class Player {
       if (resource === Resources.PLANTS) return this.plantProduction;
       if (resource === Resources.ENERGY) return this.energyProduction;
       if (resource === Resources.HEAT) return this.heatProduction;
-      return 0;
+      throw new Error("Resource " + resource + " not found");
     }
 
     public getResource(resource: Resources): number {
@@ -99,7 +99,7 @@ export class Player {
       if (resource === Resources.PLANTS) return this.plants;
       if (resource === Resources.ENERGY) return this.energy;
       if (resource === Resources.HEAT) return this.heat;
-      return 0;
+      throw new Error("Resource " + resource + " not found");
     }
 
 

@@ -213,12 +213,15 @@ export class Game {
       }
       let candidates: Array<Player> = [];
       if (resource === Resources.PLANTS) {
-        candidates = this.getPlayers().filter((p) => p.id != player.id && !p.hasProtectedHabitats && p.getResource(resource) > 0);
+        candidates = this.getPlayers().filter((p) => p.id != player.id && !p.hasProtectedHabitats() && p.getResource(resource) > 0);
       } else {
         candidates = this.getPlayers().filter((p) => p.id != player.id && p.getResource(resource) > 0);
       }
 
       if (candidates.length === 0) {
+        return;
+      } else if (candidates.length === 1) {
+        candidates[0].setResource(resource, -count, this, player);
         return;
       }
 

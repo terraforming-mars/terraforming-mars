@@ -94,15 +94,16 @@ export const CreateGameForm = Vue.component("create-game-form", {
             if (this.randomFirstPlayer) {
                 this.firstIndex = this.randomInteger(0, this.playersCount-1);
             }
+
+            // Set player name for solo mode
+            if (this.playersCount === 1 && this.players[0].name === "") {
+                this.players[0].name = "You";
+            }
+
             const players = this.$data.players.slice(0, this.playersCount).map((player: any, index: number) => {
                 player.first = (this.firstIndex === index);
                 return player;
             }).filter((player: any) => player.name);
-
-            // Set player name for solo mode
-            if (this.playersCount === 1) {
-                this.players[0].name = "You";
-            }
 
             // TODO Check if all players has different colors
 
@@ -210,7 +211,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         </div>
 
                         <div class="create-game-options-block col3 col-sm-6">
-                            <h4>Board:</h4>
+                            <h4>Board</h4>
 
                             <label class="form-radio">
                                 <input type="radio" :value=getOriginalBoard() name="board" v-model="board">

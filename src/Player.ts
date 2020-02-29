@@ -297,7 +297,7 @@ export class Player {
       return count;
     }
 
-    public getTagCount(tag: Tags, includeEventsTags:boolean = false): number {
+    public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeWildcardTags:boolean = true): number {
       let tagCount = 0;
       this.playedCards.forEach((card: IProjectCard) => {
         if ( ! includeEventsTags && card.cardType === CardType.EVENT) return;
@@ -310,24 +310,34 @@ export class Player {
       }
       if (tag === Tags.WILDCARD) {
         return tagCount;
+      };
+      if (includeWildcardTags) {
+          return tagCount + this.getTagCount(Tags.WILDCARD);
       } else {
-        return tagCount + this.getTagCount(Tags.WILDCARD);
+        return tagCount;
       }
     }
 
-    public getMultipleTagCount(tags: Array<Tags>, includeEventsTags:boolean = false): number {
+    public getMultipleTagCount(tags: Array<Tags>): number {
       let tagCount = 0;
-      this.playedCards.forEach((card: IProjectCard) => {
-        if ( ! includeEventsTags && card.cardType === CardType.EVENT) return;
-        tagCount += card.tags.filter((cardTag) => tags.indexOf(cardTag) !== -1).length;
+      tags.forEach(tag => {
+        tagCount += this.getTagCount(tag, false, false);
       });
-      if (this.corporationCard !== undefined) {
-        tagCount += this.corporationCard.tags.filter(
-            (cardTag) => tags.indexOf(cardTag) !== -1
-        ).length;
-      }
       return tagCount + this.getTagCount(Tags.WILDCARD);
     }  
+
+    public checkMultipleTagPresence(tags: Array<Tags>): boolean {
+      var distinctCount = 0;
+      tags.forEach(tag => {
+        if (this.getTagCount(tag, false, false) > 0) {
+          distinctCount++;
+        }  
+      });
+      if (distinctCount + this.getTagCount(Tags.WILDCARD) >= tags.length) {
+        return true;
+      }
+      return false;
+    }
 
     public getCard(cards: Array<IProjectCard>, cardName: string): IProjectCard {
       const foundCards = cards.filter((card) => card.name === cardName);

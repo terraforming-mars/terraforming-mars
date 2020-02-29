@@ -2119,7 +2119,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Advanced Ecosystems",`
+[CardName.ADVANCED_ECOSYSTEMS,`
       <div class="title background-color-automated">Advanced Ecosystems</div>
       <div class="price">11</div>
       <div class="tag tag1 tag-animal"></div>
@@ -3821,7 +3821,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
             </div>
 `],
-["Omnicourt",`
+[CardName.OMNICOURT,`
             <div class="title background-color-automated ">Omnicourt</div>
             <div class="price ">11</div>
             <div class="tag tag1 tag-building"></div>
@@ -3870,7 +3870,7 @@ export const HTML_DATA: Map<string, string> =
                 </div>
             </div>
 `],
-["Sister Planet Support",`
+[CardName.SISTER_PLANET_SUPPORT,`
             <div class="title background-color-automated ">Sister Planet Support</div>
             <div class="price ">7</div>
             <div class="tag tag1 tag-earth"></div>
@@ -3887,7 +3887,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
             </div>
 `],
-["Solarnet",`
+[CardName.SOLARNET,`
             <div class="title background-color-automated ">Solarnet</div>
             <div class="price ">7</div>
             <div class="venus-icon project-icon"></div>

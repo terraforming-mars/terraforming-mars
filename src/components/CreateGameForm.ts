@@ -42,7 +42,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 { name: "", color: Color.BLACK, beginner: false, first: false }
             ],
             prelude: false,
-            draftVariant: false,
+            draftVariant: true,
             randomFirstPlayer: true,
             venusNext: false,
             colonies: false,

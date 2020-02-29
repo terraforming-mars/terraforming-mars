@@ -5,11 +5,8 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 
-
-// import { OrOptions } from "../../src/inputs/OrOptions";
 import { Pets } from "../../src/cards/Pets";
 import { OrOptions } from "../../src/inputs/OrOptions";
-import { SelectSpace } from "../../src/inputs/SelectSpace";
 import { maxOutOceans } from "../TestingUtils";
 
 describe("LargeConvoy", function () {
@@ -19,17 +16,12 @@ describe("LargeConvoy", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
-        if (action === undefined) return;
+        expect(action).to.eq(undefined);
 
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(2);
         expect(player.cardsInHand.length).to.eq(2);
         expect(player.plants).to.eq(5);
-
-
-        action.cb(game.board.getAvailableSpacesForOcean(player)[0]);
-        expect(game.board.getOceansOnBoard()).to.eq(1);
     });
 
     it("Should play with animals placement", function () {
@@ -50,13 +42,9 @@ describe("LargeConvoy", function () {
         expect(player.cardsInHand.length).to.eq(2);
         expect(player.plants).to.eq(0);
 
-        const newAction = (action as OrOptions).options[1].cb([pets])
+        (action as OrOptions).options[1].cb([pets])
         expect(player.getResourcesOnCard(pets)).to.eq(4);
 
-        expect(newAction instanceof SelectSpace).to.eq(true);
-        if (newAction === undefined) return;
-        newAction.cb(game.board.getAvailableSpacesForOcean(player)[0]);
-        expect(game.board.getOceansOnBoard()).to.eq(1);
     });
 
     it("Should play without oceans", function () {
@@ -80,11 +68,8 @@ describe("LargeConvoy", function () {
         expect(player.plants).to.eq(0);
 
         expect(player.plants).to.eq(0);
-        const newAction = (action as OrOptions).options[0].cb()
+        (action as OrOptions).options[0].cb()
         expect(player.plants).to.eq(5);
-
-        expect(newAction).to.eq(undefined);
-        if (newAction === undefined) return;
     });
 
 

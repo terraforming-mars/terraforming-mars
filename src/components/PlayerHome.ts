@@ -15,6 +15,8 @@ import { Preferences } from "./Preferences"
 import { PlayerModel } from "../models/PlayerModel";
 import { Colony } from './Colony';
 
+const dialogPolyfill = require("dialog-polyfill");
+
 export const PlayerHome = Vue.component("player-home", {
     props: ["player"],
     components: {
@@ -40,6 +42,9 @@ export const PlayerHome = Vue.component("player-home", {
             if (hilightActive && player.isActive) ret += " player_is_active";
             return ret;
         }
+    },
+    mounted: function () {
+        dialogPolyfill.default.registerDialog(document.getElementById("dialog-default"));
     },
     template: `
         <div id="player-home">

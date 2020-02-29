@@ -4,27 +4,17 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { SelectSpace } from "../inputs/SelectSpace";
-import { ISpace } from "../ISpace";
-import { MAX_OCEAN_TILES } from '../constants';
+import { CardName } from '../CardName';
 
 export class TowingAComet implements IProjectCard {
     public cost: number = 23;
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
-    public name: string = "Towing A Comet";
+    public name: string = CardName.TOWING_A_COMET;
 
     public play(player: Player, game: Game) {
-
-        if (game.board.getOceansOnBoard() === MAX_OCEAN_TILES) {
-            player.plants += 2;
-            return game.increaseOxygenLevel(player, 1);
-        }
-
-        return new SelectSpace("Select place for ocean tile", game.board.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
-            game.addOceanTile(player, foundSpace.id)
-            player.plants += 2;
-            return game.increaseOxygenLevel(player, 1);
-        });
+        game.addOceanInterrupt(player);
+        player.plants += 2;
+        return game.increaseOxygenLevel(player, 1);
     }
 }

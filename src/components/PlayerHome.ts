@@ -55,7 +55,7 @@ export const PlayerHome = Vue.component("player-home", {
                         <p class="title">Error with input</p>
                         <p id="dialog-default-message"></p>
                         <menu class="dialog-menu">
-                            <button class="nes-btn is-primary">OK</button>
+                            <button class="btn btn-lg btn-primary">OK</button>
                         </menu>
                     </form>
                 </dialog>
@@ -107,11 +107,13 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
 
 
-                <div class="player_home_block nofloat" v-if="player.players.length > 1 && player.gameLog">
+                <div class="player_home_block player_home_block--log nofloat" v-if="player.players.length > 1 && player.gameLog.length > 0">
                     <h2>Last Actions</h2>
-                    <div v-for="message in player.gameLog">
-                        {{message}}
-                    </div>
+                    <ul>
+                        <li v-for="message in player.gameLog">
+                            {{message}}
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="player_home_block player_home_block--corporation">

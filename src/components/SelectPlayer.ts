@@ -23,7 +23,7 @@ export const SelectPlayer = Vue.component("select-player", {
     <input type="radio" v-model="selectedPlayer" :value="player" />
     <select-player-row :player="players.find((otherPlayer) => otherPlayer.id === player)"></select-player-row>
   </label>
-  <button v-if="showsave === true" class="nes-btn" v-on:click="saveData">Save</button>
+  <button v-if="showsave === true" class="btn btn-lg btn-primary" v-on:click="saveData">Save</button>
 </div>`
 });
 

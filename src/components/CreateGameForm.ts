@@ -123,9 +123,14 @@ export const CreateGameForm = Vue.component("create-game-form", {
             }
             xhr.onload = () => {
                 if (xhr.status === 200) {
-                    window.history.replaceState(xhr.response, "Teraforming Mars - Game", "/game?id=" + xhr.response.id);
-                    this.$root.$data.game = xhr.response;
-                    this.$root.$data.screen = "game-home";
+                    if (xhr.response.players.length == 1) {
+                        window.location.href = "/player?id=" + xhr.response.players[0].id;
+                        return;
+                    } else {
+                        window.history.replaceState(xhr.response, "Teraforming Mars - Game", "/game?id=" + xhr.response.id);
+                        this.$root.$data.game = xhr.response;
+                        this.$root.$data.screen = "game-home";
+                    }
                 } else {
                     alert("Unexpected server response");
                 }

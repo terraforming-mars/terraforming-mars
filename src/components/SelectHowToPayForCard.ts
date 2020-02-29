@@ -157,7 +157,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
     },
     template: `<div class="payments_cont">
 
-  <div v-if="showtitle === true" class="card-header">{{playerinput.title}}</div>
+  <div v-if="showtitle === true">{{playerinput.title}}</div>
 
   <label v-for="availableCard in playerinput.cards" :key="availableCard" class="payments_cards">
     <input class="hidden" type="radio" v-model="card" v-on:change="cardChanged()" :value="availableCard" />

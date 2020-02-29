@@ -42,7 +42,7 @@ export const SelectSpace = Vue.component("select-space", {
             playerInput.availableSpaces.forEach((spaceId: string) => {
                 setOfSpaces[spaceId] = true;
             });
-            children.push(createElement("button", { domProps: { className: "nes-btn" }, on: { click: () => {
+            children.push(createElement("button", { domProps: { className: "btn btn-lg btn-primary" }, on: { click: () => {
                 clearAllAvailableSpaces();
                 const elTiles = document.getElementsByClassName("board_space");
                 for (let i = 0; i < elTiles.length; i++) {

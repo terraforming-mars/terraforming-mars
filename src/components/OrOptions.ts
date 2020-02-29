@@ -63,9 +63,9 @@ export const OrOptions = Vue.component("or-options", {
             children.push(createElement("div", subchildren));
         });
         if (this.showsave) {
-            children.push(createElement("div", [createElement("button", { domProps: { className: "nes-btn" }, on: { click: () => { this.saveData(); } } }, "Save")]));
+            children.push(createElement("div", {"class": "wf-action"}, [createElement("button", { domProps: { className: "btn btn-primary" }, on: { click: () => { this.saveData(); } } }, "Save")]));
         }
-        return createElement("div", children);
+        return createElement("div", {"class": "wf-options"}, children);
     }
 });
 

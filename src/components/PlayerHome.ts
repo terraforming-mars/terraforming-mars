@@ -156,15 +156,17 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
             </div>
 
-            <div class="player_home_block player_home_block--actions nofloat"  v-if="!player.corporationCard">
-                <h2>Actions</h2>
+            <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
+                <h2>Prepare to the game:</h2>
                 <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
             </div>
 
-            <div v-if="player.colonies.length > 0">
+            <div v-if="player.colonies.length > 0" class="player_home_block">
                 <h2>Colonies</h2>
-                <div v-for="colony in player.colonies" :key="colony.name">
-                    <colony :colony="colony" :player="player"></colony>
+                <div class="player_home_colony_cont">
+                    <div class="player_home_colony" v-for="colony in player.colonies" :key="colony.name">
+                        <colony :colony="colony" :player="player"></colony>
+                    </div>
                 </div>
             </div>
 

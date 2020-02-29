@@ -6,17 +6,15 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { AndOptions } from "../inputs/AndOptions";
-import { SelectSpace } from "../inputs/SelectSpace";
-import { ISpace } from "../ISpace";
-import { SpaceType } from "../SpaceType";
 import { HowToPay } from "../inputs/HowToPay";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { MAX_OCEAN_TILES } from '../constants';
+import { CardName } from '../CardName';
 
 export class WaterImportFromEuropa implements IActionCard, IProjectCard {
     public cost: number = 25;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: string = "Water Import From Europa";
+    public name: string = CardName.WATER_IMPORT_FROM_EUROPA;
     public cardType: CardType = CardType.ACTIVE;
 
     public getVictoryPoints(player: Player) {
@@ -30,13 +28,12 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
     }
     public action(player: Player, game: Game) {
         let htp: HowToPay;
-        let selectedSpace: ISpace;
         return new AndOptions(
             () => {
                 if ((player.canUseHeatAsMegaCredits ? htp.heat : 0) + htp.megaCredits + (htp.titanium * player.titaniumValue) < 12) {
                     throw "Need to spend at least 12";
                 }
-                game.addOceanTile(player, selectedSpace.id);
+                game.addOceanInterrupt(player);
                 player.titanium -= htp.titanium;
                 player.megaCredits -= htp.megaCredits;
                 player.heat -= htp.heat;
@@ -44,10 +41,6 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
             },
             new SelectHowToPay("Select how to pay for action", false, true, player.canUseHeatAsMegaCredits, 12, (howToPay: HowToPay) => {
                 htp = howToPay;
-                return undefined;
-            }),
-            new SelectSpace("Select where to place ocean", game.board.getSpaces(SpaceType.OCEAN).filter((space) => space.tile === undefined && space.player === undefined), (space: ISpace) => {
-                selectedSpace = space;
                 return undefined;
             })
         );

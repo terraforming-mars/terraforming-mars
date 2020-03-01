@@ -42,6 +42,7 @@ import { SelectRemoveColony } from './interrupts/SelectRemoveColony';
 import { SelectResourceProductionDecrease } from './interrupts/SelectResourceProductionDecrease';
 import { ICard } from './cards/ICard';
 import { SelectResourceDecrease } from './interrupts/SelectResourceDecrease';
+import { SelectHowToPayInterrupt } from './interrupts/SelectHowToPayInterrupt';
 
 export class Game {
     public activePlayer: Player;
@@ -167,6 +168,16 @@ export class Game {
         }
       }
     }
+
+    public addSelectHowToPayInterrupt(player: Player, amount: number, canUseSteel: boolean, canUseTitanium: boolean, title?: string): void {
+      if ((!player.canUseHeatAsMegaCredits || player.heat === 0) &&
+          (!canUseSteel || player.steel === 0) &&
+          (!canUseTitanium || player.titanium === 0)) {
+            player.megaCredits -= amount;
+            return;
+      }        
+      this.addInterrupt(new SelectHowToPayInterrupt(player, amount, title, canUseSteel, canUseTitanium));
+    }  
 
     public addOceanInterrupt(player: Player, title?: string): void {
       if (this.board.getOceansOnBoard() + this.pendingOceans  >= constants.MAX_OCEAN_TILES) {

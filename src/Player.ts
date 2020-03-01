@@ -27,6 +27,8 @@ import { ResourceType } from './ResourceType';
 import { CardName } from "./CardName";
 import { CorporationName } from './CorporationName';
 import { IColony } from './colonies/Colony';
+import { SelectGreenery } from './interrupts/SelectGreenery';
+import { SelectCity } from './interrupts/SelectCity';
 
 export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
@@ -966,32 +968,26 @@ export class Player {
       );
     }
 
-    private payForStandardProject(
-        projectType: StandardProjectType,
-        megaCredits: number,
-        heat: number): void {
-      this.megaCredits -= megaCredits;
-      this.heat -= heat;
-
-      if (this.corporationCard !== undefined && this.corporationCard.onStandardProject!== undefined) {
-        this.corporationCard.onStandardProject(this, projectType);
-      }
-
-      for (const playedCard of this.playedCards) {
-        if (playedCard.onStandardProject !== undefined) {
-          playedCard.onStandardProject(this, projectType);
-        }
-      }
+  private onStandardProject(projectType: StandardProjectType): void {
+    if (this.corporationCard !== undefined && this.corporationCard.onStandardProject!== undefined) {
+      this.corporationCard.onStandardProject(this, projectType);
     }
 
-    private sellPatents(game: Game): PlayerInput {
+    for (const playedCard of this.playedCards) {
+      if (playedCard.onStandardProject !== undefined) {
+        playedCard.onStandardProject(this, projectType);
+      }
+    }
+  }
+
+  private sellPatents(game: Game): PlayerInput {
       return new SelectCard(
           'Sell patents',
           this.cardsInHand,
           (foundCards: Array<IProjectCard>) => {
-            this.payForStandardProject(
-                StandardProjectType.SELLING_PATENTS, -foundCards.length, 0
-            );
+
+            this.onStandardProject(StandardProjectType.SELLING_PATENTS);
+            this.megaCredits += foundCards.length;
             foundCards.forEach((card) => {
               for (let i = 0; i < this.cardsInHand.length; i++) {
                 if (this.cardsInHand[i].name === card.name) {
@@ -1008,270 +1004,102 @@ export class Player {
     }
 
     private buildColony(game: Game, openColonies: Array<IColony>): PlayerInput {
-      const fundProject = (
-        megaCredits: number,
-        heat: number,
-        colony: IColony) => {
-      colony.onColonyPlaced(this, game);
-      this.payForStandardProject(
-          StandardProjectType.BUILD_COLONY, megaCredits, heat
-      );
-      game.log(this.name + " built a colony on " + colony.name);
-      return undefined;
-    };
-
-    if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-      let htp: HowToPay;
-      let helionColonyProject = new SelectHowToPay(
-        'Colony (' + constants.BUILD_COLONY_COST + ' MC)', 
-        false, false, true, constants.BUILD_COLONY_COST,
-        (stp: HowToPay) => {
-          if (stp.heat + stp.megaCredits < constants.BUILD_COLONY_COST) {
-            throw new Error('Haven\'t spend enough for colony');
+      let buildColony = new OrOptions();
+      buildColony.title = "Build colony (" + constants.BUILD_COLONY_COST + " MC)";
+      openColonies.forEach(colony => {
+        const colonySelect =  new SelectOption(
+          colony.name + " - (" + colony.description + ")", 
+          () => {
+            game.addSelectHowToPayInterrupt(this, constants.BUILD_COLONY_COST, false, false, "Select how to pay for Colony project");
+            colony.onColonyPlaced(this, game);
+            this.onStandardProject(StandardProjectType.BUILD_COLONY);
+            game.log(this.name + " built a colony on " + colony.name);
+            return undefined;
           }
-          htp = stp;
-          let buildColony = new OrOptions();
-          buildColony.title = "Build colony (" + constants.BUILD_COLONY_COST + " MC)";
-          openColonies.forEach(colony => {
-            const colonySelect =  new SelectOption(
-              colony.name + " - (" + colony.description + ")", 
-              () => {
-                return fundProject(constants.BUILD_COLONY_COST, htp.heat, colony);
-              }
-            );
-            buildColony.options.push(colonySelect);
-          });
-      
-          return buildColony;
-        }
-      );
-      return helionColonyProject;
-    }
-
-    let buildColony = new OrOptions();
-    buildColony.title = "Build colony (" + constants.BUILD_COLONY_COST + " MC)";
-    openColonies.forEach(colony => {
-      const colonySelect =  new SelectOption(
-        colony.name + " - (" + colony.description + ")", 
-        () => {
-          return fundProject(constants.BUILD_COLONY_COST, 0, colony);
-        }
-      );
-      buildColony.options.push(colonySelect);
-    });
-
-    return buildColony;
-    }  
+        );
+        buildColony.options.push(colonySelect);
+      }); 
+      return buildColony;
+    }      
 
     private airScraping(game: Game): PlayerInput {
-      const fundProject = (megaCredits: number, heat: number) => {
-        game.increaseVenusScaleLevel(this, 1);
-        this.payForStandardProject(
-            StandardProjectType.AIR_SCRAPING, megaCredits, heat
-        );
-        game.log(this.name + " used air scraping standard project");
-        return undefined;
-      };
-      if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-        return new SelectHowToPay(
-            'Air scraping (' + constants.AIR_SCRAPING_COST + ' MC)',
-            false, false, true, 
-            constants.AIR_SCRAPING_COST,
-            (htp) => {
-              return fundProject(htp.megaCredits, htp.heat);
-            }
-        );
-      }
       return new SelectOption(
         'Air scraping (' + constants.AIR_SCRAPING_COST + ' MC)', 
-        () => {return fundProject(constants.AIR_SCRAPING_COST, 0);}
+        () => {
+          game.addSelectHowToPayInterrupt(this, constants.AIR_SCRAPING_COST, false, false, "Select how to pay for Air Scrapping project");
+          game.increaseVenusScaleLevel(this, 1);
+          this.onStandardProject(StandardProjectType.AIR_SCRAPING);
+          game.log(this.name + " used Air Scrapping standard project");
+          return undefined;
+        }
       );
     }
 
-
     private buildPowerPlant(game: Game): PlayerInput {
-      const fundProject = (megaCredits: number, heat: number) => {
-        this.energyProduction++;
-        this.payForStandardProject(
-            StandardProjectType.POWER_PLANT, megaCredits, heat
-        );
-        game.log(this.name + " used power plant standard project");
-        return undefined;
-      };
-      if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-        return new SelectHowToPay(
-            'Power plant (' + this.powerPlantCost + ' MC)',
-            false, false, true, this.powerPlantCost,
-            (htp) => {
-              return fundProject(htp.megaCredits, htp.heat);
-            }
-        );
-      }
       return new SelectOption(
         'Power plant (' + this.powerPlantCost + ' MC)', 
-        () => {return fundProject(this.powerPlantCost, 0);}
+        () => {
+          game.addSelectHowToPayInterrupt(this, this.powerPlantCost, false, false, "Select how to pay for Power Plant project");
+          this.energyProduction++;
+          this.onStandardProject(StandardProjectType.POWER_PLANT);
+          game.log(this.name + " used power plant standard project");
+          return undefined;
+        }
       );
     }
 
     private asteroid(game: Game): PlayerInput {
-      const fundProject = (megaCredits: number, heat: number) => {
-        game.increaseTemperature(this, 1);
-        this.payForStandardProject(
-            StandardProjectType.ASTEROID, megaCredits, heat
-        );
-        game.log(this.name + " used asteroid standard project");
-        return undefined;
-      };
-      if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-        return new SelectHowToPay(
-            'Asteroid (' + constants.ASTEROID_COST + ' MC)',
-            false, false, true, constants.ASTEROID_COST,
-            (htp) => {
-              if (htp.heat + htp.megaCredits < constants.ASTEROID_COST) {
-                throw new Error('Haven\'t spend enough for asteroid');
-              }
-              return fundProject(htp.megaCredits, htp.heat);
-            }
-        );
-      }
       return new SelectOption(
         'Asteroid (' + constants.ASTEROID_COST + ' MC)', 
-        () => {return fundProject(constants.ASTEROID_COST, 0);}
-      );
-    }
-
-    private aquifer(game: Game): PlayerInput {
-      const fundProject = (
-          megaCredits: number,
-          heat: number,
-          spaceId: string) => {
-        game.addOceanTile(this, spaceId);
-        this.payForStandardProject(
-            StandardProjectType.AQUIFER, megaCredits, heat
-        );
-        game.log(this.name + " used aquifer standard project");
-        return undefined;
-      };
-
-      if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-        let htp: HowToPay;
-        let helionAquiferProject = new SelectHowToPay(
-          'Aquifer (' + constants.AQUIFER_COST + ' MC)', 
-          false, false, true, constants.AQUIFER_COST,
-          (stp: HowToPay) => {
-            if (stp.heat + stp.megaCredits < constants.AQUIFER_COST) {
-              throw new Error('Haven\'t spend enough for aquifer');
-            }
-            htp = stp;
-            return new SelectSpace(
-              'Select where to place an ocean',
-              game.board.getAvailableSpacesForOcean(this),
-              (space: ISpace) => {
-                return fundProject(htp.megaCredits, htp.heat, space.id);
-              }
-            )
-          }
-        );
-        return helionAquiferProject;
-      }
-
-      return new SelectSpace(
-        'Aquifer (' + constants.AQUIFER_COST + ' MC)',
-        game.board.getAvailableSpacesForOcean(this),
-        (space: ISpace) => {
-          return fundProject(constants.AQUIFER_COST, 0, space.id);
+        () => {
+          game.addSelectHowToPayInterrupt(this, constants.ASTEROID_COST, false, false, "Select how to pay for Asteroid project");
+          game.increaseTemperature(this, 1);
+          this.onStandardProject(StandardProjectType.ASTEROID);
+          game.log(this.name + " used asteroid standard project");
+          return undefined;
         }
       );
-    }
+    }  
+
+    private aquifer(game: Game): PlayerInput {
+      return new SelectOption(
+        'Aquifer (' + constants.AQUIFER_COST + ' MC)', 
+        () => {
+          game.addSelectHowToPayInterrupt(this, constants.AQUIFER_COST, false, false, "Select how to pay for Aquifer project");
+          game.addOceanInterrupt(this, "Select space for ocean");
+          this.onStandardProject(StandardProjectType.AQUIFER);
+          game.log(this.name + " used aquifer standard project");
+          return undefined;
+        }
+      );
+    } 
 
     private addGreenery(game: Game): PlayerInput {
-      const fundProject = (
-          megaCredits: number,
-          heat: number,
-          spaceId: string) => {
-        game.addGreenery(this, spaceId);
-        this.payForStandardProject(
-            StandardProjectType.GREENERY, megaCredits, heat
-        );
-        game.log(this.name + " used greenery standard project");
-        return undefined;
-      };
-
-      if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-        let htp: HowToPay;
-
-        let helionGreeneryProject = new SelectHowToPay(
-            'Greenery (' + constants.GREENERY_COST + ' MC)',
-            false, false, true, constants.GREENERY_COST,
-            (stp) => {
-              htp = stp;
-              return new SelectSpace(
-                'Select where to place your greenery',
-                game.board.getAvailableSpacesForGreenery(this),
-                (space: ISpace) => {
-                  return fundProject(htp.megaCredits, htp.heat, space.id);
-                }
-              )
-            }
-        );
-        return helionGreeneryProject;
-      }
-      return new SelectSpace(
-        'Greenery (' + constants.GREENERY_COST + ' MC)',
-          game.board.getAvailableSpacesForGreenery(this),
-          (space: ISpace) => {
-            return fundProject(constants.GREENERY_COST, 0, space.id);
-          }
+      return new SelectOption(
+        'Greenery (' + constants.GREENERY_COST + ' MC)', 
+        () => {
+          game.addSelectHowToPayInterrupt(this, constants.GREENERY_COST, false, false, "Select how to pay for Greenery project");
+          game.addInterrupt(new SelectGreenery(this, game));
+          this.onStandardProject(StandardProjectType.GREENERY);
+          game.log(this.name + " used greenery standard project");
+          return undefined;
+        }
       );
-    }
+    } 
 
     private addCity(game: Game): PlayerInput {
-      const fundProject = (
-          megaCredits: number,
-          heat: number,
-          spaceId: string
-      ) => {
-        game.addCityTile(this, spaceId);
-        this.setProduction(Resources.MEGACREDITS);
-        this.payForStandardProject(
-            StandardProjectType.CITY,
-            megaCredits,
-            heat
-        );
-        game.log(this.name + " used city standard project");
-        return undefined;
-      };
-      if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-        let htp: HowToPay;
-
-        let helionCityProject = new SelectHowToPay(
-          'City (' + constants.CITY_COST + ' MC)',
-          false,
-          false,
-          true,
-          constants.CITY_COST,
-          (stp) => {
-            htp = stp;
-            return new SelectSpace(
-              'Select where to place your city',
-              game.board.getAvailableSpacesForCity(this),
-              (space: ISpace) => {
-                return fundProject(htp.megaCredits, htp.heat, space.id);
-              }
-            )
-          }
-        )
-
-      return helionCityProject;
-      }
-      return new SelectSpace(
-          'City (' + constants.CITY_COST + ' MC)',
-          game.board.getAvailableSpacesForCity(this),
-          (space: ISpace) => {
-            return fundProject(constants.CITY_COST, 0, space.id);
-          }
+      return new SelectOption(
+        'City (' + constants.CITY_COST + ' MC)', 
+        () => {
+          game.addSelectHowToPayInterrupt(this, constants.CITY_COST, false, false, "Select how to pay for City project");
+          game.addInterrupt(new SelectCity(this, game));
+          this.onStandardProject(StandardProjectType.CITY);
+          this.setProduction(Resources.MEGACREDITS);
+          game.log(this.name + " used city standard project");
+          return undefined;
+        }
       );
-    }
+    } 
 
     private tradeWithColony(openColonies: Array<IColony>, game: Game): PlayerInput {
       let selectColony = new OrOptions();

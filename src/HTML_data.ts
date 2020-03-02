@@ -1,5 +1,5 @@
-import { CardName } from './CardName';
-import { CorporationName } from './CorporationName';
+import { CardName } from "./CardName";
+import { CorporationName } from "./CorporationName";
 
 export const HTML_DATA: Map<string, string> =
   new Map ([

@@ -276,7 +276,7 @@ export class RoboticWorkforce implements IProjectCard {
                 player.setProduction(Resources.PLANTS,result.plantProduction);
                 player.setProduction(Resources.HEAT,result.heatProduction);
 
-                game.log(player + " copied " + result.name + " production with Robotic Workforce card");
+                game.log(player.name + " copied " + result.name + " production with Robotic Workforce card");
 
                return undefined;
             });

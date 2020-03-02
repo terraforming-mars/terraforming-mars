@@ -41,10 +41,10 @@ export abstract class Board {
     public getAdjacentSpaces(space: ISpace): Array<ISpace> {
         if (space.spaceType !== SpaceType.COLONY) {
         if (space.y < 0 || space.y > 8) {
-            throw new Error('Unexpected space y value');
+            throw new Error("Unexpected space y value");
         }
         if (space.x < 0 || space.x > 8) {
-            throw new Error('Unexpected space x value');
+            throw new Error("Unexpected space x value");
         }
         const leftSpace: Array<number> = [space.x - 1, space.y];
         const rightSpace: Array<number> = [space.x + 1, space.y];

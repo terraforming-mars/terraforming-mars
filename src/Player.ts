@@ -1,35 +1,36 @@
-import {IProjectCard} from './cards/IProjectCard';
-import { CorporationCard } from './cards/corporation/CorporationCard';
-import {Tags} from './cards/Tags';
-import {PlayerInput} from './PlayerInput';
-import {CardType} from './cards/CardType';
-import {Color} from './Color';
-import {SelectCard} from './inputs/SelectCard';
-import {AndOptions} from './inputs/AndOptions';
-import {ICard} from './cards/ICard';
-import { OrOptions } from './inputs/OrOptions';
-import {Game} from './Game';
-import {HowToPay} from './inputs/HowToPay';
-import {SelectSpace} from './inputs/SelectSpace';
-import {ISpace} from './ISpace';
-import {SelectHowToPayForCard} from './inputs/SelectHowToPayForCard';
-import {SelectHowToPay} from './inputs/SelectHowToPay';
-import { SelectAmount } from './inputs/SelectAmount';
-import {SelectOption} from './inputs/SelectOption';
-import {SelectPlayer} from './inputs/SelectPlayer';
-import {IMilestone} from './milestones/IMilestone';
-import {StandardProjectType} from './StandardProjectType';
-import * as constants from './constants';
-import {IAward} from './awards/IAward';
-import { VictoryPointsBreakdown } from './VictoryPointsBreakdown';
-import {Resources} from './Resources';
-import { ResourceType } from './ResourceType';
+import {IProjectCard} from "./cards/IProjectCard";
+import { CorporationCard } from "./cards/corporation/CorporationCard";
+import {Tags} from "./cards/Tags";
+import {PlayerInput} from "./PlayerInput";
+import {CardType} from "./cards/CardType";
+import {Color} from "./Color";
+import {SelectCard} from "./inputs/SelectCard";
+import {AndOptions} from "./inputs/AndOptions";
+import {ICard} from "./cards/ICard";
+import { OrOptions } from "./inputs/OrOptions";
+import {Game} from "./Game";
+import {HowToPay} from "./inputs/HowToPay";
+import {SelectSpace} from "./inputs/SelectSpace";
+import {ISpace} from "./ISpace";
+import {SelectHowToPayForCard} from "./inputs/SelectHowToPayForCard";
+import {SelectHowToPay} from "./inputs/SelectHowToPay";
+import { SelectAmount } from "./inputs/SelectAmount";
+import {SelectOption} from "./inputs/SelectOption";
+import {SelectPlayer} from "./inputs/SelectPlayer";
+import {IMilestone} from "./milestones/IMilestone";
+import {StandardProjectType} from "./StandardProjectType";
+import * as constants from "./constants";
+import {IAward} from "./awards/IAward";
+import { VictoryPointsBreakdown } from "./VictoryPointsBreakdown";
+import {Resources} from "./Resources";
+import { ResourceType } from "./ResourceType";
 import { CardName } from "./CardName";
 import { CorporationName } from './CorporationName';
 import { IColony } from './colonies/Colony';
 import { SelectGreenery } from './interrupts/SelectGreenery';
 import { SelectCity } from './interrupts/SelectCity';
 import { SpaceType } from './SpaceType';
+
 
 export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
@@ -189,13 +190,13 @@ export class Player {
         count: number,
         game: Game): void {
       if (removingPlayer !== this && this.hasProtectedHabitats()) {
-        throw new Error('Can not remove animals due to protected habitats');
+        throw new Error("Can not remove animals due to protected habitats");
       }
       if (card.name === CardName.PETS) {
-        throw new Error('Animals may not be removed from pets');
+        throw new Error("Animals may not be removed from pets");
       }
       if (this.getResourcesOnCard(card) === 0) {
-        throw new Error(card.name + ' does not have animals to remove');
+        throw new Error(card.name + " does not have animals to remove");
       }
       this.removeResourceFrom(card, count, game, removingPlayer);
     }
@@ -207,11 +208,11 @@ export class Player {
         game: Game): void {
       if (removingPlayer !== this && this.hasProtectedHabitats()) {
         throw new Error(
-            'Can not remove microbes due to protected habitats'
+            "Can not remove microbes due to protected habitats"
         );
       }
       if (this.getResourcesOnCard(card) === 0) {
-        throw new Error(card.name + ' does not have microbes to remove');
+        throw new Error(card.name + " does not have microbes to remove");
       }
       this.removeResourceFrom(card, count, game, removingPlayer);
     }
@@ -345,7 +346,7 @@ export class Player {
     public getCard(cards: Array<IProjectCard>, cardName: string): IProjectCard {
       const foundCards = cards.filter((card) => card.name === cardName);
       if (foundCards.length === 0) {
-        throw new Error('Card not found');
+        throw new Error("Card not found");
       }
       return foundCards[0];
     }
@@ -364,7 +365,7 @@ export class Player {
       if (pi instanceof AndOptions) {
         const waiting: AndOptions = pi;
         if (input.length !== waiting.options.length) {
-          throw new Error('Not all options provided');
+          throw new Error("Not all options provided");
         }
         for (let i = 0; i < input.length; i++) {
           this.runInput(game, [input[i]], waiting.options[i]);
@@ -373,20 +374,20 @@ export class Player {
       } else if (pi instanceof SelectAmount) {
         const waiting: SelectAmount = pi;
         if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
+          throw new Error("Incorrect options provided");
         }
         if (input[0].length !== 1) {
-          throw new Error('Incorrect number of amounts provided');
+          throw new Error("Incorrect number of amounts provided");
         }
         const amount: number = parseInt(input[0][0]);
         if (isNaN(amount)) {
-          throw new Error('Number not provided for amount');
+          throw new Error("Number not provided for amount");
         }
         if (amount > waiting.max) {
-          throw new Error('Amount provided too high');
+          throw new Error("Amount provided too high");
         }
         if (amount < 0) {
-          throw new Error('Amount provided too low');
+          throw new Error("Amount provided too low");
         }
         this.runInputCb(game, pi.cb(amount));
       } else if (pi instanceof SelectOption) {
@@ -400,7 +401,7 @@ export class Player {
         this.runInput(game, [remainingInput], waiting.options[optionIndex]);
       } else if (pi instanceof SelectHowToPayForCard) {
         if (input.length !== 1 || input[0].length !== 2) {
-          throw new Error('Incorrect options provided');
+          throw new Error("Incorrect options provided");
         }
         const foundCard: IProjectCard = this.getCard(pi.cards, input[0][0]);
         const payMethod: HowToPay = {
@@ -440,72 +441,72 @@ export class Player {
           }
 
         } catch (err) {
-          throw new Error('Unable to parse input ' + err);
+          throw new Error("Unable to parse input " + err);
         }
         this.runInputCb(game, pi.cb(foundCard, payMethod));
       } else if (pi instanceof SelectCard) {
         if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
+          throw new Error("Incorrect options provided");
         }
         const mappedCards: Array<ICard> = [];
         for (const cardName of input[0]) {
           mappedCards.push(this.getCard(pi.cards, cardName));
         }
         if (input[0].length < pi.minCardsToSelect) {
-          throw new Error('Not enough cards selected');
+          throw new Error("Not enough cards selected");
         }
         if (input[0].length > pi.maxCardsToSelect) {
-          throw new Error('Too many cards selected');
+          throw new Error("Too many cards selected");
         }
         if (mappedCards.length !== input[0].length) {
-          throw new Error('Not all cards found');
+          throw new Error("Not all cards found");
         }
         this.runInputCb(game, pi.cb(mappedCards));
       } else if (pi instanceof SelectAmount) {
         if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
+          throw new Error("Incorrect options provided");
         }
         if (input[0].length !== 1) {
-          throw new Error('Too many amounts provided');
+          throw new Error("Too many amounts provided");
         }
         if (isNaN(parseInt(input[0][0]))) {
-          throw new Error('Amount is not a number');
+          throw new Error("Amount is not a number");
         }
         this.runInputCb(game, pi.cb(parseInt(input[0][0])));
       } else if (pi instanceof SelectSpace) {
         if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
+          throw new Error("Incorrect options provided");
         }
         if (input[0].length !== 1) {
-          throw new Error('Too many spaces provided');
+          throw new Error("Too many spaces provided");
         }
         const foundSpace = pi.availableSpaces.find(
             (space) => space.id === input[0][0]
         );
         if (foundSpace === undefined) {
-          throw new Error('Space not available');
+          throw new Error("Space not available");
         }
         this.runInputCb(game, pi.cb(foundSpace));
       } else if (pi instanceof SelectPlayer) {
         if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
+          throw new Error("Incorrect options provided");
         }
         if (input[0].length !== 1) {
-          throw new Error('Invalid players array provided');
+          throw new Error("Invalid players array provided");
         }
         const foundPlayer = pi.players.find(
             (player) => player.id === input[0][0]
         );
         if (foundPlayer === undefined) {
-          throw new Error('Player not available');
+          throw new Error("Player not available");
         }
         this.runInputCb(game, pi.cb(foundPlayer));
       } else if (pi instanceof SelectHowToPay) {
         if (input.length !== 1) {
-          throw new Error('Incorrect options provided');
+          throw new Error("Incorrect options provided");
         }
         if (input[0].length !== 1) {
-          throw new Error('Incorrect input provided');
+          throw new Error("Incorrect input provided");
         }
         const payMethod: HowToPay = {
           steel: 0,
@@ -524,34 +525,34 @@ export class Player {
           if (parsedInput.steel !== undefined) {
             payMethod.steel = parsedInput.steel;
           } else {
-            throw new Error('Steel not provided, bad input');
+            throw new Error("Steel not provided, bad input");
           }
           if (parsedInput.titanium !== undefined) {
             payMethod.titanium = parsedInput.titanium;
           } else {
-            throw new Error('Titanium not provided, bad input');
+            throw new Error("Titanium not provided, bad input");
           }
           if (parsedInput.megaCredits !== undefined) {
             payMethod.megaCredits = parsedInput.megaCredits;
           } else {
-            throw new Error('Mega credits not provided, bad input');
+            throw new Error("Mega credits not provided, bad input");
           }
           if (this.canUseHeatAsMegaCredits) {
             if (parsedInput.heat !== undefined) {
               payMethod.heat = parsedInput.heat;
             } else {
-              throw new Error('Heat not provided, bad input');
+              throw new Error("Heat not provided, bad input");
             }
           }
           if (parsedInput.microbes !== undefined) {
               payMethod.microbes = parsedInput.microbes;
           }
         } catch (err) {
-          throw new Error('Unable to parse input ' + err);
+          throw new Error("Unable to parse input " + err);
         }
         this.runInputCb(game, pi.cb(payMethod));
       } else {
-        throw new Error('Unsupported waitingFor');
+        throw new Error("Unsupported waitingFor");
       }
     }
 
@@ -596,7 +597,7 @@ export class Player {
 
     public worldGovernmentTerraforming(game: Game) {
       const action: OrOptions = new OrOptions();
-      action.title = 'Select action for World Government Terraforming';
+      action.title = "Select action for World Government Terraforming";
       if (game.getTemperature() < constants.MAX_TEMPERATURE) {
         action.options.push(
           new SelectOption('Increase temperature', () => {
@@ -618,7 +619,7 @@ export class Player {
       if (game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
         action.options.push(
           new SelectSpace(
-            'Add an ocean',
+            "Add an ocean",
             game.board.getAvailableSpacesForOcean(this), (space) => {
               game.addOceanTile(this, space.id, SpaceType.OCEAN, true);
               game.log(this.name + " acted as World Government and increased oceans");
@@ -655,7 +656,7 @@ export class Player {
 
       this.setWaitingFor(
         new SelectCard(
-          'Select a card to keep and pass the rest to ' + playerName,
+          "Select a card to keep and pass the rest to " + playerName,
           cards,
           (foundCards: Array<IProjectCard>) => {
             this.draftedCards.push(foundCards[0]);
@@ -723,7 +724,7 @@ export class Player {
               return undefined;
             },
             new SelectHowToPay(
-                'Select how to pay for cards',
+                "Select how to pay for cards",
                 false,
                 false,
                 true,
@@ -734,7 +735,7 @@ export class Player {
                 }
             ),
             new SelectCard(
-                'Select which cards to take into hand',
+                "Select which cards to take into hand",
                 dealtCards,
                 (foundCards: Array<IProjectCard>) => {
                   selectedCards = foundCards;
@@ -746,7 +747,7 @@ export class Player {
       } else {
         this.setWaitingFor(
             new SelectCard(
-                'Select which cards to take into hand',
+                "Select which cards to take into hand",
                 dealtCards,
                 (foundCards: Array<IProjectCard>) => {
                   htp.megaCredits = foundCards.length * this.cardCost;
@@ -810,14 +811,14 @@ export class Player {
         
         if (canUseSteel && howToPay.steel > 0) {
           if (howToPay.steel > this.steel) {
-            throw new Error('Do not have enough steel');
+            throw new Error("Do not have enough steel");
           }
           totalToPay += howToPay.steel * this.steelValue;
         } 
         
         if (canUseTitanium && howToPay.titanium > 0) {
           if (howToPay.titanium > this.titanium) {
-            throw new Error('Do not have enough titanium');
+            throw new Error("Do not have enough titanium");
           }
           totalToPay += howToPay.titanium * this.titaniumValue;
         }
@@ -835,13 +836,13 @@ export class Player {
         }
 
         if (howToPay.megaCredits > this.megaCredits) {
-          throw new Error('Do not have enough mega credits');
+          throw new Error("Do not have enough mega credits");
         }
 
         totalToPay += howToPay.megaCredits;
 
         if (totalToPay < cardCost) {
-          throw new Error('Did not spend enough to pay for card');
+          throw new Error("Did not spend enough to pay for card");
         }
         return this.playCard(game, selectedCard, howToPay);
       };
@@ -951,7 +952,7 @@ export class Player {
 
     private playActionCard(game: Game): PlayerInput {
       return new SelectCard(
-          'Perform an action from a played card',
+          "Perform an action from a played card",
           this.getPlayableActionCards(game),
           (foundCards: Array<ICard>) => {
             const foundCard = foundCards[0];
@@ -983,7 +984,7 @@ export class Player {
 
   private sellPatents(game: Game): PlayerInput {
       return new SelectCard(
-          'Sell patents',
+          "Sell patents",
           this.cardsInHand,
           (foundCards: Array<IProjectCard>) => {
 
@@ -1025,7 +1026,7 @@ export class Player {
 
     private airScraping(game: Game): PlayerInput {
       return new SelectOption(
-        'Air scraping (' + constants.AIR_SCRAPING_COST + ' MC)', 
+        "Air scraping (" + constants.AIR_SCRAPING_COST + " MC)", 
         () => {
           game.addSelectHowToPayInterrupt(this, constants.AIR_SCRAPING_COST, false, false, "Select how to pay for Air Scrapping project");
           game.increaseVenusScaleLevel(this, 1);
@@ -1038,7 +1039,7 @@ export class Player {
 
     private buildPowerPlant(game: Game): PlayerInput {
       return new SelectOption(
-        'Power plant (' + this.powerPlantCost + ' MC)', 
+        "Power plant (" + this.powerPlantCost + " MC)", 
         () => {
           game.addSelectHowToPayInterrupt(this, this.powerPlantCost, false, false, "Select how to pay for Power Plant project");
           this.energyProduction++;
@@ -1051,7 +1052,7 @@ export class Player {
 
     private asteroid(game: Game): PlayerInput {
       return new SelectOption(
-        'Asteroid (' + constants.ASTEROID_COST + ' MC)', 
+        "Asteroid (" + constants.ASTEROID_COST + " MC)", 
         () => {
           game.addSelectHowToPayInterrupt(this, constants.ASTEROID_COST, false, false, "Select how to pay for Asteroid project");
           game.increaseTemperature(this, 1);
@@ -1064,7 +1065,7 @@ export class Player {
 
     private aquifer(game: Game): PlayerInput {
       return new SelectOption(
-        'Aquifer (' + constants.AQUIFER_COST + ' MC)', 
+        "Aquifer (" + constants.AQUIFER_COST + " MC)", 
         () => {
           game.addSelectHowToPayInterrupt(this, constants.AQUIFER_COST, false, false, "Select how to pay for Aquifer project");
           game.addOceanInterrupt(this, "Select space for ocean");
@@ -1077,7 +1078,7 @@ export class Player {
 
     private addGreenery(game: Game): PlayerInput {
       return new SelectOption(
-        'Greenery (' + constants.GREENERY_COST + ' MC)', 
+        "Greenery (" + constants.GREENERY_COST + " MC)", 
         () => {
           game.addSelectHowToPayInterrupt(this, constants.GREENERY_COST, false, false, "Select how to pay for Greenery project");
           game.addInterrupt(new SelectGreenery(this, game));
@@ -1090,7 +1091,7 @@ export class Player {
 
     private addCity(game: Game): PlayerInput {
       return new SelectOption(
-        'City (' + constants.CITY_COST + ' MC)', 
+        "City (" + constants.CITY_COST + " MC)", 
         () => {
           game.addSelectHowToPayInterrupt(this, constants.CITY_COST, false, false, "Select how to pay for City project");
           game.addInterrupt(new SelectCity(this, game));
@@ -1178,7 +1179,7 @@ export class Player {
         let raiseTempOptions = new AndOptions (
           () => {
             if (heatAmount + (floaterAmount * 2) < 8) {
-                throw new Error('Need to pay 8 heat');
+                throw new Error("Need to pay 8 heat");
             }
             this.removeResourceFrom(this.corporationCard as ICard, floaterAmount);
             this.heat -= heatAmount;
@@ -1195,15 +1196,15 @@ export class Player {
             return undefined;
           }, this.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED))
         );
-        raiseTempOptions.title = 'Select resource amounts to raise temp';
+        raiseTempOptions.title = "Select resource amounts to raise temp";
 
-        return new SelectOption('Convert 8 heat into temperature', () => {
+        return new SelectOption("Convert 8 heat into temperature", () => {
           return raiseTempOptions;
         });
 
       } else {
 
-      return new SelectOption('Convert 8 heat into temperature', () => {
+      return new SelectOption("Convert 8 heat into temperature", () => {
         game.increaseTemperature(this, 1);
         this.heat -= 8;
         game.log(this.name + " converted heat into temperature");
@@ -1227,7 +1228,7 @@ export class Player {
       };
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
         return new SelectHowToPay(
-            'Claim milestone: ' + milestone.name,
+            "Claim milestone: " + milestone.name,
             false,
             false,
             true,
@@ -1235,7 +1236,7 @@ export class Player {
             (stp) => {
               if (stp.megaCredits + stp.heat < 8) {
                 throw new Error(
-                    'Did not spend enough to claim milestone'
+                    "Did not spend enough to claim milestone"
                 );
               }
               return claimer(stp.megaCredits, stp.heat);
@@ -1257,7 +1258,7 @@ export class Player {
       };
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
         return new SelectHowToPay(
-            award.name + ' (' + game.getAwardFundingCost() + ' MC)',
+            award.name + " (" + game.getAwardFundingCost() + " MC)",
             false,
             false,
             true,
@@ -1273,14 +1274,14 @@ export class Player {
     }
 
     private endTurnOption(): PlayerInput {
-      return new SelectOption('End Turn', () => {
+      return new SelectOption("End Turn", () => {
         this.actionsTakenThisRound = 1;
         return undefined;
       });
     }
 
     private passOption(game: Game): PlayerInput {
-      return new SelectOption('Pass', () => {
+      return new SelectOption("Pass", () => {
         game.playerHasPassed(this);
         game.log(this.name + " passed");
         this.lastCardPlayed = undefined;
@@ -1291,16 +1292,16 @@ export class Player {
     public takeActionForFinalGreenery(game: Game): void {
       if (game.canPlaceGreenery(this)) {
         const action: OrOptions = new OrOptions();
-        action.title = 'Place any final greenery from plants';
+        action.title = "Place any final greenery from plants";
         action.options.push(
-            new SelectOption('Don\'t place a greenery', () => {
+            new SelectOption("Don't place a greenery", () => {
               game.playerIsDoneWithGame(this);
               return undefined;
             })
         );
         action.options.push(
             new SelectSpace(
-                'Select space for greenery',
+                "Select space for greenery",
                 game.board.getAvailableSpacesForGreenery(this), (space) => {
                   game.addGreenery(this, space.id);
                   this.plants -= this.plantsNeededForGreenery;
@@ -1355,7 +1356,7 @@ export class Player {
 
     private getAvailableStandardProjects(game: Game): OrOptions {
       const standardProjects = new OrOptions();
-      standardProjects.title = 'Pay for a standard project';
+      standardProjects.title = "Pay for a standard project";
 
       if (this.canAfford(this.powerPlantCost)) {
         standardProjects.options.push(
@@ -1468,8 +1469,8 @@ export class Player {
       }         
 
       const action: OrOptions = new OrOptions();
-      action.title = 'Take action for action phase, select one ' +
-                       'available action.';
+      action.title = "Take action for action phase, select one " +
+                       "available action.";
 
       if (this.getPlayableCards(game).length > 0) {
         action.options.push(
@@ -1542,7 +1543,7 @@ export class Player {
 
       if (this.canAfford(8) && !game.allMilestonesClaimed()) {
         const remainingMilestones = new OrOptions();
-        remainingMilestones.title = 'Select a milestone to claim';
+        remainingMilestones.title = "Select a milestone to claim";
         remainingMilestones.options = game.milestones
             .filter(
                 (milestone: IMilestone) =>
@@ -1562,7 +1563,7 @@ export class Player {
         this.canAfford(game.getAwardFundingCost()) &&
             !game.allAwardsFunded()) {
         const remainingAwards = new OrOptions();
-        remainingAwards.title = 'Select an award to fund';
+        remainingAwards.title = "Select an award to fund";
         remainingAwards.options = game.awards
             .filter((award: IAward) => game.hasBeenFunded(award) === false)
             .map((award: IAward) => this.fundAward(award, game));
@@ -1586,7 +1587,7 @@ export class Player {
 
     public process(game: Game, input: Array<Array<string>>): void {
       if (this.waitingFor === undefined || this.waitingForCb === undefined) {
-        throw new Error('Not waiting for anything');
+        throw new Error("Not waiting for anything");
       }
       const waitingFor = this.waitingFor;
       const waitingForCb = this.waitingForCb;

@@ -1,27 +1,27 @@
-import {Player} from './Player';
-import { Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS } from './Dealer';
-import {ISpace} from './ISpace';
-import {SpaceType} from './SpaceType';
-import {TileType} from './TileType';
-import {SpaceBonus} from './SpaceBonus';
-import {ITile} from './ITile';
-import {IProjectCard} from './cards/IProjectCard';
-import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
-import {CorporationCard} from './cards/corporation/CorporationCard';
-import {OriginalBoard} from './OriginalBoard';
-import {SelectCard} from './inputs/SelectCard';
-import {SelectSpace} from './inputs/SelectSpace';
-import {AndOptions} from './inputs/AndOptions';
-import {PlayerInput} from './PlayerInput';
-import {Phase} from './Phase';
-import {ClaimedMilestone} from './ClaimedMilestone';
-import {FundedAward} from './FundedAward';
-import {IMilestone} from './milestones/IMilestone';
-import {ResourceType} from './ResourceType';
-import * as constants from './constants';
-import {Color} from './Color';
-import {IAward} from './awards/IAward';
-import { Tags } from './cards/Tags';
+import {Player} from "./Player";
+import { Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS } from "./Dealer";
+import {ISpace} from "./ISpace";
+import {SpaceType} from "./SpaceType";
+import {TileType} from "./TileType";
+import {SpaceBonus} from "./SpaceBonus";
+import {ITile} from "./ITile";
+import {IProjectCard} from "./cards/IProjectCard";
+import {BeginnerCorporation} from "./cards/corporation/BeginnerCorporation";
+import {CorporationCard} from "./cards/corporation/CorporationCard";
+import {OriginalBoard} from "./OriginalBoard";
+import {SelectCard} from "./inputs/SelectCard";
+import {SelectSpace} from "./inputs/SelectSpace";
+import {AndOptions} from "./inputs/AndOptions";
+import {PlayerInput} from "./PlayerInput";
+import {Phase} from "./Phase";
+import {ClaimedMilestone} from "./ClaimedMilestone";
+import {FundedAward} from "./FundedAward";
+import {IMilestone} from "./milestones/IMilestone";
+import {ResourceType} from "./ResourceType";
+import * as constants from "./constants";
+import {Color} from "./Color";
+import {IAward} from "./awards/IAward";
+import { Tags } from "./cards/Tags";
 import {Resources} from "./Resources";
 import { ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES } from './milestones/Milestones';
 import { ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS } from './awards/Awards';
@@ -212,9 +212,9 @@ export class Game {
       }
       let candidates: Array<Player> = [];
       if (resource === Resources.PLANTS) {
-        candidates = this.getPlayers().filter((p) => p.id != player.id && !p.hasProtectedHabitats() && p.getResource(resource) > 0);
+        candidates = this.getPlayers().filter((p) => p.id !== player.id && !p.hasProtectedHabitats() && p.getResource(resource) > 0);
       } else {
-        candidates = this.getPlayers().filter((p) => p.id != player.id && p.getResource(resource) > 0);
+        candidates = this.getPlayers().filter((p) => p.id !== player.id && p.getResource(resource) > 0);
       }
 
       if (candidates.length === 0) {
@@ -268,7 +268,7 @@ export class Game {
 
     public fundAward(player: Player, award: IAward): void {
       if (this.allAwardsFunded()) {
-        throw new Error('All awards already funded');
+        throw new Error("All awards already funded");
       }
       this.fundedAwards.push({
         award: award,
@@ -370,7 +370,7 @@ export class Game {
       result.title = "Select corporation and initial cards";
       result.options.push(
         new SelectCard<CorporationCard>(
-          'Select corporation', player.dealtCorporationCards,
+          "Select corporation", player.dealtCorporationCards,
           (foundCards: Array<CorporationCard>) => {
             corporation = foundCards[0];
             return undefined;
@@ -387,7 +387,7 @@ export class Game {
 
         result.options.push(
           new SelectCard(
-            'Select 2 Prelude cards', preludeDealtCards,
+            "Select 2 Prelude cards", preludeDealtCards,
             (preludeCards: Array<IProjectCard>) => {
               player.preludeCardsInHand.push(preludeCards[0], preludeCards[1]);
               return undefined;
@@ -398,7 +398,7 @@ export class Game {
 
       result.options.push(
         new SelectCard(
-          'Select initial cards to buy', dealtCards,
+          "Select initial cards to buy", dealtCards,
           (foundCards: Array<IProjectCard>) => {
             for (const dealt of dealtCards) {
               if (foundCards.find((foundCard) => foundCard.name === dealt.name)) {
@@ -421,7 +421,7 @@ export class Game {
     private incrementFirstPlayer(): void {
       let firstIndex: number = this.players.indexOf(this.first);
       if (firstIndex === -1) {
-        throw new Error('Didn\'t even find player');
+        throw new Error("Didn't even find player");
       }
       if (firstIndex === this.players.length - 1) {
         firstIndex = 0;
@@ -659,7 +659,7 @@ export class Game {
       // Defensive coding to fail fast, if we don't find the next
       // player we are in an unexpected game state
       if (nextPlayer === undefined) {
-        throw new Error('Did not find player');
+        throw new Error("Did not find player");
       }
 
       if (!this.hasPassedThisActionPhase(nextPlayer)) {
@@ -678,7 +678,7 @@ export class Game {
     }
 
     private gotoEndGame(): void {
-      if (this.phase == Phase.END) return;
+      if (this.phase === Phase.END) return;
       this.phase = Phase.END;
 
       // Give players any victory points from cards and corporations
@@ -779,7 +779,7 @@ export class Game {
       if (firstPlayer !== undefined) {
         this.startFinalGreeneryPlacement(firstPlayer);
       } else {
-        throw new Error('Was no player left to place final greenery');
+        throw new Error("Was no player left to place final greenery");
       }
     }
 
@@ -822,7 +822,7 @@ export class Game {
       return undefined;
     }
     if (steps > 1 && this.venusScaleLevel + 2 * steps > constants.MAX_VENUS_SCALE) {
-      steps = (steps == 3) ? 2 : 1; // typing disallows decrement
+      steps = (steps === 3) ? 2 : 1; // typing disallows decrement
       return this.increaseVenusScaleLevel(player, steps);
     }
     this.venusScaleLevel += 2 * steps;
@@ -907,7 +907,7 @@ export class Game {
     public getPlayer(name: string): Player {
       const found = this.players.filter((player) => player.name === name);
       if (found.length === 0) {
-        throw new Error('Player not found');
+        throw new Error("Player not found");
       }
       return found[0];
     }
@@ -917,7 +917,7 @@ export class Game {
       if (matchedSpaces.length === 1) {
         return matchedSpaces[0];
       }
-      throw new Error('Error with getting space');
+      throw new Error("Error with getting space");
     }
     public getCitiesInPlayOnMars(): number {
       return this.board.spaces.filter(
@@ -944,7 +944,7 @@ export class Game {
         player: Player, spaceType: SpaceType,
         space: ISpace, tile: ITile, isWorldGov: boolean = false): void {
       if (space.tile !== undefined) {
-        throw new Error('Selected space is occupied');
+        throw new Error("Selected space is occupied");
       }
       // Hellas special requirements ocean tile
       if (space.id === SpaceName.HELLAS_OCEAN_TILE 
@@ -956,7 +956,7 @@ export class Game {
 
       // Land claim a player can claim land for themselves
       if (space.player !== undefined && space.player !== player) {
-        throw new Error('This space is land claimed by ' + space.player.name);
+        throw new Error("This space is land claimed by " + space.player.name);
       }
       // Arcadian Communities
       if (space.player !== undefined && space.player === player && player.isCorporation(CorporationName.ARCADIAN_COMMUNITIES)) {
@@ -1080,7 +1080,7 @@ export class Game {
           return player;
         }
       }
-      throw new Error('No player has played requested card');
+      throw new Error("No player has played requested card");
     }
     public getCard(name: string): IProjectCard | undefined {
       for (let i = 0; i < this.players.length; i++) {
@@ -1136,7 +1136,7 @@ export class Game {
       this.players[0].terraformRatingAtGenerationStart = 14;
       // Single player add neutral player
       // put 2 neutrals cities on board with adjacent forest
-      const neutral = new Player('neutral', Color.NEUTRAL, true);
+      const neutral = new Player("neutral", Color.NEUTRAL, true);
       const space1 = this.board.getRandomCitySpace(0);
       this.addCityTile(neutral, space1.id, SpaceType.LAND);
       const fspace1 = this.board.getForestSpace(

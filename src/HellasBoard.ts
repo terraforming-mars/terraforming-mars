@@ -1,8 +1,8 @@
 import { SpaceBonus } from "./SpaceBonus";
 import { SpaceName } from "./SpaceName";
-import { Board, Land, Ocean, BoardColony } from './Board';
-import { Player } from './Player';
-import { ISpace } from './ISpace';
+import { Board, Land, Ocean, BoardColony } from "./Board";
+import { Player } from "./Player";
+import { ISpace } from "./ISpace";
 
 export class HellasBoard extends Board{
     constructor() {

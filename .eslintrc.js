@@ -4,13 +4,8 @@ module.exports = {
     'es6': true,
   },
   'extends': [
-    'plugin:vue/essential',
-    'google',
+    'plugin:vue/essential'
   ],
-  'globals': {
-    'Atomics': 'readonly',
-    'SharedArrayBuffer': 'readonly',
-  },
   'parserOptions': {
     'ecmaVersion': 2018,
     'parser': '@typescript-eslint/parser',
@@ -21,17 +16,7 @@ module.exports = {
     '@typescript-eslint',
   ],
   'rules': {
-    'comma-dangle': ['error', 'never'],
-    'no-unused-vars': ['off'],
-    '@typescript-eslint/no-unused-vars': ['error', {
-        "vars": "all",
-        "args": "after-used",
-        "ignoreRestSiblings": false
-    }],
-    'require-jsdoc': ['error', {
-        'require': {
-            'FunctionDeclaration': false
-        }
-    }]
+    'eqeqeq': ['error', 'always'],
+    'quotes': ['error', 'double']
   },
 };

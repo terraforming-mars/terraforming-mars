@@ -28,7 +28,6 @@ import { ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS } from './
 import {SpaceName} from './SpaceName';
 import {BoardColony, Board} from './Board';
 import {CorporationName} from './CorporationName';
-import {CardName} from './CardName';
 import { ElysiumBoard } from './ElysiumBoard';
 import { HellasBoard } from './HellasBoard';
 import { BoardName } from './BoardName';
@@ -70,17 +69,6 @@ export class Game {
     public colonies: Array<IColony> = [];
     public colonyDealer: ColonyDealer = new ColonyDealer();
     public pendingOceans: number = 0;
-
-    private tempMC: number = 0;
-    private tempSteel: number = 0;
-    private tempTitanium: number = 0;
-    private tempPlants: number = 0;
-    private tempHeat: number = 0;
-    private tempTR: number = 0;
-    private tempCards: Array<IProjectCard> = [];
-    private tempHeatProduction: number = 0;
-    private tempVenusScaleLevel: number = 0;
-    private tempOceans: number = 0;
 
     constructor(
       public id: string,
@@ -179,12 +167,12 @@ export class Game {
       this.addInterrupt(new SelectHowToPayInterrupt(player, amount, title, canUseSteel, canUseTitanium));
     }  
 
-    public addOceanInterrupt(player: Player, title?: string): void {
+    public addOceanInterrupt(player: Player, title?: string, isWorldGov: boolean = false): void {
       if (this.board.getOceansOnBoard() + this.pendingOceans  >= constants.MAX_OCEAN_TILES) {
         return;
       }
       this.pendingOceans++;
-      this.addInterrupt(new SelectOcean(player, this, title));
+      this.addInterrupt(new SelectOcean(player, this, title, isWorldGov));
     }
 
     public addColonyInterrupt(player: Player, allowDuplicate: boolean = false, title: string): void {
@@ -516,47 +504,10 @@ export class Game {
     }
 
     private gotoWorldGovernmentTerraforming() {
-      //Snapshot player's resources
-      this.tempMC = this.first.megaCredits;
-      this.tempSteel = this.first.steel;
-      this.tempTitanium = this.first.titanium;
-      this.tempPlants = this.first.plants;
-      this.tempHeat = this.first.heat;
-      this.tempTR = this.first.terraformRating;
-      this.tempCards = this.first.cardsInHand;
-      this.tempHeatProduction = this.first.getProduction(Resources.HEAT);
-      this.tempVenusScaleLevel = this.venusScaleLevel;
-      this.tempOceans = this.board.getOceansOnBoard();
-
-
       this.first.worldGovernmentTerraforming(this);
     }
 
     public doneWorldGovernmentTerraforming() {
-      //Revert snapshoted player's resources
-      this.first.megaCredits = this.tempMC;
-      this.first.steel = this.tempSteel;
-      this.first.titanium = this.tempTitanium;
-      this.first.plants = this.tempPlants;
-      this.first.heat = this.tempHeat;
-      this.first.terraformRating = this.tempTR;
-      this.first.cardsInHand = this.tempCards;
-
-      if (this.first.getProduction(Resources.HEAT) > this.tempHeatProduction) {
-        this.first.setProduction(Resources.HEAT, this.tempHeatProduction - this.first.getProduction(Resources.HEAT));
-      }
-
-      // Check for Aphrodite corporation
-      if (this.tempVenusScaleLevel < this.venusScaleLevel 
-          && this.first.isCorporation(CorporationName.APHRODITE)) {
-            this.first.megaCredits += 2;
-      }
-
-      //Check for arctic algae
-      if (this.tempOceans < this.board.getOceansOnBoard() && this.first.cardIsInEffect(CardName.ARCTIC_ALGAE)) {
-          this.first.plants += 2;
-      }     
-
       //Carry on to next phase
       this.gotoDraftOrResearch();
     }  
@@ -844,7 +795,7 @@ export class Game {
     }
 
     public increaseOxygenLevel(
-        player: Player, steps: 1 | 2): undefined {
+        player: Player, steps: 1 | 2, isWorldGov: boolean = false): undefined {
       if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
         return undefined;
       }
@@ -852,9 +803,11 @@ export class Game {
         return this.increaseOxygenLevel(player, 1);
       }
       this.oxygenLevel += steps;
-      player.terraformRating += steps;
+      if (!isWorldGov) {
+        player.terraformRating += steps;
+      }
       if (this.oxygenLevel === 8 || (steps === 2 && this.oxygenLevel === 9)) {
-        return this.increaseTemperature(player, 1);
+        return this.increaseTemperature(player, 1, isWorldGov);
       }
       return undefined;
     }
@@ -864,7 +817,7 @@ export class Game {
     }
 
     public increaseVenusScaleLevel(
-      player: Player, steps: 1 | 2 | 3): SelectSpace | undefined {
+      player: Player, steps: 1 | 2 | 3, isWorldGov: boolean = false): SelectSpace | undefined {
     if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
       return undefined;
     }
@@ -873,7 +826,9 @@ export class Game {
       return this.increaseVenusScaleLevel(player, steps);
     }
     this.venusScaleLevel += 2 * steps;
-    player.terraformRating += steps;
+    if (!isWorldGov) {
+      player.terraformRating += steps;
+    }  
 
     // Check for Aphrodite corporation
     this.players.forEach((player) => {
@@ -882,14 +837,14 @@ export class Game {
       }
     });
 
-    if (this.venusScaleLevel === 8 
+    if ((!isWorldGov) && this.venusScaleLevel === 8 
         || ((steps === 2 || steps === 3) && this.venusScaleLevel === 10) 
         || (steps === 3 && this.venusScaleLevel === 12)
     ) {
       player.cardsInHand.push(this.dealer.dealCard());
     }
 
-    if (this.venusScaleLevel === 16 
+    if ((!isWorldGov) && this.venusScaleLevel === 16 
         || ((steps === 2 || steps === 3) && this.venusScaleLevel === 18) 
         || (steps === 3 && this.venusScaleLevel === 20)
     ) {
@@ -904,7 +859,7 @@ export class Game {
   }
 
     public increaseTemperature(
-        player: Player, steps: 1 | 2 | 3): undefined {
+        player: Player, steps: 1 | 2 | 3, isWorldGov: boolean = false): undefined {
       if (this.temperature >= constants.MAX_TEMPERATURE) {
         return;
       }
@@ -914,12 +869,14 @@ export class Game {
         return;
       }
       this.temperature += 2 * steps;
-      player.terraformRating += steps;
+      if (!isWorldGov) {
+        player.terraformRating += steps;
+      }
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
       // BONUS FOR OCEAN TILE AT 0
-      if (steps === 3 && this.temperature === -20) {
+      if (steps === 3 && this.temperature === -20 && !isWorldGov) {
         player.setProduction(Resources.HEAT, 2);
-      } else if (this.temperature === -24 || this.temperature === -20 ||
+      } else if ((!isWorldGov) && this.temperature === -24 || this.temperature === -20 ||
             (
               (steps === 2 || steps === 3) &&
               (this.temperature === -22 || this.temperature === -18)
@@ -934,7 +891,7 @@ export class Game {
           (steps === 3 && this.temperature === 4)
         ) && this.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES
       ) {
-        this.addOceanInterrupt(player, "Select space for ocean from temperature increase");
+        this.addOceanInterrupt(player, "Select space for ocean from temperature increase", isWorldGov);
       }
       return undefined;
     }
@@ -985,7 +942,7 @@ export class Game {
     }
     public addTile(
         player: Player, spaceType: SpaceType,
-        space: ISpace, tile: ITile): void {
+        space: ISpace, tile: ITile, isWorldGov: boolean = false): void {
       if (space.tile !== undefined) {
         throw new Error('Selected space is occupied');
       }
@@ -1016,25 +973,28 @@ export class Game {
       }
 
       space.tile = tile;
-      space.bonus.forEach((spaceBonus) => {
-        if (spaceBonus === SpaceBonus.DRAW_CARD) {
-          player.cardsInHand.push(this.dealer.dealCard());
-        } else if (spaceBonus === SpaceBonus.PLANT) {
-          player.plants++;
-        } else if (spaceBonus === SpaceBonus.STEEL) {
-          player.steel++;
-        } else if (spaceBonus === SpaceBonus.TITANIUM) {
-          player.titanium++;
-        } else if (spaceBonus === SpaceBonus.HEAT) {
-          player.heat++;  
-        }
-      });
-      this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-        if (adjacentSpace.tile &&
-            adjacentSpace.tile.tileType === TileType.OCEAN) {
-          player.megaCredits += player.oceanBonus;
-        }
-      });
+      if (!isWorldGov) {
+        space.bonus.forEach((spaceBonus) => {
+          if (spaceBonus === SpaceBonus.DRAW_CARD) {
+            player.cardsInHand.push(this.dealer.dealCard());
+          } else if (spaceBonus === SpaceBonus.PLANT) {
+            player.plants++;
+          } else if (spaceBonus === SpaceBonus.STEEL) {
+            player.steel++;
+          } else if (spaceBonus === SpaceBonus.TITANIUM) {
+            player.titanium++;
+          } else if (spaceBonus === SpaceBonus.HEAT) {
+            player.heat++;  
+          }
+        });
+      
+        this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
+          if (adjacentSpace.tile &&
+              adjacentSpace.tile.tileType === TileType.OCEAN) {
+            player.megaCredits += player.oceanBonus;
+          }
+        });
+      }
       
       this.tilePlaced(space);
 
@@ -1071,14 +1031,16 @@ export class Game {
     }
     public addOceanTile(
         player: Player, spaceId: string,
-        spaceType: SpaceType = SpaceType.OCEAN): void {
+        spaceType: SpaceType = SpaceType.OCEAN, isWorldGov: boolean = false): void {
       if (this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES) {
         return;
       }
       this.addTile(player, spaceType, this.getSpace(spaceId), {
         tileType: TileType.OCEAN
-      });
-      player.terraformRating++;
+      }, isWorldGov);
+      if (!isWorldGov) {
+        player.terraformRating++;
+      }  
     }
     public getPlayers(): Array<Player> {
       // We always return them in turn order

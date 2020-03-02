@@ -88,9 +88,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
             return ALL_PROMO_CORPORATIONS;
         }, 
         createGame: function () {
-            const component = this;
             if (this.randomFirstPlayer) {
-                component.firstIndex = Math.floor(Math.random() * this.playersCount) + 1;
+                this.firstIndex = Math.floor(Math.random() * this.playersCount) + 1;
             }
 
             // Set player name for solo mode

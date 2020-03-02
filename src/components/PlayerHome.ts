@@ -96,7 +96,7 @@ export const PlayerHome = Vue.component("player-home", {
                         <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, false)">
                             <span class="player_number">{{ idx+1 }}.</span><span class="player_name" :class="getPlayerCssForTurnOrder(p, true)">{{ p.name }}</span>
                         </div>
-                        <div class="player_separator" v-if="idx !== player.players.length - 1">→</div>
+                        <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
                     </div>
                 </div>
 

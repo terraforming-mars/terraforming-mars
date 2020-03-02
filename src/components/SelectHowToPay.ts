@@ -78,9 +78,11 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
     },
     template: `<div class="payments_cont"> 
   <section v-trim-whitespace>
-    <h3 class="payments_title">How to pay?</h3>
+
+    <h3 class="payments_title">{{playerinput.title}}</h3>
 
     <div class="payments_type input-group" v-if="playerinput.canUseSteel">
+
       <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
       <button class="btn btn-primary" v-on:click="reduceValue('steel', 1)" :class="getCssClassFor('<', 'steel')"><i class="icon icon-minus" /></button>
       <input class="form-input form-inline payments_input" v-model.number="steel" />

@@ -159,7 +159,7 @@ export const PlayerHome = Vue.component("player-home", {
             </div>
 
             <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
-                <h2>Prepare to the game:</h2>
+                <h2>Select initial cards:</h2>
                 <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
             </div>
 

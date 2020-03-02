@@ -22,6 +22,7 @@ interface CreateGameModel {
 }
 
 interface NewPlayerModel {
+    index: number;
     name: string;
     color: Color;
     beginner: boolean;
@@ -32,14 +33,14 @@ interface NewPlayerModel {
 export const CreateGameForm = Vue.component("create-game-form", {
     data: function () {
         return {
-            firstIndex: 0,
+            firstIndex: 1,
             playersCount: 1,
             players: [
-                { name: "", color: Color.RED, beginner: false, first: false },
-                { name: "", color: Color.GREEN, beginner: false, first: false },
-                { name: "", color: Color.YELLOW, beginner: false, first: false },
-                { name: "", color: Color.BLUE, beginner: false, first: false },
-                { name: "", color: Color.BLACK, beginner: false, first: false }
+                {index: 1, name: "", color: Color.RED, beginner: false, first: false},
+                {index: 2, name: "", color: Color.GREEN, beginner: false, first: false},
+                {index: 3, name: "", color: Color.YELLOW, beginner: false, first: false},
+                {index: 4, name: "", color: Color.BLUE, beginner: false, first: false},
+                {index: 5, name: "", color: Color.BLACK, beginner: false, first: false}
             ],
             prelude: false,
             draftVariant: true,
@@ -56,8 +57,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
         toggleDisplayed: function () {
             this.displayed = !this.displayed;
         },
-        getPlayersRange: function (): Array<number> {
-            return Array.from({length: this.playersCount}, (_, key) => key)
+        getPlayers: function (): Array<NewPlayerModel> {
+            return this.players.slice(0, this.playersCount);
         },
         getOriginalBoard: function () {
             return BoardName.ORIGINAL;
@@ -86,13 +87,10 @@ export const CreateGameForm = Vue.component("create-game-form", {
         getPromoCorps: function () {
             return ALL_PROMO_CORPORATIONS;
         }, 
-        randomInteger: function(min: number, max: number) {
-            let rand = min - 0.5 + Math.random() * (max - min + 1);
-            return Math.round(rand);
-        },
         createGame: function () {
+            const component = this;
             if (this.randomFirstPlayer) {
-                this.firstIndex = this.randomInteger(0, this.playersCount-1);
+                component.firstIndex = Math.floor(Math.random() * this.playersCount) + 1;
             }
 
             // Set player name for solo mode
@@ -100,14 +98,14 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 this.players[0].name = "You";
             }
 
-            const players = this.players.slice(0, this.playersCount + 1).map((player: any, index: number) => {
-                player.first = (this.firstIndex === index);
+            const players = this.players.slice(0, this.playersCount + 1).map((player: any) => {
+                player.first = (this.firstIndex === player.index);
                 return player;
             }).filter((player: any) => player.name);
             
             // TODO Check if all players has different colors
 
-            // Check all names to be set
+            // TODO Check all names to be set
 
             const prelude = this.$data.prelude;
             const draftVariant = this.$data.draftVariant;
@@ -246,45 +244,25 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <h2>Players</h2>
                 <div class="container">
                     <div class="columns">
-                        <div class="form-group col6 create-game-player create-game--block" v-for="playerIndex in getPlayersRange()">
+                        <div class="form-group col6 create-game-player create-game--block" v-for="newPlayer in getPlayers()">
                             <div>
-                                <input class="form-input form-inline" style="max-width: 430px" :placeholder="'Player ' + (playerIndex + 1) + ' name'" v-model="players[playerIndex].name" :id="'playerName' + playerIndex" type="text" />
+                                <input class="form-input form-inline create-game-player-name" :placeholder="'Player ' + newPlayer.index + ' name'" v-model="newPlayer.name" />
                             </div>
                             <div>
                                 <label class="form-label form-inline">Color:</label>
-                                <label class="form-radio form-inline">
-                                    <input type="radio" value="red" :name="'playerColor' + playerIndex" v-model="players[playerIndex].color">
-                                    <i class="form-icon"></i> Red
-                                </label>
-
-                                <label class="form-radio form-inline">
-                                    <input type="radio" value="green" :name="'playerColor' + playerIndex" v-model="players[playerIndex].color">
-                                    <i class="form-icon"></i> Green
-                                </label>
-
-                                <label class="form-radio form-inline">
-                                    <input type="radio" value="yellow" :name="'playerColor' + playerIndex" v-model="players[playerIndex].color">
-                                    <i class="form-icon"></i> Yellow
-                                </label>
-
-                                <label class="form-radio form-inline">
-                                    <input type="radio" value="blue" :name="'playerColor' + playerIndex" v-model="players[playerIndex].color">
-                                    <i class="form-icon"></i> Blue
-                                </label>
-
-                                <label class="form-radio form-inline">
-                                    <input type="radio" value="black" :name="'playerColor' + playerIndex" v-model="players[playerIndex].color">
-                                    <i class="form-icon"></i> Black
+                                <label class="form-radio form-inline" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black']">
+                                    <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color">
+                                    <i class="form-icon"></i> {{ color }}
                                 </label>
                             </div>
                             <div>
                                 <label class="form-switch form-inline">
-                                    <input type="checkbox" v-model="players[playerIndex].beginner">
+                                    <input type="checkbox" v-model="newPlayer.beginner">
                                     <i class="form-icon"></i> Beginner?
                                 </label>
 
                                 <label class="form-radio form-inline" v-if="!randomFirstPlayer">
-                                    <input type="radio" name="firstIndex" v-model="firstIndex">
+                                    <input type="radio" name="firstIndex" :value="newPlayer.index" v-model="firstIndex">
                                     <i class="form-icon"></i> Goes First?
                                 </label>
                             </div>

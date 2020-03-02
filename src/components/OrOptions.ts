@@ -34,7 +34,6 @@ export const OrOptions = Vue.component("or-options", {
         const optionElements: Array<VNode> = [];
         this.playerinput.options.forEach((option: any, idx: number) => {
             const domProps: {[key: string]: any} = {
-                //className: "nes-radio",
                 name: "selectOption" + unique,
                 type: "radio",
                 value: String(idx)
@@ -57,7 +56,6 @@ export const OrOptions = Vue.component("or-options", {
                 this.onsave([copy]);
             }, false, false));
             subchildren.push(createElement("div", { style: { display: displayStyle, marginLeft: "30px" } }, [this.$data.childComponents[this.$data.childComponents.length - 1]]));
-            //subchildren.push(createElement("div", { style: { marginLeft: "30px" } }, [this.$data.childComponents[this.$data.childComponents.length - 1]]));
             optionElements.push(subchildren[subchildren.length - 1]);
             children.push(createElement("div", subchildren));
         });

@@ -41,6 +41,12 @@ export const PlayerHome = Vue.component("player-home", {
             var ret: string = "player_color_" + player.color;
             if (hilightActive && player.isActive) ret += " player_is_active";
             return ret;
+        },
+        showPlayerDetails: function (player: PlayerModel) {
+            console.log(player.name, player.id, this.player.id);
+            if (player.id === this.player.id) return;
+            
+            (this.$root as any).setOtherPlayerVisibility(player.id, true);
         }
     },
     mounted: function () {
@@ -91,12 +97,17 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
 
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
-                    <h3>Turn order</h3>
+                    <h3>Turn order <span class="help_tip">(click on player name to see details)</span></h3>
                     <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
                         <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, false)">
-                            <span class="player_number">{{ idx+1 }}.</span><span class="player_name" :class="getPlayerCssForTurnOrder(p, true)">{{ p.name }}</span>
+                            <span class="player_number">{{ idx+1 }}.</span><a v-on:click.prevent="showPlayerDetails(p)" class="player_name" :class="getPlayerCssForTurnOrder(p, true)" href="#">{{ p.name }}</a>
                         </div>
                         <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
+                    </div>
+                    <div v-if="player.players.length > 1">
+                        <div v-for="otherPlayer in player.players" :key="otherPlayer.id">
+                            <other-player v-if="otherPlayer.id !== player.id" :player="otherPlayer"></other-player>
+                        </div>
                     </div>
                 </div>
 
@@ -147,13 +158,6 @@ export const PlayerHome = Vue.component("player-home", {
                     <h2>Funded Awards</h2>
                     <div>
                         <funded-award v-for="fundedAward in player.fundedAwards" :key="fundedAward.award" :players="player.players" :fundedaward="fundedAward"></funded-award>
-                    </div>
-                </div>
-
-                <div class="player_home_block player_home_block--others" v-if="player.players.length > 1">
-                    <h2>Other Players</h2>
-                    <div v-for="otherPlayer in player.players" :key="otherPlayer.id">
-                        <other-player v-if="otherPlayer.id !== player.id" :player="otherPlayer"></other-player>
                     </div>
                 </div>
             </div>

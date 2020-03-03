@@ -36,6 +36,14 @@ const app = new Vue({
         "player-end": GameEnd
     },
     methods: {
+        setOtherPlayerVisibility: function(playerId: string, isVisible: boolean) {
+            if (isVisible === this.getOtherPlayerVisibility(playerId)) return;
+            (this as any).otherPlayersVisibility[playerId] = isVisible
+            this.playerkey++;
+        },
+        getOtherPlayerVisibility: function(playerId: string): boolean {
+            return (this as any).otherPlayersVisibility[playerId] ? true : false;
+        },
         updatePlayer: function() {
             const currentPathname: string = window.location.pathname;
             const xhr = new XMLHttpRequest();

@@ -17,7 +17,7 @@ interface CreateGameModel {
     colonies: boolean;
     customCorporationsList: boolean;
     corporations: Array<CorporationCard>;
-    displayed: boolean;
+    showCorporationList: boolean;
     board: BoardName;
 }
 
@@ -49,14 +49,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
             colonies: false,
             customCorporationsList: false,
             corporations: [...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS, ...ALL_TURMOIL_CORPORATIONS, ...ALL_PROMO_CORPORATIONS],
-            displayed: false,
+            showCorporationList: false,
             board: BoardName.ORIGINAL
         } as CreateGameModel
     },
     methods: {
-        toggleDisplayed: function () {
-            this.displayed = !this.displayed;
-        },
         getPlayers: function (): Array<NewPlayerModel> {
             return this.players.slice(0, this.playersCount);
         },
@@ -93,7 +90,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             }
 
             // Set player name for solo mode
-            if (this.playersCount == 1 && this.players[0].name == "") {
+            if (this.playersCount === 1 && this.players[0].name === "") {
                 this.players[0].name = "You";
             }
 
@@ -120,7 +117,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             }
             xhr.onload = () => {
                 if (xhr.status === 200) {
-                    if (xhr.response.players.length == 1) {
+                    if (xhr.response.players.length === 1) {
                         window.location.href = "/player?id=" + xhr.response.players[0].id;
                         return;
                     } else {
@@ -149,29 +146,9 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         <div class="create-game-options-block col3 col-sm-6">
                             <h4>Players count</h4>
 
-                            <label class="form-radio">
-                                <input type="radio" value="1" name="playersCount" v-model="playersCount">
-                                <i class="form-icon"></i> Solo
-                            </label>
-
-                            <label class="form-radio">
-                                <input type="radio" value="2" name="playersCount" v-model="playersCount">
-                                <i class="form-icon"></i> 2
-                            </label>
-
-                            <label class="form-radio">
-                                <input type="radio" value="3" name="playersCount" v-model="playersCount">
-                                <i class="form-icon"></i> 3
-                            </label>
-
-                            <label class="form-radio">
-                                <input type="radio" value="4" name="playersCount" v-model="playersCount">
-                                <i class="form-icon"></i> 4
-                            </label>
-
-                            <label class="form-radio">
-                                <input type="radio" value="5" name="playersCount" v-model="playersCount">
-                                <i class="form-icon"></i> 5
+                            <label class="form-radio" v-for="pCount in [1,2,3,4,5]">
+                                <input type="radio" :value="pCount" name="playersCount" v-model="playersCount">
+                                <i class="form-icon"></i> <span v-html="pCount === 1 ? 'Solo' : pCount"></span>
                             </label>
                         </div>
 
@@ -202,7 +179,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </label>
 
                             <label class="form-switch">
-                                <input type="checkbox" v-model="customCorporationsList" v-on:click="toggleDisplayed()">
+                                <input type="checkbox" v-model="customCorporationsList" v-on:click="showCorporationList = !showCorporationList">
                                 <i class="form-icon"></i> Custom Corporation list
                             </label>
 
@@ -270,7 +247,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 </div>
             </div>
 
-            <div v-if="displayed === true">
+            <div v-if="showCorporationList">
 
                 <h2>Corporations</h2>
 

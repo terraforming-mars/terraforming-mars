@@ -68,7 +68,7 @@ export class Game {
     public interrupts: Array<PlayerInterrupt> = [];
     public monsInsuranceOwner: Player | undefined = undefined;
     public colonies: Array<IColony> = [];
-    public colonyDealer: ColonyDealer = new ColonyDealer();
+    public colonyDealer: ColonyDealer | undefined = undefined;
     public pendingOceans: number = 0;
 
     private tempMC: number = 0;
@@ -92,7 +92,8 @@ export class Game {
       public coloniesExtension: boolean = false,
       customCorporationsList: boolean = false,
       corporationList: Array<CorporationCard> = [],
-      public boardName: BoardName = BoardName.ORIGINAL
+      public boardName: BoardName = BoardName.ORIGINAL,
+      seed: number
     ) {
 
       if (boardName === BoardName.ELYSIUM) {
@@ -110,7 +111,7 @@ export class Game {
       }
 
       this.activePlayer = first;
-      this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension);
+      this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, seed);
       
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
@@ -140,6 +141,7 @@ export class Game {
       // Add colonies stuff
       if (this.coloniesExtension) {
         corporationCards.push(...ALL_COLONIES_CORPORATIONS);
+        this.colonyDealer = new ColonyDealer(seed);
         this.colonies = this.colonyDealer.drawColonies(players.length);
         if (this.players.length === 1) {
           players[0].setProduction(Resources.MEGACREDITS, -2);

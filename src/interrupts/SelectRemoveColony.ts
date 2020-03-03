@@ -17,6 +17,7 @@ export class SelectRemoveColony implements PlayerInterrupt {
             colony.name + " - (" + colony.description + ")", 
             () => {
                 game.colonies.splice(game.colonies.indexOf(colony),1);
+                if (game.colonyDealer === undefined) return;
                 game.colonyDealer.discardedColonies.push(colony);
                 return undefined;
             }

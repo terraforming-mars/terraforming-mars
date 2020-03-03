@@ -646,10 +646,10 @@ export class Player {
       let cards: Array<IProjectCard> = [];
       if (passedCards === undefined) {
         cards.push(
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-          game.dealer.dealCard()
+          game.dealer.dealCard(true),
+          game.dealer.dealCard(true),
+          game.dealer.dealCard(true),
+          game.dealer.dealCard(true)
       ) } else { cards = passedCards}      
 
       this.setWaitingFor(
@@ -670,10 +670,10 @@ export class Player {
       let dealtCards: Array<IProjectCard> = [];
       if (!draftVariant) {
         dealtCards.push(
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-          game.dealer.dealCard()
+          game.dealer.dealCard(true),
+          game.dealer.dealCard(true),
+          game.dealer.dealCard(true),
+          game.dealer.dealCard(true)
         );
       } else {
         dealtCards = this.draftedCards;

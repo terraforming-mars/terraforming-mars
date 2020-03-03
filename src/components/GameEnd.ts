@@ -68,7 +68,7 @@ export const GameEnd = Vue.component("game-end", {
                 </div>
                 <div class="game_end_victory_points">
                     <h2>Victory points breakdown after {{player.generation}} generations</h2>
-                    <table class="nes-table is-bordered is-centered">
+                    <table class="table game_end_table">
                         <thead>
                             <tr>
                                 <th>Player</th>

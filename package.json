@@ -10,7 +10,7 @@
     "@types/node": "^10.14.4",
     "dialog-polyfill": "^0.5.0",
     "less": "^3.10.3",
-    "nes.css": "^2.1.1",
+    "spectre.css": "^0.5.8",
     "typescript": "^3.5.0",
     "vue": "^2.6.10",
     "webpack": "^4.30.0",

@@ -93,8 +93,12 @@ export class Game {
       customCorporationsList: boolean = false,
       corporationList: Array<CorporationCard> = [],
       public boardName: BoardName = BoardName.ORIGINAL,
-      seed: number
+      seed?: number
     ) {
+
+      if (seed === undefined) {
+        seed = Math.random();
+      }
 
       if (boardName === BoardName.ELYSIUM) {
         this.board = new ElysiumBoard();

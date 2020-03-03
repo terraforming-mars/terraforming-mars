@@ -78,7 +78,7 @@ export const WaitingFor = Vue.component("waiting-for", {
             (this as any).waitForUpdate();
             return createElement("div", "Not your turn to take any actions");
         }
-        return new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
+        const input = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
             const xhr = new XMLHttpRequest();
             xhr.open("POST", "/player/input?id=" + (this.$parent as any).player.id);
             xhr.responseType = "json";
@@ -108,6 +108,8 @@ export const WaitingFor = Vue.component("waiting-for", {
             }
             xhr.send(JSON.stringify(out));  
         }, true, true);
+
+        return createElement("div", {"class": "wf-root"}, [input])
     }
 });
 

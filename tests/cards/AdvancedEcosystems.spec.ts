@@ -3,15 +3,19 @@ import { expect } from "chai";
 import { AdvancedEcosystems } from "../../src/cards/AdvancedEcosystems";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
-import { Pets } from "../../src/cards/Pets";
 import { Tardigrades } from "../../src/cards/Tardigrades";
 import { TundraFarming } from "../../src/cards/TundraFarming";
+import { ResearchNetwork } from '../../src/cards/prelude/ResearchNetwork';
 
 describe("AdvancedEcosystems", function () {
     it("Should play", function () {
         const card = new AdvancedEcosystems();
         const player = new Player("test", Color.BLUE, false);
-        player.playedCards.push(new Tardigrades(), new TundraFarming, new Pets());
+        player.playedCards.push(new TundraFarming);
+        expect(card.canPlay(player)).to.eq(false);
+        player.playedCards.push(new ResearchNetwork());
+        expect(card.canPlay(player)).to.eq(false);
+        player.playedCards.push(new Tardigrades());
         expect(card.canPlay(player)).to.eq(true);
         card.play();
         player.victoryPoints += card.getVictoryPoints();

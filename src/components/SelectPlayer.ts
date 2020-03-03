@@ -19,11 +19,11 @@ export const SelectPlayer = Vue.component("select-player", {
     },
     template: `<div>
   <div v-if="showtitle === true">{{playerinput.title}}</div>
-  <label v-for="player in playerinput.players" :key="player" style="display:block;font-size:12px">
-    <input class="nes-radio" type="radio" v-model="selectedPlayer" :value="player" />
+  <label v-for="player in playerinput.players" :key="player" style="font-size:12px">
+    <input type="radio" v-model="selectedPlayer" :value="player" />
     <select-player-row :player="players.find((otherPlayer) => otherPlayer.id === player)"></select-player-row>
   </label>
-  <button v-if="showsave === true" class="nes-btn" v-on:click="saveData">Save</button>
+  <button v-if="showsave === true" class="btn btn-lg btn-primary" v-on:click="saveData">Save</button>
 </div>`
 });
 

@@ -1,6 +1,6 @@
 import { SpaceBonus } from "./SpaceBonus";
 import { SpaceName } from "./SpaceName";
-import { Board, Land, Ocean, BoardColony } from './Board';
+import { Board, Land, Ocean, BoardColony } from "./Board";
 
 export class ElysiumBoard extends Board{
     constructor() {

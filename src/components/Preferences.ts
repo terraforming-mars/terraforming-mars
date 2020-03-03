@@ -99,43 +99,43 @@ export const Preferences = Vue.component("preferences", {
                 <i class="preferences_icon preferences_icon--settings" v-on:click="ui.preferences_panel_open = !ui.preferences_panel_open"></i>
                 <div class="preferences_panel" v-if="ui.preferences_panel_open">
                     <div class="preferences_panel_item">
-                        <label>
+                        <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_corporation" />
-                            <span>Hide corporation card</span>
+                            <i class="form-icon"></i> Hide corporation card
                         </label>
                     </div>
                     <div class="preferences_panel_item">
-                        <label>
+                        <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_turnorder" />
-                            <span>Hide turn order</span>
+                            <i class="form-icon"></i> Hide turn order
                         </label>
                     </div>
                     <div class="preferences_panel_item">
-                        <label>
+                        <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_hand" />
-                            <span>Hide cards in hand</span>
+                            <i class="form-icon"></i> Hide cards in hand
                         </label>
                     </div>
                     <div class="preferences_panel_item">
-                        <label>
+                        <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_cards" />
-                            <span>Hide played cards</span>
+                            <i class="form-icon"></i> Hide played cards
                         </label>
                     </div>
                     <div class="preferences_panel_item">
-                        <label>
+                        <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_awards_and_milestones" />
-                            <span>Hide awards and milestones</span>
+                            <i class="form-icon"></i> Hide awards and milestones
                         </label>
                     </div>
                     <div class="preferences_panel_item">
-                        <label>
+                        <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="small_cards" />
-                            <span>Smaller cards</span>
+                            <i class="form-icon"></i> Smaller cards
                         </label>
                     </div>
                     <div class="preferences_panel_actions">
-                        <button class="nes-btn is-primary" v-on:click="ui.preferences_panel_open=false">Ok</button>
+                        <button class="btn btn-lg btn-primary" v-on:click="ui.preferences_panel_open=false">Ok</button>
                     </div>
                 </div>
             </div>

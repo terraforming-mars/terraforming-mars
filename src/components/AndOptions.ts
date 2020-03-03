@@ -25,6 +25,7 @@ export const AndOptions = Vue.component("and-options", {
             for (let i = 0; i < this.playerinput.options.length; i++) {
                 res.push(this.responded["" + i]);
             }
+            console.log(res);
             this.onsave(res);
         }
     },
@@ -33,7 +34,7 @@ export const AndOptions = Vue.component("and-options", {
         const children: Array<VNode> = [];
         this.$data.childComponents = [];
         if (this.showtitle) {
-            children.push(createElement("div", playerInput.title));
+            children.push(createElement("div", {"class": "wf-title"}, playerInput.title));
         }
         if (playerInput.options !== undefined) {
             const options = playerInput.options;
@@ -47,9 +48,19 @@ export const AndOptions = Vue.component("and-options", {
             });
         }
         if (this.showsave) {
-            children.push(createElement("div", [createElement("button", { domProps: { className: "nes-btn" }, on: { click: () => { this.saveData(); } } }, "Save")]));
+            const saveBtn = createElement(
+                "button", 
+                {
+                    domProps: { className: "btn btn-primary" }, 
+                    on: { click: () => { this.saveData(); } } 
+                }, 
+                "Save"
+            );
+            children.push(
+                createElement("div", {"class": "wf-action"}, [saveBtn])
+            );
         }
-        return createElement("div", children);
+        return createElement("div", {"class": "wf-options"}, children);
     }
 });
 

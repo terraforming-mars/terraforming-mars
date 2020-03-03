@@ -128,7 +128,6 @@ export class RoboticWorkforce implements IProjectCard {
                         || card.name === CardName.UNDERGROUND_CITY
                         || card.name === CardName.URBANIZED_AREA
                         || card.name === CardName.LAVA_TUBE_SETTLEMENT
-                        || card.name === CardName.SPACE_ELEVATOR
                         )
                 ) {
                     if (player.getProduction(Resources.ENERGY) >= 1) {
@@ -276,6 +275,8 @@ export class RoboticWorkforce implements IProjectCard {
                 player.setProduction(Resources.TITANIUM,result.titaniumProduction);
                 player.setProduction(Resources.PLANTS,result.plantProduction);
                 player.setProduction(Resources.HEAT,result.heatProduction);
+
+                game.log(player.name + " copied " + result.name + " production with Robotic Workforce card");
 
                return undefined;
             });

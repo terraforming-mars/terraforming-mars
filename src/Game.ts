@@ -367,7 +367,7 @@ export class Game {
         dealtCards.push(this.dealer.dealCard());
       }
 
-      result.title = "Select corporation and initial cards";
+      result.title = " ";
       result.options.push(
         new SelectCard<CorporationCard>(
           "Select corporation", player.dealtCorporationCards,

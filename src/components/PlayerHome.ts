@@ -55,7 +55,7 @@ export const PlayerHome = Vue.component("player-home", {
                         <p class="title">Error with input</p>
                         <p id="dialog-default-message"></p>
                         <menu class="dialog-menu">
-                            <button class="nes-btn is-primary">OK</button>
+                            <button class="btn btn-lg btn-primary">OK</button>
                         </menu>
                     </form>
                 </dialog>
@@ -96,7 +96,7 @@ export const PlayerHome = Vue.component("player-home", {
                         <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, false)">
                             <span class="player_number">{{ idx+1 }}.</span><span class="player_name" :class="getPlayerCssForTurnOrder(p, true)">{{ p.name }}</span>
                         </div>
-                        <div class="player_separator" v-if="idx !== player.players.length - 1">→</div>
+                        <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
                     </div>
                 </div>
 
@@ -107,11 +107,13 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
 
 
-                <div class="player_home_block nofloat" v-if="player.players.length > 1 && player.gameLog">
+                <div class="player_home_block player_home_block--log nofloat" v-if="player.players.length > 1 && player.gameLog.length > 0">
                     <h2>Last Actions</h2>
-                    <div v-for="message in player.gameLog">
-                        {{message}}
-                    </div>
+                    <ul>
+                        <li v-for="message in player.gameLog">
+                            {{message}}
+                        </li>
+                    </ul>
                 </div>
 
                 <div class="player_home_block player_home_block--corporation">
@@ -156,15 +158,17 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
             </div>
 
-            <div class="player_home_block player_home_block--actions nofloat"  v-if="!player.corporationCard">
-                <h2>Actions</h2>
+            <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
+                <h2>Select initial cards:</h2>
                 <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
             </div>
 
-            <div v-if="player.colonies.length > 0">
+            <div v-if="player.colonies.length > 0" class="player_home_block">
                 <h2>Colonies</h2>
-                <div v-for="colony in player.colonies" :key="colony.name">
-                    <colony :colony="colony" :player="player"></colony>
+                <div class="player_home_colony_cont">
+                    <div class="player_home_colony" v-for="colony in player.colonies" :key="colony.name">
+                        <colony :colony="colony" :player="player"></colony>
+                    </div>
                 </div>
             </div>
 

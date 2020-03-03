@@ -34,7 +34,6 @@ export const OrOptions = Vue.component("or-options", {
         const optionElements: Array<VNode> = [];
         this.playerinput.options.forEach((option: any, idx: number) => {
             const domProps: {[key: string]: any} = {
-                className: "nes-radio",
                 name: "selectOption" + unique,
                 type: "radio",
                 value: String(idx)
@@ -44,10 +43,11 @@ export const OrOptions = Vue.component("or-options", {
             if (this.$data.selectedOption === idx) {
                 domProps.checked = true;
             }
-            subchildren.push(createElement("label", [
-                createElement("input", { style: { display: displayStyle }, domProps, on: { change: (event: any) => {
+            subchildren.push(createElement("label", {"class": "form-radio"},  [
+                createElement("input", { domProps, on: { change: (event: any) => {
                     this.selectedOption = Number(event.target.value);
                 }}}),
+                createElement("i", {"class": "form-icon"}),
                 createElement("span", option.title)
             ]));
             this.$data.childComponents.push(new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, option, (out: Array<Array<string>>) => {
@@ -60,9 +60,9 @@ export const OrOptions = Vue.component("or-options", {
             children.push(createElement("div", subchildren));
         });
         if (this.showsave) {
-            children.push(createElement("div", [createElement("button", { domProps: { className: "nes-btn" }, on: { click: () => { this.saveData(); } } }, "Save")]));
+            children.push(createElement("div", {"class": "wf-action"}, [createElement("button", { domProps: { className: "btn btn-primary" }, on: { click: () => { this.saveData(); } } }, "Save")]));
         }
-        return createElement("div", children);
+        return createElement("div", {"class": "wf-options"}, children);
     }
 });
 

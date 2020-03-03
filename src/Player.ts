@@ -25,11 +25,11 @@ import { VictoryPointsBreakdown } from "./VictoryPointsBreakdown";
 import {Resources} from "./Resources";
 import { ResourceType } from "./ResourceType";
 import { CardName } from "./CardName";
-import { CorporationName } from './CorporationName';
-import { IColony } from './colonies/Colony';
-import { SelectGreenery } from './interrupts/SelectGreenery';
-import { SelectCity } from './interrupts/SelectCity';
-import { SpaceType } from './SpaceType';
+import { CorporationName } from "./CorporationName";
+import { IColony } from "./colonies/Colony";
+import { SelectGreenery } from "./interrupts/SelectGreenery";
+import { SelectCity } from "./interrupts/SelectCity";
+import { SpaceType } from "./SpaceType";
 
 
 export class Player {
@@ -600,7 +600,7 @@ export class Player {
       action.title = "Select action for World Government Terraforming";
       if (game.getTemperature() < constants.MAX_TEMPERATURE) {
         action.options.push(
-          new SelectOption('Increase temperature', () => {
+          new SelectOption("Increase temperature", () => {
             game.increaseTemperature(this,1, true);
             game.log(this.name + " acted as World Government and increased temperature");
             return undefined;
@@ -609,7 +609,7 @@ export class Player {
       }
       if (game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL) {
         action.options.push(
-          new SelectOption('Increase oxygen', () => {
+          new SelectOption("Increase oxygen", () => {
             game.increaseOxygenLevel(this,1, true);
             game.log(this.name + " acted as World Government and increased oxygen level");
             return undefined;
@@ -630,7 +630,7 @@ export class Player {
       }
       if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
         action.options.push(
-          new SelectOption('Increase Venus scale', () => {
+          new SelectOption("Increase Venus scale", () => {
             game.increaseVenusScaleLevel(this,1, true);
             game.log(this.name + " acted as World Government and increased Venus scale");
             return undefined;

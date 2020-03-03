@@ -4,13 +4,15 @@ import { Player } from '../Player';
 import { SelectSpace } from '../inputs/SelectSpace';
 import { ISpace } from '../ISpace';
 import { PlayerInterrupt } from './PlayerInterrupt';
+import { SpaceType } from '../SpaceType';
 
 export class SelectOcean implements PlayerInterrupt {
     public playerInput: PlayerInput;
     constructor(
         public player: Player,
         public game: Game,
-        public title?: string
+        public title?: string,
+        public isWorldGov: boolean = false
     ){
         if (title === undefined) {
             title = 'Select space for ocean tile';
@@ -19,7 +21,7 @@ export class SelectOcean implements PlayerInterrupt {
             title,
             game.board.getAvailableSpacesForOcean(player),
             (space: ISpace) => {
-                game.addOceanTile(player, space.id);
+                game.addOceanTile(player, space.id, SpaceType.OCEAN, isWorldGov);
                 game.pendingOceans--;
                 return undefined;
             }

@@ -43,7 +43,6 @@ export const PlayerHome = Vue.component("player-home", {
             return ret;
         },
         showPlayerDetails: function (player: PlayerModel) {
-            console.log(player.name, player.id, this.player.id);
             if (player.id === this.player.id) return;
             
             (this.$root as any).setOtherPlayerVisibility(player.id, true);

@@ -996,16 +996,16 @@ export class Game {
         });
       }
       
-      this.tilePlaced(space);
+      this.tilePlaced(space, player);
 
     }
-    private tilePlaced(space: ISpace) {
-      this.players.forEach((player) => {
-        if (player.corporationCard !== undefined &&
-            player.corporationCard.onTilePlaced !== undefined) {
-          player.corporationCard.onTilePlaced(player, space, this);
+    private tilePlaced(space: ISpace, player: Player) {
+      this.players.forEach((p) => {
+        if (p.corporationCard !== undefined &&
+            p.corporationCard.onTilePlaced !== undefined) {
+          p.corporationCard.onTilePlaced(player, space, this);
         }
-        player.playedCards.forEach((playedCard) => {
+        p.playedCards.forEach((playedCard) => {
           if (playedCard.onTilePlaced !== undefined) {
             playedCard.onTilePlaced(player, space, this);
           }

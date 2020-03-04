@@ -9,18 +9,20 @@ export const OtherPlayer = Vue.component("other-player", {
         "player-resources": PlayerResources
     },
     methods: {
-        toggleVisible: function () {
-            (this.$root as any).otherPlayersVisibility[this.player.id] = !(this.$root as any).otherPlayersVisibility[this.player.id];
-            this.$forceUpdate();
+        hideMe: function () {
+            (this.$root as any).setOtherPlayerVisibility(this.player.id, false);
         },
         isVisible: function () {
-            return (this.$root as any).otherPlayersVisibility[this.player.id] === true;
+            return (this.$root as any).getOtherPlayerVisibility(this.player.id);
         }
     },
     template: `
-        <div>
-            <h3 :style="'color:' + player.color" v-on:click="toggleVisible()">{{player.name}}</h3>
-            <div v-show="isVisible()">
+        <div> 
+            <div v-show="isVisible()" class="other_player_cont menu">
+                <button class="btn btn-sm btn-error other_player_close" v-on:click="hideMe()"><i class="icon icon-cross"></i></button>
+                
+                <h4>Player «{{ player.name }}» details</h4>
+                
                 <div class="player_home_block">
                     Cards In Hand: {{player.cardsInHandNbr}}
                 </div>

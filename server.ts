@@ -261,7 +261,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         }
       }
 
-      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.venusNext, gameReq.colonies, gameReq.customCorporationsList, selectedCorporations, gameReq.board);
+      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.venusNext, gameReq.colonies, gameReq.customCorporationsList, selectedCorporations, gameReq.board, gameReq.seed);
       games.set(gameId, game);
       game.getPlayers().forEach((player) => {
         playersToGame.set(player.id, game);

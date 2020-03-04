@@ -6,11 +6,12 @@ import {Player} from '../Player';
 import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
 import {ResourceType} from '../ResourceType';
+import { CardName } from '../CardName';
 
 export class Ants implements IActionCard, IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.MICROBES];
-    public name: string = 'Ants';
+    public name: string = CardName.ANTS;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public cardType: CardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {

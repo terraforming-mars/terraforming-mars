@@ -552,7 +552,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Ants",`
+[CardName.ANTS,`
         <div class="title background-color-active ">Ants</div>
         <div class="price ">9</div>
         ##RESOURCES##
@@ -630,7 +630,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-["Asteroid Mining",`
+[ CardName.ASTEROID_MINING,`
     <div class="title background-color-automated">Asteroid Mining</div>
     <div class="price">30</div>
     <div class="tag tag1 tag-space"></div>
@@ -662,7 +662,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-["ArchaeBacteria",`
+[CardName.ARCHAEBACTERIA,`
     <div class="title background-color-automated">Archaebacteria</div>
     <div class="price">6</div>
     <div class="tag tag1 tag-microbe"></div>
@@ -743,7 +743,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-["Algae",`
+[CardName.ALGAE,`
     <div class="title background-color-automated">Algae</div>
     <div class="price">10</div>
     <div class="tag tag1 tag-plant"></div>
@@ -759,7 +759,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-["Adapted Lichen",`
+[CardName.ADAPTED_LICHEN,`
     <div class="title background-color-automated">Adapted Lichen</div>
     <div class="price">9</div>
     <div class="tag tag1 tag-plant"></div>
@@ -933,7 +933,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Beam From A Thorium Asteroid",`
+[CardName.BEAM_FROM_A_THORIUM_ASTEROID,`
       <div class="title background-color-automated" style="font-size:14px">Beam from a Thorium Asteroid</div>
       <div class="price">32</div>
       <div class="tag tag1 tag-power"></div>
@@ -1133,7 +1133,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Advanced Alloys",`
+[CardName.ADVANCED_ALLOYS,`
         <div class="title background-color-active ">Advanced Alloys</div>
         <div class="price ">9</div>
         <div class="corporate-icon project-icon"></div>
@@ -1677,7 +1677,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Acquired Company",`
+[CardName.ACQUIRED_COMPANY,`
       <div class="title background-color-automated">Acquired Company</div>
       <div class="price">10</div>
       <div class="tag tag1 tag-earth"></div>
@@ -1809,7 +1809,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Artificial Photosynthesis",`
+[ CardName.ARTIFICIAL_PHOTOSYNTHESIS,`
         <div class="title background-color-automated ">Artificial Photosynthesis</div>
         <div class="price ">12</div>
         <div class="tag tag1 tag-science "></div>
@@ -1823,7 +1823,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Artificial Lake",`
+[CardName.ARTIFICIAL_LAKE,`
       <div class="title background-color-automated">Artificial Lake</div>
       <div class="price">15</div>
       <div class="tag tag1 tag-building "></div>
@@ -2351,7 +2351,7 @@ export const HTML_DATA: Map<string, string> =
           ADD 1 RESOURCE TO A CARD WITH AT LEAST 1 RESOURCE ON IT
         </div>
 `],
-["Anti-Gravity Technology",`
+[CardName.ANTI_GRAVITY_TECHNOLOGY,`
         <div class="title background-color-active ">Anti-Gravity Technology</div>
         <div class="price ">14</div>
         <div class="tag tag1 tag-science"></div>
@@ -2396,7 +2396,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Adaptation Technology",`
+[CardName.ADAPTATION_TECHNOLOGY,`
       <div class="title background-color-active">Adaptation Technology</div>
       <div class="price">12</div>
       <div class="tag tag1 tag-science"></div>
@@ -2663,7 +2663,7 @@ export const HTML_DATA: Map<string, string> =
           </div>
         </div>
 `],
-["Aerobraked Ammonia Asteroid",`
+[CardName.AEROBRAKED_AMMONIA_ASTEROID,`
           <div class="title background-color-events " style="font-size:14px">Aerobraked Ammonia Asteroid</div>
           <div class="price ">26</div>
           <div class="tag tag1 tag-event "></div>

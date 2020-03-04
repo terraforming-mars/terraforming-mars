@@ -3,11 +3,12 @@ import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class AcquiredCompany implements IProjectCard {
     public cost: number = 10;
     public tags: Array<Tags> = [Tags.EARTH];
-    public name: string = 'Acquired Company';
+    public name: string = CardName.ACQUIRED_COMPANY;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {

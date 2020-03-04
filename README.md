@@ -116,6 +116,10 @@ Thanks goes to these wonderful people:
         <sub><b>alrusdi</b></sub><br />Front End</a>
     </td>
     <td align="center">
+      <a href="https://github.com/ssimeonoff"><img src="https://avatars3.githubusercontent.com/u/6917565?s=460&v=4" width="100px;" alt=""/><br />
+        <sub><b>Simeon Simeonov</b></sub><br />Cards and Colonies design</a>
+    </td>
+    <td align="center">
       <a href="https://github.com/pierrehilbert"><img src="https://avatars0.githubusercontent.com/u/806950?v=3" width="100px;" alt=""/><br />
         <sub><b>Pierre HILBERT</b></sub><br />Helps with the things</a>
     </td>

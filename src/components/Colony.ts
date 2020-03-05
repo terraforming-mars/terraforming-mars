@@ -150,15 +150,15 @@ export const Colony = Vue.component("colony", {
     <div v-if="colony.name === getPluto()" class="colony-grid-container">
       <div>
         <div class="resource card" style="margin-left: -5px; transform: scale(0.8);"></div>
-        <div class="resource card" style="position absolute; margin: 0px 0 0 -30px; transform: scale(0.8);"></div>
+        <div class="resource card" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
       </div>
       <div>
         <div class="resource card" style="margin-left: -5px; transform: scale(0.8);"></div>
-        <div class="resource card" style="position absolute; margin: 0px 0 0 -30px; transform: scale(0.8);"></div>
+        <div class="resource card" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
       </div>
       <div>
         <div class="resource card" style="margin-left: -5px; transform: scale(0.8);"></div>
-        <div class="resource card" style="position absolute; margin: 0px 0 0 -30px; transform: scale(0.8);"></div>
+        <div class="resource card" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
       </div>
       <div></div>
       <div></div>

@@ -968,11 +968,9 @@ export class Game {
         );
       }
 
-      //if (tile.tileType !== TileType.OCEAN) {
-        space.player = player;
-      //}
-
+      space.player = player;
       space.tile = tile;
+
       if (!isWorldGov) {
         space.bonus.forEach((spaceBonus) => {
           if (spaceBonus === SpaceBonus.DRAW_CARD) {
@@ -1001,8 +999,6 @@ export class Game {
       if (tile.tileType === TileType.OCEAN) {
         space.player = undefined;
       }
-
-
     }
     private tilePlaced(space: ISpace) {
       this.players.forEach((p) => {

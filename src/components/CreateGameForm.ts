@@ -94,10 +94,10 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 this.players[0].name = "You";
             }
 
-            const players = this.players.slice(0, this.playersCount + 1).map((player: any) => {
+            const players = this.players.slice(0, this.playersCount).map((player: any) => {
                 player.first = (this.firstIndex === player.index);
                 return player;
-            }).filter((player: any) => player.name);
+            });
             
             // TODO Check if all players has different colors
 

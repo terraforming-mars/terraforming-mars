@@ -44,10 +44,16 @@ export class Predators implements IProjectCard, IActionCard {
     }
 
     public canAct(player: Player, game: Game): boolean {
+        if (game.getPlayers().length === 1) return true;
         return this.getPossibleTargetCards(player, game).length > 0;
     }
 
     public action(player: Player, game: Game) {
+        // Solo play, can always steal from immaginary opponent
+        if (game.getPlayers().length === 1) {
+            player.addResourceTo(this);
+            return undefined;
+        }
         const animalCards = this.getPossibleTargetCards(player, game);
         if (animalCards.length === 1) {
             this.doAction(animalCards[0], player, game)

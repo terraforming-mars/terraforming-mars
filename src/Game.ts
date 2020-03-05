@@ -1127,7 +1127,7 @@ export class Game {
     public log(message: String) {
       this.gameLog.push(message);
       this.gameAge++;
-      if (this.gameLog.length > 10 ) {
+      if (this.gameLog.length > 50 ) {
         (this.gameLog.shift());
       }
     }

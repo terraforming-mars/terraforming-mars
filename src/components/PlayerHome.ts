@@ -119,11 +119,13 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <div class="player_home_block player_home_block--log nofloat" v-if="player.players.length > 1 && player.gameLog.length > 0">
                     <h2>Last Actions</h2>
-                    <ul>
-                        <li v-for="message in player.gameLog">
-                            {{message}}
-                        </li>
-                    </ul>
+                    <div class="panel custom-panel">
+                        <div class="panel-body">
+                            <div v-for="message in player.gameLog">
+                                {{message}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="player_home_block player_home_block--corporation">

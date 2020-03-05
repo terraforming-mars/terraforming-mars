@@ -5,11 +5,12 @@ import {CardType} from './CardType';
 import {Player} from '../Player';
 import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
+import { CardName } from '../CardName';
 
 export class BusinessContacts implements IProjectCard {
     public cost: number = 7;
     public tags: Array<Tags> = [Tags.EARTH];
-    public name: string = 'Business Contacts';
+    public name: string = CardName.BUSINESS_CONTACTS;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {

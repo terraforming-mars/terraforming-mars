@@ -8,12 +8,13 @@ import {Game} from '../Game';
 import { CorporationName } from '../CorporationName';
 import { AndOptions } from '../inputs/AndOptions';
 import { SelectAmount } from '../inputs/SelectAmount';
+import { CardName } from '../CardName';
 
 export class CaretakerContract implements IActionCard, IProjectCard {
     public cost: number = 3;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = 'Caretaker Contract';
+    public name: string = CardName.CARETAKER_CONTRACT;
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() >= 0 - (
         2 * player.getRequirementsBonus(game)

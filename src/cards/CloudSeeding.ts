@@ -6,11 +6,12 @@ import {Player} from '../Player';
 import {Game} from '../Game';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import { Resources } from "../Resources";
+import { CardName } from '../CardName';
 
 export class CloudSeeding implements IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [];
-    public name: string = 'Cloud Seeding';
+    public name: string = CardName.CLOUD_SEEDING;
     public cardType: CardType = CardType.AUTOMATED;
     
     private playersWithHeatProduction(game: Game): Array<Player> {

@@ -34,7 +34,7 @@ export class RoboticWorkforce implements IProjectCard {
             CardName.MOHOLE_EXCAVATION,
             CardName.POLAR_INDUSTRIES,
             CardName.SELF_SUFFICIENT_SETTLEMENT,
-            CardName.CABONATE_PROCESSING,
+            CardName.CARBONATE_PROCESSING,
             CardName.COMMERCIAL_DISTRICT,
             CardName.CORPORATE_STRONGHOLD,
             CardName.CUPOLA_CITY,
@@ -113,7 +113,7 @@ export class RoboticWorkforce implements IProjectCard {
                 } else if (builderCardsNames[i] === card.name  
                     && (card.name === CardName.AI_CENTRAL
                         || card.name === CardName.BUILDING_INDUSTRIES
-                        || card.name === CardName.CABONATE_PROCESSING
+                        || card.name === CardName.CARBONATE_PROCESSING
                         || card.name === CardName.COMMERCIAL_DISTRICT
                         || card.name === CardName.CORPORATE_STRONGHOLD
                         || card.name === CardName.DOMED_CRATER
@@ -229,7 +229,7 @@ export class RoboticWorkforce implements IProjectCard {
                     new Updater(CardName.GHG_FACTORIES,-1, 0, 0, 0, 0, 4),
                     new Updater(CardName.MINE, 0, 0, 1, 0, 0, 0),
                     new Updater(CardName.DEEP_WELL_HEATING, 1, 0, 0, 0, 0, 0),
-                    new Updater(CardName.CABONATE_PROCESSING, -1, 0, 0, 0, 0, 3),
+                    new Updater(CardName.CARBONATE_PROCESSING, -1, 0, 0, 0, 0, 3),
                     new Updater(CardName.INDUSTRIAL_MICROBES, 1, 0, 1, 0, 0, 0),
                     new Updater(CardName.COMMERCIAL_DISTRICT, -1, 4, 0, 0, 0, 0),
                     new Updater(CardName.TROPICAL_RESORT, 0, 3, 0, 0, 0, -2),

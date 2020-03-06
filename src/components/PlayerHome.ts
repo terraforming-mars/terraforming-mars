@@ -48,17 +48,10 @@ export const PlayerHome = Vue.component("player-home", {
             if (player.id === this.player.id) return;
             
             (this.$root as any).setOtherPlayerVisibility(player.id, true);
-        },
-        scrollToEnd: function() { 
-            const scrollablePanel = document.getElementById("logpanel");
-            if (scrollablePanel !== null) {
-                scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
-            }
-        }    
+        }  
     },
     mounted: function () {
         dialogPolyfill.default.registerDialog(document.getElementById("dialog-default"));
-        this.scrollToEnd();
     },
     template: `
         <div id="player-home">
@@ -127,7 +120,7 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <div class="player_home_block player_home_block--log nofloat" v-if="player.players.length > 1 && player.gameLog.length > 0">
                     <h2>Last Actions</h2>
-                    <log-panel> :messages="player.gameLog" </log-panel>
+                    <log-panel> v-bind:messages="player.gameLog" </log-panel>
                 </div>
 
                 <div class="player_home_block player_home_block--corporation">

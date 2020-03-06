@@ -5,24 +5,14 @@
 import Vue from "vue";
 
 export const Award = Vue.component("award", {
-    props: ["awards_list"],
-    data: function () {
-        return {
-            displayed: false,
-        };
-    },
-    methods: {
-        toggleDisplayed: function () {
-            this.displayed = !this.displayed;
-        }
-    },
+    props: ["awards_list", "expanded"],
     template: `
     <div class="awards_cont">
         <div class="awards">
-            <span v-on:click="toggleDisplayed()">Awards List</span>
-            <ul v-if="displayed === true">
+            <span v-on:click="expanded=!expanded">Awards List</span>
+            <ul v-show="expanded === true">
                 <li v-for="award in awards_list">
-                    {{award.name}}: {{award.description}}
+                    <strong>{{award.name}}</strong> — {{award.description}}
                 </li>
             </ul>
         </div>

@@ -5,24 +5,14 @@
 import Vue from "vue";
 
 export const Milestone = Vue.component("milestone", {
-    props: ["milestones_list"],
-    data: function () {
-        return {
-            displayed: false
-        };
-    },
-    methods: {
-        toggleDisplayed: function () {
-            this.displayed = !this.displayed;
-        }
-    },
+    props: ["milestones_list", "expanded"],
     template: `
     <div class="milestones_cont">
         <div class="milestones">
-            <span v-on:click="toggleDisplayed()">Milestones List</span>
-            <ul v-if="displayed === true">
+            <span v-on:click="expanded=!expanded">Milestones List</span>
+            <ul v-show="expanded === true">
                 <li v-for="milestone in milestones_list">
-                    {{milestone.name}}: {{milestone.description}}
+                    <strong>{{milestone.name}}</strong> — {{milestone.description}}
                 </li>
             </ul>
         </div>

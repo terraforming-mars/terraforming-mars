@@ -90,8 +90,8 @@ export const PlayerHome = Vue.component("player-home", {
                     <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature" v-trim-whitespace></global-parameters>
 
                     <div v-if="player.players.length > 1" class="player_home_block--millestones-and-awards">
-                        <milestone :milestones_list="player.milestones" />
-                        <award :awards_list="player.awards" />
+                        <milestone :milestones_list="player.milestones" expanded=false />
+                        <award :awards_list="player.awards" expanded=false />
                     </div>
                 </div>
 
@@ -163,7 +163,35 @@ export const PlayerHome = Vue.component("player-home", {
 
             <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
                 <h2>Select initial cards:</h2>
+
                 <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
+
+                <h2>Game details</h2>
+
+                <details class="accordion" v-if="player.players.length > 1">
+                    <summary class="accordion-header">
+                        <div class="is-action">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                            Millestones and awards
+                        </div>
+                    </summary>
+                    <div class="accordion-body">
+                        <milestone :milestones_list="player.milestones" :expanded="true" />
+                        <award :awards_list="player.awards" :expanded="true" />
+                    </div>
+                </details>
+
+                <details class="accordion">
+                    <summary class="accordion-header">
+                        <div class="is-action">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                            Board
+                        </div>
+                    </summary>
+                    <div class="accordion-body">
+                        <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.boardName"></board>
+                    </div>
+                </details>
             </div>
 
             <div v-if="player.colonies.length > 0" class="player_home_block">

@@ -974,11 +974,9 @@ export class Game {
         );
       }
 
-      if (tile.tileType !== TileType.OCEAN) {
-        space.player = player;
-      }
-
+      space.player = player;
       space.tile = tile;
+
       if (!isWorldGov) {
         space.bonus.forEach((spaceBonus) => {
           if (spaceBonus === SpaceBonus.DRAW_CARD) {
@@ -1002,18 +1000,21 @@ export class Game {
         });
       }
       
-      this.tilePlaced(space, player);
+      this.tilePlaced(space);
 
+      if (tile.tileType === TileType.OCEAN) {
+        space.player = undefined;
+      }
     }
-    private tilePlaced(space: ISpace, player: Player) {
+    private tilePlaced(space: ISpace) {
       this.players.forEach((p) => {
         if (p.corporationCard !== undefined &&
             p.corporationCard.onTilePlaced !== undefined) {
-          p.corporationCard.onTilePlaced(player, space, this);
+          p.corporationCard.onTilePlaced(p, space, this);
         }
         p.playedCards.forEach((playedCard) => {
           if (playedCard.onTilePlaced !== undefined) {
-            playedCard.onTilePlaced(player, space, this);
+            playedCard.onTilePlaced(p, space, this);
           }
         });
       });

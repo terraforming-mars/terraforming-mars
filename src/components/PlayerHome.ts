@@ -14,6 +14,7 @@ import { GlobalParameters } from "./GlobalParameters"
 import { Preferences } from "./Preferences"
 import { PlayerModel } from "../models/PlayerModel";
 import { Colony } from './Colony';
+import { LogPanel } from './LogPanel';
 
 const dialogPolyfill = require("dialog-polyfill");
 
@@ -31,7 +32,8 @@ export const PlayerHome = Vue.component("player-home", {
         "milestone": Milestone,
         "award": Award,
         "preferences": Preferences,
-        "colony": Colony
+        "colony": Colony,
+        "log-panel": LogPanel
     },
     data: function () {
         return {}
@@ -46,10 +48,17 @@ export const PlayerHome = Vue.component("player-home", {
             if (player.id === this.player.id) return;
             
             (this.$root as any).setOtherPlayerVisibility(player.id, true);
-        }
+        },
+        scrollToEnd: function() { 
+            const scrollablePanel = document.getElementById("logpanel");
+            if (scrollablePanel !== null) {
+                scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
+            }
+        }    
     },
     mounted: function () {
         dialogPolyfill.default.registerDialog(document.getElementById("dialog-default"));
+        this.scrollToEnd();
     },
     template: `
         <div id="player-home">
@@ -116,16 +125,9 @@ export const PlayerHome = Vue.component("player-home", {
                     <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
 
-
                 <div class="player_home_block player_home_block--log nofloat" v-if="player.players.length > 1 && player.gameLog.length > 0">
                     <h2>Last Actions</h2>
-                    <div class="panel custom-panel">
-                        <div class="panel-body">
-                            <div v-for="message in player.gameLog">
-                                {{message}}
-                            </div>
-                        </div>
-                    </div>
+                    <log-panel> :messages="player.gameLog" </log-panel>
                 </div>
 
                 <div class="player_home_block player_home_block--corporation">

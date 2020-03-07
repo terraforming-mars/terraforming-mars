@@ -1455,7 +1455,7 @@ export class Player {
         game.getGeneration() === 1 &&
             this.corporationCard !== undefined &&
             this.corporationCard.initialAction !== undefined &&
-            !this.actionsThisGeneration.has(this.corporationCard.name) &&
+            !this.actionsThisGeneration.has("CORPORATION_INITIAL_ACTION") &&
             this.actionsTakenThisRound === 0
       ) {
         const input = this.corporationCard.initialAction(this, game);
@@ -1465,7 +1465,7 @@ export class Player {
             playerInput: input
           });
         }
-        this.actionsThisGeneration.add(this.corporationCard.name);
+        this.actionsThisGeneration.add("CORPORATION_INITIAL_ACTION");
         this.actionsTakenThisRound++;
         this.takeAction(game);
         return;

@@ -3,12 +3,6 @@
     border-left: 1px solid #adacac;
 }
  
-.custom-panel {
-    height: 180px;
-    border-style:none;
-    font-size: 18px;
-}
-
 .player_home_block--resources {
     position: sticky;
     top: -13px;
@@ -97,8 +91,23 @@
     }
 }
 
-.player_home_block--log li {
-    margin-top: 0 !important;
+.player_home_block--log {
+    .log-panel {
+        max-height: 180px;
+        border-style:none;
+        font-size: 18px;
+        padding: 5px;
+        max-width: 767px;
+        background: #c8c8c8;
+
+        li {
+            margin-top: 0 !important;
+        }
+
+        ul {
+            margin: 0 !important;
+        }
+    }
 }
 
 

@@ -29,7 +29,8 @@ describe("Ants", function () {
         const card = new Ants();
         const cardTardigrades = new Tardigrades();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("ants_action_game", [player], player);
+        const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("ants_action_game", [player, player2], player);
 
         expect(card.canAct(player, game)).to.eq(false);
 
@@ -44,12 +45,14 @@ describe("Ants", function () {
         expect(action).not.to.eq(undefined);
 
         expect(action instanceof SelectCard).to.eq(true);
-        expect(action.cards.length).to.eq(1);
+        if (action !== undefined) {
+            expect(action.cards.length).to.eq(1);
 
-        expect(action.cards[0]).to.eq(cardTardigrades);
-        action.cb([action.cards[0]]);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
-        expect(player.getResourcesOnCard(cardTardigrades)).to.eq(0);
+            expect(action.cards[0]).to.eq(cardTardigrades);
+            action.cb([action.cards[0]]);
+            expect(player.getResourcesOnCard(card)).to.eq(1);
+            expect(player.getResourcesOnCard(cardTardigrades)).to.eq(0);
+        }
     });
     it("Respects protected habitats", function () {
         const card = new Ants();
@@ -91,8 +94,9 @@ describe("Ants", function () {
 
         const action = card.action(player, game);
         expect(action instanceof SelectCard).to.eq(true);
-        expect(action.cards.length).to.eq(1);
-
-        expect(action.cards[0]).to.eq(cardTardigrades);
+        if (action !== undefined) {
+            expect(action.cards.length).to.eq(1);
+            expect(action.cards[0]).to.eq(cardTardigrades);
+        }
     });
 });

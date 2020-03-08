@@ -1,6 +1,6 @@
 import Vue from "vue";
-import { IColony } from '../colonies/Colony';
-import { Player } from '../Player';
+
+import { ColonyModel } from '../models/ColonyModel';
 import { ColonyName } from '../colonies/ColonyName';
 
 export const Colony = Vue.component("colony", {
@@ -15,22 +15,16 @@ export const Colony = Vue.component("colony", {
       };
     },
     methods: {
-        getCubeXPosition: (colony: IColony): number => {
+        getCubeXPosition: (colony: ColonyModel): number => {
             return colony.trackPosition * 56 + 26;
         },
         getColonyXPosition: (index: number): number => {
             return index * 56 + 26;
         },
-        getCubeYPosition: (colony: IColony): number => {
+        getCubeYPosition: (colony: ColonyModel): number => {
             if (colony.name === ColonyName.EUROPA) return 145;
             if (colony.name === ColonyName.MIRANDA || colony.name === ColonyName.PLUTO ) return 180;
             return 165;
-        },
-        getColonyPlayers: (colony: IColony): Array<Player>=> {
-          return colony.colonies;
-        },
-        getPlayerColor:(player: Player): string => {
-          return player.color;
         },
         getGanymede:(): string => {
           return ColonyName.GANYMEDE;
@@ -69,12 +63,12 @@ export const Colony = Vue.component("colony", {
     template: `
     <div class="filterDiv colony-card colonies" :class="colony.name + '-background'">
     <div v-if="colony.visitor !== undefined" class="spaceship">
-      <div style="margin-left: 45px;  margin-top: 55px;" :class="'board_cube board_cube--' + getPlayerColor(colony.visitor)"></div>
+      <div style="margin-left: 45px;  margin-top: 55px;" :class="'board_cube board_cube--' + colony.visitor"></div>
     </div>
     <div v-if="colony.isActive" :style="'margin-left:' + getCubeXPosition(colony) + 'px; margin-top:' + getCubeYPosition(colony) + 'px;'" class="colony_cube"></div>
-    <div v-if="colony.colonies.length > 0" :style="'margin-left: ' + getColonyXPosition(0) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board_cube board_cube--' + getPlayerColor(colony.colonies[0])"></div>
-    <div v-if="colony.colonies.length > 1" :style="'margin-left: ' + getColonyXPosition(1) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board_cube board_cube--' + getPlayerColor(colony.colonies[1])"></div>
-    <div v-if="colony.colonies.length > 2" :style="'margin-left: ' + getColonyXPosition(2) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board_cube board_cube--' + getPlayerColor(colony.colonies[2])"></div>
+    <div v-if="colony.colonies.length > 0" :style="'margin-left: ' + getColonyXPosition(0) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board_cube board_cube--' + colony.colonies[0]"></div>
+    <div v-if="colony.colonies.length > 1" :style="'margin-left: ' + getColonyXPosition(1) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board_cube board_cube--' + colony.colonies[1]"></div>
+    <div v-if="colony.colonies.length > 2" :style="'margin-left: ' + getColonyXPosition(2) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board_cube board_cube--' + colony.colonies[2]"></div>
 
     <div class="colony-card-title-div">
       <span class="colony-card-title-span" :class="colony.name + '-title'">{{colony.name}}</span>

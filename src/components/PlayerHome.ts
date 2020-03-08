@@ -199,7 +199,6 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
             </div>
-
         </div>
     `
 });

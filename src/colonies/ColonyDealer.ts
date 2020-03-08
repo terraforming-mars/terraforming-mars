@@ -50,7 +50,11 @@ export class ColonyDealer {
     }
     public drawColonies(players: number): Array<IColony> {
         let count: number = players + 2;
-        if (players === 1) count = 4;
+        if (players === 1) {
+            count = 4;
+        } else if (players === 2) {
+            count = 5;
+        }
         let tempDeck = this.shuffle(this.ALL_COLONIES_TILES);
         for (let i = 0; i < count; i++) {
             this.coloniesDeck.push(tempDeck.pop());

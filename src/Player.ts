@@ -596,6 +596,15 @@ export class Player {
     }
 
     public worldGovernmentTerraforming(game: Game) {
+
+      // Test if this is needed, usefull for solo play
+      if (game.getTemperature() >= constants.MAX_TEMPERATURE 
+        && game.getOxygenLevel() >= constants.MAX_OXYGEN_LEVEL
+        && game.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES
+        && game.getVenusScaleLevel() >= constants.MAX_VENUS_SCALE) {
+          return;
+      }
+
       const action: OrOptions = new OrOptions();
       action.title = "Select action for World Government Terraforming";
       if (game.getTemperature() < constants.MAX_TEMPERATURE) {
@@ -1446,7 +1455,7 @@ export class Player {
         game.getGeneration() === 1 &&
             this.corporationCard !== undefined &&
             this.corporationCard.initialAction !== undefined &&
-            !this.actionsThisGeneration.has(this.corporationCard.name) &&
+            !this.actionsThisGeneration.has("CORPORATION_INITIAL_ACTION") &&
             this.actionsTakenThisRound === 0
       ) {
         const input = this.corporationCard.initialAction(this, game);
@@ -1456,7 +1465,7 @@ export class Player {
             playerInput: input
           });
         }
-        this.actionsThisGeneration.add(this.corporationCard.name);
+        this.actionsThisGeneration.add("CORPORATION_INITIAL_ACTION");
         this.actionsTakenThisRound++;
         this.takeAction(game);
         return;

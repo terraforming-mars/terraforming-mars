@@ -5,6 +5,7 @@ import * as path from 'path';
 import * as querystring from 'querystring';
 import {AndOptions} from './src/inputs/AndOptions';
 import {CardModel} from './src/models/CardModel';
+import {ColonyModel} from './src/models/ColonyModel';
 import {Color} from './src/Color';
 import {CorporationCard} from './src/cards/corporation/CorporationCard';
 import {
@@ -17,6 +18,7 @@ import {
 } from './src/Dealer';
 import {Game} from './src/Game';
 import {ICard} from './src/cards/ICard';
+import {IColony} from './src/colonies/Colony';
 import {IProjectCard} from './src/cards/IProjectCard';
 import {ISpace} from './src/ISpace';
 import {OrOptions} from './src/inputs/OrOptions';
@@ -332,7 +334,7 @@ function getPlayer(player: Player, game: Game): string {
     venusNextExtension: game.venusNextExtension,
     venusScaleLevel: game.getVenusScaleLevel(),
     boardName: game.boardName,
-    colonies: game.colonies
+    colonies: getColonies(game.colonies)
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -472,9 +474,19 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       venusNextExtension: game.venusNextExtension,
       venusScaleLevel: game.getVenusScaleLevel(),
       boardName: game.boardName,
-      colonies: game.colonies
+      colonies: getColonies(game.colonies)
     } as PlayerModel;
   });
+}
+
+function getColonies(colonies: Array<IColony>): Array<ColonyModel> {
+    return colonies.map((colony): ColonyModel => ({
+        colonies: colony.colonies.map((player): Color => player.color),
+        isActive: colony.isActive,
+        name: colony.name,
+        trackPosition: colony.trackPosition,
+        visitor: colony.visitor === undefined ? undefined : colony.visitor.color
+    }));
 }
 
 // Oceans can't be owned so they shouldn't have a color associated with them

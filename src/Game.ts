@@ -133,7 +133,7 @@ export class Game {
       // Add colonies stuff
       if (this.coloniesExtension) {
         corporationCards.push(...ALL_COLONIES_CORPORATIONS);
-        this.colonyDealer = new ColonyDealer(seed);
+        this.colonyDealer = new ColonyDealer();
         this.colonies = this.colonyDealer.drawColonies(players.length);
         if (this.players.length === 1) {
           players[0].setProduction(Resources.MEGACREDITS, -2);

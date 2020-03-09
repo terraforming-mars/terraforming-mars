@@ -437,7 +437,8 @@ function getCards(
   return cards.sort(compareCards).map((card) => ({
     resources: player.getResourcesOnCard(card),
     name: card.name,
-    calculatedCost: player.getCardCost(game, card)
+    calculatedCost: player.getCardCost(game, card),
+    cardType: card.cardType
   }));
 }
 

@@ -13,9 +13,6 @@ import { ALL_PRELUDE_CORPORATIONS,
          ALL_VENUS_PROJECTS_CARDS,
          ALL_COLONIES_PROJECTS_CARDS
          } from "../Dealer";
-import { CardType } from "../cards/CardType";
-import { Tags } from "../cards/Tags";
-import { ResourceType } from "../ResourceType";
 import { HTML_DATA } from "../HTML_data";
 
 
@@ -65,50 +62,6 @@ export const Card = Vue.component("card", {
         },
         getCard: function () {
             return getProjectCardByName(this.card) || getCorporationCardByName(this.card);
-        },
-        getResourceType: function () {
-            return ResourceType;
-        },
-        getEventColor: function (cardType: CardType) {
-            if (cardType === CardType.EVENT) {
-                return "red";
-            } else if (cardType === CardType.ACTIVE) {
-                return "blue";
-            } else if (cardType === CardType.AUTOMATED) {
-                return "green";
-            } else {
-                return "black";
-            }
-        },
-        isAnimalTag: function (tag: Tags) {
-            return tag === Tags.ANIMAL;
-        },
-        isBuildingTag: function (tag: Tags) {
-            return tag === Tags.STEEL;
-        },
-        isCityTag: function (tag: Tags) {
-            return tag === Tags.CITY;
-        },
-        isEarthTag: function (tag: Tags) {
-            return tag === Tags.EARTH;
-        },
-        isEnergyTag: function (tag: Tags) {
-            return tag === Tags.ENERGY;
-        },
-        isJovianTag: function (tag: Tags) {
-            return tag === Tags.JOVIAN;
-        },
-        isMicrobesTag: function (tag: Tags) {
-            return tag === Tags.MICROBES;
-        },
-        isPlantTag: function (tag: Tags) {
-            return tag === Tags.PLANT;
-        },
-        isScienceTag: function (tag: Tags) {
-            return tag === Tags.SCIENCE;
-        },
-        isSpaceTag: function (tag: Tags) {
-            return tag === Tags.SPACE;
         }
     },
     template: `

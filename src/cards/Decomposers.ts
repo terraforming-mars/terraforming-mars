@@ -5,13 +5,14 @@ import {CardType} from './CardType';
 import {Player} from '../Player';
 import {Game} from '../Game';
 import {ResourceType} from '../ResourceType';
+import { CardName } from '../CardName';
 
 export class Decomposers implements IProjectCard {
     public cost: number = 5;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public tags: Array<Tags> = [Tags.MICROBES];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = 'Decomposers';
+    public name: string = CardName.DECOMPOSERS;
     public canPlay(player: Player, game: Game): boolean {
       return game.getOxygenLevel() >= 3 - player.getRequirementsBonus(game);
     }

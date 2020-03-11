@@ -208,7 +208,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Development Center",`
+[CardName.DEVELOPMENT_CENTER,`
         <div class="title background-color-active ">Development Center</div>
         <div class="price ">11</div>
         <div class="tag tag1 tag-building "></div>
@@ -222,7 +222,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Equatorial Magnetizer",`
+[CardName.EQUATORIAL_MAGNETIZER,`
         <div class="title background-color-active ">Equatorial Magnetizer</div>
         <div class="price ">11</div>
         <div class="tag tag1 tag-building "></div>
@@ -1119,7 +1119,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Earth Catapult",`
+[CardName.EARTH_CATAPULT,`
         <div class="title background-color-active ">Earth Catapult</div>
         <div class="price ">23</div>
         <div class="tag tag1 tag-earth"></div>
@@ -1297,7 +1297,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Ganymede Colony",`
+[CardName.GANYMEDE_COLONY,`
         <div class="title background-color-automated ">Ganymede Colony</div>
         <div class="price ">20</div>
         <div class="tag tag1 tag-city"></div>
@@ -1664,7 +1664,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Earth Office",`
+[CardName.EARTH_OFFICE,`
         <div class="title background-color-active ">Earth Office</div>
         <div class="price ">1</div>
         <div class="tag tag1 tag-earth "></div>
@@ -1852,7 +1852,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Farming",`
+[CardName.FARMING,`
       <div class="title background-color-automated">Farming</div>
       <div class="price">16</div>
       <div class="tag tag1 tag-plant"></div>
@@ -1871,7 +1871,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Dust Seals",`
+[CardName.DUST_SEALS,`
         <div class="title background-color-automated ">Dust Seals</div>
         <div class="price ">2</div>
       <div class="card-number">119</div>
@@ -2003,7 +2003,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Ecological Zone",`
+[CardName.ECOLOGICAL_ZONE,`
       <div class="title background-color-active">Ecological Zone</div>
       <div class="price">12</div>
       ##RESOURCES##
@@ -2053,7 +2053,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Decomposers",`
+[CardName.DECOMPOSERS,`
       <div class="title background-color-active">Decomposers</div>
       <div class="price">5</div>
       ##RESOURCES##
@@ -2103,7 +2103,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Extreme-Cold Fungus",`
+[CardName.EXTREME_COLD_FUNGUS,`
         <div class="title background-color-active ">Extreme-Cold Fungus</div>
         <div class="price ">13</div>
         <div class="tag tag1 tag-microbe "></div>
@@ -2425,7 +2425,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Designed Micro-organisms",`
+[CardName.DESIGNED_MICRO_ORGANISMS,`
         <div class="title background-color-automated ">Designed Micro-organisms</div>
         <div class="price ">16</div>
         <div class="tag tag1 tag-microbe"></div>
@@ -2970,7 +2970,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
 `],
-["Energy Saving",`
+[CardName.ENERGY_SAVING,`
         <div class="title background-color-automated">Energy Saving</div>
         <div class="price">15</div>
         <div class="tag tag1 tag-power"></div>
@@ -3143,7 +3143,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
 `],
-["Energy Tapping",`
+[CardName.ENERGY_TAPPING,`
         <div class="title background-color-automated">Energy Tapping</div>
         <div class="price">3</div>
         <div class="tag tag1 tag-power"></div>

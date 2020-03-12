@@ -1,4 +1,4 @@
-import * as randomseed from 'random-seed'; 
+import * as randomseed from "random-seed"; 
 
 // Prelude Cards
 import { AlliedBanks } from "./cards/prelude/AlliedBanks";

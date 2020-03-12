@@ -7,11 +7,12 @@ import { Player } from "../Player";
 import { AndOptions } from "../inputs/AndOptions";
 import { SelectCard } from "../inputs/SelectCard";
 import { ResourceType } from '../ResourceType';
+import { CardName } from '../CardName';
 
 export class ImportedNitrogen implements IProjectCard {
     public cost: number = 23;
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public name: string = "Imported Nitrogen";
+    public name: string = CardName.IMPORTED_NITROGEN;
     public cardType: CardType = CardType.EVENT;
 
     private giveResources(player: Player): undefined {

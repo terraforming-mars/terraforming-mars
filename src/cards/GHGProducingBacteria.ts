@@ -8,11 +8,12 @@ import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
 import { ResourceType } from "../ResourceType";
 import { SelectOption } from "../inputs/SelectOption";
+import { CardName } from '../CardName';
 
 export class GHGProducingBacteria implements IActionCard, IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.MICROBES];
-    public name: string = "GHG Producing Bacteria";
+    public name: string = CardName.GHG_PRODUCING_BACTERIA;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public canPlay(player: Player, game: Game): boolean {

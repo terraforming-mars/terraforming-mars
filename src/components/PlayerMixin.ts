@@ -12,6 +12,18 @@ export const PlayerMixin = {
                 } 
             }
             return cards;
+        },
+        getActiveCardType: function() {
+            return CardType.ACTIVE;
+        },
+        getEventCardType: function() {
+            return CardType.EVENT;
+        },
+        getAutomatedCardType: function() {
+            return CardType.AUTOMATED;
+        },
+        getPreludCardType: function() {
+            return CardType.PRELUDE;
         }
     }
 }

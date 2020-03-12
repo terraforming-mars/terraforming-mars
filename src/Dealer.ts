@@ -1,3 +1,5 @@
+import * as randomseed from 'random-seed'; 
+
 // Prelude Cards
 import { AlliedBanks } from "./cards/prelude/AlliedBanks";
 import { BiosphereSupport } from "./cards/prelude/BiosphereSupport";
@@ -818,18 +820,21 @@ export class Dealer {
     private usePreludeExtension: boolean = false;
     private useVenusNextExtension: boolean = false;   
     private useColoniesNextExtension: boolean = false;
-    //private seed: number = 0;
-    constructor(usePreludeExtension: boolean, useVenusNextExtension: boolean, useColoniesNextExtension : boolean, _seed?: number) {
+    private seed: number;
+    public rand: randomseed.RandomSeed;
+    constructor(usePreludeExtension: boolean, useVenusNextExtension: boolean, useColoniesNextExtension : boolean, seed: number) {
         this.usePreludeExtension = usePreludeExtension;
         this.useVenusNextExtension = useVenusNextExtension;
         this.useColoniesNextExtension = useColoniesNextExtension;
-        /*
+        
         if (seed !== undefined) {
             this.seed = seed;
         } else {
             this.seed = Math.random();
         }
-        */
+
+        this.rand = randomseed.create(this.seed.toString());
+
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS);
         if (this.usePreludeExtension) {
             this.preludeDeck = this.shuffleCards(ALL_PRELUDE_CARDS);
@@ -849,9 +854,7 @@ export class Dealer {
         const deck: Array<any> = [];
         const copy = cards.slice();
         while (copy.length) {
-            // not working, disable for now
-            //deck.push(copy.splice(Math.floor(this.seed * copy.length), 1)[0]);
-            deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
+            deck.push(copy.splice(Math.floor(this.rand.random() * copy.length), 1)[0]);
         }
         return deck;
     }

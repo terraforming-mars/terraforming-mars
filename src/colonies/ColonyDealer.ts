@@ -1,3 +1,5 @@
+import * as randomseed from 'random-seed'; 
+
 import { IColony } from './Colony';
 import { Europa } from './Europa';
 import { Ganymede } from './Ganymede';
@@ -13,6 +15,7 @@ import { Enceladus } from './Enceladus';
 
 export class ColonyDealer {
     //private seed: number = 0;
+    private rand: randomseed.RandomSeed;
     public coloniesDeck: Array<IColony> = [];
     public discardedColonies: Array<IColony> = [];
     private ALL_COLONIES_TILES: Array<IColony> = [
@@ -28,23 +31,16 @@ export class ColonyDealer {
         new Pluto(),
         new Triton()
     ];
-    /*
-    constructor(seed?: number) {
-        if (seed !== undefined) {
-            this.seed = seed;
-        } else {
-            this.seed = Math.random();
-        }
+    
+    constructor(rand: randomseed.RandomSeed) {
+        this.rand = rand;
     }
-    */
-
+    
     public shuffle(cards: Array<any>): Array<any> {
         const deck: Array<any> = [];
         const copy = cards.slice();
         while (copy.length) {
-            // not working, disable for now
-            //deck.push(copy.splice(Math.floor(this.seed * copy.length), 1)[0]);
-            deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
+            deck.push(copy.splice(Math.floor(this.rand.random() * copy.length), 1)[0]);
         }
         return deck;
     }

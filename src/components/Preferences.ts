@@ -100,12 +100,6 @@ export const Preferences = Vue.component("preferences", {
                 <div class="preferences_panel" v-if="ui.preferences_panel_open">
                     <div class="preferences_panel_item">
                         <label class="form-switch">
-                            <input type="checkbox" v-on:change="updatePreferences" v-model="hide_corporation" />
-                            <i class="form-icon"></i> Hide corporation card
-                        </label>
-                    </div>
-                    <div class="preferences_panel_item">
-                        <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_turnorder" />
                             <i class="form-icon"></i> Hide turn order
                         </label>

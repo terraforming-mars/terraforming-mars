@@ -15,6 +15,7 @@ import { Preferences } from "./Preferences"
 import { PlayerModel } from "../models/PlayerModel";
 import { Colony } from './Colony';
 import { LogPanel } from './LogPanel';
+import { PlayerMixin } from './PlayerMixin';
 
 const dialogPolyfill = require("dialog-polyfill");
 
@@ -38,6 +39,7 @@ export const PlayerHome = Vue.component("player-home", {
     data: function () {
         return {}
     },
+    mixins: [PlayerMixin],
     methods: {
         getPlayerCssForTurnOrder: (player: PlayerModel, hilightActive: boolean): string => {
             var ret: string = "player_color_" + player.color;
@@ -122,12 +124,7 @@ export const PlayerHome = Vue.component("player-home", {
                     <h2>Last Actions</h2>
                     <log-panel :messages="player.gameLog"></log-panel>
                 </div>
-
-                <div class="player_home_block player_home_block--corporation">
-                    <h2>Corporation Card</h2>
-                    <card :card="player.corporationCard" :resources="player.corporationCardResources"></card>
-                </div>
-  
+ 
                 <a name="cards" class="player_home_anchor"></a>
                 <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
                     <h2>Cards In Hand</h2>
@@ -136,11 +133,18 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
 
-                <div v-if="player.playedCards.length > 0" class="player_home_block player_home_block--cards">
+                <div class="player_home_block player_home_block--cards">
                     <h2>Played Cards</h2>
-                    <div v-for="card in player.playedCards" :key="card.name" class="cardbox">
+
+                    <div v-if="player.corporationCard !== undefined" class="cardbox">
+                        <card :card="player.corporationCard" :resources="player.corporationCardResources"></card>
+                    </div>
+                    <div v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
                         <card :card="card.name" :resources="card.resources"></card>
                     </div>
+
+                    <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType])" ></stacked-cards>
+                    <stacked-cards :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
                 </div>
 
                 <div class="player_home_block player_home_block--milestones" v-if="player.claimedMilestones.length > 0">

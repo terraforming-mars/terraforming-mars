@@ -276,6 +276,7 @@ export class Game {
       if (this.allAwardsFunded()) {
         throw new Error("All awards already funded");
       }
+      this.log(player.name + " funded " + award.name + " award");
       this.fundedAwards.push({
         award: award,
         player: player

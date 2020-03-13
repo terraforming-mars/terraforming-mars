@@ -2,7 +2,6 @@
 import Vue from "vue";
 
 import { PlayerResources } from "./PlayerResources";
-import { CardType } from '../cards/CardType';
 import { StackedCards } from './StackedCards';
 import { PlayerMixin } from "./PlayerMixin";
 import { TagCount } from './TagCount';

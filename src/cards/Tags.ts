@@ -3,14 +3,15 @@ export enum Tags {
     ANIMAL = "animal",
     CITY = "city",
     EARTH = "earth",
-    ENERGY = "energy",
+    ENERGY = "power",
     JOVIAN = "jovian",
-    MICROBES = "microbes",
+    MICROBES = "microbe",
     PLANT = "plant",
     SCIENCE = "science",
     SPACE = "space",
     STEEL = "building",
-    WILDCARD = "wildcard",
-    VENUS = "venus"
+    VENUS = "venus",
+    WILDCARD = "wild",
+    EVENT = "event"
 }
 

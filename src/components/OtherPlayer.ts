@@ -5,12 +5,14 @@ import { PlayerResources } from "./PlayerResources";
 import { CardType } from '../cards/CardType';
 import { StackedCards } from './StackedCards';
 import { PlayerMixin } from "./PlayerMixin";
+import { TagCount } from './TagCount';
 
 export const OtherPlayer = Vue.component("other-player", {
     props: ["player"],
     components: {
         "player-resources": PlayerResources,
-        "stacked-cards": StackedCards
+        "stacked-cards": StackedCards,
+        "tag-count": TagCount
     },
     mixins: [PlayerMixin],
     methods: {
@@ -19,15 +21,6 @@ export const OtherPlayer = Vue.component("other-player", {
         },
         isVisible: function () {
             return (this.$root as any).getOtherPlayerVisibility(this.player.id);
-        },
-        getEventCount: function() {
-            let count: number = 0;
-            for (let index = 0; index < this.player.playedCards.length; index++) {
-                if (this.player.playedCards[index].cardType === CardType.EVENT) {
-                    count++;
-                } 
-            }
-            return count;
         }
     },
     template: `
@@ -38,11 +31,17 @@ export const OtherPlayer = Vue.component("other-player", {
                 <h4>Player «{{ player.name }}» details</h4>
                 
                 <div class="player_home_block">
-                    Cards In Hand: {{player.cardsInHandNbr}} - Event cards played: {{ getEventCount() }}
+                    Cards In Hand: {{player.cardsInHandNbr}}
                 </div>
 
                 <div class="player_home_block">
                     <player-resources :player="player"></player-resources>
+                </div>
+
+                <div class="tag-display tags_item_cont">
+                    <div v-for="tag in player.tags">
+                        <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>
+                    </div>
                 </div>
 
                 <div v-if="player.playedCards.length > 0 || player.corporationCard !== undefined" class="player_home_block">

@@ -1,6 +1,6 @@
 import {IProjectCard} from "./cards/IProjectCard";
 import { CorporationCard } from "./cards/corporation/CorporationCard";
-import { Tags } from './cards/Tags';
+import { Tags } from "./cards/Tags";
 import {PlayerInput} from "./PlayerInput";
 import {CardType} from "./cards/CardType";
 import {Color} from "./Color";
@@ -30,7 +30,7 @@ import { IColony } from "./colonies/Colony";
 import { SelectGreenery } from "./interrupts/SelectGreenery";
 import { SelectCity } from "./interrupts/SelectCity";
 import { SpaceType } from "./SpaceType";
-import { ITagCount } from './ITagCount';
+import { ITagCount } from "./ITagCount";
 
 export class Player {
     public corporationCard: CorporationCard | undefined = undefined;

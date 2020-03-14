@@ -34,6 +34,7 @@ describe("Vitor", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
         const card = new Vitor();
+        player.corporationCard = card;
         card.onCardPlayed(player, game, ants);
         expect(player.megaCredits).to.eq(3);
         card.onCardPlayed(player, game, lava);

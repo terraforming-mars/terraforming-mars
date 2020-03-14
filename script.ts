@@ -1,6 +1,7 @@
 
 import { CreateGameForm } from "./src/components/CreateGameForm";
 import { GameHome } from "./src/components/GameHome";
+import { GamesOverview } from "./src/components/GamesOverview";
 import { PlayerHome } from "./src/components/PlayerHome";
 
 import Vue from "vue";
@@ -33,7 +34,8 @@ const app = new Vue({
         "create-game-form": CreateGameForm,
         "game-home": GameHome,
         "player-home": PlayerHome,
-        "player-end": GameEnd
+        "player-end": GameEnd,
+        "games-overview": GamesOverview
     },
     methods: {
         setOtherPlayerVisibility: function(playerId: string, isVisible: boolean) {
@@ -95,6 +97,8 @@ const app = new Vue({
             }
             xhr.responseType = "json";
             xhr.send();
+        } else if (currentPathname === "/games-overview") {
+            (this.$data as any).screen = "games-overview";
         } else {
             (this.$data as any).screen = "create";
         }

@@ -59,7 +59,8 @@ function requestHandler(
         req.url === '/' ||
         req.url.startsWith('/game?id=') ||
         req.url.startsWith('/player?id=') ||
-        req.url.startsWith('/the-end?player_id=')
+        req.url.startsWith('/the-end?player_id=') ||
+        req.url.startsWith('/games-overview')
       ) {
         serveApp(res);
       } else if (req.url.startsWith('/api/player?id=')) {
@@ -75,6 +76,8 @@ function requestHandler(
           req.url === '/main.js'
       ) {
         serveAsset(req, res);
+      } else if (req.url.startsWith('/api/games')) {
+        apiGetGames(req, res);
       } else if (req.url.indexOf('/api/game') === 0) {
         apiGetGame(req, res);
       } else {
@@ -140,6 +143,25 @@ function processInput(
       res.end();
     }
   });
+}
+
+function apiGetGames(req: http.IncomingMessage, res: http.ServerResponse): void {
+
+  if (games === undefined) {
+    notFound(req, res);
+    return;
+  }
+
+  const answer: Array<string> = [];
+
+  for (let key of Array.from(games.keys())) {
+    answer.push(key);
+  }
+
+  res.setHeader('Content-Type', 'application/json');
+  res.write(JSON.stringify(answer));
+  res.end();
+
 }
 
 function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {

@@ -22,7 +22,7 @@ export const PlayerMixin = {
         getAutomatedCardType: function() {
             return CardType.AUTOMATED;
         },
-        getPreludCardType: function() {
+        getPreludeCardType: function() {
             return CardType.PRELUDE;
         }
     }

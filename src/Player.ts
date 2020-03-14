@@ -1,6 +1,6 @@
 import {IProjectCard} from "./cards/IProjectCard";
 import { CorporationCard } from "./cards/corporation/CorporationCard";
-import {Tags} from "./cards/Tags";
+import { Tags } from "./cards/Tags";
 import {PlayerInput} from "./PlayerInput";
 import {CardType} from "./cards/CardType";
 import {Color} from "./Color";
@@ -30,7 +30,7 @@ import { IColony } from "./colonies/Colony";
 import { SelectGreenery } from "./interrupts/SelectGreenery";
 import { SelectCity } from "./interrupts/SelectCity";
 import { SpaceType } from "./SpaceType";
-
+import { ITagCount } from "./ITagCount";
 
 export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
@@ -301,6 +301,24 @@ export class Player {
       return count;
     }
 
+    public getAllTags(): Array<ITagCount> {
+      let tags: Array<ITagCount> = [];
+      tags.push({tag : Tags.CITY, count : this.getTagCount(Tags.CITY)} as ITagCount);
+      tags.push({tag : Tags.EARTH, count : this.getTagCount(Tags.EARTH)} as ITagCount);
+      tags.push({tag : Tags.ENERGY, count : this.getTagCount(Tags.ENERGY)} as ITagCount);
+      tags.push({tag : Tags.JOVIAN, count : this.getTagCount(Tags.JOVIAN)} as ITagCount);
+      tags.push({tag : Tags.MICROBES, count : this.getTagCount(Tags.MICROBES)} as ITagCount);
+      tags.push({tag : Tags.PLANT, count : this.getTagCount(Tags.PLANT)} as ITagCount);
+      tags.push({tag : Tags.SCIENCE, count : this.getTagCount(Tags.SCIENCE)} as ITagCount);
+      tags.push({tag : Tags.SPACE, count : this.getTagCount(Tags.SPACE)} as ITagCount);
+      tags.push({tag : Tags.STEEL, count : this.getTagCount(Tags.STEEL)} as ITagCount);
+      tags.push({tag : Tags.VENUS, count : this.getTagCount(Tags.VENUS)} as ITagCount);
+      tags.push({tag : Tags.WILDCARD, count : this.getTagCount(Tags.WILDCARD)} as ITagCount);
+      tags.push({tag : Tags.EVENT, count : this.playedCards.filter(card => card.cardType === CardType.EVENT).length} as ITagCount);
+      
+      return tags;
+    }
+    
     public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeWildcardTags:boolean = true): number {
       let tagCount = 0;
       this.playedCards.forEach((card: IProjectCard) => {

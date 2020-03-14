@@ -2,6 +2,7 @@ import { CardModel } from "./CardModel";
 import { ColonyModel } from "./ColonyModel";
 import { Color } from "../Color";
 import { VictoryPointsBreakdown } from "../VictoryPointsBreakdown";
+import { ITagCount } from '../ITagCount';
 
 export interface PlayerModel {
     boardName: string;
@@ -35,4 +36,5 @@ export interface PlayerModel {
     venusScaleLevel: number;
     victoryPoints: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;
+    tags: Array<ITagCount>;
 }

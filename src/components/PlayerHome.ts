@@ -16,6 +16,7 @@ import { PlayerModel } from "../models/PlayerModel";
 import { Colony } from './Colony';
 import { LogPanel } from './LogPanel';
 import { PlayerMixin } from './PlayerMixin';
+import { TagCount } from './TagCount';
 
 const dialogPolyfill = require("dialog-polyfill");
 
@@ -34,7 +35,8 @@ export const PlayerHome = Vue.component("player-home", {
         "award": Award,
         "preferences": Preferences,
         "colony": Colony,
-        "log-panel": LogPanel
+        "log-panel": LogPanel,
+        "tag-count": TagCount
     },
     data: function () {
         return {}
@@ -85,6 +87,12 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <div class="player_home_block player_home_block--resources nofloat">
                     <player-resources :player="player" v-trim-whitespace></player-resources>
+                </div>
+
+                <div class="tag-display tags_item_cont">
+                    <div v-for="tag in player.tags">
+                        <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>
+                    </div>
                 </div>
 
                 <div class="player_home_block">

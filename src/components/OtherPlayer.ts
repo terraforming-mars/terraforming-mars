@@ -2,9 +2,11 @@
 import Vue from "vue";
 
 import { PlayerResources } from "./PlayerResources";
+
 import { StackedCards } from './StackedCards';
 import { PlayerMixin } from "./PlayerMixin";
 import { TagCount } from './TagCount';
+
 
 export const OtherPlayer = Vue.component("other-player", {
     props: ["player"],
@@ -12,6 +14,7 @@ export const OtherPlayer = Vue.component("other-player", {
         "player-resources": PlayerResources,
         "stacked-cards": StackedCards,
         "tag-count": TagCount
+
     },
     mixins: [PlayerMixin],
     methods: {
@@ -20,6 +23,15 @@ export const OtherPlayer = Vue.component("other-player", {
         },
         isVisible: function () {
             return (this.$root as any).getOtherPlayerVisibility(this.player.id);
+        },
+        getEventCount: function() {
+            let count: number = 0;
+            for (let index = 0; index < this.player.playedCards.length; index++) {
+                if (this.player.playedCards[index].cardType === CardType.EVENT) {
+                    count++;
+                } 
+            }
+            return count;
         }
     },
     template: `
@@ -30,7 +42,7 @@ export const OtherPlayer = Vue.component("other-player", {
                 <h4>Player «{{ player.name }}» details</h4>
                 
                 <div class="player_home_block">
-                    Cards In Hand: {{player.cardsInHandNbr}}
+                    Cards In Hand: {{player.cardsInHandNbr}} - Event cards played: {{ getEventCount() }}
                 </div>
 
                 <div class="player_home_block">
@@ -54,6 +66,7 @@ export const OtherPlayer = Vue.component("other-player", {
                         </div>
 
                         <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
+
 
                     </div>
                 </div> 

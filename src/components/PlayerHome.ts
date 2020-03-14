@@ -18,6 +18,7 @@ import { LogPanel } from './LogPanel';
 import { PlayerMixin } from './PlayerMixin';
 import { TagCount } from './TagCount';
 
+
 const dialogPolyfill = require("dialog-polyfill");
 
 export const PlayerHome = Vue.component("player-home", {

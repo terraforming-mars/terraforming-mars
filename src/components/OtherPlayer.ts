@@ -53,7 +53,7 @@ export const OtherPlayer = Vue.component("other-player", {
                             <card :card="card.name" :resources="card.resources"></card>
                         </div>
 
-                        <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType])" ></stacked-cards>
+                        <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
 
                     </div>
                 </div> 

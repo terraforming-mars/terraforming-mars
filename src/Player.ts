@@ -1262,7 +1262,6 @@ export class Player {
         game.fundAward(this, award);
         this.megaCredits -= megaCredits;
         this.heat -= heat;
-        game.log(this.name + " funded " + award.name + " award");
         return undefined;
       };
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {

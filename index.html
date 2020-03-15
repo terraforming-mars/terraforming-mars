@@ -11,7 +11,7 @@
             <player-home v-if="screen === 'player-home'" :player="$data.player" :key="$data.playerkey"></player-home>
             <create-game-form v-if="screen === 'create'"></create-game-form>
             <game-end v-if="screen === 'the-end'" :player="$data.player" :game="$data.game"></game-end>
-            <games-overview v-if="screen === 'games-overview'"></admin>
+            <games-overview v-if="screen === 'games-overview'"></games-overview>
         </div>
         <script src="/main.js"></script>
     </body>

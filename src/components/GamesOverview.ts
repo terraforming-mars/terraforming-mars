@@ -5,17 +5,19 @@ import {Phase} from "../Phase";
 export const GamesOverview = Vue.component("games-overview", {
     data: function () {
         return {
+            serverId: '',
             games: {}
         }
     },
     mounted: function() {
+        this.serverId = (new URL(location.href)).searchParams.get('serverId') || '';
         this.getGames();
     },
     methods: {
         getGames: function () {
             const vueApp = this;
             const xhr = new XMLHttpRequest();
-            xhr.open("GET", "/api/games");
+            xhr.open("GET", "/api/games?serverId="+this.serverId);
             xhr.onerror = function () {
                 alert("Error getting games data");
             };

@@ -29,8 +29,6 @@ export class ImmigrantCity implements IProjectCard {
             game.addCityTile(player, space.id);
             player.setProduction(Resources.ENERGY,-1);
             player.setProduction(Resources.MEGACREDITS, -2);
-            // Resolve onTilePlaced
-            player.setProduction(Resources.MEGACREDITS);
             return undefined;
         });
     }

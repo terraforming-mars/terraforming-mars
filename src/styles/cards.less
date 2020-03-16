@@ -52,7 +52,7 @@
     cursor: pointer;
     /*float: left;*/
     position: relative;
-    background: #eeeeee;
+    background: #333333;
     background: linear-gradient(to bottom right, #ffffff, #aaaaaa, #eeeeee, #cecece, #dddddd, #eeeeee, #cccccc);
     width: 240px;
     height: 310px;
@@ -73,7 +73,7 @@
 
 input[type=checkbox]:checked + .filterDiv,
 input[type=radio]:checked + .filterDiv {
-    filter: brightness(125%);
+    filter: drop-shadow(-2px -2px 2px rgba(0,150,255,100)) drop-shadow(-2px -2px 2px rgba(255,255,255,100))drop-shadow(16px 16px 5px black) ;
 }
 
 .filterDiv3 {
@@ -129,6 +129,7 @@ input[type=radio]:checked + .filterDiv {
 
 .price {
     float: left;
+    color: black;
     font-family: Prototype;
     font-size: 26px;
     border-top: 2px solid rgb(221,221,221);
@@ -358,6 +359,7 @@ input[type=radio]:checked + .filterDiv {
 
 
 .title {
+    color: #020202;
     text-transform: uppercase;
     font-family: Prototype;
     float: left;
@@ -424,6 +426,7 @@ input[type=radio]:checked + .filterDiv {
 
 /************** Style the Content ************/
 .content {
+    color: black;
     position: relative;
     display: inline-block;
     width: 220px;
@@ -442,7 +445,8 @@ input[type=radio]:checked + .filterDiv {
 }
 
 .requirements {
-  font-family: Prototype;
+    color: #020202;
+    font-family: Prototype;
     background-color: rgb(255,204,100);
     background: linear-gradient(to right, #e28c22, rgb(255,204,100),rgb(255,204,100), #e28c22);
     border-top: 2px solid rgb(221,221,221);
@@ -493,6 +497,7 @@ input[type=radio]:checked + .filterDiv {
 
 
 .description {
+    color: #020202;
     font-size: 11px;
     line-height: 13px;
     font-weight:normal;
@@ -1150,6 +1155,7 @@ input[type=radio]:checked + .filterDiv {
 .corporationLabel {
     float: left;
     position:absolute;
+    color: #020202;
     font-family: Prototype;
     width: 115px;
     height: 14px;
@@ -1198,7 +1204,9 @@ border-right: 2px solid rgb(137,137,137);
 
 
 .card_resources_counter {
+    
     position: absolute;
+    color: #020202;
     font-family: Prototype;
     width: 62px;
     height: 20px;

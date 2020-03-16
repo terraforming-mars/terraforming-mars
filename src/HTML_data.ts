@@ -6004,7 +6004,8 @@ export const HTML_DATA: Map<string, string> =
 ["Beginner Corporation",`
       <div class="corporationLabel">CORPORATION</div>
       <div class="contentCorporation">
-        <div style="font-size:20px;
+        <div style="color:#020202;
+        font-size:20px;
         margin-top:10px;
         padding-left:3px;width:160px;background:#eeeeee;box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 3px 3px 3px grey;margin-left:10px;border-radius:5px;
         border-top: 2px solid rgb(221,221,221);

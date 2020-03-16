@@ -90,7 +90,7 @@ export const PlayerHome = Vue.component("player-home", {
                     <player-resources :player="player" v-trim-whitespace></player-resources>
                 </div>
 
-                <div class="tag-display tags_item_cont">
+                <div class="tag-display tags_item_cont" v-if="player.tags.length > 0">
                     <div v-for="tag in player.tags">
                         <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>
                     </div>

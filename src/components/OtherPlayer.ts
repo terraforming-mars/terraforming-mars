@@ -2,9 +2,11 @@
 import Vue from "vue";
 
 import { PlayerResources } from "./PlayerResources";
+
 import { StackedCards } from './StackedCards';
 import { PlayerMixin } from "./PlayerMixin";
 import { TagCount } from './TagCount';
+
 
 export const OtherPlayer = Vue.component("other-player", {
     props: ["player"],
@@ -12,6 +14,7 @@ export const OtherPlayer = Vue.component("other-player", {
         "player-resources": PlayerResources,
         "stacked-cards": StackedCards,
         "tag-count": TagCount
+
     },
     mixins: [PlayerMixin],
     methods: {
@@ -53,7 +56,8 @@ export const OtherPlayer = Vue.component("other-player", {
                             <card :card="card.name" :resources="card.resources"></card>
                         </div>
 
-                        <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType])" ></stacked-cards>
+                        <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
+
 
                     </div>
                 </div> 

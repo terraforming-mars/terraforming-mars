@@ -7,12 +7,13 @@ import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 import { MAX_OCEAN_TILES } from '../constants';
+import { CardName } from '../CardName';
 
 export class PermafrostExtraction implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public tags: Array<Tags> = [];
     public cost: number = 8;
-    public name: string = "Permafrost Extraction";
+    public name: string = CardName.PERMAFROST_EXTRACTION;
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() >= -8 - (2 * player.getRequirementsBonus(game));
     }

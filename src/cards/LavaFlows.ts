@@ -10,11 +10,12 @@ import { Tags } from "./Tags";
 import { ISpace } from "../ISpace";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { BoardName } from '../BoardName';
+import { CardName } from '../CardName';
 
 export class LavaFlows implements IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [];
-    public name: string = "Lava Flows";
+    public name: string = CardName.LAVA_FLOWS;
     public hasRequirements = false;
     public cardType: CardType = CardType.EVENT;
     public static getVolcanicSpaces(player: Player, game: Game): Array<ISpace> {

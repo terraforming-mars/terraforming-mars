@@ -6,12 +6,13 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectAmount } from "../inputs/SelectAmount";
 import { Resources } from "../Resources";
+import { CardName } from '../CardName';
 
 
 export class Insulation implements IProjectCard {
     public cost: number = 2;
     public tags: Array<Tags> = [];
-    public name: string = "Insulation";
+    public name: string = CardName.INSULATION;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, _game: Game) {

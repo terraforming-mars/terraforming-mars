@@ -7,11 +7,12 @@ import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectCard } from "../inputs/SelectCard";
 import { SelectOption } from "../inputs/SelectOption";
+import { CardName } from '../CardName';
 
 export class MarsUniversity implements IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
-    public name: string = "Mars University";
+    public name: string = CardName.MARS_UNIVERSITY;
     public cardType: CardType = CardType.ACTIVE;
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {

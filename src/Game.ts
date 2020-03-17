@@ -714,10 +714,10 @@ export class Game {
         this.giveAward(fundedAward.award);
       });
 
-      // Give 5 victory points for each claimed millestone
-      for (const millestone of this.claimedMilestones) {
-        millestone.player.victoryPointsBreakdown.milestones += 5;
-        millestone.player.victoryPoints += 5;
+      // Give 5 victory points for each claimed milestone
+      for (const milestone of this.claimedMilestones) {
+        milestone.player.victoryPointsBreakdown.milestones += 5;
+        milestone.player.victoryPoints += 5;
       }
 
       const spaces = this.board.spaces;

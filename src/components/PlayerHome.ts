@@ -102,7 +102,7 @@ export const PlayerHome = Vue.component("player-home", {
 
                     <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature" v-trim-whitespace></global-parameters>
 
-                    <div v-if="player.players.length > 1" class="player_home_block--millestones-and-awards">
+                    <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
                         <milestone :milestones_list="player.milestones" expanded=false />
                         <award :awards_list="player.awards" expanded=false />
                     </div>
@@ -182,7 +182,7 @@ export const PlayerHome = Vue.component("player-home", {
                     <summary class="accordion-header">
                         <div class="is-action">
                             <i class="icon icon-arrow-right mr-1"></i>
-                            Millestones and awards
+                            Milestones and awards
                         </div>
                     </summary>
                     <div class="accordion-body">

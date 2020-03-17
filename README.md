@@ -17,9 +17,9 @@ npm install
 npm run start
 ```
 
-This will start the game server listening on the default port of 8080. If you then point a web browser to http://localhost:8080/?serverId=_SERVER-ID_ you will be on the create game screen. The secret _SERVER-ID_ is available from the console after starting the server and required to access game administration pages like the create game screen.
+This will start the game server listening on the default port of 8080. If you then point a web browser to http://localhost:8080 you will be on the create game screen.
 
-Pointing your web browser to http://localhost:8080/games-overview?serverId=_SERVER-ID_ will provide a list of all games available on the server.
+Pointing your web browser to http://localhost:8080/games-overview?serverId=_SERVER-ID_ will provide a list of all games available on the server. The secret _SERVER-ID_ is available from the console after starting the server and required to access game administration pages like the games overview.
 
 ### docker
 

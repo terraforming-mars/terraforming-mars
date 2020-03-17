@@ -56,10 +56,7 @@ function requestHandler(
 ): void {
   if (req.url !== undefined) {
     if (req.method === 'GET') {
-      if (
-        req.url.replace(/\?.*$/, '') === '/' ||
-        req.url.replace(/\?.*$/, '').startsWith('/games-overview')
-      ) {
+      if (req.url.replace(/\?.*$/, '').startsWith('/games-overview')) {
         if (!isServerIdValid(req)) {
           notAuthorized(req, res);
           return;
@@ -67,6 +64,7 @@ function requestHandler(
           serveApp(res);
         }
       } else if (
+        req.url === '/' ||
         req.url.startsWith('/game?id=') ||
         req.url.startsWith('/player?id=') ||
         req.url.startsWith('/the-end?player_id=')
@@ -645,6 +643,5 @@ console.log('version 0.X');
 server.listen(process.env.PORT || 8080);
 
 console.log('\nThe secret serverId for this server is \x1b[1m'+serverId+'\x1b[0m. Use it to access the following administrative routes:\n');
-console.log('* Create games: /?serverId='+serverId);
 console.log('* Overview of existing games: /games-overview?serverId='+serverId);
 console.log('* API for game IDs: /api/games?serverId='+serverId+'\n');

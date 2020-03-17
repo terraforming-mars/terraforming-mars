@@ -7,12 +7,13 @@ import { Game } from "../Game";
 import { SelectPlayer } from "../inputs/SelectPlayer";
 import { OrOptions } from "../inputs/OrOptions";
 import { Resources } from "../Resources";
+import { CardName } from '../CardName';
 
 export class Sabotage implements IProjectCard {
     public cost: number = 1;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.EVENT;
-    public name: string = "Sabotage";
+    public name: string = CardName.SABOTAGE;
 
     public play(player: Player, game: Game) {
         if (game.getPlayers().length == 1)  return undefined;

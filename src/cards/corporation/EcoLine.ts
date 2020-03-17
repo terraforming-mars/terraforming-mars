@@ -5,7 +5,7 @@ import { Player } from "../../Player";
 import { Resources } from '../../Resources';
 
 export class EcoLine implements CorporationCard {
-    public name: string = "EcoLine";
+    public name: string = "";
     public tags: Array<Tags> = [Tags.PLANT];
     public startingMegaCredits: number = 36;
     public play(player: Player) {

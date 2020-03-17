@@ -8,9 +8,10 @@ import { SpaceType } from "../../SpaceType";
 import { ISpace } from "../../ISpace";
 import { TileType } from "../../TileType";
 import { Resources } from '../../Resources';
+import { CardName } from '../../CardName';
 
 export class TharsisRepublic implements CorporationCard {
-    public name: string = "Tharsis Republic";
+    public name: string = CardName.THARSIS_REPUBLIC;
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 40;
     public initialAction(player: Player, game: Game) {

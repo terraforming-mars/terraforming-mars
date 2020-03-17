@@ -12,7 +12,7 @@ import { Pluto } from './Pluto';
 import { Enceladus } from './Enceladus';
 
 export class ColonyDealer {
-    private seed: number = 0;
+    //private seed: number = 0;
     public coloniesDeck: Array<IColony> = [];
     public discardedColonies: Array<IColony> = [];
     private ALL_COLONIES_TILES: Array<IColony> = [
@@ -28,6 +28,7 @@ export class ColonyDealer {
         new Pluto(),
         new Triton()
     ];
+    /*
     constructor(seed?: number) {
         if (seed !== undefined) {
             this.seed = seed;
@@ -35,13 +36,15 @@ export class ColonyDealer {
             this.seed = Math.random();
         }
     }
-
+    */
 
     public shuffle(cards: Array<any>): Array<any> {
         const deck: Array<any> = [];
         const copy = cards.slice();
         while (copy.length) {
-            deck.push(copy.splice(Math.floor(this.seed * copy.length), 1)[0]);
+            // not working, disable for now
+            //deck.push(copy.splice(Math.floor(this.seed * copy.length), 1)[0]);
+            deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
         }
         return deck;
     }

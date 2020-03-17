@@ -32,7 +32,7 @@ export class Vitor implements CorporationCard {
     }
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
-        if (card.getVictoryPoints !== undefined && card.getVictoryPoints(player, game) >= 0 ) {
+        if (player.corporationCard !== undefined && player.corporationCard.name === this.name && card.getVictoryPoints !== undefined && card.getVictoryPoints(player, game) >= 0 ) {
             player.megaCredits += 3;
         }
     }

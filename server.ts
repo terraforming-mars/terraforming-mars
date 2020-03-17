@@ -39,6 +39,7 @@ import { Phase } from './src/Phase';
 import { Resources } from "./src/Resources";
 import { CardType } from "./src/cards/CardType";
 
+const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
@@ -55,7 +56,14 @@ function requestHandler(
 ): void {
   if (req.url !== undefined) {
     if (req.method === 'GET') {
-      if (
+      if (req.url.replace(/\?.*$/, '').startsWith('/games-overview')) {
+        if (!isServerIdValid(req)) {
+          notAuthorized(req, res);
+          return;
+        } else {
+          serveApp(res);
+        }
+      } else if (
         req.url === '/' ||
         req.url.startsWith('/game?id=') ||
         req.url.startsWith('/player?id=') ||
@@ -75,6 +83,8 @@ function requestHandler(
           req.url === '/main.js'
       ) {
         serveAsset(req, res);
+      } else if (req.url.startsWith('/api/games')) {
+        apiGetGames(req, res);
       } else if (req.url.indexOf('/api/game') === 0) {
         apiGetGame(req, res);
       } else {
@@ -112,6 +122,10 @@ function generateRandomGameId(): string {
   return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
 }
 
+function generateRandomServerId(): string {
+  return generateRandomGameId();
+}
+
 function processInput(
     req: http.IncomingMessage,
     res: http.ServerResponse,
@@ -140,6 +154,30 @@ function processInput(
       res.end();
     }
   });
+}
+
+function apiGetGames(req: http.IncomingMessage, res: http.ServerResponse): void {
+
+  if (!isServerIdValid(req)) {
+    notAuthorized(req, res);
+    return;
+  }
+
+  if (games === undefined) {
+    notFound(req, res);
+    return;
+  }
+
+  const answer: Array<string> = [];
+
+  for (let key of Array.from(games.keys())) {
+    answer.push(key);
+  }
+
+  res.setHeader('Content-Type', 'application/json');
+  res.write(JSON.stringify(answer));
+  res.end();
+
 }
 
 function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -534,12 +572,27 @@ function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {
   res.end();
 }
 
+function notAuthorized(req: http.IncomingMessage, res: http.ServerResponse): void {
+  console.warn('Not authorized', req.method, req.url);
+  res.writeHead(403);
+  res.write('Not authorized');
+  res.end();
+}
+
+function isServerIdValid (req: http.IncomingMessage): boolean {
+  const queryParams = querystring.parse(req.url!.replace(/^.*\?/, ''));
+  if (queryParams.serverId === undefined || queryParams.serverId !== serverId) {
+    console.warn('No or invalid serverId given');
+    return false;
+  }
+  return true;
+}
+
 function serveApp(res: http.ServerResponse): void {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.write(fs.readFileSync('index.html'));
   res.end();
 }
-
 
 function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url === undefined) throw new Error("Empty url");
@@ -586,5 +639,9 @@ function serveResource(res: http.ServerResponse, s: Buffer): void {
 
 console.log('Starting server on port ' + (process.env.PORT || 8080));
 console.log('version 0.X');
+
 server.listen(process.env.PORT || 8080);
 
+console.log('\nThe secret serverId for this server is \x1b[1m'+serverId+'\x1b[0m. Use it to access the following administrative routes:\n');
+console.log('* Overview of existing games: /games-overview?serverId='+serverId);
+console.log('* API for game IDs: /api/games?serverId='+serverId+'\n');

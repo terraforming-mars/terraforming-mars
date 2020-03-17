@@ -880,26 +880,29 @@ export class Game {
         player.terraformRating += steps;
       }
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
+      if (!isWorldGov) {
+        if (steps === 3 && this.temperature === -20) {
+          player.setProduction(Resources.HEAT, 2);
+        } else if (this.temperature === -24 || this.temperature === -20 ||
+              (
+                (steps === 2 || steps === 3) &&
+                (this.temperature === -22 || this.temperature === -18)
+              ) ||
+              (steps === 3 && this.temperature === -16)
+        ) {
+          player.setProduction(Resources.HEAT);;
+        } 
+      }
+      
       // BONUS FOR OCEAN TILE AT 0
-      if (steps === 3 && this.temperature === -20 && !isWorldGov) {
-        player.setProduction(Resources.HEAT, 2);
-      } else if ((!isWorldGov) && this.temperature === -24 || this.temperature === -20 ||
-            (
-              (steps === 2 || steps === 3) &&
-              (this.temperature === -22 || this.temperature === -18)
-            ) ||
-            (steps === 3 && this.temperature === -16)
-      ) {
-        player.setProduction(Resources.HEAT);;
-      } else if (
-        (
+      if (
           this.temperature === 0 ||
           ((steps === 2 || steps === 3) && this.temperature === 2) ||
           (steps === 3 && this.temperature === 4)
-        ) && this.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES
       ) {
         this.addOceanInterrupt(player, "Select space for ocean from temperature increase", isWorldGov);
       }
+
       return undefined;
     }
 

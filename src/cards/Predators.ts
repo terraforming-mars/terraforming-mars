@@ -7,11 +7,12 @@ import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
 import { SelectCard } from "../inputs/SelectCard";
 import { Pets } from "./Pets";
+import { CardName } from '../CardName';
 
 export class Predators implements IProjectCard, IActionCard {
     public cost: number = 14;
     public tags: Array<Tags> = [Tags.ANIMAL];
-    public name: string = "Predators";
+    public name: string = CardName.PREDATORS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.ANIMAL;
     public canPlay(player: Player, game: Game): boolean {

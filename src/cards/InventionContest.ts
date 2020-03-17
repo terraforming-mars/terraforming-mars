@@ -5,12 +5,13 @@ import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectCard } from "../inputs/SelectCard";
+import { CardName } from '../CardName';
 
 export class InventionContest implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public cost: number = 2;
     public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: string = "Invention Contest";
+    public name: string = CardName.INVENTION_CONTEST;
 
     public play(player: Player, game: Game) {
         const cardsDrawn: Array<IProjectCard> = [

@@ -5,12 +5,13 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { ResourceType } from "../ResourceType";
+import { CardName } from '../CardName';
 
 export class SecurityFleet implements IActionCard, IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = "Security Fleet";
+    public name: string = CardName.SECURITY_FLEET;
     public resourceType: ResourceType = ResourceType.FIGHTER;
 
     public getVictoryPoints(player: Player): number {

@@ -5,11 +5,12 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { TileType } from "../TileType";
+import { CardName } from '../CardName';
 
 export class RoverConstruction implements IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = "Rover Construction";
+    public name: string = CardName.ROVER_CONSTRUCTION;
     public cardType: CardType = CardType.ACTIVE;
 
     public onTilePlaced(player: Player, space: ISpace) {

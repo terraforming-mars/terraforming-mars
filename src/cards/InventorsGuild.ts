@@ -7,11 +7,12 @@ import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import {SelectCard} from '../inputs/SelectCard';
 import { IProjectCard } from "./IProjectCard";
 import { IActionCard } from "./ICard";
+import { CardName } from '../CardName';
 
 export class InventorsGuild implements IActionCard, IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: string = "Inventors' Guild";
+    public name: string = CardName.INVENTORS_GUILD;
     public cardType: CardType = CardType.ACTIVE;
 
     public play(_player: Player, _game: Game) {

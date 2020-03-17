@@ -5,9 +5,10 @@ import { CorporationCard } from "./../corporation/CorporationCard";
 import { IProjectCard } from "../IProjectCard";
 import { Game } from "../../Game";
 import { Resources } from '../../Resources';
+import { CardName } from '../../CardName';
 
 export class CheungShingMARS implements CorporationCard {
-    public name: string = "Cheung Shing MARS";
+    public name: string = CardName.CHEUNG_SHING_MARS;
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 44;
 

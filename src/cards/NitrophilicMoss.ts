@@ -10,7 +10,7 @@ export class NitrophilicMoss implements IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.PLANT];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = "Nitrophilic Moss";
+    public name: string = "";
     public canPlay(player: Player, game: Game): boolean {
         return game.board.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game) && player.plants >= 2;
     }

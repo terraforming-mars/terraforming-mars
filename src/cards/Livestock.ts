@@ -7,13 +7,14 @@ import { Game } from "../Game";
 import { Player } from "../Player";
 import { ResourceType } from "../ResourceType";
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class Livestock implements IActionCard, IProjectCard {
     public cost: number = 13;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.ANIMAL;
     public tags: Array<Tags> = [Tags.ANIMAL];
-    public name: string = "Livestock";
+    public name: string = CardName.LIVESTOCK;
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 9 - player.getRequirementsBonus(game) && player.getProduction(Resources.PLANTS) >= 1;
     }

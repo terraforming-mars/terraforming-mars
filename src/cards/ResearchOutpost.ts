@@ -7,11 +7,12 @@ import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 import { PlayerInput } from "../PlayerInput";
+import { CardName } from '../CardName';
 
 export class ResearchOutpost implements IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.CITY, Tags.STEEL];
-    public name: string = "Research Outpost";
+    public name: string = CardName.RESEARCH_OUTPOST;
     public cardType: CardType = CardType.ACTIVE;
     public hasRequirements = false;
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {

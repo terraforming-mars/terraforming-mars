@@ -7,12 +7,13 @@ import { Game } from "../Game";
 import { CardType } from "./CardType";
 import { SelectCard } from "../inputs/SelectCard";
 import { ResourceType } from '../ResourceType';
+import { CardName } from '../CardName';
 
 export class SymbioticFungus implements IActionCard, IProjectCard {
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.MICROBES];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = "Symbiotic Fungus";
+    public name: string = CardName.SYMBIOTIC_FUNGUS;
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() >= -14 - (2 * player.getRequirementsBonus(game));
     }

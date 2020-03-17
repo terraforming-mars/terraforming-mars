@@ -4,9 +4,10 @@ import { CorporationCard } from "./CorporationCard";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { IProjectCard } from "../IProjectCard";
+import { CardName } from '../../CardName';
 
 export class Teractor implements CorporationCard {
-    public name: string = "Teractor";
+    public name: string = CardName.TERACTOR;
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 60;
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {

@@ -5,12 +5,13 @@ import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { SelectCard } from '../../inputs/SelectCard';
+import { CardName } from '../../CardName';
 
 
 export class AirScrappingExpedition implements IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = "Air-Scrapping Expedition";
+    public name: string = CardName.AIR_SCRAPPING_EXPEDITION;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player) {

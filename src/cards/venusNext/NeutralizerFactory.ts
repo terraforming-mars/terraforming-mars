@@ -4,11 +4,12 @@ import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Game } from '../../Game';
+import { CardName } from '../../CardName';
 
 export class NeutralizerFactory  implements IProjectCard {
     public cost: number = 7;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = "Neutralizer Factory";
+    public name: string = CardName.NEUTRALIZER_FACTORY;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {

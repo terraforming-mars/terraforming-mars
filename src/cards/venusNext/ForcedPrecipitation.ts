@@ -9,11 +9,12 @@ import { OrOptions } from '../../inputs/OrOptions';
 import { SelectOption } from '../../inputs/SelectOption';
 import { Game } from '../../Game';
 import { MAX_VENUS_SCALE } from '../../constants';
+import { CardName } from '../../CardName';
 
 export class ForcedPrecipitation implements IActionCard,IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = "Forced Precipitation";
+    public name: string = CardName.FORCED_PRECIPITATION;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
 

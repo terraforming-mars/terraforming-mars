@@ -3,9 +3,10 @@ import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
 import { Game } from '../../Game';
+import { CardName } from '../../CardName';
 
 export class MorningStarInc implements CorporationCard {
-    public name: string = "Morning Star Inc.";
+    public name: string = CardName.MORNING_STAR_INC;
     public tags: Array<Tags> = [Tags.VENUS];
     public startingMegaCredits: number = 50;
 

@@ -9,11 +9,12 @@ import { OrOptions } from '../../inputs/OrOptions';
 import { SelectOption } from '../../inputs/SelectOption';
 import { Game } from '../../Game';
 import { MAX_VENUS_SCALE } from '../../constants';
+import { CardName } from '../../CardName';
 
 export class RotatorImpacts implements IActionCard,IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = "Rotator Impacts";
+    public name: string = CardName.ROTATOR_IMPACTS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.ASTEROID;
     public canPlay(player: Player, game: Game): boolean {

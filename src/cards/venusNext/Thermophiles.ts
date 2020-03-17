@@ -9,11 +9,12 @@ import { SelectOption } from '../../inputs/SelectOption';
 import { Game } from '../../Game';
 import { MAX_VENUS_SCALE } from '../../constants';
 import { SelectCard } from '../../inputs/SelectCard';
+import { CardName } from '../../CardName';
 
 export class Thermophiles implements IActionCard,IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.VENUS, Tags.MICROBES];
-    public name: string = "Thermophiles";
+    public name: string = CardName.THERMOPHILES;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public canPlay(player: Player, game: Game): boolean {

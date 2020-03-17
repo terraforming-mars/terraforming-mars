@@ -5505,8 +5505,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="corporationLabel">CORPORATION</div>
       ##RESOURCES##
       <div class="venus-icon corporation-icon"></div>
-       <div class="contentCorporation">
-        <div class="points" style="z-index:1;margin-top:251px;margin-left:124px;">1/3<div class="resource floater"></div></div>
+      <div class="contentCorporation">
+        <div class="points" style="z-index:1;margin-top:231px;margin-left:124px;">1/3<div class="resource floater"></div></div>
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">ACTION</div>
           <div class="red-arrow"></div> <div class="resource floater"></div>*
@@ -5518,7 +5518,7 @@ export const HTML_DATA: Map<string, string> =
           on this card.)
           </div>
         </div>
-        <div  class="celestic" font-size:24px;box-shadow:6px 6px 6px grey;margin-left: 9px;
+        <div  class="celestic" style="font-size:24px;box-shadow:6px 6px 6px grey;margin-left: 9px;
                         ">
                     <span style="background:linear-gradient(to right, rgb(251,192,137),rgb(251,192,137),rgb(23,185,236));padding-left:5px;">CEL</span><span
                     style="background:linear-gradient(to right,rgb(23,185,236),rgb(251,192,137))">ES</span><span style="background:rgb(251,192,137);padding-right:5px;">TIC</span>
@@ -5643,7 +5643,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="tag tag2 tag-earth"></div>
         <div class="corporationLabel ">CORPORATION</div>
         <div class="prelude-icon corporation-icon"></div>
-        <div class="contentCorporation">
+        <div class="contentCorporation ">
             <div class="corporationEffectBox ">
                 <div class="corporationEffectBoxLabel ">EFFECT</div>
                 <div class="resource-tag tag-earth"></div> : <div class="resource card"></div>
@@ -5700,7 +5700,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="tag tag1 tag-earth"></div>
         <div class="corporationLabel ">CORPORATION</div>
         <div class="prelude-icon corporation-icon"></div>
-        <div class="contentCorporation">
+        <div class="contentCorporation ">
             <div class="corporationEffectBox ">
                 <div class="corporationEffectBoxLabel ">EFFECT</div>
                 <div class="resource-tag science"></div> : <div class="resource money">-2</div>
@@ -5722,7 +5722,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="tag tag1 tag-earth"></div>
         <div class="corporationLabel ">CORPORATION</div>
         <div class="prelude-icon corporation-icon"></div>
-        <div class="contentCorporation">
+        <div class="contentCorporation ">
             <div class="corporationEffectBox ">
                 <div class="corporationEffectBoxLabel ">EFFECT</div>
                 <div class="resource points-big"
@@ -5834,7 +5834,7 @@ export const HTML_DATA: Map<string, string> =
       ##RESOURCES##
       <div class="colonies-icon corporation-icon"></div>
       <div class="contentCorporation">
-        <div class="points" style="z-index:1;margin-top:250px;margin-left:124px;">1/2<div class="resource animal"></div></div>
+        <div class="points" style="z-index:1;margin-top:231px;margin-left:124px;">1/2<div class="resource animal"></div></div>
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
           <div class="resource-tag tag-animal"></div> / <div class="resource-tag tag-plant"></div> : <div class="resource animal"></div>
@@ -5871,9 +5871,10 @@ export const HTML_DATA: Map<string, string> =
             <div class="turmoil-icon corporation-icon"></div>
             ##RESOURCES##
             <div class="contentCorporation ">
-              <div class="points" style="z-index:1;margin-top:251px;margin-left:124px;">1/<div class="resource pristar"></div></div>
+              <div class="points" style="z-index:1;margin-top:231px;margin-left:124px;">1/<div class="resource pristar"></div></div>
                 <div class="corporationEffectBox ">
                     <div class="corporationEffectBoxLabel" style="margin-bottom:5px;">EFFECT</div>
+
                       <div class="tile rating"><div class="left-line"></div><div class="right-line"></div></div> : <div class="resource pristar"></div> <div class="resource money">6</div>
                     <div class="description " style="text-align:center;margin-top:-7px; text-align:left;">
                         (Effect: During production phase, if you did not get TR so far this <br> generation, add one <br> preservation resource<br> here and gain 6MC.)
@@ -6003,7 +6004,8 @@ export const HTML_DATA: Map<string, string> =
 ["Beginner Corporation",`
       <div class="corporationLabel">CORPORATION</div>
       <div class="contentCorporation">
-        <div style="font-size:20px;
+        <div style="color:#020202;
+        font-size:20px;
         margin-top:10px;
         padding-left:3px;width:160px;background:#eeeeee;box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 3px 3px 3px grey;margin-left:10px;border-radius:5px;
         border-top: 2px solid rgb(221,221,221);
@@ -6090,7 +6092,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="tag tag1 tag-building"></div>
             <div class="corporationLabel ">CORPORATION</div>
             <div class="turmoil-icon corporation-icon"></div>
-            <div class="contentCorporation">
+            <div class="contentCorporation ">
                 <div class="corporationEffectBox ">
                     <div class="corporationEffectBoxLabel" style="margin-bottom:0px;">EFFECT</div>
                     <div class="resource ocean-resource red-outline"></div>*: <div class="production-box"><div class="production money">1</div></div>&nbsp;&nbsp;
@@ -6116,7 +6118,7 @@ export const HTML_DATA: Map<string, string> =
 <div class="tag tag2 tag-science"></div>
   <div class="corporationLabel ">CORPORATION</div>
   <div class="turmoil-icon corporation-icon"></div>
-  <div class="contentCorporation">
+  <div class="contentCorporation ">
       <div class="corporationEffectBox ">
           <div class="corporationEffectBoxLabel">EFFECT</div>
             <div class="resource card"></div> : <div class="resource money">1</div>

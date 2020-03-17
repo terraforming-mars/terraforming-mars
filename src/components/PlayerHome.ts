@@ -18,6 +18,7 @@ import { LogPanel } from './LogPanel';
 import { PlayerMixin } from './PlayerMixin';
 import { TagCount } from './TagCount';
 
+
 const dialogPolyfill = require("dialog-polyfill");
 
 export const PlayerHome = Vue.component("player-home", {
@@ -89,7 +90,7 @@ export const PlayerHome = Vue.component("player-home", {
                     <player-resources :player="player" v-trim-whitespace></player-resources>
                 </div>
 
-                <div class="tag-display tags_item_cont">
+                <div class="tag-display tags_item_cont" v-if="player.tags.length > 0">
                     <div v-for="tag in player.tags">
                         <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>
                     </div>
@@ -151,7 +152,7 @@ export const PlayerHome = Vue.component("player-home", {
                         <card :card="card.name" :resources="card.resources"></card>
                     </div>
 
-                    <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType])" ></stacked-cards>
+                    <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
                     <stacked-cards :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
                 </div>
 

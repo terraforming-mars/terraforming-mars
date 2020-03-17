@@ -7,6 +7,6 @@ export class SpaceBaron implements IAward {
     public name: string = "Space Baron";
     public description: string = "Most space tags (event cards do not count)"
     public getScore(player: Player, _game: Game): number {
-        return player.getTagCount(Tags.SPACE);
+        return player.getTagCount(Tags.SPACE, false, false);
     }   
 }

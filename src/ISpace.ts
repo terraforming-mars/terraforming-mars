@@ -12,4 +12,5 @@ export interface ISpace {
     bonus: Array<SpaceBonus>;
     x: number;
     y: number;
+    tileDetails?: string;
 }

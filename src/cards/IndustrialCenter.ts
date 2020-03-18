@@ -26,7 +26,7 @@ export class IndustrialCenter implements IActionCard, IProjectCard {
     }
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space adjacent to a city tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
-            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
+            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL }, false, "industrial_center");
             return undefined;
         });
     }

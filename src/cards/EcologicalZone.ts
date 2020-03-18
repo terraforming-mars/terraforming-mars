@@ -50,7 +50,7 @@ export class EcologicalZone implements IProjectCard {
         (requestedSpace: ISpace) => {
           game.addTile(player, requestedSpace.spaceType, requestedSpace, {
             tileType: TileType.SPECIAL
-          });
+          }, false, "ecological_zone");
           return undefined;
         }
     );

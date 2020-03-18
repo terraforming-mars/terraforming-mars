@@ -952,7 +952,7 @@ export class Game {
     }
     public addTile(
         player: Player, spaceType: SpaceType,
-        space: ISpace, tile: ITile, isWorldGov: boolean = false): void {
+        space: ISpace, tile: ITile, isWorldGov: boolean = false, tileDetails: string = ""): void {
       if (space.tile !== undefined) {
         throw new Error("Selected space is occupied");
       }
@@ -980,6 +980,7 @@ export class Game {
 
       space.player = player;
       space.tile = tile;
+      space.tileDetails = tileDetails;
 
       if (!isWorldGov) {
         space.bonus.forEach((spaceBonus) => {

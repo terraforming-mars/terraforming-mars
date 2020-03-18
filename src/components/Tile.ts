@@ -11,7 +11,7 @@ export const Tile = Vue.component("bonus", {
         let tile_elements = [];
         let app = this;
 
-        let build_tile_css_class = (tile_type: TileType):string => {
+        let build_tile_css_class = (tile_type: TileType, tileDetails: string = ""):string => {
             var ret = "board_tile board_tile--";
             if (tile_type == TileType.GREENERY) {
                 ret += "greenery";
@@ -20,17 +20,46 @@ export const Tile = Vue.component("bonus", {
             } else if (tile_type == TileType.CITY) {
                 ret += "city";
             } else if (tile_type == TileType.SPECIAL) {
-                ret += "special";
+                ret += tileDetails;
             }
 
             ret += " board_tile_pos--" + app.space.id.toString();
             return ret
         }
 
+        let getVerboseTitle = (tileDetails: string): string => {
+            let ret: string = ""; 
+            if (tileDetails === "mohole") {
+                ret = "Project Mohole"
+            } else if (tileDetails === "commercial_district") {
+                ret = "Commercial District: 1 VP per adjacent city tile"
+            } else if (tileDetails === "ecological_zone") {
+                ret = "Ecological Zone: 1 VP per 2 Animals on this card"
+            } else if (tileDetails === "industrial_center") {
+                ret = "Industrial Center"
+            } else if (tileDetails === "lava_flows") {
+                ret = "Lava Flows"
+            } else if (tileDetails === "mining_area") {
+                ret = "Mining Area"
+            } else if (tileDetails === "mining_rights") {
+                ret = "Mining Rights"
+            } else if (tileDetails === "natural_preserve") {
+                ret = "Natural Preserve"
+            } else if (tileDetails === "nuclear_zone") {
+                ret = "Nuclear Zone"
+            } else if (tileDetails === "restricted_area") {
+                ret = "Restricted Area"
+            }
+            return ret;
+        }
+
         let tile_type = this.space.tileType;
         if (tile_type !== undefined) {
             tile_elements.push(
-                createElement("i", {"class": build_tile_css_class(tile_type)})
+                createElement("i", {
+                    "class": build_tile_css_class(tile_type, this.space.tileDetails),
+                    "attrs": {"title": getVerboseTitle(this.space.tileDetails)}
+                })
             )
         }
 

@@ -336,7 +336,7 @@ function getPlayer(player: Player, game: Game): string {
     boardName: game.boardName,
     colonies: getColonies(game.colonies),
     tags: player.getAllTags(),
-    actionsThisGeneration: player.getActionsThisGeneration()
+    actionsThisGeneration: Array.from(player.getActionsThisGeneration())
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -479,7 +479,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       boardName: game.boardName,
       colonies: getColonies(game.colonies),
       tags: player.getAllTags(),
-      actionsThisGeneration: player.getActionsThisGeneration()
+      actionsThisGeneration: Array.from(player.getActionsThisGeneration())
     } as PlayerModel;
   });
 }

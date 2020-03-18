@@ -64,7 +64,7 @@ export class Player {
     public resourcesOnCards: Map<string, number> = new Map<string, number>();
     public victoryPoints: number = 0;
     public victoryPointsBreakdown = new VictoryPointsBreakdown();
-    private actionsThisGeneration: Array<string> = [];
+    private actionsThisGeneration: Set<string> = new Set<string>();
     public lastCardPlayed: IProjectCard | undefined;
     private waitingFor?: PlayerInput;
     private waitingForCb?: () => void;
@@ -166,12 +166,12 @@ export class Player {
 
     };  
 
-    public getActionsThisGeneration(): Array<string> {
+    public getActionsThisGeneration(): Set<string> {
       return this.actionsThisGeneration;
     }
 
     public setActionsThisGeneration(cardName: string): void {
-      this.actionsThisGeneration.push(cardName);
+      this.actionsThisGeneration.add(cardName);
       return;
     }
 
@@ -578,7 +578,7 @@ export class Player {
       const result: Array<ICard> = [];
       if (
         this.corporationCard !== undefined &&
-            this.getActionsThisGeneration().indexOf(this.corporationCard.name) === -1 &&
+            !this.actionsThisGeneration.has(this.corporationCard.name) &&
             this.corporationCard.action !== undefined &&
             this.corporationCard.canAct !== undefined &&
             this.corporationCard.canAct(this, game)) {
@@ -588,7 +588,7 @@ export class Player {
         if (
           playedCard.action !== undefined &&
                 playedCard.canAct !== undefined &&
-                this.getActionsThisGeneration().indexOf(playedCard.name) === -1 &&
+                !this.actionsThisGeneration.has(playedCard.name) &&
                 playedCard.canAct(this, game)) {
           result.push(playedCard);
         }
@@ -597,7 +597,7 @@ export class Player {
     }
 
     public runProductionPhase(): void {
-      this.actionsThisGeneration.splice(0);
+      this.actionsThisGeneration.clear();
       this.tradesThisTurn = 0;
       this.megaCredits += this.megaCreditProduction + this.terraformRating;
       this.heat += this.energy;
@@ -990,7 +990,7 @@ export class Player {
                     playerInput: action
                 });
             }
-            this.actionsThisGeneration.push(foundCard.name);
+            this.actionsThisGeneration.add(foundCard.name);
             game.log(this.name + " used " + foundCard.name + " action");
             return undefined;
           }
@@ -1472,7 +1472,7 @@ export class Player {
         game.getGeneration() === 1 &&
             this.corporationCard !== undefined &&
             this.corporationCard.initialAction !== undefined &&
-            this.getActionsThisGeneration().indexOf("CORPORATION_INITIAL_ACTION") === -1 &&
+            !this.actionsThisGeneration.has("CORPORATION_INITIAL_ACTION") &&
             this.actionsTakenThisRound === 0
       ) {
         const input = this.corporationCard.initialAction(this, game);
@@ -1482,7 +1482,7 @@ export class Player {
             playerInput: input
           });
         }
-        this.actionsThisGeneration.push("CORPORATION_INITIAL_ACTION");
+        this.actionsThisGeneration.add("CORPORATION_INITIAL_ACTION");
         this.actionsTakenThisRound++;
         this.takeAction(game);
         return;

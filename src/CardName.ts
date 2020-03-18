@@ -15,7 +15,7 @@ export enum CardName {
     BLACK_POLAR_DUST = "Black Polar Dust",
     BUILDING_INDUSTRIES = "Building Industries",
     CAPITAL = "Capital",
-    CABONATE_PROCESSING = "Carbonate Processing",
+    CARBONATE_PROCESSING = "Carbonate Processing",
     COMET = "Comet",
     COMMERCIAL_DISTRICT = "Commercial District",
     COMMUNITY_SERVICES = "Community Services",

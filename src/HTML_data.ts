@@ -677,7 +677,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-[CardName.CABONATE_PROCESSING,`
+[CardName.CARBONATE_PROCESSING,`
     <div class="title background-color-automated">Carbonate Processing</div>
     <div class="price">6</div>
     <div class="tag tag1 tag-building"></div>

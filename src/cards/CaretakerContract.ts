@@ -14,7 +14,7 @@ export class CaretakerContract implements IActionCard, IProjectCard {
     public cost: number = 3;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = CardName.CARETAKER_CONTRACT;
+    public name: CardName = CardName.CARETAKER_CONTRACT;
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() >= 0 - (
         2 * player.getRequirementsBonus(game)

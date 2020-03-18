@@ -10,7 +10,7 @@ export class LagrangeObservatory implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.SPACE];
-    public name: string = CardName.LAGRANGE_OBSERVATORY;
+    public name: CardName = CardName.LAGRANGE_OBSERVATORY;
 
     public play(player: Player, game: Game) {
         player.cardsInHand.push(game.dealer.dealCard());

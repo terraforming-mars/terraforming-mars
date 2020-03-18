@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class Trees implements IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.PLANT];
-    public name: string = CardName.TREES;
+    public name: CardName = CardName.TREES;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() >= -4 - (2 * player.getRequirementsBonus(game));

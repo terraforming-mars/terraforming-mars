@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class Lichen implements IProjectCard {
     public cost: number = 7;
     public tags: Array<Tags> = [Tags.PLANT];
-    public name: string = CardName.LICHEN;
+    public name: CardName = CardName.LICHEN;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() >= -24 - (2 * player.getRequirementsBonus(game));

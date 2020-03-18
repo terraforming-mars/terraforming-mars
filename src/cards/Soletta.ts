@@ -11,7 +11,7 @@ export class Soletta implements IProjectCard {
     public cost: number = 35;
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.SOLETTA;
+    public name: CardName = CardName.SOLETTA;
 
     public play(player: Player, _game: Game) {
         player.setProduction(Resources.HEAT,7);

@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class Ironworks implements IActionCard, IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.IRONWORKS;
+    public name: CardName = CardName.IRONWORKS;
     public cardType: CardType = CardType.ACTIVE;
 
     public play(_player: Player, _game: Game) {

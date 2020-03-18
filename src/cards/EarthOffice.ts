@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class EarthOffice implements IProjectCard {
     public cost: number = 1;
     public tags: Array<Tags> = [Tags.EARTH];
-    public name: string = CardName.EARTH_OFFICE;
+    public name: CardName = CardName.EARTH_OFFICE;
     public cardType: CardType = CardType.ACTIVE;
 
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {

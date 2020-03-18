@@ -10,7 +10,7 @@ export class MediaArchives implements IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.EARTH];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.MEDIA_ARCHIVES;
+    public name: CardName = CardName.MEDIA_ARCHIVES;
 
     public play(player: Player, game: Game) {
         let allPlayedEvents = 0;

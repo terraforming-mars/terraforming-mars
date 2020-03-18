@@ -9,7 +9,7 @@ import { CardName } from '../../CardName';
 export class MartianSurvey implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: string = CardName.MARTIAN_SURVEY;
+    public name: CardName = CardName.MARTIAN_SURVEY;
     public cardType: CardType = CardType.EVENT;
     public canPlay(player: Player, game: Game): boolean {
 		return game.getOxygenLevel() <= 4 + player.getRequirementsBonus(game);

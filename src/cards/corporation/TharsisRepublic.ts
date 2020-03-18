@@ -11,7 +11,7 @@ import { Resources } from '../../Resources';
 import { CardName } from '../../CardName';
 
 export class TharsisRepublic implements CorporationCard {
-    public name: string = CardName.THARSIS_REPUBLIC;
+    public name: CardName = CardName.THARSIS_REPUBLIC;
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 40;
     public initialAction(player: Player, game: Game) {

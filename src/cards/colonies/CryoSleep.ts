@@ -7,7 +7,7 @@ import { CardName } from '../../CardName';
 export class CryoSleep implements IProjectCard {
     public cost: number = 10;
     public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: string = CardName.CRYO_SLEEP;
+    public name: CardName = CardName.CRYO_SLEEP;
     public cardType: CardType = CardType.ACTIVE;
 
     public play(player: Player) {

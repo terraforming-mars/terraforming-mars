@@ -7,7 +7,7 @@ import { SelectOption } from "../../inputs/SelectOption";
 import { CardName } from '../../CardName';
 
 export class Inventrix implements CorporationCard {
-    public name: string = CardName.INVENTRIX;
+    public name: CardName = CardName.INVENTRIX;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public startingMegaCredits: number = 45;
     public initialAction(player: Player, game: Game) {

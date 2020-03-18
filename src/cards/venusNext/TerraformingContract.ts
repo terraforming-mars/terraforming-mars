@@ -8,7 +8,7 @@ import { CardName } from '../../CardName';
 export class TerraformingContract implements IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.EARTH];
-    public name: string = CardName.TERRAFORMING_CONTRACT;
+    public name: CardName = CardName.TERRAFORMING_CONTRACT;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player): boolean {
         return player.terraformRating >= 25 ;

@@ -14,7 +14,7 @@ import { CardName } from '../../CardName';
 export class ForcedPrecipitation implements IActionCard,IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = CardName.FORCED_PRECIPITATION;
+    public name: CardName = CardName.FORCED_PRECIPITATION;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
 

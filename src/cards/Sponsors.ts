@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class Sponsors implements IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.EARTH];
-    public name: string = CardName.SPONSORS;
+    public name: CardName = CardName.SPONSORS;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {

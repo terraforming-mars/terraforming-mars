@@ -10,7 +10,7 @@ export class AdaptedLichen implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.PLANT];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.ADAPTED_LICHEN;
+    public name: CardName = CardName.ADAPTED_LICHEN;
     public play(player: Player) {
       player.setProduction(Resources.PLANTS);
       return undefined;

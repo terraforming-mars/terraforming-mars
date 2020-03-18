@@ -6,7 +6,7 @@ import { Resources } from "../../Resources";
 import { CardName } from '../../CardName';
 
 export class Helion implements CorporationCard {
-    public name: string = CardName.HELION;
+    public name: CardName = CardName.HELION;
     public tags: Array<Tags> = [Tags.SPACE];
     public startingMegaCredits: number = 42;
     public play(player: Player) {

@@ -9,7 +9,7 @@ export class AsteroidMining implements IProjectCard {
     public cost: number = 30;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.ASTEROID_MINING;
+    public name: CardName = CardName.ASTEROID_MINING;
 
     public play(player: Player) {
       player.setProduction(Resources.TITANIUM,2);

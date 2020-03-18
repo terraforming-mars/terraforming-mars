@@ -6,7 +6,7 @@ import { CardName } from '../../CardName';
 
 export class Donation extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];
-    public name: string = CardName.DONATION;
+    public name: CardName = CardName.DONATION;
     public play(player: Player) {     
         player.megaCredits += 21;
         return undefined;

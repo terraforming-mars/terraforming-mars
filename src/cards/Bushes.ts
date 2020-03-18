@@ -11,7 +11,7 @@ export class Bushes implements IProjectCard {
     public cost: number = 10;
     public tags: Array<Tags> = [Tags.PLANT];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.BUSHES;
+    public name: CardName = CardName.BUSHES;
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() >= -10 - (
         2 * player.getRequirementsBonus(game)

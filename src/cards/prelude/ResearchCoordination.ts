@@ -8,7 +8,7 @@ export class ResearchCoordination implements IProjectCard {
     public cost: number = 4;
     public cardType: CardType = CardType.AUTOMATED;
     public tags: Array<Tags> = [Tags.WILDCARD];
-    public name: string = CardName.RESEARCH_COORDINATION;
+    public name: CardName = CardName.RESEARCH_COORDINATION;
 
     public play() {
         return undefined;

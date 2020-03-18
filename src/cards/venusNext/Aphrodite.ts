@@ -6,7 +6,7 @@ import { Resources } from '../../Resources';
 import { CardName } from '../../CardName';
 
 export class Aphrodite implements CorporationCard {
-    public name: string = CardName.APHRODITE;
+    public name: CardName = CardName.APHRODITE;
     public tags: Array<Tags> = [Tags.PLANT,Tags.VENUS];
     public startingMegaCredits: number = 47;
 

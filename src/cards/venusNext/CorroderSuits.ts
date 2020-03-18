@@ -11,7 +11,7 @@ import { CardName } from '../../CardName';
 export class CorroderSuits implements IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = CardName.CORRODER_SUITS;
+    public name: CardName = CardName.CORRODER_SUITS;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {

@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class WavePower implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY];
     public cost: number = 8;
-    public name: string = CardName.WAVE_POWER;
+    public name: CardName = CardName.WAVE_POWER;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
         return game.board.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game);

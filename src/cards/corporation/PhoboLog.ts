@@ -6,7 +6,7 @@ import { CorporationCard } from "./CorporationCard";
 import { CardName } from '../../CardName';
 
 export class PhoboLog implements CorporationCard {
-    public name: string = CardName.PHOBOLOG;
+    public name: CardName = CardName.PHOBOLOG;
     public tags: Array<Tags> = [Tags.SPACE];
     public startingMegaCredits: number = 23;
     public play(player: Player, _game: Game) {

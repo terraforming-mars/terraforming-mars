@@ -12,7 +12,7 @@ import { CardName } from '../CardName';
 export class ImportedNitrogen implements IProjectCard {
     public cost: number = 23;
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public name: string = CardName.IMPORTED_NITROGEN;
+    public name: CardName = CardName.IMPORTED_NITROGEN;
     public cardType: CardType = CardType.EVENT;
 
     private giveResources(player: Player): undefined {

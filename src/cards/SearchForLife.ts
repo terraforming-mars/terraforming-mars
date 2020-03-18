@@ -14,7 +14,7 @@ export class SearchForLife implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.SCIENCE;
-    public name: string = CardName.SEARCH_FOR_LIFE;
+    public name: CardName = CardName.SEARCH_FOR_LIFE;
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() <= 6 + player.getRequirementsBonus(game);
     }

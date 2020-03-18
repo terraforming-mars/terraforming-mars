@@ -13,7 +13,7 @@ export class PermafrostExtraction implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public tags: Array<Tags> = [];
     public cost: number = 8;
-    public name: string = CardName.PERMAFROST_EXTRACTION;
+    public name: CardName = CardName.PERMAFROST_EXTRACTION;
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() >= -8 - (2 * player.getRequirementsBonus(game));
     }

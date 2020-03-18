@@ -8,7 +8,7 @@ import { CardName } from '../../CardName';
 export class MiningQuota implements IProjectCard {
     public cost: number = 5;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.MINING_QUOTA;
+    public name: CardName = CardName.MINING_QUOTA;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player): boolean {

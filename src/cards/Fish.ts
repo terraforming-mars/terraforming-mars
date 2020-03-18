@@ -12,7 +12,7 @@ import { CardName } from '../CardName';
 export class Fish implements IActionCard, IProjectCard {
   public cost: number = 9;
   public tags: Array<Tags> = [Tags.ANIMAL];
-  public name: string = CardName.FISH;
+  public name: CardName = CardName.FISH;
   public resourceType: ResourceType = ResourceType.ANIMAL;
   public cardType: CardType = CardType.ACTIVE;
 

@@ -6,7 +6,7 @@ import { CardName } from '../CardName';
 export class AdaptationTechnology implements IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: string = CardName.ADAPTATION_TECHNOLOGY;
+    public name: CardName = CardName.ADAPTATION_TECHNOLOGY;
     public cardType: CardType = CardType.ACTIVE;
 
     public getRequirementBonus(): number {

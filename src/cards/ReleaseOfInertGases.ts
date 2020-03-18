@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class ReleaseOfInertGases implements IProjectCard {
     public cost: number = 14;
     public tags: Array<Tags> = [];
-    public name: string = CardName.RELEASE_OF_INERT_GASES;
+    public name: CardName = CardName.RELEASE_OF_INERT_GASES;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, _game: Game) {

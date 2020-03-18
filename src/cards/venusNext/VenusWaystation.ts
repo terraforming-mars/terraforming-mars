@@ -8,7 +8,7 @@ import { CardName } from '../../CardName';
 export class VenusWaystation implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.VENUS, Tags.SPACE];
-    public name: string = CardName.VENUS_WAYSTATION;
+    public name: CardName = CardName.VENUS_WAYSTATION;
     public cardType: CardType = CardType.ACTIVE;
 
     public play() {

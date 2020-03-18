@@ -11,7 +11,7 @@ import { CardName } from '../../CardName';
 export class StratosphericBirds implements IActionCard,IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.VENUS, Tags.ANIMAL];
-    public name: string = CardName.STRATOSPHERIC_BIRDS;
+    public name: CardName = CardName.STRATOSPHERIC_BIRDS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.ANIMAL;
     public canPlay(player: Player, game: Game): boolean {

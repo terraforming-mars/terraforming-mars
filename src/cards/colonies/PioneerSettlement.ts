@@ -9,7 +9,7 @@ import { Resources } from '../../Resources';
 export class PioneerSettlement implements IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.PIONEER_SETTLEMENT;
+    public name: CardName = CardName.PIONEER_SETTLEMENT;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {

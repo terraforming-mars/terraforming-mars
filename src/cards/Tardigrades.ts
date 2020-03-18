@@ -10,7 +10,7 @@ export class Tardigrades implements IProjectCard {
     public cost: number = 4;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public tags: Array<Tags> = [Tags.MICROBES];
-    public name: string = CardName.TARDIGRADES;
+    public name: CardName = CardName.TARDIGRADES;
     public cardType: CardType = CardType.ACTIVE;
 
     public getVictoryPoints(player: Player): number {

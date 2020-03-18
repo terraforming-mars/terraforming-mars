@@ -10,7 +10,7 @@ export class DustSeals implements IProjectCard {
     public cost: number = 2;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.DUST_SEALS;
+    public name: CardName = CardName.DUST_SEALS;
     public canPlay(player: Player, game: Game): boolean {
       return game.board.getOceansOnBoard() <= 3 + player.getRequirementsBonus(game);
     }

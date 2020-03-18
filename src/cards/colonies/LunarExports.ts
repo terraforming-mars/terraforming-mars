@@ -10,7 +10,7 @@ import { SelectOption } from "../../inputs/SelectOption";
 export class LunarExports implements IProjectCard {
     public cost: number = 19;
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public name: string = CardName.LUNAR_EXPORTS;
+    public name: CardName = CardName.LUNAR_EXPORTS;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {

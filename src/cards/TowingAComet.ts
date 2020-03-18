@@ -10,7 +10,7 @@ export class TowingAComet implements IProjectCard {
     public cost: number = 23;
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
-    public name: string = CardName.TOWING_A_COMET;
+    public name: CardName = CardName.TOWING_A_COMET;
 
     public play(player: Player, game: Game) {
         game.addOceanInterrupt(player);

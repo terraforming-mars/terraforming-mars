@@ -7,7 +7,7 @@ import { CardName } from '../CardName';
 export class EarthCatapult implements IProjectCard {
   public cost: number = 23;
   public tags: Array<Tags> = [Tags.EARTH];
-  public name: string = CardName.EARTH_CATAPULT;
+  public name: CardName = CardName.EARTH_CATAPULT;
   public cardType: CardType = CardType.ACTIVE;
   public getCardDiscount() {
     return 2;

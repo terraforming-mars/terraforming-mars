@@ -11,7 +11,7 @@ import { CardName } from '../CardName';
 export class LandClaim implements IProjectCard {
     public cost: number = 1;
     public tags: Array<Tags> = [];
-    public name: string = CardName.LAND_CLAIM;
+    public name: CardName = CardName.LAND_CLAIM;
     public cardType: CardType = CardType.EVENT;
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {

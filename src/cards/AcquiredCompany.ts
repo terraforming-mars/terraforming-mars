@@ -8,7 +8,7 @@ import { CardName } from '../CardName';
 export class AcquiredCompany implements IProjectCard {
     public cost: number = 10;
     public tags: Array<Tags> = [Tags.EARTH];
-    public name: string = CardName.ACQUIRED_COMPANY;
+    public name: CardName = CardName.ACQUIRED_COMPANY;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {

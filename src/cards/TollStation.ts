@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class TollStation implements IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.TOLL_STATION;
+    public name: CardName = CardName.TOLL_STATION;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

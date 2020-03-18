@@ -15,7 +15,7 @@ import { AndOptions } from "../../inputs/AndOptions";
 export class AirRaid implements IProjectCard {
     public cost: number = 0;
     public tags: Array<Tags> = [];
-    public name: string = CardName.AIR_RAID;
+    public name: CardName = CardName.AIR_RAID;
     public cardType: CardType = CardType.EVENT;
     public hasRequirements = false;
 

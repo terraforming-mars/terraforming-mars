@@ -11,7 +11,7 @@ export class GeneRepair implements IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.GENE_REPAIR;
+    public name: CardName = CardName.GENE_REPAIR;
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 3;
     }

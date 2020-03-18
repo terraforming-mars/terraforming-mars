@@ -7,7 +7,7 @@ import { CardName } from '../CardName';
 export class AdvancedAlloys implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: string = CardName.ADVANCED_ALLOYS;
+    public name: CardName = CardName.ADVANCED_ALLOYS;
     public cardType: CardType = CardType.ACTIVE;
 
     public play(player: Player) {

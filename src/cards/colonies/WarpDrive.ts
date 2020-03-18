@@ -8,7 +8,7 @@ import { Game } from '../../Game';
 export class WarpDrive implements IProjectCard {
     public cost: number = 14;
     public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: string = CardName.WARP_DRIVE;
+    public name: CardName = CardName.WARP_DRIVE;
     public cardType: CardType = CardType.AUTOMATED;
 
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {

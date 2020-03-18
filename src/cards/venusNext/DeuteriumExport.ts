@@ -12,7 +12,7 @@ import { CardName } from '../../CardName';
 export class DeuteriumExport implements IActionCard,IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.SPACE, Tags.VENUS, Tags.ENERGY];
-    public name: string = CardName.DEUTERIUM_EXPORT;
+    public name: CardName = CardName.DEUTERIUM_EXPORT;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
 

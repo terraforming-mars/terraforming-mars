@@ -8,7 +8,7 @@ import { CardName } from '../../CardName';
 export class WaterToVenus implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.WATER_TO_VENUS;
+    public name: CardName = CardName.WATER_TO_VENUS;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {

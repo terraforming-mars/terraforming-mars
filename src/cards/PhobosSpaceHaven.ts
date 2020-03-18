@@ -12,7 +12,7 @@ import { CardName } from '../CardName';
 export class PhobosSpaceHaven implements IProjectCard {
     public cost: number = 25;
     public tags: Array<Tags> = [Tags.SPACE, Tags.CITY];
-    public name: string = CardName.PHOBOS_SPACE_HAVEN;
+    public name: CardName = CardName.PHOBOS_SPACE_HAVEN;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

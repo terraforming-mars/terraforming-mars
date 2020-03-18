@@ -10,7 +10,7 @@ import { ResourceType } from '../../ResourceType';
 export class EcologyResearch implements IProjectCard {
     public cost: number = 21;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.PLANT, Tags.ANIMAL, Tags.MICROBES];
-    public name: string = CardName.ECOLOGY_RESEARCH;
+    public name: CardName = CardName.ECOLOGY_RESEARCH;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

@@ -9,7 +9,7 @@ import { CardName } from '../../CardName';
 export class SFMemorial implements IProjectCard {
     public cost: number = 7;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.SF_MEMORIAL;
+    public name: CardName = CardName.SF_MEMORIAL;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

@@ -10,7 +10,7 @@ export class TechnologyDemonstration implements IProjectCard {
     public cost: number = 5;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
-    public name: string = CardName.TECHNOLOGY_DEMONSTRATION;
+    public name: CardName = CardName.TECHNOLOGY_DEMONSTRATION;
 
     public play(player: Player, game: Game) {
         for (let i = 0; i < 2; i++) {

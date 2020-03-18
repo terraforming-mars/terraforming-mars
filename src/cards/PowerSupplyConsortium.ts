@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class PowerSupplyConsortium implements IProjectCard {
     public cost: number = 5;
     public tags: Array<Tags> = [Tags.ENERGY];
-    public name: string = CardName.POWER_SUPPLY_CONSORTIUM;
+    public name: CardName = CardName.POWER_SUPPLY_CONSORTIUM;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {

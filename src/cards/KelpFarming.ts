@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class KelpFarming implements IProjectCard {
     public cost: number = 17;
     public tags: Array<Tags> = [Tags.PLANT];
-    public name: string = CardName.KELP_FARMING;
+    public name: CardName = CardName.KELP_FARMING;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
         return game.board.getOceansOnBoard() >= 6 - player.getRequirementsBonus(game);

@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class EquatorialMagnetizer implements IActionCard, IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.EQUATORIAL_MAGNETIZER;
+    public name: CardName = CardName.EQUATORIAL_MAGNETIZER;
     public cardType: CardType = CardType.ACTIVE;
 
     public play() {

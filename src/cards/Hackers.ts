@@ -11,7 +11,7 @@ import { CardName } from '../CardName';
 export class Hackers implements IProjectCard {
     public cost: number = 3;
     public tags: Array<Tags> = [];
-    public name: string = CardName.HACKERS;
+    public name: CardName = CardName.HACKERS;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {

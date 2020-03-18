@@ -8,7 +8,7 @@ import { CardName } from '../../CardName';
 
 export class Biolab extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: string = CardName.BIOLAB;
+    public name: CardName = CardName.BIOLAB;
     public play(player: Player, game: Game) {
         player.setProduction(Resources.PLANTS);
 		for (let i = 0; i < 3; i++) {

@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class LunarBeam implements IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.EARTH, Tags.ENERGY];
-    public name: string = CardName.LUNAR_BEAM;
+    public name: CardName = CardName.LUNAR_BEAM;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {

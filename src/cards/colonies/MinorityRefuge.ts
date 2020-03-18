@@ -10,7 +10,7 @@ import { Resources } from '../../Resources';
 export class MinorityRefuge implements IProjectCard {
     public cost: number = 5;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.MINORITY_REFUGE;
+    public name: CardName = CardName.MINORITY_REFUGE;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

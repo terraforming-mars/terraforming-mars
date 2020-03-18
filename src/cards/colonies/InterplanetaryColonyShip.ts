@@ -8,7 +8,7 @@ import { Game } from '../../Game';
 export class InterplanetaryColonyShip implements IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.SPACE, Tags.EARTH];
-    public name: string = CardName.INTERPLANETARY_COLONY_SHIP;
+    public name: CardName = CardName.INTERPLANETARY_COLONY_SHIP;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {

@@ -9,7 +9,7 @@ import { SelectCard } from '../../inputs/SelectCard';
 import { CardName } from '../../CardName';
 
 export class Celestic implements IActionCard, CorporationCard {
-    public name: string = CardName.CELESTIC;
+    public name: CardName = CardName.CELESTIC;
     public tags: Array<Tags> = [Tags.VENUS];
     public startingMegaCredits: number = 42;
     public resourceType: ResourceType = ResourceType.FLOATER;

@@ -8,7 +8,7 @@ import { IProjectCard } from "../IProjectCard";
 import { CardName } from '../../CardName';
 
 export class CrediCor implements CorporationCard {
-    public name: string = CardName.CREDICOR;
+    public name: CardName = CardName.CREDICOR;
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 57;
     public requirements: undefined;

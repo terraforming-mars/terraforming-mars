@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class ImmigrationShuttles implements IProjectCard {
     public cost: number = 31;
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public name: string = CardName.IMMIGRATION_SHUTTLES;
+    public name: CardName = CardName.IMMIGRATION_SHUTTLES;
     public cardType: CardType = CardType.AUTOMATED;
 
     public getVictoryPoints(_player: Player, game: Game) {

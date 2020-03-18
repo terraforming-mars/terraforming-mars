@@ -13,7 +13,7 @@ import { SelectAmount } from "../../inputs/SelectAmount";
 export class TitanShuttles implements IProjectCard {
     public cost: number = 23;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: string = CardName.TITAN_SHUTTLES;
+    public name: CardName = CardName.TITAN_SHUTTLES;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType = ResourceType.FLOATER;
 

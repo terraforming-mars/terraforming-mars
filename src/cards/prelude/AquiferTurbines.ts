@@ -8,7 +8,7 @@ import { CardName } from '../../CardName';
 
 export class AquiferTurbines extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY];
-    public name: string = CardName.AQUIFER_TURBINES;
+    public name: CardName = CardName.AQUIFER_TURBINES;
     public canPlay(player: Player) {
         return player.canAfford(3);
     }

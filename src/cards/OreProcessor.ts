@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class OreProcessor implements IActionCard, IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.ORE_PROCESSOR;
+    public name: CardName = CardName.ORE_PROCESSOR;
     public cardType: CardType = CardType.ACTIVE;
 
     public play(_player: Player, _game: Game) {

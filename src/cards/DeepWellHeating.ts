@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class DeepWellHeating implements IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
-    public name: string = CardName.DEEP_WELL_HEATING;
+    public name: CardName = CardName.DEEP_WELL_HEATING;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

@@ -8,7 +8,7 @@ import { Resources } from '../../Resources';
 import { CardName } from '../../CardName';
 
 export class SaturnSystems implements CorporationCard {
-    public name: string = CardName.SATURN_SYSTEMS;
+    public name: CardName = CardName.SATURN_SYSTEMS;
     public tags: Array<Tags> = [Tags.JOVIAN];
     public startingMegaCredits: number = 42; 
     public onCardPlayed(_player: Player, game: Game, card: IProjectCard) {

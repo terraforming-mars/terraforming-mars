@@ -11,7 +11,7 @@ export class InvestmentLoan implements IProjectCard {
     public cost: number = 3;
     public tags: Array<Tags> = [Tags.EARTH];
     public cardType: CardType = CardType.EVENT;
-    public name: string = CardName.INVESTMENT_LOAN;
+    public name: CardName = CardName.INVESTMENT_LOAN;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.MEGACREDITS) >= -4;

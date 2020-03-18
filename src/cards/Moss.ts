@@ -11,7 +11,7 @@ export class Moss implements IProjectCard {
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.PLANT];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.MOSS;
+    public name: CardName = CardName.MOSS;
     public canPlay(player: Player, game: Game): boolean {
         return game.board.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game) && player.plants >= 1;
     }

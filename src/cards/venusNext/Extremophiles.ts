@@ -10,7 +10,7 @@ import { CardName } from '../../CardName';
 export class Extremophiles implements IActionCard,IProjectCard {
     public cost: number = 3;
     public tags: Array<Tags> = [Tags.VENUS, Tags.MICROBES];
-    public name: string = CardName.EXTREMOPHILES;
+    public name: CardName = CardName.EXTREMOPHILES;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public canPlay(player: Player): boolean {

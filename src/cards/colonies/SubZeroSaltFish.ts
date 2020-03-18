@@ -10,7 +10,7 @@ import { Resources } from '../../Resources';
 export class SubZeroSaltFish implements IProjectCard {
     public cost: number = 5;
     public tags: Array<Tags> = [Tags.ANIMAL];
-    public name: string = CardName.SUBZERO_SALT_FISH;
+    public name: CardName = CardName.SUBZERO_SALT_FISH;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType = ResourceType.ANIMAL;
 

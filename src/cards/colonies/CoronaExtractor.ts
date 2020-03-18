@@ -8,7 +8,7 @@ import { Resources } from "../../Resources";
 export class CoronaExtractor implements IProjectCard {
     public cost: number = 10;
     public tags: Array<Tags> = [Tags.SPACE, Tags.ENERGY];
-    public name: string = CardName.CORONA_EXTRACTOR;
+    public name: CardName = CardName.CORONA_EXTRACTOR;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player): boolean {

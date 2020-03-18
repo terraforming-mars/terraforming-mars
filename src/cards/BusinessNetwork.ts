@@ -13,7 +13,7 @@ import { CardName } from '../CardName';
 export class BusinessNetwork implements IActionCard, IProjectCard {
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.EARTH];
-    public name: string = CardName.BUSINESS_NETWORK;
+    public name: CardName = CardName.BUSINESS_NETWORK;
     public cardType: CardType = CardType.ACTIVE;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {

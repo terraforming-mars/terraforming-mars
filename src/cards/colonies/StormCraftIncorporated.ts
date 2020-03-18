@@ -4,10 +4,10 @@ import { Tags } from "../Tags";
 import { ResourceType } from '../../ResourceType';
 import {ICard, IActionCard} from '../ICard';
 import { SelectCard } from '../../inputs/SelectCard';
-import { CorporationName } from '../../CorporationName';
+import { CardName } from '../../CardName';
 
 export class StormCraftIncorporated implements IActionCard, CorporationCard {
-    public name: string =  CorporationName.STORMCRAFT_INCORPORATED;
+    public name: CardName =  CardName.STORMCRAFT_INCORPORATED;
     public tags: Array<Tags> = [Tags.JOVIAN];
     public startingMegaCredits: number = 48;
     public resourceType: ResourceType = ResourceType.FLOATER;

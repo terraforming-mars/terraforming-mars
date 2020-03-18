@@ -8,7 +8,7 @@ import { SelectCard } from "../../inputs/SelectCard";
 import { CardName } from '../../CardName';
 
 export class ValleyTrust implements CorporationCard {
-    public name: string = CardName.VALLEY_TRUST;
+    public name: CardName = CardName.VALLEY_TRUST;
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 37;
 

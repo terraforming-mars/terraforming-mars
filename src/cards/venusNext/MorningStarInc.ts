@@ -6,7 +6,7 @@ import { Game } from '../../Game';
 import { CardName } from '../../CardName';
 
 export class MorningStarInc implements CorporationCard {
-    public name: string = CardName.MORNING_STAR_INC;
+    public name: CardName = CardName.MORNING_STAR_INC;
     public tags: Array<Tags> = [Tags.VENUS];
     public startingMegaCredits: number = 50;
 

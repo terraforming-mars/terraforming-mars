@@ -9,7 +9,7 @@ import { CardName } from '../../CardName';
 export class GHGImportFromVenus implements IProjectCard {
     public cost: number = 23;
     public tags: Array<Tags> = [Tags.SPACE, Tags.VENUS];
-    public name: string = CardName.GHG_IMPORT_FROM_VENUS;
+    public name: CardName = CardName.GHG_IMPORT_FROM_VENUS;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {

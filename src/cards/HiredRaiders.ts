@@ -14,7 +14,7 @@ export class HiredRaiders implements IProjectCard {
     public cost: number = 1;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.EVENT;
-    public name: string = CardName.HIRED_RAIDERS;
+    public name: CardName = CardName.HIRED_RAIDERS;
 
     public play(player: Player, game: Game) {
 

@@ -12,7 +12,7 @@ import { CardName } from '../CardName';
 export class NuclearZone implements IProjectCard {
     public cost: number = 10;
     public tags: Array<Tags> = [Tags.EARTH];
-    public name: string = CardName.NUCLEAR_ZONE;
+    public name: CardName = CardName.NUCLEAR_ZONE;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

@@ -5,12 +5,13 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class NitrophilicMoss implements IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.PLANT];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = "";
+    public name: CardName = CardName.NITROPHILIC_MOSS;
     public canPlay(player: Player, game: Game): boolean {
         return game.board.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game) && player.plants >= 2;
     }

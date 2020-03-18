@@ -14,7 +14,7 @@ export class OlympusConference implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.EARTH, Tags.STEEL];
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.SCIENCE;
-    public name: string = CardName.OLYMPUS_CONFERENCE;
+    public name: CardName = CardName.OLYMPUS_CONFERENCE;
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
         const gainAScienceResource = () => {

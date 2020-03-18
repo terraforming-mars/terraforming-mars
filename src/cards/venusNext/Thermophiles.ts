@@ -14,7 +14,7 @@ import { CardName } from '../../CardName';
 export class Thermophiles implements IActionCard,IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.VENUS, Tags.MICROBES];
-    public name: string = CardName.THERMOPHILES;
+    public name: CardName = CardName.THERMOPHILES;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public canPlay(player: Player, game: Game): boolean {

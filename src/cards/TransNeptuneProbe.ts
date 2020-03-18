@@ -7,7 +7,7 @@ import { CardName } from '../CardName';
 export class TransNeptuneProbe implements IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.SPACE];
-    public name: string = CardName.TRANS_NEPTUNE_PROBE;
+    public name: CardName = CardName.TRANS_NEPTUNE_PROBE;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play() {

@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class PhysicsComplex implements IActionCard, IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
-    public name: string = CardName.PHYSICS_COMPLEX;
+    public name: CardName = CardName.PHYSICS_COMPLEX;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.SCIENCE;
 

@@ -14,7 +14,7 @@ import { CardName } from '../CardName';
 export class NoctisCity implements IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public name: string = CardName.NOCTIS_CITY;
+    public name: CardName = CardName.NOCTIS_CITY;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {

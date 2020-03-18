@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class BusinessContacts implements IProjectCard {
     public cost: number = 7;
     public tags: Array<Tags> = [Tags.EARTH];
-    public name: string = CardName.BUSINESS_CONTACTS;
+    public name: CardName = CardName.BUSINESS_CONTACTS;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {

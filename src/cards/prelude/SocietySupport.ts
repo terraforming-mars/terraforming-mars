@@ -7,7 +7,7 @@ import { CardName } from '../../CardName';
 
 export class SocietySupport extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];
-    public name: string = CardName.SOCIETY_SUPPORT;
+    public name: CardName = CardName.SOCIETY_SUPPORT;
     public play(player: Player) {     
         player.setProduction(Resources.MEGACREDITS,-1);
         player.setProduction(Resources.PLANTS);

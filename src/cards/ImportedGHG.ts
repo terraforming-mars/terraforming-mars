@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class ImportedGHG implements IProjectCard {
     public cost: number = 7;
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public name: string = CardName.IMPORTED_GHG;
+    public name: CardName = CardName.IMPORTED_GHG;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, _game: Game) {

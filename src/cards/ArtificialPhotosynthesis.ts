@@ -11,7 +11,7 @@ export class ArtificialPhotosynthesis implements IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.ARTIFICIAL_PHOTOSYNTHESIS;
+    public name: CardName = CardName.ARTIFICIAL_PHOTOSYNTHESIS;
 
     public play(player: Player) {
       return new OrOptions(

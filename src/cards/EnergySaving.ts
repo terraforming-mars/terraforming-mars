@@ -11,7 +11,7 @@ export class EnergySaving implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public cost: number = 15;
     public tags: Array<Tags> = [Tags.ENERGY];
-    public name: string = CardName.ENERGY_SAVING;
+    public name: CardName = CardName.ENERGY_SAVING;
 
     public play(player: Player, game: Game) {
       player.setProduction(Resources.ENERGY,game.getCitiesInPlay());

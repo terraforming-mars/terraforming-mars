@@ -15,7 +15,7 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.MICROBES];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = CardName.EXTREME_COLD_FUNGUS;
+    public name: CardName = CardName.EXTREME_COLD_FUNGUS;
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() <= -10 + (
         2 * player.getRequirementsBonus(game)

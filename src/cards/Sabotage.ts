@@ -13,7 +13,7 @@ export class Sabotage implements IProjectCard {
     public cost: number = 1;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.EVENT;
-    public name: string = CardName.SABOTAGE;
+    public name: CardName = CardName.SABOTAGE;
 
     public play(player: Player, game: Game) {
         if (game.getPlayers().length == 1)  return undefined;

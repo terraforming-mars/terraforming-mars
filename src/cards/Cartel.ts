@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class Cartel implements IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.EARTH];
-    public name: string = CardName.CARTEL;
+    public name: CardName = CardName.CARTEL;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {

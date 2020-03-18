@@ -14,7 +14,7 @@ export class Livestock implements IActionCard, IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.ANIMAL;
     public tags: Array<Tags> = [Tags.ANIMAL];
-    public name: string = CardName.LIVESTOCK;
+    public name: CardName = CardName.LIVESTOCK;
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 9 - player.getRequirementsBonus(game) && player.getProduction(Resources.PLANTS) >= 1;
     }

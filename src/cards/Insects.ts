@@ -11,7 +11,7 @@ export class Insects implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.MICROBES];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.INSECTS;
+    public name: CardName = CardName.INSECTS;
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game);
     }

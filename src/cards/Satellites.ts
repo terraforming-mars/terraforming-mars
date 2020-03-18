@@ -10,7 +10,7 @@ export class Satellites implements IProjectCard {
     public cost: number = 10;
     public cardType: CardType = CardType.AUTOMATED;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.SATELLITES;
+    public name: CardName = CardName.SATELLITES;
 
     public play(player: Player) {
         player.setProduction(Resources.MEGACREDITS, 1 + player.getTagCount(Tags.SPACE));

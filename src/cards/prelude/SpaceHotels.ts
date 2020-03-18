@@ -9,7 +9,7 @@ import { CardName } from '../../CardName';
 export class SpaceHotels implements IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.SPACE, Tags.EARTH];
-    public name: string = CardName.SPACE_HOTELS;
+    public name: CardName = CardName.SPACE_HOTELS;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player): boolean {
        return player.getTagCount(Tags.EARTH) >= 2; 

@@ -11,7 +11,7 @@ import { CardName } from '../CardName';
 export class ViralEnhancers implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.MICROBES];
-    public name: string = CardName.VIRAL_ENHANCERS;
+    public name: CardName = CardName.VIRAL_ENHANCERS;
     public cardType: CardType = CardType.ACTIVE;
 
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {

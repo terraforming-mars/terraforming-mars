@@ -16,7 +16,7 @@ export class EcologicalZone implements IProjectCard {
   public resourceType: ResourceType = ResourceType.ANIMAL;
   public tags: Array<Tags> = [Tags.ANIMAL, Tags.PLANT];
   public cardType: CardType = CardType.ACTIVE;
-  public name: string = CardName.ECOLOGICAL_ZONE;
+  public name: CardName = CardName.ECOLOGICAL_ZONE;
   private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
     return game.board.getAvailableSpacesOnLand(player)
         .filter(

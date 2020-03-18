@@ -7,7 +7,7 @@ import { CardName } from '../../CardName';
 
 export class AcquiredSpaceAgency extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];
-    public name: string = CardName.ACQUIRED_SPACE_AGENCY;
+    public name: CardName = CardName.ACQUIRED_SPACE_AGENCY;
     public play(player: Player, game: Game) {
         for (let foundCard of game.drawCardsByTag(Tags.SPACE, 2)) {
             player.cardsInHand.push(foundCard);

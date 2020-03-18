@@ -12,7 +12,7 @@ export class GanymedeColony implements IProjectCard {
     public cost: number = 20;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE, Tags.CITY];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.GANYMEDE_COLONY;
+    public name: CardName = CardName.GANYMEDE_COLONY;
 
     public getVictoryPoints(player: Player) {
         return player.getTagCount(Tags.JOVIAN);

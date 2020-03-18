@@ -11,7 +11,7 @@ import { CardName } from '../CardName';
 export class AerobrakedAmmoniaAsteroid implements IProjectCard {
     public cost: number = 26;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.AEROBRAKED_AMMONIA_ASTEROID;
+    public name: CardName = CardName.AEROBRAKED_AMMONIA_ASTEROID;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player) {

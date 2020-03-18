@@ -7,7 +7,7 @@ import { IProjectCard } from "../IProjectCard";
 import { CardName } from '../../CardName';
 
 export class Teractor implements CorporationCard {
-    public name: string = CardName.TERACTOR;
+    public name: CardName = CardName.TERACTOR;
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 60;
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {

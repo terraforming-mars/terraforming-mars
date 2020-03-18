@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class MartianRails implements IActionCard, IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.MARTIAN_RAILS;
+    public name: CardName = CardName.MARTIAN_RAILS;
     public cardType: CardType = CardType.ACTIVE;
 
     public play(_player: Player, _game: Game) {

@@ -11,7 +11,7 @@ import { CardName } from '../CardName';
 export class Ants implements IActionCard, IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.MICROBES];
-    public name: string = CardName.ANTS;
+    public name: CardName = CardName.ANTS;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public cardType: CardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {

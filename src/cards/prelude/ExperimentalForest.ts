@@ -9,7 +9,7 @@ import { CardName } from '../../CardName';
 
 export class ExperimentalForest extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT];
-    public name: string = CardName.EXPERIMENTAL_FOREST
+    public name: CardName = CardName.EXPERIMENTAL_FOREST
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space for greenery tile", game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
 	        for (let foundCard of game.drawCardsByTag(Tags.PLANT, 2)) {

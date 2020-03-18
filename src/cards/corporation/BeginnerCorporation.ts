@@ -8,7 +8,7 @@ import { CardName } from '../../CardName';
 export class BeginnerCorporation implements CorporationCard {
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 42;
-    public name: string = CardName.BEGINNER_CORPORATION;
+    public name: CardName = CardName.BEGINNER_CORPORATION;
     public play(player: Player, game: Game) {
         for (let i = 0; i < 10; i++) { 
             player.cardsInHand.push(game.dealer.dealCard());

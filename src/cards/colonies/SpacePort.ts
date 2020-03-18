@@ -11,7 +11,7 @@ import { ISpace } from '../../ISpace';
 export class SpacePort implements IProjectCard {
     public cost: number = 22;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public name: string = CardName.SPACE_PORT;
+    public name: CardName = CardName.SPACE_PORT;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {

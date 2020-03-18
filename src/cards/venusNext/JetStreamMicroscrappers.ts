@@ -13,7 +13,7 @@ import { CardName } from '../../CardName';
 export class JetStreamMicroscrappers implements IActionCard,IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = CardName.JET_STREAM_MICROSCRAPPERS;
+    public name: CardName = CardName.JET_STREAM_MICROSCRAPPERS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
 

@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class DevelopmentCenter implements IActionCard, IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
-    public name: string = CardName.DEVELOPMENT_CENTER;
+    public name: CardName = CardName.DEVELOPMENT_CENTER;
     public cardType: CardType = CardType.ACTIVE;
 
     public play() {

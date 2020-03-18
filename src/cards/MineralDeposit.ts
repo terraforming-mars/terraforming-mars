@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class MineralDeposit implements IProjectCard {
     public cost: number = 5;
     public tags: Array<Tags> = [];
-    public name: string = CardName.MINERAL_DEPOSIT;
+    public name: CardName = CardName.MINERAL_DEPOSIT;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, _game: Game) {

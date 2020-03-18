@@ -1,16 +1,16 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { CorporationName } from '../../CorporationName';
 import { Game } from '../../Game';
 import { SelectOption } from '../../inputs/SelectOption';
 import { OrOptions } from '../../inputs/OrOptions';
 import { IProjectCard } from '../IProjectCard';
 import { Resources } from '../../Resources';
 import { CardType } from '../CardType';
+import { CardName } from '../../CardName';
 
 export class Aridor implements CorporationCard {
-    public name: string =  CorporationName.ARIDOR;
+    public name: CardName =  CardName.ARIDOR;
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 40;
     public allTags = new Set();

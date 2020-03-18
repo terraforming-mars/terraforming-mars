@@ -11,7 +11,7 @@ export class MicroMills implements IProjectCard {
     public cost: number = 3;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.MICRO_MILLS;
+    public name: CardName = CardName.MICRO_MILLS;
 
     public play(player: Player, _game: Game) {
         player.setProduction(Resources.HEAT);

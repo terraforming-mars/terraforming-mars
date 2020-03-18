@@ -11,7 +11,7 @@ import { CardName } from '../../CardName';
 export class LunaMetropolis implements IProjectCard {
     public cost: number = 21;
     public tags: Array<Tags> = [Tags.CITY, Tags.SPACE, Tags.EARTH];
-    public name: string = CardName.LUNA_METROPOLIS;
+    public name: CardName = CardName.LUNA_METROPOLIS;
     public cardType: CardType = CardType.AUTOMATED;
     public play(player: Player, game: Game) {
         player.setProduction(Resources.MEGACREDITS, player.getTagCount(Tags.EARTH) + 1);

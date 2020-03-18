@@ -7,7 +7,7 @@ import { CardName } from '../../CardName';
 export class LuxuryFoods implements IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [];
-    public name: string = CardName.LUXURY_FOODS;
+    public name: CardName = CardName.LUXURY_FOODS;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player): boolean {

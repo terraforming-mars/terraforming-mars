@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class PowerPlant implements IProjectCard {
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
-    public name: string = CardName.POWER_PLANT;
+    public name: CardName = CardName.POWER_PLANT;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {

@@ -14,7 +14,7 @@ import { SelectOption } from '../inputs/SelectOption';
 export class Virus implements IProjectCard {
     public cost: number = 1;
     public tags: Array<Tags> = [Tags.MICROBES];
-    public name: string = CardName.VIRUS;
+    public name: CardName = CardName.VIRUS;
     public cardType: CardType = CardType.EVENT;
 
     private getPossibleTargetCards(player: Player, game: Game): Array<IProjectCard> {

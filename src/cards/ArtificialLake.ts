@@ -12,7 +12,7 @@ import { CardName } from '../CardName';
 export class ArtificialLake implements IProjectCard {
     public cost: number = 15;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.ARTIFICIAL_LAKE;
+    public name: CardName = CardName.ARTIFICIAL_LAKE;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() >= -6 - (

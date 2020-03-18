@@ -12,7 +12,7 @@ export class Decomposers implements IProjectCard {
     public resourceType: ResourceType = ResourceType.MICROBE;
     public tags: Array<Tags> = [Tags.MICROBES];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = CardName.DECOMPOSERS;
+    public name: CardName = CardName.DECOMPOSERS;
     public canPlay(player: Player, game: Game): boolean {
       return game.getOxygenLevel() >= 3 - player.getRequirementsBonus(game);
     }

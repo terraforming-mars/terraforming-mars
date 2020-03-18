@@ -12,7 +12,7 @@ import { SelectTradeColony } from '../../interrupts/SelectTradeColony';
 export class TitanFloatingLaunchPad implements IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [Tags.JOVIAN];
-    public name: string = CardName.TITAN_FLOATER_LAUNCHPAD;
+    public name: CardName = CardName.TITAN_FLOATER_LAUNCHPAD;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType = ResourceType.FLOATER;
 

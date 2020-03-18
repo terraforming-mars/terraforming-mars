@@ -9,7 +9,7 @@ import { SelectAmount } from "../inputs/SelectAmount";
 import { CardName } from '../CardName';
 
 export class PowerInfrastructure implements IActionCard, IProjectCard {
-    public name: string = CardName.POWER_INFRASTRUCTURE;
+    public name: CardName = CardName.POWER_INFRASTRUCTURE;
     public cardType: CardType = CardType.ACTIVE;
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];

@@ -11,7 +11,7 @@ export class RadSuits implements IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.RAD_SUITS;
+    public name: CardName = CardName.RAD_SUITS;
     public canPlay(_player: Player, game: Game): boolean {
         return game.getCitiesInPlay() >= 2;
     }

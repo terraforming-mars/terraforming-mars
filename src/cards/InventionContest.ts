@@ -11,7 +11,7 @@ export class InventionContest implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public cost: number = 2;
     public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: string = CardName.INVENTION_CONTEST;
+    public name: CardName = CardName.INVENTION_CONTEST;
 
     public play(player: Player, game: Game) {
         const cardsDrawn: Array<IProjectCard> = [

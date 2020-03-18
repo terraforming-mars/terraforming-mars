@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class GiantSpaceMirror implements IProjectCard {
     public cost: number = 17;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.SPACE];
-    public name: string = CardName.GIANT_SPACE_MIRROR;
+    public name: CardName = CardName.GIANT_SPACE_MIRROR;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {

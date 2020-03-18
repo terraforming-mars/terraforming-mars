@@ -12,7 +12,7 @@ import { CardName } from '../../CardName';
 export class Gyropolis implements IProjectCard {
     public cost: number = 20;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public name: string = CardName.GYROPOLIS;
+    public name: CardName = CardName.GYROPOLIS;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {

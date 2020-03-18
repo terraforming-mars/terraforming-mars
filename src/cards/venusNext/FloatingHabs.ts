@@ -11,7 +11,7 @@ import { CardName } from '../../CardName';
 export class FloatingHabs implements IActionCard,IProjectCard {
     public cost: number = 5;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = CardName.FLOATING_HABS;
+    public name: CardName = CardName.FLOATING_HABS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
     public canPlay(player: Player): boolean {

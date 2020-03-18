@@ -12,7 +12,7 @@ import { CardName } from '../CardName';
 export class InventorsGuild implements IActionCard, IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: string = CardName.INVENTORS_GUILD;
+    public name: CardName = CardName.INVENTORS_GUILD;
     public cardType: CardType = CardType.ACTIVE;
 
     public play(_player: Player, _game: Game) {

@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class RoverConstruction implements IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.ROVER_CONSTRUCTION;
+    public name: CardName = CardName.ROVER_CONSTRUCTION;
     public cardType: CardType = CardType.ACTIVE;
 
     public onTilePlaced(player: Player, space: ISpace) {

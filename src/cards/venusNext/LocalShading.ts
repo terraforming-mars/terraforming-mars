@@ -12,7 +12,7 @@ import { CardName } from '../../CardName';
 export class LocalShading implements IActionCard,IProjectCard {
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = CardName.LOCAL_SHADING;
+    public name: CardName = CardName.LOCAL_SHADING;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
 

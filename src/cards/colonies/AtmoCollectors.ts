@@ -11,7 +11,7 @@ import { SelectOption } from "../../inputs/SelectOption";
 export class AtmoCollectors implements IProjectCard {
     public cost: number = 15;
     public tags: Array<Tags> = [];
-    public name: string = CardName.ATMO_COLLECTORS;
+    public name: CardName = CardName.ATMO_COLLECTORS;
     public cardType: CardType = CardType.ACTIVE;
 
     public canAct(): boolean {

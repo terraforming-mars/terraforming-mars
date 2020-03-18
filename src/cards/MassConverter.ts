@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class MassConverter implements IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.ENERGY];
-    public name: string = CardName.MASS_CONVERTER;
+    public name: CardName = CardName.MASS_CONVERTER;
     public cardType: CardType = CardType.ACTIVE;
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 5;

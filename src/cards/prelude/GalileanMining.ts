@@ -7,7 +7,7 @@ import { CardName } from '../../CardName';
 
 export class GalileanMining extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN];
-    public name: string = CardName.GALILEAN_MINING;
+    public name: CardName = CardName.GALILEAN_MINING;
     public canPlay(player: Player) {
         return player.canAfford(5);
     }

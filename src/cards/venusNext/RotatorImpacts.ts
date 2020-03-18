@@ -14,7 +14,7 @@ import { CardName } from '../../CardName';
 export class RotatorImpacts implements IActionCard,IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.ROTATOR_IMPACTS;
+    public name: CardName = CardName.ROTATOR_IMPACTS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.ASTEROID;
     public canPlay(player: Player, game: Game): boolean {

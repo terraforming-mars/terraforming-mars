@@ -11,7 +11,7 @@ export class Shuttles implements IProjectCard {
     public cost: number = 10;
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = CardName.SHUTTLES;
+    public name: CardName = CardName.SHUTTLES;
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 5 - player.getRequirementsBonus(game) && player.getProduction(Resources.ENERGY) >= 1;
     }

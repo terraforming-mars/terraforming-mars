@@ -7,7 +7,7 @@ import { CardName } from '../../CardName';
 
 export class HugeAsteroid extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];
-    public name: string = CardName.HUGE_ASTEROID;
+    public name: CardName = CardName.HUGE_ASTEROID;
     public canPlay(player: Player) {
         return player.canAfford(5);
     }

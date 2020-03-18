@@ -10,7 +10,7 @@ export class OptimalAerobraking implements IProjectCard {
     public cost: number = 7;
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = CardName.OPTIMAL_AEROBRAKING;
+    public name: CardName = CardName.OPTIMAL_AEROBRAKING;
 
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
         if (card.cardType === CardType.EVENT && card.tags.indexOf(Tags.SPACE) !== -1) {

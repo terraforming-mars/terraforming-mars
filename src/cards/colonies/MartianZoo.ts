@@ -9,7 +9,7 @@ import { Game } from '../../Game';
 export class MartianZoo implements IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.ANIMAL, Tags.STEEL];
-    public name: string = CardName.MARTIAN_ZOO;
+    public name: CardName = CardName.MARTIAN_ZOO;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType = ResourceType.ANIMAL;
 

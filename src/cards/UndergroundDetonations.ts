@@ -12,7 +12,7 @@ import { CardName } from '../CardName';
 export class UndergroundDetonations implements IActionCard, IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.UNDERGROUND_DETONATIONS;
+    public name: CardName = CardName.UNDERGROUND_DETONATIONS;
     public cardType: CardType = CardType.ACTIVE;
 
     public canAct(player: Player): boolean {

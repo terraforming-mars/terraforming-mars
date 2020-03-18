@@ -14,7 +14,7 @@ export class NaturalPreserve implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.NATURAL_PRESERVE;
+    public name: CardName = CardName.NATURAL_PRESERVE;
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.board.getAvailableSpacesOnLand(player)
                 .filter((space) => game.board.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined).length === 0);

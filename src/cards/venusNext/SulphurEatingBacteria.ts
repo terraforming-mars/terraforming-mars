@@ -13,7 +13,7 @@ import { CardName } from '../../CardName';
 export class SulphurEatingBacteria implements IActionCard,IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.VENUS, Tags.MICROBES];
-    public name: string = CardName.SULPHUR_EATING_BACTERIA;
+    public name: CardName = CardName.SULPHUR_EATING_BACTERIA;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public canPlay(player: Player, game: Game): boolean {

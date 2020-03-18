@@ -8,7 +8,7 @@ import { CardName } from '../../CardName';
 export class GiantSolarShade implements IProjectCard {
     public cost: number = 27;
     public tags: Array<Tags> = [Tags.SPACE, Tags.VENUS];
-    public name: string = CardName.GIANT_SOLAR_SHADE;
+    public name: CardName = CardName.GIANT_SOLAR_SHADE;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

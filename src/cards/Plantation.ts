@@ -12,7 +12,7 @@ export class Plantation implements IProjectCard {
     public cost: number = 15;
     public cardType: CardType = CardType.AUTOMATED;
     public tags: Array<Tags> = [Tags.PLANT];
-    public name: string = CardName.PLANTATION;
+    public name: CardName = CardName.PLANTATION;
     public canPlay(player: Player, game: Game): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 2 && game.board.getAvailableSpacesOnLand(player).length > 0;
     }

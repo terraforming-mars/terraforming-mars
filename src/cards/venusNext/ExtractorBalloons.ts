@@ -12,7 +12,7 @@ import { CardName } from '../../CardName';
 export class ExtractorBalloons implements IActionCard,IProjectCard {
     public cost: number = 21;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = CardName.EXTRACTOR_BALLOONS;
+    public name: CardName = CardName.EXTRACTOR_BALLOONS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
 

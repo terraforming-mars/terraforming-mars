@@ -13,7 +13,7 @@ import { CardName } from '../../CardName';
 export class AerialMappers implements IActionCard,IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = CardName.AERIAL_MAPPERS;
+    public name: CardName = CardName.AERIAL_MAPPERS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
 

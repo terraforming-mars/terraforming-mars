@@ -9,7 +9,7 @@ export class BribedCommitte implements IProjectCard {
     public cost: number = 7;
     public tags: Array<Tags> = [Tags.EARTH];
     public cardType: CardType = CardType.EVENT;
-    public name: string = CardName.BRIBED_COMMITTEE;
+    public name: CardName = CardName.BRIBED_COMMITTEE;
 
     public play(player: Player) {
       player.terraformRating += 2;

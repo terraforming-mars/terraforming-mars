@@ -271,7 +271,6 @@ export enum CardName {
     VIRUS = "Virus",
     WARP_DRIVE = "Warp Drive",
     WATER_IMPORT_FROM_EUROPA = "Water Import From Europa",
-
     AERIAL_MAPPERS = "Aerial Mappers",
     AEROSPORT_TOURNAMENT = "Aerosport Tournament",
     AIR_SCRAPPING_EXPEDITION = "Air-Scrapping Expedition",
@@ -368,5 +367,27 @@ export enum CardName {
     SUPPLY_DROP = "Supply Drop",
     UNMI_CONTRACTOR = "UNMI Contractor",
     VALLEY_TRUST = "Valley Trust",
-    VITOR = "Vitor"
+    VITOR = "Vitor",
+    ARIDOR = "Aridor",
+    ARKLIGHT = "Arklight",
+    POSEIDON = "Poseidon",
+    STORMCRAFT_INCORPORATED = "Stormcraft Incorporated",
+    ARCADIAN_COMMUNITIES = "Arcadian Communities",
+    INDUSTRIAL_CENTER = "Industrial Center",
+    FACTORUM = "Factorum",
+    LAKEFRONT_RESORTS = "Lakefront Resorts",
+    TERRALABS_RESEARCH = "Terralabs Research",
+    MONS_INSURANCE = "Mons Insurance",
+    SPLICE = "Splice",
+    PHILARES = "Philares",
+    PRISTAR = "Pristar",
+    RECYCLON = "Recyclon",
+    UTOPIA_INVEST = "Utopia Invest",
+    MANUTECH = "Manutech",
+    SMALL_ASTEROID = "Small Asteroid",
+    SELF_REPLICATING_ROBOTS = "Self-replicating Robots",
+    SNOW_ALGAE = "Snow Algae",
+    PENGUINS = "Penguins",
+    POLYPHEMOS = "Polyphemos"
+
 }

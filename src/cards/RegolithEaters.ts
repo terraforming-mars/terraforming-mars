@@ -13,7 +13,7 @@ import { CardName } from '../CardName';
 export class RegolithEaters implements IActionCard, IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.MICROBES];
-    public name: string = CardName.REGOLITH_EATERS;
+    public name: CardName = CardName.REGOLITH_EATERS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.MICROBE;
 

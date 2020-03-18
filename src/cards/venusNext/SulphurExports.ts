@@ -9,7 +9,7 @@ import { CardName } from '../../CardName';
 export class SulphurExports implements IProjectCard {
     public cost: number = 21;
     public tags: Array<Tags> = [Tags.VENUS, Tags.SPACE];
-    public name: string = CardName.SULPHUR_EXPORTS;
+    public name: CardName = CardName.SULPHUR_EXPORTS;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

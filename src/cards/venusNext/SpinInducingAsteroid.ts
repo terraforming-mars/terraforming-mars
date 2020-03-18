@@ -8,7 +8,7 @@ import { CardName } from '../../CardName';
 export class SpinInducingAsteroid implements IProjectCard {
     public cost: number = 16;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.SPIN_INDUCING_ASTEROID;
+    public name: CardName = CardName.SPIN_INDUCING_ASTEROID;
     public cardType: CardType = CardType.EVENT;
     public canPlay(player: Player, game: Game): boolean {
         return game.getVenusScaleLevel() - (2 * player.getRequirementsBonus(game)) <= 10;

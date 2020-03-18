@@ -12,7 +12,7 @@ import { CardName } from '../../CardName';
 export class FreyjaBiodomes implements IProjectCard {
     public cost: number = 14;
     public tags: Array<Tags> = [Tags.PLANT, Tags.VENUS];
-    public name: string = CardName.FREYJA_BIODOMES;
+    public name: CardName = CardName.FREYJA_BIODOMES;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
         return player.getProduction(Resources.ENERGY) >= 1 && game.getVenusScaleLevel() >= 10 - (2 * player.getRequirementsBonus(game, true));

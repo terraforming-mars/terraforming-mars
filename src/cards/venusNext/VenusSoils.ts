@@ -13,7 +13,7 @@ import { CardName } from '../../CardName';
 export class VenusSoils implements IProjectCard {
     public cost: number = 20;
     public tags: Array<Tags> = [Tags.VENUS, Tags.PLANT];
-    public name: string = CardName.VENUS_SOILS;
+    public name: CardName = CardName.VENUS_SOILS;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

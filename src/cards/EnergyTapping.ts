@@ -11,7 +11,7 @@ import { CardName } from '../CardName';
 export class EnergyTapping implements IProjectCard {
   public cost: number = 3;
   public tags: Array<Tags> = [Tags.ENERGY];
-  public name: string = CardName.ENERGY_TAPPING;
+  public name: CardName = CardName.ENERGY_TAPPING;
   public cardType: CardType = CardType.AUTOMATED;
   public hasRequirements = false;
   public canPlay(_player: Player, game: Game): boolean {

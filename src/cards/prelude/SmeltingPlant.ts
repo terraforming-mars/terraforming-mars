@@ -7,7 +7,7 @@ import { CardName } from '../../CardName';
 
 export class SmeltingPlant extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.SMELTING_PLANT;
+    public name: CardName = CardName.SMELTING_PLANT;
     public play(player: Player, game: Game) {     
         player.steel += 5;
         return game.increaseOxygenLevel(player, 2);

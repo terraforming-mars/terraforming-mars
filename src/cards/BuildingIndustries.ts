@@ -10,7 +10,7 @@ export class BuildingIndustries implements IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.BUILDING_INDUSTRIES;
+    public name: CardName = CardName.BUILDING_INDUSTRIES;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {
       return player.getProduction(Resources.ENERGY) >= 1;

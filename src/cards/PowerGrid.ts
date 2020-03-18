@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class PowerGrid implements IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [Tags.ENERGY];
-    public name: string = CardName.POWER_GRID;
+    public name: CardName = CardName.POWER_GRID;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {

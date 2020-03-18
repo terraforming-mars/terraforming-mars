@@ -8,7 +8,7 @@ import { CardName } from '../../CardName';
 export class IoSulphurResearch implements IProjectCard {
     public cost: number = 17;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.JOVIAN];
-    public name: string = CardName.IO_SULPHUR_RESEARCH;
+    public name: CardName = CardName.IO_SULPHUR_RESEARCH;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

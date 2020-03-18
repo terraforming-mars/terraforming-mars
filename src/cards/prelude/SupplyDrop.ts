@@ -6,7 +6,7 @@ import { CardName } from '../../CardName';
 
 export class SupplyDrop extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY];
-    public name: string = CardName.SUPPLY_DROP;
+    public name: CardName = CardName.SUPPLY_DROP;
     public play(player: Player) {
         player.titanium +=3;
         player.steel +=8;

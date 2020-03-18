@@ -8,7 +8,7 @@ import { Resources } from '../../Resources';
 import { CardName } from '../../CardName';
 
 export class CheungShingMARS implements CorporationCard {
-    public name: string = CardName.CHEUNG_SHING_MARS;
+    public name: CardName = CardName.CHEUNG_SHING_MARS;
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 44;
 

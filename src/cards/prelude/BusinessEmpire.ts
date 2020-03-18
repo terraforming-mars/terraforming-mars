@@ -7,7 +7,7 @@ import { CardName } from '../../CardName';
 
 export class BusinessEmpire extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
-    public name: string = CardName.BUSINESS_EMPIRE;
+    public name: CardName = CardName.BUSINESS_EMPIRE;
     public canPlay(player: Player) {
         return player.canAfford(6);
     }

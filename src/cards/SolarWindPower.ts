@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class SolarWindPower implements IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.SPACE, Tags.ENERGY];
-    public name: string = CardName.SOLAR_WIND_POWER;
+    public name: CardName = CardName.SOLAR_WIND_POWER;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {

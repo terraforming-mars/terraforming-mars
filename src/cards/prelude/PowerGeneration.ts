@@ -7,7 +7,7 @@ import { CardName } from '../../CardName';
 
 export class PowerGeneration extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY];
-    public name: string = CardName.POWER_GENERATION;
+    public name: CardName = CardName.POWER_GENERATION;
     public play(player: Player) {     
         player.setProduction(Resources.ENERGY,3);
         return undefined;

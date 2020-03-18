@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class ArchaeBacteria implements IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.MICROBES];
-    public name: string = CardName.ARCHAEBACTERIA;
+    public name: CardName = CardName.ARCHAEBACTERIA;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() <= -18 + (

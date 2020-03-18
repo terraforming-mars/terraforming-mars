@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class CallistoPenalMines implements IProjectCard {
     public cost: number = 24;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: string = CardName.CALLISTO_PENAL_MINES;
+    public name: CardName = CardName.CALLISTO_PENAL_MINES;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {

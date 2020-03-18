@@ -10,7 +10,7 @@ export class RadChemFactory implements IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.RAD_CHEM_FACTORY;
+    public name: CardName = CardName.RAD_CHEM_FACTORY;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.ENERGY) >= 1;

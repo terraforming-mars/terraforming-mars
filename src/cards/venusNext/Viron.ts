@@ -8,7 +8,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import { CardName } from '../../CardName';
 
 export class Viron implements ICard, CorporationCard {
-    public name: string = CardName.VIRON;
+    public name: CardName = CardName.VIRON;
     public tags: Array<Tags> = [Tags.MICROBES];
     public startingMegaCredits: number = 48;
 

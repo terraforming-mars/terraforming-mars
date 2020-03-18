@@ -7,7 +7,7 @@ import { CardName } from '../../CardName';
 
 export class NitrogenDelivery extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [];
-    public name: string = CardName.NITROGEN_SHIPMENT;
+    public name: CardName = CardName.NITROGEN_SHIPMENT;
     public play(player: Player) {     
         player.megaCredits += 5;
         player.terraformRating++;

@@ -9,7 +9,7 @@ import { Resources } from "../../Resources";
 import { CardName } from '../../CardName';
 
 export class RobinsonIndustries implements IActionCard, CorporationCard {
-    public name: string = CardName.ROBINSON_INDUSTRIES;
+    public name: CardName = CardName.ROBINSON_INDUSTRIES;
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 47;
     public play() {

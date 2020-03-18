@@ -34,7 +34,7 @@ export class RoboticWorkforce implements IProjectCard {
             CardName.MOHOLE_EXCAVATION,
             CardName.POLAR_INDUSTRIES,
             CardName.SELF_SUFFICIENT_SETTLEMENT,
-            CardName.CABONATE_PROCESSING,
+            CardName.CARBONATE_PROCESSING,
             CardName.COMMERCIAL_DISTRICT,
             CardName.CORPORATE_STRONGHOLD,
             CardName.CUPOLA_CITY,

@@ -303,17 +303,17 @@ export class Player {
 
     public getAllTags(): Array<ITagCount> {
       let tags: Array<ITagCount> = [];
-      tags.push({tag : Tags.CITY, count : this.getTagCount(Tags.CITY)} as ITagCount);
-      tags.push({tag : Tags.EARTH, count : this.getTagCount(Tags.EARTH)} as ITagCount);
-      tags.push({tag : Tags.ENERGY, count : this.getTagCount(Tags.ENERGY)} as ITagCount);
-      tags.push({tag : Tags.JOVIAN, count : this.getTagCount(Tags.JOVIAN)} as ITagCount);
-      tags.push({tag : Tags.MICROBES, count : this.getTagCount(Tags.MICROBES)} as ITagCount);
-      tags.push({tag : Tags.PLANT, count : this.getTagCount(Tags.PLANT)} as ITagCount);
-      tags.push({tag : Tags.SCIENCE, count : this.getTagCount(Tags.SCIENCE)} as ITagCount);
-      tags.push({tag : Tags.SPACE, count : this.getTagCount(Tags.SPACE)} as ITagCount);
-      tags.push({tag : Tags.STEEL, count : this.getTagCount(Tags.STEEL)} as ITagCount);
-      tags.push({tag : Tags.VENUS, count : this.getTagCount(Tags.VENUS)} as ITagCount);
-      tags.push({tag : Tags.WILDCARD, count : this.getTagCount(Tags.WILDCARD)} as ITagCount);
+      tags.push({tag : Tags.CITY, count : this.getTagCount(Tags.CITY, false, false)} as ITagCount);
+      tags.push({tag : Tags.EARTH, count : this.getTagCount(Tags.EARTH, false, false)} as ITagCount);
+      tags.push({tag : Tags.ENERGY, count : this.getTagCount(Tags.ENERGY, false, false)} as ITagCount);
+      tags.push({tag : Tags.JOVIAN, count : this.getTagCount(Tags.JOVIAN, false, false)} as ITagCount);
+      tags.push({tag : Tags.MICROBES, count : this.getTagCount(Tags.MICROBES, false, false)} as ITagCount);
+      tags.push({tag : Tags.PLANT, count : this.getTagCount(Tags.PLANT, false, false)} as ITagCount);
+      tags.push({tag : Tags.SCIENCE, count : this.getTagCount(Tags.SCIENCE, false, false)} as ITagCount);
+      tags.push({tag : Tags.SPACE, count : this.getTagCount(Tags.SPACE, false, false)} as ITagCount);
+      tags.push({tag : Tags.STEEL, count : this.getTagCount(Tags.STEEL, false, false)} as ITagCount);
+      tags.push({tag : Tags.VENUS, count : this.getTagCount(Tags.VENUS, false, false)} as ITagCount);
+      tags.push({tag : Tags.WILDCARD, count : this.getTagCount(Tags.WILDCARD, false, false)} as ITagCount);
       tags.push({tag : Tags.EVENT, count : this.playedCards.filter(card => card.cardType === CardType.EVENT).length} as ITagCount);
       
       return tags.filter((tag) => tag.count > 0);

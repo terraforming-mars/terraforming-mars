@@ -373,7 +373,8 @@ function getPlayer(player: Player, game: Game): string {
     venusScaleLevel: game.getVenusScaleLevel(),
     boardName: game.boardName,
     colonies: getColonies(game.colonies),
-    tags: player.getAllTags()
+    tags: player.getAllTags(),
+    actionsThisGeneration: Array.from(player.getActionsThisGeneration())
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -515,7 +516,8 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       venusScaleLevel: game.getVenusScaleLevel(),
       boardName: game.boardName,
       colonies: getColonies(game.colonies),
-      tags: player.getAllTags()
+      tags: player.getAllTags(),
+      actionsThisGeneration: Array.from(player.getActionsThisGeneration())
     } as PlayerModel;
   });
 }

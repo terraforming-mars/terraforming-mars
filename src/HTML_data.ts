@@ -4262,7 +4262,7 @@ export const HTML_DATA: Map<string, string> =
                 </div>
               </div>
 `],
-["Research Coordination",`
+[CardName.RESEARCH_COORDINATION,`
               <div class="title background-color-automated ">RESEARCH COORDINATION</div>
               <div class="price ">4</div>
               <div class="tag tag1 tag-wild"></div>
@@ -4272,7 +4272,7 @@ export const HTML_DATA: Map<string, string> =
                 After being played, when you perform an action, the wild tag counts as any tag of your choice.
               </div>
 `],
-["SF Memorial",`
+[CardName.SF_MEMORIAL,`
               <div class="title background-color-automated ">SF MEMORIAL</div>
               <div class="price ">7</div>
               <div class="tag tag1 tag-building"></div>
@@ -4286,7 +4286,7 @@ export const HTML_DATA: Map<string, string> =
                 </div>
               </div>
 `],
-["Space Hotels",`
+[CardName.SPACE_HOTELS,`
               <div class="title background-color-automated ">Space hotels</div>
               <div class="price ">12</div>
               <div class="tag tag1 tag-space"></div>
@@ -5635,7 +5635,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Point Luna",`
+[CardName.POINT_LUNA,`
       <div class="tag tag1 tag-space"></div>
       <div class="tag tag2 tag-earth"></div>
         <div class="corporationLabel ">CORPORATION</div>
@@ -5670,7 +5670,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Robinson Industries",`
+[CardName.ROBINSON_INDUSTRIES,`
       <div class="corporationLabel">CORPORATION</div>
       <div class="prelude-icon corporation-icon"></div>
       <div class="contentCorporation">
@@ -5693,7 +5693,7 @@ export const HTML_DATA: Map<string, string> =
           (You start with 47 MC.)
         </div>
 `],
-["Valley Trust",`
+[CardName.VALLEY_TRUST,`
       <div class="tag tag1 tag-earth"></div>
         <div class="corporationLabel ">CORPORATION</div>
         <div class="prelude-icon corporation-icon"></div>
@@ -5715,7 +5715,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-["Vitor",`
+[CardName.VITOR,`
       <div class="tag tag1 tag-earth"></div>
         <div class="corporationLabel ">CORPORATION</div>
         <div class="prelude-icon corporation-icon"></div>
@@ -6447,7 +6447,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Metals Company",`
+[CardName.METALS_COMPANY,`
       <div class="title background-color-prelude">Metals Company</div>
       <div class="prelude-label">PRELUDE</div>
       <div class="prelude-icon preludeCard-icon"></div>
@@ -6510,7 +6510,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Nitrogen Shipment",`
+[CardName.NITROGEN_SHIPMENT,`
       <div class="title background-color-prelude">Nitrogen Shipment</div>
       <div class="prelude-label">PRELUDE</div>
       <div class="prelude-icon preludeCard-icon"></div>
@@ -6525,7 +6525,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Orbital Construction Yard",`
+[CardName.ORBITAL_CONSTRUCTION_YARD,`
       <div class="title background-color-prelude">Orbital Construction Yard</div>
       <div class="tag tag1 tag-space"></div>
       <div class="prelude-label">PRELUDE</div>
@@ -6554,7 +6554,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Power Generation",`
+[CardName.POWER_GENERATION,`
       <div class="title background-color-prelude">Power Generation</div>
       <div class="prelude-label">PRELUDE</div>
       <div class="tag tag1 tag-power"></div>
@@ -6569,7 +6569,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Research Network",`
+[CardName.RESEARCH_NETWORK,`
       <div class="title background-color-prelude">Research Network</div>
       <div class="prelude-label">PRELUDE</div>
       <div class="tag tag1 tag-wild"></div>
@@ -6602,7 +6602,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Smelting Plant",`
+[CardName.SMELTING_PLANT,`
       <div class="title background-color-prelude">Smelting Plant</div>
       <div class="tag tag1 tag-building"></div>
       <div class="prelude-label">PRELUDE</div>
@@ -6616,7 +6616,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Society Support",`
+[CardName.SOCIETY_SUPPORT,`
       <div class="title background-color-prelude">Society Support</div>
       <div class="prelude-label">PRELUDE</div>
       <div class="prelude-icon preludeCard-icon"></div>
@@ -6631,7 +6631,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Supplier",`
+[CardName.SUPPLIER,`
       <div class="title background-color-prelude">Supplier</div>
       <div class="tag tag1 tag-power"></div>
       <div class="prelude-label">PRELUDE</div>
@@ -6647,7 +6647,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["Supply Drop",`
+[CardName.SUPPLY_DROP,`
       <div class="title background-color-prelude">Supply Drop</div>
       <div class="prelude-label">PRELUDE</div>
       <div class="prelude-icon preludeCard-icon"></div>
@@ -6659,7 +6659,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-["UNMI Contractor",`
+[CardName.UNMI_CONTRACTOR,`
       <div class="title background-color-prelude">UNMI Contractor</div>
       <div class="tag tag1 tag-earth"></div>
       <div class="prelude-label">PRELUDE</div>

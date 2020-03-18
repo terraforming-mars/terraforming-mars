@@ -6,9 +6,10 @@ import { CorporationCard } from "./../corporation/CorporationCard";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 import { Resources } from "../../Resources";
+import { CardName } from '../../CardName';
 
 export class RobinsonIndustries implements IActionCard, CorporationCard {
-    public name: string = "Robinson Industries";
+    public name: string = CardName.ROBINSON_INDUSTRIES;
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 47;
     public play() {

@@ -303,5 +303,22 @@ export enum CardName {
     IO_RESEARCH_OUTPOST = "Io Research Outpost",
     LOAN = "Loan",
     MARTIAN_SURVEY = "Martian Survey",
-    METAL_RICH_ASTEROID = "Metal-Rich Asteroid"
+    METAL_RICH_ASTEROID = "Metal-Rich Asteroid",
+    METALS_COMPANY = "Metals Company",
+    NITROGEN_SHIPMENT = "Nitrogen Shipment",
+    ORBITAL_CONSTRUCTION_YARD = "Orbital Construction Yard",
+    POINT_LUNA = "Point Luna",
+    POWER_GENERATION = "Power Generation",
+    RESEARCH_COORDINATION = "Research Coordination",
+    RESEARCH_NETWORK = "Research Network",
+    ROBINSON_INDUSTRIES = "Robinson Industries",
+    SF_MEMORIAL = "SF Memorial",
+    SMELTING_PLANT = "Smelting Plant",
+    SOCIETY_SUPPORT = "Society Support",
+    SPACE_HOTELS = "Space Hotels",
+    SUPPLIER = "Supplier",
+    SUPPLY_DROP = "Supply Drop",
+    UNMI_CONTRACTOR = "UNMI Contractor",
+    VALLEY_TRUST = "Valley Trust",
+    VITOR = "Vitor"
 }

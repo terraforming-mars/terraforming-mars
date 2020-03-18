@@ -7,11 +7,12 @@ import { ResourceType } from "../../ResourceType";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 import { Resources } from '../../Resources';
+import { CardName } from '../../CardName';
 
 export class DeuteriumExport implements IActionCard,IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.SPACE, Tags.VENUS, Tags.ENERGY];
-    public name: string = "Deuterium Export";
+    public name: string = CardName.DEUTERIUM_EXPORT;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
 

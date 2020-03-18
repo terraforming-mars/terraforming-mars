@@ -8,11 +8,12 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from '../../inputs/SelectOption';
 import { Game } from '../../Game';
 import { MAX_VENUS_SCALE } from '../../constants';
+import { CardName } from '../../CardName';
 
 export class JetStreamMicroscrappers implements IActionCard,IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = "Jet Stream Microscrappers";
+    public name: string = CardName.JET_STREAM_MICROSCRAPPERS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
 

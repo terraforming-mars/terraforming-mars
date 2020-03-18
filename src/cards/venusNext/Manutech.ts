@@ -5,6 +5,7 @@ import { Tags } from "../Tags";
 import { Resources } from '../../Resources';
 import { CorporationName } from '../../CorporationName';
 
+
 export class Manutech implements CorporationCard {
     public name: string = CorporationName.MANUTECH;
     public tags: Array<Tags> = [Tags.STEEL];

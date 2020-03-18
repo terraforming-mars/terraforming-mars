@@ -8,11 +8,12 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from '../../inputs/SelectOption';
 import { Game } from '../../Game';
 import { SelectAmount } from '../../inputs/SelectAmount';
+import { CardName } from '../../CardName';
 
 export class SulphurEatingBacteria implements IActionCard,IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.VENUS, Tags.MICROBES];
-    public name: string = "Sulphur-Eating Bacteria";
+    public name: string = CardName.SULPHUR_EATING_BACTERIA;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public canPlay(player: Player, game: Game): boolean {

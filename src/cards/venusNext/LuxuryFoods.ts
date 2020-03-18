@@ -2,11 +2,12 @@ import { IProjectCard } from '../IProjectCard';
 import { Tags } from '../Tags';
 import { CardType } from '../CardType';
 import { Player } from '../../Player';
+import { CardName } from '../../CardName';
 
 export class LuxuryFoods implements IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [];
-    public name: string = 'Luxury Foods';
+    public name: string = CardName.LUXURY_FOODS;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player): boolean {

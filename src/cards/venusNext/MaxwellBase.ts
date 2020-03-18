@@ -10,12 +10,12 @@ import { Resources } from '../../Resources';
 import { IActionCard, ICard } from '../ICard';
 import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
-
+import { CardName } from '../../CardName';
 
 export class MaxwellBase implements IActionCard, IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [Tags.CITY, Tags.VENUS];
-    public name: string = "Maxwell Base";
+    public name: string = CardName.MAXWELL_BASE;
     public cardType: CardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
         return player.getProduction(Resources.ENERGY) >= 1 && game.getVenusScaleLevel() >= 12 - (2 * player.getRequirementsBonus(game, true));

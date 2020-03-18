@@ -8,11 +8,12 @@ import { SelectOption } from '../../inputs/SelectOption';
 import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
 import { ICard } from '../ICard';
+import { CardName } from '../../CardName';
 
 export class Atmoscoop implements IProjectCard {
     public cost: number = 22;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: string = "Atmoscoop";
+    public name: string = CardName.ATMOSCOOP;
     public cardType: CardType = CardType.EVENT;
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 3 ;

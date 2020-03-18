@@ -6,11 +6,12 @@ import { Player } from "../../Player";
 import { Game } from '../../Game';
 import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
+import { CardName } from '../../CardName';
 
 export class HydrogenToVenus implements IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = "Hydrogen to Venus";
+    public name: string = CardName.HYDROGEN_TO_VENUS;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {

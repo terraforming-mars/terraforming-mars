@@ -620,6 +620,7 @@ export class Player {
         && game.getOxygenLevel() >= constants.MAX_OXYGEN_LEVEL
         && game.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES
         && game.getVenusScaleLevel() >= constants.MAX_VENUS_SCALE) {
+          game.doneWorldGovernmentTerraforming();
           return;
       }
 

@@ -42,6 +42,7 @@ import { SelectResourceProductionDecrease } from "./interrupts/SelectResourcePro
 import { ICard } from "./cards/ICard";
 import { SelectResourceDecrease } from "./interrupts/SelectResourceDecrease";
 import { SelectHowToPayInterrupt } from "./interrupts/SelectHowToPayInterrupt";
+import { VictoryPointsBreakdown } from "./VictoryPointsBreakdown";
 
 export class Game {
     public activePlayer: Player;
@@ -281,6 +282,7 @@ export class Game {
         award: award,
         player: player
       });
+      this.calculateVictoryPoints();
     }
 
     public giveAward(award: IAward): void {
@@ -363,6 +365,7 @@ export class Game {
         });
       }
 
+      this.calculateVictoryPoints();
       this.playerIsFinishedWithResearchPhase(player);
     }
 
@@ -687,55 +690,64 @@ export class Game {
     private gotoEndGame(): void {
       if (this.phase === Phase.END) return;
       this.phase = Phase.END;
+      this.calculateVictoryPoints();
+    }
 
-      // Give players any victory points from cards and corporations
+    public calculateVictoryPoints(): void {
+
+      // Reset victory points
       this.players.forEach((player) => {
+        player.victoryPoints = 0
+        player.victoryPointsBreakdown = new VictoryPointsBreakdown();
+      });
+
+      this.players.forEach((player) => {
+
+        // Victory points from corporations
         if (player.corporationCard !== undefined && player.corporationCard.getVictoryPoints !== undefined) {
           player.victoryPoints += player.corporationCard.getVictoryPoints(player, this);
           player.victoryPointsBreakdown.VPdetails.push(player.corporationCard.name + " : " + player.corporationCard.getVictoryPoints(player, this));
         }
+
+        // Victory points from cards
         for (let playedCard of player.playedCards) {
           if (playedCard.getVictoryPoints !== undefined) {
             player.victoryPoints += playedCard.getVictoryPoints(player, this);
             player.victoryPointsBreakdown.VPdetails.push(playedCard.name + " : " + playedCard.getVictoryPoints(player, this));
           }
         }
-        player.victoryPointsBreakdown.victoryPoints = player.victoryPoints;
-      });
 
-      // TR is converted in victory points
-      this.players.forEach((player) => {
+        player.victoryPointsBreakdown.victoryPoints = player.victoryPoints;
+
+        // Victory points from TR
         player.victoryPointsBreakdown.terraformRating = player.terraformRating;
         player.victoryPoints += player.terraformRating;
+
       });
 
-      // Distribute awards
+      // Victory points from awards
       this.fundedAwards.forEach((fundedAward) => {
         this.giveAward(fundedAward.award);
       });
 
-      // Give 5 victory points for each claimed milestone
+      // Victory points from milestones
       for (const milestone of this.claimedMilestones) {
         milestone.player.victoryPointsBreakdown.milestones += 5;
         milestone.player.victoryPoints += 5;
       }
 
+      // Victory points from board
       const spaces = this.board.spaces;
       spaces.forEach((space) => {
-        // Give victory point for each greenery tile
-        if (
-          space.tile &&
-          space.tile.tileType === TileType.GREENERY &&
-          space.player !== undefined) {
+
+        // Victory points for greenery tiles
+        if (space.tile && space.tile.tileType === TileType.GREENERY && space.player !== undefined) {
             space.player.victoryPointsBreakdown.greenery += 1;
             space.player.victoryPoints++;
         }
-        // Give victory point for each greenery adjacent to city tile
-        if (
-          space.tile &&
-          space.tile.tileType === TileType.CITY &&
-          space.player !== undefined
-        ) {
+
+        // Victory points for greenery tiles adjacent to cities
+        if (space.tile && space.tile.tileType === TileType.CITY && space.player !== undefined) {
           const adjacent = this.board.getAdjacentSpaces(space);
           for (const adj of adjacent) {
             if (adj.tile && adj.tile.tileType === TileType.GREENERY) {
@@ -744,12 +756,13 @@ export class Game {
             }
           }
         }
+
       });
 
       this.players.forEach((player) => {
         player.victoryPointsBreakdown.updateTotal();
       });
-        
+
     }
 
     public canPlaceGreenery(player: Player): boolean {

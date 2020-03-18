@@ -40,9 +40,17 @@ export const OtherPlayer = Vue.component("other-player", {
                     <player-resources :player="player"></player-resources>
                 </div>
 
-                <div class="tag-display tags_item_cont" v-if="player.tags.length > 0">
+                <div class="tag-display tags_item_cont tag-display-tags" v-if="player.tags.length > 0">
                     <div v-for="tag in player.tags">
                         <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>
+                    </div>
+                </div>
+                <div class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
+                    <div>
+                        <div class="tag-display">
+                            <div class="tag-count icon-vp"></div>
+                            <span class="tag-count-display"> : {{player.victoryPointsBreakdown.total}}</span>
+                        </div>
                     </div>
                 </div>
 

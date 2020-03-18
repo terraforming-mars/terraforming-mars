@@ -1270,6 +1270,7 @@ export class Player {
             }
         );
       }
+      game.calculateVictoryPoints();
       return new SelectOption(milestone.name, () => {
         return claimer(8, 0);
       });
@@ -1609,6 +1610,8 @@ export class Player {
         this.actionsTakenThisRound++;
         this.takeAction(game);
       });
+
+      game.calculateVictoryPoints();
     }
 
     public process(game: Game, input: Array<Array<string>>): void {

@@ -3,11 +3,20 @@ import Vue from "vue";
 
 import { PlayerResources } from "./PlayerResources";
 
+import { StackedCards } from './StackedCards';
+import { PlayerMixin } from "./PlayerMixin";
+import { TagCount } from './TagCount';
+
+
 export const OtherPlayer = Vue.component("other-player", {
     props: ["player"],
     components: {
-        "player-resources": PlayerResources
+        "player-resources": PlayerResources,
+        "stacked-cards": StackedCards,
+        "tag-count": TagCount
+
     },
+    mixins: [PlayerMixin],
     methods: {
         hideMe: function () {
             (this.$root as any).setOtherPlayerVisibility(this.player.id, false);
@@ -31,18 +40,29 @@ export const OtherPlayer = Vue.component("other-player", {
                     <player-resources :player="player"></player-resources>
                 </div>
 
-                <div v-if="player.playedCards.length > 0" class="player_home_block">
+                <div class="tag-display tags_item_cont" v-if="player.tags.length > 0">
+                    <div v-for="tag in player.tags">
+                        <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>
+                    </div>
+                </div>
+
+                <div v-if="player.playedCards.length > 0 || player.corporationCard !== undefined" class="player_home_block">
                     <h4>Played Cards</h4>
                     <div>
-                        <div v-for="card in player.playedCards" :key="card.name" class="cardbox">
-                            <card :card="card.name" :resources="card.resources"></card>
+                        <div v-if="player.corporationCard !== undefined" class="cardbox">
+                            <card :card="player.corporationCard" :resources="player.corporationCardResources"></card>
                         </div>
+                        <div v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
+                            <card :card="card.name" :resources="card.resources" :player="player"></card>
+                        </div>
+
+                        <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
+
+
                     </div>
                 </div> 
 
-                <div v-if="player.corporationCard !== undefined" class="player_home_block">
-                    <card :card="player.corporationCard" :resources="player.corporationCardResources"></card>
-                </div>
+
             </div>
         </div>
     `

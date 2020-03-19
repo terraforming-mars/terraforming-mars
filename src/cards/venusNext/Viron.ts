@@ -27,7 +27,7 @@ export class Viron implements ICard, CorporationCard {
     }
 
     public canAct(player: Player, game: Game): boolean {
-        return this.getActionCards(player, game).length > 0 && !player.getActionsThisGeneration().has(this.name); 
+        return this.getActionCards(player, game).length > 0 && !player.getActionsThisGeneration().has(this.name);
     }
 
     public action(player: Player, game: Game) {

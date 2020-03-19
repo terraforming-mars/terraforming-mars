@@ -1,4 +1,4 @@
-
+ 
 import Vue from "vue";
 
 import { Board } from "./Board";
@@ -14,6 +14,10 @@ import { GlobalParameters } from "./GlobalParameters"
 import { Preferences } from "./Preferences"
 import { PlayerModel } from "../models/PlayerModel";
 import { Colony } from './Colony';
+import { LogPanel } from './LogPanel';
+import { PlayerMixin } from './PlayerMixin';
+import { TagCount } from './TagCount';
+
 
 const dialogPolyfill = require("dialog-polyfill");
 
@@ -31,11 +35,14 @@ export const PlayerHome = Vue.component("player-home", {
         "milestone": Milestone,
         "award": Award,
         "preferences": Preferences,
-        "colony": Colony
+        "colony": Colony,
+        "log-panel": LogPanel,
+        "tag-count": TagCount
     },
     data: function () {
         return {}
     },
+    mixins: [PlayerMixin],
     methods: {
         getPlayerCssForTurnOrder: (player: PlayerModel, hilightActive: boolean): string => {
             var ret: string = "player_color_" + player.color;
@@ -46,7 +53,7 @@ export const PlayerHome = Vue.component("player-home", {
             if (player.id === this.player.id) return;
             
             (this.$root as any).setOtherPlayerVisibility(player.id, true);
-        }
+        }  
     },
     mounted: function () {
         dialogPolyfill.default.registerDialog(document.getElementById("dialog-default"));
@@ -83,15 +90,21 @@ export const PlayerHome = Vue.component("player-home", {
                     <player-resources :player="player" v-trim-whitespace></player-resources>
                 </div>
 
+                <div class="tag-display tags_item_cont" v-if="player.tags.length > 0">
+                    <div v-for="tag in player.tags">
+                        <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>
+                    </div>
+                </div>
+
                 <div class="player_home_block">
                     <a name="board" class="player_home_anchor"></a>
                     <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.boardName"></board>
 
                     <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature" v-trim-whitespace></global-parameters>
 
-                    <div v-if="player.players.length > 1" class="player_home_block--millestones-and-awards">
-                        <milestone :milestones_list="player.milestones" />
-                        <award :awards_list="player.awards" />
+                    <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
+                        <milestone :milestones_list="player.milestones" expanded=false />
+                        <award :awards_list="player.awards" expanded=false />
                     </div>
                 </div>
 
@@ -116,21 +129,11 @@ export const PlayerHome = Vue.component("player-home", {
                     <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
 
-
                 <div class="player_home_block player_home_block--log nofloat" v-if="player.players.length > 1 && player.gameLog.length > 0">
                     <h2>Last Actions</h2>
-                    <ul>
-                        <li v-for="message in player.gameLog">
-                            {{message}}
-                        </li>
-                    </ul>
+                    <log-panel :messages="player.gameLog"></log-panel>
                 </div>
-
-                <div class="player_home_block player_home_block--corporation">
-                    <h2>Corporation Card</h2>
-                    <card :card="player.corporationCard" :resources="player.corporationCardResources"></card>
-                </div>
-  
+ 
                 <a name="cards" class="player_home_anchor"></a>
                 <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
                     <h2>Cards In Hand</h2>
@@ -139,11 +142,18 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
 
-                <div v-if="player.playedCards.length > 0" class="player_home_block player_home_block--cards">
+                <div class="player_home_block player_home_block--cards">
                     <h2>Played Cards</h2>
-                    <div v-for="card in player.playedCards" :key="card.name" class="cardbox">
-                        <card :card="card.name" :resources="card.resources"></card>
+
+                    <div v-if="player.corporationCard !== undefined" class="cardbox">
+                        <card :card="player.corporationCard" :resources="player.corporationCardResources"></card>
                     </div>
+                    <div v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
+                        <card :card="card.name" :resources="card.resources" :player="player"></card>
+                    </div>
+
+                    <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
+                    <stacked-cards :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
                 </div>
 
                 <div class="player_home_block player_home_block--milestones" v-if="player.claimedMilestones.length > 0">
@@ -163,7 +173,35 @@ export const PlayerHome = Vue.component("player-home", {
 
             <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
                 <h2>Select initial cards:</h2>
+
                 <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
+
+                <h2>Game details</h2>
+
+                <details class="accordion" v-if="player.players.length > 1">
+                    <summary class="accordion-header">
+                        <div class="is-action">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                            Milestones and awards
+                        </div>
+                    </summary>
+                    <div class="accordion-body">
+                        <milestone :milestones_list="player.milestones" :expanded="true" />
+                        <award :awards_list="player.awards" :expanded="true" />
+                    </div>
+                </details>
+
+                <details class="accordion">
+                    <summary class="accordion-header">
+                        <div class="is-action">
+                            <i class="icon icon-arrow-right mr-1"></i>
+                            Board
+                        </div>
+                    </summary>
+                    <div class="accordion-body">
+                        <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.boardName"></board>
+                    </div>
+                </details>
             </div>
 
             <div v-if="player.colonies.length > 0" class="player_home_block">
@@ -174,7 +212,6 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
             </div>
-
         </div>
     `
 });

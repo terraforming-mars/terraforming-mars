@@ -1,6 +1,6 @@
 import {IProjectCard} from "./cards/IProjectCard";
 import { CorporationCard } from "./cards/corporation/CorporationCard";
-import {Tags} from "./cards/Tags";
+import { Tags } from "./cards/Tags";
 import {PlayerInput} from "./PlayerInput";
 import {CardType} from "./cards/CardType";
 import {Color} from "./Color";
@@ -30,7 +30,7 @@ import { IColony } from "./colonies/Colony";
 import { SelectGreenery } from "./interrupts/SelectGreenery";
 import { SelectCity } from "./interrupts/SelectCity";
 import { SpaceType } from "./SpaceType";
-
+import { ITagCount } from "./ITagCount";
 
 export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
@@ -301,6 +301,24 @@ export class Player {
       return count;
     }
 
+    public getAllTags(): Array<ITagCount> {
+      let tags: Array<ITagCount> = [];
+      tags.push({tag : Tags.CITY, count : this.getTagCount(Tags.CITY, false, false)} as ITagCount);
+      tags.push({tag : Tags.EARTH, count : this.getTagCount(Tags.EARTH, false, false)} as ITagCount);
+      tags.push({tag : Tags.ENERGY, count : this.getTagCount(Tags.ENERGY, false, false)} as ITagCount);
+      tags.push({tag : Tags.JOVIAN, count : this.getTagCount(Tags.JOVIAN, false, false)} as ITagCount);
+      tags.push({tag : Tags.MICROBES, count : this.getTagCount(Tags.MICROBES, false, false)} as ITagCount);
+      tags.push({tag : Tags.PLANT, count : this.getTagCount(Tags.PLANT, false, false)} as ITagCount);
+      tags.push({tag : Tags.SCIENCE, count : this.getTagCount(Tags.SCIENCE, false, false)} as ITagCount);
+      tags.push({tag : Tags.SPACE, count : this.getTagCount(Tags.SPACE, false, false)} as ITagCount);
+      tags.push({tag : Tags.STEEL, count : this.getTagCount(Tags.STEEL, false, false)} as ITagCount);
+      tags.push({tag : Tags.VENUS, count : this.getTagCount(Tags.VENUS, false, false)} as ITagCount);
+      tags.push({tag : Tags.WILDCARD, count : this.getTagCount(Tags.WILDCARD, false, false)} as ITagCount);
+      tags.push({tag : Tags.EVENT, count : this.playedCards.filter(card => card.cardType === CardType.EVENT).length} as ITagCount);
+      
+      return tags.filter((tag) => tag.count > 0);
+    }
+    
     public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeWildcardTags:boolean = true): number {
       let tagCount = 0;
       this.playedCards.forEach((card: IProjectCard) => {
@@ -596,6 +614,16 @@ export class Player {
     }
 
     public worldGovernmentTerraforming(game: Game) {
+
+      // Test if this is needed, usefull for solo play
+      if (game.getTemperature() >= constants.MAX_TEMPERATURE 
+        && game.getOxygenLevel() >= constants.MAX_OXYGEN_LEVEL
+        && game.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES
+        && game.getVenusScaleLevel() >= constants.MAX_VENUS_SCALE) {
+          game.doneWorldGovernmentTerraforming();
+          return;
+      }
+
       const action: OrOptions = new OrOptions();
       action.title = "Select action for World Government Terraforming";
       if (game.getTemperature() < constants.MAX_TEMPERATURE) {
@@ -648,10 +676,10 @@ export class Player {
       let cards: Array<IProjectCard> = [];
       if (passedCards === undefined) {
         cards.push(
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-          game.dealer.dealCard()
+          game.dealer.dealCard(true),
+          game.dealer.dealCard(true),
+          game.dealer.dealCard(true),
+          game.dealer.dealCard(true)
       ) } else { cards = passedCards}      
 
       this.setWaitingFor(
@@ -672,10 +700,10 @@ export class Player {
       let dealtCards: Array<IProjectCard> = [];
       if (!draftVariant) {
         dealtCards.push(
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-          game.dealer.dealCard(),
-          game.dealer.dealCard()
+          game.dealer.dealCard(true),
+          game.dealer.dealCard(true),
+          game.dealer.dealCard(true),
+          game.dealer.dealCard(true)
         );
       } else {
         dealtCards = this.draftedCards;
@@ -1253,7 +1281,6 @@ export class Player {
         game.fundAward(this, award);
         this.megaCredits -= megaCredits;
         this.heat -= heat;
-        game.log(this.name + " funded " + award.name + " award");
         return undefined;
       };
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
@@ -1446,7 +1473,7 @@ export class Player {
         game.getGeneration() === 1 &&
             this.corporationCard !== undefined &&
             this.corporationCard.initialAction !== undefined &&
-            !this.actionsThisGeneration.has(this.corporationCard.name) &&
+            !this.actionsThisGeneration.has("CORPORATION_INITIAL_ACTION") &&
             this.actionsTakenThisRound === 0
       ) {
         const input = this.corporationCard.initialAction(this, game);
@@ -1456,7 +1483,7 @@ export class Player {
             playerInput: input
           });
         }
-        this.actionsThisGeneration.add(this.corporationCard.name);
+        this.actionsThisGeneration.add("CORPORATION_INITIAL_ACTION");
         this.actionsTakenThisRound++;
         this.takeAction(game);
         return;

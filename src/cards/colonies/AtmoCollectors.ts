@@ -13,6 +13,7 @@ export class AtmoCollectors implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: CardName = CardName.ATMO_COLLECTORS;
     public cardType: CardType = CardType.ACTIVE;
+    public resourceType: ResourceType = ResourceType.FLOATER;
 
     public canAct(): boolean {
         return true;

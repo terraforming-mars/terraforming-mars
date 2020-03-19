@@ -67,7 +67,7 @@ export class Game {
     public interrupts: Array<PlayerInterrupt> = [];
     public monsInsuranceOwner: Player | undefined = undefined;
     public colonies: Array<IColony> = [];
-    public colonyDealer: ColonyDealer = new ColonyDealer();
+    public colonyDealer: ColonyDealer | undefined = undefined;
     public pendingOceans: number = 0;
 
     constructor(
@@ -80,8 +80,13 @@ export class Game {
       public coloniesExtension: boolean = false,
       customCorporationsList: boolean = false,
       corporationList: Array<CorporationCard> = [],
-      public boardName: BoardName = BoardName.ORIGINAL
+      public boardName: BoardName = BoardName.ORIGINAL,
+      seed?: number
     ) {
+
+      if (seed === undefined) {
+        seed = Math.random();
+      }
 
       if (boardName === BoardName.ELYSIUM) {
         this.board = new ElysiumBoard();
@@ -98,11 +103,12 @@ export class Game {
       }
 
       this.activePlayer = first;
-      this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension);
+      this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, seed);
       
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
       if (players.length === 1) {
+        this.draftVariant = false;
         this.setupSolo();
       }
 
@@ -128,6 +134,7 @@ export class Game {
       // Add colonies stuff
       if (this.coloniesExtension) {
         corporationCards.push(...ALL_COLONIES_CORPORATIONS);
+        this.colonyDealer = new ColonyDealer();
         this.colonies = this.colonyDealer.drawColonies(players.length);
         if (this.players.length === 1) {
           players[0].setProduction(Resources.MEGACREDITS, -2);
@@ -270,6 +277,7 @@ export class Game {
       if (this.allAwardsFunded()) {
         throw new Error("All awards already funded");
       }
+      this.log(player.name + " funded " + award.name + " award");
       this.fundedAwards.push({
         award: award,
         player: player
@@ -707,10 +715,10 @@ export class Game {
         this.giveAward(fundedAward.award);
       });
 
-      // Give 5 victory points for each claimed millestone
-      for (const millestone of this.claimedMilestones) {
-        millestone.player.victoryPointsBreakdown.milestones += 5;
-        millestone.player.victoryPoints += 5;
+      // Give 5 victory points for each claimed milestone
+      for (const milestone of this.claimedMilestones) {
+        milestone.player.victoryPointsBreakdown.milestones += 5;
+        milestone.player.victoryPoints += 5;
       }
 
       const spaces = this.board.spaces;
@@ -873,26 +881,29 @@ export class Game {
         player.terraformRating += steps;
       }
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
+      if (!isWorldGov) {
+        if (steps === 3 && this.temperature === -20) {
+          player.setProduction(Resources.HEAT, 2);
+        } else if (this.temperature === -24 || this.temperature === -20 ||
+              (
+                (steps === 2 || steps === 3) &&
+                (this.temperature === -22 || this.temperature === -18)
+              ) ||
+              (steps === 3 && this.temperature === -16)
+        ) {
+          player.setProduction(Resources.HEAT);;
+        } 
+      }
+      
       // BONUS FOR OCEAN TILE AT 0
-      if (steps === 3 && this.temperature === -20 && !isWorldGov) {
-        player.setProduction(Resources.HEAT, 2);
-      } else if ((!isWorldGov) && this.temperature === -24 || this.temperature === -20 ||
-            (
-              (steps === 2 || steps === 3) &&
-              (this.temperature === -22 || this.temperature === -18)
-            ) ||
-            (steps === 3 && this.temperature === -16)
-      ) {
-        player.setProduction(Resources.HEAT);;
-      } else if (
-        (
+      if (
           this.temperature === 0 ||
           ((steps === 2 || steps === 3) && this.temperature === 2) ||
           (steps === 3 && this.temperature === 4)
-        ) && this.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES
       ) {
         this.addOceanInterrupt(player, "Select space for ocean from temperature increase", isWorldGov);
       }
+
       return undefined;
     }
 
@@ -968,11 +979,9 @@ export class Game {
         );
       }
 
-      if (tile.tileType !== TileType.OCEAN) {
-        space.player = player;
-      }
-
+      space.player = player;
       space.tile = tile;
+
       if (!isWorldGov) {
         space.bonus.forEach((spaceBonus) => {
           if (spaceBonus === SpaceBonus.DRAW_CARD) {
@@ -996,18 +1005,21 @@ export class Game {
         });
       }
       
-      this.tilePlaced(space, player);
+      this.tilePlaced(space);
 
+      if (tile.tileType === TileType.OCEAN) {
+        space.player = undefined;
+      }
     }
-    private tilePlaced(space: ISpace, player: Player) {
+    private tilePlaced(space: ISpace) {
       this.players.forEach((p) => {
         if (p.corporationCard !== undefined &&
             p.corporationCard.onTilePlaced !== undefined) {
-          p.corporationCard.onTilePlaced(player, space, this);
+          p.corporationCard.onTilePlaced(p, space, this);
         }
         p.playedCards.forEach((playedCard) => {
           if (playedCard.onTilePlaced !== undefined) {
-            playedCard.onTilePlaced(player, space, this);
+            playedCard.onTilePlaced(p, space, this);
           }
         });
       });
@@ -1126,7 +1138,7 @@ export class Game {
     public log(message: String) {
       this.gameLog.push(message);
       this.gameAge++;
-      if (this.gameLog.length > 10 ) {
+      if (this.gameLog.length > 50 ) {
         (this.gameLog.shift());
       }
     }

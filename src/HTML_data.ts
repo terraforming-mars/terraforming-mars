@@ -5176,6 +5176,7 @@ export const HTML_DATA: Map<string, string> =
       <div style="font-size:34px;
                       width:140px;
                       text-align: center;
+                      color: #020202;
                       margin-top:5px;
                       border:2px solid black;
                       margin-left:8px;
@@ -5242,12 +5243,12 @@ export const HTML_DATA: Map<string, string> =
                   (Effect: Each time you play an event, you gain 2 MC.)
               </div>
           </div>
-          <div class="INTERPLANETARY CINEMATICS" style="font-size:17px">
+          <div class="INTERPLANETARY CINEMATICS" style="color: #020202;font-size:17px">
             INTERPLANETARY
           </div>
           <div style="height:5px;margin-top:-2px;width:143px;background:linear-gradient(to right, yellow,black,yellow,black,yellow);border:5px solid #cc3333;box-shadow:3px 3px 6px grey;">
           </div>
-          <div class="INTERPLANETARY CINEMATICS" style="font-size:24px;margin-left:3px;margin-top:-5px;
+          <div class="INTERPLANETARY CINEMATICS" style="color: #020202;font-size:24px;margin-left:3px;margin-top:-5px;
           display:inline-block;
           -webkit-transform:scale(0.5,1); /* Safari and Chrome */
           -moz-transform:scale(0.5,1); /* Firefox */
@@ -5274,12 +5275,13 @@ export const HTML_DATA: Map<string, string> =
                   (Effect: Your temperature, oxygen and ocean requirements are +2 or -2 steps, your choice in each case.)
               </div>
           </div>
-          <span style="font-size:24px;
+          <span style="color: #020202;
+          font-size:24px;
           padding-left:5px;
           padding-bottom:5px;
           text-shadow: 6px 6px 5px grey;
           ;">
-            <span style="background-color:#6bb5c7;padding-left:4px;padding-right:4px;font-size:26px;box-shadow: 6px 6px 10px grey;">X</span> INVENTRIX
+            <span style="color: #020202;background-color:#6bb5c7;padding-left:4px;padding-right:4px;font-size:26px;box-shadow: 6px 6px 10px grey;">X</span> INVENTRIX
           </span>
           <div class="description " style="text-align:center ">
             <div class="resource money " style="margin-left:20px;">45</div> <div class="resource card" style="margin-left:20px"></div><div class="resource card"></div><div class="resource card"></div><br>
@@ -5337,8 +5339,8 @@ export const HTML_DATA: Map<string, string> =
                   (Effect: When any city tile is placed ON MARS, increase your MC production 1 step. When you place a city tile, gain 3 MC.)
               </div>
           </div>
-          <div style="font-size:24px;text-shadow:6px 6px 6px grey;">
-            <div style="text-shadow:none;box-shadow:3px 3px 6px grey;margin-right:2px;border: 1px solid red;display:inline-block;background-color:#ff5f00;">&#x25b2<span style="font-size:14px;padding:0px;border:none;margin-left:-5px;">&#x25b2</span>
+          <div style="color: #020202;font-size:24px;text-shadow:6px 6px 6px grey;">
+            <div style="text-shadow:none;box-shadow:3px 3px 6px grey;margin-right:2px;border: 1px solid red;display:inline-block;background-color:#ff5f00;">&#x25b2<span style="color: #020202;font-size:14px;padding:0px;border:none;margin-left:-5px;">&#x25b2</span>
             </div>THARSIS<br>&nbsp; REPUBLIC</div>
           <div class="description " style="text-align:center ">
           <div class="resource money " style="margin-left:60px;">40</div> <div class="tile city-tile" style="margin-left:40px;margin-top:-20px;"> </div><br>
@@ -5358,10 +5360,11 @@ export const HTML_DATA: Map<string, string> =
           (Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 MC less for it.)
         </div>
       </div>
-      <span style="font-size:32px;
+      <span style="color: #020202;
+                      font-size:32px;
                       font-family: 'Arial Narrow','Verdana';
                       font-weight:normal;
-                       text-shadow: 6px 3px 5px  grey;">
+                      text-shadow: 6px 3px 5px  grey;">
                   THORGATE
               </span><br><br>
       <div class="production-box" style="margin-left:45px;margin-top:-10px;">
@@ -5502,7 +5505,7 @@ export const HTML_DATA: Map<string, string> =
       ##RESOURCES##
       <div class="venus-icon corporation-icon"></div>
       <div class="contentCorporation">
-        <div class="points" style="z-index:1;margin-top:231px;margin-left:124px;">1/3<div class="resource floater"></div></div>
+        <div class="pointsCorporation">1/3<div class="resource floater"></div></div>
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">ACTION</div>
           <div class="red-arrow"></div> <div class="resource floater"></div>*
@@ -5830,7 +5833,7 @@ export const HTML_DATA: Map<string, string> =
       ##RESOURCES##
       <div class="colonies-icon corporation-icon"></div>
       <div class="contentCorporation">
-        <div class="points" style="z-index:1;margin-top:231px;margin-left:124px;">1/2<div class="resource animal"></div></div>
+         <div class="pointsCorporation">1/2<div class="resource animal"></div></div>
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
           <div class="resource-tag tag-animal"></div> / <div class="resource-tag tag-plant"></div> : <div class="resource animal"></div>
@@ -5867,7 +5870,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="turmoil-icon corporation-icon"></div>
             ##RESOURCES##
             <div class="contentCorporation ">
-              <div class="points" style="z-index:1;margin-top:231px;margin-left:124px;">1/<div class="resource pristar"></div></div>
+               <div class="pointsCorporation">1/<div class="resource pristar"></div></div>
                 <div class="corporationEffectBox ">
                     <div class="corporationEffectBoxLabel" style="margin-bottom:5px;">EFFECT</div>
 
@@ -6000,7 +6003,8 @@ export const HTML_DATA: Map<string, string> =
 [CardName.BEGINNER_CORPORATION,`
       <div class="corporationLabel">CORPORATION</div>
       <div class="contentCorporation">
-        <div style="font-size:20px;
+        <div style="color:#020202;
+        font-size:20px;
         margin-top:10px;
         padding-left:3px;width:160px;background:#eeeeee;box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 3px 3px 3px grey;margin-left:10px;border-radius:5px;
         border-top: 2px solid rgb(221,221,221);

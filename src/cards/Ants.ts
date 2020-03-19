@@ -23,8 +23,9 @@ export class Ants implements IActionCard, IProjectCard {
     public play() {
       return undefined;
     }
-    public canAct(_player: Player, game: Game): boolean {
-      return this.getAvailableCards(game, _player).length > 0;
+    public canAct(player: Player, game: Game): boolean {
+      if (game.getPlayers().length === 1) return true;
+      return this.getAvailableCards(game, player).length > 0;
     }
     private getAvailableCards(game: Game, currentPlayer: Player): Array<ICard> {
       const availableCards: Array<ICard> = [];
@@ -46,6 +47,12 @@ export class Ants implements IActionCard, IProjectCard {
       return availableCards;
     }
     public action(player: Player, game: Game) {
+      // Solo play, can always steal from immaginary opponent
+      if (game.getPlayers().length === 1) {
+        player.addResourceTo(this);
+        return undefined;
+      }
+
       const availableCards: Array<ICard> = this.getAvailableCards(game, player);
       return new SelectCard('Select card to remove microbe', availableCards,
           (foundCards: Array<ICard>) => {

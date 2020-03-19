@@ -34,7 +34,7 @@ export class CloudSeeding implements IProjectCard {
           this.playersWithHeatProduction(game),
           'Select player to decrease heat production 1 step',
           (foundPlayer: Player) => {
-            foundPlayer.setProduction(Resources.HEAT,-1,game,player);;
+            foundPlayer.setProduction(Resources.HEAT,-1,game,player);
             return this.doPlay(player);
           }
       );

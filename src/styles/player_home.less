@@ -1,8 +1,49 @@
+@font-face {
+    font-family: Prototype;
+    src: url(./assets/Prototype.ttf);
+}
+
 #player-home {
     padding-left: 20px;
     border-left: 1px solid #adacac;
 }
- 
+h1 {
+    font-family: Prototype;
+    filter: drop-shadow(-1px -1px 1px rgba(255,255,255,100))drop-shadow(4px 4px 4px black) ;
+} 
+h2 {
+    filter: drop-shadow(-1px -1px 1px rgba(255,255,255,100))drop-shadow(2px 2px 2px black) ;
+} 
+.tag-count {
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background-size: 42px 42px;
+    background-position: -1px -1px;
+    text-align: center;
+    border-radius: 50%;
+    border-top: 2px solid rgb(221,221,221);
+    border-left: 2px solid rgb(221,221,221);
+    border-bottom: 2px solid rgb(137,137,137);
+    border-right: 2px solid rgb(137,137,137);
+    background-color: white;
+    margin-top: -6px;
+    box-sizing: content-box;
+    margin-left: 10px;
+}
+
+.tag-display {
+    display: inline-flex;
+    position: relative;
+}
+
+.tag-count-display {
+    color: #020202;
+    padding: 1px 7px 2px 10px;
+    line-height: 1;
+}
+
 .player_home_block--resources {
     position: sticky;
     top: -13px;
@@ -28,7 +69,7 @@
         color: #01b301;
     }
     .player_color_black {
-        color: #2d2d2d;
+        color: #020202;
     }
     .player_color_blue {
         color: #0202d5;
@@ -66,7 +107,12 @@
         text-decoration: underline;
     }
 }
-
+.milestones {
+     color: #00aaee;
+}
+.awards {
+     color: #eeaa00;
+}
 .player_home_block--setup {
     .wf-action {
         margin: 20px 0 40px;
@@ -77,6 +123,10 @@
             height: 50px;
             width: 150px;
         }
+    }
+
+    .accordion-body {
+        padding-left: 40px;
     }
 }
 
@@ -89,11 +139,5 @@
         vertical-align: top;
         margin: 0 25px 25px;
     }
+
 }
-
-.player_home_block--log li {
-    margin-top: 0 !important;
-}
-
-
-

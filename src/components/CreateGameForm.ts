@@ -19,6 +19,8 @@ interface CreateGameModel {
     corporations: Array<CorporationCard>;
     showCorporationList: boolean;
     board: BoardName;
+    showSeed: boolean;
+    seed: number;
 }
 
 interface NewPlayerModel {
@@ -50,7 +52,9 @@ export const CreateGameForm = Vue.component("create-game-form", {
             customCorporationsList: false,
             corporations: [...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS, ...ALL_TURMOIL_CORPORATIONS, ...ALL_PROMO_CORPORATIONS],
             showCorporationList: false,
-            board: BoardName.ORIGINAL
+            board: BoardName.ORIGINAL,
+            showSeed: false,
+            seed: Math.random()
         } as CreateGameModel
     },
     methods: {
@@ -86,7 +90,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
         }, 
         createGame: function () {
             if (this.randomFirstPlayer) {
-                this.firstIndex = Math.floor(Math.random() * this.playersCount) + 1;
+                this.firstIndex = Math.floor(this.seed * this.playersCount) + 1;
             }
 
             // Set player name for solo mode
@@ -94,10 +98,10 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 this.players[0].name = "You";
             }
 
-            const players = this.players.slice(0, this.playersCount + 1).map((player: any) => {
+            const players = this.players.slice(0, this.playersCount).map((player: any) => {
                 player.first = (this.firstIndex === player.index);
                 return player;
-            }).filter((player: any) => player.name);
+            });
             
             // TODO Check if all players has different colors
 
@@ -110,6 +114,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const corporations = this.$data.corporations;
             const customCorporationsList = this.$data.customCorporationsList;
             const board =  this.$data.board;
+            const seed = this.$data.seed;
             const xhr = new XMLHttpRequest();
             xhr.open("PUT", "/game");
             xhr.onerror = function () {
@@ -131,7 +136,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             };
             xhr.responseType = "json";
             xhr.send(JSON.stringify({
-                players: players, prelude, draftVariant, venusNext, colonies, customCorporationsList, corporations, board
+                players: players, prelude, draftVariant, venusNext, colonies, customCorporationsList, corporations, board, seed
             }));
         }
     },
@@ -173,7 +178,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         <div class="create-game-options-block col3 col-sm-6">
                             <h4>Options</h4>
 
-                            <label class="form-switch">
+                            <label class="form-switch" v-if="playersCount > 1">
                                 <input type="checkbox" name="draftVariant" v-model="draftVariant">
                                 <i class="form-icon"></i> Draft variant
                             </label>
@@ -187,6 +192,15 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <input type="checkbox" v-model="randomFirstPlayer">
                                 <i class="form-icon"></i> Random first player
                             </label>
+
+                            <label class="form-switch">
+                                <input type="checkbox" v-model="seededGame" v-on:click="showSeed = !showSeed" >
+                                <i class="form-icon"></i> Show seed
+                            </label>
+                            <div v-if="showSeed">
+                                <input class="form-input form-inline" v-model="seed" />
+                            </div>
+
                         </div>
 
                         <div class="create-game-options-block col3 col-sm-6">

@@ -17,13 +17,7 @@ export class Decomposers implements IProjectCard {
       return game.getOxygenLevel() >= 3 - player.getRequirementsBonus(game);
     }
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
-      if (
-        card.tags.indexOf(Tags.ANIMAL) !== -1 ||
-        card.tags.indexOf(Tags.MICROBES) !== -1 ||
-        card.tags.indexOf(Tags.PLANT) !== -1
-      ) {
-        player.addResourceTo(this);
-      }
+      player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT ||  tag === Tags.MICROBES).length);
     }
     public getVictoryPoints(player: Player): number {
       return Math.floor(player.getResourcesOnCard(this) / 3);

@@ -53,7 +53,7 @@ export const OtherPlayer = Vue.component("other-player", {
                             <card :card="player.corporationCard" :resources="player.corporationCardResources"></card>
                         </div>
                         <div v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
-                            <card :card="card.name" :resources="card.resources"></card>
+                            <card :card="card.name" :resources="card.resources" :player="player"></card>
                         </div>
 
                         <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>

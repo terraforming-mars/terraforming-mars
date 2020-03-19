@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class HeatTrappers implements IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
-    public name: string = CardName.HEAT_TRAPPERS;
+    public name: CardName = CardName.HEAT_TRAPPERS;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
 

@@ -8,7 +8,7 @@ import { Game } from '../../Game';
 export class SpacePortColony implements IProjectCard {
     public cost: number = 27;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.SPACE_PORT_COLONY;
+    public name: CardName = CardName.SPACE_PORT_COLONY;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {

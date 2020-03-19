@@ -8,7 +8,7 @@ import { Game } from '../../Game';
 export class SolarProbe implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SPACE, Tags.SCIENCE];
-    public name: string = CardName.SOLAR_PROBE;
+    public name: CardName = CardName.SOLAR_PROBE;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {

@@ -5,12 +5,13 @@ import {Player} from '../Player';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class ArtificialPhotosynthesis implements IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = 'Artificial Photosynthesis';
+    public name: CardName = CardName.ARTIFICIAL_PHOTOSYNTHESIS;
 
     public play(player: Player) {
       return new OrOptions(

@@ -13,7 +13,7 @@ import { CardName } from '../CardName';
 export class CommercialDistrict implements IProjectCard {
     public cost: number = 16;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.COMMERCIAL_DISTRICT;
+    public name: CardName = CardName.COMMERCIAL_DISTRICT;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {

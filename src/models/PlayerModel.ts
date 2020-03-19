@@ -37,4 +37,5 @@ export interface PlayerModel {
     victoryPoints: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;
     tags: Array<ITagCount>;
+    actionsThisGeneration: Array<string>;
 }

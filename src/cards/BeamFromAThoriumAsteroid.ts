@@ -4,12 +4,13 @@ import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
 import { Resources } from "../Resources";
+import { CardName } from '../CardName';
 
 export class BeamFromAThoriumAsteroid implements IProjectCard {
     public cost: number = 32;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE, Tags.ENERGY];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = 'Beam From A Thorium Asteroid';
+    public name: CardName = CardName.BEAM_FROM_A_THORIUM_ASTEROID;
     public canPlay(player: Player): boolean {
       return player.getTagCount(Tags.JOVIAN) >= 1;
     }

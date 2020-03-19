@@ -14,7 +14,7 @@ import { CardName } from '../CardName';
 export class AquiferPumping implements IActionCard, IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.AQUIFER_PUMPING;
+    public name: CardName = CardName.AQUIFER_PUMPING;
     public cardType: CardType = CardType.ACTIVE;
 
     public play() {

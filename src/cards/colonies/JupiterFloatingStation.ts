@@ -11,7 +11,7 @@ import { SelectOption } from "../../inputs/SelectOption";
 export class JupiterFloatingStation implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.JOVIAN];
-    public name: string = CardName.JUPITER_FLOATING_STATION;
+    public name: CardName = CardName.JUPITER_FLOATING_STATION;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType = ResourceType.FLOATER;
 

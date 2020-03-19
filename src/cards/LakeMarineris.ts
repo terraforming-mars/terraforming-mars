@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class LakeMarineris implements IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [];
-    public name: string = CardName.LAKE_MARINERIS;
+    public name: CardName = CardName.LAKE_MARINERIS;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() >= 0 - (2 * player.getRequirementsBonus(game));

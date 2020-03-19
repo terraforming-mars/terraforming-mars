@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class SoilFactory implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.SOIL_FACTORY;
+    public name: CardName = CardName.SOIL_FACTORY;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {

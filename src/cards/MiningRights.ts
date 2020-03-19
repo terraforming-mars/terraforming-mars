@@ -13,7 +13,7 @@ import { CardName } from '../CardName';
 export class MiningRights implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.MINING_RIGHTS;
+    public name: CardName = CardName.MINING_RIGHTS;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public bonusResource: Resources | undefined = undefined;

@@ -10,7 +10,7 @@ import { Resources } from '../Resources';
 export class Comet implements IProjectCard {
     public cost: number = 21;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.COMET;
+    public name: CardName = CardName.COMET;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {

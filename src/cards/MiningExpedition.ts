@@ -11,7 +11,7 @@ export class MiningExpedition implements IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.EVENT;
-    public name: string = CardName.MINING_EXPEDITION;
+    public name: CardName = CardName.MINING_EXPEDITION;
 
     public play(player: Player, game: Game) {
         game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 2);

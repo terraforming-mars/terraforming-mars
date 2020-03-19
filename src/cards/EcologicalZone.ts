@@ -9,13 +9,14 @@ import {TileType} from '../TileType';
 import {ResourceType} from '../ResourceType';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
+import { CardName } from '../CardName';
 
 export class EcologicalZone implements IProjectCard {
   public cost: number = 12;
   public resourceType: ResourceType = ResourceType.ANIMAL;
   public tags: Array<Tags> = [Tags.ANIMAL, Tags.PLANT];
   public cardType: CardType = CardType.ACTIVE;
-  public name: string = 'Ecological Zone';
+  public name: CardName = CardName.ECOLOGICAL_ZONE;
   private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
     return game.board.getAvailableSpacesOnLand(player)
         .filter(

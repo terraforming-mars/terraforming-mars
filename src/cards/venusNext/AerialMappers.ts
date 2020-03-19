@@ -8,11 +8,12 @@ import { ResourceType } from "../../ResourceType";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 import { SelectCard } from '../../inputs/SelectCard';
+import { CardName } from '../../CardName';
 
 export class AerialMappers implements IActionCard,IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = "Aerial Mappers";
+    public name: CardName = CardName.AERIAL_MAPPERS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
 

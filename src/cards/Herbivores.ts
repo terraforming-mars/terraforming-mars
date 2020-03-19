@@ -13,7 +13,7 @@ export class Herbivores implements IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.ANIMAL];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = CardName.HERBIVORES;
+    public name: CardName = CardName.HERBIVORES;
     public resourceType: ResourceType = ResourceType.ANIMAL;
 
     public canPlay(player: Player, game: Game): boolean {

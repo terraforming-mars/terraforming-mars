@@ -9,7 +9,7 @@ import { Game } from '../../Game';
 export class JovianLanterns implements IProjectCard {
     public cost: number = 20;
     public tags: Array<Tags> = [Tags.JOVIAN];
-    public name: string = CardName.JOVIAN_LANTERNS;
+    public name: CardName = CardName.JOVIAN_LANTERNS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType = ResourceType.FLOATER;
 

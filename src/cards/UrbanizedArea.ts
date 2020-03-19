@@ -13,7 +13,7 @@ import { CardName } from '../CardName';
 export class UrbanizedArea implements IProjectCard {
     public cost: number = 10;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public name: string = CardName.URBANIZED_AREA;
+    public name: CardName = CardName.URBANIZED_AREA;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {

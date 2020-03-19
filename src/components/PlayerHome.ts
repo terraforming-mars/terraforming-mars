@@ -1,4 +1,4 @@
-
+ 
 import Vue from "vue";
 
 import { Board } from "./Board";
@@ -102,7 +102,7 @@ export const PlayerHome = Vue.component("player-home", {
 
                     <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature" v-trim-whitespace></global-parameters>
 
-                    <div v-if="player.players.length > 1" class="player_home_block--millestones-and-awards">
+                    <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
                         <milestone :milestones_list="player.milestones" expanded=false />
                         <award :awards_list="player.awards" expanded=false />
                     </div>
@@ -149,7 +149,7 @@ export const PlayerHome = Vue.component("player-home", {
                         <card :card="player.corporationCard" :resources="player.corporationCardResources"></card>
                     </div>
                     <div v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
-                        <card :card="card.name" :resources="card.resources"></card>
+                        <card :card="card.name" :resources="card.resources" :player="player"></card>
                     </div>
 
                     <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
@@ -182,7 +182,7 @@ export const PlayerHome = Vue.component("player-home", {
                     <summary class="accordion-header">
                         <div class="is-action">
                             <i class="icon icon-arrow-right mr-1"></i>
-                            Millestones and awards
+                            Milestones and awards
                         </div>
                     </summary>
                     <div class="accordion-body">

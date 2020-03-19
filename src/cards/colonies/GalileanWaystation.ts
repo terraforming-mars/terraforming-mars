@@ -9,7 +9,7 @@ import { Game } from '../../Game';
 export class GalileanWaystation implements IProjectCard {
     public cost: number = 15;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.GALILEAN_WAYSTATION;
+    public name: CardName = CardName.GALILEAN_WAYSTATION;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

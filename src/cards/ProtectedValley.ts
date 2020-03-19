@@ -14,7 +14,7 @@ export class ProtectedValley implements IProjectCard {
     public cost: number = 23;
     public cardType: CardType = CardType.AUTOMATED;
     public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];
-    public name: string = CardName.PROTECTED_VALLEY;
+    public name: CardName = CardName.PROTECTED_VALLEY;
 
     public play(player: Player, game: Game) {
         return new SelectSpace(

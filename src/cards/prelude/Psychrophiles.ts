@@ -11,7 +11,7 @@ export class Psychrophiles implements IActionCard, IProjectCard {
     public cost: number = 2;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public tags: Array<Tags> = [Tags.MICROBES];
-    public name: string = CardName.PSYCHROPHILES;
+    public name: CardName = CardName.PSYCHROPHILES;
     public cardType: CardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() <= -20 + (player.getRequirementsBonus(game) * 2);

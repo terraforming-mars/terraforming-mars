@@ -9,7 +9,7 @@ import { CardName } from '../../CardName';
 export class HousePrinting implements IProjectCard {
     public cost: number = 10;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.HOUSE_PRINTING;
+    public name: CardName = CardName.HOUSE_PRINTING;
     public cardType: CardType = CardType.AUTOMATED;
 
 

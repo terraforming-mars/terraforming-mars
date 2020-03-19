@@ -10,7 +10,7 @@ export class FusionPower implements IProjectCard {
   public cost: number = 14;
   public tags: Array<Tags> = [Tags.SCIENCE, Tags.ENERGY, Tags.STEEL];
   public cardType: CardType = CardType.AUTOMATED;
-  public name: string = CardName.FUSION_POWER;
+  public name: CardName = CardName.FUSION_POWER;
   public canPlay(player: Player): boolean {
     return player.getTagCount(Tags.ENERGY) >= 2;
   }

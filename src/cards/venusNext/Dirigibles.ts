@@ -12,7 +12,7 @@ export class Dirigibles implements IActionCard,IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.VENUS];
 
-    public name: string = CardName.DIRIGIBLES;
+    public name: CardName = CardName.DIRIGIBLES;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
 

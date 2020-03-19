@@ -8,7 +8,7 @@ import { Resources } from "../../Resources";
 export class LunarMining implements IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.EARTH];
-    public name: string = CardName.LUNAR_MINING;
+    public name: CardName = CardName.LUNAR_MINING;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {

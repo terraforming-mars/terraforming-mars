@@ -7,7 +7,7 @@ import { CardName } from '../../CardName';
 
 export class MoholeExcavation extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.MOHOLE_EXCAVATION;
+    public name: CardName = CardName.MOHOLE_EXCAVATION;
     public play(player: Player) {     
         player.setProduction(Resources.STEEL);
         player.setProduction(Resources.HEAT,2);

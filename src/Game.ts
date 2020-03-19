@@ -110,6 +110,7 @@ export class Game {
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
       if (players.length === 1) {
+        this.draftVariant = false;
         this.setupSolo();
       }
 

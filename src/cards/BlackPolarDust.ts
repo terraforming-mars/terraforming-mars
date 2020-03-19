@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class BlackPolarDust implements IProjectCard {
     public cost: number = 15;
     public tags: Array<Tags> = [];
-    public name: string = CardName.BLACK_POLAR_DUST;
+    public name: CardName = CardName.BLACK_POLAR_DUST;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {

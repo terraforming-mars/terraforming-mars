@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class MagneticFieldGenerators implements IProjectCard {
     public cost: number = 20;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.MAGNETIC_FIELD_GENERATORS;
+    public name: CardName = CardName.MAGNETIC_FIELD_GENERATORS;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {

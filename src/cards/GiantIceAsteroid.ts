@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class GiantIceAsteroid implements IProjectCard {
     public cost: number = 36;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.GIANT_ICE_ASTEROID;
+    public name: CardName = CardName.GIANT_ICE_ASTEROID;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {

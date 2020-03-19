@@ -11,7 +11,7 @@ export class MagneticFieldDome implements IProjectCard {
     public cost: number = 5;
     public tags: Array<Tags> = [Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.MAGNETIC_FIELD_DOME;
+    public name: CardName = CardName.MAGNETIC_FIELD_DOME;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.ENERGY) >= 2;

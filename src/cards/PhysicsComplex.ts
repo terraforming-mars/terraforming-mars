@@ -5,11 +5,12 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { ResourceType } from "../ResourceType";
+import { CardName } from '../CardName';
 
 export class PhysicsComplex implements IActionCard, IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
-    public name: string = "Physics Complex";
+    public name: CardName = CardName.PHYSICS_COMPLEX;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.SCIENCE;
 

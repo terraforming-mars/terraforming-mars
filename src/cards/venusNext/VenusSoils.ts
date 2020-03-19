@@ -8,12 +8,12 @@ import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
 import { Game } from '../../Game';
 import { ICard } from '../ICard';
-
+import { CardName } from '../../CardName';
 
 export class VenusSoils implements IProjectCard {
     public cost: number = 20;
     public tags: Array<Tags> = [Tags.VENUS, Tags.PLANT];
-    public name: string = "Venus Soils";
+    public name: CardName = CardName.VENUS_SOILS;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

@@ -1,8 +1,19 @@
+@font-face {
+    font-family: Prototype;
+    src: url(./assets/Prototype.ttf);
+}
+
 #player-home {
     padding-left: 20px;
     border-left: 1px solid #adacac;
 }
- 
+h1 {
+    font-family: Prototype;
+    filter: drop-shadow(-1px -1px 1px rgba(255,255,255,100))drop-shadow(4px 4px 4px black) ;
+} 
+h2 {
+    filter: drop-shadow(-1px -1px 1px rgba(255,255,255,100))drop-shadow(2px 2px 2px black) ;
+} 
 .tag-count {
     box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
     position: relative;
@@ -108,7 +119,12 @@
         text-decoration: underline;
     }
 }
-
+.milestones {
+     color: #00aaee;
+}
+.awards {
+     color: #eeaa00;
+}
 .player_home_block--setup {
     .wf-action {
         margin: 20px 0 40px;

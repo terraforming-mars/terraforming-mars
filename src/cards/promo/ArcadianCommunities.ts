@@ -2,13 +2,13 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CorporationCard } from '../corporation/CorporationCard';
-import { CorporationName } from '../../CorporationName';
 import { SelectSpace } from "../../inputs/SelectSpace";
 import { ISpace } from '../../ISpace';
 import { IActionCard } from '../ICard';
+import { CardName } from '../../CardName';
 
 export class ArcadianCommunities implements IActionCard, CorporationCard {
-    public name: string = CorporationName.ARCADIAN_COMMUNITIES;
+    public name: CardName = CardName.ARCADIAN_COMMUNITIES;
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 40; 
 

@@ -10,7 +10,7 @@ export class IceAsteroid implements IProjectCard {
     public cost: number = 23;
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
-    public name: string = CardName.ICE_ASTEROID;
+    public name: CardName = CardName.ICE_ASTEROID;
 
     public play(player: Player, game: Game) {
         game.addOceanInterrupt(player, "Select space for first ocean");

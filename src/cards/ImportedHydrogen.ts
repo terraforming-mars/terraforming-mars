@@ -15,7 +15,7 @@ import { CardName } from '../CardName';
 export class ImportedHydrogen implements IProjectCard {
     public cost: number = 16;
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public name: string = CardName.IMPORTED_HYDROGEN;
+    public name: CardName = CardName.IMPORTED_HYDROGEN;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game): undefined | PlayerInput {

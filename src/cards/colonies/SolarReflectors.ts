@@ -8,7 +8,7 @@ import { Resources } from "../../Resources";
 export class SolarReflectors implements IProjectCard {
     public cost: number = 23;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.SOLAR_REFLECTORS;
+    public name: CardName = CardName.SOLAR_REFLECTORS;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {

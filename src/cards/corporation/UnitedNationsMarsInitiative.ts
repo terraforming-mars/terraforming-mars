@@ -4,9 +4,10 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CorporationCard } from "./CorporationCard";
+import { CardName } from '../../CardName';
 
 export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard {
-    public name: string = "United Nations Mars Initiative";
+    public name: CardName = CardName.UNITED_NATIONS_MARS_INITIATIVE;
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 40;
     public play() {

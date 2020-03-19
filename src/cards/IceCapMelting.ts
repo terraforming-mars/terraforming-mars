@@ -10,7 +10,7 @@ export class IceCapMelting implements IProjectCard {
     public cost: number = 5;
     public cardType: CardType = CardType.EVENT;
     public tags: Array<Tags> = [];
-    public name: string = CardName.ICE_CAP_MELTING;
+    public name: CardName = CardName.ICE_CAP_MELTING;
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() >= 2 - (2 * player.getRequirementsBonus(game));
     }

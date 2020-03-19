@@ -8,7 +8,7 @@ import { Resources } from "../../Resources";
 export class EarthElevator implements IProjectCard {
     public cost: number = 43;
     public tags: Array<Tags> = [Tags.SPACE, Tags.EARTH];
-    public name: string = CardName.EARTH_ELEVATOR;
+    public name: CardName = CardName.EARTH_ELEVATOR;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {

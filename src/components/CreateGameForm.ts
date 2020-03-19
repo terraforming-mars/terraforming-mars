@@ -180,7 +180,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         <div class="create-game-options-block col3 col-sm-6">
                             <h4>Options</h4>
 
-                            <label class="form-switch">
+                            <label class="form-switch" v-if="playersCount > 1">
                                 <input type="checkbox" name="draftVariant" v-model="draftVariant">
                                 <i class="form-icon"></i> Draft variant
                             </label>

@@ -8,7 +8,7 @@ import { CardName } from '../CardName';
 
 export class FuelFactory implements IProjectCard {
   public cost: number = 6;
-  public name: string = CardName.FUEL_FACTORY;
+  public name: CardName = CardName.FUEL_FACTORY;
   public tags: Array<Tags> = [Tags.STEEL];
   public cardType: CardType = CardType.AUTOMATED;
   public hasRequirements = false;

@@ -16,7 +16,7 @@ export class MiningArea implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
-    public name: string = CardName.MINING_AREA;
+    public name: CardName = CardName.MINING_AREA;
     public bonusResource: Resources | undefined = undefined;
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.board.getAvailableSpacesOnLand(player)

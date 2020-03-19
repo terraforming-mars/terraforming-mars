@@ -10,7 +10,7 @@ import { OrOptions } from "../../inputs/OrOptions";
 export class TitanAirScrapping implements IProjectCard {
     public cost: number = 21;
     public tags: Array<Tags> = [Tags.JOVIAN];
-    public name: string = CardName.TITAN_AIRSCRAPPING;
+    public name: CardName = CardName.TITAN_AIRSCRAPPING;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType = ResourceType.FLOATER;
 

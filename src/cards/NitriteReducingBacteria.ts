@@ -7,13 +7,14 @@ import { Player } from "../Player";
 import { OrOptions } from "../inputs/OrOptions";
 import { ResourceType } from "../ResourceType";
 import { SelectOption } from "../inputs/SelectOption";
+import { CardName } from '../CardName';
 
 export class NitriteReducingBacteria implements IActionCard, IProjectCard {
     public cost: number = 11;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public tags: Array<Tags> = [Tags.MICROBES];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = "Nitrite Reducing Bacteria";
+    public name: CardName = CardName.NITRITE_REDUCING_BACTERIA;
 
     public play(player: Player) {
         player.addResourceTo(this, 3);

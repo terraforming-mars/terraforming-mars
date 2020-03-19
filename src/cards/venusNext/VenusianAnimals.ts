@@ -4,11 +4,12 @@ import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { Game } from '../../Game';
+import { CardName } from '../../CardName';
 
 export class VenusianAnimals implements IProjectCard {
     public cost: number = 15;
     public tags: Array<Tags> = [Tags.VENUS, Tags.ANIMAL, Tags.SCIENCE];
-    public name: string = "Venusian Animals";
+    public name: CardName = CardName.VENUSIAN_ANIMALS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.ANIMAL;
     public canPlay(player: Player, game: Game): boolean {

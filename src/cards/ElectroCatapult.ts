@@ -13,7 +13,7 @@ import { CardName } from '../CardName';
 export class ElectroCatapult implements IActionCard, IProjectCard {
     public cost: number = 17;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.ELECTRO_CATAPULT;
+    public name: CardName = CardName.ELECTRO_CATAPULT;
     public cardType: CardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 1 &&

@@ -5,11 +5,12 @@ import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { Game } from '../../Game';
+import { CardName } from '../../CardName';
 
 export class VenusianInsects implements IActionCard,IProjectCard {
     public cost: number = 5;
     public tags: Array<Tags> = [Tags.VENUS, Tags.MICROBES];
-    public name: string = "Venusian Insects";
+    public name: CardName = CardName.VENUSIAN_INSECTS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public canPlay(player: Player, game: Game): boolean {

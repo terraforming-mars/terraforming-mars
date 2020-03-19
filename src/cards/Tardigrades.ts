@@ -4,12 +4,13 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { ResourceType } from "../ResourceType";
+import { CardName } from '../CardName';
 
 export class Tardigrades implements IProjectCard {
     public cost: number = 4;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public tags: Array<Tags> = [Tags.MICROBES];
-    public name: string = "Tardigrades";
+    public name: CardName = CardName.TARDIGRADES;
     public cardType: CardType = CardType.ACTIVE;
 
     public getVictoryPoints(player: Player): number {

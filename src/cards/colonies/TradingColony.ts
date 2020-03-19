@@ -8,7 +8,7 @@ import { Game } from '../../Game';
 export class TradingColony implements IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.TRADING_COLONY;
+    public name: CardName = CardName.TRADING_COLONY;
     public cardType: CardType = CardType.ACTIVE;
 
     public play(player: Player, game: Game) {

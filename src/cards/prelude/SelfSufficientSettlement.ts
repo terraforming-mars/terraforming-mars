@@ -10,7 +10,7 @@ import { CardName } from '../../CardName';
 
 export class SelfSufficientSettlement extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL, Tags.CITY];
-    public name: string = CardName.SELF_SUFFICIENT_SETTLEMENT;
+    public name: CardName = CardName.SELF_SUFFICIENT_SETTLEMENT;
     public play(player: Player, game: Game) {     
         return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
             game.addCityTile(player, space.id);

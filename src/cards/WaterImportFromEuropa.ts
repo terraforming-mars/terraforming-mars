@@ -14,7 +14,7 @@ import { CardName } from '../CardName';
 export class WaterImportFromEuropa implements IActionCard, IProjectCard {
     public cost: number = 25;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: string = CardName.WATER_IMPORT_FROM_EUROPA;
+    public name: CardName = CardName.WATER_IMPORT_FROM_EUROPA;
     public cardType: CardType = CardType.ACTIVE;
 
     public getVictoryPoints(player: Player) {

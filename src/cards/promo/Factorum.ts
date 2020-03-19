@@ -3,13 +3,13 @@ import { Player } from "../../Player";
 import { Tags } from "../Tags";
 import { Game } from '../../Game';
 import { IActionCard } from '../ICard';
-import { CorporationName } from '../../CorporationName';
 import { Resources } from "../../Resources";
 import { SelectOption } from '../../inputs/SelectOption';
 import { OrOptions } from '../../inputs/OrOptions';
+import { CardName } from '../../CardName';
 
 export class Factorum implements IActionCard, CorporationCard {
-    public name: string = CorporationName.FACTORUM;
+    public name: CardName = CardName.FACTORUM;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public startingMegaCredits: number = 37;
 

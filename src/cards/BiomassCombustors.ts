@@ -11,7 +11,7 @@ export class BiomassCombustors implements IProjectCard {
     public cost: number = 4;
     public cardType: CardType = CardType.AUTOMATED;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
-    public name: string = CardName.BIOMASS_COMBUSTORS;
+    public name: CardName = CardName.BIOMASS_COMBUSTORS;
     public canPlay(player: Player, game: Game): boolean {
       if (game.getPlayers().length > 1 && game.getPlayers().filter((p) => p.getProduction(Resources.PLANTS) > 0).length === 0) return false;
       return game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game);

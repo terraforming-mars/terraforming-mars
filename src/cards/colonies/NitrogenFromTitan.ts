@@ -9,7 +9,7 @@ import { Game } from '../../Game';
 export class NitrogenFromTitan implements IProjectCard {
     public cost: number = 25;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: string = CardName.NITROGEN_FROM_TITAN;
+    public name: CardName = CardName.NITROGEN_FROM_TITAN;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

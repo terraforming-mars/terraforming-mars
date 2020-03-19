@@ -7,7 +7,7 @@ import { CardName } from '../../CardName';
 
 export class MartianIndustries extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.MARTIAN_INDUSTRIES;
+    public name: CardName = CardName.MARTIAN_INDUSTRIES;
     public play(player: Player) {
         player.setProduction(Resources.ENERGY);
         player.setProduction(Resources.STEEL);

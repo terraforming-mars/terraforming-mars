@@ -11,7 +11,7 @@ export class IndustrialMicrobes implements IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.MICROBES, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.INDUSTRIAL_MICROBES;
+    public name: CardName = CardName.INDUSTRIAL_MICROBES;
 
     public play(player: Player, _game: Game) {
         player.setProduction(Resources.ENERGY);

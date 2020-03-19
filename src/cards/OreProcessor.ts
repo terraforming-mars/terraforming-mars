@@ -5,11 +5,12 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { CardName } from '../CardName';
 
 export class OreProcessor implements IActionCard, IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = "Ore Processor";
+    public name: CardName = CardName.ORE_PROCESSOR;
     public cardType: CardType = CardType.ACTIVE;
 
     public play(_player: Player, _game: Game) {

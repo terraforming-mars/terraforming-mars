@@ -12,7 +12,7 @@ import { CardName } from '../CardName';
 export class SmallAnimals implements IActionCard, IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.ANIMAL];
-    public name: string = CardName.SMALL_ANIMALS;
+    public name: CardName = CardName.SMALL_ANIMALS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.ANIMAL;
     public canPlay(player: Player, game: Game): boolean {

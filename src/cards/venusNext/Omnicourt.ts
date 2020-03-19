@@ -7,7 +7,7 @@ import { CardName } from '../../CardName';
 export class Omnicourt implements IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.OMNICOURT;
+    public name: CardName = CardName.OMNICOURT;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player): boolean {

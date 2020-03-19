@@ -4,10 +4,10 @@ import { Player } from '../../Player';
 import { ISpace } from "../../ISpace";
 import { TileType } from "../../TileType";
 import { Resources } from "../../Resources";
-import { CorporationName } from '../../CorporationName';
+import { CardName } from '../../CardName';
 
 export class LakefrontResorts implements CorporationCard {
-    public name: string = CorporationName.LAKEFRONT_RESORTS;
+    public name: CardName = CardName.LAKEFRONT_RESORTS;
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 54;
 

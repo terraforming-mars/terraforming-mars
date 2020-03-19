@@ -7,9 +7,10 @@ import { Game } from "../../Game";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 import { IAward } from "../../awards/IAward";
+import { CardName } from '../../CardName';
 
 export class Vitor implements CorporationCard {
-    public name: string = "Vitor";
+    public name: CardName = CardName.VITOR;
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 48; // It's 45 + 3 when this corp is played
 

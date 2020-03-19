@@ -38,6 +38,7 @@ import {TileType} from './src/TileType';
 import { Phase } from './src/Phase';
 import { Resources } from "./src/Resources";
 import { CardType } from "./src/cards/CardType";
+import { getAllTranslations } from "./src/api/translations/TranslationsLoader"
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
@@ -56,6 +57,7 @@ function requestHandler(
 ): void {
   if (req.url !== undefined) {
     if (req.method === 'GET') {
+      console.log("Serving", req.url);
       if (req.url.replace(/\?.*$/, '').startsWith('/games-overview')) {
         if (!isServerIdValid(req)) {
           notAuthorized(req, res);
@@ -74,6 +76,8 @@ function requestHandler(
         apiGetPlayer(req, res);
       } else if (req.url.startsWith('/api/waitingfor?id=')) {
         apiGetWaitingFor(req, res);
+      } else if (req.url.startsWith("/api/translations")) {
+        apiGetTranslations(req, res); 
       } else if (req.url === '/styles.css') {
         res.setHeader('Content-Type', 'text/css');
         serveResource(res, styles);
@@ -215,6 +219,16 @@ function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
   res.setHeader('Content-Type', 'application/json');
   res.write(getGame(game));
+  res.end();
+}
+
+function apiGetTranslations(
+  _: http.IncomingMessage,
+  res: http.ServerResponse
+): void {
+  res.setHeader('Content-Type', 'text/javascript; charset=utf-8');
+  let translations = getAllTranslations();
+  res.write("var TM_translations = " + JSON.stringify(translations) + ";");
   res.end();
 }
 

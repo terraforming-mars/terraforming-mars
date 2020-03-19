@@ -15,9 +15,26 @@ function trimEmptyTextNodes (el: any) {
     }
 }
   
-Vue.directive('trim-whitespace', {
+Vue.directive("trim-whitespace", {
     inserted: trimEmptyTextNodes,
     componentUpdated: trimEmptyTextNodes
+});
+
+function translateTextNode(el: any) {
+    
+    if ((window as any).TM_translations === undefined) return;
+
+    for (let node of el.childNodes) {
+        if (node.nodeType !== Node.TEXT_NODE) continue;
+        if ((window as any).TM_translations["ru"][node.data]) {
+            node.data = (window as any).TM_translations["ru"][node.data]
+        }
+    }
+}
+
+Vue.directive("i18", {
+    inserted: translateTextNode,
+    componentUpdated: translateTextNode
 });
 
 const app = new Vue({

@@ -1,4 +1,4 @@
-import { IActionCard, ICard } from './ICard';
+import { IActionCard, ICard, IResourceCard } from './ICard';
 import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
@@ -8,11 +8,12 @@ import {SelectCard} from '../inputs/SelectCard';
 import {ResourceType} from '../ResourceType';
 import { CardName } from '../CardName';
 
-export class Ants implements IActionCard, IProjectCard {
+export class Ants implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.MICROBES];
     public name: CardName = CardName.ANTS;
     public resourceType: ResourceType = ResourceType.MICROBE;
+    public resourceCount: number = 0;
     public cardType: CardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
       return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);

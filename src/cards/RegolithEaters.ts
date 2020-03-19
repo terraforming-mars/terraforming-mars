@@ -1,5 +1,5 @@
 
-import { IActionCard } from "./ICard";
+import { IActionCard, IResourceCard } from './ICard';
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -10,12 +10,13 @@ import { ResourceType } from "../ResourceType";
 import { SelectOption } from "../inputs/SelectOption";
 import { CardName } from '../CardName';
 
-export class RegolithEaters implements IActionCard, IProjectCard {
+export class RegolithEaters implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.MICROBES];
     public name: CardName = CardName.REGOLITH_EATERS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.MICROBE;
+    public resourceCount: number = 0;
 
     public play(_player: Player, _game: Game) {
         return undefined;

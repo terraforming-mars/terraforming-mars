@@ -6,12 +6,14 @@ import { IProjectCard } from '../IProjectCard';
 import { Resources } from '../../Resources';
 import { Game } from '../../Game';
 import { CardName } from '../../CardName';
+import { IResourceCard } from '../ICard';
 
-export class Arklight implements CorporationCard {
+export class Arklight implements CorporationCard, IResourceCard {
     public name: CardName =  CardName.ARKLIGHT;
     public tags: Array<Tags> = [Tags.ANIMAL];
     public startingMegaCredits: number = 45;
     public resourceType: ResourceType = ResourceType.ANIMAL;
+    public resourceCount: number = 0;
 
     public play(player: Player) {
         player.setProduction(Resources.MEGACREDITS, 2);

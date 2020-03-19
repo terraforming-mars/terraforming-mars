@@ -1,5 +1,5 @@
 import { IProjectCard } from "../IProjectCard";
-import {IActionCard} from '../ICard';
+import { IActionCard, IResourceCard } from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -9,12 +9,13 @@ import { SelectOption } from "../../inputs/SelectOption";
 import { Game } from '../../Game';
 import { CardName } from '../../CardName';
 
-export class ExtractorBalloons implements IActionCard,IProjectCard {
+export class ExtractorBalloons implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 21;
     public tags: Array<Tags> = [Tags.VENUS];
     public name: CardName = CardName.EXTRACTOR_BALLOONS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
 
     public play(player: Player) {
         player.addResourceTo(this, 3);

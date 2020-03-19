@@ -1,5 +1,5 @@
 import { IProjectCard } from "../IProjectCard";
-import {IActionCard} from '../ICard';
+import { IActionCard, IResourceCard } from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -10,12 +10,13 @@ import { Game } from '../../Game';
 import { SelectAmount } from '../../inputs/SelectAmount';
 import { CardName } from '../../CardName';
 
-export class SulphurEatingBacteria implements IActionCard,IProjectCard {
+export class SulphurEatingBacteria implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.VENUS, Tags.MICROBES];
     public name: CardName = CardName.SULPHUR_EATING_BACTERIA;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.MICROBE;
+    public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
         return game.getVenusScaleLevel() >= 6 - (2 * player.getRequirementsBonus(game, true));
     }

@@ -8,13 +8,15 @@ import { ResourceType } from "../ResourceType";
 import { TileType } from "../TileType";
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
+import { IResourceCard } from './ICard';
 
-export class Herbivores implements IProjectCard {
+export class Herbivores implements IProjectCard, IResourceCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.ANIMAL];
     public cardType: CardType = CardType.ACTIVE;
     public name: CardName = CardName.HERBIVORES;
     public resourceType: ResourceType = ResourceType.ANIMAL;
+    public resourceCount: number = 0;
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.getPlayers().length > 1 && game.getPlayers().filter((p) => p.getProduction(Resources.PLANTS) > 0).length === 0) return false;

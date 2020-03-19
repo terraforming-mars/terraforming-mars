@@ -21,6 +21,11 @@ export interface IActionCard {
     canAct: (player: Player, game: Game) => boolean;
 }
 
+export interface IResourceCard {
+    resourceType: ResourceType;
+    resourceCount: number;
+}
+
 export interface ICard {
     name: string;
     tags: Array<Tags>;
@@ -34,4 +39,5 @@ export interface ICard {
     onStandardProject?: (player: Player, projectType: StandardProjectType) => void;
     onTilePlaced?: (player: Player, space: ISpace, game: Game) => void;
     resourceType?: ResourceType;
+    resourceCount?: number;
 }

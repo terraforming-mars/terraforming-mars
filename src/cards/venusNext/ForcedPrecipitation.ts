@@ -1,5 +1,5 @@
 import { IProjectCard } from "../IProjectCard";
-import {IActionCard} from '../ICard';
+import { IActionCard, IResourceCard } from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -11,12 +11,13 @@ import { Game } from '../../Game';
 import { MAX_VENUS_SCALE } from '../../constants';
 import { CardName } from '../../CardName';
 
-export class ForcedPrecipitation implements IActionCard,IProjectCard {
+export class ForcedPrecipitation implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.VENUS];
     public name: CardName = CardName.FORCED_PRECIPITATION;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
 
     public play() {
         return undefined;

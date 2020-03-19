@@ -1,5 +1,5 @@
 
-import {IActionCard} from './ICard';
+import { IActionCard, IResourceCard } from './ICard';
 import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
@@ -9,11 +9,12 @@ import {Game} from '../Game';
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 
-export class Fish implements IActionCard, IProjectCard {
+export class Fish implements IActionCard, IProjectCard, IResourceCard {
   public cost: number = 9;
   public tags: Array<Tags> = [Tags.ANIMAL];
   public name: CardName = CardName.FISH;
   public resourceType: ResourceType = ResourceType.ANIMAL;
+  public resourceCount: number = 0;
   public cardType: CardType = CardType.ACTIVE;
 
   public canPlay(player: Player, game: Game): boolean {

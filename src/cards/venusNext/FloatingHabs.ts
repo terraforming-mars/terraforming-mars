@@ -1,5 +1,5 @@
 import { IProjectCard } from "../IProjectCard";
-import {ICard, IActionCard} from '../ICard';
+import { ICard, IActionCard, IResourceCard } from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -8,12 +8,13 @@ import { SelectCard } from '../../inputs/SelectCard';
 import { SelectHowToPay } from '../../inputs/SelectHowToPay';
 import { CardName } from '../../CardName';
 
-export class FloatingHabs implements IActionCard,IProjectCard {
+export class FloatingHabs implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 5;
     public tags: Array<Tags> = [Tags.VENUS];
     public name: CardName = CardName.FLOATING_HABS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 2 ;
     }

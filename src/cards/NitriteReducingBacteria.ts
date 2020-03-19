@@ -1,5 +1,5 @@
 
-import { IActionCard } from "./ICard";
+import { IActionCard, IResourceCard } from './ICard';
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -9,9 +9,10 @@ import { ResourceType } from "../ResourceType";
 import { SelectOption } from "../inputs/SelectOption";
 import { CardName } from '../CardName';
 
-export class NitriteReducingBacteria implements IActionCard, IProjectCard {
+export class NitriteReducingBacteria implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 11;
     public resourceType: ResourceType = ResourceType.MICROBE;
+    public resourceCount: number = 0;
     public tags: Array<Tags> = [Tags.MICROBES];
     public cardType: CardType = CardType.ACTIVE;
     public name: CardName = CardName.NITRITE_REDUCING_BACTERIA;

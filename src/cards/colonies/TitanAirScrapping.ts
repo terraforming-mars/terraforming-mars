@@ -6,13 +6,15 @@ import { CardName } from '../../CardName';
 import { ResourceType } from '../../ResourceType';
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
+import { IResourceCard } from '../ICard';
 
-export class TitanAirScrapping implements IProjectCard {
+export class TitanAirScrapping implements IProjectCard, IResourceCard {
     public cost: number = 21;
     public tags: Array<Tags> = [Tags.JOVIAN];
     public name: CardName = CardName.TITAN_AIRSCRAPPING;
     public cardType: CardType = CardType.ACTIVE;
-    public resourceType = ResourceType.FLOATER;
+    public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
 
     public canAct(player: Player): boolean {
         return player.titanium > 0  || player.getResourcesOnCard(this) >= 2;

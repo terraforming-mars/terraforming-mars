@@ -1,4 +1,4 @@
-import { IActionCard, ICard } from './ICard';
+import { IActionCard, ICard, IResourceCard } from './ICard';
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -9,12 +9,13 @@ import { SelectCard } from "../inputs/SelectCard";
 import { Pets } from "./Pets";
 import { CardName } from '../CardName';
 
-export class Predators implements IProjectCard, IActionCard {
+export class Predators implements IProjectCard, IActionCard, IResourceCard {
     public cost: number = 14;
     public tags: Array<Tags> = [Tags.ANIMAL];
     public name: CardName = CardName.PREDATORS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.ANIMAL;
+    public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 11 - player.getRequirementsBonus(game);
     }

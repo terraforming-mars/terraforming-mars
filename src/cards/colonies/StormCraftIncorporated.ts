@@ -2,15 +2,16 @@ import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
 import { ResourceType } from '../../ResourceType';
-import {ICard, IActionCard} from '../ICard';
+import { ICard, IActionCard, IResourceCard } from '../ICard';
 import { SelectCard } from '../../inputs/SelectCard';
 import { CardName } from '../../CardName';
 
-export class StormCraftIncorporated implements IActionCard, CorporationCard {
+export class StormCraftIncorporated implements IActionCard, CorporationCard, IResourceCard {
     public name: CardName =  CardName.STORMCRAFT_INCORPORATED;
     public tags: Array<Tags> = [Tags.JOVIAN];
     public startingMegaCredits: number = 48;
     public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
 
     public play() {
         return undefined;

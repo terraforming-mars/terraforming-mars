@@ -8,13 +8,15 @@ import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
 import { Game } from '../../Game';
 import { SelectTradeColony } from '../../interrupts/SelectTradeColony';
+import { IResourceCard } from '../ICard';
 
-export class TitanFloatingLaunchPad implements IProjectCard {
+export class TitanFloatingLaunchPad implements IProjectCard,IResourceCard {
     public cost: number = 18;
     public tags: Array<Tags> = [Tags.JOVIAN];
     public name: CardName = CardName.TITAN_FLOATER_LAUNCHPAD;
     public cardType: CardType = CardType.ACTIVE;
-    public resourceType = ResourceType.FLOATER;
+    public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
 
     public canAct(): boolean {
         return true;

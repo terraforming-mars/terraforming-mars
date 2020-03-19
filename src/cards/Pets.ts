@@ -7,11 +7,13 @@ import { TileType } from "../TileType";
 import { ISpace } from "../ISpace";
 import { ResourceType } from "../ResourceType";
 import { CardName} from "../CardName";
+import { IResourceCard } from './ICard';
 
 
-export class Pets implements IProjectCard {
+export class Pets implements IProjectCard, IResourceCard {
     public cost: number = 10;
     public resourceType: ResourceType = ResourceType.ANIMAL;
+    public resourceCount: number = 0;
     public tags: Array<Tags> = [Tags.EARTH, Tags.ANIMAL];
     public cardType: CardType = CardType.ACTIVE;
     public name: CardName = CardName.PETS;

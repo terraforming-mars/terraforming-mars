@@ -4,15 +4,16 @@ import { Player } from "../../Player";
 import { Tags } from "../Tags";
 import { ResourceType } from '../../ResourceType';
 import { Game } from '../../Game';
-import { IActionCard, ICard } from '../ICard';
+import { IActionCard, ICard, IResourceCard } from '../ICard';
 import { SelectCard } from '../../inputs/SelectCard';
 import { CardName } from '../../CardName';
 
-export class Celestic implements IActionCard, CorporationCard {
+export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public name: CardName = CardName.CELESTIC;
     public tags: Array<Tags> = [Tags.VENUS];
     public startingMegaCredits: number = 42;
     public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
 
     public initialAction(player: Player, game: Game) {
         for (let foundCard of game.drawCardsByResource(ResourceType.FLOATER, 2)) {

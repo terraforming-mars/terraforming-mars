@@ -5,10 +5,12 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { ResourceType } from "../ResourceType";
 import { CardName } from '../CardName';
+import { IResourceCard } from './ICard';
 
-export class Tardigrades implements IProjectCard {
+export class Tardigrades implements IProjectCard, IResourceCard {
     public cost: number = 4;
     public resourceType: ResourceType = ResourceType.MICROBE;
+    public resourceCount: number = 0;
     public tags: Array<Tags> = [Tags.MICROBES];
     public name: CardName = CardName.TARDIGRADES;
     public cardType: CardType = CardType.ACTIVE;

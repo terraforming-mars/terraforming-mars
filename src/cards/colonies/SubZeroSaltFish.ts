@@ -6,13 +6,15 @@ import { CardName } from '../../CardName';
 import { ResourceType } from '../../ResourceType';
 import { Game } from '../../Game';
 import { Resources } from '../../Resources';
+import { IResourceCard } from '../ICard';
 
-export class SubZeroSaltFish implements IProjectCard {
+export class SubZeroSaltFish implements IProjectCard, IResourceCard {
     public cost: number = 5;
     public tags: Array<Tags> = [Tags.ANIMAL];
     public name: CardName = CardName.SUBZERO_SALT_FISH;
     public cardType: CardType = CardType.ACTIVE;
-    public resourceType = ResourceType.ANIMAL;
+    public resourceType: ResourceType = ResourceType.ANIMAL;
+    public resourceCount: number = 0;
 
     public canAct(): boolean {
         return true;

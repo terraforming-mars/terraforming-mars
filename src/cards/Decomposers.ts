@@ -6,10 +6,12 @@ import {Player} from '../Player';
 import {Game} from '../Game';
 import {ResourceType} from '../ResourceType';
 import { CardName } from '../CardName';
+import { IResourceCard } from './ICard';
 
-export class Decomposers implements IProjectCard {
+export class Decomposers implements IProjectCard, IResourceCard {
     public cost: number = 5;
     public resourceType: ResourceType = ResourceType.MICROBE;
+    public resourceCount: number = 0;
     public tags: Array<Tags> = [Tags.MICROBES];
     public cardType: CardType = CardType.ACTIVE;
     public name: CardName = CardName.DECOMPOSERS;

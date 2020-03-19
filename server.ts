@@ -414,15 +414,13 @@ function getWaitingFor(
       }
       break;
     case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD:
-      result.cards = (waitingFor as SelectHowToPayForCard)
-          .cards.map((card) => card.name);
+      result.cards = (waitingFor as SelectHowToPayForCard).cards;
       result.microbes = (waitingFor as SelectHowToPayForCard).microbes;
       result.floaters = (waitingFor as SelectHowToPayForCard).floaters;
       result.canUseHeat = (waitingFor as SelectHowToPayForCard).canUseHeat;
       break;
     case PlayerInputTypes.SELECT_CARD:
-      result.cards = (waitingFor as SelectCard<ICard>)
-          .cards.map((card) => card.name);
+      result.cards = (waitingFor as SelectCard<ICard>).cards;
       result.maxCardsToSelect = (waitingFor as SelectCard<ICard>)
           .maxCardsToSelect;
       result.minCardsToSelect = (waitingFor as SelectCard<ICard>)

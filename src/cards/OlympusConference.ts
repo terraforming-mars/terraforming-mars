@@ -8,12 +8,14 @@ import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
 import { ResourceType } from "../ResourceType";
 import { CardName } from '../CardName';
+import { IResourceCard } from './ICard';
 
-export class OlympusConference implements IProjectCard {
+export class OlympusConference implements IProjectCard, IResourceCard {
     public cost: number = 10;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.EARTH, Tags.STEEL];
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.SCIENCE;
+    public resourceCount: number = 0;
     public name: CardName = CardName.OLYMPUS_CONFERENCE;
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {

@@ -1,5 +1,5 @@
 import { IProjectCard } from "../IProjectCard";
-import {IActionCard} from '../ICard';
+import { IActionCard, IResourceCard } from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -11,12 +11,13 @@ import { Game } from '../../Game';
 import { MAX_VENUS_SCALE } from '../../constants';
 import { CardName } from '../../CardName';
 
-export class RotatorImpacts implements IActionCard,IProjectCard {
+export class RotatorImpacts implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.SPACE];
     public name: CardName = CardName.ROTATOR_IMPACTS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.ASTEROID;
+    public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
         return game.getVenusScaleLevel() - (2 * player.getRequirementsBonus(game)) <= 14;
     }

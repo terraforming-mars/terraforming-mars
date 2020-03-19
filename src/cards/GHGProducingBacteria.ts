@@ -1,5 +1,5 @@
 
-import { IActionCard } from "./ICard";
+import { IActionCard, IResourceCard } from './ICard';
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -10,12 +10,13 @@ import { ResourceType } from "../ResourceType";
 import { SelectOption } from "../inputs/SelectOption";
 import { CardName } from '../CardName';
 
-export class GHGProducingBacteria implements IActionCard, IProjectCard {
+export class GHGProducingBacteria implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.MICROBES];
     public name: CardName = CardName.GHG_PRODUCING_BACTERIA;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.MICROBE;
+    public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);
     }

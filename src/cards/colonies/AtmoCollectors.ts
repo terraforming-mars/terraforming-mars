@@ -7,13 +7,15 @@ import { ResourceType } from '../../ResourceType';
 import { Game } from '../../Game';
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
+import { IResourceCard } from '../ICard';
 
-export class AtmoCollectors implements IProjectCard {
+export class AtmoCollectors implements IProjectCard, IResourceCard {
     public cost: number = 15;
     public tags: Array<Tags> = [];
     public name: CardName = CardName.ATMO_COLLECTORS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
 
     public canAct(): boolean {
         return true;

@@ -8,13 +8,15 @@ import { IProjectCard } from '../IProjectCard';
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
 import { CardName } from '../../CardName';
+import { IResourceCard } from '../ICard';
 
 
-export class Recyclon implements CorporationCard {
+export class Recyclon implements CorporationCard, IResourceCard {
     public name: CardName = CardName.RECYCLON;
     public tags: Array<Tags> = [Tags.MICROBES, Tags.STEEL];
     public startingMegaCredits: number = 38;
     public resourceType: ResourceType = ResourceType.MICROBE;
+    public resourceCount: number = 0;
 
     public play(player: Player) {
         player.setProduction(Resources.STEEL);

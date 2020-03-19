@@ -1,5 +1,5 @@
 import { IProjectCard } from "../IProjectCard";
-import {IActionCard} from '../ICard';
+import { IActionCard, IResourceCard } from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -9,12 +9,13 @@ import { SelectOption } from "../../inputs/SelectOption";
 import { Resources } from '../../Resources';
 import { CardName } from '../../CardName';
 
-export class DeuteriumExport implements IActionCard,IProjectCard {
+export class DeuteriumExport implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.SPACE, Tags.VENUS, Tags.ENERGY];
     public name: CardName = CardName.DEUTERIUM_EXPORT;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
 
     public play() {
         return undefined;

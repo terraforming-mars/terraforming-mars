@@ -44,7 +44,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
     methods: {
         getCardCost: function () {
             for (const icard of this.player.cardsInHand) {
-                if (this.$data.card === icard.name) {
+                if (this.$data.card.name === icard.name) {
                     return icard.calculatedCost
                 }
             }
@@ -150,7 +150,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 return;
             }
             this.onsave([[
-                this.$data.card,
+                this.$data.card.name,
                 JSON.stringify(htp)
             ]]);
         }
@@ -161,7 +161,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
 
   <label v-for="availableCard in playerinput.cards" :key="availableCard" class="payments_cards">
     <input class="hidden" type="radio" v-model="card" v-on:change="cardChanged()" :value="availableCard" />
-    <card class="cardbox" :card="availableCard"></card>
+    <card class="cardbox" :card="availableCard.name" :resources="availableCard.resourceCount"></card>
   </label>
 
   <section v-trim-whitespace>

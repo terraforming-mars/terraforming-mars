@@ -9,7 +9,7 @@ import { Game } from '../../Game';
 export class FloaterTechnology implements IProjectCard {
     public cost: number = 7;
     public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: string = CardName.FLOATER_TECHNOLOGY;
+    public name: CardName = CardName.FLOATER_TECHNOLOGY;
     public cardType: CardType = CardType.ACTIVE;
 
     public canAct(player: Player): boolean {

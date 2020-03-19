@@ -10,7 +10,7 @@ export class FueledGenerators implements IProjectCard {
   public cost: number = 1;
   public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
   public cardType: CardType = CardType.AUTOMATED;
-  public name: string = CardName.FUELED_GENERATORS;
+  public name: CardName = CardName.FUELED_GENERATORS;
   public hasRequirements = false;
   public canPlay(player: Player): boolean {
     return player.getProduction(Resources.MEGACREDITS) >= -4;

@@ -6,11 +6,12 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
+import { CardName } from '../CardName';
 
 export class ViralEnhancers implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.MICROBES];
-    public name: string = "Viral Enhancers";
+    public name: CardName = CardName.VIRAL_ENHANCERS;
     public cardType: CardType = CardType.ACTIVE;
 
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {

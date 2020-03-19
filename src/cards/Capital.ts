@@ -15,7 +15,7 @@ export class Capital implements IProjectCard {
     public cost: number = 26;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.CAPITAL;
+    public name: CardName = CardName.CAPITAL;
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 2 &&
         game.board.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game) &&

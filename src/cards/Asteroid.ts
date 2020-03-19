@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class Asteroid implements IProjectCard {
     public cost: number = 14;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.ASTEROID;
+    public name: CardName = CardName.ASTEROID;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {

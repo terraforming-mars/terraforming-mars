@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class FoodFactory implements IProjectCard {
   public cost: number = 12;
   public tags: Array<Tags> = [Tags.STEEL];
-  public name: string = CardName.FOOD_FACTORY;
+  public name: CardName = CardName.FOOD_FACTORY;
   public cardType: CardType = CardType.AUTOMATED;
   public hasRequirements = false;
   public canPlay(player: Player): boolean {

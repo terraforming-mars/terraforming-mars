@@ -1,13 +1,13 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { CorporationName } from '../../CorporationName';
 import { Game } from '../../Game';
 import { SelectOption } from '../../inputs/SelectOption';
 import { OrOptions } from '../../inputs/OrOptions';
+import { CardName } from '../../CardName';
 
 export class Poseidon implements CorporationCard {
-    public name: string =  CorporationName.POSEIDON;
+    public name: CardName =  CardName.POSEIDON;
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 45;
 

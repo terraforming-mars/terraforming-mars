@@ -9,12 +9,12 @@ import { Resources } from '../../Resources';
 import { IActionCard, ICard } from '../ICard';
 import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
-
+import { CardName } from '../../CardName';
 
 export class Stratopolis implements IActionCard, IProjectCard {
     public cost: number = 22;
     public tags: Array<Tags> = [Tags.CITY, Tags.VENUS];
-    public name: string = "Stratopolis";
+    public name: CardName = CardName.STRATOPOLIS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
     public canPlay(player: Player): boolean {

@@ -11,7 +11,7 @@ import { Resources } from '../Resources';
 export class RoboticWorkforce implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: string = "Robotic Workforce";
+    public name: CardName = CardName.ROBOTIC_WORKFORCE;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
         return this.getAvailableCards(player, game).length > 0;

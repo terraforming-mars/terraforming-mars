@@ -1,11 +1,11 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { CorporationName } from '../../CorporationName';
 import { ResourceType } from '../../ResourceType';
+import { CardName } from '../../CardName';
 
 export class Pristar implements CorporationCard {
-    public name: string = CorporationName.PRISTAR;
+    public name: CardName = CardName.PRISTAR;
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 53;
     public resourceType: ResourceType = ResourceType.PRESERVATION;

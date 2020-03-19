@@ -1,17 +1,17 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { CorporationName } from '../../CorporationName';
 import { ResourceType } from '../../ResourceType';
 import { Resources } from "../../Resources";
 import { Game } from '../../Game';
 import { IProjectCard } from '../IProjectCard';
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
+import { CardName } from '../../CardName';
 
 
 export class Recyclon implements CorporationCard {
-    public name: string = CorporationName.RECYCLON;
+    public name: CardName = CardName.RECYCLON;
     public tags: Array<Tags> = [Tags.MICROBES, Tags.STEEL];
     public startingMegaCredits: number = 38;
     public resourceType: ResourceType = ResourceType.MICROBE;

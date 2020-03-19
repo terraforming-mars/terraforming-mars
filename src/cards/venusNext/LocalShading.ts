@@ -7,11 +7,12 @@ import { ResourceType } from "../../ResourceType";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from '../../inputs/SelectOption';
 import { Resources } from "../../Resources";
+import { CardName } from '../../CardName';
 
 export class LocalShading implements IActionCard,IProjectCard {
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = "Local Shading";
+    public name: CardName = CardName.LOCAL_SHADING;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
 

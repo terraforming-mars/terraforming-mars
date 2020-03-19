@@ -9,7 +9,7 @@ import { Resources } from "../../Resources";
 export class RefugeeCamps implements IProjectCard {
     public cost: number = 10;
     public tags: Array<Tags> = [Tags.EARTH];
-    public name: string = CardName.REFUGEE_CAMP;
+    public name: CardName = CardName.REFUGEE_CAMP;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType = ResourceType.CAMP;
 

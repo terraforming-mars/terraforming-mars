@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class CarbonateProcessing implements IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.CARBONATE_PROCESSING;
+    public name: CardName = CardName.CARBONATE_PROCESSING;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {

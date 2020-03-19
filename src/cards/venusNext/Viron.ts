@@ -5,9 +5,10 @@ import { Game } from "../../Game";
 import { Tags } from "../Tags";
 import { ICard } from "../ICard";
 import {SelectCard} from '../../inputs/SelectCard';
+import { CardName } from '../../CardName';
 
 export class Viron implements ICard, CorporationCard {
-    public name: string = "Viron";
+    public name: CardName = CardName.VIRON;
     public tags: Array<Tags> = [Tags.MICROBES];
     public startingMegaCredits: number = 48;
 

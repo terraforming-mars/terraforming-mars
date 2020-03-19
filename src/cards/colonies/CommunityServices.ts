@@ -8,7 +8,7 @@ import { Resources } from "../../Resources";
 export class CommunityServices implements IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [];
-    public name: string = CardName.COMMUNITY_SERVICES;
+    public name: CardName = CardName.COMMUNITY_SERVICES;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {

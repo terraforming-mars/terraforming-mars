@@ -14,7 +14,7 @@ import { CardName } from '../CardName';
 export class Flooding implements IProjectCard {
   public cardType: CardType = CardType.EVENT;
   public cost: number = 7;
-  public name: string = CardName.FLOODING;
+  public name: CardName = CardName.FLOODING;
   public tags: Array<Tags> = [];
   public play(player: Player, game: Game) {
     return new SelectSpace(

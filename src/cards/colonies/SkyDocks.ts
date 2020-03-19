@@ -7,7 +7,7 @@ import { CardName } from '../../CardName';
 export class SkyDocks implements IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [Tags.SPACE, Tags.EARTH];
-    public name: string = CardName.SKY_DOCKS;
+    public name: CardName = CardName.SKY_DOCKS;
     public cardType: CardType = CardType.ACTIVE;
 
     public canPlay(player: Player): boolean {

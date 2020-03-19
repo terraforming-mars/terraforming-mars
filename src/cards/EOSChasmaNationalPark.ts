@@ -13,7 +13,7 @@ export class EosChasmaNationalPark implements IProjectCard {
   public cost: number = 16;
   public nonNegativeVPIcon: boolean = true;
   public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];
-  public name: string = CardName.EOS_CHASMA_NATIONAL_PARK;
+  public name: CardName = CardName.EOS_CHASMA_NATIONAL_PARK;
   public cardType: CardType = CardType.AUTOMATED;
 
   public canPlay(player: Player, game: Game): boolean {

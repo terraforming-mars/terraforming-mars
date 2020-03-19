@@ -4,12 +4,13 @@ import { Player } from "../Player";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { Game } from "../Game";
+import { CardName } from '../CardName';
 
 export class IndenturedWorkers implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public cost: number = 0;
     public tags: Array<Tags> = [];
-    public name: string = "Indentured Workers";
+    public name: CardName = CardName.INDENTURED_WORKERS;
 
     public getCardDiscount(player: Player, _game: Game) {
         if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {

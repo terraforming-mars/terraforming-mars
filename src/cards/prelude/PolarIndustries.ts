@@ -8,7 +8,7 @@ import { CardName } from '../../CardName';
 
 export class PolarIndustries extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.POLAR_INDUSTRIES;
+    public name: CardName = CardName.POLAR_INDUSTRIES;
     public play(player: Player, game: Game) {
         game.addOceanInterrupt(player);
         player.setProduction(Resources.HEAT,2);

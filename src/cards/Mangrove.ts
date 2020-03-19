@@ -7,11 +7,12 @@ import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { SpaceType } from "../SpaceType";
 import { ISpace } from "../ISpace";
+import { CardName } from '../CardName';
 
 export class Mangrove implements IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.PLANT];
-    public name: string = "Mangrove";
+    public name: CardName = CardName.MANGROVE;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
         return game.getTemperature() >= 4 - (2 * player.getRequirementsBonus(game));

@@ -3,12 +3,12 @@ import { Player } from "../../Player";
 import { Tags } from "../Tags";
 import { ResourceType } from '../../ResourceType';
 import { IProjectCard } from '../IProjectCard';
-import { CorporationName } from '../../CorporationName';
 import { Resources } from '../../Resources';
 import { Game } from '../../Game';
+import { CardName } from '../../CardName';
 
 export class Arklight implements CorporationCard {
-    public name: string =  CorporationName.ARKLIGHT;
+    public name: CardName =  CardName.ARKLIGHT;
     public tags: Array<Tags> = [Tags.ANIMAL];
     public startingMegaCredits: number = 45;
     public resourceType: ResourceType = ResourceType.ANIMAL;

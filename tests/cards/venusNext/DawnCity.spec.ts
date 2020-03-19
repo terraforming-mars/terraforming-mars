@@ -10,7 +10,7 @@ describe("DawnCity", function () {
     it("Should play", function () {
         const card = new DawnCity();
         const player = new Player("test", Color.BLUE, false,);
-        const game = new Game("foobar", [player,player], player, false, false, true);
+        const game = new Game("foobar", [player,player], player, false, false, false, true);
         player.setProduction(Resources.ENERGY);
         expect(card.canPlay(player)).to.eq(false);
         const action = card.play(player,game);

@@ -235,7 +235,7 @@ describe("Game", function () {
     it("Check Ecologist Milestone", function() {
         const player = new Player("temp_test", Color.BLUE, false);
         const player2 = new Player("temp_test2", Color.RED, false);
-        const game = new Game("classic_game", [player,player2], player, false, false, false, false, false, undefined, BoardName.ELYSIUM);
+        const game = new Game("classic_game", [player,player2], player, false, false, false, false, false, false, undefined, BoardName.ELYSIUM);
 
         const card1 = new ResearchNetwork();
         const card2 = new ArcticAlgae();

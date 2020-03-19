@@ -45,7 +45,8 @@ export const OtherPlayer = Vue.component("other-player", {
                         <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>
                     </div>
                 </div>
-                <div class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
+
+                <div v-if="player.showOtherPlayersVP" class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
                     <div>
                         <div class="tag-display">
                             <div class="tag-count icon-vp"></div>
@@ -53,6 +54,7 @@ export const OtherPlayer = Vue.component("other-player", {
                         </div>
                     </div>
                 </div>
+                <div v-else class="nofloat"></div>
 
                 <div v-if="player.playedCards.length > 0 || player.corporationCard !== undefined" class="player_home_block">
                     <h4>Played Cards</h4>

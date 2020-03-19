@@ -77,6 +77,7 @@ export class Game {
       private first: Player,
       private preludeExtension: boolean = false,
       private draftVariant: boolean = false,
+      public showOtherPlayersVP: boolean = false,
       public venusNextExtension: boolean = false,
       public coloniesExtension: boolean = false,
       customCorporationsList: boolean = false,

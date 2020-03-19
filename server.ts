@@ -301,7 +301,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         }
       }
 
-      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.venusNext, gameReq.colonies, gameReq.customCorporationsList, selectedCorporations, gameReq.board, gameReq.seed);
+      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.showOtherPlayersVP, gameReq.venusNext, gameReq.colonies, gameReq.customCorporationsList, selectedCorporations, gameReq.board, gameReq.seed);
       games.set(gameId, game);
       game.getPlayers().forEach((player) => {
         playersToGame.set(player.id, game);
@@ -373,7 +373,8 @@ function getPlayer(player: Player, game: Game): string {
     venusScaleLevel: game.getVenusScaleLevel(),
     boardName: game.boardName,
     colonies: getColonies(game.colonies),
-    tags: player.getAllTags()
+    tags: player.getAllTags(),
+    showOtherPlayersVP: game.showOtherPlayersVP
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -515,7 +516,8 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       venusScaleLevel: game.getVenusScaleLevel(),
       boardName: game.boardName,
       colonies: getColonies(game.colonies),
-      tags: player.getAllTags()
+      tags: player.getAllTags(),
+      showOtherPlayersVP: game.showOtherPlayersVP
     } as PlayerModel;
   });
 }

@@ -5,9 +5,9 @@ describe("TranslationsLoader", function () {
 
     it("Loads all translations", function () {
         let translations = getAllTranslations();
-        let ruLang = translations.get("ru");
+        let ruLang = translations["ru"];
         if (ruLang === undefined) return;
-        expect(ruLang.get("Terraforming Mars")).to.eq("Покорение Марса");
+        expect(ruLang["Terraforming Mars"]).to.eq("Покорение Марса");
     });
 
 });

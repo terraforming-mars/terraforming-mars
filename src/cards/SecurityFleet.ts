@@ -15,8 +15,8 @@ export class SecurityFleet implements IActionCard, IProjectCard, IResourceCard {
     public resourceType: ResourceType = ResourceType.FIGHTER;
     public resourceCount: number = 0;
 
-    public getVictoryPoints(player: Player): number {
-        return player.getResourcesOnCard(this);
+    public getVictoryPoints(): number {
+        return this.resourceCount;
     }
     public play() {
         return undefined;
@@ -26,7 +26,7 @@ export class SecurityFleet implements IActionCard, IProjectCard, IResourceCard {
     }
     public action(player: Player) {
         player.titanium--;
-        player.addResourceTo(this);
+        this.resourceCount++;
         return undefined;
     }
 }

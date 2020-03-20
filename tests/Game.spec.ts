@@ -67,7 +67,7 @@ describe("Game", function () {
 
         // Add some cards with VPs
         const birdsCard = new Birds()
-        player.addResourceTo(birdsCard, 6)
+        birdsCard.resourceCount += 6;
         player.playedCards.push(birdsCard);
 
         player2.playedCards.push(new WaterImportFromEuropa())

@@ -194,7 +194,7 @@ export class Player {
       if (card.name === CardName.PETS) {
         throw new Error("Animals may not be removed from pets");
       }
-      if (this.getResourcesOnCard(card) === 0) {
+      if (card.resourceCount === 0) {
         throw new Error(card.name + " does not have animals to remove");
       }
       this.removeResourceFrom(card, count, game, removingPlayer);

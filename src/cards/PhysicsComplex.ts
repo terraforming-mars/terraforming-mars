@@ -15,8 +15,8 @@ export class PhysicsComplex implements IActionCard, IProjectCard, IResourceCard 
     public resourceType: ResourceType = ResourceType.SCIENCE;
     public resourceCount: number = 0;
 
-    public getVictoryPoints(player: Player): number {
-        return 2 * player.getResourcesOnCard(this);
+    public getVictoryPoints(): number {
+        return 2 * this.resourceCount;
     }
     public play() {
         return undefined;
@@ -26,7 +26,7 @@ export class PhysicsComplex implements IActionCard, IProjectCard, IResourceCard 
     }
     public action(player: Player) {
         player.energy -= 6;
-        player.addResourceTo(this);
+        this.resourceCount++;
         return undefined;
     }
 }

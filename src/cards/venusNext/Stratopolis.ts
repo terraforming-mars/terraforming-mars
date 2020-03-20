@@ -26,8 +26,8 @@ export class Stratopolis implements IActionCard, IProjectCard, IResourceCard {
         game.addCityTile(player, SpaceName.STRATOPOLIS, SpaceType.COLONY);
         return undefined;
     }
-    public getVictoryPoints(player: Player): number {
-        return Math.floor(player.getResourcesOnCard(this) / 3);
+    public getVictoryPoints(): number {
+        return Math.floor(this.resourceCount / 3);
     }
 
     public getResCards(player: Player): ICard[] {

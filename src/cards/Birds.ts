@@ -21,8 +21,8 @@ export class Birds implements IActionCard, IProjectCard, IResourceCard {
       if (game.getPlayers().length > 1 && game.getPlayers().filter((p) => p.getProduction(Resources.PLANTS) > 1).length === 0) return false;
       return game.getOxygenLevel() >= 13 - player.getRequirementsBonus(game);
     }
-    public getVictoryPoints(player: Player): number {
-      return player.getResourcesOnCard(this);
+    public getVictoryPoints(): number {
+      return this.resourceCount;
     }
     public play(player: Player, game: Game) {
       game.addResourceProductionDecreaseInterrupt(player, Resources.PLANTS, 2);
@@ -31,8 +31,8 @@ export class Birds implements IActionCard, IProjectCard, IResourceCard {
     public canAct(): boolean {
       return true;
     }
-    public action(player: Player) {
-      player.addResourceTo(this);
+    public action() {
+      this.resourceCount++;
       return undefined;
     }
 }

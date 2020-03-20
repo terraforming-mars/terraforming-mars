@@ -40,14 +40,14 @@ export class AerialMappers implements IActionCard,IProjectCard, IResourceCard {
         );
 
         const spendResource = new SelectOption("Remove 1 floater on this card and draw a card", () => {
-            player.removeResourceFrom(this, 1);
+            this.resourceCount--;
             player.cardsInHand.push(game.dealer.dealCard());
             return undefined;
         });
 
         opts.push(addResource);
 
-        if (player.getResourcesOnCard(this) > 0) {
+        if (this.resourceCount > 0) {
              opts.push(spendResource);
         } else return addResource;
 

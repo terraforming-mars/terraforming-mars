@@ -23,18 +23,18 @@ export class JetStreamMicroscrappers implements IActionCard,IProjectCard, IResou
     }
     public canAct(player: Player, game: Game): boolean {
         return player.titanium > 0 || 
-          (player.getResourcesOnCard(this) > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE);
+          (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE);
     }    
     public action(player: Player, game: Game) {
         var opts: Array<SelectOption> = [];
         const addResource = new SelectOption("Spend one titanium to add 2 floaters to this card", () => {
-            player.addResourceTo(this,2);
+            this.resourceCount += 2;
             player.titanium--;
             return undefined;
         });
 
         const spendResource = new SelectOption("Remove 2 floaters to raise Venus 1 step", () => {
-            player.removeResourceFrom(this, 2);
+            this.resourceCount -= 2;
             game.increaseVenusScaleLevel(player, 1);
             return undefined;
         });
@@ -43,7 +43,7 @@ export class JetStreamMicroscrappers implements IActionCard,IProjectCard, IResou
             opts.push(addResource);
         } else return spendResource;
 
-        if (player.getResourcesOnCard(this) > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
+        if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
             opts.push(spendResource);
         } else return addResource;
 

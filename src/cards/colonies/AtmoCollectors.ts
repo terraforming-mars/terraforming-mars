@@ -22,27 +22,27 @@ export class AtmoCollectors implements IProjectCard, IResourceCard {
     } 
 
     public action(player: Player) {
-        if (player.getResourcesOnCard(this) < 1) {
-            player.addResourceTo(this);
+        if (this.resourceCount < 1) {
+            this.resourceCount++;
             return undefined;
         }
         return new OrOptions(
             new SelectOption("Add 1 floater to this card", () => {
-                player.addResourceTo(this);
+                this.resourceCount++;
                 return undefined;
             }),
             new SelectOption("Remove 1 floater to gain 2 titanium", () => {
-                player.removeResourceFrom(this, 1);
+                this.resourceCount--;
                 player.titanium += 2;
                 return undefined;
             }),
             new SelectOption("Remove 1 floater to gain 3 energy", () => {
-                player.removeResourceFrom(this, 1);
+                this.resourceCount--;
                 player.energy += 3;
                 return undefined;
             }),
             new SelectOption("Remove 1 floater to gain 4 heat", () => {
-                player.removeResourceFrom(this, 1);
+                this.resourceCount--;
                 player.heat += 4;
                 return undefined;
             })

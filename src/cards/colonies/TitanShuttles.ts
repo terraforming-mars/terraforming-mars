@@ -34,11 +34,11 @@ export class TitanShuttles implements IProjectCard, IResourceCard {
             player.removeResourceFrom(this, amount);
             player.titanium += amount; 
             return undefined;
-        }, player.getResourcesOnCard(this));
+        }, this.resourceCount);
 
         opts.push(addResource);
 
-        if (player.getResourcesOnCard(this) > 0){
+        if (this.resourceCount > 0){
             opts.push(spendResource);
         }
 

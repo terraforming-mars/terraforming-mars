@@ -18,8 +18,8 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
     public canPlay(player: Player, game: Game): boolean {
       return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);
     }
-    public getVictoryPoints(player: Player): number {
-      return Math.floor(player.getResourcesOnCard(this) / 2);
+    public getVictoryPoints(): number {
+      return Math.floor(this.resourceCount / 2);
     }
     public play() {
       return undefined;
@@ -50,7 +50,7 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
     public action(player: Player, game: Game) {
       // Solo play, can always steal from immaginary opponent
       if (game.getPlayers().length === 1) {
-        player.addResourceTo(this);
+        this.resourceCount++;
         return undefined;
       }
 
@@ -60,7 +60,7 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
             // TODO Log here
             game.getCardPlayer(foundCards[0].name).
                 removeMicrobes(player, foundCards[0], 1, game);
-            player.addResourceTo(this);
+            this.resourceCount++;
             return undefined;
           }
       );

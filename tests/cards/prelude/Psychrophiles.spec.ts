@@ -26,7 +26,7 @@ describe("Psychrophiles", function () {
         const player = new Player("test", Color.BLUE, false);
         expect(player.getMicrobesCanSpend()).to.eq(0);
         player.playedCards.push(card);
-        expect(card.action(player)).to.eq(undefined);
+        expect(card.action()).to.eq(undefined);
         expect(player.getCardsWithResources().length).to.eq(1);
         expect(player.getMicrobesCanSpend()).to.eq(1);
     });

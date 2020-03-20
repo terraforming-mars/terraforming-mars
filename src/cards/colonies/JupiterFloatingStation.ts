@@ -32,7 +32,7 @@ export class JupiterFloatingStation implements IProjectCard, IResourceCard {
                 return undefined;
             }),
             new SelectOption("Get 1 MC per floater here (max 4) ", () => {
-                player.megaCredits += Math.min(player.getResourcesOnCard(this), 4);
+                player.megaCredits += Math.min(this.resourceCount, 4);
                 return undefined;
             })
         );

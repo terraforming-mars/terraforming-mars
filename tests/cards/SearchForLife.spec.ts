@@ -18,9 +18,9 @@ describe("SearchForLife", function () {
         player.playedCards.push(card);
         const action = card.play();
         expect(action).to.eq(undefined);
-        expect(card.getVictoryPoints(player)).to.eq(0);
+        expect(card.getVictoryPoints()).to.eq(0);
         player.addResourceTo(card);
-        expect(card.getVictoryPoints(player)).to.eq(3);
+        expect(card.getVictoryPoints()).to.eq(3);
     });
     it("Should act", function () {
         const card = new SearchForLife();
@@ -34,6 +34,6 @@ describe("SearchForLife", function () {
             expect(action).to.eq(undefined);
             expect(player.megaCredits).to.eq(0);
         }
-        expect(player.getResourcesOnCard(card) >= 1).to.eq(true);    
+        expect(card.resourceCount >= 1).to.eq(true);    
     });
 });

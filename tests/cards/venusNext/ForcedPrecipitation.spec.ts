@@ -24,16 +24,16 @@ describe("ForcedPrecipitation", function () {
         const selectOption = card.action(player,game) as SelectOption;
         expect(selectOption instanceof SelectOption).to.eq(true);
         selectOption.cb();
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(8);
 
         player.addResourceTo(card);
-        expect(player.getResourcesOnCard(card)).to.eq(2);
+        expect(card.resourceCount).to.eq(2);
 
         const orOptions2 = card.action(player,game) as OrOptions;
         expect(orOptions2 instanceof OrOptions).to.eq(true);
         orOptions2.options[1].cb();
-        expect(player.getResourcesOnCard(card)).to.eq(0);
+        expect(card.resourceCount).to.eq(0);
         expect(game.getVenusScaleLevel()).to.eq(2);
     });
 });

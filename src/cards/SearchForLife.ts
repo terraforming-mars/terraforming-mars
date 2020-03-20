@@ -19,8 +19,8 @@ export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() <= 6 + player.getRequirementsBonus(game);
     }
-    public getVictoryPoints(player: Player) {
-        if (player.getResourcesOnCard(this) > 0) {
+    public getVictoryPoints() {
+        if (this.resourceCount > 0) {
             return  3;
         }
         return 0;
@@ -35,7 +35,7 @@ export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
         const doAction = () => {
             const topCard = game.dealer.dealCard();
             if (topCard.tags.indexOf(Tags.MICROBES) !== -1) {
-                player.addResourceTo(this);
+                this.resourceCount++;
             }
             game.dealer.discard(topCard);
             return undefined;

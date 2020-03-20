@@ -19,8 +19,8 @@ export class Livestock implements IActionCard, IProjectCard, IResourceCard {
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 9 - player.getRequirementsBonus(game) && player.getProduction(Resources.PLANTS) >= 1;
     }
-    public getVictoryPoints(player: Player): number {
-        return player.getResourcesOnCard(this);
+    public getVictoryPoints(): number {
+        return this.resourceCount;
     }
     public play(player: Player) {
         player.setProduction(Resources.PLANTS,-1);
@@ -30,8 +30,8 @@ export class Livestock implements IActionCard, IProjectCard, IResourceCard {
     public canAct(): boolean {
         return true;
     }
-    public action(player: Player) {
-        player.addResourceTo(this);
+    public action() {
+        this.resourceCount++;
         return undefined;
     }
 }

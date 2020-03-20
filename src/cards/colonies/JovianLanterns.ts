@@ -25,7 +25,7 @@ export class JovianLanterns implements IProjectCard, IResourceCard {
 
     public action(player: Player) {
         player.titanium--;
-        player.addResourceTo(this,2);
+        this.resourceCount += 2;
         return undefined;
     }
 
@@ -35,7 +35,7 @@ export class JovianLanterns implements IProjectCard, IResourceCard {
       return undefined;
     }
 
-    public getVictoryPoints(player: Player): number {
-        return Math.floor(player.getResourcesOnCard(this) / 2);
+    public getVictoryPoints(): number {
+        return Math.floor(this.resourceCount / 2);
     }
 }

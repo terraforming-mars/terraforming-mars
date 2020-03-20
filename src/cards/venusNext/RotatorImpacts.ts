@@ -26,7 +26,7 @@ export class RotatorImpacts implements IActionCard,IProjectCard, IResourceCard {
     }
     public canAct(player: Player, game: Game): boolean {
         return player.canAfford(6,false, true) || 
-          (player.getResourcesOnCard(this) > 1 &&  game.getVenusScaleLevel() < MAX_VENUS_SCALE);
+          (this.resourceCount > 1 &&  game.getVenusScaleLevel() < MAX_VENUS_SCALE);
     }  
     
     public action(player: Player, game: Game) {
@@ -43,7 +43,7 @@ export class RotatorImpacts implements IActionCard,IProjectCard, IResourceCard {
                     player.megaCredits -= htp.megaCredits;
                     player.heat -= htp.heat;
                     player.titanium -= htp.titanium;
-                    player.addResourceTo(this);
+                    this.resourceCount++;
                     return undefined;
                 }
             );
@@ -59,7 +59,7 @@ export class RotatorImpacts implements IActionCard,IProjectCard, IResourceCard {
             opts.push(addResource);
         } else return spendResource;
 
-        if (player.getResourcesOnCard(this) > 0 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
+        if (this.resourceCount > 0 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
             opts.push(spendResource);
         } else return addResource;
 

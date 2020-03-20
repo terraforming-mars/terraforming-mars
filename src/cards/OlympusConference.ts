@@ -20,11 +20,11 @@ export class OlympusConference implements IProjectCard, IResourceCard {
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
         const gainAScienceResource = () => {
-            player.addResourceTo(this);
+            this.resourceCount++;
             return undefined;
         }
         if (card.tags.filter((tag) => tag === Tags.SCIENCE).length > 0) {
-            if (player.getResourcesOnCard(this) > 0) {
+            if (this.resourceCount > 0) {
                 return new OrOptions(
                     new SelectOption("Add a science resource to this card", gainAScienceResource),
                     new SelectOption("Remove a science resource from this card to draw a card", () => {

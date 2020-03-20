@@ -25,8 +25,8 @@ export class SubZeroSaltFish implements IProjectCard, IResourceCard {
         return game.getTemperature() >= -6 - (player.getRequirementsBonus(game) * 2);
       }
 
-    public action(player: Player) {
-      player.addResourceTo(this);
+    public action() {
+      this.resourceCount++;
       return undefined;
     }
 
@@ -35,7 +35,7 @@ export class SubZeroSaltFish implements IProjectCard, IResourceCard {
       return undefined;
     }
 
-    public getVictoryPoints(player: Player): number {
-        return Math.floor(player.getResourcesOnCard(this) / 2);
+    public getVictoryPoints(): number {
+        return Math.floor(this.resourceCount / 2);
     }
 }

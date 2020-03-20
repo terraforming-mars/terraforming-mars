@@ -17,7 +17,7 @@ export class Arklight implements CorporationCard, IResourceCard {
 
     public play(player: Player) {
         player.setProduction(Resources.MEGACREDITS, 2);
-        player.addResourceTo(this);
+        this.resourceCount++;
         return undefined;
     }
 
@@ -25,7 +25,7 @@ export class Arklight implements CorporationCard, IResourceCard {
         player.addResourceTo(this, card.tags.filter((cardTag) => cardTag === Tags.ANIMAL || cardTag === Tags.PLANT ).length);
       }
 
-    public getVictoryPoints(player: Player): number {
-        return Math.floor(player.getResourcesOnCard(this) / 2);
+    public getVictoryPoints(): number {
+        return Math.floor(this.resourceCount / 2);
     }
 }

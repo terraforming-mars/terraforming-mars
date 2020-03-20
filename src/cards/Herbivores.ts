@@ -23,8 +23,8 @@ export class Herbivores implements IProjectCard, IResourceCard {
         return game.getOxygenLevel() >= 8 - player.getRequirementsBonus(game);
     }
 
-    public getVictoryPoints(player: Player): number {
-        return Math.floor(player.getResourcesOnCard(this) / 2);
+    public getVictoryPoints(): number {
+        return Math.floor(this.resourceCount / 2);
     }
 
     public onTilePlaced(cardOwner: Player, space: ISpace) {
@@ -33,7 +33,7 @@ export class Herbivores implements IProjectCard, IResourceCard {
         }
     }
     public play(player: Player, game: Game) {
-        player.addResourceTo(this);
+        this.resourceCount++;
         game.addResourceProductionDecreaseInterrupt(player, Resources.PLANTS, 1);
         return undefined;
     }

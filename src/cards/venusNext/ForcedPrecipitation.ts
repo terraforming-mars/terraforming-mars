@@ -24,7 +24,7 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard, IResourceC
     }
     public canAct(player: Player, game: Game): boolean {
         return player.canAfford(2) || 
-          (player.getResourcesOnCard(this) > 1 &&  game.getVenusScaleLevel() < MAX_VENUS_SCALE);
+          (this.resourceCount > 1 &&  game.getVenusScaleLevel() < MAX_VENUS_SCALE);
     }  
     
     public action(player: Player, game: Game) {
@@ -41,13 +41,13 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard, IResourceC
                         }
                         player.megaCredits -= htp.megaCredits;
                         player.heat -= htp.heat;
-                        player.addResourceTo(this);
+                        this.resourceCount++;
                         return undefined;
                     }
                 );
             }
             player.megaCredits -= 2;
-            player.addResourceTo(this);
+            this.resourceCount++;
             return undefined;
         });
 
@@ -61,7 +61,7 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard, IResourceC
             opts.push(addResource);
         } else return spendResource;
 
-        if (player.getResourcesOnCard(this) > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
+        if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
             opts.push(spendResource);
         } else return addResource;
 

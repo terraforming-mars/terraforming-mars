@@ -24,7 +24,7 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
     public action(player: Player) {
         const floaterCards = player.getResourceCards(ResourceType.FLOATER);
         if (floaterCards.length === 1) {
-            player.addResourceTo(this);
+            this.resourceCount++;
             return undefined;
         }
 

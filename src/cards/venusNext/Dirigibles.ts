@@ -26,7 +26,7 @@ export class Dirigibles implements IActionCard,IProjectCard, IResourceCard {
     public action(player: Player) {
         const floaterCards = player.getResourceCards(ResourceType.FLOATER);
         if (floaterCards.length === 1) {
-            player.addResourceTo(this);
+            this.resourceCount++;
             return undefined;
         }
 

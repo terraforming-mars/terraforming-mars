@@ -27,10 +27,10 @@ export class GHGProducingBacteria implements IActionCard, IProjectCard, IResourc
         return true;
     }
     public action(player: Player, game: Game) {
-        if (player.getResourcesOnCard(this) > 1) {
+        if (this.resourceCount > 1) {
             return new OrOptions(
                 new SelectOption("Add 1 microbe to this card", () => {
-                    player.addResourceTo(this);
+                    this.resourceCount++;
                     return undefined;
                 }),
                 new SelectOption("Remove 2 microbes to raise temperature 1 step", () => {
@@ -39,7 +39,7 @@ export class GHGProducingBacteria implements IActionCard, IProjectCard, IResourc
                 })
             );
         }
-        player.addResourceTo(this);
+        this.resourceCount++;
         return undefined;
     }
 }

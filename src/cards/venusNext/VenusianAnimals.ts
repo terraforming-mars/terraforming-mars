@@ -17,16 +17,16 @@ export class VenusianAnimals implements IProjectCard, IResourceCard {
     public canPlay(player: Player, game: Game): boolean {
         return game.getVenusScaleLevel() >= 18 - (2 * player.getRequirementsBonus(game, true));
     }
-    public play(player: Player) {
-        player.addResourceTo(this);
+    public play() {
+        this.resourceCount++;
         return undefined;
     }
-    public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
+    public onCardPlayed(_player: Player, _game: Game, card: IProjectCard): void {
         if (card.tags.indexOf(Tags.SCIENCE) !== -1) {
-          player.addResourceTo(this);
+          this.resourceCount++;
         }
       } 
-    public getVictoryPoints(player: Player): number {
-        return player.getResourcesOnCard(this);
+    public getVictoryPoints(): number {
+        return this.resourceCount;
     }
 }

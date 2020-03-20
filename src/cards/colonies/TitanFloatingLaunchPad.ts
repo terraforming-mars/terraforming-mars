@@ -30,7 +30,7 @@ export class TitanFloatingLaunchPad implements IProjectCard,IResourceCard {
         });
 
         const spendResource = new SelectOption("Remove 1 floater on this card to trade for free", () => {
-            player.removeResourceFrom(this, 1);
+            this.resourceCount--;
             game.addInterrupt(new SelectTradeColony(player, game, openColonies, "Select colony to trade with for free")); 
             return undefined;
         });
@@ -39,7 +39,7 @@ export class TitanFloatingLaunchPad implements IProjectCard,IResourceCard {
 
         let openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor === undefined);
         if (openColonies.length > 0 
-          && player.fleetSize > player.tradesThisTurn && player.getResourcesOnCard(this) > 0 ){
+          && player.fleetSize > player.tradesThisTurn && this.resourceCount > 0 ){
             opts.push(spendResource);
         }
 

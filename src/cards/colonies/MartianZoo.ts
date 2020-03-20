@@ -25,12 +25,12 @@ export class MartianZoo implements IProjectCard, IResourceCard {
         return game.getCitiesInPlay() >= 2;
     }
 
-    public canAct(player: Player): boolean {
-        return player.getResourcesOnCard(this) > 0;
+    public canAct(): boolean {
+        return this.resourceCount > 0;
     }
 
     public action(player: Player, _game: Game) {
-        player.megaCredits += player.getResourcesOnCard(this);
+        player.megaCredits += this.resourceCount;
         return undefined;
     }
 

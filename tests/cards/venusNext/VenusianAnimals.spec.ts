@@ -10,9 +10,9 @@ describe("VenusianAnimals", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player,game)).to.eq(false);
-        card.play(player);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
-        player.victoryPoints += card.getVictoryPoints(player);
+        card.play();
+        expect(card.resourceCount).to.eq(1);
+        player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
     });
 });

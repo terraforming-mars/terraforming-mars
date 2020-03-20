@@ -23,8 +23,8 @@ export class Psychrophiles implements IActionCard, IProjectCard, IResourceCard {
     public canAct(): boolean {
         return true; 
     }
-    public action(player: Player) {
-        player.addResourceTo(this);
+    public action() {
+        this.resourceCount++;
         return undefined;
     }
 }

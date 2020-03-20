@@ -20,18 +20,18 @@ export class Recyclon implements CorporationCard, IResourceCard {
 
     public play(player: Player) {
         player.setProduction(Resources.STEEL);
-        player.addResourceTo(this);
+        this.resourceCount++;
         return undefined;
     }
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
         if (card.tags.indexOf(Tags.STEEL) === -1 || !player.isCorporation(this.name)) {return undefined;}
-        if (player.getResourcesOnCard(this) < 2) {
-            player.addResourceTo(this);
+        if (this.resourceCount < 2) {
+            this.resourceCount++;
             return undefined;
         }
 
         const addResource = new SelectOption("Add a microbe resource to this card", () => {
-            player.addResourceTo(this);
+            this.resourceCount++;
             return undefined;
         });
 

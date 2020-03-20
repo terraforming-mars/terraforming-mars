@@ -24,14 +24,14 @@ export class Extremophiles implements IActionCard,IProjectCard, IResourceCard {
         return true;
     }  
 
-    public getVictoryPoints(player: Player): number {
-        return Math.floor(player.getResourcesOnCard(this) / 3);
+    public getVictoryPoints(): number {
+        return Math.floor(this.resourceCount / 3);
     }
     
     public action(player: Player) {
         const microbeCards = player.getResourceCards(ResourceType.MICROBE);
         if (microbeCards.length === 1) {
-            player.addResourceTo(this);
+            this.resourceCount++;
             return undefined;
         }
 

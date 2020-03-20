@@ -23,11 +23,11 @@ export class VenusianInsects implements IActionCard,IProjectCard, IResourceCard 
     public canAct(): boolean {
         return true;
     }   
-    public action(player: Player) {
-        player.addResourceTo(this);
+    public action() {
+        this.resourceCount++;
         return undefined;
     }
-    public getVictoryPoints(player: Player): number {
-        return Math.floor(player.getResourcesOnCard(this) / 2);
+    public getVictoryPoints(): number {
+        return Math.floor(this.resourceCount / 2);
     }
 }

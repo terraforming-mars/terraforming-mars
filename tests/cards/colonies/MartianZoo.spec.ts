@@ -22,10 +22,10 @@ describe("MartianZoo", function () {
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
         player.playedCards.push(card);
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct()).to.eq(false);
         card.onCardPlayed(player, game, card2);
         card.action(player, game);
         expect(player.megaCredits).to.eq(2);
-        expect(player.getResourcesOnCard(card)).to.eq(2);
+        expect(card.resourceCount).to.eq(2);
     });
 });

@@ -17,6 +17,6 @@ describe("Extremophiles", function () {
         player.playedCards.push(card);
         const action = card.action(player);
         expect(action).to.eq(undefined);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
     });
 });

@@ -19,14 +19,14 @@ export class Pristar implements CorporationCard, IResourceCard {
         return undefined;
     }
 
-    public getVictoryPoints(player: Player): number {
-        return Math.floor(player.getResourcesOnCard(this));
+    public getVictoryPoints(): number {
+        return Math.floor(this.resourceCount);
     }
 
     public onProductionPhase(player: Player) {
         if (this.lastGenerationTR >= player.terraformRating) {
             player.megaCredits += 6;
-            player.addResourceTo(this);
+            this.resourceCount++;
         }
         this.lastGenerationTR = player.terraformRating;
         return undefined;

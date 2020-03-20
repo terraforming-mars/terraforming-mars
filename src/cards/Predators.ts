@@ -19,8 +19,8 @@ export class Predators implements IProjectCard, IActionCard, IResourceCard {
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 11 - player.getRequirementsBonus(game);
     }
-    public getVictoryPoints(player: Player): number {
-        return player.getResourcesOnCard(this);
+    public getVictoryPoints(): number {
+        return this.resourceCount;
     }
     public play() {
         return undefined;
@@ -42,7 +42,7 @@ export class Predators implements IProjectCard, IActionCard, IResourceCard {
 
     private doAction(targetCard:ICard, player: Player, game: Game): void {
         game.getCardPlayer(targetCard.name).removeAnimals(player, targetCard, 1, game);
-        player.addResourceTo(this);
+        this.resourceCount++;
     }
 
     public canAct(player: Player, game: Game): boolean {
@@ -53,7 +53,7 @@ export class Predators implements IProjectCard, IActionCard, IResourceCard {
     public action(player: Player, game: Game) {
         // Solo play, can always steal from immaginary opponent
         if (game.getPlayers().length === 1) {
-            player.addResourceTo(this);
+            this.resourceCount++;
             return undefined;
         }
         const animalCards = this.getPossibleTargetCards(player, game);

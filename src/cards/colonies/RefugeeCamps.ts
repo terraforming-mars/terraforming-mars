@@ -21,7 +21,7 @@ export class RefugeeCamps implements IProjectCard, IResourceCard {
 
     public action(player: Player) {
         player.setProduction(Resources.MEGACREDITS, -1);
-        player.addResourceTo(this);
+        this.resourceCount++;
         return undefined;
     } 
 
@@ -29,8 +29,8 @@ export class RefugeeCamps implements IProjectCard, IResourceCard {
       return undefined;
     }
 
-    public getVictoryPoints(player: Player): number {
-        return player.getResourcesOnCard(this);
+    public getVictoryPoints(): number {
+        return this.resourceCount;
     }
 }
 

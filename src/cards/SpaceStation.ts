@@ -4,11 +4,12 @@ import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardType } from "./CardType";
+import { CardName } from '../CardName';
 
 export class SpaceStation implements IProjectCard {
     public cost: number = 10;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = "Space Station";
+    public name: CardName = CardName.SPACE_STATION;
     public cardType: CardType = CardType.ACTIVE;
 
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {

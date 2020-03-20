@@ -8,7 +8,7 @@ import { Resources } from "../../Resources";
 export class HeavyTaxation implements IProjectCard {
     public cost: number = 3;
     public tags: Array<Tags> = [Tags.EARTH];
-    public name: string = CardName.HEAVY_TAXATION;
+    public name: CardName = CardName.HEAVY_TAXATION;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player): boolean {

@@ -10,7 +10,7 @@ import { Resources } from '../Resources';
 export class DeimosDown implements IProjectCard {
     public cost: number = 31;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.DEIMOS_DOWN;
+    public name: CardName = CardName.DEIMOS_DOWN;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {

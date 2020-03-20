@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class ArcticAlgae implements IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.PLANT];
-    public name: string = CardName.ARCTIC_ALGAE;
+    public name: CardName = CardName.ARCTIC_ALGAE;
     public cardType: CardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() <= -12 + (

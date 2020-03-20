@@ -1,10 +1,10 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { CorporationName } from '../../CorporationName';
+import { CardName } from '../../CardName';
 
 export class TerralabsResearch implements CorporationCard {
-    public name: string = CorporationName.TERRALABS_RESEARCH;
+    public name: CardName = CardName.TERRALABS_RESEARCH;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.EARTH];
     public startingMegaCredits: number = 14;
 

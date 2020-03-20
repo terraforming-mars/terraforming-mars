@@ -13,7 +13,7 @@ import { CardName } from '../../CardName';
 export class LavaTubeSettlement implements IProjectCard {
     public cost: number = 15;
     public tags: Array<Tags> = [Tags.STEEL, Tags.CITY];
-    public name: string = CardName.LAVA_TUBE_SETTLEMENT;
+    public name: CardName = CardName.LAVA_TUBE_SETTLEMENT;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {

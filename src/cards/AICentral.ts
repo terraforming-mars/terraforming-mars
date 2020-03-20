@@ -11,7 +11,7 @@ export class AICentral implements IActionCard, IProjectCard {
     public cost: number = 21;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = CardName.AI_CENTRAL;
+    public name: CardName = CardName.AI_CENTRAL;
     public canPlay(player: Player): boolean {
       return player.getTagCount(Tags.SCIENCE) >= 3 &&
       player.getProduction(Resources.ENERGY) >= 1;

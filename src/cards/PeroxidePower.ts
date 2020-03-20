@@ -10,7 +10,7 @@ export class PeroxidePower implements IProjectCard {
     public cost: number = 7;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.PEROXIDE_POWER;
+    public name: CardName = CardName.PEROXIDE_POWER;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.MEGACREDITS) >= -4;

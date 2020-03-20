@@ -4,9 +4,10 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { SelectOption } from "../../inputs/SelectOption";
+import { CardName } from '../../CardName';
 
 export class Inventrix implements CorporationCard {
-    public name: string = "Inventrix";
+    public name: CardName = CardName.INVENTRIX;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public startingMegaCredits: number = 45;
     public initialAction(player: Player, game: Game) {

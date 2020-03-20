@@ -5,9 +5,10 @@ import { CorporationCard } from "./../corporation/CorporationCard";
 import { IProjectCard } from "../IProjectCard";
 import { Game } from "../../Game";
 import { SelectCard } from "../../inputs/SelectCard";
+import { CardName } from '../../CardName';
 
 export class ValleyTrust implements CorporationCard {
-    public name: string = "Valley Trust";
+    public name: CardName = CardName.VALLEY_TRUST;
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 37;
 

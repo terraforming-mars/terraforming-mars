@@ -3,13 +3,13 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { IProjectCard } from "../IProjectCard";
 import { CorporationCard } from '../corporation/CorporationCard';
-import { CorporationName } from '../../CorporationName';
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
 import { ResourceType } from "../../ResourceType";
+import { CardName } from '../../CardName';
 
 export class Splice implements CorporationCard {
-    public name: string = CorporationName.SPLICE;
+    public name: CardName = CardName.SPLICE;
     public tags: Array<Tags> = [Tags.MICROBES];
     public startingMegaCredits: number = 48; // 44 + 4 as card resolution when played
 

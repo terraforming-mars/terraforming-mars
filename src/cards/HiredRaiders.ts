@@ -8,12 +8,13 @@ import { OrOptions } from "../inputs/OrOptions";
 import { SelectPlayer } from "../inputs/SelectPlayer";
 import { SelectOption } from "../inputs/SelectOption";
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class HiredRaiders implements IProjectCard {
     public cost: number = 1;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.EVENT;
-    public name: string = "Hired Raiders";
+    public name: CardName = CardName.HIRED_RAIDERS;
 
     public play(player: Player, game: Game) {
 

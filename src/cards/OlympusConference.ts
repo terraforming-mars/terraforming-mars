@@ -7,13 +7,14 @@ import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
 import { ResourceType } from "../ResourceType";
+import { CardName } from '../CardName';
 
 export class OlympusConference implements IProjectCard {
     public cost: number = 10;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.EARTH, Tags.STEEL];
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.SCIENCE;
-    public name: string = "Olympus Conference";
+    public name: CardName = CardName.OLYMPUS_CONFERENCE;
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
         const gainAScienceResource = () => {

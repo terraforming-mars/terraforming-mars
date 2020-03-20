@@ -11,7 +11,7 @@ export class StripMine implements IProjectCard {
     public cost: number = 25;
     public tags: Array<Tags> = [Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.STRIP_MINE;
+    public name: CardName = CardName.STRIP_MINE;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.ENERGY) >= 2;

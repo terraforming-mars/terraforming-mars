@@ -11,7 +11,7 @@ import { ResourceType } from '../../ResourceType';
 export class UrbanDecomposers implements IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.MICROBES];
-    public name: string = CardName.URBAN_DECOMPOSERS;
+    public name: CardName = CardName.URBAN_DECOMPOSERS;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {

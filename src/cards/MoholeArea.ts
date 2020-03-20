@@ -14,7 +14,7 @@ import { CardName } from '../CardName';
 export class MoholeArea implements IProjectCard {
     public cost: number = 20;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.MOHOLE_AREA;
+    public name: CardName = CardName.MOHOLE_AREA;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

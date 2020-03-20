@@ -6,11 +6,12 @@ import { Game } from "../Game";
 import { Tags } from "./Tags";
 import { SelectPlayer } from "../inputs/SelectPlayer";
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class Hackers implements IProjectCard {
     public cost: number = 3;
     public tags: Array<Tags> = [];
-    public name: string = "Hackers";
+    public name: CardName = CardName.HACKERS;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {

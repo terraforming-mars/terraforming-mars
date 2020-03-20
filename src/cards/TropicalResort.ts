@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class TropicalResort implements IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.TROPICAL_RESORT;
+    public name: CardName = CardName.TROPICAL_RESORT;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {

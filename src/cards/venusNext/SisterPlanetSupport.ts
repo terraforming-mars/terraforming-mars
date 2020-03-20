@@ -8,7 +8,7 @@ import { CardName } from '../../CardName';
 export class SisterPlanetSupport implements IProjectCard {
     public cost: number = 7;
     public tags: Array<Tags> = [Tags.VENUS, Tags.EARTH];
-    public name: string = CardName.SISTER_PLANET_SUPPORT;
+    public name: CardName = CardName.SISTER_PLANET_SUPPORT;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player): boolean {
         return  player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH]);

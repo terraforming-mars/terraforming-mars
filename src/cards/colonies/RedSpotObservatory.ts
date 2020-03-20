@@ -11,7 +11,7 @@ import { Game } from '../../Game';
 export class RedSpotObservatory implements IProjectCard {
     public cost: number = 17;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SCIENCE];
-    public name: string = CardName.RED_SPOT_OBSERVATORY;
+    public name: CardName = CardName.RED_SPOT_OBSERVATORY;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType = ResourceType.FLOATER;
 

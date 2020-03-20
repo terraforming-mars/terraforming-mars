@@ -9,7 +9,7 @@ import { Game } from '../../Game';
 export class SpinoffDepartment implements IProjectCard {
     public cost: number = 10;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.SPINOFF_DEPARTMENT
+    public name: CardName = CardName.SPINOFF_DEPARTMENT
     public cardType: CardType = CardType.ACTIVE;
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {

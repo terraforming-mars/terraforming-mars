@@ -11,7 +11,7 @@ import { AndOptions } from "../../inputs/AndOptions";
 export class MarketManipulation implements IProjectCard {
     public cost: number = 1;
     public tags: Array<Tags> = [Tags.EARTH];
-    public name: string = CardName.MARKET_MANIPULATION;
+    public name: CardName = CardName.MARKET_MANIPULATION;
     public cardType: CardType = CardType.EVENT;
 
     public play(_player: Player, game: Game) {

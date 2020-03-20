@@ -5,10 +5,10 @@ import { CorporationCard } from "./../corporation/CorporationCard";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 import { Resources } from "../../Resources";
-import { CorporationName } from '../../CorporationName';
+import { CardName } from '../../CardName';
 
 export class UtopiaInvest implements IActionCard, CorporationCard {
-    public name: string = CorporationName.UTOPIA_INVEST;
+    public name: CardName = CardName.UTOPIA_INVEST;
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 40;
     public play(player: Player) {

@@ -42,6 +42,7 @@ import { SelectResourceProductionDecrease } from "./interrupts/SelectResourcePro
 import { ICard } from "./cards/ICard";
 import { SelectResourceDecrease } from "./interrupts/SelectResourceDecrease";
 import { SelectHowToPayInterrupt } from "./interrupts/SelectHowToPayInterrupt";
+import { MoholeArea } from "./cards/MoholeArea";
 
 export class Game {
     public activePlayer: Player;
@@ -111,6 +112,7 @@ export class Game {
         this.draftVariant = false;
         this.setupSolo();
       }
+      first.cardsInHand.push(new MoholeArea())
 
       let corporationCards = ALL_CORPORATION_CARDS.slice();
       // Add prelude corporations cards

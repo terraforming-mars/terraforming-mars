@@ -1,6 +1,7 @@
 import { TileType } from "../TileType";
 import { Color } from "../Color";
 import Vue from "vue";
+import { CardName } from "../CardName";
 
 export const Tile = Vue.component("bonus", {
     props: ["space"],
@@ -20,7 +21,8 @@ export const Tile = Vue.component("bonus", {
             } else if (tile_type == TileType.CITY) {
                 ret += "city";
             } else if (tile_type == TileType.SPECIAL) {
-                ret += tileDetails;
+                // Convert card name to correct css class
+                ret += tileDetails.toLowerCase().replace(" ", "_");
             }
 
             ret += " board_tile_pos--" + app.space.id.toString();
@@ -29,25 +31,25 @@ export const Tile = Vue.component("bonus", {
 
         let getVerboseTitle = (tileDetails: string): string => {
             let ret: string = ""; 
-            if (tileDetails === "mohole") {
-                ret = "Project Mohole"
-            } else if (tileDetails === "commercial_district") {
+            if (tileDetails === CardName.MOHOLE_AREA) {
+                ret = "Mohole Area"
+            } else if (tileDetails === CardName.COMMERCIAL_DISTRICT) {
                 ret = "Commercial District: 1 VP per adjacent city tile"
-            } else if (tileDetails === "ecological_zone") {
+            } else if (tileDetails === CardName.ECOLOGICAL_ZONE) {
                 ret = "Ecological Zone: 1 VP per 2 Animals on this card"
-            } else if (tileDetails === "industrial_center") {
+            } else if (tileDetails === CardName.INDUSTRIAL_CENTER) {
                 ret = "Industrial Center"
-            } else if (tileDetails === "lava_flows") {
+            } else if (tileDetails === CardName.LAVA_FLOWS) {
                 ret = "Lava Flows"
-            } else if (tileDetails === "mining_area") {
+            } else if (tileDetails === CardName.MINING_AREA) {
                 ret = "Mining Area"
-            } else if (tileDetails === "mining_rights") {
+            } else if (tileDetails === CardName.MINING_RIGHTS) {
                 ret = "Mining Rights"
-            } else if (tileDetails === "natural_preserve") {
+            } else if (tileDetails === CardName.NATURAL_PRESERVE) {
                 ret = "Natural Preserve"
-            } else if (tileDetails === "nuclear_zone") {
+            } else if (tileDetails === CardName.NUCLEAR_ZONE) {
                 ret = "Nuclear Zone"
-            } else if (tileDetails === "restricted_area") {
+            } else if (tileDetails === CardName.RESTRICTED_AREA) {
                 ret = "Restricted Area"
             }
             return ret;

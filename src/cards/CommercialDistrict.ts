@@ -37,7 +37,7 @@ export class CommercialDistrict implements IProjectCard {
             game.addTile(player, foundSpace.spaceType, foundSpace, {
               tileType: TileType.SPECIAL,
               card: this.name
-            }, false, "commercial_district");
+            }, false, this.name);
             player.setProduction(Resources.ENERGY,-1);
             player.setProduction(Resources.MEGACREDITS,4);
             return undefined;

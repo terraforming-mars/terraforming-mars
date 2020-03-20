@@ -74,6 +74,11 @@ describe("Game", function () {
         game.playerIsDoneWithGame(player2);
         game.playerIsDoneWithGame(player);
 
+        player.getVictoryPoints(game);
+        player2.getVictoryPoints(game);
+        player3.getVictoryPoints(game);
+
+        expect(player.victoryPointsBreakdown.terraformRating).to.eq(21);
         expect(player.victoryPointsBreakdown.milestones).to.eq(5);
         expect(player.victoryPointsBreakdown.awards).to.eq(2); // one 2nd place
         expect(player.victoryPointsBreakdown.greenery).to.eq(1);

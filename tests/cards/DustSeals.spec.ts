@@ -22,8 +22,8 @@ describe("DustSeals", function () {
         const player = new Player("test", Color.BLUE, false);
         const action = card.play();
         expect(action).to.eq(undefined);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
 });
 

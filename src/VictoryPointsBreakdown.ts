@@ -17,4 +17,33 @@ export class VictoryPointsBreakdown {
         this.total += this.city;
         this.total += this.victoryPoints;
     }
+
+    public setVictoryPoints(key: string, points: number, message?: string) {
+
+        switch (key) {
+            case 'terraformRating':
+                this.terraformRating += points;
+                break;
+            case 'milestones':
+                this.milestones += points;
+                break;
+            case 'awards':
+                this.awards += points;
+                break;
+            case 'greenery':
+                this.greenery += points;
+                break;
+            case 'city':
+                this.city += points;
+                break;
+            case 'victoryPoints':
+                this.victoryPoints += points;
+                break;
+        }
+
+        if (message !== undefined) {
+            this.VPdetails.push(message+': '+points);
+        }
+    }
+
 }

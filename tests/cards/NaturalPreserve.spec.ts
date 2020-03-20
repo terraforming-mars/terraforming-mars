@@ -32,8 +32,8 @@ describe("NaturalPreserve", function () {
         expect(action instanceof SelectSpace).to.eq(true);
         action.cb(action.availableSpaces[0]);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
         expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.SPECIAL);
     }); 
 });

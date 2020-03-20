@@ -34,7 +34,6 @@ export interface PlayerModel {
     titaniumValue: number;
     venusNextExtension: boolean;
     venusScaleLevel: number;
-    victoryPoints: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;
     tags: Array<ITagCount>;
     showOtherPlayersVP: boolean;

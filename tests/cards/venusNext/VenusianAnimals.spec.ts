@@ -12,7 +12,7 @@ describe("VenusianAnimals", function () {
         expect(card.canPlay(player,game)).to.eq(false);
         card.play(player);
         expect(player.getResourcesOnCard(card)).to.eq(1);
-        player.victoryPoints += card.getVictoryPoints(player);
-        expect(player.victoryPoints).to.eq(1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints(player));
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
 });

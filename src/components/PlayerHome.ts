@@ -77,7 +77,7 @@ export const PlayerHome = Vue.component("player-home", {
                 <div class="player_home_block">
                     <h2>This game is over!</h2>
                     <div v-for="otherPlayer in player.players">
-                        <div :style="'color:' + otherPlayer.color">{{otherPlayer.name}} - {{otherPlayer.victoryPoints}}</div>
+                        <div :style="'color:' + otherPlayer.color">{{otherPlayer.name}} - {{otherPlayer.victoryPointsBreakdown.total}}</div>
                     </div>
                 </div>
             </div>

@@ -25,8 +25,8 @@ describe("AICentral", function () {
         player.setProduction(Resources.ENERGY);
         card.play(player);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
     it("Should take action", function () {
         const card = new AICentral();

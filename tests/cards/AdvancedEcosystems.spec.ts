@@ -18,8 +18,8 @@ describe("AdvancedEcosystems", function () {
         player.playedCards.push(new Tardigrades());
         expect(card.canPlay(player)).to.eq(true);
         card.play();
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(3);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(3);
     });
     it("Can't play if tag requirements is unmet", function () {
         const card = new AdvancedEcosystems();

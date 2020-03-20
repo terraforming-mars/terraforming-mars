@@ -30,8 +30,8 @@ describe("ArtificialLake", function () {
         action.cb(action.availableSpaces[0]);
         expect(action.availableSpaces[0].tile).not.to.eq(undefined);
         expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.OCEAN);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
     it("Does not suggest a place for an ocean if all oceans are already placed", function () {
         const card = new ArtificialLake();

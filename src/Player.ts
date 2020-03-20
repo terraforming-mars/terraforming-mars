@@ -6,7 +6,7 @@ import {CardType} from "./cards/CardType";
 import {Color} from "./Color";
 import {SelectCard} from "./inputs/SelectCard";
 import {AndOptions} from "./inputs/AndOptions";
-import { ICard } from './cards/ICard';
+import { ICard } from "./cards/ICard";
 import { OrOptions } from "./inputs/OrOptions";
 import {Game} from "./Game";
 import {HowToPay} from "./inputs/HowToPay";

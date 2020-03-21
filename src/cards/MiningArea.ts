@@ -28,7 +28,7 @@ export class MiningArea implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         return new SelectSpace("Select a space with steel or titanium placement bonus adjacent to one of your tiles", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
-            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL }, false, this.name);
+            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.MINING_AREA });
             if (foundSpace.bonus.indexOf(SpaceBonus.STEEL) !== -1) {
                 player.setProduction(Resources.STEEL);
                 this.bonusResource = Resources.STEEL;

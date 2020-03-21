@@ -1,7 +1,19 @@
 import { TileType } from "../TileType";
 import { Color } from "../Color";
 import Vue from "vue";
-import { CardName } from "../CardName";
+
+let tileTypeToCssClass = new Map<TileType, string>([
+    [TileType.COMMERCIAL_DISTRICT, "commercial_district"],
+    [TileType.ECOLOGICAL_ZONE, "ecological_zone"],
+    [TileType.INDUSTRIAL_CENTER, "industrial_center"],
+    [TileType.LAVA_FLOWS, "lava_flows"],
+    [TileType.MINING_AREA, "mining_area"],
+    [TileType.MINING_RIGHTS, "mining_rights"],
+    [TileType.MOHOLE_AREA, "mohole_area"],
+    [TileType.NATURAL_PRESERVE, "natural_preserve"],
+    [TileType.NUCLEAR_ZONE, "nuclear_zone"],
+    [TileType.RESTRICTED_AREA, "restricted_area"]
+]);
 
 export const Tile = Vue.component("bonus", {
     props: ["space"],
@@ -9,63 +21,62 @@ export const Tile = Vue.component("bonus", {
         return {}
     },
     render: function (createElement) {
-        let tile_elements = [];
+        let tileElements = [];
         let app = this;
 
-        let build_tile_css_class = (tile_type: TileType, tileDetails: string = ""):string => {
+        let buildTileCssClass = (tileType: TileType):string => {
             var ret = "board_tile board_tile--";
-            if (tile_type == TileType.GREENERY) {
+            if (tileType === TileType.GREENERY) {
                 ret += "greenery";
-            } else if (tile_type == TileType.OCEAN) {
+            } else if (tileType === TileType.OCEAN) {
                 ret += "ocean";
-            } else if (tile_type == TileType.CITY) {
+            } else if (tileType === TileType.CITY) {
                 ret += "city";
-            } else if (tile_type == TileType.SPECIAL) {
-                // Convert card name to correct css class
-                ret += tileDetails.toLowerCase().replace(" ", "_");
+            } else {
+                ret += tileTypeToCssClass.get(tileType);
             }
 
             ret += " board_tile_pos--" + app.space.id.toString();
             return ret
         }
 
-        let getVerboseTitle = (tileDetails: string): string => {
+        let getVerboseTitle = (tileType: TileType): string => {
             let ret: string = ""; 
-            if (tileDetails === CardName.MOHOLE_AREA) {
+            if (tileType === TileType.MOHOLE_AREA) {
                 ret = "Mohole Area"
-            } else if (tileDetails === CardName.COMMERCIAL_DISTRICT) {
+            } else if (tileType === TileType.COMMERCIAL_DISTRICT) {
                 ret = "Commercial District: 1 VP per adjacent city tile"
-            } else if (tileDetails === CardName.ECOLOGICAL_ZONE) {
+            } else if (tileType === TileType.ECOLOGICAL_ZONE) {
                 ret = "Ecological Zone: 1 VP per 2 Animals on this card"
-            } else if (tileDetails === CardName.INDUSTRIAL_CENTER) {
+            } else if (tileType === TileType.INDUSTRIAL_CENTER) {
                 ret = "Industrial Center"
-            } else if (tileDetails === CardName.LAVA_FLOWS) {
+            } else if (tileType === TileType.LAVA_FLOWS) {
                 ret = "Lava Flows"
-            } else if (tileDetails === CardName.MINING_AREA) {
+            } else if (tileType === TileType.MINING_AREA) {
                 ret = "Mining Area"
-            } else if (tileDetails === CardName.MINING_RIGHTS) {
+            } else if (tileType === TileType.MINING_RIGHTS) {
                 ret = "Mining Rights"
-            } else if (tileDetails === CardName.NATURAL_PRESERVE) {
+            } else if (tileType === TileType.NATURAL_PRESERVE) {
                 ret = "Natural Preserve"
-            } else if (tileDetails === CardName.NUCLEAR_ZONE) {
+            } else if (tileType === TileType.NUCLEAR_ZONE) {
                 ret = "Nuclear Zone"
-            } else if (tileDetails === CardName.RESTRICTED_AREA) {
+            } else if (tileType === TileType.RESTRICTED_AREA) {
                 ret = "Restricted Area"
             }
             return ret;
         }
 
-        let tile_type = this.space.tileType;
-        if (tile_type !== undefined) {
-            tile_elements.push(
+        let tileType: TileType = this.space.tileType;
+        if (tileType !== undefined) {
+            tileElements.push(
                 createElement("i", {
-                    "class": build_tile_css_class(tile_type, this.space.tileDetails),
-                    "attrs": {"title": getVerboseTitle(this.space.tileDetails)}
+                    "class": buildTileCssClass(tileType),
+                    "attrs": {"title": getVerboseTitle(tileType)}
                 })
             )
         }
 
-        let build_player_css_class = (player_color: Color):string => {
+        let buildPlayerCssClass = (player_color: Color):string => {
             var ret = "board_cube board_cube--";
             ret += player_color;
             ret += " board_cube_pos--" + app.space.id.toString();
@@ -75,11 +86,11 @@ export const Tile = Vue.component("bonus", {
         let color = this.space.color;
 
         if (color) {
-            tile_elements.push(
-                createElement("i", {"class": build_player_css_class(color)})
+            tileElements.push(
+                createElement("i", {"class": buildPlayerCssClass(color)})
             )
         }
         
-        return createElement("span", tile_elements);
+        return createElement("span", tileElements);
     }
 });

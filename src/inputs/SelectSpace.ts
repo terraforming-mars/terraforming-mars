@@ -9,8 +9,7 @@ export class SelectSpace implements PlayerInput {
     constructor(
         public title: string, 
         public availableSpaces: Array<ISpace>, 
-        public cb: (space: ISpace) => OrOptions | SelectSpace | undefined, 
-        public tileDetails: string = "") {
+        public cb: (space: ISpace) => OrOptions | SelectSpace | undefined) {
         if (availableSpaces.length === 0) {
             throw "No available spaces";
         }

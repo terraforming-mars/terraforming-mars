@@ -19,7 +19,7 @@ describe("RestrictedArea", function () {
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         action.cb(action.availableSpaces[0]);
-        expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.SPECIAL);
+        expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.RESTRICTED_AREA);
     });
     it("Should act", function () {
         const card = new RestrictedArea();

@@ -552,8 +552,7 @@ function getSpaces(spaces: Array<ISpace>): Array<SpaceModel> {
       bonus: space.bonus,
       spaceType: space.spaceType,
       tileType: space.tile && space.tile.tileType,
-      color: getColor(space),
-      tileDetails: space.tileDetails
+      color: getColor(space)
     };
   });
 }

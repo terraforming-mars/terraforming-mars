@@ -12,5 +12,4 @@ export interface SpaceModel {
     color: Color | undefined;
     tileType: TileType | undefined;
     spaceType: SpaceType;
-    tileDetails: string | undefined; 
 }

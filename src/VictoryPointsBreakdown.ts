@@ -21,28 +21,28 @@ export class VictoryPointsBreakdown {
     public setVictoryPoints(key: string, points: number, message?: string) {
 
         switch (key) {
-            case 'terraformRating':
+            case "terraformRating":
                 this.terraformRating += points;
                 break;
-            case 'milestones':
+            case "milestones":
                 this.milestones += points;
                 break;
-            case 'awards':
+            case "awards":
                 this.awards += points;
                 break;
-            case 'greenery':
+            case "greenery":
                 this.greenery += points;
                 break;
-            case 'city':
+            case "city":
                 this.city += points;
                 break;
-            case 'victoryPoints':
+            case "victoryPoints":
                 this.victoryPoints += points;
                 break;
         }
 
         if (message !== undefined) {
-            this.VPdetails.push(message+': '+points);
+            this.VPdetails.push(message+": "+points);
         }
     }
 

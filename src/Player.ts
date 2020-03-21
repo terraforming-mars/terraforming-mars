@@ -182,18 +182,18 @@ export class Player {
 
       // Victory points from corporations
       if (this.corporationCard !== undefined && this.corporationCard.getVictoryPoints !== undefined) {
-        this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.corporationCard.getVictoryPoints(this, game), this.corporationCard.name);
+        this.victoryPointsBreakdown.setVictoryPoints("victoryPoints", this.corporationCard.getVictoryPoints(this, game), this.corporationCard.name);
       }
 
       // Victory points from cards
       for (let playedCard of this.playedCards) {
         if (playedCard.getVictoryPoints !== undefined) {
-          this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', playedCard.getVictoryPoints(this, game), playedCard.name);
+          this.victoryPointsBreakdown.setVictoryPoints("victoryPoints", playedCard.getVictoryPoints(this, game), playedCard.name);
         }
       }
 
       // Victory points from TR
-      this.victoryPointsBreakdown.setVictoryPoints('terraformRating', this.terraformRating);
+      this.victoryPointsBreakdown.setVictoryPoints("terraformRating", this.terraformRating);
 
       // Victory points from awards
       this.giveAwards(game);
@@ -201,7 +201,7 @@ export class Player {
       // Victory points from milestones
       for (const milestone of game.claimedMilestones) {
         if (milestone.player !== undefined && milestone.player.id === this.id) {
-          this.victoryPointsBreakdown.setVictoryPoints('milestones', 5);
+          this.victoryPointsBreakdown.setVictoryPoints("milestones", 5);
         }
       }
 
@@ -210,7 +210,7 @@ export class Player {
 
         // Victory points for greenery tiles
         if (space.tile && space.tile.tileType === TileType.GREENERY && space.player !== undefined && space.player.id === this.id) {
-          this.victoryPointsBreakdown.setVictoryPoints('greenery', 1);
+          this.victoryPointsBreakdown.setVictoryPoints("greenery", 1);
         }
 
         // Victory points for greenery tiles adjacent to cities
@@ -218,7 +218,7 @@ export class Player {
           const adjacent = game.board.getAdjacentSpaces(space);
           for (const adj of adjacent) {
             if (adj.tile && adj.tile.tileType === TileType.GREENERY) {
-              this.victoryPointsBreakdown.setVictoryPoints('city', 1);
+              this.victoryPointsBreakdown.setVictoryPoints("city", 1);
             }
           }
         }
@@ -1370,7 +1370,7 @@ export class Player {
         // We have one rank 1 player
         if (fundedAward.award.getScore(players[0], game) > fundedAward.award.getScore(players[1], game)) {
 
-          if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 5);
+          if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 5);
           players.shift();
 
           if (players.length > 1) {
@@ -1378,14 +1378,14 @@ export class Player {
             // We have one rank 2 player
             if (fundedAward.award.getScore(players[0], game) > fundedAward.award.getScore(players[1], game)) {
 
-              if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 2);
+              if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 2);
 
             // We have at least two rank 2 players
             } else {
 
               const score = fundedAward.award.getScore(players[0], game);
               while (players.length > 0 && fundedAward.award.getScore(players[0], game) === score) {
-                if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 2);
+                if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 2);
                 players.shift();
 
               }
@@ -1397,7 +1397,7 @@ export class Player {
 
           const score = fundedAward.award.getScore(players[0], game);
           while (players.length > 0 && fundedAward.award.getScore(players[0], game) === score) {
-            if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 5);
+            if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 5);
             players.shift();
           }
 

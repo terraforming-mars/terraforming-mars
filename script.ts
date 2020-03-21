@@ -1,38 +1,20 @@
 
+import Vue from "vue";
+
+import { GameEnd } from "./src/components/GameEnd";
 import { CreateGameForm } from "./src/components/CreateGameForm";
 import { GameHome } from "./src/components/GameHome";
 import { GamesOverview } from "./src/components/GamesOverview";
 import { PlayerHome } from "./src/components/PlayerHome";
 
-import Vue from "vue";
-import { GameEnd } from "./src/components/GameEnd";
-import { PreferencesManager } from "./src/PreferencesManger";
+import { translateTextNode } from "./src/directives/i18n"
+import { trimEmptyTextNodes } from "./src/directives/TrimWhitespase"
 
-function trimEmptyTextNodes (el: any) {
-    for (let node of el.childNodes) {
-        if (node.nodeType === Node.TEXT_NODE && node.data.trim() === '') {
-        node.remove()
-        }
-    }
-}
   
 Vue.directive("trim-whitespace", {
     inserted: trimEmptyTextNodes,
     componentUpdated: trimEmptyTextNodes
 });
-
-function translateTextNode(el: any) {
-    const lang = PreferencesManager.loadValue("lang") || "en";
-    if ((window as any).TM_translations === undefined) return;
-    if ((window as any).TM_translations[lang] === undefined) return;
-
-    for (let node of el.childNodes) {
-        if (node.nodeType !== Node.TEXT_NODE) continue;
-        if ((window as any).TM_translations[lang][node.data]) {
-            node.data = (window as any).TM_translations[lang][node.data]
-        }
-    }
-}
 
 Vue.directive("i18n", {
     inserted: translateTextNode,

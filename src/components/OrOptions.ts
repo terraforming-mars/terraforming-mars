@@ -1,6 +1,7 @@
 
 import Vue, { VNode } from "vue";
 import { PlayerInputFactory } from "./PlayerInputFactory";
+import { $t } from "../directives/i18n";
 
 let unique: number = 0;
 
@@ -29,7 +30,7 @@ export const OrOptions = Vue.component("or-options", {
         this.$data.childComponents = [];
         const children: Array<VNode> = [];
         if (this.showtitle) {
-            children.push(createElement('label', [createElement("div", this.playerinput.title)]))
+            children.push(createElement('label', [createElement("div", $t(this.playerinput.title))]))
         }
         const optionElements: Array<VNode> = [];
         this.playerinput.options.forEach((option: any, idx: number) => {
@@ -48,7 +49,7 @@ export const OrOptions = Vue.component("or-options", {
                     this.selectedOption = Number(event.target.value);
                 }}}),
                 createElement("i", {"class": "form-icon"}),
-                createElement("span", option.title)
+                createElement("span", $t(option.title))
             ]));
             this.$data.childComponents.push(new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, option, (out: Array<Array<string>>) => {
                 const copy = out[0].slice();

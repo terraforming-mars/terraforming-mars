@@ -1,24 +1,7 @@
 
 import Vue from "vue";
+import { PreferencesManager } from "../PreferencesManger";
 
-
-class PreferencesManager {
-    static keys: Array<string> = ["hide_corporation", "hide_hand", "hide_cards", "hide_awards_and_milestones", "hide_turnorder", "small_cards"];
-    static preferencesValues: Map<string, boolean> = new Map<string, boolean>();
-    static localStorageSupported: boolean = typeof window['localStorage'] != "undefined" && window['localStorage'] != null;
-
-    static saveValue(name: string, val: string): void {
-        if ( ! PreferencesManager.localStorageSupported) return;
-        localStorage.setItem(name, val);
-    }
-
-    static loadValue(name: string): string {
-        if ( ! PreferencesManager.localStorageSupported) return "";
-        const value = localStorage.getItem(name);
-        if (value === null) return "";
-        return value
-    }
-}
 
 export const Preferences = Vue.component("preferences", {
     data: function () {
@@ -31,7 +14,8 @@ export const Preferences = Vue.component("preferences", {
             "hide_cards": false,
             "hide_awards_and_milestones": false,
             "hide_turnorder": false,
-            "small_cards": false
+            "small_cards": false,
+            "lang": "en"
         };
     },
     methods: {
@@ -44,27 +28,37 @@ export const Preferences = Vue.component("preferences", {
                 target.classList.remove("preferences_" + cssClassSuffix);
             }
         },
-        updatePreferencesFromCookies: function (): Map<string, boolean>  {
+        updatePreferencesFromStorage: function (): Map<string, boolean>  {
             for (let k of PreferencesManager.keys) {
                 let val = PreferencesManager.loadValue(k);
-                let boolVal = (val !== "") ? val === "1" : this.$data[k];
-                PreferencesManager.preferencesValues.set(k, val === "1");
-                this.$data[k] = boolVal;
+                if (k === "lang") {
+                    PreferencesManager.preferencesValues.set(k, this.$data[k]);
+                    this.$data[k] = val || "en";
+                    console.log("Loaded", k, val, this[k])
+                } else {
+                    let boolVal = (val !== "") ? val === "1" : this.$data[k];
+                    PreferencesManager.preferencesValues.set(k, val === "1");
+                    this.$data[k] = boolVal;
+                }
             }
             return PreferencesManager.preferencesValues;
         },
-        updatePreferences: function (_evt: any, initial: boolean = false):void {
+        updatePreferences: function (_evt: any):void {
+            var strVal: string = "";
             for (let k of PreferencesManager.keys) {
                 let val = PreferencesManager.preferencesValues.get(k);
-                if (val !== this.$data[k] || initial) {
-                    if ( ! initial) {
-                        let strVal = this.$data[k] ? "1": "0";
-                        PreferencesManager.saveValue(k, strVal);
-                        PreferencesManager.preferencesValues.set(k, this.$data[k]);
+                if (val !== this.$data[k]) {
+                    if (k === "lang") {
+                        strVal = this.$data[k];
+                    } else {
+                        strVal = this.$data[k] ? "1": "0";
                     }
+                    PreferencesManager.saveValue(k, strVal);
+                    PreferencesManager.preferencesValues.set(k, this.$data[k]);
                     this.setPreferencesCSS(this.$data[k], k);
                 }
             }
+            console.log("LANG", this.lang)
         },
         syncPreferences: function(): void {
             for (let k of PreferencesManager.keys) {
@@ -75,7 +69,7 @@ export const Preferences = Vue.component("preferences", {
 
     },
     mounted: function () {
-        this.updatePreferencesFromCookies();
+        this.$nextTick(this.updatePreferencesFromStorage);
     },
     template: `
         <div class="preferences_cont" :data="syncPreferences()">
@@ -127,6 +121,19 @@ export const Preferences = Vue.component("preferences", {
                             <input type="checkbox" v-on:change="updatePreferences" v-model="small_cards" />
                             <i class="form-icon"></i> Smaller cards
                         </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-label">Language</label>
+                        <div class="preferences_panel_langs">
+                            <label class="form-radio">
+                                <input type="radio" name="language" v-on:change="updatePreferences" v-model="lang" value="en" />
+                                <i class="form-icon"></i> English
+                            </label>
+                            <label class="form-radio">
+                                <input type="radio" name="language" v-on:change="updatePreferences" v-model="lang" value="ru" />
+                                <i class="form-icon"></i> Russian
+                            </label>
+                        </div>
                     </div>
                     <div class="preferences_panel_actions">
                         <button class="btn btn-lg btn-primary" v-on:click="ui.preferences_panel_open=false">Ok</button>

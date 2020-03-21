@@ -7,7 +7,6 @@ export function getAllTranslations(): Record<string, Record<string, string>> {
     let translations: Record<string, Record<string, string>> = {};
     let translationDir: string = "";
 
-    console.error(pathToTranslationsDir);
     for (let idx in ALL_LANGUAGES) {
         let lang: string = ALL_LANGUAGES[idx];
         translationDir = path.resolve(path.join(pathToTranslationsDir, lang));

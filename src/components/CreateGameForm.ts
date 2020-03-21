@@ -142,14 +142,14 @@ export const CreateGameForm = Vue.component("create-game-form", {
     },
     template: `
         <div id="create-game">
-            <h1><span v-i18>Terraforming Mars</span> — <span v-i18>Create New Game</span></h1>
+            <h1><span v-i18n>Terraforming Mars</span> — <span v-i18n>Create New Game</span></h1>
 
             <div class="create-game-form create-game--block">
 
                 <div class="container create-game-options">
                     <div class="columns">
                         <div class="create-game-options-block col3 col-sm-6">
-                            <h4 v-i18>Players count</h4>
+                            <h4 v-i18n>Players count</h4>
 
                             <label class="form-radio" v-for="pCount in [1,2,3,4,5]">
                                 <input type="radio" :value="pCount" name="playersCount" v-model="playersCount">
@@ -158,7 +158,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         </div>
 
                         <div class="create-game-options-block col3 col-sm-6">
-                            <h4 v-i18>Extensions</h4>
+                            <h4 v-i18n>Extensions</h4>
                             <label class="form-switch">
                                 <input type="checkbox" name="prelude" v-model="prelude">
                                 <i class="form-icon"></i> Prelude
@@ -176,7 +176,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         </div>
 
                         <div class="create-game-options-block col3 col-sm-6">
-                            <h4 v-i18>Options</h4>
+                            <h4 v-i18n>Options</h4>
 
                             <label class="form-switch" v-if="playersCount > 1">
                                 <input type="checkbox" name="draftVariant" v-model="draftVariant">
@@ -204,7 +204,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         </div>
 
                         <div class="create-game-options-block col3 col-sm-6">
-                            <h4 v-i18>Board</h4>
+                            <h4 v-i18n>Board</h4>
 
                             <label class="form-radio">
                                 <input type="radio" :value=getOriginalBoard() name="board" v-model="board">
@@ -224,7 +224,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                     </div>
 
                     <div class="create-game-action">			
-                        <button class="btn btn-lg btn-success" v-on:click="createGame" v-i18>Create Game</button> 
+                        <button class="btn btn-lg btn-success" v-on:click="createGame" v-i18n>Create Game</button> 
                     </div>  
 
                 </div>

@@ -57,7 +57,6 @@ function requestHandler(
 ): void {
   if (req.url !== undefined) {
     if (req.method === 'GET') {
-      console.log("Serving", req.url);
       if (req.url.replace(/\?.*$/, '').startsWith('/games-overview')) {
         if (!isServerIdValid(req)) {
           notAuthorized(req, res);

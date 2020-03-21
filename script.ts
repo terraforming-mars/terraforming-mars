@@ -6,6 +6,7 @@ import { PlayerHome } from "./src/components/PlayerHome";
 
 import Vue from "vue";
 import { GameEnd } from "./src/components/GameEnd";
+import { PreferencesManager } from "./src/PreferencesManger";
 
 function trimEmptyTextNodes (el: any) {
     for (let node of el.childNodes) {
@@ -21,18 +22,19 @@ Vue.directive("trim-whitespace", {
 });
 
 function translateTextNode(el: any) {
-    
+    const lang = PreferencesManager.loadValue("lang") || "en";
     if ((window as any).TM_translations === undefined) return;
+    if ((window as any).TM_translations[lang] === undefined) return;
 
     for (let node of el.childNodes) {
         if (node.nodeType !== Node.TEXT_NODE) continue;
-        if ((window as any).TM_translations["ru"][node.data]) {
-            node.data = (window as any).TM_translations["ru"][node.data]
+        if ((window as any).TM_translations[lang][node.data]) {
+            node.data = (window as any).TM_translations[lang][node.data]
         }
     }
 }
 
-Vue.directive("i18", {
+Vue.directive("i18n", {
     inserted: translateTextNode,
     componentUpdated: translateTextNode
 });
@@ -42,7 +44,7 @@ const app = new Vue({
     data: {
         screen: "empty",
         playerkey: 0,
-        otherPlayersVisibility: {},
+        componentsVisibility: {},
         game: {
             players: []
         }
@@ -55,13 +57,13 @@ const app = new Vue({
         "games-overview": GamesOverview
     },
     methods: {
-        setOtherPlayerVisibility: function(playerId: string, isVisible: boolean) {
-            if (isVisible === this.getOtherPlayerVisibility(playerId)) return;
-            (this as any).otherPlayersVisibility[playerId] = isVisible
+        setVisibilityState: function(targetVar: string, isVisible: boolean) {
+            if (isVisible === this.getVisibilityState(targetVar)) return;
+            (this as any).componentsVisibility[targetVar] = isVisible
             this.playerkey++;
         },
-        getOtherPlayerVisibility: function(playerId: string): boolean {
-            return (this as any).otherPlayersVisibility[playerId] ? true : false;
+        getVisibilityState: function(targetVar: string): boolean {
+            return (this as any).componentsVisibility[targetVar] ? true : false;
         },
         updatePlayer: function() {
             const currentPathname: string = window.location.pathname;

@@ -1,6 +1,6 @@
 
 import { PlayerInputTypes } from "../PlayerInputTypes";
-import { ICard } from '../cards/ICard';
+import { CardModel } from './CardModel';
 
 export interface PlayerInputModel {
     amount: number | undefined;
@@ -8,7 +8,7 @@ export interface PlayerInputModel {
     canUseHeat: boolean | undefined;
     canUseSteel: boolean | undefined;
     canUseTitanium: boolean | undefined;
-    cards: Array<ICard> | undefined;
+    cards: Array<CardModel> | undefined;
     inputType: PlayerInputTypes;
     options: Array<PlayerInputModel> | undefined;
     max: number | undefined;

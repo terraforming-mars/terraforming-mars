@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as querystring from 'querystring';
 import {AndOptions} from './src/inputs/AndOptions';
-import {CardModel} from './src/models/CardModel';
+import { CardModel } from './src/models/CardModel';
 import {ColonyModel} from './src/models/ColonyModel';
 import {Color} from './src/Color';
 import {CorporationCard} from './src/cards/corporation/CorporationCard';
@@ -37,7 +37,7 @@ import {SpaceModel} from './src/models/SpaceModel';
 import {TileType} from './src/TileType';
 import { Phase } from './src/Phase';
 import { Resources } from "./src/Resources";
-import { CardType } from "./src/cards/CardType";
+import { CardType } from './src/cards/CardType';
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
@@ -379,6 +379,16 @@ function getPlayer(player: Player, game: Game): string {
   return JSON.stringify(output);
 }
 
+function getCardsAsCardModel(cards: Array<ICard>): Array<CardModel> {
+  let result:Array<CardModel> = [];
+
+  cards.forEach((card) => {
+    result.push({name: card.name, resources: (card.resourceCount ? card.resourceCount : 0), calculatedCost : 0, cardType : CardType.AUTOMATED});
+  });
+    
+  return result;
+}
+
 function getWaitingFor(
     waitingFor: PlayerInput | undefined
 ): PlayerInputModel | undefined {
@@ -414,13 +424,13 @@ function getWaitingFor(
       }
       break;
     case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD:
-      result.cards = (waitingFor as SelectHowToPayForCard).cards;
+      result.cards = getCardsAsCardModel((waitingFor as SelectHowToPayForCard).cards);
       result.microbes = (waitingFor as SelectHowToPayForCard).microbes;
       result.floaters = (waitingFor as SelectHowToPayForCard).floaters;
       result.canUseHeat = (waitingFor as SelectHowToPayForCard).canUseHeat;
       break;
     case PlayerInputTypes.SELECT_CARD:
-      result.cards = (waitingFor as SelectCard<ICard>).cards;
+      result.cards = getCardsAsCardModel((waitingFor as SelectCard<ICard>).cards);
       result.maxCardsToSelect = (waitingFor as SelectCard<ICard>)
           .maxCardsToSelect;
       result.minCardsToSelect = (waitingFor as SelectCard<ICard>)

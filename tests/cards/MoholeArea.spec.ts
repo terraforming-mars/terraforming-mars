@@ -17,7 +17,7 @@ describe("MoholeArea", function () {
         expect(action).not.to.eq(undefined);
         expect(action instanceof SelectSpace).to.eq(true);
         action.cb(action.availableSpaces[0]);
-        expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.SPECIAL);
+        expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.MOHOLE_AREA);
         expect(player.getProduction(Resources.HEAT)).to.eq(4);
     });
 });

@@ -17,11 +17,11 @@ describe("LavaTubeSettlement", function () {
         expect(card.canPlay(player, game)).to.eq(false);
         player.setProduction(Resources.ENERGY);
         expect(card.canPlay(player, game)).to.eq(true);
-        game.addTile(player, SpaceType.LAND, game.getSpace(SpaceName.THARSIS_THOLUS), { tileType: TileType.SPECIAL }); 
+        game.addTile(player, SpaceType.LAND, game.getSpace(SpaceName.THARSIS_THOLUS), { tileType: TileType.LAVA_FLOWS }); 
         const anotherPlayer = new Player("test", Color.RED, false);
         game.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
-        game.addTile(player, SpaceType.LAND, game.getSpace(SpaceName.ARSIA_MONS), { tileType: TileType.SPECIAL });
-        game.addTile(player, SpaceType.LAND, game.getSpace(SpaceName.PAVONIS_MONS), { tileType: TileType.SPECIAL });
+        game.addTile(player, SpaceType.LAND, game.getSpace(SpaceName.ARSIA_MONS), { tileType: TileType.LAVA_FLOWS });
+        game.addTile(player, SpaceType.LAND, game.getSpace(SpaceName.PAVONIS_MONS), { tileType: TileType.LAVA_FLOWS });
         expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {

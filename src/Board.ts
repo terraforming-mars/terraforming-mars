@@ -115,7 +115,7 @@ export abstract class Board {
 
     public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
         const spacesForGreenery = this.getAvailableSpacesOnLand(player)
-            .filter((space) => this.getAdjacentSpaces(space).find((adj) => adj.tile !== undefined && adj.player === player && (adj.tile.tileType === TileType.GREENERY || adj.tile.tileType === TileType.SPECIAL || adj.tile.tileType === TileType.CITY)) !== undefined);
+            .filter((space) => this.getAdjacentSpaces(space).find((adj) => adj.tile !== undefined && adj.player === player && adj.tile.tileType !== TileType.OCEAN) !== undefined);
 
         // Spaces next to tiles you own
         if (spacesForGreenery.length > 0) {

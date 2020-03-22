@@ -154,10 +154,13 @@ export class Game {
         if (!player.beginner) {
           const firstCard: CorporationCard | undefined = corporationCards.pop();
           const secondCard: CorporationCard | undefined = corporationCards.pop();
-          if (firstCard === undefined || secondCard === undefined) {
+          const thirdCard: CorporationCard | undefined = corporationCards.pop();
+          const fourthCard: CorporationCard | undefined = corporationCards.pop();
+
+          if (firstCard === undefined || secondCard === undefined || thirdCard === undefined || fourthCard === undefined) {
             throw new Error("No corporation card dealt for player");
           }
-          player.dealtCorporationCards = [firstCard, secondCard];
+          player.dealtCorporationCards = [firstCard, secondCard, thirdCard, fourthCard];
           player.setWaitingFor(this.pickCorporationCard(player), () => {});
         } else {
           this.playCorporationCard(player, new BeginnerCorporation());

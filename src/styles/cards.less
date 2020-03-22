@@ -77,7 +77,8 @@
 
 input[type=checkbox]:checked + .filterDiv,
 input[type=radio]:checked + .filterDiv {
-    filter: drop-shadow(-2px -2px 2px rgba(0,150,255,100)) drop-shadow(-2px -2px 2px rgba(255,255,255,100))drop-shadow(16px 16px 5px black) ;
+    box-shadow: 0 0 0 2px #303030, 0 0 8px 8px #ee792b;
+    filter: brightness(120%);
 }
 
 .filterDiv3 {
@@ -123,7 +124,6 @@ input[type=radio]:checked + .filterDiv {
 
 .colony-card {
     color: white;
-    filter: drop-shadow(2px 2px 1px #020202);
     height: 275px;
     width: 418px;
     background-color: black;

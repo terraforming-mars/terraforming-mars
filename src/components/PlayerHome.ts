@@ -86,24 +86,6 @@ export const PlayerHome = Vue.component("player-home", {
 
             <div v-if="player.corporationCard">
 
-                <div class="player_home_block player_home_block--resources nofloat">
-                    <player-resources :player="player" v-trim-whitespace></player-resources>
-                </div>
-
-                <div class="tag-display tags_item_cont tag-display-tags" v-if="player.tags.length > 0">
-                    <div v-for="tag in player.tags">
-                        <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>
-                    </div>
-                </div>
-                <div class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
-                    <div>
-                        <div class="tag-display">
-                            <div class="tag-count icon-vp"></div>
-                            <span class="tag-count-display"> : {{player.victoryPointsBreakdown.total}}</span>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="player_home_block">
                     <a name="board" class="player_home_anchor"></a>
                     <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.boardName"></board>
@@ -131,6 +113,24 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
 
+                <div class="tag-display tags_item_cont tag-display-tags" v-if="player.tags.length > 0">
+                    <div v-for="tag in player.tags">
+                        <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>
+                    </div>
+                </div>
+                <div class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
+                    <div>
+                        <div class="tag-display">
+                            <div class="tag-count icon-vp"></div>
+                            <span class="tag-count-display"> : {{player.victoryPointsBreakdown.total}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="player_home_block player_home_block--resources nofloat">
+                    <player-resources :player="player" v-trim-whitespace></player-resources>
+                </div>
+
                 <div class="player_home_block player_home_block--actions nofloat">
                     <a name="actions" class="player_home_anchor"></a>
                     <h2>Actions</h2>
@@ -141,7 +141,7 @@ export const PlayerHome = Vue.component("player-home", {
                     <h2>Last Actions</h2>
                     <log-panel :messages="player.gameLog"></log-panel>
                 </div>
- 
+
                 <a name="cards" class="player_home_anchor"></a>
                 <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
                     <h2>Cards In Hand</h2>

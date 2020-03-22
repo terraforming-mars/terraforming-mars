@@ -19,7 +19,7 @@ export class RestrictedArea implements IActionCard, IProjectCard {
 
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space for tile", game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
-            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
+            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.RESTRICTED_AREA });
             return undefined;
         });
     }

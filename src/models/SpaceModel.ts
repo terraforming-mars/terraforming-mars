@@ -11,5 +11,5 @@ export interface SpaceModel {
     bonus: Array<SpaceBonus>;
     color: Color | undefined;
     tileType: TileType | undefined;
-    spaceType: SpaceType; 
+    spaceType: SpaceType;
 }

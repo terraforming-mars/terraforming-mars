@@ -15,7 +15,7 @@ describe("NaturalPreserve", function () {
         const game = new Game("foobar", [player,player], player);
         const lands = game.board.getAvailableSpacesOnLand(player);
         for (let land of lands) {
-            game.addTile(player, land.spaceType, land, { tileType: TileType.SPECIAL });
+            game.addTile(player, land.spaceType, land, { tileType: TileType.NATURAL_PRESERVE });
         }
         expect(card.canPlay(player, game)).to.eq(false);
         game.increaseOxygenLevel(player, 2); // 2
@@ -34,6 +34,6 @@ describe("NaturalPreserve", function () {
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
         player.victoryPoints += card.getVictoryPoints();
         expect(player.victoryPoints).to.eq(1);
-        expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.SPECIAL);
+        expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.NATURAL_PRESERVE);
     }); 
 });

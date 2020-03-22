@@ -9,7 +9,7 @@ export const TagCount = Vue.component("tag-count", {
     template: `
     <div class="tag-display">
         <tag :tag="tag"></tag>
-        <span class="tag-count-display"> : {{count}}</span>
+        <span class="tag-count-display">{{count}}</span>
     </div>
     `
 });

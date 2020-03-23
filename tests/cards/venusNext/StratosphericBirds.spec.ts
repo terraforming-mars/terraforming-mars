@@ -34,7 +34,7 @@ describe("StratosphericBirds", function () {
         const action = card.action();
         expect(action).to.eq(undefined);
         expect(player.getResourcesOnCard(card)).to.eq(1);
-        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints(player));
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
 

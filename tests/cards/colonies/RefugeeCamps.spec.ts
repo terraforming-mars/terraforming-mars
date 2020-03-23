@@ -17,7 +17,7 @@ describe("RefugeeCamps", function () {
         expect(action).to.eq(undefined);
         
         player.addResourceTo(card, 5);
-        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints(player));
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(5);
     });
 });

@@ -24,8 +24,7 @@
         "tests/cards/turmoil/*.spec.ts",        
         "tests/cards/promo/*.spec.ts",       
         "tests/*.spec.ts",
-        "tests/TestingUtils.ts",
-        "tests/api/translations/*.spec.ts"
+        "tests/TestingUtils.ts"
     ],
     "files": [
         "tests/cards/AICentral.spec.ts",

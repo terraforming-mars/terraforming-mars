@@ -32,7 +32,7 @@ import { ElysiumBoard } from "./ElysiumBoard";
 import { HellasBoard } from "./HellasBoard";
 import { BoardName } from "./BoardName";
 import { IColony } from "./colonies/Colony";
-import { ColonyDealer } from "./colonies/ColonyDealer";
+import { ColonyDealer, ALL_COLONIES_TILES } from "./colonies/ColonyDealer";
 import { PlayerInterrupt } from "./interrupts/PlayerInterrupt";
 import { SelectOcean } from "./interrupts/SelectOcean";
 import { SelectResourceCard } from "./interrupts/SelectResourceCard";
@@ -1186,8 +1186,8 @@ export class Game {
     // Function to save the current game state
     private saveGameState(): void {
       // Getting the file path
-      let path = require('path')
-      let dbPath = path.resolve(__dirname, '../db/game.db')
+      let path = require('path');
+      let dbPath = path.resolve(__dirname, '../../db/game.db');
       let db = new sqlite3.Database(dbPath);
       // Create the table that will store every saves
       db.run('CREATE TABLE IF NOT EXISTS games(gameId varchar, saveId integer, game text)');
@@ -1217,8 +1217,8 @@ export class Game {
     // Function to restore previous turn from the database
     public restoreLastSave(): void {
       // Getting the file path
-      let path = require('path')
-      let dbPath = path.resolve(__dirname, '../db/game.db')
+      let path = require('path');
+      let dbPath = path.resolve(__dirname, '../../db/game.db');
       let db = new sqlite3.Database(dbPath);
 
       // Retrieve last save from database
@@ -1242,6 +1242,14 @@ export class Game {
       // Assign each attributes
       var o = Object.assign(this, d);
 
+      // Rebuild every player objects
+      this.players = new Array<Player>();
+      d.players.forEach((element: Player) => {
+        let player = new Player(element.name, element.color, element.beginner);
+        player = player.loadFromJSON(element);
+        this.players.push(player);
+      });
+
       // Rebuild milestones, awards and board elements
       this.milestones = [];
       this.awards = [];
@@ -1251,7 +1259,10 @@ export class Game {
           var space = this.getSpace(element.id);
           var tileType = element.tile.tileType;
           var tileCard = element.tile.card;
-          space.player = element.player!;
+          if (element.player){
+            let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.player.id);
+            space.player = this.players[playerIndex];
+          }
           space.tile = {
             tileType: tileType,
             card: tileCard
@@ -1264,13 +1275,24 @@ export class Game {
         this.setVenusElements();
       }
 
-      // Rebuild every player objects
-      this.players = new Array<Player>();
-      d.players.forEach((element: Player) => {
-        let player = new Player(element.name, element.color, element.beginner);
-        player = player.loadFromJSON(element);
-        this.players.push(player);
-      });
+      // Reload colony elements if needed 
+      if (this.coloniesExtension) {
+        this.colonyDealer = new ColonyDealer();
+        this.colonies = new Array<IColony>();
+        d.colonies.forEach((element: IColony) => {
+          let colonie = ALL_COLONIES_TILES.find((colony: IColony) => colony.name === element.name)!;
+          if (element.visitor){
+            let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.visitor.id);
+            colonie.visitor = this.players[playerIndex];
+          }
+          colonie.colonies = new Array<Player>();
+          element.colonies.forEach((element: Player) => {
+            let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.id);
+            colonie.colonies.push(this.players[playerIndex]);
+          });
+          this.colonies.push(colonie);
+        });     
+      }
 
       // Rebuild claimed milestones
       this.claimedMilestones = new Array<ClaimedMilestone>();

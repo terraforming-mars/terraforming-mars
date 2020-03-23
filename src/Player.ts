@@ -32,7 +32,7 @@ import { SelectCity } from "./interrupts/SelectCity";
 import { SpaceType } from "./SpaceType";
 import { ITagCount } from "./ITagCount";
 import { BeginnerCorporation } from "./cards/corporation/BeginnerCorporation";
-import { ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_VENUS_CORPORATIONS, ALL_PROJECT_CARDS, ALL_PRELUDE_CARDS, ALL_PRELUDE_PROJECTS_CARDS, ALL_VENUS_PROJECTS_CARDS, ALL_COLONIES_PROJECTS_CARDS } from "./Dealer";
+import { ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_VENUS_CORPORATIONS, ALL_PROJECT_CARDS, ALL_PRELUDE_CARDS, ALL_PRELUDE_PROJECTS_CARDS, ALL_VENUS_PROJECTS_CARDS, ALL_COLONIES_PROJECTS_CARDS, ALL_COLONIES_CORPORATIONS, ALL_PROMO_CORPORATIONS, ALL_TURMOIL_CORPORATIONS } from "./Dealer";
 
 export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
@@ -1661,7 +1661,10 @@ export class Player {
       }
       return ALL_CORPORATION_CARDS.find((card) => card.name === cardName) 
       || ALL_PRELUDE_CORPORATIONS.find((card) => card.name === cardName) 
-      || ALL_VENUS_CORPORATIONS.find((card) => card.name === cardName) ;
+      || ALL_VENUS_CORPORATIONS.find((card) => card.name === cardName) 
+      || ALL_COLONIES_CORPORATIONS.find((card) => card.name === cardName) 
+      || ALL_PROMO_CORPORATIONS.find((card) => card.name === cardName) 
+      || ALL_TURMOIL_CORPORATIONS.find((card) => card.name === cardName);
     }
 
     // Function to return a card object by its name

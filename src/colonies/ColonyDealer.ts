@@ -11,23 +11,25 @@ import { Miranda } from './Miranda';
 import { Pluto } from './Pluto';
 import { Enceladus } from './Enceladus';
 
+// ALL COLONIES TILES is now a const not and attribute of Colony Dealer
+export const ALL_COLONIES_TILES: Array<IColony> = [
+    new Ceres(),
+    new Enceladus(),
+    new Europa(),
+    new Ganymede(),
+    new Io(),
+    new Luna(),
+    new Miranda(),
+    new Titan(),
+    new Callisto(),
+    new Pluto(),
+    new Triton()
+];
+
 export class ColonyDealer {
     //private seed: number = 0;
     public coloniesDeck: Array<IColony> = [];
     public discardedColonies: Array<IColony> = [];
-    private ALL_COLONIES_TILES: Array<IColony> = [
-        new Ceres(),
-        new Enceladus(),
-        new Europa(),
-        new Ganymede(),
-        new Io(),
-        new Luna(),
-        new Miranda(),
-        new Titan(),
-        new Callisto(),
-        new Pluto(),
-        new Triton()
-    ];
     /*
     constructor(seed?: number) {
         if (seed !== undefined) {
@@ -58,7 +60,7 @@ export class ColonyDealer {
         } else if (players === 2) {
             count = 5;
         }
-        let tempDeck = this.shuffle(this.ALL_COLONIES_TILES);
+        let tempDeck = this.shuffle(ALL_COLONIES_TILES);
         for (let i = 0; i < count; i++) {
             this.coloniesDeck.push(tempDeck.pop());
         }    

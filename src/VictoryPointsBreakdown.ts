@@ -6,7 +6,9 @@ export class VictoryPointsBreakdown {
     public city: number = 0;
     public victoryPoints = 0;
     public total = 0;
-    public VPdetails: Array<string> = [];
+    public detailsCards: Array<string> = [];
+    public detailsMilestones: Array<string> = [];
+    public detailsAwards: Array<string> = [];
 
     public updateTotal(): void {
         this.total = 0;
@@ -26,9 +28,11 @@ export class VictoryPointsBreakdown {
                 break;
             case "milestones":
                 this.milestones += points;
+                if (message !== undefined) this.detailsMilestones.push(message+": "+points);
                 break;
             case "awards":
                 this.awards += points;
+                if (message !== undefined) this.detailsAwards.push(message+": "+points);
                 break;
             case "greenery":
                 this.greenery += points;
@@ -38,12 +42,10 @@ export class VictoryPointsBreakdown {
                 break;
             case "victoryPoints":
                 this.victoryPoints += points;
+                if (message !== undefined) this.detailsCards.push(message+": "+points);
                 break;
         }
 
-        if (message !== undefined) {
-            this.VPdetails.push(message+": "+points);
-        }
     }
 
 }

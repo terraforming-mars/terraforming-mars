@@ -201,7 +201,7 @@ export class Player {
       // Victory points from milestones
       for (const milestone of game.claimedMilestones) {
         if (milestone.player !== undefined && milestone.player.id === this.id) {
-          this.victoryPointsBreakdown.setVictoryPoints("milestones", 5);
+          this.victoryPointsBreakdown.setVictoryPoints("milestones", 5, "Claimed "+milestone.milestone.name+" milestone");
         }
       }
 
@@ -1370,7 +1370,7 @@ export class Player {
         // We have one rank 1 player
         if (fundedAward.award.getScore(players[0], game) > fundedAward.award.getScore(players[1], game)) {
 
-          if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 5);
+          if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 5, "1st place for "+fundedAward.award.name+" award (funded by "+fundedAward.player.name+")");
           players.shift();
 
           if (players.length > 1) {
@@ -1378,14 +1378,14 @@ export class Player {
             // We have one rank 2 player
             if (fundedAward.award.getScore(players[0], game) > fundedAward.award.getScore(players[1], game)) {
 
-              if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 2);
+              if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 2, "2nd place for "+fundedAward.award.name+" award (funded by "+fundedAward.player.name+")");
 
             // We have at least two rank 2 players
             } else {
 
               const score = fundedAward.award.getScore(players[0], game);
               while (players.length > 0 && fundedAward.award.getScore(players[0], game) === score) {
-                if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 2);
+                if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 2, "2nd place for "+fundedAward.award.name+" award (funded by "+fundedAward.player.name+")");
                 players.shift();
 
               }
@@ -1397,7 +1397,7 @@ export class Player {
 
           const score = fundedAward.award.getScore(players[0], game);
           while (players.length > 0 && fundedAward.award.getScore(players[0], game) === score) {
-            if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 5);
+            if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 5, "1st place for "+fundedAward.award.name+" award (funded by "+fundedAward.player.name+")");
             players.shift();
           }
 

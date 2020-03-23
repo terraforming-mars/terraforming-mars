@@ -45,7 +45,6 @@ export const WaitingFor = Vue.component("waiting-for", {
                         const result = xhr.response;
                         if (result["result"] === "GO") {
                             (vueApp as any).$root.updatePlayer();
-                            document.title = "YOUR TURN!";
 
                             if (Notification.permission !== 'granted') {
                                 Notification.requestPermission();
@@ -62,7 +61,6 @@ export const WaitingFor = Vue.component("waiting-for", {
                         } else if (result["result"] === "REFRESH") {
                             // Something changed, let's refresh UI
                             (vueApp as any).$root.updatePlayer();
-                            document.title = result["player"] + " is playing..."
                             return;
                         }
                         (vueApp as any).waitForUpdate();

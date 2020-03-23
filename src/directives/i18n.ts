@@ -1,8 +1,9 @@
 
-import { PreferencesManager } from "../PreferencesManger";
+import { PreferencesManager } from "../components/PreferencesManger";
 
 export function translateText(englishText: string): string {
     let translatedText = englishText;
+    if ((window as any).TM_translations === undefined) return translatedText; 
     const lang = PreferencesManager.loadValue("lang") || "en";
     if (lang === "en") return englishText;
     if ((window as any).TM_translations[lang][englishText]) {

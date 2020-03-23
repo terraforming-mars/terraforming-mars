@@ -55,7 +55,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
             showCorporationList: false,
             board: BoardName.ORIGINAL,
             showSeed: false,
-            seed: Math.random()
+            seed: Math.random(),
+            seededGame: false
         } as CreateGameModel
     },
     methods: {

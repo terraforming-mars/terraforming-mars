@@ -19,8 +19,8 @@ describe("SpaceElevator", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(2);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     });
     it("Should act", function () {
         const card = new SpaceElevator();

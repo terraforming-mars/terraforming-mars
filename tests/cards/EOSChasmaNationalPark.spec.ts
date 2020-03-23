@@ -36,16 +36,19 @@ describe("EosChasmaNationalPark", function () {
         const action = card.play(player, game);
         expect(action instanceof SelectCard).to.eq(true);
         if (action === undefined) return;
+        player.playedCards.push(card);
 
         action.cb([birds]);
+
+        player.getVictoryPoints(game);
 
         expect(player.getResourcesOnCard(birds)).to.eq(1);
         expect(player.plants).to.eq(3);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
-        expect(player.victoryPoints).to.eq(1);
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     });
 
-    it("Skips unnecessary confiramtions", function () {
+    it("Skips unnecessary confirmations", function () {
         const card = new EosChasmaNationalPark();
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
@@ -61,11 +64,16 @@ describe("EosChasmaNationalPark", function () {
         expect(card.canPlay(player, game)).to.eq(true);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
+        player.playedCards.push(card);
+
+        player.getVictoryPoints(game);
+        player2.getVictoryPoints(game);
 
         expect(player2.getResourcesOnCard(birds)).to.eq(1);
+        expect(player2.victoryPointsBreakdown.victoryPoints).to.eq(1);
         expect(player.plants).to.eq(3);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
-        expect(player.victoryPoints).to.eq(1);
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
 });
 

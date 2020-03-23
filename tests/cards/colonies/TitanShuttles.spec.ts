@@ -25,7 +25,7 @@ describe("TitanShuttles", function () {
         orOptions.options[1].cb(6);
         expect(player.getResourcesOnCard(card)).to.eq(1);
         expect(player.titanium).to.eq(6);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
 });

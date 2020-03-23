@@ -14,8 +14,8 @@ describe("MarsUniversity", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play();
         expect(action).to.eq(undefined);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
         expect(card.onCardPlayed(player, game, new Pets())).to.eq(undefined);
         const orOptions = card.onCardPlayed(player, game, card) as OrOptions;
         expect(orOptions.options.length).to.eq(2);

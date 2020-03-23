@@ -43,6 +43,8 @@ import { ICard } from "./cards/ICard";
 import { SelectResourceDecrease } from "./interrupts/SelectResourceDecrease";
 import { SelectHowToPayInterrupt } from "./interrupts/SelectHowToPayInterrupt";
 
+const sqlite3 = require('sqlite3').verbose();
+
 export class Game {
     public activePlayer: Player;
     public claimedMilestones: Array<ClaimedMilestone> = [];
@@ -69,6 +71,7 @@ export class Game {
     public colonies: Array<IColony> = [];
     public colonyDealer: ColonyDealer | undefined = undefined;
     public pendingOceans: number = 0;
+    public lastSaveId: number = 0;
 
     constructor(
       public id: string,
@@ -88,19 +91,7 @@ export class Game {
         seed = Math.random();
       }
 
-      if (boardName === BoardName.ELYSIUM) {
-        this.board = new ElysiumBoard();
-        this.milestones.push(...ELYSIUM_MILESTONES);
-        this.awards.push(...ELYSIUM_AWARDS);
-      } else if (boardName === BoardName.HELLAS) {
-        this.board = new HellasBoard();
-        this.milestones.push(...HELLAS_MILESTONES);
-        this.awards.push(...HELLAS_AWARDS);
-      } else {        
-        this.board = new OriginalBoard();
-        this.milestones.push(...ORIGINAL_MILESTONES);
-        this.awards.push(...ORIGINAL_AWARDS);
-      }
+      this.board = this.boardConstructor(boardName);
 
       this.activePlayer = first;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, seed);
@@ -120,14 +111,7 @@ export class Game {
       // Add Venus Next corporations cards, board colonies and milestone / award
       if (this.venusNextExtension) {
         corporationCards.push(...ALL_VENUS_CORPORATIONS);
-        this.milestones.push(...VENUS_MILESTONES);
-        this.awards.push(...VENUS_AWARDS);
-        this.board.spaces.push(
-            new BoardColony(SpaceName.DAWN_CITY),
-            new BoardColony(SpaceName.LUNA_METROPOLIS),
-            new BoardColony(SpaceName.MAXWELL_BASE),
-            new BoardColony(SpaceName.STRATOPOLIS)
-        );
+        this.setVenusElements();
       }
 
       // Add colonies stuff
@@ -161,6 +145,35 @@ export class Game {
           this.playCorporationCard(player, new BeginnerCorporation());
         }
       }
+    }
+
+    // Function to construct the board and milestones/awards list
+    public boardConstructor(boardName: BoardName): Board {
+      if (boardName === BoardName.ELYSIUM) {
+        this.milestones.push(...ELYSIUM_MILESTONES);
+        this.awards.push(...ELYSIUM_AWARDS);
+        return new ElysiumBoard();
+      } else if (boardName === BoardName.HELLAS) {
+        this.milestones.push(...HELLAS_MILESTONES);
+        this.awards.push(...HELLAS_AWARDS);
+        return new HellasBoard();
+      } else {        
+        this.milestones.push(...ORIGINAL_MILESTONES);
+        this.awards.push(...ORIGINAL_AWARDS);
+        return new OriginalBoard();
+      }
+    }
+
+    // Add Venus Next board colonies and milestone / award
+    public setVenusElements() {
+      this.milestones.push(...VENUS_MILESTONES);
+      this.awards.push(...VENUS_AWARDS);
+      this.board.spaces.push(
+          new BoardColony(SpaceName.DAWN_CITY),
+          new BoardColony(SpaceName.LUNA_METROPOLIS),
+          new BoardColony(SpaceName.MAXWELL_BASE),
+          new BoardColony(SpaceName.STRATOPOLIS)
+      );
     }
 
     public addSelectHowToPayInterrupt(player: Player, amount: number, canUseSteel: boolean, canUseTitanium: boolean, title?: string): void {
@@ -426,7 +439,7 @@ export class Game {
     }
 
     private incrementFirstPlayer(): void {
-      let firstIndex: number = this.players.indexOf(this.first);
+      let firstIndex: number = this.players.map(function(x) {return x.id; }).indexOf(this.first.id);
       if (firstIndex === -1) {
         throw new Error("Didn't even find player");
       }
@@ -637,6 +650,9 @@ export class Game {
       if (playerIndex === -1) {
         return undefined;
       }
+
+      // Save the game state after changing the current player
+      this.saveGameState();
 
       // Go to the beginning of the array if we reached the end
       return players[(playerIndex + 1 >= players.length) ? 0 : playerIndex + 1];
@@ -1165,6 +1181,165 @@ export class Game {
         tileType: TileType.GREENERY
       });
       return undefined;
+    }
+
+    // Function to save the current game state
+    private saveGameState(): void {
+      // Getting the file path
+      let path = require('path')
+      let dbPath = path.resolve(__dirname, '../db/game.db')
+      let db = new sqlite3.Database(dbPath);
+      // Create the table that will store every saves
+      db.run('CREATE TABLE IF NOT EXISTS games(gameId varchar, saveId integer, game text)');
+      // Increment the save id
+      this.lastSaveId += 1;
+      // Insert
+      db.run(`INSERT INTO games(gameId, saveId, game) VALUES(?, ?, ?)`, [this.id, this.lastSaveId, JSON.stringify(this,this.replacer)], function(err: { message: any; }) {
+        if (err) {
+          return console.log(err.message);  
+        }
+      });
+      db.close();
+    }
+
+    // Custom replacer to transform Map and Set to Array
+    public replacer(key: any, value: any) {
+      key = key +"";
+      if (typeof value === 'object' && value instanceof Set) {
+        return Array.from(value);
+      }
+      else if(typeof value === 'object' && value instanceof Map) {
+        return Array.from(value.entries());
+      }
+      return value;
+    }
+
+    // Function to restore previous turn from the database
+    public restoreLastSave(): void {
+      // Getting the file path
+      let path = require('path')
+      let dbPath = path.resolve(__dirname, '../db/game.db')
+      let db = new sqlite3.Database(dbPath);
+
+      // Retrieve last save from database
+      db.get(`SELECT game game FROM games WHERE gameId = ? AND saveId = ? ORDER BY saveId DESC`, [this.id, this.lastSaveId],(err: { message: any; }, row: { game: any; }) => {
+        if (err) {
+          return console.error(err.message);
+        }
+        // Transform string to json
+        let gameToRestore = JSON.parse(row.game);
+
+        // Rebuild each objects
+        this.loadFromJSON(gameToRestore);
+
+        return true;
+      });
+      db.close();
+    }
+
+    // Function used to rebuild each objects
+    public loadFromJSON(d: Game): Game {
+      // Assign each attributes
+      var o = Object.assign(this, d);
+
+      // Rebuild milestones, awards and board elements
+      this.milestones = [];
+      this.awards = [];
+      this.board = this.boardConstructor(d.boardName);
+      d.board.spaces.forEach((element: ISpace) => {
+        if(element.tile) {
+          var space = this.getSpace(element.id);
+          var tileType = element.tile.tileType;
+          var tileCard = element.tile.card;
+          space.player = element.player!;
+          space.tile = {
+            tileType: tileType,
+            card: tileCard
+          };
+        }
+      });
+
+      // Reload venus elements if needed
+      if(this.venusNextExtension) {
+        this.setVenusElements();
+      }
+
+      // Rebuild every player objects
+      this.players = new Array<Player>();
+      d.players.forEach((element: Player) => {
+        let player = new Player(element.name, element.color, element.beginner);
+        player = player.loadFromJSON(element);
+        this.players.push(player);
+      });
+
+      // Rebuild claimed milestones
+      this.claimedMilestones = new Array<ClaimedMilestone>();
+      d.claimedMilestones.forEach((element: ClaimedMilestone) => {
+        let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.player.id);
+        let milestoneIndex: number = this.milestones.map(function(x) {return x.name; }).indexOf(element.milestone.name);
+        this.claimedMilestones.push({
+          player: this.players[playerIndex],
+          milestone: this.milestones[milestoneIndex]
+        });
+      });
+
+      // Rebuild funded awards
+      this.fundedAwards = new Array<FundedAward>();
+      d.fundedAwards.forEach((element: FundedAward) => {
+        let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.player.id);
+        let awardIndex: number = this.awards.map(function(x) {return x.name; }).indexOf(element.award.name);
+        this.fundedAwards.push({
+          player: this.players[playerIndex],
+          award: this.awards[awardIndex]
+        });
+      });
+
+      // Rebuild passed players set
+      this.passedPlayers = new Set<Player>();
+      d.passedPlayers.forEach((element: Player) => {
+        let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.id);
+        this.passedPlayers.add(this.players[playerIndex]);
+      });
+
+      // Rebuild done players set
+      this.donePlayers = new Set<Player>();
+      d.donePlayers.forEach((element: Player) => {
+        let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.id);
+        this.donePlayers.add(this.players[playerIndex]);
+      });
+
+      // Rebuild researched players set
+      this.researchedPlayers = new Set<Player>();
+      d.researchedPlayers.forEach((element: Player) => {
+        let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.id);
+        this.researchedPlayers.add(this.players[playerIndex]);
+      });
+
+      // Rebuild drafted players set
+      this.draftedPlayers = new Set<Player>();
+      d.draftedPlayers.forEach((element: Player) => {
+        let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.id);
+        this.draftedPlayers.add(this.players[playerIndex]);
+      });
+
+      // Reinit undrafted cards map
+      this.unDraftedCards = new Map<Player, IProjectCard[]>();
+
+      // Define who is the active player and init the take action phase
+      let activeIndex: number = this.players.map(function(x) {return x.id; }).indexOf(d.activePlayer.id);
+      // We have to switch active player because it's still the one that ended last turn
+      this.activePlayer = this.players[(activeIndex + 1 >= this.players.length) ? 0 : activeIndex + 1];;
+      this.activePlayer.takeAction(this);
+
+      // Define who was the first player for this generation
+      let firstIndex: number = this.players.map(function(x) {return x.id; }).indexOf(d.first.id);
+      this.first = this.players[firstIndex];
+
+      // Rebuild dealer object to be sure that we will have cards in the same order
+      let dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension);
+      this.dealer = dealer.loadFromJSON(this.dealer);
+
+      return o;
     }
 }
 

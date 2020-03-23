@@ -31,6 +31,8 @@ import { SelectGreenery } from "./interrupts/SelectGreenery";
 import { SelectCity } from "./interrupts/SelectCity";
 import { SpaceType } from "./SpaceType";
 import { ITagCount } from "./ITagCount";
+import { BeginnerCorporation } from "./cards/corporation/BeginnerCorporation";
+import { ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_VENUS_CORPORATIONS, ALL_PROJECT_CARDS, ALL_PRELUDE_CARDS, ALL_PRELUDE_PROJECTS_CARDS, ALL_VENUS_PROJECTS_CARDS, ALL_COLONIES_PROJECTS_CARDS } from "./Dealer";
 
 export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
@@ -1315,6 +1317,15 @@ export class Player {
       });
     }
 
+    // Propose a new action to undo last action
+    private undoTurnOption(game: Game): PlayerInput {
+      return new SelectOption("Undo Turn", () => {
+        //this.actionsTakenThisRound = 0;
+        game.restoreLastSave();
+        return undefined;
+      });
+    }
+
     public takeActionForFinalGreenery(game: Game): void {
       if (game.canPlaceGreenery(this)) {
         const action: OrOptions = new OrOptions();
@@ -1596,6 +1607,11 @@ export class Player {
         action.options.push(remainingAwards);
       }
 
+      // Propose undo action only if you have done one action this turn
+      if (this.actionsTakenThisRound > 0) {
+        action.options.push(this.undoTurnOption(game));
+      }
+
       action.options.sort((a, b) => {
         if (a.title > b.title) {
           return 1;
@@ -1636,6 +1652,89 @@ export class Player {
     public setWaitingFor(input: PlayerInput, cb: () => void): void {
       this.waitingFor = input;
       this.waitingForCb = cb;
+    }
+
+    // Function to return a corporation card object by its name
+    private getCorporationCardByName(cardName: string): CorporationCard | undefined {
+      if (cardName === (new BeginnerCorporation()).name) {
+          return new BeginnerCorporation();
+      }
+      return ALL_CORPORATION_CARDS.find((card) => card.name === cardName) 
+      || ALL_PRELUDE_CORPORATIONS.find((card) => card.name === cardName) 
+      || ALL_VENUS_CORPORATIONS.find((card) => card.name === cardName) ;
+    }
+
+    // Function to return a card object by its name
+    private getProjectCardByName(cardName: string): IProjectCard | undefined {
+      return ALL_PROJECT_CARDS.find((card) => card.name === cardName) 
+      || ALL_PRELUDE_CARDS.find((card) => card.name === cardName) 
+      || ALL_PRELUDE_PROJECTS_CARDS.find((card) => card.name === cardName)
+      || ALL_VENUS_PROJECTS_CARDS.find((card) => card.name === cardName)
+      || ALL_COLONIES_PROJECTS_CARDS.find((card) => card.name === cardName);
+    }
+
+    // Function used to rebuild each objects
+    public loadFromJSON(d: Player): Player {
+      // Assign each attributes
+      var o = Object.assign(this, d);
+
+      // Rebuild resources on card map
+      this.resourcesOnCards = new Map<string, number>();
+      d.resourcesOnCards.forEach((element: any) => {
+        this.resourcesOnCards.set(element[0], element[1]);
+      });
+
+      // Rebuild generation played map
+      this.generationPlayed = new Map<string, number>();
+      d.generationPlayed.forEach((element: any) => {
+        this.generationPlayed.set(element[0], element[1]);
+      });
+
+      // action this generation set
+      this.actionsThisGeneration = new Set<string>();
+      d.actionsThisGeneration.forEach((element: any) => {
+        this.actionsThisGeneration.add(element);
+      });
+
+      // Rebuild corporation card
+      this.corporationCard = this.getCorporationCardByName(d.corporationCard!.name)
+
+      // Rebuild deal corporation array
+      this.dealtCorporationCards = [];
+      d.dealtCorporationCards.forEach((element: CorporationCard) => {
+        let corporationCard = this.getCorporationCardByName(element!.name);
+        this.dealtCorporationCards.push(corporationCard!);
+      });
+
+      // Rebuild each cards in hand
+      this.cardsInHand = [];
+      d.cardsInHand.forEach((element: IProjectCard) => {
+        let card = this.getProjectCardByName(element!.name);
+        this.cardsInHand.push(card!);
+      });
+
+      // Rebuild each prelude in hand
+      this.preludeCardsInHand = [];
+      d.preludeCardsInHand.forEach((element: IProjectCard) => {
+        let card = this.getProjectCardByName(element!.name);
+        this.preludeCardsInHand.push(card!);
+      });
+
+      // Rebuild each playerd card
+      this.playedCards = [];
+      d.playedCards.forEach((element: IProjectCard) => {
+        let card = this.getProjectCardByName(element!.name);
+        this.playedCards.push(card!);
+      });
+
+      // Rebuild each drafted cards
+      this.draftedCards = [];
+      d.draftedCards.forEach((element: IProjectCard) => {
+        let card = this.getProjectCardByName(element!.name);
+        this.draftedCards.push(card!);
+      });
+      
+      return o;
     }
 }
 

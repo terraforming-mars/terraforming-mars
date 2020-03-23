@@ -883,4 +883,42 @@ export class Dealer {
         }
         return result;
     }
+  
+    // Function to return a card object by its name
+    private getProjectCardByName(cardName: string): IProjectCard | undefined {
+        return ALL_PROJECT_CARDS.find((card) => card.name === cardName) 
+        || ALL_PRELUDE_CARDS.find((card) => card.name === cardName) 
+        || ALL_PRELUDE_PROJECTS_CARDS.find((card) => card.name === cardName)
+        || ALL_VENUS_PROJECTS_CARDS.find((card) => card.name === cardName)
+        || ALL_COLONIES_PROJECTS_CARDS.find((card) => card.name === cardName);
+    }
+
+    // Function used to rebuild each objects
+    public loadFromJSON(d: Dealer): Dealer {
+        // Assign each attributes
+        var o = Object.assign(this, d);
+
+        // Rebuild deck
+        this.deck = [];
+        d.deck.forEach((element: IProjectCard) => {
+            let card = this.getProjectCardByName(element!.name);
+            this.deck.push(card!);
+        });
+
+        // Rebuild prelude deck
+        this.preludeDeck = [];
+        d.preludeDeck.forEach((element: IProjectCard) => {
+            let card = this.getProjectCardByName(element!.name);
+            this.preludeDeck.push(card!);
+        });
+
+        // Rebuild the discard
+        this.discarded = [];
+        d.discarded.forEach((element: IProjectCard) => {
+            let card = this.getProjectCardByName(element!.name);
+            this.discarded.push(card!);
+        });
+        
+        return o;
+    }
 }

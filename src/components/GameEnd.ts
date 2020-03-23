@@ -103,7 +103,13 @@ export const GameEnd = Vue.component("game-end", {
                     <br/>
                     <div v-for="p in getSortedPlayers()">
                         <h2>Victory points details for {{p.name}}</h2>
-                        <div v-for="v in p.victoryPointsBreakdown.VPdetails">
+                        <div v-for="v in p.victoryPointsBreakdown.detailsCards">
+                            {{v}}
+                        </div>
+                        <div v-for="v in p.victoryPointsBreakdown.detailsMilestones">
+                            {{v}}
+                        </div>
+                        <div v-for="v in p.victoryPointsBreakdown.detailsAwards">
                             {{v}}
                         </div>
                         <br/>

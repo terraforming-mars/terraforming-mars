@@ -5,16 +5,18 @@ import { Player } from "../../../src/Player";
 import { Celestic } from '../../../src/cards/venusNext/Celestic';
 import { SelectCard } from "../../../src/inputs/SelectCard";
 import { ICard } from '../../../src/cards/ICard';
+import { Game } from "../../Game";
 
 describe("AirScrappingExpedition", function () {
     it("Should play", function () {
         const card = new AirScrappingExpedition();
         const corp = new Celestic();
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player,player], player);
         player.corporationCard = corp;
 
 
-        const selectCard = card.play(player) as SelectCard<ICard>;
+        const selectCard = card.play(player, game) as SelectCard<ICard>;
         expect(selectCard).not.to.eq(undefined);
         expect(selectCard instanceof SelectCard).to.eq(true);
 

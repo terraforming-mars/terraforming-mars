@@ -13,8 +13,8 @@ describe("RoverConstruction", function () {
         const game = new Game("foobar", [player,player2], player);
         const action = card.play();
         expect(action).to.eq(undefined);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
         player.playedCards.push(card);
         game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
         expect(game.getCitiesInPlay()).to.eq(1);

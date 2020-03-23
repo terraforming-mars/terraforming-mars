@@ -11,7 +11,7 @@ describe("Stratopolis", function () {
     it("Should play", function () {
         const card = new Stratopolis();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player, false, false, true);
+        const game = new Game("foobar", [player,player], player, false, false, false, true);
         expect(card.canPlay(player)).to.eq(false);
         const action = card.play(player,game);
         expect(action).to.eq(undefined);

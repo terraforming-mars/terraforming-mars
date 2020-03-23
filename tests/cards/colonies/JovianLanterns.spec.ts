@@ -25,7 +25,7 @@ describe("JovianLanterns", function () {
         expect(action).to.eq(undefined);
         expect(player.getResourcesOnCard(card)).to.eq(2);
         expect(player.titanium).to.eq(2);
-        player.victoryPoints += card.getVictoryPoints(player);
-        expect(player.victoryPoints).to.eq(1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints(player));
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
 });

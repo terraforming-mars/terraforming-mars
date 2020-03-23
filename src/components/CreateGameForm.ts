@@ -13,6 +13,7 @@ interface CreateGameModel {
     prelude: boolean;
     draftVariant: boolean;
     randomFirstPlayer: boolean;
+    showOtherPlayersVP: boolean;
     venusNext: boolean;
     colonies: boolean;
     customCorporationsList: boolean;
@@ -31,7 +32,6 @@ interface NewPlayerModel {
     first: boolean;
 }
 
-
 export const CreateGameForm = Vue.component("create-game-form", {
     data: function () {
         return {
@@ -47,6 +47,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             prelude: false,
             draftVariant: true,
             randomFirstPlayer: true,
+            showOtherPlayersVP: false,
             venusNext: false,
             colonies: false,
             customCorporationsList: false,
@@ -109,6 +110,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
             const prelude = this.$data.prelude;
             const draftVariant = this.$data.draftVariant;
+            const showOtherPlayersVP = this.$data.showOtherPlayersVP;
             const venusNext = this.$data.venusNext;
             const colonies = this.$data.colonies;
             const corporations = this.$data.corporations;
@@ -136,7 +138,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             };
             xhr.responseType = "json";
             xhr.send(JSON.stringify({
-                players: players, prelude, draftVariant, venusNext, colonies, customCorporationsList, corporations, board, seed
+                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, customCorporationsList, corporations, board, seed
             }));
         }
     },
@@ -191,6 +193,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <label class="form-switch" v-if="playersCount > 1">
                                 <input type="checkbox" v-model="randomFirstPlayer">
                                 <i class="form-icon"></i> Random first player
+                            </label>
+
+                            <label class="form-switch" v-if="playersCount > 1">
+                                <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP">
+                                <i class="form-icon"></i> Show real-time VP
                             </label>
 
                             <label class="form-switch">

@@ -26,8 +26,8 @@ describe("Hackers", function () {
             action.cb(player2);
         }
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(-1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
         expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(-2);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     });

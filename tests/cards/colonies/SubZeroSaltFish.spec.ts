@@ -37,7 +37,7 @@ describe("SubZeroSaltFish", function () {
         
 
         player.addResourceTo(card, 5);
-        player.victoryPoints += card.getVictoryPoints(player);
-        expect(player.victoryPoints).to.eq(2);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints(player));
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     });
 });

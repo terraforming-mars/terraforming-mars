@@ -23,7 +23,7 @@ describe("AsteroidMiningConsortium", function () {
         player2.setProduction(Resources.TITANIUM);
         player3.setProduction(Resources.TITANIUM);
         card.play(player, game);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
 });

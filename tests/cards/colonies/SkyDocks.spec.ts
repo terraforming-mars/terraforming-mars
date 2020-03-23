@@ -12,7 +12,7 @@ describe("SkyDocks", function () {
         expect(action).to.eq(undefined);
         expect(player.fleetSize).to.eq(2);
         expect(card.getCardDiscount()).to.eq(1);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(2);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     });
 });

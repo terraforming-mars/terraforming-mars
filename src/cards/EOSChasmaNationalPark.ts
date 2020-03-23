@@ -27,7 +27,6 @@ export class EosChasmaNationalPark implements IProjectCard {
     if (availableCards.length < 1) {
       player.plants += 3;
       player.setProduction(Resources.MEGACREDITS,2);
-      player.victoryPoints++;
       return undefined;
     }
 
@@ -35,7 +34,6 @@ export class EosChasmaNationalPark implements IProjectCard {
       game.getCardPlayer(availableCards[0].name).addResourceTo(availableCards[0]);
       player.plants += 3;
       player.setProduction(Resources.MEGACREDITS,2);
-      player.victoryPoints++;
       return undefined;
     }
 
@@ -46,9 +44,13 @@ export class EosChasmaNationalPark implements IProjectCard {
           game.getCardPlayer(foundCards[0].name).addResourceTo(foundCards[0]);
           player.plants += 3;
           player.setProduction(Resources.MEGACREDITS,2);
-          player.victoryPoints++;
           return undefined;
         }
     );
   }
+
+  public getVictoryPoints() {
+    return 1;
+  }
+
 }

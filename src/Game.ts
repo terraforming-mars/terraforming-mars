@@ -760,11 +760,16 @@ export class Game {
             }
           }
         }
+
+        // Clean old saves when the party is over.
+        this.cleanSaves();
       });
 
       this.players.forEach((player) => {
         player.victoryPointsBreakdown.updateTotal();
       });
+
+
         
     }
 
@@ -1233,6 +1238,21 @@ export class Game {
         this.loadFromJSON(gameToRestore);
 
         return true;
+      });
+      db.close();
+    }
+
+    // Function to clean saves
+    public cleanSaves(): void {
+      // Getting the file path
+      let path = require('path');
+      let dbPath = path.resolve(__dirname, '../../db/game.db');
+      let db = new sqlite3.Database(dbPath);
+      // DELETE all saves expect last one
+      db.run(`DELETE FROM games WHERE gameId = ? AND saveId < ?`, [this.id, this.lastSaveId], function(err: { message: any; }) {
+        if (err) {
+          return console.log(err.message);  
+        }
       });
       db.close();
     }

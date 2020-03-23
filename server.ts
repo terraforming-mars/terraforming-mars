@@ -314,7 +314,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         }
       }
 
-      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.venusNext, gameReq.colonies, gameReq.customCorporationsList, selectedCorporations, gameReq.board, gameReq.seed);
+      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.showOtherPlayersVP, gameReq.venusNext, gameReq.colonies, gameReq.customCorporationsList, selectedCorporations, gameReq.board, gameReq.seed);
       games.set(gameId, game);
       game.getPlayers().forEach((player) => {
         playersToGame.set(player.id, game);
@@ -375,8 +375,7 @@ function getPlayer(player: Player, game: Game): string {
     titanium: player.titanium,
     titaniumProduction: player.getProduction(Resources.TITANIUM),
     titaniumValue: player.titaniumValue,
-    victoryPoints: player.victoryPoints,
-    victoryPointsBreakdown: player.victoryPointsBreakdown,
+    victoryPointsBreakdown: player.getVictoryPoints(game),
     waitingFor: getWaitingFor(player.getWaitingFor()),
     gameLog: game.gameLog,
     isSoloModeWin: game.isSoloModeWin(),
@@ -387,6 +386,7 @@ function getPlayer(player: Player, game: Game): string {
     boardName: game.boardName,
     colonies: getColonies(game.colonies),
     tags: player.getAllTags(),
+    showOtherPlayersVP: game.showOtherPlayersVP,
     actionsThisGeneration: Array.from(player.getActionsThisGeneration())
   } as PlayerModel;
   return JSON.stringify(output);
@@ -522,14 +522,14 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       titanium: player.titanium,
       titaniumProduction: player.getProduction(Resources.TITANIUM),
       titaniumValue: player.titaniumValue,
-      victoryPoints: player.victoryPoints,
-      victoryPointsBreakdown: player.victoryPointsBreakdown,
+      victoryPointsBreakdown: player.getVictoryPoints(game),
       isActive: player.id === game.activePlayer.id,
       venusNextExtension: game.venusNextExtension,
       venusScaleLevel: game.getVenusScaleLevel(),
       boardName: game.boardName,
       colonies: getColonies(game.colonies),
       tags: player.getAllTags(),
+      showOtherPlayersVP: game.showOtherPlayersVP,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration())
     } as PlayerModel;
   });

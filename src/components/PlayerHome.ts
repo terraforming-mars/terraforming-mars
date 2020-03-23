@@ -53,7 +53,7 @@ export const PlayerHome = Vue.component("player-home", {
             if (player.id === this.player.id) return;
             
             (this.$root as any).setOtherPlayerVisibility(player.id, true);
-        }  
+        }
     },
     mounted: function () {
         dialogPolyfill.default.registerDialog(document.getElementById("dialog-default"));
@@ -77,7 +77,7 @@ export const PlayerHome = Vue.component("player-home", {
                 <div class="player_home_block">
                     <h2 v-i18n>This game is over!</h2>
                     <div v-for="otherPlayer in player.players">
-                        <div :style="'color:' + otherPlayer.color">{{otherPlayer.name}} - {{otherPlayer.victoryPoints}}</div>
+                        <div :style="'color:' + otherPlayer.color">{{otherPlayer.name}} - {{otherPlayer.victoryPointsBreakdown.total}}</div>
                     </div>
                 </div>
             </div>
@@ -113,9 +113,17 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
 
-                <div class="tag-display tags_item_cont" v-if="player.tags.length > 0">
+                <div class="tag-display tags_item_cont tag-display-tags" v-if="player.tags.length > 0">
                     <div v-for="tag in player.tags">
                         <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>
+                    </div>
+                </div>
+                <div class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
+                    <div>
+                        <div class="tag-display">
+                            <div class="tag-count icon-vp"></div>
+                            <span class="tag-count-display"> : {{player.victoryPointsBreakdown.total}}</span>
+                        </div>
                     </div>
                 </div>
 

@@ -1,5 +1,5 @@
 import {Player} from "./Player";
-import { Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS } from "./Dealer";
+import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS} from "./Dealer";
 import {ISpace} from "./ISpace";
 import {SpaceType} from "./SpaceType";
 import {TileType} from "./TileType";
@@ -21,27 +21,27 @@ import {ResourceType} from "./ResourceType";
 import * as constants from "./constants";
 import {Color} from "./Color";
 import {IAward} from "./awards/IAward";
-import { Tags } from "./cards/Tags";
+import {Tags} from "./cards/Tags";
 import {Resources} from "./Resources";
-import { ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES } from "./milestones/Milestones";
-import { ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS } from "./awards/Awards";
+import {ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES} from "./milestones/Milestones";
+import {ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS} from "./awards/Awards";
 import {SpaceName} from "./SpaceName";
 import {BoardColony, Board} from "./Board";
 import {CorporationName} from "./CorporationName";
-import { ElysiumBoard } from "./ElysiumBoard";
-import { HellasBoard } from "./HellasBoard";
-import { BoardName } from "./BoardName";
-import { IColony } from "./colonies/Colony";
-import { ColonyDealer } from "./colonies/ColonyDealer";
-import { PlayerInterrupt } from "./interrupts/PlayerInterrupt";
-import { SelectOcean } from "./interrupts/SelectOcean";
-import { SelectResourceCard } from "./interrupts/SelectResourceCard";
-import { SelectColony } from "./interrupts/SelectColony";
-import { SelectRemoveColony } from "./interrupts/SelectRemoveColony";
-import { SelectResourceProductionDecrease } from "./interrupts/SelectResourceProductionDecrease";
-import { ICard } from "./cards/ICard";
-import { SelectResourceDecrease } from "./interrupts/SelectResourceDecrease";
-import { SelectHowToPayInterrupt } from "./interrupts/SelectHowToPayInterrupt";
+import {ElysiumBoard} from "./ElysiumBoard";
+import {HellasBoard} from "./HellasBoard";
+import {BoardName} from "./BoardName";
+import {IColony} from "./colonies/Colony";
+import {ColonyDealer} from "./colonies/ColonyDealer";
+import {PlayerInterrupt} from "./interrupts/PlayerInterrupt";
+import {SelectOcean} from "./interrupts/SelectOcean";
+import {SelectResourceCard} from "./interrupts/SelectResourceCard";
+import {SelectColony} from "./interrupts/SelectColony";
+import {SelectRemoveColony} from "./interrupts/SelectRemoveColony";
+import {SelectResourceProductionDecrease} from "./interrupts/SelectResourceProductionDecrease";
+import {ICard} from "./cards/ICard";
+import {SelectResourceDecrease} from "./interrupts/SelectResourceDecrease";
+import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
 
 export class Game {
     public activePlayer: Player;
@@ -76,6 +76,7 @@ export class Game {
       private first: Player,
       private preludeExtension: boolean = false,
       private draftVariant: boolean = false,
+      public showOtherPlayersVP: boolean = false,
       public venusNextExtension: boolean = false,
       public coloniesExtension: boolean = false,
       customCorporationsList: boolean = false,
@@ -282,49 +283,6 @@ export class Game {
         award: award,
         player: player
       });
-    }
-
-    public giveAward(award: IAward): void {
-      // Awards are disabled for 1 player games
-      if (this.players.length === 1) return;
-
-      const players: Array<Player> = this.players.slice();
-      players.sort(
-          (p1, p2) => award.getScore(p2, this) - award.getScore(p1, this)
-      );
-      if (award.getScore(players[0], this) > award.getScore(players[1], this)) {
-        players[0].victoryPointsBreakdown.awards += 5;
-        players[0].victoryPoints += 5;
-        players.shift();
-        if (players.length > 1) {
-          if (
-            award.getScore(players[0], this) > award.getScore(players[1], this)
-          ) {
-            players[0].victoryPointsBreakdown.awards += 2;
-            players[0].victoryPoints += 2;
-          } else { // We have at least 2 rank 2 players
-            const score = award.getScore(players[0], this);
-            while (
-              players.length > 0 &&
-              award.getScore(players[0], this) === score
-            ) {
-              players[0].victoryPointsBreakdown.awards += 2;
-              players[0].victoryPoints += 2;
-              players.shift();
-            }
-          }
-        }
-      } else { // We have at least 2 rank 1 players
-        const score = award.getScore(players[0], this);
-        while (
-          players.length > 0 &&
-          award.getScore(players[0], this) === score
-        ) {
-          players[0].victoryPointsBreakdown.awards += 5;
-          players[0].victoryPoints += 5;
-          players.shift();
-        }
-      }
     }
 
     public hasBeenFunded(award: IAward): boolean {
@@ -688,69 +646,6 @@ export class Game {
     private gotoEndGame(): void {
       if (this.phase === Phase.END) return;
       this.phase = Phase.END;
-
-      // Give players any victory points from cards and corporations
-      this.players.forEach((player) => {
-        if (player.corporationCard !== undefined && player.corporationCard.getVictoryPoints !== undefined) {
-          player.victoryPoints += player.corporationCard.getVictoryPoints(player, this);
-          player.victoryPointsBreakdown.VPdetails.push(player.corporationCard.name + " : " + player.corporationCard.getVictoryPoints(player, this));
-        }
-        for (let playedCard of player.playedCards) {
-          if (playedCard.getVictoryPoints !== undefined) {
-            player.victoryPoints += playedCard.getVictoryPoints(player, this);
-            player.victoryPointsBreakdown.VPdetails.push(playedCard.name + " : " + playedCard.getVictoryPoints(player, this));
-          }
-        }
-        player.victoryPointsBreakdown.victoryPoints = player.victoryPoints;
-      });
-
-      // TR is converted in victory points
-      this.players.forEach((player) => {
-        player.victoryPointsBreakdown.terraformRating = player.terraformRating;
-        player.victoryPoints += player.terraformRating;
-      });
-
-      // Distribute awards
-      this.fundedAwards.forEach((fundedAward) => {
-        this.giveAward(fundedAward.award);
-      });
-
-      // Give 5 victory points for each claimed milestone
-      for (const milestone of this.claimedMilestones) {
-        milestone.player.victoryPointsBreakdown.milestones += 5;
-        milestone.player.victoryPoints += 5;
-      }
-
-      const spaces = this.board.spaces;
-      spaces.forEach((space) => {
-        // Give victory point for each greenery tile
-        if (
-          space.tile &&
-          space.tile.tileType === TileType.GREENERY &&
-          space.player !== undefined) {
-            space.player.victoryPointsBreakdown.greenery += 1;
-            space.player.victoryPoints++;
-        }
-        // Give victory point for each greenery adjacent to city tile
-        if (
-          space.tile &&
-          space.tile.tileType === TileType.CITY &&
-          space.player !== undefined
-        ) {
-          const adjacent = this.board.getAdjacentSpaces(space);
-          for (const adj of adjacent) {
-            if (adj.tile && adj.tile.tileType === TileType.GREENERY) {
-              space.player.victoryPointsBreakdown.city += 1;
-              space.player.victoryPoints++;
-            }
-          }
-        }
-      });
-
-      this.players.forEach((player) => {
-        player.victoryPointsBreakdown.updateTotal();
-      });
-        
     }
 
     public canPlaceGreenery(player: Player): boolean {
@@ -1168,4 +1063,3 @@ export class Game {
       return undefined;
     }
 }
-

@@ -21,7 +21,7 @@ describe("KelpFarming", function () {
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
         expect(player.getProduction(Resources.PLANTS)).to.eq(3);
         expect(player.plants).to.eq(2);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
 });

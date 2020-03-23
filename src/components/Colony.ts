@@ -79,6 +79,8 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getTitan()" class="resource floater"></div>
       <div v-if="colony.name === getEnceladus()" class="resource microbe"></div>
       <div v-if="colony.name === getCallisto()" class="resource energy"></div>
+      <div v-if="colony.name === getCallisto()" class="resource energy"></div>
+      <div v-if="colony.name === getCallisto()" class="resource energy"></div>
       <div v-if="colony.name === getTriton()" class="resource titanium"></div>
       <div v-if="colony.name === getMiranda()" style="transform:scale(0.8)" class="resource card"></div>
       <div v-if="colony.name === getCeres()" class="resource steel"></div>

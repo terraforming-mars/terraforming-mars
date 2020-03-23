@@ -36,14 +36,24 @@ export const OtherPlayer = Vue.component("other-player", {
                     Cards In Hand: {{player.cardsInHandNbr}}
                 </div>
 
-                <div class="player_home_block">
-                    <player-resources :player="player"></player-resources>
-                </div>
-
-                <div class="tag-display tags_item_cont" v-if="player.tags.length > 0">
+                <div class="tag-display tags_item_cont tag-display-tags" v-if="player.tags.length > 0">
                     <div v-for="tag in player.tags">
                         <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>
                     </div>
+                </div>
+
+                <div v-if="player.showOtherPlayersVP" class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
+                    <div>
+                        <div class="tag-display">
+                            <div class="tag-count icon-vp"></div>
+                            <span class="tag-count-display"> : {{player.victoryPointsBreakdown.total}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div v-else class="nofloat"></div>
+
+                <div class="player_home_block">
+                    <player-resources :player="player"></player-resources>
                 </div>
 
                 <div v-if="player.playedCards.length > 0 || player.corporationCard !== undefined" class="player_home_block">

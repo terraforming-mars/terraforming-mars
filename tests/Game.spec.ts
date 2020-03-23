@@ -36,11 +36,8 @@ describe("Game", function () {
 
         game.addCityTile(player, SpaceName.ARSIA_MONS);
         game.addGreenery(player, SpaceName.PAVONIS_MONS);
-
-        // Add some initial VPs
-        player.victoryPoints += 64;
-        
-        // claim millestone
+   
+        // Claim milestone
         let milestone = new Mayor();
 
         game.claimedMilestones.push({
@@ -77,12 +74,17 @@ describe("Game", function () {
         game.playerIsDoneWithGame(player2);
         game.playerIsDoneWithGame(player);
 
+        player.getVictoryPoints(game);
+        player2.getVictoryPoints(game);
+        player3.getVictoryPoints(game);
+
+        expect(player.victoryPointsBreakdown.terraformRating).to.eq(21);
         expect(player.victoryPointsBreakdown.milestones).to.eq(5);
         expect(player.victoryPointsBreakdown.awards).to.eq(2); // one 2nd place
         expect(player.victoryPointsBreakdown.greenery).to.eq(1);
         expect(player.victoryPointsBreakdown.city).to.eq(1); // greenery adjanced to city
-        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(70);
-        expect(player.victoryPointsBreakdown.total).to.eq(100);
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(6);
+        expect(player.victoryPointsBreakdown.total).to.eq(36);
 
         expect(player2.victoryPointsBreakdown.awards).to.eq(10); // 1st place + one shared 1st place
         expect(player3.victoryPointsBreakdown.awards).to.eq(5); // one shared 1st place
@@ -238,7 +240,7 @@ describe("Game", function () {
     it("Check Ecologist Milestone", function() {
         const player = new Player("temp_test", Color.BLUE, false);
         const player2 = new Player("temp_test2", Color.RED, false);
-        const game = new Game("classic_game", [player,player2], player, false, false, false, false, false, undefined, BoardName.ELYSIUM);
+        const game = new Game("classic_game", [player,player2], player, false, false, false, false, false, false, undefined, BoardName.ELYSIUM);
 
         const card1 = new ResearchNetwork();
         const card2 = new ArcticAlgae();

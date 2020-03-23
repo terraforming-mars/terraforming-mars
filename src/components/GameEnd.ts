@@ -21,8 +21,8 @@ export const GameEnd = Vue.component("game-end", {
         },
         getSortedPlayers: function () {
             this.player.players.sort(function (a:PlayerModel, b:PlayerModel){
-                if (a.victoryPoints < b.victoryPoints) return -1;
-                if (a.victoryPoints > b.victoryPoints) return 1;
+                if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
+                if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) return 1;
                 if (a.megaCredits < b.megaCredits) return -1;
                 if (a.megaCredits > b.megaCredits) return 1;
                 return 0;
@@ -102,13 +102,19 @@ export const GameEnd = Vue.component("game-end", {
                     </table>
                     <br/>
                     <div v-for="p in getSortedPlayers()">
-                      <h2>Victory points details for {{p.name}}</h2>
-                        <div v-for="v in p.victoryPointsBreakdown.VPdetails">
-                          {{v}}
+                        <h2>Victory points details for {{p.name}}</h2>
+                        <div v-for="v in p.victoryPointsBreakdown.detailsCards">
+                            {{v}}
                         </div>
+                        <div v-for="v in p.victoryPointsBreakdown.detailsMilestones">
+                            {{v}}
+                        </div>
+                        <div v-for="v in p.victoryPointsBreakdown.detailsAwards">
+                            {{v}}
+                        </div>
+                        <br/>
                     </div>
                 </div>
-                <br/>
                 <div class="game_end_block--board">
                     <h2>Final situation on the board</h2>
                     <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName="player.boardName"></board>

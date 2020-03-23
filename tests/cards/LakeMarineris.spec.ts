@@ -18,7 +18,7 @@ describe("LakeMarineris", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(2);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     });
 });

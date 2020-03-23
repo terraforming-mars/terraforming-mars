@@ -1,6 +1,6 @@
 import {IProjectCard} from "./cards/IProjectCard";
-import { CorporationCard } from "./cards/corporation/CorporationCard";
-import { Tags } from "./cards/Tags";
+import {CorporationCard} from "./cards/corporation/CorporationCard";
+import {Tags} from "./cards/Tags";
 import {PlayerInput} from "./PlayerInput";
 import {CardType} from "./cards/CardType";
 import {Color} from "./Color";
@@ -21,16 +21,17 @@ import {IMilestone} from "./milestones/IMilestone";
 import {StandardProjectType} from "./StandardProjectType";
 import * as constants from "./constants";
 import {IAward} from "./awards/IAward";
-import { VictoryPointsBreakdown } from "./VictoryPointsBreakdown";
+import {VictoryPointsBreakdown} from "./VictoryPointsBreakdown";
 import {Resources} from "./Resources";
-import { ResourceType } from "./ResourceType";
-import { CardName } from "./CardName";
-import { CorporationName } from "./CorporationName";
-import { IColony } from "./colonies/Colony";
-import { SelectGreenery } from "./interrupts/SelectGreenery";
-import { SelectCity } from "./interrupts/SelectCity";
-import { SpaceType } from "./SpaceType";
-import { ITagCount } from "./ITagCount";
+import {ResourceType} from "./ResourceType";
+import {CardName} from "./CardName";
+import {CorporationName} from "./CorporationName";
+import {IColony} from "./colonies/Colony";
+import {SelectGreenery} from "./interrupts/SelectGreenery";
+import {SelectCity} from "./interrupts/SelectCity";
+import {SpaceType} from "./SpaceType";
+import {ITagCount} from "./ITagCount";
+import {TileType} from "./TileType";
 
 export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
@@ -61,7 +62,6 @@ export class Player {
     public actionsTakenThisRound: number = 0;
     public terraformRating: number = 20;
     public terraformRatingAtGenerationStart: number = 20;
-    public victoryPoints: number = 0;
     public victoryPointsBreakdown = new VictoryPointsBreakdown();
     private actionsThisGeneration: Set<string> = new Set<string>();
     public lastCardPlayed: IProjectCard | undefined;
@@ -172,6 +172,61 @@ export class Player {
     public setActionsThisGeneration(cardName: string): void {
       this.actionsThisGeneration.add(cardName);
       return;
+    }
+
+    public getVictoryPoints(game: Game): VictoryPointsBreakdown {
+
+      // Reset victory points
+      this.victoryPointsBreakdown = new VictoryPointsBreakdown();
+
+      // Victory points from corporations
+      if (this.corporationCard !== undefined && this.corporationCard.getVictoryPoints !== undefined) {
+        this.victoryPointsBreakdown.setVictoryPoints("victoryPoints", this.corporationCard.getVictoryPoints(this, game), this.corporationCard.name);
+      }
+
+      // Victory points from cards
+      for (let playedCard of this.playedCards) {
+        if (playedCard.getVictoryPoints !== undefined) {
+          this.victoryPointsBreakdown.setVictoryPoints("victoryPoints", playedCard.getVictoryPoints(this, game), playedCard.name);
+        }
+      }
+
+      // Victory points from TR
+      this.victoryPointsBreakdown.setVictoryPoints("terraformRating", this.terraformRating);
+
+      // Victory points from awards
+      this.giveAwards(game);
+
+      // Victory points from milestones
+      for (const milestone of game.claimedMilestones) {
+        if (milestone.player !== undefined && milestone.player.id === this.id) {
+          this.victoryPointsBreakdown.setVictoryPoints("milestones", 5, "Claimed "+milestone.milestone.name+" milestone");
+        }
+      }
+
+      // Victory points from board
+      game.board.spaces.forEach((space) => {
+
+        // Victory points for greenery tiles
+        if (space.tile && space.tile.tileType === TileType.GREENERY && space.player !== undefined && space.player.id === this.id) {
+          this.victoryPointsBreakdown.setVictoryPoints("greenery", 1);
+        }
+
+        // Victory points for greenery tiles adjacent to cities
+        if (space.tile && space.tile.tileType === TileType.CITY && space.player !== undefined && space.player.id === this.id) {
+          const adjacent = game.board.getAdjacentSpaces(space);
+          for (const adj of adjacent) {
+            if (adj.tile && adj.tile.tileType === TileType.GREENERY) {
+              this.victoryPointsBreakdown.setVictoryPoints("city", 1);
+            }
+          }
+        }
+
+      });
+
+      this.victoryPointsBreakdown.updateTotal();
+      return this.victoryPointsBreakdown;
+
     }
 
     public cardIsInEffect(cardName: CardName): boolean {
@@ -1298,6 +1353,57 @@ export class Player {
       });
     }
 
+    private giveAwards(game: Game): void {
+
+      game.fundedAwards.forEach((fundedAward) => {
+
+        // Awards are disabled for 1 player games
+        if (game.getPlayers().length === 1) return;
+
+        const players: Array<Player> = game.getPlayers().slice();
+        players.sort(
+            (p1, p2) => fundedAward.award.getScore(p2, game) - fundedAward.award.getScore(p1, game)
+        );
+
+        // We have one rank 1 player
+        if (fundedAward.award.getScore(players[0], game) > fundedAward.award.getScore(players[1], game)) {
+
+          if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 5, "1st place for "+fundedAward.award.name+" award (funded by "+fundedAward.player.name+")");
+          players.shift();
+
+          if (players.length > 1) {
+
+            // We have one rank 2 player
+            if (fundedAward.award.getScore(players[0], game) > fundedAward.award.getScore(players[1], game)) {
+
+              if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 2, "2nd place for "+fundedAward.award.name+" award (funded by "+fundedAward.player.name+")");
+
+            // We have at least two rank 2 players
+            } else {
+
+              const score = fundedAward.award.getScore(players[0], game);
+              while (players.length > 0 && fundedAward.award.getScore(players[0], game) === score) {
+                if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 2, "2nd place for "+fundedAward.award.name+" award (funded by "+fundedAward.player.name+")");
+                players.shift();
+
+              }
+            }
+          }
+
+        // We have at least two rank 1 players
+        } else {
+
+          const score = fundedAward.award.getScore(players[0], game);
+          while (players.length > 0 && fundedAward.award.getScore(players[0], game) === score) {
+            if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 5, "1st place for "+fundedAward.award.name+" award (funded by "+fundedAward.player.name+")");
+            players.shift();
+          }
+
+        }
+      });
+
+    }
+
     private endTurnOption(): PlayerInput {
       return new SelectOption("End Turn", () => {
         this.actionsTakenThisRound = 1;
@@ -1616,6 +1722,7 @@ export class Player {
         this.actionsTakenThisRound++;
         this.takeAction(game);
       });
+
     }
 
     public process(game: Game, input: Array<Array<string>>): void {
@@ -1645,4 +1752,3 @@ export class Player {
       this.waitingForCb = cb;
     }
 }
-

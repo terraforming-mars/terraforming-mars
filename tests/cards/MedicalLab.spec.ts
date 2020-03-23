@@ -16,7 +16,7 @@ describe("MedicalLab", function () {
         player.playedCards.push(new Capital());
         card.play(player);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
 });

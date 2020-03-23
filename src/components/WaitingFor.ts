@@ -45,6 +45,7 @@ export const WaitingFor = Vue.component("waiting-for", {
                         const result = xhr.response;
                         if (result["result"] === "GO") {
                             (vueApp as any).$root.updatePlayer();
+
                             if (Notification.permission !== 'granted') {
                                 Notification.requestPermission();
                             }

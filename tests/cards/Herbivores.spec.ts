@@ -89,7 +89,6 @@ describe("Herbivores", function () {
         card.play(player, game);
             
         player.playedCards.push(card);
-        player.victoryPoints = 0
 
         expect(player.getProduction(Resources.PLANTS)).to.eq(1, "Somehow plantProduction is changed"); // Not changed
 

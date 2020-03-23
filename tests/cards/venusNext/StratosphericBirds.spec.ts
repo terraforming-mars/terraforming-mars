@@ -33,9 +33,9 @@ describe("StratosphericBirds", function () {
         player.playedCards.push(card);
         const action = card.action();
         expect(action).to.eq(undefined);
-        expect(card.resourceCount).to.eq(1);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(1);
+        expect(player.getResourcesOnCard(card)).to.eq(1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints(player));
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
 
     it("Allows to choose card to remove floater from", function () {

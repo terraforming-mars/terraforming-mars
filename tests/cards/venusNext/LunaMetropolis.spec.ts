@@ -9,7 +9,7 @@ describe("LunaMetropolis", function () {
     it("Should play", function () {
         const card = new LunaMetropolis();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player, false, false, true);
+        const game = new Game("foobar", [player,player], player, false, false, false, true);
 
         const action = card.play(player, game);
         expect(action).to.eq(undefined);

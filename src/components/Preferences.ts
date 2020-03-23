@@ -28,13 +28,13 @@ export const Preferences = Vue.component("preferences", {
                 target.classList.remove("preferences_" + cssClassSuffix);
             }
         },
-        updatePreferencesFromStorage: function (): Map<string, boolean>  {
+        updatePreferencesFromStorage: function (): Map<string, boolean | string>  {
             for (let k of PreferencesManager.keys) {
                 let val = PreferencesManager.loadValue(k);
                 if (k === "lang") {
                     PreferencesManager.preferencesValues.set(k, this.$data[k]);
-                    this.$data[k] = val || "en";
-                    console.log("Loaded", k, val, this[k])
+                    this[k] = val || "en";
+                    PreferencesManager.preferencesValues.set(k, val || "en");
                 } else {
                     let boolVal = (val !== "") ? val === "1" : this.$data[k];
                     PreferencesManager.preferencesValues.set(k, val === "1");
@@ -58,7 +58,6 @@ export const Preferences = Vue.component("preferences", {
                     this.setPreferencesCSS(this.$data[k], k);
                 }
             }
-            console.log("LANG", this.lang)
         },
         syncPreferences: function(): void {
             for (let k of PreferencesManager.keys) {
@@ -69,7 +68,7 @@ export const Preferences = Vue.component("preferences", {
 
     },
     mounted: function () {
-        this.$nextTick(this.updatePreferencesFromStorage);
+        this.updatePreferencesFromStorage();
     },
     template: `
         <div class="preferences_cont" :data="syncPreferences()">
@@ -122,15 +121,15 @@ export const Preferences = Vue.component("preferences", {
                             <i class="form-icon"></i> Smaller cards
                         </label>
                     </div>
-                    <div class="preferences_panel_item">
-                        <label class="form-label">Language</label>
+                    <div class="preferences_panel_item form-group">
+                        <label class="form-label">Language (<a href="javascript:document.location.reload(true);">refresh page</a> to see changes)</label>
                         <div class="preferences_panel_langs">
                             <label class="form-radio">
-                                <input type="radio" name="language" v-on:change="updatePreferences" v-model="lang" value="en" />
+                                <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" value="en" />
                                 <i class="form-icon"></i> English
                             </label>
                             <label class="form-radio">
-                                <input type="radio" name="language" v-on:change="updatePreferences" v-model="lang" value="ru" />
+                                <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" value="ru" />
                                 <i class="form-icon"></i> Russian
                             </label>
                         </div>

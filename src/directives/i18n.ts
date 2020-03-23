@@ -4,10 +4,9 @@ import { PreferencesManager } from "../PreferencesManger";
 export function translateText(englishText: string): string {
     let translatedText = englishText;
     const lang = PreferencesManager.loadValue("lang") || "en";
+    if (lang === "en") return englishText;
     if ((window as any).TM_translations[lang][englishText]) {
         translatedText = (window as any).TM_translations[lang][englishText]
-    } else {
-        console.log("PLAEASE TRANSLATE", englishText);
     }
     return translatedText;
 }

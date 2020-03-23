@@ -1325,6 +1325,12 @@ export class Game {
       // Reinit undrafted cards map
       this.unDraftedCards = new Map<Player, IProjectCard[]>();
 
+      // Mons insurance
+      if (d.monsInsuranceOwner) {
+        let monsIndex: number = this.players.map(function(x) {return x.id; }).indexOf(d.monsInsuranceOwner.id);
+        this.monsInsuranceOwner = this.players[monsIndex];
+      }
+
       // Define who is the active player and init the take action phase
       let activeIndex: number = this.players.map(function(x) {return x.id; }).indexOf(d.activePlayer.id);
       // We have to switch active player because it's still the one that ended last turn

@@ -43,9 +43,9 @@ import {ICard} from "./cards/ICard";
 import {SelectResourceDecrease} from "./interrupts/SelectResourceDecrease";
 import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
 
-const sqlite3 = require('sqlite3');
-const path = require('path');
-const dbPath = path.resolve(__dirname, '../../db/game.db');
+const sqlite3 = require("sqlite3");
+const path = require("path");
+const dbPath = path.resolve(__dirname, "../../db/game.db");
 
 export class Game {
     public activePlayer: Player;
@@ -1087,11 +1087,11 @@ export class Game {
       // Open the database connexion
       let db = new sqlite3.Database(dbPath);
       // Create the table that will store every saves
-      db.run('CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, PRIMARY KEY (game_id, save_id))');
+      db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, PRIMARY KEY (game_id, save_id))");
       // Increment the save id
       this.lastSaveId += 1;
       // Insert
-      db.run(`INSERT INTO games(game_id, save_id, game) VALUES(?, ?, ?)`, [this.id, this.lastSaveId, JSON.stringify(this,this.replacer)], function(err: { message: any; }) {
+      db.run("INSERT INTO games(game_id, save_id, game) VALUES(?, ?, ?)", [this.id, this.lastSaveId, JSON.stringify(this,this.replacer)], function(err: { message: any; }) {
         if (err) {
           return console.log(err.message);  
         }
@@ -1117,7 +1117,7 @@ export class Game {
       let db = new sqlite3.Database(dbPath);
 
       // Retrieve last save from database
-      db.get(`SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC`, [this.id, this.lastSaveId],(err: { message: any; }, row: { game: any; }) => {
+      db.get("SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC", [this.id, this.lastSaveId],(err: { message: any; }, row: { game: any; }) => {
         if (err) {
           return console.error(err.message);
         }
@@ -1137,7 +1137,7 @@ export class Game {
       // Open the database connexion
       let db = new sqlite3.Database(dbPath);
       // DELETE all saves expect last one
-      db.run(`DELETE FROM games WHERE game_id = ? AND save_id < ?`, [this.id, this.lastSaveId], function(err: { message: any; }) {
+      db.run("DELETE FROM games WHERE game_id = ? AND save_id < ?", [this.id, this.lastSaveId], function(err: { message: any; }) {
         if (err) {
           return console.log(err.message);  
         }

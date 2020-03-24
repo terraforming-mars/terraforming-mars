@@ -87,11 +87,11 @@ export const WaitingFor = Vue.component("waiting-for", {
             xhr.onload = () => {
                 if (xhr.status === 200) {
                     const root = (this.$root as any);
-                    root.$data.screen = "empty";
-                    root.$data.player = xhr.response;
-                    root.$data.playerkey++;
-                    root.$data.screen = "player-home";
-                    if (root.$data.player.phase == "end" && window.location.pathname !== "/the-end") {
+                    root.screen = "empty";
+                    root.player = xhr.response;
+                    root.playerkey++;
+                    root.screen = "player-home";
+                    if (root.player.phase == "end" && window.location.pathname !== "/the-end") {
                         (window as any).location = (window as any).location;
                     }
 

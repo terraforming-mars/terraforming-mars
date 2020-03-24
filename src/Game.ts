@@ -1259,12 +1259,11 @@ export class Game {
       let o = Object.assign(this, d);
 
       // Rebuild every player objects
-      this.players = new Array<Player>();
-      d.players.forEach((element: Player) => {
+      this.players = d.players.map((element: Player)  => {
         let player = new Player(element.name, element.color, element.beginner);
-        player = player.loadFromJSON(element);
-        this.players.push(player);
+        return player.loadFromJSON(element);
       });
+
 
       // Rebuild milestones, awards and board elements
       this.milestones = [];
@@ -1311,25 +1310,23 @@ export class Game {
       }
 
       // Rebuild claimed milestones
-      this.claimedMilestones = new Array<ClaimedMilestone>();
-      d.claimedMilestones.forEach((element: ClaimedMilestone) => {
+      this.claimedMilestones = d.claimedMilestones.map((element: ClaimedMilestone)  => {
         let playerIndex: number = this.players.findIndex((player) => player.id === element.player.id);
         let milestoneIndex: number = this.milestones.findIndex((milestone) => milestone.name === element.milestone.name);
-        this.claimedMilestones.push({
+        return {
           player: this.players[playerIndex],
           milestone: this.milestones[milestoneIndex]
-        });
+        };
       });
 
       // Rebuild funded awards
-      this.fundedAwards = new Array<FundedAward>();
-      d.fundedAwards.forEach((element: FundedAward) => {
+      this.fundedAwards = d.fundedAwards.map((element: FundedAward)  => {
         let playerIndex: number = this.players.findIndex((player) => player.id === element.player.id);
         let awardIndex: number = this.awards.findIndex((award) => award.name === element.award.name);
-        this.fundedAwards.push({
+        return {
           player: this.players[playerIndex],
           award: this.awards[awardIndex]
-        });
+        };
       });
 
       // Rebuild passed players set

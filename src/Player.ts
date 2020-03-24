@@ -1703,38 +1703,28 @@ export class Player {
       this.corporationCard = this.getCorporationCardByName(d.corporationCard!.name)
 
       // Rebuild deal corporation array
-      this.dealtCorporationCards = [];
-      d.dealtCorporationCards.forEach((element: CorporationCard) => {
-        let corporationCard = this.getCorporationCardByName(element!.name);
-        this.dealtCorporationCards.push(corporationCard!);
+      this.dealtCorporationCards = d.dealtCorporationCards.map((element: CorporationCard)  => {
+        return this.getCorporationCardByName(element.name)!;
       });
 
       // Rebuild each cards in hand
-      this.cardsInHand = [];
-      d.cardsInHand.forEach((element: IProjectCard) => {
-        let card = this.getProjectCardByName(element!.name);
-        this.cardsInHand.push(card!);
+      this.cardsInHand = d.cardsInHand.map((element: IProjectCard)  => {
+        return this.getProjectCardByName(element.name)!;
       });
 
       // Rebuild each prelude in hand
-      this.preludeCardsInHand = [];
-      d.preludeCardsInHand.forEach((element: IProjectCard) => {
-        let card = this.getProjectCardByName(element!.name);
-        this.preludeCardsInHand.push(card!);
+      this.preludeCardsInHand = d.preludeCardsInHand.map((element: IProjectCard)  => {
+        return this.getProjectCardByName(element.name)!;
       });
 
       // Rebuild each playerd card
-      this.playedCards = [];
-      d.playedCards.forEach((element: IProjectCard) => {
-        let card = this.getProjectCardByName(element!.name);
-        this.playedCards.push(card!);
+      this.playedCards = d.playedCards.map((element: IProjectCard)  => {
+        return this.getProjectCardByName(element.name)!;
       });
 
       // Rebuild each drafted cards
-      this.draftedCards = [];
-      d.draftedCards.forEach((element: IProjectCard) => {
-        let card = this.getProjectCardByName(element!.name);
-        this.draftedCards.push(card!);
+      this.draftedCards = d.draftedCards.map((element: IProjectCard)  => {
+        return this.getProjectCardByName(element.name)!;
       });
       
       return o;

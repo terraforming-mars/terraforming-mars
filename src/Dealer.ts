@@ -899,24 +899,18 @@ export class Dealer {
         let o = Object.assign(this, d);
 
         // Rebuild deck
-        this.deck = [];
-        d.deck.forEach((element: IProjectCard) => {
-            let card = this.getProjectCardByName(element!.name);
-            this.deck.push(card!);
+        this.deck = d.deck.map((element: IProjectCard)  => {
+            return this.getProjectCardByName(element.name)!;
         });
 
         // Rebuild prelude deck
-        this.preludeDeck = [];
-        d.preludeDeck.forEach((element: IProjectCard) => {
-            let card = this.getProjectCardByName(element!.name);
-            this.preludeDeck.push(card!);
+        this.preludeDeck = d.preludeDeck.map((element: IProjectCard)  => {
+            return this.getProjectCardByName(element.name)!;
         });
 
         // Rebuild the discard
-        this.discarded = [];
-        d.discarded.forEach((element: IProjectCard) => {
-            let card = this.getProjectCardByName(element!.name);
-            this.discarded.push(card!);
+        this.discarded = d.discarded.map((element: IProjectCard)  => {
+            return this.getProjectCardByName(element.name)!;
         });
         
         return o;

@@ -1210,10 +1210,10 @@ export class Game {
     // Custom replacer to transform Map and Set to Array
     public replacer(key: any, value: any) {
       key = key +"";
-      if (typeof value === 'object' && value instanceof Set) {
+      if (value instanceof Set) {
         return Array.from(value);
       }
-      else if(typeof value === 'object' && value instanceof Map) {
+      else if(value instanceof Map) {
         return Array.from(value.entries());
       }
       return value;

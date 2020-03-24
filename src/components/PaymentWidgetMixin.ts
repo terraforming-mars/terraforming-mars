@@ -2,8 +2,8 @@
 
 export const PaymentWidgetMixin = {
     "methods": {
-        getCardCost: function (): number {
-            return (this as any).player.megaCredits;
+        getMegaCreditsMax: function (): number {
+            return Math.min((this as any).player.megaCredits, (this as any).getCardCost());
         },
         getCssClassFor: function (action: string, target: string): string {
             let currentValue: number = (this as any)[target];
@@ -38,12 +38,11 @@ export const PaymentWidgetMixin = {
 
             let rate = this.getResourceRate(target)
             this.addValue("megaCredits", rate * realTo);
-
         },
         addValue: function (target: string, to: number): void {
             let currentValue: number = (this as any)[target];
             let maxValue: number = (this as any).player[target];
-            if (target === "megaCredits") maxValue = this.getCardCost();
+            if (target === "megaCredits") maxValue = this.getMegaCreditsMax();
             if (target === "microbes") maxValue = (this as any).playerinput.microbes;
             if (target === "floaters") maxValue = (this as any).playerinput.floaters;
             if (currentValue === maxValue) return;

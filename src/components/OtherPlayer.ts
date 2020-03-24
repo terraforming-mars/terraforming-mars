@@ -25,22 +25,10 @@ export const OtherPlayer = Vue.component("other-player", {
             return (this.$root as any).getOtherPlayerVisibility(this.player.id);
         },
         getEventCount: function() {
-            let count: number = 0;
-            for (let index = 0; index < this.player.playedCards.length; index++) {
-                if (this.player.playedCards[index].cardType === CardType.EVENT) {
-                    count++;
-                } 
-            }
-            return count;
+            return this.player.playedCards.filter((card: CardModel) => card.cardType === CardType.EVENT).length;
         },
         getActiveCards: function() {
-            let cards: Array<CardModel> = [];
-            for (let index = 0; index < this.player.playedCards.length; index++) {
-                if (this.player.playedCards[index].cardType === CardType.ACTIVE) {
-                    cards.push(this.player.playedCards[index]);
-                } 
-            }
-            return cards;
+            return this.player.playedCards.filter((card: CardModel) => card.cardType === CardType.ACTIVE);
         }
     },
     template: `

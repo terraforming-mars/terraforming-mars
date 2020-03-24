@@ -13,7 +13,7 @@ export const PaymentWidgetMixin = {
             if (currentValue === disablingLimit) return "is-disabled";
             return "is-primary"
         },
-        getRersourceRate: function (resourceName: string): number {
+        getResourceRate: function (resourceName: string): number {
             let rate = 1; // one resource == one money
             if (resourceName === "titanium") {
                 rate = (this as any).player.titaniumValue;
@@ -36,7 +36,7 @@ export const PaymentWidgetMixin = {
 
             if (target === "megaCredits" || realTo === 0) return;
 
-            let rate = this.getRersourceRate(target)
+            let rate = this.getResourceRate(target)
             this.addValue("megaCredits", rate * realTo);
 
         },
@@ -47,13 +47,13 @@ export const PaymentWidgetMixin = {
             if (target === "microbes") maxValue = (this as any).playerinput.microbes;
             if (target === "floaters") maxValue = (this as any).playerinput.floaters;
             if (currentValue === maxValue) return;
-            
+
             const realTo = (currentValue + to <= maxValue) ? to : maxValue - currentValue;
             (this as any)[target] += realTo;
 
             if (target === "megaCredits" || realTo === 0) return;
 
-            let rate = this.getRersourceRate(target)
+            let rate = this.getResourceRate(target)
             this.reduceValue("megaCredits", rate * realTo);
         }
     }

@@ -8,7 +8,7 @@ export class Titan extends Colony implements IColony {
     public name = ColonyName.TITAN;
     public description: string = "Floaters";
     public isActive = false;
-    public resourceType = ResourceType.FLOATER;
+    public resourceType: ResourceType = ResourceType.FLOATER;
     public trade(player: Player, game: Game): void {
         this.beforeTrade(this, player);
         let floaters: number = 0;

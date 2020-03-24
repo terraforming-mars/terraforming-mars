@@ -24,10 +24,10 @@ export class CaretakerContract implements IActionCard, IProjectCard {
       return undefined;
     }
     public canAct(player: Player): boolean {
-      return player.heat >= 8 || (player.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED) * 2) + player.heat >= 8 );
+      return player.heat >= 8 || (player.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCorporation() * 2) + player.heat >= 8 );
     }
     public action(player: Player) {
-      if (player.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && player.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED) > 0 ) {
+      if (player.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && player.getResourcesOnCorporation() > 0 ) {
         let heatAmount: number;
         let floaterAmount: number;
         return new AndOptions(
@@ -50,7 +50,7 @@ export class CaretakerContract implements IActionCard, IProjectCard {
             new SelectAmount("Select amount of floater on corporation to spend", (amount: number) => {
               floaterAmount = amount;
               return undefined;
-            }, player.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED))
+            }, player.getResourcesOnCorporation())
         );
       }
       player.heat -= 8;

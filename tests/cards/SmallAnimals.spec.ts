@@ -21,8 +21,8 @@ describe("SmallAnimals", function () {
         const card = new SmallAnimals();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        card.action(player);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        card.action();
+        expect(card.resourceCount).to.eq(1);
     });
     it("Should play", function () {
         const card = new SmallAnimals();
@@ -32,8 +32,8 @@ describe("SmallAnimals", function () {
         player.playedCards.push(card);
         card.play(player, game);
 
-        expect(card.getVictoryPoints(player)).to.eq(0);
+        expect(card.getVictoryPoints()).to.eq(0);
         player.addResourceTo(card, 3);
-        expect(card.getVictoryPoints(player)).to.eq(1);
+        expect(card.getVictoryPoints()).to.eq(1);
     });
 });

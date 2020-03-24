@@ -17,11 +17,11 @@ describe("Pristar", function () {
         if (player.corporationCard.onProductionPhase !== undefined) {
             player.corporationCard.onProductionPhase(player);
             expect(player.megaCredits).to.eq(10);
-            expect(player.getResourcesOnCard(card)).to.eq(0);
+            expect(card.resourceCount).to.eq(0);
             expect(player.corporationCard.onProductionPhase).not.to.eq(undefined);
             player.corporationCard.onProductionPhase(player);
             expect(player.megaCredits).to.eq(16);
-            expect(player.getResourcesOnCard(card)).to.eq(1);
+            expect(card.resourceCount).to.eq(1);
         }
     });
 });

@@ -22,13 +22,13 @@ describe("AerialMappers", function () {
         const action = card.action(player,game) as SelectCard<ICard>;
         expect(action instanceof SelectCard).to.eq(true);
         action.cb([card]);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
 
         const orOptions = card.action(player,game) as OrOptions;
         expect(orOptions).not.to.eq(undefined);
         expect(orOptions instanceof OrOptions).to.eq(true);
         orOptions.options[1].cb();
-        expect(player.getResourcesOnCard(card)).to.eq(0);
+        expect(card.resourceCount).to.eq(0);
         expect(player.cardsInHand.length).to.eq(1);
     });
 });

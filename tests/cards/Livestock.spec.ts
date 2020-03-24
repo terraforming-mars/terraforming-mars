@@ -29,13 +29,13 @@ describe("Livestock", function () {
         expect(player.getProduction(Resources.PLANTS)).to.eq(0);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
         player.addResourceTo(card, 4);
-        expect(card.getVictoryPoints(player)).to.eq(4);
+        expect(card.getVictoryPoints()).to.eq(4);
     });
     it("Should act", function () {
         const card = new Livestock();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        card.action(player);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        card.action();
+        expect(card.resourceCount).to.eq(1);
     });
 });

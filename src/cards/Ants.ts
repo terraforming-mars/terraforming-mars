@@ -1,4 +1,4 @@
-import { IActionCard, ICard } from './ICard';
+import { IActionCard, ICard, IResourceCard } from './ICard';
 import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
@@ -8,17 +8,18 @@ import {SelectCard} from '../inputs/SelectCard';
 import {ResourceType} from '../ResourceType';
 import { CardName } from '../CardName';
 
-export class Ants implements IActionCard, IProjectCard {
+export class Ants implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.MICROBES];
     public name: CardName = CardName.ANTS;
     public resourceType: ResourceType = ResourceType.MICROBE;
+    public resourceCount: number = 0;
     public cardType: CardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
       return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);
     }
-    public getVictoryPoints(player: Player): number {
-      return Math.floor(player.getResourcesOnCard(this) / 2);
+    public getVictoryPoints(): number {
+      return Math.floor(this.resourceCount / 2);
     }
     public play() {
       return undefined;
@@ -49,7 +50,7 @@ export class Ants implements IActionCard, IProjectCard {
     public action(player: Player, game: Game) {
       // Solo play, can always steal from immaginary opponent
       if (game.getPlayers().length === 1) {
-        player.addResourceTo(this);
+        this.resourceCount++;
         return undefined;
       }
 
@@ -59,7 +60,7 @@ export class Ants implements IActionCard, IProjectCard {
             // TODO Log here
             game.getCardPlayer(foundCards[0].name).
                 removeMicrobes(player, foundCards[0], 1, game);
-            player.addResourceTo(this);
+            this.resourceCount++;
             return undefined;
           }
       );

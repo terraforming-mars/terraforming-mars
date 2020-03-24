@@ -1,5 +1,5 @@
 import { IProjectCard } from "../IProjectCard";
-import {IActionCard} from '../ICard';
+import { IActionCard, IResourceCard } from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -11,19 +11,20 @@ import { Game } from '../../Game';
 import { MAX_VENUS_SCALE } from '../../constants';
 import { CardName } from '../../CardName';
 
-export class ForcedPrecipitation implements IActionCard,IProjectCard {
+export class ForcedPrecipitation implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.VENUS];
     public name: CardName = CardName.FORCED_PRECIPITATION;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
 
     public play() {
         return undefined;
     }
     public canAct(player: Player, game: Game): boolean {
         return player.canAfford(2) || 
-          (player.getResourcesOnCard(this) > 1 &&  game.getVenusScaleLevel() < MAX_VENUS_SCALE);
+          (this.resourceCount > 1 &&  game.getVenusScaleLevel() < MAX_VENUS_SCALE);
     }  
     
     public action(player: Player, game: Game) {
@@ -40,13 +41,13 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard {
                         }
                         player.megaCredits -= htp.megaCredits;
                         player.heat -= htp.heat;
-                        player.addResourceTo(this);
+                        this.resourceCount++;
                         return undefined;
                     }
                 );
             }
             player.megaCredits -= 2;
-            player.addResourceTo(this);
+            this.resourceCount++;
             return undefined;
         });
 
@@ -60,7 +61,7 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard {
             opts.push(addResource);
         } else return spendResource;
 
-        if (player.getResourcesOnCard(this) > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
+        if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
             opts.push(spendResource);
         } else return addResource;
 

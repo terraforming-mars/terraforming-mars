@@ -6,7 +6,7 @@ import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { SelectCard } from '../../inputs/SelectCard';
 import { CardName } from '../../CardName';
-
+import { Game } from "../../Game";
 
 export class AirScrappingExpedition implements IProjectCard {
     public cost: number = 13;
@@ -14,7 +14,8 @@ export class AirScrappingExpedition implements IProjectCard {
     public name: CardName = CardName.AIR_SCRAPPING_EXPEDITION;
     public cardType: CardType = CardType.EVENT;
 
-    public play(player: Player) {
+    public play(player: Player, game: Game) {
+        game.increaseVenusScaleLevel(player,1);
         let floaterCards = player.getResourceCards(ResourceType.FLOATER);
         floaterCards = floaterCards.filter(card => card.tags.filter((cardTag) => cardTag === Tags.VENUS).length > 0 );
         if (floaterCards.length === 0) {

@@ -1,5 +1,5 @@
 import { IProjectCard } from "../IProjectCard";
-import { IActionCard, ICard } from '../ICard';
+import { IActionCard, ICard, IResourceCard } from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -11,12 +11,13 @@ import { MAX_VENUS_SCALE } from '../../constants';
 import { SelectCard } from '../../inputs/SelectCard';
 import { CardName } from '../../CardName';
 
-export class Thermophiles implements IActionCard,IProjectCard {
+export class Thermophiles implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.VENUS, Tags.MICROBES];
     public name: CardName = CardName.THERMOPHILES;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.MICROBE;
+    public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
         return game.getVenusScaleLevel() >= 6 - (2 * player.getRequirementsBonus(game, true));
     }
@@ -46,7 +47,7 @@ export class Thermophiles implements IActionCard,IProjectCard {
 
         opts.push(addResource);
 
-        if (player.getResourcesOnCard(this) > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
+        if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
             opts.push(spendResource);
         } else return addResource;
 

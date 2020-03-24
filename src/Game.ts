@@ -113,7 +113,6 @@ export class Game {
         this.draftVariant = false;
         this.setupSolo();
       }
-      first.cardsInHand.push(new Pets())
 
       let corporationCards = ALL_CORPORATION_CARDS.slice();
       // Add prelude corporations cards

@@ -17,7 +17,7 @@ describe("SecurityFleet", function () {
         const action = card.play();
         expect(action).to.eq(undefined);
         player.addResourceTo(card, 5);
-        expect(card.getVictoryPoints(player)).to.eq(5);
+        expect(card.getVictoryPoints()).to.eq(5);
     });
     it("Should act", function () {
         const card = new SecurityFleet();
@@ -27,6 +27,6 @@ describe("SecurityFleet", function () {
         const action = card.action(player);
         expect(action).to.eq(undefined);
         expect(player.titanium).to.eq(0);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
     });
 });

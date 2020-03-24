@@ -11,6 +11,6 @@ describe("Recyclon", function () {
         const play = card.play(player);
         expect(play).to.eq(undefined);
         expect(player.getProduction(Resources.STEEL)).to.eq(1);
-        expect(player.getResourcesOnCard(card)).to.eq(1);       
+        expect(card.resourceCount).to.eq(1);       
     });
 });

@@ -20,11 +20,11 @@ describe("Pets", function () {
         const player2 = new Player("test2", Color.RED, false);
         player.playedCards.push(card);
         const game = new Game("foobar", [player,player2], player);
-        const action = card.play(player);
+        const action = card.play();
         expect(action).to.eq(undefined);
         player.addResourceTo(card, 4);
-        expect(card.getVictoryPoints(player)).to.eq(2);
+        expect(card.getVictoryPoints()).to.eq(2);
         game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
-        expect(player.getResourcesOnCard(card)).to.eq(6);
+        expect(card.resourceCount).to.eq(6);
     });
 });

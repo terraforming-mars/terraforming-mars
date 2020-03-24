@@ -19,6 +19,7 @@
   "include": [
     "src/*.ts",
     "src/components/*.ts",
+    "src/directives/*.ts",
     "src/cards/*.ts",
     "src/cards/corporation/*.ts",
     "src/cards/prelude/*.ts",

@@ -6,7 +6,7 @@ import {CardType} from "./cards/CardType";
 import {Color} from "./Color";
 import {SelectCard} from "./inputs/SelectCard";
 import {AndOptions} from "./inputs/AndOptions";
-import {ICard} from "./cards/ICard";
+import { ICard } from "./cards/ICard";
 import { OrOptions } from "./inputs/OrOptions";
 import {Game} from "./Game";
 import {HowToPay} from "./inputs/HowToPay";
@@ -65,7 +65,6 @@ export class Player {
     public actionsTakenThisRound: number = 0;
     public terraformRating: number = 20;
     public terraformRatingAtGenerationStart: number = 20;
-    public resourcesOnCards: Map<string, number> = new Map<string, number>();
     public victoryPointsBreakdown = new VictoryPointsBreakdown();
     private actionsThisGeneration: Set<string> = new Set<string>();
     public lastCardPlayed: IProjectCard | undefined;
@@ -274,7 +273,7 @@ export class Player {
       if (card.name === CardName.PETS) {
         throw new Error("Animals may not be removed from pets");
       }
-      if (this.getResourcesOnCard(card) === 0) {
+      if (card.resourceCount === 0) {
         throw new Error(card.name + " does not have animals to remove");
       }
       this.removeResourceFrom(card, count, game, removingPlayer);
@@ -297,12 +296,17 @@ export class Player {
     }
 
     public getResourcesOnCard(card: ICard): number {
-      return this.resourcesOnCards.get(card.name) || 0;
+      if (card.resourceCount !== undefined) {
+        return card.resourceCount;
+      } else return 0;
     }
 
-    public getResourcesOnCardname(cardname: CardName | CorporationName):number {
-      return this.resourcesOnCards.get(cardname as string) || 0;
-    }
+    public getResourcesOnCorporation():number {
+      if (this.corporationCard !== undefined
+        && this.corporationCard.resourceCount !== undefined) {
+        return this.corporationCard.resourceCount;
+      } else return 0;
+    }  
 
     public getRequirementsBonus(game: Game, venusOnly?: boolean): number {
       let requirementsBonus: number = 0;
@@ -324,10 +328,8 @@ export class Player {
       return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
     }
     public removeResourceFrom(card: ICard, count: number = 1, game? : Game, removingPlayer? : Player): void {
-      const cardValue: number | undefined =
-            this.resourcesOnCards.get(card.name);
-      if (cardValue) {
-        this.resourcesOnCards.set(card.name, Math.max(cardValue - count, 0));
+      if (card.resourceCount) {
+        card.resourceCount = Math.max(card.resourceCount - count, 0);
         // Mons Insurance hook
         if (game !== undefined && removingPlayer !== undefined) {
           this.resolveMonsInsurance(game);
@@ -343,18 +345,14 @@ export class Player {
       }
     }
     public addResourceTo(card: ICard, count: number = 1): void {
-      const cardValue: number | undefined =
-            this.resourcesOnCards.get(card.name);
-      if (cardValue) {
-        this.resourcesOnCards.set(card.name, cardValue + count);
-      } else {
-        this.resourcesOnCards.set(card.name, count);
+      if (card.resourceCount !== undefined) {
+        card.resourceCount += count;
       }
     }
 
     public getCardsWithResources(): Array<ICard> {
       return this.playedCards.filter(
-          (card) => Number(this.resourcesOnCards.get(card.name)) > 0
+          (card) => card.resourceCount && card.resourceCount > 0
       );
     }
 
@@ -400,6 +398,7 @@ export class Player {
       tags.push({tag : Tags.STEEL, count : this.getTagCount(Tags.STEEL, false, false)} as ITagCount);
       tags.push({tag : Tags.VENUS, count : this.getTagCount(Tags.VENUS, false, false)} as ITagCount);
       tags.push({tag : Tags.WILDCARD, count : this.getTagCount(Tags.WILDCARD, false, false)} as ITagCount);
+      tags.push({tag : Tags.ANIMAL, count : this.getTagCount(Tags.ANIMAL, false, false)} as ITagCount);
       tags.push({tag : Tags.EVENT, count : this.playedCards.filter(card => card.cardType === CardType.EVENT).length} as ITagCount);
       
       return tags.filter((tag) => tag.count > 0);
@@ -1362,7 +1361,7 @@ export class Player {
     private convertHeatIntoTemperature(game: Game): PlayerInput {
       let heatAmount: number;
       let floaterAmount: number;
-      if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED) > 0 ) {
+      if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
         let raiseTempOptions = new AndOptions (
           () => {
             if (heatAmount + (floaterAmount * 2) < 8) {
@@ -1385,7 +1384,7 @@ export class Player {
           new SelectAmount("Select amount of floater on corporation to spend", (amount: number) => {
             floaterAmount = amount;
             return undefined;
-          }, this.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED))
+          }, this.getResourcesOnCorporation())
         );
         raiseTempOptions.title = "Select resource amounts to raise temp";
 
@@ -1589,15 +1588,23 @@ export class Player {
         if (canUseTitanium) {
           maxPay += this.titanium * this.titaniumValue;
         }
-        if (this.playedCards.find(
-          (playedCard) => playedCard.name === CardName.PSYCHROPHILES) !== undefined 
+
+        let psychrophiles = this.playedCards.find(
+          (playedCard) => playedCard.name === CardName.PSYCHROPHILES);
+
+        if (psychrophiles !== undefined 
+           && psychrophiles.resourceCount
            && card.tags.indexOf(Tags.PLANT) !== -1) {
-            maxPay += this.getResourcesOnCardname(CardName.PSYCHROPHILES) * 2;
+            maxPay += psychrophiles.resourceCount * 2;
         }
-        if (this.playedCards.find(
-          (playedCard) => playedCard.name === CardName.DIRIGIBLES) !== undefined 
+
+        let dirigibles = this.playedCards.find(
+          (playedCard) => playedCard.name === CardName.DIRIGIBLES);
+
+        if (dirigibles !== undefined 
+           && dirigibles.resourceCount
            && card.tags.indexOf(Tags.VENUS) !== -1) {
-            maxPay += this.getResourcesOnCardname(CardName.DIRIGIBLES) * 3;
+            maxPay += dirigibles.resourceCount * 3;
         }
 
         maxPay += this.megaCredits;
@@ -1792,7 +1799,7 @@ export class Player {
       if (
         (this.heat >= constants.HEAT_FOR_TEMPERATURE || 
           (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) &&
-           (this.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED) * 2) + this.heat >= constants.HEAT_FOR_TEMPERATURE)
+           (this.getResourcesOnCorporation() * 2) + this.heat >= constants.HEAT_FOR_TEMPERATURE)
            ) &&
             game.getTemperature() + 2 <= constants.MAX_TEMPERATURE) {
         action.options.push(

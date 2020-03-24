@@ -44,7 +44,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
     methods: {
         getCardCost: function () {
             for (const icard of this.player.cardsInHand) {
-                if (this.$data.card === icard.name) {
+                if (this.$data.card.name === icard.name) {
                     return icard.calculatedCost
                 }
             }
@@ -58,7 +58,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         },
         canUseSteel: function () {
             if (this.$data.card !== undefined && this.player.steel > 0) {
-                const card = getProjectCardByName(this.$data.card);
+                const card = getProjectCardByName(this.$data.card.name);
                 if (card !== undefined) {
                     if (card.tags.find((tag) => tag === Tags.STEEL) !== undefined) {
                         return true;
@@ -69,7 +69,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         },
         canUseTitanium: function () {
             if (this.$data.card !== undefined && this.player.titanium > 0) {
-                const card = getProjectCardByName(this.$data.card);
+                const card = getProjectCardByName(this.$data.card.name);
                 if (card !== undefined) {
                     if (card.tags.find((tag) => tag === Tags.SPACE) !== undefined) {
                         return true;
@@ -80,7 +80,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
 		},	
         canUseMicrobes: function () {
             if (this.$data.card !== undefined && this.playerinput.microbes > 0) {
-                const card = getProjectCardByName(this.$data.card);
+                const card = getProjectCardByName(this.$data.card.name);
                 if (card !== undefined) {
                     if (card.tags.find((tag) => tag === Tags.PLANT) !== undefined) {
                         return true;
@@ -91,7 +91,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         },
         canUseFloaters: function () {
             if (this.$data.card !== undefined && this.playerinput.floaters > 0) {
-                const card = getProjectCardByName(this.$data.card);
+                const card = getProjectCardByName(this.$data.card.name);
                 if (card !== undefined) {
                     if (card.tags.find((tag) => tag === Tags.VENUS) !== undefined) {
                         return true;
@@ -150,7 +150,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 return;
             }
             this.onsave([[
-                this.$data.card,
+                this.$data.card.name,
                 JSON.stringify(htp)
             ]]);
         }
@@ -161,7 +161,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
 
   <label v-for="availableCard in playerinput.cards" :key="availableCard" class="payments_cards">
     <input class="hidden" type="radio" v-model="card" v-on:change="cardChanged()" :value="availableCard" />
-    <card class="cardbox" :card="availableCard"></card>
+    <card class="cardbox" :card="availableCard.name" :resources="availableCard.resourceCount"></card>
   </label>
 
   <section v-trim-whitespace>

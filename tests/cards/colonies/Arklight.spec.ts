@@ -13,10 +13,10 @@ describe("Arklight", function () {
         const game = new Game("foobar", [player,player2], player);
         const play = card.play(player);
         expect(play).to.eq(undefined);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
         player.corporationCard = card;
         card.onCardPlayed(player, game, new Predators());
-        expect(player.getResourcesOnCard(card)).to.eq(2);
-        expect(card.getVictoryPoints(player)).to.eq(1);
+        expect(card.resourceCount).to.eq(2);
+        expect(card.getVictoryPoints()).to.eq(1);
     });
 });

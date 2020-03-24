@@ -22,11 +22,11 @@ describe("Decomposers", function () {
         const action = card.play();
         expect(action).to.eq(undefined);
         card.onCardPlayed(player, game, new Birds());
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
         card.onCardPlayed(player, game, card);
-        expect(player.getResourcesOnCard(card)).to.eq(2);
+        expect(card.resourceCount).to.eq(2);
         card.onCardPlayed(player, game, new Algae());
-        expect(player.getResourcesOnCard(card)).to.eq(3);
-        expect(card.getVictoryPoints(player)).to.eq(1);
+        expect(card.resourceCount).to.eq(3);
+        expect(card.getVictoryPoints()).to.eq(1);
     });
 });

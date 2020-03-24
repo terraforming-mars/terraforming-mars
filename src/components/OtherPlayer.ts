@@ -19,10 +19,10 @@ export const OtherPlayer = Vue.component("other-player", {
     mixins: [PlayerMixin],
     methods: {
         hideMe: function () {
-            (this.$root as any).setOtherPlayerVisibility(this.player.id, false);
+            (this.$root as any).setVisibilityState("other_player_"+this.player.id, false);
         },
         isVisible: function () {
-            return (this.$root as any).getOtherPlayerVisibility(this.player.id);
+            return (this.$root as any).getVisibilityState("other_player_"+this.player.id);
         }
     },
     template: `

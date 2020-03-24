@@ -15,9 +15,8 @@ describe("Fish", function () {
     });
     it("Should act", function () {
         const card = new Fish();
-        const player = new Player("test", Color.BLUE, false);
-        card.action(player);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        card.action();
+        expect(card.resourceCount).to.eq(1);
     });
     it("Should play", function () {
         const card = new Fish();
@@ -37,6 +36,6 @@ describe("Fish", function () {
         card.play(player, game);
 
         player.addResourceTo(card, 5);
-        expect(card.getVictoryPoints(player)).to.eq(player.getResourcesOnCard(card));
+        expect(card.getVictoryPoints()).to.eq(card.resourceCount);
     });
 });

@@ -1,5 +1,5 @@
 import { IProjectCard } from "../IProjectCard";
-import {IActionCard} from '../ICard';
+import { IActionCard, IResourceCard } from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -9,12 +9,13 @@ import { SelectOption } from '../../inputs/SelectOption';
 import { Resources } from "../../Resources";
 import { CardName } from '../../CardName';
 
-export class LocalShading implements IActionCard,IProjectCard {
+export class LocalShading implements IActionCard,IProjectCard,IResourceCard {
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.VENUS];
     public name: CardName = CardName.LOCAL_SHADING;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
 
     public play() {
         return undefined;
@@ -25,7 +26,7 @@ export class LocalShading implements IActionCard,IProjectCard {
     public action(player: Player) {
         var opts: Array<SelectOption> = [];
         const addResource = new SelectOption("Add 1 floater to this card", () => {
-            player.addResourceTo(this);
+            this.resourceCount++;
             return undefined;
         });
 
@@ -37,7 +38,7 @@ export class LocalShading implements IActionCard,IProjectCard {
 
         opts.push(addResource);
 
-        if (player.getResourcesOnCard(this) > 0) {
+        if (this.resourceCount > 0) {
             opts.push(spendResource);
         } else return addResource;
 

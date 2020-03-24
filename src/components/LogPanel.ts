@@ -1,6 +1,10 @@
 import Vue from "vue";
 
 import { CardType } from "../cards/CardType";
+import { LogMessage } from "../LogMessage";
+import { LogMessageType } from "../LogMessageType";
+import { LogMessageData } from "../LogMessageData";
+import { LogMessageDataType } from "../LogMessageDataType";
 
 export const LogPanel = Vue.component("log-panel", {
     props: ["messages", "players"],
@@ -14,62 +18,48 @@ export const LogPanel = Vue.component("log-panel", {
                 scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
             }
         },
-        parseMessage: function(message: string) {
-            let parsed = document.createElement("div");
-            parsed.innerHTML = message;
-
-            // Parse <log-player> tags
-            const domPlayers = parsed.getElementsByTagName("log-player");
-            for (let i = 0; i < domPlayers.length; i++) {
-                if (domPlayers[i].getAttribute("name") !== undefined) {
+        parseData: function(data: LogMessageData) {
+            if (data.type !== undefined && data.value !== undefined) {
+                if (data.type === LogMessageDataType.PLAYER) {
                     for (let player of this.players) {
-                        if (domPlayers[i].getAttribute("name") === player.name) {
-                            domPlayers[i].classList.add("player_color_"+player.color);
-                            break;
+                        if (data.value === player.name) {
+                            return "<log-player class=\"player_color_"+player.color+"\">"+data.value+"</log-player>";
                         }
                     }
-                }
-            }
-
-            // Parse <log-card> tags
-            const domCards = parsed.getElementsByTagName("log-card");
-            for (let i = 0; i < domCards.length; i++) {
-                if (domCards[i].getAttribute("name") !== undefined) {
+                } else if (data.type === LogMessageDataType.CARD) {
                     for (let player of this.players) {
                         for (let card of player.playedCards) {
-                            if (domCards[i].getAttribute("name") === card.name && card.cardType !== undefined) {
-                                switch (card.cardType) {
-                                    case CardType.EVENT:
-                                        domCards[i].classList.add("background-color-events");
-                                        break;
-                                    case CardType.ACTIVE:
-                                        domCards[i].classList.add("background-color-active");
-                                        break;
-                                    case CardType.AUTOMATED:
-                                        domCards[i].classList.add("background-color-automated");
-                                        break;
-                                    case CardType.PRELUDE:
-                                        domCards[i].classList.add("background-color-prelude");
-                                        break;
+                            if (data.value === card.name && card.cardType !== undefined) {
+                                if (card.cardType === CardType.EVENT) {
+                                    return "<log-card class=\"background-color-events\">"+data.value+"</log-card>";
+                                } else if (card.cardType === CardType.ACTIVE) {
+                                    return "<log-card class=\"background-color-active\">"+data.value+"</log-card>";
+                                } else if (card.cardType === CardType.AUTOMATED) {
+                                    return "<log-card class=\"background-color-automated\">"+data.value+"</log-card>";
+                                } else if (card.cardType === CardType.PRELUDE) {
+                                    return "<log-card class=\"background-color-prelude\">"+data.value+"</log-card>";
+                                } else {
+                                    return data.value;
                                 }
                             }
                         }
                     }
+                } else  {
+                    return data.value;
                 }
             }
-
-            return parsed.innerHTML;
+            return '';
         },
-        hasGenerationTag: function(message: string) {
-            let parsed = document.createElement("div");
-            parsed.innerHTML = message;
-
-            const domGeneration = parsed.getElementsByTagName("log-generation");
-            if (domGeneration[0] !== undefined) {
-                return true;
+        parseMessage: function(message: LogMessage) {
+            if (message.type !== undefined && message.message !== undefined) {
+                return message.message.replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
+                    return this.parseData(message.data[idx]);
+                });
             }
-
-            return false;
+            return '';
+        },
+        isNewGeneration: function(type: LogMessageType) {
+            return (type === LogMessageType.NEW_GENERATION);
         }
     },
     mounted: function () {
@@ -79,7 +69,7 @@ export const LogPanel = Vue.component("log-panel", {
     <div class="panel log-panel">
         <div id="logpanel-scrollable" class="panel-body">
             <ul v-if="messages">
-                <li v-for="message in messages" v-html="parseMessage(message)" :class="hasGenerationTag(message) ? 'noBullet' : ''"></li>
+                <li v-for="message in messages" v-html="parseMessage(message)" :class="isNewGeneration(message.type) ? 'noBullet' : ''"></li>
             </ul>
         </div>
     </div>

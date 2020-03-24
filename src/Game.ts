@@ -42,6 +42,10 @@ import {SelectResourceProductionDecrease} from "./interrupts/SelectResourceProdu
 import {ICard} from "./cards/ICard";
 import {SelectResourceDecrease} from "./interrupts/SelectResourceDecrease";
 import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
+import {LogMessage} from "./LogMessage";
+import {LogMessageType} from "./LogMessageType";
+import {LogMessageData} from "./LogMessageData";
+import {LogMessageDataType} from "./LogMessageDataType";
 
 export class Game {
     public activePlayer: Player;
@@ -61,7 +65,7 @@ export class Game {
     private draftedPlayers: Set<Player> = new Set<Player>();
     public board: Board;
     private temperature: number = constants.MIN_TEMPERATURE;
-    public gameLog: Array<String> = [];
+    public gameLog: Array<LogMessage> = [];
     public gameAge: number = 0; // Each log event increases it
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
     public interrupts: Array<PlayerInterrupt> = [];
@@ -164,7 +168,11 @@ export class Game {
         }
       }
 
-      this.log("<log-generation>Generation "+this.generation+"</log-generation>");
+      this.log(
+        LogMessageType.NEW_GENERATION,
+        "Generation ${0}",
+        new LogMessageData(LogMessageDataType.STRING, this.generation.toString())
+      );
     }
 
     public addSelectHowToPayInterrupt(player: Player, amount: number, canUseSteel: boolean, canUseTitanium: boolean, title?: string): void {
@@ -280,7 +288,12 @@ export class Game {
       if (this.allAwardsFunded()) {
         throw new Error("All awards already funded");
       }
-      this.log("<log-player name=\""+player.name+"\">"+player.name+"</log-player> funded "+award.name+" award");
+      this.log(
+        LogMessageType.DEFAULT,
+        "${0} funded ${1} award",
+        new LogMessageData(LogMessageDataType.PLAYER, player.name),
+        new LogMessageData(LogMessageDataType.AWARD, award.name)
+      );
       this.fundedAwards.push({
         award: award,
         player: player
@@ -463,7 +476,11 @@ export class Game {
         });
       }
       this.generation++;
-      this.log("<log-generation>Generation "+this.generation+"</log-generation>");
+      this.log(
+        LogMessageType.NEW_GENERATION,
+        "Generation ${0}",
+        new LogMessageData(LogMessageDataType.STRING, this.generation.toString())
+      );
       this.incrementFirstPlayer();
       if (this.draftVariant) {
         this.gotoDraftingPhase();
@@ -1033,8 +1050,8 @@ export class Game {
       return result;
     }   
 
-    public log(message: String) {
-      this.gameLog.push(message);
+    public log(type: LogMessageType, message: string, ...data: LogMessageData[]) {
+      this.gameLog.push(new LogMessage(type, message, data));
       this.gameAge++;
       if (this.gameLog.length > 50 ) {
         (this.gameLog.shift());

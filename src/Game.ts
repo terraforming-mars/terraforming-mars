@@ -163,6 +163,8 @@ export class Game {
           this.playCorporationCard(player, new BeginnerCorporation());
         }
       }
+
+      this.log("<log-generation>Generation "+this.generation+"</log-generation>");
     }
 
     public addSelectHowToPayInterrupt(player: Player, amount: number, canUseSteel: boolean, canUseTitanium: boolean, title?: string): void {
@@ -278,7 +280,7 @@ export class Game {
       if (this.allAwardsFunded()) {
         throw new Error("All awards already funded");
       }
-      this.log(player.name + " funded " + award.name + " award");
+      this.log("<log-player name=\""+player.name+"\">"+player.name+"</log-player> funded "+award.name+" award");
       this.fundedAwards.push({
         award: award,
         player: player
@@ -461,6 +463,7 @@ export class Game {
         });
       }
       this.generation++;
+      this.log("<log-generation>Generation "+this.generation+"</log-generation>");
       this.incrementFirstPlayer();
       if (this.draftVariant) {
         this.gotoDraftingPhase();

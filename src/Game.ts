@@ -90,6 +90,11 @@ export class Game {
       seed?: number
     ) {
 
+      // Create the table that will store every saves if not exists
+      let db = new sqlite3.Database(dbPath);
+      db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, PRIMARY KEY (game_id, save_id))");
+      db.close();
+
       if (seed === undefined) {
         seed = Math.random();
       }
@@ -1086,8 +1091,6 @@ export class Game {
     private saveGameState(): void {
       // Open the database connexion
       let db = new sqlite3.Database(dbPath);
-      // Create the table that will store every saves
-      db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, PRIMARY KEY (game_id, save_id))");
       // Increment the save id
       this.lastSaveId += 1;
       // Insert

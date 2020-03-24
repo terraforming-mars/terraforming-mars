@@ -36,8 +36,7 @@ export const PaymentWidgetMixin = {
 
             if (target === "megaCredits" || realTo === 0) return;
 
-            let rate = this.getResourceRate(target)
-            this.addValue("megaCredits", rate * realTo);
+            this.setRemainingMCValue();
         },
         addValue: function (target: string, to: number): void {
             let currentValue: number = (this as any)[target];
@@ -52,8 +51,16 @@ export const PaymentWidgetMixin = {
 
             if (target === "megaCredits" || realTo === 0) return;
 
-            let rate = this.getResourceRate(target)
-            this.reduceValue("megaCredits", rate * realTo);
+            this.setRemainingMCValue();
+        },
+        setRemainingMCValue: function (): void {
+            let costInMC: number = (this as any).getCardCost();
+            let remainingMC: number = costInMC -
+              (this as any)["titanium"] * this.getResourceRate("titanium") -
+              (this as any)["steel"] * this.getResourceRate("steel") -
+              (this as any)["microbes"] * this.getResourceRate("microbes") -
+              (this as any)["floaters"] * this.getResourceRate("floaters");
+            (this as any)["megaCredits"] = Math.max(0, remainingMC);
         }
     }
 }

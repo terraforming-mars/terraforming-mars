@@ -1276,7 +1276,7 @@ export class Game {
           let tileType = element.tile.tileType;
           let tileCard = element.tile.card;
           if (element.player){
-            let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.player.id);
+            let playerIndex: number = this.players.findIndex((player) => player.id === element.player!.id);
             space.player = this.players[playerIndex];
           }
           space.tile = {
@@ -1298,12 +1298,12 @@ export class Game {
         d.colonies.forEach((element: IColony) => {
           let colonie = ALL_COLONIES_TILES.find((colony: IColony) => colony.name === element.name)!;
           if (element.visitor){
-            let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.visitor.id);
+            let playerIndex: number = this.players.findIndex((player) => player.id === element.visitor!.id);
             colonie.visitor = this.players[playerIndex];
           }
           colonie.colonies = new Array<Player>();
           element.colonies.forEach((element: Player) => {
-            let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.id);
+            let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
             colonie.colonies.push(this.players[playerIndex]);
           });
           this.colonies.push(colonie);
@@ -1313,8 +1313,8 @@ export class Game {
       // Rebuild claimed milestones
       this.claimedMilestones = new Array<ClaimedMilestone>();
       d.claimedMilestones.forEach((element: ClaimedMilestone) => {
-        let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.player.id);
-        let milestoneIndex: number = this.milestones.map(function(x) {return x.name; }).indexOf(element.milestone.name);
+        let playerIndex: number = this.players.findIndex((player) => player.id === element.player.id);
+        let milestoneIndex: number = this.milestones.findIndex((milestone) => milestone.name === element.milestone.name);
         this.claimedMilestones.push({
           player: this.players[playerIndex],
           milestone: this.milestones[milestoneIndex]
@@ -1324,8 +1324,8 @@ export class Game {
       // Rebuild funded awards
       this.fundedAwards = new Array<FundedAward>();
       d.fundedAwards.forEach((element: FundedAward) => {
-        let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.player.id);
-        let awardIndex: number = this.awards.map(function(x) {return x.name; }).indexOf(element.award.name);
+        let playerIndex: number = this.players.findIndex((player) => player.id === element.player.id);
+        let awardIndex: number = this.awards.findIndex((award) => award.name === element.award.name);
         this.fundedAwards.push({
           player: this.players[playerIndex],
           award: this.awards[awardIndex]
@@ -1335,28 +1335,28 @@ export class Game {
       // Rebuild passed players set
       this.passedPlayers = new Set<Player>();
       d.passedPlayers.forEach((element: Player) => {
-        let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.id);
+        let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
         this.passedPlayers.add(this.players[playerIndex]);
       });
 
       // Rebuild done players set
       this.donePlayers = new Set<Player>();
       d.donePlayers.forEach((element: Player) => {
-        let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.id);
+        let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
         this.donePlayers.add(this.players[playerIndex]);
       });
 
       // Rebuild researched players set
       this.researchedPlayers = new Set<Player>();
       d.researchedPlayers.forEach((element: Player) => {
-        let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.id);
+        let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
         this.researchedPlayers.add(this.players[playerIndex]);
       });
 
       // Rebuild drafted players set
       this.draftedPlayers = new Set<Player>();
       d.draftedPlayers.forEach((element: Player) => {
-        let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.id);
+        let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
         this.draftedPlayers.add(this.players[playerIndex]);
       });
 
@@ -1365,18 +1365,18 @@ export class Game {
 
       // Mons insurance
       if (d.monsInsuranceOwner) {
-        let monsIndex: number = this.players.map(function(x) {return x.id; }).indexOf(d.monsInsuranceOwner.id);
+        let monsIndex: number = this.players.findIndex((player) => player.id === d.monsInsuranceOwner!.id);
         this.monsInsuranceOwner = this.players[monsIndex];
       }
 
       // Define who is the active player and init the take action phase
-      let activeIndex: number = this.players.map(function(x) {return x.id; }).indexOf(d.activePlayer.id);
+      let activeIndex: number = this.players.findIndex((player) => player.id === d.activePlayer.id);
       // We have to switch active player because it's still the one that ended last turn
       this.activePlayer = this.players[(activeIndex + 1 >= this.players.length) ? 0 : activeIndex + 1];;
       this.activePlayer.takeAction(this);
 
       // Define who was the first player for this generation
-      let firstIndex: number = this.players.map(function(x) {return x.id; }).indexOf(d.first.id);
+      let firstIndex: number = this.players.findIndex((player) => player.id === d.first.id);
       this.first = this.players[firstIndex];
 
       // Rebuild dealer object to be sure that we will have cards in the same order

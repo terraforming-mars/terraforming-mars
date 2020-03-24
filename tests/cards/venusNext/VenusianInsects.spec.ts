@@ -11,14 +11,14 @@ describe("VenusianInsects", function () {
         const action = card.play();
         expect(action).to.eq(undefined);
         player.addResourceTo(card, 7);
-        expect(card.getVictoryPoints(player)).to.eq(3);
+        expect(card.getVictoryPoints()).to.eq(3);
     });
     it("Should act", function () {
         const card = new VenusianInsects();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        const action = card.action(player);
+        const action = card.action();
         expect(action).to.eq(undefined);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
     });
 });

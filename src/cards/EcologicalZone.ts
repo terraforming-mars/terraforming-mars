@@ -10,10 +10,12 @@ import {ResourceType} from '../ResourceType';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
 import { CardName } from '../CardName';
+import { IResourceCard } from './ICard';
 
-export class EcologicalZone implements IProjectCard {
+export class EcologicalZone implements IProjectCard, IResourceCard {
   public cost: number = 12;
   public resourceType: ResourceType = ResourceType.ANIMAL;
+  public resourceCount: number = 0;
   public tags: Array<Tags> = [Tags.ANIMAL, Tags.PLANT];
   public cardType: CardType = CardType.ACTIVE;
   public name: CardName = CardName.ECOLOGICAL_ZONE;
@@ -41,8 +43,8 @@ export class EcologicalZone implements IProjectCard {
   public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
       player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT).length);
   }
-  public getVictoryPoints(player: Player): number {
-    return Math.floor(player.getResourcesOnCard(this) / 2);
+  public getVictoryPoints(): number {
+    return Math.floor(this.resourceCount / 2);
   }
   public play(player: Player, game: Game) {
     return new SelectSpace(

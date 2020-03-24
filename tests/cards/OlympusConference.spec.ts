@@ -19,14 +19,14 @@ describe("OlympusConference", function () {
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
         expect(card.onCardPlayed(player, game, new Bushes())).to.eq(undefined) 
         card.onCardPlayed(player, game, card);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
         const orOptions = card.onCardPlayed(player, game, card) as OrOptions;
         expect(orOptions).not.to.eq(undefined);
         expect(orOptions instanceof OrOptions).to.eq(true);
         orOptions.options[0].cb();
-        expect(player.getResourcesOnCard(card)).to.eq(2);
+        expect(card.resourceCount).to.eq(2);
         orOptions.options[1].cb();
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
         expect(player.cardsInHand.length).to.eq(1);
     });
 });

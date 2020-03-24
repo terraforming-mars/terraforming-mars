@@ -7,13 +7,15 @@ import { ResourceType } from '../../ResourceType';
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
 import { Game } from '../../Game';
+import { IResourceCard } from '../ICard';
 
-export class RedSpotObservatory implements IProjectCard {
+export class RedSpotObservatory implements IProjectCard, IResourceCard {
     public cost: number = 17;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SCIENCE];
     public name: CardName = CardName.RED_SPOT_OBSERVATORY;
     public cardType: CardType = CardType.ACTIVE;
-    public resourceType = ResourceType.FLOATER;
+    public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
 
     public canAct(): boolean {
         return true;
@@ -26,19 +28,19 @@ export class RedSpotObservatory implements IProjectCard {
     public action(player: Player, game: Game) {
         var opts: Array<SelectOption> = [];
         const addResource = new SelectOption("Add 1 floater on this card", () => {
-            player.addResourceTo(this, 1);
+            this.resourceCount++;
             return undefined;
         });
 
         const spendResource = new SelectOption("Remove 1 floater on this card to draw a card", () => {
-            player.removeResourceFrom(this, 1);
+            this.resourceCount--;
             player.cardsInHand.push(game.dealer.dealCard());
             return undefined;
         });
 
         opts.push(addResource);
 
-        if (player.getResourcesOnCard(this) > 0 ) {
+        if (this.resourceCount > 0 ) {
             opts.push(spendResource);
         } else {
             return addResource;

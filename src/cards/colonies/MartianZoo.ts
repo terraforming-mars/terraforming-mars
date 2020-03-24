@@ -5,13 +5,15 @@ import { Player } from "../../Player";
 import { CardName } from '../../CardName';
 import { ResourceType } from '../../ResourceType';
 import { Game } from '../../Game';
+import { IResourceCard } from '../ICard';
 
-export class MartianZoo implements IProjectCard {
+export class MartianZoo implements IProjectCard, IResourceCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.ANIMAL, Tags.STEEL];
     public name: CardName = CardName.MARTIAN_ZOO;
     public cardType: CardType = CardType.ACTIVE;
-    public resourceType = ResourceType.ANIMAL;
+    public resourceType: ResourceType = ResourceType.ANIMAL;
+    public resourceCount: number = 0;
 
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
         if (card.tags.indexOf(Tags.EARTH) !== -1) {
@@ -23,12 +25,12 @@ export class MartianZoo implements IProjectCard {
         return game.getCitiesInPlay() >= 2;
     }
 
-    public canAct(player: Player): boolean {
-        return player.getResourcesOnCard(this) > 0;
+    public canAct(): boolean {
+        return this.resourceCount > 0;
     }
 
     public action(player: Player, _game: Game) {
-        player.megaCredits += player.getResourcesOnCard(this);
+        player.megaCredits += this.resourceCount;
         return undefined;
     }
 

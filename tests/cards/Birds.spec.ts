@@ -34,13 +34,13 @@ describe("Birds", function () {
 
         // Check victory points assignment
         player.addResourceTo(card, 2); 
-        expect(card.getVictoryPoints(player)).to.eq(2);
+        expect(card.getVictoryPoints()).to.eq(2);
     });
     it("Should act", function () {
         const card = new Birds();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        card.action(player);
-        expect(player.getResourcesOnCard(card)).to.eq(1); 
+        card.action();
+        expect(card.resourceCount).to.eq(1); 
     });
 });

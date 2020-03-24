@@ -34,6 +34,10 @@
     z-index: 2;
   }
 
+.cards-action-was-used {
+    filter: grayscale(1);
+}
+
 .nofloat {
   clear: both;
   margin-bottom: 15px;
@@ -118,6 +122,8 @@ input[type=radio]:checked + .filterDiv {
 }
 
 .colony-card {
+    color: white;
+    filter: drop-shadow(2px 2px 1px #020202);
     height: 275px;
     width: 418px;
     background-color: black;
@@ -435,9 +441,11 @@ input[type=radio]:checked + .filterDiv {
     line-height: 20px;
     font-weight: bold;
     text-align: center;
+    filter: ;
 }
 
 .contentCorporation {
+	color:#020202;
     position: relative;
     display: inline-block;
     font-weight:bold;
@@ -490,6 +498,27 @@ input[type=radio]:checked + .filterDiv {
     box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
 }
 
+.pointsCorporation {
+    position: absolute;
+    font-family: Prototype;
+    font-weight: normal;
+    z-index:1;
+    margin-top:250px;
+    margin-left:135px;
+    width: 80px;
+    height: 42px;
+    line-height: 35px;
+    font-size: 28px;
+    text-align: center;
+    border-radius: 12px;
+    border-top: 2px solid rgb(221,221,221);
+    border-left: 2px solid rgb(221,221,221);
+    border-bottom: 2px solid rgb(137,137,137);
+    border-right: 2px solid rgb(137,137,137);
+    background-color: rgb(205,162, 130);
+    background: linear-gradient(#cc8b00, rgb(128, 87, 0),rgb(128, 87, 0));
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
+}
 .points-big {
     line-height: 42px;
     font-size: 36px;
@@ -1178,9 +1207,9 @@ input[type=radio]:checked + .filterDiv {
 border-left: 2px solid rgb(221,221,221);
 border-bottom: 2px solid rgb(137,137,137);
 border-right: 2px solid rgb(137,137,137);
-    height: 135px;
+    height: 130px;
     width: 212px;
-    margin-top: 145px;
+    margin-top: 160px;
     padding: 3px;
     border-radius: 10px;
     text-align: center;
@@ -1213,7 +1242,7 @@ border-right: 2px solid rgb(137,137,137);
     height: 20px;
     line-height: 20px;
     text-align: center;
-    margin: 279px 0 0 30px;
+    margin: 305px 0 0 30px;
     font-size: 12px;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
     background: #f5e500;

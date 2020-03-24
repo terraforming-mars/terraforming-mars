@@ -8,7 +8,7 @@ import { Resources } from "../../Resources";
 export class LunaGovernor implements IProjectCard {
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.EARTH, Tags.EARTH];
-    public name: string = CardName.LUNA_GOVERNOR;
+    public name: CardName = CardName.LUNA_GOVERNOR;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player): boolean {

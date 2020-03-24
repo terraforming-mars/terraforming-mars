@@ -25,7 +25,7 @@ describe("EcologyResearch", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         expect(player.getProduction(Resources.PLANTS)).to.eq(2);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
 });

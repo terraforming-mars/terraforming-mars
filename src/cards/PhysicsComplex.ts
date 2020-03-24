@@ -1,20 +1,22 @@
 
-import { IActionCard } from "./ICard";
+import { IActionCard, IResourceCard } from './ICard';
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { ResourceType } from "../ResourceType";
+import { CardName } from '../CardName';
 
-export class PhysicsComplex implements IActionCard, IProjectCard {
+export class PhysicsComplex implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
-    public name: string = "Physics Complex";
+    public name: CardName = CardName.PHYSICS_COMPLEX;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.SCIENCE;
+    public resourceCount: number = 0;
 
-    public getVictoryPoints(player: Player): number {
-        return 2 * player.getResourcesOnCard(this);
+    public getVictoryPoints(): number {
+        return 2 * this.resourceCount;
     }
     public play() {
         return undefined;
@@ -24,7 +26,7 @@ export class PhysicsComplex implements IActionCard, IProjectCard {
     }
     public action(player: Player) {
         player.energy -= 6;
-        player.addResourceTo(this);
+        this.resourceCount++;
         return undefined;
     }
 }

@@ -7,7 +7,7 @@ import { CardName } from '../../CardName';
 export class RimFreighters implements IProjectCard {
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.RIM_FREIGHTERS;
+    public name: CardName = CardName.RIM_FREIGHTERS;
     public cardType: CardType = CardType.ACTIVE;
 
     public play(player: Player) {

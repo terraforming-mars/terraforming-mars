@@ -8,12 +8,13 @@ import {Game} from '../Game';
 import { CorporationName } from '../CorporationName';
 import { AndOptions } from '../inputs/AndOptions';
 import { SelectAmount } from '../inputs/SelectAmount';
+import { CardName } from '../CardName';
 
 export class CaretakerContract implements IActionCard, IProjectCard {
     public cost: number = 3;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = 'Caretaker Contract';
+    public name: CardName = CardName.CARETAKER_CONTRACT;
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() >= 0 - (
         2 * player.getRequirementsBonus(game)
@@ -23,10 +24,10 @@ export class CaretakerContract implements IActionCard, IProjectCard {
       return undefined;
     }
     public canAct(player: Player): boolean {
-      return player.heat >= 8 || (player.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED) * 2) + player.heat >= 8 );
+      return player.heat >= 8 || (player.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCorporation() * 2) + player.heat >= 8 );
     }
     public action(player: Player) {
-      if (player.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && player.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED) > 0 ) {
+      if (player.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && player.getResourcesOnCorporation() > 0 ) {
         let heatAmount: number;
         let floaterAmount: number;
         return new AndOptions(
@@ -49,7 +50,7 @@ export class CaretakerContract implements IActionCard, IProjectCard {
             new SelectAmount("Select amount of floater on corporation to spend", (amount: number) => {
               floaterAmount = amount;
               return undefined;
-            }, player.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED))
+            }, player.getResourcesOnCorporation())
         );
       }
       player.heat -= 8;

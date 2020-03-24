@@ -1,5 +1,5 @@
 import { IProjectCard } from "../IProjectCard";
-import {IActionCard} from '../ICard';
+import { IActionCard, IResourceCard } from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -9,13 +9,15 @@ import { OrOptions } from '../../inputs/OrOptions';
 import { SelectOption } from '../../inputs/SelectOption';
 import { Game } from '../../Game';
 import { MAX_VENUS_SCALE } from '../../constants';
+import { CardName } from '../../CardName';
 
-export class RotatorImpacts implements IActionCard,IProjectCard {
+export class RotatorImpacts implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = "Rotator Impacts";
+    public name: CardName = CardName.ROTATOR_IMPACTS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.ASTEROID;
+    public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
         return game.getVenusScaleLevel() - (2 * player.getRequirementsBonus(game)) <= 14;
     }
@@ -24,7 +26,7 @@ export class RotatorImpacts implements IActionCard,IProjectCard {
     }
     public canAct(player: Player, game: Game): boolean {
         return player.canAfford(6,false, true) || 
-          (player.getResourcesOnCard(this) > 1 &&  game.getVenusScaleLevel() < MAX_VENUS_SCALE);
+          (this.resourceCount > 1 &&  game.getVenusScaleLevel() < MAX_VENUS_SCALE);
     }  
     
     public action(player: Player, game: Game) {
@@ -41,7 +43,7 @@ export class RotatorImpacts implements IActionCard,IProjectCard {
                     player.megaCredits -= htp.megaCredits;
                     player.heat -= htp.heat;
                     player.titanium -= htp.titanium;
-                    player.addResourceTo(this);
+                    this.resourceCount++;
                     return undefined;
                 }
             );
@@ -57,7 +59,7 @@ export class RotatorImpacts implements IActionCard,IProjectCard {
             opts.push(addResource);
         } else return spendResource;
 
-        if (player.getResourcesOnCard(this) > 0 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
+        if (this.resourceCount > 0 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
             opts.push(spendResource);
         } else return addResource;
 

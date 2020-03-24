@@ -21,14 +21,14 @@ describe("JetStreamMicroscrappers", function () {
         const action = card.action(player,game) as SelectOption;
         expect(action instanceof SelectOption).to.eq(true);
         action.cb();
-        expect(player.getResourcesOnCard(card)).to.eq(2);
+        expect(card.resourceCount).to.eq(2);
         expect(player.titanium).to.eq(1);
 
         const orOptions = card.action(player,game) as OrOptions;
         expect(orOptions).not.to.eq(undefined);
         expect(orOptions instanceof OrOptions).to.eq(true);
         orOptions.options[1].cb();
-        expect(player.getResourcesOnCard(card)).to.eq(0);
+        expect(card.resourceCount).to.eq(0);
         expect(game.getVenusScaleLevel()).to.eq(2);
     });
 });

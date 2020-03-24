@@ -8,13 +8,15 @@ import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
 import { Game } from '../../Game';
 import { SelectTradeColony } from '../../interrupts/SelectTradeColony';
+import { IResourceCard } from '../ICard';
 
-export class TitanFloatingLaunchPad implements IProjectCard {
+export class TitanFloatingLaunchPad implements IProjectCard,IResourceCard {
     public cost: number = 18;
     public tags: Array<Tags> = [Tags.JOVIAN];
-    public name: string = CardName.TITAN_FLOATER_LAUNCHPAD;
+    public name: CardName = CardName.TITAN_FLOATER_LAUNCHPAD;
     public cardType: CardType = CardType.ACTIVE;
-    public resourceType = ResourceType.FLOATER;
+    public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
 
     public canAct(): boolean {
         return true;
@@ -28,7 +30,7 @@ export class TitanFloatingLaunchPad implements IProjectCard {
         });
 
         const spendResource = new SelectOption("Remove 1 floater on this card to trade for free", () => {
-            player.removeResourceFrom(this, 1);
+            this.resourceCount--;
             game.addInterrupt(new SelectTradeColony(player, game, openColonies, "Select colony to trade with for free")); 
             return undefined;
         });
@@ -37,7 +39,7 @@ export class TitanFloatingLaunchPad implements IProjectCard {
 
         let openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor === undefined);
         if (openColonies.length > 0 
-          && player.fleetSize > player.tradesThisTurn && player.getResourcesOnCard(this) > 0 ){
+          && player.fleetSize > player.tradesThisTurn && this.resourceCount > 0 ){
             opts.push(spendResource);
         }
 

@@ -10,7 +10,7 @@ import { Game } from '../../Game';
 export class Airliners implements IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [];
-    public name: string = CardName.AIRLINERS;
+    public name: CardName = CardName.AIRLINERS;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player): boolean {

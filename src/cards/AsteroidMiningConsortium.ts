@@ -10,7 +10,7 @@ export class AsteroidMiningConsortium implements IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.JOVIAN];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.ASTEROID_MINING_CONSORTIUM;
+    public name: CardName = CardName.ASTEROID_MINING_CONSORTIUM;
     public canPlay(player: Player, game: Game): boolean {
       if (game.getPlayers().length > 1 
         && game.getPlayers().filter(p => p.id !== player.id && p.getProduction(Resources.TITANIUM) > 0).length === 0 ) {

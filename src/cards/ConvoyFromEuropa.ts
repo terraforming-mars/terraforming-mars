@@ -10,7 +10,7 @@ export class ConvoyFromEuropa implements IProjectCard {
     public cost: number = 15;
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
-    public name: string = CardName.CONVOY_FROM_EUROPA;
+    public name: CardName = CardName.CONVOY_FROM_EUROPA;
 
     public play(player: Player, game: Game) {
       player.cardsInHand.push(game.dealer.dealCard());

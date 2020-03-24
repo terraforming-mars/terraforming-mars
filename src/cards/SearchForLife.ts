@@ -1,5 +1,5 @@
 
-import { IActionCard } from "./ICard";
+import { IActionCard, IResourceCard } from './ICard';
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -7,18 +7,20 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
+import { CardName } from '../CardName';
 
-export class SearchForLife implements IActionCard, IProjectCard {
+export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 3;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.SCIENCE;
-    public name: string = "Search For Life";
+    public resourceCount: number = 0;
+    public name: CardName = CardName.SEARCH_FOR_LIFE;
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() <= 6 + player.getRequirementsBonus(game);
     }
-    public getVictoryPoints(player: Player) {
-        if (player.getResourcesOnCard(this) > 0) {
+    public getVictoryPoints() {
+        if (this.resourceCount > 0) {
             return  3;
         }
         return 0;
@@ -33,7 +35,7 @@ export class SearchForLife implements IActionCard, IProjectCard {
         const doAction = () => {
             const topCard = game.dealer.dealCard();
             if (topCard.tags.indexOf(Tags.MICROBES) !== -1) {
-                player.addResourceTo(this);
+                this.resourceCount++;
             }
             game.dealer.discard(topCard);
             return undefined;

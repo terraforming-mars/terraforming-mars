@@ -11,6 +11,7 @@ import { SelectHowToPayForCard } from "./SelectHowToPayForCard";
 import { SelectOption } from "./SelectOption";
 import { SelectPlayer } from "./SelectPlayer";
 import { SelectSpace } from "./SelectSpace";
+import { $t } from "../directives/i18n";
 
 var ui_update_timeout_id: number | undefined = undefined;
 
@@ -45,6 +46,7 @@ export const WaitingFor = Vue.component("waiting-for", {
                         const result = xhr.response;
                         if (result["result"] === "GO") {
                             (vueApp as any).$root.updatePlayer();
+
                             if (Notification.permission !== 'granted') {
                                 Notification.requestPermission();
                             }
@@ -76,7 +78,7 @@ export const WaitingFor = Vue.component("waiting-for", {
     render: function (createElement) {
         if (this.waitingfor === undefined) {
             (this as any).waitForUpdate();
-            return createElement("div", "Not your turn to take any actions");
+            return createElement("div", $t("Not your turn to take any actions"));
         }
         const input = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
             const xhr = new XMLHttpRequest();

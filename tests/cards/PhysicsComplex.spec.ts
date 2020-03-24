@@ -17,7 +17,7 @@ describe("PhysicsComplex", function () {
         const action = card.play();
         expect(action).to.eq(undefined);
         player.addResourceTo(card, 4);
-        expect(card.getVictoryPoints(player)).to.eq(8);
+        expect(card.getVictoryPoints()).to.eq(8);
     });
     it("Should act", function () {
         const card = new PhysicsComplex();
@@ -26,7 +26,7 @@ describe("PhysicsComplex", function () {
         player.energy = 6;
         const action = card.action(player);
         expect(player.energy).to.eq(0);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
         expect(action).to.eq(undefined);
     });
 });

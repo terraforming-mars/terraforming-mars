@@ -21,8 +21,8 @@ describe("HeatTrappers", function () {
         expect(action).to.eq(undefined);
 
         expect(player.getProduction(Resources.HEAT)).to.eq(1); // Not changed
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(-1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1); // Incremented
     });
 
@@ -39,8 +39,8 @@ describe("HeatTrappers", function () {
         expect(action).to.eq(undefined);
 
         expect(player.getProduction(Resources.HEAT)).to.eq(0); // Not changed
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(-1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1); // Incremented
     });
 

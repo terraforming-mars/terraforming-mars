@@ -5,9 +5,10 @@ import { Game } from "../../Game";
 import { IProjectCard } from "../IProjectCard";
 import { CorporationCard } from "./CorporationCard";
 import { Resources } from '../../Resources';
+import { CardName } from '../../CardName';
 
 export class Thorgate implements CorporationCard {
-    public name: string = "Thorgate";
+    public name: CardName = CardName.THORGATE;
     public tags: Array<Tags> = [Tags.ENERGY];
     public startingMegaCredits: number = 48;
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {

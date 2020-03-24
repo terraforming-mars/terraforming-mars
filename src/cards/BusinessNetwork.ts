@@ -8,11 +8,12 @@ import {SelectHowToPay} from '../inputs/SelectHowToPay';
 import {IActionCard} from './ICard';
 import {IProjectCard} from './IProjectCard';
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class BusinessNetwork implements IActionCard, IProjectCard {
     public cost: number = 4;
     public tags: Array<Tags> = [Tags.EARTH];
-    public name: string = 'Business Network';
+    public name: CardName = CardName.BUSINESS_NETWORK;
     public cardType: CardType = CardType.ACTIVE;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {

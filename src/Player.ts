@@ -1,12 +1,12 @@
 import {IProjectCard} from "./cards/IProjectCard";
-import { CorporationCard } from "./cards/corporation/CorporationCard";
-import { Tags } from "./cards/Tags";
+import {CorporationCard} from "./cards/corporation/CorporationCard";
+import {Tags} from "./cards/Tags";
 import {PlayerInput} from "./PlayerInput";
 import {CardType} from "./cards/CardType";
 import {Color} from "./Color";
 import {SelectCard} from "./inputs/SelectCard";
 import {AndOptions} from "./inputs/AndOptions";
-import {ICard} from "./cards/ICard";
+import { ICard } from "./cards/ICard";
 import { OrOptions } from "./inputs/OrOptions";
 import {Game} from "./Game";
 import {HowToPay} from "./inputs/HowToPay";
@@ -21,18 +21,19 @@ import {IMilestone} from "./milestones/IMilestone";
 import {StandardProjectType} from "./StandardProjectType";
 import * as constants from "./constants";
 import {IAward} from "./awards/IAward";
-import { VictoryPointsBreakdown } from "./VictoryPointsBreakdown";
+import {VictoryPointsBreakdown} from "./VictoryPointsBreakdown";
 import {Resources} from "./Resources";
-import { ResourceType } from "./ResourceType";
-import { CardName } from "./CardName";
-import { CorporationName } from "./CorporationName";
-import { IColony } from "./colonies/Colony";
-import { SelectGreenery } from "./interrupts/SelectGreenery";
-import { SelectCity } from "./interrupts/SelectCity";
-import { SpaceType } from "./SpaceType";
-import { ITagCount } from "./ITagCount";
+import {ResourceType} from "./ResourceType";
+import {CardName} from "./CardName";
+import {CorporationName} from "./CorporationName";
+import {IColony} from "./colonies/Colony";
+import {SelectGreenery} from "./interrupts/SelectGreenery";
+import {SelectCity} from "./interrupts/SelectCity";
+import {SpaceType} from "./SpaceType";
+import {ITagCount} from "./ITagCount";
+import {TileType} from "./TileType";
 import { BeginnerCorporation } from "./cards/corporation/BeginnerCorporation";
-import { ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_VENUS_CORPORATIONS, ALL_PROJECT_CARDS, ALL_PRELUDE_CARDS, ALL_PRELUDE_PROJECTS_CARDS, ALL_VENUS_PROJECTS_CARDS, ALL_COLONIES_PROJECTS_CARDS, ALL_COLONIES_CORPORATIONS, ALL_PROMO_CORPORATIONS, ALL_TURMOIL_CORPORATIONS } from "./Dealer";
+import { ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_VENUS_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_PROMO_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROJECT_CARDS, ALL_PRELUDE_CARDS, ALL_PRELUDE_PROJECTS_CARDS, ALL_VENUS_PROJECTS_CARDS, ALL_COLONIES_PROJECTS_CARDS } from "./Dealer";
 
 export class Player {
     public corporationCard: CorporationCard | undefined = undefined;
@@ -63,8 +64,6 @@ export class Player {
     public actionsTakenThisRound: number = 0;
     public terraformRating: number = 20;
     public terraformRatingAtGenerationStart: number = 20;
-    public resourcesOnCards: Map<string, number> = new Map<string, number>();
-    public victoryPoints: number = 0;
     public victoryPointsBreakdown = new VictoryPointsBreakdown();
     private actionsThisGeneration: Set<string> = new Set<string>();
     public lastCardPlayed: IProjectCard | undefined;
@@ -177,6 +176,61 @@ export class Player {
       return;
     }
 
+    public getVictoryPoints(game: Game): VictoryPointsBreakdown {
+
+      // Reset victory points
+      this.victoryPointsBreakdown = new VictoryPointsBreakdown();
+
+      // Victory points from corporations
+      if (this.corporationCard !== undefined && this.corporationCard.getVictoryPoints !== undefined) {
+        this.victoryPointsBreakdown.setVictoryPoints("victoryPoints", this.corporationCard.getVictoryPoints(this, game), this.corporationCard.name);
+      }
+
+      // Victory points from cards
+      for (let playedCard of this.playedCards) {
+        if (playedCard.getVictoryPoints !== undefined) {
+          this.victoryPointsBreakdown.setVictoryPoints("victoryPoints", playedCard.getVictoryPoints(this, game), playedCard.name);
+        }
+      }
+
+      // Victory points from TR
+      this.victoryPointsBreakdown.setVictoryPoints("terraformRating", this.terraformRating);
+
+      // Victory points from awards
+      this.giveAwards(game);
+
+      // Victory points from milestones
+      for (const milestone of game.claimedMilestones) {
+        if (milestone.player !== undefined && milestone.player.id === this.id) {
+          this.victoryPointsBreakdown.setVictoryPoints("milestones", 5, "Claimed "+milestone.milestone.name+" milestone");
+        }
+      }
+
+      // Victory points from board
+      game.board.spaces.forEach((space) => {
+
+        // Victory points for greenery tiles
+        if (space.tile && space.tile.tileType === TileType.GREENERY && space.player !== undefined && space.player.id === this.id) {
+          this.victoryPointsBreakdown.setVictoryPoints("greenery", 1);
+        }
+
+        // Victory points for greenery tiles adjacent to cities
+        if (space.tile && space.tile.tileType === TileType.CITY && space.player !== undefined && space.player.id === this.id) {
+          const adjacent = game.board.getAdjacentSpaces(space);
+          for (const adj of adjacent) {
+            if (adj.tile && adj.tile.tileType === TileType.GREENERY) {
+              this.victoryPointsBreakdown.setVictoryPoints("city", 1);
+            }
+          }
+        }
+
+      });
+
+      this.victoryPointsBreakdown.updateTotal();
+      return this.victoryPointsBreakdown;
+
+    }
+
     public cardIsInEffect(cardName: CardName): boolean {
       return this.playedCards.find(
         (playedCard) => playedCard.name === cardName) !== undefined;      
@@ -197,7 +251,7 @@ export class Player {
       if (card.name === CardName.PETS) {
         throw new Error("Animals may not be removed from pets");
       }
-      if (this.getResourcesOnCard(card) === 0) {
+      if (card.resourceCount === 0) {
         throw new Error(card.name + " does not have animals to remove");
       }
       this.removeResourceFrom(card, count, game, removingPlayer);
@@ -220,12 +274,17 @@ export class Player {
     }
 
     public getResourcesOnCard(card: ICard): number {
-      return this.resourcesOnCards.get(card.name) || 0;
+      if (card.resourceCount !== undefined) {
+        return card.resourceCount;
+      } else return 0;
     }
 
-    public getResourcesOnCardname(cardname: CardName | CorporationName):number {
-      return this.resourcesOnCards.get(cardname as string) || 0;
-    }
+    public getResourcesOnCorporation():number {
+      if (this.corporationCard !== undefined
+        && this.corporationCard.resourceCount !== undefined) {
+        return this.corporationCard.resourceCount;
+      } else return 0;
+    }  
 
     public getRequirementsBonus(game: Game, venusOnly?: boolean): number {
       let requirementsBonus: number = 0;
@@ -247,10 +306,8 @@ export class Player {
       return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
     }
     public removeResourceFrom(card: ICard, count: number = 1, game? : Game, removingPlayer? : Player): void {
-      const cardValue: number | undefined =
-            this.resourcesOnCards.get(card.name);
-      if (cardValue) {
-        this.resourcesOnCards.set(card.name, Math.max(cardValue - count, 0));
+      if (card.resourceCount) {
+        card.resourceCount = Math.max(card.resourceCount - count, 0);
         // Mons Insurance hook
         if (game !== undefined && removingPlayer !== undefined) {
           this.resolveMonsInsurance(game);
@@ -259,18 +316,14 @@ export class Player {
       }
     }
     public addResourceTo(card: ICard, count: number = 1): void {
-      const cardValue: number | undefined =
-            this.resourcesOnCards.get(card.name);
-      if (cardValue) {
-        this.resourcesOnCards.set(card.name, cardValue + count);
-      } else {
-        this.resourcesOnCards.set(card.name, count);
+      if (card.resourceCount !== undefined) {
+        card.resourceCount += count;
       }
     }
 
     public getCardsWithResources(): Array<ICard> {
       return this.playedCards.filter(
-          (card) => Number(this.resourcesOnCards.get(card.name)) > 0
+          (card) => card.resourceCount && card.resourceCount > 0
       );
     }
 
@@ -305,17 +358,17 @@ export class Player {
 
     public getAllTags(): Array<ITagCount> {
       let tags: Array<ITagCount> = [];
-      tags.push({tag : Tags.CITY, count : this.getTagCount(Tags.CITY)} as ITagCount);
-      tags.push({tag : Tags.EARTH, count : this.getTagCount(Tags.EARTH)} as ITagCount);
-      tags.push({tag : Tags.ENERGY, count : this.getTagCount(Tags.ENERGY)} as ITagCount);
-      tags.push({tag : Tags.JOVIAN, count : this.getTagCount(Tags.JOVIAN)} as ITagCount);
-      tags.push({tag : Tags.MICROBES, count : this.getTagCount(Tags.MICROBES)} as ITagCount);
-      tags.push({tag : Tags.PLANT, count : this.getTagCount(Tags.PLANT)} as ITagCount);
-      tags.push({tag : Tags.SCIENCE, count : this.getTagCount(Tags.SCIENCE)} as ITagCount);
-      tags.push({tag : Tags.SPACE, count : this.getTagCount(Tags.SPACE)} as ITagCount);
-      tags.push({tag : Tags.STEEL, count : this.getTagCount(Tags.STEEL)} as ITagCount);
-      tags.push({tag : Tags.VENUS, count : this.getTagCount(Tags.VENUS)} as ITagCount);
-      tags.push({tag : Tags.WILDCARD, count : this.getTagCount(Tags.WILDCARD)} as ITagCount);
+      tags.push({tag : Tags.CITY, count : this.getTagCount(Tags.CITY, false, false)} as ITagCount);
+      tags.push({tag : Tags.EARTH, count : this.getTagCount(Tags.EARTH, false, false)} as ITagCount);
+      tags.push({tag : Tags.ENERGY, count : this.getTagCount(Tags.ENERGY, false, false)} as ITagCount);
+      tags.push({tag : Tags.JOVIAN, count : this.getTagCount(Tags.JOVIAN, false, false)} as ITagCount);
+      tags.push({tag : Tags.MICROBES, count : this.getTagCount(Tags.MICROBES, false, false)} as ITagCount);
+      tags.push({tag : Tags.PLANT, count : this.getTagCount(Tags.PLANT, false, false)} as ITagCount);
+      tags.push({tag : Tags.SCIENCE, count : this.getTagCount(Tags.SCIENCE, false, false)} as ITagCount);
+      tags.push({tag : Tags.SPACE, count : this.getTagCount(Tags.SPACE, false, false)} as ITagCount);
+      tags.push({tag : Tags.STEEL, count : this.getTagCount(Tags.STEEL, false, false)} as ITagCount);
+      tags.push({tag : Tags.VENUS, count : this.getTagCount(Tags.VENUS, false, false)} as ITagCount);
+      tags.push({tag : Tags.WILDCARD, count : this.getTagCount(Tags.WILDCARD, false, false)} as ITagCount);
       tags.push({tag : Tags.EVENT, count : this.playedCards.filter(card => card.cardType === CardType.EVENT).length} as ITagCount);
       
       return tags.filter((tag) => tag.count > 0);
@@ -622,6 +675,7 @@ export class Player {
         && game.getOxygenLevel() >= constants.MAX_OXYGEN_LEVEL
         && game.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES
         && game.getVenusScaleLevel() >= constants.MAX_VENUS_SCALE) {
+          game.doneWorldGovernmentTerraforming();
           return;
       }
 
@@ -1204,7 +1258,7 @@ export class Player {
     private convertHeatIntoTemperature(game: Game): PlayerInput {
       let heatAmount: number;
       let floaterAmount: number;
-      if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED) > 0 ) {
+      if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
         let raiseTempOptions = new AndOptions (
           () => {
             if (heatAmount + (floaterAmount * 2) < 8) {
@@ -1223,7 +1277,7 @@ export class Player {
           new SelectAmount("Select amount of floater on corporation to spend", (amount: number) => {
             floaterAmount = amount;
             return undefined;
-          }, this.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED))
+          }, this.getResourcesOnCorporation())
         );
         raiseTempOptions.title = "Select resource amounts to raise temp";
 
@@ -1301,6 +1355,57 @@ export class Player {
       });
     }
 
+    private giveAwards(game: Game): void {
+
+      game.fundedAwards.forEach((fundedAward) => {
+
+        // Awards are disabled for 1 player games
+        if (game.getPlayers().length === 1) return;
+
+        const players: Array<Player> = game.getPlayers().slice();
+        players.sort(
+            (p1, p2) => fundedAward.award.getScore(p2, game) - fundedAward.award.getScore(p1, game)
+        );
+
+        // We have one rank 1 player
+        if (fundedAward.award.getScore(players[0], game) > fundedAward.award.getScore(players[1], game)) {
+
+          if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 5, "1st place for "+fundedAward.award.name+" award (funded by "+fundedAward.player.name+")");
+          players.shift();
+
+          if (players.length > 1) {
+
+            // We have one rank 2 player
+            if (fundedAward.award.getScore(players[0], game) > fundedAward.award.getScore(players[1], game)) {
+
+              if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 2, "2nd place for "+fundedAward.award.name+" award (funded by "+fundedAward.player.name+")");
+
+            // We have at least two rank 2 players
+            } else {
+
+              const score = fundedAward.award.getScore(players[0], game);
+              while (players.length > 0 && fundedAward.award.getScore(players[0], game) === score) {
+                if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 2, "2nd place for "+fundedAward.award.name+" award (funded by "+fundedAward.player.name+")");
+                players.shift();
+
+              }
+            }
+          }
+
+        // We have at least two rank 1 players
+        } else {
+
+          const score = fundedAward.award.getScore(players[0], game);
+          while (players.length > 0 && fundedAward.award.getScore(players[0], game) === score) {
+            if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints("awards", 5, "1st place for "+fundedAward.award.name+" award (funded by "+fundedAward.player.name+")");
+            players.shift();
+          }
+
+        }
+      });
+
+    }
+
     private endTurnOption(): PlayerInput {
       return new SelectOption("End Turn", () => {
         this.actionsTakenThisRound = 1;
@@ -1367,15 +1472,23 @@ export class Player {
         if (canUseTitanium) {
           maxPay += this.titanium * this.titaniumValue;
         }
-        if (this.playedCards.find(
-          (playedCard) => playedCard.name === CardName.PSYCHROPHILES) !== undefined 
+
+        let psychrophiles = this.playedCards.find(
+          (playedCard) => playedCard.name === CardName.PSYCHROPHILES);
+
+        if (psychrophiles !== undefined 
+           && psychrophiles.resourceCount
            && card.tags.indexOf(Tags.PLANT) !== -1) {
-            maxPay += this.getResourcesOnCardname(CardName.PSYCHROPHILES) * 2;
+            maxPay += psychrophiles.resourceCount * 2;
         }
-        if (this.playedCards.find(
-          (playedCard) => playedCard.name === CardName.DIRIGIBLES) !== undefined 
+
+        let dirigibles = this.playedCards.find(
+          (playedCard) => playedCard.name === CardName.DIRIGIBLES);
+
+        if (dirigibles !== undefined 
+           && dirigibles.resourceCount
            && card.tags.indexOf(Tags.VENUS) !== -1) {
-            maxPay += this.getResourcesOnCardname(CardName.DIRIGIBLES) * 3;
+            maxPay += dirigibles.resourceCount * 3;
         }
 
         maxPay += this.megaCredits;
@@ -1570,7 +1683,7 @@ export class Player {
       if (
         (this.heat >= constants.HEAT_FOR_TEMPERATURE || 
           (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) &&
-           (this.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED) * 2) + this.heat >= constants.HEAT_FOR_TEMPERATURE)
+           (this.getResourcesOnCorporation() * 2) + this.heat >= constants.HEAT_FOR_TEMPERATURE)
            ) &&
             game.getTemperature() + 2 <= constants.MAX_TEMPERATURE) {
         action.options.push(
@@ -1625,6 +1738,7 @@ export class Player {
         this.actionsTakenThisRound++;
         this.takeAction(game);
       });
+
     }
 
     public process(game: Game, input: Array<Array<string>>): void {
@@ -1680,12 +1794,6 @@ export class Player {
     public loadFromJSON(d: Player): Player {
       // Assign each attributes
       let o = Object.assign(this, d);
-
-      // Rebuild resources on card map
-      this.resourcesOnCards = new Map<string, number>();
-      d.resourcesOnCards.forEach((element: any) => {
-        this.resourcesOnCards.set(element[0], element[1]);
-      });
 
       // Rebuild generation played map
       this.generationPlayed = new Map<string, number>();

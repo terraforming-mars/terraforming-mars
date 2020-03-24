@@ -5,9 +5,10 @@ import { Game } from "../../Game";
 import { Tags } from "../Tags";
 import { StandardProjectType } from "../../StandardProjectType";
 import { IProjectCard } from "../IProjectCard";
+import { CardName } from '../../CardName';
 
 export class CrediCor implements CorporationCard {
-    public name: string = "CrediCor";
+    public name: CardName = CardName.CREDICOR;
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 57;
     public requirements: undefined;

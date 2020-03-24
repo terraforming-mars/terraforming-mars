@@ -6,17 +6,18 @@ import { Game } from "../../Game";
 import { SpaceName } from "../../SpaceName";
 import { SpaceType } from "../../SpaceType";
 import { Resources } from '../../Resources';
-import { IActionCard, ICard } from '../ICard';
+import { IActionCard, ICard, IResourceCard } from '../ICard';
 import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
+import { CardName } from '../../CardName';
 
-
-export class Stratopolis implements IActionCard, IProjectCard {
+export class Stratopolis implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 22;
     public tags: Array<Tags> = [Tags.CITY, Tags.VENUS];
-    public name: string = "Stratopolis";
+    public name: CardName = CardName.STRATOPOLIS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 2 ;
     }
@@ -25,8 +26,8 @@ export class Stratopolis implements IActionCard, IProjectCard {
         game.addCityTile(player, SpaceName.STRATOPOLIS, SpaceType.COLONY);
         return undefined;
     }
-    public getVictoryPoints(player: Player): number {
-        return Math.floor(player.getResourcesOnCard(this) / 3);
+    public getVictoryPoints(): number {
+        return Math.floor(this.resourceCount / 3);
     }
 
     public getResCards(player: Player): ICard[] {

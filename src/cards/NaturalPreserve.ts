@@ -14,7 +14,7 @@ export class NaturalPreserve implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
-    public name: string = CardName.NATURAL_PRESERVE;
+    public name: CardName = CardName.NATURAL_PRESERVE;
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.board.getAvailableSpacesOnLand(player)
                 .filter((space) => game.board.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined).length === 0);
@@ -24,7 +24,7 @@ export class NaturalPreserve implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space for special tile next to no other tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
-            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
+            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.NATURAL_PRESERVE });
             player.setProduction(Resources.MEGACREDITS);
             return undefined;
         });

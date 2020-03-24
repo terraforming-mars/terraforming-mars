@@ -1,8 +1,19 @@
+@font-face {
+    font-family: Prototype;
+    src: url(./assets/Prototype.ttf);
+}
+
 #player-home {
     padding-left: 20px;
     border-left: 1px solid #adacac;
 }
- 
+h1 {
+    font-family: Prototype;
+    filter: drop-shadow(-1px -1px 1px rgba(255,255,255,100))drop-shadow(4px 4px 4px black) ;
+} 
+h2 {
+    filter: drop-shadow(-1px -1px 1px rgba(255,255,255,100))drop-shadow(2px 2px 2px black) ;
+} 
 .tag-count {
     box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
     position: relative;
@@ -27,10 +38,36 @@
     position: relative;
 }
 
+.tag-display-tags {
+  float: left;
+}
+
+.tag-display-vp {
+  margin-left: 20px;
+}
+
 .tag-count-display {
     color: #020202;
-    padding: 1px 7px 2px 10px;
     line-height: 1;
+    position: absolute;
+    left: 12px;
+    top: 32px;
+    background: linear-gradient(#fff, #888);
+    height: 24px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 18px;
+    width: 40px;
+    border-radius: 5px;
+    border-top: 2px solid #dddddd;
+    border-left: 2px solid #dddddd;
+    border-bottom: 2px solid #898989;
+    border-right: 2px solid #898989;
+    box-shadow: 0 0 0 2px #303030;
+}
+
+.icon-vp {
+  background-image: url("./assets/icon_vp.png");
 }
 
 .player_home_block--resources {
@@ -96,7 +133,12 @@
         text-decoration: underline;
     }
 }
-
+.milestones {
+     color: #00aaee;
+}
+.awards {
+     color: #eeaa00;
+}
 .player_home_block--setup {
     .wf-action {
         margin: 20px 0 40px;

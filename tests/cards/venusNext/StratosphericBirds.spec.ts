@@ -25,17 +25,17 @@ describe("StratosphericBirds", function () {
         expect(action).to.eq(undefined);
 
         player.addResourceTo(card, 7);
-        expect(card.getVictoryPoints(player)).to.eq(7);
+        expect(card.getVictoryPoints()).to.eq(7);
     });
     it("Should act", function () {
         const card = new StratosphericBirds();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        const action = card.action(player);
+        const action = card.action();
         expect(action).to.eq(undefined);
         expect(player.getResourcesOnCard(card)).to.eq(1);
-        player.victoryPoints += card.getVictoryPoints(player);
-        expect(player.victoryPoints).to.eq(1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
 
     it("Allows to choose card to remove floater from", function () {

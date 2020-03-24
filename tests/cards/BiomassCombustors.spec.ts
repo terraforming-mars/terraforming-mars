@@ -28,7 +28,7 @@ describe("BiomassCombustors", function () {
         expect(game.getOxygenLevel()).to.eq(6);
         card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(2);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(-1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
     });
 });

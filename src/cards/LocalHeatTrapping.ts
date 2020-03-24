@@ -11,15 +11,16 @@ import { CorporationName } from "../CorporationName";
 import { AndOptions } from "../inputs/AndOptions";
 import { SelectAmount } from "../inputs/SelectAmount";
 import { ICard } from './ICard';
+import { CardName } from '../CardName';
 
 export class LocalHeatTrapping implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public cost: number = 1;
     public tags: Array<Tags> = [];
-    public name: string = "Local Heat Trapping";
+    public name: CardName = CardName.LOCAL_HEAT_TRAPPING;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {
-        return player.heat >= 5 || (player.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED) * 2) + player.heat >= 5 );
+        return player.heat >= 5 || (player.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCorporation() * 2) + player.heat >= 5 );
     }
     public play(player: Player) {
         const otherAnimalCards: Array<ICard> = player.getResourceCards(ResourceType.ANIMAL);
@@ -39,7 +40,8 @@ export class LocalHeatTrapping implements IProjectCard {
                 }));
         };
         
-        if (player.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && player.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED) > 0 ) {
+        if (player.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) 
+          && player.getResourcesOnCorporation() > 0) {
             let heatAmount: number;
             let floaterAmount: number;
             return new AndOptions(
@@ -61,7 +63,7 @@ export class LocalHeatTrapping implements IProjectCard {
                 new SelectAmount("Select amount of floater on corporation to spend", (amount: number) => {
                   floaterAmount = amount;
                   return undefined;
-                }, player.getResourcesOnCardname(CorporationName.STORMCRAFT_INCORPORATED)),
+                }, player.getResourcesOnCorporation()),
 
             );
           }

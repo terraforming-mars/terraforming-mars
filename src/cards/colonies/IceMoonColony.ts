@@ -8,7 +8,7 @@ import { Game } from '../../Game';
 export class IceMoonColony implements IProjectCard {
     public cost: number = 23;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.ICE_MOON_COLONY;
+    public name: CardName = CardName.ICE_MOON_COLONY;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

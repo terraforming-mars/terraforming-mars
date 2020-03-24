@@ -11,7 +11,7 @@ import { CardName } from '../CardName';
 export class Windmills implements IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
-    public name: string = CardName.WINDMILLS;
+    public name: CardName = CardName.WINDMILLS;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
         return game.getOxygenLevel() >= 7 - player.getRequirementsBonus(game);

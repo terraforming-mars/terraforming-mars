@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class TitaniumMine implements IProjectCard {
     public cost: number = 7;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.TITANIUM_MINE;
+    public name: CardName = CardName.TITANIUM_MINE;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, _game: Game) {

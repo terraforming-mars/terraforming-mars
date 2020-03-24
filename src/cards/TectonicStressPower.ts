@@ -9,7 +9,7 @@ import { CardName } from '../CardName';
 export class TectonicStressPower implements IProjectCard {
     public cost: number = 18;
      public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
-    public name: string = CardName.TECTONIC_STRESS_POWER;
+    public name: CardName = CardName.TECTONIC_STRESS_POWER;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 2;

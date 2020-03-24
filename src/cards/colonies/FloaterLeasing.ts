@@ -9,7 +9,7 @@ import { ResourceType } from '../../ResourceType';
 export class FloaterLeasing implements IProjectCard {
     public cost: number = 3;
     public tags: Array<Tags> = [];
-    public name: string = CardName.FLOATER_LEASING;
+    public name: CardName = CardName.FLOATER_LEASING;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player): boolean {

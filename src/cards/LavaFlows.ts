@@ -10,11 +10,12 @@ import { Tags } from "./Tags";
 import { ISpace } from "../ISpace";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { BoardName } from '../BoardName';
+import { CardName } from '../CardName';
 
 export class LavaFlows implements IProjectCard {
     public cost: number = 18;
     public tags: Array<Tags> = [];
-    public name: string = "Lava Flows";
+    public name: CardName = CardName.LAVA_FLOWS;
     public hasRequirements = false;
     public cardType: CardType = CardType.EVENT;
     public static getVolcanicSpaces(player: Player, game: Game): Array<ISpace> {
@@ -42,7 +43,7 @@ export class LavaFlows implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         return new SelectSpace("Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons", LavaFlows.getVolcanicSpaces(player, game), (space: ISpace) => {
-            game.addTile(player, SpaceType.LAND, space, { tileType: TileType.SPECIAL });
+            game.addTile(player, SpaceType.LAND, space, { tileType: TileType.LAVA_FLOWS });
             return game.increaseTemperature(player, 2);
         });
     }

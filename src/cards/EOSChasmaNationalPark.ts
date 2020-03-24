@@ -13,7 +13,7 @@ export class EosChasmaNationalPark implements IProjectCard {
   public cost: number = 16;
   public nonNegativeVPIcon: boolean = true;
   public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];
-  public name: string = CardName.EOS_CHASMA_NATIONAL_PARK;
+  public name: CardName = CardName.EOS_CHASMA_NATIONAL_PARK;
   public cardType: CardType = CardType.AUTOMATED;
 
   public canPlay(player: Player, game: Game): boolean {
@@ -27,7 +27,6 @@ export class EosChasmaNationalPark implements IProjectCard {
     if (availableCards.length < 1) {
       player.plants += 3;
       player.setProduction(Resources.MEGACREDITS,2);
-      player.victoryPoints++;
       return undefined;
     }
 
@@ -35,7 +34,6 @@ export class EosChasmaNationalPark implements IProjectCard {
       game.getCardPlayer(availableCards[0].name).addResourceTo(availableCards[0]);
       player.plants += 3;
       player.setProduction(Resources.MEGACREDITS,2);
-      player.victoryPoints++;
       return undefined;
     }
 
@@ -46,9 +44,13 @@ export class EosChasmaNationalPark implements IProjectCard {
           game.getCardPlayer(foundCards[0].name).addResourceTo(foundCards[0]);
           player.plants += 3;
           player.setProduction(Resources.MEGACREDITS,2);
-          player.victoryPoints++;
           return undefined;
         }
     );
   }
+
+  public getVictoryPoints() {
+    return 1;
+  }
+
 }

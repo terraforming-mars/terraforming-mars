@@ -15,8 +15,8 @@ describe("AntiGravityTechnology", function () {
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card, card, card, card, card, card, card);
         card.play();
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(3);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(3);
         expect(card.getCardDiscount()).to.eq(2); 
     });
 });

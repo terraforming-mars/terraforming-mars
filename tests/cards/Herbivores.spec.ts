@@ -20,7 +20,7 @@ describe("Herbivores", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
 
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
 
     });
 
@@ -38,7 +38,7 @@ describe("Herbivores", function () {
         expect(card.canPlay(player, game)).to.eq(true, "Cant play");
         card.play(player, game);
 
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
     });
 
     it("Can't play", function () {
@@ -62,15 +62,15 @@ describe("Herbivores", function () {
         const game = new Game("foobar", [player,player2], player);
 
         player.playedCards.push(card);
-        expect(player.getResourcesOnCard(card)).to.eq(0);
+        expect(card.resourceCount).to.eq(0);
 
         game.addGreenery(player, game.board.getAvailableSpacesOnLand(player)[0].id);
         game.addGreenery(player, game.board.getAvailableSpacesOnLand(player)[0].id);
 
         game.addGreenery(player2, game.board.getAvailableSpacesOnLand(player2)[0].id);
-        expect(player.getResourcesOnCard(card)).to.eq(2); // i.e. not changed
+        expect(card.resourceCount).to.eq(2); // i.e. not changed
 
-        expect(card.getVictoryPoints(player)).to.eq(1);
+        expect(card.getVictoryPoints()).to.eq(1);
     });
 
     it("Should be playable in solo mode", function () {
@@ -89,15 +89,14 @@ describe("Herbivores", function () {
         card.play(player, game);
             
         player.playedCards.push(card);
-        player.victoryPoints = 0
 
         expect(player.getProduction(Resources.PLANTS)).to.eq(1, "Somehow plantProduction is changed"); // Not changed
 
         game.addGreenery(player, game.board.getAvailableSpacesOnLand(player)[0].id);
         game.addGreenery(player, game.board.getAvailableSpacesOnLand(player)[0].id);
 
-        expect(player.getResourcesOnCard(card)).to.eq(3);
+        expect(card.resourceCount).to.eq(3);
 
-        expect(card.getVictoryPoints(player)).to.eq(1);
+        expect(card.getVictoryPoints()).to.eq(1);
     });
 });

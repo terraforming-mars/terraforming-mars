@@ -7,13 +7,15 @@ import { ResourceType } from '../../ResourceType';
 import { Game } from '../../Game';
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
+import { IResourceCard } from '../ICard';
 
-export class JupiterFloatingStation implements IProjectCard {
+export class JupiterFloatingStation implements IProjectCard, IResourceCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.JOVIAN];
-    public name: string = CardName.JUPITER_FLOATING_STATION;
+    public name: CardName = CardName.JUPITER_FLOATING_STATION;
     public cardType: CardType = CardType.ACTIVE;
-    public resourceType = ResourceType.FLOATER;
+    public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
 
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 3;
@@ -30,7 +32,7 @@ export class JupiterFloatingStation implements IProjectCard {
                 return undefined;
             }),
             new SelectOption("Get 1 MC per floater here (max 4) ", () => {
-                player.megaCredits += Math.min(player.getResourcesOnCard(this), 4);
+                player.megaCredits += Math.min(this.resourceCount, 4);
                 return undefined;
             })
         );

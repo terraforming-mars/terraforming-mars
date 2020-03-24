@@ -14,9 +14,8 @@ describe("SubZeroSaltFish", function () {
     });
     it("Should act", function () {
         const card = new SubZeroSaltFish();
-        const player = new Player("test", Color.BLUE, false);
-        card.action(player);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        card.action();
+        expect(card.resourceCount).to.eq(1);
     });
     it("Should play", function () {
         const card = new SubZeroSaltFish();
@@ -35,9 +34,8 @@ describe("SubZeroSaltFish", function () {
 
         card.play(player, game);
         
-
         player.addResourceTo(card, 5);
-        player.victoryPoints += card.getVictoryPoints(player);
-        expect(player.victoryPoints).to.eq(2);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     });
 });

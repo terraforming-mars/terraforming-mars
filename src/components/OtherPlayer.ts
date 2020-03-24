@@ -2,8 +2,7 @@
 import Vue from "vue";
 
 import { PlayerResources } from "./PlayerResources";
-import { CardType } from '../cards/CardType';
-import { CardModel } from '../models/CardModel';
+
 import { StackedCards } from './StackedCards';
 import { PlayerMixin } from "./PlayerMixin";
 import { TagCount } from './TagCount';
@@ -19,16 +18,10 @@ export const OtherPlayer = Vue.component("other-player", {
     mixins: [PlayerMixin],
     methods: {
         hideMe: function () {
-            (this.$root as any).setOtherPlayerVisibility(this.player.id, false);
+            (this.$root as any).setVisibilityState("other_player_"+this.player.id, false);
         },
         isVisible: function () {
-            return (this.$root as any).getOtherPlayerVisibility(this.player.id);
-        },
-        getEventCount: function() {
-            return this.player.playedCards.filter((card: CardModel) => card.cardType === CardType.EVENT).length;
-        },
-        getActiveCards: function() {
-            return this.player.playedCards.filter((card: CardModel) => card.cardType === CardType.ACTIVE);
+            return (this.$root as any).getVisibilityState("other_player_"+this.player.id);
         }
     },
     template: `
@@ -42,14 +35,24 @@ export const OtherPlayer = Vue.component("other-player", {
                     Cards In Hand: {{player.cardsInHandNbr}} - Event cards: {{ getEventCount() }}
                 </div>
 
-                <div class="player_home_block">
-                    <player-resources :player="player"></player-resources>
-                </div>
-
-                <div class="tag-display tags_item_cont" v-if="player.tags.length > 0">
+                <div class="tag-display tags_item_cont tag-display-tags" v-if="player.tags.length > 0">
                     <div v-for="tag in player.tags">
                         <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>
                     </div>
+                </div>
+
+                <div v-if="player.showOtherPlayersVP" class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
+                    <div>
+                        <div class="tag-display">
+                            <div class="tag-count icon-vp"></div>
+                            <span class="tag-count-display"> : {{player.victoryPointsBreakdown.total}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div v-else class="nofloat"></div>
+
+                <div class="player_home_block">
+                    <player-resources :player="player"></player-resources>
                 </div>
 
                 <div v-if="player.playedCards.length > 0 || player.corporationCard !== undefined" class="player_home_block">
@@ -59,7 +62,7 @@ export const OtherPlayer = Vue.component("other-player", {
                             <card :card="player.corporationCard" :resources="player.corporationCardResources"></card>
                         </div>
                         <div v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
-                            <card :card="card.name" :resources="card.resources"></card>
+                            <card :card="card.name" :resources="card.resources" :player="player"></card>
                         </div>
 
                         <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>

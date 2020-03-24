@@ -1,35 +1,37 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { CorporationName } from '../../CorporationName';
 import { ResourceType } from '../../ResourceType';
 import { Resources } from "../../Resources";
 import { Game } from '../../Game';
 import { IProjectCard } from '../IProjectCard';
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
+import { CardName } from '../../CardName';
+import { IResourceCard } from '../ICard';
 
 
-export class Recyclon implements CorporationCard {
-    public name: string = CorporationName.RECYCLON;
+export class Recyclon implements CorporationCard, IResourceCard {
+    public name: CardName = CardName.RECYCLON;
     public tags: Array<Tags> = [Tags.MICROBES, Tags.STEEL];
     public startingMegaCredits: number = 38;
     public resourceType: ResourceType = ResourceType.MICROBE;
+    public resourceCount: number = 0;
 
     public play(player: Player) {
         player.setProduction(Resources.STEEL);
-        player.addResourceTo(this);
+        this.resourceCount++;
         return undefined;
     }
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
         if (card.tags.indexOf(Tags.STEEL) === -1 || !player.isCorporation(this.name)) {return undefined;}
-        if (player.getResourcesOnCard(this) < 2) {
-            player.addResourceTo(this);
+        if (this.resourceCount < 2) {
+            this.resourceCount++;
             return undefined;
         }
 
         const addResource = new SelectOption("Add a microbe resource to this card", () => {
-            player.addResourceTo(this);
+            this.resourceCount++;
             return undefined;
         });
 

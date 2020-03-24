@@ -13,6 +13,7 @@ interface CreateGameModel {
     prelude: boolean;
     draftVariant: boolean;
     randomFirstPlayer: boolean;
+    showOtherPlayersVP: boolean;
     venusNext: boolean;
     colonies: boolean;
     customCorporationsList: boolean;
@@ -31,7 +32,6 @@ interface NewPlayerModel {
     first: boolean;
 }
 
-
 export const CreateGameForm = Vue.component("create-game-form", {
     data: function () {
         return {
@@ -47,6 +47,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             prelude: false,
             draftVariant: true,
             randomFirstPlayer: true,
+            showOtherPlayersVP: false,
             venusNext: false,
             colonies: false,
             customCorporationsList: false,
@@ -54,7 +55,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
             showCorporationList: false,
             board: BoardName.ORIGINAL,
             showSeed: false,
-            seed: Math.random()
+            seed: Math.random(),
+            seededGame: false
         } as CreateGameModel
     },
     methods: {
@@ -109,6 +111,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
             const prelude = this.$data.prelude;
             const draftVariant = this.$data.draftVariant;
+            const showOtherPlayersVP = this.$data.showOtherPlayersVP;
             const venusNext = this.$data.venusNext;
             const colonies = this.$data.colonies;
             const corporations = this.$data.corporations;
@@ -136,20 +139,20 @@ export const CreateGameForm = Vue.component("create-game-form", {
             };
             xhr.responseType = "json";
             xhr.send(JSON.stringify({
-                players: players, prelude, draftVariant, venusNext, colonies, customCorporationsList, corporations, board, seed
+                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, customCorporationsList, corporations, board, seed
             }));
         }
     },
     template: `
         <div id="create-game">
-            <h1>Terraforming Mars — Create New Game</h1>
+            <h1><span v-i18n>Terraforming Mars</span> — <span v-i18n>Create New Game</span></h1>
 
             <div class="create-game-form create-game--block">
 
                 <div class="container create-game-options">
                     <div class="columns">
                         <div class="create-game-options-block col3 col-sm-6">
-                            <h4>Players count</h4>
+                            <h4 v-i18n>Players count</h4>
 
                             <label class="form-radio" v-for="pCount in [1,2,3,4,5]">
                                 <input type="radio" :value="pCount" name="playersCount" v-model="playersCount">
@@ -158,7 +161,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         </div>
 
                         <div class="create-game-options-block col3 col-sm-6">
-                            <h4>Extensions</h4>
+                            <h4 v-i18n>Extensions</h4>
                             <label class="form-switch">
                                 <input type="checkbox" name="prelude" v-model="prelude">
                                 <i class="form-icon"></i> Prelude
@@ -176,9 +179,9 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         </div>
 
                         <div class="create-game-options-block col3 col-sm-6">
-                            <h4>Options</h4>
+                            <h4 v-i18n>Options</h4>
 
-                            <label class="form-switch">
+                            <label class="form-switch" v-if="playersCount > 1">
                                 <input type="checkbox" name="draftVariant" v-model="draftVariant">
                                 <i class="form-icon"></i> Draft variant
                             </label>
@@ -193,6 +196,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <i class="form-icon"></i> Random first player
                             </label>
 
+                            <label class="form-switch" v-if="playersCount > 1">
+                                <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP">
+                                <i class="form-icon"></i> Show real-time VP
+                            </label>
+
                             <label class="form-switch">
                                 <input type="checkbox" v-model="seededGame" v-on:click="showSeed = !showSeed" >
                                 <i class="form-icon"></i> Show seed
@@ -204,7 +212,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         </div>
 
                         <div class="create-game-options-block col3 col-sm-6">
-                            <h4>Board</h4>
+                            <h4 v-i18n>Board</h4>
 
                             <label class="form-radio">
                                 <input type="radio" :value=getOriginalBoard() name="board" v-model="board">
@@ -224,7 +232,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                     </div>
 
                     <div class="create-game-action">			
-                        <button class="btn btn-lg btn-success" v-on:click="createGame">Create Game</button> 
+                        <button class="btn btn-lg btn-success" v-on:click="createGame" v-i18n>Create Game</button> 
                     </div>  
 
                 </div>

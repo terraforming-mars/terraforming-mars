@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as querystring from 'querystring';
 import {AndOptions} from './src/inputs/AndOptions';
-import {CardModel} from './src/models/CardModel';
+import { CardModel } from './src/models/CardModel';
 import {ColonyModel} from './src/models/ColonyModel';
 import {Color} from './src/Color';
 import {CorporationCard} from './src/cards/corporation/CorporationCard';
@@ -37,8 +37,9 @@ import {SpaceModel} from './src/models/SpaceModel';
 import {TileType} from './src/TileType';
 import { Phase } from './src/Phase';
 import { Resources } from "./src/Resources";
-import { CardType } from "./src/cards/CardType";
+import { CardType } from './src/cards/CardType';
 
+const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
@@ -55,7 +56,14 @@ function requestHandler(
 ): void {
   if (req.url !== undefined) {
     if (req.method === 'GET') {
-      if (
+      if (req.url.replace(/\?.*$/, '').startsWith('/games-overview')) {
+        if (!isServerIdValid(req)) {
+          notAuthorized(req, res);
+          return;
+        } else {
+          serveApp(res);
+        }
+      } else if (
         req.url === '/' ||
         req.url.startsWith('/game?id=') ||
         req.url.startsWith('/player?id=') ||
@@ -66,6 +74,10 @@ function requestHandler(
         apiGetPlayer(req, res);
       } else if (req.url.startsWith('/api/waitingfor?id=')) {
         apiGetWaitingFor(req, res);
+      } else if (req.url.startsWith("/assets/translations.json")) {
+        res.setHeader('Content-Type', 'application/json');
+        res.write(fs.readFileSync("assets/translations.json"));
+        res.end();
       } else if (req.url === '/styles.css') {
         res.setHeader('Content-Type', 'text/css');
         serveResource(res, styles);
@@ -75,6 +87,8 @@ function requestHandler(
           req.url === '/main.js'
       ) {
         serveAsset(req, res);
+      } else if (req.url.startsWith('/api/games')) {
+        apiGetGames(req, res);
       } else if (req.url.indexOf('/api/game') === 0) {
         apiGetGame(req, res);
       } else {
@@ -112,6 +126,10 @@ function generateRandomGameId(): string {
   return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
 }
 
+function generateRandomServerId(): string {
+  return generateRandomGameId();
+}
+
 function processInput(
     req: http.IncomingMessage,
     res: http.ServerResponse,
@@ -140,6 +158,30 @@ function processInput(
       res.end();
     }
   });
+}
+
+function apiGetGames(req: http.IncomingMessage, res: http.ServerResponse): void {
+
+  if (!isServerIdValid(req)) {
+    notAuthorized(req, res);
+    return;
+  }
+
+  if (games === undefined) {
+    notFound(req, res);
+    return;
+  }
+
+  const answer: Array<string> = [];
+
+  for (let key of Array.from(games.keys())) {
+    answer.push(key);
+  }
+
+  res.setHeader('Content-Type', 'application/json');
+  res.write(JSON.stringify(answer));
+  res.end();
+
 }
 
 function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -263,7 +305,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         }
       }
 
-      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.venusNext, gameReq.colonies, gameReq.customCorporationsList, selectedCorporations, gameReq.board, gameReq.seed);
+      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.showOtherPlayersVP, gameReq.venusNext, gameReq.colonies, gameReq.customCorporationsList, selectedCorporations, gameReq.board, gameReq.seed);
       games.set(gameId, game);
       game.getPlayers().forEach((player) => {
         playersToGame.set(player.id, game);
@@ -324,8 +366,7 @@ function getPlayer(player: Player, game: Game): string {
     titanium: player.titanium,
     titaniumProduction: player.getProduction(Resources.TITANIUM),
     titaniumValue: player.titaniumValue,
-    victoryPoints: player.victoryPoints,
-    victoryPointsBreakdown: player.victoryPointsBreakdown,
+    victoryPointsBreakdown: player.getVictoryPoints(game),
     waitingFor: getWaitingFor(player.getWaitingFor()),
     gameLog: game.gameLog,
     isSoloModeWin: game.isSoloModeWin(),
@@ -335,9 +376,21 @@ function getPlayer(player: Player, game: Game): string {
     venusScaleLevel: game.getVenusScaleLevel(),
     boardName: game.boardName,
     colonies: getColonies(game.colonies),
-    tags: player.getAllTags()
+    tags: player.getAllTags(),
+    showOtherPlayersVP: game.showOtherPlayersVP,
+    actionsThisGeneration: Array.from(player.getActionsThisGeneration())
   } as PlayerModel;
   return JSON.stringify(output);
+}
+
+function getCardsAsCardModel(cards: Array<ICard>): Array<CardModel> {
+  let result:Array<CardModel> = [];
+
+  cards.forEach((card) => {
+    result.push({name: card.name, resources: (card.resourceCount ? card.resourceCount : 0), calculatedCost : 0, cardType : CardType.AUTOMATED});
+  });
+    
+  return result;
 }
 
 function getWaitingFor(
@@ -375,15 +428,13 @@ function getWaitingFor(
       }
       break;
     case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD:
-      result.cards = (waitingFor as SelectHowToPayForCard)
-          .cards.map((card) => card.name);
+      result.cards = getCardsAsCardModel((waitingFor as SelectHowToPayForCard).cards);
       result.microbes = (waitingFor as SelectHowToPayForCard).microbes;
       result.floaters = (waitingFor as SelectHowToPayForCard).floaters;
       result.canUseHeat = (waitingFor as SelectHowToPayForCard).canUseHeat;
       break;
     case PlayerInputTypes.SELECT_CARD:
-      result.cards = (waitingFor as SelectCard<ICard>)
-          .cards.map((card) => card.name);
+      result.cards = getCardsAsCardModel((waitingFor as SelectCard<ICard>).cards);
       result.maxCardsToSelect = (waitingFor as SelectCard<ICard>)
           .maxCardsToSelect;
       result.minCardsToSelect = (waitingFor as SelectCard<ICard>)
@@ -470,14 +521,15 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       titanium: player.titanium,
       titaniumProduction: player.getProduction(Resources.TITANIUM),
       titaniumValue: player.titaniumValue,
-      victoryPoints: player.victoryPoints,
-      victoryPointsBreakdown: player.victoryPointsBreakdown,
+      victoryPointsBreakdown: player.getVictoryPoints(game),
       isActive: player.id === game.activePlayer.id,
       venusNextExtension: game.venusNextExtension,
       venusScaleLevel: game.getVenusScaleLevel(),
       boardName: game.boardName,
       colonies: getColonies(game.colonies),
-      tags: player.getAllTags()
+      tags: player.getAllTags(),
+      showOtherPlayersVP: game.showOtherPlayersVP,
+      actionsThisGeneration: Array.from(player.getActionsThisGeneration())
     } as PlayerModel;
   });
 }
@@ -534,12 +586,27 @@ function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {
   res.end();
 }
 
+function notAuthorized(req: http.IncomingMessage, res: http.ServerResponse): void {
+  console.warn('Not authorized', req.method, req.url);
+  res.writeHead(403);
+  res.write('Not authorized');
+  res.end();
+}
+
+function isServerIdValid (req: http.IncomingMessage): boolean {
+  const queryParams = querystring.parse(req.url!.replace(/^.*\?/, ''));
+  if (queryParams.serverId === undefined || queryParams.serverId !== serverId) {
+    console.warn('No or invalid serverId given');
+    return false;
+  }
+  return true;
+}
+
 function serveApp(res: http.ServerResponse): void {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.write(fs.readFileSync('index.html'));
   res.end();
 }
-
 
 function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url === undefined) throw new Error("Empty url");
@@ -586,5 +653,9 @@ function serveResource(res: http.ServerResponse, s: Buffer): void {
 
 console.log('Starting server on port ' + (process.env.PORT || 8080));
 console.log('version 0.X');
+
 server.listen(process.env.PORT || 8080);
 
+console.log('\nThe secret serverId for this server is \x1b[1m'+serverId+'\x1b[0m. Use it to access the following administrative routes:\n');
+console.log('* Overview of existing games: /games-overview?serverId='+serverId);
+console.log('* API for game IDs: /api/games?serverId='+serverId+'\n');

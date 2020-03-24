@@ -7,7 +7,7 @@ import { Resources } from '../../Resources';
 
 export class EcologyExperts extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT, Tags.MICROBES];
-    public name: string = CardName.ECOLOGY_EXPERTS;
+    public name: CardName = CardName.ECOLOGY_EXPERTS;
     public getRequirementBonus(player: Player): number {
         if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
             // Magic number high enough to always ignore requirements.

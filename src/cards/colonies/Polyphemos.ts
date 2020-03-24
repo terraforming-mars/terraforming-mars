@@ -2,9 +2,10 @@ import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
 import { Resources } from '../../Resources';
+import { CardName } from '../../CardName';
 
 export class Polyphemos implements CorporationCard {
-    public name: string = "Polyphemos";
+    public name: CardName = CardName.POLYPHEMOS;
     public tags: Array<Tags> = [];
     public startingMegaCredits: number = 50;
 

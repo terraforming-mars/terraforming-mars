@@ -8,14 +8,16 @@ import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
 import { Game } from '../../Game';
 import { SelectAmount } from "../../inputs/SelectAmount";
+import { IResourceCard } from '../ICard';
 
 
-export class TitanShuttles implements IProjectCard {
+export class TitanShuttles implements IProjectCard, IResourceCard {
     public cost: number = 23;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: string = CardName.TITAN_SHUTTLES;
+    public name: CardName = CardName.TITAN_SHUTTLES;
     public cardType: CardType = CardType.ACTIVE;
-    public resourceType = ResourceType.FLOATER;
+    public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
 
     public canAct(): boolean {
         return true;
@@ -32,11 +34,11 @@ export class TitanShuttles implements IProjectCard {
             player.removeResourceFrom(this, amount);
             player.titanium += amount; 
             return undefined;
-        }, player.getResourcesOnCard(this));
+        }, this.resourceCount);
 
         opts.push(addResource);
 
-        if (player.getResourcesOnCard(this) > 0){
+        if (this.resourceCount > 0){
             opts.push(spendResource);
         }
 

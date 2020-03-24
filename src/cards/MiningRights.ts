@@ -13,7 +13,7 @@ import { CardName } from '../CardName';
 export class MiningRights implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = CardName.MINING_RIGHTS;
+    public name: CardName = CardName.MINING_RIGHTS;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public bonusResource: Resources | undefined = undefined;
@@ -26,7 +26,7 @@ export class MiningRights implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space with a steel or titanium placement bonus", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
-            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.SPECIAL });
+            game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.MINING_RIGHTS });
             if (foundSpace.bonus.indexOf(SpaceBonus.STEEL) !== -1) {
                 player.setProduction(Resources.STEEL);
                 this.bonusResource = Resources.STEEL;

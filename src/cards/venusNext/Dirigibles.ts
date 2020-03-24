@@ -1,5 +1,5 @@
 import { IProjectCard } from "../IProjectCard";
-import {ICard, IActionCard} from '../ICard';
+import { ICard, IActionCard, IResourceCard } from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -8,13 +8,14 @@ import { SelectCard } from '../../inputs/SelectCard';
 import { CardName } from '../../CardName';
 
 
-export class Dirigibles implements IActionCard,IProjectCard {
+export class Dirigibles implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.VENUS];
 
-    public name: string = CardName.DIRIGIBLES;
+    public name: CardName = CardName.DIRIGIBLES;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
 
     public play() {
         return undefined;
@@ -25,7 +26,7 @@ export class Dirigibles implements IActionCard,IProjectCard {
     public action(player: Player) {
         const floaterCards = player.getResourceCards(ResourceType.FLOATER);
         if (floaterCards.length === 1) {
-            player.addResourceTo(this);
+            this.resourceCount++;
             return undefined;
         }
 

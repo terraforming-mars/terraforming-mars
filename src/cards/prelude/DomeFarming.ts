@@ -7,7 +7,7 @@ import { CardName } from '../../CardName';
 
 export class DomeFarming extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];
-    public name: string = CardName.DOME_FARMING;
+    public name: CardName = CardName.DOME_FARMING;
     public play(player: Player) {     
         player.setProduction(Resources.PLANTS);
         player.setProduction(Resources.MEGACREDITS,2);

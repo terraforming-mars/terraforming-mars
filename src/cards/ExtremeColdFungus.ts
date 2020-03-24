@@ -9,12 +9,13 @@ import {SelectOption} from '../inputs/SelectOption';
 import {SelectCard} from '../inputs/SelectCard';
 import {IProjectCard} from './IProjectCard';
 import { ResourceType } from '../ResourceType';
+import { CardName } from '../CardName';
 
 export class ExtremeColdFungus implements IActionCard, IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.MICROBES];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = 'Extreme-Cold Fungus';
+    public name: CardName = CardName.EXTREME_COLD_FUNGUS;
     public canPlay(player: Player, game: Game): boolean {
       return game.getTemperature() <= -10 + (
         2 * player.getRequirementsBonus(game)

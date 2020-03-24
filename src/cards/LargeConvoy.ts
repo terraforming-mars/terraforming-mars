@@ -15,7 +15,7 @@ import { CardName } from '../CardName';
 export class LargeConvoy implements IProjectCard {
     public cost: number = 36;
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
-    public name: string = CardName.LARGE_CONVOY;
+    public name: CardName = CardName.LARGE_CONVOY;
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game): PlayerInput | undefined {

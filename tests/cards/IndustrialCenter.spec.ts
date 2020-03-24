@@ -35,6 +35,6 @@ describe("IndustrialCenter", function () {
         expect(action).not.to.eq(undefined);
         action.cb(action.availableSpaces[0]);
         expect(action.availableSpaces[0].tile).not.to.eq(undefined);
-        expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.SPECIAL);
+        expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.INDUSTRIAL_CENTER);
     });
 });

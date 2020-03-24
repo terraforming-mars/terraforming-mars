@@ -10,7 +10,7 @@ import { CardName } from '../CardName';
 export class GreatEscarpmentConsortium implements IProjectCard {
     public cost: number = 6;
     public tags: Array<Tags> = [];
-    public name: string = CardName.GREAT_ESCARPMENT_CONSORTIUM;
+    public name: CardName = CardName.GREAT_ESCARPMENT_CONSORTIUM;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
         if (game.getPlayers().length > 1 

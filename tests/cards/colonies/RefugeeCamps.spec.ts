@@ -8,7 +8,7 @@ describe("RefugeeCamps", function () {
         const card = new RefugeeCamps();
         const player = new Player("test", Color.BLUE, false);
         card.action(player);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
     });
     it("Should play", function () {
         const card = new RefugeeCamps();
@@ -17,7 +17,7 @@ describe("RefugeeCamps", function () {
         expect(action).to.eq(undefined);
         
         player.addResourceTo(card, 5);
-        player.victoryPoints += card.getVictoryPoints(player);
-        expect(player.victoryPoints).to.eq(5);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(5);
     });
 });

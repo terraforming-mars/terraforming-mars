@@ -9,7 +9,7 @@ import { Resources } from '../../Resources';
 export class MiningColony implements IProjectCard {
     public cost: number = 20;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = CardName.MINING_COLONY;
+    public name: CardName = CardName.MINING_COLONY;
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {

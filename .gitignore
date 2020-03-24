@@ -6,3 +6,4 @@ node_modules/
 styles.css
 .vscode/symbols.json
 db/*
+assets/translations.json

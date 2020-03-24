@@ -7,10 +7,11 @@
     </head>
     <body id="ts-preferences-target">
         <div id="app">
-            <game-home v-if="screen === 'game-home'" :game="$data.game"></game-home>
-            <player-home v-if="screen === 'player-home'" :player="$data.player" :key="$data.playerkey"></player-home>
+            <game-home v-if="screen === 'game-home'" :game="game"></game-home>
+            <player-home v-if="screen === 'player-home'" :player="player" :key="playerkey"></player-home>
             <create-game-form v-if="screen === 'create'"></create-game-form>
-            <game-end v-if="screen == 'the-end'" :player="$data.player" :game="$data.game"></game-end>
+            <game-end v-if="screen === 'the-end'" :player="player" :game="game"></game-end>
+            <games-overview v-if="screen === 'games-overview'"></games-overview>
         </div>
         <script src="/main.js"></script>
     </body>

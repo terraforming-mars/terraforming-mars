@@ -44,6 +44,8 @@ import { SelectResourceDecrease } from "./interrupts/SelectResourceDecrease";
 import { SelectHowToPayInterrupt } from "./interrupts/SelectHowToPayInterrupt";
 
 const sqlite3 = require('sqlite3');
+const path = require('path');
+const dbPath = path.resolve(__dirname, '../../db/game.db');
 
 export class Game {
     public activePlayer: Player;
@@ -1190,9 +1192,7 @@ export class Game {
 
     // Function to save the current game state
     private saveGameState(): void {
-      // Getting the file path
-      let path = require('path');
-      let dbPath = path.resolve(__dirname, '../../db/game.db');
+      // Open the database connexion
       let db = new sqlite3.Database(dbPath);
       // Create the table that will store every saves
       db.run('CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, PRIMARY KEY (game_id, save_id))');
@@ -1221,9 +1221,7 @@ export class Game {
 
     // Function to restore previous turn from the database
     public restoreLastSave(): void {
-      // Getting the file path
-      let path = require('path');
-      let dbPath = path.resolve(__dirname, '../../db/game.db');
+      // Open the database connexion
       let db = new sqlite3.Database(dbPath);
 
       // Retrieve last save from database
@@ -1244,9 +1242,7 @@ export class Game {
 
     // Function to clean saves
     public cleanSaves(): void {
-      // Getting the file path
-      let path = require('path');
-      let dbPath = path.resolve(__dirname, '../../db/game.db');
+      // Open the database connexion
       let db = new sqlite3.Database(dbPath);
       // DELETE all saves expect last one
       db.run(`DELETE FROM games WHERE game_id = ? AND save_id < ?`, [this.id, this.lastSaveId], function(err: { message: any; }) {

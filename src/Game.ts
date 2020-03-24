@@ -42,6 +42,7 @@ import {SelectResourceProductionDecrease} from "./interrupts/SelectResourceProdu
 import {ICard} from "./cards/ICard";
 import {SelectResourceDecrease} from "./interrupts/SelectResourceDecrease";
 import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
+import { Pets } from "./cards/Pets";
 
 export class Game {
     public activePlayer: Player;
@@ -112,6 +113,7 @@ export class Game {
         this.draftVariant = false;
         this.setupSolo();
       }
+      first.cardsInHand.push(new Pets())
 
       let corporationCards = ALL_CORPORATION_CARDS.slice();
       // Add prelude corporations cards

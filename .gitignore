@@ -5,3 +5,4 @@ node_modules/
 .nyc_output/
 styles.css
 .vscode/symbols.json
+assets/translations.json

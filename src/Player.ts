@@ -1679,7 +1679,7 @@ export class Player {
     // Function used to rebuild each objects
     public loadFromJSON(d: Player): Player {
       // Assign each attributes
-      var o = Object.assign(this, d);
+      let o = Object.assign(this, d);
 
       // Rebuild resources on card map
       this.resourcesOnCards = new Map<string, number>();

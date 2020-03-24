@@ -896,7 +896,7 @@ export class Dealer {
     // Function used to rebuild each objects
     public loadFromJSON(d: Dealer): Dealer {
         // Assign each attributes
-        var o = Object.assign(this, d);
+        let o = Object.assign(this, d);
 
         // Rebuild deck
         this.deck = [];

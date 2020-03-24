@@ -1256,7 +1256,7 @@ export class Game {
     // Function used to rebuild each objects
     public loadFromJSON(d: Game): Game {
       // Assign each attributes
-      var o = Object.assign(this, d);
+      let o = Object.assign(this, d);
 
       // Rebuild every player objects
       this.players = new Array<Player>();
@@ -1272,9 +1272,9 @@ export class Game {
       this.board = this.boardConstructor(d.boardName);
       d.board.spaces.forEach((element: ISpace) => {
         if(element.tile) {
-          var space = this.getSpace(element.id);
-          var tileType = element.tile.tileType;
-          var tileCard = element.tile.card;
+          let space = this.getSpace(element.id);
+          let tileType = element.tile.tileType;
+          let tileCard = element.tile.card;
           if (element.player){
             let playerIndex: number = this.players.map(function(x) {return x.id; }).indexOf(element.player.id);
             space.player = this.players[playerIndex];

@@ -1257,7 +1257,7 @@ export class Player {
     private convertHeatIntoTemperature(game: Game): PlayerInput {
       let heatAmount: number;
       let floaterAmount: number;
-      if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
+      if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
         let raiseTempOptions = new AndOptions (
           () => {
             if (heatAmount + (floaterAmount * 2) < 8) {
@@ -1672,7 +1672,7 @@ export class Player {
 
       if (
         (this.heat >= constants.HEAT_FOR_TEMPERATURE || 
-          (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) &&
+          (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) &&
            (this.getResourcesOnCorporation() * 2) + this.heat >= constants.HEAT_FOR_TEMPERATURE)
            ) &&
             game.getTemperature() + 2 <= constants.MAX_TEMPERATURE) {

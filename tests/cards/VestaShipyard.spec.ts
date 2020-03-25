@@ -15,4 +15,8 @@ describe("VestaShipyard", function () {
         expect(action).to.eq(undefined);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
     });
+    it("Should have victory point", function () {
+        const card = new VestaShipyard();
+        expect(card.getVictoryPoints()).to.eq(1);
+    });
 });

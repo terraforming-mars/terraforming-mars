@@ -52,7 +52,7 @@ export const PlayerHome = Vue.component("player-home", {
         showPlayerDetails: function (player: PlayerModel) {
             if (player.id === this.player.id) return;
             
-            (this.$root as any).setOtherPlayerVisibility(player.id, true);
+            (this.$root as any).setVisibilityState("other_player_" + player.id, true);
         }
     },
     mounted: function () {

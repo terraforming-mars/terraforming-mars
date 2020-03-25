@@ -370,6 +370,7 @@ export class Player implements ILoadable<Player>{
       tags.push({tag : Tags.STEEL, count : this.getTagCount(Tags.STEEL, false, false)} as ITagCount);
       tags.push({tag : Tags.VENUS, count : this.getTagCount(Tags.VENUS, false, false)} as ITagCount);
       tags.push({tag : Tags.WILDCARD, count : this.getTagCount(Tags.WILDCARD, false, false)} as ITagCount);
+      tags.push({tag : Tags.ANIMAL, count : this.getTagCount(Tags.ANIMAL, false, false)} as ITagCount);
       tags.push({tag : Tags.EVENT, count : this.playedCards.filter(card => card.cardType === CardType.EVENT).length} as ITagCount);
       
       return tags.filter((tag) => tag.count > 0);
@@ -1259,7 +1260,7 @@ export class Player implements ILoadable<Player>{
     private convertHeatIntoTemperature(game: Game): PlayerInput {
       let heatAmount: number;
       let floaterAmount: number;
-      if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
+      if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
         let raiseTempOptions = new AndOptions (
           () => {
             if (heatAmount + (floaterAmount * 2) < 8) {
@@ -1683,7 +1684,7 @@ export class Player implements ILoadable<Player>{
 
       if (
         (this.heat >= constants.HEAT_FOR_TEMPERATURE || 
-          (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) &&
+          (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) &&
            (this.getResourcesOnCorporation() * 2) + this.heat >= constants.HEAT_FOR_TEMPERATURE)
            ) &&
             game.getTemperature() + 2 <= constants.MAX_TEMPERATURE) {

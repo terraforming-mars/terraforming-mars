@@ -3,5 +3,5 @@ export enum ColoniesCorporation {
     ARKLIGHT = "Arklight",
     POLYPHEMOS = "Polyphemos",
     POSEIDON = "Poseidon",
-    STORMCRAFT_INCORPORATED = "StormCraft Incorporated"
+    STORMCRAFT_INCORPORATED = "Stormcraft Incorporated"
 }

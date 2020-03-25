@@ -387,9 +387,9 @@ function getCardsAsCardModel(cards: Array<ICard>): Array<CardModel> {
   let result:Array<CardModel> = [];
 
   cards.forEach((card) => {
-    result.push({name: card.name, resources: (card.resourceCount ? card.resourceCount : 0), calculatedCost : 0, cardType : CardType.AUTOMATED});
+    result.push({name: card.name, resources: (card.resourceCount !== undefined ? card.resourceCount : 0), calculatedCost : 0, cardType : CardType.AUTOMATED});
   });
-    
+
   return result;
 }
 

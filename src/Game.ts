@@ -45,6 +45,8 @@ import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
 
 const sqlite3 = require("sqlite3");
 const path = require("path");
+const fs = require('fs');
+const dbFolder = path.resolve(__dirname, "../../db")
 const dbPath = path.resolve(__dirname, "../../db/game.db");
 
 export class Game {
@@ -91,6 +93,9 @@ export class Game {
     ) {
 
       // Create the table that will store every saves if not exists
+      if (!fs.existsSync(dbFolder)){
+          fs.mkdirSync(dbFolder);
+      }
       let db = new sqlite3.Database(dbPath);
       db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, PRIMARY KEY (game_id, save_id))");
       db.close();

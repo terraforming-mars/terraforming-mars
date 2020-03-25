@@ -34,6 +34,7 @@ import {ITagCount} from "./ITagCount";
 import {TileType} from "./TileType";
 import { BeginnerCorporation } from "./cards/corporation/BeginnerCorporation";
 import { ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_VENUS_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_PROMO_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROJECT_CARDS, ALL_PRELUDE_CARDS, ALL_PRELUDE_PROJECTS_CARDS, ALL_VENUS_PROJECTS_CARDS, ALL_COLONIES_PROJECTS_CARDS } from "./Dealer";
+import { ILoadable } from "./ILoadable";
 
 export class Player implements ILoadable<Player>{
     public corporationCard: CorporationCard | undefined = undefined;

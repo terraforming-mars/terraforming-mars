@@ -392,7 +392,7 @@ import { RedSpotObservatory } from "./cards/colonies/RedSpotObservatory";
 import { MarketManipulation } from "./cards/colonies/MarketManipulation";
 import { MartianZoo } from "./cards/colonies/MartianZoo";
 
-
+import { ILoadable } from "./ILoadable";
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),

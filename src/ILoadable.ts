@@ -1,3 +1,3 @@
-interface ILoadable<T> {
+export interface ILoadable<T> {
     loadFromJSON(d: T): T;
 }

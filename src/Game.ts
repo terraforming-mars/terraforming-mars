@@ -42,6 +42,7 @@ import {SelectResourceProductionDecrease} from "./interrupts/SelectResourceProdu
 import {ICard} from "./cards/ICard";
 import {SelectResourceDecrease} from "./interrupts/SelectResourceDecrease";
 import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
+import { ILoadable } from "./ILoadable";
 
 const sqlite3 = require("sqlite3");
 const path = require("path");

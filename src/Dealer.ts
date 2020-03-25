@@ -392,68 +392,72 @@ import { RedSpotObservatory } from "./cards/colonies/RedSpotObservatory";
 import { MarketManipulation } from "./cards/colonies/MarketManipulation";
 import { MartianZoo } from "./cards/colonies/MartianZoo";
 
+import { CardName } from "./CardName";
 
+export interface ICardFactory<T> {
+    cardName: CardName;
+    factory: new () => T
+}
 
-export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
-        new AlliedBanks(),
-        new BiosphereSupport(),
-        new AquiferTurbines(),
-        new MoholeExcavation(),
-        new EarlySettlement(),
-        new Biofuels(),
-        new PowerGeneration(),
-        new SelfSufficientSettlement(),
-        new MiningOperations(),
-        new UNMIContractor(),
-        new DomeFarming(),
-        new BusinessEmpire(),
-        new Donation(),
-        new NitrogenDelivery(),
-        new SmeltingPlant(),
-        new Supplier(),
-        new SupplyDrop(),
-        new GreatAquifer(),
-        new Biolab(),
-        new MartianIndustries(),
-        new IoResearchOutpost(),
-        new PolarIndustries(),
-        new SocietySupport(),
-        new GalileanMining(),
-        new HugeAsteroid(),
-        new MetalsCompany(),
-        new Loan(),
-        new Mohole(),
-        new MetalRichAsteroid(),
-        new OrbitalConstructionYard(),
-        new AcquiredSpaceAgency(),
-        new ResearchNetwork(),
-        new EccentricSponsor(),
-        new EcologyExperts(),
-        new ExperimentalForest()
+export const ALL_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>> = [
+    { cardName: CardName.ALLIED_BANKS, factory: AlliedBanks },
+    { cardName: CardName.BIOSPHERE_SUPPORT, factory: BiosphereSupport },
+    { cardName: CardName.AQUIFER_TURBINES, factory: AquiferTurbines },
+    { cardName: CardName.MOHOLE_EXCAVATION, factory: MoholeExcavation },
+    { cardName: CardName.EARLY_SETTLEMENT, factory: EarlySettlement },
+    { cardName: CardName.BIOFUELS, factory: Biofuels },
+    { cardName: CardName.POWER_GENERATION, factory: PowerGeneration },
+    { cardName: CardName.SELF_SUFFICIENT_SETTLEMENT, factory: SelfSufficientSettlement },
+    { cardName: CardName.MINING_OPERATIONS, factory: MiningOperations },
+    { cardName: CardName.UNMI_CONTRACTOR, factory: UNMIContractor },
+    { cardName: CardName.DOME_FARMING, factory: DomeFarming },
+    { cardName: CardName.BUSINESS_EMPIRE, factory: BusinessEmpire },
+    { cardName: CardName.DONATION, factory: Donation },
+    { cardName: CardName.NITROGEN_SHIPMENT, factory: NitrogenDelivery },
+    { cardName: CardName.SMELTING_PLANT, factory: SmeltingPlant },
+    { cardName: CardName.SUPPLIER, factory: Supplier },
+    { cardName: CardName.SUPPLY_DROP, factory: SupplyDrop },
+    { cardName: CardName.GREAT_AQUIFER, factory: GreatAquifer },
+    { cardName: CardName.BIOLAB, factory: Biolab },
+    { cardName: CardName.MARTIAN_INDUSTRIES, factory: MartianIndustries },
+    { cardName: CardName.IO_RESEARCH_OUTPOST, factory: IoResearchOutpost },
+    { cardName: CardName.POLAR_INDUSTRIES, factory: PolarIndustries },
+    { cardName: CardName.SOCIETY_SUPPORT, factory: SocietySupport },
+    { cardName: CardName.GALILEAN_MINING, factory: GalileanMining },
+    { cardName: CardName.HUGE_ASTEROID, factory: HugeAsteroid },
+    { cardName: CardName.METALS_COMPANY, factory: MetalsCompany },
+    { cardName: CardName.LOAN, factory: Loan },
+    { cardName: CardName.MOHOLE, factory: Mohole },
+    { cardName: CardName.METAL_RICH_ASTEROID, factory: MetalRichAsteroid },
+    { cardName: CardName.ORBITAL_CONSTRUCTION_YARD, factory: OrbitalConstructionYard },
+    { cardName: CardName.ACQUIRED_SPACE_AGENCY, factory: AcquiredSpaceAgency },
+    { cardName: CardName.RESEARCH_NETWORK, factory: ResearchNetwork },
+    { cardName: CardName.ECCENTRIC_SPONSOR, factory: EccentricSponsor },
+    { cardName: CardName.ECOLOGY_EXPERTS, factory: EcologyExperts },
+    { cardName: CardName.EXPERIMENTAL_FOREST, factory: ExperimentalForest }
 ];
 
-
-export const ALL_CORPORATION_CARDS: Array<CorporationCard> = [
-    new CrediCor(),
-    new EcoLine(),
-    new Helion(),
-    new InterplanetaryCinematics(),
-    new Inventrix(),
-    new MiningGuild(),
-    new PhoboLog(),
-    new SaturnSystems(),
-    new Teractor(),
-    new TharsisRepublic(),
-    new Thorgate(),
-    new UnitedNationsMarsInitiative()
+export const ALL_CORPORATION_CARDS: Array<ICardFactory<CorporationCard>> = [
+    { cardName: CardName.CREDICOR, factory: CrediCor },
+    { cardName: CardName.ECOLINE, factory: EcoLine },
+    { cardName: CardName.HELION, factory: Helion },
+    { cardName: CardName.INTERPLANETARY_CINEMATICS, factory: InterplanetaryCinematics },
+    { cardName: CardName.INVENTRIX, factory: Inventrix },
+    { cardName: CardName.MINING_GUILD, factory: MiningGuild },
+    { cardName: CardName.PHOBOLOG, factory: PhoboLog },
+    { cardName: CardName.SATURN_SYSTEMS, factory: SaturnSystems },
+    { cardName: CardName.TERACTOR, factory: Teractor },
+    { cardName: CardName.THARSIS_REPUBLIC, factory: TharsisRepublic },
+    { cardName: CardName.THORGATE, factory: Thorgate },
+    { cardName: CardName.UNITED_NATIONS_MARS_INITIATIVE, factory: UnitedNationsMarsInitiative }
 ];
 
-export const ALL_PRELUDE_CORPORATIONS: Array<CorporationCard> = [
-        new CheungShingMARS(),
-        new PointLuna(),
-        new RobinsonIndustries(),
-        new ValleyTrust(),
-        new Vitor()
+export const ALL_PRELUDE_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
+    { cardName: CardName.CHEUNG_SHING_MARS, factory: CheungShingMARS },
+    { cardName: CardName.POINT_LUNA, factory: PointLuna },
+    { cardName: CardName.ROBINSON_INDUSTRIES, factory: RobinsonIndustries },
+    { cardName: CardName.VALLEY_TRUST, factory: ValleyTrust },
+    { cardName: CardName.VITOR, factory: Vitor }
 ];
 
 export const ALL_PRELUDE_PROJECTS_CARDS: Array<IProjectCard> = [
@@ -568,37 +572,37 @@ export const ALL_COLONIES_PROJECTS_CARDS: Array<IProjectCard> = [
         new WarpDrive()
 ]; 
 
-export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [
-        new Aphrodite(),
-        new Celestic(),
-        new Manutech(),
-        new MorningStarInc(),
-        new Viron()
-];   
+export const ALL_VENUS_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
+    { cardName: CardName.APHRODITE, factory: Aphrodite },
+    { cardName: CardName.CELESTIC, factory: Celestic },
+    { cardName: CardName.MANUTECH, factory: Manutech },
+    { cardName: CardName.MORNING_STAR_INC, factory: MorningStarInc },
+    { cardName: CardName.VIRON, factory: Viron }
+];
 
-export const ALL_COLONIES_CORPORATIONS: Array<CorporationCard> = [
-    new Aridor(),
-    new Arklight(),
-    new Polyphemos(),
-    new Poseidon(),
-    new StormCraftIncorporated()
-];   
+export const ALL_COLONIES_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
+    { cardName: CardName.ARIDOR, factory: Aridor },
+    { cardName: CardName.ARKLIGHT, factory: Arklight },
+    { cardName: CardName.POLYPHEMOS, factory: Polyphemos },
+    { cardName: CardName.POSEIDON, factory: Poseidon },
+    { cardName: CardName.STORMCRAFT_INCORPORATED, factory: StormCraftIncorporated }
+];
 
-export const ALL_TURMOIL_CORPORATIONS: Array<CorporationCard> = [
-    new LakefrontResorts(),
-    new Pristar(),
-    new TerralabsResearch(),
-    new UtopiaInvest()
-]; 
+export const ALL_TURMOIL_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
+    { cardName: CardName.LAKEFRONT_RESORTS, factory: LakefrontResorts },
+    { cardName: CardName.PRISTAR, factory: Pristar },
+    { cardName: CardName.TERRALABS_RESEARCH, factory: TerralabsResearch },
+    { cardName: CardName.UTOPIA_INVEST, factory: UtopiaInvest }
+];
 
-export const ALL_PROMO_CORPORATIONS: Array<CorporationCard> = [
-    new ArcadianCommunities(),
-    new Factorum(),
-    new Philares(),
-    new MonsInsurance(),
-    new Recyclon(),
-    new Splice()
-]; 
+export const ALL_PROMO_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
+    { cardName: CardName.ARCADIAN_COMMUNITIES, factory: ArcadianCommunities },
+    { cardName: CardName.FACTORUM, factory: Factorum },
+    { cardName: CardName.PHILARES, factory: Philares },
+    { cardName: CardName.MONS_INSURANCE, factory: MonsInsurance },
+    { cardName: CardName.RECYCLON, factory: Recyclon },
+    { cardName: CardName.SPLICE, factory: Splice }
+];
 
 export const ALL_PROJECT_CARDS: Array<IProjectCard> = [
     new AcquiredCompany(),
@@ -818,39 +822,29 @@ export class Dealer {
     private usePreludeExtension: boolean = false;
     private useVenusNextExtension: boolean = false;   
     private useColoniesNextExtension: boolean = false;
-    //private seed: number = 0;
     constructor(usePreludeExtension: boolean, useVenusNextExtension: boolean, useColoniesNextExtension : boolean, _seed?: number) {
         this.usePreludeExtension = usePreludeExtension;
         this.useVenusNextExtension = useVenusNextExtension;
         this.useColoniesNextExtension = useColoniesNextExtension;
-        /*
-        if (seed !== undefined) {
-            this.seed = seed;
-        } else {
-            this.seed = Math.random();
-        }
-        */
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS);
         if (this.usePreludeExtension) {
-            this.preludeDeck = this.shuffleCards(ALL_PRELUDE_CARDS);
+            this.preludeDeck = this.shuffleCards<IProjectCard>(ALL_PRELUDE_CARDS.map((factory) => new factory.factory()));
             this.deck.push(...ALL_PRELUDE_PROJECTS_CARDS);
-            this.deck = this.shuffleCards(this.deck);
+            this.deck = this.shuffleCards<IProjectCard>(this.deck);
         }
         if (this.useVenusNextExtension) {
             this.deck.push(...ALL_VENUS_PROJECTS_CARDS);
-            this.deck = this.shuffleCards(this.deck);
+            this.deck = this.shuffleCards<IProjectCard>(this.deck);
         }
         if (this.useColoniesNextExtension) {
             this.deck.push(...ALL_COLONIES_PROJECTS_CARDS);
-            this.deck = this.shuffleCards(this.deck);
+            this.deck = this.shuffleCards<IProjectCard>(this.deck);
         }
     }
-    public shuffleCards(cards: Array<any>): Array<any> {
-        const deck: Array<any> = [];
+    public shuffleCards<T>(cards: Array<T>): Array<T> {
+        const deck: Array<T> = [];
         const copy = cards.slice();
         while (copy.length) {
-            // not working, disable for now
-            //deck.push(copy.splice(Math.floor(this.seed * copy.length), 1)[0]);
             deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
         }
         return deck;

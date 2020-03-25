@@ -9,6 +9,7 @@ import { ALL_PRELUDE_CORPORATIONS,
          ALL_PROJECT_CARDS,
          ALL_PRELUDE_CARDS,
          ALL_PRELUDE_PROJECTS_CARDS,
+         ALL_PROMO_CORPORATIONS,
          ALL_VENUS_CORPORATIONS,
          ALL_VENUS_PROJECTS_CARDS,
          ALL_COLONIES_PROJECTS_CARDS
@@ -20,14 +21,31 @@ function getCorporationCardByName(cardName: string): ICard | undefined {
     if (cardName === (new BeginnerCorporation()).name) {
         return new BeginnerCorporation();
     }
-    return ALL_CORPORATION_CARDS.find((card) => card.name === cardName) 
-    || ALL_PRELUDE_CORPORATIONS.find((card) => card.name === cardName) 
-    || ALL_VENUS_CORPORATIONS.find((card) => card.name === cardName) ;
+    let cardFactory = ALL_CORPORATION_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_PRELUDE_CORPORATIONS.find((cardFactory) => cardFactory.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_VENUS_CORPORATIONS.find((cardFactory) => cardFactory.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_PROMO_CORPORATIONS.find((cardFactory) => cardFactory.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    return undefined;
 }
 
 export function getProjectCardByName(cardName: string): IProjectCard | undefined {
+    let cardFactory = ALL_PRELUDE_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
     return ALL_PROJECT_CARDS.find((card) => card.name === cardName) 
-    || ALL_PRELUDE_CARDS.find((card) => card.name === cardName) 
     || ALL_PRELUDE_PROJECTS_CARDS.find((card) => card.name === cardName)
     || ALL_VENUS_PROJECTS_CARDS.find((card) => card.name === cardName)
     || ALL_COLONIES_PROJECTS_CARDS.find((card) => card.name === cardName);

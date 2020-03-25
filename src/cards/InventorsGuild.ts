@@ -7,15 +7,14 @@ import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import {SelectCard} from '../inputs/SelectCard';
 import { IProjectCard } from "./IProjectCard";
 import { IActionCard } from "./ICard";
+import { CardName } from '../CardName';
 
 export class InventorsGuild implements IActionCard, IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE];
-    public name: string = "Inventors' Guild";
+    public name: CardName = CardName.INVENTORS_GUILD;
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(_player: Player, _game: Game) {
         return undefined;
     }
@@ -35,9 +34,9 @@ export class InventorsGuild implements IActionCard, IProjectCard {
             if (player.canUseHeatAsMegaCredits && player.heat > 0) {
               return new SelectHowToPay(
                 'Select how to pay and buy ' + dealtCard.name, false, false,
-                true, 3,
+                true, player.cardCost,
                 (htp) => {
-                  if (htp.heat + htp.megaCredits < 3) {
+                  if (htp.heat + htp.megaCredits < player.cardCost) {
                     game.dealer.discard(dealtCard);
                     throw new Error('Not enough spent to buy card');
                   }
@@ -49,7 +48,7 @@ export class InventorsGuild implements IActionCard, IProjectCard {
               );
             }
             player.cardsInHand.push(dealtCard);
-            player.megaCredits -= 3;
+            player.megaCredits -= player.cardCost;
             return undefined;
           }, 1, 0
         );

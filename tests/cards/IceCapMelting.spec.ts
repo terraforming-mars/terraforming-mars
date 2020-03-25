@@ -4,7 +4,6 @@ import { IceCapMelting } from "../../src/cards/IceCapMelting";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { SelectSpace } from "../../src/inputs/SelectSpace";
 
 describe("IceCapMelting", function () {
     it("Can't play", function () {
@@ -19,10 +18,6 @@ describe("IceCapMelting", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
-        if (action === undefined) return;
-        expect(action instanceof SelectSpace).to.eq(true);
-        action.cb(game.board.getAvailableSpacesForOcean(player)[0]);
-        expect(game.board.getOceansOnBoard()).to.eq(1);
+        expect(action).to.eq(undefined);
     });
 });

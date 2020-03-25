@@ -14,6 +14,11 @@ import { Phase } from "../src/Phase";
 import { maxOutOceans } from "./TestingUtils";
 import { SaturnSystems } from "../src/cards/corporation/SaturnSystems";
 import { Resources } from '../src/Resources';
+import { ISpace } from "../src/ISpace";
+import { BoardName } from '../src/BoardName';
+import { ResearchNetwork } from '../src/cards/prelude/ResearchNetwork';
+import { ArcticAlgae } from "../src/cards/ArcticAlgae";
+import { Ecologist } from '../src/milestones/Ecologist';
 
 describe("Game", function () {
     it("should initialize with right defaults", function () {
@@ -31,11 +36,8 @@ describe("Game", function () {
 
         game.addCityTile(player, SpaceName.ARSIA_MONS);
         game.addGreenery(player, SpaceName.PAVONIS_MONS);
-
-        // Add some initial VPs
-        player.victoryPoints += 64;
-        
-        // claim millestone
+   
+        // Claim milestone
         let milestone = new Mayor();
 
         game.claimedMilestones.push({
@@ -62,7 +64,7 @@ describe("Game", function () {
 
         // Add some cards with VPs
         const birdsCard = new Birds()
-        player.addResourceTo(birdsCard, 6)
+        birdsCard.resourceCount += 6;
         player.playedCards.push(birdsCard);
 
         player2.playedCards.push(new WaterImportFromEuropa())
@@ -72,12 +74,17 @@ describe("Game", function () {
         game.playerIsDoneWithGame(player2);
         game.playerIsDoneWithGame(player);
 
+        player.getVictoryPoints(game);
+        player2.getVictoryPoints(game);
+        player3.getVictoryPoints(game);
+
+        expect(player.victoryPointsBreakdown.terraformRating).to.eq(21);
         expect(player.victoryPointsBreakdown.milestones).to.eq(5);
         expect(player.victoryPointsBreakdown.awards).to.eq(2); // one 2nd place
         expect(player.victoryPointsBreakdown.greenery).to.eq(1);
         expect(player.victoryPointsBreakdown.city).to.eq(1); // greenery adjanced to city
-        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(70);
-        expect(player.victoryPointsBreakdown.total).to.eq(100);
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(6);
+        expect(player.victoryPointsBreakdown.total).to.eq(36);
 
         expect(player2.victoryPointsBreakdown.awards).to.eq(10); // 1st place + one shared 1st place
         expect(player3.victoryPointsBreakdown.awards).to.eq(5); // one shared 1st place
@@ -125,7 +132,9 @@ describe("Game", function () {
         game.venusNextExtension = false;
         game.generation = 4;
         game.playerHasPassed(player);
+        game.playerIsFinishedTakingActions();
         game.playerHasPassed(player2);
+        game.playerIsFinishedTakingActions();
         expect(game.getGeneration()).to.eq(5);
     });    
 
@@ -136,7 +145,9 @@ describe("Game", function () {
         game.venusNextExtension = false;
         game.generation = 2;
         game.playerHasPassed(player);
+        game.playerIsFinishedTakingActions();
         game.playerHasPassed(player2);
+        game.playerIsFinishedTakingActions();
         expect(game.getGeneration()).to.eq(3);
     });
  
@@ -145,16 +156,14 @@ describe("Game", function () {
         const game = new Game("draft_game", [player], player, false, false);
         game.venusNextExtension = false;
         game.playerHasPassed(player);
+        game.playerIsFinishedTakingActions();
         expect(game.getGeneration()).to.eq(2);
     });    
 
     it("Should finish solo game in the end of last generation", function() {
         const player = new Player("temp_test", Color.BLUE, false);
         const game = new Game("solo1", [player], player);
-        game.generation = 14;
-
-        // Pass last turn
-        game.playerHasPassed(player);
+        game.playerIsDoneWithGame(player);
 
         // Now game should be in finished state
         expect(game.phase).to.eq(Phase.END);
@@ -217,4 +226,29 @@ describe("Game", function () {
         player1.corporationCard = card;
         expect(game.getCardPlayer(card.name)).to.eq(player1);
     });
+
+    it("Does not assign player to ocean after placement", function() {
+        const player1 = new Player("oc_p1", Color.BLUE, false);
+        const game = new Game("oceanz", [player1], player1);
+        const spaceId: string = game.board.getAvailableSpacesForOcean(player1)[0].id;
+        game.addOceanTile(player1, spaceId);
+
+        const space: ISpace = game.getSpace(spaceId);
+        expect(space.player).to.eq(undefined);
+    });
+
+    it("Check Ecologist Milestone", function() {
+        const player = new Player("temp_test", Color.BLUE, false);
+        const player2 = new Player("temp_test2", Color.RED, false);
+        const game = new Game("classic_game", [player,player2], player, false, false, false, false, false, false, undefined, BoardName.ELYSIUM);
+
+        const card1 = new ResearchNetwork();
+        const card2 = new ArcticAlgae();
+        const ecologist = new Ecologist();
+
+        player.playedCards.push(card1, card2);
+        expect(ecologist.canClaim(player, game)).to.eq(false);
+        player.playedCards.push(card1, card2);
+        expect(ecologist.canClaim(player, game)).to.eq(true);
+    });    
 });

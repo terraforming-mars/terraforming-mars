@@ -5,15 +5,14 @@ import {Player} from '../Player';
 import {IActionCard} from './ICard';
 import {IProjectCard} from './IProjectCard';
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class EquatorialMagnetizer implements IActionCard, IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = 'Equatorial Magnetizer';
+    public name: CardName = CardName.EQUATORIAL_MAGNETIZER;
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-      return true;
-    }
+
     public play() {
       return undefined;
     }

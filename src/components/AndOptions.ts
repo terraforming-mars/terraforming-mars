@@ -4,17 +4,37 @@ import { PlayerInputFactory } from "./PlayerInputFactory";
 import { PlayerInputModel } from "../models/PlayerInputModel";
 
 export const AndOptions = Vue.component("and-options", {
-    props: ["player", "players", "playerinput", "onsave", "showtitle"],
+    props: ["player", "players", "playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
+            childComponents: [],
             responded: {} as {[x: string]: Array<string>}
         };
+    },
+    methods: {
+        saveData: function () {
+            for (var i = 0; i < this.$data.childComponents.length; i++) {
+                const componentInstance = this.$data.childComponents[i].componentInstance;
+                if (componentInstance !== undefined) {
+                    if ((componentInstance as any).saveData instanceof Function) {
+                        (componentInstance as any).saveData();
+                    }
+                }
+            }
+            const res: Array<Array<string>> = [];
+            for (let i = 0; i < this.playerinput.options.length; i++) {
+                res.push(this.responded["" + i]);
+            }
+            console.log(res);
+            this.onsave(res);
+        }
     },
     render: function(createElement) {
         const playerInput: PlayerInputModel = this.playerinput as PlayerInputModel;
         const children: Array<VNode> = [];
+        this.$data.childComponents = [];
         if (this.showtitle) {
-            children.push(createElement("div", playerInput.title));
+            children.push(createElement("div", {"class": "wf-title"}, playerInput.title));
         }
         if (playerInput.options !== undefined) {
             const options = playerInput.options;
@@ -22,18 +42,25 @@ export const AndOptions = Vue.component("and-options", {
                 if (this.responded[idx] === undefined) {
                     children.push(new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, option, (out: Array<Array<string>>) => {
                         this.responded[idx] = out[0];
-                        if (Object.keys(this.responded).length === options.length) {
-                            let res: Array<Array<string>> = [];
-                            for (let i = 0; i < options.length; i++) {
-                                res.push(this.responded["" + i]);
-                            }
-                            this.onsave(res);
-                        }
-                    }, true));
+                    }, false, true));
+                    this.$data.childComponents.push(children[children.length - 1]);
                 }
             });
         }
-        return createElement("div", children);
+        if (this.showsave) {
+            const saveBtn = createElement(
+                "button", 
+                {
+                    domProps: { className: "btn btn-primary" }, 
+                    on: { click: () => { this.saveData(); } } 
+                }, 
+                "Save"
+            );
+            children.push(
+                createElement("div", {"class": "wf-action"}, [saveBtn])
+            );
+        }
+        return createElement("div", {"class": "wf-options"}, children);
     }
 });
 

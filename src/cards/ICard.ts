@@ -14,22 +14,30 @@ import { SelectSpace } from "../inputs/SelectSpace";
 import { StandardProjectType } from "../StandardProjectType";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from '../inputs/SelectOption';
+import { ResourceType } from '../ResourceType';
 
 export interface IActionCard {
-    action: (player: Player, game: Game) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
+    action: (player: Player, game: Game) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
     canAct: (player: Player, game: Game) => boolean;
+}
+
+export interface IResourceCard {
+    resourceType: ResourceType;
+    resourceCount: number;
 }
 
 export interface ICard {
     name: string;
     tags: Array<Tags>;
     play: (player: Player, game: Game) => PlayerInput | undefined;
-    action?: (player: Player, game: Game) =>  OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
+    action?: (player: Player, game: Game) =>  OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
     canAct?: (player: Player, game: Game) => boolean;
     getCardDiscount?: (player: Player, game: Game, card: IProjectCard) => number;
     getRequirementBonus?: (player: Player, game: Game, venusOnly?: boolean) => number;
     getVictoryPoints?: (player: Player, game: Game) => number;
     onCardPlayed?: (player: Player, game: Game, card: IProjectCard) => OrOptions | void;
     onStandardProject?: (player: Player, projectType: StandardProjectType) => void;
-    onTilePlaced?: (player: Player, space: ISpace, game?: Game) => void;
+    onTilePlaced?: (player: Player, space: ISpace, game: Game) => void;
+    resourceType?: ResourceType;
+    resourceCount?: number;
 }

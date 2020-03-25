@@ -5,15 +5,14 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class NitrogenRichAsteroid implements IProjectCard {
     public cost: number = 31;
     public tags: Array<Tags> = [Tags.SPACE];
-    public name: string = "Nitrogen-Rich Asteroid";
+    public name: CardName = CardName.NITROGEN_RICH_ASTEROID;
     public cardType: CardType = CardType.EVENT;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(player: Player, game: Game) {
         player.terraformRating += 2;
         if (player.getTagCount(Tags.PLANT) < 3) {

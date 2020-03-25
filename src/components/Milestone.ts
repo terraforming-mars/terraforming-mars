@@ -3,27 +3,25 @@
   */
 
 import Vue from "vue";
-import { ORIGINAL_MILESTONES } from "../milestones/Milestones";
 
 export const Milestone = Vue.component("milestone", {
-    data: function () {
-        return {
-            displayed: false,
-            "milestones_list": ORIGINAL_MILESTONES
-        };
-    },
+    props: ["milestones_list"],
     methods: {
-        toggleDisplayed: function () {
-            this.displayed = !this.displayed;
+        toggleMe: function () {
+            let currentState: boolean = this.isVisible();
+            (this.$root as any).setVisibilityState("millestones_list", ! currentState);
+        },
+        isVisible: function () {
+            return (this.$root as any).getVisibilityState("millestones_list");
         }
     },
     template: `
     <div class="milestones_cont">
         <div class="milestones">
-            <span v-on:click="toggleDisplayed()">Milestones List</span>
-            <ul v-if="displayed === true">
+            <a href="#" v-on:click.prevent="toggleMe()" v-i18n>Milestones List</a>
+            <ul v-show="isVisible()">
                 <li v-for="milestone in milestones_list">
-                    {{milestone.name}}: {{milestone.description}}
+                    <strong v-i18n>{{milestone.name}}</strong> — <span v-i18n>{{milestone.description}}</span>
                 </li>
             </ul>
         </div>

@@ -11,7 +11,7 @@ describe("CorroderSuits", function () {
         const card = new CorroderSuits();
         const card2 = new AerialMappers();
         const player = new Player("test", Color.BLUE, false);
-        expect(card.canPlay()).to.eq(true);
+
         player.playedCards.push(card2);
         const action = card.play(player);
         expect(action instanceof SelectCard).to.eq(true);

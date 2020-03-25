@@ -8,15 +8,14 @@ import { Tags } from "./Tags";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class ProtectedValley implements IProjectCard {
     public cost: number = 23;
     public cardType: CardType = CardType.AUTOMATED;
     public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];
-    public name: string = "Protected Valley";
-    public canPlay(): boolean {
-        return true;
-    }
+    public name: CardName = CardName.PROTECTED_VALLEY;
+
     public play(player: Player, game: Game) {
         return new SelectSpace(
             "Select space reserved for ocean to place greenery tile", 

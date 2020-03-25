@@ -1,5 +1,5 @@
 
-import { IActionCard } from "./ICard";
+import { IActionCard, IResourceCard } from './ICard';
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -8,16 +8,16 @@ import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
 import { ResourceType } from "../ResourceType";
 import { SelectOption } from "../inputs/SelectOption";
+import { CardName } from '../CardName';
 
-export class RegolithEaters implements IActionCard, IProjectCard {
+export class RegolithEaters implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.MICROBES];
-    public name: string = "Regolith Eaters";
+    public name: CardName = CardName.REGOLITH_EATERS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.MICROBE;
-    public canPlay(): boolean {
-        return true;
-    }
+    public resourceCount: number = 0;
+
     public play(_player: Player, _game: Game) {
         return undefined;
     }
@@ -25,13 +25,13 @@ export class RegolithEaters implements IActionCard, IProjectCard {
         return true;
     }
     public action(player: Player, game: Game) {
-        if (player.getResourcesOnCard(this) < 2) {
-            player.addResourceTo(this);
+        if (this.resourceCount < 2) {
+            this.resourceCount++;
             return undefined;
         }
         return new OrOptions(
             new SelectOption("Add 1 microbe to this card", () => {
-                player.addResourceTo(this);
+                this.resourceCount++;
                 return undefined;
             }),
             new SelectOption("Remove 2 microbes to raise oxygen level 1 step", () => {

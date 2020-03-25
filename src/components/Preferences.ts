@@ -1,24 +1,7 @@
 
 import Vue from "vue";
+import { PreferencesManager } from "./PreferencesManger";
 
-
-class PreferencesManager {
-    static keys: Array<string> = ["hide_corporation", "hide_hand", "hide_cards", "hide_awards_and_milestones", "hide_turnorder", "small_cards"];
-    static preferencesValues: Map<string, boolean> = new Map<string, boolean>();
-    static localStorageSupported: boolean = typeof window['localStorage'] != "undefined" && window['localStorage'] != null;
-
-    static saveValue(name: string, val: string): void {
-        if ( ! PreferencesManager.localStorageSupported) return;
-        localStorage.setItem(name, val);
-    }
-
-    static loadValue(name: string): string {
-        if ( ! PreferencesManager.localStorageSupported) return "";
-        const value = localStorage.getItem(name);
-        if (value === null) return "";
-        return value
-    }
-}
 
 export const Preferences = Vue.component("preferences", {
     data: function () {
@@ -31,7 +14,8 @@ export const Preferences = Vue.component("preferences", {
             "hide_cards": false,
             "hide_awards_and_milestones": false,
             "hide_turnorder": false,
-            "small_cards": false
+            "small_cards": false,
+            "lang": "en"
         };
     },
     methods: {
@@ -44,24 +28,33 @@ export const Preferences = Vue.component("preferences", {
                 target.classList.remove("preferences_" + cssClassSuffix);
             }
         },
-        updatePreferencesFromCookies: function (): Map<string, boolean>  {
+        updatePreferencesFromStorage: function (): Map<string, boolean | string>  {
             for (let k of PreferencesManager.keys) {
                 let val = PreferencesManager.loadValue(k);
-                let boolVal = (val !== "") ? val === "1" : this.$data[k];
-                PreferencesManager.preferencesValues.set(k, val === "1");
-                this.$data[k] = boolVal;
+                if (k === "lang") {
+                    PreferencesManager.preferencesValues.set(k, this.$data[k]);
+                    this[k] = val || "en";
+                    PreferencesManager.preferencesValues.set(k, val || "en");
+                } else {
+                    let boolVal = (val !== "") ? val === "1" : this.$data[k];
+                    PreferencesManager.preferencesValues.set(k, val === "1");
+                    this.$data[k] = boolVal;
+                }
             }
             return PreferencesManager.preferencesValues;
         },
-        updatePreferences: function (_evt: any, initial: boolean = false):void {
+        updatePreferences: function (_evt: any):void {
+            var strVal: string = "";
             for (let k of PreferencesManager.keys) {
                 let val = PreferencesManager.preferencesValues.get(k);
-                if (val !== this.$data[k] || initial) {
-                    if ( ! initial) {
-                        let strVal = this.$data[k] ? "1": "0";
-                        PreferencesManager.saveValue(k, strVal);
-                        PreferencesManager.preferencesValues.set(k, this.$data[k]);
+                if (val !== this.$data[k]) {
+                    if (k === "lang") {
+                        strVal = this.$data[k];
+                    } else {
+                        strVal = this.$data[k] ? "1": "0";
                     }
+                    PreferencesManager.saveValue(k, strVal);
+                    PreferencesManager.preferencesValues.set(k, this.$data[k]);
                     this.setPreferencesCSS(this.$data[k], k);
                 }
             }
@@ -75,7 +68,7 @@ export const Preferences = Vue.component("preferences", {
 
     },
     mounted: function () {
-        this.updatePreferencesFromCookies();
+        this.updatePreferencesFromStorage();
     },
     template: `
         <div class="preferences_cont" :data="syncPreferences()">
@@ -99,43 +92,50 @@ export const Preferences = Vue.component("preferences", {
                 <i class="preferences_icon preferences_icon--settings" v-on:click="ui.preferences_panel_open = !ui.preferences_panel_open"></i>
                 <div class="preferences_panel" v-if="ui.preferences_panel_open">
                     <div class="preferences_panel_item">
-                        <label>
-                            <input type="checkbox" v-on:change="updatePreferences" v-model="hide_corporation" />
-                            <span>Hide corporation card</span>
-                        </label>
-                    </div>
-                    <div class="preferences_panel_item">
-                        <label>
+                        <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_turnorder" />
-                            <span>Hide turn order</span>
+                            <i class="form-icon"></i> Hide turn order
                         </label>
                     </div>
                     <div class="preferences_panel_item">
-                        <label>
+                        <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_hand" />
-                            <span>Hide cards in hand</span>
+                            <i class="form-icon"></i> Hide cards in hand
                         </label>
                     </div>
                     <div class="preferences_panel_item">
-                        <label>
+                        <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_cards" />
-                            <span>Hide played cards</span>
+                            <i class="form-icon"></i> Hide played cards
                         </label>
                     </div>
                     <div class="preferences_panel_item">
-                        <label>
+                        <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_awards_and_milestones" />
-                            <span>Hide awards and milestones</span>
+                            <i class="form-icon"></i> Hide awards and milestones
                         </label>
                     </div>
                     <div class="preferences_panel_item">
-                        <label>
+                        <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="small_cards" />
-                            <span>Smaller cards</span>
+                            <i class="form-icon"></i> Smaller cards
                         </label>
+                    </div>
+                    <div class="preferences_panel_item form-group">
+                        <label class="form-label">Language (<a href="javascript:document.location.reload(true);">refresh page</a> to see changes)</label>
+                        <div class="preferences_panel_langs">
+                            <label class="form-radio">
+                                <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" value="en" />
+                                <i class="form-icon"></i> English
+                            </label>
+                            <label class="form-radio">
+                                <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" value="ru" />
+                                <i class="form-icon"></i> Russian
+                            </label>
+                        </div>
                     </div>
                     <div class="preferences_panel_actions">
-                        <button class="nes-btn is-primary" v-on:click="ui.preferences_panel_open=false">Ok</button>
+                        <button class="btn btn-lg btn-primary" v-on:click="ui.preferences_panel_open=false">Ok</button>
                     </div>
                 </div>
             </div>

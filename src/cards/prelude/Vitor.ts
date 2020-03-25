@@ -4,13 +4,13 @@ import { Player } from "../../Player";
 import { CorporationCard } from "./../corporation/CorporationCard";
 import { IProjectCard } from "../IProjectCard";
 import { Game } from "../../Game";
-import { ORIGINAL_AWARDS } from "../../awards/Awards";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 import { IAward } from "../../awards/IAward";
+import { CardName } from '../../CardName';
 
 export class Vitor implements CorporationCard {
-    public name: string = "Vitor";
+    public name: CardName = CardName.VITOR;
     public tags: Array<Tags> = [Tags.EARTH];
     public startingMegaCredits: number = 48; // It's 45 + 3 when this corp is played
 
@@ -28,12 +28,12 @@ export class Vitor implements CorporationCard {
         }
         const freeAward = new OrOptions();
         freeAward.title = "Select award to fund";
-        freeAward.options = ORIGINAL_AWARDS.map((award) => this.selectAwardToFund(player, game, award));
+        freeAward.options = game.awards.map((award) => this.selectAwardToFund(player, game, award));
         return freeAward;
     }
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
-        if (card.getVictoryPoints !== undefined && card.getVictoryPoints(player, game) >= 0 ) {
+        if (player.corporationCard !== undefined && player.corporationCard.name === this.name && card.getVictoryPoints !== undefined && card.getVictoryPoints(player, game) >= 0 ) {
             player.megaCredits += 3;
         }
     }

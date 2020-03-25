@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { InventorsGuild } from "../../src/cards/InventorsGuild";
 import { Color } from "../../src/Color";

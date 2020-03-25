@@ -1,17 +1,25 @@
 import { CardModel } from "./CardModel";
+import { ColonyModel } from "./ColonyModel";
 import { Color } from "../Color";
 import { VictoryPointsBreakdown } from "../VictoryPointsBreakdown";
+import { ITagCount } from '../ITagCount';
 
 export interface PlayerModel {
+    boardName: string;
     corporationCard: string;
+    corporationCardResources: number;
     playedCards: Array<CardModel>;
     cardsInHandNbr: number;
+    colonies: Array<ColonyModel>;
     color: Color;
     energy: number;
     energyProduction: number;
+    gameAge: number;
     heat: number;
     heatProduction: number;
     id: string;
+    isActive: boolean;
+    isSoloModeWin: boolean;
     megaCredits: number;
     megaCreditProduction: number;
     name: string;
@@ -24,11 +32,10 @@ export interface PlayerModel {
     titanium: number;
     titaniumProduction: number;
     titaniumValue: number;
-    victoryPoints: number;
-    victoryPointsBreakdown: VictoryPointsBreakdown;
-    isSoloModeWin: boolean;
-    gameAge: number;
-    isActive: boolean;
     venusNextExtension: boolean;
     venusScaleLevel: number;
+    victoryPointsBreakdown: VictoryPointsBreakdown;
+    tags: Array<ITagCount>;
+    showOtherPlayersVP: boolean;
+    actionsThisGeneration: Array<string>;
 }

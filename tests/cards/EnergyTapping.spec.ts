@@ -46,8 +46,8 @@ describe("EnergyTapping", function () {
         expect(action).to.eq(undefined);
         
         expect(player.getProduction(Resources.ENERGY)).to.eq(2);
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(-1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
     });
 
     it("Asks for target player to reduce Energy production", function () {
@@ -70,8 +70,8 @@ describe("EnergyTapping", function () {
         expect(player.getProduction(Resources.ENERGY)).to.eq(2); // increased
         expect(player2.getProduction(Resources.ENERGY)).to.eq(3); // not changed
         expect(player3.getProduction(Resources.ENERGY)).to.eq(4); // reduced
-        player.victoryPoints += card.getVictoryPoints();
-        expect(player.victoryPoints).to.eq(-1);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
     });
     it("Playable in solo mode", function () {
         const card = new EnergyTapping();
@@ -82,8 +82,8 @@ describe("EnergyTapping", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         
-        player.victoryPoints += card.getVictoryPoints();
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);
-        expect(player.victoryPoints).to.eq(-1);
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
     });
 });

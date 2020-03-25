@@ -4,15 +4,14 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class IoMiningIndustries implements IProjectCard {
     public cost: number = 41;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: string = "Io Mining Industries";
+    public name: CardName = CardName.IO_MINING_INDUSTRIES;
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public getVictoryPoints(player: Player) {
         return player.getTagCount(Tags.JOVIAN);
     }

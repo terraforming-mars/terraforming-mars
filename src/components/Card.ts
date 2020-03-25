@@ -10,12 +10,11 @@ import { ALL_PRELUDE_CORPORATIONS,
          ALL_PRELUDE_CARDS,
          ALL_PRELUDE_PROJECTS_CARDS,
          ALL_VENUS_CORPORATIONS,
-         ALL_VENUS_PROJECTS_CARDS
+         ALL_VENUS_PROJECTS_CARDS,
+         ALL_COLONIES_PROJECTS_CARDS
          } from "../Dealer";
-import { CardType } from "../cards/CardType";
-import { Tags } from "../cards/Tags";
-import { ResourceType } from "../ResourceType";
 import { HTML_DATA } from "../HTML_data";
+
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
     if (cardName === (new BeginnerCorporation()).name) {
@@ -30,10 +29,11 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
     return ALL_PROJECT_CARDS.find((card) => card.name === cardName) 
     || ALL_PRELUDE_CARDS.find((card) => card.name === cardName) 
     || ALL_PRELUDE_PROJECTS_CARDS.find((card) => card.name === cardName)
-    || ALL_VENUS_PROJECTS_CARDS.find((card) => card.name === cardName);
+    || ALL_VENUS_PROJECTS_CARDS.find((card) => card.name === cardName)
+    || ALL_COLONIES_PROJECTS_CARDS.find((card) => card.name === cardName);
 }
 
-function getData(cardName: string, resources: string): string | undefined {
+function getData(cardName: string, resources: string, wasPlayed: boolean): string | undefined {
     let htmlData : string | undefined = '';
     htmlData = HTML_DATA.get(cardName);
     if (htmlData !== undefined && (resources === undefined || resources === '0')) {
@@ -48,64 +48,25 @@ function getData(cardName: string, resources: string): string | undefined {
               '<div class="card_resources_counter">RES:<span class="card_resources_counter--number">' + resources + '</span></div>');
         }
     }
+    if (htmlData !== undefined && wasPlayed) {
+      htmlData = '<div class="cards-action-was-used">'+htmlData+'</div>';
+    }
     return htmlData;
 }
 
 export const Card = Vue.component("card", {
     props: [
         "card",
-        "resources"
+        "resources",
+        "player"
     ],
     methods: {
         getData: function() {
-            return getData(this.card, this.resources);
+            const wasPlayed = (this.player !== undefined && this.player.actionsThisGeneration !== undefined && this.player.actionsThisGeneration.indexOf(this.card) !== -1) ? true : false;
+            return getData(this.card, this.resources, wasPlayed);
         },
         getCard: function () {
             return getProjectCardByName(this.card) || getCorporationCardByName(this.card);
-        },
-        getResourceType: function () {
-            return ResourceType;
-        },
-        getEventColor: function (cardType: CardType) {
-            if (cardType === CardType.EVENT) {
-                return "red";
-            } else if (cardType === CardType.ACTIVE) {
-                return "blue";
-            } else if (cardType === CardType.AUTOMATED) {
-                return "green";
-            } else {
-                return "black";
-            }
-        },
-        isAnimalTag: function (tag: Tags) {
-            return tag === Tags.ANIMAL;
-        },
-        isBuildingTag: function (tag: Tags) {
-            return tag === Tags.STEEL;
-        },
-        isCityTag: function (tag: Tags) {
-            return tag === Tags.CITY;
-        },
-        isEarthTag: function (tag: Tags) {
-            return tag === Tags.EARTH;
-        },
-        isEnergyTag: function (tag: Tags) {
-            return tag === Tags.ENERGY;
-        },
-        isJovianTag: function (tag: Tags) {
-            return tag === Tags.JOVIAN;
-        },
-        isMicrobesTag: function (tag: Tags) {
-            return tag === Tags.MICROBES;
-        },
-        isPlantTag: function (tag: Tags) {
-            return tag === Tags.PLANT;
-        },
-        isScienceTag: function (tag: Tags) {
-            return tag === Tags.SCIENCE;
-        },
-        isSpaceTag: function (tag: Tags) {
-            return tag === Tags.SPACE;
         }
     },
     template: `

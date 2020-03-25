@@ -8,12 +8,14 @@ import {TileType} from '../TileType';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class CommercialDistrict implements IProjectCard {
     public cost: number = 16;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = 'Commercial District';
+    public name: CardName = CardName.COMMERCIAL_DISTRICT;
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
     public canPlay(player: Player): boolean {
       return player.getProduction(Resources.ENERGY) >= 1;
     }
@@ -33,7 +35,7 @@ export class CommercialDistrict implements IProjectCard {
           game.board.getAvailableSpacesOnLand(player),
           (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, {
-              tileType: TileType.SPECIAL,
+              tileType: TileType.COMMERCIAL_DISTRICT,
               card: this.name
             });
             player.setProduction(Resources.ENERGY,-1);

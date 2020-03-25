@@ -4,7 +4,6 @@ import { Fish } from "../../src/cards/Fish";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { SelectPlayer } from "../../src/inputs/SelectPlayer";
 import { Resources } from '../../src/Resources';
 
 describe("Fish", function () {
@@ -16,9 +15,8 @@ describe("Fish", function () {
     });
     it("Should act", function () {
         const card = new Fish();
-        const player = new Player("test", Color.BLUE, false);
-        card.action(player);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        card.action();
+        expect(card.resourceCount).to.eq(1);
     });
     it("Should play", function () {
         const card = new Fish();
@@ -35,17 +33,9 @@ describe("Fish", function () {
 
         expect(card.canPlay(player, game)).to.eq(true);
 
-        const action = card.play(player, game);
-        expect(action instanceof SelectPlayer).to.eq(true);
-        if (action === undefined) return;
-
-        action.cb(player3);
-
-        expect(player3.getProduction(Resources.PLANTS)).to.eq(6); // reduced one step
-        expect(player2.getProduction(Resources.PLANTS)).to.eq(2); // no side effects on other than target players
-        expect(player.getProduction(Resources.PLANTS)).to.eq(0); // no negative values etc.
+        card.play(player, game);
 
         player.addResourceTo(card, 5);
-        expect(card.getVictoryPoints(player)).to.eq(player.getResourcesOnCard(card));
+        expect(card.getVictoryPoints()).to.eq(card.resourceCount);
     });
 });

@@ -9,15 +9,13 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
+import { CardName } from '../CardName';
 
 export class Flooding implements IProjectCard {
   public cardType: CardType = CardType.EVENT;
   public cost: number = 7;
-  public name: string = 'Flooding';
+  public name: CardName = CardName.FLOODING;
   public tags: Array<Tags> = [];
-  public canPlay(): boolean {
-    return true;
-  }
   public play(player: Player, game: Game) {
     return new SelectSpace(
         'Select space for ocean tile',
@@ -26,7 +24,7 @@ export class Flooding implements IProjectCard {
           const adjacentPlayers: Array<Player> = [];
           game.addOceanTile(player, space.id);
           game.board.getAdjacentSpaces(space).forEach((space) => {
-            if (space.player) {
+            if (space.player && space.player != player) {
               adjacentPlayers.push(space.player);
             }
           });

@@ -4,15 +4,13 @@ import { PowerSupplyConsortium } from "../../src/cards/PowerSupplyConsortium";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { SelectPlayer } from "../../src/inputs/SelectPlayer";
 import { Resources } from '../../src/Resources';
 
 describe("PowerSupplyConsortium", function () {
     it("Can't play", function () {
         const card = new PowerSupplyConsortium();
         const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test2", Color.RED, false);
-        const game = new Game("foobar", [player, player2], player);
+        const game = new Game("foobar2", [player], player);
         expect(card.canPlay(player, game)).to.eq(false);
     });
 
@@ -29,14 +27,8 @@ describe("PowerSupplyConsortium", function () {
 
         expect(card.canPlay(player, game)).to.eq(true);
 
-        const action = card.play(player, game);
-        expect(action instanceof SelectPlayer).to.eq(true);
-        if (action === undefined) return;
-
-        expect(action.cb(player3)).to.eq(undefined);
+        card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1); // incremented
-        expect(player3.getProduction(Resources.ENERGY)).to.eq(6); // reduced
-        expect(player2.getProduction(Resources.ENERGY)).to.eq(3); // unchanged
     });
 
     it("Should be playable in solo mode", function () {

@@ -4,12 +4,14 @@ import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { SelectCard } from '../../inputs/SelectCard';
+import { CardName } from '../../CardName';
 
 export class SponsoredAcademies implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.EARTH, Tags.SCIENCE];
-    public name: string = "Sponsored Academies";
+    public name: CardName = CardName.SPONSORED_ACADEMIES;
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.cardsInHand.length > 1; //this card and at least another
     }
@@ -23,7 +25,7 @@ export class SponsoredAcademies implements IProjectCard {
     public play(player: Player, game: Game) {
         return new  SelectCard(
             'Select 1 card to discard',
-            player.cardsInHand,
+            player.cardsInHand.filter((c) => c.name !== this.name),
             (foundCards: Array<IProjectCard>) => {
               player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
               game.dealer.discard(foundCards[0]);

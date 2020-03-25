@@ -16,7 +16,7 @@ describe("MiningRights", function () {
         const game = new Game("foobar", [player,player], player);
         for (let land of game.board.getAvailableSpacesOnLand(player)) {
             if (land.bonus.indexOf(SpaceBonus.STEEL) !== -1 || land.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
-                game.addTile(player, land.spaceType, land, { tileType: TileType.SPECIAL });
+                game.addTile(player, land.spaceType, land, { tileType: TileType.MINING_RIGHTS });
             }
         }
         expect(card.canPlay(player, game)).to.eq(false);
@@ -32,13 +32,13 @@ describe("MiningRights", function () {
         expect(titaniumSpace).not.to.eq(undefined);
         action.cb(titaniumSpace!);
         expect(titaniumSpace!.player).to.eq(player);
-        expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.SPECIAL);
+        expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.MINING_RIGHTS);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1); 
         const steelSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) === -1 && space.bonus.indexOf(SpaceBonus.STEEL) !== -1);
         expect(steelSpace).not.to.eq(undefined);
         action.cb(steelSpace!);
         expect(steelSpace!.player).to.eq(player);
-        expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(TileType.SPECIAL);
+        expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(TileType.MINING_RIGHTS);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1); 
     });
 });

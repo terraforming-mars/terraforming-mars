@@ -1,5 +1,5 @@
 import { IProjectCard } from "../IProjectCard";
-import {IActionCard} from '../ICard';
+import { IActionCard, ICard, IResourceCard } from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -9,13 +9,15 @@ import { SelectOption } from '../../inputs/SelectOption';
 import { Game } from '../../Game';
 import { MAX_VENUS_SCALE } from '../../constants';
 import { SelectCard } from '../../inputs/SelectCard';
+import { CardName } from '../../CardName';
 
-export class Thermophiles implements IActionCard,IProjectCard {
+export class Thermophiles implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.VENUS, Tags.MICROBES];
-    public name: string = "Thermophiles";
+    public name: CardName = CardName.THERMOPHILES;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.MICROBE;
+    public resourceCount: number = 0;
     public canPlay(player: Player, game: Game): boolean {
         return game.getVenusScaleLevel() >= 6 - (2 * player.getRequirementsBonus(game, true));
     }
@@ -26,12 +28,12 @@ export class Thermophiles implements IActionCard,IProjectCard {
         return true;
     }   
     public action(player: Player, game: Game) {
-        const microbeCards = player.getResourceCards(ResourceType.MICROBE);
-        var opts: Array<SelectOption | SelectCard<IProjectCard>> = [];
+        const microbeCards = player.getResourceCards(ResourceType.MICROBE).filter(card => card.tags.indexOf(Tags.VENUS) !== -1);
+        var opts: Array<SelectOption | SelectCard<ICard>> = [];
         const addResource = new SelectCard(
-            'Select card to add 1 microbe',
+            'Select a Venus card to add 1 microbe',
             microbeCards,
-            (foundCards: Array<IProjectCard>) => {
+            (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 1);
               return undefined;
             }
@@ -45,7 +47,7 @@ export class Thermophiles implements IActionCard,IProjectCard {
 
         opts.push(addResource);
 
-        if (player.getResourcesOnCard(this) > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
+        if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
             opts.push(spendResource);
         } else return addResource;
 

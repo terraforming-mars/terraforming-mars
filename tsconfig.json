@@ -19,14 +19,20 @@
   "include": [
     "src/*.ts",
     "src/components/*.ts",
+    "src/directives/*.ts",
     "src/cards/*.ts",
     "src/cards/corporation/*.ts",
     "src/cards/prelude/*.ts",
     "src/cards/venusNext/*.ts",    
+    "src/cards/turmoil/*.ts",  
+    "src/cards/promo/*.ts",  
+    "src/cards/colonies/*.ts",           
     "src/inputs/*.ts",
     "src/models/*.ts",
+    "src/colonies/*.ts",
     "script.ts",
-    "server.ts"
+    "server.ts",
+    "src/interrupts/*.ts"
   ],
   "files": [
     "script.ts",

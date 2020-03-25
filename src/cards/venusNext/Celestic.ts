@@ -4,22 +4,16 @@ import { Player } from "../../Player";
 import { Tags } from "../Tags";
 import { ResourceType } from '../../ResourceType';
 import { Game } from '../../Game';
-import { IActionCard } from '../ICard';
+import { IActionCard, ICard, IResourceCard } from '../ICard';
 import { SelectCard } from '../../inputs/SelectCard';
-import { IProjectCard } from '../IProjectCard';
-import { CardType } from '../CardType';
+import { CardName } from '../../CardName';
 
-export class Celestic implements IActionCard, CorporationCard {
-    public name: string = "Celestic";
+export class Celestic implements IActionCard, CorporationCard, IResourceCard {
+    public name: CardName = CardName.CELESTIC;
     public tags: Array<Tags> = [Tags.VENUS];
     public startingMegaCredits: number = 42;
     public resourceType: ResourceType = ResourceType.FLOATER;
-
-    // Hack to mimic project card
-    public cost: number = 0;
-    public canPlay() {return true;}
-    public cardType: CardType = CardType.ACTIVE;
-    // End of hack
+    public resourceCount: number = 0;
 
     public initialAction(player: Player, game: Game) {
         for (let foundCard of game.drawCardsByResource(ResourceType.FLOATER, 2)) {
@@ -36,21 +30,21 @@ export class Celestic implements IActionCard, CorporationCard {
         return true; 
     }
 
-    public getVictoryPoints(player: Player): number {
-        return Math.floor(player.getResourcesOnCard(this) / 3);
+    public getVictoryPoints(): number {
+        return Math.floor(this.resourceCount / 3);
     }
 
     public action(player: Player) {
         const floaterCards = player.getResourceCards(ResourceType.FLOATER);
         if (floaterCards.length === 1) {
-            player.addResourceTo(this);
+            this.resourceCount++;
             return undefined;
         }
 
         return new SelectCard(
             'Select card to add 1 floater',
             floaterCards,
-            (foundCards: Array<IProjectCard>) => {
+            (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 1);
             return undefined;
             }

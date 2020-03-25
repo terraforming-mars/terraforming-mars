@@ -6,11 +6,12 @@ import { Player } from "../../Player";
 import { Game } from '../../Game';
 import { Resources } from "../../Resources";
 import { MAX_VENUS_SCALE } from '../../constants';
+import { CardName } from '../../CardName';
 
 export class VenusMagnetizer implements IActionCard,IProjectCard {
     public cost: number = 7;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = "Venus Magnetizer";
+    public name: CardName = CardName.VENUS_MAGNETIZER;
     public cardType: CardType = CardType.ACTIVE;
     public canPlay(player: Player, game: Game): boolean {
         return game.getVenusScaleLevel() >= 10 - (2 * player.getRequirementsBonus(game, true));

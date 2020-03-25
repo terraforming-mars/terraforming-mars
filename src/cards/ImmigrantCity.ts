@@ -8,12 +8,14 @@ import { ISpace } from "../ISpace";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { TileType } from "../TileType";
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class ImmigrantCity implements IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public cardType: CardType = CardType.ACTIVE;
-    public name: string = "Immigrant City";
+    public name: CardName = CardName.IMMIGRANT_CITY;
+    public hasRequirements = false;
     public canPlay(player: Player,game: Game): boolean {
         return player.getProduction(Resources.ENERGY) >= 1 && player.getProduction(Resources.MEGACREDITS) >= -3 && game.board.getAvailableSpacesForCity(player).length >= 0;
     }
@@ -26,7 +28,7 @@ export class ImmigrantCity implements IProjectCard {
         return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
             player.setProduction(Resources.ENERGY,-1);
-            player.setProduction(Resources.MEGACREDITS);
+            player.setProduction(Resources.MEGACREDITS, -2);
             return undefined;
         });
     }

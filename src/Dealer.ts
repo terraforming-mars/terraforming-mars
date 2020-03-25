@@ -275,54 +275,124 @@ import { Worms } from "./cards/Worms";
 import { Zeppelins } from "./cards/Zeppelins";
 
 import { IProjectCard } from "./cards/IProjectCard";
-import { Dirigibles } from './cards/venusNext/Dirigibles';
-import { IshtarMining } from './cards/venusNext/IshtarMining';
-import { MaxwellBase } from './cards/venusNext/MaxwellBase';
-import { AerialMappers } from './cards/venusNext/AerialMappers';
-import { AerosportTournament } from './cards/venusNext/AerosportTournament';
-import { CometForVenus } from './cards/venusNext/CometForVenus';
-import { AirScrappingExpedition } from './cards/venusNext/AirScrappingExpedition';
-import { DeuteriumExport } from './cards/venusNext/DeuteriumExport';
-import { GiantSolarShade } from './cards/venusNext/GiantSolarShade';
-import { Aphrodite } from './cards/venusNext/Aphrodite';
-import { Celestic } from './cards/venusNext/Celestic';
-import { Manutech } from './cards/venusNext/Manutech';
-import { MorningStarInc } from './cards/venusNext/MorningStarInc';
-import { Viron } from './cards/venusNext/Viron';
-import { CorroderSuits } from './cards/venusNext/CorroderSuits';
-import { DawnCity } from './cards/venusNext/DawnCity';
-import { GHGImportFromVenus } from './cards/venusNext/GHGImportFromVenus';
-import { AtalantaPlanitiaLab } from './cards/venusNext/AtalantaPlanitiaLab';
-import { ExtractorBalloons } from './cards/venusNext/ExtractorBalloons';
-import { Extremophiles } from './cards/venusNext/Extremophiles';
-import { FloatingHabs } from './cards/venusNext/FloatingHabs';
-import { ForcedPrecipitation } from './cards/venusNext/ForcedPrecipitation';
-import { FreyjaBiodomes } from './cards/venusNext/FreyjaBiodomes';
-import { Gyropolis } from './cards/venusNext/Gyropolis';
-import { HydrogenToVenus } from './cards/venusNext/HydrogenToVenus';
-import { IoSulphurResearch } from './cards/venusNext/IoSulphurResearch';
-import { LunaMetropolis } from './cards/venusNext/LunaMetropolis';
-import { JetStreamMicroscrappers } from './cards/venusNext/JetStreamMicroscrappers';
-import { LocalShading } from './cards/venusNext/LocalShading';
-import { VenusianInsects } from './cards/venusNext/VenusianInsects';
-import { Thermophiles } from './cards/venusNext/Thermophiles';
-import { VenusMagnetizer } from './cards/venusNext/VenusMagnetizer';
-import { SulphurEatingBacteria } from './cards/venusNext/SulphurEatingBacteria';
-import { RotatorImpacts } from './cards/venusNext/RotatorImpacts';
-import { SponsoredAcademies } from './cards/venusNext/SponsoredAcademies';
-import { VenusWaystation } from './cards/venusNext/VenusWaystation';
-import { SpinInducingAsteroid } from './cards/venusNext/SpinInducingAsteroid';
-import { WaterToVenus } from './cards/venusNext/WaterToVenus';
-import { Stratopolis } from './cards/venusNext/Stratopolis';
-import { StratosphericBirds } from './cards/venusNext/StratosphericBirds';
-import { VenusSoils } from './cards/venusNext/VenusSoils';
+import { Dirigibles } from "./cards/venusNext/Dirigibles";
+import { IshtarMining } from "./cards/venusNext/IshtarMining";
+import { MaxwellBase } from "./cards/venusNext/MaxwellBase";
+import { AerialMappers } from "./cards/venusNext/AerialMappers";
+import { AerosportTournament } from "./cards/venusNext/AerosportTournament";
+import { CometForVenus } from "./cards/venusNext/CometForVenus";
+import { AirScrappingExpedition } from "./cards/venusNext/AirScrappingExpedition";
+import { DeuteriumExport } from "./cards/venusNext/DeuteriumExport";
+import { GiantSolarShade } from "./cards/venusNext/GiantSolarShade";
+import { Aphrodite } from "./cards/venusNext/Aphrodite";
+import { Celestic } from "./cards/venusNext/Celestic";
+import { Manutech } from "./cards/venusNext/Manutech";
+import { MorningStarInc } from "./cards/venusNext/MorningStarInc";
+import { Viron } from "./cards/venusNext/Viron";
+import { CorroderSuits } from "./cards/venusNext/CorroderSuits";
+import { DawnCity } from "./cards/venusNext/DawnCity";
+import { GHGImportFromVenus } from "./cards/venusNext/GHGImportFromVenus";
+import { AtalantaPlanitiaLab } from "./cards/venusNext/AtalantaPlanitiaLab";
+import { ExtractorBalloons } from "./cards/venusNext/ExtractorBalloons";
+import { Extremophiles } from "./cards/venusNext/Extremophiles";
+import { FloatingHabs } from "./cards/venusNext/FloatingHabs";
+import { ForcedPrecipitation } from "./cards/venusNext/ForcedPrecipitation";
+import { FreyjaBiodomes } from "./cards/venusNext/FreyjaBiodomes";
+import { Gyropolis } from "./cards/venusNext/Gyropolis";
+import { HydrogenToVenus } from "./cards/venusNext/HydrogenToVenus";
+import { IoSulphurResearch } from "./cards/venusNext/IoSulphurResearch";
+import { LunaMetropolis } from "./cards/venusNext/LunaMetropolis";
+import { JetStreamMicroscrappers } from "./cards/venusNext/JetStreamMicroscrappers";
+import { LocalShading } from "./cards/venusNext/LocalShading";
+import { VenusianInsects } from "./cards/venusNext/VenusianInsects";
+import { Thermophiles } from "./cards/venusNext/Thermophiles";
+import { VenusMagnetizer } from "./cards/venusNext/VenusMagnetizer";
+import { SulphurEatingBacteria } from "./cards/venusNext/SulphurEatingBacteria";
+import { RotatorImpacts } from "./cards/venusNext/RotatorImpacts";
+import { SponsoredAcademies } from "./cards/venusNext/SponsoredAcademies";
+import { VenusWaystation } from "./cards/venusNext/VenusWaystation";
+import { SpinInducingAsteroid } from "./cards/venusNext/SpinInducingAsteroid";
+import { WaterToVenus } from "./cards/venusNext/WaterToVenus";
+import { Stratopolis } from "./cards/venusNext/Stratopolis";
+import { StratosphericBirds } from "./cards/venusNext/StratosphericBirds";
+import { VenusSoils } from "./cards/venusNext/VenusSoils";
 import { VenusianAnimals } from "./cards/venusNext/VenusianAnimals";
-import { VenusianPlants } from './cards/venusNext/VenusianPlants';
-import { VenusGovernor } from './cards/venusNext/VenusGovernor';
-import { SisterPlanetSupport } from './cards/venusNext/SisterPlanetSupport';
-import { TerraformingContract } from './cards/venusNext/TerraformingContract';
-import { Solarnet } from './cards/venusNext/Solarnet';
-import { SulphurExports } from './cards/venusNext/SulphurExports';
+import { VenusianPlants } from "./cards/venusNext/VenusianPlants";
+import { VenusGovernor } from "./cards/venusNext/VenusGovernor";
+import { SisterPlanetSupport } from "./cards/venusNext/SisterPlanetSupport";
+import { TerraformingContract } from "./cards/venusNext/TerraformingContract";
+import { Solarnet } from "./cards/venusNext/Solarnet";
+import { SulphurExports } from "./cards/venusNext/SulphurExports";
+import { LuxuryFoods } from "./cards/venusNext/LuxuryFoods";
+import { NeutralizerFactory } from "./cards/venusNext/NeutralizerFactory";
+import { OrbitalReflectors } from "./cards/venusNext/OrbitalReflectors";
+import { MiningQuota } from "./cards/venusNext/MiningQuota";
+import { Omnicourt } from "./cards/venusNext/Omnicourt";
+import { Polyphemos } from "./cards/colonies/Polyphemos";
+import { UtopiaInvest } from "./cards/turmoil/UtopiaInvest";
+import { LakefrontResorts } from "./cards/turmoil/LakefrontResorts";
+import { StormCraftIncorporated } from "./cards/colonies/StormCraftIncorporated";
+import { Arklight } from "./cards/colonies/Arklight";
+import { TerralabsResearch } from "./cards/turmoil/TerralabsResearch";
+import { Factorum } from "./cards/promo/Factorum";
+import { Pristar } from "./cards/turmoil/Pristar";
+import { Recyclon } from "./cards/promo/Recyclon";
+import { Splice } from "./cards/promo/Splice";
+import { ArcadianCommunities } from "./cards/promo/ArcadianCommunities";
+import { Philares } from "./cards/promo/Philares";
+import { MonsInsurance } from "./cards/promo/MonsInsurance";
+import { Poseidon } from "./cards/colonies/Poseidon";
+import { Aridor } from "./cards/colonies/Aridor";
+import { CryoSleep } from "./cards/colonies/CryoSleep";
+import { RimFreighters } from "./cards/colonies/RimFreighters";
+import { SkyDocks } from "./cards/colonies/SkyDocks";
+import { Conscription } from "./cards/colonies/Conscription";
+import { CommunityServices } from "./cards/colonies/CommunityServices";
+import { CoronaExtractor } from "./cards/colonies/CoronaExtractor";
+import { LunaGovernor } from "./cards/colonies/LunaGovernor";
+import { EarthElevator } from "./cards/colonies/EarthElevator";
+import { LunarMining } from "./cards/colonies/LunarMining";
+import { GalileanWaystation } from "./cards/colonies/GalileanWaystation";
+import { ProductiveOutpost } from "./cards/colonies/ProductiveOutpost";
+import { HeavyTaxation } from "./cards/colonies/HeavyTaxation";
+import { SolarProbe } from "./cards/colonies/SolarProbe";
+import { SolarReflectors } from "./cards/colonies/SolarReflectors";
+import { WarpDrive } from "./cards/colonies/WarpDrive";
+import { QuantumCommunications } from "./cards/colonies/QuantumCommunications";
+import { SpinoffDepartment } from "./cards/colonies/SpinoffDepartment";
+import { IceMoonColony } from "./cards/colonies/IceMoonColony";
+import { InterplanetaryColonyShip } from "./cards/colonies/InterplanetaryColonyShip";
+import { MiningColony } from "./cards/colonies/MiningColony";
+import { MinorityRefuge } from "./cards/colonies/MinorityRefuge";
+import { PioneerSettlement } from "./cards/colonies/PioneerSettlement";
+import { ResearchColony } from "./cards/colonies/ResearchColony";
+import { SpacePortColony } from "./cards/colonies/SpacePortColony";
+import { TradingColony } from "./cards/colonies/TradingColony";
+import { Airliners } from "./cards/colonies/Airliners";
+import { FloaterPrototypes } from "./cards/colonies/FloaterPrototypes";
+import { FloaterLeasing } from "./cards/colonies/FloaterLeasing";
+import { FloaterTechnology } from "./cards/colonies/FloaterTechnology";
+import { NitrogenFromTitan } from "./cards/colonies/NitrogenFromTitan";
+import { AirRaid } from "./cards/colonies/AirRaid";
+import { AtmoCollectors } from "./cards/colonies/AtmoCollectors";
+import { EcologyResearch } from "./cards/colonies/EcologyResearch";
+import { ImpactorSwarm } from "./cards/colonies/ImpactorSwarm";
+import { JovianLanterns } from "./cards/colonies/JovianLanterns";
+import { JupiterFloatingStation } from "./cards/colonies/JupiterFloatingStation";
+import { LunarExports } from "./cards/colonies/LunarExports";
+import { TradeEnvoys } from "./cards/colonies/TradeEnvoys";
+import { TitanAirScrapping } from "./cards/colonies/TitanAirScrapping";
+import { TitanFloatingLaunchPad } from "./cards/colonies/TitanFloatingLaunchPad";
+import { TitanShuttles } from "./cards/colonies/TitanShuttles";
+import { SubZeroSaltFish } from "./cards/colonies/SubZeroSaltFish";
+import { SpacePort } from "./cards/colonies/SpacePort";
+import { UrbanDecomposers } from "./cards/colonies/UrbanDecomposers";
+import { RefugeeCamps } from "./cards/colonies/RefugeeCamps";
+import { RedSpotObservatory } from "./cards/colonies/RedSpotObservatory";
+import { MarketManipulation } from "./cards/colonies/MarketManipulation";
+import { MartianZoo } from "./cards/colonies/MartianZoo";
+
+
 
 export const ALL_PRELUDE_CARDS: Array<IProjectCard> = [
         new AlliedBanks(),
@@ -380,8 +450,8 @@ export const ALL_CORPORATION_CARDS: Array<CorporationCard> = [
 
 export const ALL_PRELUDE_CORPORATIONS: Array<CorporationCard> = [
         new CheungShingMARS(),
-        new RobinsonIndustries(),
         new PointLuna(),
+        new RobinsonIndustries(),
         new ValleyTrust(),
         new Vitor()
 ];
@@ -439,8 +509,64 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<IProjectCard> = [
         new VenusMagnetizer(),
         new VenusSoils(),
         new VenusWaystation(),
-        new WaterToVenus()
+        new WaterToVenus(),
+        new LuxuryFoods(),
+        new NeutralizerFactory(),
+        new OrbitalReflectors(),
+        new Omnicourt(),
+        new MiningQuota()
 ];    
+
+export const ALL_COLONIES_PROJECTS_CARDS: Array<IProjectCard> = [
+        new Airliners(),
+        new AirRaid(),
+        new AtmoCollectors(),
+        new CommunityServices(),
+        new Conscription(),
+        new CoronaExtractor(),
+        new CryoSleep(),
+        new EarthElevator(),
+        new EcologyResearch(),
+        new FloaterLeasing(),
+        new FloaterPrototypes(),
+        new FloaterTechnology(),
+        new GalileanWaystation(),
+        new HeavyTaxation(),
+        new IceMoonColony(),
+        new ImpactorSwarm(),
+        new InterplanetaryColonyShip(),
+        new JovianLanterns(),
+        new JupiterFloatingStation(),
+        new LunaGovernor(),
+        new LunarExports(),
+        new LunarMining(),
+        new MartianZoo(),
+        new MarketManipulation(),
+        new MiningColony(),
+        new MinorityRefuge(),
+        new NitrogenFromTitan(),
+        new PioneerSettlement(),
+        new ProductiveOutpost(),
+        new QuantumCommunications(),
+        new RedSpotObservatory(),
+        new ResearchColony(),
+        new RimFreighters(),
+        new RefugeeCamps(),
+        new SolarProbe(),
+        new SolarReflectors(),
+        new SkyDocks(),
+        new SpacePort(),
+        new SpacePortColony(),
+        new SpinoffDepartment(),
+        new SubZeroSaltFish(),
+        new TitanAirScrapping(),
+        new TitanFloatingLaunchPad(),
+        new TitanShuttles(),
+        new TradingColony(),
+        new TradeEnvoys(),
+        new UrbanDecomposers(),
+        new WarpDrive()
+]; 
 
 export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [
         new Aphrodite(),
@@ -448,7 +574,31 @@ export const ALL_VENUS_CORPORATIONS: Array<CorporationCard> = [
         new Manutech(),
         new MorningStarInc(),
         new Viron()
-];    
+];   
+
+export const ALL_COLONIES_CORPORATIONS: Array<CorporationCard> = [
+    new Aridor(),
+    new Arklight(),
+    new Polyphemos(),
+    new Poseidon(),
+    new StormCraftIncorporated()
+];   
+
+export const ALL_TURMOIL_CORPORATIONS: Array<CorporationCard> = [
+    new LakefrontResorts(),
+    new Pristar(),
+    new TerralabsResearch(),
+    new UtopiaInvest()
+]; 
+
+export const ALL_PROMO_CORPORATIONS: Array<CorporationCard> = [
+    new ArcadianCommunities(),
+    new Factorum(),
+    new Philares(),
+    new MonsInsurance(),
+    new Recyclon(),
+    new Splice()
+]; 
 
 export const ALL_PROJECT_CARDS: Array<IProjectCard> = [
     new AcquiredCompany(),
@@ -667,24 +817,40 @@ export class Dealer {
     public discarded: Array<IProjectCard> = [];
     private usePreludeExtension: boolean = false;
     private useVenusNextExtension: boolean = false;   
-    constructor(usePreludeExtension: boolean, useVenusNextExtension: boolean) {
+    private useColoniesNextExtension: boolean = false;
+    //private seed: number = 0;
+    constructor(usePreludeExtension: boolean, useVenusNextExtension: boolean, useColoniesNextExtension : boolean, _seed?: number) {
         this.usePreludeExtension = usePreludeExtension;
         this.useVenusNextExtension = useVenusNextExtension;
+        this.useColoniesNextExtension = useColoniesNextExtension;
+        /*
+        if (seed !== undefined) {
+            this.seed = seed;
+        } else {
+            this.seed = Math.random();
+        }
+        */
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS);
         if (this.usePreludeExtension) {
-                this.preludeDeck = this.shuffleCards(ALL_PRELUDE_CARDS);
-                this.deck.push(...ALL_PRELUDE_PROJECTS_CARDS);
-                this.deck = this.shuffleCards(this.deck);
+            this.preludeDeck = this.shuffleCards(ALL_PRELUDE_CARDS);
+            this.deck.push(...ALL_PRELUDE_PROJECTS_CARDS);
+            this.deck = this.shuffleCards(this.deck);
         }
         if (this.useVenusNextExtension) {
             this.deck.push(...ALL_VENUS_PROJECTS_CARDS);
             this.deck = this.shuffleCards(this.deck);
-    }
+        }
+        if (this.useColoniesNextExtension) {
+            this.deck.push(...ALL_COLONIES_PROJECTS_CARDS);
+            this.deck = this.shuffleCards(this.deck);
+        }
     }
     public shuffleCards(cards: Array<any>): Array<any> {
         const deck: Array<any> = [];
         const copy = cards.slice();
         while (copy.length) {
+            // not working, disable for now
+            //deck.push(copy.splice(Math.floor(this.seed * copy.length), 1)[0]);
             deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
         }
         return deck;
@@ -692,12 +858,18 @@ export class Dealer {
     public discard(card: IProjectCard): void {
         this.discarded.push(card);
     }
-    public dealCard(): IProjectCard {
+    public dealCard(isResearchPhase: boolean = false): IProjectCard {
         if (this.deck.length === 0) {
             this.deck = this.shuffleCards(this.discarded);
             this.discarded = [];
         }
-        const result: IProjectCard | undefined = this.deck.pop();
+        let result: IProjectCard | undefined;
+        if (isResearchPhase) {
+            result = this.deck.shift();
+        } else {
+            result = this.deck.pop();
+        }
+
         if (result === undefined) {
             throw "Unexpected empty deck";
         }

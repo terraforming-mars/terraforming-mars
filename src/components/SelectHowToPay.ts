@@ -14,7 +14,7 @@ interface SelectHowToPayModel {
 }
 
 export const SelectHowToPay = Vue.component("select-how-to-pay", {
-    props: ["player", "playerinput", "onsave", "showtitle"],
+    props: ["player", "playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
             heat: 0,
@@ -28,13 +28,16 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
     },
     mixins: [PaymentWidgetMixin],
     mounted: function () {
-        this.$data.megaCredits = this.playerinput.amount;
+      let app = this;
+      Vue.nextTick(function () {
+        app.$data.megaCredits = app.playerinput.amount;
+      });
     },
     methods: {
         hasWarning: function () {
             return this.$data.warning !== undefined;
         },
-        pay: function () {
+        saveData: function () {
             const htp: HowToPay = {
                 heat: this.$data.heat,
                 megaCredits: this.$data.megaCredits,
@@ -73,49 +76,49 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
             this.onsave([[JSON.stringify(htp)]]);
         }
     },
-    template: `
-    <div class="payments_cont"> 
-        <section class="nes-container with-title" v-trim-whitespace>
+    template: `<div class="payments_cont"> 
+  <section v-trim-whitespace>
 
-            <h3 class="payments_title">"How to pay?"</h3>
+    <h3 class="payments_title">{{playerinput.title}}</h3>
 
-            <div class="payments_type" v-if="playerinput.canUseSteel">
-                <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
-                <button class="nes-btn" v-on:click="reduceValue('steel', 1)" :class="getCssClassFor('<', 'steel')"><</button>
-                <input class="nes-input payments_input" v-model.number="steel" />
-                <button class="nes-btn" v-on:click="addValue('steel', 1)" :class="getCssClassFor('>', 'steel')">></button>
-            </div>
+    <div class="payments_type input-group" v-if="playerinput.canUseSteel">
 
-            <div class="payments_type" v-if="playerinput.canUseTitanium">
-                <i class="resource_icon resource_icon--titanium payments_type_icon" title="Pay by Titanium"></i>
-                <button class="nes-btn" v-on:click="reduceValue('titanium', 1)" :class="getCssClassFor('<', 'titanium')"><</button>
-                <input class="nes-input payments_input" v-model.number="titanium" />
-                <button class="nes-btn" v-on:click="addValue('titanium', 1)" :class="getCssClassFor('>', 'titanium')">></button>
-            </div>
-
-            <div class="payments_type" v-if="playerinput.canUseHeat">
-                <i class="resource_icon resource_icon--heat payments_type_icon" title="Pay by Heat"></i>
-                <button class="nes-btn" v-on:click="reduceValue('heat', 1)" :class="getCssClassFor('<', 'heat')"><</button>
-                <input class="nes-input payments_input" v-model.number="heat" />
-                <button class="nes-btn" v-on:click="addValue('heat', 1)" :class="getCssClassFor('>', 'heat')">></button>
-            </div>
-
-            <div class="payments_type">
-                <i class="resource_icon resource_icon--megacredits payments_type_icon" title="Pay by Megacredits"></i>
-                <button class="nes-btn" v-on:click="reduceValue('megaCredits', 1)" :class="getCssClassFor('<', 'megaCredits')"><</button>
-                <input class="nes-input payments_input" v-model.number="megaCredits" />
-                <button class="nes-btn" v-on:click="addValue('megaCredits', 1)" :class="getCssClassFor('>', 'megaCredits')">></button>
-            </div>
-
-            <div v-if="hasWarning()" class="nes-container is-rounded">
-                <span class="nes-text is-warning">{{ warning }}</span>
-            </div>
-
-            <div class="payments_save">
-                <button class="nes-btn" v-on:click="pay">Save</button>
-            </div>
-        </section>
+      <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
+      <button class="btn btn-primary" v-on:click="reduceValue('steel', 1)" :class="getCssClassFor('<', 'steel')"><i class="icon icon-minus" /></button>
+      <input class="form-input form-inline payments_input" v-model.number="steel" />
+      <button class="btn btn-primary" v-on:click="addValue('steel', 1)" :class="getCssClassFor('>', 'steel')"><i class="icon icon-plus" /></button>
     </div>
-`
+
+    <div class="payments_type input-group" v-if="playerinput.canUseTitanium">
+      <i class="resource_icon resource_icon--titanium payments_type_icon" title="Pay by Titanium"></i>
+      <button class="btn btn-primary" v-on:click="reduceValue('titanium', 1)" :class="getCssClassFor('<', 'titanium')"><i class="icon icon-minus" /></button>
+      <input class="form-input form-inline payments_input" v-model.number="titanium" />
+      <button class="btn btn-primary" v-on:click="addValue('titanium', 1)" :class="getCssClassFor('>', 'titanium')"><i class="icon icon-plus" /></button>
+    </div>
+
+    <div class="payments_type input-group" v-if="playerinput.canUseHeat">
+      <i class="resource_icon resource_icon--heat payments_type_icon" title="Pay by Heat"></i>
+      <button class="btn btn-primary" v-on:click="reduceValue('heat', 1)" :class="getCssClassFor('<', 'heat')"><i class="icon icon-minus" /></button>
+      <input class="form-input form-inline payments_input" v-model.number="heat" />
+      <button class="btn btn-primary" v-on:click="addValue('heat', 1)" :class="getCssClassFor('>', 'heat')"><i class="icon icon-plus" /></button>
+    </div>
+
+    <div class="payments_type input-group">
+      <i class="resource_icon resource_icon--megacredits payments_type_icon" title="Pay by Megacredits"></i>
+      <button class="btn btn-primary" v-on:click="reduceValue('megaCredits', 1)" :class="getCssClassFor('<', 'megaCredits')"><i class="icon icon-minus" /></button>
+      <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
+      <button class="btn btn-primary" v-on:click="addValue('megaCredits', 1)" :class="getCssClassFor('>', 'megaCredits')"><i class="icon icon-plus" /></button>
+    </div>
+
+    <div v-if="hasWarning()" class="tm-warning">
+      <label class="label label-error">{{ warning }}</label>
+    </div>
+
+    <div v-if="showsave === true" class="payments_save">
+      <button class="btn btn-lg btn-primary" v-on:click="saveData">Save</button>
+    </div>
+
+  </section>
+</div>`
 });
 

@@ -1,18 +1,20 @@
 import { IProjectCard } from "../IProjectCard";
-import {IActionCard} from '../ICard';
+import { ICard, IActionCard, IResourceCard } from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { SelectCard } from '../../inputs/SelectCard';
 import { SelectHowToPay } from '../../inputs/SelectHowToPay';
+import { CardName } from '../../CardName';
 
-export class FloatingHabs implements IActionCard,IProjectCard {
+export class FloatingHabs implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 5;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = "Floating Habs";
+    public name: CardName = CardName.FLOATING_HABS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
+    public resourceCount: number = 0;
     public canPlay(player: Player): boolean {
         return player.getTagCount(Tags.SCIENCE) >= 2 ;
     }
@@ -23,8 +25,8 @@ export class FloatingHabs implements IActionCard,IProjectCard {
         return player.canAfford(2);
     }  
 
-    public getVictoryPoints(player: Player): number {
-        return Math.floor(player.getResourcesOnCard(this) / 2);
+    public getVictoryPoints(): number {
+        return Math.floor(this.resourceCount / 2);
     }
     
     public action(player: Player) {
@@ -32,7 +34,7 @@ export class FloatingHabs implements IActionCard,IProjectCard {
       return new SelectCard(
           "Spend 2 MC and select card to add 1 floater",
           floaterCards,
-          (foundCards: Array<IProjectCard>) => {
+          (foundCards: Array<ICard>) => {
             if (player.canUseHeatAsMegaCredits && player.heat > 0) {
               return new SelectHowToPay(
                 'Select how to pay ', false, false,

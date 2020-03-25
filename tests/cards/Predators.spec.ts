@@ -23,7 +23,7 @@ describe("Predators", function () {
         const action = card.play();
         expect(action).to.eq(undefined);
         player.addResourceTo(card, 5);
-        expect(card.getVictoryPoints(player)).to.eq(5);
+        expect(card.getVictoryPoints()).to.eq(5);
     });
     it("Should act", function () {
         const card = new Predators();
@@ -37,7 +37,7 @@ describe("Predators", function () {
         expect(action).not.to.eq(undefined);
         if (action === undefined) return;
         action.cb(action.cards);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
         expect(player.getResourcesOnCard(fish)).to.eq(0);
     });
     it("Respects pets", function () {
@@ -62,7 +62,7 @@ describe("Predators", function () {
         const action = card.action(player, game);
         expect(action).to.eq(undefined); // No option to choose Pets card provided
 
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
         expect(player3.getResourcesOnCard(fish)).to.eq(0);
         expect(player2.getResourcesOnCard(pets)).to.eq(1);
     });
@@ -90,7 +90,7 @@ describe("Predators", function () {
         const action = card.action(player, game);
         expect(action).to.eq(undefined); // No option to choose SmallAnimals card provided
 
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
         expect(player3.getResourcesOnCard(fish)).to.eq(0);
         expect(player2.getResourcesOnCard(animals)).to.eq(1);
     });

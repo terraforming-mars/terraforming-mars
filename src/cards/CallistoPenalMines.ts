@@ -4,15 +4,14 @@ import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class CallistoPenalMines implements IProjectCard {
     public cost: number = 24;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
-    public name: string = 'Callisto Penal Mines';
+    public name: CardName = CardName.CALLISTO_PENAL_MINES;
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(): boolean {
-      return true;
-    }
+
     public play(player: Player) {
       player.setProduction(Resources.MEGACREDITS,3);
       return undefined;

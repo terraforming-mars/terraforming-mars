@@ -4,7 +4,6 @@ import { Birds } from "../../src/cards/Birds";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { SelectPlayer } from "../../src/inputs/SelectPlayer";
 import { Resources } from '../../src/Resources';
 
 describe("Birds", function () {
@@ -30,24 +29,18 @@ describe("Birds", function () {
         (game as any).oxygenLevel = 13;
 
         // Play card
-        const action = card.play(player, game);
-        expect(action instanceof SelectPlayer).to.eq(true);
-        if (action === undefined) return;
+        card.play(player, game);
         player.playedCards.push(card);
-
-        // Check action to reduce plant production
-        action.cb(player2);
-        expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
 
         // Check victory points assignment
         player.addResourceTo(card, 2); 
-        expect(card.getVictoryPoints(player)).to.eq(2);
+        expect(card.getVictoryPoints()).to.eq(2);
     });
     it("Should act", function () {
         const card = new Birds();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        card.action(player);
-        expect(player.getResourcesOnCard(card)).to.eq(1); 
+        card.action();
+        expect(card.resourceCount).to.eq(1); 
     });
 });

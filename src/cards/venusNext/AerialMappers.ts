@@ -1,5 +1,5 @@
 import { IProjectCard } from "../IProjectCard";
-import {IActionCard} from '../ICard';
+import { IActionCard, ICard, IResourceCard } from '../ICard';
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
@@ -8,16 +8,16 @@ import { ResourceType } from "../../ResourceType";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 import { SelectCard } from '../../inputs/SelectCard';
+import { CardName } from '../../CardName';
 
-export class AerialMappers implements IActionCard,IProjectCard {
+export class AerialMappers implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.VENUS];
-    public name: string = "Aerial Mappers";
+    public name: CardName = CardName.AERIAL_MAPPERS;
     public cardType: CardType = CardType.ACTIVE;
     public resourceType: ResourceType = ResourceType.FLOATER;
-    public canPlay(): boolean {
-        return true;
-    }
+    public resourceCount: number = 0;
+
     public play() {
         return undefined;
     }
@@ -29,25 +29,25 @@ export class AerialMappers implements IActionCard,IProjectCard {
     }       
     public action(player: Player, game: Game) {
         const floaterCards = player.getResourceCards(ResourceType.FLOATER);
-        var opts: Array<SelectOption | SelectCard<IProjectCard>> = [];
+        var opts: Array<SelectOption | SelectCard<ICard>> = [];
         const addResource = new SelectCard(
             'Select card to add 1 floater',
             floaterCards,
-            (foundCards: Array<IProjectCard>) => {
+            (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 1);
               return undefined;
             }
         );
 
         const spendResource = new SelectOption("Remove 1 floater on this card and draw a card", () => {
-            player.removeResourceFrom(this, 1);
+            this.resourceCount--;
             player.cardsInHand.push(game.dealer.dealCard());
             return undefined;
         });
 
         opts.push(addResource);
 
-        if (player.getResourcesOnCard(this) > 0) {
+        if (this.resourceCount > 0) {
              opts.push(spendResource);
         } else return addResource;
 

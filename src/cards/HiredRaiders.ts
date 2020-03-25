@@ -7,15 +7,15 @@ import { Tags } from "./Tags";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectPlayer } from "../inputs/SelectPlayer";
 import { SelectOption } from "../inputs/SelectOption";
+import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class HiredRaiders implements IProjectCard {
     public cost: number = 1;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.EVENT;
-    public name: string = "Hired Raiders";
-    public canPlay(): boolean {
-        return true;
-    }
+    public name: CardName = CardName.HIRED_RAIDERS;
+
     public play(player: Player, game: Game) {
 
         if (game.getPlayers().length == 1) {
@@ -34,12 +34,12 @@ export class HiredRaiders implements IProjectCard {
         return new OrOptions(
             new SelectPlayer(game.getPlayers(), "Select player to steal up to 2 steel", (selectedPlayer: Player) => {
                 player.steel += Math.min(2, selectedPlayer.steel);
-                selectedPlayer.steel = Math.max(0, selectedPlayer.steel - 2);
+                selectedPlayer.setResource(Resources.STEEL, -2, game, player);
                 return undefined;
             }),
             new SelectPlayer(game.getPlayers(), "Select player to steal up to 3 mega credits", (selectedPlayer: Player) => {
                 player.megaCredits += Math.min(3, selectedPlayer.megaCredits);
-                selectedPlayer.megaCredits = Math.max(0, selectedPlayer.megaCredits - 3);
+                selectedPlayer.setResource(Resources.MEGACREDITS, -3, game, player);
                 return undefined;
             })
         );

@@ -1,19 +1,19 @@
 
-import Vue, { VNode } from "vue";
+import Vue from "vue";
 
 export const SelectOption = Vue.component("select-option", {
-    props: ["playerinput", "onsave", "showtitle"],
+    props: ["playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {};
     },
-    render: function (createElement) {
-        const children: Array<VNode> = [];
-        if (this.showtitle) {
-            children.push(createElement("div", this.playerinput.title));
+    methods: {
+        saveData: function () {
+            this.onsave([["1"]]);
         }
-        children.push(createElement("button", { domProps: { className: "nes-btn" }, on: { click: () => { this.onsave([["1"]]); } } }, "Select"));
-        return createElement("div", children);
-    }
+    },
+    template: `<div class="wf-component wf-component--select-option">
+        <div v-if="showtitle === true" class="wf-component-title" v-i18n>{{playerinput.title}}</div>
+        <button v-if="showsave === true" class="btn btn-lg btn-primary" v-on:click="saveData">Select</button>
+    </div>`
 });
-
 

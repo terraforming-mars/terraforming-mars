@@ -6,15 +6,14 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class SpaceMirrors implements IActionCard, IProjectCard {
     public cost: number = 3;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.SPACE];
-    public name: string = "Space Mirrors";
+    public name: CardName = CardName.SPACE_MIRRORS;
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play() {
         return undefined;
     }

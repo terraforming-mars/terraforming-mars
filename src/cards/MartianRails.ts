@@ -5,15 +5,14 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { CardName } from '../CardName';
 
 export class MartianRails implements IActionCard, IProjectCard {
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = "Martian Rails";
+    public name: CardName = CardName.MARTIAN_RAILS;
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public play(_player: Player, _game: Game) {
         return undefined;
     }

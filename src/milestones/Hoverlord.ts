@@ -5,7 +5,7 @@ import { ResourceType } from '../ResourceType';
 
 export class Hoverlord implements IMilestone {
     public name: string = "Hoverlord";
-    public description: string = "Having at least 7 floater resources on your cards when you claim this milestone"
+    public description: string = "Having at least 7 floater resources on your cards"
     public canClaim(player: Player, _game: Game): boolean {
         let floaterResources: number = 0;
         player.playedCards.forEach((card) => {

@@ -1,6 +1,8 @@
-
+.DS_Store
 dist/
 node_modules/
 *.swp
 .nyc_output/
 styles.css
+.vscode/symbols.json
+assets/translations.json

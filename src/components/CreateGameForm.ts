@@ -2,15 +2,30 @@
 import Vue from "vue";
 import { Color } from "../Color";
 
+import { CorporationCard } from '../cards/corporation/CorporationCard';
+import { ALL_VENUS_CORPORATIONS, ALL_PRELUDE_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS } from '../Dealer';
+import { BoardName } from '../BoardName';
+
 interface CreateGameModel {
     firstIndex: number;
+    playersCount: number;
     players: Array<NewPlayerModel>;
     prelude: boolean;
     draftVariant: boolean;
+    randomFirstPlayer: boolean;
+    showOtherPlayersVP: boolean;
     venusNext: boolean;
+    colonies: boolean;
+    customCorporationsList: boolean;
+    corporations: Array<CorporationCard>;
+    showCorporationList: boolean;
+    board: BoardName;
+    showSeed: boolean;
+    seed: number;
 }
 
 interface NewPlayerModel {
+    index: number;
     name: string;
     color: Color;
     beginner: boolean;
@@ -20,28 +35,89 @@ interface NewPlayerModel {
 export const CreateGameForm = Vue.component("create-game-form", {
     data: function () {
         return {
-            firstIndex: 0,
+            firstIndex: 1,
+            playersCount: 1,
             players: [
-                { name: "", color: Color.RED, beginner: false, first: false },
-                { name: "", color: Color.GREEN, beginner: false, first: false },
-                { name: "", color: Color.YELLOW, beginner: false, first: false },
-                { name: "", color: Color.BLUE, beginner: false, first: false },
-                { name: "", color: Color.BLACK, beginner: false, first: false }
+                {index: 1, name: "", color: Color.RED, beginner: false, first: false},
+                {index: 2, name: "", color: Color.GREEN, beginner: false, first: false},
+                {index: 3, name: "", color: Color.YELLOW, beginner: false, first: false},
+                {index: 4, name: "", color: Color.BLUE, beginner: false, first: false},
+                {index: 5, name: "", color: Color.BLACK, beginner: false, first: false}
             ],
             prelude: false,
-            draftVariant: false,
-            venusNext: false
+            draftVariant: true,
+            randomFirstPlayer: true,
+            showOtherPlayersVP: false,
+            venusNext: false,
+            colonies: false,
+            customCorporationsList: false,
+            corporations: [...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS, ...ALL_TURMOIL_CORPORATIONS, ...ALL_PROMO_CORPORATIONS],
+            showCorporationList: false,
+            board: BoardName.ORIGINAL,
+            showSeed: false,
+            seed: Math.random(),
+            seededGame: false
         } as CreateGameModel
     },
     methods: {
+        getPlayers: function (): Array<NewPlayerModel> {
+            return this.players.slice(0, this.playersCount);
+        },
+        getOriginalBoard: function () {
+            return BoardName.ORIGINAL;
+        },
+        getHellasBoard: function () {
+            return BoardName.HELLAS;
+        },
+        getElysiumBoard: function () {
+            return BoardName.ELYSIUM;
+        },
+        getOriginalCorps: function () {
+            return ALL_CORPORATION_CARDS;
+        },
+        getPreludeCorps: function () {
+            return ALL_PRELUDE_CORPORATIONS;
+        },
+        getVenusCorps: function () {
+            return ALL_VENUS_CORPORATIONS;
+        },    
+        getColoniesCorps: function () {
+            return ALL_COLONIES_CORPORATIONS;
+        },            
+        getTurmoilCorps: function () {
+            return ALL_TURMOIL_CORPORATIONS;
+        }, 
+        getPromoCorps: function () {
+            return ALL_PROMO_CORPORATIONS;
+        }, 
         createGame: function () {
-            const players = this.$data.players.slice().map((player: any, index: number) => {
-                player.first = (this.$data.firstIndex === index);
+            if (this.randomFirstPlayer) {
+                this.firstIndex = Math.floor(this.seed * this.playersCount) + 1;
+            }
+
+            // Set player name for solo mode
+            if (this.playersCount === 1 && this.players[0].name === "") {
+                this.players[0].name = "You";
+            }
+
+            const players = this.players.slice(0, this.playersCount).map((player: any) => {
+                player.first = (this.firstIndex === player.index);
                 return player;
-            }).filter((player: any) => player.name);
+            });
+            
+            // TODO Check if all players has different colors
+
+            // TODO Check all names to be set
+
             const prelude = this.$data.prelude;
             const draftVariant = this.$data.draftVariant;
+            const showOtherPlayersVP = this.$data.showOtherPlayersVP;
             const venusNext = this.$data.venusNext;
+            const colonies = this.$data.colonies;
+            const corporations = this.$data.corporations;
+            const customCorporationsList = this.$data.customCorporationsList;
+            const board =  this.$data.board;
+            const seed = this.$data.seed;
             const xhr = new XMLHttpRequest();
             xhr.open("PUT", "/game");
             xhr.onerror = function () {
@@ -49,66 +125,221 @@ export const CreateGameForm = Vue.component("create-game-form", {
             }
             xhr.onload = () => {
                 if (xhr.status === 200) {
-                    window.history.replaceState(xhr.response, "Teraforming Mars - Game", "/game?id=" + xhr.response.id);
-                    this.$root.$data.game = xhr.response;
-                    this.$root.$data.screen = "game-home";
+                    if (xhr.response.players.length === 1) {
+                        window.location.href = "/player?id=" + xhr.response.players[0].id;
+                        return;
+                    } else {
+                        window.history.replaceState(xhr.response, "Teraforming Mars - Game", "/game?id=" + xhr.response.id);
+                        this.$root.$data.game = xhr.response;
+                        this.$root.$data.screen = "game-home";
+                    }
                 } else {
                     alert("Unexpected server response");
                 }
             };
             xhr.responseType = "json";
-            console.log(JSON.stringify({
-                players: players, prelude, draftVariant, venusNext
-            }));
             xhr.send(JSON.stringify({
-                players: players, prelude, draftVariant, venusNext
+                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, customCorporationsList, corporations, board, seed
             }));
         }
     },
     template: `
         <div id="create-game">
-            <h1>Terraforming Mars</h1>
-            <h2>Create New Game</h2>
-            <div class="nes-container with-title" v-for="playerIndex in [1, 2, 3, 4, 5]">
-                <p class="nes-container.title">Player {{playerIndex}}</p>
-                <div class="nes-field">
-                    <label :for="'playerName' + playerIndex">Name:</label>
-                    <input v-model="players[playerIndex - 1].name" :id="'playerName' + playerIndex" type="text" class="nes-input" />
+            <h1><span v-i18n>Terraforming Mars</span> — <span v-i18n>Create New Game</span></h1>
+
+            <div class="create-game-form create-game--block">
+
+                <div class="container create-game-options">
+                    <div class="columns">
+                        <div class="create-game-options-block col3 col-sm-6">
+                            <h4 v-i18n>Players count</h4>
+
+                            <label class="form-radio" v-for="pCount in [1,2,3,4,5]">
+                                <input type="radio" :value="pCount" name="playersCount" v-model="playersCount">
+                                <i class="form-icon"></i> <span v-html="pCount === 1 ? 'Solo' : pCount"></span>
+                            </label>
+                        </div>
+
+                        <div class="create-game-options-block col3 col-sm-6">
+                            <h4 v-i18n>Extensions</h4>
+                            <label class="form-switch">
+                                <input type="checkbox" name="prelude" v-model="prelude">
+                                <i class="form-icon"></i> Prelude
+                            </label>
+
+                            <label class="form-switch">
+                                <input type="checkbox" name="venusNext" v-model="venusNext">
+                                <i class="form-icon"></i> Venus Next
+                            </label>
+
+                            <label class="form-switch">
+                                <input type="checkbox" name="colonies"  v-model="colonies">
+                                <i class="form-icon"></i> Colonies
+                            </label>
+                        </div>
+
+                        <div class="create-game-options-block col3 col-sm-6">
+                            <h4 v-i18n>Options</h4>
+
+                            <label class="form-switch" v-if="playersCount > 1">
+                                <input type="checkbox" name="draftVariant" v-model="draftVariant">
+                                <i class="form-icon"></i> Draft variant
+                            </label>
+
+                            <label class="form-switch">
+                                <input type="checkbox" v-model="customCorporationsList" v-on:click="showCorporationList = !showCorporationList">
+                                <i class="form-icon"></i> Custom Corporation list
+                            </label>
+
+                            <label class="form-switch" v-if="playersCount > 1">
+                                <input type="checkbox" v-model="randomFirstPlayer">
+                                <i class="form-icon"></i> Random first player
+                            </label>
+
+                            <label class="form-switch" v-if="playersCount > 1">
+                                <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP">
+                                <i class="form-icon"></i> Show real-time VP
+                            </label>
+
+                            <label class="form-switch">
+                                <input type="checkbox" v-model="seededGame" v-on:click="showSeed = !showSeed" >
+                                <i class="form-icon"></i> Show seed
+                            </label>
+                            <div v-if="showSeed">
+                                <input class="form-input form-inline" v-model="seed" />
+                            </div>
+
+                        </div>
+
+                        <div class="create-game-options-block col3 col-sm-6">
+                            <h4 v-i18n>Board</h4>
+
+                            <label class="form-radio">
+                                <input type="radio" :value=getOriginalBoard() name="board" v-model="board">
+                                <i class="form-icon"></i> Original
+                            </label>
+
+                            <label class="form-radio">
+                                <input type="radio" :value=getHellasBoard() name="board" v-model="board">
+                                <i class="form-icon"></i> Hellas
+                            </label>
+
+                            <label class="form-radio">
+                                <input type="radio" :value=getElysiumBoard() name="board" v-model="board">
+                                <i class="form-icon"></i> Elysium
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="create-game-action">			
+                        <button class="btn btn-lg btn-success" v-on:click="createGame" v-i18n>Create Game</button> 
+                    </div>  
+
                 </div>
-                <label :for="'playerColor' + playerIndex">Color:</label>
-                <div class="nes-select">
-                    <select :id="'playerColor' + playerIndex" v-model="players[playerIndex - 1].color">
-                        <option value="red">Red</option>
-                        <option value="green">Green</option>
-                        <option value="yellow">Yellow</option>
-                        <option value="blue">Blue</option>
-                        <option value="black">Black</option>
-                    </select>
-                </div>
-                <label>
-                    <input type="checkbox" class="nes-checkbox" v-model="players[playerIndex - 1].beginner" />
-                    <span>Is Beginner</span>
-                </label>
-                <label>
-                    <input v-model="firstIndex" class="nes-radio" type="radio" v-bind:value="playerIndex - 1" />
-                    <span>Goes First</span>
-                </label>
             </div>
-            <div>
-                <label>
-                        <input type="checkbox" class="nes-checkbox" v-model="prelude" />
-                        <span>Use prelude extension?</span>
-                </label>
-                <label>
-                        <input type="checkbox" class="nes-checkbox" v-model="venusNext" />
-                        <span>Use Venus Next extension?</span>
-                </label>			
-                <label>
-                        <input type="checkbox" class="nes-checkbox" v-model="draftVariant" />
-                        <span>Use draft variant?</span>
-                </label>
-            </div>			
-            <button class="nes-btn is-primary" v-on:click="createGame">Create Game</button>
+
+            <div class="create-game-players-cont" v-if="playersCount > 1">
+                <h2>Players</h2>
+                <div class="container">
+                    <div class="columns">
+                        <div class="form-group col6 create-game-player create-game--block" v-for="newPlayer in getPlayers()">
+                            <div>
+                                <input class="form-input form-inline create-game-player-name" :placeholder="'Player ' + newPlayer.index + ' name'" v-model="newPlayer.name" />
+                            </div>
+                            <div>
+                                <label class="form-label form-inline">Color:</label>
+                                <label class="form-radio form-inline" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black']">
+                                    <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color">
+                                    <i class="form-icon"></i> {{ color }}
+                                </label>
+                            </div>
+                            <div>
+                                <label class="form-switch form-inline">
+                                    <input type="checkbox" v-model="newPlayer.beginner">
+                                    <i class="form-icon"></i> Beginner?
+                                </label>
+
+                                <label class="form-radio form-inline" v-if="!randomFirstPlayer">
+                                    <input type="radio" name="firstIndex" :value="newPlayer.index" v-model="firstIndex">
+                                    <i class="form-icon"></i> Goes First?
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="showCorporationList">
+
+                <h2>Corporations</h2>
+
+                <div class="container create-game--block">
+                    <div class="columns">
+                        <div class="col4 create-game-corporation">
+                            <h2>Original</h2>
+                            <div v-for="corporation in getOriginalCorps()">
+                                <label class="form-checkbox">
+                                    <input type="checkbox" v-model="corporations" :value="corporation"/>
+                                    <i class="form-icon"></i>{{corporation.name}}
+                                </label>    
+                            </div>
+                        </div>
+
+                        <div class="col4 create-game-corporation">
+                            <h2>Prelude</h2>
+                            <div v-for="corporation in getPreludeCorps()">
+                                <label class="form-checkbox">
+                                    <input type="checkbox"  v-model="corporations" :value="corporation"/>
+                                    <i class="form-icon"></i>{{corporation.name}}
+                                </label>    
+                            </div>
+                        </div>
+
+                        <div class="col4 create-game-corporation">
+                            <h2>Venus Next</h2>
+                            <div v-for="corporation in getVenusCorps()">
+                                <label class="form-checkbox">
+                                    <input type="checkbox"  v-model="corporations" :value="corporation"/>
+                                    <i class="form-icon"></i>{{corporation.name}}
+                                </label>    
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="columns">
+                        <div class="col4 create-game-corporation">
+                            <h2>Colonies</h2>   
+                            <div v-for="corporation in getColoniesCorps()">
+                                <label class="form-checkbox">
+                                    <input type="checkbox"  v-model="corporations" :value="corporation"/>
+                                    <i class="form-icon"></i>{{corporation.name}}
+                                </label>    
+                            </div>
+                        </div>
+    
+                        <div class="col4 create-game-corporation">
+                            <h2>Turmoil</h2>   
+                            <div v-for="corporation in getTurmoilCorps()">
+                                <label class="form-checkbox">
+                                    <input type="checkbox"  v-model="corporations" :value="corporation"/>
+                                    <i class="form-icon"></i>{{corporation.name}}
+                                </label>
+                            </div> 
+                        </div> 
+
+                        <div class="col4 create-game-corporation">
+                            <h2>Promo</h2>   
+                            <div v-for="corporation in getPromoCorps()">
+                                <label class="form-checkbox">
+                                    <input type="checkbox"  v-model="corporations" :value="corporation"/>
+                                    <i class="form-icon"></i>{{corporation.name}}
+                                </label>
+                            </div> 
+                        </div>  
+                    </div>              
+                </div>              
+            </div>
+
         </div>
     `
 });

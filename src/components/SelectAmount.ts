@@ -2,23 +2,21 @@
 import Vue from "vue";
 
 export const SelectAmount = Vue.component("select-amount", {
-    props: ["playerinput", "onsave", "showtitle"],
+    props: ["playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
             amount: 0
         };
     },
     methods: {
-        saveAmount: function () {
+        saveData: function () {
             this.onsave([[parseInt(this.$data.amount)]]);
         }
     },
-    template: `
-        <div>
-            <div v-if="showtitle === true">{{playerinput.title}}</div>
-            <input type="number" class="nes-input" value="0" min="0" :max="playerinput.max" v-model="amount" />
-            <button class="nes-btn" v-on:click="saveAmount">Save</button> 
-        </div>
-    `
+    template: `<div>
+  <div v-if="showtitle === true">{{playerinput.title}}</div>
+  <input type="number" class="nes-input" value="0" min="0" :max="playerinput.max" v-model="amount" />
+  <button v-if="showsave === true" class="btn btn-lg btn-primary" v-on:click="saveData">Save</button> 
+</div>`
 });
 

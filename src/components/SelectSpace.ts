@@ -2,11 +2,22 @@
 import Vue, { VNode } from "vue";
 import { PlayerInputModel } from "../models/PlayerInputModel";
 
-
 export const SelectSpace = Vue.component("select-space", {
-    props: ["playerinput", "onsave", "showtitle"],
+    props: ["playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
-        return {};
+        return {
+            spaceId: undefined,
+            warning: undefined
+        };
+    },
+    methods: {
+        saveData: function () {
+            if (this.$data.spaceId === undefined) {
+                this.$data.warning = "Must select a space";
+                return;
+            }
+            this.onsave([[this.$data.spaceId]]);
+        }
     },
     render: function (createElement) {
         const playerInput: PlayerInputModel = this.playerinput as PlayerInputModel;
@@ -14,11 +25,14 @@ export const SelectSpace = Vue.component("select-space", {
         if (this.showtitle) {
             children.push(createElement("div", playerInput.title));
         }
-
+        if (this.$data.warning) {
+            children.push(createElement("div", { domProps: { className: "nes-container is-rounded" } }, [createElement("span", { domProps: { className: "nes-text is-warning" } }, this.$data.warning)]));
+        }
         const clearAllAvailableSpaces = function() {
             const elTiles = document.getElementsByClassName("board_space");
             for (let i = 0; i < elTiles.length; i++) {
-                elTiles[0].classList.remove("board_space--available");
+                elTiles[i].classList.remove("board_space--available");
+                elTiles[i].classList.remove("board_space--selected");
             }
         };
 
@@ -28,7 +42,7 @@ export const SelectSpace = Vue.component("select-space", {
             playerInput.availableSpaces.forEach((spaceId: string) => {
                 setOfSpaces[spaceId] = true;
             });
-            children.push(createElement("button", { domProps: { className: "nes-btn" }, on: { click: () => {
+            children.push(createElement("button", { domProps: { className: "btn btn-lg btn-primary" }, on: { click: () => {
                 clearAllAvailableSpaces();
                 const elTiles = document.getElementsByClassName("board_space");
                 for (let i = 0; i < elTiles.length; i++) {
@@ -43,8 +57,9 @@ export const SelectSpace = Vue.component("select-space", {
                         for (let j = 0; j < elTiles.length; j++) {
                             (elTiles[j] as HTMLElement).onclick = null;
                         }
-                        el_id = elTile.getAttribute("data_space_id");
-                        this.onsave([[el_id]]);
+                        this.$data.spaceId = elTile.getAttribute("data_space_id");
+                        elTile.classList.add("board_space--selected")
+                        this.saveData();
                     }
                 }
             } } }, "Select Space"));

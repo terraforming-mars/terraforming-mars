@@ -9,13 +9,16 @@ import {TileType} from '../TileType';
 import {ResourceType} from '../ResourceType';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
+import { CardName } from '../CardName';
+import { IResourceCard } from './ICard';
 
-export class EcologicalZone implements IProjectCard {
+export class EcologicalZone implements IProjectCard, IResourceCard {
   public cost: number = 12;
   public resourceType: ResourceType = ResourceType.ANIMAL;
+  public resourceCount: number = 0;
   public tags: Array<Tags> = [Tags.ANIMAL, Tags.PLANT];
   public cardType: CardType = CardType.ACTIVE;
-  public name: string = 'Ecological Zone';
+  public name: CardName = CardName.ECOLOGICAL_ZONE;
   private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
     return game.board.getAvailableSpacesOnLand(player)
         .filter(
@@ -38,13 +41,10 @@ export class EcologicalZone implements IProjectCard {
     return this.hasGreeneryTile(player, game);
   }
   public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
-    if (card.tags.indexOf(Tags.ANIMAL) !== -1 ||
-          card.tags.indexOf(Tags.PLANT) !== -1) {
-      player.addResourceTo(this);
-    }
+      player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT).length);
   }
-  public getVictoryPoints(player: Player) {
-    return Math.floor(player.getResourcesOnCard(this) / 2);
+  public getVictoryPoints(): number {
+    return Math.floor(this.resourceCount / 2);
   }
   public play(player: Player, game: Game) {
     return new SelectSpace(
@@ -52,7 +52,7 @@ export class EcologicalZone implements IProjectCard {
         this.getAvailableSpaces(player, game),
         (requestedSpace: ISpace) => {
           game.addTile(player, requestedSpace.spaceType, requestedSpace, {
-            tileType: TileType.SPECIAL
+            tileType: TileType.ECOLOGICAL_ZONE
           });
           return undefined;
         }

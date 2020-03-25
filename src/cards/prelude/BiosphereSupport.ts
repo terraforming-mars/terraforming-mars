@@ -3,10 +3,12 @@ import { Player } from "../../Player";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
 import { Resources } from '../../Resources';
+import { CardName } from '../../CardName';
 
 export class BiosphereSupport extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT];
-    public name: string = "Biosphere Support";
+    public name: CardName = CardName.BIOSPHERE_SUPPORT;
+    public hasRequirements = false;
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.MEGACREDITS) >= -4;
     }    

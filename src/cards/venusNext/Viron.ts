@@ -4,20 +4,16 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { Tags } from "../Tags";
 import { ICard } from "../ICard";
-import { IProjectCard } from "../IProjectCard";
 import {SelectCard} from '../../inputs/SelectCard';
+import { CardName } from '../../CardName';
 
 export class Viron implements ICard, CorporationCard {
-    public name: string = "Viron";
+    public name: CardName = CardName.VIRON;
     public tags: Array<Tags> = [Tags.MICROBES];
     public startingMegaCredits: number = 48;
 
-    public canAct(player: Player): boolean {
-        return player.getActionsThisGeneration().size > 0 && !player.getActionsThisGeneration().has(this.name); 
-    }
-
-    public action(player: Player, game: Game) {
-        const result: Array<IProjectCard> = [];
+    private getActionCards(player: Player, game: Game):Array<ICard> {
+        let result: Array<ICard> = [];
         for (const playedCard of player.playedCards) {
             if (
               playedCard.action !== undefined &&
@@ -27,30 +23,28 @@ export class Viron implements ICard, CorporationCard {
               result.push(playedCard);
             }
         }
+        return result;
+    }
+
+    public canAct(player: Player, game: Game): boolean {
+        return this.getActionCards(player, game).length > 0 && !player.getActionsThisGeneration().has(this.name);
+    }
+
+    public action(player: Player, game: Game) {
+        if (this.getActionCards(player, game).length === 0 ) {
+            return undefined;
+        }
+ 
         return new SelectCard(
             'Perform again an action from a played card',
-            result,
-            (foundCards: Array<IProjectCard>) => {
+            this.getActionCards(player, game),
+            (foundCards: Array<ICard>) => {
               const foundCard = foundCards[0];
-              const action = foundCard.action!(player, game);
-              const whenDone = (err?: string) => {
-                if (!err) {
-                    player.setActionsThisGeneration(this.name);
-                    player.actionsTakenThisRound++;
-                }
-                game.log(this.name + " used " + foundCard.name + " action");
-                player.takeAction(game);
-              };
-              if (action !== undefined) {
-                action.onend = whenDone;
-                return action;
-              }
-              whenDone();
-              return undefined;
+              game.log(player.name + " used " + foundCard.name + " action with " + this.name);
+              return foundCard.action!(player, game);
             }
         );
-        return undefined;
-    }    
+    }
 
     public play() {
         return undefined;

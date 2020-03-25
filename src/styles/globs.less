@@ -1,7 +1,7 @@
 /* UI to display global parameters (oxygen, temperature, oceans count) */
 
 .globs_cont {
-    background: black;
+    background: #313131;
     border-radius: 20px;
     padding: 15px 20px;
     display: inline-block;
@@ -10,8 +10,8 @@
 
 
 .globs {
-    width: 200px;
-    height: 462px;
+    width: 170px;
+    height: 466px;
     margin: 0 auto;
     line-height: 1.23;
     background: url("assets/globs.png")
@@ -19,11 +19,11 @@
 
 .globs_oceans_count {
     text-align: left;
-    font-family: Tahoma,Verdana,Segoe,sans-serif;
-    font-size: 26px;
+    color: #03fdfcff;
+    font-family: Prototype;
+    font-size: 18px;
     font-weight: bold;
-    color: #ffffffab;
-    margin: 55px 0 0 110px;
+    margin: 78px 0 0 88px;
 }
 
 .globs_columns_cont {
@@ -34,35 +34,59 @@
 .globs_column {
     display: inline-block;
     vertical-align: top;
-    width: 26px;
-    text-align: center;
-    font-family: Tahoma,Verdana,Segoe,sans-serif;
-    font-size: 9px;
-    font-weight: bold;
-    color: #ffffffab;
 }
 
 .globs_column--temperature {
-    margin: 0;
+    margin: 14px 0 0 13px;
 }
 
 .globs_column--oxygen {
-    margin: 0 0 0 132px;
+    margin: 11px 0 0 85px;
 }
 
 .globs_column--temperature .globs_value {
-    line-height: 17px;
-    font-size: 12px;
+    color: #03fdfcff;
+    font-family: Prototype;
+    font-size: 11px;
     position: relative;
     z-index: 10;
+    line-height: 20px;
+    text-align: right;
 }
 
 .globs_column--oxygen .globs_value {
-    line-height: 23px;
-    font-size: 12px;
+    color: #03fdfcff;
+    font-family: Prototype;
+    font-size: 11px;
     position: relative;
     z-index: 10;
+    line-height: 27px;
 }
+
+.globs_figure {
+    width: 21px;
+    height: 10px;
+    background: #03fdfc3d;
+    border-radius: 3px;
+    margin: -15px 0 0 22px;
+    position: absolute;
+}
+
+.globs_figure--active {
+    background: #03fdfcff;
+}
+
+.globs_column--oxygen .globs_figure {
+    margin: 8px 0 0 -27px;
+}
+
+
+.globs_column--oxygen  {
+    .glob_value_oxygen--1, .glob_value_oxygen--2 {
+        line-height: 28px !important;
+    }
+}
+
 
 .globs_column_scale {
     width: 13px;
@@ -73,31 +97,10 @@
 }
 
 .globs_column_scale--temperature {
-    background: #ed1b34;
     margin-left: 50px;
 }
 
-.globs_column_scale--temperature::before {
-    background:#ed1b34;
-    width: 24px;
-    height: 3px;
-    content: ".";
-    display: inline-block;
-    color: #0000;
-    margin-left: -5px;
-}
 
 .globs_column_scale--oxygen {
-    background: #609627;
     margin-left: -32px;
-}
-
-.globs_column_scale--oxygen::before {
-    background:#609627;
-    width: 24px;
-    height: 4px;
-    content: ".";
-    display: inline-block;
-    color: #0000;
-    margin-left: -6px;
 }

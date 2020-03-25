@@ -5,15 +5,14 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { CardName } from '../CardName';
 
 export class Steelworks implements IProjectCard, IActionCard {
     public cost: number = 15;
     public tags: Array<Tags> = [Tags.STEEL];
-    public name: string = "Steelworks";
+    public name: CardName = CardName.STEELWORKS;
     public cardType: CardType = CardType.ACTIVE;
-    public canPlay(): boolean {
-        return true;
-    }
+
     public canAct(player: Player): boolean {
         return player.energy >= 4;
     }

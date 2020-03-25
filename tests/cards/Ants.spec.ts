@@ -22,14 +22,15 @@ describe("Ants", function () {
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
         card.play();
-        player.addResourceTo(card, 5);
-        expect(card.getVictoryPoints(player)).to.eq(2);
+        card.resourceCount += 5;
+        expect(card.getVictoryPoints()).to.eq(2);
     });
     it("Should action", function () {
         const card = new Ants();
         const cardTardigrades = new Tardigrades();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("ants_action_game", [player], player);
+        const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("ants_action_game", [player, player2], player);
 
         expect(card.canAct(player, game)).to.eq(false);
 
@@ -37,19 +38,22 @@ describe("Ants", function () {
         expect(card.canAct(player, game)).to.eq(false);
 
         player.playedCards.push(cardTardigrades);
-        player.addResourceTo(cardTardigrades);
+        cardTardigrades.resourceCount++;
+        
         expect(card.canAct(player, game)).to.eq(true);
 
         const action = card.action(player, game);
         expect(action).not.to.eq(undefined);
 
         expect(action instanceof SelectCard).to.eq(true);
-        expect(action.cards.length).to.eq(1);
+        if (action !== undefined) {
+            expect(action.cards.length).to.eq(1);
 
-        expect(action.cards[0]).to.eq(cardTardigrades);
-        action.cb([action.cards[0]]);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
-        expect(player.getResourcesOnCard(cardTardigrades)).to.eq(0);
+            expect(action.cards[0]).to.eq(cardTardigrades);
+            action.cb([action.cards[0]]);
+            expect(card.resourceCount).to.eq(1);
+            expect(cardTardigrades.resourceCount).to.eq(0);
+        }
     });
     it("Respects protected habitats", function () {
         const card = new Ants();
@@ -62,7 +66,7 @@ describe("Ants", function () {
 
         player.playedCards.push(card);
         player2.playedCards.push(cardTardigrades);
-        player2.addResourceTo(cardTardigrades);
+        cardTardigrades.resourceCount += 2;
 
         expect(card.canAct(player, game)).to.eq(true);
         player2.playedCards.push(protectedHabitatsCard);
@@ -91,8 +95,9 @@ describe("Ants", function () {
 
         const action = card.action(player, game);
         expect(action instanceof SelectCard).to.eq(true);
-        expect(action.cards.length).to.eq(1);
-
-        expect(action.cards[0]).to.eq(cardTardigrades);
+        if (action !== undefined) {
+            expect(action.cards.length).to.eq(1);
+            expect(action.cards[0]).to.eq(cardTardigrades);
+        }
     });
 });

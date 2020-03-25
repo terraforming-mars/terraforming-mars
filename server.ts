@@ -4,10 +4,21 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as querystring from 'querystring';
 import {AndOptions} from './src/inputs/AndOptions';
-import {CardModel} from './src/models/CardModel';
+import { CardModel } from './src/models/CardModel';
+import {ColonyModel} from './src/models/ColonyModel';
 import {Color} from './src/Color';
+import {CorporationCard} from './src/cards/corporation/CorporationCard';
+import {
+    ALL_CORPORATION_CARDS,
+    ALL_PRELUDE_CORPORATIONS,
+    ALL_COLONIES_CORPORATIONS,
+    ALL_VENUS_CORPORATIONS,
+    ALL_TURMOIL_CORPORATIONS,
+    ALL_PROMO_CORPORATIONS
+} from './src/Dealer';
 import {Game} from './src/Game';
 import {ICard} from './src/cards/ICard';
+import {IColony} from './src/colonies/Colony';
 import {IProjectCard} from './src/cards/IProjectCard';
 import {ISpace} from './src/ISpace';
 import {OrOptions} from './src/inputs/OrOptions';
@@ -26,18 +37,33 @@ import {SpaceModel} from './src/models/SpaceModel';
 import {TileType} from './src/TileType';
 import { Phase } from './src/Phase';
 import { Resources } from "./src/Resources";
+import { CardType } from './src/cards/CardType';
 
+const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
-
+const allCorporationCards: Array<CorporationCard> = ALL_CORPORATION_CARDS.concat(
+    ALL_PRELUDE_CORPORATIONS,
+    ALL_COLONIES_CORPORATIONS,
+    ALL_VENUS_CORPORATIONS,
+    ALL_TURMOIL_CORPORATIONS,
+    ALL_PROMO_CORPORATIONS
+);
 function requestHandler(
     req: http.IncomingMessage,
     res: http.ServerResponse
 ): void {
   if (req.url !== undefined) {
     if (req.method === 'GET') {
-      if (
+      if (req.url.replace(/\?.*$/, '').startsWith('/games-overview')) {
+        if (!isServerIdValid(req)) {
+          notAuthorized(req, res);
+          return;
+        } else {
+          serveApp(res);
+        }
+      } else if (
         req.url === '/' ||
         req.url.startsWith('/game?id=') ||
         req.url.startsWith('/player?id=') ||
@@ -48,7 +74,12 @@ function requestHandler(
         apiGetPlayer(req, res);
       } else if (req.url.startsWith('/api/waitingfor?id=')) {
         apiGetWaitingFor(req, res);
+      } else if (req.url.startsWith("/assets/translations.json")) {
+        res.setHeader('Content-Type', 'application/json');
+        res.write(fs.readFileSync("assets/translations.json"));
+        res.end();
       } else if (req.url === '/styles.css') {
+        res.setHeader('Content-Type', 'text/css');
         serveResource(res, styles);
       } else if (
           req.url.startsWith('/assets/') ||
@@ -56,6 +87,8 @@ function requestHandler(
           req.url === '/main.js'
       ) {
         serveAsset(req, res);
+      } else if (req.url.startsWith('/api/games')) {
+        apiGetGames(req, res);
       } else if (req.url.indexOf('/api/game') === 0) {
         apiGetGame(req, res);
       } else {
@@ -93,6 +126,10 @@ function generateRandomGameId(): string {
   return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
 }
 
+function generateRandomServerId(): string {
+  return generateRandomGameId();
+}
+
 function processInput(
     req: http.IncomingMessage,
     res: http.ServerResponse,
@@ -106,7 +143,7 @@ function processInput(
   req.once('end', function() {
     try {
       const entity = JSON.parse(body);
-      player.process(entity);
+      player.process(game, entity);
       res.setHeader('Content-Type', 'application/json');
       res.write(getPlayer(player, game));
       res.end();
@@ -121,6 +158,30 @@ function processInput(
       res.end();
     }
   });
+}
+
+function apiGetGames(req: http.IncomingMessage, res: http.ServerResponse): void {
+
+  if (!isServerIdValid(req)) {
+    notAuthorized(req, res);
+    return;
+  }
+
+  if (games === undefined) {
+    notFound(req, res);
+    return;
+  }
+
+  const answer: Array<string> = [];
+
+  for (let key of Array.from(games.keys())) {
+    answer.push(key);
+  }
+
+  res.setHeader('Content-Type', 'application/json');
+  res.write(JSON.stringify(answer));
+  res.end();
+
 }
 
 function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -234,7 +295,17 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
           break;
         }
       }
-      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.venusNext);
+      const selectedCorporations: Array<CorporationCard> = [];
+      for (let corp of gameReq.corporations) {
+        const foundCard: CorporationCard | undefined = allCorporationCards.find((card) => card.name === corp.name);
+        if (foundCard !== undefined) {
+          selectedCorporations.push(foundCard);
+        } else {
+          throw new Error("Custom corporation card " + corp + " not found");
+        }
+      }
+
+      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.showOtherPlayersVP, gameReq.venusNext, gameReq.colonies, gameReq.customCorporationsList, selectedCorporations, gameReq.board, gameReq.seed);
       games.set(gameId, game);
       game.getPlayers().forEach((player) => {
         playersToGame.set(player.id, game);
@@ -259,9 +330,13 @@ function getPlayer(player: Player, game: Game): string {
         milestone: claimedMilestone.milestone.name
       };
     }),
+    milestones: game.milestones,
+    awards: game.awards,
     color: player.color,
     corporationCard: player.corporationCard ?
       player.corporationCard.name : undefined,
+    corporationCardResources: player.corporationCard ?
+      player.getResourcesOnCard(player.corporationCard) : undefined,  
     energy: player.energy,
     energyProduction: player.getProduction(Resources.ENERGY),
     fundedAwards: game.fundedAwards.map((fundedAward) => {
@@ -291,17 +366,31 @@ function getPlayer(player: Player, game: Game): string {
     titanium: player.titanium,
     titaniumProduction: player.getProduction(Resources.TITANIUM),
     titaniumValue: player.titaniumValue,
-    victoryPoints: player.victoryPoints,
-    victoryPointsBreakdown: player.victoryPointsBreakdown,
+    victoryPointsBreakdown: player.getVictoryPoints(game),
     waitingFor: getWaitingFor(player.getWaitingFor()),
     gameLog: game.gameLog,
     isSoloModeWin: game.isSoloModeWin(),
     gameAge: game.gameAge,
     isActive: player.id === game.activePlayer.id,
     venusNextExtension: game.venusNextExtension,
-    venusScaleLevel: game.getVenusScaleLevel()
+    venusScaleLevel: game.getVenusScaleLevel(),
+    boardName: game.boardName,
+    colonies: getColonies(game.colonies),
+    tags: player.getAllTags(),
+    showOtherPlayersVP: game.showOtherPlayersVP,
+    actionsThisGeneration: Array.from(player.getActionsThisGeneration())
   } as PlayerModel;
   return JSON.stringify(output);
+}
+
+function getCardsAsCardModel(cards: Array<ICard>): Array<CardModel> {
+  let result:Array<CardModel> = [];
+
+  cards.forEach((card) => {
+    result.push({name: card.name, resources: (card.resourceCount !== undefined ? card.resourceCount : 0), calculatedCost : 0, cardType : CardType.AUTOMATED});
+  });
+
+  return result;
 }
 
 function getWaitingFor(
@@ -339,15 +428,13 @@ function getWaitingFor(
       }
       break;
     case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD:
-      result.cards = (waitingFor as SelectHowToPayForCard)
-          .cards.map((card) => card.name);
+      result.cards = getCardsAsCardModel((waitingFor as SelectHowToPayForCard).cards);
       result.microbes = (waitingFor as SelectHowToPayForCard).microbes;
       result.floaters = (waitingFor as SelectHowToPayForCard).floaters;
       result.canUseHeat = (waitingFor as SelectHowToPayForCard).canUseHeat;
       break;
     case PlayerInputTypes.SELECT_CARD:
-      result.cards = (waitingFor as SelectCard<ICard>)
-          .cards.map((card) => card.name);
+      result.cards = getCardsAsCardModel((waitingFor as SelectCard<ICard>).cards);
       result.maxCardsToSelect = (waitingFor as SelectCard<ICard>)
           .maxCardsToSelect;
       result.minCardsToSelect = (waitingFor as SelectCard<ICard>)
@@ -374,15 +461,36 @@ function getWaitingFor(
   return result;
 }
 
+function compareCards(card1: IProjectCard, card2: IProjectCard): number
+{
+  const tagWeights: Map<CardType, number> = new Map();
+  tagWeights.set(CardType.ACTIVE, 0);
+  tagWeights.set(CardType.AUTOMATED, 1);
+  tagWeights.set(CardType.PRELUDE, 2);
+  tagWeights.set(CardType.EVENT, 3);
+
+  const w1: number | undefined = tagWeights.get(card1.cardType);
+  const w2: number | undefined = tagWeights.get(card2.cardType);
+
+  // It's ok to how unknown card types last
+  if (w1 === undefined || w2 === undefined) return -1;
+
+  if (w1 > w2) return 1;
+  if (w1 < w2) return -1
+  return 0;
+  
+}
+
 function getCards(
     player: Player,
     cards: Array<IProjectCard>,
     game: Game
 ): Array<CardModel> {
-  return cards.map((card) => ({
+  return cards.sort(compareCards).map((card) => ({
     resources: player.getResourcesOnCard(card),
     name: card.name,
-    calculatedCost: player.getCardCost(game, card)
+    calculatedCost: player.getCardCost(game, card),
+    cardType: card.cardType
   }));
 }
 
@@ -392,6 +500,8 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       color: player.color,
       corporationCard: player.corporationCard ?
         player.corporationCard.name : undefined,
+      corporationCardResources: player.corporationCard ?
+        player.getResourcesOnCard(player.corporationCard) : undefined,  
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
       heat: player.heat,
@@ -411,13 +521,27 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       titanium: player.titanium,
       titaniumProduction: player.getProduction(Resources.TITANIUM),
       titaniumValue: player.titaniumValue,
-      victoryPoints: player.victoryPoints,
-      victoryPointsBreakdown: player.victoryPointsBreakdown,
+      victoryPointsBreakdown: player.getVictoryPoints(game),
       isActive: player.id === game.activePlayer.id,
       venusNextExtension: game.venusNextExtension,
-      venusScaleLevel: game.getVenusScaleLevel()
+      venusScaleLevel: game.getVenusScaleLevel(),
+      boardName: game.boardName,
+      colonies: getColonies(game.colonies),
+      tags: player.getAllTags(),
+      showOtherPlayersVP: game.showOtherPlayersVP,
+      actionsThisGeneration: Array.from(player.getActionsThisGeneration())
     } as PlayerModel;
   });
+}
+
+function getColonies(colonies: Array<IColony>): Array<ColonyModel> {
+    return colonies.map((colony): ColonyModel => ({
+        colonies: colony.colonies.map((player): Color => player.color),
+        isActive: colony.isActive,
+        name: colony.name,
+        trackPosition: colony.trackPosition,
+        visitor: colony.visitor === undefined ? undefined : colony.visitor.color
+    }));
 }
 
 // Oceans can't be owned so they shouldn't have a color associated with them
@@ -462,12 +586,27 @@ function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {
   res.end();
 }
 
+function notAuthorized(req: http.IncomingMessage, res: http.ServerResponse): void {
+  console.warn('Not authorized', req.method, req.url);
+  res.writeHead(403);
+  res.write('Not authorized');
+  res.end();
+}
+
+function isServerIdValid (req: http.IncomingMessage): boolean {
+  const queryParams = querystring.parse(req.url!.replace(/^.*\?/, ''));
+  if (queryParams.serverId === undefined || queryParams.serverId !== serverId) {
+    console.warn('No or invalid serverId given');
+    return false;
+  }
+  return true;
+}
+
 function serveApp(res: http.ServerResponse): void {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.write(fs.readFileSync('index.html'));
   res.end();
 }
-
 
 function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url === undefined) throw new Error("Empty url");
@@ -480,6 +619,8 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
     res.write(fs.readFileSync('dist/main.js'));
   } else if (req.url === '/assets/Prototype.ttf') {
     res.write(fs.readFileSync('assets/Prototype.ttf'));
+  } else if (req.url === '/assets/futureforces.ttf') {
+    res.write(fs.readFileSync('assets/futureforces.ttf'));
   } else if (req.url.endsWith('.png')) {
     const assetsRoot = path.resolve('./assets');
     const reqFile = path.resolve(path.normalize(req.url).slice(1));
@@ -489,6 +630,16 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
       return notFound(req, res);
     }
     res.setHeader('Content-Type', 'image/png');
+    res.write(fs.readFileSync(reqFile))
+  } else if (req.url.endsWith('.jpg') ) {
+    const assetsRoot = path.resolve('./assets');
+    const reqFile = path.resolve(path.normalize(req.url).slice(1));
+
+    // Disallow to go outside of assets directory
+    if ( ! reqFile.startsWith(assetsRoot) || ! fs.existsSync(reqFile)) {
+      return notFound(req, res);
+    }
+    res.setHeader('Content-Type', 'image/jpeg');
     res.write(fs.readFileSync(reqFile))
   }
 
@@ -501,5 +652,10 @@ function serveResource(res: http.ServerResponse, s: Buffer): void {
 }
 
 console.log('Starting server on port ' + (process.env.PORT || 8080));
+console.log('version 0.X');
+
 server.listen(process.env.PORT || 8080);
 
+console.log('\nThe secret serverId for this server is \x1b[1m'+serverId+'\x1b[0m. Use it to access the following administrative routes:\n');
+console.log('* Overview of existing games: /games-overview?serverId='+serverId);
+console.log('* API for game IDs: /api/games?serverId='+serverId+'\n');

@@ -20,7 +20,7 @@ describe("FloatingHabs", function () {
         const action = card.action(player);
         expect(action instanceof SelectCard).to.eq(true);
         action.cb([card]);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(8);
     });
 });

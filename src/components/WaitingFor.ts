@@ -11,6 +11,7 @@ import { SelectHowToPayForCard } from "./SelectHowToPayForCard";
 import { SelectOption } from "./SelectOption";
 import { SelectPlayer } from "./SelectPlayer";
 import { SelectSpace } from "./SelectSpace";
+import { $t } from "../directives/i18n";
 
 var ui_update_timeout_id: number | undefined = undefined;
 
@@ -45,6 +46,7 @@ export const WaitingFor = Vue.component("waiting-for", {
                         const result = xhr.response;
                         if (result["result"] === "GO") {
                             (vueApp as any).$root.updatePlayer();
+
                             if (Notification.permission !== 'granted') {
                                 Notification.requestPermission();
                             }
@@ -76,20 +78,20 @@ export const WaitingFor = Vue.component("waiting-for", {
     render: function (createElement) {
         if (this.waitingfor === undefined) {
             (this as any).waitForUpdate();
-            return createElement("div", "Not your turn to take any actions");
+            return createElement("div", $t("Not your turn to take any actions"));
         }
-        return new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
+        const input = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
             const xhr = new XMLHttpRequest();
             xhr.open("POST", "/player/input?id=" + (this.$parent as any).player.id);
             xhr.responseType = "json";
             xhr.onload = () => {
                 if (xhr.status === 200) {
                     const root = (this.$root as any);
-                    root.$data.screen = "empty";
-                    root.$data.player = xhr.response;
-                    root.$data.playerkey++;
-                    root.$data.screen = "player-home";
-                    if (root.$data.player.phase == "end" && window.location.pathname !== "/the-end") {
+                    root.screen = "empty";
+                    root.player = xhr.response;
+                    root.playerkey++;
+                    root.screen = "player-home";
+                    if (root.player.phase == "end" && window.location.pathname !== "/the-end") {
                         (window as any).location = (window as any).location;
                     }
 
@@ -107,7 +109,9 @@ export const WaitingFor = Vue.component("waiting-for", {
                 }
             }
             xhr.send(JSON.stringify(out));  
-        }, true);
+        }, true, true);
+
+        return createElement("div", {"class": "wf-root"}, [input])
     }
 });
 

@@ -5,9 +5,10 @@ import { IProjectCard } from "../IProjectCard";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CardType } from "../CardType";
+import { CardName } from '../../CardName';
 
 export class InterplanetaryCinematics implements CorporationCard {
-    public name: string = "Interplanetary Cinematics";
+    public name: CardName = CardName.INTERPLANETARY_CINEMATICS;
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 30;
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {

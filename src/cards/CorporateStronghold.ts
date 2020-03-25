@@ -7,12 +7,14 @@ import {Tags} from './Tags';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class CorporateStronghold implements IProjectCard {
     public cost: number = 11;
     public cardType: CardType = CardType.AUTOMATED;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
-    public name: string = 'Corporate Stronghold';
+    public name: CardName = CardName.CORPORATE_STRONGHOLD;
+    public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 1 && game.board.getAvailableSpacesForCity(player).length >= 0;
     }

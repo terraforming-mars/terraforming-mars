@@ -15,6 +15,29 @@
   vertical-align: top;
 }
 
+.cards-stack {
+  position: relative;
+  margin-top: -260px;
+  z-index: 1;
+}
+
+.cards-stack-first {
+    position: relative;
+    z-index: 1;
+}
+
+.cards-stack:hover {
+    z-index: 2;
+  }
+  
+  .cards-stack-first:hover {
+    z-index: 2;
+  }
+
+.cards-action-was-used {
+    filter: grayscale(1);
+}
+
 .nofloat {
   clear: both;
   margin-bottom: 15px;
@@ -33,7 +56,7 @@
     cursor: pointer;
     /*float: left;*/
     position: relative;
-    background: #eeeeee;
+    background: #333333;
     background: linear-gradient(to bottom right, #ffffff, #aaaaaa, #eeeeee, #cecece, #dddddd, #eeeeee, #cccccc);
     width: 240px;
     height: 310px;
@@ -54,7 +77,7 @@
 
 input[type=checkbox]:checked + .filterDiv,
 input[type=radio]:checked + .filterDiv {
-    filter: brightness(125%);
+    filter: drop-shadow(-2px -2px 2px rgba(0,150,255,100)) drop-shadow(-2px -2px 2px rgba(255,255,255,100))drop-shadow(16px 16px 5px black) ;
 }
 
 .filterDiv3 {
@@ -99,6 +122,8 @@ input[type=radio]:checked + .filterDiv {
 }
 
 .colony-card {
+    color: white;
+    filter: drop-shadow(2px 2px 1px #020202);
     height: 275px;
     width: 418px;
     background-color: black;
@@ -110,6 +135,7 @@ input[type=radio]:checked + .filterDiv {
 
 .price {
     float: left;
+    color: black;
     font-family: Prototype;
     font-size: 26px;
     border-top: 2px solid rgb(221,221,221);
@@ -339,6 +365,7 @@ input[type=radio]:checked + .filterDiv {
 
 
 .title {
+    color: #020202;
     text-transform: uppercase;
     font-family: Prototype;
     float: left;
@@ -405,6 +432,7 @@ input[type=radio]:checked + .filterDiv {
 
 /************** Style the Content ************/
 .content {
+    color: black;
     position: relative;
     display: inline-block;
     width: 220px;
@@ -413,17 +441,21 @@ input[type=radio]:checked + .filterDiv {
     line-height: 20px;
     font-weight: bold;
     text-align: center;
+    filter: ;
 }
 
 .contentCorporation {
+	color:#020202;
     position: relative;
     display: inline-block;
     font-weight:bold;
     padding: 8px;
+    color: #020202;
 }
 
 .requirements {
-  font-family: Prototype;
+    color: #020202;
+    font-family: Prototype;
     background-color: rgb(255,204,100);
     background: linear-gradient(to right, #e28c22, rgb(255,204,100),rgb(255,204,100), #e28c22);
     border-top: 2px solid rgb(221,221,221);
@@ -466,6 +498,27 @@ input[type=radio]:checked + .filterDiv {
     box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
 }
 
+.pointsCorporation {
+    position: absolute;
+    font-family: Prototype;
+    font-weight: normal;
+    z-index:1;
+    margin-top:250px;
+    margin-left:135px;
+    width: 80px;
+    height: 42px;
+    line-height: 35px;
+    font-size: 28px;
+    text-align: center;
+    border-radius: 12px;
+    border-top: 2px solid rgb(221,221,221);
+    border-left: 2px solid rgb(221,221,221);
+    border-bottom: 2px solid rgb(137,137,137);
+    border-right: 2px solid rgb(137,137,137);
+    background-color: rgb(205,162, 130);
+    background: linear-gradient(#cc8b00, rgb(128, 87, 0),rgb(128, 87, 0));
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
+}
 .points-big {
     line-height: 42px;
     font-size: 36px;
@@ -474,6 +527,7 @@ input[type=radio]:checked + .filterDiv {
 
 
 .description {
+    color: #020202;
     font-size: 11px;
     line-height: 13px;
     font-weight:normal;
@@ -1131,6 +1185,7 @@ input[type=radio]:checked + .filterDiv {
 .corporationLabel {
     float: left;
     position:absolute;
+    color: #020202;
     font-family: Prototype;
     width: 115px;
     height: 14px;
@@ -1152,9 +1207,9 @@ input[type=radio]:checked + .filterDiv {
 border-left: 2px solid rgb(221,221,221);
 border-bottom: 2px solid rgb(137,137,137);
 border-right: 2px solid rgb(137,137,137);
-    height: 135px;
+    height: 130px;
     width: 212px;
-    margin-top: 145px;
+    margin-top: 160px;
     padding: 3px;
     border-radius: 10px;
     text-align: center;
@@ -1179,15 +1234,16 @@ border-right: 2px solid rgb(137,137,137);
 
 
 .card_resources_counter {
+    
     position: absolute;
+    color: #020202;
     font-family: Prototype;
     width: 62px;
     height: 20px;
     line-height: 20px;
     text-align: center;
-    margin-top: 7px;
-    margin-left: 53px;
-    font-size: 14px;
+    margin: 305px 0 0 30px;
+    font-size: 12px;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
     background: #f5e500;
     border-radius: 2px;
@@ -1195,9 +1251,208 @@ border-right: 2px solid rgb(137,137,137);
     border-left: 2px solid rgb(221,221,221);
     border-bottom: 2px solid rgb(137,137,137);
     border-right: 2px solid rgb(137,137,137);
+    z-index: 3;
 }
 
 .card_resources_counter--number {
     padding-left: 5px;
+    z-index: 3;
 }
+    .polyphemos {
+    font-family: Prototype;
+    width: 180px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-align: center;
+    font-size: 26px;
+    border-bottom: 3px solid #cc3333;
+    border-top: 3px solid #cc3333;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .stormcraft1 {
+    display: inline-block;
+    color: white;
+    background: #ff9900;
+    line-height: 50px;
+    width: 83px;
+    text-align: center;
+    font-size: 24px;
+    margin-top: 10px;
+    margin-left: 0px;
+    margin-bottom: 10px;
+    border-radius: 100% 0 50% 0;
+    text-shadow: 0 0 6px black;
+    box-shadow: 0 3px 10px 0px black;
+  }
   
+  .stormcraft2 {
+    display: inline-block;
+    line-height: 50px;
+    width: 100px;
+    text-align: center;
+    font-size: 24px;
+    margin-top: 10px;
+    margin-left: -5px;
+    margin-bottom: 10px;
+    text-shadow: 0 5px 10px black;
+  }
+  
+  .stormcraft3 {
+    position: absolute;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 6px black;
+    color: white;
+    font-weight: normal;
+    margin-top: -23px;
+    margin-left:20px;
+    transform: scaleX(1.7);
+    font-family: Prototype;
+  }
+  
+  .stormcraft4 {
+    position: absolute;
+    transform: scaleX(1.7);
+    font-family: Prototype;
+    letter-spacing: 2px;
+    font-size: 10px;
+    font-weight: normal;
+    text-shadow: 0 5px 10px black;
+    margin-top: -23px;
+    margin-left: 90px;
+  }
+  
+  .utopia {
+    background: green;
+    color: white;
+    font-family: Prototype;
+    box-shadow: 3px 3px 3px 0px #444;
+    text-align: center;
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 160px;
+    padding: 2px;
+    border-top: 3px solid #09aa09;
+    border-left: 3px solid #09aa09;
+    border-right: 3px solid #005100;
+    border-bottom: 3px solid #005100;
+  
+  }
+  .utopia1 {
+    font-size: 20px;
+    transform: scaleX(1.5);
+    letter-spacing: 5px;
+    margin-left: 5px;
+  }
+  .utopia2 {
+    font-size: 10px;
+    letter-spacing: 16px;
+    margin-left: 13px;
+  }
+  
+  .factorum {
+    color: #ee792b;
+    text-shadow: 0 0 1px black, 0 1px black,  1px 0px black,  -1px 0px black,  0 -1px black;
+    letter-spacing: 5px;
+    font-size: 30px;
+    transform: scaleX(0.7);
+    margin-left: -35px;
+  }
+  
+  .mons {
+    background: rgb(200, 110, 35);
+    color: white;
+    text-align: center;
+    width: 80px;
+    height: 75px;
+    box-shadow: 3px 3px 6px #444;
+  }
+  
+  .mons0 {
+    font-size: 38px;
+    transform: scaleX(2.5);
+  }
+  
+  .mons1 {
+    letter-spacing: 5px;
+    font-size: 20px;
+    margin-top: -10px;
+    margin-left: 5px;
+  }
+  .mons2 {
+    margin-top: 0px;
+    letter-spacing: 3px;
+    margin-left: 2px;
+    font-size: 7px;
+  }
+  
+  .philares {
+    color: #444;
+    text-shadow: 0 1px 1px white, 0 -1px 1px white, -1px 0px 1px white, 1px 0px 1px white;
+    filter: drop-shadow(0 0 1px black);
+    letter-spacing: 4px;
+    font-size: 20px;
+    transform: scaleX(1.5);
+    margin-left: 48px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .septem {
+    color: white;
+    font-family: Times;
+    text-shadow: 0 0 1px black, 0 2px 2px black;
+    font-size: 30px;
+  }
+
+  .pristar {
+    background: radial-gradient(orange, orangered);
+    font-weight: normal;
+    color: black;
+  }
+
+  .pristar:before {
+    content: "P";
+    font-size: 20px;
+  }
+
+  .poseidon {
+    display:inline-block;
+    font-family: "Times New Roman", Arial;
+    background: linear-gradient(rgba(0,0,0,0) 0%, #3633ff 20%, rgba(0,0,0,0) 22%, #3633ff 50%, rgba(0,0,0,0) 78%,  #3633ff 80%, rgba(0,0,0,0) 100%);
+    line-height: 50px;
+    color: #aaa;
+    text-shadow:  0 0 1px black, 0 0 3px black;
+    width: 180px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    border-radius: 0% 100% 0% 75%;
+    box-shadow: 0 4px 10px 0px black;
+  }
+
+  .aridor {
+    font-family: Prototype;
+    font-weight: normal;
+    color: #c5c553;
+    letter-spacing: 4px;
+    background: #cc3333;
+    border: 2px solid #c5c553;
+    box-shadow: 1px 1px 5px 1px black;
+    width: 150px;
+    text-align: center;
+    font-size: 30px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  } 
+
+  .card-number {
+      visibility: hidden;
+      line-height: 0;
+  }

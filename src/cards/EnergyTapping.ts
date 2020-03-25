@@ -6,13 +6,14 @@ import {Player} from '../Player';
 import {Game} from '../Game';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import { Resources } from '../Resources';
+import { CardName } from '../CardName';
 
 export class EnergyTapping implements IProjectCard {
   public cost: number = 3;
   public tags: Array<Tags> = [Tags.ENERGY];
-  public name: string = 'Energy Tapping';
+  public name: CardName = CardName.ENERGY_TAPPING;
   public cardType: CardType = CardType.AUTOMATED;
-  
+  public hasRequirements = false;
   public canPlay(_player: Player, game: Game): boolean {
     if (game.getPlayers().length === 1) return true;
     return game.getPlayers().filter((p) => p.getProduction(Resources.ENERGY) > 0).length > 0;

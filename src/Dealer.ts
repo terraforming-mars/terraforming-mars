@@ -811,7 +811,7 @@ export const ALL_PROJECT_CARDS: Array<IProjectCard> = [
     new Zeppelins()
 ];
 
-export class Dealer {
+export class Dealer implements ILoadable<Dealer>{
     public deck: Array<IProjectCard> = [];
     public preludeDeck: Array<IProjectCard> = [];
     public discarded: Array<IProjectCard> = [];

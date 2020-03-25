@@ -49,7 +49,7 @@ const fs = require("fs");
 const dbFolder = path.resolve(__dirname, "../../db")
 const dbPath = path.resolve(__dirname, "../../db/game.db");
 
-export class Game {
+export class Game implements ILoadable<Game> {
     public activePlayer: Player;
     public claimedMilestones: Array<ClaimedMilestone> = [];
     public milestones: Array<IMilestone> = [];

@@ -45,7 +45,7 @@ import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
 
 const sqlite3 = require("sqlite3");
 const path = require("path");
-const fs = require('fs');
+const fs = require("fs");
 const dbFolder = path.resolve(__dirname, "../../db")
 const dbPath = path.resolve(__dirname, "../../db/game.db");
 

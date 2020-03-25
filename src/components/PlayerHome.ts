@@ -121,8 +121,7 @@ export const PlayerHome = Vue.component("player-home", {
                 <div class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
                     <div>
                         <div class="tag-display">
-                            <div class="tag-count icon-vp"></div>
-                            <span class="tag-count-display"> : {{player.victoryPointsBreakdown.total}}</span>
+                            <div class="tag-count icon-vp">{{player.victoryPointsBreakdown.total}}</div>
                         </div>
                     </div>
                 </div>

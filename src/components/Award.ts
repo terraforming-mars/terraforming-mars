@@ -20,8 +20,12 @@ export const Award = Vue.component("award", {
         <div class="awards">
             <a href="#" v-on:click.prevent="toggleMe()" v-i18n>Awards List</a>
             <ul v-show="isVisible()">
-                <li v-for="award in awards_list">
-                    <strong v-i18n>{{award.name}}</strong> — <span v-i18n>{{award.description}}</span>
+                <li v-for="award in awards_list" :class="award.player ? 'pwned-item': ''">
+                    <strong v-i18n>{{award.award.name}}</strong>
+                    <span v-if="award.player">
+                        (<span v-i18n>funded by</span> {{ award.player }})
+                    </span>
+                    — <span v-i18n>{{award.award.description}}</span>
                 </li>
             </ul>
         </div>

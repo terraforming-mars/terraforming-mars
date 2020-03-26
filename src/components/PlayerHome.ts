@@ -5,8 +5,6 @@ import { Board } from "./Board";
 import { Card } from "./Card";
 import { Milestone } from "./Milestone";
 import { Award } from "./Award";
-import { ClaimedMilestone } from "./ClaimedMilestone";
-import { FundedAward } from "./FundedAward";
 import { OtherPlayer } from "./OtherPlayer";
 import { PlayerResources } from "./PlayerResources";
 import { WaitingFor } from "./WaitingFor";
@@ -26,8 +24,6 @@ export const PlayerHome = Vue.component("player-home", {
     components: {
         "board": Board,
         "card": Card,
-        "claimed-milestone": ClaimedMilestone,
-        "funded-award": FundedAward,
         "other-player": OtherPlayer,
         "player-resources": PlayerResources,
         "waiting-for": WaitingFor,
@@ -162,20 +158,6 @@ export const PlayerHome = Vue.component("player-home", {
 
                     <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
                     <stacked-cards :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
-                </div>
-
-                <div class="player_home_block player_home_block--milestones" v-if="player.claimedMilestones.length > 0">
-                    <h2 v-i18n>Claimed Milestones</h2>
-                    <div class="player_home_block--claimed_milestones">
-                        <claimed-milestone v-for="claimedMilestone in player.claimedMilestones" :key="claimedMilestone.milestone" :players="player.players" :claimedmilestone="claimedMilestone"></claimed-milestone>
-                    </div>
-                </div>
-
-                <div class="player_home_block player_home_block--awards" v-if="player.fundedAwards.length > 0">
-                    <h2 v-i18n>Funded Awards</h2>
-                    <div>
-                        <funded-award v-for="fundedAward in player.fundedAwards" :key="fundedAward.award" :players="player.players" :fundedaward="fundedAward"></funded-award>
-                    </div>
                 </div>
             </div>
 

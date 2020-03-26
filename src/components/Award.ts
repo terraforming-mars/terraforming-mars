@@ -18,7 +18,13 @@ export const Award = Vue.component("award", {
     template: `
     <div class="awards_cont">
         <div class="awards">
-            <a href="#" v-on:click.prevent="toggleMe()" v-i18n>Awards List</a>
+            <div class="milestones-title">
+                <a href="#" v-on:click.prevent="toggleMe()" v-i18n>Awards</a>
+                <span v-for="award in awards_list" v-if="award.player" class="funded-award-inline">
+                    <span v-i18n>{{ award.award.name }}</span>: <span>{{ award.player }}</span>
+                </span>
+            </div>
+            
             <ul v-show="isVisible()">
                 <li v-for="award in awards_list" :class="award.player ? 'pwned-item': ''">
                     <strong v-i18n>{{award.award.name}}</strong>

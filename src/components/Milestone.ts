@@ -18,7 +18,12 @@ export const Milestone = Vue.component("milestone", {
     template: `
     <div class="milestones_cont">
         <div class="milestones">
-            <a href="#" v-on:click.prevent="toggleMe()" v-i18n>Milestones List</a>
+            <div class="milestones-title">
+                <a href="#" v-on:click.prevent="toggleMe()" v-i18n>Milestones</a>
+                <span v-for="milestone in milestones_list" v-if="milestone.player" class="claimed-milestone-inline">
+                    <span v-i18n>{{ milestone.milestone.name }}</span>: <span>{{ milestone.player }}</span>
+                </span>
+            </div>
             <ul v-show="isVisible()">
                 <li v-for="milestone in milestones_list" :class="milestone.player ? 'pwned-item': ''">
                     <strong v-i18n>{{milestone.milestone.name}}</strong>

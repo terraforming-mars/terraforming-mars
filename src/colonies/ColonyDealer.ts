@@ -10,20 +10,26 @@ import { Io } from './Io';
 import { Miranda } from './Miranda';
 import { Pluto } from './Pluto';
 import { Enceladus } from './Enceladus';
+import { ColonyName } from './ColonyName';
+
+export interface IColonyFactory<T> {
+    colonyName: ColonyName;
+    factory: new () => T
+}
 
 // ALL COLONIES TILES is now a const not and attribute of Colony Dealer
-export const ALL_COLONIES_TILES: Array<IColony> = [
-    new Ceres(),
-    new Enceladus(),
-    new Europa(),
-    new Ganymede(),
-    new Io(),
-    new Luna(),
-    new Miranda(),
-    new Titan(),
-    new Callisto(),
-    new Pluto(),
-    new Triton()
+export const ALL_COLONIES_TILES: Array<IColonyFactory<IColony>> = [
+    { colonyName: ColonyName.CERES, factory: Ceres },
+    { colonyName: ColonyName.ENCELADUS, factory: Enceladus },
+    { colonyName: ColonyName.EUROPA, factory: Europa },
+    { colonyName: ColonyName.GANYMEDE, factory: Ganymede },
+    { colonyName: ColonyName.IO, factory: Io },
+    { colonyName: ColonyName.LUNA, factory: Luna },
+    { colonyName: ColonyName.MIRANDA, factory: Miranda },
+    { colonyName: ColonyName.TITAN, factory: Titan },
+    { colonyName: ColonyName.CALLISTO, factory: Callisto },
+    { colonyName: ColonyName.PLUTO, factory: Pluto },
+    { colonyName: ColonyName.TRITON, factory: Triton },
 ];
 
 export class ColonyDealer {

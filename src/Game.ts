@@ -1109,8 +1109,7 @@ export class Game implements ILoadable<Game> {
     }
 
     // Custom replacer to transform Map and Set to Array
-    public replacer(key: any, value: any) {
-      key = key +"";
+    public replacer(_key: any, value: any) {
       if (value instanceof Set) {
         return Array.from(value);
       }

@@ -1798,16 +1798,10 @@ export class Player implements ILoadable<Player>{
       let o = Object.assign(this, d);
 
       // Rebuild generation played map
-      this.generationPlayed = new Map<string, number>();
-      d.generationPlayed.forEach((element: any) => {
-        this.generationPlayed.set(element[0], element[1]);
-      });
+      this.generationPlayed = new Map<string, number>(d.generationPlayed);
 
       // action this generation set
-      this.actionsThisGeneration = new Set<string>();
-      d.actionsThisGeneration.forEach((element: any) => {
-        this.actionsThisGeneration.add(element);
-      });
+      this.actionsThisGeneration = new Set<string>(d.actionsThisGeneration);
 
       // Rebuild corporation card
       this.corporationCard = this.getCorporationCardByName(d.corporationCard!.name)

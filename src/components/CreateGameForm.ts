@@ -2,9 +2,9 @@
 import Vue from "vue";
 import { Color } from "../Color";
 
-import { CorporationCard } from '../cards/corporation/CorporationCard';
 import { ALL_VENUS_CORPORATIONS, ALL_PRELUDE_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS } from '../Dealer';
 import { BoardName } from '../BoardName';
+import { CardName } from "../CardName";
 
 interface CreateGameModel {
     firstIndex: number;
@@ -17,7 +17,7 @@ interface CreateGameModel {
     venusNext: boolean;
     colonies: boolean;
     customCorporationsList: boolean;
-    corporations: Array<CorporationCard>;
+    corporations: Array<CardName>;
     showCorporationList: boolean;
     board: BoardName;
     showSeed: boolean;
@@ -51,7 +51,14 @@ export const CreateGameForm = Vue.component("create-game-form", {
             venusNext: false,
             colonies: false,
             customCorporationsList: false,
-            corporations: [...ALL_CORPORATION_CARDS, ...ALL_PRELUDE_CORPORATIONS, ...ALL_VENUS_CORPORATIONS, ...ALL_COLONIES_CORPORATIONS, ...ALL_TURMOIL_CORPORATIONS, ...ALL_PROMO_CORPORATIONS],
+            corporations: [
+                ...ALL_CORPORATION_CARDS.map((cf) => cf.cardName),
+                ...ALL_PRELUDE_CORPORATIONS.map((cf) => cf.cardName),
+                ...ALL_VENUS_CORPORATIONS.map((cf) => cf.cardName),
+                ...ALL_COLONIES_CORPORATIONS.map((cf) => cf.cardName),
+                ...ALL_TURMOIL_CORPORATIONS.map((cf) => cf.cardName),
+                ...ALL_PROMO_CORPORATIONS.map((cf) => cf.cardName)
+            ],
             showCorporationList: false,
             board: BoardName.ORIGINAL,
             showSeed: false,
@@ -279,8 +286,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <h2>Original</h2>
                             <div v-for="corporation in getOriginalCorps()">
                                 <label class="form-checkbox">
-                                    <input type="checkbox" v-model="corporations" :value="corporation"/>
-                                    <i class="form-icon"></i>{{corporation.name}}
+                                    <input type="checkbox" v-model="corporations" :value="corporation.cardName"/>
+                                    <i class="form-icon"></i>{{corporation.cardName}}
                                 </label>    
                             </div>
                         </div>
@@ -289,8 +296,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <h2>Prelude</h2>
                             <div v-for="corporation in getPreludeCorps()">
                                 <label class="form-checkbox">
-                                    <input type="checkbox"  v-model="corporations" :value="corporation"/>
-                                    <i class="form-icon"></i>{{corporation.name}}
+                                    <input type="checkbox"  v-model="corporations" :value="corporation.cardName"/>
+                                    <i class="form-icon"></i>{{corporation.cardName}}
                                 </label>    
                             </div>
                         </div>
@@ -299,9 +306,9 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <h2>Venus Next</h2>
                             <div v-for="corporation in getVenusCorps()">
                                 <label class="form-checkbox">
-                                    <input type="checkbox"  v-model="corporations" :value="corporation"/>
-                                    <i class="form-icon"></i>{{corporation.name}}
-                                </label>    
+                                    <input type="checkbox"  v-model="corporations" :value="corporation.cardName"/>
+                                    <i class="form-icon"></i>{{corporation.cardName}}
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -311,9 +318,9 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <h2>Colonies</h2>   
                             <div v-for="corporation in getColoniesCorps()">
                                 <label class="form-checkbox">
-                                    <input type="checkbox"  v-model="corporations" :value="corporation"/>
-                                    <i class="form-icon"></i>{{corporation.name}}
-                                </label>    
+                                    <input type="checkbox"  v-model="corporations" :value="corporation.cardName"/>
+                                    <i class="form-icon"></i>{{corporation.cardName}}
+                                </label>
                             </div>
                         </div>
     
@@ -321,8 +328,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <h2>Turmoil</h2>   
                             <div v-for="corporation in getTurmoilCorps()">
                                 <label class="form-checkbox">
-                                    <input type="checkbox"  v-model="corporations" :value="corporation"/>
-                                    <i class="form-icon"></i>{{corporation.name}}
+                                    <input type="checkbox"  v-model="corporations" :value="corporation.cardName"/>
+                                    <i class="form-icon"></i>{{corporation.cardName}}
                                 </label>
                             </div> 
                         </div> 
@@ -331,13 +338,13 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <h2>Promo</h2>   
                             <div v-for="corporation in getPromoCorps()">
                                 <label class="form-checkbox">
-                                    <input type="checkbox"  v-model="corporations" :value="corporation"/>
-                                    <i class="form-icon"></i>{{corporation.name}}
+                                    <input type="checkbox"  v-model="corporations" :value="corporation.cardName"/>
+                                    <i class="form-icon"></i>{{corporation.cardName}}
                                 </label>
                             </div> 
-                        </div>  
-                    </div>              
-                </div>              
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>

@@ -32,8 +32,7 @@ import {SelectCity} from "./interrupts/SelectCity";
 import {SpaceType} from "./SpaceType";
 import {ITagCount} from "./ITagCount";
 import {TileType} from "./TileType";
-import { BeginnerCorporation } from "./cards/corporation/BeginnerCorporation";
-import { ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_VENUS_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_PROMO_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROJECT_CARDS, ALL_PRELUDE_CARDS, ALL_PRELUDE_PROJECTS_CARDS, ALL_VENUS_PROJECTS_CARDS, ALL_COLONIES_PROJECTS_CARDS } from "./Dealer";
+import { getProjectCardByName, getCorporationCardByName } from "./Dealer";
 import { ILoadable } from "./ILoadable";
 
 export class Player implements ILoadable<Player>{
@@ -152,7 +151,7 @@ export class Player implements ILoadable<Player>{
       }
 
       //Manutech hook
-      if (amount > 0 && this.corporationCard !== undefined && this.corporationCard.name ===  CorporationName.MANUTECH) {
+      if (amount > 0 && this.corporationCard !== undefined && this.corporationCard.name === CardName.MANUTECH) {
         if (resource === Resources.MEGACREDITS) this.megaCredits += amount;
         if (resource === Resources.STEEL) this.steel += amount;
         if (resource === Resources.TITANIUM) this.titanium += amount;
@@ -1770,28 +1769,6 @@ export class Player implements ILoadable<Player>{
       this.waitingForCb = cb;
     }
 
-    // Function to return a corporation card object by its name
-    private getCorporationCardByName(cardName: string): CorporationCard | undefined {
-      if (cardName === (new BeginnerCorporation()).name) {
-          return new BeginnerCorporation();
-      }
-      return ALL_CORPORATION_CARDS.find((card) => card.name === cardName) 
-      || ALL_PRELUDE_CORPORATIONS.find((card) => card.name === cardName) 
-      || ALL_VENUS_CORPORATIONS.find((card) => card.name === cardName) 
-      || ALL_COLONIES_CORPORATIONS.find((card) => card.name === cardName) 
-      || ALL_PROMO_CORPORATIONS.find((card) => card.name === cardName) 
-      || ALL_TURMOIL_CORPORATIONS.find((card) => card.name === cardName);
-    }
-
-    // Function to return a card object by its name
-    private getProjectCardByName(cardName: string): IProjectCard | undefined {
-      return ALL_PROJECT_CARDS.find((card) => card.name === cardName) 
-      || ALL_PRELUDE_CARDS.find((card) => card.name === cardName) 
-      || ALL_PRELUDE_PROJECTS_CARDS.find((card) => card.name === cardName)
-      || ALL_VENUS_PROJECTS_CARDS.find((card) => card.name === cardName)
-      || ALL_COLONIES_PROJECTS_CARDS.find((card) => card.name === cardName);
-    }
-
     // Function used to rebuild each objects
     public loadFromJSON(d: Player): Player {
       // Assign each attributes
@@ -1804,31 +1781,31 @@ export class Player implements ILoadable<Player>{
       this.actionsThisGeneration = new Set<string>(d.actionsThisGeneration);
 
       // Rebuild corporation card
-      this.corporationCard = this.getCorporationCardByName(d.corporationCard!.name)
+      this.corporationCard = getCorporationCardByName(d.corporationCard!.name)
 
       // Rebuild deal corporation array
       this.dealtCorporationCards = d.dealtCorporationCards.map((element: CorporationCard)  => {
-        return this.getCorporationCardByName(element.name)!;
+        return getCorporationCardByName(element.name)!;
       });
 
       // Rebuild each cards in hand
       this.cardsInHand = d.cardsInHand.map((element: IProjectCard)  => {
-        return this.getProjectCardByName(element.name)!;
+        return getProjectCardByName(element.name)!;
       });
 
       // Rebuild each prelude in hand
       this.preludeCardsInHand = d.preludeCardsInHand.map((element: IProjectCard)  => {
-        return this.getProjectCardByName(element.name)!;
+        return getProjectCardByName(element.name)!;
       });
 
       // Rebuild each playerd card
       this.playedCards = d.playedCards.map((element: IProjectCard)  => {
-        return this.getProjectCardByName(element.name)!;
+        return getProjectCardByName(element.name)!;
       });
 
       // Rebuild each drafted cards
       this.draftedCards = d.draftedCards.map((element: IProjectCard)  => {
-        return this.getProjectCardByName(element.name)!;
+        return getProjectCardByName(element.name)!;
       });
       
       return o;

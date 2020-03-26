@@ -15,10 +15,7 @@ export class VenusWaystation implements IProjectCard {
         return undefined;
     }
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
-        if (card.tags.indexOf(Tags.VENUS) !== -1) {
-            return 2;
-        }
-        return 0;
+        return card.tags.filter(tag => tag === Tags.VENUS).length * 2;
     }
     public getVictoryPoints() {
         return 1;

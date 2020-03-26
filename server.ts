@@ -7,7 +7,6 @@ import {AndOptions} from './src/inputs/AndOptions';
 import { CardModel } from './src/models/CardModel';
 import {ColonyModel} from './src/models/ColonyModel';
 import {Color} from './src/Color';
-import {CorporationCard} from './src/cards/corporation/CorporationCard';
 import {
     ALL_CORPORATION_CARDS,
     ALL_PRELUDE_CORPORATIONS,
@@ -38,17 +37,18 @@ import {TileType} from './src/TileType';
 import { Phase } from './src/Phase';
 import { Resources } from "./src/Resources";
 import { CardType } from './src/cards/CardType';
+import { CardName } from "./src/CardName";
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
-const allCorporationCards: Array<CorporationCard> = ALL_CORPORATION_CARDS.concat(
-    ALL_PRELUDE_CORPORATIONS,
-    ALL_COLONIES_CORPORATIONS,
-    ALL_VENUS_CORPORATIONS,
-    ALL_TURMOIL_CORPORATIONS,
-    ALL_PROMO_CORPORATIONS
+const allCorporationCards: Array<CardName> = ALL_CORPORATION_CARDS.map((cardFactory): CardName => cardFactory.cardName).concat(
+    ALL_PRELUDE_CORPORATIONS.map((cardFactory): CardName => cardFactory.cardName),
+    ALL_COLONIES_CORPORATIONS.map((cardFactory): CardName => cardFactory.cardName),
+    ALL_VENUS_CORPORATIONS.map((cardFactory): CardName => cardFactory.cardName),
+    ALL_TURMOIL_CORPORATIONS.map((cardFactory): CardName => cardFactory.cardName),
+    ALL_PROMO_CORPORATIONS.map((cardFactory): CardName => cardFactory.cardName)
 );
 function requestHandler(
     req: http.IncomingMessage,
@@ -295,9 +295,9 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
           break;
         }
       }
-      const selectedCorporations: Array<CorporationCard> = [];
-      for (let corp of gameReq.corporations) {
-        const foundCard: CorporationCard | undefined = allCorporationCards.find((card) => card.name === corp.name);
+      const selectedCorporations: Array<CardName> = [];
+      for (let corp of (gameReq.corporations as Array<CardName>)) {
+        const foundCard: CardName | undefined = allCorporationCards.find((cardName) => cardName === corp);
         if (foundCard !== undefined) {
           selectedCorporations.push(foundCard);
         } else {

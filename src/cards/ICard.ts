@@ -15,6 +15,7 @@ import { StandardProjectType } from "../StandardProjectType";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from '../inputs/SelectOption';
 import { ResourceType } from '../ResourceType';
+import { CardName } from "../CardName";
 
 export interface IActionCard {
     action: (player: Player, game: Game) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
@@ -27,7 +28,7 @@ export interface IResourceCard {
 }
 
 export interface ICard {
-    name: string;
+    name: CardName;
     tags: Array<Tags>;
     play: (player: Player, game: Game) => PlayerInput | undefined;
     action?: (player: Player, game: Game) =>  OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;

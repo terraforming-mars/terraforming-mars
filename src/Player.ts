@@ -149,7 +149,7 @@ export class Player {
       }
 
       //Manutech hook
-      if (amount > 0 && this.corporationCard !== undefined && this.corporationCard.name ===  CorporationName.MANUTECH) {
+      if (amount > 0 && this.corporationCard !== undefined && this.corporationCard.name === CardName.MANUTECH) {
         if (resource === Resources.MEGACREDITS) this.megaCredits += amount;
         if (resource === Resources.STEEL) this.steel += amount;
         if (resource === Resources.TITANIUM) this.titanium += amount;

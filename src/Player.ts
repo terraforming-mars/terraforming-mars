@@ -1426,8 +1426,12 @@ export class Player implements ILoadable<Player>{
     // Propose a new action to undo last action
     private undoTurnOption(game: Game): PlayerInput {
       return new SelectOption("Undo Turn", () => {
-        //this.actionsTakenThisRound = 0;
-        game.restoreLastSave();
+        try {
+          game.restoreLastSave();
+        }
+        catch(error){
+          console.log(error);
+        }
         return undefined;
       });
     }

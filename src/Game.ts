@@ -42,6 +42,7 @@ import {SelectResourceProductionDecrease} from "./interrupts/SelectResourceProdu
 import {ICard} from "./cards/ICard";
 import {SelectResourceDecrease} from "./interrupts/SelectResourceDecrease";
 import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
+import {CardName} from "./CardName";
 
 export class Game {
     public activePlayer: Player;
@@ -80,7 +81,7 @@ export class Game {
       public venusNextExtension: boolean = false,
       public coloniesExtension: boolean = false,
       customCorporationsList: boolean = false,
-      corporationList: Array<CorporationCard> = [],
+      corporationList: Array<CardName> = [],
       public boardName: BoardName = BoardName.ORIGINAL,
       seed?: number
     ) {
@@ -113,15 +114,15 @@ export class Game {
         this.setupSolo();
       }
 
-      let corporationCards = ALL_CORPORATION_CARDS.slice();
+      let corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
       // Add prelude corporations cards
       if (this.preludeExtension) {
-        corporationCards.push(...ALL_PRELUDE_CORPORATIONS);
+        corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
       }
 
       // Add Venus Next corporations cards, board colonies and milestone / award
       if (this.venusNextExtension) {
-        corporationCards.push(...ALL_VENUS_CORPORATIONS);
+        corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
         this.milestones.push(...VENUS_MILESTONES);
         this.awards.push(...VENUS_AWARDS);
         this.board.spaces.push(
@@ -134,7 +135,7 @@ export class Game {
 
       // Add colonies stuff
       if (this.coloniesExtension) {
-        corporationCards.push(...ALL_COLONIES_CORPORATIONS);
+        corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
         this.colonyDealer = new ColonyDealer();
         this.colonies = this.colonyDealer.drawColonies(players.length);
         if (this.players.length === 1) {
@@ -144,7 +145,12 @@ export class Game {
       }
       // Setup custom corporation list
       if (customCorporationsList && corporationList.length >= players.length * 2) {
-        corporationCards = corporationList;
+        corporationList.forEach((cardName) => {
+            const cardFactory = ALL_CORPORATION_CARDS.find((cf) => cf.cardName === cardName);
+            if (cardFactory !== undefined) {
+                corporationCards.push(new cardFactory.factory());
+            }
+        });
       }
 
       corporationCards = this.dealer.shuffleCards(corporationCards);

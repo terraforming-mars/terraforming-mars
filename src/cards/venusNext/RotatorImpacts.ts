@@ -55,7 +55,7 @@ export class RotatorImpacts implements IActionCard,IProjectCard, IResourceCard {
             return undefined;
         });
 
-        if (player.canAfford(6, true)) {
+        if (player.canAfford(6, false, true)) {
             opts.push(addResource);
         };
 

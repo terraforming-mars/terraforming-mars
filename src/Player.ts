@@ -1781,7 +1781,11 @@ export class Player implements ILoadable<Player>{
       this.actionsThisGeneration = new Set<string>(d.actionsThisGeneration);
 
       // Rebuild corporation card
-      this.corporationCard = getCorporationCardByName(d.corporationCard!.name)
+      if (d.corporationCard !== undefined) {
+        this.corporationCard = getCorporationCardByName(d.corporationCard.name);
+      } else {
+          this.corporationCard = undefined;
+      }
 
       // Rebuild deal corporation array
       this.dealtCorporationCards = d.dealtCorporationCards.map((element: CorporationCard)  => {

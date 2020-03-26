@@ -32,6 +32,15 @@ export const ALL_COLONIES_TILES: Array<IColonyFactory<IColony>> = [
     { colonyName: ColonyName.TRITON, factory: Triton },
 ];
 
+// Function to return a card object by its name
+export function getColonyByName(colonyName: string): IColony | undefined {
+    let colonyFactory = ALL_COLONIES_TILES.find((colonyFactory) => colonyFactory.colonyName === colonyName);
+    if (colonyFactory !== undefined) {
+        return new colonyFactory.factory();
+    }
+    return undefined;
+}
+
 export class ColonyDealer {
     //private seed: number = 0;
     public coloniesDeck: Array<IColony> = [];
@@ -66,7 +75,7 @@ export class ColonyDealer {
         } else if (players === 2) {
             count = 5;
         }
-        let tempDeck = this.shuffle(ALL_COLONIES_TILES);
+        let tempDeck = this.shuffle(ALL_COLONIES_TILES.map((cf) => new cf.factory()));
         for (let i = 0; i < count; i++) {
             this.coloniesDeck.push(tempDeck.pop());
         }    

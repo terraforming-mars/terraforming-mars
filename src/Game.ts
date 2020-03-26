@@ -32,7 +32,7 @@ import {ElysiumBoard} from "./ElysiumBoard";
 import {HellasBoard} from "./HellasBoard";
 import {BoardName} from "./BoardName";
 import {IColony} from "./colonies/Colony";
-import {ColonyDealer, ALL_COLONIES_TILES} from "./colonies/ColonyDealer";
+import {ColonyDealer, getColonyByName} from "./colonies/ColonyDealer";
 import {PlayerInterrupt} from "./interrupts/PlayerInterrupt";
 import {SelectOcean} from "./interrupts/SelectOcean";
 import {SelectResourceCard} from "./interrupts/SelectResourceCard";
@@ -1203,17 +1203,19 @@ export class Game implements ILoadable<Game> {
         this.colonyDealer = new ColonyDealer();
         this.colonies = new Array<IColony>();
         d.colonies.forEach((element: IColony) => {
-          let colonie = ALL_COLONIES_TILES.find((colony: IColony) => colony.name === element.name)!;
-          if (element.visitor){
-            let playerIndex: number = this.players.findIndex((player) => player.id === element.visitor!.id);
-            colonie.visitor = this.players[playerIndex];
+          let colonie = getColonyByName(element.name);
+          if (colonie !== undefined) {
+            if (element.visitor){
+              let playerIndex: number = this.players.findIndex((player) => player.id === element.visitor!.id);
+              colonie.visitor = this.players[playerIndex];
+            }
+            colonie.colonies = new Array<Player>();
+            element.colonies.forEach((element: Player) => {
+              let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
+              colonie!.colonies.push(this.players[playerIndex]);
+            });
+            this.colonies.push(colonie);
           }
-          colonie.colonies = new Array<Player>();
-          element.colonies.forEach((element: Player) => {
-            let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
-            colonie.colonies.push(this.players[playerIndex]);
-          });
-          this.colonies.push(colonie);
         });     
       }
 

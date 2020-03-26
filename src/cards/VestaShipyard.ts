@@ -12,7 +12,9 @@ export class VestaShipyard implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: CardName = CardName.VESTA_SHIPYARD;
     public cardType: CardType = CardType.AUTOMATED;
-
+    public getVictoryPoints(): number {
+        return 1;
+    }
     public play(player: Player, _game: Game): undefined {
         player.setProduction(Resources.TITANIUM);
         return undefined;

@@ -13,10 +13,7 @@ export class ValleyTrust implements CorporationCard {
     public startingMegaCredits: number = 37;
 
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
-        if (card.tags.indexOf(Tags.SCIENCE) !== -1) {
-            return 2;
-        }
-        return 0;
+        return card.tags.filter(tag => tag === Tags.SCIENCE).length * 2;
     }
 
     public initialAction(player: Player, game: Game) {

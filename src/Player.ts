@@ -173,7 +173,7 @@ export class Player {
       }
 
       //Manutech hook
-      if (amount > 0 && this.corporationCard !== undefined && this.corporationCard.name ===  CorporationName.MANUTECH) {
+      if (amount > 0 && this.corporationCard !== undefined && this.corporationCard.name === CardName.MANUTECH) {
         if (resource === Resources.MEGACREDITS) this.megaCredits += amount;
         if (resource === Resources.STEEL) this.steel += amount;
         if (resource === Resources.TITANIUM) this.titanium += amount;
@@ -1361,7 +1361,7 @@ export class Player {
     private convertHeatIntoTemperature(game: Game): PlayerInput {
       let heatAmount: number;
       let floaterAmount: number;
-      if (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
+      if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
         let raiseTempOptions = new AndOptions (
           () => {
             if (heatAmount + (floaterAmount * 2) < 8) {
@@ -1798,7 +1798,7 @@ export class Player {
 
       if (
         (this.heat >= constants.HEAT_FOR_TEMPERATURE || 
-          (this.isCorporation(CorporationName.STORMCRAFT_INCORPORATED) &&
+          (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) &&
            (this.getResourcesOnCorporation() * 2) + this.heat >= constants.HEAT_FOR_TEMPERATURE)
            ) &&
             game.getTemperature() + 2 <= constants.MAX_TEMPERATURE) {

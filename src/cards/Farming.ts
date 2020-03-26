@@ -21,4 +21,7 @@ export class Farming implements IProjectCard {
     player.plants += 2;
     return undefined;
   }
+  public getVictoryPoints() {
+    return 2;
+  }
 }

@@ -13,10 +13,7 @@ export class CheungShingMARS implements CorporationCard {
     public startingMegaCredits: number = 44;
 
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
-        if (card.tags.indexOf(Tags.STEEL) !== -1) {
-            return 2;
-        }
-        return 0;
+        return card.tags.filter(tag => tag === Tags.STEEL).length * 2;
     }
 	    
     public play(player: Player) {

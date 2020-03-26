@@ -45,10 +45,23 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
-    return ALL_PROJECT_CARDS.find((card) => card.name === cardName) 
-    || ALL_PRELUDE_PROJECTS_CARDS.find((card) => card.name === cardName)
-    || ALL_VENUS_PROJECTS_CARDS.find((card) => card.name === cardName)
-    || ALL_COLONIES_PROJECTS_CARDS.find((card) => card.name === cardName);
+    cardFactory = ALL_PRELUDE_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_VENUS_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_COLONIES_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_PROJECT_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    return undefined;
 }
 
 function getData(cardName: string, resources: string, wasPlayed: boolean): string | undefined {

@@ -106,7 +106,7 @@ export const PlayerHome = Vue.component("player-home", {
                         </div>
                         <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
                     </div>
-                    <div v-if="player.players.length > 1">
+                    <div v-if="player.players.length > 1" style="display:flex;flex-wrap:wrap;">
                         <div v-for="otherPlayer in player.players" :key="otherPlayer.id">
                             <other-player v-if="otherPlayer.id !== player.id" :player="otherPlayer"></other-player>
                         </div>

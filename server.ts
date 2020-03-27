@@ -38,6 +38,8 @@ import { Phase } from './src/Phase';
 import { Resources } from "./src/Resources";
 import { CardType } from './src/cards/CardType';
 import { CardName } from "./src/CardName";
+import { ClaimedMilestoneModel } from "./src/models/ClaimedMilestoneModel";
+import { FundedAwardModel } from "./src/models/FundedAwardModel";
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
@@ -321,17 +323,45 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
   });
 }
 
+function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
+  const allMilestones = game.milestones;
+  const claimedMilestones = game.claimedMilestones;
+  let milestoneModels: Array<ClaimedMilestoneModel> = [];
+
+  for (let idx in allMilestones) {
+    let claimed = claimedMilestones.find((m) => m.milestone.name === allMilestones[idx].name)
+    milestoneModels.push({
+      player_name: claimed === undefined ? "": claimed.player.name,
+      player_color: claimed === undefined ? "": claimed.player.color,
+      milestone: allMilestones[idx]
+    })
+  }
+  
+  return milestoneModels;
+}
+
+function getAwards(game: Game): Array<FundedAwardModel>  {
+  const allAwards = game.awards;
+  const fundedAwards = game.fundedAwards;
+  let awardModels: Array<FundedAwardModel> = [];
+
+  for (let idx in allAwards) {
+    let funded = fundedAwards.find((a) => a.award.name === allAwards[idx].name)
+    awardModels.push({
+      player_name: funded === undefined ? "": funded.player.name,
+      player_color: funded === undefined ?  "": funded.player.color,
+      award: allAwards[idx]
+    })
+  }
+  
+  return awardModels;
+}
+
 function getPlayer(player: Player, game: Game): string {
   const output = {
     cardsInHand: getCards(player, player.cardsInHand, game),
-    claimedMilestones: game.claimedMilestones.map((claimedMilestone) => {
-      return {
-        player: claimedMilestone.player.id,
-        milestone: claimedMilestone.milestone.name
-      };
-    }),
-    milestones: game.milestones,
-    awards: game.awards,
+    milestones: getMilestones(game),
+    awards: getAwards(game),
     color: player.color,
     corporationCard: player.corporationCard ?
       player.corporationCard.name : undefined,
@@ -339,9 +369,6 @@ function getPlayer(player: Player, game: Game): string {
       player.getResourcesOnCard(player.corporationCard) : undefined,  
     energy: player.energy,
     energyProduction: player.getProduction(Resources.ENERGY),
-    fundedAwards: game.fundedAwards.map((fundedAward) => {
-      return {player: fundedAward.player.id, award: fundedAward.award.name};
-    }),
     generation: game.getGeneration(),
     heat: player.heat,
     heatProduction: player.getProduction(Resources.HEAT),

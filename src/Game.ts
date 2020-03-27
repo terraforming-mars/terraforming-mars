@@ -1133,7 +1133,7 @@ export class Game implements ILoadable<Game> {
       let db = new sqlite3.Database(dbPath);
 
       // Retrieve last save from database
-      db.get("SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC", [this.id, this.lastSaveId],(err: { message: any; }, row: { game: any; }) => {
+      db.get("SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1", [this.id, this.lastSaveId],(err: { message: any; }, row: { game: any; }) => {
         if (err) {
           return console.error(err.message);
         }

@@ -43,6 +43,10 @@ import {ICard} from "./cards/ICard";
 import {SelectResourceDecrease} from "./interrupts/SelectResourceDecrease";
 import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
 import { ILoadable } from "./ILoadable";
+import {LogMessage} from "./LogMessage";
+import {LogMessageType} from "./LogMessageType";
+import {LogMessageData} from "./LogMessageData";
+import {LogMessageDataType} from "./LogMessageDataType";
 import {CardName} from "./CardName";
 import {Database} from "./database/Database";
 import { SerializedGame } from "./SerializedGame";
@@ -66,7 +70,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private draftedPlayers: Set<Player> = new Set<Player>();
     public board: Board;
     private temperature: number = constants.MIN_TEMPERATURE;
-    public gameLog: Array<String> = [];
+    public gameLog: Array<LogMessage> = [];
     public gameAge: number = 0; // Each log event increases it
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
     public interrupts: Array<PlayerInterrupt> = [];
@@ -157,6 +161,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
           this.playCorporationCard(player, new BeginnerCorporation());
         }
       }
+
+      this.log(
+        LogMessageType.NEW_GENERATION,
+        "Generation ${0}",
+        new LogMessageData(LogMessageDataType.STRING, this.generation.toString())
+      );
     }
 
     // Function to construct the board and milestones/awards list
@@ -301,7 +311,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.allAwardsFunded()) {
         throw new Error("All awards already funded");
       }
-      this.log(player.name + " funded " + award.name + " award");
+      this.log(
+        LogMessageType.DEFAULT,
+        "${0} funded ${1} award",
+        new LogMessageData(LogMessageDataType.PLAYER, player.name),
+        new LogMessageData(LogMessageDataType.AWARD, award.name)
+      );
       this.fundedAwards.push({
         award: award,
         player: player
@@ -481,6 +496,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
         });
       }
       this.generation++;
+      this.log(
+        LogMessageType.NEW_GENERATION,
+        "Generation ${0}",
+        new LogMessageData(LogMessageDataType.STRING, this.generation.toString())
+      );
       this.incrementFirstPlayer();
 
       this.players.forEach((player) => {
@@ -1061,8 +1081,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return result;
     }   
 
-    public log(message: String) {
-      this.gameLog.push(message);
+    public log(type: LogMessageType, message: string, ...data: LogMessageData[]) {
+      this.gameLog.push(new LogMessage(type, message, data));
       this.gameAge++;
       if (this.gameLog.length > 50 ) {
         (this.gameLog.shift());

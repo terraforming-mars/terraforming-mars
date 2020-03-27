@@ -2,5 +2,6 @@ import { IMilestone } from "../milestones/IMilestone";
 
 export interface ClaimedMilestoneModel {
     milestone: IMilestone;
-    player: string;
+    player_name: string;
+    player_color: string;
 }

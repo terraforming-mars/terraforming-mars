@@ -25,7 +25,6 @@ export const AndOptions = Vue.component("and-options", {
             for (let i = 0; i < this.playerinput.options.length; i++) {
                 res.push(this.responded["" + i]);
             }
-            console.log(res);
             this.onsave(res);
         }
     },

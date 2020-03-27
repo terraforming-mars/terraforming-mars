@@ -3,5 +3,6 @@ import {IAward  } from "../awards/IAward";
 
 export interface FundedAwardModel {
     award: IAward;
-    player: string;
+    player_name: string;
+    player_color: string;
 }

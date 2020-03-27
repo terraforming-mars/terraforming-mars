@@ -32,10 +32,13 @@ import {SelectCity} from "./interrupts/SelectCity";
 import {SpaceType} from "./SpaceType";
 import {ITagCount} from "./ITagCount";
 import {TileType} from "./TileType";
-import { getProjectCardByName, getCorporationCardByName } from "./Dealer";
-import { ILoadable } from "./ILoadable";
+import {getProjectCardByName, getCorporationCardByName} from "./Dealer";
+import {ILoadable} from "./ILoadable";
 import {Database} from "./database/Database";
 import {SerializedPlayer} from "./SerializedPlayer";
+import {LogMessageType} from "./LogMessageType";
+import {LogMessageData} from "./LogMessageData";
+import {LogMessageDataType} from "./LogMessageDataType";
 
 export class Player implements ILoadable<SerializedPlayer, Player>{
     public corporationCard: CorporationCard | undefined = undefined;
@@ -116,7 +119,14 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.megaCredits += retribution;
         game.monsInsuranceOwner.setResource(Resources.MEGACREDITS,-3);
         if (retribution > 0) {
-          game.log(this.name + " received " + retribution + " MC from Mons Insurance owner (" + game.monsInsuranceOwner.name +")");
+          game.log(
+            LogMessageType.DEFAULT,
+            "${0} received ${1} MC from ${2} owner (${3})",
+            new LogMessageData(LogMessageDataType.PLAYER, this.name),
+            new LogMessageData(LogMessageDataType.STRING, retribution.toString()),
+            new LogMessageData(LogMessageDataType.CARD, "Mons Insurance"),
+            new LogMessageData(LogMessageDataType.PLAYER, game.monsInsuranceOwner.name)
+          );
         }
       }  
     }
@@ -130,7 +140,14 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (resource === Resources.HEAT) this.heat = Math.max(0, this.heat + amount);
       
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-        game.log(this.name + "'s " + resource + " amount modified by " + amount + " by " + fromPlayer.name);
+        game.log(
+          LogMessageType.DEFAULT,
+          "${0}'s ${1} amount modified by ${2} by ${3}",
+          new LogMessageData(LogMessageDataType.PLAYER, this.name),
+          new LogMessageData(LogMessageDataType.STRING, resource),
+          new LogMessageData(LogMessageDataType.STRING, amount.toString()),
+          new LogMessageData(LogMessageDataType.PLAYER, fromPlayer.name)
+        );
       }
 
       // Mons Insurance hook
@@ -149,7 +166,14 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (resource === Resources.HEAT) this.heatProduction = Math.max(0, this.heatProduction + amount);
       
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-        game.log(this.name + "'s " + resource + " production modified by " + amount + " by " + fromPlayer.name);
+        game.log(
+          LogMessageType.DEFAULT,
+          "${0}'s ${1} production modified by ${2} by ${3}",
+          new LogMessageData(LogMessageDataType.PLAYER, this.name),
+          new LogMessageData(LogMessageDataType.STRING, resource),
+          new LogMessageData(LogMessageDataType.STRING, amount.toString()),
+          new LogMessageData(LogMessageDataType.PLAYER, fromPlayer.name)
+        );
       }
 
       //Manutech hook
@@ -313,7 +337,14 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         // Mons Insurance hook
         if (game !== undefined && removingPlayer !== undefined) {
           this.resolveMonsInsurance(game);
-          game.log(this.name + " loose " + count + " resource(s) on  " + card.name + " from " + removingPlayer.name);
+          game.log(
+            LogMessageType.DEFAULT,
+            "${0} looses ${1} resource(s) on ${2} by ${3}",
+            new LogMessageData(LogMessageDataType.PLAYER, this.name),
+            new LogMessageData(LogMessageDataType.STRING, count.toString()),
+            new LogMessageData(LogMessageDataType.CARD, card.name),
+            new LogMessageData(LogMessageDataType.PLAYER, removingPlayer.name)
+          );
         }
       }
     }
@@ -688,7 +719,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         action.options.push(
           new SelectOption("Increase temperature", () => {
             game.increaseTemperature(this,1, true);
-            game.log(this.name + " acted as World Government and increased temperature");
+            game.log(
+              LogMessageType.DEFAULT,
+              "${0} acted as World Government and increased temperature",
+              new LogMessageData(LogMessageDataType.PLAYER, this.name)
+            );
             return undefined;
           })
         );
@@ -697,7 +732,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         action.options.push(
           new SelectOption("Increase oxygen", () => {
             game.increaseOxygenLevel(this,1, true);
-            game.log(this.name + " acted as World Government and increased oxygen level");
+            game.log(
+              LogMessageType.DEFAULT,
+              "${0} acted as World Government and increased oxygen level",
+              new LogMessageData(LogMessageDataType.PLAYER, this.name)
+            );
             return undefined;
           })
         );
@@ -708,7 +747,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             "Add an ocean",
             game.board.getAvailableSpacesForOcean(this), (space) => {
               game.addOceanTile(this, space.id, SpaceType.OCEAN, true);
-              game.log(this.name + " acted as World Government and increased oceans");
+              game.log(
+                LogMessageType.DEFAULT,
+                "${0} acted as World Government and increased oceans",
+                new LogMessageData(LogMessageDataType.PLAYER, this.name)
+              );
               return undefined;
             }
           )
@@ -718,7 +761,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         action.options.push(
           new SelectOption("Increase Venus scale", () => {
             game.increaseVenusScaleLevel(this,1, true);
-            game.log(this.name + " acted as World Government and increased Venus scale");
+            game.log(
+              LogMessageType.DEFAULT,
+              "${0} acted as World Government and increased Venus scale",
+              new LogMessageData(LogMessageDataType.PLAYER, this.name)
+            );
             return undefined;
           })
         );
@@ -800,7 +847,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             .forEach((card) => {
               game.dealer.discard(card);
             });
-        game.log(this.name + " bought " + selectedCards.length + " cards");   
+        game.log(
+          LogMessageType.DEFAULT,
+          "${0} bought ${1} card(s)",
+          new LogMessageData(LogMessageDataType.PLAYER, this.name),
+          new LogMessageData(LogMessageDataType.STRING, selectedCards.length.toString())
+        );
         game.playerIsFinishedWithResearchPhase(this);
       };
 
@@ -862,7 +914,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     private addPlayedCard(game: Game, card: IProjectCard): void {
       this.playedCards.push(card);
-      game.log(this.name + " played " + card.name);
+      game.log(
+        LogMessageType.DEFAULT,
+        "${0} played ${1}",
+        new LogMessageData(LogMessageDataType.PLAYER, this.name),
+        new LogMessageData(LogMessageDataType.CARD, card.name)
+      );
       this.lastCardPlayed = card;
       this.generationPlayed.set(card.name, game.generation);
     }
@@ -1050,7 +1107,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                 });
             }
             this.actionsThisGeneration.add(foundCard.name);
-            game.log(this.name + " used " + foundCard.name + " action");
+            game.log(
+              LogMessageType.DEFAULT,
+              "${0} used ${1} action",
+              new LogMessageData(LogMessageDataType.PLAYER, this.name),
+              new LogMessageData(LogMessageDataType.CARD, foundCard.name)
+            );
             return undefined;
           }
       );
@@ -1085,7 +1147,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
               }
               game.dealer.discard(card);
             });
-            game.log(this.name + " used sell patents standard project");
+            game.log(
+              LogMessageType.DEFAULT,
+              "${0} used sell patents standard project",
+              new LogMessageData(LogMessageDataType.PLAYER, this.name)
+            );
             return undefined;
           }, this.cardsInHand.length
       );
@@ -1101,7 +1167,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             game.addSelectHowToPayInterrupt(this, constants.BUILD_COLONY_COST, false, false, "Select how to pay for Colony project");
             colony.onColonyPlaced(this, game);
             this.onStandardProject(StandardProjectType.BUILD_COLONY);
-            game.log(this.name + " built a colony on " + colony.name);
+            game.log(
+              LogMessageType.DEFAULT,
+              "${0} built a colony on ${1}",
+              new LogMessageData(LogMessageDataType.PLAYER, this.name),
+              new LogMessageData(LogMessageDataType.COLONY, colony.name)
+            );
             return undefined;
           }
         );
@@ -1117,7 +1188,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           game.addSelectHowToPayInterrupt(this, constants.AIR_SCRAPING_COST, false, false, "Select how to pay for Air Scrapping project");
           game.increaseVenusScaleLevel(this, 1);
           this.onStandardProject(StandardProjectType.AIR_SCRAPING);
-          game.log(this.name + " used Air Scrapping standard project");
+          game.log(
+            LogMessageType.DEFAULT,
+            "${0} used Air Scrapping standard project",
+            new LogMessageData(LogMessageDataType.PLAYER, this.name)
+          );
           return undefined;
         }
       );
@@ -1130,7 +1205,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           game.addSelectHowToPayInterrupt(this, this.powerPlantCost, false, false, "Select how to pay for Power Plant project");
           this.energyProduction++;
           this.onStandardProject(StandardProjectType.POWER_PLANT);
-          game.log(this.name + " used power plant standard project");
+          game.log(
+            LogMessageType.DEFAULT,
+            "${0} used power plant standard project",
+            new LogMessageData(LogMessageDataType.PLAYER, this.name)
+          );
           return undefined;
         }
       );
@@ -1143,7 +1222,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           game.addSelectHowToPayInterrupt(this, constants.ASTEROID_COST, false, false, "Select how to pay for Asteroid project");
           game.increaseTemperature(this, 1);
           this.onStandardProject(StandardProjectType.ASTEROID);
-          game.log(this.name + " used asteroid standard project");
+          game.log(
+            LogMessageType.DEFAULT,
+            "${0} used asteroid standard project",
+            new LogMessageData(LogMessageDataType.PLAYER, this.name)
+          );
           return undefined;
         }
       );
@@ -1156,7 +1239,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           game.addSelectHowToPayInterrupt(this, constants.AQUIFER_COST, false, false, "Select how to pay for Aquifer project");
           game.addOceanInterrupt(this, "Select space for ocean");
           this.onStandardProject(StandardProjectType.AQUIFER);
-          game.log(this.name + " used aquifer standard project");
+          game.log(
+            LogMessageType.DEFAULT,
+            "${0} used aquafier standard project",
+            new LogMessageData(LogMessageDataType.PLAYER, this.name)
+          );
           return undefined;
         }
       );
@@ -1169,7 +1256,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           game.addSelectHowToPayInterrupt(this, constants.GREENERY_COST, false, false, "Select how to pay for Greenery project");
           game.addInterrupt(new SelectGreenery(this, game));
           this.onStandardProject(StandardProjectType.GREENERY);
-          game.log(this.name + " used greenery standard project");
+          game.log(
+            LogMessageType.DEFAULT,
+            "${0} used greenery standard project",
+            new LogMessageData(LogMessageDataType.PLAYER, this.name)
+          );
           return undefined;
         }
       );
@@ -1183,7 +1274,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           game.addInterrupt(new SelectCity(this, game));
           this.onStandardProject(StandardProjectType.CITY);
           this.setProduction(Resources.MEGACREDITS);
-          game.log(this.name + " used city standard project");
+          game.log(
+            LogMessageType.DEFAULT,
+            "${0} used city standard project",
+            new LogMessageData(LogMessageDataType.PLAYER, this.name)
+          );
           return undefined;
         }
       );
@@ -1196,7 +1291,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           colony.name + " - (" + colony.description + ")", 
           () => {
             colony.trade(this, game);
-            game.log(this.name + " traded with " + colony.name);
+            game.log(
+              LogMessageType.DEFAULT,
+              "${0} traded with ${1}",
+              new LogMessageData(LogMessageDataType.PLAYER, this.name),
+              new LogMessageData(LogMessageDataType.PLAYER, colony.name)
+            );
             return undefined;
           }
         );
@@ -1252,7 +1352,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           (space: ISpace) => {
             game.addGreenery(this, space.id);
             this.plants -= this.plantsNeededForGreenery;
-            game.log(this.name + " converted plants into a greenery");
+            game.log(
+              LogMessageType.DEFAULT,
+              "${0} converted plants into a greenery",
+              new LogMessageData(LogMessageDataType.PLAYER, this.name),
+            );
             return undefined;
           }
       );
@@ -1270,7 +1374,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             this.removeResourceFrom(this.corporationCard as ICard, floaterAmount);
             this.heat -= heatAmount;
             game.increaseTemperature(this, 1);
-            game.log(this.name + " converted heat into temperature");
+            game.log(
+              LogMessageType.DEFAULT,
+              "${0} converted heat into temperature",
+              new LogMessageData(LogMessageDataType.PLAYER, this.name)
+            );
             return undefined;
           },
           new SelectAmount("Select amount of heat to spend", (amount: number) => {
@@ -1293,7 +1401,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return new SelectOption("Convert 8 heat into temperature", () => {
         game.increaseTemperature(this, 1);
         this.heat -= 8;
-        game.log(this.name + " converted heat into temperature");
+        game.log(
+          LogMessageType.DEFAULT,
+          "${0} converted heat into temperature",
+          new LogMessageData(LogMessageDataType.PLAYER, this.name)
+        );
         return undefined;
       });
     }
@@ -1309,7 +1421,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         });
         this.heat -= heat;
         this.megaCredits -= megaCredits;
-        game.log(this.name + " claimed " + milestone.name + " milestone");
+        game.log(
+          LogMessageType.DEFAULT,
+          "${0} claimed ${1} milestone",
+          new LogMessageData(LogMessageDataType.PLAYER, this.name),
+          new LogMessageData(LogMessageDataType.MILESTONE, milestone.name)
+        );
         return undefined;
       };
       if (this.canUseHeatAsMegaCredits && this.heat > 0) {
@@ -1409,9 +1526,14 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     }
 
-    private endTurnOption(): PlayerInput {
+    private endTurnOption(game: Game): PlayerInput {
       return new SelectOption("End Turn", () => {
         this.actionsTakenThisRound = 1;
+        game.log(
+          LogMessageType.DEFAULT,
+          "${0} ended turn",
+          new LogMessageData(LogMessageDataType.PLAYER, this.name)
+        );
         return undefined;
       });
     }
@@ -1419,7 +1541,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private passOption(game: Game): PlayerInput {
       return new SelectOption("Pass", () => {
         game.playerHasPassed(this);
-        game.log(this.name + " passed");
+        game.log(
+          LogMessageType.DEFAULT,
+          "${0} passed",
+          new LogMessageData(LogMessageDataType.PLAYER, this.name)
+        );
         this.lastCardPlayed = undefined;
         return undefined;
       });
@@ -1653,7 +1779,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       if (game.getPlayers().length > 1 && this.actionsTakenThisRound > 0) {
         action.options.push(
-            this.endTurnOption()
+            this.endTurnOption(game)
         );
       }
 

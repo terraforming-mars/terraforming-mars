@@ -329,10 +329,10 @@ function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
   let milestoneModels: Array<ClaimedMilestoneModel> = [];
 
   for (let idx in allMilestones) {
-    let claimed = claimedMilestones.filter((m) => m.milestone.name === allMilestones[idx].name)
+    let claimed = claimedMilestones.find((m) => m.milestone.name === allMilestones[idx].name)
     milestoneModels.push({
-      player_name: claimed === undefined ? "": claimed[0].player.name,
-      player_color: claimed === undefined ? "": claimed[0].player.color,
+      player_name: claimed === undefined ? "": claimed.player.name,
+      player_color: claimed === undefined ? "": claimed.player.color,
       milestone: allMilestones[idx]
     })
   }

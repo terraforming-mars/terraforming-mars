@@ -122,7 +122,7 @@ export const GameEnd = Vue.component("game-end", {
                 <br/>
                 <div class="game_end_block--log">
                     <h2>Final game log</h2>
-                    <log-panel :messages="player.gameLog"></log-panel>
+                    <log-panel :messages="player.gameLog" :players="player.players"></log-panel>
                 </div>
             </div>
         </div>

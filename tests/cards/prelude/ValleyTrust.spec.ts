@@ -6,6 +6,7 @@ import { Game } from "../../../src/Game";
 import { MedicalLab } from "../../../src/cards/MedicalLab";
 import { Player } from "../../../src/Player";
 import { ValleyTrust } from "../../../src/cards/prelude/ValleyTrust";
+import { Research } from '../../../src/cards/Research';
 
 describe("ValleyTrust", function () {
     it("Doesn't get card discount", function () {
@@ -19,6 +20,7 @@ describe("ValleyTrust", function () {
         const game = new Game("bar", [player], player);
         const card = new ValleyTrust();
         expect(card.getCardDiscount(player, game, new MedicalLab())).to.eq(2);
+        expect(card.getCardDiscount(player, game, new Research())).to.eq(4);
     });
     it("Should play", function () {
         const card = new ValleyTrust();

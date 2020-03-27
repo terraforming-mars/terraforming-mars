@@ -5,6 +5,9 @@ import { PlayerInterrupt } from './PlayerInterrupt';
 import { OrOptions } from '../inputs/OrOptions';
 import { IColony } from '../colonies/Colony';
 import { SelectOption } from '../inputs/SelectOption';
+import { LogMessageType } from "../LogMessageType";
+import { LogMessageData } from "../LogMessageData";
+import { LogMessageDataType } from "../LogMessageDataType";
 
 export class SelectTradeColony implements PlayerInterrupt {
     public playerInput: PlayerInput;
@@ -19,7 +22,12 @@ export class SelectTradeColony implements PlayerInterrupt {
             colony.name + " - (" + colony.description + ")", 
             () => {
               colony.trade(player, game);
-              game.log(player.name + " traded with " + colony.name);
+              game.log(
+                LogMessageType.DEFAULT,
+                "${0} traded with ${1}",
+                new LogMessageData(LogMessageDataType.PLAYER, player.name),
+                new LogMessageData(LogMessageDataType.COLONY, colony.name)
+              );
               return undefined;
             }
           ));

@@ -5,6 +5,9 @@ import { PlayerInterrupt } from './PlayerInterrupt';
 import { OrOptions } from '../inputs/OrOptions';
 import { IColony } from '../colonies/Colony';
 import { SelectOption } from '../inputs/SelectOption';
+import { LogMessageType } from "../LogMessageType";
+import { LogMessageData } from "../LogMessageData";
+import { LogMessageDataType } from "../LogMessageDataType";
 
 export class SelectColony implements PlayerInterrupt {
     public playerInput: PlayerInput;
@@ -19,7 +22,12 @@ export class SelectColony implements PlayerInterrupt {
               colony.name + " - (" + colony.description + ")", 
               () => {
                 colony.onColonyPlaced(player, game);
-                game.log(player.name + " built a colony on " + colony.name);
+                game.log(
+                  LogMessageType.DEFAULT,
+                  "${0} built a colony on ${1}",
+                  new LogMessageData(LogMessageDataType.PLAYER, player.name),
+                  new LogMessageData(LogMessageDataType.COLONY, colony.name)
+                );
                 return undefined;
               }
             ));

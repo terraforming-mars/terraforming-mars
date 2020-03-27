@@ -395,6 +395,7 @@ import { MartianZoo } from "./cards/colonies/MartianZoo";
 import { ILoadable } from "./ILoadable";
 import { CardName } from "./CardName";
 import { BeginnerCorporation } from "./cards/corporation/BeginnerCorporation";
+import { SerializedDealer } from "./SerializedDealer";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -874,7 +875,7 @@ export function getCorporationCardByName(cardName: string): CorporationCard | un
     return undefined;
 }
 
-export class Dealer implements ILoadable<Dealer>{
+export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     public deck: Array<IProjectCard> = [];
     public preludeDeck: Array<IProjectCard> = [];
     public discarded: Array<IProjectCard> = [];
@@ -938,7 +939,7 @@ export class Dealer implements ILoadable<Dealer>{
     }
 
     // Function used to rebuild each objects
-    public loadFromJSON(d: Dealer): Dealer {
+    public loadFromJSON(d: SerializedDealer): Dealer {
         // Assign each attributes
         let o = Object.assign(this, d);
 

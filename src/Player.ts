@@ -35,8 +35,9 @@ import {TileType} from "./TileType";
 import { getProjectCardByName, getCorporationCardByName } from "./Dealer";
 import { ILoadable } from "./ILoadable";
 import {Database} from "./database/Database";
+import {SerializedPlayer} from "./SerializedPlayer";
 
-export class Player implements ILoadable<Player>{
+export class Player implements ILoadable<SerializedPlayer, Player>{
     public corporationCard: CorporationCard | undefined = undefined;
     public id: string;
     public canUseHeatAsMegaCredits: boolean = false;
@@ -1775,7 +1776,7 @@ export class Player implements ILoadable<Player>{
     }
 
     // Function used to rebuild each objects
-    public loadFromJSON(d: Player): Player {
+    public loadFromJSON(d: SerializedPlayer): Player {
       // Assign each attributes
       let o = Object.assign(this, d);
 

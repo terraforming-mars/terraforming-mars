@@ -45,8 +45,10 @@ import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
 import { ILoadable } from "./ILoadable";
 import {CardName} from "./CardName";
 import {Database} from "./database/Database";
+import { SerializedGame } from "./SerializedGame";
+import { SerializedPlayer } from "./SerializedPlayer";
 
-export class Game implements ILoadable<Game> {
+export class Game implements ILoadable<SerializedGame, Game> {
     public activePlayer: Player;
     public claimedMilestones: Array<ClaimedMilestone> = [];
     public milestones: Array<IMilestone> = [];
@@ -1104,12 +1106,12 @@ export class Game implements ILoadable<Game> {
     }
 
     // Function used to rebuild each objects
-    public loadFromJSON(d: Game): Game {
+    public loadFromJSON(d: SerializedGame): Game {
       // Assign each attributes
       let o = Object.assign(this, d);
 
       // Rebuild every player objects
-      this.players = d.players.map((element: Player)  => {
+      this.players = d.players.map((element: SerializedPlayer)  => {
         let player = new Player(element.name, element.color, element.beginner);
         return player.loadFromJSON(element);
       });
@@ -1230,7 +1232,7 @@ export class Game implements ILoadable<Game> {
 
       // Rebuild dealer object to be sure that we will have cards in the same order
       let dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension);
-      this.dealer = dealer.loadFromJSON(this.dealer);
+      this.dealer = dealer.loadFromJSON(d.dealer);
 
       return o;
     }

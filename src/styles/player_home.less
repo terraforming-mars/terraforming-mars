@@ -134,21 +134,215 @@ h2 {
     }
 }
 .milestones, .awards {
-
-     color: #00aaee;
-
-     .pwned-item {
-        opacity: 0.4;
-        strong {
-            text-decoration: line-through;
+    .ma-title {
+        margin-bottom: 4px;
+        a {
+            color: #c2c2c2;
+            text-transform: uppercase;
         }
-     }
+    }
+
+    .ma-block {
+        display: inline-block;
+        vertical-align: top;
+        width: 156px;
+
+        .ma-player {
+            margin: 25px 0 0 70px;
+            position: absolute;
+        }
+
+        .ma-name {
+            display: inline-block;
+            width: 156px;
+            height: 97px;
+            
+            color: #000000b0;
+            padding-top: 62px;
+            font-size: 13px;
+            text-transform: uppercase;
+            text-align: center;
+            font-weight: bold;
+        }
+
+
+        .ma-name--awards {
+            background: url(assets/awards_bg.png) 0px -52px;
+        }
+
+        .ma-name--milestones {
+            background: url(assets/milestones_bg.png) 0px -52px;
+        }
+
+        .ma-name--terraformer {
+            background-position: 0px -52px;
+        }
+
+        .ma-name--mayor {
+            background-position: 0px -152px;
+        }
+
+        .ma-name--gardener {
+            background-position: 0px -252px;
+        }
+
+        .ma-name--builder {
+            background-position: 0px -352px;
+        }
+
+        .ma-name--planner {
+            background-position: 0px -452px;
+        }
+
+        .ma-name--generalist {
+            background-position: 0px -552px;
+        }
+
+        .ma-name--ecologist {
+            background-position: 0px -652px;
+        }
+
+        .ma-name--tycoon {
+            background-position: 0px -752px;
+        }
+
+        .ma-name--legend {
+            background-position: 0px -852px;
+        }
+
+        .ma-name--diversifier {
+            background-position: 0px -952px;
+        }
+
+        .ma-name--polar-explorer {
+            background-position: 0px -1052px;
+        }
+
+        .ma-name--energizer {
+            background-position: 0px -1152px;
+        }
+
+        .ma-name--rim-settler {
+            background-position: 0px -1252px;
+        }
+
+        .ma-name--hoverlord {
+            background-position: 0px -1252px;
+        }
+
+
+        .ma-name--landlord {
+            background-position: 0px -52px;
+        }
+
+        .ma-name--banker {
+            background-position: 0px -252px; 
+        }
+
+        .ma-name--scientist {
+            background-position: 0px -152px; 
+        }
+
+        .ma-name--thermalist {
+            background-position: 0px -352px; 
+        }
+
+        .ma-name--miner {
+            background-position: 0px -452px; 
+        }
+
+        .ma-name--celebrity {
+            background-position: 0px -552px; 
+        }            
+
+        .ma-name--industrialist {
+            background-position: 0px -652px; 
+        }
+
+        .ma-name--desert-settler {
+            background-position: 0px -752px; 
+        }
+
+        .ma-name--estate-dealer {
+            background-position: 0px -852px; 
+        }
+
+        .ma-name--benefactor {
+            background-position: 0px -952px; 
+        }
+
+        .ma-name--cultivator {
+            background-position: 0px -1052px; 
+        }
+
+        .ma-name--maganate {
+            background-position: 0px -1152px; 
+        }
+
+        .ma-name--space-baron {
+            background-position: 0px -1252px; 
+        }
+
+        .ma-name--excentric {
+            background-position: 0px -1352px; 
+        }
+
+        .ma-name--venuphile {
+            background-position: 0px -1452px; 
+        }
+
+        .ma-description {
+            display: inline-block;
+            width: 156px;
+            height: 70px;
+            color: #000000b0;
+            background: #c2c2c2;
+            border: 2px solid #7e7e7e;
+            padding: 7px 2px 2px 2px;
+            font-size: 14px;
+            line-height: 14px;
+            text-align: center;
+        }
+
+
+    }
+
+    .pwned-item {
+        .ma-name, .ma-description {
+            filter: grayscale(100%);
+            opacity: 0.6;
+        }
+    }
+}
+
+.ma-player-cube .board_cube {
+    margin-left: 5px;
+}
+
+.milestones .ma-block {
+    margin-bottom: 5px;
 }
 
 .funded-award-inline, .claimed-milestone-inline {
     white-space: nowrap;
-    font-size: 18px;
-    margin-left: 20px;
+    color: #000;
+    text-transform: uppercase; 
+    background: #c2c2c2;  
+    padding: 3px 33px 2px 10px;
+    font-size: 15px;
+    font-weight: bold;
+    margin: -7px 0 0 10px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.active-award-or-milestone {
+    color: #000;
+    text-transform: uppercase;
+    background: #c2c2c2;
+    padding: 3px 30px 2px 7px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .player_home_block--setup {

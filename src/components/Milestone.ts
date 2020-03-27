@@ -13,26 +13,28 @@ export const Milestone = Vue.component("milestone", {
         },
         isVisible: function () {
             return (this.$root as any).getVisibilityState("millestones_list");
+        },
+        getNameCss: function(milestoneName: string): string {
+            return "ma-name ma-name--" +  milestoneName.replace(' ', '-').toLowerCase();
         }
     },
     template: `
-    <div class="milestones_cont">
+    <div class="milestones_cont" v-trim-whitespace>
         <div class="milestones">
-            <div class="milestones-title">
+            <div class="ma-title">
                 <a href="#" v-on:click.prevent="toggleMe()" v-i18n>Milestones</a>
-                <span v-for="milestone in milestones_list" v-if="milestone.player" class="claimed-milestone-inline">
-                    <span v-i18n>{{ milestone.milestone.name }}</span>: <span>{{ milestone.player }}</span>
+                <span v-for="milestone in milestones_list" v-if="milestone.player_name" class="claimed-milestone-inline" :title="milestone.player_name">
+                    <span v-i18n>{{ milestone.milestone.name }}</span>: <span>{{ milestone.player_name }}</span>
+                    <span class="ma-player-cube"><i :class="'board_cube board_cube--'+milestone.player_color"></span>
                 </span>
             </div>
-            <ul v-show="isVisible()">
-                <li v-for="milestone in milestones_list" :class="milestone.player ? 'pwned-item': ''">
-                    <strong v-i18n>{{milestone.milestone.name}}</strong>
-                    <span v-if="milestone.player">
-                        (<span v-i18n>claimed by</span> {{ milestone.player }})
-                    </span>
-                    — <span v-i18n>{{milestone.milestone.description}}</span>
-                </li>
-            </ul>
+            <div v-show="isVisible()">
+                <div v-for="milestone in milestones_list" :class="milestone.player_name ? 'ma-block pwned-item': 'ma-block'">
+                    <div class="ma-player" v-if="milestone.player_name"><i :title="milestone.player_name" :class="'board_cube board_cube--'+milestone.player_color" /></div>
+                    <div class="ma-name--milestones" :class="getNameCss(milestone.milestone.name)" v-i18n>{{milestone.milestone.name}}</div>
+                    <div class="ma-description" v-i18n>{{milestone.milestone.description}}</div>
+                </div>
+            </div>
         </div>
     </div>
     `

@@ -13,27 +13,29 @@ export const Award = Vue.component("award", {
         },
         isVisible: function () {
             return (this.$root as any).getVisibilityState("awards_list");
+        },
+        getNameCss: function(awardName: string): string {
+            return "ma-name ma-name--" +  awardName.replace(' ', '-').toLowerCase();
         }
     },
     template: `
-    <div class="awards_cont">
+    <div class="awards_cont" v-trim-whitespace>
         <div class="awards">
-            <div class="milestones-title">
+            <div class="ma-title">
                 <a href="#" v-on:click.prevent="toggleMe()" v-i18n>Awards</a>
-                <span v-for="award in awards_list" v-if="award.player" class="funded-award-inline">
-                    <span v-i18n>{{ award.award.name }}</span>: <span>{{ award.player }}</span>
+                <span v-for="award in awards_list" v-if="award.player_name" class="funded-award-inline" :title="award.player_name">
+                    <span v-i18n>{{ award.award.name }}</span>
+                    <span class="ma-player-cube"><i :class="'board_cube board_cube--'+award.player_color" /></span>
                 </span>
             </div>
             
-            <ul v-show="isVisible()">
-                <li v-for="award in awards_list" :class="award.player ? 'pwned-item': ''">
-                    <strong v-i18n>{{award.award.name}}</strong>
-                    <span v-if="award.player">
-                        (<span v-i18n>funded by</span> {{ award.player }})
-                    </span>
-                    — <span v-i18n>{{award.award.description}}</span>
-                </li>
-            </ul>
+            <div v-show="isVisible()">
+                <div v-for="award in awards_list" :class="award.player_name ? 'ma-block pwned-item': 'ma-block'">
+                    <div class="ma-player" v-if="award.player_name"><i :title="award.player_name" :class="'board_cube board_cube--'+award.player_color" /></div>
+                    <div class="ma-name--awards" :class="getNameCss(award.award.name)" v-i18n>{{award.award.name}}</div>
+                    <div class="ma-description" v-i18n>{{award.award.description}}</div>
+                </div>
+            </div>
         </div>
     </div>
     `

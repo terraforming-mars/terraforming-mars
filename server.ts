@@ -331,8 +331,8 @@ function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
   for (let idx in allMilestones) {
     let claimed = claimedMilestones.filter((m) => m.milestone.name === allMilestones[idx].name)
     milestoneModels.push({
-      player_name: claimed.length > 0 ? claimed[0].player.name : "",
-      player_color: claimed.length > 0 ? claimed[0].player.color : "",
+      player_name: claimed === undefined ? "": claimed[0].player.name,
+      player_color: claimed === undefined ? "": claimed[0].player.color,
       milestone: allMilestones[idx]
     })
   }
@@ -346,10 +346,10 @@ function getAwards(game: Game): Array<FundedAwardModel>  {
   let awardModels: Array<FundedAwardModel> = [];
 
   for (let idx in allAwards) {
-    let funded = fundedAwards.filter((a) => a.award.name === allAwards[idx].name)
+    let funded = fundedAwards.find((a) => a.award.name === allAwards[idx].name)
     awardModels.push({
-      player_name: funded.length > 0 ? funded[0].player.name : "",
-      player_color: funded.length > 0 ? funded[0].player.color : "",
+      player_name: funded === undefined ? "": funded.player.name,
+      player_color: funded === undefined ?  "": funded.player.color,
       award: allAwards[idx]
     })
   }

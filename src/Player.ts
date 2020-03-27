@@ -34,6 +34,7 @@ import {ITagCount} from "./ITagCount";
 import {TileType} from "./TileType";
 import { getProjectCardByName, getCorporationCardByName } from "./Dealer";
 import { ILoadable } from "./ILoadable";
+import {Database} from "./database/Database";
 
 export class Player implements ILoadable<Player>{
     public corporationCard: CorporationCard | undefined = undefined;
@@ -1427,7 +1428,7 @@ export class Player implements ILoadable<Player>{
     private undoTurnOption(game: Game): PlayerInput {
       return new SelectOption("Undo Turn", () => {
         try {
-          game.restoreLastSave();
+          Database.getInstance().restoreLastSave(game.id, game.lastSaveId, game);
         }
         catch(error){
           console.log(error);

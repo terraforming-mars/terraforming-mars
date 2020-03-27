@@ -44,12 +44,7 @@ import {SelectResourceDecrease} from "./interrupts/SelectResourceDecrease";
 import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
 import { ILoadable } from "./ILoadable";
 import {CardName} from "./CardName";
-
-const sqlite3 = require("sqlite3");
-const path = require("path");
-const fs = require("fs");
-const dbFolder = path.resolve(__dirname, "../../db")
-const dbPath = path.resolve(__dirname, "../../db/game.db");
+import {Database} from "./database/Database";
 
 export class Game implements ILoadable<Game> {
     public activePlayer: Player;
@@ -94,13 +89,7 @@ export class Game implements ILoadable<Game> {
       seed?: number
     ) {
 
-      // Create the table that will store every saves if not exists
-      if (!fs.existsSync(dbFolder)){
-          fs.mkdirSync(dbFolder);
-      }
-      let db = new sqlite3.Database(dbPath);
-      db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, PRIMARY KEY (game_id, save_id))");
-      db.close();
+      Database.getInstance();
 
       if (seed === undefined) {
         seed = Math.random();
@@ -632,7 +621,9 @@ export class Game implements ILoadable<Game> {
       }
 
       // Save the game state after changing the current player
-      this.saveGameState();
+      // Increment the save id
+      this.lastSaveId += 1;
+      Database.getInstance().saveGameState(this.id, this.lastSaveId, JSON.stringify(this,this.replacer));
 
       // Go to the beginning of the array if we reached the end
       return players[(playerIndex + 1 >= players.length) ? 0 : playerIndex + 1];
@@ -681,7 +672,7 @@ export class Game implements ILoadable<Game> {
     }
 
     private gotoEndGame(): void {
-      this.cleanSaves();
+      Database.getInstance().cleanSaves(this.id, this.lastSaveId);
       if (this.phase === Phase.END) return;
       this.phase = Phase.END;
     }
@@ -1101,21 +1092,6 @@ export class Game implements ILoadable<Game> {
       return undefined;
     }
 
-    // Function to save the current game state
-    private saveGameState(): void {
-      // Open the database connexion
-      let db = new sqlite3.Database(dbPath);
-      // Increment the save id
-      this.lastSaveId += 1;
-      // Insert
-      db.run("INSERT INTO games(game_id, save_id, game) VALUES(?, ?, ?)", [this.id, this.lastSaveId, JSON.stringify(this,this.replacer)], function(err: { message: any; }) {
-        if (err) {
-          return console.log(err.message);  
-        }
-      });
-      db.close();
-    }
-
     // Custom replacer to transform Map and Set to Array
     public replacer(_key: any, value: any) {
       if (value instanceof Set) {
@@ -1125,40 +1101,6 @@ export class Game implements ILoadable<Game> {
         return Array.from(value.entries());
       }
       return value;
-    }
-
-    // Function to restore previous turn from the database
-    public restoreLastSave(): void {
-      // Open the database connexion
-      let db = new sqlite3.Database(dbPath);
-
-      // Retrieve last save from database
-      db.get("SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1", [this.id, this.lastSaveId],(err: { message: any; }, row: { game: any; }) => {
-        if (err) {
-          return console.error(err.message);
-        }
-        // Transform string to json
-        let gameToRestore = JSON.parse(row.game);
-
-        // Rebuild each objects
-        this.loadFromJSON(gameToRestore);
-
-        return true;
-      });
-      db.close();
-    }
-
-    // Function to clean saves
-    public cleanSaves(): void {
-      // Open the database connexion
-      let db = new sqlite3.Database(dbPath);
-      // DELETE all saves expect last one
-      db.run("DELETE FROM games WHERE game_id = ? AND save_id < ?", [this.id, this.lastSaveId], function(err: { message: any; }) {
-        if (err) {
-          return console.log(err.message);  
-        }
-      });
-      db.close();
     }
 
     // Function used to rebuild each objects

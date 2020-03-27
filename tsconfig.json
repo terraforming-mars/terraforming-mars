@@ -32,7 +32,8 @@
     "src/colonies/*.ts",
     "script.ts",
     "server.ts",
-    "src/interrupts/*.ts"
+    "src/interrupts/*.ts",
+    "src/database/*.ts"
   ],
   "files": [
     "script.ts",

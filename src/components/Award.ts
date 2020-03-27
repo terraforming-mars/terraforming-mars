@@ -15,7 +15,7 @@ export const Award = Vue.component("award", {
             return (this.$root as any).getVisibilityState("awards_list");
         },
         getNameCss: function(awardName: string): string {
-            return "ma-name ma-name--" +  awardName.replace(/ /g, '-').toLowerCase();
+            return "ma-name ma-name--" +  awardName.replace(/ /g, "-").toLowerCase();
         }
     },
     template: `

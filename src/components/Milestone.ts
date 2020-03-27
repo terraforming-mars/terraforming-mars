@@ -15,7 +15,7 @@ export const Milestone = Vue.component("milestone", {
             return (this.$root as any).getVisibilityState("millestones_list");
         },
         getNameCss: function(milestoneName: string): string {
-            return "ma-name ma-name--" +  milestoneName.replace(/ /g, '-').toLowerCase();
+            return "ma-name ma-name--" +  milestoneName.replace(/ /g, "-").toLowerCase();
         }
     },
     template: `

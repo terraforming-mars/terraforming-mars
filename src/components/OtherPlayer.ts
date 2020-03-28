@@ -32,7 +32,7 @@ export const OtherPlayer = Vue.component("other-player", {
                 <h4>Player «{{ player.name }}» details</h4>
                 
                 <div class="player_home_block">
-                    Cards In Hand: {{player.cardsInHandNbr}} - Event cards: {{ getEventCount() }}
+                    Cards In Hand: {{player.cardsInHandNbr}}
                 </div>
 
                 <div class="tag-display tags_item_cont tag-display-tags" v-if="player.tags.length > 0">

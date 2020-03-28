@@ -11,12 +11,14 @@
     "dialog-polyfill": "^0.5.0",
     "less": "^3.10.3",
     "spectre.css": "^0.5.8",
+    "sqlite3": "^4.1.1",
     "typescript": "^3.5.0",
     "vue": "^2.6.10",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.0"
   },
   "devDependencies": {
+    "@types/sqlite3": "^3.1.6",
     "@typescript-eslint/eslint-plugin": "^2.6.1",
     "@typescript-eslint/parser": "^2.6.1",
     "chai": "^4.2.0",

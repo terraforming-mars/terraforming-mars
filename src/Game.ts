@@ -32,7 +32,7 @@ import {ElysiumBoard} from "./ElysiumBoard";
 import {HellasBoard} from "./HellasBoard";
 import {BoardName} from "./BoardName";
 import {IColony} from "./colonies/Colony";
-import {ColonyDealer} from "./colonies/ColonyDealer";
+import {ColonyDealer, getColonyByName} from "./colonies/ColonyDealer";
 import {PlayerInterrupt} from "./interrupts/PlayerInterrupt";
 import {SelectOcean} from "./interrupts/SelectOcean";
 import {SelectResourceCard} from "./interrupts/SelectResourceCard";
@@ -42,13 +42,17 @@ import {SelectResourceProductionDecrease} from "./interrupts/SelectResourceProdu
 import {ICard} from "./cards/ICard";
 import {SelectResourceDecrease} from "./interrupts/SelectResourceDecrease";
 import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
+import { ILoadable } from "./ILoadable";
 import {LogMessage} from "./LogMessage";
 import {LogMessageType} from "./LogMessageType";
 import {LogMessageData} from "./LogMessageData";
 import {LogMessageDataType} from "./LogMessageDataType";
 import {CardName} from "./CardName";
+import {Database} from "./database/Database";
+import { SerializedGame } from "./SerializedGame";
+import { SerializedPlayer } from "./SerializedPlayer";
 
-export class Game {
+export class Game implements ILoadable<SerializedGame, Game> {
     public activePlayer: Player;
     public claimedMilestones: Array<ClaimedMilestone> = [];
     public milestones: Array<IMilestone> = [];
@@ -74,6 +78,7 @@ export class Game {
     public colonies: Array<IColony> = [];
     public colonyDealer: ColonyDealer | undefined = undefined;
     public pendingOceans: number = 0;
+    public lastSaveId: number = 0;
 
     constructor(
       public id: string,
@@ -90,23 +95,13 @@ export class Game {
       seed?: number
     ) {
 
+      Database.getInstance();
+
       if (seed === undefined) {
         seed = Math.random();
       }
 
-      if (boardName === BoardName.ELYSIUM) {
-        this.board = new ElysiumBoard();
-        this.milestones.push(...ELYSIUM_MILESTONES);
-        this.awards.push(...ELYSIUM_AWARDS);
-      } else if (boardName === BoardName.HELLAS) {
-        this.board = new HellasBoard();
-        this.milestones.push(...HELLAS_MILESTONES);
-        this.awards.push(...HELLAS_AWARDS);
-      } else {        
-        this.board = new OriginalBoard();
-        this.milestones.push(...ORIGINAL_MILESTONES);
-        this.awards.push(...ORIGINAL_AWARDS);
-      }
+      this.board = this.boardConstructor(boardName);
 
       this.activePlayer = first;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, seed);
@@ -127,14 +122,7 @@ export class Game {
       // Add Venus Next corporations cards, board colonies and milestone / award
       if (this.venusNextExtension) {
         corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
-        this.milestones.push(...VENUS_MILESTONES);
-        this.awards.push(...VENUS_AWARDS);
-        this.board.spaces.push(
-            new BoardColony(SpaceName.DAWN_CITY),
-            new BoardColony(SpaceName.LUNA_METROPOLIS),
-            new BoardColony(SpaceName.MAXWELL_BASE),
-            new BoardColony(SpaceName.STRATOPOLIS)
-        );
+        this.setVenusElements();
       }
 
       // Add colonies stuff
@@ -178,6 +166,35 @@ export class Game {
         LogMessageType.NEW_GENERATION,
         "Generation ${0}",
         new LogMessageData(LogMessageDataType.STRING, this.generation.toString())
+      );
+    }
+
+    // Function to construct the board and milestones/awards list
+    public boardConstructor(boardName: BoardName): Board {
+      if (boardName === BoardName.ELYSIUM) {
+        this.milestones.push(...ELYSIUM_MILESTONES);
+        this.awards.push(...ELYSIUM_AWARDS);
+        return new ElysiumBoard();
+      } else if (boardName === BoardName.HELLAS) {
+        this.milestones.push(...HELLAS_MILESTONES);
+        this.awards.push(...HELLAS_AWARDS);
+        return new HellasBoard();
+      } else {        
+        this.milestones.push(...ORIGINAL_MILESTONES);
+        this.awards.push(...ORIGINAL_AWARDS);
+        return new OriginalBoard();
+      }
+    }
+
+    // Add Venus Next board colonies and milestone / award
+    public setVenusElements() {
+      this.milestones.push(...VENUS_MILESTONES);
+      this.awards.push(...VENUS_AWARDS);
+      this.board.spaces.push(
+          new BoardColony(SpaceName.DAWN_CITY),
+          new BoardColony(SpaceName.LUNA_METROPOLIS),
+          new BoardColony(SpaceName.MAXWELL_BASE),
+          new BoardColony(SpaceName.STRATOPOLIS)
       );
     }
 
@@ -406,7 +423,7 @@ export class Game {
     }
 
     private incrementFirstPlayer(): void {
-      let firstIndex: number = this.players.indexOf(this.first);
+      let firstIndex: number = this.players.map(function(x) {return x.id; }).indexOf(this.first.id);
       if (firstIndex === -1) {
         throw new Error("Didn't even find player");
       }
@@ -625,6 +642,11 @@ export class Game {
         return undefined;
       }
 
+      // Save the game state after changing the current player
+      // Increment the save id
+      this.lastSaveId += 1;
+      Database.getInstance().saveGameState(this.id, this.lastSaveId, JSON.stringify(this,this.replacer));
+
       // Go to the beginning of the array if we reached the end
       return players[(playerIndex + 1 >= players.length) ? 0 : playerIndex + 1];
     }
@@ -672,6 +694,7 @@ export class Game {
     }
 
     private gotoEndGame(): void {
+      Database.getInstance().cleanSaves(this.id, this.lastSaveId);
       if (this.phase === Phase.END) return;
       this.phase = Phase.END;
     }
@@ -1090,4 +1113,148 @@ export class Game {
       });
       return undefined;
     }
+
+    // Custom replacer to transform Map and Set to Array
+    public replacer(_key: any, value: any) {
+      if (value instanceof Set) {
+        return Array.from(value);
+      }
+      else if(value instanceof Map) {
+        return Array.from(value.entries());
+      }
+      return value;
+    }
+
+    // Function used to rebuild each objects
+    public loadFromJSON(d: SerializedGame): Game {
+      // Assign each attributes
+      let o = Object.assign(this, d);
+
+      // Rebuild every player objects
+      this.players = d.players.map((element: SerializedPlayer)  => {
+        let player = new Player(element.name, element.color, element.beginner);
+        return player.loadFromJSON(element);
+      });
+
+
+      // Rebuild milestones, awards and board elements
+      this.milestones = [];
+      this.awards = [];
+      this.board = this.boardConstructor(d.boardName);
+      d.board.spaces.forEach((element: ISpace) => {
+        if(element.tile) {
+          let space = this.getSpace(element.id);
+          let tileType = element.tile.tileType;
+          let tileCard = element.tile.card;
+          if (element.player){
+            let playerIndex: number = this.players.findIndex((player) => player.id === element.player!.id);
+            space.player = this.players[playerIndex];
+          }
+          space.tile = {
+            tileType: tileType,
+            card: tileCard
+          };
+        }
+      });
+
+      // Reload venus elements if needed
+      if(this.venusNextExtension) {
+        this.setVenusElements();
+      }
+
+      // Reload colony elements if needed 
+      if (this.coloniesExtension) {
+        this.colonyDealer = new ColonyDealer();
+        this.colonies = new Array<IColony>();
+        d.colonies.forEach((element: IColony) => {
+          let colonie = getColonyByName(element.name);
+          if (colonie !== undefined) {
+            if (element.visitor){
+              let playerIndex: number = this.players.findIndex((player) => player.id === element.visitor!.id);
+              colonie.visitor = this.players[playerIndex];
+            }
+            colonie.colonies = new Array<Player>();
+            element.colonies.forEach((element: Player) => {
+              let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
+              colonie!.colonies.push(this.players[playerIndex]);
+            });
+            this.colonies.push(colonie);
+          }
+        });     
+      }
+
+      // Rebuild claimed milestones
+      this.claimedMilestones = d.claimedMilestones.map((element: ClaimedMilestone)  => {
+        let playerIndex: number = this.players.findIndex((player) => player.id === element.player.id);
+        let milestoneIndex: number = this.milestones.findIndex((milestone) => milestone.name === element.milestone.name);
+        return {
+          player: this.players[playerIndex],
+          milestone: this.milestones[milestoneIndex]
+        };
+      });
+
+      // Rebuild funded awards
+      this.fundedAwards = d.fundedAwards.map((element: FundedAward)  => {
+        let playerIndex: number = this.players.findIndex((player) => player.id === element.player.id);
+        let awardIndex: number = this.awards.findIndex((award) => award.name === element.award.name);
+        return {
+          player: this.players[playerIndex],
+          award: this.awards[awardIndex]
+        };
+      });
+
+      // Rebuild passed players set
+      this.passedPlayers = new Set<Player>();
+      d.passedPlayers.forEach((element: Player) => {
+        let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
+        this.passedPlayers.add(this.players[playerIndex]);
+      });
+
+      // Rebuild done players set
+      this.donePlayers = new Set<Player>();
+      d.donePlayers.forEach((element: Player) => {
+        let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
+        this.donePlayers.add(this.players[playerIndex]);
+      });
+
+      // Rebuild researched players set
+      this.researchedPlayers = new Set<Player>();
+      d.researchedPlayers.forEach((element: Player) => {
+        let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
+        this.researchedPlayers.add(this.players[playerIndex]);
+      });
+
+      // Rebuild drafted players set
+      this.draftedPlayers = new Set<Player>();
+      d.draftedPlayers.forEach((element: Player) => {
+        let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
+        this.draftedPlayers.add(this.players[playerIndex]);
+      });
+
+      // Reinit undrafted cards map
+      this.unDraftedCards = new Map<Player, IProjectCard[]>();
+
+      // Mons insurance
+      if (d.monsInsuranceOwner) {
+        let monsIndex: number = this.players.findIndex((player) => player.id === d.monsInsuranceOwner!.id);
+        this.monsInsuranceOwner = this.players[monsIndex];
+      }
+
+      // Define who is the active player and init the take action phase
+      let activeIndex: number = this.players.findIndex((player) => player.id === d.activePlayer.id);
+      // We have to switch active player because it's still the one that ended last turn
+      this.activePlayer = this.players[(activeIndex + 1 >= this.players.length) ? 0 : activeIndex + 1];;
+      this.activePlayer.takeAction(this);
+
+      // Define who was the first player for this generation
+      let firstIndex: number = this.players.findIndex((player) => player.id === d.first.id);
+      this.first = this.players[firstIndex];
+
+      // Rebuild dealer object to be sure that we will have cards in the same order
+      let dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension);
+      this.dealer = dealer.loadFromJSON(d.dealer);
+
+      return o;
+    }
 }
+

@@ -14,7 +14,6 @@ export const OtherPlayer = Vue.component("other-player", {
         "player-resources": PlayerResources,
         "stacked-cards": StackedCards,
         "tag-count": TagCount
-
     },
     mixins: [PlayerMixin],
     methods: {
@@ -33,7 +32,7 @@ export const OtherPlayer = Vue.component("other-player", {
                 <h4>Player «{{ player.name }}» details</h4>
                 
                 <div class="player_home_block">
-                    Cards In Hand: {{player.cardsInHandNbr}}
+                    Cards In Hand: {{player.cardsInHandNbr}} - Event cards: {{ getEventCount() }}
                 </div>
 
                 <div class="tag-display tags_item_cont tag-display-tags" v-if="player.tags.length > 0">

@@ -1,0 +1,51 @@
+import {IProjectCard} from "./cards/IProjectCard";
+import {CorporationCard} from "./cards/corporation/CorporationCard";
+import {PlayerInput} from "./PlayerInput";
+import {Color} from "./Color";
+import {VictoryPointsBreakdown} from "./VictoryPointsBreakdown";
+
+export interface SerializedPlayer {
+    corporationCard: CorporationCard | undefined;
+    id: string;
+    name: string;
+    color: Color;
+    beginner: boolean;
+    canUseHeatAsMegaCredits: boolean;
+    plantsNeededForGreenery: number;
+    dealtCorporationCards: Array<CorporationCard>;
+    powerPlantCost: number;
+    titaniumValue: number;
+    steelValue: number;
+    megaCredits: number;
+    megaCreditProduction: number;
+    steel: number;
+    titanium: number;
+    energy: number;
+    steelProduction: number;
+    titaniumProduction: number;
+    energyProduction: number;
+    heat: number;
+    heatProduction: number;
+    plants: number;
+    plantProduction: number;
+    cardsInHand: Array<IProjectCard>;
+    preludeCardsInHand: Array<IProjectCard>;    
+    playedCards: Array<IProjectCard>;
+    draftedCards: Array<IProjectCard>;
+    generationPlayed: Map<string, number>;
+    actionsTakenThisRound: number;
+    terraformRating: number;
+    terraformRatingAtGenerationStart: number;
+    victoryPointsBreakdown: VictoryPointsBreakdown;
+    actionsThisGeneration: Set<string>;
+    lastCardPlayed: IProjectCard | undefined;
+    waitingFor?: PlayerInput;
+    waitingForCb?: () => void;
+    cardCost: number;
+    oceanBonus: number;
+    fleetSize: number;
+    tradesThisTurn: number;
+    colonyTradeOffset: number;
+    colonyTradeDiscount: number;
+}
+

@@ -23,7 +23,7 @@ export const LogPanel = Vue.component("log-panel", {
                 if (data.type === LogMessageDataType.PLAYER) {
                     for (let player of this.players) {
                         if (data.value === player.name) {
-                            return "<log-player class=\"player_color_"+player.color+"\">"+data.value+"</log-player>";
+                            return "<log-player class=\"player_bg_color_"+player.color+"\">"+data.value+"</log-player>";
                         }
                     }
                 } else if (data.type === LogMessageDataType.CARD) {

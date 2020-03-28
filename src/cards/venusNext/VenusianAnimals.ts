@@ -20,10 +20,8 @@ export class VenusianAnimals implements IProjectCard, IResourceCard {
     public play() {
         return undefined;
     }
-    public onCardPlayed(_player: Player, _game: Game, card: IProjectCard): void {
-        if (card.tags.indexOf(Tags.SCIENCE) !== -1) {
-          this.resourceCount++;
-        }
+    public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
+        player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.SCIENCE).length);
       } 
     public getVictoryPoints(): number {
         return this.resourceCount;

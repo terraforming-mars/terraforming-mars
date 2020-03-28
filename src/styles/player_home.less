@@ -10,24 +10,24 @@
 
 .player_color_red {
    color: #910;
-   text-shadow: 1px 1px 0px #aaa, -1px -1px 0px #aaa, 1px -1px 0px #aaa, -1px 1px 0px #aaa;
+
 }
 .player_color_yellow {
    color:  #aa0;
-   text-shadow: 1px 1px 0px #444, -1px -1px 0px #444, 1px -1px 0px #444, -1px 1px 0px #444;
+  
 }
 .player_color_green {
    color:  #090;
-   text-shadow: 1px 1px 0px #444, -1px -1px 0px #444, 1px -1px 0px #444, -1px 1px 0px #444;
+
 
 }
 .player_color_black {
    color:  #111;
-   text-shadow: 1px 1px 0px #aaa, -1px -1px 0px #aaa, 1px -1px 0px #aaa, -1px 1px 0px #aaa;
+   text-shadow: -1px -1px 4px #aaaa;
 }
 .player_color_blue {
    color:  #06f;
-   text-shadow: 1px 1px 0px #444, -1px -1px 0px #444, 1px -1px 0px #444, -1px 1px 0px #444;
+
 }
 
 .player_bg_color_red {
@@ -55,7 +55,7 @@ h1 {
     color: #ddd;
     font-family: Prototype;
     filter: drop-shadow(4px 4px 4px black);
-    text-shadow: 1px 1px 1px #333, -1px -1px 1px #aaa;
+    text-shadow: -1px -1px 1px #aaaa,1px 1px 1px #333a;
     padding: 1px 15px;
     border-radius: 8px;
 } 
@@ -64,7 +64,7 @@ h2 {
     color: #ddd;
     font-family: Prototype;
     filter: drop-shadow(4px 4px 4px black);
-    text-shadow: 1px 1px 0px #aaa, -1px -1px 0px #aaa, 1px -1px 0px #aaa, -1px 1px 0px #aaa;
+    text-shadow: -1px -1px 6px #aaa4;
 } 
 
 .tag-count {
@@ -142,20 +142,22 @@ h2 {
     }
 
 .help_tip {
-        color: #aaa;
+    color: #aaa;
+    font-size: smaller;
+    text-shadow: none;
+    font-family: Ubuntu, Sans;
     }
 
 .player_home_block {
     margin-bottom: 20px;
     
-
-
     .player_item {
         display: inline-block;
         vertical-align: middle;
         white-space: nowrap;
         margin-right: 15px;
     }
+    
     .player_name {
         color: #ccc;
         text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
@@ -187,6 +189,7 @@ h2 {
         background-color: #444; 
     }
 }
+
 .milestones, .awards {
     .ma-title {
         margin-bottom: 4px;
@@ -218,7 +221,6 @@ h2 {
             text-align: center;
             font-weight: bold;
         }
-
 
         .ma-name--awards {
             background: url(assets/awards_bg.png) 0px -52px;
@@ -357,7 +359,6 @@ h2 {
             line-height: 14px;
             text-align: center;
         }
-
 
     }
 

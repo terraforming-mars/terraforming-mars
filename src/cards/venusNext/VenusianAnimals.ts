@@ -18,7 +18,6 @@ export class VenusianAnimals implements IProjectCard, IResourceCard {
         return game.getVenusScaleLevel() >= 18 - (2 * player.getRequirementsBonus(game, true));
     }
     public play() {
-        this.resourceCount++;
         return undefined;
     }
     public onCardPlayed(_player: Player, _game: Game, card: IProjectCard): void {

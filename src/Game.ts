@@ -1168,6 +1168,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.colonies = new Array<IColony>();
         d.colonies.forEach((element: IColony) => {
           let colonie = getColonyByName(element.name);
+          
+          // Assign each attributes
+          Object.assign(colonie, element);
+
           if (colonie !== undefined) {
             if (element.visitor){
               let playerIndex: number = this.players.findIndex((player) => player.id === element.visitor!.id);

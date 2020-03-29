@@ -1,28 +1,23 @@
 /* UI to display global parameters (oxygen, temperature, oceans count) */
 
 .globs_cont {
-    background: #313131;
-    border-radius: 20px;
-    padding: 15px 20px;
     display: inline-block;
-    vertical-align: top;
 }
 
-
 .globs {
-    width: 170px;
-    height: 466px;
-    margin: 0 auto;
+    width: 165px;
+    height: 505px;
+    margin: -40px auto;
     line-height: 1.23;
     background: url("assets/globs.png")
 }
 
 .globs_oceans_count {
     text-align: left;
-    color: #03fdfcff;
+    color: #008ebd;
     font-family: Prototype;
-    font-size: 18px;
-    margin: 78px 0 0 88px;
+    font-size: 22px;
+    margin: 110px 0 0 85px;
 }
 
 .globs_columns_cont {
@@ -36,55 +31,69 @@
 }
 
 .globs_column--temperature {
-    margin: 9px 0 0 14px;
+    margin: 10px 0 0 20px;
+    background: linear-gradient(#cc3333cc 30%, lightblue 60%, rgba(0, 0, 0, 0.5));
+    width: 40px;
+    border-radius: 5px;
+    padding-top: 4px;
+    box-shadow: 0 0px 2px black;
+    margin-top: 20px;
 }
 
 .globs_column--oxygen {
-    margin: 6px 0 0 85px;
+    background: linear-gradient(#007a00cc 30%, lightblue 60%, rgba(0, 0, 0, 0.5));    
+    width: 40px;
+    border-radius: 5px;
+    padding-top: 3px;
+    padding-bottom: 0px;
+    box-shadow: 0 0px 2px black;
+    margin-left: 26px;
+    margin-top: 8px;
 }
 
 .globs_column--temperature .globs_value {
-    color: #03fdfcff;
+    color: #303030;
     font-family: Prototype;
-    font-size: 11px;
     position: relative;
     z-index: 10;
-    line-height: 20px;
-    text-align: right;
-    top: 5px;
+    line-height: 21px;
+    font-size: 14px;
+    text-align: center;
+    top: -1px;
 }
 
 .globs_column--oxygen .globs_value {
-    color: #03fdfcff;
+    color: #303030;
     font-family: Prototype;
-    font-size: 11px;
     position: relative;
     z-index: 10;
-    line-height: 27px;
-    top: 1px;
-    left: 4px;
+    line-height: 29px;
+    font-size: 14px;
+    text-align: center;
 }
 
 .globs_figure {
-    width: 27px;
-    height: 17px;
-    background: #03fdfc3d;
+    width: 30px;
+    height: 15px;
+    background: #8888;
+    border: 1px solid #303030;
     border-radius: 3px;
-    margin: -15px 0 0 22px;
+    margin: -20px 0 0 5px;
     position: absolute;
 }
 
 .globs_figure_oxygen {
-    width: 27px;
-    height: 24px;
-    background: #03fdfc3d;
+    width: 30px;
+    height: 23px;
+    background: #8888;
+    border: 1px solid #303030;
     border-radius: 3px;
-    margin: 2px 0 0 -28px;
+    margin: 2px 0 0 5px;
     position: absolute;
 }
 
 .globs_figure--active {
-    background: #03fdfcff;
+    background: #fff;
 }
 
 .globs_column--oxygen .globs_figure {

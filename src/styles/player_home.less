@@ -48,31 +48,39 @@ h2 {
 }
 
 .tag-count-display {
-    color: #020202;
+    color: #000;
     position: absolute;
     left: 14px;
     top: 25px;
-    background: linear-gradient(#fff, #888);
     height: 35px;
     line-height: 44px;
     text-align: center;
     font-size: 18px;
     width: 36px;
     border-radius: 0 0 5px 5px;
-    border-top: 2px solid #dddddd;
-    border-left: 2px solid #dddddd;
-    border-bottom: 2px solid #898989;
-    border-right: 2px solid #898989;
-    box-shadow: 0 0 0 2px #303030;
+    border-top: 2px solid #bb8760;
+    border-left: 2px solid #bb8760;
+    border-bottom: 2px solid #744631;
+    border-right: 2px solid #744631;
+    background-image: url(assets/mars.png);
+    background-size: 60px 60px;
+    background-position: -13px -5px;
+    box-shadow: 0 1px 2px black;
 }
 
 .icon-vp {
-    background: linear-gradient(#cc8b00, #805700, #805700);
     text-shadow: 0 0 5px darkorange;
-    color:#000;
+    color: #000;
     width: 60px;
-    line-height: 40px;
-    font-size: 24px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 28px;
+    background-image: url(assets/mars.png);
+    background-size: 64px 64px;
+    border-top: 2px solid #bb8760;
+    border-left: 2px solid #bb8760;
+    border-bottom: 2px solid #744631;
+    border-right: 2px solid #744631;
 }
 
 .player_home_block--resources {
@@ -138,12 +146,20 @@ h2 {
         text-decoration: underline;
     }
 }
+.awards-padding {padding: 3px 42px 3px 42px !important;}
+
 .milestones, .awards {
     .ma-title {
-        margin-bottom: 4px;
         a {
-            color: #c2c2c2;
+            font-family: Prototype;
+            letter-spacing: 1px;
+            font-size: 16px;
+            color: #303030;
             text-transform: uppercase;
+            background: lightblue;
+            padding: 3px 26px 3px 26px;
+            border-radius: 20px 20px 0 0;
+            text-decoration: none;
         }
     }
 
@@ -300,12 +316,10 @@ h2 {
             display: inline-block;
             width: 156px;
             height: 70px;
-            color: #000000b0;
-            background: #c2c2c2;
-            border: 2px solid #7e7e7e;
-            padding: 7px 2px 2px 2px;
+            color: #ddd;
+            padding: 5px 2px 0px 2px;
             font-size: 14px;
-            line-height: 14px;
+            line-height: 15px;
             text-align: center;
         }
 
@@ -313,7 +327,6 @@ h2 {
     }
 
     .pwned-item {
-        background: #fff;
         .ma-name, .ma-description {
             filter: grayscale(100%);
             opacity: 0.5;
@@ -332,13 +345,14 @@ h2 {
 .funded-award-inline, .claimed-milestone-inline {
     white-space: nowrap;
     color: #000;
-    text-transform: uppercase; 
-    background: #c2c2c2;  
-    padding: 3px 33px 2px 10px;
+    text-transform: uppercase;
+    background: #c2c2c2;
+    padding: 1px 33px 1px 10px;
     font-size: 15px;
+    line-height: 23px;
     font-weight: bold;
-    margin: -7px 0 0 10px;
-    vertical-align: middle;
+    margin: 0 0 0 10px;
+    border-radius: 20px;
     display: inline-block;
 }
 

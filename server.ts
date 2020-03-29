@@ -678,10 +678,10 @@ function serveResource(res: http.ServerResponse, s: Buffer): void {
   res.end();
 }
 
-console.log('Starting server on port ' + (process.env.PORT || 90));
+console.log('Starting server on port ' + (process.env.PORT || 80));
 console.log('version 0.X');
 
-server.listen(process.env.PORT || 90);
+server.listen(process.env.PORT || 80);
 
 console.log('\nThe secret serverId for this server is \x1b[1m'+serverId+'\x1b[0m. Use it to access the following administrative routes:\n');
 console.log('* Overview of existing games: /games-overview?serverId='+serverId);

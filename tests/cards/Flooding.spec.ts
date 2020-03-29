@@ -14,10 +14,11 @@ describe("Flooding", function () {
         const card = new Flooding();
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
-        const game = new Game("foobar", [player,player], player);
+        const game = new Game("foobar", [player,player2], player);
         const oceans = game.board.getAvailableSpacesForOcean(player);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
+        if (action === undefined) return;
         expect(action instanceof SelectSpace).to.eq(true);
         expect(action.cb(oceans[0])).to.eq(undefined);
         const adjacentSpaces = game.board.getAdjacentSpaces(oceans[0]);
@@ -56,6 +57,7 @@ describe("Flooding", function () {
         game.addGreenery(player2, "05");
 
         expect(action).not.to.eq(undefined);
+        if (action === undefined) return;
         expect(action instanceof SelectSpace).to.eq(true);
         const subActions: OrOptions = action.cb(oceanSpaces[0]) as OrOptions;
         expect(subActions.options.length).to.eq(2);
@@ -76,6 +78,7 @@ describe("Flooding", function () {
         game.addOceanTile(player2, "34");
 
         expect(action).not.to.eq(undefined);
+        if (action === undefined) return;
         expect(action instanceof SelectSpace).to.eq(true);
         expect(action.cb(game.getSpace("33"))).to.eq(undefined);
     });

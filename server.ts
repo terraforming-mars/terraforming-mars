@@ -360,6 +360,7 @@ function getAwards(game: Game): Array<FundedAwardModel>  {
 function getPlayer(player: Player, game: Game): string {
   const output = {
     cardsInHand: getCards(player, player.cardsInHand, game),
+    draftedCards: getCards(player, player.draftedCards, game),
     milestones: getMilestones(game),
     awards: getAwards(game),
     color: player.color,

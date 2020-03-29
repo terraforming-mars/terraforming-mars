@@ -1915,6 +1915,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       // Rebuild corporation card
       if (d.corporationCard !== undefined) {
         this.corporationCard = getCorporationCardByName(d.corporationCard.name);
+        if(d.corporationCard.resourceCount && d.corporationCard.resourceCount > 0) {
+          this.corporationCard!.resourceCount = d.corporationCard.resourceCount;
+        }
       } else {
           this.corporationCard = undefined;
       }
@@ -1934,9 +1937,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         return getProjectCardByName(element.name)!;
       });
 
-      // Rebuild each playerd card
+      // Rebuild each played card
       this.playedCards = d.playedCards.map((element: IProjectCard)  => {
-        return getProjectCardByName(element.name)!;
+        let card = getProjectCardByName(element.name)!;
+        if(element.resourceCount && element.resourceCount > 0) {
+          card.resourceCount = element.resourceCount;
+        }
+        return card;
       });
 
       // Rebuild each drafted cards

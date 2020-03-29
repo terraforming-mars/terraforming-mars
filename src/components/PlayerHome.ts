@@ -134,6 +134,13 @@ export const PlayerHome = Vue.component("player-home", {
                     <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
 
+                <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
+                    <h2 v-i18n>Drafted Cards</h2>
+                    <div v-for="card in player.draftedCards" :key="card.name" class="cardbox">
+                        <card :card="card.name"></card>
+                    </div>
+                </div>
+
                 <div class="player_home_block player_home_block--log nofloat" v-if="player.players.length > 1 && player.gameLog.length > 0">
                     <h2 :class="'player_color_'+ player.color" v-i18n>Last Actions</h2>
                     <log-panel :messages="player.gameLog" :players="player.players"></log-panel>

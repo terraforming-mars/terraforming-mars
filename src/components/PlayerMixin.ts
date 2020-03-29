@@ -11,7 +11,7 @@ export const PlayerMixin = {
                     cards.push(inCards[index]);
                 } 
             }
-            return cards;
+            return cards.reverse();
         },
         getActiveCardType: function() {
             return CardType.ACTIVE;

@@ -565,6 +565,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public playerIsFinishedWithResearchPhase(player: Player): void {
       this.researchedPlayers.add(player);
       if (this.allPlayersHaveFinishedResearch()) {
+        // Save the game state after changing the current player
+        // Increment the save id
+        this.lastSaveId += 1;
+        Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
         this.gotoActionPhase();
       }
     }
@@ -1168,7 +1172,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.colonies = new Array<IColony>();
         d.colonies.forEach((element: IColony) => {
           let colonie = getColonyByName(element.name);
-          
+
           // Assign each attributes
           Object.assign(colonie, element);
 

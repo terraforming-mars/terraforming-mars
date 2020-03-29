@@ -10,6 +10,7 @@ import {SelectOption} from '../inputs/SelectOption';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
 import { CardName } from '../CardName';
+import { Resources } from '../Resources';
 
 export class Flooding implements IProjectCard {
   public cardType: CardType = CardType.EVENT;
@@ -17,6 +18,10 @@ export class Flooding implements IProjectCard {
   public name: CardName = CardName.FLOODING;
   public tags: Array<Tags> = [];
   public play(player: Player, game: Game) {
+    if (game.getPlayers().length === 1) {
+      game.addOceanInterrupt(player);
+      return undefined;
+    }
     return new SelectSpace(
         'Select space for ocean tile',
         game.board.getAvailableSpacesForOcean(player),
@@ -34,10 +39,7 @@ export class Flooding implements IProjectCard {
                     adjacentPlayers,
                     'Select adjacent player to remove 4 mega credits from',
                     (selectedPlayer: Player) => {
-                      selectedPlayer.megaCredits = Math.max(
-                          0,
-                          selectedPlayer.megaCredits - 4
-                      );
+                      selectedPlayer.setResource(Resources.MEGACREDITS, -4, game, player);
                       return undefined;
                     }
                 ),

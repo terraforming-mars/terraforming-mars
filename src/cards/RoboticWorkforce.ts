@@ -6,7 +6,9 @@ import { Game } from "../Game";
 import { SelectCard } from "../inputs/SelectCard";
 import { CardName } from '../CardName';
 import { Resources } from '../Resources';
-
+import { LogMessageType } from "../LogMessageType";
+import { LogMessageData } from "../LogMessageData";
+import { LogMessageDataType } from "../LogMessageDataType";
 
 export class RoboticWorkforce implements IProjectCard {
     public cost: number = 9;
@@ -276,9 +278,15 @@ export class RoboticWorkforce implements IProjectCard {
                 player.setProduction(Resources.PLANTS,result.plantProduction);
                 player.setProduction(Resources.HEAT,result.heatProduction);
 
-                game.log(player.name + " copied " + result.name + " production with Robotic Workforce card");
+                game.log(
+                  LogMessageType.DEFAULT,
+                  "${0} copied ${1} production with ${2}",
+                  new LogMessageData(LogMessageDataType.PLAYER, player.name),
+                  new LogMessageData(LogMessageDataType.CARD, result.name),
+                  new LogMessageData(LogMessageDataType.CARD, this.name)
+                );
 
-               return undefined;
+                return undefined;
             });
     }
 }

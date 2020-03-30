@@ -55,7 +55,7 @@ export const PlayerHome = Vue.component("player-home", {
         dialogPolyfill.default.registerDialog(document.getElementById("dialog-default"));
     },
     template: `
-        <div id="player-home">
+        <div id="player-home" :style="{ backgroundImage: 'url( assets/' + player.preferences.background + '.png )' }" >
            <h2 :class="'player_color_'+ player.color"><span v-i18n>TERRAFORMING MARS</span> </h2> 
            <h1 :class="'player_bg_color_'+ player.color">{{player.name}}</h1>
             <section>

@@ -15,7 +15,8 @@ export const Preferences = Vue.component("preferences", {
             "hide_awards_and_milestones": false,
             "hide_turnorder": false,
             "small_cards": false,
-            "lang": "en"
+            "lang": "en",
+            "background": "background_none"
         };
     },
     methods: {
@@ -35,6 +36,10 @@ export const Preferences = Vue.component("preferences", {
                     PreferencesManager.preferencesValues.set(k, this.$data[k]);
                     this[k] = val || "en";
                     PreferencesManager.preferencesValues.set(k, val || "en");
+                } else if (k === "background") {
+                    PreferencesManager.preferencesValues.set(k, this.$data[k]);
+                    this[k] = val || "background-none";
+                    PreferencesManager.preferencesValues.set(k, val || "background-none");   
                 } else {
                     let boolVal = (val !== "") ? val === "1" : this.$data[k];
                     PreferencesManager.preferencesValues.set(k, val === "1");
@@ -131,6 +136,19 @@ export const Preferences = Vue.component("preferences", {
                             <label class="form-radio">
                                 <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" value="ru" />
                                 <i class="form-icon"></i> Russian
+                            </label>
+                        </div>
+                    </div>
+                    <div class="preferences_panel_item form-group">
+                        <label class="form-label">Background (<a href="javascript:document.location.reload(true);">refresh page</a> to see changes)</label>
+                        <div class="preferences_panel_backgrounds">
+                            <label class="form-radio">
+                                <input name="background" type="radio" v-on:change="updatePreferences" v-model="background" value="background-none" />
+                                <i class="form-icon"></i> None
+                            </label>
+                            <label class="form-radio">
+                                <input name="background" type="radio" v-on:change="updatePreferences" v-model="background" value="background-noise" />
+                                <i class="form-icon"></i> Noise
                             </label>
                         </div>
                     </div>

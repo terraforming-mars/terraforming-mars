@@ -8,6 +8,12 @@ export class Hoverlord implements IMilestone {
     public description: string = "Having at least 7 floater resources on your cards"
     public canClaim(player: Player, _game: Game): boolean {
         let floaterResources: number = 0;
+        if (player.corporationCard !== undefined 
+                && player.corporationCard.resourceType === ResourceType.FLOATER
+                && player.corporationCard.resourceCount
+                && player.corporationCard.resourceCount > 0) {
+            floaterResources += player.corporationCard.resourceCount;
+        }
         player.playedCards.forEach((card) => {
             if (card.resourceType === ResourceType.FLOATER) {
                 floaterResources += player.getResourcesOnCard(card);

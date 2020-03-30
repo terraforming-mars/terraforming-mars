@@ -14,7 +14,6 @@ export const OtherPlayer = Vue.component("other-player", {
         "player-resources": PlayerResources,
         "stacked-cards": StackedCards,
         "tag-count": TagCount
-
     },
     mixins: [PlayerMixin],
     methods: {

@@ -6,14 +6,68 @@
 #player-home {
     padding-left: 20px;
     border-left: 1px solid #adacac;
+    background: url(assets/background-noise.png);
+    background-size: cover;
 }
+
+.player_color_red {
+    text-shadow: -1px -1px 6px #910,1px 1px 1px #333a;
+
+}
+.player_color_yellow {
+    text-shadow: -1px -1px 6px #aa0,1px 1px 1px #333a;
+}
+.player_color_green {
+   text-shadow: -1px -1px 6px #090,1px 1px 1px #333a;
+
+}
+
+.player_color_black {
+   text-shadow: -1px -1px 6px #aaa,1px 1px 1px #333a;
+}
+
+.player_color_blue {
+   text-shadow: -1px -1px 6px #06f,1px 1px 1px #333a;
+
+}
+
+.player_bg_color_red {
+    background-color: #910;
+
+}
+.player_bg_color_yellow {
+    background-color: #aa0;
+
+}
+.player_bg_color_green {
+    background-color: #090;
+
+}
+.player_bg_color_black {
+    background-color: #111;
+
+}
+.player_bg_color_blue {
+    background-color: #06f;
+
+}
+
 h1 {
+    color: #ddd;
     font-family: Prototype;
-    filter: drop-shadow(-1px -1px 1px rgba(255,255,255,100))drop-shadow(4px 4px 4px black) ;
-} 
+    filter: drop-shadow(4px 4px 4px black);
+    text-shadow: -1px -1px 1px #aaaa,1px 1px 1px #333a;
+    padding: 1px 15px;
+    border-radius: 8px;
+}
+
 h2 {
-    filter: drop-shadow(-1px -1px 1px rgba(255,255,255,100))drop-shadow(2px 2px 2px black) ;
-} 
+    color: #ddd;
+    font-family: Prototype;
+    filter: drop-shadow(4px 4px 4px black);
+    text-shadow: -1px -1px 6px #aaa4;
+}
+
 .tag-count {
     box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
     position: relative;
@@ -95,28 +149,21 @@ h2 {
     visibility: hidden;
 }
 
+.highlighter_box {
+    text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
+    padding: 1px 5px;
+    border-radius: 4px;
+    }
+
+.help_tip {
+    color: #aaa;
+    font-size: smaller;
+    text-shadow: none;
+    font-family: Ubuntu, Sans;
+    }
+
 .player_home_block {
     margin-bottom: 20px;
-
-    .player_color_red {
-        color: #c20000;
-    }
-    .player_color_yellow {
-        color: #caca03;
-    }
-    .player_color_green {
-        color: #01b301;
-    }
-    .player_color_black {
-        color: #020202;
-    }
-    .player_color_blue {
-        color: #0202d5;
-    }
-
-    .help_tip {
-        color: #8e8e8e;
-    }
 
     .player_item {
         display: inline-block;
@@ -125,12 +172,21 @@ h2 {
         margin-right: 15px;
     }
 
+    .player_name {
+        color: #ccc;
+        text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
+        padding: 1px 5px;
+        border-radius: 4px;
+        font-weight: bold;
+
+        }
+
     .player_name_cont {
         display: inline-block;
         vertical-align: middle;
-
         .player_number {
             margin-right: 5px;
+            text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
         }
     }
 
@@ -144,6 +200,7 @@ h2 {
 
     .player_is_active {
         text-decoration: underline;
+        background-color: #444;
     }
 }
 .awards-padding {padding: 3px 42px 3px 42px !important;}
@@ -177,7 +234,7 @@ h2 {
             display: inline-block;
             width: 156px;
             height: 97px;
-            
+
             color: #000000b0;
             padding-top: 62px;
             font-size: 13px;
@@ -185,7 +242,6 @@ h2 {
             text-align: center;
             font-weight: bold;
         }
-
 
         .ma-name--awards {
             background: url(assets/awards_bg.png) 0px -52px;
@@ -219,36 +275,44 @@ h2 {
             background-position: 0px -552px;
         }
 
-        .ma-name--ecologist {
+        .ma-name--specialist {
             background-position: 0px -652px;
         }
 
-        .ma-name--tycoon {
+        .ma-name--ecologist {
             background-position: 0px -752px;
         }
 
-        .ma-name--legend {
+        .ma-name--tycoon {
             background-position: 0px -852px;
         }
 
-        .ma-name--diversifier {
+        .ma-name--legend {
             background-position: 0px -952px;
         }
 
-        .ma-name--polar-explorer {
+        .ma-name--diversifier {
             background-position: 0px -1052px;
         }
 
-        .ma-name--energizer {
+        .ma-name--tactitian {
             background-position: 0px -1152px;
         }
 
-        .ma-name--rim-settler {
+        .ma-name--polar-explorer {
             background-position: 0px -1252px;
         }
 
+        .ma-name--energizer {
+            background-position: 0px -1352px;
+        }
+
+        .ma-name--rim-settler {
+            background-position: 0px -1452px;
+        }
+
         .ma-name--hoverlord {
-            background-position: 0px -1252px;
+            background-position: 0px -1552px;
         }
 
 
@@ -257,59 +321,63 @@ h2 {
         }
 
         .ma-name--banker {
-            background-position: 0px -252px; 
+            background-position: 0px -252px;
         }
 
         .ma-name--scientist {
-            background-position: 0px -152px; 
+            background-position: 0px -152px;
         }
 
         .ma-name--thermalist {
-            background-position: 0px -352px; 
+            background-position: 0px -352px;
         }
 
         .ma-name--miner {
-            background-position: 0px -452px; 
+            background-position: 0px -452px;
         }
 
         .ma-name--celebrity {
-            background-position: 0px -552px; 
-        }            
+            background-position: 0px -552px;
+        }
 
         .ma-name--industrialist {
-            background-position: 0px -652px; 
+            background-position: 0px -652px;
         }
 
         .ma-name--desert-settler {
-            background-position: 0px -752px; 
+            background-position: 0px -752px;
         }
 
         .ma-name--estate-dealer {
-            background-position: 0px -852px; 
+            background-position: 0px -852px;
         }
 
         .ma-name--benefactor {
-            background-position: 0px -952px; 
+            background-position: 0px -952px;
         }
 
         .ma-name--cultivator {
-            background-position: 0px -1052px; 
+            background-position: 0px -1052px;
         }
 
-        .ma-name--maganate {
-            background-position: 0px -1152px; 
+        .ma-name--magnate {
+            background-position: 0px -1152px;
         }
 
         .ma-name--space-baron {
-            background-position: 0px -1252px; 
+            background-position: 0px -1252px;
         }
 
         .ma-name--excentric {
-            background-position: 0px -1352px; 
+            background-position: 0px -1352px;
+        }
+
+        .ma-name--contractor {
+            background-position: 0px -1452px;
         }
 
         .ma-name--venuphile {
-            background-position: 0px -1452px; 
+            background-position: 0px -1552px;
         }
 
         .ma-description {
@@ -322,7 +390,6 @@ h2 {
             line-height: 15px;
             text-align: center;
         }
-
 
     }
 

@@ -392,7 +392,10 @@ import { RedSpotObservatory } from "./cards/colonies/RedSpotObservatory";
 import { MarketManipulation } from "./cards/colonies/MarketManipulation";
 import { MartianZoo } from "./cards/colonies/MartianZoo";
 
+import { ILoadable } from "./ILoadable";
 import { CardName } from "./CardName";
+import { BeginnerCorporation } from "./cards/corporation/BeginnerCorporation";
+import { SerializedDealer } from "./SerializedDealer";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -815,7 +818,64 @@ export const ALL_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.ZEPPELINS, factory: Zeppelins }
 ];
 
-export class Dealer {
+// Function to return a card object by its name
+export function getProjectCardByName(cardName: string): IProjectCard | undefined {
+    let cardFactory = ALL_PRELUDE_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_PRELUDE_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_VENUS_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_COLONIES_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_PROJECT_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    return undefined;
+}
+
+// Function to return a corporation card object by its name
+export function getCorporationCardByName(cardName: string): CorporationCard | undefined {
+    if (cardName === (new BeginnerCorporation()).name) {
+        return new BeginnerCorporation();
+    }
+    let cardFactory = ALL_CORPORATION_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_PRELUDE_CORPORATIONS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_VENUS_CORPORATIONS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_COLONIES_CORPORATIONS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_PROMO_CORPORATIONS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_TURMOIL_CORPORATIONS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    return undefined;
+}
+
+export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     public deck: Array<IProjectCard> = [];
     public preludeDeck: Array<IProjectCard> = [];
     public discarded: Array<IProjectCard> = [];
@@ -876,5 +936,28 @@ export class Dealer {
             throw "Unexpected empty prelude deck";
         }
         return result;
+    }
+
+    // Function used to rebuild each objects
+    public loadFromJSON(d: SerializedDealer): Dealer {
+        // Assign each attributes
+        let o = Object.assign(this, d);
+
+        // Rebuild deck
+        this.deck = d.deck.map((element: IProjectCard)  => {
+            return getProjectCardByName(element.name)!;
+        });
+
+        // Rebuild prelude deck
+        this.preludeDeck = d.preludeDeck.map((element: IProjectCard)  => {
+            return getProjectCardByName(element.name)!;
+        });
+
+        // Rebuild the discard
+        this.discarded = d.discarded.map((element: IProjectCard)  => {
+            return getProjectCardByName(element.name)!;
+        });
+        
+        return o;
     }
 }

@@ -32,11 +32,15 @@ import {SelectCity} from "./interrupts/SelectCity";
 import {SpaceType} from "./SpaceType";
 import {ITagCount} from "./ITagCount";
 import {TileType} from "./TileType";
+import {getProjectCardByName, getCorporationCardByName} from "./Dealer";
+import {ILoadable} from "./ILoadable";
+import {Database} from "./database/Database";
+import {SerializedPlayer} from "./SerializedPlayer";
 import {LogMessageType} from "./LogMessageType";
 import {LogMessageData} from "./LogMessageData";
 import {LogMessageDataType} from "./LogMessageDataType";
 
-export class Player {
+export class Player implements ILoadable<SerializedPlayer, Player>{
     public corporationCard: CorporationCard | undefined = undefined;
     public id: string;
     public canUseHeatAsMegaCredits: boolean = false;
@@ -1547,6 +1551,19 @@ export class Player {
       });
     }
 
+    // Propose a new action to undo last action
+    private undoTurnOption(game: Game): PlayerInput {
+      return new SelectOption("Undo Turn", () => {
+        try {
+          Database.getInstance().restoreLastSave(game.id, game.lastSaveId, game);
+        }
+        catch(error){
+          console.log(error);
+        }
+        return undefined;
+      });
+    }
+
     public takeActionForFinalGreenery(game: Game): void {
       if (game.canPlaceGreenery(this)) {
         const action: OrOptions = new OrOptions();
@@ -1836,6 +1853,11 @@ export class Player {
         action.options.push(remainingAwards);
       }
 
+      // Propose undo action only if you have done one action this turn
+      if (this.actionsTakenThisRound > 0) {
+        action.options.push(this.undoTurnOption(game));
+      }
+
       action.options.sort((a, b) => {
         if (a.title > b.title) {
           return 1;
@@ -1878,4 +1900,58 @@ export class Player {
       this.waitingFor = input;
       this.waitingForCb = cb;
     }
+
+    // Function used to rebuild each objects
+    public loadFromJSON(d: SerializedPlayer): Player {
+      // Assign each attributes
+      let o = Object.assign(this, d);
+
+      // Rebuild generation played map
+      this.generationPlayed = new Map<string, number>(d.generationPlayed);
+
+      // action this generation set
+      this.actionsThisGeneration = new Set<string>(d.actionsThisGeneration);
+
+      // Rebuild corporation card
+      if (d.corporationCard !== undefined) {
+        this.corporationCard = getCorporationCardByName(d.corporationCard.name);
+        if(d.corporationCard.resourceCount && d.corporationCard.resourceCount > 0) {
+          this.corporationCard!.resourceCount = d.corporationCard.resourceCount;
+        }
+      } else {
+          this.corporationCard = undefined;
+      }
+
+      // Rebuild deal corporation array
+      this.dealtCorporationCards = d.dealtCorporationCards.map((element: CorporationCard)  => {
+        return getCorporationCardByName(element.name)!;
+      });
+
+      // Rebuild each cards in hand
+      this.cardsInHand = d.cardsInHand.map((element: IProjectCard)  => {
+        return getProjectCardByName(element.name)!;
+      });
+
+      // Rebuild each prelude in hand
+      this.preludeCardsInHand = d.preludeCardsInHand.map((element: IProjectCard)  => {
+        return getProjectCardByName(element.name)!;
+      });
+
+      // Rebuild each played card
+      this.playedCards = d.playedCards.map((element: IProjectCard)  => {
+        let card = getProjectCardByName(element.name)!;
+        if(element.resourceCount && element.resourceCount > 0) {
+          card.resourceCount = element.resourceCount;
+        }
+        return card;
+      });
+
+      // Rebuild each drafted cards
+      this.draftedCards = d.draftedCards.map((element: IProjectCard)  => {
+        return getProjectCardByName(element.name)!;
+      });
+      
+      return o;
+    }
 }
+

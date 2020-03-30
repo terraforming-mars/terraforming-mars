@@ -41,7 +41,7 @@ export const PlayerHome = Vue.component("player-home", {
     mixins: [PlayerMixin],
     methods: {
         getPlayerCssForTurnOrder: (player: PlayerModel, hilightActive: boolean): string => {
-            var ret: string = "player_color_" + player.color;
+            var ret: string = "highlighter_box player_bg_color_" + player.color;
             if (hilightActive && player.isActive) ret += " player_is_active";
             return ret;
         },
@@ -56,7 +56,8 @@ export const PlayerHome = Vue.component("player-home", {
     },
     template: `
         <div id="player-home">
-            <h1 :style="'color:' + player.color"><span v-i18n>Terraforming Mars</span> - {{player.name}}</h1>
+           <h2 :class="'player_color_'+ player.color"><span v-i18n>TERRAFORMING MARS</span> </h2> 
+           <h1 :class="'player_bg_color_'+ player.color">{{player.name}}</h1>
             <section>
                 <dialog class="nes-dialog" id="dialog-default">
                     <form method="dialog">
@@ -95,7 +96,7 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
 
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
-                    <h3>Turn order <span class="help_tip">(click on player name to see details)</span></h3>
+                    <h2 :class="'player_color_'+ player.color">Turn order <span class="help_tip">(click on player name to see details)</span></h2>
                     <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
                         <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, false)">
                             <span class="player_number">{{ idx+1 }}.</span><a v-on:click.prevent="showPlayerDetails(p)" class="player_name" :class="getPlayerCssForTurnOrder(p, true)" href="#">{{ p.name }}</a>
@@ -129,7 +130,7 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <div class="player_home_block player_home_block--actions nofloat">
                     <a name="actions" class="player_home_anchor"></a>
-                    <h2 v-i18n>Actions</h2>
+                    <h2 :class="'player_color_'+ player.color" v-i18n>Actions</h2>
                     <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
 
@@ -141,20 +142,20 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
 
                 <div class="player_home_block player_home_block--log nofloat" v-if="player.players.length > 1 && player.gameLog.length > 0">
-                    <h2 v-i18n>Last Actions</h2>
+                    <h2 :class="'player_color_'+ player.color" v-i18n>Last Actions</h2>
                     <log-panel :messages="player.gameLog" :players="player.players"></log-panel>
                 </div>
 
                 <a name="cards" class="player_home_anchor"></a>
                 <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
-                    <h2 v-i18n>Cards In Hand</h2>
+                    <h2 :class="'player_color_'+ player.color" v-i18n>Cards In Hand</h2>
                     <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
                         <card :card="card.name" :resources="card.resources"></card>
                     </div>
                 </div>
 
                 <div class="player_home_block player_home_block--cards">
-                    <h2 v-i18n>Played Cards</h2>
+                    <h2 :class="'player_color_'+ player.color" v-i18n>Played Cards</h2>
 
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
                         <card :card="player.corporationCard" :resources="player.corporationCardResources"></card>
@@ -169,11 +170,11 @@ export const PlayerHome = Vue.component("player-home", {
             </div>
 
             <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
-                <h2 v-i18n>Select initial cards:</h2>
+                <h2 :class="'player_color_'+ player.color" v-i18n>Select initial cards:</h2>
 
                 <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
 
-                <h2 v-i18n>Game details</h2>
+                <h2 :class="'player_color_'+ player.color" v-i18n>Game details</h2>
 
                 <details class="accordion" v-if="player.players.length > 1">
                     <summary class="accordion-header">
@@ -202,7 +203,7 @@ export const PlayerHome = Vue.component("player-home", {
             </div>
 
             <div v-if="player.colonies.length > 0" class="player_home_block">
-                <h2 v-i18n>Colonies</h2>
+                <h2 :class="'player_color_'+ player.color" v-i18n>Colonies</h2>
                 <div class="player_home_colony_cont">
                     <div class="player_home_colony" v-for="colony in player.colonies" :key="colony.name">
                         <colony :colony="colony" :player="player"></colony>

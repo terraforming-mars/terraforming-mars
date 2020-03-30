@@ -79,6 +79,10 @@ export const CreateGameForm = Vue.component("create-game-form", {
         getElysiumBoard: function () {
             return BoardName.ELYSIUM;
         },
+        getRandomBoard: function () {
+            const boards = Object.values(BoardName);
+            return boards[Math.floor(Math.random() * boards.length)];
+        },
         getOriginalCorps: function () {
             return ALL_CORPORATION_CARDS;
         },
@@ -234,6 +238,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <label class="form-radio">
                                 <input type="radio" :value=getElysiumBoard() name="board" v-model="board">
                                 <i class="form-icon"></i> Elysium
+                            </label>
+
+                            <label class="form-radio">
+                                <input type="radio" :value=getRandomBoard() name="board" v-model="board">
+                                <i class="form-icon"></i> Random board
                             </label>
                         </div>
                     </div>

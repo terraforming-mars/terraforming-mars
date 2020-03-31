@@ -162,6 +162,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
       // Setup custom corporation list
       if (gameOptions.customCorporationsList && gameOptions.corporations.length >= players.length * 2) {
+        corporationCards = [];
         gameOptions.corporations.forEach((cardName) => {
             const cardFactory = ALL_CORPORATION_CARDS.find((cf) => cf.cardName === cardName);
             if (cardFactory !== undefined) {

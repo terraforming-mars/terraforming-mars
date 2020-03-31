@@ -69,7 +69,7 @@ export const PlayerHome = Vue.component("player-home", {
                     </form>
                 </dialog>
             </section>
-
+            
             <div v-if="player.phase === 'end'">
                 <div class="player_home_block">
                     <h2 v-i18n>This game is over!</h2>

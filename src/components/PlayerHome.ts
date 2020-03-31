@@ -59,7 +59,7 @@ export const PlayerHome = Vue.component("player-home", {
            <h2 :class="'player_color_'+ player.color"><span v-i18n>TERRAFORMING MARS</span> </h2> 
            <h1 :class="'player_bg_color_'+ player.color">{{player.name}}</h1>
             <section>
-                <dialog class="nes-dialog" id="dialog-default">
+                <dialog id="dialog-default">
                     <form method="dialog">
                         <p class="title" v-i18n>Error with input</p>
                         <p id="dialog-default-message"></p>
@@ -69,13 +69,11 @@ export const PlayerHome = Vue.component("player-home", {
                     </form>
                 </dialog>
             </section>
-
+            
             <div v-if="player.phase === 'end'">
                 <div class="player_home_block">
                     <h2 v-i18n>This game is over!</h2>
-                    <div v-for="otherPlayer in player.players">
-                        <div :style="'color:' + otherPlayer.color">{{otherPlayer.name}} - {{otherPlayer.victoryPointsBreakdown.total}}</div>
-                    </div>
+                    <a :href="'/the-end?id='+ player.id" v-i18n>Go to game results</a>
                 </div>
             </div>
 

@@ -15,7 +15,7 @@ import { maxOutOceans } from "./TestingUtils";
 import { SaturnSystems } from "../src/cards/corporation/SaturnSystems";
 import { Resources } from '../src/Resources';
 import { ISpace } from "../src/ISpace";
-import { BoardName } from '../src/BoardName';
+//import { BoardName } from '../src/BoardName';
 import { ResearchNetwork } from '../src/cards/prelude/ResearchNetwork';
 import { ArcticAlgae } from "../src/cards/ArcticAlgae";
 import { Ecologist } from '../src/milestones/Ecologist';
@@ -128,7 +128,7 @@ describe("Game", function () {
     it ("Draft round for 2 players", function () {
         const player = new Player("temp_test", Color.BLUE, false);
         const player2 = new Player("temp_test2", Color.RED, false);
-        const game = new Game("draft_game", [player,player2], player, false, true);
+        const game = new Game("draft_game", [player,player2], player);
         game.venusNextExtension = false;
         game.generation = 4;
         game.playerHasPassed(player);
@@ -141,7 +141,7 @@ describe("Game", function () {
     it("No draft round for 2 players", function () {
         const player = new Player("temp_test", Color.BLUE, false);
         const player2 = new Player("temp_test2", Color.RED, false);
-        const game = new Game("classic_game", [player,player2], player, false, false);
+        const game = new Game("classic_game", [player,player2], player);
         game.venusNextExtension = false;
         game.generation = 2;
         game.playerHasPassed(player);
@@ -153,7 +153,7 @@ describe("Game", function () {
  
     it("Solo play next generation", function () {
         const player = new Player("temp_test", Color.BLUE, false);
-        const game = new Game("draft_game", [player], player, false, false);
+        const game = new Game("draft_game", [player], player);
         game.venusNextExtension = false;
         game.playerHasPassed(player);
         game.playerIsFinishedTakingActions();
@@ -240,8 +240,8 @@ describe("Game", function () {
     it("Check Ecologist Milestone", function() {
         const player = new Player("temp_test", Color.BLUE, false);
         const player2 = new Player("temp_test2", Color.RED, false);
-        const game = new Game("classic_game", [player,player2], player, false, false, false, false, false, false, undefined, BoardName.ELYSIUM);
-
+        const game = new Game("classic_game", [player,player2], player);
+//, false, false, false, false, false, false, undefined, BoardName.ELYSIUM
         const card1 = new ResearchNetwork();
         const card2 = new ArcticAlgae();
         const ecologist = new Ecologist();

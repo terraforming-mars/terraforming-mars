@@ -56,7 +56,7 @@ export const PlayerHome = Vue.component("player-home", {
     },
     template: `
 
-        <div id="player-home" :style="{ backgroundImage: 'url( assets/' + player.preferences.background + '.png )' }>
+        <div id="player-home" :style="{ backgroundImage: 'url( assets/' + player.color + '.png )' }">
            <h2 :class="'game-title player_color_'+ player.color" v-i18n>Terraforming Mars</h2> 
            <h1 :class="'player_bg_color_'+ player.color">{{player.name}}</h1>
             <section>

@@ -55,7 +55,9 @@ export const Preferences = Vue.component("preferences", {
                 if (val !== this.$data[k]) {
                     if (k === "lang") {
                         strVal = this.$data[k];
-                    } else {
+                    }else if (k === "background") {
+                        strVal = this.$data[k];
+                    }else {
                         strVal = this.$data[k] ? "1": "0";
                     }
                     PreferencesManager.saveValue(k, strVal);

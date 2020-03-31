@@ -2,16 +2,27 @@ import { expect } from "chai";
 import { Stratopolis } from "../../../src/cards/venusNext/Stratopolis";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from "../../../src/Game";
+import { Game, GameOptions } from '../../../src/Game';
 import { Resources } from "../../../src/Resources";
 import { AerialMappers } from '../../../src/cards/venusNext/AerialMappers';
 import { SelectCard } from '../../../src/inputs/SelectCard';
+import { BoardName } from '../../../src/BoardName';
 
 describe("Stratopolis", function () {
     it("Should play", function () {
         const card = new Stratopolis();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player, false, false, false, true);
+        const gameOptions = {
+            draftVariant: false,
+            preludeExtension: false,
+            venusNextExtension: true,
+            coloniesExtension: false,
+            boardName: BoardName.ORIGINAL,
+            showOtherPlayersVP: false,
+            customCorporationsList: false,
+            corporations: []
+          } as GameOptions;
+        const game = new Game("foobar", [player,player], player, gameOptions);
         expect(card.canPlay(player)).to.eq(false);
         const action = card.play(player,game);
         expect(action).to.eq(undefined);

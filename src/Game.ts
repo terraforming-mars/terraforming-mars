@@ -565,10 +565,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public playerIsFinishedWithResearchPhase(player: Player): void {
       this.researchedPlayers.add(player);
       if (this.allPlayersHaveFinishedResearch()) {
-        // Save the game state after changing the current player
-        // Increment the save id
-        this.lastSaveId += 1;
-        Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
+        // Check that it's not the first gen
+        if(this.generation > 1) {
+          // Save the game state after changing the current player
+          // Increment the save id
+          this.lastSaveId += 1;
+          Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
+        }
         this.gotoActionPhase();
       }
     }

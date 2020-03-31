@@ -1148,6 +1148,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.milestones = [];
       this.awards = [];
       this.board = this.boardConstructor(d.boardName);
+
+      // Reload venus elements if needed
+      if(this.venusNextExtension) {
+        this.setVenusElements();
+      }
+
       d.board.spaces.forEach((element: ISpace) => {
         if(element.tile) {
           let space = this.getSpace(element.id);
@@ -1163,11 +1169,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
           };
         }
       });
-
-      // Reload venus elements if needed
-      if(this.venusNextExtension) {
-        this.setVenusElements();
-      }
 
       // Reload colony elements if needed 
       if (this.coloniesExtension) {

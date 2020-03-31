@@ -77,7 +77,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 }
             }
             return false;
-		},	
+        },
         canUseMicrobes: function () {
             if (this.$data.card !== undefined && this.playerinput.microbes > 0) {
                 const card = getProjectCardByName(this.$data.card.name);
@@ -87,7 +87,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                     }
                 }
             }
-            return false;			
+            return false;
         },
         canUseFloaters: function () {
             if (this.$data.card !== undefined && this.playerinput.floaters > 0) {
@@ -98,11 +98,11 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                     }
                 }
             }
-            return false;			
+            return false;
         },
         cardChanged: function () {
             this.$data.megaCredits = this.getCardCost();
-            
+
             this.titanium = 0;
             this.steel = 0;
             this.heat = 0;

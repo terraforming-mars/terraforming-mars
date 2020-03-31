@@ -33,40 +33,44 @@
 
 .player_bg_color_red {
     background-color: #910;
-
+    width: 505px;
 }
 .player_bg_color_yellow {
     background-color: #aa0;
-
+    width: 505px;
 }
 .player_bg_color_green {
     background-color: #090;
-
+    width: 505px;
 }
 .player_bg_color_black {
     background-color: #111;
-
+    width: 505px;
 }
 .player_bg_color_blue {
     background-color: #06f;
-
+    width: 505px;
 }
 
 h1 {
     color: #ddd;
-    font-family: Prototype;
+    font-family: Ubuntu, Sans;
     filter: drop-shadow(4px 4px 4px black);
     text-shadow: -1px -1px 1px #aaaa,1px 1px 1px #333a;
     padding: 1px 15px;
     border-radius: 8px;
-} 
+}
 
 h2 {
     color: #ddd;
-    font-family: Prototype;
+    font-family: Ubuntu, Sans;
     filter: drop-shadow(4px 4px 4px black);
     text-shadow: -1px -1px 6px #aaa4;
-} 
+}
+
+.game-title {
+    text-transform: uppercase;
+}
 
 .tag-count {
     box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
@@ -85,6 +89,7 @@ h2 {
     margin-top: -6px;
     box-sizing: content-box;
     margin-left: 10px;
+    z-index: 2;
 }
 
 .tag-display {
@@ -101,27 +106,39 @@ h2 {
 }
 
 .tag-count-display {
-    color: #020202;
-    line-height: 1;
+    color: #000;
     position: absolute;
-    left: 12px;
-    top: 32px;
-    background: linear-gradient(#fff, #888);
-    height: 24px;
-    line-height: 20px;
+    left: 14px;
+    top: 25px;
+    height: 35px;
+    line-height: 44px;
     text-align: center;
     font-size: 18px;
-    width: 40px;
-    border-radius: 5px;
-    border-top: 2px solid #dddddd;
-    border-left: 2px solid #dddddd;
-    border-bottom: 2px solid #898989;
-    border-right: 2px solid #898989;
-    box-shadow: 0 0 0 2px #303030;
+    width: 36px;
+    border-radius: 0 0 5px 5px;
+    border-top: 2px solid #bb8760;
+    border-left: 2px solid #bb8760;
+    border-bottom: 2px solid #744631;
+    border-right: 2px solid #744631;
+    background-image: url(assets/mars.png);
+    background-size: 60px 60px;
+    background-position: -13px -5px;
+    box-shadow: 0 1px 2px black;
 }
 
 .icon-vp {
-  background-image: url("./assets/icon_vp.png");
+    text-shadow: 0 0 5px darkorange;
+    color: #000;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 28px;
+    background-image: url(assets/mars.png);
+    background-size: 64px 64px;
+    border-top: 2px solid #bb8760;
+    border-left: 2px solid #bb8760;
+    border-bottom: 2px solid #744631;
+    border-right: 2px solid #744631;
 }
 
 .player_home_block--resources {
@@ -138,9 +155,9 @@ h2 {
 
 .highlighter_box {
     text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
-    padding: 1px 5px;
+    padding: 1px 10px;
     border-radius: 4px;
-    }
+}
 
 .help_tip {
     color: #aaa;
@@ -151,29 +168,41 @@ h2 {
 
 .player_home_block {
     margin-bottom: 20px;
-    
+
     .player_item {
         display: inline-block;
         vertical-align: middle;
         white-space: nowrap;
         margin-right: 15px;
     }
-    
+
     .player_name {
         color: #ccc;
         text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
         padding: 1px 5px;
         border-radius: 4px;
         font-weight: bold;
-      
+
         }
-    
+
     .player_name_cont {
         display: inline-block;
         vertical-align: middle;
+
+
+
         .player_number {
             margin-right: 5px;
             text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
+        }
+    }
+
+    .player_name_cont.player_is_active {
+        border: 3px solid #fff;
+
+        .player_name, .player_name:hover {
+            cursor: auto;
+            text-decoration: none;
         }
     }
 
@@ -187,16 +216,23 @@ h2 {
 
     .player_is_active {
         text-decoration: underline;
-        background-color: #444; 
+        background-color: #444;
     }
 }
+.awards-padding {padding: 3px 42px 3px 42px !important;}
 
 .milestones, .awards {
     .ma-title {
-        margin-bottom: 4px;
         a {
-            color: #c2c2c2;
+            font-family: Prototype;
+            letter-spacing: 1px;
+            font-size: 16px;
+            color: #303030;
             text-transform: uppercase;
+            background: lightblue;
+            padding: 3px 26px 3px 26px;
+            border-radius: 20px 20px 0 0;
+            text-decoration: none;
         }
     }
 
@@ -214,7 +250,7 @@ h2 {
             display: inline-block;
             width: 156px;
             height: 97px;
-            
+
             color: #000000b0;
             padding-top: 62px;
             font-size: 13px;
@@ -301,82 +337,79 @@ h2 {
         }
 
         .ma-name--banker {
-            background-position: 0px -252px; 
+            background-position: 0px -252px;
         }
 
         .ma-name--scientist {
-            background-position: 0px -152px; 
+            background-position: 0px -152px;
         }
 
         .ma-name--thermalist {
-            background-position: 0px -352px; 
+            background-position: 0px -352px;
         }
 
         .ma-name--miner {
-            background-position: 0px -452px; 
+            background-position: 0px -452px;
         }
 
         .ma-name--celebrity {
-            background-position: 0px -552px; 
-        }            
+            background-position: 0px -552px;
+        }
 
         .ma-name--industrialist {
-            background-position: 0px -652px; 
+            background-position: 0px -652px;
         }
 
         .ma-name--desert-settler {
-            background-position: 0px -752px; 
+            background-position: 0px -752px;
         }
 
         .ma-name--estate-dealer {
-            background-position: 0px -852px; 
+            background-position: 0px -852px;
         }
 
         .ma-name--benefactor {
-            background-position: 0px -952px; 
+            background-position: 0px -952px;
         }
 
         .ma-name--cultivator {
-            background-position: 0px -1052px; 
+            background-position: 0px -1052px;
         }
 
         .ma-name--magnate {
-            background-position: 0px -1152px; 
+            background-position: 0px -1152px;
         }
 
         .ma-name--space-baron {
-            background-position: 0px -1252px; 
+            background-position: 0px -1252px;
         }
 
         .ma-name--excentric {
-            background-position: 0px -1352px; 
+            background-position: 0px -1352px;
         }
 
         .ma-name--contractor {
-            background-position: 0px -1452px; 
+            background-position: 0px -1452px;
         }
 
         .ma-name--venuphile {
-            background-position: 0px -1552px; 
+            background-position: 0px -1552px;
         }
 
         .ma-description {
             display: inline-block;
             width: 156px;
             height: 70px;
-            color: #000000b0;
-            background: #c2c2c2;
-            border: 2px solid #7e7e7e;
-            padding: 7px 2px 2px 2px;
+            color: #ddd;
+            padding: 5px 2px 0px 2px;
             font-size: 14px;
-            line-height: 14px;
+            line-height: 15px;
             text-align: center;
         }
 
     }
 
     .pwned-item {
-        background: #fff;
         .ma-name, .ma-description {
             filter: grayscale(100%);
             opacity: 0.5;
@@ -395,13 +428,14 @@ h2 {
 .funded-award-inline, .claimed-milestone-inline {
     white-space: nowrap;
     color: #000;
-    text-transform: uppercase; 
-    background: #c2c2c2;  
-    padding: 3px 33px 2px 10px;
+    text-transform: uppercase;
+    background: #c2c2c2;
+    padding: 1px 33px 1px 10px;
     font-size: 15px;
+    line-height: 23px;
     font-weight: bold;
-    margin: -7px 0 0 10px;
-    vertical-align: middle;
+    margin: 0 0 0 10px;
+    border-radius: 20px;
     display: inline-block;
 }
 

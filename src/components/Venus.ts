@@ -27,7 +27,7 @@ export const Venus = Vue.component("venus", {
                     new VenusScaleLevel(value, value <= this.venusScaleLevel)
                 )
             }
-            return levels
+            return levels.reverse();
         },
         getScaleLevelCSS: function (level: VenusScaleLevel): string {
             return level.isActive ? "scale_figure--active" : ""
@@ -43,14 +43,10 @@ export const Venus = Vue.component("venus", {
     template: `
     <div class="venus_board_cont">
         <div class="venus_board">
-            <i class="bonus_rt"></i>
-            <i class="bonus_card"></i>
-            <div class="venus_board_title">Terraforming Venus...</div>
-            <div class="venus_board_current_value">{{ venusScaleLevel }}%</div>
             <div class="venus_board_scale_cont">
                 <div class="scale_item" v-for="lvl in getVenusScaleLevels()">
-                    <div class="scale_value">{{ lvl.value }}</div>
                     <div class="scale_figure" :class="getScaleLevelCSS(lvl)"></div>
+                    <div class="scale_value">{{ lvl.value }}</div>
                 </div>
             </div>
             <i class="venus_img"></i>

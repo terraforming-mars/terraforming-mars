@@ -2,14 +2,25 @@ import { expect } from "chai";
 import { LunaMetropolis } from "../../../src/cards/venusNext/LunaMetropolis";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
-import { Game } from "../../../src/Game";
+import { Game, GameOptions } from '../../../src/Game';
 import { Resources } from "../../../src/Resources";
+import { BoardName } from '../../../src/BoardName';
 
 describe("LunaMetropolis", function () {
     it("Should play", function () {
         const card = new LunaMetropolis();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player, false, false, false, true);
+        const gameOptions = {
+            draftVariant: false,
+            preludeExtension: false,
+            venusNextExtension: true,
+            coloniesExtension: false,
+            boardName: BoardName.ORIGINAL,
+            showOtherPlayersVP: false,
+            customCorporationsList: false,
+            corporations: []
+          } as GameOptions;
+        const game = new Game("foobar", [player,player], player, gameOptions);
 
         const action = card.play(player, game);
         expect(action).to.eq(undefined);

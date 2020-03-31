@@ -28,8 +28,8 @@ export const LogPanel = Vue.component("log-panel", {
             if (data.type !== undefined && data.value !== undefined) {
                 if (data.type === LogMessageDataType.PLAYER) {
                     for (let player of this.players) {
-                        if (data.value === player.name) {
-                            return "<log-player class=\"player_bg_color_"+player.color+"\">"+data.value+"</log-player>";
+                        if (data.value === player.id) {
+                            return "<log-player class=\"player_bg_color_"+player.color+"\">"+player.name+"</log-player>";
                         }
                     }
                 } else if (data.type === LogMessageDataType.CARD) {

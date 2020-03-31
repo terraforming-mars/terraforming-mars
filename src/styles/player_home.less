@@ -6,6 +6,8 @@
 #player-home {
     padding-left: 20px;
     border-left: 1px solid #adacac;
+    background: url(assets/background-noise.png);
+    background-size: cover;
 }
 
 .player_color_red {
@@ -52,19 +54,23 @@
 
 h1 {
     color: #ddd;
-    font-family: Prototype;
+    font-family: Ubuntu, Sans;
     filter: drop-shadow(4px 4px 4px black);
     text-shadow: -1px -1px 1px #aaaa,1px 1px 1px #333a;
     padding: 1px 15px;
     border-radius: 8px;
-} 
+}
 
 h2 {
     color: #ddd;
-    font-family: Prototype;
+    font-family: Ubuntu, Sans;
     filter: drop-shadow(4px 4px 4px black);
     text-shadow: -1px -1px 6px #aaa4;
 } 
+
+.game-title {
+    text-transform: uppercase;
+}
 
 .tag-count {
     box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
@@ -136,9 +142,9 @@ h2 {
 
 .highlighter_box {
     text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
-    padding: 1px 5px;
+    padding: 1px 10px;
     border-radius: 4px;
-    }
+}
 
 .help_tip {
     color: #aaa;
@@ -169,9 +175,21 @@ h2 {
     .player_name_cont {
         display: inline-block;
         vertical-align: middle;
+
+
+
         .player_number {
             margin-right: 5px;
             text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
+        }
+    }
+
+    .player_name_cont.player_is_active {
+        border: 3px solid #fff;
+
+        .player_name, .player_name:hover {
+            cursor: auto;
+            text-decoration: none;
         }
     }
 
@@ -181,11 +199,6 @@ h2 {
         font-size: 20px;
         margin: 5px 0 0 10px;
         color:#7e7c7c;
-    }
-
-    .player_is_active {
-        text-decoration: underline;
-        background-color: #444; 
     }
 }
 

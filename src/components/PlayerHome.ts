@@ -55,11 +55,12 @@ export const PlayerHome = Vue.component("player-home", {
         dialogPolyfill.default.registerDialog(document.getElementById("dialog-default"));
     },
     template: `
-        <div id="player-home" :style="{ backgroundImage: 'url( assets/' + player.preferences.background + '.png )' }" >
-           <h2 :class="'player_color_'+ player.color"><span v-i18n>TERRAFORMING MARS</span> </h2> 
+
+        <div id="player-home" :style="{ backgroundImage: 'url( assets/' + player.preferences.background + '.png )' }>
+           <h2 :class="'game-title player_color_'+ player.color" v-i18n>Terraforming Mars</h2> 
            <h1 :class="'player_bg_color_'+ player.color">{{player.name}}</h1>
             <section>
-                <dialog class="nes-dialog" id="dialog-default">
+                <dialog id="dialog-default">
                     <form method="dialog">
                         <p class="title" v-i18n>Error with input</p>
                         <p id="dialog-default-message"></p>
@@ -69,13 +70,11 @@ export const PlayerHome = Vue.component("player-home", {
                     </form>
                 </dialog>
             </section>
-
+            
             <div v-if="player.phase === 'end'">
                 <div class="player_home_block">
                     <h2 v-i18n>This game is over!</h2>
-                    <div v-for="otherPlayer in player.players">
-                        <div :style="'color:' + otherPlayer.color">{{otherPlayer.name}} - {{otherPlayer.victoryPointsBreakdown.total}}</div>
-                    </div>
+                    <a :href="'/the-end?id='+ player.id" v-i18n>Go to game results</a>
                 </div>
             </div>
 
@@ -96,10 +95,13 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
 
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
-                    <h2 :class="'player_color_'+ player.color">Turn order <span class="help_tip">(click on player name to see details)</span></h2>
+                    <h2 :class="'player_color_'+ player.color">
+                        <span v-i18n>Turn order</span>
+                        <span class="help_tip" v-i18n>(click on player name to see details)</span>
+                    </h2>
                     <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
-                        <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, false)">
-                            <span class="player_number">{{ idx+1 }}.</span><a v-on:click.prevent="showPlayerDetails(p)" class="player_name" :class="getPlayerCssForTurnOrder(p, true)" href="#">{{ p.name }}</a>
+                        <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
+                            <span class="player_number">{{ idx+1 }}.</span><a v-on:click.prevent="showPlayerDetails(p)" class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</a>
                         </div>
                         <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
                     </div>
@@ -119,7 +121,7 @@ export const PlayerHome = Vue.component("player-home", {
                     <div>
                         <div class="tag-display">
                             <div class="tag-count icon-vp"></div>
-                            <span class="tag-count-display"> : {{player.victoryPointsBreakdown.total}}</span>
+                            <span class="tag-count-display">{{player.victoryPointsBreakdown.total}}</span>
                         </div>
                     </div>
                 </div>

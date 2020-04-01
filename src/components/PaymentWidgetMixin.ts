@@ -59,7 +59,7 @@ export const PaymentWidgetMixin = {
               (this as any)["steel"] * this.getResourceRate("steel") -
               (this as any)["microbes"] * this.getResourceRate("microbes") -
               (this as any)["floaters"] * this.getResourceRate("floaters");
-            (this as any)["megaCredits"] = Math.max(0, remainingMC);
+            (this as any)["megaCredits"] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
         }
     }
 }

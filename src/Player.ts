@@ -1295,7 +1295,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
               LogMessageType.DEFAULT,
               "${0} traded with ${1}",
               new LogMessageData(LogMessageDataType.PLAYER, this.name),
-              new LogMessageData(LogMessageDataType.PLAYER, colony.name)
+              new LogMessageData(LogMessageDataType.COLONY, colony.name)
             );
             return undefined;
           }

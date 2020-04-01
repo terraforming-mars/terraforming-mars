@@ -15,7 +15,7 @@ import {
     ALL_TURMOIL_CORPORATIONS,
     ALL_PROMO_CORPORATIONS
 } from './src/Dealer';
-import {Game} from './src/Game';
+import { Game, GameOptions } from './src/Game';
 import {ICard} from './src/cards/ICard';
 import {IColony} from './src/colonies/Colony';
 import {IProjectCard} from './src/cards/IProjectCard';
@@ -307,7 +307,18 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         }
       }
 
-      const game = new Game(gameId, players, firstPlayer, gameReq.prelude, gameReq.draftVariant, gameReq.showOtherPlayersVP, gameReq.venusNext, gameReq.colonies, gameReq.customCorporationsList, selectedCorporations, gameReq.board, gameReq.seed);
+      const gameOptions = {
+        draftVariant: gameReq.draftVariant,
+        preludeExtension: gameReq.prelude,
+        venusNextExtension: gameReq.venusNext,
+        coloniesExtension: gameReq.colonies,
+        boardName: gameReq.board,
+        showOtherPlayersVP: gameReq.showOtherPlayersVP,
+        customCorporationsList: gameReq.customCorporationsList,
+        corporations: selectedCorporations
+      } as GameOptions;
+
+      const game = new Game(gameId, players, firstPlayer, gameOptions);
       games.set(gameId, game);
       game.getPlayers().forEach((player) => {
         playersToGame.set(player.id, game);

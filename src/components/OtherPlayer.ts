@@ -45,7 +45,7 @@ export const OtherPlayer = Vue.component("other-player", {
                     <div>
                         <div class="tag-display">
                             <div class="tag-count icon-vp"></div>
-                            <span class="tag-count-display"> : {{player.victoryPointsBreakdown.total}}</span>
+                            <span class="tag-count-display">{{player.victoryPointsBreakdown.total}}</span>
                         </div>
                     </div>
                 </div>

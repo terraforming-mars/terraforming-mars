@@ -22,6 +22,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
     data: function () {
         return {
             card: this.playerinput.cards[0],
+            cost: 0,
             heat: 0,
             megaCredits: 0,
             steel: 0,
@@ -38,7 +39,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
     mounted: function () {
         let app = this;
         Vue.nextTick(function () {
-            app.$data.megaCredits = app.getCardCost();
+            app.$data.cost = app.getCardCost();
+            app.$data.megaCredits = (app as any).getMegaCreditsMax();
         });
     },
     methods: {
@@ -77,7 +79,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 }
             }
             return false;
-		},	
+        },
         canUseMicrobes: function () {
             if (this.$data.card !== undefined && this.playerinput.microbes > 0) {
                 const card = getProjectCardByName(this.$data.card.name);
@@ -87,7 +89,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                     }
                 }
             }
-            return false;			
+            return false;
         },
         canUseFloaters: function () {
             if (this.$data.card !== undefined && this.playerinput.floaters > 0) {
@@ -98,11 +100,12 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                     }
                 }
             }
-            return false;			
+            return false;
         },
         cardChanged: function () {
-            this.$data.megaCredits = this.getCardCost();
-            
+            this.$data.cost = this.getCardCost();
+            this.$data.megaCredits = (this as any).getMegaCreditsMax();
+
             this.titanium = 0;
             this.steel = 0;
             this.heat = 0;

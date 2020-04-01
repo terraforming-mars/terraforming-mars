@@ -69,15 +69,16 @@ export const LogPanel = Vue.component("log-panel", {
         },
         cardClicked: function (message: LogMessage) {
             let datas = message.data;
-            let card_name ='';
             datas.forEach((data: LogMessageData) => {
                 if (data.type !== undefined && data.value !== undefined) {
                     if (data.type === LogMessageDataType.CARD) {
-                        card_name = data.value;    
+                        let card_name = data.value;    
+                        if (!this.cards.includes(card_name)) {
+                            this.cards.push(card_name);
+                        }
                     }
                 }
             });
-            this.cards.push(card_name);
         },
         hideMe: function () {
             this.cards = new Array<string>();

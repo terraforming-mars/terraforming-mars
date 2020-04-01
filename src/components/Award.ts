@@ -22,7 +22,7 @@ export const Award = Vue.component("award", {
     <div class="awards_cont" v-trim-whitespace>
         <div class="awards">
             <div class="ma-title">
-                <a href="#" v-on:click.prevent="toggleMe()" v-i18n>Awards</a>
+                <a href="#" v-on:click.prevent="toggleMe()" v-i18n class="awards-padding">Awards</a>
                 <span v-for="award in awards_list" v-if="award.player_name" class="funded-award-inline" :title="award.player_name">
                     <span v-i18n>{{ award.award.name }}</span>
                     <span class="ma-player-cube"><i :class="'board_cube board_cube--'+award.player_color" /></span>

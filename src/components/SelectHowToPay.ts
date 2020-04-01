@@ -17,6 +17,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
     props: ["player", "playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
+            cost: 0,
             heat: 0,
             megaCredits: 0,
             steel: 0,
@@ -30,7 +31,8 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
     mounted: function () {
       let app = this;
       Vue.nextTick(function () {
-        app.$data.megaCredits = app.playerinput.amount;
+        app.$data.cost = app.playerinput.amount;
+        app.$data.megaCredits = (app as any).getMegaCreditsMax();
       });
     },
     methods: {
@@ -62,10 +64,10 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                 this.$data.warning = "You don't have enough steel";
                 return;
             }
-            if (this.playerinput.amount > 0 && 
-                htp.heat + 
-                htp.megaCredits + 
-                (htp.steel * this.player.steelValue) + 
+            if (this.playerinput.amount > 0 &&
+                htp.heat +
+                htp.megaCredits +
+                (htp.steel * this.player.steelValue) +
                 (htp.titanium * this.player.titaniumValue) +
                 (htp.microbes * 2) +
                 (htp.floaters * 3)
@@ -76,7 +78,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
             this.onsave([[JSON.stringify(htp)]]);
         }
     },
-    template: `<div class="payments_cont"> 
+    template: `<div class="payments_cont">
   <section v-trim-whitespace>
 
     <h3 class="payments_title">{{playerinput.title}}</h3>

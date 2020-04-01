@@ -178,6 +178,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         if (!player.beginner) {
           const firstCard: CorporationCard | undefined = corporationCards.pop();
           const secondCard: CorporationCard | undefined = corporationCards.pop();
+
           if (firstCard === undefined || secondCard === undefined) {
             throw new Error("No corporation card dealt for player");
           }

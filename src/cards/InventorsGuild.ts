@@ -23,8 +23,9 @@ export class InventorsGuild implements IActionCard, IProjectCard {
     }
     public action(player: Player, game: Game) {
         const dealtCard = game.dealer.dealCard();
+        const canSelectCard = (player.megaCredits + (player.canUseHeatAsMegaCredits ?  player.heat : 0))  >=3 ;
         return new SelectCard(
-          "Select card to keep or none to discard",
+          canSelectCard ? "Select card to keep or none to discard" : "You cannot pay this card" ,
           [dealtCard],
           (cards: Array<IProjectCard>) => {
             if (cards.length === 0) {
@@ -50,7 +51,7 @@ export class InventorsGuild implements IActionCard, IProjectCard {
             player.cardsInHand.push(dealtCard);
             player.megaCredits -= player.cardCost;
             return undefined;
-          }, 1, 0
+          }, canSelectCard ? 1 : 0 , 0
         );
       }
 }

@@ -47,7 +47,7 @@ export const PlayerHome = Vue.component("player-home", {
         },
         showPlayerDetails: function (player: PlayerModel) {
             if (player.id === this.player.id) return;
-            
+
             (this.$root as any).setVisibilityState("other_player_" + player.id, true);
         }
     },
@@ -105,7 +105,7 @@ export const PlayerHome = Vue.component("player-home", {
                         </div>
                         <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
                     </div>
-                    <div v-if="player.players.length > 1">
+                    <div v-if="player.players.length > 1" style="display:flex;flex-wrap:wrap;">
                         <div v-for="otherPlayer in player.players" :key="otherPlayer.id">
                             <other-player v-if="otherPlayer.id !== player.id" :player="otherPlayer"></other-player>
                         </div>
@@ -120,8 +120,7 @@ export const PlayerHome = Vue.component("player-home", {
                 <div class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
                     <div>
                         <div class="tag-display">
-                            <div class="tag-count icon-vp"></div>
-                            <span class="tag-count-display">{{player.victoryPointsBreakdown.total}}</span>
+                            <div class="tag-count icon-vp">{{player.victoryPointsBreakdown.total}}</div>
                         </div>
                     </div>
                 </div>

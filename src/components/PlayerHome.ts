@@ -56,7 +56,6 @@ export const PlayerHome = Vue.component("player-home", {
     },
     template: `
         <div id="player-home">
-          <div class="background">
            <h2 :class="'game-title player_color_'+ player.color" v-i18n>Terraforming Mars</h2>
            <h1 :class="'player_bg_color_'+ player.color">{{player.name}}</h1>
             <section>
@@ -211,7 +210,6 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
             </div>
-           </div>
         </div>
     `
 });

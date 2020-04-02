@@ -767,7 +767,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private startActionsForPlayer(player: Player) {
       this.activePlayer = player;
       player.actionsTakenThisRound = 0;
-      
+
       // Save the game state after changing the current player
       // Increment the save id
       this.lastSaveId += 1;
@@ -1143,8 +1143,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     // Custom replacer to transform Map and Set to Array
-    public replacer(_key: any, value: any) {
-      if (_key == 'interrupts'){
+    public replacer(key: any, value: any) {
+      if (key === "interrupts"){
         return [];
       }
       else if (value instanceof Set) {

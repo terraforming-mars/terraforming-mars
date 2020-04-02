@@ -15,6 +15,7 @@ export const Preferences = Vue.component("preferences", {
             "hide_awards_and_milestones": false,
             "hide_turnorder": false,
             "small_cards": false,
+            "remove_background": false,
             "lang": "en"
         };
     },
@@ -119,6 +120,12 @@ export const Preferences = Vue.component("preferences", {
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="small_cards" />
                             <i class="form-icon"></i> Smaller cards
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="remove_background" />
+                            <i class="form-icon"></i> Remove background image
                         </label>
                     </div>
                     <div class="preferences_panel_item form-group">

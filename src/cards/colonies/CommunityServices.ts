@@ -16,7 +16,9 @@ export class CommunityServices implements IProjectCard {
         if (player.corporationCard !== undefined && player.corporationCard.tags.length === 0) {
             noTagsCount++;
         }
-        player.setProduction(Resources.MEGACREDITS, player.playedCards.filter((card) => card.cardType !== CardType.EVENT && card.tags.length === 0).length + noTagsCount + 1);
+        player.setProduction(Resources.MEGACREDITS,
+            player.playedCards.filter((card) => card.cardType !== CardType.EVENT 
+                    && card.tags.filter(tag => tag !== Tags.WILDCARD).length === 0).length + noTagsCount + 1);
         return undefined;
     }
 

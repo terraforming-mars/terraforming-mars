@@ -47,10 +47,21 @@ import {LogMessage} from "./LogMessage";
 import {LogMessageType} from "./LogMessageType";
 import {LogMessageData} from "./LogMessageData";
 import {LogMessageDataType} from "./LogMessageDataType";
-import {CardName} from "./CardName";
 import {Database} from "./database/Database";
 import { SerializedGame } from "./SerializedGame";
 import { SerializedPlayer } from "./SerializedPlayer";
+import { CardName } from "./CardName";
+
+export interface GameOptions {
+  draftVariant: boolean;
+  preludeExtension: boolean;
+  venusNextExtension: boolean;
+  coloniesExtension: boolean;
+  boardName: BoardName;
+  showOtherPlayersVP: boolean;
+  customCorporationsList: boolean,
+  corporations: Array<CardName>
+}  
 
 export class Game implements ILoadable<SerializedGame, Game> {
     public activePlayer: Player;
@@ -79,33 +90,47 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public colonyDealer: ColonyDealer | undefined = undefined;
     public pendingOceans: number = 0;
     public lastSaveId: number = 0;
+    private draftVariant: boolean;
+    private preludeExtension: boolean;
+    public venusNextExtension: boolean;
+    public coloniesExtension: boolean;
+    public boardName: BoardName;
+    public showOtherPlayersVP: boolean;
+
 
     constructor(
       public id: string,
       private players: Array<Player>,
       private first: Player,
-      private preludeExtension: boolean = false,
-      private draftVariant: boolean = false,
-      public showOtherPlayersVP: boolean = false,
-      public venusNextExtension: boolean = false,
-      public coloniesExtension: boolean = false,
-      customCorporationsList: boolean = false,
-      corporationList: Array<CardName> = [],
-      public boardName: BoardName = BoardName.ORIGINAL,
-      seed?: number
+      gameOptions?: GameOptions
     ) {
 
       Database.getInstance();
 
-      if (seed === undefined) {
-        seed = Math.random();
+      if (gameOptions === undefined) {
+        gameOptions = {
+          draftVariant: false,
+          preludeExtension: false,
+          venusNextExtension: false,
+          coloniesExtension: false,
+          boardName: BoardName.ORIGINAL,
+          showOtherPlayersVP: false,
+          customCorporationsList: false,
+          corporations: []
+        } as GameOptions
       }
 
-      this.board = this.boardConstructor(boardName);
+      this.board = this.boardConstructor(gameOptions.boardName);
 
       this.activePlayer = first;
-      this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, seed);
-      
+      this.boardName = gameOptions.boardName;
+      this.draftVariant = gameOptions.draftVariant;
+      this.preludeExtension = gameOptions.preludeExtension;
+      this.venusNextExtension = gameOptions.venusNextExtension;
+      this.coloniesExtension = gameOptions.coloniesExtension;
+      this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, Math.random());
+      this.showOtherPlayersVP = gameOptions.showOtherPlayersVP;
+
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
       if (players.length === 1) {
@@ -136,8 +161,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
       }
       // Setup custom corporation list
-      if (customCorporationsList && corporationList.length >= players.length * 2) {
-        corporationList.forEach((cardName) => {
+      if (gameOptions.customCorporationsList && gameOptions.corporations.length >= players.length * 2) {
+        corporationCards = [];
+        gameOptions.corporations.forEach((cardName) => {
             const cardFactory = ALL_CORPORATION_CARDS.find((cf) => cf.cardName === cardName);
             if (cardFactory !== undefined) {
                 corporationCards.push(new cardFactory.factory());
@@ -152,6 +178,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         if (!player.beginner) {
           const firstCard: CorporationCard | undefined = corporationCards.pop();
           const secondCard: CorporationCard | undefined = corporationCards.pop();
+
           if (firstCard === undefined || secondCard === undefined) {
             throw new Error("No corporation card dealt for player");
           }

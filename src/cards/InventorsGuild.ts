@@ -23,7 +23,7 @@ export class InventorsGuild implements IActionCard, IProjectCard {
     }
     public action(player: Player, game: Game) {
         const dealtCard = game.dealer.dealCard();
-        const canSelectCard = (player.megaCredits + (player.canUseHeatAsMegaCredits ?  player.heat : 0))  >=3 ;
+        const canSelectCard = player.canAfford(dealtCard.cost);
         return new SelectCard(
           canSelectCard ? "Select card to keep or none to discard" : "You cannot pay this card" ,
           [dealtCard],

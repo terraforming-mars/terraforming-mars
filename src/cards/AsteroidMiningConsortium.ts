@@ -13,8 +13,9 @@ export class AsteroidMiningConsortium implements IProjectCard {
     public name: CardName = CardName.ASTEROID_MINING_CONSORTIUM;
     public canPlay(player: Player, game: Game): boolean {
       if (game.getPlayers().length > 1 
-        && game.getPlayers().filter(p => p.id !== player.id && p.getProduction(Resources.TITANIUM) > 0).length === 0 ) {
-            return false; //No other player to reduce resource from
+        && ( player.getProduction(Resources.TITANIUM)==0 ||
+        game.getPlayers().filter(p => p.id !== player.id && p.getProduction(Resources.TITANIUM) > 0).length === 0 )) {
+            return false; //PLayer hasn't production or No other player to reduce resource from
       }
       return player.getProduction(Resources.TITANIUM) >= 1;
     }

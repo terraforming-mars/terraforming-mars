@@ -12,8 +12,7 @@ export class AsteroidMiningConsortium implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: CardName = CardName.ASTEROID_MINING_CONSORTIUM;
     public canPlay(player: Player, game: Game): boolean {
-      const othersHaveTitaniumProduction = game.getPlayers().length === 0 || 
-        game.getPlayers().filter(p => p.id !== player.id && p.getProduction(Resources.TITANIUM) > 0).length === 0  ?  false : true; 
+      const othersHaveTitaniumProduction = game.getPlayers().filter(p => p.id !== player.id && p.getProduction(Resources.TITANIUM) > 0).length >= 1  ?  true : false; 
       return player.getProduction(Resources.TITANIUM) >= 1 || othersHaveTitaniumProduction;
     }
     public play(player: Player, game: Game) {

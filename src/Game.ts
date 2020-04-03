@@ -56,6 +56,7 @@ export interface GameOptions {
   draftVariant: boolean;
   preludeExtension: boolean;
   venusNextExtension: boolean;
+  venusNextWorldGovt: boolean;
   coloniesExtension: boolean;
   boardName: BoardName;
   showOtherPlayersVP: boolean;
@@ -93,6 +94,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private draftVariant: boolean;
     private preludeExtension: boolean;
     public venusNextExtension: boolean;
+    public venusNextWorldGovt: boolean;
     public coloniesExtension: boolean;
     public boardName: BoardName;
     public showOtherPlayersVP: boolean;
@@ -112,6 +114,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           draftVariant: false,
           preludeExtension: false,
           venusNextExtension: false,
+          venusNextWorldGovt: false,
           coloniesExtension: false,
           boardName: BoardName.ORIGINAL,
           showOtherPlayersVP: false,
@@ -127,6 +130,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.draftVariant = gameOptions.draftVariant;
       this.preludeExtension = gameOptions.preludeExtension;
       this.venusNextExtension = gameOptions.venusNextExtension;
+      this.venusNextWorldGovt = gameOptions.venusNextWorldGovt;
       this.coloniesExtension = gameOptions.coloniesExtension;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, Math.random());
       this.showOtherPlayersVP = gameOptions.showOtherPlayersVP;
@@ -509,7 +513,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return;
       } 
       // Venus Next Solar phase
-      if (this.venusNextExtension) {
+      if (this.venusNextWorldGovt) {
         this.gotoWorldGovernmentTerraforming();
         return;
       }

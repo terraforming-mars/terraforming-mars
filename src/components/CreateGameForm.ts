@@ -15,6 +15,7 @@ interface CreateGameModel {
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
     venusNext: boolean;
+    enableWorldGovt: boolean;
     colonies: boolean;
     customCorporationsList: boolean;
     corporations: Array<CardName>;
@@ -48,6 +49,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             draftVariant: true,
             randomFirstPlayer: true,
             showOtherPlayersVP: false,
+            enableWorldGovt: false,
             venusNext: false,
             colonies: false,
             customCorporationsList: false,
@@ -124,6 +126,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const draftVariant = this.$data.draftVariant;
             const showOtherPlayersVP = this.$data.showOtherPlayersVP;
             const venusNext = this.$data.venusNext;
+            const enableWorldGovt = this.$data.enableWorldGovt;
             const colonies = this.$data.colonies;
             const corporations = this.$data.corporations;
             const customCorporationsList = this.$data.customCorporationsList;
@@ -150,7 +153,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             };
             xhr.responseType = "json";
             xhr.send(JSON.stringify({
-                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, customCorporationsList, corporations, board, seed
+                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, enableWorldGovt, colonies, customCorporationsList, corporations, board, seed
             }));
         }
     },
@@ -210,6 +213,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <label class="form-switch" v-if="playersCount > 1">
                                 <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP">
                                 <i class="form-icon"></i> Show real-time VP
+                            </label>
+
+                            <label class="form-switch" v-if="playersCount > 1 && venusNext">
+                                <input type="checkbox" name="enableWorldGovt" v-model="enableWorldGovt">
+                                <i class="form-icon"></i> WG Terraforming  
                             </label>
 
                             <label class="form-switch">

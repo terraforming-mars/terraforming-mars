@@ -13,11 +13,8 @@ export class GreatEscarpmentConsortium implements IProjectCard {
     public name: CardName = CardName.GREAT_ESCARPMENT_CONSORTIUM;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
-        if (game.getPlayers().length > 1 
-          && game.getPlayers().filter(p => p.id !== player.id && p.getProduction(Resources.STEEL) > 0).length === 0 ) {
-              return false; //No other player to reduce resource from
-        }
-        return player.getProduction(Resources.STEEL) > 0;
+        const othersHaveSteelProduction = game.getPlayers().filter(p => p.id !== player.id && p.getProduction(Resources.STEEL) > 0).length >= 1  ?  true : false; 
+        return player.getProduction(Resources.STEEL) >= 1 || othersHaveSteelProduction;
     }
     public play(player: Player, game: Game) {
         game.addResourceProductionDecreaseInterrupt(player, Resources.STEEL, 1);

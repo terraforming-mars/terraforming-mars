@@ -7,11 +7,10 @@ import { Game } from "../../src/Game";
 import { Resources } from '../../src/Resources';
 
 describe("AsteroidMiningConsortium", function () {
-    it("Should throw", function () {
+    it("Should throw, no production", function () {
         const card = new AsteroidMiningConsortium();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        expect(card.canPlay(player, game)).to.eq(false);
+        expect(card.canPlay(player)).to.eq(false);
     });
     it("Should play", function () {
         const card = new AsteroidMiningConsortium();
@@ -20,19 +19,9 @@ describe("AsteroidMiningConsortium", function () {
         const player3 = new Player("test3", Color.YELLOW, false);
         const game = new Game("foobar", [player, player2, player3], player);
         player.setProduction(Resources.TITANIUM);
-        player2.setProduction(Resources.TITANIUM);
-        player3.setProduction(Resources.TITANIUM);
+        expect(card.canPlay(player)).to.eq(true);
         card.play(player, game);
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
-    });
-    it("Should play because has titanium production", function () {
-        const card = new AsteroidMiningConsortium();
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test2", Color.RED, false);
-        const player3 = new Player("test3", Color.YELLOW, false);
-        const game = new Game("foobar", [player, player2, player3], player);
-        player.setProduction(Resources.TITANIUM);
-        expect(card.canPlay(player, game)).to.eq(true);
     });
 });

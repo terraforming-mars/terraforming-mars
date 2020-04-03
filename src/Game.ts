@@ -345,7 +345,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.log(
         LogMessageType.DEFAULT,
         "${0} funded ${1} award",
-        new LogMessageData(LogMessageDataType.PLAYER, player.name),
+        new LogMessageData(LogMessageDataType.PLAYER, player.id),
         new LogMessageData(LogMessageDataType.AWARD, award.name)
       );
       this.fundedAwards.push({

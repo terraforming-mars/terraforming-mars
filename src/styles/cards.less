@@ -10,6 +10,11 @@
   box-sizing: content-box;
 }
 
+.filterDiv:hover {
+  transform: scale(1.25);
+  z-index: 2;
+}
+
 .cardbox {
   display: inline-block;
   vertical-align: top;
@@ -29,11 +34,13 @@
 
 .cards-stack:hover {
     z-index: 2;
-  }
+    transform: scale(1);
+}
   
   .cards-stack-first:hover {
     z-index: 2;
-  }
+    transform: scale(1);
+}
 
 .cards-action-was-used {
     filter: grayscale(1);
@@ -79,7 +86,9 @@
 input[type=checkbox]:checked + .filterDiv,
 input[type=radio]:checked + .filterDiv {
     box-shadow: 0 0 0 2px #303030, 0 0 8px 8px #ee792b;
-    filter: brightness(120%);
+    /* filter: brightness(120%); filter: blurs text when magnified (hover) */
+    background: #fff;
+    background: linear-gradient(to bottom right, #fff, #ccc, #fff, #ddd, #eee, #fff, #ddd);
 }
 
 .filterDiv3 {

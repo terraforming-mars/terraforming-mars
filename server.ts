@@ -40,6 +40,7 @@ import { CardType } from './src/cards/CardType';
 import { CardName } from "./src/CardName";
 import { ClaimedMilestoneModel } from "./src/models/ClaimedMilestoneModel";
 import { FundedAwardModel } from "./src/models/FundedAwardModel";
+import { Database } from './src/database/Database';
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
@@ -69,7 +70,8 @@ function requestHandler(
         req.url === '/' ||
         req.url.startsWith('/game?id=') ||
         req.url.startsWith('/player?id=') ||
-        req.url.startsWith('/the-end?player_id=')
+        req.url.startsWith('/the-end?player_id=') ||
+        req.url.startsWith('/load')
       ) {
         serveApp(res);
       } else if (req.url.startsWith('/api/player?id=')) {
@@ -98,6 +100,8 @@ function requestHandler(
       }
     } else if (req.method === 'PUT' && req.url.indexOf('/game') === 0) {
       createGame(req, res);
+    } else if (req.method === 'PUT' && req.url.indexOf('/load') === 0) {
+      loadGame(req, res);
     } else if (
       req.method === 'POST' &&
       req.url.indexOf('/player/input?id=') === 0
@@ -184,6 +188,41 @@ function apiGetGames(req: http.IncomingMessage, res: http.ServerResponse): void 
   res.write(JSON.stringify(answer));
   res.end();
 
+}
+
+function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
+  let body = '';
+  req.on('data', function(data) {
+    body += data.toString();
+  });
+  req.once('end', function() {
+    try {
+      const gameReq = JSON.parse(body);
+
+      let game_id = gameReq.game_id;
+
+      const player = new Player("test", Color.BLUE, false);
+      const player2 = new Player("test2", Color.RED, false);
+      let gameToRebuild = new Game(game_id,[player,player2], player);
+      Database.getInstance().restoreGame(game_id, gameToRebuild);
+    
+      setTimeout(function() {
+        games.set(gameToRebuild.id, gameToRebuild);
+    
+        gameToRebuild.getPlayers().forEach((player) => {
+          playersToGame.set(player.id, gameToRebuild);
+        });
+      }, 3000);
+
+      res.setHeader('Content-Type', 'application/json');
+      res.write(getGame(gameToRebuild));
+    } catch (err) {
+      console.warn('error loading game', err);
+      res.writeHead(500);
+      res.write('Unable to load game');
+    }
+    res.end();
+  });
 }
 
 function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {

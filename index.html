@@ -10,6 +10,7 @@
             <game-home v-if="screen === 'game-home'" :game="game"></game-home>
             <player-home v-if="screen === 'player-home'" :player="player" :key="playerkey"></player-home>
             <create-game-form v-if="screen === 'create'"></create-game-form>
+            <load-game-form v-if="screen === 'load'"></load-game-form>
             <game-end v-if="screen === 'the-end'" :player="player" :game="game"></game-end>
             <games-overview v-if="screen === 'games-overview'"></games-overview>
         </div>

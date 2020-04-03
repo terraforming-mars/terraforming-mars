@@ -22,6 +22,7 @@ interface CreateGameModel {
     board: BoardName;
     showSeed: boolean;
     seed: number;
+    solarPhaseOption: boolean;
 }
 
 interface NewPlayerModel {
@@ -63,7 +64,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
             board: BoardName.ORIGINAL,
             showSeed: false,
             seed: Math.random(),
-            seededGame: false
+            seededGame: false,
+            solarPhaseOption: false
         } as CreateGameModel
     },
     methods: {
@@ -125,6 +127,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const showOtherPlayersVP = this.$data.showOtherPlayersVP;
             const venusNext = this.$data.venusNext;
             const colonies = this.$data.colonies;
+            const solarPhaseOption = this.$data.solarPhaseOption;
             const corporations = this.$data.corporations;
             const customCorporationsList = this.$data.customCorporationsList;
             const board =  this.$data.board;
@@ -150,7 +153,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             };
             xhr.responseType = "json";
             xhr.send(JSON.stringify({
-                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, customCorporationsList, corporations, board, seed
+                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, customCorporationsList, corporations, board, seed, solarPhaseOption
             }));
         }
     },
@@ -211,6 +214,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP">
                                 <i class="form-icon"></i> Show real-time VP
                             </label>
+
+                            <label class="form-switch">
+                                <input type="checkbox" v-model="solarPhaseOption">
+                                <i class="form-icon"></i> Use Solar Phase Option
+                            </label>                            
 
                             <label class="form-switch">
                                 <input type="checkbox" v-model="seededGame" v-on:click="showSeed = !showSeed" >

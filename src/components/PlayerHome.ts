@@ -57,7 +57,6 @@ export const PlayerHome = Vue.component("player-home", {
     template: `
         <div id="player-home">
            <h2 :class="'game-title player_color_'+ player.color" v-i18n>Terraforming Mars</h2>
-           <h1 :class="'player_bg_color_'+ player.color">{{player.name}}</h1>
             <section>
                 <dialog id="dialog-default">
                     <form method="dialog">
@@ -176,18 +175,10 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <h2 :class="'player_color_'+ player.color" v-i18n>Game details</h2>
 
-                <details class="accordion" v-if="player.players.length > 1">
-                    <summary class="accordion-header">
-                        <div class="is-action">
-                            <i class="icon icon-arrow-right mr-1"></i>
-                            <span v-i18n>Milestones and awards</span>
-                        </div>
-                    </summary>
-                    <div class="accordion-body">
-                        <milestone :milestones_list="player.milestones" :expanded="true" />
-                        <award :awards_list="player.awards" :expanded="true" />
-                    </div>
-                </details>
+                <div class="player_home_block" v-if="player.players.length > 1">
+                    <milestone :milestones_list="player.milestones" />
+                    <award :awards_list="player.awards" />
+                </div>
 
                 <details class="accordion">
                     <summary class="accordion-header">

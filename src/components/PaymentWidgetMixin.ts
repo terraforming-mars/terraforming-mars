@@ -3,7 +3,7 @@
 export const PaymentWidgetMixin = {
     "methods": {
         getMegaCreditsMax: function (): number {
-            return Math.min((this as any).player.megaCredits, (this as any).getCardCost());
+            return Math.min((this as any).player.megaCredits, (this as any).$data.cost);
         },
         getCssClassFor: function (action: string, target: string): string {
             let currentValue: number = (this as any)[target];
@@ -54,13 +54,12 @@ export const PaymentWidgetMixin = {
             this.setRemainingMCValue();
         },
         setRemainingMCValue: function (): void {
-            let costInMC: number = (this as any).getCardCost();
-            let remainingMC: number = costInMC -
+            let remainingMC: number = (this as any).$data.cost -
               (this as any)["titanium"] * this.getResourceRate("titanium") -
               (this as any)["steel"] * this.getResourceRate("steel") -
               (this as any)["microbes"] * this.getResourceRate("microbes") -
               (this as any)["floaters"] * this.getResourceRate("floaters");
-            (this as any)["megaCredits"] = Math.max(0, remainingMC);
+            (this as any)["megaCredits"] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
         }
     }
 }

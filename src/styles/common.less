@@ -6,20 +6,27 @@
 @import (inline) "../../node_modules/dialog-polyfill/dialog-polyfill.css";
 
 #app {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 60px;
 }
 
 .hidden {
   display: none !important;
 }
 
-input[type=radio]:checked + label {
-  border: 2px solid rgb(137,137,137);
-  box-shadow: inset 0 0 0 3px rgb(68,68,68);
-  filter: brightness(120%)  drop-shadow(0 0 5px white);
-  transform: translate(0,2px);
+a:link {
+color: #ddd;
+}
+
+a:visited {
+color: #ccc;
+}
+
+a:hover {
+color: #fff;
+}
+
+a:active {
+color: #ddd;
 }
 
 body {
@@ -29,6 +36,29 @@ body {
   font-size: 23px;
 }
 
+
+h1 {
+    color: #ddd;
+    font-family: Ubuntu, Sans;
+    filter: drop-shadow(4px 4px 4px black);
+    text-shadow: -1px -1px 1px #aaaa,1px 1px 1px #333a;
+    padding: 1px 15px;
+    border-radius: 8px;
+}
+
+h2 {
+    color: #ddd;
+    font-family: Ubuntu, Sans;
+    filter: drop-shadow(4px 4px 4px black);
+    text-shadow: -1px -1px 6px #aaa4;
+}
+
+input[type=radio]:checked + label {
+  border: 2px solid rgb(137,137,137);
+  box-shadow: inset 0 0 0 3px rgb(68,68,68);
+  filter: brightness(120%)  drop-shadow(0 0 5px white);
+  transform: translate(0,2px);
+}
 .filterDiv {
   font-size: 17px !important;
 }
@@ -53,3 +83,4 @@ body {
 @import "./venus.less";
 @import "./colonies.less";
 @import "./log.less";
+@import "./load_game_form.less";

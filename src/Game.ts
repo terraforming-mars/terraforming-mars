@@ -60,7 +60,8 @@ export interface GameOptions {
   boardName: BoardName;
   showOtherPlayersVP: boolean;
   customCorporationsList: boolean,
-  corporations: Array<CardName>
+  corporations: Array<CardName>,
+  solarPhaseOption: boolean
 }  
 
 export class Game implements ILoadable<SerializedGame, Game> {
@@ -96,6 +97,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public coloniesExtension: boolean;
     public boardName: BoardName;
     public showOtherPlayersVP: boolean;
+    private solarPhaseOption: boolean;
 
 
     constructor(
@@ -116,7 +118,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
           boardName: BoardName.ORIGINAL,
           showOtherPlayersVP: false,
           customCorporationsList: false,
-          corporations: []
+          corporations: [],
+          solarPhaseOption: false
         } as GameOptions
       }
 
@@ -130,6 +133,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.coloniesExtension = gameOptions.coloniesExtension;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, Math.random());
       this.showOtherPlayersVP = gameOptions.showOtherPlayersVP;
+      this.solarPhaseOption = gameOptions.solarPhaseOption;
 
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
@@ -178,6 +182,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         if (!player.beginner) {
           const firstCard: CorporationCard | undefined = corporationCards.pop();
           const secondCard: CorporationCard | undefined = corporationCards.pop();
+
           if (firstCard === undefined || secondCard === undefined) {
             throw new Error("No corporation card dealt for player");
           }
@@ -507,8 +512,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.gotoFinalGreeneryPlacement();
         return;
       } 
-      // Venus Next Solar phase
-      if (this.venusNextExtension) {
+      // solar Phase Option
+      if (this.solarPhaseOption) {
         this.gotoWorldGovernmentTerraforming();
         return;
       }
@@ -591,13 +596,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public playerIsFinishedWithResearchPhase(player: Player): void {
       this.researchedPlayers.add(player);
       if (this.allPlayersHaveFinishedResearch()) {
-        // Check that it's not the first gen
-        if(this.generation > 1) {
-          // Save the game state after changing the current player
-          // Increment the save id
-          this.lastSaveId += 1;
-          Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
-        }
         this.gotoActionPhase();
       }
     }
@@ -674,11 +672,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (playerIndex === -1) {
         return undefined;
       }
-
-      // Save the game state after changing the current player
-      // Increment the save id
-      this.lastSaveId += 1;
-      Database.getInstance().saveGameState(this.id, this.lastSaveId, JSON.stringify(this,this.replacer));
 
       // Go to the beginning of the array if we reached the end
       return players[(playerIndex + 1 >= players.length) ? 0 : playerIndex + 1];
@@ -778,6 +771,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private startActionsForPlayer(player: Player) {
       this.activePlayer = player;
       player.actionsTakenThisRound = 0;
+
+      // Save the game state after changing the current player
+      // Increment the save id
+      this.lastSaveId += 1;
+      Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
+
       player.takeAction(this);
     }
 
@@ -1148,8 +1147,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     // Custom replacer to transform Map and Set to Array
-    public replacer(_key: any, value: any) {
-      if (value instanceof Set) {
+    public replacer(key: any, value: any) {
+      // Prevent infinite loop because interrupts contains game object.
+      if (key === "interrupts"){
+        return [];
+      }
+      else if (value instanceof Set) {
         return Array.from(value);
       }
       else if(value instanceof Map) {
@@ -1280,8 +1283,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Define who is the active player and init the take action phase
       let activeIndex: number = this.players.findIndex((player) => player.id === d.activePlayer.id);
+
       // We have to switch active player because it's still the one that ended last turn
-      this.activePlayer = this.players[(activeIndex + 1 >= this.players.length) ? 0 : activeIndex + 1];;
+      this.activePlayer = this.players[activeIndex];
       this.activePlayer.takeAction(this);
 
       // Define who was the first player for this generation

@@ -3,6 +3,7 @@ import { CreateGameForm } from "./CreateGameForm";
 import { GameHome } from "./GameHome";
 import { GamesOverview } from "./GamesOverview";
 import { PlayerHome } from "./PlayerHome";
+import { StartScreen } from "./StartScreen";
 
 export const mainAppSettings = {
     "el": "#app",
@@ -15,6 +16,7 @@ export const mainAppSettings = {
         }
     },
     "components": {
+        "start-screen": StartScreen,
         "create-game-form": CreateGameForm,
         "game-home": GameHome,
         "player-home": PlayerHome,
@@ -85,8 +87,10 @@ export const mainAppSettings = {
             xhr.send();
         } else if (currentPathname === "/games-overview") {
             app.screen = "games-overview";
-        } else {
-            app.screen = "create";
+        } else if (currentPathname === "/new-game") {
+            app.screen = "create-game-form";
+        } else  {
+            app.screen = "start-screen";
         }
     }
 }

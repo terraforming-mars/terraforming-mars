@@ -67,6 +67,7 @@ function requestHandler(
         }
       } else if (
         req.url === '/' ||
+        req.url.startsWith('/new-game') ||
         req.url.startsWith('/game?id=') ||
         req.url.startsWith('/player?id=') ||
         req.url.startsWith('/the-end?player_id=')

@@ -101,7 +101,7 @@ function requestHandler(
     } else if (req.method === 'PUT' && req.url.indexOf('/game') === 0) {
       createGame(req, res);
     } else if (req.method === 'PUT' && req.url.indexOf('/load') === 0) {
-      LoadGame(req, res);
+      loadGame(req, res);
     } else if (
       req.method === 'POST' &&
       req.url.indexOf('/player/input?id=') === 0
@@ -190,7 +190,7 @@ function apiGetGames(req: http.IncomingMessage, res: http.ServerResponse): void 
 
 }
 
-function LoadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
+function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
   let body = '';
   req.on('data', function(data) {
     body += data.toString();

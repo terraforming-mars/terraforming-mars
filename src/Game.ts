@@ -1144,6 +1144,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     // Custom replacer to transform Map and Set to Array
     public replacer(key: any, value: any) {
+      // Prevent infinite loop because interrupts contains game object.
       if (key === "interrupts"){
         return [];
       }

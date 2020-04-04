@@ -27,11 +27,12 @@ export class SQLite implements IDatabase {
             }
         });
     }
+
     restoreLastSave(game_id: string, save_id: number, game: Game): void {
         // Retrieve last save from database
         this.db.get("SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1", [game_id, save_id],(err: { message: any; }, row: { game: any; }) => {
             if (err) {
-            return console.error(err.message);
+                return console.error(err.message);
             }
             // Transform string to json
             let gameToRestore = JSON.parse(row.game);
@@ -42,6 +43,23 @@ export class SQLite implements IDatabase {
             return true;
         });
     }
+
+    restoreGame(game_id:string, game:Game): void {
+        // Retrieve last save from database
+        this.db.get("SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1", [game_id],(err: { message: any; }, row: { game: any; }) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            // Transform string to json
+            let gameToRestore = JSON.parse(row.game);
+
+            // Rebuild each objects
+            game.loadFromJSON(gameToRestore);
+
+            return true;
+        });
+    }
+
     saveGameState(game_id: string, save_id: number, game: string): void {
         // Insert
         this.db.run("INSERT INTO games(game_id, save_id, game) VALUES(?, ?, ?)", [game_id, save_id, game], function(err: { message: any; }) {

@@ -22,6 +22,7 @@ export interface CreateGameModel {
     board: BoardName;
     showSeed: boolean;
     seed: number;
+    solarPhaseOption: boolean;
 }
 
 export interface NewPlayerModel {
@@ -62,7 +63,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
             ],
             showSeed: false,
             seed: Math.random(),
-            seededGame: false
+            seededGame: false,
+            solarPhaseOption: false
         } as CreateGameModel
     },
     components: {
@@ -107,12 +109,13 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const showOtherPlayersVP = component.showOtherPlayersVP;
             const venusNext = component.venusNext;
             const colonies = component.colonies;
+            const solarPhaseOption = this.solarPhaseOption;
             const customCorporationsList = component.customCorporationsList;
             const board =  component.board;
             const seed = component.seed;
 
             const dataToSend = JSON.stringify({
-                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, customCorporationsList, board, seed
+                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, customCorporationsList, board, seed, solarPhaseOption
             });
 
             const onSucces = (response: any) => {
@@ -209,6 +212,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP">
                                 <i class="form-icon"></i> <span v-i18n>Show real-time VP</span>
                             </label>
+
+                            <label class="form-switch">
+                                <input type="checkbox" v-model="solarPhaseOption">
+                                <i class="form-icon"></i> <span v-i18n>Use Solar Phase Option</span>
+                            </label> 
 
                         </div>
 

@@ -90,7 +90,7 @@ export class RoboticWorkforce implements IProjectCard {
         const availableCards = player.playedCards.filter((card) => {
             for (let i = 0; i < builderCardsNames.length; i++) {
                 if (builderCardsNames[i] === card.name  && card.name === CardName.BIOMASS_COMBUSTORS) {
-                    if (game.getPlayers().length == 1 || game.getPlayers().filter((p) => p.getProduction(Resources.PLANTS) > 0).length > 0) {
+                    if (game.someoneHasResourceProduction(Resources.PLANTS,1)) {
                         return true;
                     }
                 } else if (builderCardsNames[i] === card.name  && card.name === CardName.MAGNETIC_FIELD_GENERATORS) {
@@ -137,7 +137,7 @@ export class RoboticWorkforce implements IProjectCard {
                     }
 
                 } else if (builderCardsNames[i] === card.name  && card.name === CardName.HEAT_TRAPPERS) {
-                    if (game.getPlayers().length == 1 || game.getPlayers().filter((p) => p.getProduction(Resources.HEAT) >= 2).length > 0) {
+                    if (game.someoneHasResourceProduction(Resources.HEAT,2)) {
                         return true;
                     }    
                 } else if (builderCardsNames[i] === card.name) {

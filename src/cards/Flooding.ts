@@ -18,7 +18,7 @@ export class Flooding implements IProjectCard {
   public name: CardName = CardName.FLOODING;
   public tags: Array<Tags> = [];
   public play(player: Player, game: Game) {
-    if (game.getPlayers().length === 1) {
+    if (game.soloMode) {
       game.addOceanInterrupt(player);
       return undefined;
     }

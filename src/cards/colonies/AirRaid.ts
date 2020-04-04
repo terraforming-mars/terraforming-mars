@@ -44,7 +44,7 @@ export class AirRaid implements IProjectCard {
         return undefined;
     });
 
-    if (game.getPlayers().length === 1) {
+    if (game.soloMode) {
         player.megaCredits += 5;
         return selectCard;
     }

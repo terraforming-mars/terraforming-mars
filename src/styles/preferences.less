@@ -73,15 +73,13 @@
 /* Visual effects of changing settings */
 
 /* Reduce all cards size */
-.preferences_small_cards .filterDiv {
+.preferences_small_cards .filterDiv,
+.preferences_small_cards .filterDiv:hover{
     transform: scale(0.8);
     margin: -22px -15px 15px -15px;
 }
 
-.preferences_small_cards .filterDiv:hover {
-    transform: scale(0.95);
-    margin: -22px -15px 15px -15px;
-}
+
 
 /* Hide blocks */
 .preferences_hide_turnorder .player_home_block--turnorder,
@@ -101,6 +99,23 @@
     background: #222;
 }
 
+/* Card Magnification */
+.preferences_magnify_cards .filterDiv:hover {
+  transform: scale(1.20);
+  z-index: 2;
+}
+
+.preferences_magnify_cards .cards-stack:hover,  
+.preferences_magnify_cards .cards-stack-first:hover {
+    z-index: 2;
+    transform: scale(1);
+}
+
+/* Magnify the wee little cards in a special way, if requested */
+.preferences_small_cards.preferences_magnify_cards .filterDiv:hover {
+        transform: scale(0.95);
+}
+
 /* Description Magnification */
 .preferences_magnify_card_descriptions .description:hover {
     background: #fffd;
@@ -112,5 +127,5 @@
     padding: 3px;
     z-index: 5;
 }
-    
-    
+ 
+

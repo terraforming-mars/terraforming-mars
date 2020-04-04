@@ -16,6 +16,7 @@ export const Preferences = Vue.component("preferences", {
             "hide_turnorder": false,
             "small_cards": false,
             "remove_background": false,
+            "magnify_cards": true,
             "magnify_card_descriptions": true,
             "lang": "en"
         };
@@ -127,6 +128,12 @@ export const Preferences = Vue.component("preferences", {
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="remove_background" />
                             <i class="form-icon"></i> Remove background image
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="magnify_cards" />
+                            <i class="form-icon"></i> Magnify cards on hover
                         </label>
                     </div>
                     <div class="preferences_panel_item">

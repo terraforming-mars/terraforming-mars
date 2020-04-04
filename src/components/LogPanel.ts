@@ -6,6 +6,7 @@ import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
 import { Card } from "./Card";
+import { $t } from "../directives/i18n";
 
 export const LogPanel = Vue.component("log-panel", {
     props: ["messages", "players"],
@@ -25,6 +26,11 @@ export const LogPanel = Vue.component("log-panel", {
             }
         },
         parseData: function(data: LogMessageData) {
+            const translatableMessageDataTypes = [
+                LogMessageDataType.STANDART_PROJECT,
+                LogMessageDataType.MILESTONE,
+                LogMessageDataType.AWARD
+            ];
             if (data.type !== undefined && data.value !== undefined) {
                 if (data.type === LogMessageDataType.PLAYER) {
                     for (let player of this.players) {
@@ -50,6 +56,8 @@ export const LogPanel = Vue.component("log-panel", {
                             }
                         }
                     }
+                } else if (translatableMessageDataTypes.includes(data.type)) {
+                    return $t(data.value);
                 } else  {
                     return data.value;
                 }
@@ -58,6 +66,7 @@ export const LogPanel = Vue.component("log-panel", {
         },
         parseMessage: function(message: LogMessage) {
             if (message.type !== undefined && message.message !== undefined) {
+                message.message = $t(message.message);
                 return message.message.replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
                     return this.parseData(message.data[idx]);
                 });

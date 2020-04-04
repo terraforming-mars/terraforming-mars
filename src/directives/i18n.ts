@@ -8,6 +8,8 @@ export function translateText(englishText: string): string {
     if (lang === "en") return englishText;
     if ((window as any).TM_translations[lang][englishText]) {
         translatedText = (window as any).TM_translations[lang][englishText]
+    } else {
+        console.log("Please translate", englishText)
     }
     return translatedText;
 }

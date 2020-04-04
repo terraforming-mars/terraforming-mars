@@ -87,7 +87,7 @@ export const mainAppSettings = {
             xhr.send();
         } else if (currentPathname === "/games-overview") {
             app.screen = "games-overview";
-        } else if (currentPathname === "/new-game") {
+        } else if (currentPathname === "/new-game" || currentPathname === "/solo") {
             app.screen = "create-game-form";
         } else  {
             app.screen = "start-screen";

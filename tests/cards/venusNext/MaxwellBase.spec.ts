@@ -22,7 +22,8 @@ describe("MaxwellBase", function () {
             boardName: BoardName.ORIGINAL,
             showOtherPlayersVP: false,
             customCorporationsList: false,
-            corporations: []
+            corporations: [],
+            solarPhaseOption: false
           } as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);
         player.setProduction(Resources.ENERGY);

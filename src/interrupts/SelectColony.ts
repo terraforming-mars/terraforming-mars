@@ -25,7 +25,7 @@ export class SelectColony implements PlayerInterrupt {
                 game.log(
                   LogMessageType.DEFAULT,
                   "${0} built a colony on ${1}",
-                  new LogMessageData(LogMessageDataType.PLAYER, player.name),
+                  new LogMessageData(LogMessageDataType.PLAYER, player.id),
                   new LogMessageData(LogMessageDataType.COLONY, colony.name)
                 );
                 return undefined;

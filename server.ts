@@ -354,7 +354,8 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         boardName: gameReq.board,
         showOtherPlayersVP: gameReq.showOtherPlayersVP,
         customCorporationsList: gameReq.customCorporationsList,
-        corporations: selectedCorporations
+        corporations: selectedCorporations,
+        solarPhaseOption: gameReq.solarPhaseOption
       } as GameOptions;
 
       const game = new Game(gameId, players, firstPlayer, gameOptions);

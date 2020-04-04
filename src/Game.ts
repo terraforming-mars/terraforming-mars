@@ -60,7 +60,8 @@ export interface GameOptions {
   boardName: BoardName;
   showOtherPlayersVP: boolean;
   customCorporationsList: boolean,
-  corporations: Array<CardName>
+  corporations: Array<CardName>,
+  solarPhaseOption: boolean
 }  
 
 export class Game implements ILoadable<SerializedGame, Game> {
@@ -96,6 +97,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public coloniesExtension: boolean;
     public boardName: BoardName;
     public showOtherPlayersVP: boolean;
+    private solarPhaseOption: boolean;
 
 
     constructor(
@@ -116,7 +118,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
           boardName: BoardName.ORIGINAL,
           showOtherPlayersVP: false,
           customCorporationsList: false,
-          corporations: []
+          corporations: [],
+          solarPhaseOption: false
         } as GameOptions
       }
 
@@ -130,6 +133,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.coloniesExtension = gameOptions.coloniesExtension;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, Math.random());
       this.showOtherPlayersVP = gameOptions.showOtherPlayersVP;
+      this.solarPhaseOption = gameOptions.solarPhaseOption;
 
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
@@ -341,7 +345,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.log(
         LogMessageType.DEFAULT,
         "${0} funded ${1} award",
-        new LogMessageData(LogMessageDataType.PLAYER, player.name),
+        new LogMessageData(LogMessageDataType.PLAYER, player.id),
         new LogMessageData(LogMessageDataType.AWARD, award.name)
       );
       this.fundedAwards.push({
@@ -508,8 +512,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.gotoFinalGreeneryPlacement();
         return;
       } 
-      // Venus Next Solar phase
-      if (this.venusNextExtension) {
+      // solar Phase Option
+      if (this.solarPhaseOption) {
         this.gotoWorldGovernmentTerraforming();
         return;
       }

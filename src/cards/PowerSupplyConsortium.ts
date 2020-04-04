@@ -13,8 +13,7 @@ export class PowerSupplyConsortium implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
-        const someoneHasEnergyProduction = game.getPlayers().filter(p => p.getProduction(Resources.ENERGY) > 0).length >= 1  ?  true : false; 
-        return player.getTagCount(Tags.ENERGY) >= 2 && someoneHasEnergyProduction; 
+        return player.getTagCount(Tags.ENERGY) >= 2 && game.someoneHasResourceProduction(Resources.ENERGY,1); 
     }
     public play(player: Player, game: Game) {
         game.addResourceProductionDecreaseInterrupt(player, Resources.ENERGY, 1);

@@ -76,7 +76,7 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
             </div>
 
-            <preferences v-if="player.corporationCard" v-trim-whitespace></preferences>
+            <preferences v-trim-whitespace></preferences>
 
             <div v-if="player.corporationCard">
 

@@ -49,6 +49,13 @@ export const PlayerHome = Vue.component("player-home", {
             if (player.id === this.player.id) return;
 
             (this.$root as any).setVisibilityState("other_player_" + player.id, true);
+        },
+        getFleetsCountRange: function(player: PlayerModel): Array<number> {
+            const fleetsRange: Array<number> = [];
+            for (var i=0; i < player.fleetSize - player.tradesThisTurn; i++) {
+                fleetsRange.push(i);
+            }
+            return fleetsRange
         }
     },
     mounted: function () {
@@ -180,6 +187,18 @@ export const PlayerHome = Vue.component("player-home", {
                     <award :awards_list="player.awards" />
                 </div>
 
+                <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
+                    <h2 :class="'player_color_'+ player.color">
+                        <span v-i18n>Turn order</span>
+                    </h2>
+                    <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
+                        <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
+                            <span class="player_number">{{ idx+1 }}.</span><span class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</span>
+                        </div>
+                        <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
+                    </div>
+                </div>
+
                 <details class="accordion">
                     <summary class="accordion-header">
                         <div class="is-action">
@@ -193,21 +212,13 @@ export const PlayerHome = Vue.component("player-home", {
                 </details>
             </div>
 
-            <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
-                <h2 :class="'player_color_'+ player.color">
-                    <span v-i18n>Turn order</span>
-                </h2>
-                <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
-                    <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
-                        <span class="player_number">{{ idx+1 }}.</span><span class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</span>
-                    </div>
-                    <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
-                </div>
-            </div>
-
-
             <div v-if="player.colonies.length > 0" class="player_home_block">
                 <h2 :class="'player_color_'+ player.color" v-i18n>Colonies</h2>
+                <div class="colonies-fleets-cont" v-if="player.corporationCard">
+                    <div class="colonies-player-fleets" v-for="colonyPlayer in player.players">
+                        <div :class="'colonies-fleet colonies-fleet-'+ colonyPlayer.color" v-for="idx in getFleetsCountRange(colonyPlayer)"></div>
+                    </div>
+                </div>
                 <div class="player_home_colony_cont">
                     <div class="player_home_colony" v-for="colony in player.colonies" :key="colony.name">
                         <colony :colony="colony" :player="player"></colony>

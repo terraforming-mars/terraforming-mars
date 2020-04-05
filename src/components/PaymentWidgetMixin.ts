@@ -55,6 +55,7 @@ export const PaymentWidgetMixin = {
         },
         setRemainingMCValue: function (): void {
             let remainingMC: number = (this as any).$data.cost -
+              (this as any)["heat"] -
               (this as any)["titanium"] * this.getResourceRate("titanium") -
               (this as any)["steel"] * this.getResourceRate("steel") -
               (this as any)["microbes"] * this.getResourceRate("microbes") -

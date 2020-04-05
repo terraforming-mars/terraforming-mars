@@ -19,7 +19,7 @@ export interface CreateGameModel {
     customCorporationsList: Array<CardName>;
     showCorporationList: boolean;
     isSoloModePage: boolean,
-    board: BoardName;
+    board: BoardName | "random";
     showSeed: boolean;
     seed: number;
     solarPhaseOption: boolean;
@@ -99,10 +99,16 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 player.first = (component.firstIndex === player.index);
                 return player;
             });
-            
+
             // TODO Check if all players has different colors
 
             // TODO Check all names to be set
+
+            if (component.board === "random") {
+                const boards = Object.values(BoardName);
+                this.board = boards[Math.floor(Math.random() * boards.length)];
+            }
+            
 
             const prelude = component.prelude;
             const draftVariant = component.draftVariant;
@@ -128,7 +134,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
                     (this as any).$root.$data.screen = "game-home";
                 }
             }
-
+            console.log(dataToSend);
+            return
             fetch("/game", {method: "PUT", "body": dataToSend, headers: {"Content-Type": "application/json"}})
                 .then(response => response.json())
                 .then(onSucces)

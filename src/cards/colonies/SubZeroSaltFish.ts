@@ -21,9 +21,8 @@ export class SubZeroSaltFish implements IProjectCard, IResourceCard {
     }
 
     public canPlay(player: Player, game: Game): boolean {
-      if (game.getPlayers().length > 1 && game.getPlayers().filter((p) => p.getProduction(Resources.PLANTS) > 0).length === 0) return false;
-        return game.getTemperature() >= -6 - (player.getRequirementsBonus(game) * 2);
-      }
+      return game.getTemperature() >= -6 - (player.getRequirementsBonus(game) * 2) && game.someoneHasResourceProduction(Resources.PLANTS,1);
+    }
 
     public action() {
       this.resourceCount++;

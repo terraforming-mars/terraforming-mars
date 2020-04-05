@@ -19,8 +19,7 @@ export class Herbivores implements IProjectCard, IResourceCard {
     public resourceCount: number = 0;
 
     public canPlay(player: Player, game: Game): boolean {
-        if (game.getPlayers().length > 1 && game.getPlayers().filter((p) => p.getProduction(Resources.PLANTS) > 0).length === 0) return false;
-        return game.getOxygenLevel() >= 8 - player.getRequirementsBonus(game);
+        return game.getOxygenLevel() >= 8 - player.getRequirementsBonus(game) && game.someoneHasResourceProduction(Resources.PLANTS,1);
     }
 
     public getVictoryPoints(): number {

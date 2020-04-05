@@ -17,9 +17,6 @@ export class SelectResourceProductionDecrease implements PlayerInterrupt {
     ){
 
         var players = game.getPlayers().filter((p) => p.getProduction(this.resource) >= count);
-        if (players.length > 1) {
-          players = players.filter((p) => p.id != this.player.id)
-        }
 
         this.playerInput = new SelectPlayer(
             players,

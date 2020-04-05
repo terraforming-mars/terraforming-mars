@@ -92,6 +92,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public pendingOceans: number = 0;
     public lastSaveId: number = 0;
     private draftVariant: boolean;
+    public soloMode: boolean = false;
     private preludeExtension: boolean;
     public venusNextExtension: boolean;
     public coloniesExtension: boolean;
@@ -138,6 +139,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
       if (players.length === 1) {
+        this.soloMode = true;
         this.draftVariant = false;
         this.setupSolo();
       }
@@ -272,14 +274,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public addResourceProductionDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {
-      if (this.players.length === 1) {
-        return;
-      }
       this.addInterrupt(new SelectResourceProductionDecrease(player, this, resource, count, title));
     }
 
     public addResourceDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {
-      if (this.players.length === 1) {
+      if (this.soloMode) {
         return;
       }
       let candidates: Array<Player> = [];
@@ -1119,6 +1118,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.gameLog.length > 50 ) {
         (this.gameLog.shift());
       }
+    }
+
+    public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {
+      // in soloMode you don'thave to decrease resources
+      return this.getPlayers().filter((p) => p.getProduction(resource) >= minQuantity).length > 0 || this.soloMode ;
     }
 
     private setupSolo() {

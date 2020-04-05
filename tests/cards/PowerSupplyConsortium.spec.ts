@@ -32,17 +32,16 @@ describe("PowerSupplyConsortium", function () {
         expect(player.getProduction(Resources.ENERGY)).to.eq(1); // incremented
     });
 
-    it("Should be playable in solo mode: has tag and production", function () {
+    it("Should be playable in solo mode: has tag", function () {
         const card = new PowerSupplyConsortium();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar2", [player], player);
-        player.setProduction(Resources.ENERGY,2);
-        player.playedCards.push(card, card); // we need energy tag
-
+        player.playedCards.push(card, card); // we need 2 energy tags
         expect(card.canPlay(player, game)).to.eq(true);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(0);
 
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.getProduction(Resources.ENERGY)).to.eq(3); // incremented
+        expect(player.getProduction(Resources.ENERGY)).to.eq(1); // incremented
     });
 });

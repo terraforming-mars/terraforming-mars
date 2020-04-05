@@ -4,5 +4,6 @@ export enum LogMessageDataType {
     CARD,
     AWARD,
     MILESTONE,
-    COLONY
+    COLONY,
+    STANDART_PROJECT
 }

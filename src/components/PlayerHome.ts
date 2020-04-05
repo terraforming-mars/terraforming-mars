@@ -193,6 +193,19 @@ export const PlayerHome = Vue.component("player-home", {
                 </details>
             </div>
 
+            <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
+                <h2 :class="'player_color_'+ player.color">
+                    <span v-i18n>Turn order</span>
+                </h2>
+                <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
+                    <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
+                        <span class="player_number">{{ idx+1 }}.</span><span class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</span>
+                    </div>
+                    <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
+                </div>
+            </div>
+
+
             <div v-if="player.colonies.length > 0" class="player_home_block">
                 <h2 :class="'player_color_'+ player.color" v-i18n>Colonies</h2>
                 <div class="player_home_colony_cont">

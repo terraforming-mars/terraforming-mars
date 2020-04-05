@@ -13,7 +13,7 @@ export class IoMiningIndustries implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public getVictoryPoints(player: Player) {
-        return player.getTagCount(Tags.JOVIAN);
+        return player.getTagCount(Tags.JOVIAN, false, false);
     }
     public play(player: Player) {
         player.setProduction(Resources.TITANIUM,2);

@@ -72,6 +72,8 @@
     "Most tiles adjacent to ocean tiles": "Больше всех жетонов рядом с жетонами океана",
     "Benefactor": "Меценат",
     "Highest terraform rating": "Самый высокий рейтинг терраформирования",
+    "Venuphile": "Венерианец",
+    "Having the most Venus tags in play": "Наибольшее количество меток Венеры",
 
     "Actions": "Действия",
     "Played Cards": "Сыгранные карты",
@@ -98,9 +100,19 @@
     "Take action for action phase, select one available action.": "Выберите одно из действий для продолжения игры",
     "Undo Turn": "Отменить ход",
     "End Turn": "Завершить ход",
+    "Perform an action from a played card": "Выполнить действие с разыгранной карты",
     "Power plant (11 MC)": "Электростанция (11 MC)",
     "Asteroid (14 MC)": "Астероид (14 MC)",
     "Aquifer (18 MC)": "Океан (18 MC)",
     "Greenery (23 MC)": "Озеленение (23 MC)",
-    "City (25 MC)": "Город (25 MC)"
+    "City (25 MC)": "Город (25 MC)",
+    "Power plant": "Электростанция",
+    "Asteroid": "Астероид",
+    "Aquifer": "Океан",
+    "Greenery": "Озеленение",
+    "City": "Город",
+
+    "Pay 9 MC": "Заплатить 9 MC",
+    "Trade with a colony": "Торговать с колонией"
+
 }

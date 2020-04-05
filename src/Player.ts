@@ -1149,8 +1149,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             });
             game.log(
               LogMessageType.DEFAULT,
-              "${0} used sell patents standard project",
-              new LogMessageData(LogMessageDataType.PLAYER, this.id)
+              "${0} used ${1} standard project",
+              new LogMessageData(LogMessageDataType.PLAYER, this.id),
+              new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Sell patents")
             );
             return undefined;
           }, this.cardsInHand.length
@@ -1190,8 +1191,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           this.onStandardProject(StandardProjectType.AIR_SCRAPING);
           game.log(
             LogMessageType.DEFAULT,
-            "${0} used Air Scrapping standard project",
-            new LogMessageData(LogMessageDataType.PLAYER, this.id)
+            "${0} used ${1} standard project",
+            new LogMessageData(LogMessageDataType.PLAYER, this.id),
+            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Air Scrapping")
           );
           return undefined;
         }
@@ -1207,8 +1209,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           this.onStandardProject(StandardProjectType.POWER_PLANT);
           game.log(
             LogMessageType.DEFAULT,
-            "${0} used power plant standard project",
-            new LogMessageData(LogMessageDataType.PLAYER, this.id)
+            "${0} used ${1} standard project",
+            new LogMessageData(LogMessageDataType.PLAYER, this.id),
+            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Power plant")
           );
           return undefined;
         }
@@ -1224,8 +1227,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           this.onStandardProject(StandardProjectType.ASTEROID);
           game.log(
             LogMessageType.DEFAULT,
-            "${0} used asteroid standard project",
-            new LogMessageData(LogMessageDataType.PLAYER, this.id)
+            "${0} used ${1} standard project",
+            new LogMessageData(LogMessageDataType.PLAYER, this.id),
+            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Asteroid")
           );
           return undefined;
         }
@@ -1241,8 +1245,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           this.onStandardProject(StandardProjectType.AQUIFER);
           game.log(
             LogMessageType.DEFAULT,
-            "${0} used aquafier standard project",
-            new LogMessageData(LogMessageDataType.PLAYER, this.id)
+            "${0} used ${1} standard project",
+            new LogMessageData(LogMessageDataType.PLAYER, this.id),
+            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Aquifer"),
           );
           return undefined;
         }
@@ -1258,8 +1263,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           this.onStandardProject(StandardProjectType.GREENERY);
           game.log(
             LogMessageType.DEFAULT,
-            "${0} used greenery standard project",
-            new LogMessageData(LogMessageDataType.PLAYER, this.id)
+            "${0} used ${1} standard project",
+            new LogMessageData(LogMessageDataType.PLAYER, this.id),
+            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Greenery")
           );
           return undefined;
         }
@@ -1276,8 +1282,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           this.setProduction(Resources.MEGACREDITS);
           game.log(
             LogMessageType.DEFAULT,
-            "${0} used city standard project",
-            new LogMessageData(LogMessageDataType.PLAYER, this.id)
+            "${0} used ${1} standard project",
+            new LogMessageData(LogMessageDataType.PLAYER, this.id),
+            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "City")
           );
           return undefined;
         }
@@ -1480,7 +1487,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       game.fundedAwards.forEach((fundedAward) => {
 
         // Awards are disabled for 1 player games
-        if (game.getPlayers().length === 1) return;
+        if (game.soloMode) return;
 
         const players: Array<Player> = game.getPlayers().slice();
         players.sort(

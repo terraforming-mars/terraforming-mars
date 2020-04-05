@@ -9,6 +9,7 @@ import { NoctisFarming } from "../../src/cards/NoctisFarming";
 import { FuelFactory } from "../../src/cards/FuelFactory";
 import { FoodFactory } from "../../src/cards/FoodFactory";
 import { Resources } from '../../src/Resources';
+import { UtopiaInvest } from "../../src/cards/turmoil/UtopiaInvest";
 
 describe("RoboticWorkforce", function () {
     it("Should throw", function () {
@@ -32,5 +33,22 @@ describe("RoboticWorkforce", function () {
         expect(action).not.to.eq(undefined);
         action!.cb([new NoctisFarming()]);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    });
+    it("Should play with corporation cards", function () {
+        const card = new RoboticWorkforce();
+        const player = new Player("test", Color.BLUE, false);
+        const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("foobar", [player,player2], player);
+        const corporationCard = new UtopiaInvest();
+        player.corporationCard = corporationCard;
+
+        const action = card.play(player, game);
+        expect(action).not.to.eq(undefined);
+
+        expect(player.getProduction(Resources.STEEL)).to.eq(0);
+        expect(player.getProduction(Resources.TITANIUM)).to.eq(0);
+        action!.cb([corporationCard as any]);
+        expect(player.getProduction(Resources.STEEL)).to.eq(1);
+        expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
     });
 });

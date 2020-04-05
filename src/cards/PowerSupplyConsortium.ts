@@ -16,7 +16,9 @@ export class PowerSupplyConsortium implements IProjectCard {
         return player.getTagCount(Tags.ENERGY) >= 2 && game.someoneHasResourceProduction(Resources.ENERGY,1); 
     }
     public play(player: Player, game: Game) {
-        game.addResourceProductionDecreaseInterrupt(player, Resources.ENERGY, 1);
+        if ( ! game.soloMode) {
+            game.addResourceProductionDecreaseInterrupt(player, Resources.ENERGY, 1);
+        }
         player.setProduction(Resources.ENERGY);
         return undefined;
     }

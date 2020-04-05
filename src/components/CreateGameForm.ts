@@ -134,8 +134,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                     (this as any).$root.$data.screen = "game-home";
                 }
             }
-            console.log(dataToSend);
-            return
+
             fetch("/game", {method: "PUT", "body": dataToSend, headers: {"Content-Type": "application/json"}})
                 .then(response => response.json())
                 .then(onSucces)

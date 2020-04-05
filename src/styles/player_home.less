@@ -175,20 +175,9 @@
         display: inline-block;
         vertical-align: middle;
 
-
-
         .player_number {
             margin-right: 5px;
             text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
-        }
-    }
-
-    .player_name_cont.player_is_active {
-        border: 3px solid #fff;
-
-        .player_name, .player_name:hover {
-            cursor: auto;
-            text-decoration: none;
         }
     }
 
@@ -201,7 +190,9 @@
     }
 
     .player_is_active {
-        background-color: #444;
+        box-shadow: -1px -1px 5px #f80, 1px 1px 5px #f80;
+        scale: 1.2;
+        border: 2px solid #fff;
     }
 
 }

@@ -88,14 +88,13 @@ export class RoboticWorkforce implements IProjectCard {
             CardName.SPACE_PORT
         ];
 
-        const corporationCardNames = [
-            CardName.MINING_GUILD,
-            CardName.MANUTECH,
-            CardName.CHEUNG_SHING_MARS,
-            CardName.UTOPIA_INVEST,
-            CardName.FACTORUM,
-            CardName.RECYCLON
-        ];
+        const corporationCardNames = (new Set())
+            .add(CardName.MINING_GUILD)
+            .add(CardName.MANUTECH)
+            .add(CardName.CHEUNG_SHING_MARS)
+            .add(CardName.UTOPIA_INVEST)
+            .add(CardName.FACTORUM)
+            .add(CardName.RECYCLON);
 
         const availableCards: Array<ICard> = player.playedCards.filter((card) => {
             for (let i = 0; i < builderCardsNames.length; i++) {
@@ -157,7 +156,7 @@ export class RoboticWorkforce implements IProjectCard {
             return false;
         });
 
-        if (player.corporationCard !== undefined && corporationCardNames.includes(player.corporationCard.name)) {
+        if (player.corporationCard !== undefined && corporationCardNames.has(player.corporationCard.name)) {
             availableCards.push(player.corporationCard);
         }
 
@@ -187,7 +186,7 @@ export class RoboticWorkforce implements IProjectCard {
 
                 // Mining resource definition
                 if (foundCard.name === CardName.MINING_AREA || foundCard.name === CardName.MINING_RIGHTS) {
-                    const bonusResource = (foundCard as any).bonusResource;
+                    const bonusResource = (foundCard as IProjectCard).bonusResource;
                     if (bonusResource !== undefined && bonusResource === Resources.STEEL) {
                         this.miningSteelProduction++;
                     }

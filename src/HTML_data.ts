@@ -6688,5 +6688,24 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
     </div>
+`],
+[CardName.PENGUINS, `
+    <div class="title background-color-active">Penguins</div>
+    <div class="price ">7</div>
+    ##RESOURCES##
+    <div class="tag tag1 tag-animal "></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">212</div>
+    <div class="content ">
+        <div class="points">1/<div class="animal resource"></div></div>
+        <div class="requirements">8 Oceans</div>
+        <span class="red-arrow"></span> <div class="animal resource"></div>
+        <div class="description">
+            (Action: Add 1 Animal to this card.)
+        </div><br/>
+        <div class="description">
+            (Requires 8 oceans. 1 VP for each animal on this card.)
+        </div>
+    </div>
 `]
 ]);

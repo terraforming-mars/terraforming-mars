@@ -387,7 +387,6 @@ export enum CardName {
     SMALL_ASTEROID = "Small Asteroid",
     SELF_REPLICATING_ROBOTS = "Self-replicating Robots",
     SNOW_ALGAE = "Snow Algae",
-    PENGUINS = "Penguins",
-    POLYPHEMOS = "Polyphemos"
-
+    POLYPHEMOS = "Polyphemos",
+    PENGUINS = "Penguins"
 }

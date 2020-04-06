@@ -6727,5 +6727,22 @@ export const HTML_DATA: Map<string, string> =
             Gain 4 titanium.)
         </div>
     </div>
+`],
+[CardName.MERCURIAN_ALLOYS,`
+    <div class="title background-color-automated">Mercurian Alloys</div>
+    <div class="price">3</div>
+    <div class="tag tag1 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X07</div>
+    <div class="content">
+        <div class="requirements">2 Science</div>
+        <div class="resource titanium"></div> : + <div class="resource money">1</div>
+        <div class="description">
+            (Effect: Your titanium resources are worth 1 MC extra.)
+        </div><br/>
+        <div class="description">
+            (Requires 2 Science tags.)
+        </div>
+    </div>
 `]
 ]);

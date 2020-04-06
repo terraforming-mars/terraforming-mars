@@ -399,6 +399,7 @@
         "tests/cards/promo/SmallAsteroid.spec.ts",
         "tests/cards/promo/SnowAlgae.spec.ts",
         "tests/cards/promo/DuskLaserMining.spec.ts",
+        "tests/cards/promo/MercurianAlloys.spec.ts",
         "tests/milestones/Diversifier.spec.ts",
         "tests/Board.spec.ts",
         "tests/Game.spec.ts",

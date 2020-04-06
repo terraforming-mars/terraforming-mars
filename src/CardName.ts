@@ -388,5 +388,6 @@ export enum CardName {
     POLYPHEMOS = "Polyphemos",
     PENGUINS = "Penguins",
     SMALL_ASTEROID = "Small Asteroid",
-    SNOW_ALGAE = "Snow Algae"
+    SNOW_ALGAE = "Snow Algae",
+    DUSK_LASER_MINING = "Dusk Laser Mining"
 }

@@ -6708,4 +6708,24 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
+[CardName.DUSK_LASER_MINING,`
+    <div class="title background-color-automated">Dusk Laser Mining</div>
+    <div class="price">8</div>
+    <div class="tag tag1 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X01</div>
+    <div class="content">
+        <div class="requirements">Science Science</div>
+        <div class="production-box production-box-size1a">
+            <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="production energy"></div><br/>
+            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="production titanium"></div>
+        </div>
+        <span style="font-size: 18px; margin-left: 20px; font-family: Prototype">4</span> <div class="production titanium"></div>
+        <div class="description">
+            (Requires 2 Science tags.
+            Decrease your energy production 1 step, and increase your titanium production 1 step.
+            Gain 4 titanium.)
+        </div>
+    </div>
+`]
 ]);

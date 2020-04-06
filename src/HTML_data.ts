@@ -3289,22 +3289,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
           </div>
 `],
-[CardName.SNOW_ALGAE,`
-        <div class="title background-color-automated">Snow Algae</div>
-        <div class="price">12</div>
-        <div class="tag tag1 tag-plant"></div>
-        <div class="promo-icon project-icon"></div>
-      <div class="card-number">211</div>
-        <div class="content">
-          <div class="requirements">2 Oceans</div>
-          <div class="production-box production-box-size2">
-            <div class="plant production"></div><div class="heat production"></div>
-          </div>
-          <div class="description">
-            (Requires 2 oceans. Increase your Plant production and your heat production 1 step each.)
-          </div>
-        </div>
-`],
 [CardName.PENGUINS,`
             <div class="title background-color-active ">Penguins</div>
             <div class="price ">7</div>
@@ -6705,6 +6689,22 @@ export const HTML_DATA: Map<string, string> =
         - <div class="resource plant red-outline"></div><div class="resource plant red-outline"></div>
         <div class="description ">
             (Increase temperature 1 step. Remove up to 2 plants from any player.)
+        </div>
+    </div>
+`],
+[CardName.SNOW_ALGAE,`
+    <div class="title background-color-automated">Snow Algae</div>
+    <div class="price">12</div>
+    <div class="tag tag1 tag-plant"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">211</div>
+    <div class="content">
+        <div class="requirements">2 Oceans</div>
+        <div class="production-box production-box-size2">
+            <div class="plant production"></div><div class="heat production"></div>
+        </div>
+        <div class="description">
+            (Requires 2 oceans. Increase your Plant production and your heat production 1 step each.)
         </div>
     </div>
 `],

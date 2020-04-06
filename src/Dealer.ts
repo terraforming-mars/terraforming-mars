@@ -395,6 +395,7 @@ import { MartianZoo } from "./cards/colonies/MartianZoo";
 // Promo Cards
 import { Penguins } from "./cards/promo/Penguins";
 import { SmallAsteroid } from "./cards/promo/SmallAsteroid";
+import { SnowAlgae } from "./cards/promo/SnowAlgae";
 
 import { ILoadable } from "./ILoadable";
 import { CardName } from "./CardName";
@@ -821,7 +822,8 @@ export const ALL_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.WORMS, factory: Worms },
     { cardName: CardName.ZEPPELINS, factory: Zeppelins },
     { cardName: CardName.PENGUINS, factory: Penguins },
-    { cardName: CardName.SMALL_ASTEROID, factory: SmallAsteroid }
+    { cardName: CardName.SMALL_ASTEROID, factory: SmallAsteroid },
+    { cardName: CardName.SNOW_ALGAE, factory: SnowAlgae }
 ];
 
 // Function to return a card object by its name

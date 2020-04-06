@@ -457,7 +457,9 @@ function getPlayer(player: Player, game: Game): string {
     colonies: getColonies(game.colonies),
     tags: player.getAllTags(),
     showOtherPlayersVP: game.showOtherPlayersVP,
-    actionsThisGeneration: Array.from(player.getActionsThisGeneration())
+    actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
+    fleetSize: player.fleetSize,
+    tradesThisTurn: player.tradesThisTurn
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -588,7 +590,9 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       colonies: getColonies(game.colonies),
       tags: player.getAllTags(),
       showOtherPlayersVP: game.showOtherPlayersVP,
-      actionsThisGeneration: Array.from(player.getActionsThisGeneration())
+      actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
+      fleetSize: player.fleetSize,
+      tradesThisTurn: player.tradesThisTurn
     } as PlayerModel;
   });
 }

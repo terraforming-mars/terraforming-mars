@@ -5,6 +5,7 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Tardigrades } from "../../src/cards/Tardigrades";
 import { TundraFarming } from "../../src/cards/TundraFarming";
+import { ResearchCoordination } from "../../src/cards/prelude/ResearchCoordination";
 import { ResearchNetwork } from '../../src/cards/prelude/ResearchNetwork';
 
 describe("AdvancedEcosystems", function () {
@@ -25,5 +26,13 @@ describe("AdvancedEcosystems", function () {
         const card = new AdvancedEcosystems();
         const player = new Player("test", Color.BLUE, false);
         expect(card.canPlay(player)).to.eq(false);
+    });
+    it("Can play with two wildcards", function () {
+        const card = new AdvancedEcosystems();
+        const player = new Player("test", Color.BLUE, false);
+        player.playedCards.push(new ResearchCoordination());
+        player.playedCards.push(new ResearchNetwork());
+        player.playedCards.push(new TundraFarming());
+        expect(card.canPlay(player)).to.eq(true); 
     });
 });

@@ -399,6 +399,7 @@ import { SnowAlgae } from "./cards/promo/SnowAlgae";
 import { DuskLaserMining } from "./cards/promo/DuskLaserMining";
 import { MercurianAlloys } from "./cards/promo/MercurianAlloys";
 import { RegoPlastics } from "./cards/promo/RegoPlastics";
+import { InterplanetaryTrade } from "./cards/promo/InterplanetaryTrade";
 
 import { ILoadable } from "./ILoadable";
 import { CardName } from "./CardName";
@@ -829,7 +830,8 @@ export const ALL_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.SNOW_ALGAE, factory: SnowAlgae },
     { cardName: CardName.DUSK_LASER_MINING, factory: DuskLaserMining },
     { cardName: CardName.MERCURIAN_ALLOYS, factory: MercurianAlloys },
-    { cardName: CardName.REGO_PLASTICS, factory: RegoPlastics }
+    { cardName: CardName.REGO_PLASTICS, factory: RegoPlastics },
+    { cardName: CardName.INTERPLANETARY_TRADE, factory: InterplanetaryTrade }
 ];
 
 // Function to return a card object by its name

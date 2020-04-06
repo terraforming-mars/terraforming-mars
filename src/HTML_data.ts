@@ -6758,5 +6758,20 @@ export const HTML_DATA: Map<string, string> =
             (Effect: Your steel resources are worth 1 MC extra.)
         </div>
     </div>
+`],
+[CardName.INTERPLANETARY_TRADE,`
+    <div class="title background-color-automated">Interplanetary Trade</div>
+    <div class="price">27</div>
+    <div class="tag tag1 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X05/div>
+    <div class="content">
+        <div class="points points-big">1</div>
+        <div class="production-box"><div class="production money">1</div></div> /
+        <div class="resource-tag" style="background: linear-gradient(to bottom right, green, yellow, red);"></div>
+        <div class="description">
+            (Increase your MC production 1 step per different tag you have in play, including this.)
+        </div>
+    </div>
 `]
 ]);

@@ -6744,5 +6744,19 @@ export const HTML_DATA: Map<string, string> =
             (Requires 2 Science tags.)
         </div>
     </div>
+`],
+[CardName.REGO_PLASTICS,`
+    <div class="title background-color-automated">Rego Plastics</div>
+    <div class="price">10</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X10/div>
+    <div class="content ">
+        <div class="points points-big">1</div>
+        <div class="resource steel"></div> : + <div class="resource money">1</div>
+        <div class="description">
+            (Effect: Your steel resources are worth 1 MC extra.)
+        </div>
+    </div>
 `]
 ]);

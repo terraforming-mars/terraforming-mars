@@ -9,6 +9,7 @@ import { Resources } from '../Resources';
 import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
+import { ICard } from "./ICard";
 
 export class RoboticWorkforce implements IProjectCard {
     public cost: number = 9;
@@ -21,7 +22,7 @@ export class RoboticWorkforce implements IProjectCard {
     private miningSteelProduction: number = 0;
     private miningTitaniumProduction: number = 0;
 
-    private getAvailableCards(player: Player, game: Game): Array<IProjectCard> {
+    private getAvailableCards(player: Player, game: Game): Array<ICard> {
 
         const builderCardsNames: Array<CardName> = [
             CardName.AI_CENTRAL,
@@ -87,7 +88,15 @@ export class RoboticWorkforce implements IProjectCard {
             CardName.SPACE_PORT
         ];
 
-        const availableCards = player.playedCards.filter((card) => {
+        const corporationCardNames = (new Set())
+            .add(CardName.MINING_GUILD)
+            .add(CardName.MANUTECH)
+            .add(CardName.CHEUNG_SHING_MARS)
+            .add(CardName.UTOPIA_INVEST)
+            .add(CardName.FACTORUM)
+            .add(CardName.RECYCLON);
+
+        const availableCards: Array<ICard> = player.playedCards.filter((card) => {
             for (let i = 0; i < builderCardsNames.length; i++) {
                 if (builderCardsNames[i] === card.name  && card.name === CardName.BIOMASS_COMBUSTORS) {
                     if (game.someoneHasResourceProduction(Resources.PLANTS,1)) {
@@ -146,17 +155,23 @@ export class RoboticWorkforce implements IProjectCard {
             }
             return false;
         });
+
+        if (player.corporationCard !== undefined && corporationCardNames.has(player.corporationCard.name)) {
+            availableCards.push(player.corporationCard);
+        }
+
         return availableCards;
     }
 
     public play(player: Player, game: Game) {
         const availableCards = this.getAvailableCards(player, game);
+
         if (availableCards.length === 0) {
             return undefined;
         }
 
-        return new SelectCard("Select builder card to copy", availableCards, (selectedCards: Array<IProjectCard>) => {
-                const foundCard: IProjectCard = selectedCards[0];
+        return new SelectCard("Select builder card to copy", availableCards, (selectedCards: Array<ICard>) => {
+                const foundCard: ICard = selectedCards[0];
                 // this cards require additional user input
                 if (foundCard.name === CardName.BIOMASS_COMBUSTORS) {
                     player.setProduction(Resources.ENERGY,2);
@@ -170,11 +185,12 @@ export class RoboticWorkforce implements IProjectCard {
                 }
 
                 // Mining resource definition
-                if (foundCard.name === CardName.MINING_AREA || foundCard.name === CardName.MINING_RIGHTS ) {
-                    if (foundCard.bonusResource !== undefined && foundCard.bonusResource === Resources.STEEL) {
+                if (foundCard.name === CardName.MINING_AREA || foundCard.name === CardName.MINING_RIGHTS) {
+                    const bonusResource = (foundCard as IProjectCard).bonusResource;
+                    if (bonusResource !== undefined && bonusResource === Resources.STEEL) {
                         this.miningSteelProduction++;
                     }
-                    if (foundCard.bonusResource !== undefined && foundCard.bonusResource === Resources.TITANIUM) {
+                    if (bonusResource !== undefined && bonusResource === Resources.TITANIUM) {
                         this.miningTitaniumProduction++;
                     }
                 }    
@@ -249,7 +265,13 @@ export class RoboticWorkforce implements IProjectCard {
                     new Updater(CardName.NATURAL_PRESERVE, 1, 0, 0, 0, 0, 0),
                     new Updater(CardName.HOUSE_PRINTING, 0, 0, 1, 0, 0, 0),
                     new Updater(CardName.LAVA_TUBE_SETTLEMENT, -1, 2, 0, 0, 0, 0),
-                    new Updater(CardName.SPACE_PORT, -1, 4, 0, 0, 0, 0)                    
+                    new Updater(CardName.SPACE_PORT, -1, 4, 0, 0, 0, 0),
+                    new Updater(CardName.MINING_GUILD, 0, 0, 1, 0, 0, 0),
+                    new Updater(CardName.MANUTECH, 0, 0, 1, 0, 0, 0),
+                    new Updater(CardName.CHEUNG_SHING_MARS, 0, 3, 0, 0, 0, 0),
+                    new Updater(CardName.UTOPIA_INVEST, 0, 0, 1, 1, 0, 0),
+                    new Updater(CardName.FACTORUM, 0, 0, 1, 0, 0, 0),
+                    new Updater(CardName.RECYCLON, 0, 0, 1, 0, 0, 0)
                 ]
 
                 let result:Updater = updaters.filter(u => u.name === foundCard.name)[0];

@@ -38,4 +38,6 @@ export interface PlayerModel {
     tags: Array<ITagCount>;
     showOtherPlayersVP: boolean;
     actionsThisGeneration: Array<string>;
+    fleetSize: number;
+    tradesThisTurn: number;
 }

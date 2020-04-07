@@ -18,24 +18,36 @@ export class OlympusConference implements IProjectCard, IResourceCard {
     public resourceCount: number = 0;
     public name: CardName = CardName.OLYMPUS_CONFERENCE;
 
+    private runInterrupts(player: Player, game: Game, scienceTags: number): void {
+
+      // No science tags
+      if (scienceTags <= 0) {
+        return;
+      }
+
+      // Can't remove a resource
+      if (this.resourceCount === 0) {
+        this.resourceCount++;
+        this.runInterrupts(player, game, scienceTags - 1);
+        return;
+      }
+
+      game.addInterrupt({ player, playerInput: new OrOptions(
+        new SelectOption("Add a science resource to this card", () => {
+          this.resourceCount++;
+          this.runInterrupts(player, game, scienceTags - 1);
+          return undefined;
+        }),
+        new SelectOption("Remove a science resource from this card to draw a card", () => {
+          player.removeResourceFrom(this);
+          player.cardsInHand.push(game.dealer.dealCard());
+          this.runInterrupts(player, game, scienceTags - 1);
+          return undefined;
+        })
+      ) });
+    }
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
-        const gainAScienceResource = () => {
-            this.resourceCount++;
-            return undefined;
-        }
-        if (card.tags.filter((tag) => tag === Tags.SCIENCE).length > 0) {
-            if (this.resourceCount > 0) {
-                return new OrOptions(
-                    new SelectOption("Add a science resource to this card", gainAScienceResource),
-                    new SelectOption("Remove a science resource from this card to draw a card", () => {
-                        player.removeResourceFrom(this);
-                        player.cardsInHand.push(game.dealer.dealCard());
-                        return undefined;
-                    })
-                );
-            }
-            return gainAScienceResource();
-        }
+        this.runInterrupts(player, game, card.tags.filter((tag) => tag === Tags.SCIENCE).length);
         return undefined;
     }
     public play() {

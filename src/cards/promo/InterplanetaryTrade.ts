@@ -31,7 +31,10 @@ export class InterplanetaryTrade implements IProjectCard {
                 uniqueTags.add(tags);
             }
         }
-        player.setProduction(Resources.MEGACREDITS, (uniqueTags.size + wildcardCount));
+        // Only count wildcards up to the max amount of tag types existing (minus events and wildcards)
+        const availableTags = uniqueTags.size + wildcardCount;
+        const existingTags = Object.keys(Tags).length - 2;
+        player.setProduction(Resources.MEGACREDITS, Math.min(availableTags, existingTags));
         return undefined;
     }
 

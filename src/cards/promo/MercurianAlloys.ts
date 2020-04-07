@@ -1,8 +1,8 @@
-import { IProjectCard } from '../IProjectCard';
-import { CardName } from '../../CardName';
-import { CardType } from '../CardType';
-import { Tags } from '../Tags';
-import { Player } from '../../Player';
+import { IProjectCard } from "../IProjectCard";
+import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
+import { Tags } from "../Tags";
+import { Player } from "../../Player";
 
 export class MercurianAlloys implements IProjectCard {
 

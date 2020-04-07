@@ -6,7 +6,7 @@ import { BoardName } from '../BoardName';
 import { CardName } from "../CardName";
 import { CorporationsFilter } from "./CorporationsFilter";
 
-export interface CreateGameModel {
+interface CreateGameModel {
     firstIndex: number;
     playersCount: number;
     players: Array<NewPlayerModel>;
@@ -20,12 +20,11 @@ export interface CreateGameModel {
     showCorporationList: boolean;
     isSoloModePage: boolean,
     board: BoardName | "random";
-    showSeed: boolean;
     seed: number;
     solarPhaseOption: boolean;
 }
 
-export interface NewPlayerModel {
+interface NewPlayerModel {
     index: number;
     name: string;
     color: Color;
@@ -61,7 +60,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 BoardName.ELYSIUM,
                 "random"
             ],
-            showSeed: false,
             seed: Math.random(),
             seededGame: false,
             solarPhaseOption: false
@@ -222,7 +220,15 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <label class="form-switch">
                                 <input type="checkbox" v-model="solarPhaseOption">
                                 <i class="form-icon"></i> <span v-i18n>Use Solar Phase Option</span>
-                            </label> 
+                            </label>
+
+                            <label class="form-switch">
+                                <input type="checkbox" v-model="seededGame">
+                                <i class="form-icon"></i> <span v-i18n>Show seed</span>
+                            </label>
+                            <div v-if="seededGame">
+                                <input class="form-input form-inline" v-model="seed" />
+                            </div>
 
                         </div>
 

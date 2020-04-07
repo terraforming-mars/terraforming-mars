@@ -6729,7 +6729,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
 [CardName.MERCURIAN_ALLOYS,`
-    <div class="title background-color-automated">Mercurian Alloys</div>
+    <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>
     <div class="tag tag1 tag-space"></div>
     <div class="promo-icon project-icon"></div>
@@ -6746,7 +6746,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
 [CardName.REGO_PLASTICS,`
-    <div class="title background-color-automated">Rego Plastics</div>
+    <div class="title background-color-active">Rego Plastics</div>
     <div class="price">10</div>
     <div class="tag tag1 tag-building"></div>
     <div class="promo-icon project-icon"></div>

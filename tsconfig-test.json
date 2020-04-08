@@ -402,6 +402,7 @@
         "tests/cards/promo/MercurianAlloys.spec.ts",
         "tests/cards/promo/RegoPlastics.spec.ts",
         "tests/cards/promo/InterplanetaryTrade.spec.ts",
+        "tests/cards/promo/OrbitalCleanup.spec.ts",
         "tests/milestones/Diversifier.spec.ts",
         "tests/Board.spec.ts",
         "tests/Game.spec.ts",

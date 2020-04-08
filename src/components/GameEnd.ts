@@ -89,7 +89,7 @@ export const GameEnd = Vue.component("game-end", {
                         </thead>
                         <tbody>
                             <tr v-for="p in getSortedPlayers()">
-                                <td><span :style="getPlayerColorStyle(p)">{{ p.name }}</span></td>
+                                <td><a :href="'/player?id='+p.id+'&noredirect'" :style="getPlayerColorStyle(p)">{{ p.name }}</a></td>
                                 <td>{{ p.corporationCard }}</td>
                                 <td>{{ p.victoryPointsBreakdown.terraformRating }}</td>
                                 <td>{{ p.victoryPointsBreakdown.milestones }}</td>

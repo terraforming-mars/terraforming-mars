@@ -30,4 +30,12 @@ describe("HiTechLab", function () {
         amount.cb(3);
         expect(player.getResource(Resources.ENERGY)).to.eq(2);
     });
+    it("Should give victory points", function () {
+        const card = new HiTechLab();
+        const player = new Player("test", Color.BLUE, false);
+        const play = card.play();
+        expect(play).to.eq(undefined);
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
+    });
 });

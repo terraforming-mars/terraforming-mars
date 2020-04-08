@@ -153,6 +153,10 @@ export const Preferences = Vue.component("preferences", {
                                 <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" value="ru" />
                                 <i class="form-icon"></i> Russian
                             </label>
+                            <label class="form-radio">
+                                <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" value="de" />
+                                <i class="form-icon"></i> German
+                            </label>
                         </div>
                     </div>
                     <div class="preferences_panel_actions">

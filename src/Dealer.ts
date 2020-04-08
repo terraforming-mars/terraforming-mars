@@ -275,6 +275,7 @@ import { Worms } from "./cards/Worms";
 import { Zeppelins } from "./cards/Zeppelins";
 
 import { IProjectCard } from "./cards/IProjectCard";
+import { Atmoscoop } from "./cards/venusNext/Atmoscoop";
 import { Dirigibles } from "./cards/venusNext/Dirigibles";
 import { IshtarMining } from "./cards/venusNext/IshtarMining";
 import { MaxwellBase } from "./cards/venusNext/MaxwellBase";
@@ -489,6 +490,7 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.AEROSPORT_TOURNAMENT, factory: AerosportTournament },
     { cardName: CardName.AIR_SCRAPPING_EXPEDITION, factory: AirScrappingExpedition },
     { cardName: CardName.ATALANTA_PLANITIA_LAB, factory: AtalantaPlanitiaLab },
+    { cardName: CardName.ATMOSCOOP, factory: Atmoscoop },
     { cardName: CardName.COMET_FOR_VENUS, factory: CometForVenus },
     { cardName: CardName.CORRODER_SUITS, factory: CorroderSuits },
     { cardName: CardName.DAWN_CITY, factory: DawnCity },

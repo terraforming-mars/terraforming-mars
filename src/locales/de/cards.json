@@ -59,10 +59,42 @@
     "Requires 2% oxygen. Increase your heat production 2 steps and your Plant production 2 steps.": "Benötigt Sauerstoffgehalt von 2% oder mehr. Erhöhe deine Wärme-Produktion und deine Pflanzen-Produktion um je 2.",
 
     "Imported Hydrogen": "Importierter Wasserstoff",
-    "Gain 3 Plants, or add 3 Microbes or 2 Animals to ANOTHER card. Place an ocean tile.": "Erhalte 3 Pflanzen ODER füge einer Karte 3 Mikroben ODER 2 Tiere hinzu. Platziere ein Ozeanplättchen",
+    "Gain 3 Plants, or add 3 Microbes or 2 Animals to ANOTHER card. Place an ocean tile.": "Erhalte 3 Pflanzen ODER füge einer Karte 3 Mikroben ODER 2 Tiere hinzu. Platziere ein Ozeanplättchen.",
 
     "Research Outpost": "Forschungsvorposten",
     "Effect: When you play a card, you pay 1 MC less for it.": "EFFEKT: Wenn du eine Karte ausspielst, bezahlst du 1 M€ weniger.",
-    "Place a city tile NEXT TO NO OTHER TILE.": "Platziere ein Stadtplättchen, aber nciht neben ein anderes Plättchen"
+    "Place a city tile NEXT TO NO OTHER TILE.": "Platziere ein Stadtplättchen, aber nciht neben ein anderes Plättchen.",
+
+    "Phobos Space Haven": "Phobos Raumhafen",
+    "Increase your titanium production 1 step and place a City tile ON THE RESERVED AREA.": "Erhöhe deine Titan-Produktion um 1 und platziere ein Stadtplättchen auf dem reservierten Gebiet.",
+
+    "Black Polar Dust": "Schwarzer Polarstaub",
+    "Place an ocean tile. Decrease your MC production 2 steps and increase your heat production 3 steps.": "Platziere 1 Ozeanplättchen. Senke deine M€-Produktion um 2 und erhöhe deine Wärme-Produktion um 3.",
+
+    "Arctic Algae": "Arktische Algen",
+    "Effect: When anyone places an ocean tile, gain 2 Plants.": "EFFEKT: Immer wenn ein Spieler ein Ozeanplättchen platziert, erhältst du 2 Pflanzen.",
+    "It must be -12 C or colder to play. Gain 1 Plant.": "Temperatur muss -12 °C oder kälter sein. Erhalte 1 Pflanze.",
+
+    "Predators": "Raubtiere",
+    "Action: Remove 1 Animal from any card and add it to this card.": "AKTION: Entferne 1 Tier von einer anderen Karte und füge es dieser Karte hinzu.",
+    "Requires 11% oxygen. 1 VP per Animal on this card.": "Benötigt einen Sauerstoffgehalt von 11% oder mehr. 1 SP je Tier auf dieser Karte.",
+
+    "Space Station": "Raumstation",
+    "Effect: When you play a Space card, you pay 2 MC less for it.": "EFFEKT: Wenn du ein Weltraumsymbol ausspielst, zahlst du 2 M€ weniger.",
+
+    "Eos Chasma National Park": "Eos Chasma Nationalpark",
+    "Requires -12 C or warmer. Add 1 Animal TO ANY ANIMAL CARD. Gain 3 Plants. Increase your MC production 2 steps.": "Benötigt eine Temperatur von -12 °C oder wärmer. Füge einer Tierkarte 1 Tier hinzu. Erhalte 3 Pflanzen. Erhöhe deine M€-Produktion um 2.",
+
+    "Interstellar Colony Ship": "Interstellares Kolonieschiff",
+
+    "Security Fleet": "Schutzflotte",
+    "Action: Spend 1 titanium to add 1 fighter resource to this card.": "AKTION: Verbrauche 1 Titan, um dieser Karte 1 Jäger hinzuzufügen.",
+    "1 VP for each fighter resource on this card.": "1 SP je Jäger auf dieser Karte.",
+
+    "Cupola City": "Kuppelstadt",
+    "Oxygen must be 9% or less. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.": "Sauerstoffgehalt muss 9% oder weniger sein. Platziere ein Stadtplättchen. Senke deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 3.",
+
+    "Lunar Beam": "Lunarer Energiestrahl",
+    "Decrease your MC production 2 steps and increase your heat production and Energy production 2 steps each.": "Senke deine M€-Produktion um 2. Erhöhe deine Wärme- und Energie-Produktion um je 2."
 
 }

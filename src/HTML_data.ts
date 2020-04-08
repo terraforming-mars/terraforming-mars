@@ -6772,6 +6772,17 @@ export const HTML_DATA: Map<string, string> =
         <div class="description">
             (Increase your MC production 1 step per different tag you have in play, including this.)
         </div>
+        </div>
+    </div>
+`],
+[CardName.PROJECT_INSPECTION, `
+    <div class="title background-color-events">Project Inspection</div>
+    <div class="price">0</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X02</div>
+    <div class="content">
+        USE A CARD ACTION THAT HAS BEEN USED THIS GENERATION
     </div>
 `],
 [CardName.ORBITAL_CLEANUP, `

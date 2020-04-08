@@ -393,5 +393,6 @@ export enum CardName {
     MERCURIAN_ALLOYS = "Mercurian Alloys",
     REGO_PLASTICS = "Rego Plastics",
     INTERPLANETARY_TRADE = "Interplanetary Trade",
-    ORBITAL_CLEANUP = "Orbital Cleanup"
+    ORBITAL_CLEANUP = "Orbital Cleanup",
+    PROJECT_INSPECTION = "Project Inspection"
 }

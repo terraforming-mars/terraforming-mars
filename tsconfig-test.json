@@ -396,6 +396,7 @@
         "tests/cards/promo/Recyclon.spec.ts",
         "tests/cards/promo/Splice.spec.ts",
         "tests/cards/promo/Penguins.spec.ts",
+        "tests/cards/promo/SmallAsteroid.spec.ts",
         "tests/milestones/Diversifier.spec.ts",
         "tests/Board.spec.ts",
         "tests/Game.spec.ts",

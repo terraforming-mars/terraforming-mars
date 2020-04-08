@@ -392,7 +392,9 @@ import { RedSpotObservatory } from "./cards/colonies/RedSpotObservatory";
 import { MarketManipulation } from "./cards/colonies/MarketManipulation";
 import { MartianZoo } from "./cards/colonies/MartianZoo";
 
+// Promo Cards
 import { Penguins } from "./cards/promo/Penguins";
+import { SmallAsteroid } from "./cards/promo/SmallAsteroid";
 
 import { ILoadable } from "./ILoadable";
 import { CardName } from "./CardName";
@@ -818,7 +820,8 @@ export const ALL_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.WINDMILLS, factory: Windmills },
     { cardName: CardName.WORMS, factory: Worms },
     { cardName: CardName.ZEPPELINS, factory: Zeppelins },
-    { cardName: CardName.PENGUINS, factory: Penguins }
+    { cardName: CardName.PENGUINS, factory: Penguins },
+    { cardName: CardName.SMALL_ASTEROID, factory: SmallAsteroid }
 ];
 
 // Function to return a card object by its name

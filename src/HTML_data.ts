@@ -3269,21 +3269,6 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
 `],
-[CardName.SMALL_ASTEROID,`
-          <div class="title background-color-events ">Small Asteroid</div>
-          <div class="price ">10</div>
-          <div class="tag tag1 tag-event "></div>
-          <div class="tag tag2 tag-space "></div>
-          <div class="promo-icon project-icon"></div>
-      <div class="card-number">209</div>
-          <div class="content ">
-              <div class="tile temperature-tile "></div><br>
-               - <div class="resource plant red-outline "></div><div class="plant resource red-outline "></div>
-              <div class="description ">
-                  (Increase temperature 1 step. Remove up to 2 plants from any player.)
-              </div>
-          </div>
-`],
 [CardName.SELF_REPLICATING_ROBOTS,`
           <div class="title background-color-active ">Self-replicating robots</div>
           <div class="price ">7</div>
@@ -6707,5 +6692,20 @@ export const HTML_DATA: Map<string, string> =
             (Requires 8 oceans. 1 VP for each animal on this card.)
         </div>
     </div>
-`]
+`],
+[CardName.SMALL_ASTEROID,`
+    <div class="title background-color-events ">Small Asteroid</div>
+    <div class="price ">10</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="tag tag2 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">209</div>
+    <div class="content ">
+        <div class="tile temperature-tile"></div><br/>
+        - <div class="resource plant red-outline"></div><div class="resource plant red-outline"></div>
+        <div class="description ">
+            (Increase temperature 1 step. Remove up to 2 plants from any player.)
+        </div>
+    </div>
+`],
 ]);

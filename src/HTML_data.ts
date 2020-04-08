@@ -6750,7 +6750,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="price">10</div>
     <div class="tag tag1 tag-building"></div>
     <div class="promo-icon project-icon"></div>
-    <div class="card-number">X10/div>
+    <div class="card-number">X10</div>
     <div class="content ">
         <div class="points points-big">1</div>
         <div class="resource steel"></div> : + <div class="resource money">1</div>
@@ -6764,7 +6764,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="price">27</div>
     <div class="tag tag1 tag-space"></div>
     <div class="promo-icon project-icon"></div>
-    <div class="card-number">X05/div>
+    <div class="card-number">X05</div>
     <div class="content">
         <div class="points points-big">1</div>
         <div class="production-box"><div class="production money">1</div></div> /

@@ -6784,5 +6784,24 @@ export const HTML_DATA: Map<string, string> =
     <div class="content">
         USE A CARD ACTION THAT HAS BEEN USED THIS GENERATION
     </div>
+`],
+[CardName.ORBITAL_CLEANUP, `
+    <div class="title background-color-active">Orbital Cleanup</div>
+    <div class="price ">14</div>
+    <div class="tag tag1 tag-space"></div>
+    <div class="tag tag2 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X08</div>
+    <div class="content">
+        <div class="points points-big">2</div>
+        <span class="red-arrow"></span> <div class="money resource">1</div> / <div class="resource-tag tag-science"></div>
+        <div class="description " style="margin-bottom:10px;">
+            (Action: Gain 1 MC per Science tag you have.)
+        </div>
+        <div class="production-box"><div class="money production ">-2</div></div>
+        <div class="description">
+            (Decrease your MC production 2 steps.)
+        </div>
+    </div>
 `]
 ]);

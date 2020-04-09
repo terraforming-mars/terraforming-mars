@@ -6803,5 +6803,20 @@ export const HTML_DATA: Map<string, string> =
             (Decrease your MC production 2 steps.)
         </div>
     </div>
+`],
+[CardName.HI_TECH_LAB, `
+    <div class="title background-color-active">Hi-Tech Lab</div>
+    <div class="price ">17</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="tag tag2 tag-science"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X04</div>
+    <div class="content">
+        <div class="points points-big">1</div>
+        X <div class="energy resource "></div> <div class="red-arrow"></div> X <div class="card resource "></div>*
+        <div class="description">
+            (Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.)
+        </div>
+    </div>
 `]
 ]);

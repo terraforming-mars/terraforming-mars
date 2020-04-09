@@ -6818,5 +6818,19 @@ export const HTML_DATA: Map<string, string> =
             (Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.)
         </div>
     </div>
+`],
+[CardName.ENERGY_MARKET, `
+    <div class="title background-color-active">Energy Market</div>
+    <div class="price ">3</div>
+    <div class="tag tag1 tag-power"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X03</div>
+    <div class="content ">
+        <div class="money resource">2X</div> <div class="red-arrow"></div> X <div class="energy resource"></div><br/>
+        OR <div class="production-box"><div class="production energy"></div></div> <div class="red-arrow"></div> <div class="money resource">8</div>
+        <div class="description">
+            (Action: Spend 2X MC to gain X energy, or decrease energy production 1 step to gain 8 MC.)
+        </div>
+    </div>
 `]
 ]);

@@ -128,6 +128,37 @@
     "Remove up to 8 Plants from any player.": "Entferne bis zu 8 Pflanzen eines Spielers.",
 
     "Asteroid Mining": "Asteroidenbergbau",
-    "Increase your titanium production 2 steps.": "Erhöhe deine Titan-Produktion um 2."
+    "Increase your titanium production 2 steps.": "Erhöhe deine Titan-Produktion um 2.",
+
+    "Food Factory": "Lebensmittel-Manufaktur",
+    "Decrease your Plant production 1 step and increase your MC production 4 steps.": "Senke deine Pflanzen-Produktion um 1 und erhöhe deine M€-Produktion um 4.",
+
+    "Archaebacteria": "Archaeen",
+    "It must be -18 C or colder. Increase your Plant production 1 step.": "Temperatur muss -18 °C oder kälter sein. Erhöhe deine Pflanzen-Produktion um 1.",
+
+    "Carbonate Processing": "Karbonat-Verarbeitung",
+    "Decrease your Energy production 1 step and increase your heat production 3 steps.": "Senke deine Energie-Produktion um 1. Erhöhe deine Wärme-Produktion um 3.",
+
+    "Natural Preserve": "Naturpark",
+    "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your MC production 1 step.": "Sauerstoffgehalt muss 4% oder weniger sein. Platziere das Plättchen NICHT neben ein anderes Plättchen. Erhöhe deine M€-Produktion um 1.",
+
+    "Nuclear Power": "Atomkraft",
+    "Decrease your MC production 2 steps and increase your Energy production 3 steps.": "Senke deine M€-Produktion um 2. Erhöhe deine Energie-Produktion um 3.",
+
+    "Lightning Harvest": "Nutzung von Blitzenergie",
+    "Requires 3 Science tags. Increase your Energy production and your MC production up one step each.": "Benötigt 3 eigene Wissenschaftssymbole. Erhöhe deine Energie-Produktion und M€-Produktion um je 1.",
+
+    "Algae": "Seetang",
+    "Requires 5 ocean tiles. Gain 1 Plant and increase your Plant production 2 steps.": "Benötigt 5 Ozeanplättchen im Spiel. Erhalte 1 Pflanze. Erhöhe deine Pflanzen-Produktion um 2.",
+
+    "Adapted Lichen": "Angepasste Flechten",
+    "Increase your Plant production 1 step.": "Erhöhe deine Pflanzenproduktion um 1.",
+
+    "Tardigrades": "Bärtierchen",
+    "Action: Add 1 Microbe to this card.": "AKTION: Füge dieser Karte 1 Mikrobe hinzu.",
+    "1 VP per 4 Microbes on this card.": "1 SP je 4 Mikroben auf dieser Karte.",
+
+    "Virus": "Virus",
+    "Remove up to 2 Animals or 5 Plants from any player.": "Entferne bis zu 2 Tiere ODER 5 Pflanzen eines Spielers."
 
 }

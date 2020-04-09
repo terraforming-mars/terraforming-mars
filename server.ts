@@ -1,4 +1,3 @@
-
 import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -7,14 +6,6 @@ import {AndOptions} from './src/inputs/AndOptions';
 import { CardModel } from './src/models/CardModel';
 import {ColonyModel} from './src/models/ColonyModel';
 import {Color} from './src/Color';
-import {
-    ALL_CORPORATION_CARDS,
-    ALL_PRELUDE_CORPORATIONS,
-    ALL_COLONIES_CORPORATIONS,
-    ALL_VENUS_CORPORATIONS,
-    ALL_TURMOIL_CORPORATIONS,
-    ALL_PROMO_CORPORATIONS
-} from './src/Dealer';
 import { Game, GameOptions } from './src/Game';
 import {ICard} from './src/cards/ICard';
 import {IColony} from './src/colonies/Colony';
@@ -37,7 +28,6 @@ import {TileType} from './src/TileType';
 import { Phase } from './src/Phase';
 import { Resources } from "./src/Resources";
 import { CardType } from './src/cards/CardType';
-import { CardName } from "./src/CardName";
 import { ClaimedMilestoneModel } from "./src/models/ClaimedMilestoneModel";
 import { FundedAwardModel } from "./src/models/FundedAwardModel";
 import { Database } from './src/database/Database';
@@ -46,13 +36,7 @@ const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
-const allCorporationCards: Array<CardName> = ALL_CORPORATION_CARDS.map((cardFactory): CardName => cardFactory.cardName).concat(
-    ALL_PRELUDE_CORPORATIONS.map((cardFactory): CardName => cardFactory.cardName),
-    ALL_COLONIES_CORPORATIONS.map((cardFactory): CardName => cardFactory.cardName),
-    ALL_VENUS_CORPORATIONS.map((cardFactory): CardName => cardFactory.cardName),
-    ALL_TURMOIL_CORPORATIONS.map((cardFactory): CardName => cardFactory.cardName),
-    ALL_PROMO_CORPORATIONS.map((cardFactory): CardName => cardFactory.cardName)
-);
+
 function requestHandler(
     req: http.IncomingMessage,
     res: http.ServerResponse
@@ -68,6 +52,8 @@ function requestHandler(
         }
       } else if (
         req.url === '/' ||
+        req.url.startsWith('/new-game') ||
+        req.url.startsWith('/solo') ||
         req.url.startsWith('/game?id=') ||
         req.url.startsWith('/player?id=') ||
         req.url.startsWith('/the-end?player_id=') ||
@@ -336,15 +322,6 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
           break;
         }
       }
-      const selectedCorporations: Array<CardName> = [];
-      for (let corp of (gameReq.corporations as Array<CardName>)) {
-        const foundCard: CardName | undefined = allCorporationCards.find((cardName) => cardName === corp);
-        if (foundCard !== undefined) {
-          selectedCorporations.push(foundCard);
-        } else {
-          throw new Error("Custom corporation card " + corp + " not found");
-        }
-      }
 
       const gameOptions = {
         draftVariant: gameReq.draftVariant,
@@ -354,7 +331,6 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         boardName: gameReq.board,
         showOtherPlayersVP: gameReq.showOtherPlayersVP,
         customCorporationsList: gameReq.customCorporationsList,
-        corporations: selectedCorporations,
         solarPhaseOption: gameReq.solarPhaseOption
       } as GameOptions;
 

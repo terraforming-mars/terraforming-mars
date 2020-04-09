@@ -5,7 +5,16 @@
 @import (inline) "../../node_modules//spectre.css/dist/spectre-icons.min.css";
 @import (inline) "../../node_modules/dialog-polyfill/dialog-polyfill.css";
 
-#app {
+html, body {
+  height: 100%;
+  margin: 0px;
+}
+
+.capitalized {
+  text-transform: capitalize;
+}
+
+.main-container {
     margin: 0 60px;
 }
 
@@ -74,7 +83,9 @@ input[type=radio]:checked + label {
 @import "./globs.less";
 @import "./game_end.less";
 @import "./resources.less";
+@import "./start_screen.less";
 @import "./create_game_form.less";
+@import "./corporations_filter.less";
 @import "./player_home.less";
 @import "./preferences.less";
 @import "./waiting_for.less";

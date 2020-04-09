@@ -1,5 +1,5 @@
 import {Player} from "./Player";
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS} from "./Dealer";
+import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from "./Dealer";
 import {ISpace} from "./ISpace";
 import {SpaceType} from "./SpaceType";
 import {TileType} from "./TileType";
@@ -59,9 +59,8 @@ export interface GameOptions {
   coloniesExtension: boolean;
   boardName: BoardName;
   showOtherPlayersVP: boolean;
-  customCorporationsList: boolean,
-  corporations: Array<CardName>,
-  solarPhaseOption: boolean
+  customCorporationsList: Array<CardName>;
+  solarPhaseOption: boolean;
 }  
 
 export class Game implements ILoadable<SerializedGame, Game> {
@@ -118,8 +117,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           coloniesExtension: false,
           boardName: BoardName.ORIGINAL,
           showOtherPlayersVP: false,
-          customCorporationsList: false,
-          corporations: [],
+          customCorporationsList: [],
           solarPhaseOption: false
         } as GameOptions
       }
@@ -166,15 +164,21 @@ export class Game implements ILoadable<SerializedGame, Game> {
           this.addInterrupt(new SelectRemoveColony(players[0], this));
         }
       }
+
       // Setup custom corporation list
-      if (gameOptions.customCorporationsList && gameOptions.corporations.length >= players.length * 2) {
-        corporationCards = [];
-        gameOptions.corporations.forEach((cardName) => {
-            const cardFactory = ALL_CORPORATION_CARDS.find((cf) => cf.cardName === cardName);
-            if (cardFactory !== undefined) {
-                corporationCards.push(new cardFactory.factory());
-            }
-        });
+      if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= players.length * 2) {
+
+        // Init all available corporation cards to choose from
+        corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
+        corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
+        corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
+        corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
+        corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
+        corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
+
+        corporationCards = corporationCards.filter(
+          (corpCard) => gameOptions !== undefined && gameOptions.customCorporationsList.includes(corpCard.name)
+        );
       }
 
       corporationCards = this.dealer.shuffleCards(corporationCards);

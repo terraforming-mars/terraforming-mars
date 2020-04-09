@@ -95,6 +95,39 @@
     "Oxygen must be 9% or less. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.": "Sauerstoffgehalt muss 9% oder weniger sein. Platziere ein Stadtplättchen. Senke deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 3.",
 
     "Lunar Beam": "Lunarer Energiestrahl",
-    "Decrease your MC production 2 steps and increase your heat production and Energy production 2 steps each.": "Senke deine M€-Produktion um 2. Erhöhe deine Wärme- und Energie-Produktion um je 2."
+    "Decrease your MC production 2 steps and increase your heat production and Energy production 2 steps each.": "Senke deine M€-Produktion um 2. Erhöhe deine Wärme- und Energie-Produktion um je 2.",
+
+    "Optimal Aerobraking": "Optimale Atmosphärenbremsung",
+    "Effect: When you play a Space Event, you gain 3 MC and 3 heat.": "EFFEKT: Wenn du ein Weltraumereignis spielst, erhältst du 3 M€ und 3 Wärme.",
+
+    "Underground City": "Unterirdische Stadt",
+    "Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps.": "Platziere eine Staadtplättchen. Senke deine Energie-Produktion um 2 und erhöhe deine Stahl-Produktion um 2.",    
+
+    "Regolith Eaters": "Regolith-Fresser",
+    "Action: Add 1 Microbe to this card, or remove 2 Microbes from this card to raise oxygen level 1 step.": "AKTION: Füge dieser Karte eine Mikrobe hinzu ODER entferne 2 Mikroben von dieser Karte, um den Sauerstoffgehalt um 1% zu erhöhen.",
+
+    "GHG Producing Bacteria": "CO₂ produzierende Bakterien",
+    "Action: Add 1 Microbe to this card, or remove 2 Microbes to raise temperature 1 step.": "AKTION: Füge dieser Karte eine Mikrobe hinzu ODER entferne 2 Mikroben von dieser Karte, um die Temperatur um 2 °C zu erhöhen.",
+    "Requires 4% oxygen.": "Benötigt einen Sauerstoffgehalt von 4% oder mehr.",
+
+    "Ants": "Ameisen",
+    "Action: Remove 1 Microbe from any card to add 1 to this card.": "AKTION: Entferne von einer beliebigen Karte 1 Mikrobe, um dieser Karte 1 Mikrobe hinzuzufügen.",
+    "Requires 4% oxygen. 1 VP per 2 Microbes on this card.": "Benötigt Sauerstoffgehalt von 4% oder mehr. 1 SP je 2 Mikroben auf dieser Karte",
+
+    "Release of Inert Gases": "Freisetzen von Inertgasen",
+    "Raise your terraform rating 2 steps.": "Erhöhe deinen Terraformwert um 2.",
+
+    "Nitrogen-Rich Asteroid": "Stickstoffreicher Asteroid",
+    "Raise your terraforming rating 2 steps and temperature 1 step. Increase your Plant production 1 step, or 4 steps if you have 3 Plant tags.": "Erhöhe deinen Terraformwert um 2 und die Temperatur um 2 °C. Erhöhe deine Pflanzen-Produktion um 1 ODER um 4, falls du mindestens 3 Pflanzensymbole hast.",
+
+    "Rover Construction": "Mars-Rover-Entwicklung",
+    "Effect: When any City tile is placed, gain 2 MC.": "EFFEKT: Immer wenn ein Stadtplättchen platziert wird, erhältst du 2 M€.",
+
+    "Deimos Down": "Absturz des Daimos",
+    "Raise temperature 3 steps and gain 4 steel.": "Erhöhe die Temperatur um 6 °C und erhalte 4 Stahl.",
+    "Remove up to 8 Plants from any player.": "Entferne bis zu 8 Pflanzen eines Spielers.",
+
+    "Asteroid Mining": "Asteroidenbergbau",
+    "Increase your titanium production 2 steps.": "Erhöhe deine Titan-Produktion um 2."
 
 }

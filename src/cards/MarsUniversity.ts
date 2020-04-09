@@ -14,21 +14,30 @@ export class MarsUniversity implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public name: CardName = CardName.MARS_UNIVERSITY;
     public cardType: CardType = CardType.ACTIVE;
-
+    private runInterrupts(player: Player, game: Game, scienceTags: number): void {
+      if (scienceTags <= 0) {
+        return;
+      }
+      if (player.cardsInHand.length === 0) {
+        this.runInterrupts(player, game, scienceTags - 1);
+        return;
+      }
+      game.addInterrupt({ player, playerInput: new OrOptions(
+        new SelectCard("Select a card to discard", player.cardsInHand, (foundCards: Array<IProjectCard>) => {
+          player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
+          game.dealer.discard(foundCards[0]);
+          player.cardsInHand.push(game.dealer.dealCard());
+          this.runInterrupts(player, game, scienceTags - 1);
+          return undefined;
+        }),
+        new SelectOption("Do nothing", () => {
+          this.runInterrupts(player, game, scienceTags - 1);
+          return undefined;
+        })
+      ) });
+    }
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
-        if (card.tags.indexOf(Tags.SCIENCE) !== -1) {
-            return new OrOptions(
-                new SelectCard("Select a card to discard", player.cardsInHand, (foundCards: Array<IProjectCard>) => {
-                    player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
-                    game.dealer.discard(foundCards[0]);
-                    player.cardsInHand.push(game.dealer.dealCard());
-                    return undefined;
-                }),
-                new SelectOption("Do nothing", () => {
-                    return undefined;
-                })
-            );
-        }
+        this.runInterrupts(player, game, card.tags.filter((tag) => tag === Tags.SCIENCE).length);
         return undefined;
     }
     public play() {

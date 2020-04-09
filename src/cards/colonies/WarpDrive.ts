@@ -9,7 +9,7 @@ export class WarpDrive implements IProjectCard {
     public cost: number = 14;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: CardName = CardName.WARP_DRIVE;
-    public cardType: CardType = CardType.AUTOMATED;
+    public cardType: CardType = CardType.ACTIVE;
 
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
         if (card.tags.indexOf(Tags.SPACE) !== -1) {

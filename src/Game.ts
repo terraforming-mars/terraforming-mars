@@ -278,6 +278,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public addResourceProductionDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {
+      if (this.soloMode) {
+        return;
+      }
       this.addInterrupt(new SelectResourceProductionDecrease(player, this, resource, count, title));
     }
 

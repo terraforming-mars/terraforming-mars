@@ -275,6 +275,7 @@ import { Worms } from "./cards/Worms";
 import { Zeppelins } from "./cards/Zeppelins";
 
 import { IProjectCard } from "./cards/IProjectCard";
+import { Atmoscoop } from "./cards/venusNext/Atmoscoop";
 import { Dirigibles } from "./cards/venusNext/Dirigibles";
 import { IshtarMining } from "./cards/venusNext/IshtarMining";
 import { MaxwellBase } from "./cards/venusNext/MaxwellBase";
@@ -400,6 +401,9 @@ import { DuskLaserMining } from "./cards/promo/DuskLaserMining";
 import { MercurianAlloys } from "./cards/promo/MercurianAlloys";
 import { RegoPlastics } from "./cards/promo/RegoPlastics";
 import { InterplanetaryTrade } from "./cards/promo/InterplanetaryTrade";
+import { OrbitalCleanup } from "./cards/promo/OrbitalCleanup";
+import { ProjectInspection } from "./cards/promo/ProjectInspection";
+import { HiTechLab } from "./cards/promo/HiTechLab";
 
 import { ILoadable } from "./ILoadable";
 import { CardName } from "./CardName";
@@ -487,6 +491,7 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.AEROSPORT_TOURNAMENT, factory: AerosportTournament },
     { cardName: CardName.AIR_SCRAPPING_EXPEDITION, factory: AirScrappingExpedition },
     { cardName: CardName.ATALANTA_PLANITIA_LAB, factory: AtalantaPlanitiaLab },
+    { cardName: CardName.ATMOSCOOP, factory: Atmoscoop },
     { cardName: CardName.COMET_FOR_VENUS, factory: CometForVenus },
     { cardName: CardName.CORRODER_SUITS, factory: CorroderSuits },
     { cardName: CardName.DAWN_CITY, factory: DawnCity },
@@ -831,7 +836,10 @@ export const ALL_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.DUSK_LASER_MINING, factory: DuskLaserMining },
     { cardName: CardName.MERCURIAN_ALLOYS, factory: MercurianAlloys },
     { cardName: CardName.REGO_PLASTICS, factory: RegoPlastics },
-    { cardName: CardName.INTERPLANETARY_TRADE, factory: InterplanetaryTrade }
+    { cardName: CardName.INTERPLANETARY_TRADE, factory: InterplanetaryTrade },
+    { cardName: CardName.ORBITAL_CLEANUP, factory: OrbitalCleanup },
+    { cardName: CardName.PROJECT_INSPECTION, factory: ProjectInspection },
+    { cardName: CardName.HI_TECH_LAB, factory: HiTechLab }
 ];
 
 // Function to return a card object by its name

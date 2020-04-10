@@ -6832,5 +6832,21 @@ export const HTML_DATA: Map<string, string> =
             (Action: Spend 2X MC to gain X energy, or decrease energy production 1 step to gain 8 MC.)
         </div>
     </div>
+`],
+[CardName.LAW_SUIT, `
+    <div class="title background-color-events">Law Suit</div>
+    <div class="price ">2</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="tag tag2 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X06</div>
+    <div class="content">
+        <div class="points points-big red-outline">-1</div>
+        STEAL <div class="production money red-outline">3</div> *
+        <div class="description ">
+            (Steal 3 MC from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation.
+            Place this card face down in THAT PLAYER'S EVENT PILE.)
+        </div>
+    </div>
 `]
 ]);

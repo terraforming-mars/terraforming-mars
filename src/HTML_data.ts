@@ -6827,7 +6827,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="card-number">X03</div>
     <div class="content ">
         <div class="money resource">2X</div> <div class="red-arrow"></div> X <div class="energy resource"></div><br/>
-        OR <div class="production-box"><div class="production energy"></div></div> <div class="red-arrow"></div> <div class="money resource">8</div>
+        OR <div class="production-box production-box-size1a"><div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div></div> <div class="red-arrow"></div> <div class="money resource">8</div>
         <div class="description">
             (Action: Spend 2X MC to gain X energy, or decrease energy production 1 step to gain 8 MC.)
         </div>

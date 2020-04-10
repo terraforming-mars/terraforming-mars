@@ -26,8 +26,8 @@ export const OtherPlayer = Vue.component("other-player", {
     },
     template: `
         <div> 
-            <div v-show="isVisible()" class="other_player_cont menu" v-on:click="hideMe()">
-
+            <div v-show="isVisible()" class="other_player_cont menu">
+                <button class="btn btn-lg btn-error other_player_close" v-on:click="hideMe()"><i class="icon icon-cross"></i></button> 
                 <div class="player_home_block">
                     <span class="player_name" :class="'player_bg_color_' + player.color"> {{ player.name }} : {{player.cardsInHandNbr}} cards in hand </span>
                 </div>

@@ -4,6 +4,7 @@ import { Color } from "../src/Color";
 import { Player } from "../src/Player";
 import { Turmoil } from "../src/turmoil/Turmoil";
 import { PartyName } from "../src/turmoil/parties/PartyName";
+import { Game } from "../src/Game";
 
 describe("Turmoil", function () {
     it("Should initialize with right defaults", function () {
@@ -45,5 +46,18 @@ describe("Turmoil", function () {
         expect(turmoil.getPartyByName(PartyName.GREENS)!.partyLeader).to.eq(player);
         turmoil.sendDelegateToParty(player2, PartyName.GREENS);
         expect(turmoil.getPartyByName(PartyName.GREENS)!.partyLeader).to.eq(player2);        
+    });
+
+    it("Correctly run end of generation", function () {
+        const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player], player);
+        const turmoil = new Turmoil();
+        turmoil.sendDelegateToParty(player, PartyName.MARS);
+
+        turmoil.endGeneration(game);
+        expect(turmoil.chairman).to.eq(player);
+        expect(turmoil.lobby.size).to.eq(1);
+        expect(turmoil.rulingParty).to.eq(turmoil.getPartyByName(PartyName.MARS));
+        expect(turmoil.dominantParty).to.eq(turmoil.getPartyByName(PartyName.GREENS));
     });
 });

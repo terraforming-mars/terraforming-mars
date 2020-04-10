@@ -7,7 +7,7 @@ export abstract class Party  {
     // Empty the area after becoming the new ruling party
     public becomesRulingParty(): void {
         this.partyLeader = undefined;
-        this.delegates = [];
+        this.delegates = new Array<Player>();
     }
 
     // Send a delegate in the area

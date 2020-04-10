@@ -72,19 +72,35 @@ export class Turmoil {
         }
         // If it's the end of generation
         else {
-            const parties: Array<IParty> = this.parties;
-            parties.sort(
+            let sortParties = [...this.parties].sort(
                 (p1, p2) => p2.delegates.length - p1.delegates.length
             );
-            const max = parties[0].delegates.length;
+            const max = sortParties[0].delegates.length;
             
-            let left = this.parties.slice(0, this.parties.indexOf(parties[0]) -1);
-            const right = this.parties.slice(this.parties.indexOf(parties[0])+1);
-            let partiesOrdered = left.concat(right);
-            partiesOrdered.reverse().forEach(party => {
-                if (party.delegates.length === max) {
-                    this.dominantParty = party;
+            const currentIndex = this.parties.indexOf(this.rulingParty!);
+            
+            let partiesToCheck = [];
+
+            if (currentIndex === 0) {
+                partiesToCheck = this.parties.slice(currentIndex + 1);
+            }
+            else if (currentIndex === this.parties.length - 1) {
+                partiesToCheck = this.parties.slice(0, currentIndex);
+            }
+            else {
+                let left = this.parties.slice(0, currentIndex);
+                const right = this.parties.slice(currentIndex + 1);
+                partiesToCheck = right.concat(left);
+            }
+
+            const partiesOrdered = partiesToCheck.reverse();
+            
+            partiesOrdered.some(newParty => {
+                if (newParty.delegates.length === max) {
+                    this.dominantParty = newParty;
+                    return true;
                 }
+                return false;
             });   
         }
     }

@@ -395,5 +395,6 @@ export enum CardName {
     INTERPLANETARY_TRADE = "Interplanetary Trade",
     ORBITAL_CLEANUP = "Orbital Cleanup",
     PROJECT_INSPECTION = "Project Inspection",
-    HI_TECH_LAB = "Hi-Tech Lab"
+    HI_TECH_LAB = "Hi-Tech Lab",
+    ENERGY_MARKET = "Energy Market"
 }

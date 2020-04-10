@@ -23,17 +23,9 @@ export const ALL_PARTIES: Array<IPartyFactory<IParty>> = [
     { partyName: PartyName.GREENS, factory: Greens }
 ];
 
-// Function to return a party by name
-export function getPartyByName(partyName: string): IParty | undefined {
-    let partyFactory = ALL_PARTIES.find((partyFactory) => partyFactory.partyName === partyName);
-    if (partyFactory !== undefined) {
-        return new partyFactory.factory();
-    }
-    return undefined;
-}
-
 export class Turmoil {
     public chairman: undefined | Player = undefined;
+    public rulingParty: undefined | IParty = undefined;
     public dominantParty: undefined | IParty = undefined;
     public lobby: Set<Player> = new Set<Player>();
     public parties: Array<IParty> = [];
@@ -42,18 +34,39 @@ export class Turmoil {
         this.parties = ALL_PARTIES.map((cf) => new cf.factory());
     }
 
+    // Function to return a party by name
+    public getPartyByName(partyName: string): IParty | undefined {
+        const party = this.parties.find((party) => party.name === partyName);
+        if (party) {
+            return party;
+        }
+        else {
+            return undefined;
+        }
+    }
+
     // Use to send a delegate to a specific party
     public sendDelegateToParty(player: Player, partyName: PartyName, ): void {
-        const party = getPartyByName(partyName);
-        party.sendDelegate(player);
-        this.checkDominantParty(party);
+        const party = this.getPartyByName(partyName);
+        if (party) {
+            party.sendDelegate(player);
+            this.checkDominantParty(party);
+        }
+        else {
+            console.error("Party not found");
+        }
     }
 
     // Check dominant party
-    public checkDominantParty(party:IParty = undefined): void {
+    public checkDominantParty(party:IParty | undefined = undefined): void {
         // If a new delegate is sent
         if (party) {
-            if (party.delegates.length > this.dominantParty.delegates.length) {
+            if (this.dominantParty) {
+                if (party.delegates.length > this.dominantParty.delegates.length) {
+                    this.dominantParty = party;
+                }
+            }
+            else {
                 this.dominantParty = party;
             }
         }
@@ -87,18 +100,27 @@ export class Turmoil {
         // TODO
 
         // 3 - New Gouvernment
+        this.rulingParty = this.dominantParty;
+
         // 3.a - Ruling Policy change
         // TODO
 
-        // 3.b - Resolve Ruling Bonus
-        this.dominantParty.rulingBonus(game);
+        if (this.rulingParty) {
+            // 3.b - Resolve Ruling Bonus
+            this.rulingParty.rulingBonus(game);
 
-        // 3.c - Change the chairman
-        this.chairman = this.dominantParty.partyLeader;
-        this.chairman.terraformRating += 1;
+            // 3.c - Change the chairman
+            this.chairman = this.rulingParty.partyLeader;
+            if (this.chairman) {
+                this.chairman.terraformRating += 1;
+            }
+            else {
+                console.error("No chairman");
+            }
 
-        // 3.d - Clean the dominantParty 
-        this.dominantParty.becomesRulingParty();
+            // 3.d - Clean the rulingParty area and leader 
+            this.rulingParty.becomesRulingParty();
+        }
 
         // 3.e - New dominant party
         this.checkDominantParty();

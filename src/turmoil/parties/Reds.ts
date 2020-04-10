@@ -3,8 +3,6 @@ import { Party } from "./Party";
 import { PartyName } from "./PartyName";
 import { Game } from "../../Game";
 import { Player } from "../../Player";
-import { Tags } from "../../cards/Tags";
-import { Resources } from "../../Resources";
 
 export class Reds extends Party implements IParty {
     public name = PartyName.REDS;

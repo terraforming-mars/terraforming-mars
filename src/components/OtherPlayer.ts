@@ -27,12 +27,9 @@ export const OtherPlayer = Vue.component("other-player", {
     template: `
         <div> 
             <div v-show="isVisible()" class="other_player_cont menu">
-                <button class="btn btn-sm btn-error other_player_close" v-on:click="hideMe()"><i class="icon icon-cross"></i></button>
-                
-                <h4>Player «{{ player.name }}» details</h4>
-                
+                <button class="btn btn-lg btn-error other_player_close" v-on:click="hideMe()"><i class="icon icon-cross"></i></button> 
                 <div class="player_home_block">
-                    Cards In Hand: {{player.cardsInHandNbr}}
+                    <span class="player_name" :class="'player_bg_color_' + player.color"> {{ player.name }} : {{player.cardsInHandNbr}} cards in hand </span>
                 </div>
 
                 <div class="tag-display tags_item_cont tag-display-tags" v-if="player.tags.length > 0">
@@ -55,7 +52,7 @@ export const OtherPlayer = Vue.component("other-player", {
                 </div>
 
                 <div v-if="player.playedCards.length > 0 || player.corporationCard !== undefined" class="player_home_block">
-                    <h4>Played Cards</h4>
+                    <span class="player_name" :class="'player_bg_color_' + player.color"> {{ player.name }} played cards </span>
                     <div>
                         <div v-if="player.corporationCard !== undefined" class="cardbox">
                             <card :card="player.corporationCard" :resources="player.corporationCardResources"></card>

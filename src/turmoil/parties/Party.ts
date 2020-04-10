@@ -17,10 +17,10 @@ export abstract class Party  {
     }
 
     // Check if you are the new party leader 
-    public checkPartyLeader(player: Player): void {
-        if(player != this.partyLeader){
-            if (this.delegates.filter((player) => player === player).length > this.delegates.filter((player) => player === this.partyLeader).length) {
-                this.partyLeader = player;
+    public checkPartyLeader(newPlayer: Player): void {
+        if(newPlayer != this.partyLeader){
+            if (this.delegates.filter((player) => player === newPlayer).length > this.delegates.filter((player) => player === this.partyLeader).length) {
+                this.partyLeader = newPlayer;
             }
         }
     }

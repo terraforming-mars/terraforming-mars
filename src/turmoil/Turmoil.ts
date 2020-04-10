@@ -8,6 +8,8 @@ import { Reds } from "./parties/Reds";
 import { Greens } from "./parties/Greens";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { GlobalEventDealer } from './globalEvents/GlobalEventDealer';
+import { IGlobalEvent } from './globalEvents/IGlobalEvent';
 
 export interface IPartyFactory<T> {
     partyName: PartyName;
@@ -29,13 +31,32 @@ export class Turmoil {
     public dominantParty: undefined | IParty = undefined;
     public lobby: Set<Player> = new Set<Player>();
     public parties: Array<IParty> = [];
+    public globalEventDealer: GlobalEventDealer;
+    public distantGlobalEvent: IGlobalEvent | undefined;
+    public commingGlobalEvent: IGlobalEvent | undefined;
+    public currentGlobalEvent: IGlobalEvent | undefined;
 
     constructor() {
         this.parties = ALL_PARTIES.map((cf) => new cf.factory());
+        this.globalEventDealer = new GlobalEventDealer();
+        this.commingGlobalEvent = this.globalEventDealer.draw();
+        if (this.commingGlobalEvent !== undefined) {
+            this.dominantParty = this.getPartyByName(this.commingGlobalEvent.currentDelegate);
+        }
+        this.distantGlobalEvent = this.globalEventDealer.draw();
+        if (this.distantGlobalEvent !== undefined) {
+
+            if (this.dominantParty === this.getPartyByName(this.distantGlobalEvent.currentDelegate)) {
+                this.dominantParty.delegates.push(neutral);
+            } else {
+                this.getPartyByName(this.distantGlobalEvent.currentDelegate).partyLeader = neutral; 
+            }
+
+        }
     }
 
     // Function to return a party by name
-    public getPartyByName(partyName: string): IParty | undefined {
+    public getPartyByName(partyName: PartyName): IParty | undefined {
         const party = this.parties.find((party) => party.name === partyName);
         if (party) {
             return party;
@@ -130,5 +151,13 @@ export class Turmoil {
 
         // 4 - Changing Time
         // TODO
+    }
+
+    public getPlayerInfluence(player: Player) {
+        let influence: number = 0;
+        if (this.chairman !== undefined && this.chairman === player) influence++;
+        if (this.dominantParty !== undefined && this.dominantParty.partyLeader === player) influence++;
+        if (this.dominantParty !== undefined && this.dominantParty.delegates.indexOf(player) !== -1) influence++;
+        return influence;
     }
 }    

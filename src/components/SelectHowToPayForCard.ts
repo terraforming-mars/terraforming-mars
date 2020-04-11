@@ -172,38 +172,48 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
     <h3 class="payments_title">How to pay?</h3>
 
     <div class="payments_type input-group" v-if="canUseSteel()">
-      <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('steel', 1)" :class="getCssClassFor('<', 'steel')"><i class="icon icon-minus" /></button>
-      <input class="form-input form-inline payments_input" v-model.number="steel" />
-      <button class="btn btn-primary" v-on:click="addValue('steel', 1)" :class="getCssClassFor('>', 'steel')"><i class="icon icon-plus" /></button>
+        <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
+        <button class="btn btn-primary" v-on:click="reduceValue('steel', 1)" :class="getCssClassFor('<', 'steel')"><i class="icon icon-minus" /></button>
+        <div class="form-input form-inline payments_input">{{steel}}</div>          
+        <button class="btn btn-primary" v-on:click="steel = 0, setRemainingMCValue(n)">0</button>          
+        <button v-for="n in Math.min(player.steel, Math.ceil(( getCardCost() / getResourceRate( 'steel' ) )))" class="btn btn-primary"  v-on:click="steel = n, setRemainingMCValue(n)">{{n}}</button>       
+        <button class="btn btn-primary" v-on:click="addValue('steel', 1)"  :class="getCssClassFor('>', 'steel')"><i class="icon icon-plus" /></button>
     </div>
 
     <div class="payments_type input-group" v-if="canUseTitanium()">
-      <i class="resource_icon resource_icon--titanium payments_type_icon" title="Pay by Titanium"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('titanium', 1)" :class="getCssClassFor('<', 'titanium')"><i class="icon icon-minus" /></button>
-      <input class="form-input form-inline payments_input" v-model.number="titanium" />
-      <button class="btn btn-primary" v-on:click="addValue('titanium', 1)" :class="getCssClassFor('>', 'titanium')"><i class="icon icon-plus" /></button>
+        <i class="resource_icon resource_icon--titanium payments_type_icon" title="Pay by Titanium"></i>
+        <button class="btn btn-primary" v-on:click="reduceValue('titanium', 1)" :class="getCssClassFor('<', 'titanium')"><i class="icon icon-minus" /></button>
+        <div class="form-input form-inline payments_input">{{titanium}}</div>          
+        <button class="btn btn-primary" v-on:click="titanium = 0, setRemainingMCValue(n)">0</button>          
+        <button v-for="n in Math.min(player.titanium, Math.ceil(( getCardCost() / getResourceRate( 'titanium' ) )))" class="btn btn-primary"  v-on:click="titanium = n, setRemainingMCValue(n)">{{n}}</button>  
+        <button class="btn btn-primary" v-on:click="addValue('titanium', 1)" :class="getCssClassFor('>', 'titanium')"><i class="icon icon-plus" /></button>
     </div>
 
     <div class="payments_type input-group" v-if="canUseHeat()">
-      <i class="resource_icon resource_icon--heat payments_type_icon" title="Pay by Heat"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('heat', 1)" :class="getCssClassFor('<', 'heat')"><i class="icon icon-minus" /></button>
-      <input class="form-input form-inline payments_input" v-model.number="heat" />
-      <button class="btn btn-primary" v-on:click="addValue('heat', 1)" :class="getCssClassFor('>', 'heat')"><i class="icon icon-plus" /></button>
+        <i class="resource_icon resource_icon--heat payments_type_icon" title="Pay by Heat"></i>
+        <button class="btn btn-primary" v-on:click="reduceValue('heat', 1)" :class="getCssClassFor('<', 'heat')"><i class="icon icon-minus" /></button>
+        <div class="form-input form-inline payments_input">{{heat}}</div>          
+        <button class="btn btn-primary" v-on:click="heat = 0, setRemainingMCValue(n)">0</button>          
+        <button v-for="n in Math.min(player.heat, Math.ceil(( getCardCost() / getResourceRate( 'heat' ) )))" class="btn btn-primary"  v-on:click="heat = n, setRemainingMCValue(n)">{{n}}</button>  
+        <button class="btn btn-primary" v-on:click="addValue('heat', 1)" :class="getCssClassFor('>', 'heat')"><i class="icon icon-plus" /></button>
     </div>
 
     <div class="payments_type input-group" v-if="canUseMicrobes()">
-      <i class="resource_icon resource_icon--microbe payments_type_icon" title="Pay by Microbes"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('microbes', 1)" :class="getCssClassFor('<', 'microbes')"><i class="icon icon-minus" /></button>
-      <input class="form-input form-inline payments_input" v-model.number="microbes" />
-      <button class="btn btn-primary" v-on:click="addValue('microbes', 1)" :class="getCssClassFor('>', 'microbes')"><i class="icon icon-plus" /></button>
+        <i class="resource_icon resource_icon--microbe payments_type_icon" title="Pay by Microbes"></i>
+        <button class="btn btn-primary" v-on:click="reduceValue('microbes', 1)" :class="getCssClassFor('<', 'microbes')"><i class="icon icon-minus" /></button>
+        <div class="form-input form-inline payments_input">{{microbes}}</div>          
+        <button class="btn btn-primary" v-on:click="microbes = 0, setRemainingMCValue(n)">0</button>          
+        <button v-for="n in Math.min(player.microbes, Math.ceil(( getCardCost() / getResourceRate( 'microbes' ) )))" class="btn btn-primary"  v-on:click="microbes = n, setRemainingMCValue(n)">{{n}}</button>  
+        <button class="btn btn-primary" v-on:click="addValue('microbes', 1)" :class="getCssClassFor('>', 'microbes')"><i class="icon icon-plus" /></button>
     </div>
 
     <div class="payments_type input-group" v-if="canUseFloaters()">
-      <i class="resource_icon resource_icon--floater payments_type_icon" title="Pay by Floaters"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('floaters', 1)" :class="getCssClassFor('<', 'floaters')"><i class="icon icon-minus" /></button>
-      <input class="form-input form-inline payments_input" v-model.number="floaters" />
-      <button class="btn btn-primary" v-on:click="addValue('floaters', 1)" :class="getCssClassFor('>', 'floaters')"><i class="icon icon-plus" /></button>
+        <i class="resource_icon resource_icon--floater payments_type_icon" title="Pay by Floaters"></i>
+        <button class="btn btn-primary" v-on:click="reduceValue('floaters', 1)" :class="getCssClassFor('<', 'floaters')"><i class="icon icon-minus" /></button>
+        <div class="form-input form-inline payments_input">{{floaters}}</div>          
+        <button class="btn btn-primary" v-on:click="floaters = 0, setRemainingMCValue(n)">0</button>          
+        <button v-for="n in Math.min(player.floaters, Math.ceil(( getCardCost() / getResourceRate( 'floaters' ) )))" class="btn btn-primary"  v-on:click="floaters = n, setRemainingMCValue(n)">{{n}}</button>  
+        <button class="btn btn-primary" v-on:click="addValue('floaters', 1)" :class="getCssClassFor('>', 'floaters')"><i class="icon icon-plus" /></button>
     </div>
 
     <div class="payments_type input-group">

@@ -6,9 +6,9 @@ import { Game } from '../../Game';
 export interface IParty {
     name: PartyName;
     description: string;
-    delegates: Array<Player>;
-    partyLeader: undefined | Player;
-    sendDelegate: (player: Player) => void;
+    delegates: Array<Player | "NEUTRAL">;
+    partyLeader: undefined | Player | "NEUTRAL";
+    sendDelegate: (player: Player | "NEUTRAL") => void;
     rulingBonus: (game: Game) => void;
     //rulingPolicy: (player: Player, game: Game) => void;
     becomesRulingParty: () => void;

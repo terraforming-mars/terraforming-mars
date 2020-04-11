@@ -1,6 +1,7 @@
 
 import Vue from "vue";
 import { PreferencesManager } from "./PreferencesManger";
+import { LANGUAGES } from "../constants";
 
 
 export const Preferences = Vue.component("preferences", {
@@ -18,7 +19,8 @@ export const Preferences = Vue.component("preferences", {
             "remove_background": false,
             "magnify_cards": true,
             "magnify_card_descriptions": true,
-            "lang": "en"
+            "lang": "en",
+            "langs": LANGUAGES
         };
     },
     methods: {
@@ -145,17 +147,9 @@ export const Preferences = Vue.component("preferences", {
                     <div class="preferences_panel_item form-group">
                         <label class="form-label">Language (<a href="javascript:document.location.reload(true);">refresh page</a> to see changes)</label>
                         <div class="preferences_panel_langs">
-                            <label class="form-radio">
-                                <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" value="en" />
-                                <i class="form-icon"></i> English
-                            </label>
-                            <label class="form-radio">
-                                <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" value="ru" />
-                                <i class="form-icon"></i> Russian
-                            </label>
-                            <label class="form-radio">
-                                <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" value="de" />
-                                <i class="form-icon"></i> German
+                            <label class="form-radio" v-for="language in langs">
+                                <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" :value="language.id" />
+                                <i class="form-icon"></i> {{ language.title }}
                             </label>
                         </div>
                     </div>

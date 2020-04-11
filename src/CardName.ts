@@ -397,5 +397,6 @@ export enum CardName {
     PROJECT_INSPECTION = "Project Inspection",
     HI_TECH_LAB = "Hi-Tech Lab",
     ENERGY_MARKET = "Energy Market",
+    LAW_SUIT = "Law Suit",
     STANFORD_TORUS = "Stanford Torus"
 }

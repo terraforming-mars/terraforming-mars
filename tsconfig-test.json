@@ -407,6 +407,7 @@
         "tests/cards/promo/ProjectInspection.spec.ts",
         "tests/cards/promo/HiTechLab.spec.ts",
         "tests/cards/promo/EnergyMarket.spec.ts",
+        "tests/cards/promo/LawSuit.spec.ts",
         "tests/milestones/Diversifier.spec.ts",
         "tests/awards/EstateDealer.spec.ts",
         "tests/Board.spec.ts",

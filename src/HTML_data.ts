@@ -6750,7 +6750,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="price">10</div>
     <div class="tag tag1 tag-building"></div>
     <div class="promo-icon project-icon"></div>
-    <div class="card-number">X10/div>
+    <div class="card-number">X10</div>
     <div class="content ">
         <div class="points points-big">1</div>
         <div class="resource steel"></div> : + <div class="resource money">1</div>
@@ -6764,13 +6764,88 @@ export const HTML_DATA: Map<string, string> =
     <div class="price">27</div>
     <div class="tag tag1 tag-space"></div>
     <div class="promo-icon project-icon"></div>
-    <div class="card-number">X05/div>
+    <div class="card-number">X05</div>
     <div class="content">
         <div class="points points-big">1</div>
         <div class="production-box"><div class="production money">1</div></div> /
         <div class="resource-tag" style="background: linear-gradient(to bottom right, green, yellow, red);"></div>
         <div class="description">
             (Increase your MC production 1 step per different tag you have in play, including this.)
+        </div>
+        </div>
+    </div>
+`],
+[CardName.PROJECT_INSPECTION, `
+    <div class="title background-color-events">Project Inspection</div>
+    <div class="price">0</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X02</div>
+    <div class="content">
+        USE A CARD ACTION THAT HAS BEEN USED THIS GENERATION
+    </div>
+`],
+[CardName.ORBITAL_CLEANUP, `
+    <div class="title background-color-active">Orbital Cleanup</div>
+    <div class="price ">14</div>
+    <div class="tag tag1 tag-space"></div>
+    <div class="tag tag2 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X08</div>
+    <div class="content">
+        <div class="points points-big">2</div>
+        <span class="red-arrow"></span> <div class="money resource">1</div> / <div class="resource-tag tag-science"></div>
+        <div class="description " style="margin-bottom:10px;">
+            (Action: Gain 1 MC per Science tag you have.)
+        </div>
+        <div class="production-box"><div class="money production ">-2</div></div>
+        <div class="description">
+            (Decrease your MC production 2 steps.)
+        </div>
+    </div>
+`],
+[CardName.HI_TECH_LAB, `
+    <div class="title background-color-active">Hi-Tech Lab</div>
+    <div class="price ">17</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="tag tag2 tag-science"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X04</div>
+    <div class="content">
+        <div class="points points-big">1</div>
+        X <div class="energy resource "></div> <div class="red-arrow"></div> X <div class="card resource "></div>*
+        <div class="description">
+            (Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.)
+        </div>
+    </div>
+`],
+[CardName.ENERGY_MARKET, `
+    <div class="title background-color-active">Energy Market</div>
+    <div class="price ">3</div>
+    <div class="tag tag1 tag-power"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X03</div>
+    <div class="content ">
+        <div class="money resource">2X</div> <div class="red-arrow"></div> X <div class="energy resource"></div><br/>
+        OR <div class="production-box production-box-size1a"><div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div></div> <div class="red-arrow"></div> <div class="money resource">8</div>
+        <div class="description">
+            (Action: Spend 2X MC to gain X energy, or decrease energy production 1 step to gain 8 MC.)
+        </div>
+    </div>
+`],
+[CardName.LAW_SUIT, `
+    <div class="title background-color-events">Law Suit</div>
+    <div class="price ">2</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="tag tag2 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X06</div>
+    <div class="content">
+        <div class="points points-big red-outline">-1</div>
+        STEAL <div class="production money red-outline">3</div> *
+        <div class="description ">
+            (Steal 3 MC from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation.
+            Place this card face down in THAT PLAYER'S EVENT PILE.)
         </div>
     </div>
 `]

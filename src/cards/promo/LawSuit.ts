@@ -29,7 +29,7 @@ export class LawSuit implements IProjectCard {
             suedPlayer.setResource(Resources.MEGACREDITS, -3, game, player);
             const cardIndex = player.playedCards.findIndex((element) => element.name === this.name);
             player.playedCards.splice(cardIndex, 1);
-            suedPlayer.playedCards.push(new LawSuit());
+            suedPlayer.playedCards.push(this);
             return undefined;
         });
     }

@@ -24,8 +24,11 @@ describe("GlobalDustStorm", function () {
         turmoil.dominantParty.delegates.push(player2);
         player.megaCredits = 10;
         player2.megaCredits = 10;
+        player.heat = 7;
         card.resolve(game, turmoil);
         expect(player.getResource(Resources.MEGACREDITS)).to.eq(8);
+        expect(player.getResource(Resources.HEAT)).to.eq(0);
         expect(player2.getResource(Resources.MEGACREDITS)).to.eq(10);
+
     });
 });

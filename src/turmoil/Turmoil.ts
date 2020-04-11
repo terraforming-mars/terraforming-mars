@@ -47,9 +47,9 @@ export class Turmoil {
         if (this.distantGlobalEvent !== undefined) {
 
             if (this.dominantParty === this.getPartyByName(this.distantGlobalEvent.currentDelegate)) {
-                this.dominantParty.delegates.push(neutral);
+                //this.dominantParty.delegates.push(neutral);
             } else {
-                this.getPartyByName(this.distantGlobalEvent.currentDelegate).partyLeader = neutral; 
+                //this.getPartyByName(this.distantGlobalEvent.currentDelegate).partyLeader = neutral; 
             }
 
         }

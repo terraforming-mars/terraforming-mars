@@ -131,7 +131,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }  
     }
 
-    public setResource(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player) {
+    public setResource(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
       if (resource === Resources.MEGACREDITS) this.megaCredits = Math.max(0, this.megaCredits + amount);
       if (resource === Resources.STEEL) this.steel = Math.max(0, this.steel + amount);
       if (resource === Resources.TITANIUM) this.titanium = Math.max(0, this.titanium + amount);
@@ -149,6 +149,17 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           new LogMessageData(LogMessageDataType.PLAYER, fromPlayer.id)
         );
       }
+
+      // Global event logging
+      if (game !== undefined && globalEvent !== undefined  && globalEvent && amount < 0) {
+        game.log(
+          LogMessageType.DEFAULT,
+          "${0}'s ${1} amount modified by ${2} by Global Event",
+          new LogMessageData(LogMessageDataType.PLAYER, this.id),
+          new LogMessageData(LogMessageDataType.STRING, resource),
+          new LogMessageData(LogMessageDataType.STRING, amount.toString())
+        );
+      }      
 
       // Mons Insurance hook
       if (game !== undefined && game.monsInsuranceOwner !== undefined && amount < 0 && fromPlayer !== undefined) {

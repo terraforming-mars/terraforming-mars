@@ -48,7 +48,7 @@ export const GameEnd = Vue.component("game-end", {
                             </div>
                             <ul class="game_end_list">
                                 <li>Try to win with extensions enabled</li>
-                                <li>Try to win faster then last generation comes</li>
+                                <li>Try to win before the last generation comes</li>
                                 <li>Can you get 90+ Victory Points?</li>
                             </ul>
                         </div>

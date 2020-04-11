@@ -406,6 +406,7 @@ import { ProjectInspection } from "./cards/promo/ProjectInspection";
 import { HiTechLab } from "./cards/promo/HiTechLab";
 import { EnergyMarket } from "./cards/promo/EnergyMarket";
 import { LawSuit } from "./cards/promo/LawSuit";
+import { StanfordTorus } from "./cards/promo/StanfordTorus";
 
 import { ILoadable } from "./ILoadable";
 import { CardName } from "./CardName";
@@ -843,7 +844,8 @@ export const ALL_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.PROJECT_INSPECTION, factory: ProjectInspection },
     { cardName: CardName.HI_TECH_LAB, factory: HiTechLab },
     { cardName: CardName.ENERGY_MARKET, factory: EnergyMarket },
-    { cardName: CardName.LAW_SUIT, factory: LawSuit }
+    { cardName: CardName.LAW_SUIT, factory: LawSuit },
+    { cardName: CardName.STANFORD_TORUS, factory: StanfordTorus }
 ];
 
 // Function to return a card object by its name

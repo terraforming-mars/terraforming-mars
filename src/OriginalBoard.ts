@@ -7,8 +7,8 @@ import { ISpace } from "./ISpace";
 export class OriginalBoard extends Board{
     constructor() {
         super();
-        this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY)); 
-        this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));                    
+        this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY));
+        this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));
 
         let idx = 3, pos_x = 4, pos_y=0;
 
@@ -107,6 +107,8 @@ export class OriginalBoard extends Board{
             new Land(idx++, pos_x++, pos_y),
             new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.TITANIUM, SpaceBonus.TITANIUM])
         );
+
+        this.spaces.push(new BoardColony(SpaceName.STANFORD_TORUS));
     }
     public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
         return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.NOCTIS_CITY);

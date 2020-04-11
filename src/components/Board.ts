@@ -68,11 +68,15 @@ export const Board = Vue.component("board", {
             <svg id="board_legend" height="470" width="470" class="board_legend">
 
                 <g id="ganymede_colony">
-                    <text x="67" y="462" class="board_caption">Ganymede colony</text>
+                    <text x="67" y="462" class="board_caption">Ganymede Colony</text>
                 </g>
 
                 <g id="phobos_space_heaven">
-                    <text x="2" y="15" class="board_caption">Phobos space haven</text>
+                    <text x="4" y="15" class="board_caption">Phobos Space Haven</text>
+                </g>
+
+                <g id="stanford_torus">
+                    <text x="395" y="15" class="board_caption">Stanford Torus</text>
                 </g>
 
                 <g v-if="boardName === 'original'" id="ascraeus_mons" transform="translate(40, 120)">

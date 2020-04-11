@@ -26,7 +26,7 @@ export const ALL_PARTIES: Array<IPartyFactory<IParty>> = [
 ];
 
 export class Turmoil {
-    public chairman: undefined | Player = undefined;
+    public chairman: undefined | Player | "NEUTRAL" = undefined;
     public rulingParty: undefined | IParty = undefined;
     public dominantParty: undefined | IParty = undefined;
     public lobby: Set<Player> = new Set<Player>();
@@ -37,21 +37,18 @@ export class Turmoil {
     public currentGlobalEvent: IGlobalEvent | undefined;
 
     constructor() {
+        // Init parties
         this.parties = ALL_PARTIES.map((cf) => new cf.factory());
+        // Init the global event dealer
         this.globalEventDealer = new GlobalEventDealer();
+        // Draw the first global event to setup the game
         this.commingGlobalEvent = this.globalEventDealer.draw();
         if (this.commingGlobalEvent !== undefined) {
-            this.dominantParty = this.getPartyByName(this.commingGlobalEvent.currentDelegate);
+            this.sendDelegateToParty("NEUTRAL", this.commingGlobalEvent.currentDelegate);
         }
         this.distantGlobalEvent = this.globalEventDealer.draw();
         if (this.distantGlobalEvent !== undefined) {
-
-            if (this.dominantParty === this.getPartyByName(this.distantGlobalEvent.currentDelegate)) {
-                //this.dominantParty.delegates.push(neutral);
-            } else {
-                //this.getPartyByName(this.distantGlobalEvent.currentDelegate).partyLeader = neutral; 
-            }
-
+            this.sendDelegateToParty("NEUTRAL", this.distantGlobalEvent.currentDelegate);
         }
     }
 
@@ -67,7 +64,7 @@ export class Turmoil {
     }
 
     // Use to send a delegate to a specific party
-    public sendDelegateToParty(player: Player, partyName: PartyName, ): void {
+    public sendDelegateToParty(player: Player | "NEUTRAL", partyName: PartyName, ): void {
         const party = this.getPartyByName(partyName);
         if (party) {
             party.sendDelegate(player);
@@ -102,6 +99,7 @@ export class Turmoil {
             
             let partiesToCheck = [];
 
+            // Manage if it's the first party or the last
             if (currentIndex === 0) {
                 partiesToCheck = this.parties.slice(currentIndex + 1);
             }
@@ -114,6 +112,7 @@ export class Turmoil {
                 partiesToCheck = right.concat(left);
             }
 
+            // Take the clockwise order
             const partiesOrdered = partiesToCheck.reverse();
             
             partiesOrdered.some(newParty => {
@@ -148,7 +147,7 @@ export class Turmoil {
 
             // 3.c - Change the chairman
             this.chairman = this.rulingParty.partyLeader;
-            if (this.chairman) {
+            if (this.chairman && this.chairman instanceof Player) {
                 this.chairman.terraformRating += 1;
             }
             else {

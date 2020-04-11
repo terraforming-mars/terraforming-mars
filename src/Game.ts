@@ -51,8 +51,8 @@ import {Database} from "./database/Database";
 import { SerializedGame } from "./SerializedGame";
 import { SerializedPlayer } from "./SerializedPlayer";
 import { CardName } from "./CardName";
-import { Turmoil } from './turmoil/Turmoil';
-import { AerialLenses } from './cards/turmoil/AerialLenses';
+import { Turmoil } from "./turmoil/Turmoil";
+import { AerialLenses } from "./cards/turmoil/AerialLenses";
 
 export interface GameOptions {
   draftVariant: boolean;

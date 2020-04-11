@@ -16,6 +16,7 @@ interface CreateGameModel {
     showOtherPlayersVP: boolean;
     venusNext: boolean;
     colonies: boolean;
+    turmoil: boolean;
     customCorporationsList: Array<CardName>;
     showCorporationList: boolean;
     isSoloModePage: boolean,
@@ -50,6 +51,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             showOtherPlayersVP: false,
             venusNext: false,
             colonies: false,
+            turmoil: false,
             customCorporationsList: [],
             showCorporationList: false,
             isSoloModePage: false,
@@ -113,13 +115,14 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const showOtherPlayersVP = component.showOtherPlayersVP;
             const venusNext = component.venusNext;
             const colonies = component.colonies;
+            const turmoil = component.turmoil;
             const solarPhaseOption = this.solarPhaseOption;
             const customCorporationsList = component.customCorporationsList;
             const board =  component.board;
             const seed = component.seed;
 
             const dataToSend = JSON.stringify({
-                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, customCorporationsList, board, seed, solarPhaseOption
+                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption
             });
 
             const onSucces = (response: any) => {
@@ -192,6 +195,12 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <input type="checkbox" name="colonies"  v-model="colonies">
                                 <i class="form-icon"></i> <span v-i18n>Colonies</span>
                             </label>
+
+                            <label class="form-switch">
+                                <input type="checkbox" name="turmoil"  v-model="turmoil">
+                                <i class="form-icon"></i> <span v-i18n>Turmoil</span>
+                            </label>                            
+
                         </div>
 
                         <div class="create-game-options-block col3 col-sm-6">

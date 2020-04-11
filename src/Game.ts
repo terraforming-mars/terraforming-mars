@@ -57,6 +57,7 @@ export interface GameOptions {
   preludeExtension: boolean;
   venusNextExtension: boolean;
   coloniesExtension: boolean;
+  turmoilExtension: boolean;
   boardName: BoardName;
   showOtherPlayersVP: boolean;
   customCorporationsList: Array<CardName>;
@@ -95,6 +96,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private preludeExtension: boolean;
     public venusNextExtension: boolean;
     public coloniesExtension: boolean;
+    public turmoilExtension: boolean;
     public boardName: BoardName;
     public showOtherPlayersVP: boolean;
     private solarPhaseOption: boolean;
@@ -115,6 +117,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           preludeExtension: false,
           venusNextExtension: false,
           coloniesExtension: false,
+          turmoilExtension: false,
           boardName: BoardName.ORIGINAL,
           showOtherPlayersVP: false,
           customCorporationsList: [],
@@ -130,6 +133,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.preludeExtension = gameOptions.preludeExtension;
       this.venusNextExtension = gameOptions.venusNextExtension;
       this.coloniesExtension = gameOptions.coloniesExtension;
+      this.turmoilExtension = gameOptions.turmoilExtension;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, Math.random());
       this.showOtherPlayersVP = gameOptions.showOtherPlayersVP;
       this.solarPhaseOption = gameOptions.solarPhaseOption;

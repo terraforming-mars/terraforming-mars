@@ -328,6 +328,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         preludeExtension: gameReq.prelude,
         venusNextExtension: gameReq.venusNext,
         coloniesExtension: gameReq.colonies,
+        turmoilExtension: gameReq.turmoil,
         boardName: gameReq.board,
         showOtherPlayersVP: gameReq.showOtherPlayersVP,
         customCorporationsList: gameReq.customCorporationsList,

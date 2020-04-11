@@ -15,5 +15,6 @@ export enum SpaceName {
     HECATES_THOLUS = "08",
     ELYSIUM_MONS = "14",
     OLYMPUS_MONS = "20",
-    HELLAS_OCEAN_TILE = "61"
+    HELLAS_OCEAN_TILE = "61",
+    STANFORD_TORUS = "69"
 }

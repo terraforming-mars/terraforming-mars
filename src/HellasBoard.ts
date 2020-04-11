@@ -7,8 +7,8 @@ import { ISpace } from "./ISpace";
 export class HellasBoard extends Board{
     constructor() {
         super();
-        this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY)); 
-        this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));                    
+        this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY));
+        this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));
 
         let idx = 3, pos_x = 4, pos_y=0;
 
@@ -107,6 +107,8 @@ export class HellasBoard extends Board{
             new Land(idx++, pos_x++, pos_y, [SpaceBonus.HEAT, SpaceBonus.HEAT]),
             new Land(idx++, pos_x++, pos_y)
         );
+
+        this.spaces.push(new BoardColony(SpaceName.STANFORD_TORUS));
     }    
 
     public getAvailableSpacesForCity(player: Player): Array<ISpace> {

@@ -6832,5 +6832,20 @@ export const HTML_DATA: Map<string, string> =
             (Action: Spend 2X MC to gain X energy, or decrease energy production 1 step to gain 8 MC.)
         </div>
     </div>
+`],
+[CardName.STANFORD_TORUS, `
+    <div class="title background-color-automated">Stanford Torus</div>
+    <div class="price">12</div>
+    <div class="tag tag1 tag-space"></div>
+    <div class="tag tag2 tag-city"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X12</div>
+    <div class="content">
+        <div class="points points-big">2</div>
+        <div class="tile city-tile"></div> *
+        <div class="description ">
+            (Place a city tile IN SPACE, outside and separate from the planet.)
+        </div>
+    </div>
 `]
 ]);

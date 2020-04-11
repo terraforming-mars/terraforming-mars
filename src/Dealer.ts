@@ -393,6 +393,9 @@ import { RedSpotObservatory } from "./cards/colonies/RedSpotObservatory";
 import { MarketManipulation } from "./cards/colonies/MarketManipulation";
 import { MartianZoo } from "./cards/colonies/MartianZoo";
 
+// Turmoil cards
+import { AerialLenses } from "./cards/turmoil/AerialLenses";
+
 // Promo Cards
 import { Penguins } from "./cards/promo/Penguins";
 import { SmallAsteroid } from "./cards/promo/SmallAsteroid";
@@ -410,7 +413,6 @@ import { ILoadable } from "./ILoadable";
 import { CardName } from "./CardName";
 import { BeginnerCorporation } from "./cards/corporation/BeginnerCorporation";
 import { SerializedDealer } from "./SerializedDealer";
-import { AerialLenses } from './cards/turmoil/AerialLenses';
 
 export interface ICardFactory<T> {
     cardName: CardName;

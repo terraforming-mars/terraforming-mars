@@ -1,6 +1,7 @@
-import { GlobalEventName } from './GlobalEventName';
-import { IGlobalEvent } from './IGlobalEvent';
-import { GlobalDustStorm } from './GlobalDustStorm';
+import { GlobalEventName } from "./GlobalEventName";
+import { IGlobalEvent } from "./IGlobalEvent";
+import { GlobalDustStorm } from "./GlobalDustStorm";
+import { SponsoredProjects } from "./SponsoredProjects";
 
 export interface IGlobalEventFactory<T> {
     globalEventName: GlobalEventName;
@@ -9,7 +10,9 @@ export interface IGlobalEventFactory<T> {
 
 // ALL GLOBAL EVENTS
 export const ALL_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
-    { globalEventName: GlobalEventName.GLOBAL_DUST_STORM , factory: GlobalDustStorm }
+    { globalEventName: GlobalEventName.GLOBAL_DUST_STORM , factory: GlobalDustStorm },
+    { globalEventName: GlobalEventName.SPONSORED_PROJECTS , factory: SponsoredProjects }
+    
 ];
 
 export class GlobalEventDealer {

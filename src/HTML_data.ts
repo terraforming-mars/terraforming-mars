@@ -6863,5 +6863,26 @@ export const HTML_DATA: Map<string, string> =
             (Place a city tile IN SPACE, outside and separate from the planet.)
         </div>
     </div>
+`],
+[CardName.SATURN_SURFING, `
+    <div class="title background-color-active">Saturn Surfing</div>
+    <div class="price">13</div>
+    <div class="tag tag1 tag-earth"></div>
+    <div class="tag tag2 tag-jovian"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X11</div>
+    <div class="content">
+        <div class="points points-big">1</div>
+        <div class="floater resource"></div>
+        <span class="red-arrow"></span>
+        <div class="money resource">1</div> / <div class="resource floater"></div> * (max 5)
+        <div class="description" style="margin-bottom:10px;">
+            (Action: Spend 1 floater from here to gain 1 MC from each floater here, INCLUDING THE PAID FLOATER (max 5).)
+        </div>
+        <div class="floater resource"></div> / <div class="resource-tag tag-earth"></div>
+        <div class="description">
+            (Add 1 floater here for every Earth tag you have, including this.)
+        </div>
+    </div>
 `]
 ]);

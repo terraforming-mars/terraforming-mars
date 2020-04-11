@@ -8,8 +8,8 @@ import { Reds } from "./parties/Reds";
 import { Greens } from "./parties/Greens";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { GlobalEventDealer } from './globalEvents/GlobalEventDealer';
-import { IGlobalEvent } from './globalEvents/IGlobalEvent';
+import { GlobalEventDealer } from "./globalEvents/GlobalEventDealer";
+import { IGlobalEvent } from "./globalEvents/IGlobalEvent";
 
 export interface IPartyFactory<T> {
     partyName: PartyName;
@@ -175,5 +175,18 @@ export class Turmoil {
         if (this.dominantParty !== undefined && this.dominantParty.partyLeader === player) influence++;
         if (this.dominantParty !== undefined && this.dominantParty.delegates.indexOf(player) !== -1) influence++;
         return influence;
+    }
+
+    public canPlay(player: Player, partyName : PartyName): boolean {
+        if (this.rulingParty === this.getPartyByName(partyName)) {
+            return true;
+        }
+        
+        let party = this.getPartyByName(partyName);
+        if (party !== undefined && party.getDelegates(player) >= 2) {
+            return true;
+        }
+
+        return false;
     }
 }    

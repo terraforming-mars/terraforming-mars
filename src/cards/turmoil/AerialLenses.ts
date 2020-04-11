@@ -16,14 +16,8 @@ export class AerialLenses implements IProjectCard {
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {
-            if (game.turmoil.rulingParty === game.turmoil.getPartyByName(PartyName.KELVINISTS)) {
-                return true;
-            }
-            let kelvinists = game.turmoil.getPartyByName(PartyName.KELVINISTS);
-            if (kelvinists !== undefined && kelvinists.getDelegates(player) >= 2) {
-                return true;
-            }
-         }
+            return game.turmoil.canPlay(player, PartyName.KELVINISTS);
+        }
         return false;
     }
 

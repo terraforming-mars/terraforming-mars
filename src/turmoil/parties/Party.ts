@@ -24,4 +24,11 @@ export abstract class Party  {
             }
         }
     }
+
+    // Return number of delegate + partyleader for a player
+    public getDelegates(player: Player): number {
+        let delegates = this.delegates.filter(p => p === player).length;
+        if (this.partyLeader === player) delegates++;
+        return delegates;
+    }
 }    

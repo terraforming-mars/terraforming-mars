@@ -412,6 +412,7 @@
         "tests/Game.spec.ts",
         "tests/OriginalBoard.spec.ts",
         "tests/Player.spec.ts",
-        "tests/globalEvents/GlobalDustStorm.spec.ts"
+        "tests/globalEvents/GlobalDustStorm.spec.ts",
+        "tests/cards/turmoil/AerialLenses.spec.ts"
     ]
 }

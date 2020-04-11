@@ -51,6 +51,7 @@ import {Database} from "./database/Database";
 import { SerializedGame } from "./SerializedGame";
 import { SerializedPlayer } from "./SerializedPlayer";
 import { CardName } from "./CardName";
+import { Turmoil } from './turmoil/Turmoil';
 
 export interface GameOptions {
   draftVariant: boolean;
@@ -100,6 +101,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public boardName: BoardName;
     public showOtherPlayersVP: boolean;
     private solarPhaseOption: boolean;
+    public turmoil: Turmoil | undefined;
 
 
     constructor(
@@ -134,7 +136,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.venusNextExtension = gameOptions.venusNextExtension;
       this.coloniesExtension = gameOptions.coloniesExtension;
       this.turmoilExtension = gameOptions.turmoilExtension;
-      this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, Math.random());
+      this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.turmoilExtension, Math.random());
       this.showOtherPlayersVP = gameOptions.showOtherPlayersVP;
       this.solarPhaseOption = gameOptions.solarPhaseOption;
 
@@ -168,6 +170,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
           this.addInterrupt(new SelectRemoveColony(players[0], this));
         }
       }
+
+      // Add Turmoil stuff
+      if (this.turmoilExtension) {
+        this.turmoil = new Turmoil();
+        corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
+      }  
 
       // Setup custom corporation list
       if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= players.length * 2) {
@@ -1308,7 +1316,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.first = this.players[firstIndex];
 
       // Rebuild dealer object to be sure that we will have cards in the same order
-      let dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension);
+      let dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.turmoilExtension);
       this.dealer = dealer.loadFromJSON(d.dealer);
 
       return o;

@@ -12,4 +12,5 @@ export interface IParty {
     rulingBonus: (game: Game) => void;
     //rulingPolicy: (player: Player, game: Game) => void;
     becomesRulingParty: () => void;
+    getDelegates:(player: Player) => number;
 }

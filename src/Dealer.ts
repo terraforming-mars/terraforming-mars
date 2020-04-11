@@ -410,6 +410,7 @@ import { ILoadable } from "./ILoadable";
 import { CardName } from "./CardName";
 import { BeginnerCorporation } from "./cards/corporation/BeginnerCorporation";
 import { SerializedDealer } from "./SerializedDealer";
+import { AerialLenses } from './cards/turmoil/AerialLenses';
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -588,6 +589,10 @@ export const ALL_COLONIES_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.TRADE_ENVOYS, factory: TradeEnvoys },
     { cardName: CardName.URBAN_DECOMPOSERS, factory: UrbanDecomposers },
     { cardName: CardName.WARP_DRIVE, factory: WarpDrive }
+]; 
+
+export const ALL_TURMOIL_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
+    { cardName: CardName.AERIAL_LENSES, factory: AerialLenses }
 ]; 
 
 export const ALL_VENUS_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
@@ -908,10 +913,12 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     private usePreludeExtension: boolean = false;
     private useVenusNextExtension: boolean = false;   
     private useColoniesNextExtension: boolean = false;
-    constructor(usePreludeExtension: boolean, useVenusNextExtension: boolean, useColoniesNextExtension : boolean, _seed?: number) {
+    private useTurmoilExtension: boolean = false;
+    constructor(usePreludeExtension: boolean, useVenusNextExtension: boolean, useColoniesNextExtension: boolean, useTurmoilExtension: boolean, _seed?: number) {
         this.usePreludeExtension = usePreludeExtension;
         this.useVenusNextExtension = useVenusNextExtension;
         this.useColoniesNextExtension = useColoniesNextExtension;
+        this.useTurmoilExtension = useTurmoilExtension;
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS.map((cf) => new cf.factory()));
         if (this.usePreludeExtension) {
             this.preludeDeck = this.shuffleCards<IProjectCard>(ALL_PRELUDE_CARDS.map((cf) => new cf.factory()));
@@ -926,6 +933,11 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
             this.deck.push(...ALL_COLONIES_PROJECTS_CARDS.map((cf) => new cf.factory()));
             this.deck = this.shuffleCards<IProjectCard>(this.deck);
         }
+        if (this.useTurmoilExtension) {
+            this.deck.push(...ALL_TURMOIL_PROJECTS_CARDS.map((cf) => new cf.factory()));
+            this.deck = this.shuffleCards<IProjectCard>(this.deck);
+        }
+
     }
     public shuffleCards<T>(cards: Array<T>): Array<T> {
         const deck: Array<T> = [];

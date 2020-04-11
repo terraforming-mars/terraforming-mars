@@ -6832,5 +6832,24 @@ export const HTML_DATA: Map<string, string> =
             (Action: Spend 2X MC to gain X energy, or decrease energy production 1 step to gain 8 MC.)
         </div>
     </div>
+`],
+[CardName.AERIAL_LENSES, `
+  <div class="title background-color-automated ">Aerial Lenses</div>
+  <div class="price">2</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="card-number">T01</div>
+  <div class="content ">
+    <div class="points points-big">-1</div>
+    <div class="requirements"><span class="party">KELVINISTS</span></div>
+      - <div class="resource plant red-outline"></div><div class="resource plant red-outline"></div>
+
+      <div class="production-box production-box-size2">
+        <div class="heat production"></div><div class="heat production"></div>
+      </div>
+      <div class="description ">
+        (Requires that Kelvinists are ruling or that you have 2 delegates there. Remove up to 2 plants from any player. Increase your heat production 2 steps.)
+      </div>
+  </div>
 `]
+
 ]);

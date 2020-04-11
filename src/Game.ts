@@ -52,6 +52,7 @@ import { SerializedGame } from "./SerializedGame";
 import { SerializedPlayer } from "./SerializedPlayer";
 import { CardName } from "./CardName";
 import { Turmoil } from './turmoil/Turmoil';
+import { AerialLenses } from './cards/turmoil/AerialLenses';
 
 export interface GameOptions {
   draftVariant: boolean;
@@ -419,6 +420,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       for (let i = 0; i < 10; i++) {
         dealtCards.push(this.dealer.dealCard());
       }
+
+      // For testing only - TODO : remove
+      dealtCards.push(new AerialLenses());
 
       result.title = " ";
       result.options.push(

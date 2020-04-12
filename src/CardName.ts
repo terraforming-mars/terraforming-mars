@@ -401,5 +401,6 @@ export enum CardName {
     BANNED_DELEGATE = "Banned Delegate",
     CULTURAL_METROPOLIS = "Cultural Metropolis",
     DIASPORA_MOVEMENT = "Diaspora Movement",
-    EVENT_ANALYSTS = "Event Analysts"
+    EVENT_ANALYSTS = "Event Analysts",
+    GMO_CONTRACT = "GMO Contract"
 }

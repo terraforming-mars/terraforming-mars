@@ -141,7 +141,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (resource === Resources.HEAT) this.heat = Math.max(0, this.heat + amount);
       
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-        //this.resourcesRemovedThisGenerationByPlayer.add(fromPlayer.name);
         if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer) === -1) {
           this.removingPlayers.push(fromPlayer);
         }
@@ -171,7 +170,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (resource === Resources.HEAT) this.heatProduction = Math.max(0, this.heatProduction + amount);
       
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-        //this.productionDecreasedThisGenerationByPlayer.add(fromPlayer.name);
         if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer) === -1) {
           this.removingPlayers.push(fromPlayer);
         }

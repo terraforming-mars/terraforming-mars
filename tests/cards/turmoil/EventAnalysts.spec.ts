@@ -2,12 +2,9 @@ import { expect } from "chai";
 import { EventAnalysts } from "../../../src/cards/turmoil/EventAnalysts";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
-import { Resources } from "../../../src/Resources";
 import { BoardName } from '../../../src/BoardName';
 import { GameOptions, Game } from '../../../src/Game';
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
-import { ColonizerTrainingCamp } from "../../../src/cards/ColonizerTrainingCamp";
-import { MethaneFromTitan } from "../../../src/cards/MethaneFromTitan";
 
 describe("EventAnalysts", function () {
     it("Should play", function () {
@@ -32,8 +29,8 @@ describe("EventAnalysts", function () {
                 scientists.delegates.push(player, player);
                 expect(card.canPlay(player, game)).to.eq(true); 
             }
+            card.play(player, game);
+            expect(game.turmoil.getPlayerInfluence(player)).to.eq(1);
         } 
-        card.play(player, game);
-        expect(game.turmoil.getPlayerInfluence(player)).to.eq(1);
     });
 });

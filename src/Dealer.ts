@@ -407,6 +407,7 @@ import { HiTechLab } from "./cards/promo/HiTechLab";
 import { EnergyMarket } from "./cards/promo/EnergyMarket";
 import { LawSuit } from "./cards/promo/LawSuit";
 import { StanfordTorus } from "./cards/promo/StanfordTorus";
+import { SaturnSurfing } from "./cards/promo/SaturnSurfing";
 
 import { ILoadable } from "./ILoadable";
 import { CardName } from "./CardName";
@@ -538,7 +539,8 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.NEUTRALIZER_FACTORY, factory: NeutralizerFactory },
     { cardName: CardName.ORBITAL_REFLECTORS, factory: OrbitalReflectors },
     { cardName: CardName.OMNICOURT, factory: Omnicourt },
-    { cardName: CardName.MINING_QUOTA, factory: MiningQuota }
+    { cardName: CardName.MINING_QUOTA, factory: MiningQuota },
+    { cardName: CardName.SATURN_SURFING, factory: SaturnSurfing }
 ];    
 
 export const ALL_COLONIES_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [

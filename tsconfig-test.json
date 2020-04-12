@@ -409,6 +409,7 @@
         "tests/cards/promo/EnergyMarket.spec.ts",
         "tests/cards/promo/LawSuit.spec.ts",
         "tests/cards/promo/StanfordTorus.spec.ts",
+        "tests/cards/promo/SaturnSurfing.spec.ts",
         "tests/milestones/Diversifier.spec.ts",
         "tests/awards/EstateDealer.spec.ts",
         "tests/Board.spec.ts",

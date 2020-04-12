@@ -15,16 +15,11 @@ export class LawSuit implements IProjectCard {
     public name: CardName = CardName.LAW_SUIT;
 
     public canPlay(player: Player) {
-        return player.resourcesRemovedThisGenerationByPlayer.size > 0 || player.productionDecreasedThisGenerationByPlayer.size > 0;
+        return player.removingPlayers.length > 0;
     }
 
     public play(player: Player, game: Game) {
-        const possibleLawSuitsNames = Array.from(new Set(Array.from(player.resourcesRemovedThisGenerationByPlayer).concat(Array.from(player.productionDecreasedThisGenerationByPlayer))));
-        let possibleLawSuits: Array<Player> = [];
-        for (let playerName of possibleLawSuitsNames) {
-            possibleLawSuits.push(game.getPlayer(playerName));
-        }
-        return new SelectPlayer(possibleLawSuits, "Select player to sue (steal 3 MC from)", (suedPlayer: Player) => {
+        return new SelectPlayer(player.removingPlayers, "Select player to sue (steal 3 MC from)", (suedPlayer: Player) => {
             player.setResource(Resources.MEGACREDITS, Math.min(3, suedPlayer.getResource(Resources.MEGACREDITS)));
             suedPlayer.setResource(Resources.MEGACREDITS, -3, game, player);
             const cardIndex = player.playedCards.findIndex((element) => element.name === this.name);

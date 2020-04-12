@@ -399,5 +399,6 @@ export enum CardName {
     ENERGY_MARKET = "Energy Market",
     AERIAL_LENSES = "Aerial Lenses",
     BANNED_DELEGATE = "Banned Delegate",
-    CULTURAL_METROPOLIS = "Cultural Metropolis"
+    CULTURAL_METROPOLIS = "Cultural Metropolis",
+    DIASPORA_MOVEMENT = "Diaspora Movement"
 }

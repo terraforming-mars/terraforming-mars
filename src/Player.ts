@@ -80,7 +80,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public tradesThisTurn: number = 0;
     public colonyTradeOffset: number = 0;
     public colonyTradeDiscount: number = 0;
-    public removingPlayers: Array<Player> = [];
+    public removingPlayers: Array<string> = [];
 
     constructor(
         public name: string,
@@ -141,8 +141,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (resource === Resources.HEAT) this.heat = Math.max(0, this.heat + amount);
       
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-        if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer) === -1) {
-          this.removingPlayers.push(fromPlayer);
+        if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer.id) === -1) {
+          this.removingPlayers.push(fromPlayer.id);
         }
         game.log(
           LogMessageType.DEFAULT,
@@ -170,8 +170,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (resource === Resources.HEAT) this.heatProduction = Math.max(0, this.heatProduction + amount);
       
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-        if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer) === -1) {
-          this.removingPlayers.push(fromPlayer);
+        if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer.id) === -1) {
+          this.removingPlayers.push(fromPlayer.id);
         }
         game.log(
           LogMessageType.DEFAULT,

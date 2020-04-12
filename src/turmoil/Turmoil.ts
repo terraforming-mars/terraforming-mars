@@ -25,7 +25,7 @@ export const ALL_PARTIES: Array<IPartyFactory<IParty>> = [
     { partyName: PartyName.GREENS, factory: Greens }
 ];
 
-export class Turmoil {
+export class Turmoil  {
     public chairman: undefined | Player | "NEUTRAL" = undefined;
     public rulingParty: undefined | IParty = undefined;
     public dominantParty: undefined | IParty = undefined;
@@ -41,14 +41,17 @@ export class Turmoil {
         this.parties = ALL_PARTIES.map((cf) => new cf.factory());
         // Init the global event dealer
         this.globalEventDealer = new GlobalEventDealer();
+    }
+
+    public initGlobalEvent(game: Game) {
         // Draw the first global event to setup the game
         this.commingGlobalEvent = this.globalEventDealer.draw();
         if (this.commingGlobalEvent !== undefined) {
-            this.sendDelegateToParty("NEUTRAL", this.commingGlobalEvent.currentDelegate);
+            this.sendDelegateToParty("NEUTRAL", this.commingGlobalEvent.currentDelegate, game);
         }
         this.distantGlobalEvent = this.globalEventDealer.draw();
         if (this.distantGlobalEvent !== undefined) {
-            this.sendDelegateToParty("NEUTRAL", this.distantGlobalEvent.currentDelegate);
+            this.sendDelegateToParty("NEUTRAL", this.distantGlobalEvent.currentDelegate, game);
         }
     }
 
@@ -64,10 +67,22 @@ export class Turmoil {
     }
 
     // Use to send a delegate to a specific party
-    public sendDelegateToParty(player: Player | "NEUTRAL", partyName: PartyName, ): void {
+    public sendDelegateToParty(player: Player | "NEUTRAL", partyName: PartyName, game: Game): void {
         const party = this.getPartyByName(partyName);
         if (party) {
-            party.sendDelegate(player);
+            party.sendDelegate(player, game);
+            this.checkDominantParty(party);
+        }
+        else {
+            console.error("Party not found");
+        }
+    }
+
+    // Use to remove a delegate from a specific party
+    public removeDelegateFromParty(player: Player | "NEUTRAL", partyName: PartyName, game: Game): void {
+        const party = this.getPartyByName(partyName);
+        if (party) {
+            party.removeDelegate(player, game);
             this.checkDominantParty(party);
         }
         else {
@@ -76,53 +91,56 @@ export class Turmoil {
     }
 
     // Check dominant party
-    public checkDominantParty(party:IParty | undefined = undefined): void {
-        // If a new delegate is sent
-        if (party) {
-            if (this.dominantParty) {
-                if (party.delegates.length > this.dominantParty.delegates.length) {
-                    this.dominantParty = party;
-                }
-            }
-            else {
-                this.dominantParty = party;
-            }
-        }
-        // If it's the end of generation
-        else {
+    public checkDominantParty(party:IParty): void {
+        // If there is a dominant party
+        if (this.dominantParty) {
             let sortParties = [...this.parties].sort(
                 (p1, p2) => p2.delegates.length - p1.delegates.length
             );
             const max = sortParties[0].delegates.length;
-            
-            const currentIndex = this.parties.indexOf(this.rulingParty!);
-            
-            let partiesToCheck = [];
-
-            // Manage if it's the first party or the last
-            if (currentIndex === 0) {
-                partiesToCheck = this.parties.slice(currentIndex + 1);
+            if (this.dominantParty.delegates.length != max) {
+                this.setNextPartyAsDominant(this.dominantParty);
             }
-            else if (currentIndex === this.parties.length - 1) {
-                partiesToCheck = this.parties.slice(0, currentIndex);
-            }
-            else {
-                let left = this.parties.slice(0, currentIndex);
-                const right = this.parties.slice(currentIndex + 1);
-                partiesToCheck = right.concat(left);
-            }
-
-            // Take the clockwise order
-            const partiesOrdered = partiesToCheck.reverse();
-            
-            partiesOrdered.some(newParty => {
-                if (newParty.delegates.length === max) {
-                    this.dominantParty = newParty;
-                    return true;
-                }
-                return false;
-            });   
         }
+        else {
+            this.dominantParty = party;
+        }
+    }
+
+    // Function to get next dominant party taking into account the clockwise order
+    public setNextPartyAsDominant(currentDominantParty: IParty) {
+        let sortParties = [...this.parties].sort(
+            (p1, p2) => p2.delegates.length - p1.delegates.length
+        );
+        const max = sortParties[0].delegates.length;
+        
+        const currentIndex = this.parties.indexOf(currentDominantParty);
+        
+        let partiesToCheck = [];
+
+        // Manage if it's the first party or the last
+        if (currentIndex === 0) {
+            partiesToCheck = this.parties.slice(currentIndex + 1);
+        }
+        else if (currentIndex === this.parties.length - 1) {
+            partiesToCheck = this.parties.slice(0, currentIndex);
+        }
+        else {
+            let left = this.parties.slice(0, currentIndex);
+            const right = this.parties.slice(currentIndex + 1);
+            partiesToCheck = right.concat(left);
+        }
+
+        // Take the clockwise order
+        const partiesOrdered = partiesToCheck.reverse();
+        
+        partiesOrdered.some(newParty => {
+            if (newParty.delegates.length === max) {
+                this.dominantParty = newParty;
+                return true;
+            }
+            return false;
+        });   
     }
 
     // Launch the turmoil phase
@@ -159,7 +177,7 @@ export class Turmoil {
         }
 
         // 3.e - New dominant party
-        this.checkDominantParty();
+        this.setNextPartyAsDominant(this.rulingParty!);
 
         // 3.f - Fill the lobby
         this.lobby = new Set<Player>(game.getPlayers());

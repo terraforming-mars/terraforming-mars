@@ -175,6 +175,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Add Turmoil stuff
       if (this.turmoilExtension) {
         this.turmoil = new Turmoil();
+        this.turmoil.initGlobalEvent(this);
         corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
       }  
 

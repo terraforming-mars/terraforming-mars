@@ -15,6 +15,7 @@ describe("GlobalDustStorm", function () {
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
         const turmoil = new Turmoil();
+        turmoil.initGlobalEvent(game);
         player.playedCards.push(new StripMine());
         player2.playedCards.push(new StripMine());
         player2.playedCards.push(new StripMine());

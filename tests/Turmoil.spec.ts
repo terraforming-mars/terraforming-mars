@@ -14,37 +14,40 @@ describe("Turmoil", function () {
 
     it("Correctly send delegate", function () {
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player], player);
         const turmoil = new Turmoil();
-        turmoil.sendDelegateToParty(player, PartyName.GREENS);
+        turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
         const greens = turmoil.getPartyByName(PartyName.GREENS);
         if (greens) {
             expect(greens.delegates.length).to.eq(1);
-            expect(greens.delegates[0].name).to.eq(player.name);
+            expect(greens.delegates[0]).to.eq(player);
         }
     });
 
     it("Correctly set dominant party", function () {
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player], player);
         const turmoil = new Turmoil();
-        turmoil.sendDelegateToParty(player, PartyName.GREENS);
+        turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
         const greens = turmoil.getPartyByName(PartyName.GREENS);
         expect(turmoil.dominantParty).to.eq(greens);
-        turmoil.sendDelegateToParty(player, PartyName.REDS);
+        turmoil.sendDelegateToParty(player, PartyName.REDS, game);
         expect(turmoil.dominantParty).to.eq(greens);
         const reds = turmoil.getPartyByName(PartyName.REDS);
-        turmoil.sendDelegateToParty(player, PartyName.REDS);
+        turmoil.sendDelegateToParty(player, PartyName.REDS, game);
         expect(turmoil.dominantParty).to.eq(reds);        
     });
 
     it("Correctly set party leader", function () {
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("foobar", [player, player2], player);
         const turmoil = new Turmoil();
-        turmoil.sendDelegateToParty(player, PartyName.GREENS);
+        turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
         expect(turmoil.getPartyByName(PartyName.GREENS)!.partyLeader).to.eq(player);
-        turmoil.sendDelegateToParty(player2, PartyName.GREENS);
+        turmoil.sendDelegateToParty(player2, PartyName.GREENS, game);
         expect(turmoil.getPartyByName(PartyName.GREENS)!.partyLeader).to.eq(player);
-        turmoil.sendDelegateToParty(player2, PartyName.GREENS);
+        turmoil.sendDelegateToParty(player2, PartyName.GREENS, game);
         expect(turmoil.getPartyByName(PartyName.GREENS)!.partyLeader).to.eq(player2);        
     });
 
@@ -52,7 +55,7 @@ describe("Turmoil", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
         const turmoil = new Turmoil();
-        turmoil.sendDelegateToParty(player, PartyName.MARS);
+        turmoil.sendDelegateToParty(player, PartyName.MARS, game);
 
         turmoil.endGeneration(game);
         expect(turmoil.chairman).to.eq(player);

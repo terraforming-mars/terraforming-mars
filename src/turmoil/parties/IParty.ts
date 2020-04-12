@@ -8,9 +8,11 @@ export interface IParty {
     description: string;
     delegates: Array<Player | "NEUTRAL">;
     partyLeader: undefined | Player | "NEUTRAL";
-    sendDelegate: (player: Player | "NEUTRAL") => void;
+    sendDelegate: (player: Player | "NEUTRAL", game: Game) => void;
+    removeDelegate: (player: Player | "NEUTRAL", game: Game) => void;
     rulingBonus: (game: Game) => void;
     //rulingPolicy: (player: Player, game: Game) => void;
     becomesRulingParty: () => void;
-    getDelegates:(player: Player) => number;
+    getPresentPlayers(): Array<Player | "NEUTRAL">;
+    getDelegates:(player: Player | "NEUTRAL") => number;
 }

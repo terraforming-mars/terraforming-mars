@@ -31,6 +31,7 @@ export class Turmoil  {
     public dominantParty: undefined | IParty = undefined;
     public lobby: Set<Player> = new Set<Player>();
     public parties: Array<IParty> = [];
+    public playersInfluenceBonus: Map<string, number> = new Map<string, number>();
     public globalEventDealer: GlobalEventDealer;
     public distantGlobalEvent: IGlobalEvent | undefined;
     public commingGlobalEvent: IGlobalEvent | undefined;
@@ -191,7 +192,25 @@ export class Turmoil  {
         if (this.chairman !== undefined && this.chairman === player) influence++;
         if (this.dominantParty !== undefined && this.dominantParty.partyLeader === player) influence++;
         if (this.dominantParty !== undefined && this.dominantParty.delegates.indexOf(player) !== -1) influence++;
+        if (this.playersInfluenceBonus.has(player.id)) {
+            const bonus = this.playersInfluenceBonus.get(player.id);
+            if (bonus) {
+                influence+= bonus;
+            }
+        }
         return influence;
+    }
+
+    public addInfluenceBonus(player: Player, bonus:number = 1) {
+        if (this.playersInfluenceBonus.has(player.id)) {
+            let current = this.playersInfluenceBonus.get(player.id);
+            if (current) {
+                current += bonus;
+            }
+        }
+        else {
+            this.playersInfluenceBonus.set(player.id, bonus);
+        }
     }
 
     public canPlay(player: Player, partyName : PartyName): boolean {

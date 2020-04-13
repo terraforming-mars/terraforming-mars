@@ -23,8 +23,9 @@ describe("Recruitment", function () {
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         if (game.turmoil !== undefined) {
-            let party = game.turmoil.getPartyByName(PartyName.GREENS)!;
-            party.delegates = [];
+            game.turmoil.parties.forEach(party => {
+                party.delegates = [];
+            });
             expect(card.canPlay(player, game)).to.eq(false);
             game.turmoil.sendDelegateToParty("NEUTRAL", PartyName.GREENS, game);
             expect(card.canPlay(player, game)).to.eq(false);

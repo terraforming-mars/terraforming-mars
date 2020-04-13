@@ -403,5 +403,14 @@ export enum CardName {
     DIASPORA_MOVEMENT = "Diaspora Movement",
     EVENT_ANALYSTS = "Event Analysts",
     GMO_CONTRACT = "GMO Contract",
-    MARTIAN_MEDIA_CENTER = "Martian Media Center"
+    MARTIAN_MEDIA_CENTER = "Martian Media Center",
+    PARLIAMENT_HALL = "Parliament Hall",
+    PR_OFFICE = "PR Office",
+    PUBLIC_CELEBRATIONS = "Public Celebrations",
+    RECRUITMENT = "Recruitment",
+    RED_TOURISM_WAVE = "Red Tourism Wave",
+    SPONSORED_MOHOLE = "Sponsored Mohole",
+    SUPPORTED_RESEARCH = "Supported Research",
+    WILDLIFE_DOME = "Wildlife Dome",
+    VOTE_OF_NO_CONFIDENCE = "Vote Of No Confidence"
 }

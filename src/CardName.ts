@@ -402,5 +402,6 @@ export enum CardName {
     CULTURAL_METROPOLIS = "Cultural Metropolis",
     DIASPORA_MOVEMENT = "Diaspora Movement",
     EVENT_ANALYSTS = "Event Analysts",
-    GMO_CONTRACT = "GMO Contract"
+    GMO_CONTRACT = "GMO Contract",
+    MARTIAN_MEDIA_CENTER = "Martian Media Center"
 }

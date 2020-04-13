@@ -15,12 +15,26 @@ export class SelectParty implements PlayerInterrupt {
         public game: Game,
         public title: string = "Select where to send a delegate",
         public nbr: number = 1,
+        public replace: "NEUTRAL" | Player | undefined = undefined,
     ){
         const sendDelegate = new OrOptions();
-        sendDelegate.options = game.turmoil!.parties.map(party => new SelectOption(
+        let parties;
+        if (replace) {
+          parties = game.turmoil!.parties.filter(party => 
+              party.delegates.length > 1 && 
+              [...party.delegates].splice(party.delegates.indexOf(party.partyLeader!),1).indexOf(replace) != -1
+          );
+        }
+        else {
+          parties = game.turmoil!.parties;
+        }
+        sendDelegate.options = parties.map(party => new SelectOption(
               party.name + " - (" + party.description + ")", 
               () => {
                 for (let i = 0; i < nbr; i++) {
+                  if (replace) {
+                    game.turmoil?.removeDelegateFromParty(replace, party.name, game);
+                  }
                   game.turmoil?.sendDelegateToParty(player, party.name, game);
                 }
                 game.log(

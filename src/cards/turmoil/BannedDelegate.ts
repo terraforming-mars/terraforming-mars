@@ -21,19 +21,19 @@ export class BannedDelegate implements IProjectCard {
     }
 
     public play(_player: Player, game: Game) {
-      let orOptions = new Array<SelectDelegate>();
-      // Take each party having more than just the party leader in the area
-      game.turmoil!.parties.forEach(party => {
-        if(party.delegates.length > 1) {
-          // Remove the party leader from available choices
-          const delegates = [...party.delegates].splice(party.delegates.indexOf(party.partyLeader!),1);
-          const players = Array.from(new Set<Player | "NEUTRAL">(delegates));
-          orOptions.push(new SelectDelegate(players, "Select player to remove from" + party.name + "party", (selectedPlayer: Player) => {
-            game.turmoil!.removeDelegateFromParty(selectedPlayer, party.name, game);   
-            return undefined;
-          }));
-        }
-      });
-      return new OrOptions(...orOptions);   
+        let orOptions = new Array<SelectDelegate>();
+        // Take each party having more than just the party leader in the area
+        game.turmoil!.parties.forEach(party => {
+          if(party.delegates.length > 1) {
+            // Remove the party leader from available choices
+            const delegates = [...party.delegates].splice(party.delegates.indexOf(party.partyLeader!),1);
+            const players = Array.from(new Set<Player | "NEUTRAL">(delegates));
+            orOptions.push(new SelectDelegate(players, "Select player to remove from" + party.name + "party", (selectedPlayer: Player) => {
+              game.turmoil!.removeDelegateFromParty(selectedPlayer, party.name, game);   
+              return undefined;
+            }));
+          }
+        });
+        return new OrOptions(...orOptions);   
     }
 }

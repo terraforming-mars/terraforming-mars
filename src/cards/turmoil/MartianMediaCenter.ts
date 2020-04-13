@@ -30,6 +30,10 @@ export class MartianMediaCenter implements IProjectCard {
         return undefined;
     }
 
+    public canAct(): boolean {
+        return true;
+    }
+
     public action(player: Player, game: Game) {
         let howToPay: HowToPay;
         return new AndOptions(
@@ -43,7 +47,7 @@ export class MartianMediaCenter implements IProjectCard {
               return undefined;
             },
             new SelectHowToPay(
-                'Select how to pay for action', true, false,
+                'Select how to pay for action', false, false,
                 player.canUseHeatAsMegaCredits, 3,
                 (htp: HowToPay) => {
                   howToPay = htp;

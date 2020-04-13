@@ -4,6 +4,7 @@ import { GlobalDustStorm } from "./GlobalDustStorm";
 import { SponsoredProjects } from "./SponsoredProjects";
 import { AsteroidMining } from "./AsteroidMining";
 import { GenerousFunding } from "./GenerousFunding";
+import { SucessfulOrganisms } from './SucessfulOrganisms';
 
 
 export interface IGlobalEventFactory<T> {
@@ -17,7 +18,7 @@ export const ALL_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
     { globalEventName: GlobalEventName.SPONSORED_PROJECTS , factory: SponsoredProjects },
     { globalEventName: GlobalEventName.ASTEROID_MINING , factory: AsteroidMining },
     { globalEventName: GlobalEventName.GENEROUS_FUNDING , factory: GenerousFunding },
-    
+    { globalEventName: GlobalEventName.SUCESSFUL_ORGANISMS , factory: SucessfulOrganisms }
 ];
 
 export class GlobalEventDealer {

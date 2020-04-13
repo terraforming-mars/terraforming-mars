@@ -416,6 +416,7 @@
         "tests/globalEvents/SponsoredProjects.spec.ts",
         "tests/globalEvents/AsteroidMining.spec.ts",
         "tests/globalEvents/GenerousFunding.spec.ts",
+        "tests/globalEvents/SucessfulOrganisms.spec.ts",
         "tests/cards/turmoil/AerialLenses.spec.ts"
     ]
 }

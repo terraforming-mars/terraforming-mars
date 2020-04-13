@@ -413,6 +413,21 @@ import { ILoadable } from "./ILoadable";
 import { CardName } from "./CardName";
 import { BeginnerCorporation } from "./cards/corporation/BeginnerCorporation";
 import { SerializedDealer } from "./SerializedDealer";
+import { CulturalMetropolis } from "./cards/turmoil/CulturalMetropolis";
+import { BannedDelegate } from "./cards/turmoil/BannedDelegate";
+import { DiasporaMovement } from "./cards/turmoil/DiasporaMovement";
+import { EventAnalysts } from "./cards/turmoil/EventAnalysts";
+import { GMOContract } from "./cards/turmoil/GMOContract";
+import { MartianMediaCenter } from "./cards/turmoil/MartianMediaCenter";
+import { ParliamentHall } from "./cards/turmoil/ParliamentHall";
+import { PROffice } from "./cards/turmoil/PROffice";
+import { PublicCelebrations } from "./cards/turmoil/PublicCelebrations";
+import { Recruitment } from "./cards/turmoil/Recruitment";
+import { RedTourismWave } from "./cards/turmoil/RedTourismWave";
+import { SponsoredMohole } from "./cards/turmoil/SponsoredMohole";
+import { SupportedResearch } from "./cards/turmoil/SupportedResearch";
+import { WildlifeDome } from "./cards/turmoil/WildlifeDome";
+import { VoteOfNoConfidence } from "./cards/turmoil/VoteOfNoConfidence";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -594,7 +609,22 @@ export const ALL_COLONIES_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
 ]; 
 
 export const ALL_TURMOIL_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
-    { cardName: CardName.AERIAL_LENSES, factory: AerialLenses }
+    { cardName: CardName.AERIAL_LENSES, factory: AerialLenses },
+    { cardName: CardName.BANNED_DELEGATE, factory: BannedDelegate },
+    { cardName: CardName.CULTURAL_METROPOLIS, factory: CulturalMetropolis },
+    { cardName: CardName.DIASPORA_MOVEMENT, factory: DiasporaMovement },
+    { cardName: CardName.EVENT_ANALYSTS, factory: EventAnalysts },
+    { cardName: CardName.GMO_CONTRACT, factory: GMOContract },
+    { cardName: CardName.MARTIAN_MEDIA_CENTER, factory: MartianMediaCenter },
+    { cardName: CardName.PARLIAMENT_HALL, factory: ParliamentHall },
+    { cardName: CardName.PR_OFFICE, factory: PROffice },
+    { cardName: CardName.PUBLIC_CELEBRATIONS, factory: PublicCelebrations },
+    { cardName: CardName.RECRUITMENT, factory: Recruitment },
+    { cardName: CardName.RED_TOURISM_WAVE, factory: RedTourismWave },
+    { cardName: CardName.SPONSORED_MOHOLE, factory: SponsoredMohole },
+    { cardName: CardName.SUPPORTED_RESEARCH, factory: SupportedResearch },
+    { cardName: CardName.WILDLIFE_DOME, factory: WildlifeDome },
+    { cardName: CardName.VOTE_OF_NO_CONFIDENCE, factory: VoteOfNoConfidence },
 ]; 
 
 export const ALL_VENUS_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [

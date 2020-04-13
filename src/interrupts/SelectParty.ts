@@ -7,6 +7,7 @@ import { SelectOption } from '../inputs/SelectOption';
 import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
+import { Resources } from '../Resources';
 
 export class SelectParty implements PlayerInterrupt {
     public playerInput: PlayerInput;
@@ -16,6 +17,7 @@ export class SelectParty implements PlayerInterrupt {
         public title: string = "Select where to send a delegate",
         public nbr: number = 1,
         public replace: "NEUTRAL" | Player | undefined = undefined,
+        public price: number | undefined = undefined,
     ){
         const sendDelegate = new OrOptions();
         // Change the default title
@@ -33,6 +35,10 @@ export class SelectParty implements PlayerInterrupt {
         sendDelegate.options = parties.map(party => new SelectOption(
               party.name + " - (" + party.description + ")", 
               () => {
+                if (price) {
+                  player.setResource(Resources.MEGACREDITS, -price);
+                }
+
                 for (let i = 0; i < nbr; i++) {
                   if (replace) {
                     game.turmoil?.removeDelegateFromParty(replace, party.name, game);

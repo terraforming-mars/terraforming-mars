@@ -39,6 +39,7 @@ import {SerializedPlayer} from "./SerializedPlayer";
 import {LogMessageType} from "./LogMessageType";
 import {LogMessageData} from "./LogMessageData";
 import {LogMessageDataType} from "./LogMessageDataType";
+import { SelectParty } from "./interrupts/SelectParty";
 
 export class Player implements ILoadable<SerializedPlayer, Player>{
     public corporationCard: CorporationCard | undefined = undefined;
@@ -1874,6 +1875,14 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       // Propose undo action only if you have done one action this turn
       if (this.actionsTakenThisRound > 0) {
         action.options.push(this.undoTurnOption(game));
+      }
+
+      // If you can pay to send some in the Ara
+      if (game.turmoilExtension &&
+        this.canAfford(5)) {
+        let selectParty = new SelectParty(this, game);
+        selectParty.playerInput.title = "Send a delegate in an area";
+        action.options.push(selectParty.playerInput);
       }
 
       action.options.sort((a, b) => {

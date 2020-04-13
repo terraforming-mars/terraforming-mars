@@ -18,6 +18,8 @@ export class SelectParty implements PlayerInterrupt {
         public replace: "NEUTRAL" | Player | undefined = undefined,
     ){
         const sendDelegate = new OrOptions();
+        // Change the default title
+        sendDelegate.title = title;
         let parties;
         if (replace) {
           parties = game.turmoil!.parties.filter(party => 

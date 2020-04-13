@@ -53,6 +53,21 @@ import { SerializedPlayer } from "./SerializedPlayer";
 import { CardName } from "./CardName";
 import { Turmoil } from "./turmoil/Turmoil";
 import { AerialLenses } from "./cards/turmoil/AerialLenses";
+import { BannedDelegate } from "./cards/turmoil/BannedDelegate";
+import { CulturalMetropolis } from "./cards/turmoil/CulturalMetropolis";
+import { DiasporaMovement } from "./cards/turmoil/DiasporaMovement";
+import { GMOContract } from "./cards/turmoil/GMOContract";
+import { EventAnalysts } from "./cards/turmoil/EventAnalysts";
+import { ParliamentHall } from "./cards/turmoil/ParliamentHall";
+import { MartianMediaCenter } from "./cards/turmoil/MartianMediaCenter";
+import { PROffice } from "./cards/turmoil/PROffice";
+import { PublicCelebrations } from "./cards/turmoil/PublicCelebrations";
+import { Recruitment } from "./cards/turmoil/Recruitment";
+import { RedTourismWave } from "./cards/turmoil/RedTourismWave";
+import { SponsoredMohole } from "./cards/turmoil/SponsoredMohole";
+import { WildlifeDome } from "./cards/turmoil/WildlifeDome";
+import { VoteOfNoConfidence } from "./cards/turmoil/VoteOfNoConfidence";
+import { SupportedResearch } from "./cards/turmoil/SupportedResearch";
 
 export interface GameOptions {
   draftVariant: boolean;
@@ -424,6 +439,21 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // For testing only - TODO : remove
       dealtCards.push(new AerialLenses());
+      dealtCards.push(new BannedDelegate());
+      dealtCards.push(new CulturalMetropolis());
+      dealtCards.push(new DiasporaMovement());
+      dealtCards.push(new GMOContract());
+      dealtCards.push(new EventAnalysts());
+      dealtCards.push(new ParliamentHall());
+      dealtCards.push(new MartianMediaCenter());
+      dealtCards.push(new PROffice());
+      dealtCards.push(new PublicCelebrations());
+      dealtCards.push(new Recruitment());
+      dealtCards.push(new RedTourismWave());
+      dealtCards.push(new SponsoredMohole());
+      dealtCards.push(new SupportedResearch());
+      dealtCards.push(new WildlifeDome());
+      dealtCards.push(new VoteOfNoConfidence());
 
       result.title = " ";
       result.options.push(

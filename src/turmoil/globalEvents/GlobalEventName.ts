@@ -17,5 +17,6 @@ export enum GlobalEventName {
     ELECTION = "Election",
     AQUIFER_RELEASED_BY_PUBLIC_COUNCIL = "Aquifer Released by Public Council",
     PARADIGM_BREAKDOWN = "Paradigm Breakdown",
-    HOMEWORLD_SUPPORT = "Homeworld Support"
+    HOMEWORLD_SUPPORT = "Homeworld Support",
+    RIOTS = "Riots",
 }

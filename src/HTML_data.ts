@@ -6867,6 +6867,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.SATURN_SURFING, `
     <div class="title background-color-active">Saturn Surfing</div>
     <div class="price">13</div>
+    ##RESOURCES##
     <div class="tag tag1 tag-earth"></div>
     <div class="tag tag2 tag-jovian"></div>
     <div class="promo-icon project-icon"></div>

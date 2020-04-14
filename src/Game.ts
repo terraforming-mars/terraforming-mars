@@ -898,7 +898,19 @@ export class Game implements ILoadable<SerializedGame, Game> {
   }
 
     public increaseTemperature(
-        player: Player, steps: 1 | 2 | 3, isWorldGov: boolean = false): undefined {
+        player: Player, steps: -2 | 1 | 2 | 3, isWorldGov: boolean = false): undefined {
+      if (steps === -2) {    
+        if (this.temperature >= constants.MIN_TEMPERATURE + 4) {
+          this.temperature -= 4;
+          return;
+        } else if (this.temperature >= constants.MIN_TEMPERATURE + 2) {
+          this.temperature -= 2;
+          return;
+        } else {
+          return;
+        }
+      }
+
       if (this.temperature >= constants.MAX_TEMPERATURE) {
         return;
       }

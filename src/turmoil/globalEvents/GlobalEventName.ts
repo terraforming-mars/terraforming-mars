@@ -5,5 +5,16 @@ export enum GlobalEventName {
     GENEROUS_FUNDING = "Generous Funding",
     SUCESSFUL_ORGANISMS = "Sucessful Organisms",
     ECO_SABOTAGE = "Eco Sabotage",
-    PRODUCTIVITY = "Productivity"
+    PRODUCTIVITY = "Productivity",
+    SNOW_COVER = "Snow Cover",
+    DIVERSITY = "Diversity",
+    PANDEMIC = "Pandemic",
+    WAR_ON_EARTH = "War on Earth",
+    IMPROVED_ENERGY_TEMPLATES = "Improved Energy Templates",
+    INTERPLANETARY_TRADE = "Interplanetary Trade",
+    CELEBRITY_LEADERS = "Celebrity Leaders",
+    SPINOFF_PRODUCTS = "Spin-Off Products",
+    ELECTION = "Election",
+    AQUIFER_RELEASED_BY_PUBLIC_COUNCIL = "Aquifer Released by Public Council",
+    PARADIGM_BREAKDOWN = "Paradigm Breakdown"
 }

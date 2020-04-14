@@ -1213,7 +1213,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Power plant (" + this.powerPlantCost + " MC)", 
         () => {
           game.addSelectHowToPayInterrupt(this, this.powerPlantCost, false, false, "Select how to pay for Power Plant project");
-          this.energyProduction++;
+          this.setProduction(Resources.ENERGY);
           this.onStandardProject(StandardProjectType.POWER_PLANT);
           game.log(
             LogMessageType.DEFAULT,

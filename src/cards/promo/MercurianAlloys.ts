@@ -16,7 +16,7 @@ export class MercurianAlloys implements IProjectCard {
     }
 
     public play(player: Player) {
-        player.titaniumValue++;
+        player.increaseTitaniumValue();
         return undefined;
     }
 

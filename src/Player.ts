@@ -40,6 +40,7 @@ import {LogMessageType} from "./LogMessageType";
 import {LogMessageData} from "./LogMessageData";
 import {LogMessageDataType} from "./LogMessageDataType";
 import { SelectParty } from "./interrupts/SelectParty";
+import { PartyName } from './turmoil/parties/PartyName';
 
 export class Player implements ILoadable<SerializedPlayer, Player>{
     public corporationCard: CorporationCard | undefined = undefined;
@@ -48,7 +49,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public plantsNeededForGreenery: number = 8;
     public dealtCorporationCards: Array<CorporationCard> = [];
     public powerPlantCost: number = 11;
-    public titaniumValue: number = 3;
+    private titaniumValue: number = 3;
     public steelValue: number = 2;
     public megaCredits: number = 0;
     private megaCreditProduction: number = 0;
@@ -87,6 +88,19 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         public color: Color,
         public beginner: boolean) {
       this.id = this.generateId();
+    }
+
+    public getTitaniumValue(game: Game): number {
+      if (game.turmoilExtension 
+        && game.turmoil !== undefined 
+        && game.turmoil.rulingParty !== undefined 
+        && game.turmoil.rulingParty.name === PartyName.UNITY) {
+          return this.titaniumValue + 1;
+        }
+      return this.titaniumValue;
+    }
+    public increaseTitaniumValue() {
+      this.titaniumValue++;
     }
 
     public isCorporation(corporationName: CorporationName): boolean {

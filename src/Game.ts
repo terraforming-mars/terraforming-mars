@@ -68,6 +68,7 @@ import { SponsoredMohole } from "./cards/turmoil/SponsoredMohole";
 import { WildlifeDome } from "./cards/turmoil/WildlifeDome";
 import { VoteOfNoConfidence } from "./cards/turmoil/VoteOfNoConfidence";
 import { SupportedResearch } from "./cards/turmoil/SupportedResearch";
+import { Terraformer } from "./milestones/Terraformer";
 
 export interface GameOptions {
   draftVariant: boolean;
@@ -189,8 +190,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Add Turmoil stuff
       if (this.turmoilExtension) {
-        this.turmoil = new Turmoil();
-        this.turmoil.initGlobalEvent(this);
+        this.turmoil = new Turmoil(this);
         corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
       }  
 
@@ -248,6 +248,16 @@ export class Game implements ILoadable<SerializedGame, Game> {
       } else {        
         this.milestones.push(...ORIGINAL_MILESTONES);
         this.awards.push(...ORIGINAL_AWARDS);
+
+        // Terraformer target change with Turmoil extension
+        if(this.turmoilExtension) {
+          let terraformer = new Terraformer();
+          terraformer.terraformRating = 26;
+          const index = this.milestones.findIndex(({ name }) => name === "Terraformer");
+          if (index !== -1) {
+            this.milestones[index] = terraformer;
+          }
+        }
         return new OriginalBoard();
       }
     }
@@ -579,6 +589,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
           colony.endGeneration();
         });
       }
+
+      if(this.turmoilExtension) {
+        this.turmoil?.endGeneration(this);
+      }
+      
       this.generation++;
       this.log(
         LogMessageType.NEW_GENERATION,

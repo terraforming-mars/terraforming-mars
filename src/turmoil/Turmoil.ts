@@ -30,6 +30,7 @@ export class Turmoil  {
     public rulingParty: undefined | IParty = undefined;
     public dominantParty: undefined | IParty = undefined;
     public lobby: Set<Player> = new Set<Player>();
+    public delegate_reserve: Array<Player | "NEUTRAL"> = new Array<Player | "NEUTRAL">();
     public parties: Array<IParty> = [];
     public playersInfluenceBonus: Map<string, number> = new Map<string, number>();
     public globalEventDealer: GlobalEventDealer;
@@ -37,11 +38,29 @@ export class Turmoil  {
     public commingGlobalEvent: IGlobalEvent | undefined;
     public currentGlobalEvent: IGlobalEvent | undefined;
 
-    constructor() {
+    constructor(game: Game) {
         // Init parties
         this.parties = ALL_PARTIES.map((cf) => new cf.factory());
+
+        game.getPlayers().forEach(player => {
+            // Begin with one delegate in the lobby
+            this.lobby.add(player);
+            // Begin with six delegates in the delegate reserve
+            for (let i = 0; i < 6; i++) {
+                this.delegate_reserve.push(player);   
+            }
+        });
+
+        // The game begin with Neutral chairman
+        this.chairman = "NEUTRAL";
+        // Begin with 13 neutral delegates in the reserve
+        for (let i = 0; i < 13; i++) {
+            this.delegate_reserve.push("NEUTRAL");   
+        }
+
         // Init the global event dealer
         this.globalEventDealer = new GlobalEventDealer();
+        this.initGlobalEvent(game);
     }
 
     public initGlobalEvent(game: Game) {
@@ -71,6 +90,15 @@ export class Turmoil  {
     public sendDelegateToParty(player: Player | "NEUTRAL", partyName: PartyName, game: Game): void {
         const party = this.getPartyByName(partyName);
         if (party) {
+            if (player != "NEUTRAL" && this.lobby.has(player)) {
+                this.lobby.delete(player);
+            }
+            else {
+                const index = this.delegate_reserve.indexOf(player);
+                if (index > -1) {
+                    this.delegate_reserve.splice(index, 1);
+                }
+            }
             party.sendDelegate(player, game);
             this.checkDominantParty(party);
         }
@@ -83,6 +111,7 @@ export class Turmoil  {
     public removeDelegateFromParty(player: Player | "NEUTRAL", partyName: PartyName, game: Game): void {
         const party = this.getPartyByName(partyName);
         if (party) {
+            this.delegate_reserve.push(player);
             party.removeDelegate(player, game);
             this.checkDominantParty(party);
         }
@@ -158,13 +187,27 @@ export class Turmoil  {
         this.rulingParty = this.dominantParty;
 
         // 3.a - Ruling Policy change
-        // TODO
-
         if (this.rulingParty) {
-            // 3.b - Resolve Ruling Bonus
+            this.setRulingParty(game);
+        }
+
+        // 3.b - New dominant party
+        this.setNextPartyAsDominant(this.rulingParty!);
+
+        // 3.c - Fill the lobby
+        this.lobby = new Set<Player>(game.getPlayers());
+
+        // 4 - Changing Time
+        // TODO
+    }
+
+    // Ruling Party changes
+    public setRulingParty(game: Game): void {
+        if (this.rulingParty) {
+            // Resolve Ruling Bonus
             this.rulingParty.rulingBonus(game);
 
-            // 3.c - Change the chairman
+            // Change the chairman
             this.chairman = this.rulingParty.partyLeader;
             if (this.chairman && this.chairman instanceof Player) {
                 this.chairman.terraformRating += 1;
@@ -173,18 +216,16 @@ export class Turmoil  {
                 console.error("No chairman");
             }
 
-            // 3.d - Clean the rulingParty area and leader 
-            this.rulingParty.becomesRulingParty();
+            const index = this.rulingParty.delegates.indexOf(this.rulingParty.partyLeader!);
+            // Remove the party leader from the delegates array
+            this.rulingParty.delegates.slice(index, 1);
+            // Fill the delegate reserve
+            this.delegate_reserve = this.delegate_reserve.concat(this.rulingParty.delegates);
+
+            // Clean the party
+            this.rulingParty.partyLeader = undefined;
+            this.rulingParty.delegates = new Array<Player>();
         }
-
-        // 3.e - New dominant party
-        this.setNextPartyAsDominant(this.rulingParty!);
-
-        // 3.f - Fill the lobby
-        this.lobby = new Set<Player>(game.getPlayers());
-
-        // 4 - Changing Time
-        // TODO
     }
 
     public getPlayerInfluence(player: Player) {

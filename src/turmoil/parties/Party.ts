@@ -5,12 +5,6 @@ export abstract class Party  {
     public partyLeader: undefined | Player | "NEUTRAL" = undefined;
     public delegates: Array<Player|"NEUTRAL"> = [];
 
-    // Empty the area after becoming the new ruling party
-    public becomesRulingParty(): void {
-        this.partyLeader = undefined;
-        this.delegates = new Array<Player>();
-    }
-
     // Send a delegate in the area
     public sendDelegate(player: Player | "NEUTRAL", game: Game): void {
         this.delegates.push(player);
@@ -44,8 +38,11 @@ export abstract class Party  {
             
                     let playersToCheck = [];
 
-                    // Manage if it's the first party or the last
-                    if (currentIndex === 0) {
+                    // Manage if it's the first player or the last
+                    if (game.getPlayers().length === 1) {
+                        playersToCheck = game.getPlayers();
+                    }
+                    else if (currentIndex === 0) {
                         playersToCheck = game.getPlayers().slice(currentIndex + 1);
                     }
                     else if (currentIndex === game.getPlayers().length - 1) {

@@ -12,7 +12,6 @@ export interface IParty {
     removeDelegate: (player: Player | "NEUTRAL", game: Game) => void;
     rulingBonus: (game: Game) => void;
     //rulingPolicy: (player: Player, game: Game) => void;
-    becomesRulingParty: () => void;
     getPresentPlayers(): Array<Player | "NEUTRAL">;
     getDelegates:(player: Player | "NEUTRAL") => number;
 }

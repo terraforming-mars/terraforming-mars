@@ -40,7 +40,7 @@ import {LogMessageType} from "./LogMessageType";
 import {LogMessageData} from "./LogMessageData";
 import {LogMessageDataType} from "./LogMessageDataType";
 import { SelectParty } from "./interrupts/SelectParty";
-import { PartyName } from './turmoil/parties/PartyName';
+import { PartyName } from "./turmoil/parties/PartyName";
 
 export class Player implements ILoadable<SerializedPlayer, Player>{
     public corporationCard: CorporationCard | undefined = undefined;

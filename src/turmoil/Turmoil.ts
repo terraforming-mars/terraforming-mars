@@ -67,11 +67,11 @@ export class Turmoil  {
         // Draw the first global event to setup the game
         this.commingGlobalEvent = this.globalEventDealer.draw();
         if (this.commingGlobalEvent !== undefined) {
-            this.sendDelegateToParty("NEUTRAL", this.commingGlobalEvent.currentDelegate, game);
+            this.sendDelegateToParty("NEUTRAL", this.commingGlobalEvent.revealedDelegate, game);
         }
         this.distantGlobalEvent = this.globalEventDealer.draw();
         if (this.distantGlobalEvent !== undefined) {
-            this.sendDelegateToParty("NEUTRAL", this.distantGlobalEvent.currentDelegate, game);
+            this.sendDelegateToParty("NEUTRAL", this.distantGlobalEvent.revealedDelegate, game);
         }
     }
 
@@ -181,7 +181,11 @@ export class Turmoil  {
         });
         
         // 2 - Global Event
-        // TODO
+        if (this.currentGlobalEvent) {
+            this.currentGlobalEvent.resolve(game, this);
+            // TO DO: remove after testing phase
+            console.log(this.currentGlobalEvent);
+        }
 
         // 3 - New Gouvernment
         this.rulingParty = this.dominantParty;
@@ -198,7 +202,18 @@ export class Turmoil  {
         this.lobby = new Set<Player>(game.getPlayers());
 
         // 4 - Changing Time
-        // TODO
+        // 4.a - Coming Event is now Current event. Add neutral delegate.
+        this.currentGlobalEvent = this.commingGlobalEvent;
+        if (this.currentGlobalEvent !== undefined) {
+            this.sendDelegateToParty("NEUTRAL", this.currentGlobalEvent.currentDelegate, game);
+        }
+        // 4.b - Distant Event is now Coming Event
+        this.commingGlobalEvent = this.distantGlobalEvent;
+        // 4.c - Draw the new distant event and add neutral delegate
+        this.distantGlobalEvent = this.globalEventDealer.draw();
+        if (this.distantGlobalEvent !== undefined) {
+            this.sendDelegateToParty("NEUTRAL", this.distantGlobalEvent.revealedDelegate, game);
+        }
     }
 
     // Ruling Party changes

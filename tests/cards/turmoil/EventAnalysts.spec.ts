@@ -24,13 +24,12 @@ describe("EventAnalysts", function () {
         const game = new Game("foobar", [player], player, gameOptions);  
         expect(card.canPlay(player, game)).to.eq(false);
         if (game.turmoil !== undefined) {
-            let scientists = game.turmoil.getPartyByName(PartyName.SCIENTISTS);
-            if (scientists !== undefined) {
-                scientists.delegates.push(player, player);
-                expect(card.canPlay(player, game)).to.eq(true); 
-            }
+            game.turmoil.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
+            game.turmoil.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
+            game.turmoil.sendDelegateToParty(player, PartyName.SCIENTISTS, game);
+            expect(card.canPlay(player, game)).to.eq(true); 
             card.play(player, game);
-            expect(game.turmoil.getPlayerInfluence(player)).to.eq(1);
+            expect(game.turmoil.getPlayerInfluence(player)).to.eq(3);
         } 
     });
 });

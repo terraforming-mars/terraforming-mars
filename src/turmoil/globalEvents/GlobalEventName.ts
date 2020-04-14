@@ -16,5 +16,6 @@ export enum GlobalEventName {
     SPINOFF_PRODUCTS = "Spin-Off Products",
     ELECTION = "Election",
     AQUIFER_RELEASED_BY_PUBLIC_COUNCIL = "Aquifer Released by Public Council",
-    PARADIGM_BREAKDOWN = "Paradigm Breakdown"
+    PARADIGM_BREAKDOWN = "Paradigm Breakdown",
+    HOMEWORLD_SUPPORT = "Homeworld Support"
 }

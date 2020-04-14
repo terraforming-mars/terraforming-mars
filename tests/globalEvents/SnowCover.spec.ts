@@ -12,7 +12,7 @@ describe("SnowCover", function () {
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
-        const turmoil = new Turmoil();
+        const turmoil = new Turmoil(game);
         turmoil.chairman = player2;
         turmoil.dominantParty = new Kelvinists();
         turmoil.dominantParty.partyLeader = player2;

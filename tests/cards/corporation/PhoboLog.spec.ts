@@ -13,6 +13,6 @@ describe("PhoboLog", function () {
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
         expect(player.titanium).to.eq(10);
-        expect(player.titaniumValue).to.eq(4);
+        expect(player.getTitaniumValue(game)).to.eq(4);
     });
 });

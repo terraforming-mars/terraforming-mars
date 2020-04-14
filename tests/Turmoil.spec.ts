@@ -5,6 +5,9 @@ import { Player } from "../src/Player";
 import { PartyName } from "../src/turmoil/parties/PartyName";
 import { Game, GameOptions } from "../src/Game";
 import { BoardName } from "../src/BoardName";
+import { Unity } from '../src/turmoil/parties/Unity';
+import { Greens } from '../src/turmoil/parties/Greens';
+import { MarsFirst } from '../src/turmoil/parties/MarsFirst';
 
 describe("Turmoil", function () {
     it("Should initialize with right defaults", function () {
@@ -138,4 +141,31 @@ describe("Turmoil", function () {
             expect(turmoil.dominantParty).to.eq(turmoil.getPartyByName(PartyName.GREENS));
         }
     });
+
+    it("Check ruling policy", function () {
+        const player = new Player("test", Color.BLUE, false);
+        const gameOptions = {
+            draftVariant: false,
+            preludeExtension: false,
+            venusNextExtension: true,
+            coloniesExtension: false,
+            turmoilExtension: true,
+            boardName: BoardName.ORIGINAL,
+            showOtherPlayersVP: false,
+            customCorporationsList: [],
+            solarPhaseOption: false
+          } as GameOptions;
+        const game = new Game("foobar", [player,player], player, gameOptions);
+        if (game.turmoil) {
+            game.turmoil.rulingParty = new Unity();
+            expect(player.getTitaniumValue(game)).to.eq(4);
+            game.turmoil.rulingParty = new Greens();
+            game.addGreenery(player, '10');
+            expect(player.megaCredits).to.eq(4);
+            game.turmoil.rulingParty = new MarsFirst();
+            game.addGreenery(player, '11');
+            expect(player.steel).to.eq(1);
+        }
+    });
+
 });

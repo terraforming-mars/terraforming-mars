@@ -69,6 +69,7 @@ import { WildlifeDome } from "./cards/turmoil/WildlifeDome";
 import { VoteOfNoConfidence } from "./cards/turmoil/VoteOfNoConfidence";
 import { SupportedResearch } from "./cards/turmoil/SupportedResearch";
 import { Terraformer } from "./milestones/Terraformer";
+import { PartyName } from './turmoil/parties/PartyName';
 
 export interface GameOptions {
   draftVariant: boolean;
@@ -1015,6 +1016,16 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (space.tile !== undefined) {
         throw new Error("Selected space is occupied");
       }
+
+      // Turmoil Mars First ruling policy
+      if (this.turmoilExtension 
+        && this.turmoil !== undefined 
+        && this.turmoil.rulingParty !== undefined 
+        && this.turmoil.rulingParty.name === PartyName.MARS
+        && spaceType !== SpaceType.COLONY) {
+          player.setResource(Resources.STEEL, 1);
+      }      
+
       // Hellas special requirements ocean tile
       if (space.id === SpaceName.HELLAS_OCEAN_TILE 
           && this.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES
@@ -1088,6 +1099,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.addTile(player, spaceType, this.getSpace(spaceId), {
         tileType: TileType.GREENERY
       });
+      // Turmoil Greens ruling policy
+      if (this.turmoilExtension 
+        && this.turmoil !== undefined 
+        && this.turmoil.rulingParty !== undefined 
+        && this.turmoil.rulingParty.name === PartyName.GREENS) {
+          player.setResource(Resources.MEGACREDITS, 4);
+      }
       return this.increaseOxygenLevel(player, 1);
     }
     public addCityTile(

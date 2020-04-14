@@ -37,7 +37,7 @@ export class RotatorImpacts implements IActionCard,IProjectCard, IResourceCard {
                 player.canUseHeatAsMegaCredits,
                 6,
                 (htp) => {
-                    if (htp.heat + htp.megaCredits + htp.titanium * player.titaniumValue < 6) {
+                    if (htp.heat + htp.megaCredits + htp.titanium * player.getTitaniumValue(game) < 6) {
                         throw new Error('Not enough for action');
                     }
                     player.megaCredits -= htp.megaCredits;

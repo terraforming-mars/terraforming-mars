@@ -82,6 +82,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public tradesThisTurn: number = 0;
     public colonyTradeOffset: number = 0;
     public colonyTradeDiscount: number = 0;
+    private turmoilScientistsActionUsed: boolean = false;
 
     constructor(
         public name: string,
@@ -714,6 +715,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public runProductionPhase(): void {
       this.actionsThisGeneration.clear();
       this.tradesThisTurn = 0;
+      this.turmoilScientistsActionUsed = false;
       this.megaCredits += this.megaCreditProduction + this.terraformRating;
       this.heat += this.energy;
       this.heat += this.heatProduction;
@@ -1395,6 +1397,47 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       );
     }
 
+    private turmoilKelvinistsAction(game: Game): PlayerInput {
+      return new SelectOption(
+        "Pay 10 M€ to increase your heat and energy production 1 step (Turmoil Kelvinists)", 
+        () => {
+          game.addSelectHowToPayInterrupt(this, 10, false, false, "Select how to pay for Turmoil Kelvinists action");
+          this.setProduction(Resources.ENERGY);
+          this.setProduction(Resources.HEAT);
+          game.log(
+            LogMessageType.DEFAULT,
+            "${0} used Turmoil Kelvinists action",
+            new LogMessageData(LogMessageDataType.PLAYER, this.id),
+          );
+          return undefined;
+        }
+      );
+    } 
+
+    private turmoilScientistsAction(game: Game): PlayerInput {
+      return new SelectOption(
+        "Pay 10 M€ to draw 3 cards (Turmoil Scientists)", 
+        () => {
+          game.addSelectHowToPayInterrupt(this, 10, false, false, "Select how to pay for Turmoil Scientists draw");
+          this.turmoilScientistsActionUsed = true;
+          this.cardsInHand.push(
+            game.dealer.dealCard(),
+            game.dealer.dealCard(),
+            game.dealer.dealCard()
+          );
+          game.log(
+            LogMessageType.DEFAULT,
+            "${0} used Turmoil Scientists draw action",
+            new LogMessageData(LogMessageDataType.PLAYER, this.id),
+          );
+          return undefined;
+        }
+      );
+    } 
+
+
+
+
     private convertHeatIntoTemperature(game: Game): PlayerInput {
       let heatAmount: number;
       let floaterAmount: number;
@@ -1856,6 +1899,29 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             this.convertHeatIntoTemperature(game)
         );
       }
+
+      // Turmoil Scientists capacity
+      if (this.canAfford(10) 
+        && game.turmoilExtension 
+        && game.turmoil !== undefined 
+        && game.turmoil.rulingParty !== undefined 
+        && game.turmoil.rulingParty.name === PartyName.SCIENTISTS
+        && !this.turmoilScientistsActionUsed) {
+          action.options.push(
+            this.turmoilScientistsAction(game)
+        );
+      }
+
+      // Turmoil Kelvinists capacity
+      if (this.canAfford(10) 
+        && game.turmoilExtension 
+        && game.turmoil !== undefined 
+        && game.turmoil.rulingParty !== undefined 
+        && game.turmoil.rulingParty.name === PartyName.KELVINISTS) {
+          action.options.push(
+            this.turmoilKelvinistsAction(game)
+        );
+      }      
 
       if (this.canAfford(8) && !game.allMilestonesClaimed()) {
         const remainingMilestones = new OrOptions();

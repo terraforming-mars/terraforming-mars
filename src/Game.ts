@@ -604,7 +604,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.incrementFirstPlayer();
 
       this.players.forEach((player) => {
-        player.terraformRatingAtGenerationStart = player.terraformRating;
+        player.terraformRatingAtGenerationStart = player.getTerraformRating();
       });
 
       if (this.draftVariant) {
@@ -859,7 +859,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
       this.oxygenLevel += steps;
       if (!isWorldGov) {
-        player.terraformRating += steps;
+        player.increaseTerraformRatingSteps(steps, this);
       }
       if (this.oxygenLevel === 8 || (steps === 2 && this.oxygenLevel === 9)) {
         return this.increaseTemperature(player, 1, isWorldGov);
@@ -882,7 +882,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
     this.venusScaleLevel += 2 * steps;
     if (!isWorldGov) {
-      player.terraformRating += steps;
+      player.increaseTerraformRatingSteps(steps, this);
     }  
 
     // Check for Aphrodite corporation
@@ -903,7 +903,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         || ((steps === 2 || steps === 3) && this.venusScaleLevel === 18) 
         || (steps === 3 && this.venusScaleLevel === 20)
     ) {
-      player.terraformRating++;
+      player.increaseTerraformRating(this);
     }    
 
     return undefined;
@@ -937,7 +937,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
       this.temperature += 2 * steps;
       if (!isWorldGov) {
-        player.terraformRating += steps;
+        player.increaseTerraformRatingSteps(steps, this);
       }
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
       if (!isWorldGov) {
@@ -1127,7 +1127,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         tileType: TileType.OCEAN
       }, isWorldGov);
       if (!isWorldGov) {
-        player.terraformRating++;
+        player.increaseTerraformRating(this);
       }  
     }
     public getPlayers(): Array<Player> {
@@ -1225,7 +1225,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private setupSolo() {
-      this.players[0].terraformRating = 14;
+      this.players[0].setTerraformRating(14);
       this.players[0].terraformRatingAtGenerationStart = 14;
       // Single player add neutral player
       // put 2 neutrals cities on board with adjacent forest

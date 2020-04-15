@@ -22,7 +22,7 @@ export class VoteOfNoConfidence implements IProjectCard {
     public play(player: Player, game: Game) {
         if (game.turmoil !== undefined) {
             game.turmoil.chairman! = player;
-            player.terraformRating += 1;
+            player.increaseTerraformRating(game);
         }
         return undefined;
     }

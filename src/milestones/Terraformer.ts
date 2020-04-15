@@ -7,6 +7,6 @@ export class Terraformer implements IMilestone {
     public terraformRating: number = 35;
     public description: string = "Having a terraform rating of at least "+this.terraformRating;
     public canClaim(player: Player, _game: Game): boolean {
-        return player.terraformRating >= this.terraformRating;
+        return player.getTerraformRating() >= this.terraformRating;
     }   
 }

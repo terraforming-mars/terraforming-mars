@@ -12,8 +12,8 @@ export class ReleaseOfInertGases implements IProjectCard {
     public name: CardName = CardName.RELEASE_OF_INERT_GASES;
     public cardType: CardType = CardType.EVENT;
 
-    public play(player: Player, _game: Game) {
-        player.terraformRating += 2;
+    public play(player: Player, game: Game) {
+        player.increaseTerraformRatingSteps(2, game);
         return undefined;
     }
 }

@@ -14,7 +14,7 @@ export class NitrogenRichAsteroid implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {
-        player.terraformRating += 2;
+        player.increaseTerraformRatingSteps(2, game);
         if (player.getTagCount(Tags.PLANT) < 3) {
             player.setProduction(Resources.PLANTS);
         } else {

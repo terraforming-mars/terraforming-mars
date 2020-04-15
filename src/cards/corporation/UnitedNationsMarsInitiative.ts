@@ -14,11 +14,11 @@ export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard
         return undefined;
     }
     public canAct(player: Player): boolean {
-        return player.terraformRating > player.terraformRatingAtGenerationStart && player.canAfford(3); 
+        return player.getTerraformRating() > player.terraformRatingAtGenerationStart && player.canAfford(3); 
     }
-    public action(player: Player, _game: Game) {
+    public action(player: Player, game: Game) {
         player.megaCredits -= 3;
-        player.terraformRating++;
+        player.increaseTerraformRating(game);
         return undefined;
     }
 }

@@ -16,7 +16,7 @@ describe("TerralabsResearch", function () {
         const play = card.play(player);
         expect(play).to.eq(undefined);
         player.megaCredits = 10;
-        expect(player.terraformRating).to.eq(19);
+        expect(player.getTerraformRating()).to.eq(19);
         player.playedCards.push(card2);
         const action = card2.action(player, game);
         expect(action).not.to.eq(undefined);

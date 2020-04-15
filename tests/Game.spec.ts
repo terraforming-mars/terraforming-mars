@@ -97,19 +97,19 @@ describe("Game", function () {
         const game = new Game("vp_game", [player,player2], player);
 
         (game as any).temperature = 6;
-        var initialTR = player.terraformRating;
+        var initialTR = player.getTerraformRating();
         game.increaseTemperature(player, 2);
 
         expect(game.getTemperature()).to.eq(constants.MAX_TEMPERATURE);
-        expect(player.terraformRating).to.eq(initialTR + 1);
+        expect(player.getTerraformRating()).to.eq(initialTR + 1);
 
-        initialTR = player.terraformRating;
+        initialTR = player.getTerraformRating();
         (game as any).temperature = 6;
 
         // Try 3 steps increase
         game.increaseTemperature(player, 3);
         expect(game.getTemperature()).to.eq(constants.MAX_TEMPERATURE);
-        expect(player.terraformRating).to.eq(initialTR + 1);
+        expect(player.getTerraformRating()).to.eq(initialTR + 1);
     });
 
     it("Disallows to set oxygenLevel more than allowed maximum", function () {
@@ -118,11 +118,11 @@ describe("Game", function () {
         const game = new Game("vp_game", [player,player2], player);
 
         (game as any).oxygenLevel = 13;
-        const initialTR = player.terraformRating;
+        const initialTR = player.getTerraformRating();
         game.increaseOxygenLevel(player, 2);
 
         expect(game.getOxygenLevel()).to.eq(constants.MAX_OXYGEN_LEVEL);
-        expect(player.terraformRating).to.eq(initialTR + 1);
+        expect(player.getTerraformRating()).to.eq(initialTR + 1);
     });
 
     it ("Draft round for 2 players", function () {

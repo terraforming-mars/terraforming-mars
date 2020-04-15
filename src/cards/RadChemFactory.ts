@@ -5,6 +5,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
+import { Game } from '../Game';
 
 export class RadChemFactory implements IProjectCard {
     public cost: number = 8;
@@ -15,9 +16,9 @@ export class RadChemFactory implements IProjectCard {
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.ENERGY) >= 1;
     }
-    public play(player: Player) {
+    public play(player: Player, game: Game) {
         player.setProduction(Resources.ENERGY,-1);
-        player.terraformRating += 2;
+        player.increaseTerraformRatingSteps(2, game);
         return undefined;
     }
 }

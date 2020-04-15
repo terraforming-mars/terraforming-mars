@@ -20,8 +20,8 @@ export class PROffice implements IProjectCard {
         return false;
     }
 
-    public play(player: Player) {
-        player.terraformRating += 1;
+    public play(player: Player, game: Game) {
+        player.increaseTerraformRating(game);
         let amount = player.getTagCount(Tags.EARTH) + 1;
         player.setResource(Resources.MEGACREDITS, amount);
         return undefined;

@@ -69,7 +69,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public draftedCards: Array<IProjectCard> = [];
     private generationPlayed: Map<string, number> = new Map<string, number>();
     public actionsTakenThisRound: number = 0;
-    public terraformRating: number = 20;
+    private terraformRating: number = 20;
     public terraformRatingAtGenerationStart: number = 20;
     public victoryPointsBreakdown = new VictoryPointsBreakdown();
     private actionsThisGeneration: Set<string> = new Set<string>();
@@ -102,6 +102,47 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
     public increaseTitaniumValue() {
       this.titaniumValue++;
+    }
+
+    public getTerraformRating(): number {
+      return this.terraformRating;
+    }
+
+    public decreaseTerraformRating() {
+      this.terraformRating--;
+    }    
+
+    public increaseTerraformRating(game: Game) {
+      if (!game.turmoilExtension) {
+        this.terraformRating++;
+        return;
+      }
+
+      // Turmoil Reds capacity
+      if (game.turmoilExtension 
+        && game.turmoil !== undefined 
+        && game.turmoil.rulingParty !== undefined 
+        && game.turmoil.rulingParty.name === PartyName.REDS) {
+          if (this.canAfford(3)) 
+          {
+            game.addSelectHowToPayInterrupt(this, 3, false, false, "Select how to pay for TR increase");
+            this.terraformRating++;
+            return;
+          } else {
+            return;
+          }; 
+      }
+      this.terraformRating++;
+    }
+
+    public increaseTerraformRatingSteps(value: number, game: Game) {
+      for (let i = 0; i < value; i++) {
+        this.increaseTerraformRating(game);
+      }
+    }
+
+    public setTerraformRating(value: number) {
+      return this.terraformRating = value;
     }
 
     public isCorporation(corporationName: CorporationName): boolean {

@@ -622,7 +622,36 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
       }
     });
 
-    return {chairman: chairman, ruling: ruling, dominant: dominant, parties: parties, lobby: lobby, reserve: reserve};
+    let distant;
+    if (game.turmoil.distantGlobalEvent) {
+      distant = {name: game.turmoil.distantGlobalEvent.name, 
+        revealed: game.turmoil.distantGlobalEvent.revealedDelegate, 
+        current: game.turmoil.distantGlobalEvent.currentDelegate};
+    }
+
+    let comming;
+    if (game.turmoil.commingGlobalEvent) {
+      comming = {name: game.turmoil.commingGlobalEvent.name, 
+        revealed: game.turmoil.commingGlobalEvent.revealedDelegate, 
+        current: game.turmoil.commingGlobalEvent.currentDelegate};
+    }
+
+    let current;
+    if (game.turmoil.currentGlobalEvent) {
+      current = {name: game.turmoil.currentGlobalEvent.name, 
+        revealed: game.turmoil.currentGlobalEvent.revealedDelegate, 
+        current: game.turmoil.currentGlobalEvent.currentDelegate};
+    }
+
+    return {chairman: chairman, 
+      ruling: ruling, 
+      dominant: dominant, 
+      parties: parties, 
+      lobby: lobby, 
+      reserve: reserve, 
+      distant: distant,
+      comming: comming,
+      current: current};
   }
   else {
     return undefined;

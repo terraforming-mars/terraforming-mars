@@ -1,49 +1,35 @@
 import Vue from "vue";
 
-import { PartyName } from '../turmoil/parties/PartyName';
-
 export const Turmoil = Vue.component("turmoil", {
     props: [
       "turmoil"
     ],
-    data: function () {
-      return {
-        MARS : PartyName.MARS,
-        SCIENTISTS: PartyName.SCIENTISTS
-      };
-    },
     methods: {
-        getMars:(): string => {
-          return PartyName.MARS;
-        },
-        getScientists:(): string => {
-          return PartyName.SCIENTISTS;
-        }
     },
     template: `
     <div class="turmoil">
       <div class="events-board">
-          <div class="global-event">
-            <div class="event-title">Event title here</div>
+          <div v-if="turmoil.distant" class="global-event">
+            <div class="event-title">{{ turmoil.distant.name }}</div>
             <div class="event-parties">
-              <div class="event-party">top party</div>
-              <div class="event-party">bottom party</div>
+              <div class="event-party">{{ turmoil.distant.revealed }}</div>
+              <div class="event-party">{{ turmoil.distant.current }}</div>
             </div>
             <div class="event-content">Event content here with icons or/and with text.</div>
           </div>
-          <div class="global-event">
-            <div class="event-title">Event title here</div>
+          <div v-if="turmoil.comming" class="global-event">
+            <div class="event-title">{{ turmoil.comming.name }}</div>
             <div class="event-parties">
-              <div class="event-party">top party</div>
-              <div class="event-party">bottom party</div>
+              <div class="event-party">{{ turmoil.comming.revealed }}</div>
+              <div class="event-party">{{ turmoil.comming.current }}</div>
             </div>
             <div class="event-content">Event content here with icons or/and with text.</div>
           </div>
-          <div class="global-event global-event-current">
-            <div class="event-title">Event title here</div>
+          <div v-if="turmoil.current" class="global-event global-event-current">
+            <div class="event-title">{{ turmoil.current.name }}</div>
             <div class="event-parties">
-              <div class="event-party">top party</div>
-              <div class="event-party">bottom party</div>
+              <div class="event-party">{{ turmoil.current.revealed }}</div>
+              <div class="event-party">{{ turmoil.current.current }}</div>
             </div>
             <div class="event-content">Event content here with icons or/and with text.</div>
           </div>

@@ -281,4 +281,15 @@ export class Turmoil  {
 
         return false;
     }
+
+    // List players present in the reserve
+    public getPresentPlayers(): Array<Player | "NEUTRAL"> {
+        return Array.from(new Set(this.delegate_reserve));
+    }
+
+    // Return number of delegate
+    public getDelegates(player: Player | "NEUTRAL"): number {
+        let delegates = this.delegate_reserve.filter(p => p === player).length;
+        return delegates;
+    }
 }    

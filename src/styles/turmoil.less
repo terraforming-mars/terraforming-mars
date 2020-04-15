@@ -23,6 +23,13 @@
     filter: drop-shadow(0px 1px 1px darkred) drop-shadow(0px -1px 1px red) drop-shadow(0px 0px 2px black);
 }
 
+.party {
+    background: #ddd;
+    padding: 0px 10px 0px 10px;
+    border: 1px solid #666;
+    border-radius: 20px;
+}
+
 .influence {
     display: inline-block;
     background-image: url("./assets/delegate.png");
@@ -51,3 +58,221 @@
     vertical-align: middle;
     filter: drop-shadow(0px 1px 1px #222) drop-shadow(0px -1px 1px #222);
 }
+
+/* fonts */
+@font-face {
+    font-family: Prototype;
+    src: url("./assets/Prototype.ttf");
+}
+  
+.turmoil {
+    margin-left: auto;
+    margin-right: auto;
+    font-family: Prototype;
+    position: relative;
+    color: #000000;
+    font-size: medium;
+    line-height: initial;
+    box-sizing: initial;
+    text-align: center;
+    width: 1000px;
+    display: inline-block;
+}
+  
+.turmoil::after {
+    content: "";
+    background: url("./assets/mars.png") no-repeat center center;
+    width: 100%;
+    height: 100%;
+    background-size: 1710px;
+    border-radius: 20px;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+.events-board {
+    display: inline-block;
+    width: 665px;
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+    box-sizing: initial;
+}
+  
+.global-event {
+    display: inline-block;
+    width: 205px;
+    background: linear-gradient(lightyellow, lightblue, lightblue);
+    height: 260px;
+    padding: 5px;
+    border: 1px solid #444;
+    border-radius: 10px;
+    box-shadow: 0 2px 2px rgba(0,0,0,.5);
+}
+  
+.global-event-current {
+    filter: brightness(110%);
+}
+  
+.event-title {
+    height: 60px;
+    line-height: 60px;
+}
+.event-parties {
+    margin-bottom: 10px;
+}
+  
+.event-party {
+    display: inline-block;
+    width: 100px;
+    background-color: rgba(0,0,0,.2);
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+}
+  
+.turmoil-board {
+    display: inline-block;
+    vertical-align: bottom;
+    padding: 10px;
+    border-radius: 15px;
+    text-align: center;
+}
+  
+.grid-parties {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    gap:10px;
+}
+  
+.board-party {
+    width: 150px;
+    height: 160px;
+    border-radius: 0 0 10px 10px;
+}
+  
+.grid-delegates {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+    gap:5px;
+}
+  
+.delegate-spot {
+    width: 40px;
+    height:40px;
+    background: linear-gradient(transparent, rgba(0,0,0,.1));
+}
+  
+.party-name {
+    height: 20px;
+    line-height: 20px;
+}
+  
+.grid-leaders {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    gap:10px;
+}
+  
+.party-bonus {
+    line-height: 30px;
+}
+  
+.leader-spot {
+    width: 40px;
+    padding: 7px 55px 0 55px;
+    height:45px;
+    background: linear-gradient(transparent, rgba(0,0,0,.2));
+    z-index: 2;
+}
+  
+.turmoil-header {
+    display: flex;
+    border-bottom: 5px solid rgba(0,0,0,.3);
+}
+  
+.grid-lobby {
+    display: grid;
+    width: 320px;
+    grid-template-columns: auto auto auto auto auto auto;
+}
+  
+.lobby-spot {
+    width: 44px;
+    height: 30px;
+    padding: 5px;
+    background: linear-gradient(rgba(0,0,0,.5), transparent);
+    border-radius: 10px 10px 0 0;
+}
+.chairman-spot {
+    width: 60px;
+    height: 35px;
+    padding: 10px;
+    background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.3));
+    border-radius: 20px 20px 0 0;
+}
+  
+.label-lobby {
+    width:115px;
+    margin: auto;
+}
+
+.label-5mc {
+    width: 110px;
+    margin: auto;
+}
+  
+.player-token {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 2px rgba(0,0,0,.5);
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    text-shadow: 0 0  2px black;
+    border-top: 2px solid rgb(221,221,221);
+    border-left: 2px solid rgb(221,221,221);
+    border-bottom: 2px solid rgb(137,137,137);
+    border-right: 2px solid rgb(137,137,137);
+}
+  
+.player-token-new-leader {
+    box-shadow:0 2px 5px 5px #fff;
+}
+  
+.red {background-color: red}
+.green {background-color: green}
+.blue {background-color: blue}
+.yellow {background-color: rgba(255, 255, 0, 0.726)}
+.black {background-color: #444}
+.neutral {background-color: #ccc;}
+
+.board-party--marsfirst { background: rgb(203,156,131); }
+.board-party--scientists { background: rgb(244,231,204); }
+.board-party--unity { background: rgb(162,190,225); }
+.board-party--kelvinists { background: rgb(183,108,108); }
+.board-party--reds { background: rgb(258,165,169); }
+.board-party--greens { background: rgb(181,217,179); }
+
+.leader-spot--marsfirst { background: linear-gradient(rgba(0,0,0,.3), rgb(203,156,131)); }
+.leader-spot--scientists { background: linear-gradient(rgba(0,0,0,.3), rgb(244,231,204)); }
+.leader-spot--unity { background: linear-gradient(rgba(0,0,0,.3), rgb(162,190,225)); }
+.leader-spot--kelvinists { background: linear-gradient(rgba(0,0,0,.3), rgb(183,108,108)); }
+.leader-spot--reds { background: linear-gradient(rgba(0,0,0,.3), rgb(258,165,169)); }
+.leader-spot--greens { background: linear-gradient(rgba(0,0,0,.3), rgb(181,217,179)); }
+
+.party-name--marsfirst { background: rgb(200,125,33); }
+.party-name--scientists { background: #eee; }
+.party-name--unity { background: rgb(59,154,227); }
+.party-name--kelvinists { background: rgb(165,81,9); }
+.party-name--reds { background: rgb(231,109,109); }
+.party-name--greens { background: rgb(9,170,9); }

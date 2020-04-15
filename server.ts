@@ -31,6 +31,7 @@ import { CardType } from './src/cards/CardType';
 import { ClaimedMilestoneModel } from "./src/models/ClaimedMilestoneModel";
 import { FundedAwardModel } from "./src/models/FundedAwardModel";
 import { Database } from './src/database/Database';
+import { PartyModel, DelegatesModel, TurmoilModel } from './src/models/TurmoilModel';
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
@@ -436,7 +437,8 @@ function getPlayer(player: Player, game: Game): string {
     showOtherPlayersVP: game.showOtherPlayersVP,
     actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
     fleetSize: player.fleetSize,
-    tradesThisTurn: player.tradesThisTurn
+    tradesThisTurn: player.tradesThisTurn,
+    turmoil: getTurmoil(game)
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -569,7 +571,8 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       showOtherPlayersVP: game.showOtherPlayersVP,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
       fleetSize: player.fleetSize,
-      tradesThisTurn: player.tradesThisTurn
+      tradesThisTurn: player.tradesThisTurn,
+      turmoil: getTurmoil(game)
     } as PlayerModel;
   });
 }
@@ -582,6 +585,79 @@ function getColonies(colonies: Array<IColony>): Array<ColonyModel> {
         trackPosition: colony.trackPosition,
         visitor: colony.visitor === undefined ? undefined : colony.visitor.color
     }));
+}
+
+function getTurmoil(game: Game): TurmoilModel | undefined {
+  if (game.turmoilExtension && game.turmoil){
+    const parties = getParties(game);
+    let chairman, dominant, ruling;
+    if (game.turmoil.chairman){
+      if (game.turmoil.chairman === "NEUTRAL") {
+        chairman = Color.NEUTRAL;
+      }
+      else {
+        chairman = game.turmoil.chairman.color;
+      }
+    }
+    if (game.turmoil.dominantParty){
+      dominant = game.turmoil.dominantParty.name;
+    }
+    if (game.turmoil.rulingParty){
+      ruling = game.turmoil.rulingParty.name;
+    }
+
+    let lobby = new Array<Color>();
+    game.turmoil.lobby.forEach(player => {
+      lobby.push(player.color);
+    });
+
+    let reserve = new Array<DelegatesModel>();
+    game.turmoil.getPresentPlayers().forEach(player => {
+      const number = game.turmoil!.getDelegates(player);
+      if (player != "NEUTRAL") {
+        reserve.push({color: player.color, number: number});
+      }
+      else {
+        reserve.push({color: Color.NEUTRAL, number: number});
+      }
+    });
+
+    return {chairman: chairman, ruling: ruling, dominant: dominant, parties: parties, lobby: lobby, reserve: reserve};
+  }
+  else {
+    return undefined;
+  }
+
+}
+
+function getParties(game: Game): Array<PartyModel> | undefined{
+  if (game.turmoilExtension && game.turmoil){
+    return game.turmoil.parties.map(function(party) {
+      let delegates = new Array<DelegatesModel>();
+      party.getPresentPlayers().forEach(player => {
+        const number = party.getDelegates(player);
+        if (player != "NEUTRAL") {
+          delegates.push({color: player.color, number: number});
+        }
+        else {
+          delegates.push({color: Color.NEUTRAL, number: number});
+        }
+      });
+      let partyLeader;
+      if (party.partyLeader) {
+        if (party.partyLeader === "NEUTRAL") {
+          partyLeader = Color.NEUTRAL;
+        }
+        else {
+          partyLeader = party.partyLeader.color;
+        }
+      }
+      return {name: party.name, description: party.description, partyLeader: partyLeader, delegates: delegates};
+    });
+  }
+  else {
+    return undefined;
+  }
 }
 
 // Oceans can't be owned so they shouldn't have a color associated with them

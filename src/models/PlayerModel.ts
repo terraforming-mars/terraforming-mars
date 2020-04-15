@@ -3,6 +3,7 @@ import { ColonyModel } from "./ColonyModel";
 import { Color } from "../Color";
 import { VictoryPointsBreakdown } from "../VictoryPointsBreakdown";
 import { ITagCount } from '../ITagCount';
+import { TurmoilModel } from "./TurmoilModel";
 
 export interface PlayerModel {
     boardName: string;
@@ -32,6 +33,7 @@ export interface PlayerModel {
     titanium: number;
     titaniumProduction: number;
     titaniumValue: number;
+    turmoil: TurmoilModel | undefined;
     venusNextExtension: boolean;
     venusScaleLevel: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;

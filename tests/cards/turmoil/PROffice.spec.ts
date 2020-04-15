@@ -36,8 +36,8 @@ describe("PROffice", function () {
             }
         } 
         player.playedCards.push(card2, card3);
-        card.play(player);
+        card.play(player, game);
         expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
-        expect(player.terraformRating).to.eq(15);
+        expect(player.getTerraformRating()).to.eq(15);
     });
 });

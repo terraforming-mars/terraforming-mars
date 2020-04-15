@@ -16,10 +16,10 @@ export class MagneticFieldDome implements IProjectCard {
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.ENERGY) >= 2;
     }
-    public play(player: Player, _game: Game) {
+    public play(player: Player, game: Game) {
         player.setProduction(Resources.ENERGY,-2);
         player.setProduction(Resources.PLANTS);
-        player.terraformRating++;
+        player.increaseTerraformRating(game);
         return undefined;
     }
 }

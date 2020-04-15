@@ -11,7 +11,7 @@ export class TerraformingContract implements IProjectCard {
     public name: CardName = CardName.TERRAFORMING_CONTRACT;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player): boolean {
-        return player.terraformRating >= 25 ;
+        return player.getTerraformRating() >= 25 ;
       }
     public play(player: Player) {
         player.setProduction(Resources.MEGACREDITS,4);

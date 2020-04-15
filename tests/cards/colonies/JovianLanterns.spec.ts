@@ -12,7 +12,7 @@ describe("JovianLanterns", function () {
         const game = new Game("foobar", [player,player2], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.terraformRating).to.eq(21);
+        expect(player.getTerraformRating()).to.eq(21);
     });
     it("Should act", function () {
         const card = new JovianLanterns();

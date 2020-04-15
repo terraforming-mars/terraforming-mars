@@ -177,7 +177,7 @@ export class Turmoil  {
     public endGeneration(game: Game): void {
         // 1 - All player lose 1 TR
         game.getPlayers().forEach(player => {
-            player.terraformRating -= 1;
+            player.decreaseTerraformRating();
         });
         
         // 2 - Global Event
@@ -225,7 +225,7 @@ export class Turmoil  {
             // Change the chairman
             this.chairman = this.rulingParty.partyLeader;
             if (this.chairman && this.chairman instanceof Player) {
-                this.chairman.terraformRating += 1;
+                this.chairman.increaseTerraformRating(game);
             }
             else {
                 console.error("No chairman");

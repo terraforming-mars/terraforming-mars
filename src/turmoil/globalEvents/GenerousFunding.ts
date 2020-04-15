@@ -11,7 +11,7 @@ export class GenerousFunding implements IGlobalEvent {
     public currentDelegate = PartyName.UNITY;
     public resolve(game: Game, turmoil: Turmoil) {
         game.getPlayers().forEach(player => {
-            player.setResource(Resources.MEGACREDITS, 2 * (Math.min(5, Math.floor((player.terraformRating - 15) / 5)) + turmoil.getPlayerInfluence(player)), undefined, undefined, true);
+            player.setResource(Resources.MEGACREDITS, 2 * (Math.min(5, Math.floor((player.getTerraformRating() - 15) / 5)) + turmoil.getPlayerInfluence(player)), undefined, undefined, true);
         });    
     }
 }    

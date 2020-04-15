@@ -9,7 +9,7 @@ export class UNMIContractor extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: CardName = CardName.UNMI_CONTRACTOR;
     public play(player: Player, game: Game) {
-        player.terraformRating += 3;
+        player.increaseTerraformRatingSteps(3, game);
 	      player.cardsInHand.push(game.dealer.dealCard());
 	      return undefined;   
     }

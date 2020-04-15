@@ -23,7 +23,7 @@ describe("Revolution", function () {
         
         turmoil.dominantParty.delegates.push(player2);
         card.resolve(game, turmoil);
-        expect(player.terraformRating).to.eq(19);
-        expect(player2.terraformRating).to.eq(18);
+        expect(player.getTerraformRating()).to.eq(19);
+        expect(player2.getTerraformRating()).to.eq(18);
     });
 });

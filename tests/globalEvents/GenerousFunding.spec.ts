@@ -21,8 +21,8 @@ describe("GenerousFunding", function () {
         turmoil.dominantParty.delegates.push(player2);
         player.megaCredits = 10;
         player2.megaCredits = 10;
-        player.terraformRating = 25;
-        player2.terraformRating = 50;
+        player.setTerraformRating(25);
+        player2.setTerraformRating(50);
         player
         card.resolve(game, turmoil);
         expect(player.getResource(Resources.MEGACREDITS)).to.eq(14);

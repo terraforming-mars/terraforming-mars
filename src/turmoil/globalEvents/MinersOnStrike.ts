@@ -8,6 +8,7 @@ import { Turmoil } from '../Turmoil';
 
 export class MinersOnStrike implements IGlobalEvent {
     public name = GlobalEventName.MINERS_ON_STRIKE;
+    public description = "Lose 1 titanium for each Jovian tag (max 5, then reduced by influence).";
     public revealedDelegate = PartyName.MARS;
     public currentDelegate = PartyName.GREENS;
     public resolve(game: Game, turmoil: Turmoil) {

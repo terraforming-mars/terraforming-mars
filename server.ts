@@ -624,26 +624,36 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
 
     let distant;
     if (game.turmoil.distantGlobalEvent) {
-      distant = {name: game.turmoil.distantGlobalEvent.name, 
+      distant = {
+        name: game.turmoil.distantGlobalEvent.name, 
+        description: game.turmoil.distantGlobalEvent.description,
         revealed: game.turmoil.distantGlobalEvent.revealedDelegate, 
-        current: game.turmoil.distantGlobalEvent.currentDelegate};
+        current: game.turmoil.distantGlobalEvent.currentDelegate
+      };
     }
 
     let comming;
     if (game.turmoil.commingGlobalEvent) {
-      comming = {name: game.turmoil.commingGlobalEvent.name, 
+      comming = {
+        name: game.turmoil.commingGlobalEvent.name, 
+        description: game.turmoil.commingGlobalEvent.description,
         revealed: game.turmoil.commingGlobalEvent.revealedDelegate, 
-        current: game.turmoil.commingGlobalEvent.currentDelegate};
+        current: game.turmoil.commingGlobalEvent.currentDelegate}
+      ;
     }
 
     let current;
     if (game.turmoil.currentGlobalEvent) {
-      current = {name: game.turmoil.currentGlobalEvent.name, 
+      current = {
+        name: game.turmoil.currentGlobalEvent.name, 
+        description: game.turmoil.currentGlobalEvent.description,
         revealed: game.turmoil.currentGlobalEvent.revealedDelegate, 
-        current: game.turmoil.currentGlobalEvent.currentDelegate};
+        current: game.turmoil.currentGlobalEvent.currentDelegate
+      };
     }
 
-    return {chairman: chairman, 
+    return {
+      chairman: chairman, 
       ruling: ruling, 
       dominant: dominant, 
       parties: parties, 
@@ -651,7 +661,8 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
       reserve: reserve, 
       distant: distant,
       comming: comming,
-      current: current};
+      current: current
+    };
   }
   else {
     return undefined;
@@ -681,7 +692,12 @@ function getParties(game: Game): Array<PartyModel> | undefined{
           partyLeader = party.partyLeader.color;
         }
       }
-      return {name: party.name, description: party.description, partyLeader: partyLeader, delegates: delegates};
+      return {
+        name: party.name, 
+        description: party.description, 
+        partyLeader: partyLeader, 
+        delegates: delegates
+      };
     });
   }
   else {

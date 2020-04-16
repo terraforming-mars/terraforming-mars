@@ -7,6 +7,7 @@ import { Turmoil } from '../Turmoil';
 
 export class EcoSabotage implements IGlobalEvent {
     public name = GlobalEventName.ECO_SABOTAGE;
+    public description = "Lose all plants except 3 + influence.";
     public revealedDelegate = PartyName.GREENS;
     public currentDelegate = PartyName.REDS;
     public resolve(game: Game, turmoil: Turmoil) {

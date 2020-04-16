@@ -47,28 +47,28 @@ export const Turmoil = Vue.component("turmoil", {
     <div class="turmoil">
       <div class="events-board">
           <div v-if="turmoil.distant" class="global-event">
-            <div class="event-title">{{ turmoil.distant.name }}</div>
+            <div class="event-title">{{ turmoil.distant.name.toUpperCase() }}</div>
             <div class="event-parties">
-              <div class="event-party">{{ turmoil.distant.revealed }}</div>
-              <div class="event-party">{{ turmoil.distant.current }}</div>
+              <div class="event-party">{{ turmoil.distant.revealed.toUpperCase() }}</div>
+              <div class="event-party">{{ turmoil.distant.current.toUpperCase() }}</div>
             </div>
-            <div class="event-content">Event content here with icons or/and with text.</div>
+            <div class="event-content">{{ turmoil.distant.description }}</div>
           </div>
           <div v-if="turmoil.comming" class="global-event">
-            <div class="event-title">{{ turmoil.comming.name }}</div>
+            <div class="event-title">{{ turmoil.comming.name.toUpperCase() }}</div>
             <div class="event-parties">
-              <div class="event-party">{{ turmoil.comming.revealed }}</div>
-              <div class="event-party">{{ turmoil.comming.current }}</div>
+              <div class="event-party">{{ turmoil.comming.revealed.toUpperCase() }}</div>
+              <div class="event-party">{{ turmoil.comming.current.toUpperCase() }}</div>
             </div>
-            <div class="event-content">Event content here with icons or/and with text.</div>
+            <div class="event-content">{{ turmoil.comming.description }}</div>
           </div>
           <div v-if="turmoil.current" class="global-event global-event-current">
-            <div class="event-title">{{ turmoil.current.name }}</div>
+            <div class="event-title">{{ turmoil.current.name.toUpperCase() }}</div>
             <div class="event-parties">
-              <div class="event-party">{{ turmoil.current.revealed }}</div>
-              <div class="event-party">{{ turmoil.current.current }}</div>
+              <div class="event-party">{{ turmoil.current.revealed.toUpperCase() }}</div>
+              <div class="event-party">{{ turmoil.current.current.toUpperCase() }}</div>
             </div>
-            <div class="event-content">Event content here with icons or/and with text.</div>
+            <div class="event-content">{{ turmoil.current.description }}</div>
           </div>
         </div>
         <div class="turmoil-board">

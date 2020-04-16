@@ -8,6 +8,7 @@ import { Player } from '../../Player';
 
 export class Revolution implements IGlobalEvent {
     public name = GlobalEventName.REVOLUTION;
+    public description = "Count Earth tags and ADD(!) influence. The player(s) with most (at least 1) loses 2 TR, and 2nd most (at least 1) loses 1 TR. SOLO: Lose 2 TR if the sum is 4 or more.";
     public revealedDelegate = PartyName.UNITY;
     public currentDelegate = PartyName.MARS;
     public resolve(game: Game, turmoil: Turmoil) {

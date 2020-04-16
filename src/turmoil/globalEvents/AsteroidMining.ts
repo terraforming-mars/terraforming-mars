@@ -8,6 +8,7 @@ import { Turmoil } from '../Turmoil';
 
 export class AsteroidMining implements IGlobalEvent {
     public name = GlobalEventName.ASTEROID_MINING;
+    public description = "Gain 1 titanium for each Jovian tag (max 5) and influence.";
     public revealedDelegate = PartyName.REDS;
     public currentDelegate = PartyName.UNITY;
     public resolve(game: Game, turmoil: Turmoil) {

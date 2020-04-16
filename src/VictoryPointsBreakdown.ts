@@ -40,7 +40,7 @@ export class VictoryPointsBreakdown {
             case "city":
                 this.city += points;
                 break;
-            case "victoryPoints":
+            case "victoryPoints" || "turmoil":
                 this.victoryPoints += points;
                 if (message !== undefined) this.detailsCards.push(message+": "+points);
                 break;

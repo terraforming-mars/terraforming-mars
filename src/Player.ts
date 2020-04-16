@@ -320,9 +320,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       });
 
+      // Turmoil Victory Points
+      if (game.turmoilExtension && game.turmoil){
+        this.victoryPointsBreakdown.setVictoryPoints("turmoil", game.turmoil.getPlayerVictoryPoints(this));
+      }
+
       this.victoryPointsBreakdown.updateTotal();
       return this.victoryPointsBreakdown;
-
     }
 
     public cardIsInEffect(cardName: CardName): boolean {

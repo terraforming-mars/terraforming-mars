@@ -292,4 +292,16 @@ export class Turmoil  {
         let delegates = this.delegate_reserve.filter(p => p === player).length;
         return delegates;
     }
+
+    // Get Victory Points
+    public getPlayerVictoryPoints(player: Player): number {
+        let victory: number = 0;
+        if (this.chairman !== undefined && this.chairman === player) victory++;
+        this.parties.forEach(function(party) {
+            if (party.partyLeader === player) {
+                victory++;
+            }
+        });
+        return victory;
+    }
 }    

@@ -1,10 +1,47 @@
 import Vue from "vue";
+import { PartyName } from '../turmoil/parties/PartyName';
 
 export const Turmoil = Vue.component("turmoil", {
     props: [
       "turmoil"
     ],
     methods: {
+      getBonus: function (party: PartyName) {
+        if (party === PartyName.MARS) {
+          return `<div class="resource money party-resource">1</div> / 
+          <div class="resource-tag tag-building party-resource-tag"></div>`;
+        }
+        else if (party === PartyName.SCIENTISTS) {
+          return `<div class="resource money party-resource">1</div> / 
+          <div class="resource-tag tag-science party-resource-tag"></div>`;
+        }
+        else if (party === PartyName.UNITY) {
+          return `<div class="resource money party-resource">1</div> / 
+          <div class="resource-tag tag-venus party-resource-tag"></div>
+          <div class="resource-tag tag-earth party-resource-tag"></div>
+          <div class="resource-tag tag-jovian party-resource-tag"></div>`;
+        }
+        else if (party === PartyName.KELVINISTS) {
+          return `<div class="resource money party-resource">1</div> / 
+          <div class="production-box party-production-box">
+            <div class="heat party-production"></div>
+          </div>`;
+        }
+        else if (party === PartyName.REDS) {
+          return `
+          <div class="party-inferior-rating tile party-rating party-tile"><</div> : 
+          <div class="rating tile party-rating party-tile"></div>`;
+        }
+        else if (party === PartyName.GREENS) {
+          return `<div class="resource money party-resource">1</div> / 
+          <div class="resource-tag tag-plant party-resource-tag"></div>
+          <div class="resource-tag tag-microbe party-resource-tag"></div>
+          <div class="resource-tag tag-animal party-resource-tag"></div>`;
+        }
+        else {
+          return `<p>Error</p>`;
+        }
+      }
     },
     template: `
     <div class="turmoil">
@@ -65,7 +102,9 @@ export const Turmoil = Vue.component("turmoil", {
                 </div>
               </div>
               <div :class="'party-name party-name--'+party.name.toLowerCase().replace(/ /g,'')">{{party.name.toUpperCase()}}</div>
-              <div class="party-bonus">party bonus</div>
+              <div class="party-bonus">
+                <span v-html="getBonus(party.name)"></span>
+              </div>
             </div>
           </div>
         </div>

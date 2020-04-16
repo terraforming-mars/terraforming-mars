@@ -71,7 +71,7 @@ import { SupportedResearch } from "./cards/turmoil/SupportedResearch";
 import { Terraformer } from "./milestones/Terraformer";
 import { PartyName } from "./turmoil/parties/PartyName";
 import { IParty } from "./turmoil/parties/IParty";
-import { InterplanetaryTrade } from './cards/promo/InterplanetaryTrade';
+import { InterplanetaryTrade } from "./cards/promo/InterplanetaryTrade";
 
 export interface GameOptions {
   draftVariant: boolean;

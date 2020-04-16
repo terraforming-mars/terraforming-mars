@@ -25,8 +25,7 @@ export class Revolution implements IGlobalEvent {
 
             // We have one rank 1 player
             if (this.getScore(players[0], turmoil) > this.getScore(players[1], turmoil)) {
-                players[0].decreaseTerraformRating();
-                players[0].decreaseTerraformRating();
+                players[0].decreaseTerraformRatingSteps(2);
                 players.shift();
 
                 if (players.length = 1) {
@@ -50,8 +49,7 @@ export class Revolution implements IGlobalEvent {
             } else {
                 const score = this.getScore(players[0], turmoil);
                 while (players.length > 0 && this.getScore(players[0], turmoil) === score) {
-                    players[0].decreaseTerraformRating();
-                    players[0].decreaseTerraformRating();
+                    players[0].decreaseTerraformRatingSteps(2);
                     players.shift();
                 }
             }

@@ -29,6 +29,7 @@ export interface DelegatesModel {
 
 export interface GlobalEventModel {
     name: GlobalEventName;
+    description: string;
     revealed: PartyName;
     current: PartyName;
 }

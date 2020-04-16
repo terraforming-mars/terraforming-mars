@@ -224,8 +224,10 @@ export class Turmoil  {
 
             // Change the chairman
             this.chairman = this.rulingParty.partyLeader;
-            if (this.chairman && this.chairman instanceof Player) {
-                this.chairman.increaseTerraformRating(game);
+            if (this.chairman) {
+                if (this.chairman instanceof Player) {
+                    this.chairman.increaseTerraformRating(game);
+                }
             }
             else {
                 console.error("No chairman");

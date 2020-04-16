@@ -7,6 +7,7 @@ import { Turmoil } from '../Turmoil';
 
 export class Sabotage implements IGlobalEvent {
     public name = GlobalEventName.SABOTAGE;
+    public description = "Decrease steel and energy production 1 step each. Gain 1 steel per influence.";
     public revealedDelegate = PartyName.UNITY;
     public currentDelegate = PartyName.REDS;
     public resolve(game: Game, turmoil: Turmoil) {

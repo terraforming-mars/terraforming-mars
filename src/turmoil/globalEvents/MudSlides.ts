@@ -8,6 +8,7 @@ import { SpaceType } from '../../SpaceType';
 
 export class MudSlides implements IGlobalEvent {
     public name = GlobalEventName.MUD_SLIDES;
+    public description = "Lose 4 M$ for each tile adjacent to ocean (max 5, then reduced by influence).";
     public revealedDelegate = PartyName.KELVINISTS;
     public currentDelegate = PartyName.GREENS;
     public resolve(game: Game, turmoil: Turmoil) {

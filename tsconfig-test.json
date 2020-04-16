@@ -423,6 +423,7 @@
         "tests/globalEvents/Diversity.spec.ts",
         "tests/globalEvents/Pandemic.spec.ts",
         "tests/globalEvents/WarOnEarth.spec.ts",
+        "tests/globalEvents/ImprovedEnergyTemplates.spec.ts",
         "tests/cards/turmoil/AerialLenses.spec.ts"
     ]
 }

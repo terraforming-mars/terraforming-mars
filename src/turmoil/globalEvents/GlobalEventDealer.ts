@@ -43,6 +43,15 @@ export const ALL_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
 
 ];
 
+// Function to return a global event object by its name
+export function getGlobalEventByName(globalEventName: string): IGlobalEvent | undefined {
+    let globalEventFactory = ALL_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
+    if (globalEventFactory !== undefined) {
+        return new globalEventFactory.factory();
+    }
+    return undefined;
+}
+
 export class GlobalEventDealer {
     public globalEventsDeck: Array<IGlobalEvent> = this.shuffle(ALL_GLOBAL_EVENTS.map((cf) => new cf.factory()));
     public discardedGlobalEvents: Array<IGlobalEvent> = [];

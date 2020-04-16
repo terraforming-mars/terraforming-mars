@@ -8,8 +8,10 @@ import { Reds } from "./parties/Reds";
 import { Greens } from "./parties/Greens";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { GlobalEventDealer } from "./globalEvents/GlobalEventDealer";
+import { GlobalEventDealer, getGlobalEventByName } from "./globalEvents/GlobalEventDealer";
 import { IGlobalEvent } from "./globalEvents/IGlobalEvent";
+import { ILoadable } from "../ILoadable";
+import { SerializedTurmoil } from "./SerializedTurmoil";
 
 export interface IPartyFactory<T> {
     partyName: PartyName;
@@ -25,7 +27,7 @@ export const ALL_PARTIES: Array<IPartyFactory<IParty>> = [
     { partyName: PartyName.GREENS, factory: Greens }
 ];
 
-export class Turmoil  {
+export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
     public chairman: undefined | Player | "NEUTRAL" = undefined;
     public rulingParty: undefined | IParty = undefined;
     public dominantParty: undefined | IParty = undefined;
@@ -202,16 +204,19 @@ export class Turmoil  {
         this.lobby = new Set<Player>(game.getPlayers());
 
         // 4 - Changing Time
+        if (this.currentGlobalEvent) {
+            this.globalEventDealer.discardedGlobalEvents.push(this.currentGlobalEvent);
+        }
         // 4.a - Coming Event is now Current event. Add neutral delegate.
         this.currentGlobalEvent = this.commingGlobalEvent;
-        if (this.currentGlobalEvent !== undefined) {
+        if (this.currentGlobalEvent) {
             this.sendDelegateToParty("NEUTRAL", this.currentGlobalEvent.currentDelegate, game);
         }
         // 4.b - Distant Event is now Coming Event
         this.commingGlobalEvent = this.distantGlobalEvent;
         // 4.c - Draw the new distant event and add neutral delegate
         this.distantGlobalEvent = this.globalEventDealer.draw();
-        if (this.distantGlobalEvent !== undefined) {
+        if (this.distantGlobalEvent) {
             this.sendDelegateToParty("NEUTRAL", this.distantGlobalEvent.revealedDelegate, game);
         }
     }
@@ -305,5 +310,45 @@ export class Turmoil  {
             }
         });
         return victory;
+    }
+
+    // Function used to rebuild each objects
+    loadFromJSON(d: SerializedTurmoil): Turmoil {
+        // Assign each attributes
+        let o = Object.assign(this, d);
+
+        this.parties = ALL_PARTIES.map((cf) => new cf.factory());
+
+        if (d.rulingParty) {
+            this.rulingParty = this.getPartyByName(d.rulingParty.name);
+        }
+        if (d.dominantParty) {
+            this.dominantParty = this.getPartyByName(d.dominantParty.name);
+        }
+
+        this.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
+
+        // Rebuild Global Event Dealer
+        this.globalEventDealer = new GlobalEventDealer();
+
+        this.globalEventDealer.globalEventsDeck = d.globalEventDealer.globalEventsDeck.map((element: IGlobalEvent)  => {
+            return getGlobalEventByName(element.name)!;
+        });
+
+        this.globalEventDealer.discardedGlobalEvents = d.globalEventDealer.discardedGlobalEvents.map((element: IGlobalEvent)  => {
+            return getGlobalEventByName(element.name)!;
+        });
+
+        if (d.distantGlobalEvent) {
+            this.distantGlobalEvent = getGlobalEventByName(d.distantGlobalEvent.name);
+        }
+        if (d.commingGlobalEvent) {
+            this.commingGlobalEvent = getGlobalEventByName(d.commingGlobalEvent.name);
+        }
+        if (d.currentGlobalEvent) {
+            this.currentGlobalEvent = getGlobalEventByName(d.currentGlobalEvent.name);
+        }
+
+        return o;
     }
 }    

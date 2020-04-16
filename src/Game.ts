@@ -70,6 +70,7 @@ import { VoteOfNoConfidence } from "./cards/turmoil/VoteOfNoConfidence";
 import { SupportedResearch } from "./cards/turmoil/SupportedResearch";
 import { Terraformer } from "./milestones/Terraformer";
 import { PartyName } from "./turmoil/parties/PartyName";
+import { IParty } from "./turmoil/parties/IParty";
 
 export interface GameOptions {
   draftVariant: boolean;
@@ -1269,6 +1270,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Assign each attributes
       let o = Object.assign(this, d);
 
+      // Rebuild dealer object to be sure that we will have cards in the same order
+      let dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.turmoilExtension);
+      this.dealer = dealer.loadFromJSON(d.dealer);
+
       // Rebuild every player objects
       this.players = d.players.map((element: SerializedPlayer)  => {
         let player = new Player(element.name, element.color, element.beginner);
@@ -1325,6 +1330,69 @@ export class Game implements ILoadable<SerializedGame, Game> {
             this.colonies.push(colonie);
           }
         });     
+      }
+
+      // Reload turmoil elements if needed 
+      if (this.turmoilExtension) {
+        let turmoil = new Turmoil(this);
+        this.turmoil = turmoil.loadFromJSON(d.turmoil);
+
+        // Rebuild chairman
+        if (d.turmoil.chairman) {
+          if (d.turmoil.chairman === "NEUTRAL"){
+            this.turmoil.chairman === "NEUTRAL";
+          }
+          else {
+            const chairman_id = d.turmoil.chairman.id
+            let playerIndex: number = this.players.findIndex((player) => player.id === chairman_id);
+            this.turmoil.chairman = this.players[playerIndex];
+          }
+        }
+
+        // Rebuild lobby
+        this.turmoil.lobby = new Set<Player>();
+        d.turmoil.lobby.forEach((element: Player) => {
+          let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
+          this.turmoil?.lobby.add(this.players[playerIndex]);
+        });
+
+        // Rebuild delegate reserve
+        this.turmoil.delegate_reserve = d.turmoil.delegate_reserve.map((element: Player | "NEUTRAL")  => {
+          if(element === "NEUTRAL"){
+            return "NEUTRAL";
+          }
+          else {
+            let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
+            return this.players[playerIndex];
+          }
+        });
+
+        // Rebuild party leader
+        d.turmoil.parties.forEach((element: IParty) => {
+          let party = this.turmoil?.getPartyByName(element.name);
+          if (element.partyLeader) {
+            if (element.partyLeader === "NEUTRAL") {
+              party!.partyLeader = "NEUTRAL";
+            }
+            else {
+              const partyLeaderId = element.partyLeader.id;
+              let playerIndex: number = this.players.findIndex((player) => player.id === partyLeaderId);
+              party!.partyLeader = this.players[playerIndex];
+            }
+          }
+
+          // Rebuild delegates
+          party!.delegates = new Array<Player>();
+          element.delegates.forEach((element: Player | "NEUTRAL") => {
+            if (element === "NEUTRAL") {
+              party!.delegates.push("NEUTRAL");
+            }
+            else {
+              let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
+              party!.delegates.push(this.players[playerIndex]);
+            }
+          });
+        });
       }
 
       // Rebuild claimed milestones
@@ -1394,10 +1462,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Define who was the first player for this generation
       let firstIndex: number = this.players.findIndex((player) => player.id === d.first.id);
       this.first = this.players[firstIndex];
-
-      // Rebuild dealer object to be sure that we will have cards in the same order
-      let dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.turmoilExtension);
-      this.dealer = dealer.loadFromJSON(d.dealer);
 
       return o;
     }

@@ -6,6 +6,7 @@ import { Turmoil } from '../Turmoil';
 
 export class WarOnEarth implements IGlobalEvent {
     public name = GlobalEventName.WAR_ON_EARTH;
+    public description = "Reduce TR 4 steps. Each influence prevents 1 step.";
     public revealedDelegate = PartyName.MARS;
     public currentDelegate = PartyName.KELVINISTS;
     public resolve(game: Game, turmoil: Turmoil) {

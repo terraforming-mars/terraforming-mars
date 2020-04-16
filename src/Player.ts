@@ -141,6 +141,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
     }
 
+    public decreaseTerraformRatingSteps(value: number) {
+      this.terraformRating -= value;
+    }
+
     public setTerraformRating(value: number) {
       return this.terraformRating = value;
     }
@@ -508,6 +512,36 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       });
       return tagCount + this.getTagCount(Tags.WILDCARD);
     }  
+
+    public getDistinctTagCount(countWild: boolean, extraTag?: Tags): number {
+      const allTags: Tags[] = [];
+      let wildcardCount: number = 0;
+      if (extraTag !== undefined) {
+        allTags.push(extraTag);
+      }
+      const uniqueTags: Set<Tags> = new Set<Tags>();
+      if (this.corporationCard !== undefined && this.corporationCard.tags.length > 0) {
+        this.corporationCard.tags.forEach((tag) => allTags.push(tag));
+      }
+      this.playedCards.filter((card) => card.cardType !== CardType.EVENT)
+        .forEach((card) => {
+          card.tags.forEach((tag) => {
+            allTags.push(tag);
+          });
+        });
+      for (const tags of allTags) {
+        if (tags === Tags.WILDCARD) {
+          wildcardCount++;
+        } else {
+          uniqueTags.add(tags);
+        }
+      }
+      if(countWild) {
+        return uniqueTags.size + wildcardCount;
+      } else {
+        return uniqueTags.size;
+      }
+    }
 
     public checkMultipleTagPresence(tags: Array<Tags>): boolean {
       var distinctCount = 0;

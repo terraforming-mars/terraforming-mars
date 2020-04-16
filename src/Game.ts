@@ -70,6 +70,7 @@ import { VoteOfNoConfidence } from "./cards/turmoil/VoteOfNoConfidence";
 import { SupportedResearch } from "./cards/turmoil/SupportedResearch";
 import { Terraformer } from "./milestones/Terraformer";
 import { PartyName } from "./turmoil/parties/PartyName";
+import { InterplanetaryTrade } from './cards/promo/InterplanetaryTrade';
 
 export interface GameOptions {
   draftVariant: boolean;
@@ -449,6 +450,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       // For testing only - TODO : remove
+      dealtCards.push(new InterplanetaryTrade());
       dealtCards.push(new AerialLenses());
       dealtCards.push(new BannedDelegate());
       dealtCards.push(new CulturalMetropolis());

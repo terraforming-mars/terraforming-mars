@@ -420,6 +420,9 @@
         "tests/globalEvents/EcoSabotage.spec.ts",
         "tests/globalEvents/Productivity.spec.ts",
         "tests/globalEvents/SnowCover.spec.ts",
+        "tests/globalEvents/Diversity.spec.ts",
+        "tests/globalEvents/Pandemic.spec.ts",
+        "tests/globalEvents/WarOnEarth.spec.ts",
         "tests/cards/turmoil/AerialLenses.spec.ts"
     ]
 }

@@ -47,5 +47,7 @@ export interface SerializedPlayer {
     tradesThisTurn: number;
     colonyTradeOffset: number;
     colonyTradeDiscount: number;
+    resourcesRemovedThisGenerationByPlayer: Set<string>;
+    productionDecreasedThisGenerationByPlayer: Set<string>;
 }
 

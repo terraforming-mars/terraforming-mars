@@ -1,6 +1,7 @@
 
 import Vue from "vue";
 import { PreferencesManager } from "./PreferencesManger";
+import { LANGUAGES } from "../constants";
 
 
 export const Preferences = Vue.component("preferences", {
@@ -15,7 +16,11 @@ export const Preferences = Vue.component("preferences", {
             "hide_awards_and_milestones": false,
             "hide_turnorder": false,
             "small_cards": false,
-            "lang": "en"
+            "remove_background": false,
+            "magnify_cards": true,
+            "magnify_card_descriptions": true,
+            "lang": "en",
+            "langs": LANGUAGES
         };
     },
     methods: {
@@ -121,16 +126,30 @@ export const Preferences = Vue.component("preferences", {
                             <i class="form-icon"></i> Smaller cards
                         </label>
                     </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="remove_background" />
+                            <i class="form-icon"></i> Remove background image
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="magnify_cards" />
+                            <i class="form-icon"></i> Magnify cards on hover
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="magnify_card_descriptions" />
+                            <i class="form-icon"></i> Magnify card descriptions on hover
+                        </label>
+                    </div>
                     <div class="preferences_panel_item form-group">
                         <label class="form-label">Language (<a href="javascript:document.location.reload(true);">refresh page</a> to see changes)</label>
                         <div class="preferences_panel_langs">
-                            <label class="form-radio">
-                                <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" value="en" />
-                                <i class="form-icon"></i> English
-                            </label>
-                            <label class="form-radio">
-                                <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" value="ru" />
-                                <i class="form-icon"></i> Russian
+                            <label class="form-radio" v-for="language in langs">
+                                <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" :value="language.id" />
+                                <i class="form-icon"></i> {{ language.title }}
                             </label>
                         </div>
                     </div>

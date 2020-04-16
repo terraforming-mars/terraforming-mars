@@ -19,8 +19,8 @@ describe("Stratopolis", function () {
             coloniesExtension: false,
             boardName: BoardName.ORIGINAL,
             showOtherPlayersVP: false,
-            customCorporationsList: false,
-            corporations: []
+            customCorporationsList: [],
+            solarPhaseOption: true
           } as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);
         expect(card.canPlay(player)).to.eq(false);

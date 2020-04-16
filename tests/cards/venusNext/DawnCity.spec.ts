@@ -18,8 +18,8 @@ describe("DawnCity", function () {
             coloniesExtension: false,
             boardName: BoardName.ORIGINAL,
             showOtherPlayersVP: false,
-            customCorporationsList: false,
-            corporations: []
+            customCorporationsList: [],
+            solarPhaseOption: false
           } as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);
         player.setProduction(Resources.ENERGY);

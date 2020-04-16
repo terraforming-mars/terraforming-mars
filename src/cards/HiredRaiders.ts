@@ -18,7 +18,7 @@ export class HiredRaiders implements IProjectCard {
 
     public play(player: Player, game: Game) {
 
-        if (game.getPlayers().length === 1) {
+        if (game.soloMode) {
             return new OrOptions(
                 new SelectOption("Steal 2 steel", () => {
                     player.steel += 2;

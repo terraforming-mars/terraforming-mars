@@ -1,4 +1,3 @@
-
 import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -7,14 +6,6 @@ import {AndOptions} from './src/inputs/AndOptions';
 import { CardModel } from './src/models/CardModel';
 import {ColonyModel} from './src/models/ColonyModel';
 import {Color} from './src/Color';
-import {
-    ALL_CORPORATION_CARDS,
-    ALL_PRELUDE_CORPORATIONS,
-    ALL_COLONIES_CORPORATIONS,
-    ALL_VENUS_CORPORATIONS,
-    ALL_TURMOIL_CORPORATIONS,
-    ALL_PROMO_CORPORATIONS
-} from './src/Dealer';
 import { Game, GameOptions } from './src/Game';
 import {ICard} from './src/cards/ICard';
 import {IColony} from './src/colonies/Colony';
@@ -37,21 +28,15 @@ import {TileType} from './src/TileType';
 import { Phase } from './src/Phase';
 import { Resources } from "./src/Resources";
 import { CardType } from './src/cards/CardType';
-import { CardName } from "./src/CardName";
 import { ClaimedMilestoneModel } from "./src/models/ClaimedMilestoneModel";
 import { FundedAwardModel } from "./src/models/FundedAwardModel";
+import { Database } from './src/database/Database';
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
-const allCorporationCards: Array<CardName> = ALL_CORPORATION_CARDS.map((cardFactory): CardName => cardFactory.cardName).concat(
-    ALL_PRELUDE_CORPORATIONS.map((cardFactory): CardName => cardFactory.cardName),
-    ALL_COLONIES_CORPORATIONS.map((cardFactory): CardName => cardFactory.cardName),
-    ALL_VENUS_CORPORATIONS.map((cardFactory): CardName => cardFactory.cardName),
-    ALL_TURMOIL_CORPORATIONS.map((cardFactory): CardName => cardFactory.cardName),
-    ALL_PROMO_CORPORATIONS.map((cardFactory): CardName => cardFactory.cardName)
-);
+
 function requestHandler(
     req: http.IncomingMessage,
     res: http.ServerResponse
@@ -67,9 +52,12 @@ function requestHandler(
         }
       } else if (
         req.url === '/' ||
+        req.url.startsWith('/new-game') ||
+        req.url.startsWith('/solo') ||
         req.url.startsWith('/game?id=') ||
         req.url.startsWith('/player?id=') ||
-        req.url.startsWith('/the-end?player_id=')
+        req.url.startsWith('/the-end?id=') ||
+        req.url.startsWith('/load')
       ) {
         serveApp(res);
       } else if (req.url.startsWith('/api/player?id=')) {
@@ -98,6 +86,8 @@ function requestHandler(
       }
     } else if (req.method === 'PUT' && req.url.indexOf('/game') === 0) {
       createGame(req, res);
+    } else if (req.method === 'PUT' && req.url.indexOf('/load') === 0) {
+      loadGame(req, res);
     } else if (
       req.method === 'POST' &&
       req.url.indexOf('/player/input?id=') === 0
@@ -184,6 +174,41 @@ function apiGetGames(req: http.IncomingMessage, res: http.ServerResponse): void 
   res.write(JSON.stringify(answer));
   res.end();
 
+}
+
+function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
+  let body = '';
+  req.on('data', function(data) {
+    body += data.toString();
+  });
+  req.once('end', function() {
+    try {
+      const gameReq = JSON.parse(body);
+
+      let game_id = gameReq.game_id;
+
+      const player = new Player("test", Color.BLUE, false);
+      const player2 = new Player("test2", Color.RED, false);
+      let gameToRebuild = new Game(game_id,[player,player2], player);
+      Database.getInstance().restoreGame(game_id, gameToRebuild);
+    
+      setTimeout(function() {
+        games.set(gameToRebuild.id, gameToRebuild);
+    
+        gameToRebuild.getPlayers().forEach((player) => {
+          playersToGame.set(player.id, gameToRebuild);
+        });
+      }, 3000);
+
+      res.setHeader('Content-Type', 'application/json');
+      res.write(getGame(gameToRebuild));
+    } catch (err) {
+      console.warn('error loading game', err);
+      res.writeHead(500);
+      res.write('Unable to load game');
+    }
+    res.end();
+  });
 }
 
 function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -297,15 +322,6 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
           break;
         }
       }
-      const selectedCorporations: Array<CardName> = [];
-      for (let corp of (gameReq.corporations as Array<CardName>)) {
-        const foundCard: CardName | undefined = allCorporationCards.find((cardName) => cardName === corp);
-        if (foundCard !== undefined) {
-          selectedCorporations.push(foundCard);
-        } else {
-          throw new Error("Custom corporation card " + corp + " not found");
-        }
-      }
 
       const gameOptions = {
         draftVariant: gameReq.draftVariant,
@@ -315,7 +331,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         boardName: gameReq.board,
         showOtherPlayersVP: gameReq.showOtherPlayersVP,
         customCorporationsList: gameReq.customCorporationsList,
-        corporations: selectedCorporations
+        solarPhaseOption: gameReq.solarPhaseOption
       } as GameOptions;
 
       const game = new Game(gameId, players, firstPlayer, gameOptions);
@@ -417,7 +433,9 @@ function getPlayer(player: Player, game: Game): string {
     colonies: getColonies(game.colonies),
     tags: player.getAllTags(),
     showOtherPlayersVP: game.showOtherPlayersVP,
-    actionsThisGeneration: Array.from(player.getActionsThisGeneration())
+    actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
+    fleetSize: player.fleetSize,
+    tradesThisTurn: player.tradesThisTurn
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -548,7 +566,9 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       colonies: getColonies(game.colonies),
       tags: player.getAllTags(),
       showOtherPlayersVP: game.showOtherPlayersVP,
-      actionsThisGeneration: Array.from(player.getActionsThisGeneration())
+      actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
+      fleetSize: player.fleetSize,
+      tradesThisTurn: player.tradesThisTurn
     } as PlayerModel;
   });
 }

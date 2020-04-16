@@ -3,6 +3,9 @@ import { CreateGameForm } from "./CreateGameForm";
 import { GameHome } from "./GameHome";
 import { GamesOverview } from "./GamesOverview";
 import { PlayerHome } from "./PlayerHome";
+import { StartScreen } from "./StartScreen";
+import { LoadGameForm } from "./LoadGameForm";
+
 
 export const mainAppSettings = {
     "el": "#app",
@@ -15,7 +18,9 @@ export const mainAppSettings = {
         }
     },
     "components": {
+        "start-screen": StartScreen,
         "create-game-form": CreateGameForm,
+        "load-game-form": LoadGameForm,
         "game-home": GameHome,
         "player-home": PlayerHome,
         "player-end": GameEnd,
@@ -34,7 +39,7 @@ export const mainAppSettings = {
             const currentPathname: string = window.location.pathname;
             const xhr = new XMLHttpRequest();
             let app = (this as any);
-            xhr.open("GET", "/api/player" + window.location.search);
+            xhr.open("GET", "/api/player" + window.location.search.replace("&noredirect", ""));
             xhr.onerror = function () {
                 alert("Error getting game data");
             };
@@ -42,7 +47,7 @@ export const mainAppSettings = {
                 if (xhr.status === 200) {
                     app.player = xhr.response;
                     app.playerkey ++;
-                    if (app.player.phase == "end") {
+                    if (app.player.phase === "end" &&  window.location.search.indexOf("&noredirect") === -1 ) {
                         app.screen = "the-end";
                         if (currentPathname != "/the-end") {
                             window.history.replaceState(xhr.response, "Teraforming Mars - Player", "/the-end?id=" + xhr.response.id);
@@ -85,8 +90,12 @@ export const mainAppSettings = {
             xhr.send();
         } else if (currentPathname === "/games-overview") {
             app.screen = "games-overview";
+        } else if (currentPathname === "/new-game" || currentPathname === "/solo") {
+            app.screen = "create-game-form";
+        } else if (currentPathname === '/load'){
+            app.screen = "load";   
         } else {
-            app.screen = "create";
+            app.screen = "start-screen";
         }
     }
 }

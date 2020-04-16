@@ -2,6 +2,7 @@ import Vue from "vue";
 import { PlayerModel } from "../models/PlayerModel";
 import { Board } from "./Board";
 import { LogPanel } from './LogPanel';
+import { GlobalParameters } from "./GlobalParameters";
 
 export const GameEnd = Vue.component("game-end", {
     props: ["player", "game"],
@@ -10,7 +11,8 @@ export const GameEnd = Vue.component("game-end", {
     },
     components: {
         "board": Board,
-        "log-panel": LogPanel
+        "log-panel": LogPanel,
+        "global-parameters": GlobalParameters
     },
     methods: {
         isSoloGame: function (): boolean {
@@ -46,7 +48,7 @@ export const GameEnd = Vue.component("game-end", {
                             </div>
                             <ul class="game_end_list">
                                 <li>Try to win with extensions enabled</li>
-                                <li>Try to win faster then last generation comes</li>
+                                <li>Try to win before the last generation comes</li>
                                 <li>Can you get 90+ Victory Points?</li>
                             </ul>
                         </div>
@@ -87,7 +89,7 @@ export const GameEnd = Vue.component("game-end", {
                         </thead>
                         <tbody>
                             <tr v-for="p in getSortedPlayers()">
-                                <td><span :style="getPlayerColorStyle(p)">{{ p.name }}</span></td>
+                                <td><a :href="'/player?id='+p.id+'&noredirect'" :style="getPlayerColorStyle(p)">{{ p.name }}</a></td>
                                 <td>{{ p.corporationCard }}</td>
                                 <td>{{ p.victoryPointsBreakdown.terraformRating }}</td>
                                 <td>{{ p.victoryPointsBreakdown.milestones }}</td>
@@ -118,6 +120,7 @@ export const GameEnd = Vue.component("game-end", {
                 <div class="game_end_block--board">
                     <h2>Final situation on the board</h2>
                     <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName="player.boardName"></board>
+                    <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature" v-trim-whitespace></global-parameters>
                 </div>
                 <br/>
                 <div class="game_end_block--log">

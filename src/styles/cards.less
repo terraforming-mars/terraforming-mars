@@ -10,30 +10,32 @@
   box-sizing: content-box;
 }
 
+.filterDiv:hover {
+}
+
 .cardbox {
   display: inline-block;
   vertical-align: top;
 }
 
 .cards-stack {
-  position: relative;
-  margin-top: -265px;
-  filter: drop-shadow(0px -3px 3px black);
-  z-index: 1;
+    position: relative;
+    margin-top: -256px;
+    filter: drop-shadow(0px -3px 3px black);
+    z-index: 1;
+        &:hover {
+        z-index: 2;
+    }
 }
 
 .cards-stack-first {
     position: relative;
     z-index: 1;
+        &:hover {
+        z-index: 2;
+    }
 }
 
-.cards-stack:hover {
-    z-index: 2;
-  }
-  
-  .cards-stack-first:hover {
-    z-index: 2;
-  }
 
 .cards-action-was-used {
     filter: grayscale(1);
@@ -79,7 +81,9 @@
 input[type=checkbox]:checked + .filterDiv,
 input[type=radio]:checked + .filterDiv {
     box-shadow: 0 0 0 2px #303030, 0 0 8px 8px #ee792b;
-    filter: brightness(120%);
+    /* filter: brightness(120%); filter: blurs text when magnified (hover) */
+    background: #fff;
+    background: linear-gradient(to bottom right, #fff, #ccc, #fff, #ddd, #eee, #fff, #ddd);
 }
 
 .filterDiv3 {
@@ -532,6 +536,9 @@ input[type=radio]:checked + .filterDiv {
     font-size: 11px;
     line-height: 13px;
     font-weight:normal;
+}
+
+.description:hover {
 }
 
 .production-box {

@@ -275,6 +275,7 @@ import { Worms } from "./cards/Worms";
 import { Zeppelins } from "./cards/Zeppelins";
 
 import { IProjectCard } from "./cards/IProjectCard";
+import { Atmoscoop } from "./cards/venusNext/Atmoscoop";
 import { Dirigibles } from "./cards/venusNext/Dirigibles";
 import { IshtarMining } from "./cards/venusNext/IshtarMining";
 import { MaxwellBase } from "./cards/venusNext/MaxwellBase";
@@ -392,6 +393,22 @@ import { RedSpotObservatory } from "./cards/colonies/RedSpotObservatory";
 import { MarketManipulation } from "./cards/colonies/MarketManipulation";
 import { MartianZoo } from "./cards/colonies/MartianZoo";
 
+// Promo Cards
+import { Penguins } from "./cards/promo/Penguins";
+import { SmallAsteroid } from "./cards/promo/SmallAsteroid";
+import { SnowAlgae } from "./cards/promo/SnowAlgae";
+import { DuskLaserMining } from "./cards/promo/DuskLaserMining";
+import { MercurianAlloys } from "./cards/promo/MercurianAlloys";
+import { RegoPlastics } from "./cards/promo/RegoPlastics";
+import { InterplanetaryTrade } from "./cards/promo/InterplanetaryTrade";
+import { OrbitalCleanup } from "./cards/promo/OrbitalCleanup";
+import { ProjectInspection } from "./cards/promo/ProjectInspection";
+import { HiTechLab } from "./cards/promo/HiTechLab";
+import { EnergyMarket } from "./cards/promo/EnergyMarket";
+import { LawSuit } from "./cards/promo/LawSuit";
+import { StanfordTorus } from "./cards/promo/StanfordTorus";
+import { SaturnSurfing } from "./cards/promo/SaturnSurfing";
+
 import { ILoadable } from "./ILoadable";
 import { CardName } from "./CardName";
 import { BeginnerCorporation } from "./cards/corporation/BeginnerCorporation";
@@ -478,6 +495,7 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.AEROSPORT_TOURNAMENT, factory: AerosportTournament },
     { cardName: CardName.AIR_SCRAPPING_EXPEDITION, factory: AirScrappingExpedition },
     { cardName: CardName.ATALANTA_PLANITIA_LAB, factory: AtalantaPlanitiaLab },
+    { cardName: CardName.ATMOSCOOP, factory: Atmoscoop },
     { cardName: CardName.COMET_FOR_VENUS, factory: CometForVenus },
     { cardName: CardName.CORRODER_SUITS, factory: CorroderSuits },
     { cardName: CardName.DAWN_CITY, factory: DawnCity },
@@ -521,7 +539,8 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.NEUTRALIZER_FACTORY, factory: NeutralizerFactory },
     { cardName: CardName.ORBITAL_REFLECTORS, factory: OrbitalReflectors },
     { cardName: CardName.OMNICOURT, factory: Omnicourt },
-    { cardName: CardName.MINING_QUOTA, factory: MiningQuota }
+    { cardName: CardName.MINING_QUOTA, factory: MiningQuota },
+    { cardName: CardName.SATURN_SURFING, factory: SaturnSurfing }
 ];    
 
 export const ALL_COLONIES_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
@@ -815,7 +834,20 @@ export const ALL_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.WAVE_POWER, factory: WavePower },
     { cardName: CardName.WINDMILLS, factory: Windmills },
     { cardName: CardName.WORMS, factory: Worms },
-    { cardName: CardName.ZEPPELINS, factory: Zeppelins }
+    { cardName: CardName.ZEPPELINS, factory: Zeppelins },
+    { cardName: CardName.PENGUINS, factory: Penguins },
+    { cardName: CardName.SMALL_ASTEROID, factory: SmallAsteroid },
+    { cardName: CardName.SNOW_ALGAE, factory: SnowAlgae },
+    { cardName: CardName.DUSK_LASER_MINING, factory: DuskLaserMining },
+    { cardName: CardName.MERCURIAN_ALLOYS, factory: MercurianAlloys },
+    { cardName: CardName.REGO_PLASTICS, factory: RegoPlastics },
+    { cardName: CardName.INTERPLANETARY_TRADE, factory: InterplanetaryTrade },
+    { cardName: CardName.ORBITAL_CLEANUP, factory: OrbitalCleanup },
+    { cardName: CardName.PROJECT_INSPECTION, factory: ProjectInspection },
+    { cardName: CardName.HI_TECH_LAB, factory: HiTechLab },
+    { cardName: CardName.ENERGY_MARKET, factory: EnergyMarket },
+    { cardName: CardName.LAW_SUIT, factory: LawSuit },
+    { cardName: CardName.STANFORD_TORUS, factory: StanfordTorus }
 ];
 
 // Function to return a card object by its name

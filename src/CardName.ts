@@ -384,10 +384,20 @@ export enum CardName {
     RECYCLON = "Recyclon",
     UTOPIA_INVEST = "Utopia Invest",
     MANUTECH = "Manutech",
-    SMALL_ASTEROID = "Small Asteroid",
     SELF_REPLICATING_ROBOTS = "Self-replicating Robots",
-    SNOW_ALGAE = "Snow Algae",
+    POLYPHEMOS = "Polyphemos",
     PENGUINS = "Penguins",
-    POLYPHEMOS = "Polyphemos"
-
+    SMALL_ASTEROID = "Small Asteroid",
+    SNOW_ALGAE = "Snow Algae",
+    DUSK_LASER_MINING = "Dusk Laser Mining",
+    MERCURIAN_ALLOYS = "Mercurian Alloys",
+    REGO_PLASTICS = "Rego Plastics",
+    INTERPLANETARY_TRADE = "Interplanetary Trade",
+    ORBITAL_CLEANUP = "Orbital Cleanup",
+    PROJECT_INSPECTION = "Project Inspection",
+    HI_TECH_LAB = "Hi-Tech Lab",
+    ENERGY_MARKET = "Energy Market",
+    LAW_SUIT = "Law Suit",
+    STANFORD_TORUS = "Stanford Torus",
+    SATURN_SURFING = "Saturn Surfing"
 }

@@ -3269,21 +3269,6 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
 `],
-[CardName.SMALL_ASTEROID,`
-          <div class="title background-color-events ">Small Asteroid</div>
-          <div class="price ">10</div>
-          <div class="tag tag1 tag-event "></div>
-          <div class="tag tag2 tag-space "></div>
-          <div class="promo-icon project-icon"></div>
-      <div class="card-number">209</div>
-          <div class="content ">
-              <div class="tile temperature-tile "></div><br>
-               - <div class="resource plant red-outline "></div><div class="plant resource red-outline "></div>
-              <div class="description ">
-                  (Increase temperature 1 step. Remove up to 2 plants from any player.)
-              </div>
-          </div>
-`],
 [CardName.SELF_REPLICATING_ROBOTS,`
           <div class="title background-color-active ">Self-replicating robots</div>
           <div class="price ">7</div>
@@ -3303,22 +3288,6 @@ export const HTML_DATA: Map<string, string> =
               (Requires 2 Science tags.)
             </div>
           </div>
-`],
-[CardName.SNOW_ALGAE,`
-        <div class="title background-color-automated">Snow Algae</div>
-        <div class="price">12</div>
-        <div class="tag tag1 tag-plant"></div>
-        <div class="promo-icon project-icon"></div>
-      <div class="card-number">211</div>
-        <div class="content">
-          <div class="requirements">2 Oceans</div>
-          <div class="production-box production-box-size2">
-            <div class="plant production"></div><div class="heat production"></div>
-          </div>
-          <div class="description">
-            (Requires 2 oceans. Increase your Plant production and your heat production 1 step each.)
-          </div>
-        </div>
 `],
 [CardName.PENGUINS,`
             <div class="title background-color-active ">Penguins</div>
@@ -6687,6 +6656,234 @@ export const HTML_DATA: Map<string, string> =
           (Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.)
         </div>
       </div>
+    </div>
+`],
+[CardName.PENGUINS, `
+    <div class="title background-color-active">Penguins</div>
+    <div class="price ">7</div>
+    ##RESOURCES##
+    <div class="tag tag1 tag-animal "></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">212</div>
+    <div class="content ">
+        <div class="points">1/<div class="animal resource"></div></div>
+        <div class="requirements">8 Oceans</div>
+        <span class="red-arrow"></span> <div class="animal resource"></div>
+        <div class="description">
+            (Action: Add 1 Animal to this card.)
+        </div><br/>
+        <div class="description">
+            (Requires 8 oceans. 1 VP for each animal on this card.)
+        </div>
+    </div>
+`],
+[CardName.SMALL_ASTEROID,`
+    <div class="title background-color-events ">Small Asteroid</div>
+    <div class="price ">10</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="tag tag2 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">209</div>
+    <div class="content ">
+        <div class="tile temperature-tile"></div><br/>
+        - <div class="resource plant red-outline"></div><div class="resource plant red-outline"></div>
+        <div class="description ">
+            (Increase temperature 1 step. Remove up to 2 plants from any player.)
+        </div>
+    </div>
+`],
+[CardName.SNOW_ALGAE,`
+    <div class="title background-color-automated">Snow Algae</div>
+    <div class="price">12</div>
+    <div class="tag tag1 tag-plant"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">211</div>
+    <div class="content">
+        <div class="requirements">2 Oceans</div>
+        <div class="production-box production-box-size2">
+            <div class="plant production"></div><div class="heat production"></div>
+        </div>
+        <div class="description">
+            (Requires 2 oceans. Increase your Plant production and your heat production 1 step each.)
+        </div>
+    </div>
+`],
+[CardName.DUSK_LASER_MINING,`
+    <div class="title background-color-automated">Dusk Laser Mining</div>
+    <div class="price">8</div>
+    <div class="tag tag1 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X01</div>
+    <div class="content">
+        <div class="requirements">Science Science</div>
+        <div class="production-box production-box-size1a">
+            <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="production energy"></div><br/>
+            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="production titanium"></div>
+        </div>
+        <span style="font-size: 18px; margin-left: 20px; font-family: Prototype">4</span> <div class="production titanium"></div>
+        <div class="description">
+            (Requires 2 Science tags.
+            Decrease your energy production 1 step, and increase your titanium production 1 step.
+            Gain 4 titanium.)
+        </div>
+    </div>
+`],
+[CardName.MERCURIAN_ALLOYS,`
+    <div class="title background-color-active">Mercurian Alloys</div>
+    <div class="price">3</div>
+    <div class="tag tag1 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X07</div>
+    <div class="content">
+        <div class="requirements">2 Science</div>
+        <div class="resource titanium"></div> : + <div class="resource money">1</div>
+        <div class="description">
+            (Effect: Your titanium resources are worth 1 MC extra.)
+        </div><br/>
+        <div class="description">
+            (Requires 2 Science tags.)
+        </div>
+    </div>
+`],
+[CardName.REGO_PLASTICS,`
+    <div class="title background-color-active">Rego Plastics</div>
+    <div class="price">10</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X10</div>
+    <div class="content ">
+        <div class="points points-big">1</div>
+        <div class="resource steel"></div> : + <div class="resource money">1</div>
+        <div class="description">
+            (Effect: Your steel resources are worth 1 MC extra.)
+        </div>
+    </div>
+`],
+[CardName.INTERPLANETARY_TRADE,`
+    <div class="title background-color-automated">Interplanetary Trade</div>
+    <div class="price">27</div>
+    <div class="tag tag1 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X05</div>
+    <div class="content">
+        <div class="points points-big">1</div>
+        <div class="production-box"><div class="production money">1</div></div> /
+        <div class="resource-tag" style="background: linear-gradient(to bottom right, green, yellow, red);"></div>
+        <div class="description">
+            (Increase your MC production 1 step per different tag you have in play, including this.)
+        </div>
+        </div>
+    </div>
+`],
+[CardName.PROJECT_INSPECTION, `
+    <div class="title background-color-events">Project Inspection</div>
+    <div class="price">0</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X02</div>
+    <div class="content">
+        USE A CARD ACTION THAT HAS BEEN USED THIS GENERATION
+    </div>
+`],
+[CardName.ORBITAL_CLEANUP, `
+    <div class="title background-color-active">Orbital Cleanup</div>
+    <div class="price ">14</div>
+    <div class="tag tag1 tag-space"></div>
+    <div class="tag tag2 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X08</div>
+    <div class="content">
+        <div class="points points-big">2</div>
+        <span class="red-arrow"></span> <div class="money resource">1</div> / <div class="resource-tag tag-science"></div>
+        <div class="description " style="margin-bottom:10px;">
+            (Action: Gain 1 MC per Science tag you have.)
+        </div>
+        <div class="production-box"><div class="money production ">-2</div></div>
+        <div class="description">
+            (Decrease your MC production 2 steps.)
+        </div>
+    </div>
+`],
+[CardName.HI_TECH_LAB, `
+    <div class="title background-color-active">Hi-Tech Lab</div>
+    <div class="price ">17</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="tag tag2 tag-science"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X04</div>
+    <div class="content">
+        <div class="points points-big">1</div>
+        X <div class="energy resource "></div> <div class="red-arrow"></div> X <div class="card resource "></div>*
+        <div class="description">
+            (Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.)
+        </div>
+    </div>
+`],
+[CardName.ENERGY_MARKET, `
+    <div class="title background-color-active">Energy Market</div>
+    <div class="price ">3</div>
+    <div class="tag tag1 tag-power"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X03</div>
+    <div class="content ">
+        <div class="money resource">2X</div> <div class="red-arrow"></div> X <div class="energy resource"></div><br/>
+        OR <div class="production-box production-box-size1a"><div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div></div> <div class="red-arrow"></div> <div class="money resource">8</div>
+        <div class="description">
+            (Action: Spend 2X MC to gain X energy, or decrease energy production 1 step to gain 8 MC.)
+        </div>
+    </div>
+`],
+[CardName.LAW_SUIT, `
+    <div class="title background-color-events">Law Suit</div>
+    <div class="price ">2</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="tag tag2 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X06</div>
+    <div class="content">
+        <div class="points points-big red-outline">-1</div>
+        STEAL <div class="production money red-outline">3</div> *
+        <div class="description ">
+            (Steal 3 MC from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation.
+            Place this card face down in THAT PLAYER'S EVENT PILE.)
+        </div>
+    </div>
+`],
+[CardName.STANFORD_TORUS, `
+    <div class="title background-color-automated">Stanford Torus</div>
+    <div class="price">12</div>
+    <div class="tag tag1 tag-space"></div>
+    <div class="tag tag2 tag-city"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X12</div>
+    <div class="content">
+        <div class="points points-big">2</div>
+        <div class="tile city-tile"></div> *
+        <div class="description ">
+            (Place a city tile IN SPACE, outside and separate from the planet.)
+        </div>
+    </div>
+`],
+[CardName.SATURN_SURFING, `
+    <div class="title background-color-active">Saturn Surfing</div>
+    <div class="price">13</div>
+    ##RESOURCES##
+    <div class="tag tag1 tag-earth"></div>
+    <div class="tag tag2 tag-jovian"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X11</div>
+    <div class="content">
+        <div class="points points-big">1</div>
+        <div class="floater resource"></div>
+        <span class="red-arrow"></span>
+        <div class="money resource">1</div> / <div class="resource floater"></div> * (max 5)
+        <div class="description" style="margin-bottom:10px;">
+            (Action: Spend 1 floater from here to gain 1 MC from each floater here, INCLUDING THE PAID FLOATER (max 5).)
+        </div>
+        <div class="floater resource"></div> / <div class="resource-tag tag-earth"></div>
+        <div class="description">
+            (Add 1 floater here for every Earth tag you have, including this.)
+        </div>
     </div>
 `]
 ]);

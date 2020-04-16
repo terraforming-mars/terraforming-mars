@@ -49,6 +49,13 @@ export const PlayerHome = Vue.component("player-home", {
             if (player.id === this.player.id) return;
 
             (this.$root as any).setVisibilityState("other_player_" + player.id, true);
+        },
+        getFleetsCountRange: function(player: PlayerModel): Array<number> {
+            const fleetsRange: Array<number> = [];
+            for (var i=0; i < player.fleetSize - player.tradesThisTurn; i++) {
+                fleetsRange.push(i);
+            }
+            return fleetsRange
         }
     },
     mounted: function () {
@@ -57,7 +64,6 @@ export const PlayerHome = Vue.component("player-home", {
     template: `
         <div id="player-home">
            <h2 :class="'game-title player_color_'+ player.color" v-i18n>Terraforming Mars</h2>
-           <h1 :class="'player_bg_color_'+ player.color">{{player.name}}</h1>
             <section>
                 <dialog id="dialog-default">
                     <form method="dialog">
@@ -77,7 +83,7 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
             </div>
 
-            <preferences v-if="player.corporationCard" v-trim-whitespace></preferences>
+            <preferences v-trim-whitespace></preferences>
 
             <div v-if="player.corporationCard">
 
@@ -176,18 +182,22 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <h2 :class="'player_color_'+ player.color" v-i18n>Game details</h2>
 
-                <details class="accordion" v-if="player.players.length > 1">
-                    <summary class="accordion-header">
-                        <div class="is-action">
-                            <i class="icon icon-arrow-right mr-1"></i>
-                            <span v-i18n>Milestones and awards</span>
+                <div class="player_home_block" v-if="player.players.length > 1">
+                    <milestone :milestones_list="player.milestones" />
+                    <award :awards_list="player.awards" />
+                </div>
+
+                <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
+                    <h2 :class="'player_color_'+ player.color">
+                        <span v-i18n>Turn order</span>
+                    </h2>
+                    <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
+                        <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
+                            <span class="player_number">{{ idx+1 }}.</span><span class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</span>
                         </div>
-                    </summary>
-                    <div class="accordion-body">
-                        <milestone :milestones_list="player.milestones" :expanded="true" />
-                        <award :awards_list="player.awards" :expanded="true" />
+                        <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
                     </div>
-                </details>
+                </div>
 
                 <details class="accordion">
                     <summary class="accordion-header">
@@ -204,6 +214,11 @@ export const PlayerHome = Vue.component("player-home", {
 
             <div v-if="player.colonies.length > 0" class="player_home_block">
                 <h2 :class="'player_color_'+ player.color" v-i18n>Colonies</h2>
+                <div class="colonies-fleets-cont" v-if="player.corporationCard">
+                    <div class="colonies-player-fleets" v-for="colonyPlayer in player.players">
+                        <div :class="'colonies-fleet colonies-fleet-'+ colonyPlayer.color" v-for="idx in getFleetsCountRange(colonyPlayer)"></div>
+                    </div>
+                </div>
                 <div class="player_home_colony_cont">
                     <div class="player_home_colony" v-for="colony in player.colonies" :key="colony.name">
                         <colony :colony="colony" :player="player"></colony>

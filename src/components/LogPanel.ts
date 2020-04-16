@@ -6,6 +6,7 @@ import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
 import { Card } from "./Card";
+import { $t } from "../directives/i18n";
 
 export const LogPanel = Vue.component("log-panel", {
     props: ["messages", "players"],
@@ -25,31 +26,42 @@ export const LogPanel = Vue.component("log-panel", {
             }
         },
         parseData: function(data: LogMessageData) {
+            const translatableMessageDataTypes = [
+                LogMessageDataType.STANDART_PROJECT,
+                LogMessageDataType.MILESTONE,
+                LogMessageDataType.AWARD
+            ];
             if (data.type !== undefined && data.value !== undefined) {
                 if (data.type === LogMessageDataType.PLAYER) {
                     for (let player of this.players) {
-                        if (data.value === player.name) {
-                            return "<log-player class=\"player_bg_color_"+player.color+"\">"+data.value+"</log-player>";
+                        if (data.value === player.id) {
+                            return "<log-player class=\"player_bg_color_"+player.color+"\">"+player.name+"</log-player>";
                         }
                     }
                 } else if (data.type === LogMessageDataType.CARD) {
                     for (let player of this.players) {
-                        for (let card of player.playedCards) {
-                            if (data.value === card.name && card.cardType !== undefined) {
-                                if (card.cardType === CardType.EVENT) {
-                                    return "<log-card class=\"background-color-events\">"+data.value+"</log-card>";
-                                } else if (card.cardType === CardType.ACTIVE) {
-                                    return "<log-card class=\"background-color-active\">"+data.value+"</log-card>";
-                                } else if (card.cardType === CardType.AUTOMATED) {
-                                    return "<log-card class=\"background-color-automated\">"+data.value+"</log-card>";
-                                } else if (card.cardType === CardType.PRELUDE) {
-                                    return "<log-card class=\"background-color-prelude\">"+data.value+"</log-card>";
-                                } else {
-                                    return data.value;
+                        if (player.corporationCard !== undefined && data.value === player.corporationCard) {
+                            return "<log-card class=\"background-color-corporation\">"+data.value+"</log-card>";
+                        } else {
+                            for (let card of player.playedCards) {
+                                if (data.value === card.name && card.cardType !== undefined) {
+                                    if (card.cardType === CardType.EVENT) {
+                                        return "<log-card class=\"background-color-events\">"+data.value+"</log-card>";
+                                    } else if (card.cardType === CardType.ACTIVE) {
+                                        return "<log-card class=\"background-color-active\">"+data.value+"</log-card>";
+                                    } else if (card.cardType === CardType.AUTOMATED) {
+                                        return "<log-card class=\"background-color-automated\">"+data.value+"</log-card>";
+                                    } else if (card.cardType === CardType.PRELUDE) {
+                                        return "<log-card class=\"background-color-prelude\">"+data.value+"</log-card>";
+                                    } else {
+                                        return data.value;
+                                    }
                                 }
                             }
                         }
                     }
+                } else if (translatableMessageDataTypes.includes(data.type)) {
+                    return $t(data.value);
                 } else  {
                     return data.value;
                 }
@@ -58,6 +70,7 @@ export const LogPanel = Vue.component("log-panel", {
         },
         parseMessage: function(message: LogMessage) {
             if (message.type !== undefined && message.message !== undefined) {
+                message.message = $t(message.message);
                 return message.message.replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
                     return this.parseData(message.data[idx]);
                 });

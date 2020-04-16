@@ -18,7 +18,7 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
 
     public getVictoryPoints(player: Player) {
-        return player.getTagCount(Tags.JOVIAN);
+        return player.getTagCount(Tags.JOVIAN, false, false);
     }
     public play() {
         return undefined;

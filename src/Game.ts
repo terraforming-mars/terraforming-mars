@@ -568,6 +568,17 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public doneWorldGovernmentTerraforming() {
+      // Interrupt hook
+      if (this.interrupts.length > 0) {
+        let interrupt = this.interrupts.shift();
+        if (interrupt !== undefined && interrupt.playerInput !== undefined) {
+          interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+            this.doneWorldGovernmentTerraforming();
+          });
+          return;
+        }
+      }
+
       //Carry on to next phase
       this.gotoDraftOrResearch();
     }  

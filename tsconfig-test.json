@@ -424,6 +424,7 @@
         "tests/globalEvents/Pandemic.spec.ts",
         "tests/globalEvents/WarOnEarth.spec.ts",
         "tests/globalEvents/ImprovedEnergyTemplates.spec.ts",
+        "tests/globalEvents/InterplanetaryTrade.spec.ts",
         "tests/cards/turmoil/AerialLenses.spec.ts"
     ]
 }

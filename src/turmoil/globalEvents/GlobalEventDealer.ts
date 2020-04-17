@@ -15,6 +15,11 @@ import { Riots } from './Riots';
 import { Sabotage } from './Sabotage';
 import { SnowCover } from './SnowCover';
 import { VolcanicEruptions } from './VolcanicEruptions';
+import { InterplanetaryTrade } from './InterplanetaryTrade';
+import { ImprovedEnergyTemplates } from './ImprovedEnergyTemplates';
+import { WarOnEarth } from './WarOnEarth';
+import { Pandemic } from './Pandemic';
+import { Diversity } from './Diversity';
 
 
 
@@ -40,7 +45,11 @@ export const ALL_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
     { globalEventName: GlobalEventName.SABOTAGE , factory: Sabotage },
     { globalEventName: GlobalEventName.SNOW_COVER , factory: SnowCover },
     { globalEventName: GlobalEventName.VOLCANIC_ERUPTIONS , factory: VolcanicEruptions },
-
+    { globalEventName: GlobalEventName.DIVERSITY , factory: Diversity },     
+    { globalEventName: GlobalEventName.PANDEMIC , factory: Pandemic },        
+    { globalEventName: GlobalEventName.WAR_ON_EARTH , factory: WarOnEarth },    
+    { globalEventName: GlobalEventName.IMPROVED_ENERGY_TEMPLATES , factory: ImprovedEnergyTemplates },
+    { globalEventName: GlobalEventName.INTERPLANETARY_TRADE , factory: InterplanetaryTrade }
 ];
 
 // Function to return a global event object by its name

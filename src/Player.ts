@@ -1022,31 +1022,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     public playCard(game: Game, selectedCard: IProjectCard, howToPay?: HowToPay): undefined { 
 
-        //Activate some colonies
-        if (game.coloniesExtension && selectedCard.resourceType !== undefined) {
-          game.colonies.filter(colony => colony.resourceType !== undefined && colony.resourceType === selectedCard.resourceType).forEach(colony => {
-            colony.isActive = true;
-          });
-        }
-
-        // Play the card
-        const action = selectedCard.play(this, game);
-        if (action !== undefined) {
-            game.interrupts.push({
-                player: this,
-                playerInput: action
-            });
-        }
-
-        const projectCardIndex = this.cardsInHand.findIndex((card) => card.name === selectedCard.name);
-        const preludeCardIndex = this.preludeCardsInHand.findIndex((card) => card.name === selectedCard.name);
-        if (projectCardIndex !== -1) {
-          this.cardsInHand.splice(projectCardIndex, 1);
-        } else if (preludeCardIndex !== -1) {
-          this.preludeCardsInHand.splice(preludeCardIndex, 1);
-        }
-        this.addPlayedCard(game, selectedCard);
-
+        // Pay for card
         if (howToPay !== undefined) {
             this.steel -= howToPay.steel;
             this.titanium -= howToPay.titanium;
@@ -1059,36 +1035,59 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
                 if (playedCard.name === CardName.DIRIGIBLES) {
                     this.removeResourceFrom(playedCard, howToPay.floaters);
-                } 
+                }
             }
-          }
+        }
 
-          for (const playedCard of this.playedCards) {
+        //Activate some colonies
+        if (game.coloniesExtension && selectedCard.resourceType !== undefined) {
+            game.colonies.filter(colony => colony.resourceType !== undefined && colony.resourceType === selectedCard.resourceType).forEach(colony => {
+                colony.isActive = true;
+            });
+        }
+
+        // Play the card
+        const action = selectedCard.play(this, game);
+        if (action !== undefined) {
+            game.interrupts.push({
+                player: this,
+                playerInput: action
+            });
+        }
+
+        // Remove card from hand
+        const projectCardIndex = this.cardsInHand.findIndex((card) => card.name === selectedCard.name);
+        const preludeCardIndex = this.preludeCardsInHand.findIndex((card) => card.name === selectedCard.name);
+        if (projectCardIndex !== -1) {
+          this.cardsInHand.splice(projectCardIndex, 1);
+        } else if (preludeCardIndex !== -1) {
+          this.preludeCardsInHand.splice(preludeCardIndex, 1);
+        }
+        this.addPlayedCard(game, selectedCard);
+
+        for (const playedCard of this.playedCards) {
             if (playedCard.onCardPlayed !== undefined) {
-              const actionFromPlayedCard: OrOptions | void =
-                            playedCard.onCardPlayed(this, game, selectedCard);
-              if (actionFromPlayedCard !== undefined) {
-                game.interrupts.push({
-                    player: this,
-                    playerInput: actionFromPlayedCard
-                });
-              }
+                const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, game, selectedCard);
+                if (actionFromPlayedCard !== undefined) {
+                    game.interrupts.push({
+                        player: this,
+                        playerInput: actionFromPlayedCard
+                    });
+                }
             }
-          }
+        }
 
-          for (let somePlayer of game.getPlayers()) {
-            if (somePlayer.corporationCard !== undefined &&
-                somePlayer.corporationCard.onCardPlayed !== undefined
-            ) {
-              const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, game, selectedCard);
-              if (actionFromPlayedCard !== undefined) {
-                game.interrupts.push({
-                    player: this,
-                    playerInput: actionFromPlayedCard
-                });
-              }
+        for (let somePlayer of game.getPlayers()) {
+            if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCardPlayed !== undefined) {
+                const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, game, selectedCard);
+                if (actionFromPlayedCard !== undefined) {
+                    game.interrupts.push({
+                        player: this,
+                        playerInput: actionFromPlayedCard
+                    });
+                }
             }
-          }
+        }
 
         if (selectedCard.name === CardName.ECOLOGY_EXPERTS || selectedCard.name === CardName.ECCENTRIC_SPONSOR) {
             if (this.getPlayableCards(game).length > 0) {

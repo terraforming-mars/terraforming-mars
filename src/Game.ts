@@ -68,7 +68,6 @@ import { SponsoredMohole } from "./cards/turmoil/SponsoredMohole";
 import { WildlifeDome } from "./cards/turmoil/WildlifeDome";
 import { VoteOfNoConfidence } from "./cards/turmoil/VoteOfNoConfidence";
 import { SupportedResearch } from "./cards/turmoil/SupportedResearch";
-import { Terraformer } from "./milestones/Terraformer";
 import { PartyName } from "./turmoil/parties/PartyName";
 import { IParty } from "./turmoil/parties/IParty";
 import { InterplanetaryTrade } from "./cards/promo/InterplanetaryTrade";
@@ -252,15 +251,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.milestones.push(...ORIGINAL_MILESTONES);
         this.awards.push(...ORIGINAL_AWARDS);
 
-        // Terraformer target change with Turmoil extension
-        if(this.turmoilExtension) {
-          let terraformer = new Terraformer();
-          terraformer.terraformRating = 26;
-          const index = this.milestones.findIndex(({ name }) => name === "Terraformer");
-          if (index !== -1) {
-            this.milestones[index] = terraformer;
-          }
-        }
         return new OriginalBoard();
       }
     }

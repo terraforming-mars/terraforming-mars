@@ -20,6 +20,7 @@ import { ImprovedEnergyTemplates } from './ImprovedEnergyTemplates';
 import { WarOnEarth } from './WarOnEarth';
 import { Pandemic } from './Pandemic';
 import { Diversity } from './Diversity';
+import { CelebrityLeaders } from './CelebrityLeaders';
 
 
 
@@ -49,7 +50,8 @@ export const ALL_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
     { globalEventName: GlobalEventName.PANDEMIC , factory: Pandemic },        
     { globalEventName: GlobalEventName.WAR_ON_EARTH , factory: WarOnEarth },    
     { globalEventName: GlobalEventName.IMPROVED_ENERGY_TEMPLATES , factory: ImprovedEnergyTemplates },
-    { globalEventName: GlobalEventName.INTERPLANETARY_TRADE , factory: InterplanetaryTrade }
+    { globalEventName: GlobalEventName.INTERPLANETARY_TRADE , factory: InterplanetaryTrade },
+    { globalEventName: GlobalEventName.CELEBRITY_LEADERS , factory: CelebrityLeaders }    
 ];
 
 // Function to return a global event object by its name

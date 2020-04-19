@@ -28,7 +28,7 @@ export class Revolution implements IGlobalEvent {
                 players[0].decreaseTerraformRatingSteps(2);
                 players.shift();
 
-                if (players.length = 1) {
+                if (players.length === 1) {
                     players[0].decreaseTerraformRating();   
                 }
                 else if (players.length > 1) {

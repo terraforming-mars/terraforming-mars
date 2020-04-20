@@ -428,6 +428,8 @@
         "tests/globalEvents/CelebrityLeaders.spec.ts",
         "tests/globalEvents/SpinoffProducts.spec.ts",
         "tests/globalEvents/Election.spec.ts",
+        "tests/globalEvents/AquiferReleasedByPublicCouncil.spec.ts",
+        "tests/globalEvents/ParadigmBreakdown.spec.ts",
         "tests/cards/turmoil/AerialLenses.spec.ts"
     ]
 }

@@ -23,6 +23,8 @@ import { Diversity } from './Diversity';
 import { CelebrityLeaders } from './CelebrityLeaders';
 import { SpinoffProducts } from './SpinoffProducts';
 import { Election } from './Election';
+import { AquiferReleasedByPublicCouncil } from './AquiferReleasedByPublicCouncil';
+import { ParadigmBreakdown } from './ParadigmBreakdown';
 
 
 
@@ -56,6 +58,9 @@ export const ALL_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
     { globalEventName: GlobalEventName.CELEBRITY_LEADERS , factory: CelebrityLeaders },
     { globalEventName: GlobalEventName.SPINOFF_PRODUCTS , factory: SpinoffProducts },
     { globalEventName: GlobalEventName.ELECTION , factory: Election },    
+    { globalEventName: GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL , factory: AquiferReleasedByPublicCouncil },   
+    { globalEventName: GlobalEventName.PARADIGM_BREAKDOWN , factory: ParadigmBreakdown },
+    
 ];
 
 // Function to return a global event object by its name

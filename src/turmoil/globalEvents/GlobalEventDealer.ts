@@ -28,6 +28,7 @@ import { ParadigmBreakdown } from './ParadigmBreakdown';
 import { CorrosiveRain } from './CorrosiveRain';
 import { Game } from '../../Game';
 import { JovianTaxRights } from './JovianTaxRights';
+import { DryDeserts } from './DryDeserts';
 
 
 
@@ -73,6 +74,7 @@ export const ALL_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
     { globalEventName: GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL , factory: AquiferReleasedByPublicCouncil },   
     { globalEventName: GlobalEventName.PARADIGM_BREAKDOWN , factory: ParadigmBreakdown },
     { globalEventName: GlobalEventName.CORROSIVE_RAIN , factory: CorrosiveRain },
+    { globalEventName: GlobalEventName.DRY_DESERTS , factory: DryDeserts },    
 ];
 
 // Function to return a global event object by its name

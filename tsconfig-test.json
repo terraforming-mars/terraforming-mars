@@ -430,6 +430,7 @@
         "tests/globalEvents/Election.spec.ts",
         "tests/globalEvents/AquiferReleasedByPublicCouncil.spec.ts",
         "tests/globalEvents/ParadigmBreakdown.spec.ts",
+        "tests/globalEvents/CorrosiveRain.spec.ts",
         "tests/cards/turmoil/AerialLenses.spec.ts"
     ]
 }

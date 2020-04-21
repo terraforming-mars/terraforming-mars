@@ -62,6 +62,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
 
         // Init the global event dealer
         this.globalEventDealer = new GlobalEventDealer();
+        this.globalEventDealer.initGlobalEvents(game);
         this.initGlobalEvent(game);
     }
 

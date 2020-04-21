@@ -25,6 +25,9 @@ import { SpinoffProducts } from './SpinoffProducts';
 import { Election } from './Election';
 import { AquiferReleasedByPublicCouncil } from './AquiferReleasedByPublicCouncil';
 import { ParadigmBreakdown } from './ParadigmBreakdown';
+import { CorrosiveRain } from './CorrosiveRain';
+import { Game } from '../../Game';
+import { JovianTaxRights } from './JovianTaxRights';
 
 
 
@@ -32,6 +35,15 @@ export interface IGlobalEventFactory<T> {
     globalEventName: GlobalEventName;
     factory: new () => T
 }
+
+// COLONY ONLY GLOBAL EVENT
+export const COLONY_ONLY_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
+    { globalEventName: GlobalEventName.JOVIAN_TAX_RIGHTS , factory: JovianTaxRights }
+];    
+
+export const VENUS_COLONY_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
+    { globalEventName: GlobalEventName.CORROSIVE_RAIN , factory: CorrosiveRain }
+];    
 
 // ALL GLOBAL EVENTS
 export const ALL_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
@@ -60,7 +72,7 @@ export const ALL_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
     { globalEventName: GlobalEventName.ELECTION , factory: Election },    
     { globalEventName: GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL , factory: AquiferReleasedByPublicCouncil },   
     { globalEventName: GlobalEventName.PARADIGM_BREAKDOWN , factory: ParadigmBreakdown },
-    
+    { globalEventName: GlobalEventName.CORROSIVE_RAIN , factory: CorrosiveRain },
 ];
 
 // Function to return a global event object by its name
@@ -73,8 +85,23 @@ export function getGlobalEventByName(globalEventName: string): IGlobalEvent | un
 }
 
 export class GlobalEventDealer {
-    public globalEventsDeck: Array<IGlobalEvent> = this.shuffle(ALL_GLOBAL_EVENTS.map((cf) => new cf.factory()));
+    public globalEventsDeck: Array<IGlobalEvent> = [];
     public discardedGlobalEvents: Array<IGlobalEvent> = [];
+
+    public initGlobalEvents(game: Game) {
+        //this.globalEventsDeck = this.shuffle(ALL_GLOBAL_EVENTS.map((cf) => new cf.factory()));
+        var events;
+        if (game.venusNextExtension && game.coloniesExtension) {
+            events = [...COLONY_ONLY_GLOBAL_EVENTS, ...VENUS_COLONY_GLOBAL_EVENTS, ...ALL_GLOBAL_EVENTS];
+        } else if (!game.venusNextExtension && game.coloniesExtension) {
+            events = [...COLONY_ONLY_GLOBAL_EVENTS, ...ALL_GLOBAL_EVENTS];
+        } else if (game.venusNextExtension && !game.coloniesExtension){
+            events = [...VENUS_COLONY_GLOBAL_EVENTS, ...ALL_GLOBAL_EVENTS];
+        } else {
+            events = [...ALL_GLOBAL_EVENTS];
+        }
+        this.globalEventsDeck = this.shuffle(events.map((cf) => new cf.factory()));
+    };
 
     private shuffle(cards: Array<any>): Array<any> {
         const deck: Array<any> = [];

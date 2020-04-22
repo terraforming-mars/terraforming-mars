@@ -1123,6 +1123,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
         player.increaseTerraformRating(this);
       }  
     }
+
+    public removeTile(spaceId: string): void {
+      this.getSpace(spaceId).tile = undefined;
+      this.getSpace(spaceId).player = undefined;
+    }
+
     public getPlayers(): Array<Player> {
       // We always return them in turn order
       let ret: Array<Player> = [];

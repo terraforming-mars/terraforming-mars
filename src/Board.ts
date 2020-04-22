@@ -88,6 +88,12 @@ export abstract class Board {
         ).length;
     }
 
+    public getOceansTiles(): Array<ISpace> {
+        return this.spaces.filter((space) => space.tile !== undefined &&
+                    space.tile.tileType === TileType.OCEAN
+        );
+    }    
+
     public getSpaces(spaceType: SpaceType): Array<ISpace> {
         return this.spaces.filter((space) => space.spaceType === spaceType);
     }

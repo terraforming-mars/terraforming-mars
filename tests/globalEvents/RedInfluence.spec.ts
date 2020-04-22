@@ -1,32 +1,30 @@
 import { expect } from "chai";
-import { CelebrityLeaders } from "../../src/turmoil/globalEvents/CelebrityLeaders";
+import { RedInfluence } from "../../src/turmoil/globalEvents/RedInfluence";
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
-import { Resources } from "../../src/Resources";
 import { Game } from '../../src/Game';
 import { Turmoil } from '../../src/turmoil/Turmoil';
 import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
-import { Virus } from '../../src/cards/Virus';
+import { Resources } from "../../src/Resources";
 
-describe("CelebrityLeaders", function () {
+describe("RedInfluence", function () {
     it("resolve play", function () {
-        const card = new CelebrityLeaders();
+        const card = new RedInfluence();
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
         const turmoil = new Turmoil(game);
-        turmoil.initGlobalEvent(game);
-        player.playedCards.push(new Virus());
-        player2.playedCards.push(new Virus());
-        player2.playedCards.push(new Virus());
+        player.setTerraformRating(23);
+        player.megaCredits = 10;
+        player2.megaCredits = 10;
         turmoil.chairman = player2;
         turmoil.dominantParty = new Kelvinists();
         turmoil.dominantParty.partyLeader = player2;
         turmoil.dominantParty.delegates.push(player2);
-        player.megaCredits = 10;
-        player2.megaCredits = 10;
         card.resolve(game, turmoil);
-        expect(player.getResource(Resources.MEGACREDITS)).to.eq(12);
-        expect(player2.getResource(Resources.MEGACREDITS)).to.eq(20);
+        expect(player.getResource(Resources.MEGACREDITS)).to.eq(4);
+        expect(player2.getResource(Resources.MEGACREDITS)).to.eq(4);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
+        expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(3);
     });
 });

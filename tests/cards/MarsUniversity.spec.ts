@@ -7,10 +7,12 @@ import { Game } from "../../src/Game";
 import { Pets } from "../../src/cards/Pets";
 import { OrOptions } from "../../src/inputs/OrOptions";
 import { Research } from "../../src/cards/Research";
+import { TransNeptuneProbe } from "../../src/cards/TransNeptuneProbe";
 
 describe("MarsUniversity", function () {
     it("Should play", function () {
         const card = new MarsUniversity();
+        const card1 = new TransNeptuneProbe();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const action = card.play();
@@ -20,7 +22,9 @@ describe("MarsUniversity", function () {
         expect(card.onCardPlayed(player, game, new Pets())).to.eq(undefined);
         expect(game.interrupts.length).to.eq(0);
         player.cardsInHand.push(card);
-        card.onCardPlayed(player, game, card);
+        card.onCardPlayed(player, game, card); //doesn't trigger iself
+        expect(game.interrupts.length).to.eq(0);
+        card.onCardPlayed(player, game, card1);
         expect(game.interrupts.length).to.eq(1);
         let orOptions = game.interrupts[0].playerInput as OrOptions;
         game.interrupts.splice(0, 1);

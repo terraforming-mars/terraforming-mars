@@ -37,6 +37,7 @@ export class MarsUniversity implements IProjectCard {
       ) });
     }
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
+        if (card.name === CardName.MARS_UNIVERSITY) return undefined;
         this.runInterrupts(player, game, card.tags.filter((tag) => tag === Tags.SCIENCE).length);
         return undefined;
     }

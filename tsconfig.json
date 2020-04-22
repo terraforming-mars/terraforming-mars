@@ -13,8 +13,13 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "target": "es5",
-    "types": ["node"],
-    "moduleResolution": "node"
+    "types": [
+      "node",
+      "mocha",
+      "chai"
+    ],
+    "moduleResolution": "node",
+    
   },
   "include": [
     "src/*.ts",

@@ -7,28 +7,43 @@ import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
 import { CardName } from '../CardName';
+import { ResourceType } from "../ResourceType";
 
 export class ViralEnhancers implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.MICROBES];
     public name: CardName = CardName.VIRAL_ENHANCERS;
     public cardType: CardType = CardType.ACTIVE;
+    private applyCardBonus(player: Player, game: Game, card: IProjectCard, resourceCount: number): void {
+        if (resourceCount <= 0) {
+            return;
+        }
 
-    public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {
-        let resourceCount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES).length;
-        if (resourceCount > 0 && card.resourceType !== undefined) {
-            return new OrOptions(
-                new SelectOption("Add " + resourceCount + " resource(s) to card " + card.name, () => {
-                    player.addResourceTo(card, resourceCount);
+        game.interrupts.push({
+            player: player,
+            playerInput: new OrOptions(
+                new SelectOption("Add resource to card " + card.name, () => {
+                    player.addResourceTo(card);
+                    this.applyCardBonus(player, game, card, resourceCount - 1);
                     return undefined;
                 }),
-                new SelectOption("Gain " + resourceCount + " plant(s)", () => {
-                    player.plants += resourceCount;
+                new SelectOption("Gain plant", () => {
+                    player.plants++;
+                    this.applyCardBonus(player, game, card, resourceCount - 1);
                     return undefined;
                 })
-            );
+            )
+        });
+    }
+    public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
+        const resourceCount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES).length;
+        if (resourceCount > 0) {
+            if (card.resourceType === ResourceType.ANIMAL || card.resourceType === ResourceType.MICROBE) {
+                this.applyCardBonus(player, game, card, resourceCount);
+            } else {
+                player.plants += resourceCount;
+            }
         }
-        player.plants += resourceCount;
         return undefined;
     }
     public play() {

@@ -59,88 +59,123 @@
     filter: drop-shadow(0px 1px 1px #222) drop-shadow(0px -1px 1px #222);
 }
 
-/* fonts */
-@font-face {
-    font-family: Prototype;
-    src: url("./assets/Prototype.ttf");
-}
-  
+
 .turmoil {
-    margin-left: auto;
-    margin-right: auto;
-    font-family: Prototype;
-    position: relative;
     color: #000000;
     font-size: medium;
     line-height: initial;
     box-sizing: initial;
     text-align: center;
-    width: 1000px;
+    width: 1010px;
     display: inline-block;
-}
-  
-.turmoil::after {
-    content: "";
-    background: url("./assets/mars.png") no-repeat center center;
-    width: 100%;
-    height: 100%;
-    background-size: 1710px;
-    border-radius: 20px;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    z-index: -1;
+    vertical-align: top;
 }
 
 .events-board {
     display: inline-block;
-    width: 665px;
-    padding: 10px;
-    border-radius: 15px;
-    text-align: center;
+    vertical-align: top;
+    width: 1025px;
     box-sizing: initial;
+    text-align: left;
+    margin: 0 0 0 10px;
 }
   
 .global-event {
     display: inline-block;
-    width: 205px;
-    background: linear-gradient(lightyellow, lightblue, lightblue);
-    height: 260px;
-    padding: 5px;
-    border: 1px solid #444;
-    border-radius: 10px;
-    box-shadow: 0 2px 2px rgba(0,0,0,.5);
+    vertical-align: top;
+    width: 350px;
+    height: 186px;
+    background: url(assets/turmoil_ui.png);
+    background-position: -21px -172px;
+    margin: 20px 0 0 -13px;
 }
   
-.global-event-current {
-    filter: brightness(110%);
+.global-event--current {
+    background-position: -727px -172px;
+}
+
+.global-event--comming {
+    background-position: -375px -172px;
 }
   
 .event-title {
-    height: 60px;
-    line-height: 60px;
+    display: none;
 }
 .event-parties {
     margin-bottom: 10px;
 }
   
 .event-party {
-    display: inline-block;
-    width: 100px;
-    background-color: rgba(0,0,0,.2);
-    height: 40px;
-    line-height: 40px;
-    border-radius: 5px;
-}
-  
-.turmoil-board {
-    display: inline-block;
-    vertical-align: bottom;
-    padding: 10px;
-    border-radius: 15px;
+    position: absolute;
+    width: 200px;
+    font-family: Ubuntu, Sans;
+    font-weight: bold;
     text-align: center;
+    line-height: 35px;
+    color: #fff;
+    background: #000;
+    text-transform: uppercase;
+
+    &.event-party--top {
+        clip-path: polygon(5% 0, 95% 0, 100% 30%, 100% 80%, 100% 100%, 6% 100%, 0% 70%, 0 0);
+        margin: 0px 0 0 69px;
+    }
+
+    &.event-party--bottom {
+        margin: 136px 0 0 127px;
+        clip-path: polygon(5% 0%, 100% 0, 100% 40%, 89% 102%, 0% 100%, 0% 35%);
+    }
+
+    &.event-party--greens {
+        background: #16b215;
+    }
+
+    &.event-party--scientists {
+        background: #fff;
+        color: #222;
+    }
+
+    &.event-party--mars_first {
+        background: #c97e23;
+    }
+
+    &.event-party--unity {
+        background: #108ff0;
+    }
+
+    &.event-party--reds {
+        background: #e65b5a;
+    }
+
+    &.event-party--kelvinists {
+        background: #5d4d4d;
+    }
+}
+
+.global-event--comming .event-party--bottom {
+    margin-left: 123px
+}
+
+.global-event--current .event-party--bottom {
+    margin-left: 121px
+}
+
+.event-content {
+    display: table-cell;
+    vertical-align: middle;
+    height: 170px;
+    padding: 0 30px;
+}
+
+.turmoil-board {
+    margin: 10px 0 0 0;
+    background: url(assets/turmoil_ui.png);
+    background-position: -25px -383px;
+    min-height: 500px;
+}
+
+.turmoil-header {
+    min-height: 180px;
 }
   
 .grid-parties {
@@ -150,7 +185,7 @@
 }
   
 .board-party {
-    width: 150px;
+    width: 160px;
     height: 160px;
     border-radius: 0 0 10px 10px;
 }
@@ -158,63 +193,107 @@
 .grid-delegates {
     display: grid;
     grid-template-columns: auto auto auto;
-    padding: 10px;
-    gap:5px;
+    padding: 10px 7px 7px 9px;
+    gap:0px;
+    min-height: 118px;
 }
   
 .delegate-spot {
     width: 40px;
     height:40px;
-    background: linear-gradient(transparent, rgba(0,0,0,.1));
+    /*background: linear-gradient(transparent, rgba(0,0,0,.1));*/
+
 }
   
 .party-name {
-    height: 20px;
-    line-height: 20px;
+    height: 31px;
+    line-height: 32px;
+    clip-path: polygon(5% 0, 95% 0, 100% 30%, 100% 80%, 100% 100%, 6% 100%, 0% 70%, 0 0);
+    background: #e00bc4;
+    width: 165px;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0 0 6px -3px;
+
+    &.party-name--greens {
+        background: #16b215;
+    }
+
+    &.party-name--scientists {
+        background: #fff;
+        color: #222;
+    }
+
+    &.party-name--mars_first {
+        background: #c97e23;
+    }
+
+    &.party-name--unity {
+        background: #108ff0;
+    }
+
+    &.party-name--reds {
+        background: #e65b5a;
+    }
+
+    &.party-name--kelvinists {
+        background: #5d4d4d;
+    }
 }
   
 .grid-leaders {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto;
     gap:10px;
+    margin: 11px 0 0 2px;
 }
   
 .party-bonus {
     line-height: 18px;
+    transform: scale(0.8);
 }
   
 .leader-spot {
     width: 40px;
     padding: 7px 55px 0 55px;
-    height:45px;
-    background: linear-gradient(transparent, rgba(0,0,0,.2));
+    height:72px;
     z-index: 2;
+
+    .delegate-spot {
+        transform: scale(0.70);
+        margin-top: 5px;
+    }
 }
   
-.turmoil-header {
-    display: flex;
-    border-bottom: 5px solid rgba(0,0,0,.3);
-}
   
-.grid-lobby {
-    display: grid;
+.turmoil-lobby {
+    position: absolute;
     width: 320px;
-    grid-template-columns: auto auto auto auto auto auto;
+    margin: 59px 0 0 52px;
+    text-align: left;
+}
+  
+.turmoil-reserve {
+    position: absolute;
+    width: 320px;
+    margin: 58px 0 0 651px;
+    text-align: left;
 }
   
 .lobby-spot {
-    width: 44px;
-    height: 30px;
-    padding: 5px;
-    background: linear-gradient(rgba(0,0,0,.5), transparent);
-    border-radius: 10px 10px 0 0;
+    width: 52px;
+    height: 63px;
+    display: inline-block;
 }
 .chairman-spot {
-    width: 60px;
-    height: 35px;
-    padding: 10px;
-    background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.3));
-    border-radius: 20px 20px 0 0;
+    width: 95px;
+    height: 87px;
+    background: url(assets/turmoil_ui.png);
+    background-position: -343px 876px;
+    position: absolute;
+    margin: 36px 0 0 495px;
+    padding: 17px 0 0 42px;
+    transform: scale(0.8);
 }
   
 .label-lobby {
@@ -228,54 +307,53 @@
 }
   
 .player-token {
-    width: 36px;
-    height: 36px;
-    line-height: 36px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 5px;
-    box-shadow: 0 2px 2px rgba(0,0,0,.5);
+    width: 50px;
+    height: 60px;
+    background: url(assets/turmoil_ui.png);
+    background-position: -25px -383px;
+    font-size: 27px;
     text-align: center;
-    font-size: 30px;
+    padding: 27px 0 0 0;
     color: white;
-    text-shadow: 0 0  2px black;
-    border-top: 2px solid rgb(221,221,221);
-    border-left: 2px solid rgb(221,221,221);
-    border-bottom: 2px solid rgb(137,137,137);
-    border-right: 2px solid rgb(137,137,137);
+    font-family: Prototype;
+
+    &.red {
+        background-position: -699px 850px;
+    }
+
+    &.yellow {
+        background-position: -644px 850px;
+    }
+
+    &.black {
+        background-position: -754px 850px;
+    }
+
+    &.blue {
+        background-position: -809px 850px;
+    }
+
+    &.green {
+        background-position: -865px 850px;
+    }
+
+    &.neutral {
+        background-position: -919px 850px;
+        color: #7b7b7b;
+    }
 }
   
 .player-token-new-leader {
-    box-shadow:0 2px 5px 5px #fff;
+    background: url(assets/turmoil_ui.png);
+    background-position: -486px 861px;
 }
-  
-.red {background-color: red}
-.green {background-color: green}
-.blue {background-color: blue}
-.yellow {background-color: rgba(255, 255, 0, 0.726)}
-.black {background-color: #444}
-.neutral {background-color: #ccc;}
 
-.board-party--marsfirst { background: rgb(203,156,131); }
-.board-party--scientists { background: rgb(244,231,204); }
-.board-party--unity { background: rgb(162,190,225); }
-.board-party--kelvinists { background: rgb(183,108,108); }
-.board-party--reds { background: rgb(258,165,169); }
-.board-party--greens { background: rgb(181,217,179); }
+.dominant-party-bonus {
+    position: absolute;
+    margin: 69px 0px 0 352px;
+    width: 150px;
+}
 
-.leader-spot--marsfirst { background: linear-gradient(rgba(0,0,0,.3), rgb(203,156,131)); }
-.leader-spot--scientists { background: linear-gradient(rgba(0,0,0,.3), rgb(244,231,204)); }
-.leader-spot--unity { background: linear-gradient(rgba(0,0,0,.3), rgb(162,190,225)); }
-.leader-spot--kelvinists { background: linear-gradient(rgba(0,0,0,.3), rgb(183,108,108)); }
-.leader-spot--reds { background: linear-gradient(rgba(0,0,0,.3), rgb(258,165,169)); }
-.leader-spot--greens { background: linear-gradient(rgba(0,0,0,.3), rgb(181,217,179)); }
-
-.party-name--marsfirst { background: rgb(200,125,33); }
-.party-name--scientists { background: #eee; }
-.party-name--unity { background: rgb(59,154,227); }
-.party-name--kelvinists { background: rgb(165,81,9); }
-.party-name--reds { background: rgb(231,109,109); }
-.party-name--greens { background: rgb(9,170,9); }
 
 .party-production {
     display: inline-block;
@@ -312,6 +390,8 @@
     font-size: 20px;
     padding-bottom: 4px;
     padding-left: 5px;
+    height: 16px;
+    line-height: 11px;
 }
 
 .party-inferior-rating {
@@ -321,7 +401,8 @@
     font-weight: normal;
     padding-bottom: 7px;
     padding-left: 5px;
-    vertical-align: middle;
+    height: 16px;
+    line-height: 11px;
 }
 
 .party-tile {

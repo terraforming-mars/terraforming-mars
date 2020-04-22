@@ -18,17 +18,16 @@ export class ViralEnhancers implements IProjectCard {
         let resourceCount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBES).length;
         if (resourceCount > 0 && card.resourceType !== undefined) {
             return new OrOptions(
-                new SelectOption("Add " + resourceCount + " resource(s) to card " + card.name, () => {
-                    player.addResourceTo(card, resourceCount);
+                new SelectOption("Add one resource to card " + card.name, () => {
+                    player.addResourceTo(card, 1);
                     return undefined;
                 }),
-                new SelectOption("Gain " + resourceCount + " plant(s)", () => {
-                    player.plants += resourceCount;
+                new SelectOption("Gain 1 plant", () => {
+                    player.plants += 1;
                     return undefined;
                 })
             );
         }
-        player.plants += resourceCount;
         return undefined;
     }
     public play() {

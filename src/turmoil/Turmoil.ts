@@ -202,7 +202,20 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
         this.setNextPartyAsDominant(this.rulingParty!);
 
         // 3.c - Fill the lobby
-        this.lobby = new Set<Player>(game.getPlayers());
+        this.lobby.forEach(player => {
+            this.delegate_reserve.push(player);
+        });
+        this.lobby = new Set<Player>();
+
+        game.getPlayers().forEach(player => {
+            if (this.getDelegates(player) > 0) { 
+                const index = this.delegate_reserve.indexOf(player);
+                if (index > -1) {
+                    this.delegate_reserve.splice(index, 1);
+                }
+                this.lobby.add(player);
+            }
+        });
 
         // 4 - Changing Time
         if (this.currentGlobalEvent) {
@@ -241,7 +254,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
 
             const index = this.rulingParty.delegates.indexOf(this.rulingParty.partyLeader!);
             // Remove the party leader from the delegates array
-            this.rulingParty.delegates.slice(index, 1);
+            this.rulingParty.delegates.splice(index, 1);
             // Fill the delegate reserve
             this.delegate_reserve = this.delegate_reserve.concat(this.rulingParty.delegates);
 

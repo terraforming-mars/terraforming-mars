@@ -29,6 +29,13 @@ import { CorrosiveRain } from './CorrosiveRain';
 import { Game } from '../../Game';
 import { JovianTaxRights } from './JovianTaxRights';
 import { DryDeserts } from './DryDeserts';
+import { ScientificCommunity } from './ScientificCommunity';
+import { RedInfluence } from './RedInfluence';
+import { SolarnetShutdown } from './SolarnetShutdown';
+import { StrongSociety } from './StrongSociety';
+import { SolarFlare } from './SolarFlare';
+import { VenusInfrastructure } from './VenusInfrastructure';
+import { CloudSocieties } from './CloudSocieties';
 
 
 
@@ -43,7 +50,8 @@ export const COLONY_ONLY_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>>
 ];    
 
 export const VENUS_COLONY_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
-    { globalEventName: GlobalEventName.CORROSIVE_RAIN , factory: CorrosiveRain }
+    { globalEventName: GlobalEventName.CORROSIVE_RAIN , factory: CorrosiveRain },
+    { globalEventName: GlobalEventName.CLOUD_SOCIETIES , factory: CloudSocieties },  
 ];    
 
 // ALL GLOBAL EVENTS
@@ -74,7 +82,14 @@ export const ALL_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
     { globalEventName: GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL , factory: AquiferReleasedByPublicCouncil },   
     { globalEventName: GlobalEventName.PARADIGM_BREAKDOWN , factory: ParadigmBreakdown },
     { globalEventName: GlobalEventName.CORROSIVE_RAIN , factory: CorrosiveRain },
-    { globalEventName: GlobalEventName.DRY_DESERTS , factory: DryDeserts },    
+    { globalEventName: GlobalEventName.DRY_DESERTS , factory: DryDeserts },
+    { globalEventName: GlobalEventName.SCIENTIFIC_COMMUNITY , factory: ScientificCommunity },
+    { globalEventName: GlobalEventName.RED_INFLUENCE , factory: RedInfluence },
+    { globalEventName: GlobalEventName.SOLARNET_SHUTDOWN , factory: SolarnetShutdown },
+    { globalEventName: GlobalEventName.STRONG_SOCIETY , factory: StrongSociety },
+    { globalEventName: GlobalEventName.SOLAR_FLARE , factory: SolarFlare },
+    { globalEventName: GlobalEventName.VENUS_INFRASTRUCTURE , factory: VenusInfrastructure },
+    
 ];
 
 // Function to return a global event object by its name

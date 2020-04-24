@@ -81,7 +81,6 @@ export const ALL_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
     { globalEventName: GlobalEventName.ELECTION , factory: Election },    
     { globalEventName: GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL , factory: AquiferReleasedByPublicCouncil },   
     { globalEventName: GlobalEventName.PARADIGM_BREAKDOWN , factory: ParadigmBreakdown },
-    { globalEventName: GlobalEventName.CORROSIVE_RAIN , factory: CorrosiveRain },
     { globalEventName: GlobalEventName.DRY_DESERTS , factory: DryDeserts },
     { globalEventName: GlobalEventName.SCIENTIFIC_COMMUNITY , factory: ScientificCommunity },
     { globalEventName: GlobalEventName.RED_INFLUENCE , factory: RedInfluence },

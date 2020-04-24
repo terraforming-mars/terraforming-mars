@@ -9,5 +9,6 @@ export enum PlayerInputTypes {
     SELECT_OPTION,
     SELECT_PLAYER,
     SELECT_SPACE,
-    SELECT_DELEGATE
+    SELECT_DELEGATE,
+    SELECT_PARTY
 }

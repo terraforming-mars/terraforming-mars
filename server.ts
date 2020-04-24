@@ -32,6 +32,7 @@ import { ClaimedMilestoneModel } from "./src/models/ClaimedMilestoneModel";
 import { FundedAwardModel } from "./src/models/FundedAwardModel";
 import { Database } from './src/database/Database';
 import { PartyModel, DelegatesModel, TurmoilModel } from './src/models/TurmoilModel';
+import { SelectDelegate } from './src/inputs/SelectDelegate';
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
@@ -516,6 +517,17 @@ function getWaitingFor(
       break;
     case PlayerInputTypes.SELECT_AMOUNT:
       result.max = (waitingFor as SelectAmount).max;
+      break;
+    case PlayerInputTypes.SELECT_DELEGATE:
+      result.players = (waitingFor as SelectDelegate)
+          .players.map((player) => {
+            if(player === "NEUTRAL") {
+              return "NEUTRAL";
+            }  
+            else {
+              return player.id;
+            }
+          });
       break;
   }
   return result;

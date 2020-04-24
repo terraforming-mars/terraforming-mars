@@ -41,6 +41,7 @@ import {LogMessageData} from "./LogMessageData";
 import {LogMessageDataType} from "./LogMessageDataType";
 import { SelectParty } from "./interrupts/SelectParty";
 import { PartyName } from "./turmoil/parties/PartyName";
+import { SelectDelegate } from "./inputs/SelectDelegate";
 
 export class Player implements ILoadable<SerializedPlayer, Player>{
     public corporationCard: CorporationCard | undefined = undefined;
@@ -710,6 +711,28 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         const foundPlayer = pi.players.find(
             (player) => player.id === input[0][0]
         );
+        if (foundPlayer === undefined) {
+          throw new Error("Player not available");
+        }
+        this.runInputCb(game, pi.cb(foundPlayer));
+      } else if (pi instanceof SelectDelegate) {
+        if (input.length !== 1) {
+          throw new Error("Incorrect options provided");
+        }
+        if (input[0].length !== 1) {
+          throw new Error("Invalid players array provided");
+        }
+        let foundPlayer: Player | "NEUTRAL" | undefined = undefined;
+        if (input[0][0] === "NEUTRAL") {
+          foundPlayer = "NEUTRAL";
+        }
+        else {
+          pi.players.forEach(player => {
+            if (player instanceof Player && player.id === input[0][0]) {
+              foundPlayer = player;
+            }
+          });
+        }
         if (foundPlayer === undefined) {
           throw new Error("Player not available");
         }
@@ -2042,7 +2065,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           const selectParty = new SelectParty(this, game, "Send a delegate in an area (from lobby)");
           action.options.push(selectParty.playerInput);
         }
-        else if (this.canAfford(5)){
+        else if (this.canAfford(5) && game.turmoil!.getDelegates(this) > 0){
           const selectParty = new SelectParty(this, game, "Send a delegate in an area (5MC)", 1, undefined, 5);
           action.options.push(selectParty.playerInput);
         }

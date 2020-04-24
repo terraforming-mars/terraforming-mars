@@ -39,18 +39,16 @@ export abstract class Party  {
                     let playersToCheck = [];
 
                     // Manage if it's the first player or the last
-                    if (game.getPlayers().length === 1) {
+                    if (game.getPlayers().length === 1 || currentIndex === 0) {
                         playersToCheck = game.getPlayers();
-                    }
-                    else if (currentIndex === 0) {
-                        playersToCheck = game.getPlayers().slice(currentIndex + 1);
                     }
                     else if (currentIndex === game.getPlayers().length - 1) {
                         playersToCheck = game.getPlayers().slice(0, currentIndex);
+                        playersToCheck.unshift(game.getPlayers()[currentIndex]);
                     }
                     else {
                         let left = game.getPlayers().slice(0, currentIndex);
-                        const right = game.getPlayers().slice(currentIndex + 1);
+                        const right = game.getPlayers().slice(currentIndex);
                         playersToCheck = right.concat(left);
                     }
                     

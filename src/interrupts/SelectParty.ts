@@ -24,10 +24,15 @@ export class SelectParty implements PlayerInterrupt {
         sendDelegate.title = title;
         let parties;
         if (replace) {
-          parties = game.turmoil!.parties.filter(party => 
-              party.delegates.length > 1 && 
-              [...party.delegates].splice(party.delegates.indexOf(party.partyLeader!),1).indexOf(replace) != -1
-          );
+          parties = game.turmoil!.parties.filter(party => {
+              if (party.delegates.length > 1) {
+                let delegates = [...party.delegates];
+                delegates.splice(party.delegates.indexOf(party.partyLeader!),1);
+                return delegates.indexOf(replace) != -1;
+              } else {
+                return false;
+              }
+          });
         }
         else {
           parties = game.turmoil!.parties;

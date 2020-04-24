@@ -207,7 +207,7 @@ export class RoboticWorkforce implements IProjectCard {
                 }
 
                 let updaters: Array<Updater> = [
-                    new Updater(CardName.DOME_FARMING, 2, 0, 0, 0, 1, 0),
+                    new Updater(CardName.DOME_FARMING, 0, 2, 0, 0, 1, 0),
                     new Updater(CardName.EARLY_SETTLEMENT, 0, 0, 0, 0, 1, 0),
                     new Updater(CardName.MARTIAN_INDUSTRIES, 1, 0, 1, 0, 0, 0),
                     new Updater(CardName.MINING_OPERATIONS, 0, 0, 2, 0, 0, 0),

@@ -44,6 +44,43 @@ export const Turmoil = Vue.component("turmoil", {
         else {
           return `<p>Error</p>`;
         }
+      },
+      getPolicy: function (party: PartyName) {
+        if (party === PartyName.MARS) {
+          return `<div class="tile empty-tile-small"></div> : 
+          <span class="steel resource">`;
+        }
+        else if (party === PartyName.SCIENTISTS) {
+          return `<span class="money resource">10</span>
+          <span class="red-arrow"></span>
+          <span class="card resource party-resource"></span>
+          <span class="card resource party-resource"></span>
+          <span class="card resource party-resource"></span>`;
+        }
+        else if (party === PartyName.UNITY) {
+          return `<div class="resource titanium"></div> : 
+          + <div class="resource money">1</div>`;
+        }
+        else if (party === PartyName.KELVINISTS) {
+          return `<span class="money resource">10</span>
+          <span class="red-arrow"></span>
+          <div class="production-box production-box-size2">
+            <div class="energy production"></div>
+            <div class="heat production"></div>
+          </div>`;
+        }
+        else if (party === PartyName.REDS) {
+          return `
+          <div class="rating tile"></div> : 
+          <div class="resource money">-3</div>`;
+        }
+        else if (party === PartyName.GREENS) {
+          return `<div class="tile greenery-tile"></div> : 
+          <div class="resource money">4</div>`;
+        }
+        else {
+          return `<p>No ruling Policy</p>`;
+        }
       }
     },
     template: `
@@ -73,7 +110,7 @@ export const Turmoil = Vue.component("turmoil", {
                 <div v-if="turmoil.lobby.length >= n" :class="'player-token '+turmoil.lobby[n-1]"></div>
             </div>
           </div>
-          <div class="dominant-party-bonus" v-html="getBonus(turmoil.dominant)"></div>
+          <div class="dominant-party-bonus" v-html="getPolicy(turmoil.ruling)"></div>
           <div class="chairman-spot"><div v-if="turmoil.chairman" :class="'player-token '+turmoil.chairman"></div></div>
           <div class="turmoil-reserve">
               <div class="lobby-spot" v-for="n in 6" :key="n">

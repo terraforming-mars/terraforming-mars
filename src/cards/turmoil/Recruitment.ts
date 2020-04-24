@@ -14,10 +14,15 @@ export class Recruitment implements IProjectCard {
 
     public canPlay(_player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {
-            let parties = game.turmoil!.parties.filter(party => 
-                party.delegates.length > 1 && 
-                party.delegates.splice(party.delegates.indexOf(party.partyLeader!),1).indexOf("NEUTRAL") != -1
-            );
+            let parties = game.turmoil!.parties.filter(party => {
+                if (party.delegates.length > 1) {
+                  let delegates = [...party.delegates];
+                  delegates.splice(party.delegates.indexOf(party.partyLeader!),1);
+                  return delegates.indexOf("NEUTRAL") != -1;
+                } else {
+                  return false;
+                }
+            });
             return parties.length > 0
         }
         return false;

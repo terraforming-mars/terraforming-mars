@@ -6,9 +6,6 @@ import { Player } from "../../Player";
 import { Game } from '../../Game';
 import { PartyName } from '../../turmoil/parties/PartyName';
 import { Resources } from "../../Resources";
-import { HowToPay } from "../../inputs/HowToPay";
-import { AndOptions } from "../../inputs/AndOptions";
-import { SelectHowToPay } from "../../inputs/SelectHowToPay";
 import { SelectParty } from "../../interrupts/SelectParty";
 
 
@@ -30,30 +27,13 @@ export class MartianMediaCenter implements IProjectCard {
         return undefined;
     }
 
-    public canAct(): boolean {
-        return true;
+    public canAct(player: Player): boolean {
+        return player.canAfford(3);
     }
 
     public action(player: Player, game: Game) {
-        let howToPay: HowToPay;
-        return new AndOptions(
-            () => {
-              if (howToPay.megaCredits + howToPay.heat < 3) {
-                throw new Error('Need to pay 3');
-              }
-              player.heat -= howToPay.heat;
-              player.megaCredits -= howToPay.megaCredits;
-              game.addInterrupt(new SelectParty(player, game));
-              return undefined;
-            },
-            new SelectHowToPay(
-                'Select how to pay for action', false, false,
-                player.canUseHeatAsMegaCredits, 3,
-                (htp: HowToPay) => {
-                  howToPay = htp;
-                  return undefined;
-                }
-            )
-        );
+        game.addSelectHowToPayInterrupt(player, 3, false, false, "Select how to pay for Martian Media Center action");
+        game.addInterrupt(new SelectParty(player, game));
+        return undefined;
     }
 }

@@ -242,6 +242,10 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
             this.rulingParty.rulingBonus(game);
 
             // Change the chairman
+            if (this.chairman) {
+                this.delegate_reserve.push(this.chairman);
+            }
+            
             this.chairman = this.rulingParty.partyLeader;
             if (this.chairman) {
                 if (this.chairman instanceof Player) {

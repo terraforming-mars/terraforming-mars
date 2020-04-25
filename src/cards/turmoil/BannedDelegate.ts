@@ -9,7 +9,7 @@ import { SelectDelegate } from "../../inputs/SelectDelegate";
 
 export class BannedDelegate implements IProjectCard {
     public cost: number = 0;
-    public tags: Array<Tags> = [Tags.EVENT];
+    public tags: Array<Tags> = [];
     public name: CardName = CardName.BANNED_DELEGATE;
     public cardType: CardType = CardType.EVENT;
 

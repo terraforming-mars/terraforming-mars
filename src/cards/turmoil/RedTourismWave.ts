@@ -9,7 +9,7 @@ import { Resources } from "../../Resources";
 
 export class RedTourismWave implements IProjectCard {
     public cost: number = 3;
-    public tags: Array<Tags> = [Tags.EARTH, Tags.EVENT];
+    public tags: Array<Tags> = [Tags.EARTH];
     public name: CardName = CardName.RED_TOURISM_WAVE;
     public cardType: CardType = CardType.EVENT;
 

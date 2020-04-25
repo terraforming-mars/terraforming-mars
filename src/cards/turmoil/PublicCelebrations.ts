@@ -7,7 +7,7 @@ import { Game } from '../../Game';
 
 export class PublicCelebrations implements IProjectCard {
     public cost: number = 8;
-    public tags: Array<Tags> = [Tags.EVENT];
+    public tags: Array<Tags> = [];
     public name: CardName = CardName.PUBLIC_CELEBRATIONS;
     public cardType: CardType = CardType.EVENT;
 

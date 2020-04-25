@@ -23,7 +23,7 @@ export class DiasporaMovement implements IProjectCard {
 
     public play(player: Player, game: Game) {
         let amount = game.getPlayers()
-          .map((aplayer) => aplayer.getTagCount(Tags.JOVIAN))
+          .map((aplayer) => aplayer.getTagCount(Tags.JOVIAN, false, false))
           .reduce((a, c) => a + c, 0);
         player.setProduction(Resources.MEGACREDITS, amount + 1);
         return undefined;

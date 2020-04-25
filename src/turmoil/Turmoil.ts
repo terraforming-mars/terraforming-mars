@@ -12,6 +12,9 @@ import { GlobalEventDealer, getGlobalEventByName } from "./globalEvents/GlobalEv
 import { IGlobalEvent } from "./globalEvents/IGlobalEvent";
 import { ILoadable } from "../ILoadable";
 import { SerializedTurmoil } from "./SerializedTurmoil";
+import { LogMessageType } from "../LogMessageType";
+import { LogMessageData } from '../LogMessageData';
+import { LogMessageDataType } from '../LogMessageDataType';
 
 export interface IPartyFactory<T> {
     partyName: PartyName;
@@ -233,6 +236,9 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
         if (this.distantGlobalEvent) {
             this.sendDelegateToParty("NEUTRAL", this.distantGlobalEvent.revealedDelegate, game);
         }
+        game.log(
+            LogMessageType.DEFAULT,
+            "Turmoil phase has been resolved");        
     }
 
     // Ruling Party changes
@@ -250,6 +256,10 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
             if (this.chairman) {
                 if (this.chairman instanceof Player) {
                     this.chairman.increaseTerraformRating(game);
+                    game.log(
+                        LogMessageType.DEFAULT,
+                        "${0} is the new chairman and got 1 TR increase",
+                        new LogMessageData(LogMessageDataType.PLAYER, this.chairman.id));
                 }
             }
             else {

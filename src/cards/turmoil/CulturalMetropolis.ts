@@ -18,7 +18,7 @@ export class CulturalMetropolis implements IProjectCard {
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {
-            return game.turmoil.canPlay(player, PartyName.UNITY);
+            return game.turmoil.canPlay(player, PartyName.UNITY) && player.getProduction(Resources.ENERGY) >= 1;
         }
         return false;
     }

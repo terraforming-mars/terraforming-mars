@@ -8,7 +8,7 @@ import { SelectParty } from "../../interrupts/SelectParty";
 
 export class Recruitment implements IProjectCard {
     public cost: number = 2;
-    public tags: Array<Tags> = [Tags.EVENT];
+    public tags: Array<Tags> = [];
     public name: CardName = CardName.RECRUITMENT;
     public cardType: CardType = CardType.EVENT;
 

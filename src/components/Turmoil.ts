@@ -81,6 +81,13 @@ export const Turmoil = Vue.component("turmoil", {
         else {
           return `<p>No ruling Policy</p>`;
         }
+      },
+      toggleMe: function () {
+        let currentState: boolean = this.isVisible();
+        (this.$root as any).setVisibilityState("turmoil.parties", ! currentState);
+      },
+      isVisible: function () {
+          return (this.$root as any).getVisibilityState("turmoil.parties");
       }
     },
     template: `
@@ -138,6 +145,16 @@ export const Turmoil = Vue.component("turmoil", {
             <div class="party-bonus">
               <span v-html="getBonus(party.name)"></span>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="policies">
+        <div class="policies-title">
+            <a class="policies-clickable" href="#" v-on:click.prevent="toggleMe()" v-i18n>Policies</a>
+        </div>
+        <div v-show="isVisible()" class='policies-global'>
+          <div v-for="party in turmoil.parties" class='policy-block'>
+            <span>{{party.name}}<span class="policy-bonus" v-html="getPolicy(party.name)"></span></span>
           </div>
         </div>
       </div>

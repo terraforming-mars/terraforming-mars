@@ -1303,6 +1303,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
             card: tileCard
           };
         }
+        // Correct Land Claim
+        else if(element.player) {
+          if (element.player){
+            let space = this.getSpace(element.id);
+            let playerIndex: number = this.players.findIndex((player) => player.id === element.player!.id);
+            space.player = this.players[playerIndex];
+          }
+        }
       });
 
       // Reload colony elements if needed 

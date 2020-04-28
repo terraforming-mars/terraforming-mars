@@ -220,6 +220,18 @@ export class Game implements ILoadable<SerializedGame, Game> {
       );
     }
 
+    // Function to retrieve a player by it's id
+    public getPlayerById(id: string): Player {
+      return this.players.filter(p => p.id === id)[0];
+    }
+
+    // Function to return an array of players from an array of player ids
+    public getPlayersById(ids: Array<string>): Array<Player> {
+      let players: Array<Player> = [];
+      ids.forEach(id => players.push(this.getPlayerById(id)));
+      return players;
+    }
+
     // Function to construct the board and milestones/awards list
     public boardConstructor(boardName: BoardName): Board {
       if (boardName === BoardName.ELYSIUM) {

@@ -1193,7 +1193,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="resource-tag tag-plant"></div> / <div class="resource-tag tag-microbe"></div> / <div class="resource-tag tag-animal"></div> : <br><br>
             <div class="plant resource"></div> / <div class="microbe resource"></div>* / <div class="animal resource"></div>*
             <div class="description ">
-                (Effect: When you play a  plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.)
+                (Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.)
             </div>
         </div>
 `],
@@ -7137,6 +7137,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.SATURN_SURFING, `
     <div class="title background-color-active">Saturn Surfing</div>
     <div class="price">13</div>
+    ##RESOURCES##
     <div class="tag tag1 tag-earth"></div>
     <div class="tag tag2 tag-jovian"></div>
     <div class="promo-icon project-icon"></div>

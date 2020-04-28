@@ -39,7 +39,7 @@ export const mainAppSettings = {
             const currentPathname: string = window.location.pathname;
             const xhr = new XMLHttpRequest();
             let app = (this as any);
-            xhr.open("GET", "/api/player" + window.location.search);
+            xhr.open("GET", "/api/player" + window.location.search.replace("&noredirect", ""));
             xhr.onerror = function () {
                 alert("Error getting game data");
             };
@@ -47,7 +47,7 @@ export const mainAppSettings = {
                 if (xhr.status === 200) {
                     app.player = xhr.response;
                     app.playerkey ++;
-                    if (app.player.phase == "end") {
+                    if (app.player.phase === "end" &&  window.location.search.indexOf("&noredirect") === -1 ) {
                         app.screen = "the-end";
                         if (currentPathname != "/the-end") {
                             window.history.replaceState(xhr.response, "Teraforming Mars - Player", "/the-end?id=" + xhr.response.id);

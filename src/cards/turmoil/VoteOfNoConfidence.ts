@@ -7,7 +7,7 @@ import { Game } from '../../Game';
 
 export class VoteOfNoConfidence implements IProjectCard {
     public cost: number = 5;
-    public tags: Array<Tags> = [Tags.EVENT];
+    public tags: Array<Tags> = [];
     public name: CardName = CardName.VOTE_OF_NO_CONFIDENCE;
     public cardType: CardType = CardType.EVENT;
 

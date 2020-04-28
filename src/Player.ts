@@ -430,6 +430,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             new LogMessageData(LogMessageDataType.PLAYER, removingPlayer.id)
           );
         }
+        // Lawsuit hook
+        if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.indexOf(removingPlayer.id) === -1) {
+          this.removingPlayers.push(removingPlayer.id);
+        }
       }
     }
     public addResourceTo(card: ICard, count: number = 1): void {

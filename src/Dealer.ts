@@ -408,6 +408,9 @@ import { OrbitalCleanup } from "./cards/promo/OrbitalCleanup";
 import { ProjectInspection } from "./cards/promo/ProjectInspection";
 import { HiTechLab } from "./cards/promo/HiTechLab";
 import { EnergyMarket } from "./cards/promo/EnergyMarket";
+import { LawSuit } from "./cards/promo/LawSuit";
+import { StanfordTorus } from "./cards/promo/StanfordTorus";
+import { SaturnSurfing } from "./cards/promo/SaturnSurfing";
 
 import { ILoadable } from "./ILoadable";
 import { CardName } from "./CardName";
@@ -554,7 +557,8 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.NEUTRALIZER_FACTORY, factory: NeutralizerFactory },
     { cardName: CardName.ORBITAL_REFLECTORS, factory: OrbitalReflectors },
     { cardName: CardName.OMNICOURT, factory: Omnicourt },
-    { cardName: CardName.MINING_QUOTA, factory: MiningQuota }
+    { cardName: CardName.MINING_QUOTA, factory: MiningQuota },
+    { cardName: CardName.SATURN_SURFING, factory: SaturnSurfing }
 ];    
 
 export const ALL_COLONIES_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
@@ -878,7 +882,9 @@ export const ALL_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.ORBITAL_CLEANUP, factory: OrbitalCleanup },
     { cardName: CardName.PROJECT_INSPECTION, factory: ProjectInspection },
     { cardName: CardName.HI_TECH_LAB, factory: HiTechLab },
-    { cardName: CardName.ENERGY_MARKET, factory: EnergyMarket }
+    { cardName: CardName.ENERGY_MARKET, factory: EnergyMarket },
+    { cardName: CardName.LAW_SUIT, factory: LawSuit },
+    { cardName: CardName.STANFORD_TORUS, factory: StanfordTorus }
 ];
 
 // Function to return a card object by its name

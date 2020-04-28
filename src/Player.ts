@@ -84,6 +84,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public colonyTradeOffset: number = 0;
     public colonyTradeDiscount: number = 0;
     private turmoilScientistsActionUsed: boolean = false;
+    public removingPlayers: Array<Player> = [];
 
     constructor(
         public name: string,
@@ -202,6 +203,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (resource === Resources.HEAT) this.heat = Math.max(0, this.heat + amount);
       
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
+        if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer) === -1) {
+          this.removingPlayers.push(fromPlayer);
+        }
         game.log(
           LogMessageType.DEFAULT,
           "${0}'s ${1} amount modified by ${2} by ${3}",
@@ -239,6 +243,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (resource === Resources.HEAT) this.heatProduction = Math.max(0, this.heatProduction + amount);
       
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
+        if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer) === -1) {
+          this.removingPlayers.push(fromPlayer);
+        }
         game.log(
           LogMessageType.DEFAULT,
           "${0}'s ${1} production modified by ${2} by ${3}",
@@ -816,6 +823,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     public runProductionPhase(): void {
       this.actionsThisGeneration.clear();
+      this.removingPlayers = [];
       this.tradesThisTurn = 0;
       this.turmoilScientistsActionUsed = false;
       this.megaCredits += this.megaCreditProduction + this.terraformRating;
@@ -887,7 +895,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           )
         );
       }
-      if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
+      if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE && game.venusNextExtension) {
         action.options.push(
           new SelectOption("Increase Venus scale", () => {
             game.increaseVenusScaleLevel(this,1, true);

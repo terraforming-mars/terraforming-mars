@@ -7102,6 +7102,57 @@ export const HTML_DATA: Map<string, string> =
         Gain 1 TR.)
       </div>
   </div>
+`],
+[CardName.LAW_SUIT, `
+    <div class="title background-color-events">Law Suit</div>
+    <div class="price ">2</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="tag tag2 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X06</div>
+    <div class="content">
+        <div class="points points-big red-outline">-1</div>
+        STEAL <div class="production money red-outline">3</div> *
+        <div class="description ">
+            (Steal 3 MC from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation.
+            Place this card face down in THAT PLAYER'S EVENT PILE.)
+        </div>
+    </div>
+`],
+[CardName.STANFORD_TORUS, `
+    <div class="title background-color-automated">Stanford Torus</div>
+    <div class="price">12</div>
+    <div class="tag tag1 tag-space"></div>
+    <div class="tag tag2 tag-city"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X12</div>
+    <div class="content">
+        <div class="points points-big">2</div>
+        <div class="tile city-tile"></div> *
+        <div class="description ">
+            (Place a city tile IN SPACE, outside and separate from the planet.)
+        </div>
+    </div>
+`],
+[CardName.SATURN_SURFING, `
+    <div class="title background-color-active">Saturn Surfing</div>
+    <div class="price">13</div>
+    <div class="tag tag1 tag-earth"></div>
+    <div class="tag tag2 tag-jovian"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="card-number">X11</div>
+    <div class="content">
+        <div class="points points-big">1</div>
+        <div class="floater resource"></div>
+        <span class="red-arrow"></span>
+        <div class="money resource">1</div> / <div class="resource floater"></div> * (max 5)
+        <div class="description" style="margin-bottom:10px;">
+            (Action: Spend 1 floater from here to gain 1 MC from each floater here, INCLUDING THE PAID FLOATER (max 5).)
+        </div>
+        <div class="floater resource"></div> / <div class="resource-tag tag-earth"></div>
+        <div class="description">
+            (Add 1 floater here for every Earth tag you have, including this.)
+        </div>
+    </div>
 `]
-
 ]);

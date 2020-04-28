@@ -40,18 +40,22 @@ export const LogPanel = Vue.component("log-panel", {
                     }
                 } else if (data.type === LogMessageDataType.CARD) {
                     for (let player of this.players) {
-                        for (let card of player.playedCards) {
-                            if (data.value === card.name && card.cardType !== undefined) {
-                                if (card.cardType === CardType.EVENT) {
-                                    return "<log-card class=\"background-color-events\">"+data.value+"</log-card>";
-                                } else if (card.cardType === CardType.ACTIVE) {
-                                    return "<log-card class=\"background-color-active\">"+data.value+"</log-card>";
-                                } else if (card.cardType === CardType.AUTOMATED) {
-                                    return "<log-card class=\"background-color-automated\">"+data.value+"</log-card>";
-                                } else if (card.cardType === CardType.PRELUDE) {
-                                    return "<log-card class=\"background-color-prelude\">"+data.value+"</log-card>";
-                                } else {
-                                    return data.value;
+                        if (player.corporationCard !== undefined && data.value === player.corporationCard) {
+                            return "<log-card class=\"background-color-corporation\">"+data.value+"</log-card>";
+                        } else {
+                            for (let card of player.playedCards) {
+                                if (data.value === card.name && card.cardType !== undefined) {
+                                    if (card.cardType === CardType.EVENT) {
+                                        return "<log-card class=\"background-color-events\">"+data.value+"</log-card>";
+                                    } else if (card.cardType === CardType.ACTIVE) {
+                                        return "<log-card class=\"background-color-active\">"+data.value+"</log-card>";
+                                    } else if (card.cardType === CardType.AUTOMATED) {
+                                        return "<log-card class=\"background-color-automated\">"+data.value+"</log-card>";
+                                    } else if (card.cardType === CardType.PRELUDE) {
+                                        return "<log-card class=\"background-color-prelude\">"+data.value+"</log-card>";
+                                    } else {
+                                        return data.value;
+                                    }
                                 }
                             }
                         }

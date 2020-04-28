@@ -5,8 +5,8 @@ import { Board, Land, Ocean, BoardColony } from "./Board";
 export class ElysiumBoard extends Board{
     constructor() {
         super();
-        this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY)); 
-        this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));                    
+        this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY));
+        this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));
 
         let idx = 3, pos_x = 4, pos_y=0;
 
@@ -105,5 +105,7 @@ export class ElysiumBoard extends Board{
             new Land(idx++, pos_x++, pos_y, [SpaceBonus.DRAW_CARD]),
             new Land(idx++, pos_x++, pos_y, [SpaceBonus.STEEL, SpaceBonus.STEEL])
         );
+
+        this.spaces.push(new BoardColony(SpaceName.STANFORD_TORUS));
     }    
 }

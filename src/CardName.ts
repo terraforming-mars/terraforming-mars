@@ -412,5 +412,8 @@ export enum CardName {
     SPONSORED_MOHOLE = "Sponsored Mohole",
     SUPPORTED_RESEARCH = "Supported Research",
     WILDLIFE_DOME = "Wildlife Dome",
-    VOTE_OF_NO_CONFIDENCE = "Vote Of No Confidence"
+    VOTE_OF_NO_CONFIDENCE = "Vote Of No Confidence",
+    LAW_SUIT = "Law Suit",
+    STANFORD_TORUS = "Stanford Torus",
+    SATURN_SURFING = "Saturn Surfing"
 }

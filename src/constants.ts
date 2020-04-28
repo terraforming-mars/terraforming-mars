@@ -15,3 +15,9 @@ export const MAX_VENUS_SCALE: number = 30;
 export const AIR_SCRAPING_COST: number = 15;
 export const OCEAN_BONUS: number = 2;
 export const BUILD_COLONY_COST: number = 17;
+export const LANGUAGES = [
+    {"id": "en", "title": "English"},
+    {"id": "de", "title": "German"},
+    {"id": "fr", "title": "French"},
+    {"id": "ru", "title": "Russian"}
+];

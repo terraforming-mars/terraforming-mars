@@ -13,55 +13,62 @@ export class Election implements IGlobalEvent {
     public revealedDelegate = PartyName.GREENS;
     public currentDelegate = PartyName.MARS;
     public resolve(game: Game, turmoil: Turmoil) {
-        interface result {player: Player, score: number};
-        let results: Array<result> = [];
-        game.getPlayers().forEach(player => {
-            let score: number = player.getTagCount(Tags.STEEL, false, false) + turmoil.getPlayerInfluence(player) + game.board.spaces.filter(
-                (space) => space.tile !== undefined &&
-                         space.tile.tileType === TileType.CITY &&
-                         space.player === player
-            ).length;
-            results.push({player : player, score: score});
-        });
         // Solo
-        if(results.length === 1 && results[0].score >= 10) {
-            results[0].player.increaseTerraformRatingSteps(2, game);
-            return;
-        } else if (results.length === 1 && results[0].score >= 5) {
-            results[0].player.increaseTerraformRating(game);
-            return;            
+        if(game.soloMode) {
+            if(this.getScore(game.getPlayers()[0], turmoil, game) >= 10) {
+                game.getPlayers()[0].increaseTerraformRatingSteps(2, game);
+            }
+            else if (this.getScore(game.getPlayers()[0], turmoil, game) >= 1) {
+                game.getPlayers()[0].increaseTerraformRatingSteps(1, game);
+            }
         }
+        else {
+            const players = [...game.getPlayers()].sort(
+                (p1, p2) => this.getScore(p2, turmoil, game) - this.getScore(p1, turmoil, game)
+            );
 
-        results = results.sort(
-            (p1, p2) => p2.score - p1.score
-        );
+            // We have one rank 1 player
+            if (this.getScore(players[0], turmoil, game) > this.getScore(players[1], turmoil, game)) {
+                players[0].increaseTerraformRatingSteps(2, game);
+                players.shift();
 
-        // First rank
-        if (results[0].score > results[1].score) {
-            results[0].player.increaseTerraformRatingSteps(2, game);
-            results.shift();
-        } else {
-            let referenceScore = results[0].score;
-            results.forEach(result => {
-                if (results[0].score === referenceScore) {
-                    result.player.increaseTerraformRatingSteps(2, game);
+                if (players.length === 1) {
+                    players[0].increaseTerraformRatingSteps(1, game);   
                 }
-            });
-            return;
-        }
-
-        // Second rank
-        if (results[0].score > results[1].score) {
-            results[0].player.increaseTerraformRating(game);
-            return;
-        } else {
-            let referenceScore = results[0].score;
-            results.forEach(result => {
-                if (results[0].score === referenceScore) {
-                    result.player.increaseTerraformRating(game);
+                else if (players.length > 1) {
+                    // We have one rank 2 player
+                    if (this.getScore(players[0], turmoil, game) > this.getScore(players[1], turmoil, game)) {
+                        players[0].increaseTerraformRatingSteps(1, game);
+                    // We have at least two rank 2 players
+                    } 
+                    else {
+                        const score = this.getScore(players[0], turmoil, game);
+                        while (players.length > 0 && this.getScore(players[0], turmoil, game) === score) {
+                            players[0].increaseTerraformRatingSteps(1, game);
+                            players.shift();
+                        }
+                    }
                 }
-            });
-            return;
+            // We have at least two rank 1 players
+            } else {
+                const score = this.getScore(players[0], turmoil, game);
+                while (players.length > 0 && this.getScore(players[0], turmoil, game) === score) {
+                    players[0].increaseTerraformRatingSteps(2, game);
+                    players.shift();
+                }
+            }
         }
+    }
+
+    public getScore(player: Player, turmoil: Turmoil, game: Game) {
+        let score = player.getTagCount(Tags.STEEL, false, false) + turmoil.getPlayerInfluence(player);
+
+        const cities = game.board.spaces.filter(
+            (space) => space.tile !== undefined &&
+                     space.tile.tileType === TileType.CITY &&
+                     space.player === player
+        ).length;
+
+        return score + cities;
     }
 }    

@@ -40,6 +40,6 @@ describe("DiasporaMovement", function () {
         player.playedCards.push(card2);
         player2.playedCards.push(card3);
         card.play(player, game);
-        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
+        expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
     });
 });

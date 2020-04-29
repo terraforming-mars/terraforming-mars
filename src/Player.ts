@@ -42,6 +42,7 @@ import {LogMessageDataType} from "./LogMessageDataType";
 import { SelectParty } from "./interrupts/SelectParty";
 import { PartyName } from "./turmoil/parties/PartyName";
 import { SelectDelegate } from "./inputs/SelectDelegate";
+import { Phase } from "./Phase";
 
 export class Player implements ILoadable<SerializedPlayer, Player>{
     public corporationCard: CorporationCard | undefined = undefined;
@@ -333,8 +334,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       });
 
       // Turmoil Victory Points
-      if (game.turmoilExtension && game.turmoil){
-        this.victoryPointsBreakdown.setVictoryPoints("turmoil", game.turmoil.getPlayerVictoryPoints(this));
+      if (game.phase === Phase.END && game.turmoilExtension && game.turmoil){
+        this.victoryPointsBreakdown.setVictoryPoints("victoryPoints", game.turmoil.getPlayerVictoryPoints(this), "Turmoil Points");
       }
 
       this.victoryPointsBreakdown.updateTotal();

@@ -28,7 +28,7 @@ import { ParadigmBreakdown } from './ParadigmBreakdown';
 import { CorrosiveRain } from './CorrosiveRain';
 import { Game } from '../../Game';
 import { JovianTaxRights } from './JovianTaxRights';
-import { DryDeserts } from './DryDeserts';
+// import { DryDeserts } from './DryDeserts';
 import { ScientificCommunity } from './ScientificCommunity';
 import { RedInfluence } from './RedInfluence';
 import { SolarnetShutdown } from './SolarnetShutdown';
@@ -81,7 +81,8 @@ export const ALL_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
     { globalEventName: GlobalEventName.ELECTION , factory: Election },    
     { globalEventName: GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL , factory: AquiferReleasedByPublicCouncil },   
     { globalEventName: GlobalEventName.PARADIGM_BREAKDOWN , factory: ParadigmBreakdown },
-    { globalEventName: GlobalEventName.DRY_DESERTS , factory: DryDeserts },
+    // Need to be fixerd 
+    // { globalEventName: GlobalEventName.DRY_DESERTS , factory: DryDeserts },
     { globalEventName: GlobalEventName.SCIENTIFIC_COMMUNITY , factory: ScientificCommunity },
     { globalEventName: GlobalEventName.RED_INFLUENCE , factory: RedInfluence },
     { globalEventName: GlobalEventName.SOLARNET_SHUTDOWN , factory: SolarnetShutdown },

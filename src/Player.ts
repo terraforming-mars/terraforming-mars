@@ -431,6 +431,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             new LogMessageData(LogMessageDataType.PLAYER, removingPlayer.id)
           );
         }
+        // Lawsuit hook
+        if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.indexOf(removingPlayer.id) === -1) {
+          this.removingPlayers.push(removingPlayer.id);
+        }
       }
     }
     public addResourceTo(card: ICard, count: number = 1): void {
@@ -1102,7 +1106,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           if (howToPay.titanium > this.titanium) {
             throw new Error("Do not have enough titanium");
           }
-          totalToPay += howToPay.titanium * this.titaniumValue;
+          totalToPay += howToPay.titanium * this.getTitaniumValue(game);
         }
 
         if (this.canUseHeatAsMegaCredits && howToPay.heat !== undefined) {
@@ -1454,7 +1458,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         return selectColony;
       });
 
-      if (this.canAfford(9) && this.canUseHeatAsMegaCredits && this.heat > 0) {
+      if (this.canAfford(9, game) && this.canUseHeatAsMegaCredits && this.heat > 0) {
         let htp: HowToPay;
         let helionTrade = new SelectHowToPay(
           "Select how to spend " + (9 - this.colonyTradeDiscount) +" MC",
@@ -1789,7 +1793,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           maxPay += this.steel * this.steelValue;
         }
         if (canUseTitanium) {
-          maxPay += this.titanium * this.titaniumValue;
+          maxPay += this.titanium * this.getTitaniumValue(game);
         }
 
         let psychrophiles = this.playedCards.find(
@@ -1816,10 +1820,16 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       });
     }
 
-    public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false): boolean {
+    public canAfford(cost: number, game?: Game, canUseSteel: boolean = false, canUseTitanium: boolean = false): boolean {
+      if (game !== undefined && canUseTitanium) {
+        return (this.canUseHeatAsMegaCredits ? this.heat : 0) +
+        (canUseSteel ? this.steel * this.steelValue : 0) +
+        (canUseTitanium ? this.titanium * this.getTitaniumValue(game) : 0) +
+          this.megaCredits >= cost;        
+      } 
+      
       return (this.canUseHeatAsMegaCredits ? this.heat : 0) +
               (canUseSteel ? this.steel * this.steelValue : 0) +
-              (canUseTitanium ? this.titanium * this.titaniumValue : 0) +
                 this.megaCredits >= cost;
     }
 

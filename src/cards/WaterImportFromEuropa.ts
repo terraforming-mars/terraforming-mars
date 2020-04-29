@@ -24,7 +24,7 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
         return undefined;
     }
     public canAct(player: Player, game: Game): boolean {
-        return (player.canAfford(12,false, true) && game.board.getOceansOnBoard() < MAX_OCEAN_TILES);
+        return (player.canAfford(12, game, false, true) && game.board.getOceansOnBoard() < MAX_OCEAN_TILES);
     }
     public action(player: Player, game: Game) {
         let htp: HowToPay;

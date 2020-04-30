@@ -101,7 +101,7 @@ export const Card = Vue.component("card", {
         }
     },
     template: `
-    <div class="filterDiv" v-html=this.getData()></div>
+    <div class="filterDiv" v-i18n v-html=this.getData()></div>
     `
 });
 

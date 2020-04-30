@@ -1994,6 +1994,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         if(element.resourceCount && element.resourceCount > 0) {
           card.resourceCount = element.resourceCount;
         }
+        if(card instanceof SelfReplicatingRobots && element instanceof SelfReplicatingRobots) {
+          card.targetCard = element.targetCard;
+        }
         return card;
       });
 

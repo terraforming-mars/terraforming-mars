@@ -1,6 +1,7 @@
 import { IAward } from "./IAward";
 import { Player } from "../Player";
 import { Game } from "../Game";
+import { ResourceType } from "../ResourceType";
 
 export class Excentric implements IAward {
     public name: string = "Excentric";
@@ -11,7 +12,10 @@ export class Excentric implements IAward {
           score += player.getResourcesOnCard(player.corporationCard);
         }  
         player.playedCards.forEach(card => {
-            score += player.getResourcesOnCard(card);
+            // exclude Self Replicating Robots
+            if (card.resourceType !== ResourceType.ROBOT) {
+                score += player.getResourcesOnCard(card);
+            }
         });
         return score;
     }   

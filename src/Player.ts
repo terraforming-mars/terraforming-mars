@@ -218,7 +218,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       // Global event logging
-      if (game !== undefined && globalEvent !== undefined  && globalEvent && amount < 0) {
+      if (game !== undefined && globalEvent && amount < 0) {
         game.log(
           LogMessageType.DEFAULT,
           "${0}'s ${1} amount modified by ${2} by Global Event",

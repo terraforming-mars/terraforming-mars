@@ -13,7 +13,7 @@ import { CardName } from "./CardName";
 import { BoardName } from "./BoardName";
 import { SerializedPlayer } from "./SerializedPlayer";
 import { SerializedDealer } from "./SerializedDealer";
-import { Turmoil } from "./turmoil/Turmoil";
+import { SerializedTurmoil } from "./turmoil/SerializedTurmoil";
 
 export interface SerializedGame {
     id: string;
@@ -54,6 +54,6 @@ export interface SerializedGame {
     colonyDealer: ColonyDealer | undefined;
     pendingOceans: number;
     lastSaveId: number;
-    turmoil: Turmoil;
+    turmoil: SerializedTurmoil;
 }
 

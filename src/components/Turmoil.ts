@@ -7,7 +7,7 @@ export const Turmoil = Vue.component("turmoil", {
     ],
     methods: {
       partyNameToCss: function (party: PartyName): string {
-        return party.toLowerCase().replace(" ", "_");
+        return party.toLowerCase().split(" ").join("_");
       },
       getBonus: function (party: PartyName) {
         if (party === PartyName.MARS) {
@@ -32,7 +32,7 @@ export const Turmoil = Vue.component("turmoil", {
         }
         else if (party === PartyName.REDS) {
           return `
-          <div class="party-inferior-rating tile party-rating party-tile"><</div> : 
+          <div class="party-inferior-rating tile party-rating party-tile">&lt;</div> : 
           <div class="rating tile party-rating party-tile"></div>`;
         }
         else if (party === PartyName.GREENS) {
@@ -48,7 +48,7 @@ export const Turmoil = Vue.component("turmoil", {
       getPolicy: function (party: PartyName) {
         if (party === PartyName.MARS) {
           return `<div class="tile empty-tile-small"></div> : 
-          <span class="steel resource">`;
+          <span class="steel resource"></span>`;
         }
         else if (party === PartyName.SCIENTISTS) {
           return `<span class="money resource">10</span>

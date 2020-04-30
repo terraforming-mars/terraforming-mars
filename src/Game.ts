@@ -1281,11 +1281,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
         // Correct Land Claim
         else if(element.player) {
-          if (element.player){
-            let space = this.getSpace(element.id);
-            let playerIndex: number = this.players.findIndex((player) => player.id === element.player!.id);
-            space.player = this.players[playerIndex];
-          }
+          let space = this.getSpace(element.id);
+          let playerIndex: number = this.players.findIndex((player) => player.id === element.player!.id);
+          space.player = this.players[playerIndex];
         }
       });
 
@@ -1322,7 +1320,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         // Rebuild chairman
         if (d.turmoil.chairman) {
           if (d.turmoil.chairman === "NEUTRAL"){
-            this.turmoil.chairman === "NEUTRAL";
+            this.turmoil.chairman = "NEUTRAL";
           }
           else {
             const chairman_id = d.turmoil.chairman.id

@@ -618,20 +618,16 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
       ruling = game.turmoil.rulingParty.name;
     }
 
-    let lobby = new Array<Color>();
-    game.turmoil.lobby.forEach(player => {
-      lobby.push(player.color);
-    });
+    const lobby = Array.from(game.turmoil.lobby, player => player.color);
 
-    let reserve = new Array<DelegatesModel>();
-    game.turmoil.getPresentPlayers().forEach(player => {
+    const reserve = game.turmoil.getPresentPlayers().map(player => {
       const number = game.turmoil!.getDelegates(player);
       if (player != "NEUTRAL") {
-        reserve.push({color: player.color, number: number});
+        return {color: player.color, number: number};
       }
       else {
-        reserve.push({color: Color.NEUTRAL, number: number});
-      }
+        return {color: Color.NEUTRAL, number: number};
+      } 
     });
 
     let distant;

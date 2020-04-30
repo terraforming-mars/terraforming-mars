@@ -6,8 +6,20 @@ export function translateText(englishText: string): string {
     if ((window as any).TM_translations === undefined) return translatedText; 
     const lang = PreferencesManager.loadValue("lang") || "en";
     if (lang === "en") return englishText;
+
+    englishText = englishText.trim();
+
     if ((window as any).TM_translations[lang][englishText]) {
         translatedText = (window as any).TM_translations[lang][englishText]
+    } else {
+        let stripedText = englishText.replace(/^\(|\)$/gm, "");
+        if (stripedText !== englishText) {
+            stripedText = translateText(stripedText);
+            if (stripedText !== englishText) {
+                translatedText = "(" + stripedText + ")";
+            }
+        }
+        console.log('Please translate "' + englishText + '"')
     }
     return translatedText;
 }

@@ -39,7 +39,7 @@ import {SerializedPlayer} from "./SerializedPlayer";
 import {LogMessageType} from "./LogMessageType";
 import {LogMessageData} from "./LogMessageData";
 import {LogMessageDataType} from "./LogMessageDataType";
-import { SelfReplicatingRobots } from './cards/promo/SelfReplicatingRobots';
+import { SelfReplicatingRobots } from "./cards/promo/SelfReplicatingRobots";
 
 export class Player implements ILoadable<SerializedPlayer, Player>{
     public corporationCard: CorporationCard | undefined = undefined;

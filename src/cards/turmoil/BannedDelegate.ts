@@ -26,7 +26,7 @@ export class BannedDelegate implements IProjectCard {
         game.turmoil!.parties.forEach(party => {
           if(party.delegates.length > 1) {
             // Remove the party leader from available choices
-            const delegates = [...party.delegates];
+            const delegates = party.delegates.slice();
             delegates.splice(party.delegates.indexOf(party.partyLeader!),1);
             const players = Array.from(new Set<Player | "NEUTRAL">(delegates));
             if (players.length > 0) {

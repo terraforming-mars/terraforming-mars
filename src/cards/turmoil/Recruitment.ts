@@ -16,7 +16,7 @@ export class Recruitment implements IProjectCard {
         if (game.turmoil !== undefined) {
             let parties = game.turmoil!.parties.filter(party => {
                 if (party.delegates.length > 1) {
-                  let delegates = [...party.delegates];
+                  let delegates = party.delegates.slice();
                   delegates.splice(party.delegates.indexOf(party.partyLeader!),1);
                   return delegates.indexOf("NEUTRAL") != -1;
                 } else {

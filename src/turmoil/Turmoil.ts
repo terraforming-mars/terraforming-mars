@@ -84,13 +84,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
 
     // Function to return a party by name
     public getPartyByName(partyName: PartyName): IParty | undefined {
-        const party = this.parties.find((party) => party.name === partyName);
-        if (party) {
-            return party;
-        }
-        else {
-            return undefined;
-        }
+        return this.parties.find((party) => party.name === partyName);
     }
 
     // Use to send a delegate to a specific party
@@ -254,7 +248,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
             this.chairman = this.rulingParty.partyLeader;
             if (this.chairman) {
                 if (this.chairman instanceof Player) {
-                    // Reds hook (chairman must no loose 3 M€ here if reds are rulling)
+                    // Reds hook (chairman must no loose 3 MC here if reds are rulling)
                     if (this.rulingParty.name === PartyName.REDS) {
                         this.chairman.setResource(Resources.MEGACREDITS, 3);
                     }

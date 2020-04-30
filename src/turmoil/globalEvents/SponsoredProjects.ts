@@ -12,10 +12,9 @@ export class SponsoredProjects implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
         game.getPlayers().forEach(player => {
             player.getCardsWithResources().forEach(card => card.resourceCount && card.resourceCount++);
-            for (let i = 0; i < turmoil.getPlayerInfluence(player); i++) {
+            for (let i = 0, length = turmoil.getPlayerInfluence(player); i < length; i++) {
                 player.cardsInHand.push(game.dealer.dealCard());
-              }
-            
+            }     
         });    
     }
 }    

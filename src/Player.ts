@@ -1513,7 +1513,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     private turmoilKelvinistsAction(game: Game): PlayerInput {
       return new SelectOption(
-        "Pay 10 M€ to increase your heat and energy production 1 step (Turmoil Kelvinists)", 
+        "Pay 10 MC to increase your heat and energy production 1 step (Turmoil Kelvinists)", 
         () => {
           game.addSelectHowToPayInterrupt(this, 10, false, false, "Select how to pay for Turmoil Kelvinists action");
           this.setProduction(Resources.ENERGY);
@@ -1530,7 +1530,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     private turmoilScientistsAction(game: Game): PlayerInput {
       return new SelectOption(
-        "Pay 10 M€ to draw 3 cards (Turmoil Scientists)", 
+        "Pay 10 MC to draw 3 cards (Turmoil Scientists)", 
         () => {
           game.addSelectHowToPayInterrupt(this, 10, false, false, "Select how to pay for Turmoil Scientists draw");
           this.turmoilScientistsActionUsed = true;

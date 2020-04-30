@@ -7,7 +7,7 @@ import { Resources } from "../../Resources";
 
 export class MarsFirst extends Party implements IParty {
     public name = PartyName.MARS;
-    public description: string = "All players receive 1 M€ for each Building tag they have.";
+    public description: string = "All players receive 1 MC for each Building tag they have.";
 
     public rulingBonus(game: Game): void {
         game.getPlayers().forEach(player => {

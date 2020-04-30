@@ -14,10 +14,10 @@ export class SelectRemoveFloaters implements PlayerInterrupt {
         public player: Player,
         public game: Game,
         public floaterCards: Array<ICard>,
-        public title: string = "Remove 2 floaters from a card or lose up to 10 M€"
+        public title: string = "Remove 2 floaters from a card or lose up to 10 MC"
     ){
         const selectAction = new OrOptions();
-        const payMC = new SelectOption('Loose up to 10 M€', () => {
+        const payMC = new SelectOption('Loose up to 10 MC', () => {
             player.setResource(Resources.MEGACREDITS, -10);
             return undefined;
           });

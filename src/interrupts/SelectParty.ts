@@ -26,9 +26,7 @@ export class SelectParty implements PlayerInterrupt {
         if (replace) {
           parties = game.turmoil!.parties.filter(party => {
               if (party.delegates.length > 1) {
-                let delegates = [...party.delegates];
-                delegates.splice(party.delegates.indexOf(party.partyLeader!),1);
-                return delegates.indexOf(replace) != -1;
+                return party.delegates.filter((delegate) => delegate !== party.partyLeader).indexOf(replace) !== -1
               } else {
                 return false;
               }

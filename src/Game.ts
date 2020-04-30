@@ -1331,13 +1331,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
         // Rebuild lobby
         this.turmoil.lobby = new Set<Player>();
-        d.turmoil.lobby.forEach((element: Player) => {
+        d.turmoil.lobby.forEach((element: SerializedPlayer) => {
           let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
           this.turmoil?.lobby.add(this.players[playerIndex]);
         });
 
         // Rebuild delegate reserve
-        this.turmoil.delegate_reserve = d.turmoil.delegate_reserve.map((element: Player | "NEUTRAL")  => {
+        this.turmoil.delegate_reserve = d.turmoil.delegate_reserve.map((element: SerializedPlayer | "NEUTRAL")  => {
           if(element === "NEUTRAL"){
             return "NEUTRAL";
           }
@@ -1397,28 +1397,28 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Rebuild passed players set
       this.passedPlayers = new Set<Player>();
-      d.passedPlayers.forEach((element: Player) => {
+      d.passedPlayers.forEach((element: SerializedPlayer) => {
         let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
         this.passedPlayers.add(this.players[playerIndex]);
       });
 
       // Rebuild done players set
       this.donePlayers = new Set<Player>();
-      d.donePlayers.forEach((element: Player) => {
+      d.donePlayers.forEach((element: SerializedPlayer) => {
         let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
         this.donePlayers.add(this.players[playerIndex]);
       });
 
       // Rebuild researched players set
       this.researchedPlayers = new Set<Player>();
-      d.researchedPlayers.forEach((element: Player) => {
+      d.researchedPlayers.forEach((element: SerializedPlayer) => {
         let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
         this.researchedPlayers.add(this.players[playerIndex]);
       });
 
       // Rebuild drafted players set
       this.draftedPlayers = new Set<Player>();
-      d.draftedPlayers.forEach((element: Player) => {
+      d.draftedPlayers.forEach((element: SerializedPlayer) => {
         let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
         this.draftedPlayers.add(this.players[playerIndex]);
       });

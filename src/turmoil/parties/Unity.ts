@@ -7,7 +7,7 @@ import { Resources } from "../../Resources";
 
 export class Unity extends Party implements IParty {
     public name = PartyName.UNITY;
-    public description: string = "All players receive 1 M€ for each Venus tag, Earth tag, and Jovian tag they have.";
+    public description: string = "All players receive 1 MC for each Venus tag, Earth tag, and Jovian tag they have.";
 
     public rulingBonus(game: Game): void {
         game.getPlayers().forEach(player => {

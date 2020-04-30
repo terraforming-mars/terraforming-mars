@@ -190,8 +190,6 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
         // 2 - Global Event
         if (this.currentGlobalEvent) {
             this.currentGlobalEvent.resolve(game, this);
-            // TO DO: remove after testing phase
-            console.log(this.currentGlobalEvent);
         }
 
         // 3 - New Gouvernment

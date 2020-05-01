@@ -13,7 +13,8 @@ import { ALL_PRELUDE_CORPORATIONS,
          ALL_VENUS_CORPORATIONS,
          ALL_VENUS_PROJECTS_CARDS,
          ALL_COLONIES_PROJECTS_CARDS,
-         ALL_TURMOIL_PROJECTS_CARDS
+         ALL_TURMOIL_PROJECTS_CARDS,
+         ALL_PROMO_PROJECTS_CARDS
          } from "../Dealer";
 import { HTML_DATA } from "../HTML_data";
 
@@ -66,7 +67,10 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
-    
+    cardFactory = ALL_PROMO_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }    
     return undefined;
 }
 

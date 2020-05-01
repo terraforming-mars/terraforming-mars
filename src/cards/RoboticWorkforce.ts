@@ -214,7 +214,7 @@ export class RoboticWorkforce implements IProjectCard {
                     new Updater(CardName.MOHOLE, 0, 0, 0, 0, 0, 3),
                     new Updater(CardName.MOHOLE_EXCAVATION, 0, 0, 1, 0, 0, 2),
                     new Updater(CardName.POLAR_INDUSTRIES, 0, 0, 0, 0, 0, 2),
-                    new Updater(CardName.SELF_SUFFICIENT_SETTLEMENT, 2, 0, 0, 0, 0, 0),
+                    new Updater(CardName.SELF_SUFFICIENT_SETTLEMENT, 0, 2, 0, 0, 0, 0),
                     new Updater(CardName.NOCTIS_CITY, -1, 3, 0, 0, 0, 0),
                     new Updater(CardName.DOMED_CRATER, -1, 3, 0, 0, 0, 0),
                     new Updater(CardName.ELECTRO_CATAPULT, -1, 0, 0, 0, 0, 0),

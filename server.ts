@@ -334,9 +334,11 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         boardName: gameReq.board,
         showOtherPlayersVP: gameReq.showOtherPlayersVP,
         customCorporationsList: gameReq.customCorporationsList,
-        solarPhaseOption: gameReq.solarPhaseOption
+        solarPhaseOption: gameReq.solarPhaseOption,
+        promoCardsOption: gameReq.promoCardsOption,
+        startingCorporations: gameReq.startingCorporations
       } as GameOptions;
-
+    
       const game = new Game(gameId, players, firstPlayer, gameOptions);
       games.set(gameId, game);
       game.getPlayers().forEach((player) => {

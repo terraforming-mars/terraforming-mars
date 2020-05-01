@@ -15,8 +15,12 @@ export class SelectResourceProductionDecrease implements PlayerInterrupt {
         public count: number = 1,
         public title: string = "Select player to decrease " + resource  + " production by " + count + " step(s)"
     ){
-
-        var players = game.getPlayers().filter((p) => p.getProduction(this.resource) >= count);
+        var players;
+        if (this.resource === Resources.MEGACREDITS) {
+            players = game.getPlayers().filter((p) => p.getProduction(this.resource) >= count - 5);
+        } else {
+            players = game.getPlayers().filter((p) => p.getProduction(this.resource) >= count);
+        }
 
         this.playerInput = new SelectPlayer(
             players,

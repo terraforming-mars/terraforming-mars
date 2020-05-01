@@ -4,6 +4,8 @@
     "Players count": "Кол-во игроков",
     "Extensions": "Дополнения",
     "Options": "Настройки",
+    "Use promo cards": "Промо карты",
+    "Starting Corporations": "Кол-во корпораций на выбор",
     "Create Game": "Создать игру",
     "Board": "Карта",
     "Beginner?": "Новичек?",
@@ -15,7 +17,7 @@
 
     "original": "База",
     "hellas": "Эллада",
-    "elysium": "Эллизий",
+    "elysium": "Элизий",
     "random": "Случайная",
 
     "Prelude": "Прологи",

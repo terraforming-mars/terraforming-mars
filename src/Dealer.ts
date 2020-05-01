@@ -628,6 +628,23 @@ export const ALL_PROMO_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
     { cardName: CardName.SPLICE, factory: Splice }
 ];
 
+export const ALL_PROMO_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
+    { cardName: CardName.PENGUINS, factory: Penguins },
+    { cardName: CardName.SELF_REPLICATING_ROBOTS, factory: SelfReplicatingRobots },
+    { cardName: CardName.SMALL_ASTEROID, factory: SmallAsteroid },
+    { cardName: CardName.SNOW_ALGAE, factory: SnowAlgae },
+    { cardName: CardName.DUSK_LASER_MINING, factory: DuskLaserMining },
+    { cardName: CardName.MERCURIAN_ALLOYS, factory: MercurianAlloys },
+    { cardName: CardName.REGO_PLASTICS, factory: RegoPlastics },
+    { cardName: CardName.INTERPLANETARY_TRADE, factory: InterplanetaryTrade },
+    { cardName: CardName.ORBITAL_CLEANUP, factory: OrbitalCleanup },
+    { cardName: CardName.PROJECT_INSPECTION, factory: ProjectInspection },
+    { cardName: CardName.HI_TECH_LAB, factory: HiTechLab },
+    { cardName: CardName.ENERGY_MARKET, factory: EnergyMarket },
+    { cardName: CardName.LAW_SUIT, factory: LawSuit },
+    { cardName: CardName.STANFORD_TORUS, factory: StanfordTorus }
+];    
+
 export const ALL_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.ACQUIRED_COMPANY , factory: AcquiredCompany },
     { cardName: CardName.ADAPTATION_TECHNOLOGY , factory: AdaptationTechnology },
@@ -836,21 +853,7 @@ export const ALL_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.WAVE_POWER, factory: WavePower },
     { cardName: CardName.WINDMILLS, factory: Windmills },
     { cardName: CardName.WORMS, factory: Worms },
-    { cardName: CardName.ZEPPELINS, factory: Zeppelins },
-    { cardName: CardName.PENGUINS, factory: Penguins },
-    { cardName: CardName.SELF_REPLICATING_ROBOTS, factory: SelfReplicatingRobots },
-    { cardName: CardName.SMALL_ASTEROID, factory: SmallAsteroid },
-    { cardName: CardName.SNOW_ALGAE, factory: SnowAlgae },
-    { cardName: CardName.DUSK_LASER_MINING, factory: DuskLaserMining },
-    { cardName: CardName.MERCURIAN_ALLOYS, factory: MercurianAlloys },
-    { cardName: CardName.REGO_PLASTICS, factory: RegoPlastics },
-    { cardName: CardName.INTERPLANETARY_TRADE, factory: InterplanetaryTrade },
-    { cardName: CardName.ORBITAL_CLEANUP, factory: OrbitalCleanup },
-    { cardName: CardName.PROJECT_INSPECTION, factory: ProjectInspection },
-    { cardName: CardName.HI_TECH_LAB, factory: HiTechLab },
-    { cardName: CardName.ENERGY_MARKET, factory: EnergyMarket },
-    { cardName: CardName.LAW_SUIT, factory: LawSuit },
-    { cardName: CardName.STANFORD_TORUS, factory: StanfordTorus }
+    { cardName: CardName.ZEPPELINS, factory: Zeppelins }
 ];
 
 // Function to return a card object by its name
@@ -872,6 +875,10 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
         return new cardFactory.factory();
     }
     cardFactory = ALL_PROJECT_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_PROMO_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
@@ -917,10 +924,12 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     private usePreludeExtension: boolean = false;
     private useVenusNextExtension: boolean = false;   
     private useColoniesNextExtension: boolean = false;
-    constructor(usePreludeExtension: boolean, useVenusNextExtension: boolean, useColoniesNextExtension : boolean, _seed?: number) {
+    private usePromoCards: boolean = false;
+    constructor(usePreludeExtension: boolean, useVenusNextExtension: boolean, useColoniesNextExtension : boolean, usePromoCards: boolean, _seed?: number) {
         this.usePreludeExtension = usePreludeExtension;
         this.useVenusNextExtension = useVenusNextExtension;
         this.useColoniesNextExtension = useColoniesNextExtension;
+        this.usePromoCards = usePromoCards;
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS.map((cf) => new cf.factory()));
         if (this.usePreludeExtension) {
             this.preludeDeck = this.shuffleCards<IProjectCard>(ALL_PRELUDE_CARDS.map((cf) => new cf.factory()));
@@ -933,6 +942,10 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         }
         if (this.useColoniesNextExtension) {
             this.deck.push(...ALL_COLONIES_PROJECTS_CARDS.map((cf) => new cf.factory()));
+            this.deck = this.shuffleCards<IProjectCard>(this.deck);
+        }
+        if (this.usePromoCards) {
+            this.deck.push(...ALL_PROMO_PROJECTS_CARDS.map((cf) => new cf.factory()));
             this.deck = this.shuffleCards<IProjectCard>(this.deck);
         }
     }

@@ -50,7 +50,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                     return icard.calculatedCost
                 }
             }
-            // If not found, it is self replication robot stored card
+            // If not found, it should be self replication robot stored card
             return this.player.selfReplicatingRobotsCardCost;
         },
         canUseHeat: function () {

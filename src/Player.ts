@@ -907,14 +907,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     public getSelfReplicatingRobotsCardCost(game: Game) : number {
-      if (this.playedCards.filter(card => card.name === CardName.SELF_REPLICATING_ROBOTS).length === 1) {
-        let card = this.playedCards.filter(card => card.name === CardName.SELF_REPLICATING_ROBOTS)[0];
-        if (card instanceof SelfReplicatingRobots) {
-          if (card.targetCard !== undefined) {
-            return this.getCardCost(game, card.targetCard);
-          }
-        } 
-      }
+      let card = this.playedCards.find(card => card.name === CardName.SELF_REPLICATING_ROBOTS);
+      if (card instanceof SelfReplicatingRobots) {
+        if (card.targetCard !== undefined) {
+          return this.getCardCost(game, card.targetCard);
+        }
+      } 
       return 41;
     }  
 
@@ -1078,15 +1076,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
 
         // Remove card from Self Replicating Robots
-        if (this.playedCards.filter(card => card.name === CardName.SELF_REPLICATING_ROBOTS).length === 1) {
-          let card = this.playedCards.filter(card => card.name === CardName.SELF_REPLICATING_ROBOTS)[0];
-          if (card instanceof SelfReplicatingRobots) {
-            if (card.targetCard !== undefined && card.targetCard.name === selectedCard.name) {
-              card.targetCard = undefined;
-              card.resourceCount = 0;
-            }
-          } 
-        }
+        const card = this.playedCards.find(card => card.name === CardName.SELF_REPLICATING_ROBOTS);
+        if (card instanceof SelfReplicatingRobots) {
+          if (card.targetCard !== undefined && card.targetCard.name === selectedCard.name) {
+            card.targetCard = undefined;
+            card.resourceCount = 0;
+          }
+        } 
 
         this.addPlayedCard(game, selectedCard);
 
@@ -1633,12 +1629,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private getPlayableCards(game: Game): Array<IProjectCard> {
       let candidateCards: Array<IProjectCard> = [...this.cardsInHand];
       // Self Replicating robots check
-      if (this.playedCards.filter(card => card.name === CardName.SELF_REPLICATING_ROBOTS).length === 1) {
-        let card = this.playedCards.filter(card => card.name === CardName.SELF_REPLICATING_ROBOTS)[0];
-        if (card instanceof SelfReplicatingRobots) {
-          if (card.targetCard !== undefined) {
-            candidateCards.push(card.targetCard);
-          }
+      const card = this.playedCards.find(card => card.name === CardName.SELF_REPLICATING_ROBOTS);
+      if (card instanceof SelfReplicatingRobots) {
+        if (card.targetCard !== undefined) {
+          candidateCards.push(card.targetCard);
         }
       }
 

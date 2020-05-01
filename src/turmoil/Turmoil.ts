@@ -104,7 +104,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
             this.checkDominantParty(party);
         }
         else {
-            console.error("Party not found");
+            throw "Party not found";
         }
     }
 
@@ -117,7 +117,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
             this.checkDominantParty(party);
         }
         else {
-            console.error("Party not found");
+            throw "Party not found";
         }
     }
 

@@ -233,8 +233,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <i class="form-icon"></i> <span v-i18n>Use promo cards</span>
                             </label>
 
-                            <label class="nes-input">
-                            <input type="number" class="nes-input" value="2" min="1" :max="6" v-model="startingCorporations" />
+                            <label class="form-label">
+                                <input type="number" class="form-input form-inline create-game-corporations-count" value="2" min="1" :max="6" v-model="startingCorporations" />
                                 <i class="form-icon"></i> <span v-i18n>Starting Corporations</span>
                             </label>
 

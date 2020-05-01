@@ -32,6 +32,10 @@ export const Preferences = Vue.component("preferences", {
             } else {
                 target.classList.remove("preferences_" + cssClassSuffix);
             }
+
+            if ( ! target.classList.contains("language-"+this.lang)) {
+                target.classList.add("language-" + this.lang);
+            }
         },
         updatePreferencesFromStorage: function (): Map<string, boolean | string>  {
             for (let k of PreferencesManager.keys) {

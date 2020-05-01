@@ -334,9 +334,11 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         boardName: gameReq.board,
         showOtherPlayersVP: gameReq.showOtherPlayersVP,
         customCorporationsList: gameReq.customCorporationsList,
-        solarPhaseOption: gameReq.solarPhaseOption
+        solarPhaseOption: gameReq.solarPhaseOption,
+        promoCardsOption: gameReq.promoCardsOption,
+        startingCorporations: gameReq.startingCorporations
       } as GameOptions;
-
+    
       const game = new Game(gameId, players, firstPlayer, gameOptions);
       games.set(gameId, game);
       game.getPlayers().forEach((player) => {
@@ -439,7 +441,8 @@ function getPlayer(player: Player, game: Game): string {
     actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
     fleetSize: player.fleetSize,
     tradesThisTurn: player.tradesThisTurn,
-    turmoil: getTurmoil(game)
+    turmoil: getTurmoil(game),
+    selfReplicatingRobotsCardCost: player.getSelfReplicatingRobotsCardCost(game)
   } as PlayerModel;
   return JSON.stringify(output);
 }

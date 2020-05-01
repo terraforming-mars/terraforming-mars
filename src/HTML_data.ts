@@ -3284,7 +3284,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="production" style="background:white;color:black;vertical-align:middle">X</div> x2
             <div class="description">
               (Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.) <br>
-              (Effect: Cards here may be played as if from hand with its cost reduced by the number of resources on it.)<br>
+              (Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.)<br>
               (Requires 2 Science tags.)
             </div>
           </div>

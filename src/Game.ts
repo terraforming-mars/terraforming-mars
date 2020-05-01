@@ -61,6 +61,8 @@ export interface GameOptions {
   showOtherPlayersVP: boolean;
   customCorporationsList: Array<CardName>;
   solarPhaseOption: boolean;
+  promoCardsOption: boolean;
+  startingCorporations: number;
 }  
 
 export class Game implements ILoadable<SerializedGame, Game> {
@@ -98,7 +100,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public boardName: BoardName;
     public showOtherPlayersVP: boolean;
     private solarPhaseOption: boolean;
-
+    private promoCardsOption: boolean;
+    private startingCorporations: number;
 
     constructor(
       public id: string,
@@ -118,7 +121,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
           boardName: BoardName.ORIGINAL,
           showOtherPlayersVP: false,
           customCorporationsList: [],
-          solarPhaseOption: false
+          solarPhaseOption: false,
+          promoCardsOption: false,
+          startingCorporations: 2
         } as GameOptions
       }
 
@@ -130,7 +135,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.preludeExtension = gameOptions.preludeExtension;
       this.venusNextExtension = gameOptions.venusNextExtension;
       this.coloniesExtension = gameOptions.coloniesExtension;
-      this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, Math.random());
+      this.promoCardsOption = gameOptions.promoCardsOption;
+      this.startingCorporations = gameOptions.startingCorporations;
+      this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption, Math.random());
       this.showOtherPlayersVP = gameOptions.showOtherPlayersVP;
       this.solarPhaseOption = gameOptions.solarPhaseOption;
 
@@ -186,13 +193,18 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Give each player their corporation cards
       for (const player of players) {
         if (!player.beginner) {
-          const firstCard: CorporationCard | undefined = corporationCards.pop();
-          const secondCard: CorporationCard | undefined = corporationCards.pop();
-
-          if (firstCard === undefined || secondCard === undefined) {
-            throw new Error("No corporation card dealt for player");
+          // Failsafe for exceding corporation pool - Minimum is 12
+          if (this.startingCorporations * this.players.length > 12) {
+            this.startingCorporations = 2;
           }
-          player.dealtCorporationCards = [firstCard, secondCard];
+          for (let i = 0; i < this.startingCorporations; i++) {
+            const corpCard : CorporationCard | undefined = corporationCards.pop();
+            if (corpCard !== undefined) {
+              player.dealtCorporationCards.push(corpCard);
+            } else {
+              throw new Error("No corporation card dealt for player");
+            }
+          }
           player.setWaitingFor(this.pickCorporationCard(player), () => {});
         } else {
           this.playCorporationCard(player, new BeginnerCorporation());
@@ -1316,7 +1328,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.first = this.players[firstIndex];
 
       // Rebuild dealer object to be sure that we will have cards in the same order
-      let dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension);
+      let dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption);
       this.dealer = dealer.loadFromJSON(d.dealer);
 
       return o;

@@ -50,10 +50,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                     return icard.calculatedCost
                 }
             }
-            // We should always find a card
-            // It may make more sense to throw
-            // an error here that the card wasn't found
-            return 41; // max card cost
+            // If not found, it should be self replication robot stored card
+            return this.player.selfReplicatingRobotsCardCost;
         },
         canUseHeat: function () {
             return this.playerinput.canUseHeat && this.player.heat > 0;

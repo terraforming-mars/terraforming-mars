@@ -42,4 +42,5 @@ export interface PlayerModel {
     actionsThisGeneration: Array<string>;
     fleetSize: number;
     tradesThisTurn: number;
+    selfReplicatingRobotsCardCost: number;
 }

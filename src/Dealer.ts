@@ -411,6 +411,8 @@ import { EnergyMarket } from "./cards/promo/EnergyMarket";
 import { LawSuit } from "./cards/promo/LawSuit";
 import { StanfordTorus } from "./cards/promo/StanfordTorus";
 import { SaturnSurfing } from "./cards/promo/SaturnSurfing";
+import { SelfReplicatingRobots } from "./cards/promo/SelfReplicatingRobots";
+
 
 import { ILoadable } from "./ILoadable";
 import { CardName } from "./CardName";
@@ -873,6 +875,7 @@ export const ALL_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.WORMS, factory: Worms },
     { cardName: CardName.ZEPPELINS, factory: Zeppelins },
     { cardName: CardName.PENGUINS, factory: Penguins },
+    { cardName: CardName.SELF_REPLICATING_ROBOTS, factory: SelfReplicatingRobots },
     { cardName: CardName.SMALL_ASTEROID, factory: SmallAsteroid },
     { cardName: CardName.SNOW_ALGAE, factory: SnowAlgae },
     { cardName: CardName.DUSK_LASER_MINING, factory: DuskLaserMining },

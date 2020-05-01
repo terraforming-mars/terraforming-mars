@@ -439,7 +439,8 @@ function getPlayer(player: Player, game: Game): string {
     actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
     fleetSize: player.fleetSize,
     tradesThisTurn: player.tradesThisTurn,
-    turmoil: getTurmoil(game)
+    turmoil: getTurmoil(game),
+    selfReplicatingRobotsCardCost: player.getSelfReplicatingRobotsCardCost(game)
   } as PlayerModel;
   return JSON.stringify(output);
 }

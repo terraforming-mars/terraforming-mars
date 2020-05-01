@@ -104,10 +104,12 @@ export const Card = Vue.component("card", {
         },
         getCard: function () {
             return getProjectCardByName(this.card) || getCorporationCardByName(this.card);
+        },
+        cardNameToCssClass: function (cardName: string): string {
+            return "filterDiv card-" + cardName.toLowerCase().replace(/ /g, "-");
         }
     },
     template: `
-    <div class="filterDiv" v-html=this.getData()></div>
+    <div :class="cardNameToCssClass(card)" v-i18n v-html=this.getData()></div>
     `
 });
-

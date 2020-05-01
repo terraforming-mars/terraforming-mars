@@ -38,7 +38,9 @@
     "script.ts",
     "server.ts",
     "src/interrupts/*.ts",
-    "src/database/*.ts"
+    "src/database/*.ts",
+    "src/turmoil/*.ts",
+    "src/turmoil/globalEvents*.ts",    
   ],
   "files": [
     "script.ts",

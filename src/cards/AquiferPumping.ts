@@ -21,7 +21,7 @@ export class AquiferPumping implements IActionCard, IProjectCard {
       return undefined;
     }
     public canAct(player: Player, game: Game): boolean {
-      return player.canAfford(8,true, false) && game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES;
+      return player.canAfford(8, game, true, false) && game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES;
     }
     public action(player: Player, game: Game) {
       let howToPay: HowToPay;

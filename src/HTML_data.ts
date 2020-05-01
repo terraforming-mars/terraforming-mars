@@ -6833,6 +6833,276 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
+[CardName.AERIAL_LENSES, `
+  <div class="title background-color-automated ">Aerial Lenses</div>
+  <div class="price">2</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="card-number">T01</div>
+  <div class="content ">
+    <div class="points points-big">-1</div>
+    <div class="requirements"><span class="party">KELVINISTS</span></div>
+      - <div class="resource plant red-outline"></div><div class="resource plant red-outline"></div>
+
+      <div class="production-box production-box-size2">
+        <div class="heat production"></div><div class="heat production"></div>
+      </div>
+      <div class="description ">
+        (Requires that Kelvinists are ruling or that you have 2 delegates there. Remove up to 2 plants from any player. Increase your heat production 2 steps.)
+      </div>
+  </div>
+`],
+[CardName.BANNED_DELEGATE, `
+  <div class="title background-color-events ">Banned Delegate</div>
+  <div class="price">0</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-event "></div>
+  <div class="card-number">T02</div>
+  <div class="content ">
+    <div class="requirements">Chairman</div>
+      - <div class="delegate delegate-red"></div>
+      <div class="description ">
+          (Requires that you are Chairman. Remove any NON-LEADER delegate.)
+      </div>
+  </div>
+`],
+[CardName.CULTURAL_METROPOLIS, `
+  <div class="title background-color-automated ">Cultural Metropolis</div>
+  <div class="price">20</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-building "></div>
+  <div class="tag tag2 tag-city "></div>
+  <div class="card-number">#T03</div>
+  <div class="content ">
+      <div class="requirements"><span class="party">UNITY</span></div>
+      <div class="production-box production-box-size1a ">
+          <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div>
+          <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">3</div>
+      </div>
+      <div class="tile city-tile " style="margin-left:10px "></div>
+      <div class="delegate"></div><div class="delegate"></div>
+      <div class="description ">
+        (Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your MC production 3 steps.
+        Place a city tile. Place 2 delegates in 1 party.)
+      </div>
+  </div>
+`],
+[CardName.DIASPORA_MOVEMENT, `
+  <div class="title background-color-automated ">Diaspora Movement</div>
+  <div class="price">7</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-jovian "></div>
+  <div class="card-number">#T04</div>
+  <div class="content ">
+      <div class="points points-big">1</div>
+      <div class="requirements"><span class="party">REDS</span></div>
+      <div class="money production">1</div> / <div class="resource-tag tag-jovian red-outline"></div>
+      <div class="description" style="margin-top:5px;">
+        (Requires that Reds are ruling or that you have 2 delegates there. Gain 1MC for each Jovian tag in play.)
+      </div>
+  </div>
+`],
+[CardName.EVENT_ANALYSTS, `
+  <div class="title background-color-active ">Event Analysts</div>
+  <div class="price">5</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-science "></div>
+  <div class="card-number">#T05</div>
+  <div class="content ">
+    <div class="requirements"><span class="party">SCIENTISTS</span></div>
+    + <div class="influence"></div><br>
+    <div class="description" style="margin-top:5px;">
+      (Effect: You have influence +1. )
+    </div>
+    <br>
+    <div class="description">
+      (Requires that Scientists are ruling or that you have 2 delegates there.)
+    </div>
+  </div>
+`],
+[CardName.GMO_CONTRACT, `
+  <div class="title background-color-active">GMO Contract</div>
+  <div class="price">3</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-microbe"></div>
+  <div class="tag tag2 tag-science"></div>
+  <div class="card-number">#T06</div>
+  <div class="content">
+    <div class="requirements"><span class="party">GREENS</span></div>
+    <div class="tag-animal resource-tag"></div> / <div class="tag-plant resource-tag"></div> / <div class="tag-microbe resource-tag"></div> : <div class="money resource">2</div>
+    <div class="description">
+      (Effect: Each time you play a plant,animal, or microbe tag, including this, gain 2MC.)
+    </div>
+    <div class="description" style="margin-top:10px;">
+      (Requires that Greens are ruling or that you have 2 delegates there.)
+    </div>
+  </div>
+`],
+[CardName.MARTIAN_MEDIA_CENTER, `
+  <div class="title background-color-active ">Martian Media Center</div>
+  <div class="price">7</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-building "></div>
+  <div class="card-number">#T07</div>
+  <div class="content ">
+    <div class="requirements"><span class="party">MARS FIRST</span></div>
+      <div class="money resource ">3</div> <span class="red-arrow "></span> <div class="delegate"></div>
+      <div class="description " style="margin-bottom:10px;">
+          (Action: Pay 3 MC to add a delegate to any party.)
+      </div>
+      <div class="production-box "><div class="money production ">2</div></div>
+      <div class="description ">
+          (Requires that Mars First is ruling or that you have 2 delegates there.Increase your MC production 2 steps.)
+      </div>
+  </div>
+`],
+[CardName.PARLIAMENT_HALL, `
+  <div class="title background-color-automated ">Parliament Hall</div>
+  <div class="price">8</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-building "></div>
+  <div class="card-number">#T08</div>
+  <div class="content ">
+    <div class="points points-big">1</div>
+    <div class="requirements"><span class="party">MARS FIRST</span></div>
+      <div class="production-box production-box-size4a">
+        <div class="money production">1</div> /
+        <div class="resource-tag tag-building"></div>
+        <div class="resource-tag tag-building"></div>
+        <div class="resource-tag tag-building"></div>
+      </div>
+      <div class="description ">
+        (Requires that Mars First are ruling or that you have 2 delegates there.
+        Increase your MC production 1 step for every 3 Building tag you have, including this.)
+      </div>
+  </div>
+`],
+[CardName.PR_OFFICE, `
+  <div class="title background-color-automated ">PR Office</div>
+  <div class="price">7</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-earth "></div>
+  <div class="card-number">#T09</div>
+  <div class="content ">
+    <div class="requirements"><span class="party">UNITY</span></div>
+      <div class="tile rating"></div>
+      <br>
+      <div class="resource money">1</div> / <div class="resource-tag tag-earth"></div>
+      <div class="description ">
+        (Requires that Unity are ruling or that you have 2 delegates there.
+        Gain 1 TR. Gain 1 MC for each Earth tag you have, including this.)
+      </div>
+  </div>
+`],
+[CardName.PUBLIC_CELEBRATIONS, `
+  <div class="title background-color-events ">Public Celebrations</div>
+  <div class="price">8</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-event "></div>
+  <div class="card-number">#T10</div>
+  <div class="content ">
+    <div class="points points-big">2</div>
+    <div class="requirements">Chairman</div>
+      <div class="description ">
+        (Requires that you are Chairman.)
+      </div>
+  </div>
+`],
+[CardName.RECRUITMENT, `
+  <div class="title background-color-events ">Recruitment</div>
+  <div class="price">2</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-event "></div>
+  <div class="card-number">#T11</div>
+  <div class="content ">
+    - <div class="delegate delegate-red"></div>* &nbsp;&nbsp; + <div class="delegate"></div>
+      <div class="description ">
+        (Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.)
+      </div>
+  </div>
+`],
+[CardName.RED_TOURISM_WAVE, `
+  <div class="title background-color-events ">Red Tourism Wave</div>
+  <div class="price">3</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-event "></div>
+  <div class="tag tag2 tag-earth "></div>
+  <div class="card-number">#T12</div>
+  <div class="content ">
+    <div class="requirements"><span class="party">REDS</span></div>
+    <div class="resource money">1</div> / <div class="tile empty-tile-small"></div>*
+
+      <div class="description ">
+        (Requires that Reds are ruling or that you have 2 delegates there.
+        Gain 1 MC from each EMPTY AREA ADJACENT TO YOUR TILES.)
+      </div>
+  </div>
+`],
+[CardName.SPONSORED_MOHOLE, `
+  <div class="title background-color-automated ">Sponsored Mohole</div>
+  <div class="price">5</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-building "></div>
+  <div class="card-number">#T13</div>
+  <div class="content ">
+    <div class="requirements"><span class="party">KELVINISTS</span></div>
+      <div class="production-box production-box-size2">
+        <div class="heat production"></div><div class="heat production"></div>
+      </div>
+      <div class="description ">
+        (Requires that Kelvinists are ruling or that you have 2 delegates there.
+        Increase your heat production 2 steps.)
+      </div>
+  </div>
+`],
+[CardName.SUPPORTED_RESEARCH, `
+  <div class="title background-color-automated ">Supported Research</div>
+  <div class="price">3</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-science "></div>
+  <div class="card-number">#T14</div>
+  <div class="content ">
+    <div class="requirements"><span class="party">SCIENTISTS</span></div>
+      <div class="resource card"></div> <div class="resource card"></div>
+      <div class="description ">
+        (Requires that Scientists are ruling or that you have 2 delegates there.
+        Draw 2 cards.)
+      </div>
+  </div>
+`],
+[CardName.WILDLIFE_DOME, `
+  <div class="title background-color-automated ">Wildlife Dome</div>
+  <div class="price">15</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-building"></div>
+  <div class="tag tag2 tag-plant"></div>
+  <div class="tag tag3 tag-animal"></div>
+  <div class="card-number">#T15</div>
+  <div class="content ">
+    <div class="requirements"><span class="party">GREENS</span></div>
+      <div class="tile greenery-tile"></div>
+      <div class="description ">
+        (Requires that Greens are ruling or that you have 2 delegates there.
+        Place a greenery tile and raise oxygen 1 step.)
+      </div>
+  </div>
+`],
+[CardName.VOTE_OF_NO_CONFIDENCE, `
+  <div class="title background-color-events ">Vote Of No Confidence</div>
+  <div class="price">5</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-event "></div>
+  <div class="card-number">#T16</div>
+  <div class="content ">
+    - <div class="chairman" style="box-shadow:1px 0 1px red, -1px 0 1px red"></div> * &nbsp;&nbsp; + <div class="chairman"></div>
+    <br>
+    <div class="tile rating"></div>
+      <div class="description ">
+        (Requires that you have a Party Leader in any party and that the sitting Chairman is neutral.
+        Remove the NEUTRAL Chairman and move your own delegate(from the reserve) there instead.
+        Gain 1 TR.)
+      </div>
+  </div>
+`],
 [CardName.LAW_SUIT, `
     <div class="title background-color-events">Law Suit</div>
     <div class="price ">2</div>

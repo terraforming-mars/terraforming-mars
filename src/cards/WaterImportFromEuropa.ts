@@ -24,13 +24,13 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
         return undefined;
     }
     public canAct(player: Player, game: Game): boolean {
-        return (player.canAfford(12,false, true) && game.board.getOceansOnBoard() < MAX_OCEAN_TILES);
+        return (player.canAfford(12, game, false, true) && game.board.getOceansOnBoard() < MAX_OCEAN_TILES);
     }
     public action(player: Player, game: Game) {
         let htp: HowToPay;
         return new AndOptions(
             () => {
-                if ((player.canUseHeatAsMegaCredits ? htp.heat : 0) + htp.megaCredits + (htp.titanium * player.titaniumValue) < 12) {
+                if ((player.canUseHeatAsMegaCredits ? htp.heat : 0) + htp.megaCredits + (htp.titanium * player.getTitaniumValue(game)) < 12) {
                     throw "Need to spend at least 12";
                 }
                 game.addOceanInterrupt(player);

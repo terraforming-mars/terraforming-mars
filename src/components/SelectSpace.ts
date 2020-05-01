@@ -29,7 +29,7 @@ export const SelectSpace = Vue.component("select-space", {
             children.push(createElement("div", { domProps: { className: "nes-container is-rounded" } }, [createElement("span", { domProps: { className: "nes-text is-warning" } }, this.$data.warning)]));
         }
         const clearAllAvailableSpaces = function() {
-            const elTiles = document.getElementsByClassName("board_space");
+            const elTiles = document.getElementsByClassName("board_selectable");
             for (let i = 0; i < elTiles.length; i++) {
                 elTiles[i].classList.remove("board_space--available");
                 elTiles[i].classList.remove("board_space--selected");
@@ -44,7 +44,7 @@ export const SelectSpace = Vue.component("select-space", {
             });
             children.push(createElement("button", { domProps: { className: "btn btn-lg btn-primary" }, on: { click: () => {
                 clearAllAvailableSpaces();
-                const elTiles = document.getElementsByClassName("board_space");
+                const elTiles = document.getElementsByClassName("board_selectable");
                 for (let i = 0; i < elTiles.length; i++) {
                     const elTile = elTiles[i] as HTMLElement;
                     var el_id = elTile.getAttribute("data_space_id");

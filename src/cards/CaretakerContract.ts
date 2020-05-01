@@ -25,7 +25,7 @@ export class CaretakerContract implements IActionCard, IProjectCard {
     public canAct(player: Player): boolean {
       return player.heat >= 8 || (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCorporation() * 2) + player.heat >= 8 );
     }
-    public action(player: Player) {
+    public action(player: Player, game: Game) {
       if (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) && player.getResourcesOnCorporation() > 0 ) {
         let heatAmount: number;
         let floaterAmount: number;
@@ -39,7 +39,7 @@ export class CaretakerContract implements IActionCard, IProjectCard {
               }
               player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
               player.heat -= heatAmount;
-              player.terraformRating++;
+              player.increaseTerraformRating(game);
               return undefined;
             },
             new SelectAmount("Select amount of heat to spend", (amount: number) => {
@@ -53,7 +53,7 @@ export class CaretakerContract implements IActionCard, IProjectCard {
         );
       }
       player.heat -= 8;
-      player.terraformRating++;
+      player.increaseTerraformRating(game);
       return undefined;
     }
 }

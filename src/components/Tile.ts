@@ -25,7 +25,7 @@ export const Tile = Vue.component("bonus", {
         let app = this;
 
         let buildTileCssClass = (tileType: TileType):string => {
-            var ret = "board_tile board_tile--";
+            var ret = "board_tile board_selectable board_tile--";
             if (tileType === TileType.GREENERY) {
                 ret += "greenery";
             } else if (tileType === TileType.OCEAN) {
@@ -71,7 +71,7 @@ export const Tile = Vue.component("bonus", {
             tileElements.push(
                 createElement("i", {
                     "class": buildTileCssClass(tileType),
-                    "attrs": {"title": getVerboseTitle(tileType)}
+                    "attrs": {"title": getVerboseTitle(tileType), "data_space_id": this.space.id}
                 })
             )
         }

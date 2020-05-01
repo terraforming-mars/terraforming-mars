@@ -19,6 +19,7 @@ describe("MaxwellBase", function () {
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
+            turmoilExtension: false,
             boardName: BoardName.ORIGINAL,
             showOtherPlayersVP: false,
             customCorporationsList: [],

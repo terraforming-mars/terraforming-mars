@@ -83,7 +83,7 @@ export const GameEnd = Vue.component("game-end", {
                                 <th>Greenery</th>
                                 <th>City</th>
                                 <th>VP</th>
-                                <th>M€</th>
+                                <th>MC</th>
                                 <th>Total</th>
                             </tr>
                         </thead>

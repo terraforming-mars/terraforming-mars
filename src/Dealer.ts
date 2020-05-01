@@ -393,6 +393,9 @@ import { RedSpotObservatory } from "./cards/colonies/RedSpotObservatory";
 import { MarketManipulation } from "./cards/colonies/MarketManipulation";
 import { MartianZoo } from "./cards/colonies/MartianZoo";
 
+// Turmoil cards
+import { AerialLenses } from "./cards/turmoil/AerialLenses";
+
 // Promo Cards
 import { Penguins } from "./cards/promo/Penguins";
 import { SmallAsteroid } from "./cards/promo/SmallAsteroid";
@@ -415,6 +418,21 @@ import { ILoadable } from "./ILoadable";
 import { CardName } from "./CardName";
 import { BeginnerCorporation } from "./cards/corporation/BeginnerCorporation";
 import { SerializedDealer } from "./SerializedDealer";
+import { CulturalMetropolis } from "./cards/turmoil/CulturalMetropolis";
+import { BannedDelegate } from "./cards/turmoil/BannedDelegate";
+import { DiasporaMovement } from "./cards/turmoil/DiasporaMovement";
+import { EventAnalysts } from "./cards/turmoil/EventAnalysts";
+import { GMOContract } from "./cards/turmoil/GMOContract";
+import { MartianMediaCenter } from "./cards/turmoil/MartianMediaCenter";
+import { ParliamentHall } from "./cards/turmoil/ParliamentHall";
+import { PROffice } from "./cards/turmoil/PROffice";
+import { PublicCelebrations } from "./cards/turmoil/PublicCelebrations";
+import { Recruitment } from "./cards/turmoil/Recruitment";
+import { RedTourismWave } from "./cards/turmoil/RedTourismWave";
+import { SponsoredMohole } from "./cards/turmoil/SponsoredMohole";
+import { SupportedResearch } from "./cards/turmoil/SupportedResearch";
+import { WildlifeDome } from "./cards/turmoil/WildlifeDome";
+import { VoteOfNoConfidence } from "./cards/turmoil/VoteOfNoConfidence";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -594,6 +612,25 @@ export const ALL_COLONIES_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.TRADE_ENVOYS, factory: TradeEnvoys },
     { cardName: CardName.URBAN_DECOMPOSERS, factory: UrbanDecomposers },
     { cardName: CardName.WARP_DRIVE, factory: WarpDrive }
+]; 
+
+export const ALL_TURMOIL_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
+    { cardName: CardName.AERIAL_LENSES, factory: AerialLenses },
+    { cardName: CardName.BANNED_DELEGATE, factory: BannedDelegate },
+    { cardName: CardName.CULTURAL_METROPOLIS, factory: CulturalMetropolis },
+    { cardName: CardName.DIASPORA_MOVEMENT, factory: DiasporaMovement },
+    { cardName: CardName.EVENT_ANALYSTS, factory: EventAnalysts },
+    { cardName: CardName.GMO_CONTRACT, factory: GMOContract },
+    { cardName: CardName.MARTIAN_MEDIA_CENTER, factory: MartianMediaCenter },
+    { cardName: CardName.PARLIAMENT_HALL, factory: ParliamentHall },
+    { cardName: CardName.PR_OFFICE, factory: PROffice },
+    { cardName: CardName.PUBLIC_CELEBRATIONS, factory: PublicCelebrations },
+    { cardName: CardName.RECRUITMENT, factory: Recruitment },
+    { cardName: CardName.RED_TOURISM_WAVE, factory: RedTourismWave },
+    { cardName: CardName.SPONSORED_MOHOLE, factory: SponsoredMohole },
+    { cardName: CardName.SUPPORTED_RESEARCH, factory: SupportedResearch },
+    { cardName: CardName.WILDLIFE_DOME, factory: WildlifeDome },
+    { cardName: CardName.VOTE_OF_NO_CONFIDENCE, factory: VoteOfNoConfidence },
 ]; 
 
 export const ALL_VENUS_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
@@ -874,6 +911,10 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
+    cardFactory = ALL_TURMOIL_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
     cardFactory = ALL_PROJECT_CARDS.find((cf) => cf.cardName === cardName);
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
@@ -925,11 +966,13 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     private useVenusNextExtension: boolean = false;   
     private useColoniesNextExtension: boolean = false;
     private usePromoCards: boolean = false;
-    constructor(usePreludeExtension: boolean, useVenusNextExtension: boolean, useColoniesNextExtension : boolean, usePromoCards: boolean, _seed?: number) {
+    private useTurmoilExtension: boolean = false;
+    constructor(usePreludeExtension: boolean, useVenusNextExtension: boolean, useColoniesNextExtension : boolean, usePromoCards: boolean, useTurmoilExtension: boolean, _seed?: number) {
         this.usePreludeExtension = usePreludeExtension;
         this.useVenusNextExtension = useVenusNextExtension;
         this.useColoniesNextExtension = useColoniesNextExtension;
         this.usePromoCards = usePromoCards;
+        this.useTurmoilExtension = useTurmoilExtension;
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS.map((cf) => new cf.factory()));
         if (this.usePreludeExtension) {
             this.preludeDeck = this.shuffleCards<IProjectCard>(ALL_PRELUDE_CARDS.map((cf) => new cf.factory()));
@@ -942,6 +985,10 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         }
         if (this.useColoniesNextExtension) {
             this.deck.push(...ALL_COLONIES_PROJECTS_CARDS.map((cf) => new cf.factory()));
+            this.deck = this.shuffleCards<IProjectCard>(this.deck);
+        }
+        if (this.useTurmoilExtension) {
+            this.deck.push(...ALL_TURMOIL_PROJECTS_CARDS.map((cf) => new cf.factory()));
             this.deck = this.shuffleCards<IProjectCard>(this.deck);
         }
         if (this.usePromoCards) {

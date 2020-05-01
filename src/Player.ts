@@ -39,6 +39,10 @@ import {SerializedPlayer} from "./SerializedPlayer";
 import {LogMessageType} from "./LogMessageType";
 import {LogMessageData} from "./LogMessageData";
 import {LogMessageDataType} from "./LogMessageDataType";
+import { SelectParty } from "./interrupts/SelectParty";
+import { PartyName } from "./turmoil/parties/PartyName";
+import { SelectDelegate } from "./inputs/SelectDelegate";
+import { Phase } from "./Phase";
 import { SelfReplicatingRobots } from "./cards/promo/SelfReplicatingRobots";
 
 export class Player implements ILoadable<SerializedPlayer, Player>{
@@ -48,7 +52,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public plantsNeededForGreenery: number = 8;
     public dealtCorporationCards: Array<CorporationCard> = [];
     public powerPlantCost: number = 11;
-    public titaniumValue: number = 3;
+    private titaniumValue: number = 3;
     public steelValue: number = 2;
     public megaCredits: number = 0;
     private megaCreditProduction: number = 0;
@@ -68,7 +72,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public draftedCards: Array<IProjectCard> = [];
     private generationPlayed: Map<string, number> = new Map<string, number>();
     public actionsTakenThisRound: number = 0;
-    public terraformRating: number = 20;
+    private terraformRating: number = 20;
     public terraformRatingAtGenerationStart: number = 20;
     public victoryPointsBreakdown = new VictoryPointsBreakdown();
     private actionsThisGeneration: Set<string> = new Set<string>();
@@ -81,6 +85,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public tradesThisTurn: number = 0;
     public colonyTradeOffset: number = 0;
     public colonyTradeDiscount: number = 0;
+    private turmoilScientistsActionUsed: boolean = false;
     public removingPlayers: Array<string> = [];
 
     constructor(
@@ -88,6 +93,64 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         public color: Color,
         public beginner: boolean) {
       this.id = this.generateId();
+    }
+
+    public getTitaniumValue(game: Game): number {
+      if (game.turmoilExtension 
+        && game.turmoil !== undefined 
+        && game.turmoil.rulingParty !== undefined 
+        && game.turmoil.rulingParty.name === PartyName.UNITY) {
+          return this.titaniumValue + 1;
+        }
+      return this.titaniumValue;
+    }
+    public increaseTitaniumValue() {
+      this.titaniumValue++;
+    }
+
+    public getTerraformRating(): number {
+      return this.terraformRating;
+    }
+
+    public decreaseTerraformRating() {
+      this.terraformRating--;
+    }    
+
+    public increaseTerraformRating(game: Game) {
+      if (!game.turmoilExtension) {
+        this.terraformRating++;
+        return;
+      }
+
+      // Turmoil Reds capacity
+      if (game.turmoilExtension 
+        && game.turmoil !== undefined 
+        && game.turmoil.rulingParty !== undefined 
+        && game.turmoil.rulingParty.name === PartyName.REDS) {
+          if (this.canAfford(3)) 
+          {
+            game.addSelectHowToPayInterrupt(this, 3, false, false, "Select how to pay for TR increase");
+            this.terraformRating++;
+            return;
+          } else {
+            return;
+          }; 
+      }
+      this.terraformRating++;
+    }
+
+    public increaseTerraformRatingSteps(value: number, game: Game) {
+      for (let i = 0; i < value; i++) {
+        this.increaseTerraformRating(game);
+      }
+    }
+
+    public decreaseTerraformRatingSteps(value: number) {
+      this.terraformRating -= value;
+    }
+
+    public setTerraformRating(value: number) {
+      return this.terraformRating = value;
     }
 
     public isCorporation(corporationName: CorporationName): boolean {
@@ -133,7 +196,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }  
     }
 
-    public setResource(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player) {
+    public setResource(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
       if (resource === Resources.MEGACREDITS) this.megaCredits = Math.max(0, this.megaCredits + amount);
       if (resource === Resources.STEEL) this.steel = Math.max(0, this.steel + amount);
       if (resource === Resources.TITANIUM) this.titanium = Math.max(0, this.titanium + amount);
@@ -154,6 +217,17 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           new LogMessageData(LogMessageDataType.PLAYER, fromPlayer.id)
         );
       }
+
+      // Global event logging
+      if (game !== undefined && globalEvent && amount < 0) {
+        game.log(
+          LogMessageType.DEFAULT,
+          "${0}'s ${1} amount modified by ${2} by Global Event",
+          new LogMessageData(LogMessageDataType.PLAYER, this.id),
+          new LogMessageData(LogMessageDataType.STRING, resource),
+          new LogMessageData(LogMessageDataType.STRING, amount.toString())
+        );
+      }      
 
       // Mons Insurance hook
       if (game !== undefined && game.monsInsuranceOwner !== undefined && amount < 0 && fromPlayer !== undefined) {
@@ -260,9 +334,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       });
 
+      // Turmoil Victory Points
+      if (game.phase === Phase.END && game.turmoilExtension && game.turmoil){
+        this.victoryPointsBreakdown.setVictoryPoints("victoryPoints", game.turmoil.getPlayerVictoryPoints(this), "Turmoil Points");
+      }
+
       this.victoryPointsBreakdown.updateTotal();
       return this.victoryPointsBreakdown;
-
     }
 
     public cardIsInEffect(cardName: CardName): boolean {
@@ -354,6 +432,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             new LogMessageData(LogMessageDataType.PLAYER, removingPlayer.id)
           );
         }
+        // Lawsuit hook
+        if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.indexOf(removingPlayer.id) === -1) {
+          this.removingPlayers.push(removingPlayer.id);
+        }
       }
     }
     public addResourceTo(card: ICard, count: number = 1): void {
@@ -444,6 +526,36 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       });
       return tagCount + this.getTagCount(Tags.WILDCARD);
     }  
+
+    public getDistinctTagCount(countWild: boolean, extraTag?: Tags): number {
+      const allTags: Tags[] = [];
+      let wildcardCount: number = 0;
+      if (extraTag !== undefined) {
+        allTags.push(extraTag);
+      }
+      const uniqueTags: Set<Tags> = new Set<Tags>();
+      if (this.corporationCard !== undefined && this.corporationCard.tags.length > 0) {
+        this.corporationCard.tags.forEach((tag) => allTags.push(tag));
+      }
+      this.playedCards.filter((card) => card.cardType !== CardType.EVENT)
+        .forEach((card) => {
+          card.tags.forEach((tag) => {
+            allTags.push(tag);
+          });
+        });
+      for (const tags of allTags) {
+        if (tags === Tags.WILDCARD) {
+          wildcardCount++;
+        } else {
+          uniqueTags.add(tags);
+        }
+      }
+      if(countWild) {
+        return uniqueTags.size + wildcardCount;
+      } else {
+        return uniqueTags.size;
+      }
+    }
 
     public checkMultipleTagPresence(tags: Array<Tags>): boolean {
       var distinctCount = 0;
@@ -616,6 +728,28 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           throw new Error("Player not available");
         }
         this.runInputCb(game, pi.cb(foundPlayer));
+      } else if (pi instanceof SelectDelegate) {
+        if (input.length !== 1) {
+          throw new Error("Incorrect options provided");
+        }
+        if (input[0].length !== 1) {
+          throw new Error("Invalid players array provided");
+        }
+        let foundPlayer: Player | "NEUTRAL" | undefined = undefined;
+        if (input[0][0] === "NEUTRAL") {
+          foundPlayer = "NEUTRAL";
+        }
+        else {
+          pi.players.forEach(player => {
+            if (player instanceof Player && player.id === input[0][0]) {
+              foundPlayer = player;
+            }
+          });
+        }
+        if (foundPlayer === undefined) {
+          throw new Error("Player not available");
+        }
+        this.runInputCb(game, pi.cb(foundPlayer));
       } else if (pi instanceof SelectHowToPay) {
         if (input.length !== 1) {
           throw new Error("Incorrect options provided");
@@ -697,6 +831,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       this.actionsThisGeneration.clear();
       this.removingPlayers = [];
       this.tradesThisTurn = 0;
+      this.turmoilScientistsActionUsed = false;
       this.megaCredits += this.megaCreditProduction + this.terraformRating;
       this.heat += this.energy;
       this.heat += this.heatProduction;
@@ -982,7 +1117,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           if (howToPay.titanium > this.titanium) {
             throw new Error("Do not have enough titanium");
           }
-          totalToPay += howToPay.titanium * this.titaniumValue;
+          totalToPay += howToPay.titanium * this.getTitaniumValue(game);
         }
 
         if (this.canUseHeatAsMegaCredits && howToPay.heat !== undefined) {
@@ -1344,7 +1479,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         return selectColony;
       });
 
-      if (this.canAfford(9) && this.canUseHeatAsMegaCredits && this.heat > 0) {
+      if (this.canAfford(9, game) && this.canUseHeatAsMegaCredits && this.heat > 0) {
         let htp: HowToPay;
         let helionTrade = new SelectHowToPay(
           "Select how to spend " + (9 - this.colonyTradeDiscount) +" MC",
@@ -1396,6 +1531,47 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           }
       );
     }
+
+    private turmoilKelvinistsAction(game: Game): PlayerInput {
+      return new SelectOption(
+        "Pay 10 MC to increase your heat and energy production 1 step (Turmoil Kelvinists)", 
+        () => {
+          game.addSelectHowToPayInterrupt(this, 10, false, false, "Select how to pay for Turmoil Kelvinists action");
+          this.setProduction(Resources.ENERGY);
+          this.setProduction(Resources.HEAT);
+          game.log(
+            LogMessageType.DEFAULT,
+            "${0} used Turmoil Kelvinists action",
+            new LogMessageData(LogMessageDataType.PLAYER, this.id),
+          );
+          return undefined;
+        }
+      );
+    } 
+
+    private turmoilScientistsAction(game: Game): PlayerInput {
+      return new SelectOption(
+        "Pay 10 MC to draw 3 cards (Turmoil Scientists)", 
+        () => {
+          game.addSelectHowToPayInterrupt(this, 10, false, false, "Select how to pay for Turmoil Scientists draw");
+          this.turmoilScientistsActionUsed = true;
+          this.cardsInHand.push(
+            game.dealer.dealCard(),
+            game.dealer.dealCard(),
+            game.dealer.dealCard()
+          );
+          game.log(
+            LogMessageType.DEFAULT,
+            "${0} used Turmoil Scientists draw action",
+            new LogMessageData(LogMessageDataType.PLAYER, this.id),
+          );
+          return undefined;
+        }
+      );
+    } 
+
+
+
 
     private convertHeatIntoTemperature(game: Game): PlayerInput {
       let heatAmount: number;
@@ -1647,7 +1823,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           maxPay += this.steel * this.steelValue;
         }
         if (canUseTitanium) {
-          maxPay += this.titanium * this.titaniumValue;
+          maxPay += this.titanium * this.getTitaniumValue(game);
         }
 
         let psychrophiles = this.playedCards.find(
@@ -1675,10 +1851,16 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return playableCards;
     }
 
-    public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false): boolean {
+    public canAfford(cost: number, game?: Game, canUseSteel: boolean = false, canUseTitanium: boolean = false): boolean {
+      if (game !== undefined && canUseTitanium) {
+        return (this.canUseHeatAsMegaCredits ? this.heat : 0) +
+        (canUseSteel ? this.steel * this.steelValue : 0) +
+        (canUseTitanium ? this.titanium * this.getTitaniumValue(game) : 0) +
+          this.megaCredits >= cost;        
+      } 
+      
       return (this.canUseHeatAsMegaCredits ? this.heat : 0) +
               (canUseSteel ? this.steel * this.steelValue : 0) +
-              (canUseTitanium ? this.titanium * this.titaniumValue : 0) +
                 this.megaCredits >= cost;
     }
 
@@ -1869,6 +2051,29 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
       }
 
+      // Turmoil Scientists capacity
+      if (this.canAfford(10) 
+        && game.turmoilExtension 
+        && game.turmoil !== undefined 
+        && game.turmoil.rulingParty !== undefined 
+        && game.turmoil.rulingParty.name === PartyName.SCIENTISTS
+        && !this.turmoilScientistsActionUsed) {
+          action.options.push(
+            this.turmoilScientistsAction(game)
+        );
+      }
+
+      // Turmoil Kelvinists capacity
+      if (this.canAfford(10) 
+        && game.turmoilExtension 
+        && game.turmoil !== undefined 
+        && game.turmoil.rulingParty !== undefined 
+        && game.turmoil.rulingParty.name === PartyName.KELVINISTS) {
+          action.options.push(
+            this.turmoilKelvinistsAction(game)
+        );
+      }      
+
       if (this.canAfford(8) && !game.allMilestonesClaimed()) {
         const remainingMilestones = new OrOptions();
         remainingMilestones.title = "Select a milestone to claim";
@@ -1901,6 +2106,18 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       // Propose undo action only if you have done one action this turn
       if (this.actionsTakenThisRound > 0) {
         action.options.push(this.undoTurnOption(game));
+      }
+
+      // If you can pay to send some in the Ara
+      if (game.turmoilExtension) {
+        if (game.turmoil?.lobby.has(this.id)) {
+          const selectParty = new SelectParty(this, game, "Send a delegate in an area (from lobby)");
+          action.options.push(selectParty.playerInput);
+        }
+        else if (this.canAfford(5) && game.turmoil!.getDelegates(this) > 0){
+          const selectParty = new SelectParty(this, game, "Send a delegate in an area (5MC)", 1, undefined, 5);
+          action.options.push(selectParty.playerInput);
+        }
       }
 
       action.options.sort((a, b) => {

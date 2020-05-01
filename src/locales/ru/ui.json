@@ -6,6 +6,24 @@
     "Options": "Настройки",
     "Create Game": "Создать игру",
     "Board": "Карта",
+    "Beginner?": "Новичек?",
+    "Red": "Красный",
+    "Green": "Зеленый",
+    "Yellow": "Желтый",
+    "Blue": "Синий",
+    "Black": "Черный",
+
+    "original": "База",
+    "hellas": "Эллада",
+    "elysium": "Эллизий",
+    "random": "Случайная",
+
+    "Prelude": "Прологи",
+    "Venus Next": "Венера",
+    "Custom Corporation list": "Настроить корпорации",
+    "Use Solar Phase Option": "Помощь Солнечной системы",
+
+    "NEXT CARD:": "СЛЕДУЮЩАЯ КАРТА:",
 
     "Milestones": "Достижения",
     "Builder": "Строитель",

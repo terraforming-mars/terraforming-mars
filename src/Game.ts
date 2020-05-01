@@ -1271,8 +1271,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
           let tileType = element.tile.tileType;
           let tileCard = element.tile.card;
           if (element.player){
-            let playerIndex: number = this.players.findIndex((player) => player.id === element.player!.id);
-            space.player = this.players[playerIndex];
+            const player = this.players.find((player) => player.id === element.player!.id);
+            space.player = player;
           }
           space.tile = {
             tileType: tileType,
@@ -1281,9 +1281,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
         // Correct Land Claim
         else if(element.player) {
-          let space = this.getSpace(element.id);
-          let playerIndex: number = this.players.findIndex((player) => player.id === element.player!.id);
-          space.player = this.players[playerIndex];
+          const space = this.getSpace(element.id);
+          const player = this.players.find((player) => player.id === element.player!.id);
+          space.player = player;
         }
       });
 
@@ -1299,13 +1299,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
           if (colonie !== undefined) {
             if (element.visitor){
-              let playerIndex: number = this.players.findIndex((player) => player.id === element.visitor!.id);
-              colonie.visitor = this.players[playerIndex];
+              const player = this.players.find((player) => player.id === element.visitor!.id);
+              colonie.visitor = player;
             }
             colonie.colonies = new Array<Player>();
             element.colonies.forEach((element: Player) => {
-              let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
-              colonie!.colonies.push(this.players[playerIndex]);
+              const player = this.players.find((player) => player.id === element.id);
+              if (player) {
+                colonie!.colonies.push(player);
+              }
             });
             this.colonies.push(colonie);
           }
@@ -1324,16 +1326,18 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
           else {
             const chairman_id = d.turmoil.chairman.id
-            let playerIndex: number = this.players.findIndex((player) => player.id === chairman_id);
-            this.turmoil.chairman = this.players[playerIndex];
+            const player = this.players.find((player) => player.id === chairman_id);
+            this.turmoil.chairman = player;
           }
         }
 
         // Rebuild lobby
         this.turmoil.lobby = new Set<Player>();
         d.turmoil.lobby.forEach((element: SerializedPlayer) => {
-          let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
-          this.turmoil?.lobby.add(this.players[playerIndex]);
+          const player = this.players.find((player) => player.id === element.id);
+          if (player){
+            this.turmoil?.lobby.add(player);
+          }
         });
 
         // Rebuild delegate reserve
@@ -1342,8 +1346,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
             return "NEUTRAL";
           }
           else {
-            let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
-            return this.players[playerIndex];
+            const player = this.players.find((player) => player.id === element.id);
+            if (player){
+              return player;
+            }
+            else {
+              throw "Player not found when rebuilding delegate reserve";
+            }
           }
         });
 
@@ -1356,8 +1365,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
             }
             else {
               const partyLeaderId = element.partyLeader.id;
-              let playerIndex: number = this.players.findIndex((player) => player.id === partyLeaderId);
-              party!.partyLeader = this.players[playerIndex];
+              const player = this.players.find((player) => player.id === partyLeaderId);
+              party!.partyLeader = player;
             }
           }
 
@@ -1368,8 +1377,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
               party!.delegates.push("NEUTRAL");
             }
             else {
-              let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
-              party!.delegates.push(this.players[playerIndex]);
+              const player = this.players.find((player) => player.id === element.id);
+              if (player) {
+                party!.delegates.push(player);
+              }
             }
           });
         });
@@ -1377,50 +1388,68 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Rebuild claimed milestones
       this.claimedMilestones = d.claimedMilestones.map((element: ClaimedMilestone)  => {
-        let playerIndex: number = this.players.findIndex((player) => player.id === element.player.id);
-        let milestoneIndex: number = this.milestones.findIndex((milestone) => milestone.name === element.milestone.name);
-        return {
-          player: this.players[playerIndex],
-          milestone: this.milestones[milestoneIndex]
-        };
+        const player = this.players.find((player) => player.id === element.player.id);
+        const milestone = this.milestones.find((milestone) => milestone.name === element.milestone.name);
+        if (player && milestone) {
+          return {
+            player: player,
+            milestone: milestone
+          };
+        }
+        else {
+          throw "Player or Milestone not found when rebuilding Claimed Milestone";
+        }
       });
 
       // Rebuild funded awards
       this.fundedAwards = d.fundedAwards.map((element: FundedAward)  => {
-        let playerIndex: number = this.players.findIndex((player) => player.id === element.player.id);
-        let awardIndex: number = this.awards.findIndex((award) => award.name === element.award.name);
-        return {
-          player: this.players[playerIndex],
-          award: this.awards[awardIndex]
-        };
+        const player = this.players.find((player) => player.id === element.player.id);
+        const award = this.awards.find((award) => award.name === element.award.name);
+        if (player && award) {
+          return {
+            player: player,
+            award: award
+          };
+        }
+        else {
+          throw "Player or Award not found when rebuilding Claimed Award";
+        }
       });
 
       // Rebuild passed players set
       this.passedPlayers = new Set<Player>();
       d.passedPlayers.forEach((element: SerializedPlayer) => {
-        let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
-        this.passedPlayers.add(this.players[playerIndex]);
+        const player = this.players.find((player) => player.id === element.id);
+        if (player) {
+          this.passedPlayers.add(player);
+        }
       });
 
       // Rebuild done players set
       this.donePlayers = new Set<Player>();
       d.donePlayers.forEach((element: SerializedPlayer) => {
-        let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
-        this.donePlayers.add(this.players[playerIndex]);
+        const player = this.players.find((player) => player.id === element.id);
+        if (player) {
+          this.donePlayers.add(player);
+        }
       });
 
       // Rebuild researched players set
       this.researchedPlayers = new Set<Player>();
       d.researchedPlayers.forEach((element: SerializedPlayer) => {
-        let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
-        this.researchedPlayers.add(this.players[playerIndex]);
+        const player = this.players.find((player) => player.id === element.id);
+        if (player) {
+          this.researchedPlayers.add(player);
+        }
       });
 
       // Rebuild drafted players set
       this.draftedPlayers = new Set<Player>();
       d.draftedPlayers.forEach((element: SerializedPlayer) => {
-        let playerIndex: number = this.players.findIndex((player) => player.id === element.id);
-        this.draftedPlayers.add(this.players[playerIndex]);
+        const player = this.players.find((player) => player.id === element.id);
+        if (player) {
+          this.draftedPlayers.add(player);
+        }
       });
 
       // Reinit undrafted cards map
@@ -1428,20 +1457,28 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Mons insurance
       if (d.monsInsuranceOwner) {
-        let monsIndex: number = this.players.findIndex((player) => player.id === d.monsInsuranceOwner!.id);
-        this.monsInsuranceOwner = this.players[monsIndex];
+        this.monsInsuranceOwner = this.players.find((player) => player.id === d.monsInsuranceOwner!.id);
       }
 
       // Define who is the active player and init the take action phase
-      let activeIndex: number = this.players.findIndex((player) => player.id === d.activePlayer.id);
-
-      // We have to switch active player because it's still the one that ended last turn
-      this.activePlayer = this.players[activeIndex];
-      this.activePlayer.takeAction(this);
+      const active = this.players.find((player) => player.id === d.activePlayer.id);
+      if (active) {
+        // We have to switch active player because it's still the one that ended last turn
+        this.activePlayer = active;
+        this.activePlayer.takeAction(this);
+      }
+      else {
+        throw "No Player found when rebuilding Active Player";
+      }
 
       // Define who was the first player for this generation
-      let firstIndex: number = this.players.findIndex((player) => player.id === d.first.id);
-      this.first = this.players[firstIndex];
+      const first = this.players.find((player) => player.id === d.first.id);
+      if (first) {
+        this.first = first;
+      }
+      else {
+        throw "No Player found when rebuilding First Player";
+      }
 
       return o;
     }

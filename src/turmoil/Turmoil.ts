@@ -35,7 +35,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
     public chairman: undefined | Player | "NEUTRAL" = undefined;
     public rulingParty: undefined | IParty = undefined;
     public dominantParty: undefined | IParty = undefined;
-    public lobby: Set<Player> = new Set<Player>();
+    public lobby: Set<string> = new Set<string>();
     public delegate_reserve: Array<Player | "NEUTRAL"> = new Array<Player | "NEUTRAL">();
     public parties: Array<IParty> = [];
     public playersInfluenceBonus: Map<string, number> = new Map<string, number>();
@@ -50,7 +50,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
 
         game.getPlayers().forEach(player => {
             // Begin with one delegate in the lobby
-            this.lobby.add(player);
+            this.lobby.add(player.id);
             // Begin with six delegates in the delegate reserve
             for (let i = 0; i < 6; i++) {
                 this.delegate_reserve.push(player);   
@@ -91,8 +91,8 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
     public sendDelegateToParty(player: Player | "NEUTRAL", partyName: PartyName, game: Game): void {
         const party = this.getPartyByName(partyName);
         if (party) {
-            if (player != "NEUTRAL" && this.lobby.has(player)) {
-                this.lobby.delete(player);
+            if (player != "NEUTRAL" && this.lobby.has(player.id)) {
+                this.lobby.delete(player.id);
             }
             else {
                 const index = this.delegate_reserve.indexOf(player);
@@ -198,10 +198,10 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
         this.setNextPartyAsDominant(this.rulingParty!);
 
         // 3.c - Fill the lobby
-        this.lobby.forEach(player => {
-            this.delegate_reserve.push(player);
+        this.lobby.forEach(playerId => {
+            this.delegate_reserve.push(game.getPlayerById(playerId));
         });
-        this.lobby = new Set<Player>();
+        this.lobby = new Set<string>();
 
         game.getPlayers().forEach(player => {
             if (this.getDelegates(player) > 0) { 
@@ -209,7 +209,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
                 if (index > -1) {
                     this.delegate_reserve.splice(index, 1);
                 }
-                this.lobby.add(player);
+                this.lobby.add(player.id);
             }
         });
 

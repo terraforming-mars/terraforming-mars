@@ -1344,13 +1344,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
 
         // Rebuild lobby
-        this.turmoil.lobby = new Set<Player>();
-        d.turmoil.lobby.forEach((element: SerializedPlayer) => {
-          const player = this.players.find((player) => player.id === element.id);
-          if (player){
-            this.turmoil?.lobby.add(player);
-          }
-        });
+        this.turmoil.lobby = new Set<string>(d.turmoil.lobby);
 
         // Rebuild delegate reserve
         this.turmoil.delegate_reserve = d.turmoil.delegate_reserve.map((element: SerializedPlayer | "NEUTRAL")  => {

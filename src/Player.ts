@@ -2110,7 +2110,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       // If you can pay to send some in the Ara
       if (game.turmoilExtension) {
-        if (game.turmoil?.lobby.has(this)) {
+        if (game.turmoil?.lobby.has(this.id)) {
           const selectParty = new SelectParty(this, game, "Send a delegate in an area (from lobby)");
           action.options.push(selectParty.playerInput);
         }

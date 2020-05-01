@@ -621,7 +621,7 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
       ruling = game.turmoil.rulingParty.name;
     }
 
-    const lobby = Array.from(game.turmoil.lobby, player => player.color);
+    const lobby = Array.from(game.turmoil.lobby, player => game.getPlayerById(player).color);
 
     const reserve = game.turmoil.getPresentPlayers().map(player => {
       const number = game.turmoil!.getDelegates(player);

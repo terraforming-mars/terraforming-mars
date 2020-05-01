@@ -7,7 +7,7 @@ export interface SerializedTurmoil {
     chairman: undefined | SerializedPlayer | "NEUTRAL";
     rulingParty: undefined | IParty;
     dominantParty: undefined | IParty;
-    lobby: Set<SerializedPlayer>;
+    lobby: Set<string>;
     delegate_reserve: Array<SerializedPlayer | "NEUTRAL">;
     parties: Array<IParty>;
     playersInfluenceBonus: Map<string, number>;

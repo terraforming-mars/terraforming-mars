@@ -21,7 +21,9 @@ describe("Turmoil", function () {
             boardName: BoardName.ORIGINAL,
             showOtherPlayersVP: false,
             customCorporationsList: [],
-            solarPhaseOption: false
+            solarPhaseOption: false,
+            promoCardsOption: false,
+            startingCorporations: 2
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         const turmoil = game.turmoil;
@@ -41,7 +43,9 @@ describe("Turmoil", function () {
             boardName: BoardName.ORIGINAL,
             showOtherPlayersVP: false,
             customCorporationsList: [],
-            solarPhaseOption: false
+            solarPhaseOption: false,
+            promoCardsOption: false,
+            startingCorporations: 2
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         let turmoil = game.turmoil;
@@ -67,7 +71,9 @@ describe("Turmoil", function () {
             boardName: BoardName.ORIGINAL,
             showOtherPlayersVP: false,
             customCorporationsList: [],
-            solarPhaseOption: false
+            solarPhaseOption: false,
+            promoCardsOption: false,
+            startingCorporations: 2
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         let turmoil = game.turmoil;
@@ -99,7 +105,9 @@ describe("Turmoil", function () {
             boardName: BoardName.ORIGINAL,
             showOtherPlayersVP: false,
             customCorporationsList: [],
-            solarPhaseOption: false
+            solarPhaseOption: false,
+            promoCardsOption: false,
+            startingCorporations: 2
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         let turmoil = game.turmoil;
@@ -122,7 +130,9 @@ describe("Turmoil", function () {
             boardName: BoardName.ORIGINAL,
             showOtherPlayersVP: false,
             customCorporationsList: [],
-            solarPhaseOption: false
+            solarPhaseOption: false,
+            promoCardsOption: false,
+            startingCorporations: 2
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         let turmoil = game.turmoil;
@@ -153,7 +163,9 @@ describe("Turmoil", function () {
             boardName: BoardName.ORIGINAL,
             showOtherPlayersVP: false,
             customCorporationsList: [],
-            solarPhaseOption: false
+            solarPhaseOption: false,
+            promoCardsOption: false,
+            startingCorporations: 2
           } as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);
         if (game.turmoil) {

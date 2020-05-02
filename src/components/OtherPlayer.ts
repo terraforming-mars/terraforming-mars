@@ -22,12 +22,18 @@ export const OtherPlayer = Vue.component("other-player", {
         },
         isVisible: function () {
             return (this.$root as any).getVisibilityState("other_player_"+this.player.id);
+        },
+        toggleVisible: function() {
+            (this.$root as any).setVisibilityState("other_player_"+this.player.id,  !(this.isVisible()));
+        },
+        buttonTitle: function() {
+            return ( this.isVisible() ? "Hide Cards" : "Show Cards" )
         }
     },
     template: `
         <div> 
-            <div v-show="isVisible()" class="other_player_cont menu">
-                <button class="btn btn-lg btn-error other_player_close" v-on:click="hideMe()"><i class="icon icon-cross"></i></button> 
+            <div class="other_player_cont menu">
+                <button class="btn btn-lg btn-error other_player_close" v-on:click="toggleVisible()"> {{buttonTitle()}}  </button> 
                 <div class="player_home_block">
                     <span class="player_name" :class="'player_bg_color_' + player.color"> {{ player.name }} : {{player.cardsInHandNbr}} cards in hand </span>
                 </div>
@@ -51,7 +57,7 @@ export const OtherPlayer = Vue.component("other-player", {
                     <player-resources :player="player"></player-resources>
                 </div>
 
-                <div v-if="player.playedCards.length > 0 || player.corporationCard !== undefined" class="player_home_block">
+                <div v-show="isVisible()" v-if="player.playedCards.length > 0 || player.corporationCard !== undefined" class="player_home_block">
                     <span class="player_name" :class="'player_bg_color_' + player.color"> {{ player.name }} played cards </span>
                     <div>
                         <div v-if="player.corporationCard !== undefined" class="cardbox">

@@ -843,20 +843,17 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (this.corporationCard !== undefined && this.corporationCard.onProductionPhase !== undefined) {
         this.corporationCard.onProductionPhase(this);
       }
-
     }
 
-    public worldGovernmentTerraforming(game: Game) {
-
-      // Test if this is needed, usefull for solo play
-      if (game.getTemperature() >= constants.MAX_TEMPERATURE 
-        && game.getOxygenLevel() >= constants.MAX_OXYGEN_LEVEL
-        && game.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES
-        && game.getVenusScaleLevel() >= constants.MAX_VENUS_SCALE) {
-          game.doneWorldGovernmentTerraforming();
-          return;
+    private doneWorldGovernmentTerraforming(game: Game): void {
+      if (this.hasInterrupt(game)) {
+        this.runInterrupt(game, () => this.doneWorldGovernmentTerraforming(game));
+      } else {
+        game.doneWorldGovernmentTerraforming();
       }
+    }
 
+    public worldGovernmentTerraforming(game: Game): void {
       const action: OrOptions = new OrOptions();
       action.title = "Select action for World Government Terraforming";
       if (game.getTemperature() < constants.MAX_TEMPERATURE) {
@@ -916,10 +913,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       this.setWaitingFor(action, () => {
-        game.doneWorldGovernmentTerraforming();
+        this.doneWorldGovernmentTerraforming(game);
       });
-      return;
-  }
+    }
 
     public runDraftPhase(game: Game, playerName: String, passedCards?: Array<IProjectCard>): void {
       let cards: Array<IProjectCard> = [];
@@ -1929,15 +1925,27 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return standardProjects;
     }
 
+    private hasInterrupt(game: Game): boolean {
+      return game.interrupts.find(interrupt => interrupt.player === this) !== undefined;
+    }
+
+    private runInterrupt(game: Game, cb: () => void): void {
+      //Interrupt action
+      const interruptIndex: number = game.interrupts.findIndex(interrupt => interrupt.player === this);
+      if (interruptIndex !== -1) {
+        this.setWaitingFor(game.interrupts.splice(interruptIndex, 1)[0].playerInput, () => {
+          cb();
+        });
+      } else {
+        cb();
+      }
+    }
+
     public takeAction(game: Game): void {
 
-      //Interrupt action
-      const interruptIndex = game.interrupts.findIndex(interrupt => interrupt.player === this);
-      if (interruptIndex !== -1) {
-          this.setWaitingFor(game.interrupts.splice(interruptIndex, 1)[0].playerInput, () => {
-            this.takeAction(game);
-          });
-          return;
+      if (this.hasInterrupt(game)) {
+        this.runInterrupt(game, () => this.takeAction(game));
+        return;
       }
  
       // Prelude cards have to be played first

@@ -540,11 +540,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private gameIsOver(): boolean {
       // Single player game is done after generation 14 or 12 with prelude
       if (this.players.length === 1) {
-        if (this.generation === 14 || (this.generation === 12 && this.preludeExtension)) return true;
-      } else {
-        return this.marsIsTerraformed();
+        if (this.generation === 14 || (this.generation === 12 && this.preludeExtension)) {
+            return true;
+        }
       }
-      return false;      
+      return this.marsIsTerraformed();
     }
 
     private gotoProductionPhase(): void {

@@ -1943,7 +1943,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       // Prelude cards have to be played first
       if (this.preludeCardsInHand.length > 0) {
         // Remove unplayable prelude cards
-        this.preludeCardsInHand = this.preludeCardsInHand.filter(card => card.canPlay !== undefined && card.canPlay(this, game));
+        this.preludeCardsInHand = this.preludeCardsInHand.filter(card => card.canPlay === undefined || card.canPlay(this, game));
         if (this.preludeCardsInHand.length === 0) {
           game.playerIsFinishedTakingActions();
           return;

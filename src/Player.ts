@@ -1951,6 +1951,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         });
         if (this.preludeCardsInHand.length === 0) {
           game.playerIsFinishedTakingActions();
+          return;
         }
         
         this.setWaitingFor(this.playPreludeCard(game), () => {

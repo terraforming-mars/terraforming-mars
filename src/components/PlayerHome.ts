@@ -101,23 +101,23 @@ export const PlayerHome = Vue.component("player-home", {
                         <milestone :milestones_list="player.milestones" />
                         <award :awards_list="player.awards" />
                     </div>
+
+                    <div class="player_home_block player_home_block--log nofloat" v-if="player.players.length > 1 && player.gameLog.length > 0">
+                        <h2 :class="'player_color_'+ player.color" v-i18n>Last Actions</h2>
+                        <log-panel :messages="player.gameLog" :players="player.players"></log-panel>
+                    </div>
+
                 </div>
 
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
                     <h2 :class="'player_color_'+ player.color">
                         <span v-i18n>Turn order</span>
-                        <span class="help_tip" v-i18n>(click on player name to see details)</span>
                     </h2>
                     <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
                         <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
                             <span class="player_number">{{ idx+1 }}.</span><a v-on:click.prevent="showPlayerDetails(p)" class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</a>
                         </div>
                         <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
-                    </div>
-                    <div v-if="player.players.length > 1" style="display:flex;flex-wrap:wrap;">
-                        <div v-for="otherPlayer in player.players" :key="otherPlayer.id">
-                            <other-player v-if="otherPlayer.id !== player.id" :player="otherPlayer"></other-player>
-                        </div>
                     </div>
                 </div>
 
@@ -151,11 +151,6 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
 
-                <div class="player_home_block player_home_block--log nofloat" v-if="player.players.length > 1 && player.gameLog.length > 0">
-                    <h2 :class="'player_color_'+ player.color" v-i18n>Last Actions</h2>
-                    <log-panel :messages="player.gameLog" :players="player.players"></log-panel>
-                </div>
-
                 <a name="cards" class="player_home_anchor"></a>
                 <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
                     <h2 :class="'player_color_'+ player.color" v-i18n>Cards In Hand</h2>
@@ -177,7 +172,15 @@ export const PlayerHome = Vue.component("player-home", {
                     <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
                     <stacked-cards :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
                 </div>
+               
+                <div v-if="player.players.length > 1" >
+                    <div v-for="otherPlayer in player.players" :key="otherPlayer.id">
+                        <other-player v-if="otherPlayer.id !== player.id" :player="otherPlayer"></other-player>
+                    </div>
+                </div>
+       
             </div>
+
 
             <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
                 <h2 :class="'player_color_'+ player.color" v-i18n>Select initial cards:</h2>

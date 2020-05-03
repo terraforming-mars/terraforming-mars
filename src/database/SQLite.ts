@@ -19,6 +19,22 @@ export class SQLite implements IDatabase {
         this.db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, PRIMARY KEY (game_id, save_id))");
     }
 
+    getAllGames(): Array<string> {
+        let allGames: Array<string> = [];
+        let sql = "SELECT distinct game_id game_id FROM games";
+        this.db.all(sql, [], (err, rows) => {
+            if (err) {
+              throw err;
+            }
+            rows.forEach((row) => {
+              allGames.push(row.game_id);
+              console.log(row.game_id);
+            });
+            
+        });
+        return allGames;
+    }
+
     cleanSaves(game_id: string, save_id: number): void {
         // DELETE all saves expect last one
         this.db.run("DELETE FROM games WHERE game_id = ? AND save_id < ?", [game_id, save_id], function(err: { message: any; }) {

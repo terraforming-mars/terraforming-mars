@@ -34,6 +34,8 @@ import { Database } from './src/database/Database';
 import { PartyModel, DelegatesModel, TurmoilModel } from './src/models/TurmoilModel';
 import { SelectDelegate } from './src/inputs/SelectDelegate';
 
+import sqlite3 = require("sqlite3");
+
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
 const games: Map<string, Game> = new Map<string, Game>();
@@ -211,6 +213,32 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
     }
     res.end();
   });
+}
+
+function loadAllGames(): void {
+  const dbPath = path.resolve(__dirname, "../db/game.db");
+  let db = new sqlite3.Database(dbPath);
+  let sql = "SELECT distinct game_id game_id FROM games";
+  db.all(sql, [], (err, rows) => {
+      if (err) {
+        throw err;
+      }
+      rows.forEach((row) => {
+        const player = new Player("test", Color.BLUE, false);
+        const player2 = new Player("test2", Color.RED, false);
+        let gameToRebuild = new Game(row.game_id,[player,player2], player);
+        Database.getInstance().restoreGame(row.game_id, gameToRebuild);
+        console.log("load game "+ row.game_id);
+        setTimeout(function() {
+          games.set(gameToRebuild.id, gameToRebuild);
+      
+          gameToRebuild.getPlayers().forEach((player) => {
+            playersToGame.set(player.id, gameToRebuild);
+          });
+        }, 3000);        
+      });
+  });
+
 }
 
 function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -822,6 +850,8 @@ function serveResource(res: http.ServerResponse, s: Buffer): void {
   res.write(s);
   res.end();
 }
+
+loadAllGames();
 
 console.log('Starting server on port ' + (process.env.PORT || 8080));
 console.log('version 0.X');

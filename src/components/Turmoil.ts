@@ -1,5 +1,6 @@
 import Vue from "vue";
 import { PartyName } from '../turmoil/parties/PartyName';
+import { $t } from "../directives/i18n";
 
 export const Turmoil = Vue.component("turmoil", {
     props: [
@@ -79,7 +80,7 @@ export const Turmoil = Vue.component("turmoil", {
           <div class="resource money">4</div>`;
         }
         else {
-          return `<p>No ruling Policy</p>`;
+          return "<p>" + $t("No ruling Policy") + "</p>";
         }
       },
       toggleMe: function () {
@@ -94,19 +95,19 @@ export const Turmoil = Vue.component("turmoil", {
     <div class="turmoil" v-trim-whitespace>
       <div class="events-board">
           <div v-if="turmoil.distant" class="global-event">
-            <div class="event-party event-party--top" :class="'event-party--'+partyNameToCss(turmoil.distant.revealed)">{{ turmoil.distant.revealed }}</div>
-            <div class="event-party event-party--bottom" :class="'event-party--'+partyNameToCss(turmoil.distant.current)">{{ turmoil.distant.current }}</div>
-            <div class="event-content"><div class="event-text">{{ turmoil.distant.description }}</div></div>
+            <div class="event-party event-party--top" :class="'event-party--'+partyNameToCss(turmoil.distant.revealed)" v-i18n>{{ turmoil.distant.revealed }}</div>
+            <div class="event-party event-party--bottom" :class="'event-party--'+partyNameToCss(turmoil.distant.current)" v-i18n>{{ turmoil.distant.current }}</div>
+            <div class="event-content"><div class="event-text" v-i18n>{{ turmoil.distant.description }}</div></div>
           </div>
           <div v-if="turmoil.comming" class="global-event global-event--comming">
-            <div class="event-party event-party--top" :class="'event-party--'+partyNameToCss(turmoil.comming.revealed)">{{ turmoil.comming.revealed }}</div>
-            <div class="event-party event-party--bottom" :class="'event-party--'+partyNameToCss(turmoil.comming.current)">{{ turmoil.comming.current }}</div>
-            <div class="event-content">{{ turmoil.comming.description }}</div>
+            <div class="event-party event-party--top" :class="'event-party--'+partyNameToCss(turmoil.comming.revealed)" v-i18n>{{ turmoil.comming.revealed }}</div>
+            <div class="event-party event-party--bottom" :class="'event-party--'+partyNameToCss(turmoil.comming.current)" v-i18n>{{ turmoil.comming.current }}</div>
+            <div class="event-content" v-i18n>{{ turmoil.comming.description }}</div>
           </div>
           <div v-if="turmoil.current" class="global-event global-event--current">
-            <div class="event-party event-party--top" :class="'event-party--'+partyNameToCss(turmoil.current.revealed)">{{ turmoil.current.revealed }}</div>
-            <div class="event-party event-party--bottom" :class="'event-party--'+partyNameToCss(turmoil.current.current)">{{ turmoil.current.current }}</div>
-            <div class="event-content">{{ turmoil.current.description }}</div>
+            <div class="event-party event-party--top" :class="'event-party--'+partyNameToCss(turmoil.current.revealed)" v-i18n>{{ turmoil.current.revealed }}</div>
+            <div class="event-party event-party--bottom" :class="'event-party--'+partyNameToCss(turmoil.current.current)" v-i18n>{{ turmoil.current.current }}</div>
+            <div class="event-content" v-i18n>{{ turmoil.current.description }}</div>
           </div>
       </div>
       
@@ -141,7 +142,7 @@ export const Turmoil = Vue.component("turmoil", {
                 <div v-if="party.delegates.length >= n" :class="'player-token '+party.delegates[n-1].color">{{ party.delegates[n-1].number }}</div>
               </div>
             </div>
-            <div :class="'party-name party-name--'+partyNameToCss(party.name)">{{party.name}}</div>
+            <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
             <div class="party-bonus">
               <span v-html="getBonus(party.name)"></span>
             </div>
@@ -154,7 +155,8 @@ export const Turmoil = Vue.component("turmoil", {
         </div>
         <div v-show="isVisible()" class='policies-global'>
           <div v-for="party in turmoil.parties" class='policy-block'>
-            <span>{{party.name}}<span class="policy-bonus" v-html="getPolicy(party.name)"></span></span>
+            <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
+            <div class="policy-bonus" v-html="getPolicy(party.name)"></div>
           </div>
         </div>
       </div>

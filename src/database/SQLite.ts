@@ -16,32 +16,37 @@ export class SQLite implements IDatabase {
             fs.mkdirSync(dbFolder);
         }
         this.db = new sqlite3.Database(dbPath);
-        this.db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, PRIMARY KEY (game_id, save_id))");
+        this.db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, status text default 'running', PRIMARY KEY (game_id, save_id))");
     }
 
-    getAllGames(): Array<string> {
+    getAllPendingGames(): Array<string> {
         let allGames: Array<string> = [];
-        let sql = "SELECT distinct game_id game_id FROM games";
+        let sql = "SELECT distinct game_id game_id FROM games WHERE status = 'running'";
         this.db.all(sql, [], (err, rows) => {
             if (err) {
-              throw err;
+              // Database might not exist yet
+              return;
             }
             rows.forEach((row) => {
               allGames.push(row.game_id);
-              console.log(row.game_id);
             });
-            
         });
         return allGames;
     }
 
     cleanSaves(game_id: string, save_id: number): void {
-        // DELETE all saves expect last one
+        // DELETE all saves exept last one
         this.db.run("DELETE FROM games WHERE game_id = ? AND save_id < ?", [game_id, save_id], function(err: { message: any; }) {
             if (err) {
             return console.warn(err.message);  
             }
         });
+        // Flag game as finished
+        this.db.run("UPDATE games SET status = 'finished' WHERE game_id = ?", [game_id], function(err: { message: any; }) {
+            if (err) {
+            return console.warn(err.message);  
+            }
+        });        
     }
 
     restoreLastSave(game_id: string, save_id: number, game: Game): void {

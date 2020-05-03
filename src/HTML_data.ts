@@ -6840,7 +6840,7 @@ export const HTML_DATA: Map<string, string> =
   <div class="card-number">T01</div>
   <div class="content ">
     <div class="points points-big">-1</div>
-    <div class="requirements"><span class="party">KELVINISTS</span></div>
+    <div class="requirements"><span class="party">Kelvinists</span></div>
       - <div class="resource plant red-outline"></div><div class="resource plant red-outline"></div>
 
       <div class="production-box production-box-size2">
@@ -6873,7 +6873,7 @@ export const HTML_DATA: Map<string, string> =
   <div class="tag tag2 tag-city "></div>
   <div class="card-number">#T03</div>
   <div class="content ">
-      <div class="requirements"><span class="party">UNITY</span></div>
+      <div class="requirements"><span class="party">Unity</span></div>
       <div class="production-box production-box-size1a ">
           <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div>
           <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">3</div>
@@ -6881,8 +6881,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="tile city-tile " style="margin-left:10px "></div>
       <div class="delegate"></div><div class="delegate"></div>
       <div class="description ">
-        (Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your MC production 3 steps.
-        Place a city tile. Place 2 delegates in 1 party.)
+        (Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your MC production 3 steps. Place a city tile. Place 2 delegates in 1 party.)
       </div>
   </div>
 `],
@@ -6894,7 +6893,7 @@ export const HTML_DATA: Map<string, string> =
   <div class="card-number">#T04</div>
   <div class="content ">
       <div class="points points-big">1</div>
-      <div class="requirements"><span class="party">REDS</span></div>
+      <div class="requirements"><span class="party">Reds</span></div>
       <div class="money production">1</div> / <div class="resource-tag tag-jovian red-outline"></div>
       <div class="description" style="margin-top:5px;">
         (Requires that Reds are ruling or that you have 2 delegates there. Gain 1MC for each Jovian tag in play.)
@@ -6908,10 +6907,10 @@ export const HTML_DATA: Map<string, string> =
   <div class="tag tag1 tag-science "></div>
   <div class="card-number">#T05</div>
   <div class="content ">
-    <div class="requirements"><span class="party">SCIENTISTS</span></div>
+    <div class="requirements"><span class="party">Scientists</span></div>
     + <div class="influence"></div><br>
     <div class="description" style="margin-top:5px;">
-      (Effect: You have influence +1. )
+      (Effect: You have influence +1.)
     </div>
     <br>
     <div class="description">
@@ -6927,10 +6926,10 @@ export const HTML_DATA: Map<string, string> =
   <div class="tag tag2 tag-science"></div>
   <div class="card-number">#T06</div>
   <div class="content">
-    <div class="requirements"><span class="party">GREENS</span></div>
+    <div class="requirements"><span class="party">Greens</span></div>
     <div class="tag-animal resource-tag"></div> / <div class="tag-plant resource-tag"></div> / <div class="tag-microbe resource-tag"></div> : <div class="money resource">2</div>
     <div class="description">
-      (Effect: Each time you play a plant,animal, or microbe tag, including this, gain 2MC.)
+      (Effect: Each time you play a plant, animal, or microbe tag, including this, gain 2MC.)
     </div>
     <div class="description" style="margin-top:10px;">
       (Requires that Greens are ruling or that you have 2 delegates there.)
@@ -6944,14 +6943,14 @@ export const HTML_DATA: Map<string, string> =
   <div class="tag tag1 tag-building "></div>
   <div class="card-number">#T07</div>
   <div class="content ">
-    <div class="requirements"><span class="party">MARS FIRST</span></div>
+    <div class="requirements"><span class="party">Mars First</span></div>
       <div class="money resource ">3</div> <span class="red-arrow "></span> <div class="delegate"></div>
       <div class="description " style="margin-bottom:10px;">
           (Action: Pay 3 MC to add a delegate to any party.)
       </div>
       <div class="production-box "><div class="money production ">2</div></div>
       <div class="description ">
-          (Requires that Mars First is ruling or that you have 2 delegates there.Increase your MC production 2 steps.)
+          (Requires that Mars First is ruling or that you have 2 delegates there. Increase your MC production 2 steps.)
       </div>
   </div>
 `],
@@ -6963,7 +6962,7 @@ export const HTML_DATA: Map<string, string> =
   <div class="card-number">#T08</div>
   <div class="content ">
     <div class="points points-big">1</div>
-    <div class="requirements"><span class="party">MARS FIRST</span></div>
+    <div class="requirements"><span class="party">Mars First</span></div>
       <div class="production-box production-box-size4a">
         <div class="money production">1</div> /
         <div class="resource-tag tag-building"></div>
@@ -6971,8 +6970,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="resource-tag tag-building"></div>
       </div>
       <div class="description ">
-        (Requires that Mars First are ruling or that you have 2 delegates there.
-        Increase your MC production 1 step for every 3 Building tag you have, including this.)
+        (Requires that Mars First are ruling or that you have 2 delegates there. Increase your MC production 1 step for every 3 Building tag you have, including this.)
       </div>
   </div>
 `],
@@ -6983,13 +6981,12 @@ export const HTML_DATA: Map<string, string> =
   <div class="tag tag1 tag-earth "></div>
   <div class="card-number">#T09</div>
   <div class="content ">
-    <div class="requirements"><span class="party">UNITY</span></div>
+    <div class="requirements"><span class="party">Unity</span></div>
       <div class="tile rating"></div>
       <br>
       <div class="resource money">1</div> / <div class="resource-tag tag-earth"></div>
       <div class="description ">
-        (Requires that Unity are ruling or that you have 2 delegates there.
-        Gain 1 TR. Gain 1 MC for each Earth tag you have, including this.)
+        (Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 MC for each Earth tag you have, including this.)
       </div>
   </div>
 `],
@@ -7028,12 +7025,11 @@ export const HTML_DATA: Map<string, string> =
   <div class="tag tag2 tag-earth "></div>
   <div class="card-number">#T12</div>
   <div class="content ">
-    <div class="requirements"><span class="party">REDS</span></div>
+    <div class="requirements"><span class="party">Reds</span></div>
     <div class="resource money">1</div> / <div class="tile empty-tile-small"></div>*
 
       <div class="description ">
-        (Requires that Reds are ruling or that you have 2 delegates there.
-        Gain 1 MC from each EMPTY AREA ADJACENT TO YOUR TILES.)
+        (Requires that Reds are ruling or that you have 2 delegates there. Gain 1 MC from each EMPTY AREA ADJACENT TO YOUR TILES.)
       </div>
   </div>
 `],
@@ -7044,13 +7040,12 @@ export const HTML_DATA: Map<string, string> =
   <div class="tag tag1 tag-building "></div>
   <div class="card-number">#T13</div>
   <div class="content ">
-    <div class="requirements"><span class="party">KELVINISTS</span></div>
+    <div class="requirements"><span class="party">Kelvinists</span></div>
       <div class="production-box production-box-size2">
         <div class="heat production"></div><div class="heat production"></div>
       </div>
       <div class="description ">
-        (Requires that Kelvinists are ruling or that you have 2 delegates there.
-        Increase your heat production 2 steps.)
+        (Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.)
       </div>
   </div>
 `],
@@ -7061,11 +7056,10 @@ export const HTML_DATA: Map<string, string> =
   <div class="tag tag1 tag-science "></div>
   <div class="card-number">#T14</div>
   <div class="content ">
-    <div class="requirements"><span class="party">SCIENTISTS</span></div>
+    <div class="requirements"><span class="party">Scientists</span></div>
       <div class="resource card"></div> <div class="resource card"></div>
       <div class="description ">
-        (Requires that Scientists are ruling or that you have 2 delegates there.
-        Draw 2 cards.)
+        (Requires that Scientists are ruling or that you have 2 delegates there. Draw 2 cards.)
       </div>
   </div>
 `],
@@ -7078,11 +7072,10 @@ export const HTML_DATA: Map<string, string> =
   <div class="tag tag3 tag-animal"></div>
   <div class="card-number">#T15</div>
   <div class="content ">
-    <div class="requirements"><span class="party">GREENS</span></div>
+    <div class="requirements"><span class="party">Greens</span></div>
       <div class="tile greenery-tile"></div>
       <div class="description ">
-        (Requires that Greens are ruling or that you have 2 delegates there.
-        Place a greenery tile and raise oxygen 1 step.)
+        (Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.)
       </div>
   </div>
 `],
@@ -7097,9 +7090,7 @@ export const HTML_DATA: Map<string, string> =
     <br>
     <div class="tile rating"></div>
       <div class="description ">
-        (Requires that you have a Party Leader in any party and that the sitting Chairman is neutral.
-        Remove the NEUTRAL Chairman and move your own delegate(from the reserve) there instead.
-        Gain 1 TR.)
+        (Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate(from the reserve) there instead. Gain 1 TR.)
       </div>
   </div>
 `],

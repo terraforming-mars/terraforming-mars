@@ -7,7 +7,6 @@ import { SelectOption } from '../inputs/SelectOption';
 import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
-import { Resources } from '../Resources';
 
 export class SelectParty implements PlayerInterrupt {
     public playerInput: PlayerInput;
@@ -39,7 +38,7 @@ export class SelectParty implements PlayerInterrupt {
               party.name + " - (" + party.description + ")", 
               () => {
                 if (price) {
-                  player.setResource(Resources.MEGACREDITS, -price);
+                  game.addSelectHowToPayInterrupt(player, -price, false, false, "Select how to pay for send delegate action");
                 }
 
                 for (let i = 0; i < nbr; i++) {

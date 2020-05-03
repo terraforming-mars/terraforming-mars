@@ -38,7 +38,7 @@ export class SelectParty implements PlayerInterrupt {
               party.name + " - (" + party.description + ")", 
               () => {
                 if (price) {
-                  game.addSelectHowToPayInterrupt(player, -price, false, false, "Select how to pay for send delegate action");
+                  game.addSelectHowToPayInterrupt(player, price, false, false, "Select how to pay for send delegate action");
                 }
 
                 for (let i = 0; i < nbr; i++) {

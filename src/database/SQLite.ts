@@ -17,6 +17,12 @@ export class SQLite implements IDatabase {
         }
         this.db = new sqlite3.Database(dbPath);
         this.db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, status text default 'running', PRIMARY KEY (game_id, save_id))");
+        this.db.run("ALTER TABLE games ADD COLUMN status TEXT default 'finished'", function(err: { message: any; }) {
+        if (err) {
+            // Should be duplicate column error
+            return;
+          }
+        });  
     }
 
     getAllPendingGames(): Array<string> {

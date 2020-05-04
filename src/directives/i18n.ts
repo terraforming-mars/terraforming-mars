@@ -7,7 +7,7 @@ export function translateText(englishText: string): string {
     const lang = PreferencesManager.loadValue("lang") || "en";
     if (lang === "en") return englishText;
 
-    englishText = englishText.trim();
+    englishText = normalizeText(englishText);
 
     if ((window as any).TM_translations[lang][englishText]) {
         translatedText = (window as any).TM_translations[lang][englishText]
@@ -22,6 +22,11 @@ export function translateText(englishText: string): string {
         console.log('Please translate "' + englishText + '"')
     }
     return translatedText;
+}
+
+function normalizeText(text: string): string {
+    text = text.replace(/[\n\r]/g, "").replace(/[ ]+/g, " ");
+    return text.trim()
 }
 
 function translateChildren(node: any) {

@@ -10,7 +10,8 @@ describe("MudSlides", function () {
     it("resolve play", function () {
         const card = new MudSlides();
         const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+        const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("foobar", [player, player2], player);
         const turmoil = new Turmoil(game);
         turmoil.initGlobalEvent(game);
         const oceanTile = game.board.getAvailableSpacesForOcean(player)[0];

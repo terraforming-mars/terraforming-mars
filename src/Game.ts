@@ -422,6 +422,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private playCorporationCard(
         player: Player, corporationCard: CorporationCard
     ): void {
+      // Check for negative M€
+      if (corporationCard.name !== new BeginnerCorporation().name && player.cardsInHand.length * player.cardCost > corporationCard.startingMegaCredits) {
+        player.cardsInHand = [];
+        player.preludeCardsInHand = [];
+        throw new Error("Too many cards selected");
+      }
+
       player.corporationCard = corporationCard;
       corporationCard.play(player, this);
       player.megaCredits = corporationCard.startingMegaCredits;
@@ -429,6 +436,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         let cardsToPayFor: number = player.cardsInHand.length;
         player.megaCredits -= cardsToPayFor * player.cardCost;
       }
+
       //Activate some colonies
       if (this.coloniesExtension && corporationCard.resourceType !== undefined) {
         this.colonies.filter(colony => colony.resourceType !== undefined && colony.resourceType === corporationCard.resourceType).forEach(colony => {

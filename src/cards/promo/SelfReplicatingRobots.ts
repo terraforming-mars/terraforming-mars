@@ -6,6 +6,9 @@ import { Player } from '../../Player';
 import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
 import { Game } from '../../Game';
+import { LogMessageType } from '../../LogMessageType';
+import { LogMessageData } from '../../LogMessageData';
+import { LogMessageDataType } from '../../LogMessageDataType';
 
 export class SelfReplicatingRobots implements IProjectCard {
 
@@ -40,7 +43,7 @@ export class SelfReplicatingRobots implements IProjectCard {
         return false;
     }
 
-    public action(player: Player) {
+    public action(player: Player, game: Game) {
         if (this.targetCard !== undefined) {
             this.resourceCount = this.resourceCount * 2;
             return undefined;
@@ -56,6 +59,12 @@ export class SelfReplicatingRobots implements IProjectCard {
                   player.cardsInHand.splice(projectCardIndex, 1);                 
                   this.targetCard = foundCards[0];
                   this.resourceCount = 2;
+                  game.log(
+                    LogMessageType.DEFAULT,
+                    "${0} linked ${1} with Self Replicating Robots",
+                    new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                    new LogMessageData(LogMessageDataType.CARD, this.targetCard.name)
+                  );                  
                   return undefined;
                 }
             );

@@ -25,20 +25,33 @@ export class SQLite implements IDatabase {
         });  
     }
 
-    getAllPendingGames(): Array<string> {
-        let allGames: Array<string> = [];
+    getAllPendingGames(cb:(err: any, allGames:Array<string>)=> void) {
+        var allGames:Array<string> = [];
         let sql = "SELECT distinct game_id game_id FROM games WHERE status = 'running'";
         this.db.all(sql, [], (err, rows) => {
-            if (err) {
-              // Database might not exist yet
-              return;
-            }
             rows.forEach((row) => {
-              allGames.push(row.game_id);
+                allGames.push(row.game_id);
             });
+            return cb(err, allGames);
         });
-        return allGames;
     }
+   
+    restoreGame(game_id:string, game: Game, cb:(err: any) => void) {
+        // Retrieve last save from database
+        this.db.get("SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1", [game_id],(err: { message: any; }, row: { game: any; }) => {
+            if (err) {
+                return cb(err);
+            }
+            // Transform string to json
+            let gameToRestore = JSON.parse(row.game);
+
+            // Rebuild each objects
+            game.loadFromJSON(gameToRestore);
+
+            return cb(err);
+        });
+    }    
+
 
     cleanSaves(game_id: string, save_id: number): void {
         // DELETE all saves exept last one
@@ -58,22 +71,6 @@ export class SQLite implements IDatabase {
     restoreLastSave(game_id: string, save_id: number, game: Game): void {
         // Retrieve last save from database
         this.db.get("SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1", [game_id, save_id],(err: { message: any; }, row: { game: any; }) => {
-            if (err) {
-                return console.error(err.message);
-            }
-            // Transform string to json
-            let gameToRestore = JSON.parse(row.game);
-
-            // Rebuild each objects
-            game.loadFromJSON(gameToRestore);
-
-            return true;
-        });
-    }
-
-    restoreGame(game_id:string, game:Game): void {
-        // Retrieve last save from database
-        this.db.get("SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1", [game_id],(err: { message: any; }, row: { game: any; }) => {
             if (err) {
                 return console.error(err.message);
             }

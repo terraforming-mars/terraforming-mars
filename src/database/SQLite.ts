@@ -54,7 +54,7 @@ export class SQLite implements IDatabase {
 
 
     cleanSaves(game_id: string, save_id: number): void {
-        // DELETE all saves exept last one
+        // DELETE all saves except last one
         this.db.run("DELETE FROM games WHERE game_id = ? AND save_id < ?", [game_id, save_id], function(err: { message: any; }) {
             if (err) {
             return console.warn(err.message);  

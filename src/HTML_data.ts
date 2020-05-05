@@ -120,8 +120,8 @@ export const HTML_DATA: Map<string, string> =
             <div class="special-tile tile capitol ">&#x2302&#xFE0E;</div>
             <div class="description " style="text-align:left;">
                 (Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.<br>
-                <div style="font-size:9px;line-height:12px;margin-top:10px ">
-                    1 ADDITIONAL VP FOR EACH <br>OCEAN TILE ADJACENT <br> TO THIS CITY TILE.
+                <div style="font-size:9px;line-height:12px;margin-top:10px; width: 140px;">
+                    1 ADDITIONAL VP FOR EACH OCEAN TILE ADJACENT TO THIS CITY TILE.
                 </div>
             </div>
         </div>
@@ -252,9 +252,9 @@ export const HTML_DATA: Map<string, string> =
             </div>
             <div class="tile city-tile " style="margin-left:20px;margin-bottom:5px;"></div><br>
             <div class="plant resource "></div><div class="plant resource "></div><div class="plant resource "></div>
-            <div class="description " style="margin-top:-5px;font-size:11px;text-align: left">
-                (Oxygen must be 7% or less. Gain 3 plants. Place a City tile.
-                Decrease<br>your Energy production 1 <br>step and increase your <br>MC production 3 steps.)
+            <div class="description " style="margin-top:-5px;font-size:11px;text-align: left; line-height: 12px;">
+                <div>Oxygen must be 7% or less.</div> 
+                <div style="width:140px;">Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.</div>
             </div>
         </div>
 `],
@@ -839,8 +839,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="production-box production-box-size1a" style="margin-top:-10px;">
           <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div>
         </div>
-        <div class="description" style="text-align:left;margin-top:-5px;">
-          (Requires +2 C or warmer. Decrease any Plant production 1 step.<br> 1 VP for each Animal <br> on this card.)
+        <div class="description description-half">
+          (Requires +2 C or warmer. Decrease any Plant production 1 step. 1 VP for each Animal on this card.)
         </div>
       </div>
 `],
@@ -877,7 +877,8 @@ export const HTML_DATA: Map<string, string> =
           <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div>
         </div>
         <div class="description" style="text-align:left;">
-          (Requires 6% oxygen. Decrease any Plant production 1 step. <br>1 VP per 2 Animals <br>on this card.)
+          <div>Requires 6% oxygen.</div>
+          <div style="width: 135px;">Decrease any Plant production 1 step. 1 VP per 2 Animals on this card.</div>
         </div>
       </div>
 `],
@@ -1366,8 +1367,8 @@ export const HTML_DATA: Map<string, string> =
           (Decrease your energy production 1 step and increase your MC production 4 steps.)
           </div>
           <div class="tile special-tile">&#x20ac;</div>
-          <div class="description" style="text-align:left">
-          (Place this tile. 1 VP PER<br> ADJACENT CITY TILE.)
+          <div class="description" style="text-align:left; width: 140px;">
+          (Place this tile. 1 VP PER ADJACENT CITY TILE.)
           </div>
         </div>
 `],
@@ -1719,9 +1720,9 @@ export const HTML_DATA: Map<string, string> =
             </div>
             <div class="tile city-tile " style="margin-left:20px;margin-bottom:5px; "></div><br>
             <div class="plant resource "></div><div class="plant resource "></div>
-            <div class="description " style="margin-top:-5px;font-size:11px;text-align: left">
-                (Requires 12% oxygen. Gain 2 plants. Place a City tile.
-                Decrease<br>your Energy production 1 <br>step and increase your <br>MC production 4 steps.)
+            <div class="description " style="margin-top:-8px;font-size:11px;text-align: left">
+                <div>Requires 12% oxygen. Gain 2 plants. Place a City tile.</div>
+                <div style="width: 135px">Decrease your Energy production 1 step and increase your MC production 4 steps.</div>
             </div>
         </div>
 `],
@@ -2017,8 +2018,8 @@ export const HTML_DATA: Map<string, string> =
           (Effect: When you play an animal or plant tag (including these), add an animal to this card.)
         </div>
         <div class="tile special-tile" style="margin-left:143px;">&#x1F43e;&#xFE0E;</div>
-        <div class="description" style="text-align:left;margin-top:-55px;">
-          (Requires that you have a <br>greenery tile. Place this tile <br> adjacent to any greenery <br>tile. <br><br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1 VP per 2 Animals<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; on this card.)
+        <div class="description" style="text-align:left;margin-top:-65px;width: 135px;">
+          (Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. 1 VP per 2 Animals on this card.)
         </div>
       </div>
 `],
@@ -2320,8 +2321,8 @@ export const HTML_DATA: Map<string, string> =
             <div class="production-box production-box-size1a" style="margin-top:2px;">
                 <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div>
             </div>
-            <div class="description" style="position:absolute;text-align:left;margin-top:-25px;">
-              (Requires 8% oxygen.<br> Add 1 Animal to this card.<br> Decrease any Plant <br>production 1 step. 1 VP<br> per 2 Animals on this card.)
+            <div class="description" style="position:absolute;text-align:left;margin-top:-25px; width: 130px;">
+              (Requires 8% oxygen. Add 1 Animal to this card. Decrease any Plant production 1 step. 1 VP per 2 Animals on this card.)
             </div>
         </div>
 `],
@@ -2711,8 +2712,8 @@ export const HTML_DATA: Map<string, string> =
             (Effect: When any City tile is placed, add an Animal to this card.)
           </div><br>
           <div class="animal resource"></div>
-          <div class="description" style="text-align:left;margin-top:10px;" >
-            (Add 1 Animal to this card.<br> 1 VP per 2 Animals here.)
+          <div class="description description-half" style="text-align:left; width: 135px;" >
+            (Add 1 Animal to this card. 1 VP per 2 Animals here.)
           </div>
         </div>
 `],

@@ -36,7 +36,7 @@ export abstract class Party  {
                         currentIndex = game.getPlayers().indexOf(this.partyLeader);
                     }
             
-                    let playersToCheck = [];
+                    let playersToCheck = new Array<Player | "NEUTRAL">();
 
                     // Manage if it's the first player or the last
                     if (game.getPlayers().length === 1 || currentIndex === 0) {
@@ -51,6 +51,9 @@ export abstract class Party  {
                         const right = game.getPlayers().slice(currentIndex);
                         playersToCheck = right.concat(left);
                     }
+
+                    // Add NEUTRAL in the list
+                    playersToCheck.push("NEUTRAL");
                     
                     playersToCheck.some(nextPlayer => {
                         if (this.getDelegates(nextPlayer) === max) {

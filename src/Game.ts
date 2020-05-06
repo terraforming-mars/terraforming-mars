@@ -423,7 +423,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
         player: Player, corporationCard: CorporationCard
     ): void {
       // Check for negative M€
-      if (corporationCard.name !== new BeginnerCorporation().name && player.cardsInHand.length * player.cardCost > corporationCard.startingMegaCredits) {
+      let cardCost = player.cardCost;
+      if (corporationCard.name === CardName.TERRALABS_RESEARCH) {
+        cardCost = 1;
+      } else if (corporationCard.name === CardName.POLYPHEMOS) {
+        cardCost = 5;
+      }
+      if (corporationCard.name !== new BeginnerCorporation().name && player.cardsInHand.length * cardCost > corporationCard.startingMegaCredits) {
         player.cardsInHand = [];
         player.preludeCardsInHand = [];
         throw new Error("Too many cards selected");

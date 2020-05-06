@@ -59,6 +59,10 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
 
         // The game begin with Neutral chairman
         this.chairman = "NEUTRAL";
+
+        // First ruling party should be green
+        this.rulingParty = this.getPartyByName(PartyName.GREENS);
+
         // Begin with 13 neutral delegates in the reserve
         for (let i = 0; i < 13; i++) {
             this.delegate_reserve.push("NEUTRAL");   

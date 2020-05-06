@@ -365,6 +365,7 @@ import { IceMoonColony } from "./cards/colonies/IceMoonColony";
 import { InterplanetaryColonyShip } from "./cards/colonies/InterplanetaryColonyShip";
 import { MiningColony } from "./cards/colonies/MiningColony";
 import { MinorityRefuge } from "./cards/colonies/MinorityRefuge";
+import { MolecularPrinting } from "./cards/colonies/MolecularPrinting";
 import { PioneerSettlement } from "./cards/colonies/PioneerSettlement";
 import { ResearchColony } from "./cards/colonies/ResearchColony";
 import { SpacePortColony } from "./cards/colonies/SpacePortColony";

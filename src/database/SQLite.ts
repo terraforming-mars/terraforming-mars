@@ -29,10 +29,12 @@ export class SQLite implements IDatabase {
         var allGames:Array<string> = [];
         let sql = "SELECT distinct game_id game_id FROM games WHERE status = 'running'";
         this.db.all(sql, [], (err, rows) => {
-            rows.forEach((row) => {
-                allGames.push(row.game_id);
-            });
-            return cb(err, allGames);
+            if (rows) {
+                rows.forEach((row) => {
+                    allGames.push(row.game_id);
+                });
+                return cb(err, allGames);
+            }
         });
     }
    

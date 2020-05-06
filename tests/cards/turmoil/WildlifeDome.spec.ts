@@ -24,8 +24,9 @@ describe("WildlifeDome", function () {
             startingCorporations: 2
           } as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);  
-        expect(card.canPlay(player, game)).to.eq(false);
         if (game.turmoil !== undefined) {
+            game.turmoil.rulingParty = game.turmoil.getPartyByName(PartyName.REDS);
+            expect(card.canPlay(player, game)).to.eq(false);
             let greens = game.turmoil.getPartyByName(PartyName.GREENS);
             if (greens !== undefined) {
                 greens.delegates.push(player, player);

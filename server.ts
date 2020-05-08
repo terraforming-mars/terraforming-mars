@@ -192,16 +192,15 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       const player = new Player("test", Color.BLUE, false);
       const player2 = new Player("test2", Color.RED, false);
       let gameToRebuild = new Game(game_id,[player,player2], player);
-      Database.getInstance().restoreGame(game_id, gameToRebuild);
-    
-      setTimeout(function() {
+      Database.getInstance().restoreGame(game_id, gameToRebuild, function (err) {
+        if (err) {
+          return;
+        }
         games.set(gameToRebuild.id, gameToRebuild);
-    
         gameToRebuild.getPlayers().forEach((player) => {
           playersToGame.set(player.id, gameToRebuild);
         });
-      }, 3000);
-
+      });
       res.setHeader('Content-Type', 'application/json');
       res.write(getGame(gameToRebuild));
     } catch (err) {
@@ -210,6 +209,29 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       res.write('Unable to load game');
     }
     res.end();
+  });
+}
+
+function loadAllGames(): void {
+  Database.getInstance().getAllPendingGames(function (err, allGames) {
+    if (err) {
+      return;
+    }
+    allGames.forEach((game_id)=> {
+      const player = new Player("test", Color.BLUE, false);
+      const player2 = new Player("test2", Color.RED, false);
+      let gameToRebuild = new Game(game_id,[player,player2], player);
+      Database.getInstance().restoreGame(game_id, gameToRebuild, function (err) {
+        if (err) {
+          return;
+        }
+        console.log("load game "+ game_id);
+        games.set(gameToRebuild.id, gameToRebuild);
+        gameToRebuild.getPlayers().forEach((player) => {
+          playersToGame.set(player.id, gameToRebuild);
+        });
+      });
+    });
   });
 }
 
@@ -822,6 +844,8 @@ function serveResource(res: http.ServerResponse, s: Buffer): void {
   res.write(s);
   res.end();
 }
+
+loadAllGames();
 
 console.log('Starting server on port ' + (process.env.PORT || 8080));
 console.log('version 0.X');

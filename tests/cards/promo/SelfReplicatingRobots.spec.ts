@@ -6,6 +6,7 @@ import { Research } from '../../../src/cards/Research';
 import { HousePrinting } from '../../../src/cards/prelude/HousePrinting';
 import { SelectCard } from '../../../src/inputs/SelectCard';
 import { IProjectCard } from '../../../src/cards/IProjectCard';
+import { Game } from '../../../src/Game';
 
 describe("SelfReplicatingRobots", function () {
     it("Can't play", function () {
@@ -23,15 +24,16 @@ describe("SelfReplicatingRobots", function () {
     it("Should act", function () {
         const card = new SelfReplicatingRobots();
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player, player], player);
         player.playedCards.push(card);
         expect(card.canAct(player)).to.eq(false);
         player.cardsInHand.push(new HousePrinting());
         expect(card.canAct(player)).to.eq(true);
-        const action = card.action(player);
+        const action = card.action(player, game);
         expect(action instanceof SelectCard).to.eq(true);
         (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
         expect(card.resourceCount).to.eq(2);
-        card.action(player);
+        card.action(player, game);
         expect(card.resourceCount).to.eq(4);
     });
 });

@@ -17,9 +17,7 @@ export class MolecularPrinting implements IProjectCard {
         game.colonies.forEach(colony => { 
           coloniesCount += colony.colonies.length;
         }); 
-       
-            player.megaCredits += game.getCitiesInPlay() 
-        player.megaCredits += coloniesCount ;
+         player.megaCredits += game.getCitiesInPlay() +coloniesCount
         return undefined;
     }
 

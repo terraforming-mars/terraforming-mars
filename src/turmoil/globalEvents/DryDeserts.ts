@@ -13,12 +13,14 @@ export class DryDeserts implements IGlobalEvent {
     public currentDelegate = PartyName.UNITY;
     public resolve(game: Game, turmoil: Turmoil) {
         if (game.board.getOceansOnBoard() > 0) {
-            game.addInterrupt(new RemoveOcean(game.getPlayers()[0], game, 'Global Event - Remove an Ocean tile from the board'));
+            game.addInterrupt(new RemoveOcean(game.getPlayers()[0], game, 'Dry Deserts Global Event - Remove an Ocean tile from the board'));
         }
 
         game.getPlayers().forEach(player => {
             if (turmoil.getPlayerInfluence(player) > 0) {
-                game.addInterrupt(new SelectResources(player, game, turmoil.getPlayerInfluence(player)));
+                let selectResources = new SelectResources(player, game, turmoil.getPlayerInfluence(player));
+                selectResources.playerInput.title = "Dry Deserts Global Event - Gain " +  turmoil.getPlayerInfluence(player) + " resource(s) for influence";
+                game.addInterrupt(selectResources);
             }            
         });    
     }

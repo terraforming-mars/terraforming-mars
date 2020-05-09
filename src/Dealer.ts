@@ -591,7 +591,7 @@ export const ALL_COLONIES_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.MARKET_MANIPULATION, factory: MarketManipulation },
     { cardName: CardName.MINING_COLONY, factory: MiningColony },
     { cardName: CardName.MINORITY_REFUGE, factory: MinorityRefuge },
-    { cardName: CardName.MOLECULAR_PRINTING,factory:MolecularPrinting},
+    { cardName: CardName.MOLECULAR_PRINTING,factory: MolecularPrinting},
     { cardName: CardName.NITROGEN_FROM_TITAN, factory: NitrogenFromTitan },
     { cardName: CardName.PIONEER_SETTLEMENT, factory: PioneerSettlement },
     { cardName: CardName.PRODUCTIVE_OUTPOST, factory: ProductiveOutpost },

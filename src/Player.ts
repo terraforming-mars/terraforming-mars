@@ -445,9 +445,22 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     public getCardsWithResources(): Array<ICard> {
-      return this.playedCards.filter(
-          (card) => card.resourceCount && card.resourceCount > 0
-      );
+      const result: Array<ICard> = [];
+
+      this.playedCards.forEach((card) => {
+        if (card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0) {
+          result.push(card);
+        }
+      });
+
+      if (this.corporationCard !== undefined 
+          && this.corporationCard.resourceType !== undefined 
+          && this.corporationCard.resourceCount !== undefined 
+          && this.corporationCard.resourceCount > 0) {
+        result.push(this.corporationCard);
+      }
+      
+      return result;      
     }
 
     public getResourceCards(resource: ResourceType): Array<ICard> {

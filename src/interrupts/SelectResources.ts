@@ -64,6 +64,7 @@ export class SelectResources implements PlayerInterrupt {
                   player.heat += heatAmount;
                   return undefined;
             }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
+        selectResources.title = this.title;
         this.playerInput = selectResources;
     };
 }    

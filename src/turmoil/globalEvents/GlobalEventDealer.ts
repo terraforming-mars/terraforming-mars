@@ -97,6 +97,14 @@ export function getGlobalEventByName(globalEventName: string): IGlobalEvent | un
     if (globalEventFactory !== undefined) {
         return new globalEventFactory.factory();
     }
+    globalEventFactory = COLONY_ONLY_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
+    if (globalEventFactory !== undefined) {
+        return new globalEventFactory.factory();
+    }
+    globalEventFactory = VENUS_COLONY_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
+    if (globalEventFactory !== undefined) {
+        return new globalEventFactory.factory();
+    }
     return undefined;
 }
 

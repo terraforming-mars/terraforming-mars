@@ -358,7 +358,8 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         customCorporationsList: gameReq.customCorporationsList,
         solarPhaseOption: gameReq.solarPhaseOption,
         promoCardsOption: gameReq.promoCardsOption,
-        startingCorporations: gameReq.startingCorporations
+        startingCorporations: gameReq.startingCorporations,
+        soloTR: gameReq.soloTR
       } as GameOptions;
     
       const game = new Game(gameId, players, firstPlayer, gameOptions);

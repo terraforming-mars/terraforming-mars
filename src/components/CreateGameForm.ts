@@ -25,6 +25,7 @@ interface CreateGameModel {
     solarPhaseOption: boolean;
     promoCardsOption: boolean;
     startingCorporations: number;
+    soloTR: boolean;
 }
 
 interface NewPlayerModel {
@@ -68,7 +69,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
             seededGame: false,
             solarPhaseOption: false,
             promoCardsOption: false,
-            startingCorporations: 2
+            startingCorporations: 2,
+            soloTR: false
         } as CreateGameModel
     },
     components: {
@@ -126,9 +128,10 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const seed = component.seed;
             const promoCardsOption = component.promoCardsOption;
             const startingCorporations = component.startingCorporations;
+            const soloTR = component.soloTR;
 
             const dataToSend = JSON.stringify({
-                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption, promoCardsOption, startingCorporations 
+                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption, promoCardsOption, startingCorporations, soloTR 
             });
 
             const onSucces = (response: any) => {
@@ -220,6 +223,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <label class="form-switch">
                                 <input type="checkbox" v-model="showCorporationList">
                                 <i class="form-icon"></i> <span v-i18n>Custom Corporation list</span>
+                            </label>
+
+                            <label class="form-switch" v-if="playersCount === 1">
+                                <input type="checkbox" v-model="soloTR">
+                                <i class="form-icon"></i> <span v-i18n>TR solo mode</span>
                             </label>
 
                             <label class="form-switch" v-if="playersCount > 1">

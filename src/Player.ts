@@ -1372,6 +1372,24 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       );
     }
 
+    private bufferGas(game: Game): PlayerInput {
+      return new SelectOption(
+        "Buffer Gas (" + constants.BUFFER_GAS_COST + " MC)", 
+        () => {
+          game.addSelectHowToPayInterrupt(this, constants.BUFFER_GAS_COST, false, false, "Select how to pay for Buffer Gas project");
+          this.increaseTerraformRatingSteps(1, game);
+          this.onStandardProject(StandardProjectType.BUFFER_GAS);
+          game.log(
+            LogMessageType.DEFAULT,
+            "${0} used ${1} standard project",
+            new LogMessageData(LogMessageDataType.PLAYER, this.id),
+            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Buffer Gas")
+          );
+          return undefined;
+        }
+      );
+    }    
+
     private buildPowerPlant(game: Game): PlayerInput {
       return new SelectOption(
         "Power plant (" + this.powerPlantCost + " MC)", 
@@ -1934,6 +1952,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             );
           }
       }
+
+      if ( game.soloTR &&
+        this.canAfford(constants.BUFFER_GAS_COST)) {
+        standardProjects.options.push(
+            this.bufferGas(game)
+        );
+      }      
 
       return standardProjects;
     }

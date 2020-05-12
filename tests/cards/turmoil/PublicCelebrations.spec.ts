@@ -20,7 +20,8 @@ describe("PublicCelebrations", function () {
             customCorporationsList: [],
             solarPhaseOption: false,
             promoCardsOption: false,
-            startingCorporations: 2
+            startingCorporations: 2,
+            soloTR: false
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         expect(card.canPlay(player, game)).to.eq(false);

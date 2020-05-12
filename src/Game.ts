@@ -67,6 +67,7 @@ export interface GameOptions {
   solarPhaseOption: boolean;
   promoCardsOption: boolean;
   startingCorporations: number;
+  soloTR: boolean;
 }  
 
 export class Game implements ILoadable<SerializedGame, Game> {
@@ -108,6 +109,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public turmoil: Turmoil | undefined;
     private promoCardsOption: boolean;
     private startingCorporations: number;
+    public soloTR: boolean;
 
     constructor(
       public id: string,
@@ -130,7 +132,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
           customCorporationsList: [],
           solarPhaseOption: false,
           promoCardsOption: false,
-          startingCorporations: 2
+          startingCorporations: 2,
+          soloTR: false
         } as GameOptions
       }
 
@@ -148,7 +151,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption, this.turmoilExtension, Math.random());
       this.showOtherPlayersVP = gameOptions.showOtherPlayersVP;
       this.solarPhaseOption = gameOptions.solarPhaseOption;
-
+      this.soloTR = gameOptions.soloTR;
+      
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
       if (players.length === 1) {
@@ -375,6 +379,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public isSoloModeWin(): boolean {
+      // Solo TR
+      if (this.soloTR) {
+        if (this.players[0].getTerraformRating() >= 63) {
+          return true;
+        } else return false;
+      }
       if ( ! this.marsIsTerraformed()) return false;
       return this.preludeExtension ? this.generation <= 12 : this.generation <= 14;
     }

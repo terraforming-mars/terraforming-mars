@@ -23,7 +23,8 @@ describe("Stratopolis", function () {
             customCorporationsList: [],
             solarPhaseOption: true,
             promoCardsOption: false,
-            startingCorporations: 2
+            startingCorporations: 2,
+            soloTR: false
           } as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);
         expect(card.canPlay(player)).to.eq(false);

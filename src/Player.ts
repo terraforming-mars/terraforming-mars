@@ -1058,7 +1058,17 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
       } 
       return 41;
-    }  
+    }
+
+    public getSelfReplicatingRobotsCard() : IProjectCard | undefined {
+      let card = this.playedCards.find(card => card.name === CardName.SELF_REPLICATING_ROBOTS);
+      if (card instanceof SelfReplicatingRobots) {
+        if (card.targetCard !== undefined) {
+          return card.targetCard;
+        }
+      } 
+      return undefined;
+    }      
 
     public getCardCost(game: Game, card: IProjectCard): number {
       let cost: number = card.cost;
@@ -2258,8 +2268,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         if(element.resourceCount && element.resourceCount > 0) {
           card.resourceCount = element.resourceCount;
         }
-        if(card instanceof SelfReplicatingRobots && element instanceof SelfReplicatingRobots) {
-          card.targetCard = element.targetCard;
+        if(card instanceof SelfReplicatingRobots) {
+          let targetCard = (element as SelfReplicatingRobots).targetCard;
+          if (targetCard !== undefined) {
+            card.targetCard = getProjectCardByName(targetCard.name)!;
+          }
         }
         return card;
       });

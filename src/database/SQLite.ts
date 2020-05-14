@@ -27,7 +27,7 @@ export class SQLite implements IDatabase {
 
     getAllPendingGames(cb:(err: any, allGames:Array<string>)=> void) {
         var allGames:Array<string> = [];
-        let sql = "SELECT distinct game_id game_id FROM games WHERE status = 'running'";
+        let sql = "SELECT distinct game_id game_id FROM games WHERE status = 'running' and save_id > 0";
         this.db.all(sql, [], (err, rows) => {
             if (rows) {
                 rows.forEach((row) => {
@@ -37,8 +37,25 @@ export class SQLite implements IDatabase {
             }
         });
     }
-   
-    restoreGame(game_id:string, game: Game, cb:(err: any) => void) {
+
+    restoreReferenceGame(game_id:string, game: Game, cb:(err: any) => void) {
+        // Retrieve first save from database
+        this.db.get("SELECT game game FROM games WHERE game_id = ? AND save_id = 0", [game_id],(err: { message: any; }, row: { game: any; }) => {
+            if (err) {
+                return cb(err);
+                //return false;
+            }
+            // Transform string to json
+            let gameToRestore = JSON.parse(row.game);
+
+            // Rebuild each objects
+            game.loadFromJSON(gameToRestore);
+
+            return cb(err);
+        });
+    }      
+
+    restoreGameLastSave(game_id:string, game: Game, cb:(err: any) => void) {
         // Retrieve last save from database
         this.db.get("SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1", [game_id],(err: { message: any; }, row: { game: any; }) => {
             if (err) {
@@ -56,8 +73,8 @@ export class SQLite implements IDatabase {
 
 
     cleanSaves(game_id: string, save_id: number): void {
-        // DELETE all saves except last one
-        this.db.run("DELETE FROM games WHERE game_id = ? AND save_id < ?", [game_id, save_id], function(err: { message: any; }) {
+        // DELETE all saves except initial and last one
+        this.db.run("DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0", [game_id, save_id], function(err: { message: any; }) {
             if (err) {
             return console.warn(err.message);  
             }
@@ -70,7 +87,7 @@ export class SQLite implements IDatabase {
         });        
     }
 
-    restoreLastSave(game_id: string, save_id: number, game: Game): void {
+    restoreGame(game_id: string, save_id: number, game: Game): void {
         // Retrieve last save from database
         this.db.get("SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1", [game_id, save_id],(err: { message: any; }, row: { game: any; }) => {
             if (err) {

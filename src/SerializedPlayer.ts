@@ -13,6 +13,8 @@ export interface SerializedPlayer {
     canUseHeatAsMegaCredits: boolean;
     plantsNeededForGreenery: number;
     dealtCorporationCards: Array<CorporationCard>;
+    dealtProjectCards: Array<IProjectCard>;
+    dealtPreludeCards: Array<IProjectCard>;
     powerPlantCost: number;
     titaniumValue: number;
     steelValue: number;

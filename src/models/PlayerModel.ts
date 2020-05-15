@@ -4,6 +4,7 @@ import { Color } from "../Color";
 import { VictoryPointsBreakdown } from "../VictoryPointsBreakdown";
 import { ITagCount } from '../ITagCount';
 import { TurmoilModel } from "./TurmoilModel";
+import { IProjectCard } from '../cards/IProjectCard';
 
 export interface PlayerModel {
     boardName: string;
@@ -43,4 +44,5 @@ export interface PlayerModel {
     fleetSize: number;
     tradesThisTurn: number;
     selfReplicatingRobotsCardCost: number;
+    selfReplicatingRobotsCardTarget: IProjectCard | undefined;
 }

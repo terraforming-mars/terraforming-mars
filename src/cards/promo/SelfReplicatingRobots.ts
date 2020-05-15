@@ -56,15 +56,16 @@ export class SelfReplicatingRobots implements IProjectCard {
                 'Select card to link with Self-Replicating Robots', selectableCards,
                 (foundCards: Array<IProjectCard>) => {
                   const projectCardIndex = player.cardsInHand.findIndex((card) => card.name === foundCards[0].name);
-                  player.cardsInHand.splice(projectCardIndex, 1);                 
+                  player.cardsInHand.splice(projectCardIndex, 1);        
                   this.targetCard = foundCards[0];
                   this.resourceCount = 2;
                   game.log(
                     LogMessageType.DEFAULT,
-                    "${0} linked ${1} with Self Replicating Robots",
+                    "${0} linked ${1} with ${2}",
                     new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                    new LogMessageData(LogMessageDataType.CARD, this.targetCard.name)
-                  );                  
+                    new LogMessageData(LogMessageDataType.CARD, foundCards[0].name),
+                    new LogMessageData(LogMessageDataType.CARD, this.name)
+                  );             
                   return undefined;
                 }
             );

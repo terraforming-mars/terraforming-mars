@@ -69,8 +69,7 @@ export class SQLite implements IDatabase {
 
             return cb(err);
         });
-    }    
-
+    }
 
     cleanSaves(game_id: string, save_id: number): void {
         // DELETE all saves except initial and last one
@@ -107,7 +106,8 @@ export class SQLite implements IDatabase {
         // Insert
         this.db.run("INSERT INTO games(game_id, save_id, game) VALUES(?, ?, ?)", [game_id, save_id, game], function(err: { message: any; }) {
             if (err) {
-            return console.log(err.message);  
+                //Should be a duplicate, does not matter
+                return;  
             }
         });
     }

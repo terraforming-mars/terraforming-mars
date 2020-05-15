@@ -111,6 +111,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private promoCardsOption: boolean;
     private startingCorporations: number;
     public soloTR: boolean;
+    private clonedGamedId: string | undefined;
 
     constructor(
       public id: string,
@@ -156,11 +157,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.soloTR = gameOptions.soloTR;
 
       // Clone game
-            if (gameOptions !== undefined && gameOptions.clonedGamedId !== undefined) {
-              this.cloneGame(gameOptions.clonedGamedId, this);
-              gameOptions.clonedGamedId = undefined;
-              return;
+      if (gameOptions !== undefined 
+        && gameOptions.clonedGamedId !== undefined
+        && !gameOptions.clonedGamedId.startsWith("#")) {
+        this.cloneGame(gameOptions.clonedGamedId, this);
+        this.clonedGamedId = "#" + gameOptions.clonedGamedId;
+        return;
       }
+
       
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
@@ -250,7 +254,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Save initial game state
       Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
-      console.log("Initial save for game " + this.id);
 
       this.log(
         LogMessageType.NEW_GENERATION,
@@ -302,81 +305,86 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private cloneGame(gameId: string, game: Game): void {
-      const player = new Player("test", Color.BLUE, false);
-      const player2 = new Player("test2", Color.RED, false);
-      let gameToRebuild = new Game(gameId,[player,player2], player);
-      Database.getInstance().restoreReferenceGame(gameId, gameToRebuild, function (err) {
-        if (err) {
-          //return false;
-        }
-        // Check number of players
-        if (game.players.length !== gameToRebuild.players.length) {
-          return false;
-          //throw new Error("Player number missmatch");
-        }
-
-        // Update game options
-        game.draftVariant = gameToRebuild.draftVariant;
-        game.soloMode = gameToRebuild.soloMode;
-        game.preludeExtension = gameToRebuild.preludeExtension;
-        game.venusNextExtension = gameToRebuild.venusNextExtension;
-        game.coloniesExtension = gameToRebuild.coloniesExtension;
-        game.turmoilExtension = gameToRebuild.turmoilExtension;
-        game.boardName = gameToRebuild.boardName;
-        game.showOtherPlayersVP = gameToRebuild.showOtherPlayersVP;
-        game.solarPhaseOption = gameToRebuild.solarPhaseOption;
-        game.promoCardsOption = gameToRebuild.promoCardsOption;
-        game.startingCorporations = gameToRebuild.startingCorporations;
-        game.soloTR = gameToRebuild.soloTR;
-
-        // Update dealers
-        game.dealer = gameToRebuild.dealer;
-        game.colonyDealer = gameToRebuild.colonyDealer;
-
-        // Update other objects
-        game.milestones = gameToRebuild.milestones;
-        game.awards = gameToRebuild.awards;
-        game.colonies = gameToRebuild.colonies;
-        game.turmoil = gameToRebuild.turmoil;
-
-        // Set active player
-        //let playerIndex = gameToRebuild.players.indexOf(gameToRebuild.activePlayer);
-        let playerIndex = gameToRebuild.players.indexOf(gameToRebuild.first);
-        game.first = game.players[playerIndex];
-        game.activePlayer = game.players[playerIndex];
-
-        // Recreate turmoil lobby and reserve (Turmoil stores some players ids)
-        if (gameToRebuild.turmoilExtension && game.turmoil !== undefined) {
-          game.turmoil.lobby.clear();
-          game.turmoil.delegate_reserve = [];
-          game.getPlayers().forEach(player => {
-            if (game.turmoil !== undefined) {
-              game.turmoil.lobby.add(player.id);
-              for (let i = 0; i < 6; i++) {
-                game.turmoil.delegate_reserve.push(player);   
-              }
+      
+        const player = new Player("test", Color.BLUE, false);
+        const player2 = new Player("test2", Color.RED, false);
+        let gameToRebuild = new Game(gameId,[player,player2], player);
+        Database.getInstance().restoreReferenceGame(gameId, gameToRebuild, function (err) {
+          if (err) {
+            throw new Error("Game " + gameId + " not found");
+          }
+          // Check number of players
+          try{  
+            if (game.players.length !== gameToRebuild.players.length) {
+              throw new Error("Player number missmatch");
             }
-          });
-          for (let i = 0; i < 13; i++) {
-            game.turmoil.delegate_reserve.push("NEUTRAL");   
+          } catch(e) {
+            if(e instanceof Error) {
+              // Revert to default game creation
+              return;
+            }  
           }  
-        }  
 
-        // Update Players
-        game.players.forEach(player => {
-          let playerIndex = game.players.indexOf(player);
-          let referencePlayer = gameToRebuild.players[playerIndex];
-          player.dealtCorporationCards = referencePlayer.dealtCorporationCards;
-          player.dealtPreludeCards = referencePlayer.dealtPreludeCards;
-          player.dealtProjectCards = referencePlayer.dealtProjectCards;
+          // Update game options
+          game.draftVariant = gameToRebuild.draftVariant;
+          game.soloMode = gameToRebuild.soloMode;
+          game.preludeExtension = gameToRebuild.preludeExtension;
+          game.venusNextExtension = gameToRebuild.venusNextExtension;
+          game.coloniesExtension = gameToRebuild.coloniesExtension;
+          game.turmoilExtension = gameToRebuild.turmoilExtension;
+          game.boardName = gameToRebuild.boardName;
+          game.showOtherPlayersVP = gameToRebuild.showOtherPlayersVP;
+          game.solarPhaseOption = gameToRebuild.solarPhaseOption;
+          game.promoCardsOption = gameToRebuild.promoCardsOption;
+          game.startingCorporations = gameToRebuild.startingCorporations;
+          game.soloTR = gameToRebuild.soloTR;
 
-          player.setWaitingFor(game.pickCorporationCard(player), () => {});
-        });
-        return true;
-      });
+          // Update dealers
+          game.dealer = gameToRebuild.dealer;
+          game.colonyDealer = gameToRebuild.colonyDealer;
+
+          // Update other objects
+          game.milestones = gameToRebuild.milestones;
+          game.awards = gameToRebuild.awards;
+          game.colonies = gameToRebuild.colonies;
+          game.turmoil = gameToRebuild.turmoil;
+
+          // Set active player
+          //let playerIndex = gameToRebuild.players.indexOf(gameToRebuild.activePlayer);
+          let playerIndex = gameToRebuild.players.indexOf(gameToRebuild.first);
+          game.first = game.players[playerIndex];
+          game.activePlayer = game.players[playerIndex];
+
+          // Recreate turmoil lobby and reserve (Turmoil stores some players ids)
+          if (gameToRebuild.turmoilExtension && game.turmoil !== undefined) {
+            game.turmoil.lobby.clear();
+            game.turmoil.delegate_reserve = [];
+            game.getPlayers().forEach(player => {
+              if (game.turmoil !== undefined) {
+                game.turmoil.lobby.add(player.id);
+                for (let i = 0; i < 6; i++) {
+                  game.turmoil.delegate_reserve.push(player);   
+                }
+              }
+            });
+            for (let i = 0; i < 13; i++) {
+              game.turmoil.delegate_reserve.push("NEUTRAL");   
+            }  
+          }  
+
+          // Update Players
+          game.players.forEach(player => {
+            let playerIndex = game.players.indexOf(player);
+            let referencePlayer = gameToRebuild.players[playerIndex];
+            player.dealtCorporationCards = referencePlayer.dealtCorporationCards;
+            player.dealtPreludeCards = referencePlayer.dealtPreludeCards;
+            player.dealtProjectCards = referencePlayer.dealtProjectCards;
+
+            player.setWaitingFor(game.pickCorporationCard(player), () => {});
+          });
+        });  
     }
     
-
     public addSelectHowToPayInterrupt(player: Player, amount: number, canUseSteel: boolean, canUseTitanium: boolean, title?: string): void {
       if ((!player.canUseHeatAsMegaCredits || player.heat === 0) &&
           (!canUseSteel || player.steel === 0) &&
@@ -670,6 +678,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       if (this.gameIsOver()) {
         this.gotoFinalGreeneryPlacement();
+        // Log id or cloned game id
+        if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith("#")) {
+          this.log(LogMessageType.DEFAULT, "This game was a clone from game " + this.clonedGamedId);
+        } else {
+          this.log(LogMessageType.DEFAULT, "This game id was " + this.id);
+        }
         return;
       } 
       // solar Phase Option

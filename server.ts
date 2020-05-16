@@ -192,7 +192,7 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       const player = new Player("test", Color.BLUE, false);
       const player2 = new Player("test2", Color.RED, false);
       let gameToRebuild = new Game(game_id,[player,player2], player);
-      Database.getInstance().restoreGame(game_id, gameToRebuild, function (err) {
+      Database.getInstance().restoreGameLastSave(game_id, gameToRebuild, function (err) {
         if (err) {
           return;
         }
@@ -221,7 +221,7 @@ function loadAllGames(): void {
       const player = new Player("test", Color.BLUE, false);
       const player2 = new Player("test2", Color.RED, false);
       let gameToRebuild = new Game(game_id,[player,player2], player);
-      Database.getInstance().restoreGame(game_id, gameToRebuild, function (err) {
+      Database.getInstance().restoreGameLastSave(game_id, gameToRebuild, function (err) {
         if (err) {
           return;
         }
@@ -359,7 +359,8 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         solarPhaseOption: gameReq.solarPhaseOption,
         promoCardsOption: gameReq.promoCardsOption,
         startingCorporations: gameReq.startingCorporations,
-        soloTR: gameReq.soloTR
+        soloTR: gameReq.soloTR,
+        clonedGamedId: gameReq.clonedGamedId
       } as GameOptions;
     
       const game = new Game(gameId, players, firstPlayer, gameOptions);

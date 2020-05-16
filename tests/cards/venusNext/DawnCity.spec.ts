@@ -23,7 +23,8 @@ describe("DawnCity", function () {
             solarPhaseOption: false,
             promoCardsOption: false,
             startingCorporations: 2,
-            soloTR: false
+            soloTR: false,
+            clonedGamedId: undefined
           } as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);
         player.setProduction(Resources.ENERGY);

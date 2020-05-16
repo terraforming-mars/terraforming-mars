@@ -51,6 +51,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public canUseHeatAsMegaCredits: boolean = false;
     public plantsNeededForGreenery: number = 8;
     public dealtCorporationCards: Array<CorporationCard> = [];
+    public dealtProjectCards: Array<IProjectCard> = [];
+    public dealtPreludeCards: Array<IProjectCard> = [];
     public powerPlantCost: number = 11;
     private titaniumValue: number = 3;
     public steelValue: number = 2;
@@ -1803,7 +1805,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private undoTurnOption(game: Game): PlayerInput {
       return new SelectOption("Undo Turn", () => {
         try {
-          Database.getInstance().restoreLastSave(game.id, game.lastSaveId, game);
+          Database.getInstance().restoreGame(game.id, game.lastSaveId, game);
         }
         catch(error){
           console.log(error);
@@ -2247,10 +2249,20 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           this.corporationCard = undefined;
       }
 
-      // Rebuild deal corporation array
+      // Rebuild dealt corporation array
       this.dealtCorporationCards = d.dealtCorporationCards.map((element: CorporationCard)  => {
         return getCorporationCardByName(element.name)!;
       });
+
+      // Rebuild dealt prelude array
+      this.dealtPreludeCards = d.dealtPreludeCards.map((element: IProjectCard)  => {
+        return getProjectCardByName(element.name)!;
+      });
+      
+      // Rebuild dealt cards array
+      this.dealtProjectCards = d.dealtProjectCards.map((element: IProjectCard)  => {
+        return getProjectCardByName(element.name)!;
+      });      
 
       // Rebuild each cards in hand
       this.cardsInHand = d.cardsInHand.map((element: IProjectCard)  => {

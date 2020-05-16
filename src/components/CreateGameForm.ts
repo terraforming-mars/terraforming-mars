@@ -26,6 +26,7 @@ interface CreateGameModel {
     promoCardsOption: boolean;
     startingCorporations: number;
     soloTR: boolean;
+    clonedGamedId: string | undefined;
 }
 
 interface NewPlayerModel {
@@ -70,7 +71,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
             solarPhaseOption: false,
             promoCardsOption: false,
             startingCorporations: 2,
-            soloTR: false
+            soloTR: false,
+            clonedGamedId: undefined
         } as CreateGameModel
     },
     components: {
@@ -129,9 +131,10 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const promoCardsOption = component.promoCardsOption;
             const startingCorporations = component.startingCorporations;
             const soloTR = component.soloTR;
+            const clonedGamedId = component.clonedGamedId;
 
             const dataToSend = JSON.stringify({
-                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption, promoCardsOption, startingCorporations, soloTR 
+                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption, promoCardsOption, startingCorporations, soloTR, clonedGamedId 
             });
 
             const onSucces = (response: any) => {
@@ -257,10 +260,10 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                             <label class="form-switch">
                                 <input type="checkbox" v-model="seededGame">
-                                <i class="form-icon"></i> <span v-i18n>Show seed</span>
+                                <i class="form-icon"></i> <span v-i18n>Set Predefined Game</span>
                             </label>
                             <div v-if="seededGame">
-                                <input class="form-input form-inline" v-model="seed" />
+                                <input class="form-input form-inline" v-model="clonedGamedId" />
                             </div>
 
                         </div>

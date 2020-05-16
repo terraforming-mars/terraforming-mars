@@ -14,8 +14,9 @@ export class Comet implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {
-      game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 3);
+      game.increaseTemperature(player, 1);
       game.addOceanInterrupt(player);
-      return game.increaseTemperature(player, 1);
+      game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 3);
+      return undefined;
     }
 }

@@ -13,8 +13,9 @@ export class BigAsteroid implements IProjectCard {
     public name: CardName = CardName.BIG_ASTEROID;
 
     public play(player: Player, game: Game) {
+      game.increaseTemperature(player, 2);
       game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 4);
       player.titanium += 4;
-      return game.increaseTemperature(player, 2);
+      return undefined;
     }
 }

@@ -310,17 +310,18 @@ export class Game implements ILoadable<SerializedGame, Game> {
         const player2 = new Player("test2", Color.RED, false);
         let gameToRebuild = new Game(gameId,[player,player2], player);
         Database.getInstance().restoreReferenceGame(gameId, gameToRebuild, function (err) {
-          if (err) {
-            throw new Error("Game " + gameId + " not found");
-          }
+          try{
+            if (err) {
+              throw new Error("Game " + gameId + " not found");
+            }
           // Check number of players
-          try{  
             if (game.players.length !== gameToRebuild.players.length) {
               throw new Error("Player number missmatch");
             }
           } catch(e) {
             if(e instanceof Error) {
-              // Revert to default game creation
+              console.log("Clone game error: " + e.message);
+              // Revert to game creation screen with error message
               return;
             }  
           }  

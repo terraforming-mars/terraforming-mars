@@ -40,10 +40,9 @@ export class SQLite implements IDatabase {
 
     restoreReferenceGame(game_id:string, game: Game, cb:(err: any) => void) {
         // Retrieve first save from database
-        this.db.get("SELECT game game FROM games WHERE game_id = ? AND save_id = 0", [game_id],(err: { message: any; }, row: { game: any; }) => {
-            if (err) {
-                return cb(err);
-                //return false;
+        this.db.get("SELECT game_id game_id, game game FROM games WHERE game_id = ? AND save_id = 0", [game_id],(err: { message: any; }, row: { game_id: string, game: any; }) => {
+            if (row.game_id === undefined) {
+                return cb(new Error("Game not found"));
             }
             // Transform string to json
             let gameToRestore = JSON.parse(row.game);

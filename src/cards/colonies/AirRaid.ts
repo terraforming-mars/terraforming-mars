@@ -25,10 +25,8 @@ export class AirRaid implements IProjectCard {
 
     public play(player: Player, game: Game) {
       
-    let resourceCards: Array<ICard> = player.playedCards.filter(card => card.resourceType === ResourceType.FLOATER && player.getResourcesOnCard(card) > 0);
-    if (player.corporationCard !== undefined && player.corporationCard.resourceType === ResourceType.FLOATER && player.getResourcesOnCard(player.corporationCard) > 0) {
-        resourceCards.push(player.corporationCard);
-    }
+    let resourceCards = player.getCardsWithResources().filter(card => card.resourceType === ResourceType.FLOATER);
+
     const selectCard = new SelectCard(
         'Select card to remove one floater from ',
         resourceCards,

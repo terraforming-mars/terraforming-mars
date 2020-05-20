@@ -1,0 +1,106 @@
+{
+    "Allied Banks": "Союзнический банк",
+    "Increase your MC production 4 steps. Gain 3 MC.": "Повысьте доход на 4. Получите 3 MC.",
+
+    "Aquifer Turbines": "Гидротурбины",
+    "Place an Ocean. Increase your energy production 2 steps. Pay 3 MC.": "Выложите тайл океана и повысьте производство энергии на 2. Заплатите 3 MC.",
+
+    "Biofuels": "Биотопливо",
+    "Increase your energy and plant production 1 step. Gain 2 plants.": "Повысьте производство энергии и растений на 1 шаг каждое. Получите 2 растения.",
+
+    "Biolab": "Биолаборатория",
+    "Increase your plant production 1 step. Draw 3 cards.": "Повысьте производство растений на 1. Возьмите 3 карты.",
+
+    "Biosphere Support": "Поддержка биосферы",
+    "Increase your plant production 2 steps. Decrease your MC production 1 step.": "Снизьте свой доход на 1 и повысьте производство растений на 2 шага.",
+
+    "Business Empire": "Бизнес-империя",
+    "Increase your MC production 6 steps. Pay 6 MC.": "Повысьте доход на 6. Заплатите 6 MC.",
+
+    "Dome Farming": "Тепличное хозяйство",
+    "Increase your MC production 2 steps and plant production 1 step.": "Повысьте доход на 2 и производство растений на 1.",
+
+    "Donation": "Пожертвование",
+    "Gain 21 MC.": "Получите 21 MC.",
+
+    "Early Settlement": "Раннее поселение",
+    "Increase your plant production 1 step. Place a city tile.": "Выложите тайл города. Повысьте производство растений на 1.",
+
+    "Ecology Experts": "Экологические эксперты",
+    "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "Повысьте производство растений на 1. Разыграйте карту с руки, игнорируя глобальные требования.",
+
+    "Eccentric Sponsor": "Эксцентричный спонсор",
+    "Play 1 card from hand with a 25 MC reduction.": "Разыграйте карту с руки, снизив ее стоимость на 25 mc.",
+
+    "Experimental Forest": "Экспериментальный лес",
+    "Place 1 Greenery Tile. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Проведите озеленение и повысьте уровень кислорода на 1. Тяните карты из колоды, пока не найдете 2 карты с символом растения. Возьмите их в руку. Сбросьте остальные.",
+
+    "Galilean Mining": "Добыча на Галилео",
+    "Increase your titanium production 2 steps. Pay 5 MC.": "Повысьте производство титана на 2. Заплатите 5 MC.",
+
+    "Great Aquifer": "Большой водоносный слой",
+    "Place 2 Ocean tiles.": "Выложите 2 тайла океана.",
+
+    "Huge Asteroid": "Огромный астероид",
+    "Increase Temperature 3 steps. Pay 5 MC.": "Повысьте температуру на 3. Заплатите 5 MC.",
+
+    "IO Research Outpost": "Исследовательская база на Ио",
+    "Increase your titanium production 1 step. Draw a card.": "Повысьте производство титана на 1. Возьмите 1 карту",
+
+    "Loan": "Кредит",
+    "Gain 30 MC. Decrease your MC production 2 steps.": "Получите 30 MC. Снизьте доход на 2.",
+
+    "Martian Industries": "Промышленность Марса",
+    "Increase your energy and steel production 1 step. Gain 6 MC.": "Повысьте производство энергии и стали на 1 каждое. Получите 6 MC.",
+
+    "Metal-Rich Asteroid": "Богатый металлом астероид",
+    "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "Повысьте температуру на 1. Получите 4 титана и 4 стали.",
+
+    "Metals Company": "Металлургическая компания",
+    "Increase your MC, steel and titanium production 1 step.": "Повысьте доход, производство стали и титана на 1 шаг каждое.",
+
+    "Mining Operations": "Горные работы",
+    "Increase your steel production 2 steps. Gain 4 steel.": "Повысьте производство стали на 2. Получите 4 стали.",
+
+    "Mohole": "Сверхглубокая скважина",
+    "Increase your heat production 3 steps. Gain 3 heat.": "Повысьте производство тепла на 3. Получите 3 тепла.",
+
+    "Mohole Excavation": "Свехрглубокая добыча",
+    "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "Повысьте производство стали на 1. Повысьте производство тепла на 2. Получите 2 тепла.",
+
+    "Nitrogen Shipment": "Ввоз азота",
+    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 MC.": "Повысьте свой рейтинг и производство растений на 1 каждое. Получите 5 MC.",
+
+    "Orbital Construction Yard": "Строительный парк на орбите",
+    "Increase your titanium production 1 step. Gain 4 titanium.": "Повысьте производство титана на 1. Получите 4 титана.",
+
+    "Polar Industries": "Полярная промышленность",
+    "Increase your heat production 2 steps. Place an Ocean tile.": "Выложите тайл океана. Повысьте производство тепла на 2.",
+
+    "Power Generation": "Производство энергии",
+    "Increase your energy production 3 steps.": "Повысьте производство энергии на 3.",
+
+    "Research Network": "Исследовательская сеть",
+    "Increase your money production 1 step. Draw 3 cards.": "Возьмите 3 карты и увеличьте доход на 1.",
+
+    "Self-Sufficient Settlement": "Самодостаточное поселение",
+    "Increase your money production 2 step. Place a City tile.": "Выложите тайл города. Повысьте доход на 2.",
+
+    "Smelting Plant": "Плавильный завод",
+    "Raise oxygen 2 steps. Gain 5 steel.": "Повысьте уровень кислорода на 2. Получите 5 стали.",
+
+    "Society Support": "Поддержка общественности",
+    "Increase your plant, energy and heat production 1 step. Decrease money production 1 step.": "Повысьте производство растений, энергии и тепла на 1 каждое. Снизьте доход на 1.",
+
+    "Supplier": "Поставщик",
+    "Increase your energy production 2 steps. Gain 4 steel.": "Повысьте производство энергии на 2. Получите 4 стали.",
+
+    "Supply Drop": "Поставка",
+    "Gain 3 titanium, 8 steel and 3 plants.": "Получите 3 титана, 8 стали и 3 растения.",
+
+    "UNMI Contractor": "Подрядчик UNMI",
+    "Increase your TR 3 steps. Draw a card.": "Повысьте рейтинг на 3. Возьмите 1 карту.",
+
+    "Acquired Space Agency": "Приобретенное космоагенство",
+    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Получите 6 титана. Тяните карты из колоды, пока не найдете 2 карты с символом космоса. Возьмите их в руку. Сбросьте остальные."
+}

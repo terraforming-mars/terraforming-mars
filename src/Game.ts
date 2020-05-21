@@ -1261,17 +1261,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       } 
       return ret;
     }
-    public getPlayedCardsWithAnimals(): Array<IProjectCard> {
-      const result: Array<IProjectCard> = [];
-      this.players.forEach((player) => {
-        player.playedCards.forEach((card) => {
-          if (card.resourceType === ResourceType.ANIMAL) {
-            result.push(card);
-          }
-        });
-      });
-      return result;
-    }
+
     public getCardPlayer(name: string): Player {
       for (let player of this.players) {
         // Check cards player has played

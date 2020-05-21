@@ -27,7 +27,7 @@ export class HiTechLab implements IProjectCard {
         return new SelectAmount("Select amount of energy to spend", (amount: number) => {
             // 0 amount failsafe
             if (amount === 0 ) {
-                amount = 1;
+                return undefined;
             }
             player.setResource(Resources.ENERGY, -amount);
             let cardsDrawn: Array<IProjectCard> = [];

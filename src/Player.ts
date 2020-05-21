@@ -353,40 +353,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public hasProtectedHabitats(): boolean {
       return this.cardIsInEffect(CardName.PROTECTED_HABITATS);
     }
-    
-    public removeAnimals(
-        removingPlayer: Player,
-        card: ICard,
-        count: number,
-        game: Game): void {
-      if (removingPlayer !== this && this.hasProtectedHabitats()) {
-        throw new Error("Can not remove animals due to protected habitats");
-      }
-      if (card.name === CardName.PETS) {
-        throw new Error("Animals may not be removed from pets");
-      }
-      if (card.resourceCount === 0) {
-        throw new Error(card.name + " does not have animals to remove");
-      }
-      this.removeResourceFrom(card, count, game, removingPlayer);
-    }
-    
-    public removeMicrobes(
-        removingPlayer: Player,
-        card: ICard,
-        count: number,
-        game: Game): void {
-      if (removingPlayer !== this && this.hasProtectedHabitats()) {
-        throw new Error(
-            "Can not remove microbes due to protected habitats"
-        );
-      }
-      if (this.getResourcesOnCard(card) === 0) {
-        throw new Error(card.name + " does not have microbes to remove");
-      }
-      this.removeResourceFrom(card, count, game, removingPlayer);
-    }
-
+        
     public getResourcesOnCard(card: ICard): number {
       if (card.resourceCount !== undefined) {
         return card.resourceCount;
@@ -482,15 +449,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     public getResourceCount(resource: ResourceType): number {
       let count: number = 0;
-      this.playedCards.forEach((card) => {
-        if (card.resourceType === resource) {
-          count += this.getResourcesOnCard(card);
-        }
+      this.getCardsWithResources().filter(card => card.resourceType === resource).forEach((card) => {
+        count += this.getResourcesOnCard(card);
       });
-
-      if (this.corporationCard !== undefined && this.corporationCard.resourceType !== undefined && this.corporationCard.resourceType === resource) {
-        count += this.getResourcesOnCard(this.corporationCard);
-      }    
       return count;
     }
 

@@ -20,5 +20,6 @@ export const LANGUAGES = [
     {"id": "en", "title": "English"},
     {"id": "de", "title": "German"},
     {"id": "fr", "title": "French"},
-    {"id": "ru", "title": "Russian"}
+    {"id": "ru", "title": "Russian"},
+    {"id": "cn", "title": "Chinese"}
 ];

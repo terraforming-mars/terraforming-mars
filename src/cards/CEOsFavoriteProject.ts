@@ -14,18 +14,13 @@ export class CEOsFavoriteProject implements IProjectCard {
     public name: CardName = CardName.CEOS_FAVORITE_PROJECT;
     public hasRequirements = false;
     public canPlay(player: Player): boolean {
-      return this.getAvailableCards(player).length > 0;
+      return player.getCardsWithResources().length > 0;
     }
-    private getAvailableCards(player: Player): Array<ICard> {
-      return player.getCardsWithResources().filter(
-          (card) => player.getResourcesOnCard(card)
-      );
-    }
+
     public play(player: Player) {
-      const availableCards = this.getAvailableCards(player);
       return new SelectCard(
           'Select card to add resource',
-          availableCards,
+          player.getCardsWithResources(),
           (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0]);
             return undefined;

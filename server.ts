@@ -213,7 +213,7 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 }
 
 function loadAllGames(): void {
-  Database.getInstance().getAllPendingGames(function (err, allGames) {
+  Database.getInstance().getGames("restore", function (err, allGames) {
     if (err) {
       return;
     }

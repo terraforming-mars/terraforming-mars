@@ -572,7 +572,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private pickCorporationCard(player: Player): PlayerInput {
-      let dealtCards: Array<IProjectCard> = [];
       let corporation: CorporationCard;
       const result: AndOptions = new AndOptions(() => { this.playCorporationCard(player, corporation); return undefined; });
 
@@ -604,7 +603,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         new SelectCard(
           "Select initial cards to buy", player.dealtProjectCards,
           (foundCards: Array<IProjectCard>) => {
-            for (const dealt of dealtCards) {
+            for (const dealt of foundCards) {
               if (foundCards.find((foundCard) => foundCard.name === dealt.name)) {
                 player.cardsInHand.push(dealt);
               } else {

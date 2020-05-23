@@ -25,9 +25,14 @@ export class SQLite implements IDatabase {
         });  
     }
 
-    getAllPendingGames(cb:(err: any, allGames:Array<string>)=> void) {
+    getGames(action: string, cb:(err: any, allGames:Array<string>)=> void) {
         var allGames:Array<string> = [];
-        let sql = "SELECT distinct game_id game_id FROM games WHERE status = 'running' and save_id > 0";
+        var sql: string = "";
+        if (action === "restore") {
+            sql = "SELECT distinct game_id game_id FROM games WHERE status = 'running' and save_id > 0";
+        } else if (action === "clone") {
+            sql = "SELECT distinct game_id game_id FROM games WHERE status = 'running' and save_id = 0";
+        }    
         this.db.all(sql, [], (err, rows) => {
             if (rows) {
                 rows.forEach((row) => {

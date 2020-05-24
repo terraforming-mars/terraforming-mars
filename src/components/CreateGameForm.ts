@@ -87,15 +87,13 @@ export const CreateGameForm = Vue.component("create-game-form", {
         }
 
         const onSucces = (response: any) => {
-            //const clonableGames:Array<IGameData> = response;
             this.$data.cloneGameData = response;
-            //console.log("received from server: " + response[0])
         }
 
         fetch("/api/clonablegames")
         .then(response => response.json())
         .then(onSucces)
-        .catch(_ => alert("clonablegames server response"));        
+        .catch(_ => alert("Unexpected server response"));        
     },
     methods: {
         updateCustomCorporationsList: function (newCustomCorporationsList: Array<CardName>) {

@@ -5,6 +5,7 @@ import { Color } from "../Color";
 import { BoardName } from '../BoardName';
 import { CardName } from "../CardName";
 import { CorporationsFilter } from "./CorporationsFilter";
+import { IGameData } from '../database/IDatabase';
 
 interface CreateGameModel {
     firstIndex: number;
@@ -26,7 +27,8 @@ interface CreateGameModel {
     promoCardsOption: boolean;
     startingCorporations: number;
     soloTR: boolean;
-    clonedGamedId: string | undefined;
+    clonedGameData: IGameData | undefined;
+    cloneGameData: Array<IGameData>;
 }
 
 interface NewPlayerModel {
@@ -72,7 +74,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
             promoCardsOption: false,
             startingCorporations: 2,
             soloTR: false,
-            clonedGamedId: undefined
+            clonedGameData: undefined,
+            cloneGameData: []
         } as CreateGameModel
     },
     components: {
@@ -82,6 +85,17 @@ export const CreateGameForm = Vue.component("create-game-form", {
         if (window.location.pathname === '/solo') {
             this.isSoloModePage = true;
         }
+
+        const onSucces = (response: any) => {
+            //const clonableGames:Array<IGameData> = response;
+            this.$data.cloneGameData = response;
+            //console.log("received from server: " + response[0])
+        }
+
+        fetch("/api/clonablegames")
+        .then(response => response.json())
+        .then(onSucces)
+        .catch(_ => alert("clonablegames server response"));        
     },
     methods: {
         updateCustomCorporationsList: function (newCustomCorporationsList: Array<CardName>) {
@@ -131,7 +145,17 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const promoCardsOption = component.promoCardsOption;
             const startingCorporations = component.startingCorporations;
             const soloTR = component.soloTR;
-            const clonedGamedId = component.clonedGamedId;
+            let clonedGamedId: undefined | string = undefined;
+
+            // Clone game checks
+            if (component.clonedGameData !== undefined) {
+                clonedGamedId = component.clonedGameData.gameId;
+                if (component.clonedGameData.playerCount !== players.length) {
+                    alert("Player count mismatch ");
+                    this.$data.playersCount = component.clonedGameData.playerCount;
+                    return;
+                }
+            }
 
             const dataToSend = JSON.stringify({
                 players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption, promoCardsOption, startingCorporations, soloTR, clonedGamedId 
@@ -263,9 +287,12 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <i class="form-icon"></i> <span v-i18n>Set Predefined Game</span>
                             </label>
                             <div v-if="seededGame">
-                                <input class="form-input form-inline" v-model="clonedGamedId" />
+                                <select name="clonedGamedId" v-model="clonedGameData">
+                                    <option v-for="game in cloneGameData" :value="game" :key="game.gameId">
+                                        {{ game.gameId }} - {{ game.playerCount }} player(s)
+                                    </option>
+                                </select>
                             </div>
-
                         </div>
 
                         <div class="create-game-options-block col3 col-sm-6">

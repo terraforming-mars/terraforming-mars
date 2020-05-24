@@ -83,6 +83,8 @@ function requestHandler(
         apiGetGames(req, res);
       } else if (req.url.indexOf('/api/game') === 0) {
         apiGetGame(req, res);
+      } else if (req.url.startsWith('/api/clonablegames')) {
+        getClonableGames(res);        
       } else {
         notFound(req, res);
       }
@@ -154,6 +156,17 @@ function processInput(
   });
 }
 
+function getClonableGames(res: http.ServerResponse): void {
+  Database.getInstance().getClonableGames(function (err, allGames) {
+    if (err) {
+      return;
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.write(JSON.stringify(allGames));
+    res.end();
+  });
+}  
+
 function apiGetGames(req: http.IncomingMessage, res: http.ServerResponse): void {
 
   if (!isServerIdValid(req)) {
@@ -213,7 +226,7 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 }
 
 function loadAllGames(): void {
-  Database.getInstance().getGames("restore", function (err, allGames) {
+  Database.getInstance().getGames(function (err, allGames) {
     if (err) {
       return;
     }

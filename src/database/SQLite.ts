@@ -1,5 +1,6 @@
 import { IDatabase } from "./IDatabase";
 import {Game} from "../Game";
+import { IGameData } from './IDatabase';
 
 import sqlite3 = require("sqlite3");
 const path = require("path");
@@ -25,14 +26,26 @@ export class SQLite implements IDatabase {
         });  
     }
 
-    getGames(action: string, cb:(err: any, allGames:Array<string>)=> void) {
+    getClonableGames( cb:(err: any, allGames:Array<IGameData>)=> void) {
+        var allGames:Array<IGameData> = [];
+        var sql = "SELECT distinct game_id game_id, json_array_length(json_extract(game, '$.players')) playerCount FROM games WHERE status = 'running' and save_id = 0";
+  
+        this.db.all(sql, [], (err, rows) => {
+            if (rows) {
+                rows.forEach((row) => {
+                    let gameId:string = row.game_id
+                    let playerCount: number = row.playerCount;
+                    let gameData:IGameData = {gameId,playerCount};
+                    allGames.push(gameData);
+                });
+                return cb(err, allGames);
+            }
+        });
+    }  
+
+    getGames(cb:(err: any, allGames:Array<string>)=> void) {
         var allGames:Array<string> = [];
-        var sql: string = "";
-        if (action === "restore") {
-            sql = "SELECT distinct game_id game_id FROM games WHERE status = 'running' and save_id > 0";
-        } else if (action === "clone") {
-            sql = "SELECT distinct game_id game_id FROM games WHERE status = 'running' and save_id = 0";
-        }    
+        var sql: string = "SELECT distinct game_id game_id FROM games WHERE status = 'running' and save_id > 0"; 
         this.db.all(sql, [], (err, rows) => {
             if (rows) {
                 rows.forEach((row) => {

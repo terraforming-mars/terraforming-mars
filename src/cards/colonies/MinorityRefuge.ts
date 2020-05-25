@@ -13,6 +13,10 @@ export class MinorityRefuge implements IProjectCard {
     public name: CardName = CardName.MINORITY_REFUGE;
     public cardType: CardType = CardType.AUTOMATED;
 
+    public canPlay(player: Player): boolean {
+      return player.getProduction(Resources.MEGACREDITS) >= -3;
+    }
+
     public play(player: Player, game: Game) {
       game.addColonyInterrupt(player, false, "Select colony for Minority Refuge");
       player.setProduction(Resources.MEGACREDITS, -2); 

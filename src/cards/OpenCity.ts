@@ -15,7 +15,7 @@ export class OpenCity implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: CardName = CardName.OPEN_CITY;
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOxygenLevel() >= 12 - player.getRequirementsBonus(game) && player.getProduction(Resources.ENERGY) >= 1 && game.board.getAvailableSpacesForCity(player).length >= 0;
+        return game.getOxygenLevel() >= 12 - player.getRequirementsBonus(game) && player.getProduction(Resources.ENERGY) >= 1 && game.board.getAvailableSpacesForCity(player).length > 0;
     }
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {

@@ -28,7 +28,7 @@ export class SQLite implements IDatabase {
 
     getClonableGames( cb:(err: any, allGames:Array<IGameData>)=> void) {
         var allGames:Array<IGameData> = [];
-        var sql = "SELECT distinct game_id game_id, json_array_length(json_extract(game, '$.players')) playerCount FROM games WHERE status = 'running' and save_id = 0";
+        var sql = "SELECT distinct game_id game_id, json_array_length(json_extract(game, '$.players')) playerCount FROM games WHERE status = 'running' and save_id = 0 order by 2,1";
   
         this.db.all(sql, [], (err, rows) => {
             if (rows) {

@@ -5,6 +5,7 @@ import { VictoryPointsBreakdown } from "../VictoryPointsBreakdown";
 import { ITagCount } from '../ITagCount';
 import { TurmoilModel } from "./TurmoilModel";
 import { IProjectCard } from '../cards/IProjectCard';
+import { CorporationCard } from '../cards/corporation/CorporationCard';
 
 export interface PlayerModel {
     boardName: string;
@@ -45,4 +46,7 @@ export interface PlayerModel {
     tradesThisTurn: number;
     selfReplicatingRobotsCardCost: number;
     selfReplicatingRobotsCardTarget: IProjectCard | undefined;
+    dealtCorporationCards: Array<CorporationCard>;
+    dealtPreludeCards:  Array<IProjectCard>;
+    initialDraft: boolean;
 }

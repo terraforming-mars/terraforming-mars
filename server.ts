@@ -480,7 +480,10 @@ function getPlayer(player: Player, game: Game): string {
     tradesThisTurn: player.tradesThisTurn,
     turmoil: getTurmoil(game),
     selfReplicatingRobotsCardCost: player.getSelfReplicatingRobotsCardCost(game),
-    selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard()
+    selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
+    dealtCorporationCards: player.dealtCorporationCards,
+    dealtPreludeCards: player.dealtPreludeCards,
+    initialDraft: game.initialDraft
   } as PlayerModel;
   return JSON.stringify(output);
 }

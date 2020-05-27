@@ -25,10 +25,10 @@ export class InventorsGuild implements IActionCard, IProjectCard {
         const dealtCard = game.dealer.dealCard();
         const canSelectCard = player.canAfford(player.cardCost);
         return new SelectCard(
-          canSelectCard ? "Select card to keep or none to discard" : "You cannot pay this card" ,
+          canSelectCard ? "Select card to keep or none to discard" : "You cannot pay for this card" ,
           [dealtCard],
           (cards: Array<IProjectCard>) => {
-            if (cards.length === 0) {
+            if (cards.length === 0 || !canSelectCard) {
               game.dealer.discard(dealtCard);
               return undefined;
             }

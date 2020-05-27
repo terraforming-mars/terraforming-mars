@@ -8,7 +8,7 @@
     "Starting Corporations": "起始公司",
     "Create Game": "建立游戏",
     "Board": "版图",
-    "Beginner?": "新手公司?",
+    "Beginner?": "使用新手公司?",
     "Red": "红色",
     "Green": "绿色",
     "Yellow": "黄色",
@@ -16,8 +16,8 @@
     "Black": "黑色",
 
     "original": "基础版图",
-    "hellas": "hellas",
-    "elysium": "elysium",
+    "hellas": "希腊版图",
+    "elysium": "极乐世界版图",
     "random": "随机地图",
 
     "Prelude": "前序",

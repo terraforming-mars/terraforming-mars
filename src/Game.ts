@@ -468,6 +468,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       let dealtCards: Array<IProjectCard> = [];
       let corporation: CorporationCard;
       const result: AndOptions = new AndOptions(() => { this.playCorporationCard(player, corporation); return undefined; });
+        // draw 100 card for debug
+        // for (let i = 0; i < this.dealer.deck.length; i++) {
       for (let i = 0; i < 10; i++) {
         dealtCards.push(this.dealer.dealCard());
       }

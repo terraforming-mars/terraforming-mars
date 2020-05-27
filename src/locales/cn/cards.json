@@ -658,6 +658,9 @@
   "3 Science": "3 科技标",
   "5 Science": "5 科技标",
   "Action: Draw 2 cards.": "行动：抽取两张牌",
-  "Requires 3 Science tags to play. Decrease your Energy production 1 step.": "（需求：科技图标数≥3）电力产量-1"
+  "Requires 3 Science tags to play. Decrease your Energy production 1 step.": "（需求：科技图标数≥3）电力产量-1",
+
+
+  "HYDROGEN TO VENUS":"输送氢气到金星"
 
 }

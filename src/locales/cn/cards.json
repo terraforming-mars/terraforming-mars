@@ -658,13 +658,5 @@
   "3 Science": "3 科技标",
   "5 Science": "5 科技标",
   "Action: Draw 2 cards.": "行动：抽取两张牌",
-  "Requires 3 Science tags to play. Decrease your Energy production 1 step.": "（需求：科技图标数≥3）电力产量-1",
-
-
-  "Hydrogen to Venus":"输送氢气到金星",
-  "Raise Venus 1 step. Add 1 Floater to A Venus CARD for each Jovian tag you have).":"提升晋升改造度1格。你每有1个木星标志,放置1个云资源到一张带有金星标志的牌",
-
-  "Water to Venus":"输送水源到金星",
-  "Raise Venus 1 step.":"提升金星改造度1格"
-
+  "Requires 3 Science tags to play. Decrease your Energy production 1 step.": "（需求：科技图标数≥3）电力产量-1"
 }

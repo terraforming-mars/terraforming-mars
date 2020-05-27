@@ -350,6 +350,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.colonies = gameToRebuild.colonies;
           game.turmoil = gameToRebuild.turmoil;
 
+          if(gameToRebuild.venusNextExtension) {
+            game.setVenusElements();
+          }
+
           // Set active player
           //let playerIndex = gameToRebuild.players.indexOf(gameToRebuild.activePlayer);
           let playerIndex = gameToRebuild.players.indexOf(gameToRebuild.first);

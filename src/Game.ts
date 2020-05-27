@@ -57,7 +57,6 @@ import { IParty } from "./turmoil/parties/IParty";
 
 export interface GameOptions {
   draftVariant: boolean;
-  initialDraftVariant: boolean;
   preludeExtension: boolean;
   venusNextExtension: boolean;
   coloniesExtension: boolean;
@@ -70,6 +69,7 @@ export interface GameOptions {
   startingCorporations: number;
   soloTR: boolean;
   clonedGamedId: string | undefined;
+  initialDraftVariant: boolean;
 }  
 
 export class Game implements ILoadable<SerializedGame, Game> {
@@ -142,8 +142,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
           clonedGamedId: undefined
         } as GameOptions
       }
-
-      gameOptions.initialDraftVariant = true;
 
       this.board = this.boardConstructor(gameOptions.boardName);
 

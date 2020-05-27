@@ -13,6 +13,7 @@ interface CreateGameModel {
     players: Array<NewPlayerModel>;
     prelude: boolean;
     draftVariant: boolean;
+    initialDraft: boolean;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
     venusNext: boolean;
@@ -53,6 +54,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             ],
             prelude: false,
             draftVariant: true,
+            initialDraft: true,
             randomFirstPlayer: true,
             showOtherPlayersVP: false,
             venusNext: false,
@@ -141,6 +143,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
             const prelude = component.prelude;
             const draftVariant = component.draftVariant;
+            const initialDraft = component.initialDraft;
             const showOtherPlayersVP = component.showOtherPlayersVP;
             const venusNext = component.venusNext;
             const colonies = component.colonies;
@@ -165,7 +168,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             }
 
             const dataToSend = JSON.stringify({
-                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption, promoCardsOption, startingCorporations, soloTR, clonedGamedId 
+                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption, promoCardsOption, startingCorporations, soloTR, clonedGamedId, initialDraft 
             });
 
             const onSucces = (response: any) => {
@@ -254,6 +257,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <i class="form-icon"></i> <span v-i18n>Draft variant</span>
                             </label>
 
+                            <label class="form-switch" v-if="playersCount > 1">
+                                <input type="checkbox" name="initialDraft" v-model="initialDraft">
+                                <i class="form-icon"></i> <span v-i18n>Initial Draft variant</span>
+                            </label>
+                            
                             <label class="form-switch">
                                 <input type="checkbox" v-model="showCorporationList">
                                 <i class="form-icon"></i> <span v-i18n>Custom Corporation list</span>

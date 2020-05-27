@@ -373,7 +373,8 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         promoCardsOption: gameReq.promoCardsOption,
         startingCorporations: gameReq.startingCorporations,
         soloTR: gameReq.soloTR,
-        clonedGamedId: gameReq.clonedGamedId
+        clonedGamedId: gameReq.clonedGamedId,
+        initialDraftVariant: gameReq.initialDraft
       } as GameOptions;
     
       const game = new Game(gameId, players, firstPlayer, gameOptions);

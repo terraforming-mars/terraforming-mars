@@ -19,7 +19,7 @@ export class Capital implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 2 &&
         game.board.getOceansOnBoard() >= 4 - player.getRequirementsBonus(game) &&
-        game.board.getAvailableSpacesForCity(player).length >= 0;
+        game.board.getAvailableSpacesForCity(player).length > 0;
     }
     public getVictoryPoints(_player: Player, game: Game) {
       const usedSpace = game.board.getSpaceByTileCard(this.name);

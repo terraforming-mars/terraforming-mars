@@ -12,7 +12,8 @@ describe("CommercialDistrict", function () {
     it("Can't play", function () {
         const card = new CommercialDistrict();
         const player = new Player("test", Color.BLUE, false);
-        expect(card.canPlay(player)).to.eq(false);
+        const game = new Game("foobar", [player,player], player);
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
         const card = new CommercialDistrict();

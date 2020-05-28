@@ -110,10 +110,19 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 component.firstIndex = Math.floor(component.seed * component.playersCount) + 1;
             }
 
-            // Set player name for solo mode
-            if (component.playersCount === 1 && component.players[0].name === "") {
-                component.players[0].name = "You";
-            }
+            // Set player name automatically if not entered
+            const isSoloMode = component.playersCount === 1;
+
+            component.players.forEach((player) => {
+                if (player.name === "") {
+                    if (isSoloMode) {
+                        player.name = "You";
+                    } else {
+                        const defaultPlayerName = player.color.charAt(0).toUpperCase() + player.color.slice(1);
+                        player.name = defaultPlayerName;
+                    }
+                }
+            })
 
             const players = component.players.slice(0, component.playersCount).map((player: any) => {
                 player.first = (component.firstIndex === player.index);

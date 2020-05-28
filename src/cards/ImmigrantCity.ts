@@ -17,7 +17,7 @@ export class ImmigrantCity implements IProjectCard {
     public name: CardName = CardName.IMMIGRANT_CITY;
     public hasRequirements = false;
     public canPlay(player: Player,game: Game): boolean {
-        return player.getProduction(Resources.ENERGY) >= 1 && player.getProduction(Resources.MEGACREDITS) >= -3 && game.board.getAvailableSpacesForCity(player).length >= 0;
+        return player.getProduction(Resources.ENERGY) >= 1 && player.getProduction(Resources.MEGACREDITS) >= -3 && game.board.getAvailableSpacesForCity(player).length > 0;
     }
     public onTilePlaced(player: Player, space: ISpace) {
         if (space.tile !== undefined && space.tile.tileType === TileType.CITY) {

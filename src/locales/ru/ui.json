@@ -4,8 +4,28 @@
     "Players count": "Кол-во игроков",
     "Extensions": "Дополнения",
     "Options": "Настройки",
+    "Use promo cards": "Промо карты",
+    "Starting Corporations": "Кол-во корпораций на выбор",
     "Create Game": "Создать игру",
     "Board": "Карта",
+    "Beginner?": "Новичек?",
+    "Red": "Красный",
+    "Green": "Зеленый",
+    "Yellow": "Желтый",
+    "Blue": "Синий",
+    "Black": "Черный",
+
+    "original": "База",
+    "hellas": "Эллада",
+    "elysium": "Элизий",
+    "random": "Случайная",
+
+    "Prelude": "Прологи",
+    "Venus Next": "Венера",
+    "Custom Corporation list": "Настроить корпорации",
+    "Use Solar Phase Option": "Помощь Солнечной системы",
+
+    "NEXT CARD:": "СЛЕДУЮЩАЯ КАРТА:",
 
     "Milestones": "Достижения",
     "Builder": "Строитель",
@@ -37,7 +57,7 @@
     "Tactitian": "Тактик",
     "Requires that you have 5 cards with requirements in play": "Разыграйте не менее 5 карт с требованиями",
     "Terraformer": "Терраформер",
-    "Having a terraform rating of at least 35": "Ваш рейтинг терраформирования должен быть не менее 35",
+    "Having a terraform rating of at least 35 or 26 with Turmoil.": "Ваш рейтинг терраформирования должен быть не менее 35 (26 c Кризисом)",
     "Tycoon": "Олигарх",
     "Requires that you have 15 project cards in play (blue and green cards)": "Разыграйте не менее 15 проектов (синих и зелёных карт)",
     

@@ -59,7 +59,7 @@ export const Board = Vue.component("board", {
                     <use v-for="space in getMainSpaces()"
                         v-if="space.tileType === undefined"
                         :data_space_id="space.id" 
-                        class="board_space" 
+                        class="board_space board_selectable"
                         :class="getPosCssClass(space)" 
                         :stroke="getStroke(space)" 
                         xlink:href="#hexagon" />

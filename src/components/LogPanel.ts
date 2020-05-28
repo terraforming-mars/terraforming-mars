@@ -25,6 +25,19 @@ export const LogPanel = Vue.component("log-panel", {
                 scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
             }
         },
+        parseCardType: function(cardType: CardType, cardName: string) {
+            if (cardType === CardType.EVENT) {
+                return "<log-card class=\"background-color-events\">"+cardName+"</log-card>";
+            } else if (cardType === CardType.ACTIVE) {
+                return "<log-card class=\"background-color-active\">"+cardName+"</log-card>";
+            } else if (cardType === CardType.AUTOMATED) {
+                return "<log-card class=\"background-color-automated\">"+cardName+"</log-card>";
+            } else if (cardType === CardType.PRELUDE) {
+                return "<log-card class=\"background-color-prelude\">"+cardName+"</log-card>";
+            } else {
+                return cardName;
+            }
+        },
         parseData: function(data: LogMessageData) {
             const translatableMessageDataTypes = [
                 LogMessageDataType.STANDART_PROJECT,
@@ -42,20 +55,12 @@ export const LogPanel = Vue.component("log-panel", {
                     for (let player of this.players) {
                         if (player.corporationCard !== undefined && data.value === player.corporationCard) {
                             return "<log-card class=\"background-color-corporation\">"+data.value+"</log-card>";
+                        } else if (player.selfReplicatingRobotsCardTarget !== undefined && data.value === player.selfReplicatingRobotsCardTarget.name) {
+                            return this.parseCardType(player.selfReplicatingRobotsCardTarget.cardType, data.value);
                         } else {
                             for (let card of player.playedCards) {
                                 if (data.value === card.name && card.cardType !== undefined) {
-                                    if (card.cardType === CardType.EVENT) {
-                                        return "<log-card class=\"background-color-events\">"+data.value+"</log-card>";
-                                    } else if (card.cardType === CardType.ACTIVE) {
-                                        return "<log-card class=\"background-color-active\">"+data.value+"</log-card>";
-                                    } else if (card.cardType === CardType.AUTOMATED) {
-                                        return "<log-card class=\"background-color-automated\">"+data.value+"</log-card>";
-                                    } else if (card.cardType === CardType.PRELUDE) {
-                                        return "<log-card class=\"background-color-prelude\">"+data.value+"</log-card>";
-                                    } else {
-                                        return data.value;
-                                    }
+                                    return this.parseCardType(card.cardType, data.value);
                                 }
                             }
                         }

@@ -6,7 +6,6 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
 import { SelectCard } from "../inputs/SelectCard";
-import { Pets } from "./Pets";
 import { CardName } from '../CardName';
 
 export class Predators implements IProjectCard, IActionCard, IResourceCard {
@@ -27,21 +26,18 @@ export class Predators implements IProjectCard, IActionCard, IResourceCard {
     }
 
     private getPossibleTargetCards(player: Player, game: Game): Array<ICard> {
-        let possibleCards = new Array<ICard>(); 
-        const petsCard = new Pets();
-        for (let card of game.getPlayedCardsWithAnimals()) {  
-            let owner = game.getCardPlayer(card.name);
-            if (player.id != owner.id && owner.hasProtectedHabitats()) continue;
-            if (owner.getResourcesOnCard(card) < 1) continue;
-            if (this.name === card.name) continue;
-            if (card.name === petsCard.name) continue;
-            possibleCards.push(card);
-        }
-        return possibleCards;
+        const result: Array<ICard> = [];
+        game.getPlayers().forEach((p) => {
+            if (p.hasProtectedHabitats() && player.id !== p.id) return;
+            result.push(...p.getCardsWithResources().filter(card => card.resourceType === ResourceType.ANIMAL 
+                                                                && card.name !== CardName.PETS
+                                                                && card.name !== this.name));
+        });
+        return result;
     }
 
     private doAction(targetCard:ICard, player: Player, game: Game): void {
-        game.getCardPlayer(targetCard.name).removeAnimals(player, targetCard, 1, game);
+        game.getCardPlayer(targetCard.name).removeResourceFrom(targetCard, 1, game, player);
         this.resourceCount++;
     }
 

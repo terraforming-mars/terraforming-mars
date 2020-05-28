@@ -47,4 +47,11 @@ describe("InterplanetaryTrade", function () {
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
+    it("Should raise MC production by one", function () {
+        const card = new InterplanetaryTrade();
+        const player = new Player("test", Color.BLUE, false);
+        const play = card.play(player);
+        expect(play).to.eq(undefined);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+    });
 });

@@ -8,5 +8,7 @@ export enum PlayerInputTypes {
     SELECT_HOW_TO_PAY_FOR_CARD,
     SELECT_OPTION,
     SELECT_PLAYER,
-    SELECT_SPACE
+    SELECT_SPACE,
+    SELECT_DELEGATE,
+    SELECT_PARTY
 }

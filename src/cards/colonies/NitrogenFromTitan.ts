@@ -13,7 +13,7 @@ export class NitrogenFromTitan implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
-      player.terraformRating += 2;
+      player.increaseTerraformRatingSteps(2, game);
       game.addResourceInterrupt(player, ResourceType.FLOATER, 2, undefined, Tags.JOVIAN);
       return undefined;
     }

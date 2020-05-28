@@ -15,7 +15,6 @@ export class UrbanDecomposers implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
-        if (game.board.getAvailableSpacesForCity(player).length === 0) return false;
         let coloniesCount: number = 0;
         game.colonies.forEach(colony => { 
           coloniesCount += colony.colonies.filter(owner => owner === player).length;

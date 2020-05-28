@@ -12,20 +12,28 @@ export class Poseidon implements CorporationCard {
     public startingMegaCredits: number = 45;
 
     public initialAction(player: Player, game: Game) {
-        let openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor === undefined);
-        let buildColony = new OrOptions();
-        buildColony.title = "Poseidon first action - Select where to build colony";
-        openColonies.forEach(colony => {
-          const colonySelect =  new SelectOption(
-            colony.name + " - (" + colony.description + ")", 
-            () => {
-                colony.onColonyPlaced(player, game);
-                return undefined;
-            }
-          );
-          buildColony.options.push(colonySelect);
-        });
-        return buildColony;
+        if (game.coloniesExtension) {
+          let openColonies = game.colonies.filter(colony => colony.colonies.length < 3 
+            && colony.colonies.indexOf(player) === -1 
+            && colony.isActive);
+          let buildColony = new OrOptions();
+          buildColony.title = "Poseidon first action - Select where to build colony";
+          openColonies.forEach(colony => {
+            const colonySelect =  new SelectOption(
+              colony.name + " - (" + colony.description + ")", 
+              () => {
+                  colony.onColonyPlaced(player, game);
+                  return undefined;
+              }
+            );
+            buildColony.options.push(colonySelect);
+          });
+          return buildColony;
+        }
+        else {
+          console.warn("Colonie extension isn't selected.");
+          return;
+        }
     }
 
     public play() {

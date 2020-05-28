@@ -10,7 +10,7 @@ describe("UnitedNationsMarsInitiative", function () {
         const card = new UnitedNationsMarsInitiative();
         const player = new Player("test", Color.BLUE, false);
         expect(card.canAct(player)).to.eq(false);
-        player.terraformRating = 21;
+        player.setTerraformRating(21);
         expect(card.canAct(player)).to.eq(false);
     });
     it("Should play", function () {
@@ -22,11 +22,11 @@ describe("UnitedNationsMarsInitiative", function () {
         const card = new UnitedNationsMarsInitiative();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        player.terraformRating = 21;
+        player.setTerraformRating(21);
         player.megaCredits = 3;
         const action = card.action(player, game);
         expect(action).to.eq(undefined);
         expect(player.megaCredits).to.eq(0);
-        expect(player.terraformRating).to.eq(22);
+        expect(player.getTerraformRating()).to.eq(22);
     });
 });

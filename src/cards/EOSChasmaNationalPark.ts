@@ -8,6 +8,8 @@ import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
+import { ResourceType } from '../ResourceType';
+
 
 export class EosChasmaNationalPark implements IProjectCard {
   public cost: number = 16;
@@ -22,31 +24,18 @@ export class EosChasmaNationalPark implements IProjectCard {
     );
   }
 
-  public play(player: Player, game: Game) {   
-    const availableCards = game.getPlayedCardsWithAnimals();
-    if (availableCards.length < 1) {
-      player.plants += 3;
-      player.setProduction(Resources.MEGACREDITS,2);
-      return undefined;
-    }
+  public play(player: Player) {
+    const cards = player.getResourceCards(ResourceType.ANIMAL);
+    player.plants += 3;
+    player.setProduction(Resources.MEGACREDITS,2);
 
-    if (availableCards.length === 1) {
-      game.getCardPlayer(availableCards[0].name).addResourceTo(availableCards[0]);
-      player.plants += 3;
-      player.setProduction(Resources.MEGACREDITS,2);
-      return undefined;
-    }
-
-    return new SelectCard(
-        'Select card to add 1 animal',
-        availableCards,
-        (foundCards: Array<ICard>) => {
-          game.getCardPlayer(foundCards[0].name).addResourceTo(foundCards[0]);
-          player.plants += 3;
-          player.setProduction(Resources.MEGACREDITS,2);
-          return undefined;
-        }
-    );
+    if ( cards.length < 1 ) return undefined;
+   
+    return new SelectCard("Add 1 animal to a card",  cards, (foundCards: Array<ICard>) => {
+        player.addResourceTo(foundCards[0], 1);
+        return undefined;
+    });
+       
   }
 
   public getVictoryPoints() {

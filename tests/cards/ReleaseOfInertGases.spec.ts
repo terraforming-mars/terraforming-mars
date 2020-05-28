@@ -12,6 +12,6 @@ describe("ReleaseOfInertGases", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).to.eq(undefined);
-        expect(player.terraformRating).to.eq(22);
+        expect(player.getTerraformRating()).to.eq(22);
     });
 });

@@ -8,6 +8,7 @@ import { AndOptions } from "../inputs/AndOptions";
 import { SelectCard } from "../inputs/SelectCard";
 import { ResourceType } from '../ResourceType';
 import { CardName } from '../CardName';
+import { Game } from '../Game';
 
 export class ImportedNitrogen implements IProjectCard {
     public cost: number = 23;
@@ -15,20 +16,20 @@ export class ImportedNitrogen implements IProjectCard {
     public name: CardName = CardName.IMPORTED_NITROGEN;
     public cardType: CardType = CardType.EVENT;
 
-    private giveResources(player: Player): undefined {
-        player.terraformRating++;
+    private giveResources(player: Player, game: Game): undefined {
+        player.increaseTerraformRating(game);
         player.plants += 4;
         return undefined;
     }
-    public play(player: Player) {
+    public play(player: Player, game: Game) {
         const otherAnimalCards = player.getResourceCards(ResourceType.ANIMAL);
         const otherMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
 
         if (otherAnimalCards.length === 0 && otherMicrobeCards.length === 0) {
-            return this.giveResources(player);
+            return this.giveResources(player, game);
         } else if (otherAnimalCards.length > 0 && otherMicrobeCards.length > 0) {
             return new AndOptions(
-                () => this.giveResources(player),
+                () => this.giveResources(player, game),
                 new SelectCard("Select card to add 3 microbes", otherMicrobeCards, (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], 3);
                     return undefined;
@@ -41,12 +42,12 @@ export class ImportedNitrogen implements IProjectCard {
         } else if (otherAnimalCards.length > 0) {
             return new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 2);
-                return this.giveResources(player);
+                return this.giveResources(player, game);
             });
         }
         return new SelectCard("Select card to add 3 microbes", otherMicrobeCards, (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0], 3);
-            return this.giveResources(player);
+            return this.giveResources(player, game);
         });
     }
 }

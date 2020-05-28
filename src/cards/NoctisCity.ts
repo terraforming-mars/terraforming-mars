@@ -17,8 +17,13 @@ export class NoctisCity implements IProjectCard {
     public name: CardName = CardName.NOCTIS_CITY;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
-    public canPlay(player: Player): boolean {
-        return player.getProduction(Resources.ENERGY) >= 1;
+    public canPlay(player: Player, game: Game): boolean {
+        if (game.boardName === BoardName.ORIGINAL) {
+            return player.getProduction(Resources.ENERGY) >= 1;
+        } else {
+            return player.getProduction(Resources.ENERGY) >= 1 &&
+            game.board.getAvailableSpacesForCity(player).length > 0;;
+        }
     }
     public play(player: Player, game: Game) {
         const noctisSpace = game.getSpace(SpaceName.NOCTIS_CITY);

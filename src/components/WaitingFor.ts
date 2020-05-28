@@ -12,6 +12,7 @@ import { SelectOption } from "./SelectOption";
 import { SelectPlayer } from "./SelectPlayer";
 import { SelectSpace } from "./SelectSpace";
 import { $t } from "../directives/i18n";
+import { SelectPartyPlayer } from "./SelectPartyPlayer";
 
 var ui_update_timeout_id: number | undefined = undefined;
 
@@ -29,7 +30,8 @@ export const WaitingFor = Vue.component("waiting-for", {
         "select-how-to-pay": SelectHowToPay,
         "select-how-to-pay-for-card": SelectHowToPayForCard,
         "select-player": SelectPlayer,
-        "select-space": SelectSpace
+        "select-space": SelectSpace,
+        "select-party-player": SelectPartyPlayer
     },
     methods: {
         waitForUpdate: function () {

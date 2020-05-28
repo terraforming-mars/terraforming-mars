@@ -14,8 +14,9 @@ export class DeimosDown implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {
+      game.increaseTemperature(player, 3);
       game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 8);
       player.steel += 4;
-      return game.increaseTemperature(player, 3);
+      return undefined;
     }
 }

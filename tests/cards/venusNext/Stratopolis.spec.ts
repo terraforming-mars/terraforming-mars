@@ -17,10 +17,15 @@ describe("Stratopolis", function () {
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
+            turmoilExtension: false,
             boardName: BoardName.ORIGINAL,
             showOtherPlayersVP: false,
             customCorporationsList: [],
-            solarPhaseOption: true
+            solarPhaseOption: true,
+            promoCardsOption: false,
+            startingCorporations: 2,
+            soloTR: false,
+            clonedGamedId: undefined
           } as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);
         expect(card.canPlay(player)).to.eq(false);

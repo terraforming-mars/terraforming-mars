@@ -16,7 +16,7 @@ export class RefugeeCamps implements IProjectCard, IResourceCard {
     public resourceCount: number = 0;
 
     public canAct(player: Player): boolean {
-        return player.getProduction(Resources.MEGACREDITS) > -4;
+        return player.getProduction(Resources.MEGACREDITS) >= -4;
     } 
 
     public action(player: Player) {

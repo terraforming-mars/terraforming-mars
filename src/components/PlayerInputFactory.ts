@@ -25,6 +25,10 @@ export class PlayerInputFactory {
                 return "select-player";
             case PlayerInputTypes.SELECT_AMOUNT:
                 return "select-amount";
+            case PlayerInputTypes.SELECT_PARTY:
+                return "select-party";
+            case PlayerInputTypes.SELECT_DELEGATE:
+                return "select-party-player";
             default:
                 throw "Unsupported input type";
         }

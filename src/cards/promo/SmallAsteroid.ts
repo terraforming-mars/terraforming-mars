@@ -14,8 +14,9 @@ export class SmallAsteroid implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {
+        game.increaseTemperature(player, 1);
         game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 2);
-        return game.increaseTemperature(player, 1);
+        return undefined;
     }
 
 }

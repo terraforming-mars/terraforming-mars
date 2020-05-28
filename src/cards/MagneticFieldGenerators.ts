@@ -5,6 +5,7 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
+import { Game } from '../Game';
 
 export class MagneticFieldGenerators implements IProjectCard {
     public cost: number = 20;
@@ -15,10 +16,10 @@ export class MagneticFieldGenerators implements IProjectCard {
     public canPlay(player: Player): boolean {
         return player.getProduction(Resources.ENERGY) >= 4;
     }
-    public play(player: Player) {
+    public play(player: Player, game: Game) {
         player.setProduction(Resources.ENERGY,-4);
         player.setProduction(Resources.PLANTS,2);
-        player.terraformRating += 3;
+        player.increaseTerraformRatingSteps(3, game);
         return undefined;
     }
 } 

@@ -1202,6 +1202,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
         });
       });
+      this.gameAge++;
     }
     public addGreenery(
         player: Player, spaceId: string,

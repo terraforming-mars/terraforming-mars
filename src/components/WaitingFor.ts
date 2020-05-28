@@ -74,7 +74,7 @@ export const WaitingFor = Vue.component("waiting-for", {
                 xhr.responseType = "json";
                 xhr.send();
             }
-            ui_update_timeout_id = (setTimeout(askForUpdate, 5000) as any);
+            ui_update_timeout_id = (setTimeout(askForUpdate, 1500) as any);
         }
     },
     render: function (createElement) {

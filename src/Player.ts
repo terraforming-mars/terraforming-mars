@@ -1296,7 +1296,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
               LogMessageType.DEFAULT,
               "${0} used ${1} standard project",
               new LogMessageData(LogMessageDataType.PLAYER, this.id),
-              new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Sell patents")
+              new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Sell patents")
             );
             return undefined;
           }, this.cardsInHand.length
@@ -1338,7 +1338,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Air Scrapping")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Air Scrapping")
           );
           return undefined;
         }
@@ -1356,7 +1356,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Buffer Gas")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Buffer Gas")
           );
           return undefined;
         }
@@ -1374,7 +1374,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Power plant")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Power plant")
           );
           return undefined;
         }
@@ -1392,7 +1392,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Asteroid")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Asteroid")
           );
           return undefined;
         }
@@ -1410,7 +1410,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Aquifer"),
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Aquifer"),
           );
           return undefined;
         }
@@ -1428,7 +1428,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Greenery")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Greenery")
           );
           return undefined;
         }
@@ -1447,7 +1447,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "City")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "City")
           );
           return undefined;
         }

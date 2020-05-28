@@ -5,6 +5,6 @@ export enum LogMessageDataType {
     AWARD,
     MILESTONE,
     COLONY,
-    STANDART_PROJECT,
+    STANDARD_PROJECT,
     PARTY
 }

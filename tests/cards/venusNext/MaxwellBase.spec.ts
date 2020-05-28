@@ -25,6 +25,7 @@ describe("MaxwellBase", function () {
             customCorporationsList: [],
             solarPhaseOption: false,
             promoCardsOption: false,
+            undoOption: false,
             startingCorporations: 2,
             soloTR: false,
             clonedGamedId: undefined

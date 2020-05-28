@@ -66,6 +66,7 @@ export interface GameOptions {
   customCorporationsList: Array<CardName>;
   solarPhaseOption: boolean;
   promoCardsOption: boolean;
+  undoOption: boolean;
   startingCorporations: number;
   soloTR: boolean;
   clonedGamedId: string | undefined;
@@ -109,6 +110,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private solarPhaseOption: boolean;
     public turmoil: Turmoil | undefined;
     private promoCardsOption: boolean;
+    public undoOption: boolean;
     private startingCorporations: number;
     public soloTR: boolean;
     private clonedGamedId: string | undefined;
@@ -134,6 +136,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           customCorporationsList: [],
           solarPhaseOption: false,
           promoCardsOption: false,
+          undoOption: false,
           startingCorporations: 2,
           soloTR: false,
           clonedGamedId: undefined
@@ -150,6 +153,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.coloniesExtension = gameOptions.coloniesExtension;
       this.turmoilExtension = gameOptions.turmoilExtension;      
       this.promoCardsOption = gameOptions.promoCardsOption;
+      this.undoOption = gameOptions.undoOption;
       this.startingCorporations = gameOptions.startingCorporations;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption, this.turmoilExtension, Math.random());
       this.showOtherPlayersVP = gameOptions.showOtherPlayersVP;
@@ -337,6 +341,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.showOtherPlayersVP = gameToRebuild.showOtherPlayersVP;
           game.solarPhaseOption = gameToRebuild.solarPhaseOption;
           game.promoCardsOption = gameToRebuild.promoCardsOption;
+          game.undoOption = gameToRebuild.undoOption;
           game.startingCorporations = gameToRebuild.startingCorporations;
           game.soloTR = gameToRebuild.soloTR;
 

@@ -394,7 +394,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           this.resolveMonsInsurance(game);
           game.log(
             LogMessageType.DEFAULT,
-            "${0} looses ${1} resource(s) on ${2} by ${3}",
+            "${0} loses ${1} resource(s) on ${2} by ${3}",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
             new LogMessageData(LogMessageDataType.STRING, count.toString()),
             new LogMessageData(LogMessageDataType.CARD, card.name),

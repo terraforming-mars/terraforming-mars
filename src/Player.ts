@@ -2111,11 +2111,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             .map(
                 (milestone: IMilestone) =>
                   this.claimMilestone(milestone, game));
-        if (remainingMilestones.options.length > 1) {
-          action.options.push(remainingMilestones);
-        } else if (remainingMilestones.options.length === 1) {
-          action.options.push(remainingMilestones.options[0]);
-        }
+        
+        if (remainingMilestones.options.length >= 1) action.options.push(remainingMilestones);
       }
 
       if (

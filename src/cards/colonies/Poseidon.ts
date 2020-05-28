@@ -32,7 +32,7 @@ export class Poseidon implements CorporationCard {
         }
         else {
           console.warn("Colonies extension isn't selected.");
-          return;
+          return undefined;
         }
     }
 

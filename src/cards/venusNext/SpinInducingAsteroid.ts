@@ -11,7 +11,7 @@ export class SpinInducingAsteroid implements IProjectCard {
     public name: CardName = CardName.SPIN_INDUCING_ASTEROID;
     public cardType: CardType = CardType.EVENT;
     public canPlay(player: Player, game: Game): boolean {
-        return game.getVenusScaleLevel() - (2 * player.getRequirementsBonus(game)) <= 10;
+        return game.getVenusScaleLevel() - (2 * player.getRequirementsBonus(game, true)) <= 10;
     }
     public play(player: Player, game: Game) {
         game.increaseVenusScaleLevel(player,2);

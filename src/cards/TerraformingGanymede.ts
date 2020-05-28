@@ -12,8 +12,8 @@ export class TerraformingGanymede implements IProjectCard {
     public name: CardName = CardName.TERRAFORMING_GANYMEDE;
     public cardType: CardType = CardType.AUTOMATED;
 
-    public play(player: Player, _game: Game) {
-        player.terraformRating += 1 + player.getTagCount(Tags.JOVIAN);
+    public play(player: Player, game: Game) {
+        player.increaseTerraformRatingSteps(1 + player.getTagCount(Tags.JOVIAN), game);
         return undefined;
     }
     public getVictoryPoints() {

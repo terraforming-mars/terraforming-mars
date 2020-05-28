@@ -9,7 +9,7 @@ export class TerralabsResearch implements CorporationCard {
     public startingMegaCredits: number = 14;
 
     public play(player: Player) {
-        player.terraformRating --;
+        player.decreaseTerraformRating();
         player.cardCost = 1;
         return undefined;
     }

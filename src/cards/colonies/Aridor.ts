@@ -8,6 +8,7 @@ import { IProjectCard } from '../IProjectCard';
 import { Resources } from '../../Resources';
 import { CardType } from '../CardType';
 import { CardName } from '../../CardName';
+import { IColony } from '../../colonies/Colony';
 
 export class Aridor implements CorporationCard {
     public name: CardName =  CardName.ARIDOR;
@@ -25,12 +26,28 @@ export class Aridor implements CorporationCard {
             () => {
                 game.colonies.push(colony);
                 game.colonies.sort((a,b) => (a.name > b.name) ? 1 : -1);
+                this.checkActivation(colony, game);
                 return undefined;
             }
           );
           addColony.options.push(colonySelect);
         });
         return addColony;
+    }
+
+    private checkActivation(colony: IColony, game: Game): void {
+        if (colony.resourceType === undefined) return;
+        game.getPlayers().forEach(player => {
+            if (player.corporationCard !== undefined && player.corporationCard.resourceType === colony.resourceType) {
+                colony.isActive = true;
+                return;
+            }
+            let resourceCard = player.playedCards.find(card => card.resourceType === colony.resourceType);
+                if (resourceCard !== undefined) {
+                    colony.isActive = true;
+                    return;
+                }
+            });
     }
     
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard) {

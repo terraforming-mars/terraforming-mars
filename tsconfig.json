@@ -13,8 +13,13 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "target": "es5",
-    "types": ["node"],
-    "moduleResolution": "node"
+    "types": [
+      "node",
+      "mocha",
+      "chai"
+    ],
+    "moduleResolution": "node",
+    
   },
   "include": [
     "src/*.ts",
@@ -33,7 +38,9 @@
     "script.ts",
     "server.ts",
     "src/interrupts/*.ts",
-    "src/database/*.ts"
+    "src/database/*.ts",
+    "src/turmoil/*.ts",
+    "src/turmoil/globalEvents*.ts",    
   ],
   "files": [
     "script.ts",

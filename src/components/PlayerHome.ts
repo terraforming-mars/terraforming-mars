@@ -15,6 +15,7 @@ import { Colony } from './Colony';
 import { LogPanel } from './LogPanel';
 import { PlayerMixin } from './PlayerMixin';
 import { TagCount } from './TagCount';
+import { Turmoil } from './Turmoil';
 
 
 const dialogPolyfill = require("dialog-polyfill");
@@ -33,7 +34,8 @@ export const PlayerHome = Vue.component("player-home", {
         "preferences": Preferences,
         "colony": Colony,
         "log-panel": LogPanel,
-        "tag-count": TagCount
+        "tag-count": TagCount,
+        "turmoil": Turmoil
     },
     data: function () {
         return {}
@@ -92,6 +94,8 @@ export const PlayerHome = Vue.component("player-home", {
                     <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.boardName"></board>
 
                     <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature" v-trim-whitespace></global-parameters>
+                    
+                    <turmoil :turmoil="player.turmoil"></turmoil>
 
                     <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
                         <milestone :milestones_list="player.milestones" />

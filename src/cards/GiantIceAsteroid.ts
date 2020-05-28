@@ -13,9 +13,10 @@ export class GiantIceAsteroid implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game) {
-        game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 6);
+        game.increaseTemperature(player, 2);
         game.addOceanInterrupt(player, "Select space for first ocean");
         game.addOceanInterrupt(player, "Select space for second ocean");
-        return game.increaseTemperature(player, 2);
+        game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 6);
+        return undefined;
     }
 }

@@ -45,7 +45,7 @@
 	pointer-events: none;
 }
 
-[id^=board_tile_]:hover, .board_space:hover {
+.board_space--available:hover {
 	stroke: #9acd32;
 	cursor: pointer;
 }
@@ -88,7 +88,21 @@
 	width: 44px;
 	height: 52px;
 	z-index: 2;
+
+	&.board_space--available {
+		animation: board-tile-blink-animation 2s infinite;
+		cursor: pointer;
+	}
 }
+
+@keyframes board-tile-blink-animation {
+	0% { filter: grayscale(0)}
+	49% { filter: grayscale(0)}
+	70% { filter: grayscale(0.7)}
+	99% { filter: grayscale(0.7)}
+	100% { filter: grayscale(0)}
+}
+
 
 .board_tile--ocean {
 	background: url(assets/board_icons.png) -80px -28px no-repeat;

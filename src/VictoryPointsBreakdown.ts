@@ -21,7 +21,6 @@ export class VictoryPointsBreakdown {
     }
 
     public setVictoryPoints(key: string, points: number, message?: string) {
-
         switch (key) {
             case "terraformRating":
                 this.terraformRating += points;

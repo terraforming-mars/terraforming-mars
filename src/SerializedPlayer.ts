@@ -13,6 +13,8 @@ export interface SerializedPlayer {
     canUseHeatAsMegaCredits: boolean;
     plantsNeededForGreenery: number;
     dealtCorporationCards: Array<CorporationCard>;
+    dealtProjectCards: Array<IProjectCard>;
+    dealtPreludeCards: Array<IProjectCard>;
     powerPlantCost: number;
     titaniumValue: number;
     steelValue: number;
@@ -47,7 +49,7 @@ export interface SerializedPlayer {
     tradesThisTurn: number;
     colonyTradeOffset: number;
     colonyTradeDiscount: number;
-    resourcesRemovedThisGenerationByPlayer: Set<string>;
-    productionDecreasedThisGenerationByPlayer: Set<string>;
+    turmoilScientistsActionUsed: boolean;
+    removingPlayers: Array<string>;
 }
 

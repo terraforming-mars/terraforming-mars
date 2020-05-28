@@ -45,7 +45,8 @@ describe("Virus", function () {
         player.playedCards.push(predators);
         player.addResourceTo(birds);
         player.addResourceTo(predators);
-        expect(card.play(player, game)).to.eq(undefined);
+        const orOptions = card.play(player, game) as OrOptions;
+        expect(orOptions instanceof OrOptions).to.eq(true);
         expect(game.interrupts.length).to.eq(0);
     });
 });

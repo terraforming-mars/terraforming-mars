@@ -25,10 +25,19 @@ describe("BusinessNetwork", function () {
     });
     it("Can act", function () {
         const card = new BusinessNetwork();
+        expect(card.canAct()).to.eq(true);
+    });
+    it("Cannot buy card if cannot pay", function () {
+        const card = new BusinessNetwork();
         const player = new Player("test", Color.BLUE, false);
-        expect(card.canAct(player)).to.eq(false);
-        player.megaCredits = 3;
-        expect(card.canAct(player)).to.eq(true);
+        const game = new Game("foobar", [player,player], player);
+        player.megaCredits = 2;
+        const action = card.action(player, game);
+        expect(action instanceof SelectCard).to.eq(true);
+        (action! as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
+        expect(game.dealer.discarded.length).to.eq(1);
+        expect(player.cardsInHand.length).to.eq(0);
+        expect(player.megaCredits).to.eq(2);
     });
     it("Should action as not helion", function () {
         const card = new BusinessNetwork();

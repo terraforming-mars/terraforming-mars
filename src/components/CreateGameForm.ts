@@ -5,6 +5,7 @@ import { Color } from "../Color";
 import { BoardName } from '../BoardName';
 import { CardName } from "../CardName";
 import { CorporationsFilter } from "./CorporationsFilter";
+import { IGameData } from '../database/IDatabase';
 
 interface CreateGameModel {
     firstIndex: number;
@@ -16,12 +17,18 @@ interface CreateGameModel {
     showOtherPlayersVP: boolean;
     venusNext: boolean;
     colonies: boolean;
+    turmoil: boolean;
     customCorporationsList: Array<CardName>;
     showCorporationList: boolean;
     isSoloModePage: boolean,
     board: BoardName | "random";
     seed: number;
     solarPhaseOption: boolean;
+    promoCardsOption: boolean;
+    startingCorporations: number;
+    soloTR: boolean;
+    clonedGameData: IGameData | undefined;
+    cloneGameData: Array<IGameData>;
 }
 
 interface NewPlayerModel {
@@ -50,6 +57,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             showOtherPlayersVP: false,
             venusNext: false,
             colonies: false,
+            turmoil: false,
             customCorporationsList: [],
             showCorporationList: false,
             isSoloModePage: false,
@@ -62,7 +70,12 @@ export const CreateGameForm = Vue.component("create-game-form", {
             ],
             seed: Math.random(),
             seededGame: false,
-            solarPhaseOption: false
+            solarPhaseOption: false,
+            promoCardsOption: false,
+            startingCorporations: 2,
+            soloTR: false,
+            clonedGameData: undefined,
+            cloneGameData: []
         } as CreateGameModel
     },
     components: {
@@ -72,6 +85,15 @@ export const CreateGameForm = Vue.component("create-game-form", {
         if (window.location.pathname === '/solo') {
             this.isSoloModePage = true;
         }
+
+        const onSucces = (response: any) => {
+            this.$data.cloneGameData = response;
+        }
+
+        fetch("/api/clonablegames")
+        .then(response => response.json())
+        .then(onSucces)
+        .catch(_ => alert("Unexpected server response"));        
     },
     methods: {
         updateCustomCorporationsList: function (newCustomCorporationsList: Array<CardName>) {
@@ -88,10 +110,19 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 component.firstIndex = Math.floor(component.seed * component.playersCount) + 1;
             }
 
-            // Set player name for solo mode
-            if (component.playersCount === 1 && component.players[0].name === "") {
-                component.players[0].name = "You";
-            }
+            // Set player name automatically if not entered
+            const isSoloMode = component.playersCount === 1;
+
+            component.players.forEach((player) => {
+                if (player.name === "") {
+                    if (isSoloMode) {
+                        player.name = "You";
+                    } else {
+                        const defaultPlayerName = player.color.charAt(0).toUpperCase() + player.color.slice(1);
+                        player.name = defaultPlayerName;
+                    }
+                }
+            })
 
             const players = component.players.slice(0, component.playersCount).map((player: any) => {
                 player.first = (component.firstIndex === player.index);
@@ -113,13 +144,28 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const showOtherPlayersVP = component.showOtherPlayersVP;
             const venusNext = component.venusNext;
             const colonies = component.colonies;
+            const turmoil = component.turmoil;
             const solarPhaseOption = this.solarPhaseOption;
             const customCorporationsList = component.customCorporationsList;
             const board =  component.board;
             const seed = component.seed;
+            const promoCardsOption = component.promoCardsOption;
+            const startingCorporations = component.startingCorporations;
+            const soloTR = component.soloTR;
+            let clonedGamedId: undefined | string = undefined;
+
+            // Clone game checks
+            if (component.clonedGameData !== undefined) {
+                clonedGamedId = component.clonedGameData.gameId;
+                if (component.clonedGameData.playerCount !== players.length) {
+                    alert("Player count mismatch ");
+                    this.$data.playersCount = component.clonedGameData.playerCount;
+                    return;
+                }
+            }
 
             const dataToSend = JSON.stringify({
-                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, customCorporationsList, board, seed, solarPhaseOption
+                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption, promoCardsOption, startingCorporations, soloTR, clonedGamedId 
             });
 
             const onSucces = (response: any) => {
@@ -192,6 +238,12 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <input type="checkbox" name="colonies"  v-model="colonies">
                                 <i class="form-icon"></i> <span v-i18n>Colonies</span>
                             </label>
+
+                            <label class="form-switch">
+                                <input type="checkbox" name="turmoil"  v-model="turmoil">
+                                <i class="form-icon"></i> <span v-i18n>Turmoil</span>
+                            </label>                            
+
                         </div>
 
                         <div class="create-game-options-block col3 col-sm-6">
@@ -205,6 +257,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <label class="form-switch">
                                 <input type="checkbox" v-model="showCorporationList">
                                 <i class="form-icon"></i> <span v-i18n>Custom Corporation list</span>
+                            </label>
+
+                            <label class="form-switch" v-if="playersCount === 1">
+                                <input type="checkbox" v-model="soloTR">
+                                <i class="form-icon"></i> <span v-i18n>TR solo mode</span>
                             </label>
 
                             <label class="form-switch" v-if="playersCount > 1">
@@ -223,13 +280,26 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </label>
 
                             <label class="form-switch">
+                                <input type="checkbox" v-model="promoCardsOption">
+                                <i class="form-icon"></i> <span v-i18n>Use promo cards</span>
+                            </label>
+
+                            <label class="form-label">
+                                <input type="number" class="form-input form-inline create-game-corporations-count" value="2" min="1" :max="6" v-model="startingCorporations" />
+                                <i class="form-icon"></i> <span v-i18n>Starting Corporations</span>
+                            </label>
+
+                            <label class="form-switch">
                                 <input type="checkbox" v-model="seededGame">
-                                <i class="form-icon"></i> <span v-i18n>Show seed</span>
+                                <i class="form-icon"></i> <span v-i18n>Set Predefined Game</span>
                             </label>
                             <div v-if="seededGame">
-                                <input class="form-input form-inline" v-model="seed" />
+                                <select name="clonedGamedId" v-model="clonedGameData">
+                                    <option v-for="game in cloneGameData" :value="game" :key="game.gameId">
+                                        {{ game.gameId }} - {{ game.playerCount }} player(s)
+                                    </option>
+                                </select>
                             </div>
-
                         </div>
 
                         <div class="create-game-options-block col3 col-sm-6">

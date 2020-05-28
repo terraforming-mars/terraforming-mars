@@ -6,6 +6,6 @@ export class Benefactor implements IAward {
     public name: string = "Benefactor";
     public description: string = "Highest terraform rating"
     public getScore(player: Player, _game: Game): number {
-        return player.terraformRating;
+        return player.getTerraformRating();
     }   
 }

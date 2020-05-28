@@ -26,7 +26,8 @@
         "tests/milestones/*.spec.ts",
         "tests/awards/*.spec.ts",
         "tests/*.spec.ts",
-        "tests/TestingUtils.ts"
+        "tests/TestingUtils.ts",
+        "tests/globalEvents/*.spec.ts"
     ],
     "files": [
         "tests/cards/AICentral.spec.ts",
@@ -410,11 +411,32 @@
         "tests/cards/promo/LawSuit.spec.ts",
         "tests/cards/promo/StanfordTorus.spec.ts",
         "tests/cards/promo/SaturnSurfing.spec.ts",
+        "tests/cards/promo/SelfReplicatingRobots.spec.ts",       
         "tests/milestones/Diversifier.spec.ts",
         "tests/awards/EstateDealer.spec.ts",
         "tests/Board.spec.ts",
         "tests/Game.spec.ts",
         "tests/OriginalBoard.spec.ts",
-        "tests/Player.spec.ts"
+        "tests/Player.spec.ts",
+        "tests/globalEvents/GlobalDustStorm.spec.ts",
+        "tests/globalEvents/SponsoredProjects.spec.ts",
+        "tests/globalEvents/AsteroidMining.spec.ts",
+        "tests/globalEvents/GenerousFunding.spec.ts",
+        "tests/globalEvents/SucessfulOrganisms.spec.ts",
+        "tests/globalEvents/EcoSabotage.spec.ts",
+        "tests/globalEvents/Productivity.spec.ts",
+        "tests/globalEvents/SnowCover.spec.ts",
+        "tests/globalEvents/Diversity.spec.ts",
+        "tests/globalEvents/Pandemic.spec.ts",
+        "tests/globalEvents/WarOnEarth.spec.ts",
+        "tests/globalEvents/ImprovedEnergyTemplates.spec.ts",
+        "tests/globalEvents/InterplanetaryTrade.spec.ts",
+        "tests/globalEvents/CelebrityLeaders.spec.ts",
+        "tests/globalEvents/SpinoffProducts.spec.ts",
+        "tests/globalEvents/Election.spec.ts",
+        "tests/globalEvents/AquiferReleasedByPublicCouncil.spec.ts",
+        "tests/globalEvents/ParadigmBreakdown.spec.ts",
+        "tests/globalEvents/CorrosiveRain.spec.ts",
+        "tests/cards/turmoil/AerialLenses.spec.ts"
     ]
 }

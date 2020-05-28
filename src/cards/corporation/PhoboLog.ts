@@ -11,7 +11,7 @@ export class PhoboLog implements CorporationCard {
     public startingMegaCredits: number = 23;
     public play(player: Player, _game: Game) {
         player.titanium = 10;
-        player.titaniumValue++;
+        player.increaseTitaniumValue();
         return undefined;
     }
 }

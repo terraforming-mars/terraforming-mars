@@ -1327,13 +1327,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return buildColony;
     }      
 
-    private airScraping(game: Game): PlayerInput {
+    private airScrapping(game: Game): PlayerInput {
       return new SelectOption(
-        "Air scraping (" + constants.AIR_SCRAPING_COST + " MC)", 
+        "Air scrapping (" + constants.AIR_SCRAPPING_COST + " MC)", 
         () => {
-          game.addSelectHowToPayInterrupt(this, constants.AIR_SCRAPING_COST, false, false, "Select how to pay for Air Scrapping project");
+          game.addSelectHowToPayInterrupt(this, constants.AIR_SCRAPPING_COST, false, false, "Select how to pay for Air Scrapping project");
           game.increaseVenusScaleLevel(this, 1);
-          this.onStandardProject(StandardProjectType.AIR_SCRAPING);
+          this.onStandardProject(StandardProjectType.AIR_SCRAPPING);
           game.log(
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
@@ -1907,10 +1907,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       if ( game.venusNextExtension &&
-        this.canAfford(constants.AIR_SCRAPING_COST) &&
+        this.canAfford(constants.AIR_SCRAPPING_COST) &&
             game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
         standardProjects.options.push(
-            this.airScraping(game)
+            this.airScrapping(game)
         );
       }
 

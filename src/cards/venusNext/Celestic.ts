@@ -16,9 +16,14 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public resourceCount: number = 0;
 
     public initialAction(player: Player, game: Game) {
-        for (let foundCard of game.drawCardsByResource(ResourceType.FLOATER, 2)) {
-            player.cardsInHand.push(foundCard);
+        if (game.venusNextExtension || game.coloniesExtension) {
+            for (let foundCard of game.drawCardsByResource(ResourceType.FLOATER, 2)) {
+                player.cardsInHand.push(foundCard);
+            }
+
+            return;
         }
+        
         return undefined;
     }
 

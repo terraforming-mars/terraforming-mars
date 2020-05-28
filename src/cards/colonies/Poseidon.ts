@@ -31,7 +31,7 @@ export class Poseidon implements CorporationCard {
           return buildColony;
         }
         else {
-          console.warn("Colonie extension isn't selected.");
+          console.warn("Colonies extension isn't selected.");
           return;
         }
     }

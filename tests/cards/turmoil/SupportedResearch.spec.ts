@@ -21,8 +21,10 @@ describe("SupportedResearch", function () {
             customCorporationsList: [],
             solarPhaseOption: false,
             promoCardsOption: false,
+            undoOption: false,
             startingCorporations: 2,
-            soloTR: false
+            soloTR: false,
+            clonedGamedId: undefined
           } as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);  
         expect(card.canPlay(player, game)).to.eq(false);

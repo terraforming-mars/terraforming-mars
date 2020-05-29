@@ -51,6 +51,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public canUseHeatAsMegaCredits: boolean = false;
     public plantsNeededForGreenery: number = 8;
     public dealtCorporationCards: Array<CorporationCard> = [];
+    public dealtProjectCards: Array<IProjectCard> = [];
+    public dealtPreludeCards: Array<IProjectCard> = [];
     public powerPlantCost: number = 11;
     private titaniumValue: number = 3;
     public steelValue: number = 2;
@@ -392,7 +394,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           this.resolveMonsInsurance(game);
           game.log(
             LogMessageType.DEFAULT,
-            "${0} looses ${1} resource(s) on ${2} by ${3}",
+            "${0} loses ${1} resource(s) on ${2} by ${3}",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
             new LogMessageData(LogMessageDataType.STRING, count.toString()),
             new LogMessageData(LogMessageDataType.CARD, card.name),
@@ -1294,7 +1296,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
               LogMessageType.DEFAULT,
               "${0} used ${1} standard project",
               new LogMessageData(LogMessageDataType.PLAYER, this.id),
-              new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Sell patents")
+              new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Sell patents")
             );
             return undefined;
           }, this.cardsInHand.length
@@ -1325,18 +1327,18 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return buildColony;
     }      
 
-    private airScraping(game: Game): PlayerInput {
+    private airScrapping(game: Game): PlayerInput {
       return new SelectOption(
-        "Air scraping (" + constants.AIR_SCRAPING_COST + " MC)", 
+        "Air scrapping (" + constants.AIR_SCRAPPING_COST + " MC)", 
         () => {
-          game.addSelectHowToPayInterrupt(this, constants.AIR_SCRAPING_COST, false, false, "Select how to pay for Air Scrapping project");
+          game.addSelectHowToPayInterrupt(this, constants.AIR_SCRAPPING_COST, false, false, "Select how to pay for Air Scrapping project");
           game.increaseVenusScaleLevel(this, 1);
-          this.onStandardProject(StandardProjectType.AIR_SCRAPING);
+          this.onStandardProject(StandardProjectType.AIR_SCRAPPING);
           game.log(
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Air Scrapping")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Air Scrapping")
           );
           return undefined;
         }
@@ -1354,7 +1356,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Buffer Gas")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Buffer Gas")
           );
           return undefined;
         }
@@ -1372,7 +1374,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Power plant")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Power plant")
           );
           return undefined;
         }
@@ -1390,7 +1392,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Asteroid")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Asteroid")
           );
           return undefined;
         }
@@ -1408,7 +1410,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Aquifer"),
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Aquifer"),
           );
           return undefined;
         }
@@ -1426,7 +1428,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Greenery")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Greenery")
           );
           return undefined;
         }
@@ -1445,7 +1447,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "City")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "City")
           );
           return undefined;
         }
@@ -1764,7 +1766,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private undoTurnOption(game: Game): PlayerInput {
       return new SelectOption("Undo Turn", () => {
         try {
-          Database.getInstance().restoreLastSave(game.id, game.lastSaveId, game);
+          Database.getInstance().restoreGame(game.id, game.lastSaveId, game);
         }
         catch(error){
           console.log(error);
@@ -1905,10 +1907,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       if ( game.venusNextExtension &&
-        this.canAfford(constants.AIR_SCRAPING_COST) &&
+        this.canAfford(constants.AIR_SCRAPPING_COST) &&
             game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
         standardProjects.options.push(
-            this.airScraping(game)
+            this.airScrapping(game)
         );
       }
 
@@ -2128,7 +2130,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       // Propose undo action only if you have done one action this turn
-      if (this.actionsTakenThisRound > 0) {
+      if (this.actionsTakenThisRound > 0 && game.undoOption) {
         action.options.push(this.undoTurnOption(game));
       }
 
@@ -2208,10 +2210,20 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           this.corporationCard = undefined;
       }
 
-      // Rebuild deal corporation array
+      // Rebuild dealt corporation array
       this.dealtCorporationCards = d.dealtCorporationCards.map((element: CorporationCard)  => {
         return getCorporationCardByName(element.name)!;
       });
+
+      // Rebuild dealt prelude array
+      this.dealtPreludeCards = d.dealtPreludeCards.map((element: IProjectCard)  => {
+        return getProjectCardByName(element.name)!;
+      });
+      
+      // Rebuild dealt cards array
+      this.dealtProjectCards = d.dealtProjectCards.map((element: IProjectCard)  => {
+        return getProjectCardByName(element.name)!;
+      });      
 
       // Rebuild each cards in hand
       this.cardsInHand = d.cardsInHand.map((element: IProjectCard)  => {

@@ -2130,7 +2130,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       // Propose undo action only if you have done one action this turn
-      if (this.actionsTakenThisRound > 0) {
+      if (this.actionsTakenThisRound > 0 && game.undoOption) {
         action.options.push(this.undoTurnOption(game));
       }
 

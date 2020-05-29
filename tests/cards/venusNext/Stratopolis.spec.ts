@@ -23,6 +23,7 @@ describe("Stratopolis", function () {
             customCorporationsList: [],
             solarPhaseOption: true,
             promoCardsOption: false,
+            undoOption: false,
             startingCorporations: 2,
             soloTR: false,
             clonedGamedId: undefined

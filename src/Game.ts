@@ -338,6 +338,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.coloniesExtension = gameToRebuild.coloniesExtension;
           game.turmoilExtension = gameToRebuild.turmoilExtension;
           game.boardName = gameToRebuild.boardName;
+          game.board = gameToRebuild.board;
           game.showOtherPlayersVP = gameToRebuild.showOtherPlayersVP;
           game.solarPhaseOption = gameToRebuild.solarPhaseOption;
           game.promoCardsOption = gameToRebuild.promoCardsOption;
@@ -360,7 +361,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
 
           // Set active player
-          //let playerIndex = gameToRebuild.players.indexOf(gameToRebuild.activePlayer);
           let playerIndex = gameToRebuild.players.indexOf(gameToRebuild.first);
           game.first = game.players[playerIndex];
           game.activePlayer = game.players[playerIndex];
@@ -389,8 +389,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
             player.dealtCorporationCards = referencePlayer.dealtCorporationCards;
             player.dealtPreludeCards = referencePlayer.dealtPreludeCards;
             player.dealtProjectCards = referencePlayer.dealtProjectCards;
-
+            player.setTerraformRating(referencePlayer.getTerraformRating());
             player.setWaitingFor(game.pickCorporationCard(player), () => {});
+            // Special case solo play and Colonies
+            if (game.players.length === 1 && game.coloniesExtension) {
+              player.setProduction(Resources.MEGACREDITS, -2);
+              game.addInterrupt(new SelectRemoveColony(player, game));
+            }
           });
         });  
     }
@@ -1427,29 +1432,36 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
       });
 
-      // Reload colony elements if needed 
+      // Reload colonies elements if needed 
       if (this.coloniesExtension) {
         this.colonyDealer = new ColonyDealer();
         this.colonies = new Array<IColony>();
+
+        d.colonyDealer?.discardedColonies.forEach((element: IColony) => {
+          if(this.colonyDealer !== undefined) {
+            this.colonyDealer.discardedColonies.push(element);
+          }
+        });  
+
         d.colonies.forEach((element: IColony) => {
-          let colonie = getColonyByName(element.name);
+          let colony = getColonyByName(element.name);
 
           // Assign each attributes
-          Object.assign(colonie, element);
+          Object.assign(colony, element);
 
-          if (colonie !== undefined) {
+          if (colony !== undefined) {
             if (element.visitor){
               const player = this.players.find((player) => player.id === element.visitor!.id);
-              colonie.visitor = player;
+              colony.visitor = player;
             }
-            colonie.colonies = new Array<Player>();
+            colony.colonies = new Array<Player>();
             element.colonies.forEach((element: Player) => {
               const player = this.players.find((player) => player.id === element.id);
               if (player) {
-                colonie!.colonies.push(player);
+                colony!.colonies.push(player);
               }
             });
-            this.colonies.push(colonie);
+            this.colonies.push(colony);
           }
         });     
       }

@@ -40,7 +40,7 @@ export const LogPanel = Vue.component("log-panel", {
         },
         parseData: function(data: LogMessageData) {
             const translatableMessageDataTypes = [
-                LogMessageDataType.STANDART_PROJECT,
+                LogMessageDataType.STANDARD_PROJECT,
                 LogMessageDataType.MILESTONE,
                 LogMessageDataType.AWARD
             ];

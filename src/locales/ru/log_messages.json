@@ -16,7 +16,7 @@
     "${0} acted as World Government and increased oceans": "${0} залил с помощью правительства океан",
     "${0} acted as World Government and increased oxygen level": "${0} повысил с помощью правительства уровень кислорода",
     "${0} acted as World Government and increased temperature": "${0} повысил с помощью правительства температуру",
-    "${0} looses ${1} resource(s) on ${2} by ${3}": "${0} теряет ${1} ресурс. на ${2} из-за ${3}",
+    "${0} loses ${1} resource(s) on ${2} by ${3}": "${0} теряет ${1} ресурс. на ${2} из-за ${3}",
     "${0}'s ${1} production modified by ${2} by ${3}": "производство ${1} у ${0} меняется на ${3} из-за ${2}",
     "${0}'s ${1} amount modified by ${2} by ${3}": "количество ресурсов ${1} у ${0} меняется на ${2} из-за ${3}",
     "${0} received ${1} MC from ${2} owner (${3})": "${0} получил ${1} MC с ${2} (владелец ${3})",

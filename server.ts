@@ -371,6 +371,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         customCorporationsList: gameReq.customCorporationsList,
         solarPhaseOption: gameReq.solarPhaseOption,
         promoCardsOption: gameReq.promoCardsOption,
+        undoOption: gameReq.undoOption,
         startingCorporations: gameReq.startingCorporations,
         soloTR: gameReq.soloTR,
         clonedGamedId: gameReq.clonedGamedId,

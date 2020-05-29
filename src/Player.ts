@@ -1991,10 +1991,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             player: this,
             playerInput: input
           });
-
-          this.actionsTakenThisRound++; // only increment if corp can take its corp first action
         }
         this.actionsThisGeneration.add("CORPORATION_INITIAL_ACTION");
+        this.actionsTakenThisRound++;
         this.takeAction(game);
         return;
       }

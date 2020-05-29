@@ -919,52 +919,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           }, 1, 1
         ), () => { }
       );  
-  }  
-/*
-  public runDraftPhase(game: Game, playerName: String, passedCards?: Array<IProjectCard>): void {
-    let cards: Array<IProjectCard> = [];
-    if (passedCards === undefined) {
-      cards.push(
-        game.dealer.dealCard(true),
-        game.dealer.dealCard(true),
-        game.dealer.dealCard(true),
-        game.dealer.dealCard(true)
-    ) } else { cards = passedCards}      
+    }  
 
-    this.setWaitingFor(
-      new SelectCard(
-        "Select a card to keep and pass the rest to " + playerName,
-        cards,
-        (foundCards: Array<IProjectCard>) => {
-          this.draftedCards.push(foundCards[0]);
-          cards = cards.filter((card) => card !== foundCards[0]);
-          game.playerIsFinishedWithDraftingPhase(this,cards);
-          return undefined;
-        }, 1, 1
-      ), () => { }
-    );  
-
-
-  public runInitialDraftPhase(game: Game, playerName: String, passedCards?: Array<IProjectCard>): void {
-    let cards: Array<IProjectCard> = [];
-    if (passedCards === undefined) {
-      cards = this.dealtProjectCards;
-    } else { cards = passedCards}      
-
-    this.setWaitingFor(
-      new SelectCard(
-        "Select a card to keep and pass the rest to " + playerName,
-        cards,
-        (foundCards: Array<IProjectCard>) => {
-          this.draftedCards.push(foundCards[0]);
-          cards = cards.filter((card) => card !== foundCards[0]);
-          game.playerIsFinishedWithInitialDraftingPhase(this,cards);
-          return undefined;
-        }, 1, 1
-      ), () => { }
-    );  
-}
-*/
     public runResearchPhase(game: Game, draftVariant: boolean): void {
       let dealtCards: Array<IProjectCard> = [];
       if (!draftVariant) {

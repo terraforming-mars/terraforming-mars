@@ -674,21 +674,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
       });
     }
 
-    /*
-    private runInitialDraftRound(): void {
-      this.draftedPlayers.clear();
-      this.players.forEach((player) => {
-        if (this.draftRound === 1) {
-          player.runInitialDraftPhase(this,this.getNextDraft(player).name);
-        } else {
-          let cards = this.unDraftedCards.get(this.getDraftCardsFrom(player));
-          this.unDraftedCards.delete(this.getDraftCardsFrom(player));
-          player.runInitialDraftPhase(this, this.getNextDraft(player).name, cards);
-        }
-      });
-    }    
-    */
-
     private gotoResearchPhase(): void {
       this.researchedPlayers.clear();
       this.players.forEach((player) => {
@@ -867,63 +852,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return;
       }      
     }
-
-    /*
-    public playerIsFinishedWithDraftingPhase(player: Player, cards : Array<IProjectCard>): void {
-      this.draftedPlayers.add(player);
-      this.unDraftedCards.set(player,cards);
-     
-      if (!this.allPlayersHaveFinishedDraft()) {
-        return;
-      }
-
-      if (this.allPlayersHaveFinishedDraft() && this.draftRound < 3) {
-        this.draftRound++;
-        this.runDraftRound();
-      }      
-
-      if (this.allPlayersHaveFinishedDraft() && this.draftRound === 3) {
-        // Push last card for each player
-        if (cards.length === 1) {
-          this.players.forEach((player) => {
-            let lastCards  = this.unDraftedCards.get(this.getDraftCardsFrom(player));
-            if (lastCards !== undefined && lastCards[0] !== undefined) {
-              player.draftedCards.push(lastCards[0]);
-            }
-          });
-        }
-        this.gotoResearchPhase();
-      }
-    }
-
-    public playerIsFinishedWithInitialDraftingPhase(player: Player, cards : Array<IProjectCard>): void {
-      this.draftedPlayers.add(player);
-      this.unDraftedCards.set(player,cards);
-     
-      if (!this.allPlayersHaveFinishedDraft()) {
-        return;
-      }
-
-      if (this.allPlayersHaveFinishedDraft() && this.draftRound < this.players.length) {
-        this.draftRound++;
-        this.runDraftRound(true);
-      }      
-
-      if (this.allPlayersHaveFinishedDraft() && this.draftRound === this.players.length) {
-        // Push last cards for each player
-          this.players.forEach((player) => {
-            let lastCards  = this.unDraftedCards.get(this.getDraftCardsFrom(player));
-            if (lastCards !== undefined) {
-              player.draftedCards.push(...lastCards);
-            }
-            player.dealtProjectCards = player.draftedCards;
-            player.draftedCards = [];
-            player.setWaitingFor(this.pickCorporationCard(player), () => {});
-          });
-        return;
-      }
-    }
-    */
 
     public getDraftCardsFrom(player: Player): Player {
       let nextPlayer = this.getPreviousPlayer(this.players, player);

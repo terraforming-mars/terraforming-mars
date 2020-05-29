@@ -9,6 +9,8 @@
     "Create Game": "Создать игру",
     "Board": "Карта",
     "Beginner?": "Новичек?",
+    "Goes First?": "Ходит первым?",
+
     "Red": "Красный",
     "Green": "Зеленый",
     "Yellow": "Желтый",
@@ -65,7 +67,7 @@
     "Landlord": "Землевладелец",
     "Owning the most tiles in play": "Наибольшее количество своих тайлов в игре",
     "Banker": "Банкир",
-    "Having the highest M€ production": "Наибольший уровень производства кредитов",
+    "Having the highest MC production": "Наибольший уровень производства кредитов",
     "Scientist": "Ученый",
     "Having the most science tags in play": "Наибольшее количество карт с меткой наука",
     "Thermalist": "Термалист",   
@@ -126,6 +128,7 @@
     "Aquifer (18 MC)": "Океан (18 MC)",
     "Greenery (23 MC)": "Озеленение (23 MC)",
     "City (25 MC)": "Город (25 MC)",
+    "Buffer Gas (16 MC)": "Буферный газ (16 МС)",
     "Power plant": "Электростанция",
     "Asteroid": "Астероид",
     "Aquifer": "Океан",
@@ -133,5 +136,22 @@
     "City": "Город",
 
     "Pay 9 MC": "Заплатить 9 MC",
-    "Trade with a colony": "Торговать с колонией"
+    "Trade with a colony": "Торговать с колонией",
+    "TR solo mode": "Соло режим на РТ",
+    "Random first player": "Случайный первый игрок",
+    "Show real-time VP": "Показывать ПО в реальном времени",
+    "Draft variant": "Драфт",
+
+    "Place any final greenery from plants": "Выполнить финальное озеленение",
+    "Don't place a greenery": "Не выполнять финального озеленения",
+    "Select space for greenery": "Выбрать место для озеленения",
+    "Player 1 name": "Имя игрока 1",
+    "Player 2 name": "Имя игрока 2",
+    "Player 3 name": "Имя игрока 3",
+    "Player 4 name": "Имя игрока 4",
+    "Player 5 name": "Имя игрока 5",
+
+    "Select corporation": "Выбрать корпорацию",
+    "Select initial cards to buy": "Выбрать стартовые карты для покупки",
+    "Send players their links below. As game administrator pick your link to use.": "Отправьте каждому из игроков соответствующую ссылку ниже."
 }

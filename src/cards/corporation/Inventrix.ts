@@ -17,6 +17,7 @@ export class Inventrix implements CorporationCard {
                 game.dealer.dealCard(),
                 game.dealer.dealCard()
             );
+            game.logCorpFirstAction(player);
             return undefined;
         });
     }

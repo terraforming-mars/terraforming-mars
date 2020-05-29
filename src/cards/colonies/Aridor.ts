@@ -16,7 +16,7 @@ export class Aridor implements CorporationCard {
     public startingMegaCredits: number = 40;
     public allTags = new Set();
 
-    public initialAction(_player: Player, game: Game) {
+    public initialAction(player: Player, game: Game) {
         if (game.colonyDealer === undefined || !game.coloniesExtension) return undefined;
         let addColony = new OrOptions();
         addColony.title = "Aridor first action - Select colony tile to add";
@@ -26,6 +26,7 @@ export class Aridor implements CorporationCard {
             () => {
                 game.colonies.push(colony);
                 game.colonies.sort((a,b) => (a.name > b.name) ? 1 : -1);
+                game.logCorpFirstAction(player, colony.name);
                 this.checkActivation(colony, game);
                 return undefined;
             }

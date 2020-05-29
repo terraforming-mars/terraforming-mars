@@ -18,6 +18,7 @@ export class ArcadianCommunities implements IActionCard, CorporationCard {
             game.board.getAvailableSpacesOnLand(player), 
             (foundSpace: ISpace) => {
                 foundSpace.player = player;
+                game.logCorpFirstAction(player);
                 return undefined;
             }
         );

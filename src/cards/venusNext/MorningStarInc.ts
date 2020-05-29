@@ -16,7 +16,7 @@ export class MorningStarInc implements CorporationCard {
                 player.cardsInHand.push(foundCard);
             }
         }
-        
+        game.logCorpFirstAction(player);
         return undefined;
     }
 

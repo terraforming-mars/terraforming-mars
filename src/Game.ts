@@ -54,6 +54,7 @@ import { CardName } from "./CardName";
 import { Turmoil } from "./turmoil/Turmoil";
 import { PartyName } from "./turmoil/parties/PartyName";
 import { IParty } from "./turmoil/parties/IParty";
+import { ColonyName } from "./colonies/ColonyName"
 
 export interface GameOptions {
   draftVariant: boolean;
@@ -1345,6 +1346,58 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public hasCardsWithResource(resource: ResourceType, requiredQuantity: number = 1) {
       return this.dealer.deck.filter((card) => card.resourceType === resource).length >= requiredQuantity;
+    }
+    
+    public logCorpFirstAction(player: Player, colonyName?: ColonyName) {
+      if (player.corporationCard !== undefined) {
+        let message = "";
+
+        switch (player.corporationCard.name) {
+          case CardName.INVENTRIX:
+            message = "drew 3 cards"
+            break;
+
+          case CardName.THARSIS_REPUBLIC:
+            message = "placed a City tile"
+            break;
+
+          case CardName.CELESTIC:
+            const floaterCards = player.cardsInHand.filter((card) => card.resourceType === ResourceType.FLOATER).slice(-2)
+            message = "drew 2 floater cards: " + floaterCards.map((card) => card.name).join(", ")
+            break;
+
+          case CardName.MORNING_STAR_INC:
+            const venusCards = player.cardsInHand.filter((card) => card.tags.includes(Tags.VENUS)).slice(-3)
+            message = "drew 3 Venus cards: " + venusCards.map((card) => card.name).join(", ")
+            break;
+
+          case CardName.ARIDOR:
+            message = "added a new Colony tile: " + colonyName
+            break;
+
+          case CardName.PHILARES:
+            message = "placed a Greenery tile"
+            break;
+
+          case CardName.ARCADIAN_COMMUNITIES:
+            message = "placed a Community (player marker)"
+            break;
+
+          case CardName.SPLICE:
+            const drawnCard = player.cardsInHand.filter((card) => card.tags.includes(Tags.MICROBES)).slice(-1)[0]
+            message = "drew a Microbe card: " + drawnCard.name
+            break;
+        
+          default:
+            break;
+        }
+
+        this.log(
+          LogMessageType.DEFAULT,
+          "${0} " + message,
+          new LogMessageData(LogMessageDataType.PLAYER, player.id)
+        );
+      }
     }
 
     private setupSolo() {

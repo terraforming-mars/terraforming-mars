@@ -15,6 +15,7 @@ export class Splice implements CorporationCard {
 
     public initialAction(player: Player, game: Game) {
         player.cardsInHand.push(game.drawCardsByTag(Tags.MICROBES, 1)[0]);
+        game.logCorpFirstAction(player);
         return undefined;
     }
 

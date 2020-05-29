@@ -2020,19 +2020,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
       }
 
-      action.options.push(
-          this.passOption(game)
-      );
-
       if (this.cardsInHand.length > 0) {
         action.options.push(
             this.sellPatents(game)
-        );
-      }
-
-      if (game.getPlayers().length > 1 && this.actionsTakenThisRound > 0) {
-        action.options.push(
-            this.endTurnOption(game)
         );
       }
 
@@ -2126,11 +2116,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         action.options.push(remainingAwards);
       }
 
-      // Propose undo action only if you have done one action this turn
-      if (this.actionsTakenThisRound > 0 && game.undoOption) {
-        action.options.push(this.undoTurnOption(game));
-      }
-
       // If you can pay to send some in the Ara
       if (game.turmoilExtension) {
         if (game.turmoil?.lobby.has(this.id)) {
@@ -2144,20 +2129,28 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       action.options.sort((a, b) => {
-        if (a.title == b.title) return 0;
-
-        if (a.title == "Undo Turn") return 1;
-        if (b.title == "Undo Turn") return -1;
-
-        if (a.title == "Pass") return 1;
-        if (b.title == "Pass") return -1;
-
-        if (a.title == "End Turn") return 1;
-        if (b.title == "End Turn") return -1;
-
-        if (a.title > b.title) return 1;
-        return -1; // a.title < b.title
+        if (a.title > b.title) {
+          return 1;
+        } else if (a.title < b.title) {
+          return -1;
+        }
+        return 0;
       });
+
+      if (game.getPlayers().length > 1 && this.actionsTakenThisRound > 0) {
+        action.options.push(
+            this.endTurnOption(game)
+        );
+      }
+
+      action.options.push(
+        this.passOption(game)
+      );
+
+      // Propose undo action only if you have done one action this turn
+      if (this.actionsTakenThisRound > 0 && game.undoOption) {
+        action.options.push(this.undoTurnOption(game));
+      }
 
       this.setWaitingFor(action, () => {
         this.actionsTakenThisRound++;

@@ -1325,7 +1325,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
       }
       return result;
-    }   
+    }
+
+    public getCardsInHandByTag(player: Player, tag: Tags) {
+      return player.cardsInHand.filter((card) => card.tags.includes(tag));
+    }
+
+    public getCardsInHandByResource(player: Player, resourceType: ResourceType) {
+      return player.cardsInHand.filter((card) => card.resourceType === resourceType);
+    }
 
     public log(type: LogMessageType, message: string, ...data: LogMessageData[]) {
       this.gameLog.push(new LogMessage(type, message, data));
@@ -1350,53 +1358,71 @@ export class Game implements ILoadable<SerializedGame, Game> {
     
     public logCorpFirstAction(player: Player, colonyName?: ColonyName) {
       if (player.corporationCard !== undefined) {
-        let message = "";
+        let message = "", drawnCards = undefined;
+        const corpName = player.corporationCard.name;
 
-        switch (player.corporationCard.name) {
-          case CardName.INVENTRIX:
-            message = "drew 3 cards"
-            break;
+        if (corpName === CardName.CELESTIC) {
+          drawnCards = this.getCardsInHandByResource(player, ResourceType.FLOATER).slice(-2);
 
-          case CardName.THARSIS_REPUBLIC:
-            message = "placed a City tile"
-            break;
+          this.log(
+            LogMessageType.DEFAULT,
+            "${0} drew ${1} and ${2}",
+            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.CARD, drawnCards[0].name),
+            new LogMessageData(LogMessageDataType.CARD, drawnCards[1].name)
+          );
+        } else if (corpName === CardName.MORNING_STAR_INC) {
+          drawnCards = this.getCardsInHandByTag(player, Tags.VENUS).slice(-3);
 
-          case CardName.CELESTIC:
-            const floaterCards = player.cardsInHand.filter((card) => card.resourceType === ResourceType.FLOATER).slice(-2)
-            message = "drew 2 floater cards: " + floaterCards.map((card) => card.name).join(", ")
-            break;
+          this.log(
+            LogMessageType.DEFAULT,
+            "${0} drew ${1}, ${2} and ${3}",
+            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.CARD, drawnCards[0].name),
+            new LogMessageData(LogMessageDataType.CARD, drawnCards[1].name),
+            new LogMessageData(LogMessageDataType.CARD, drawnCards[2].name)
+          );
+        } else if (corpName === CardName.SPLICE) {
+          drawnCards = this.getCardsInHandByTag(player, Tags.MICROBES).slice(-1);
 
-          case CardName.MORNING_STAR_INC:
-            const venusCards = player.cardsInHand.filter((card) => card.tags.includes(Tags.VENUS)).slice(-3)
-            message = "drew 3 Venus cards: " + venusCards.map((card) => card.name).join(", ")
-            break;
+          this.log(
+            LogMessageType.DEFAULT,
+            "${0} drew ${1}",
+            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.CARD, drawnCards[0].name)
+          );
+        } else {
+          switch (corpName) {
+            case CardName.INVENTRIX:
+              message = "drew 3 cards"
+              break;
 
-          case CardName.ARIDOR:
-            message = "added a new Colony tile: " + colonyName
-            break;
+            case CardName.THARSIS_REPUBLIC:
+              message = "placed a City tile"
+              break;
 
-          case CardName.PHILARES:
-            message = "placed a Greenery tile"
-            break;
+            case CardName.ARIDOR:
+              message = "added a new Colony tile: " + colonyName
+              break;
 
-          case CardName.ARCADIAN_COMMUNITIES:
-            message = "placed a Community (player marker)"
-            break;
+            case CardName.PHILARES:
+              message = "placed a Greenery tile"
+              break;
 
-          case CardName.SPLICE:
-            const drawnCard = player.cardsInHand.filter((card) => card.tags.includes(Tags.MICROBES)).slice(-1)[0]
-            message = "drew a Microbe card: " + drawnCard.name
-            break;
-        
-          default:
-            break;
+            case CardName.ARCADIAN_COMMUNITIES:
+              message = "placed a Community (player marker)"
+              break;
+
+            default:
+              break;
+          }
+  
+          this.log(
+            LogMessageType.DEFAULT,
+            "${0} " + message,
+            new LogMessageData(LogMessageDataType.PLAYER, player.id)
+          );
         }
-
-        this.log(
-          LogMessageType.DEFAULT,
-          "${0} " + message,
-          new LogMessageData(LogMessageDataType.PLAYER, player.id)
-        );
       }
     }
 

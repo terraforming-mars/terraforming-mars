@@ -6134,6 +6134,25 @@ export const HTML_DATA: Map<string, string> =
             </div>
           </div>
           `],
+[CardName.SEPTUM_TRIBUS,`
+      <div class="tag tag1 tag-wild"></div>
+      <div class="corporationLabel">CORPORATION</div>
+      <div class="turmoil-icon corporation-icon"></div>
+      <div class="contentCorporation">
+        <div class="corporationEffectBox">
+          <div class="corporationEffectBoxLabel" style="margin-bottom:15px;" >ACTION</div>
+          <div class="red-arrow"></div> <div class="resource money">2</div> / <div class="delegate"></div> *
+          <div class="description" style="text-align:center;margin-top:5px;">
+            (Action: Gain 2 MC for each party where you have at least 1 delegate.)<br>
+          </div>
+        </div>
+        <div class="septem">Septum Tribus</div>
+        <div class="resource money" style="margin-left:60px;margin-top:10px">36</div>
+        <div class="description" style="text-align:center;margin-top:10px">
+          (You start with 36 MC. When you perform an action, the wild tag counts as any tag of your choice.)
+        </div>
+      </div>
+`],
 [CardName.ALLIED_BANKS,`
       <div class="title background-color-prelude">Allied Banks</div>
       <div class="tag tag1 tag-earth"></div>

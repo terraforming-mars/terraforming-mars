@@ -58,10 +58,10 @@
     "Oxygen must be 7% or less.": "氧气浓度不能多于7%",
     "Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.": "获得3个植物资源,放置一个城市版块。降低电力产能1级,提升MC产能3级",
     
-    "Noctis City": "不夜城",
+    "Noctis City": "诺提斯城",
     "Decrease your Energy production 1 step and increase your MC production 3 steps. Place a City ON THE RESERVED AREA, disregarding normal placement restrictions.": "降低你的电力产能1级,提升你的MC产能3级。放置一个城市版块到'预留区域',无视基础放置条件。",
 
-    "Methane from Titan": "从泰坦(土卫六)开采甲烷",
+    "Methane from Titan": "从来自泰坦的甲烷",
     "Requires 2% oxygen. Increase your heat production 2 steps and your Plant production 2 steps.": "需要达到至少2%的氧气浓度。提升你的热能产能2级和植物产能2级",
 
     "Imported Hydrogen": "外部注入氢气",
@@ -93,7 +93,7 @@
 
     "Interstellar Colony Ship": "星际殖民飞船",
 
-    "Security Fleet": "保安舰队",
+    "Security Fleet": "安保舰队",
     "Action: Spend 1 titanium to add 1 fighter resource to this card.": "行动:花费1个钛合金资源,放置1个云资源到本卡上",
     "1 VP for each fighter resource on this card.": "这张卡上每有1个云资源,获得1分",
 
@@ -129,7 +129,7 @@
     "Rover Construction": "漫游者建设",
     "Effect: When any City tile is placed, gain 2 MC.": "效果: когда любой игрок строит город, вы получаете 2 MC.",
 
-    "Deimos Down": "得摩斯(火卫二)陨落",
+    "Deimos Down": "火卫二陨落",
     "Raise temperature 3 steps and gain 4 steel. Remove up to 8 Plants from any player.": "提升火星温度3级并获得4个钢铁资源。移除任一玩家最多8个植物资源",
 
     "Asteroid Mining": "小行星采矿",
@@ -180,7 +180,7 @@
     "Requires 6% oxygen.": "需要氧气浓度至少达到6%",
     "Decrease any Plant production 1 step. 1 VP per 2 Animals on this card.": "降低任一玩家的植物产能1级。本卡上每有2个动物资源,获得1分",
 
-    "Kelp Farming": "海带养殖",
+    "Kelp Farming": "养殖海藻",
     "Requires 6 ocean tiles. Increase your MC production 2 steps and your Plant production 3 steps. Gain 2 Plants.": "Необходимо 6 тайлов океана. Получите 2 растения, повысьте своё производство растений на 3, а свой доход на 2.",
 
     "Mine": "采矿",
@@ -194,7 +194,7 @@
     "Mangrove": "红树林",
     "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "需要火星温度至少+4度。放置一个温室版块在原本用于放置海洋版块的地方(无视基础放置条件)。提升氧气浓度1级",
 
-    "Trees": "植树",
+    "Trees": "树",
     "Requires -4 C or warmer. Increase your Plant production 3 steps. Gain 1 Plant.": "需要火星温度至少-4度。增加你的植物产能3级。获得1个植物资源",
 
     "Great Escarpment Consortium": "巨大断崖",
@@ -206,13 +206,13 @@
     "Mining Expedition": "矿业探险",
     "Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel.": "提升氧气浓度1级。移除任一玩家的2个植物资源。获得2个钢铁资源",
 
-    "Mining Area": "矿区",
+    "Mining Area": "采矿区",
     "Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.": "将此版块放置在版图上有钢铁或钛合金奖励的地方,并且必须邻近你的任一版块。增加对应的资源产量1级",
     
     "Building Industries": "建筑行业",
     "Decrease your Energy production 1 step and increase your steel production 2 steps.": "降低你的电力产能1级并增加你的钢铁产能2级",
 
-    "Land Claim": "领地宣言",
+    "Land Claim": "宣称领土",
     "PLACE YOUR MARKER ON A NON-RESERVED AREA. ONLY YOU MAY PLACE A TILE HERE.": "放置一个你的标志物在一个版图格子上。只有你能在该格子上放置版块。",
 
     "Mining Rights": "采矿权",
@@ -225,20 +225,20 @@
     "Action: Spend 1 plant or 1 steel to gain 7MC.": "行动: 花费1植物资源或1钢铁资源,获得7MC",
     "Oxygen must be 8% or less. Decrease your energy production 1 step.": "氧气浓度必须不高于8%,降低你的电力产能1级",
 
-    "Earth Catapult": "地球弹射器",
+    "Earth Catapult": "地球发射站",
     "Effect: When you play a card, you pay 2 MC less for it.": "效果: 当你打牌的时候,费用减少2MC",
 
-    "Advanced Alloys": "高级合金",
+    "Advanced Alloys": "优化合金",
     "Effect: Each titanium you have is worth 1 MC extra. Each steel you have is worth 1 MC extra.": "效果:你的钛合金资源价值+1MC,你的钢铁资源价值+1MC",
 
-    "Birds": "鸟类",
+    "Birds": "鸟",
     "Action: Add an animal to this card.": "行动: 增加一个动物资源到本卡",
     "Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card.": "需要至少13%氧气浓度。降低任一玩家的植物产能2级。本卡上每有1个动物资源,获得1分",
     
     "Mars University": "火星大学",
     "Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.": "效果: 当你打出一个科学标记,包括本牌,你可以从手牌中弃掉1张牌,然后抽1张牌",
 
-    "Viral Enhancers": "病毒增强剂",
+    "Viral Enhancers": "病毒增强",
     "Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "效果: 当你打出一个植物、微生物或动物标记时,包括本牌,获得1个植物,或增加1个对应资源到该牌",
 
     "Towing a Comet": "牵引彗星",
@@ -247,16 +247,16 @@
     "Space Mirrors": "太空镜",
     "Action: Spend 7 MC to increase your energy production 1 step.": "行动: 花费7MC,增加你的电力产能1级",
 
-    "Solar Wind Power": "太阳风量",
+    "Solar Wind Power": "太阳风",
     "Increase your energy production 1 step and gain 2 titanium.": "提升你的电力产量1级,获得2个钛合金资源",
 
-    "Ice Asteroid": "结冰小行星",
+    "Ice Asteroid": "结冰行星",
     "Place 2 ocean tiles.": "放置2个海洋版块",
 
-    "Quantum Extractor": "量子提取器",
+    "Quantum Extractor": "量子提取",
     "Requires 4 science tags. Increase your energy production 4 steps.": "需要有4个科学标记。提升你的电力产能4级",
 
-    "Giant Ice Asteroid": "巨大冰行星",
+    "Giant Ice Asteroid": "巨冰行星",
     "Raise temperature 2 steps and place 2 ocean tiles. Remove up to 6 plants from any player.": "提升火星温度2格并放置2个海洋版块。移除任一玩家最多6个植物资源",
 
     "Ganymede Colony": "木卫三殖民地",
@@ -286,7 +286,7 @@
     "Peroxide Power": "过氧化氢能源",
     "Decrease your MC production 1 step and increase your Energy production 2 steps.": "降低你的MC产能1级并增加你的电力产能2级",
 
-    "Research": "科学研究",
+    "Research": "研究",
     "Counts as playing 2 science cards. Draw 2 cards.": "当做打了2张科研牌。抽2张卡",
 
     "Gene Repair": "基因修复",
@@ -298,7 +298,7 @@
     "Bushes": "花丛",
     "Requires -10 C or warmer. Increase your plant production 2 steps. Gain 2 plants.": "需要至少-10度。增加你的植物产能2级,获得2个植物资源",
 
-    "Mass Converter": "质量转换器",
+    "Mass Converter": "大规模转换器",
     "Requires 5 science tags. Increase your energy production 6 steps.": "需要5个科学标志。增加你的电力产能6级",
 
     "Physics Complex": "物理复杂性",
@@ -340,7 +340,7 @@
     "Media Archives": "多媒体档案库",
     "Gain 1 MC for each event EVER PLAYED by all players.": "所有玩家合计每打出过1个事件,你获得1MC",
 
-    "Open City": "开放式城市",
+    "Open City": "开放的城市",
     "Requires 12% oxygen. Gain 2 plants. Place a City tile.": "需要氧气浓度达到12%,获得2个植物资源,放置一个城市版块",
     "Decrease your Energy production 1 step and increase your MC production 4 steps.": "降低你的电力产能1级并增加你的MC产能4级",
 
@@ -430,7 +430,7 @@
     "Advanced Ecosystems": "先进的生态系统",
     "Requires a Plant tag, a Microbe tag, and an Animal tag.": "需要1个植物标记,1个微生物标记和1个动物标记",
 
-    "Great Dam": "巨大的大坝",
+    "Great Dam": "大坝",
     "Requires 4 ocean tiles. Increase your Energy production 2 steps.": "需要至少4个海洋版块。增加你的电力产能2级",
 
     "Cartel": "同业联盟",
@@ -472,7 +472,7 @@
     "CEO's Favorite Project": "CEO最喜欢的项目",
     "ADD 1 RESOURCE TO A CARD WITH AT LEAST 1 RESOURCE ON IT": "在1个已经有资源的牌上放置多1个资源",
 
-    "Anti-Gravity Technology": "反重力技术",
+    "Anti-Gravity Technology": "反重力科技",
     "Requires 7 science tags.": "需要7个科研标记",
 
     "Investment Loan": "投资性贷款",
@@ -484,7 +484,7 @@
     "Adaptation Technology": "适应性技术",
     "Effect: Your global requirements are +2 or -2 steps, your choice in each case.": "效果: 你打出牌时对全球改造需求+2或-2格",
 
-    "Caretaker Contract": "临时合同",
+    "Caretaker Contract": "合同工",
     "Action: Spend 8 heat to increase your terraform rating 1 step.": "行动: 花费8个热能资源,增加你的改造度(TR) 1格",
     "Requires 0 C or warmer.": "需要火星温度至少0度",
 

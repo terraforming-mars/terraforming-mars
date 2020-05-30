@@ -42,25 +42,13 @@ export function getColonyByName(colonyName: string): IColony | undefined {
 }
 
 export class ColonyDealer {
-    //private seed: number = 0;
     public coloniesDeck: Array<IColony> = [];
     public discardedColonies: Array<IColony> = [];
-    /*
-    constructor(seed?: number) {
-        if (seed !== undefined) {
-            this.seed = seed;
-        } else {
-            this.seed = Math.random();
-        }
-    }
-    */
 
     public shuffle(cards: Array<any>): Array<any> {
         const deck: Array<any> = [];
         const copy = cards.slice();
         while (copy.length) {
-            // not working, disable for now
-            //deck.push(copy.splice(Math.floor(this.seed * copy.length), 1)[0]);
             deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
         }
         return deck;

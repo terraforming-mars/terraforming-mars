@@ -1334,12 +1334,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.getPlayers().filter((p) => p.getProduction(resource) >= minQuantity).length > 0 || this.soloMode ;
     }
 
-    public hasCardsWithTag(tag: Tags) {
-      return this.dealer.deck.some((card) => card.tags.includes(tag));
+    public hasCardsWithTag(tag: Tags, requiredQuantity: number = 1) {
+      return this.dealer.deck.filter((card) => card.tags.includes(tag)).length >= requiredQuantity;
     }
 
-    public hasCardsWithResource(resource: ResourceType) {
-      return this.dealer.deck.some((card) => card.resourceType === resource);
+    public hasCardsWithResource(resource: ResourceType, requiredQuantity: number = 1) {
+      return this.dealer.deck.filter((card) => card.resourceType === resource).length >= requiredQuantity;
     }
 
     private setupSolo() {

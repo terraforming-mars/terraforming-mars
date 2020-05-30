@@ -1780,12 +1780,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         const action: OrOptions = new OrOptions();
         action.title = "Place any final greenery from plants";
         action.options.push(
-            new SelectOption("Don't place a greenery", () => {
-              game.playerIsDoneWithGame(this);
-              return undefined;
-            })
-        );
-        action.options.push(
             new SelectSpace(
                 "Select space for greenery",
                 game.board.getAvailableSpacesForGreenery(this), (space) => {
@@ -1796,6 +1790,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                 }
             )
         );
+        action.options.push(
+          new SelectOption("Don't place a greenery", () => {
+            game.playerIsDoneWithGame(this);
+            return undefined;
+          })
+      );
         this.setWaitingFor(action, () => {});
         return;
       }

@@ -934,7 +934,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.BEAM_FROM_A_THORIUM_ASTEROID,`
-      <div class="title background-color-automated" style="font-size:14px">Beam from a Thorium Asteroid</div>
+      <div class="title background-color-automated">Beam from a Thorium Asteroid</div>
       <div class="price">32</div>
       <div class="tag tag1 tag-power"></div>
       <div class="tag tag2 tag-space"></div>

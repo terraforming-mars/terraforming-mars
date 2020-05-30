@@ -59,7 +59,7 @@ describe("SeptumTribus", function () {
             preludeExtension: false,
             venusNextExtension: false,
             coloniesExtension: false,
-            turmoilExtension: true,
+            turmoilExtension: false,
             boardName: BoardName.ORIGINAL,
             showOtherPlayersVP: false,
             customCorporationsList: [],
@@ -74,6 +74,6 @@ describe("SeptumTribus", function () {
         const game = new Game("foobar", [player], player, gameOptions);
         card.play();
         player.corporationCard = card;
-        expect(card.action(player, game)).to.eq(undefined);
+        expect(card.canAct(player, game)).to.eq(false);
     });
 });

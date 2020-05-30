@@ -2020,19 +2020,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
       }
 
-      action.options.push(
-          this.passOption(game)
-      );
-
       if (this.cardsInHand.length > 0) {
         action.options.push(
             this.sellPatents(game)
-        );
-      }
-
-      if (game.getPlayers().length > 1 && this.actionsTakenThisRound > 0) {
-        action.options.push(
-            this.endTurnOption(game)
         );
       }
 
@@ -2111,11 +2101,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             .map(
                 (milestone: IMilestone) =>
                   this.claimMilestone(milestone, game));
-        if (remainingMilestones.options.length > 1) {
-          action.options.push(remainingMilestones);
-        } else if (remainingMilestones.options.length === 1) {
-          action.options.push(remainingMilestones.options[0]);
-        }
+        
+        if (remainingMilestones.options.length >= 1) action.options.push(remainingMilestones);
       }
 
       if (
@@ -2127,11 +2114,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             .filter((award: IAward) => game.hasBeenFunded(award) === false)
             .map((award: IAward) => this.fundAward(award, game));
         action.options.push(remainingAwards);
-      }
-
-      // Propose undo action only if you have done one action this turn
-      if (this.actionsTakenThisRound > 0 && game.undoOption) {
-        action.options.push(this.undoTurnOption(game));
       }
 
       // If you can pay to send some in the Ara
@@ -2154,6 +2136,21 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
         return 0;
       });
+
+      if (game.getPlayers().length > 1 && this.actionsTakenThisRound > 0) {
+        action.options.push(
+            this.endTurnOption(game)
+        );
+      }
+
+      action.options.push(
+        this.passOption(game)
+      );
+
+      // Propose undo action only if you have done one action this turn
+      if (this.actionsTakenThisRound > 0 && game.undoOption) {
+        action.options.push(this.undoTurnOption(game));
+      }
 
       this.setWaitingFor(action, () => {
         this.actionsTakenThisRound++;

@@ -1339,6 +1339,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.getPlayers().filter((p) => p.getProduction(resource) >= minQuantity).length > 0 || this.soloMode ;
     }
 
+    public hasCardsWithTag(tag: Tags, requiredQuantity: number = 1) {
+      return this.dealer.deck.filter((card) => card.tags.includes(tag)).length >= requiredQuantity;
+    }
+
+    public hasCardsWithResource(resource: ResourceType, requiredQuantity: number = 1) {
+      return this.dealer.deck.filter((card) => card.resourceType === resource).length >= requiredQuantity;
+    }
+
     private setupSolo() {
       this.players[0].setTerraformRating(14);
       this.players[0].terraformRatingAtGenerationStart = 14;

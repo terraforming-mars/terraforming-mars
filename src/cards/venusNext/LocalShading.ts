@@ -24,6 +24,11 @@ export class LocalShading implements IActionCard,IProjectCard,IResourceCard {
         return true;
     }    
     public action(player: Player) {
+        if (this.resourceCount < 1) {
+            this.resourceCount++;
+            return undefined;
+        }
+        
         var opts: Array<SelectOption> = [];
         const addResource = new SelectOption("Add 1 floater to this card", () => {
             this.resourceCount++;

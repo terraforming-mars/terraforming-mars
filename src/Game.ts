@@ -545,7 +545,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private playCorporationCard(
         player: Player, corporationCard: CorporationCard
     ): void {
-      // Check for negative Mâ‚      let cardCost = player.cardCost;
+      // Check for negative Mâ‚¬      
+      let cardCost = player.cardCost;
       if (corporationCard.name === CardName.TERRALABS_RESEARCH) {
         cardCost = 1;
       } else if (corporationCard.name === CardName.POLYPHEMOS) {

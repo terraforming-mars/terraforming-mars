@@ -1,41 +1,41 @@
-import * as http from 'http';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as querystring from 'querystring';
-import {AndOptions} from './src/inputs/AndOptions';
-import { CardModel } from './src/models/CardModel';
-import {ColonyModel} from './src/models/ColonyModel';
-import {Color} from './src/Color';
-import { Game, GameOptions } from './src/Game';
-import {ICard} from './src/cards/ICard';
-import {IColony} from './src/colonies/Colony';
-import {IProjectCard} from './src/cards/IProjectCard';
-import {ISpace} from './src/ISpace';
-import {OrOptions} from './src/inputs/OrOptions';
-import {Player} from './src/Player';
-import {PlayerInput} from './src/PlayerInput';
-import {PlayerInputModel} from './src/models/PlayerInputModel';
-import {PlayerInputTypes} from './src/PlayerInputTypes';
-import {PlayerModel} from './src/models/PlayerModel';
-import {SelectAmount} from './src/inputs/SelectAmount';
-import {SelectCard} from './src/inputs/SelectCard';
-import {SelectHowToPay} from './src/inputs/SelectHowToPay';
-import {SelectHowToPayForCard} from './src/inputs/SelectHowToPayForCard';
-import {SelectPlayer} from './src/inputs/SelectPlayer';
-import {SelectSpace} from './src/inputs/SelectSpace';
-import {SpaceModel} from './src/models/SpaceModel';
-import {TileType} from './src/TileType';
-import { Phase } from './src/Phase';
+import * as http from "http";
+import * as fs from "fs";
+import * as path from "path";
+import * as querystring from "querystring";
+import {AndOptions} from "./src/inputs/AndOptions";
+import { CardModel } from "./src/models/CardModel";
+import {ColonyModel} from "./src/models/ColonyModel";
+import {Color} from "./src/Color";
+import { Game, GameOptions } from "./src/Game";
+import {ICard} from "./src/cards/ICard";
+import {IColony} from "./src/colonies/Colony";
+import {IProjectCard} from "./src/cards/IProjectCard";
+import {ISpace} from "./src/ISpace";
+import {OrOptions} from "./src/inputs/OrOptions";
+import {Player} from "./src/Player";
+import {PlayerInput} from "./src/PlayerInput";
+import {PlayerInputModel} from "./src/models/PlayerInputModel";
+import {PlayerInputTypes} from "./src/PlayerInputTypes";
+import {PlayerModel} from "./src/models/PlayerModel";
+import {SelectAmount} from "./src/inputs/SelectAmount";
+import {SelectCard} from "./src/inputs/SelectCard";
+import {SelectHowToPay} from "./src/inputs/SelectHowToPay";
+import {SelectHowToPayForCard} from "./src/inputs/SelectHowToPayForCard";
+import {SelectPlayer} from "./src/inputs/SelectPlayer";
+import {SelectSpace} from "./src/inputs/SelectSpace";
+import {SpaceModel} from "./src/models/SpaceModel";
+import {TileType} from "./src/TileType";
+import { Phase } from "./src/Phase";
 import { Resources } from "./src/Resources";
-import { CardType } from './src/cards/CardType';
+import { CardType } from "./src/cards/CardType";
 import { ClaimedMilestoneModel } from "./src/models/ClaimedMilestoneModel";
 import { FundedAwardModel } from "./src/models/FundedAwardModel";
-import { Database } from './src/database/Database';
-import { PartyModel, DelegatesModel, TurmoilModel } from './src/models/TurmoilModel';
-import { SelectDelegate } from './src/inputs/SelectDelegate';
+import { Database } from "./src/database/Database";
+import { PartyModel, DelegatesModel, TurmoilModel } from "./src/models/TurmoilModel";
+import { SelectDelegate } from "./src/inputs/SelectDelegate";
 
 const serverId = generateRandomServerId();
-const styles = fs.readFileSync('styles.css');
+const styles = fs.readFileSync("styles.css");
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
 
@@ -44,8 +44,8 @@ function requestHandler(
     res: http.ServerResponse
 ): void {
   if (req.url !== undefined) {
-    if (req.method === 'GET') {
-      if (req.url.replace(/\?.*$/, '').startsWith('/games-overview')) {
+    if (req.method === "GET") {
+      if (req.url.replace(/\?.*$/, "").startsWith("/games-overview")) {
         if (!isServerIdValid(req)) {
           notAuthorized(req, res);
           return;
@@ -53,50 +53,50 @@ function requestHandler(
           serveApp(res);
         }
       } else if (
-        req.url === '/' ||
-        req.url.startsWith('/new-game') ||
-        req.url.startsWith('/solo') ||
-        req.url.startsWith('/game?id=') ||
-        req.url.startsWith('/player?id=') ||
-        req.url.startsWith('/the-end?id=') ||
-        req.url.startsWith('/load')
+        req.url === "/" ||
+        req.url.startsWith("/new-game") ||
+        req.url.startsWith("/solo") ||
+        req.url.startsWith("/game?id=") ||
+        req.url.startsWith("/player?id=") ||
+        req.url.startsWith("/the-end?id=") ||
+        req.url.startsWith("/load")
       ) {
         serveApp(res);
-      } else if (req.url.startsWith('/api/player?id=')) {
+      } else if (req.url.startsWith("/api/player?id=")) {
         apiGetPlayer(req, res);
-      } else if (req.url.startsWith('/api/waitingfor?id=')) {
+      } else if (req.url.startsWith("/api/waitingfor?id=")) {
         apiGetWaitingFor(req, res);
       } else if (req.url.startsWith("/assets/translations.json")) {
-        res.setHeader('Content-Type', 'application/json');
+        res.setHeader("Content-Type", "application/json");
         res.write(fs.readFileSync("assets/translations.json"));
         res.end();
-      } else if (req.url === '/styles.css') {
-        res.setHeader('Content-Type', 'text/css');
+      } else if (req.url === "/styles.css") {
+        res.setHeader("Content-Type", "text/css");
         serveResource(res, styles);
       } else if (
-          req.url.startsWith('/assets/') ||
-          req.url === '/favicon.ico' ||
-          req.url === '/main.js'
+          req.url.startsWith("/assets/") ||
+          req.url === "/favicon.ico" ||
+          req.url === "/main.js"
       ) {
         serveAsset(req, res);
-      } else if (req.url.startsWith('/api/games')) {
+      } else if (req.url.startsWith("/api/games")) {
         apiGetGames(req, res);
-      } else if (req.url.indexOf('/api/game') === 0) {
+      } else if (req.url.indexOf("/api/game") === 0) {
         apiGetGame(req, res);
       } else if (req.url.startsWith('/api/clonablegames')) {
         getClonableGames(res);        
       } else {
         notFound(req, res);
       }
-    } else if (req.method === 'PUT' && req.url.indexOf('/game') === 0) {
+    } else if (req.method === "PUT" && req.url.indexOf("/game") === 0) {
       createGame(req, res);
-    } else if (req.method === 'PUT' && req.url.indexOf('/load') === 0) {
+    } else if (req.method === "PUT" && req.url.indexOf("/load") === 0) {
       loadGame(req, res);
     } else if (
-      req.method === 'POST' &&
-      req.url.indexOf('/player/input?id=') === 0
+      req.method === "POST" &&
+      req.url.indexOf("/player/input?id=") === 0
     ) {
-      const playerId: string = req.url.substring('/player/input?id='.length);
+      const playerId: string = req.url.substring("/player/input?id=".length);
       const game = playersToGame.get(playerId);
       if (game === undefined) {
         notFound(req, res);
@@ -132,22 +132,22 @@ function processInput(
     player: Player,
     game: Game
 ): void {
-  let body = '';
-  req.on('data', function(data) {
+  let body = "";
+  req.on("data", function(data) {
     body += data.toString();
   });
-  req.once('end', function() {
+  req.once("end", function() {
     try {
       const entity = JSON.parse(body);
       player.process(game, entity);
-      res.setHeader('Content-Type', 'application/json');
+      res.setHeader("Content-Type", "application/json");
       res.write(getPlayer(player, game));
       res.end();
     } catch (err) {
       res.writeHead(400, {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       });
-      console.warn('Error processing input from player', err);
+      console.warn("Error processing input from player", err);
       res.write(JSON.stringify({
         message: err.message
       }));
@@ -185,18 +185,18 @@ function apiGetGames(req: http.IncomingMessage, res: http.ServerResponse): void 
     answer.push(key);
   }
 
-  res.setHeader('Content-Type', 'application/json');
+  res.setHeader("Content-Type", "application/json");
   res.write(JSON.stringify(answer));
   res.end();
 
 }
 
 function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
-  let body = '';
-  req.on('data', function(data) {
+  let body = "";
+  req.on("data", function(data) {
     body += data.toString();
   });
-  req.once('end', function() {
+  req.once("end", function() {
     try {
       const gameReq = JSON.parse(body);
 
@@ -214,12 +214,12 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
           playersToGame.set(player.id, gameToRebuild);
         });
       });
-      res.setHeader('Content-Type', 'application/json');
+      res.setHeader("Content-Type", "application/json");
       res.write(getGame(gameToRebuild));
     } catch (err) {
-      console.warn('error loading game', err);
+      console.warn("error loading game", err);
       res.writeHead(500);
-      res.write('Unable to load game');
+      res.write("Unable to load game");
     }
     res.end();
   });
@@ -252,13 +252,13 @@ function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
   const routeRegExp: RegExp = /^\/api\/game\?id\=([0-9abcdef]+)$/i;
 
   if (req.url === undefined) {
-    console.warn('url not defined');
+    console.warn("url not defined");
     notFound(req, res);
     return;
   }
 
   if (!routeRegExp.test(req.url)) {
-    console.warn('no match with regexp');
+    console.warn("no match with regexp");
     notFound(req, res);
     return;
   }
@@ -266,7 +266,7 @@ function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
   const matches = req.url.match(routeRegExp);
 
   if (matches === null || matches[1] === undefined) {
-    console.warn('didn\'t find game id');
+    console.warn("didn't find game id");
     notFound(req, res);
     return;
   }
@@ -276,12 +276,12 @@ function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
   const game = games.get(gameId);
 
   if (game === undefined) {
-    console.warn('game is undefined');
+    console.warn("game is undefined");
     notFound(req, res);
     return;
   }
 
-  res.setHeader('Content-Type', 'application/json');
+  res.setHeader("Content-Type", "application/json");
   res.write(getGame(game));
   res.end();
 }
@@ -290,10 +290,10 @@ function apiGetWaitingFor(
   req: http.IncomingMessage,
   res: http.ServerResponse
 ): void {
-  const qs: string = req.url!.substring('/api/waitingfor?'.length);
+  const qs: string = req.url!.substring("/api/waitingfor?".length);
   let queryParams = querystring.parse(qs);
-  const playerId = (queryParams as any)['id'];
-  const prevGameAge = parseInt((queryParams as any)['prev-game-age']);
+  const playerId = (queryParams as any)["id"];
+  const prevGameAge = parseInt((queryParams as any)["prev-game-age"]);
   const game = playersToGame.get(playerId);
   if (game === undefined) {
     notFound(req, res);
@@ -305,7 +305,7 @@ function apiGetWaitingFor(
     return;
   }
 
-  res.setHeader('Content-Type', 'application/json');
+  res.setHeader("Content-Type", "application/json");
   const answer = {
     "result": "WAIT",
     "player": game.activePlayer.name
@@ -323,7 +323,7 @@ function apiGetPlayer(
     req: http.IncomingMessage,
     res: http.ServerResponse
 ): void {
-  const playerId: string = req.url!.substring('/api/player?id='.length);
+  const playerId: string = req.url!.substring("/api/player?id=".length);
   const game = playersToGame.get(playerId);
   if (game === undefined) {
     notFound(req, res);
@@ -335,17 +335,17 @@ function apiGetPlayer(
     return;
   }
 
-  res.setHeader('Content-Type', 'application/json');
+  res.setHeader("Content-Type", "application/json");
   res.write(getPlayer(player, game));
   res.end();
 }
 
 function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
-  let body = '';
-  req.on('data', function(data) {
+  let body = "";
+  req.on("data", function(data) {
     body += data.toString();
   });
-  req.once('end', function() {
+  req.once("end", function() {
     try {
       const gameReq = JSON.parse(body);
       const gameId = generateRandomGameId();
@@ -381,12 +381,12 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       game.getPlayers().forEach((player) => {
         playersToGame.set(player.id, game);
       });
-      res.setHeader('Content-Type', 'application/json');
+      res.setHeader("Content-Type", "application/json");
       res.write(getGame(game));
     } catch (err) {
-      console.warn('error creating game', err);
+      console.warn("error creating game", err);
       res.writeHead(500);
-      res.write('Unable to create game');
+      res.write("Unable to create game");
     }
     res.end();
   });
@@ -791,66 +791,66 @@ function getGame(game: Game): string {
 }
 
 function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {
-  console.warn('Not found', req.method, req.url);
+  console.warn("Not found", req.method, req.url);
   res.writeHead(404);
-  res.write('Not found');
+  res.write("Not found");
   res.end();
 }
 
 function notAuthorized(req: http.IncomingMessage, res: http.ServerResponse): void {
-  console.warn('Not authorized', req.method, req.url);
+  console.warn("Not authorized", req.method, req.url);
   res.writeHead(403);
-  res.write('Not authorized');
+  res.write("Not authorized");
   res.end();
 }
 
 function isServerIdValid (req: http.IncomingMessage): boolean {
-  const queryParams = querystring.parse(req.url!.replace(/^.*\?/, ''));
+  const queryParams = querystring.parse(req.url!.replace(/^.*\?/, ""));
   if (queryParams.serverId === undefined || queryParams.serverId !== serverId) {
-    console.warn('No or invalid serverId given');
+    console.warn("No or invalid serverId given");
     return false;
   }
   return true;
 }
 
 function serveApp(res: http.ServerResponse): void {
-  res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  res.write(fs.readFileSync('index.html'));
+  res.setHeader("Content-Type", "text/html; charset=utf-8");
+  res.write(fs.readFileSync("index.html"));
   res.end();
 }
 
 function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url === undefined) throw new Error("Empty url");
 
-  if (req.url === '/favicon.ico') {
-    res.setHeader('Content-Type', 'image/x-icon');
-    res.write(fs.readFileSync('favicon.ico'));
-  } else if (req.url === '/main.js') {
-    res.setHeader('Content-Type', 'text/javascript');
-    res.write(fs.readFileSync('dist/main.js'));
-  } else if (req.url === '/assets/Prototype.ttf') {
-    res.write(fs.readFileSync('assets/Prototype.ttf'));
-  } else if (req.url === '/assets/futureforces.ttf') {
-    res.write(fs.readFileSync('assets/futureforces.ttf'));
-  } else if (req.url.endsWith('.png')) {
-    const assetsRoot = path.resolve('./assets');
+  if (req.url === "/favicon.ico") {
+    res.setHeader("Content-Type", "image/x-icon");
+    res.write(fs.readFileSync("favicon.ico"));
+  } else if (req.url === "/main.js") {
+    res.setHeader("Content-Type", "text/javascript");
+    res.write(fs.readFileSync("dist/main.js"));
+  } else if (req.url === "/assets/Prototype.ttf") {
+    res.write(fs.readFileSync("assets/Prototype.ttf"));
+  } else if (req.url === "/assets/futureforces.ttf") {
+    res.write(fs.readFileSync("assets/futureforces.ttf"));
+  } else if (req.url.endsWith(".png")) {
+    const assetsRoot = path.resolve("./assets");
     const reqFile = path.resolve(path.normalize(req.url).slice(1));
 
     // Disallow to go outside of assets directory
     if ( ! reqFile.startsWith(assetsRoot) || ! fs.existsSync(reqFile)) {
       return notFound(req, res);
     }
-    res.setHeader('Content-Type', 'image/png');
+    res.setHeader("Content-Type", "image/png");
     res.write(fs.readFileSync(reqFile))
-  } else if (req.url.endsWith('.jpg') ) {
-    const assetsRoot = path.resolve('./assets');
+  } else if (req.url.endsWith(".jpg") ) {
+    const assetsRoot = path.resolve("./assets");
     const reqFile = path.resolve(path.normalize(req.url).slice(1));
 
     // Disallow to go outside of assets directory
     if ( ! reqFile.startsWith(assetsRoot) || ! fs.existsSync(reqFile)) {
       return notFound(req, res);
     }
-    res.setHeader('Content-Type', 'image/jpeg');
+    res.setHeader("Content-Type", "image/jpeg");
     res.write(fs.readFileSync(reqFile))
   }
 
@@ -864,11 +864,11 @@ function serveResource(res: http.ServerResponse, s: Buffer): void {
 
 loadAllGames();
 
-console.log('Starting server on port ' + (process.env.PORT || 8080));
-console.log('version 0.X');
+console.log("Starting server on port " + (process.env.PORT || 8081));
+console.log("version 0.X");
 
-server.listen(process.env.PORT || 8080);
+server.listen(process.env.PORT || 8081);
 
-console.log('\nThe secret serverId for this server is \x1b[1m'+serverId+'\x1b[0m. Use it to access the following administrative routes:\n');
-console.log('* Overview of existing games: /games-overview?serverId='+serverId);
-console.log('* API for game IDs: /api/games?serverId='+serverId+'\n');
+console.log("\nThe secret serverId for this server is \x1b[1m"+serverId+"\x1b[0m. Use it to access the following administrative routes:\n");
+console.log("* Overview of existing games: /games-overview?serverId="+serverId);
+console.log("* API for game IDs: /api/games?serverId="+serverId+"\n");

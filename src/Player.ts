@@ -51,6 +51,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public canUseHeatAsMegaCredits: boolean = false;
     public plantsNeededForGreenery: number = 8;
     public dealtCorporationCards: Array<CorporationCard> = [];
+    public dealtProjectCards: Array<IProjectCard> = [];
+    public dealtPreludeCards: Array<IProjectCard> = [];
     public powerPlantCost: number = 11;
     private titaniumValue: number = 3;
     public steelValue: number = 2;
@@ -351,40 +353,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public hasProtectedHabitats(): boolean {
       return this.cardIsInEffect(CardName.PROTECTED_HABITATS);
     }
-    
-    public removeAnimals(
-        removingPlayer: Player,
-        card: ICard,
-        count: number,
-        game: Game): void {
-      if (removingPlayer !== this && this.hasProtectedHabitats()) {
-        throw new Error("Can not remove animals due to protected habitats");
-      }
-      if (card.name === CardName.PETS) {
-        throw new Error("Animals may not be removed from pets");
-      }
-      if (card.resourceCount === 0) {
-        throw new Error(card.name + " does not have animals to remove");
-      }
-      this.removeResourceFrom(card, count, game, removingPlayer);
-    }
-    
-    public removeMicrobes(
-        removingPlayer: Player,
-        card: ICard,
-        count: number,
-        game: Game): void {
-      if (removingPlayer !== this && this.hasProtectedHabitats()) {
-        throw new Error(
-            "Can not remove microbes due to protected habitats"
-        );
-      }
-      if (this.getResourcesOnCard(card) === 0) {
-        throw new Error(card.name + " does not have microbes to remove");
-      }
-      this.removeResourceFrom(card, count, game, removingPlayer);
-    }
-
+        
     public getResourcesOnCard(card: ICard): number {
       if (card.resourceCount !== undefined) {
         return card.resourceCount;
@@ -480,15 +449,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     public getResourceCount(resource: ResourceType): number {
       let count: number = 0;
-      this.playedCards.forEach((card) => {
-        if (card.resourceType === resource) {
-          count += this.getResourcesOnCard(card);
-        }
+      this.getCardsWithResources().filter(card => card.resourceType === resource).forEach((card) => {
+        count += this.getResourcesOnCard(card);
       });
-
-      if (this.corporationCard !== undefined && this.corporationCard.resourceType !== undefined && this.corporationCard.resourceType === resource) {
-        count += this.getResourcesOnCard(this.corporationCard);
-      }    
       return count;
     }
 
@@ -1803,7 +1766,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private undoTurnOption(game: Game): PlayerInput {
       return new SelectOption("Undo Turn", () => {
         try {
-          Database.getInstance().restoreLastSave(game.id, game.lastSaveId, game);
+          Database.getInstance().restoreGame(game.id, game.lastSaveId, game);
         }
         catch(error){
           console.log(error);
@@ -2247,10 +2210,20 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           this.corporationCard = undefined;
       }
 
-      // Rebuild deal corporation array
+      // Rebuild dealt corporation array
       this.dealtCorporationCards = d.dealtCorporationCards.map((element: CorporationCard)  => {
         return getCorporationCardByName(element.name)!;
       });
+
+      // Rebuild dealt prelude array
+      this.dealtPreludeCards = d.dealtPreludeCards.map((element: IProjectCard)  => {
+        return getProjectCardByName(element.name)!;
+      });
+      
+      // Rebuild dealt cards array
+      this.dealtProjectCards = d.dealtProjectCards.map((element: IProjectCard)  => {
+        return getProjectCardByName(element.name)!;
+      });      
 
       // Rebuild each cards in hand
       this.cardsInHand = d.cardsInHand.map((element: IProjectCard)  => {

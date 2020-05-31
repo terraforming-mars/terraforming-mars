@@ -83,6 +83,8 @@ function requestHandler(
         apiGetGames(req, res);
       } else if (req.url.indexOf('/api/game') === 0) {
         apiGetGame(req, res);
+      } else if (req.url.startsWith('/api/clonablegames')) {
+        getClonableGames(res);        
       } else {
         notFound(req, res);
       }
@@ -154,6 +156,17 @@ function processInput(
   });
 }
 
+function getClonableGames(res: http.ServerResponse): void {
+  Database.getInstance().getClonableGames(function (err, allGames) {
+    if (err) {
+      return;
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.write(JSON.stringify(allGames));
+    res.end();
+  });
+}  
+
 function apiGetGames(req: http.IncomingMessage, res: http.ServerResponse): void {
 
   if (!isServerIdValid(req)) {
@@ -192,7 +205,7 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       const player = new Player("test", Color.BLUE, false);
       const player2 = new Player("test2", Color.RED, false);
       let gameToRebuild = new Game(game_id,[player,player2], player);
-      Database.getInstance().restoreGame(game_id, gameToRebuild, function (err) {
+      Database.getInstance().restoreGameLastSave(game_id, gameToRebuild, function (err) {
         if (err) {
           return;
         }
@@ -213,7 +226,7 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 }
 
 function loadAllGames(): void {
-  Database.getInstance().getAllPendingGames(function (err, allGames) {
+  Database.getInstance().getGames(function (err, allGames) {
     if (err) {
       return;
     }
@@ -221,7 +234,7 @@ function loadAllGames(): void {
       const player = new Player("test", Color.BLUE, false);
       const player2 = new Player("test2", Color.RED, false);
       let gameToRebuild = new Game(game_id,[player,player2], player);
-      Database.getInstance().restoreGame(game_id, gameToRebuild, function (err) {
+      Database.getInstance().restoreGameLastSave(game_id, gameToRebuild, function (err) {
         if (err) {
           return;
         }
@@ -359,7 +372,8 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         solarPhaseOption: gameReq.solarPhaseOption,
         promoCardsOption: gameReq.promoCardsOption,
         startingCorporations: gameReq.startingCorporations,
-        soloTR: gameReq.soloTR
+        soloTR: gameReq.soloTR,
+        clonedGamedId: gameReq.clonedGamedId
       } as GameOptions;
     
       const game = new Game(gameId, players, firstPlayer, gameOptions);

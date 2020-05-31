@@ -23,16 +23,18 @@ export class BusinessNetwork implements IActionCard, IProjectCard {
       player.setProduction(Resources.MEGACREDITS,-1);
       return undefined;
     }
-    public canAct(player: Player): boolean {
-      return player.canAfford(player.cardCost);
+    public canAct(): boolean {
+      return true;
     }
     public action(player: Player, game: Game) {
       const dealtCard = game.dealer.dealCard();
+      const canSelectCard = player.canAfford(player.cardCost);
+
       return new SelectCard(
-        "Select card to keep or none to discard",
+        canSelectCard ? "Select card to keep or none to discard" : "You cannot pay for this card" ,
         [dealtCard],
         (cards: Array<IProjectCard>) => {
-          if (cards.length === 0) {
+          if (cards.length === 0 || !canSelectCard) {
             game.dealer.discard(dealtCard);
             return undefined;
           }
@@ -55,7 +57,7 @@ export class BusinessNetwork implements IActionCard, IProjectCard {
           player.cardsInHand.push(dealtCard);
           player.megaCredits -= player.cardCost;
           return undefined;
-        }, 1, 0
+        }, canSelectCard ? 1 : 0 , 0
       );
     }
 }

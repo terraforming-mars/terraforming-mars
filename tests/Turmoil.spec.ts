@@ -24,7 +24,8 @@ describe("Turmoil", function () {
             solarPhaseOption: false,
             promoCardsOption: false,
             startingCorporations: 2,
-            soloTR: false
+            soloTR: false,
+            clonedGamedId: undefined
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         const turmoil = game.turmoil;
@@ -47,7 +48,8 @@ describe("Turmoil", function () {
             solarPhaseOption: false,
             promoCardsOption: false,
             startingCorporations: 2,
-            soloTR: false
+            soloTR: false,
+            clonedGamedId: undefined
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         let turmoil = game.turmoil;
@@ -76,7 +78,8 @@ describe("Turmoil", function () {
             solarPhaseOption: false,
             promoCardsOption: false,
             startingCorporations: 2,
-            soloTR: false
+            soloTR: false,
+            clonedGamedId: undefined
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         let turmoil = game.turmoil;
@@ -115,7 +118,8 @@ describe("Turmoil", function () {
             solarPhaseOption: false,
             promoCardsOption: false,
             startingCorporations: 2,
-            soloTR: false
+            soloTR: false,
+            clonedGamedId: undefined
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         let turmoil = game.turmoil;
@@ -141,7 +145,8 @@ describe("Turmoil", function () {
             solarPhaseOption: false,
             promoCardsOption: false,
             startingCorporations: 2,
-            soloTR: false
+            soloTR: false,
+            clonedGamedId: undefined
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         let turmoil = game.turmoil;
@@ -175,7 +180,8 @@ describe("Turmoil", function () {
             solarPhaseOption: false,
             promoCardsOption: false,
             startingCorporations: 2,
-            soloTR: false
+            soloTR: false,
+            clonedGamedId: undefined
           } as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);
         if (game.turmoil) {

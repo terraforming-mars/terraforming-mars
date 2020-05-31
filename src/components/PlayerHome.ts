@@ -95,7 +95,7 @@ export const PlayerHome = Vue.component("player-home", {
 
                     <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature" v-trim-whitespace></global-parameters>
                     
-                    <turmoil :turmoil="player.turmoil"></turmoil>
+                    <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
 
                     <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
                         <milestone :milestones_list="player.milestones" />

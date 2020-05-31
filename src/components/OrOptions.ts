@@ -10,7 +10,7 @@ export const OrOptions = Vue.component("or-options", {
     data: function () {
         return {
             childComponents: [],
-            selectedOption: 0
+            selectedOption: -1
         };
     },
     methods: {
@@ -30,7 +30,7 @@ export const OrOptions = Vue.component("or-options", {
         this.$data.childComponents = [];
         const children: Array<VNode> = [];
         if (this.showtitle) {
-            children.push(createElement('label', [createElement("div", $t(this.playerinput.title))]))
+            children.push(createElement("label", [createElement("div", $t(this.playerinput.title))]))
         }
         const optionElements: Array<VNode> = [];
         this.playerinput.options.forEach((option: any, idx: number) => {

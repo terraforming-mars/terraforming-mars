@@ -49,11 +49,11 @@ export const WaitingFor = Vue.component("waiting-for", {
                         if (result["result"] === "GO") {
                             (vueApp as any).$root.updatePlayer();
 
-                            if (Notification.permission !== 'granted') {
+                            if (Notification.permission !== "granted") {
                                 Notification.requestPermission();
                             }
                             if (Notification.permission === "granted") {
-                                new Notification('Terraforming Mars Online', {
+                                new Notification("Terraforming Mars Online", {
                                     icon: "/favicon.ico",
                                     body: "It's your turn!",
                                 });
@@ -93,11 +93,11 @@ export const WaitingFor = Vue.component("waiting-for", {
                     root.player = xhr.response;
                     root.playerkey++;
                     root.screen = "player-home";
-                    if (root.player.phase == "end" && window.location.pathname !== "/the-end") {
+                    if (root.player.phase === "end" && window.location.pathname !== "/the-end") {
                         (window as any).location = (window as any).location;
                     }
 
-                } else if (xhr.status === 400 && xhr.responseType === 'json') {
+                } else if (xhr.status === 400 && xhr.responseType === "json") {
                     const element: HTMLElement | null = document.getElementById("dialog-default");
                     const message: HTMLElement | null = document.getElementById("dialog-default-message");
                     if (message !== null && element !== null && (element as HTMLDialogElement).showModal !== undefined) {

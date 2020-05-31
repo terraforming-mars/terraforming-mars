@@ -2216,14 +2216,18 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       });
 
       // Rebuild dealt prelude array
-      this.dealtPreludeCards = d.dealtPreludeCards.map((element: IProjectCard)  => {
-        return getProjectCardByName(element.name)!;
-      });
+      if(d.dealtPreludeCards !== undefined ){
+        this.dealtPreludeCards = d.dealtPreludeCards.map((element: IProjectCard)  => {
+          return getProjectCardByName(element.name)!;
+        });
+      } 
       
       // Rebuild dealt cards array
-      this.dealtProjectCards = d.dealtProjectCards.map((element: IProjectCard)  => {
-        return getProjectCardByName(element.name)!;
-      });      
+      if(d.dealtProjectCards !== undefined ){
+        this.dealtProjectCards = d.dealtProjectCards.map((element: IProjectCard)  => {
+          return getProjectCardByName(element.name)!;
+        });     
+      } 
 
       // Rebuild each cards in hand
       this.cardsInHand = d.cardsInHand.map((element: IProjectCard)  => {

@@ -225,9 +225,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       for (const player of players) {
         if (!player.beginner) {
           // Failsafe for exceding corporation pool - Minimum is 12
-          // Minimum increase to 25 by ChainLee
-          if (this.startingCorporations * this.players.length > 25) {
-            this.startingCorporations = 5;
+          // change minimum to corporationCards.length , not 12 
+          if (this.startingCorporations * this.players.length > corporationCards.length) {
+            this.startingCorporations = 2;
           }
           for (let i = 0; i < this.startingCorporations; i++) {
             const corpCard : CorporationCard | undefined = corporationCards.pop();
@@ -579,8 +579,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private pickCorporationCard(player: Player): PlayerInput {
       let corporation: CorporationCard;
       const result: AndOptions = new AndOptions(() => { this.playCorporationCard(player, corporation); return undefined; });
-        // draw 100 card for debug by ChainLee
-        // for (let i = 0; i < this.dealer.deck.length; i++) {
 
       result.title = " ";
       result.options.push(

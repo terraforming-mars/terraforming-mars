@@ -11,11 +11,11 @@ import { WaitingFor } from "./WaitingFor";
 import { GlobalParameters } from "./GlobalParameters"
 import { Preferences } from "./Preferences"
 import { PlayerModel } from "../models/PlayerModel";
-import { Colony } from './Colony';
-import { LogPanel } from './LogPanel';
-import { PlayerMixin } from './PlayerMixin';
-import { TagCount } from './TagCount';
-import { Turmoil } from './Turmoil';
+import { Colony } from "./Colony";
+import { LogPanel } from "./LogPanel";
+import { PlayerMixin } from "./PlayerMixin";
+import { TagCount } from "./TagCount";
+import { Turmoil } from "./Turmoil";
 
 
 const dialogPolyfill = require("dialog-polyfill");
@@ -190,7 +190,9 @@ export const PlayerHome = Vue.component("player-home", {
                     <milestone :milestones_list="player.milestones" />
                     <award :awards_list="player.awards" />
                 </div>
-
+                <div>
+                    <turmoil :turmoil="player.turmoil"></turmoil>
+                </div>
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
                     <h2 :class="'player_color_'+ player.color">
                         <span v-i18n>Turn order</span>

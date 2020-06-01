@@ -4,6 +4,9 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CardName } from '../../CardName';
+import { LogMessageType } from "../../LogMessageType";
+import { LogMessageData } from "../../LogMessageData";
+import { LogMessageDataType } from "../../LogMessageDataType";
 
 export class Inventrix implements CorporationCard {
     public name: CardName = CardName.INVENTRIX;
@@ -15,7 +18,13 @@ export class Inventrix implements CorporationCard {
             game.dealer.dealCard(),
             game.dealer.dealCard()
         );
-        game.logCorpFirstAction(player);
+        
+        game.log(
+            LogMessageType.DEFAULT,
+            "${0} drew 3 cards",
+            new LogMessageData(LogMessageDataType.PLAYER, player.id)
+        );
+        
         return undefined;
     }
     public getRequirementBonus(_player: Player, _game: Game): number {

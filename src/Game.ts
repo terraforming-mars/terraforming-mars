@@ -54,7 +54,6 @@ import { CardName } from "./CardName";
 import { Turmoil } from "./turmoil/Turmoil";
 import { PartyName } from "./turmoil/parties/PartyName";
 import { IParty } from "./turmoil/parties/IParty";
-import { ColonyName } from "./colonies/ColonyName"
 
 export interface GameOptions {
   draftVariant: boolean;
@@ -1354,76 +1353,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public hasCardsWithResource(resource: ResourceType, requiredQuantity: number = 1) {
       return this.dealer.deck.filter((card) => card.resourceType === resource).length >= requiredQuantity;
-    }
-    
-    public logCorpFirstAction(player: Player, colonyName?: ColonyName) {
-      if (player.corporationCard !== undefined) {
-        let message = "", drawnCards = undefined;
-        const corpName = player.corporationCard.name;
-
-        if (corpName === CardName.CELESTIC) {
-          drawnCards = this.getCardsInHandByResource(player, ResourceType.FLOATER).slice(-2);
-
-          this.log(
-            LogMessageType.DEFAULT,
-            "${0} drew ${1} and ${2}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.CARD, drawnCards[0].name),
-            new LogMessageData(LogMessageDataType.CARD, drawnCards[1].name)
-          );
-        } else if (corpName === CardName.MORNING_STAR_INC) {
-          drawnCards = this.getCardsInHandByTag(player, Tags.VENUS).slice(-3);
-
-          this.log(
-            LogMessageType.DEFAULT,
-            "${0} drew ${1}, ${2} and ${3}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.CARD, drawnCards[0].name),
-            new LogMessageData(LogMessageDataType.CARD, drawnCards[1].name),
-            new LogMessageData(LogMessageDataType.CARD, drawnCards[2].name)
-          );
-        } else if (corpName === CardName.SPLICE) {
-          drawnCards = this.getCardsInHandByTag(player, Tags.MICROBES).slice(-1);
-
-          this.log(
-            LogMessageType.DEFAULT,
-            "${0} drew ${1}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.CARD, drawnCards[0].name)
-          );
-        } else {
-          switch (corpName) {
-            case CardName.INVENTRIX:
-              message = "drew 3 cards"
-              break;
-
-            case CardName.THARSIS_REPUBLIC:
-              message = "placed a City tile"
-              break;
-
-            case CardName.ARIDOR:
-              message = "added a new Colony tile: " + colonyName
-              break;
-
-            case CardName.PHILARES:
-              message = "placed a Greenery tile"
-              break;
-
-            case CardName.ARCADIAN_COMMUNITIES:
-              message = "placed a Community (player marker)"
-              break;
-
-            default:
-              break;
-          }
-  
-          this.log(
-            LogMessageType.DEFAULT,
-            "${0} " + message,
-            new LogMessageData(LogMessageDataType.PLAYER, player.id)
-          );
-        }
-      }
     }
 
     private setupSolo() {

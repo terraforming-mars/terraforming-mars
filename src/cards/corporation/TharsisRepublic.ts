@@ -9,6 +9,9 @@ import { ISpace } from "../../ISpace";
 import { TileType } from "../../TileType";
 import { Resources } from '../../Resources';
 import { CardName } from '../../CardName';
+import { LogMessageType } from "../../LogMessageType";
+import { LogMessageData } from "../../LogMessageData";
+import { LogMessageDataType } from "../../LogMessageDataType";
 
 export class TharsisRepublic implements CorporationCard {
     public name: CardName = CardName.THARSIS_REPUBLIC;
@@ -17,7 +20,13 @@ export class TharsisRepublic implements CorporationCard {
     public initialAction(player: Player, game: Game) {
         return new SelectSpace("Select space on mars for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
-            game.logCorpFirstAction(player);
+            
+            game.log(
+                LogMessageType.DEFAULT,
+                "${0} placed a City tile",
+                new LogMessageData(LogMessageDataType.PLAYER, player.id)
+            );
+            
             return undefined;
         });
     }

@@ -1306,6 +1306,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
           result.push(projectCard);
         } else {
           this.dealer.discard(projectCard);
+          this.log(
+            LogMessageType.DEFAULT,
+           "${0} was discarded",
+           new LogMessageData(LogMessageDataType.CARD, projectCard.name)
+          );
         }
       }
       return result;
@@ -1321,6 +1326,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
           result.push(projectCard);
         } else {
           this.dealer.discard(projectCard);
+          this.log(
+            LogMessageType.DEFAULT,
+           "${0} was discarded",
+           new LogMessageData(LogMessageDataType.CARD, projectCard.name)
+          );
         }
       }
       return result;

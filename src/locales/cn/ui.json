@@ -16,8 +16,8 @@
     "Black": "黑色",
 
     "original": "基础版图",
-    "hellas": "希腊版图",
-    "elysium": "极乐世界版图",
+    "hellas": "hellas版图",
+    "elysium": "elysium版图",
     "random": "随机地图",
 
     "Prelude": "前序",
@@ -50,7 +50,7 @@
     "Having at least 16 cards in your hand when you claim this milestone": "拥有16张手牌",
     "Polar Explorer": "极地探险",
     "Requires that you have 3 tiles on the two bottom rows": "底图最下方的两行上拥有至少3个版块",
-    "Rim Settler": "RIM定居者",
+    "Rim Settler": "木星定居者",
     "Requires that you have 3 jovian tags": "拥有3个木星标记",
     "Specialist": "专家",
     "Requires that you have at least 10 in production of any resource": "拥有至少10个卡上的资源",
@@ -92,7 +92,7 @@
     "Most tiles adjacent to ocean tiles": "拥有最多紧邻海洋的版块",
     "Benefactor": "主力军",
     "Highest terraform rating": "拥有最高的TR值",
-    "Venuphile": "Венерианец",
+    "Venuphile": "金星族群",
     "Having the most Venus tags in play": "拥有最多金星标记",
 
     "Actions": "可执行行动",
@@ -137,5 +137,7 @@
     "City": "城市",
 
     "Pay 9 MC": "支付 9 MC",
-    "Trade with a colony": "与殖民星球贸易"
+    "Pay 3 Energy":"支付 3 电力资源",
+    "Trade with a colony": "与殖民星球贸易",
+    "(Enceladus - (Microbes)":"(Enceladus - (微生物)"
 }

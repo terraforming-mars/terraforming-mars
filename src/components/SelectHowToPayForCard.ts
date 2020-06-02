@@ -45,6 +45,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             app.setDefaultMicrobesValue();
             app.setDefaultFloatersValue();
             app.setDefaultHeatValue();
+            app.setDefaultSteelValue();
         });
     },
     methods: {
@@ -58,7 +59,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             return this.player.selfReplicatingRobotsCardCost;
         },
         setDefaultMicrobesValue: function() {
-            // automatically use microbes to pay for card if not enough MC
+            // automatically use available microbes to pay if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseMicrobes()) {
                 let requiredMicrobes = Math.ceil((this.$data.cost - this.player.megaCredits) / 2);
 
@@ -74,7 +75,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             }
         },
         setDefaultFloatersValue: function() {
-            // automatically use floaters to pay for card if not enough MC
+            // automatically use available floaters to pay if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseFloaters()) {
                 let requiredFloaters = Math.ceil((this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2)) / 3)
 
@@ -90,17 +91,31 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             }
         },
         setDefaultHeatValue: function() {
-            // automatically use heat for Helion if not enough MC
+            // automatically use available heat for Helion if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseHeat()) {
-                let requiredHeatAmt = Math.max(this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3), 0);
+                let requiredHeat = Math.max(this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3), 0);
                 
-                if (requiredHeatAmt > this.player.heat) {
+                if (requiredHeat > this.player.heat) {
                     this.$data.heat = this.player.heat;
                 } else {
-                    this.$data.heat = requiredHeatAmt;
+                    this.$data.heat = requiredHeat;
                 }
             } else {
                 this.$data.heat = 0;
+            }
+        },
+        setDefaultSteelValue: function() {
+            // automatically use available steel to pay if not enough MC
+            if (!this.canAffordWithMcOnly() && this.canUseSteel()) {
+                let requiredSteelQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3) - this.$data.heat, 0) / this.player.steelValue);
+                
+                if (requiredSteelQty > this.player.steel) {
+                    this.$data.steel = this.player.steel;
+                } else {
+                    this.$data.steel = requiredSteelQty;
+                }
+            } else {
+                this.$data.steel = 0;
             }
         },
         canAffordWithMcOnly: function() {
@@ -163,6 +178,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             this.setDefaultMicrobesValue();
             this.setDefaultFloatersValue();
             this.setDefaultHeatValue();
+            this.setDefaultSteelValue();
         },
         hasWarning: function () {
             return this.$data.warning !== undefined;

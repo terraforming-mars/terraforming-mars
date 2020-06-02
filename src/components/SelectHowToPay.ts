@@ -35,6 +35,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
         app.$data.megaCredits = (app as any).getMegaCreditsMax();
 
         app.setDefaultHeatValue();
+        app.setDefaultSteelValue();
       });
     },
     methods: {
@@ -42,19 +43,38 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
             return this.$data.warning !== undefined;
         },
         setDefaultHeatValue: function() {
-          // automatically use heat for Helion if not enough MC
+          // automatically use available heat for Helion if not enough MC
           if (!this.canAffordWithMcOnly() && this.canUseHeat()) {
               this.$data.heat =  this.$data.cost - this.player.megaCredits;
           } else {
               this.$data.heat = 0;
           }
         },
+        setDefaultSteelValue: function() {
+          // automatically use available steel to pay if not enough MC
+          if (!this.canAffordWithMcOnly() && this.canUseSteel()) {
+              let requiredSteelQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits - this.$data.heat, 0) / this.player.steelValue);
+              
+              if (requiredSteelQty > this.player.steel) {
+                  this.$data.steel = this.player.steel;
+              } else {
+                  this.$data.steel = requiredSteelQty;
+              }
+              
+              this.$data.megaCredits = Math.max(this.$data.cost - (this.$data.steel * this.player.steelValue), 0);
+          } else {
+              this.$data.steel = 0;
+          }
+      },
         canAffordWithMcOnly: function() {
           return this.player.megaCredits >= this.$data.cost;
         },
         canUseHeat: function () {
           return this.playerinput.canUseHeat && this.player.heat > 0;
         },
+        canUseSteel: function () {
+          return this.playerinput.canUseSteel && this.player.steel > 0;
+        }, 
         saveData: function () {
             const htp: HowToPay = {
                 heat: this.$data.heat,

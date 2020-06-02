@@ -51,6 +51,13 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
               if (requiredSteelQty > this.player.steel) {
                   this.$data.steel = this.player.steel;
               } else {
+                  // use as much steel as possible without overpaying by default
+                  let currentSteelValue = requiredSteelQty * this.player.steelValue;
+                  while (currentSteelValue <= this.$data.cost - this.player.steelValue && requiredSteelQty < this.player.steel) {
+                      requiredSteelQty++;
+                      currentSteelValue = requiredSteelQty * this.player.steelValue;
+                  }
+
                   this.$data.steel = requiredSteelQty;
               }
               
@@ -68,6 +75,13 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
               if (requiredTitaniumQty > this.player.titanium) {
                   this.$data.titanium = this.player.titanium;
               } else {
+                  // use as much titanium as possible without overpaying by default
+                  let currentTitaniumValue = requiredTitaniumQty * this.player.titaniumValue;
+                  while (currentTitaniumValue <= this.$data.cost - this.player.titaniumValue && requiredTitaniumQty < this.player.titanium) {
+                      requiredTitaniumQty++;
+                      currentTitaniumValue = requiredTitaniumQty * this.player.titaniumValue;
+                  }
+
                   this.$data.titanium = requiredTitaniumQty;
               }
               

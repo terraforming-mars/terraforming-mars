@@ -62,7 +62,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultMicrobesValue: function() {
             // automatically use available microbes to pay if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseMicrobes()) {
-                let requiredMicrobes = Math.ceil((this.$data.cost - this.player.megaCredits) / 2);
+                let remainingCostToPay = this.$data.cost - this.player.megaCredits;
+                let requiredMicrobes = Math.ceil(remainingCostToPay / 2);
 
                 if (requiredMicrobes > this.playerinput.microbes) {
                     this.$data.microbes = this.playerinput.microbes;
@@ -79,7 +80,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultFloatersValue: function() {
             // automatically use available floaters to pay if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseFloaters()) {
-                let requiredFloaters = Math.ceil((this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2)) / 3)
+                let remainingCostToPay = this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2);
+                let requiredFloaters = Math.ceil(Math.max(remainingCostToPay, 0) / 3)
 
                 if (requiredFloaters > this.playerinput.floaters) {
                     this.$data.floaters = this.playerinput.floaters;
@@ -96,7 +98,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultSteelValue: function() {
             // automatically use available steel to pay if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseSteel()) {
-                let requiredSteelQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3), 0) / this.player.steelValue);
+                let remainingCostToPay = this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3);
+                let requiredSteelQty = Math.ceil(Math.max(remainingCostToPay, 0) / this.player.steelValue);
                 
                 if (requiredSteelQty > this.player.steel) {
                     this.$data.steel = this.player.steel;
@@ -113,7 +116,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultTitaniumValue: function() {
             // automatically use available titanium to pay if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseTitanium()) {
-                let requiredTitaniumQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3) - (this.$data.steel * this.player.steelValue), 0) / this.player.titaniumValue);
+                let remainingCostToPay = this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3) - (this.$data.steel * this.player.steelValue);
+                let requiredTitaniumQty = Math.ceil(Math.max(remainingCostToPay, 0) / this.player.titaniumValue);
                 
                 if (requiredTitaniumQty > this.player.titanium) {
                     this.$data.titanium = this.player.titanium;
@@ -130,7 +134,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultHeatValue: function() {
             // automatically use available heat for Helion if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseHeat()) {
-                let requiredHeat = Math.max(this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3) - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue), 0);
+                let remainingCostToPay = this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3) - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue);
+                let requiredHeat = Math.max(remainingCostToPay, 0);
                 
                 if (requiredHeat > this.player.heat) {
                     this.$data.heat = this.player.heat;

@@ -1,6 +1,6 @@
 import { IDatabase } from "./IDatabase";
 import {Game} from "../Game";
-import { IGameData } from './IDatabase';
+import { IGameData } from "./IDatabase";
 
 import sqlite3 = require("sqlite3");
 const path = require("path");
@@ -17,7 +17,7 @@ export class SQLite implements IDatabase {
             fs.mkdirSync(dbFolder);
         }
         this.db = new sqlite3.Database(dbPath);
-        this.db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, status text default 'running', PRIMARY KEY (game_id, save_id))");
+        this.db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, status text default 'running',createtime timestamp default current_timestamp, PRIMARY KEY (game_id, save_id))");
         this.db.run("ALTER TABLE games ADD COLUMN status TEXT default 'finished'", function(err: { message: any; }) {
         if (err) {
             // Should be duplicate column error
@@ -45,7 +45,7 @@ export class SQLite implements IDatabase {
 
     getGames(cb:(err: any, allGames:Array<string>)=> void) {
         var allGames:Array<string> = [];
-        var sql: string = "SELECT distinct game_id game_id FROM games WHERE status = 'running' and save_id > 0"; 
+        var sql: string = "SELECT distinct game_id game_id FROM games "; 
         this.db.all(sql, [], (err, rows) => {
             if (rows) {
                 rows.forEach((row) => {
@@ -74,7 +74,7 @@ export class SQLite implements IDatabase {
 
     restoreGameLastSave(game_id:string, game: Game, cb:(err: any) => void) {
         // Retrieve last save from database
-        this.db.get("SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1", [game_id],(err: { message: any; }, row: { game: any; }) => {
+        this.db.get("SELECT game game ,createtime createtime  FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1", [game_id],(err: { message: any; }, row: { game: any, createtime: any; }) => {
             if (err) {
                 return cb(err);
             }
@@ -83,7 +83,7 @@ export class SQLite implements IDatabase {
 
             // Rebuild each objects
             game.loadFromJSON(gameToRestore);
-
+            game.updatetime = row.createtime;
             return cb(err);
         });
     }

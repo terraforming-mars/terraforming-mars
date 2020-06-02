@@ -76,14 +76,14 @@ function requestHandler(
       } else if (
           req.url.startsWith("/assets/") ||
           req.url === "/favicon.ico" ||
-          req.url === "/main.js"
+          req.url.startsWith("/main.js")
       ) {
         serveAsset(req, res);
       } else if (req.url.startsWith("/api/games")) {
         apiGetGames(req, res);
       } else if (req.url.indexOf("/api/game") === 0) {
         apiGetGame(req, res);
-      } else if (req.url.startsWith('/api/clonablegames')) {
+      } else if (req.url.startsWith("/api/clonablegames")) {
         getClonableGames(res);        
       } else {
         notFound(req, res);
@@ -161,7 +161,7 @@ function getClonableGames(res: http.ServerResponse): void {
     if (err) {
       return;
     }
-    res.setHeader('Content-Type', 'application/json');
+    res.setHeader("Content-Type", "application/json");
     res.write(JSON.stringify(allGames));
     res.end();
   });
@@ -664,7 +664,7 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
 
     const reserve = game.turmoil.getPresentPlayers().map(player => {
       const number = game.turmoil!.getDelegates(player);
-      if (player != "NEUTRAL") {
+      if (player !== "NEUTRAL") {
         return {color: player.color, number: number};
       }
       else {
@@ -726,7 +726,7 @@ function getParties(game: Game): Array<PartyModel> | undefined{
       let delegates = new Array<DelegatesModel>();
       party.getPresentPlayers().forEach(player => {
         const number = party.getDelegates(player);
-        if (player != "NEUTRAL") {
+        if (player !== "NEUTRAL") {
           delegates.push({color: player.color, number: number});
         }
         else {
@@ -785,7 +785,9 @@ function getGame(game: Game): string {
     activePlayer: game.activePlayer.color,
     id: game.id,
     phase: game.phase,
-    players: game.getPlayers()
+    players: game.getPlayers(),
+    createtime: game.createtime,
+    updatetime: game.updatetime?.slice(5,19)
   };
   return JSON.stringify(output);
 }
@@ -825,7 +827,7 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url === "/favicon.ico") {
     res.setHeader("Content-Type", "image/x-icon");
     res.write(fs.readFileSync("favicon.ico"));
-  } else if (req.url === "/main.js") {
+  } else if (req.url.startsWith("/main.js")) {
     res.setHeader("Content-Type", "text/javascript");
     res.write(fs.readFileSync("dist/main.js"));
   } else if (req.url === "/assets/Prototype.ttf") {

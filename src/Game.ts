@@ -112,6 +112,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private startingCorporations: number;
     public soloTR: boolean;
     private clonedGamedId: string | undefined;
+    public createtime :string = new Date().toISOString().slice(5,19);
+    public updatetime :string | undefined;
+    private static stringifyPlayers : Map<Player, boolean> = new Map ();
 
     constructor(
       public id: string,
@@ -254,6 +257,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       // Save initial game state
+      Game.stringifyPlayers.clear();
       Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
 
       this.log(
@@ -959,6 +963,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Save the game state after changing the current player
       // Increment the save id
       this.lastSaveId += 1;
+      Game.stringifyPlayers.clear();
       Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
 
       player.takeAction(this);
@@ -1366,6 +1371,16 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (key === "interrupts"){
         return [];
       }
+      else if(value instanceof Player ){
+        if(Game.stringifyPlayers.get(value) ){
+          return  {id: value.id};
+        }else{
+          Game.stringifyPlayers.set(value,true);
+          return value;
+        }
+      }
+
+      // TODO cards
       else if (value instanceof Set) {
         return Array.from(value);
       }
@@ -1407,6 +1422,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           let tileType = element.tile.tileType;
           let tileCard = element.tile.card;
           if (element.player){
+            //TODO  canot load  neutralPlayer  for  solo
             const player = this.players.find((player) => player.id === element.player!.id);
             space.player = player;
           }
@@ -1513,6 +1529,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
               }
             }
           });
+
+          if(this.turmoil &&  this.turmoil.dominantParty?.name === party?.name){
+            this.turmoil.dominantParty = party;
+          }
         });
       }
 

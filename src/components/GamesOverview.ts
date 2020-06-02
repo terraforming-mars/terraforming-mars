@@ -5,12 +5,12 @@ import {Phase} from "../Phase";
 export const GamesOverview = Vue.component("games-overview", {
     data: function () {
         return {
-            serverId: '',
+            serverId: "",
             games: {}
         }
     },
     mounted: function() {
-        this.serverId = (new URL(location.href)).searchParams.get('serverId') || '';
+        this.serverId = (new URL(location.href)).searchParams.get("serverId") || "";
         this.getGames();
     },
     methods: {
@@ -72,6 +72,7 @@ export const GamesOverview = Vue.component("games-overview", {
             <ul>
                 <li v-for="game in games">
                     <a v-bind:href="'/game?id='+game.id">{{game.id}}</a> 
+                    <span>{{game.createtime}}  {{game.updatetime}}  </span>
                     with {{game.players.length}} player(s) : 
                     <span class="player_home_block nofloat" >
                         <span v-for="player in game.players" class="player_name" :class="'player_bg_color_'+ player.color">

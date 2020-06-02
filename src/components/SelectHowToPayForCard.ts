@@ -60,7 +60,14 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultMicrobesValue: function() {
             // automatically use microbes to pay for card if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseMicrobes()) {
-                this.$data.microbes = Math.ceil((this.$data.cost - this.player.megaCredits) / 2);
+                let requiredMicrobes = Math.ceil((this.$data.cost - this.player.megaCredits) / 2);
+
+                if (requiredMicrobes > this.playerinput.microbes) {
+                    this.$data.microbes = this.playerinput.microbes;
+                } else {
+                    this.$data.microbes = requiredMicrobes;
+                }
+
                 this.$data.megaCredits = Math.max(this.$data.cost - (this.$data.microbes * 2), 0);
             } else {
                 this.$data.microbes = 0;
@@ -69,7 +76,14 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultFloatersValue: function() {
             // automatically use floaters to pay for card if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseFloaters()) {
-                this.$data.floaters = Math.ceil((this.$data.cost - this.player.megaCredits) / 3);
+                let requiredFloaters = Math.ceil((this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2)) / 3)
+
+                if (requiredFloaters > this.playerinput.floaters) {
+                    this.$data.floaters = this.playerinput.floaters;
+                } else {
+                    this.$data.floaters = requiredFloaters;
+                }
+
                 this.$data.megaCredits = Math.max(this.$data.cost - (this.$data.microbes * 2) - (this.$data.floaters * 3), 0);
             } else {
                 this.$data.floaters = 0;

@@ -43,6 +43,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             app.$data.megaCredits = (app as any).getMegaCreditsMax();
 
             app.setDefaultMicrobesValue();
+            app.setDefaultFloatersValue();
             app.setDefaultHeatValue();
         });
     },
@@ -60,15 +61,30 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             // automatically use microbes to pay for card if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseMicrobes()) {
                 this.$data.microbes = Math.ceil((this.$data.cost - this.player.megaCredits) / 2);
-                this.$data.megaCredits = this.$data.cost - (this.$data.microbes * 2);
+                this.$data.megaCredits = Math.max(this.$data.cost - (this.$data.microbes * 2), 0);
             } else {
                 this.$data.microbes = 0;
+            }
+        },
+        setDefaultFloatersValue: function() {
+            // automatically use floaters to pay for card if not enough MC
+            if (!this.canAffordWithMcOnly() && this.canUseFloaters()) {
+                this.$data.floaters = Math.ceil((this.$data.cost - this.player.megaCredits) / 3);
+                this.$data.megaCredits = Math.max(this.$data.cost - (this.$data.microbes * 2) - (this.$data.floaters * 3), 0);
+            } else {
+                this.$data.floaters = 0;
             }
         },
         setDefaultHeatValue: function() {
             // automatically use heat for Helion if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseHeat()) {
-                this.$data.heat =  this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2);
+                let requiredHeatAmt = Math.max(this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3), 0);
+                
+                if (requiredHeatAmt > this.player.heat) {
+                    this.$data.heat = this.player.heat;
+                } else {
+                    this.$data.heat = requiredHeatAmt;
+                }
             } else {
                 this.$data.heat = 0;
             }
@@ -129,9 +145,9 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
 
             this.titanium = 0;
             this.steel = 0;
-            this.floaters = 0;
 
             this.setDefaultMicrobesValue();
+            this.setDefaultFloatersValue();
             this.setDefaultHeatValue();
         },
         hasWarning: function () {

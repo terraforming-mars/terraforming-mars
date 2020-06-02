@@ -153,5 +153,7 @@
 
     "Select corporation": "Выбрать корпорацию",
     "Select initial cards to buy": "Выбрать стартовые карты для покупки",
-    "Send players their links below. As game administrator pick your link to use.": "Отправьте каждому из игроков соответствующую ссылку ниже."
+    "Send players their links below. As game administrator pick your link to use.": "Отправьте каждому из игроков соответствующую ссылку ниже.",
+    "Allow undo": "Разрешить отмену хода",
+    "Drafted Cards": "Отложенные на драфте карты"
 }

@@ -41,6 +41,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         Vue.nextTick(function () {
             app.$data.cost = app.getCardCost();
             app.$data.megaCredits = (app as any).getMegaCreditsMax();
+
+            app.setDefaultHeatValue();
         });
     },
     methods: {
@@ -52,6 +54,14 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             }
             // If not found, it should be self replication robot stored card
             return this.player.selfReplicatingRobotsCardCost;
+        },
+        setDefaultHeatValue: function() {
+            // automatically use heat for Helion if not enough MC
+            if (this.$data.cost > this.player.megaCredits && this.canUseHeat()) {
+                this.$data.heat =  this.$data.cost - this.player.megaCredits;
+            } else {
+                this.$data.heat = 0;
+            }
         },
         canUseHeat: function () {
             return this.playerinput.canUseHeat && this.player.heat > 0;
@@ -106,9 +116,10 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
 
             this.titanium = 0;
             this.steel = 0;
-            this.heat = 0;
             this.microbes = 0;
             this.floaters = 0;
+
+            this.setDefaultHeatValue();
         },
         hasWarning: function () {
             return this.$data.warning !== undefined;

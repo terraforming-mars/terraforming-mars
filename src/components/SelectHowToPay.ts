@@ -33,11 +33,24 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
       Vue.nextTick(function () {
         app.$data.cost = app.playerinput.amount;
         app.$data.megaCredits = (app as any).getMegaCreditsMax();
+
+        app.setDefaultHeatValue();
       });
     },
     methods: {
         hasWarning: function () {
             return this.$data.warning !== undefined;
+        },
+        setDefaultHeatValue: function() {
+          // automatically use heat for Helion if not enough MC
+          if (this.$data.cost > this.player.megaCredits && this.canUseHeat()) {
+              this.$data.heat =  this.$data.cost - this.player.megaCredits;
+          } else {
+              this.$data.heat = 0;
+          }
+        },
+        canUseHeat: function () {
+          return this.playerinput.canUseHeat && this.player.heat > 0;
         },
         saveData: function () {
             const htp: HowToPay = {

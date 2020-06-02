@@ -36,6 +36,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
 
         app.setDefaultHeatValue();
         app.setDefaultSteelValue();
+        app.setDefaultTitaniumValue();
       });
     },
     methods: {
@@ -49,6 +50,8 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
           } else {
               this.$data.heat = 0;
           }
+
+          this.$data.megaCredits = Math.max(this.$data.cost - this.$data.heat, 0);
         },
         setDefaultSteelValue: function() {
           // automatically use available steel to pay if not enough MC
@@ -61,11 +64,27 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                   this.$data.steel = requiredSteelQty;
               }
               
-              this.$data.megaCredits = Math.max(this.$data.cost - (this.$data.steel * this.player.steelValue), 0);
+              this.$data.megaCredits = Math.max(this.$data.cost - this.$data.heat - (this.$data.steel * this.player.steelValue), 0);
           } else {
               this.$data.steel = 0;
           }
-      },
+        },
+        setDefaultTitaniumValue: function() {
+          // automatically use available titanium to pay if not enough MC
+          if (!this.canAffordWithMcOnly() && this.canUseTitanium()) {
+              let requiredTitaniumQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits - this.$data.heat - (this.$data.steel * this.player.steelValue), 0) / this.player.titaniumValue);
+              
+              if (requiredTitaniumQty > this.player.titanium) {
+                  this.$data.titanium = this.player.titanium;
+              } else {
+                  this.$data.titanium = requiredTitaniumQty;
+              }
+              
+              this.$data.megaCredits = Math.max(this.$data.cost - this.$data.heat - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue), 0);
+          } else {
+              this.$data.titanium = 0;
+          }
+        },
         canAffordWithMcOnly: function() {
           return this.player.megaCredits >= this.$data.cost;
         },
@@ -74,7 +93,10 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
         },
         canUseSteel: function () {
           return this.playerinput.canUseSteel && this.player.steel > 0;
-        }, 
+        },
+        canUseTitanium: function () {
+          return this.playerinput.canUseTitanium && this.player.titanium > 0;
+        },
         saveData: function () {
             const htp: HowToPay = {
                 heat: this.$data.heat,

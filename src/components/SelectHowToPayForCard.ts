@@ -46,6 +46,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             app.setDefaultFloatersValue();
             app.setDefaultHeatValue();
             app.setDefaultSteelValue();
+            app.setDefaultTitaniumValue();
         });
     },
     methods: {
@@ -118,6 +119,20 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 this.$data.steel = 0;
             }
         },
+        setDefaultTitaniumValue: function() {
+            // automatically use available titanium to pay if not enough MC
+            if (!this.canAffordWithMcOnly() && this.canUseTitanium()) {
+                let requiredTitaniumQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3) - this.$data.heat - (this.$data.Steel * this.player.steelValue), 0) / this.player.titaniumValue);
+                
+                if (requiredTitaniumQty > this.player.titanium) {
+                    this.$data.titanium = this.player.titanium;
+                } else {
+                    this.$data.titanium = requiredTitaniumQty;
+                }
+            } else {
+                this.$data.titanium = 0;
+            }
+        },
         canAffordWithMcOnly: function() {
             return this.player.megaCredits >= this.$data.cost;
         },
@@ -179,6 +194,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             this.setDefaultFloatersValue();
             this.setDefaultHeatValue();
             this.setDefaultSteelValue();
+            this.setDefaultTitaniumValue();
         },
         hasWarning: function () {
             return this.$data.warning !== undefined;

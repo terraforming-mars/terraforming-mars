@@ -503,9 +503,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public isSoloModeWin(): boolean {
       // Solo TR
       if (this.soloTR) {
-        if (this.players[0].getTerraformRating() >= 63) {
-          return true;
-        } else return false;
+        return this.players[0].getTerraformRating() >= 63;
       }
       if ( ! this.marsIsTerraformed()) return false;
       return this.preludeExtension ? this.generation <= 12 : this.generation <= 14;
@@ -676,10 +674,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     private gameIsOver(): boolean {
       // Single player game is done after generation 14 or 12 with prelude
-      if (this.players.length === 1) {
+      if (this.soloMode) {
         if (this.generation === 14 || (this.generation === 12 && this.preludeExtension)) {
             return true;
         }
+        return false; // Solo mode must go on untill 14 or 12 generation even if Mars is already terraformed
       }
       return this.marsIsTerraformed();
     }
@@ -701,7 +700,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return;
       } 
       // solar Phase Option
-      if (this.solarPhaseOption) {
+      if (this.solarPhaseOption && ! this.marsIsTerraformed()) {
         this.gotoWorldGovernmentTerraforming();
         return;
       }

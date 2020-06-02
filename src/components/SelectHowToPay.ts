@@ -34,30 +34,19 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
         app.$data.cost = app.playerinput.amount;
         app.$data.megaCredits = (app as any).getMegaCreditsMax();
 
-        app.setDefaultHeatValue();
         app.setDefaultSteelValue();
         app.setDefaultTitaniumValue();
+        app.setDefaultHeatValue();
       });
     },
     methods: {
         hasWarning: function () {
             return this.$data.warning !== undefined;
         },
-        setDefaultHeatValue: function() {
-          // automatically use available heat for Helion if not enough MC
-          if (!this.canAffordWithMcOnly() && this.canUseHeat()) {
-              this.$data.heat =  this.$data.cost - this.player.megaCredits;
-          } else {
-              this.$data.heat = 0;
-          }
-
-          let discountedCost = this.$data.cost - this.$data.heat;
-          this.$data.megaCredits = Math.max(discountedCost, 0);
-        },
         setDefaultSteelValue: function() {
           // automatically use available steel to pay if not enough MC
           if (!this.canAffordWithMcOnly() && this.canUseSteel()) {
-              let requiredSteelQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits - this.$data.heat, 0) / this.player.steelValue);
+              let requiredSteelQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits, 0) / this.player.steelValue);
               
               if (requiredSteelQty > this.player.steel) {
                   this.$data.steel = this.player.steel;
@@ -65,7 +54,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                   this.$data.steel = requiredSteelQty;
               }
               
-              let discountedCost = this.$data.cost - this.$data.heat - (this.$data.steel * this.player.steelValue);
+              let discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue);
               this.$data.megaCredits = Math.max(discountedCost, 0);
           } else {
               this.$data.steel = 0;
@@ -74,7 +63,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
         setDefaultTitaniumValue: function() {
           // automatically use available titanium to pay if not enough MC
           if (!this.canAffordWithMcOnly() && this.canUseTitanium()) {
-              let requiredTitaniumQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits - this.$data.heat - (this.$data.steel * this.player.steelValue), 0) / this.player.titaniumValue);
+              let requiredTitaniumQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits - (this.$data.steel * this.player.steelValue), 0) / this.player.titaniumValue);
               
               if (requiredTitaniumQty > this.player.titanium) {
                   this.$data.titanium = this.player.titanium;
@@ -82,11 +71,22 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                   this.$data.titanium = requiredTitaniumQty;
               }
               
-              let discountedCost = this.$data.cost - this.$data.heat - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue);
+              let discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue);
               this.$data.megaCredits = Math.max(discountedCost, 0);
           } else {
               this.$data.titanium = 0;
           }
+        },
+        setDefaultHeatValue: function() {
+          // automatically use available heat for Helion if not enough MC
+          if (!this.canAffordWithMcOnly() && this.canUseHeat()) {
+              this.$data.heat =  Math.max(this.$data.cost - this.player.megaCredits - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue), 0);
+          } else {
+              this.$data.heat = 0;
+          }
+
+          let discountedCost = this.$data.cost - this.$data.heat;
+          this.$data.megaCredits = Math.max(discountedCost, 0);
         },
         canAffordWithMcOnly: function() {
           return this.player.megaCredits >= this.$data.cost;

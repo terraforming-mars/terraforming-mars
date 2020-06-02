@@ -1350,6 +1350,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
           result.push(projectCard);
         } else {
           this.dealer.discard(projectCard);
+          this.log(
+            LogMessageType.DEFAULT,
+           "${0} was discarded",
+           new LogMessageData(LogMessageDataType.CARD, projectCard.name)
+          );
         }
       }
       return result;
@@ -1365,10 +1370,23 @@ export class Game implements ILoadable<SerializedGame, Game> {
           result.push(projectCard);
         } else {
           this.dealer.discard(projectCard);
+          this.log(
+            LogMessageType.DEFAULT,
+           "${0} was discarded",
+           new LogMessageData(LogMessageDataType.CARD, projectCard.name)
+          );
         }
       }
       return result;
-    }   
+    }
+
+    public getCardsInHandByTag(player: Player, tag: Tags) {
+      return player.cardsInHand.filter((card) => card.tags.includes(tag));
+    }
+
+    public getCardsInHandByResource(player: Player, resourceType: ResourceType) {
+      return player.cardsInHand.filter((card) => card.resourceType === resourceType);
+    }
 
     public log(type: LogMessageType, message: string, ...data: LogMessageData[]) {
       this.gameLog.push(new LogMessage(type, message, data));
@@ -1381,6 +1399,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {
       // in soloMode you don'thave to decrease resources
       return this.getPlayers().filter((p) => p.getProduction(resource) >= minQuantity).length > 0 || this.soloMode ;
+    }
+
+    public hasCardsWithTag(tag: Tags, requiredQuantity: number = 1) {
+      return this.dealer.deck.filter((card) => card.tags.includes(tag)).length >= requiredQuantity;
+    }
+
+    public hasCardsWithResource(resource: ResourceType, requiredQuantity: number = 1) {
+      return this.dealer.deck.filter((card) => card.resourceType === resource).length >= requiredQuantity;
     }
 
     private setupSolo() {

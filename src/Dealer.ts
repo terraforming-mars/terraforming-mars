@@ -333,6 +333,7 @@ import { Polyphemos } from "./cards/colonies/Polyphemos";
 import { UtopiaInvest } from "./cards/turmoil/UtopiaInvest";
 import { LakefrontResorts } from "./cards/turmoil/LakefrontResorts";
 import { StormCraftIncorporated } from "./cards/colonies/StormCraftIncorporated";
+import { SeptumTribus } from "./cards/turmoil/SeptumTribus";
 import { Arklight } from "./cards/colonies/Arklight";
 import { TerralabsResearch } from "./cards/turmoil/TerralabsResearch";
 import { Factorum } from "./cards/promo/Factorum";
@@ -655,7 +656,8 @@ export const ALL_TURMOIL_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
     { cardName: CardName.LAKEFRONT_RESORTS, factory: LakefrontResorts },
     { cardName: CardName.PRISTAR, factory: Pristar },
     { cardName: CardName.TERRALABS_RESEARCH, factory: TerralabsResearch },
-    { cardName: CardName.UTOPIA_INVEST, factory: UtopiaInvest }
+    { cardName: CardName.UTOPIA_INVEST, factory: UtopiaInvest },
+    { cardName: CardName.SEPTUM_TRIBUS, factory: SeptumTribus }
 ];
 
 export const ALL_PROMO_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [

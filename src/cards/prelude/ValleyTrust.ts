@@ -29,7 +29,7 @@ export class ValleyTrust implements CorporationCard {
         }
         else {
             console.warn("Prelude extension isn't selected.");
-            return;
+            return undefined;
         }
     }
 

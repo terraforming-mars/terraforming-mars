@@ -7,6 +7,9 @@ import { Game } from '../../Game';
 import { IActionCard, ICard, IResourceCard } from '../ICard';
 import { SelectCard } from '../../inputs/SelectCard';
 import { CardName } from '../../CardName';
+import { LogMessageType } from "../../LogMessageType";
+import { LogMessageData } from "../../LogMessageData";
+import { LogMessageDataType } from "../../LogMessageDataType";
 
 export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public name: CardName = CardName.CELESTIC;
@@ -16,9 +19,22 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public resourceCount: number = 0;
 
     public initialAction(player: Player, game: Game) {
-        for (let foundCard of game.drawCardsByResource(ResourceType.FLOATER, 2)) {
-            player.cardsInHand.push(foundCard);
+        if (game.hasCardsWithResource(ResourceType.FLOATER, 2)) {
+            for (let foundCard of game.drawCardsByResource(ResourceType.FLOATER, 2)) {
+                player.cardsInHand.push(foundCard);
+            }
+
+            const drawnCards = game.getCardsInHandByResource(player, ResourceType.FLOATER).slice(-2);
+
+            game.log(
+                LogMessageType.DEFAULT,
+                "${0} drew ${1} and ${2}",
+                new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                new LogMessageData(LogMessageDataType.CARD, drawnCards[0].name),
+                new LogMessageData(LogMessageDataType.CARD, drawnCards[1].name)
+            );
         }
+        
         return undefined;
     }
 

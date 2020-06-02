@@ -9,6 +9,9 @@ import { Resources } from '../../Resources';
 import { CardType } from '../CardType';
 import { CardName } from '../../CardName';
 import { IColony } from '../../colonies/Colony';
+import { LogMessageType } from "../../LogMessageType";
+import { LogMessageData } from "../../LogMessageData";
+import { LogMessageDataType } from "../../LogMessageDataType";
 
 export class Aridor implements CorporationCard {
     public name: CardName =  CardName.ARIDOR;
@@ -16,8 +19,8 @@ export class Aridor implements CorporationCard {
     public startingMegaCredits: number = 40;
     public allTags = new Set();
 
-    public initialAction(_player: Player, game: Game) {
-        if (game.colonyDealer === undefined) return undefined;
+    public initialAction(player: Player, game: Game) {
+        if (game.colonyDealer === undefined || !game.coloniesExtension) return undefined;
         let addColony = new OrOptions();
         addColony.title = "Aridor first action - Select colony tile to add";
         game.colonyDealer.discardedColonies.forEach(colony => {
@@ -26,6 +29,14 @@ export class Aridor implements CorporationCard {
             () => {
                 game.colonies.push(colony);
                 game.colonies.sort((a,b) => (a.name > b.name) ? 1 : -1);
+                
+                game.log(
+                    LogMessageType.DEFAULT,
+                    "${0} added a new Colony tile: ${1}",
+                    new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                    new LogMessageData(LogMessageDataType.STRING, colony.name)
+                );
+
                 this.checkActivation(colony, game);
                 return undefined;
             }

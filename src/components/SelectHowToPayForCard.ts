@@ -70,7 +70,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                     this.$data.microbes = requiredMicrobes;
                 }
 
-                this.$data.megaCredits = Math.max(this.$data.cost - (this.$data.microbes * 2), 0);
+                let discountedCost = this.$data.cost - (this.$data.microbes * 2);
+                this.$data.megaCredits = Math.max(discountedCost, 0);
             } else {
                 this.$data.microbes = 0;
             }
@@ -86,7 +87,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                     this.$data.floaters = requiredFloaters;
                 }
 
-                this.$data.megaCredits = Math.max(this.$data.cost - (this.$data.microbes * 2) - (this.$data.floaters * 3), 0);
+                let discountedCost = this.$data.cost - (this.$data.microbes * 2) - (this.$data.floaters * 3);
+                this.$data.megaCredits = Math.max(discountedCost, 0);
             } else {
                 this.$data.floaters = 0;
             }
@@ -101,6 +103,9 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 } else {
                     this.$data.heat = requiredHeat;
                 }
+
+                let discountedCost = this.$data.cost - (this.$data.microbes * 2) - (this.$data.floaters * 3) - this.$data.heat;
+                this.$data.megaCredits = Math.max(discountedCost, 0);
             } else {
                 this.$data.heat = 0;
             }
@@ -115,6 +120,9 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 } else {
                     this.$data.steel = requiredSteelQty;
                 }
+
+                let discountedCost = this.$data.cost - (this.$data.microbes * 2) - (this.$data.floaters * 3) - this.$data.heat - (this.$data.steel * this.player.steelValue);
+                this.$data.megaCredits = Math.max(discountedCost, 0);
             } else {
                 this.$data.steel = 0;
             }
@@ -122,13 +130,16 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultTitaniumValue: function() {
             // automatically use available titanium to pay if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseTitanium()) {
-                let requiredTitaniumQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3) - this.$data.heat - (this.$data.Steel * this.player.steelValue), 0) / this.player.titaniumValue);
+                let requiredTitaniumQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3) - this.$data.heat - (this.$data.steel * this.player.steelValue), 0) / this.player.titaniumValue);
                 
                 if (requiredTitaniumQty > this.player.titanium) {
                     this.$data.titanium = this.player.titanium;
                 } else {
                     this.$data.titanium = requiredTitaniumQty;
                 }
+
+                let discountedCost = this.$data.cost - (this.$data.microbes * 2) - (this.$data.floaters * 3) - this.$data.heat - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue);
+                this.$data.megaCredits = Math.max(discountedCost, 0);
             } else {
                 this.$data.titanium = 0;
             }
@@ -186,9 +197,6 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         cardChanged: function () {
             this.$data.cost = this.getCardCost();
             this.$data.megaCredits = (this as any).getMegaCreditsMax();
-
-            this.titanium = 0;
-            this.steel = 0;
 
             this.setDefaultMicrobesValue();
             this.setDefaultFloatersValue();

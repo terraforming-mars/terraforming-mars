@@ -51,7 +51,8 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
               this.$data.heat = 0;
           }
 
-          this.$data.megaCredits = Math.max(this.$data.cost - this.$data.heat, 0);
+          let discountedCost = this.$data.cost - this.$data.heat;
+          this.$data.megaCredits = Math.max(discountedCost, 0);
         },
         setDefaultSteelValue: function() {
           // automatically use available steel to pay if not enough MC
@@ -64,7 +65,8 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                   this.$data.steel = requiredSteelQty;
               }
               
-              this.$data.megaCredits = Math.max(this.$data.cost - this.$data.heat - (this.$data.steel * this.player.steelValue), 0);
+              let discountedCost = this.$data.cost - this.$data.heat - (this.$data.steel * this.player.steelValue);
+              this.$data.megaCredits = Math.max(discountedCost, 0);
           } else {
               this.$data.steel = 0;
           }
@@ -80,7 +82,8 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                   this.$data.titanium = requiredTitaniumQty;
               }
               
-              this.$data.megaCredits = Math.max(this.$data.cost - this.$data.heat - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue), 0);
+              let discountedCost = this.$data.cost - this.$data.heat - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue);
+              this.$data.megaCredits = Math.max(discountedCost, 0);
           } else {
               this.$data.titanium = 0;
           }

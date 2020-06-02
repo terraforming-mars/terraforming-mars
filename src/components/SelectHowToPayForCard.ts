@@ -42,6 +42,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             app.$data.cost = app.getCardCost();
             app.$data.megaCredits = (app as any).getMegaCreditsMax();
 
+            app.setDefaultMicrobesValue();
             app.setDefaultHeatValue();
         });
     },
@@ -55,13 +56,25 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             // If not found, it should be self replication robot stored card
             return this.player.selfReplicatingRobotsCardCost;
         },
+        setDefaultMicrobesValue: function() {
+            // automatically use microbes to pay for card if not enough MC
+            if (!this.canAffordWithMcOnly() && this.canUseMicrobes()) {
+                this.$data.microbes = Math.ceil((this.$data.cost - this.player.megaCredits) / 2);
+                this.$data.megaCredits = this.$data.cost - (this.$data.microbes * 2);
+            } else {
+                this.$data.microbes = 0;
+            }
+        },
         setDefaultHeatValue: function() {
             // automatically use heat for Helion if not enough MC
-            if (this.$data.cost > this.player.megaCredits && this.canUseHeat()) {
-                this.$data.heat =  this.$data.cost - this.player.megaCredits;
+            if (!this.canAffordWithMcOnly() && this.canUseHeat()) {
+                this.$data.heat =  this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2);
             } else {
                 this.$data.heat = 0;
             }
+        },
+        canAffordWithMcOnly: function() {
+            return this.player.megaCredits >= this.$data.cost;
         },
         canUseHeat: function () {
             return this.playerinput.canUseHeat && this.player.heat > 0;
@@ -116,9 +129,9 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
 
             this.titanium = 0;
             this.steel = 0;
-            this.microbes = 0;
             this.floaters = 0;
 
+            this.setDefaultMicrobesValue();
             this.setDefaultHeatValue();
         },
         hasWarning: function () {

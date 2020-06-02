@@ -43,11 +43,14 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
         },
         setDefaultHeatValue: function() {
           // automatically use heat for Helion if not enough MC
-          if (this.$data.cost > this.player.megaCredits && this.canUseHeat()) {
+          if (!this.canAffordWithMcOnly() && this.canUseHeat()) {
               this.$data.heat =  this.$data.cost - this.player.megaCredits;
           } else {
               this.$data.heat = 0;
           }
+        },
+        canAffordWithMcOnly: function() {
+          return this.player.megaCredits >= this.$data.cost;
         },
         canUseHeat: function () {
           return this.playerinput.canUseHeat && this.player.heat > 0;

@@ -9,7 +9,6 @@ export const OrOptions = Vue.component("or-options", {
     props: ["player", "players", "playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
-            childComponents: [],
             selectedOption: 0
         };
     },

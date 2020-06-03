@@ -7,8 +7,6 @@ export const AndOptions = Vue.component("and-options", {
     props: ["player", "players", "playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
-            childComponents: [],
-            responded: {} as {[x: string]: Array<string>}
         };
     },
     methods: {
@@ -23,7 +21,7 @@ export const AndOptions = Vue.component("and-options", {
             }
             const res: Array<Array<string>> = [];
             for (let i = 0; i < this.playerinput.options.length; i++) {
-                res.push(this.responded["" + i]);
+                res.push(this.$data.responded["" + i]);
             }
             this.onsave(res);
         }
@@ -32,15 +30,16 @@ export const AndOptions = Vue.component("and-options", {
         const playerInput: PlayerInputModel = this.playerinput as PlayerInputModel;
         const children: Array<VNode> = [];
         this.$data.childComponents = [];
+        this.$data.responded = [];
         if (this.showtitle) {
             children.push(createElement("div", {"class": "wf-title"}, playerInput.title));
         }
         if (playerInput.options !== undefined) {
             const options = playerInput.options;
             options.forEach((option, idx: number) => {
-                if (this.responded[idx] === undefined) {
+                if (this.$data.responded[idx] === undefined) {
                     children.push(new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, option, (out: Array<Array<string>>) => {
-                        this.responded[idx] = out[0];
+                        this.$data.responded[idx] = out[0];
                     }, false, true));
                     this.$data.childComponents.push(children[children.length - 1]);
                 }

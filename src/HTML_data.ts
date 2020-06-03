@@ -5483,8 +5483,7 @@ export const HTML_DATA: Map<string, string> =
             (Action: Add a floater to ANY card.) <br>
           </div>
           <div class="description" style="margin-top:17px;margin-left:17px;text-align:left;">
-          (1 VP per 3 floaters <br>
-          on this card.)
+          (1 VP per 3 floaters <br> on this card.)
           </div>
         </div>
         <div  class="celestic" style="font-size:24px;box-shadow:6px 6px 6px grey;margin-left: 9px;

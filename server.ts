@@ -480,7 +480,8 @@ function getPlayer(player: Player, game: Game): string {
     tradesThisTurn: player.tradesThisTurn,
     turmoil: getTurmoil(game),
     selfReplicatingRobotsCardCost: player.getSelfReplicatingRobotsCardCost(game),
-    selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard()
+    selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
+    undoing : player.undoing
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -594,7 +595,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       corporationCard: player.corporationCard ?
         player.corporationCard.name : undefined,
       corporationCardResources: player.corporationCard ?
-        player.getResourcesOnCard(player.corporationCard) : undefined,  
+        player.getResourcesOnCard(player.corporationCard) : undefined,
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
       heat: player.heat,
@@ -603,6 +604,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       megaCredits: player.megaCredits,
       megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
       name: player.name,
+      phase: game.phase,
       plants: player.plants,
       plantProduction: player.getProduction(Resources.PLANTS),
       playedCards: getCards(player, player.playedCards, game),
@@ -626,8 +628,9 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       fleetSize: player.fleetSize,
       tradesThisTurn: player.tradesThisTurn,
       turmoil: getTurmoil(game),
-      selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard()
-    } as PlayerModel;
+      selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
+      waitingFor: player.getWaitingFor()
+    } as unknown as PlayerModel;
   });
 }
 

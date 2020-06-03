@@ -42,9 +42,14 @@ export const PlayerHome = Vue.component("player-home", {
     },
     mixins: [PlayerMixin],
     methods: {
-        getPlayerCssForTurnOrder: (player: PlayerModel, hilightActive: boolean): string => {
+        getPlayerCssForTurnOrder: ( player: PlayerModel, hilightActive: boolean): string => {
             var ret: string = "highlighter_box player_bg_color_" + player.color;
             if (hilightActive && player.isActive) ret += " player_is_active";
+            // hilightActive 显示小框的高亮
+            if (!hilightActive &&  player.waitingFor !== undefined &&  
+                (!player.isActive || player.phase === "drafting" ||  player.phase === "research" )){
+                ret += " player_is_waiting";
+            }
             return ret;
         },
         showPlayerDetails: function (player: PlayerModel) {

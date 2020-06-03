@@ -66,10 +66,10 @@ export const WaitingFor = Vue.component("waiting-for", {
                             (vueApp as any).$root.updatePlayer();
                             return;
                         }
-                        (vueApp as any).waitForUpdate();
                     } else {
                         alert("Unexpected server response");
                     }
+                    (vueApp as any).waitForUpdate();
                 }
                 xhr.responseType = "json";
                 xhr.send();
@@ -79,6 +79,9 @@ export const WaitingFor = Vue.component("waiting-for", {
     },
     render: function (createElement) {
         (this as any).waitForUpdate();
+        if (this.player.undoing ){
+            return createElement("div", $t("Undoing, Please refresh or wait seconds"));
+        }
         if (this.waitingfor === undefined) {
             return createElement("div", $t("Not your turn to take any actions"));
         }

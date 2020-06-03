@@ -105,7 +105,7 @@ export class SQLite implements IDatabase {
 
     restoreGame(game_id: string, save_id: number, game: Game): void {
         // Retrieve last save from database
-        this.db.get("SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1", [game_id, save_id],(err: { message: any; }, row: { game: any; }) => {
+        this.db.get("SELECT game game ,createtime createtime  FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1", [game_id, save_id],(err: { message: any; }, row: { game: any, createtime: any; }) => {
             if (err) {
                 return console.error(err.message);
             }
@@ -114,7 +114,8 @@ export class SQLite implements IDatabase {
 
             // Rebuild each objects
             game.loadFromJSON(gameToRestore);
-
+            game.updatetime = row.createtime;
+            
             return true;
         });
     }

@@ -118,6 +118,7 @@
     "Error with input": "输入错误",
     "This game is over!": "游戏已经结束了",
     "Not your turn to take any actions": "还没到你的回合,暂无法行动",
+    "Undoing, Please refresh or wait seconds": "撤回中，请等待几秒或手动刷新页面",
     "Pass": "结束本时代",
     "Pay for a standard project": "执行标准行动",
     "Play project card": "打出项目卡",

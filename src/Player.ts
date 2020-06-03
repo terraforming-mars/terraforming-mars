@@ -89,7 +89,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public colonyTradeDiscount: number = 0;
     private turmoilScientistsActionUsed: boolean = false;
     public removingPlayers: Array<string> = [];
-
+    public undoing : boolean = false;
     constructor(
         public name: string,
         public color: Color,
@@ -367,6 +367,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       } else return 0;
     }  
 
+    //获取全球参数适应调整值   如：  +-2科技
     public getRequirementsBonus(game: Game, venusOnly?: boolean): number {
       let requirementsBonus: number = 0;
       if (
@@ -1263,19 +1264,19 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       );
     }
 
-  private onStandardProject(projectType: StandardProjectType): void {
-    if (this.corporationCard !== undefined && this.corporationCard.onStandardProject!== undefined) {
-      this.corporationCard.onStandardProject(this, projectType);
-    }
+    private onStandardProject(projectType: StandardProjectType): void {
+      if (this.corporationCard !== undefined && this.corporationCard.onStandardProject!== undefined) {
+        this.corporationCard.onStandardProject(this, projectType);
+      }
 
-    for (const playedCard of this.playedCards) {
-      if (playedCard.onStandardProject !== undefined) {
-        playedCard.onStandardProject(this, projectType);
+      for (const playedCard of this.playedCards) {
+        if (playedCard.onStandardProject !== undefined) {
+          playedCard.onStandardProject(this, projectType);
+        }
       }
     }
-  }
 
-  private sellPatents(game: Game): PlayerInput {
+    private sellPatents(game: Game): PlayerInput {
       return new SelectCard(
           "Sell patents",
           this.cardsInHand,
@@ -1766,6 +1767,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private undoTurnOption(game: Game): PlayerInput {
       return new SelectOption("Undo Turn", () => {
         try {
+          this.undoing =  true;
           Database.getInstance().restoreGame(game.id, game.lastSaveId, game);
         }
         catch(error){
@@ -1952,6 +1954,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
     }
 
+    //返回玩家可选的行动
     public takeAction(game: Game): void {
 
       if (this.hasInterrupt(game)) {
@@ -1997,7 +2000,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.takeAction(game);
         return;
       }
-
+      if(this.undoing){
+          this.waitingFor = undefined;
+          return ;
+      }
       if (game.hasPassedThisActionPhase(this) || this.actionsTakenThisRound >= 2) {
         this.actionsTakenThisRound = 0;
         game.playerIsFinishedTakingActions();

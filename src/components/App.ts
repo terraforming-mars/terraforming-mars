@@ -49,12 +49,12 @@ export const mainAppSettings = {
                     app.playerkey ++;
                     if (app.player.phase === "end" &&  window.location.search.indexOf("&noredirect") === -1 ) {
                         app.screen = "the-end";
-                        if (currentPathname != "/the-end") {
+                        if (currentPathname !== "/the-end") {
                             window.history.replaceState(xhr.response, "Teraforming Mars - Player", "/the-end?id=" + xhr.response.id);
                         }
                     } else {
                         app.screen = "player-home";
-                        if (currentPathname != "/player") {
+                        if (currentPathname !== "/player") {
                             window.history.replaceState(xhr.response, "Teraforming Mars - Game", "/player?id=" + xhr.response.id);
                         }
                     }
@@ -92,7 +92,7 @@ export const mainAppSettings = {
             app.screen = "games-overview";
         } else if (currentPathname === "/new-game" || currentPathname === "/solo") {
             app.screen = "create-game-form";
-        } else if (currentPathname === '/load'){
+        } else if (currentPathname === "/load"){
             app.screen = "load";   
         } else {
             app.screen = "start-screen";

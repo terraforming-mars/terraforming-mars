@@ -657,6 +657,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private gotoResearchPhase(): void {
+      this.phase = Phase.RESEARCH;
       this.researchedPlayers.clear();
       this.players.forEach((player) => {
         player.runResearchPhase(this, this.draftVariant);
@@ -664,6 +665,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }  
 
     private gotoDraftingPhase(): void {
+      this.phase = Phase.DRAFTING;
       this.draftedPlayers.clear();
       this.draftRound = 1;
       this.runDraftRound();
@@ -680,6 +682,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private gotoProductionPhase(): void {
+      this.phase = Phase.PRODUCTION;
       this.passedPlayers.clear();
       this.players.forEach((player) => {
         player.runProductionPhase();

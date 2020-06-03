@@ -95,6 +95,10 @@
   "Penguins":"企鹅",
   "Requires 8 oceans. 1 VP for each animal on this card":"需要场上已有8片海洋。本牌每个动物价值1分",
 
-  "Interplanetary Colony Ship":"星际殖民船"
+  "Interplanetary Colony Ship":"星际殖民船",
+
+  "GHG Import From Venus":"从金星导入温室气体",
+  "Raise Venus 1 step. Increase your heat production 3 steps).":"提升金星改造度1格。提升你的热能产能3级"
+
 
 }

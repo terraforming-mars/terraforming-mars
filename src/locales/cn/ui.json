@@ -110,6 +110,8 @@
     "Go to game results": "查看游戏结果",
     "Save":"保存操作",
 
+    "Select which cards to take into hand":"选择保留到手牌的牌(每张3MC)",
+
     "Colonies": "殖民地",
     "funded by": "提供资金者:",
     "claimed by": "宣告达成者:",
@@ -126,18 +128,27 @@
     "End Turn": "结束本轮操作",
     "Perform an action from a played card": "执行一个已打出卡牌上的行动",
     "Power plant (11 MC)": "建造发电厂 (11 MC)",
-    "Asteroid (14 MC)": "导引小行星 (14 MC)",
+    "Asteroid (14 MC)": "导引小行星 (14 MC) - 提升火星温度",
     "Aquifer (18 MC)": "开发含水层 (18 MC)",
     "Greenery (23 MC)": "绿化 (23 MC)",
     "City (25 MC)": "建造城市 (25 MC)",
+    "(Build colony (17 MC)":"建立殖民地 (17 MC)",
+    "(Air scraping (15 MC)":"建设金星(15 MC)",
+    "(Buffer Gas (16 MC)":"缓冲气体 (16 MC) - 提升1TR",
     "Power plant": "建造发电厂",
     "Asteroid": "导引小行星",
     "Aquifer": "开发含水层",
     "Greenery": "绿化",
     "City": "建造城市",
     "Pay 9 MC": "支付 9 MC",
-    "Pay 3 Energy":"支付 3 电力资源",
+    "Pay 3 Energy": "支付 3 个电力资源",
+    "Pay 3 Titanium":"支付 3 个钛合金资源",
     "Trade with a colony": "与殖民星球贸易",
-    "(Enceladus - (Microbes)":"(Enceladus - (微生物)"
+    "(Enceladus - (Microbes)":"(Enceladus - (微生物)",
+    "Select action for World Government Terraforming":"请你作为世界政府,选择一项改造(不获得奖励)",
+    "Increase temperature":"提升火星温度",
+    "Increase oxygen":"提升火星氧气浓度",
+    "Add an ocean":"放置一个海洋版块",
+    "Increase Venus scale":"提升金星改造度"
 }
 

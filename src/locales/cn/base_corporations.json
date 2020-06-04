@@ -1,0 +1,76 @@
+{
+
+  "You start with 1 titanium production and 42 MC.":"",
+  "Effect: Each time any Jovian tag is put into play, including this, increase your MC production 1 step.":"",
+
+  "You start with 45 MC. Increase your MC production 2 steps. 1 VP per 2 animals on this card.":"",
+  "Effect: When you play an animal or plant tag, including":"效果:当你打出动物或植物标记时,在此牌",
+  "this, add 1 animal":"上放置1个动物资源",
+  "to this card.":"牌上每2个东都资源1分",
+
+  "You start with 50 MC. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.":"",
+  "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.":"",
+
+
+  "You start with 3 MC production and 44 MC.":"",
+  "Effect: When you play a building tag, you pay 2 MC less for it.":"",
+
+
+  "You start with 1 plant production and 47 MC)":"",
+  "Effect: Whenever Venus is terraformed 1 step, you gain 2MC.":"",
+
+  "You start with 1 energy production and 48 MC.":"",
+  "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 MC less for it.":"",
+
+  "You start with 60 MC.":"",
+  "Effect: When playing an Earth card, you pay 3 MC less for it.":"",
+
+  "You start with 2 plant production, 3 plants, and 36MC":"",
+  "Effect: You may always pay 7 plants, instead of 8, to place greenery.":"",
+
+  "You start with 3 heat production and 42 MC.":"",
+  "Effect: Your may use heat as MC. You may not use MC as heat.":"",
+
+  "You start with 45 MC. As your first action, fund an award for free.":"",
+  "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3MC.":"",
+
+  "You start with 50MC. Increase your MC production 5 steps. Gain 5 titanium.":"",
+  "Effect: When you buy a card to hand, pay 5MC instead of 3, including the starting hand.":"",
+
+
+  "You start with 30 MC, 5 steel, and 1 steel production":"",
+  "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.":"",
+
+  "You start with 40MC. As your first action add a colony tile.":"",
+  "When you get a new type of tag in play (event cards do not count), increase your MC production 1 step.":"",
+
+  "You start with 40 MC. As your first action in the game,place a city tile.":"",
+  "Effect: When any city tile is placed ON MARS, increase your MC production 1 step. When you place a city tile, gain 3 MC.":"",
+
+  "You start with 47 MC.":"",
+  "Action: Spend 4 MC to increase (one of) your LOWEST PRODUCTION 1 step.":"",
+
+  "You start with 1 titanium production, and 38 MC.":"",
+
+  "You start with 42 MC. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take those 2 cards into hand and discard the rest.":"",
+  "Action: Add a floater to ANY card.":"",
+  "(1 VP per 3 floaters)":"",
+  "(on this card.)":"",
+
+  "As you first action in the game, draw 3 cards. Start with 45MC.":"",
+  "Temp / O2 / Ocean":"",
+  "Effect: Your temperature, oxygen and ocean requirements are +2 or -2 steps, your choice in each case.":"",
+
+  "You start with 20 steel and 30 MC.":"",
+  "Effect: Each time you play an event, you gain 2 MC.":"",
+
+  "You start with 10 titanium and 23 MC.":"",
+  "Effect: Your titanium resources are each worth 1 MC extra.":"",
+
+  "You start with 57 MC.":"",
+  "Effect: After you pay for a card or standard project with a basic cost of 20MC or more, you gain 4MC.)":"",
+
+  "You start with 48 MC.":"",
+  "Effect: Floaters on this card may be used as 2 heat each.":"",
+
+}

@@ -16,8 +16,8 @@
     "Black": "黑色",
 
     "original": "基础版图",
-    "hellas": "赫拉斯版图",
-    "elysium": "埃律西昂版图",
+    "hellas": "hellas版图",
+    "elysium": "elysium版图",
     "random": "随机地图",
 
     "Prelude": "前序",
@@ -50,7 +50,7 @@
     "Having at least 16 cards in your hand when you claim this milestone": "拥有16张手牌",
     "Polar Explorer": "极地探险家",
     "Requires that you have 3 tiles on the two bottom rows": "底图最下方的两行上拥有至少3个版块",
-    "Rim Settler": "木星环先锋",
+    "Rim Settler": "木星定居者",
     "Requires that you have 3 jovian tags": "拥有3个木星标记",
     "Specialist": "专业人士",
     "Requires that you have at least 10 in production of any resource": "拥有至少10个卡上的资源",
@@ -86,9 +86,9 @@
     "Most cards in play (not events) with a cost of at least 20 megacredits": "场上已打出最多 (不包含事件卡) 费用至少 20 的卡牌的",
     "Industrialist": "杰出实业家",
     "Having most steel and energy resources": "拥有最多钢铁和电力资源方块",
-    "DesertSettler": "大漠望族",
-    "Most tiles south of the equator (the four bottom rows)": "拥有最多北半球版块的 (地图下方4行)",
-    "EstateDealer": "金钟奖",
+    "DesertSettler": "沙漠定居者",
+    "Most tiles south of the equator (the four bottom rows)": "拥有最多南半球版块的 (地图下方4行)",
+    "EstateDealer": "海景房",
     "Most tiles adjacent to ocean tiles": "拥有最多紧邻海洋的版块",
     "Benefactor": "火星改造王",
     "Highest terraform rating": "拥有最高的TR值",
@@ -135,7 +135,9 @@
     "Aquifer": "开发含水层",
     "Greenery": "绿化",
     "City": "建造城市",
-
     "Pay 9 MC": "支付 9 MC",
-    "Trade with a colony": "与殖民星球贸易"
+    "Pay 3 Energy":"支付 3 电力资源",
+    "Trade with a colony": "与殖民星球贸易",
+    "(Enceladus - (Microbes)":"(Enceladus - (微生物)"
 }
+

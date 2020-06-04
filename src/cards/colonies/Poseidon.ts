@@ -5,6 +5,9 @@ import { Game } from '../../Game';
 import { SelectOption } from '../../inputs/SelectOption';
 import { OrOptions } from '../../inputs/OrOptions';
 import { CardName } from '../../CardName';
+import {LogMessageType} from "../../LogMessageType";
+import {LogMessageData} from "../../LogMessageData";
+import {LogMessageDataType} from "../../LogMessageDataType";
 
 export class Poseidon implements CorporationCard {
     public name: CardName =  CardName.POSEIDON;
@@ -23,6 +26,12 @@ export class Poseidon implements CorporationCard {
               colony.name + " - (" + colony.description + ")", 
               () => {
                   colony.onColonyPlaced(player, game);
+                  game.log(
+                    LogMessageType.DEFAULT,
+                    "${0} built a colony on ${1}",
+                    new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                    new LogMessageData(LogMessageDataType.COLONY, colony.name)
+                  );
                   return undefined;
               }
             );

@@ -8,5 +8,6 @@ export enum OriginalCorporation {
     TERACTOR = "Teractor",
     THARSIS_REPUBLIC = "Tharsis Republic",
     THORGATE = "Thorgate",
-    UNITED_NATIONS_MARS_INITIATIVE = "United Nations Mars Initiative"
+    UNITED_NATIONS_MARS_INITIATIVE = "United Nations Mars Initiative",
+    INVENTRIX = "Inventrix"
 }

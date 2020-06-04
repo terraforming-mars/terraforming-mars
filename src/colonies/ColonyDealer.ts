@@ -5,10 +5,10 @@ import { Titan } from './Titan';
 import { Callisto } from './Callisto';
 import { Triton } from './Triton';
 import { Ceres } from './Ceres';
-import { Luna } from './Luna';
+//import { Luna } from './Luna';
 import { Io } from './Io';
 import { Miranda } from './Miranda';
-import { Pluto } from './Pluto';
+//import { Pluto } from './Pluto';
 import { Enceladus } from './Enceladus';
 import { ColonyName } from './ColonyName';
 
@@ -24,11 +24,11 @@ export const ALL_COLONIES_TILES: Array<IColonyFactory<IColony>> = [
     { colonyName: ColonyName.EUROPA, factory: Europa },
     { colonyName: ColonyName.GANYMEDE, factory: Ganymede },
     { colonyName: ColonyName.IO, factory: Io },
-    { colonyName: ColonyName.LUNA, factory: Luna },
+    //{ colonyName: ColonyName.LUNA, factory: Luna }, BAN
     { colonyName: ColonyName.MIRANDA, factory: Miranda },
     { colonyName: ColonyName.TITAN, factory: Titan },
     { colonyName: ColonyName.CALLISTO, factory: Callisto },
-    { colonyName: ColonyName.PLUTO, factory: Pluto },
+    //{ colonyName: ColonyName.PLUTO, factory: Pluto }, BAN
     { colonyName: ColonyName.TRITON, factory: Triton },
 ];
 

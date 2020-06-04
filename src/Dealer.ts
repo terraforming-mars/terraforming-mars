@@ -317,7 +317,7 @@ import { WaterToVenus } from "./cards/venusNext/WaterToVenus";
 import { Stratopolis } from "./cards/venusNext/Stratopolis";
 import { StratosphericBirds } from "./cards/venusNext/StratosphericBirds";
 import { VenusSoils } from "./cards/venusNext/VenusSoils";
-import { VenusianAnimals } from "./cards/venusNext/VenusianAnimals";
+//import { VenusianAnimals } from "./cards/venusNext/VenusianAnimals";
 import { VenusianPlants } from "./cards/venusNext/VenusianPlants";
 import { VenusGovernor } from "./cards/venusNext/VenusGovernor";
 import { SisterPlanetSupport } from "./cards/venusNext/SisterPlanetSupport";
@@ -550,7 +550,7 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.TERRAFORMING_CONTRACT, factory: TerraformingContract },
     { cardName: CardName.THERMOPHILES, factory: Thermophiles },
     { cardName: CardName.VENUS_GOVERNOR, factory: VenusGovernor },
-    { cardName: CardName.VENUSIAN_ANIMALS, factory: VenusianAnimals },
+    //{ cardName: CardName.VENUSIAN_ANIMALS, factory: VenusianAnimals }, BAN
     { cardName: CardName.VENUSIAN_INSECTS, factory: VenusianInsects },
     { cardName: CardName.VENUSIAN_PLANTS, factory: VenusianPlants },
     { cardName: CardName.VENUS_MAGNETIZER, factory: VenusMagnetizer },

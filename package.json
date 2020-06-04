@@ -48,5 +48,6 @@
   "bugs": {
     "url": "https://github.com/bafolts/terraforming-mars/issues"
   },
-  "homepage": "https://github.com/bafolts/terraforming-mars#readme"
+  "homepage": "https://github.com/bafolts/terraforming-mars#readme",
+  "cacheDirectories": ["db"]
 }

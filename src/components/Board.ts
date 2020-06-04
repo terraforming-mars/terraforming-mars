@@ -1,149 +1,183 @@
 
 import Vue from "vue";
-
-import {Bonus} from "./Bonus";
-import {Tile} from "./Tile";
-import { Venus } from "./Venus";
 import { BoardMixin } from "./BoardMixin";
+import * as constants from '../constants';
+import { BoardSpace } from "./BoardSpace";
+
+class GlobalParamLevel {
+    constructor(public value: number, public isActive: boolean, public strValue: string) {
+
+    }
+}
 
 export const Board = Vue.component("board", {
-    props: ["spaces", "venusNextExtension", "venusScaleLevel","boardName"],
+    props: ["spaces", "venusNextExtension", "venusScaleLevel","boardName", "oceans_count", "oxygen_level", "temperature"],
     components: {
-        "bonus": Bonus,
-        "tile": Tile,
-        "venus": Venus
+        "board-space": BoardSpace
     },
     data: function () {
-        return {}
+        return {
+            "constants": constants
+        }
+    },
+    methods: {
+        "getSpaceById": function (space_id: string) {
+            for (let space of this.spaces) {
+                if (space.id === space_id) {
+                    return space
+                }
+            }
+            throw "Board space not found by id '" + space_id + "'"
+        },
+        "getValuesForParameter": function (targetParameter: string): Array<GlobalParamLevel> {
+            let values: Array<GlobalParamLevel> = [];
+            var startValue: number;
+            var endValue: number;
+            var step: number;
+            var curValue: number;
+            var strValue: string;
+            switch (targetParameter) {
+                case "oxygen":
+                    startValue = constants.MIN_OXYGEN_LEVEL;
+                    endValue = constants.MAX_OXYGEN_LEVEL;
+                    step = 1;
+                    curValue = this.oxygen_level;
+                    break;
+                case "temperature":
+                    startValue = constants.MIN_TEMPERATURE;
+                    endValue = constants.MAX_TEMPERATURE;
+                    step = 2;
+                    curValue = this.temperature;
+                    break;
+                case "venus":
+                    startValue = constants.MIN_VENUS_SCALE;
+                    endValue = constants.MAX_VENUS_SCALE;
+                    step = 2;
+                    curValue = this.venusScaleLevel;
+                    break;
+                default:
+                    throw "Wrong parameter to get values from";
+
+            }
+            for (let value: number = endValue; value >= startValue; value -= step) {
+                strValue = (targetParameter == "temperature" && value > 0) ? "+"+value : value.toString();
+                values.push(
+                    new GlobalParamLevel(value, value <= curValue, strValue)
+                )
+            }
+            return values;
+        },
+        "getScaleCSS": function (paramLevel: GlobalParamLevel): string {
+            let css = "global-numbers-value val-" + paramLevel.value + " ";
+            if (paramLevel.isActive) {
+                css += "val-is-active";
+            }
+            return css
+        }
     },
     mixins: [BoardMixin],
     template: `
-    <div class="board_cont">
+    <div class="board-cont">
+        <div class="board-outer-spaces">
+            <board-space :space="getSpaceById('01')" text="Ganymede Colony"></board-space>
+            <board-space :space="getSpaceById('02')" text="Phobos Space Haven"></board-space>
+            <board-space :space="getSpaceById('69')" text="Stanford Torus"></board-space>
+            <board-space :space="getSpaceById('70')" text="Luna Metropolis" v-if="venusNextExtension"></board-space>
+            <board-space :space="getSpaceById('71')" text="Dawn City" v-if="venusNextExtension"></board-space>
+            <board-space :space="getSpaceById('72')" text="Stratopolis" v-if="venusNextExtension"></board-space>
+            <board-space :space="getSpaceById('73')" text="Maxwell Base" v-if="venusNextExtension"></board-space>
+        </div>
+
+        <div class="global-numbers">
+            <div class="global-numbers-temperature">
+                <div :class="getScaleCSS(lvl)" v-for="lvl in getValuesForParameter('temperature')">{{ lvl.strValue }}</div>
+            </div>
+
+            <div class="global-numbers-oxygen">
+                <div :class="getScaleCSS(lvl)" v-for="lvl in getValuesForParameter('oxygen')">{{ lvl.strValue }}</div>
+            </div>
+
+            <div class="global-numbers-venus" v-if="venusNextExtension">
+                <div :class="getScaleCSS(lvl)" v-for="lvl in getValuesForParameter('venus')">{{ lvl.strValue }}</div>
+            </div>
+
+            <div class="global-numbers-oceans">
+                <div class="global-numbers-value">{{ oceans_count }}/{{ constants.MAX_OCEAN_TILES }}</div>
+            </div>
+        </div>
+
         <div class="board" id="main_board">
-            <tile v-for="space in getSpacesWithTile()" :space="space" :key="getKey('tile', space)"></tile>
-            <bonus v-for="space in getSpacesWithBonus(spaces)" :space="space" :key="getKey('bonus', space)"></bonus>
-            <svg height="470" width="450">
-                <defs>
-                    <symbol id="hexagon">
-                        <polygon points="24,48.5 45.3,36.5 45.3,13.5 24,2 3.5,13.5 3.5,36.5" fill="#fff" fill-opacity="0.01" stroke-width="3" stroke-opacity="0.4" />
-                        <polygon 
-                            style="visibility: var(--board_space_visibility, hidden)" 
-                            transform="scale(0.9, 0.9) translate(3, 3)" 
-                            points="24,48.5 45.3,36.5 45.3,13.5 24,2 3.5,13.5 3.5,36.5" 
-                            fill="none" 
-                            stroke="#4f4" 
-                            stroke-width="4" 
-                            stroke-opacity="0.4">
+            <board-space :space="curSpace" :is_selectable="true" :key="'board-space-'+curSpace.id" v-for="curSpace in getMainSpaces()"></board-space>
+            <svg id="board_legend" height="550" width="630" class="board-legend">
 
-                            <animate
-                                attributeType="XML"
-                                attributeName="stroke"
-                                values="#e95c2e;#f9c4b3;#e95c2e;#e95c2e"
-                                dur="1.2s"
-                                repeatCount="indefinite"/>
-
-                        </polygon>
-                        <polygon 
-                            style="visibility: var(--board_space_selected, hidden)" 
-                            transform="scale(0.9, 0.9) translate(3, 3)" 
-                            points="24,48.5 45.3,36.5 45.3,13.5 24,2 3.5,13.5 3.5,36.5" 
-                            fill="none" 
-                            stroke="#3c3" 
-                            stroke-width="4" 
-                            stroke-opacity="0.7">
-                        </polygon>
-                    </symbol>
-
-                </defs>
-                <g transform="translate(1, 1)" id="main_grid">
-                    <use v-for="space in getMainSpaces()"
-                        v-if="space.tileType === undefined"
-                        :data_space_id="space.id" 
-                        class="board_space board_selectable"
-                        :class="getPosCssClass(space)" 
-                        :stroke="getStroke(space)" 
-                        xlink:href="#hexagon" />
-                </g>
-            </svg>
-            <svg id="board_legend" height="470" width="470" class="board_legend">
-
-                <g id="ganymede_colony">
-                    <text x="67" y="462" class="board_caption">Ganymede Colony</text>
-                </g>
-
-                <g id="phobos_space_heaven">
-                    <text x="4" y="15" class="board_caption">Phobos Space Haven</text>
-                </g>
-
-                <g id="stanford_torus">
-                    <text x="395" y="15" class="board_caption">Stanford Torus</text>
-                </g>
-
-                <g v-if="boardName === 'original'" id="ascraeus_mons" transform="translate(40, 120)">
-                    <text class="board_caption">
+                <g v-if="boardName === 'original'" id="ascraeus_mons" transform="translate(95, 192)">
+                    <text class="board-caption">
                         <tspan dy="15">Ascraeus</tspan>
-                        <tspan x="4" dy="12">Mons</tspan>
+                        <tspan x="12" dy="12">Mons</tspan>
                     </text>
                 </g>
                 
-                <g v-if="boardName === 'original'" id="pavonis_mons" transform="translate(15, 160)">
-                    <text class="board_caption">
+                <g v-if="boardName === 'original'" id="pavonis_mons" transform="translate(90, 230)">
+                    <text class="board-caption">
                         <tspan dy="15">Pavonis</tspan>
                         <tspan x="4" dy="12">Mons</tspan>
                     </text>
                 </g>
                 
-                <g v-if="boardName === 'original'" id="arsia_mons" transform="translate(2, 205)">
-                    <text class="board_caption">
+                <g v-if="boardName === 'original'" id="arsia_mons" transform="translate(77, 275)">
+                    <text class="board-caption">
                         <tspan dy="15">Arsia</tspan>
                         <tspan x="-2" dy="12">Mons</tspan>
                     </text>
                 </g>
-                
-                <g v-if="boardName === 'original'" id="tharsis_tholus"  transform="translate(10, 100)">
-                    <text class="board_caption">Tharsis Tholus</text>
-                    <line x1="85" y1="-3" x2="160" y2="2" class="board_line"></line>
-                    <text x="158" y="5" class="board_caption board_caption--black">&#x25cf;</text>
+
+                <g v-if="boardName === 'original'" id="tharsis_tholus" transform="translate(85, 175)">
+                    <text class="board-caption" dx="47">
+                        <tspan dy="-7">Tharsis</tspan>
+                        <tspan dy="12" x="48">Tholus</tspan>
+                    </text>
+                    <line y1="-3" x2="160" y2="2" class="board-line" x1="90"></line>
+                    <text x="158" y="5" class="board-caption board_caption--black">&#x25cf;</text>
                 </g>
                 
-                <g v-if="boardName === 'original'" id="noctis_city" transform="translate(10, 258)">
-                    <text class="board_caption">
+                <g v-if="boardName === 'original'" id="noctis_city" transform="translate(85, 320)">
+                    <text class="board-caption">
                         <tspan dy="15">Noctis</tspan>
                         <tspan x="7" dy="12">City</tspan>
                     </text>
-                    <line x1="30" y1="20" x2="140" y2="-20" class="board_line"></line>
-                    <text x="136" y="-18" class="board_caption board_caption--black">&#x25cf;</text>
+                    <line x1="30" y1="20" x2="140" y2="-20" class="board-line"></line>
+                    <text x="136" y="-18" class="board-caption board_caption--black">&#x25cf;</text>
                 </g>
 
-                <g v-if="boardName === 'elysium'" id="elysium_mons" transform="translate(40, 120)">
-                <text class="board_caption">
+                <g v-if="boardName === 'elysium'" id="elysium_mons" transform="translate(110, 190)">
+                <text class="board-caption">
                     <tspan dy="15">Elysium</tspan>
-                    <tspan x="4" dy="12">Mons</tspan>
+                    <tspan x="8" dy="12">Mons</tspan>
                 </text>
                 </g>
 
-                <g v-if="boardName === 'elysium'" id="hecates_tholus"  transform="translate(20, 100)">
-                    <text class="board_caption">Hecates Tholus</text>
+                <g v-if="boardName === 'elysium'" id="hecatus_tholus"  transform="translate(130, 150)">
+                    <text class="board-caption">
+                        <tspan dy="15">Hecatus</tspan>
+                        <tspan x="3" dy="12">Tholus</tspan>
+                    </text>
                 </g>
 
-                <g v-if="boardName === 'elysium'" id="arsia_mons" transform="translate(420, 221)">
-                <text class="board_caption">
-                    <tspan dy="15">Arsia</tspan>
-                    <tspan x="4" dy="12">Mons</tspan>
-                </text>
+                <g v-if="boardName === 'elysium'" id="arsia_mons" transform="translate(545, 272)">
+                    <text class="board-caption">
+                        <tspan dy="15">Arsia</tspan>
+                        <tspan x="0" dy="12">Mons</tspan>
+                    </text>
                 </g>
 
-                <g v-if="boardName === 'elysium'" id="olympus_mons" transform="translate(410, 110)">
-                <text class="board_caption">
+                <g v-if="boardName === 'elysium'" id="olympus_mons" transform="translate(505, 190)">
+                <text class="board-caption">
                     <tspan x="-5" dy="15">Olympus</tspan>
                     <tspan x="4" dy="12">Mons</tspan>
                 </text>
                 </g>
-
             </svg>
         </div>
-
-        <venus v-if="venusNextExtension" :spaces="getVenusSpaces()" :venusScaleLevel="venusScaleLevel"></venus>
     </div>
     `
 });

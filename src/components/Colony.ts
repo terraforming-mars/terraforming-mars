@@ -61,7 +61,7 @@ export const Colony = Vue.component("colony", {
         }
     },
     template: `
-    <div class="filterDiv colony-card colonies" :class="colony.name + '-background'">
+    <div class="filterDiv colony-card colonies" :class="colony.name + '-background'" v-i18n>
     <div v-if="colony.visitor !== undefined" class="spaceship">
       <div style="margin-left: 45px;  margin-top: 55px;" :class="'board_cube board_cube--' + colony.visitor"></div>
     </div>

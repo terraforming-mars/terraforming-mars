@@ -18,7 +18,7 @@ export const BoardMixin = {
             return boardSpaces;
         },
         getMainSpaces: function (): Array<SpaceModel> {
-            return (this as any).getAllSpaces().filter((s: SpaceModel) => {return parseInt(s.id) < 70})
+            return (this as any).getAllSpaces().filter((s: SpaceModel) => {return s.spaceType != "colony"})
         },
         getAllSpaces: function(): Array<SpaceModel> {
             const boardSpaces: Array<SpaceModel> = (this as any).spaces;

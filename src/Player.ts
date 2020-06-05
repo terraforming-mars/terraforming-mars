@@ -1866,7 +1866,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     private getAvailableStandardProjects(game: Game): OrOptions {
       const standardProjects = new OrOptions();
-      standardProjects.title = "Pay for a standard project";
+      standardProjects.title = "Pay for a Standard Project";
 
       if (this.canAfford(this.powerPlantCost)) {
         standardProjects.options.push(
@@ -2020,12 +2020,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
       }
 
-      if (this.cardsInHand.length > 0) {
-        action.options.push(
-            this.sellPatents(game)
-        );
-      }
-
       if (game.coloniesExtension) {
         let openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor === undefined);
         if (openColonies.length > 0 
@@ -2038,14 +2032,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             this.tradeWithColony(openColonies, game)
           );
         }
-      }
-
-      const standardProjects = this.getAvailableStandardProjects(game);
-
-      if (standardProjects.options.length > 1) {
-        action.options.push(standardProjects);
-      } else if (standardProjects.options.length === 1) {
-        action.options.push(standardProjects.options[0]);
       }
 
       if (
@@ -2092,7 +2078,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       if (this.canAfford(8) && !game.allMilestonesClaimed()) {
         const remainingMilestones = new OrOptions();
-        remainingMilestones.title = "Select a milestone to claim";
+        remainingMilestones.title = "Claim a milestone";
         remainingMilestones.options = game.milestones
             .filter(
                 (milestone: IMilestone) =>
@@ -2103,17 +2089,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                   this.claimMilestone(milestone, game));
         
         if (remainingMilestones.options.length >= 1) action.options.push(remainingMilestones);
-      }
-
-      if (
-        this.canAfford(game.getAwardFundingCost()) &&
-            !game.allAwardsFunded()) {
-        const remainingAwards = new OrOptions();
-        remainingAwards.title = "Select an award to fund";
-        remainingAwards.options = game.awards
-            .filter((award: IAward) => game.hasBeenFunded(award) === false)
-            .map((award: IAward) => this.fundAward(award, game));
-        action.options.push(remainingAwards);
       }
 
       // If you can pay to send some in the Ara
@@ -2143,9 +2118,34 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
       }
 
+      if (
+        this.canAfford(game.getAwardFundingCost()) &&
+            !game.allAwardsFunded()) {
+        const remainingAwards = new OrOptions();
+        remainingAwards.title = "Fund an award";
+        remainingAwards.options = game.awards
+            .filter((award: IAward) => game.hasBeenFunded(award) === false)
+            .map((award: IAward) => this.fundAward(award, game));
+        action.options.push(remainingAwards);
+      }
+
+      const standardProjects = this.getAvailableStandardProjects(game);
+
+      if (standardProjects.options.length > 1) {
+        action.options.push(standardProjects);
+      } else if (standardProjects.options.length === 1) {
+        action.options.push(standardProjects.options[0]);
+      }
+
       action.options.push(
         this.passOption(game)
       );
+
+      if (this.cardsInHand.length > 0) {
+        action.options.push(
+            this.sellPatents(game)
+        );
+      }
 
       // Propose undo action only if you have done one action this turn
       if (this.actionsTakenThisRound > 0 && game.undoOption) {

@@ -18,24 +18,21 @@ export class SQLite implements IDatabase {
         }
         this.db = new sqlite3.Database(dbPath);
         this.db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, status text default 'running', PRIMARY KEY (game_id, save_id))");
-        this.db.run("ALTER TABLE games ADD COLUMN status TEXT default 'finished'", function(err: { message: any; }) {
-        if (err) {
-            // Should be duplicate column error
-            return;
-          }
-        });  
     }
 
     getClonableGames( cb:(err: any, allGames:Array<IGameData>)=> void) {
         var allGames:Array<IGameData> = [];
-        var sql = "SELECT distinct game_id game_id, json_array_length(json_extract(game, '$.players')) playerCount FROM games WHERE status = 'running' and save_id = 0 order by 2,1";
+        var sql = "SELECT distinct game_id game_id, game FROM games WHERE status = 'running' and save_id = 0 order by game_id asc";
   
         this.db.all(sql, [], (err, rows) => {
             if (rows) {
                 rows.forEach((row) => {
-                    let gameId:string = row.game_id
-                    let playerCount: number = row.playerCount;
-                    let gameData:IGameData = {gameId,playerCount};
+                    let gameId:string = row.game_id;
+                    let playerCount: number = JSON.parse(row.game).players.length;
+                    let gameData:IGameData = {
+                        gameId,
+                        playerCount
+                    };
                     allGames.push(gameData);
                 });
                 return cb(err, allGames);

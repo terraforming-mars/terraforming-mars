@@ -11,7 +11,9 @@ describe("AquiferTurbines", function () {
         const card = new AquiferTurbines();
         const player = new Player("test", Color.BLUE, false);
         player.megaCredits = 3;
-        expect(card.canPlay(player)).to.eq(true);
+        const game = new Game("foobar", [player], player);
+
+        expect(card.canPlay(player, game)).to.eq(true);
     });
     it("Should play", function () {
         const card = new AquiferTurbines();

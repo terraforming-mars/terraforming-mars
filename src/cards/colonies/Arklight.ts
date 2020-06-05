@@ -7,6 +7,7 @@ import { Resources } from '../../Resources';
 import { Game } from '../../Game';
 import { CardName } from '../../CardName';
 import { IResourceCard } from '../ICard';
+import {CorporationName} from "../../CorporationName";
 
 export class Arklight implements CorporationCard, IResourceCard {
     public name: CardName =  CardName.ARKLIGHT;
@@ -22,7 +23,9 @@ export class Arklight implements CorporationCard, IResourceCard {
     }
 
     public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
-        player.addResourceTo(this, card.tags.filter((cardTag) => cardTag === Tags.ANIMAL || cardTag === Tags.PLANT ).length);
+        if (player.isCorporation(CorporationName.ARKLIGHT)) {
+            player.addResourceTo(this, card.tags.filter((cardTag) => cardTag === Tags.ANIMAL || cardTag === Tags.PLANT).length);
+        }
       }
 
     public getVictoryPoints(): number {

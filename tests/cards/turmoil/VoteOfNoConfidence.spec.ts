@@ -12,6 +12,7 @@ describe("VoteOfNoConfidence", function () {
         const player = new Player("test", Color.BLUE, false);
         const gameOptions = {
             draftVariant: false,
+	        initialDraftVariant: false,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,

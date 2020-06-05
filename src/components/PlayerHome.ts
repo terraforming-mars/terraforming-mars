@@ -180,6 +180,22 @@ export const PlayerHome = Vue.component("player-home", {
             </div>
 
             <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
+
+                <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
+                    <card :card="card.name"></card>
+                </div>
+
+                <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
+                    <card :card="card.name"></card>
+                </div> 
+
+                <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">              
+                    <h2 v-i18n>Drafted Cards</h2>
+                    <div v-for="card in player.draftedCards" :key="card.name" class="cardbox">
+                        <card :card="card.name"></card>
+                    </div>
+                </div>
+
                 <h2 :class="'player_color_'+ player.color" v-i18n>Select initial cards:</h2>
 
                 <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>

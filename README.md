@@ -21,6 +21,8 @@ This will start the game server listening on the default port of 8080. If you th
 
 Pointing your web browser to http://localhost:8080/games-overview?serverId=_SERVER-ID_ will provide a list of all games available on the server. The secret _SERVER-ID_ is available from the console after starting the server and required to access game administration pages like the games overview.
 
+Additional information on how to setup the game server locally can be found [here](https://docs.google.com/document/d/1r4GlqA6DkrSAtR6MMYmX_nmh6o4igVTqDUUETiJYGt8/edit?usp=sharing) (short version) and [here](https://docs.google.com/document/d/1y-QnffzkQtpasBkDAFQwBoqhLmUpVTzRPybtvmbktDQ/edit?usp=sharing) (detailed version).
+
 ### docker
 
 Build the docker image and run it
@@ -111,7 +113,7 @@ Thanks goes to these wonderful people:
     </td>
     <td align="center">
       <a href="https://github.com/vincentneko"><img src="https://avatars1.githubusercontent.com/u/56086992?v=3" width="100px;" alt=""/><br />
-        <sub><b>Vincent Moreau</b></sub><br />Venus, Prelude, Hellas & Elysium, Colonies</a>
+        <sub><b>Vincent Moreau</b></sub><br />Venus, Prelude, Hellas & Elysium, Colonies, Turmoil</a>
     </td>
     <td align="center">
       <a href="https://github.com/alrusdi"><img src="https://avatars2.githubusercontent.com/u/394311?v=3" width="100px;" alt=""/><br />
@@ -123,7 +125,11 @@ Thanks goes to these wonderful people:
     </td>
     <td align="center">
       <a href="https://github.com/pierrehilbert"><img src="https://avatars0.githubusercontent.com/u/806950?v=3" width="100px;" alt=""/><br />
-        <sub><b>Pierre HILBERT</b></sub><br />Helps with the things</a>
+        <sub><b>Pierre Hilbert</b></sub><br />Turmoil and helps with the things</a>
     </td>
+    <td align="center">
+      <a href="https://github.com/nwai90"><img src="https://avatars1.githubusercontent.com/u/2408094?s=460&v=4" width="100px;" alt=""/><br />
+        <sub><b>nwai90</b></sub><br />Helps with the things</a>
+    </td>    
   </tr>
 </table>

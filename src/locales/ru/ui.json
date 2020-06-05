@@ -129,11 +129,15 @@
     "Greenery (23 MC)": "Озеленение (23 MC)",
     "City (25 MC)": "Город (25 MC)",
     "Buffer Gas (16 MC)": "Буферный газ (16 МС)",
+    "Air scrapping (15 MC)": "Очистка воздуха (15 МС)",
+    "Build colony (17 MC)": "Построить колонию (17 МС)",
     "Power plant": "Электростанция",
     "Asteroid": "Астероид",
     "Aquifer": "Океан",
     "Greenery": "Озеленение",
     "City": "Город",
+    "Air scrapping": "Очистка воздуха",
+    "Build colony": "Построить колонию",
 
     "Pay 9 MC": "Заплатить 9 MC",
     "Trade with a colony": "Торговать с колонией",
@@ -155,5 +159,15 @@
     "Select initial cards to buy": "Выбрать стартовые карты для покупки",
     "Send players their links below. As game administrator pick your link to use.": "Отправьте каждому из игроков соответствующую ссылку ниже.",
     "Allow undo": "Разрешить отмену хода",
-    "Drafted Cards": "Отложенные на драфте карты"
+    "Drafted Cards": "Отложенные на драфте карты",
+
+    "City: 1 VP per each adjanced greenery": "Город: 1 ПО владельцу за каждое смежное озеленение",
+    "Greenery: 1 VP": "Озеленение: 1 ПО владельцу",
+    "Commercial District: 1 VP per adjacent city tile": "Коммерческий район: 1 ПО за каждый смежный город",
+    "Stanford Torus": "Стэнфордский тор",
+    "Select space on mars for city tile": "Выберите место на карте, чтобы построить на нём город",
+    "Select space for ocean": "Выберите место для размещения океана",
+    "Select space for city tile": "Выберите место для размещения города",
+    "Select space for greenery tile": "Выберите место для размещения озеленения"
+
 }

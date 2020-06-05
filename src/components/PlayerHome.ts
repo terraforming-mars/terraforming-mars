@@ -8,7 +8,6 @@ import { Award } from "./Award";
 import { OtherPlayer } from "./OtherPlayer";
 import { PlayerResources } from "./PlayerResources";
 import { WaitingFor } from "./WaitingFor";
-import { GlobalParameters } from "./GlobalParameters"
 import { Preferences } from "./Preferences"
 import { PlayerModel } from "../models/PlayerModel";
 import { Colony } from './Colony';
@@ -28,7 +27,6 @@ export const PlayerHome = Vue.component("player-home", {
         "other-player": OtherPlayer,
         "player-resources": PlayerResources,
         "waiting-for": WaitingFor,
-        "global-parameters": GlobalParameters,
         "milestone": Milestone,
         "award": Award,
         "preferences": Preferences,
@@ -91,10 +89,15 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <div class="player_home_block">
                     <a name="board" class="player_home_anchor"></a>
-                    <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.boardName"></board>
+                    <board 
+                        :spaces="player.spaces" 
+                        :venusNextExtension="player.venusNextExtension" 
+                        :venusScaleLevel="player.venusScaleLevel" 
+                        :boardName ="player.boardName"
+                        :oceans_count="player.oceans" 
+                        :oxygen_level="player.oxygenLevel" 
+                        :temperature="player.temperature"></board>
 
-                    <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature" v-trim-whitespace></global-parameters>
-                    
                     <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
 
                     <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">

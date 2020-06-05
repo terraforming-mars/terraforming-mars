@@ -179,6 +179,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (players.length === 1) {
         this.soloMode = true;
         this.draftVariant = false;
+        this.initialDraft = false;
+        this.draftVariant = false;
         this.setupSolo();
       }
 

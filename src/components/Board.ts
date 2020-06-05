@@ -1,8 +1,9 @@
 
 import Vue from "vue";
-import { BoardMixin } from "./BoardMixin";
 import * as constants from '../constants';
 import { BoardSpace } from "./BoardSpace";
+import { SpaceModel } from "../models/SpaceModel";
+import { SpaceType } from "../SpaceType";
 
 class GlobalParamLevel {
     constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -21,21 +22,29 @@ export const Board = Vue.component("board", {
         }
     },
     methods: {
-        "getSpaceById": function (space_id: string) {
+        getAllSpacesOnMars: function (): Array<SpaceModel> {
+            const boardSpaces: Array<SpaceModel> = this.spaces;
+            boardSpaces.sort(
+                (space1: SpaceModel, space2: SpaceModel) => {return parseInt(space1.id) - parseInt(space2.id)}
+            );
+            return boardSpaces.filter((s: SpaceModel) => {return s.spaceType != SpaceType.COLONY})
+        },
+        getSpaceById: function (spaceId: string) {
             for (let space of this.spaces) {
-                if (space.id === space_id) {
+                if (space.id === spaceId) {
                     return space
                 }
             }
-            throw "Board space not found by id '" + space_id + "'"
+            throw "Board space not found by id '" + spaceId + "'"
         },
-        "getValuesForParameter": function (targetParameter: string): Array<GlobalParamLevel> {
+        getValuesForParameter: function (targetParameter: string): Array<GlobalParamLevel> {
             let values: Array<GlobalParamLevel> = [];
             var startValue: number;
             var endValue: number;
             var step: number;
             var curValue: number;
             var strValue: string;
+
             switch (targetParameter) {
                 case "oxygen":
                     startValue = constants.MIN_OXYGEN_LEVEL;
@@ -57,8 +66,8 @@ export const Board = Vue.component("board", {
                     break;
                 default:
                     throw "Wrong parameter to get values from";
-
             }
+
             for (let value: number = endValue; value >= startValue; value -= step) {
                 strValue = (targetParameter == "temperature" && value > 0) ? "+"+value : value.toString();
                 values.push(
@@ -67,7 +76,7 @@ export const Board = Vue.component("board", {
             }
             return values;
         },
-        "getScaleCSS": function (paramLevel: GlobalParamLevel): string {
+        getScaleCSS: function (paramLevel: GlobalParamLevel): string {
             let css = "global-numbers-value val-" + paramLevel.value + " ";
             if (paramLevel.isActive) {
                 css += "val-is-active";
@@ -75,7 +84,6 @@ export const Board = Vue.component("board", {
             return css
         }
     },
-    mixins: [BoardMixin],
     template: `
     <div class="board-cont">
         <div class="board-outer-spaces">
@@ -107,9 +115,8 @@ export const Board = Vue.component("board", {
         </div>
 
         <div class="board" id="main_board">
-            <board-space :space="curSpace" :is_selectable="true" :key="'board-space-'+curSpace.id" v-for="curSpace in getMainSpaces()"></board-space>
+            <board-space :space="curSpace" :is_selectable="true" :key="'board-space-'+curSpace.id" v-for="curSpace in getAllSpacesOnMars()"></board-space>
             <svg id="board_legend" height="550" width="630" class="board-legend">
-
                 <g v-if="boardName === 'original'" id="ascraeus_mons" transform="translate(95, 192)">
                     <text class="board-caption">
                         <tspan dy="15">Ascraeus</tspan>
@@ -150,10 +157,10 @@ export const Board = Vue.component("board", {
                 </g>
 
                 <g v-if="boardName === 'elysium'" id="elysium_mons" transform="translate(110, 190)">
-                <text class="board-caption">
-                    <tspan dy="15">Elysium</tspan>
-                    <tspan x="8" dy="12">Mons</tspan>
-                </text>
+                    <text class="board-caption">
+                        <tspan dy="15">Elysium</tspan>
+                        <tspan x="8" dy="12">Mons</tspan>
+                    </text>
                 </g>
 
                 <g v-if="boardName === 'elysium'" id="hecatus_tholus"  transform="translate(130, 150)">
@@ -171,15 +178,13 @@ export const Board = Vue.component("board", {
                 </g>
 
                 <g v-if="boardName === 'elysium'" id="olympus_mons" transform="translate(505, 190)">
-                <text class="board-caption">
-                    <tspan x="-5" dy="15">Olympus</tspan>
-                    <tspan x="4" dy="12">Mons</tspan>
-                </text>
+                    <text class="board-caption">
+                        <tspan x="-5" dy="15">Olympus</tspan>
+                        <tspan x="4" dy="12">Mons</tspan>
+                    </text>
                 </g>
             </svg>
         </div>
     </div>
     `
 });
-
-

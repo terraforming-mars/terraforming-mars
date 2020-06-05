@@ -1149,7 +1149,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }    
 
     public playCard(game: Game, selectedCard: IProjectCard, howToPay?: HowToPay): undefined { 
-
         // Pay for card
         if (howToPay !== undefined) {
             this.steel -= howToPay.steel;
@@ -1952,8 +1951,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
     }
 
-    public takeAction(game: Game): void {
+    private getPreludeMcBonus(preludeCards: IProjectCard[]) {
+      return preludeCards.map((card) => card.bonusMc || 0).reduce((a, b) => Math.max(a, b));
+    }
 
+    public takeAction(game: Game): void {
       if (this.hasInterrupt(game)) {
         this.runInterrupt(game, () => this.takeAction(game));
         return;
@@ -1961,8 +1963,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
  
       // Prelude cards have to be played first
       if (this.preludeCardsInHand.length > 0) {
+        let preludeMcBonus = this.getPreludeMcBonus(this.preludeCardsInHand);
+
         // Remove unplayable prelude cards
-        this.preludeCardsInHand = this.preludeCardsInHand.filter(card => card.canPlay === undefined || card.canPlay(this, game));
+        this.preludeCardsInHand = this.preludeCardsInHand.filter(card => card.canPlay === undefined || card.canPlay(this, game, preludeMcBonus));
         if (this.preludeCardsInHand.length === 0) {
           game.playerIsFinishedTakingActions();
           return;

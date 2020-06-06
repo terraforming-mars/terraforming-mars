@@ -8,8 +8,10 @@
     "@types/chai": "^4.2.11",
     "@types/mocha": "^5.2.6",
     "@types/node": "^10.17.21",
+    "@types/pg": "^7.14.3",
     "dialog-polyfill": "^0.5.1",
     "less": "^3.10.3",
+    "pg": "^8.2.1",
     "spectre.css": "^0.5.8",
     "sqlite3": "^4.2.0",
     "typescript": "^3.8.3",
@@ -48,6 +50,5 @@
   "bugs": {
     "url": "https://github.com/bafolts/terraforming-mars/issues"
   },
-  "homepage": "https://github.com/bafolts/terraforming-mars#readme",
-  "cacheDirectories": ["db"]
+  "homepage": "https://github.com/bafolts/terraforming-mars#readme"
 }

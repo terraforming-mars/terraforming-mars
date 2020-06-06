@@ -214,7 +214,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }  
 
       // Setup custom corporation list
-      if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= players.length * 2) {
+      const minCorpsRequired = players.length * this.startingCorporations;
+      if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
 
         // Init all available corporation cards to choose from
         corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());

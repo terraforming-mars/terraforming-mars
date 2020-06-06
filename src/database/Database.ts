@@ -1,3 +1,4 @@
+import { PostgreSQL } from "./PostgreSQL";
 import { SQLite } from "./SQLite";
 import { IDatabase } from "./IDatabase";
 
@@ -8,10 +9,12 @@ export class Database {
   
     public static getInstance() {
         if (!Database.instance) {
-            Database.instance = new SQLite();
+            if (process.env.POSTGRES_HOST !== undefined) {
+                Database.instance = new PostgreSQL();
+            } else {
+                Database.instance = new SQLite();
+            }
         }
-
         return Database.instance;
     }
-  
-  }
+}

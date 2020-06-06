@@ -15,7 +15,7 @@ export class PostgreSQL implements IDatabase {
             }
         });
         this.client.connect();
-        this.client.query("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, status text default 'running', PRIMARY KEY (game_id, save_id))", (err) => {
+        this.client.query("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, status text default 'running', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))", (err) => {
             if (err) {
                 throw err;
             }

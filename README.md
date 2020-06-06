@@ -21,82 +21,9 @@ This will start the game server listening on the default port of 8080. If you th
 
 Pointing your web browser to http://localhost:8080/games-overview?serverId=_SERVER-ID_ will provide a list of all games available on the server. The secret _SERVER-ID_ is available from the console after starting the server and required to access game administration pages like the games overview.
 
-### docker
+Additional information on how to setup the game server locally can be found [here](https://docs.google.com/document/d/1r4GlqA6DkrSAtR6MMYmX_nmh6o4igVTqDUUETiJYGt8/edit?usp=sharing) (short version) and [here](https://docs.google.com/document/d/1y-QnffzkQtpasBkDAFQwBoqhLmUpVTzRPybtvmbktDQ/edit?usp=sharing) (detailed version).
 
-Build the docker image and run it
-
-```
-docker build . -t terraforming-mars
-docker run -p 8080:8080 terraforming-mars
-```
-
-This will start the game server listening on the default port of 8080. If you then point a web browser to http://localhost:8080 you will be on the create game screen.
-
-### docker-compose
-
-If traefik and watchtower are running on your docker host, you can use the docker-compose.yml template of this repo.
-
-It is starting the game from a public image hosted on hub.docker.com
-
-```
-terraforming-mars:
-  image: lotooo/terraforming-mars
-  container_name: terraforming-mars
-  labels:
-    - "traefik.frontend.rule=Host:terraforming-mars.mydomain.com"
-    - "traefik.port=8080"
-    - "traefik.protocol=http"
-    - "traefik.backend=terraforming-mars"
-    - "com.centurylinklabs.watchtower.enable=true"
-```
-
-Start the service
-
-```
-docker-compose up
-```
-
-This will start the game server. If you then point a web browser to https://terraforming-mars.mydomain.com you will be on the create game screen.
-
-### docker-compose + systemd
-
-Copy your docker-compose file in a /data/docker/terraforming-mars folder, then create a systemd unit to stop/start/restart your service
-
-Create a  file `/lib/systemd/system/terraforming-mars.service` with this content:
-
-```
-[Unit]
-Description=Terraforming Mars service with docker compose
-Requires=docker.service
-After=docker.service
-
-[Service]
-Restart=always
-WorkingDirectory=/data/docker/terraforming-mars
-
-# Remove old containers, images and volumes
-ExecStartPre=/usr/bin/docker-compose down -v
-ExecStartPre=/usr/bin/docker-compose rm -fv
-ExecStartPre=-/bin/bash -c 'docker ps -aqf "name=terraforming-mars*" | xargs -r docker rm'
-
-# Compose up
-ExecStart=/usr/bin/docker-compose up
-
-# Compose down, remove containers and volumes
-ExecStop=/usr/bin/docker-compose down -v
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Reload systemd + enable and start terraforming mars
-
-```
-sudo systemctl daemon-reload
-sudo systemctl enable terraforming-mars.service
-sudo systemctl start terraforming-mars.service
-```
-
+Additional information on how to setup the game with docker can be found [here](https://drive.google.com/file/d/14hOxxLrCjhWJimvCyuLc-2JRrXevFiR1/view?usp=sharing).
 
 
 ## Contributors ✨
@@ -111,7 +38,7 @@ Thanks goes to these wonderful people:
     </td>
     <td align="center">
       <a href="https://github.com/vincentneko"><img src="https://avatars1.githubusercontent.com/u/56086992?v=3" width="100px;" alt=""/><br />
-        <sub><b>Vincent Moreau</b></sub><br />Venus, Prelude, Hellas & Elysium, Colonies</a>
+        <sub><b>Vincent Moreau</b></sub><br />Venus, Prelude, Hellas & Elysium, Colonies, Turmoil</a>
     </td>
     <td align="center">
       <a href="https://github.com/alrusdi"><img src="https://avatars2.githubusercontent.com/u/394311?v=3" width="100px;" alt=""/><br />
@@ -123,7 +50,11 @@ Thanks goes to these wonderful people:
     </td>
     <td align="center">
       <a href="https://github.com/pierrehilbert"><img src="https://avatars0.githubusercontent.com/u/806950?v=3" width="100px;" alt=""/><br />
-        <sub><b>Pierre HILBERT</b></sub><br />Helps with the things</a>
+        <sub><b>Pierre Hilbert</b></sub><br />Turmoil and helps with the things</a>
     </td>
+    <td align="center">
+      <a href="https://github.com/nwai90"><img src="https://avatars1.githubusercontent.com/u/2408094?s=460&v=4" width="100px;" alt=""/><br />
+        <sub><b>nwai90</b></sub><br />Helps with the things</a>
+    </td>    
   </tr>
 </table>

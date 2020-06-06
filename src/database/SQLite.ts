@@ -17,7 +17,7 @@ export class SQLite implements IDatabase {
             fs.mkdirSync(dbFolder);
         }
         this.db = new sqlite3.Database(dbPath);
-        this.db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, status text default 'running', PRIMARY KEY (game_id, save_id))");
+        this.db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, status text default 'running', created_time timestamp default (strftime('%s', 'now')), PRIMARY KEY (game_id, save_id))");
     }
 
     getClonableGames( cb:(err: any, allGames:Array<IGameData>)=> void) {

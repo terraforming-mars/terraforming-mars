@@ -44,6 +44,7 @@ import { PartyName } from "./turmoil/parties/PartyName";
 import { SelectDelegate } from "./inputs/SelectDelegate";
 import { Phase } from "./Phase";
 import { SelfReplicatingRobots } from "./cards/promo/SelfReplicatingRobots";
+import { Aridor } from "./cards/colonies/Aridor";
 
 export class Player implements ILoadable<SerializedPlayer, Player>{
     public corporationCard: CorporationCard | undefined = undefined;
@@ -2212,6 +2213,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.corporationCard = getCorporationCardByName(d.corporationCard.name);
         if(d.corporationCard.resourceCount && d.corporationCard.resourceCount > 0) {
           this.corporationCard!.resourceCount = d.corporationCard.resourceCount;
+        }
+        if(d.corporationCard.name === CardName.ARIDOR){
+          (this.corporationCard as Aridor).allTags = new Set((d.corporationCard as Aridor).allTags);
         }
       } else {
           this.corporationCard = undefined;

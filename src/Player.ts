@@ -128,7 +128,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (game.turmoilExtension 
         && game.turmoil !== undefined 
         && game.turmoil.rulingParty !== undefined 
-        && game.turmoil.rulingParty.name === PartyName.REDS) {
+        && game.turmoil.rulingParty.name === PartyName.REDS && game.phase === Phase.ACTION) {
           if (this.canAfford(3)) 
           {
             game.addSelectHowToPayInterrupt(this, 3, false, false, "Select how to pay for TR increase");

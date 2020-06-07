@@ -1147,7 +1147,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
         && this.turmoil !== undefined 
         && this.turmoil.rulingParty !== undefined 
         && this.turmoil.rulingParty.name === PartyName.MARS
-        && spaceType !== SpaceType.COLONY) {
+        && spaceType !== SpaceType.COLONY
+        && this.phase === Phase.ACTION) {
           player.setResource(Resources.STEEL, 1);
       }      
 
@@ -1228,7 +1229,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.turmoilExtension 
         && this.turmoil !== undefined 
         && this.turmoil.rulingParty !== undefined 
-        && this.turmoil.rulingParty.name === PartyName.GREENS) {
+        && this.turmoil.rulingParty.name === PartyName.GREENS
+        && this.phase ===  Phase.ACTION) {
           player.setResource(Resources.MEGACREDITS, 4);
       }
       return this.increaseOxygenLevel(player, 1);

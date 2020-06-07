@@ -15,7 +15,6 @@ import { SerializedTurmoil } from "./SerializedTurmoil";
 import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
-import { Resources } from "../Resources";
 
 export interface IPartyFactory<T> {
     partyName: PartyName;
@@ -252,12 +251,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
             this.chairman = this.rulingParty.partyLeader;
             if (this.chairman) {
                 if (this.chairman instanceof Player) {
-                    // Reds hook (chairman must no loose 3 MC here if reds are rulling)
-                    if (this.rulingParty.name === PartyName.REDS) {
-                        this.chairman.setResource(Resources.MEGACREDITS, 3);
-                    }
                     this.chairman.increaseTerraformRating(game);
-
 
                     game.log(
                         LogMessageType.DEFAULT,

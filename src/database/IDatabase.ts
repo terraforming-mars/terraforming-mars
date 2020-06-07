@@ -7,6 +7,8 @@ export interface IGameData {
 
 export interface IDatabase {
     cleanSaves(game_id: string, save_id: number): void;
+    cleanGame(game_id: string): void;
+    cleanGameSave(game_id: string, save_id: number): void;
     restoreGame(game_id: string, save_id: number, game: Game): void;
     restoreGameLastSave(game_id:string, game: Game, cb:(err: any) => void): void;
     saveGameState(game_id: string, save_id: number, game: string): void;

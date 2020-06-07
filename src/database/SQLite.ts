@@ -103,6 +103,24 @@ export class SQLite implements IDatabase {
         });        
     }
 
+    cleanGame(game_id: string): void {
+        // DELETE all saves 
+        this.db.run("DELETE FROM games WHERE game_id = ? ", [game_id], function(err: { message: any; }) {
+            if (err) {
+            return console.warn(err.message);  
+            }
+        });
+    }
+    
+    cleanGameSave(game_id: string, save_id: number): void {
+        // DELETE one  save  by save id
+        this.db.run("DELETE FROM games WHERE game_id = ? AND save_id = ?", [game_id, save_id], function(err: { message: any; }) {
+            if (err) {
+            return console.warn(err.message);  
+            }
+        });
+    }
+
     restoreGame(game_id: string, save_id: number, game: Game): void {
         // Retrieve last save from database
         this.db.get("SELECT game game ,createtime createtime  FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1", [game_id, save_id],(err: { message: any; }, row: { game: any, createtime: any; }) => {

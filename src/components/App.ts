@@ -15,7 +15,8 @@ export const mainAppSettings = {
         componentsVisibility: {},
         game: {
             players: []
-        }
+        },
+        undoable : false
     },
     "components": {
         "start-screen": StartScreen,
@@ -73,6 +74,11 @@ export const mainAppSettings = {
             app.updatePlayer();
         } else if (currentPathname === "/game") {
             app.screen = "game-home";
+            if(window.location.search.indexOf("undo")>0){
+                app.undoable = true;
+            }else{
+                app.undoable = false;
+            }
             const xhr = new XMLHttpRequest();
             xhr.open("GET", "/api/game" + window.location.search);
             xhr.onerror = function () {

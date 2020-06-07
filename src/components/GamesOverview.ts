@@ -71,7 +71,7 @@ export const GamesOverview = Vue.component("games-overview", {
             <p>The following games are available on this server:</p>
             <ul>
                 <li v-for="game in games">
-                    <a v-bind:href="'/game?id='+game.id">{{game.id}}</a> 
+                    <a v-bind:href="'/game?id='+game.id+'&undo'">{{game.id}}</a> 
                     <span>{{game.createtime}}  {{game.updatetime}}  </span>
                     with {{game.players.length}} player(s) : 
                     <span class="player_home_block nofloat" >

@@ -81,6 +81,10 @@ function requestHandler(
         serveAsset(req, res);
       } else if (req.url.startsWith("/api/games")) {
         apiGetGames(req, res);
+      } else if (req.url.indexOf("/api/gameback") === 0) {
+        apiGameBack(req, res);
+      } else if (req.url.indexOf("/api/gamedelete") === 0) {
+        apiGameDelete(req, res);
       } else if (req.url.indexOf("/api/game") === 0) {
         apiGetGame(req, res);
       } else if (req.url.startsWith("/api/clonablegames")) {
@@ -248,8 +252,85 @@ function loadAllGames(): void {
   });
 }
 
+function apiGameBack(req: http.IncomingMessage, res: http.ServerResponse): void {
+  const routeRegExp: RegExp = /^\/api\/gameback\?id\=([0-9abcdef]+).*?$/i;
+
+  if (req.url === undefined) {
+    console.warn("url not defined");
+    notFound(req, res);
+    return;
+  }
+
+  if (!routeRegExp.test(req.url)) {
+    console.warn("no match with regexp");
+    notFound(req, res);
+    return;
+  }
+
+  const matches = req.url.match(routeRegExp);
+
+  if (matches === null || matches[1] === undefined) {
+    console.warn("didn't find game id");
+    notFound(req, res);
+    return;
+  }
+
+  const gameId: string = matches[1];
+
+  const game = games.get(gameId);
+
+  if (game === undefined) {
+    console.warn("game is undefined");
+    notFound(req, res);
+    return;
+  }
+  game.rollback();
+  res.setHeader("Content-Type", "application/json");
+  res.write("success");
+  res.end();
+}
+
+function apiGameDelete(req: http.IncomingMessage, res: http.ServerResponse): void {
+  const routeRegExp: RegExp = /^\/api\/gamedelete\?id\=([0-9abcdef]+).*?$/i;
+
+  if (req.url === undefined) {
+    console.warn("url not defined");
+    notFound(req, res);
+    return;
+  }
+
+  if (!routeRegExp.test(req.url)) {
+    console.warn("no match with regexp");
+    notFound(req, res);
+    return;
+  }
+
+  const matches = req.url.match(routeRegExp);
+
+  if (matches === null || matches[1] === undefined) {
+    console.warn("didn't find game id");
+    notFound(req, res);
+    return;
+  }
+
+  const gameId: string = matches[1];
+
+  const game = games.get(gameId);
+
+  if (game === undefined) {
+    console.warn("game is undefined");
+    notFound(req, res);
+    return;
+  }
+  game.delete();
+  games.delete(gameId);
+  res.setHeader("Content-Type", "application/json");
+  res.write("success");
+  res.end();
+}
+
 function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
-  const routeRegExp: RegExp = /^\/api\/game\?id\=([0-9abcdef]+)$/i;
+  const routeRegExp: RegExp = /^\/api\/game\?id\=([0-9abcdef]+).*?$/i;
 
   if (req.url === undefined) {
     console.warn("url not defined");
@@ -789,8 +870,10 @@ function getGame(game: Game): string {
     id: game.id,
     phase: game.phase,
     players: game.getPlayers(),
-    createtime: game.createtime,
-    updatetime: game.updatetime?.slice(5,19)
+    createtime: game.createtime?.slice(5,16),
+    updatetime: game.updatetime?.slice(5,16),
+    gameAge: game.gameAge,
+    saveId: game.lastSaveId
   };
   return JSON.stringify(output);
 }

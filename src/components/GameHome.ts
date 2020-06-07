@@ -18,9 +18,11 @@ export const GameHome = Vue.component("game-home", {
         <div id="game-home">
             <h1>Terraforming Mars - Game Home</h1>
             <p>Send players their links below. As game administrator pick your link to use.</p>
-            Game Age： {{game.gameAge}} ,Last Save Id : {{game.saveId}}  --&gt;
-            <a v-if="undoable == true" v-bind:href="'api/gameback?id='+game.id" target="_blank" > ROLLBACk</a>
-            <button v-if="undoable == true" v-on:click="deleteGame()"   > DELETE</button>
+            Game Age： {{game.gameAge}} ,Last Save Id : {{game.saveId}}  
+            <div v-if="undoable == true">--&gt;
+                <a  v-bind:href="'api/gameback?id='+game.id" target="_blank" > ROLLBACk</a>
+                <button v-on:click="deleteGame()" > DELETE</button>
+            </div>
             <ul>
                 <li v-for="player in game.players">
                         <span class="player_home_block nofloat">

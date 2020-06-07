@@ -1295,9 +1295,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             });
             game.log(
               LogMessageType.DEFAULT,
-              "${0} used ${1} standard project",
+              "${0} used ${1} standard project,sold ${2} card(s)",
               new LogMessageData(LogMessageDataType.PLAYER, this.id),
-              new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Sell patents")
+              new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Sell patents"),
+              new LogMessageData(LogMessageDataType.STRING, foundCards.length.toString()),
             );
             return undefined;
           }, this.cardsInHand.length

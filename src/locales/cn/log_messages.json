@@ -10,6 +10,7 @@
     "${0} converted plants into a greenery": "${0} 用植物建立温室",
     "${0} traded with ${1}": "${0} 到 ${1} 进行贸易",
     "${0} used ${1} standard project": "${0} 执行了标准行动 - ${1} ",
+    "${0} used ${1} standard project,sold ${2} card(s)": "${0} 执行了标准行动 - ${1}, 出售了 ${2} 张卡",
     "${0} built a colony on ${1}": "${0} 在 ${1} 上建立了殖民地",
     "${0} bought ${1} card(s)": "${0} 购买了 ${1} 张计划卡",
     "${0} acted as World Government and increased Venus scale": "${0} 作为世界政府,提升了金星的改造度",

@@ -1,9 +1,9 @@
-import { Game } from '../Game';
-import { PlayerInput } from '../PlayerInput';
-import { Player } from '../Player';
-import { PlayerInterrupt } from './PlayerInterrupt';
-import { OrOptions } from '../inputs/OrOptions';
-import { SelectOption } from '../inputs/SelectOption';
+import { Game } from "../Game";
+import { PlayerInput } from "../PlayerInput";
+import { Player } from "../Player";
+import { PlayerInterrupt } from "./PlayerInterrupt";
+import { OrOptions } from "../inputs/OrOptions";
+import { SelectOption } from "../inputs/SelectOption";
 import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
@@ -17,6 +17,7 @@ export class SelectParty implements PlayerInterrupt {
         public nbr: number = 1,
         public replace: "NEUTRAL" | Player | undefined = undefined,
         public price: number | undefined = undefined,
+        public lobby: boolean = true
     ){
         const sendDelegate = new OrOptions();
         // Change the default title
@@ -48,7 +49,7 @@ export class SelectParty implements PlayerInterrupt {
                   if (replace) {
                     game.turmoil?.removeDelegateFromParty(replace, party.name, game);
                   }
-                  game.turmoil?.sendDelegateToParty(player, party.name, game);
+                  game.turmoil?.sendDelegateToParty(player, party.name, game, lobby);
                 }
                 game.log(
                   LogMessageType.DEFAULT,

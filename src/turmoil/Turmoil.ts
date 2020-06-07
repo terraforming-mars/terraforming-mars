@@ -13,8 +13,8 @@ import { IGlobalEvent } from "./globalEvents/IGlobalEvent";
 import { ILoadable } from "../ILoadable";
 import { SerializedTurmoil } from "./SerializedTurmoil";
 import { LogMessageType } from "../LogMessageType";
-import { LogMessageData } from '../LogMessageData';
-import { LogMessageDataType } from '../LogMessageDataType';
+import { LogMessageData } from "../LogMessageData";
+import { LogMessageDataType } from "../LogMessageDataType";
 import { Resources } from "../Resources";
 
 export interface IPartyFactory<T> {
@@ -92,10 +92,10 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
     }
 
     // Use to send a delegate to a specific party
-    public sendDelegateToParty(player: Player | "NEUTRAL", partyName: PartyName, game: Game): void {
+    public sendDelegateToParty(player: Player | "NEUTRAL", partyName: PartyName, game: Game, lobby :boolean =true): void {
         const party = this.getPartyByName(partyName);
         if (party) {
-            if (player != "NEUTRAL" && this.lobby.has(player.id)) {
+            if (player !== "NEUTRAL" && this.lobby.has(player.id) && lobby) {
                 this.lobby.delete(player.id);
             }
             else {

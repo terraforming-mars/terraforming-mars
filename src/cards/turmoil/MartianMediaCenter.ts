@@ -3,8 +3,8 @@ import { Tags } from "../Tags";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { Game } from '../../Game';
-import { PartyName } from '../../turmoil/parties/PartyName';
+import { Game } from "../../Game";
+import { PartyName } from "../../turmoil/parties/PartyName";
 import { Resources } from "../../Resources";
 import { SelectParty } from "../../interrupts/SelectParty";
 
@@ -33,7 +33,7 @@ export class MartianMediaCenter implements IProjectCard {
 
     public action(player: Player, game: Game) {
         game.addSelectHowToPayInterrupt(player, 3, false, false, "Select how to pay for Martian Media Center action");
-        game.addInterrupt(new SelectParty(player, game));
+        game.addInterrupt(new SelectParty(player, game, "Select where to send a delegate", 1, undefined, undefined, false));
         return undefined;
     }
 }

@@ -86,7 +86,7 @@ export const mainAppSettings = {
             };
             xhr.onload = () => {
                 if (xhr.status === 200) {
-                    window.history.replaceState(xhr.response, "Teraforming Mars - Game", "/game?id=" + xhr.response.id);
+                    // window.history.replaceState(xhr.response, "Teraforming Mars - Game", "/game?id=" + xhr.response.id);
                     app.game = xhr.response;
                 } else {
                     alert("Unexpected server response");

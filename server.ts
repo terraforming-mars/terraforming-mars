@@ -127,7 +127,7 @@ function generateRandomGameId(): string {
 }
 
 function generateRandomServerId(): string {
-  return generateRandomGameId();
+  return "123";
 }
 
 function processInput(
@@ -183,12 +183,26 @@ function apiGetGames(req: http.IncomingMessage, res: http.ServerResponse): void 
     return;
   }
 
-  const answer: Array<string> = [];
+  const answer: Array<any> = [];
 
   for (let key of Array.from(games.keys())) {
-    answer.push(key);
+    let game =  games.get(key)
+    if (game !== undefined){
+      answer.push({
+        activePlayer: game.activePlayer.color,
+        id: game.id,
+        phase: game.phase,
+        players: game.getPlayers(),
+        createtime: game.createtime?.slice(5,16),
+        updatetime: game.updatetime?.slice(5,16),
+        gameAge: game.gameAge,
+        saveId: game.lastSaveId
+      });
+    }
   }
-
+  answer.sort((a : any,b:any) => {
+    return a.updatetime > b.updatetime ? -1 : (a.updatetime === b.updatetime ? 0 : 1 )
+  })
   res.setHeader("Content-Type", "application/json");
   res.write(JSON.stringify(answer));
   res.end();
@@ -875,7 +889,15 @@ function getGame(game: Game): string {
     gameAge: game.gameAge,
     saveId: game.lastSaveId
   };
-  return JSON.stringify(output);
+  
+  return JSON.stringify(output,replacer);
+}
+
+function replacer(_key: any, value: any) {
+  if(value instanceof Player ){
+    return  {id: value.id, name: value.name, color: value.color};
+  }
+  return value;
 }
 
 function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {

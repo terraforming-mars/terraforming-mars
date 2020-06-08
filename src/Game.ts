@@ -911,9 +911,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private gotoEndGame(): void {
+      this.lastSaveId += 1;
+      this.phase = Phase.END
+      Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
       Database.getInstance().cleanSaves(this.id, this.lastSaveId);
-      if (this.phase === Phase.END) return;
-      this.phase = Phase.END;
+      return;
     }
 
     public canPlaceGreenery(player: Player): boolean {

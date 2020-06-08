@@ -25,9 +25,10 @@ export const GamesOverview = Vue.component("games-overview", {
                 if (xhr.status === 200) {
                     const result = xhr.response;
                     if (result instanceof Array) {
-                        result.forEach(function (gameId) {
-                            (vueApp as any).getGame(gameId);
-                        });
+                        (vueApp as any).games = result;
+                        // result.forEach(function (gameId) {
+                            // (vueApp as any).getGame(gameId);
+                        // });
 
                     } else {
                         alert("Unexpected response fetching games from API");

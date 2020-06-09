@@ -120,7 +120,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       public id: string,
       private players: Array<Player>,
       private first: Player,
-      gameOptions?: GameOptions
+      gameOptions?: GameOptions,
+      rebuild: boolean = true
     ) {
 
       Database.getInstance();
@@ -258,8 +259,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Save initial game state
       Game.stringifyPlayers.clear();
-      Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
-
+      if(!rebuild){
+        Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
+      }
       this.log(
         LogMessageType.NEW_GENERATION,
         "Generation ${0}",
@@ -913,6 +915,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private gotoEndGame(): void {
       this.lastSaveId += 1;
       this.phase = Phase.END
+      Game.stringifyPlayers.clear();
       Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
       Database.getInstance().cleanSaves(this.id, this.lastSaveId);
       return;
@@ -1624,7 +1627,17 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (active) {
         // We have to switch active player because it's still the one that ended last turn
         this.activePlayer = active;
-        this.activePlayer.takeAction(this);
+        if(this.lastSaveId > 0){
+          this.activePlayer.takeAction(this);
+        }else{
+          this.players.forEach((player) => {
+            if (!player.beginner) { 
+              player.setWaitingFor(this.pickCorporationCard(player), () => {});
+            } else {
+              this.playCorporationCard(player, new BeginnerCorporation());
+            }  
+          })
+        }
       }
       else {
         throw "No Player found when rebuilding Active Player";

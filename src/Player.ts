@@ -2013,59 +2013,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }         
 
       const action: OrOptions = new OrOptions();
+      action.id = this.generateId();
       action.title = "Take action for action phase, select one " +
                        "available action.";
 
-      if (this.getPlayableCards(game).length > 0) {
-        action.options.push(
-            this.playProjectCard(game)
-        );
-      }
-
-      if (this.getPlayableActionCards(game).length > 0) {
-        action.options.push(
-            this.playActionCard(game)
-        );
-      }
-
-      action.options.push(
-          this.passOption(game)
-      );
-
-      if (this.cardsInHand.length > 0) {
-        action.options.push(
-            this.sellPatents(game)
-        );
-      }
-
-      if (game.getPlayers().length > 1 && this.actionsTakenThisRound > 0) {
-        action.options.push(
-            this.endTurnOption(game)
-        );
-      }
-
-      if (game.coloniesExtension) {
-        let openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor === undefined);
-        if (openColonies.length > 0 
-          && this.fleetSize > this.tradesThisTurn
-          && (this.canAfford(9 - this.colonyTradeDiscount) 
-            || this.energy >= (3 - this.colonyTradeDiscount) 
-            || this.titanium >= (3 - this.colonyTradeDiscount)) 
-          ) {
-          action.options.push(
-            this.tradeWithColony(openColonies, game)
-          );
-        }
-      }
-
-      const standardProjects = this.getAvailableStandardProjects(game);
-
-      if (standardProjects.options.length > 1) {
-        action.options.push(standardProjects);
-      } else if (standardProjects.options.length === 1) {
-        action.options.push(standardProjects.options[0]);
-      }
-
+      //plants Greenery
       if (
         this.plants >= this.plantsNeededForGreenery &&
             game.board.getAvailableSpacesForGreenery(this).length > 0) {
@@ -2074,6 +2026,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
       }
 
+      //heat Temperature
       if (
         (this.heat >= constants.HEAT_FOR_TEMPERATURE || 
           (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) &&
@@ -2084,8 +2037,28 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             this.convertHeatIntoTemperature(game)
         );
       }
+      
+      //end turn
+      if (game.getPlayers().length > 1 && this.actionsTakenThisRound > 0) {
+        action.options.push(
+            this.endTurnOption(game)
+        );
+      }
 
-      // Turmoil Scientists capacity
+      //pass
+      action.options.push(
+        this.passOption(game)
+      );
+
+      //Pay standardProjects
+      const standardProjects = this.getAvailableStandardProjects(game);
+      if (standardProjects.options.length > 1) {
+        action.options.push(standardProjects);
+      } else if (standardProjects.options.length === 1) {
+        action.options.push(standardProjects.options[0]);
+      }
+
+      // Pay Turmoil Scientists capacity
       if (this.canAfford(10) 
         && game.turmoilExtension 
         && game.turmoil !== undefined 
@@ -2097,7 +2070,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
       }
 
-      // Turmoil Kelvinists capacity
+      // Pay Turmoil Kelvinists capacity
       if (this.canAfford(10) 
         && game.turmoilExtension 
         && game.turmoil !== undefined 
@@ -2108,6 +2081,21 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
       }      
 
+      //perform action cards
+      if (this.getPlayableActionCards(game).length > 0) {
+        action.options.push(
+            this.playActionCard(game)
+        );
+      }
+
+      //play cards
+      if (this.getPlayableCards(game).length > 0) {
+        action.options.push(
+            this.playProjectCard(game)
+        );
+      }
+
+      //Select milestone
       if (this.canAfford(8) && !game.allMilestonesClaimed()) {
         const remainingMilestones = new OrOptions();
         remainingMilestones.title = "Select a milestone to claim";
@@ -2126,6 +2114,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
       }
 
+      //Select Award
       if (
         this.canAfford(game.getAwardFundingCost()) &&
             !game.allAwardsFunded()) {
@@ -2137,12 +2126,14 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         action.options.push(remainingAwards);
       }
 
-      // Propose undo action only if you have done one action this turn
-      if (this.actionsTakenThisRound > 0) {
-        action.options.push(this.undoTurnOption(game));
+      //sellPatents
+      if (this.cardsInHand.length > 0) {
+        action.options.push(
+            this.sellPatents(game)
+        );
       }
-
-      // If you can pay to send some in the Ara
+      
+      // Send ,If you can pay to send some in the Ara
       if (game.turmoilExtension) {
         if (game.turmoil?.lobby.has(this.id)) {
           const selectParty = new SelectParty(this, game, "Send a delegate in an area (from lobby)");
@@ -2154,14 +2145,34 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
       }
 
-      action.options.sort((a, b) => {
+      //trade colony
+      if (game.coloniesExtension) {
+        let openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor === undefined);
+        if (openColonies.length > 0 
+          && this.fleetSize > this.tradesThisTurn
+          && (this.canAfford(9 - this.colonyTradeDiscount) 
+            || this.energy >= (3 - this.colonyTradeDiscount) 
+            || this.titanium >= (3 - this.colonyTradeDiscount)) 
+          ) {
+          action.options.push(
+            this.tradeWithColony(openColonies, game)
+          );
+        }
+      }
+
+      // Propose undo action only if you have done one action this turn
+      if (this.actionsTakenThisRound > 0) {
+        action.options.push(this.undoTurnOption(game));
+      }
+
+      /* action.options.sort((a, b) => {
         if (a.title > b.title) {
           return 1;
         } else if (a.title < b.title) {
           return -1;
         }
         return 0;
-      });
+      }); */
 
       this.setWaitingFor(action, () => {
         this.actionsTakenThisRound++;
@@ -2170,16 +2181,23 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     }
 
-    public process(game: Game, input: Array<Array<string>>): void {
+    public process(game: Game, input: any): void {
       if (this.waitingFor === undefined || this.waitingForCb === undefined) {
         throw new Error("Not waiting for anything");
       }
+      if(input.id && this.waitingFor instanceof OrOptions && this.waitingFor.id ){
+        if(input.id !== this.waitingFor.id){
+          throw new Error("Not Exact Id");
+        }
+      }
+      let input2: Array<Array<string>> = input.input;
+
       const waitingFor = this.waitingFor;
       const waitingForCb = this.waitingForCb;
       this.waitingFor = undefined;
       this.waitingForCb = undefined;
       try {
-        this.runInput(game, input, waitingFor);
+        this.runInput(game, input2, waitingFor);
         waitingForCb();
       } catch (err) {
         this.waitingFor = waitingFor;
@@ -2222,10 +2240,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       // Rebuild dealt corporation array
-      this.dealtCorporationCards = d.dealtCorporationCards.map((element: CorporationCard)  => {
-        return getCorporationCardByName(element.name)!;
-      });
-
+      if(d.dealtCorporationCards !== undefined ){
+        this.dealtCorporationCards = d.dealtCorporationCards.map((element: CorporationCard)  => {
+          return getCorporationCardByName(element.name)!;
+        });
+      }
       // Rebuild dealt prelude array
       if(d.dealtPreludeCards !== undefined ){
         this.dealtPreludeCards = d.dealtPreludeCards.map((element: IProjectCard)  => {
@@ -2241,14 +2260,17 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       } 
 
       // Rebuild each cards in hand
-      this.cardsInHand = d.cardsInHand.map((element: IProjectCard)  => {
-        return getProjectCardByName(element.name)!;
-      });
-
+      if(d.cardsInHand !== undefined ){
+        this.cardsInHand = d.cardsInHand.map((element: IProjectCard)  => {
+          return getProjectCardByName(element.name)!;
+        });
+      }
       // Rebuild each prelude in hand
-      this.preludeCardsInHand = d.preludeCardsInHand.map((element: IProjectCard)  => {
-        return getProjectCardByName(element.name)!;
-      });
+      if(d.preludeCardsInHand !== undefined ){
+        this.preludeCardsInHand = d.preludeCardsInHand.map((element: IProjectCard)  => {
+          return getProjectCardByName(element.name)!;
+        });
+      }
 
       // Rebuild each played card
       this.playedCards = d.playedCards.map((element: IProjectCard)  => {

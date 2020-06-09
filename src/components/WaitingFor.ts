@@ -113,7 +113,8 @@ export const WaitingFor = Vue.component("waiting-for", {
                     alert("Error sending input");
                 }
             }
-            xhr.send(JSON.stringify(out));  
+            let senddata ={"id":this.waitingfor.id,"input":out};
+            xhr.send(JSON.stringify(senddata));  
         }, true, true);
 
         return createElement("div", {"class": "wf-root"}, [input])

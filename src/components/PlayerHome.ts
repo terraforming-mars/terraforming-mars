@@ -70,7 +70,7 @@ export const PlayerHome = Vue.component("player-home", {
     },
     template: `
         <div id="player-home">
-           <h2 :class="'game-title player_color_'+ player.color" v-i18n>Terraforming Mars</h2>
+           <h2 :class="'game-title player_color_'+ player.color"><a :href="'/game?id='+ player.gameId" v-i18n>Terraforming Mars</a></h2>
             <section>
                 <dialog id="dialog-default">
                     <form method="dialog">

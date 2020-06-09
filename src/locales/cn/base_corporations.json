@@ -29,7 +29,7 @@
   "Effect: Your may use heat as MC. You may not use MC as heat.":"效果:你可以用热能资源代替MC使用,但不用用MC代替热能资源使用",
 
   "You start with 45 MC. As your first action, fund an award for free.":"起始获得45MC。作为你的起始行动,你可以免费资助一个奖项",
-  "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3MC.":"效果:当你打出一张没有得分标记的牌(包括本牌)时,获得3MC",
+  "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3MC.":"效果:当你打出一张有得分标记的牌(包括本牌)时,获得3MC",
 
   "You start with 50MC. Increase your MC production 5 steps. Gain 5 titanium.":"起始获得50MC。提升你的MC产能5级,获得5个钛合金",
   "Effect: When you buy a card to hand, pay 5MC instead of 3, including the starting hand.":"效果:当你购买手牌时,你需要支付5MC而非原本的3MC,包括起始的手牌",

@@ -222,7 +222,7 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
       const player = new Player("test", Color.BLUE, false);
       const player2 = new Player("test2", Color.RED, false);
-      let gameToRebuild = new Game(game_id,[player,player2], player);
+      let gameToRebuild = new Game(game_id,[player,player2], player );
       Database.getInstance().restoreGameLastSave(game_id, gameToRebuild, function (err) {
         if (err) {
           return;
@@ -471,7 +471,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         clonedGamedId: gameReq.clonedGamedId
       } as GameOptions;
     
-      const game = new Game(gameId, players, firstPlayer, gameOptions);
+      const game = new Game(gameId, players, firstPlayer, gameOptions, false);
       games.set(gameId, game);
       game.getPlayers().forEach((player) => {
         playersToGame.set(player.id, game);
@@ -576,9 +576,16 @@ function getPlayer(player: Player, game: Game): string {
     turmoil: getTurmoil(game),
     selfReplicatingRobotsCardCost: player.getSelfReplicatingRobotsCardCost(game),
     selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
-    undoing : player.undoing
+    undoing : player.undoing,
+    gameId : game.id
   } as PlayerModel;
-  return JSON.stringify(output);
+  try{
+    return JSON.stringify(output);
+  }catch(err) {
+    console.warn("error get player", err);
+    return "";
+  }
+
 }
 
 function getCardsAsCardModel(cards: Array<ICard>): Array<CardModel> {
@@ -598,6 +605,7 @@ function getWaitingFor(
     return undefined;
   }
   const result: PlayerInputModel = {
+    id: undefined,
     title: waitingFor.title,
     inputType: waitingFor.inputType,
     amount: undefined,
@@ -614,6 +622,9 @@ function getWaitingFor(
     microbes: undefined,
     floaters: undefined
   };
+  if(waitingFor instanceof OrOptions){
+    result.id = (waitingFor as OrOptions).id;
+  }
   switch (waitingFor.inputType) {
     case PlayerInputTypes.AND_OPTIONS:
     case PlayerInputTypes.OR_OPTIONS:
@@ -724,7 +735,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       tradesThisTurn: player.tradesThisTurn,
       turmoil: getTurmoil(game),
       selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
-      waitingFor: player.getWaitingFor()
+      waitingFor: getWaitingFor(player.getWaitingFor())
     } as unknown as PlayerModel;
   });
 }

@@ -1,7 +1,7 @@
 {
 
   "Impactor Swarm": "冲击虫群",
-  "Jovian Jovian": "【木星】【木星】",
+  "Jovian Jovian": "木星  木星",
   "Requires 2 Jovian tags. Gain 12 heat. Remove up to 2 plants from any player.": "（需要两个木星图标 ）增加12点热能 移除任一玩家两点植物",
 
   "Market Manipulation": "操控市场",
@@ -12,7 +12,7 @@
   "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "放置1个殖民地，可以放置在你已经放置过的殖民地板块 抽取2张牌",
 
   "Urban Decomposers": "都市分解者",
-  "City": "【城市】",
+  "City": "城市",
   "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "（需要你有1个殖民地和1个城市）增加1点自身植物产能 增加2个微生物标记到其他卡上",
 
   "Trading Colony": "交易殖民地",
@@ -45,7 +45,7 @@
   "GAIN ALL YOUR COLONY BONUSES":"获得你所有殖民地奖励",
 
   "Space Port Colony":"太空港殖民地",
-  "Colony":"【殖民地】",
+  "Colony":"殖民地",
   "(Requires a colony. Place a colony.)":"需要1个殖民地，放置1个殖民地",
   "MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY.":"可以放置在你已经放置过的殖民地版图上",
   "Gain 1 Trade Fleet. 1VP per 2 colonies in play.":"获得1支交易舰队，每2个殖民地获得1VP",
@@ -60,7 +60,7 @@
   "Add two floaters to ANY JOVIAN CARD.": "增加2点漂浮物到任意木星卡上",
 
   "Heavy Taxation": "重税",
-  "Earth Earth": "【地球标记】【地球标记】",
+  "Earth Earth": "地球 地球",
   "Requires 2 Earth tags. Increase your MC production 2 steps, and gain 4MC.": "（需要两个地球图标）增加自身2点金钱产能 获得4块钱",
 
   "Refugee Camp": "难民营",

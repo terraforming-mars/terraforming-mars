@@ -17,6 +17,7 @@ export class SelectParty implements PlayerInterrupt {
         public nbr: number = 1,
         public replace: "NEUTRAL" | Player | undefined = undefined,
         public price: number | undefined = undefined,
+        public fromLobby: boolean = true
     ){
         const sendDelegate = new OrOptions();
         // Change the default title
@@ -48,7 +49,7 @@ export class SelectParty implements PlayerInterrupt {
                   if (replace) {
                     game.turmoil?.removeDelegateFromParty(replace, party.name, game);
                   }
-                  game.turmoil?.sendDelegateToParty(player, party.name, game);
+                  game.turmoil?.sendDelegateToParty(player, party.name, game, fromLobby);
                 }
                 game.log(
                   LogMessageType.DEFAULT,

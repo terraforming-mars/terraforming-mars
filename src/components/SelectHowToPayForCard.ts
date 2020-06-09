@@ -263,10 +263,24 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 this.$data.warning = "Haven't spent enough";
                 return;
             }
-            this.onsave([[
-                this.$data.card.name,
-                JSON.stringify(htp)
-            ]]);
+            if ((3 * htp.floaters) + (2 * htp.microbes) + htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) > this.getCardCost()) {
+                let diff = htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) + (htp.microbes * 2) + (htp.floaters * 3) - this.getCardCost();
+  
+                if (confirm("Warning: You are overpaying by " + diff + " MC")) {
+                    this.onsave([[
+                        this.$data.card.name,
+                        JSON.stringify(htp)
+                    ]]);
+                } else {
+                    this.$data.warning = "Please adjust payment amount";
+                    return;
+                }
+            } else {
+                this.onsave([[
+                    this.$data.card.name,
+                    JSON.stringify(htp)
+                ]]);
+            }
         }
     },
     template: `<div class="payments_cont">

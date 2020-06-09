@@ -18,7 +18,8 @@ describe("DiasporaMovement", function () {
         const player2 = new Player("test2", Color.RED, false);
         const gameOptions = {
             draftVariant: false,
-	        initialDraftVariant: false,
+            initialDraftVariant: false,
+            randomMA: false,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,

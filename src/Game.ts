@@ -730,10 +730,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.gotoWorldGovernmentTerraforming();
         return;
       }
-      this.gotoDraftOrResearch();
+      this.gotoEndGeneration();
     }
 
-    private gotoDraftOrResearch() {
+    private gotoEndGeneration() {
       if (this.coloniesExtension) {
         this.colonies.forEach(colony => {
           colony.endGeneration();
@@ -743,7 +743,33 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if(this.turmoilExtension) {
         this.turmoil?.endGeneration(this);
       }
+         
+      // Resolve Turmoil interrupts
+      if (this.interrupts.length > 0) {
+        this.resolveTurmoilInterrupts();
+        return;
+      }
       
+      this.goToDraftOrResearch();
+    }
+
+    private resolveTurmoilInterrupts() {
+      if (this.interrupts.length > 0) {
+        let interrupt = this.interrupts.shift();
+        if (interrupt !== undefined && interrupt.playerInput !== undefined) {
+          interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+            this.resolveTurmoilInterrupts();
+          });
+          return;
+        }
+      }
+
+      // All turmoil interrupts have been resolved, continue game flow
+      this.goToDraftOrResearch();
+    }
+
+    private goToDraftOrResearch() {
+
       this.generation++;
       this.log(
         LogMessageType.NEW_GENERATION,
@@ -755,7 +781,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.players.forEach((player) => {
         player.terraformRatingAtGenerationStart = player.getTerraformRating();
       });
-
+      
       if (this.draftVariant) {
         this.gotoDraftingPhase();
       } else {
@@ -769,7 +795,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public doneWorldGovernmentTerraforming() {
       //Carry on to next phase
-      this.gotoDraftOrResearch();
+      this.gotoEndGeneration();
     }  
 
     private allPlayersHavePassed(): boolean {

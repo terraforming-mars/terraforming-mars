@@ -675,6 +675,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private runDraftRound(initialDraft: boolean = false): void {
       this.draftedPlayers.clear();
       this.players.forEach((player) => {
+        player.needsToDraft = true;
         if (this.draftRound === 1) {
           player.runDraftPhase(initialDraft,this,this.getNextDraft(player).name);
         } else {
@@ -821,7 +822,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public playerIsFinishedWithDraftingPhase(initialDraft: boolean, player: Player, cards : Array<IProjectCard>): void {
       this.draftedPlayers.add(player);
       this.unDraftedCards.set(player,cards);
-     
+
+      player.needsToDraft = false;
+
       if (!this.allPlayersHaveFinishedDraft()) {
         return;
       }
@@ -844,6 +847,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
             if (lastCards !== undefined && lastCards[0] !== undefined) {
               player.draftedCards.push(lastCards[0]);
             }
+            player.needsToDraft = undefined;
           });
         }
         this.gotoResearchPhase();

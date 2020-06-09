@@ -1,4 +1,3 @@
- 
 import Vue from "vue";
 
 import { Board } from "./Board";
@@ -15,7 +14,6 @@ import { LogPanel } from './LogPanel';
 import { PlayerMixin } from './PlayerMixin';
 import { TagCount } from './TagCount';
 import { Turmoil } from './Turmoil';
-
 
 const dialogPolyfill = require("dialog-polyfill");
 
@@ -40,9 +38,13 @@ export const PlayerHome = Vue.component("player-home", {
     },
     mixins: [PlayerMixin],
     methods: {
-        getPlayerCssForTurnOrder: (player: PlayerModel, hilightActive: boolean): string => {
+        getPlayerCssForTurnOrder: (player: PlayerModel, highlightActive: boolean): string => {
             var ret: string = "highlighter_box player_bg_color_" + player.color;
-            if (hilightActive && player.isActive) ret += " player_is_active";
+            if (highlightActive) {
+                if (player.needsToDraft || (player.needsToDraft === undefined && player.isActive)) {
+                    ret += " player_is_active";
+                }
+            }
             return ret;
         },
         showPlayerDetails: function (player: PlayerModel) {

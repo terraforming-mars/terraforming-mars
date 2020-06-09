@@ -485,7 +485,8 @@ function getPlayer(player: Player, game: Game): string {
     selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
     dealtCorporationCards: player.dealtCorporationCards,
     dealtPreludeCards: player.dealtPreludeCards,
-    initialDraft: game.initialDraft
+    initialDraft: game.initialDraft,
+    needsToDraft: player.needsToDraft
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -631,7 +632,8 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       fleetSize: player.fleetSize,
       tradesThisTurn: player.tradesThisTurn,
       turmoil: getTurmoil(game),
-      selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard()
+      selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
+      needsToDraft: player.needsToDraft
     } as PlayerModel;
   });
 }

@@ -139,26 +139,17 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                 this.$data.warning = "You don't have enough steel";
                 return;
             }
-            if (this.playerinput.amount > 0 &&
-                htp.heat +
-                htp.megaCredits +
-                (htp.steel * this.player.steelValue) +
-                (htp.titanium * this.player.titaniumValue) +
-                (htp.microbes * 2) +
-                (htp.floaters * 3)
-                < this.playerinput.amount) {
+
+            const requiredAmt =  this.playerinput.amount;
+            const totalSpentAmt = htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) + (htp.microbes * 2) + (htp.floaters * 3);
+            
+            if (requiredAmt > 0 && totalSpentAmt < requiredAmt) {
                 this.$data.warning = "Haven't spent enough";
                 return;
             }
-            if (this.playerinput.amount > 0 &&
-              htp.heat +
-              htp.megaCredits +
-              (htp.steel * this.player.steelValue) +
-              (htp.titanium * this.player.titaniumValue) +
-              (htp.microbes * 2) +
-              (htp.floaters * 3)
-              > this.playerinput.amount) {
-              let diff = htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) + (htp.microbes * 2) + (htp.floaters * 3) - this.playerinput.amount;
+
+            if (requiredAmt > 0 && totalSpentAmt > requiredAmt) {
+              let diff = totalSpentAmt - requiredAmt;
 
               if (confirm("Warning: You are overpaying by " + diff + " MC")) {
                 this.onsave([[JSON.stringify(htp)]]);    

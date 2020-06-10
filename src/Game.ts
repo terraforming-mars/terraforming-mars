@@ -1299,40 +1299,50 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public drawCardsByTag(tag: Tags, total: number): Array<IProjectCard> {
       let cardsToDraw = 0;
       const result: Array<IProjectCard> = [];
+      const discardedCards: Array<IProjectCard> = [];
+
       while (cardsToDraw < total) {
         const projectCard = this.dealer.dealCard();
         if (projectCard.tags.includes(tag)) {
           cardsToDraw++;
           result.push(projectCard);
         } else {
+          discardedCards.push(projectCard);
           this.dealer.discard(projectCard);
-          this.log(
-            LogMessageType.DEFAULT,
-           "${0} was discarded",
-           new LogMessageData(LogMessageDataType.CARD, projectCard.name)
-          );
         }
       }
+
+      this.log(
+        LogMessageType.DEFAULT,
+        discardedCards.length + " card(s) were discarded",
+       ...discardedCards.map((card) => new LogMessageData(LogMessageDataType.CARD, card.name)),
+      );
+
       return result;
     }
 
     public drawCardsByResource(resource: ResourceType, total: number): Array<IProjectCard> {
       let cardsToDraw = 0;
       const result: Array<IProjectCard> = [];
+      const discardedCards: Array<IProjectCard> = [];
+
       while (cardsToDraw < total) {
         const projectCard = this.dealer.dealCard();
         if (projectCard.resourceType !== undefined && projectCard.resourceType === resource ) {
           cardsToDraw++;
           result.push(projectCard);
         } else {
+          discardedCards.push(projectCard);
           this.dealer.discard(projectCard);
-          this.log(
-            LogMessageType.DEFAULT,
-           "${0} was discarded",
-           new LogMessageData(LogMessageDataType.CARD, projectCard.name)
-          );
         }
       }
+
+      this.log(
+        LogMessageType.DEFAULT,
+        discardedCards.length + " card(s) were discarded",
+       ...discardedCards.map((card) => new LogMessageData(LogMessageDataType.CARD, card.name)),
+      );
+
       return result;
     }
 

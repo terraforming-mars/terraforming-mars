@@ -34,7 +34,7 @@ export const WaitingFor = Vue.component("waiting-for", {
         "select-party-player": SelectPartyPlayer
     },
     methods: {
-        waitForUpdate: function () {
+        waitForUpdate: function (faster:boolean = false) {
             const vueApp = this;
             clearTimeout(ui_update_timeout_id);
             const askForUpdate = () => {
@@ -74,14 +74,15 @@ export const WaitingFor = Vue.component("waiting-for", {
                 xhr.responseType = "json";
                 xhr.send();
             }
-            ui_update_timeout_id = (setTimeout(askForUpdate, 5000) as any);
+            ui_update_timeout_id = (setTimeout(askForUpdate, faster ? 1 : 5000) as any);
         }
     },
     render: function (createElement) {
-        (this as any).waitForUpdate();
         if (this.player.undoing ){
+            (this as any).waitForUpdate(true);
             return createElement("div", $t("Undoing, Please refresh or wait seconds"));
         }
+        (this as any).waitForUpdate();
         if (this.waitingfor === undefined) {
             return createElement("div", $t("Not your turn to take any actions"));
         }

@@ -54,6 +54,7 @@ import { CardName } from "./CardName";
 import { Turmoil } from "./turmoil/Turmoil";
 import { PartyName } from "./turmoil/parties/PartyName";
 import { IParty } from "./turmoil/parties/IParty";
+import { Pristar } from "./cards/turmoil/Pristar";
 
 export interface GameOptions {
   draftVariant: boolean;
@@ -208,7 +209,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }  
 
       // Setup custom corporation list
-      if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= players.length * 2) {
+      if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= players.length * this.startingCorporations ) {
 
         // Init all available corporation cards to choose from
         corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
@@ -224,15 +225,16 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       corporationCards = this.dealer.shuffleCards(corporationCards);
-
+      
+      if (this.startingCorporations * this.players.length > corporationCards.length) {
+        this.startingCorporations = 2;
+      }
       // Give each player their corporation cards and other cards
       for (const player of players) {
         if (!player.beginner) {
           // Failsafe for exceding corporation pool - Minimum is 12
           // change minimum to corporationCards.length , not 12 
-          if (this.startingCorporations * this.players.length > corporationCards.length) {
-            this.startingCorporations = 2;
-          }
+          
           for (let i = 0; i < this.startingCorporations; i++) {
             const corpCard : CorporationCard | undefined = corporationCards.pop();
             if (corpCard !== undefined) {
@@ -718,7 +720,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if(this.turmoilExtension) {
         this.turmoil?.endGeneration(this);
       }
-      
+      this.players.forEach((player) => {
+        if(player.corporationCard?.name === CardName.PRISTAR){
+          (player.corporationCard as Pristar).lastGenerationTR = player.getTerraformRating();
+        }
+      });
       this.generation++;
       this.log(
         LogMessageType.NEW_GENERATION,

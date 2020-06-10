@@ -19,7 +19,7 @@ export function translateText(englishText: string): string {
                 translatedText = "(" + stripedText + ")";
             }
         }
-        console.log('Please translate "' + englishText + '"')
+        //  console.log('Please translate "' + englishText + '"')
     }
     return translatedText;
 }

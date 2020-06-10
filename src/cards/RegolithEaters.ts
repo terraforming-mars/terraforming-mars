@@ -9,6 +9,7 @@ import { OrOptions } from "../inputs/OrOptions";
 import { ResourceType } from "../ResourceType";
 import { SelectOption } from "../inputs/SelectOption";
 import { CardName } from '../CardName';
+import { Expansion } from '../Expansion';
 
 export class RegolithEaters implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 13;
@@ -40,4 +41,20 @@ export class RegolithEaters implements IActionCard, IProjectCard, IResourceCard 
             })
         );
     }
+
+    public expansion: Expansion = Expansion.BASE_GAME;
+    public cardNumber: string = "033";
+    public content: string = `
+        <div class="red-arrow"></div>
+        <div class="microbe resource"></div>
+        <br/>
+        OR
+        <div class="microbe resource"></div>
+        <div class="microbe resource"></div>
+        <div class="red-arrow"></div>
+        <div class="tile oxygen-tile"></div>
+        <div class="description">
+            (Action: Add 1 Microbe to this card, or remove 2 Microbes from this card to raise oxygen level 1 step.)
+        </div>
+    `;
 }

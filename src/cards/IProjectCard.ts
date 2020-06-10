@@ -5,6 +5,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
 import { Resources } from '../Resources';
+import { Expansion } from "../Expansion";
 
 export interface IProjectCard extends ICard {
     canPlay?: (player: Player, game: Game, bonusMc?: number) => boolean;
@@ -14,5 +15,8 @@ export interface IProjectCard extends ICard {
     hasRequirements?: boolean;
     bonusResource?: Resources | undefined;
     bonusMc?: number | undefined;
+    expansion?: Expansion;
+    cardNumber?: string;
+    content?: string;
 }
 

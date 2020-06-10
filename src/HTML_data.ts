@@ -519,21 +519,6 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-[CardName.REGOLITH_EATERS,`
-        <div class="title background-color-active ">Regolith Eaters</div>
-        <div class="price ">13</div>
-        ##RESOURCES##
-        <div class="tag tag1 tag-microbe "></div>
-        <div class="tag tag2 tag-science "></div>
-        <div class="card-number">033</div>
-        <div class="content ">
-            <div class="red-arrow "></div> <div class="microbe resource "></div><br>
-            OR <div class="microbe resource "></div><div class="microbe resource "></div> <div class="red-arrow "></div> <div class="tile oxygen-tile "></div>
-            <div class="description ">
-                (Action: Add 1 Microbe to this card, or remove 2 Microbes from this card to raise oxygen level 1 step.)
-            </div>
-        </div>
-`],
 [CardName.GHG_PRODUCING_BACTERIA,`
         <div class="title background-color-active ">GHG Producing Bacteria</div>
         <div class="price ">8</div>
@@ -1676,21 +1661,6 @@ export const HTML_DATA: Map<string, string> =
                 (Effect: When you play an Earth card, you pay 3 MC less for it.)
             </div>
         </div>
-`],
-[CardName.ACQUIRED_COMPANY,`
-      <div class="title background-color-automated">Acquired Company</div>
-      <div class="price">10</div>
-      <div class="tag tag1 tag-earth"></div>
-      <div class="corporate-icon project-icon"></div>
-      <div class="card-number">106</div>
-      <div class="content">
-        <div class="production-box">
-          <div class="money production">3</div>
-        </div>
-        <div class="description">
-          (Increase your MC production 3 steps.)
-        </div>
-      </div>
 `],
 [CardName.MEDIA_ARCHIVES,`
       <div class="title background-color-automated">Media Archives</div>

@@ -17,7 +17,8 @@ import { ALL_PRELUDE_CORPORATIONS,
          ALL_PROMO_PROJECTS_CARDS
          } from "../Dealer";
 import { HTML_DATA } from "../HTML_data";
-
+import { CardType } from "../cards/CardType";
+import { Expansion } from "../Expansion";
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
     if (cardName === (new BeginnerCorporation()).name) {
@@ -74,6 +75,11 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
     return undefined;
 }
 
+/**
+ * This is the legacy getData() method which will be replaced by Card#get(Project|Corporation)CardHTML().
+ * This method can be removed as soon as all cards are migrated to the new format. Until then it will be
+ * called for all cards not yet migrated (graceful fallback), see Card#getData().
+ */
 function getData(cardName: string, resources: string, wasPlayed: boolean): string | undefined {
     let htmlData : string | undefined = '';
     htmlData = HTML_DATA.get(cardName);
@@ -102,8 +108,55 @@ export const Card = Vue.component("card", {
         "player"
     ],
     methods: {
-        getData: function() {
+        getProjectCardHTML: function (card: IProjectCard, cardResources: string, wasPlayed: boolean) {
+
+            let html: string | undefined = ``;
+
+            // Title
+            if (card.cardType === CardType.EVENT) {
+                html += `<div class="title background-color-events">${card.name}</div>`;
+            } else if (card.cardType === CardType.ACTIVE) {
+                html += `<div class="title background-color-active">${card.name}</div>`;
+            } else if (card.cardType === CardType.AUTOMATED) {
+                html += `<div class="title background-color-automated">${card.name}</div>`;
+            } else {
+                html += `<div class="title">${card.name}</div>`;
+            }
+
+            // Cost
+            html += `<div class="price">${card.cost}</div>`;
+
+            // Resources
+            if (cardResources !== undefined && card.resourceType !== undefined) {
+                html += `<div class="card_resources_counter">RES:<span class="card_resources_counter--number">${cardResources}</span></div>`;
+            }
+
+            // Tags
+            for (let count = 1; count <= card.tags.length; count++) {
+                html += `<div class="tag tag${count} tag-${card.tags[count-1]}"></div>`;
+            }
+
+            // Expansion
+            switch (card.expansion) {
+                case Expansion.CORPORATE_ERA:
+                    html += `<div class="corporate-icon project-icon"></div>`
+                    break;
+            }
+
+            // Card Number
+            html += `<div class="card-number">${ String(card.cardNumber).padStart(3, '0')}</div>`;
+
+            // Content
+            html += `<div class="content">${card.content}</div>`;
+
+            return (wasPlayed) ? `<div class="cards-action-was-used">${html}</div>` : html;
+        },
+        getData: function () {
             const wasPlayed = (this.player !== undefined && this.player.actionsThisGeneration !== undefined && this.player.actionsThisGeneration.indexOf(this.card) !== -1) ? true : false;
+            let projectCard = getProjectCardByName(this.card);
+            if (projectCard !== undefined && [CardType.ACTIVE, CardType.AUTOMATED, CardType.EVENT].includes(projectCard.cardType) && projectCard.content !== undefined) {
+                return this.getProjectCardHTML(projectCard, this.resources, wasPlayed);
+            }
             return getData(this.card, this.resources, wasPlayed);
         },
         getCard: function () {

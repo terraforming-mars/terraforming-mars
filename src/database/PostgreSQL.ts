@@ -96,7 +96,12 @@ export class PostgreSQL implements IDatabase {
             let gameToRestore = JSON.parse(res.rows[0].game);
 
             // Rebuild each objects
-            game.loadFromJSON(gameToRestore);
+            try {
+                game.loadFromJSON(gameToRestore);
+            } catch (e) {
+                cb(e);
+                return;
+            }
 
             return cb(err);
         });

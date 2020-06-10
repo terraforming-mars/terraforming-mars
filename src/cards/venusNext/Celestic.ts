@@ -16,25 +16,16 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public resourceCount: number = 0;
 
     private static readonly floaterCards: Set<CardName> = new Set<CardName>([
-        CardName.AERIAL_MAPPERS,
         CardName.AEROSPORT_TOURNAMENT,
         CardName.AIR_SCRAPPING_EXPEDITION,
         CardName.AIR_RAID,
         CardName.AIRLINERS,
         CardName.ATMOSCOOP,
-        CardName.DEUTERIUM_EXPORT,
-        CardName.DIRIGIBLES,
-        CardName.EXTRACTOR_BALLOONS,
         CardName.FLOATER_LEASING,
         CardName.FLOATER_PROTOTYPES,
         CardName.FLOATER_TECHNOLOGY,
-        CardName.FLOATING_HABS,
-        CardName.FORCED_PRECIPITATION,
         CardName.HYDROGEN_TO_VENUS,
-        CardName.JET_STREAM_MICROSCRAPPERS,
-        CardName.LOCAL_SHADING,
         CardName.NITROGEN_FROM_TITAN,
-        CardName.STRATOPOLIS,
         CardName.STRATOSPHERIC_BIRDS
     ]);
 
@@ -44,7 +35,7 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
             let drawnCount = 0;
             while (drawnCount < requiredCardsCount) {
                 let card = game.dealer.dealCard();
-                if (Celestic.floaterCards.has(card.name)) {
+                if (Celestic.floaterCards.has(card.name) || card.resourceType === ResourceType.FLOATER) {
                     player.cardsInHand.push(card);
                     drawnCount++;
                 }

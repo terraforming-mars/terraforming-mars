@@ -16,10 +16,11 @@
     "${0} acted as World Government and increased oceans": "${0} handelte als Weltregierung und platzierte einen Ozean",
     "${0} acted as World Government and increased oxygen level": "${0} handelte als Weltregierung und erhöhte den Sauerstoffgehalt",
     "${0} acted as World Government and increased temperature": "${0} handelte als Weltregierung und erhöhte die Temperatur",
-    "${0} looses ${1} resource(s) on ${2} by ${3}": "${0} verlor ${1} Ressource(n) auf ${2} durch ${3}",
+    "${0} loses ${1} resource(s) on ${2} by ${3}": "${0} verlor ${1} Ressource(n) auf ${2} durch ${3}",
     "${0}'s ${1} production modified by ${2} by ${3}": "Die ${1}-Produktion von ${0} wurde um ${2} modifiziert durch ${3}",
     "${0}'s ${1} amount modified by ${2} by ${3}": "Die ${1}-Ressourcen von ${0} wurde um ${2} modifiziert durch ${3}",
     "${0} received ${1} MC from ${2} owner (${3})": "${0} erhielt ${1} MC von ${2} (${3})",
     "${0} copied ${1} production with ${2}": "${0} hat die Produktion von ${1} mit ${2} kopiert",
-    "${0} used ${1} action with ${2}": "${0} hat mit ${2} eine Aktion von ${1} genutzt"
+    "${0} used ${1} action with ${2}": "${0} hat mit ${2} eine Aktion von ${1} genutzt",
+    "${0} sold ${1} patents": "${0} hat ${1} Patente verkauft"
 }

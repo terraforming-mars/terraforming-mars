@@ -6,6 +6,7 @@ import { VictoryPointsBreakdown } from "../VictoryPointsBreakdown";
 import { ITagCount } from "../ITagCount";
 import { TurmoilModel } from "./TurmoilModel";
 import { IProjectCard } from "../cards/IProjectCard";
+import { CorporationCard } from '../cards/corporation/CorporationCard';
 // import { LogMessage } from "../LogMessage";
 import { Phase } from "../Phase";
 import { PlayerInputModel } from "./PlayerInputModel";
@@ -60,6 +61,9 @@ export interface PlayerModel {
     tradesThisTurn: number;
     selfReplicatingRobotsCardCost: number;
     selfReplicatingRobotsCardTarget: IProjectCard | undefined;
+    dealtCorporationCards: Array<CorporationCard>;
+    dealtPreludeCards:  Array<IProjectCard>;
+    initialDraft: boolean;
     undoing :boolean;
     waitingFor :PlayerInputModel;
 }

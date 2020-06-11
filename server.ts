@@ -466,9 +466,11 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         customCorporationsList: gameReq.customCorporationsList,
         solarPhaseOption: gameReq.solarPhaseOption,
         promoCardsOption: gameReq.promoCardsOption,
+        undoOption: gameReq.undoOption,
         startingCorporations: gameReq.startingCorporations,
         soloTR: gameReq.soloTR,
-        clonedGamedId: gameReq.clonedGamedId
+        clonedGamedId: gameReq.clonedGamedId,
+        initialDraftVariant: gameReq.initialDraft
       } as GameOptions;
     
       const game = new Game(gameId, players, firstPlayer, gameOptions, false);
@@ -577,7 +579,10 @@ function getPlayer(player: Player, game: Game): string {
     selfReplicatingRobotsCardCost: player.getSelfReplicatingRobotsCardCost(game),
     selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
     undoing : player.undoing,
-    gameId : game.id
+    gameId : game.id,
+    dealtCorporationCards: player.dealtCorporationCards,
+    dealtPreludeCards: player.dealtPreludeCards,
+    initialDraft: game.initialDraft
   } as PlayerModel;
   try{
     return JSON.stringify(output);

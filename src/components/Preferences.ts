@@ -103,53 +103,53 @@ export const Preferences = Vue.component("preferences", {
                     <div class="preferences_panel_item">
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_turnorder" />
-                            <i class="form-icon"></i> Hide turn order
+                            <i class="form-icon"></i> <span v-i18n>Hide turn order</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_hand" />
-                            <i class="form-icon"></i> Hide cards in hand
+                            <i class="form-icon"></i> <span v-i18n>Hide cards in hand</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_cards" />
-                            <i class="form-icon"></i> Hide played cards
+                            <i class="form-icon"></i> <span v-i18n>Hide played cards</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_awards_and_milestones" />
-                            <i class="form-icon"></i> Hide awards and milestones
+                            <i class="form-icon"></i> <span v-i18n>Hide awards and milestones</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="small_cards" />
-                            <i class="form-icon"></i> Smaller cards
+                            <i class="form-icon"></i> <span v-i18n>Smaller cards</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="remove_background" />
-                            <i class="form-icon"></i> Remove background image
+                            <i class="form-icon"></i> <span v-i18n>Remove background image</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="magnify_cards" />
-                            <i class="form-icon"></i> Magnify cards on hover
+                            <i class="form-icon"></i> <span v-i18n>Magnify cards on hover</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="magnify_card_descriptions" />
-                            <i class="form-icon"></i> Magnify card descriptions on hover
+                            <i class="form-icon"></i> <span v-i18n>Magnify card descriptions on hover</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item form-group">
-                        <label class="form-label">Language (<a href="javascript:document.location.reload(true);">refresh page</a> to see changes)</label>
+                        <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
                         <div class="preferences_panel_langs">
                             <label class="form-radio" v-for="language in langs">
                                 <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" :value="language.id" />

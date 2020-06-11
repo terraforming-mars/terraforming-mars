@@ -54,7 +54,7 @@
 
   "You start with 42 MC. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take those 2 cards into hand and discard the rest.":"起始获得42MC。作为你的第一个行动,从牌库顶展示牌,直到展示出2张带有云标记的牌。将那2张牌加入手牌,并弃掉剩余的牌。",
   "Action: Add a floater to ANY card.":"行动:放置1个云资源到任意卡牌",
-  "(1 VP per 3 floaters <br> on this card.)":"本牌上每3个云资源获得1分",
+  "(1 VP per 3 floaters on this card.)":"本牌上每3个云资源获得1分",
 
   "As you first action in the game, draw 3 cards. Start with 45MC.":"起始获得45MC。作为你的第一个行动,抽3张牌",
   "Effect: Your temperature, oxygen and ocean requirements are +2 or -2 steps, your choice in each case.":"效果:你打牌时的 温度/氧气浓度/海洋 要求 +2格或-2格",

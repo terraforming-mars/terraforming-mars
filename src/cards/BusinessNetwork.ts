@@ -1,14 +1,14 @@
 
-import {Tags} from './Tags';
-import {CardType} from './CardType';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import {SelectCard} from '../inputs/SelectCard';
-import {SelectHowToPay} from '../inputs/SelectHowToPay';
-import {IActionCard} from './ICard';
-import {IProjectCard} from './IProjectCard';
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
+import {Tags} from "./Tags";
+import {CardType} from "./CardType";
+import {Player} from "../Player";
+import {Game} from "../Game";
+import {SelectCard} from "../inputs/SelectCard";
+import {SelectHowToPay} from "../inputs/SelectHowToPay";
+import {IActionCard} from "./ICard";
+import {IProjectCard} from "./IProjectCard";
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
 
 export class BusinessNetwork implements IActionCard, IProjectCard {
     public cost: number = 4;
@@ -40,12 +40,12 @@ export class BusinessNetwork implements IActionCard, IProjectCard {
           }
           if (player.canUseHeatAsMegaCredits && player.heat > 0) {
             return new SelectHowToPay(
-              'Select how to pay and buy ' + dealtCard.name, false, false,
+              "Select how to pay and buy " + dealtCard.name, false, false,
               true, player.cardCost,
               (htp) => {
                 if (htp.heat + htp.megaCredits < player.cardCost) {
                   game.dealer.discard(dealtCard);
-                  throw new Error('Not enough spent to buy card');
+                  throw new Error("Not enough spent to buy card");
                 }
                 player.megaCredits -= htp.megaCredits;
                 player.heat -= htp.heat;

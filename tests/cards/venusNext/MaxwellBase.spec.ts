@@ -16,6 +16,7 @@ describe("MaxwellBase", function () {
         const player = new Player("test", Color.BLUE, false);
         const gameOptions = {
             draftVariant: false,
+	        initialDraftVariant: false,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
@@ -25,6 +26,7 @@ describe("MaxwellBase", function () {
             customCorporationsList: [],
             solarPhaseOption: false,
             promoCardsOption: false,
+            undoOption: false,
             startingCorporations: 2,
             soloTR: false,
             clonedGamedId: undefined

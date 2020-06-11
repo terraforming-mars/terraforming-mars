@@ -9,7 +9,7 @@ export const OrOptions = Vue.component("or-options", {
     props: ["player", "players", "playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
-            selectedOption: -1,
+            selectedOption: -1
         };
     },
     methods: {
@@ -56,10 +56,10 @@ export const OrOptions = Vue.component("or-options", {
             }, false, false);
             subchildren.push(createElement("div", { style: { display: displayStyle, marginLeft: "30px" } }, [child]));
             children.push(createElement("div", subchildren));
+            if (this.showsave && this.$data.selectedOption === idx) {
+                children.push(createElement("div", { style: {"margin": "5px 30px 10px"}, "class": "wf-action"}, [createElement("button", { domProps: { className: "btn btn-primary" }, on: { click: () => { this.saveData(); } } }, "Save")]));
+            }
         });
-        if (this.showsave) {
-            children.push(createElement("div", {"class": "wf-action"}, [createElement("button", { domProps: { className: "btn btn-primary" }, on: { click: () => { this.saveData(); } } }, "Save")]));
-        }
         return createElement("div", {"class": "wf-options"}, children);
     }
 });

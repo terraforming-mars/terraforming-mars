@@ -8,7 +8,6 @@ import { Award } from "./Award";
 import { OtherPlayer } from "./OtherPlayer";
 import { PlayerResources } from "./PlayerResources";
 import { WaitingFor } from "./WaitingFor";
-import { GlobalParameters } from "./GlobalParameters"
 import { Preferences } from "./Preferences"
 import { PlayerModel } from "../models/PlayerModel";
 import { Colony } from "./Colony";
@@ -28,7 +27,6 @@ export const PlayerHome = Vue.component("player-home", {
         "other-player": OtherPlayer,
         "player-resources": PlayerResources,
         "waiting-for": WaitingFor,
-        "global-parameters": GlobalParameters,
         "milestone": Milestone,
         "award": Award,
         "preferences": Preferences,
@@ -104,11 +102,16 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <div class="player_home_block">
                     <a name="board" class="player_home_anchor"></a>
-                    <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.boardName"></board>
+                    <board 
+                        :spaces="player.spaces" 
+                        :venusNextExtension="player.venusNextExtension" 
+                        :venusScaleLevel="player.venusScaleLevel" 
+                        :boardName ="player.boardName"
+                        :oceans_count="player.oceans" 
+                        :oxygen_level="player.oxygenLevel" 
+                        :temperature="player.temperature"></board>
 
-                    <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature" v-trim-whitespace></global-parameters>
-                    
-                    <turmoil :turmoil="player.turmoil"></turmoil>
+                    <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
 
                     <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
                         <milestone :milestones_list="player.milestones" />
@@ -197,6 +200,22 @@ export const PlayerHome = Vue.component("player-home", {
             </div>
 
             <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
+
+                <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
+                    <card :card="card.name"></card>
+                </div>
+
+                <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
+                    <card :card="card.name"></card>
+                </div> 
+
+                <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">              
+                    <h2 v-i18n>Drafted Cards</h2>
+                    <div v-for="card in player.draftedCards" :key="card.name" class="cardbox">
+                        <card :card="card.name"></card>
+                    </div>
+                </div>
+
                 <h2 :class="'player_color_'+ player.color" v-i18n>Select initial cards:</h2>
 
                 <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>

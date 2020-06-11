@@ -1,35 +1,25 @@
 .board {
-	background: url(assets/mars.png);
-    width: 450px;
-    height: 450px;
-    background-size: 450px 450px;
-    background-position: 0px 0px;
-    margin: 0 auto;
-    filter: drop-shadow(0px 5px 10px black);
+    width: 600px;
+    height: 488px;
+    margin: 85px 0 0 93px;
 }
 
-#hexagon {
-	transform: translate(0, -100);
-}
-
-.board_cont {
+.board-cont {
 	display: inline-block;
 	vertical-align: top;
-	width: 505px;
+	width: 640px;
 	margin: 0 auto;
-	background: #313131;
-	padding: 30px;
-	border-radius: 20px;
+	background: url(assets/mars.png) no-repeat;
 }
 
-.board_legend {
+.board-legend {
 	position: absolute; 
-	margin-left: -470px; 
+	margin: -67px 0 0 -100px; 
 	z-index: 5; 
 	pointer-events: none
 }
 
-.board_caption {
+.board-caption {
 	font-family: Tahoma,Verdana,Segoe,sans-serif;
 	font-size: 10px;
 	font-weight: bold;
@@ -38,152 +28,193 @@
 	pointer-events: none;
 }
 
-.board_line {
+.board-line {
 	stroke: white;
 	stroke-width: 3;
 	stroke-opacity: 0.3;
 	pointer-events: none;
 }
 
-.board_space--available:hover {
-	stroke: #9acd32;
+.board-space--available:hover {
+	background: url(assets/hex_green.png) !important;
 	cursor: pointer;
 }
 
-.board_bonus {
+.board-space-bonus {
 	position: absolute;
 	pointer-events: none;
 	width: 15px;
 	height: 17px;
+	margin: 0 0 0 2px;
+
+	&.board-space-bonus-pos--1 {
+		margin: 15px 0 0 5px;
+	}
+
+	&.board-space-bonus-pos--2 {
+		margin: 15px 0 0 23px;
+	}
+
+	&.board-space-bonus-pos--3 {
+		margin: 23px 0 0 14px;
+	}
 }
 
-.board_bonus--plant {
+.board-space-bonus--plant {
 	background: url(assets/board_icons.png) -31px -1px no-repeat;
 }
-.board_bonus--steel {
+.board-space-bonus--steel {
 	background: url(assets/board_icons.png) -16px -1px no-repeat;
 }
-.board_bonus--titanium {
+.board-space-bonus--titanium {
 	background: url(assets/board_icons.png) -1px -1px no-repeat;
 }
 
-.board_bonus--card {
+.board-space-bonus--card {
 	background: url(assets/board_icons.png) -47px -1px no-repeat;
 	width: 14px;
 	height: 18px;
 }
 
-.board_bonus--heat {
+.board-space-bonus--heat {
 	background: url(assets/board_icons.png) -62px -1px no-repeat;
 }
 
-.board_bonus--bonusocean {
+.board-space-bonus--bonusocean {
 	background: url(assets/board_icons.png) -78px -1px no-repeat;
 	width: 30px;
 	height: 18px;
 }
 
-.board_tile {
-	position: absolute;
-	width: 44px;
-	height: 52px;
-	z-index: 2;
 
-	&.board_space--available {
+.board-space-tile--ocean {
+	background: url(assets/board_icons.png) -79px -29px no-repeat;
+	width: 46px;
+}
+
+.board-space-tile--city {
+	background: url(assets/board_icons.png) -29px -29px no-repeat;
+}
+
+.board-space-tile--greenery {
+	background: url(assets/board_icons.png) -129px -29px no-repeat;
+}
+
+.board-space-tile--mohole_area {
+	background: url(assets/board_icons.png) -438px -27px no-repeat;	
+}
+
+.board-space-tile--commercial_district {
+	background: url(assets/board_icons.png) -486px -27px no-repeat;	
+}
+
+.board-space-tile--ecological_zone {
+	background: url(assets/board_icons.png) -581px -27px no-repeat;	
+}
+
+.board-space-tile--industrial_center {
+	background: url(assets/board_icons.png) -534px -27px no-repeat;	
+}
+
+.board-space-tile--lava_flows {
+	background: url(assets/board_icons.png) -246px -27px no-repeat;	
+}
+
+.board-space-tile--mining_area, .board-space-tile--mining_rights {
+	background: url(assets/board_icons.png) -294px -27px no-repeat;	
+}
+
+.board-space-tile--natural_preserve {
+	background: url(assets/board_icons.png) -390px -27px no-repeat;	
+}
+
+.board-space-tile--nuclear_zone {
+	background: url(assets/board_icons.png) -198px -27px no-repeat;	
+}
+
+.board-space-tile--restricted_area {
+	background: url(assets/board_icons.png) -342px -27px no-repeat;	
+}
+
+.board-cube {
+	position: absolute;
+	width: 21px;
+	height: 21px;
+	z-index: 3;
+	margin: 25px 0 0 15px;
+}
+
+.board-cube--red {
+	background: url(assets/board_icons.png) -24px -91px no-repeat;
+}
+
+.board-cube--blue {
+	background: url(assets/board_icons.png) -94px -91px no-repeat;
+}
+
+.board-cube--black {
+	background: url(assets/board_icons.png) -48px -91px no-repeat;
+}
+
+.board-cube--yellow {
+	background: url(assets/board_icons.png) -72px -91px no-repeat;
+}
+
+.board-cube--green {
+	background: url(assets/board_icons.png) -1px -91px no-repeat;
+}
+
+.board-outer-spaces {
+	position: absolute;
+}
+
+.board-space {
+	width: 46px;
+	height: 51px;
+	position: absolute;
+
+	.board-space-text {
+		font-size: 11px;
+		line-height: 11px;
+		font-weight: bold;
+		text-align: center;
+		position: absolute;
+		margin: -25px 0 0 -20px;
+		width: 90px;
+	}
+
+	&.board-space-69, &.board-space-70, &.board-space-71, &.board-space-72, &.board-space-73 {
+		.board-space-text {
+			margin-top: -15px;
+		}
+	}
+
+	.board-space-bonuses {
+		position: absolute;
+
+
+	}
+
+	&.board-space--available {
 		animation: board-tile-blink-animation 2s infinite;
 		cursor: pointer;
 	}
 }
 
 @keyframes board-tile-blink-animation {
-	0% { filter: grayscale(0)}
-	49% { filter: grayscale(0)}
-	70% { filter: grayscale(0.7)}
-	99% { filter: grayscale(0.7)}
-	100% { filter: grayscale(0)}
+	0% { filter: opacity(1)}
+	49% { filter: opacity(1)}
+	70% { filter: opacity(0.4)}
+	99% { filter: opacity(0.4)}
+	100% { filter: opacity(1)}
+}
+
+.board-space-type-land {
+	background: url(assets/hex_white.png) no-repeat;
+}
+
+.board-space-type-ocean {
+	background: url(assets/hex_blue.png) no-repeat;
 }
 
 
-.board_tile--ocean {
-	background: url(assets/board_icons.png) -80px -28px no-repeat;
-	width: 46px;
-}
-
-.board_tile--city {
-	background: url(assets/board_icons.png) -30px -27px no-repeat;
-}
-
-.board_tile--greenery {
-	background: url(assets/board_icons.png) -130px -27px no-repeat;
-}
-
-.board_tile--mohole_area {
-	background: url(assets/board_icons.png) -439px -26px no-repeat;	
-}
-
-.board_tile--commercial_district {
-	background: url(assets/board_icons.png) -488px -26px no-repeat;	
-}
-
-.board_tile--ecological_zone {
-	background: url(assets/board_icons.png) -583px -26px no-repeat;	
-}
-
-.board_tile--industrial_center {
-	background: url(assets/board_icons.png) -536px -26px no-repeat;	
-}
-
-.board_tile--lava_flows {
-	background: url(assets/board_icons.png) -248px -26px no-repeat;	
-}
-
-.board_tile--mining_area, .board_tile--mining_rights {
-	background: url(assets/board_icons.png) -296px -26px no-repeat;	
-}
-
-.board_tile--natural_preserve {
-	background: url(assets/board_icons.png) -391px -26px no-repeat;	
-}
-
-.board_tile--nuclear_zone {
-	background: url(assets/board_icons.png) -200px -26px no-repeat;	
-}
-
-.board_tile--restricted_area {
-	background: url(assets/board_icons.png) -344px -26px no-repeat;	
-}
-
-.board_cube {
-	position: absolute;
-	width: 21px;
-	height: 21px;
-	z-index: 3;
-}
-
-.board_cube--red {
-	background: url(assets/board_icons.png) -24px -91px no-repeat;
-}
-
-.board_cube--blue {
-	background: url(assets/board_icons.png) -94px -91px no-repeat;
-}
-
-.board_cube--black {
-	background: url(assets/board_icons.png) -48px -91px no-repeat;
-}
-
-.board_cube--yellow {
-	background: url(assets/board_icons.png) -72px -91px no-repeat;
-}
-
-.board_cube--green {
-	background: url(assets/board_icons.png) -1px -91px no-repeat;
-}
-
-.board_space--available {
-	--board_space_visibility: visible;
-}
-
-.board_space--selected {
-	--board_space_selected: visible;
-}

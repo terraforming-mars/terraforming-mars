@@ -396,7 +396,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           this.resolveMonsInsurance(game);
           game.log(
             LogMessageType.DEFAULT,
-            "${0} looses ${1} resource(s) on ${2} by ${3}",
+            "${0} loses ${1} resource(s) on ${2} by ${3}",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
             new LogMessageData(LogMessageDataType.STRING, count.toString()),
             new LogMessageData(LogMessageDataType.CARD, card.name),
@@ -895,15 +895,19 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       });
     }
 
-    public runDraftPhase(game: Game, playerName: String, passedCards?: Array<IProjectCard>): void {
+    public runDraftPhase(initialDraft: boolean, game: Game, playerName: String, passedCards?: Array<IProjectCard>): void {
       let cards: Array<IProjectCard> = [];
       if (passedCards === undefined) {
-        cards.push(
-          game.dealer.dealCard(true),
-          game.dealer.dealCard(true),
-          game.dealer.dealCard(true),
-          game.dealer.dealCard(true)
-      ) } else { cards = passedCards}      
+        if (!initialDraft) {
+          cards.push(
+            game.dealer.dealCard(true),
+            game.dealer.dealCard(true),
+            game.dealer.dealCard(true),
+            game.dealer.dealCard(true));
+        } else {
+          cards = this.dealtProjectCards;
+        }
+      } else { cards = passedCards}          
 
       this.setWaitingFor(
         new SelectCard(
@@ -912,12 +916,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           (foundCards: Array<IProjectCard>) => {
             this.draftedCards.push(foundCards[0]);
             cards = cards.filter((card) => card !== foundCards[0]);
-            game.playerIsFinishedWithDraftingPhase(this,cards);
+            game.playerIsFinishedWithDraftingPhase(initialDraft, this,cards);
             return undefined;
           }, 1, 1
         ), () => { }
       );  
-  }  
+    }  
 
     public runResearchPhase(game: Game, draftVariant: boolean): void {
       let dealtCards: Array<IProjectCard> = [];
@@ -1298,7 +1302,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
               LogMessageType.DEFAULT,
               "${0} used ${1} standard project,sold ${2} card(s)",
               new LogMessageData(LogMessageDataType.PLAYER, this.id),
-              new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Sell patents"),
+              new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Sell patents"),
               new LogMessageData(LogMessageDataType.STRING, foundCards.length.toString()),
             );
             return undefined;
@@ -1330,18 +1334,18 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return buildColony;
     }      
 
-    private airScraping(game: Game): PlayerInput {
+    private airScrapping(game: Game): PlayerInput {
       return new SelectOption(
-        "Air scraping (" + constants.AIR_SCRAPING_COST + " MC)", 
+        "Air scrapping (" + constants.AIR_SCRAPPING_COST + " MC)", 
         () => {
-          game.addSelectHowToPayInterrupt(this, constants.AIR_SCRAPING_COST, false, false, "Select how to pay for Air Scrapping project");
+          game.addSelectHowToPayInterrupt(this, constants.AIR_SCRAPPING_COST, false, false, "Select how to pay for Air Scrapping project");
           game.increaseVenusScaleLevel(this, 1);
-          this.onStandardProject(StandardProjectType.AIR_SCRAPING);
+          this.onStandardProject(StandardProjectType.AIR_SCRAPPING);
           game.log(
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Air Scrapping")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Air Scrapping")
           );
           return undefined;
         }
@@ -1359,7 +1363,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Buffer Gas")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Buffer Gas")
           );
           return undefined;
         }
@@ -1377,7 +1381,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Power plant")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Power plant")
           );
           return undefined;
         }
@@ -1395,7 +1399,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Asteroid")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Asteroid")
           );
           return undefined;
         }
@@ -1413,7 +1417,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Aquifer"),
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Aquifer"),
           );
           return undefined;
         }
@@ -1431,7 +1435,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "Greenery")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "Greenery")
           );
           return undefined;
         }
@@ -1450,7 +1454,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             LogMessageType.DEFAULT,
             "${0} used ${1} standard project",
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STANDART_PROJECT, "City")
+            new LogMessageData(LogMessageDataType.STANDARD_PROJECT, "City")
           );
           return undefined;
         }
@@ -1870,7 +1874,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     private getAvailableStandardProjects(game: Game): OrOptions {
       const standardProjects = new OrOptions();
-      standardProjects.title = "Pay for a standard project";
+      standardProjects.title = "Pay for a Standard Project";
 
       if (this.canAfford(this.powerPlantCost)) {
         standardProjects.options.push(
@@ -1911,10 +1915,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       if ( game.venusNextExtension &&
-        this.canAfford(constants.AIR_SCRAPING_COST) &&
+        this.canAfford(constants.AIR_SCRAPPING_COST) &&
             game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
         standardProjects.options.push(
-            this.airScraping(game)
+            this.airScrapping(game)
         );
       }
 
@@ -1956,6 +1960,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
     }
 
+    private getPreludeMcBonus(preludeCards: IProjectCard[]) {
+      return preludeCards.map((card) => card.bonusMc || 0).reduce((a, b) => Math.max(a, b));
+    }
+
     //返回玩家可选的行动
     public takeAction(game: Game): void {
 
@@ -1966,9 +1974,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
  
       // Prelude cards have to be played first
       if (this.preludeCardsInHand.length > 0) {
+		    let preludeMcBonus = this.getPreludeMcBonus(this.preludeCardsInHand);
+		
         // Remove unplayable prelude cards
-        this.preludeCardsInHand = this.preludeCardsInHand.filter(card => card.canPlay === undefined || card.canPlay(this, game));
-        if (this.preludeCardsInHand.length === 0) {
+        this.preludeCardsInHand = this.preludeCardsInHand.filter(card => card.canPlay === undefined || card.canPlay(this, game, preludeMcBonus));
+		    if (this.preludeCardsInHand.length === 0) {
           game.playerIsFinishedTakingActions();
           return;
         }
@@ -2098,7 +2108,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       //Select milestone
       if (this.canAfford(8) && !game.allMilestonesClaimed()) {
         const remainingMilestones = new OrOptions();
-        remainingMilestones.title = "Select a milestone to claim";
+        remainingMilestones.title = "Claim a milestone";
         remainingMilestones.options = game.milestones
             .filter(
                 (milestone: IMilestone) =>
@@ -2119,7 +2129,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.canAfford(game.getAwardFundingCost()) &&
             !game.allAwardsFunded()) {
         const remainingAwards = new OrOptions();
-        remainingAwards.title = "Select an award to fund";
+        remainingAwards.title = "Fund an award";
         remainingAwards.options = game.awards
             .filter((award: IAward) => game.hasBeenFunded(award) === false)
             .map((award: IAward) => this.fundAward(award, game));

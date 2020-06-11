@@ -18,8 +18,9 @@ export function translateText(englishText: string): string {
             if (stripedText !== englishText) {
                 translatedText = "(" + stripedText + ")";
             }
+        } else if (stripedText && stripedText.length > 3) {
+            console.log('Please translate "' + stripedText + '"')
         }
-        //  console.log('Please translate "' + englishText + '"')
     }
     return translatedText;
 }

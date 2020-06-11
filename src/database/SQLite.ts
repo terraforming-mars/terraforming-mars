@@ -18,24 +18,21 @@ export class SQLite implements IDatabase {
         }
         this.db = new sqlite3.Database(dbPath);
         this.db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, status text default 'running',createtime timestamp default current_timestamp, PRIMARY KEY (game_id, save_id))");
-        this.db.run("ALTER TABLE games ADD COLUMN status TEXT default 'finished'", function(err: { message: any; }) {
-        if (err) {
-            // Should be duplicate column error
-            return;
-          }
-        });  
     }
 
     getClonableGames( cb:(err: any, allGames:Array<IGameData>)=> void) {
         var allGames:Array<IGameData> = [];
-        var sql = "SELECT distinct game_id game_id, json_array_length(json_extract(game, '$.players')) playerCount FROM games WHERE status = 'running' and save_id = 0 order by 2,1";
+        var sql = "SELECT distinct game_id game_id, game FROM games WHERE status = 'running' and save_id = 0 order by game_id asc";
   
         this.db.all(sql, [], (err, rows) => {
             if (rows) {
                 rows.forEach((row) => {
-                    let gameId:string = row.game_id
-                    let playerCount: number = row.playerCount;
-                    let gameData:IGameData = {gameId,playerCount};
+                    let gameId:string = row.game_id;
+                    let playerCount: number = JSON.parse(row.game).players.length;
+                    let gameData:IGameData = {
+                        gameId,
+                        playerCount
+                    };
                     allGames.push(gameData);
                 });
                 return cb(err, allGames);
@@ -92,13 +89,13 @@ export class SQLite implements IDatabase {
         // DELETE all saves except initial and last one
         this.db.run("DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0", [game_id, save_id], function(err: { message: any; }) {
             if (err) {
-            return console.warn(err.message);  
+                return console.warn(err.message);  
             }
         });
         // Flag game as finished
         this.db.run("UPDATE games SET status = 'finished' WHERE game_id = ?", [game_id], function(err: { message: any; }) {
             if (err) {
-            return console.warn(err.message);  
+                return console.warn(err.message);  
             }
         });        
     }
@@ -107,7 +104,7 @@ export class SQLite implements IDatabase {
         // DELETE all saves 
         this.db.run("DELETE FROM games WHERE game_id = ? ", [game_id], function(err: { message: any; }) {
             if (err) {
-            return console.warn(err.message);  
+                return console.warn(err.message);  
             }
         });
     }
@@ -116,7 +113,7 @@ export class SQLite implements IDatabase {
         // DELETE one  save  by save id
         this.db.run("DELETE FROM games WHERE game_id = ? AND save_id = ?", [game_id, save_id], function(err: { message: any; }) {
             if (err) {
-            return console.warn(err.message);  
+                return console.warn(err.message);  
             }
         });
     }

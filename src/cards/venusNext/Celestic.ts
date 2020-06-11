@@ -2,11 +2,11 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { ResourceType } from '../../ResourceType';
-import { Game } from '../../Game';
-import { IActionCard, ICard, IResourceCard } from '../ICard';
-import { SelectCard } from '../../inputs/SelectCard';
-import { CardName } from '../../CardName';
+import { ResourceType } from "../../ResourceType";
+import { Game } from "../../Game";
+import { IActionCard, ICard, IResourceCard } from "../ICard";
+import { SelectCard } from "../../inputs/SelectCard";
+import { CardName } from "../../CardName";
 
 export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public name: CardName = CardName.CELESTIC;
@@ -16,9 +16,12 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public resourceCount: number = 0;
 
     public initialAction(player: Player, game: Game) {
-        for (let foundCard of game.drawCardsByResource(ResourceType.FLOATER, 2)) {
-            player.cardsInHand.push(foundCard);
+        if (game.hasCardsWithResource(ResourceType.FLOATER, 2)) {
+            for (let foundCard of game.drawCardsByResource(ResourceType.FLOATER, 2)) {
+                player.cardsInHand.push(foundCard);
+            }
         }
+        
         return undefined;
     }
 
@@ -42,7 +45,7 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
         }
 
         return new SelectCard(
-            'Select card to add 1 floater',
+            "Select card to add 1 floater",
             floaterCards,
             (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 1);

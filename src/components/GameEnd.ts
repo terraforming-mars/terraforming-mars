@@ -2,7 +2,6 @@ import Vue from "vue";
 import { PlayerModel } from "../models/PlayerModel";
 import { Board } from "./Board";
 import { LogPanel } from './LogPanel';
-import { GlobalParameters } from "./GlobalParameters";
 
 export const GameEnd = Vue.component("game-end", {
     props: ["player", "game"],
@@ -12,7 +11,6 @@ export const GameEnd = Vue.component("game-end", {
     components: {
         "board": Board,
         "log-panel": LogPanel,
-        "global-parameters": GlobalParameters
     },
     methods: {
         isSoloGame: function (): boolean {
@@ -118,8 +116,14 @@ export const GameEnd = Vue.component("game-end", {
                 </div>
                 <div class="game_end_block--board">
                     <h2 v-i18n>Final situation on the board</h2>
-                    <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName="player.boardName"></board>
-                    <global-parameters :oceans_count="player.oceans" :oxygen_level="player.oxygenLevel" :temperature="player.temperature" v-trim-whitespace></global-parameters>
+                    <board 
+                        :spaces="player.spaces" 
+                        :venusNextExtension="player.venusNextExtension" 
+                        :venusScaleLevel="player.venusScaleLevel" 
+                        :boardName ="player.boardName"
+                        :oceans_count="player.oceans" 
+                        :oxygen_level="player.oxygenLevel" 
+                        :temperature="player.temperature"></board>
                 </div>
                 <br/>
                 <div class="game_end_block--log">

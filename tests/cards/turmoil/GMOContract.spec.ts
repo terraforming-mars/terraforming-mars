@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { GMOContract } from "../../../src/cards/turmoil/GMOContract";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
-import { BoardName } from '../../../src/BoardName';
-import { GameOptions, Game } from '../../../src/Game';
+import { BoardName } from "../../../src/BoardName";
+import { GameOptions, Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 
 describe("GMOContract", function () {
@@ -36,7 +36,8 @@ describe("GMOContract", function () {
                 greens.delegates.push(player, player);
                 expect(card.canPlay(player, game)).to.eq(true); 
             }
-            card.play(player);
+            card.play();
+            card.onCardPlayed(player,game,card);
             expect(player.megaCredits).to.eq(2);
         } 
     });

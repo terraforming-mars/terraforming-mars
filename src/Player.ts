@@ -732,6 +732,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         if (input.length !== 1) {
           throw new Error("Incorrect options provided");
         }
+        if (input[0] === null) throw new Error("Invalid/no input provided");
         if (input[0].length !== 1) {
           throw new Error("Incorrect input provided");
         }

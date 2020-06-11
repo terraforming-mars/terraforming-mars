@@ -254,9 +254,10 @@ function loadAllGames(): void {
       let gameToRebuild = new Game(game_id,[player,player2], player);
       Database.getInstance().restoreGameLastSave(game_id, gameToRebuild, function (err) {
         if (err) {
+          console.error("unable to load game " + game_id, err);
           return;
         }
-        console.log("load game "+ game_id);
+        console.log("load game " + game_id);
         games.set(gameToRebuild.id, gameToRebuild);
         gameToRebuild.getPlayers().forEach((player) => {
           playersToGame.set(player.id, gameToRebuild);

@@ -13,11 +13,12 @@ import { SelectPlayer } from "./SelectPlayer";
 import { SelectSpace } from "./SelectSpace";
 import { $t } from "../directives/i18n";
 import { SelectPartyPlayer } from "./SelectPartyPlayer";
+import { playTips } from "../PlaySound";
 
 var ui_update_timeout_id: number | undefined = undefined;
 
 export const WaitingFor = Vue.component("waiting-for", {
-    props: ["player", "players", "waitingfor"],
+    props: ["player", "players", "waitingfor","soundtip"],
     data: function () {
         return {}
     },
@@ -58,7 +59,10 @@ export const WaitingFor = Vue.component("waiting-for", {
                                     body: "It's your turn!",
                                 });
                             }
-
+                            if(this.soundtip){
+                                playTips();
+                                console.log("soundtips");
+                            }
                             // We don't need to wait anymore - it's our turn
                             return;
                         } else if (result["result"] === "REFRESH") {

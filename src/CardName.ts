@@ -296,7 +296,7 @@ export enum CardName {
     LOCAL_SHADING = "Local Shading",
     LUNA_METROPOLIS = "Luna Metropolis",
     LUXURY_FOODS = "Luxury Foods",
-    MAXWELL_BASE = "MAxwell Base",
+    MAXWELL_BASE = "Maxwell Base",
     MORNING_STAR_INC = "Morning Star Inc.",
     NEUTRALIZER_FACTORY = "Neutralizer Factory",
     ORBITAL_REFLECTORS = "Orbital Reflectors",

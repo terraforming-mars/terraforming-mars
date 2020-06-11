@@ -7,6 +7,9 @@ import { Game } from "../../Game";
 import { IActionCard, ICard, IResourceCard } from "../ICard";
 import { SelectCard } from "../../inputs/SelectCard";
 import { CardName } from "../../CardName";
+import { LogMessageType } from "../../LogMessageType";
+import { LogMessageData } from "../../LogMessageData";
+import { LogMessageDataType } from "../../LogMessageDataType";
 
 export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public name: CardName = CardName.CELESTIC;
@@ -33,13 +36,23 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
         const requiredCardsCount = 2;
         if (game.hasCardsWithResource(ResourceType.FLOATER, requiredCardsCount)) {
             let drawnCount = 0;
+            const drawnCards = [];
             while (drawnCount < requiredCardsCount) {
                 let card = game.dealer.dealCard();
                 if (Celestic.floaterCards.has(card.name) || card.resourceType === ResourceType.FLOATER) {
                     player.cardsInHand.push(card);
+                    drawnCards.push(card);
                     drawnCount++;
                 }
             }
+
+            game.log(
+                LogMessageType.DEFAULT,
+                "${0} drew ${1} and ${2}",
+                new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                new LogMessageData(LogMessageDataType.CARD, drawnCards[0].name),
+                new LogMessageData(LogMessageDataType.CARD, drawnCards[1].name)
+            );
         }
         
         return undefined;

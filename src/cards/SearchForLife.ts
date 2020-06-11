@@ -8,6 +8,9 @@ import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { CardName } from '../CardName';
+import { LogMessageType } from "../LogMessageType";
+import { LogMessageData } from "../LogMessageData";
+import { LogMessageDataType } from "../LogMessageDataType";
 
 export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 3;
@@ -37,6 +40,14 @@ export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
             if (topCard.tags.indexOf(Tags.MICROBES) !== -1) {
                 this.resourceCount++;
             }
+
+            game.log(
+                LogMessageType.DEFAULT,
+                "${0} revealed and discarded ${1}",
+                new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                new LogMessageData(LogMessageDataType.CARD, topCard.name)
+            );
+            
             game.dealer.discard(topCard);
             return undefined;
         };

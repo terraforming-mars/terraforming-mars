@@ -2,8 +2,11 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { Game } from '../../Game';
-import { CardName } from '../../CardName';
+import { Game } from "../../Game";
+import { CardName } from "../../CardName";
+import { LogMessageType } from "../../LogMessageType";
+import { LogMessageData } from "../../LogMessageData";
+import { LogMessageDataType } from "../../LogMessageDataType";
 
 export class MorningStarInc implements CorporationCard {
     public name: CardName = CardName.MORNING_STAR_INC;
@@ -12,11 +15,22 @@ export class MorningStarInc implements CorporationCard {
 
     public initialAction(player: Player, game: Game) {
         if (game.hasCardsWithTag(Tags.VENUS, 3)) {
+            const drawnCards = [];
             for (let foundCard of game.drawCardsByTag(Tags.VENUS, 3)) {
                 player.cardsInHand.push(foundCard);
+                drawnCards.push(foundCard);
             }
+
+            game.log(
+                LogMessageType.DEFAULT,
+                "${0} drew ${1}, ${2} and ${3}",
+                new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                new LogMessageData(LogMessageDataType.CARD, drawnCards[0].name),
+                new LogMessageData(LogMessageDataType.CARD, drawnCards[1].name),
+                new LogMessageData(LogMessageDataType.CARD, drawnCards[2].name)
+            );
         }
-        
+
         return undefined;
     }
 

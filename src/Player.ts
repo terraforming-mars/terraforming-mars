@@ -1321,12 +1321,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             game.addSelectHowToPayInterrupt(this, constants.BUILD_COLONY_COST, false, false, "Select how to pay for Colony project");
             colony.onColonyPlaced(this, game);
             this.onStandardProject(StandardProjectType.BUILD_COLONY);
-            game.log(
-              LogMessageType.DEFAULT,
-              "${0} built a colony on ${1}",
-              new LogMessageData(LogMessageDataType.PLAYER, this.id),
-              new LogMessageData(LogMessageDataType.COLONY, colony.name)
-            );
             return undefined;
           }
         );

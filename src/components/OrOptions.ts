@@ -9,7 +9,6 @@ export const OrOptions = Vue.component("or-options", {
     props: ["player", "players", "playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
-            childComponents: [],
             selectedOption: 0
         };
     },
@@ -59,10 +58,10 @@ export const OrOptions = Vue.component("or-options", {
             subchildren.push(createElement("div", { style: { display: displayStyle, marginLeft: "30px" } }, [this.$data.childComponents[this.$data.childComponents.length - 1]]));
             optionElements.push(subchildren[subchildren.length - 1]);
             children.push(createElement("div", subchildren));
+            if (this.showsave && this.$data.selectedOption === idx) {
+                children.push(createElement("div", { style: {"margin": "5px 30px 10px"}, "class": "wf-action"}, [createElement("button", { domProps: { className: "btn btn-primary" }, on: { click: () => { this.saveData(); } } }, "Save")]));
+            }
         });
-        if (this.showsave) {
-            children.push(createElement("div", {"class": "wf-action"}, [createElement("button", { domProps: { className: "btn btn-primary" }, on: { click: () => { this.saveData(); } } }, "Save")]));
-        }
         return createElement("div", {"class": "wf-options"}, children);
     }
 });

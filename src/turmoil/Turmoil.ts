@@ -92,10 +92,10 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
     }
 
     // Use to send a delegate to a specific party
-    public sendDelegateToParty(player: Player | "NEUTRAL", partyName: PartyName, game: Game): void {
+    public sendDelegateToParty(player: Player | "NEUTRAL", partyName: PartyName, game: Game, fromLobby: boolean = true): void {
         const party = this.getPartyByName(partyName);
         if (party) {
-            if (player != "NEUTRAL" && this.lobby.has(player.id)) {
+            if (player != "NEUTRAL" && this.lobby.has(player.id) && fromLobby) {
                 this.lobby.delete(player.id);
             }
             else {

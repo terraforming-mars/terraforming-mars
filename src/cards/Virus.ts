@@ -10,6 +10,8 @@ import { PlayerInput } from "../PlayerInput";
 import { CardName } from '../CardName';
 import { Resources } from '../Resources';
 import { SelectOption } from '../inputs/SelectOption';
+import { ResourceType } from "../ResourceType";
+import { ICard } from './ICard';
 
 export class Virus implements IProjectCard {
     public cost: number = 1;
@@ -17,21 +19,30 @@ export class Virus implements IProjectCard {
     public name: CardName = CardName.VIRUS;
     public cardType: CardType = CardType.EVENT;
 
-    private getPossibleTargetCards(player: Player, game: Game): Array<IProjectCard> {
-        return game.getPlayedCardsWithAnimals().filter((card) => {
-            const owner = game.getCardPlayer(card.name);
-            if (player.id === owner.id || owner.hasProtectedHabitats()) return false;
-            if (owner.getResourcesOnCard(card) < 1) return false;
-            if (this.name === card.name) return false;
-            if (card.name === CardName.PETS) return false;
-            return true;
+    public canPlay(player: Player, game: Game): boolean {
+        return this.getPossibleTargetCards(player, game).length +
+            game.getPlayers().filter((p) => 
+                ((p.id !== player.id && !p.hasProtectedHabitats()) 
+                || p.id === player.id)
+                && p.plants > 0).length > 0;
+    }
+
+    private getPossibleTargetCards(player: Player, game: Game): Array<ICard> {
+        const result: Array<ICard> = [];
+        game.getPlayers().forEach((p) => {
+            if (p.hasProtectedHabitats() && player.id !== p.id) return;
+            result.push(...p.getCardsWithResources().filter(card => card.resourceType === ResourceType.ANIMAL && card.name !== CardName.PETS));
         });
+        return result;
     }
 
     public play(player: Player, game: Game): PlayerInput | undefined {
         if (game.getPlayers().length === 1)  return undefined;
         const cards = this.getPossibleTargetCards(player, game);
-        const playersWithPlants: number = game.getPlayers().filter((p) => p.id !== player.id && !p.hasProtectedHabitats() && p.plants > 0).length;
+        const playersWithPlants: number = game.getPlayers().filter((p) => 
+            ((p.id !== player.id && !p.hasProtectedHabitats()) 
+            || p.id === player.id)
+            && p.plants > 0).length;
         const remove5Plants = () => {
             return new SelectOption("Remove up to 5 plants from a player", () =>
             {
@@ -43,8 +54,8 @@ export class Virus implements IProjectCard {
         const removeAnimals = () => {
             return new SelectCard(
                 "Select card to remove up to 2 animals from", 
-                cards, (foundCard: Array<IProjectCard>) => {
-                    game.getCardPlayer(foundCard[0].name).removeAnimals(player, foundCard[0], 2, game);
+                cards, (foundCard: Array<ICard>) => {
+                    game.getCardPlayer(foundCard[0].name).removeResourceFrom(foundCard[0], 2, game, player);
                     return undefined;
                 }
             );
@@ -69,7 +80,7 @@ export class Virus implements IProjectCard {
             }
 
             if (cards.length === 1) {
-                game.getCardPlayer(cards[0].name).removeAnimals(player, cards[0], 2, game);
+                game.getCardPlayer(cards[0].name).removeResourceFrom(cards[0], 2, game, player);
                 return undefined;
             }
             return undefined;

@@ -11,9 +11,12 @@ export class MorningStarInc implements CorporationCard {
     public startingMegaCredits: number = 50;
 
     public initialAction(player: Player, game: Game) {
-        for (let foundCard of game.drawCardsByTag(Tags.VENUS, 3)) {
-            player.cardsInHand.push(foundCard);
+        if (game.hasCardsWithTag(Tags.VENUS, 3)) {
+            for (let foundCard of game.drawCardsByTag(Tags.VENUS, 3)) {
+                player.cardsInHand.push(foundCard);
+            }
         }
+        
         return undefined;
     }
 

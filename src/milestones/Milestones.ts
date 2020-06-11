@@ -11,7 +11,7 @@ import { Ecologist } from './Ecologist';
 import { Tycoon } from './Tycoon';
 import { Legend } from './Legend';
 import { Diversifier } from './Diversifier';
-import { Tactitian } from './Tactitian';
+import { Tactician } from './Tactician';
 import { PolarExplorer } from './PolarExplorer';
 import { Energizer } from './Energizer';
 import { RimSettler } from './RimSettler';
@@ -38,7 +38,7 @@ export const ELYSIUM_MILESTONES: Array<IMilestone> = [
 
 export const HELLAS_MILESTONES: Array<IMilestone> = [
     new Diversifier(),
-    new Tactitian(),
+    new Tactician(),
     new PolarExplorer(),
     new Energizer(),
     new RimSettler()

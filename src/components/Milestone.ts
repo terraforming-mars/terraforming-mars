@@ -25,12 +25,12 @@ export const Milestone = Vue.component("milestone", {
                 <a class="ma-clickable" href="#" v-on:click.prevent="toggleMe()" v-i18n>Milestones</a>
                 <span v-for="milestone in milestones_list" v-if="milestone.player_name" class="claimed-milestone-inline" :title="milestone.player_name">
                     <span v-i18n>{{ milestone.milestone.name }}</span>: <span>{{ milestone.player_name }}</span>
-                    <span class="ma-player-cube"><i :class="'board_cube board_cube--'+milestone.player_color"></span>
+                    <span class="ma-player-cube"><i :class="'board-cube board-cube--'+milestone.player_color" /></span>
                 </span>
             </div>
             <div v-show="isVisible()">
                 <div v-for="milestone in milestones_list" :class="milestone.player_name ? 'ma-block pwned-item': 'ma-block'">
-                    <div class="ma-player" v-if="milestone.player_name"><i :title="milestone.player_name" :class="'board_cube board_cube--'+milestone.player_color" /></div>
+                    <div class="ma-player" v-if="milestone.player_name"><i :title="milestone.player_name" :class="'board-cube board-cube--'+milestone.player_color" /></div>
                     <div class="ma-name--milestones" :class="getNameCss(milestone.milestone.name)" v-i18n>{{milestone.milestone.name}}</div>
                     <div class="ma-description" v-i18n>{{milestone.milestone.description}}</div>
                 </div>

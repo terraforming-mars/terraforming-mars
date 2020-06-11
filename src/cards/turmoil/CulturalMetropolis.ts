@@ -27,7 +27,7 @@ export class CulturalMetropolis implements IProjectCard {
         player.setProduction(Resources.ENERGY,-1);
         player.setProduction(Resources.MEGACREDITS,3);
         game.addInterrupt(new SelectCity(player, game));
-        game.addInterrupt(new SelectParty(player, game, "Select where to send two delegates", 2));
+        game.addInterrupt(new SelectParty(player, game, "Select where to send two delegates", 2, undefined, undefined, false));
         return undefined;
     }
 }

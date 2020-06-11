@@ -18,6 +18,7 @@ describe("DiasporaMovement", function () {
         const player2 = new Player("test2", Color.RED, false);
         const gameOptions = {
             draftVariant: false,
+	        initialDraftVariant: false,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
@@ -27,8 +28,10 @@ describe("DiasporaMovement", function () {
             customCorporationsList: [],
             solarPhaseOption: false,
             promoCardsOption: false,
+            undoOption: false,
             startingCorporations: 2,
-            soloTR: false
+            soloTR: false,
+            clonedGamedId: undefined
           } as GameOptions;
         const game = new Game("foobar", [player,player2], player, gameOptions);  
         expect(card.canPlay(player, game)).to.eq(false);

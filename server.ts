@@ -83,6 +83,8 @@ function requestHandler(
         apiGetGames(req, res);
       } else if (req.url.indexOf('/api/game') === 0) {
         apiGetGame(req, res);
+      } else if (req.url.startsWith('/api/clonablegames')) {
+        getClonableGames(res);        
       } else {
         notFound(req, res);
       }
@@ -154,6 +156,17 @@ function processInput(
   });
 }
 
+function getClonableGames(res: http.ServerResponse): void {
+  Database.getInstance().getClonableGames(function (err, allGames) {
+    if (err) {
+      return;
+    }
+    res.setHeader('Content-Type', 'application/json');
+    res.write(JSON.stringify(allGames));
+    res.end();
+  });
+}  
+
 function apiGetGames(req: http.IncomingMessage, res: http.ServerResponse): void {
 
   if (!isServerIdValid(req)) {
@@ -192,7 +205,7 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       const player = new Player("test", Color.BLUE, false);
       const player2 = new Player("test2", Color.RED, false);
       let gameToRebuild = new Game(game_id,[player,player2], player);
-      Database.getInstance().restoreGame(game_id, gameToRebuild, function (err) {
+      Database.getInstance().restoreGameLastSave(game_id, gameToRebuild, function (err) {
         if (err) {
           return;
         }
@@ -213,7 +226,7 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 }
 
 function loadAllGames(): void {
-  Database.getInstance().getAllPendingGames(function (err, allGames) {
+  Database.getInstance().getGames(function (err, allGames) {
     if (err) {
       return;
     }
@@ -221,11 +234,12 @@ function loadAllGames(): void {
       const player = new Player("test", Color.BLUE, false);
       const player2 = new Player("test2", Color.RED, false);
       let gameToRebuild = new Game(game_id,[player,player2], player);
-      Database.getInstance().restoreGame(game_id, gameToRebuild, function (err) {
+      Database.getInstance().restoreGameLastSave(game_id, gameToRebuild, function (err) {
         if (err) {
+          console.error("unable to load game " + game_id, err);
           return;
         }
-        console.log("load game "+ game_id);
+        console.log("load game " + game_id);
         games.set(gameToRebuild.id, gameToRebuild);
         gameToRebuild.getPlayers().forEach((player) => {
           playersToGame.set(player.id, gameToRebuild);
@@ -358,8 +372,11 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         customCorporationsList: gameReq.customCorporationsList,
         solarPhaseOption: gameReq.solarPhaseOption,
         promoCardsOption: gameReq.promoCardsOption,
+        undoOption: gameReq.undoOption,
         startingCorporations: gameReq.startingCorporations,
-        soloTR: gameReq.soloTR
+        soloTR: gameReq.soloTR,
+        clonedGamedId: gameReq.clonedGamedId,
+        initialDraftVariant: gameReq.initialDraft
       } as GameOptions;
     
       const game = new Game(gameId, players, firstPlayer, gameOptions);
@@ -466,7 +483,10 @@ function getPlayer(player: Player, game: Game): string {
     tradesThisTurn: player.tradesThisTurn,
     turmoil: getTurmoil(game),
     selfReplicatingRobotsCardCost: player.getSelfReplicatingRobotsCardCost(game),
-    selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard()
+    selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
+    dealtCorporationCards: player.dealtCorporationCards,
+    dealtPreludeCards: player.dealtPreludeCards,
+    initialDraft: game.initialDraft
   } as PlayerModel;
   return JSON.stringify(output);
 }

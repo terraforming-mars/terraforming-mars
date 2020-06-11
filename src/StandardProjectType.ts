@@ -6,7 +6,7 @@ export enum StandardProjectType {
     CITY,
     POWER_PLANT,
     AQUIFER,
-    AIR_SCRAPING,
+    AIR_SCRAPPING,
     BUILD_COLONY,
     BUFFER_GAS
 }

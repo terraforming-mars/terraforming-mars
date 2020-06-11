@@ -9,8 +9,9 @@ import { CardName } from '../../CardName';
 export class AquiferTurbines extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY];
     public name: CardName = CardName.AQUIFER_TURBINES;
-    public canPlay(player: Player) {
-        return player.canAfford(3);
+    public canPlay(player: Player, _game: Game, bonusMc?: number) {
+        let requiredPayment = 3 - (bonusMc || 0);
+        return requiredPayment <= 0 ? true : player.canAfford(requiredPayment);
     }
     public play(player: Player, game: Game) {
         player.setProduction(Resources.ENERGY,2);

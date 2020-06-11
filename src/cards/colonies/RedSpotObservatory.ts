@@ -26,6 +26,11 @@ export class RedSpotObservatory implements IProjectCard, IResourceCard {
     }
 
     public action(player: Player, game: Game) {
+        if (this.resourceCount < 1) {
+            this.resourceCount++;
+            return undefined;
+        }
+
         var opts: Array<SelectOption> = [];
         const addResource = new SelectOption("Add 1 floater on this card", () => {
             this.resourceCount++;

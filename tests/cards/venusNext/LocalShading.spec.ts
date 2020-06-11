@@ -3,7 +3,6 @@ import { LocalShading } from "../../../src/cards/venusNext/LocalShading";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { OrOptions } from "../../../src/inputs/OrOptions";
-import { SelectOption } from '../../../src/inputs/SelectOption';
 import { Resources } from "../../../src/Resources";
 
 describe("LocalShading", function () {
@@ -16,9 +15,8 @@ describe("LocalShading", function () {
         const card = new LocalShading();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        const action = card.action(player) as SelectOption;
-        expect(action instanceof SelectOption).to.eq(true);
-        action.cb();
+        expect(card.canAct()).to.eq(true);
+        card.action(player);
         expect(card.resourceCount).to.eq(1);
 
         const orOptions = card.action(player) as OrOptions;

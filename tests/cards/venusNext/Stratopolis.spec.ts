@@ -14,6 +14,7 @@ describe("Stratopolis", function () {
         const player = new Player("test", Color.BLUE, false);
         const gameOptions = {
             draftVariant: false,
+	        initialDraftVariant: false,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
@@ -23,8 +24,10 @@ describe("Stratopolis", function () {
             customCorporationsList: [],
             solarPhaseOption: true,
             promoCardsOption: false,
+            undoOption: false,
             startingCorporations: 2,
-            soloTR: false
+            soloTR: false,
+            clonedGamedId: undefined
           } as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);
         expect(card.canPlay(player)).to.eq(false);

@@ -25,13 +25,13 @@ export const Award = Vue.component("award", {
                 <a  class="ma-clickable awards-padding" href="#" v-on:click.prevent="toggleMe()" v-i18n>Awards</a>
                 <span v-for="award in awards_list" v-if="award.player_name" class="funded-award-inline" :title="award.player_name">
                     <span v-i18n>{{ award.award.name }}</span>
-                    <span class="ma-player-cube"><i :class="'board_cube board_cube--'+award.player_color" /></span>
+                    <span class="ma-player-cube"><i :class="'board-cube board-cube--'+award.player_color" /></span>
                 </span>
             </div>
             
             <div v-show="isVisible()">
                 <div v-for="award in awards_list" :class="award.player_name ? 'ma-block pwned-item': 'ma-block'">
-                    <div class="ma-player" v-if="award.player_name"><i :title="award.player_name" :class="'board_cube board_cube--'+award.player_color" /></div>
+                    <div class="ma-player" v-if="award.player_name"><i :title="award.player_name" :class="'board-cube board-cube--'+award.player_color" /></div>
                     <div class="ma-name--awards" :class="getNameCss(award.award.name)" v-i18n>{{award.award.name}}</div>
                     <div class="ma-description" v-i18n>{{award.award.description}}</div>
                 </div>

@@ -5,7 +5,6 @@ import { Player } from "../../../src/Player";
 import { Game } from '../../../src/Game';
 import { Luna } from '../../../src/colonies/Luna';
 import { Triton } from '../../../src/colonies/Triton';
-import { AndOptions } from "../../../src/inputs/AndOptions";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 
 describe("MarketManipulation", function () {
@@ -20,14 +19,10 @@ describe("MarketManipulation", function () {
         game.colonies.push(colony1);
         game.colonies.push(colony2);
 
-        const action = card.play(player, game) as AndOptions;
+        const action = card.play(player, game) as OrOptions;
         expect(action).not.to.eq(undefined);
-
-        const orOptions1 = action.options[0] as OrOptions;
-        const orOptions2 = action.options[1] as OrOptions;
-
-        orOptions1.options[0].cb();
-        orOptions2.options[1].cb();
+        expect(action.options[0].title).to.eq("Increase Luna (MegaCredits) and decrease Triton (Titanium)")
+        action.options[0].cb();
 
         expect(colony1.trackPosition).to.eq(2);
         expect(colony2.trackPosition).to.eq(0);

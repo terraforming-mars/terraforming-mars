@@ -33,17 +33,8 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
       for (const gamePlayer of game.getPlayers()) {
         // Microbes of this player are protected
         if (gamePlayer.hasProtectedHabitats() && gamePlayer.id !== currentPlayer.id) continue;
-
-        for (const playedCard of gamePlayer.playedCards) {
-          // Do not remove Microbes from this card itself
-          if (this.name === playedCard.name) continue;
-          // No resources, sorry
-          if (gamePlayer.getResourcesOnCard(playedCard) < 1) continue;
-          // Resources are not the Microbes
-          if (playedCard.resourceType !== ResourceType.MICROBE) continue;
-
-          availableCards.push(playedCard);
-        }
+        availableCards.push(...gamePlayer.getCardsWithResources().filter(card => card.resourceType === ResourceType.MICROBE 
+          && card.name !== this.name));
       }
       return availableCards;
     }
@@ -58,8 +49,7 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
       return new SelectCard('Select card to remove microbe', availableCards,
           (foundCards: Array<ICard>) => {
             // TODO Log here
-            game.getCardPlayer(foundCards[0].name).
-                removeMicrobes(player, foundCards[0], 1, game);
+            game.getCardPlayer(foundCards[0].name).removeResourceFrom(foundCards[0], 1, game, player);    
             this.resourceCount++;
             return undefined;
           }

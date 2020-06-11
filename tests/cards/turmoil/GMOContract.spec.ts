@@ -12,6 +12,7 @@ describe("GMOContract", function () {
         const player = new Player("test", Color.BLUE, false);
         const gameOptions = {
             draftVariant: false,
+	        initialDraftVariant: false,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
@@ -21,8 +22,10 @@ describe("GMOContract", function () {
             customCorporationsList: [],
             solarPhaseOption: false,
             promoCardsOption: false,
+            undoOption: false,
             startingCorporations: 2,
-            soloTR: false
+            soloTR: false,
+            clonedGamedId: undefined
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         if (game.turmoil !== undefined) {

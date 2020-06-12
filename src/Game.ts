@@ -24,7 +24,7 @@ import {IAward} from "./awards/IAward";
 import {Tags} from "./cards/Tags";
 import {Resources} from "./Resources";
 import {ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES} from "./milestones/Milestones";
-import {ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS} from "./awards/Awards";
+import { ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS } from './awards/Awards';
 import {SpaceName} from "./SpaceName";
 import {BoardColony, Board} from "./Board";
 import {CorporationName} from "./CorporationName";
@@ -356,10 +356,20 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public getRandomMilestonesAndAwards() {
-      const shuffledMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES).sort(() => 0.5 - Math.random());
+      let shuffledMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES); 
+      if (this.venusNextExtension) {
+        shuffledMilestones = shuffledMilestones.concat(VENUS_MILESTONES).sort(() => 0.5 - Math.random());
+      } else {
+        shuffledMilestones = shuffledMilestones.sort(() => 0.5 - Math.random());
+      }
       this.milestones.push(...shuffledMilestones.slice(0, 5));
 
-      const shuffledAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS).sort(() => 0.5 - Math.random());
+      let shuffledAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS);
+      if (this.venusNextExtension) {
+        shuffledAwards = shuffledAwards.concat(VENUS_AWARDS).sort(() => 0.5 - Math.random());
+      } else {
+        shuffledAwards = shuffledAwards.sort(() => 0.5 - Math.random());
+      }      
       this.awards.push(...shuffledAwards.slice(0, 5));
     }
 

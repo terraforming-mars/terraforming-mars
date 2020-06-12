@@ -44,6 +44,7 @@ import { PartyName } from "./turmoil/parties/PartyName";
 import { SelectDelegate } from "./inputs/SelectDelegate";
 import { Phase } from "./Phase";
 import { SelfReplicatingRobots } from "./cards/promo/SelfReplicatingRobots";
+import { Aridor } from "./cards/colonies/Aridor";
 
 export class Player implements ILoadable<SerializedPlayer, Player>{
     public corporationCard: CorporationCard | undefined = undefined;
@@ -128,7 +129,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (game.turmoilExtension 
         && game.turmoil !== undefined 
         && game.turmoil.rulingParty !== undefined 
-        && game.turmoil.rulingParty.name === PartyName.REDS) {
+        && game.turmoil.rulingParty.name === PartyName.REDS && game.phase === Phase.ACTION) {
           if (this.canAfford(3)) 
           {
             game.addSelectHowToPayInterrupt(this, 3, false, false, "Select how to pay for TR increase");
@@ -730,6 +731,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         if (input.length !== 1) {
           throw new Error("Incorrect options provided");
         }
+        if (input[0] === null) throw new Error("Invalid/no input provided");
         if (input[0].length !== 1) {
           throw new Error("Incorrect input provided");
         }
@@ -2210,6 +2212,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.corporationCard = getCorporationCardByName(d.corporationCard.name);
         if(d.corporationCard.resourceCount && d.corporationCard.resourceCount > 0) {
           this.corporationCard!.resourceCount = d.corporationCard.resourceCount;
+        }
+        if(d.corporationCard.name === CardName.ARIDOR){
+          (this.corporationCard as Aridor).allTags = new Set((d.corporationCard as Aridor).allTags);
         }
       } else {
           this.corporationCard = undefined;

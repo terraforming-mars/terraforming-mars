@@ -117,7 +117,7 @@ export const HTML_DATA: Map<string, string> =
                 <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div><div class="energy production "></div><br>
                 <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">5</div>
             </div>
-            <div class="special-tile tile capitol ">&#x2302&#xFE0E;</div>
+            <div class="special-tile tile capitol ">&#x2302;&#xFE0E;</div>
             <div class="description " style="text-align:left;">
                 (Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.<br>
                 <div style="font-size:9px;line-height:12px;margin-top:10px; width: 140px;">
@@ -445,8 +445,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="corporate-icon project-icon"></div>
         <div class="card-number">028</div>
         <div class="content ">
-            <div class="points ">1/<div class="resource " style="padding-bottom:2px;padding-top:2px;font-size:22px;background-color:rgb(230,230,230);font-weight:normal ">&#x1F680&#xFE0E;</div></div>
-            <div class="resource titanium "></div> <span class="red-arrow "></span> <div class="resource " style="padding-bottom:2px;padding-top:2px;font-size:22px;background-color:rgb(230,230,230);font-weight:normal ">&#x1F680&#xFE0E;</div>
+            <div class="points ">1/<div class="resource " style="padding-bottom:2px;padding-top:2px;font-size:22px;background-color:rgb(230,230,230);font-weight:normal ">&#x1F680;&#xFE0E;</div></div>
+            <div class="resource titanium "></div> <span class="red-arrow "></span> <div class="resource " style="padding-bottom:2px;padding-top:2px;font-size:22px;background-color:rgb(230,230,230);font-weight:normal ">&#x1F680;&#xFE0E;</div>
             <div class="description ">
                 (Action: Spend 1 titanium to add 1 fighter resource to this card.)
             </div>
@@ -1809,7 +1809,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
-[ CardName.ARTIFICIAL_PHOTOSYNTHESIS,`
+[CardName.ARTIFICIAL_PHOTOSYNTHESIS,`
         <div class="title background-color-automated ">Artificial Photosynthesis</div>
         <div class="price ">12</div>
         <div class="tag tag1 tag-science "></div>
@@ -2313,7 +2313,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="content ">
             <div class="points ">1/2<div class="animal resource "></div></div>
             <div class="requirements">8% O2</div>
-            <div class="tile greenery-tile" style="margin-top:-3px;"></div> : </span> <div class="animal resource "></div>
+            <div class="tile greenery-tile" style="margin-top:-3px;"></div> : <div class="animal resource "></div>
             <div class="description " style="margin-top:-8px;">
               (Effect: When you place a greenery tile, add an Animal to this card.)
             </div>
@@ -5305,7 +5305,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
           </div>
           <div style="color: #020202;font-size:24px;text-shadow:6px 6px 6px grey;">
-            <div style="text-shadow:none;box-shadow:3px 3px 6px grey;margin-right:2px;border: 1px solid red;display:inline-block;background-color:#ff5f00;">&#x25b2<span style="color: #020202;font-size:14px;padding:0px;border:none;margin-left:-5px;">&#x25b2</span>
+            <div style="text-shadow:none;box-shadow:3px 3px 6px grey;margin-right:2px;border: 1px solid red;display:inline-block;background-color:#ff5f00;">&#x25b2;<span style="color: #020202;font-size:14px;padding:0px;border:none;margin-left:-5px;">&#x25b2;</span>
             </div>THARSIS<br>&nbsp; REPUBLIC</div>
           <div class="description " style="text-align:center ">
           <div class="resource money " style="margin-left:60px;">40</div> <div class="tile city-tile" style="margin-left:40px;margin-top:-20px;"> </div><br>
@@ -5488,7 +5488,7 @@ export const HTML_DATA: Map<string, string> =
       </div><br>
         <div class="resource money" style="margin-left:30px;">42</div>
         <div class="resource card" style="margin-left:15px;"><div class="card-icon card-icon-floater">&#x2601;</div></div>
-        <div class="resource card"><div class="card-icon card-icon-floater">&#x2601</div></div>
+        <div class="resource card"><div class="card-icon card-icon-floater">&#x2601;</div></div>
         <div class="description" style="text-align:center;margin-top:-5px;font-size:10px;">
           (You start with 42 MC. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take those 2 cards into hand and discard the rest.)
         </div>
@@ -5633,7 +5633,6 @@ export const HTML_DATA: Map<string, string> =
             <div class="resource money" style="margin-left:60px">38</div><br>
               (You start with 1 titanium production<br> and 38 MC.)
             </div>
-        </div>
 `],
 [CardName.ROBINSON_INDUSTRIES,`
       <div class="corporationLabel">CORPORATION</div>
@@ -5979,7 +5978,7 @@ export const HTML_DATA: Map<string, string> =
                 <div class="resource money" style="margin-left:85px;margin-right:15px;margin-top:10px;">42</div>
         <div class="description" style="text-align:center;">
           (You start with 42 MC. Instead of choosing from 10 cards during setup, you get 10 cards for free.)
-        </div
+        </div>
       </div>
 `],
 [CardName.PHILARES,`
@@ -6029,7 +6028,6 @@ export const HTML_DATA: Map<string, string> =
                 <div class="resource money" style="margin-left:60px;margin-right:25px;">38</div>
                 <div class="production-box" style="margin-left:20px;"><div class="production steel"></div></div>
         <div class="description" style="margin-top:0px;text-align:center;">(You start with 38 MC and 1 steel production.)</div>
-      </div>
 `],
 [CardName.SPLICE,`
       <div class="tag tag1 tag-microbe"></div>
@@ -6327,7 +6325,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">P12</div>
       <div class="content">
         <div class="tile greenery-tile"></div>
-        <div class="resource card"><div class="card-icon card-icon-plant">&#x1F331&#xFE0E;</div></div> <div class="resource card"><div class="card-icon card-icon-plant">&#x1F331&#xFE0E;</div></div>
+        <div class="resource card"><div class="card-icon card-icon-plant">&#x1F331;&#xFE0E;</div></div> <div class="resource card"><div class="card-icon card-icon-plant">&#x1F331;&#xFE0E;</div></div>
         <div class="description">
           Place 1 Greenery Tile. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.
         </div>
@@ -6382,7 +6380,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="card-number">P16</div>
       <div class="content">
-        <div class="production-box"><div class="production titanium"></div></div></br>
+        <div class="production-box"><div class="production titanium"></div></div><br>
         <div class="resource card"></div>
         <div class="description">
           Increase your titanium production 1 step. Draw a card.
@@ -6519,7 +6517,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="card-number">P25</div>
       <div class="content">
-        <div class="production-box"><div class="production titanium"></div></div></br>
+        <div class="production-box"><div class="production titanium"></div></div><br>
         <div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div>
         <div class="description">
           Increase your titanium production 1 step. Gain 4 titanium.
@@ -6671,7 +6669,6 @@ export const HTML_DATA: Map<string, string> =
           Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.
         </div>
       </div>
-    </div>
 `],
 [CardName.PENGUINS, `
     <div class="title background-color-active">Penguins</div>
@@ -6788,7 +6785,6 @@ export const HTML_DATA: Map<string, string> =
             (Increase your MC production 1 step per different tag you have in play, including this.)
         </div>
         </div>
-    </div>
 `],
 [CardName.PROJECT_INSPECTION, `
     <div class="title background-color-events">Project Inspection</div>

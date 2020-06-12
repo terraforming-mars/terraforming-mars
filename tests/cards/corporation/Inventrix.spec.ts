@@ -19,9 +19,8 @@ describe("Inventrix", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const action = card.initialAction(player, game);
-        expect(action).not.to.eq(undefined);
-        expect(player.cardsInHand.length).to.eq(0);
-        action.cb();
+        
+        expect(action).to.eq(undefined);
         expect(player.cardsInHand.length).to.eq(3);
     });
 });

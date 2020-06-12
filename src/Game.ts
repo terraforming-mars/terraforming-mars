@@ -1359,32 +1359,60 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public drawCardsByTag(tag: Tags, total: number): Array<IProjectCard> {
       let cardsToDraw = 0;
       const result: Array<IProjectCard> = [];
+      const discardedCards: Array<IProjectCard> = [];
+
       while (cardsToDraw < total) {
         const projectCard = this.dealer.dealCard();
         if (projectCard.tags.includes(tag)) {
           cardsToDraw++;
           result.push(projectCard);
         } else {
+          discardedCards.push(projectCard);
           this.dealer.discard(projectCard);
         }
       }
+
+      this.log(
+        LogMessageType.DEFAULT,
+        discardedCards.length + " card(s) were discarded",
+       ...discardedCards.map((card) => new LogMessageData(LogMessageDataType.CARD, card.name)),
+      );
+
       return result;
     }
 
     public drawCardsByResource(resource: ResourceType, total: number): Array<IProjectCard> {
       let cardsToDraw = 0;
       const result: Array<IProjectCard> = [];
+      const discardedCards: Array<IProjectCard> = [];
+
       while (cardsToDraw < total) {
         const projectCard = this.dealer.dealCard();
         if (projectCard.resourceType !== undefined && projectCard.resourceType === resource ) {
           cardsToDraw++;
           result.push(projectCard);
         } else {
+          discardedCards.push(projectCard);
           this.dealer.discard(projectCard);
         }
       }
+
+      this.log(
+        LogMessageType.DEFAULT,
+        discardedCards.length + " card(s) were discarded",
+       ...discardedCards.map((card) => new LogMessageData(LogMessageDataType.CARD, card.name)),
+      );
+
       return result;
-    }   
+    }
+
+    public getCardsInHandByTag(player: Player, tag: Tags) {
+      return player.cardsInHand.filter((card) => card.tags.includes(tag));
+    }
+
+    public getCardsInHandByResource(player: Player, resourceType: ResourceType) {
+      return player.cardsInHand.filter((card) => card.resourceType === resourceType);
+    }
 
     public log(type: LogMessageType, message: string, ...data: LogMessageData[]) {
       this.gameLog.push(new LogMessage(type, message, data));

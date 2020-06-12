@@ -54,6 +54,7 @@ import { CardName } from "./CardName";
 import { Turmoil } from "./turmoil/Turmoil";
 import { PartyName } from "./turmoil/parties/PartyName";
 import { IParty } from "./turmoil/parties/IParty";
+import { Pristar } from './cards/turmoil/Pristar';
 
 export interface GameOptions {
   draftVariant: boolean;
@@ -780,8 +781,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       this.players.forEach((player) => {
         player.terraformRatingAtGenerationStart = player.getTerraformRating();
+        if(player.corporationCard?.name === CardName.PRISTAR){
+          (player.corporationCard as Pristar).lastGenerationTR = player.getTerraformRating();
+        }
       });
-      
+       
       if (this.draftVariant) {
         this.gotoDraftingPhase();
       } else {

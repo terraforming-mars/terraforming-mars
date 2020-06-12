@@ -39,13 +39,13 @@ export class JetStreamMicroscrappers implements IActionCard,IProjectCard, IResou
             return undefined;
         });
 
-        if (player.titanium > 0) {
-            opts.push(addResource);
-        } else return spendResource;
-
         if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
             opts.push(spendResource);
         } else return addResource;
+
+        if (player.titanium > 0) {
+            opts.push(addResource);
+        } else return spendResource;
 
         return new OrOptions(...opts);
 

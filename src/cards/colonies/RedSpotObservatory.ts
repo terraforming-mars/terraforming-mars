@@ -43,10 +43,9 @@ export class RedSpotObservatory implements IProjectCard, IResourceCard {
             return undefined;
         });
 
-        opts.push(addResource);
-
         if (this.resourceCount > 0 ) {
             opts.push(spendResource);
+            opts.push(addResource);
         } else {
             return addResource;
         }

@@ -38,11 +38,12 @@ export class SulphurEatingBacteria implements IActionCard,IProjectCard, IResourc
             player.megaCredits += 3 * amount;
             return undefined;
         }, this.resourceCount);
-        opts.push(addResource);
 
         if (this.resourceCount > 0) {
             opts.push(spendResource);
         } else return addResource;
+
+        opts.push(addResource);
 
         return new OrOptions(...opts);
     }

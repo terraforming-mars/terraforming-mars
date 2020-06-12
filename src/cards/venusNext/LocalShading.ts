@@ -41,11 +41,11 @@ export class LocalShading implements IActionCard,IProjectCard,IResourceCard {
             return undefined;
         });
 
-        opts.push(addResource);
-
         if (this.resourceCount > 0) {
             opts.push(spendResource);
         } else return addResource;
+
+        opts.push(addResource);
 
         return new OrOptions(...opts);
     }

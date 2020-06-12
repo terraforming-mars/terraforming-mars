@@ -57,13 +57,13 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard, IResourceC
             return undefined;
         });
 
-        if (player.canAfford(2)) {
-            opts.push(addResource);
-        } else return spendResource;
-
         if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
             opts.push(spendResource);
         } else return addResource;
+
+        if (player.canAfford(2)) {
+            opts.push(addResource);
+        } else return spendResource;
 
         return new OrOptions(...opts);
     }

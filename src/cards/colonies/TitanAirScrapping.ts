@@ -36,8 +36,8 @@ export class TitanAirScrapping implements IProjectCard, IResourceCard {
         });
 
         if (this.resourceCount >= 2 && player.titanium > 0) {
-            opts.push(addResource);
             opts.push(spendResource);
+            opts.push(addResource);
         } else if (player.titanium > 0) {
             return addResource;
         } else {

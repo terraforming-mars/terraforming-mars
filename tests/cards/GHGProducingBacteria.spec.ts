@@ -35,9 +35,9 @@ describe("GHGProducingBacteria", function () {
         const orAction = card.action(player, game) as OrOptions;
         expect(orAction).not.to.eq(undefined);
         expect(orAction instanceof OrOptions).to.eq(true);
-        orAction.options[0].cb();
-        expect(card.resourceCount).to.eq(3);
         orAction.options[1].cb();
+        expect(card.resourceCount).to.eq(3);
+        orAction.options[0].cb();
         expect(card.resourceCount).to.eq(1);
         expect(game.getTemperature()).to.eq(-28);
     });

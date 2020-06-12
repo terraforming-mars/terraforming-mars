@@ -72,6 +72,7 @@ export interface GameOptions {
   soloTR: boolean;
   clonedGamedId: string | undefined;
   initialDraftVariant: boolean;
+  randomMA: boolean;
 }  
 
 export class Game implements ILoadable<SerializedGame, Game> {
@@ -117,6 +118,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public soloTR: boolean;
     private clonedGamedId: string | undefined;
     public initialDraft: boolean = false;
+    public randomMA: boolean = false;
 
     constructor(
       public id: string,
@@ -131,6 +133,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         gameOptions = {
           draftVariant: false,
           initialDraftVariant: false,
+          randomMA: false,
           preludeExtension: false,
           venusNextExtension: false,
           coloniesExtension: false,
@@ -147,7 +150,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         } as GameOptions
       }
 
-      this.board = this.boardConstructor(gameOptions.boardName);
+      this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA);
 
       this.activePlayer = first;
       this.boardName = gameOptions.boardName;
@@ -164,6 +167,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.solarPhaseOption = gameOptions.solarPhaseOption;
       this.soloTR = gameOptions.soloTR;
       this.initialDraft = gameOptions.initialDraftVariant;
+      this.randomMA = gameOptions.randomMA;
 
       // Clone game
       if (gameOptions !== undefined 
@@ -181,6 +185,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.soloMode = true;
         this.draftVariant = false;
         this.initialDraft = false;
+        this.randomMA = false;
         this.draftVariant = false;
         this.setupSolo();
       }
@@ -297,21 +302,43 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     // Function to construct the board and milestones/awards list
-    public boardConstructor(boardName: BoardName): Board {
+    public boardConstructor(boardName: BoardName, randomMA: boolean): Board {
       if (boardName === BoardName.ELYSIUM) {
-        this.milestones.push(...ELYSIUM_MILESTONES);
-        this.awards.push(...ELYSIUM_AWARDS);
+        if (randomMA) {
+          this.getRandomMilestonesAndAwards();
+        } else {
+          this.milestones.push(...ELYSIUM_MILESTONES);
+          this.awards.push(...ELYSIUM_AWARDS);
+        }
+        
         return new ElysiumBoard();
       } else if (boardName === BoardName.HELLAS) {
-        this.milestones.push(...HELLAS_MILESTONES);
-        this.awards.push(...HELLAS_AWARDS);
+        if (randomMA) {
+          this.getRandomMilestonesAndAwards();
+        } else {
+          this.milestones.push(...HELLAS_MILESTONES);
+          this.awards.push(...HELLAS_AWARDS);
+        }
+
         return new HellasBoard();
       } else {        
-        this.milestones.push(...ORIGINAL_MILESTONES);
-        this.awards.push(...ORIGINAL_AWARDS);
+        if (randomMA) {
+          this.getRandomMilestonesAndAwards();
+        } else {
+          this.milestones.push(...ORIGINAL_MILESTONES);
+          this.awards.push(...ORIGINAL_AWARDS);
+        }
 
         return new OriginalBoard();
       }
+    }
+
+    public getRandomMilestonesAndAwards() {
+      const shuffledMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES).sort(() => 0.5 - Math.random());
+      this.milestones.push(...shuffledMilestones.slice(0, 5));
+
+      const shuffledAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS).sort(() => 0.5 - Math.random());
+      this.awards.push(...shuffledAwards.slice(0, 5));
     }
 
     // Add Venus Next board colonies and milestone / award
@@ -364,6 +391,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.startingCorporations = gameToRebuild.startingCorporations;
           game.soloTR = gameToRebuild.soloTR;
           game.initialDraft = gameToRebuild.initialDraft;
+          game.randomMA = gameToRebuild.randomMA;
 
           // Update dealers
           game.dealer = gameToRebuild.dealer;
@@ -1462,11 +1490,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return player.loadFromJSON(element);
       });
 
-
       // Rebuild milestones, awards and board elements
-      this.milestones = [];
+      this.milestones = []; // TODO: Store and fetch M&A data on rebuild
       this.awards = [];
-      this.board = this.boardConstructor(d.boardName);
+      this.board = this.boardConstructor(d.boardName, false);
 
       // Reload venus elements if needed
       if(this.venusNextExtension) {

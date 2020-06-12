@@ -68,11 +68,13 @@ export const PlayerHome = Vue.component("player-home", {
             }
         }
     },
-    mounted: function () {
-        dialogPolyfill.default.registerDialog(document.getElementById("dialog-default"));   
+    created() {
         if(window.localStorage){
             this.soundtip = window.localStorage.getItem("soundtip") === "1";
         }
+    },
+    mounted: function () {
+        dialogPolyfill.default.registerDialog(document.getElementById("dialog-default"));   
     },
     template: `
         <div id="player-home">

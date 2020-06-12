@@ -444,7 +444,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.turmoil = gameToRebuild.turmoil;
 
           if(gameToRebuild.venusNextExtension) {
-            game.setVenusElements(gameToRebuild.randomMA);
+            game.board.spaces.push(
+              new BoardColony(SpaceName.DAWN_CITY),
+              new BoardColony(SpaceName.LUNA_METROPOLIS),
+              new BoardColony(SpaceName.MAXWELL_BASE),
+              new BoardColony(SpaceName.STRATOPOLIS)
+          );
           }
 
           // Set active player
@@ -1588,13 +1593,45 @@ export class Game implements ILoadable<SerializedGame, Game> {
       });
       
       // Rebuild milestones, awards and board elements
-      this.milestones = []; // TODO: Store and fetch M&A data on rebuild
+      if (d.boardName === BoardName.ELYSIUM) {
+        this.board = new ElysiumBoard();
+      } else if (d.boardName === BoardName.HELLAS) {
+        this.board = new HellasBoard();
+      } else {        
+        this.board = new OriginalBoard();
+      }  
+
+      this.milestones = [];
       this.awards = [];
-      this.board = this.boardConstructor(d.boardName, false, this.venusNextExtension);
+
+      let allMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES);
+
+      d.milestones.forEach((element: IMilestone) => {
+        allMilestones.forEach((ms: IMilestone) => {
+          if (ms.name === element.name) {
+            this.milestones.push(ms);
+          }
+        });
+      });  
+
+      let allAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS);
+
+      d.awards.forEach((element: IAward) => {
+        allAwards.forEach((award: IAward) => {
+          if (award.name === element.name) {
+            this.awards.push(award);
+          }
+        });
+      });
 
       // Reload venus elements if needed
       if(this.venusNextExtension) {
-        this.setVenusElements(this.randomMA);
+        this.board.spaces.push(
+          new BoardColony(SpaceName.DAWN_CITY),
+          new BoardColony(SpaceName.LUNA_METROPOLIS),
+          new BoardColony(SpaceName.MAXWELL_BASE),
+          new BoardColony(SpaceName.STRATOPOLIS)
+      );
       }
 
       d.board.spaces.forEach((element: ISpace) => {

@@ -5,5 +5,6 @@ export enum Color {
     YELLOW = "yellow",
     GREEN = "green",
     BLACK = "black",
+    PURPLE = "purple",
     NEUTRAL = "neutral"
 }

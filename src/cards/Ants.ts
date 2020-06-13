@@ -46,6 +46,14 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
       }
 
       const availableCards: Array<ICard> = this.getAvailableCards(game, player);
+
+      // Auto select if there is only one possible target
+      if (availableCards.length === 1) {
+        game.getCardPlayer(availableCards[0].name).removeResourceFrom(availableCards[0], 1, game, player);    
+        this.resourceCount++;
+        return undefined;
+      }
+
       return new SelectCard('Select card to remove microbe', availableCards,
           (foundCards: Array<ICard>) => {
             // TODO Log here

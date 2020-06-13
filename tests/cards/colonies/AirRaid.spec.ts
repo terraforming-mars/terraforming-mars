@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import { AirRaid } from "../../../src/cards/colonies/AirRaid";
+import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { StormCraftIncorporated } from '../../../src/cards/colonies/StormCraftIncorporated';
@@ -10,25 +11,55 @@ import { ICard } from '../../../src/cards/ICard';
 import { SelectPlayer } from '../../../src/inputs/SelectPlayer';
 
 describe("AirRaid", function () {
-    it("Should play", function () {
+    it("Should play - multiple targets", function () {
         const card = new AirRaid();
         let corpo = new StormCraftIncorporated();
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
-        const game = new Game("foobar", [player,player2], player);
+        const player3 = new Player("test3", Color.BLACK, false);
+        const game = new Game("foobar", [player,player2,player3], player);
+
         expect(card.canPlay(player)).to.eq(false);
         player.corporationCard = corpo;
         player2.megaCredits = 4;
         player.addResourceTo(corpo);
         expect(player.getResourcesOnCard(corpo)).to.eq(1);
+
+        const otherCardWithFloater = new Dirigibles();
+        player.playedCards.push(otherCardWithFloater);
+        player.addResourceTo(otherCardWithFloater);
+
         card.play(player, game);
+
         const andOptions = card.play(player, game) as AndOptions;
         const option1 = andOptions.options[0] as SelectCard<ICard>;
         const option2 = andOptions.options[1] as SelectPlayer;
+
         option1.cb([corpo]);
         expect(player.getResourcesOnCard(corpo)).to.eq(0);
+
         option2.cb(player2);
         expect(player2.megaCredits).to.eq(0);
         expect(player.megaCredits).to.eq(4);
     });
+
+    it("Should play - single target for floater removal and MC removal", function () {
+        const card = new AirRaid();
+        let corpo = new StormCraftIncorporated();
+        const player = new Player("test", Color.BLUE, false);
+        const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("foobar", [player,player2], player);
+
+        expect(card.canPlay(player)).to.eq(false);
+        player.corporationCard = corpo;
+        player2.megaCredits = 4;
+        player.addResourceTo(corpo);
+        expect(player.getResourcesOnCard(corpo)).to.eq(1);
+        
+        card.play(player, game);
+
+        expect(player.getResourcesOnCard(corpo)).to.eq(0);
+        expect(player2.megaCredits).to.eq(0);
+        expect(player.megaCredits).to.eq(4);
+    })
 });

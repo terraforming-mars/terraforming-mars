@@ -4,7 +4,6 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from '../../../src/Game';
 import { OrOptions } from '../../../src/inputs/OrOptions';
-import { SelectOption } from '../../../src/inputs/SelectOption';
 
 describe("ForcedPrecipitation", function () {
     it("Should play", function () {
@@ -21,9 +20,7 @@ describe("ForcedPrecipitation", function () {
         player.playedCards.push(card);
         player.megaCredits = 10;
 
-        const selectOption = card.action(player,game) as SelectOption;
-        expect(selectOption instanceof SelectOption).to.eq(true);
-        selectOption.cb();
+        card.action(player,game);
         expect(card.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(8);
 

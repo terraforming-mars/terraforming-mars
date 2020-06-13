@@ -4,7 +4,6 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 import { Game } from "../../../src/Game";
-import { SelectOption } from '../../../src/inputs/SelectOption';
 
 describe("JetStreamMicroscrappers", function () {
     it("Should play", function () {
@@ -18,9 +17,8 @@ describe("JetStreamMicroscrappers", function () {
         const game = new Game("foobar", [player,player], player);
         player.playedCards.push(card);
         player.titanium = 2;
-        const action = card.action(player,game) as SelectOption;
-        expect(action instanceof SelectOption).to.eq(true);
-        action.cb();
+
+        card.action(player,game)
         expect(card.resourceCount).to.eq(2);
         expect(player.titanium).to.eq(1);
 

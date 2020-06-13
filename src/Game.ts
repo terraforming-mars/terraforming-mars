@@ -384,11 +384,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.awards.push(...VENUS_AWARDS);
       }
 
+      this.addVenusBoardSpaces();
+    }
+
+    private addVenusBoardSpaces() {
       this.board.spaces.push(
-          new BoardColony(SpaceName.DAWN_CITY),
-          new BoardColony(SpaceName.LUNA_METROPOLIS),
-          new BoardColony(SpaceName.MAXWELL_BASE),
-          new BoardColony(SpaceName.STRATOPOLIS)
+        new BoardColony(SpaceName.DAWN_CITY),
+        new BoardColony(SpaceName.LUNA_METROPOLIS),
+        new BoardColony(SpaceName.MAXWELL_BASE),
+        new BoardColony(SpaceName.STRATOPOLIS)
       );
     }
 
@@ -444,12 +448,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.turmoil = gameToRebuild.turmoil;
 
           if(gameToRebuild.venusNextExtension) {
-            game.board.spaces.push(
-              new BoardColony(SpaceName.DAWN_CITY),
-              new BoardColony(SpaceName.LUNA_METROPOLIS),
-              new BoardColony(SpaceName.MAXWELL_BASE),
-              new BoardColony(SpaceName.STRATOPOLIS)
-          );
+            game.addVenusBoardSpaces();
           }
 
           // Set active player
@@ -1626,12 +1625,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Reload venus elements if needed
       if(this.venusNextExtension) {
-        this.board.spaces.push(
-          new BoardColony(SpaceName.DAWN_CITY),
-          new BoardColony(SpaceName.LUNA_METROPOLIS),
-          new BoardColony(SpaceName.MAXWELL_BASE),
-          new BoardColony(SpaceName.STRATOPOLIS)
-      );
+        this.addVenusBoardSpaces();
       }
 
       d.board.spaces.forEach((element: ISpace) => {

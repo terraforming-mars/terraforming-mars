@@ -30,6 +30,18 @@ export class AerialMappers implements IActionCard,IProjectCard, IResourceCard {
     public action(player: Player, game: Game) {
         const floaterCards = player.getResourceCards(ResourceType.FLOATER);
         var opts: Array<SelectOption | SelectCard<ICard>> = [];
+
+        // only one valid target - itself
+        if (floaterCards.length === 1 && this.resourceCount === 0) {
+            this.resourceCount++;
+            return undefined;
+        }
+
+        const addResourceToSelf = new SelectOption("Add 1 floater to this card", () => {
+            this.resourceCount++;
+            return undefined;
+        });
+
         const addResource = new SelectCard(
             'Select card to add 1 floater',
             floaterCards,
@@ -45,11 +57,12 @@ export class AerialMappers implements IActionCard,IProjectCard, IResourceCard {
             return undefined;
         });
 
-        opts.push(addResource);
-
         if (this.resourceCount > 0) {
              opts.push(spendResource);
-        } else return addResource;
+             floaterCards.length === 1 ? opts.push(addResourceToSelf) : opts.push(addResource);
+        } else {
+            return addResource;
+        };
 
         return new OrOptions(...opts);
     }

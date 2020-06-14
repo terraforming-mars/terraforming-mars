@@ -141,8 +141,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
             // TODO Check if all players has different colors
 
-            // TODO Check all names to be set
-
             if (component.board === "random") {
                 const boards = Object.values(BoardName);
                 this.board = boards[Math.floor(Math.random() * boards.length)];

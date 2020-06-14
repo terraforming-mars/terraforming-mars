@@ -405,20 +405,23 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private generateId(): string {
       return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
     }
-    public removeResourceFrom(card: ICard, count: number = 1, game? : Game, removingPlayer? : Player): void {
+    public removeResourceFrom(card: ICard, count: number = 1, game? : Game, removingPlayer? : Player, shouldLogAction: boolean = true): void {
       if (card.resourceCount) {
         card.resourceCount = Math.max(card.resourceCount - count, 0);
         // Mons Insurance hook
         if (game !== undefined && removingPlayer !== undefined) {
           this.resolveMonsInsurance(game);
-          game.log(
-            LogMessageType.DEFAULT,
-            "${0} loses ${1} resource(s) on ${2} by ${3}",
-            new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STRING, count.toString()),
-            new LogMessageData(LogMessageDataType.CARD, card.name),
-            new LogMessageData(LogMessageDataType.PLAYER, removingPlayer.id)
-          );
+
+          if (shouldLogAction) {
+            game.log(
+              LogMessageType.DEFAULT,
+              "${0} loses ${1} resource(s) on ${2} by ${3}",
+              new LogMessageData(LogMessageDataType.PLAYER, this.id),
+              new LogMessageData(LogMessageDataType.STRING, count.toString()),
+              new LogMessageData(LogMessageDataType.CARD, card.name),
+              new LogMessageData(LogMessageDataType.PLAYER, removingPlayer.id)
+            );
+          }
         }
         // Lawsuit hook
         if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.indexOf(removingPlayer.id) === -1) {

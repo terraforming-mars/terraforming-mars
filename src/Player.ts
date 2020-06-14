@@ -45,8 +45,8 @@ import { SelectDelegate } from "./inputs/SelectDelegate";
 import { Phase } from "./Phase";
 import { SelfReplicatingRobots } from "./cards/promo/SelfReplicatingRobots";
 import { Aridor } from "./cards/colonies/Aridor";
-import { MiningArea } from './cards/MiningArea';
-import { MiningRights } from './cards/MiningRights';
+import { MiningArea } from "./cards/MiningArea";
+import { MiningRights } from "./cards/MiningRights";
 
 export class Player implements ILoadable<SerializedPlayer, Player>{
     public corporationCard: CorporationCard | undefined = undefined;

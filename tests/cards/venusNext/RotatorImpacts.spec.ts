@@ -37,7 +37,7 @@ describe("RotatorImpacts", function () {
 
         const orOptions2 = card.action(player,game) as OrOptions;
         expect(orOptions2 instanceof OrOptions).to.eq(true);
-        orOptions2.options[1].cb();
+        orOptions2.options[0].cb();
         expect(card.resourceCount).to.eq(0);
         expect(game.getVenusScaleLevel()).to.eq(2);
     });

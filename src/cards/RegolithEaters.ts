@@ -30,13 +30,13 @@ export class RegolithEaters implements IActionCard, IProjectCard, IResourceCard 
             return undefined;
         }
         return new OrOptions(
-            new SelectOption("Add 1 microbe to this card", () => {
-                this.resourceCount++;
-                return undefined;
-            }),
             new SelectOption("Remove 2 microbes to raise oxygen level 1 step", () => {
                 player.removeResourceFrom(this, 2);
                 return game.increaseOxygenLevel(player, 1);
+            }),
+            new SelectOption("Add 1 microbe to this card", () => {
+                this.resourceCount++;
+                return undefined;
             })
         );
     }

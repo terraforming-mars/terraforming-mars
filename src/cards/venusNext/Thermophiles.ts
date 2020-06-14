@@ -45,11 +45,11 @@ export class Thermophiles implements IActionCard,IProjectCard, IResourceCard {
             return undefined;
         });
 
-        opts.push(addResource);
-
         if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
             opts.push(spendResource);
         } else return addResource;
+
+        opts.push(addResource);
 
         return new OrOptions(...opts);
     }

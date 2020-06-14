@@ -22,7 +22,7 @@ describe("TitanShuttles", function () {
         const orOptions = card.action(player, game) as OrOptions;
         expect(orOptions).not.to.eq(undefined);
         expect(orOptions instanceof OrOptions).to.eq(true);
-        orOptions.options[1].cb(6);
+        orOptions.options[0].cb(6);
         expect(card.resourceCount).to.eq(1);
         expect(player.titanium).to.eq(6);
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());

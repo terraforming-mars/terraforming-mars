@@ -19,7 +19,7 @@ describe("SulphurEatingBacteria", function () {
         player.playedCards.push(card);
         player.addResourceTo(card,5);
         const action = card.action(player) as OrOptions;
-        action.options[1].cb(3);
+        action.options[0].cb(3);
         expect(player.megaCredits).to.eq(9);
         expect(card.resourceCount).to.eq(2);
     });

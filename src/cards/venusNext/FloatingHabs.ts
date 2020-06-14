@@ -31,6 +31,31 @@ export class FloatingHabs implements IActionCard,IProjectCard, IResourceCard {
     
     public action(player: Player) {
       const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+
+      // add to itself if no other available target
+      if (floaterCards.length === 1) {
+        if (player.canUseHeatAsMegaCredits && player.heat > 0) {
+          return new SelectHowToPay(
+            'Select how to pay ', false, false,
+            true,
+            2,
+            (htp) => {
+              if (htp.heat + htp.megaCredits < 2) {
+                  throw new Error('Not enough spent for action');
+              }
+              player.megaCredits -= htp.megaCredits;
+              player.heat -= htp.heat;
+              player.addResourceTo(floaterCards[0], 1);
+              return undefined;
+            }
+          );
+        }
+
+        player.addResourceTo(floaterCards[0], 1);
+        player.megaCredits -= 2;
+        return undefined;
+      }
+
       return new SelectCard(
           "Spend 2 MC and select card to add 1 floater",
           floaterCards,
@@ -42,7 +67,7 @@ export class FloatingHabs implements IActionCard,IProjectCard, IResourceCard {
                 2,
                 (htp) => {
                   if (htp.heat + htp.megaCredits < 2) {
-                      throw new Error('Not enough spent to buy card');
+                      throw new Error('Not enough spent for action');
                   }
                   player.megaCredits -= htp.megaCredits;
                   player.heat -= htp.heat;

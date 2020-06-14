@@ -54,7 +54,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 {index: 2, name: "", color: Color.GREEN, beginner: false, first: false},
                 {index: 3, name: "", color: Color.YELLOW, beginner: false, first: false},
                 {index: 4, name: "", color: Color.BLUE, beginner: false, first: false},
-                {index: 5, name: "", color: Color.BLACK, beginner: false, first: false}
+                {index: 5, name: "", color: Color.BLACK, beginner: false, first: false},
+                {index: 6, name: "", color: Color.PURPLE, beginner: false, first: false}
             ],
             prelude: false,
             draftVariant: true,
@@ -209,7 +210,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         </div>
                         <div>
                             <label class="form-label form-inline">Color:</label>
-                            <label class="form-radio form-inline" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black']">
+                            <label class="form-radio form-inline" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
                                 <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color">
                                 <i class="form-icon"></i> <span v-i18n>{{ color }}</span>
                             </label>
@@ -226,7 +227,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         <div class="create-game-options-block col3 col-sm-6" v-if="! isSoloModePage">
                             <h4 v-i18n>Players count</h4>
 
-                            <label class="form-radio" v-for="pCount in [1,2,3,4,5]">
+                            <label class="form-radio" v-for="pCount in [1,2,3,4,5,6]">
                                 <input type="radio" :value="pCount" name="playersCount" v-model="playersCount">
                                 <i class="form-icon"></i> <span v-html="pCount === 1 ? 'Solo' : pCount"></span>
                             </label>
@@ -348,7 +349,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </div>
                             <div>
                                 <label class="form-label form-inline">Color:</label>
-                                <label class="form-radio form-inline" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black']">
+                                <label class="form-radio form-inline" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
                                     <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color">
                                     <i class="form-icon"></i> <span v-i18n>{{ color }}</span>
                                 </label>

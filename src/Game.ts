@@ -1,5 +1,5 @@
 import {Player} from "./Player";
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from "./Dealer";
+import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS, ALL_DIY_CARDS} from "./Dealer";
 import {ISpace} from "./ISpace";
 import {SpaceType} from "./SpaceType";
 import {TileType} from "./TileType";
@@ -234,6 +234,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
           (corpCard) => gameOptions !== undefined && gameOptions.customCorporationsList.includes(corpCard.name)
         );
       }
+
+      corporationCards.forEach((card,index) => {
+        let cardFactory = ALL_DIY_CARDS.find((cardFactory) => (cardFactory as any).cardName_ori === card.name);
+        if (cardFactory !== undefined) {
+          corporationCards.splice(index,1, new cardFactory.factory() as CorporationCard);
+        }
+      });
 
       corporationCards = this.dealer.shuffleCards(corporationCards);
       

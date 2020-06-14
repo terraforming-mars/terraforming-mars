@@ -23,6 +23,11 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
       // Rules pg. 9
       if (cardsToPick.length < 1) return undefined;
 
+      if (cardsToPick.length === 1) {
+        player.addResourceTo(cardsToPick[0], 2);
+        return undefined;
+      }
+
       return new SelectCard(
           'Select card to add 2 microbes', cardsToPick,
           (foundCards: Array<ICard>) => {

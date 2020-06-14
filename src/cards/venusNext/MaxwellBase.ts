@@ -41,9 +41,16 @@ export class MaxwellBase implements IActionCard, IProjectCard {
     } 
 
     public action(player: Player) {
+        const cards = this.getResCards(player);
+
+        if (cards.length === 1) {
+            player.addResourceTo(cards[0], 1);
+            return undefined;
+        }
+
         return new SelectCard(
             'Select card to add 1 resource',
-            this.getResCards(player),
+            cards,
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 1);
               return undefined;

@@ -18,14 +18,42 @@ export class StratosphericBirds implements IActionCard,IProjectCard, IResourceCa
     public canPlay(player: Player, game: Game): boolean {
         const cardsWithFloater = player.getCardsWithResources().filter(card => card.resourceType === ResourceType.FLOATER);
         if (cardsWithFloater.length === 0) return false;
-        return game.getVenusScaleLevel() >= 12 - (2 * player.getRequirementsBonus(game, true));
+
+        const meetsVenusRequirements = game.getVenusScaleLevel() >= 12 - (2 * player.getRequirementsBonus(game, true));
+
+        if (cardsWithFloater.length > 1) {
+            return meetsVenusRequirements;
+        } else {
+            const floaterCard = cardsWithFloater[0];
+            if (floaterCard.name !== CardName.DIRIGIBLES) return meetsVenusRequirements;
+
+            const canPayForFloater = (floaterCard.resourceCount! * 3 + player.megaCredits) >= 15
+            return canPayForFloater && meetsVenusRequirements;
+        }
     }
     public play(player: Player) {
        const cardsWithFloater = player.getCardsWithResources().filter(card => card.resourceType === ResourceType.FLOATER);
+
         if (cardsWithFloater.length === 1) {
-            player.removeResourceFrom(cardsWithFloater[0], 1)
+            const floaterCard = cardsWithFloater[0];
+            
+            if (floaterCard.resourceCount! > 0) {
+                player.removeResourceFrom(floaterCard, 1);
+            } else {
+                player.megaCredits -= 3;
+            }
+
             return undefined;
         }
+
+        // Edge case for Dirigibles: floater(s) used as payment
+        const cardsCollectingFloaters = player.getResourceCards(ResourceType.FLOATER);
+
+        if (cardsCollectingFloaters.length === 1) {
+            player.megaCredits -= 3;
+            return undefined;
+        }
+
         return new SelectCard(
             "Select card to remove 1 floater from", 
             cardsWithFloater,

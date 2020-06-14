@@ -6,6 +6,7 @@ import { Game } from '../../../src/Game';
 import { DeuteriumExport } from "../../../src/cards/venusNext/DeuteriumExport";
 import { ExtractorBalloons } from "../../../src/cards/venusNext/ExtractorBalloons";
 import { SelectCard } from "../../../src/inputs/SelectCard";
+import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";
 
 describe("StratosphericBirds", function () {
     it("Should play", function () {
@@ -37,7 +38,6 @@ describe("StratosphericBirds", function () {
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
-
     it("Allows to choose card to remove floater from", function () {
         const card = new StratosphericBirds();
         const cardWithFloater1 = new DeuteriumExport();
@@ -63,5 +63,33 @@ describe("StratosphericBirds", function () {
 
         expect(player.getResourcesOnCard(cardWithFloater1)).to.eq(0);
         expect(player.getResourcesOnCard(cardWithFloater2)).to.eq(1);
+    });
+    it("Edge case: Dirigibles with no other floater cards", function () {
+        const card = new StratosphericBirds();
+        const dirigibles = new Dirigibles();
+        const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player,player], player);
+
+        // Add dirigibles with 1 floater
+        player.playedCards.push(dirigibles);
+        player.addResourceTo(dirigibles, 1);
+
+        (game as any).venusScaleLevel = 12; // set min. requirement
+        player.megaCredits = 9;
+
+        // 9 MC + 1 Dirigibles floater: Cannot play
+        expect(card.canPlay(player,game)).to.eq(false);
+
+        // 12 MC + 1 Dirigibles floater: Can play
+        player.megaCredits = 12;
+        expect(card.canPlay(player,game)).to.eq(true);
+
+        // Use floater as payment for Stratospheric Birds
+        player.removeResourceFrom(dirigibles, 1);
+        expect(dirigibles.resourceCount).to.eq(0);
+
+        // Should play and remove 3 MC from player
+        card.play(player);
+        expect(player.megaCredits).to.eq(9);
     });
 });

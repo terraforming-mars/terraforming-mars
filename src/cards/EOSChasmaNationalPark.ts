@@ -30,6 +30,11 @@ export class EosChasmaNationalPark implements IProjectCard {
     player.setProduction(Resources.MEGACREDITS,2);
 
     if ( cards.length < 1 ) return undefined;
+
+    if (cards.length === 1) {
+      player.addResourceTo(cards[0], 1);
+      return undefined;
+    }
    
     return new SelectCard("Add 1 animal to a card",  cards, (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], 1);

@@ -77,9 +77,10 @@ export const LogPanel = Vue.component("log-panel", {
             return '';
         },
         parseMessage: function(message: LogMessage) {
+            let logEntryBullet = (this.isNewGeneration(message.type)) ? '' : `<span title="${new Date(message.timestamp).toLocaleString()}">&#x1f551;</span>`;
             if (message.type !== undefined && message.message !== undefined) {
                 message.message = $t(message.message);
-                return message.message.replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
+                return logEntryBullet+message.message.replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
                     return this.parseData(message.data[idx]);
                 });
             }
@@ -113,7 +114,7 @@ export const LogPanel = Vue.component("log-panel", {
         <div class="panel log-panel">
             <div id="logpanel-scrollable" class="panel-body">
                 <ul v-if="messages">
-                    <li v-for="message in messages" v-on:click.prevent="cardClicked(message)" v-html="parseMessage(message)" :class="isNewGeneration(message.type) ? 'noBullet' : ''"></li>
+                    <li v-for="message in messages" v-on:click.prevent="cardClicked(message)" v-html="parseMessage(message)"></li>
                 </ul>
             </div>
         </div>

@@ -253,7 +253,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="tile city-tile " style="margin-left:20px;margin-bottom:5px;"></div><br>
             <div class="plant resource "></div><div class="plant resource "></div><div class="plant resource "></div>
             <div class="description " style="margin-top:-5px;font-size:11px;text-align: left; line-height: 12px;">
-                <div>Oxygen must be 7% or less.</div> 
+                <div>Oxygen must be 7% or less.</div>
                 <div style="width:140px;">Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.</div>
             </div>
         </div>
@@ -3916,7 +3916,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
               &nbsp;<div class="tile city-tile"></div>*
                 <div class="description " style="text-align:left;margin-top:-58px; width: 92px;">
-                  Requires 2 science tags. Increase your MC production 2 steps. 
+                  Requires 2 science tags. Increase your MC production 2 steps.
                 </div>
                 <div class="description" style="text-align:left; width: 117px; margin-left: 19px;">
                   Place a City tile ON THE RESERVED AREA. 1 VP for every 3rd Floater on this card.
@@ -6727,7 +6727,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="promo-icon project-icon"></div>
     <div class="card-number">X01</div>
     <div class="content">
-        <div class="requirements">Science Science</div>
+        <div class="requirements">2 Science</div>
         <div class="production-box production-box-size1a">
             <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="production energy"></div><br/>
             <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="production titanium"></div>

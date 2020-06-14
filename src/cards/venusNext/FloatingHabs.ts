@@ -34,11 +34,7 @@ export class FloatingHabs implements IActionCard,IProjectCard, IResourceCard {
 
       // add to itself if no other available target
       if (floaterCards.length === 1) {
-        if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-          game.addSelectHowToPayInterrupt(player, 2, false, false, "Select how to pay for Floating Habs action");
-        } else {
-          player.megaCredits -= 2;
-        }
+        game.addSelectHowToPayInterrupt(player, 2, false, false, "Select how to pay for Floating Habs action");
 
         player.addResourceTo(floaterCards[0], 1);
         return undefined;
@@ -48,11 +44,7 @@ export class FloatingHabs implements IActionCard,IProjectCard, IResourceCard {
           "Spend 2 MC and select card to add 1 floater",
           floaterCards,
           (foundCards: Array<ICard>) => {
-            if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-              game.addSelectHowToPayInterrupt(player, 2, false, false, "Select how to pay for Floating Habs action");
-            } else {
-              player.megaCredits -= 2;
-            }
+            game.addSelectHowToPayInterrupt(player, 2, false, false, "Select how to pay for Floating Habs action");
 
             player.addResourceTo(foundCards[0], 1);
             return undefined;

@@ -207,7 +207,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (resource === Resources.ENERGY) this.energy = Math.max(0, this.energy + amount);
       if (resource === Resources.HEAT) this.heat = Math.max(0, this.heat + amount);
 
-      const modifier = amount > 0 ? 'increased' : 'decreased';
+      const modifier = amount > 0 ? "increased" : "decreased";
 
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
         if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer.id) === -1) {
@@ -250,7 +250,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (resource === Resources.ENERGY) this.energyProduction = Math.max(0, this.energyProduction + amount);
       if (resource === Resources.HEAT) this.heatProduction = Math.max(0, this.heatProduction + amount);
       
-      const modifier = amount > 0 ? 'increased' : 'decreased';
+      const modifier = amount > 0 ? "increased" : "decreased";
 
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
         if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer.id) === -1) {

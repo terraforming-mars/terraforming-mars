@@ -14,7 +14,7 @@ export class Pandemic implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
         game.getPlayers().forEach(player => {
             let maxedSteelTags = Math.min(5, player.getTagCount(Tags.STEEL, false, false));
-            player.setResource(Resources.MEGACREDITS, -3 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), undefined, undefined, true);
+            player.setResource(Resources.MEGACREDITS, -3 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), game, undefined, true);
         });    
     }
 }    

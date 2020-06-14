@@ -225,7 +225,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       // Global event logging
-      if (game !== undefined && globalEvent && amount < 0) {
+      if (game !== undefined && globalEvent && amount !== 0) {
         game.log(
           LogMessageType.DEFAULT,
           "${0}'s ${1} amount ${2} by ${3} by Global Event",
@@ -242,8 +242,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
     }
 
-    public setProduction(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player) {
-
+    public setProduction(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
       if (resource === Resources.MEGACREDITS) this.megaCreditProduction = Math.max(-5, this.megaCreditProduction + amount);
       if (resource === Resources.STEEL) this.steelProduction = Math.max(0, this.steelProduction + amount);
       if (resource === Resources.TITANIUM) this.titaniumProduction = Math.max(0, this.titaniumProduction + amount);
@@ -265,6 +264,18 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           new LogMessageData(LogMessageDataType.STRING, modifier),
           new LogMessageData(LogMessageDataType.STRING, Math.abs(amount).toString()),
           new LogMessageData(LogMessageDataType.PLAYER, fromPlayer.id)
+        );
+      }
+      
+      // Global event logging
+      if (game !== undefined && globalEvent && amount !== 0) {
+        game.log(
+          LogMessageType.DEFAULT,
+          "${0}'s ${1} amount ${2} by ${3} by Global Event",
+          new LogMessageData(LogMessageDataType.PLAYER, this.id),
+          new LogMessageData(LogMessageDataType.STRING, resource),
+          new LogMessageData(LogMessageDataType.STRING, modifier),
+          new LogMessageData(LogMessageDataType.STRING, Math.abs(amount).toString())
         );
       }
 

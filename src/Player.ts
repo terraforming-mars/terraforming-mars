@@ -206,29 +206,33 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (resource === Resources.PLANTS) this.plants = Math.max(0, this.plants + amount);
       if (resource === Resources.ENERGY) this.energy = Math.max(0, this.energy + amount);
       if (resource === Resources.HEAT) this.heat = Math.max(0, this.heat + amount);
-      
+
+      const modifier = amount > 0 ? "increased" : "decreased";
+
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
         if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer.id) === -1) {
           this.removingPlayers.push(fromPlayer.id);
         }
         game.log(
           LogMessageType.DEFAULT,
-          "${0}'s ${1} amount modified by ${2} by ${3}",
+          "${0}'s ${1} amount ${2} by ${3} by ${4}",
           new LogMessageData(LogMessageDataType.PLAYER, this.id),
           new LogMessageData(LogMessageDataType.STRING, resource),
-          new LogMessageData(LogMessageDataType.STRING, amount.toString()),
+          new LogMessageData(LogMessageDataType.STRING, modifier),
+          new LogMessageData(LogMessageDataType.STRING, Math.abs(amount).toString()),
           new LogMessageData(LogMessageDataType.PLAYER, fromPlayer.id)
         );
       }
 
       // Global event logging
-      if (game !== undefined && globalEvent && amount < 0) {
+      if (game !== undefined && globalEvent && amount !== 0) {
         game.log(
           LogMessageType.DEFAULT,
-          "${0}'s ${1} amount modified by ${2} by Global Event",
+          "${0}'s ${1} amount ${2} by ${3} by Global Event",
           new LogMessageData(LogMessageDataType.PLAYER, this.id),
           new LogMessageData(LogMessageDataType.STRING, resource),
-          new LogMessageData(LogMessageDataType.STRING, amount.toString())
+          new LogMessageData(LogMessageDataType.STRING, modifier),
+          new LogMessageData(LogMessageDataType.STRING, Math.abs(amount).toString())
         );
       }      
 
@@ -238,8 +242,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
     }
 
-    public setProduction(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player) {
-
+    public setProduction(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
       if (resource === Resources.MEGACREDITS) this.megaCreditProduction = Math.max(-5, this.megaCreditProduction + amount);
       if (resource === Resources.STEEL) this.steelProduction = Math.max(0, this.steelProduction + amount);
       if (resource === Resources.TITANIUM) this.titaniumProduction = Math.max(0, this.titaniumProduction + amount);
@@ -247,17 +250,32 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (resource === Resources.ENERGY) this.energyProduction = Math.max(0, this.energyProduction + amount);
       if (resource === Resources.HEAT) this.heatProduction = Math.max(0, this.heatProduction + amount);
       
+      const modifier = amount > 0 ? "increased" : "decreased";
+
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
         if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer.id) === -1) {
           this.removingPlayers.push(fromPlayer.id);
         }
         game.log(
           LogMessageType.DEFAULT,
-          "${0}'s ${1} production modified by ${2} by ${3}",
+          "${0}'s ${1} production ${2} by ${3} by ${4}",
           new LogMessageData(LogMessageDataType.PLAYER, this.id),
           new LogMessageData(LogMessageDataType.STRING, resource),
-          new LogMessageData(LogMessageDataType.STRING, amount.toString()),
+          new LogMessageData(LogMessageDataType.STRING, modifier),
+          new LogMessageData(LogMessageDataType.STRING, Math.abs(amount).toString()),
           new LogMessageData(LogMessageDataType.PLAYER, fromPlayer.id)
+        );
+      }
+      
+      // Global event logging
+      if (game !== undefined && globalEvent && amount !== 0) {
+        game.log(
+          LogMessageType.DEFAULT,
+          "${0}'s ${1} amount ${2} by ${3} by Global Event",
+          new LogMessageData(LogMessageDataType.PLAYER, this.id),
+          new LogMessageData(LogMessageDataType.STRING, resource),
+          new LogMessageData(LogMessageDataType.STRING, modifier),
+          new LogMessageData(LogMessageDataType.STRING, Math.abs(amount).toString())
         );
       }
 

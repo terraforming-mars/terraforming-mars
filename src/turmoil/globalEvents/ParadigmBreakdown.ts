@@ -19,7 +19,7 @@ export class ParadigmBreakdown implements IGlobalEvent {
             } else if (player.cardsInHand.length >= 1) {
                 game.addInterrupt(new SelectDiscard(player, game, 'Global Event - Select a card to discard'));
             }
-            player.setResource(Resources.MEGACREDITS, 2 * (turmoil.getPlayerInfluence(player)), undefined, undefined, true);
+            player.setResource(Resources.MEGACREDITS, 2 * (turmoil.getPlayerInfluence(player)), game, undefined, true);
         });    
     }
 }    

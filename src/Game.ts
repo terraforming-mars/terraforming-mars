@@ -236,8 +236,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Give each player their corporation cards and other cards
       for (const player of players) {
         if (!player.beginner) {
-          // Failsafe for exceding corporation pool - Minimum is 12
-          if (this.startingCorporations * this.players.length > 12) {
+          // Failsafe for exceding corporation pool
+          if (this.startingCorporations * this.players.length > corporationCards.length) {
             this.startingCorporations = 2;
           }
           for (let i = 0; i < this.startingCorporations; i++) {

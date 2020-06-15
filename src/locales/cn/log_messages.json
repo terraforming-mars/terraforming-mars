@@ -7,7 +7,7 @@
     "${0} passed": "${0} 结束本时代行动",
     "${0} ended turn": "${0} 结束本轮操作",
     "${0} converted heat into temperature": "${0} 用热量提升火星温度",
-    "${0} converted plants into a greenery": "${0} 用植物建立温室",
+    "${0} converted plants into a greenery": "${0} 用植物放置绿化板块",
     "${0} traded with ${1}": "${0} 到 ${1} 进行贸易",
     "${0} used ${1} standard project": "${0} 执行了标准行动 - ${1} ",
     "${0} used ${1} standard project,sold ${2} card(s)": "${0} 执行了标准行动 - ${1}, 出售了 ${2} 张卡",

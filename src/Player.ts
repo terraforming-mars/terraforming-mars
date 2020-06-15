@@ -1929,7 +1929,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           }
       }
 
-      if ( game.soloTR &&
+      if ( game.soloTR && game.soloMode &&
         this.canAfford(constants.BUFFER_GAS_COST)) {
         standardProjects.options.push(
             this.bufferGas(game)

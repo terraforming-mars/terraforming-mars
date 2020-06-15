@@ -536,6 +536,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public isSoloModeWin(): boolean {
+      if(!this.soloMode){
+        return false;
+      }
       // Solo TR
       if (this.soloTR) {
         return this.players[0].getTerraformRating() >= 63;

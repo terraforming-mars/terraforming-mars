@@ -192,7 +192,7 @@
     "Requires a Jovian tag. Increase your heat production and Energy production 3 steps each.": "需要拥有一个木星标记。增加你的热能产能和电力产能各3级",
 
     "Mangrove": "红树林",
-    "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "需要火星温度至少+4度。放置一个温室版块在原本用于放置海洋版块的地方(无视基础放置条件)。提升氧气浓度1级",
+    "Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.": "需要火星温度至少+4度。放置一个绿化版块在原本用于放置海洋版块的地方(无视基础放置条件)。提升氧气浓度1级",
 
     "Trees": "树",
     "Requires -4 C or warmer. Increase your Plant production 3 steps. Gain 1 Plant.": "需要火星温度至少-4度。增加你的植物产能3级。获得1个植物资源",
@@ -404,7 +404,7 @@
 
     "Ecological Zone": "生态保护区",
     "Effect: When you play an animal or plant tag (including these), add an animal to this card.": "效果: 当你打出动物标记或植物标记(包括本牌),增加1个动物资源到本卡",
-    "Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. 1 VP per 2 Animals on this card.": "需要你至少拥有一个温室。放置这个版块到任意的温室版块旁边。本卡上每有2个动物资源,获得1分",
+    "Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. 1 VP per 2 Animals on this card.": "需要你至少拥有一个绿化板块。放置这个版块到任意的绿化版块旁边。本卡上每有2个动物资源,获得1分",
 
     "Zeppelins": "齐柏林飞艇",
     "Requires 5% oxygen. Increase your MC production 1 step for each City tile ON MARS.": "需要至少氧气浓度5%,火星上每有1个城市,增加你的MC产能1级",
@@ -463,7 +463,7 @@
     "Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.": "需要3个海洋版块且你移除2个植物资源。增加你的植物产能2级",
 
     "Herbivores": "食草动物",
-    "Effect: When you place a greenery tile, add an Animal to this card.": "效果: 当你放置一个温室版块时,放置一个动物资源到本牌",
+    "Effect: When you place a greenery tile, add an Animal to this card.": "效果: 当你放置一个绿化版块时,放置一个动物资源到本牌",
     "Requires 8% oxygen. Add 1 Animal to this card. Decrease any Plant production 1 step. 1 VP per 2 Animals on this card.": "需要至少8%氧气浓度。放置1个动物资源到本牌。降低任一玩家的植物产能1级。本牌每有2动物资源,获得1分",
 
     "Insects": "昆虫",

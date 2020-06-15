@@ -1,4 +1,3 @@
-import {ICard} from "./cards/ICard";
 // Prelude Cards
 import { AlliedBanks } from "./cards/prelude/AlliedBanks";
 import { BiosphereSupport } from "./cards/prelude/BiosphereSupport";
@@ -437,23 +436,13 @@ import { SupportedResearch } from "./cards/turmoil/SupportedResearch";
 import { WildlifeDome } from "./cards/turmoil/WildlifeDome";
 import { VoteOfNoConfidence } from "./cards/turmoil/VoteOfNoConfidence";
 
-
-// diy
-import { CrediCor_} from "./cards/enhance/corporation/CrediCor_";
-
 export interface ICardFactory<T> {
     cardName: CardName;
-    factory: new () => T;
+    factory: new () => T
 }
-export interface ICardFactoryDiy<T> {
-    cardName: CardName;
-    factory: new () => T;
-    cardName_ori: CardName;
-}
-
 
 export const ALL_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>> = [
-    { cardName: CardName.ALLIED_BANKS, factory: AlliedBanks},
+    { cardName: CardName.ALLIED_BANKS, factory: AlliedBanks },
     { cardName: CardName.BIOSPHERE_SUPPORT, factory: BiosphereSupport },
     { cardName: CardName.AQUIFER_TURBINES, factory: AquiferTurbines },
     { cardName: CardName.MOHOLE_EXCAVATION, factory: MoholeExcavation },
@@ -908,11 +897,6 @@ export const ALL_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.ZEPPELINS, factory: Zeppelins }
 ];
 
-export const ALL_DIY_CARDS: Array<ICardFactoryDiy<ICard>> = [
-    { cardName: CardName.CREDICOR_, factory: CrediCor_ , cardName_ori: CardName.CREDICOR}
-];
-
-
 // Function to return a card object by its name
 export function getProjectCardByName(cardName: string): IProjectCard | undefined {
     let cardFactory = ALL_PRELUDE_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
@@ -943,11 +927,6 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
-    cardFactory = ALL_DIY_CARDS.find((cf) => cf.cardName === cardName) as ICardFactoryDiy<IProjectCard>;
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    
     return undefined;
 }
 
@@ -980,10 +959,6 @@ export function getCorporationCardByName(cardName: string): CorporationCard | un
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
-    cardFactory = ALL_DIY_CARDS.find((cf) => cf.cardName === cardName) as ICardFactoryDiy<CorporationCard>;
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
     return undefined;
 }
 
@@ -1005,12 +980,6 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS.map((cf) => new cf.factory()));
         if (this.usePreludeExtension) {
             this.preludeDeck = this.shuffleCards<IProjectCard>(ALL_PRELUDE_CARDS.map((cf) => new cf.factory()));
-            this.preludeDeck.forEach((card,index) => {
-                let cardFactory = ALL_DIY_CARDS.find((cardFactory) => (cardFactory as any).cardName_ori === card.name);
-                if (cardFactory !== undefined) {
-                    this.preludeDeck.splice(index,1, new cardFactory.factory() as IProjectCard);
-                }
-            });
             this.deck.push(...ALL_PRELUDE_PROJECTS_CARDS.map((cf) => new cf.factory()));
             this.deck = this.shuffleCards<IProjectCard>(this.deck);
         }
@@ -1030,12 +999,6 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
             this.deck.push(...ALL_PROMO_PROJECTS_CARDS.map((cf) => new cf.factory()));
             this.deck = this.shuffleCards<IProjectCard>(this.deck);
         }
-        this.deck.forEach((card,index) => {
-            let cardFactory = ALL_DIY_CARDS.find((cardFactory) => (cardFactory as any).cardName_ori === card.name);
-            if (cardFactory !== undefined) {
-                this.deck.splice(index,1, new cardFactory.factory() as IProjectCard);
-            }
-        });
     }
     public shuffleCards<T>(cards: Array<T>): Array<T> {
         const deck: Array<T> = [];

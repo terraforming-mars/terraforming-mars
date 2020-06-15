@@ -7157,29 +7157,5 @@ export const HTML_DATA: Map<string, string> =
             (Add 1 floater here for every Earth tag you have, including this.)
         </div>
     </div>
-`],
-
-
-/// diy
-
-[CardName.CREDICOR_,`
-      <div class="corporationLabel ">CORPORATION</div>
-      <div class="contentCorporation ">
-          <div class="corporationEffectBox ">
-              <div class="corporationEffectBoxLabel ">EFFECT</div>
-              -<div class="resource money ">20</div> : <div class="resource money ">4</div>
-              <div class="description " style="text-align:center;margin-top:0px; ">
-                  (Effect: After you pay for a card or standard project with a basic cost of 20MC or more, you gain 4MC.)
-              </div>
-          </div>
-          <span style="font-size:40px; color: white; font-family: 'Times New Roman'; font-weight:normal;line-height:60px; border:2px solid purple; padding-left:5px; padding-bottom:5px; margin-left:10px; box-shadow: 6px 6px 10px grey; text-shadow:
-      -1px 0 purple, 0 1px purple, 1px 0 purple, 0 -1px purple, 6px 6px 10px grey; ">
-              credicor_
-          </span><br><br>
-          <div class="description " style="text-align:center ">
-          <div class="resource money" style="margin-top:-10px;">157</div><br>
-              (You start with 157 MC.)
-          </div>
-      </div>
-`],
+`]
 ]);

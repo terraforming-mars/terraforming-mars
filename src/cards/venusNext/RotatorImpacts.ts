@@ -38,19 +38,15 @@ export class RotatorImpacts implements IActionCard,IProjectCard, IResourceCard {
         if (this.resourceCount > 0 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
             opts.push(spendResource);
         } else {
-            this.addResource(player, game);
+            return this.addResource(player, game);
         }
 
         if (player.canAfford(6, game, false, true)) {
             opts.push(addResource);
         } else {
-            this.spendResource(player, game);
+            return this.spendResource(player, game);
         }
-
-        if (opts.length === 0) return undefined;
-
-        if (opts.length === 1) return opts[0];
-
+        
         return new OrOptions(...opts);
     }
 

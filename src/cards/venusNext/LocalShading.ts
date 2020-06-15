@@ -34,12 +34,7 @@ export class LocalShading implements IActionCard,IProjectCard,IResourceCard {
         const addResource = new SelectOption("Add 1 floater to this card", () => this.addResource());
         const spendResource = new SelectOption("Remove 1 floater to increase MC production 1 step", () => this.spendResource(player));
 
-        if (this.resourceCount > 0) {
-            opts.push(spendResource);
-        } else {
-            this.addResource();
-        }
-
+        opts.push(spendResource);
         opts.push(addResource);
 
         return new OrOptions(...opts);

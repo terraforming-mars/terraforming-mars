@@ -35,7 +35,7 @@ export class SulphurEatingBacteria implements IActionCard,IProjectCard, IResourc
         if (this.resourceCount > 0) {
             opts.push(spendResource);
         } else {
-            this.addResource();
+            return this.addResource();
         }
 
         opts.push(addResource);

@@ -4581,7 +4581,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="colonies-icon project-icon"></div>
               <div class="card-number">C20</div>
               <div class="content ">
-                <div class="requirements">2 Earth Earth</div>
+                <div class="requirements">3 Earth</div>
                 <div class="production-box"><div class="production money">2</div></div>
                   <div class="description ">
                     (Requires 3 Earth tags. Increase your MC production 2 steps.)

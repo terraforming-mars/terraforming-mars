@@ -26,8 +26,7 @@ export class UrbanDecomposers implements IProjectCard {
         player.setProduction(Resources.PLANTS, 1);
 
         const microbeCards = player.getResourceCards(ResourceType.MICROBE);
-console.log(microbeCards)
-console.log('microbeCards')
+
         if (microbeCards.length === 1) {
             player.addResourceTo(microbeCards[0], 2);
         } else if (microbeCards.length > 1) {

@@ -4258,7 +4258,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="prelude-icon project-icon"></div>
               <div class="card-number">P42</div>
               <div class="content ">
-                <div class="requirements">Earth Earth</div>
+                <div class="requirements">2 Earth</div>
                 <div class="production-box">
                   <div class="production money">4</div>
                 </div><br>
@@ -4341,7 +4341,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="card-number">C05</div>
               <div class="content ">
                 <div class="points points-big">-1</div>
-                <div class="requirements">Earth Earth</div>
+                <div class="requirements">2 Earth</div>
                 <span style="font-size:14px;">NEXT CARD: </span> <div class="resource money">-16</div>
                   <div class="description ">
                     (Requires 2 Earth tags. The next card you play this generation costs 16 MC less.)
@@ -4481,7 +4481,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="card-number">C14</div>
               <div class="content ">
                 <div class="points points-big">-1</div>
-                <div class="requirements">Earth Earth</div>
+                <div class="requirements">2 Earth</div>
                 <div class="production-box"><div class="production money">2</div></div> <div style="margin-left:20px;" class="resource money">4</div>
                   <div class="description ">
                     (Requires 2 Earth tags. Increase your MC production 2 steps, and gain 4MC.)
@@ -4581,7 +4581,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="colonies-icon project-icon"></div>
               <div class="card-number">C20</div>
               <div class="content ">
-                <div class="requirements">Earth Earth Earth</div>
+                <div class="requirements">2 Earth Earth</div>
                 <div class="production-box"><div class="production money">2</div></div>
                   <div class="description ">
                     (Requires 3 Earth tags. Increase your MC production 2 steps.)
@@ -4835,7 +4835,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="card-number">C36</div>
               <div class="content ">
                 <div class="points points-big">2</div>
-                <div class="requirements">Earth Earth</div>
+                <div class="requirements">2 Earth</div>
                   : <span class="money resource ">-1</span>
                   <div class="description ">
                       (Effect: When you play a card, you pay 1 MC less for it.)

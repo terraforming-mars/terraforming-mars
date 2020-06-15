@@ -4039,7 +4039,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="venus-icon project-icon"></div>
       <div class="card-number">255</div>
             <div class="content ">
-              <div class="requirements">Venus Venus</div>
+              <div class="requirements">2 Venus</div>
               <div class="production-box">
                   <div class="money production">2</div>
               </div>

@@ -19,8 +19,23 @@ export class EcologyResearch implements IProjectCard {
           coloniesCount += colony.colonies.filter(owner => owner === player).length;
         });  
         player.setProduction(Resources.PLANTS, coloniesCount);
-        game.addResourceInterrupt(player, ResourceType.ANIMAL, 1, undefined);
-        game.addResourceInterrupt(player, ResourceType.MICROBE, 2, undefined);
+
+        const animalCards = player.getResourceCards(ResourceType.ANIMAL);
+
+        if (animalCards.length === 1) {
+            player.addResourceTo(animalCards[0], 1);
+        } else if (animalCards.length > 1) {
+            game.addResourceInterrupt(player, ResourceType.ANIMAL, 1, undefined);
+        }
+
+        const microbeCards = player.getResourceCards(ResourceType.MICROBE);
+
+        if (microbeCards.length === 1) {
+            player.addResourceTo(microbeCards[0], 2);
+        } else if (microbeCards.length > 1) {
+            game.addResourceInterrupt(player, ResourceType.MICROBE, 2, undefined);
+        }
+
         return undefined;
     }
 

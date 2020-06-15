@@ -44,16 +44,15 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
         const targetCard = otherMicrobeCards[0];
 
         return new OrOptions(
-          gainPlantOption,
           new SelectOption('Add 2 microbes to ' + targetCard.name, () => {
             player.addResourceTo(targetCard, 2);
             return undefined;
-          })
+          }),
+          gainPlantOption
         );
       }
 
       return new OrOptions(
-        gainPlantOption,
         new SelectCard(
           'Select card to add 2 microbes',
           otherMicrobeCards,
@@ -61,7 +60,8 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
               player.addResourceTo(foundCards[0], 2);
               return undefined;
           }
-        )
+        ),
+        gainPlantOption
       );
     }
 }

@@ -36,9 +36,9 @@ describe("ExtremeColdFungus", function () {
         expect(action instanceof OrOptions).to.eq(true);
         expect(action!.options.length).to.eq(2);
         
-        action!.options[1].cb();
-        expect(player.getResourcesOnCard(tardigrades)).to.eq(2);
         action!.options[0].cb();
+        expect(player.getResourcesOnCard(tardigrades)).to.eq(2);
+        action!.options[1].cb();
         expect(player.plants).to.eq(1);
     });
     it("Should act - multiple targets", function () {
@@ -52,9 +52,9 @@ describe("ExtremeColdFungus", function () {
         expect(action).not.to.eq(undefined);
         expect(action instanceof OrOptions).to.eq(true);
         expect(action!.options.length).to.eq(2);
-        action!.options[1].cb([tardigrades]);
+        action!.options[0].cb([tardigrades]);
         expect(player.getResourcesOnCard(tardigrades)).to.eq(6);
-        action!.options[0].cb();
+        action!.options[1].cb();
         expect(player.plants).to.eq(1);
     });
 });

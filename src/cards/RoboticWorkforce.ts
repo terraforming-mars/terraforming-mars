@@ -4,8 +4,8 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectCard } from "../inputs/SelectCard";
-import { CardName } from '../CardName';
-import { Resources } from '../Resources';
+import { CardName } from "../CardName";
+import { Resources } from "../Resources";
 import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
@@ -16,6 +16,7 @@ export class RoboticWorkforce implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: CardName = CardName.ROBOTIC_WORKFORCE;
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         return this.getAvailableCards(player, game).length > 0;
     }

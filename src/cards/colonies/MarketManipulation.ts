@@ -1,9 +1,9 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { Game } from '../../Game';
+import { CardName } from "../../CardName";
+import { Game } from "../../Game";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 
@@ -12,7 +12,7 @@ export class MarketManipulation implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: CardName = CardName.MARKET_MANIPULATION;
     public cardType: CardType = CardType.EVENT;
-    
+    public hasRequirements = false;
     public canPlay(_player: Player, game: Game): boolean {
       return this.getIncreasableColonies(game).length > 0 && this.getDecreasableColonies(game).length > 0;
     }

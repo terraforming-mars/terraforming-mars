@@ -16,7 +16,7 @@ export class ProjectInspection implements IProjectCard {
     public cost: number = 0;
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.EVENT;
-
+    public hasRequirements = false;
     private getActionCards(player: Player, game: Game): Array<ICard> {
         let result: Array<ICard> = [];
         for (const playedCard of player.playedCards) {
@@ -36,7 +36,7 @@ export class ProjectInspection implements IProjectCard {
             return undefined;
         }
         return new SelectCard(
-            'Perform an action from a played card again',
+            "Perform an action from a played card again",
             this.getActionCards(player, game),
             (foundCards: Array<ICard>) => {
                 const foundCard = foundCards[0];

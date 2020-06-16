@@ -7,18 +7,18 @@ import { Game } from "../Game";
 import { SelectCard } from "../inputs/SelectCard";
 import { OrOptions } from "../inputs/OrOptions";
 import { PlayerInput } from "../PlayerInput";
-import { CardName } from '../CardName';
-import { Resources } from '../Resources';
-import { SelectOption } from '../inputs/SelectOption';
+import { CardName } from "../CardName";
+import { Resources } from "../Resources";
+import { SelectOption } from "../inputs/SelectOption";
 import { ResourceType } from "../ResourceType";
-import { ICard } from './ICard';
+import { ICard } from "./ICard";
 
 export class Virus implements IProjectCard {
     public cost: number = 1;
     public tags: Array<Tags> = [Tags.MICROBES];
     public name: CardName = CardName.VIRUS;
     public cardType: CardType = CardType.EVENT;
-
+    public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         return this.getPossibleTargetCards(player, game).length +
             game.getPlayers().filter((p) => 

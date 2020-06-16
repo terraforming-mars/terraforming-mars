@@ -10,7 +10,7 @@ export class VoteOfNoConfidence implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: CardName = CardName.VOTE_OF_NO_CONFIDENCE;
     public cardType: CardType = CardType.EVENT;
-
+    public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {
             const parties = game.turmoil.parties.filter(party => party.partyLeader === player);

@@ -70,7 +70,7 @@ function requestHandler(
         res.setHeader("Content-Type", "application/json");
         res.write(fs.readFileSync("assets/translations.json"));
         res.end();
-      } else if (req.url === "/styles.css") {
+      } else if (req.url.startsWith("/styles.css")) {
         res.setHeader("Content-Type", "text/css");
         serveResource(res, styles);
       } else if (
@@ -192,7 +192,13 @@ function apiGetGames(req: http.IncomingMessage, res: http.ServerResponse): void 
         activePlayer: game.activePlayer.color,
         id: game.id,
         phase: game.phase,
-        players: game.getPlayers(),
+        players: game.getPlayers().map(player => {
+          return {
+            id: player.id,
+            name: player.name,
+            color: player.color
+          }
+        }),
         createtime: game.createtime?.slice(5,16),
         updatetime: game.updatetime?.slice(5,16),
         gameAge: game.gameAge,
@@ -900,7 +906,13 @@ function getGame(game: Game): string {
     activePlayer: game.activePlayer.color,
     id: game.id,
     phase: game.phase,
-    players: game.getPlayers(),
+    players: game.getPlayers().map(player => {
+      return {
+        id: player.id,
+        name: player.name,
+        color: player.color
+      }
+    }),
     createtime: game.createtime?.slice(5,16),
     updatetime: game.updatetime?.slice(5,16),
     gameAge: game.gameAge,

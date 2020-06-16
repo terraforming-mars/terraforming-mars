@@ -1629,6 +1629,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Rebuild claimed milestones
       this.claimedMilestones = d.claimedMilestones.map((element: ClaimedMilestone)  => {
+        if(element.milestone.name === "Tactitian"){
+          element.milestone.name = "Tactician";
+        }
         const player = this.players.find((player) => player.id === element.player.id);
         const milestone = this.milestones.find((milestone) => milestone.name === element.milestone.name);
         if (player && milestone) {

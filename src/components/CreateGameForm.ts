@@ -2,12 +2,12 @@
 import Vue from "vue";
 import { Color } from "../Color";
 
-import { BoardName } from '../BoardName';
+import { BoardName } from "../BoardName";
 import { CardName } from "../CardName";
 import { CorporationsFilter } from "./CorporationsFilter";
 
 import { $t } from "../directives/i18n";
-import { IGameData } from '../database/IDatabase';
+import { IGameData } from "../database/IDatabase";
 
 
 interface CreateGameModel {
@@ -56,18 +56,18 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 {index: 4, name: "", color: Color.BLUE, beginner: false, first: false},
                 {index: 5, name: "", color: Color.BLACK, beginner: false, first: false}
             ],
-            prelude: false,
+            prelude: true,
             draftVariant: true,
             initialDraft: false,
             randomFirstPlayer: true,
-            showOtherPlayersVP: false,
-            venusNext: false,
-            colonies: false,
-            turmoil: false,
+            showOtherPlayersVP: true,
+            venusNext: true,
+            colonies: true,
+            turmoil: true,
             customCorporationsList: [],
             showCorporationList: false,
             isSoloModePage: false,
-            board: BoardName.ORIGINAL,
+            board: "random",
             boards: [
                 BoardName.ORIGINAL,
                 BoardName.HELLAS,
@@ -76,10 +76,10 @@ export const CreateGameForm = Vue.component("create-game-form", {
             ],
             seed: Math.random(),
             seededGame: false,
-            solarPhaseOption: false,
-            promoCardsOption: false,
-            undoOption: false,
-            startingCorporations: 2,
+            solarPhaseOption: true,
+            promoCardsOption: true,
+            undoOption: true,
+            startingCorporations: 4,
             soloTR: false,
             clonedGameData: undefined,
             cloneGameData: []
@@ -89,7 +89,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
         "corporations-filter": CorporationsFilter,
     },
     mounted: function () {
-        if (window.location.pathname === '/solo') {
+        if (window.location.pathname === "/solo") {
             this.isSoloModePage = true;
         }
 

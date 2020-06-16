@@ -2196,6 +2196,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
       }
       let input2: Array<Array<string>> = input.input;
+      if(input2 === undefined ){
+        input2 = input;
+      }
 
       const waitingFor = this.waitingFor;
       const waitingForCb = this.waitingForCb;

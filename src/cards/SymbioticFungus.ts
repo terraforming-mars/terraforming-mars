@@ -25,6 +25,12 @@ export class SymbioticFungus implements IActionCard, IProjectCard {
     }
     public action(player: Player) {
         const availableCards = player.getResourceCards(ResourceType.MICROBE);
+
+        if (availableCards.length === 1) {
+            player.addResourceTo(availableCards[0]);
+            return undefined;
+        }
+
         return new SelectCard("Select card to add microbe", availableCards, (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0]);
             return undefined;

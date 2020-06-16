@@ -21,7 +21,7 @@ export class CorrosiveRain implements IGlobalEvent {
                 && card.resourceCount != undefined 
                 && card.resourceCount >= 2);
             if (floaterCards.length === 0) {
-                player.setResource(Resources.MEGACREDITS, -10, undefined, undefined, true);
+                player.setResource(Resources.MEGACREDITS, -10, game, undefined, true);
             } else {
                 // Trigger interrupt
                 game.addInterrupt(new SelectRemoveFloaters(player, game, floaterCards));

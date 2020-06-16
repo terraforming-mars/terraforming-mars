@@ -27,9 +27,9 @@ describe("RegolithEaters", function () {
         const orOptions = card.action(player, game) as OrOptions;
         expect(orOptions).not.to.eq(undefined);
         expect(orOptions instanceof OrOptions).to.eq(true);
-        orOptions.options[0].cb();
-        expect(card.resourceCount).to.eq(3);
         orOptions.options[1].cb();
+        expect(card.resourceCount).to.eq(3);
+        orOptions.options[0].cb();
         expect(card.resourceCount).to.eq(1);
         expect(game.getOxygenLevel()).to.eq(1);
     });

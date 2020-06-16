@@ -253,7 +253,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="tile city-tile " style="margin-left:20px;margin-bottom:5px;"></div><br>
             <div class="plant resource "></div><div class="plant resource "></div><div class="plant resource "></div>
             <div class="description " style="margin-top:-5px;font-size:11px;text-align: left; line-height: 12px;">
-                <div>Oxygen must be 7% or less.</div> 
+                <div>Oxygen must be 7% or less.</div>
                 <div style="width:140px;">Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.</div>
             </div>
         </div>
@@ -3916,7 +3916,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
               &nbsp;<div class="tile city-tile"></div>*
                 <div class="description " style="text-align:left;margin-top:-58px; width: 92px;">
-                  Requires 2 science tags. Increase your MC production 2 steps. 
+                  Requires 2 science tags. Increase your MC production 2 steps.
                 </div>
                 <div class="description" style="text-align:left; width: 117px; margin-left: 19px;">
                   Place a City tile ON THE RESERVED AREA. 1 VP for every 3rd Floater on this card.
@@ -4039,7 +4039,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="venus-icon project-icon"></div>
       <div class="card-number">255</div>
             <div class="content ">
-              <div class="requirements">Venus Venus</div>
+              <div class="requirements">2 Venus</div>
               <div class="production-box">
                   <div class="money production">2</div>
               </div>
@@ -4258,7 +4258,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="prelude-icon project-icon"></div>
               <div class="card-number">P42</div>
               <div class="content ">
-                <div class="requirements">Earth Earth</div>
+                <div class="requirements">2 Earth</div>
                 <div class="production-box">
                   <div class="production money">4</div>
                 </div><br>
@@ -4341,7 +4341,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="card-number">C05</div>
               <div class="content ">
                 <div class="points points-big">-1</div>
-                <div class="requirements">Earth Earth</div>
+                <div class="requirements">2 Earth</div>
                 <span style="font-size:14px;">NEXT CARD: </span> <div class="resource money">-16</div>
                   <div class="description ">
                     (Requires 2 Earth tags. The next card you play this generation costs 16 MC less.)
@@ -4481,7 +4481,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="card-number">C14</div>
               <div class="content ">
                 <div class="points points-big">-1</div>
-                <div class="requirements">Earth Earth</div>
+                <div class="requirements">2 Earth</div>
                 <div class="production-box"><div class="production money">2</div></div> <div style="margin-left:20px;" class="resource money">4</div>
                   <div class="description ">
                     (Requires 2 Earth tags. Increase your MC production 2 steps, and gain 4MC.)
@@ -4581,7 +4581,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="colonies-icon project-icon"></div>
               <div class="card-number">C20</div>
               <div class="content ">
-                <div class="requirements">Earth Earth Earth</div>
+                <div class="requirements">3 Earth</div>
                 <div class="production-box"><div class="production money">2</div></div>
                   <div class="description ">
                     (Requires 3 Earth tags. Increase your MC production 2 steps.)
@@ -4835,7 +4835,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="card-number">C36</div>
               <div class="content ">
                 <div class="points points-big">2</div>
-                <div class="requirements">Earth Earth</div>
+                <div class="requirements">2 Earth</div>
                   : <span class="money resource ">-1</span>
                   <div class="description ">
                       (Effect: When you play a card, you pay 1 MC less for it.)
@@ -6727,7 +6727,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="promo-icon project-icon"></div>
     <div class="card-number">X01</div>
     <div class="content">
-        <div class="requirements">Science Science</div>
+        <div class="requirements">2 Science</div>
         <div class="production-box production-box-size1a">
             <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="production energy"></div><br/>
             <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="production titanium"></div>

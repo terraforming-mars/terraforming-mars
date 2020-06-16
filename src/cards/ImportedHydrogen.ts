@@ -19,23 +19,54 @@ export class ImportedHydrogen implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, game: Game): undefined | PlayerInput {
+        const availableMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
+        const availableAnimalCards = player.getResourceCards(ResourceType.ANIMAL);
 
-        return new OrOptions(
-            new SelectOption("Gain 3 plants", () => {
-                player.plants += 3;
+        const gainPlants = function () {
+            player.plants += 3;
+            game.addOceanInterrupt(player);
+            return undefined;
+        };
+        
+        if (availableMicrobeCards.length === 0 && availableAnimalCards.length === 0) {
+            return gainPlants();
+        }
+
+        let availableActions = new Array<SelectOption | SelectCard<ICard>>();
+
+        const gainPlantsOption = new SelectOption("Gain 3 plants", gainPlants);
+        availableActions.push(gainPlantsOption);
+
+        if (availableMicrobeCards.length === 1) {
+            const targetMicrobeCard = availableMicrobeCards[0];
+            availableActions.push(new SelectOption("Add 3 microbes to " + targetMicrobeCard.name, () => {
+                player.addResourceTo(targetMicrobeCard, 3);
                 game.addOceanInterrupt(player);
                 return undefined;
-            }),
-            new SelectCard("Add 3 microbes to card", player.getResourceCards(ResourceType.MICROBE), (foundCards: Array<ICard>) => {
+            }))
+        } else if (availableMicrobeCards.length > 1) {
+            availableActions.push(new SelectCard("Add 3 microbes to a card", availableMicrobeCards, (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 3);
                 game.addOceanInterrupt(player);
                 return undefined;
-            }),
-            new SelectCard("Add 2 animals to card", player.getResourceCards(ResourceType.ANIMAL), (foundCards: Array<ICard>) => {
+            }))
+        }
+
+        if (availableAnimalCards.length === 1) {
+            const targetAnimalCard = availableAnimalCards[0];
+            availableActions.push(new SelectOption("Add 2 animals to " + targetAnimalCard.name, () => {
+                player.addResourceTo(targetAnimalCard, 2);
+                game.addOceanInterrupt(player);
+                return undefined;
+            }))
+        } else if (availableAnimalCards.length > 1) {
+            availableActions.push(new SelectCard("Add 2 animals to a card", availableAnimalCards, (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 2);
                 game.addOceanInterrupt(player);
                 return undefined;
-            })
-        )
+            }))
+        }
+
+        return new OrOptions(...availableActions);   
     }
 }

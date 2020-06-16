@@ -12,7 +12,7 @@ export class SucessfulOrganisms implements IGlobalEvent {
     public currentDelegate = PartyName.SCIENTISTS;
     public resolve(game: Game, turmoil: Turmoil) {
         game.getPlayers().forEach(player => {
-            player.setResource(Resources.PLANTS, Math.min(5, player.getProduction(Resources.PLANTS)) + turmoil.getPlayerInfluence(player), undefined, undefined, true);
+            player.setResource(Resources.PLANTS, Math.min(5, player.getProduction(Resources.PLANTS)) + turmoil.getPlayerInfluence(player), game, undefined, true);
         });    
     }
 }    

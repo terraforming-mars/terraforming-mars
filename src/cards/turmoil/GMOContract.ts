@@ -29,8 +29,6 @@ export class GMOContract implements IProjectCard {
     }
 
     public play() {
-    // public play(player: Player) {
-        // player.setResource(Resources.MEGACREDITS, 2);
         return undefined;
     }
 }

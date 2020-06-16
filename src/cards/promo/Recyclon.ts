@@ -40,6 +40,6 @@ export class Recyclon implements CorporationCard, IResourceCard {
             player.setProduction(Resources.PLANTS);
             return undefined;
         });
-        return new OrOptions(addResource, spendResource);
+        return new OrOptions(spendResource, addResource);
     }
 }

@@ -28,16 +28,16 @@ export class Thermophiles implements IActionCard,IProjectCard, IResourceCard {
         return true;
     }   
     public action(player: Player, game: Game) {
-        const microbeCards = player.getResourceCards(ResourceType.MICROBE).filter(card => card.tags.indexOf(Tags.VENUS) !== -1);
+        const venusMicrobeCards = player.getResourceCards(ResourceType.MICROBE).filter(card => card.tags.indexOf(Tags.VENUS) !== -1);
+        const canRaiseVenus = this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE;
+
+        // only 1 valid target and cannot remove 2 microbes - add to itself
+        if (venusMicrobeCards.length === 1 && !canRaiseVenus) {
+            this.resourceCount++;
+            return undefined;
+        }
+
         var opts: Array<SelectOption | SelectCard<ICard>> = [];
-        const addResource = new SelectCard(
-            'Select a Venus card to add 1 microbe',
-            microbeCards,
-            (foundCards: Array<ICard>) => {
-              player.addResourceTo(foundCards[0], 1);
-              return undefined;
-            }
-        );
 
         const spendResource = new SelectOption("Remove 2 microbes to raise Venus 1 step", () => {
             player.removeResourceFrom(this, 2);
@@ -45,11 +45,28 @@ export class Thermophiles implements IActionCard,IProjectCard, IResourceCard {
             return undefined;
         });
 
-        opts.push(addResource);
+        const addResource = new SelectCard(
+            'Select a Venus card to add 1 microbe',
+            venusMicrobeCards,
+            (foundCards: Array<ICard>) => {
+              player.addResourceTo(foundCards[0], 1);
+              return undefined;
+            }
+        );
 
-        if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
+        const addResourceToSelf = new SelectOption("Add a microbe to this card", () => {
+            player.addResourceTo(venusMicrobeCards[0], 1);
+            return undefined;
+        });
+
+        if (canRaiseVenus) {
             opts.push(spendResource);
-        } else return addResource;
+        } else {
+            if (venusMicrobeCards.length === 1) return addResourceToSelf;
+            return addResource;
+        }
+
+        venusMicrobeCards.length === 1 ? opts.push(addResourceToSelf) : opts.push(addResource);
 
         return new OrOptions(...opts);
     }

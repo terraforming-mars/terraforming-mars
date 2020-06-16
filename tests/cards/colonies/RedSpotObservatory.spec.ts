@@ -25,7 +25,7 @@ describe("RedSpotObservatory", function () {
         const orOptions = card.action(player, game) as OrOptions;
         expect(orOptions).not.to.eq(undefined);
         expect(orOptions instanceof OrOptions).to.eq(true);
-        orOptions.options[1].cb();
+        orOptions.options[0].cb();
         expect(player.cardsInHand.length).to.eq(1);
         expect(player.getResourcesOnCard(card)).to.eq(2);
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());

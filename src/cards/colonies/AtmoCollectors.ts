@@ -27,10 +27,6 @@ export class AtmoCollectors implements IProjectCard, IResourceCard {
             return undefined;
         }
         return new OrOptions(
-            new SelectOption("Add 1 floater to this card", () => {
-                this.resourceCount++;
-                return undefined;
-            }),
             new SelectOption("Remove 1 floater to gain 2 titanium", () => {
                 this.resourceCount--;
                 player.titanium += 2;
@@ -44,6 +40,10 @@ export class AtmoCollectors implements IProjectCard, IResourceCard {
             new SelectOption("Remove 1 floater to gain 4 heat", () => {
                 this.resourceCount--;
                 player.heat += 4;
+                return undefined;
+            }),
+            new SelectOption("Add 1 floater to this card", () => {
+                this.resourceCount++;
                 return undefined;
             })
         );

@@ -23,28 +23,32 @@ export class TitanAirScrapping implements IProjectCard, IResourceCard {
 
     public action(player: Player, game: Game) {
         var opts: Array<SelectOption> = [];
-        const addResource = new SelectOption("Spend 1 titanium to add 2 floaters on this card", () => {
-            this.resourceCount += 2;
-            player.titanium--;
-            return undefined;
-        });
 
-        const spendResource = new SelectOption("Remove 2 floaters on this card to increase your TR 1 step", () => {
-            this.resourceCount -= 2;
-            player.increaseTerraformRating(game);
-            return undefined;
-        });
+        const addResource = new SelectOption("Spend 1 titanium to add 2 floaters on this card", () => this.addResource(player));
+        const spendResource = new SelectOption("Remove 2 floaters on this card to increase your TR 1 step", () => this.spendResource(player, game));
 
         if (this.resourceCount >= 2 && player.titanium > 0) {
-            opts.push(addResource);
             opts.push(spendResource);
+            opts.push(addResource);
         } else if (player.titanium > 0) {
-            return addResource;
+            return this.addResource(player);
         } else {
-            return spendResource;
+            return this.spendResource(player, game);
         }
 
         return new OrOptions(...opts);
+    }
+
+    private addResource(player: Player) {
+        this.resourceCount += 2;
+        player.titanium--;
+        return undefined;
+    }
+
+    private spendResource(player: Player, game: Game) {
+        this.resourceCount -= 2;
+        player.increaseTerraformRating(game);
+        return undefined;
     }
 
     public play() {

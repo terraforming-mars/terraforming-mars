@@ -16,7 +16,15 @@ export class CorroderSuits implements IProjectCard {
 
     public play(player: Player) {
         player.setProduction(Resources.MEGACREDITS,2);
-        if (this.getResCards(player).length === 0) return undefined;
+        const cards = this.getResCards(player);
+
+        if (cards.length === 0) return undefined;
+
+        if (cards.length === 1) {
+            player.addResourceTo(cards[0], 1);
+            return undefined;
+        }
+
         return new SelectCard(
             'Select card to add 1 resource',
             this.getResCards(player),

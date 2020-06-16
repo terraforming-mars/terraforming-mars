@@ -229,7 +229,7 @@ export const PlayerHome = Vue.component("player-home", {
                     <award :awards_list="player.awards" />
                 </div>
                 <div>
-                    <turmoil :turmoil="player.turmoil"></turmoil>
+                    <turmoil  v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
                 </div>
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
                     <h2 :class="'player_color_'+ player.color">

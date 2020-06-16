@@ -45,6 +45,8 @@ import { SelectDelegate } from "./inputs/SelectDelegate";
 import { Phase } from "./Phase";
 import { SelfReplicatingRobots } from "./cards/promo/SelfReplicatingRobots";
 import { Aridor } from "./cards/colonies/Aridor";
+import { MiningArea } from "./cards/MiningArea";
+import { MiningRights } from "./cards/MiningRights";
 
 export class Player implements ILoadable<SerializedPlayer, Player>{
     public corporationCard: CorporationCard | undefined = undefined;
@@ -206,29 +208,33 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (resource === Resources.PLANTS) this.plants = Math.max(0, this.plants + amount);
       if (resource === Resources.ENERGY) this.energy = Math.max(0, this.energy + amount);
       if (resource === Resources.HEAT) this.heat = Math.max(0, this.heat + amount);
-      
+
+      const modifier = amount > 0 ? "increased" : "decreased";
+
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
         if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer.id) === -1) {
           this.removingPlayers.push(fromPlayer.id);
         }
         game.log(
           LogMessageType.DEFAULT,
-          "${0}'s ${1} amount modified by ${2} by ${3}",
+          "${0}'s ${1} amount ${2} by ${3} by ${4}",
           new LogMessageData(LogMessageDataType.PLAYER, this.id),
           new LogMessageData(LogMessageDataType.STRING, resource),
-          new LogMessageData(LogMessageDataType.STRING, amount.toString()),
+          new LogMessageData(LogMessageDataType.STRING, modifier),
+          new LogMessageData(LogMessageDataType.STRING, Math.abs(amount).toString()),
           new LogMessageData(LogMessageDataType.PLAYER, fromPlayer.id)
         );
       }
 
       // Global event logging
-      if (game !== undefined && globalEvent && amount < 0) {
+      if (game !== undefined && globalEvent && amount !== 0) {
         game.log(
           LogMessageType.DEFAULT,
-          "${0}'s ${1} amount modified by ${2} by Global Event",
+          "${0}'s ${1} amount ${2} by ${3} by Global Event",
           new LogMessageData(LogMessageDataType.PLAYER, this.id),
           new LogMessageData(LogMessageDataType.STRING, resource),
-          new LogMessageData(LogMessageDataType.STRING, amount.toString())
+          new LogMessageData(LogMessageDataType.STRING, modifier),
+          new LogMessageData(LogMessageDataType.STRING, Math.abs(amount).toString())
         );
       }      
 
@@ -238,8 +244,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
     }
 
-    public setProduction(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player) {
-
+    public setProduction(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
       if (resource === Resources.MEGACREDITS) this.megaCreditProduction = Math.max(-5, this.megaCreditProduction + amount);
       if (resource === Resources.STEEL) this.steelProduction = Math.max(0, this.steelProduction + amount);
       if (resource === Resources.TITANIUM) this.titaniumProduction = Math.max(0, this.titaniumProduction + amount);
@@ -247,17 +252,32 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (resource === Resources.ENERGY) this.energyProduction = Math.max(0, this.energyProduction + amount);
       if (resource === Resources.HEAT) this.heatProduction = Math.max(0, this.heatProduction + amount);
       
+      const modifier = amount > 0 ? "increased" : "decreased";
+
       if (game !== undefined && fromPlayer !== undefined && amount < 0) {
         if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer.id) === -1) {
           this.removingPlayers.push(fromPlayer.id);
         }
         game.log(
           LogMessageType.DEFAULT,
-          "${0}'s ${1} production modified by ${2} by ${3}",
+          "${0}'s ${1} production ${2} by ${3} by ${4}",
           new LogMessageData(LogMessageDataType.PLAYER, this.id),
           new LogMessageData(LogMessageDataType.STRING, resource),
-          new LogMessageData(LogMessageDataType.STRING, amount.toString()),
+          new LogMessageData(LogMessageDataType.STRING, modifier),
+          new LogMessageData(LogMessageDataType.STRING, Math.abs(amount).toString()),
           new LogMessageData(LogMessageDataType.PLAYER, fromPlayer.id)
+        );
+      }
+      
+      // Global event logging
+      if (game !== undefined && globalEvent && amount !== 0) {
+        game.log(
+          LogMessageType.DEFAULT,
+          "${0}'s ${1} amount ${2} by ${3} by Global Event",
+          new LogMessageData(LogMessageDataType.PLAYER, this.id),
+          new LogMessageData(LogMessageDataType.STRING, resource),
+          new LogMessageData(LogMessageDataType.STRING, modifier),
+          new LogMessageData(LogMessageDataType.STRING, Math.abs(amount).toString())
         );
       }
 
@@ -388,20 +408,23 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private generateId(): string {
       return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
     }
-    public removeResourceFrom(card: ICard, count: number = 1, game? : Game, removingPlayer? : Player): void {
+    public removeResourceFrom(card: ICard, count: number = 1, game? : Game, removingPlayer? : Player, shouldLogAction: boolean = true): void {
       if (card.resourceCount) {
         card.resourceCount = Math.max(card.resourceCount - count, 0);
         // Mons Insurance hook
         if (game !== undefined && removingPlayer !== undefined) {
           this.resolveMonsInsurance(game);
-          game.log(
-            LogMessageType.DEFAULT,
-            "${0} loses ${1} resource(s) on ${2} by ${3}",
-            new LogMessageData(LogMessageDataType.PLAYER, this.id),
-            new LogMessageData(LogMessageDataType.STRING, count.toString()),
-            new LogMessageData(LogMessageDataType.CARD, card.name),
-            new LogMessageData(LogMessageDataType.PLAYER, removingPlayer.id)
-          );
+
+          if (shouldLogAction) {
+            game.log(
+              LogMessageType.DEFAULT,
+              "${0} loses ${1} resource(s) on ${2} by ${3}",
+              new LogMessageData(LogMessageDataType.PLAYER, this.id),
+              new LogMessageData(LogMessageDataType.STRING, count.toString()),
+              new LogMessageData(LogMessageDataType.CARD, card.name),
+              new LogMessageData(LogMessageDataType.PLAYER, removingPlayer.id)
+            );
+          }
         }
         // Lawsuit hook
         if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.indexOf(removingPlayer.id) === -1) {
@@ -2292,6 +2315,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             card.targetCard = getProjectCardByName(targetCard.name)!;
           }
         }
+        if(card instanceof MiningArea || card instanceof MiningRights) {
+          let bonusResource = (element as MiningArea).bonusResource;
+          if (bonusResource !== undefined) {
+            card.bonusResource = bonusResource;
+          }
+        }        
+
         return card;
       });
 

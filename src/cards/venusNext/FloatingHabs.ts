@@ -5,8 +5,8 @@ import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { SelectCard } from '../../inputs/SelectCard';
-import { SelectHowToPay } from '../../inputs/SelectHowToPay';
 import { CardName } from '../../CardName';
+import { Game } from "../../Game";
 
 export class FloatingHabs implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 5;
@@ -29,30 +29,24 @@ export class FloatingHabs implements IActionCard,IProjectCard, IResourceCard {
         return Math.floor(this.resourceCount / 2);
     }
     
-    public action(player: Player) {
+    public action(player: Player, game: Game) {
       const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+
+      // add to itself if no other available target
+      if (floaterCards.length === 1) {
+        game.addSelectHowToPayInterrupt(player, 2, false, false, "Select how to pay for Floating Habs action");
+
+        player.addResourceTo(floaterCards[0], 1);
+        return undefined;
+      }
+
       return new SelectCard(
           "Spend 2 MC and select card to add 1 floater",
           floaterCards,
           (foundCards: Array<ICard>) => {
-            if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-              return new SelectHowToPay(
-                'Select how to pay ', false, false,
-                true,
-                2,
-                (htp) => {
-                  if (htp.heat + htp.megaCredits < 2) {
-                      throw new Error('Not enough spent to buy card');
-                  }
-                  player.megaCredits -= htp.megaCredits;
-                  player.heat -= htp.heat;
-                  player.addResourceTo(foundCards[0], 1);
-                  return undefined;
-                }
-              );
-            }
+            game.addSelectHowToPayInterrupt(player, 2, false, false, "Select how to pay for Floating Habs action");
+
             player.addResourceTo(foundCards[0], 1);
-            player.megaCredits -= 2;
             return undefined;
           }
       );

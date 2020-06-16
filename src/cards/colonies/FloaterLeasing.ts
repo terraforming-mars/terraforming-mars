@@ -11,10 +11,6 @@ export class FloaterLeasing implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: CardName = CardName.FLOATER_LEASING;
     public cardType: CardType = CardType.AUTOMATED;
-    public hasRequirements = false;
-    public canPlay(player: Player): boolean {
-        return player.getResourceCount(ResourceType.FLOATER) >= 3;
-    }
 
     public play(player: Player) {
       player.setProduction(Resources.MEGACREDITS, Math.floor(player.getResourceCount(ResourceType.FLOATER) / 3));

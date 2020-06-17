@@ -4,7 +4,6 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from '../../../src/Game';
 import { OrOptions } from '../../../src/inputs/OrOptions';
-import { SelectOption } from "../../../src/inputs/SelectOption";
 
 describe("Astrodrill", function () {
     it("Should play - can spend asteroid resource", function () {
@@ -43,16 +42,10 @@ describe("Astrodrill", function () {
 
         // add asteroid resource and gain standard resource
         const addAsteroidOption = action.options[1] as OrOptions;
-        addAsteroidOption.cb();
-        expect(card.resourceCount).to.eq(4);
-        
-        expect(game.interrupts.length).to.eq(1);
-        const gainPlantOption = (game.interrupts[0].playerInput as OrOptions).options[2] as SelectOption;
-        gainPlantOption.cb();
-        expect(player.plants).to.eq(1);
+        const resourceChoices = addAsteroidOption.cb()! as OrOptions;
+        resourceChoices.options[2].cb()
 
-        // TODO: Fix this
-        game.interrupts = [];
-        expect(game.interrupts.length).to.eq(0);
+        expect(card.resourceCount).to.eq(4);
+        expect(player.plants).to.eq(1);
     });
 });

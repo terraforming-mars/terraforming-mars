@@ -69,12 +69,7 @@ export class Astrodrill implements IActionCard, CorporationCard {
                 new LogMessageData(LogMessageDataType.CARD, this.name)
             );
 
-            game.interrupts.push({
-                player: player,
-                playerInput: gainStandardResource
-            });
-
-            return undefined;
+            return gainStandardResource;
         });
 
         const addResource = new SelectCard(
@@ -89,12 +84,7 @@ export class Astrodrill implements IActionCard, CorporationCard {
                     new LogMessageData(LogMessageDataType.CARD, foundCards[0].name)
                 );
 
-                game.interrupts.push({
-                    player: player,
-                    playerInput: gainStandardResource
-                });
-    
-                return undefined;
+                return gainStandardResource;
             }
         );
 

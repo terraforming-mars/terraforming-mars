@@ -6157,15 +6157,15 @@ export const HTML_DATA: Map<string, string> =
       <div class="contentCorporation">
         <div class="corporationEffectBox" style="height:160px;margin-top:130px">
           <div class="corporationEffectBoxLabel" >ACTION</div>
-          <div class="red-arrow"></div> <div class="resource" style="background:black;color:#bbb;">A</div> * / <div class="resource " style="background:white;">?</div> OR <br>
-          <div class="resource" style="background:black;color:#bbb;">A</div><div class="red-arrow"></div> 3 <div class="resource titanium"></div>
+          <div class="red-arrow"></div> <div class="asteroid resource">A</div> * / <div class="resource " style="background:white;">?</div> OR <br>
+          <div class="asteroid resource">A</div><div class="red-arrow"></div> 3 <div class="resource titanium"></div>
           <div class="description" style="text-align:center;">
             (Action: Add an asteroid resource to ANY card and gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.)<br>
           </div>
         </div>
         <div class="astrodrill">Astrodrill</div>
         <div class="resource money" style="margin:3px 40px 0px 50px">38</div>
-        3 <div class="resource" style="background:black;color:#bbb;">A</div>
+        3 <div class="asteroid resource">A</div>
         <div class="description" style="text-align:center">
           (You start with 38 MC and 3 asteroid resources.)
         </div>

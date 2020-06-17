@@ -590,6 +590,8 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         solarPhaseOption: gameReq.solarPhaseOption,
         promoCardsOption: gameReq.promoCardsOption,
         undoOption: gameReq.undoOption,
+        heatFor: gameReq.heatFor,
+        enhance: gameReq.enhance,
         startingCorporations: gameReq.startingCorporations,
         soloTR: gameReq.soloTR,
         clonedGamedId: gameReq.clonedGamedId,

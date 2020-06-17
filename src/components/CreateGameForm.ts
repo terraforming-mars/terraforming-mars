@@ -30,6 +30,8 @@ interface CreateGameModel {
     solarPhaseOption: boolean;
     promoCardsOption: boolean;
     undoOption: boolean;
+    heatFor: boolean;
+    enhance: boolean;
     startingCorporations: number;
     soloTR: boolean;
     clonedGameData: IGameData | undefined;
@@ -80,6 +82,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
             solarPhaseOption: true,
             promoCardsOption: true,
             undoOption: true,
+            heatFor: false,
+            enhance: false,
             startingCorporations: 4,
             soloTR: false,
             clonedGameData: undefined,
@@ -166,6 +170,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const seed = component.seed;
             const promoCardsOption = component.promoCardsOption;
             const undoOption = component.undoOption;
+            const heatFor = component.heatFor;
+            const enhance = component.enhance;
             const startingCorporations = component.startingCorporations;
             const soloTR = component.soloTR;
             let clonedGamedId: undefined | string = undefined;
@@ -181,7 +187,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             }
 
             const dataToSend = JSON.stringify({
-                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption, promoCardsOption, undoOption, startingCorporations, soloTR, clonedGamedId, initialDraft 
+                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption, promoCardsOption, undoOption, heatFor, enhance, startingCorporations, soloTR, clonedGamedId, initialDraft 
             });
 
             const onSucces = (response: any) => {
@@ -308,6 +314,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <label class="form-switch">
                                 <input type="checkbox" v-model="undoOption">
                                 <i class="form-icon"></i> <span v-i18n>Allow undo</span>
+                            </label>
+
+                            <label class="form-switch">
+                                <input type="checkbox" v-model="heatFor">
+                                <i class="form-icon"></i> <span v-i18n>七热升温</span>
                             </label>
 
                             <label class="form-label">

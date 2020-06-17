@@ -53,6 +53,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public id: string;
     public canUseHeatAsMegaCredits: boolean = false;
     public plantsNeededForGreenery: number = 8;
+    public heatForTemperature: number = 8;
     public dealtCorporationCards: Array<CorporationCard> = [];
     public dealtProjectCards: Array<IProjectCard> = [];
     public dealtPreludeCards: Array<IProjectCard> = [];
@@ -1604,8 +1605,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) && this.getResourcesOnCorporation() > 0 ) {
         let raiseTempOptions = new AndOptions (
           () => {
-            if (heatAmount + (floaterAmount * 2) < 8) {
-                throw new Error("Need to pay 8 heat");
+            if (heatAmount + (floaterAmount * 2) < this.heatForTemperature) {
+                throw new Error("Need to pay "+this.heatForTemperature+" heat");
             }
             this.removeResourceFrom(this.corporationCard as ICard, floaterAmount);
             this.heat -= heatAmount;
@@ -1628,15 +1629,15 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
         raiseTempOptions.title = "Select resource amounts to raise temp";
 
-        return new SelectOption("Convert 8 heat into temperature", () => {
+        return new SelectOption("Convert "+this.heatForTemperature+" heat into temperature", () => {
           return raiseTempOptions;
         });
 
       } else {
 
-      return new SelectOption("Convert 8 heat into temperature", () => {
+      return new SelectOption("Convert "+this.heatForTemperature+" heat into temperature", () => {
         game.increaseTemperature(this, 1);
-        this.heat -= 8;
+        this.heat -= this.heatForTemperature;
         game.log(
           LogMessageType.DEFAULT,
           "${0} converted heat into temperature",
@@ -2056,9 +2057,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       //heat Temperature
       if (
-        (this.heat >= constants.HEAT_FOR_TEMPERATURE || 
+        (this.heat >= this.heatForTemperature || 
           (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) &&
-           (this.getResourcesOnCorporation() * 2) + this.heat >= constants.HEAT_FOR_TEMPERATURE)
+           (this.getResourcesOnCorporation() * 2) + this.heat >= this.heatForTemperature)
            ) &&
             game.getTemperature() + 2 <= constants.MAX_TEMPERATURE) {
         action.options.push(

@@ -68,6 +68,8 @@ export interface GameOptions {
   solarPhaseOption: boolean;
   promoCardsOption: boolean;
   undoOption: boolean;
+  heatFor: boolean;
+  enhance: boolean;
   startingCorporations: number;
   soloTR: boolean;
   clonedGamedId: string | undefined;
@@ -113,6 +115,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public turmoil: Turmoil | undefined;
     private promoCardsOption: boolean;
     public undoOption: boolean;
+    public heatFor: boolean;
+    public enhance: boolean;
     private startingCorporations: number;
     public soloTR: boolean;
     private clonedGamedId: string | undefined;
@@ -145,6 +149,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
           solarPhaseOption: false,
           promoCardsOption: false,
           undoOption: false,
+          heatFor: false,
+          enhance: false,
           startingCorporations: 2,
           soloTR: false,
           clonedGamedId: undefined
@@ -162,6 +168,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.turmoilExtension = gameOptions.turmoilExtension;      
       this.promoCardsOption = gameOptions.promoCardsOption;
       this.undoOption = gameOptions.undoOption;
+      this.heatFor = gameOptions.heatFor;
+      this.enhance = gameOptions.enhance;
       this.startingCorporations = gameOptions.startingCorporations;
       this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption, this.turmoilExtension, Math.random());
       this.showOtherPlayersVP = gameOptions.showOtherPlayersVP;
@@ -243,6 +251,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
       // Give each player their corporation cards and other cards
       for (const player of players) {
+        player.heatForTemperature = this.heatFor ? 7 : 8 ;
         if (!player.beginner) {
           for (let i = 0; i < this.startingCorporations; i++) {
             const corpCard : CorporationCard | undefined = corporationCards.pop();
@@ -367,6 +376,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.solarPhaseOption = gameToRebuild.solarPhaseOption;
           game.promoCardsOption = gameToRebuild.promoCardsOption;
           game.undoOption = gameToRebuild.undoOption;
+          game.heatFor = gameToRebuild.heatFor;
+          game.enhance = gameToRebuild.enhance;
           game.startingCorporations = gameToRebuild.startingCorporations;
           game.soloTR = gameToRebuild.soloTR;
           game.initialDraft = gameToRebuild.initialDraft;

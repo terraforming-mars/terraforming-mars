@@ -14,12 +14,6 @@
     "Yellow": "黄色",
     "Blue": "蓝色",
     "Black": "黑色",
-    "Login": "登录",
-    "Register": "注册",
-    "Go To Register": "前往注册",
-    "My Games": "我的对局",
-    "Donate": "捐助本站",
-    "LoginOut": "登出",
 
     "original": "基础版图",
     "hellas": "hellas版图",
@@ -30,7 +24,8 @@
     "Venus Next": "金星",
     "Custom Corporation list": "自定义公司列表",
     "Use Solar Phase Option": "开启世界政府",
-
+    "Draft variant": "轮抽变体",
+    "Initial Draft variant": "初始轮抽变体",
     "NEXT CARD:": "下一张卡:",
 
     "Milestones": "里程碑",
@@ -118,6 +113,10 @@
 
     "Select which cards to take into hand":"选择保留到手牌的牌(每张3MC)",
 
+    "Convert 7 heat into temperature": "7热升温",
+    "Convert 8 heat into temperature": "8热升温",
+    "Convert 8 plants into greenery" : "8叶子放绿化板块",
+    "Convert 7 plants into greenery" : "7叶子放绿化板块",
     "Colonies": "殖民地",
     "funded by": "提供资金者:",
     "claimed by": "宣告达成者:",
@@ -156,6 +155,14 @@
     "Increase temperature":"提升火星温度",
     "Increase oxygen":"提升火星氧气浓度",
     "Add an ocean":"放置一个海洋版块",
-    "Increase Venus scale":"提升金星改造度"
+    "Increase Venus scale":"提升金星改造度",
+
+    
+    "Login": "登录",
+    "Register": "注册",
+    "Go To Register": "前往注册",
+    "My Games": "我的对局",
+    "Donate": "捐助本站",
+    "LoginOut": "登出"
 }
 

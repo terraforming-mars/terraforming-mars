@@ -626,6 +626,31 @@
 
     "Immigrant City": "Immigrantenstadt",
     "Effect: When a City tile is placed, including this, increase your MC production 1 step.": "EFFEKT: Immer wenn ein Stadtplättchen platziert wird (einschließlich dieses), erhöhe deine M€-Produktion um 1.",
-    "Decrease your Energy production 1 step and decrease your MC production 2 steps. Place a City tile.": "Senke deine Energie-Produktion um 1 und deine M€-Produktion um 2. Platziere ein Stadtplättchen."
+    "Decrease your Energy production 1 step and decrease your MC production 2 steps. Place a City tile.": "Senke deine Energie-Produktion um 1 und deine M€-Produktion um 2. Platziere ein Stadtplättchen.",
+
+    "Energy Tapping": "Strom anzapfen",
+    "Decrease any Energy production 1 step and increase your own 1 step.": "Senke eine beliebige Energie-Produktion um 1 und erhöhe deine Energie-Produktion um 1.",
+
+    "Underground Detonations": "Untertage-Detonation",
+    "Action: Spend 10MC to increase your heat production 2 steps.": "AKTION: Bezahle 10 M€, um deine Wärme-Produktion um 2 zu erhöhen.",
+
+    "Soletta": "Soletta",
+    "Increase your heat production 7 steps.": "Erhöhe deine Wärme-Produktion um 7.",
+
+    "Technology Demonstration": "Technologie-Demonstration",
+    "Draw two cards.": "Ziehe 2 Karten.",
+
+    "Rad-Chem Factory": "Strahlenchemie-Fabrik",
+    "Decrease your Energy production 1 step. Raise your TR 2 steps.": "Senke deine Energie-Produktion um 1. Erhöhe deinen Terraformwert um 2.",
+
+    "Special Design": "Spezielles Design",
+    "The next card you play this generation is +2 or -2 steps in global requirements, your choice.": "Die globalen Bedingungen der nächsten Karte, die du in dieser Generation ausspielst, sind nach deiner Wahl um 2 Stufen höher oder niedriger.",
+
+    "Medical Lab": "Medizinisches Labor",
+    "Increase your MC production 1 step for every 2 Building tags you have, including this.": "Erhöhe deine M€-Produktion um 1 je 2 eigene Gebäudesymbole (einschließlich dieses).",
+
+    "AI Central": "Центр ИИ",
+    "Action: Draw 2 cards.": "AKTION: Ziehe 2 Karten.",
+    "Requires 3 Science tags to play. Decrease your Energy production 1 step.": "Benötigt 3 eigene Wissenschaftssymbole. Senke deine Energie-Produktion um 1."
 
 }

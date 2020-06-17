@@ -69,22 +69,32 @@ export class Astrodrill implements IActionCard, CorporationCard {
                 new LogMessageData(LogMessageDataType.CARD, this.name)
             );
 
-            return gainStandardResource;
+            game.interrupts.push({
+                player: player,
+                playerInput: gainStandardResource
+            });
+
+            return undefined;
         });
 
         const addResource = new SelectCard(
             'Select card to add 1 asteroid and gain a standard resource',
             asteroidCards,
             (foundCards: Array<ICard>) => {
-              player.addResourceTo(foundCards[0], 1);
-              game.log(
-                LogMessageType.DEFAULT,
-                "${0} added 1 asteroid to ${1}",
-                new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                new LogMessageData(LogMessageDataType.CARD, foundCards[0].name)
-            );
+                player.addResourceTo(foundCards[0], 1);
+                game.log(
+                    LogMessageType.DEFAULT,
+                    "${0} added 1 asteroid to ${1}",
+                    new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                    new LogMessageData(LogMessageDataType.CARD, foundCards[0].name)
+                );
 
-              return gainStandardResource;
+                game.interrupts.push({
+                    player: player,
+                    playerInput: gainStandardResource
+                });
+    
+                return undefined;
             }
         );
 

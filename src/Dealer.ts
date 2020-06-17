@@ -436,6 +436,7 @@ import { SupportedResearch } from "./cards/turmoil/SupportedResearch";
 import { WildlifeDome } from "./cards/turmoil/WildlifeDome";
 import { VoteOfNoConfidence } from "./cards/turmoil/VoteOfNoConfidence";
 import { Astrodrill } from "./cards/promo/Astrodrill";
+import { AsteroidHollowing } from "./cards/promo/AsteroidHollowing";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -688,7 +689,8 @@ export const ALL_PROMO_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.HI_TECH_LAB, factory: HiTechLab },
     { cardName: CardName.ENERGY_MARKET, factory: EnergyMarket },
     { cardName: CardName.LAW_SUIT, factory: LawSuit },
-    { cardName: CardName.STANFORD_TORUS, factory: StanfordTorus }
+    { cardName: CardName.STANFORD_TORUS, factory: StanfordTorus },
+    { cardName: CardName.ASTEROID_HOLLOWING, factory: AsteroidHollowing }
 ];    
 
 export const ALL_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [

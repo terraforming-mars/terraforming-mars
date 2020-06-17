@@ -666,12 +666,12 @@ export const ALL_TURMOIL_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
 
 export const ALL_PROMO_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
     { cardName: CardName.ARCADIAN_COMMUNITIES, factory: ArcadianCommunities },
+    { cardName: CardName.ASTRODRILL, factory: Astrodrill },
     { cardName: CardName.FACTORUM, factory: Factorum },
     { cardName: CardName.PHILARES, factory: Philares },
     { cardName: CardName.MONS_INSURANCE, factory: MonsInsurance },
     { cardName: CardName.RECYCLON, factory: Recyclon },
-    { cardName: CardName.SPLICE, factory: Splice },
-    { cardName: CardName.ASTRODRILL, factory: Astrodrill }
+    { cardName: CardName.SPLICE, factory: Splice }
 ];
 
 export const ALL_PROMO_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [

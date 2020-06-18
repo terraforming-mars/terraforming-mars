@@ -435,10 +435,12 @@ import { SponsoredMohole } from "./cards/turmoil/SponsoredMohole";
 import { SupportedResearch } from "./cards/turmoil/SupportedResearch";
 import { WildlifeDome } from "./cards/turmoil/WildlifeDome";
 import { VoteOfNoConfidence } from "./cards/turmoil/VoteOfNoConfidence";
+import { Astrodrill } from "./cards/promo/Astrodrill";
 import { AsteroidHollowing } from "./cards/promo/AsteroidHollowing";
 import { DeimosDownPromo } from "./cards/promo/DeimosDownPromo";
 import { GreatDamPromo } from "./cards/promo/GreatDamPromo";
 import { MagneticFieldGeneratorsPromo } from "./cards/promo/MagneticFieldGeneratorsPromo";
+
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -666,6 +668,7 @@ export const ALL_TURMOIL_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
 
 export const ALL_PROMO_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
     { cardName: CardName.ARCADIAN_COMMUNITIES, factory: ArcadianCommunities },
+    { cardName: CardName.ASTRODRILL, factory: Astrodrill },
     { cardName: CardName.FACTORUM, factory: Factorum },
     { cardName: CardName.PHILARES, factory: Philares },
     { cardName: CardName.MONS_INSURANCE, factory: MonsInsurance },

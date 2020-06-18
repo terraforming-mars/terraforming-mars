@@ -4509,7 +4509,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="colonies-icon project-icon"></div>
               <div class="card-number">C16</div>
               <div class="content ">
-                <div class="requirements">Jovian Jovian</div>
+                <div class="requirements">2 Jovian</div>
                 12<div class="resource heat"></div><br>
                 - <div class="resource plant red-outline"></div><div class="resource plant red-outline"></div>
                   <div class="description ">

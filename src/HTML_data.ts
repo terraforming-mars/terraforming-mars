@@ -5945,11 +5945,12 @@ export const HTML_DATA: Map<string, string> =
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">ACTION</div>
           <div style="font-size:10px;line-height:12px;margin-top:-5px;margin-bottom:10px;"><span class="red-arrow"></span>ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS</div>
-          <div class="corporationEffectBoxLabel">EFFECT</div>
+          <div class="corporationEffectBoxLabel" style="margin-top:-3px">EFFECT</div>
             <div style="font-size:10px;line-height:12px;margin-top:-5px;">EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 MC</div>
         </div>
         <div style="font-size:20px;
         padding-left:3px;width:147px;background:#eeeeee;box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 3px 3px 3px grey;margin-left:10px;border-radius:5px;
+        margin-bottom:4px;
         border-top: 2px solid rgb(221,221,221);
         border-left: 2px solid rgb(221,221,221);
         border-bottom: 2px solid rgb(137,137,137);
@@ -6105,7 +6106,7 @@ export const HTML_DATA: Map<string, string> =
           <div class="promo-icon corporation-icon"></div>
           <div class="contentCorporation">
             <div class="corporationEffectBox">
-              <div class="corporationEffectBoxLabel">ACTION</div>
+              <div class="corporationEffectBoxLabel" style="margin-bottom:5px">ACTION</div>
               <div class="red-arrow"></div><div class="production-box">
                 <div class="production energy"></div>
               </div> * OR
@@ -6123,7 +6124,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="production-box">
               <div class="production steel"></div>
             </div>
-            <div class="description" style="margin-top:-5px;text-align:center;">
+            <div class="description" style="text-align:center;">
               (You start with 37 MC. Increase your steel production 1 step.)
             </div>
           </div>

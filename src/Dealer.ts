@@ -436,6 +436,11 @@ import { SupportedResearch } from "./cards/turmoil/SupportedResearch";
 import { WildlifeDome } from "./cards/turmoil/WildlifeDome";
 import { VoteOfNoConfidence } from "./cards/turmoil/VoteOfNoConfidence";
 import { Astrodrill } from "./cards/promo/Astrodrill";
+import { AsteroidHollowing } from "./cards/promo/AsteroidHollowing";
+import { DeimosDownPromo } from "./cards/promo/DeimosDownPromo";
+import { GreatDamPromo } from "./cards/promo/GreatDamPromo";
+import { MagneticFieldGeneratorsPromo } from "./cards/promo/MagneticFieldGeneratorsPromo";
+
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -685,7 +690,12 @@ export const ALL_PROMO_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.HI_TECH_LAB, factory: HiTechLab },
     { cardName: CardName.ENERGY_MARKET, factory: EnergyMarket },
     { cardName: CardName.LAW_SUIT, factory: LawSuit },
-    { cardName: CardName.STANFORD_TORUS, factory: StanfordTorus }
+    { cardName: CardName.STANFORD_TORUS, factory: StanfordTorus },
+    { cardName: CardName.ASTEROID_HOLLOWING, factory: AsteroidHollowing }
+    { cardName: CardName.DEIMOS_DOWN_PROMO, factory: DeimosDownPromo },
+    { cardName: CardName.GREAT_DAM_PROMO, factory: GreatDamPromo },
+    { cardName: CardName.MAGNETIC_FIELD_GENERATORS_PROMO, factory: MagneticFieldGeneratorsPromo }
+
 ];    
 
 export const ALL_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
@@ -973,6 +983,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     private useColoniesNextExtension: boolean = false;
     private usePromoCards: boolean = false;
     private useTurmoilExtension: boolean = false;
+
     constructor(usePreludeExtension: boolean, useVenusNextExtension: boolean, useColoniesNextExtension : boolean, usePromoCards: boolean, useTurmoilExtension: boolean, _seed?: number) {
         this.usePreludeExtension = usePreludeExtension;
         this.useVenusNextExtension = useVenusNextExtension;
@@ -998,6 +1009,9 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
             this.deck = this.shuffleCards<IProjectCard>(this.deck);
         }
         if (this.usePromoCards) {
+            const cardsToReplace = [CardName.DEIMOS_DOWN, CardName.GREAT_DAM, CardName.MAGNETIC_FIELD_GENERATORS];
+            this.deck = this.deck.filter((card) => !cardsToReplace.includes(card.name));
+
             this.deck.push(...ALL_PROMO_PROJECTS_CARDS.map((cf) => new cf.factory()));
             this.deck = this.shuffleCards<IProjectCard>(this.deck);
         }

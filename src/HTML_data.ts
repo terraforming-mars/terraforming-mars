@@ -6762,6 +6762,25 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
+[CardName.ASTEROID_HOLLOWING, `
+    <div class="title background-color-active">Asteroid Hollowing</div>
+    <div class="price ">16</div>
+    ##RESOURCES##
+    <div class="tag tag1 tag-space "></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content ">
+        <div class="points" style="line-height:45px;vertical-align:middle">1/2<div class="asteroid resource" style="vertical-align:middle;margin-left:5px">A</div></div>
+        <div class="resource titanium"></div>
+        <span class="red-arrow"></span>
+        <div class="asteroid resource" style="margin-right:5px">A</div>
+        <div class="production-box"><div  class="production money">1</div></div>
+        <div class="description">
+            (Action: Spend 1 titanium to add 1 asteroid resource here and increase MC production 1 step.)
+            <br><br>(1 VP per 2 asteroid resources on this card.)
+        </div>
+      </div>
+    </div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>

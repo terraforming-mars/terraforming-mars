@@ -27,7 +27,7 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
 
       if (cardsToPick.length === 1) {
         player.addResourceTo(cardsToPick[0], 2);
-        this.logCardEffect(game, player, cardsToPick[0]);
+        this.log(game, player, cardsToPick[0]);
         return undefined;
       }
 
@@ -35,13 +35,13 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
           'Select card to add 2 microbes', cardsToPick,
           (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0], 2);
-            this.logCardEffect(game, player, foundCards[0]);
+            this.log(game, player, foundCards[0]);
             return undefined;
           }
       );
     }
 
-    private logCardEffect(game: Game, player: Player, card: ICard) {
+    private log(game: Game, player: Player, card: ICard) {
       game.log(
         LogMessageType.DEFAULT,
         "${0} added 2 microbes to ${1}",

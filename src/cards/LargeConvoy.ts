@@ -48,7 +48,7 @@ export class LargeConvoy implements IProjectCard {
             const targetAnimalCard = animalCards[0];
             availableActions.push(new SelectOption("Add 4 animals to " + targetAnimalCard.name, () => {
                 player.addResourceTo(targetAnimalCard, 4);
-                this.logGainAnimalsEffect(game, player, targetAnimalCard);
+                this.logGainAnimals(game, player, targetAnimalCard);
                 game.addOceanInterrupt(player);
                 return undefined;
             }))
@@ -59,7 +59,7 @@ export class LargeConvoy implements IProjectCard {
                     animalCards, 
                     (foundCards: Array<ICard>) => { 
                         player.addResourceTo(foundCards[0], 4);
-                        this.logGainAnimalsEffect(game, player, foundCards[0]);
+                        this.logGainAnimals(game, player, foundCards[0]);
                         game.addOceanInterrupt(player);
                         return undefined;
                     }
@@ -72,7 +72,7 @@ export class LargeConvoy implements IProjectCard {
     public getVictoryPoints() {
         return 2;
     }
-    private logGainAnimalsEffect(game: Game, player: Player, card: ICard) {
+    private logGainAnimals(game: Game, player: Player, card: ICard) {
         game.log(
           LogMessageType.DEFAULT,
           "${0} added 4 animals to ${1}",

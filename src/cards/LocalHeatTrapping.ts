@@ -53,7 +53,7 @@ export class LocalHeatTrapping implements IProjectCard {
               new SelectOption("Gain 4 plants", gain4Plants),
               new SelectOption("Add 2 animals to " + targetCard.name, () => {
                   player.addResourceTo(targetCard, 2);
-                  this.logGainAnimalsEffect(game, player, targetCard);
+                  this.logGainAnimals(game, player, targetCard);
                   return undefined;
               }));
           } else {
@@ -61,7 +61,7 @@ export class LocalHeatTrapping implements IProjectCard {
               new SelectOption("Gain 4 plants", gain4Plants),
               new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<ICard>) => {
                   player.addResourceTo(foundCards[0], 2);
-                  this.logGainAnimalsEffect(game, player, foundCards[0]);
+                  this.logGainAnimals(game, player, foundCards[0]);
                   return undefined;
               }));
           };
@@ -108,8 +108,7 @@ export class LocalHeatTrapping implements IProjectCard {
         if (availableActions.options.length === 1) return availableActions.options[0].cb();
         return availableActions;
     }
-
-    private logGainAnimalsEffect(game: Game, player: Player, card: ICard) {
+    private logGainAnimals(game: Game, player: Player, card: ICard) {
       game.log(
         LogMessageType.DEFAULT,
         "${0} spent 5 heat to add 2 animals to ${1}",

@@ -35,30 +35,30 @@ export class ImportedNitrogen implements IProjectCard {
                 () => this.giveResources(player, game),
                 new SelectCard("Select card to add 3 microbes", otherMicrobeCards, (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], 3);
-                    this.logGainResourcesEffect(game, player, foundCards[0], 3);
+                    this.logGainResource(game, player, foundCards[0], 3);
                     return undefined;
                 }),
                 new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], 2);
-                    this.logGainResourcesEffect(game, player, foundCards[0], 2);
+                    this.logGainResource(game, player, foundCards[0], 2);
                     return undefined;
                 })
             );
         } else if (otherAnimalCards.length > 0) {
             return new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 2);
-                this.logGainResourcesEffect(game, player, foundCards[0], 2);
+                this.logGainResource(game, player, foundCards[0], 2);
                 return this.giveResources(player, game);
             });
         }
         return new SelectCard("Select card to add 3 microbes", otherMicrobeCards, (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0], 3);
-            this.logGainResourcesEffect(game, player, foundCards[0], 3);
+            this.logGainResource(game, player, foundCards[0], 3);
             return this.giveResources(player, game);
         });
     }
 
-    private logGainResourcesEffect(game: Game, player: Player, card: ICard, qty: number) {
+    private logGainResource(game: Game, player: Player, card: ICard, qty: number) {
         let resource = card.resourceType === ResourceType.MICROBE ? "microbes" : "animals";
 
         game.log(

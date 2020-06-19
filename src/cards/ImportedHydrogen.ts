@@ -49,14 +49,14 @@ export class ImportedHydrogen implements IProjectCard {
             const targetMicrobeCard = availableMicrobeCards[0];
             availableActions.push(new SelectOption("Add 3 microbes to " + targetMicrobeCard.name, () => {
                 player.addResourceTo(targetMicrobeCard, 3);
-                this.logGainResourcesEffect(game, player, targetMicrobeCard, 3);
+                this.logGainResource(game, player, targetMicrobeCard, 3);
                 game.addOceanInterrupt(player);
                 return undefined;
             }))
         } else if (availableMicrobeCards.length > 1) {
             availableActions.push(new SelectCard("Add 3 microbes to a card", availableMicrobeCards, (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 3);
-                this.logGainResourcesEffect(game, player, foundCards[0], 3);
+                this.logGainResource(game, player, foundCards[0], 3);
                 game.addOceanInterrupt(player);
                 return undefined;
             }))
@@ -66,14 +66,14 @@ export class ImportedHydrogen implements IProjectCard {
             const targetAnimalCard = availableAnimalCards[0];
             availableActions.push(new SelectOption("Add 2 animals to " + targetAnimalCard.name, () => {
                 player.addResourceTo(targetAnimalCard, 2);
-                this.logGainResourcesEffect(game, player, targetAnimalCard, 2);
+                this.logGainResource(game, player, targetAnimalCard, 2);
                 game.addOceanInterrupt(player);
                 return undefined;
             }))
         } else if (availableAnimalCards.length > 1) {
             availableActions.push(new SelectCard("Add 2 animals to a card", availableAnimalCards, (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 2);
-                this.logGainResourcesEffect(game, player, foundCards[0], 2);
+                this.logGainResource(game, player, foundCards[0], 2);
                 game.addOceanInterrupt(player);
                 return undefined;
             }))
@@ -82,7 +82,7 @@ export class ImportedHydrogen implements IProjectCard {
         return new OrOptions(...availableActions);   
     }
 
-    private logGainResourcesEffect(game: Game, player: Player, card: ICard, qty: number) {
+    private logGainResource(game: Game, player: Player, card: ICard, qty: number) {
         let resource = card.resourceType === ResourceType.MICROBE ? "microbes" : "animals";
 
         game.log(

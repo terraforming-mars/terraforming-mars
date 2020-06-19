@@ -27,13 +27,13 @@ export class CEOsFavoriteProject implements IProjectCard {
           player.getCardsWithResources(),
           (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0]);
-            this.logCardEffect(game, player, foundCards[0]);
+            this.log(game, player, foundCards[0]);
             return undefined;
           }
       );
     }
 
-    private logCardEffect(game: Game, player: Player, card: ICard) {
+    private log(game: Game, player: Player, card: ICard) {
       game.log(
         LogMessageType.DEFAULT,
         "${0} added 1 resource to ${1}",

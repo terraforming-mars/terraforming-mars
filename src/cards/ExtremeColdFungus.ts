@@ -35,13 +35,13 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
 
       if (otherMicrobeCards.length === 0) {
         player.plants++;
-        this.logGainPlantAction(game, player);
+        this.logGainPlant(game, player);
         return undefined;
       }
 
       const gainPlantOption = new SelectOption('Gain 1 plant', () => {
         player.plants++;
-        this.logGainPlantAction(game, player);
+        this.logGainPlant(game, player);
         return undefined;
       })
 
@@ -51,7 +51,7 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
         return new OrOptions(
           new SelectOption('Add 2 microbes to ' + targetCard.name, () => {
             player.addResourceTo(targetCard, 2);
-            this.logAddMicrobeAction(game, player, targetCard);
+            this.logAddMicrobe(game, player, targetCard);
             return undefined;
           }),
           gainPlantOption
@@ -64,7 +64,7 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
           otherMicrobeCards,
           (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 2);
-              this.logAddMicrobeAction(game, player, foundCards[0]);
+              this.logAddMicrobe(game, player, foundCards[0]);
               return undefined;
           }
         ),
@@ -72,7 +72,7 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
       );
     }
 
-    private logAddMicrobeAction(game: Game, player: Player, card: ICard) {
+    private logAddMicrobe(game: Game, player: Player, card: ICard) {
       game.log(
         LogMessageType.DEFAULT,
         "${0} added 2 microbes to ${1}",
@@ -81,7 +81,7 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
       );
     }
 
-    private logGainPlantAction(game: Game, player: Player) {
+    private logGainPlant(game: Game, player: Player) {
       game.log(
         LogMessageType.DEFAULT,
         "${0} gained 1 plant using ${1}",

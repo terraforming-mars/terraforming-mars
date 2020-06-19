@@ -31,17 +31,17 @@ export class SymbioticFungus implements IActionCard, IProjectCard {
 
         if (availableCards.length === 1) {
             player.addResourceTo(availableCards[0]);
-            this.logAddMicrobeAction(game, player, availableCards[0]);
+            this.logAddMicrobe(game, player, availableCards[0]);
             return undefined;
         }
 
         return new SelectCard("Select card to add microbe", availableCards, (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0]);
-            this.logAddMicrobeAction(game, player, foundCards[0]);
+            this.logAddMicrobe(game, player, foundCards[0]);
             return undefined;
         });
     }
-    private logAddMicrobeAction(game: Game, player: Player, card: ICard) {
+    private logAddMicrobe(game: Game, player: Player, card: ICard) {
         game.log(
             LogMessageType.DEFAULT,
             "${0} added 1 microbe to ${1}",

@@ -31,23 +31,23 @@ export class ElectroCatapult implements IActionCard, IProjectCard {
             new SelectOption('Spend 1 plant to gain 7 mega credit', () => {
               player.plants--;
               player.megaCredits += 7;
-              this.logCardAction(game, player, Resources.PLANTS);
+              this.log(game, player, Resources.PLANTS);
               return undefined;
             }),
             new SelectOption('Spend 1 steel to gain 7 mega credit', () => {
               player.steel--;
               player.megaCredits += 7;
-              this.logCardAction(game, player, Resources.STEEL);
+              this.log(game, player, Resources.STEEL);
               return undefined;
             })
         );
       } else if (player.plants > 0) {
         player.plants--;
-        this.logCardAction(game, player, Resources.PLANTS);
+        this.log(game, player, Resources.PLANTS);
         player.megaCredits += 7;
       } else if (player.steel > 0) {
         player.steel--;
-        this.logCardAction(game, player, Resources.STEEL);
+        this.log(game, player, Resources.STEEL);
         player.megaCredits += 7;
       }
       return undefined;
@@ -60,7 +60,7 @@ export class ElectroCatapult implements IActionCard, IProjectCard {
       return 1;
     }
     
-    private logCardAction(game: Game, player: Player, resource: string) {
+    private log(game: Game, player: Player, resource: string) {
       game.log(
         LogMessageType.DEFAULT,
         "${0} spent 1 ${1} to gain 7 MC",

@@ -36,13 +36,13 @@ export class EosChasmaNationalPark implements IProjectCard {
 
     if (cards.length === 1) {
       player.addResourceTo(cards[0], 1);
-      this.logCardEffect(game, player, cards[0]);
+      this.log(game, player, cards[0]);
       return undefined;
     }
    
     return new SelectCard("Add 1 animal to a card",  cards, (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], 1);
-        this.logCardEffect(game, player, foundCards[0]);
+        this.log(game, player, foundCards[0]);
         return undefined;
     });
        
@@ -52,7 +52,7 @@ export class EosChasmaNationalPark implements IProjectCard {
     return 1;
   }
 
-  private logCardEffect(game: Game, player: Player, card: ICard) {
+  private log(game: Game, player: Player, card: ICard) {
     game.log(
       LogMessageType.DEFAULT,
       "${0} added 1 animal to ${1}",

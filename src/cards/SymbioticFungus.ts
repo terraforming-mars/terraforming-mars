@@ -1,4 +1,3 @@
-
 import { Tags } from "./Tags";
 import { IActionCard, ICard } from './ICard';
 import { IProjectCard } from "./IProjectCard";
@@ -8,9 +7,7 @@ import { CardType } from "./CardType";
 import { SelectCard } from "../inputs/SelectCard";
 import { ResourceType } from '../ResourceType';
 import { CardName } from '../CardName';
-import { LogMessageType } from "../LogMessageType";
-import { LogMessageData } from "../LogMessageData";
-import { LogMessageDataType } from "../LogMessageDataType";
+import { LogHelper } from "../components/LogHelper";
 
 export class SymbioticFungus implements IActionCard, IProjectCard {
     public cost: number = 4;
@@ -31,23 +28,15 @@ export class SymbioticFungus implements IActionCard, IProjectCard {
 
         if (availableCards.length === 1) {
             player.addResourceTo(availableCards[0]);
-            this.logAddMicrobe(game, player, availableCards[0]);
+            LogHelper.logAddResource(game, player, availableCards[0]);
             return undefined;
         }
 
         return new SelectCard("Select card to add microbe", availableCards, (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0]);
-            this.logAddMicrobe(game, player, foundCards[0]);
+            LogHelper.logAddResource(game, player, foundCards[0]);
             return undefined;
         });
-    }
-    private logAddMicrobe(game: Game, player: Player, card: ICard) {
-        game.log(
-            LogMessageType.DEFAULT,
-            "${0} added 1 microbe to ${1}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.CARD, card.name)
-        )
     }
 }
  

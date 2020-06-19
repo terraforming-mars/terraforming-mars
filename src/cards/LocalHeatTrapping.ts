@@ -12,9 +12,7 @@ import { SelectAmount } from "../inputs/SelectAmount";
 import { ICard } from './ICard';
 import { CardName } from '../CardName';
 import { Game } from "../Game";
-import { LogMessageType } from "../LogMessageType";
-import { LogMessageData } from "../LogMessageData";
-import { LogMessageDataType } from "../LogMessageDataType";
+import { LogHelper } from "../components/LogHelper";
 
 export class LocalHeatTrapping implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
@@ -38,11 +36,7 @@ export class LocalHeatTrapping implements IProjectCard {
 
         const gain4Plants = function () {
             player.plants += 4;
-            game.log(
-              LogMessageType.DEFAULT,
-              "${0} spent 5 heat to gain 4 plants",
-              new LogMessageData(LogMessageDataType.PLAYER, player.id)
-            )
+            LogHelper.logGainPlants(game, player, 4);
             return undefined;
         };
         if (otherAnimalCards.length === 0) {
@@ -53,7 +47,7 @@ export class LocalHeatTrapping implements IProjectCard {
               new SelectOption("Gain 4 plants", gain4Plants),
               new SelectOption("Add 2 animals to " + targetCard.name, () => {
                   player.addResourceTo(targetCard, 2);
-                  this.logGainAnimals(game, player, targetCard);
+                  LogHelper.logAddResource(game, player, targetCard, 2);
                   return undefined;
               }));
           } else {
@@ -61,7 +55,7 @@ export class LocalHeatTrapping implements IProjectCard {
               new SelectOption("Gain 4 plants", gain4Plants),
               new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<ICard>) => {
                   player.addResourceTo(foundCards[0], 2);
-                  this.logGainAnimals(game, player, foundCards[0]);
+                  LogHelper.logAddResource(game, player, foundCards[0], 2);
                   return undefined;
               }));
           };
@@ -108,12 +102,4 @@ export class LocalHeatTrapping implements IProjectCard {
         if (availableActions.options.length === 1) return availableActions.options[0].cb();
         return availableActions;
     }
-    private logGainAnimals(game: Game, player: Player, card: ICard) {
-      game.log(
-        LogMessageType.DEFAULT,
-        "${0} spent 5 heat to add 2 animals to ${1}",
-        new LogMessageData(LogMessageDataType.PLAYER, player.id),
-        new LogMessageData(LogMessageDataType.CARD, card.name)
-      );
-  }
 }

@@ -11,9 +11,7 @@ import { SelectCard } from "../inputs/SelectCard";
 import { PlayerInput } from "../PlayerInput";
 import { ResourceType } from '../ResourceType';
 import { CardName } from '../CardName';
-import { LogMessageType } from '../LogMessageType';
-import { LogMessageData } from '../LogMessageData';
-import { LogMessageDataType } from '../LogMessageDataType';
+import { LogHelper } from '../components/LogHelper';
 
 export class ImportedHydrogen implements IProjectCard {
     public cost: number = 16;
@@ -26,12 +24,9 @@ export class ImportedHydrogen implements IProjectCard {
         const availableAnimalCards = player.getResourceCards(ResourceType.ANIMAL);
 
         const gainPlants = function () {
-            player.plants += 3;
-            game.log(
-                LogMessageType.DEFAULT,
-                "${0} gained 3 plants",
-                new LogMessageData(LogMessageDataType.PLAYER, player.id)
-            )
+            const qty = 3;
+            player.plants += qty;
+            LogHelper.logGainPlants(game, player, qty);
             game.addOceanInterrupt(player);
             return undefined;
         };
@@ -49,14 +44,14 @@ export class ImportedHydrogen implements IProjectCard {
             const targetMicrobeCard = availableMicrobeCards[0];
             availableActions.push(new SelectOption("Add 3 microbes to " + targetMicrobeCard.name, () => {
                 player.addResourceTo(targetMicrobeCard, 3);
-                this.logGainResource(game, player, targetMicrobeCard, 3);
+                LogHelper.logAddResource(game, player, targetMicrobeCard, 3);
                 game.addOceanInterrupt(player);
                 return undefined;
             }))
         } else if (availableMicrobeCards.length > 1) {
             availableActions.push(new SelectCard("Add 3 microbes to a card", availableMicrobeCards, (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 3);
-                this.logGainResource(game, player, foundCards[0], 3);
+                LogHelper.logAddResource(game, player, foundCards[0], 3);
                 game.addOceanInterrupt(player);
                 return undefined;
             }))
@@ -66,32 +61,19 @@ export class ImportedHydrogen implements IProjectCard {
             const targetAnimalCard = availableAnimalCards[0];
             availableActions.push(new SelectOption("Add 2 animals to " + targetAnimalCard.name, () => {
                 player.addResourceTo(targetAnimalCard, 2);
-                this.logGainResource(game, player, targetAnimalCard, 2);
+                LogHelper.logAddResource(game, player, targetAnimalCard, 2);
                 game.addOceanInterrupt(player);
                 return undefined;
             }))
         } else if (availableAnimalCards.length > 1) {
             availableActions.push(new SelectCard("Add 2 animals to a card", availableAnimalCards, (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 2);
-                this.logGainResource(game, player, foundCards[0], 2);
+                LogHelper.logAddResource(game, player, foundCards[0], 2);
                 game.addOceanInterrupt(player);
                 return undefined;
             }))
         }
 
         return new OrOptions(...availableActions);   
-    }
-
-    private logGainResource(game: Game, player: Player, card: ICard, qty: number) {
-        let resource = card.resourceType === ResourceType.MICROBE ? "microbes" : "animals";
-
-        game.log(
-          LogMessageType.DEFAULT,
-          "${0} added ${1} ${2} to ${3}",
-          new LogMessageData(LogMessageDataType.PLAYER, player.id),
-          new LogMessageData(LogMessageDataType.STRING, qty.toString()),
-          new LogMessageData(LogMessageDataType.STRING, resource),
-          new LogMessageData(LogMessageDataType.CARD, card.name)
-        );
     }
 }

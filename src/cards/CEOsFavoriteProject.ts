@@ -1,5 +1,4 @@
 import {ICard} from './ICard';
-
 import {IProjectCard} from './IProjectCard';
 import {CardType} from './CardType';
 import {Player} from '../Player';
@@ -7,9 +6,7 @@ import {Tags} from './Tags';
 import {SelectCard} from '../inputs/SelectCard';
 import { CardName } from '../CardName';
 import { Game } from '../Game';
-import { LogMessageType } from '../LogMessageType';
-import { LogMessageData } from '../LogMessageData';
-import { LogMessageDataType } from '../LogMessageDataType';
+import { LogHelper } from '../components/LogHelper';
 
 export class CEOsFavoriteProject implements IProjectCard {
     public cost: number = 1;
@@ -27,18 +24,9 @@ export class CEOsFavoriteProject implements IProjectCard {
           player.getCardsWithResources(),
           (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0]);
-            this.log(game, player, foundCards[0]);
+            LogHelper.logAddResource(game, player, foundCards[0]);
             return undefined;
           }
-      );
-    }
-
-    private log(game: Game, player: Player, card: ICard) {
-      game.log(
-        LogMessageType.DEFAULT,
-        "${0} added 1 resource to ${1}",
-        new LogMessageData(LogMessageDataType.PLAYER, player.id),
-        new LogMessageData(LogMessageDataType.CARD, card.name)
       );
     }
 }

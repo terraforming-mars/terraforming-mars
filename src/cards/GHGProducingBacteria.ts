@@ -9,9 +9,7 @@ import { OrOptions } from "../inputs/OrOptions";
 import { ResourceType } from "../ResourceType";
 import { SelectOption } from "../inputs/SelectOption";
 import { CardName } from '../CardName';
-import { LogMessageType } from '../LogMessageType';
-import { LogMessageData } from '../LogMessageData';
-import { LogMessageDataType } from '../LogMessageDataType';
+import { LogHelper } from '../components/LogHelper';
 
 export class GHGProducingBacteria implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 8;
@@ -34,32 +32,19 @@ export class GHGProducingBacteria implements IActionCard, IProjectCard, IResourc
             return new OrOptions(
                 new SelectOption("Remove 2 microbes to raise temperature 1 step", () => {
                     player.removeResourceFrom(this,2);
-                    game.log(
-                        LogMessageType.DEFAULT,
-                        "${0} removed 2 microbes from ${1} to raise temperature 1 step",
-                        new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                        new LogMessageData(LogMessageDataType.CARD, this.name)
-                    )
+                    LogHelper.logRemoveResource(game, player, this, 2, "raise temperature 1 step");
                     return game.increaseTemperature(player, 1);
                 }),
                 new SelectOption("Add 1 microbe to this card", () => {
                     this.resourceCount++;
-                    this.logAddMicrobe(game, player);
+                    LogHelper.logAddResource(game, player, this);
                     return undefined;
                 })
             );
         }
 
         this.resourceCount++;
-        this.logAddMicrobe(game, player);
+        LogHelper.logAddResource(game, player, this);
         return undefined;
-    }
-    private logAddMicrobe(game: Game, player: Player) {
-        game.log(
-            LogMessageType.DEFAULT,
-            "${0} removed 2 microbes from ${1} to raise oxygen level 1 step",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.CARD, this.name)
-        )
     }
 }

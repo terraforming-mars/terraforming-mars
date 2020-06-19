@@ -8,9 +8,7 @@ import { Resources } from "../Resources";
 import { ResourceType } from '../ResourceType';
 import { CardName } from '../CardName';
 import { Game } from '../Game';
-import { LogMessageType } from '../LogMessageType';
-import { LogMessageData } from '../LogMessageData';
-import { LogMessageDataType } from '../LogMessageDataType';
+import { LogHelper } from '../components/LogHelper';
 
 export class AerobrakedAmmoniaAsteroid implements IProjectCard {
     public cost: number = 26;
@@ -27,7 +25,7 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
 
       if (cardsToPick.length === 1) {
         player.addResourceTo(cardsToPick[0], 2);
-        this.log(game, player, cardsToPick[0]);
+        LogHelper.logAddResource(game, player, cardsToPick[0], 2);
         return undefined;
       }
 
@@ -35,18 +33,9 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
           'Select card to add 2 microbes', cardsToPick,
           (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0], 2);
-            this.log(game, player, foundCards[0]);
+            LogHelper.logAddResource(game, player, foundCards[0], 2);
             return undefined;
           }
-      );
-    }
-
-    private log(game: Game, player: Player, card: ICard) {
-      game.log(
-        LogMessageType.DEFAULT,
-        "${0} added 2 microbes to ${1}",
-        new LogMessageData(LogMessageDataType.PLAYER, player.id),
-        new LogMessageData(LogMessageDataType.CARD, card.name)
       );
     }
 }

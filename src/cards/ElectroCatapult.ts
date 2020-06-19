@@ -65,7 +65,7 @@ export class ElectroCatapult implements IActionCard, IProjectCard {
         LogMessageType.DEFAULT,
         "${0} spent 1 ${1} to gain 7 MC",
         new LogMessageData(LogMessageDataType.PLAYER, player.id),
-        new LogMessageData(LogMessageDataType.STRING, resource)
+        new LogMessageData(LogMessageDataType.STRING, resource.slice(0, -1))
       );
     }
 }

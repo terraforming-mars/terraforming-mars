@@ -20,7 +20,7 @@ export class DeimosDownPromo implements IProjectCard {
       game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 6);
       player.steel += 4;
 
-      const availableSpaces = game.board.getAvailableSpacesOnLand(player);
+      const availableSpaces = game.board.getAvailableSpacesForCity(player);
       if (availableSpaces.length < 1) return undefined;
       
       return new SelectSpace("Select space for tile", availableSpaces, (foundSpace: ISpace) => {

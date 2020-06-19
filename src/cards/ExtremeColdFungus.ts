@@ -10,6 +10,9 @@ import {SelectCard} from '../inputs/SelectCard';
 import {IProjectCard} from './IProjectCard';
 import { ResourceType } from '../ResourceType';
 import { CardName } from '../CardName';
+import { LogMessageType } from '../LogMessageType';
+import { LogMessageData } from '../LogMessageData';
+import { LogMessageDataType } from '../LogMessageDataType';
 
 export class ExtremeColdFungus implements IActionCard, IProjectCard {
     public cost: number = 13;
@@ -27,16 +30,18 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
     public canAct(): boolean {
       return true;
     }
-    public action(player: Player) {
+    public action(player: Player, game: Game) {
       const otherMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
 
       if (otherMicrobeCards.length === 0) {
         player.plants++;
+        this.logGainPlantAction(game, player);
         return undefined;
       }
 
       const gainPlantOption = new SelectOption('Gain 1 plant', () => {
         player.plants++;
+        this.logGainPlantAction(game, player);
         return undefined;
       })
 
@@ -46,6 +51,7 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
         return new OrOptions(
           new SelectOption('Add 2 microbes to ' + targetCard.name, () => {
             player.addResourceTo(targetCard, 2);
+            this.logAddMicrobeAction(game, player, targetCard);
             return undefined;
           }),
           gainPlantOption
@@ -58,10 +64,29 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
           otherMicrobeCards,
           (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 2);
+              this.logAddMicrobeAction(game, player, foundCards[0]);
               return undefined;
           }
         ),
         gainPlantOption
+      );
+    }
+
+    private logAddMicrobeAction(game: Game, player: Player, card: ICard) {
+      game.log(
+        LogMessageType.DEFAULT,
+        "${0} added 2 microbes to ${1}",
+        new LogMessageData(LogMessageDataType.PLAYER, player.id),
+        new LogMessageData(LogMessageDataType.CARD, card.name)
+      );
+    }
+
+    private logGainPlantAction(game: Game, player: Player) {
+      game.log(
+        LogMessageType.DEFAULT,
+        "${0} gained 1 plant using ${1}",
+        new LogMessageData(LogMessageDataType.PLAYER, player.id),
+        new LogMessageData(LogMessageDataType.CARD, this.name)
       );
     }
 }

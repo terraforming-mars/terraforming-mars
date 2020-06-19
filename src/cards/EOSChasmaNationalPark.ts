@@ -9,6 +9,9 @@ import {SelectCard} from '../inputs/SelectCard';
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 import { ResourceType } from '../ResourceType';
+import { LogMessageType } from '../LogMessageType';
+import { LogMessageData } from '../LogMessageData';
+import { LogMessageDataType } from '../LogMessageDataType';
 
 
 export class EosChasmaNationalPark implements IProjectCard {
@@ -24,7 +27,7 @@ export class EosChasmaNationalPark implements IProjectCard {
     );
   }
 
-  public play(player: Player) {
+  public play(player: Player, game: Game) {
     const cards = player.getResourceCards(ResourceType.ANIMAL);
     player.plants += 3;
     player.setProduction(Resources.MEGACREDITS,2);
@@ -33,11 +36,13 @@ export class EosChasmaNationalPark implements IProjectCard {
 
     if (cards.length === 1) {
       player.addResourceTo(cards[0], 1);
+      this.logCardEffect(game, player, cards[0]);
       return undefined;
     }
    
     return new SelectCard("Add 1 animal to a card",  cards, (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], 1);
+        this.logCardEffect(game, player, foundCards[0]);
         return undefined;
     });
        
@@ -47,4 +52,12 @@ export class EosChasmaNationalPark implements IProjectCard {
     return 1;
   }
 
+  private logCardEffect(game: Game, player: Player, card: ICard) {
+    game.log(
+      LogMessageType.DEFAULT,
+      "${0} added 1 animal to ${1}",
+      new LogMessageData(LogMessageDataType.PLAYER, player.id),
+      new LogMessageData(LogMessageDataType.CARD, card.name)
+    );
+  }
 }

@@ -12,6 +12,9 @@ import { SelectAmount } from "../inputs/SelectAmount";
 import { ICard } from './ICard';
 import { CardName } from '../CardName';
 import { Game } from "../Game";
+import { LogMessageType } from "../LogMessageType";
+import { LogMessageData } from "../LogMessageData";
+import { LogMessageDataType } from "../LogMessageDataType";
 
 export class LocalHeatTrapping implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
@@ -29,12 +32,17 @@ export class LocalHeatTrapping implements IProjectCard {
 
         return player.heat >= requiredHeatAmt || (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCorporation() * 2) + player.heat >= 5 );
     }
-    public play(player: Player) {
+    public play(player: Player, game: Game) {
         const animalCards: Array<ICard> = player.getResourceCards(ResourceType.ANIMAL);
         let availableActions = new OrOptions();
 
         const gain4Plants = function () {
             player.plants += 4;
+            game.log(
+              LogMessageType.DEFAULT,
+              "${0} spent 5 heat to gain 4 plants",
+              new LogMessageData(LogMessageDataType.PLAYER, player.id)
+            )
             return undefined;
         };
 
@@ -43,11 +51,13 @@ export class LocalHeatTrapping implements IProjectCard {
         if (animalCards.length === 1) {
           availableActions.options.push(new SelectOption("Add 2 animals to " + animalCards[0].name, () => {
             player.addResourceTo(animalCards[0], 2);
+            this.logAddAnimals(game, player, animalCards[0]);
             return undefined;
           }));
         } else if (animalCards.length > 1) {
           availableActions.options.push(new SelectCard("Select card to add 2 animals", animalCards, (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0], 2);
+            this.logAddAnimals(game, player, foundCards[0]);
             return undefined;
           }));
         }
@@ -93,5 +103,14 @@ export class LocalHeatTrapping implements IProjectCard {
         
         if (availableActions.options.length === 1) return availableActions.options[0].cb();
         return availableActions;
+    }
+
+    private logAddAnimals(game: Game, player: Player, card: ICard) {
+      game.log(
+        LogMessageType.DEFAULT,
+        "${0} spent 5 heat to add 2 animals to ${1}",
+        new LogMessageData(LogMessageDataType.PLAYER, player.id),
+        new LogMessageData(LogMessageDataType.CARD, card.name)
+      );
     }
 }

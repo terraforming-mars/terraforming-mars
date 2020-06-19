@@ -9,6 +9,9 @@ import { SelectCard } from "../inputs/SelectCard";
 import { ResourceType } from '../ResourceType';
 import { CardName } from '../CardName';
 import { Game } from '../Game';
+import { LogMessageType } from '../LogMessageType';
+import { LogMessageData } from '../LogMessageData';
+import { LogMessageDataType } from '../LogMessageDataType';
 
 export class ImportedNitrogen implements IProjectCard {
     public cost: number = 23;
@@ -32,22 +35,39 @@ export class ImportedNitrogen implements IProjectCard {
                 () => this.giveResources(player, game),
                 new SelectCard("Select card to add 3 microbes", otherMicrobeCards, (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], 3);
+                    this.logGainResourcesEffect(game, player, foundCards[0], 3);
                     return undefined;
                 }),
                 new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], 2);
+                    this.logGainResourcesEffect(game, player, foundCards[0], 2);
                     return undefined;
                 })
             );
         } else if (otherAnimalCards.length > 0) {
             return new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 2);
+                this.logGainResourcesEffect(game, player, foundCards[0], 2);
                 return this.giveResources(player, game);
             });
         }
         return new SelectCard("Select card to add 3 microbes", otherMicrobeCards, (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0], 3);
+            this.logGainResourcesEffect(game, player, foundCards[0], 3);
             return this.giveResources(player, game);
         });
+    }
+
+    private logGainResourcesEffect(game: Game, player: Player, card: ICard, qty: number) {
+        let resource = card.resourceType === ResourceType.MICROBE ? "microbes" : "animals";
+
+        game.log(
+          LogMessageType.DEFAULT,
+          "${0} added ${1} ${2} to ${3}",
+          new LogMessageData(LogMessageDataType.PLAYER, player.id),
+          new LogMessageData(LogMessageDataType.STRING, qty.toString()),
+          new LogMessageData(LogMessageDataType.STRING, resource),
+          new LogMessageData(LogMessageDataType.CARD, card.name)
+        );
     }
 }

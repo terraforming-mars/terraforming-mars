@@ -14,6 +14,12 @@
     "Yellow": "黄色",
     "Blue": "蓝色",
     "Black": "黑色",
+    "Login": "登录",
+    "Register": "注册",
+    "Go To Register": "前往注册",
+    "My Games": "我的对局",
+    "Donate": "捐助本站",
+    "LoginOut": "登出",
 
     "original": "基础版图",
     "hellas": "hellas版图",

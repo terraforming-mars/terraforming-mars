@@ -6,7 +6,7 @@ import { VictoryPointsBreakdown } from "../VictoryPointsBreakdown";
 import { ITagCount } from "../ITagCount";
 import { TurmoilModel } from "./TurmoilModel";
 import { IProjectCard } from "../cards/IProjectCard";
-import { CorporationCard } from '../cards/corporation/CorporationCard';
+import { CorporationCard } from "../cards/corporation/CorporationCard";
 // import { LogMessage } from "../LogMessage";
 import { Phase } from "../Phase";
 import { PlayerInputModel } from "./PlayerInputModel";
@@ -66,4 +66,5 @@ export interface PlayerModel {
     initialDraft: boolean;
     undoing :boolean;
     waitingFor :PlayerInputModel;
+    deckLen?: number;
 }

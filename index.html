@@ -15,6 +15,10 @@
                 <player-home v-if="screen === 'player-home'" :player="player" :key="playerkey"></player-home>
                 <game-end v-if="screen === 'the-end'" :player="player" :game="game"></game-end>
                 <games-overview v-if="screen === 'games-overview'"></games-overview>
+                <login v-if="screen === 'login'"></login>
+                <my-games v-if="screen === 'my-games'"></my-games>
+                <register v-if="screen === 'register'"></register>
+                <donate v-if="screen === 'donate'"></donate>
             </div>
 
         </div>

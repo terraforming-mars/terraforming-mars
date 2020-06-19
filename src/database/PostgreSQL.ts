@@ -170,4 +170,11 @@ export class PostgreSQL implements IDatabase {
             }
         });
     }
+
+    saveUser(_id: string, _name: string, _password: string): void {
+        throw new Error("Method not implemented.");
+    }
+    getUsers(_cb: (err: any, allUsers: import("../User").User[]) => void): void {
+        throw new Error("Method not implemented.");
+    }
 }

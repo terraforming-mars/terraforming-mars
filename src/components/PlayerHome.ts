@@ -36,7 +36,10 @@ export const PlayerHome = Vue.component("player-home", {
         "turmoil": Turmoil
     },
     data: function () {
-        return {soundtip: false}
+        return {
+            soundtip: false,
+            userName: ""
+        }
     },
     mixins: [PlayerMixin],
     methods: {
@@ -71,6 +74,7 @@ export const PlayerHome = Vue.component("player-home", {
     created() {
         if(window.localStorage){
             this.soundtip = window.localStorage.getItem("soundtip") === "1";
+            this.userName = window.localStorage.getItem("userName") || "";
         }
     },
     mounted: function () {
@@ -78,7 +82,10 @@ export const PlayerHome = Vue.component("player-home", {
     },
     template: `
         <div id="player-home">
-           <h2 :class="'game-title player_color_'+ player.color"><a :href="'/game?id='+ player.gameId" v-i18n>Terraforming Mars</a></h2>
+            <h2 :class="'game-title player_color_'+ player.color">
+                <a :href="'/game?id='+ player.gameId" v-i18n>Terraforming Mars</a>
+                <a :href="'mygames'" v-if="userName">- {{userName}}</a>
+            </h2>
             <section>
                 <dialog id="dialog-default">
                     <form method="dialog">
@@ -151,7 +158,13 @@ export const PlayerHome = Vue.component("player-home", {
                         </div>
                     </div>
                 </div>
-
+                <div class="tag-display tags_item_cont" :class="'tag-display-vp'">
+                    <div>
+                        <div class="resource card" style="margin-left: -5px; transform: scale(0.8);top: -15px"></div>
+                        <div class="resource card" style="margin: 0px 0px 0px -30px; transform: scale(0.8);box-sizing: content-box;top: -15px"></div>
+                        <div class="deck-len">{{player.deckLen}}</div>
+                    </div>
+                </div>
                 <div class="player_home_block player_home_block--resources nofloat">
                     <player-resources :player="player" v-trim-whitespace></player-resources>
                 </div>

@@ -33,11 +33,16 @@ import { FundedAwardModel } from "./src/models/FundedAwardModel";
 import { Database } from "./src/database/Database";
 import { PartyModel, DelegatesModel, TurmoilModel } from "./src/models/TurmoilModel";
 import { SelectDelegate } from "./src/inputs/SelectDelegate";
+import { User } from "./src/User";
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync("styles.css");
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
+const userIdMap: Map<string, User> = new Map<string, User>();
+const userNameMap: Map<string, User> = new Map<string, User>();
+const usersToGames: Map<string, Array<string>> = new Map<string, Array<string>>();
+const colorNames = ["Blue", "Red", "Yellow", "Green", "Black", "Purple", "You"];
 
 function requestHandler(
     req: http.IncomingMessage,
@@ -59,7 +64,11 @@ function requestHandler(
         req.url.startsWith("/game?id=") ||
         req.url.startsWith("/player?id=") ||
         req.url.startsWith("/the-end?id=") ||
-        req.url.startsWith("/load")
+        req.url.startsWith("/load") ||
+        req.url.startsWith("/login") ||
+        req.url.startsWith("/register") ||
+        req.url.startsWith("/mygames") ||
+        req.url.startsWith("/donate") 
       ) {
         serveApp(res);
       } else if (req.url.startsWith("/api/player?id=")) {
@@ -81,6 +90,8 @@ function requestHandler(
         serveAsset(req, res);
       } else if (req.url.startsWith("/api/games")) {
         apiGetGames(req, res);
+      } else if (req.url.startsWith("/api/mygames")) {
+        apiGetMyGames(req, res);
       } else if (req.url.indexOf("/api/gameback") === 0) {
         apiGameBack(req, res);
       } else if (req.url.indexOf("/api/gamedelete") === 0) {
@@ -96,18 +107,27 @@ function requestHandler(
       createGame(req, res);
     } else if (req.method === "PUT" && req.url.indexOf("/load") === 0) {
       loadGame(req, res);
-    } else if (
-      req.method === "POST" &&
-      req.url.indexOf("/player/input?id=") === 0
-    ) {
-      const playerId: string = req.url.substring("/player/input?id=".length);
+    } else if (req.method === "POST" && req.url.indexOf("/login") === 0) {
+      login(req, res);
+    } else if (req.method === "PUT" && req.url.indexOf("/register") === 0) {
+      register(req, res);
+    } else if (req.method === "POST" && req.url.indexOf("/player/input?id=") === 0) {
+      const qs: string = req.url.substring("/player/input?".length);
+      let queryParams = querystring.parse(qs);
+      const playerId = (queryParams as any)["id"];
+      const userId = (queryParams as any)["userId"];
       const game = playersToGame.get(playerId);
-      if (game === undefined) {
+      if (game === undefined || games.get(game.id) === undefined) {
         notFound(req, res);
         return;
       }
       const player = game.getPlayers().find((p) => p.id === playerId);
       if (player === undefined) {
+        notFound(req, res);
+        return;
+      }
+      let user = userNameMap.get(player.name);
+      if(user !== undefined && user.id !== userId){
         notFound(req, res);
         return;
       }
@@ -145,7 +165,7 @@ function processInput(
       const entity = JSON.parse(body);
       player.process(game, entity);
       res.setHeader("Content-Type", "application/json");
-      res.write(getPlayer(player, game));
+      res.write(getPlayer(player, game, false));
       res.end();
     } catch (err) {
       res.writeHead(400, {
@@ -215,6 +235,73 @@ function apiGetGames(req: http.IncomingMessage, res: http.ServerResponse): void 
 
 }
 
+function apiGetMyGames(req: http.IncomingMessage, res: http.ServerResponse): void {
+
+  const routeRegExp: RegExp = /^\/api\/mygames\?id\=([0-9abcdef]+).*?$/i;
+
+  if (req.url === undefined) {
+    console.warn("url not defined");
+    notFound(req, res);
+    return;
+  }
+
+  if (!routeRegExp.test(req.url)) {
+    console.warn("no match with regexp");
+    notFound(req, res);
+    return;
+  }
+
+  const matches = req.url.match(routeRegExp);
+
+  if (matches === null || matches[1] === undefined) {
+    console.warn("didn't find user id");
+    notFound(req, res);
+    return;
+  }
+
+  const userId: string = matches[1];
+
+  const user = userIdMap.get(userId);
+
+  if (user === undefined) {
+    console.warn("user is undefined");
+    notFound(req, res);
+    return;
+  }
+  let gameids = usersToGames.get(user.id);
+  let mygames: Array<any> = [];
+  if(gameids !== undefined && gameids.length > 0){
+    gameids.forEach((id) =>{
+      let game =  games.get(id);
+      if(game !== undefined){
+        mygames.push({
+          activePlayer: game.activePlayer.color,
+          id: game.id,
+          phase: game.phase,
+          players: game.getPlayers().map(player => {
+            return {
+              id: player.id,
+              name: player.name,
+              color: player.color
+            }
+          }),
+          createtime: game.createtime?.slice(5,16),
+          updatetime: game.updatetime?.slice(5,16),
+          gameAge: game.gameAge,
+          saveId: game.lastSaveId
+        });
+      }
+    })
+  }
+  mygames.sort((a : any,b:any) => {
+    return a.updatetime > b.updatetime ? -1 : (a.updatetime === b.updatetime ? 0 : 1 )
+  })
+  res.setHeader("Content-Type", "application/json");
+  res.write(JSON.stringify(mygames));
+  res.end();
+
+}
+
 function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
   let body = "";
   req.on("data", function(data) {
@@ -250,6 +337,16 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 }
 
 function loadAllGames(): void {
+  Database.getInstance().getUsers(function (err, allUser) {
+    if (err) {
+      return;
+    }
+    allUser.forEach((user)=> {
+      userIdMap.set(user.id, user);
+      userNameMap.set(user.name, user);
+    });
+  });
+
   Database.getInstance().getGames(function (err, allGames) {
     if (err) {
       return;
@@ -267,10 +364,22 @@ function loadAllGames(): void {
         games.set(gameToRebuild.id, gameToRebuild);
         gameToRebuild.getPlayers().forEach((player) => {
           playersToGame.set(player.id, gameToRebuild);
+          const user = userNameMap.get(player.name);
+          if(user !== undefined ){
+            let gameids = usersToGames.get(user.id);
+            if(gameids !== undefined){
+              gameids.push(gameToRebuild.id);
+            }else{
+              gameids = [];
+              gameids.push(gameToRebuild.id);
+              usersToGames.set(user.id,gameids);
+            }
+          }
         });
       });
     });
   });
+
 }
 
 function apiGameBack(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -397,7 +506,7 @@ function apiGetWaitingFor(
   const playerId = (queryParams as any)["id"];
   const prevGameAge = parseInt((queryParams as any)["prev-game-age"]);
   const game = playersToGame.get(playerId);
-  if (game === undefined) {
+  if (game === undefined || games.get(game.id) === undefined) {
     notFound(req, res);
     return;
   }
@@ -425,9 +534,12 @@ function apiGetPlayer(
     req: http.IncomingMessage,
     res: http.ServerResponse
 ): void {
-  const playerId: string = req.url!.substring("/api/player?id=".length);
+  const qs: string = req.url!.substring("/api/player?".length);
+  let queryParams = querystring.parse(qs);
+  const playerId = (queryParams as any)["id"];
+  const userId = (queryParams as any)["userId"];
   const game = playersToGame.get(playerId);
-  if (game === undefined) {
+  if (game === undefined || games.get(game.id) === undefined) {
     notFound(req, res);
     return;
   }
@@ -436,9 +548,13 @@ function apiGetPlayer(
     notFound(req, res);
     return;
   }
-
+  let block = false;
+  let user = userNameMap.get(player.name);
+  if(user !== undefined && user.id !== userId){
+    block = true;
+  }
   res.setHeader("Content-Type", "application/json");
-  res.write(getPlayer(player, game));
+  res.write(getPlayer(player, game, block));
   res.end();
 }
 
@@ -484,6 +600,17 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       games.set(gameId, game);
       game.getPlayers().forEach((player) => {
         playersToGame.set(player.id, game);
+        const user = userNameMap.get(player.name);
+        if(user !== undefined ){
+          let gameids = usersToGames.get(user.id);
+          if(gameids !== undefined){
+            gameids.push(game.id);
+          }else{
+            gameids = [];
+            gameids.push(game.id);
+            usersToGames.set(user.id,gameids);
+          }
+        }
       });
       res.setHeader("Content-Type", "application/json");
       res.write(getGame(game));
@@ -491,6 +618,76 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       console.warn("error creating game", err);
       res.writeHead(500);
       res.write("Unable to create game");
+    }
+    res.end();
+  });
+}
+
+
+function login(req: http.IncomingMessage, res: http.ServerResponse): void {
+  let body = "";
+  req.on("data", function(data) {
+    body += data.toString();
+  });
+  req.once("end", function() {
+    try {
+      const userReq = JSON.parse(body);
+      const userName: string = userReq.userName;
+      const password: string = userReq.password;
+      if(userName === undefined || userName.length <= 2 ){
+        throw new Error("UserName must not be empty and  be long than 2")
+      }
+      const  user = userNameMap.get(userName);
+      if(user === undefined){
+        throw new Error("User not exists ");
+      }
+      if(password === undefined || password.length <= 2 ){
+        throw new Error("Password must not be empty and  be long than 2");
+      }
+      if(password !==  user.password){
+        throw new Error("Password error");
+      }
+      res.setHeader("Content-Type", "application/json");
+      res.write(JSON.stringify({id: user.id, name: user.name}));
+    } catch (err) {
+      console.warn("error login", err);
+      res.writeHead(500);
+      res.write("Unable to login: "+err.message);
+    }
+    res.end();
+  });
+}
+
+function register(req: http.IncomingMessage, res: http.ServerResponse): void {
+  let body = "";
+  req.on("data", function(data) {
+    body += data.toString();
+  });
+  req.once("end", function() {
+    try {
+      const userReq = JSON.parse(body);
+      const userId = generateRandomGameId();
+      const userName: string = userReq.userName;
+      const password: string = userReq.password;
+      if(userName === undefined || userName.length <= 2 ){
+        throw new Error("UserName must not be empty and  be long than 2")
+      }
+      if(userNameMap.get(userName ) !== undefined || colorNames.indexOf(userName) > -1){
+        throw new Error("User name already exists, please use another name ");
+      }
+      if(password === undefined || password.length <= 2 ){
+        throw new Error("Password must not be empty and  be long than 2");
+      }
+      Database.getInstance().saveUser(userId, userName, password);
+      const user : User = new User(userName, password, userId);
+      userNameMap.set(userName, user);
+      userIdMap.set(userId, user);
+      res.setHeader("Content-Type", "application/json");
+      res.write("success");
+    } catch (err) {
+      console.warn("error register user", err);
+      res.writeHead(500);
+      res.write("Unable to register user: "+err.message);
     }
     res.end();
   });
@@ -530,9 +727,9 @@ function getAwards(game: Game): Array<FundedAwardModel>  {
   return awardModels;
 }
 
-function getPlayer(player: Player, game: Game): string {
+function getPlayer(player: Player, game: Game, block: boolean): string {
   const output = {
-    cardsInHand: getCards(player, player.cardsInHand, game),
+    cardsInHand: block? []: getCards(player, player.cardsInHand, game),
     draftedCards: getCards(player, player.draftedCards, game),
     milestones: getMilestones(game),
     awards: getAwards(game),
@@ -568,7 +765,7 @@ function getPlayer(player: Player, game: Game): string {
     titaniumProduction: player.getProduction(Resources.TITANIUM),
     titaniumValue: player.getTitaniumValue(game),
     victoryPointsBreakdown: player.getVictoryPoints(game),
-    waitingFor: getWaitingFor(player.getWaitingFor()),
+    waitingFor: block? undefined: getWaitingFor(player.getWaitingFor()),
     gameLog: game.gameLog,
     isSoloModeWin: game.isSoloModeWin(),
     gameAge: game.gameAge,
@@ -589,7 +786,8 @@ function getPlayer(player: Player, game: Game): string {
     gameId : game.id,
     dealtCorporationCards: player.dealtCorporationCards,
     dealtPreludeCards: player.dealtPreludeCards,
-    initialDraft: game.initialDraft
+    initialDraft: game.initialDraft,
+    deckLen: game.dealer.deck.length
   } as PlayerModel;
   try{
     return JSON.stringify(output);
@@ -919,14 +1117,7 @@ function getGame(game: Game): string {
     saveId: game.lastSaveId
   };
   
-  return JSON.stringify(output,replacer);
-}
-
-function replacer(_key: any, value: any) {
-  if(value instanceof Player ){
-    return  {id: value.id, name: value.name, color: value.color};
-  }
-  return value;
+  return JSON.stringify(output);
 }
 
 function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {

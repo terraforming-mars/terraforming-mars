@@ -127,7 +127,12 @@ export const CreateGameForm = Vue.component("create-game-form", {
             component.players.forEach((player) => {
                 if (player.name === "") {
                     if (isSoloMode) {
-                        player.name = "You";
+                        const userName = localStorage.getItem("userName") || "";
+                        if( userName.length > 0){
+                            player.name = userName;
+                        }else{
+                            player.name = "You";
+                        }
                     } else {
                         const defaultPlayerName = player.color.charAt(0).toUpperCase() + player.color.slice(1);
                         player.name = defaultPlayerName;

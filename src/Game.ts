@@ -1429,7 +1429,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public log(type: LogMessageType, message: string, ...data: LogMessageData[]) {
       this.gameLog.push(new LogMessage(type, message, data));
       this.gameAge++;
-      if (this.gameLog.length > 50 ) {
+      if (this.gameLog.length > 100 ) {
         (this.gameLog.shift());
       }
     }

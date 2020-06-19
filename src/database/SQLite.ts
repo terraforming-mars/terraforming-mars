@@ -3,6 +3,7 @@ import {Game} from "../Game";
 import { IGameData } from "./IDatabase";
 
 import sqlite3 = require("sqlite3");
+import { User } from "../User";
 const path = require("path");
 const fs = require("fs");
 const dbFolder = path.resolve(__dirname, "../../../db")
@@ -17,7 +18,8 @@ export class SQLite implements IDatabase {
             fs.mkdirSync(dbFolder);
         }
         this.db = new sqlite3.Database(dbPath);
-        this.db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, status text default 'running',createtime timestamp default current_timestamp, PRIMARY KEY (game_id, save_id))");
+        this.db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, status text default 'running',createtime timestamp default (datetime(CURRENT_TIMESTAMP,'localtime')), PRIMARY KEY (game_id, save_id))");
+        this.db.run("CREATE TABLE IF NOT EXISTS 'users'('id'  varchar NOT NULL,'name'  varchar NOT NULL,'password'  varchar NOT NULL,'createtime'  timestamp DEFAULT (datetime(CURRENT_TIMESTAMP,'localtime')),PRIMARY KEY ('id'))");
     }
 
     getClonableGames( cb:(err: any, allGames:Array<IGameData>)=> void) {
@@ -146,6 +148,28 @@ export class SQLite implements IDatabase {
             if (err) {
                 //Should be a duplicate, does not matter
                 return;  
+            }
+        });
+    }
+
+    saveUser(id: string, name: string, password: string): void {
+        // Insert user
+        this.db.run("INSERT INTO users(id, name, password) VALUES(?, ?, ?)", [id, name, password], function(err: { message: any; }) {
+            if (err) {
+                return console.error(err);  
+            }
+        });
+    }
+
+    getUsers(cb:(err: any, allUsers:Array<User>)=> void): void {
+        var allUsers:Array<User> = [];
+        var sql: string = "SELECT distinct id, name, password FROM users "; 
+        this.db.all(sql, [], (err, rows) => {
+            if (rows) {
+                rows.forEach((row) => {
+                    allUsers.push( {id: row.id, name: row.name, password: row.password} as User);
+                });
+                return cb(err, allUsers);
             }
         });
     }

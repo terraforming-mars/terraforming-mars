@@ -92,7 +92,12 @@ export const WaitingFor = Vue.component("waiting-for", {
         }
         const input = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
             const xhr = new XMLHttpRequest();
-            xhr.open("POST", "/player/input?id=" + (this.$parent as any).player.id);
+            let userId = window.localStorage.getItem("userId") || "";
+            let url = "/player/input?id=" + (this.$parent as any).player.id;
+            if(userId.length > 0){
+                url += "&userId=" + userId;
+            }
+            xhr.open("POST", url);
             xhr.responseType = "json";
             xhr.onload = () => {
                 if (xhr.status === 200) {

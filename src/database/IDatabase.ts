@@ -1,4 +1,5 @@
 import {Game} from "../Game";
+import { User } from "../User";
 
 export interface IGameData {
     gameId: string;
@@ -15,4 +16,6 @@ export interface IDatabase {
     getGames(cb:(err: any, allGames:Array<string>) => void): void;
     restoreReferenceGame(game_id:string, game: Game, cb:(err: any) => void): void;
     getClonableGames( cb:(err: any, allGames:Array<IGameData>)=> void) : void;
+    saveUser(id: string, name: string, password: string): void ;
+    getUsers(cb:(err: any, allUsers:Array<User>)=> void): void ;
 }

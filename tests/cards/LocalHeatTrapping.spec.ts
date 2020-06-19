@@ -29,11 +29,13 @@ describe("LocalHeatTrapping", function () {
     it("Should play - single animal target", function () {
         const card = new LocalHeatTrapping();
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player,player], player);
+        
         player.heat = 5;
         const pets = new Pets();
         player.playedCards.push(card, pets);
 
-        const orOptions = card.play(player) as OrOptions;
+        const orOptions = card.play(player, game) as OrOptions;
         expect(orOptions).not.to.eq(undefined);
         expect(orOptions instanceof OrOptions).to.eq(true);
         

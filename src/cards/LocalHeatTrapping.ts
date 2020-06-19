@@ -45,22 +45,26 @@ export class LocalHeatTrapping implements IProjectCard {
             )
             return undefined;
         };
-
-        availableActions.options.push(new SelectOption("Gain 4 plants", gain4Plants));
-
-        if (animalCards.length === 1) {
-          availableActions.options.push(new SelectOption("Add 2 animals to " + animalCards[0].name, () => {
-            player.addResourceTo(animalCards[0], 2);
-            this.logAddAnimals(game, player, animalCards[0]);
-            return undefined;
-          }));
-        } else if (animalCards.length > 1) {
-          availableActions.options.push(new SelectCard("Select card to add 2 animals", animalCards, (foundCards: Array<ICard>) => {
-            player.addResourceTo(foundCards[0], 2);
-            this.logAddAnimals(game, player, foundCards[0]);
-            return undefined;
-          }));
-        }
+        if (otherAnimalCards.length === 0) {
+            options = new SelectOption("Gain 4 plants", gain4Plants);
+        } else if (otherAnimalCards.length === 1) {
+            const targetCard = otherAnimalCards[0];
+            options = new OrOptions(
+              new SelectOption("Gain 4 plants", gain4Plants),
+              new SelectOption("Add 2 animals to " + targetCard.name, () => {
+                  player.addResourceTo(targetCard, 2);
+                  this.logGainAnimalsEffect(game, player, targetCard);
+                  return undefined;
+              }));
+          } else {
+            options = new OrOptions(
+              new SelectOption("Gain 4 plants", gain4Plants),
+              new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<ICard>) => {
+                  player.addResourceTo(foundCards[0], 2);
+                  this.logGainAnimalsEffect(game, player, foundCards[0]);
+                  return undefined;
+              }));
+          };
         
         if (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) 
           && player.getResourcesOnCorporation() > 0) {
@@ -105,12 +109,12 @@ export class LocalHeatTrapping implements IProjectCard {
         return availableActions;
     }
 
-    private logAddAnimals(game: Game, player: Player, card: ICard) {
+    private logGainAnimalsEffect(game: Game, player: Player, card: ICard) {
       game.log(
         LogMessageType.DEFAULT,
         "${0} spent 5 heat to add 2 animals to ${1}",
         new LogMessageData(LogMessageDataType.PLAYER, player.id),
         new LogMessageData(LogMessageDataType.CARD, card.name)
       );
-    }
+  }
 }

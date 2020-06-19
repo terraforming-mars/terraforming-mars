@@ -6781,6 +6781,18 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
+[CardName.ADVERTISING,`
+      <div class="title background-color-active">Advertising</div>
+      <div class="price ">4</div>
+      <div class="tag tag1 tag-earth"></div>
+      <div class="promo-icon project-icon"></div>
+      <div class="content ">
+        <div class="resource money">20</div>* : <div class="production-box"><div class="production money">1</div></div></div>
+        <div class="description" style="text-align:center;margin:0px 10px;">
+          (Effect: When you play a card with a basic cost of 20 MC or more, increase your MC production 1 step.)
+        </div>
+      </div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>

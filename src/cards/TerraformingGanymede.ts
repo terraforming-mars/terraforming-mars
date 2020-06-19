@@ -5,6 +5,9 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardName } from '../CardName';
+import { LogMessageType } from "../LogMessageType";
+import { LogMessageData } from "../LogMessageData";
+import { LogMessageDataType } from "../LogMessageDataType";
 
 export class TerraformingGanymede implements IProjectCard {
     public cost: number = 33;
@@ -13,7 +16,14 @@ export class TerraformingGanymede implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
-        player.increaseTerraformRatingSteps(1 + player.getTagCount(Tags.JOVIAN), game);
+        const steps = 1 + player.getTagCount(Tags.JOVIAN);
+        player.increaseTerraformRatingSteps(steps, game);
+        game.log(
+            LogMessageType.DEFAULT,
+            "${0} gained ${1} TR",
+            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.STRING, steps.toString())
+        );
         return undefined;
     }
     public getVictoryPoints() {

@@ -6802,19 +6802,19 @@ export const HTML_DATA: Map<string, string> =
       ##RESOURCES##
       <div class="venus-icon corporation-icon"></div>
       <div class="contentCorporation">
-        <div class="corporationEffectBox" style="height:150px;margin-top:130px;">
-          <div class="corporationEffectBoxLabel" style="margin-bottom:5px">EFFECT</div>
+        <div class="corporationEffectBox pharmacy_union-corp-effect-box">
+          <div class="corporationEffectBoxLabel pharmacy_union-corp-effect-box-label">EFFECT</div>
           <div class="resource-tag tag-microbe red-outline"></div> : <div class="resource disease">D</div><div class="money resource ">-4</div><br>
-          <div class="resource-tag tag-science"></div> : - <div class="resource disease" style="0px"">D</div><div class="rating tile" style="margin:0px 0px 0px -8px;transform:scale(0.6,0.6)"></div>/ 3 <div class="rating tile" style="margin:0px 0px 0px -8px;transform:scale(0.6,0.6)"></div>
-          <div class="description" style="font-size:8px">
+          <div class="pharmacy_union-effectrow2"><div class="resource-tag tag-science"></div> : - <div class="resource disease">D</div><div class="rating tile pharmacy_union-tr"></div> / 3 <div class="rating tile pharmacy_union-tr"></div></div>
+          <div class="description pharmacy_union-effect">
           (Effect: When ANY microbe tag is played, add a disease here and lose 4 MC. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR)
           </div>
         </div>
         <div class="pharmacy_union">Pharmacy<br>Union</div>
-        <div class="resource money" style="position:absolute;margin-left:110px;margin-top:-34px">54</div>
-        <div class="resource card" style="position:absolute;margin-left:150px;margin-top:-44px"><div class="card-icon card-icon-science"></div></div>
+        <div class="resource money pharmacy_union-mc">54</div>
+        <div class="resource card pharmacy_union-card"><div class="card-icon card-icon-science"></div></div>
       </div>
-      <div class="description" style="text-align:center;margin-top:0px;margin-left:2px;margin-right:2px;">
+      <div class="description pharmacy_union-description">
         (You start with 54 MC. As your first action, draw a Science card.)
       </div>
 `],

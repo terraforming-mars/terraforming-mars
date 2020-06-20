@@ -6793,6 +6793,29 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
+[CardName.PHARMACY_UNION,`
+      <div class="tag tag1 tag-microbe"></div>
+      <div class="tag tag2 tag-microbe"></div>
+      <div class="corporationLabel">CORPORATION</div>
+      ##RESOURCES##
+      <div class="venus-icon corporation-icon"></div>
+      <div class="contentCorporation">
+        <div class="corporationEffectBox" style="height:150px;margin-top:130px;">
+          <div class="corporationEffectBoxLabel" style="margin-bottom:5px">EFFECT</div>
+          <div class="resource-tag tag-microbe red-outline"></div> : <div class="resource disease">D</div><div class="money resource ">-4</div><br>
+          <div class="resource-tag tag-science"></div> : - <div class="resource disease" style="0px"">D</div><div class="rating tile" style="margin:0px 0px 0px -8px;transform:scale(0.6,0.6)"></div>/ 3 <div class="rating tile" style="margin:0px 0px 0px -8px;transform:scale(0.6,0.6)"></div>
+          <div class="description" style="font-size:8px">
+          (Effect: When ANY microbe tag is played, add a disease here and lose 4 MC. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR)
+          </div>
+        </div>
+        <div class="pharmacy_union">Pharmacy<br>Union</div>
+        <div class="resource money" style="position:absolute;margin-left:110px;margin-top:-34px">54</div>
+        <div class="resource card" style="position:absolute;margin-left:150px;margin-top:-44px"><div class="card-icon card-icon-science">S</div></div>
+      </div>
+      <div class="description" style="text-align:center;margin-top:0px;margin-left:2px;margin-right:2px;">
+        (You start with 54 MC. As your first action, draw a Science card.)
+      </div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>

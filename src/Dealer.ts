@@ -442,6 +442,7 @@ import { GreatDamPromo } from "./cards/promo/GreatDamPromo";
 import { MagneticFieldGeneratorsPromo } from "./cards/promo/MagneticFieldGeneratorsPromo";
 import { Advertising } from "./cards/promo/Advertising";
 import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
+import { CometAiming } from "./cards/promo/CometAiming";
 
 
 export interface ICardFactory<T> {
@@ -695,6 +696,7 @@ export const ALL_PROMO_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.LAW_SUIT, factory: LawSuit },
     { cardName: CardName.STANFORD_TORUS, factory: StanfordTorus },
     { cardName: CardName.ASTEROID_HOLLOWING, factory: AsteroidHollowing },
+    { cardName: CardName.COMET_AIMING, factory: CometAiming },
     { cardName: CardName.ADVERTISING, factory: Advertising },
     { cardName: CardName.DEIMOS_DOWN_PROMO, factory: DeimosDownPromo },
     { cardName: CardName.GREAT_DAM_PROMO, factory: GreatDamPromo },

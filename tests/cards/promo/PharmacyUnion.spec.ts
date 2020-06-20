@@ -9,6 +9,9 @@ import { ViralEnhancers } from "../../../src/cards/ViralEnhancers";
 import { SearchForLife } from "../../../src/cards/SearchForLife";
 import { LagrangeObservatory } from "../../../src/cards/LagrangeObservatory";
 import { OrOptions } from "../../../src/inputs/OrOptions";
+import { AdvancedEcosystems } from "../../../src/cards/AdvancedEcosystems";
+import { Fish } from "../../../src/cards/Fish";
+import { Lichen } from "../../../src/cards/Lichen";
 
 describe("PharmacyUnion", function () {
     it("Should play", function () {
@@ -87,5 +90,25 @@ describe("PharmacyUnion", function () {
         card.onCardPlayed(player, game, searchForLife);
         expect(game.interrupts.length).to.eq(0);
         expect(player.getTerraformRating()).to.eq(23);
+    });
+
+    it("Corporation tags do not count when corporation is disabled", function() {
+        const card = new PharmacyUnion();
+        const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player], player);
+        player.corporationCard = card;
+
+        expect(player.getTagCount(Tags.MICROBES)).to.eq(2);
+        const advancedEcosystems = new AdvancedEcosystems();
+        player.playedCards.push(new Fish());
+        player.playedCards.push(new Lichen());
+        expect(advancedEcosystems.canPlay(player)).to.eq(true);
+        
+        card.resourceCount = 0;
+        card.onCardPlayed(player, game, new SearchForLife());        
+        (game.interrupts[0].playerInput as OrOptions).options[0].cb();
+        expect(card.isDisabled).to.eq(true);
+        expect(player.getTagCount(Tags.MICROBES)).to.eq(0);
+        expect(advancedEcosystems.canPlay(player)).to.eq(false);
     });
 });

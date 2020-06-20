@@ -6810,7 +6810,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
         <div class="pharmacy_union">Pharmacy<br>Union</div>
         <div class="resource money" style="position:absolute;margin-left:110px;margin-top:-34px">54</div>
-        <div class="resource card" style="position:absolute;margin-left:150px;margin-top:-44px"><div class="card-icon card-icon-science">S</div></div>
+        <div class="resource card" style="position:absolute;margin-left:150px;margin-top:-44px"><div class="card-icon card-icon-science"></div></div>
       </div>
       <div class="description" style="text-align:center;margin-top:0px;margin-left:2px;margin-right:2px;">
         (You start with 54 MC. As your first action, draw a Science card.)

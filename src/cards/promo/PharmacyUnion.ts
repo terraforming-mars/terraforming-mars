@@ -15,7 +15,7 @@ import { LogMessageDataType } from "../../LogMessageDataType";
 export class PharmacyUnion implements CorporationCard {
     public name: CardName = CardName.PHARMACY_UNION;
     public tags: Array<Tags> = [Tags.MICROBES, Tags.MICROBES];
-    public startingMegaCredits: number = 54;
+    public startingMegaCredits: number = 46; // 54 minus 8 for the 2 deseases
     public resourceType: ResourceType = ResourceType.DISEASE;
     public resourceCount: number = 0;
     public isDisabled: boolean = false;
@@ -40,46 +40,44 @@ export class PharmacyUnion implements CorporationCard {
     }
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard): void {
-        if (!this.isDisabled) {
-            if (card.tags.includes(Tags.MICROBES)) {
-                const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBES).length;
-                player.addResourceTo(this, microbeTagCount);
-                player.megaCredits = Math.max(player.megaCredits - microbeTagCount * 4, 0)
-            }
+        if (this.isDisabled) return undefined;
+        
+        if (card.tags.includes(Tags.MICROBES)) {
+            const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBES).length;
+            player.addResourceTo(this, microbeTagCount);
+            player.megaCredits = Math.max(player.megaCredits - microbeTagCount * 4, 0)
+        }
             
-            if (player.isCorporation(CorporationName.PHARMACY_UNION) && card.tags.includes(Tags.SCIENCE)) {
-                if (this.resourceCount > 0) {
-                    this.resourceCount--;
-                    player.increaseTerraformRating(game);
-                    game.log(
-                        LogMessageType.DEFAULT,
-                        "${0} removed a disease from ${1} to gain 1 TR",
-                        new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                        new LogMessageData(LogMessageDataType.CARD, this.name)
-                    );
-                    return undefined;
-                } else {
-                    const availableOptions: OrOptions = new OrOptions();
-    
-                    availableOptions.options.push(
-                        new SelectOption('Turn this card face down and gain 3 TR', () => {
-                            this.isDisabled = true;
-                            player.increaseTerraformRatingSteps(3, game);
-                            return undefined;
-                        })
-                    );
-                    availableOptions.options.push(
-                        new SelectOption('Do nothing', () => {
-                            return undefined;
-                        })
-                    );
-    
-                    game.addInterrupt({ player, playerInput: availableOptions});
-                }
-    
+        if (player.isCorporation(CorporationName.PHARMACY_UNION) && card.tags.includes(Tags.SCIENCE)) {
+            if (this.resourceCount > 0) {
+                this.resourceCount--;
+                player.increaseTerraformRating(game);
+                game.log(
+                    LogMessageType.DEFAULT,
+                    "${0} removed a disease from ${1} to gain 1 TR",
+                    new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                    new LogMessageData(LogMessageDataType.CARD, this.name)
+                );
                 return undefined;
+            } else {
+                const availableOptions: OrOptions = new OrOptions();
+
+                availableOptions.options.push(
+                    new SelectOption('Turn this card face down and gain 3 TR', () => {
+                        this.isDisabled = true;
+                        player.increaseTerraformRatingSteps(3, game);
+                        return undefined;
+                    })
+                );
+                availableOptions.options.push(
+                    new SelectOption('Do nothing', () => {
+                        return undefined;
+                    })
+                );
+
+                game.addInterrupt({ player, playerInput: availableOptions});
             }
-        } else {
+
             return undefined;
         }
     }

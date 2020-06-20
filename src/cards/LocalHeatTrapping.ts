@@ -11,6 +11,7 @@ import { AndOptions } from "../inputs/AndOptions";
 import { SelectAmount } from "../inputs/SelectAmount";
 import { ICard } from './ICard';
 import { CardName } from '../CardName';
+import { Game } from "../Game";
 
 export class LocalHeatTrapping implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
@@ -18,8 +19,15 @@ export class LocalHeatTrapping implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: CardName = CardName.LOCAL_HEAT_TRAPPING;
     public hasRequirements = false;
-    public canPlay(player: Player): boolean {
-        return player.heat >= 5 || (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCorporation() * 2) + player.heat >= 5 );
+    public canPlay(player: Player, game: Game): boolean {
+        const requiredHeatAmt = 5;
+
+        // Helion must be able to pay for both the card and its effect
+        if (player.canUseHeatAsMegaCredits) {
+          return player.heat + player.megaCredits >= requiredHeatAmt + player.getCardCost(game, this)
+        };
+
+        return player.heat >= requiredHeatAmt || (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCorporation() * 2) + player.heat >= 5 );
     }
     public play(player: Player) {
         const otherAnimalCards: Array<ICard> = player.getResourceCards(ResourceType.ANIMAL);
@@ -67,7 +75,15 @@ export class LocalHeatTrapping implements IProjectCard {
             );
           }
 
-        player.heat -= 5;
+        // Handle edge case for Helion
+        if (player.heat >= 5) {
+          player.heat -= 5;
+        } else {
+          const shortfall = 5 - player.heat;
+          player.heat = 0;
+          player.megaCredits -= shortfall;
+        }
+        
         return options;
     }
 }

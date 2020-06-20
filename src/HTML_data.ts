@@ -6829,6 +6829,26 @@ export const HTML_DATA: Map<string, string> =
     </div>
 
 `],
+[CardName.COMET_AIMING, `
+    <div class="title background-color-active">Comet Aiming</div>
+    <div class="price ">17</div>
+    ##RESOURCES##
+    <div class="tag tag1 tag-space "></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content ">
+        <div class="resource titanium"></div>
+        <span class="red-arrow"></span>
+        <div class="asteroid resource">A</div>*
+        <br>
+        OR <div class="asteroid resource">A</div>
+        <span class="red-arrow"></span>
+        <div class="tile ocean-tile"></div>
+        <div class="description">
+            (Action: Spend 1 titanium to add 1 asteroid resource to ANY card, or remove 1 asteroid resource here to place an ocean tile.)
+        </div>
+      </div>
+    </div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>

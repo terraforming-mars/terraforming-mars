@@ -441,6 +441,7 @@ import { DeimosDownPromo } from "./cards/promo/DeimosDownPromo";
 import { GreatDamPromo } from "./cards/promo/GreatDamPromo";
 import { MagneticFieldGeneratorsPromo } from "./cards/promo/MagneticFieldGeneratorsPromo";
 import { Advertising } from "./cards/promo/Advertising";
+import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -673,6 +674,7 @@ export const ALL_PROMO_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
     { cardName: CardName.ARCADIAN_COMMUNITIES, factory: ArcadianCommunities },
     { cardName: CardName.ASTRODRILL, factory: Astrodrill },
     { cardName: CardName.FACTORUM, factory: Factorum },
+    { cardName: CardName.PHARMACY_UNION, factory: PharmacyUnion },
     { cardName: CardName.PHILARES, factory: Philares },
     { cardName: CardName.MONS_INSURANCE, factory: MonsInsurance },
     { cardName: CardName.RECYCLON, factory: Recyclon },

@@ -8,6 +8,7 @@ export enum ResourceType {
     ASTEROID = "Asteroid",
     PRESERVATION = "Preservation",
     CAMP = "Camp",
-    ROBOT = "Robot"
+    ROBOT = "Robot",
+    DISEASE = "Disease"
 }
 

@@ -1215,6 +1215,7 @@ input[type=radio]:checked + .filterDiv {
     background-color: rgb(255,204,100);
     background: linear-gradient(to right, #e28c22, rgb(255,204,100),rgb(255,204,100), #e28c22);
     border-radius: 7px 7px 2px 2px;
+    text-transform: uppercase;
 }
 
 .corporationEffectBox {
@@ -1246,6 +1247,7 @@ border-right: 2px solid rgb(137,137,137);
     font-size: 10px;
     padding-top:2px;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
+    text-transform: uppercase;
 }
 
 
@@ -1440,56 +1442,64 @@ border-right: 2px solid rgb(137,137,137);
     font-size: 32px;
   }
 
-  .pharmacy_union {
-    color: white;
-    text-align: left;
-    margin-top: 3px;
-    text-shadow: 0 0 1px black, 0 2px 2px green;
-    font-size: 28px;
-  }
+  .card-pharmacy-union {
+    .corp-logo {
+      color: white;
+      text-align: left;
+      margin: 3px 0 8px 0;
+      text-shadow: 0 0 1px black, 0 2px 2px green;
+      font-size: 28px;
+      width: 140px;
+    }
 
-  .pharmacy_union-corp-effect-box {
-    height:150px;
-    margin-top:130px;
-  }
+    .card-effect-icons {
+      position: absolute;
+      margin: -10px 0 0 0;
+    }
 
-  .pharmacy_union-corp-effect-box-label {
-    margin-bottom:5px;
-  }
+    .card-effect-text {
+      text-align: center;
+    }
 
-  .pharmacy_union-effect {
-    margin-top:-12px;
-    font-size:8px;
-  }
+    .corporationEffectBox {
+      height:150px;
+      margin-top:10px;
 
-  .pharmacy_union-description {
-    text-align:center;
-    margin-top:0px;
-    margin-left:2px;
-    margin-right:2px;
-  }
+      .description {
+        font-size: 8px;
+      }
+    }
 
-  .pharmacy_union-tr {
-    margin-left:-8px;
-    margin-right:-8px;
-    transform:scale(0.6,0.6)
-  }
+    .corporationEffectBoxLabel {
+      margin-bottom:5px;
+    }
 
-  .pharmacy_union-mc {
-    position:absolute;
-    margin-left:110px;
-    margin-top:-34px
-  }
+    .corp-effectrow2 {
+      margin: -6px 0 -2px 0;
 
-  .pharmacy_union-card {
-    position:absolute;
-    margin-left:150px;
-    margin-top:-44px
-  }
+      .tile {
+        margin:0 -8px;
+        transform:scale(0.6,0.6)
+      }
+    }
 
-  .pharmacy_union-effectrow2 {
-    margin-top:-6px;
-    margin-bottom:4px;
+    .resource.money {
+      position:absolute;
+      margin-left:110px;
+      margin-top:-34px
+    }
+
+    .resource.card {
+      position:absolute;
+      margin-left:150px;
+      margin-top:-44px
+    }
+
+    .main-effect {
+      margin: 0 10px;
+      text-align: center;
+    }
+
   }
 
   .pristar {

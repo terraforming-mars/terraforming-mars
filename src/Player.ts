@@ -47,6 +47,7 @@ import { SelfReplicatingRobots } from "./cards/promo/SelfReplicatingRobots";
 import { Aridor } from "./cards/colonies/Aridor";
 import { MiningArea } from "./cards/MiningArea";
 import { MiningRights } from "./cards/MiningRights";
+import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
 
 export type PlayerId = string;
 
@@ -2265,6 +2266,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         if(d.corporationCard.name === CardName.ARIDOR){
           (this.corporationCard as Aridor).allTags = new Set((d.corporationCard as Aridor).allTags);
         }
+        if(d.corporationCard.name === CardName.PHARMACY_UNION){
+          if ((d.corporationCard as PharmacyUnion).isDisabled) {
+            (this.corporationCard as PharmacyUnion).tags = [];
+            (this.corporationCard as PharmacyUnion).isDisabled = true;
+          }
+        }
       } else {
           this.corporationCard = undefined;
       }
@@ -2272,7 +2279,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       // Rebuild dealt corporation array
       this.dealtCorporationCards = d.dealtCorporationCards.map((element: CorporationCard)  => {
         return getCorporationCardByName(element.name)!;
-      });
+      });     
 
       // Rebuild dealt prelude array
       this.dealtPreludeCards = d.dealtPreludeCards.map((element: IProjectCard)  => {

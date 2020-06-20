@@ -18,6 +18,7 @@ export class PharmacyUnion implements CorporationCard {
     public startingMegaCredits: number = 54;
     public resourceType: ResourceType = ResourceType.DISEASE;
     public resourceCount: number = 0;
+    public isDisabled: boolean = false;
 
     public play() {
         this.resourceCount = 2;
@@ -39,43 +40,46 @@ export class PharmacyUnion implements CorporationCard {
     }
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard): void {
-        if (card.tags.includes(Tags.MICROBES)) {
-            const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBES).length;
-            player.addResourceTo(this, microbeTagCount);
-            player.megaCredits = Math.max(player.megaCredits - microbeTagCount * 4, 0)
-        }
-        
-        if (player.isCorporation(CorporationName.PHARMACY_UNION) && card.tags.includes(Tags.SCIENCE)) {
-            if (this.resourceCount > 0) {
-                this.resourceCount--;
-                player.increaseTerraformRating(game);
-                game.log(
-                    LogMessageType.DEFAULT,
-                    "${0} removed a disease from ${1} to gain 1 TR",
-                    new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                    new LogMessageData(LogMessageDataType.CARD, this.name)
-                );
-                return undefined;
-            } else {
-                const availableOptions: OrOptions = new OrOptions();
-
-                availableOptions.options.push(
-                    new SelectOption('Turn this card face down and gain 3 TR', () => {
-                        this.tags = [];
-                        player.increaseTerraformRatingSteps(3, game);
-                        this.onCardPlayed = () => {};
-                        return undefined;
-                    })
-                );
-                availableOptions.options.push(
-                    new SelectOption('Do nothing', () => {
-                        return undefined;
-                    })
-                );
-
-                game.addInterrupt({ player, playerInput: availableOptions});
+        if (!this.isDisabled) {
+            if (card.tags.includes(Tags.MICROBES)) {
+                const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBES).length;
+                player.addResourceTo(this, microbeTagCount);
+                player.megaCredits = Math.max(player.megaCredits - microbeTagCount * 4, 0)
             }
-
+            
+            if (player.isCorporation(CorporationName.PHARMACY_UNION) && card.tags.includes(Tags.SCIENCE)) {
+                if (this.resourceCount > 0) {
+                    this.resourceCount--;
+                    player.increaseTerraformRating(game);
+                    game.log(
+                        LogMessageType.DEFAULT,
+                        "${0} removed a disease from ${1} to gain 1 TR",
+                        new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                        new LogMessageData(LogMessageDataType.CARD, this.name)
+                    );
+                    return undefined;
+                } else {
+                    const availableOptions: OrOptions = new OrOptions();
+    
+                    availableOptions.options.push(
+                        new SelectOption('Turn this card face down and gain 3 TR', () => {
+                            this.isDisabled = true;
+                            player.increaseTerraformRatingSteps(3, game);
+                            return undefined;
+                        })
+                    );
+                    availableOptions.options.push(
+                        new SelectOption('Do nothing', () => {
+                            return undefined;
+                        })
+                    );
+    
+                    game.addInterrupt({ player, playerInput: availableOptions});
+                }
+    
+                return undefined;
+            }
+        } else {
             return undefined;
         }
     }

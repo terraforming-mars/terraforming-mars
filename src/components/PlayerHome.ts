@@ -83,7 +83,9 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
             </div>
 
-            <preferences v-trim-whitespace></preferences>
+            <preferences v-trim-whitespace>
+                <div class="deck-size">{{ player.deckSize }}</div>
+            </preferences>
 
             <div v-if="player.corporationCard">
 

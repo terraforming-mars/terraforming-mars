@@ -1059,4 +1059,8 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         
         return o;
     }
+
+    public getDeckSize(): number {
+        return this.deck.length
+    }
 }

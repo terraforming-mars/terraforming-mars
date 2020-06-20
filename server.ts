@@ -636,15 +636,15 @@ function login(req: http.IncomingMessage, res: http.ServerResponse): void {
       const userReq = JSON.parse(body);
       const userName: string = userReq.userName;
       const password: string = userReq.password;
-      if(userName === undefined || userName.length <= 2 ){
-        throw new Error("UserName must not be empty and  be long than 2")
+      if(userName === undefined || userName.length <= 1 ){
+        throw new Error("UserName must not be empty and  be longer than 1")
       }
       const  user = userNameMap.get(userName);
       if(user === undefined){
         throw new Error("User not exists ");
       }
       if(password === undefined || password.length <= 2 ){
-        throw new Error("Password must not be empty and  be long than 2");
+        throw new Error("Password must not be empty and  be longer than 2");
       }
       if(password !==  user.password){
         throw new Error("Password error");
@@ -671,14 +671,14 @@ function register(req: http.IncomingMessage, res: http.ServerResponse): void {
       const userId = generateRandomGameId();
       const userName: string = userReq.userName;
       const password: string = userReq.password;
-      if(userName === undefined || userName.length <= 2 ){
-        throw new Error("UserName must not be empty and  be long than 2")
+      if(userName === undefined || userName.length <= 1 ){
+        throw new Error("UserName must not be empty and  be longer than 1")
       }
       if(userNameMap.get(userName ) !== undefined || colorNames.indexOf(userName) > -1){
         throw new Error("User name already exists, please use another name ");
       }
       if(password === undefined || password.length <= 2 ){
-        throw new Error("Password must not be empty and  be long than 2");
+        throw new Error("Password must not be empty and  be longer than 2");
       }
       Database.getInstance().saveUser(userId, userName, password);
       const user : User = new User(userName, password, userId);

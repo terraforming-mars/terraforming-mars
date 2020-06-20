@@ -120,8 +120,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private startingCorporations: number;
     public soloTR: boolean;
     private clonedGamedId: string | undefined;
-    public createtime :string = new Date().toISOString().slice(0,16);
-    public updatetime :string = new Date().toISOString().slice(0,16);
+    public createtime :string = new Date(new Date().getTime()+8*60*60*1000).toISOString().slice(0,16);
+    public updatetime :string = new Date(new Date().getTime()+8*60*60*1000).toISOString().slice(0,16);
     private static stringifyPlayers : Map<Player, boolean> = new Map ();
     public initialDraft: boolean = false;
 
@@ -1071,7 +1071,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.lastSaveId += 1;
       Game.stringifyPlayers.clear();
       
-      this.updatetime = new Date().toISOString().slice(0,16);
+      this.updatetime = new Date(new Date().getTime()+8*60*60*1000).toISOString().slice(0,16);
       Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
 
       player.takeAction(this);

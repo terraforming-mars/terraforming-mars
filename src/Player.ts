@@ -2305,32 +2305,34 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       // Rebuild each played card
-      this.playedCards = d.playedCards.map((element: IProjectCard)  => {
-        let card = getProjectCardByName(element.name)!;
-        if(element.resourceCount && element.resourceCount > 0) {
-          card.resourceCount = element.resourceCount;
-        }
-        if(card instanceof SelfReplicatingRobots) {
-          let targetCard = (element as SelfReplicatingRobots).targetCard;
-          if (targetCard !== undefined) {
-            card.targetCard = getProjectCardByName(targetCard.name)!;
+      if(d.playedCards !== undefined){
+        this.playedCards = d.playedCards.map((element: IProjectCard)  => {
+          let card = getProjectCardByName(element.name)!;
+          if(element.resourceCount && element.resourceCount > 0) {
+            card.resourceCount = element.resourceCount;
           }
-        }
-        if(card instanceof MiningArea || card instanceof MiningRights) {
-          let bonusResource = (element as MiningArea).bonusResource;
-          if (bonusResource !== undefined) {
-            card.bonusResource = bonusResource;
+          if(card instanceof SelfReplicatingRobots) {
+            let targetCard = (element as SelfReplicatingRobots).targetCard;
+            if (targetCard !== undefined) {
+              card.targetCard = getProjectCardByName(targetCard.name)!;
+            }
           }
-        }        
+          if(card instanceof MiningArea || card instanceof MiningRights) {
+            let bonusResource = (element as MiningArea).bonusResource;
+            if (bonusResource !== undefined) {
+              card.bonusResource = bonusResource;
+            }
+          }        
 
-        return card;
-      });
-
+          return card;
+        });
+      }
       // Rebuild each drafted cards
-      this.draftedCards = d.draftedCards.map((element: IProjectCard)  => {
-        return getProjectCardByName(element.name)!;
-      });
-      
+      if(d.draftedCards !== undefined){
+        this.draftedCards = d.draftedCards.map((element: IProjectCard)  => {
+          return getProjectCardByName(element.name)!;
+        });
+      }
       return o;
     }
 }

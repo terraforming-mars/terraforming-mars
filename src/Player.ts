@@ -508,7 +508,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         if ( ! includeEventsTags && card.cardType === CardType.EVENT) return;
         tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
       });
-      if (this.corporationCard !== undefined) {
+      if (this.corporationCard !== undefined && !this.corporationCard.isDisabled) {
         tagCount += this.corporationCard.tags.filter(
             (cardTag) => cardTag === tag
         ).length;
@@ -538,7 +538,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         allTags.push(extraTag);
       }
       const uniqueTags: Set<Tags> = new Set<Tags>();
-      if (this.corporationCard !== undefined && this.corporationCard.tags.length > 0) {
+      if (this.corporationCard !== undefined && this.corporationCard.tags.length > 0 && !this.corporationCard.isDisabled) {
         this.corporationCard.tags.forEach((tag) => allTags.push(tag));
       }
       this.playedCards.filter((card) => card.cardType !== CardType.EVENT)

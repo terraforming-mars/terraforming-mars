@@ -81,7 +81,7 @@ describe("PharmacyUnion", function () {
         orOptions.options[0].cb();
 
         expect(player.getTerraformRating()).to.eq(23);
-        expect(card.tags.length).to.eq(0);
+        expect(card.isDisabled).to.eq(true);
         
         // Cannot trigger once per game effect a second time
         card.onCardPlayed(player, game, searchForLife);

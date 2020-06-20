@@ -18,5 +18,6 @@ export interface CorporationCard extends ICard {
     onCardPlayed?: (player: Player, game: Game, card: IProjectCard) => void;
     resourceType?: ResourceType;
     onProductionPhase?: (player: Player)  => undefined;
+    isDisabled?: boolean;
 }
 

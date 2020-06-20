@@ -49,4 +49,5 @@ export interface PlayerModel {
     dealtCorporationCards: Array<CorporationCard>;
     dealtPreludeCards:  Array<IProjectCard>;
     initialDraft: boolean;
+    deckSize: number;
 }

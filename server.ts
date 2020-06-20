@@ -486,7 +486,8 @@ function getPlayer(player: Player, game: Game): string {
     selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
     dealtCorporationCards: player.dealtCorporationCards,
     dealtPreludeCards: player.dealtPreludeCards,
-    initialDraft: game.initialDraft
+    initialDraft: game.initialDraft,
+    deckSize: game.dealer.getDeckSize()
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -632,7 +633,8 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       fleetSize: player.fleetSize,
       tradesThisTurn: player.tradesThisTurn,
       turmoil: getTurmoil(game),
-      selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard()
+      selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
+      deckSize: game.dealer.getDeckSize()
     } as PlayerModel;
   });
 }

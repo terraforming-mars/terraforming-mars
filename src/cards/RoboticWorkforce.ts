@@ -86,7 +86,8 @@ export class RoboticWorkforce implements IProjectCard {
             CardName.WINDMILLS,
             CardName.HOUSE_PRINTING,
             CardName.LAVA_TUBE_SETTLEMENT,
-            CardName.SPACE_PORT
+            CardName.SPACE_PORT,
+            CardName.SPINOFF_DEPARTMENT
         ];
 
         const corporationCardNames = (new Set())
@@ -267,6 +268,7 @@ export class RoboticWorkforce implements IProjectCard {
                     new Updater(CardName.HOUSE_PRINTING, 0, 0, 1, 0, 0, 0),
                     new Updater(CardName.LAVA_TUBE_SETTLEMENT, -1, 2, 0, 0, 0, 0),
                     new Updater(CardName.SPACE_PORT, -1, 4, 0, 0, 0, 0),
+                    new Updater(CardName.SPINOFF_DEPARTMENT, 0, 2, 0, 0, 0, 0),
                     new Updater(CardName.MINING_GUILD, 0, 0, 1, 0, 0, 0),
                     new Updater(CardName.MANUTECH, 0, 0, 1, 0, 0, 0),
                     new Updater(CardName.CHEUNG_SHING_MARS, 0, 3, 0, 0, 0, 0),

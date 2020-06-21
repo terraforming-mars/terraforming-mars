@@ -30,22 +30,27 @@ export class LocalHeatTrapping implements IProjectCard {
         return player.heat >= requiredHeatAmt || (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCorporation() * 2) + player.heat >= 5 );
     }
     public play(player: Player) {
-        const otherAnimalCards: Array<ICard> = player.getResourceCards(ResourceType.ANIMAL);
-        let options: OrOptions | SelectOption;
+        const animalCards: Array<ICard> = player.getResourceCards(ResourceType.ANIMAL);
+        let availableActions = new OrOptions();
+
         const gain4Plants = function () {
             player.plants += 4;
             return undefined;
         };
-        if (otherAnimalCards.length === 0) {
-            options = new SelectOption("Gain 4 plants", gain4Plants);
-        } else {
-            options = new OrOptions(
-                new SelectOption("Gain 4 plants", gain4Plants),
-                new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<ICard>) => {
-                    player.addResourceTo(foundCards[0], 2);
-                    return undefined;
-                }));
-        };
+
+        availableActions.options.push(new SelectOption("Gain 4 plants", gain4Plants));
+
+        if (animalCards.length === 1) {
+          availableActions.options.push(new SelectOption("Add 2 animals to " + animalCards[0].name, () => {
+            player.addResourceTo(animalCards[0], 2);
+            return undefined;
+          }));
+        } else if (animalCards.length > 1) {
+          availableActions.options.push(new SelectCard("Select card to add 2 animals", animalCards, (foundCards: Array<ICard>) => {
+            player.addResourceTo(foundCards[0], 2);
+            return undefined;
+          }));
+        }
         
         if (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) 
           && player.getResourcesOnCorporation() > 0) {
@@ -61,7 +66,9 @@ export class LocalHeatTrapping implements IProjectCard {
                   }
                   player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
                   player.heat -= heatAmount;
-                  return options;
+                  
+                  if (availableActions.options.length === 1) return gain4Plants();
+                  return availableActions;
                 },
                 new SelectAmount("Select amount of heat to spend", (amount: number) => {
                   heatAmount = amount;
@@ -84,6 +91,7 @@ export class LocalHeatTrapping implements IProjectCard {
           player.megaCredits -= shortfall;
         }
         
-        return options;
+        if (availableActions.options.length === 1) return gain4Plants();
+        return availableActions;
     }
 }

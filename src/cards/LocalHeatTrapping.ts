@@ -66,8 +66,8 @@ export class LocalHeatTrapping implements IProjectCard {
                   }
                   player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
                   player.heat -= heatAmount;
-                  
-                  if (availableActions.options.length === 1) return gain4Plants();
+
+                  if (availableActions.options.length === 1) return availableActions.options[0].cb();
                   return availableActions;
                 },
                 new SelectAmount("Select amount of heat to spend", (amount: number) => {
@@ -91,7 +91,7 @@ export class LocalHeatTrapping implements IProjectCard {
           player.megaCredits -= shortfall;
         }
         
-        if (availableActions.options.length === 1) return gain4Plants();
+        if (availableActions.options.length === 1) return availableActions.options[0].cb();
         return availableActions;
     }
 }

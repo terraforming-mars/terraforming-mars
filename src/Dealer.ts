@@ -487,11 +487,14 @@ export const ALL_CORPORATION_CARDS: Array<ICardFactory<CorporationCard>> = [
     { cardName: CardName.INVENTRIX, factory: Inventrix },
     { cardName: CardName.MINING_GUILD, factory: MiningGuild },
     { cardName: CardName.PHOBOLOG, factory: PhoboLog },
-    { cardName: CardName.SATURN_SYSTEMS, factory: SaturnSystems },
-    { cardName: CardName.TERACTOR, factory: Teractor },
     { cardName: CardName.THARSIS_REPUBLIC, factory: TharsisRepublic },
     { cardName: CardName.THORGATE, factory: Thorgate },
     { cardName: CardName.UNITED_NATIONS_MARS_INITIATIVE, factory: UnitedNationsMarsInitiative }
+];
+
+export const ALL_CORP_ERA_CORPORATION_CARDS: Array<ICardFactory<CorporationCard>> = [
+    { cardName: CardName.SATURN_SYSTEMS, factory: SaturnSystems },
+    { cardName: CardName.TERACTOR, factory: Teractor }
 ];
 
 export const ALL_PRELUDE_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
@@ -936,6 +939,10 @@ export function getCorporationCardByName(cardName: string): CorporationCard | un
         return new BeginnerCorporation();
     }
     let cardFactory = ALL_CORPORATION_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_CORP_ERA_CORPORATION_CARDS.find((cf) => cf.cardName === cardName);
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }

@@ -1,5 +1,5 @@
 import {Player} from "./Player";
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from "./Dealer";
+import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_CORP_ERA_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from "./Dealer";
 import {ISpace} from "./ISpace";
 import {SpaceType} from "./SpaceType";
 import {TileType} from "./TileType";
@@ -190,6 +190,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       let corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
+
+      // Add Corporate Era corporation cards
+      if (this.corporateEra) {
+        corporationCards.push(...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => new cf.factory()));
+      }
+      
       // Add prelude corporations cards
       if (this.preludeExtension) {
         corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
@@ -224,6 +230,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
         // Init all available corporation cards to choose from
         corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
+        corporationCards.push(...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => new cf.factory()));
         corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
         corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
         corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));

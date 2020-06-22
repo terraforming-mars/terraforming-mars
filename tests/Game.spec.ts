@@ -1,7 +1,7 @@
 
 import { expect } from "chai";
 import { Color } from "../src/Color";
-import { Game } from "../src/Game";
+import { Game, GameOptions } from "../src/Game";
 import { Player } from "../src/Player";
 import { SpaceName } from "../src/SpaceName";
 import { Mayor } from "../src/milestones/Mayor";
@@ -20,6 +20,7 @@ import { ResearchNetwork } from '../src/cards/prelude/ResearchNetwork';
 import { ArcticAlgae } from "../src/cards/ArcticAlgae";
 import { Ecologist } from '../src/milestones/Ecologist';
 import { Dealer } from "../src/Dealer";
+import { BoardName } from "../src/BoardName";
 
 describe("Game", function () {
     it("should initialize with right defaults", function () {
@@ -38,6 +39,36 @@ describe("Game", function () {
         // exclude corporate era
         const dealer2 = new Dealer(false, false, false, false, false, false);
         expect(dealer2.getDeckSize()).to.eq(137);
+    });
+
+    it("sets starting production if corporate era not selected", function() {
+        const player = new Player("test", Color.BLUE, false);
+        const gameOptions = {
+            draftVariant: false,
+            initialDraftVariant: false,
+            corporateEra: false,
+            preludeExtension: false,
+            venusNextExtension: true,
+            coloniesExtension: false,
+            turmoilExtension: true,
+            boardName: BoardName.ORIGINAL,
+            showOtherPlayersVP: false,
+            customCorporationsList: [],
+            solarPhaseOption: false,
+            promoCardsOption: false,
+            undoOption: false,
+            startingCorporations: 2,
+            soloTR: false,
+            clonedGamedId: undefined
+          } as GameOptions;
+
+        new Game("foobar", [player], player, gameOptions);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+        expect(player.getProduction(Resources.STEEL)).to.eq(1);
+        expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+        expect(player.getProduction(Resources.HEAT)).to.eq(1);
     });
 
     it("correctly calculates victory points", function () {

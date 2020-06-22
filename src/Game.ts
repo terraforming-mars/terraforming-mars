@@ -267,7 +267,16 @@ export class Game implements ILoadable<SerializedGame, Game> {
             for (let i = 0; i < 4; i++) {
               player.dealtPreludeCards.push(this.dealer.dealPreludeCard());
             }
-          }                 
+          }
+
+          if (!this.corporateEra) {
+            player.setProduction(Resources.MEGACREDITS);
+            player.setProduction(Resources.STEEL);
+            player.setProduction(Resources.TITANIUM);
+            player.setProduction(Resources.PLANTS);
+            player.setProduction(Resources.ENERGY);
+            player.setProduction(Resources.HEAT);
+          }
 
           if (!gameOptions.initialDraftVariant) {
             player.setWaitingFor(this.pickCorporationCard(player), () => {});

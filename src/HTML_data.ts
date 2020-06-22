@@ -6849,6 +6849,21 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
+[CardName.CUTTING_EDGE_TECHNOLOGY,`
+            <div class="title background-color-active">Cutting Edge Technology</div>
+            <div class="price">11</div>
+            <div class="tag tag1 tag-science"></div>
+            <div class="promo-icon project-icon"></div>
+            <div class="content">
+                <div class="points points-big">1</div>
+                <div class="resource card">
+                <div class="card-icon requirements"></div></div>
+                 : <div class="money resource">-2</div>
+                <div class="description">
+                    (Effect: When playing a card with a requirement, you pay 2 MC less for it.)
+                </div>
+            </div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>

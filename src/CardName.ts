@@ -378,6 +378,7 @@ export enum CardName {
     ADVERTISING = "Advertising",
     PHARMACY_UNION = "Pharmacy Union",
     COMET_AIMING = "Comet Aiming",
+    CUTTING_EDGE_TECHNOLOGY = "Cutting Edge Technology",
     INDUSTRIAL_CENTER = "Industrial Center",
     FACTORUM = "Factorum",
     LAKEFRONT_RESORTS = "Lakefront Resorts",

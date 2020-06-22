@@ -443,6 +443,7 @@ import { MagneticFieldGeneratorsPromo } from "./cards/promo/MagneticFieldGenerat
 import { Advertising } from "./cards/promo/Advertising";
 import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
 import { CometAiming } from "./cards/promo/CometAiming";
+import { CuttingEdgeTechnology } from "./cards/promo/CuttingEdgeTechnology";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -699,6 +700,7 @@ export const ALL_PROMO_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.STANFORD_TORUS, factory: StanfordTorus },
     { cardName: CardName.ASTEROID_HOLLOWING, factory: AsteroidHollowing },
     { cardName: CardName.COMET_AIMING, factory: CometAiming },
+    { cardName: CardName.CUTTING_EDGE_TECHNOLOGY, factory: CuttingEdgeTechnology },
     { cardName: CardName.ADVERTISING, factory: Advertising },
     { cardName: CardName.DEIMOS_DOWN_PROMO, factory: DeimosDownPromo },
     { cardName: CardName.GREAT_DAM_PROMO, factory: GreatDamPromo },

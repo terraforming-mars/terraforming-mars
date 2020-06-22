@@ -6,6 +6,7 @@ import { ICard } from "../cards/ICard";
 import { BeginnerCorporation } from "../cards/corporation/BeginnerCorporation";
 import { ALL_PRELUDE_CORPORATIONS,
          ALL_CORPORATION_CARDS,
+         ALL_CORP_ERA_CORPORATION_CARDS,
          ALL_PROJECT_CARDS,
          ALL_CORP_ERA_PROJECT_CARDS,
          ALL_PRELUDE_CARDS,
@@ -25,6 +26,10 @@ function getCorporationCardByName(cardName: string): ICard | undefined {
         return new BeginnerCorporation();
     }
     let cardFactory = ALL_CORPORATION_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_CORP_ERA_CORPORATION_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }

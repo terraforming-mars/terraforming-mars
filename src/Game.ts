@@ -245,10 +245,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
       corporationCards = this.dealer.shuffleCards(corporationCards);
 
       // Give each player their corporation cards and other cards
-      for (const player of players) {
+      for (var i = 0; i < players.length; i++) {
+        const player = players[i];
+        const remainingPlayers = this.players.length - i;
+        
         if (!player.beginner) {
           // Failsafe for exceding corporation pool
-          if (this.startingCorporations * this.players.length > corporationCards.length) {
+          if (this.startingCorporations * remainingPlayers > corporationCards.length) {
             this.startingCorporations = 2;
           }
           for (let i = 0; i < this.startingCorporations; i++) {
@@ -283,8 +286,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
         } else {
           this.playCorporationCard(player, new BeginnerCorporation());
-        }    
-
+        }
       }
 
       // Save initial game state

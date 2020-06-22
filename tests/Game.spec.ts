@@ -19,6 +19,7 @@ import { ISpace } from "../src/ISpace";
 import { ResearchNetwork } from '../src/cards/prelude/ResearchNetwork';
 import { ArcticAlgae } from "../src/cards/ArcticAlgae";
 import { Ecologist } from '../src/milestones/Ecologist';
+import { Dealer } from "../src/Dealer";
 
 describe("Game", function () {
     it("should initialize with right defaults", function () {
@@ -27,6 +28,16 @@ describe("Game", function () {
         const game = new Game("foobar", [player,player2], player);
         expect(game.corporateEra).to.eq(true);
         expect(game.getGeneration()).to.eq(1);
+    });
+
+    it("correctly separates 71 corporate era cards", function() {
+        // include corporate era
+        const dealer = new Dealer(true, false, false, false, false, false);
+        expect(dealer.getDeckSize()).to.eq(208);
+
+        // exclude corporate era
+        const dealer2 = new Dealer(false, false, false, false, false, false);
+        expect(dealer2.getDeckSize()).to.eq(137);
     });
 
     it("correctly calculates victory points", function () {

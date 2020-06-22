@@ -363,6 +363,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
       const gameOptions = {
         draftVariant: gameReq.draftVariant,
+        corporateEra: gameReq.corporateEra,
         preludeExtension: gameReq.prelude,
         venusNextExtension: gameReq.venusNext,
         coloniesExtension: gameReq.colonies,
@@ -472,6 +473,7 @@ function getPlayer(player: Player, game: Game): string {
     isSoloModeWin: game.isSoloModeWin(),
     gameAge: game.gameAge,
     isActive: player.id === game.activePlayer.id,
+    corporateEra: game.corporateEra,
     venusNextExtension: game.venusNextExtension,
     venusScaleLevel: game.getVenusScaleLevel(),
     boardName: game.boardName,

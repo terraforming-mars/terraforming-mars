@@ -58,6 +58,7 @@ import { Pristar } from "./cards/turmoil/Pristar";
 
 export interface GameOptions {
   draftVariant: boolean;
+  corporateEra: boolean;
   preludeExtension: boolean;
   venusNextExtension: boolean;
   coloniesExtension: boolean;
@@ -103,6 +104,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public lastSaveId: number = 0;
     private draftVariant: boolean;
     public soloMode: boolean = false;
+    public corporateEra: boolean = true;
     private preludeExtension: boolean;
     public venusNextExtension: boolean;
     public coloniesExtension: boolean;
@@ -131,6 +133,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         gameOptions = {
           draftVariant: false,
           initialDraftVariant: false,
+          corporateEra: true,
           preludeExtension: false,
           venusNextExtension: false,
           coloniesExtension: false,
@@ -152,6 +155,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.activePlayer = first;
       this.boardName = gameOptions.boardName;
       this.draftVariant = gameOptions.draftVariant;
+      this.corporateEra = gameOptions.corporateEra;
       this.preludeExtension = gameOptions.preludeExtension;
       this.venusNextExtension = gameOptions.venusNextExtension;
       this.coloniesExtension = gameOptions.coloniesExtension;
@@ -351,6 +355,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           // Update game options
           game.draftVariant = gameToRebuild.draftVariant;
           game.soloMode = gameToRebuild.soloMode;
+          game.corporateEra = gameToRebuild.corporateEra;
           game.preludeExtension = gameToRebuild.preludeExtension;
           game.venusNextExtension = gameToRebuild.venusNextExtension;
           game.coloniesExtension = gameToRebuild.coloniesExtension;

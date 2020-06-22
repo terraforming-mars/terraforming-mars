@@ -6141,7 +6141,7 @@ export const HTML_DATA: Map<string, string> =
             (Action: Gain 2 MC for each party where you have at least 1 delegate.)<br>
           </div>
         </div>
-        <div class="septem">Septum Tribus</div>
+        <div class="septem">Septem Tribus</div>
         <div class="resource money" style="margin-left:60px;margin-top:10px">36</div>
         <div class="description" style="text-align:center;margin-top:10px">
           (You start with 36 MC. When you perform an action, the wild tag counts as any tag of your choice.)

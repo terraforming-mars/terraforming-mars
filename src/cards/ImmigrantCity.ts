@@ -27,7 +27,7 @@ export class ImmigrantCity implements IProjectCard {
     public onTilePlaced(player: Player, space: ISpace) {
         if (space.tile !== undefined && space.tile.tileType === TileType.CITY) {
             if (player.shouldTriggerCardEffect) player.setProduction(Resources.MEGACREDITS);
-            player.shouldTriggerCardEffect = true; // reset value
+            if (!player.isCorporation(CorporationName.THARSIS_REPUBLIC)) player.shouldTriggerCardEffect = true; // reset value
         }
     }
     public play(player: Player, game: Game) {

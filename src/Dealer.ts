@@ -444,6 +444,7 @@ import { Advertising } from "./cards/promo/Advertising";
 import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
 import { CometAiming } from "./cards/promo/CometAiming";
 import { CuttingEdgeTechnology } from "./cards/promo/CuttingEdgeTechnology";
+import { CrashSiteCleanup } from "./cards/promo/CrashSiteCleanup";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -701,6 +702,7 @@ export const ALL_PROMO_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.ASTEROID_HOLLOWING, factory: AsteroidHollowing },
     { cardName: CardName.COMET_AIMING, factory: CometAiming },
     { cardName: CardName.CUTTING_EDGE_TECHNOLOGY, factory: CuttingEdgeTechnology },
+    { cardName: CardName.CRASH_SITE_CLEANUP, factory: CrashSiteCleanup },
     { cardName: CardName.ADVERTISING, factory: Advertising },
     { cardName: CardName.DEIMOS_DOWN_PROMO, factory: DeimosDownPromo },
     { cardName: CardName.GREAT_DAM_PROMO, factory: GreatDamPromo },

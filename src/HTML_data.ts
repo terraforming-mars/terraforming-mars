@@ -6878,6 +6878,26 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
+[CardName.DIRECTED_IMPACTORS, `
+    <div class="title background-color-active">Directed Impactors</div>
+    <div class="price">8</div>
+    ##RESOURCES##
+    <div class="tag tag1 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+        <div class=" money resource">6</div> (<span class="titanium"></span>)
+        <span class="red-arrow"></span>
+        <div class="asteroid resource">A</div>*
+        <br>
+        OR <div class="asteroid resource">A</div>
+        <span class="red-arrow"></span>
+        <div class="tile temperature-tile"></div>
+        <div class="description">
+            (Action: Spend 6 MC to add 1 asteroid resource to ANY card (titanium may be used), or remove 1 asteroid resource here to raise temperature 1 step.)
+        </div>
+      </div>
+    </div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>

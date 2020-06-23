@@ -5,6 +5,8 @@ import { HowToPay } from "./HowToPay";
 import { SelectSpace } from "./SelectSpace";
 import { OrOptions } from './OrOptions';
 import { SelectOption } from "./SelectOption";
+import { SelectCard } from "./SelectCard";
+import { ICard } from "../cards/ICard";
 
 export class SelectHowToPay implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_HOW_TO_PAY;
@@ -14,7 +16,7 @@ export class SelectHowToPay implements PlayerInput {
         public canUseTitanium: boolean,
         public canUseHeat: boolean,
         public amount: number,
-        public cb: (howToPay: HowToPay) => SelectSpace | SelectOption| OrOptions | undefined,
+        public cb: (howToPay: HowToPay) => SelectSpace | SelectOption| OrOptions | SelectCard<ICard> | undefined,
         ) {
     }
 }

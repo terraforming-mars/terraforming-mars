@@ -18,10 +18,10 @@ describe("CometAiming", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player, player], player);
         player.playedCards.push(card);
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player, game)).to.eq(false);
 
         player.titanium = 1;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player, game)).to.eq(true);
 
         card.action(player, game);
         expect(player.titanium).to.eq(0);

@@ -9,6 +9,7 @@ import { SelectCard } from '../../inputs/SelectCard';
 import { Game } from '../../Game';
 import { SelectOption } from '../../inputs/SelectOption';
 import { OrOptions } from '../../inputs/OrOptions';
+import { MAX_OCEAN_TILES } from '../../constants';
 
 export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
     public name: CardName = CardName.COMET_AIMING;
@@ -26,8 +27,9 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
         return undefined;
     }
 
-    public canAct(player: Player): boolean {
-        return player.titanium > 0 || this.resourceCount > 0;
+    public canAct(player: Player, game: Game): boolean {
+        const canPlaceOcean = this.resourceCount > 0 && game.board.getOceansOnBoard() < MAX_OCEAN_TILES;
+        return player.titanium > 0 || canPlaceOcean;
     }
 
     public action(player: Player, game: Game) {

@@ -30,6 +30,11 @@ export class ImmigrantCity implements IProjectCard {
         return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
             player.setProduction(Resources.ENERGY,-1);
+
+            if (player.isCorporation(CorporationName.THARSIS_REPUBLIC)) {
+                player.shouldTriggerCardEffect = false;
+            }
+
             player.setProduction(Resources.MEGACREDITS, -1);
             return undefined;
         });

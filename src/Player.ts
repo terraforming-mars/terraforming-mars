@@ -92,6 +92,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public colonyTradeDiscount: number = 0;
     private turmoilScientistsActionUsed: boolean = false;
     public removingPlayers: Array<string> = [];
+    public shouldTriggerCardEffect?: boolean = true;
 
     constructor(
         public name: string,

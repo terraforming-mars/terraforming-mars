@@ -192,11 +192,8 @@ describe("Turmoil", function () {
         const gameOptions = {
             draftVariant: false,
             initialDraftVariant: false,
-<<<<<<< HEAD
             corporateEra: true,
-=======
             randomMA: false,
->>>>>>> [WIP] Game option to randomize milestones and awards
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,

@@ -47,6 +47,7 @@ describe("Game", function () {
             draftVariant: false,
             initialDraftVariant: false,
             corporateEra: false,
+            randomMA: false,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,

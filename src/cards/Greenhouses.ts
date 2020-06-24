@@ -5,6 +5,7 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardName } from '../CardName';
+import { LogHelper } from "../components/LogHelper";
 
 export class Greenhouses implements IProjectCard {
     public cost: number = 6;
@@ -13,7 +14,9 @@ export class Greenhouses implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
-        player.plants += game.getCitiesInPlay();
+        const qty = game.getCitiesInPlay();
+        player.plants += qty;
+        LogHelper.logGainPlants(game, player, qty);
         return undefined;
     }
 }

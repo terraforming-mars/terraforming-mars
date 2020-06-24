@@ -19,21 +19,24 @@ describe("LocalHeatTrapping", function () {
     it("Should play - no animal targets", function () {
         const card = new LocalHeatTrapping();
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player], player);
         player.heat = 5;
         player.playedCards.push(card);
 
-        card.play(player);
+        card.play(player, game);
         expect(player.plants).to.eq(4);
         expect(player.heat).to.eq(0);
     });
     it("Should play - single animal target", function () {
         const card = new LocalHeatTrapping();
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player,player], player);
+        
         player.heat = 5;
         const pets = new Pets();
         player.playedCards.push(card, pets);
 
-        const orOptions = card.play(player) as OrOptions;
+        const orOptions = card.play(player, game) as OrOptions;
         expect(orOptions).not.to.eq(undefined);
         expect(orOptions instanceof OrOptions).to.eq(true);
         
@@ -47,12 +50,14 @@ describe("LocalHeatTrapping", function () {
     it("Should play - multiple animal targets", function () {
         const card = new LocalHeatTrapping();
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player], player);
+
         player.heat = 5;
         const pets = new Pets();
         const fish = new Fish();
         player.playedCards.push(card, pets, fish);
 
-        const orOptions = card.play(player) as OrOptions;
+        const orOptions = card.play(player, game) as OrOptions;
         expect(player.heat).to.eq(0);
         orOptions.options[1].cb([fish]);
         expect(player.getResourcesOnCard(fish)).to.eq(2);

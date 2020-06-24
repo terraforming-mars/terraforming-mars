@@ -12,6 +12,7 @@ import { SelectAmount } from "../inputs/SelectAmount";
 import { ICard } from './ICard';
 import { CardName } from '../CardName';
 import { Game } from "../Game";
+import { LogHelper } from "../components/LogHelper";
 
 export class LocalHeatTrapping implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
@@ -29,28 +30,35 @@ export class LocalHeatTrapping implements IProjectCard {
 
         return player.heat >= requiredHeatAmt || (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCorporation() * 2) + player.heat >= 5 );
     }
-    public play(player: Player) {
+    public play(player: Player, game: Game) {
         const animalCards: Array<ICard> = player.getResourceCards(ResourceType.ANIMAL);
         let availableActions = new OrOptions();
 
         const gain4Plants = function () {
             player.plants += 4;
+            LogHelper.logGainPlants(game, player, 4);
             return undefined;
         };
-
-        availableActions.options.push(new SelectOption("Gain 4 plants", gain4Plants));
-
-        if (animalCards.length === 1) {
-          availableActions.options.push(new SelectOption("Add 2 animals to " + animalCards[0].name, () => {
-            player.addResourceTo(animalCards[0], 2);
-            return undefined;
-          }));
-        } else if (animalCards.length > 1) {
-          availableActions.options.push(new SelectCard("Select card to add 2 animals", animalCards, (foundCards: Array<ICard>) => {
-            player.addResourceTo(foundCards[0], 2);
-            return undefined;
-          }));
-        }
+        if (animalCards.length === 0) {
+          availableActions.options.push(new SelectOption("Gain 4 plants", gain4Plants));
+        } else if (animalCards.length === 1) {
+            const targetCard = animalCards[0];
+            availableActions.options.push(
+              new SelectOption("Gain 4 plants", gain4Plants),
+              new SelectOption("Add 2 animals to " + targetCard.name, () => {
+                  player.addResourceTo(targetCard, 2);
+                  LogHelper.logAddResource(game, player, targetCard, 2);
+                  return undefined;
+              }));
+          } else {
+            availableActions.options.push(
+              new SelectOption("Gain 4 plants", gain4Plants),
+              new SelectCard("Select card to add 2 animals", animalCards, (foundCards: Array<ICard>) => {
+                  player.addResourceTo(foundCards[0], 2);
+                  LogHelper.logAddResource(game, player, foundCards[0], 2);
+                  return undefined;
+              }));
+          };
         
         if (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) 
           && player.getResourcesOnCorporation() > 0) {

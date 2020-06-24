@@ -36,22 +36,24 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
         const requiredCardsCount = 2;
         if (game.hasCardsWithResource(ResourceType.FLOATER, requiredCardsCount)) {
             let drawnCount = 0;
+            let floaterCards: Array<CardName> = [];
             while (drawnCount < requiredCardsCount) {
                 let card = game.dealer.dealCard();
                 if (Celestic.floaterCards.has(card.name) || card.resourceType === ResourceType.FLOATER) {
                     player.cardsInHand.push(card);
                     drawnCount++;
+                    floaterCards.push(card.name);
+                } else {
+                    game.dealer.discard(card);
                 }
             }
-
-            const drawnCards = game.getCardsInHandByResource(player, ResourceType.FLOATER).slice(-2);
 
             game.log(
                 LogMessageType.DEFAULT,
                 "${0} drew ${1} and ${2}",
                 new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                new LogMessageData(LogMessageDataType.CARD, drawnCards[0].name),
-                new LogMessageData(LogMessageDataType.CARD, drawnCards[1].name)
+                new LogMessageData(LogMessageDataType.CARD, floaterCards[0]),
+                new LogMessageData(LogMessageDataType.CARD, floaterCards[1])
             );
         }
         

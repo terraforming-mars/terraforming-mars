@@ -5,10 +5,8 @@ import { Game } from "../../../src/Game";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 import { RotatorImpacts } from "../../../src/cards/venusNext/RotatorImpacts";
 import { DirectedImpactors } from "../../../src/cards/promo/DirectedImpactors";
-import { SelectHowToPay } from "../../../src/inputs/SelectHowToPay";
-import { SelectCard } from "../../../src/inputs/SelectCard";
-import { ICard } from "../../../src/cards/ICard";
 import { MAX_TEMPERATURE } from "../../../src/constants";
+import { SelectHowToPayInterrupt } from "../../../src/interrupts/SelectHowToPayInterrupt";
 
 describe("DirectedImpactors", function () {
     it("Should play", function () {
@@ -28,8 +26,11 @@ describe("DirectedImpactors", function () {
         expect(card.canAct(player, game)).to.eq(true);
 
         // can add resource to itself
-        const selectHowToPay = card.action(player,game) as SelectHowToPay;
-        selectHowToPay.cb({ steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0 });
+        card.action(player,game);
+        expect(game.interrupts.length).to.eq(1);
+        let selectHowToPayInterrupt = game.interrupts[0] as SelectHowToPayInterrupt;
+        selectHowToPayInterrupt.playerInput.cb({ steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0 });
+        
         expect(player.megaCredits).to.eq(0);
         expect(player.titanium).to.eq(0);
         expect(card.resourceCount).to.eq(1);
@@ -60,9 +61,12 @@ describe("DirectedImpactors", function () {
         expect(card.resourceCount).to.eq(0);
 
         // can add resource to any card
-        const selectHowToPay = action.options[1].cb() as SelectHowToPay;
-        const selectCard = selectHowToPay.cb({ steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0 }) as SelectCard<ICard>;
-        selectCard.cb([card2]);
+        const selectCard = action.options[1].cb();
+        expect(game.interrupts.length).to.eq(1);
+        let selectHowToPayInterrupt = game.interrupts[0] as SelectHowToPayInterrupt;
+        selectHowToPayInterrupt.playerInput.cb({ steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0 });
+
+        selectCard!.cb([card2]);
         expect(card2.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(0);
         expect(player.titanium).to.eq(0);

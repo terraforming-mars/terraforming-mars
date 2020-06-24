@@ -93,7 +93,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public colonyTradeDiscount: number = 0;
     private turmoilScientistsActionUsed: boolean = false;
     public removingPlayers: Array<string> = [];
-    public attackedPlayers: Array<string> = [];
+    public hasRemovedOtherPlayersPlants: boolean = false;
 
     constructor(
         public name: string,
@@ -219,8 +219,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
 
         // Crash site cleanup hook
-        if (fromPlayer !== this && fromPlayer.attackedPlayers.indexOf(this.id) === -1 && resource === Resources.PLANTS) {
-          fromPlayer.attackedPlayers.push(this.id);
+        if (fromPlayer !== this && resource === Resources.PLANTS) {
+          fromPlayer.hasRemovedOtherPlayersPlants = true;
         }
 
         game.log(
@@ -839,7 +839,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public runProductionPhase(): void {
       this.actionsThisGeneration.clear();
       this.removingPlayers = [];
-      this.attackedPlayers = [];
+      this.hasRemovedOtherPlayersPlants = false;
       this.tradesThisTurn = 0;
       this.turmoilScientistsActionUsed = false;
       this.megaCredits += this.megaCreditProduction + this.terraformRating;

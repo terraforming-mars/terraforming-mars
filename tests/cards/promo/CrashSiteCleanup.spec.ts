@@ -23,7 +23,7 @@ describe("CrashSiteCleanup", function () {
         smallAsteroid.play(player, game);
 
         expect(card.canPlay(player)).to.eq(true);
-        expect(player.attackedPlayers.length).to.eq(1);
+        expect(player.hasRemovedOtherPlayersPlants).to.eq(true);
 
         const action = card.play(player) as OrOptions;
         action.options[0].cb();

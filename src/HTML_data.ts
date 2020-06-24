@@ -6874,7 +6874,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="requirements">- <div class="resource plant red-outline"></div></div>
         <div class="resource titanium"></div> OR 2 <div class="resource steel"></div>
         <div class="description">
-            (Requires that any player has removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.)
+            (Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.)
         </div>
     </div>
 `],

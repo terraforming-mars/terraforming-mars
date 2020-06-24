@@ -19,7 +19,7 @@ interface CreateGameModel {
     draftVariant: boolean;
     initialDraft: boolean;
     randomFirstPlayer: boolean;
-    randomSeat: boolean;
+    randomTurnOrder: boolean;
     showOtherPlayersVP: boolean;
     venusNext: boolean;
     colonies: boolean;
@@ -64,7 +64,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             draftVariant: true,
             initialDraft: false,
             randomFirstPlayer: true,
-            randomSeat: false,
+            randomTurnOrder: false,
             showOtherPlayersVP: false,
             venusNext: false,
             colonies: false,
@@ -179,7 +179,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 }
             }
 
-            if (component.randomSeat) {
+            if (component.randomTurnOrder) {
                 // Shuffle players array to assign each player a random seat around the table
                 players = players.map((a) => ({sort: Math.random(), value: a}))
                     .sort((a, b) => a.sort - b.sort)
@@ -305,7 +305,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                             <label class="form-switch" v-if="playersCount > 2">
                                 <input type="checkbox" v-model="randomSeat">
-                                <i class="form-icon"></i> <span v-i18n>Random seat</span>
+                                <i class="form-icon"></i> <span v-i18n>Shuffle player order</span>
                             </label>
 
                             <label class="form-switch" v-if="playersCount > 1">

@@ -9,8 +9,9 @@ import { SmallAsteroid } from "../../../src/cards/promo/SmallAsteroid";
 describe("CrashSiteCleanup", function () {
     it("Can't play", function () {
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player], player);
         const card = new CrashSiteCleanup();
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Can play if removed plants from another player this generation", function () {
         const player = new Player("test", Color.BLUE, false);
@@ -22,8 +23,8 @@ describe("CrashSiteCleanup", function () {
         const smallAsteroid = new SmallAsteroid();
         smallAsteroid.play(player, game);
 
-        expect(card.canPlay(player)).to.eq(true);
-        expect(player.hasRemovedOtherPlayersPlants).to.eq(true);
+        expect(card.canPlay(player, game)).to.eq(true);
+        expect(game.someoneHasRemovedOtherPlayersPlants).to.eq(true);
 
         const action = card.play(player) as OrOptions;
         action.options[0].cb();

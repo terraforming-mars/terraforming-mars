@@ -117,6 +117,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public soloTR: boolean;
     private clonedGamedId: string | undefined;
     public initialDraft: boolean = false;
+    public someoneHasRemovedOtherPlayersPlants: boolean = false;
 
     constructor(
       public id: string,
@@ -715,6 +716,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private gotoProductionPhase(): void {
       this.phase = Phase.PRODUCTION;
       this.passedPlayers.clear();
+      this.someoneHasRemovedOtherPlayersPlants = false;
       this.players.forEach((player) => {
         player.runProductionPhase();
       });

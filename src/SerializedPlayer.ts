@@ -51,6 +51,5 @@ export interface SerializedPlayer {
     colonyTradeDiscount: number;
     turmoilScientistsActionUsed: boolean;
     removingPlayers: Array<string>;
-    hasRemovedOtherPlayersPlants: boolean;
 }
 

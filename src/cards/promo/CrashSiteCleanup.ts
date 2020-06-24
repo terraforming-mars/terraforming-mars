@@ -13,7 +13,7 @@ export class CrashSiteCleanup implements IProjectCard {
     public name: CardName = CardName.CRASH_SITE_CLEANUP;
 
     public canPlay(player: Player) {
-        return player.attackedPlayers.length > 0;
+        return player.hasRemovedOtherPlayersPlants;
     }
 
     public play(player: Player) {

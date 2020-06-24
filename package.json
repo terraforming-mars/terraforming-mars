@@ -36,10 +36,10 @@
     "build": "node make_locales.js && eslint src/*.ts && lessc src/styles/common.less styles.css && tsc --build tsconfig.json && webpack --config webpack.config.js",
     "start": "node make_locales.js && lessc src/styles/common.less styles.css && tsc --build tsconfig.json && webpack --config webpack.config.js && node dist/server.js",
     "pretest": "tsc --build tsconfig-test.json",
-    "test": "mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js dist/tests/cards/corporation/**.spec.js dist/tests/cards/prelude/**.spec.js dist/tests/cards/venusNext/**.spec.js dist/tests/cards/colonies/**.spec.js dist/tests/cards/turmoil/**.spec.js dist/tests/cards/promo/**.spec.js dist/tests/globalEvents/**.spec.js",
+    "test": "mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js dist/tests/cards/corporation/**.spec.js dist/tests/cards/prelude/**.spec.js dist/tests/cards/venusNext/**.spec.js dist/tests/cards/colonies/**.spec.js dist/tests/cards/turmoil/**.spec.js dist/tests/cards/promo/**.spec.js dist/tests/globalEvents/**.spec.js dist/tests/milestones/**.spec.js",
     "testgiven": "tsc --build tsconfig.json && webpack --config webpack.config.js && tsc --build tsconfig-test.json && mocha",
     "precover": "tsc --build tsconfig-test.json",
-    "cover": "nyc mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js dist/tests/cards/corporation/**.spec.js dist/tests/cards/prelude/**.spec.js dist/tests/cards/venusNext/**.spec.js dist/tests/cards/colonies/**.spec.js dist/tests/cards/turmoil/**.spec.js dist/tests/cards/promo/**.spec.js dist/tests/globalEvents/**.spec.js"
+    "cover": "nyc mocha dist/tests/**.spec.js dist/tests/cards/**.spec.js dist/tests/cards/corporation/**.spec.js dist/tests/cards/prelude/**.spec.js dist/tests/cards/venusNext/**.spec.js dist/tests/cards/colonies/**.spec.js dist/tests/cards/turmoil/**.spec.js dist/tests/cards/promo/**.spec.js dist/tests/globalEvents/**.spec.js dist/tests/milestones/**.spec.js"
   },
   "repository": {
     "type": "git",

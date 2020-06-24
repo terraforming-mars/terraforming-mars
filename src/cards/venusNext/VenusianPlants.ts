@@ -18,10 +18,17 @@ export class VenusianPlants implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         game.increaseVenusScaleLevel(player,1);
-        if (this.getResCards(player).length === 0) return undefined;
+        const cards = this.getResCards(player);
+        if (cards.length === 0) return undefined;
+
+        if (cards.length === 1) {
+            player.addResourceTo(cards[0], 1);
+            return undefined;
+        }
+
         return new SelectCard(
             'Select card to add 1 resource',
-            this.getResCards(player),
+            cards,
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 1);
               return undefined;

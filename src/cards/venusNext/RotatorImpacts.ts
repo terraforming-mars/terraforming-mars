@@ -30,43 +30,47 @@ export class RotatorImpacts implements IActionCard,IProjectCard, IResourceCard {
     }  
     
     public action(player: Player, game: Game) {
-        var opts: Array<SelectOption> = []; 
-        const addResource = new SelectOption("Pay 6 to add 1 asteroid to this card", () => {
-            return new SelectHowToPay(
-                'Select how to pay ', false, true,
-                player.canUseHeatAsMegaCredits,
-                6,
-                (htp) => {
-                    if (htp.heat + htp.megaCredits + htp.titanium * player.getTitaniumValue(game) < 6) {
-                        throw new Error('Not enough for action');
-                    }
-                    player.megaCredits -= htp.megaCredits;
-                    player.heat -= htp.heat;
-                    player.titanium -= htp.titanium;
-                    this.resourceCount++;
-                    return undefined;
-                }
-            );
-        });
+        var opts: Array<SelectOption> = [];
 
-        const spendResource = new SelectOption("Remove 1 asteroid to raise Venus 1 step", () => {
-            player.removeResourceFrom(this);
-            game.increaseVenusScaleLevel(player, 1);
-            return undefined;
-        });
-
-        if (player.canAfford(6, game, false, true)) {
-            opts.push(addResource);
-        };
+        const addResource = new SelectOption("Pay 6 to add 1 asteroid to this card", () => this.addResource(player, game));
+        const spendResource = new SelectOption("Remove 1 asteroid to raise Venus 1 step", () => this.spendResource(player, game));
 
         if (this.resourceCount > 0 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
             opts.push(spendResource);
-        };
+        } else {
+            return this.addResource(player, game);
+        }
 
-        if (opts.length === 0) return undefined;
-
-        if (opts.length === 1) return opts[0];
-
+        if (player.canAfford(6, game, false, true)) {
+            opts.push(addResource);
+        } else {
+            return this.spendResource(player, game);
+        }
+        
         return new OrOptions(...opts);
+    }
+
+    private addResource(player: Player, game: Game) {
+        return new SelectHowToPay(
+            'Select how to pay ', false, true,
+            player.canUseHeatAsMegaCredits,
+            6,
+            (htp) => {
+                if (htp.heat + htp.megaCredits + htp.titanium * player.getTitaniumValue(game) < 6) {
+                    throw new Error('Not enough for action');
+                }
+                player.megaCredits -= htp.megaCredits;
+                player.heat -= htp.heat;
+                player.titanium -= htp.titanium;
+                this.resourceCount++;
+                return undefined;
+            }
+        );
+    }
+
+    private spendResource(player: Player, game: Game) {
+        player.removeResourceFrom(this);
+        game.increaseVenusScaleLevel(player, 1);
+        return undefined;
     }
 }

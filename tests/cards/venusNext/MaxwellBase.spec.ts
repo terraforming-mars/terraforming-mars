@@ -9,6 +9,8 @@ import { AerialMappers } from '../../../src/cards/venusNext/AerialMappers';
 import { SelectCard } from '../../../src/inputs/SelectCard';
 import { Birds } from '../../../src/cards/Birds';
 import { BoardName } from '../../../src/BoardName';
+import { StratosphericBirds } from "../../../src/cards/venusNext/StratosphericBirds";
+import { ICard } from "../../../src/cards/ICard";
 
 describe("MaxwellBase", function () {
     it("Should play", function () {
@@ -16,7 +18,8 @@ describe("MaxwellBase", function () {
         const player = new Player("test", Color.BLUE, false);
         const gameOptions = {
             draftVariant: false,
-	        initialDraftVariant: false,
+            initialDraftVariant: false,
+            corporateEra: true,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
@@ -38,19 +41,33 @@ describe("MaxwellBase", function () {
         expect(action).to.eq(undefined);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     });
-    it("Should act", function () {
+    it("Should act - single target", function () {
         const card = new MaxwellBase();
         const card2 = new Birds();
         const card3 = new AerialMappers()
         const player = new Player("test", Color.BLUE, false);
+
         player.playedCards.push(card);
         player.playedCards.push(card2);
         expect(card.canAct(player)).to.eq(false);
+
         player.playedCards.push(card3);
         expect(card.canAct(player)).to.eq(true);        
+        card.action(player);
+        expect(player.getResourcesOnCard(card3)).to.eq(1);
+    });
+    it("Should act - multiple targets", function () {
+        const card = new MaxwellBase();
+        const card2 = new StratosphericBirds();
+        const card3 = new AerialMappers()
+        const player = new Player("test", Color.BLUE, false);
+
+        player.playedCards.push(card, card2, card3);
+        expect(card.canAct(player)).to.eq(true);
+
         const action = card.action(player);
         expect(action instanceof SelectCard).to.eq(true);
-        action.cb([card3]);
-        expect(player.getResourcesOnCard(card3)).to.eq(1);
+        (action as SelectCard<ICard>).cb([card2]);
+        expect(player.getResourcesOnCard(card2)).to.eq(1);
     });
 });

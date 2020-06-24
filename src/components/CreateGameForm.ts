@@ -14,6 +14,7 @@ interface CreateGameModel {
     firstIndex: number;
     playersCount: number;
     players: Array<NewPlayerModel>;
+    corporateEra: boolean;
     prelude: boolean;
     draftVariant: boolean;
     initialDraft: boolean;
@@ -54,8 +55,10 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 {index: 2, name: "", color: Color.GREEN, beginner: false, first: false},
                 {index: 3, name: "", color: Color.YELLOW, beginner: false, first: false},
                 {index: 4, name: "", color: Color.BLUE, beginner: false, first: false},
-                {index: 5, name: "", color: Color.BLACK, beginner: false, first: false}
+                {index: 5, name: "", color: Color.BLACK, beginner: false, first: false},
+                {index: 6, name: "", color: Color.PURPLE, beginner: false, first: false}
             ],
+            corporateEra: true,
             prelude: false,
             draftVariant: true,
             initialDraft: false,
@@ -141,14 +144,12 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
             // TODO Check if all players has different colors
 
-            // TODO Check all names to be set
-
             if (component.board === "random") {
                 const boards = Object.values(BoardName);
                 this.board = boards[Math.floor(Math.random() * boards.length)];
             }
             
-
+            const corporateEra = component.corporateEra;
             const prelude = component.prelude;
             const draftVariant = component.draftVariant;
             const initialDraft = component.initialDraft;
@@ -177,7 +178,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             }
 
             const dataToSend = JSON.stringify({
-                players: players, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption, promoCardsOption, undoOption, startingCorporations, soloTR, clonedGamedId, initialDraft 
+                players: players, corporateEra, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption, promoCardsOption, undoOption, startingCorporations, soloTR, clonedGamedId, initialDraft 
             });
 
             const onSucces = (response: any) => {
@@ -211,7 +212,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         </div>
                         <div>
                             <label class="form-label form-inline">Color:</label>
-                            <label class="form-radio form-inline" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black']">
+                            <label class="form-radio form-inline" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
                                 <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color">
                                 <i class="form-icon"></i> <span v-i18n>{{ color }}</span>
                             </label>
@@ -228,7 +229,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         <div class="create-game-options-block col3 col-sm-6" v-if="! isSoloModePage">
                             <h4 v-i18n>Players count</h4>
 
-                            <label class="form-radio" v-for="pCount in [1,2,3,4,5]">
+                            <label class="form-radio" v-for="pCount in [1,2,3,4,5,6]">
                                 <input type="radio" :value="pCount" name="playersCount" v-model="playersCount">
                                 <i class="form-icon"></i> <span v-html="pCount === 1 ? 'Solo' : pCount"></span>
                             </label>
@@ -236,6 +237,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                         <div class="create-game-options-block col3 col-sm-6">
                             <h4 v-i18n>Extensions</h4>
+                            <label class="form-switch">
+                                <input type="checkbox" name="corporateEra" v-model="corporateEra">
+                                <i class="form-icon"></i> <span v-i18n>Corporate Era</span>
+                            </label>
+
                             <label class="form-switch">
                                 <input type="checkbox" name="prelude" v-model="prelude">
                                 <i class="form-icon"></i> <span v-i18n>Prelude</span>
@@ -350,7 +356,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </div>
                             <div>
                                 <label class="form-label form-inline">Color:</label>
-                                <label class="form-radio form-inline" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black']">
+                                <label class="form-radio form-inline" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
                                     <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color">
                                     <i class="form-icon"></i> <span v-i18n>{{ color }}</span>
                                 </label>

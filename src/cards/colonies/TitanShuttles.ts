@@ -30,17 +30,17 @@ export class TitanShuttles implements IProjectCard, IResourceCard {
             return undefined;
         });
 
-        const spendResource = new SelectAmount("Remove X floater on this card to gain X titanium", (amount: number) => {
+        const spendResource = new SelectAmount("Remove X floaters on this card to gain X titanium", (amount: number) => {
             player.removeResourceFrom(this, amount);
             player.titanium += amount; 
             return undefined;
         }, this.resourceCount);
 
-        opts.push(addResource);
-
         if (this.resourceCount > 0){
             opts.push(spendResource);
         }
+
+        opts.push(addResource);
 
         return new OrOptions(...opts);
     }

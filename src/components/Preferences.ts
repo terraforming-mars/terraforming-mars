@@ -93,7 +93,7 @@ export const Preferences = Vue.component("preferences", {
             </div>
             <div class="preferences_item">
                 <a href="#cards">
-                    <i class="preferences_icon preferences_icon--cards"></i>
+                    <i class="preferences_icon preferences_icon--cards"><slot></slot></i>
                 </a>
             </div>
 

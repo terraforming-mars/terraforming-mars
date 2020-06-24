@@ -5,16 +5,18 @@ import { Player } from "../src/Player";
 import { PartyName } from "../src/turmoil/parties/PartyName";
 import { Game, GameOptions } from "../src/Game";
 import { BoardName } from "../src/BoardName";
-import { Unity } from '../src/turmoil/parties/Unity';
-import { Greens } from '../src/turmoil/parties/Greens';
-import { MarsFirst } from '../src/turmoil/parties/MarsFirst';
+import { Unity } from "../src/turmoil/parties/Unity";
+import { Greens } from "../src/turmoil/parties/Greens";
+import { MarsFirst } from "../src/turmoil/parties/MarsFirst";
+import { Phase } from "../src/Phase";
 
 describe("Turmoil", function () {
     it("Should initialize with right defaults", function () {
         const player = new Player("test", Color.BLUE, false);
         const gameOptions = {
             draftVariant: false,
-	        initialDraftVariant: false,
+            initialDraftVariant: false,
+            corporateEra: true,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
@@ -40,7 +42,8 @@ describe("Turmoil", function () {
         const player = new Player("test", Color.BLUE, false);
         const gameOptions = {
             draftVariant: false,
-	        initialDraftVariant: false,
+            initialDraftVariant: false,
+            corporateEra: true,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
@@ -72,7 +75,8 @@ describe("Turmoil", function () {
         const player = new Player("test", Color.BLUE, false);
         const gameOptions = {
             draftVariant: false,
-	        initialDraftVariant: false,
+            initialDraftVariant: false,
+            corporateEra: true,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
@@ -114,7 +118,8 @@ describe("Turmoil", function () {
         const player = new Player("test", Color.BLUE, false);
         const gameOptions = {
             draftVariant: false,
-	        initialDraftVariant: false,
+            initialDraftVariant: false,
+            corporateEra: true,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
@@ -143,7 +148,8 @@ describe("Turmoil", function () {
         const player = new Player("test", Color.BLUE, false);
         const gameOptions = {
             draftVariant: false,
-	        initialDraftVariant: false,
+            initialDraftVariant: false,
+            corporateEra: true,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
@@ -180,7 +186,8 @@ describe("Turmoil", function () {
         const player = new Player("test", Color.BLUE, false);
         const gameOptions = {
             draftVariant: false,
-	        initialDraftVariant: false,
+            initialDraftVariant: false,
+            corporateEra: true,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
@@ -198,12 +205,13 @@ describe("Turmoil", function () {
         const game = new Game("foobar", [player,player], player, gameOptions);
         if (game.turmoil) {
             game.turmoil.rulingParty = new Unity();
+            game.phase = Phase.ACTION;
             expect(player.getTitaniumValue(game)).to.eq(4);
             game.turmoil.rulingParty = new Greens();
-            game.addGreenery(player, '10');
+            game.addGreenery(player, "10");
             expect(player.megaCredits).to.eq(4);
             game.turmoil.rulingParty = new MarsFirst();
-            game.addGreenery(player, '11');
+            game.addGreenery(player, "11");
             expect(player.steel).to.eq(1);
         }
     });

@@ -15,7 +15,7 @@ export class MinersOnStrike implements IGlobalEvent {
         game.getPlayers().forEach(player => {
             let amount = Math.min(5, player.getTagCount(Tags.JOVIAN, false, false)) - turmoil.getPlayerInfluence(player);
             if (amount > 0) {
-                player.setResource(Resources.TITANIUM, -amount, undefined, undefined, true);
+                player.setResource(Resources.TITANIUM, -amount, game, undefined, true);
             }
         });    
     }

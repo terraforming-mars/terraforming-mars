@@ -17,7 +17,6 @@ describe("EosChasmaNationalPark", function () {
         expect(card.canPlay(player, game)).to.eq(false);
     });
     it("Should play", function () {
-
         const card = new EosChasmaNationalPark();
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
@@ -33,13 +32,12 @@ describe("EosChasmaNationalPark", function () {
         player.playedCards.push(fish);
 
         expect(card.canPlay(player, game)).to.eq(true);
-        const action = card.play(player);
+        const action = card.play(player, game);
         expect(action instanceof SelectCard).to.eq(true);
         if (action === undefined) return;
         player.playedCards.push(card);
 
         action.cb([birds]);
-
         player.getVictoryPoints(game);
 
         expect(player.getResourcesOnCard(birds)).to.eq(1);
@@ -47,7 +45,28 @@ describe("EosChasmaNationalPark", function () {
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     });
+    it("Should play - single target", function () {
+        const card = new EosChasmaNationalPark();
+        const player = new Player("test", Color.BLUE, false);
+        const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("foobar", [player, player2], player);
 
-  
+        // Fit minimal requirements
+        (game as any).temperature = -12;
+
+        // Single target
+        const birds = new Birds();
+        player.playedCards.push(birds);
+
+        expect(card.canPlay(player, game)).to.eq(true);
+        card.play(player, game);
+        player.playedCards.push(card);
+        player.getVictoryPoints(game);
+
+        expect(player.getResourcesOnCard(birds)).to.eq(1);
+        expect(player.plants).to.eq(3);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
+    });
 });
 

@@ -1,5 +1,5 @@
 import {Player} from "./Player";
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from "./Dealer";
+import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_CORP_ERA_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from "./Dealer";
 import {ISpace} from "./ISpace";
 import {SpaceType} from "./SpaceType";
 import {TileType} from "./TileType";
@@ -54,9 +54,11 @@ import { CardName } from "./CardName";
 import { Turmoil } from "./turmoil/Turmoil";
 import { PartyName } from "./turmoil/parties/PartyName";
 import { IParty } from "./turmoil/parties/IParty";
+import { Pristar } from "./cards/turmoil/Pristar";
 
 export interface GameOptions {
   draftVariant: boolean;
+  corporateEra: boolean;
   preludeExtension: boolean;
   venusNextExtension: boolean;
   coloniesExtension: boolean;
@@ -102,6 +104,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public lastSaveId: number = 0;
     private draftVariant: boolean;
     public soloMode: boolean = false;
+    public corporateEra: boolean = true;
     private preludeExtension: boolean;
     public venusNextExtension: boolean;
     public coloniesExtension: boolean;
@@ -130,6 +133,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         gameOptions = {
           draftVariant: false,
           initialDraftVariant: false,
+          corporateEra: true,
           preludeExtension: false,
           venusNextExtension: false,
           coloniesExtension: false,
@@ -151,6 +155,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.activePlayer = first;
       this.boardName = gameOptions.boardName;
       this.draftVariant = gameOptions.draftVariant;
+      this.corporateEra = gameOptions.corporateEra;
       this.preludeExtension = gameOptions.preludeExtension;
       this.venusNextExtension = gameOptions.venusNextExtension;
       this.coloniesExtension = gameOptions.coloniesExtension;
@@ -158,7 +163,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.promoCardsOption = gameOptions.promoCardsOption;
       this.undoOption = gameOptions.undoOption;
       this.startingCorporations = gameOptions.startingCorporations;
-      this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption, this.turmoilExtension, Math.random());
+      this.dealer = new Dealer(this.corporateEra, this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption, this.turmoilExtension, Math.random());
       this.showOtherPlayersVP = gameOptions.showOtherPlayersVP;
       this.solarPhaseOption = gameOptions.solarPhaseOption;
       this.soloTR = gameOptions.soloTR;
@@ -185,6 +190,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       let corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
+
+      // Add Corporate Era corporation cards
+      if (this.corporateEra) {
+        corporationCards.push(...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => new cf.factory()));
+      }
+      
       // Add prelude corporations cards
       if (this.preludeExtension) {
         corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
@@ -219,6 +230,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
         // Init all available corporation cards to choose from
         corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
+        corporationCards.push(...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => new cf.factory()));
         corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
         corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
         corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
@@ -233,10 +245,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
       corporationCards = this.dealer.shuffleCards(corporationCards);
 
       // Give each player their corporation cards and other cards
-      for (const player of players) {
+      for (var i = 0; i < players.length; i++) {
+        const player = players[i];
+        const remainingPlayers = this.players.length - i;
+        
         if (!player.beginner) {
-          // Failsafe for exceding corporation pool - Minimum is 12
-          if (this.startingCorporations * this.players.length > 12) {
+          // Failsafe for exceding corporation pool
+          if (this.startingCorporations * remainingPlayers > corporationCards.length) {
             this.startingCorporations = 2;
           }
           for (let i = 0; i < this.startingCorporations; i++) {
@@ -255,15 +270,23 @@ export class Game implements ILoadable<SerializedGame, Game> {
             for (let i = 0; i < 4; i++) {
               player.dealtPreludeCards.push(this.dealer.dealPreludeCard());
             }
-          }                 
+          }
+
+          if (!this.corporateEra) {
+            player.setProduction(Resources.MEGACREDITS);
+            player.setProduction(Resources.STEEL);
+            player.setProduction(Resources.TITANIUM);
+            player.setProduction(Resources.PLANTS);
+            player.setProduction(Resources.ENERGY);
+            player.setProduction(Resources.HEAT);
+          }
 
           if (!gameOptions.initialDraftVariant) {
             player.setWaitingFor(this.pickCorporationCard(player), () => {});
           }
         } else {
           this.playCorporationCard(player, new BeginnerCorporation());
-        }    
-
+        }
       }
 
       // Save initial game state
@@ -350,6 +373,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           // Update game options
           game.draftVariant = gameToRebuild.draftVariant;
           game.soloMode = gameToRebuild.soloMode;
+          game.corporateEra = gameToRebuild.corporateEra;
           game.preludeExtension = gameToRebuild.preludeExtension;
           game.venusNextExtension = gameToRebuild.venusNextExtension;
           game.coloniesExtension = gameToRebuild.coloniesExtension;
@@ -687,6 +711,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private gotoResearchPhase(): void {
+      this.phase = Phase.RESEARCH;
       this.researchedPlayers.clear();
       this.players.forEach((player) => {
         player.runResearchPhase(this, this.draftVariant);
@@ -694,6 +719,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }  
 
     private gotoDraftingPhase(): void {
+      this.phase = Phase.DRAFTING;
       this.draftedPlayers.clear();
       this.draftRound = 1;
       this.runDraftRound();
@@ -711,6 +737,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private gotoProductionPhase(): void {
+      this.phase = Phase.PRODUCTION;
       this.passedPlayers.clear();
       this.players.forEach((player) => {
         player.runProductionPhase();
@@ -731,10 +758,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.gotoWorldGovernmentTerraforming();
         return;
       }
-      this.gotoDraftOrResearch();
+      this.gotoEndGeneration();
     }
 
-    private gotoDraftOrResearch() {
+    private gotoEndGeneration() {
       if (this.coloniesExtension) {
         this.colonies.forEach(colony => {
           colony.endGeneration();
@@ -744,7 +771,33 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if(this.turmoilExtension) {
         this.turmoil?.endGeneration(this);
       }
+         
+      // Resolve Turmoil interrupts
+      if (this.interrupts.length > 0) {
+        this.resolveTurmoilInterrupts();
+        return;
+      }
       
+      this.goToDraftOrResearch();
+    }
+
+    private resolveTurmoilInterrupts() {
+      if (this.interrupts.length > 0) {
+        let interrupt = this.interrupts.shift();
+        if (interrupt !== undefined && interrupt.playerInput !== undefined) {
+          interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+            this.resolveTurmoilInterrupts();
+          });
+          return;
+        }
+      }
+
+      // All turmoil interrupts have been resolved, continue game flow
+      this.goToDraftOrResearch();
+    }
+
+    private goToDraftOrResearch() {
+
       this.generation++;
       this.log(
         LogMessageType.NEW_GENERATION,
@@ -755,8 +808,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       this.players.forEach((player) => {
         player.terraformRatingAtGenerationStart = player.getTerraformRating();
+        if(player.corporationCard?.name === CardName.PRISTAR){
+          (player.corporationCard as Pristar).lastGenerationTR = player.getTerraformRating();
+        }
       });
-
+       
       if (this.draftVariant) {
         this.gotoDraftingPhase();
       } else {
@@ -770,7 +826,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public doneWorldGovernmentTerraforming() {
       //Carry on to next phase
-      this.gotoDraftOrResearch();
+      this.gotoEndGeneration();
     }  
 
     private allPlayersHavePassed(): boolean {
@@ -1195,7 +1251,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
         && this.turmoil !== undefined 
         && this.turmoil.rulingParty !== undefined 
         && this.turmoil.rulingParty.name === PartyName.MARS
-        && spaceType !== SpaceType.COLONY) {
+        && spaceType !== SpaceType.COLONY
+        && this.phase === Phase.ACTION) {
           player.setResource(Resources.STEEL, 1);
       }      
 
@@ -1276,7 +1333,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.turmoilExtension 
         && this.turmoil !== undefined 
         && this.turmoil.rulingParty !== undefined 
-        && this.turmoil.rulingParty.name === PartyName.GREENS) {
+        && this.turmoil.rulingParty.name === PartyName.GREENS
+        && this.phase ===  Phase.ACTION) {
           player.setResource(Resources.MEGACREDITS, 4);
       }
       return this.increaseOxygenLevel(player, 1);
@@ -1353,32 +1411,60 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public drawCardsByTag(tag: Tags, total: number): Array<IProjectCard> {
       let cardsToDraw = 0;
       const result: Array<IProjectCard> = [];
+      const discardedCards: Array<IProjectCard> = [];
+
       while (cardsToDraw < total) {
         const projectCard = this.dealer.dealCard();
         if (projectCard.tags.includes(tag)) {
           cardsToDraw++;
           result.push(projectCard);
         } else {
+          discardedCards.push(projectCard);
           this.dealer.discard(projectCard);
         }
       }
+
+      this.log(
+        LogMessageType.DEFAULT,
+        discardedCards.length + " card(s) were discarded",
+       ...discardedCards.map((card) => new LogMessageData(LogMessageDataType.CARD, card.name)),
+      );
+
       return result;
     }
 
     public drawCardsByResource(resource: ResourceType, total: number): Array<IProjectCard> {
       let cardsToDraw = 0;
       const result: Array<IProjectCard> = [];
+      const discardedCards: Array<IProjectCard> = [];
+
       while (cardsToDraw < total) {
         const projectCard = this.dealer.dealCard();
         if (projectCard.resourceType !== undefined && projectCard.resourceType === resource ) {
           cardsToDraw++;
           result.push(projectCard);
         } else {
+          discardedCards.push(projectCard);
           this.dealer.discard(projectCard);
         }
       }
+
+      this.log(
+        LogMessageType.DEFAULT,
+        discardedCards.length + " card(s) were discarded",
+       ...discardedCards.map((card) => new LogMessageData(LogMessageDataType.CARD, card.name)),
+      );
+
       return result;
-    }   
+    }
+
+    public getCardsInHandByTag(player: Player, tag: Tags) {
+      return player.cardsInHand.filter((card) => card.tags.includes(tag));
+    }
+
+    public getCardsInHandByResource(player: Player, resourceType: ResourceType) {
+      return player.cardsInHand.filter((card) => card.resourceType === resourceType);
+    }
 
     public log(type: LogMessageType, message: string, ...data: LogMessageData[]) {
       this.gameLog.push(new LogMessage(type, message, data));
@@ -1447,7 +1533,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       let o = Object.assign(this, d);
 
       // Rebuild dealer object to be sure that we will have cards in the same order
-      let dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption, this.turmoilExtension);
+      let dealer = new Dealer(this.corporateEra, this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption, this.turmoilExtension);
       this.dealer = dealer.loadFromJSON(d.dealer);
 
       // Rebuild every player objects

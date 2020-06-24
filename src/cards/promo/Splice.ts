@@ -7,6 +7,9 @@ import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
 import { ResourceType } from "../../ResourceType";
 import { CardName } from '../../CardName';
+import { LogMessageType } from "../../LogMessageType";
+import { LogMessageData } from "../../LogMessageData";
+import { LogMessageDataType } from "../../LogMessageDataType";
 
 export class Splice implements CorporationCard {
     public name: CardName = CardName.SPLICE;
@@ -15,6 +18,16 @@ export class Splice implements CorporationCard {
 
     public initialAction(player: Player, game: Game) {
         player.cardsInHand.push(game.drawCardsByTag(Tags.MICROBES, 1)[0]);
+        
+        const drawnCards = game.getCardsInHandByTag(player, Tags.MICROBES).slice(-1);
+
+        game.log(
+            LogMessageType.DEFAULT,
+            "${0} drew ${1}",
+            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.CARD, drawnCards[0].name)
+        );
+        
         return undefined;
     }
 

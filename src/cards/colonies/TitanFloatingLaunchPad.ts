@@ -35,13 +35,13 @@ export class TitanFloatingLaunchPad implements IProjectCard,IResourceCard {
             return undefined;
         });
 
-        opts.push(addResource);
-
         let openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor === undefined);
         if (openColonies.length > 0 
           && player.fleetSize > player.tradesThisTurn && this.resourceCount > 0 ){
             opts.push(spendResource);
         }
+
+        opts.push(addResource);
 
         return new OrOptions(...opts);
     }

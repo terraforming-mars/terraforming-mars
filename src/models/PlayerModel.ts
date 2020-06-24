@@ -50,4 +50,5 @@ export interface PlayerModel {
     dealtPreludeCards:  Array<IProjectCard>;
     initialDraft: boolean;
     needsToDraft: boolean | undefined;
+    deckSize: number;
 }

@@ -24,20 +24,40 @@ describe("ExtremeColdFungus", function () {
         const action = card.play();
         expect(action).to.eq(undefined);
     });
-    it("Should act", function () {
+    it("Should act - single target", function () {
         const card = new ExtremeColdFungus();
         const player = new Player("test", Color.BLUE, false);
-        player.playedCards.push(new Ants());
-        const action = card.action(player);
+        const game = new Game("foobar", [player,player], player);
+
+        const tardigrades = new Tardigrades();
+        player.playedCards.push(tardigrades);
+        
+        const action = card.action(player, game);
         expect(action).not.to.eq(undefined);
         expect(action instanceof OrOptions).to.eq(true);
         expect(action!.options.length).to.eq(2);
+        
+        action!.options[0].cb();
+        expect(player.getResourcesOnCard(tardigrades)).to.eq(2);
+        action!.options[1].cb();
+        expect(player.plants).to.eq(1);
+    });
+    it("Should act - multiple targets", function () {
+        const card = new ExtremeColdFungus();
+        const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player,player], player);
+        
+        player.playedCards.push(new Ants());
         const tardigrades = new Tardigrades();
         player.playedCards.push(tardigrades);
         player.addResourceTo(tardigrades, 4);
-        action!.options[1].cb([tardigrades]);
+        const action = card.action(player, game);
+        expect(action).not.to.eq(undefined);
+        expect(action instanceof OrOptions).to.eq(true);
+        expect(action!.options.length).to.eq(2);
+        action!.options[0].cb([tardigrades]);
         expect(player.getResourcesOnCard(tardigrades)).to.eq(6);
-        action!.options[0].cb();
+        action!.options[1].cb();
         expect(player.plants).to.eq(1);
     });
 });

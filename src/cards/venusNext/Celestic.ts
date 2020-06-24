@@ -7,6 +7,9 @@ import { Game } from '../../Game';
 import { IActionCard, ICard, IResourceCard } from '../ICard';
 import { SelectCard } from '../../inputs/SelectCard';
 import { CardName } from '../../CardName';
+import { LogMessageType } from "../../LogMessageType";
+import { LogMessageData } from "../../LogMessageData";
+import { LogMessageDataType } from "../../LogMessageDataType";
 
 export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public name: CardName = CardName.CELESTIC;
@@ -15,11 +18,43 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public resourceType: ResourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
 
+    private static readonly floaterCards: Set<CardName> = new Set<CardName>([
+        CardName.AEROSPORT_TOURNAMENT,
+        CardName.AIR_SCRAPPING_EXPEDITION,
+        CardName.AIR_RAID,
+        CardName.AIRLINERS,
+        CardName.ATMOSCOOP,
+        CardName.FLOATER_LEASING,
+        CardName.FLOATER_PROTOTYPES,
+        CardName.FLOATER_TECHNOLOGY,
+        CardName.HYDROGEN_TO_VENUS,
+        CardName.NITROGEN_FROM_TITAN,
+        CardName.STRATOSPHERIC_BIRDS
+    ]);
+
     public initialAction(player: Player, game: Game) {
-        if (game.hasCardsWithResource(ResourceType.FLOATER, 2)) {
-            for (let foundCard of game.drawCardsByResource(ResourceType.FLOATER, 2)) {
-                player.cardsInHand.push(foundCard);
+        const requiredCardsCount = 2;
+        if (game.hasCardsWithResource(ResourceType.FLOATER, requiredCardsCount)) {
+            let drawnCount = 0;
+            let floaterCards: Array<CardName> = [];
+            while (drawnCount < requiredCardsCount) {
+                let card = game.dealer.dealCard();
+                if (Celestic.floaterCards.has(card.name) || card.resourceType === ResourceType.FLOATER) {
+                    player.cardsInHand.push(card);
+                    drawnCount++;
+                    floaterCards.push(card.name);
+                } else {
+                    game.dealer.discard(card);
+                }
             }
+
+            game.log(
+                LogMessageType.DEFAULT,
+                "${0} drew ${1} and ${2}",
+                new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                new LogMessageData(LogMessageDataType.CARD, floaterCards[0]),
+                new LogMessageData(LogMessageDataType.CARD, floaterCards[1])
+            );
         }
         
         return undefined;

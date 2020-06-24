@@ -24,9 +24,9 @@ describe("OlympusConference", function () {
         card.onCardPlayed(player, game, card);
         expect(game.interrupts.length).to.eq(1);
         const orOptions: OrOptions = game.interrupts[0].playerInput as OrOptions;
-        orOptions.options[0].cb();
-        expect(card.resourceCount).to.eq(2);
         orOptions.options[1].cb();
+        expect(card.resourceCount).to.eq(2);
+        orOptions.options[0].cb();
         expect(card.resourceCount).to.eq(1);
         expect(player.cardsInHand.length).to.eq(1);
         expect(game.interrupts.length).to.eq(1);
@@ -41,7 +41,7 @@ describe("OlympusConference", function () {
         expect(card.resourceCount).to.eq(1);
         const orOptions: OrOptions = game.interrupts[0].playerInput as OrOptions;
         game.interrupts.splice(0, 1);
-        orOptions.options[0].cb();
+        orOptions.options[1].cb();
         expect(card.resourceCount).to.eq(2);
         expect(game.interrupts.length).to.eq(0);
     });

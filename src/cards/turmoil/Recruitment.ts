@@ -3,7 +3,7 @@ import { Tags } from "../Tags";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { Game } from '../../Game';
+import { Game } from "../../Game";
 import { SelectParty } from "../../interrupts/SelectParty";
 
 export class Recruitment implements IProjectCard {
@@ -11,7 +11,7 @@ export class Recruitment implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: CardName = CardName.RECRUITMENT;
     public cardType: CardType = CardType.EVENT;
-
+    public hasRequirements = false;
     public canPlay(_player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {
             let parties = game.turmoil!.parties.filter(party => {
@@ -29,7 +29,7 @@ export class Recruitment implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        game.addInterrupt(new SelectParty(player, game, "Select which Neutral delegate to remove", 1, "NEUTRAL"));
+        game.addInterrupt(new SelectParty(player, game, "Select which Neutral delegate to remove", 1, "NEUTRAL", undefined, false));
         return undefined;
     }
 }

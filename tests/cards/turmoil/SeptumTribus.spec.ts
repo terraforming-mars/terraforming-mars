@@ -13,6 +13,7 @@ describe("SeptumTribus", function () {
         const player2 = new Player("test", Color.RED, false);
         const gameOptions = {
             draftVariant: false,
+            corporateEra: true,
             preludeExtension: false,
             venusNextExtension: false,
             coloniesExtension: false,
@@ -57,6 +58,7 @@ describe("SeptumTribus", function () {
         const player = new Player("test", Color.BLUE, false);
         const gameOptions = {
             draftVariant: false,
+            corporateEra: true,
             preludeExtension: false,
             venusNextExtension: false,
             coloniesExtension: false,

@@ -33,14 +33,14 @@ export class OlympusConference implements IProjectCard, IResourceCard {
       }
 
       game.addInterrupt({ player, playerInput: new OrOptions(
-        new SelectOption("Add a science resource to this card", () => {
-          this.resourceCount++;
-          this.runInterrupts(player, game, scienceTags - 1);
-          return undefined;
-        }),
         new SelectOption("Remove a science resource from this card to draw a card", () => {
           player.removeResourceFrom(this);
           player.cardsInHand.push(game.dealer.dealCard());
+          this.runInterrupts(player, game, scienceTags - 1);
+          return undefined;
+        }),
+        new SelectOption("Add a science resource to this card", () => {
+          this.resourceCount++;
           this.runInterrupts(player, game, scienceTags - 1);
           return undefined;
         })

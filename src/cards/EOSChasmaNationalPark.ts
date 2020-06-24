@@ -9,7 +9,7 @@ import {SelectCard} from '../inputs/SelectCard';
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 import { ResourceType } from '../ResourceType';
-
+import { LogHelper } from '../components/LogHelper';
 
 export class EosChasmaNationalPark implements IProjectCard {
   public cost: number = 16;
@@ -24,22 +24,27 @@ export class EosChasmaNationalPark implements IProjectCard {
     );
   }
 
-  public play(player: Player) {
+  public play(player: Player, game: Game) {
     const cards = player.getResourceCards(ResourceType.ANIMAL);
     player.plants += 3;
     player.setProduction(Resources.MEGACREDITS,2);
 
     if ( cards.length < 1 ) return undefined;
+
+    if (cards.length === 1) {
+      player.addResourceTo(cards[0], 1);
+      LogHelper.logAddResource(game, player, cards[0]);
+      return undefined;
+    }
    
     return new SelectCard("Add 1 animal to a card",  cards, (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], 1);
+        LogHelper.logAddResource(game, player, foundCards[0]);
         return undefined;
     });
-       
   }
 
   public getVictoryPoints() {
     return 1;
   }
-
 }

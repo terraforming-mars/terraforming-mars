@@ -28,22 +28,29 @@ export class SulphurEatingBacteria implements IActionCard,IProjectCard, IResourc
     }    
     public action(player: Player) {
         var opts: Array<SelectOption | SelectAmount> = [];
-        const addResource = new SelectOption("Add 1 microbe to this card", () => {
-            this.resourceCount++;
-            return undefined;
-        });
 
-        const spendResource = new SelectAmount("Remove any number of microbes to gain 3 MC per microbe removed", (amount: number) => {
-            player.removeResourceFrom(this,amount);
-            player.megaCredits += 3 * amount;
-            return undefined;
-        }, this.resourceCount);
-        opts.push(addResource);
+        const addResource = new SelectOption("Add 1 microbe to this card", () => this.addResource());
+        const spendResource = new SelectAmount("Remove any number of microbes to gain 3 MC per microbe removed", (amount: number) => this.spendResource(player, amount), this.resourceCount);
 
         if (this.resourceCount > 0) {
             opts.push(spendResource);
-        } else return addResource;
+        } else {
+            return this.addResource();
+        }
+
+        opts.push(addResource);
 
         return new OrOptions(...opts);
+    }
+
+    private addResource() {
+        this.resourceCount++;
+        return undefined;
+    }
+
+    private spendResource(player: Player, amount: number) {
+        player.removeResourceFrom(this,amount);
+        player.megaCredits += 3 * amount;
+        return undefined;
     }
 }

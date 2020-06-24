@@ -85,7 +85,9 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
             </div>
 
-            <preferences v-trim-whitespace></preferences>
+            <preferences v-trim-whitespace>
+                <div class="deck-size">{{ player.deckSize }}</div>
+            </preferences>
 
             <div v-if="player.corporationCard">
 
@@ -233,6 +235,7 @@ export const PlayerHome = Vue.component("player-home", {
                     </summary>
                     <div class="accordion-body">
                         <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.boardName"></board>
+                        <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
                     </div>
                 </details>
             </div>

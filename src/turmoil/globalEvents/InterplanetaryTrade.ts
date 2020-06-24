@@ -13,7 +13,7 @@ export class InterplanetaryTrade implements IGlobalEvent {
     public currentDelegate = PartyName.UNITY;
     public resolve(game: Game, turmoil: Turmoil) {
         game.getPlayers().forEach(player => {
-            player.setResource(Resources.MEGACREDITS, 2 * (Math.min(5, player.getTagCount(Tags.SPACE, false, false)) + turmoil.getPlayerInfluence(player)), undefined, undefined, true);
+            player.setResource(Resources.MEGACREDITS, 2 * (Math.min(5, player.getTagCount(Tags.SPACE, false, false)) + turmoil.getPlayerInfluence(player)), game, undefined, true);
         });    
     }
 }    

@@ -236,9 +236,10 @@ function loadAllGames(): void {
       let gameToRebuild = new Game(game_id,[player,player2], player);
       Database.getInstance().restoreGameLastSave(game_id, gameToRebuild, function (err) {
         if (err) {
+          console.error("unable to load game " + game_id, err);
           return;
         }
-        console.log("load game "+ game_id);
+        console.log("load game " + game_id);
         games.set(gameToRebuild.id, gameToRebuild);
         gameToRebuild.getPlayers().forEach((player) => {
           playersToGame.set(player.id, gameToRebuild);
@@ -362,6 +363,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
       const gameOptions = {
         draftVariant: gameReq.draftVariant,
+        corporateEra: gameReq.corporateEra,
         preludeExtension: gameReq.prelude,
         venusNextExtension: gameReq.venusNext,
         coloniesExtension: gameReq.colonies,
@@ -471,6 +473,7 @@ function getPlayer(player: Player, game: Game): string {
     isSoloModeWin: game.isSoloModeWin(),
     gameAge: game.gameAge,
     isActive: player.id === game.activePlayer.id,
+    corporateEra: game.corporateEra,
     venusNextExtension: game.venusNextExtension,
     venusScaleLevel: game.getVenusScaleLevel(),
     boardName: game.boardName,
@@ -486,7 +489,8 @@ function getPlayer(player: Player, game: Game): string {
     dealtCorporationCards: player.dealtCorporationCards,
     dealtPreludeCards: player.dealtPreludeCards,
     initialDraft: game.initialDraft,
-    needsToDraft: player.needsToDraft
+    needsToDraft: player.needsToDraft,
+    deckSize: game.dealer.getDeckSize()
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -633,7 +637,8 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       tradesThisTurn: player.tradesThisTurn,
       turmoil: getTurmoil(game),
       selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
-      needsToDraft: player.needsToDraft
+      needsToDraft: player.needsToDraft,
+      deckSize: game.dealer.getDeckSize()
     } as PlayerModel;
   });
 }

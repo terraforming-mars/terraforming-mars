@@ -4,8 +4,8 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectCard } from "../inputs/SelectCard";
-import { CardName } from '../CardName';
-import { Resources } from '../Resources';
+import { CardName } from "../CardName";
+import { Resources } from "../Resources";
 import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
@@ -16,6 +16,7 @@ export class RoboticWorkforce implements IProjectCard {
     public tags: Array<Tags> = [Tags.SCIENCE];
     public name: CardName = CardName.ROBOTIC_WORKFORCE;
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         return this.getAvailableCards(player, game).length > 0;
     }
@@ -85,7 +86,8 @@ export class RoboticWorkforce implements IProjectCard {
             CardName.WINDMILLS,
             CardName.HOUSE_PRINTING,
             CardName.LAVA_TUBE_SETTLEMENT,
-            CardName.SPACE_PORT
+            CardName.SPACE_PORT,
+            CardName.SPINOFF_DEPARTMENT
         ];
 
         const corporationCardNames = (new Set())
@@ -266,6 +268,7 @@ export class RoboticWorkforce implements IProjectCard {
                     new Updater(CardName.HOUSE_PRINTING, 0, 0, 1, 0, 0, 0),
                     new Updater(CardName.LAVA_TUBE_SETTLEMENT, -1, 2, 0, 0, 0, 0),
                     new Updater(CardName.SPACE_PORT, -1, 4, 0, 0, 0, 0),
+                    new Updater(CardName.SPINOFF_DEPARTMENT, 0, 2, 0, 0, 0, 0),
                     new Updater(CardName.MINING_GUILD, 0, 0, 1, 0, 0, 0),
                     new Updater(CardName.MANUTECH, 0, 0, 1, 0, 0, 0),
                     new Updater(CardName.CHEUNG_SHING_MARS, 0, 3, 0, 0, 0, 0),

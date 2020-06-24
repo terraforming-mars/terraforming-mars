@@ -7,6 +7,7 @@ import { Game } from "../../src/Game";
 import { SelectCard } from "../../src/inputs/SelectCard";
 import { ProtectedHabitats } from "../../src/cards/ProtectedHabitats";
 import { Tardigrades } from "../../src/cards/Tardigrades";
+import { NitriteReducingBacteria } from "../../src/cards/NitriteReducingBacteria";
 import { Fish } from "../../src/cards/Fish";
 import { SecurityFleet } from "../../src/cards/SecurityFleet";
 
@@ -25,9 +26,10 @@ describe("Ants", function () {
         card.resourceCount += 5;
         expect(card.getVictoryPoints()).to.eq(2);
     });
-    it("Should action", function () {
+    it("Should action with multiple valid targets", function () {
         const card = new Ants();
         const cardTardigrades = new Tardigrades();
+        const cardNitriteReducingBacteria = new NitriteReducingBacteria();
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("ants_action_game", [player, player2], player);
@@ -39,6 +41,9 @@ describe("Ants", function () {
 
         player.playedCards.push(cardTardigrades);
         cardTardigrades.resourceCount++;
+
+        player.playedCards.push(cardNitriteReducingBacteria);
+        cardNitriteReducingBacteria.resourceCount++;
         
         expect(card.canAct(player, game)).to.eq(true);
 
@@ -47,7 +52,7 @@ describe("Ants", function () {
 
         expect(action instanceof SelectCard).to.eq(true);
         if (action !== undefined) {
-            expect(action.cards.length).to.eq(1);
+            expect(action.cards.length).to.eq(2);
 
             expect(action.cards[0]).to.eq(cardTardigrades);
             action.cb([action.cards[0]]);
@@ -93,11 +98,8 @@ describe("Ants", function () {
         player2.playedCards.push(securityFleetCard);
         player2.addResourceTo(securityFleetCard);
 
-        const action = card.action(player, game);
-        expect(action instanceof SelectCard).to.eq(true);
-        if (action !== undefined) {
-            expect(action.cards.length).to.eq(1);
-            expect(action.cards[0]).to.eq(cardTardigrades);
-        }
+        card.action(player, game);
+        expect(card.resourceCount).to.eq(1);
+        expect(cardTardigrades.resourceCount).to.eq(0);
     });
 });

@@ -9,14 +9,14 @@ import { TileType } from "../TileType";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 export class RestrictedArea implements IActionCard, IProjectCard {
     public cost: number = 11;
     public tags: Array<Tags> = [Tags.SCIENCE];
     public cardType: CardType = CardType.ACTIVE;
     public name: CardName = CardName.RESTRICTED_AREA;
-
+    public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
         return game.board.getAvailableSpacesOnLand(player).length > 0;
       }

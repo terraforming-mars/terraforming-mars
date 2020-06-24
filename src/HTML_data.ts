@@ -253,7 +253,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="tile city-tile " style="margin-left:20px;margin-bottom:5px;"></div><br>
             <div class="plant resource "></div><div class="plant resource "></div><div class="plant resource "></div>
             <div class="description " style="margin-top:-5px;font-size:11px;text-align: left; line-height: 12px;">
-                <div>Oxygen must be 7% or less.</div> 
+                <div>Oxygen must be 7% or less.</div>
                 <div style="width:140px;">Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.</div>
             </div>
         </div>
@@ -3916,7 +3916,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
               &nbsp;<div class="tile city-tile"></div>*
                 <div class="description " style="text-align:left;margin-top:-58px; width: 92px;">
-                  Requires 2 science tags. Increase your MC production 2 steps. 
+                  Requires 2 science tags. Increase your MC production 2 steps.
                 </div>
                 <div class="description" style="text-align:left; width: 117px; margin-left: 19px;">
                   Place a City tile ON THE RESERVED AREA. 1 VP for every 3rd Floater on this card.
@@ -4039,7 +4039,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="venus-icon project-icon"></div>
       <div class="card-number">255</div>
             <div class="content ">
-              <div class="requirements">Venus Venus</div>
+              <div class="requirements">2 Venus</div>
               <div class="production-box">
                   <div class="money production">2</div>
               </div>
@@ -4258,7 +4258,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="prelude-icon project-icon"></div>
               <div class="card-number">P42</div>
               <div class="content ">
-                <div class="requirements">Earth Earth</div>
+                <div class="requirements">2 Earth</div>
                 <div class="production-box">
                   <div class="production money">4</div>
                 </div><br>
@@ -4341,7 +4341,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="card-number">C05</div>
               <div class="content ">
                 <div class="points points-big">-1</div>
-                <div class="requirements">Earth Earth</div>
+                <div class="requirements">2 Earth</div>
                 <span style="font-size:14px;">NEXT CARD: </span> <div class="resource money">-16</div>
                   <div class="description ">
                     (Requires 2 Earth tags. The next card you play this generation costs 16 MC less.)
@@ -4481,7 +4481,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="card-number">C14</div>
               <div class="content ">
                 <div class="points points-big">-1</div>
-                <div class="requirements">Earth Earth</div>
+                <div class="requirements">2 Earth</div>
                 <div class="production-box"><div class="production money">2</div></div> <div style="margin-left:20px;" class="resource money">4</div>
                   <div class="description ">
                     (Requires 2 Earth tags. Increase your MC production 2 steps, and gain 4MC.)
@@ -4509,7 +4509,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="colonies-icon project-icon"></div>
               <div class="card-number">C16</div>
               <div class="content ">
-                <div class="requirements">Jovian Jovian</div>
+                <div class="requirements">2 Jovian</div>
                 12<div class="resource heat"></div><br>
                 - <div class="resource plant red-outline"></div><div class="resource plant red-outline"></div>
                   <div class="description ">
@@ -4581,7 +4581,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="colonies-icon project-icon"></div>
               <div class="card-number">C20</div>
               <div class="content ">
-                <div class="requirements">Earth Earth Earth</div>
+                <div class="requirements">3 Earth</div>
                 <div class="production-box"><div class="production money">2</div></div>
                   <div class="description ">
                     (Requires 3 Earth tags. Increase your MC production 2 steps.)
@@ -4835,7 +4835,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="card-number">C36</div>
               <div class="content ">
                 <div class="points points-big">2</div>
-                <div class="requirements">Earth Earth</div>
+                <div class="requirements">2 Earth</div>
                   : <span class="money resource ">-1</span>
                   <div class="description ">
                       (Effect: When you play a card, you pay 1 MC less for it.)
@@ -5123,7 +5123,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="production plant"></div><div class="production plant"></div>
       </div>
        <div class="resource money">36</div> 3<div class="resource plant"></div>
-      <div class="description" style="margin-top:0px;text-align:center;">(You start with 2 plant production, 3 plants, and 36MC)</div>
+      <div class="description" style="margin-top:-3px;text-align:center;">(You start with 2 plant production, 3 plants, and 36MC)</div>
     </div>
 `],
 [CardName.HELION,`
@@ -5357,7 +5357,7 @@ export const HTML_DATA: Map<string, string> =
                       width:100px;
                       color: white;
                       margin-left:19px;
-                      margin-bottom:2px;
+                      margin-bottom:8px;
                       padding:5px;
                       padding-top:5px;
                       padding-bottom:5px;
@@ -5478,10 +5478,10 @@ export const HTML_DATA: Map<string, string> =
             (Action: Add a floater to ANY card.) <br>
           </div>
           <div class="description" style="margin-top:17px;margin-left:17px; width: 120px; text-align:left;">
-          (1 VP per 3 floaters on this card.)
+          (1 VP per 3 floaters <br> on this card.)
           </div>
         </div>
-        <div class="celestic" style="font-size:24px;box-shadow:6px 6px 6px grey;margin-left: 9px;">
+        <div class="celestic" style="font-size:24px;box-shadow:6px 6px 6px grey;margin-left: 9px;margin-bottom:2px">
           <span style="background:linear-gradient(to right, rgb(251,192,137),rgb(251,192,137),rgb(23,185,236));padding-left:5px;">CEL</span><span
           style="background:linear-gradient(to right,rgb(23,185,236),rgb(251,192,137))">ES</span><span style="background:rgb(251,192,137);padding-right:5px;">TIC</span>
         </div>
@@ -5489,7 +5489,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="resource money" style="margin-left:30px;">42</div>
         <div class="resource card" style="margin-left:15px;"><div class="card-icon card-icon-floater">&#x2601;</div></div>
         <div class="resource card"><div class="card-icon card-icon-floater">&#x2601;</div></div>
-        <div class="description" style="text-align:center;margin-top:-5px;font-size:10px;">
+        <div class="description" style="text-align:center;margin-top:-3px;font-size:10px;">
           (You start with 42 MC. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take those 2 cards into hand and discard the rest.)
         </div>
 `],
@@ -5543,7 +5543,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="resource card" style="margin-left:15px;"><div class="card-icon card-icon-venus">V</div></div>
         <div class="resource card"><div class="card-icon card-icon-venus">V</div></div>
         <div class="resource card"><div class="card-icon card-icon-venus">V</div></div>
-        <div class="description" style="text-align:center;margin-top:-5px;">
+        <div class="description" style="text-align:center;margin-top:-4px;">
           (You start with 50 MC. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.)
         </div>
       </div>
@@ -5630,7 +5630,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
             <div class="description " style="text-align:center;margin-top:0px ">
             <div class="production-box" style="margin-left:-30px;margin-top:-5px;margin-bottom:-5px;"><div class="production titanium"></div></div>
-            <div class="resource money" style="margin-left:60px">38</div><br>
+            <div class="resource money" style="margin-left:60px;margin-bottom:15px">38</div><br>
               (You start with 1 titanium production<br> and 38 MC.)
             </div>
 `],
@@ -5652,7 +5652,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="robinson" style="letter-spacing:4px;border-bottom:3px solid #ccc;margin-top:5px;">ROBINSON</div>
         <div class="robinson" style="border-bottom:3px solid #ccc;">•—•—•—•—•—•—•&nbsp;</div>
         <div class="robinson" style="letter-spacing:2px;">INDUSTRIES</div>
-        <div class="resource money" style="margin-left:59px;margin-top:20px;">47</div>
+        <div class="resource money" style="margin-left:59px;margin-top:10px;">47</div>
         <div class="description" style="text-align:center;">
           (You start with 47 MC.)
         </div>
@@ -5670,7 +5670,7 @@ export const HTML_DATA: Map<string, string> =
                 </div>
             </div>
             <div style="color:rgb(2,125,195);background:linear-gradient(to right,rgb(2,125,195) 10%,white,white,white, white,white,white, white);box-shadow:3px 3px 10px 1px rgb(58,58,58);width:135px;line-height:24px;border-radius:10px 0px 0px 10px">
-              <div style="display:inline-block;margin-left:25px;margin-top: 3px;font-size:26px;text-shadow: 2px 2px #ccc;text-align:center">VALLEY TRUST</div>
+              <div style="display:inline-block;margin-left:25px;margin-top: 3px;margin-bottom:15px;font-size:26px;text-shadow: 2px 2px #ccc;text-align:center">VALLEY TRUST</div>
             </div>
             <div class="description" style="text-align:center;">
             <div class="resource money" style="margin-left:12px;margin-top:10px;">37</div> <div class="resource card-corporation" style="margin-left:50px"><span style="background:linear-gradient(to right, rgb(235,118,171), #e64d91);padding-left:4px;padding-right:4px;border-radius:2px;">PREL</span></div>
@@ -5758,32 +5758,32 @@ export const HTML_DATA: Map<string, string> =
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
-          <div class="production-box" style="width:50px;">
+          <div class="production-box" style="width:50px;margin-left:-2px">
             -<div class="production red-outline" style="background:white;">?</div>
           </div>
-          OR -<div class="resource red-outline" style="background:white;">?</div>:
-          PAY<div class="resource money">3</div>
-          <div class="description" style="text-align:center;margin-top:0px;">
+          OR - <div class="resource red-outline" style="background:white;">?</div>:
+          PAY<div class="resource money" style="margin-right:-2px">3</div>
+          <div class="description" style="text-align:center;margin-top:-2px;">
             (Effect: When a player causes another player to decrease production or lose resources, pay 3MC to the victim,
             or as much as possible.)
           </div>
         </div>
-        <div class="mons">
+        <div class="mons" style="margin-top:18px">
           <div class="mons0">&#x25b2;</div>
           <div class="mons1">mons</div>
           <div class="mons2">INSURANCE</div>
         </div>
         <div class="resource money" style="margin-left: 145px;
               margin-right: 20px;
-              margin-top: -84px;
+              margin-top: -80px;
               position: absolute;">48</div>
         <div class="production-box production-box-size2a" style="
               position: absolute;
-              margin-top: -53px;
+              margin-top: -46px;
               margin-left: 92px;">
           <div class="production money">4</div> <div class="production money red-outline">-2</div>*
         </div>
-        <div class="description" style="margin-top:2px;text-align:center;">
+        <div class="description" style="margin-top:11px;text-align:center;">
           (You start with 48 MC. Increase your MC production 4 steps. ALL OPPONENTS DECREASE THEIR MC PRODUCTION 2 STEPS.
           THIS DOES NOT TRIGGER THE EFFECT BELOW.)
         </div>
@@ -5807,7 +5807,7 @@ export const HTML_DATA: Map<string, string> =
           font-family: Prototype;
           margin-left: 74px;
           letter-spacing: 1px;
-          background: linear-gradient(to right,#000089, lightblue, white);
+          background: linear-gradient(to right,#000089, dodgerblue, deepskyblue);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           -webkit-transform:scale(2,1); /* Safari and Chrome */
@@ -5832,13 +5832,13 @@ export const HTML_DATA: Map<string, string> =
             <div class="turmoil-icon corporation-icon"></div>
             ##RESOURCES##
             <div class="contentCorporation ">
-               <div class="pointsCorporation">1/<div class="resource pristar"></div></div>
-                <div class="corporationEffectBox ">
+               <div class="pointsCorporation" >1/<div class="resource pristar"></div></div>
+                <div class="corporationEffectBox" style="height:140px;margin-top:150px">
                     <div class="corporationEffectBoxLabel" style="margin-bottom:5px;">EFFECT</div>
 
                       <div class="tile rating"><div class="left-line"></div><div class="right-line"></div></div> : <div class="resource pristar"></div> <div class="resource money">6</div>
-                    <div class="description " style="text-align:center;margin-top:-7px; text-align:left;">
-                        (Effect: During production phase, if you did not get TR so far this <br> generation, add one <br> preservation resource<br> here and gain 6MC.)
+                    <div class="description " style="text-align:center;margin-top:-3px; text-align:left;">
+                        (Effect: During production phase, if you did not get TR so far this <br> generation, add one <br> preservation resource<br> here and gain 6 MC.)
                     </div>
                 </div>
                 <div style="color:#ff5d21;text-shadow: 3px 3px 3px black;font-size:30px;transform:scaleX(0.8);letter-spacing:1px;">
@@ -5945,11 +5945,12 @@ export const HTML_DATA: Map<string, string> =
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">ACTION</div>
           <div style="font-size:10px;line-height:12px;margin-top:-5px;margin-bottom:10px;"><span class="red-arrow"></span>ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS</div>
-          <div class="corporationEffectBoxLabel">EFFECT</div>
+          <div class="corporationEffectBoxLabel" style="margin-top:-3px">EFFECT</div>
             <div style="font-size:10px;line-height:12px;margin-top:-5px;">EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 MC</div>
         </div>
         <div style="font-size:20px;
         padding-left:3px;width:147px;background:#eeeeee;box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 3px 3px 3px grey;margin-left:10px;border-radius:5px;
+        margin-bottom:4px;
         border-top: 2px solid rgb(221,221,221);
         border-left: 2px solid rgb(221,221,221);
         border-bottom: 2px solid rgb(137,137,137);
@@ -6002,7 +6003,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="resource money" style="margin-left:35px;margin-right:20px;margin-top:20px;">47</div>
         <div class="tile greenery-tile">
         </div>
-        <div class="description" style="margin-top:-5px;text-align:center;">
+        <div class="description" style="margin-top:-3px;text-align:center;">
           (You start with 47 MC. As your first action, place a greenery tile and raise the oxygen 1 step.)
         </div>
       </div>
@@ -6041,13 +6042,13 @@ export const HTML_DATA: Map<string, string> =
           <div class="description" style="margin-top:-3px;text-align:center;">(Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 MC, or adds a microbe to THAT card, and you gain 2 MC.)
         </div>
         </div>
-        <div class="splice" style="margin-left: 19px;font-size:29px;font-weight:bold; width:109px;background:#eeeeee;box-shadow: 0 0 0 1px rgba(0,0,0,0.2), 3px 3px 3px grey;"><div style="margin-left:2px"> SPLI<span style="color:red">C</span>E</div>
+        <div class="splice"><div style="margin-left:2px"> SPLI<span style="color:red">C</span>E</div>
                     <div STYLE="height:3px;background:red;margin-top:-3px;"></div>
                     <div STYLE="font-size:10px">TACTICAL GENOMICS</div>
                 </div>
                 <div class="resource money" style="margin-left:60px;margin-right:25px;">44</div>
                 <div class="resource card" style="margin-left:20px;"><div class="card-icon card-icon-microbe">&#x2042;</div></div>
-        <div class="description" style="margin-top:-8px;text-align:center;">(You start with 44 MC. As your first action, reveal cards until you have revealed a microbe tag. Take that card into hand, and discard the rest.)</div>
+        <div class="description" style="margin-top:-2px;margin-left:-7px;margin-right:-7px;text-align:center;">(You start with 44 MC. As your first action, reveal cards until you have revealed a microbe tag. Take that card into hand and discard the rest.)</div>
       </div>
 `],
 [CardName.LAKEFRONT_RESORTS,`
@@ -6055,8 +6056,8 @@ export const HTML_DATA: Map<string, string> =
             <div class="corporationLabel ">CORPORATION</div>
             <div class="turmoil-icon corporation-icon"></div>
             <div class="contentCorporation ">
-                <div class="corporationEffectBox ">
-                    <div class="corporationEffectBoxLabel" style="margin-bottom:0px;">EFFECT</div>
+                <div class="corporationEffectBox" style="height:140px;margin-top:150px">
+                    <div class="corporationEffectBoxLabel" style="margin-bottom:4px;">EFFECT</div>
                     <div class="resource ocean-resource red-outline"></div>*: <div class="production-box"><div class="production money">1</div></div>&nbsp;&nbsp;
                       <div class="resource" style="height:29px;width:30px;background:#eee"></div>
                       <div class="resource ocean-resource" style="position:absolute;margin-left:-39px;margin-top:36px;"></div>
@@ -6091,7 +6092,7 @@ export const HTML_DATA: Map<string, string> =
       <div style="font-size:16px;margin-top:33px;margin-left:75px;margin-bottom:5px; font-family:Prototype;color:#222;transform:scale(2,1)">
         TERRALABS
         </div>
-        <div style="font-size:8px;letter-spacing:2px;font-family:Prototype;margin-left:100px;margin-top:-5px;transform:scale(2,1)">RESEARCH</div>
+        <div style="font-size:8px;letter-spacing:2px;font-family:Prototype;margin-left:100px;margin-top:-5px;margin-bottom:10px;transform:scale(2,1)">RESEARCH</div>
       <div class="resource money " style="margin-left:25px;margin-right:20px;">14</div> - <div class="tile rating"></div>
       <div class="description " style="text-align:center;">
           (You start with 14 MC. Lower your TR 1 step.)
@@ -6105,7 +6106,7 @@ export const HTML_DATA: Map<string, string> =
           <div class="promo-icon corporation-icon"></div>
           <div class="contentCorporation">
             <div class="corporationEffectBox">
-              <div class="corporationEffectBoxLabel">ACTION</div>
+              <div class="corporationEffectBoxLabel" style="margin-bottom:5px">ACTION</div>
               <div class="red-arrow"></div><div class="production-box">
                 <div class="production energy"></div>
               </div> * OR
@@ -6123,7 +6124,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="production-box">
               <div class="production steel"></div>
             </div>
-            <div class="description" style="margin-top:-5px;text-align:center;">
+            <div class="description" style="text-align:center;">
               (You start with 37 MC. Increase your steel production 1 step.)
             </div>
           </div>
@@ -6140,7 +6141,7 @@ export const HTML_DATA: Map<string, string> =
             (Action: Gain 2 MC for each party where you have at least 1 delegate.)<br>
           </div>
         </div>
-        <div class="septem">Septum Tribus</div>
+        <div class="septem">Septem Tribus</div>
         <div class="resource money" style="margin-left:60px;margin-top:10px">36</div>
         <div class="description" style="text-align:center;margin-top:10px">
           (You start with 36 MC. When you perform an action, the wild tag counts as any tag of your choice.)
@@ -6727,7 +6728,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="promo-icon project-icon"></div>
     <div class="card-number">X01</div>
     <div class="content">
-        <div class="requirements">Science Science</div>
+        <div class="requirements">2 Science</div>
         <div class="production-box production-box-size1a">
             <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="production energy"></div><br/>
             <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="production titanium"></div>

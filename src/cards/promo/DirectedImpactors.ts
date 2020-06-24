@@ -10,7 +10,6 @@ import { Game } from '../../Game';
 import { SelectOption } from '../../inputs/SelectOption';
 import { OrOptions } from '../../inputs/OrOptions';
 import { MAX_TEMPERATURE } from '../../constants';
-import { SelectHowToPay } from '../../inputs/SelectHowToPay';
 
 export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCard {
     public name: CardName = CardName.DIRECTED_IMPACTORS;
@@ -56,32 +55,19 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
     }
 
     private addResource(player: Player, game: Game, asteroidCards: ICard[]) {
-        return new SelectHowToPay(
-            'Select how to pay ', false, true,
-            player.canUseHeatAsMegaCredits,
-            6,
-            (htp) => {
-                if (htp.heat + htp.megaCredits + htp.titanium * player.getTitaniumValue(game) < 6) {
-                    throw new Error("Need to spend at least 6");
-                }
-                
-                player.megaCredits -= htp.megaCredits;
-                player.heat -= htp.heat;
-                player.titanium -= htp.titanium;
+        game.addSelectHowToPayInterrupt(player, 6, false, true, "Select how to pay for Directed Impactors action");
 
-                if (asteroidCards.length === 1) {
-                    this.resourceCount++;
-                    return undefined;
-                }
+        if (asteroidCards.length === 1) {
+            this.resourceCount++;
+            return undefined;
+        }
 
-                return new SelectCard(
-                    "Select card to add 1 asteroid", 
-                    asteroidCards, 
-                    (foundCards: Array<ICard>) => { 
-                        player.addResourceTo(foundCards[0]);
-                        return undefined;
-                    }
-                );
+        return new SelectCard(
+            "Select card to add 1 asteroid", 
+            asteroidCards, 
+            (foundCards: Array<ICard>) => { 
+                player.addResourceTo(foundCards[0]);
+                return undefined;
             }
         );
     }

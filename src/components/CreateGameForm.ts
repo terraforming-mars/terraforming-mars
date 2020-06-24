@@ -19,7 +19,6 @@ interface CreateGameModel {
     draftVariant: boolean;
     initialDraft: boolean;
     randomFirstPlayer: boolean;
-    randomTurnOrder: boolean;
     showOtherPlayersVP: boolean;
     venusNext: boolean;
     colonies: boolean;
@@ -64,7 +63,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
             draftVariant: true,
             initialDraft: false,
             randomFirstPlayer: true,
-            randomTurnOrder: false,
             showOtherPlayersVP: false,
             venusNext: false,
             colonies: false,
@@ -121,7 +119,14 @@ export const CreateGameForm = Vue.component("create-game-form", {
         },
         createGame: function () {
             const component = (this as any) as CreateGameModel;
+
+            var players = component.players.slice(0, component.playersCount);
+
             if (component.randomFirstPlayer) {
+                // Shuffle players array to assign each player a random seat around the table
+                players = players.map((a) => ({sort: Math.random(), value: a}))
+                    .sort((a, b) => a.sort - b.sort)
+                    .map((a) => a.value)
                 component.firstIndex = Math.floor(component.seed * component.playersCount) + 1;
             }
 
@@ -139,7 +144,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 }
             })
 
-            var players = component.players.slice(0, component.playersCount).map((player: any) => {
+            players.map((player: any) => {
                 player.first = (component.firstIndex === player.index);
                 return player;
             });
@@ -177,13 +182,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
                     this.$data.playersCount = component.clonedGameData.playerCount;
                     return;
                 }
-            }
-
-            if (component.randomTurnOrder) {
-                // Shuffle players array to assign each player a random seat around the table
-                players = players.map((a) => ({sort: Math.random(), value: a}))
-                    .sort((a, b) => a.sort - b.sort)
-                    .map((a) => a.value)
             }
 
             const dataToSend = JSON.stringify({
@@ -301,11 +299,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <label class="form-switch" v-if="playersCount > 1">
                                 <input type="checkbox" v-model="randomFirstPlayer">
                                 <i class="form-icon"></i> <span v-i18n>Random first player</span>
-                            </label>
-
-                            <label class="form-switch" v-if="playersCount > 2">
-                                <input type="checkbox" v-model="randomSeat">
-                                <i class="form-icon"></i> <span v-i18n>Shuffle player order</span>
                             </label>
 
                             <label class="form-switch" v-if="playersCount > 1">

@@ -489,6 +489,7 @@ function getPlayer(player: Player, game: Game): string {
     dealtCorporationCards: player.dealtCorporationCards,
     dealtPreludeCards: player.dealtPreludeCards,
     initialDraft: game.initialDraft,
+    needsToDraft: player.needsToDraft,
     deckSize: game.dealer.getDeckSize()
   } as PlayerModel;
   return JSON.stringify(output);
@@ -636,6 +637,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       tradesThisTurn: player.tradesThisTurn,
       turmoil: getTurmoil(game),
       selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
+      needsToDraft: player.needsToDraft,
       deckSize: game.dealer.getDeckSize()
     } as PlayerModel;
   });

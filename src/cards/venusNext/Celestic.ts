@@ -10,6 +10,7 @@ import { CardName } from '../../CardName';
 import { LogMessageType } from "../../LogMessageType";
 import { LogMessageData } from "../../LogMessageData";
 import { LogMessageDataType } from "../../LogMessageDataType";
+import { LogHelper } from "../../components/LogHelper";
 
 export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public name: CardName = CardName.CELESTIC;
@@ -72,10 +73,11 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
         return Math.floor(this.resourceCount / 3);
     }
 
-    public action(player: Player) {
+    public action(player: Player, game: Game) {
         const floaterCards = player.getResourceCards(ResourceType.FLOATER);
         if (floaterCards.length === 1) {
             this.resourceCount++;
+            LogHelper.logAddResource(game, player, floaterCards[0]);
             return undefined;
         }
 
@@ -84,7 +86,8 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
             floaterCards,
             (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 1);
-            return undefined;
+                LogHelper.logAddResource(game, player, foundCards[0]);
+                return undefined;
             }
         );
     }

@@ -6,6 +6,8 @@ import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { SelectCard } from '../../inputs/SelectCard';
 import { CardName } from '../../CardName';
+import { Game } from "../../Game";
+import { LogHelper } from "../../components/LogHelper";
 
 
 export class Dirigibles implements IActionCard,IProjectCard, IResourceCard {
@@ -23,10 +25,11 @@ export class Dirigibles implements IActionCard,IProjectCard, IResourceCard {
     public canAct(): boolean {
         return true;
     }         
-    public action(player: Player) {
+    public action(player: Player, game: Game) {
         const floaterCards = player.getResourceCards(ResourceType.FLOATER);
         if (floaterCards.length === 1) {
             this.resourceCount++;
+            LogHelper.logAddResource(game, player, floaterCards[0]);
             return undefined;
         }
 
@@ -35,6 +38,7 @@ export class Dirigibles implements IActionCard,IProjectCard, IResourceCard {
             floaterCards,
             (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 1);
+                LogHelper.logAddResource(game, player, foundCards[0]);
                 return undefined;
             }
         );

@@ -6,6 +6,8 @@ import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { SelectCard } from '../../inputs/SelectCard';
 import { CardName } from '../../CardName';
+import { Game } from "../../Game";
+import { LogHelper } from "../../components/LogHelper";
 
 export class Extremophiles implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 3;
@@ -28,10 +30,11 @@ export class Extremophiles implements IActionCard,IProjectCard, IResourceCard {
         return Math.floor(this.resourceCount / 3);
     }
     
-    public action(player: Player) {
+    public action(player: Player, game: Game) {
         const microbeCards = player.getResourceCards(ResourceType.MICROBE);
         if (microbeCards.length === 1) {
             this.resourceCount++;
+            LogHelper.logAddResource(game, player, microbeCards[0]);
             return undefined;
         }
 
@@ -40,6 +43,7 @@ export class Extremophiles implements IActionCard,IProjectCard, IResourceCard {
             microbeCards,
             (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 1);
+                LogHelper.logAddResource(game, player, foundCards[0]);
                 return undefined;
             }
         );

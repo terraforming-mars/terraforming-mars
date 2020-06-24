@@ -39,17 +39,20 @@ describe("Stratopolis", function () {
     it("Should act - single target", function () {
         const card = new Stratopolis();
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(card);
-        card.action(player);
+        card.action(player, game);
         expect(player.getResourcesOnCard(card)).to.eq(2);
     });
     it("Should act - multiple targets", function () {
         const card = new Stratopolis();
         const card2 = new AerialMappers();
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player,player], player);
+        
         player.playedCards.push(card);
         player.playedCards.push(card2);
-        const action = card.action(player);
+        const action = card.action(player, game);
         expect(action instanceof SelectCard).to.eq(true);
         action!.cb([card2]);
         expect(player.getResourcesOnCard(card2)).to.eq(2);

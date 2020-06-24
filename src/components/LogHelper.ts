@@ -4,6 +4,7 @@ import { ICard } from "../cards/ICard";
 import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
+import { Resources } from "../Resources";
 
 export class LogHelper {
     static logAddResource(game: Game, player: Player, card: ICard, qty: number = 1): void {
@@ -41,12 +42,13 @@ export class LogHelper {
         );
     }
 
-    static logGainPlants(game: Game, player: Player, qty: number = 1) {
+    static logGainStandardResource(game: Game, player: Player, resource: Resources, qty: number = 1) {
         game.log(
             LogMessageType.DEFAULT,
-            "${0} gained ${1} plant(s)",
+            "${0} gained ${1} ${2}",
             new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.STRING, qty.toString())
+            new LogMessageData(LogMessageDataType.STRING, qty.toString()),
+            new LogMessageData(LogMessageDataType.STRING, resource)
         )
     }
 }

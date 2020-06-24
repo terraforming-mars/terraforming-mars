@@ -19,6 +19,7 @@ interface CreateGameModel {
     draftVariant: boolean;
     initialDraft: boolean;
     randomFirstPlayer: boolean;
+    randomSeat: boolean;
     showOtherPlayersVP: boolean;
     venusNext: boolean;
     colonies: boolean;
@@ -63,6 +64,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             draftVariant: true,
             initialDraft: false,
             randomFirstPlayer: true,
+            randomSeat: false,
             showOtherPlayersVP: false,
             venusNext: false,
             colonies: false,
@@ -137,7 +139,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 }
             })
 
-            const players = component.players.slice(0, component.playersCount).map((player: any) => {
+            var players = component.players.slice(0, component.playersCount).map((player: any) => {
                 player.first = (component.firstIndex === player.index);
                 return player;
             });
@@ -177,6 +179,13 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 }
             }
 
+            if (component.randomSeat) {
+                // Shuffle players array to assign each player a random seat around the table
+                players = players.map((a) => ({sort: Math.random(), value: a}))
+                    .sort((a, b) => a.sort - b.sort)
+                    .map((a) => a.value)
+            }
+
             const dataToSend = JSON.stringify({
                 players: players, corporateEra, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption, promoCardsOption, undoOption, startingCorporations, soloTR, clonedGamedId, initialDraft 
             });
@@ -211,11 +220,13 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <input class="form-input form-inline create-game-player-name" placeholder="Your name" v-model="newPlayer.name" />
                         </div>
                         <div>
-                            <label class="form-label form-inline">Color:</label>
-                            <label class="form-radio form-inline" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
+                            <label class="form-label form-inline create-game-color-label" v-i18n>Color:</label>
+                            <span class="create-game-colors-cont">
+                            <label class="form-radio form-inline create-game-color" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
                                 <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color">
-                                <i class="form-icon"></i> <span v-i18n>{{ color }}</span>
+                                <i class="form-icon"></i> <div :class="'board-cube board-cube--'+color.toLowerCase()"></div>
                             </label>
+                            </span>
                         </div>
                         <div>
                             <label class="form-switch form-inline">
@@ -292,6 +303,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <i class="form-icon"></i> <span v-i18n>Random first player</span>
                             </label>
 
+                            <label class="form-switch" v-if="playersCount > 2">
+                                <input type="checkbox" v-model="randomSeat">
+                                <i class="form-icon"></i> <span v-i18n>Random seat</span>
+                            </label>
+
                             <label class="form-switch" v-if="playersCount > 1">
                                 <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP">
                                 <i class="form-icon"></i> <span v-i18n>Show real-time VP</span>
@@ -355,11 +371,13 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(newPlayer)" v-model="newPlayer.name" />
                             </div>
                             <div>
-                                <label class="form-label form-inline">Color:</label>
-                                <label class="form-radio form-inline" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
+                                <label class="form-label form-inline create-game-color-label" v-i18n>Color:</label>
+                                <span class="create-game-colors-cont">
+                                <label class="form-radio form-inline create-game-color" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
                                     <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color">
-                                    <i class="form-icon"></i> <span v-i18n>{{ color }}</span>
+                                    <i class="form-icon"></i> <div :class="'board-cube board-cube--'+color.toLowerCase()"></div>
                                 </label>
+                                </span>
                             </div>
                             <div>
                                 <label class="form-switch form-inline">

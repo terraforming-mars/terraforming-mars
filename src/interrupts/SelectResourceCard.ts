@@ -5,6 +5,7 @@ import { PlayerInterrupt } from './PlayerInterrupt';
 import { SelectCard } from '../inputs/SelectCard';
 import { ResourceType } from '../ResourceType';
 import { ICard } from '../cards/ICard';
+import { LogHelper } from '../components/LogHelper';
 
 export class SelectResourceCard implements PlayerInterrupt {
     public playerInput: PlayerInput;
@@ -24,6 +25,7 @@ export class SelectResourceCard implements PlayerInterrupt {
             resourceCards,
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], count);
+              LogHelper.logAddResource(game, player, foundCards[0], count);
               return undefined;
             }
           );

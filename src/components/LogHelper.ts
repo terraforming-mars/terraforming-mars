@@ -49,6 +49,6 @@ export class LogHelper {
             new LogMessageData(LogMessageDataType.PLAYER, player.id),
             new LogMessageData(LogMessageDataType.STRING, qty.toString()),
             new LogMessageData(LogMessageDataType.STRING, resource)
-        )
+        );
     }
 }

@@ -19,12 +19,14 @@ describe("AtmoCollectors", function () {
     it("Should act", function () {
         const card = new AtmoCollectors();
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player], player);
+
         player.playedCards.push(card);
-        const action = card.action(player);
+        const action = card.action(player, game);
         expect(action).to.eq(undefined);
         expect(card.resourceCount).to.eq(1);
 
-        const orOptions = card.action(player) as OrOptions;
+        const orOptions = card.action(player, game) as OrOptions;
         expect(orOptions).not.to.eq(undefined);
         expect(orOptions instanceof OrOptions).to.eq(true);
         orOptions.options[0].cb();

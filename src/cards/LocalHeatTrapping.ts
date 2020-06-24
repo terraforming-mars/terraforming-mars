@@ -39,11 +39,11 @@ export class LocalHeatTrapping implements IProjectCard {
             LogHelper.logGainPlants(game, player, 4);
             return undefined;
         };
-        if (otherAnimalCards.length === 0) {
-            options = new SelectOption("Gain 4 plants", gain4Plants);
-        } else if (otherAnimalCards.length === 1) {
-            const targetCard = otherAnimalCards[0];
-            options = new OrOptions(
+        if (animalCards.length === 0) {
+          availableActions.options.push(new SelectOption("Gain 4 plants", gain4Plants));
+        } else if (animalCards.length === 1) {
+            const targetCard = animalCards[0];
+            availableActions.options.push(
               new SelectOption("Gain 4 plants", gain4Plants),
               new SelectOption("Add 2 animals to " + targetCard.name, () => {
                   player.addResourceTo(targetCard, 2);
@@ -51,9 +51,9 @@ export class LocalHeatTrapping implements IProjectCard {
                   return undefined;
               }));
           } else {
-            options = new OrOptions(
+            availableActions.options.push(
               new SelectOption("Gain 4 plants", gain4Plants),
-              new SelectCard("Select card to add 2 animals", otherAnimalCards, (foundCards: Array<ICard>) => {
+              new SelectCard("Select card to add 2 animals", animalCards, (foundCards: Array<ICard>) => {
                   player.addResourceTo(foundCards[0], 2);
                   LogHelper.logAddResource(game, player, foundCards[0], 2);
                   return undefined;

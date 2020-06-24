@@ -97,7 +97,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private turmoilScientistsActionUsed: boolean = false;
     public removingPlayers: Array<PlayerId> = [];
     public needsToDraft: boolean | undefined = undefined;
-    public hasRemovedOtherPlayersPlants: boolean = false;
 
     constructor(
         public name: string,
@@ -224,7 +223,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
         // Crash site cleanup hook
         if (fromPlayer !== this && resource === Resources.PLANTS) {
-          fromPlayer.hasRemovedOtherPlayersPlants = true;
+          game.someoneHasRemovedOtherPlayersPlants = true;
         }
 
         game.log(
@@ -843,7 +842,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public runProductionPhase(): void {
       this.actionsThisGeneration.clear();
       this.removingPlayers = [];
-      this.hasRemovedOtherPlayersPlants = false;
       this.tradesThisTurn = 0;
       this.turmoilScientistsActionUsed = false;
       this.megaCredits += this.megaCreditProduction + this.terraformRating;

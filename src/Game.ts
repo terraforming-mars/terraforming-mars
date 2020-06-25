@@ -1541,8 +1541,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         let player = new Player(element.name, element.color, element.beginner);
         return player.loadFromJSON(element);
       });
-
-
+      
       // Rebuild milestones, awards and board elements
       this.milestones = [];
       this.awards = [];
@@ -1560,7 +1559,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
           let tileCard = element.tile.card;
           if (element.player){
             const player = this.players.find((player) => player.id === element.player!.id);
-            space.player = player;
+            // Prevent loss of "neutral" player tile ownership across reloads
+            space.player = player ? player : element.player;
           }
           space.tile = {
             tileType: tileType,

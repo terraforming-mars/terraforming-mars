@@ -784,7 +784,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private resolveTurmoilInterrupts() {
       if (this.interrupts.length > 0) {
         let interrupt = this.interrupts.shift();
-        if (interrupt !== undefined && interrupt.playerInput !== undefined) {
+        if (interrupt) {
           interrupt.player.setWaitingFor(interrupt.playerInput, () => {
             this.resolveTurmoilInterrupts();
           });

@@ -1838,7 +1838,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private resolveFinalGreeneryInterrupts(game: Game) {
       if (game.interrupts.length > 0) {
         let interrupt = game.interrupts.shift();
-        if (interrupt !== undefined && interrupt.playerInput !== undefined) {
+        if (interrupt) {
           interrupt.player.setWaitingFor(interrupt.playerInput, () => {
             this.resolveFinalGreeneryInterrupts(game);
           });

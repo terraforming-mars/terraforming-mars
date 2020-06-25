@@ -446,6 +446,7 @@ import { CometAiming } from "./cards/promo/CometAiming";
 import { CuttingEdgeTechnology } from "./cards/promo/CuttingEdgeTechnology";
 import { CrashSiteCleanup } from "./cards/promo/CrashSiteCleanup";
 import { DirectedImpactors } from "./cards/promo/DirectedImpactors";
+import { FieldCappedCity } from "./cards/promo/FieldCappedCity";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -705,6 +706,7 @@ export const ALL_PROMO_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.CUTTING_EDGE_TECHNOLOGY, factory: CuttingEdgeTechnology },
     { cardName: CardName.CRASH_SITE_CLEANUP, factory: CrashSiteCleanup },
     { cardName: CardName.DIRECTED_IMPACTORS, factory: DirectedImpactors },
+    { cardName: CardName.FIELD_CAPPED_CITY, factory: FieldCappedCity },
     { cardName: CardName.ADVERTISING, factory: Advertising },
     { cardName: CardName.DEIMOS_DOWN_PROMO, factory: DeimosDownPromo },
     { cardName: CardName.GREAT_DAM_PROMO, factory: GreatDamPromo },

@@ -6896,6 +6896,25 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
+[CardName.FIELD_CAPPED_CITY,`
+        <div class="title background-color-automated">Field-Capped City</div>
+        <div class="price">29</div>
+        <div class="tag tag1 tag-building"></div>
+        <div class="tag tag2 tag-city"></div>
+        <div class="tag tag3 tag-power"></div>
+        <div class="promo-icon project-icon"></div>
+        <div class="content">
+            <div class="production-box production-box-size1a">
+            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="money production">2</div>
+            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="energy production"></div>
+            </div>
+            <div class="tile city-tile"></div><br>
+            <div class="plant resource"></div><div class="plant resource"></div><div class="plant resource"></div>
+            <div class="description">
+                <div>(Increase your MC production 2 steps and increase your Energy production 1 step. Gain 3 plants, and place a City tile.)</div>
+            </div>
+        </div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>

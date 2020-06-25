@@ -1810,6 +1810,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                   game.addGreenery(this, space.id);
                   this.plants -= this.plantsNeededForGreenery;
                   this.takeActionForFinalGreenery(game);
+                  
+                  // Resolve Philares interrupts
+                  if (game.interrupts.length > 0) this.resolveFinalGreeneryInterrupts(game);
+
                   return undefined;
                 }
             )
@@ -1823,7 +1827,27 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.setWaitingFor(action, () => {});
         return;
       }
-      game.playerIsDoneWithGame(this);
+
+      if (game.interrupts.length > 0) {
+        this.resolveFinalGreeneryInterrupts(game);
+      } else {
+        game.playerIsDoneWithGame(this);
+      }
+    }
+
+    private resolveFinalGreeneryInterrupts(game: Game) {
+      if (game.interrupts.length > 0) {
+        let interrupt = game.interrupts.shift();
+        if (interrupt) {
+          interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+            this.resolveFinalGreeneryInterrupts(game);
+          });
+          return;
+        }
+      }
+
+      // All final greenery interrupts have been resolved, continue game flow
+      this.takeActionForFinalGreenery(game);
     }
 
     private getPlayableCards(game: Game): Array<IProjectCard> {

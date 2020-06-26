@@ -6915,6 +6915,19 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
+[CardName.MAGNETIC_SHIELD,`
+    <div class="title background-color-automated">Magnetic Shield</div>
+    <div class="price">26</div>
+    <div class="tag tag1 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+        <div class="requirements">2 Power</div>
+        4 <div class="tile rating"></div>
+        <div class="description">
+            (Requires 2 Power tags. Raise your TR 4 steps.)
+        </div>
+    </div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>

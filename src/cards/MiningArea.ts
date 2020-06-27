@@ -10,6 +10,7 @@ import { ISpace } from "../ISpace";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
+import { LogHelper } from "../components/LogHelper";
 
 export class MiningArea implements IProjectCard {
     public cost: number = 4;
@@ -32,9 +33,11 @@ export class MiningArea implements IProjectCard {
             if (foundSpace.bonus.indexOf(SpaceBonus.STEEL) !== -1) {
                 player.setProduction(Resources.STEEL);
                 this.bonusResource = Resources.STEEL;
+                LogHelper.logGainProduction(game, player, Resources.STEEL);
             } else if (foundSpace.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
                 player.setProduction(Resources.TITANIUM);
                 this.bonusResource = Resources.TITANIUM;
+                LogHelper.logGainProduction(game, player, Resources.TITANIUM);
             }
             return undefined;
         });

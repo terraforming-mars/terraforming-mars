@@ -51,4 +51,14 @@ export class LogHelper {
             new LogMessageData(LogMessageDataType.STRING, resource)
         );
     }
+
+    static logGainProduction(game: Game, player: Player, resource: Resources, qty: number = 1) {
+        game.log(
+            LogMessageType.DEFAULT,
+            "${0}'s ${1} production increased by ${3}",
+            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.STRING, resource),
+            new LogMessageData(LogMessageDataType.STRING, qty.toString())
+        );
+    }
 }

@@ -11,6 +11,7 @@ import { LogMessageType } from "../../LogMessageType";
 import { LogMessageData } from "../../LogMessageData";
 import { LogMessageDataType } from "../../LogMessageDataType";
 import { LogHelper } from "../../components/LogHelper";
+import { IProjectCard } from "../IProjectCard";
 
 export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public name: CardName = CardName.CELESTIC;
@@ -38,6 +39,8 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
         if (game.hasCardsWithResource(ResourceType.FLOATER, requiredCardsCount)) {
             let drawnCount = 0;
             let floaterCards: Array<CardName> = [];
+            let discardedCards: Array<IProjectCard> = [];
+
             while (drawnCount < requiredCardsCount) {
                 let card = game.dealer.dealCard();
                 if (Celestic.floaterCards.has(card.name) || card.resourceType === ResourceType.FLOATER) {
@@ -45,6 +48,7 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
                     drawnCount++;
                     floaterCards.push(card.name);
                 } else {
+                    discardedCards.push(card);
                     game.dealer.discard(card);
                 }
             }
@@ -55,6 +59,12 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
                 new LogMessageData(LogMessageDataType.PLAYER, player.id),
                 new LogMessageData(LogMessageDataType.CARD, floaterCards[0]),
                 new LogMessageData(LogMessageDataType.CARD, floaterCards[1])
+            );
+
+            game.log(
+                LogMessageType.DEFAULT,
+                discardedCards.length + " card(s) were discarded",
+               ...discardedCards.map((card) => new LogMessageData(LogMessageDataType.CARD, card.name)),
             );
         }
         

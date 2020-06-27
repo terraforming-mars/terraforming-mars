@@ -30,16 +30,19 @@ export class HydrogenToVenus implements IProjectCard {
         const floatersCards = player.getResourceCards(ResourceType.FLOATER).filter((card) => {
             return HydrogenToVenus.venusCardsWithFloaters.has(card.name)
         });
-        if (jovianTags > 0 && floatersCards.length > 0) {
-            return new SelectCard(
-                'Select card to add ' + jovianTags + ' floater(s)',
-                floatersCards,
-                (foundCards: Array<ICard>) => {
-                    player.addResourceTo(foundCards[0], jovianTags);
-                    game.increaseVenusScaleLevel(player, 1);
-                    return undefined;
-                }
-            );
+        if (jovianTags > 0) {
+            if (floatersCards.length === 1) player.addResourceTo(floatersCards[0], jovianTags);
+            if (floatersCards.length > 1) {
+                return new SelectCard(
+                    'Select card to add ' + jovianTags + ' floater(s)',
+                    floatersCards,
+                    (foundCards: Array<ICard>) => {
+                        player.addResourceTo(foundCards[0], jovianTags);
+                        game.increaseVenusScaleLevel(player, 1);
+                        return undefined;
+                    }
+                );
+            }
         }
         game.increaseVenusScaleLevel(player, 1);
         return undefined;

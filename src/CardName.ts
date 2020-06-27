@@ -383,6 +383,7 @@ export enum CardName {
     DIRECTED_IMPACTORS = "Directed Impactors",
     FIELD_CAPPED_CITY = "Field-Capped City",
     MAGNETIC_SHIELD = "Magnetic Shield",
+    MELTWORKS = "Meltworks",
     INDUSTRIAL_CENTER = "Industrial Center",
     FACTORUM = "Factorum",
     LAKEFRONT_RESORTS = "Lakefront Resorts",

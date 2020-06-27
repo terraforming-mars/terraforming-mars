@@ -6930,6 +6930,19 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
+[CardName.MELTWORKS,`
+    <div class="title background-color-active">Meltworks</div>
+    <div class="price">4</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content ">
+      5 <span class="heat resource"></span> <span class="red-arrow "></span>
+      <div class="steel resource"></div><div class="steel resource"></div><div class="steel resource"></div>
+      <div class="description ">
+        (Action: Spend 5 heat to gain 3 steel.)
+      </div>
+    </div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>

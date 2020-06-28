@@ -6941,6 +6941,24 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
+[CardName.MOHOLE_LAKE,`
+    <div class="title background-color-active">Mohole Lake</div>
+    <div class="price">31</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+        <div class="red-arrow"></div><div class="microbe resource"></div>* OR <div class="animal resource"></div>*
+        <div class="description">
+          (Action: Add a microbe or animal to ANOTHER card.)
+        </div>
+        <br>
+        <div class="tile temperature-tile"></div><div class="tile ocean-tile"></div>
+        <div class="plant resource"></div><div class="plant resource"></div>
+        <div class="description">
+          (Place an ocean tile and raise temperature 1 step. Gain 2 Plants.)
+        </div>
+    </div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>

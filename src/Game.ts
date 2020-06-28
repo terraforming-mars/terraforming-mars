@@ -1325,7 +1325,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
     public addGreenery(
         player: Player, spaceId: string,
-        spaceType: SpaceType = SpaceType.LAND): undefined {
+        spaceType: SpaceType = SpaceType.LAND,
+        shouldRaiseOxygen: boolean = true): undefined {
       this.addTile(player, spaceType, this.getSpace(spaceId), {
         tileType: TileType.GREENERY
       });
@@ -1337,7 +1338,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
         && this.phase ===  Phase.ACTION) {
           player.setResource(Resources.MEGACREDITS, 4);
       }
-      return this.increaseOxygenLevel(player, 1);
+      if (shouldRaiseOxygen) return this.increaseOxygenLevel(player, 1);
+      return undefined;
     }
     public addCityTile(
         player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND,

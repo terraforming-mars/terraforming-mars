@@ -1807,7 +1807,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             new SelectSpace(
                 "Select space for greenery",
                 game.board.getAvailableSpacesForGreenery(this), (space) => {
-                  game.addGreenery(this, space.id);
+                  // Do not raise oxygen or award TR for final greenery placements
+                  game.addGreenery(this, space.id, SpaceType.LAND, false);
                   this.plants -= this.plantsNeededForGreenery;
                   this.takeActionForFinalGreenery(game);
                   

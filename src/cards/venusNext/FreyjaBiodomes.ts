@@ -24,18 +24,22 @@ export class FreyjaBiodomes implements IProjectCard {
     }
 
     public play(player: Player) {
-        if (this.getResCards(player).length > 0) {
+        const cards = this.getResCards(player);
+
+        if (cards.length > 1) {
             return new SelectCard(
                 'Select card to add 2 resources',
-                this.getResCards(player),
+                cards,
                 (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], 2);
-                player.setProduction(Resources.ENERGY,-1);
-                player.setProduction(Resources.MEGACREDITS,2);   
-                return undefined;
+                    player.setProduction(Resources.ENERGY,-1);
+                    player.setProduction(Resources.MEGACREDITS,2);   
+                    return undefined;
                 }
             );
         }
+
+        if (cards.length === 1) player.addResourceTo(cards[0], 2);
         player.setProduction(Resources.ENERGY,-1);
         player.setProduction(Resources.MEGACREDITS,2);
         return undefined;

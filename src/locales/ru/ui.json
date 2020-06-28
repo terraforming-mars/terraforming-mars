@@ -10,12 +10,15 @@
     "Board": "Карта",
     "Beginner?": "Новичек?",
     "Goes First?": "Ходит первым?",
+    "Corporate Era": "Эпоха корпораций",
 
+    "Color:": "Цвет:",
     "Red": "Красный",
     "Green": "Зеленый",
     "Yellow": "Желтый",
     "Blue": "Синий",
     "Black": "Черный",
+    "Purple": "Фиолетовый",
 
     "original": "База",
     "hellas": "Эллада",
@@ -171,5 +174,4 @@
     "Select space for ocean": "Выберите место для размещения океана",
     "Select space for city tile": "Выберите место для размещения города",
     "Select space for greenery tile": "Выберите место для размещения озеленения"
-
 }

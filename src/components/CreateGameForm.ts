@@ -119,7 +119,14 @@ export const CreateGameForm = Vue.component("create-game-form", {
         },
         createGame: function () {
             const component = (this as any) as CreateGameModel;
+
+            var players = component.players.slice(0, component.playersCount);
+
             if (component.randomFirstPlayer) {
+                // Shuffle players array to assign each player a random seat around the table
+                players = players.map((a) => ({sort: Math.random(), value: a}))
+                    .sort((a, b) => a.sort - b.sort)
+                    .map((a) => a.value)
                 component.firstIndex = Math.floor(component.seed * component.playersCount) + 1;
             }
 
@@ -137,7 +144,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 }
             })
 
-            const players = component.players.slice(0, component.playersCount).map((player: any) => {
+            players.map((player: any) => {
                 player.first = (component.firstIndex === player.index);
                 return player;
             });
@@ -211,11 +218,13 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <input class="form-input form-inline create-game-player-name" placeholder="Your name" v-model="newPlayer.name" />
                         </div>
                         <div>
-                            <label class="form-label form-inline">Color:</label>
-                            <label class="form-radio form-inline" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
+                            <label class="form-label form-inline create-game-color-label" v-i18n>Color:</label>
+                            <span class="create-game-colors-cont">
+                            <label class="form-radio form-inline create-game-color" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
                                 <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color">
-                                <i class="form-icon"></i> <span v-i18n>{{ color }}</span>
+                                <i class="form-icon"></i> <div :class="'board-cube board-cube--'+color.toLowerCase()"></div>
                             </label>
+                            </span>
                         </div>
                         <div>
                             <label class="form-switch form-inline">
@@ -355,11 +364,13 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(newPlayer)" v-model="newPlayer.name" />
                             </div>
                             <div>
-                                <label class="form-label form-inline">Color:</label>
-                                <label class="form-radio form-inline" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
+                                <label class="form-label form-inline create-game-color-label" v-i18n>Color:</label>
+                                <span class="create-game-colors-cont">
+                                <label class="form-radio form-inline create-game-color" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
                                     <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color">
-                                    <i class="form-icon"></i> <span v-i18n>{{ color }}</span>
+                                    <i class="form-icon"></i> <div :class="'board-cube board-cube--'+color.toLowerCase()"></div>
                                 </label>
+                                </span>
                             </div>
                             <div>
                                 <label class="form-switch form-inline">

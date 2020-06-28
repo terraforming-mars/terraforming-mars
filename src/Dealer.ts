@@ -449,6 +449,7 @@ import { DirectedImpactors } from "./cards/promo/DirectedImpactors";
 import { FieldCappedCity } from "./cards/promo/FieldCappedCity";
 import { MagneticShield } from "./cards/promo/MagneticShield";
 import { Meltworks } from "./cards/promo/Meltworks";
+import { MoholeLake } from "./cards/promo/MoholeLake";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -711,6 +712,7 @@ export const ALL_PROMO_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.FIELD_CAPPED_CITY, factory: FieldCappedCity },
     { cardName: CardName.MAGNETIC_SHIELD, factory: MagneticShield },
     { cardName: CardName.MELTWORKS, factory: Meltworks },
+    { cardName: CardName.MOHOLE_LAKE, factory: MoholeLake },
     { cardName: CardName.ADVERTISING, factory: Advertising },
     { cardName: CardName.DEIMOS_DOWN_PROMO, factory: DeimosDownPromo },
     { cardName: CardName.GREAT_DAM_PROMO, factory: GreatDamPromo },

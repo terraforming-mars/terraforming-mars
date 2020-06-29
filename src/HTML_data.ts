@@ -6959,6 +6959,19 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
+[CardName.DIVERSITY_SUPPORT,`
+        <div class="title background-color-events">Diversity Support</div>
+        <div class="price">1</div>
+        <div class="tag tag1 tag-event"></div>
+        <div class="promo-icon project-icon"></div>
+        <div class="content">
+            <div class="requirements">9 Resources</div>
+            <div class="tile rating"></div>
+            <div class="description ">
+                (Requires that you have 9 resources on cards. Raise your terraform rating 1 step.)
+            </div>
+        </div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>

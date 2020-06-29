@@ -22,10 +22,10 @@ describe("JovianTaxRights", function () {
         colony2.colonies.push(player2.id);
         game.colonies.push(colony1);
         game.colonies.push(colony2);
-        turmoil.chairman = player2;
+        turmoil.chairman = player2.id;
         turmoil.dominantParty = new Kelvinists();
-        turmoil.dominantParty.partyLeader = player2;
-        turmoil.dominantParty.delegates.push(player2);
+        turmoil.dominantParty.partyLeader = player2.id;
+        turmoil.dominantParty.delegates.push(player2.id);
         card.resolve(game, turmoil);
         expect(player.getResource(Resources.TITANIUM)).to.eq(0);
         expect(player2.getResource(Resources.TITANIUM)).to.eq(3);

@@ -17,10 +17,10 @@ describe("Sabotage", function () {
         turmoil.initGlobalEvent(game);
         player.setProduction(Resources.ENERGY, 1);
         player2.setProduction(Resources.STEEL, 3);
-        turmoil.chairman = player2;
+        turmoil.chairman = player2.id;
         turmoil.dominantParty = new Kelvinists();
-        turmoil.dominantParty.partyLeader = player2;
-        turmoil.dominantParty.delegates.push(player2);
+        turmoil.dominantParty.partyLeader = player2.id;
+        turmoil.dominantParty.delegates.push(player2.id);
         card.resolve(game, turmoil);
         expect(player.getResource(Resources.STEEL)).to.eq(0);
         expect(player2.getResource(Resources.STEEL)).to.eq(3);

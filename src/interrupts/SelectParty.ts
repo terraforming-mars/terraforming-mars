@@ -1,6 +1,6 @@
 import { Game } from '../Game';
 import { PlayerInput } from '../PlayerInput';
-import { Player } from '../Player';
+import { Player, PlayerId } from "../Player";
 import { PlayerInterrupt } from './PlayerInterrupt';
 import { OrOptions } from '../inputs/OrOptions';
 import { SelectOption } from '../inputs/SelectOption';
@@ -15,7 +15,7 @@ export class SelectParty implements PlayerInterrupt {
         public game: Game,
         public title: string = "Select where to send a delegate",
         public nbr: number = 1,
-        public replace: "NEUTRAL" | Player | undefined = undefined,
+        public replace: "NEUTRAL" | PlayerId | undefined = undefined,
         public price: number | undefined = undefined,
         public fromLobby: boolean = true
     ){
@@ -49,7 +49,7 @@ export class SelectParty implements PlayerInterrupt {
                   if (replace) {
                     game.turmoil?.removeDelegateFromParty(replace, party.name, game);
                   }
-                  game.turmoil?.sendDelegateToParty(player, party.name, game, fromLobby);
+                  game.turmoil?.sendDelegateToParty(player.id, party.name, game, fromLobby);
                 }
                 game.log(
                   LogMessageType.DEFAULT,

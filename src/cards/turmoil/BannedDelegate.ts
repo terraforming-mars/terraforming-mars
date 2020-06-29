@@ -2,7 +2,7 @@ import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
-import { Player } from "../../Player";
+import { Player, PlayerId } from "../../Player";
 import { Game } from '../../Game';
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectDelegate } from "../../inputs/SelectDelegate";
@@ -19,7 +19,7 @@ export class BannedDelegate implements IProjectCard {
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {
-            return game.turmoil.chairman === player
+            return game.turmoil.chairman === player.id
         }
         return false;
     }
@@ -32,10 +32,25 @@ export class BannedDelegate implements IProjectCard {
             // Remove the party leader from available choices
             const delegates = party.delegates.slice();
             delegates.splice(party.delegates.indexOf(party.partyLeader!),1);
-            const players = Array.from(new Set<Player | "NEUTRAL">(delegates));
+            const playersId = Array.from(new Set<PlayerId | "NEUTRAL">(delegates));
+            let players = new Array<Player | "NEUTRAL">();
+            playersId.forEach(playerId => {
+              if (playerId === "NEUTRAL") {
+                players.push("NEUTRAL");
+              } else {
+                players.push(game.getPlayerById(playerId));
+              }  
+            });
+
             if (players.length > 0) {
               let selectDelegate = new SelectDelegate(players, "Select player delegate to remove from " + party.name + " party", (selectedPlayer: Player | "NEUTRAL") => {
-                game.turmoil!.removeDelegateFromParty(selectedPlayer, party.name, game);
+                let playerToRemove = "";
+                if (selectedPlayer === "NEUTRAL") {
+                  playerToRemove = "NEUTRAL";
+                } else {
+                  playerToRemove = selectedPlayer.id;
+                }
+                game.turmoil!.removeDelegateFromParty(playerToRemove, party.name, game);
                 this.log(game, player, party);
                 return undefined;
               });

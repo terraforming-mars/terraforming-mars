@@ -34,7 +34,7 @@ describe("AerialLenses", function () {
         if (game.turmoil !== undefined) {
             let kelvinists = game.turmoil.getPartyByName(PartyName.KELVINISTS);
             if (kelvinists !== undefined) {
-                kelvinists.delegates.push(player, player);
+                kelvinists.delegates.push(player.id, player.id);
                 expect(card.canPlay(player, game)).to.eq(true); 
             }
         } 

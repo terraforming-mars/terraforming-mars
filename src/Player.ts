@@ -2153,7 +2153,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           const selectParty = new SelectParty(this, game, "Send a delegate in an area (from lobby)");
           action.options.push(selectParty.playerInput);
         }
-        else if (this.canAfford(5) && game.turmoil!.getDelegates(this) > 0){
+        else if (this.canAfford(5) && game.turmoil!.getDelegates(this.id) > 0){
           const selectParty = new SelectParty(this, game, "Send a delegate in an area (5MC)", 1, undefined, 5);
           action.options.push(selectParty.playerInput);
         }

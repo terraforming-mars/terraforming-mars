@@ -64,9 +64,9 @@ describe("Turmoil", function () {
             const greens = turmoil.getPartyByName(PartyName.GREENS);
             if (greens) {
                 greens.delegates = [];
-                turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+                turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
                 expect(greens.delegates.length).to.eq(1);
-                expect(greens.delegates[0]).to.eq(player);
+                expect(game.getPlayerById(greens.delegates[0])).to.eq(player);
             }
         }
     });
@@ -101,15 +101,15 @@ describe("Turmoil", function () {
                 greens.delegates = [];
                 reds.delegates = [];
             }
-            turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
-            turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
-            turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+            turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+            turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+            turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
             expect(turmoil.dominantParty).to.eq(greens);
-            turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+            turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
             expect(turmoil.dominantParty).to.eq(greens);
-            turmoil.sendDelegateToParty(player, PartyName.REDS, game);
-            turmoil.sendDelegateToParty(player, PartyName.REDS, game);
-            turmoil.sendDelegateToParty(player, PartyName.REDS, game);
+            turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
+            turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
+            turmoil.sendDelegateToParty(player.id, PartyName.REDS, game);
             expect(turmoil.dominantParty).to.eq(reds);     
         }   
     });
@@ -137,10 +137,10 @@ describe("Turmoil", function () {
         const game = new Game("foobar", [player], player, gameOptions);  
         let turmoil = game.turmoil;
         if (turmoil) {
-            turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
-            turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
-            turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
-            expect(turmoil.getPartyByName(PartyName.GREENS)!.partyLeader).to.eq(player);   
+            turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+            turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+            turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+            expect(game.getPlayerById(turmoil.getPartyByName(PartyName.GREENS)!.partyLeader!)).to.eq(player);   
         } 
     });
 
@@ -167,15 +167,16 @@ describe("Turmoil", function () {
         const game = new Game("foobar", [player], player, gameOptions);  
         let turmoil = game.turmoil;
         if (turmoil) {
-            turmoil.sendDelegateToParty(player, PartyName.MARS, game);
-            turmoil.sendDelegateToParty(player, PartyName.MARS, game);
-            turmoil.sendDelegateToParty(player, PartyName.MARS, game);
-            turmoil.sendDelegateToParty(player, PartyName.MARS, game);
-            turmoil.sendDelegateToParty(player, PartyName.MARS, game);
-            turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
-            turmoil.sendDelegateToParty(player, PartyName.GREENS, game);
+            turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
+            turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
+            turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
+            turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
+            turmoil.sendDelegateToParty(player.id, PartyName.MARS, game);
+            turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+            turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
             turmoil.endGeneration(game);
-            expect(turmoil.chairman).to.eq(player);
+            expect(game.getPlayerById(turmoil.chairman!)).to.eq(player);
+
             expect(turmoil.lobby.size).to.eq(1);
             expect(turmoil.rulingParty).to.eq(turmoil.getPartyByName(PartyName.MARS));
             expect(turmoil.dominantParty).to.eq(turmoil.getPartyByName(PartyName.GREENS));

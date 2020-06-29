@@ -661,7 +661,7 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
         chairman = Color.NEUTRAL;
       }
       else {
-        chairman = game.turmoil.chairman.color;
+        chairman = game.getPlayerById(game.turmoil.chairman).color;
       }
     }
     if (game.turmoil.dominantParty){
@@ -676,7 +676,7 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
     const reserve = game.turmoil.getPresentPlayers().map(player => {
       const number = game.turmoil!.getDelegates(player);
       if (player != "NEUTRAL") {
-        return {color: player.color, number: number};
+        return {color: game.getPlayerById(player).color, number: number};
       }
       else {
         return {color: Color.NEUTRAL, number: number};
@@ -738,7 +738,7 @@ function getParties(game: Game): Array<PartyModel> | undefined{
       party.getPresentPlayers().forEach(player => {
         const number = party.getDelegates(player);
         if (player != "NEUTRAL") {
-          delegates.push({color: player.color, number: number});
+          delegates.push({color: game.getPlayerById(player).color, number: number});
         }
         else {
           delegates.push({color: Color.NEUTRAL, number: number});
@@ -750,7 +750,7 @@ function getParties(game: Game): Array<PartyModel> | undefined{
           partyLeader = Color.NEUTRAL;
         }
         else {
-          partyLeader = party.partyLeader.color;
+          partyLeader = game.getPlayerById(party.partyLeader).color;
         }
       }
       return {

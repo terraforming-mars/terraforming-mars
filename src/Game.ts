@@ -415,7 +415,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
               if (game.turmoil !== undefined) {
                 game.turmoil.lobby.add(player.id);
                 for (let i = 0; i < 6; i++) {
-                  game.turmoil.delegate_reserve.push(player);   
+                  game.turmoil.delegate_reserve.push(player.id);   
                 }
               }
             });
@@ -1622,9 +1622,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
             this.turmoil.chairman = "NEUTRAL";
           }
           else {
-            const chairman_id = d.turmoil.chairman.id
+            const chairman_id = d.turmoil.chairman;
             const player = this.players.find((player) => player.id === chairman_id);
-            this.turmoil.chairman = player;
+            this.turmoil.chairman = player!.id;
           }
         }
 
@@ -1632,17 +1632,19 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.turmoil.lobby = new Set<string>(d.turmoil.lobby);
 
         // Rebuild delegate reserve
-        this.turmoil.delegate_reserve = d.turmoil.delegate_reserve.map((element: SerializedPlayer | "NEUTRAL")  => {
+        this.turmoil.delegate_reserve = d.turmoil.delegate_reserve.map((element: PlayerId | "NEUTRAL")  => {
           if(element === "NEUTRAL"){
             return "NEUTRAL";
           }
           else {
-            const player = this.players.find((player) => player.id === element.id);
+            const player = this.players.find((player) => player.id === element);
             if (player){
-              return player;
+              return player.id;
             }
             else {
-              throw "Player not found when rebuilding delegate reserve";
+              // Avoid breaking server, return neutral instead of error
+              console.log("Player not found when rebuilding delegate reserve");
+              return "NEUTRAL";
             }
           }
         });
@@ -1655,22 +1657,22 @@ export class Game implements ILoadable<SerializedGame, Game> {
               party!.partyLeader = "NEUTRAL";
             }
             else {
-              const partyLeaderId = element.partyLeader.id;
+              const partyLeaderId = element.partyLeader;
               const player = this.players.find((player) => player.id === partyLeaderId);
-              party!.partyLeader = player;
+              party!.partyLeader = player!.id;
             }
           }
 
           // Rebuild delegates
-          party!.delegates = new Array<Player>();
-          element.delegates.forEach((element: Player | "NEUTRAL") => {
+          party!.delegates = new Array<PlayerId>();
+          element.delegates.forEach((element: PlayerId | "NEUTRAL") => {
             if (element === "NEUTRAL") {
               party!.delegates.push("NEUTRAL");
             }
             else {
-              const player = this.players.find((player) => player.id === element.id);
+              const player = this.players.find((player) => player.id === element);
               if (player) {
-                party!.delegates.push(player);
+                party!.delegates.push(player.id);
               }
             }
           });

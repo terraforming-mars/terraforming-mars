@@ -34,7 +34,7 @@ describe("GMOContract", function () {
             expect(card.canPlay(player, game)).to.eq(false);
             let greens = game.turmoil.getPartyByName(PartyName.GREENS);
             if (greens !== undefined) {
-                greens.delegates.push(player, player);
+                greens.delegates.push(player.id, player.id);
                 expect(card.canPlay(player, game)).to.eq(true); 
             }
             card.play();

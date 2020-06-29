@@ -38,7 +38,7 @@ describe("ParliamentHall", function () {
         if (game.turmoil !== undefined) {
             let mars = game.turmoil.getPartyByName(PartyName.MARS);
             if (mars !== undefined) {
-                mars.delegates.push(player, player);
+                mars.delegates.push(player.id, player.id);
                 expect(card.canPlay(player, game)).to.eq(true); 
             }
         } 

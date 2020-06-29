@@ -60,13 +60,11 @@ export class ElectroCatapult implements IActionCard, IProjectCard {
     }
     
     private log(game: Game, player: Player, resource: Resources) {
-      const displayStr = resource === Resources.PLANTS ? resource.slice(0, -1) : resource;
-
       game.log(
         LogMessageType.DEFAULT,
         "${0} spent 1 ${1} to gain 7 MC",
         new LogMessageData(LogMessageDataType.PLAYER, player.id),
-        new LogMessageData(LogMessageDataType.STRING, displayStr)
+        new LogMessageData(LogMessageDataType.STRING, resource)
       );
     }
 }

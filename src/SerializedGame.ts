@@ -28,7 +28,7 @@ export interface SerializedGame {
     corporationList: Array<CardName>;
     boardName: BoardName;
     seed?: number
-    activePlayer: SerializedPlayer;
+    activePlayer: PlayerId;
     claimedMilestones: Array<ClaimedMilestone>;
     milestones: Array<IMilestone>;
     dealer: SerializedDealer;

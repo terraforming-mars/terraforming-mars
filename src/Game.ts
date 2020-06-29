@@ -76,7 +76,7 @@ export interface GameOptions {
 }  
 
 export class Game implements ILoadable<SerializedGame, Game> {
-    public activePlayer: Player;
+    public activePlayer: PlayerId;
     public claimedMilestones: Array<ClaimedMilestone> = [];
     public milestones: Array<IMilestone> = [];
     public dealer: Dealer;
@@ -152,7 +152,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       this.board = this.boardConstructor(gameOptions.boardName);
 
-      this.activePlayer = first;
+      this.activePlayer = first.id;
       this.boardName = gameOptions.boardName;
       this.draftVariant = gameOptions.draftVariant;
       this.corporateEra = gameOptions.corporateEra;
@@ -405,7 +405,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           // Set active player
           let playerIndex = gameToRebuild.players.indexOf(gameToRebuild.first);
           game.first = game.players[playerIndex];
-          game.activePlayer = game.players[playerIndex];
+          game.activePlayer = game.players[playerIndex].id;
 
           // Recreate turmoil lobby and reserve (Turmoil stores some players ids)
           if (gameToRebuild.turmoilExtension && game.turmoil !== undefined) {
@@ -994,7 +994,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return;
       }
 
-      const nextPlayer = this.getNextPlayer(this.players, this.activePlayer);
+      const nextPlayer = this.getNextPlayer(this.players, this.getPlayerById(this.activePlayer));
 
       // Defensive coding to fail fast, if we don't find the next
       // player we are in an unexpected game state
@@ -1006,7 +1006,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.startActionsForPlayer(nextPlayer);
       } else {
         // Recursively find the next player
-        this.activePlayer = nextPlayer;
+        this.activePlayer = nextPlayer.id;
         this.playerIsFinishedTakingActions();
       }
     }
@@ -1062,12 +1062,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private startFinalGreeneryPlacement(player: Player) {
-      this.activePlayer = player;
+      this.activePlayer = player.id;
       player.takeActionForFinalGreenery(this);
     }
 
     private startActionsForPlayer(player: Player) {
-      this.activePlayer = player;
+      this.activePlayer = player.id;
       player.actionsTakenThisRound = 0;
 
       // Save the game state after changing the current player
@@ -1754,11 +1754,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       // Define who is the active player and init the take action phase
-      const active = this.players.find((player) => player.id === d.activePlayer.id);
+      const active = this.players.find((player) => player.id === d.activePlayer);
       if (active) {
         // We have to switch active player because it's still the one that ended last turn
-        this.activePlayer = active;
-        this.activePlayer.takeAction(this);
+        this.activePlayer = active.id;
+        this.getPlayerById(this.activePlayer).takeAction(this);
       }
       else {
         throw "No Player found when rebuilding Active Player";

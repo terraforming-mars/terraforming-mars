@@ -308,7 +308,7 @@ function apiGetWaitingFor(
   res.setHeader('Content-Type', 'application/json');
   const answer = {
     "result": "WAIT",
-    "player": game.activePlayer.name
+    "player": game.getPlayerById(game.activePlayer).name
   }
   if (player.getWaitingFor() !== undefined || game.phase === Phase.END) {
     answer["result"] = "GO";
@@ -471,7 +471,7 @@ function getPlayer(player: Player, game: Game): string {
     gameLog: game.gameLog,
     isSoloModeWin: game.isSoloModeWin(),
     gameAge: game.gameAge,
-    isActive: player.id === game.activePlayer.id,
+    isActive: player.id === game.activePlayer,
     corporateEra: game.corporateEra,
     venusNextExtension: game.venusNextExtension,
     venusScaleLevel: game.getVenusScaleLevel(),
@@ -624,7 +624,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       titaniumProduction: player.getProduction(Resources.TITANIUM),
       titaniumValue: player.getTitaniumValue(game),
       victoryPointsBreakdown: player.getVictoryPoints(game),
-      isActive: player.id === game.activePlayer.id,
+      isActive: player.id === game.activePlayer,
       venusNextExtension: game.venusNextExtension,
       venusScaleLevel: game.getVenusScaleLevel(),
       boardName: game.boardName,
@@ -793,7 +793,7 @@ function getSpaces(spaces: Array<ISpace>): Array<SpaceModel> {
 
 function getGame(game: Game): string {
   const output = {
-    activePlayer: game.activePlayer.color,
+    activePlayer: game.getPlayerById(game.activePlayer).color,
     id: game.id,
     phase: game.phase,
     players: game.getPlayers()

@@ -11,6 +11,7 @@ import { PlayerInput } from "../PlayerInput";
 import { ResourceType } from '../ResourceType';
 import { CardName } from '../CardName';
 import { LogHelper } from '../components/LogHelper';
+import { Resources } from '../Resources';
 
 export class LargeConvoy implements IProjectCard {
     public cost: number = 36;
@@ -25,7 +26,7 @@ export class LargeConvoy implements IProjectCard {
 
         const gainPlants = function() {
             player.plants += 5;
-            LogHelper.logGainPlants(game, player, 5);
+            LogHelper.logGainStandardResource(game, player, Resources.PLANTS, 5);
             game.addOceanInterrupt(player);
             return undefined;
         }

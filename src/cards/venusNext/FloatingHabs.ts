@@ -7,6 +7,7 @@ import { ResourceType } from "../../ResourceType";
 import { SelectCard } from '../../inputs/SelectCard';
 import { CardName } from '../../CardName';
 import { Game } from "../../Game";
+import { LogHelper } from "../../components/LogHelper";
 
 export class FloatingHabs implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 5;
@@ -35,7 +36,7 @@ export class FloatingHabs implements IActionCard,IProjectCard, IResourceCard {
       // add to itself if no other available target
       if (floaterCards.length === 1) {
         game.addSelectHowToPayInterrupt(player, 2, false, false, "Select how to pay for Floating Habs action");
-
+        LogHelper.logAddResource(game, player, floaterCards[0]);
         player.addResourceTo(floaterCards[0], 1);
         return undefined;
       }
@@ -45,7 +46,7 @@ export class FloatingHabs implements IActionCard,IProjectCard, IResourceCard {
           floaterCards,
           (foundCards: Array<ICard>) => {
             game.addSelectHowToPayInterrupt(player, 2, false, false, "Select how to pay for Floating Habs action");
-
+            LogHelper.logAddResource(game, player, foundCards[0]);
             player.addResourceTo(foundCards[0], 1);
             return undefined;
           }

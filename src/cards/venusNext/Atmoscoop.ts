@@ -9,6 +9,7 @@ import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
 import { ICard } from '../ICard';
 import { CardName } from '../../CardName';
+import { LogHelper } from '../../components/LogHelper';
 
 export class Atmoscoop implements IProjectCard {
     public cost: number = 22;
@@ -26,6 +27,7 @@ export class Atmoscoop implements IProjectCard {
                 "Raise temperature 2 steps and add 2 floaters to" + floaterCards[0].name,
                 () => {
                     player.addResourceTo(floaterCards[0], 2);
+                    LogHelper.logAddResource(game, player, floaterCards[0], 2);
                     return game.increaseTemperature(player,2);
                 })
             : new SelectCard(
@@ -33,6 +35,7 @@ export class Atmoscoop implements IProjectCard {
                 floaterCards,
                 (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 2);
+                LogHelper.logAddResource(game, player, foundCards[0], 2);
                 return game.increaseTemperature(player,2);
                 });
 
@@ -41,14 +44,16 @@ export class Atmoscoop implements IProjectCard {
                 "Raise Venus 2 steps and add 2 floaters to" + floaterCards[0].name,
                 () => {
                     player.addResourceTo(floaterCards[0], 2);
+                    LogHelper.logAddResource(game, player, floaterCards[0], 2);
                     return game.increaseVenusScaleLevel(player,2);
                 })
             : new SelectCard(
-            'Select card to add 2 floaters and raise Venus 2 steps',
-            floaterCards,
-            (foundCards: Array<ICard>) => {
-              player.addResourceTo(foundCards[0], 2);
-              return game.increaseVenusScaleLevel(player,2);
+                'Select card to add 2 floaters and raise Venus 2 steps',
+                floaterCards,
+                (foundCards: Array<ICard>) => {
+                player.addResourceTo(foundCards[0], 2);
+                LogHelper.logAddResource(game, player, foundCards[0], 2);
+                return game.increaseVenusScaleLevel(player,2);
             });
 
         const raiseTempOnly = new SelectOption("Raise temperature 2 steps", () => {

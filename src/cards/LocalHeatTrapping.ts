@@ -13,6 +13,7 @@ import { ICard } from './ICard';
 import { CardName } from '../CardName';
 import { Game } from "../Game";
 import { LogHelper } from "../components/LogHelper";
+import { Resources } from "../Resources";
 
 export class LocalHeatTrapping implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
@@ -36,7 +37,7 @@ export class LocalHeatTrapping implements IProjectCard {
 
         const gain4Plants = function () {
             player.plants += 4;
-            LogHelper.logGainPlants(game, player, 4);
+            LogHelper.logGainStandardResource(game, player, Resources.PLANTS, 4);
             return undefined;
         };
         if (animalCards.length === 0) {

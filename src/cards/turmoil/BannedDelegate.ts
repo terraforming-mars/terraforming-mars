@@ -6,6 +6,10 @@ import { Player } from "../../Player";
 import { Game } from '../../Game';
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectDelegate } from "../../inputs/SelectDelegate";
+import { IParty } from "../../turmoil/parties/IParty";
+import { LogMessageType } from "../../LogMessageType";
+import { LogMessageData } from "../../LogMessageData";
+import { LogMessageDataType } from "../../LogMessageDataType";
 
 export class BannedDelegate implements IProjectCard {
     public cost: number = 0;
@@ -20,7 +24,7 @@ export class BannedDelegate implements IProjectCard {
         return false;
     }
 
-    public play(_player: Player, game: Game) {
+    public play(player: Player, game: Game) {
         let orOptions = new Array<SelectDelegate>();
         // Take each party having more than just the party leader in the area
         game.turmoil!.parties.forEach(party => {
@@ -31,7 +35,8 @@ export class BannedDelegate implements IProjectCard {
             const players = Array.from(new Set<Player | "NEUTRAL">(delegates));
             if (players.length > 0) {
               let selectDelegate = new SelectDelegate(players, "Select player delegate to remove from " + party.name + " party", (selectedPlayer: Player | "NEUTRAL") => {
-                game.turmoil!.removeDelegateFromParty(selectedPlayer, party.name, game);   
+                game.turmoil!.removeDelegateFromParty(selectedPlayer, party.name, game);
+                this.log(game, player, party);
                 return undefined;
               });
               orOptions.push(selectDelegate);
@@ -46,5 +51,14 @@ export class BannedDelegate implements IProjectCard {
           let options = new OrOptions(...orOptions);   
           return options;
         }
+    }
+
+    private log(game: Game, player: Player, party: IParty) {
+      game.log(
+        LogMessageType.DEFAULT,
+        "${0} removed a delegate from ${1}",
+        new LogMessageData(LogMessageDataType.PLAYER, player.id),
+        new LogMessageData(LogMessageDataType.PARTY, party.name)
+      );
     }
 }

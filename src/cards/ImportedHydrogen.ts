@@ -12,6 +12,7 @@ import { PlayerInput } from "../PlayerInput";
 import { ResourceType } from '../ResourceType';
 import { CardName } from '../CardName';
 import { LogHelper } from '../components/LogHelper';
+import { Resources } from '../Resources';
 
 export class ImportedHydrogen implements IProjectCard {
     public cost: number = 16;
@@ -26,7 +27,7 @@ export class ImportedHydrogen implements IProjectCard {
         const gainPlants = function () {
             const qty = 3;
             player.plants += qty;
-            LogHelper.logGainPlants(game, player, qty);
+            LogHelper.logGainStandardResource(game, player, Resources.PLANTS, qty);
             game.addOceanInterrupt(player);
             return undefined;
         };

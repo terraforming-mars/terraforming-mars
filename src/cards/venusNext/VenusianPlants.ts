@@ -7,6 +7,7 @@ import { SelectCard } from '../../inputs/SelectCard';
 import { Game } from '../../Game';
 import { ICard } from '../ICard';
 import { CardName } from '../../CardName';
+import { LogHelper } from "../../components/LogHelper";
 
 export class VenusianPlants implements IProjectCard {
     public cost: number = 13;
@@ -23,6 +24,7 @@ export class VenusianPlants implements IProjectCard {
 
         if (cards.length === 1) {
             player.addResourceTo(cards[0], 1);
+            LogHelper.logAddResource(game, player, cards[0]);
             return undefined;
         }
 
@@ -31,6 +33,7 @@ export class VenusianPlants implements IProjectCard {
             cards,
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 1);
+              LogHelper.logAddResource(game, player, foundCards[0]);
               return undefined;
             }
         );

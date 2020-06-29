@@ -46,6 +46,7 @@ describe("MaxwellBase", function () {
         const card2 = new Birds();
         const card3 = new AerialMappers()
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player,player], player);
 
         player.playedCards.push(card);
         player.playedCards.push(card2);
@@ -53,7 +54,7 @@ describe("MaxwellBase", function () {
 
         player.playedCards.push(card3);
         expect(card.canAct(player)).to.eq(true);        
-        card.action(player);
+        card.action(player, game);
         expect(player.getResourcesOnCard(card3)).to.eq(1);
     });
     it("Should act - multiple targets", function () {
@@ -61,11 +62,12 @@ describe("MaxwellBase", function () {
         const card2 = new StratosphericBirds();
         const card3 = new AerialMappers()
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player,player], player);
 
         player.playedCards.push(card, card2, card3);
         expect(card.canAct(player)).to.eq(true);
 
-        const action = card.action(player);
+        const action = card.action(player, game);
         expect(action instanceof SelectCard).to.eq(true);
         (action as SelectCard<ICard>).cb([card2]);
         expect(player.getResourcesOnCard(card2)).to.eq(1);

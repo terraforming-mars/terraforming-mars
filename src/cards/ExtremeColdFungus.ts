@@ -11,6 +11,7 @@ import {IProjectCard} from './IProjectCard';
 import { ResourceType } from '../ResourceType';
 import { CardName } from '../CardName';
 import { LogHelper } from '../components/LogHelper';
+import { Resources } from '../Resources';
 
 export class ExtremeColdFungus implements IActionCard, IProjectCard {
     public cost: number = 13;
@@ -33,13 +34,13 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
 
       if (otherMicrobeCards.length === 0) {
         player.plants++;
-        LogHelper.logGainPlants(game, player);
+        LogHelper.logGainStandardResource(game, player, Resources.PLANTS);
         return undefined;
       }
 
       const gainPlantOption = new SelectOption('Gain 1 plant', () => {
         player.plants++;
-        LogHelper.logGainPlants(game, player);
+        LogHelper.logGainStandardResource(game, player, Resources.PLANTS);
         return undefined;
       })
 

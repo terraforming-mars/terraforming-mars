@@ -88,9 +88,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private donePlayers: Set<Player> = new Set<Player>();
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
     private venusScaleLevel: number = constants.MIN_VENUS_SCALE;
-    private passedPlayers: Set<Player> = new Set<Player>();
-    private researchedPlayers: Set<Player> = new Set<Player>();
-    private draftedPlayers: Set<Player> = new Set<Player>();
+    private passedPlayers: Set<PlayerId> = new Set<PlayerId>();
+    private researchedPlayers: Set<PlayerId> = new Set<PlayerId>();
+    private draftedPlayers: Set<PlayerId> = new Set<PlayerId>();
     public board: Board;
     private temperature: number = constants.MIN_TEMPERATURE;
     public gameLog: Array<LogMessage> = [];
@@ -680,7 +680,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public hasPassedThisActionPhase(player: Player): boolean {
-      return this.passedPlayers.has(player);
+      return this.passedPlayers.has(player.id);
     }
 
     private incrementFirstPlayer(): void {
@@ -839,15 +839,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public playerHasPassed(player: Player): void {
-      this.passedPlayers.add(player);
+      this.passedPlayers.add(player.id);
     }
 
     private hasResearched(player: Player): boolean {
-      return this.researchedPlayers.has(player);
+      return this.researchedPlayers.has(player.id);
     }
 
     private hasDrafted(player: Player): boolean {
-      return this.draftedPlayers.has(player);
+      return this.draftedPlayers.has(player.id);
     }
 
     private allPlayersHaveFinishedResearch(): boolean {
@@ -869,14 +869,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public playerIsFinishedWithResearchPhase(player: Player): void {
-      this.researchedPlayers.add(player);
+      this.researchedPlayers.add(player.id);
       if (this.allPlayersHaveFinishedResearch()) {
         this.gotoActionPhase();
       }
     }
 
     public playerIsFinishedWithDraftingPhase(initialDraft: boolean, player: Player, cards : Array<IProjectCard>): void {
-      this.draftedPlayers.add(player);
+      this.draftedPlayers.add(player.id);
       this.unDraftedCards.set(player,cards);
 
       player.needsToDraft = false;
@@ -1710,11 +1710,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
       });
 
       // Rebuild passed players set
-      this.passedPlayers = new Set<Player>();
+      this.passedPlayers = new Set<PlayerId>();
       d.passedPlayers.forEach((element: SerializedPlayer) => {
         const player = this.players.find((player) => player.id === element.id);
         if (player) {
-          this.passedPlayers.add(player);
+          this.passedPlayers.add(player.id);
         }
       });
 
@@ -1728,20 +1728,20 @@ export class Game implements ILoadable<SerializedGame, Game> {
       });
 
       // Rebuild researched players set
-      this.researchedPlayers = new Set<Player>();
+      this.researchedPlayers = new Set<PlayerId>();
       d.researchedPlayers.forEach((element: SerializedPlayer) => {
         const player = this.players.find((player) => player.id === element.id);
         if (player) {
-          this.researchedPlayers.add(player);
+          this.researchedPlayers.add(player.id);
         }
       });
 
       // Rebuild drafted players set
-      this.draftedPlayers = new Set<Player>();
+      this.draftedPlayers = new Set<PlayerId>();
       d.draftedPlayers.forEach((element: SerializedPlayer) => {
         const player = this.players.find((player) => player.id === element.id);
         if (player) {
-          this.draftedPlayers.add(player);
+          this.draftedPlayers.add(player.id);
         }
       });
 

@@ -97,7 +97,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public gameAge: number = 0; // Each log event increases it
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
     public interrupts: Array<PlayerInterrupt> = [];
-    public monsInsuranceOwner: Player | undefined = undefined;
+    public monsInsuranceOwner: PlayerId | undefined = undefined;
     public colonies: Array<IColony> = [];
     public colonyDealer: ColonyDealer | undefined = undefined;
     public pendingOceans: number = 0;
@@ -1749,8 +1749,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.unDraftedCards = new Map<Player, IProjectCard[]>();
 
       // Mons insurance
-      if (d.monsInsuranceOwner) {
-        this.monsInsuranceOwner = this.players.find((player) => player.id === d.monsInsuranceOwner!.id);
+      if (d.monsInsuranceOwner !== undefined) {
+        this.monsInsuranceOwner = this.players.find((player) => player.id === d.monsInsuranceOwner!)!.id;
       }
 
       // Define who is the active player and init the take action phase

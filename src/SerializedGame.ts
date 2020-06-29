@@ -13,6 +13,7 @@ import { BoardName } from "./BoardName";
 import { SerializedPlayer } from "./SerializedPlayer";
 import { SerializedDealer } from "./SerializedDealer";
 import { SerializedTurmoil } from "./turmoil/SerializedTurmoil";
+import { PlayerId } from "./Player";
 
 export interface SerializedGame {
     id: string;
@@ -48,7 +49,7 @@ export interface SerializedGame {
     gameAge: number;
     unDraftedCards: Map<SerializedPlayer, Array<IProjectCard>>;
     interrupts: Array<PlayerInterrupt>;
-    monsInsuranceOwner: SerializedPlayer | undefined;
+    monsInsuranceOwner: PlayerId | undefined;
     colonies: Array<IColony>;
     colonyDealer: ColonyDealer | undefined;
     pendingOceans: number;

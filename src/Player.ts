@@ -189,9 +189,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     private resolveMonsInsurance(game: Game) {
       if (game.monsInsuranceOwner !== undefined) {
-        let retribution: number = Math.min(game.monsInsuranceOwner.megaCredits, 3);
+        let retribution: number = Math.min(game.getPlayerById(game.monsInsuranceOwner).megaCredits, 3);
         this.megaCredits += retribution;
-        game.monsInsuranceOwner.setResource(Resources.MEGACREDITS,-3);
+        game.getPlayerById(game.monsInsuranceOwner).setResource(Resources.MEGACREDITS,-3);
         if (retribution > 0) {
           game.log(
             LogMessageType.DEFAULT,
@@ -199,7 +199,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
             new LogMessageData(LogMessageDataType.STRING, retribution.toString()),
             new LogMessageData(LogMessageDataType.CARD, "Mons Insurance"),
-            new LogMessageData(LogMessageDataType.PLAYER, game.monsInsuranceOwner.id)
+            new LogMessageData(LogMessageDataType.PLAYER, game.monsInsuranceOwner)
           );
         }
       }  

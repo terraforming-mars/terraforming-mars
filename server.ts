@@ -803,7 +803,9 @@ function getGame(game: Game): string {
 }
 
 function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {
-  console.warn('Not found', req.method, req.url);
+  if (process.argv.length > 0 && process.argv.includes("with-not-found-warnings")) {
+    console.warn('Not found', req.method, req.url);
+  }
   res.writeHead(404);
   res.write('Not found');
   res.end();

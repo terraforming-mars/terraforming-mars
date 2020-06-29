@@ -1711,8 +1711,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Rebuild passed players set
       this.passedPlayers = new Set<PlayerId>();
-      d.passedPlayers.forEach((element: SerializedPlayer) => {
-        const player = this.players.find((player) => player.id === element.id);
+      d.passedPlayers.forEach((element: PlayerId) => {
+        const player = this.players.find((player) => player.id === element);
         if (player) {
           this.passedPlayers.add(player.id);
         }
@@ -1720,8 +1720,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Rebuild done players set
       this.donePlayers = new Set<Player>();
-      d.donePlayers.forEach((element: SerializedPlayer) => {
-        const player = this.players.find((player) => player.id === element.id);
+      d.donePlayers.forEach((element: PlayerId) => {
+        const player = this.players.find((player) => player.id === element);
         if (player) {
           this.donePlayers.add(player);
         }
@@ -1729,8 +1729,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Rebuild researched players set
       this.researchedPlayers = new Set<PlayerId>();
-      d.researchedPlayers.forEach((element: SerializedPlayer) => {
-        const player = this.players.find((player) => player.id === element.id);
+      d.researchedPlayers.forEach((element: PlayerId) => {
+        const player = this.players.find((player) => player.id === element);
         if (player) {
           this.researchedPlayers.add(player.id);
         }
@@ -1738,8 +1738,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Rebuild drafted players set
       this.draftedPlayers = new Set<PlayerId>();
-      d.draftedPlayers.forEach((element: SerializedPlayer) => {
-        const player = this.players.find((player) => player.id === element.id);
+      d.draftedPlayers.forEach((element: PlayerId) => {
+        const player = this.players.find((player) => player.id === element);
         if (player) {
           this.draftedPlayers.add(player.id);
         }

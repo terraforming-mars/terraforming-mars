@@ -37,12 +37,12 @@ export interface SerializedGame {
     generation: number;
     draftRound: number;
     phase: Phase;
-    donePlayers: Set<SerializedPlayer>;
+    donePlayers: Set<PlayerId>;
     oxygenLevel: number;
     venusScaleLevel: number;
-    passedPlayers: Set<SerializedPlayer>;
-    researchedPlayers: Set<SerializedPlayer>;
-    draftedPlayers: Set<SerializedPlayer>;
+    passedPlayers: Set<PlayerId>;
+    researchedPlayers: Set<PlayerId>;
+    draftedPlayers: Set<PlayerId>;
     board: Board;
     temperature: number;
     gameLog: Array<String>;

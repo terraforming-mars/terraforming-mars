@@ -1,4 +1,4 @@
-import {Player} from "./Player";
+import { Player, PlayerId } from "./Player";
 import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_CORP_ERA_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from "./Dealer";
 import {ISpace} from "./ISpace";
 import {SpaceType} from "./SpaceType";
@@ -470,7 +470,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public addColonyInterrupt(player: Player, allowDuplicate: boolean = false, title: string): void {
       let openColonies = this.colonies.filter(colony => colony.colonies.length < 3 
-        && (colony.colonies.indexOf(player) === -1 || allowDuplicate)
+        && (colony.colonies.indexOf(player.id) === -1 || allowDuplicate)
         && colony.isActive);
       if (openColonies.length >0 ) {
         this.addInterrupt(new SelectColony(player, this, openColonies, title));
@@ -1595,15 +1595,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
           Object.assign(colony, element);
 
           if (colony !== undefined) {
-            if (element.visitor){
-              const player = this.players.find((player) => player.id === element.visitor!.id);
-              colony.visitor = player;
+            if (element.visitor !== undefined){
+              const player = this.players.find((player) => player.id === element.visitor);
+              colony.visitor = player!.id;
             }
-            colony.colonies = new Array<Player>();
-            element.colonies.forEach((element: Player) => {
-              const player = this.players.find((player) => player.id === element.id);
+            colony.colonies = new Array<PlayerId>();
+            element.colonies.forEach((element: PlayerId) => {
+              const player = this.players.find((player) => player.id === element);
               if (player) {
-                colony!.colonies.push(player);
+                colony!.colonies.push(player.id);
               }
             });
             this.colonies.push(colony);

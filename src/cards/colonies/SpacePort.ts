@@ -18,7 +18,7 @@ export class SpacePort implements IProjectCard {
         if (game.board.getAvailableSpacesForCity(player).length === 0) return false;
         let coloniesCount: number = 0;
         game.colonies.forEach(colony => { 
-          coloniesCount += colony.colonies.filter(owner => owner === player).length;
+          coloniesCount += colony.colonies.filter(owner => owner === player.id).length;
         }); 
         return coloniesCount > 0 && player.getProduction(Resources.ENERGY) > 0;
     }

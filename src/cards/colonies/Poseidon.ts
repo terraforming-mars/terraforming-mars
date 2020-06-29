@@ -14,7 +14,7 @@ export class Poseidon implements CorporationCard {
     public initialAction(player: Player, game: Game) {
         if (game.coloniesExtension) {
           let openColonies = game.colonies.filter(colony => colony.colonies.length < 3 
-            && colony.colonies.indexOf(player) === -1 
+            && colony.colonies.indexOf(player.id) === -1 
             && colony.isActive);
           let buildColony = new OrOptions();
           buildColony.title = "Poseidon first action - Select where to build colony";

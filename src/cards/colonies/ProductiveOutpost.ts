@@ -13,8 +13,8 @@ export class ProductiveOutpost implements IProjectCard {
 
     public play(player: Player, game: Game) {
       game.colonies.forEach(colony => {
-          colony.colonies.filter(owner => owner === player).forEach(owner => {
-            colony.giveTradeBonus(owner, game);
+          colony.colonies.filter(owner => owner === player.id).forEach(owner => {
+            colony.giveTradeBonus(game.getPlayerById(owner), game);
           });
       }); 
       return undefined;

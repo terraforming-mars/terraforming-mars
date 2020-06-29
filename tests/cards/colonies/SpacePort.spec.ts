@@ -20,7 +20,7 @@ describe("SpacePort", function () {
         const game = new Game("foobar", [player,player2], player);
         player.setProduction(Resources.ENERGY);
         let colony = new Ceres();
-        colony.colonies.push(player);
+        colony.colonies.push(player.id);
         game.colonies.push(colony);
         expect(card.canPlay(player,game)).to.eq(true);
         const action = card.play(player, game);

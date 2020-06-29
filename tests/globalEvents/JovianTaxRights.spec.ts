@@ -18,8 +18,8 @@ describe("JovianTaxRights", function () {
         const turmoil = new Turmoil(game);
         let colony1 = new Luna();
         let colony2 = new Triton();
-        colony1.colonies.push(player2);
-        colony2.colonies.push(player2);
+        colony1.colonies.push(player2.id);
+        colony2.colonies.push(player2.id);
         game.colonies.push(colony1);
         game.colonies.push(colony2);
         turmoil.chairman = player2;

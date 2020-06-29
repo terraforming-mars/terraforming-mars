@@ -8,7 +8,6 @@ import {ColonyModel} from './src/models/ColonyModel';
 import {Color} from './src/Color';
 import { Game, GameOptions } from './src/Game';
 import {ICard} from './src/cards/ICard';
-import {IColony} from './src/colonies/Colony';
 import {IProjectCard} from './src/cards/IProjectCard';
 import {ISpace} from './src/ISpace';
 import {OrOptions} from './src/inputs/OrOptions';
@@ -477,7 +476,7 @@ function getPlayer(player: Player, game: Game): string {
     venusNextExtension: game.venusNextExtension,
     venusScaleLevel: game.getVenusScaleLevel(),
     boardName: game.boardName,
-    colonies: getColonies(game.colonies),
+    colonies: getColonies(game),
     tags: player.getAllTags(),
     showOtherPlayersVP: game.showOtherPlayersVP,
     actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
@@ -629,7 +628,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       venusNextExtension: game.venusNextExtension,
       venusScaleLevel: game.getVenusScaleLevel(),
       boardName: game.boardName,
-      colonies: getColonies(game.colonies),
+      colonies: getColonies(game),
       tags: player.getAllTags(),
       showOtherPlayersVP: game.showOtherPlayersVP,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
@@ -643,14 +642,14 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
   });
 }
 
-function getColonies(colonies: Array<IColony>): Array<ColonyModel> {
-    return colonies.map((colony): ColonyModel => ({
-        colonies: colony.colonies.map((player): Color => player.color),
-        isActive: colony.isActive,
-        name: colony.name,
-        trackPosition: colony.trackPosition,
-        visitor: colony.visitor === undefined ? undefined : colony.visitor.color
-    }));
+function getColonies(game: Game): Array<ColonyModel> {
+  return game.colonies.map((colony): ColonyModel => ({
+      colonies: colony.colonies.map((playerId): Color => game.getPlayerById(playerId).color),
+      isActive: colony.isActive,
+      name: colony.name,
+      trackPosition: colony.trackPosition,
+      visitor: colony.visitor === undefined ? undefined : game.getPlayerById(colony.visitor).color
+  }));
 }
 
 function getTurmoil(game: Game): TurmoilModel | undefined {

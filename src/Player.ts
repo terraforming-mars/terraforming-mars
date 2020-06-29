@@ -48,9 +48,11 @@ import { Aridor } from "./cards/colonies/Aridor";
 import { MiningArea } from "./cards/MiningArea";
 import { MiningRights } from "./cards/MiningRights";
 
+export type PlayerId = string;
+
 export class Player implements ILoadable<SerializedPlayer, Player>{
     public corporationCard: CorporationCard | undefined = undefined;
-    public id: string;
+    public id: PlayerId;
     public canUseHeatAsMegaCredits: boolean = false;
     public shouldTriggerCardEffect: boolean = true;
     public plantsNeededForGreenery: number = 8;
@@ -92,7 +94,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public colonyTradeOffset: number = 0;
     public colonyTradeDiscount: number = 0;
     private turmoilScientistsActionUsed: boolean = false;
-    public removingPlayers: Array<string> = [];
+    public removingPlayers: Array<PlayerId> = [];
     public needsToDraft: boolean | undefined = undefined;
 
     constructor(
@@ -1966,7 +1968,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if ( game.coloniesExtension &&
         this.canAfford(constants.BUILD_COLONY_COST)) {
         let openColonies = game.colonies.filter(colony => colony.colonies.length < 3 
-          && colony.colonies.indexOf(this) === -1
+          && colony.colonies.indexOf(this.id) === -1
           && colony.isActive);      
           if (openColonies.length > 0) {
             standardProjects.options.push(

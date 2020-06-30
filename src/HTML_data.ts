@@ -5797,11 +5797,11 @@ export const HTML_DATA: Map<string, string> =
       <div class="colonies-icon corporation-icon"></div>
       <div class="contentCorporation">
          <div class="pointsCorporation">1/2<div class="resource animal"></div></div>
-        <div class="corporationEffectBox">
+        <div class="corporationEffectBox" style="margin-top: 143px; height: 144px">
           <div class="corporationEffectBoxLabel">EFFECT</div>
           <div class="resource-tag tag-animal"></div> / <div class="resource-tag tag-plant"></div> : <div class="resource animal"></div>
-          <div class="description" style="margin-top:0px;text-align:left;margin-left:20px;">
-            (Effect: When you play an animal or plant tag, including<br> this, add 1 animal<br> to this card.) <br>
+          <div class="description" style="margin-top:0px;text-align:left;margin-left:10px;">
+            (Effect: When you play an animal or plant tag, including this, add 1 animal to this card.)
           </div>
         </div>
         <div  class= "arklight" style="font-size:19px;
@@ -5923,7 +5923,7 @@ export const HTML_DATA: Map<string, string> =
       ##RESOURCES##
       <div class="colonies-icon corporation-icon"></div>
       <div class="contentCorporation">
-        <div class="corporationEffectBox">
+        <div class="corporationEffectBox" style="margin-top: 136px; height: 149px">
           <div class="corporationEffectBoxLabel" style="margin-bottom:5px;" >ACTION</div>
           <div class="red-arrow"></div> <div class="resource floater" style="margin-bottom:5px;"></div>* <br>
           <div class="resource floater"></div> = <div class="resource heat"></div><div class="resource heat"></div>

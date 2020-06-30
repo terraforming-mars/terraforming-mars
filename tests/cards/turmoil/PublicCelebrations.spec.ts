@@ -13,6 +13,7 @@ describe("PublicCelebrations", function () {
             draftVariant: false,
             initialDraftVariant: false,
             corporateEra: true,
+            randomMA: false,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,

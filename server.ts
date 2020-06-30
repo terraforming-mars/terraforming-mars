@@ -377,7 +377,8 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         startingCorporations: gameReq.startingCorporations,
         soloTR: gameReq.soloTR,
         clonedGamedId: gameReq.clonedGamedId,
-        initialDraftVariant: gameReq.initialDraft
+        initialDraftVariant: gameReq.initialDraft,
+        randomMA: gameReq.randomMA
       } as GameOptions;
     
       const game = new Game(gameId, players, firstPlayer, gameOptions);
@@ -490,7 +491,8 @@ function getPlayer(player: Player, game: Game): string {
     dealtPreludeCards: player.dealtPreludeCards,
     initialDraft: game.initialDraft,
     needsToDraft: player.needsToDraft,
-    deckSize: game.dealer.getDeckSize()
+    deckSize: game.dealer.getDeckSize(),
+    randomMA: game.randomMA
   } as PlayerModel;
   return JSON.stringify(output);
 }

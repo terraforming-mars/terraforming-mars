@@ -1595,17 +1595,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
           Object.assign(colony, element);
 
           if (colony !== undefined) {
-            if (element.visitor !== undefined){
-              const player = this.players.find((player) => player.id === element.visitor);
-              colony.visitor = player!.id;
-            }
-            colony.colonies = new Array<PlayerId>();
-            element.colonies.forEach((element: PlayerId) => {
-              const player = this.players.find((player) => player.id === element);
-              if (player) {
-                colony!.colonies.push(player.id);
-              }
-            });
             this.colonies.push(colony);
           }
         });     

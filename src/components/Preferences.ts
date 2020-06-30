@@ -19,6 +19,7 @@ export const Preferences = Vue.component("preferences", {
             "remove_background": false,
             "magnify_cards": true,
             "magnify_card_descriptions": true,
+            "alert_mars_terraformed": true,
             "lang": "en",
             "langs": LANGUAGES
         };
@@ -146,6 +147,12 @@ export const Preferences = Vue.component("preferences", {
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="magnify_card_descriptions" />
                             <i class="form-icon"></i> <span v-i18n>Magnify card descriptions on hover</span>
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="alert_mars_terraformed" />
+                            <i class="form-icon"></i> <span v-i18n>Alert when Terraforming completed</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item form-group">

@@ -446,6 +446,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (card.resourceCount !== undefined) {
         card.resourceCount += count;
       }
+
+      // Topsoil contract hook
+      if (card.resourceType === ResourceType.MICROBE && this.playedCards.map((card) => card.name).includes(CardName.TOPSOIL_CONTRACT)) {
+        this.megaCredits += count;
+      }
     }
 
     public getCardsWithResources(): Array<ICard> {

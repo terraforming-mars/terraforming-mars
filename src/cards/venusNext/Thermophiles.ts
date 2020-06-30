@@ -34,7 +34,7 @@ export class Thermophiles implements IActionCard,IProjectCard, IResourceCard {
 
         // only 1 valid target and cannot remove 2 microbes - add to itself
         if (venusMicrobeCards.length === 1 && !canRaiseVenus) {
-            this.resourceCount++;
+            player.addResourceTo(this);
             LogHelper.logAddResource(game, player, this);
             return undefined;
         }

@@ -386,6 +386,7 @@ export enum CardName {
     MELTWORKS = "Meltworks",
     MOHOLE_LAKE = "Mohole Lake",
     DIVERSITY_SUPPORT = "Diversity Support",
+    JOVIAN_EMBASSY = "Jovian Embassy",
     INDUSTRIAL_CENTER = "Industrial Center",
     FACTORUM = "Factorum",
     LAKEFRONT_RESORTS = "Lakefront Resorts",

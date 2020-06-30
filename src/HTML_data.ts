@@ -6953,9 +6953,9 @@ export const HTML_DATA: Map<string, string> =
         </div>
         <br>
         <div class="tile temperature-tile"></div><div class="tile ocean-tile"></div>
-        <div class="plant resource"></div><div class="plant resource"></div>
+        <div class="plant resource"></div><div class="plant resource"></div><div class="plant resource"></div>
         <div class="description">
-          (Place an ocean tile and raise temperature 1 step. Gain 2 Plants.)
+          (Place an ocean tile and raise temperature 1 step. Gain 3 Plants.)
         </div>
     </div>
 `],
@@ -6968,9 +6968,23 @@ export const HTML_DATA: Map<string, string> =
             <div class="requirements">9 Resources</div>
             <div class="tile rating"></div>
             <div class="description ">
-                (Requires that you have 9 resources on cards. Raise your terraform rating 1 step.)
+                (Requires that you have 9 different types of resources. Raise your terraform rating 1 step.)
             </div>
         </div>
+`],
+[CardName.JOVIAN_EMBASSY,`
+<div class="title background-color-automated">Jovian Embassy</div>
+<div class="price">14</div>
+<div class="tag tag1 tag-building"></div>
+<div class="tag tag2 tag-jovian"></div>
+<div class="promo-icon project-icon"></div>
+<div class="content">
+    <div class="points points-big">1</div>
+    <div class="tile rating"></div>
+    <div class="description ">
+        (Raise your terraform rating 1 step.)
+    </div>
+</div>
 `],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>

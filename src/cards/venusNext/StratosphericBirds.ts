@@ -32,7 +32,7 @@ export class StratosphericBirds implements IActionCard,IProjectCard, IResourceCa
         }
     }
     public play(player: Player) {
-       const cardsWithFloater = player.getCardsWithResources().filter(card => card.resourceType === ResourceType.FLOATER);
+        const cardsWithFloater = player.getCardsWithResources().filter(card => card.resourceType === ResourceType.FLOATER);
 
         if (cardsWithFloater.length === 1) {
             const floaterCard = cardsWithFloater[0];
@@ -44,12 +44,7 @@ export class StratosphericBirds implements IActionCard,IProjectCard, IResourceCa
             }
 
             return undefined;
-        }
-
-        // Edge case for Dirigibles: floater(s) used as payment
-        const cardsCollectingFloaters = player.getResourceCards(ResourceType.FLOATER);
-
-        if (cardsCollectingFloaters.length === 1) {
+        } else if (cardsWithFloater.length === 0) {
             player.megaCredits -= 3;
             return undefined;
         }

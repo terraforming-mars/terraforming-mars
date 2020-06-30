@@ -4549,7 +4549,7 @@ export const HTML_DATA: Map<string, string> =
                 </div>
                 <div class="tile rating"></div> <div class="resource floater"></div><div class="resource floater"></div>*
                 <div class="description " style="margin-top:-5px;text-align:left;">
-                  (Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY <br> card. 1VP per 2 floaters.)
+                  (Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card. 1VP per 2 floaters.)
                 </div>
               </div>
 `],
@@ -4629,6 +4629,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="content ">
                 INCREASE ONE COLONY TILE TRACK 1 STEP. <BR>
                 DECREASE ANOTHER COLONY TILE TRACK 1 STEP.
+              </div>
 `],
 [CardName.MARTIAN_ZOO,`
               <div class="title background-color-active ">Martian Zoo</div>
@@ -4644,9 +4645,9 @@ export const HTML_DATA: Map<string, string> =
                 <div class="resource-tag tag-earth"></div> : <div class="resource animal"></div> <br>
                 <div class="red-arrow"></div> <div class="resource money">1</div> / <div class="resource animal"></div>
                 <div class="description">
-                  (Effect: When you play an Earth tag, place an animal here.) <br><br>
-                  (Action: Gain 1MC per animal here.)<br><br>
-                  <div style="margin-left:-75px;">(Requires 2 city <br>tiles in play.)</div>
+                  <p style="margin-bottom: 4px;">(Effect: When you play an Earth tag, place an animal here.)</p>
+                  <p style="margin-bottom: 13px;">(Action: Gain 1MC per animal here.)</p>
+                  <div style="margin-left:-93px;">(Requires 2 city tiles in play.)</div>
                 </div>
               </div>
 `],
@@ -4693,7 +4694,8 @@ export const HTML_DATA: Map<string, string> =
                   <div class="resource money">1</div> / <div class="tile city-tile-small red-outline"></div> <br>
                   <div class="resource money" style="margin-left:-14px;">1</div> / <div class="triangle triangle-red"></div>
                   <div class="description ">
-                      (Gain 1Mc for each city tile in play.<br> Gain 1MC for each colony in play.)
+                      <p>(Gain 1MC for each city tile in play.)</p>
+                      <p>(Gain 1MC for each colony in play.)</p>
                   </div>
               </div>
 `],
@@ -4775,7 +4777,7 @@ export const HTML_DATA: Map<string, string> =
                 </div>
                 <div class="resource card"></div><div class="resource card"></div>
                 <div class="description " style="margin-top:-5px;text-align:left;">
-                  (Requires 3 Science tags.<br>&nbsp; Draw 2 cards.)
+                  (Requires 3 Science tags. Draw 2 cards.)
                 </div>
               </div>
 `],
@@ -4893,8 +4895,7 @@ export const HTML_DATA: Map<string, string> =
                   </div>
                   <div class="tile city-tile " style="margin-left:10px "></div> <div class="triangle triangle-white" style="margin-left:10px "></div><br>
                   <div class="description ">
-                      (Requires 1 colony. Decrease your Energy production 1 step and increase your MC production 4 steps.
-                      Place a City tile. Gain 1 Trade Fleet.)
+                      (Requires 1 colony. Decrease your Energy production 1 step and increase your MC production 4 steps. Place a City tile. Gain 1 Trade Fleet.)
                   </div>
               </div>
 `],
@@ -4909,7 +4910,7 @@ export const HTML_DATA: Map<string, string> =
                 <div class="requirements">Colony</div>
                   <div class="triangle triangle-black"></div>* <div class="triangle triangle-white" style="margin-left:20px "></div><br>
                   <div class="description ">
-                      (Requires a colony. Place a colony.<br> MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY.<br> Gain 1 Trade Fleet. 1VP per 2 colonies in play.)
+                      (Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet. 1VP per 2 colonies in play.)
                   </div>
               </div>
 `],
@@ -4950,7 +4951,7 @@ export const HTML_DATA: Map<string, string> =
                 <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div>
               </div>
               <div class="description" style="text-align:left;">
-                (Requires -6 C. Decrease any Plant production 1 step. 1 VP per<br> 2 Animals on this card.)
+                (Requires -6 C. Decrease any Plant production 1 step. 1 VP per 2 Animals on this card.)
               </div>
             </div>
 `],

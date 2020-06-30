@@ -6953,9 +6953,9 @@ export const HTML_DATA: Map<string, string> =
         </div>
         <br>
         <div class="tile temperature-tile"></div><div class="tile ocean-tile"></div>
-        <div class="plant resource"></div><div class="plant resource"></div>
+        <div class="plant resource"></div><div class="plant resource"></div><div class="plant resource"></div>
         <div class="description">
-          (Place an ocean tile and raise temperature 1 step. Gain 2 Plants.)
+          (Place an ocean tile and raise temperature 1 step. Gain 3 Plants.)
         </div>
     </div>
 `],

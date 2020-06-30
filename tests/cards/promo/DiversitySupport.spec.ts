@@ -19,6 +19,7 @@ describe("DiversitySupport", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
 
+        // 3 non-standard resources
         const ants = new Ants();
         const fish = new Fish();
         const dirigibles = new Dirigibles();
@@ -26,6 +27,15 @@ describe("DiversitySupport", function () {
         dirigibles.resourceCount = 4;
         fish.resourceCount = 3;
         ants.resourceCount = 2;
+        expect(card.canPlay(player)).to.eq(false);
+
+        // 6 standard resources
+        player.megaCredits = 10;
+        player.steel = 2;
+        player.titanium = 1;
+        player.plants = 4;
+        player.energy = 1;
+        player.heat = 3;
 
         expect(card.canPlay(player)).to.eq(true);
         card.play(player, game);

@@ -23,7 +23,7 @@ describe("MoholeLake", function () {
         expect(game.getTemperature()).to.eq(-28);
         expect(game.board.getOceansOnBoard()).to.eq(1);
         expect(player.getTerraformRating()).to.eq(22);
-        expect(player.plants).to.eq(2);
+        expect(player.plants).to.eq(3);
     });
 
     it("Can't act", function () {

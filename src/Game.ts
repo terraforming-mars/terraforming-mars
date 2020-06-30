@@ -1604,41 +1604,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.turmoilExtension) {
         let turmoil = new Turmoil(this);
         this.turmoil = turmoil.loadFromJSON(d.turmoil);
-
-        // Rebuild chairman
-        if (d.turmoil.chairman) {
-          if (d.turmoil.chairman === "NEUTRAL"){
-            this.turmoil.chairman = "NEUTRAL";
-          }
-          else {
-            const chairman_id = d.turmoil.chairman;
-            const player = this.players.find((player) => player.id === chairman_id);
-            this.turmoil.chairman = player!.id;
-          }
-        }
-
+        
         // Rebuild lobby
         this.turmoil.lobby = new Set<string>(d.turmoil.lobby);
 
-        // Rebuild delegate reserve
-        this.turmoil.delegate_reserve = d.turmoil.delegate_reserve.map((element: PlayerId | "NEUTRAL")  => {
-          if(element === "NEUTRAL"){
-            return "NEUTRAL";
-          }
-          else {
-            const player = this.players.find((player) => player.id === element);
-            if (player){
-              return player.id;
-            }
-            else {
-              // Avoid breaking server, return neutral instead of error
-              console.log("Player not found when rebuilding delegate reserve");
-              return "NEUTRAL";
-            }
-          }
-        });
-
-        // Rebuild party leader
+        // Rebuild parties
         d.turmoil.parties.forEach((element: IParty) => {
           let party = this.turmoil?.getPartyByName(element.name);
           if (element.partyLeader) {
@@ -1652,7 +1622,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
             }
           }
 
-          // Rebuild delegates
+          // Rebuild parties delegates
           party!.delegates = new Array<PlayerId>();
           element.delegates.forEach((element: PlayerId | "NEUTRAL") => {
             if (element === "NEUTRAL") {
@@ -1665,7 +1635,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
               }
             }
           });
+
         });
+
       }
 
       // Rebuild claimed milestones

@@ -11,8 +11,12 @@ class GlobalParamLevel {
     }
 }
 
+class AlertDialog {
+    static shouldAlert = true;
+}
+
 export const Board = Vue.component("board", {
-    props: ["spaces", "venusNextExtension", "venusScaleLevel","boardName", "oceans_count", "oxygen_level", "temperature"],
+    props: ["spaces", "venusNextExtension", "venusScaleLevel","boardName", "oceans_count", "oxygen_level", "temperature", "shouldNotify"],
     components: {
         "board-space": BoardSpace
     },
@@ -20,6 +24,12 @@ export const Board = Vue.component("board", {
         return {
             "constants": constants
         }
+    },
+    mounted: function () {
+        if (this.marsIsTerraformed() && this.shouldNotify && AlertDialog.shouldAlert) {
+            alert("Mars is Terraformed!");
+            AlertDialog.shouldAlert = false;
+        };
     },
     methods: {
         getAllSpacesOnMars: function (): Array<SpaceModel> {
@@ -82,6 +92,18 @@ export const Board = Vue.component("board", {
                 css += "val-is-active";
             }
             return css
+        },
+        marsIsTerraformed: function () {
+            const temperatureMaxed = this.temperature === constants.MAX_TEMPERATURE;
+            const oceansMaxed = this.oceans_count === constants.MAX_OCEAN_TILES;
+            const oxygenMaxed = this.oxygen_level === constants.MAX_OXYGEN_LEVEL;
+            const venusMaxed = this.venusScaleLevel === constants.MAX_VENUS_SCALE;
+
+            if (this.venusNextExtension) {
+                return temperatureMaxed && oceansMaxed && oxygenMaxed && venusMaxed;
+            } else {
+                return temperatureMaxed && oceansMaxed && oxygenMaxed;
+            }
         }
     },
     template: `

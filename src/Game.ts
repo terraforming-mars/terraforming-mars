@@ -1748,11 +1748,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Reinit undrafted cards map
       this.unDraftedCards = new Map<Player, IProjectCard[]>();
 
-      // Mons insurance
-      if (d.monsInsuranceOwner !== undefined) {
-        this.monsInsuranceOwner = this.players.find((player) => player.id === d.monsInsuranceOwner!)!.id;
-      }
-
       // Define who is the active player and init the take action phase
       const active = this.players.find((player) => player.id === d.activePlayer);
       if (active) {

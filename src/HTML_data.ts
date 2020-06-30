@@ -6972,6 +6972,20 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
+[CardName.JOVIAN_EMBASSY,`
+<div class="title background-color-automated">Jovian Embassy</div>
+<div class="price">14</div>
+<div class="tag tag1 tag-building"></div>
+<div class="tag tag2 tag-jovian"></div>
+<div class="promo-icon project-icon"></div>
+<div class="content">
+    <div class="points points-big">1</div>
+    <div class="tile rating"></div>
+    <div class="description ">
+        (Raise your terraform rating 1 step.)
+    </div>
+</div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>

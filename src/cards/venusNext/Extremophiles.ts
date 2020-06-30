@@ -31,7 +31,7 @@ export class Extremophiles implements IActionCard,IProjectCard, IResourceCard {
     public action(player: Player) {
         const microbeCards = player.getResourceCards(ResourceType.MICROBE);
         if (microbeCards.length === 1) {
-            this.resourceCount++;
+            player.addResourceTo(this);
             return undefined;
         }
 

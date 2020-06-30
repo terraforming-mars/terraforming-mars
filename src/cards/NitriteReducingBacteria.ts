@@ -27,7 +27,7 @@ export class NitriteReducingBacteria implements IActionCard, IProjectCard, IReso
     }
     public action(player: Player, game: Game) {
         if (this.resourceCount < 3) {
-            this.resourceCount++;
+            player.addResourceTo(this);
             return undefined;
         }
         return new OrOptions(
@@ -37,7 +37,7 @@ export class NitriteReducingBacteria implements IActionCard, IProjectCard, IReso
                 return undefined;
             }),
             new SelectOption("Add 1 microbe to this card", () => {
-                this.resourceCount++;
+                player.addResourceTo(this);
                 return undefined;
             })
         );

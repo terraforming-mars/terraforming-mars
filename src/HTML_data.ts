@@ -6968,7 +6968,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="requirements">9 Resources</div>
             <div class="tile rating"></div>
             <div class="description ">
-                (Requires that you have 9 resources on cards. Raise your terraform rating 1 step.)
+                (Requires that you have 9 different types of resources. Raise your terraform rating 1 step.)
             </div>
         </div>
 `],

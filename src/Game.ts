@@ -73,7 +73,7 @@ export interface GameOptions {
   soloTR: boolean;
   clonedGamedId: string | undefined;
   initialDraftVariant: boolean;
-  initialDraftRounds: number;
+  initialDraftRounds: number | undefined;
   randomMA: boolean;
 }  
 

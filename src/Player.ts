@@ -381,6 +381,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public hasProtectedHabitats(): boolean {
       return this.cardIsInEffect(CardName.PROTECTED_HABITATS);
     }
+
+    public plantsAreProtected(): boolean {
+      return this.hasProtectedHabitats() || this.cardIsInEffect(CardName.ASTEROID_DEFLECTION_SYSTEM);
+    }
         
     public getResourcesOnCard(card: ICard): number {
       if (card.resourceCount !== undefined) {

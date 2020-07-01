@@ -388,6 +388,7 @@ export enum CardName {
     DIVERSITY_SUPPORT = "Diversity Support",
     JOVIAN_EMBASSY = "Jovian Embassy",
     TOPSOIL_CONTRACT = "Topsoil Contract",
+    IMPORTED_NUTRIENTS = "Imported Nutrients",
     INDUSTRIAL_CENTER = "Industrial Center",
     FACTORUM = "Factorum",
     LAKEFRONT_RESORTS = "Lakefront Resorts",

@@ -17,7 +17,7 @@ describe("VenusianInsects", function () {
         const card = new VenusianInsects();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        const action = card.action();
+        const action = card.action(player);
         expect(action).to.eq(undefined);
         expect(card.resourceCount).to.eq(1);
     });

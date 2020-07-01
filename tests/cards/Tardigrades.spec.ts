@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { Tardigrades } from "../../src/cards/Tardigrades";
 import { Color } from "../../src/Color";
@@ -18,7 +17,7 @@ describe("Tardigrades", function () {
         const card = new Tardigrades();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        const action = card.action();
+        const action = card.action(player);
         expect(action).to.eq(undefined);
         expect(card.resourceCount).to.eq(1);
     });

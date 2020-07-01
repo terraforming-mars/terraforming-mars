@@ -6972,6 +6972,38 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
+[CardName.TOPSOIL_CONTRACT, `
+    <div class="title background-color-active">Topsoil Contract</div>
+    <div class="price">8</div>
+    <div class="tag tag1 tag-microbe"></div>
+    <div class="tag tag2 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      <div class="microbe resource"></div>* : <div class="money resource">1</div>
+      <div class="description">
+        (Effect: When you gain a microbe to ANY CARD, gain 1 MC.)
+      </div>
+      <br><br>
+      <div class="plant resource"></div><div class="plant resource"></div><div class="plant resource"></div>
+      <div class="description">
+        (Gain 3 plants.)
+      </div>
+    </div>
+`],
+[CardName.IMPORTED_NUTRIENTS,`
+    <div class="title background-color-events">Imported Nutrients</div>
+    <div class="price">14</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="tag tag2 tag-space"></div>
+    <div class="tag tag3 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      4 <div class="plant resource"></div> 4 <div class="microbe resource"></div>*
+      <div class="description">
+        (Gain 4 Plants and add 4 Microbes to ANOTHER card.)
+      </div>
+    </div>
+`],
 [CardName.JOVIAN_EMBASSY,`
 <div class="title background-color-automated">Jovian Embassy</div>
 <div class="price">14</div>

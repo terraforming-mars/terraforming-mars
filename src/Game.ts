@@ -73,6 +73,7 @@ export interface GameOptions {
   soloTR: boolean;
   clonedGamedId: string | undefined;
   initialDraftVariant: boolean;
+  initialDraftRounds: number;
   randomMA: boolean;
 }  
 
@@ -120,6 +121,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public soloTR: boolean;
     private clonedGamedId: string | undefined;
     public initialDraft: boolean = false;
+    public initialDraftRounds: number = 4;
     public randomMA: boolean = false;
 
     constructor(
@@ -135,6 +137,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         gameOptions = {
           draftVariant: false,
           initialDraftVariant: false,
+          initialDraftRounds: 4,
           corporateEra: true,
           randomMA: false,
           preludeExtension: false,
@@ -171,6 +174,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.solarPhaseOption = gameOptions.solarPhaseOption;
       this.soloTR = gameOptions.soloTR;
       this.initialDraft = gameOptions.initialDraftVariant;
+      this.initialDraftRounds = gameOptions.initialDraftRounds || 4;
       this.randomMA = gameOptions.randomMA;
 
       // Clone game
@@ -435,6 +439,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.startingCorporations = gameToRebuild.startingCorporations;
           game.soloTR = gameToRebuild.soloTR;
           game.initialDraft = gameToRebuild.initialDraft;
+          game.initialDraftRounds = gameToRebuild.initialDraftRounds || 4;
           game.randomMA = gameToRebuild.randomMA;
 
           // Update dealers
@@ -924,54 +929,49 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
     }
 
+    private isLastActiveRoundOfDraft(initialDraft: boolean): boolean {
+
+      if (initialDraft && (this.draftRound === this.initialDraftRounds || this.draftRound === 9)) return true;
+
+      if ( ! initialDraft && this.draftRound === 3) return true;
+
+      return false;
+    }
+
     public playerIsFinishedWithDraftingPhase(initialDraft: boolean, player: Player, cards : Array<IProjectCard>): void {
       this.draftedPlayers.add(player);
       this.unDraftedCards.set(player,cards);
 
       player.needsToDraft = false;
-
       if (!this.allPlayersHaveFinishedDraft()) {
         return;
       }
 
-      if (this.allPlayersHaveFinishedDraft() && this.draftRound < 3 && !initialDraft) {
+      if ( ! this.isLastActiveRoundOfDraft(initialDraft)) {
         this.draftRound++;
-        this.runDraftRound();
-      }      
-
-      if (this.allPlayersHaveFinishedDraft() && this.draftRound < this.players.length && initialDraft) {
-        this.draftRound++;
-        this.runDraftRound(true);
-      } 
-
-      if (this.allPlayersHaveFinishedDraft() && this.draftRound === 3 && !initialDraft) {
+        this.runDraftRound(initialDraft);
+      } else {
         // Push last card for each player
-        if (cards.length === 1) {
-          this.players.forEach((player) => {
-            let lastCards  = this.unDraftedCards.get(this.getDraftCardsFrom(player));
-            if (lastCards !== undefined && lastCards[0] !== undefined) {
-              player.draftedCards.push(lastCards[0]);
-            }
-            player.needsToDraft = undefined;
-          });
-        }
-        this.gotoResearchPhase();
-      }
-
-      if (this.allPlayersHaveFinishedDraft() && this.draftRound === this.players.length && initialDraft) {
         this.initialDraft = false;
-        // Push last cards for each player
-          this.players.forEach((player) => {
-            let lastCards  = this.unDraftedCards.get(this.getDraftCardsFrom(player));
-            if (lastCards !== undefined) {
-              player.draftedCards.push(...lastCards);
-            }
+
+        this.players.forEach((player) => {
+          let lastCards  = this.unDraftedCards.get(this.getDraftCardsFrom(player));
+          if (lastCards !== undefined) {
+            player.draftedCards.push(...lastCards);
+          }
+          player.needsToDraft = undefined;
+
+          if (initialDraft) {
             player.dealtProjectCards = player.draftedCards;
             player.draftedCards = [];
             player.setWaitingFor(this.pickCorporationCard(player), () => {});
-          });
-        return;
-      }      
+          }
+        });
+
+        if ( ! initialDraft) {
+          this.gotoResearchPhase();
+        }
+      }
     }
 
     public getDraftCardsFrom(player: Player): Player {

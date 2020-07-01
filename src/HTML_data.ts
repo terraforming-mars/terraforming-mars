@@ -7006,6 +7006,35 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
+[CardName.ASTEROID_DEFLECTION_SYSTEM,`
+    <div class="title background-color-active">Asteroid Deflection System</div>
+    <div class="price">13</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="tag tag2 tag-space"></div>
+    <div class="tag tag3 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      <div class="points">1/<div class="asteroid resource">A</div></div>
+      <span class="red-arrow"></span><div class="resource card"></div>*
+      <div class="resource-tag tag-space"></div> : <div class="asteroid resource">A</div>
+      <div class="description">
+        (Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid resource here.)
+      </div>
+      <br>
+      <div class="description effect">
+        OPPONENTS MAY NOT REMOVE YOUR PLANTS
+      </div>
+      <br>
+      <div class="production-box production-box-size1a">
+        <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div><br>
+      </div>
+      <div class="description bottom" >
+        (Decrease your energy<br>
+        production 1 step. 1 VP per<br>
+        asteroid on this card.)
+      </div>
+    </div>
+`],
 [CardName.JOVIAN_EMBASSY,`
 <div class="title background-color-automated">Jovian Embassy</div>
 <div class="price">14</div>

@@ -100,7 +100,8 @@ export const PlayerHome = Vue.component("player-home", {
                         :boardName ="player.boardName"
                         :oceans_count="player.oceans" 
                         :oxygen_level="player.oxygenLevel" 
-                        :temperature="player.temperature"></board>
+                        :temperature="player.temperature"
+                        :shouldNotify="true"></board>
 
                     <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
 

@@ -73,6 +73,7 @@ export interface GameOptions {
   soloTR: boolean;
   clonedGamedId: string | undefined;
   initialDraftVariant: boolean;
+  randomMA: boolean;
 }  
 
 export class Game implements ILoadable<SerializedGame, Game> {
@@ -119,6 +120,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public soloTR: boolean;
     private clonedGamedId: string | undefined;
     public initialDraft: boolean = false;
+    public randomMA: boolean = false;
 
     constructor(
       public id: string,
@@ -134,6 +136,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           draftVariant: false,
           initialDraftVariant: false,
           corporateEra: true,
+          randomMA: false,
           preludeExtension: false,
           venusNextExtension: false,
           coloniesExtension: false,
@@ -150,7 +153,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         } as GameOptions
       }
 
-      this.board = this.boardConstructor(gameOptions.boardName);
+      this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.venusNextExtension);
 
       this.activePlayer = first;
       this.boardName = gameOptions.boardName;
@@ -168,6 +171,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.solarPhaseOption = gameOptions.solarPhaseOption;
       this.soloTR = gameOptions.soloTR;
       this.initialDraft = gameOptions.initialDraftVariant;
+      this.randomMA = gameOptions.randomMA;
 
       // Clone game
       if (gameOptions !== undefined 
@@ -185,6 +189,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.soloMode = true;
         this.draftVariant = false;
         this.initialDraft = false;
+        this.randomMA = false;
         this.draftVariant = false;
         this.setupSolo();
       }
@@ -204,7 +209,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Add Venus Next corporations cards, board colonies and milestone / award
       if (this.venusNextExtension) {
         corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
-        this.setVenusElements();
+        this.setVenusElements(this.randomMA);
       }
 
       // Add colonies stuff
@@ -319,32 +324,75 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     // Function to construct the board and milestones/awards list
-    public boardConstructor(boardName: BoardName): Board {
+    public boardConstructor(boardName: BoardName, randomMA: boolean, hasVenus: boolean): Board {
+      const requiredQty = 5;
+
       if (boardName === BoardName.ELYSIUM) {
-        this.milestones.push(...ELYSIUM_MILESTONES);
-        this.awards.push(...ELYSIUM_AWARDS);
+        if (randomMA) {
+          this.getRandomMilestonesAndAwards(hasVenus, requiredQty);
+        } else {
+          this.milestones.push(...ELYSIUM_MILESTONES);
+          this.awards.push(...ELYSIUM_AWARDS);
+        }
+        
         return new ElysiumBoard();
       } else if (boardName === BoardName.HELLAS) {
-        this.milestones.push(...HELLAS_MILESTONES);
-        this.awards.push(...HELLAS_AWARDS);
+        if (randomMA) {
+          this.getRandomMilestonesAndAwards(hasVenus, requiredQty);
+        } else {
+          this.milestones.push(...HELLAS_MILESTONES);
+          this.awards.push(...HELLAS_AWARDS);
+        }
+
         return new HellasBoard();
       } else {        
-        this.milestones.push(...ORIGINAL_MILESTONES);
-        this.awards.push(...ORIGINAL_AWARDS);
+        if (randomMA) {
+          this.getRandomMilestonesAndAwards(hasVenus, requiredQty);
+        } else {
+          this.milestones.push(...ORIGINAL_MILESTONES);
+          this.awards.push(...ORIGINAL_AWARDS);
+        }
 
         return new OriginalBoard();
       }
     }
 
+    public getRandomMilestonesAndAwards(hasVenus: boolean, requiredQty: number) {
+      let availableMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES);
+      if (hasVenus) availableMilestones = availableMilestones.concat(VENUS_MILESTONES);
+
+      availableMilestones = availableMilestones.filter((milestone) => !this.milestones.includes(milestone));
+
+      const shuffledMilestones = availableMilestones.sort(() => 0.5 - Math.random());
+      this.milestones.push(...shuffledMilestones.slice(0, requiredQty));
+
+      let availableAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS);
+      if (hasVenus) availableAwards = availableAwards.concat(VENUS_AWARDS);
+
+      availableAwards = availableAwards.filter((award) => !this.awards.includes(award));
+
+      const shuffledAwards = availableAwards.sort(() => 0.5 - Math.random());
+      this.awards.push(...shuffledAwards.slice(0, requiredQty));
+    }
+
     // Add Venus Next board colonies and milestone / award
-    public setVenusElements() {
-      this.milestones.push(...VENUS_MILESTONES);
-      this.awards.push(...VENUS_AWARDS);
+    public setVenusElements(randomMA: boolean) {
+      if (randomMA) {
+        this.getRandomMilestonesAndAwards(true, 1);
+      } else {
+        this.milestones.push(...VENUS_MILESTONES);
+        this.awards.push(...VENUS_AWARDS);
+      }
+
+      this.addVenusBoardSpaces();
+    }
+
+    private addVenusBoardSpaces() {
       this.board.spaces.push(
-          new BoardColony(SpaceName.DAWN_CITY),
-          new BoardColony(SpaceName.LUNA_METROPOLIS),
-          new BoardColony(SpaceName.MAXWELL_BASE),
-          new BoardColony(SpaceName.STRATOPOLIS)
+        new BoardColony(SpaceName.DAWN_CITY),
+        new BoardColony(SpaceName.LUNA_METROPOLIS),
+        new BoardColony(SpaceName.MAXWELL_BASE),
+        new BoardColony(SpaceName.STRATOPOLIS)
       );
     }
 
@@ -387,6 +435,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.startingCorporations = gameToRebuild.startingCorporations;
           game.soloTR = gameToRebuild.soloTR;
           game.initialDraft = gameToRebuild.initialDraft;
+          game.randomMA = gameToRebuild.randomMA;
 
           // Update dealers
           game.dealer = gameToRebuild.dealer;
@@ -399,7 +448,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.turmoil = gameToRebuild.turmoil;
 
           if(gameToRebuild.venusNextExtension) {
-            game.setVenusElements();
+            game.addVenusBoardSpaces();
           }
 
           // Set active player
@@ -1545,13 +1594,40 @@ export class Game implements ILoadable<SerializedGame, Game> {
       });
       
       // Rebuild milestones, awards and board elements
+      if (d.boardName === BoardName.ELYSIUM) {
+        this.board = new ElysiumBoard();
+      } else if (d.boardName === BoardName.HELLAS) {
+        this.board = new HellasBoard();
+      } else {        
+        this.board = new OriginalBoard();
+      }  
+
       this.milestones = [];
       this.awards = [];
-      this.board = this.boardConstructor(d.boardName);
+
+      let allMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES);
+
+      d.milestones.forEach((element: IMilestone) => {
+        allMilestones.forEach((ms: IMilestone) => {
+          if (ms.name === element.name) {
+            this.milestones.push(ms);
+          }
+        });
+      });  
+
+      let allAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS);
+
+      d.awards.forEach((element: IAward) => {
+        allAwards.forEach((award: IAward) => {
+          if (award.name === element.name) {
+            this.awards.push(award);
+          }
+        });
+      });
 
       // Reload venus elements if needed
       if(this.venusNextExtension) {
-        this.setVenusElements();
+        this.addVenusBoardSpaces();
       }
 
       d.board.spaces.forEach((element: ISpace) => {

@@ -18,6 +18,7 @@ interface CreateGameModel {
     prelude: boolean;
     draftVariant: boolean;
     initialDraft: boolean;
+    randomMA: boolean;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
     venusNext: boolean;
@@ -62,6 +63,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             prelude: false,
             draftVariant: true,
             initialDraft: false,
+            randomMA: false,
             randomFirstPlayer: true,
             showOtherPlayersVP: false,
             venusNext: false,
@@ -160,6 +162,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const prelude = component.prelude;
             const draftVariant = component.draftVariant;
             const initialDraft = component.initialDraft;
+            const randomMA = component.randomMA;
             const showOtherPlayersVP = component.showOtherPlayersVP;
             const venusNext = component.venusNext;
             const colonies = component.colonies;
@@ -185,7 +188,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             }
 
             const dataToSend = JSON.stringify({
-                players: players, corporateEra, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption, promoCardsOption, undoOption, startingCorporations, soloTR, clonedGamedId, initialDraft 
+                players: players, corporateEra, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption, promoCardsOption, undoOption, startingCorporations, soloTR, clonedGamedId, initialDraft, randomMA 
             });
 
             const onSucces = (response: any) => {
@@ -299,6 +302,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <label class="form-switch" v-if="playersCount > 1">
                                 <input type="checkbox" v-model="randomFirstPlayer">
                                 <i class="form-icon"></i> <span v-i18n>Random first player</span>
+                            </label>
+
+                            <label class="form-switch" v-if="playersCount > 1">
+                                <input type="checkbox" name="randomMA" v-model="randomMA">
+                                <i class="form-icon"></i> <span v-i18n>Random Milestones/Awards</span>
                             </label>
 
                             <label class="form-switch" v-if="playersCount > 1">

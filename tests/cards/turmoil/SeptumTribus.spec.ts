@@ -27,7 +27,8 @@ describe("SeptumTribus", function () {
             startingCorporations: 2,
             soloTR: false,
             clonedGamedId: undefined,
-            initialDraftVariant: false
+            initialDraftVariant: false,
+            randomMA: false
           } as GameOptions;
 
         const game = new Game("foobar", [player,player2], player, gameOptions);
@@ -72,7 +73,8 @@ describe("SeptumTribus", function () {
             startingCorporations: 2,
             soloTR: false,
             clonedGamedId: undefined,
-            initialDraftVariant: false
+            initialDraftVariant: false,
+            randomMA: false
           } as GameOptions;
 
         const game = new Game("foobar", [player], player, gameOptions);

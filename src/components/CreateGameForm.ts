@@ -1,14 +1,10 @@
-
 import Vue from "vue";
 import { Color } from "../Color";
-
 import { BoardName } from '../BoardName';
 import { CardName } from "../CardName";
 import { CorporationsFilter } from "./CorporationsFilter";
-
 import { $t } from "../directives/i18n";
 import { IGameData } from '../database/IDatabase';
-
 
 interface CreateGameModel {
     firstIndex: number;
@@ -139,6 +135,19 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 component.firstIndex = Math.floor(component.seed * component.playersCount) + 1;
             }
 
+            // Auto assign an available color if there are duplicates
+            const uniqueColors = players.map((player) => player.color).filter((v, i, a) => a.indexOf(v) === i);
+            if (uniqueColors.length !== players.length) {
+                const allColors = [Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.BLACK, Color.PURPLE];
+                players.forEach((player) => {
+                    if (allColors.includes(player.color)) {
+                        allColors.splice(allColors.indexOf(player.color), 1);
+                    } else {
+                        player.color = allColors.shift() as Color;
+                    }
+                })
+            }
+
             // Set player name automatically if not entered
             const isSoloMode = component.playersCount === 1;
 
@@ -157,8 +166,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 player.first = (component.firstIndex === player.index);
                 return player;
             });
-
-            // TODO Check if all players has different colors
 
             if (component.board === "random") {
                 const boards = Object.values(BoardName);

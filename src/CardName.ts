@@ -391,6 +391,7 @@ export enum CardName {
     IMPORTED_NUTRIENTS = "Imported Nutrients",
     ASTEROID_DEFLECTION_SYSTEM = "Asteroid Deflection System",
     SUB_CRUST_MEASUREMENTS = "Sub-Crust Measurements",
+    POTATOES = "Potatoes",
     INDUSTRIAL_CENTER = "Industrial Center",
     FACTORUM = "Factorum",
     LAKEFRONT_RESORTS = "Lakefront Resorts",

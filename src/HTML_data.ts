@@ -7067,6 +7067,22 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
+[CardName.POTATOES,`
+      <div class="title background-color-automated">Potatoes</div>
+      <div class="price">2</div>
+      <div class="tag tag1 tag-plant"></div>
+      <div class="promo-icon project-icon"></div>
+      <div class="content">
+        -  <div class="plant resource"></div><div class="plant resource"></div>
+        &nbsp;&nbsp;
+        <div class="production-box">
+          <div class="money production">2</div>
+        </div>
+        <div class="description">
+          (Requires that you lose 2 plants. Increase your MC production 2 steps.)
+        </div>
+      </div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>

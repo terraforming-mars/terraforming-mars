@@ -7049,6 +7049,26 @@ export const HTML_DATA: Map<string, string> =
     </div>
 </div>
 `],
+[CardName.SUB_CRUST_MEASUREMENTS,`
+    <div class="title background-color-active">Sub-Crust Measurements</div>
+    <div class="price">20</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="tag tag2 tag-science"></div>
+    <div class="tag tag3 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      <div class="points points-big">2</div>
+      <div class="requirements">2 Science</div>
+      <span class="red-arrow"></span> <span class="card resource"></span>
+      <div class="description">
+        (Action: Draw a card.)
+      </div>
+      <br>
+      <div class="description">
+        (Requires 2 Science tags.)
+      </div>
+    </div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>

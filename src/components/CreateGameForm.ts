@@ -109,6 +109,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
         .then(onSucces)
         .catch(_ => alert("Unexpected server response"));        
     },
+    watch: {
+        playersCount: function (val) {
+          this.initialDraftRounds = val
+        }
+    },
     methods: {
         getPlayerNamePlaceholder: function (player: NewPlayerModel): string {
             return $t("Player " + player.index + " name");

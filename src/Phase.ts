@@ -4,5 +4,6 @@ export enum Phase {
     END = "end",
     PRODUCTION = "production",
     RESEARCH = "research",
-    DRAFTING = "drafting"
+    DRAFTING = "drafting",
+    PRELUDES = "preludes"
 }

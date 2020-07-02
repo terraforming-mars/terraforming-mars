@@ -456,6 +456,7 @@ import { TopsoilContract } from "./cards/promo/TopsoilContract";
 import { ImportedNutrients } from "./cards/promo/ImportedNutrients";
 import { AsteroidDeflectionSystem } from "./cards/promo/AsteroidDeflectionSystem";
 import { SubCrustMeasurements } from "./cards/promo/SubCrustMeasurements";
+import { Potatoes } from "./cards/promo/Potatoes";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -725,6 +726,7 @@ export const ALL_PROMO_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.IMPORTED_NUTRIENTS, factory: ImportedNutrients },
     { cardName: CardName.ASTEROID_DEFLECTION_SYSTEM, factory: AsteroidDeflectionSystem },
     { cardName: CardName.SUB_CRUST_MEASUREMENTS, factory: SubCrustMeasurements },
+    { cardName: CardName.POTATOES, factory: Potatoes },
     { cardName: CardName.ADVERTISING, factory: Advertising },
     { cardName: CardName.DEIMOS_DOWN_PROMO, factory: DeimosDownPromo },
     { cardName: CardName.GREAT_DAM_PROMO, factory: GreatDamPromo },

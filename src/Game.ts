@@ -290,7 +290,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       // Save initial game state
-      Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
+      Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer), this.players.length);
 
       this.log(
         LogMessageType.NEW_GENERATION,
@@ -1073,7 +1073,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Save the game state after changing the current player
       // Increment the save id
       this.lastSaveId += 1;
-      Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
+      Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer), this.players.length);
 
       player.takeAction(this);
     }

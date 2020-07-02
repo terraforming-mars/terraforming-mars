@@ -389,6 +389,8 @@ export enum CardName {
     JOVIAN_EMBASSY = "Jovian Embassy",
     TOPSOIL_CONTRACT = "Topsoil Contract",
     IMPORTED_NUTRIENTS = "Imported Nutrients",
+    ASTEROID_DEFLECTION_SYSTEM = "Asteroid Deflection System",
+    SUB_CRUST_MEASUREMENTS = "Sub-Crust Measurements",
     INDUSTRIAL_CENTER = "Industrial Center",
     FACTORUM = "Factorum",
     LAKEFRONT_RESORTS = "Lakefront Resorts",

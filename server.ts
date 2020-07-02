@@ -378,6 +378,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         soloTR: gameReq.soloTR,
         clonedGamedId: gameReq.clonedGamedId,
         initialDraftVariant: gameReq.initialDraft,
+        initialDraftRounds: parseInt(gameReq.initialDraftRounds),
         randomMA: gameReq.randomMA
       } as GameOptions;
     
@@ -805,7 +806,9 @@ function getGame(game: Game): string {
 }
 
 function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {
-  console.warn('Not found', req.method, req.url);
+  if ( ! process.argv.includes("hide-not-found-warnings")) {
+    console.warn('Not found', req.method, req.url);
+  }
   res.writeHead(404);
   res.write('Not found');
   res.end();

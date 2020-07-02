@@ -2013,6 +2013,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
  
       // Prelude cards have to be played first
       if (this.preludeCardsInHand.length > 0) {
+        game.phase = Phase.PRELUDES;
         let preludeMcBonus = this.getPreludeMcBonus(this.preludeCardsInHand);
 
         // Remove unplayable prelude cards
@@ -2030,6 +2031,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             }
         });
         return;
+      } else {
+        game.phase = Phase.ACTION;
       }
 
       if (

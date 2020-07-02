@@ -8,7 +8,7 @@
     "Starting Corporations": "Кол-во корпораций на выбор",
     "Create Game": "Создать игру",
     "Board": "Карта",
-    "Beginner?": "Новичек?",
+    "Beginner?": "Новичок?",
     "Goes First?": "Ходит первым?",
     "Corporate Era": "Эпоха корпораций",
 
@@ -173,5 +173,8 @@
     "Select space on mars for city tile": "Выберите место на карте, чтобы построить на нём город",
     "Select space for ocean": "Выберите место для размещения океана",
     "Select space for city tile": "Выберите место для размещения города",
-    "Select space for greenery tile": "Выберите место для размещения озеленения"
+    "Select space for greenery tile": "Выберите место для размещения озеленения",
+    "Initial Draft rounds:": "Раундов драфта стартовых карт:",
+    "Random Milestones/Awards": "Случайные награды и достижения",
+    "Players": "Игроки"
 }

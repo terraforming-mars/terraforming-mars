@@ -18,6 +18,7 @@ interface CreateGameModel {
     prelude: boolean;
     draftVariant: boolean;
     initialDraft: boolean;
+    initialDraftRounds: number;
     randomMA: boolean;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
@@ -63,6 +64,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             prelude: false,
             draftVariant: true,
             initialDraft: false,
+            initialDraftRounds: 4,
             randomMA: false,
             randomFirstPlayer: true,
             showOtherPlayersVP: false,
@@ -106,6 +108,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
         .then(response => response.json())
         .then(onSucces)
         .catch(_ => alert("Unexpected server response"));        
+    },
+    watch: {
+        playersCount: function (val) {
+          this.initialDraftRounds = val
+        }
     },
     methods: {
         getPlayerNamePlaceholder: function (player: NewPlayerModel): string {
@@ -162,6 +169,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const prelude = component.prelude;
             const draftVariant = component.draftVariant;
             const initialDraft = component.initialDraft;
+            const initialDraftRounds = component.initialDraftRounds;
             const randomMA = component.randomMA;
             const showOtherPlayersVP = component.showOtherPlayersVP;
             const venusNext = component.venusNext;
@@ -188,7 +196,26 @@ export const CreateGameForm = Vue.component("create-game-form", {
             }
 
             const dataToSend = JSON.stringify({
-                players: players, corporateEra, prelude, draftVariant, showOtherPlayersVP, venusNext, colonies, turmoil, customCorporationsList, board, seed, solarPhaseOption, promoCardsOption, undoOption, startingCorporations, soloTR, clonedGamedId, initialDraft, randomMA 
+                players: players,
+                corporateEra,
+                prelude,
+                draftVariant,
+                showOtherPlayersVP,
+                venusNext,
+                colonies,
+                turmoil,
+                customCorporationsList,
+                board,
+                seed,
+                solarPhaseOption,
+                promoCardsOption,
+                undoOption,
+                startingCorporations,
+                soloTR,
+                clonedGamedId,
+                initialDraft,
+                initialDraftRounds,
+                randomMA
             });
 
             const onSucces = (response: any) => {
@@ -288,6 +315,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <input type="checkbox" name="initialDraft" v-model="initialDraft">
                                 <i class="form-icon"></i> <span v-i18n>Initial Draft variant</span>
                             </label>
+
+                            <label class="form-label" v-if="playersCount > 1 && initialDraft">
+                                <i class="form-icon"></i> <span v-i18n>Initial Draft rounds:</span>
+                                <input type="number" class="form-input form-inline create-game-corporations-count" min="1" max="10" name="initialDraftRounds" v-model="initialDraftRounds">
+                            </label>
                             
                             <label class="form-switch">
                                 <input type="checkbox" v-model="showCorporationList">
@@ -364,7 +396,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             </div>
 
             <div class="create-game-players-cont" v-if="playersCount > 1">
-                <h2>Players</h2>
+                <h2 v-i18n>Players</h2>
                 <div class="container">
                     <div class="columns">
                         <div class="form-group col6 create-game-player create-game--block" v-for="newPlayer in getPlayers()">

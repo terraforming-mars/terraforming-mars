@@ -54,7 +54,6 @@ import { CardName } from "./CardName";
 import { Turmoil } from "./turmoil/Turmoil";
 import { PartyName } from "./turmoil/parties/PartyName";
 import { IParty } from "./turmoil/parties/IParty";
-import { Pristar } from "./cards/turmoil/Pristar";
 
 export interface GameOptions {
   draftVariant: boolean;

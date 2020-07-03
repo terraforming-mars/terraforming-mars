@@ -1,5 +1,4 @@
 import {ICard} from './ICard';
-
 import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';

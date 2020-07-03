@@ -8,6 +8,8 @@ import { Game } from '../../Game';
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 import { IResourceCard } from '../ICard';
+import { LogHelper } from "../../components/LogHelper";
+import { Resources } from "../../Resources";
 
 export class JupiterFloatingStation implements IProjectCard, IResourceCard {
     public cost: number = 9;
@@ -32,7 +34,9 @@ export class JupiterFloatingStation implements IProjectCard, IResourceCard {
                 return undefined;
             }),
             new SelectOption("Get 1 MC per floater here (max 4) ", () => {
-                player.megaCredits += Math.min(this.resourceCount, 4);
+                const amount = Math.min(this.resourceCount, 4);
+                player.megaCredits += amount;
+                LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS, amount);
                 return undefined;
             })
         );

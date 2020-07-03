@@ -9,6 +9,7 @@ import { OrOptions } from "../inputs/OrOptions";
 import { ResourceType } from "../ResourceType";
 import { SelectOption } from "../inputs/SelectOption";
 import { CardName } from '../CardName';
+import { LogHelper } from '../components/LogHelper';
 
 export class GHGProducingBacteria implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 8;
@@ -31,15 +32,18 @@ export class GHGProducingBacteria implements IActionCard, IProjectCard, IResourc
             return new OrOptions(
                 new SelectOption("Remove 2 microbes to raise temperature 1 step", () => {
                     player.removeResourceFrom(this,2);
+                    LogHelper.logRemoveResource(game, player, this, 2, "raise temperature 1 step");
                     return game.increaseTemperature(player, 1);
                 }),
                 new SelectOption("Add 1 microbe to this card", () => {
                     player.addResourceTo(this);
+                    LogHelper.logAddResource(game, player, this);
                     return undefined;
                 })
             );
         }
         player.addResourceTo(this);
+        LogHelper.logAddResource(game, player, this);
         return undefined;
     }
 }

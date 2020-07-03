@@ -5,6 +5,8 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { ResourceType } from "../../ResourceType";
 import { CardName } from '../../CardName';
+import { Resources } from "../../Resources";
+import { LogHelper } from "../../components/LogHelper";
 
 
 export class AerosportTournament implements IProjectCard {
@@ -16,7 +18,9 @@ export class AerosportTournament implements IProjectCard {
         return player.getResourceCount(ResourceType.FLOATER) >= 5;
     }
     public play(player: Player, game: Game) {
-        player.megaCredits += game.getCitiesInPlay();
+        const amount = game.getCitiesInPlay();
+        player.megaCredits += amount;
+        LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS, amount);
         return undefined;
     }
     

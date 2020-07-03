@@ -20,8 +20,8 @@ describe("EcologyResearch", function () {
         let colony1 = new Luna();
         let colony2 = new Triton();
 
-        colony1.colonies.push(player);
-        colony2.colonies.push(player);
+        colony1.colonies.push(player.id);
+        colony2.colonies.push(player.id);
 
         game.colonies.push(colony1);
         game.colonies.push(colony2);
@@ -38,7 +38,7 @@ describe("EcologyResearch", function () {
         const game = new Game("foobar", [player], player);
 
         let colony1 = new Luna();
-        colony1.colonies.push(player);
+        colony1.colonies.push(player.id);
         game.colonies.push(colony1);
 
         const tardigrades = new Tardigrades();
@@ -59,7 +59,7 @@ describe("EcologyResearch", function () {
         const game = new Game("foobar", [player], player);
 
         let colony1 = new Luna();
-        colony1.colonies.push(player);
+        colony1.colonies.push(player.id);
         game.colonies.push(colony1);
 
         const tardigrades = new Tardigrades();

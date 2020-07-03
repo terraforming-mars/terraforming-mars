@@ -1,7 +1,7 @@
 
 import { expect } from "chai";
 import { Color } from "../src/Color";
-import { Game } from "../src/Game";
+import { Game, GameOptions } from "../src/Game";
 import { Player } from "../src/Player";
 import { SpaceName } from "../src/SpaceName";
 import { Mayor } from "../src/milestones/Mayor";
@@ -15,17 +15,61 @@ import { maxOutOceans } from "./TestingUtils";
 import { SaturnSystems } from "../src/cards/corporation/SaturnSystems";
 import { Resources } from '../src/Resources';
 import { ISpace } from "../src/ISpace";
-//import { BoardName } from '../src/BoardName';
 import { ResearchNetwork } from '../src/cards/prelude/ResearchNetwork';
 import { ArcticAlgae } from "../src/cards/ArcticAlgae";
 import { Ecologist } from '../src/milestones/Ecologist';
+import { Dealer } from "../src/Dealer";
+import { BoardName } from "../src/BoardName";
+import { OrOptions } from "../src/inputs/OrOptions";
 
 describe("Game", function () {
     it("should initialize with right defaults", function () {
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
+        expect(game.corporateEra).to.eq(true);
         expect(game.getGeneration()).to.eq(1);
+    });
+
+    it("correctly separates 71 corporate era cards", function() {
+        // include corporate era
+        const dealer = new Dealer(true, false, false, false, false, false);
+        expect(dealer.getDeckSize()).to.eq(208);
+
+        // exclude corporate era
+        const dealer2 = new Dealer(false, false, false, false, false, false);
+        expect(dealer2.getDeckSize()).to.eq(137);
+    });
+
+    it("sets starting production if corporate era not selected", function() {
+        const player = new Player("test", Color.BLUE, false);
+        const gameOptions = {
+            draftVariant: false,
+            initialDraftVariant: false,
+            corporateEra: false,
+            randomMA: false,
+            preludeExtension: false,
+            venusNextExtension: true,
+            coloniesExtension: false,
+            turmoilExtension: true,
+            boardName: BoardName.ORIGINAL,
+            showOtherPlayersVP: false,
+            customCorporationsList: [],
+            solarPhaseOption: false,
+            promoCardsOption: false,
+            undoOption: false,
+            startingCorporations: 2,
+            soloTR: false,
+            clonedGamedId: undefined
+          } as GameOptions;
+
+        new Game("foobar", [player], player, gameOptions);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+        expect(player.getProduction(Resources.STEEL)).to.eq(1);
+        expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+        expect(player.getProduction(Resources.HEAT)).to.eq(1);
     });
 
     it("correctly calculates victory points", function () {
@@ -188,6 +232,43 @@ describe("Game", function () {
 
         // Now game should be in finished state
         expect(game.phase).to.eq(Phase.RESEARCH);
+    });
+
+    it("Should not give TR or raise oxygen for final greenery placements", function() {
+        const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player, player], player);
+        game.generation = 14;
+
+        // Terraform
+        (game as any).temperature = constants.MAX_TEMPERATURE;
+        (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL - 2;
+        maxOutOceans(player, game);
+
+        // Trigger end game
+        player.setTerraformRating(20);
+        player.plants = 14;
+        player.takeActionForFinalGreenery(game);
+
+        // Place first greenery to get 2 plants
+        const placeFirstGreenery = player.getWaitingFor() as OrOptions;
+        const arsiaMons = game.getSpace(SpaceName.ARSIA_MONS);
+        placeFirstGreenery.options[0].cb(arsiaMons);
+        expect(player.plants).to.eq(8);
+
+        // Place second greenery
+        const placeSecondGreenery = player.getWaitingFor() as OrOptions;
+        const otherSpace = game.getSpace("30");
+        placeSecondGreenery.options[0].cb(otherSpace);;
+
+        // End the game
+        game.playerHasPassed(player);
+        game.playerIsDoneWithGame(player);
+        expect(game.phase).to.eq(Phase.END);
+        expect(game.isSoloModeWin()).to.eq(false);
+
+        // Don't give TR or raise oxygen for final greenery placements
+        expect(player.getTerraformRating()).to.eq(20);
+        expect(game.getOxygenLevel()).to.eq(12);
     });
 
     it("Should return players in turn order", function () {

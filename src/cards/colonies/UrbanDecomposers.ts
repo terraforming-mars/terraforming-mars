@@ -7,6 +7,7 @@ import { Resources } from "../../Resources";
 import { Game } from '../../Game';
 import { TileType } from '../../TileType';
 import { ResourceType } from '../../ResourceType';
+import { LogHelper } from "../../components/LogHelper";
 
 export class UrbanDecomposers implements IProjectCard {
     public cost: number = 6;
@@ -17,7 +18,7 @@ export class UrbanDecomposers implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         let coloniesCount: number = 0;
         game.colonies.forEach(colony => { 
-          coloniesCount += colony.colonies.filter(owner => owner === player).length;
+          coloniesCount += colony.colonies.filter(owner => owner === player.id).length;
         });
         return coloniesCount > 0 && game.getSpaceCount(TileType.CITY, player) > 0;
     }
@@ -29,6 +30,7 @@ export class UrbanDecomposers implements IProjectCard {
 
         if (microbeCards.length === 1) {
             player.addResourceTo(microbeCards[0], 2);
+            LogHelper.logAddResource(game, player, microbeCards[0], 2);
         } else if (microbeCards.length > 1) {
             game.addResourceInterrupt(player, ResourceType.MICROBE, 2, undefined);
         }

@@ -14,7 +14,7 @@ export class SpacePortColony implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         let coloniesCount: number = 0;
         game.colonies.forEach(colony => { 
-          coloniesCount += colony.colonies.filter(owner => owner === player).length;
+          coloniesCount += colony.colonies.filter(owner => owner === player.id).length;
         }); 
         return coloniesCount > 0;
     }

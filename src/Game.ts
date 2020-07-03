@@ -1,5 +1,5 @@
-import {Player} from "./Player";
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from "./Dealer";
+import { Player, PlayerId } from "./Player";
+import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_CORP_ERA_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from "./Dealer";
 import {ISpace} from "./ISpace";
 import {SpaceType} from "./SpaceType";
 import {TileType} from "./TileType";
@@ -58,6 +58,7 @@ import { Pristar } from "./cards/turmoil/Pristar";
 
 export interface GameOptions {
   draftVariant: boolean;
+  corporateEra: boolean;
   preludeExtension: boolean;
   venusNextExtension: boolean;
   coloniesExtension: boolean;
@@ -72,10 +73,12 @@ export interface GameOptions {
   soloTR: boolean;
   clonedGamedId: string | undefined;
   initialDraftVariant: boolean;
+  initialDraftRounds?: number;
+  randomMA: boolean;
 }  
 
 export class Game implements ILoadable<SerializedGame, Game> {
-    public activePlayer: Player;
+    public activePlayer: PlayerId;
     public claimedMilestones: Array<ClaimedMilestone> = [];
     public milestones: Array<IMilestone> = [];
     public dealer: Dealer;
@@ -87,22 +90,23 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private donePlayers: Set<Player> = new Set<Player>();
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
     private venusScaleLevel: number = constants.MIN_VENUS_SCALE;
-    private passedPlayers: Set<Player> = new Set<Player>();
-    private researchedPlayers: Set<Player> = new Set<Player>();
-    private draftedPlayers: Set<Player> = new Set<Player>();
+    private passedPlayers: Set<PlayerId> = new Set<PlayerId>();
+    private researchedPlayers: Set<PlayerId> = new Set<PlayerId>();
+    private draftedPlayers: Set<PlayerId> = new Set<PlayerId>();
     public board: Board;
     private temperature: number = constants.MIN_TEMPERATURE;
     public gameLog: Array<LogMessage> = [];
     public gameAge: number = 0; // Each log event increases it
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
     public interrupts: Array<PlayerInterrupt> = [];
-    public monsInsuranceOwner: Player | undefined = undefined;
+    public monsInsuranceOwner: PlayerId | undefined = undefined;
     public colonies: Array<IColony> = [];
     public colonyDealer: ColonyDealer | undefined = undefined;
     public pendingOceans: number = 0;
     public lastSaveId: number = 0;
     private draftVariant: boolean;
     public soloMode: boolean = false;
+    public corporateEra: boolean = true;
     private preludeExtension: boolean;
     public venusNextExtension: boolean;
     public coloniesExtension: boolean;
@@ -118,6 +122,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private clonedGamedId: string | undefined;
     public initialDraft: boolean = false;
     public someoneHasRemovedOtherPlayersPlants: boolean = false;
+    public initialDraftRounds: number = 4;
+    public randomMA: boolean = false;
 
     constructor(
       public id: string,
@@ -132,6 +138,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
         gameOptions = {
           draftVariant: false,
           initialDraftVariant: false,
+          initialDraftRounds: 4,
+          corporateEra: true,
+          randomMA: false,
           preludeExtension: false,
           venusNextExtension: false,
           coloniesExtension: false,
@@ -148,11 +157,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
         } as GameOptions
       }
 
-      this.board = this.boardConstructor(gameOptions.boardName);
+      this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.venusNextExtension);
 
-      this.activePlayer = first;
+      this.activePlayer = first.id;
       this.boardName = gameOptions.boardName;
       this.draftVariant = gameOptions.draftVariant;
+      this.corporateEra = gameOptions.corporateEra;
       this.preludeExtension = gameOptions.preludeExtension;
       this.venusNextExtension = gameOptions.venusNextExtension;
       this.coloniesExtension = gameOptions.coloniesExtension;
@@ -160,11 +170,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.promoCardsOption = gameOptions.promoCardsOption;
       this.undoOption = gameOptions.undoOption;
       this.startingCorporations = gameOptions.startingCorporations;
-      this.dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption, this.turmoilExtension, Math.random());
+      this.dealer = new Dealer(this.corporateEra, this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption, this.turmoilExtension, Math.random());
       this.showOtherPlayersVP = gameOptions.showOtherPlayersVP;
       this.solarPhaseOption = gameOptions.solarPhaseOption;
       this.soloTR = gameOptions.soloTR;
       this.initialDraft = gameOptions.initialDraftVariant;
+      this.initialDraftRounds = gameOptions.initialDraftRounds || 4;
+      this.randomMA = gameOptions.randomMA;
 
       // Clone game
       if (gameOptions !== undefined 
@@ -182,11 +194,18 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.soloMode = true;
         this.draftVariant = false;
         this.initialDraft = false;
+        this.randomMA = false;
         this.draftVariant = false;
         this.setupSolo();
       }
 
       let corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
+
+      // Add Corporate Era corporation cards
+      if (this.corporateEra) {
+        corporationCards.push(...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => new cf.factory()));
+      }
+      
       // Add prelude corporations cards
       if (this.preludeExtension) {
         corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
@@ -195,7 +214,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Add Venus Next corporations cards, board colonies and milestone / award
       if (this.venusNextExtension) {
         corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
-        this.setVenusElements();
+        this.setVenusElements(this.randomMA);
       }
 
       // Add colonies stuff
@@ -221,6 +240,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
         // Init all available corporation cards to choose from
         corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
+        corporationCards.push(...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => new cf.factory()));
         corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
         corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
         corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
@@ -235,10 +255,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
       corporationCards = this.dealer.shuffleCards(corporationCards);
 
       // Give each player their corporation cards and other cards
-      for (const player of players) {
+      for (var i = 0; i < players.length; i++) {
+        const player = players[i];
+        const remainingPlayers = this.players.length - i;
+        
         if (!player.beginner) {
           // Failsafe for exceding corporation pool
-          if (this.startingCorporations * this.players.length > corporationCards.length) {
+          if (this.startingCorporations * remainingPlayers > corporationCards.length) {
             this.startingCorporations = 2;
           }
           for (let i = 0; i < this.startingCorporations; i++) {
@@ -257,19 +280,27 @@ export class Game implements ILoadable<SerializedGame, Game> {
             for (let i = 0; i < 4; i++) {
               player.dealtPreludeCards.push(this.dealer.dealPreludeCard());
             }
-          }                 
+          }
+
+          if (!this.corporateEra) {
+            player.setProduction(Resources.MEGACREDITS);
+            player.setProduction(Resources.STEEL);
+            player.setProduction(Resources.TITANIUM);
+            player.setProduction(Resources.PLANTS);
+            player.setProduction(Resources.ENERGY);
+            player.setProduction(Resources.HEAT);
+          }
 
           if (!gameOptions.initialDraftVariant) {
             player.setWaitingFor(this.pickCorporationCard(player), () => {});
           }
         } else {
           this.playCorporationCard(player, new BeginnerCorporation());
-        }    
-
+        }
       }
 
       // Save initial game state
-      Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
+      Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer), this.players.length);
 
       this.log(
         LogMessageType.NEW_GENERATION,
@@ -298,32 +329,75 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     // Function to construct the board and milestones/awards list
-    public boardConstructor(boardName: BoardName): Board {
+    public boardConstructor(boardName: BoardName, randomMA: boolean, hasVenus: boolean): Board {
+      const requiredQty = 5;
+
       if (boardName === BoardName.ELYSIUM) {
-        this.milestones.push(...ELYSIUM_MILESTONES);
-        this.awards.push(...ELYSIUM_AWARDS);
+        if (randomMA) {
+          this.getRandomMilestonesAndAwards(hasVenus, requiredQty);
+        } else {
+          this.milestones.push(...ELYSIUM_MILESTONES);
+          this.awards.push(...ELYSIUM_AWARDS);
+        }
+        
         return new ElysiumBoard();
       } else if (boardName === BoardName.HELLAS) {
-        this.milestones.push(...HELLAS_MILESTONES);
-        this.awards.push(...HELLAS_AWARDS);
+        if (randomMA) {
+          this.getRandomMilestonesAndAwards(hasVenus, requiredQty);
+        } else {
+          this.milestones.push(...HELLAS_MILESTONES);
+          this.awards.push(...HELLAS_AWARDS);
+        }
+
         return new HellasBoard();
       } else {        
-        this.milestones.push(...ORIGINAL_MILESTONES);
-        this.awards.push(...ORIGINAL_AWARDS);
+        if (randomMA) {
+          this.getRandomMilestonesAndAwards(hasVenus, requiredQty);
+        } else {
+          this.milestones.push(...ORIGINAL_MILESTONES);
+          this.awards.push(...ORIGINAL_AWARDS);
+        }
 
         return new OriginalBoard();
       }
     }
 
+    public getRandomMilestonesAndAwards(hasVenus: boolean, requiredQty: number) {
+      let availableMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES);
+      if (hasVenus) availableMilestones = availableMilestones.concat(VENUS_MILESTONES);
+
+      availableMilestones = availableMilestones.filter((milestone) => !this.milestones.includes(milestone));
+
+      const shuffledMilestones = availableMilestones.sort(() => 0.5 - Math.random());
+      this.milestones.push(...shuffledMilestones.slice(0, requiredQty));
+
+      let availableAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS);
+      if (hasVenus) availableAwards = availableAwards.concat(VENUS_AWARDS);
+
+      availableAwards = availableAwards.filter((award) => !this.awards.includes(award));
+
+      const shuffledAwards = availableAwards.sort(() => 0.5 - Math.random());
+      this.awards.push(...shuffledAwards.slice(0, requiredQty));
+    }
+
     // Add Venus Next board colonies and milestone / award
-    public setVenusElements() {
-      this.milestones.push(...VENUS_MILESTONES);
-      this.awards.push(...VENUS_AWARDS);
+    public setVenusElements(randomMA: boolean) {
+      if (randomMA) {
+        this.getRandomMilestonesAndAwards(true, 1);
+      } else {
+        this.milestones.push(...VENUS_MILESTONES);
+        this.awards.push(...VENUS_AWARDS);
+      }
+
+      this.addVenusBoardSpaces();
+    }
+
+    private addVenusBoardSpaces() {
       this.board.spaces.push(
-          new BoardColony(SpaceName.DAWN_CITY),
-          new BoardColony(SpaceName.LUNA_METROPOLIS),
-          new BoardColony(SpaceName.MAXWELL_BASE),
-          new BoardColony(SpaceName.STRATOPOLIS)
+        new BoardColony(SpaceName.DAWN_CITY),
+        new BoardColony(SpaceName.LUNA_METROPOLIS),
+        new BoardColony(SpaceName.MAXWELL_BASE),
+        new BoardColony(SpaceName.STRATOPOLIS)
       );
     }
 
@@ -352,6 +426,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           // Update game options
           game.draftVariant = gameToRebuild.draftVariant;
           game.soloMode = gameToRebuild.soloMode;
+          game.corporateEra = gameToRebuild.corporateEra;
           game.preludeExtension = gameToRebuild.preludeExtension;
           game.venusNextExtension = gameToRebuild.venusNextExtension;
           game.coloniesExtension = gameToRebuild.coloniesExtension;
@@ -365,6 +440,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.startingCorporations = gameToRebuild.startingCorporations;
           game.soloTR = gameToRebuild.soloTR;
           game.initialDraft = gameToRebuild.initialDraft;
+          game.initialDraftRounds = gameToRebuild.initialDraftRounds || 4;
+          game.randomMA = gameToRebuild.randomMA;
 
           // Update dealers
           game.dealer = gameToRebuild.dealer;
@@ -377,13 +454,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.turmoil = gameToRebuild.turmoil;
 
           if(gameToRebuild.venusNextExtension) {
-            game.setVenusElements();
+            game.addVenusBoardSpaces();
           }
 
           // Set active player
           let playerIndex = gameToRebuild.players.indexOf(gameToRebuild.first);
           game.first = game.players[playerIndex];
-          game.activePlayer = game.players[playerIndex];
+          game.activePlayer = game.players[playerIndex].id;
 
           // Recreate turmoil lobby and reserve (Turmoil stores some players ids)
           if (gameToRebuild.turmoilExtension && game.turmoil !== undefined) {
@@ -393,7 +470,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
               if (game.turmoil !== undefined) {
                 game.turmoil.lobby.add(player.id);
                 for (let i = 0; i < 6; i++) {
-                  game.turmoil.delegate_reserve.push(player);   
+                  game.turmoil.delegate_reserve.push(player.id);   
                 }
               }
             });
@@ -448,7 +525,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public addColonyInterrupt(player: Player, allowDuplicate: boolean = false, title: string): void {
       let openColonies = this.colonies.filter(colony => colony.colonies.length < 3 
-        && (colony.colonies.indexOf(player) === -1 || allowDuplicate)
+        && (colony.colonies.indexOf(player.id) === -1 || allowDuplicate)
         && colony.isActive);
       if (openColonies.length >0 ) {
         this.addInterrupt(new SelectColony(player, this, openColonies, title));
@@ -658,7 +735,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public hasPassedThisActionPhase(player: Player): boolean {
-      return this.passedPlayers.has(player);
+      return this.passedPlayers.has(player.id);
     }
 
     private incrementFirstPlayer(): void {
@@ -677,6 +754,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private runDraftRound(initialDraft: boolean = false): void {
       this.draftedPlayers.clear();
       this.players.forEach((player) => {
+        player.needsToDraft = true;
         if (this.draftRound === 1) {
           player.runDraftPhase(initialDraft,this,this.getNextDraft(player).name);
         } else {
@@ -762,7 +840,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private resolveTurmoilInterrupts() {
       if (this.interrupts.length > 0) {
         let interrupt = this.interrupts.shift();
-        if (interrupt !== undefined && interrupt.playerInput !== undefined) {
+        if (interrupt) {
           interrupt.player.setWaitingFor(interrupt.playerInput, () => {
             this.resolveTurmoilInterrupts();
           });
@@ -817,15 +895,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public playerHasPassed(player: Player): void {
-      this.passedPlayers.add(player);
+      this.passedPlayers.add(player.id);
     }
 
     private hasResearched(player: Player): boolean {
-      return this.researchedPlayers.has(player);
+      return this.researchedPlayers.has(player.id);
     }
 
     private hasDrafted(player: Player): boolean {
-      return this.draftedPlayers.has(player);
+      return this.draftedPlayers.has(player.id);
     }
 
     private allPlayersHaveFinishedResearch(): boolean {
@@ -847,57 +925,55 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public playerIsFinishedWithResearchPhase(player: Player): void {
-      this.researchedPlayers.add(player);
+      this.researchedPlayers.add(player.id);
       if (this.allPlayersHaveFinishedResearch()) {
         this.gotoActionPhase();
       }
     }
 
+    private isLastActiveRoundOfDraft(initialDraft: boolean): boolean {
+
+      if (initialDraft && (this.draftRound === this.initialDraftRounds || this.draftRound === 9)) return true;
+
+      if ( ! initialDraft && this.draftRound === 3) return true;
+
+      return false;
+    }
+
     public playerIsFinishedWithDraftingPhase(initialDraft: boolean, player: Player, cards : Array<IProjectCard>): void {
-      this.draftedPlayers.add(player);
+      this.draftedPlayers.add(player.id);
       this.unDraftedCards.set(player,cards);
-     
+
+      player.needsToDraft = false;
       if (!this.allPlayersHaveFinishedDraft()) {
         return;
       }
 
-      if (this.allPlayersHaveFinishedDraft() && this.draftRound < 3 && !initialDraft) {
+      if ( ! this.isLastActiveRoundOfDraft(initialDraft)) {
         this.draftRound++;
-        this.runDraftRound();
-      }      
-
-      if (this.allPlayersHaveFinishedDraft() && this.draftRound < this.players.length && initialDraft) {
-        this.draftRound++;
-        this.runDraftRound(true);
-      } 
-
-      if (this.allPlayersHaveFinishedDraft() && this.draftRound === 3 && !initialDraft) {
+        this.runDraftRound(initialDraft);
+      } else {
         // Push last card for each player
-        if (cards.length === 1) {
-          this.players.forEach((player) => {
-            let lastCards  = this.unDraftedCards.get(this.getDraftCardsFrom(player));
-            if (lastCards !== undefined && lastCards[0] !== undefined) {
-              player.draftedCards.push(lastCards[0]);
-            }
-          });
-        }
-        this.gotoResearchPhase();
-      }
-
-      if (this.allPlayersHaveFinishedDraft() && this.draftRound === this.players.length && initialDraft) {
         this.initialDraft = false;
-        // Push last cards for each player
-          this.players.forEach((player) => {
-            let lastCards  = this.unDraftedCards.get(this.getDraftCardsFrom(player));
-            if (lastCards !== undefined) {
-              player.draftedCards.push(...lastCards);
-            }
+
+        this.players.forEach((player) => {
+          let lastCards  = this.unDraftedCards.get(this.getDraftCardsFrom(player));
+          if (lastCards !== undefined) {
+            player.draftedCards.push(...lastCards);
+          }
+          player.needsToDraft = undefined;
+
+          if (initialDraft) {
             player.dealtProjectCards = player.draftedCards;
             player.draftedCards = [];
             player.setWaitingFor(this.pickCorporationCard(player), () => {});
-          });
-        return;
-      }      
+          }
+        });
+
+        if ( ! initialDraft) {
+          this.gotoResearchPhase();
+        }
+      }
     }
 
     public getDraftCardsFrom(player: Player): Player {
@@ -969,7 +1045,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return;
       }
 
-      const nextPlayer = this.getNextPlayer(this.players, this.activePlayer);
+      const nextPlayer = this.getNextPlayer(this.players, this.getPlayerById(this.activePlayer));
 
       // Defensive coding to fail fast, if we don't find the next
       // player we are in an unexpected game state
@@ -981,7 +1057,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.startActionsForPlayer(nextPlayer);
       } else {
         // Recursively find the next player
-        this.activePlayer = nextPlayer;
+        this.activePlayer = nextPlayer.id;
         this.playerIsFinishedTakingActions();
       }
     }
@@ -1037,18 +1113,18 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private startFinalGreeneryPlacement(player: Player) {
-      this.activePlayer = player;
+      this.activePlayer = player.id;
       player.takeActionForFinalGreenery(this);
     }
 
     private startActionsForPlayer(player: Player) {
-      this.activePlayer = player;
+      this.activePlayer = player.id;
       player.actionsTakenThisRound = 0;
 
       // Save the game state after changing the current player
       // Increment the save id
       this.lastSaveId += 1;
-      Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer));
+      Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer), this.players.length);
 
       player.takeAction(this);
     }
@@ -1300,7 +1376,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
     public addGreenery(
         player: Player, spaceId: string,
-        spaceType: SpaceType = SpaceType.LAND): undefined {
+        spaceType: SpaceType = SpaceType.LAND,
+        shouldRaiseOxygen: boolean = true): undefined {
       this.addTile(player, spaceType, this.getSpace(spaceId), {
         tileType: TileType.GREENERY
       });
@@ -1312,7 +1389,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
         && this.phase ===  Phase.ACTION) {
           player.setResource(Resources.MEGACREDITS, 4);
       }
-      return this.increaseOxygenLevel(player, 1);
+      if (shouldRaiseOxygen) return this.increaseOxygenLevel(player, 1);
+      return undefined;
     }
     public addCityTile(
         player: Player, spaceId: string, spaceType: SpaceType = SpaceType.LAND,
@@ -1508,7 +1586,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       let o = Object.assign(this, d);
 
       // Rebuild dealer object to be sure that we will have cards in the same order
-      let dealer = new Dealer(this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption, this.turmoilExtension);
+      let dealer = new Dealer(this.corporateEra, this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption, this.turmoilExtension);
       this.dealer = dealer.loadFromJSON(d.dealer);
 
       // Rebuild every player objects
@@ -1516,16 +1594,42 @@ export class Game implements ILoadable<SerializedGame, Game> {
         let player = new Player(element.name, element.color, element.beginner);
         return player.loadFromJSON(element);
       });
-
-
+      
       // Rebuild milestones, awards and board elements
+      if (d.boardName === BoardName.ELYSIUM) {
+        this.board = new ElysiumBoard();
+      } else if (d.boardName === BoardName.HELLAS) {
+        this.board = new HellasBoard();
+      } else {        
+        this.board = new OriginalBoard();
+      }  
+
       this.milestones = [];
       this.awards = [];
-      this.board = this.boardConstructor(d.boardName);
+
+      let allMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES);
+
+      d.milestones.forEach((element: IMilestone) => {
+        allMilestones.forEach((ms: IMilestone) => {
+          if (ms.name === element.name) {
+            this.milestones.push(ms);
+          }
+        });
+      });  
+
+      let allAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS);
+
+      d.awards.forEach((element: IAward) => {
+        allAwards.forEach((award: IAward) => {
+          if (award.name === element.name) {
+            this.awards.push(award);
+          }
+        });
+      });
 
       // Reload venus elements if needed
       if(this.venusNextExtension) {
-        this.setVenusElements();
+        this.addVenusBoardSpaces();
       }
 
       d.board.spaces.forEach((element: ISpace) => {
@@ -1535,7 +1639,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
           let tileCard = element.tile.card;
           if (element.player){
             const player = this.players.find((player) => player.id === element.player!.id);
-            space.player = player;
+            // Prevent loss of "neutral" player tile ownership across reloads
+            space.player = player ? player : element.player;
           }
           space.tile = {
             tileType: tileType,
@@ -1568,17 +1673,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
           Object.assign(colony, element);
 
           if (colony !== undefined) {
-            if (element.visitor){
-              const player = this.players.find((player) => player.id === element.visitor!.id);
-              colony.visitor = player;
-            }
-            colony.colonies = new Array<Player>();
-            element.colonies.forEach((element: Player) => {
-              const player = this.players.find((player) => player.id === element.id);
-              if (player) {
-                colony!.colonies.push(player);
-              }
-            });
             this.colonies.push(colony);
           }
         });     
@@ -1588,39 +1682,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.turmoilExtension) {
         let turmoil = new Turmoil(this);
         this.turmoil = turmoil.loadFromJSON(d.turmoil);
-
-        // Rebuild chairman
-        if (d.turmoil.chairman) {
-          if (d.turmoil.chairman === "NEUTRAL"){
-            this.turmoil.chairman = "NEUTRAL";
-          }
-          else {
-            const chairman_id = d.turmoil.chairman.id
-            const player = this.players.find((player) => player.id === chairman_id);
-            this.turmoil.chairman = player;
-          }
-        }
-
+        
         // Rebuild lobby
         this.turmoil.lobby = new Set<string>(d.turmoil.lobby);
 
-        // Rebuild delegate reserve
-        this.turmoil.delegate_reserve = d.turmoil.delegate_reserve.map((element: SerializedPlayer | "NEUTRAL")  => {
-          if(element === "NEUTRAL"){
-            return "NEUTRAL";
-          }
-          else {
-            const player = this.players.find((player) => player.id === element.id);
-            if (player){
-              return player;
-            }
-            else {
-              throw "Player not found when rebuilding delegate reserve";
-            }
-          }
-        });
-
-        // Rebuild party leader
+        // Rebuild parties
         d.turmoil.parties.forEach((element: IParty) => {
           let party = this.turmoil?.getPartyByName(element.name);
           if (element.partyLeader) {
@@ -1628,26 +1694,28 @@ export class Game implements ILoadable<SerializedGame, Game> {
               party!.partyLeader = "NEUTRAL";
             }
             else {
-              const partyLeaderId = element.partyLeader.id;
+              const partyLeaderId = element.partyLeader;
               const player = this.players.find((player) => player.id === partyLeaderId);
-              party!.partyLeader = player;
+              party!.partyLeader = player!.id;
             }
           }
 
-          // Rebuild delegates
-          party!.delegates = new Array<Player>();
-          element.delegates.forEach((element: Player | "NEUTRAL") => {
+          // Rebuild parties delegates
+          party!.delegates = new Array<PlayerId>();
+          element.delegates.forEach((element: PlayerId | "NEUTRAL") => {
             if (element === "NEUTRAL") {
               party!.delegates.push("NEUTRAL");
             }
             else {
-              const player = this.players.find((player) => player.id === element.id);
+              const player = this.players.find((player) => player.id === element);
               if (player) {
-                party!.delegates.push(player);
+                party!.delegates.push(player.id);
               }
             }
           });
+
         });
+
       }
 
       // Rebuild claimed milestones
@@ -1681,55 +1749,50 @@ export class Game implements ILoadable<SerializedGame, Game> {
       });
 
       // Rebuild passed players set
-      this.passedPlayers = new Set<Player>();
-      d.passedPlayers.forEach((element: SerializedPlayer) => {
-        const player = this.players.find((player) => player.id === element.id);
+      this.passedPlayers = new Set<PlayerId>();
+      d.passedPlayers.forEach((element: PlayerId) => {
+        const player = this.players.find((player) => player.id === element);
         if (player) {
-          this.passedPlayers.add(player);
+          this.passedPlayers.add(player.id);
         }
       });
 
       // Rebuild done players set
       this.donePlayers = new Set<Player>();
-      d.donePlayers.forEach((element: SerializedPlayer) => {
-        const player = this.players.find((player) => player.id === element.id);
+      d.donePlayers.forEach((element: PlayerId) => {
+        const player = this.players.find((player) => player.id === element);
         if (player) {
           this.donePlayers.add(player);
         }
       });
 
       // Rebuild researched players set
-      this.researchedPlayers = new Set<Player>();
-      d.researchedPlayers.forEach((element: SerializedPlayer) => {
-        const player = this.players.find((player) => player.id === element.id);
+      this.researchedPlayers = new Set<PlayerId>();
+      d.researchedPlayers.forEach((element: PlayerId) => {
+        const player = this.players.find((player) => player.id === element);
         if (player) {
-          this.researchedPlayers.add(player);
+          this.researchedPlayers.add(player.id);
         }
       });
 
       // Rebuild drafted players set
-      this.draftedPlayers = new Set<Player>();
-      d.draftedPlayers.forEach((element: SerializedPlayer) => {
-        const player = this.players.find((player) => player.id === element.id);
+      this.draftedPlayers = new Set<PlayerId>();
+      d.draftedPlayers.forEach((element: PlayerId) => {
+        const player = this.players.find((player) => player.id === element);
         if (player) {
-          this.draftedPlayers.add(player);
+          this.draftedPlayers.add(player.id);
         }
       });
 
       // Reinit undrafted cards map
       this.unDraftedCards = new Map<Player, IProjectCard[]>();
 
-      // Mons insurance
-      if (d.monsInsuranceOwner) {
-        this.monsInsuranceOwner = this.players.find((player) => player.id === d.monsInsuranceOwner!.id);
-      }
-
       // Define who is the active player and init the take action phase
-      const active = this.players.find((player) => player.id === d.activePlayer.id);
+      const active = this.players.find((player) => player.id === d.activePlayer);
       if (active) {
         // We have to switch active player because it's still the one that ended last turn
-        this.activePlayer = active;
-        this.activePlayer.takeAction(this);
+        this.activePlayer = active.id;
+        this.getPlayerById(this.activePlayer).takeAction(this);
       }
       else {
         throw "No Player found when rebuilding Active Player";

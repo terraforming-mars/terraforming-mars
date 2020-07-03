@@ -9,6 +9,7 @@ import { ResourceType } from "../ResourceType";
 import { SelectOption } from "../inputs/SelectOption";
 import { CardName } from '../CardName';
 import { Game } from '../Game';
+import { LogHelper } from '../components/LogHelper';
 
 export class NitriteReducingBacteria implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 11;
@@ -28,16 +29,19 @@ export class NitriteReducingBacteria implements IActionCard, IProjectCard, IReso
     public action(player: Player, game: Game) {
         if (this.resourceCount < 3) {
             player.addResourceTo(this);
+            LogHelper.logAddResource(game, player, this);
             return undefined;
         }
         return new OrOptions(
             new SelectOption("Remove 3 microbes to increase your terraform rating 1 step", () => {
                 this.resourceCount -= 3;
+                LogHelper.logRemoveResource(game, player, this, 3, "gain 1 TR");
                 player.increaseTerraformRating(game);
                 return undefined;
             }),
             new SelectOption("Add 1 microbe to this card", () => {
                 player.addResourceTo(this);
+                LogHelper.logAddResource(game, player, this);
                 return undefined;
             })
         );

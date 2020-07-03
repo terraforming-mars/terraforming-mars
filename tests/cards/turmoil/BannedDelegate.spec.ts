@@ -11,7 +11,9 @@ describe("Banned Delegate", function () {
         const player = new Player("test", Color.BLUE, false);
         const gameOptions = {
             draftVariant: false,
-	        initialDraftVariant: false,
+            initialDraftVariant: false,
+            corporateEra: true,
+            randomMA: false,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
@@ -29,7 +31,7 @@ describe("Banned Delegate", function () {
         const game = new Game("foobar", [player,player], player, gameOptions);  
         expect(card.canPlay(player, game)).to.eq(false);
         if (game.turmoil !== undefined) {
-            game.turmoil.chairman = player;
+            game.turmoil.chairman = player.id;
             expect(card.canPlay(player, game)).to.eq(true);
         }
     });

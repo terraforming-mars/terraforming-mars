@@ -118,6 +118,9 @@ export const Turmoil = Vue.component("turmoil", {
                 <div v-if="turmoil.lobby.length >= n" :class="'player-token '+turmoil.lobby[n-1]"></div>
             </div>
           </div>
+          <div class="dominant-party-name">
+            <div :class="'party-name party-name--'+partyNameToCss(turmoil.ruling)" v-i18n>{{ turmoil.ruling }}</div>
+          </div>
           <div class="dominant-party-bonus" v-html="getPolicy(turmoil.ruling)"></div>
           <div class="chairman-spot"><div v-if="turmoil.chairman" :class="'player-token '+turmoil.chairman"></div></div>
           <div class="turmoil-reserve">

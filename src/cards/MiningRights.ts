@@ -9,6 +9,7 @@ import { TileType } from "../TileType";
 import { ISpace } from "../ISpace";
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
+import { LogHelper } from "../components/LogHelper";
 
 export class MiningRights implements IProjectCard {
     public cost: number = 9;
@@ -30,9 +31,11 @@ export class MiningRights implements IProjectCard {
             if (foundSpace.bonus.indexOf(SpaceBonus.STEEL) !== -1) {
                 player.setProduction(Resources.STEEL);
                 this.bonusResource = Resources.STEEL;
+                LogHelper.logGainProduction(game, player, Resources.STEEL);
             } else if (foundSpace.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
                 player.setProduction(Resources.TITANIUM);
                 this.bonusResource = Resources.TITANIUM;
+                LogHelper.logGainProduction(game, player, Resources.TITANIUM);
             }
             return undefined;
         });

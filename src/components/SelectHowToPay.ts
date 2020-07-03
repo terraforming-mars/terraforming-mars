@@ -99,7 +99,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
               this.$data.heat = 0;
           }
 
-          let discountedCost = this.$data.cost - this.$data.heat;
+          let discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue) - this.$data.heat;
           this.$data.megaCredits = Math.max(discountedCost, 0);
         },
         canAffordWithMcOnly: function() {

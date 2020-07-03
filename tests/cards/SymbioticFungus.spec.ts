@@ -22,17 +22,19 @@ describe("SymbioticFungus", function () {
     it("Should act - single target", function () {
         const card = new SymbioticFungus();
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(new Ants());
-        card.action(player);
+        card.action(player, game);
         expect(player.getResourcesOnCard(player.playedCards[0])).to.eq(1);
     });
     it("Should act - multiple targets", function () {
         const card = new SymbioticFungus();
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(new Ants());
         player.playedCards.push(new Decomposers());
         
-        const action = card.action(player);
+        const action = card.action(player, game);
         expect(action).not.to.eq(undefined);
         action!.cb([player.playedCards[0]]);
         expect(player.getResourcesOnCard(player.playedCards[0])).to.eq(1);

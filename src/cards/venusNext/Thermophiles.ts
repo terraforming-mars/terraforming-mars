@@ -10,6 +10,7 @@ import { Game } from '../../Game';
 import { MAX_VENUS_SCALE } from '../../constants';
 import { SelectCard } from '../../inputs/SelectCard';
 import { CardName } from '../../CardName';
+import { LogHelper } from "../../components/LogHelper";
 
 export class Thermophiles implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 9;
@@ -34,6 +35,7 @@ export class Thermophiles implements IActionCard,IProjectCard, IResourceCard {
         // only 1 valid target and cannot remove 2 microbes - add to itself
         if (venusMicrobeCards.length === 1 && !canRaiseVenus) {
             player.addResourceTo(this);
+            LogHelper.logAddResource(game, player, this);
             return undefined;
         }
 
@@ -50,12 +52,14 @@ export class Thermophiles implements IActionCard,IProjectCard, IResourceCard {
             venusMicrobeCards,
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 1);
+              LogHelper.logAddResource(game, player, foundCards[0]);
               return undefined;
             }
         );
 
         const addResourceToSelf = new SelectOption("Add a microbe to this card", () => {
             player.addResourceTo(venusMicrobeCards[0], 1);
+            LogHelper.logAddResource(game, player, this);
             return undefined;
         });
 

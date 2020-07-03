@@ -17,7 +17,9 @@ describe("ParliamentHall", function () {
         const player = new Player("test", Color.BLUE, false);
         const gameOptions = {
             draftVariant: false,
-	        initialDraftVariant: false,
+            initialDraftVariant: false,
+            corporateEra: true,
+            randomMA: false,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
@@ -37,7 +39,7 @@ describe("ParliamentHall", function () {
         if (game.turmoil !== undefined) {
             let mars = game.turmoil.getPartyByName(PartyName.MARS);
             if (mars !== undefined) {
-                mars.delegates.push(player, player);
+                mars.delegates.push(player.id, player.id);
                 expect(card.canPlay(player, game)).to.eq(true); 
             }
         } 

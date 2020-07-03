@@ -1,5 +1,4 @@
 import {ICard} from '../../../src/cards/ICard';
-
 import { expect } from "chai";
 import { AerialMappers } from "../../../src/cards/venusNext/AerialMappers";
 import { Color } from "../../../src/Color";

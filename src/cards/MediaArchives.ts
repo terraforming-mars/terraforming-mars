@@ -5,6 +5,8 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardName } from '../CardName';
+import { LogHelper } from "../components/LogHelper";
+import { Resources } from "../Resources";
 
 export class MediaArchives implements IProjectCard {
     public cost: number = 8;
@@ -22,6 +24,7 @@ export class MediaArchives implements IProjectCard {
             });
         });
         player.megaCredits += allPlayedEvents;
+        LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS, allPlayedEvents);
         return undefined;
     }
 }

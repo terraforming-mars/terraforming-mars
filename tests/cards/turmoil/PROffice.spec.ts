@@ -17,7 +17,9 @@ describe("PROffice", function () {
         const player = new Player("test", Color.BLUE, false);
         const gameOptions = {
             draftVariant: false,
-	        initialDraftVariant: false,
+            initialDraftVariant: false,
+            corporateEra: true,
+            randomMA: false,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
@@ -37,7 +39,7 @@ describe("PROffice", function () {
         if (game.turmoil !== undefined) {
             let unity = game.turmoil.getPartyByName(PartyName.UNITY);
             if (unity !== undefined) {
-                unity.delegates.push(player, player);
+                unity.delegates.push(player.id, player.id);
                 expect(card.canPlay(player, game)).to.eq(true); 
             }
         } 

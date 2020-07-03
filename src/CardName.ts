@@ -397,7 +397,7 @@ export enum CardName {
     FACTORUM = "Factorum",
     LAKEFRONT_RESORTS = "Lakefront Resorts",
     TERRALABS_RESEARCH = "Terralabs Research",
-    SEPTUM_TRIBUS = "Septum Tribus",
+    SEPTUM_TRIBUS = "Septem Tribus",
     MONS_INSURANCE = "Mons Insurance",
     SPLICE = "Splice",
     PHILARES = "Philares",

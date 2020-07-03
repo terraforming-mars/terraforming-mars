@@ -9,6 +9,7 @@ import { SelectCard } from '../../inputs/SelectCard';
 import { Game } from '../../Game';
 import { ICard } from '../ICard';
 import { CardName } from '../../CardName';
+import { LogHelper } from "../../components/LogHelper";
 
 export class VenusSoils implements IProjectCard {
     public cost: number = 20;
@@ -26,6 +27,7 @@ export class VenusSoils implements IProjectCard {
 
         if (microbeCards.length === 1) {
             player.addResourceTo(microbeCards[0], 2);
+            LogHelper.logAddResource(game, player, microbeCards[0], 2);
             return undefined;
         }
 
@@ -34,6 +36,7 @@ export class VenusSoils implements IProjectCard {
             microbeCards,
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 2);
+              LogHelper.logAddResource(game, player, foundCards[0], 2);
               return undefined;
             }
         );

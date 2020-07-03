@@ -12,12 +12,12 @@ describe("AerosportTournament", function () {
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         player.corporationCard = corp;
-        corp.action(player);
-        corp.action(player);
-        corp.action(player);
-        corp.action(player);
+        corp.action(player, game);
+        corp.action(player, game);
+        corp.action(player, game);
+        corp.action(player, game);
         expect(card.canPlay(player)).to.eq(false);
-        corp.action(player);
+        corp.action(player, game);
         expect(card.canPlay(player)).to.eq(true);
 
         game.addCityTile(player, '03');

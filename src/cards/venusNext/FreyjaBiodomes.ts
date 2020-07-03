@@ -8,6 +8,7 @@ import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
 import { ICard } from '../ICard';
 import { CardName } from '../../CardName';
+import { LogHelper } from "../../components/LogHelper";
 
 export class FreyjaBiodomes implements IProjectCard {
     public cost: number = 14;
@@ -23,19 +24,28 @@ export class FreyjaBiodomes implements IProjectCard {
         return resourceCards.filter(card => card.tags.indexOf(Tags.VENUS) !== -1);
     }
 
-    public play(player: Player) {
-        if (this.getResCards(player).length > 0) {
+    public play(player: Player, game: Game) {
+        const cards = this.getResCards(player);
+
+        if (cards.length > 1) {
             return new SelectCard(
                 'Select card to add 2 resources',
-                this.getResCards(player),
+                cards,
                 (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], 2);
-                player.setProduction(Resources.ENERGY,-1);
-                player.setProduction(Resources.MEGACREDITS,2);   
-                return undefined;
+                    player.setProduction(Resources.ENERGY,-1);
+                    player.setProduction(Resources.MEGACREDITS,2);
+                    LogHelper.logAddResource(game, player, foundCards[0], 2);
+                    return undefined;
                 }
             );
         }
+
+        if (cards.length === 1) {
+            player.addResourceTo(cards[0], 2);
+            LogHelper.logAddResource(game, player, cards[0], 2);
+        }
+        
         player.setProduction(Resources.ENERGY,-1);
         player.setProduction(Resources.MEGACREDITS,2);
         return undefined;

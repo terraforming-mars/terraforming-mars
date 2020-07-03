@@ -10,6 +10,7 @@ import { IActionCard, ICard, IResourceCard } from '../ICard';
 import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
 import { CardName } from '../../CardName';
+import { LogHelper } from "../../components/LogHelper";
 
 export class Stratopolis implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 22;
@@ -39,12 +40,21 @@ export class Stratopolis implements IActionCard, IProjectCard, IResourceCard {
         return true;
     } 
 
-    public action(player: Player) {
+    public action(player: Player, game: Game) {
+        const cards = this.getResCards(player);
+
+        if (cards.length === 1) {
+            player.addResourceTo(cards[0], 2);
+            LogHelper.logAddResource(game, player, cards[0], 2);
+            return undefined;
+        }
+
         return new SelectCard(
             'Select card to add 2 floaters',
-            this.getResCards(player),
+            cards,
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 2);
+              LogHelper.logAddResource(game, player, foundCards[0], 2);
               return undefined;
             }
         );

@@ -12,7 +12,9 @@ describe("SupportedResearch", function () {
         const player = new Player("test", Color.BLUE, false);
         const gameOptions = {
             draftVariant: false,
-	        initialDraftVariant: false,
+            initialDraftVariant: false,
+            corporateEra: true,
+            randomMA: false,
             preludeExtension: false,
             venusNextExtension: true,
             coloniesExtension: false,
@@ -32,7 +34,7 @@ describe("SupportedResearch", function () {
         if (game.turmoil !== undefined) {
             let scientists = game.turmoil.getPartyByName(PartyName.SCIENTISTS);
             if (scientists !== undefined) {
-                scientists.delegates.push(player, player);
+                scientists.delegates.push(player.id, player.id);
                 expect(card.canPlay(player, game)).to.eq(true); 
             }
         } 

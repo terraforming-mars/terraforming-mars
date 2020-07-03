@@ -6,6 +6,7 @@ import { CardName } from '../../CardName';
 import { Resources } from "../../Resources";
 import { Game } from '../../Game';
 import { ResourceType } from '../../ResourceType';
+import { LogHelper } from "../../components/LogHelper";
 
 export class EcologyResearch implements IProjectCard {
     public cost: number = 21;
@@ -16,7 +17,7 @@ export class EcologyResearch implements IProjectCard {
     public play(player: Player, game: Game) {
         let coloniesCount: number = 0;
         game.colonies.forEach(colony => { 
-          coloniesCount += colony.colonies.filter(owner => owner === player).length;
+          coloniesCount += colony.colonies.filter(owner => owner === player.id).length;
         });  
         player.setProduction(Resources.PLANTS, coloniesCount);
 
@@ -24,6 +25,7 @@ export class EcologyResearch implements IProjectCard {
 
         if (animalCards.length === 1) {
             player.addResourceTo(animalCards[0], 1);
+            LogHelper.logAddResource(game, player, animalCards[0]);
         } else if (animalCards.length > 1) {
             game.addResourceInterrupt(player, ResourceType.ANIMAL, 1, undefined);
         }
@@ -32,6 +34,7 @@ export class EcologyResearch implements IProjectCard {
 
         if (microbeCards.length === 1) {
             player.addResourceTo(microbeCards[0], 2);
+            LogHelper.logAddResource(game, player, microbeCards[0], 2);
         } else if (microbeCards.length > 1) {
             game.addResourceInterrupt(player, ResourceType.MICROBE, 2, undefined);
         }

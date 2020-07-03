@@ -13,7 +13,11 @@ export class Moss implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: CardName = CardName.MOSS;
     public canPlay(player: Player, game: Game): boolean {
-        return game.board.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game) && player.plants >= 1;
+        const meetsOceanRequirements = game.board.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game);
+        const hasViralEnhancers = player.playedCards.find((card) => card.name === CardName.VIRAL_ENHANCERS);
+        const hasEnoughPlants = player.plants >= 1 || hasViralEnhancers !== undefined;
+        
+        return meetsOceanRequirements && hasEnoughPlants;
     }
     public play(player: Player) {
         player.plants--;

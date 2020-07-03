@@ -2,10 +2,14 @@ import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
-import { Player } from "../../Player";
+import { Player, PlayerId } from "../../Player";
 import { Game } from '../../Game';
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectDelegate } from "../../inputs/SelectDelegate";
+import { IParty } from "../../turmoil/parties/IParty";
+import { LogMessageType } from "../../LogMessageType";
+import { LogMessageData } from "../../LogMessageData";
+import { LogMessageDataType } from "../../LogMessageDataType";
 
 export class BannedDelegate implements IProjectCard {
     public cost: number = 0;
@@ -15,12 +19,12 @@ export class BannedDelegate implements IProjectCard {
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {
-            return game.turmoil.chairman === player
+            return game.turmoil.chairman === player.id
         }
         return false;
     }
 
-    public play(_player: Player, game: Game) {
+    public play(player: Player, game: Game) {
         let orOptions = new Array<SelectDelegate>();
         // Take each party having more than just the party leader in the area
         game.turmoil!.parties.forEach(party => {
@@ -28,10 +32,26 @@ export class BannedDelegate implements IProjectCard {
             // Remove the party leader from available choices
             const delegates = party.delegates.slice();
             delegates.splice(party.delegates.indexOf(party.partyLeader!),1);
-            const players = Array.from(new Set<Player | "NEUTRAL">(delegates));
+            const playersId = Array.from(new Set<PlayerId | "NEUTRAL">(delegates));
+            let players = new Array<Player | "NEUTRAL">();
+            playersId.forEach(playerId => {
+              if (playerId === "NEUTRAL") {
+                players.push("NEUTRAL");
+              } else {
+                players.push(game.getPlayerById(playerId));
+              }  
+            });
+
             if (players.length > 0) {
               let selectDelegate = new SelectDelegate(players, "Select player delegate to remove from " + party.name + " party", (selectedPlayer: Player | "NEUTRAL") => {
-                game.turmoil!.removeDelegateFromParty(selectedPlayer, party.name, game);   
+                let playerToRemove = "";
+                if (selectedPlayer === "NEUTRAL") {
+                  playerToRemove = "NEUTRAL";
+                } else {
+                  playerToRemove = selectedPlayer.id;
+                }
+                game.turmoil!.removeDelegateFromParty(playerToRemove, party.name, game);
+                this.log(game, player, party);
                 return undefined;
               });
               orOptions.push(selectDelegate);
@@ -46,5 +66,14 @@ export class BannedDelegate implements IProjectCard {
           let options = new OrOptions(...orOptions);   
           return options;
         }
+    }
+
+    private log(game: Game, player: Player, party: IParty) {
+      game.log(
+        LogMessageType.DEFAULT,
+        "${0} removed a delegate from ${1}",
+        new LogMessageData(LogMessageDataType.PLAYER, player.id),
+        new LogMessageData(LogMessageDataType.PARTY, party.name)
+      );
     }
 }

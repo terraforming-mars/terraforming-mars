@@ -49,10 +49,13 @@ import { MiningArea } from "./cards/MiningArea";
 import { MiningRights } from "./cards/MiningRights";
 import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
 
+export type PlayerId = string;
+
 export class Player implements ILoadable<SerializedPlayer, Player>{
     public corporationCard: CorporationCard | undefined = undefined;
-    public id: string;
+    public id: PlayerId;
     public canUseHeatAsMegaCredits: boolean = false;
+    public shouldTriggerCardEffect: boolean = true;
     public plantsNeededForGreenery: number = 8;
     public dealtCorporationCards: Array<CorporationCard> = [];
     public dealtProjectCards: Array<IProjectCard> = [];
@@ -92,7 +95,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public colonyTradeOffset: number = 0;
     public colonyTradeDiscount: number = 0;
     private turmoilScientistsActionUsed: boolean = false;
-    public removingPlayers: Array<string> = [];
+    public removingPlayers: Array<PlayerId> = [];
+    public needsToDraft: boolean | undefined = undefined;
 
     constructor(
         public name: string,
@@ -186,9 +190,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     private resolveMonsInsurance(game: Game) {
       if (game.monsInsuranceOwner !== undefined) {
-        let retribution: number = Math.min(game.monsInsuranceOwner.megaCredits, 3);
+        let retribution: number = Math.min(game.getPlayerById(game.monsInsuranceOwner).megaCredits, 3);
         this.megaCredits += retribution;
-        game.monsInsuranceOwner.setResource(Resources.MEGACREDITS,-3);
+        game.getPlayerById(game.monsInsuranceOwner).setResource(Resources.MEGACREDITS,-3);
         if (retribution > 0) {
           game.log(
             LogMessageType.DEFAULT,
@@ -196,7 +200,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             new LogMessageData(LogMessageDataType.PLAYER, this.id),
             new LogMessageData(LogMessageDataType.STRING, retribution.toString()),
             new LogMessageData(LogMessageDataType.CARD, "Mons Insurance"),
-            new LogMessageData(LogMessageDataType.PLAYER, game.monsInsuranceOwner.id)
+            new LogMessageData(LogMessageDataType.PLAYER, game.monsInsuranceOwner)
           );
         }
       }  
@@ -1826,9 +1830,14 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             new SelectSpace(
                 "Select space for greenery",
                 game.board.getAvailableSpacesForGreenery(this), (space) => {
-                  game.addGreenery(this, space.id);
+                  // Do not raise oxygen or award TR for final greenery placements
+                  game.addGreenery(this, space.id, SpaceType.LAND, false);
                   this.plants -= this.plantsNeededForGreenery;
                   this.takeActionForFinalGreenery(game);
+                  
+                  // Resolve Philares interrupts
+                  if (game.interrupts.length > 0) this.resolveFinalGreeneryInterrupts(game);
+
                   return undefined;
                 }
             )
@@ -1842,7 +1851,27 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.setWaitingFor(action, () => {});
         return;
       }
-      game.playerIsDoneWithGame(this);
+
+      if (game.interrupts.length > 0) {
+        this.resolveFinalGreeneryInterrupts(game);
+      } else {
+        game.playerIsDoneWithGame(this);
+      }
+    }
+
+    private resolveFinalGreeneryInterrupts(game: Game) {
+      if (game.interrupts.length > 0) {
+        let interrupt = game.interrupts.shift();
+        if (interrupt) {
+          interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+            this.resolveFinalGreeneryInterrupts(game);
+          });
+          return;
+        }
+      }
+
+      // All final greenery interrupts have been resolved, continue game flow
+      this.takeActionForFinalGreenery(game);
     }
 
     private getPlayableCards(game: Game): Array<IProjectCard> {
@@ -1960,7 +1989,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if ( game.coloniesExtension &&
         this.canAfford(constants.BUILD_COLONY_COST)) {
         let openColonies = game.colonies.filter(colony => colony.colonies.length < 3 
-          && colony.colonies.indexOf(this) === -1
+          && colony.colonies.indexOf(this.id) === -1
           && colony.isActive);      
           if (openColonies.length > 0) {
             standardProjects.options.push(
@@ -2007,6 +2036,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
  
       // Prelude cards have to be played first
       if (this.preludeCardsInHand.length > 0) {
+        game.phase = Phase.PRELUDES;
         let preludeMcBonus = this.getPreludeMcBonus(this.preludeCardsInHand);
 
         // Remove unplayable prelude cards
@@ -2024,6 +2054,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             }
         });
         return;
+      } else {
+        game.phase = Phase.ACTION;
       }
 
       if (
@@ -2145,7 +2177,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           const selectParty = new SelectParty(this, game, "Send a delegate in an area (from lobby)");
           action.options.push(selectParty.playerInput);
         }
-        else if (this.canAfford(5) && game.turmoil!.getDelegates(this) > 0){
+        else if (this.canAfford(5) && game.turmoil!.getDelegates(this.id) > 0){
           const selectParty = new SelectParty(this, game, "Send a delegate in an area (5MC)", 1, undefined, 5);
           action.options.push(selectParty.playerInput);
         }

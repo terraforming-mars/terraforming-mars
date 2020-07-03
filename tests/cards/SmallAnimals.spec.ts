@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { SmallAnimals } from "../../src/cards/SmallAnimals";
 import { Color } from "../../src/Color";
@@ -21,7 +20,7 @@ describe("SmallAnimals", function () {
         const card = new SmallAnimals();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        card.action();
+        card.action(player);
         expect(card.resourceCount).to.eq(1);
     });
     it("Should play", function () {

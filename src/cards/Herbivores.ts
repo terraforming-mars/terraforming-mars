@@ -32,7 +32,7 @@ export class Herbivores implements IProjectCard, IResourceCard {
         }
     }
     public play(player: Player, game: Game) {
-        this.resourceCount++;
+        player.addResourceTo(this);
         game.addResourceProductionDecreaseInterrupt(player, Resources.PLANTS, 1);
         return undefined;
     }

@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { Birds } from "../../src/cards/Birds";
 import { Color } from "../../src/Color";
@@ -40,7 +39,7 @@ describe("Birds", function () {
         const card = new Birds();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        card.action();
+        card.action(player);
         expect(card.resourceCount).to.eq(1); 
     });
 });

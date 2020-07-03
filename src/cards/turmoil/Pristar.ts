@@ -22,7 +22,7 @@ export class Pristar implements CorporationCard, IResourceCard {
     }
 
     public onProductionPhase(player: Player) {
-        if (!player.increaseTerraformRatingThisGeneration) {
+        if (!(player.increaseTerraformRatingThisGeneration)) {
             player.megaCredits += 6;
             this.resourceCount++;
         }

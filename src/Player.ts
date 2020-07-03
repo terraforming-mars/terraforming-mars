@@ -129,7 +129,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public increaseTerraformRating(game: Game) {
       if (!game.turmoilExtension) {
         this.terraformRating++;
-        this.increaseTerraformRatingThisGeneration = true;
+        this.hasIncreasedTerraformRatingThisGeneration = true;
         return;
       }
 
@@ -142,7 +142,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           {
             game.addSelectHowToPayInterrupt(this, 3, false, false, "Select how to pay for TR increase");
             this.terraformRating++;
-            this.increaseTerraformRatingThisGeneration = true;
+            this.hasIncreasedTerraformRatingThisGeneration = true;
             return;
           } else {
             return;

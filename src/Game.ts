@@ -861,7 +861,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       this.players.forEach((player) => {
         player.terraformRatingAtGenerationStart = player.getTerraformRating();
-        player.increaseTerraformRatingThisGeneration = false;
+        player.hasIncreasedTerraformRatingThisGeneration = false;
       });
        
       if (this.draftVariant) {

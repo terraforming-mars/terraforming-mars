@@ -24,7 +24,7 @@ describe("UrbanDecomposers", function () {
         lands[0].tile = { tileType: TileType.CITY };
 
         let colony = new Luna();
-        colony.colonies.push(player);
+        colony.colonies.push(player.id);
         game.colonies.push(colony);
         
         expect(card.canPlay(player, game)).to.eq(true);

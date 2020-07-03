@@ -19,10 +19,10 @@ describe("ImprovedEnergyTemplates", function () {
         player.playedCards.push(new SolarWindPower());
         player2.playedCards.push(new SolarWindPower());
         player2.playedCards.push(new SolarWindPower());
-        turmoil.chairman = player2;
+        turmoil.chairman = player2.id;
         turmoil.dominantParty = new Kelvinists();
-        turmoil.dominantParty.partyLeader = player2;
-        turmoil.dominantParty.delegates.push(player2);
+        turmoil.dominantParty.partyLeader = player2.id;
+        turmoil.dominantParty.delegates.push(player2.id);
         card.resolve(game, turmoil);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
         expect(player2.getProduction(Resources.ENERGY)).to.eq(2);

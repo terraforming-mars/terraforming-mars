@@ -14,7 +14,7 @@ export class JovianTaxRights implements IGlobalEvent {
         game.getPlayers().forEach(player => {
             let coloniesCount: number = 0;
             game.colonies.forEach(colony => { 
-                coloniesCount += colony.colonies.filter(owner => owner === player).length;
+                coloniesCount += colony.colonies.filter(owner => owner === player.id).length;
             });  
             player.setProduction(Resources.MEGACREDITS, coloniesCount, game, undefined, true);
             player.setResource(Resources.TITANIUM, turmoil.getPlayerInfluence(player), game, undefined, true);

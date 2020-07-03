@@ -19,10 +19,10 @@ describe("Pandemic", function () {
         player.playedCards.push(new StripMine());
         player2.playedCards.push(new StripMine());
         player2.playedCards.push(new StripMine());
-        turmoil.chairman = player2;
+        turmoil.chairman = player2.id;
         turmoil.dominantParty = new Kelvinists();
-        turmoil.dominantParty.partyLeader = player2;
-        turmoil.dominantParty.delegates.push(player2);
+        turmoil.dominantParty.partyLeader = player2.id;
+        turmoil.dominantParty.delegates.push(player2.id);
         player.megaCredits = 10;
         player2.megaCredits = 10;
         card.resolve(game, turmoil);

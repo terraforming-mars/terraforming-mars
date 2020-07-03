@@ -16,10 +16,6 @@ describe("Pristar", function () {
         game.increaseTemperature(player,1);
         if (player.corporationCard.onProductionPhase !== undefined) {
             player.corporationCard.onProductionPhase(player);
-            expect(player.megaCredits).to.eq(10);
-            expect(card.resourceCount).to.eq(0);
-            expect(player.corporationCard.onProductionPhase).not.to.eq(undefined);
-            player.corporationCard.onProductionPhase(player);
             expect(player.megaCredits).to.eq(16);
             expect(card.resourceCount).to.eq(1);
         }

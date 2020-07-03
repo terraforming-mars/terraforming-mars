@@ -14,7 +14,6 @@ export class Pristar implements CorporationCard, IResourceCard {
 
     public play(player: Player) {
         player.decreaseTerraformRatingSteps(2);
-        this.lastGenerationTR = player.getTerraformRating();
         return undefined;
     }
 

@@ -1,5 +1,4 @@
 import {ICard} from './ICard';
-
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { IProjectCard } from "./IProjectCard";
@@ -11,6 +10,7 @@ import { SelectOption } from "../inputs/SelectOption";
 import { PlayerInput } from "../PlayerInput";
 import { ResourceType } from '../ResourceType';
 import { CardName } from '../CardName';
+import { LogHelper } from '../components/LogHelper';
 
 export class LargeConvoy implements IProjectCard {
     public cost: number = 36;
@@ -25,6 +25,7 @@ export class LargeConvoy implements IProjectCard {
 
         const gainPlants = function() {
             player.plants += 5;
+            LogHelper.logGainPlants(game, player, 5);
             game.addOceanInterrupt(player);
             return undefined;
         }
@@ -40,6 +41,7 @@ export class LargeConvoy implements IProjectCard {
             const targetAnimalCard = animalCards[0];
             availableActions.push(new SelectOption("Add 4 animals to " + targetAnimalCard.name, () => {
                 player.addResourceTo(targetAnimalCard, 4);
+                LogHelper.logAddResource(game, player, targetAnimalCard, 4);
                 game.addOceanInterrupt(player);
                 return undefined;
             }))
@@ -50,6 +52,7 @@ export class LargeConvoy implements IProjectCard {
                     animalCards, 
                     (foundCards: Array<ICard>) => { 
                         player.addResourceTo(foundCards[0], 4);
+                        LogHelper.logAddResource(game, player, foundCards[0], 4);
                         game.addOceanInterrupt(player);
                         return undefined;
                     }

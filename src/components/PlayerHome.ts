@@ -105,7 +105,9 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
             </div>
 
-            <preferences v-trim-whitespace></preferences>
+            <preferences v-trim-whitespace>
+                <div class="deck-size">{{ player.deckSize }}</div>
+            </preferences>
 
             <div v-if="player.corporationCard">
 
@@ -162,7 +164,7 @@ export const PlayerHome = Vue.component("player-home", {
                     <div>
                         <div class="resource card" style="margin-left: -5px; transform: scale(0.8);top: -15px"></div>
                         <div class="resource card" style="margin: 0px 0px 0px -30px; transform: scale(0.8);box-sizing: content-box;top: -15px"></div>
-                        <div class="deck-len">{{player.deckLen}}</div>
+                        <div class="deck-len">{{player.deckSize}}</div>
                     </div>
                 </div>
                 <div class="player_home_block player_home_block--resources nofloat">

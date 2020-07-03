@@ -43,6 +43,8 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
                     player.cardsInHand.push(card);
                     drawnCards.push(card);
                     drawnCount++;
+                } else {
+                    game.dealer.discard(card);
                 }
             }
 

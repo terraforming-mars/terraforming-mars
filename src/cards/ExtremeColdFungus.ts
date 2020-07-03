@@ -10,6 +10,7 @@ import {SelectCard} from '../inputs/SelectCard';
 import {IProjectCard} from './IProjectCard';
 import { ResourceType } from '../ResourceType';
 import { CardName } from '../CardName';
+import { LogHelper } from '../components/LogHelper';
 
 export class ExtremeColdFungus implements IActionCard, IProjectCard {
     public cost: number = 13;
@@ -27,16 +28,18 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
     public canAct(): boolean {
       return true;
     }
-    public action(player: Player) {
+    public action(player: Player, game: Game) {
       const otherMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
 
       if (otherMicrobeCards.length === 0) {
         player.plants++;
+        LogHelper.logGainPlants(game, player);
         return undefined;
       }
 
       const gainPlantOption = new SelectOption('Gain 1 plant', () => {
         player.plants++;
+        LogHelper.logGainPlants(game, player);
         return undefined;
       })
 
@@ -46,6 +49,7 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
         return new OrOptions(
           new SelectOption('Add 2 microbes to ' + targetCard.name, () => {
             player.addResourceTo(targetCard, 2);
+            LogHelper.logAddResource(game, player, targetCard, 2);
             return undefined;
           }),
           gainPlantOption
@@ -58,6 +62,7 @@ export class ExtremeColdFungus implements IActionCard, IProjectCard {
           otherMicrobeCards,
           (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 2);
+              LogHelper.logAddResource(game, player, foundCards[0], 2);
               return undefined;
           }
         ),

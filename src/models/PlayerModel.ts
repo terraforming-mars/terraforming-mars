@@ -66,5 +66,5 @@ export interface PlayerModel {
     initialDraft: boolean;
     undoing :boolean;
     waitingFor :PlayerInputModel;
-    deckLen?: number;
+    deckSize?: number;
 }

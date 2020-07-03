@@ -27,11 +27,12 @@ describe("ExtremeColdFungus", function () {
     it("Should act - single target", function () {
         const card = new ExtremeColdFungus();
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player,player], player);
 
         const tardigrades = new Tardigrades();
         player.playedCards.push(tardigrades);
         
-        const action = card.action(player);
+        const action = card.action(player, game);
         expect(action).not.to.eq(undefined);
         expect(action instanceof OrOptions).to.eq(true);
         expect(action!.options.length).to.eq(2);
@@ -44,11 +45,13 @@ describe("ExtremeColdFungus", function () {
     it("Should act - multiple targets", function () {
         const card = new ExtremeColdFungus();
         const player = new Player("test", Color.BLUE, false);
+        const game = new Game("foobar", [player,player], player);
+        
         player.playedCards.push(new Ants());
         const tardigrades = new Tardigrades();
         player.playedCards.push(tardigrades);
         player.addResourceTo(tardigrades, 4);
-        const action = card.action(player);
+        const action = card.action(player, game);
         expect(action).not.to.eq(undefined);
         expect(action instanceof OrOptions).to.eq(true);
         expect(action!.options.length).to.eq(2);

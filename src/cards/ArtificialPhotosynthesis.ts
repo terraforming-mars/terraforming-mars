@@ -15,12 +15,12 @@ export class ArtificialPhotosynthesis implements IProjectCard {
 
     public play(player: Player) {
       return new OrOptions(
-          new SelectOption('Increase your plant production 1 step', () => {
-            player.setProduction(Resources.PLANTS);
-            return undefined;
-          }),
           new SelectOption('Increase your energy production 2 steps', () => {
             player.setProduction(Resources.ENERGY,2);
+            return undefined;
+          }),
+          new SelectOption('Increase your plant production 1 step', () => {
+            player.setProduction(Resources.PLANTS);
             return undefined;
           })
       );

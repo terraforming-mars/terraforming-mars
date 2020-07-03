@@ -6,7 +6,9 @@ import { ICard } from "../cards/ICard";
 import { BeginnerCorporation } from "../cards/corporation/BeginnerCorporation";
 import { ALL_PRELUDE_CORPORATIONS,
          ALL_CORPORATION_CARDS,
+         ALL_CORP_ERA_CORPORATION_CARDS,
          ALL_PROJECT_CARDS,
+         ALL_CORP_ERA_PROJECT_CARDS,
          ALL_PRELUDE_CARDS,
          ALL_PRELUDE_PROJECTS_CARDS,
          ALL_PROMO_CORPORATIONS,
@@ -24,6 +26,10 @@ function getCorporationCardByName(cardName: string): ICard | undefined {
         return new BeginnerCorporation();
     }
     let cardFactory = ALL_CORPORATION_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_CORP_ERA_CORPORATION_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
@@ -63,6 +69,10 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
+    cardFactory = ALL_CORP_ERA_PROJECT_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
     cardFactory = ALL_TURMOIL_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
@@ -75,22 +85,22 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
 }
 
 function getData(cardName: string, resources: string, wasPlayed: boolean): string | undefined {
-    let htmlData : string | undefined = '';
+    let htmlData : string | undefined = "";
     htmlData = HTML_DATA.get(cardName);
-    if (htmlData !== undefined && (resources === undefined || resources === '0')) {
-        htmlData = htmlData.replace('##RESOURCES##', '');
+    if (htmlData !== undefined && (resources === undefined || resources === "0")) {
+        htmlData = htmlData.replace("##RESOURCES##", "");
     }    
     if (htmlData !== undefined && resources !== undefined) {
-        if (resources === '0') {
-          htmlData = htmlData.replace('##RESOURCES##', '');
+        if (resources === "0") {
+          htmlData = htmlData.replace("##RESOURCES##", "");
         } else {
           htmlData = htmlData.replace(
-              '##RESOURCES##', 
-              '<div class="card_resources_counter">RES:<span class="card_resources_counter--number">' + resources + '</span></div>');
+              "##RESOURCES##", 
+              "<div class=\"card_resources_counter\">RES:<span class=\"card_resources_counter--number\">" + resources + "</span></div>");
         }
     }
     if (htmlData !== undefined && wasPlayed) {
-      htmlData = '<div class="cards-action-was-used">'+htmlData+'</div>';
+      htmlData = "<div class=\"cards-action-was-used\">"+htmlData+"</div>";
     }
     return htmlData;
 }

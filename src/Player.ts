@@ -52,6 +52,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public corporationCard: CorporationCard | undefined = undefined;
     public id: string;
     public canUseHeatAsMegaCredits: boolean = false;
+    public shouldTriggerCardEffect: boolean = true;
     public plantsNeededForGreenery: number = 8;
     public heatForTemperature: number = 8;
     public dealtCorporationCards: Array<CorporationCard> = [];

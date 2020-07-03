@@ -18,7 +18,7 @@ export class Arklight implements CorporationCard, IResourceCard {
 
     public play(player: Player) {
         player.setProduction(Resources.MEGACREDITS, 2);
-        this.resourceCount++;
+        player.addResourceTo(this);
         return undefined;
     }
 

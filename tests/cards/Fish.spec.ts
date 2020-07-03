@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { Fish } from "../../src/cards/Fish";
 import { Color } from "../../src/Color";
@@ -15,7 +14,8 @@ describe("Fish", function () {
     });
     it("Should act", function () {
         const card = new Fish();
-        card.action();
+        const player = new Player("test", Color.BLUE, false);
+        card.action(player);
         expect(card.resourceCount).to.eq(1);
     });
     it("Should play", function () {

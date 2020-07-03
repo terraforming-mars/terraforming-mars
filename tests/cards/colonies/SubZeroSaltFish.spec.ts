@@ -14,7 +14,8 @@ describe("SubZeroSaltFish", function () {
     });
     it("Should act", function () {
         const card = new SubZeroSaltFish();
-        card.action();
+        const player = new Player("test", Color.BLUE, false);
+        card.action(player);
         expect(card.resourceCount).to.eq(1);
     });
     it("Should play", function () {

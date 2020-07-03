@@ -21,13 +21,13 @@ export class Pets implements IProjectCard, IResourceCard {
     public getVictoryPoints(): number {
         return Math.floor(this.resourceCount / 2);
     }
-    public onTilePlaced(_player: Player, space: ISpace) {
+    public onTilePlaced(player: Player, space: ISpace) {
         if (space.tile !== undefined && space.tile.tileType === TileType.CITY) {
-            this.resourceCount++;
+            player.addResourceTo(this);
         }
     }
-    public play() {
-        this.resourceCount++;
+    public play(player: Player) {
+        player.addResourceTo(this);
         return undefined;
     }
 }

@@ -28,7 +28,7 @@ describe("Penguins", function () {
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
         expect(card.canAct()).to.eq(true);
-        const action = card.action();
+        const action = card.action(player);
         expect(action).to.eq(undefined);
         expect(card.resourceCount).to.eq(1);
     });
@@ -36,8 +36,8 @@ describe("Penguins", function () {
         const card = new Penguins();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        card.action();
-        card.action();
+        card.action(player);
+        card.action(player);
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     });

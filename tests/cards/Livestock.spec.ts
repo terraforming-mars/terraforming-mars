@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { Livestock } from "../../src/cards/Livestock";
 import { Color } from "../../src/Color";
@@ -35,7 +34,7 @@ describe("Livestock", function () {
         const card = new Livestock();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        card.action();
+        card.action(player);
         expect(card.resourceCount).to.eq(1);
     });
 });

@@ -32,7 +32,7 @@ describe("StratosphericBirds", function () {
         const card = new StratosphericBirds();
         const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        const action = card.action();
+        const action = card.action(player);
         expect(action).to.eq(undefined);
         expect(player.getResourcesOnCard(card)).to.eq(1);
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());

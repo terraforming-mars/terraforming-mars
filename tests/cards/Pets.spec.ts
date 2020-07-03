@@ -11,7 +11,7 @@ describe("Pets", function () {
         const player2 = new Player("test2", Color.RED, false);
         player.playedCards.push(card);
         const game = new Game("foobar", [player,player2], player);
-        const action = card.play();
+        const action = card.play(player);
         expect(action).to.eq(undefined);
         player.addResourceTo(card, 4);
         expect(card.getVictoryPoints()).to.eq(2);

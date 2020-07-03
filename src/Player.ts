@@ -455,6 +455,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (card.resourceType === ResourceType.MICROBE && this.playedCards.map((card) => card.name).includes(CardName.TOPSOIL_CONTRACT)) {
         this.megaCredits += count;
       }
+
+      // Meat industry hook
+      if (card.resourceType === ResourceType.ANIMAL && this.playedCards.map((card) => card.name).includes(CardName.MEAT_INDUSTRY)) {
+        this.megaCredits += count * 2;
+      }
     }
 
     public getCardsWithResources(): Array<ICard> {

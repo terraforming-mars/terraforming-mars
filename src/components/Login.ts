@@ -10,12 +10,12 @@ export const Login = Vue.component("login", {
     },
     methods: {
         login: function () {
-            if(this.userName === undefined || this.userName.length <=2){
-                alert("Please enter more than 2 characters for userName");
+            if(this.userName === undefined || this.userName.length <=1){
+                alert("Please enter more than 1 characters for userName");
                 return;
             }
-            if(this.password === undefined || this.password.length <=2){
-                alert("Please enter more than 2 characters for password");
+            if(this.password === undefined || this.password.length <=1){
+                alert("Please enter more than 1 characters for password");
                 return;
             }
             const dataToSend = JSON.stringify({userName:this.userName, password:this.password});

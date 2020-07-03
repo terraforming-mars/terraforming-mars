@@ -14,7 +14,7 @@ export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard
         return undefined;
     }
     public canAct(player: Player): boolean {
-        return player.increaseTerraformRatingThisGeneration && player.canAfford(3); 
+        return player.hasIncreasedTerraformRatingThisGeneration && player.canAfford(3); 
     }
     public action(player: Player, game: Game) {
         player.megaCredits -= 3;

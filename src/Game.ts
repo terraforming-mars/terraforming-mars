@@ -862,9 +862,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       this.players.forEach((player) => {
         player.terraformRatingAtGenerationStart = player.getTerraformRating();
-        if(player.corporationCard?.name === CardName.PRISTAR){
-          (player.corporationCard as Pristar).lastGenerationTR = player.getTerraformRating();
-        }
+        player.increaseTerraformRatingThisGeneration = false;
       });
        
       if (this.draftVariant) {

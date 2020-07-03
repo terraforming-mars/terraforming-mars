@@ -81,7 +81,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private generationPlayed: Map<string, number> = new Map<string, number>();
     public actionsTakenThisRound: number = 0;
     private terraformRating: number = 20;
-    public increaseTerraformRatingThisGeneration: boolean = false;
+    public hasIncreasedTerraformRatingThisGeneration: boolean = false;
     public terraformRatingAtGenerationStart: number = 20;
     public victoryPointsBreakdown = new VictoryPointsBreakdown();
     private actionsThisGeneration: Set<string> = new Set<string>();

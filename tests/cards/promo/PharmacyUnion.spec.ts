@@ -12,6 +12,7 @@ import { OrOptions } from "../../../src/inputs/OrOptions";
 import { AdvancedEcosystems } from "../../../src/cards/AdvancedEcosystems";
 import { Fish } from "../../../src/cards/Fish";
 import { Lichen } from "../../../src/cards/Lichen";
+import { Research } from "../../../src/cards/Research";
 
 describe("PharmacyUnion", function () {
     it("Should play", function () {
@@ -65,6 +66,22 @@ describe("PharmacyUnion", function () {
         card.onCardPlayed(player2, game, lagrangeObservatory);
         expect(card.resourceCount).to.eq(1);
         expect(player.getTerraformRating()).to.eq(21);
+    });
+
+    it("Works correctly with Research", function () {
+        const card = new PharmacyUnion();
+        const player = new Player("test", Color.BLUE, false);
+        const player2 = new Player("test", Color.RED, false);
+        const game = new Game("foobar", [player,player2], player);
+        card.play();
+        player.corporationCard = card;
+        expect(card.resourceCount).to.eq(2);
+
+        const research = new Research();
+        player.playedCards.push(research);
+        card.onCardPlayed(player, game, research);
+        expect(card.resourceCount).to.eq(0);
+        expect(player.getTerraformRating()).to.eq(22);
     });
 
     it("Can turn card face down once per game to gain 3 TR if no diseases on card", function () {

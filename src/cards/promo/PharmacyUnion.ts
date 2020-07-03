@@ -49,36 +49,43 @@ export class PharmacyUnion implements CorporationCard {
         }
             
         if (player.isCorporation(CorporationName.PHARMACY_UNION) && card.tags.includes(Tags.SCIENCE)) {
-            if (this.resourceCount > 0) {
-                this.resourceCount--;
-                player.increaseTerraformRating(game);
-                game.log(
-                    LogMessageType.DEFAULT,
-                    "${0} removed a disease from ${1} to gain 1 TR",
-                    new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                    new LogMessageData(LogMessageDataType.CARD, this.name)
-                );
-                return undefined;
-            } else {
-                const availableOptions: OrOptions = new OrOptions();
-
-                availableOptions.options.push(
-                    new SelectOption('Turn this card face down and gain 3 TR', () => {
-                        this.isDisabled = true;
-                        player.increaseTerraformRatingSteps(3, game);
-                        return undefined;
-                    })
-                );
-                availableOptions.options.push(
-                    new SelectOption('Do nothing', () => {
-                        return undefined;
-                    })
-                );
-
-                game.addInterrupt({ player, playerInput: availableOptions});
-            }
-
+            this.runInterrupts(player, game, card.tags.filter((tag) => tag === Tags.SCIENCE).length);
             return undefined;
         }
     }
+
+    private runInterrupts(player: Player, game: Game, scienceTags: number): void {
+        if (scienceTags <= 0) return;
+
+        if (this.resourceCount > 0) {
+            this.resourceCount--;
+            player.increaseTerraformRating(game);
+            game.log(
+                LogMessageType.DEFAULT,
+                "${0} removed a disease from ${1} to gain 1 TR",
+                new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                new LogMessageData(LogMessageDataType.CARD, this.name)
+            );
+            this.runInterrupts(player, game, scienceTags - 1);
+            return undefined;
+        } else {
+            const availableOptions: OrOptions = new OrOptions();
+
+            availableOptions.options.push(
+                new SelectOption('Turn this card face down and gain 3 TR', () => {
+                    this.isDisabled = true;
+                    player.increaseTerraformRatingSteps(3, game);
+                    return undefined;
+                })
+            );
+            availableOptions.options.push(
+                new SelectOption('Do nothing', () => {
+                    this.runInterrupts(player, game, scienceTags - 1);
+                    return undefined;
+                })
+            );
+
+            game.addInterrupt({ player, playerInput: availableOptions});
+        }
+      }
 }

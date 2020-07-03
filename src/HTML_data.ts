@@ -7083,6 +7083,18 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
+[CardName.MEAT_INDUSTRY, `
+    <div class="title background-color-active">Meat Industry</div>
+    <div class="price">5</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      <div class="animal resource"></div>* : <div class="money resource">2</div>
+      <div class="description">
+        (Effect: When you gain an animal to ANY CARD, gain 2 MC.)
+      </div>
+    </div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>

@@ -7097,6 +7097,58 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
+[CardName.DEIMOS_DOWN_PROMO,`
+    <div class="title background-color-events">Deimos Down</div>
+    <div class="price">31</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="tag tag2 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      <div class="tile temperature-tile"></div>
+      <div class="tile temperature-tile"></div>
+      <div class="tile temperature-tile"></div><br>
+      <div class="tile special-tile">&#x274B;</div>*&nbsp;
+      4 <div class=" steel resource"></div>&nbsp;
+      -6 <div class="resource plant red-outline"></div>
+      <div class="description">
+        (Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.)
+      </div>
+    </div>
+`],
+[CardName.GREAT_DAM_PROMO,`
+      <div class="title background-color-automated">Great Dam</div>
+      <div class="price">15</div>
+      <div class="tag tag1 tag-building"></div>
+      <div class="tag tag2 tag-power"></div>
+      <div class="promo-icon project-icon"></div>
+      <div class="content">
+        <div class="points points-big">1</div>
+        <div class="requirements">4 Oceans</div>
+        <div class="production-box production-box-size2">
+          <div class="energy production"></div><div class="energy production"></div>
+        </div>
+        *&nbsp;<div class="tile special-tile">&#x23DA;</div>
+        <div class="description">
+          (Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.)
+        </div>
+      </div>
+`],
+[CardName.MAGNETIC_FIELD_GENERATORS_PROMO,`
+        <div class="title background-color-automated">Magnetic Field Generators</div>
+        <div class="price">22</div>
+        <div class="tag tag1 tag-building"></div>
+        <div class="promo-icon project-icon"></div>
+        <div class="content">
+          <div class="production-box production-box-size2a">
+            <div class="production-prefix">&#x2796;&#xFE0E;</div> 4 <div class="energy production"></div><br>
+            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="plant production"></div><div class="plant production"></div>
+          </div> <br>
+           3 <div class="tile rating"></div>*&nbsp;&nbsp;<div class="tile special-tile"><span class="tile-icon">&#x25C9;</span></div>
+          <div class="description">
+            (Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.)
+          </div>
+        </div>
+`],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>
     <div class="price">3</div>

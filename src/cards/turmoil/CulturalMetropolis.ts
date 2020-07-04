@@ -27,7 +27,13 @@ export class CulturalMetropolis implements IProjectCard {
         player.setProduction(Resources.ENERGY,-1);
         player.setProduction(Resources.MEGACREDITS,3);
         game.addInterrupt(new SelectCity(player, game));
-        game.addInterrupt(new SelectParty(player, game, "Select where to send two delegates", 2, undefined, undefined, false));
+        // To Do: Should allow use the free delegate (in lobby) for this card (only matter in very few secnarios)
+        if (game.turmoil!.getDelegates(player.id) > 1){
+          game.addInterrupt(new SelectParty(player, game, "Select where to send two delegates", 2, undefined, undefined, false));
+        }
+        else if (game.turmoil!.getDelegates(player.id) === 1) {
+          game.addInterrupt(new SelectParty(player, game, "Select where to send one delegate", 1, undefined, undefined, false));
+        }
         return undefined;
     }
 }

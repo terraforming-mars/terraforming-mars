@@ -11,7 +11,7 @@ export class Unity extends Party implements IParty {
 
     public rulingBonus(game: Game): void {
         game.getPlayers().forEach(player => {
-            let tagCount = player.getTagCount(Tags.VENUS, false, false) + player.getTagCount(Tags.EARTH, false, false) + player.getTagCount(Tags.JOVIAN, false, false) + player.getTagCount(Tags.WILDCARD);
+            let tagCount = player.getTagCount(Tags.VENUS, false, false) + player.getTagCount(Tags.EARTH, false, false) + player.getTagCount(Tags.JOVIAN, false, false);
             player.setResource(Resources.MEGACREDITS, tagCount);
         });
     }

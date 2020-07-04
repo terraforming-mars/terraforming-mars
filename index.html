@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Terraforming Mars</title>
-        <link href="assets/font-ubuntu.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet"> 
         <link rel='stylesheet' type='text/css' media='all' href='/styles.css' />
     </head>
     <body id="ts-preferences-target">
@@ -11,17 +11,13 @@
                 <start-screen v-if="screen === 'start-screen'"></start-screen>
                 <create-game-form v-if="screen === 'create-game-form'"></create-game-form>
                 <load-game-form v-if="screen === 'load'"></load-game-form>
-                <game-home v-if="screen === 'game-home'" :game="game" ></game-home>
+                <game-home v-if="screen === 'game-home'" :game="game"></game-home>
                 <player-home v-if="screen === 'player-home'" :player="player" :key="playerkey"></player-home>
                 <game-end v-if="screen === 'the-end'" :player="player" :game="game"></game-end>
                 <games-overview v-if="screen === 'games-overview'"></games-overview>
-                <login v-if="screen === 'login'"></login>
-                <my-games v-if="screen === 'my-games'"></my-games>
-                <register v-if="screen === 'register'"></register>
-                <donate v-if="screen === 'donate'"></donate>
             </div>
 
         </div>
-        <script src="/main.js?v=06231"></script>
+        <script src="/main.js"></script>
     </body>
 </html>

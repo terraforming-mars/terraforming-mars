@@ -7,5 +7,3 @@ styles.css
 .vscode/symbols.json
 db/*
 assets/translations.json
-
-/.vscode/launch.json

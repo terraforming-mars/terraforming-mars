@@ -5741,7 +5741,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="production money">1</div>
           </div>
           <div class="description" style="text-align:center;margin-top:0px;">
-            (Effect: When you get a new type of tag in play (event cards do not count), increase your MC production 1 step.)
+            (When you get a new type of tag in play (event cards do not count), increase your MC production 1 step.)
           </div>
         </div>
         <div class="aridor">ARIDOR</div>

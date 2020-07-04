@@ -85,22 +85,22 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
 }
 
 function getData(cardName: string, resources: string, wasPlayed: boolean): string | undefined {
-    let htmlData : string | undefined = "";
+    let htmlData : string | undefined = '';
     htmlData = HTML_DATA.get(cardName);
-    if (htmlData !== undefined && (resources === undefined || resources === "0")) {
-        htmlData = htmlData.replace("##RESOURCES##", "");
+    if (htmlData !== undefined && (resources === undefined || resources === '0')) {
+        htmlData = htmlData.replace('##RESOURCES##', '');
     }    
     if (htmlData !== undefined && resources !== undefined) {
-        if (resources === "0") {
-          htmlData = htmlData.replace("##RESOURCES##", "");
+        if (resources === '0') {
+          htmlData = htmlData.replace('##RESOURCES##', '');
         } else {
           htmlData = htmlData.replace(
-              "##RESOURCES##", 
-              "<div class=\"card_resources_counter\">RES:<span class=\"card_resources_counter--number\">" + resources + "</span></div>");
+              '##RESOURCES##', 
+              '<div class="card_resources_counter">RES:<span class="card_resources_counter--number">' + resources + '</span></div>');
         }
     }
     if (htmlData !== undefined && wasPlayed) {
-      htmlData = "<div class=\"cards-action-was-used\">"+htmlData+"</div>";
+      htmlData = '<div class="cards-action-was-used">'+htmlData+'</div>';
     }
     return htmlData;
 }

@@ -1,9 +1,8 @@
 
 import { PlayerInputTypes } from "../PlayerInputTypes";
-import { CardModel } from "./CardModel";
+import { CardModel } from './CardModel';
 
 export interface PlayerInputModel {
-    id: string | undefined;
     amount: number | undefined;
     availableSpaces: Array<string> | undefined;
     canUseHeat: boolean | undefined;

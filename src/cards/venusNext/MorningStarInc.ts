@@ -2,8 +2,8 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { Game } from '../../Game';
-import { CardName } from '../../CardName';
+import { Game } from "../../Game";
+import { CardName } from "../../CardName";
 import { LogMessageType } from "../../LogMessageType";
 import { LogMessageData } from "../../LogMessageData";
 import { LogMessageDataType } from "../../LogMessageDataType";
@@ -15,11 +15,11 @@ export class MorningStarInc implements CorporationCard {
 
     public initialAction(player: Player, game: Game) {
         if (game.hasCardsWithTag(Tags.VENUS, 3)) {
+            const drawnCards = [];
             for (let foundCard of game.drawCardsByTag(Tags.VENUS, 3)) {
                 player.cardsInHand.push(foundCard);
+                drawnCards.push(foundCard);
             }
-
-            const drawnCards = game.getCardsInHandByTag(player, Tags.VENUS).slice(-3);
 
             game.log(
                 LogMessageType.DEFAULT,

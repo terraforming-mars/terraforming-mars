@@ -5,12 +5,12 @@ import {Phase} from "../Phase";
 export const GamesOverview = Vue.component("games-overview", {
     data: function () {
         return {
-            serverId: '',
+            serverId: "",
             games: {}
         }
     },
     mounted: function() {
-        this.serverId = (new URL(location.href)).searchParams.get('serverId') || '';
+        this.serverId = (new URL(location.href)).searchParams.get("serverId") || "";
         this.getGames();
     },
     methods: {
@@ -25,9 +25,10 @@ export const GamesOverview = Vue.component("games-overview", {
                 if (xhr.status === 200) {
                     const result = xhr.response;
                     if (result instanceof Array) {
-                        result.forEach(function (gameId) {
-                            (vueApp as any).getGame(gameId);
-                        });
+                        (vueApp as any).games = result;
+                        // result.forEach(function (gameId) {
+                            // (vueApp as any).getGame(gameId);
+                        // });
 
                     } else {
                         alert("Unexpected response fetching games from API");
@@ -71,7 +72,9 @@ export const GamesOverview = Vue.component("games-overview", {
             <p>The following games are available on this server:</p>
             <ul>
                 <li v-for="game in games">
-                    <a v-bind:href="'/game?id='+game.id">{{game.id}}</a> 
+                    <a v-bind:href="'/game?id='+game.id" target="_blank" >{{game.id}}</a> 
+                    <span>{{game.createtime}}  {{game.updatetime}}  </span>
+                    age: {{game.gameAge}} 
                     with {{game.players.length}} player(s) : 
                     <span class="player_home_block nofloat" >
                         <span v-for="player in game.players" class="player_name" :class="'player_bg_color_'+ player.color">

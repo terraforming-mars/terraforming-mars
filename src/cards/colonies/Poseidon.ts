@@ -1,10 +1,10 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { Game } from '../../Game';
-import { SelectOption } from '../../inputs/SelectOption';
-import { OrOptions } from '../../inputs/OrOptions';
-import { CardName } from '../../CardName';
+import { Game } from "../../Game";
+import { SelectOption } from "../../inputs/SelectOption";
+import { OrOptions } from "../../inputs/OrOptions";
+import { CardName } from "../../CardName";
 
 export class Poseidon implements CorporationCard {
     public name: CardName =  CardName.POSEIDON;

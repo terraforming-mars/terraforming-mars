@@ -905,6 +905,9 @@ export const ALL_CORP_ERA_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
 
 // Function to return a card object by its name
 export function getProjectCardByName(cardName: string): IProjectCard | undefined {
+    if(cardName === "MAxwell Base"){
+        cardName = "Maxwell Base";
+    }
     let cardFactory = ALL_PRELUDE_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
@@ -1080,7 +1083,4 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         return o;
     }
 
-    public getDeckSize(): number {
-        return this.deck.length
-    }
 }

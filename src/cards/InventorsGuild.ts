@@ -4,10 +4,10 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectHowToPay } from "../inputs/SelectHowToPay";
-import {SelectCard} from '../inputs/SelectCard';
+import {SelectCard} from "../inputs/SelectCard";
 import { IProjectCard } from "./IProjectCard";
 import { IActionCard } from "./ICard";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 export class InventorsGuild implements IActionCard, IProjectCard {
     public cost: number = 9;
@@ -34,12 +34,12 @@ export class InventorsGuild implements IActionCard, IProjectCard {
             }
             if (player.canUseHeatAsMegaCredits && player.heat > 0) {
               return new SelectHowToPay(
-                'Select how to pay and buy ' + dealtCard.name, false, false,
+                "Select how to pay and buy " + dealtCard.name, false, false,
                 true, player.cardCost,
                 (htp) => {
                   if (htp.heat + htp.megaCredits < player.cardCost) {
                     game.dealer.discard(dealtCard);
-                    throw new Error('Not enough spent to buy card');
+                    throw new Error("Not enough spent to buy card");
                   }
                   player.megaCredits -= htp.megaCredits;
                   player.heat -= htp.heat;

@@ -1,9 +1,9 @@
-import { Game } from '../Game';
-import { PlayerInput } from '../PlayerInput';
+import { Game } from "../Game";
+import { PlayerInput } from "../PlayerInput";
 import { Player, PlayerId } from "../Player";
-import { PlayerInterrupt } from './PlayerInterrupt';
-import { OrOptions } from '../inputs/OrOptions';
-import { SelectOption } from '../inputs/SelectOption';
+import { PlayerInterrupt } from "./PlayerInterrupt";
+import { OrOptions } from "../inputs/OrOptions";
+import { SelectOption } from "../inputs/SelectOption";
 import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";

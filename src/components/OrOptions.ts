@@ -9,12 +9,12 @@ export const OrOptions = Vue.component("or-options", {
     props: ["player", "players", "playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
-            selectedOption: 0
+            selectedOption: -1
         };
     },
     methods: {
         saveData: function () {
-            const componentInstance = this.$data.childComponents[this.$data.selectedOption].componentInstance;
+            const componentInstance = this.$children[this.$data.selectedOption];
             if (componentInstance !== undefined) {
                 if ((componentInstance as any).saveData instanceof Function) {
                     (componentInstance as any).saveData();
@@ -26,12 +26,11 @@ export const OrOptions = Vue.component("or-options", {
     },
     render: function (createElement) {
         unique++;
-        this.$data.childComponents = [];
         const children: Array<VNode> = [];
+        let child :VNode ;
         if (this.showtitle) {
-            children.push(createElement('label', [createElement("div", $t(this.playerinput.title))]))
+            children.push(createElement("label", [createElement("div", $t(this.playerinput.title))]))
         }
-        const optionElements: Array<VNode> = [];
         this.playerinput.options.forEach((option: any, idx: number) => {
             const domProps: {[key: string]: any} = {
                 name: "selectOption" + unique,
@@ -50,13 +49,12 @@ export const OrOptions = Vue.component("or-options", {
                 createElement("i", {"class": "form-icon"}),
                 createElement("span", $t(option.title))
             ]));
-            this.$data.childComponents.push(new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, option, (out: Array<Array<string>>) => {
+            child = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, option, (out: Array<Array<string>>) => {
                 const copy = out[0].slice();
                 copy.unshift(String(idx));
                 this.onsave([copy]);
-            }, false, false));
-            subchildren.push(createElement("div", { style: { display: displayStyle, marginLeft: "30px" } }, [this.$data.childComponents[this.$data.childComponents.length - 1]]));
-            optionElements.push(subchildren[subchildren.length - 1]);
+            }, false, false);
+            subchildren.push(createElement("div", { style: { display: displayStyle, marginLeft: "30px" } }, [child]));
             children.push(createElement("div", subchildren));
             if (this.showsave && this.$data.selectedOption === idx) {
                 children.push(createElement("div", { style: {"margin": "5px 30px 10px"}, "class": "wf-action"}, [createElement("button", { domProps: { className: "btn btn-primary" }, on: { click: () => { this.saveData(); } } }, "Save")]));

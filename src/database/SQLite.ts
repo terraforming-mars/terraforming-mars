@@ -1,8 +1,9 @@
 import { IDatabase } from "./IDatabase";
 import {Game} from "../Game";
-import { IGameData } from './IDatabase';
+import { IGameData } from "./IDatabase";
 
 import sqlite3 = require("sqlite3");
+import { User } from "../User";
 const path = require("path");
 const fs = require("fs");
 const dbFolder = path.resolve(__dirname, "../../../db")
@@ -18,6 +19,7 @@ export class SQLite implements IDatabase {
         }
         this.db = new sqlite3.Database(dbPath);
         this.db.run("CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default 'running', created_time timestamp default (strftime('%s', 'now')), PRIMARY KEY (game_id, save_id))");
+        this.db.run("CREATE TABLE IF NOT EXISTS 'users'('id'  varchar NOT NULL,'name'  varchar NOT NULL,'password'  varchar NOT NULL,'createtime'  timestamp DEFAULT (datetime(CURRENT_TIMESTAMP,'localtime')),PRIMARY KEY ('id'))");
     }
 
     getClonableGames( cb:(err: any, allGames:Array<IGameData>)=> void) {
@@ -42,7 +44,7 @@ export class SQLite implements IDatabase {
 
     getGames(cb:(err: any, allGames:Array<string>)=> void) {
         var allGames:Array<string> = [];
-        var sql: string = "SELECT distinct game_id game_id FROM games WHERE status = 'running' and save_id > 0"; 
+        var sql: string = "SELECT distinct game_id game_id FROM games "; 
         this.db.all(sql, [], (err, rows) => {
             if (rows) {
                 rows.forEach((row) => {
@@ -71,7 +73,7 @@ export class SQLite implements IDatabase {
 
     restoreGameLastSave(game_id:string, game: Game, cb:(err: any) => void) {
         // Retrieve last save from database
-        this.db.get("SELECT game game FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1", [game_id],(err: { message: any; }, row: { game: any; }) => {
+        this.db.get("SELECT game game ,createtime createtime  FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT 1", [game_id],(err: { message: any; }, row: { game: any, createtime: any; }) => {
             if (err) {
                 return cb(err);
             }
@@ -79,8 +81,13 @@ export class SQLite implements IDatabase {
             let gameToRestore = JSON.parse(row.game);
 
             // Rebuild each objects
-            game.loadFromJSON(gameToRestore);
-
+            try {
+                game.loadFromJSON(gameToRestore);
+                game.updatetime = row.createtime;
+            } catch (e) {
+                cb(e);
+                return;
+            }
             return cb(err);
         });
     }
@@ -89,20 +96,20 @@ export class SQLite implements IDatabase {
         // DELETE all saves except initial and last one
         this.db.run("DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0", [game_id, save_id], function(err: { message: any; }) {
             if (err) {
-            return console.warn(err.message);  
+                return console.warn(err.message);  
             }
         });
         // Flag game as finished
         this.db.run("UPDATE games SET status = 'finished' WHERE game_id = ?", [game_id], function(err: { message: any; }) {
             if (err) {
-            return console.warn(err.message);  
+                return console.warn(err.message);  
             }
         });        
     }
 
     restoreGame(game_id: string, save_id: number, game: Game): void {
         // Retrieve last save from database
-        this.db.get("SELECT game game FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1", [game_id, save_id],(err: { message: any; }, row: { game: any; }) => {
+        this.db.get("SELECT game game ,createtime createtime  FROM games WHERE game_id = ? AND save_id = ? ORDER BY save_id DESC LIMIT 1", [game_id, save_id],(err: { message: any; }, row: { game: any, createtime: any; }) => {
             if (err) {
                 return console.error(err.message);
             }
@@ -111,7 +118,8 @@ export class SQLite implements IDatabase {
 
             // Rebuild each objects
             game.loadFromJSON(gameToRestore);
-
+            game.updatetime = row.createtime;
+            
             return true;
         });
     }
@@ -122,6 +130,28 @@ export class SQLite implements IDatabase {
             if (err) {
                 //Should be a duplicate, does not matter
                 return;  
+            }
+        });
+    }
+
+    saveUser(id: string, name: string, password: string): void {
+        // Insert user
+        this.db.run("INSERT INTO users(id, name, password) VALUES(?, ?, ?)", [id, name, password], function(err: { message: any; }) {
+            if (err) {
+                return console.error(err);  
+            }
+        });
+    }
+
+    getUsers(cb:(err: any, allUsers:Array<User>)=> void): void {
+        var allUsers:Array<User> = [];
+        var sql: string = "SELECT distinct id, name, password FROM users "; 
+        this.db.all(sql, [], (err, rows) => {
+            if (rows) {
+                rows.forEach((row) => {
+                    allUsers.push( {id: row.id, name: row.name, password: row.password} as User);
+                });
+                return cb(err, allUsers);
             }
         });
     }

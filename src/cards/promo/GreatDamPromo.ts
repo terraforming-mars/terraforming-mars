@@ -1,4 +1,3 @@
-
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
@@ -21,7 +20,7 @@ export class GreatDamPromo implements IProjectCard {
     public play(player: Player, game: Game) {
         player.setProduction(Resources.ENERGY,2);
 
-        const availableSpaces = game.board.getAvailableSpacesOnLand(player);
+        const availableSpaces = this.getAvailableSpaces(player, game);
         if (availableSpaces.length < 1) return undefined;
 
         return new SelectSpace("Select space for tile", availableSpaces, (foundSpace: ISpace) => {
@@ -32,5 +31,14 @@ export class GreatDamPromo implements IProjectCard {
     public getVictoryPoints() {
         return 1;
     }
+    private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
+        return game.board.getAvailableSpacesOnLand(player)
+            .filter(
+                (space) => game.board.getAdjacentSpaces(space).filter(
+                    (adjacentSpace) => adjacentSpace.tile !== undefined &&
+                  adjacentSpace.tile.tileType === TileType.OCEAN
+                ).length > 0
+            );
+      }
 }
 

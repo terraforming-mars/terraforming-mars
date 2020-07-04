@@ -11,25 +11,32 @@ import { ICard } from '../../../src/cards/ICard';
 import { SelectPlayer } from '../../../src/inputs/SelectPlayer';
 
 describe("AirRaid", function () {
-    it("Should play - multiple targets", function () {
-        const card = new AirRaid();
-        let corpo = new StormCraftIncorporated();
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test2", Color.RED, false);
-        const player3 = new Player("test3", Color.BLACK, false);
-        const game = new Game("foobar", [player,player2,player3], player);
+    let card : AirRaid, player : Player, player2 : Player, game : Game, corpo: StormCraftIncorporated;
 
-        expect(card.canPlay(player)).to.eq(false);
+    beforeEach(function() {
+        card = new AirRaid();
+        player = new Player("test", Color.BLUE, false);
+        player2 = new Player("test2", Color.RED, false);
+        game = new Game("foobar", [player, player2], player);
+
+        corpo = new StormCraftIncorporated();
         player.corporationCard = corpo;
-        player2.megaCredits = 4;
+    });
+
+    it("Can't play", function () {
+        expect(card.canPlay(player)).to.eq(false);
+    });
+
+    it("Should play - multiple targets", function () {
+        const player3 = new Player("test3", Color.YELLOW, false);
+        const game = new Game("foobar", [player, player2, player3], player);
         player.addResourceTo(corpo);
-        expect(player.getResourcesOnCard(corpo)).to.eq(1);
+        expect(card.canPlay(player)).to.eq(true);
 
         const otherCardWithFloater = new Dirigibles();
         player.playedCards.push(otherCardWithFloater);
         player.addResourceTo(otherCardWithFloater);
-
-        card.play(player, game);
+        player2.megaCredits = 4;
 
         const andOptions = card.play(player, game) as AndOptions;
         const option1 = andOptions.options[0] as SelectCard<ICard>;
@@ -44,18 +51,10 @@ describe("AirRaid", function () {
     });
 
     it("Should play - single target for floater removal and MC removal", function () {
-        const card = new AirRaid();
-        let corpo = new StormCraftIncorporated();
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test2", Color.RED, false);
-        const game = new Game("foobar", [player,player2], player);
-
-        expect(card.canPlay(player)).to.eq(false);
-        player.corporationCard = corpo;
-        player2.megaCredits = 4;
         player.addResourceTo(corpo);
-        expect(player.getResourcesOnCard(corpo)).to.eq(1);
+        expect(card.canPlay(player)).to.eq(true);
         
+        player2.megaCredits = 4;
         card.play(player, game);
 
         expect(player.getResourcesOnCard(corpo)).to.eq(0);

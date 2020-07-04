@@ -1,6 +1,6 @@
 import { IDatabase } from "./IDatabase";
 import { Game } from "../Game";
-import { IGameData } from './IDatabase';
+import { IGameData } from "./IDatabase";
 
 import { Client } from "pg";
 
@@ -157,5 +157,12 @@ export class PostgreSQL implements IDatabase {
                 return;
             }
         });
+    }
+
+    saveUser(_id: string, _name: string, _password: string): void {
+        throw new Error("Method not implemented.");
+    }
+    getUsers(_cb: (err: any, allUsers: import("../User").User[]) => void): void {
+        throw new Error("Method not implemented.");
     }
 }

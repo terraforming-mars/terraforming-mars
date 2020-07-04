@@ -9,11 +9,12 @@ import { PlayerResources } from "./PlayerResources";
 import { WaitingFor } from "./WaitingFor";
 import { Preferences } from "./Preferences"
 import { PlayerModel } from "../models/PlayerModel";
-import { Colony } from './Colony';
-import { LogPanel } from './LogPanel';
-import { PlayerMixin } from './PlayerMixin';
-import { TagCount } from './TagCount';
-import { Turmoil } from './Turmoil';
+import { Colony } from "./Colony";
+import { LogPanel } from "./LogPanel";
+import { PlayerMixin } from "./PlayerMixin";
+import { TagCount } from "./TagCount";
+import { Turmoil } from "./Turmoil";
+
 
 const dialogPolyfill = require("dialog-polyfill");
 
@@ -34,16 +35,20 @@ export const PlayerHome = Vue.component("player-home", {
         "turmoil": Turmoil
     },
     data: function () {
-        return {}
+        return {
+            soundtip: false,
+            userName: ""
+        }
     },
     mixins: [PlayerMixin],
     methods: {
-        getPlayerCssForTurnOrder: (player: PlayerModel, highlightActive: boolean): string => {
+        getPlayerCssForTurnOrder: ( player: PlayerModel, hilightActive: boolean): string => {
             var ret: string = "highlighter_box player_bg_color_" + player.color;
-            if (highlightActive) {
-                if (player.needsToDraft || (player.needsToDraft === undefined && player.isActive)) {
-                    ret += " player_is_active";
-                }
+            if (hilightActive && player.isActive) ret += " player_is_active";
+            // hilightActive 显示小框的高亮
+            if (!hilightActive &&  player.waitingFor !== undefined &&  
+                (!player.isActive || player.phase === "drafting" ||  player.phase === "research" )){
+                ret += " player_is_waiting";
             }
             return ret;
         },
@@ -58,14 +63,28 @@ export const PlayerHome = Vue.component("player-home", {
                 fleetsRange.push(i);
             }
             return fleetsRange
+        },
+        updateTips: function(){
+            if(window.localStorage){
+                window.localStorage.setItem("soundtip",this.soundtip ? "1" : "0");
+            }
+        }
+    },
+    created() {
+        if(window.localStorage){
+            this.soundtip = window.localStorage.getItem("soundtip") === "1";
+            this.userName = window.localStorage.getItem("userName") || "";
         }
     },
     mounted: function () {
-        dialogPolyfill.default.registerDialog(document.getElementById("dialog-default"));
+        dialogPolyfill.default.registerDialog(document.getElementById("dialog-default"));   
     },
     template: `
         <div id="player-home">
-           <h2 :class="'game-title player_color_'+ player.color" v-i18n>Terraforming Mars</h2>
+            <h2 :class="'game-title player_color_'+ player.color">
+                <a :href="'/game?id='+ player.gameId" v-i18n>Terraforming Mars</a>
+                <a :href="'mygames'" v-if="userName">- {{userName}}</a>
+            </h2>
             <section>
                 <dialog id="dialog-default">
                     <form method="dialog">
@@ -141,15 +160,25 @@ export const PlayerHome = Vue.component("player-home", {
                         </div>
                     </div>
                 </div>
-
+                <div class="tag-display tags_item_cont" :class="'tag-display-vp'">
+                    <div>
+                        <div class="resource card" style="margin-left: -5px; transform: scale(0.8);top: -15px"></div>
+                        <div class="resource card" style="margin: 0px 0px 0px -30px; transform: scale(0.8);box-sizing: content-box;top: -15px"></div>
+                        <div class="deck-len">{{player.deckSize}}</div>
+                    </div>
+                </div>
                 <div class="player_home_block player_home_block--resources nofloat">
                     <player-resources :player="player" v-trim-whitespace></player-resources>
                 </div>
 
                 <div class="player_home_block player_home_block--actions nofloat">
                     <a name="actions" class="player_home_anchor"></a>
-                    <h2 :class="'player_color_'+ player.color" v-i18n>Actions</h2>
-                    <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
+                    <h2 :class="'player_color_'+ player.color" style="display: inline-block;" v-i18n>Actions</h2>
+                    <label class="form-switch" style="margin-left: 20px;display: inline-block;">
+                        <input type="checkbox" name="soundtip" v-model="soundtip" v-on:change="updateTips" >
+                        <i class="form-icon"></i> <span v-i18n>语音提示</span>
+                    </label>
+                    <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :soundtip="soundtip" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
 
                 <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
@@ -214,7 +243,9 @@ export const PlayerHome = Vue.component("player-home", {
                     <milestone :milestones_list="player.milestones" />
                     <award :awards_list="player.awards" />
                 </div>
-
+                <div>
+                    <turmoil  v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
+                </div>
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
                     <h2 :class="'player_color_'+ player.color">
                         <span v-i18n>Turn order</span>
@@ -236,7 +267,6 @@ export const PlayerHome = Vue.component("player-home", {
                     </summary>
                     <div class="accordion-body">
                         <board :spaces="player.spaces" :venusNextExtension="player.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.boardName"></board>
-                        <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
                     </div>
                 </details>
             </div>

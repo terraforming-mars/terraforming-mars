@@ -1,13 +1,14 @@
-'use strict'
+"use strict"
 
 module.exports = {
-  mode: 'development',
+  mode: "development",
+  // mode: "production",
   entry: [
-    './dist/script.js'
+    "./dist/script.js"
   ],
   resolve: {
     alias: {
-        'vue$': 'vue/dist/vue.esm.js' // 'vue/dist/vue.common.js' for webpack 1
+        "vue$": "vue/dist/vue.esm.js" // 'vue/dist/vue.common.js' for webpack 1
     }
   }
 }

@@ -1,10 +1,10 @@
 import Vue from "vue";
 import { Color } from "../Color";
-import { BoardName } from '../BoardName';
+import { BoardName } from "../BoardName";
 import { CardName } from "../CardName";
 import { CorporationsFilter } from "./CorporationsFilter";
 import { $t } from "../directives/i18n";
-import { IGameData } from '../database/IDatabase';
+import { IGameData } from "../database/IDatabase";
 
 interface CreateGameModel {
     firstIndex: number;
@@ -29,6 +29,8 @@ interface CreateGameModel {
     solarPhaseOption: boolean;
     promoCardsOption: boolean;
     undoOption: boolean;
+    heatFor: boolean;
+    enhance: boolean;
     startingCorporations: number;
     soloTR: boolean;
     clonedGameData: IGameData | undefined;
@@ -57,16 +59,16 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 {index: 6, name: "", color: Color.PURPLE, beginner: false, first: false}
             ],
             corporateEra: true,
-            prelude: false,
+            prelude: true,
             draftVariant: true,
             initialDraft: false,
             initialDraftRounds: 4,
             randomMA: false,
             randomFirstPlayer: true,
-            showOtherPlayersVP: false,
-            venusNext: false,
-            colonies: false,
-            turmoil: false,
+            showOtherPlayersVP: true,
+            venusNext: true,
+            colonies: true,
+            turmoil: true,
             customCorporationsList: [],
             showCorporationList: false,
             isSoloModePage: false,
@@ -79,10 +81,12 @@ export const CreateGameForm = Vue.component("create-game-form", {
             ],
             seed: Math.random(),
             seededGame: false,
-            solarPhaseOption: false,
-            promoCardsOption: false,
-            undoOption: false,
-            startingCorporations: 2,
+            solarPhaseOption: true,
+            promoCardsOption: true,
+            undoOption: true,
+            heatFor: false,
+            enhance: false,
+            startingCorporations: 4,
             soloTR: false,
             clonedGameData: undefined,
             cloneGameData: []
@@ -92,7 +96,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
         "corporations-filter": CorporationsFilter,
     },
     mounted: function () {
-        if (window.location.pathname === '/solo') {
+        if (window.location.pathname === "/solo") {
             this.isSoloModePage = true;
         }
 
@@ -154,7 +158,12 @@ export const CreateGameForm = Vue.component("create-game-form", {
             component.players.forEach((player) => {
                 if (player.name === "") {
                     if (isSoloMode) {
-                        player.name = "You";
+                        const userName = localStorage.getItem("userName") || "";
+                        if( userName.length > 0){
+                            player.name = userName;
+                        }else{
+                            player.name = "You";
+                        }
                     } else {
                         const defaultPlayerName = player.color.charAt(0).toUpperCase() + player.color.slice(1);
                         player.name = defaultPlayerName;
@@ -188,6 +197,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const seed = component.seed;
             const promoCardsOption = component.promoCardsOption;
             const undoOption = component.undoOption;
+            const heatFor = component.heatFor;
+            const enhance = component.enhance;
             const startingCorporations = component.startingCorporations;
             const soloTR = component.soloTR;
             let clonedGamedId: undefined | string = undefined;
@@ -217,6 +228,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 solarPhaseOption,
                 promoCardsOption,
                 undoOption,
+                heatFor, 
+                enhance,
                 startingCorporations,
                 soloTR,
                 clonedGamedId,
@@ -366,6 +379,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <label class="form-switch">
                                 <input type="checkbox" v-model="undoOption">
                                 <i class="form-icon"></i> <span v-i18n>Allow undo</span>
+                            </label>
+
+                            <label class="form-switch">
+                                <input type="checkbox" v-model="heatFor">
+                                <i class="form-icon"></i> <span v-i18n>七热升温</span>
                             </label>
 
                             <label class="form-label">

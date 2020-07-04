@@ -2,11 +2,11 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { IProjectCard } from "../IProjectCard";
-import { CorporationCard } from '../corporation/CorporationCard';
+import { CorporationCard } from "../corporation/CorporationCard";
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
 import { ResourceType } from "../../ResourceType";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { LogMessageType } from "../../LogMessageType";
 import { LogMessageData } from "../../LogMessageData";
 import { LogMessageDataType } from "../../LogMessageDataType";
@@ -17,15 +17,14 @@ export class Splice implements CorporationCard {
     public startingMegaCredits: number = 48; // 44 + 4 as card resolution when played
 
     public initialAction(player: Player, game: Game) {
-        player.cardsInHand.push(game.drawCardsByTag(Tags.MICROBES, 1)[0]);
-        
-        const drawnCards = game.getCardsInHandByTag(player, Tags.MICROBES).slice(-1);
+        const drawnCard = game.drawCardsByTag(Tags.MICROBES, 1)[0]
+        player.cardsInHand.push(drawnCard);
 
         game.log(
             LogMessageType.DEFAULT,
             "${0} drew ${1}",
             new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.CARD, drawnCards[0].name)
+            new LogMessageData(LogMessageDataType.CARD, drawnCard.name)
         );
         
         return undefined;

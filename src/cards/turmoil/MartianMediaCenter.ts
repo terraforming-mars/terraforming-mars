@@ -28,7 +28,7 @@ export class MartianMediaCenter implements IProjectCard {
     }
 
     public canAct(player: Player): boolean {
-        return player.canAfford(3);
+        return (player.canAfford(3) && game.turmoil!.getDelegates(player.id) > 0);
     }
 
     public action(player: Player, game: Game) {

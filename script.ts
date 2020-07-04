@@ -19,7 +19,7 @@ Vue.directive("i18n", {
 
 
 // preload translations
-fetch("/assets/translations.json?v=0608")
+fetch("/assets/translations.json")
     .then(response => response.json())
     .then(jsonData => {
         (window as any).TM_translations = jsonData;

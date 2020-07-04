@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { Cartel } from "../../src/cards/Cartel";
 import { Color } from "../../src/Color";
@@ -9,30 +8,31 @@ import { LunarBeam } from "../../src/cards/LunarBeam";
 import { Resources } from '../../src/Resources';
 
 describe("Cartel", function () {
+    let card : Cartel, player : Player;
+
+    beforeEach(function() {
+        card = new Cartel();
+        player = new Player("test", Color.BLUE, false);
+    });
+
     it("Should play", function () { 
-        const card = new Cartel();
-        const player = new Player("test", Color.BLUE, false);
-        const action = card.play(player);
-        expect(action).to.eq(undefined);
+        card.play(player);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
         player.playedCards.push(card);
+
         card.play(player);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
     });
 
     it("Correctly counts tags", function () {
-        const card = new Cartel();
         const cards = [
             new ImportedHydrogen(), // event with earth tag
             new InterstellarColonyShip(), // event with earth tag
-            new LunarBeam() // Another card with earch tag
+            new LunarBeam() // another card with earth tag
         ]
-        const player = new Player("test", Color.BLUE, false);
 
         player.playedCards = player.playedCards.concat(cards);
-        
         card.play(player);
-
-        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2); // Only for LunarBeam and Cartel itself
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2); // exclude events
     });
 });

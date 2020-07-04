@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { ArtificialLake } from "../../src/cards/ArtificialLake";
 import { Color } from "../../src/Color";
@@ -10,34 +9,35 @@ import { TileType } from "../../src/TileType";
 import * as constants from '../../src/constants';
 
 describe("ArtificialLake", function () {
+    let card : ArtificialLake, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new ArtificialLake();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
     it("Can't play", function () {
-        const card = new ArtificialLake();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
     });
+
     it("Should play", function () {
-        const card = new ArtificialLake();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
-        if (action === undefined) return;
         expect(action instanceof SelectSpace).to.eq(true);
-        action.availableSpaces.forEach((space) => {
+
+        action!.availableSpaces.forEach((space) => {
             expect(space.spaceType).to.eq(SpaceType.LAND);
         });
-        action.cb(action.availableSpaces[0]);
-        expect(action.availableSpaces[0].tile).not.to.eq(undefined);
-        expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.OCEAN);
+
+        action!.cb(action!.availableSpaces[0]);
+        const placedTile = action!.availableSpaces[0].tile;
+        expect(placedTile!.tileType).to.eq(TileType.OCEAN);
+        
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });
-    it("Does not suggest a place for an ocean if all oceans are already placed", function () {
-        const card = new ArtificialLake();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("no_oceans_game", [player,player], player);
 
+    it("Cannot place ocean if all oceans are already placed", function () {
         // Set temperature level to fit requirements
         (game as any).temperature = -6;
 

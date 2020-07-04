@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { MiningArea } from "../../src/cards/MiningArea";
 import { Color } from "../../src/Color";
@@ -10,16 +9,19 @@ import { TileType } from "../../src/TileType";
 import { Resources } from '../../src/Resources';
 
 describe("MiningArea", function () {
+    let card : MiningArea, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new MiningArea();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
     it("Can't play", function () {
-        const card = new MiningArea();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         expect(card.canPlay(player, game)).to.eq(false);
     });
+
     it("Should play", function () {
-        const card = new MiningArea();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         const lands = game.board.getAvailableSpacesOnLand(player);
         for (let land of lands) {
             if (land.bonus.indexOf(SpaceBonus.STEEL) !== -1 || land.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
@@ -31,15 +33,17 @@ describe("MiningArea", function () {
                 }
             }
         }
+
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
         expect(action instanceof SelectSpace).to.eq(true);
+        
         const titaniumSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1 && space.bonus.indexOf(SpaceBonus.STEEL) === -1);
         expect(titaniumSpace).not.to.eq(undefined);
         action.cb(titaniumSpace!);
         expect(titaniumSpace!.player).to.eq(player);
         expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.MINING_AREA);
-        expect(player.getProduction(Resources.TITANIUM)).to.eq(1); 
+        expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
+        
         const steelSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) === -1 && space.bonus.indexOf(SpaceBonus.STEEL) !== -1);
         expect(steelSpace).not.to.eq(undefined);
         action.cb(steelSpace!);

@@ -6,6 +6,7 @@ import { Game } from "../../src/Game";
 import { TileType } from "../../src/TileType";
 import { SpaceName } from "../../src/SpaceName";
 import { SpaceType } from "../../src/SpaceType";
+import { resetBoard } from "../TestingUtils";
 
 describe("LavaFlows", function () {
     let card : LavaFlows, player : Player, game : Game;
@@ -14,6 +15,7 @@ describe("LavaFlows", function () {
         card = new LavaFlows();
         player = new Player("test", Color.BLUE, false);
         game = new Game("foobar", [player, player], player);
+        resetBoard(game);
     });
 
     it("Can't play if no available spaces", function () {

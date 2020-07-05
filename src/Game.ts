@@ -1301,7 +1301,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
         && this.turmoil.rulingParty !== undefined 
         && this.turmoil.rulingParty.name === PartyName.MARS
         && spaceType !== SpaceType.COLONY
-        && this.phase === Phase.ACTION) {
+        && this.phase === Phase.ACTION
+        && !isWorldGov) {
           player.setResource(Resources.STEEL, 1);
       }      
 
@@ -1359,6 +1360,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         space.player = undefined;
       }
     }
+
     private tilePlaced(space: ISpace) {
       this.players.forEach((p) => {
         if (p.corporationCard !== undefined &&

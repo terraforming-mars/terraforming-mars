@@ -4,7 +4,7 @@ import { PartyName } from '../parties/PartyName';
 import { Game } from '../../Game';
 import { Resources } from '../../Resources';
 import { Turmoil } from '../Turmoil';
-import { SpaceType } from '../../SpaceType';
+import { TileType } from '../../TileType';
 
 export class MudSlides implements IGlobalEvent {
     public name = GlobalEventName.MUD_SLIDES;

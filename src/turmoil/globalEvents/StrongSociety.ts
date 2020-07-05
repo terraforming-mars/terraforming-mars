@@ -8,7 +8,7 @@ import { TileType } from '../../TileType';
 
 export class StrongSociety implements IGlobalEvent {
     public name = GlobalEventName.STRONG_SOCIETY;
-    public description = "Gain 2 M$ for each City tile (max 5) and influence.";
+    public description = "Gain 2 MC for each City tile (max 5) and influence.";
     public revealedDelegate = PartyName.REDS;
     public currentDelegate = PartyName.MARS;
     public resolve(game: Game, turmoil: Turmoil) {

@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { Color } from "../src/Color";
 import { Player } from "../src/Player";
@@ -9,6 +8,9 @@ import { Unity } from "../src/turmoil/parties/Unity";
 import { Greens } from "../src/turmoil/parties/Greens";
 import { MarsFirst } from "../src/turmoil/parties/MarsFirst";
 import { Phase } from "../src/Phase";
+import { OrOptions } from "../src/inputs/OrOptions";
+import { SelectSpace } from "../src/inputs/SelectSpace";
+import { SpaceBonus } from "../src/SpaceBonus";
 
 describe("Turmoil", function () {
     it("Should initialize with right defaults", function () {
@@ -223,4 +225,38 @@ describe("Turmoil", function () {
         }
     });
 
+    it("Does not give Mars First bonus for World Government terraforming", function () {
+        const player = new Player("test", Color.BLUE, false);
+        const gameOptions = {
+            draftVariant: false,
+            initialDraftVariant: false,
+            corporateEra: true,
+            randomMA: false,
+            preludeExtension: false,
+            venusNextExtension: true,
+            coloniesExtension: false,
+            turmoilExtension: true,
+            boardName: BoardName.ORIGINAL,
+            showOtherPlayersVP: false,
+            customCorporationsList: [],
+            solarPhaseOption: false,
+            promoCardsOption: false,
+            undoOption: false,
+            startingCorporations: 2,
+            soloTR: false,
+            clonedGamedId: undefined
+          } as GameOptions;
+
+        const game = new Game("foobar", [player,player], player, gameOptions);
+        game.turmoil!.rulingParty = new MarsFirst();
+        game.phase = Phase.ACTION;
+
+        player.worldGovernmentTerraforming(game);
+        const action = player.getWaitingFor() as OrOptions;
+        const placeOcean = action.options.find((option) => option.title === "Add an ocean") as SelectSpace;
+        const steelSpace = placeOcean.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1);
+
+        placeOcean.cb(steelSpace!);
+        expect(player.steel).to.eq(5);
+    });
 });

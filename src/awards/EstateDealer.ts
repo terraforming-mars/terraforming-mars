@@ -4,7 +4,7 @@ import { Game } from "../Game";
 import { TileType } from "../TileType";
 
 export class EstateDealer implements IAward {
-    public name: string = "EstateDealer";
+    public name: string = "Estate Dealer";
     public description: string = "Most tiles adjacent to ocean tiles"
     public getScore(player: Player, game: Game): number {
         return game.board.spaces

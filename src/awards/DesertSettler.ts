@@ -3,7 +3,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 
 export class DesertSettler implements IAward {
-    public name: string = "DesertSettler";
+    public name: string = "Desert Settler";
     public description: string = "Most tiles south of the equator (the four bottom rows)"
     public getScore(player: Player, game: Game): number {
         return game.board.spaces

@@ -1,27 +1,27 @@
-
 import { expect } from "chai";
 import { DustSeals } from "../../src/cards/DustSeals";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { TileType } from "../../src/TileType";
+import { maxOutOceans } from "../TestingUtils"
 
 describe("DustSeals", function () {
+    let card : DustSeals, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new DustSeals();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
     it("Can't play", function () {
-        const card = new DustSeals();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
-        for (let i = 0; i < 4; i++) {
-            oceanSpaces[i].tile = { tileType: TileType.OCEAN };
-        }
+        maxOutOceans(player, game, 4);
         expect(card.canPlay(player, game)).to.eq(false);
     });
+
     it("Should play", function () {
-        const card = new DustSeals();
-        const player = new Player("test", Color.BLUE, false);
-        const action = card.play();
-        expect(action).to.eq(undefined);
+        expect(card.canPlay(player, game)).to.eq(true);
+        card.play();
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });

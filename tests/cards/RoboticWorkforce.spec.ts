@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { RoboticWorkforce } from "../../src/cards/RoboticWorkforce";
 import { Color } from "../../src/Color";
@@ -12,11 +11,19 @@ import { Resources } from '../../src/Resources';
 import { UtopiaInvest } from "../../src/cards/turmoil/UtopiaInvest";
 
 describe("RoboticWorkforce", function () {
+    let card : RoboticWorkforce, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new RoboticWorkforce();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
+    it("Can't play if no building cards to copy", function () {
+        expect(card.canPlay(player, game)).to.eq(false);
+    });
+
     it("Should throw", function () {
-        const card = new RoboticWorkforce();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        expect(card.play(player, game)).to.eq(undefined);
         player.playedCards.push(new FoodFactory(), new BiomassCombustors(), card);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
@@ -24,21 +31,16 @@ describe("RoboticWorkforce", function () {
         expect(function () { action!.cb([new FuelFactory()]); }).to.throw("not enough energy production");
         expect(function () { action!.cb([new FoodFactory()]); }).to.throw("not enough plant production");
     });
+
     it("Should play", function () {
-        const card = new RoboticWorkforce();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(new NoctisFarming());
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         action!.cb([new NoctisFarming()]);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     });
+
     it("Should play with corporation cards", function () {
-        const card = new RoboticWorkforce();
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test2", Color.RED, false);
-        const game = new Game("foobar", [player,player2], player);
         const corporationCard = new UtopiaInvest();
         player.corporationCard = corporationCard;
 

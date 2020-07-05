@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { NuclearPower } from "../../src/cards/NuclearPower";
 import { Color } from "../../src/Color";
@@ -7,19 +6,22 @@ import { Game } from "../../src/Game";
 import { Resources } from '../../src/Resources';
 
 describe("NuclearPower", function () {
-    it("Should throw", function () {
-        const card = new NuclearPower();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        player.setProduction(Resources.MEGACREDITS,-4);
-        expect(function () { card.play(player, game); }).to.throw("Not enough mega credit production");
+    let card : NuclearPower, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new NuclearPower();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
     });
+
+    it("Can't play", function () {
+        player.setProduction(Resources.MEGACREDITS,-4);
+        expect(card.canPlay(player)).to.eq(false);
+    });
+
     it("Should play", function () {
-        const card = new NuclearPower();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(card.canPlay(player)).to.eq(true);
+        card.play(player, game);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-2);
         expect(player.getProduction(Resources.ENERGY)).to.eq(3);
     });

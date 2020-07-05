@@ -12,16 +12,17 @@ export class MudSlides implements IGlobalEvent {
     public revealedDelegate = PartyName.KELVINISTS;
     public currentDelegate = PartyName.GREENS;
     public resolve(game: Game, turmoil: Turmoil) {
-        
+
         game.getPlayers().forEach(player => {
-            const ocean = game.board.spaces.filter((space) => (space.player !== undefined && space.player === player && space.tile !== undefined) 
+            const tiles = game.board.spaces.filter((space) => (space.player !== undefined && space.player === player && space.tile !== undefined)
                                && game.board.getAdjacentSpaces(space)
-                               .filter((space) => space.spaceType === SpaceType.OCEAN).length > 0
+                               .filter((space) => (space.tile !== undefined &&
+                                           space.tile.tileType === TileType.OCEAN)).length > 0
                                ).length;
-            const amount = Math.min(5, ocean) - turmoil.getPlayerInfluence(player);
+            const amount = Math.min(5, tiles) - turmoil.getPlayerInfluence(player);
             if (amount > 0) {
                 player.setResource(Resources.MEGACREDITS, -4 * amount, game, undefined, true);
             }
-        });    
+        });
     }
-}    
+}

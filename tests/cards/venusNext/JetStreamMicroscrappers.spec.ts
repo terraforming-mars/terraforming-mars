@@ -6,15 +6,20 @@ import { OrOptions } from "../../../src/inputs/OrOptions";
 import { Game } from "../../../src/Game";
 
 describe("JetStreamMicroscrappers", function () {
+    let card : JetStreamMicroscrappers, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new JetStreamMicroscrappers();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
     it("Should play", function () {
-        const card = new JetStreamMicroscrappers();
         const action = card.play();
         expect(action).to.eq(undefined);
     });
+
     it("Should act", function () {
-        const card = new JetStreamMicroscrappers();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(card);
         player.titanium = 2;
 

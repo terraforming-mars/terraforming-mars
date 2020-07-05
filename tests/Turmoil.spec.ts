@@ -12,6 +12,7 @@ import { OrOptions } from "../src/inputs/OrOptions";
 import { SelectSpace } from "../src/inputs/SelectSpace";
 import { SpaceBonus } from "../src/SpaceBonus";
 import { Turmoil } from "../src/turmoil/Turmoil";
+import { resetBoard } from "./TestingUtils";
 
 describe("Turmoil", function () {
     let player : Player, game : Game, turmoil: Turmoil;
@@ -40,6 +41,7 @@ describe("Turmoil", function () {
         
           game = new Game("foobar", [player], player, gameOptions);
           turmoil = game.turmoil!;
+          resetBoard(game);
     });
 
     it("Should initialize with right defaults", function () {

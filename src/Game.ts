@@ -722,10 +722,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
             for (const dealt of foundCards) {
               if (foundCards.find((foundCard) => foundCard.name === dealt.name)) {
                 player.cardsInHand.push(dealt);
-              } else {
-                this.dealer.discard(dealt);
               }
             }
+
+            // discard all unpurchased cards
+            player.dealtProjectCards
+                .filter((card) => !foundCards.includes(card))
+                .forEach((card) => this.dealer.discard(card));
+
             return undefined;
           }, 10, 0
         )

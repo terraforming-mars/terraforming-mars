@@ -5,7 +5,6 @@ import { Player } from "../../Player";
 import { CardName } from '../../CardName';
 import { Resources } from "../../Resources";
 import { Game } from '../../Game';
-import { TileType } from '../../TileType';
 import { ResourceType } from '../../ResourceType';
 import { LogHelper } from "../../components/LogHelper";
 
@@ -20,8 +19,7 @@ export class UrbanDecomposers implements IProjectCard {
         game.colonies.forEach(colony => { 
           coloniesCount += colony.colonies.filter(owner => owner === player.id).length;
         });
-        const citiesCount = game.getSpaceCount(TileType.CITY, player) + game.getSpaceCount(TileType.CAPITAL, player);
-        return coloniesCount > 0 && citiesCount> 0;
+        return coloniesCount > 0 && player.getCitiesCount(game) > 0;
     }
 
     public play(player: Player, game: Game) {

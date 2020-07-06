@@ -3,13 +3,16 @@ import { Player } from '../Player';
 import { Resources } from '../Resources';
 import { ColonyName } from './ColonyName';
 import { Game } from '../Game';
+import { LogHelper } from '../components/LogHelper';
 
 export class Ganymede extends Colony implements IColony {
     public name = ColonyName.GANYMEDE;
     public description: string = "Plants";
     public trade(player: Player, game: Game): void {
         this.beforeTrade(this, player);
-        player.plants += this.trackPosition;
+        const qty = this.trackPosition;
+        player.plants += qty;
+        LogHelper.logGainStandardResource(game, player, Resources.PLANTS, qty);
         this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {

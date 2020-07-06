@@ -3,6 +3,7 @@ import { Player } from '../Player';
 import { Resources } from '../Resources';
 import { Game } from '../Game';
 import { ColonyName } from './ColonyName';
+import { LogHelper } from '../components/LogHelper';
 
 export class Europa extends Colony implements IColony {
     public name = ColonyName.EUROPA;
@@ -11,10 +12,13 @@ export class Europa extends Colony implements IColony {
         this.beforeTrade(this, player);
         if (this.trackPosition < 2) {
             player.setProduction(Resources.MEGACREDITS);
+            LogHelper.logGainProduction(game, player, Resources.MEGACREDITS);
         } else if (this.trackPosition < 4) {
             player.setProduction(Resources.ENERGY);
+            LogHelper.logGainProduction(game, player, Resources.ENERGY);
         } else {
             player.setProduction(Resources.PLANTS);
+            LogHelper.logGainProduction(game, player, Resources.PLANTS);
         }
         this.afterTrade(this, player, game);
     }

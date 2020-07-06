@@ -47,6 +47,7 @@ import { SelfReplicatingRobots } from "./cards/promo/SelfReplicatingRobots";
 import { Aridor } from "./cards/colonies/Aridor";
 import { MiningArea } from "./cards/MiningArea";
 import { MiningRights } from "./cards/MiningRights";
+import { Board } from "./Board";
 
 export type PlayerId = string;
 
@@ -350,7 +351,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
 
         // Victory points for greenery tiles adjacent to cities
-        if (space.tile && space.tile.tileType === TileType.CITY && space.player !== undefined && space.player.id === this.id) {
+        if (Board.isCitySpace(space) && space.player !== undefined && space.player.id === this.id) {
           const adjacent = game.board.getAdjacentSpaces(space);
           for (const adj of adjacent) {
             if (adj.tile && adj.tile.tileType === TileType.GREENERY) {
@@ -377,6 +378,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     public hasProtectedHabitats(): boolean {
       return this.cardIsInEffect(CardName.PROTECTED_HABITATS);
+    }
+
+    public getCitiesCount(game: Game) {
+      return game.getSpaceCount(TileType.CITY, this) + game.getSpaceCount(TileType.CAPITAL, this);
     }
         
     public getResourcesOnCard(card: ICard): number {

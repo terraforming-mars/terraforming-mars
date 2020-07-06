@@ -4,7 +4,7 @@ import { PartyName } from '../parties/PartyName';
 import { Game } from '../../Game';
 import { Resources } from '../../Resources';
 import { Turmoil } from '../Turmoil';
-import { TileType } from '../../TileType';
+import { Board } from '../../Board';
 
 export class Riots implements IGlobalEvent {
     public name = GlobalEventName.RIOTS;
@@ -14,8 +14,7 @@ export class Riots implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
         game.getPlayers().forEach(player => {
             const city = game.board.spaces.filter(
-                (space) => space.tile !== undefined &&
-                         space.tile.tileType === TileType.CITY &&
+                (space) => Board.isCitySpace(space) &&
                          space.player === player
             ).length;
             const amount = Math.min(5, city) - turmoil.getPlayerInfluence(player);

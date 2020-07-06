@@ -1,4 +1,3 @@
-
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -6,10 +5,10 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { ISpace } from "../ISpace";
 import { SelectSpace } from "../inputs/SelectSpace";
-import { TileType } from "../TileType";
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 import { CorporationName } from "../CorporationName";
+import { Board } from "../Board";
 
 export class ImmigrantCity implements IProjectCard {
     public cost: number = 13;
@@ -25,7 +24,7 @@ export class ImmigrantCity implements IProjectCard {
         return hasEnergyProduction && canDecreaseMcProduction && canPlaceCityOnMars;
     }
     public onTilePlaced(player: Player, space: ISpace) {
-        if (space.tile !== undefined && space.tile.tileType === TileType.CITY) {
+        if (Board.isCitySpace(space)) {
             if (player.shouldTriggerCardEffect) player.setProduction(Resources.MEGACREDITS);
             if (!player.isCorporation(CorporationName.THARSIS_REPUBLIC)) player.shouldTriggerCardEffect = true; // reset value
         }

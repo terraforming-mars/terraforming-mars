@@ -1,4 +1,3 @@
-
 import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
@@ -39,7 +38,10 @@ export class Capital implements IProjectCard {
           'Select space for special city tile',
           game.board.getAvailableSpacesForCity(player),
           (space: ISpace) => {
-            game.addCityTile(player, space.id, SpaceType.LAND, this.name);
+            game.addTile(player, SpaceType.LAND, space, {
+              tileType: TileType.CAPITAL,
+              card: this.name
+            });
             return undefined;
           }
       );

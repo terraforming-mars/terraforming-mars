@@ -8,6 +8,7 @@ import { TileType } from "../../src/TileType";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
 import { Resources } from '../../src/Resources';
 import { maxOutOceans } from "../TestingUtils";
+import { Board } from "../../src/Board";
 
 describe("Capital", function () {
     let card : Capital, player : Player, game : Game;
@@ -47,8 +48,27 @@ describe("Capital", function () {
         
         expect(citySpace.tile).not.to.eq(undefined);
         expect(citySpace.player).to.eq(player);
-        expect(citySpace.tile && citySpace.tile.tileType).to.eq(TileType.CITY);
+        expect(citySpace.tile && citySpace.tile.tileType).to.eq(TileType.CAPITAL);
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(0);
         expect(card.getVictoryPoints(player, game)).to.eq(1);
+    });
+
+    it("Capital special tile counts as a city", function () {
+        const space = game.board.getRandomCitySpace(0);
+        game.addTile(player, SpaceType.LAND, space, {
+            tileType: TileType.CAPITAL,
+            card: card.name
+        });
+
+        // cover main functions
+        expect(Board.isCitySpace(space)).to.eq(true);
+        expect(game.getCitiesInPlayOnMars()).to.eq(1);
+        expect(game.getCitiesInPlay()).to.eq(1);
+
+        // check VP
+        const greenerySpace = game.board.getAdjacentSpaces(space).find((space) => space.spaceType === SpaceType.LAND);
+        game.addGreenery(player, greenerySpace!.id);
+
+        expect(player.getVictoryPoints(game).city).to.eq(1); // 1 VP for Capital city
     });
 });

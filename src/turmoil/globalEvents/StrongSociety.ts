@@ -13,7 +13,8 @@ export class StrongSociety implements IGlobalEvent {
     public currentDelegate = PartyName.MARS;
     public resolve(game: Game, turmoil: Turmoil) {
         game.getPlayers().forEach(player => {
-            const amount = Math.min(5, game.getSpaceCount(TileType.CITY, player)) + turmoil.getPlayerInfluence(player);
+            const citiesCount = game.getSpaceCount(TileType.CITY, player) + game.getSpaceCount(TileType.CAPITAL, player);
+            const amount = Math.min(5, citiesCount) + turmoil.getPlayerInfluence(player);
             if (amount > 0) {
                 player.setResource(Resources.MEGACREDITS, amount * 2, game, undefined, true);
             }

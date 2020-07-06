@@ -1270,15 +1270,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public getCitiesInPlayOnMars(): number {
       return this.board.spaces.filter(
           (space) => space.tile !== undefined &&
-                   space.tile.tileType === TileType.CITY &&
-                   space.spaceType !== SpaceType.COLONY
+                   ((space.tile.tileType === TileType.CITY &&
+                   space.spaceType !== SpaceType.COLONY)
+                   || space.tile.tileType === TileType.CAPITAL)
       ).length;
     }
     public getCitiesInPlay(): number {
-      return this.board.spaces.filter(
-          (space) => space.tile !== undefined &&
-                   space.tile.tileType === TileType.CITY
-      ).length;
+      return this.board.spaces.filter((space) => Board.isCitySpace(space)).length;
     }
     public getSpaceCount(tileType: TileType, player: Player): number {
       return this.board.spaces.filter(

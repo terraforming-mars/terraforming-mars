@@ -20,7 +20,8 @@ export class UrbanDecomposers implements IProjectCard {
         game.colonies.forEach(colony => { 
           coloniesCount += colony.colonies.filter(owner => owner === player.id).length;
         });
-        return coloniesCount > 0 && game.getSpaceCount(TileType.CITY, player) > 0;
+        const citiesCount = game.getSpaceCount(TileType.CITY, player) + game.getSpaceCount(TileType.CAPITAL, player);
+        return coloniesCount > 0 && citiesCount> 0;
     }
 
     public play(player: Player, game: Game) {

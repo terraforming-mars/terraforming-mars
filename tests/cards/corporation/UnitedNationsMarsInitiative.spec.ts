@@ -25,7 +25,7 @@ describe("UnitedNationsMarsInitiative", function () {
     });
 
     it("Should act", function () {
-        player.setTerraformRating(21);
+        player.increaseTerraformRating(game);
         player.megaCredits = 3;
         expect(card.canAct(player)).to.eq(true);
 

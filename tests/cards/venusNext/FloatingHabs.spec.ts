@@ -6,19 +6,29 @@ import { SelectCard } from '../../../src/inputs/SelectCard';
 import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";
 import { ICard } from "../../../src/cards/ICard";
 import { Game } from "../../../src/Game";
+import { Research } from "../../../src/cards/Research";
 
 describe("FloatingHabs", function () {
-    it("Should play", function () {
-        const card = new FloatingHabs();
-        const player = new Player("test", Color.BLUE, false);
+    let card : FloatingHabs, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new FloatingHabs();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
+    it("Can't play", function () {
         expect(card.canPlay(player)).to.eq(false);
+    });
+
+    it("Should play", function () {
+        player.playedCards.push(new Research());
+        expect(card.canPlay(player)).to.eq(true);
         const action = card.play();
         expect(action).to.eq(undefined);
     });
+
     it("Should act - single target", function () {
-        const card = new FloatingHabs();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
         player.playedCards.push(card);
         player.megaCredits = 10;
 
@@ -26,17 +36,20 @@ describe("FloatingHabs", function () {
         expect(card.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(8);
     });
+
     it("Should act - multiple targets", function () {
-        const card = new FloatingHabs();
-        const card2 = new Dirigibles();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        player.playedCards.push(card, card2);
+        player.playedCards.push(card, new Dirigibles());
         player.megaCredits = 10;
         const action = card.action(player, game);
         expect(action instanceof SelectCard).to.eq(true);
+        
         (action as SelectCard<ICard>).cb([card]);
         expect(card.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(8);
+    });
+
+    it("Gives victory points", function () {
+        player.addResourceTo(card, 5);
+        expect(card.getVictoryPoints()).to.eq(2);
     });
 });

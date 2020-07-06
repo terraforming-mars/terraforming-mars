@@ -16,11 +16,8 @@ describe("CometForVenus", function () {
         player2.megaCredits = 10;
         player2.playedCards.push(card2);
 
-
-
         const play = card.play(player, game);
         expect(play).to.eq(undefined);
-
         expect(game.getVenusScaleLevel()).to.eq(2);
         expect(player2.megaCredits).to.eq(6);
     });

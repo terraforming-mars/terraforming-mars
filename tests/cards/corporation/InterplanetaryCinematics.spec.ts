@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { InterplanetaryCinematics } from "../../../src/cards/corporation/InterplanetaryCinematics";
 import { Color } from "../../../src/Color";
@@ -8,17 +7,20 @@ import { Bushes } from "../../../src/cards/Bushes";
 import { Virus } from "../../../src/cards/Virus";
 
 describe("InterplanetaryCinematics", function () {
+    let card : InterplanetaryCinematics, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new InterplanetaryCinematics();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
     it("Should play", function () {
-        const card = new InterplanetaryCinematics();
-        const player = new Player("test", Color.BLUE, false);
-        const action = card.play(player);
-        expect(action).to.eq(undefined);
+        card.play(player);
         expect(player.steel).to.eq(20);
     });
+
     it("Has onCardPlayed", function () {
-        const card = new InterplanetaryCinematics();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         player.corporationCard = card;
         card.onCardPlayed(player, game, new Bushes());
         expect(player.megaCredits).to.eq(0);

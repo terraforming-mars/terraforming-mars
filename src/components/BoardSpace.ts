@@ -10,6 +10,7 @@ let tileTypeToCssClass = new Map<TileType, string>([
     [TileType.LAVA_FLOWS, "lava_flows"],
     [TileType.MINING_AREA, "mining_area"],
     [TileType.MINING_RIGHTS, "mining_rights"],
+    [TileType.CAPITAL, "capital"],
     [TileType.MOHOLE_AREA, "mohole_area"],
     [TileType.NATURAL_PRESERVE, "natural_preserve"],
     [TileType.NUCLEAR_ZONE, "nuclear_zone"],
@@ -40,6 +41,8 @@ export const BoardSpace = Vue.component("board-space", {
                 ret = "Industrial Center"
             } else if (tileType === TileType.LAVA_FLOWS) {
                 ret = "Lava Flows"
+            } else if (tileType === TileType.CAPITAL) {
+                ret = "Capital"
             } else if (tileType === TileType.MINING_AREA) {
                 ret = "Mining Area"
             } else if (tileType === TileType.MINING_RIGHTS) {

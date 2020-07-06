@@ -11,11 +11,9 @@ export class Pristar implements CorporationCard, IResourceCard {
     public startingMegaCredits: number = 53;
     public resourceType: ResourceType = ResourceType.PRESERVATION;
     public resourceCount: number = 0;
-    public lastGenerationTR: number = 0;
 
     public play(player: Player) {
         player.decreaseTerraformRatingSteps(2);
-        this.lastGenerationTR = player.getTerraformRating();
         return undefined;
     }
 
@@ -24,11 +22,10 @@ export class Pristar implements CorporationCard, IResourceCard {
     }
 
     public onProductionPhase(player: Player) {
-        if (this.lastGenerationTR >= player.getTerraformRating()) {
+        if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
             player.megaCredits += 6;
             this.resourceCount++;
         }
-        this.lastGenerationTR = player.getTerraformRating();
         return undefined;
     }
 }

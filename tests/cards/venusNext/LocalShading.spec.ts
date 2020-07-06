@@ -6,14 +6,19 @@ import { OrOptions } from "../../../src/inputs/OrOptions";
 import { Resources } from "../../../src/Resources";
 
 describe("LocalShading", function () {
+    let card : LocalShading, player : Player;
+
+    beforeEach(function() {
+        card = new LocalShading();
+        player = new Player("test", Color.BLUE, false);
+    });
+
     it("Should play", function () {
-        const card = new LocalShading();
         const action = card.play();
         expect(action).to.eq(undefined);
     });
+
     it("Should act", function () {
-        const card = new LocalShading();
-        const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
         expect(card.canAct()).to.eq(true);
         card.action(player);

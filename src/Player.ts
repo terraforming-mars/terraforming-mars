@@ -48,6 +48,7 @@ import { Aridor } from "./cards/colonies/Aridor";
 import { MiningArea } from "./cards/MiningArea";
 import { MiningRights } from "./cards/MiningRights";
 import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
+import { Board } from "./Board";
 
 export type PlayerId = string;
 
@@ -82,6 +83,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private generationPlayed: Map<string, number> = new Map<string, number>();
     public actionsTakenThisRound: number = 0;
     private terraformRating: number = 20;
+    public hasIncreasedTerraformRatingThisGeneration: boolean = false;
     public terraformRatingAtGenerationStart: number = 20;
     public victoryPointsBreakdown = new VictoryPointsBreakdown();
     private actionsThisGeneration: Set<string> = new Set<string>();
@@ -129,6 +131,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public increaseTerraformRating(game: Game) {
       if (!game.turmoilExtension) {
         this.terraformRating++;
+        this.hasIncreasedTerraformRatingThisGeneration = true;
         return;
       }
 
@@ -141,6 +144,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           {
             game.addSelectHowToPayInterrupt(this, 3, false, false, "Select how to pay for TR increase");
             this.terraformRating++;
+            this.hasIncreasedTerraformRatingThisGeneration = true;
             return;
           } else {
             return;
@@ -357,7 +361,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
 
         // Victory points for greenery tiles adjacent to cities
-        if (space.tile && space.tile.tileType === TileType.CITY && space.player !== undefined && space.player.id === this.id) {
+        if (Board.isCitySpace(space) && space.player !== undefined && space.player.id === this.id) {
           const adjacent = game.board.getAdjacentSpaces(space);
           for (const adj of adjacent) {
             if (adj.tile && adj.tile.tileType === TileType.GREENERY) {
@@ -388,6 +392,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     public plantsAreProtected(): boolean {
       return this.hasProtectedHabitats() || this.cardIsInEffect(CardName.ASTEROID_DEFLECTION_SYSTEM);
+    }
+    
+    public getCitiesCount(game: Game) {
+      return game.getSpaceCount(TileType.CITY, this) + game.getSpaceCount(TileType.CAPITAL, this);
     }
         
     public getResourcesOnCard(card: ICard): number {

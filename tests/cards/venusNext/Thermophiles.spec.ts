@@ -8,22 +8,29 @@ import { SelectCard } from '../../../src/inputs/SelectCard';
 import { VenusianInsects } from "../../../src/cards/venusNext/VenusianInsects";
 
 describe("Thermophiles", function () {
-    it("Should play", function () {
-        const card = new Thermophiles();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
+    let card : Thermophiles, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new Thermophiles();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
+    it("Can't play", function () {
+        (game as any).venusScaleLevel = 4;
         expect(card.canPlay(player, game)).to.eq(false);
+    });
+
+    it("Should play", function () {
+        (game as any).venusScaleLevel = 6;
+        expect(card.canPlay(player, game)).to.eq(true);
         const action = card.play();
         expect(action).to.eq(undefined);
     });
-    it("Should act - multiple targets", function () {
-        const card = new Thermophiles();
-        const card2 = new VenusianInsects();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        card.play();
 
-        player.playedCards.push(card,card2);
+    it("Should act - multiple targets", function () {
+        card.play();
+        player.playedCards.push(card, new VenusianInsects());
 
         const action = card.action(player, game);
         expect(action instanceof SelectCard).to.eq(true);
@@ -39,12 +46,9 @@ describe("Thermophiles", function () {
         expect(card.resourceCount).to.eq(0);
         expect(game.getVenusScaleLevel()).to.eq(2);
     });
-    it("Should act - single target", function () {
-        const card = new Thermophiles();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        card.play();
 
+    it("Should act - single target", function () {
+        card.play();
         player.playedCards.push(card);
 
         const action = card.action(player, game);

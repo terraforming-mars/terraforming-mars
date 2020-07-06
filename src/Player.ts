@@ -82,6 +82,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private generationPlayed: Map<string, number> = new Map<string, number>();
     public actionsTakenThisRound: number = 0;
     private terraformRating: number = 20;
+    public hasIncreasedTerraformRatingThisGeneration: boolean = false;
     public terraformRatingAtGenerationStart: number = 20;
     public victoryPointsBreakdown = new VictoryPointsBreakdown();
     private actionsThisGeneration: Set<string> = new Set<string>();
@@ -129,6 +130,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public increaseTerraformRating(game: Game) {
       if (!game.turmoilExtension) {
         this.terraformRating++;
+        this.hasIncreasedTerraformRatingThisGeneration = true;
         return;
       }
 
@@ -141,6 +143,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           {
             game.addSelectHowToPayInterrupt(this, 3, false, false, "Select how to pay for TR increase");
             this.terraformRating++;
+            this.hasIncreasedTerraformRatingThisGeneration = true;
             return;
           } else {
             return;

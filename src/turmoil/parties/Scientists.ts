@@ -11,7 +11,7 @@ export class Scientists extends Party implements IParty {
 
     public rulingBonus(game: Game): void {
         game.getPlayers().forEach(player => {
-            let tagCount = player.getTagCount(Tags.SCIENCE);
+            let tagCount = player.getTagCount(Tags.SCIENCE, false, false);
             player.setResource(Resources.MEGACREDITS, tagCount);
         });
     }

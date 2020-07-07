@@ -39,8 +39,8 @@ describe("Comet", function () {
         maxOutOceans(player, game);
         player.plants = 8;
 
-        const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        card.play(player, game);
+        expect(game.interrupts.length).to.eq(0);
 
         expect(player.plants).to.eq(8); // self plants are not removed
         expect(game.getTemperature()).to.eq(-28);
@@ -52,5 +52,6 @@ describe("Comet", function () {
 
         var action = card.play(player, game);
         expect(action).to.eq(undefined);
+        expect(player.plants).to.eq(8);
     });
 });

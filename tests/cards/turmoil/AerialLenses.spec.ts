@@ -6,11 +6,16 @@ import { Resources } from "../../../src/Resources";
 import { BoardName } from '../../../src/BoardName';
 import { GameOptions, Game } from '../../../src/Game';
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
+import { OrOptions } from "../../../src/inputs/OrOptions";
 
 describe("AerialLenses", function () {
-    it("Should play", function () {
-        const card = new AerialLenses();
-        const player = new Player("test", Color.BLUE, false);
+    let card : AerialLenses, player : Player, player2 : Player, game : Game;
+
+    beforeEach(function() {
+        card = new AerialLenses();
+        player = new Player("test", Color.BLUE, false);
+        player2 = new Player("test2", Color.RED, false);
+        
         const gameOptions = {
             draftVariant: false,
             initialDraftVariant: false,
@@ -30,17 +35,32 @@ describe("AerialLenses", function () {
             soloTR: false,
             clonedGamedId: undefined
           } as GameOptions;
-        const game = new Game("foobar", [player,player], player, gameOptions);  
-        expect(card.canPlay(player, game)).to.eq(false);
-        if (game.turmoil !== undefined) {
-            let kelvinists = game.turmoil.getPartyByName(PartyName.KELVINISTS);
-            if (kelvinists !== undefined) {
-                kelvinists.delegates.push(player.id, player.id);
-                expect(card.canPlay(player, game)).to.eq(true); 
-            }
-        } 
+        
+          game = new Game("foobar", [player, player2], player, gameOptions);  
+    });
 
+    it("Can play", function () {
+        expect(card.canPlay(player, game)).to.eq(false);
+        
+        const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS)!;    
+        kelvinists.delegates.push(player.id, player.id);
+        expect(card.canPlay(player, game)).to.eq(true);
+    });
+
+    it("Should play without plants", function () {
         card.play(player, game);
         expect(player.getProduction(Resources.HEAT)).to.eq(2);
+        expect(game.interrupts.length).to.eq(0);
+    });
+
+    it("Should play with plants", function () {
+        player2.plants = 5;
+        card.play(player, game);
+        expect(player.getProduction(Resources.HEAT)).to.eq(2);
+        expect(game.interrupts.length).to.eq(1);
+
+        const orOptions = game.interrupts[0].playerInput as OrOptions;
+        orOptions.options[0].cb();
+        expect(player2.plants).to.eq(3);
     });
 });

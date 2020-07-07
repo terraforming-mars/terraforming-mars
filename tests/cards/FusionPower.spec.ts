@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { FusionPower } from "../../src/cards/FusionPower";
 import { Color } from "../../src/Color";
@@ -6,17 +5,22 @@ import { Player } from "../../src/Player";
 import { Resources } from '../../src/Resources';
 
 describe("FusionPower", function () {
+    let card : FusionPower, player : Player;
+
+    beforeEach(function() {
+        card = new FusionPower();
+        player = new Player("test", Color.BLUE, false);
+    });
+
     it("Can't play", function () {
-        const card = new FusionPower();
-        const player = new Player("test", Color.BLUE, false);
         expect(card.canPlay(player)).to.eq(false);
     });
+
     it("Should play", function () {
-        const card = new FusionPower();
-        const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card, card);
-        const action = card.play(player);
-        expect(action).to.eq(undefined);
+        expect(card.canPlay(player)).to.eq(true);
+
+        card.play(player);
         expect(player.getProduction(Resources.ENERGY)).to.eq(3);
     });
 });

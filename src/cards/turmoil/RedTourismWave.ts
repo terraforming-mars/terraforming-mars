@@ -21,7 +21,8 @@ export class RedTourismWave implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        let amount = game.board.getAvailableSpacesOnLand(player)
+        
+        let amount = game.board.getEmptySpaces()
             .filter((space) => game.board.getAdjacentSpaces(space).find((adj) => adj.tile !== undefined 
                 && adj.player === player) !== undefined).length;
         player.setResource(Resources.MEGACREDITS, amount);

@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { UndergroundDetonations } from "../../src/cards/UndergroundDetonations";
 import { Color } from "../../src/Color";
@@ -7,25 +6,24 @@ import { Game } from "../../src/Game";
 import { Resources } from '../../src/Resources';
 
 describe("UndergroundDetonations", function () {
-    it("Should throw", function () {
-        const card = new UndergroundDetonations();
-        const player = new Player("test", Color.BLUE, false);
+    let card : UndergroundDetonations, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new UndergroundDetonations();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
+    it("Can't act", function () {
+        player.megaCredits = 9;
         expect(card.canAct(player)).to.eq(false);
     });
-    it("Should play", function () {
-        const card = new UndergroundDetonations();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        const action = card.play(player, game);
-        expect(action).to.eq(undefined);
-    });
+
     it("Should act", function () {
-        const card = new UndergroundDetonations();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         player.megaCredits = 10;
-        const action = card.action(player, game);
-        expect(action).to.eq(undefined);
+        expect(card.canAct(player)).to.eq(true);
+        
+        card.action(player, game);
         expect(player.megaCredits).to.eq(0);
         expect(player.getProduction(Resources.HEAT)).to.eq(2);
     });

@@ -14,9 +14,8 @@ export class Recruitment implements IProjectCard {
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
 
-
         if (game.turmoil !== undefined) {
-            if (game.turmoil!.getDelegates(player.id) === 0){
+            if (!game.turmoil!.hasAvailableDelegates(player.id)) {
                 return false;
             }
 

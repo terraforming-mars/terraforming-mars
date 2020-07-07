@@ -11,14 +11,29 @@ import { Ants } from "../../../src/cards/Ants";
 import { SelectResourceCard } from "../../../src/interrupts/SelectResourceCard";
 
 describe("UrbanDecomposers", function () {
-    it("Should play without targets", function () {
-        const card = new UrbanDecomposers();
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test2", Color.RED, false);
-        const game = new Game("foobar", [player,player2], player);
+    let card : UrbanDecomposers, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new UrbanDecomposers();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
+    it("Can't play if player has no city", function () {
+        let colony = new Luna();
+        colony.colonies.push(player.id);
+        game.colonies.push(colony);
         expect(card.canPlay(player, game)).to.eq(false);
-        
-        // meet requirements
+    });
+
+    it("Can't play if player has no colony", function () {
+        const lands = game.board.getAvailableSpacesOnLand(player);
+        lands[0].player = player;
+        lands[0].tile = { tileType: TileType.CITY };
+        expect(card.canPlay(player, game)).to.eq(false);
+    });
+
+    it("Should play without targets", function () {
         const lands = game.board.getAvailableSpacesOnLand(player);
         lands[0].player = player;
         lands[0].tile = { tileType: TileType.CITY };
@@ -28,17 +43,11 @@ describe("UrbanDecomposers", function () {
         game.colonies.push(colony);
         
         expect(card.canPlay(player, game)).to.eq(true);
-
-        const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        card.play(player, game);
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     });
 
     it("Should play with single target", function () {
-        const card = new UrbanDecomposers();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-
         const decomposers = new Decomposers();
         player.playedCards.push(decomposers);
 
@@ -48,10 +57,6 @@ describe("UrbanDecomposers", function () {
     });
 
     it("Should play with multiple targets", function () {
-        const card = new UrbanDecomposers();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-
         const decomposers = new Decomposers();
         const ants = new Ants();
         player.playedCards.push(decomposers, ants);
@@ -62,7 +67,6 @@ describe("UrbanDecomposers", function () {
         // add two microbes to Ants
         let selectResourceInterrupt = game.interrupts[0] as SelectResourceCard;
         selectResourceInterrupt.playerInput.cb([ants]);
-
         expect(ants.resourceCount).to.eq(2);
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     });

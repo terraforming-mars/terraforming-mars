@@ -4,19 +4,20 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 
 describe("RegoPlastics", function () {
+    let card : RegoPlastics, player : Player;
+
+    beforeEach(function() {
+        card = new RegoPlastics();
+        player = new Player("test", Color.BLUE, false);
+    });
+
     it("Should play", function () {
-        const card = new RegoPlastics();
-        const player = new Player("test", Color.BLUE, false);
-        const play = card.play(player);
-        expect(play).to.eq(undefined);
+        card.play(player);
         expect(player.steelValue).to.eq(3);
     });
+
     it("Should give victory points", function () {
-        const card = new RegoPlastics();
-        const player = new Player("test", Color.BLUE, false);
-        const play = card.play(player);
-        expect(play).to.eq(undefined);
-        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
+        card.play(player);
+        expect(card.getVictoryPoints()).to.eq(1);
     });
 });

@@ -548,10 +548,23 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public addResourceProductionDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {
-      if (this.soloMode) {
-        return;
+      if (this.soloMode) return;
+
+      let candidates: Array<Player> = [];
+      if (resource === Resources.MEGACREDITS) {
+        candidates = this.getPlayers().filter((p) => p.getProduction(resource) >= count - 5);
+      } else {
+        candidates = this.getPlayers().filter((p) => p.getProduction(resource) >= count);
       }
-      this.addInterrupt(new SelectResourceProductionDecrease(player, this, resource, count, title));
+
+      if (candidates.length === 0) {
+        return;
+      } else if (candidates.length === 1) {
+        candidates[0].setProduction(resource, -count, this, player);
+        return undefined;
+      } else {
+        this.addInterrupt(new SelectResourceProductionDecrease(player, candidates, this, resource, count, title));
+      }
     }
 
     public addResourceDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {

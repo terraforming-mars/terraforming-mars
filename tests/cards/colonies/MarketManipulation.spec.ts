@@ -41,7 +41,7 @@ describe("MarketManipulation", function () {
         game.colonies.push(colony1);
         game.colonies.push(colony2);
         game.colonies.push(colony3);
-
+        game.coloniesExtension = true;
         let canPlay = card.canPlay(player, game);
         expect(canPlay).to.eq(false);
 

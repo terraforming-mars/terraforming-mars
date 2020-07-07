@@ -1,13 +1,12 @@
-
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
-import { TileType } from "../TileType";
 import { ISpace } from "../ISpace";
 import { ResourceType } from "../ResourceType";
 import { CardName} from "../CardName";
 import { IResourceCard } from './ICard';
+import { Board } from "../Board";
 
 
 export class Pets implements IProjectCard, IResourceCard {
@@ -22,7 +21,7 @@ export class Pets implements IProjectCard, IResourceCard {
         return Math.floor(this.resourceCount / 2);
     }
     public onTilePlaced(_player: Player, space: ISpace) {
-        if (space.tile !== undefined && space.tile.tileType === TileType.CITY) {
+        if (Board.isCitySpace(space)) {
             this.resourceCount++;
         }
     }

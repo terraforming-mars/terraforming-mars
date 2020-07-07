@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { LocalHeatTrapping } from "../../src/cards/LocalHeatTrapping";
 import { Color } from "../../src/Color";
@@ -10,28 +9,29 @@ import { Game } from "../../src/Game";
 import { Fish } from "../../src/cards/Fish";
 
 describe("LocalHeatTrapping", function () {
-    it("Can't play", function () {
-        const card = new LocalHeatTrapping();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+    let card : LocalHeatTrapping, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new LocalHeatTrapping();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
+    it("Can't play without 5 heat", function () {
         expect(card.canPlay(player, game)).to.eq(false);
     });
-    it("Should play - no animal targets", function () {
-        const card = new LocalHeatTrapping();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        player.heat = 5;
-        player.playedCards.push(card);
 
+    it("Should play - no animal targets", function () {
+        player.heat = 5;
+        expect(card.canPlay(player, game)).to.eq(true);
+        
         card.play(player, game);
+        player.playedCards.push(card);
         expect(player.plants).to.eq(4);
         expect(player.heat).to.eq(0);
     });
+
     it("Should play - single animal target", function () {
-        const card = new LocalHeatTrapping();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        
         player.heat = 5;
         const pets = new Pets();
         player.playedCards.push(card, pets);
@@ -47,11 +47,8 @@ describe("LocalHeatTrapping", function () {
         orOptions.options[1].cb();
         expect(player.getResourcesOnCard(pets)).to.eq(2);
     });
-    it("Should play - multiple animal targets", function () {
-        const card = new LocalHeatTrapping();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
 
+    it("Should play - multiple animal targets", function () {
         player.heat = 5;
         const pets = new Pets();
         const fish = new Fish();
@@ -62,17 +59,14 @@ describe("LocalHeatTrapping", function () {
         orOptions.options[1].cb([fish]);
         expect(player.getResourcesOnCard(fish)).to.eq(2);
     });
-    it("Can't play as Helion if not enough heat left after paying for card", function () {
-        const card = new LocalHeatTrapping();
-        const corp = new Helion();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
 
+    it("Can't play as Helion if not enough heat left after paying for card", function () {
+        const corp = new Helion();
         corp.play(player);
         player.corporationCard = corp;
+
         player.megaCredits = 0;
         player.heat = 5; // have to pay for card with 1 heat
-
         expect(card.canPlay(player, game)).to.eq(false);
     });
 });

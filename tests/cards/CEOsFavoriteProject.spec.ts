@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { CEOsFavoriteProject } from "../../src/cards/CEOsFavoriteProject";
 import { Color } from "../../src/Color";
@@ -11,29 +10,33 @@ import { SecurityFleet } from "../../src/cards/SecurityFleet";
 import { Game } from "../../src/Game";
 
 describe("CEOsFavoriteProject", function () {
+    let card : CEOsFavoriteProject, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new CEOsFavoriteProject();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
     it("Can't play", function () {
-        const card = new CEOsFavoriteProject();
-        const player = new Player("test", Color.BLUE, false);
         expect(card.canPlay(player)).to.eq(false);
     });
+
     it("Should play", function () {
-        const card = new CEOsFavoriteProject();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        
         const searchForLife = new SearchForLife();
         const securityFleet = new SecurityFleet();
-        player.playedCards.push(searchForLife, securityFleet);
-        player.addResourceTo(securityFleet);
         const decomposers = new Decomposers();
+        const birds = new Birds();
+
+        player.playedCards.push(searchForLife, securityFleet, decomposers, birds);
+        player.addResourceTo(securityFleet);
         player.addResourceTo(decomposers);
         player.addResourceTo(searchForLife);
-        const birds = new Birds();
-        player.playedCards.push(decomposers, birds);
         player.addResourceTo(birds);
+
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
         expect(action instanceof SelectCard).to.eq(true);
+
         action.cb([searchForLife]);
         expect(player.getResourcesOnCard(searchForLife)).to.eq(2);
         action.cb([birds]);

@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { DevelopmentCenter } from "../../src/cards/DevelopmentCenter";
 import { Color } from "../../src/Color";
@@ -6,23 +5,23 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 
 describe("DevelopmentCenter", function () {
+    let card : DevelopmentCenter, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new DevelopmentCenter();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
     it("Can't act", function () {
-        const card = new DevelopmentCenter();
-        const player = new Player("test", Color.BLUE, false);
         expect(card.canAct(player)).to.eq(false);
     });
-    it("Should play", function () {
-        const card = new DevelopmentCenter();
-        const action = card.play();
-        expect(action).to.eq(undefined);
-    });
+
     it("Should act", function () {
-        const card = new DevelopmentCenter();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         player.energy = 1;
-        const action = card.action(player, game);
-        expect(action).to.eq(undefined);
+        expect(card.canAct(player)).to.eq(true);
+
+        card.action(player, game);
         expect(player.energy).to.eq(0);
         expect(player.cardsInHand.length).to.eq(1);
     });

@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { LightningHarvest } from "../../src/cards/LightningHarvest";
 import { Color } from "../../src/Color";
@@ -8,21 +7,26 @@ import { GeneRepair } from "../../src/cards/GeneRepair";
 import { Resources } from '../../src/Resources';
 
 describe("LightningHarvest", function () {
-    it("Should throw", function () {
-        const card = new LightningHarvest();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        expect(function () { card.play(player, game); }).to.throw("Requires 3 science tags");
+    let card : LightningHarvest, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new LightningHarvest();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
     });
+
+    it("Can't play", function () {
+        expect(card.canPlay(player)).to.eq(false);
+    });
+
     it("Should play", function () {
-        const card = new LightningHarvest();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(new GeneRepair(), new GeneRepair(), new GeneRepair());
-        const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        expect(card.canPlay(player)).to.eq(true);
+
+        card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+        
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     });

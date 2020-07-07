@@ -2,18 +2,22 @@ import { IDatabase } from "./IDatabase";
 import { Game } from "../Game";
 import { IGameData } from './IDatabase';
 
-import { Client } from "pg";
+import { Client, ClientConfig } from "pg";
 
 export class PostgreSQL implements IDatabase {
     private client: Client;
     
     constructor() {
-        this.client = new Client({
-            connectionString: process.env.POSTGRES_HOST,
-            ssl: {
+        const config: ClientConfig = {
+            connectionString: process.env.POSTGRES_HOST
+        };
+        if (config.connectionString !== undefined && config.connectionString.startsWith("postgres")) {
+            config.ssl = {
+                // heroku uses self-signed certificates
                 rejectUnauthorized: false
-            }
-        });
+            };
+        }
+        this.client = new Client(config);
         this.client.connect();
         this.client.query("CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default 'running', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))", (err) => {
             if (err) {

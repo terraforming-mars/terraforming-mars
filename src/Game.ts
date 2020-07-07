@@ -54,6 +54,8 @@ import { CardName } from "./CardName";
 import { Turmoil } from "./turmoil/Turmoil";
 import { PartyName } from "./turmoil/parties/PartyName";
 import { IParty } from "./turmoil/parties/IParty";
+import { OrOptions } from "./inputs/OrOptions";
+import { SelectOption } from "./inputs/SelectOption";
 
 export interface GameOptions {
   draftVariant: boolean;
@@ -566,11 +568,41 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (candidates.length === 0) {
         return;
       } else if (candidates.length === 1) {
-        candidates[0].setResource(resource, -count, this, player);
-        return;
-      }
+        let qtyToRemove = Math.min(candidates[0].plants, count);
 
-      this.addInterrupt(new SelectResourceDecrease(player, candidates, this, resource, count, title));
+        if (resource === Resources.PLANTS) {
+          this.addInterrupt({ player, playerInput: new OrOptions(
+            new SelectOption("Remove " + qtyToRemove + " plants from " + candidates[0].name, () => {
+              candidates[0].setResource(resource, -qtyToRemove, this, player);
+              return undefined;
+            }),
+            new SelectOption("Do nothing", () => {
+              return undefined;
+            })
+          )});
+        } else {
+          candidates[0].setResource(resource, -qtyToRemove, this, player);
+          return;
+        }
+      } else {
+        if (resource === Resources.PLANTS) {
+          const removalOptions = candidates.map((candidate) => {
+            let qtyToRemove = Math.min(candidate.plants, count);
+  
+            return new SelectOption("Remove " + qtyToRemove + " plants from " + candidate.name, () => {
+              candidate.setResource(resource, -qtyToRemove, this, player);
+              return undefined;
+            })
+          });
+  
+          this.addInterrupt({ player, playerInput: new OrOptions(
+            ...removalOptions,
+            new SelectOption("Do nothing", () => { return undefined; })
+          )});
+        } else {
+          this.addInterrupt(new SelectResourceDecrease(player, candidates, this, resource, count, title));
+        }
+      }
     }
 
     public addInterrupt(interrupt: PlayerInterrupt): void {
@@ -721,10 +753,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
             for (const dealt of foundCards) {
               if (foundCards.find((foundCard) => foundCard.name === dealt.name)) {
                 player.cardsInHand.push(dealt);
-              } else {
-                this.dealer.discard(dealt);
               }
             }
+
+            // discard all unpurchased cards
+            player.dealtProjectCards
+                .filter((card) => !foundCards.includes(card))
+                .forEach((card) => this.dealer.discard(card));
+
             return undefined;
           }, 10, 0
         )
@@ -1267,15 +1303,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public getCitiesInPlayOnMars(): number {
       return this.board.spaces.filter(
           (space) => space.tile !== undefined &&
-                   space.tile.tileType === TileType.CITY &&
-                   space.spaceType !== SpaceType.COLONY
+                   ((space.tile.tileType === TileType.CITY &&
+                   space.spaceType !== SpaceType.COLONY)
+                   || space.tile.tileType === TileType.CAPITAL)
       ).length;
     }
     public getCitiesInPlay(): number {
-      return this.board.spaces.filter(
-          (space) => space.tile !== undefined &&
-                   space.tile.tileType === TileType.CITY
-      ).length;
+      return this.board.spaces.filter((space) => Board.isCitySpace(space)).length;
     }
     public getSpaceCount(tileType: TileType, player: Player): number {
       return this.board.spaces.filter(
@@ -1298,7 +1332,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
         && this.turmoil.rulingParty !== undefined 
         && this.turmoil.rulingParty.name === PartyName.MARS
         && spaceType !== SpaceType.COLONY
-        && this.phase === Phase.ACTION) {
+        && this.phase === Phase.ACTION
+        && !isWorldGov) {
           player.setResource(Resources.STEEL, 1);
       }      
 
@@ -1356,6 +1391,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         space.player = undefined;
       }
     }
+
     private tilePlaced(space: ISpace) {
       this.players.forEach((p) => {
         if (p.corporationCard !== undefined &&

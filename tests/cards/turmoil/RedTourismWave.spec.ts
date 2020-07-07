@@ -45,6 +45,6 @@ describe("RedTourismWave", function () {
         const lands = game.board.getAdjacentSpaces(tharsis).filter((space) => space.spaceType === SpaceType.LAND);
         game.addCityTile(player, lands[0].id);
         card.play(player, game);
-        expect(player.getResource(Resources.MEGACREDITS)).to.eq(2);
+        expect(player.getResource(Resources.MEGACREDITS)).to.eq(3); 
     });
 });

@@ -13,20 +13,24 @@ import { Player } from "../../../src/Player";
 import { Resources } from "../../../src/Resources";
 
 describe("InterplanetaryTrade", function () {
+    let card : InterplanetaryTrade, player : Player;
+
+    beforeEach(function() {
+        card = new InterplanetaryTrade();
+        player = new Player("test", Color.BLUE, false);
+    });
+
     it("Should play", function () {
-        const card = new InterplanetaryTrade();
-        const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(new AdvancedAlloys());
         player.playedCards.push(new SpaceElevator());
         player.playedCards.push(new MarsUniversity());
         player.playedCards.push(new ResearchCoordination());
-        const play = card.play(player);
-        expect(play).to.eq(undefined);
+        
+        card.play(player);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
     });
+
     it("Should only count wildcards up to the max amount of tag types existing", function () {
-        const card = new InterplanetaryTrade();
-        const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(new AdvancedAlloys());
         player.playedCards.push(new SpaceElevator());
         player.playedCards.push(new MarsUniversity());
@@ -35,23 +39,18 @@ describe("InterplanetaryTrade", function () {
         player.playedCards.push(new MaxwellBase());
         player.playedCards.push(new LunarBeam());
         player.playedCards.push(new ColonizerTrainingCamp());
-        const play = card.play(player);
-        expect(play).to.eq(undefined);
+        
+        card.play(player);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(11);
     });
+
     it("Should give victory points", function () {
-        const card = new InterplanetaryTrade();
-        const player = new Player("test", Color.BLUE, false);
-        const play = card.play(player);
-        expect(play).to.eq(undefined);
-        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
+        card.play(player);
+        expect(card.getVictoryPoints()).to.eq(1);
     });
+
     it("Should raise MC production by one", function () {
-        const card = new InterplanetaryTrade();
-        const player = new Player("test", Color.BLUE, false);
-        const play = card.play(player);
-        expect(play).to.eq(undefined);
+        card.play(player);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     });
 });

@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { CrediCor } from "../../../src/cards/corporation/CrediCor";
 import { Color } from "../../../src/Color";
@@ -9,20 +8,25 @@ import { Bushes } from "../../../src/cards/Bushes";
 import { GiantIceAsteroid } from "../../../src/cards/GiantIceAsteroid";
 
 describe("CrediCor", function () {
+    let card : CrediCor, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new CrediCor();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
     it("Should play", function () {
-        const card = new CrediCor();
-        const player = new Player("test", Color.BLUE, false);
         const action = card.play();
         expect(action).to.eq(undefined);
+
         card.onStandardProject(player, StandardProjectType.SELLING_PATENTS);
         card.onStandardProject(player, StandardProjectType.GREENERY);
         card.onStandardProject(player, StandardProjectType.CITY);
         expect(player.megaCredits).to.eq(8);
     });
+
     it("Runs onCardPlayed", function () {
-        const card = new CrediCor();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         player.corporationCard = card;
         expect(player.megaCredits).to.eq(0);
         card.onCardPlayed(player, game, new GiantIceAsteroid());

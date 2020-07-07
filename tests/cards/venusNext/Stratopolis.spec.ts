@@ -6,12 +6,16 @@ import { Game, GameOptions } from '../../../src/Game';
 import { Resources } from "../../../src/Resources";
 import { AerialMappers } from '../../../src/cards/venusNext/AerialMappers';
 import { SelectCard } from '../../../src/inputs/SelectCard';
-import { BoardName } from '../../../src/BoardName';
+import { Research } from "../../../src/cards/Research";
+import { BoardName } from "../../../src/BoardName";
 
 describe("Stratopolis", function () {
-    it("Should play", function () {
-        const card = new Stratopolis();
-        const player = new Player("test", Color.BLUE, false);
+    let card : Stratopolis, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new Stratopolis();
+        player = new Player("test", Color.BLUE, false);
+
         const gameOptions = {
             draftVariant: false,
             initialDraftVariant: false,
@@ -24,35 +28,38 @@ describe("Stratopolis", function () {
             boardName: BoardName.ORIGINAL,
             showOtherPlayersVP: false,
             customCorporationsList: [],
-            solarPhaseOption: true,
+            solarPhaseOption: false,
             promoCardsOption: false,
             undoOption: false,
             startingCorporations: 2,
             soloTR: false,
             clonedGamedId: undefined
           } as GameOptions;
-        const game = new Game("foobar", [player,player], player, gameOptions);
+        game = new Game("foobar", [player,player], player, gameOptions);
+    });
+
+    it("Can't play", function () {
         expect(card.canPlay(player)).to.eq(false);
-        const action = card.play(player,game);
-        expect(action).to.eq(undefined);
+    });
+
+    it("Should play", function () {
+        player.playedCards.push(new Research());
+        expect(card.canPlay(player)).to.eq(true);
+
+        card.play(player,game);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
     });
+
     it("Should act - single target", function () {
-        const card = new Stratopolis();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         player.playedCards.push(card);
         card.action(player, game);
         expect(player.getResourcesOnCard(card)).to.eq(2);
     });
+
     it("Should act - multiple targets", function () {
-        const card = new Stratopolis();
         const card2 = new AerialMappers();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        
-        player.playedCards.push(card);
-        player.playedCards.push(card2);
+        player.playedCards.push(card, card2);
+
         const action = card.action(player, game);
         expect(action instanceof SelectCard).to.eq(true);
         action!.cb([card2]);

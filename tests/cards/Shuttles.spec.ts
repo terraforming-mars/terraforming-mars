@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { Shuttles } from "../../src/cards/Shuttles";
 import { Color } from "../../src/Color";
@@ -9,30 +8,37 @@ import { TollStation } from "../../src/cards/TollStation";
 import { Resources } from '../../src/Resources';
 
 describe("Shuttles", function () {
-    it("Can't play", function () {
-        const card = new Shuttles();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        expect(card.canPlay(player, game)).to.eq(false);
-        game.increaseOxygenLevel(player, 2); // 2
-        game.increaseOxygenLevel(player, 2); // 4
-        game.increaseOxygenLevel(player, 1); // 5
+    let card : Shuttles, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new Shuttles();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
+    it("Can't play without energy production", function () {
+        (game as any).oxygenLevel = 5;
         expect(card.canPlay(player, game)).to.eq(false);
     });
-    it("Should play", function () {
-        const card = new Shuttles();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        game.increaseOxygenLevel(player, 2); // 2
-        game.increaseOxygenLevel(player, 2); // 4
-        game.increaseOxygenLevel(player, 1); // 5
+
+    it("Can't play if oxygen level too low", function () {
         player.setProduction(Resources.ENERGY);
-        const action = card.play(player);
-        expect(action).to.eq(undefined);
+        (game as any).oxygenLevel = 4;
+        expect(card.canPlay(player, game)).to.eq(false);
+    });
+
+    it("Should play", function () {
+        (game as any).oxygenLevel = 5;
+        player.setProduction(Resources.ENERGY);
+        expect(card.canPlay(player, game)).to.eq(true);
+
+        card.play(player);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
+        
         expect(card.getCardDiscount(player, game, new Bushes())).to.eq(0);
         expect(card.getCardDiscount(player, game, new TollStation())).to.eq(2);
     });

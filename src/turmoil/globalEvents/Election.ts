@@ -5,7 +5,7 @@ import { Game } from '../../Game';
 import { Tags } from '../../cards/Tags';
 import { Turmoil } from '../Turmoil';
 import { Player } from '../../Player';
-import { TileType } from '../../TileType';
+import { Board } from '../../Board';
 
 export class Election implements IGlobalEvent {
     public name = GlobalEventName.ELECTION;
@@ -64,9 +64,7 @@ export class Election implements IGlobalEvent {
         let score = player.getTagCount(Tags.STEEL, false, false) + turmoil.getPlayerInfluence(player);
 
         const cities = game.board.spaces.filter(
-            (space) => space.tile !== undefined &&
-                     space.tile.tileType === TileType.CITY &&
-                     space.player === player
+            (space) => Board.isCitySpace(space) && space.player === player
         ).length;
 
         return score + cities;

@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { MartianRails } from "../../src/cards/MartianRails";
 import { Color } from "../../src/Color";
@@ -6,25 +5,25 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 
 describe("MartianRails", function () {
-    it("Can't act", function () {
-        const card = new MartianRails();
-        const player = new Player("test", Color.BLUE, false);
+    let card : MartianRails, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new MartianRails();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
+    it("Can't act without energy", function () {
+        expect(card.play(player, game)).to.eq(undefined);
         expect(card.canAct(player)).to.eq(false);
     });
-    it("Should play", function () {
-        const card = new MartianRails();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        expect(card.play(player, game)).to.eq(undefined);
-    });
+
     it("Should act", function () {
-        const card = new MartianRails();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         player.energy = 1;
+        expect(card.canAct(player)).to.eq(true);
         game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
-        const action = card.action(player, game);
-        expect(action).to.eq(undefined);
+        
+        card.action(player, game);
         expect(player.energy).to.eq(0);
         expect(player.megaCredits).to.eq(1);
     });

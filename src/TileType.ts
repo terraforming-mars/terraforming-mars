@@ -4,6 +4,7 @@ export enum TileType {
     OCEAN,
     CITY,
     
+    CAPITAL,
     COMMERCIAL_DISTRICT,
     ECOLOGICAL_ZONE,
     INDUSTRIAL_CENTER,

@@ -4,8 +4,8 @@ import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { maxOutOceans } from "../TestingUtils"
-import { SelectPlayer } from "../../src/inputs/SelectPlayer";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
+import { OrOptions } from "../../src/inputs/OrOptions";
 
 describe("Comet", function () {
     let card : Comet, player : Player, player2 : Player, player3: Player, game : Game;
@@ -30,8 +30,8 @@ describe("Comet", function () {
         selectSpace.cb(selectSpace.availableSpaces[0]);
         expect(player.getTerraformRating()).to.eq(22);
 
-        const selectPlayer = game.interrupts[1].playerInput as SelectPlayer;
-        selectPlayer.cb(player2);
+        const orOptions = game.interrupts[1].playerInput as OrOptions;
+        orOptions.options[0].cb();
         expect(player2.plants).to.eq(0);
     });
 

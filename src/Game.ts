@@ -54,6 +54,8 @@ import { CardName } from "./CardName";
 import { Turmoil } from "./turmoil/Turmoil";
 import { PartyName } from "./turmoil/parties/PartyName";
 import { IParty } from "./turmoil/parties/IParty";
+import { OrOptions } from "./inputs/OrOptions";
+import { SelectOption } from "./inputs/SelectOption";
 
 export interface GameOptions {
   draftVariant: boolean;
@@ -566,11 +568,41 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (candidates.length === 0) {
         return;
       } else if (candidates.length === 1) {
-        candidates[0].setResource(resource, -count, this, player);
-        return;
-      }
+        let qtyToRemove = Math.min(candidates[0].plants, count);
 
-      this.addInterrupt(new SelectResourceDecrease(player, candidates, this, resource, count, title));
+        if (resource === Resources.PLANTS) {
+          this.addInterrupt({ player, playerInput: new OrOptions(
+            new SelectOption("Remove " + qtyToRemove + " plants from " + candidates[0].name, () => {
+              candidates[0].setResource(resource, -qtyToRemove, this, player);
+              return undefined;
+            }),
+            new SelectOption("Do nothing", () => {
+              return undefined;
+            })
+          )});
+        } else {
+          candidates[0].setResource(resource, -qtyToRemove, this, player);
+          return;
+        }
+      } else {
+        if (resource === Resources.PLANTS) {
+          const removalOptions = candidates.map((candidate) => {
+            let qtyToRemove = Math.min(candidate.plants, count);
+  
+            return new SelectOption("Remove " + qtyToRemove + " plants from " + candidate.name, () => {
+              candidate.setResource(resource, -qtyToRemove, this, player);
+              return undefined;
+            })
+          });
+  
+          this.addInterrupt({ player, playerInput: new OrOptions(
+            ...removalOptions,
+            new SelectOption("Do nothing", () => { return undefined; })
+          )});
+        } else {
+          this.addInterrupt(new SelectResourceDecrease(player, candidates, this, resource, count, title));
+        }
+      }
     }
 
     public addInterrupt(interrupt: PlayerInterrupt): void {

@@ -101,6 +101,10 @@ export abstract class Board {
         return this.spaces[Math.floor(Math.random() * 30) + offset];
     }
 
+    public getEmptySpaces(): Array<ISpace> {
+        return this.spaces.filter((space) => space.tile === undefined);
+    }
+
     public getAvailableSpacesForCity(player: Player): Array<ISpace> {
         // A city cannot be adjacent to another city
         return this.getAvailableSpacesOnLand(player).filter(

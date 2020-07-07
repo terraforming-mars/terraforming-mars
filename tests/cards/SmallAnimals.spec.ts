@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { SmallAnimals } from "../../src/cards/SmallAnimals";
 import { Color } from "../../src/Color";
@@ -7,28 +6,37 @@ import { Game } from "../../src/Game";
 import { Resources } from '../../src/Resources';
 
 describe("SmallAnimals", function () {
-    it("Can't play", function () {
-        const card = new SmallAnimals();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        expect(card.canPlay(player, game)).to.eq(false);
-        game.increaseOxygenLevel(player, 2); // 2
-        game.increaseOxygenLevel(player, 2); // 4
-        game.increaseOxygenLevel(player, 2); // 6
+    let card : SmallAnimals, player : Player, player2 : Player, game : Game;
+
+    beforeEach(function() {
+        card = new SmallAnimals();
+        player = new Player("test", Color.BLUE, false);
+        player2 = new Player("test2", Color.RED, false);
+        game = new Game("foobar", [player, player2], player);
+    });
+
+    it("Can't play if oxygen level too low", function () {
+        player2.setProduction(Resources.PLANTS);
+        (game as any).oxygenLevel = 5;
         expect(card.canPlay(player, game)).to.eq(false);
     });
+
+    it("Can't play if no one has plant production", function () {
+        (game as any).oxygenLevel = 6;
+        expect(card.canPlay(player, game)).to.eq(false);
+    });
+
     it("Should act", function () {
-        const card = new SmallAnimals();
-        const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
         card.action();
         expect(card.resourceCount).to.eq(1);
     });
+
     it("Should play", function () {
-        const card = new SmallAnimals();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        player.setProduction(Resources.PLANTS);
+        (game as any).oxygenLevel = 6;
+        player2.setProduction(Resources.PLANTS);
+        expect(card.canPlay(player, game)).to.eq(true);
+        
         player.playedCards.push(card);
         card.play(player, game);
 

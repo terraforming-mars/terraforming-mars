@@ -6,27 +6,23 @@ import { OrOptions } from "../../../src/inputs/OrOptions";
 import { Game } from '../../../src/Game';
 
 describe("TitanFloatingLaunchPad", function () {
-    it("Should play", function () {
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test2", Color.RED, false);
-        const game = new Game("foobar", [player,player2], player);
-        const card = new TitanFloatingLaunchPad();
-        const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+    let card : TitanFloatingLaunchPad, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new TitanFloatingLaunchPad();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
     });
+
     it("Should act", function () {
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test2", Color.RED, false);
-        const game = new Game("foobar", [player,player2], player);
-        const card = new TitanFloatingLaunchPad();
         player.playedCards.push(card);
         expect(card.canAct()).to.eq(true);
+
         player.addResourceTo(card, 7);
         const orOptions = card.action(player, game) as OrOptions;
-        expect(orOptions).not.to.eq(undefined);
         expect(orOptions instanceof OrOptions).to.eq(true);
-        orOptions.options[0].cb();
-        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
+
+        orOptions!.options[0].cb();
+        expect(card.getVictoryPoints()).to.eq(1);
     });
 });

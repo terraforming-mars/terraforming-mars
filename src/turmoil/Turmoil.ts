@@ -325,6 +325,11 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
         return delegates;
     }
 
+    // Check if player has delegates available
+    public hasAvailableDelegates(playerId: PlayerId | "NEUTRAL"): boolean {
+        return this.getDelegates(playerId) > 0;
+    }
+
     // Get Victory Points
     public getPlayerVictoryPoints(player: Player): number {
         let victory: number = 0;

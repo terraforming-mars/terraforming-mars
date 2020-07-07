@@ -14,3 +14,10 @@ export const maxOutOceans = function(player: Player, game: Game, toValue: number
         game.addOceanTile(player, space.id)
     }
 };
+
+export const resetBoard = function(game: Game): void {
+    game.board.spaces.forEach((space) => {
+        space.player = undefined;
+        space.tile = undefined;
+    });
+};

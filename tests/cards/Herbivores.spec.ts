@@ -27,10 +27,21 @@ describe("Herbivores", function () {
         expect(card.canPlay(player, game)).to.eq(false);
     });
 
-    it("Should play", function () {
+    it("Should play - auto select if single target", function () {
         (game as any).oxygenLevel = 8;
         player2.setProduction(Resources.PLANTS);
         expect(card.canPlay(player, game)).to.eq(true);
+
+        card.play(player, game);
+        expect(card.resourceCount).to.eq(1);
+
+        expect(game.interrupts.length).to.eq(0);
+        expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
+    });
+
+    it("Should play - multiple targets", function () {
+        player.setProduction(Resources.PLANTS);
+        player2.setProduction(Resources.PLANTS);
 
         card.play(player, game);
         expect(card.resourceCount).to.eq(1);

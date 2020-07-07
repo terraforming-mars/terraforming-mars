@@ -39,9 +39,15 @@ describe("SmallAnimals", function () {
         
         player.playedCards.push(card);
         card.play(player, game);
+        expect(game.interrupts.length).to.eq(0);
+        expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
+    });
 
-        expect(card.getVictoryPoints()).to.eq(0);
+    it("Gives victory points", function () {
         player.addResourceTo(card, 3);
         expect(card.getVictoryPoints()).to.eq(1);
+
+        player.addResourceTo(card);
+        expect(card.getVictoryPoints()).to.eq(2);
     });
 });

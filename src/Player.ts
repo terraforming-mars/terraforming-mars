@@ -149,7 +149,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             return;
           }; 
       }
+
       this.terraformRating++;
+      this.hasIncreasedTerraformRatingThisGeneration = true;
     }
 
     public increaseTerraformRatingSteps(value: number, game: Game) {

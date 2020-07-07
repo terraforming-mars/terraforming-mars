@@ -32,6 +32,10 @@ describe("Virus", function () {
         expect(player.getResourcesOnCard(birds)).to.eq(0);
 
         orOptions.options[1].cb();
+        expect(game.interrupts.length).to.eq(1);
+        
+        const action = game.interrupts[0].playerInput as OrOptions;
+        action.options[0].cb();
         expect(player.plants).to.eq(0);
     });
 

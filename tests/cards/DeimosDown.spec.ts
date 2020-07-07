@@ -3,6 +3,7 @@ import { DeimosDown } from "../../src/cards/DeimosDown";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
+import { OrOptions } from "../../src/inputs/OrOptions";
 
 describe("DeimosDown", function () {
     let card : DeimosDown, player : Player, player2 : Player, game : Game;
@@ -17,6 +18,10 @@ describe("DeimosDown", function () {
     it("Should play", function () {
         player2.plants = 8;
         card.play(player, game);
+
+        expect(game.interrupts.length).to.eq(1);
+        const orOptions = game.interrupts[0].playerInput as OrOptions;
+        orOptions.options[0].cb();
 
         expect(game.getTemperature()).to.eq(-24);
         expect(player.steel).to.eq(4);

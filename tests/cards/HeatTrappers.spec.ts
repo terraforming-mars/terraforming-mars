@@ -29,22 +29,35 @@ describe("HeatTrappers", function () {
         expect(player.getProduction(Resources.ENERGY)).to.eq(1); // Incremented
     });
 
-    it("Should play", function () {
-        player2.setProduction(Resources.HEAT,7);
+    it("Should play - auto select if single target", function () {
+        player2.setProduction(Resources.HEAT, 7);
         expect(card.canPlay(player, game)).to.eq(true);
         card.play(player, game);
+        expect(player.getProduction(Resources.ENERGY)).to.eq(1);
+
+        expect(game.interrupts.length).to.eq(0);
+        expect(player2.getProduction(Resources.HEAT)).to.eq(5);
+    });
+
+    it("Should play - multiple targets", function () {
+        player.setProduction(Resources.HEAT, 3);
+        player2.setProduction(Resources.HEAT, 7);
+        card.play(player, game);
+
         expect(player.getProduction(Resources.ENERGY)).to.eq(1);
 
         expect(game.interrupts.length).to.eq(1);
         const selectPlayer = game.interrupts[0].playerInput as SelectPlayer;
         selectPlayer.cb(player2);
         expect(player2.getProduction(Resources.HEAT)).to.eq(5);
-
-        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
     });
 
     it("Can't play if nobody has heat production", function () {
         expect(card.canPlay(player, game)).to.eq(false);
+    });
+
+    it("Gives victory points", function () {
+        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
     });
 });

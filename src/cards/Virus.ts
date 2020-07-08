@@ -22,7 +22,7 @@ export class Virus implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         return this.getPossibleTargetCards(player, game).length +
             game.getPlayers().filter((p) => 
-                ((p.id !== player.id && !p.hasProtectedHabitats()) 
+                ((p.id !== player.id && !p.plantsAreProtected()) 
                 || p.id === player.id)
                 && p.plants > 0).length > 0;
     }
@@ -40,7 +40,7 @@ export class Virus implements IProjectCard {
         if (game.getPlayers().length === 1)  return undefined;
         const cards = this.getPossibleTargetCards(player, game);
         const playersWithPlants: number = game.getPlayers().filter((p) => 
-            ((p.id !== player.id && !p.hasProtectedHabitats()) 
+            ((p.id !== player.id && !p.plantsAreProtected()) 
             || p.id === player.id)
             && p.plants > 0).length;
         const remove5Plants = () => {

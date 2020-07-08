@@ -26,7 +26,7 @@ export class RegolithEaters implements IActionCard, IProjectCard, IResourceCard 
     }
     public action(player: Player, game: Game) {
         if (this.resourceCount < 2) {
-            this.resourceCount++;
+            player.addResourceTo(this);
             LogHelper.logAddResource(game, player, this);
             return undefined;
         }
@@ -37,7 +37,7 @@ export class RegolithEaters implements IActionCard, IProjectCard, IResourceCard 
                 return game.increaseOxygenLevel(player, 1);
             }),
             new SelectOption("Add 1 microbe to this card", () => {
-                this.resourceCount++;
+                player.addResourceTo(this);
                 LogHelper.logAddResource(game, player, this);
                 return undefined;
             })

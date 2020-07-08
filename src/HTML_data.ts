@@ -6149,6 +6149,28 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
+[CardName.ASTRODRILL,`
+      <div class="tag tag1 tag-space"></div>
+      <div class="corporationLabel">CORPORATION</div>
+      ##RESOURCES##
+      <div class="promo-icon corporation-icon"></div>
+      <div class="contentCorporation">
+        <div class="corporationEffectBox" style="height:160px;margin-top:130px">
+          <div class="corporationEffectBoxLabel" >ACTION</div>
+          <div class="red-arrow"></div> <div class="asteroid resource">A</div> * / <div class="resource " style="background:white;">?</div> OR <br>
+          <div class="asteroid resource">A</div><div class="red-arrow"></div> 3 <div class="resource titanium"></div>
+          <div class="description" style="text-align:center;">
+            (Action: Add an asteroid resource to ANY card and gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.)<br>
+          </div>
+        </div>
+        <div class="astrodrill">Astrodrill</div>
+        <div class="resource money" style="margin:3px 40px 0px 50px">38</div>
+        3 <div class="asteroid resource">A</div>
+        <div class="description" style="text-align:center">
+          (You start with 38 MC and 3 asteroid resources.)
+        </div>
+      </div>
+`],
 [CardName.ALLIED_BANKS,`
       <div class="title background-color-prelude">Allied Banks</div>
       <div class="tag tag1 tag-earth"></div>
@@ -6741,6 +6763,391 @@ export const HTML_DATA: Map<string, string> =
             Gain 4 titanium.)
         </div>
     </div>
+`],
+[CardName.ASTEROID_HOLLOWING, `
+    <div class="title background-color-active">Asteroid Hollowing</div>
+    <div class="price ">16</div>
+    ##RESOURCES##
+    <div class="tag tag1 tag-space "></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content ">
+        <div class="points" style="line-height:45px;vertical-align:middle">1/2<div class="asteroid resource" style="vertical-align:middle;margin-left:5px">A</div></div>
+        <div class="resource titanium"></div>
+        <span class="red-arrow"></span>
+        <div class="asteroid resource" style="margin-right:5px">A</div>
+        <div class="production-box"><div  class="production money">1</div></div>
+        <div class="description">
+            (Action: Spend 1 titanium to add 1 asteroid resource here and increase MC production 1 step.)
+            <br><br>(1 VP per 2 asteroid resources on this card.)
+        </div>
+      </div>
+    </div>
+`],
+[CardName.ADVERTISING,`
+      <div class="title background-color-active">Advertising</div>
+      <div class="price ">4</div>
+      <div class="tag tag1 tag-earth"></div>
+      <div class="promo-icon project-icon"></div>
+      <div class="content ">
+        <div class="resource money">20</div>* : <div class="production-box"><div class="production money">1</div></div></div>
+        <div class="description" style="text-align:center;margin:0px 10px;">
+          (Effect: When you play a card with a basic cost of 20 MC or more, increase your MC production 1 step.)
+        </div>
+      </div>
+`],
+[CardName.PHARMACY_UNION,`
+    <div class="tag tag1 tag-microbe"></div>
+    <div class="tag tag2 tag-microbe"></div>
+    <div class="corporationLabel">Corporation</div>
+    ##RESOURCES##
+    <div class="venus-icon corporation-icon"></div>
+    <div class="contentCorporation">
+
+      <div class="corp-logo">Pharmacy Union</div>
+
+      <div class="card-effect-icons">
+        <div class="resource money">54</div>
+        <div class="resource card">
+          <div class="card-icon card-icon-science"></div>
+        </div>
+      </div>
+
+      <div class="description card-effect-text">
+        (You start with 54 MC. As your first action, draw a Science card.)
+      </div>
+
+      <div class="corporationEffectBox">
+        <div class="corporationEffectBoxLabel">Effect</div>
+        <div class="resource-tag tag-microbe red-outline"></div> : <div class="resource disease">D</div><div class="money resource">-4</div>
+        <div class="corp-effectrow2">
+          <div class="resource-tag tag-science"></div> : - <div class="resource disease">D</div><div class="rating tile"></div> / 3 <div class="rating tile"></div>
+        </div>
+        <div class="description">
+          (Effect: When ANY microbe tag is played, add a disease here and lose 4 MC. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR)
+        </div>
+      </div>
+    </div>
+
+`],
+[CardName.COMET_AIMING, `
+    <div class="title background-color-active">Comet Aiming</div>
+    <div class="price ">17</div>
+    ##RESOURCES##
+    <div class="tag tag1 tag-space "></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content ">
+        <div class="resource titanium"></div>
+        <span class="red-arrow"></span>
+        <div class="asteroid resource">A</div>*
+        <br>
+        OR <div class="asteroid resource">A</div>
+        <span class="red-arrow"></span>
+        <div class="tile ocean-tile"></div>
+        <div class="description">
+            (Action: Spend 1 titanium to add 1 asteroid resource to ANY card, or remove 1 asteroid resource here to place an ocean tile.)
+        </div>
+      </div>
+    </div>
+`],
+[CardName.CUTTING_EDGE_TECHNOLOGY,`
+            <div class="title background-color-active">Cutting Edge Technology</div>
+            <div class="price">11</div>
+            <div class="tag tag1 tag-science"></div>
+            <div class="promo-icon project-icon"></div>
+            <div class="content">
+                <div class="points points-big">1</div>
+                <div class="resource card">
+                <div class="card-icon requirements"></div></div>
+                 : <div class="money resource">-2</div>
+                <div class="description">
+                    (Effect: When playing a card with a requirement, you pay 2 MC less for it.)
+                </div>
+            </div>
+`],
+[CardName.CRASH_SITE_CLEANUP, `
+    <div class="title background-color-events">Crash Site Cleanup</div>
+    <div class="price">4</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+        <div class="points points-big">1</div>
+        <div class="requirements">- <div class="resource plant red-outline"></div></div>
+        <div class="resource titanium"></div> OR 2 <div class="resource steel"></div>
+        <div class="description">
+            (Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.)
+        </div>
+    </div>
+`],
+[CardName.DIRECTED_IMPACTORS, `
+    <div class="title background-color-active">Directed Impactors</div>
+    <div class="price">8</div>
+    ##RESOURCES##
+    <div class="tag tag1 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+        <div class=" money resource">6</div> (<span class="titanium"></span>)
+        <span class="red-arrow"></span>
+        <div class="asteroid resource">A</div>*
+        <br>
+        OR <div class="asteroid resource">A</div>
+        <span class="red-arrow"></span>
+        <div class="tile temperature-tile"></div>
+        <div class="description">
+            (Action: Spend 6 MC to add 1 asteroid resource to ANY card (titanium may be used), or remove 1 asteroid resource here to raise temperature 1 step.)
+        </div>
+      </div>
+    </div>
+`],
+[CardName.FIELD_CAPPED_CITY,`
+        <div class="title background-color-automated">Field-Capped City</div>
+        <div class="price">29</div>
+        <div class="tag tag1 tag-building"></div>
+        <div class="tag tag2 tag-city"></div>
+        <div class="tag tag3 tag-power"></div>
+        <div class="promo-icon project-icon"></div>
+        <div class="content">
+            <div class="production-box production-box-size1a">
+            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="money production">2</div>
+            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="energy production"></div>
+            </div>
+            <div class="tile city-tile"></div><br>
+            <div class="plant resource"></div><div class="plant resource"></div><div class="plant resource"></div>
+            <div class="description">
+                <div>(Increase your MC production 2 steps and increase your Energy production 1 step. Gain 3 plants, and place a City tile.)</div>
+            </div>
+        </div>
+`],
+[CardName.MAGNETIC_SHIELD,`
+    <div class="title background-color-automated">Magnetic Shield</div>
+    <div class="price">26</div>
+    <div class="tag tag1 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+        <div class="requirements">2 Power</div>
+        4 <div class="tile rating"></div>
+        <div class="description">
+            (Requires 2 Power tags. Raise your TR 4 steps.)
+        </div>
+    </div>
+`],
+[CardName.MELTWORKS,`
+    <div class="title background-color-active">Meltworks</div>
+    <div class="price">4</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content ">
+      5 <span class="heat resource"></span> <span class="red-arrow "></span>
+      <div class="steel resource"></div><div class="steel resource"></div><div class="steel resource"></div>
+      <div class="description ">
+        (Action: Spend 5 heat to gain 3 steel.)
+      </div>
+    </div>
+`],
+[CardName.MOHOLE_LAKE,`
+    <div class="title background-color-active">Mohole Lake</div>
+    <div class="price">31</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+        <div class="red-arrow"></div><div class="microbe resource"></div>* OR <div class="animal resource"></div>*
+        <div class="description">
+          (Action: Add a microbe or animal to ANOTHER card.)
+        </div>
+        <br>
+        <div class="tile temperature-tile"></div><div class="tile ocean-tile"></div>
+        <div class="plant resource"></div><div class="plant resource"></div><div class="plant resource"></div>
+        <div class="description">
+          (Place an ocean tile and raise temperature 1 step. Gain 3 Plants.)
+        </div>
+    </div>
+`],
+[CardName.DIVERSITY_SUPPORT,`
+        <div class="title background-color-events">Diversity Support</div>
+        <div class="price">1</div>
+        <div class="tag tag1 tag-event"></div>
+        <div class="promo-icon project-icon"></div>
+        <div class="content">
+            <div class="requirements">9 Resources</div>
+            <div class="tile rating"></div>
+            <div class="description ">
+                (Requires that you have 9 different types of resources. Raise your terraform rating 1 step.)
+            </div>
+        </div>
+`],
+[CardName.TOPSOIL_CONTRACT, `
+    <div class="title background-color-active">Topsoil Contract</div>
+    <div class="price">8</div>
+    <div class="tag tag1 tag-microbe"></div>
+    <div class="tag tag2 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      <div class="microbe resource"></div>* : <div class="money resource">1</div>
+      <div class="description">
+        (Effect: When you gain a microbe to ANY CARD, gain 1 MC.)
+      </div>
+      <br><br>
+      <div class="plant resource"></div><div class="plant resource"></div><div class="plant resource"></div>
+      <div class="description">
+        (Gain 3 plants.)
+      </div>
+    </div>
+`],
+[CardName.IMPORTED_NUTRIENTS,`
+    <div class="title background-color-events">Imported Nutrients</div>
+    <div class="price">14</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="tag tag2 tag-space"></div>
+    <div class="tag tag3 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      4 <div class="plant resource"></div> 4 <div class="microbe resource"></div>*
+      <div class="description">
+        (Gain 4 Plants and add 4 Microbes to ANOTHER card.)
+      </div>
+    </div>
+`],
+[CardName.ASTEROID_DEFLECTION_SYSTEM,`
+    <div class="title background-color-active">Asteroid Deflection System</div>
+    <div class="price">13</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="tag tag2 tag-space"></div>
+    <div class="tag tag3 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      <div class="points">1/<div class="asteroid resource">A</div></div>
+      <span class="red-arrow"></span><div class="resource card"></div>*
+      <div class="resource-tag tag-space"></div> : <div class="asteroid resource">A</div>
+      <div class="description">
+        (Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid resource here.)
+      </div>
+      <br>
+      <div class="description effect">
+        OPPONENTS MAY NOT REMOVE YOUR PLANTS
+      </div>
+      <br>
+      <div class="production-box production-box-size1a">
+        <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div><br>
+      </div>
+      <div class="description bottom" >
+        (Decrease your energy<br>
+        production 1 step. 1 VP per<br>
+        asteroid on this card.)
+      </div>
+    </div>
+`],
+[CardName.JOVIAN_EMBASSY,`
+<div class="title background-color-automated">Jovian Embassy</div>
+<div class="price">14</div>
+<div class="tag tag1 tag-building"></div>
+<div class="tag tag2 tag-jovian"></div>
+<div class="promo-icon project-icon"></div>
+<div class="content">
+    <div class="points points-big">1</div>
+    <div class="tile rating"></div>
+    <div class="description ">
+        (Raise your terraform rating 1 step.)
+    </div>
+</div>
+`],
+[CardName.SUB_CRUST_MEASUREMENTS,`
+    <div class="title background-color-active">Sub-Crust Measurements</div>
+    <div class="price">20</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="tag tag2 tag-science"></div>
+    <div class="tag tag3 tag-earth"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      <div class="points points-big">2</div>
+      <div class="requirements">2 Science</div>
+      <span class="red-arrow"></span> <span class="card resource"></span>
+      <div class="description">
+        (Action: Draw a card.)
+      </div>
+      <br>
+      <div class="description">
+        (Requires 2 Science tags.)
+      </div>
+    </div>
+`],
+[CardName.POTATOES,`
+      <div class="title background-color-automated">Potatoes</div>
+      <div class="price">2</div>
+      <div class="tag tag1 tag-plant"></div>
+      <div class="promo-icon project-icon"></div>
+      <div class="content">
+        -  <div class="plant resource"></div><div class="plant resource"></div>
+        &nbsp;&nbsp;
+        <div class="production-box">
+          <div class="money production">2</div>
+        </div>
+        <div class="description">
+          (Requires that you lose 2 plants. Increase your MC production 2 steps.)
+        </div>
+      </div>
+`],
+[CardName.MEAT_INDUSTRY, `
+    <div class="title background-color-active">Meat Industry</div>
+    <div class="price">5</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      <div class="animal resource"></div>* : <div class="money resource">2</div>
+      <div class="description">
+        (Effect: When you gain an animal to ANY CARD, gain 2 MC.)
+      </div>
+    </div>
+`],
+[CardName.DEIMOS_DOWN_PROMO,`
+    <div class="title background-color-events">Deimos Down</div>
+    <div class="price">31</div>
+    <div class="tag tag1 tag-event"></div>
+    <div class="tag tag2 tag-space"></div>
+    <div class="promo-icon project-icon"></div>
+    <div class="content">
+      <div class="tile temperature-tile"></div>
+      <div class="tile temperature-tile"></div>
+      <div class="tile temperature-tile"></div><br>
+      <div class="tile special-tile">&#x274B;</div>*&nbsp;
+      4 <div class=" steel resource"></div>&nbsp;
+      -6 <div class="resource plant red-outline"></div>
+      <div class="description">
+        (Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.)
+      </div>
+    </div>
+`],
+[CardName.GREAT_DAM_PROMO,`
+      <div class="title background-color-automated">Great Dam</div>
+      <div class="price">15</div>
+      <div class="tag tag1 tag-building"></div>
+      <div class="tag tag2 tag-power"></div>
+      <div class="promo-icon project-icon"></div>
+      <div class="content">
+        <div class="points points-big">1</div>
+        <div class="requirements">4 Oceans</div>
+        <div class="production-box production-box-size2">
+          <div class="energy production"></div><div class="energy production"></div>
+        </div>
+        *&nbsp;<div class="tile special-tile">&#x23DA;</div>
+        <div class="description">
+          (Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.)
+        </div>
+      </div>
+`],
+[CardName.MAGNETIC_FIELD_GENERATORS_PROMO,`
+        <div class="title background-color-automated">Magnetic Field Generators</div>
+        <div class="price">22</div>
+        <div class="tag tag1 tag-building"></div>
+        <div class="promo-icon project-icon"></div>
+        <div class="content">
+          <div class="production-box production-box-size2a">
+            <div class="production-prefix">&#x2796;&#xFE0E;</div> 4 <div class="energy production"></div><br>
+            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="plant production"></div><div class="plant production"></div>
+          </div> <br>
+           3 <div class="tile rating"></div>*&nbsp;&nbsp;<div class="tile special-tile"><span class="tile-icon">&#x25C9;</span></div>
+          <div class="description">
+            (Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.)
+          </div>
+        </div>
 `],
 [CardName.MERCURIAN_ALLOYS,`
     <div class="title background-color-active">Mercurian Alloys</div>

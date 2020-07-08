@@ -36,7 +36,7 @@ describe("SubZeroSaltFish", function () {
     });
 
     it("Should act", function () {
-        card.action();
+        card.action(player);
         expect(card.resourceCount).to.eq(1);
     });
 });

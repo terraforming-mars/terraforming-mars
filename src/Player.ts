@@ -47,6 +47,7 @@ import { SelfReplicatingRobots } from "./cards/promo/SelfReplicatingRobots";
 import { Aridor } from "./cards/colonies/Aridor";
 import { MiningArea } from "./cards/MiningArea";
 import { MiningRights } from "./cards/MiningRights";
+import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
 import { Board } from "./Board";
 
 export type PlayerId = string;
@@ -225,6 +226,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer.id) === -1) {
           this.removingPlayers.push(fromPlayer.id);
         }
+
+        // Crash site cleanup hook
+        if (fromPlayer !== this && resource === Resources.PLANTS) {
+          game.someoneHasRemovedOtherPlayersPlants = true;
+        }
+
         game.log(
           LogMessageType.DEFAULT,
           "${0}'s ${1} amount ${2} by ${3} by ${4}",
@@ -385,6 +392,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return this.cardIsInEffect(CardName.PROTECTED_HABITATS);
     }
 
+    public plantsAreProtected(): boolean {
+      return this.hasProtectedHabitats() || this.cardIsInEffect(CardName.ASTEROID_DEFLECTION_SYSTEM);
+    }
+    
     public getCitiesCount(game: Game) {
       return game.getSpaceCount(TileType.CITY, this) + game.getSpaceCount(TileType.CAPITAL, this);
     }
@@ -448,6 +459,16 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public addResourceTo(card: ICard, count: number = 1): void {
       if (card.resourceCount !== undefined) {
         card.resourceCount += count;
+      }
+
+      // Topsoil contract hook
+      if (card.resourceType === ResourceType.MICROBE && this.playedCards.map((card) => card.name).includes(CardName.TOPSOIL_CONTRACT)) {
+        this.megaCredits += count;
+      }
+
+      // Meat industry hook
+      if (card.resourceType === ResourceType.ANIMAL && this.playedCards.map((card) => card.name).includes(CardName.MEAT_INDUSTRY)) {
+        this.megaCredits += count * 2;
       }
     }
 
@@ -518,7 +539,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         if ( ! includeEventsTags && card.cardType === CardType.EVENT) return;
         tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
       });
-      if (this.corporationCard !== undefined) {
+      if (this.corporationCard !== undefined && !this.corporationCard.isDisabled) {
         tagCount += this.corporationCard.tags.filter(
             (cardTag) => cardTag === tag
         ).length;
@@ -548,7 +569,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         allTags.push(extraTag);
       }
       const uniqueTags: Set<Tags> = new Set<Tags>();
-      if (this.corporationCard !== undefined && this.corporationCard.tags.length > 0) {
+      if (this.corporationCard !== undefined && this.corporationCard.tags.length > 0 && !this.corporationCard.isDisabled) {
         this.corporationCard.tags.forEach((tag) => allTags.push(tag));
       }
       this.playedCards.filter((card) => card.cardType !== CardType.EVENT)
@@ -2275,6 +2296,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         if(d.corporationCard.name === CardName.ARIDOR){
           (this.corporationCard as Aridor).allTags = new Set((d.corporationCard as Aridor).allTags);
         }
+        if(d.corporationCard.name === CardName.PHARMACY_UNION){
+          if ((d.corporationCard as PharmacyUnion).isDisabled) {
+            (this.corporationCard as PharmacyUnion).tags = [];
+            (this.corporationCard as PharmacyUnion).isDisabled = true;
+          }
+        }
       } else {
           this.corporationCard = undefined;
       }
@@ -2282,7 +2309,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       // Rebuild dealt corporation array
       this.dealtCorporationCards = d.dealtCorporationCards.map((element: CorporationCard)  => {
         return getCorporationCardByName(element.name)!;
-      });
+      });     
 
       // Rebuild dealt prelude array
       this.dealtPreludeCards = d.dealtPreludeCards.map((element: IProjectCard)  => {

@@ -36,14 +36,13 @@ export class GHGProducingBacteria implements IActionCard, IProjectCard, IResourc
                     return game.increaseTemperature(player, 1);
                 }),
                 new SelectOption("Add 1 microbe to this card", () => {
-                    this.resourceCount++;
+                    player.addResourceTo(this);
                     LogHelper.logAddResource(game, player, this);
                     return undefined;
                 })
             );
         }
-
-        this.resourceCount++;
+        player.addResourceTo(this);
         LogHelper.logAddResource(game, player, this);
         return undefined;
     }

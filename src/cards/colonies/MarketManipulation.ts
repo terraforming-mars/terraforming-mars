@@ -14,7 +14,10 @@ export class MarketManipulation implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public hasRequirements = false;
     public canPlay(_player: Player, game: Game): boolean {
-      return this.getIncreasableColonies(game).length > 0 && this.getDecreasableColonies(game).length > 0;
+      let result = this.getIncreasableColonies(game).length === 0 
+        || this.getDecreasableColonies(game).length === 0
+        || (this.getIncreasableColonies(game).length === 1 && this.getDecreasableColonies(game).length === 1 && this.getIncreasableColonies(game)[0] === this.getDecreasableColonies(game)[0])
+      return !result;
     }
 
     private getIncreasableColonies(game: Game) {

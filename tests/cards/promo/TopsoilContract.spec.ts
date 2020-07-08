@@ -8,18 +8,21 @@ import { Game } from "../../../src/Game";
 import { AerobrakedAmmoniaAsteroid } from "../../../src/cards/AerobrakedAmmoniaAsteroid";
 
 describe("TopsoilContract", function () {
+    let card : TopsoilContract, player : Player, player2 : Player, game : Game;
+
+    beforeEach(function() {
+        card = new TopsoilContract();
+        player = new Player("test", Color.BLUE, false);
+        player2 = new Player("test", Color.RED, false);
+        game = new Game("foobar", [player, player2], player);
+    });
+
     it("Can play", function () {
-        const card = new TopsoilContract();
-        const player = new Player("test", Color.BLUE, false);
         card.play(player);
         expect(player.plants).to.eq(3);
     });
 
     it("Gives 1 MC whenever player gains a microbe", function () {
-        const card = new TopsoilContract();
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test2", Color.RED, false);
-        const game = new Game("foobar", [player, player2], player);
         player.playedCards.push(card);
 
         // Get MC when player gains microbes

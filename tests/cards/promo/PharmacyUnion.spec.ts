@@ -15,11 +15,18 @@ import { Lichen } from "../../../src/cards/Lichen";
 import { Research } from "../../../src/cards/Research";
 
 describe("PharmacyUnion", function () {
+    let card : PharmacyUnion, player : Player, player2 : Player, game : Game;
+
+    beforeEach(function() {
+        card = new PharmacyUnion();
+        player = new Player("test", Color.BLUE, false);
+        player2 = new Player("test", Color.RED, false);
+        game = new Game("foobar", [player, player2], player);
+
+        player.corporationCard = card;
+    });
+
     it("Should play", function () {
-        const card = new PharmacyUnion();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-        
         card.initialAction(player, game);
         card.play();
 
@@ -29,12 +36,7 @@ describe("PharmacyUnion", function () {
     });
 
     it("Gains diseases when ANY player plays microbe cards", function () {
-        const card = new PharmacyUnion();
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test", Color.RED, false);
-        const game = new Game("foobar", [player,player2], player);
         card.play();
-        player.corporationCard = card;
 
         const ants = new Ants();
         player.playedCards.push(ants);
@@ -48,12 +50,7 @@ describe("PharmacyUnion", function () {
     });
     
     it("Removes diseases and gives TR only when corp owner plays science cards", function () {
-        const card = new PharmacyUnion();
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test", Color.RED, false);
-        const game = new Game("foobar", [player,player2], player);
         card.play();
-        player.corporationCard = card;
 
         const searchForLife = new SearchForLife();
         player.playedCards.push(searchForLife);
@@ -69,12 +66,7 @@ describe("PharmacyUnion", function () {
     });
 
     it("Works correctly with Research", function () {
-        const card = new PharmacyUnion();
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test", Color.RED, false);
-        const game = new Game("foobar", [player,player2], player);
         card.play();
-        player.corporationCard = card;
         expect(card.resourceCount).to.eq(2);
 
         const research = new Research();
@@ -85,10 +77,6 @@ describe("PharmacyUnion", function () {
     });
 
     it("Can turn card face down once per game to gain 3 TR if no diseases on card", function () {
-        const card = new PharmacyUnion();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player, player], player);
-        player.corporationCard = card;
         card.resourceCount = 0;
 
         const searchForLife = new SearchForLife();
@@ -110,11 +98,6 @@ describe("PharmacyUnion", function () {
     });
 
     it("Corporation tags do not count when corporation is disabled", function() {
-        const card = new PharmacyUnion();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        player.corporationCard = card;
-
         expect(player.getTagCount(Tags.MICROBES)).to.eq(2);
         const advancedEcosystems = new AdvancedEcosystems();
         player.playedCards.push(new Fish());
@@ -122,7 +105,8 @@ describe("PharmacyUnion", function () {
         expect(advancedEcosystems.canPlay(player)).to.eq(true);
         
         card.resourceCount = 0;
-        card.onCardPlayed(player, game, new SearchForLife());        
+        card.onCardPlayed(player, game, new SearchForLife());
+        
         (game.interrupts[0].playerInput as OrOptions).options[0].cb();
         expect(card.isDisabled).to.eq(true);
         expect(player.getTagCount(Tags.MICROBES)).to.eq(0);

@@ -8,17 +8,19 @@ import { Fish } from "../../../src/cards/Fish";
 import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";
 
 describe("DiversitySupport", function () {
+    let card : DiversitySupport, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new DiversitySupport();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
     it("Can't play", function () {
-        const card = new DiversitySupport();
-        const player = new Player("test", Color.BLUE, false);
         expect(card.canPlay(player)).to.eq(false);
     });
 
     it("Can play", function () {
-        const card = new DiversitySupport();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-
         // 3 non-standard resources
         const ants = new Ants();
         const fish = new Fish();

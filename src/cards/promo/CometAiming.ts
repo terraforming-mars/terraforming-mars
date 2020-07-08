@@ -10,6 +10,7 @@ import { Game } from '../../Game';
 import { SelectOption } from '../../inputs/SelectOption';
 import { OrOptions } from '../../inputs/OrOptions';
 import { MAX_OCEAN_TILES } from '../../constants';
+import { LogHelper } from '../../components/LogHelper';
 
 export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
     public name: CardName = CardName.COMET_AIMING;
@@ -37,6 +38,7 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
 
         const addAsteroidToSelf = function() {
             player.addResourceTo(asteroidCards[0]);
+            LogHelper.logAddResource(game, player, asteroidCards[0]);
             return undefined;
         }
 
@@ -45,12 +47,14 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
             asteroidCards, 
             (foundCards: Array<ICard>) => { 
                 player.addResourceTo(foundCards[0]);
+                LogHelper.logAddResource(game, player, foundCards[0]);
                 return undefined;
             }
         );
 
         const spendAsteroidResource = () => {
             this.resourceCount--;
+            LogHelper.logRemoveResource(game, player, this, 1, "place an ocean");
             game.addOceanInterrupt(player);
             return undefined;
         }

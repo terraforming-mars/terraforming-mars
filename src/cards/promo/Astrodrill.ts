@@ -8,9 +8,8 @@ import { SelectOption } from "../../inputs/SelectOption";
 import { SelectCard } from "../../inputs/SelectCard";
 import { OrOptions } from "../../inputs/OrOptions";
 import { Game } from "../../Game";
-import { LogMessageType } from "../../LogMessageType";
-import { LogMessageData } from "../../LogMessageData";
-import { LogMessageDataType } from "../../LogMessageDataType";
+import { LogHelper } from "../../components/LogHelper";
+import { Resources } from "../../Resources";
 
 export class Astrodrill implements IActionCard, CorporationCard {
     public name: CardName = CardName.ASTRODRILL;
@@ -30,44 +29,39 @@ export class Astrodrill implements IActionCard, CorporationCard {
         const gainStandardResource = new OrOptions(
             new SelectOption("Gain 1 titanium", () => {
                 player.titanium += 1;
-                this.logResourceGain(player, game, "titanium");
+                LogHelper.logGainStandardResource(game, player, Resources.TITANIUM);
                 return undefined;
             }),
             new SelectOption("Gain 1 steel", () => {
                 player.steel += 1;
-                this.logResourceGain(player, game, "steel");
+                LogHelper.logGainStandardResource(game, player, Resources.STEEL);
                 return undefined;
             }),
             new SelectOption("Gain 1 plant", () => {
                 player.plants += 1;
-                this.logResourceGain(player, game, "plant");
+                LogHelper.logGainStandardResource(game, player, Resources.PLANTS);
                 return undefined;
             }),
             new SelectOption("Gain 1 energy", () => {
                 player.energy += 1;
-                this.logResourceGain(player, game, "energy");
+                LogHelper.logGainStandardResource(game, player, Resources.ENERGY);
                 return undefined;
             }),
             new SelectOption("Gain 1 heat", () => {
                 player.heat += 1;
-                this.logResourceGain(player, game, "heat");
+                LogHelper.logGainStandardResource(game, player, Resources.HEAT);
                 return undefined;
             }),
             new SelectOption("Gain 1 MC", () => {
                 player.megaCredits += 1;
-                this.logResourceGain(player, game, "MC");
+                LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS);
                 return undefined;
             })
         );
 
         const addResourceToSelf = new SelectOption("Add 1 asteroid to this card and gain a standard resource", () => {
-            this.resourceCount++;
-            game.log(
-                LogMessageType.DEFAULT,
-                "${0} added 1 asteroid to ${1}",
-                new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                new LogMessageData(LogMessageDataType.CARD, this.name)
-            );
+            player.addResourceTo(this);
+            LogHelper.logAddResource(game, player, this);
 
             return gainStandardResource;
         });
@@ -77,12 +71,7 @@ export class Astrodrill implements IActionCard, CorporationCard {
             asteroidCards,
             (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 1);
-                game.log(
-                    LogMessageType.DEFAULT,
-                    "${0} added 1 asteroid to ${1}",
-                    new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                    new LogMessageData(LogMessageDataType.CARD, foundCards[0].name)
-                );
+                LogHelper.logAddResource(game, player, foundCards[0]);
 
                 return gainStandardResource;
             }
@@ -91,11 +80,7 @@ export class Astrodrill implements IActionCard, CorporationCard {
         const spendResource = new SelectOption("Remove 1 asteroid on this card to gain 3 titanium", () => {
             this.resourceCount--;
             player.titanium += 3;
-            game.log(
-                LogMessageType.DEFAULT,
-                "${0} spent an asteroid to gain 3 titanium",
-                new LogMessageData(LogMessageDataType.PLAYER, player.id)
-            );
+            LogHelper.logRemoveResource(game, player, this, 1, "gain 3 titanium");
 
             return undefined;
         });
@@ -109,14 +94,5 @@ export class Astrodrill implements IActionCard, CorporationCard {
     public play() {
         this.resourceCount = 3;
         return undefined;
-    }
-
-    private logResourceGain(player: Player, game: Game, resource: string) {
-        game.log(
-            LogMessageType.DEFAULT,
-            "${0} gained 1 ${1}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.STRING, resource)
-        );
     }
 }

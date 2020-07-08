@@ -6,24 +6,25 @@ import { Resources } from '../../../src/Resources';
 import { ViralEnhancers } from "../../../src/cards/ViralEnhancers";
 
 describe("Potatoes", function () {
+    let card : Potatoes, player : Player;
+
+    beforeEach(function() {
+        card = new Potatoes();
+        player = new Player("test", Color.BLUE, false);
+    });
+
     it("Can't play", function () {
-        const card = new Potatoes();
-        const player = new Player("test", Color.BLUE, false);
+        player.plants = 1;
         expect(card.canPlay(player)).to.eq(false);
     });
-    it("Can play with 1 plant if have Viral Enhancers", function () {
-        const card = new Potatoes();
-        const viralEnhancers = new ViralEnhancers();
-        const player = new Player("test", Color.BLUE, false);
 
+    it("Can play with 1 plant if have Viral Enhancers", function () {
         player.plants = 1;
-        player.playedCards.push(viralEnhancers);
+        player.playedCards.push(new ViralEnhancers());
         expect(card.canPlay(player)).to.eq(true);
     });
-    it("Should play", function () {
-        const card = new Potatoes();
-        const player = new Player("test", Color.BLUE, false);
 
+    it("Should play", function () {
         player.plants = 2;
         expect(card.canPlay(player)).to.eq(true);
         

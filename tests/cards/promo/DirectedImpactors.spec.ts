@@ -9,15 +9,20 @@ import { MAX_TEMPERATURE } from "../../../src/constants";
 import { SelectHowToPayInterrupt } from "../../../src/interrupts/SelectHowToPayInterrupt";
 
 describe("DirectedImpactors", function () {
+    let card : DirectedImpactors, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new DirectedImpactors();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+    
     it("Should play", function () {
-        const card = new DirectedImpactors();
         expect(card.canPlay()).to.eq(true);
         expect(card.play()).to.eq(undefined);
     });
+
     it("Should act - single action choice, single target", function () {
-        const card = new DirectedImpactors();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player, player], player);
         player.playedCards.push(card);
         expect(card.canAct(player, game)).to.eq(false);
 
@@ -41,11 +46,9 @@ describe("DirectedImpactors", function () {
         expect(game.getTemperature()).to.eq(-28);
         expect(card.resourceCount).to.eq(0);
     });
+
     it("Should act - multiple action choices, multiple targets", function () {
-        const card = new DirectedImpactors();
         const card2 = new RotatorImpacts();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player, player], player);
         player.playedCards.push(card, card2);
 
         player.megaCredits = 3;
@@ -71,14 +74,12 @@ describe("DirectedImpactors", function () {
         expect(player.megaCredits).to.eq(0);
         expect(player.titanium).to.eq(0);
     });
-    it("Cannot spend resource to raise temperature if max", function () {
-        const card = new DirectedImpactors();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player, player], player);
-        player.playedCards.push(card);
 
+    it("Cannot spend resource to raise temperature if max", function () {
+        player.playedCards.push(card);
         card.resourceCount = 1;
-        (game as any).temperature = MAX_TEMPERATURE
+        (game as any).temperature = MAX_TEMPERATURE;
+
         expect(card.canAct(player, game)).to.eq(false);
     });
 });

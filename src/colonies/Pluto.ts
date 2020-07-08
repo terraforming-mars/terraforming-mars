@@ -3,6 +3,7 @@ import { Player } from '../Player';
 import { ColonyName } from './ColonyName';
 import { Game } from '../Game';
 import { SelectDiscard } from '../interrupts/SelectDiscard';
+import { LogHelper } from '../components/LogHelper';
 
 export class Pluto extends Colony implements IColony {
     public name = ColonyName.PLUTO;
@@ -20,6 +21,7 @@ export class Pluto extends Colony implements IColony {
         for (let i = 0; i < extraCards; i++) {
             player.cardsInHand.push(game.dealer.dealCard());
         }
+        LogHelper.logCardDraw(game, player, extraCards);
         this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {

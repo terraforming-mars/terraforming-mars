@@ -283,7 +283,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (game !== undefined && globalEvent && amount !== 0) {
         game.log(
           LogMessageType.DEFAULT,
-          "${0}'s ${1} amount ${2} by ${3} by Global Event",
+          "${0}'s ${1} production ${2} by ${3} by Global Event",
           new LogMessageData(LogMessageDataType.PLAYER, this.id),
           new LogMessageData(LogMessageDataType.STRING, resource),
           new LogMessageData(LogMessageDataType.STRING, modifier),

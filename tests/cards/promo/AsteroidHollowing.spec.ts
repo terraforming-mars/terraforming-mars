@@ -6,18 +6,25 @@ import { Resources } from "../../../src/Resources";
 import { Game } from "../../../src/Game";
 
 describe("AsteroidHollowing", function () {
+    let card : AsteroidHollowing, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new AsteroidHollowing();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
     it("Should play", function () {
-        const card = new AsteroidHollowing();
         expect(card.canPlay()).to.eq(true);
         expect(card.play()).to.eq(undefined);
     });
-    it("Should act", function () {
-        const card = new AsteroidHollowing();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player, player], player);
+
+    it("Can't act", function () {
         player.playedCards.push(card);
         expect(card.canAct(player)).to.eq(false);
+    });
 
+    it("Should act", function () {
         player.titanium = 1;
         expect(card.canAct(player)).to.eq(true);
 
@@ -26,19 +33,15 @@ describe("AsteroidHollowing", function () {
         expect(card.resourceCount).to.eq(1);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     });
+
     it("Should give victory points", function () {
-        const card = new AsteroidHollowing();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player, player], player);
         player.playedCards.push(card);
         player.titanium = 2;
 
         card.action(player, game);
-        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(0);
+        expect(card.getVictoryPoints()).to.eq(0);
 
         card.action(player, game);
-        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
+        expect(card.getVictoryPoints()).to.eq(1);
     });
 });

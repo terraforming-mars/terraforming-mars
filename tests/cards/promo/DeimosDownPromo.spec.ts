@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { DeimosDownPromo } from "../../../src/cards/promo/DeimosDownPromo";
 import { Color } from "../../../src/Color";
@@ -8,25 +7,24 @@ import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 
 describe("DeimosDownPromo", function () {
-    it("Should play", function () {
-        const card = new DeimosDownPromo();
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test2", Color.RED, false);
-        const game = new Game("foobar", [player,player2], player);
-        player2.plants = 5;
+    let card : DeimosDownPromo, player : Player, player2 : Player, game : Game;
 
+    beforeEach(function() {
+        card = new DeimosDownPromo();
+        player = new Player("test", Color.BLUE, false);
+        player2 = new Player("test2", Color.RED, false);
+        game = new Game("foobar", [player, player2], player);
+    });
+
+    it("Should play without plants", function () {
         const action = card.play(player, game);
         expect(action instanceof SelectSpace).to.eq(true);
         expect(game.getTemperature()).to.eq(-24);
         expect(player.steel).to.eq(4);
-        expect(player2.plants).to.eq(5);
+        expect(game.interrupts.length).to.eq(0);
     });
 
-    it("Can remove a plants", function(){
-        const card = new DeimosDownPromo();
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test2", Color.RED, false);
-        const game = new Game("foobar", [player,player2], player);
+    it("Can remove plants", function(){
         player2.plants = 5;
 
         const action = card.play(player, game);
@@ -43,8 +41,6 @@ describe("DeimosDownPromo", function () {
     });
 
     it("Works fine in solo mode", function() {
-        const card = new DeimosDownPromo();
-        const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player], player);
 
         player.plants = 15;

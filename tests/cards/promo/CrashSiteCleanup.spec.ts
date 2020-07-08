@@ -7,17 +7,21 @@ import { CrashSiteCleanup } from "../../../src/cards/promo/CrashSiteCleanup";
 import { SmallAsteroid } from "../../../src/cards/promo/SmallAsteroid";
 
 describe("CrashSiteCleanup", function () {
+    let card : CrashSiteCleanup, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new CrashSiteCleanup();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
     it("Can't play", function () {
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        const card = new CrashSiteCleanup();
         expect(card.canPlay(player, game)).to.eq(false);
     });
+
     it("Can play if removed plants from another player this generation", function () {
-        const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test", Color.RED, false);
         const game = new Game("foobar", [player, player2], player);
-        const card = new CrashSiteCleanup();
         player2.plants = 1;
         
         const smallAsteroid = new SmallAsteroid();

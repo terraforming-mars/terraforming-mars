@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { MagneticFieldGeneratorsPromo } from "../../../src/cards/promo/MagneticFieldGeneratorsPromo";
 import { Color } from "../../../src/Color";
@@ -8,17 +7,22 @@ import { Game } from '../../../src/Game';
 import { SelectSpace } from "../../../src/inputs/SelectSpace";
 
 describe("MagneticFieldGeneratorsPromo", function () {
+    let card : MagneticFieldGeneratorsPromo, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new MagneticFieldGeneratorsPromo();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
     it("Cannot play without enough energy production", function () {
-        const card = new MagneticFieldGeneratorsPromo();
-        const player = new Player("test", Color.BLUE, false);
         player.setProduction(Resources.ENERGY,3);
         expect(card.canPlay(player)).to.eq(false);
     });
+
     it("Should play", function () {
-        const card = new MagneticFieldGeneratorsPromo();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         player.setProduction(Resources.ENERGY,4);
+        expect(card.canPlay(player)).to.eq(true);
 
         const action = card.play(player, game);
         expect(action instanceof SelectSpace).to.eq(true);

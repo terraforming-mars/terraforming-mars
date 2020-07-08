@@ -3,25 +3,30 @@ import { SubCrustMeasurements } from "../../../src/cards/promo/SubCrustMeasureme
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
+import { Research } from "../../../src/cards/Research";
 
 describe("SubCrustMeasurements", function () {
+    let card : SubCrustMeasurements, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new SubCrustMeasurements();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
     it("Can't play if not enough science tags", function () {
-        const card = new SubCrustMeasurements();
-        const player = new Player("test", Color.BLUE, false);
-        expect(card.canPlay(player)).to.eq(false); 
+        expect(card.canPlay(player)).to.eq(false);
     });
+
     it("Should play", function () {
-        const card = new SubCrustMeasurements();
-        const player = new Player("test", Color.BLUE, false);
-        player.playedCards.push(card);
+        player.playedCards.push(new Research());
+        expect(card.canPlay(player)).to.eq(true);
+
         card.play();
-        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
+        expect(card.getVictoryPoints()).to.eq(2);
     });
+
     it("Should take action", function () {
-        const card = new SubCrustMeasurements();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
         expect(player.cardsInHand.length).to.eq(0);
         card.action(player, game);
         expect(player.cardsInHand.length).to.eq(1);

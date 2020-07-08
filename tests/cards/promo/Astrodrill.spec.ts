@@ -6,36 +6,34 @@ import { Game } from '../../../src/Game';
 import { OrOptions } from '../../../src/inputs/OrOptions';
 
 describe("Astrodrill", function () {
-    it("Should play - can spend asteroid resource", function () {
-        const card = new Astrodrill();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
+    let card : Astrodrill, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new Astrodrill();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+
         card.play();
-        expect(card.resourceCount).to.eq(3);
-
         player.corporationCard = card;
+    });
 
+    it("Starts with 3 asteroid resources", function () {
+        expect(card.resourceCount).to.eq(3);
+    });
+
+    it("Should play - can spend asteroid resource", function () {
         const action = card.action(player, game);
         expect(action instanceof OrOptions).to.eq(true);
         expect(action.options.length).to.eq(2);
 
         // spend asteroid resource
         const spendAsteroidOption = action.options[0];
-
         spendAsteroidOption.cb();
         expect(player.titanium).to.eq(3);
         expect(game.interrupts.length).to.eq(0);
     });
 
     it("Should play - can add asteroid resource and gain a standard resource", function () {
-        const card = new Astrodrill();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player,player], player);
-
-        card.play();
-        expect(card.resourceCount).to.eq(3);
-
-        player.corporationCard = card;
         const action = card.action(player, game);
         expect(action instanceof OrOptions).to.eq(true);
         expect(action.options.length).to.eq(2);

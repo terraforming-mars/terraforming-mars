@@ -10,10 +10,15 @@ import { SelectCard } from "../../../src/inputs/SelectCard";
 import { ICard } from "../../../src/cards/ICard";
 
 describe("MoholeLake", function () {
+    let card : MoholeLake, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new MoholeLake();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
     it("Can play", function () {
-        const card = new MoholeLake();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player, player], player);
         card.play(player, game);
 
         expect(game.interrupts.length).to.eq(1);
@@ -27,18 +32,11 @@ describe("MoholeLake", function () {
     });
 
     it("Can't act", function () {
-        const card = new MoholeLake();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player, player], player);
         card.play(player, game);
-
         expect(card.canAct(player)).to.eq(false);
     });
 
     it("Can act - single target", function () {
-        const card = new MoholeLake();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player, player], player);
         const fish = new Fish();
         player.playedCards.push(fish);
 
@@ -49,9 +47,6 @@ describe("MoholeLake", function () {
     });
 
     it("Can act - multiple targets", function () {
-        const card = new MoholeLake();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player, player], player);
         const fish = new Fish();
         const ants = new Ants();
         player.playedCards.push(fish, ants);

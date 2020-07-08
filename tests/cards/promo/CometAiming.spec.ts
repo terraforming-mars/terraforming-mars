@@ -8,18 +8,26 @@ import { OrOptions } from "../../../src/inputs/OrOptions";
 import { RotatorImpacts } from "../../../src/cards/venusNext/RotatorImpacts";
 
 describe("CometAiming", function () {
+    let card : CometAiming, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new CometAiming();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
     it("Should play", function () {
-        const card = new CometAiming();
         expect(card.canPlay()).to.eq(true);
         expect(card.play()).to.eq(undefined);
     });
-    it("Should act - single action choice, single target", function () {
-        const card = new CometAiming();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player, player], player);
+
+    it("Can't act", function () {
         player.playedCards.push(card);
         expect(card.canAct(player, game)).to.eq(false);
+    });
 
+    it("Should act - single action choice, single target", function () {
+        player.playedCards.push(card);
         player.titanium = 1;
         expect(card.canAct(player, game)).to.eq(true);
 
@@ -33,11 +41,9 @@ describe("CometAiming", function () {
         selectSpace.cb(selectSpace.availableSpaces[0]);
         expect(player.getTerraformRating()).to.eq(21);
     });
+    
     it("Should act - multiple action choices, multiple targets", function () {
-        const card = new CometAiming();
         const card2 = new RotatorImpacts();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player, player], player);
         player.playedCards.push(card, card2);
 
         player.titanium = 1;

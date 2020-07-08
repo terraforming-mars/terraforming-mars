@@ -75,6 +75,12 @@ export class PharmacyUnion implements CorporationCard {
                 new SelectOption('Turn this card face down and gain 3 TR', () => {
                     this.isDisabled = true;
                     player.increaseTerraformRatingSteps(3, game);
+                    game.log(
+                        LogMessageType.DEFAULT,
+                        "${0} turned ${1} face down to gain 3 TR",
+                        new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                        new LogMessageData(LogMessageDataType.CARD, this.name)
+                    );
                     return undefined;
                 })
             );

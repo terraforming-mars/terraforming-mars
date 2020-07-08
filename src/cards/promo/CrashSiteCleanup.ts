@@ -6,6 +6,8 @@ import { CardName } from "../../CardName";
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
 import { Game } from "../../Game";
+import { LogHelper } from "../../components/LogHelper";
+import { Resources } from "../../Resources";
 
 export class CrashSiteCleanup implements IProjectCard {
     public cost: number = 4;
@@ -17,11 +19,12 @@ export class CrashSiteCleanup implements IProjectCard {
         return game.someoneHasRemovedOtherPlayersPlants;
     }
 
-    public play(player: Player) {
+    public play(player: Player, game: Game) {
         const gainTitanium = new SelectOption(
             "Gain 1 titanium",
             () => {
               player.titanium++;
+              LogHelper.logGainStandardResource(game, player, Resources.TITANIUM);
               return undefined;
             }
         );
@@ -30,6 +33,7 @@ export class CrashSiteCleanup implements IProjectCard {
             "Gain 2 steel",
             () => {
               player.steel += 2;
+              LogHelper.logGainStandardResource(game, player, Resources.STEEL, 2);
               return undefined;
             }
         );

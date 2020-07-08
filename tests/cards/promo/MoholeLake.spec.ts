@@ -44,7 +44,7 @@ describe("MoholeLake", function () {
 
         card.play(player, game);
         expect(card.canAct(player)).to.eq(true);
-        card.action(player);
+        card.action(player, game);
         expect(fish.resourceCount).to.eq(1);
     });
 
@@ -58,7 +58,7 @@ describe("MoholeLake", function () {
 
         card.play(player, game);
         expect(card.canAct(player)).to.eq(true);
-        const action = card.action(player) as SelectCard<ICard>;
+        const action = card.action(player, game) as SelectCard<ICard>;
         
         action.cb([ants]);
         expect(ants.resourceCount).to.eq(1);

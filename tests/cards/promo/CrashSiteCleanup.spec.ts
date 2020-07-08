@@ -28,7 +28,7 @@ describe("CrashSiteCleanup", function () {
         expect(card.canPlay(player, game)).to.eq(true);
         expect(game.someoneHasRemovedOtherPlayersPlants).to.eq(true);
 
-        const action = card.play(player) as OrOptions;
+        const action = card.play(player, game) as OrOptions;
         action.options[0].cb();
         expect(player.titanium).to.eq(1);
         action.options[1].cb();

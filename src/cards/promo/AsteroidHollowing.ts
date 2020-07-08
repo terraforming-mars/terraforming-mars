@@ -6,6 +6,8 @@ import { ResourceType } from '../../ResourceType';
 import { Tags } from '../Tags';
 import { Player } from '../../Player';
 import { Resources } from '../../Resources';
+import { Game } from '../../Game';
+import { LogHelper } from '../../components/LogHelper';
 
 export class AsteroidHollowing implements IActionCard, IProjectCard, IResourceCard {
     public name: CardName = CardName.ASTEROID_HOLLOWING;
@@ -27,10 +29,12 @@ export class AsteroidHollowing implements IActionCard, IProjectCard, IResourceCa
         return player.titanium > 0;
     }
 
-    public action(player: Player) {
+    public action(player: Player, game: Game) {
         player.titanium -= 1;
         player.setProduction(Resources.MEGACREDITS);
-        this.resourceCount++;
+        player.addResourceTo(this);
+        LogHelper.logAddResource(game, player, this);
+
         return undefined;
     }
 

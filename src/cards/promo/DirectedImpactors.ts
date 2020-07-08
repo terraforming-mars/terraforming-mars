@@ -10,6 +10,7 @@ import { Game } from '../../Game';
 import { SelectOption } from '../../inputs/SelectOption';
 import { OrOptions } from '../../inputs/OrOptions';
 import { MAX_TEMPERATURE } from '../../constants';
+import { LogHelper } from '../../components/LogHelper';
 
 export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCard {
     public name: CardName = CardName.DIRECTED_IMPACTORS;
@@ -58,7 +59,8 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
         game.addSelectHowToPayInterrupt(player, 6, false, true, "Select how to pay for Directed Impactors action");
 
         if (asteroidCards.length === 1) {
-            this.resourceCount++;
+            player.addResourceTo(this);
+            LogHelper.logAddResource(game, player, this);
             return undefined;
         }
 
@@ -67,6 +69,7 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
             asteroidCards, 
             (foundCards: Array<ICard>) => { 
                 player.addResourceTo(foundCards[0]);
+                LogHelper.logAddResource(game, player, foundCards[0]);
                 return undefined;
             }
         );
@@ -74,6 +77,7 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
 
     private spendResource(player: Player, game: Game) {
         this.resourceCount--;
+        LogHelper.logRemoveResource(game, player, this, 1, "raise temperature 1 step");
         game.increaseTemperature(player, 1);
         return undefined;
     }

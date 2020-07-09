@@ -6800,7 +6800,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="tag tag2 tag-microbe"></div>
     <div class="corporationLabel">Corporation</div>
     ##RESOURCES##
-    <div class="venus-icon corporation-icon"></div>
+    <div class="promo-icon corporation-icon"></div>
     <div class="contentCorporation">
 
       <div class="corp-logo">Pharmacy Union</div>

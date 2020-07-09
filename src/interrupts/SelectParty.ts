@@ -45,12 +45,21 @@ export class SelectParty implements PlayerInterrupt {
                   game.addSelectHowToPayInterrupt(player, price, false, false, "Select how to pay for send delegate action");
                 }
 
-                for (let i = 0; i < nbr; i++) {
-                  if (replace) {
-                    game.turmoil?.removeDelegateFromParty(replace, party.name, game);
+                if (nbr > 1 && fromLobby) { // For card: Cultural Metropolis
+                  game.turmoil?.sendDelegateToParty(player.id, party.name, game, true);
+                  for (let i = 0; i < nbr - 1; i++) {
+                    game.turmoil?.sendDelegateToParty(player.id, party.name, game, false);
                   }
+                } else {
+                  for (let i = 0; i < nbr; i++) {
+                    if (replace) {
+                      game.turmoil?.removeDelegateFromParty(replace, party.name, game);
+                    }
                   game.turmoil?.sendDelegateToParty(player.id, party.name, game, fromLobby);
                 }
+                }
+
+                
                 game.log(
                   LogMessageType.DEFAULT,
                   "${0} sent "+ nbr + " delegate(s) in ${1} area",

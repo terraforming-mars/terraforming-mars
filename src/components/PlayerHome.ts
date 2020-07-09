@@ -159,7 +159,7 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
 
-                <div class="player_home_block player_home_block--log nofloat" v-if="player.gameLog.length > 0">
+                <div class="player_home_block player_home_block--log nofloat" v-if="player.players.length > 1 && player.gameLog.length > 0">
                     <h2 :class="'player_color_'+ player.color" v-i18n>Last Actions</h2>
                     <log-panel :messages="player.gameLog" :players="player.players"></log-panel>
                 </div>

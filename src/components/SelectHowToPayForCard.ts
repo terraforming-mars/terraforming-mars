@@ -293,7 +293,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
 
   <label v-for="availableCard in playerinput.cards" class="payments_cards">
     <input class="hidden" type="radio" v-model="card" v-on:change="cardChanged()" :value="availableCard" />
-    <card class="cardbox" :card="availableCard" :resources="availableCard.resources"></card>
+    <card class="cardbox" :card="availableCard"></card>
   </label>
 
   <section v-trim-whitespace>

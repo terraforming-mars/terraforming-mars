@@ -6806,7 +6806,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="corp-logo">Pharmacy Union</div>
 
       <div class="card-effect-icons">
-        <div class="resource money">54</div>
+        <div class="resource money startmc">54</div>
         <div class="resource card">
           <div class="card-icon card-icon-science"></div>
         </div>
@@ -6818,7 +6818,7 @@ export const HTML_DATA: Map<string, string> =
 
       <div class="corporationEffectBox">
         <div class="corporationEffectBoxLabel">Effect</div>
-        <div class="resource-tag tag-microbe red-outline"></div> : <div class="resource disease">D</div><div class="money resource">-4</div>
+        <div class="resource-tag tag-microbe red-outline"></div> : <div class="resource disease">D</div><div class="resource money">-4</div>
         <div class="corp-effectrow2">
           <div class="resource-tag tag-science"></div> : - <div class="resource disease">D</div><div class="rating tile"></div> / 3 <div class="rating tile"></div>
         </div>

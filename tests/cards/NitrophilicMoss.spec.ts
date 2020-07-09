@@ -6,6 +6,7 @@ import { Game } from "../../src/Game";
 import { Resources } from '../../src/Resources';
 import { ViralEnhancers } from "../../src/cards/ViralEnhancers";
 import { maxOutOceans } from "../TestingUtils";
+import { Manutech } from "../../src/cards/venusNext/Manutech";
 
 describe("NitrophilicMoss", function () {
     let card : NitrophilicMoss, player : Player, game : Game;
@@ -52,5 +53,11 @@ describe("NitrophilicMoss", function () {
         viralEnhancers.onCardPlayed(player, game, card);
         expect(player.plants).to.eq(0);
         expect(player.getProduction(Resources.PLANTS)).to.eq(2);
+    });
+
+    it("Should play", function () {
+        maxOutOceans(player, game, 3);
+        player.corporationCard = new Manutech();
+        expect(card.canPlay(player, game)).to.eq(true);
     });
 });

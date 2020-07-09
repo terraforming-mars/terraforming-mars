@@ -15,7 +15,7 @@ export class NitrophilicMoss implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         const meetsOceanRequirements = game.board.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game);
         const hasViralEnhancers = player.playedCards.find((card) => card.name === CardName.VIRAL_ENHANCERS);
-        const hasEnoughPlants = player.plants >= 2 || player.plants >= 1 && (hasViralEnhancers !== undefined || player.isCorporation(CorporationName.MANUTECH));
+        const hasEnoughPlants = player.plants >= 2 || player.isCorporation(CorporationName.MANUTECH) || player.plants >= 1 && hasViralEnhancers !== undefined;
 
         return meetsOceanRequirements && hasEnoughPlants;
     }

@@ -19,6 +19,7 @@ import { ALL_PRELUDE_CORPORATIONS,
          ALL_PROMO_PROJECTS_CARDS
          } from "../Dealer";
 import { HTML_DATA } from "../HTML_data";
+import { CardModel } from "../models/CardModel";
 
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
@@ -101,14 +102,17 @@ export const Card = Vue.component("card", {
     ],
     methods: {
         getCardContent: function() {
-            return getCardContent(this.card);
+            return getCardContent(this.card.name);
         },
         getCard: function () {
-            return getProjectCardByName(this.card) || getCorporationCardByName(this.card);
+            return getProjectCardByName(this.card.name) || getCorporationCardByName(this.card.name);
         },
-        getCardCssClass: function (cardName: string): string {
-            var cssClass = "filterDiv card-" + cardName.toLowerCase().replace(/ /g, "-");
-            const wasActivated = (this.player !== undefined && this.player.actionsThisGeneration !== undefined && this.player.actionsThisGeneration.indexOf(this.card) !== -1) ? true : false;
+        getCardCssClass: function (card: CardModel): string {
+            var cssClass = "filterDiv card-" + card.name.toLowerCase().replace(/ /g, "-");
+            const wasActivated = (this.player !== undefined
+                                    && this.player.actionsThisGeneration !== undefined
+                                    && this.player.actionsThisGeneration.indexOf(this.card) !== -1
+                                ) ? true : false;
             if (wasActivated) {
                 cssClass += " cards-action-was-used"
             }
@@ -117,7 +121,7 @@ export const Card = Vue.component("card", {
     },
     template: `
     <div :class="getCardCssClass(card)">
-        <div class="card_resources_counter" v-if="resources">RES:<span class="card_resources_counter--number"> {{ resources }}</span></div>
+        <div class="card_resources_counter" v-if="card.resources">RES:<span class="card_resources_counter--number"> {{ card.resources }}</span></div>
         <div class="card-content-wrapper" v-i18n v-html=this.getCardContent()></div>
     </div>
     `

@@ -9,8 +9,7 @@ import { CorporationCard } from '../cards/corporation/CorporationCard';
 
 export interface PlayerModel {
     boardName: string;
-    corporationCard: string;
-    corporationCardResources: number;
+    corporationCard: CardModel;
     playedCards: Array<CardModel>;
     cardsInHandNbr: number;
     colonies: Array<ColonyModel>;

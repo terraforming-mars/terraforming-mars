@@ -155,7 +155,7 @@ export const PlayerHome = Vue.component("player-home", {
                 <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
                     <h2 v-i18n>Drafted Cards</h2>
                     <div v-for="card in player.draftedCards" :key="card.name" class="cardbox">
-                        <card :card="card.name"></card>
+                        <card :card="card"></card>
                     </div>
                 </div>
 
@@ -168,7 +168,7 @@ export const PlayerHome = Vue.component("player-home", {
                 <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
                     <h2 :class="'player_color_'+ player.color" v-i18n>Cards In Hand</h2>
                     <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
-                        <card :card="card.name" :resources="card.resources"></card>
+                        <card :card="card"></card>
                     </div>
                 </div>
 
@@ -176,10 +176,10 @@ export const PlayerHome = Vue.component("player-home", {
                     <h2 :class="'player_color_'+ player.color" v-i18n>Played Cards</h2>
 
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
-                        <card :card="player.corporationCard" :resources="player.corporationCardResources"></card>
+                        <card :card="player.corporationCard"></card>
                     </div>
                     <div v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
-                        <card :card="card.name" :resources="card.resources" :player="player"></card>
+                        <card :card="card" :player="player"></card>
                     </div>
 
                     <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
@@ -190,17 +190,17 @@ export const PlayerHome = Vue.component("player-home", {
             <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
 
                 <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
-                    <card :card="card.name"></card>
+                    <card :card="card"></card>
                 </div>
 
                 <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
-                    <card :card="card.name"></card>
+                    <card :card="card"></card>
                 </div> 
 
                 <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">              
                     <h2 v-i18n>Drafted Cards</h2>
                     <div v-for="card in player.draftedCards" :key="card.name" class="cardbox">
-                        <card :card="card.name"></card>
+                        <card :card="card"></card>
                     </div>
                 </div>
 

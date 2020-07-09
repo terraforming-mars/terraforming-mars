@@ -4776,9 +4776,8 @@ export const HTML_DATA: Map<string, string> =
                   (Action: Add 1 floater to this card, or spend 1 floater here to draw a card.)
                 </div>
                 <div class="resource card"></div><div class="resource card"></div>
-                <div class="description " style="margin-top:-5px;text-align:left;">
-                  (Requires 3 Science tags. Draw 2 cards.)
-                </div>
+                <div class="description bottom">(Requires 3 Science tags.</div>
+                <div class="description bottom">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Draw 2 cards.)</div>
               </div>
 `],
 [CardName.REFUGEE_CAMP,`

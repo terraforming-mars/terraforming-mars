@@ -27,7 +27,7 @@ export const Board = Vue.component("board", {
         }
     },
     mounted: function () {
-        if (this.marsIsTerraformed() && this.shouldNotify && AlertDialog.shouldAlert && PreferencesManager.loadValue("alert_mars_terraformed") === "1") {
+        if (this.marsIsTerraformed() && this.shouldNotify && AlertDialog.shouldAlert && PreferencesManager.loadValue("show_alerts") === "1") {
             alert("Mars is Terraformed!");
             AlertDialog.shouldAlert = false;
         };

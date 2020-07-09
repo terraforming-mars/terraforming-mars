@@ -16,6 +16,7 @@ import { HowToPay } from "../inputs/HowToPay";
 import { getProjectCardByName, Card } from "./Card";
 import { Tags } from "../cards/Tags";
 import { PaymentWidgetMixin } from "./PaymentWidgetMixin";
+import { PreferencesManager } from "./PreferencesManger";
 
 export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card", {
     props: ["player", "playerinput", "onsave", "showsave", "showtitle"],
@@ -266,8 +267,10 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 this.$data.warning = "Haven't spent enough";
                 return;
             }
+
+            const showAlert = PreferencesManager.loadValue("show_alerts") === "1";
             
-            if (totalSpentAmt > this.getCardCost()) {
+            if (totalSpentAmt > this.getCardCost() && showAlert) {
                 let diff = totalSpentAmt - this.getCardCost();
   
                 if (confirm("Warning: You are overpaying by " + diff + " MC")) {

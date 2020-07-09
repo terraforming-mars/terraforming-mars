@@ -61,4 +61,13 @@ export class LogHelper {
             new LogMessageData(LogMessageDataType.STRING, qty.toString())
         );
     }
+
+    static logCardDraw(game: Game, player: Player, qty: number = 1) {
+        game.log(
+            LogMessageType.DEFAULT,
+            "${0} drew ${1} cards",
+            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.STRING, qty.toString())
+        );
+    }
 }

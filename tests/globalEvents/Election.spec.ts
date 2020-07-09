@@ -20,10 +20,10 @@ describe("Election", function () {
         player2.playedCards.push(new StripMine());
         player2.playedCards.push(new StripMine());
         game.addCityTile(player3, game.board.getAvailableSpacesOnLand(player3)[0].id);
-        turmoil.chairman = player2;
+        turmoil.chairman = player2.id;
         turmoil.dominantParty = new Kelvinists();
-        turmoil.dominantParty.partyLeader = player2;
-        turmoil.dominantParty.delegates.push(player2);
+        turmoil.dominantParty.partyLeader = player2.id;
+        turmoil.dominantParty.delegates.push(player2.id);
         card.resolve(game, turmoil);
         expect(player.getTerraformRating()).to.eq(21);
         expect(player2.getTerraformRating()).to.eq(22);

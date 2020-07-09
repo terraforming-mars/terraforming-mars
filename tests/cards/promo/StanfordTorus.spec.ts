@@ -5,19 +5,21 @@ import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 
 describe("StanfordTorus", function () {
+    let card : StanfordTorus, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new StanfordTorus();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player, player], player);
+    });
+
     it("Should play", function () {
-        const card = new StanfordTorus();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player, player], player);
-        expect(card.play(player, game)).to.eq(undefined);
+        card.play(player, game);
         expect(game.getCitiesInPlay()).to.eq(1);
     });
+
     it("Should give victory points", function () {
-        const card = new StanfordTorus();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player, player], player);
-        expect(card.play(player, game)).to.eq(undefined);
-        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
+        card.play(player, game);
+        expect(card.getVictoryPoints()).to.eq(2);
     });
 });

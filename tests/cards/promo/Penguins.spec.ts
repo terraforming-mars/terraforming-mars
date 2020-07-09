@@ -3,42 +3,38 @@ import { Penguins } from "../../../src/cards/promo/Penguins";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
-import { TileType } from "../../../src/TileType";
+import { maxOutOceans } from "../../TestingUtils";
 
 describe("Penguins", function () {
+    let card : Penguins, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new Penguins();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player], player);
+    });
+
     it("Can't play", function () {
-        const card = new Penguins();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player, player], player);
+        maxOutOceans(player, game, 7);
         expect(card.canPlay(player, game)).to.eq(false);
     });
+
     it("Should play", function () {
-        const card = new Penguins();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player, player], player);
-        const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
-        for (let i = 0; i < oceanSpaces.length; i++) {
-            oceanSpaces[i].tile = { tileType: TileType.OCEAN };
-        }
+        maxOutOceans(player, game, 8);
         expect(card.canPlay(player, game)).to.eq(true);
-        expect(card.play()).to.eq(undefined);
     });
+
     it("Should act", function () {
-        const card = new Penguins();
-        const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
         expect(card.canAct()).to.eq(true);
-        const action = card.action();
-        expect(action).to.eq(undefined);
+        card.action(player);
         expect(card.resourceCount).to.eq(1);
     });
+
     it("Should give victory points", function () {
-        const card = new Penguins();
-        const player = new Player("test", Color.BLUE, false);
         player.playedCards.push(card);
-        card.action();
-        card.action();
-        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
+        card.action(player);
+        card.action(player);
+        expect(card.getVictoryPoints()).to.eq(2);
     });
 });

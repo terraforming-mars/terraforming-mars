@@ -15,7 +15,7 @@ export class MonsInsurance implements CorporationCard {
         for (let player of game.getPlayers()) {
             player.setProduction(Resources.MEGACREDITS,-2);
         }
-        game.monsInsuranceOwner = player;
+        game.monsInsuranceOwner = player.id;
         return undefined;
     }
 }    

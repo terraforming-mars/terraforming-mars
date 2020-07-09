@@ -17,7 +17,7 @@ export class EcologyResearch implements IProjectCard {
     public play(player: Player, game: Game) {
         let coloniesCount: number = 0;
         game.colonies.forEach(colony => { 
-          coloniesCount += colony.colonies.filter(owner => owner === player).length;
+          coloniesCount += colony.colonies.filter(owner => owner === player.id).length;
         });  
         player.setProduction(Resources.PLANTS, coloniesCount);
 

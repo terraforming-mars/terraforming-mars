@@ -1,4 +1,3 @@
-
 import {IProjectCard} from './IProjectCard';
 import {Tags} from './Tags';
 import {CardType} from './CardType';
@@ -9,6 +8,7 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
+import { Board } from '../Board';
 
 export class CommercialDistrict implements IProjectCard {
     public cost: number = 16;
@@ -24,8 +24,7 @@ export class CommercialDistrict implements IProjectCard {
       const usedSpace = game.board.getSpaceByTileCard(this.name);
       if (usedSpace !== undefined) {
         return game.board.getAdjacentSpaces(usedSpace).filter(
-            (adjacentSpace) => adjacentSpace.tile &&
-            adjacentSpace.tile.tileType === TileType.CITY
+            (adjacentSpace) => Board.isCitySpace(adjacentSpace)
         ).length;
       }
       return 0;

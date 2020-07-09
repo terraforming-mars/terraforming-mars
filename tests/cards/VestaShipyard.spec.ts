@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { VestaShipyard } from "../../src/cards/VestaShipyard";
 import { Color } from "../../src/Color";
@@ -11,12 +10,9 @@ describe("VestaShipyard", function () {
         const card = new VestaShipyard();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+
+        card.play(player, game);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
-    });
-    it("Should have victory point", function () {
-        const card = new VestaShipyard();
         expect(card.getVictoryPoints()).to.eq(1);
     });
 });

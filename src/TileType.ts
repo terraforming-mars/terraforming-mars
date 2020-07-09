@@ -4,6 +4,7 @@ export enum TileType {
     OCEAN,
     CITY,
     
+    CAPITAL,
     COMMERCIAL_DISTRICT,
     ECOLOGICAL_ZONE,
     INDUSTRIAL_CENTER,
@@ -13,5 +14,9 @@ export enum TileType {
     MOHOLE_AREA,
     NATURAL_PRESERVE,
     NUCLEAR_ZONE,
-    RESTRICTED_AREA
+    RESTRICTED_AREA,
+
+    DEIMOS_DOWN,
+    GREAT_DAM,
+    MAGNETIC_FIELD_GENERATORS
 }

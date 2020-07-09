@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { Ants } from "../../../src/cards/Ants";
 import { EarthCatapult } from "../../../src/cards/EarthCatapult";
@@ -9,22 +8,25 @@ import { Player } from "../../../src/Player";
 import { Resources } from "../../../src/Resources";
 
 describe("PointLuna", function () {
-    it("Gets card when earth tag played", function () {
-        const card = new PointLuna();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
+    let card : PointLuna, player : Player, game : Game;
+
+    beforeEach(function() {
+        card = new PointLuna();
+        player = new Player("test", Color.BLUE, false);
+        game = new Game("foobar", [player], player);
         player.corporationCard = card;
+    });
+
+    it("Gets card when earth tag played", function () {
         card.onCardPlayed(player, game, new Ants());
         expect(player.cardsInHand.length).to.eq(0);
+
         card.onCardPlayed(player, game, new EarthCatapult());
         expect(player.cardsInHand.length).to.eq(1);
     });
+
     it("Should play", function () {
-        const card = new PointLuna();
-        const player = new Player("test", Color.BLUE, false);
-        const game = new Game("foobar", [player], player);
-        const action = card.play(player, game);
-        expect(action).to.eq(undefined);
+        card.play(player, game);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
         expect(player.cardsInHand.length).to.eq(1);
     });

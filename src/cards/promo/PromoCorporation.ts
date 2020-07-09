@@ -4,5 +4,7 @@ export enum PromoCorporation {
     MONS_INSURANCE = "MonsInsurance",
     PHILARES = "Philares",
     RECYCLON = "Recyclon",
-    SPLICE = "Splice"
+    SPLICE = "Splice",
+    ASTRODRILL = "Astrodrill",
+    PHARMACY_UNION = "Pharmacy Union"
 }

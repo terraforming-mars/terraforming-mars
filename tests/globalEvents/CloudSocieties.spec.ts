@@ -14,10 +14,10 @@ describe("CloudSocieties", function () {
         const game = new Game("foobar", [player], player);
         const turmoil = new Turmoil(game);
         player.playedCards.push(new FloatingHabs());
-        turmoil.chairman = player;
+        turmoil.chairman = player.id;
         turmoil.dominantParty = new Kelvinists();
-        turmoil.dominantParty.partyLeader = player;
-        turmoil.dominantParty.delegates.push(player);
+        turmoil.dominantParty.partyLeader = player.id;
+        turmoil.dominantParty.delegates.push(player.id);
         card.resolve(game, turmoil);
         expect(player.playedCards[0].resourceCount).to.eq(1);
     });

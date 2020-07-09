@@ -10,10 +10,14 @@ let tileTypeToCssClass = new Map<TileType, string>([
     [TileType.LAVA_FLOWS, "lava_flows"],
     [TileType.MINING_AREA, "mining_area"],
     [TileType.MINING_RIGHTS, "mining_rights"],
+    [TileType.CAPITAL, "capital"],
     [TileType.MOHOLE_AREA, "mohole_area"],
     [TileType.NATURAL_PRESERVE, "natural_preserve"],
     [TileType.NUCLEAR_ZONE, "nuclear_zone"],
-    [TileType.RESTRICTED_AREA, "restricted_area"]
+    [TileType.RESTRICTED_AREA, "restricted_area"],
+    [TileType.DEIMOS_DOWN, "deimos_down"],
+    [TileType.GREAT_DAM, "great_dam"],
+    [TileType.MAGNETIC_FIELD_GENERATORS, "magnetic_field_generators"]
 ]);
 
 export const BoardSpace = Vue.component("board-space", {
@@ -37,6 +41,8 @@ export const BoardSpace = Vue.component("board-space", {
                 ret = "Industrial Center"
             } else if (tileType === TileType.LAVA_FLOWS) {
                 ret = "Lava Flows"
+            } else if (tileType === TileType.CAPITAL) {
+                ret = "Capital"
             } else if (tileType === TileType.MINING_AREA) {
                 ret = "Mining Area"
             } else if (tileType === TileType.MINING_RIGHTS) {
@@ -47,6 +53,12 @@ export const BoardSpace = Vue.component("board-space", {
                 ret = "Nuclear Zone"
             } else if (tileType === TileType.RESTRICTED_AREA) {
                 ret = "Restricted Area"
+            } else if (tileType === TileType.GREAT_DAM) {
+                ret = "Great Dam"
+            } else if (tileType === TileType.MAGNETIC_FIELD_GENERATORS) {
+                ret = "Magnetic field generators"
+            } else if (tileType === TileType.DEIMOS_DOWN) {
+                ret = "Deimos Down"
             } else if (tileType === TileType.CITY) {
                 ret = "City: 1 VP per each adjanced greenery";
             } else if (tileType === TileType.GREENERY) {

@@ -1,11 +1,10 @@
-
 import { IProjectCard } from "./IProjectCard";
 import { ISpace } from "../ISpace";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
-import { TileType } from "../TileType";
 import { CardName } from '../CardName';
+import { Board } from "../Board";
 
 export class RoverConstruction implements IProjectCard {
     public cost: number = 8;
@@ -14,7 +13,7 @@ export class RoverConstruction implements IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
 
     public onTilePlaced(player: Player, space: ISpace) {
-        if (space.tile !== undefined && space.tile.tileType === TileType.CITY) {
+        if (Board.isCitySpace(space)) {
             player.megaCredits += 2;
         }
     }

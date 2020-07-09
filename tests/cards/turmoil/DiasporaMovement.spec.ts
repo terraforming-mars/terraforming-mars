@@ -40,7 +40,7 @@ describe("DiasporaMovement", function () {
         if (game.turmoil !== undefined) {
             let reds = game.turmoil.getPartyByName(PartyName.REDS);
             if (reds !== undefined) {
-                reds.delegates.push(player, player);
+                reds.delegates.push(player.id, player.id);
                 expect(card.canPlay(player, game)).to.eq(true); 
             }
         } 

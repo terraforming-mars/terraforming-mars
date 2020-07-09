@@ -8,7 +8,6 @@ import {ColonyModel} from './src/models/ColonyModel';
 import {Color} from './src/Color';
 import { Game, GameOptions } from './src/Game';
 import {ICard} from './src/cards/ICard';
-import {IColony} from './src/colonies/Colony';
 import {IProjectCard} from './src/cards/IProjectCard';
 import {ISpace} from './src/ISpace';
 import {OrOptions} from './src/inputs/OrOptions';
@@ -309,7 +308,7 @@ function apiGetWaitingFor(
   res.setHeader('Content-Type', 'application/json');
   const answer = {
     "result": "WAIT",
-    "player": game.activePlayer.name
+    "player": game.getPlayerById(game.activePlayer).name
   }
   if (player.getWaitingFor() !== undefined || game.phase === Phase.END) {
     answer["result"] = "GO";
@@ -474,12 +473,12 @@ function getPlayer(player: Player, game: Game): string {
     gameLog: game.gameLog,
     isSoloModeWin: game.isSoloModeWin(),
     gameAge: game.gameAge,
-    isActive: player.id === game.activePlayer.id,
+    isActive: player.id === game.activePlayer,
     corporateEra: game.corporateEra,
     venusNextExtension: game.venusNextExtension,
     venusScaleLevel: game.getVenusScaleLevel(),
     boardName: game.boardName,
-    colonies: getColonies(game.colonies),
+    colonies: getColonies(game),
     tags: player.getAllTags(),
     showOtherPlayersVP: game.showOtherPlayersVP,
     actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
@@ -628,11 +627,11 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       titaniumProduction: player.getProduction(Resources.TITANIUM),
       titaniumValue: player.getTitaniumValue(game),
       victoryPointsBreakdown: player.getVictoryPoints(game),
-      isActive: player.id === game.activePlayer.id,
+      isActive: player.id === game.activePlayer,
       venusNextExtension: game.venusNextExtension,
       venusScaleLevel: game.getVenusScaleLevel(),
       boardName: game.boardName,
-      colonies: getColonies(game.colonies),
+      colonies: getColonies(game),
       tags: player.getAllTags(),
       showOtherPlayersVP: game.showOtherPlayersVP,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
@@ -646,14 +645,14 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
   });
 }
 
-function getColonies(colonies: Array<IColony>): Array<ColonyModel> {
-    return colonies.map((colony): ColonyModel => ({
-        colonies: colony.colonies.map((player): Color => player.color),
-        isActive: colony.isActive,
-        name: colony.name,
-        trackPosition: colony.trackPosition,
-        visitor: colony.visitor === undefined ? undefined : colony.visitor.color
-    }));
+function getColonies(game: Game): Array<ColonyModel> {
+  return game.colonies.map((colony): ColonyModel => ({
+      colonies: colony.colonies.map((playerId): Color => game.getPlayerById(playerId).color),
+      isActive: colony.isActive,
+      name: colony.name,
+      trackPosition: colony.trackPosition,
+      visitor: colony.visitor === undefined ? undefined : game.getPlayerById(colony.visitor).color
+  }));
 }
 
 function getTurmoil(game: Game): TurmoilModel | undefined {
@@ -665,7 +664,7 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
         chairman = Color.NEUTRAL;
       }
       else {
-        chairman = game.turmoil.chairman.color;
+        chairman = game.getPlayerById(game.turmoil.chairman).color;
       }
     }
     if (game.turmoil.dominantParty){
@@ -680,7 +679,7 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
     const reserve = game.turmoil.getPresentPlayers().map(player => {
       const number = game.turmoil!.getDelegates(player);
       if (player != "NEUTRAL") {
-        return {color: player.color, number: number};
+        return {color: game.getPlayerById(player).color, number: number};
       }
       else {
         return {color: Color.NEUTRAL, number: number};
@@ -742,7 +741,7 @@ function getParties(game: Game): Array<PartyModel> | undefined{
       party.getPresentPlayers().forEach(player => {
         const number = party.getDelegates(player);
         if (player != "NEUTRAL") {
-          delegates.push({color: player.color, number: number});
+          delegates.push({color: game.getPlayerById(player).color, number: number});
         }
         else {
           delegates.push({color: Color.NEUTRAL, number: number});
@@ -754,7 +753,7 @@ function getParties(game: Game): Array<PartyModel> | undefined{
           partyLeader = Color.NEUTRAL;
         }
         else {
-          partyLeader = party.partyLeader.color;
+          partyLeader = game.getPlayerById(party.partyLeader).color;
         }
       }
       return {
@@ -797,7 +796,7 @@ function getSpaces(spaces: Array<ISpace>): Array<SpaceModel> {
 
 function getGame(game: Game): string {
   const output = {
-    activePlayer: game.activePlayer.color,
+    activePlayer: game.getPlayerById(game.activePlayer).color,
     id: game.id,
     phase: game.phase,
     players: game.getPlayers()

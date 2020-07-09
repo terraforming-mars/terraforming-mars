@@ -34,7 +34,7 @@ describe("SupportedResearch", function () {
         if (game.turmoil !== undefined) {
             let scientists = game.turmoil.getPartyByName(PartyName.SCIENTISTS);
             if (scientists !== undefined) {
-                scientists.delegates.push(player, player);
+                scientists.delegates.push(player.id, player.id);
                 expect(card.canPlay(player, game)).to.eq(true); 
             }
         } 

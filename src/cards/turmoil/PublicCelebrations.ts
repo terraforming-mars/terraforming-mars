@@ -13,7 +13,7 @@ export class PublicCelebrations implements IProjectCard {
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {
-            return game.turmoil.chairman === player;
+            return game.turmoil.chairman === player.id;
         }
         return false;
     }

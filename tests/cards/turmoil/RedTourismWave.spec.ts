@@ -37,7 +37,7 @@ describe("RedTourismWave", function () {
         if (game.turmoil !== undefined) {
             let reds = game.turmoil.getPartyByName(PartyName.REDS);
             if (reds !== undefined) {
-                reds.delegates.push(player, player);
+                reds.delegates.push(player.id, player.id);
                 expect(card.canPlay(player, game)).to.eq(true); 
             }
         } 
@@ -45,6 +45,6 @@ describe("RedTourismWave", function () {
         const lands = game.board.getAdjacentSpaces(tharsis).filter((space) => space.spaceType === SpaceType.LAND);
         game.addCityTile(player, lands[0].id);
         card.play(player, game);
-        expect(player.getResource(Resources.MEGACREDITS)).to.eq(2);
+        expect(player.getResource(Resources.MEGACREDITS)).to.eq(3); 
     });
 });

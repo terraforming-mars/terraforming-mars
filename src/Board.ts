@@ -101,10 +101,14 @@ export abstract class Board {
         return this.spaces[Math.floor(Math.random() * 30) + offset];
     }
 
+    public getEmptySpaces(): Array<ISpace> {
+        return this.spaces.filter((space) => space.tile === undefined);
+    }
+
     public getAvailableSpacesForCity(player: Player): Array<ISpace> {
         // A city cannot be adjacent to another city
         return this.getAvailableSpacesOnLand(player).filter(
-        (space) => this.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType === TileType.CITY).length === 0
+        (space) => this.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length === 0
         );
     } 
 
@@ -177,4 +181,8 @@ export abstract class Board {
         return space;
     }
 
+    public static isCitySpace(space: ISpace): boolean {
+        const cityTileTypes = [TileType.CITY, TileType.CAPITAL];
+        return space.tile !== undefined && cityTileTypes.includes(space.tile.tileType);
+    }
 }  

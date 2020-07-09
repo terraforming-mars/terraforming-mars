@@ -36,11 +36,11 @@ describe("VoteOfNoConfidence", function () {
             expect(card.canPlay(player, game)).to.eq(false);
             let greens = game.turmoil.getPartyByName(PartyName.GREENS);
             if (greens !== undefined) {
-                greens.partyLeader = player;
+                greens.partyLeader = player.id;
                 expect(card.canPlay(player, game)).to.eq(true); 
             }
             card.play(player, game);
-            expect(game.turmoil.chairman).to.eq(player);
+            expect(game.getPlayerById(game.turmoil.chairman)).to.eq(player);           
             expect(player.getTerraformRating()).to.eq(15);
         }
     });

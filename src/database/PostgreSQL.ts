@@ -2,30 +2,40 @@ import { IDatabase } from "./IDatabase";
 import { Game } from "../Game";
 import { IGameData } from './IDatabase';
 
-import { Client } from "pg";
+import { Client, ClientConfig } from "pg";
 
 export class PostgreSQL implements IDatabase {
     private client: Client;
     
     constructor() {
-        this.client = new Client({
-            connectionString: process.env.POSTGRES_HOST,
-            ssl: {
+        const config: ClientConfig = {
+            connectionString: process.env.POSTGRES_HOST
+        };
+        if (config.connectionString !== undefined && config.connectionString.startsWith("postgres")) {
+            config.ssl = {
+                // heroku uses self-signed certificates
                 rejectUnauthorized: false
-            }
-        });
+            };
+        }
+        this.client = new Client(config);
         this.client.connect();
-        this.client.query("CREATE TABLE IF NOT EXISTS games(game_id varchar, save_id integer, game text, status text default 'running', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))", (err) => {
+        this.client.query("CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default 'running', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))", (err) => {
             if (err) {
                 throw err;
             }
             console.log("Connected to PostgreSQL");
         });
+        this.client.query("CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)", (err) => {
+            if (err) {
+                throw err;
+            }
+            console.log("Connected to PostgreSQL");
+        });        
     }
 
     getClonableGames( cb:(err: any, allGames:Array<IGameData>)=> void) {
         const allGames:Array<IGameData> = [];
-        const sql = "SELECT distinct game_id game_id, game FROM games WHERE status = 'running' and save_id = 0 order by game_id asc";
+        const sql = "SELECT distinct game_id game_id, players players FROM games WHERE status = 'running' and save_id = 0 order by game_id asc";
 
         this.client.query(sql, (err, res) => {
             if (err) {
@@ -35,7 +45,7 @@ export class PostgreSQL implements IDatabase {
             }
             for (const row of res.rows) {
                 const gameId:string = row.game_id;
-                const playerCount: number = JSON.parse(row.game).players.length;
+                const playerCount: number = row.players;
                 const gameData:IGameData = {
                     gameId,
                     playerCount
@@ -143,9 +153,9 @@ export class PostgreSQL implements IDatabase {
         });
     }
 
-    saveGameState(game_id: string, save_id: number, game: string): void {
+    saveGameState(game_id: string, save_id: number, game: string, players: number): void {
         // Insert
-        this.client.query("INSERT INTO games(game_id, save_id, game) VALUES($1, $2, $3)", [game_id, save_id, game], (err) => {
+        this.client.query("INSERT INTO games(game_id, save_id, game, players) VALUES($1, $2, $3, $4)", [game_id, save_id, game, players], (err) => {
             if (err) {
                 //Should be a duplicate, does not matter
                 return;

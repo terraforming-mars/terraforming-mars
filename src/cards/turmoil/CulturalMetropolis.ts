@@ -19,7 +19,7 @@ export class CulturalMetropolis implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {
             //This card requires player has 2 delegates available
-            return game.turmoil.canPlay(player, PartyName.UNITY) && player.getProduction(Resources.ENERGY) >= 1 && (game.turmoil!.getDelegates(player.id) > 1 || (game.turmoil!.getDelegates(player.id) === 1 && game.turmoil!.lobby.has(player.id)))
+            return game.turmoil.canPlay(player, PartyName.UNITY) && player.getProduction(Resources.ENERGY) >= 1 && (game.turmoil.getDelegates(player.id) > 1 || (game.turmoil.getDelegates(player.id) === 1 && game.turmoil.lobby.has(player.id)))
         }
         return false;
     }

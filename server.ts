@@ -431,6 +431,17 @@ function getAwards(game: Game): Array<FundedAwardModel>  {
   return awardModels;
 }
 
+function getCorporationCard(player: Player): CardModel | undefined {
+  if (player.corporationCard == undefined) return undefined;
+
+  return ({
+    name: player.corporationCard.name,
+    resources: player.getResourcesOnCard(player.corporationCard),
+    calculatedCost: 0,
+    cardType: CardType.CORPORATION
+  }) as CardModel
+}
+
 function getPlayer(player: Player, game: Game): string {
   const output = {
     cardsInHand: getCards(player, player.cardsInHand, game),
@@ -438,10 +449,7 @@ function getPlayer(player: Player, game: Game): string {
     milestones: getMilestones(game),
     awards: getAwards(game),
     color: player.color,
-    corporationCard: player.corporationCard ?
-      player.corporationCard.name : undefined,
-    corporationCardResources: player.corporationCard ?
-      player.getResourcesOnCard(player.corporationCard) : undefined,  
+    corporationCard: getCorporationCard(player),
     energy: player.energy,
     energyProduction: player.getProduction(Resources.ENERGY),
     generation: game.getGeneration(),
@@ -603,10 +611,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
   return players.map((player) => {
     return {
       color: player.color,
-      corporationCard: player.corporationCard ?
-        player.corporationCard.name : undefined,
-      corporationCardResources: player.corporationCard ?
-        player.getResourcesOnCard(player.corporationCard) : undefined,  
+      corporationCard: getCorporationCard(player),
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
       heat: player.heat,

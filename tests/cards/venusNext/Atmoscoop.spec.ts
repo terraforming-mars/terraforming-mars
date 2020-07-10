@@ -29,7 +29,7 @@ describe("Atmoscoop", function () {
         player.playedCards.push(new Research(), new SearchForLife());
         expect(card.canPlay(player)).to.eq(true);
 
-        const action = card.play(player, game);
+        const action = card.play(player, game) as OrOptions;
         expect(action instanceof OrOptions).to.eq(true);
 
         expect(action.options.length).to.eq(2);
@@ -43,7 +43,7 @@ describe("Atmoscoop", function () {
         const card2 = new Dirigibles();
         player.playedCards.push(card2);
 
-        const action = card.play(player, game);
+        const action = card.play(player, game) as OrOptions;
         expect(action instanceof OrOptions).to.eq(true);
 
         const orOptions = action.options[1] as OrOptions;
@@ -57,7 +57,7 @@ describe("Atmoscoop", function () {
         const card3 = new FloatingHabs();
         player.playedCards.push(card2, card3);
 
-        const action = card.play(player, game);
+        const action = card.play(player, game) as OrOptions;
         const orOptions = action.options[0] as SelectCard<ICard>;
         
         orOptions.cb([card3]);

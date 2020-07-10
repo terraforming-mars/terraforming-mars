@@ -88,6 +88,11 @@ export class Astrodrill implements IActionCard, CorporationCard {
         if (this.resourceCount > 0) opts.push(spendResource);
         asteroidCards.length === 1 ? opts.push(addResourceToSelf) : opts.push(addResource);
 
+        if (opts.length === 1) {
+            if (opts[0] instanceof SelectOption) return (opts[0] as SelectOption).cb() as OrOptions;
+            return opts[0] as SelectCard<ICard>;
+        }
+
         return new OrOptions(...opts);
     }
 

@@ -7028,9 +7028,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div><br>
       </div>
       <div class="description bottom" >
-        (Decrease your energy<br>
-        production 1 step. 1 VP per<br>
-        asteroid on this card.)
+        (Decrease your energy production 1 step. 1 VP per asteroid on this card.)
       </div>
     </div>
 `],

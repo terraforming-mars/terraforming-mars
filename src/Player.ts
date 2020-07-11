@@ -1064,7 +1064,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                   if (
                     foundCards.length * this.cardCost > htp.heat + htp.megaCredits
                   ) {
-                    throw new Error('Not enough spent to buy selected cards');
+                    throw new Error("Not enough spent to buy selected cards");
                   }
                   selectedCards = foundCards;
                   return undefined;
@@ -1082,7 +1082,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                   if (
                     htp.megaCredits > this.megaCredits
                   ) {
-                    throw new Error('Not enough spent to buy selected cards');
+                    throw new Error("Not enough spent to buy selected cards");
                   }
                   selectedCards = foundCards;
                   return undefined;

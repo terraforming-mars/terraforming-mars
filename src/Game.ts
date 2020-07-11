@@ -122,6 +122,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public soloTR: boolean;
     private clonedGamedId: string | undefined;
     public initialDraft: boolean = false;
+    public someoneHasRemovedOtherPlayersPlants: boolean = false;
     public initialDraftRounds: number = 4;
     public randomMA: boolean = false;
 
@@ -548,10 +549,23 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public addResourceProductionDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {
-      if (this.soloMode) {
-        return;
+      if (this.soloMode) return;
+
+      let candidates: Array<Player> = [];
+      if (resource === Resources.MEGACREDITS) {
+        candidates = this.getPlayers().filter((p) => p.getProduction(resource) >= count - 5);
+      } else {
+        candidates = this.getPlayers().filter((p) => p.getProduction(resource) >= count);
       }
-      this.addInterrupt(new SelectResourceProductionDecrease(player, this, resource, count, title));
+
+      if (candidates.length === 0) {
+        return;
+      } else if (candidates.length === 1) {
+        candidates[0].setProduction(resource, -count, this, player);
+        return undefined;
+      } else {
+        this.addInterrupt(new SelectResourceProductionDecrease(player, candidates, this, resource, count, title));
+      }
     }
 
     public addResourceDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {
@@ -560,7 +574,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
       let candidates: Array<Player> = [];
       if (resource === Resources.PLANTS) {
-        candidates = this.getPlayers().filter((p) => p.id !== player.id && !p.hasProtectedHabitats() && p.getResource(resource) > 0);
+        candidates = this.getPlayers().filter((p) => p.id !== player.id && !p.plantsAreProtected() && p.getResource(resource) > 0);
       } else {
         candidates = this.getPlayers().filter((p) => p.id !== player.id && p.getResource(resource) > 0);
       }
@@ -828,6 +842,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private gotoProductionPhase(): void {
       this.phase = Phase.PRODUCTION;
       this.passedPlayers.clear();
+      this.someoneHasRemovedOtherPlayersPlants = false;
       this.players.forEach((player) => {
         player.runProductionPhase();
       });

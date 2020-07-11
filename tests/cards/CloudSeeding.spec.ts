@@ -34,11 +34,23 @@ describe("CloudSeeding", function () {
         expect(card.canPlay(player, game)).to.eq(false);
     });
 
-    it("Should play", function () {
+    it("Should play - auto select if single target", function () {
         // Meet requirements
         player2.setProduction(Resources.HEAT);
         maxOutOceans(player, game, 3);
         expect(card.canPlay(player, game)).to.eq(true);
+        
+        card.play(player, game);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(2);
+
+        expect(game.interrupts.length).to.eq(0);
+        expect(player2.getProduction(Resources.HEAT)).to.eq(0);
+    });
+
+    it("Should play - multiple targets", function () {
+        player.setProduction(Resources.HEAT);
+        player2.setProduction(Resources.HEAT);
         
         card.play(player, game);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);

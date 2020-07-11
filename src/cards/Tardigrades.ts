@@ -1,10 +1,10 @@
-
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { ResourceType } from "../ResourceType";
 import { CardName } from '../CardName';
 import { IResourceCard } from './ICard';
+import { Player } from "../Player";
 
 export class Tardigrades implements IProjectCard, IResourceCard {
     public cost: number = 4;
@@ -20,8 +20,8 @@ export class Tardigrades implements IProjectCard, IResourceCard {
     public play() {
         return undefined;
     }
-    public action() {
-        this.resourceCount++;
+    public action(player: Player) {
+        player.addResourceTo(this);
         return undefined;
     }
     public canAct(): boolean {

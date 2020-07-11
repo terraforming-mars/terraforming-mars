@@ -27,14 +27,14 @@ describe("Penguins", function () {
     it("Should act", function () {
         player.playedCards.push(card);
         expect(card.canAct()).to.eq(true);
-        card.action();
+        card.action(player);
         expect(card.resourceCount).to.eq(1);
     });
 
     it("Should give victory points", function () {
         player.playedCards.push(card);
-        card.action();
-        card.action();
+        card.action(player);
+        card.action(player);
         expect(card.getVictoryPoints()).to.eq(2);
     });
 });

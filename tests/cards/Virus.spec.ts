@@ -43,5 +43,6 @@ describe("Virus", function () {
         player.plants = 5;
         expect(card.play(player, game)).to.eq(undefined)
         expect(game.interrupts.length).to.eq(0);
+        expect(player.plants).to.eq(5);
     });
 });

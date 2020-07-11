@@ -42,7 +42,7 @@ export class Predators implements IProjectCard, IActionCard, IResourceCard {
     private doAction(targetCard:ICard, player: Player, game: Game): void {
         game.getCardPlayer(targetCard.name).removeResourceFrom(targetCard, 1, game, player, false);
         this.logCardAction(game, player, targetCard);
-        this.resourceCount++;
+        player.addResourceTo(this);
     }
 
     public canAct(player: Player, game: Game): boolean {
@@ -53,7 +53,7 @@ export class Predators implements IProjectCard, IActionCard, IResourceCard {
     public action(player: Player, game: Game) {
         // Solo play, can always steal from immaginary opponent
         if (game.soloMode) {
-            this.resourceCount++;
+            player.addResourceTo(this);
             return undefined;
         }
         const animalCards = this.getPossibleTargetCards(player, game);

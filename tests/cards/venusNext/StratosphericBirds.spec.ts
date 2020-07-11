@@ -43,7 +43,7 @@ describe("StratosphericBirds", function () {
 
     it("Should act", function () {
         player.playedCards.push(card);
-        card.action();
+        card.action(player);
         expect(player.getResourcesOnCard(card)).to.eq(1);
 
         player.addResourceTo(card, 7);

@@ -34,9 +34,12 @@ describe("BiomassCombustors", function () {
     it("Should play", function () {
         (game as any).oxygenLevel = 6;
         player2.setProduction(Resources.PLANTS, 1);
+        expect(card.canPlay(player, game)).to.eq(true);
 
         card.play(player, game);
+        expect(game.interrupts.length).to.eq(0);
         expect(player.getProduction(Resources.ENERGY)).to.eq(2);
+        expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
 
         player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);

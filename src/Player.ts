@@ -125,7 +125,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     public decreaseTerraformRating() {
-      this.terraformRating--;
+      // To avoid negative TR though very uncommon
+      if (this.terraformRating > 0) {
+        this.terraformRating--;
+      }
     }
 
     public increaseTerraformRating(game: Game) {

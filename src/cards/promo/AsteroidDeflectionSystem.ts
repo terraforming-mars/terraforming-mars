@@ -17,6 +17,7 @@ export class AsteroidDeflectionSystem implements IActionCard, IProjectCard, IRes
     public tags: Array<Tags> = [Tags.SPACE, Tags.EARTH, Tags.STEEL];
     public resourceType: ResourceType = ResourceType.ASTEROID;
     public resourceCount: number = 0;
+    public hasRequirements = false;
     public cardType: CardType = CardType.ACTIVE;
 
     public canPlay(player: Player): boolean {
@@ -42,7 +43,7 @@ export class AsteroidDeflectionSystem implements IActionCard, IProjectCard, IRes
             new LogMessageData(LogMessageDataType.PLAYER, player.id),
             new LogMessageData(LogMessageDataType.CARD, topCard.name)
         );
-            
+
         game.dealer.discard(topCard);
         return undefined;
     }

@@ -90,7 +90,8 @@ export class RoboticWorkforce implements IProjectCard {
             CardName.LAVA_TUBE_SETTLEMENT,
             CardName.SPACE_PORT,
             CardName.SPINOFF_DEPARTMENT,
-            CardName.MARTIAN_MEDIA_CENTER
+            CardName.MARTIAN_MEDIA_CENTER,
+            CardName.FIELD_CAPPED_CITY
         ];
 
         const corporationCardNames = (new Set())
@@ -282,7 +283,8 @@ export class RoboticWorkforce implements IProjectCard {
                     new Updater(CardName.UTOPIA_INVEST, 0, 0, 1, 1, 0, 0),
                     new Updater(CardName.FACTORUM, 0, 0, 1, 0, 0, 0),
                     new Updater(CardName.RECYCLON, 0, 0, 1, 0, 0, 0),
-                    new Updater(CardName.MARTIAN_MEDIA_CENTER, 0, 2, 0, 0, 0, 0)
+                    new Updater(CardName.MARTIAN_MEDIA_CENTER, 0, 2, 0, 0, 0, 0),
+                    new Updater(CardName.FIELD_CAPPED_CITY, 1, 2, 0, 0, 0, 0)
                 ]
 
                 let result:Updater = updaters.filter(u => u.name === foundCard.name)[0];

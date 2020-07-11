@@ -17,7 +17,6 @@ describe("CometAiming", function () {
     });
 
     it("Should play", function () {
-        expect(card.canPlay()).to.eq(true);
         expect(card.play()).to.eq(undefined);
     });
 
@@ -41,7 +40,7 @@ describe("CometAiming", function () {
         selectSpace.cb(selectSpace.availableSpaces[0]);
         expect(player.getTerraformRating()).to.eq(21);
     });
-    
+
     it("Should act - multiple action choices, multiple targets", function () {
         const card2 = new RotatorImpacts();
         player.playedCards.push(card, card2);

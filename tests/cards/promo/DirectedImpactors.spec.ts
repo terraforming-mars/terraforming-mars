@@ -16,9 +16,8 @@ describe("DirectedImpactors", function () {
         player = new Player("test", Color.BLUE, false);
         game = new Game("foobar", [player, player], player);
     });
-    
+
     it("Should play", function () {
-        expect(card.canPlay()).to.eq(true);
         expect(card.play()).to.eq(undefined);
     });
 
@@ -35,7 +34,7 @@ describe("DirectedImpactors", function () {
         expect(game.interrupts.length).to.eq(1);
         let selectHowToPayInterrupt = game.interrupts[0] as SelectHowToPayInterrupt;
         selectHowToPayInterrupt.playerInput.cb({ steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0 });
-        
+
         expect(player.megaCredits).to.eq(0);
         expect(player.titanium).to.eq(0);
         expect(card.resourceCount).to.eq(1);

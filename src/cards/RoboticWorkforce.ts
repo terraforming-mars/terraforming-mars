@@ -53,12 +53,14 @@ export class RoboticWorkforce implements IProjectCard {
             CardName.GEOTHERMAL_POWER,
             CardName.GHG_FACTORIES,
             CardName.GREAT_DAM,
+            CardName.GREAT_DAM_PROMO,
             CardName.GYROPOLIS,
             CardName.HEAT_TRAPPERS,
             CardName.IMMIGRANT_CITY,
             CardName.INDUSTRIAL_MICROBES,
             CardName.MAGNETIC_FIELD_DOME,
             CardName.MAGNETIC_FIELD_GENERATORS,
+            CardName.MAGNETIC_FIELD_GENERATORS_PROMO,
             CardName.MEDICAL_LAB,
             CardName.MINE,
             CardName.MINING_AREA,
@@ -87,7 +89,9 @@ export class RoboticWorkforce implements IProjectCard {
             CardName.HOUSE_PRINTING,
             CardName.LAVA_TUBE_SETTLEMENT,
             CardName.SPACE_PORT,
-            CardName.SPINOFF_DEPARTMENT
+            CardName.SPINOFF_DEPARTMENT,
+            CardName.MARTIAN_MEDIA_CENTER,
+            CardName.FIELD_CAPPED_CITY
         ];
 
         const corporationCardNames = (new Set())
@@ -104,7 +108,9 @@ export class RoboticWorkforce implements IProjectCard {
                     if (game.someoneHasResourceProduction(Resources.PLANTS,1)) {
                         return true;
                     }
-                } else if (builderCardsNames[i] === card.name  && card.name === CardName.MAGNETIC_FIELD_GENERATORS) {
+                } else if (builderCardsNames[i] === card.name  
+                    && (card.name === CardName.MAGNETIC_FIELD_GENERATORS
+                        || card.name === CardName.MAGNETIC_FIELD_GENERATORS_PROMO)) {
                     if (player.getProduction(Resources.ENERGY) >= 4) {
                         return true;
                     }
@@ -237,6 +243,7 @@ export class RoboticWorkforce implements IProjectCard {
                     new Updater(CardName.STRIP_MINE, -2, 0, 2, 1, 0, 0),
                     new Updater(CardName.MAGNETIC_FIELD_DOME, -2, 0, 0, 0, 1, 0),
                     new Updater(CardName.MAGNETIC_FIELD_GENERATORS, -4, 0, 0, 0, 2, 0),
+                    new Updater(CardName.MAGNETIC_FIELD_GENERATORS_PROMO, -4, 0, 0, 0, 2, 0),
                     new Updater(CardName.MINING_RIGHTS, 0, 0, this.miningSteelProduction, this.miningTitaniumProduction, 0, 0),
                     new Updater(CardName.MINING_QUOTA, 0, 0, 2, 0, 0, 0),
                     new Updater(CardName.MINING_AREA, 0, 0, this.miningSteelProduction, this.miningTitaniumProduction, 0, 0),
@@ -256,6 +263,7 @@ export class RoboticWorkforce implements IProjectCard {
                     new Updater(CardName.CORPORATE_STRONGHOLD, -1, 3, 0, 0, 0, 0),
                     new Updater(CardName.SPACE_ELEVATOR, 0, 0, 0, 1, 0, 0),
                     new Updater(CardName.GREAT_DAM, 2, 0, 0, 0, 0, 0),
+                    new Updater(CardName.GREAT_DAM_PROMO, 2, 0, 0, 0, 0, 0),
                     new Updater(CardName.NOCTIS_FARMING, 0, 1, 0, 0, 0, 0),
                     new Updater(CardName.SOIL_FACTORY, -1, 0, 0, 0, 1, 0),
                     new Updater(CardName.FOOD_FACTORY, 0, 4, 0, 0, -1, 0),
@@ -274,7 +282,9 @@ export class RoboticWorkforce implements IProjectCard {
                     new Updater(CardName.CHEUNG_SHING_MARS, 0, 3, 0, 0, 0, 0),
                     new Updater(CardName.UTOPIA_INVEST, 0, 0, 1, 1, 0, 0),
                     new Updater(CardName.FACTORUM, 0, 0, 1, 0, 0, 0),
-                    new Updater(CardName.RECYCLON, 0, 0, 1, 0, 0, 0)
+                    new Updater(CardName.RECYCLON, 0, 0, 1, 0, 0, 0),
+                    new Updater(CardName.MARTIAN_MEDIA_CENTER, 0, 2, 0, 0, 0, 0),
+                    new Updater(CardName.FIELD_CAPPED_CITY, 1, 2, 0, 0, 0, 0)
                 ]
 
                 let result:Updater = updaters.filter(u => u.name === foundCard.name)[0];

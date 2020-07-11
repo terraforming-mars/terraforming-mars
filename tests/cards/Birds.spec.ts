@@ -39,7 +39,7 @@ describe("Birds", function () {
     });
 
     it("Should act", function () {
-        card.action();
+        card.action(player);
         expect(card.resourceCount).to.eq(1);
         expect(card.getVictoryPoints()).to.eq(1);
     });

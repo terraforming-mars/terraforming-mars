@@ -13,8 +13,18 @@ export class MarketManipulation implements IProjectCard {
     public name: CardName = CardName.MARKET_MANIPULATION;
     public cardType: CardType = CardType.EVENT;
     public hasRequirements = false;
+
     public canPlay(_player: Player, game: Game): boolean {
-      return this.getIncreasableColonies(game).length > 0 && this.getDecreasableColonies(game).length > 0;
+      const increasableColonies = this.getIncreasableColonies(game);
+      const decreasableColonies = this.getDecreasableColonies(game);
+
+      if (increasableColonies.length === 0) return false;
+      if (decreasableColonies.length === 0) return false;
+      if (increasableColonies.length === 1 && decreasableColonies.length === 1 && increasableColonies[0] === decreasableColonies[0]) {
+        return false;
+      }
+            
+      return true;
     }
 
     private getIncreasableColonies(game: Game) {
@@ -29,11 +39,11 @@ export class MarketManipulation implements IProjectCard {
         let selectColonies = new OrOptions();
         selectColonies.title = "Select colonies to increase and decrease tile track";
 
-        let increaseColonies = this.getIncreasableColonies(game);
-        let decreaseColonies = this.getDecreasableColonies(game);
+        const increasableColonies = this.getIncreasableColonies(game);
+        const decreasableColonies = this.getDecreasableColonies(game);
 
-        increaseColonies.forEach(function(c1){
-          decreaseColonies.forEach(function(c2){
+        increasableColonies.forEach(function(c1){
+          decreasableColonies.forEach(function(c2){
             if (c1.name !== c2.name) {
               let description = "Increase " + c1.name + " (" + c1.description + ") and decrease " + c2.name + " (" + c2.description + ")"
               const colonySelect =  new SelectOption(

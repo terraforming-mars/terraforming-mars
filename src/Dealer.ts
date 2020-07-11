@@ -435,6 +435,30 @@ import { SponsoredMohole } from "./cards/turmoil/SponsoredMohole";
 import { SupportedResearch } from "./cards/turmoil/SupportedResearch";
 import { WildlifeDome } from "./cards/turmoil/WildlifeDome";
 import { VoteOfNoConfidence } from "./cards/turmoil/VoteOfNoConfidence";
+import { Astrodrill } from "./cards/promo/Astrodrill";
+import { AsteroidHollowing } from "./cards/promo/AsteroidHollowing";
+import { DeimosDownPromo } from "./cards/promo/DeimosDownPromo";
+import { GreatDamPromo } from "./cards/promo/GreatDamPromo";
+import { MagneticFieldGeneratorsPromo } from "./cards/promo/MagneticFieldGeneratorsPromo";
+import { Advertising } from "./cards/promo/Advertising";
+import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
+import { CometAiming } from "./cards/promo/CometAiming";
+import { CuttingEdgeTechnology } from "./cards/promo/CuttingEdgeTechnology";
+import { CrashSiteCleanup } from "./cards/promo/CrashSiteCleanup";
+import { DirectedImpactors } from "./cards/promo/DirectedImpactors";
+import { FieldCappedCity } from "./cards/promo/FieldCappedCity";
+import { MagneticShield } from "./cards/promo/MagneticShield";
+import { Meltworks } from "./cards/promo/Meltworks";
+import { MoholeLake } from "./cards/promo/MoholeLake";
+import { DiversitySupport } from "./cards/promo/DiversitySupport";
+import { JovianEmbassy } from "./cards/promo/JovianEmbassy";
+import { TopsoilContract } from "./cards/promo/TopsoilContract";
+import { ImportedNutrients } from "./cards/promo/ImportedNutrients";
+import { AsteroidDeflectionSystem } from "./cards/promo/AsteroidDeflectionSystem";
+import { SubCrustMeasurements } from "./cards/promo/SubCrustMeasurements";
+import { Potatoes } from "./cards/promo/Potatoes";
+import { MeatIndustry } from "./cards/promo/MeatIndustry";
+
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -665,7 +689,9 @@ export const ALL_TURMOIL_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
 
 export const ALL_PROMO_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
     { cardName: CardName.ARCADIAN_COMMUNITIES, factory: ArcadianCommunities },
+    { cardName: CardName.ASTRODRILL, factory: Astrodrill },
     { cardName: CardName.FACTORUM, factory: Factorum },
+    { cardName: CardName.PHARMACY_UNION, factory: PharmacyUnion },
     { cardName: CardName.PHILARES, factory: Philares },
     { cardName: CardName.MONS_INSURANCE, factory: MonsInsurance },
     { cardName: CardName.RECYCLON, factory: Recyclon },
@@ -686,7 +712,29 @@ export const ALL_PROMO_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.HI_TECH_LAB, factory: HiTechLab },
     { cardName: CardName.ENERGY_MARKET, factory: EnergyMarket },
     { cardName: CardName.LAW_SUIT, factory: LawSuit },
-    { cardName: CardName.STANFORD_TORUS, factory: StanfordTorus }
+    { cardName: CardName.STANFORD_TORUS, factory: StanfordTorus },
+    { cardName: CardName.ASTEROID_HOLLOWING, factory: AsteroidHollowing },
+    { cardName: CardName.COMET_AIMING, factory: CometAiming },
+    { cardName: CardName.CUTTING_EDGE_TECHNOLOGY, factory: CuttingEdgeTechnology },
+    { cardName: CardName.CRASH_SITE_CLEANUP, factory: CrashSiteCleanup },
+    { cardName: CardName.DIRECTED_IMPACTORS, factory: DirectedImpactors },
+    { cardName: CardName.FIELD_CAPPED_CITY, factory: FieldCappedCity },
+    { cardName: CardName.MAGNETIC_SHIELD, factory: MagneticShield },
+    { cardName: CardName.MELTWORKS, factory: Meltworks },
+    { cardName: CardName.MOHOLE_LAKE, factory: MoholeLake },
+    { cardName: CardName.DIVERSITY_SUPPORT, factory: DiversitySupport },
+    { cardName: CardName.JOVIAN_EMBASSY, factory: JovianEmbassy },
+    { cardName: CardName.TOPSOIL_CONTRACT, factory: TopsoilContract },
+    { cardName: CardName.IMPORTED_NUTRIENTS, factory: ImportedNutrients },
+    { cardName: CardName.ASTEROID_DEFLECTION_SYSTEM, factory: AsteroidDeflectionSystem },
+    { cardName: CardName.SUB_CRUST_MEASUREMENTS, factory: SubCrustMeasurements },
+    { cardName: CardName.POTATOES, factory: Potatoes },
+    { cardName: CardName.MEAT_INDUSTRY, factory: MeatIndustry },
+    { cardName: CardName.ADVERTISING, factory: Advertising },
+    { cardName: CardName.DEIMOS_DOWN_PROMO, factory: DeimosDownPromo },
+    { cardName: CardName.GREAT_DAM_PROMO, factory: GreatDamPromo },
+    { cardName: CardName.MAGNETIC_FIELD_GENERATORS_PROMO, factory: MagneticFieldGeneratorsPromo }
+
 ];    
 
 export const ALL_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
@@ -1016,6 +1064,9 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
             this.deck = this.shuffleCards<IProjectCard>(this.deck);
         }
         if (this.usePromoCards) {
+            const cardsToReplace = [CardName.DEIMOS_DOWN, CardName.GREAT_DAM, CardName.MAGNETIC_FIELD_GENERATORS];
+            this.deck = this.deck.filter((card) => !cardsToReplace.includes(card.name));
+
             this.deck.push(...ALL_PROMO_PROJECTS_CARDS.map((cf) => new cf.factory()));
             this.deck = this.shuffleCards<IProjectCard>(this.deck);
         }

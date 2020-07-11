@@ -30,8 +30,8 @@ export class Fish implements IActionCard, IProjectCard, IResourceCard {
   public canAct(): boolean {
     return true;
   }
-  public action() {
-    this.resourceCount++;
+  public action(player: Player) {
+    player.addResourceTo(this);
     return undefined;
   }
 }

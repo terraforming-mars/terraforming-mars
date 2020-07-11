@@ -55,5 +55,6 @@ export interface SerializedGame {
     pendingOceans: number;
     lastSaveId: number;
     turmoil: SerializedTurmoil;
+    someoneHasRemovedOtherPlayersPlants: boolean;
 }
 

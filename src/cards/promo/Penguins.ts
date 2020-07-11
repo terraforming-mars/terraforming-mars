@@ -28,8 +28,8 @@ export class Penguins implements IActionCard, IProjectCard, IResourceCard {
         return true;
     }
 
-    public action() {
-        this.resourceCount++;
+    public action(player: Player) {
+        player.addResourceTo(this);
         return undefined;
     }
 

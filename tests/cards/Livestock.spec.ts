@@ -41,7 +41,7 @@ describe("Livestock", function () {
     
     it("Should act", function () {
         player.playedCards.push(card);
-        card.action();
+        card.action(player);
         expect(card.resourceCount).to.eq(1);
     });
 });

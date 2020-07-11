@@ -44,7 +44,7 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
     public action(player: Player, game: Game) {
       // Solo play, can always steal from immaginary opponent
       if (game.soloMode) {
-        this.resourceCount++;
+        player.addResourceTo(this);
         return undefined;
       }
 
@@ -53,7 +53,7 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
       // Auto select if there is only one possible target
       if (availableCards.length === 1) {
         game.getCardPlayer(availableCards[0].name).removeResourceFrom(availableCards[0], 1, game, player, false);    
-        this.resourceCount++;
+        player.addResourceTo(this);
         this.logCardAction(game, player, availableCards[0]);
         return undefined;
       }
@@ -61,7 +61,7 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
       return new SelectCard('Select card to remove microbe', availableCards,
           (foundCards: Array<ICard>) => {
             game.getCardPlayer(foundCards[0].name).removeResourceFrom(foundCards[0], 1, game, player, false);
-            this.resourceCount++;
+            player.addResourceTo(this);
             this.logCardAction(game, player, foundCards[0]);
             return undefined;
           }

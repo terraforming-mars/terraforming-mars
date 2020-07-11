@@ -176,5 +176,9 @@
     "Select space for greenery tile": "Выберите место для размещения озеленения",
     "Initial Draft rounds:": "Раундов драфта стартовых карт:",
     "Random Milestones/Awards": "Случайные награды и достижения",
-    "Players": "Игроки"
+    "Players": "Игроки",
+    "Select card to add microbe or animal": "Выберите карту, чтобы добавить на нее микроб или животное",
+    "Forest": "Озеленение",
+    "Alert when Terraforming completed": "Предупреждать о завершении терраформирования",
+    "CORPORATION": "Корпорация"
 }

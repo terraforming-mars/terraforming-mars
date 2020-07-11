@@ -20,10 +20,6 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
     public resourceCount: number = 0;
     public cardType: CardType = CardType.ACTIVE;
 
-    public canPlay(): boolean {
-        return true;
-    }
-
     public play() {
         return undefined;
     }
@@ -51,7 +47,7 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
         } else {
             return this.spendResource(player, game);
         }
-        
+
         return new OrOptions(...opts);
     }
 
@@ -65,9 +61,9 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
         }
 
         return new SelectCard(
-            "Select card to add 1 asteroid", 
-            asteroidCards, 
-            (foundCards: Array<ICard>) => { 
+            "Select card to add 1 asteroid",
+            asteroidCards,
+            (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0]);
                 LogHelper.logAddResource(game, player, foundCards[0]);
                 return undefined;

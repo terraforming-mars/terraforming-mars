@@ -12,6 +12,7 @@ export class FieldCappedCity implements IProjectCard {
     public cost: number = 29;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL, Tags.ENERGY];
     public name: CardName = CardName.FIELD_CAPPED_CITY;
+    public hasRequirements = false;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {

@@ -16,11 +16,11 @@ export class CuttingEdgeTechnology implements IProjectCard {
     }
 
     public getCardDiscount(_player: Player, _game: Game, card: IProjectCard) {
-        if (card.canPlay && (card.hasRequirements === undefined || card.hasRequirements)) return 2;
+        if (card.canPlay !== undefined && (card.hasRequirements === undefined || card.hasRequirements)) return 2;
         return 0;
     }
 
     public getVictoryPoints() {
         return 1;
     }
-}    
+}

@@ -1051,7 +1051,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                 false,
                 false,
                 true,
-                0,
+                4 * this.cardCost,
                 (pay) => {
                   htp = pay;
                   return undefined;
@@ -2203,7 +2203,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           action.options.push(selectParty.playerInput);
         }
         else if (this.canAfford(5) && game.turmoil!.getDelegates(this.id) > 0){
-          const selectParty = new SelectParty(this, game, "Send a delegate in an area (5MC)", 1, undefined, 5);
+          const selectParty = new SelectParty(this, game, "Send a delegate in an area (5MC)", 1, undefined, 5, false);
           action.options.push(selectParty.playerInput);
         }
       }

@@ -9,6 +9,7 @@ export class Potatoes implements IProjectCard {
     public cost: number = 2;
     public tags: Array<Tags> = [Tags.PLANT];
     public name: CardName = CardName.POTATOES;
+    public hasRequirements = false;
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player): boolean {

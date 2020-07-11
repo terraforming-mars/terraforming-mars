@@ -20,10 +20,6 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
     public resourceCount: number = 0;
     public cardType: CardType = CardType.ACTIVE;
 
-    public canPlay(): boolean {
-        return true;
-    }
-
     public play() {
         return undefined;
     }
@@ -43,9 +39,9 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
         }
 
         const addAsteroidToCard = new SelectCard(
-            "Select card to add 1 asteroid", 
-            asteroidCards, 
-            (foundCards: Array<ICard>) => { 
+            "Select card to add 1 asteroid",
+            asteroidCards,
+            (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0]);
                 LogHelper.logAddResource(game, player, foundCards[0]);
                 return undefined;
@@ -75,7 +71,7 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
         } else {
             availableActions.push(addAsteroidToCard);
         }
-        
+
         return new OrOptions(...availableActions);
     }
 }

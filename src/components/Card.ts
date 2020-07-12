@@ -111,7 +111,7 @@ export const Card = Vue.component("card", {
             var cssClass = "filterDiv card-" + card.name.toLowerCase().replace(/ /g, "-");
             const wasActivated = (this.player !== undefined
                                     && this.player.actionsThisGeneration !== undefined
-                                    && this.player.actionsThisGeneration.indexOf(this.card) !== -1
+                                    && this.player.actionsThisGeneration.indexOf(this.card.name) !== -1
                                 ) ? true : false;
             if (wasActivated) {
                 cssClass += " cards-action-was-used"

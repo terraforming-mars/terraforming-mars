@@ -32,14 +32,12 @@ describe("MartianMediaCenter", function () {
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         expect(card.canPlay(player, game)).to.eq(false);
-        if (game.turmoil !== undefined) {
-            let mars = game.turmoil.getPartyByName(PartyName.MARS);
-            if (mars !== undefined) {
-                mars.delegates.push(player.id, player.id);
-                expect(card.canPlay(player, game)).to.eq(true); 
-            }
-            card.play(player);
-            expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
-        } 
+        
+        let mars = game.turmoil!.getPartyByName(PartyName.MARS)!;
+        mars.delegates.push(player.id, player.id);
+        expect(card.canPlay(player, game)).to.eq(true); 
+        
+        card.play(player);
+        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
     });
 });

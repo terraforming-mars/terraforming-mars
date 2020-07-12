@@ -36,13 +36,11 @@ describe("PROffice", function () {
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         expect(card.canPlay(player, game)).to.eq(false);
-        if (game.turmoil !== undefined) {
-            let unity = game.turmoil.getPartyByName(PartyName.UNITY);
-            if (unity !== undefined) {
-                unity.delegates.push(player.id, player.id);
-                expect(card.canPlay(player, game)).to.eq(true); 
-            }
-        } 
+        
+        let unity = game.turmoil!.getPartyByName(PartyName.UNITY)!;
+        unity.delegates.push(player.id, player.id);
+        expect(card.canPlay(player, game)).to.eq(true);
+
         player.playedCards.push(card2, card3);
         card.play(player, game);
         expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);

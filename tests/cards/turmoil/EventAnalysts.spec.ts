@@ -31,13 +31,13 @@ describe("EventAnalysts", function () {
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         expect(card.canPlay(player, game)).to.eq(false);
-        if (game.turmoil !== undefined) {
-            game.turmoil.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
-            game.turmoil.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
-            game.turmoil.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
-            expect(card.canPlay(player, game)).to.eq(true); 
-            card.play(player, game);
-            expect(game.turmoil.getPlayerInfluence(player)).to.eq(3);
-        } 
+        
+        game.turmoil!.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
+        game.turmoil!.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
+        game.turmoil!.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
+        expect(card.canPlay(player, game)).to.eq(true); 
+        
+        card.play(player, game);    
+        expect(game.turmoil!.getPlayerInfluence(player)).to.eq(3);
     });
 });

@@ -30,16 +30,17 @@ describe("Recruitment", function () {
             clonedGamedId: undefined
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
-        if (game.turmoil !== undefined) {
-            game.turmoil.parties.forEach(party => {
-                party.delegates = [];
-            });
-            expect(card.canPlay(player, game)).to.eq(false);
-            game.turmoil.sendDelegateToParty("NEUTRAL", PartyName.GREENS, game);
-            expect(card.canPlay(player, game)).to.eq(false);
-            game.turmoil.sendDelegateToParty("NEUTRAL", PartyName.GREENS, game);
-            expect(card.canPlay(player, game)).to.eq(true); 
-        } 
+        
+        game.turmoil!.parties.forEach(party => {
+            party.delegates = [];
+        });
+        expect(card.canPlay(player, game)).to.eq(false);
+        
+        game.turmoil!.sendDelegateToParty("NEUTRAL", PartyName.GREENS, game);
+        expect(card.canPlay(player, game)).to.eq(false);
+        game.turmoil!.sendDelegateToParty("NEUTRAL", PartyName.GREENS, game);
+        expect(card.canPlay(player, game)).to.eq(true); 
+        
         card.play(player, game);
     });
 });

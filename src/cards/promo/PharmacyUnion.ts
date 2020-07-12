@@ -41,9 +41,10 @@ export class PharmacyUnion implements CorporationCard {
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard): void {
         if (this.isDisabled) return undefined;
-        
+
         if (card.tags.includes(Tags.MICROBES)) {
             const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBES).length;
+            const player = game.getPlayers().find((p) => p.isCorporation(this.name))!;
             player.addResourceTo(this, microbeTagCount);
             player.megaCredits = Math.max(player.megaCredits - microbeTagCount * 4, 0)
         }

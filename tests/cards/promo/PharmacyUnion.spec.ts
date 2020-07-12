@@ -35,18 +35,23 @@ describe("PharmacyUnion", function () {
         expect(player.cardsInHand[0].tags.includes(Tags.SCIENCE)).to.eq(true);
     });
 
-    it("Gains diseases when ANY player plays microbe cards", function () {
+    it("Gains diseases and removes MC when ANY player plays microbe cards", function () {
+        player.megaCredits = 8;
+        player2.megaCredits = 8;
         card.play();
 
         const ants = new Ants();
         player.playedCards.push(ants);
         card.onCardPlayed(player, game, ants);
         expect(card.resourceCount).to.eq(3);
+        expect(player.megaCredits).to.eq(4);
 
         const viralEnhancers = new ViralEnhancers();
         player2.playedCards.push(viralEnhancers);
         card.onCardPlayed(player2, game, viralEnhancers);
+        expect(player2.megaCredits).to.eq(8); // should not change
         expect(card.resourceCount).to.eq(4);
+        expect(player.megaCredits).to.eq(0);
     });
     
     it("Removes diseases and gives TR only when corp owner plays science cards", function () {

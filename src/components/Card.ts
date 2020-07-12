@@ -85,13 +85,10 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
     return undefined;
 }
 
-function getCardContent(cardName: string): string | undefined {
+function getCardContent(cardName: string): string {
     let htmlData : string | undefined = '';
     htmlData = HTML_DATA.get(cardName);
-    if (htmlData !== undefined) {
-        htmlData = htmlData.replace('##RESOURCES##', '');
-    }    
-    return htmlData;
+    return htmlData || "";
 }
 
 export const Card = Vue.component("card", {

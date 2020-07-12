@@ -4,11 +4,18 @@ import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
 import { BoardName } from '../../../src/BoardName';
 import { GameOptions, Game } from '../../../src/Game';
+import { PartyName } from "../../../src/turmoil/parties/PartyName";
+import { Turmoil } from "../../../src/turmoil/Turmoil";
+import { SelectDelegate } from "../../../src/inputs/SelectDelegate";
 
 describe("Banned Delegate", function () {
-    it("Should play", function () {
-        const card = new BannedDelegate();
-        const player = new Player("test", Color.BLUE, false);
+    let card : BannedDelegate, player : Player, player2 : Player, game : Game, turmoil: Turmoil;
+
+    beforeEach(function() {
+        card = new BannedDelegate();
+        player = new Player("test", Color.BLUE, false);
+        player2 = new Player("test2", Color.RED, false);
+        
         const gameOptions = {
             draftVariant: false,
             initialDraftVariant: false,
@@ -28,11 +35,28 @@ describe("Banned Delegate", function () {
             soloTR: false,
             clonedGamedId: undefined
           } as GameOptions;
-        const game = new Game("foobar", [player,player], player, gameOptions);  
+        
+          game = new Game("foobar", [player, player2], player, gameOptions);
+          turmoil = game.turmoil!;
+    });
+
+    it("Can't play", function () {
+        turmoil.chairman = player2.id;
         expect(card.canPlay(player, game)).to.eq(false);
-        if (game.turmoil !== undefined) {
-            game.turmoil.chairman = player.id;
-            expect(card.canPlay(player, game)).to.eq(true);
-        }
+    });
+
+    it("Should play", function () {
+        turmoil.chairman = player.id;
+        expect(card.canPlay(player, game)).to.eq(true);
+
+        const greens = turmoil.getPartyByName(PartyName.GREENS)!;
+        turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+        turmoil.sendDelegateToParty(player2.id, PartyName.GREENS, game);
+        const initialDelegatesCount = greens.delegates.length;
+
+        const selectDelegate = card.play(player, game) as SelectDelegate;
+        const action = selectDelegate!.cb(selectDelegate.players[0]);
+        console.log(action);
+        expect(greens.delegates.length).to.eq(initialDelegatesCount - 1);
     });
 });

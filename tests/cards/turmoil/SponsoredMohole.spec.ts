@@ -32,13 +32,11 @@ describe("SponsoredMohole", function () {
           } as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);  
         expect(card.canPlay(player, game)).to.eq(false);
-        if (game.turmoil !== undefined) {
-            let kelvinists = game.turmoil.getPartyByName(PartyName.KELVINISTS);
-            if (kelvinists !== undefined) {
-                kelvinists.delegates.push(player.id, player.id);
-                expect(card.canPlay(player, game)).to.eq(true); 
-            }
-        } 
+
+        let kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS)!;            
+        kelvinists.delegates.push(player.id, player.id);
+        expect(card.canPlay(player, game)).to.eq(true); 
+
         card.play(player);
         expect(player.getProduction(Resources.HEAT)).to.eq(2);
     });

@@ -31,13 +31,11 @@ describe("SupportedResearch", function () {
           } as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);  
         expect(card.canPlay(player, game)).to.eq(false);
-        if (game.turmoil !== undefined) {
-            let scientists = game.turmoil.getPartyByName(PartyName.SCIENTISTS);
-            if (scientists !== undefined) {
-                scientists.delegates.push(player.id, player.id);
-                expect(card.canPlay(player, game)).to.eq(true); 
-            }
-        } 
+        
+        let scientists = game.turmoil!.getPartyByName(PartyName.SCIENTISTS)!;    
+        scientists.delegates.push(player.id, player.id);
+        expect(card.canPlay(player, game)).to.eq(true);
+
         card.play(player, game);
         expect(player.cardsInHand.length).to.eq(2);
     });

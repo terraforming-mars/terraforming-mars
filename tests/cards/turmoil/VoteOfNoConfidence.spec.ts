@@ -31,17 +31,16 @@ describe("VoteOfNoConfidence", function () {
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         expect(card.canPlay(player, game)).to.eq(false);
-        if (game.turmoil !== undefined) {
-            game.turmoil.chairman = "NEUTRAL";
-            expect(card.canPlay(player, game)).to.eq(false);
-            let greens = game.turmoil.getPartyByName(PartyName.GREENS);
-            if (greens !== undefined) {
-                greens.partyLeader = player.id;
-                expect(card.canPlay(player, game)).to.eq(true); 
-            }
-            card.play(player, game);
-            expect(game.getPlayerById(game.turmoil.chairman)).to.eq(player);           
-            expect(player.getTerraformRating()).to.eq(15);
-        }
+
+        game.turmoil!.chairman = "NEUTRAL";
+        expect(card.canPlay(player, game)).to.eq(false);
+
+        let greens = game.turmoil!.getPartyByName(PartyName.GREENS)!;
+        greens.partyLeader = player.id;
+        expect(card.canPlay(player, game)).to.eq(true); 
+
+        card.play(player, game);
+        expect(game.getPlayerById(game.turmoil!.chairman)).to.eq(player);           
+        expect(player.getTerraformRating()).to.eq(15);
     });
 });

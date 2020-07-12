@@ -8,14 +8,17 @@ import { GameOptions, Game } from '../../../src/Game';
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { ColonizerTrainingCamp } from "../../../src/cards/ColonizerTrainingCamp";
 import { MethaneFromTitan } from "../../../src/cards/MethaneFromTitan";
+import { Turmoil } from "../../../src/turmoil/Turmoil";
+import { IParty } from "../../../src/turmoil/parties/IParty";
 
 describe("DiasporaMovement", function () {
-    it("Should play", function () {
-        const card = new DiasporaMovement();
-        const card2 = new ColonizerTrainingCamp();
-        const card3 = new MethaneFromTitan();
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test2", Color.RED, false);
+    let card : DiasporaMovement, player : Player, player2 : Player, game : Game, turmoil: Turmoil, reds: IParty;
+
+    beforeEach(function() {
+        card = new DiasporaMovement();
+        player = new Player("test", Color.BLUE, false);
+        player2 = new Player("test2", Color.RED, false);
+        
         const gameOptions = {
             draftVariant: false,
             initialDraftVariant: false,
@@ -35,18 +38,24 @@ describe("DiasporaMovement", function () {
             soloTR: false,
             clonedGamedId: undefined
           } as GameOptions;
-        const game = new Game("foobar", [player,player2], player, gameOptions);  
-        expect(card.canPlay(player, game)).to.eq(false);
-        if (game.turmoil !== undefined) {
-            let reds = game.turmoil.getPartyByName(PartyName.REDS);
-            if (reds !== undefined) {
-                reds.delegates.push(player.id, player.id);
-                expect(card.canPlay(player, game)).to.eq(true); 
-            }
-        } 
+        
+          game = new Game("foobar", [player, player2], player, gameOptions);
+          turmoil = game.turmoil!;
+          reds  = turmoil.getPartyByName(PartyName.REDS)!;
+    });
 
-        player.playedCards.push(card2);
-        player2.playedCards.push(card3);
+    it("Can't play", function () {
+        reds.sendDelegate(player.id, game);        
+        expect(card.canPlay(player, game)).to.eq(false);
+    });
+
+    it("Should play", function () {
+        reds.sendDelegate(player.id, game);
+        reds.sendDelegate(player.id, game);
+        expect(card.canPlay(player, game)).to.eq(true);
+
+        player.playedCards.push(new ColonizerTrainingCamp());
+        player2.playedCards.push(new MethaneFromTitan());
         card.play(player, game);
         expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
     });

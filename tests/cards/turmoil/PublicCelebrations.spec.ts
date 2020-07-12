@@ -30,10 +30,9 @@ describe("PublicCelebrations", function () {
           } as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         expect(card.canPlay(player, game)).to.eq(false);
-        if (game.turmoil !== undefined) {
-            game.turmoil.chairman = player.id;
-            expect(card.canPlay(player, game)).to.eq(true); 
-        } 
+        
+        game.turmoil!.chairman = player.id;
+        expect(card.canPlay(player, game)).to.eq(true); 
         card.play();
     });
 });

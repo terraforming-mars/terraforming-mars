@@ -15,6 +15,7 @@ import { SerializedTurmoil } from "./SerializedTurmoil";
 import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
+import { PLAYER_DELEGATES_COUNT } from "../constants";
 
 export interface IPartyFactory<T> {
     partyName: PartyName;
@@ -51,7 +52,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
             // Begin with one delegate in the lobby
             this.lobby.add(player.id);
             // Begin with six delegates in the delegate reserve
-            for (let i = 0; i < 6; i++) {
+            for (let i = 0; i < PLAYER_DELEGATES_COUNT - 1; i++) {
                 this.delegate_reserve.push(player.id);   
             }
         });

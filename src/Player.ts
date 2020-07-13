@@ -49,6 +49,7 @@ import { MiningArea } from "./cards/MiningArea";
 import { MiningRights } from "./cards/MiningRights";
 import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
 import { Board } from "./Board";
+import { PartyHooks } from "./turmoil/parties/PartyHooks";
 
 export type PlayerId = string;
 
@@ -108,14 +109,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     public getTitaniumValue(game: Game): number {
-      if (game.turmoilExtension 
-        && game.turmoil !== undefined 
-        && game.turmoil.rulingParty !== undefined 
-        && game.turmoil.rulingParty.name === PartyName.UNITY) {
-          return this.titaniumValue + 1;
-        }
+      if (PartyHooks.shouldApplyPolicy(game, PartyName.UNITY)) return this.titaniumValue + 1;
       return this.titaniumValue;
     }
+
     public increaseTitaniumValue() {
       this.titaniumValue++;
     }
@@ -136,19 +133,15 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       // Turmoil Reds capacity
-      if (game.turmoilExtension 
-        && game.turmoil !== undefined 
-        && game.turmoil.rulingParty !== undefined 
-        && game.turmoil.rulingParty.name === PartyName.REDS && game.phase === Phase.ACTION) {
-          if (this.canAfford(3)) 
-          {
-            game.addSelectHowToPayInterrupt(this, 3, false, false, "Select how to pay for TR increase");
-            this.terraformRating++;
-            this.hasIncreasedTerraformRatingThisGeneration = true;
+      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && game.phase === Phase.ACTION) {
+        if (this.canAfford(3)) {
+          game.addSelectHowToPayInterrupt(this, 3, false, false, "Select how to pay for TR increase");
+          this.terraformRating++;
+          this.hasIncreasedTerraformRatingThisGeneration = true;
+          return;
+        } else {
             return;
-          } else {
-            return;
-          }; 
+        }; 
       }
 
       this.terraformRating++;
@@ -2145,25 +2138,14 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       // Turmoil Scientists capacity
       if (this.canAfford(10) 
-        && game.turmoilExtension 
-        && game.turmoil !== undefined 
-        && game.turmoil.rulingParty !== undefined 
-        && game.turmoil.rulingParty.name === PartyName.SCIENTISTS
+        && PartyHooks.shouldApplyPolicy(game, PartyName.SCIENTISTS)
         && !this.turmoilScientistsActionUsed) {
-          action.options.push(
-            this.turmoilScientistsAction(game)
-        );
+          action.options.push(this.turmoilScientistsAction(game));
       }
 
       // Turmoil Kelvinists capacity
-      if (this.canAfford(10) 
-        && game.turmoilExtension 
-        && game.turmoil !== undefined 
-        && game.turmoil.rulingParty !== undefined 
-        && game.turmoil.rulingParty.name === PartyName.KELVINISTS) {
-          action.options.push(
-            this.turmoilKelvinistsAction(game)
-        );
+      if (this.canAfford(10) && PartyHooks.shouldApplyPolicy(game, PartyName.KELVINISTS)) {
+          action.options.push(this.turmoilKelvinistsAction(game));
       }      
 
       if (this.canAfford(8) && !game.allMilestonesClaimed()) {

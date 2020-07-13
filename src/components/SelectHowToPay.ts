@@ -2,6 +2,7 @@
 import Vue from "vue";
 import { HowToPay } from "../inputs/HowToPay";
 import { PaymentWidgetMixin } from "./PaymentWidgetMixin";
+import { PreferencesManager } from "./PreferencesManager";
 
 interface SelectHowToPayModel {
     heat: number;
@@ -148,7 +149,9 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                 return;
             }
 
-            if (requiredAmt > 0 && totalSpentAmt > requiredAmt) {
+            const showAlert = PreferencesManager.loadValue("show_alerts") === "1";
+
+            if (requiredAmt > 0 && totalSpentAmt > requiredAmt && showAlert) {
               let diff = totalSpentAmt - requiredAmt;
 
               if (confirm("Warning: You are overpaying by " + diff + " MC")) {

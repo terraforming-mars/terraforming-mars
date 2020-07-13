@@ -1,5 +1,5 @@
 
-import { PreferencesManager } from "../components/PreferencesManger";
+import { PreferencesManager } from "../components/PreferencesManager";
 
 export function translateText(englishText: string): string {
     let translatedText = englishText;

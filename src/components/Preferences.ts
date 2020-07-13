@@ -1,6 +1,6 @@
 
 import Vue from "vue";
-import { PreferencesManager } from "./PreferencesManger";
+import { PreferencesManager } from "./PreferencesManager";
 import { LANGUAGES } from "../constants";
 
 
@@ -19,7 +19,7 @@ export const Preferences = Vue.component("preferences", {
             "remove_background": false,
             "magnify_cards": true,
             "magnify_card_descriptions": true,
-            "alert_mars_terraformed": true,
+            "show_alerts": true,
             "lang": "en",
             "langs": LANGUAGES
         };
@@ -151,8 +151,8 @@ export const Preferences = Vue.component("preferences", {
                     </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
-                            <input type="checkbox" v-on:change="updatePreferences" v-model="alert_mars_terraformed" />
-                            <i class="form-icon"></i> <span v-i18n>Alert when Terraforming completed</span>
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="show_alerts" />
+                            <i class="form-icon"></i> <span v-i18n>Show in-game alerts</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item form-group">

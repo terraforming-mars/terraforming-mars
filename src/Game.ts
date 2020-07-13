@@ -52,7 +52,7 @@ import { SerializedGame } from "./SerializedGame";
 import { SerializedPlayer } from "./SerializedPlayer";
 import { CardName } from "./CardName";
 import { Turmoil } from "./turmoil/Turmoil";
-import { PartyName } from "./turmoil/parties/PartyName";
+import { PartyHooks } from "./turmoil/parties/PartyHooks";
 import { IParty } from "./turmoil/parties/IParty";
 import { OrOptions } from "./inputs/OrOptions";
 import { SelectOption } from "./inputs/SelectOption";
@@ -1342,15 +1342,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       // Turmoil Mars First ruling policy
-      if (this.turmoilExtension 
-        && this.turmoil !== undefined 
-        && this.turmoil.rulingParty !== undefined 
-        && this.turmoil.rulingParty.name === PartyName.MARS
-        && spaceType !== SpaceType.COLONY
-        && this.phase === Phase.ACTION
-        && !isWorldGov) {
-          player.setResource(Resources.STEEL, 1);
-      }      
+      PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType, isWorldGov);
 
       // Hellas special requirements ocean tile
       if (space.id === SpaceName.HELLAS_OCEAN_TILE 
@@ -1428,13 +1420,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
         tileType: TileType.GREENERY
       });
       // Turmoil Greens ruling policy
-      if (this.turmoilExtension 
-        && this.turmoil !== undefined 
-        && this.turmoil.rulingParty !== undefined 
-        && this.turmoil.rulingParty.name === PartyName.GREENS
-        && this.phase ===  Phase.ACTION) {
-          player.setResource(Resources.MEGACREDITS, 4);
-      }
+      PartyHooks.applyGreensRulingPolicy(this, player);
+
       if (shouldRaiseOxygen) return this.increaseOxygenLevel(player, 1);
       return undefined;
     }

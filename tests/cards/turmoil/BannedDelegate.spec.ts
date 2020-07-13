@@ -7,6 +7,7 @@ import { GameOptions, Game } from '../../../src/Game';
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { Turmoil } from "../../../src/turmoil/Turmoil";
 import { SelectDelegate } from "../../../src/inputs/SelectDelegate";
+import { OrOptions } from "../../../src/inputs/OrOptions";
 
 describe("Banned Delegate", function () {
     let card : BannedDelegate, player : Player, player2 : Player, game : Game, turmoil: Turmoil;
@@ -54,9 +55,16 @@ describe("Banned Delegate", function () {
         turmoil.sendDelegateToParty(player2.id, PartyName.GREENS, game);
         const initialDelegatesCount = greens.delegates.length;
 
-        const selectDelegate = card.play(player, game) as SelectDelegate;
-        const action = selectDelegate!.cb(selectDelegate.players[0]);
-        console.log(action);
+        const result = card.play(player, game);
+
+        if (result instanceof SelectDelegate) {
+            const selectDelegate = result as SelectDelegate;
+            selectDelegate.cb(result.players[0]);
+        } else {
+            const orOptions = result as OrOptions;
+            orOptions.options.forEach((option) => option.cb((option as SelectDelegate).players[0]));
+        }
+
         expect(greens.delegates.length).to.eq(initialDelegatesCount - 1);
     });
 });

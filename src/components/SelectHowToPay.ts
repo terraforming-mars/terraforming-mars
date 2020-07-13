@@ -2,7 +2,7 @@
 import Vue from "vue";
 import { HowToPay } from "../inputs/HowToPay";
 import { PaymentWidgetMixin } from "./PaymentWidgetMixin";
-import { PreferencesManager } from "./PreferencesManger";
+import { PreferencesManager } from "./PreferencesManager";
 
 interface SelectHowToPayModel {
     heat: number;

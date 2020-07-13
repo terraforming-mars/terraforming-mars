@@ -1,6 +1,6 @@
 
 import Vue from "vue";
-import { PreferencesManager } from "./PreferencesManger";
+import { PreferencesManager } from "./PreferencesManager";
 import { LANGUAGES } from "../constants";
 
 

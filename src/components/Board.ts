@@ -4,7 +4,7 @@ import * as constants from '../constants';
 import { BoardSpace } from "./BoardSpace";
 import { SpaceModel } from "../models/SpaceModel";
 import { SpaceType } from "../SpaceType";
-import { PreferencesManager } from "./PreferencesManger";
+import { PreferencesManager } from "./PreferencesManager";
 
 class GlobalParamLevel {
     constructor(public value: number, public isActive: boolean, public strValue: string) {

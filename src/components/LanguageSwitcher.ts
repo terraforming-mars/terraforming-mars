@@ -1,6 +1,6 @@
 import Vue from "vue";
 import { LANGUAGES } from "../constants";
-import { PreferencesManager } from "./PreferencesManger";
+import { PreferencesManager } from "./PreferencesManager";
 
 export const LanguageSwitcher = Vue.component("language-switcher", {
     data: function () { return {

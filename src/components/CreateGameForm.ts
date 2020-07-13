@@ -282,7 +282,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         </div>
 
                         <div class="create-game-options-block col3 col-sm-6">
-                            <h4 v-i18n>Extensions</h4>
+                            <h4 v-i18n>Expansions</h4>
                             <label class="form-switch">
                                 <input type="checkbox" name="corporateEra" v-model="corporateEra">
                                 <i class="form-icon"></i> <span v-i18n>Corporate Era</span>
@@ -306,7 +306,12 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <label class="form-switch">
                                 <input type="checkbox" name="turmoil"  v-model="turmoil">
                                 <i class="form-icon"></i> <span v-i18n>Turmoil</span>
-                            </label>                            
+                            </label>
+                            
+                            <label class="form-switch">
+                                <input type="checkbox" v-model="promoCardsOption">
+                                <i class="form-icon"></i> <span v-i18n>Promos</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
 
                         </div>
 
@@ -320,7 +325,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                             <label class="form-switch" v-if="playersCount > 1">
                                 <input type="checkbox" name="initialDraft" v-model="initialDraft">
-                                <i class="form-icon"></i> <span v-i18n>Initial Draft variant</span>
+                                <i class="form-icon"></i> <span v-i18n>Initial Draft variant</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#initial-draft" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <label class="form-label" v-if="playersCount > 1 && initialDraft">
@@ -335,7 +340,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                             <label class="form-switch" v-if="playersCount === 1">
                                 <input type="checkbox" v-model="soloTR">
-                                <i class="form-icon"></i> <span v-i18n>TR solo mode</span>
+                                <i class="form-icon"></i> <span v-i18n>TR solo mode</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-solo-mode" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <label class="form-switch" v-if="playersCount > 1">
@@ -345,22 +350,17 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                             <label class="form-switch" v-if="playersCount > 1">
                                 <input type="checkbox" name="randomMA" v-model="randomMA">
-                                <i class="form-icon"></i> <span v-i18n>Random Milestones/Awards</span>
+                                <i class="form-icon"></i> <span v-i18n>Random Milestones/Awards</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#random-milestones-and-awards" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <label class="form-switch" v-if="playersCount > 1">
                                 <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP">
-                                <i class="form-icon"></i> <span v-i18n>Show real-time VP</span>
+                                <i class="form-icon"></i> <span v-i18n>Show real-time VP</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#show-real-time-vp" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <label class="form-switch">
                                 <input type="checkbox" v-model="solarPhaseOption">
-                                <i class="form-icon"></i> <span v-i18n>Use Solar Phase Option</span>
-                            </label>
-
-                            <label class="form-switch">
-                                <input type="checkbox" v-model="promoCardsOption">
-                                <i class="form-icon"></i> <span v-i18n>Use promo cards</span>
+                                <i class="form-icon"></i> <span v-i18n>Use Solar Phase</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#solar-phase" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <label class="form-switch">
@@ -375,7 +375,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                             <label class="form-switch">
                                 <input type="checkbox" v-model="seededGame">
-                                <i class="form-icon"></i> <span v-i18n>Set Predefined Game</span>
+                                <i class="form-icon"></i> <span v-i18n>Set Predefined Game</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#set-predefined-game" class="tooltip" target="_blank">&#9432;</a>
                             </label>
                             <div v-if="seededGame">
                                 <select name="clonedGamedId" v-model="clonedGameData">
@@ -422,7 +422,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <div>
                                 <label class="form-switch form-inline">
                                     <input type="checkbox" v-model="newPlayer.beginner">
-                                    <i class="form-icon"></i> <span v-i18n>Beginner?</span>
+                                    <i class="form-icon"></i> <span v-i18n>Beginner?</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#beginner-corporation" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
 
                                 <label class="form-radio form-inline" v-if="!randomFirstPlayer">

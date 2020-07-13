@@ -15,13 +15,17 @@ export class DeimosDownPromo implements IProjectCard {
     public name: CardName = CardName.DEIMOS_DOWN_PROMO;
     public cardType: CardType = CardType.EVENT;
 
+    public canPlay(player: Player, game: Game) {
+      const canPlaceTile = game.board.getAvailableSpacesForCity(player).length > 0;
+      return canPlaceTile;
+    }
+
     public play(player: Player, game: Game) {
       game.increaseTemperature(player, 3);
       game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 6);
       player.steel += 4;
 
       const availableSpaces = game.board.getAvailableSpacesForCity(player);
-      if (availableSpaces.length < 1) return undefined;
       
       return new SelectSpace("Select space for tile", availableSpaces, (foundSpace: ISpace) => {
         game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.DEIMOS_DOWN });

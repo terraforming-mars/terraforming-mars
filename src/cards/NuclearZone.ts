@@ -1,4 +1,3 @@
-
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -15,10 +14,12 @@ export class NuclearZone implements IProjectCard {
     public name: CardName = CardName.NUCLEAR_ZONE;
     public cardType: CardType = CardType.AUTOMATED;
 
+    public canPlay(player: Player, game: Game) {
+        const canPlaceTile = game.board.getAvailableSpacesOnLand(player).length > 0;
+        return canPlaceTile;
+    }
+
     public play(player: Player, game: Game) {
-        if (game.board.getAvailableSpacesOnLand(player).length < 1) {
-            return game.increaseTemperature(player, 2);
-        }
         return new SelectSpace("Select space for special tile", game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.NUCLEAR_ZONE });
             return game.increaseTemperature(player, 2);

@@ -38,7 +38,10 @@ export class EcologicalZone implements IProjectCard, IResourceCard {
         ).length > 0;
   }
   public canPlay(player: Player, game: Game): boolean {
-    return this.hasGreeneryTile(player, game);
+    const hasGreenery = this.hasGreeneryTile(player, game);
+    const canPlaceTile = this.getAvailableSpaces(player, game).length > 0;
+    
+    return hasGreenery && canPlaceTile;
   }
   public onCardPlayed(player: Player, _game: Game, card: IProjectCard): void {
       player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT).length);

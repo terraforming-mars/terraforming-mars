@@ -16,8 +16,11 @@ export class MagneticFieldGeneratorsPromo implements IProjectCard {
     public name: CardName = CardName.MAGNETIC_FIELD_GENERATORS_PROMO;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
-    public canPlay(player: Player): boolean {
-        return player.getProduction(Resources.ENERGY) >= 4;
+    public canPlay(player: Player, game: Game): boolean {
+        const meetsEnergyRequirements = player.getProduction(Resources.ENERGY) >= 4;
+        const canPlaceTile = game.board.getAvailableSpacesOnLand(player).length > 0;
+
+        return meetsEnergyRequirements && canPlaceTile;
     }
     public play(player: Player, game: Game) {
         player.setProduction(Resources.ENERGY,-4);

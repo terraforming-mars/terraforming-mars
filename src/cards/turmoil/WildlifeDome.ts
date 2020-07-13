@@ -8,7 +8,6 @@ import { PartyName } from '../../turmoil/parties/PartyName';
 import { SelectSpace } from "../../inputs/SelectSpace";
 import { ISpace } from "../../ISpace";
 
-
 export class WildlifeDome implements IProjectCard {
     public cost: number = 15;
     public tags: Array<Tags> = [Tags.ANIMAL, Tags.PLANT, Tags.STEEL];
@@ -17,7 +16,8 @@ export class WildlifeDome implements IProjectCard {
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {
-            return game.turmoil.canPlay(player, PartyName.GREENS);
+            const canPlaceTile = game.board.getAvailableSpacesForGreenery(player).length > 0;
+            return game.turmoil.canPlay(player, PartyName.GREENS) && canPlaceTile;
         }
         return false;
     }

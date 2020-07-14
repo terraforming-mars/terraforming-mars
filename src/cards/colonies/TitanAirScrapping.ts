@@ -39,7 +39,7 @@ export class TitanAirScrapping implements IProjectCard, IResourceCard {
 
         if (this.resourceCount >= 2 && player.titanium > 0) {
             const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
-            if (!redsAreRuling || redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST)) {
+            if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
                 opts.push(spendResource);
             } 
             opts.push(addResource);

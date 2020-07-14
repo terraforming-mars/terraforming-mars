@@ -9,8 +9,10 @@ import { SelectCard } from '../../inputs/SelectCard';
 import { Game } from '../../Game';
 import { SelectOption } from '../../inputs/SelectOption';
 import { OrOptions } from '../../inputs/OrOptions';
-import { MAX_TEMPERATURE } from '../../constants';
+import { MAX_TEMPERATURE, REDS_RULING_POLICY_COST } from '../../constants';
 import { LogHelper } from '../../components/LogHelper';
+import { PartyHooks } from '../../turmoil/parties/PartyHooks';
+import { PartyName } from '../../turmoil/parties/PartyName';
 
 export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCard {
     public name: CardName = CardName.DIRECTED_IMPACTORS;
@@ -30,7 +32,13 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
 
     public canAct(player: Player, game: Game): boolean {
         const canRaiseTemperature = this.resourceCount > 0 && game.getTemperature() < MAX_TEMPERATURE;
-        return player.canAfford(6, game, false, true) || canRaiseTemperature;
+        const canPayForAsteroid = player.canAfford(6, game, false, true);
+
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+            return canPayForAsteroid || (player.canAfford(REDS_RULING_POLICY_COST) && canRaiseTemperature);
+        }
+
+        return canPayForAsteroid || canRaiseTemperature;
     }
 
     public action(player: Player, game: Game) {
@@ -39,9 +47,12 @@ export class DirectedImpactors implements IActionCard, IProjectCard, IResourceCa
 
         const addResource = new SelectOption("Pay 6 to add 1 asteroid to a card", () => this.addResource(player, game, asteroidCards));
         const spendResource = new SelectOption("Remove 1 asteroid to raise temperature 1 step", () => this.spendResource(player, game));
+        const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
 
         if (this.resourceCount > 0 && game.getTemperature() < MAX_TEMPERATURE) {
-            opts.push(spendResource);
+            if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
+                opts.push(spendResource);
+            }
         } else {
             return this.addResource(player, game, asteroidCards);
         }

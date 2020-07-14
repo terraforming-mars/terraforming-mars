@@ -8,12 +8,23 @@ import { CardName } from '../../CardName';
 import { ResourceType } from "../../ResourceType";
 import { SelectCard } from "../../inputs/SelectCard";
 import { LogHelper } from "../../components/LogHelper";
+import { PartyHooks } from "../../turmoil/parties/PartyHooks";
+import { PartyName } from "../../turmoil/parties/PartyName";
+import { REDS_RULING_POLICY_COST } from "../../constants";
 
 export class MoholeLake implements IActionCard, IProjectCard {
     public cost: number = 31;
     public tags: Array<Tags> = [Tags.STEEL];
     public name: CardName = CardName.MOHOLE_LAKE;
     public cardType: CardType = CardType.ACTIVE;
+
+    public canPlay(player: Player, game: Game) {
+      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+        return player.canAfford(REDS_RULING_POLICY_COST * 2);
+      }
+
+      return true;
+    }
 
     public play(player: Player, game: Game) {
         game.increaseTemperature(player, 1);

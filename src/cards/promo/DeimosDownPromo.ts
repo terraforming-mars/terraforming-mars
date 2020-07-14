@@ -8,6 +8,9 @@ import { Resources } from '../../Resources';
 import { SelectSpace } from '../../inputs/SelectSpace';
 import { TileType } from '../../TileType';
 import { ISpace } from '../../ISpace';
+import { PartyHooks } from '../../turmoil/parties/PartyHooks';
+import { PartyName } from '../../turmoil/parties/PartyName';
+import { REDS_RULING_POLICY_COST } from '../../constants';
 
 export class DeimosDownPromo implements IProjectCard {
     public cost: number = 31;
@@ -17,6 +20,11 @@ export class DeimosDownPromo implements IProjectCard {
 
     public canPlay(player: Player, game: Game) {
       const canPlaceTile = game.board.getAvailableSpacesForCity(player).length > 0;
+
+      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+        return player.canAfford(REDS_RULING_POLICY_COST * 3) && canPlaceTile;
+    }
+
       return canPlaceTile;
     }
 

@@ -1,4 +1,3 @@
-
 import { Player } from "../../Player";
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
@@ -9,6 +8,9 @@ import { Game } from '../../Game';
 import { SelectSpace } from "../../inputs/SelectSpace";
 import { TileType } from "../../TileType";
 import { ISpace } from "../../ISpace";
+import { PartyHooks } from "../../turmoil/parties/PartyHooks";
+import { PartyName } from "../../turmoil/parties/PartyName";
+import { REDS_RULING_POLICY_COST } from "../../constants";
 
 export class MagneticFieldGeneratorsPromo implements IProjectCard {
     public cost: number = 22;
@@ -19,6 +21,10 @@ export class MagneticFieldGeneratorsPromo implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         const meetsEnergyRequirements = player.getProduction(Resources.ENERGY) >= 4;
         const canPlaceTile = game.board.getAvailableSpacesOnLand(player).length > 0;
+
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+            return player.canAfford(REDS_RULING_POLICY_COST * 3) && meetsEnergyRequirements && canPlaceTile;
+          }
 
         return meetsEnergyRequirements && canPlaceTile;
     }

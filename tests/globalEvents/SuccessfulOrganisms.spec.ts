@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { SucessfulOrganisms } from "../../src/turmoil/globalEvents/SucessfulOrganisms";
+import { SuccessfulOrganisms } from "../../src/turmoil/globalEvents/SuccessfulOrganisms";
 import { Player } from "../../src/Player";
 import { Color } from "../../src/Color";
 import { Resources } from "../../src/Resources";
@@ -7,9 +7,9 @@ import { Game } from '../../src/Game';
 import { Turmoil } from '../../src/turmoil/Turmoil';
 import { Kelvinists } from '../../src/turmoil/parties/Kelvinists';
 
-describe("SucessfulOrganisms", function () {
+describe("SuccessfulOrganisms", function () {
     it("resolve play", function () {
-        const card = new SucessfulOrganisms();
+        const card = new SuccessfulOrganisms();
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);

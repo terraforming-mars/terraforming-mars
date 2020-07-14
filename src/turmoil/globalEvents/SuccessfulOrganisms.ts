@@ -5,8 +5,8 @@ import { Game } from '../../Game';
 import { Resources } from '../../Resources';
 import { Turmoil } from '../Turmoil';
 
-export class SucessfulOrganisms implements IGlobalEvent {
-    public name = GlobalEventName.SUCESSFUL_ORGANISMS;
+export class SuccessfulOrganisms implements IGlobalEvent {
+    public name = GlobalEventName.SUCCESSFUL_ORGANISMS;
     public description = "Gain 1 plant per plant production (max 5) and influence.";
     public revealedDelegate = PartyName.MARS;
     public currentDelegate = PartyName.SCIENTISTS;

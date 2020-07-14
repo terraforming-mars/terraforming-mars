@@ -8,7 +8,7 @@ import { PartyHooks } from '../turmoil/parties/PartyHooks';
 import { PartyName } from '../turmoil/parties/PartyName';
 import { REDS_RULING_POLICY_COST } from '../constants';
 
-export class BribedCommitte implements IProjectCard {
+export class BribedCommittee implements IProjectCard {
     public cost: number = 7;
     public tags: Array<Tags> = [Tags.EARTH];
     public cardType: CardType = CardType.EVENT;

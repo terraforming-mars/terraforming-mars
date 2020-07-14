@@ -50,6 +50,7 @@ import { MiningRights } from "./cards/MiningRights";
 import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
 import { Board } from "./Board";
 import { PartyHooks } from "./turmoil/parties/PartyHooks";
+import { REDS_RULING_POLICY_COST } from "./constants";
 
 export type PlayerId = string;
 
@@ -134,14 +135,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       // Turmoil Reds capacity
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && game.phase === Phase.ACTION) {
-        if (this.canAfford(3)) {
-          game.addSelectHowToPayInterrupt(this, 3, false, false, "Select how to pay for TR increase");
-          this.terraformRating++;
-          this.hasIncreasedTerraformRatingThisGeneration = true;
-          return;
-        } else {
-            return;
-        }; 
+        game.addSelectHowToPayInterrupt(this, REDS_RULING_POLICY_COST, false, false, "Select how to pay for TR increase");
+        this.terraformRating++;
+        this.hasIncreasedTerraformRatingThisGeneration = true;
+        return;
       }
 
       this.terraformRating++;

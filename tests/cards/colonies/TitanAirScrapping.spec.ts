@@ -16,14 +16,14 @@ describe("TitanAirScrapping", function () {
 
     it("Can't act", function () {
         player.playedCards.push(card);
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player, game)).to.eq(false);
     });
 
     it("Should act - both actions possible", function () {
         player.playedCards.push(card);
         player.titanium = 3;
         player.addResourceTo(card, 7);
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player, game)).to.eq(true);
 
         const orOptions = card.action(player, game) as OrOptions;
         expect(orOptions instanceof OrOptions).to.eq(true);
@@ -33,10 +33,11 @@ describe("TitanAirScrapping", function () {
         expect(player.getResourcesOnCard(card)).to.eq(5);
         expect(card.getVictoryPoints()).to.eq(2);
     });
+    
     it("Should act automatically when only one action possible", function () {
         player.playedCards.push(card);
         player.addResourceTo(card, 2);
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player, game)).to.eq(true);
         
         card.action(player, game)
         expect(player.getTerraformRating()).to.eq(21);

@@ -1,10 +1,12 @@
-
 import { IActionCard } from "../ICard";
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CorporationCard } from "./CorporationCard";
 import { CardName } from '../../CardName';
+import { PartyHooks } from "../../turmoil/parties/PartyHooks";
+import { PartyName } from "../../turmoil/parties/PartyName";
+import { REDS_RULING_POLICY_COST } from "../../constants";
 
 export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard {
     public name: CardName = CardName.UNITED_NATIONS_MARS_INITIATIVE;
@@ -13,8 +15,14 @@ export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard
     public play() {
         return undefined;
     }
-    public canAct(player: Player): boolean {
-        return player.hasIncreasedTerraformRatingThisGeneration && player.canAfford(3); 
+    public canAct(player: Player, game: Game): boolean {
+        const hasIncreasedTR = player.hasIncreasedTerraformRatingThisGeneration;
+
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+            return hasIncreasedTR && player.canAfford(REDS_RULING_POLICY_COST + 3);
+        }
+        
+        return hasIncreasedTR && player.canAfford(3); 
     }
     public action(player: Player, game: Game) {
         player.megaCredits -= 3;

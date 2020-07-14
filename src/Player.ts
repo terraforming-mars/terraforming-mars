@@ -135,7 +135,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       // Turmoil Reds capacity
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && game.phase === Phase.ACTION) {
-        game.addSelectHowToPayInterrupt(this, REDS_RULING_POLICY_COST, false, false, "Select how to pay for TR increase");
+        game.addSelectHowToPayInterrupt(this, REDS_RULING_POLICY_COST, true, true, "Select how to pay for TR increase");
         this.terraformRating++;
         this.hasIncreasedTerraformRatingThisGeneration = true;
         return;

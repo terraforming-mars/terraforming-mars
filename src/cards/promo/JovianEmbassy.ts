@@ -16,7 +16,7 @@ export class JovianEmbassy implements IProjectCard {
 
     public canPlay(player: Player, game: Game) {
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(REDS_RULING_POLICY_COST);
+        return player.canAfford(this.cost + REDS_RULING_POLICY_COST);
       }
 
       return true;

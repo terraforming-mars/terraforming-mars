@@ -1940,31 +1940,36 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       const standardProjects = new OrOptions();
       standardProjects.title = "Pay for a Standard Project";
 
+      const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+
       if (this.canAfford(this.powerPlantCost)) {
         standardProjects.options.push(
             this.buildPowerPlant(game)
         );
       }
 
-      if (
-        this.canAfford(constants.ASTEROID_COST) &&
-            game.getTemperature() < constants.MAX_TEMPERATURE) {
+      let asteroidCost = constants.ASTEROID_COST
+      if (redsAreRuling) asteroidCost += REDS_RULING_POLICY_COST;
+      
+      if (this.canAfford(asteroidCost) && game.getTemperature() < constants.MAX_TEMPERATURE) {
         standardProjects.options.push(
             this.asteroid(game)
         );
       }
 
-      if (
-        this.canAfford(constants.AQUIFER_COST) &&
-            game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
+      let aquiferCost = constants.AQUIFER_COST
+      if (redsAreRuling) aquiferCost += REDS_RULING_POLICY_COST;
+
+      if (this.canAfford(aquiferCost) && game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
         standardProjects.options.push(
             this.aquifer(game)
         );
       }
 
-      if (
-        this.canAfford(constants.GREENERY_COST) &&
-            game.board.getAvailableSpacesForGreenery(this).length > 0) {
+      let greeneryCost = constants.GREENERY_COST
+      if (redsAreRuling) greeneryCost += REDS_RULING_POLICY_COST;
+
+      if (this.canAfford(greeneryCost) && game.board.getAvailableSpacesForGreenery(this).length > 0) {
         standardProjects.options.push(
             this.addGreenery(game)
         );
@@ -1978,9 +1983,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
       }
 
-      if ( game.venusNextExtension &&
-        this.canAfford(constants.AIR_SCRAPPING_COST) &&
-            game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
+      let airScrappingCost = constants.AIR_SCRAPPING_COST
+      if (redsAreRuling) airScrappingCost += REDS_RULING_POLICY_COST;
+
+      if (game.venusNextExtension
+        && this.canAfford(airScrappingCost)
+        && game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
         standardProjects.options.push(
             this.airScrapping(game)
         );
@@ -1998,8 +2006,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           }
       }
 
-      if ( game.soloTR &&
-        this.canAfford(constants.BUFFER_GAS_COST)) {
+      let bufferGasCost = constants.BUFFER_GAS_COST
+      if (redsAreRuling) bufferGasCost += REDS_RULING_POLICY_COST;
+
+      if (game.soloTR && this.canAfford(bufferGasCost)) {
         standardProjects.options.push(
             this.bufferGas(game)
         );

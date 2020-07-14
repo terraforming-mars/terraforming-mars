@@ -19,7 +19,7 @@ export class IceAsteroid implements IProjectCard {
         const oceansPlaced = Math.min(remainingOceans, 2);
   
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-          return player.canAfford(REDS_RULING_POLICY_COST * oceansPlaced);
+          return player.canAfford(this.cost + REDS_RULING_POLICY_COST * oceansPlaced);
         }
   
         return true;

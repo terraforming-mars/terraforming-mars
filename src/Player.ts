@@ -1939,7 +1939,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                 this.megaCredits >= cost;
     }
 
-    private getAvailableStandardProjects(game: Game): OrOptions {
+    public getAvailableStandardProjects(game: Game): OrOptions {
       const standardProjects = new OrOptions();
       standardProjects.title = "Pay for a Standard Project";
 

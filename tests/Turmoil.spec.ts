@@ -13,6 +13,7 @@ import { SelectSpace } from "../src/inputs/SelectSpace";
 import { SpaceBonus } from "../src/SpaceBonus";
 import { Turmoil } from "../src/turmoil/Turmoil";
 import { resetBoard } from "./TestingUtils";
+import { Reds } from "../src/turmoil/parties/Reds";
 
 describe("Turmoil", function () {
     let player : Player, game : Game, turmoil: Turmoil;
@@ -125,5 +126,16 @@ describe("Turmoil", function () {
 
         placeOcean.cb(steelSpace!);
         expect(player.steel).to.eq(0); // should not give ruling policy bonus
+    });
+
+    it("Does not allow to raise TR if Reds are ruling and player cannot pay", function () {
+        turmoil.rulingParty = new Reds();
+        game.phase = Phase.ACTION;
+    
+        player.megaCredits = 14;
+        const availableStandardProjects = player.getAvailableStandardProjects(game);
+    
+        // can only use Power Plant as cannot pay 3 for Reds ruling policy
+        expect(availableStandardProjects.options.length).to.eq(1); 
     });
 });

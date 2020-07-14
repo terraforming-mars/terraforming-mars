@@ -15,12 +15,12 @@ describe("EquatorialMagnetizer", function () {
     });
 
     it("Can't act", function () {
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player, game)).to.eq(false);
     });
 
     it("Should act", function () {
         player.setProduction(Resources.ENERGY);
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player, game)).to.eq(true);
 
         card.action(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);

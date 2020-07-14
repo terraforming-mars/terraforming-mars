@@ -1,5 +1,4 @@
 import {ICard} from './ICard';
-
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -13,12 +12,25 @@ import { ResourceType } from '../ResourceType';
 import { CardName } from '../CardName';
 import { LogHelper } from '../components/LogHelper';
 import { Resources } from '../Resources';
+import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from '../constants';
+import { PartyHooks } from '../turmoil/parties/PartyHooks';
+import { PartyName } from '../turmoil/parties/PartyName';
 
 export class ImportedHydrogen implements IProjectCard {
     public cost: number = 16;
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
     public name: CardName = CardName.IMPORTED_HYDROGEN;
     public cardType: CardType = CardType.EVENT;
+
+    public canPlay(player: Player, game: Game): boolean {
+        const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
+          return player.canAfford(REDS_RULING_POLICY_COST);
+        }
+    
+        return true;
+    }
 
     public play(player: Player, game: Game): undefined | PlayerInput {
         const availableMicrobeCards = player.getResourceCards(ResourceType.MICROBE);

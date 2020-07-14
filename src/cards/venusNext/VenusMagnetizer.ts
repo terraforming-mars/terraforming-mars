@@ -26,7 +26,7 @@ export class VenusMagnetizer implements IActionCard,IProjectCard {
         const hasEnergyProduction = player.getProduction(Resources.ENERGY) > 0;
 
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-            return player.canAfford(REDS_RULING_POLICY_COST) && hasEnergyProduction && !venusMaxed;;
+            return player.canAfford(REDS_RULING_POLICY_COST) && hasEnergyProduction && !venusMaxed;
         }
 
         return hasEnergyProduction && !venusMaxed;

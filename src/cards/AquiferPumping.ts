@@ -9,7 +9,8 @@ import {AndOptions} from '../inputs/AndOptions';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
 import * as constants from '../constants';
 import { CardName } from '../CardName';
-
+import { PartyHooks } from '../turmoil/parties/PartyHooks';
+import { PartyName } from '../turmoil/parties/PartyName';
 
 export class AquiferPumping implements IActionCard, IProjectCard {
     public cost: number = 18;
@@ -21,7 +22,16 @@ export class AquiferPumping implements IActionCard, IProjectCard {
       return undefined;
     }
     public canAct(player: Player, game: Game): boolean {
-      return player.canAfford(8, game, true, false) && game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES;
+      const oceansMaxed = game.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
+      if (oceansMaxed) return false;
+
+      const canAffordOcean = player.canAfford(8, game, true, false);
+
+      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+        return player.canAfford(constants.REDS_RULING_POLICY_COST) && canAffordOcean;
+      }
+
+      return canAffordOcean;
     }
     public action(player: Player, game: Game) {
       let howToPay: HowToPay;

@@ -8,6 +8,8 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceType} from '../SpaceType';
 import * as constants from '../constants';
 import { CardName } from '../CardName';
+import { PartyHooks } from '../turmoil/parties/PartyHooks';
+import { PartyName } from '../turmoil/parties/PartyName';
 
 export class ArtificialLake implements IProjectCard {
     public cost: number = 15;
@@ -15,12 +17,16 @@ export class ArtificialLake implements IProjectCard {
     public name: CardName = CardName.ARTIFICIAL_LAKE;
     public cardType: CardType = CardType.AUTOMATED;
     public canPlay(player: Player, game: Game): boolean {
-      return game.getTemperature() >= -6 - (
-        player.getRequirementsBonus(game) * 2
-      );
+      const meetsTemperatureRequirements = game.getTemperature() >= -6 - (player.getRequirementsBonus(game) * 2);
+      const oceansMaxed = game.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
+
+      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
+        return player.canAfford(constants.REDS_RULING_POLICY_COST) && meetsTemperatureRequirements;
+      }
+
+      return meetsTemperatureRequirements;
     }
     public play(player: Player, game: Game) {
-
       if (game.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES) return undefined;
 
       return new SelectSpace(

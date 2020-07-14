@@ -36,6 +36,9 @@ describe("WildlifeDome", function () {
         
         let greens = game.turmoil!.getPartyByName(PartyName.GREENS)!;
         greens.delegates.push(player.id, player.id);
+        expect(card.canPlay(player, game)).to.eq(false); 
+
+        player.megaCredits = 3;
         expect(card.canPlay(player, game)).to.eq(true); 
 
         const action = card.play(player, game);

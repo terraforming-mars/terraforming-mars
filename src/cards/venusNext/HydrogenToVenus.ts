@@ -8,6 +8,9 @@ import { ResourceType } from '../../ResourceType';
 import { SelectCard } from '../../inputs/SelectCard';
 import { CardName } from '../../CardName';
 import { LogHelper } from '../../components/LogHelper';
+import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from '../../constants';
+import { PartyHooks } from '../../turmoil/parties/PartyHooks';
+import { PartyName } from '../../turmoil/parties/PartyName';
 
 export class HydrogenToVenus implements IProjectCard {
     public cost: number = 11;
@@ -26,6 +29,16 @@ export class HydrogenToVenus implements IProjectCard {
         CardName.LOCAL_SHADING,
         CardName.STRATOPOLIS
     ]);
+
+    public canPlay(player: Player, game: Game) {
+        const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
+          return player.canAfford(REDS_RULING_POLICY_COST);
+        }
+  
+        return true;
+    }
+
     public play(player: Player, game: Game) {
         const jovianTags: number = player.getTagCount(Tags.JOVIAN);
         const floatersCards = player.getResourceCards(ResourceType.FLOATER).filter((card) => {

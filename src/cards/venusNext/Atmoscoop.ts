@@ -11,15 +11,27 @@ import { ICard } from '../ICard';
 import { CardName } from '../../CardName';
 import { LogHelper } from '../../components/LogHelper';
 import * as constants from "./../../constants";
+import { PartyHooks } from '../../turmoil/parties/PartyHooks';
+import { PartyName } from '../../turmoil/parties/PartyName';
 
 export class Atmoscoop implements IProjectCard {
     public cost: number = 22;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SPACE];
     public name: CardName = CardName.ATMOSCOOP;
     public cardType: CardType = CardType.AUTOMATED;
-    public canPlay(player: Player): boolean {
-        return player.getTagCount(Tags.SCIENCE) >= 3 ;
-      }
+
+    public canPlay(player: Player, game: Game) {
+        const meetsTagRequirements = player.getTagCount(Tags.SCIENCE) >= 3;
+        const remainingTemperatureSteps = (constants.MAX_TEMPERATURE - game.getTemperature()) / 2;
+        const remainingVenusSteps = (constants.MAX_VENUS_SCALE - game.getVenusScaleLevel()) / 2;
+        const stepsRaised = Math.min(remainingTemperatureSteps, remainingVenusSteps, 2);
+        
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+          return player.canAfford(constants.REDS_RULING_POLICY_COST * stepsRaised) && meetsTagRequirements;
+        }
+  
+        return meetsTagRequirements;
+    }
 
     public play(player: Player, game: Game) {
         let result = new OrOptions();

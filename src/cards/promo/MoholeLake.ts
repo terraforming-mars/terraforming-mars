@@ -10,7 +10,7 @@ import { SelectCard } from "../../inputs/SelectCard";
 import { LogHelper } from "../../components/LogHelper";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
-import { REDS_RULING_POLICY_COST } from "../../constants";
+import { REDS_RULING_POLICY_COST, MAX_TEMPERATURE, MAX_OCEAN_TILES } from "../../constants";
 
 export class MoholeLake implements IActionCard, IProjectCard {
     public cost: number = 31;
@@ -19,8 +19,12 @@ export class MoholeLake implements IActionCard, IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
 
     public canPlay(player: Player, game: Game) {
+      const temperatureStep = game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;
+      const oceanStep = game.board.getOceansOnBoard() < MAX_OCEAN_TILES ? 1 : 0;
+      const totalSteps = temperatureStep + oceanStep;
+
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(REDS_RULING_POLICY_COST * 2);
+        return player.canAfford(REDS_RULING_POLICY_COST * totalSteps);
       }
 
       return true;

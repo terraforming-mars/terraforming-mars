@@ -8,8 +8,10 @@ import { SelectHowToPay } from '../../inputs/SelectHowToPay';
 import { OrOptions } from '../../inputs/OrOptions';
 import { SelectOption } from '../../inputs/SelectOption';
 import { Game } from '../../Game';
-import { MAX_VENUS_SCALE } from '../../constants';
+import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from '../../constants';
 import { CardName } from '../../CardName';
+import { PartyHooks } from "../../turmoil/parties/PartyHooks";
+import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class ForcedPrecipitation implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 8;
@@ -22,9 +24,16 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard, IResourceC
     public play() {
         return undefined;
     }
+
     public canAct(player: Player, game: Game): boolean {
-        return player.canAfford(2) || 
-          (this.resourceCount > 1 &&  game.getVenusScaleLevel() < MAX_VENUS_SCALE);
+        const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+        const canSpendResource = this.resourceCount > 1 && !venusMaxed;
+        
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
+          return player.canAfford(2) || (canSpendResource && player.canAfford(REDS_RULING_POLICY_COST));
+        }
+  
+        return player.canAfford(2) || canSpendResource;
     }  
     
     public action(player: Player, game: Game) {

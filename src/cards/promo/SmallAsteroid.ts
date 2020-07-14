@@ -7,7 +7,7 @@ import { Game } from "../../Game";
 import { Resources } from "../../Resources";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
-import { REDS_RULING_POLICY_COST } from "../../constants";
+import { REDS_RULING_POLICY_COST, MAX_TEMPERATURE } from "../../constants";
 
 export class SmallAsteroid implements IProjectCard {
     public cost: number = 10;
@@ -16,7 +16,8 @@ export class SmallAsteroid implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
 
     public canPlay(player: Player, game: Game) {
-        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+        const canRaiseTemperature = game.getTemperature() < MAX_TEMPERATURE;
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && canRaiseTemperature) {
           return player.canAfford(REDS_RULING_POLICY_COST);
         }
   

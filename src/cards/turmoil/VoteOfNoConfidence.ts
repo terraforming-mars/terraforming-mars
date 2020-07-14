@@ -23,7 +23,7 @@ export class VoteOfNoConfidence implements IProjectCard {
             const hasPartyLeadership = parties.length > 0;
 
             if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-                return player.canAfford(REDS_RULING_POLICY_COST) && chairmanIsNeutral && hasPartyLeadership;
+                return player.canAfford(this.cost + REDS_RULING_POLICY_COST) && chairmanIsNeutral && hasPartyLeadership;
             }
 
             return chairmanIsNeutral && hasPartyLeadership;

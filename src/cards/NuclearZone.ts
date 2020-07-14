@@ -23,7 +23,7 @@ export class NuclearZone implements IProjectCard {
         const stepsRaised = Math.min(remainingTemperatureSteps, 2);
 
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-            return player.canAfford(REDS_RULING_POLICY_COST * stepsRaised) && canPlaceTile;
+            return player.canAfford(this.cost + REDS_RULING_POLICY_COST * stepsRaised) && canPlaceTile;
         }
 
       return canPlaceTile;

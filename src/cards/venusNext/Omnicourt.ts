@@ -17,7 +17,7 @@ export class Omnicourt implements IProjectCard {
     public canPlay(player: Player, game: Game) {
       const hasRequiredTags = player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH, Tags.JOVIAN]);
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(REDS_RULING_POLICY_COST * 2) && hasRequiredTags;
+        return player.canAfford(this.cost + REDS_RULING_POLICY_COST * 2, game, true) && hasRequiredTags;
       }
 
       return hasRequiredTags;

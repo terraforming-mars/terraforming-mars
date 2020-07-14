@@ -17,7 +17,7 @@ export class NitrogenFromTitan implements IProjectCard {
 
     public canPlay(player: Player, game: Game) {
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(REDS_RULING_POLICY_COST * 2);
+        return player.canAfford(this.cost + REDS_RULING_POLICY_COST * 2, game, false, true);
       }
 
       return true;

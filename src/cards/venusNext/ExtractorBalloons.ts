@@ -27,7 +27,7 @@ export class ExtractorBalloons implements IActionCard,IProjectCard, IResourceCar
     public canAct(player: Player, game: Game): boolean {
         const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
-          return player.canAfford(REDS_RULING_POLICY_COST);
+          return player.canAfford(this.cost + REDS_RULING_POLICY_COST);
         }
   
         return true;

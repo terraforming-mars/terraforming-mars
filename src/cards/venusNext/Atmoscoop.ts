@@ -27,7 +27,7 @@ export class Atmoscoop implements IProjectCard {
         const stepsRaised = Math.min(remainingTemperatureSteps, remainingVenusSteps, 2);
         
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-          return player.canAfford(constants.REDS_RULING_POLICY_COST * stepsRaised) && meetsTagRequirements;
+          return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, game, false, true) && meetsTagRequirements;
         }
   
         return meetsTagRequirements;

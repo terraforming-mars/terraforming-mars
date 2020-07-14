@@ -19,7 +19,7 @@ export class PROffice implements IProjectCard {
         if (game.turmoil !== undefined) {
             const meetsPartyRequirements = game.turmoil.canPlay(player, PartyName.UNITY);
             if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-                return player.canAfford(REDS_RULING_POLICY_COST) && meetsPartyRequirements;
+                return player.canAfford(this.cost + REDS_RULING_POLICY_COST) && meetsPartyRequirements;
             }
 
             return meetsPartyRequirements;

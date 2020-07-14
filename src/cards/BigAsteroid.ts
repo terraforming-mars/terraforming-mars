@@ -20,7 +20,7 @@ export class BigAsteroid implements IProjectCard {
       const stepsRaised = Math.min(remainingTemperatureSteps, 2);
 
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(REDS_RULING_POLICY_COST * stepsRaised);
+        return player.canAfford(this.cost + REDS_RULING_POLICY_COST * stepsRaised, game, false, true);
     }
 
       return true;

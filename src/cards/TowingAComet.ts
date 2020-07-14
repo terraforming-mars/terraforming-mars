@@ -21,7 +21,7 @@ export class TowingAComet implements IProjectCard {
         const totalSteps = oxygenStep + oceanStep;
   
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-          return player.canAfford(REDS_RULING_POLICY_COST * totalSteps);
+          return player.canAfford(this.cost + REDS_RULING_POLICY_COST * totalSteps, game, false, true);
         }
   
         return true;

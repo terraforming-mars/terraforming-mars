@@ -20,7 +20,7 @@ export class MagneticFieldGenerators implements IProjectCard {
         const meetsEnergyRequirements = player.getProduction(Resources.ENERGY) >= 4;
 
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-            return player.canAfford(REDS_RULING_POLICY_COST * 3) && meetsEnergyRequirements;
+            return player.canAfford(this.cost + REDS_RULING_POLICY_COST * 3, game, true) && meetsEnergyRequirements;
         }
 
         return meetsEnergyRequirements;

@@ -17,7 +17,7 @@ export class NeutralizerFactory  implements IProjectCard {
     public canPlay(player: Player, game: Game) {
         const venusRequirementMet = game.getVenusScaleLevel() >= 10 - (2 * player.getRequirementsBonus(game, true));
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-          return player.canAfford(REDS_RULING_POLICY_COST) && venusRequirementMet;
+          return player.canAfford(this.cost + REDS_RULING_POLICY_COST) && venusRequirementMet;
         }
   
         return venusRequirementMet;

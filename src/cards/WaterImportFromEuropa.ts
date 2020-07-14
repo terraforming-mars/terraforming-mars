@@ -29,13 +29,13 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
         const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
         if (oceansMaxed) return false;
   
-        const canAffordOcean = player.canAfford(12, game, false, true);
+        let oceanCost = 12;
   
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-          return player.canAfford(REDS_RULING_POLICY_COST) && canAffordOcean;
+          return player.canAfford(oceanCost + REDS_RULING_POLICY_COST, game, false, true);
         }
   
-        return canAffordOcean;
+        return player.canAfford(oceanCost, game, false, true);;
     }
     public action(player: Player, game: Game) {
         let htp: HowToPay;

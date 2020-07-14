@@ -18,7 +18,7 @@ export class SpinInducingAsteroid implements IProjectCard {
         const meetsVenusRequirements = game.getVenusScaleLevel() - (2 * player.getRequirementsBonus(game, true)) <= 10;
         
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-          return player.canAfford(REDS_RULING_POLICY_COST * 2) && meetsVenusRequirements;
+          return player.canAfford(this.cost + REDS_RULING_POLICY_COST * 2, game, false, true) && meetsVenusRequirements;
         }
   
         return meetsVenusRequirements;

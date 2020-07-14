@@ -28,7 +28,7 @@ export class CaretakerContract implements IActionCard, IProjectCard {
       const hasEnoughHeat = player.heat >= 8 || (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCorporation() * 2) + player.heat >= 8);
       
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(REDS_RULING_POLICY_COST * 2) && hasEnoughHeat;
+        return player.canAfford(this.cost + REDS_RULING_POLICY_COST * 2) && hasEnoughHeat;
       }
 
       return hasEnoughHeat;

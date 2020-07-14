@@ -19,7 +19,7 @@ export class CometForVenus implements IProjectCard {
     public canPlay(player: Player, game: Game) {
         const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
-          return player.canAfford(REDS_RULING_POLICY_COST);
+          return player.canAfford(this.cost + REDS_RULING_POLICY_COST, game, false, true);
         }
   
         return true;

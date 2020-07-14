@@ -23,7 +23,7 @@ export class VenusianPlants implements IProjectCard {
         const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
 
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
-          return player.canAfford(REDS_RULING_POLICY_COST) && meetsVenusRequirements;
+          return player.canAfford(this.cost + REDS_RULING_POLICY_COST) && meetsVenusRequirements;
         }
   
         return meetsVenusRequirements;

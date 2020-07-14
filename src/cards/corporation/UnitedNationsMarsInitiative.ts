@@ -17,12 +17,13 @@ export class UnitedNationsMarsInitiative implements IActionCard, CorporationCard
     }
     public canAct(player: Player, game: Game): boolean {
         const hasIncreasedTR = player.hasIncreasedTerraformRatingThisGeneration;
+        const actionCost = 3;
 
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-            return hasIncreasedTR && player.canAfford(REDS_RULING_POLICY_COST + 3);
+            return hasIncreasedTR && player.canAfford(REDS_RULING_POLICY_COST + actionCost);
         }
         
-        return hasIncreasedTR && player.canAfford(3); 
+        return hasIncreasedTR && player.canAfford(actionCost); 
     }
     public action(player: Player, game: Game) {
         player.megaCredits -= 3;

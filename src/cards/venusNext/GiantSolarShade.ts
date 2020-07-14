@@ -19,7 +19,7 @@ export class GiantSolarShade implements IProjectCard {
         const stepsRaised = Math.min(remainingVenusSteps, 3);
 
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-          return player.canAfford(REDS_RULING_POLICY_COST * stepsRaised);
+          return player.canAfford(this.cost + REDS_RULING_POLICY_COST * stepsRaised, game, false, true);
         }
   
         return true;

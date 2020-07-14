@@ -31,7 +31,6 @@ export class Pluto extends Colony implements IColony {
         return undefined;
     }
     public giveTradeBonus(player: Player, game: Game): void {
-        player.cardsInHand.push(game.dealer.dealCard());
-        game.addInterrupt(new SelectDiscard(player, game, 'Pluto colony bonus. Select a card to discard'));
+        game.addInterrupt(new SelectDiscard(player, game, 'Pluto colony bonus. Select a card to discard', true));
     }    
 }

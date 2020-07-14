@@ -889,6 +889,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.interrupts.length > 0) {
         let interrupt = this.interrupts.shift();
         if (interrupt) {
+          if (interrupt.beforeAction !== undefined) {
+            interrupt.beforeAction();
+          }
           interrupt.player.setWaitingFor(interrupt.playerInput, () => {
             this.resolveTurmoilInterrupts();
           });
@@ -1079,6 +1082,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.interrupts.length > 0) {
         let interrupt = this.interrupts.shift();
         if (interrupt !== undefined && interrupt.playerInput !== undefined) {
+          if (interrupt.beforeAction !== undefined) {
+            interrupt.beforeAction();
+          }
           interrupt.player.setWaitingFor(interrupt.playerInput, () => {
             this.playerIsFinishedTakingActions();
           });

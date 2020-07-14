@@ -1866,6 +1866,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (game.interrupts.length > 0) {
         let interrupt = game.interrupts.shift();
         if (interrupt) {
+          if (interrupt.beforeAction !== undefined) {
+            interrupt.beforeAction();
+          }
           interrupt.player.setWaitingFor(interrupt.playerInput, () => {
             this.resolveFinalGreeneryInterrupts(game);
           });
@@ -2019,6 +2022,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       //Interrupt action
       const interruptIndex: number = game.interrupts.findIndex(interrupt => interrupt.player === this);
       if (interruptIndex !== -1) {
+        let interrupt = game.interrupts[interruptIndex];
+        if (interrupt !== undefined && interrupt.beforeAction !== undefined) {
+          interrupt.beforeAction();
+        }
         this.setWaitingFor(game.interrupts.splice(interruptIndex, 1)[0].playerInput, () => {
           cb();
         });

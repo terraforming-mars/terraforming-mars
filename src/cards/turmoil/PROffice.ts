@@ -6,6 +6,8 @@ import { Player } from "../../Player";
 import { Game } from '../../Game';
 import { PartyName } from '../../turmoil/parties/PartyName';
 import { Resources } from "../../Resources";
+import { PartyHooks } from "../../turmoil/parties/PartyHooks";
+import { REDS_RULING_POLICY_COST } from "../../constants";
 
 export class PROffice implements IProjectCard {
     public cost: number = 7;
@@ -15,7 +17,12 @@ export class PROffice implements IProjectCard {
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {
-            return game.turmoil.canPlay(player, PartyName.UNITY);
+            const meetsPartyRequirements = game.turmoil.canPlay(player, PartyName.UNITY);
+            if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+                return player.canAfford(REDS_RULING_POLICY_COST) && meetsPartyRequirements;
+            }
+
+            return meetsPartyRequirements;
         }
         return false;
     }

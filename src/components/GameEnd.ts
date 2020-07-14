@@ -45,7 +45,7 @@ export const GameEnd = Vue.component("game-end", {
                                 But it isn't the reason to stop making Mars better.
                             </div>
                             <ul class="game_end_list">
-                                <li v-i18n>Try to win with extensions enabled</li>
+                                <li v-i18n>Try to win with expansions enabled</li>
                                 <li v-i18n>Try to win before the last generation comes</li>
                                 <li v-i18n>Can you get 90+ Victory Points?</li>
                             </ul>

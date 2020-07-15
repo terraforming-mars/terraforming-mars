@@ -698,6 +698,16 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.claimedMilestones.length > 2;
     }
 
+    private playerHasPickedCorporationCard(player: Player, corporationCard: CorporationCard){
+      player.pickedCorporationCard = corporationCard;
+      // if all players picked corporationCard
+      if(this.players.filter(aplayer => aplayer.pickedCorporationCard === undefined).length === 0 ){
+        for (let somePlayer of this.getPlayers()) {
+          this.playCorporationCard(somePlayer, somePlayer.pickedCorporationCard!);
+        }
+      }
+    }
+
     private playCorporationCard(
         player: Player, corporationCard: CorporationCard
     ): void {
@@ -722,6 +732,19 @@ export class Game implements ILoadable<SerializedGame, Game> {
         player.megaCredits -= cardsToPayFor * player.cardCost;
       }
 
+      // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
+      for (let somePlayer of this.getPlayers()) {
+        if (somePlayer !== player && somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
+            const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCorpCardPlayed(player, this, corporationCard);
+            if (actionFromPlayedCard !== undefined) {  // always be undefined for the present 
+                this.interrupts.push({
+                    player: player,
+                    playerInput: actionFromPlayedCard
+                });
+            }
+        }
+      }
+
       //Activate some colonies
       if (this.coloniesExtension && corporationCard.resourceType !== undefined) {
         this.colonies.filter(colony => colony.resourceType !== undefined && colony.resourceType === corporationCard.resourceType).forEach(colony => {
@@ -734,7 +757,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     private pickCorporationCard(player: Player): PlayerInput {
       let corporation: CorporationCard;
-      const result: AndOptions = new AndOptions(() => { this.playCorporationCard(player, corporation); return undefined; });
+      const result: AndOptions = new AndOptions(() => { this.playerHasPickedCorporationCard(player, corporation); return undefined; });
 
       result.title = " ";
       result.options.push(

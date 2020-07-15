@@ -59,6 +59,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public canUseHeatAsMegaCredits: boolean = false;
     public shouldTriggerCardEffect: boolean = true;
     public plantsNeededForGreenery: number = 8;
+    public pickedCorporationCard: CorporationCard | undefined = undefined;
     public dealtCorporationCards: Array<CorporationCard> = [];
     public dealtProjectCards: Array<IProjectCard> = [];
     public dealtPreludeCards: Array<IProjectCard> = [];
@@ -2268,6 +2269,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       // action this generation set
       this.actionsThisGeneration = new Set<string>(d.actionsThisGeneration);
+
+      if(d.pickedCorporationCard !== undefined){
+        this.pickedCorporationCard = getCorporationCardByName(d.pickedCorporationCard.name);
+      }
 
       // Rebuild corporation card
       if (d.corporationCard !== undefined) {

@@ -4,8 +4,9 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { CorporationCard } from "./CorporationCard";
 import { IProjectCard } from "../IProjectCard";
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
+import { Resources } from "../../Resources";
+import { CardName } from "../../CardName";
+import { ICard } from "../ICard";
 
 export class SaturnSystems implements CorporationCard {
     public name: CardName = CardName.SATURN_SYSTEMS;
@@ -18,6 +19,11 @@ export class SaturnSystems implements CorporationCard {
             }
         }
     }
+
+    public onCorpCardPlayed(_player: Player, game: Game, card: CorporationCard) {
+        this.onCardPlayed(_player,game,card as ICard as IProjectCard);
+    }
+
     public play(player: Player) {
         player.setProduction(Resources.TITANIUM);
         player.setProduction(Resources.MEGACREDITS);

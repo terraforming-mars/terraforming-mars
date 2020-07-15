@@ -10,6 +10,7 @@ import { CardName } from '../../CardName';
 import { LogMessageType } from "../../LogMessageType";
 import { LogMessageData } from "../../LogMessageData";
 import { LogMessageDataType } from "../../LogMessageDataType";
+import { ICard } from "../ICard";
 
 export class Splice implements CorporationCard {
     public name: CardName = CardName.SPLICE;
@@ -54,6 +55,10 @@ export class Splice implements CorporationCard {
             player.megaCredits += 2;
             return undefined;
         }    
+    }
+
+    public onCorpCardPlayed(player: Player, game: Game, card: CorporationCard): void {
+        this.onCardPlayed(player,game,card as ICard as IProjectCard);
     }
 
     public play() {

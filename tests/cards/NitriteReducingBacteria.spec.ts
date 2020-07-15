@@ -3,7 +3,7 @@ import { NitriteReducingBacteria } from "../../src/cards/NitriteReducingBacteria
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { OrOptions } from "../../src/inputs/OrOptions";
-import { Game } from '../../src/Game';
+import { Game } from "../../src/Game";
 
 describe("NitriteReducingBacteria", function () {
     let card : NitriteReducingBacteria, player : Player, game : Game;
@@ -16,7 +16,7 @@ describe("NitriteReducingBacteria", function () {
 
     it("Should play", function () {
         player.playedCards.push(card);
-        card.play();
+        card.play(player);
         expect(card.resourceCount).to.eq(3);
     });
 

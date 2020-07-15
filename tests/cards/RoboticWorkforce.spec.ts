@@ -5,9 +5,8 @@ import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
 import { BiomassCombustors } from "../../src/cards/BiomassCombustors";
 import { NoctisFarming } from "../../src/cards/NoctisFarming";
-import { FuelFactory } from "../../src/cards/FuelFactory";
 import { FoodFactory } from "../../src/cards/FoodFactory";
-import { Resources } from '../../src/Resources';
+import { Resources } from "../../src/Resources";
 import { UtopiaInvest } from "../../src/cards/turmoil/UtopiaInvest";
 
 describe("RoboticWorkforce", function () {
@@ -25,11 +24,9 @@ describe("RoboticWorkforce", function () {
 
     it("Should throw", function () {
         player.playedCards.push(new FoodFactory(), new BiomassCombustors(), card);
+        expect(card.canPlay(player,game)).to.eq(false);
         const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
-        expect(function () { action!.cb([card]); }).to.throw("Production not found for selected card");
-        expect(function () { action!.cb([new FuelFactory()]); }).to.throw("not enough energy production");
-        expect(function () { action!.cb([new FoodFactory()]); }).to.throw("not enough plant production");
+        expect(action).to.eq(undefined);
     });
 
     it("Should play", function () {

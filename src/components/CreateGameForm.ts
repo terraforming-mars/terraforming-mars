@@ -29,6 +29,7 @@ interface CreateGameModel {
     solarPhaseOption: boolean;
     promoCardsOption: boolean;
     undoOption: boolean;
+    includeVenusMA: boolean;
     startingCorporations: number;
     soloTR: boolean;
     clonedGameData: IGameData | undefined;
@@ -82,6 +83,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             solarPhaseOption: false,
             promoCardsOption: false,
             undoOption: false,
+            includeVenusMA: true,
             startingCorporations: 2,
             soloTR: false,
             clonedGameData: undefined,
@@ -188,6 +190,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const seed = component.seed;
             const promoCardsOption = component.promoCardsOption;
             const undoOption = component.undoOption;
+            const includeVenusMA = component.includeVenusMA;
             const startingCorporations = component.startingCorporations;
             const soloTR = component.soloTR;
             let clonedGamedId: undefined | string = undefined;
@@ -217,6 +220,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 solarPhaseOption,
                 promoCardsOption,
                 undoOption,
+                includeVenusMA,
                 startingCorporations,
                 soloTR,
                 clonedGamedId,
@@ -366,6 +370,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <label class="form-switch">
                                 <input type="checkbox" v-model="undoOption">
                                 <i class="form-icon"></i> <span v-i18n>Allow undo</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#allow-undo" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
+                            <label class="form-switch" v-if="venusNext && playersCount > 1">
+                                <input type="checkbox" v-model="includeVenusMA">
+                                <i class="form-icon"></i> <span v-i18n>Venus Milestone/Award</span>
                             </label>
 
                             <label class="form-label">

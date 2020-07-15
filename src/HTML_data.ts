@@ -6899,7 +6899,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="tag tag1 tag-event"></div>
         <div class="promo-icon project-icon"></div>
         <div class="content">
-            <div class="requirements">9 Resources</div>
+            <div class="requirements">9 Resource Types</div>
             <div class="tile rating"></div>
             <div class="description ">
                 (Requires that you have 9 different types of resources. Raise your terraform rating 1 step.)

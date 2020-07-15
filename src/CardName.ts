@@ -429,6 +429,7 @@ export enum CardName {
     GMO_CONTRACT = "GMO Contract",
     MARTIAN_MEDIA_CENTER = "Martian Media Center",
     PARLIAMENT_HALL = "Parliament Hall",
+    POLITICAL_ALLIANCE = "Political Alliance",
     PR_OFFICE = "PR Office",
     PUBLIC_CELEBRATIONS = "Public Celebrations",
     RECRUITMENT = "Recruitment",

@@ -7324,6 +7324,21 @@ export const HTML_DATA: Map<string, string> =
       </div>
   </div>
 `],
+[CardName.POLITICAL_ALLIANCE, `
+  <div class="title background-color-events">Political Alliance</div>
+  <div class="price">4</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-event"></div>
+  <div class="card-number">X09</div>
+  <div class="content">
+    <div class="requirements">2 Party Leaders</div>
+      <div class="tile rating"></div>
+      <br>
+      <div class="description">
+        (Requires that you have 2 party leaders. Gain 1 TR.)
+      </div>
+  </div>
+`],
 [CardName.PR_OFFICE, `
   <div class="title background-color-automated ">PR Office</div>
   <div class="price">7</div>

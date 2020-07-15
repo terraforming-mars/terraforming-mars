@@ -1,5 +1,5 @@
 
-import { IActionCard, IResourceCard } from './ICard';
+import { IActionCard, IResourceCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -7,9 +7,9 @@ import { Player } from "../Player";
 import { OrOptions } from "../inputs/OrOptions";
 import { ResourceType } from "../ResourceType";
 import { SelectOption } from "../inputs/SelectOption";
-import { CardName } from '../CardName';
-import { Game } from '../Game';
-import { LogHelper } from '../components/LogHelper';
+import { CardName } from "../CardName";
+import { Game } from "../Game";
+import { LogHelper } from "../components/LogHelper";
 
 export class NitriteReducingBacteria implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 11;
@@ -19,8 +19,8 @@ export class NitriteReducingBacteria implements IActionCard, IProjectCard, IReso
     public cardType: CardType = CardType.ACTIVE;
     public name: CardName = CardName.NITRITE_REDUCING_BACTERIA;
 
-    public play() {
-        this.resourceCount += 3;
+    public play(player: Player) {
+        player.addResourceTo(this,3);
         return undefined;
     }
     public canAct(): boolean {

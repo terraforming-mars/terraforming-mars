@@ -147,6 +147,8 @@ export class RoboticWorkforce implements IProjectCard {
                         || card.name === CardName.UNDERGROUND_CITY
                         || card.name === CardName.URBANIZED_AREA
                         || card.name === CardName.LAVA_TUBE_SETTLEMENT
+                        || card.name === CardName.SPACE_PORT
+                        || card.name === CardName.CUPOLA_CITY
                         )
                 ) {
                     if (player.getProduction(Resources.ENERGY) >= 1) {
@@ -157,6 +159,21 @@ export class RoboticWorkforce implements IProjectCard {
                     if (game.someoneHasResourceProduction(Resources.HEAT,2)) {
                         return true;
                     }    
+                } else if (builderCardsNames[i] === card.name  && (card.name === CardName.PEROXIDE_POWER 
+                        || card.name === CardName.FUELED_GENERATORS
+                        )
+                ) {
+                    if (player.getProduction(Resources.MEGACREDITS) >= -4) {
+                        return true;
+                    }    
+                } else if (builderCardsNames[i] === card.name  && card.name === CardName.NUCLEAR_POWER) {
+                    if (player.getProduction(Resources.MEGACREDITS) >= -3) {
+                        return true;
+                    }  
+                } else if (builderCardsNames[i] === card.name  && card.name === CardName.FOOD_FACTORY) {
+                    if (player.getProduction(Resources.PLANTS) >= 1) {
+                        return true;
+                    }  
                 } else if (builderCardsNames[i] === card.name) {
                     return true;
                 }

@@ -34,6 +34,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
       Vue.nextTick(function () {
         app.$data.cost = app.playerinput.amount;
         app.$data.megaCredits = (app as any).getMegaCreditsMax();
+        app.$data.isResearchPhase = app.playerinput.title === "Select how to pay for cards";
 
         app.setDefaultSteelValue();
         app.setDefaultTitaniumValue();
@@ -122,7 +123,8 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                 steel: this.$data.steel,
                 titanium: this.$data.titanium,
                 microbes: 0,
-                floaters: 0
+                floaters: 0,
+                isResearchPhase: this.$data.isResearchPhase
             };
             if (htp.megaCredits > this.player.megaCredits) {
                 this.$data.warning = "You don't have that many mega credits";

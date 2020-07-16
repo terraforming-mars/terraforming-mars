@@ -448,6 +448,7 @@ function getPlayer(player: Player, game: Game): string {
     draftedCards: getCards(player, player.draftedCards, game),
     milestones: getMilestones(game),
     awards: getAwards(game),
+    cardCost: player.cardCost,
     color: player.color,
     corporationCard: getCorporationCard(player),
     energy: player.energy,

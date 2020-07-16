@@ -1,4 +1,3 @@
-
 import { CorporationCard } from "./CorporationCard";
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
@@ -17,7 +16,7 @@ export class Inventrix implements CorporationCard {
             game.dealer.dealCard()
         );
         
-        LogHelper.logCardDraw(game, player, 3);
+        LogHelper.logCardChange(game, player, "drew", 3);
         
         return undefined;
     }

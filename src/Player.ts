@@ -665,7 +665,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           titanium: 0,
           megaCredits: 0,
           microbes: 0,
-          floaters: 0
+          floaters: 0,
+          isResearchPhase: false,
         };
         try {
           const parsedInput: {[x: string]: number} =
@@ -792,7 +793,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           titanium: 0,
           megaCredits: 0,
           microbes: 0, 
-          floaters: 0
+          floaters: 0,
+          isResearchPhase: false,
         };
         if (this.canUseHeatAsMegaCredits) {
           payMethod.heat = 0;
@@ -994,7 +996,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         heat: 0,
         megaCredits: 0,
         microbes: 0,
-        floaters: 0
+        floaters: 0,
+        isResearchPhase: false,
       };
 
       let selectedCards: Array<IProjectCard> = [];

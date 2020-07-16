@@ -234,7 +234,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 steel: this.$data.steel,
                 titanium: this.$data.titanium,
                 microbes: this.$data.microbes,
-                floaters: this.$data.floaters
+                floaters: this.$data.floaters,
+                isResearchPhase: false
             };
             if (htp.megaCredits > this.player.megaCredits) {
                 this.$data.warning = "You don't have that many mega credits";

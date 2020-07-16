@@ -126,6 +126,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                 floaters: 0,
                 isResearchPhase: this.$data.isResearchPhase
             };
+
             if (htp.megaCredits > this.player.megaCredits) {
                 this.$data.warning = "You don't have that many mega credits";
                 return;
@@ -149,6 +150,11 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
             if (requiredAmt > 0 && totalSpentAmt < requiredAmt) {
                 this.$data.warning = "Haven't spent enough";
                 return;
+            }
+
+            if (htp.isResearchPhase && requiredAmt === 0) {
+              htp.heat = 0;
+              htp.megaCredits = 0;
             }
 
             const showAlert = PreferencesManager.loadValue("show_alerts") === "1";

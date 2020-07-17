@@ -56,10 +56,9 @@ export const LogPanel = Vue.component("log-panel", {
                     for (let player of this.players) {
                         if (player.corporationCard !== undefined && data.value === player.corporationCard) {
                             return "<log-card class=\"background-color-corporation\">"+data.value+"</log-card>";
-                        } else if (player.selfReplicatingRobotsCardTarget !== undefined && data.value === player.selfReplicatingRobotsCardTarget.name) {
-                            return this.parseCardType(player.selfReplicatingRobotsCardTarget.cardType, data.value);
                         } else {
-                            for (let card of player.playedCards) {
+                            let cards = player.playedCards.concat(player.selfReplicatingRobotsCards);
+                            for (let card of cards) {
                                 if (data.value === card.name && card.cardType !== undefined) {
                                     return this.parseCardType(card.cardType, data.value);
                                 }

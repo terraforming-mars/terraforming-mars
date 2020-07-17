@@ -52,13 +52,14 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
     },
     methods: {
         getCardCost: function () {
-            for (const icard of this.player.cardsInHand) {
+            let cards = this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards);
+            for (const icard of cards) {
                 if (this.$data.card.name === icard.name) {
                     return icard.calculatedCost
                 }
             }
             // If not found, it should be self replication robot stored card
-            return this.player.selfReplicatingRobotsCardCost;
+            //return this.player.selfReplicatingRobotsCardCost;
         },
         setDefaultMicrobesValue: function() {
             // automatically use available microbes to pay if not enough MC

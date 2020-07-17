@@ -495,8 +495,7 @@ function getPlayer(player: Player, game: Game): string {
     fleetSize: player.fleetSize,
     tradesThisTurn: player.tradesThisTurn,
     turmoil: getTurmoil(game),
-    selfReplicatingRobotsCardCost: player.getSelfReplicatingRobotsCardCost(game),
-    selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
+    selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(game),
     dealtCorporationCards: player.dealtCorporationCards,
     dealtPreludeCards: player.dealtPreludeCards,
     initialDraft: game.initialDraft,
@@ -645,7 +644,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       fleetSize: player.fleetSize,
       tradesThisTurn: player.tradesThisTurn,
       turmoil: getTurmoil(game),
-      selfReplicatingRobotsCardTarget: player.getSelfReplicatingRobotsCard(),
+      selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(game),
       needsToDraft: player.needsToDraft,
       deckSize: game.dealer.getDeckSize()
     } as PlayerModel;

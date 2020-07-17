@@ -44,8 +44,7 @@ export interface PlayerModel {
     actionsThisGeneration: Array<string>;
     fleetSize: number;
     tradesThisTurn: number;
-    selfReplicatingRobotsCardCost: number;
-    selfReplicatingRobotsCardTarget: IProjectCard | undefined;
+    selfReplicatingRobotsCards: Array<CardModel>;
     dealtCorporationCards: Array<CorporationCard>;
     dealtPreludeCards:  Array<IProjectCard>;
     initialDraft: boolean;

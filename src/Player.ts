@@ -51,6 +51,7 @@ import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
 import { Board } from "./Board";
 import { PartyHooks } from "./turmoil/parties/PartyHooks";
 import { REDS_RULING_POLICY_COST } from "./constants";
+import { CardModel } from "./models/CardModel";
 
 export type PlayerId = string;
 
@@ -1071,24 +1072,23 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
     }
 
-    public getSelfReplicatingRobotsCardCost(game: Game) : number {
+    public getSelfReplicatingRobotsCards(game: Game) : Array<CardModel> {
       let card = this.playedCards.find(card => card.name === CardName.SELF_REPLICATING_ROBOTS);
+      let cards : Array<CardModel> = [];
       if (card instanceof SelfReplicatingRobots) {
         if (card.targetCard !== undefined) {
-          return this.getCardCost(game, card.targetCard);
+          cards.push(
+            {
+              resources: card.resourceCount,
+              name: card.targetCard.name,
+              calculatedCost: this.getCardCost(game, card.targetCard),
+              cardType: card.cardType
+            }            
+          );
+          return cards;
         }
       } 
-      return 41;
-    }
-
-    public getSelfReplicatingRobotsCard() : IProjectCard | undefined {
-      let card = this.playedCards.find(card => card.name === CardName.SELF_REPLICATING_ROBOTS);
-      if (card instanceof SelfReplicatingRobots) {
-        if (card.targetCard !== undefined) {
-          return card.targetCard;
-        }
-      } 
-      return undefined;
+      return cards;
     }      
 
     public getCardCost(game: Game, card: IProjectCard): number {

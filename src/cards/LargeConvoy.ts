@@ -12,12 +12,25 @@ import { ResourceType } from '../ResourceType';
 import { CardName } from '../CardName';
 import { LogHelper } from '../components/LogHelper';
 import { Resources } from '../Resources';
+import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from '../constants';
+import { PartyHooks } from '../turmoil/parties/PartyHooks';
+import { PartyName } from '../turmoil/parties/PartyName';
 
 export class LargeConvoy implements IProjectCard {
     public cost: number = 36;
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
     public name: CardName = CardName.LARGE_CONVOY;
     public cardType: CardType = CardType.EVENT;
+
+    public canPlay(player: Player, game: Game): boolean {
+        const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
+          return player.canAfford(this.cost + REDS_RULING_POLICY_COST, game, false, true);
+        }
+    
+        return true;
+      }
 
     public play(player: Player, game: Game): PlayerInput | undefined {
         player.cardsInHand.push(game.dealer.dealCard(), game.dealer.dealCard());

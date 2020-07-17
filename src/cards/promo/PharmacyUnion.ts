@@ -11,6 +11,9 @@ import { CorporationName } from "../../CorporationName";
 import { LogMessageType } from "../../LogMessageType";
 import { LogMessageData } from "../../LogMessageData";
 import { LogMessageDataType } from "../../LogMessageDataType";
+import { PartyHooks } from "../../turmoil/parties/PartyHooks";
+import { PartyName } from "../../turmoil/parties/PartyName";
+import { REDS_RULING_POLICY_COST } from "../../constants";
 
 export class PharmacyUnion implements CorporationCard {
     public name: CardName = CardName.PHARMACY_UNION;
@@ -71,20 +74,24 @@ export class PharmacyUnion implements CorporationCard {
             return undefined;
         } else {
             const availableOptions: OrOptions = new OrOptions();
+            const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
 
-            availableOptions.options.push(
-                new SelectOption('Turn this card face down and gain 3 TR', () => {
-                    this.isDisabled = true;
-                    player.increaseTerraformRatingSteps(3, game);
-                    game.log(
-                        LogMessageType.DEFAULT,
-                        "${0} turned ${1} face down to gain 3 TR",
-                        new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                        new LogMessageData(LogMessageDataType.CARD, this.name)
-                    );
-                    return undefined;
-                })
-            );
+            if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST * 3))) {
+                availableOptions.options.push(
+                    new SelectOption('Turn this card face down and gain 3 TR', () => {
+                        this.isDisabled = true;
+                        player.increaseTerraformRatingSteps(3, game);
+                        game.log(
+                            LogMessageType.DEFAULT,
+                            "${0} turned ${1} face down to gain 3 TR",
+                            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                            new LogMessageData(LogMessageDataType.CARD, this.name)
+                        );
+                        return undefined;
+                    })
+                );
+            }
+
             availableOptions.options.push(
                 new SelectOption('Do nothing', () => {
                     this.runInterrupts(player, game, scienceTags - 1);

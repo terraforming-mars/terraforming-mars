@@ -25,12 +25,12 @@ describe("WaterSplittingPlant", function () {
 
     it("Can't act", function () {
         player.energy = 2;
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player, game)).to.eq(false);
     });
 
     it("Should act", function () {
         player.energy = 3;
-        expect(card.canAct(player)).to.eq(true);
+        expect(card.canAct(player, game)).to.eq(true);
         
         card.action(player, game);
         expect(player.energy).to.eq(0);

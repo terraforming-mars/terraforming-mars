@@ -1,4 +1,3 @@
-
 import { IProjectCard } from "./IProjectCard";
 import { CardType } from "./CardType";
 import { SpaceType } from "../SpaceType";
@@ -11,6 +10,9 @@ import { ISpace } from "../ISpace";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { BoardName } from '../BoardName';
 import { CardName } from '../CardName';
+import { MAX_TEMPERATURE, REDS_RULING_POLICY_COST } from "../constants";
+import { PartyHooks } from "../turmoil/parties/PartyHooks";
+import { PartyName } from "../turmoil/parties/PartyName";
 
 export class LavaFlows implements IProjectCard {
     public cost: number = 18;
@@ -39,7 +41,15 @@ export class LavaFlows implements IProjectCard {
         }    
     }
     public canPlay(player: Player, game: Game): boolean {
-        return LavaFlows.getVolcanicSpaces(player, game).length > 0;
+        const canPlaceTile = LavaFlows.getVolcanicSpaces(player, game).length > 0;
+        const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;
+        const stepsRaised = Math.min(remainingTemperatureSteps, 2);
+
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+            return player.canAfford(this.cost + REDS_RULING_POLICY_COST * stepsRaised) && canPlaceTile;
+        }
+
+      return canPlaceTile;
     }
     public play(player: Player, game: Game) {
         return new SelectSpace("Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons", LavaFlows.getVolcanicSpaces(player, game), (space: ISpace) => {

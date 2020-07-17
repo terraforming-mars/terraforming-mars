@@ -15,12 +15,12 @@ describe("RadChemFactory", function () {
     });
 
     it("Can't play", function () {
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player, game)).to.eq(false);
     });
 
     it("Should play", function () {
         player.setProduction(Resources.ENERGY);
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player, game)).to.eq(true);
 
         card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);

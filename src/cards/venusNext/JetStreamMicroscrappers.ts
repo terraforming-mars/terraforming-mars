@@ -7,8 +7,10 @@ import { ResourceType } from "../../ResourceType";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from '../../inputs/SelectOption';
 import { Game } from '../../Game';
-import { MAX_VENUS_SCALE } from '../../constants';
+import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from '../../constants';
 import { CardName } from '../../CardName';
+import { PartyHooks } from "../../turmoil/parties/PartyHooks";
+import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class JetStreamMicroscrappers implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 12;
@@ -21,10 +23,18 @@ export class JetStreamMicroscrappers implements IActionCard,IProjectCard, IResou
     public play() {
         return undefined;
     }
+
     public canAct(player: Player, game: Game): boolean {
-        return player.titanium > 0 || 
-          (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE);
-    }    
+        const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+        const canSpendResource = this.resourceCount > 1 && !venusMaxed;
+        
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
+          return player.titanium > 0 || (canSpendResource && player.canAfford(REDS_RULING_POLICY_COST));
+        }
+  
+        return player.titanium > 0 || canSpendResource;
+    }
+
     public action(player: Player, game: Game) {
         var opts: Array<SelectOption> = [];
 

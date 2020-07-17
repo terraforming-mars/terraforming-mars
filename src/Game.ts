@@ -70,6 +70,7 @@ export interface GameOptions {
   solarPhaseOption: boolean;
   promoCardsOption: boolean;
   undoOption: boolean;
+  includeVenusMA: boolean;
   startingCorporations: number;
   soloTR: boolean;
   clonedGamedId: string | undefined;
@@ -118,6 +119,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public turmoil: Turmoil | undefined;
     private promoCardsOption: boolean;
     public undoOption: boolean;
+    private includeVenusMA: boolean;
     private startingCorporations: number;
     public soloTR: boolean;
     private clonedGamedId: string | undefined;
@@ -153,12 +155,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
           promoCardsOption: false,
           undoOption: false,
           startingCorporations: 2,
+          includeVenusMA: true,
           soloTR: false,
           clonedGamedId: undefined
         } as GameOptions
       }
 
-      this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.venusNextExtension);
+      this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.venusNextExtension && gameOptions.includeVenusMA);
 
       this.activePlayer = first.id;
       this.boardName = gameOptions.boardName;
@@ -171,6 +174,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.promoCardsOption = gameOptions.promoCardsOption;
       this.undoOption = gameOptions.undoOption;
       this.startingCorporations = gameOptions.startingCorporations;
+      this.includeVenusMA = gameOptions.includeVenusMA;
       this.dealer = new Dealer(this.corporateEra, this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption, this.turmoilExtension, Math.random());
       this.showOtherPlayersVP = gameOptions.showOtherPlayersVP;
       this.solarPhaseOption = gameOptions.solarPhaseOption;
@@ -215,7 +219,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Add Venus Next corporations cards, board colonies and milestone / award
       if (this.venusNextExtension) {
         corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
-        this.setVenusElements(this.randomMA);
+        this.setVenusElements(this.randomMA, this.includeVenusMA);
       }
 
       // Add colonies stuff
@@ -382,12 +386,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     // Add Venus Next board colonies and milestone / award
-    public setVenusElements(randomMA: boolean) {
-      if (randomMA) {
+    public setVenusElements(randomMA: boolean, includeVenusMA: boolean) {
+      if (randomMA && includeVenusMA) {
         this.getRandomMilestonesAndAwards(true, 1);
       } else {
-        this.milestones.push(...VENUS_MILESTONES);
-        this.awards.push(...VENUS_AWARDS);
+        if (includeVenusMA) this.milestones.push(...VENUS_MILESTONES);
+        if (includeVenusMA) this.awards.push(...VENUS_AWARDS);
       }
 
       this.addVenusBoardSpaces();
@@ -439,6 +443,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.promoCardsOption = gameToRebuild.promoCardsOption;
           game.undoOption = gameToRebuild.undoOption;
           game.startingCorporations = gameToRebuild.startingCorporations;
+          game.includeVenusMA = gameToRebuild.includeVenusMA;
           game.soloTR = gameToRebuild.soloTR;
           game.initialDraft = gameToRebuild.initialDraft;
           game.initialDraftRounds = gameToRebuild.initialDraftRounds || 4;
@@ -698,6 +703,16 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.claimedMilestones.length > 2;
     }
 
+    private playerHasPickedCorporationCard(player: Player, corporationCard: CorporationCard){
+      player.pickedCorporationCard = corporationCard;
+      // if all players picked corporationCard
+      if(this.players.filter(aplayer => aplayer.pickedCorporationCard === undefined).length === 0 ){
+        for (let somePlayer of this.getPlayers()) {
+          this.playCorporationCard(somePlayer, somePlayer.pickedCorporationCard!);
+        }
+      }
+    }
+
     private playCorporationCard(
         player: Player, corporationCard: CorporationCard
     ): void {
@@ -722,6 +737,19 @@ export class Game implements ILoadable<SerializedGame, Game> {
         player.megaCredits -= cardsToPayFor * player.cardCost;
       }
 
+      // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
+      for (let somePlayer of this.getPlayers()) {
+        if (somePlayer !== player && somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
+            const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCorpCardPlayed(player, this, corporationCard);
+            if (actionFromPlayedCard !== undefined) {  // always be undefined for the present 
+                this.interrupts.push({
+                    player: player,
+                    playerInput: actionFromPlayedCard
+                });
+            }
+        }
+      }
+
       //Activate some colonies
       if (this.coloniesExtension && corporationCard.resourceType !== undefined) {
         this.colonies.filter(colony => colony.resourceType !== undefined && colony.resourceType === corporationCard.resourceType).forEach(colony => {
@@ -734,7 +762,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     private pickCorporationCard(player: Player): PlayerInput {
       let corporation: CorporationCard;
-      const result: AndOptions = new AndOptions(() => { this.playCorporationCard(player, corporation); return undefined; });
+      const result: AndOptions = new AndOptions(() => { this.playerHasPickedCorporationCard(player, corporation); return undefined; });
 
       result.title = " ";
       result.options.push(
@@ -889,6 +917,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.interrupts.length > 0) {
         let interrupt = this.interrupts.shift();
         if (interrupt) {
+          if (interrupt.beforeAction !== undefined) {
+            interrupt.beforeAction();
+          }
           interrupt.player.setWaitingFor(interrupt.playerInput, () => {
             this.resolveTurmoilInterrupts();
           });
@@ -1079,6 +1110,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.interrupts.length > 0) {
         let interrupt = this.interrupts.shift();
         if (interrupt !== undefined && interrupt.playerInput !== undefined) {
+          if (interrupt.beforeAction !== undefined) {
+            interrupt.beforeAction();
+          }
           interrupt.player.setWaitingFor(interrupt.playerInput, () => {
             this.playerIsFinishedTakingActions();
           });

@@ -9,6 +9,9 @@ import { ResourceType } from "../ResourceType";
 import { SelectOption } from "../inputs/SelectOption";
 import { CardName } from '../CardName';
 import { LogHelper } from '../components/LogHelper';
+import { PartyHooks } from '../turmoil/parties/PartyHooks';
+import { PartyName } from '../turmoil/parties/PartyName';
+import { REDS_RULING_POLICY_COST } from '../constants';
 
 export class RegolithEaters implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 13;
@@ -30,17 +33,25 @@ export class RegolithEaters implements IActionCard, IProjectCard, IResourceCard 
             LogHelper.logAddResource(game, player, this);
             return undefined;
         }
-        return new OrOptions(
-            new SelectOption("Remove 2 microbes to raise oxygen level 1 step", () => {
+
+        let orOptions = new OrOptions();
+        const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+
+        if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
+            orOptions.options.push(new SelectOption("Remove 2 microbes to raise oxygen level 1 step", () => {
                 player.removeResourceFrom(this, 2);
                 LogHelper.logRemoveResource(game, player, this, 2, "raise oxygen 1 step");
                 return game.increaseOxygenLevel(player, 1);
-            }),
-            new SelectOption("Add 1 microbe to this card", () => {
-                player.addResourceTo(this);
-                LogHelper.logAddResource(game, player, this);
-                return undefined;
-            })
-        );
+            }));
+        }
+
+        orOptions.options.push(new SelectOption("Add 1 microbe to this card", () => {
+            player.addResourceTo(this);
+            LogHelper.logAddResource(game, player, this);
+            return undefined;
+        }));
+
+        if (orOptions.options.length === 1) return orOptions.options[0].cb();
+        return orOptions;
     }
 }

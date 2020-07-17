@@ -9,8 +9,10 @@ import { SelectCard } from '../../inputs/SelectCard';
 import { Game } from '../../Game';
 import { SelectOption } from '../../inputs/SelectOption';
 import { OrOptions } from '../../inputs/OrOptions';
-import { MAX_OCEAN_TILES } from '../../constants';
+import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from '../../constants';
 import { LogHelper } from '../../components/LogHelper';
+import { PartyHooks } from '../../turmoil/parties/PartyHooks';
+import { PartyName } from '../../turmoil/parties/PartyName';
 
 export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
     public name: CardName = CardName.COMET_AIMING;
@@ -29,8 +31,14 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
     }
 
     public canAct(player: Player, game: Game): boolean {
+        const hasTitanium = player.titanium > 0;
         const canPlaceOcean = this.resourceCount > 0 && game.board.getOceansOnBoard() < MAX_OCEAN_TILES;
-        return player.titanium > 0 || canPlaceOcean;
+
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+            return hasTitanium || (player.canAfford(REDS_RULING_POLICY_COST) && canPlaceOcean);
+        }
+
+        return hasTitanium || canPlaceOcean;
     }
 
     public action(player: Player, game: Game) {
@@ -68,7 +76,11 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
         if (player.titanium === 0) return spendAsteroidResource();
 
         let availableActions = new Array<SelectOption | SelectCard<ICard>>();
-        availableActions.push(new SelectOption('Remove an asteroid resource to place an ocean', spendAsteroidResource));
+        const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+        
+        if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
+            availableActions.push(new SelectOption('Remove an asteroid resource to place an ocean', spendAsteroidResource));
+        } 
 
         if (asteroidCards.length === 1) {
             availableActions.push(new SelectOption('Spend 1 titanium to gain 1 asteroid resource', addAsteroidToSelf));

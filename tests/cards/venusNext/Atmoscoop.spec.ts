@@ -25,12 +25,12 @@ describe("Atmoscoop", function () {
 
     it("Can't play", function () {
         player.playedCards.push(new Research());
-        expect(card.canPlay(player)).to.eq(false);
+        expect(card.canPlay(player, game)).to.eq(false);
     });
 
     it("Should play - no targets", function () {
         player.playedCards.push(new Research(), new SearchForLife());
-        expect(card.canPlay(player)).to.eq(true);
+        expect(card.canPlay(player, game)).to.eq(true);
 
         const action = card.play(player, game) as OrOptions;
         expect(action instanceof OrOptions).to.eq(true);

@@ -9,12 +9,23 @@ import { ResourceType } from '../ResourceType';
 import { CardName } from '../CardName';
 import { Game } from '../Game';
 import { LogHelper } from '../components/LogHelper';
+import { PartyHooks } from '../turmoil/parties/PartyHooks';
+import { PartyName } from '../turmoil/parties/PartyName';
+import { REDS_RULING_POLICY_COST } from '../constants';
 
 export class ImportedNitrogen implements IProjectCard {
     public cost: number = 23;
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
     public name: CardName = CardName.IMPORTED_NITROGEN;
     public cardType: CardType = CardType.EVENT;
+
+    public canPlay(player: Player, game: Game) {
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
+          return player.canAfford(this.cost + REDS_RULING_POLICY_COST, game, false, true);
+        }
+  
+        return true;
+    }
 
     private giveResources(player: Player, game: Game): undefined {
         player.increaseTerraformRating(game);

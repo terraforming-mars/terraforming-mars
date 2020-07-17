@@ -7,6 +7,8 @@ import { Game } from '../../Game';
 import { PartyName } from '../../turmoil/parties/PartyName';
 import { SelectSpace } from "../../inputs/SelectSpace";
 import { ISpace } from "../../ISpace";
+import { PartyHooks } from "../../turmoil/parties/PartyHooks";
+import { REDS_RULING_POLICY_COST, MAX_OXYGEN_LEVEL } from "../../constants";
 
 export class WildlifeDome implements IProjectCard {
     public cost: number = 15;
@@ -17,7 +19,14 @@ export class WildlifeDome implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {
             const canPlaceTile = game.board.getAvailableSpacesForGreenery(player).length > 0;
-            return game.turmoil.canPlay(player, PartyName.GREENS) && canPlaceTile;
+            const meetsPartyRequirements = game.turmoil.canPlay(player, PartyName.GREENS);
+            const oxygenMaxed = game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
+
+            if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oxygenMaxed) {
+                return player.canAfford(REDS_RULING_POLICY_COST, game, true) && meetsPartyRequirements && canPlaceTile;
+            }
+
+            return meetsPartyRequirements && canPlaceTile;
         }
         return false;
     }

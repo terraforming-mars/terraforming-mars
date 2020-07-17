@@ -1,4 +1,3 @@
-
 import {Tags} from './Tags';
 import {CardType} from './CardType';
 import {Player} from '../Player';
@@ -9,6 +8,7 @@ import {IActionCard} from './ICard';
 import {IProjectCard} from './IProjectCard';
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
+import { LogHelper } from '../components/LogHelper';
 
 export class BusinessNetwork implements IActionCard, IProjectCard {
     public cost: number = 4;
@@ -35,6 +35,7 @@ export class BusinessNetwork implements IActionCard, IProjectCard {
         [dealtCard],
         (cards: Array<IProjectCard>) => {
           if (cards.length === 0 || !canSelectCard) {
+            LogHelper.logCardChange(game, player, "discarded", 1);
             game.dealer.discard(dealtCard);
             return undefined;
           }
@@ -49,11 +50,13 @@ export class BusinessNetwork implements IActionCard, IProjectCard {
                 }
                 player.megaCredits -= htp.megaCredits;
                 player.heat -= htp.heat;
+                LogHelper.logCardChange(game, player, "drew", 1);
                 player.cardsInHand.push(dealtCard);
                 return undefined;
               }
             );
           }
+          LogHelper.logCardChange(game, player, "drew", 1);
           player.cardsInHand.push(dealtCard);
           player.megaCredits -= player.cardCost;
           return undefined;

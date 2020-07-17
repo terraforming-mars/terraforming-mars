@@ -8,6 +8,9 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 import { Game } from '../../Game';
 import { CardName } from '../../CardName';
+import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from "../../constants";
+import { PartyHooks } from "../../turmoil/parties/PartyHooks";
+import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class ExtractorBalloons implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 21;
@@ -21,9 +24,14 @@ export class ExtractorBalloons implements IActionCard,IProjectCard, IResourceCar
         this.resourceCount += 3;
         return undefined;
     }
-    public canAct(): boolean {
+    public canAct(player: Player, game: Game): boolean {
+        const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
+          return player.canAfford(this.cost + REDS_RULING_POLICY_COST);
+        }
+  
         return true;
-    }    
+    }   
     public action(player: Player, game: Game) {
         if (this.resourceCount < 2) {
             this.resourceCount++;

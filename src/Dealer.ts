@@ -458,6 +458,7 @@ import { AsteroidDeflectionSystem } from "./cards/promo/AsteroidDeflectionSystem
 import { SubCrustMeasurements } from "./cards/promo/SubCrustMeasurements";
 import { Potatoes } from "./cards/promo/Potatoes";
 import { MeatIndustry } from "./cards/promo/MeatIndustry";
+import { PoliticalAlliance } from "./cards/turmoil/PoliticalAlliance";
 
 
 export interface ICardFactory<T> {
@@ -654,6 +655,7 @@ export const ALL_TURMOIL_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.MARTIAN_MEDIA_CENTER, factory: MartianMediaCenter },
     { cardName: CardName.PARLIAMENT_HALL, factory: ParliamentHall },
     { cardName: CardName.PR_OFFICE, factory: PROffice },
+    { cardName: CardName.POLITICAL_ALLIANCE, factory: PoliticalAlliance },
     { cardName: CardName.PUBLIC_CELEBRATIONS, factory: PublicCelebrations },
     { cardName: CardName.RECRUITMENT, factory: Recruitment },
     { cardName: CardName.RED_TOURISM_WAVE, factory: RedTourismWave },

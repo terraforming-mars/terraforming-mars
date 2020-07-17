@@ -3537,7 +3537,7 @@ export const HTML_DATA: Map<string, string> =
                    <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="money production">2</div>
                </div>
                <div class="description" style="position:absolute;margin-top:-90px;margin-left:10px;text-align:left; width: 120px">
-                 (Requires 10% on the Microbes or 2 Animals to another Venus card. Decrease your energy production 1 step and increase your MC production 2 steps)
+                 (Requires 10% Venus. Add 2 Microbes or 2 Animals to another Venus card. Decrease your energy production 1 step and increase your MC production 2 steps)
               </div>
             </div>
 `],

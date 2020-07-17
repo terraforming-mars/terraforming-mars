@@ -29,6 +29,7 @@ describe("PoliticalAlliance", function () {
             solarPhaseOption: false,
             promoCardsOption: false,
             undoOption: false,
+            includeVenusMA: false,
             startingCorporations: 2,
             soloTR: false,
             clonedGamedId: undefined

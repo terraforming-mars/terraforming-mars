@@ -21,6 +21,7 @@ export class LargeConvoy implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
     public name: CardName = CardName.LARGE_CONVOY;
     public cardType: CardType = CardType.EVENT;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
         const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;

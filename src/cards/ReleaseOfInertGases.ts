@@ -13,6 +13,7 @@ export class ReleaseOfInertGases implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: CardName = CardName.RELEASE_OF_INERT_GASES;
     public cardType: CardType = CardType.EVENT;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game) {
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {

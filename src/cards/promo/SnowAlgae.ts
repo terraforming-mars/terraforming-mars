@@ -7,7 +7,6 @@ import { Game } from '../../Game';
 import { Resources } from '../../Resources';
 
 export class SnowAlgae implements IProjectCard {
-
     public name: CardName = CardName.SNOW_ALGAE;
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.PLANT];

@@ -18,6 +18,7 @@ export class ImportedNitrogen implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];
     public name: CardName = CardName.IMPORTED_NITROGEN;
     public cardType: CardType = CardType.EVENT;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game) {
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {

@@ -22,10 +22,6 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
     public resourceCount: number = 0;
     public cardType: CardType = CardType.ACTIVE;
 
-    public canPlay(): boolean {
-        return true;
-    }
-
     public play() {
         return undefined;
     }

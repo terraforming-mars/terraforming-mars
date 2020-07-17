@@ -13,6 +13,7 @@ export class FieldCappedCity implements IProjectCard {
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL, Tags.ENERGY];
     public name: CardName = CardName.FIELD_CAPPED_CITY;
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       return game.board.getAvailableSpacesForCity(player).length > 0;

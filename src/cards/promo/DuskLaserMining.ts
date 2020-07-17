@@ -6,7 +6,6 @@ import { Player } from '../../Player';
 import { Resources } from '../../Resources';
 
 export class DuskLaserMining implements IProjectCard {
-
     public name: CardName = CardName.DUSK_LASER_MINING;
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.SPACE];

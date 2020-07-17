@@ -13,6 +13,7 @@ export class BribedCommitte implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public cardType: CardType = CardType.EVENT;
     public name: CardName = CardName.BRIBED_COMMITTEE;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game) {
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {

@@ -19,6 +19,7 @@ export class Flooding implements IProjectCard {
   public cost: number = 7;
   public name: CardName = CardName.FLOODING;
   public tags: Array<Tags> = [];
+  public hasRequirements = false;
 
   public canPlay(player: Player, game: Game): boolean {
     const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;

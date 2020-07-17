@@ -5,7 +5,6 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 
 export class RegoPlastics implements IProjectCard {
-
     public name: CardName = CardName.REGO_PLASTICS;
     public cost: number = 10;
     public tags: Array<Tags> = [Tags.STEEL];

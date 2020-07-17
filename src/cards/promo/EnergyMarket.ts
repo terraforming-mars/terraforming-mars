@@ -10,7 +10,6 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { SelectAmount } from "../../inputs/SelectAmount";
 
 export class EnergyMarket implements IProjectCard {
-
     public name: CardName = CardName.ENERGY_MARKET;
     public cost: number = 3;
     public tags: Array<Tags> = [Tags.ENERGY];

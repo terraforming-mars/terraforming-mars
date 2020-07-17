@@ -9,7 +9,6 @@ import { SpaceType } from "../../SpaceType";
 import { CardName } from '../../CardName';
 
 export class StanfordTorus implements IProjectCard {
-    
     public name: CardName = CardName.STANFORD_TORUS;
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.SPACE, Tags.CITY];

@@ -13,6 +13,7 @@ export class SubterraneanReservoir implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public tags: Array<Tags> = [];
     public name: CardName = CardName.SUBTERRANEAN_RESERVOIR;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
         const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;

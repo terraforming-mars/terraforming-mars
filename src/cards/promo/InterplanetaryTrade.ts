@@ -6,7 +6,6 @@ import { Player } from "../../Player";
 import { Resources } from "../../Resources";
 
 export class InterplanetaryTrade implements IProjectCard {
-
     public name: CardName = CardName.INTERPLANETARY_TRADE;
     public cost: number = 27;
     public tags: Array<Tags> = [Tags.SPACE];

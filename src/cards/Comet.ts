@@ -14,6 +14,7 @@ export class Comet implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public name: CardName = CardName.COMET;
     public cardType: CardType = CardType.EVENT;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game) {
       const temperatureStep = game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;

@@ -14,6 +14,7 @@ export class SmallAsteroid implements IProjectCard {
     public name: CardName = CardName.SMALL_ASTEROID;
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game) {
         const canRaiseTemperature = game.getTemperature() < MAX_TEMPERATURE;

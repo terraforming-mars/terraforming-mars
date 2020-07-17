@@ -13,13 +13,13 @@ export function translateText(englishText: string): string {
         translatedText = (window as any).TM_translations[lang][englishText]
     } else {
         let stripedText = englishText.replace(/^\(|\)$/gm, "");
-        if (stripedText !== englishText) {
+        if (stripedText && stripedText !== englishText) {
             stripedText = translateText(stripedText);
             if (stripedText !== englishText) {
                 translatedText = "(" + stripedText + ")";
             }
         } else if (stripedText && stripedText.length > 3) {
-            console.log('Please translate "' + stripedText + '"')
+            console.log("Please translate \"" + stripedText + "\"")
         }
     }
     return translatedText;
@@ -36,7 +36,7 @@ function translateChildren(node: any) {
         if (child.nodeType === Node.TEXT_NODE) {
             var translatedText = translateText(child.data);
             if (translatedText !== child.data) {
-                child.data = translateText(child.data);
+                child.data = translatedText;
             }
         } else {
             translateChildren(child);

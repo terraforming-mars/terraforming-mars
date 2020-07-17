@@ -1,8 +1,8 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { Resources } from "../../Resources";
 
 export class CommunityServices implements IProjectCard {
@@ -13,7 +13,7 @@ export class CommunityServices implements IProjectCard {
 
     public play(player: Player) {
         let noTagsCount: number = 0;
-        if (player.corporationCard !== undefined && player.corporationCard.tags.length === 0) {
+        if (player.corporationCard !== undefined && player.corporationCard.tags.filter(tag => tag !== Tags.WILDCARD).length === 0) {
             noTagsCount++;
         }
         player.setProduction(Resources.MEGACREDITS,

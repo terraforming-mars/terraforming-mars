@@ -1,4 +1,5 @@
-import { IActionCard, IResourceCard } from './ICard';
+
+import { IActionCard, IResourceCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -21,8 +22,8 @@ export class NitriteReducingBacteria implements IActionCard, IProjectCard, IReso
     public cardType: CardType = CardType.ACTIVE;
     public name: CardName = CardName.NITRITE_REDUCING_BACTERIA;
 
-    public play() {
-        this.resourceCount += 3;
+    public play(player: Player) {
+        player.addResourceTo(this,3);
         return undefined;
     }
     public canAct(): boolean {

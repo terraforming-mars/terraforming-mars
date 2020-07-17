@@ -6899,7 +6899,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="tag tag1 tag-event"></div>
         <div class="promo-icon project-icon"></div>
         <div class="content">
-            <div class="requirements">9 Resources</div>
+            <div class="requirements">9 Resource Types</div>
             <div class="tile rating"></div>
             <div class="description ">
                 (Requires that you have 9 different types of resources. Raise your terraform rating 1 step.)
@@ -7321,6 +7321,21 @@ export const HTML_DATA: Map<string, string> =
       </div>
       <div class="description ">
         (Requires that Mars First are ruling or that you have 2 delegates there. Increase your MC production 1 step for every 3 Building tag you have, including this.)
+      </div>
+  </div>
+`],
+[CardName.POLITICAL_ALLIANCE, `
+  <div class="title background-color-events">Political Alliance</div>
+  <div class="price">4</div>
+  <div class="turmoil-icon project-icon"></div>
+  <div class="tag tag1 tag-event"></div>
+  <div class="card-number">X09</div>
+  <div class="content">
+    <div class="requirements">2 Party Leaders</div>
+      <div class="tile rating"></div>
+      <br>
+      <div class="description">
+        (Requires that you have 2 party leaders. Gain 1 TR.)
       </div>
   </div>
 `],

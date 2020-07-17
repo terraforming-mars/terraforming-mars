@@ -62,11 +62,12 @@ export class LogHelper {
         );
     }
 
-    static logCardDraw(game: Game, player: Player, qty: number = 1) {
+    static logCardChange(game: Game, player: Player, effect: string, qty: number = 1) {
         game.log(
             LogMessageType.DEFAULT,
-            "${0} drew ${1} cards",
+            "${0} ${1} ${2} card(s)",
             new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.STRING, effect),
             new LogMessageData(LogMessageDataType.STRING, qty.toString())
         );
     }

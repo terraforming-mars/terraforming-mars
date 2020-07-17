@@ -1,4 +1,3 @@
-
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
@@ -10,12 +9,24 @@ import { Game } from '../../Game';
 import { ICard } from '../ICard';
 import { CardName } from '../../CardName';
 import { LogHelper } from "../../components/LogHelper";
+import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from "../../constants";
+import { PartyHooks } from "../../turmoil/parties/PartyHooks";
+import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class VenusSoils implements IProjectCard {
     public cost: number = 20;
     public tags: Array<Tags> = [Tags.VENUS, Tags.PLANT];
     public name: CardName = CardName.VENUS_SOILS;
     public cardType: CardType = CardType.AUTOMATED;
+
+    public canPlay(player: Player, game: Game) {
+        const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
+          return player.canAfford(this.cost + REDS_RULING_POLICY_COST);
+        }
+  
+        return true;
+    }
 
     public play(player: Player, game: Game) {
         player.setProduction(Resources.PLANTS);

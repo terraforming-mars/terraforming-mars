@@ -11,6 +11,7 @@ export interface PlayerModel {
     boardName: string;
     corporationCard: CardModel;
     playedCards: Array<CardModel>;
+    cardCost: number;
     cardsInHandNbr: number;
     colonies: Array<ColonyModel>;
     color: Color;

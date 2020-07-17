@@ -15,7 +15,7 @@ describe("CaretakerContract", function () {
 
     it("Can't play or act", function () {
         expect(card.canPlay(player, game)).to.eq(false);
-        expect(card.canAct(player)).to.eq(false);
+        expect(card.canAct(player, game)).to.eq(false);
     });
 
     it("Should play", function () {

@@ -7,10 +7,12 @@ import { ResourceType } from "../../ResourceType";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from '../../inputs/SelectOption';
 import { Game } from '../../Game';
-import { MAX_VENUS_SCALE } from '../../constants';
+import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from '../../constants';
 import { SelectCard } from '../../inputs/SelectCard';
 import { CardName } from '../../CardName';
 import { LogHelper } from "../../components/LogHelper";
+import { PartyHooks } from "../../turmoil/parties/PartyHooks";
+import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class Thermophiles implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 9;
@@ -63,8 +65,12 @@ export class Thermophiles implements IActionCard,IProjectCard, IResourceCard {
             return undefined;
         });
 
+        const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+
         if (canRaiseVenus) {
-            opts.push(spendResource);
+            if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
+                opts.push(spendResource);
+            }
         } else {
             if (venusMicrobeCards.length === 1) return addResourceToSelf;
             return addResource;

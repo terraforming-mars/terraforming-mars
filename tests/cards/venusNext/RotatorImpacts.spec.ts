@@ -38,7 +38,7 @@ describe("RotatorImpacts", function () {
 
         const selectHowToPay = card.action(player,game) as SelectHowToPay;
         expect(selectHowToPay instanceof SelectHowToPay).to.eq(true);
-        selectHowToPay.cb({ steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0 });
+        selectHowToPay.cb({ steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0, isResearchPhase: false });
         expect(card.resourceCount).to.eq(1);
         expect(player.megaCredits).to.eq(13);
         expect(player.titanium).to.eq(1);

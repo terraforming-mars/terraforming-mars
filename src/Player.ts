@@ -50,6 +50,7 @@ import { MiningRights } from "./cards/MiningRights";
 import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
 import { Board } from "./Board";
 import { PartyHooks } from "./turmoil/parties/PartyHooks";
+import { REDS_RULING_POLICY_COST } from "./constants";
 
 export type PlayerId = string;
 
@@ -135,14 +136,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       // Turmoil Reds capacity
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && game.phase === Phase.ACTION) {
-        if (this.canAfford(3)) {
-          game.addSelectHowToPayInterrupt(this, 3, false, false, "Select how to pay for TR increase");
-          this.terraformRating++;
-          this.hasIncreasedTerraformRatingThisGeneration = true;
-          return;
-        } else {
-            return;
-        }; 
+        game.addSelectHowToPayInterrupt(this, REDS_RULING_POLICY_COST, true, true, "Select how to pay for TR increase");
+        this.terraformRating++;
+        this.hasIncreasedTerraformRatingThisGeneration = true;
+        return;
       }
 
       this.terraformRating++;
@@ -666,7 +663,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           titanium: 0,
           megaCredits: 0,
           microbes: 0,
-          floaters: 0
+          floaters: 0,
+          isResearchPhase: false,
         };
         try {
           const parsedInput: {[x: string]: number} =
@@ -793,7 +791,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           titanium: 0,
           megaCredits: 0,
           microbes: 0, 
-          floaters: 0
+          floaters: 0,
+          isResearchPhase: false,
         };
         if (this.canUseHeatAsMegaCredits) {
           payMethod.heat = 0;
@@ -995,7 +994,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         heat: 0,
         megaCredits: 0,
         microbes: 0,
-        floaters: 0
+        floaters: 0,
+        isResearchPhase: false,
       };
 
       let selectedCards: Array<IProjectCard> = [];
@@ -1867,6 +1867,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (game.interrupts.length > 0) {
         let interrupt = game.interrupts.shift();
         if (interrupt) {
+          if (interrupt.beforeAction !== undefined) {
+            interrupt.beforeAction();
+          }
           interrupt.player.setWaitingFor(interrupt.playerInput, () => {
             this.resolveFinalGreeneryInterrupts(game);
           });
@@ -1940,9 +1943,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                 this.megaCredits >= cost;
     }
 
-    private getAvailableStandardProjects(game: Game): OrOptions {
+    public getAvailableStandardProjects(game: Game): OrOptions {
       const standardProjects = new OrOptions();
       standardProjects.title = "Pay for a Standard Project";
+
+      const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
 
       if (this.canAfford(this.powerPlantCost)) {
         standardProjects.options.push(
@@ -1950,25 +1955,28 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
       }
 
-      if (
-        this.canAfford(constants.ASTEROID_COST) &&
-            game.getTemperature() < constants.MAX_TEMPERATURE) {
+      let asteroidCost = constants.ASTEROID_COST
+      if (redsAreRuling) asteroidCost += REDS_RULING_POLICY_COST;
+      
+      if (this.canAfford(asteroidCost) && game.getTemperature() < constants.MAX_TEMPERATURE) {
         standardProjects.options.push(
             this.asteroid(game)
         );
       }
 
-      if (
-        this.canAfford(constants.AQUIFER_COST) &&
-            game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
+      let aquiferCost = constants.AQUIFER_COST
+      if (redsAreRuling) aquiferCost += REDS_RULING_POLICY_COST;
+
+      if (this.canAfford(aquiferCost) && game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
         standardProjects.options.push(
             this.aquifer(game)
         );
       }
 
-      if (
-        this.canAfford(constants.GREENERY_COST) &&
-            game.board.getAvailableSpacesForGreenery(this).length > 0) {
+      let greeneryCost = constants.GREENERY_COST
+      if (redsAreRuling) greeneryCost += REDS_RULING_POLICY_COST;
+
+      if (this.canAfford(greeneryCost) && game.board.getAvailableSpacesForGreenery(this).length > 0) {
         standardProjects.options.push(
             this.addGreenery(game)
         );
@@ -1982,9 +1990,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
       }
 
-      if ( game.venusNextExtension &&
-        this.canAfford(constants.AIR_SCRAPPING_COST) &&
-            game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
+      let airScrappingCost = constants.AIR_SCRAPPING_COST
+      if (redsAreRuling) airScrappingCost += REDS_RULING_POLICY_COST;
+
+      if (game.venusNextExtension
+        && this.canAfford(airScrappingCost)
+        && game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
         standardProjects.options.push(
             this.airScrapping(game)
         );
@@ -2002,8 +2013,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           }
       }
 
-      if ( game.soloTR &&
-        this.canAfford(constants.BUFFER_GAS_COST)) {
+      let bufferGasCost = constants.BUFFER_GAS_COST
+      if (redsAreRuling) bufferGasCost += REDS_RULING_POLICY_COST;
+
+      if (game.soloTR && this.canAfford(bufferGasCost)) {
         standardProjects.options.push(
             this.bufferGas(game)
         );
@@ -2020,6 +2033,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       //Interrupt action
       const interruptIndex: number = game.interrupts.findIndex(interrupt => interrupt.player === this);
       if (interruptIndex !== -1) {
+        let interrupt = game.interrupts[interruptIndex];
+        if (interrupt !== undefined && interrupt.beforeAction !== undefined) {
+          interrupt.beforeAction();
+        }
         this.setWaitingFor(game.interrupts.splice(interruptIndex, 1)[0].playerInput, () => {
           cb();
         });
@@ -2171,7 +2188,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           action.options.push(selectParty.playerInput);
         }
         else if (this.canAfford(5) && game.turmoil!.getDelegates(this.id) > 0){
-          const selectParty = new SelectParty(this, game, "Send a delegate in an area (5MC)", 1, undefined, 5);
+          const selectParty = new SelectParty(this, game, "Send a delegate in an area (5MC)", 1, undefined, 5, false);
           action.options.push(selectParty.playerInput);
         }
       }

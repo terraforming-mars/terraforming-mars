@@ -28,6 +28,7 @@ export const PaymentWidgetMixin = {
         },
         reduceValue: function (target: string, to: number): void {
             let currentValue: number = (this as any)[target];
+            const isResearchPhase = (this as any).$data.isResearchPhase;
 
             if (currentValue === 0) return;
 
@@ -36,12 +37,19 @@ export const PaymentWidgetMixin = {
 
             if (target === "megaCredits" || realTo === 0) return;
 
-            this.setRemainingMCValue();
+            this.setRemainingMCValue(isResearchPhase);
         },
         addValue: function (target: string, to: number): void {
             let currentValue: number = (this as any)[target];
             let maxValue: number = (this as any).player[target];
-            if (target === "megaCredits") maxValue = this.getMegaCreditsMax();
+            const isResearchPhase = (this as any).$data.isResearchPhase;
+
+            if (isResearchPhase && target === "megaCredits") {
+                maxValue = (this as any).player.cardCost * 4;
+            } else if (target === "megaCredits") {
+                maxValue = this.getMegaCreditsMax();
+            }
+            
             if (target === "microbes") maxValue = (this as any).playerinput.microbes;
             if (target === "floaters") maxValue = (this as any).playerinput.floaters;
             if (currentValue === maxValue) return;
@@ -51,16 +59,21 @@ export const PaymentWidgetMixin = {
 
             if (target === "megaCredits" || realTo === 0) return;
 
-            this.setRemainingMCValue();
+            this.setRemainingMCValue(isResearchPhase);
         },
-        setRemainingMCValue: function (): void {
+        setRemainingMCValue: function (isResearchPhase: boolean): void {
             let remainingMC: number = (this as any).$data.cost -
               (this as any)["heat"] -
               (this as any)["titanium"] * this.getResourceRate("titanium") -
               (this as any)["steel"] * this.getResourceRate("steel") -
               (this as any)["microbes"] * this.getResourceRate("microbes") -
               (this as any)["floaters"] * this.getResourceRate("floaters");
-            (this as any)["megaCredits"] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
+
+              if (isResearchPhase) {
+                (this as any)["megaCredits"] = Math.max(0, (this as any).player.cardCost * 4 - (this as any)["heat"]);
+              } else {
+                (this as any)["megaCredits"] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
+              }
         }
     }
 }

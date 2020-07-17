@@ -32,6 +32,7 @@ describe("AerialLenses", function () {
             promoCardsOption: false,
             undoOption: false,
             startingCorporations: 2,
+            includeVenusMA: true,
             soloTR: false,
             clonedGamedId: undefined
           } as GameOptions;

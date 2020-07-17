@@ -1,15 +1,19 @@
 import { expect } from "chai";
-import { WildlifeDome } from "../../../src/cards/turmoil/WildlifeDome";
+import { PoliticalAlliance } from "../../../src/cards/turmoil/PoliticalAlliance";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
 import { BoardName } from '../../../src/BoardName';
 import { GameOptions, Game } from '../../../src/Game';
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
+import { Turmoil } from "../../../src/turmoil/Turmoil";
 
-describe("WildlifeDome", function () {
-    it("Should play", function () {
-        const card = new WildlifeDome();
-        const player = new Player("test", Color.BLUE, false);
+describe("PoliticalAlliance", function () {
+    let card : PoliticalAlliance, player : Player, game : Game, turmoil: Turmoil;
+
+    beforeEach(function() {
+        card = new PoliticalAlliance();
+        player = new Player("test", Color.BLUE, false);
+        
         const gameOptions = {
             draftVariant: false,
             initialDraftVariant: false,
@@ -25,26 +29,30 @@ describe("WildlifeDome", function () {
             solarPhaseOption: false,
             promoCardsOption: false,
             undoOption: false,
+            includeVenusMA: false,
             startingCorporations: 2,
-            includeVenusMA: true,
             soloTR: false,
             clonedGamedId: undefined
           } as GameOptions;
-        const game = new Game("foobar", [player,player], player, gameOptions);  
-
-        game.turmoil!.rulingParty = game.turmoil!.getPartyByName(PartyName.REDS)!;
-        expect(card.canPlay(player, game)).to.eq(false);
         
-        let greens = game.turmoil!.getPartyByName(PartyName.GREENS)!;
-        greens.delegates.push(player.id, player.id);
-        expect(card.canPlay(player, game)).to.eq(false); 
+          game = new Game("foobar", [player, player], player, gameOptions);
+          turmoil = game.turmoil!
+    });
 
-        player.megaCredits = 3;
+    it("Can't play", function () {
+        let greens = turmoil.getPartyByName(PartyName.GREENS)!;
+        greens.partyLeader = player.id;
+        expect(card.canPlay(player, game)).to.eq(false);
+    });
+
+    it("Should play", function () {
+        let greens = turmoil.getPartyByName(PartyName.GREENS)!;
+        let reds = turmoil.getPartyByName(PartyName.REDS)!;
+        greens.partyLeader = player.id;
+        reds.partyLeader = player.id;
         expect(card.canPlay(player, game)).to.eq(true); 
 
-        const action = card.play(player, game);
-        expect(action).not.to.eq(undefined);
-        action.cb(action.availableSpaces[0]);
-        expect(game.getOxygenLevel()).to.eq(1);
+        card.play(player, game);
+        expect(player.getTerraformRating()).to.eq(21);
     });
 });

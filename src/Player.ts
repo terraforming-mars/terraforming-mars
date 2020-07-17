@@ -51,6 +51,7 @@ import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
 import { Board } from "./Board";
 import { PartyHooks } from "./turmoil/parties/PartyHooks";
 import { REDS_RULING_POLICY_COST } from "./constants";
+import { CardModel } from "./models/CardModel";
 
 export type PlayerId = string;
 
@@ -1071,24 +1072,25 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
     }
 
-    public getSelfReplicatingRobotsCardCost(game: Game) : number {
+    public getSelfReplicatingRobotsCards(game: Game) : Array<CardModel> {
       let card = this.playedCards.find(card => card.name === CardName.SELF_REPLICATING_ROBOTS);
+      let cards : Array<CardModel> = [];
       if (card instanceof SelfReplicatingRobots) {
-        if (card.targetCard !== undefined) {
-          return this.getCardCost(game, card.targetCard);
+        if (card.targetCards.length > 0) {
+          for (let targetCard of card.targetCards) {
+            cards.push(
+              {
+                resources: targetCard.resourceCount,
+                name: targetCard.card.name,
+                calculatedCost: this.getCardCost(game, targetCard.card),
+                cardType: card.cardType
+              }            
+            );
+          }
+          return cards;
         }
       } 
-      return 41;
-    }
-
-    public getSelfReplicatingRobotsCard() : IProjectCard | undefined {
-      let card = this.playedCards.find(card => card.name === CardName.SELF_REPLICATING_ROBOTS);
-      if (card instanceof SelfReplicatingRobots) {
-        if (card.targetCard !== undefined) {
-          return card.targetCard;
-        }
-      } 
-      return undefined;
+      return cards;
     }      
 
     public getCardCost(game: Game, card: IProjectCard): number {
@@ -1252,10 +1254,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         // Remove card from Self Replicating Robots
         const card = this.playedCards.find(card => card.name === CardName.SELF_REPLICATING_ROBOTS);
         if (card instanceof SelfReplicatingRobots) {
-          if (card.targetCard !== undefined && card.targetCard.name === selectedCard.name) {
-            card.targetCard = undefined;
-            card.resourceCount = 0;
-          }
+          for (let targetCard of card.targetCards) {
+            if (targetCard.card.name === selectedCard.name) {
+              const index = card.targetCards.indexOf(targetCard);
+              card.targetCards.splice(index, 1);
+            }
+          }  
         } 
 
         this.addPlayedCard(game, selectedCard);
@@ -1886,8 +1890,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       // Self Replicating robots check
       const card = this.playedCards.find(card => card.name === CardName.SELF_REPLICATING_ROBOTS);
       if (card instanceof SelfReplicatingRobots) {
-        if (card.targetCard !== undefined) {
-          candidateCards.push(card.targetCard);
+        for (let targetCard of card.targetCards) {
+          candidateCards.push(targetCard.card);
         }
       }
 
@@ -2342,9 +2346,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           card.resourceCount = element.resourceCount;
         }
         if(card instanceof SelfReplicatingRobots) {
-          let targetCard = (element as SelfReplicatingRobots).targetCard;
-          if (targetCard !== undefined) {
-            card.targetCard = getProjectCardByName(targetCard.name)!;
+          let targetCards = (element as SelfReplicatingRobots).targetCards;
+          if (targetCards !== undefined) {
+            card.targetCards = targetCards;
           }
         }
         if(card instanceof MiningArea || card instanceof MiningRights) {

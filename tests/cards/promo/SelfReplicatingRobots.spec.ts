@@ -7,6 +7,7 @@ import { HousePrinting } from '../../../src/cards/prelude/HousePrinting';
 import { SelectCard } from '../../../src/inputs/SelectCard';
 import { IProjectCard } from '../../../src/cards/IProjectCard';
 import { Game } from '../../../src/Game';
+import { OrOptions } from "../../../src/inputs/OrOptions";
 
 describe("SelfReplicatingRobots", function () {
     let card : SelfReplicatingRobots, player : Player, game : Game;
@@ -34,11 +35,15 @@ describe("SelfReplicatingRobots", function () {
         expect(card.canAct(player)).to.eq(true);
 
         const action = card.action(player, game);
-        expect(action instanceof SelectCard).to.eq(true);
-        (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
-        expect(card.resourceCount).to.eq(2);
+        expect(action instanceof OrOptions).to.eq(true);
+        (action as OrOptions).options[0].cb([(action.options[0] as SelectCard<IProjectCard>).cards[0]]);
+        expect(card.targetCards[0].resourceCount).to.eq(2);
+        expect(player.cardsInHand.length).to.eq(0);
+        expect(card.targetCards.length).to.eq(1);
         
-        card.action(player, game);
-        expect(card.resourceCount).to.eq(4);
+        const action2 = card.action(player, game);
+        expect(action2 instanceof OrOptions).to.eq(true);
+        (action2 as OrOptions).options[0].cb([(action2.options[0] as SelectCard<IProjectCard>).cards[0]]);
+        expect(card.targetCards[0].resourceCount).to.eq(4);
     });
 });

@@ -21,7 +21,7 @@ export class Pluto extends Colony implements IColony {
         for (let i = 0; i < extraCards; i++) {
             player.cardsInHand.push(game.dealer.dealCard());
         }
-        LogHelper.logCardDraw(game, player, extraCards);
+        LogHelper.logCardChange(game, player, "drew", extraCards);
         this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {

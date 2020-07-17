@@ -1,7 +1,7 @@
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
-import { CorporationCard } from '../corporation/CorporationCard';
-import { CardName } from '../../CardName';
+import { CorporationCard } from "../corporation/CorporationCard";
+import { CardName } from "../../CardName";
 import { ResourceType } from "../../ResourceType";
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
@@ -11,6 +11,7 @@ import { CorporationName } from "../../CorporationName";
 import { LogMessageType } from "../../LogMessageType";
 import { LogMessageData } from "../../LogMessageData";
 import { LogMessageDataType } from "../../LogMessageDataType";
+import { ICard } from "../ICard";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../../constants";
@@ -58,6 +59,10 @@ export class PharmacyUnion implements CorporationCard {
         }
     }
 
+    public onCorpCardPlayed(player: Player, game: Game, card: CorporationCard): void {
+         this.onCardPlayed(player,game,card as ICard as IProjectCard);
+    }
+
     private runInterrupts(player: Player, game: Game, scienceTags: number): void {
         if (scienceTags <= 0) return;
 
@@ -93,7 +98,7 @@ export class PharmacyUnion implements CorporationCard {
             }
 
             availableOptions.options.push(
-                new SelectOption('Do nothing', () => {
+                new SelectOption("Do nothing", () => {
                     this.runInterrupts(player, game, scienceTags - 1);
                     return undefined;
                 })

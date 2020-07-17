@@ -10,7 +10,8 @@ export class SelectDiscard implements PlayerInterrupt {
     constructor(
         public player: Player,
         public game: Game,
-        public title: string = "Select a card to discard"
+        public title: string = "Select a card to discard",
+        public drawBefore: boolean = false
     ){
         this.playerInput = new SelectCard(title, player.cardsInHand, (foundCards: Array<IProjectCard>) => {
             player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
@@ -18,4 +19,14 @@ export class SelectDiscard implements PlayerInterrupt {
             return undefined;
           });
     };
+    public beforeAction(): void {
+        if (this.drawBefore) {
+            this.player.cardsInHand.push(this.game.dealer.dealCard());
+            this.playerInput = new SelectCard(this.title, this.player.cardsInHand, (foundCards: Array<IProjectCard>) => {
+                this.player.cardsInHand.splice(this.player.cardsInHand.indexOf(foundCards[0]), 1);
+                this.game.dealer.discard(foundCards[0]);
+                return undefined;
+              });            
+        }
+    }
 }    

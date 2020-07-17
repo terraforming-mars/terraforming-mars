@@ -17,6 +17,7 @@ export class ProtectedValley implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];
     public name: CardName = CardName.PROTECTED_VALLEY;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
         const oxygenMaxed = game.getOxygenLevel() === MAX_OXYGEN_LEVEL;

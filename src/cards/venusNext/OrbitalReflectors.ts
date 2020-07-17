@@ -14,6 +14,7 @@ export class OrbitalReflectors  implements IProjectCard {
     public tags: Array<Tags> = [Tags.VENUS, Tags.SPACE];
     public name: CardName = CardName.ORBITAL_REFLECTORS;
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game) {
         const remainingVenusSteps = (MAX_VENUS_SCALE - game.getVenusScaleLevel()) / 2;

@@ -14,6 +14,7 @@ export class MiningExpedition implements IProjectCard {
     public tags: Array<Tags> = [];
     public cardType: CardType = CardType.EVENT;
     public name: CardName = CardName.MINING_EXPEDITION;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
         const oxygenMaxed = game.getOxygenLevel() === MAX_OXYGEN_LEVEL;

@@ -14,6 +14,7 @@ export class BigAsteroid implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
     public name: CardName = CardName.BIG_ASTEROID;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game) {
       const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;

@@ -15,6 +15,7 @@ export class EquatorialMagnetizer implements IActionCard, IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: CardName = CardName.EQUATORIAL_MAGNETIZER;
     public cardType: CardType = CardType.ACTIVE;
+    public hasRequirements = false;
 
     public play() {
       return undefined;

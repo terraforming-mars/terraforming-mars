@@ -13,6 +13,7 @@ export class JovianEmbassy implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.STEEL];
     public name: CardName = CardName.JOVIAN_EMBASSY;
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game) {
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {

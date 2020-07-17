@@ -16,6 +16,7 @@ export class AirScrappingExpedition implements IProjectCard {
     public tags: Array<Tags> = [Tags.VENUS];
     public name: CardName = CardName.AIR_SCRAPPING_EXPEDITION;
     public cardType: CardType = CardType.EVENT;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game) {
         const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;

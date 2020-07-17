@@ -14,6 +14,7 @@ export class DeimosDown implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public name: CardName = CardName.DEIMOS_DOWN;
     public cardType: CardType = CardType.EVENT;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game) {
       const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;

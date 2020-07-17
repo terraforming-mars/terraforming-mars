@@ -13,6 +13,7 @@ export class ConvoyFromEuropa implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
     public name: CardName = CardName.CONVOY_FROM_EUROPA;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
       const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;

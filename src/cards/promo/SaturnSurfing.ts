@@ -8,7 +8,6 @@ import { CardName } from '../../CardName';
 import { Resources } from "../../Resources";
 
 export class SaturnSurfing implements IActionCard, IProjectCard, IResourceCard {
-
     public name: CardName = CardName.SATURN_SURFING;
     public cost: number = 13;
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.EARTH];

@@ -6,7 +6,6 @@ import { Player } from "../../Player";
 import { Resources } from "../../Resources";
 
 export class OrbitalCleanup implements IProjectCard {
-
     public name: CardName = CardName.ORBITAL_CLEANUP;
     public cost: number = 14;
     public tags: Array<Tags> = [Tags.EARTH, Tags.SPACE];

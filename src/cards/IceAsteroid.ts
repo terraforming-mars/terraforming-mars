@@ -13,6 +13,7 @@ export class IceAsteroid implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.EVENT;
     public name: CardName = CardName.ICE_ASTEROID;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
         const remainingOceans = MAX_OCEAN_TILES - game.board.getOceansOnBoard();

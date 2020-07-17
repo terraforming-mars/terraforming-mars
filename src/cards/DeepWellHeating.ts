@@ -14,6 +14,7 @@ export class DeepWellHeating implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
     public name: CardName = CardName.DEEP_WELL_HEATING;
     public cardType: CardType = CardType.AUTOMATED;
+    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game) {
       const temperatureMaxed = game.getVenusScaleLevel() === MAX_TEMPERATURE;

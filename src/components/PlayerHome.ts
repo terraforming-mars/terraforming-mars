@@ -187,7 +187,7 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
 
                 <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">
-                    <h2 :class="'player_color_'+ player.color" v-i18n>Self-Replicating robots cards</h2>
+                    <h2 :class="'player_color_'+ player.color" v-i18n>Self-Replicating Robots cards</h2>
                     <div>
                         <div v-for="card in getCardsByType(player.selfReplicatingRobotsCards, [getActiveCardType()])" :key="card.name" class="cardbox">
                             <card :card="card" :player="player"></card>

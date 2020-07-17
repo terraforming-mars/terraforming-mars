@@ -85,17 +85,20 @@ export class SelfReplicatingRobots implements IProjectCard {
             orOptions.options.push(new SelectCard(
                 'Select card to double robots resource', robotCards,
                 (foundCards: Array<IProjectCard>) => {
+                  let resourceCount = 0;
                   for (let targetCard of this.targetCards) {
                     if (targetCard.card.name === foundCards[0].name) {
+                      resourceCount = targetCard.resourceCount;
                       targetCard.resourceCount = targetCard.resourceCount * 2;
                     }
                   }
                   game.log(
                     LogMessageType.DEFAULT,
-                    "${0} doubled resources on ${1} with ${2}",
+                    "${0} doubled resources on ${1} from ${2} to ${3}",
                     new LogMessageData(LogMessageDataType.PLAYER, player.id),
                     new LogMessageData(LogMessageDataType.CARD, foundCards[0].name),
-                    new LogMessageData(LogMessageDataType.CARD, this.name)
+                    new LogMessageData(LogMessageDataType.STRING, resourceCount.toString()),
+                    new LogMessageData(LogMessageDataType.STRING, (resourceCount * 2).toString()),
                   );             
                   return undefined;
                 }

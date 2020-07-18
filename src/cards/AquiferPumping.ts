@@ -28,7 +28,6 @@ export class AquiferPumping implements IActionCard, IProjectCard {
       let oceanCost = 8;
 
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        oceanCost += REDS_RULING_POLICY_COST;
         return player.canAfford(oceanCost + REDS_RULING_POLICY_COST, game, true, false);
       }
 

@@ -15,7 +15,6 @@ export class VenusMagnetizer implements IActionCard,IProjectCard {
     public tags: Array<Tags> = [Tags.VENUS];
     public name: CardName = CardName.VENUS_MAGNETIZER;
     public cardType: CardType = CardType.ACTIVE;
-    public hasRequirements = false;
     
     public canPlay(player: Player, game: Game): boolean {
         return game.getVenusScaleLevel() >= 10 - (2 * player.getRequirementsBonus(game, true));

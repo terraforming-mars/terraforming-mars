@@ -51,5 +51,6 @@ describe("CometAiming", function () {
         const action = card.action(player, game) as OrOptions;
         action.options[1].cb([card2]);
         expect(card2.resourceCount).to.eq(1);
+        expect(player.titanium).to.eq(0);
     });
 });

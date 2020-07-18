@@ -379,7 +379,8 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         clonedGamedId: gameReq.clonedGamedId,
         initialDraftVariant: gameReq.initialDraft,
         initialDraftRounds: parseInt(gameReq.initialDraftRounds),
-        randomMA: gameReq.randomMA
+        randomMA: gameReq.randomMA,
+        shuffleMapOption: gameReq.shuffleMapOption,
       } as GameOptions;
     
       const game = new Game(gameId, players, firstPlayer, gameOptions);

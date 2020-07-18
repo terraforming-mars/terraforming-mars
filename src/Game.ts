@@ -68,6 +68,7 @@ export interface GameOptions {
   showOtherPlayersVP: boolean;
   customCorporationsList: Array<CardName>;
   solarPhaseOption: boolean;
+  shuffleMapOption: boolean;
   promoCardsOption: boolean;
   undoOption: boolean;
   includeVenusMA: boolean;
@@ -116,6 +117,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public boardName: BoardName;
     public showOtherPlayersVP: boolean;
     private solarPhaseOption: boolean;
+    public shuffleMapOption: boolean;
     public turmoil: Turmoil | undefined;
     private promoCardsOption: boolean;
     public undoOption: boolean;
@@ -127,6 +129,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public someoneHasRemovedOtherPlayersPlants: boolean = false;
     public initialDraftRounds: number = 4;
     public randomMA: boolean = false;
+    public seed: number = Math.random();
 
     constructor(
       public id: string,
@@ -152,6 +155,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           showOtherPlayersVP: false,
           customCorporationsList: [],
           solarPhaseOption: false,
+          shuffleMapOption: false,
           promoCardsOption: false,
           undoOption: false,
           startingCorporations: 2,
@@ -160,7 +164,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           clonedGamedId: undefined
         } as GameOptions
       }
-
+      this.shuffleMapOption = gameOptions.shuffleMapOption;
       this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.venusNextExtension && gameOptions.includeVenusMA);
 
       this.activePlayer = first.id;
@@ -363,7 +367,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           this.awards.push(...ORIGINAL_AWARDS);
         }
 
-        return new OriginalBoard();
+        return new OriginalBoard(this.shuffleMapOption, this.seed);
       }
     }
 
@@ -440,6 +444,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.board = gameToRebuild.board;
           game.showOtherPlayersVP = gameToRebuild.showOtherPlayersVP;
           game.solarPhaseOption = gameToRebuild.solarPhaseOption;
+          game.shuffleMapOption = gameToRebuild.shuffleMapOption;
           game.promoCardsOption = gameToRebuild.promoCardsOption;
           game.undoOption = gameToRebuild.undoOption;
           game.startingCorporations = gameToRebuild.startingCorporations;
@@ -1668,7 +1673,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       } else if (d.boardName === BoardName.HELLAS) {
         this.board = new HellasBoard();
       } else {        
-        this.board = new OriginalBoard();
+        this.board = new OriginalBoard(this.shuffleMapOption, this.seed);
       }  
 
       this.milestones = [];

@@ -38,7 +38,9 @@ export class Ocean extends Space {
 
 export abstract class Board {
 
-    public myRandom() {
+    // https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
+    // generate random float in [0,1) with seed
+    public mulberry32() {
         var t = this.seed += 0x6D2B79F5;
         t = Math.imul(t ^ t >>> 15, t | 1);
         t ^= t + Math.imul(t ^ t >>> 7, t | 61);
@@ -47,7 +49,7 @@ export abstract class Board {
 
     public shuffleArray(array: Array<Object>) {
         for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(this.myRandom() * (i + 1));
+            const j = Math.floor(this.mulberry32() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
         }
     }

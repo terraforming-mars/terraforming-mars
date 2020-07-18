@@ -6,9 +6,9 @@ import { ISpace } from "./ISpace";
 
 export class OriginalBoard extends Board {
 
-    constructor(shuffleMapOption:boolean=false, seed:number=0) {
+    constructor(shuffleMapOption: boolean = false, seed: number = 0) {
         super();
-        this.seed=Math.floor(seed*2147483647)
+        this.seed = Math.floor(seed * 4294967296)
         this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY));
         this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));
 
@@ -71,18 +71,18 @@ export class OriginalBoard extends Board {
         // y=8
         is_ocean.push(false, false, false, false, true);
         bonus.push([SpaceBonus.STEEL], [SpaceBonus.STEEL, SpaceBonus.STEEL], [], [], [SpaceBonus.TITANIUM, SpaceBonus.TITANIUM]);
-        
+
         if (shuffleMapOption) {
             this.shuffleArray(is_ocean);
             this.shuffleArray(bonus);
-            while(true){
+            while (true) {
                 let satisfy = true;
                 let land_list = [SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS];
-                for(let land of land_list){
+                for (let land of land_list) {
                     let land_id = Number(land) - 3;
-                    while(is_ocean[land_id]){
+                    while (is_ocean[land_id]) {
                         satisfy = false;
-                        let idx = Math.floor(this.myRandom() * (land_list.length + 1));
+                        let idx = Math.floor(this.mulberry32() * (land_list.length + 1));
                         [is_ocean[land_id], is_ocean[idx]] = [is_ocean[idx], is_ocean[land_id]];
                     }
                 }
@@ -98,58 +98,24 @@ export class OriginalBoard extends Board {
             this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
             me_id++;
         }
-        // this.spaces.push(
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.STEEL, SpaceBonus.STEEL]),
-        //     new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.STEEL, SpaceBonus.STEEL]),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.DRAW_CARD]),
-        //     new Ocean(idx++, pos_x++, pos_y)
-        // );
 
         pos_x = 3; pos_y = 1;
         for (let i = 0; i < 6; ++i) {
             this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
             me_id++;
         }
-        // this.spaces.push(
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.STEEL]),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD])
-        // );
 
         pos_x = 2; pos_y = 2;
         for (let i = 0; i < 7; ++i) {
             this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
             me_id++;
         }
-        // this.spaces.push(
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.DRAW_CARD]),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.STEEL])
-        // );
 
         pos_x = 1; pos_y = 3;
         for (let i = 0; i < 8; ++i) {
             this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
             me_id++;
         }
-        // this.spaces.push(
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.TITANIUM]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
-        //     new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT])
-        // );
 
 
         pos_x = 0; pos_y = 4;
@@ -157,75 +123,30 @@ export class OriginalBoard extends Board {
             this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
             me_id++;
         }
-        // this.spaces.push(
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-        //     new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-        //     new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-        //     new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT])
-        // );
 
         pos_x = 1; pos_y = 5;
         for (let i = 0; i < 8; ++i) {
             this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
             me_id++;
         }
-        // this.spaces.push(
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT, SpaceBonus.PLANT]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
-        //     new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
-        //     new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
-        //     new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.PLANT])
-        // );
 
         pos_x = 2; pos_y = 6;
         for (let i = 0; i < 7; ++i) {
             this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
             me_id++;
         }
-        // this.spaces.push(
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.PLANT]),
-        //     new Land(idx++, pos_x++, pos_y)
-        // );
 
         pos_x = 3; pos_y = 7;
         for (let i = 0; i < 6; ++i) {
             this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
             me_id++;
         }
-        // this.spaces.push(
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.STEEL, SpaceBonus.STEEL]),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.DRAW_CARD]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.DRAW_CARD]),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.TITANIUM])
-        // );
 
         pos_x = 4; pos_y = 8;
         for (let i = 0; i < 5; ++i) {
             this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
             me_id++;
         }
-        // this.spaces.push(
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.STEEL]),
-        //     new Land(idx++, pos_x++, pos_y, [SpaceBonus.STEEL, SpaceBonus.STEEL]),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Land(idx++, pos_x++, pos_y),
-        //     new Ocean(idx++, pos_x++, pos_y, [SpaceBonus.TITANIUM, SpaceBonus.TITANIUM])
-        // );
 
         this.spaces.push(new BoardColony(SpaceName.STANFORD_TORUS));
     }

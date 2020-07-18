@@ -6,6 +6,7 @@ import { Game } from "../../../src/Game";
 import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 import { RotatorImpacts } from "../../../src/cards/venusNext/RotatorImpacts";
+import { maxOutOceans } from "./../../TestingUtils";
 
 describe("CometAiming", function () {
     let card : CometAiming, player : Player, game : Game;
@@ -52,5 +53,20 @@ describe("CometAiming", function () {
         action.options[1].cb([card2]);
         expect(card2.resourceCount).to.eq(1);
         expect(player.titanium).to.eq(0);
+    });
+
+    it("Cannot spend resource to place ocean if oceans are maxed", function () {
+        player.playedCards.push(card);
+        card.resourceCount = 1;
+        maxOutOceans(player, game);
+        expect(card.canAct(player, game)).to.eq(false);
+
+        player.titanium = 1;
+        expect(card.canAct(player, game)).to.eq(true);
+
+        card.action(player, game);
+        expect(game.interrupts.length).to.eq(0);
+        expect(player.titanium).to.eq(0);
+        expect(card.resourceCount).to.eq(2);
     });
 });

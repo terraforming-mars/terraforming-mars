@@ -74,8 +74,9 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
 
         let availableActions = new Array<SelectOption | SelectCard<ICard>>();
         const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+        const canPlaceOcean = game.board.getOceansOnBoard() < MAX_OCEAN_TILES;
         
-        if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
+        if (canPlaceOcean && !redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
             availableActions.push(new SelectOption('Remove an asteroid resource to place an ocean', spendAsteroidResource));
         } 
 
@@ -83,6 +84,13 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
             availableActions.push(new SelectOption('Spend 1 titanium to gain 1 asteroid resource', addAsteroidToSelf));
         } else {
             availableActions.push(addAsteroidToCard);
+        }
+
+        if (availableActions.length === 1) {
+            const action = availableActions[0];
+
+            if (action instanceof SelectOption) return (availableActions[0] as SelectOption).cb();
+            return availableActions[0]; // SelectCard
         }
         
         return new OrOptions(...availableActions);

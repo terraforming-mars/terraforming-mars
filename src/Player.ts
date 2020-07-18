@@ -2349,6 +2349,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           let targetCards = (element as SelfReplicatingRobots).targetCards;
           if (targetCards !== undefined) {
             card.targetCards = targetCards;
+            card.targetCards.forEach(robotCard => robotCard.card = getProjectCardByName(robotCard.card.name)!);
           }
         }
         if(card instanceof MiningArea || card instanceof MiningRights) {

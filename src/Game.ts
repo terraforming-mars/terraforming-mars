@@ -349,7 +349,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           this.awards.push(...ELYSIUM_AWARDS);
         }
         
-        return new ElysiumBoard();
+        return new ElysiumBoard(this.shuffleMapOption, this.seed);
       } else if (boardName === BoardName.HELLAS) {
         if (randomMA) {
           this.getRandomMilestonesAndAwards(hasVenus, requiredQty);
@@ -358,7 +358,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           this.awards.push(...HELLAS_AWARDS);
         }
 
-        return new HellasBoard();
+        return new HellasBoard(this.shuffleMapOption, this.seed);
       } else {        
         if (randomMA) {
           this.getRandomMilestonesAndAwards(hasVenus, requiredQty);
@@ -1669,9 +1669,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       
       // Rebuild milestones, awards and board elements
       if (d.boardName === BoardName.ELYSIUM) {
-        this.board = new ElysiumBoard();
+        this.board = new ElysiumBoard(this.shuffleMapOption, this.seed);
       } else if (d.boardName === BoardName.HELLAS) {
-        this.board = new HellasBoard();
+        this.board = new HellasBoard(this.shuffleMapOption, this.seed);
       } else {        
         this.board = new OriginalBoard(this.shuffleMapOption, this.seed);
       }  

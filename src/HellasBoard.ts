@@ -131,6 +131,7 @@ export class HellasBoard extends Board{
             me_id++;
         }
         
+        pos_x = 2; pos_y = 2;
         for (let i = 0; i < 7; ++i) {
             this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
             me_id++;

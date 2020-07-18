@@ -23,6 +23,7 @@ describe("Recruitment", function () {
             showOtherPlayersVP: false,
             customCorporationsList: [],
             solarPhaseOption: false,
+            shuffleMapOption: false,
             promoCardsOption: false,
             undoOption: false,
             startingCorporations: 2,

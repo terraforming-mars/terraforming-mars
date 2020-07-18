@@ -68,7 +68,7 @@ export interface GameOptions {
   showOtherPlayersVP: boolean;
   customCorporationsList: Array<CardName>;
   solarPhaseOption: boolean;
-  shuffleMapOption?: boolean;
+  shuffleMapOption: boolean;
   promoCardsOption: boolean;
   undoOption: boolean;
   includeVenusMA: boolean;

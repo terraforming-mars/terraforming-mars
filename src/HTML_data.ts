@@ -4048,7 +4048,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
               <div class="resource microbe" style="margin-left:20px;"></div><div class="resource microbe"></div>*
               <div class="description">
-                (Raise Venus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card)
+                (Raise Venus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card.)
               </div>
             </div>
 `],

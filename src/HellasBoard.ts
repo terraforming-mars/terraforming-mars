@@ -91,29 +91,14 @@ export class HellasBoard extends Board{
             [SpaceBonus.TITANIUM]);
         // y=8
         is_ocean.push(false, false, 
-            //false, 
             false, false);
         bonus.push(
             [], [SpaceBonus.HEAT, SpaceBonus.HEAT], 
-            //[SpaceBonus.OCEAN], 
             [SpaceBonus.HEAT, SpaceBonus.HEAT], []);
         
         if (shuffleMapOption) {
             this.shuffleArray(is_ocean);
             this.shuffleArray(bonus);
-            while (true) {
-                let satisfy = true;
-                let land_list: Array<SpaceName> = [];
-                for (let land of land_list) {
-                    let land_id = Number(land) - 3;
-                    while (is_ocean[land_id]) {
-                        satisfy = false;
-                        let idx = Math.floor(this.mulberry32() * (land_list.length + 1));
-                        [is_ocean[land_id], is_ocean[idx]] = [is_ocean[idx], is_ocean[land_id]];
-                    }
-                }
-                if (satisfy) break;
-            }
         }
 
         let idx = 3, me_id = 0;

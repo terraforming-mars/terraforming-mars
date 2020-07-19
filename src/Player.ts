@@ -1030,8 +1030,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
         game.playerIsFinishedWithResearchPhase(this);
       };
+      
+      let maxPurchaseQty = 4;
 
       if (this.canUseHeatAsMegaCredits) {
+        maxPurchaseQty = Math.min(maxPurchaseQty, Math.floor((this.megaCredits + this.heat) / this.cardCost));
+        
         this.setWaitingFor(
             new AndOptions(() => {
               return undefined;
@@ -1053,11 +1057,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                 (foundCards: Array<IProjectCard>) => {
                   selectedCards = foundCards;
                   return undefined;
-                }, 4, 0
+                }, maxPurchaseQty, 0
             )
             ), () => { payForCards(); }
         );
       } else {
+        maxPurchaseQty = Math.min(maxPurchaseQty, Math.floor(this.megaCredits / this.cardCost));
+
         this.setWaitingFor(
             new SelectCard(
                 "Select which cards to take into hand",
@@ -1066,7 +1072,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                   htp.megaCredits = foundCards.length * this.cardCost;
                   selectedCards = foundCards;
                   return undefined;
-                }, 4, 0
+                }, maxPurchaseQty, 0
             ), () => { payForCards(); }
         );
       }

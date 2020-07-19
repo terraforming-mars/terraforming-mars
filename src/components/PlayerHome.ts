@@ -176,7 +176,7 @@ export const PlayerHome = Vue.component("player-home", {
                     <h2 :class="'player_color_'+ player.color" v-i18n>Played Cards</h2>
 
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
-                        <card :card="player.corporationCard"></card>
+                        <card :card="player.corporationCard" :player="player"></card>
                     </div>
                     <div v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
                         <card :card="card" :player="player"></card>

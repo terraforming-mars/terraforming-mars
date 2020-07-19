@@ -13,7 +13,6 @@ export class MagneticShield implements IProjectCard {
     public cost: number = 26;
     public tags: Array<Tags> = [Tags.SPACE];
     public cardType: CardType = CardType.AUTOMATED;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game) {
         const hasEnergyTags = player.getTagCount(Tags.ENERGY) >= 2;

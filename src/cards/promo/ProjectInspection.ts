@@ -19,6 +19,16 @@ export class ProjectInspection implements IProjectCard {
     public hasRequirements = false;
     private getActionCards(player: Player, game: Game): Array<ICard> {
         let result: Array<ICard> = [];
+
+        if (
+            player.corporationCard !== undefined &&
+                player.getActionsThisGeneration().has(player.corporationCard.name) &&
+                player.corporationCard.action !== undefined &&
+                player.corporationCard.canAct !== undefined &&
+                player.corporationCard.canAct(player, game)) {
+            result.push(player.corporationCard);
+          }
+          
         for (const playedCard of player.playedCards) {
             if (playedCard.action !== undefined && playedCard.canAct !== undefined && playedCard.canAct(player, game) && player.getActionsThisGeneration().has(playedCard.name)) {
                 result.push(playedCard);

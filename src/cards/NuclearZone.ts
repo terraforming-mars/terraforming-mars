@@ -6,7 +6,7 @@ import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { TileType } from "../TileType";
 import { ISpace } from "../ISpace";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 import { MAX_TEMPERATURE, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
@@ -16,7 +16,8 @@ export class NuclearZone implements IProjectCard {
     public tags: Array<Tags> = [Tags.EARTH];
     public name: CardName = CardName.NUCLEAR_ZONE;
     public cardType: CardType = CardType.AUTOMATED;
-
+    public hasRequirements = false;
+    
     public canPlay(player: Player, game: Game): boolean {
         const canPlaceTile = game.board.getAvailableSpacesOnLand(player).length > 0;
         const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;

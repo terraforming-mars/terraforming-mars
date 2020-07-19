@@ -54,7 +54,7 @@ export const LogPanel = Vue.component("log-panel", {
                     }
                 } else if (data.type === LogMessageDataType.CARD) {
                     for (let player of this.players) {
-                        if (player.corporationCard !== undefined && data.value === player.corporationCard) {
+                        if (player.corporationCard !== undefined && data.value === player.corporationCard.name) {
                             return "<log-card class=\"background-color-corporation\">"+data.value+"</log-card>";
                         } else {
                             let cards = player.playedCards.concat(player.selfReplicatingRobotsCards);
@@ -73,17 +73,17 @@ export const LogPanel = Vue.component("log-panel", {
                     return data.value;
                 }
             }
-            return '';
+            return "";
         },
         parseMessage: function(message: LogMessage) {
-            let logEntryBullet = (this.isNewGeneration(message.type)) ? '' : `<span title="${new Date(message.timestamp).toLocaleString()}">&#x1f551;</span>`;
+            let logEntryBullet = (this.isNewGeneration(message.type)) ? "" : `<span title="${new Date(message.timestamp).toLocaleString()}">&#x1f551;</span>`;
             if (message.type !== undefined && message.message !== undefined) {
                 message.message = $t(message.message);
                 return logEntryBullet+message.message.replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
                     return this.parseData(message.data[idx]);
                 });
             }
-            return '';
+            return "";
         },
         isNewGeneration: function(type: LogMessageType) {
             return (type === LogMessageType.NEW_GENERATION);

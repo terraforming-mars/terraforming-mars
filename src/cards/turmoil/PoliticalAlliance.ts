@@ -13,7 +13,6 @@ export class PoliticalAlliance implements IProjectCard {
     public tags: Array<Tags> = [];
     public name: CardName = CardName.POLITICAL_ALLIANCE;
     public cardType: CardType = CardType.EVENT;
-    public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {

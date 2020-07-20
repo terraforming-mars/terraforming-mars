@@ -589,8 +589,7 @@ export const ALL_VENUS_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.NEUTRALIZER_FACTORY, factory: NeutralizerFactory },
     { cardName: CardName.ORBITAL_REFLECTORS, factory: OrbitalReflectors },
     { cardName: CardName.OMNICOURT, factory: Omnicourt },
-    { cardName: CardName.MINING_QUOTA, factory: MiningQuota },
-    { cardName: CardName.SATURN_SURFING, factory: SaturnSurfing }
+    { cardName: CardName.MINING_QUOTA, factory: MiningQuota }
 ];    
 
 export const ALL_COLONIES_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
@@ -735,8 +734,8 @@ export const ALL_PROMO_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.ADVERTISING, factory: Advertising },
     { cardName: CardName.DEIMOS_DOWN_PROMO, factory: DeimosDownPromo },
     { cardName: CardName.GREAT_DAM_PROMO, factory: GreatDamPromo },
-    { cardName: CardName.MAGNETIC_FIELD_GENERATORS_PROMO, factory: MagneticFieldGeneratorsPromo }
-
+    { cardName: CardName.MAGNETIC_FIELD_GENERATORS_PROMO, factory: MagneticFieldGeneratorsPromo },
+    { cardName: CardName.SATURN_SURFING, factory: SaturnSurfing }
 ];    
 
 export const ALL_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [

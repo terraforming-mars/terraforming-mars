@@ -444,7 +444,16 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 </div>
             </div>
             
-            <corporations-filter v-if="showCorporationList" v-on:corporation-list-changed="updateCustomCorporationsList"></corporations-filter>
+            <corporations-filter
+                v-if="showCorporationList"
+                v-on:corporation-list-changed="updateCustomCorporationsList"
+                v-bind:corporateEra="corporateEra"
+                v-bind:prelude="prelude"
+                v-bind:venusNext="venusNext"
+                v-bind:colonies="colonies"
+                v-bind:turmoil="turmoil"
+                v-bind:promoCardsOption="promoCardsOption"
+            ></corporations-filter>
 
         </div>
     `

@@ -137,7 +137,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       // Turmoil Reds capacity
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && game.phase === Phase.ACTION) {
-        game.addSelectHowToPayInterrupt(this, REDS_RULING_POLICY_COST, true, true, "Select how to pay for TR increase");
+        if (this.canAfford(REDS_RULING_POLICY_COST)) {
+          game.addSelectHowToPayInterrupt(this, REDS_RULING_POLICY_COST, false, false, "Select how to pay for TR increase");
+        } else {
+          this.megaCredits -= REDS_RULING_POLICY_COST;
+        }
+        
         this.terraformRating++;
         this.hasIncreasedTerraformRatingThisGeneration = true;
         return;
@@ -1946,7 +1951,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         (canUseSteel ? this.steel * this.steelValue : 0) +
         (canUseTitanium ? this.titanium * this.getTitaniumValue(game) : 0) +
           this.megaCredits >= cost;        
-      } 
+      }
       
       return (this.canUseHeatAsMegaCredits ? this.heat : 0) +
               (canUseSteel ? this.steel * this.steelValue : 0) +

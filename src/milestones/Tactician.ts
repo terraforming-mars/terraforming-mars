@@ -8,7 +8,7 @@ export class Tactician implements IMilestone {
     public description: string = "Requires that you have 5 cards with requirements in play"
     private excludedCardTypes = [CardType.PRELUDE, CardType.EVENT];
 
-    public canClaim(player: Player, _game: Game): boolean {
+    public getScore(player: Player, _game: Game): number {
         const validCards = player.playedCards.filter((card) => {
             const isValidCardType = !this.excludedCardTypes.includes(card.cardType);
             const hasRequirements = card.canPlay && (card.hasRequirements === undefined || card.hasRequirements);
@@ -16,6 +16,9 @@ export class Tactician implements IMilestone {
             return isValidCardType && hasRequirements;
         });
 
-       return validCards.length >= 5;
+       return validCards.length
+    }
+    public canClaim(player: Player, _game: Game): boolean {
+       return this.getScore(player, _game) >= 5;
     }
 }

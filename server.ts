@@ -27,7 +27,7 @@ import {TileType} from './src/TileType';
 import { Phase } from './src/Phase';
 import { Resources } from "./src/Resources";
 import { CardType } from './src/cards/CardType';
-import { ClaimedMilestoneModel } from "./src/models/ClaimedMilestoneModel";
+import { ClaimedMilestoneModel, IMilestoneScore } from "./src/models/ClaimedMilestoneModel";
 import { FundedAwardModel, IAwardScore } from "./src/models/FundedAwardModel";
 import { Database } from './src/database/Database';
 import { PartyModel, DelegatesModel, TurmoilModel } from './src/models/TurmoilModel';
@@ -405,10 +405,21 @@ function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
 
   for (let idx in allMilestones) {
     let claimed = claimedMilestones.find((m) => m.milestone.name === allMilestones[idx].name);
+    let scores:Array<IMilestoneScore> =  [];
+    if (claimed === undefined) {
+      game.getPlayers().forEach(player => {
+        scores.push({
+          playerName: player.name,
+          playerScore: allMilestones[idx].getScore(player, game)
+        });
+      });
+    }
+
     milestoneModels.push({
       player_name: claimed === undefined ? "": claimed.player.name,
       player_color: claimed === undefined ? "": claimed.player.color,
-      milestone: allMilestones[idx]
+      milestone: allMilestones[idx],
+      scores
     });
   }
   

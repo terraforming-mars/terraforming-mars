@@ -63,6 +63,17 @@
     text-transform: uppercase;
 }
 
+.tags-grid {
+    display: grid;
+    grid-template-columns: 100px repeat(13, 60px);
+
+    margin-top: 15px;
+
+    .grid-item {
+        margin: 0 auto;
+    }
+}
+
 .tag-count {
     box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
     position: relative;
@@ -184,6 +195,10 @@
         .player_number {
             margin-right: 5px;
             text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
+        }
+
+        .corporation-name {
+            font-size: 11px;
         }
     }
 

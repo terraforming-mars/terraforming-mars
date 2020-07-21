@@ -9,11 +9,12 @@ import { PlayerResources } from "./PlayerResources";
 import { WaitingFor } from "./WaitingFor";
 import { Preferences } from "./Preferences"
 import { PlayerModel } from "../models/PlayerModel";
-import { Colony } from './Colony';
-import { LogPanel } from './LogPanel';
-import { PlayerMixin } from './PlayerMixin';
-import { TagCount } from './TagCount';
-import { Turmoil } from './Turmoil';
+import { Colony } from "./Colony";
+import { LogPanel } from "./LogPanel";
+import { PlayerMixin } from "./PlayerMixin";
+import { TagCount } from "./TagCount";
+import { Turmoil } from "./Turmoil";
+import {TagsOverview} from "./TagOverview";
 
 const dialogPolyfill = require("dialog-polyfill");
 
@@ -27,6 +28,7 @@ export const PlayerHome = Vue.component("player-home", {
         "waiting-for": WaitingFor,
         "milestone": Milestone,
         "award": Award,
+        "tags": TagsOverview,
         "preferences": Preferences,
         "colony": Colony,
         "log-panel": LogPanel,
@@ -109,6 +111,20 @@ export const PlayerHome = Vue.component("player-home", {
                         <milestone :milestones_list="player.milestones" />
                         <award :awards_list="player.awards" />
                     </div>
+                    
+                    <details class="accordion">
+                        <summary class="accordion-header">
+                            <div class="is-action">
+                                <i class="icon icon-arrow-right mr-1"></i>
+                                <span v-i18n>Tag Overview</span>
+                            </div>
+                        </summary>
+                        <div class="accordion-body">
+                            <div v-if="player.players.length > 1" class="player_home_block" >
+                              <tags :player="player" />
+                            </div>
+                        </div>
+                    </details>
                 </div>
 
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
@@ -119,6 +135,8 @@ export const PlayerHome = Vue.component("player-home", {
                     <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
                         <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
                             <span class="player_number">{{ idx+1 }}.</span><a v-on:click.prevent="showPlayerDetails(p)" class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</a>
+                            <br/>
+                            <span class="corporation-name" v-if="p.corporationCard">{{ p.corporationCard.name }}</span>
                         </div>
                         <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
                     </div>

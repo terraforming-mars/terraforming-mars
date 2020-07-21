@@ -1,13 +1,12 @@
-
 import { expect } from "chai";
-import { BribedCommitte } from "../../src/cards/BribedCommitte";
+import { BribedCommittee } from "../../src/cards/BribedCommittee";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from '../../src/Game';
 
-describe("BribedCommitte", function () {
+describe("BribedCommittee", function () {
     it("Should play", function () {
-        const card = new BribedCommitte();
+        const card = new BribedCommittee();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         card.play(player, game);

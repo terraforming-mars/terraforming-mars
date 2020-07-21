@@ -89,7 +89,7 @@ import { BiomassCombustors } from "./cards/BiomassCombustors";
 import { Birds } from "./cards/Birds";
 import { BlackPolarDust } from "./cards/BlackPolarDust";
 import { BreathingFilters } from "./cards/BreathingFilters";
-import { BribedCommitte } from "./cards/BribedCommitte";
+import { BribedCommittee } from "./cards/BribedCommittee";
 import { BuildingIndustries } from "./cards/BuildingIndustries";
 import { Bushes } from "./cards/Bushes";
 import { BusinessContacts } from "./cards/BusinessContacts";
@@ -884,7 +884,7 @@ export const ALL_CORP_ERA_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.AI_CENTRAL, factory: AICentral },
     { cardName: CardName.ANTI_GRAVITY_TECHNOLOGY, factory: AntiGravityTechnology },
     { cardName: CardName.ASTEROID_MINING_CONSORTIUM, factory: AsteroidMiningConsortium },
-    { cardName: CardName.BRIBED_COMMITTEE, factory: BribedCommitte },
+    { cardName: CardName.BRIBED_COMMITTEE, factory: BribedCommittee },
     { cardName: CardName.BUILDING_INDUSTRIES, factory: BuildingIndustries },
     { cardName: CardName.BUSINESS_CONTACTS, factory: BusinessContacts },
     { cardName: CardName.BUSINESS_NETWORK, factory: BusinessNetwork },

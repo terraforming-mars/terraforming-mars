@@ -24,16 +24,13 @@ export class ExtractorBalloons implements IActionCard,IProjectCard, IResourceCar
         this.resourceCount += 3;
         return undefined;
     }
-    public canAct(player: Player, game: Game): boolean {
-        const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-        if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
-          return player.canAfford(this.cost + REDS_RULING_POLICY_COST);
-        }
-  
+    public canAct(): boolean {
         return true;
     }   
     public action(player: Player, game: Game) {
-        if (this.resourceCount < 2) {
+        const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
+        if (this.resourceCount < 2 || venusMaxed || 
+            ( PartyHooks.shouldApplyPolicy(game, PartyName.REDS) &&  !player.canAfford(REDS_RULING_POLICY_COST))) {
             this.resourceCount++;
             return undefined;
         }

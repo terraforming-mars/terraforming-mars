@@ -28,7 +28,7 @@ export class CaretakerContract implements IActionCard, IProjectCard {
       const hasEnoughHeat = player.heat >= 8 || (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCorporation() * 2) + player.heat >= 8);
       
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(this.cost + REDS_RULING_POLICY_COST * 2) && hasEnoughHeat;
+        return player.canAfford(REDS_RULING_POLICY_COST) && hasEnoughHeat;
       }
 
       return hasEnoughHeat;
@@ -43,7 +43,7 @@ export class CaretakerContract implements IActionCard, IProjectCard {
                 heatAmount +
                 (floaterAmount * 2) < 8
               ) {
-                throw new Error('Need to pay 8 heat');
+                throw new Error("Need to pay 8 heat");
               }
               player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
               player.heat -= heatAmount;

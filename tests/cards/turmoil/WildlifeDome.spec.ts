@@ -2,8 +2,8 @@ import { expect } from "chai";
 import { WildlifeDome } from "../../../src/cards/turmoil/WildlifeDome";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
-import { BoardName } from '../../../src/BoardName';
-import { GameOptions, Game } from '../../../src/Game';
+import { BoardName } from "../../../src/BoardName";
+import { GameOptions, Game } from "../../../src/Game";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 
 describe("WildlifeDome", function () {
@@ -39,7 +39,7 @@ describe("WildlifeDome", function () {
         greens.delegates.push(player.id, player.id);
         expect(card.canPlay(player, game)).to.eq(false); 
 
-        player.megaCredits = 3;
+        player.megaCredits = 18;
         expect(card.canPlay(player, game)).to.eq(true); 
 
         const action = card.play(player, game);

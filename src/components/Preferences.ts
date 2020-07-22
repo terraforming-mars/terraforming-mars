@@ -20,6 +20,7 @@ export const Preferences = Vue.component("preferences", {
             "magnify_cards": true,
             "magnify_card_descriptions": true,
             "show_alerts": true,
+            "hide_ma_scores": false,
             "lang": "en",
             "langs": LANGUAGES
         };
@@ -155,6 +156,12 @@ export const Preferences = Vue.component("preferences", {
                             <i class="form-icon"></i> <span v-i18n>Show in-game alerts</span>
                         </label>
                     </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="hide_ma_scores" />
+                            <i class="form-icon"></i> <span v-i18n>Hide Milestones / Awards scores</span>
+                        </label>
+                    </div>                    
                     <div class="preferences_panel_item form-group">
                         <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
                         <div class="preferences_panel_langs">

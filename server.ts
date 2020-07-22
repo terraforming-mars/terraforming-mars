@@ -27,8 +27,8 @@ import {TileType} from './src/TileType';
 import { Phase } from './src/Phase';
 import { Resources } from "./src/Resources";
 import { CardType } from './src/cards/CardType';
-import { ClaimedMilestoneModel } from "./src/models/ClaimedMilestoneModel";
-import { FundedAwardModel } from "./src/models/FundedAwardModel";
+import { ClaimedMilestoneModel, IMilestoneScore } from "./src/models/ClaimedMilestoneModel";
+import { FundedAwardModel, IAwardScore } from "./src/models/FundedAwardModel";
 import { Database } from './src/database/Database';
 import { PartyModel, DelegatesModel, TurmoilModel } from './src/models/TurmoilModel';
 import { SelectDelegate } from './src/inputs/SelectDelegate';
@@ -404,12 +404,23 @@ function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
   let milestoneModels: Array<ClaimedMilestoneModel> = [];
 
   for (let idx in allMilestones) {
-    let claimed = claimedMilestones.find((m) => m.milestone.name === allMilestones[idx].name)
+    let claimed = claimedMilestones.find((m) => m.milestone.name === allMilestones[idx].name);
+    let scores:Array<IMilestoneScore> =  [];
+    if (claimed === undefined && claimedMilestones.length < 3) {
+      game.getPlayers().forEach(player => {
+        scores.push({
+          playerName: player.name,
+          playerScore: allMilestones[idx].getScore(player, game)
+        });
+      });
+    }
+
     milestoneModels.push({
       player_name: claimed === undefined ? "": claimed.player.name,
       player_color: claimed === undefined ? "": claimed.player.color,
-      milestone: allMilestones[idx]
-    })
+      milestone: allMilestones[idx],
+      scores
+    });
   }
   
   return milestoneModels;
@@ -421,11 +432,22 @@ function getAwards(game: Game): Array<FundedAwardModel>  {
   let awardModels: Array<FundedAwardModel> = [];
 
   for (let idx in allAwards) {
-    let funded = fundedAwards.find((a) => a.award.name === allAwards[idx].name)
+    let funded = fundedAwards.find((a) => a.award.name === allAwards[idx].name);
+    let scores:Array<IAwardScore> =  [];
+    if (fundedAwards.length < 3 || funded !== undefined) {
+      game.getPlayers().forEach(player => {
+        scores.push({
+          playerName: player.name,
+          playerScore: allAwards[idx].getScore(player, game)
+        });
+      });
+    }
+
     awardModels.push({
       player_name: funded === undefined ? "": funded.player.name,
       player_color: funded === undefined ?  "": funded.player.color,
-      award: allAwards[idx]
+      award: allAwards[idx],
+      scores: scores
     })
   }
   

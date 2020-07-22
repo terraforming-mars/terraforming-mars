@@ -1,13 +1,13 @@
 import { IProjectCard } from "../IProjectCard";
-import { IActionCard, IResourceCard } from '../ICard';
+import { IActionCard, IResourceCard } from "../ICard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
-import { Game } from '../../Game';
-import { CardName } from '../../CardName';
+import { Game } from "../../Game";
+import { CardName } from "../../CardName";
 import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from "../../constants";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
@@ -29,8 +29,8 @@ export class ExtractorBalloons implements IActionCard,IProjectCard, IResourceCar
     }   
     public action(player: Player, game: Game) {
         const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-        if (this.resourceCount < 2 || venusMaxed || 
-            ( PartyHooks.shouldApplyPolicy(game, PartyName.REDS) &&  !player.canAfford(REDS_RULING_POLICY_COST))) {
+        const cannotAffordRed = PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !player.canAfford(REDS_RULING_POLICY_COST);
+        if (this.resourceCount < 2 || venusMaxed || cannotAffordRed) {
             this.resourceCount++;
             return undefined;
         }

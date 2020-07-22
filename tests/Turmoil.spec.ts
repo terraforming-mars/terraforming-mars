@@ -18,6 +18,8 @@ import { ReleaseOfInertGases } from "../src/cards/ReleaseOfInertGases";
 import { JovianEmbassy } from "../src/cards/promo/JovianEmbassy";
 import { IceAsteroid } from "../src/cards/IceAsteroid";
 import { ProtectedValley } from "../src/cards/ProtectedValley";
+import { MagneticFieldGeneratorsPromo } from "../src/cards/promo/MagneticFieldGeneratorsPromo";
+import { Resources } from "../src/Resources";
 
 describe("Turmoil", function () {
     let player : Player, game : Game, turmoil: Turmoil;
@@ -150,6 +152,11 @@ describe("Turmoil", function () {
         
         expect(releaseOfInertGases.canPlay(player, game)).to.eq(false); // needs 20 MC
         expect(jovianEmbassy.canPlay(player, game)).to.eq(false); // needs 17 MC
+
+        player.setProduction(Resources.ENERGY, 4);
+        player.megaCredits = 30;
+        const magneticFieldGeneratorsPromo = new MagneticFieldGeneratorsPromo();
+        expect(magneticFieldGeneratorsPromo.canPlay(player, game)).to.eq(false); // needs 31 MC
     });
 
     it("Can't play cards to raise TR via global parameters if Reds are ruling and player cannot pay", function () {

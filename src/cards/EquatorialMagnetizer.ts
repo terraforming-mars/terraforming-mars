@@ -24,7 +24,7 @@ export class EquatorialMagnetizer implements IActionCard, IProjectCard {
       const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 1;
 
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(this.cost + REDS_RULING_POLICY_COST) && hasEnergyProduction;
+        return player.canAfford(REDS_RULING_POLICY_COST) && hasEnergyProduction;
       }
 
       return hasEnergyProduction;

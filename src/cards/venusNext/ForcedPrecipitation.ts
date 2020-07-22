@@ -41,8 +41,8 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard, IResourceC
 
         const addResource = new SelectOption("Pay 2 to add 1 floater to this card", () => this.addResource(player));
         const spendResource = new SelectOption("Remove 2 floaters to raise Venus 1 step", () => this.spendResource(player, game));
-
-        if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
+        const canAffordRed = !PartyHooks.shouldApplyPolicy(game, PartyName.REDS) || player.canAfford(REDS_RULING_POLICY_COST);
+        if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE && canAffordRed) {
             opts.push(spendResource);
         } else {
             return this.addResource(player);
@@ -60,12 +60,12 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard, IResourceC
     private addResource(player: Player) {
         if (player.canUseHeatAsMegaCredits && player.heat > 0) {
             return new SelectHowToPay(
-                'Select how to pay ', false, false,
+                "Select how to pay ", false, false,
                 player.canUseHeatAsMegaCredits,
                 2,
                 (htp) => {
                     if (htp.heat + htp.megaCredits < 2) {
-                        throw new Error('Not enough for action');
+                        throw new Error("Not enough for action");
                     }
                     player.megaCredits -= htp.megaCredits;
                     player.heat -= htp.heat;

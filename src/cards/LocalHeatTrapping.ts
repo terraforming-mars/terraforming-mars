@@ -91,6 +91,8 @@ export class LocalHeatTrapping implements IProjectCard {
             );
           }
         
+        player.heat -= 5
+        
         if (availableActions.options.length === 1) return availableActions.options[0].cb();
         return availableActions;
     }

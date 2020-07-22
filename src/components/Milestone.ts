@@ -33,7 +33,7 @@ export const Milestone = Vue.component("milestone", {
                     <div class="ma-player" v-if="milestone.player_name"><i :title="milestone.player_name" :class="'board-cube board-cube--'+milestone.player_color" /></div>
                     <div class="ma-name--milestones" :class="getNameCss(milestone.milestone.name)" v-i18n>{{milestone.milestone.name}}</div>
                     <div class="ma-description" v-i18n>{{milestone.milestone.description}}</div>
-                    <div v-for="score in milestone.scores">
+                    <div v-for="score in milestone.scores" class="player_home_block--milestones-and-awards-scores">
                         <span class="ma-score"> {{ score.playerName }} : {{ score.playerScore }}</span>
                     </div>
                 </div>

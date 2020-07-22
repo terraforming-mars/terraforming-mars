@@ -26,7 +26,7 @@ export class LocalHeatTrapping implements IProjectCard {
 
         // Helion must be able to pay for both the card and its effect
         if (player.canUseHeatAsMegaCredits) {
-          return player.heat + player.megaCredits >= requiredHeatAmt + player.getCardCost(game, this)
+          return (player.heat >= requiredHeatAmt) && (player.heat + player.megaCredits >= requiredHeatAmt + player.getCardCost(game, this))
         };
 
         return player.heat >= requiredHeatAmt || (player.isCorporation(CardName.STORMCRAFT_INCORPORATED) && (player.getResourcesOnCorporation() * 2) + player.heat >= 5 );
@@ -90,15 +90,8 @@ export class LocalHeatTrapping implements IProjectCard {
 
             );
           }
-
-        // Handle edge case for Helion
-        if (player.heat >= 5) {
-          player.heat -= 5;
-        } else {
-          const shortfall = 5 - player.heat;
-          player.heat = 0;
-          player.megaCredits -= shortfall;
-        }
+        
+        player.heat -= 5;
         
         if (availableActions.options.length === 1) return availableActions.options[0].cb();
         return availableActions;

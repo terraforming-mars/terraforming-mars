@@ -406,7 +406,7 @@ function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
   for (let idx in allMilestones) {
     let claimed = claimedMilestones.find((m) => m.milestone.name === allMilestones[idx].name);
     let scores:Array<IMilestoneScore> =  [];
-    if (claimed === undefined) {
+    if (claimed === undefined && claimedMilestones.length < 3) {
       game.getPlayers().forEach(player => {
         scores.push({
           playerName: player.name,
@@ -434,12 +434,15 @@ function getAwards(game: Game): Array<FundedAwardModel>  {
   for (let idx in allAwards) {
     let funded = fundedAwards.find((a) => a.award.name === allAwards[idx].name);
     let scores:Array<IAwardScore> =  [];
-    game.getPlayers().forEach(player => {
-      scores.push({
-        playerName: player.name,
-        playerScore: allAwards[idx].getScore(player, game)
+    if (fundedAwards.length < 3 || funded !== undefined) {
+      game.getPlayers().forEach(player => {
+        scores.push({
+          playerName: player.name,
+          playerScore: allAwards[idx].getScore(player, game)
+        });
       });
-    });
+    }
+
     awardModels.push({
       player_name: funded === undefined ? "": funded.player.name,
       player_color: funded === undefined ?  "": funded.player.color,

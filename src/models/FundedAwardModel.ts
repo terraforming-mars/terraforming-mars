@@ -1,8 +1,9 @@
 
 import {IAward  } from "../awards/IAward";
+import { Color } from "../Color";
 
 export interface IAwardScore {
-    playerName: string;
+    playerColor: Color;
     playerScore: number;
 }
 

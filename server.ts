@@ -409,7 +409,7 @@ function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
     if (claimed === undefined && claimedMilestones.length < 3) {
       game.getPlayers().forEach(player => {
         scores.push({
-          playerName: player.name,
+          playerColor: player.color,
           playerScore: allMilestones[idx].getScore(player, game)
         });
       });
@@ -437,7 +437,7 @@ function getAwards(game: Game): Array<FundedAwardModel>  {
     if (fundedAwards.length < 3 || funded !== undefined) {
       game.getPlayers().forEach(player => {
         scores.push({
-          playerName: player.name,
+          playerColor: player.color,
           playerScore: allAwards[idx].getScore(player, game)
         });
       });

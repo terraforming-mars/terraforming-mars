@@ -1,7 +1,8 @@
 import { IMilestone } from "../milestones/IMilestone";
+import { Color } from "../Color";
 
 export interface IMilestoneScore {
-    playerName: string;
+    playerColor: Color;
     playerScore: number;
 }
 

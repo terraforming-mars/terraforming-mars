@@ -266,7 +266,7 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
                 <div class="player_home_colony_cont">
                     <div class="player_home_colony" v-for="colony in player.colonies" :key="colony.name">
-                        <colony :colony="colony" :player="player"></colony>
+                        <colony :colony="colony"></colony>
                     </div>
                 </div>
             </div>

@@ -321,16 +321,14 @@ describe("Game", function () {
 
     it("Check Ecologist Milestone", function() {
         const player = new Player("temp_test", Color.BLUE, false);
-        const player2 = new Player("temp_test2", Color.RED, false);
-        const game = new Game("classic_game", [player,player2], player);
-//, false, false, false, false, false, false, undefined, BoardName.ELYSIUM
+        
         const card1 = new ResearchNetwork();
         const card2 = new ArcticAlgae();
         const ecologist = new Ecologist();
 
         player.playedCards.push(card1, card2);
-        expect(ecologist.canClaim(player, game)).to.eq(false);
+        expect(ecologist.canClaim(player)).to.eq(false);
         player.playedCards.push(card1, card2);
-        expect(ecologist.canClaim(player, game)).to.eq(true);
+        expect(ecologist.canClaim(player)).to.eq(true);
     });    
 });

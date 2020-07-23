@@ -32,13 +32,15 @@ export const Award = Vue.component("award", {
             <div v-show="isVisible()">
                 <div v-for="award in awards_list" :class="award.player_name ? 'ma-block pwned-item': 'ma-block'">
                     <div class="ma-player" v-if="award.player_name"><i :title="award.player_name" :class="'board-cube board-cube--'+award.player_color" /></div>
-                    <div class="ma-name--awards" :class="getNameCss(award.award.name)" v-i18n>{{award.award.name}}</div>
-                    <div class="ma-description" v-i18n>{{award.award.description}}</div>
-                    <div v-for="score in award.scores.sort(
-                        (s1, s2) => s2.playerScore - s1.playerScore
-                    )" class="player_home_block--milestones-and-awards-scores">
-                        <span class="ma-score"> {{ score.playerName }}: {{ score.playerScore }}</span>
+                    <div class="ma-name--awards" :class="getNameCss(award.award.name)" v-i18n>
+                        {{award.award.name}}
+                        <div class="ma-scores" class="player_home_block--milestones-and-awards-scores">
+                            <p v-for="score in award.scores.sort(
+                                (s1, s2) => s2.playerScore - s1.playerScore
+                            )" :class="'ma-score player_bg_color_'+score.playerColor">{{ score.playerScore }}</p>
+                        </div>
                     </div>
+                    <div class="ma-description" v-i18n>{{award.award.description}}</div>
                 </div>
             </div>
         </div>

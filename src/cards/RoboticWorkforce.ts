@@ -91,7 +91,9 @@ export class RoboticWorkforce implements IProjectCard {
             CardName.SPACE_PORT,
             CardName.SPINOFF_DEPARTMENT,
             CardName.MARTIAN_MEDIA_CENTER,
-            CardName.FIELD_CAPPED_CITY
+            CardName.FIELD_CAPPED_CITY,
+            CardName.CULTURAL_METROPOLIS,
+            CardName.PARLIAMENT_HALL
         ];
 
         const corporationCardNames = (new Set())
@@ -149,6 +151,7 @@ export class RoboticWorkforce implements IProjectCard {
                         || card.name === CardName.LAVA_TUBE_SETTLEMENT
                         || card.name === CardName.SPACE_PORT
                         || card.name === CardName.CUPOLA_CITY
+                        || card.name === CardName.CULTURAL_METROPOLIS
                         )
                 ) {
                     if (player.getProduction(Resources.ENERGY) >= 1) {
@@ -301,7 +304,9 @@ export class RoboticWorkforce implements IProjectCard {
                     new Updater(CardName.FACTORUM, 0, 0, 1, 0, 0, 0),
                     new Updater(CardName.RECYCLON, 0, 0, 1, 0, 0, 0),
                     new Updater(CardName.MARTIAN_MEDIA_CENTER, 0, 2, 0, 0, 0, 0),
-                    new Updater(CardName.FIELD_CAPPED_CITY, 1, 2, 0, 0, 0, 0)
+                    new Updater(CardName.FIELD_CAPPED_CITY, 1, 2, 0, 0, 0, 0),
+                    new Updater(CardName.CULTURAL_METROPOLIS, -1, 3, 0, 0, 0, 0),
+                    new Updater(CardName.PARLIAMENT_HALL, 0, Math.floor(player.getTagCount(Tags.STEEL) / 3), 0, 0, 0, 0)
                 ]
 
                 let result:Updater = updaters.filter(u => u.name === foundCard.name)[0];

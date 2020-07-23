@@ -118,7 +118,7 @@ export const Card = Vue.component("card", {
     },
     template: `
     <div :class="getCardCssClass(card)">
-        <div class="card_resources_counter" v-if="card.resources">RES:<span class="card_resources_counter--number"> {{ card.resources }}</span></div>
+        <div class="card_resources_counter" v-if="card.resources !== undefined">RES:<span class="card_resources_counter--number"> {{ card.resources }}</span></div>
         <div class="card-content-wrapper" v-i18n v-html=this.getCardContent()></div>
     </div>
     `

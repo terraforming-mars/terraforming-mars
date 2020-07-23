@@ -2,10 +2,11 @@
 import Vue from "vue";
 
 interface SelectCardModel {
-    cards: Array<string>;
+    cards: Array<CardModel>;
 }
 
 import { Card } from "./Card";
+import { CardModel } from "../models/CardModel";
 
 export const SelectCard = Vue.component("select-card", {
     props: ["playerinput", "onsave", "showsave", "showtitle"],

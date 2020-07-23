@@ -37,6 +37,31 @@ export class Ocean extends Space {
 }
 
 export abstract class Board {
+
+    // https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
+    // generate random float in [0,1) with seed
+    public mulberry32() {
+        var t = this.seed += 0x6D2B79F5;
+        t = Math.imul(t ^ t >>> 15, t | 1);
+        t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+        return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    }
+
+    public shuffleArray(array: Array<Object>) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(this.mulberry32() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+    public newTile(idx: number, pos_x: number, pos_y: number, is_ocean: boolean, bonus: Array<SpaceBonus>) {
+        if (is_ocean) {
+            return new Ocean(idx, pos_x, pos_y, bonus);
+        } else {
+            return new Land(idx, pos_x, pos_y, bonus);
+        }
+    }
+
+    public seed: number=0;
     public spaces: Array<ISpace> = [];
     public getAdjacentSpaces(space: ISpace): Array<ISpace> {
         if (space.spaceType !== SpaceType.COLONY) {

@@ -6,7 +6,6 @@ import { PlayerResources } from "./PlayerResources";
 import { StackedCards } from './StackedCards';
 import { PlayerMixin } from "./PlayerMixin";
 import { TagCount } from './TagCount';
-import { CardModel } from "../models/CardModel";
 
 
 export const OtherPlayer = Vue.component("other-player", {
@@ -23,12 +22,7 @@ export const OtherPlayer = Vue.component("other-player", {
         },
         isVisible: function () {
             return (this.$root as any).getVisibilityState("other_player_"+this.player.id);
-        },
-        isCardActivated: function (card: CardModel): boolean {
-            return this.player !== undefined
-            && this.player.actionsThisGeneration !== undefined
-            && this.player.actionsThisGeneration.indexOf(card.name) !== -1;
-        }        
+        }     
     },
     template: `
         <div> 
@@ -61,10 +55,10 @@ export const OtherPlayer = Vue.component("other-player", {
                     <span class="player_name" :class="'player_bg_color_' + player.color"> {{ player.name }} played cards </span>
                     <div>
                         <div v-if="player.corporationCard !== undefined" class="cardbox">
-                            <card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard)"></card>
+                            <card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"></card>
                         </div>
                         <div v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
-                            <card :card="card" :actionUsed="isCardActivated(card)"></card>
+                            <card :card="card" :actionUsed="isCardActivated(card, player)"></card>
                         </div>
 
                         <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" :player="player"></stacked-cards>

@@ -14,7 +14,6 @@ import { LogPanel } from './LogPanel';
 import { PlayerMixin } from './PlayerMixin';
 import { TagCount } from './TagCount';
 import { Turmoil } from './Turmoil';
-import { CardModel } from "../models/CardModel";
 
 const dialogPolyfill = require("dialog-polyfill");
 
@@ -59,11 +58,6 @@ export const PlayerHome = Vue.component("player-home", {
                 fleetsRange.push(i);
             }
             return fleetsRange
-        },
-        isCardActivated: function (card: CardModel): boolean {
-            return this.player !== undefined
-            && this.player.actionsThisGeneration !== undefined
-            && this.player.actionsThisGeneration.indexOf(card.name) !== -1;
         }
     },
     mounted: function () {
@@ -182,10 +176,10 @@ export const PlayerHome = Vue.component("player-home", {
                     <h2 :class="'player_color_'+ player.color" v-i18n>Played Cards</h2>
 
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
-                        <card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard)"></card>
+                        <card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"></card>
                     </div>
                     <div v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
-                        <card :card="card" :actionUsed="isCardActivated(card)"> </card>
+                        <card :card="card" :actionUsed="isCardActivated(card, player)"> </card>
                     </div>
 
                     <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>

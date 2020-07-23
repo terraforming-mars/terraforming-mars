@@ -12,7 +12,6 @@ import { OrbitalCleanup } from "../../src/cards/promo/OrbitalCleanup";
 import { Recruitment } from "../../src/cards/turmoil/Recruitment";
 import { VoteOfNoConfidence } from "../../src/cards/turmoil/VoteOfNoConfidence";
 import { LawSuit } from "../../src/cards/promo/LawSuit";
-import { Game } from "../../src/Game";
 import { CrashSiteCleanup } from "../../src/cards/promo/CrashSiteCleanup";
 import { MartianSurvey } from "../../src/cards/prelude/MartianSurvey";
 import { PermafrostExtraction } from "../../src/cards/PermafrostExtraction";
@@ -27,13 +26,11 @@ import { GMOContract } from "../../src/cards/turmoil/GMOContract";
 import { PioneerSettlement } from "../../src/cards/colonies/PioneerSettlement";
 
 describe("Tactician", function () {
-  let milestone : Tactician, player : Player, player2 : Player, game : Game;
+  let milestone : Tactician, player : Player;
 
   beforeEach(function() {
     milestone = new Tactician();
       player = new Player("test", Color.BLUE, false);
-      player2 = new Player("test2", Color.RED, false);
-      game = new Game("foobar", [player, player2], player);
   });
 
   it("Can't claim without 5 cards with requirements", function () {
@@ -50,7 +47,7 @@ describe("Tactician", function () {
         player.playedCards.push(new LawSuit());
       }
       
-      expect(milestone.canClaim(player, game)).to.eq(false);
+      expect(milestone.canClaim(player)).to.eq(false);
     });
 
     it("Excludes event cards with requirements", function () {
@@ -62,7 +59,7 @@ describe("Tactician", function () {
       player.playedCards.push(new BannedDelegate());
       player.playedCards.push(new CrashSiteCleanup());
 
-      expect(milestone.canClaim(player, game)).to.eq(false);
+      expect(milestone.canClaim(player)).to.eq(false);
     });
 
     it("Can claim", function () {
@@ -72,6 +69,6 @@ describe("Tactician", function () {
       player.playedCards.push(new PioneerSettlement());
       player.playedCards.push(new GMOContract());
 
-      expect(milestone.canClaim(player, game)).to.eq(true);
+      expect(milestone.canClaim(player)).to.eq(true);
     });
 });

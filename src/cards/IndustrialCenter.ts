@@ -40,7 +40,8 @@ export class IndustrialCenter implements IActionCard, IProjectCard {
                 if (htp.megaCredits + htp.heat < 7) {
                     throw "Need to spend 7";
                 }
-                player.megaCredits -= 7;
+                player.megaCredits -= htp.megaCredits;
+                player.heat -= htp.heat;
                 player.setProduction(Resources.STEEL);
                 return undefined;
             });

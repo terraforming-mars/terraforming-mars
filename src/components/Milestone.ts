@@ -31,13 +31,15 @@ export const Milestone = Vue.component("milestone", {
             <div v-show="isVisible()">
                 <div v-for="milestone in milestones_list" :class="milestone.player_name ? 'ma-block pwned-item': 'ma-block'">
                     <div class="ma-player" v-if="milestone.player_name"><i :title="milestone.player_name" :class="'board-cube board-cube--'+milestone.player_color" /></div>
-                    <div class="ma-name--milestones" :class="getNameCss(milestone.milestone.name)" v-i18n>{{milestone.milestone.name}}</div>
-                    <div class="ma-description" v-i18n>{{milestone.milestone.description}}</div>
-                    <div v-for="score in milestone.scores.sort(
-                        (s1, s2) => s2.playerScore - s1.playerScore
-                    )" class="player_home_block--milestones-and-awards-scores">
-                        <span class="ma-score"> {{ score.playerName }}: {{ score.playerScore }}</span>
+                    <div class="ma-name--milestones" :class="getNameCss(milestone.milestone.name)" v-i18n>
+                        {{milestone.milestone.name}}
+                        <div class="ma-scores" class="player_home_block--milestones-and-awards-scores">
+                            <p v-for="score in milestone.scores.sort(
+                                (s1, s2) => s2.playerScore - s1.playerScore
+                            )" :class="'ma-score player_bg_color_'+score.playerColor">{{ score.playerScore }}</p>
+                        </div>
                     </div>
+                    <div class="ma-description" v-i18n>{{milestone.milestone.description}}</div>
                 </div>
             </div>
         </div>

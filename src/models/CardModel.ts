@@ -2,7 +2,7 @@ import { CardType } from '../cards/CardType';
 
 export interface CardModel {
     name: string;
-    resources: number;
+    resources: number | undefined;
     calculatedCost: number;
     cardType: CardType;
 }

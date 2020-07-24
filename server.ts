@@ -468,8 +468,8 @@ function getCorporationCard(player: Player): CardModel | undefined {
 
 function getPlayer(player: Player, game: Game): string {
   const output = {
-    cardsInHand: getCards(player, player.cardsInHand, game),
-    draftedCards: getCards(player, player.draftedCards, game),
+    cardsInHand: getCards(player, player.cardsInHand, game, false),
+    draftedCards: getCards(player, player.draftedCards, game, false),
     milestones: getMilestones(game),
     awards: getAwards(game),
     cardCost: player.cardCost,
@@ -529,11 +529,11 @@ function getPlayer(player: Player, game: Game): string {
   return JSON.stringify(output);
 }
 
-function getCardsAsCardModel(cards: Array<ICard>): Array<CardModel> {
+function getCardsAsCardModel(cards: Array<ICard>, showResouces: boolean = true): Array<CardModel> {
   let result:Array<CardModel> = [];
 
   cards.forEach((card) => {
-    result.push({name: card.name, resources: (card.resourceCount !== undefined ? card.resourceCount : 0), calculatedCost : 0, cardType : CardType.AUTOMATED});
+    result.push({name: card.name, resources: (card.resourceCount !== undefined && showResouces ? card.resourceCount : undefined), calculatedCost : 0, cardType : CardType.AUTOMATED});
   });
 
   return result;
@@ -574,7 +574,7 @@ function getWaitingFor(
       }
       break;
     case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_CARD:
-      result.cards = getCardsAsCardModel((waitingFor as SelectHowToPayForCard).cards);
+      result.cards = getCardsAsCardModel((waitingFor as SelectHowToPayForCard).cards, false);
       result.microbes = (waitingFor as SelectHowToPayForCard).microbes;
       result.floaters = (waitingFor as SelectHowToPayForCard).floaters;
       result.canUseHeat = (waitingFor as SelectHowToPayForCard).canUseHeat;
@@ -621,10 +621,11 @@ function getWaitingFor(
 function getCards(
     player: Player,
     cards: Array<IProjectCard>,
-    game: Game
+    game: Game,
+    showResouces: boolean = true
 ): Array<CardModel> {
   return cards.map((card) => ({
-    resources: player.getResourcesOnCard(card),
+    resources: showResouces?player.getResourcesOnCard(card):undefined,
     name: card.name,
     calculatedCost: player.getCardCost(game, card),
     cardType: card.cardType

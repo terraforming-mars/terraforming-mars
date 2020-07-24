@@ -94,8 +94,7 @@ function getCardContent(cardName: string): string {
 export const Card = Vue.component("card", {
     props: [
         "card",
-        "resources",
-        "player"
+        "actionUsed"
     ],
     methods: {
         getCardContent: function() {
@@ -106,11 +105,7 @@ export const Card = Vue.component("card", {
         },
         getCardCssClass: function (card: CardModel): string {
             var cssClass = "filterDiv card-" + card.name.toLowerCase().replace(/ /g, "-");
-            const wasActivated = (this.player !== undefined
-                                    && this.player.actionsThisGeneration !== undefined
-                                    && this.player.actionsThisGeneration.indexOf(this.card.name) !== -1
-                                ) ? true : false;
-            if (wasActivated) {
+            if (this.actionUsed) {
                 cssClass += " cards-action-was-used"
             }
             return cssClass;
@@ -118,7 +113,7 @@ export const Card = Vue.component("card", {
     },
     template: `
     <div :class="getCardCssClass(card)">
-        <div class="card_resources_counter" v-if="card.resources">RES:<span class="card_resources_counter--number"> {{ card.resources }}</span></div>
+        <div class="card_resources_counter" v-if="card.resources !== undefined">RES:<span class="card_resources_counter--number"> {{ card.resources }}</span></div>
         <div class="card-content-wrapper" v-i18n v-html=this.getCardContent()></div>
     </div>
     `

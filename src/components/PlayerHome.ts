@@ -176,10 +176,10 @@ export const PlayerHome = Vue.component("player-home", {
                     <h2 :class="'player_color_'+ player.color" v-i18n>Played Cards</h2>
 
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
-                        <card :card="player.corporationCard" :player="player"></card>
+                        <card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"></card>
                     </div>
                     <div v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
-                        <card :card="card" :player="player"></card>
+                        <card :card="card" :actionUsed="isCardActivated(card, player)"> </card>
                     </div>
 
                     <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
@@ -190,7 +190,7 @@ export const PlayerHome = Vue.component("player-home", {
                     <h2 :class="'player_color_'+ player.color" v-i18n>Self-Replicating Robots cards</h2>
                     <div>
                         <div v-for="card in getCardsByType(player.selfReplicatingRobotsCards, [getActiveCardType()])" :key="card.name" class="cardbox">
-                            <card :card="card" :player="player"></card>
+                            <card :card="card"></card>
                         </div>
                     </div>
                 </div>
@@ -260,7 +260,7 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
                 <div class="player_home_colony_cont">
                     <div class="player_home_colony" v-for="colony in player.colonies" :key="colony.name">
-                        <colony :colony="colony" :player="player"></colony>
+                        <colony :colony="colony"></colony>
                     </div>
                 </div>
             </div>

@@ -397,10 +397,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return game.getSpaceCount(TileType.CITY, this) + game.getSpaceCount(TileType.CAPITAL, this);
     }
         
-    public getResourcesOnCard(card: ICard): number {
+    public getResourcesOnCard(card: ICard): number | undefined {
       if (card.resourceCount !== undefined) {
         return card.resourceCount;
-      } else return 0;
+      } else return undefined;
     }
 
     public getResourcesOnCorporation():number {
@@ -506,7 +506,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public getResourceCount(resource: ResourceType): number {
       let count: number = 0;
       this.getCardsWithResources().filter(card => card.resourceType === resource).forEach((card) => {
-        count += this.getResourcesOnCard(card);
+        count += this.getResourcesOnCard(card)!;
       });
       return count;
     }
@@ -1203,7 +1203,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public getMicrobesCanSpend(): number {
         for (const playedCard of this.playedCards) {
             if (playedCard.name === CardName.PSYCHROPHILES) {
-                return this.getResourcesOnCard(playedCard);
+                return this.getResourcesOnCard(playedCard)!;
             }
         }
         return 0;
@@ -1213,7 +1213,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       for (const playedCard of this.playedCards) {
 
           if (playedCard.name === CardName.DIRIGIBLES) {
-              return this.getResourcesOnCard(playedCard);
+              return this.getResourcesOnCard(playedCard)!;
           }
       }
       return 0;

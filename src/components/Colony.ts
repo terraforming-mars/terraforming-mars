@@ -5,7 +5,6 @@ import { ColonyName } from '../colonies/ColonyName';
 
 export const Colony = Vue.component("colony", {
     props: [
-        "player",
         "colony"
     ],
     data: function () {

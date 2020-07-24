@@ -1,5 +1,6 @@
 import { CardModel } from '../models/CardModel';
 import { CardType } from '../cards/CardType';
+import { PlayerModel } from "../models/PlayerModel";
 // Common code for player layouts
 
 export const PlayerMixin = {
@@ -24,6 +25,12 @@ export const PlayerMixin = {
         },
         getPreludeCardType: function() {
             return CardType.PRELUDE;
+        },
+        isCardActivated: function (card: CardModel, player: PlayerModel): boolean {
+            return player !== undefined
+            && player.actionsThisGeneration !== undefined
+            && player.actionsThisGeneration.indexOf(card.name) !== -1;
         }
+        
     }
 }

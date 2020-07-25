@@ -113,14 +113,11 @@ export class GlobalEventDealer {
     public discardedGlobalEvents: Array<IGlobalEvent> = [];
 
     public initGlobalEvents(game: Game) {
-        //this.globalEventsDeck = this.shuffle(ALL_GLOBAL_EVENTS.map((cf) => new cf.factory()));
         var events;
         if (game.venusNextExtension && game.coloniesExtension) {
             events = [...COLONY_ONLY_GLOBAL_EVENTS, ...VENUS_COLONY_GLOBAL_EVENTS, ...ALL_GLOBAL_EVENTS];
         } else if (!game.venusNextExtension && game.coloniesExtension) {
             events = [...COLONY_ONLY_GLOBAL_EVENTS, ...ALL_GLOBAL_EVENTS];
-        } else if (game.venusNextExtension && !game.coloniesExtension){
-            events = [...VENUS_COLONY_GLOBAL_EVENTS, ...ALL_GLOBAL_EVENTS];
         } else {
             events = [...ALL_GLOBAL_EVENTS];
         }

@@ -291,19 +291,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
             }
           }
 
-          if (!this.corporateEra) {
-            player.setProduction(Resources.MEGACREDITS);
-            player.setProduction(Resources.STEEL);
-            player.setProduction(Resources.TITANIUM);
-            player.setProduction(Resources.PLANTS);
-            player.setProduction(Resources.ENERGY);
-            player.setProduction(Resources.HEAT);
-          }
+          this.setStartingProductions(player);
 
           if (!gameOptions.initialDraftVariant) {
             player.setWaitingFor(this.pickCorporationCard(player), () => {});
           }
         } else {
+          this.setStartingProductions(player);
           this.playCorporationCard(player, new BeginnerCorporation());
         }
       }
@@ -322,6 +316,17 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.initialDraft = true;
         this.runDraftRound(true);
         return;
+      }
+    }
+
+    private setStartingProductions(player: Player) {
+      if (!this.corporateEra) {
+        player.setProduction(Resources.MEGACREDITS);
+        player.setProduction(Resources.STEEL);
+        player.setProduction(Resources.TITANIUM);
+        player.setProduction(Resources.PLANTS);
+        player.setProduction(Resources.ENERGY);
+        player.setProduction(Resources.HEAT);
       }
     }
 

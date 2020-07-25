@@ -36,6 +36,7 @@ import { StrongSociety } from './StrongSociety';
 import { SolarFlare } from './SolarFlare';
 import { VenusInfrastructure } from './VenusInfrastructure';
 import { CloudSocieties } from './CloudSocieties';
+import { MicrogravityHealthProblems } from "./MicrogravityHealthProblems";
 
 
 
@@ -46,7 +47,8 @@ export interface IGlobalEventFactory<T> {
 
 // COLONY ONLY GLOBAL EVENT
 export const COLONY_ONLY_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
-    { globalEventName: GlobalEventName.JOVIAN_TAX_RIGHTS , factory: JovianTaxRights }
+    { globalEventName: GlobalEventName.JOVIAN_TAX_RIGHTS , factory: JovianTaxRights },
+    { globalEventName: GlobalEventName.MICROGRAVITY_HEALTH_PROBLEMS , factory: MicrogravityHealthProblems },
 ];    
 
 export const VENUS_COLONY_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [

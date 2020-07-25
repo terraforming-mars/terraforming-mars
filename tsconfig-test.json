@@ -437,6 +437,7 @@
         "tests/globalEvents/AquiferReleasedByPublicCouncil.spec.ts",
         "tests/globalEvents/ParadigmBreakdown.spec.ts",
         "tests/globalEvents/CorrosiveRain.spec.ts",
+        "tests/globalEvents/MicrogravityHealthProblems.spec.ts",
         "tests/cards/turmoil/AerialLenses.spec.ts"
     ]
 }

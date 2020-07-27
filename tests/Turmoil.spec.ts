@@ -20,6 +20,10 @@ import { IceAsteroid } from "../src/cards/IceAsteroid";
 import { ProtectedValley } from "../src/cards/ProtectedValley";
 import { MagneticFieldGeneratorsPromo } from "../src/cards/promo/MagneticFieldGeneratorsPromo";
 import { Resources } from "../src/Resources";
+import { NitrogenFromTitan } from "../src/cards/colonies/NitrogenFromTitan";
+import { SpaceStation } from "../src/cards/SpaceStation";
+import { EarthCatapult } from "../src/cards/EarthCatapult";
+import { QuantumExtractor } from "../src/cards/QuantumExtractor";
 
 describe("Turmoil", function () {
     let player : Player, game : Game, turmoil: Turmoil;
@@ -173,5 +177,20 @@ describe("Turmoil", function () {
         maxOutOceans(player, game, 9);
         expect(protectedValley.canPlay(player, game)).to.eq(true);
         expect(iceAsteroid.canPlay(player, game)).to.eq(true);
+    });
+
+    it("Applies card discounts when checking canPlay while Reds are ruling", function () {
+        turmoil.rulingParty = new Reds();
+        const nitrogenFromTitan = new NitrogenFromTitan();
+
+        player.megaCredits = 29;
+        expect(nitrogenFromTitan.canPlay(player, game)).to.eq(false); // needs 31 MC
+
+        player.playedCards.push(new SpaceStation());
+        expect(nitrogenFromTitan.canPlay(player, game)).to.eq(true); // 25 + 6 - 2
+
+        player.playedCards.push(new EarthCatapult(), new QuantumExtractor());
+        player.megaCredits = 25;
+        expect(nitrogenFromTitan.canPlay(player, game)).to.eq(true); // 25 + 6 - 6
     });
 });

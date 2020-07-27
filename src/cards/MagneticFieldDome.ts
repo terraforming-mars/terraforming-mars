@@ -16,10 +16,10 @@ export class MagneticFieldDome implements IProjectCard {
     public name: CardName = CardName.MAGNETIC_FIELD_DOME;
     public hasRequirements = false;
 
-    public canPlay(player: Player, game: Game) {
+    public canPlay(player: Player, game: Game): boolean {
         const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 2;
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-          return player.canAfford(this.cost + REDS_RULING_POLICY_COST, game, true) && hasEnergyProduction;
+          return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, true) && hasEnergyProduction;
         }
   
         return hasEnergyProduction;

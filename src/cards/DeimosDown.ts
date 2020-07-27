@@ -16,12 +16,12 @@ export class DeimosDown implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public hasRequirements = false;
 
-    public canPlay(player: Player, game: Game) {
+    public canPlay(player: Player, game: Game): boolean {
       const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;
       const stepsRaised = Math.min(remainingTemperatureSteps, 3);
 
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(this.cost + REDS_RULING_POLICY_COST * stepsRaised, game, false, true);
+        return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * stepsRaised, game, false, true);
       }
 
       return true;

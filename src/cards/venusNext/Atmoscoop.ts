@@ -20,7 +20,7 @@ export class Atmoscoop implements IProjectCard {
     public name: CardName = CardName.ATMOSCOOP;
     public cardType: CardType = CardType.AUTOMATED;
 
-    public canPlay(player: Player, game: Game) {
+    public canPlay(player: Player, game: Game): boolean {
         const meetsTagRequirements = player.getTagCount(Tags.SCIENCE) >= 3;
         const remainingTemperatureSteps = (constants.MAX_TEMPERATURE - game.getTemperature()) / 2;
         const remainingVenusSteps = (constants.MAX_VENUS_SCALE - game.getVenusScaleLevel()) / 2;

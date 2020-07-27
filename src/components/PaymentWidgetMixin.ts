@@ -54,6 +54,8 @@ export const PaymentWidgetMixin = {
             if (target === "floaters") maxValue = (this as any).playerinput.floaters;
             if (currentValue === maxValue) return;
 
+            if (target !== "megaCredits" && (this as any)["megaCredits"] === 0) return;
+            
             const realTo = (currentValue + to <= maxValue) ? to : maxValue - currentValue;
             (this as any)[target] += realTo;
 

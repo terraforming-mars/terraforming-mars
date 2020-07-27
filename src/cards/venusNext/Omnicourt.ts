@@ -14,10 +14,10 @@ export class Omnicourt implements IProjectCard {
     public name: CardName = CardName.OMNICOURT;
     public cardType: CardType = CardType.AUTOMATED;
     
-    public canPlay(player: Player, game: Game) {
+    public canPlay(player: Player, game: Game): boolean {
       const hasRequiredTags = player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH, Tags.JOVIAN]);
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-        return player.canAfford(this.cost + REDS_RULING_POLICY_COST * 2, game, true) && hasRequiredTags;
+        return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * 2, game, true) && hasRequiredTags;
       }
 
       return hasRequiredTags;

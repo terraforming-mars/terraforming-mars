@@ -34,7 +34,7 @@ export const Award = Vue.component("award", {
             </div>
             
             <div v-show="isVisible()">
-                <div :id="award.award.name" title="press to show or hide the description" v-on:click.prevent="toggleMADescription(award.award.name)" v-for="award in awards_list" :class="award.player_name ? 'ma-block pwned-item': 'ma-block'">
+                <div :id="award.award.name" title="press to show or hide the description" v-on:click.prevent="toggleMADescription(award.award.name)" v-for="award in awards_list" class="ma-block">
                     <div class="ma-player" v-if="award.player_name"><i :title="award.player_name" :class="'board-cube board-cube--'+award.player_color" /></div>
                     <div class="ma-name--awards" :class="getNameCss(award.award.name)" v-i18n>
                         {{award.award.name}}

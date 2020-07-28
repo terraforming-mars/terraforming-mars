@@ -800,10 +800,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           floaters: 0,
           isResearchPhase: false,
         };
-        if (this.canUseHeatAsMegaCredits) {
-          payMethod.heat = 0;
-        }
-
+        if (!this.canUseHeatAsMegaCredits) payMethod.heat = 0;
+        
         try {
           const parsedInput: {[x: string]: number} =
                     JSON.parse(input[0][0]);

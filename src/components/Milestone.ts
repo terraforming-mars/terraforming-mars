@@ -17,6 +17,9 @@ export const Milestone = Vue.component("milestone", {
         getNameCss: function(milestoneName: string): string {
             return "ma-name ma-name--" +  milestoneName.replace(/ /g, "-").toLowerCase();
         },
+        getNameId: function(awardName: string): string {
+            return awardName.replace(/ /g, "");
+        },
         toggleMADescription: function(milestoneName: string) {
             //TODO - rework this with v-show?
             document.querySelector(`#${milestoneName} > .ma-description`)?.classList.toggle("ma-description-hidden");
@@ -33,7 +36,7 @@ export const Milestone = Vue.component("milestone", {
                 </span>
             </div>
             <div v-show="isVisible()">
-                <div :id="milestone.milestone.name" title="press to show or hide the description" v-on:click.prevent="toggleMADescription(milestone.milestone.name)" v-for="milestone in milestones_list" :class="milestone.player_name ? 'ma-block pwned-item': 'ma-block'">
+                <div :id="getNameId(milestone.milestone.name)" title="press to show or hide the description" v-on:click.prevent="toggleMADescription(getNameId(milestone.milestone.name))" v-for="milestone in milestones_list" :class="milestone.player_name ? 'ma-block pwned-item': 'ma-block'">
                     <div class="ma-player" v-if="milestone.player_name"><i :title="milestone.player_name" :class="'board-cube board-cube--'+milestone.player_color" /></div>
                     <div class="ma-name--milestones" :class="getNameCss(milestone.milestone.name)" v-i18n>
                         {{milestone.milestone.name}}

@@ -49,6 +49,10 @@ export const PaymentWidgetMixin = {
             } else if (target === "megaCredits") {
                 maxValue = this.getMegaCreditsMax();
             }
+
+            if (isResearchPhase && target === "heat") {
+                maxValue = (this as any).player.cardCost * 4;
+            }
             
             if (target === "microbes") maxValue = (this as any).playerinput.microbes;
             if (target === "floaters") maxValue = (this as any).playerinput.floaters;

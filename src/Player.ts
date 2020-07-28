@@ -1009,11 +1009,14 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       let selectedCards: Array<IProjectCard> = [];
 
       const payForCards = () => {
+        const purchasedCardsCost = this.cardCost * selectedCards.length;
+
         if (htp.heat > 0 && this.canUseHeatAsMegaCredits) {
-          this.heat -= htp.heat;
-          this.megaCredits -= (this.cardCost * selectedCards.length - htp.heat);
+          this.heat -= Math.min(htp.heat, purchasedCardsCost); // prevent overspending
+          let megaCreditsToRemove = purchasedCardsCost - htp.heat;
+          if (megaCreditsToRemove > 0) this.megaCredits -= megaCreditsToRemove;
         } else {
-          this.megaCredits -= this.cardCost * selectedCards.length;
+          this.megaCredits -= purchasedCardsCost;
         }  
         selectedCards.forEach((card) => {
           this.cardsInHand.push(card);

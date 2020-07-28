@@ -32,10 +32,10 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
     mounted: function () {
       let app = this;
       Vue.nextTick(function () {
-        app.$data.cost = app.playerinput.amount;
-        app.$data.megaCredits = (app as any).getMegaCreditsMax();
         app.$data.isResearchPhase = app.playerinput.title === "Select how to pay for cards";
-
+        app.setInitialCost();
+        app.$data.megaCredits = (app as any).getMegaCreditsMax();
+        
         app.setDefaultSteelValue();
         app.setDefaultTitaniumValue();
         app.setDefaultHeatValue();
@@ -44,6 +44,13 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
     methods: {
         hasWarning: function () {
             return this.$data.warning !== undefined;
+        },
+        setInitialCost: function() {
+          if (this.$data.isResearchPhase) {
+            this.playerinput.amount = this.player.cardCost * 4;
+          }
+          
+          this.$data.cost = this.playerinput.amount;
         },
         setDefaultSteelValue: function() {
           // automatically use available steel to pay if not enough MC
@@ -100,7 +107,6 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
           } else {
               this.$data.heat = 0;
           }
-
           let discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue) - this.$data.heat;
           this.$data.megaCredits = Math.max(discountedCost, 0);
         },
@@ -146,8 +152,8 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
 
             const requiredAmt =  this.playerinput.amount;
             const totalSpentAmt = htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) + (htp.microbes * 2) + (htp.floaters * 3);
-            
-            if (requiredAmt > 0 && totalSpentAmt < requiredAmt) {
+
+            if (requiredAmt > 0 && totalSpentAmt < requiredAmt && !htp.isResearchPhase) {
                 this.$data.warning = "Haven't spent enough";
                 return;
             }

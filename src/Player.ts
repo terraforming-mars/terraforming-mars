@@ -800,9 +800,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           floaters: 0,
           isResearchPhase: false,
         };
-        if (this.canUseHeatAsMegaCredits) {
-          payMethod.heat = 0;
-        }
+        if (!this.canUseHeatAsMegaCredits) payMethod.heat = 0;
+        
         try {
           const parsedInput: {[x: string]: number} =
                     JSON.parse(input[0][0]);
@@ -830,6 +829,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           }
           if (parsedInput.microbes !== undefined) {
               payMethod.microbes = parsedInput.microbes;
+          }
+          if (parsedInput.isResearchPhase !== undefined) {
+            payMethod.isResearchPhase = (parsedInput.isResearchPhase) as any;
           }
         } catch (err) {
           throw new Error("Unable to parse input " + err);
@@ -1001,17 +1003,20 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         megaCredits: 0,
         microbes: 0,
         floaters: 0,
-        isResearchPhase: false,
+        isResearchPhase: true,
       };
 
       let selectedCards: Array<IProjectCard> = [];
 
       const payForCards = () => {
+        const purchasedCardsCost = this.cardCost * selectedCards.length;
+
         if (htp.heat > 0 && this.canUseHeatAsMegaCredits) {
-          this.heat -= htp.heat;
-          this.megaCredits -= (this.cardCost * selectedCards.length - htp.heat);
+          this.heat -= Math.min(htp.heat, purchasedCardsCost); // prevent overspending
+          let megaCreditsToRemove = purchasedCardsCost - htp.heat;
+          if (megaCreditsToRemove > 0) this.megaCredits -= megaCreditsToRemove;
         } else {
-          this.megaCredits -= this.cardCost * selectedCards.length;
+          this.megaCredits -= purchasedCardsCost;
         }  
         selectedCards.forEach((card) => {
           this.cardsInHand.push(card);

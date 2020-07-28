@@ -82,7 +82,7 @@ export class OriginalBoard extends Board {
                     let land_id = Number(land) - 3;
                     while (is_ocean[land_id]) {
                         satisfy = false;
-                        let idx = Math.floor(this.mulberry32() * (land_list.length + 1));
+                        let idx = Math.floor(this.mulberry32() * (is_ocean.length + 1));
                         [is_ocean[land_id], is_ocean[idx]] = [is_ocean[idx], is_ocean[land_id]];
                     }
                 }

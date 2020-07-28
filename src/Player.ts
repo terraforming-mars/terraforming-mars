@@ -803,6 +803,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         if (this.canUseHeatAsMegaCredits) {
           payMethod.heat = 0;
         }
+
         try {
           const parsedInput: {[x: string]: number} =
                     JSON.parse(input[0][0]);
@@ -830,6 +831,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           }
           if (parsedInput.microbes !== undefined) {
               payMethod.microbes = parsedInput.microbes;
+          }
+          if (parsedInput.isResearchPhase !== undefined) {
+            payMethod.isResearchPhase = (parsedInput.isResearchPhase) as any;
           }
         } catch (err) {
           throw new Error("Unable to parse input " + err);
@@ -1001,7 +1005,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         megaCredits: 0,
         microbes: 0,
         floaters: 0,
-        isResearchPhase: false,
+        isResearchPhase: true,
       };
 
       let selectedCards: Array<IProjectCard> = [];

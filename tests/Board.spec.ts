@@ -36,4 +36,9 @@ describe("Board", function () {
         const availableSpaces = board.getAvailableSpacesForGreenery(player1);
         expect(availableSpaces.length).to.eq(1);
     });
+    it("doesnt block node process when bug with getRandomCitySpace", function () {
+        const board = new OriginalBoard();
+        (board as any).canPlaceTile = function () { return false; };
+        expect(function () { board.getRandomCitySpace(0); }).to.throw("space not found for getRandomCitySpace");
+    });
 });

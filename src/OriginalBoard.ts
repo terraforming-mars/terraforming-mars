@@ -1,6 +1,6 @@
 import { SpaceBonus } from "./SpaceBonus";
 import { SpaceName } from "./SpaceName";
-import { Board, Land, BoardColony, Space } from "./Board";
+import { Board, Land, BoardColony } from "./Board";
 import { Player } from "./Player";
 import { ISpace } from "./ISpace";
 
@@ -12,8 +12,8 @@ export class OriginalBoard extends Board {
         this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY));
         this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));
 
-        let is_ocean = [];
-        let bonus = [];
+        const is_ocean: Array<boolean> = [];
+        const bonus: Array<Array<SpaceBonus>> = [];
         // y=0
         is_ocean.push(false, true, false, true, true);
         bonus.push([SpaceBonus.STEEL, SpaceBonus.STEEL], [SpaceBonus.STEEL, SpaceBonus.STEEL], [], [SpaceBonus.DRAW_CARD], []);
@@ -73,21 +73,7 @@ export class OriginalBoard extends Board {
         bonus.push([SpaceBonus.STEEL], [SpaceBonus.STEEL, SpaceBonus.STEEL], [], [], [SpaceBonus.TITANIUM, SpaceBonus.TITANIUM]);
 
         if (shuffleMapOption) {
-            this.shuffleArray(is_ocean);
-            this.shuffleArray(bonus);
-            while (true) {
-                let satisfy = true;
-                let land_list = [SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS];
-                for (let land of land_list) {
-                    let land_id = Number(land) - 3;
-                    while (is_ocean[land_id]) {
-                        satisfy = false;
-                        let idx = Math.floor(this.mulberry32() * (is_ocean.length + 1));
-                        [is_ocean[land_id], is_ocean[idx]] = [is_ocean[idx], is_ocean[land_id]];
-                    }
-                }
-                if (satisfy) break;
-            }
+            this.shuffleMap(is_ocean, bonus, [SpaceName.NOCTIS_CITY, SpaceName.THARSIS_THOLUS, SpaceName.ASCRAEUS_MONS, SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS]);
         }
 
         let pos_x = 4, pos_y = 0;
@@ -153,19 +139,9 @@ export class OriginalBoard extends Board {
     public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
         return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.NOCTIS_CITY);
     }
-    public getRandomCitySpace(offset: number): Space {
-        while (true) {
-            let space = super.getRandomSpace(offset);
-            if (this.canPlaceTile(space) && this.getAdjacentSpaces(space).find(sp => this.canPlaceTile(sp)) !== undefined) {
-                return space;
-            }
-        }
-    }
-
     protected canPlaceTile(space: ISpace): boolean {
         return space !== undefined && space.tile === undefined && space instanceof Land && space.id !== SpaceName.NOCTIS_CITY;
     }
-
     public getForestSpace(spaces: Array<ISpace>): ISpace {
         const space = super.shuffle(spaces).find((s) => this.canPlaceTile(s));
         if (space === undefined) {

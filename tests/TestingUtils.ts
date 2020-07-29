@@ -1,7 +1,8 @@
 import { Player } from "../src/Player";
-import { Game } from "../src/Game";
+import { Game, GameOptions } from "../src/Game";
 import * as constants from "../src/constants"
 import { SpaceType } from "../src/SpaceType";
+import { BoardName } from "../src/BoardName";
 
 export const maxOutOceans = function(player: Player, game: Game, toValue: number = 0): void {
     if (toValue < 1) {
@@ -21,3 +22,29 @@ export const resetBoard = function(game: Game): void {
         space.tile = undefined;
     });
 };
+
+export const setCustomGameOptions = function(options: object = {}): GameOptions {
+    const defaultOptions = {
+        draftVariant: false,
+        initialDraftVariant: false,
+        corporateEra: true,
+        randomMA: false,
+        preludeExtension: false,
+        venusNextExtension: true,
+        coloniesExtension: false,
+        turmoilExtension: true,
+        boardName: BoardName.ORIGINAL,
+        showOtherPlayersVP: false,
+        customCorporationsList: [],
+        solarPhaseOption: false,
+        shuffleMapOption: false,
+        promoCardsOption: false,
+        undoOption: false,
+        startingCorporations: 2,
+        includeVenusMA: true,
+        soloTR: false,
+        clonedGamedId: undefined
+      };
+      
+    return Object.assign(defaultOptions, options) as GameOptions;
+}

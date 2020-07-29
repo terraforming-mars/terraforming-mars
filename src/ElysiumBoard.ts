@@ -9,8 +9,8 @@ export class ElysiumBoard extends Board {
         this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY));
         this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));
 
-        let is_ocean = [];
-        let bonus = [];
+        const is_ocean: Array<boolean> = [];
+        const bonus: Array<Array<SpaceBonus>> = [];
         // y=0
         is_ocean.push(true, true, true, true, false);
         bonus.push([],
@@ -80,23 +80,7 @@ export class ElysiumBoard extends Board {
         bonus.push([SpaceBonus.STEEL], [], [SpaceBonus.DRAW_CARD], [SpaceBonus.DRAW_CARD], [SpaceBonus.STEEL, SpaceBonus.STEEL]);
         
         if (shuffleMapOption) {
-            this.shuffleArray(is_ocean);
-            this.shuffleArray(bonus);
-            while (true) {
-                let satisfy = true;
-                let land_list: Array<SpaceName> = [
-                    SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS
-                ];
-                for (let land of land_list) {
-                    let land_id = Number(land) - 3;
-                    while (is_ocean[land_id]) {
-                        satisfy = false;
-                        let idx = Math.floor(this.mulberry32() * (is_ocean.length + 1));
-                        [is_ocean[land_id], is_ocean[idx]] = [is_ocean[idx], is_ocean[land_id]];
-                    }
-                }
-                if (satisfy) break;
-            }
+            this.shuffleMap(is_ocean, bonus, [SpaceName.HECATES_THOLUS, SpaceName.ELYSIUM_MONS, SpaceName.ARSIA_MONS_ELYSIUM, SpaceName.OLYMPUS_MONS]);
         }
 
         let idx = 3, me_id = 0;

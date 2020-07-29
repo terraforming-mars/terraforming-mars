@@ -209,7 +209,7 @@ export abstract class Board {
         // avoid bugs which would lock node process
         while (safety < 1000) {
             let space = this.getRandomSpace(offset);
-            if (this.canPlaceTile(space) && this.getAdjacentSpaces(space).find(sp => this.canPlaceTile(sp)) !== undefined) {
+            if (this.canPlaceTile(space) && this.getAdjacentSpaces(space).filter(sp => sp.tile?.tileType === TileType.CITY).length === 0 && this.getAdjacentSpaces(space).find(sp => this.canPlaceTile(sp)) !== undefined) {
                 return space;
             }
             safety++;

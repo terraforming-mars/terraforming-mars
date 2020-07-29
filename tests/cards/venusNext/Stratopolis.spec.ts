@@ -7,7 +7,7 @@ import { Resources } from "../../../src/Resources";
 import { AerialMappers } from '../../../src/cards/venusNext/AerialMappers';
 import { SelectCard } from '../../../src/inputs/SelectCard';
 import { Research } from "../../../src/cards/Research";
-import { BoardName } from "../../../src/BoardName";
+import { setCustomGameOptions } from "../../TestingUtils";
 
 describe("Stratopolis", function () {
     let card : Stratopolis, player : Player, game : Game;
@@ -16,27 +16,7 @@ describe("Stratopolis", function () {
         card = new Stratopolis();
         player = new Player("test", Color.BLUE, false);
 
-        const gameOptions = {
-            draftVariant: false,
-            initialDraftVariant: false,
-            corporateEra: true,
-            randomMA: false,
-            preludeExtension: false,
-            venusNextExtension: true,
-            coloniesExtension: false,
-            turmoilExtension: false,
-            boardName: BoardName.ORIGINAL,
-            showOtherPlayersVP: false,
-            customCorporationsList: [],
-            solarPhaseOption: false,
-            shuffleMapOption: false,
-            promoCardsOption: false,
-            undoOption: false,
-            startingCorporations: 2,
-            includeVenusMA: true,
-            soloTR: false,
-            clonedGamedId: undefined
-          } as GameOptions;
+        const gameOptions = setCustomGameOptions() as GameOptions;
         game = new Game("foobar", [player,player], player, gameOptions);
     });
 

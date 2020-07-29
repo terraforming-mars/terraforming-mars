@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { Color } from "../src/Color";
 import { Game, GameOptions } from "../src/Game";
@@ -11,7 +10,7 @@ import * as constants from "../src/constants";
 import { Birds } from "../src/cards/Birds";
 import { WaterImportFromEuropa } from "../src/cards/WaterImportFromEuropa";
 import { Phase } from "../src/Phase";
-import { maxOutOceans } from "./TestingUtils";
+import { maxOutOceans, setCustomGameOptions } from "./TestingUtils";
 import { SaturnSystems } from "../src/cards/corporation/SaturnSystems";
 import { Resources } from '../src/Resources';
 import { ISpace } from "../src/ISpace";
@@ -19,7 +18,6 @@ import { ResearchNetwork } from '../src/cards/prelude/ResearchNetwork';
 import { ArcticAlgae } from "../src/cards/ArcticAlgae";
 import { Ecologist } from '../src/milestones/Ecologist';
 import { Dealer } from "../src/Dealer";
-import { BoardName } from "../src/BoardName";
 import { OrOptions } from "../src/inputs/OrOptions";
 
 describe("Game", function () {
@@ -43,27 +41,7 @@ describe("Game", function () {
 
     it("sets starting production if corporate era not selected", function() {
         const player = new Player("test", Color.BLUE, false);
-        const gameOptions = {
-            draftVariant: false,
-            initialDraftVariant: false,
-            corporateEra: false,
-            randomMA: false,
-            preludeExtension: false,
-            venusNextExtension: true,
-            coloniesExtension: false,
-            turmoilExtension: true,
-            boardName: BoardName.ORIGINAL,
-            showOtherPlayersVP: false,
-            customCorporationsList: [],
-            solarPhaseOption: false,
-            shuffleMapOption: false,
-            promoCardsOption: false,
-            undoOption: false,
-            startingCorporations: 2,
-            includeVenusMA: true,
-            soloTR: false,
-            clonedGamedId: undefined
-          } as GameOptions;
+        const gameOptions = setCustomGameOptions({corporateEra: false}) as GameOptions;
 
         new Game("foobar", [player], player, gameOptions);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);

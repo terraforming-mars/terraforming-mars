@@ -2,10 +2,10 @@ import { expect } from "chai";
 import { PoliticalAlliance } from "../../../src/cards/turmoil/PoliticalAlliance";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
-import { BoardName } from '../../../src/BoardName';
 import { GameOptions, Game } from '../../../src/Game';
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { Turmoil } from "../../../src/turmoil/Turmoil";
+import { setCustomGameOptions } from "../../TestingUtils";
 
 describe("PoliticalAlliance", function () {
     let card : PoliticalAlliance, player : Player, game : Game, turmoil: Turmoil;
@@ -13,31 +13,10 @@ describe("PoliticalAlliance", function () {
     beforeEach(function() {
         card = new PoliticalAlliance();
         player = new Player("test", Color.BLUE, false);
-        
-        const gameOptions = {
-            draftVariant: false,
-            initialDraftVariant: false,
-            corporateEra: true,
-            randomMA: false,
-            preludeExtension: false,
-            venusNextExtension: true,
-            coloniesExtension: false,
-            turmoilExtension: true,
-            boardName: BoardName.ORIGINAL,
-            showOtherPlayersVP: false,
-            customCorporationsList: [],
-            solarPhaseOption: false,
-            shuffleMapOption: false,
-            promoCardsOption: false,
-            undoOption: false,
-            includeVenusMA: false,
-            startingCorporations: 2,
-            soloTR: false,
-            clonedGamedId: undefined
-          } as GameOptions;
-        
-          game = new Game("foobar", [player, player], player, gameOptions);
-          turmoil = game.turmoil!
+
+        const gameOptions = setCustomGameOptions() as GameOptions;
+        game = new Game("foobar", [player, player], player, gameOptions);
+        turmoil = game.turmoil!
     });
 
     it("Can't play", function () {

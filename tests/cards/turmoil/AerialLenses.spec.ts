@@ -3,10 +3,10 @@ import { AerialLenses } from "../../../src/cards/turmoil/AerialLenses";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
 import { Resources } from "../../../src/Resources";
-import { BoardName } from '../../../src/BoardName';
 import { GameOptions, Game } from '../../../src/Game';
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { OrOptions } from "../../../src/inputs/OrOptions";
+import { setCustomGameOptions } from "../../TestingUtils";
 
 describe("AerialLenses", function () {
     let card : AerialLenses, player : Player, player2 : Player, game : Game;
@@ -15,30 +15,9 @@ describe("AerialLenses", function () {
         card = new AerialLenses();
         player = new Player("test", Color.BLUE, false);
         player2 = new Player("test2", Color.RED, false);
-        
-        const gameOptions = {
-            draftVariant: false,
-            initialDraftVariant: false,
-            corporateEra: true,
-            randomMA: false,
-            preludeExtension: false,
-            venusNextExtension: true,
-            coloniesExtension: false,
-            turmoilExtension: true,
-            boardName: BoardName.ORIGINAL,
-            showOtherPlayersVP: false,
-            customCorporationsList: [],
-            solarPhaseOption: false,
-            shuffleMapOption: false,
-            promoCardsOption: false,
-            undoOption: false,
-            startingCorporations: 2,
-            includeVenusMA: true,
-            soloTR: false,
-            clonedGamedId: undefined
-          } as GameOptions;
-        
-          game = new Game("foobar", [player, player2], player, gameOptions);  
+
+        const gameOptions = setCustomGameOptions() as GameOptions;
+        game = new Game("foobar", [player, player2], player, gameOptions);  
     });
 
     it("Can play", function () {

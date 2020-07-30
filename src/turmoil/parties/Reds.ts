@@ -23,7 +23,7 @@ export class Reds extends Party implements IParty {
         // Different ruling if we only have on player
         else {
             const player = game.getPlayers()[0];
-            if(player.getTerraformRating() < 20) {
+            if(player.getTerraformRating() <= 20) {
                 player.increaseTerraformRating(game);
             }
         }

@@ -6,7 +6,7 @@ import { Turmoil } from '../Turmoil';
 import { MAX_TEMPERATURE } from '../../constants';
 
 export class SnowCover implements IGlobalEvent {
-    public name = GlobalEventName.SPONSORED_PROJECTS;
+    public name = GlobalEventName.SNOW_COVER;
     public description = "Decrease temperature 2 steps. Draw 1 card per influence.";
     public revealedDelegate = PartyName.KELVINISTS;
     public currentDelegate = PartyName.KELVINISTS;

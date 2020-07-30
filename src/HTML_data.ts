@@ -6097,7 +6097,7 @@ export const HTML_DATA: Map<string, string> =
           <div class="red-arrow"></div> <div class="asteroid resource">A</div> * / <div class="resource " style="background:white;">?</div> OR <br>
           <div class="asteroid resource">A</div><div class="red-arrow"></div> 3 <div class="resource titanium"></div>
           <div class="description" style="text-align:center;">
-            (Action: Add an asteroid resource to ANY card and gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.)<br>
+            (Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.)<br>
           </div>
         </div>
         <div class="astrodrill">Astrodrill</div>

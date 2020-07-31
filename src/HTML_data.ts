@@ -3100,7 +3100,9 @@ export const HTML_DATA: Map<string, string> =
               <div class="description ">
                   (Action: Spend 2 MC to draw a card.)
               </div><br>
-              <div class="tile special-tile" style="font-size:36px;"><div style="margin-left:15px;">&#x20e0;</div></div>
+              <div class="tile special-tile" style="padding-top: 4px;
+              padding-bottom: 4px;
+              padding-left: 6px;"><div class="restricted-area-tile"></div></div>
               <div class="description ">
                 (Place this tile.)
               </div>

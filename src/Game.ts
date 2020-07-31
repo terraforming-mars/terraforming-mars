@@ -268,7 +268,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
         const player = players[i];
         const remainingPlayers = this.players.length - i;
         
-        if (!player.beginner) {
+        if (!player.beginner ||
+          // Bypass beginner choice if any extension is choosen
+              gameOptions.preludeExtension || 
+              gameOptions.venusNextExtension || 
+              gameOptions.coloniesExtension || 
+              gameOptions.turmoilExtension ||
+              gameOptions.initialDraftVariant) {
           // Failsafe for exceding corporation pool
           if (this.startingCorporations * remainingPlayers > corporationCards.length) {
             this.startingCorporations = 2;
@@ -298,7 +304,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
         } else {
           this.setStartingProductions(player);
-          this.playCorporationCard(player, new BeginnerCorporation());
+          this.playerHasPickedCorporationCard(player, new BeginnerCorporation() );
         }
       }
 

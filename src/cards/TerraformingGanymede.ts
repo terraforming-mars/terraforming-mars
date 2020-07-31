@@ -18,11 +18,11 @@ export class TerraformingGanymede implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
 
-    public canPlay(player: Player, game: Game) {
+    public canPlay(player: Player, game: Game): boolean {
         const steps = 1 + player.getTagCount(Tags.JOVIAN);
 
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-            return player.canAfford(this.cost + REDS_RULING_POLICY_COST * steps, game, false, true);
+            return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * steps, game, false, true);
         }
     
         return true;

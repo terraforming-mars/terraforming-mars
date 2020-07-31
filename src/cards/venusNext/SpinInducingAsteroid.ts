@@ -14,11 +14,11 @@ export class SpinInducingAsteroid implements IProjectCard {
     public name: CardName = CardName.SPIN_INDUCING_ASTEROID;
     public cardType: CardType = CardType.EVENT;
 
-    public canPlay(player: Player, game: Game) {
+    public canPlay(player: Player, game: Game): boolean {
         const meetsVenusRequirements = game.getVenusScaleLevel() - (2 * player.getRequirementsBonus(game, true)) <= 10;
         
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-          return player.canAfford(this.cost + REDS_RULING_POLICY_COST * 2, game, false, true) && meetsVenusRequirements;
+          return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * 2, game, false, true) && meetsVenusRequirements;
         }
   
         return meetsVenusRequirements;

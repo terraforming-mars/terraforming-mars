@@ -27,7 +27,7 @@ export class LargeConvoy implements IProjectCard {
         const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
     
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
-          return player.canAfford(this.cost + REDS_RULING_POLICY_COST, game, false, true);
+          return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, false, true);
         }
     
         return true;

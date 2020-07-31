@@ -4,10 +4,10 @@ import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
 import { Game, GameOptions } from '../../../src/Game';
 import { Resources } from "../../../src/Resources";
-import { BoardName } from "../../../src/BoardName";
 import { Turmoil } from "../../../src/turmoil/Turmoil";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { PLAYER_DELEGATES_COUNT } from "../../../src/constants";
+import { setCustomGameOptions } from "../../TestingUtils";
 
 describe("Cultural Metropolis", function () {
     let card : CulturalMetropolis, player : Player, player2 : Player, game : Game, turmoil: Turmoil;;
@@ -17,30 +17,9 @@ describe("Cultural Metropolis", function () {
         player = new Player("test", Color.BLUE, false);
         player2 = new Player("test2", Color.RED, false);
         
-        const gameOptions = {
-            draftVariant: false,
-            initialDraftVariant: false,
-            corporateEra: true,
-            randomMA: false,
-            preludeExtension: false,
-            venusNextExtension: true,
-            coloniesExtension: false,
-            turmoilExtension: true,
-            boardName: BoardName.ORIGINAL,
-            showOtherPlayersVP: false,
-            customCorporationsList: [],
-            solarPhaseOption: false,
-            shuffleMapOption: false,
-            promoCardsOption: false,
-            undoOption: false,
-            startingCorporations: 2,
-            includeVenusMA: true,
-            soloTR: false,
-            clonedGamedId: undefined
-          } as GameOptions;
-        
-          game = new Game("foobar", [player, player2], player, gameOptions);
-          turmoil = game.turmoil!;
+        const gameOptions = setCustomGameOptions() as GameOptions;
+        game = new Game("foobar", [player, player2], player, gameOptions);
+        turmoil = game.turmoil!;
     });
 
     it("Can't play without energy production", function () {

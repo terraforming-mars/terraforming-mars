@@ -3,36 +3,16 @@ import { SeptumTribus } from "../../../src/cards/turmoil/SeptumTribus";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game, GameOptions } from '../../../src/Game';
-import { BoardName } from "../../../src/BoardName";
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
+import { setCustomGameOptions } from "../../TestingUtils";
 
 describe("SeptumTribus", function () {
     it("Should play", function () {
         const card = new SeptumTribus();        
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test", Color.RED, false);
-        const gameOptions = {
-            draftVariant: false,
-            corporateEra: true,
-            preludeExtension: false,
-            venusNextExtension: false,
-            coloniesExtension: false,
-            turmoilExtension: true,
-            boardName: BoardName.ORIGINAL,
-            showOtherPlayersVP: false,
-            customCorporationsList: [],
-            solarPhaseOption: false,
-            shuffleMapOption: false,
-            promoCardsOption: false,
-            undoOption: false,
-            startingCorporations: 2,
-            includeVenusMA: true,
-            soloTR: false,
-            clonedGamedId: undefined,
-            initialDraftVariant: false,
-            randomMA: false
-          } as GameOptions;
 
+        const gameOptions = setCustomGameOptions() as GameOptions;
         const game = new Game("foobar", [player,player2], player, gameOptions);
         card.play();
 
@@ -59,30 +39,11 @@ describe("SeptumTribus", function () {
     it("Cannot act without Turmoil expansion", function () {
         const card = new SeptumTribus();        
         const player = new Player("test", Color.BLUE, false);
-        const gameOptions = {
-            draftVariant: false,
-            corporateEra: true,
-            preludeExtension: false,
-            venusNextExtension: false,
-            coloniesExtension: false,
-            turmoilExtension: false,
-            boardName: BoardName.ORIGINAL,
-            showOtherPlayersVP: false,
-            customCorporationsList: [],
-            solarPhaseOption: false,
-            shuffleMapOption: false,
-            promoCardsOption: false,
-            undoOption: false,
-            startingCorporations: 2,
-            includeVenusMA: true,
-            soloTR: false,
-            clonedGamedId: undefined,
-            initialDraftVariant: false,
-            randomMA: false
-          } as GameOptions;
 
+        const gameOptions = setCustomGameOptions({turmoilExtension: false}) as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);
         card.play();
+        
         player.corporationCard = card;
         expect(card.canAct(player, game)).to.eq(false);
     });

@@ -31,10 +31,10 @@ export class HydrogenToVenus implements IProjectCard {
         CardName.STRATOPOLIS
     ]);
 
-    public canPlay(player: Player, game: Game) {
+    public canPlay(player: Player, game: Game): boolean {
         const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
-          return player.canAfford(this.cost + REDS_RULING_POLICY_COST, game, false, true);
+          return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, false, true);
         }
   
         return true;

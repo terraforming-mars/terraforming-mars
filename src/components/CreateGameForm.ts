@@ -348,7 +348,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                             <label class="form-switch" v-if="playersCount === 1">
                                 <input type="checkbox" v-model="soloTR">
-                                <i class="form-icon"></i> <span v-i18n>TR solo mode</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-solo-mode" class="tooltip" target="_blank">&#9432;</a>
+                                <i class="form-icon"></i> <span v-i18n>63 TR solo mode</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-solo-mode" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <label class="form-switch" v-if="playersCount > 1">

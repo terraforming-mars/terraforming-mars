@@ -16,6 +16,13 @@ export const Award = Vue.component("award", {
         },
         getNameCss: function(awardName: string): string {
             return "ma-name ma-name--" +  awardName.replace(/ /g, "-").toLowerCase();
+        },
+        getNameId: function(awardName: string): string {
+            return awardName.replace(/ /g, "");
+        },
+        toggleMADescription: function(awardName: string) {
+            //TODO - rework this with v-show?
+            document.querySelector(`#${awardName} > .ma-description`)?.classList.toggle("ma-description-hidden");
         }
     },
     template: `
@@ -30,7 +37,7 @@ export const Award = Vue.component("award", {
             </div>
             
             <div v-show="isVisible()">
-                <div v-for="award in awards_list" :class="award.player_name ? 'ma-block pwned-item': 'ma-block'">
+                <div :id="getNameId(award.award.name)" title="press to show or hide the description" v-on:click.prevent="toggleMADescription(getNameId(award.award.name))" v-for="award in awards_list" class="ma-block">
                     <div class="ma-player" v-if="award.player_name"><i :title="award.player_name" :class="'board-cube board-cube--'+award.player_color" /></div>
                     <div class="ma-name--awards" :class="getNameCss(award.award.name)" v-i18n>
                         {{award.award.name}}
@@ -40,7 +47,7 @@ export const Award = Vue.component("award", {
                             )" :class="'ma-score player_bg_color_'+score.playerColor">{{ score.playerScore }}</p>
                         </div>
                     </div>
-                    <div class="ma-description" v-i18n>{{award.award.description}}</div>
+                    <div class="ma-description ma-description-hidden" v-i18n>{{award.award.description}}</div>
                 </div>
             </div>
         </div>

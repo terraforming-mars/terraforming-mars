@@ -1,6 +1,7 @@
 import { ISpace } from "./ISpace";
 import { Player } from "./Player";
 import { SpaceType } from "./SpaceType";
+import { SpaceName } from "./SpaceName";
 import { SpaceBonus } from "./SpaceBonus";
 import { TileType } from "./TileType";
 
@@ -40,14 +41,14 @@ export abstract class Board {
 
     // https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
     // generate random float in [0,1) with seed
-    public mulberry32() {
+    protected mulberry32(): number {
         var t = this.seed += 0x6D2B79F5;
         t = Math.imul(t ^ t >>> 15, t | 1);
         t ^= t + Math.imul(t ^ t >>> 7, t | 61);
         return ((t ^ t >>> 14) >>> 0) / 4294967296;
     }
 
-    public shuffleArray(array: Array<Object>) {
+    public shuffleArray(array: Array<Object>): void {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(this.mulberry32() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
@@ -60,7 +61,25 @@ export abstract class Board {
             return new Land(idx, pos_x, pos_y, bonus);
         }
     }
-
+    protected shuffleMap(oceans: Array<boolean>, bonuses: Array<Array<SpaceBonus>>, landList: Array<SpaceName>): void {
+        this.shuffleArray(oceans);
+        this.shuffleArray(bonuses);
+        let safety = 0;
+        while (safety < 1000) {
+            let satisfy = true;
+            for (const land of landList) {
+                const land_id = Number(land) - 3;
+                while (oceans[land_id]) {
+                    satisfy = false;
+                    let idx = Math.floor(this.mulberry32() * (oceans.length + 1));
+                    [oceans[land_id], oceans[idx]] = [oceans[idx], oceans[land_id]];
+                }
+            }
+            if (satisfy) return;
+            safety++;
+        }
+        throw new Error("infinite loop detected");
+    }
     public seed: number=0;
     public spaces: Array<ISpace> = [];
     public getAdjacentSpaces(space: ISpace): Array<ISpace> {
@@ -186,12 +205,16 @@ export abstract class Board {
     }
 
     public getRandomCitySpace(offset: number): Space {
-        while (true) {
+        let safety = 0;
+        // avoid bugs which would lock node process
+        while (safety < 1000) {
             let space = this.getRandomSpace(offset);
-            if (this.canPlaceTile(space) && this.getAdjacentSpaces(space).find(sp => this.canPlaceTile(sp)) !== undefined) {
+            if (this.canPlaceTile(space) && this.getAdjacentSpaces(space).filter(sp => sp.tile?.tileType === TileType.CITY).length === 0 && this.getAdjacentSpaces(space).find(sp => this.canPlaceTile(sp)) !== undefined) {
                 return space;
             }
+            safety++;
         }
+        throw new Error("space not found for getRandomCitySpace");
     }
 
     protected canPlaceTile(space: ISpace): boolean {

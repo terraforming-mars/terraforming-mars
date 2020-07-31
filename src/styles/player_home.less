@@ -209,6 +209,7 @@
         font-family: Ubuntu, Sans;
         letter-spacing: 1px;
         font-size: 16px;
+        font-weight: bold;
         color: #303030;
         text-transform: uppercase;
         background: lightblue;
@@ -222,11 +223,19 @@
         display: inline-block;
         vertical-align: top;
         width: 156px;
+        cursor: pointer;
 
         .ma-score {
-            width: 25px;
             display: inline-block;
             color: white;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            border-radius: 50%;
+            margin: 6px 2px 0 2px;
+            display: inline-block;
+            color: white;
+            font-weight: normal;
         }
     
         .ma-scores {
@@ -242,7 +251,7 @@
         .ma-name {
             display: inline-block;
             width: 156px;
-            height: 97px;
+            height: 99px;
 
             color: #000000b0;
             padding-top: 62px;
@@ -398,6 +407,10 @@
             font-size: 14px;
             line-height: 15px;
             text-align: center;
+        }
+
+        .ma-description-hidden {
+            display: none;
         }
     }
 

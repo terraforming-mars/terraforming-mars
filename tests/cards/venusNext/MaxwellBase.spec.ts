@@ -9,7 +9,7 @@ import { SelectCard } from '../../../src/inputs/SelectCard';
 import { Birds } from '../../../src/cards/Birds';
 import { StratosphericBirds } from "../../../src/cards/venusNext/StratosphericBirds";
 import { ICard } from "../../../src/cards/ICard";
-import { BoardName } from "../../../src/BoardName";
+import { setCustomGameOptions } from "../../TestingUtils";
 
 describe("MaxwellBase", function () {
     let card : MaxwellBase, player : Player, game : Game;
@@ -18,27 +18,7 @@ describe("MaxwellBase", function () {
         card = new MaxwellBase();
         player = new Player("test", Color.BLUE, false);
 
-        const gameOptions = {
-            draftVariant: false,
-            initialDraftVariant: false,
-            corporateEra: true,
-            randomMA: false,
-            preludeExtension: false,
-            venusNextExtension: true,
-            coloniesExtension: false,
-            turmoilExtension: false,
-            boardName: BoardName.ORIGINAL,
-            showOtherPlayersVP: false,
-            customCorporationsList: [],
-            solarPhaseOption: false,
-            shuffleMapOption: false,
-            promoCardsOption: false,
-            undoOption: false,
-            startingCorporations: 2,
-            includeVenusMA: true,
-            soloTR: false,
-            clonedGamedId: undefined
-          } as GameOptions;
+        const gameOptions = setCustomGameOptions() as GameOptions;
         game = new Game("foobar", [player,player], player, gameOptions);
     });
 

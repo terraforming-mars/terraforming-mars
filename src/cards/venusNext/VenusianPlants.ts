@@ -18,12 +18,12 @@ export class VenusianPlants implements IProjectCard {
     public name: CardName = CardName.VENUSIAN_PLANTS;
     public cardType: CardType = CardType.AUTOMATED;
 
-    public canPlay(player: Player, game: Game) {
+    public canPlay(player: Player, game: Game): boolean {
         const meetsVenusRequirements = game.getVenusScaleLevel() >= 16 - (2 * player.getRequirementsBonus(game, true));
         const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
 
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
-          return player.canAfford(this.cost + REDS_RULING_POLICY_COST) && meetsVenusRequirements;
+          return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST) && meetsVenusRequirements;
         }
   
         return meetsVenusRequirements;

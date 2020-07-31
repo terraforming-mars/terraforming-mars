@@ -16,12 +16,12 @@ export class NitrogenRichAsteroid implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public hasRequirements = false;
 
-    public canPlay(player: Player, game: Game) {
+    public canPlay(player: Player, game: Game): boolean {
         let steps = 2;
         if (game.getTemperature() < MAX_TEMPERATURE) steps++;
 
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-            return player.canAfford(this.cost + REDS_RULING_POLICY_COST * steps, game, false, true);
+            return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * steps, game, false, true);
         }
       
         return true;

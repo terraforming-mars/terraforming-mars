@@ -3,11 +3,11 @@ import { PROffice } from "../../../src/cards/turmoil/PROffice";
 import { Player } from "../../../src/Player";
 import { Color } from "../../../src/Color";
 import { Resources } from "../../../src/Resources";
-import { BoardName } from '../../../src/BoardName';
 import { GameOptions, Game } from '../../../src/Game';
 import { PartyName } from "../../../src/turmoil/parties/PartyName";
 import { Sponsors } from "../../../src/cards/Sponsors";
 import { AcquiredCompany } from "../../../src/cards/AcquiredCompany";
+import { setCustomGameOptions } from "../../TestingUtils";
 
 describe("PROffice", function () {
     it("Should play", function () {
@@ -15,27 +15,8 @@ describe("PROffice", function () {
         const card2 = new Sponsors();
         const card3 = new AcquiredCompany();
         const player = new Player("test", Color.BLUE, false);
-        const gameOptions = {
-            draftVariant: false,
-            initialDraftVariant: false,
-            corporateEra: true,
-            randomMA: false,
-            preludeExtension: false,
-            venusNextExtension: true,
-            coloniesExtension: false,
-            turmoilExtension: true,
-            boardName: BoardName.ORIGINAL,
-            showOtherPlayersVP: false,
-            customCorporationsList: [],
-            solarPhaseOption: false,
-            shuffleMapOption: false,
-            promoCardsOption: false,
-            undoOption: false,
-            startingCorporations: 2,
-            includeVenusMA: true,
-            soloTR: false,
-            clonedGamedId: undefined
-          } as GameOptions;
+
+        const gameOptions = setCustomGameOptions() as GameOptions;
         const game = new Game("foobar", [player], player, gameOptions);  
         expect(card.canPlay(player, game)).to.eq(false);
         

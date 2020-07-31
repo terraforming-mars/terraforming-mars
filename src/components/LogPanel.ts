@@ -120,7 +120,7 @@ export const LogPanel = Vue.component("log-panel", {
         <div class="card-panel" v-if="cards.length > 0">
             <button class="btn btn-sm btn-error other_player_close" v-on:click="hideMe()"><i class="icon icon-cross"></i></button>
             <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="index">
-                <card :card="{name: card, resources: 0}"></card>
+                <card :card="{name: card}"></card>
             </div>
         </div>
     </div>

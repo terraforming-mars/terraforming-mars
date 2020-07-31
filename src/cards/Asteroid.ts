@@ -16,10 +16,10 @@ export class Asteroid implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public hasRequirements = false;
 
-    public canPlay(player: Player, game: Game) {
+    public canPlay(player: Player, game: Game): boolean {
       const temperatureMaxed = game.getVenusScaleLevel() === MAX_TEMPERATURE;
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !temperatureMaxed) {
-        return player.canAfford(this.cost + REDS_RULING_POLICY_COST, game, false, true);
+        return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, false, true);
       }
 
       return true;

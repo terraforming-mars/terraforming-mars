@@ -35,7 +35,7 @@ export class PostgreSQL implements IDatabase {
 
     getClonableGames( cb:(err: any, allGames:Array<IGameData>)=> void) {
         const allGames:Array<IGameData> = [];
-        const sql = "SELECT distinct game_id game_id, players players FROM games WHERE status = 'running' and save_id = 0 order by game_id asc";
+        const sql = "SELECT distinct game_id game_id, players players FROM games WHERE save_id = 0 order by game_id asc";
 
         this.client.query(sql, (err, res) => {
             if (err) {
@@ -130,8 +130,14 @@ export class PostgreSQL implements IDatabase {
                     console.error("PostgreSQL:cleanSaves2", err2);
                     throw err2;
                 }
-            });
+            });           
         });
+        // Purge unfinished games older than 10 days
+        this.client.query("DELETE FROM games WHERE created_time > now() - interval '10 days' and status = 'running'", function(err: { message: any; }) {
+            if (err) {
+            return console.warn(err.message);  
+            }
+        });         
     }
 
     restoreGame(game_id: string, save_id: number, game: Game): void {

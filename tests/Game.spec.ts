@@ -106,7 +106,7 @@ describe("Game", function () {
         expect(player.victoryPointsBreakdown.milestones).to.eq(5);
         expect(player.victoryPointsBreakdown.awards).to.eq(2); // one 2nd place
         expect(player.victoryPointsBreakdown.greenery).to.eq(1);
-        expect(player.victoryPointsBreakdown.city).to.eq(1); // greenery adjanced to city
+        expect(player.victoryPointsBreakdown.city).to.eq(1); // greenery adjacent to city
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(6);
         expect(player.victoryPointsBreakdown.total).to.eq(36);
 

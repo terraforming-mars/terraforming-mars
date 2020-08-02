@@ -60,7 +60,7 @@ export const BoardSpace = Vue.component("board-space", {
             } else if (tileType === TileType.DEIMOS_DOWN) {
                 ret = "Deimos Down"
             } else if (tileType === TileType.CITY) {
-                ret = "City: 1 VP per each adjanced greenery";
+                ret = "City: 1 VP per adjacent greenery";
             } else if (tileType === TileType.GREENERY) {
                 ret = "Greenery: 1 VP";
             }

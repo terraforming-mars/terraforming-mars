@@ -56,12 +56,12 @@ export const GameEnd = Vue.component("game-end", {
                             <h2 v-i18n>Sorry, you lose.</h2>
                             <div class="game_end_notice" v-i18n>
                                 Next time you will get more luck!<br>
-                                Also, take into count these small hints to win:
+                                Also, take into account these small hints to win:
                             </div>
                             <ul class="game_end_list" v-i18n>
                                 <li>Concentrate more on Global parameters, not on Victory Points</li>
                                 <li>Don't be greedy on cards selection</li>
-                                <li>Try to increase Heating production, not Megacredits</li>
+                                <li>Try to increase Heat production, not Megacredits</li>
                                 <li>Try to start with Beginner corporation</li>
                             </ul>
                         </div>

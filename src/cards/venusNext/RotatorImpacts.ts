@@ -4,7 +4,6 @@ import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
-import { SelectHowToPay } from '../../inputs/SelectHowToPay';
 import { OrOptions } from '../../inputs/OrOptions';
 import { SelectOption } from '../../inputs/SelectOption';
 import { Game } from '../../Game';
@@ -59,21 +58,9 @@ export class RotatorImpacts implements IActionCard,IProjectCard, IResourceCard {
     }
 
     private addResource(player: Player, game: Game) {
-        return new SelectHowToPay(
-            'Select how to pay ', false, true,
-            player.canUseHeatAsMegaCredits,
-            6,
-            (htp) => {
-                if (htp.heat + htp.megaCredits + htp.titanium * player.getTitaniumValue(game) < 6) {
-                    throw new Error('Not enough for action');
-                }
-                player.megaCredits -= htp.megaCredits;
-                player.heat -= htp.heat;
-                player.titanium -= htp.titanium;
-                this.resourceCount++;
-                return undefined;
-            }
-        );
+        game.addSelectHowToPayInterrupt(player, 6, false, true, "Select how to pay for action");
+        this.resourceCount++;
+        return undefined;
     }
 
     private spendResource(player: Player, game: Game) {

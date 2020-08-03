@@ -3,7 +3,6 @@ import {CardType} from './CardType';
 import {Player} from '../Player';
 import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
-import {SelectHowToPay} from '../inputs/SelectHowToPay';
 import {IActionCard} from './ICard';
 import {IProjectCard} from './IProjectCard';
 import { Resources } from '../Resources';
@@ -39,26 +38,9 @@ export class BusinessNetwork implements IActionCard, IProjectCard {
             game.dealer.discard(dealtCard);
             return undefined;
           }
-          if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-            return new SelectHowToPay(
-              'Select how to pay and buy ' + dealtCard.name, false, false,
-              true, player.cardCost,
-              (htp) => {
-                if (htp.heat + htp.megaCredits < player.cardCost) {
-                  game.dealer.discard(dealtCard);
-                  throw new Error('Not enough spent to buy card');
-                }
-                player.megaCredits -= htp.megaCredits;
-                player.heat -= htp.heat;
-                LogHelper.logCardChange(game, player, "drew", 1);
-                player.cardsInHand.push(dealtCard);
-                return undefined;
-              }
-            );
-          }
           LogHelper.logCardChange(game, player, "drew", 1);
           player.cardsInHand.push(dealtCard);
-          player.megaCredits -= player.cardCost;
+          game.addSelectHowToPayInterrupt(player, player.cardCost, false, false, "Select how to pay for action");
           return undefined;
         }, canSelectCard ? 1 : 0 , 0
       );

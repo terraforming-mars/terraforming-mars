@@ -6,7 +6,6 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { TileType } from "../TileType";
-import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 import { CardName } from "../CardName";
@@ -31,18 +30,7 @@ export class RestrictedArea implements IActionCard, IProjectCard {
         return player.canAfford(2);
     }
     public action(player: Player, game: Game) {
-        if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-            return new SelectHowToPay("Select how to pay for action", false, false, true, 2, (htp) => {
-                if (htp.heat + htp.megaCredits < 2) {
-                    throw "Not enough spent";
-                }
-                player.megaCredits -= htp.megaCredits;
-                player.heat -= htp.heat;
-                player.cardsInHand.push(game.dealer.dealCard());
-                return undefined;
-            });
-        }
-        player.megaCredits -= 2;
+        game.addSelectHowToPayInterrupt(player, 2, false, false, "Select how to pay for action");
         player.cardsInHand.push(game.dealer.dealCard());
         return undefined;
     }

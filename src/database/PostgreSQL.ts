@@ -30,7 +30,13 @@ export class PostgreSQL implements IDatabase {
                 throw err;
             }
             console.log("Connected to PostgreSQL");
-        });        
+        });
+        this.client.query("CREATE INDEX IF NOT EXISTS games_i2 on games(created_time )", (err) => {
+            if (err) {
+                throw err;
+            }
+            console.log("Connected to PostgreSQL");
+        });
     }
 
     getClonableGames( cb:(err: any, allGames:Array<IGameData>)=> void) {
@@ -133,7 +139,7 @@ export class PostgreSQL implements IDatabase {
             });           
         });
         // Purge unfinished games older than 10 days
-        this.client.query("DELETE FROM games WHERE created_time > now() - interval '10 days' and status = 'running'", function(err: { message: any; }) {
+        this.client.query("DELETE FROM games WHERE created_time < now() - interval '10 days' and status = 'running'", function(err: { message: any; }) {
             if (err) {
             return console.warn(err.message);  
             }

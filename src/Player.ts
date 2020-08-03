@@ -1502,32 +1502,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       });      
       let howToPayForTrade = new OrOptions();
       howToPayForTrade.title = "Trade with a colony";
+
       const payWithMC = new SelectOption("Pay " + (9 - this.colonyTradeDiscount) +" MC", () => {
-        this.megaCredits -= (9 - this.colonyTradeDiscount);
+        game.addSelectHowToPayInterrupt(this, 9 - this.colonyTradeDiscount, false, false, "Select how to pay " + (9 - this.colonyTradeDiscount) + " for colony trade");
         return selectColony;
       });
-
-      if (this.canAfford(9, game) && this.canUseHeatAsMegaCredits && this.heat > 0) {
-        let htp: HowToPay;
-        let helionTrade = new SelectHowToPay(
-          "Select how to spend " + (9 - this.colonyTradeDiscount) +" MC",
-          false,
-          false,
-          true,
-          (9 - this.colonyTradeDiscount),
-          (stp) => {
-            htp = stp;
-            this.megaCredits -= htp.megaCredits;
-            this.heat -= htp.heat;
-            return selectColony;
-          }
-        )
-        howToPayForTrade.options.push(helionTrade);
-
-      } else if (this.canAfford((9 - this.colonyTradeDiscount))) {
-        howToPayForTrade.options.push(payWithMC);
-      }
-
       const payWithEnergy = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Energy", () => {
         this.energy -= (3 - this.colonyTradeDiscount);
         return selectColony;
@@ -1537,6 +1516,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         return selectColony;  
       });
 
+      if (this.canAfford((9 - this.colonyTradeDiscount))) howToPayForTrade.options.push(payWithMC);
       if (this.energy >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithEnergy);
       if (this.titanium >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithTitanium);
 

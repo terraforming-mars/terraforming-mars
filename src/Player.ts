@@ -996,28 +996,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.draftedCards = [];
       }
 
-      let htp: HowToPay = {
-        steel: 0,
-        titanium: 0,
-        heat: 0,
-        megaCredits: 0,
-        microbes: 0,
-        floaters: 0,
-        isResearchPhase: true,
-      };
-
       let selectedCards: Array<IProjectCard> = [];
 
       const payForCards = () => {
         const purchasedCardsCost = this.cardCost * selectedCards.length;
-
-        if (htp.heat > 0 && this.canUseHeatAsMegaCredits) {
-          this.heat -= Math.min(htp.heat, purchasedCardsCost); // prevent overspending
-          let megaCreditsToRemove = purchasedCardsCost - htp.heat;
-          if (megaCreditsToRemove > 0) this.megaCredits -= megaCreditsToRemove;
-        } else {
-          this.megaCredits -= purchasedCardsCost;
-        }  
+        game.addSelectHowToPayInterrupt(this, purchasedCardsCost, false, false, "Select how to pay " + purchasedCardsCost + " for purchasing " + selectedCards.length + " card(s)");
         selectedCards.forEach((card) => {
           this.cardsInHand.push(card);
         });
@@ -1044,49 +1027,23 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       let maxPurchaseQty = 4;
 
       if (this.canUseHeatAsMegaCredits) {
-        maxPurchaseQty = Math.min(maxPurchaseQty, Math.floor((this.megaCredits + this.heat) / this.cardCost));
-        
-        this.setWaitingFor(
-            new AndOptions(() => {
-              return undefined;
-            },
-            new SelectHowToPay(
-                "Select how to pay for cards",
-                false,
-                false,
-                true,
-                0,
-                (pay) => {
-                  htp = pay;
-                  return undefined;
-                }
-            ),
-            new SelectCard(
-                "Select which cards to take into hand",
-                dealtCards,
-                (foundCards: Array<IProjectCard>) => {
-                  selectedCards = foundCards;
-                  return undefined;
-                }, maxPurchaseQty, 0
-            )
-            ), () => { payForCards(); }
-        );
+        maxPurchaseQty = Math.min(maxPurchaseQty, Math.floor((this.megaCredits + this.heat) / this.cardCost)); 
       } else {
         maxPurchaseQty = Math.min(maxPurchaseQty, Math.floor(this.megaCredits / this.cardCost));
+      }  
 
         this.setWaitingFor(
             new SelectCard(
                 "Select which cards to take into hand",
                 dealtCards,
                 (foundCards: Array<IProjectCard>) => {
-                  htp.megaCredits = foundCards.length * this.cardCost;
                   selectedCards = foundCards;
                   return undefined;
                 }, maxPurchaseQty, 0
             ), () => { payForCards(); }
         );
       }
-    }
+    
 
     public getSelfReplicatingRobotsCards(game: Game) : Array<CardModel> {
       let card = this.playedCards.find(card => card.name === CardName.SELF_REPLICATING_ROBOTS);

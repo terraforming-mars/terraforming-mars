@@ -68,8 +68,8 @@ export const GameEnd = Vue.component("game-end", {
                     </div>
                 </div>
                 <div class="game_end_go_home">
-                    <a href="/">
-                        <button class="btn btn-primary btn-action btn-lg" style="margin-right: 11px;">
+                    <a href="/" v-i18n>
+                        <button class="btn btn-primary btn-action btn-lg">
                             <i class="icon icon-back"></i>
                         </button>
                         Go to main page

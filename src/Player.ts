@@ -1693,16 +1693,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
     }
 
-    private claimMilestone(
-        milestone: IMilestone,
-        game: Game): SelectHowToPay | SelectOption {
-      const claimer = (megaCredits: number, heat: number) => {
+    private claimMilestone(milestone: IMilestone, game: Game): SelectOption {
+      return new SelectOption(milestone.name, () => {
         game.claimedMilestones.push({
           player: this,
           milestone: milestone
         });
-        this.heat -= heat;
-        this.megaCredits -= megaCredits;
+        game.addSelectHowToPayInterrupt(this, 8, false, false, "Select how to pay for milestone");
         game.log(
           LogMessageType.DEFAULT,
           "${0} claimed ${1} milestone",
@@ -1710,50 +1707,14 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           new LogMessageData(LogMessageDataType.MILESTONE, milestone.name)
         );
         return undefined;
-      };
-      if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-        return new SelectHowToPay(
-            "Claim milestone: " + milestone.name,
-            false,
-            false,
-            true,
-            8,
-            (stp) => {
-              if (stp.megaCredits + stp.heat < 8) {
-                throw new Error(
-                    "Did not spend enough to claim milestone"
-                );
-              }
-              return claimer(stp.megaCredits, stp.heat);
-            }
-        );
-      }
-      return new SelectOption(milestone.name, () => {
-        return claimer(8, 0);
       });
     }
 
     private fundAward(award: IAward, game: Game): PlayerInput {
-      const funder = (megaCredits: number, heat: number) => {
-        game.fundAward(this, award);
-        this.megaCredits -= megaCredits;
-        this.heat -= heat;
-        return undefined;
-      };
-      if (this.canUseHeatAsMegaCredits && this.heat > 0) {
-        return new SelectHowToPay(
-            award.name + " (" + game.getAwardFundingCost() + " MC)",
-            false,
-            false,
-            true,
-            game.getAwardFundingCost(),
-            (htp: HowToPay) => {
-              return funder(htp.megaCredits, htp.heat);
-            }
-        );
-      }
       return new SelectOption(award.name, () => {
-        return funder(game.getAwardFundingCost(), 0);
+        game.addSelectHowToPayInterrupt(this, game.getAwardFundingCost(), false, false, "Select how to pay for award");
+        game.fundAward(this, award);
+        return undefined;
       });
     }
 

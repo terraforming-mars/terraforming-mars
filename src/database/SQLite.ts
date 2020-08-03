@@ -22,7 +22,7 @@ export class SQLite implements IDatabase {
 
     getClonableGames( cb:(err: any, allGames:Array<IGameData>)=> void) {
         var allGames:Array<IGameData> = [];
-        var sql = "SELECT distinct game_id game_id, players players FROM games WHERE status = 'running' and save_id = 0 order by game_id asc";
+        var sql = "SELECT distinct game_id game_id, players players FROM games WHERE save_id = 0 order by game_id asc";
   
         this.db.all(sql, [], (err, rows) => {
             if (rows) {
@@ -97,7 +97,14 @@ export class SQLite implements IDatabase {
             if (err) {
             return console.warn(err.message);  
             }
+        });
+        // Purge unfinished games older than 10 days
+        this.db.run("DELETE FROM games WHERE created_time < date('now', '-10 day') and status = 'running'", function(err: { message: any; }) {
+            if (err) {
+            return console.warn(err.message);  
+            }
         });        
+
     }
 
     restoreGame(game_id: string, save_id: number, game: Game): void {

@@ -5,6 +5,7 @@ import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
 import { Resources } from "../Resources";
+import { ISpace } from "../ISpace";
 
 export class LogHelper {
     static logAddResource(game: Game, player: Player, card: ICard, qty: number = 1): void {
@@ -69,6 +70,16 @@ export class LogHelper {
             new LogMessageData(LogMessageDataType.PLAYER, player.id),
             new LogMessageData(LogMessageDataType.STRING, effect),
             new LogMessageData(LogMessageDataType.STRING, qty.toString())
+        );
+    }
+
+    static logTilePlacement(game: Game, player: Player, space: ISpace) {
+        game.log(
+            LogMessageType.DEFAULT,
+            "${0} placed a tile on (${1}, ${2})",
+            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.STRING, space.x.toString()),
+            new LogMessageData(LogMessageDataType.STRING, space.y.toString())
         );
     }
 }

@@ -56,6 +56,7 @@ import { PartyHooks } from "./turmoil/parties/PartyHooks";
 import { IParty } from "./turmoil/parties/IParty";
 import { OrOptions } from "./inputs/OrOptions";
 import { SelectOption } from "./inputs/SelectOption";
+import { LogHelper } from "./components/LogHelper";
 
 export interface GameOptions {
   draftVariant: boolean;
@@ -1444,6 +1445,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
       
       this.tilePlaced(space);
+      LogHelper.logTilePlacement(this, player, space)
 
       if (tile.tileType === TileType.OCEAN) {
         space.player = undefined;

@@ -67,6 +67,14 @@ export const GameEnd = Vue.component("game-end", {
                         </div>
                     </div>
                 </div>
+                <div class="game_end_go_home">
+                    <a href="/">
+                        <button class="btn btn-primary btn-action btn-lg" style="margin-right: 11px;">
+                            <i class="icon icon-back"></i>
+                        </button>
+                        Go to main page
+                    </a>
+                </div>
                 <div class="game_end_victory_points">
                     <h2 v-i18n>Victory points breakdown after<span> {{player.generation}} </span>generations</h2>
                     <table class="table game_end_table">

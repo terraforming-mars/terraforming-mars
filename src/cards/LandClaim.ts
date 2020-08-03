@@ -15,12 +15,12 @@ export class LandClaim implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
-        return game.board.getAvailableSpacesOnLand(player).length > 0;
+        return game.board.getAvailableSpacesOnLand(player, game).length > 0;
     }
     public play(player: Player, game: Game) {
         return new SelectSpace(
             "Select space for claim", 
-            game.board.getAvailableSpacesOnLand(player), 
+            game.board.getAvailableSpacesOnLand(player, game), 
             (foundSpace: ISpace) => {
                 foundSpace.player = player;
                 return undefined;

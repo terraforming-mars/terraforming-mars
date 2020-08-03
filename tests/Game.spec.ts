@@ -291,7 +291,7 @@ describe("Game", function () {
     it("Does not assign player to ocean after placement", function() {
         const player1 = new Player("oc_p1", Color.BLUE, false);
         const game = new Game("oceanz", [player1], player1);
-        const spaceId: string = game.board.getAvailableSpacesForOcean(player1)[0].id;
+        const spaceId: string = game.board.getAvailableSpacesForOcean(player1, game)[0].id;
         game.addOceanTile(player1, spaceId);
 
         const space: ISpace = game.getSpace(spaceId);
@@ -309,5 +309,5 @@ describe("Game", function () {
         expect(ecologist.canClaim(player)).to.eq(false);
         player.playedCards.push(card1, card2);
         expect(ecologist.canClaim(player)).to.eq(true);
-    });    
+    });
 });

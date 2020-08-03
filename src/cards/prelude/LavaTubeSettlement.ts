@@ -20,7 +20,7 @@ export class LavaTubeSettlement implements IProjectCard {
     private getSpacesForCity(player: Player, game: Game) {
         if (game.boardName === BoardName.HELLAS) {
             // https://boardgamegeek.com/thread/1953628/article/29627211#29627211
-            return game.board.getAvailableSpacesForCity(player);
+            return game.board.getAvailableSpacesForCity(player, game);
         }
         
         return LavaFlows.getVolcanicSpaces(player, game);

@@ -19,7 +19,7 @@ describe("Flooding", function () {
     });
 
     it("Should play", function () {
-        const oceans = game.board.getAvailableSpacesForOcean(player);
+        const oceans = game.board.getAvailableSpacesForOcean(player, game);
         const action = card.play(player, game);
         expect(action instanceof SelectSpace).to.eq(true);
 
@@ -50,7 +50,7 @@ describe("Flooding", function () {
     });
 
     it("Does not suggest to remove money from yourself", function() {
-        const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
+        const oceanSpaces = game.board.getAvailableSpacesForOcean(player, game);
         const action = card.play(player, game);
 
         game.addGreenery(player, "03");

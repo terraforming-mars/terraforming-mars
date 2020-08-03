@@ -17,7 +17,7 @@ describe("NaturalPreserve", function () {
     });
 
     it("Can't play if no spaces available", function () {
-        const lands = game.board.getAvailableSpacesOnLand(player);
+        const lands = game.board.getAvailableSpacesOnLand(player, game);
         for (let land of lands) {
             game.addTile(player, land.spaceType, land, { tileType: TileType.NATURAL_PRESERVE });
         }

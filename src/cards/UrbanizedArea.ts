@@ -16,7 +16,7 @@ export class UrbanizedArea implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
-        return game.board.getAvailableSpacesOnLand(player)
+        return game.board.getAvailableSpacesOnLand(player, game)
                 .filter((space) => game.board.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length >= 2);
     }
     public canPlay(player: Player, game: Game): boolean {

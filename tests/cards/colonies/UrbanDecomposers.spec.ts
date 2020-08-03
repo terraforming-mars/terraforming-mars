@@ -27,14 +27,14 @@ describe("UrbanDecomposers", function () {
     });
 
     it("Can't play if player has no colony", function () {
-        const lands = game.board.getAvailableSpacesOnLand(player);
+        const lands = game.board.getAvailableSpacesOnLand(player, game);
         lands[0].player = player;
         lands[0].tile = { tileType: TileType.CITY };
         expect(card.canPlay(player, game)).to.eq(false);
     });
 
     it("Should play without targets", function () {
-        const lands = game.board.getAvailableSpacesOnLand(player);
+        const lands = game.board.getAvailableSpacesOnLand(player, game);
         lands[0].player = player;
         lands[0].tile = { tileType: TileType.CITY };
 

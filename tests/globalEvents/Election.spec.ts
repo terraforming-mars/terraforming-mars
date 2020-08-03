@@ -19,7 +19,7 @@ describe("Election", function () {
         player.playedCards.push(new StripMine());
         player2.playedCards.push(new StripMine());
         player2.playedCards.push(new StripMine());
-        game.addCityTile(player3, game.board.getAvailableSpacesOnLand(player3)[0].id);
+        game.addCityTile(player3, game.board.getAvailableSpacesOnLand(player3, game)[0].id);
         turmoil.chairman = player2.id;
         turmoil.dominantParty = new Kelvinists();
         turmoil.dominantParty.partyLeader = player2.id;

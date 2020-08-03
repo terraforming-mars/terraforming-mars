@@ -35,7 +35,7 @@ export class GreatDamPromo implements IProjectCard {
         return 1;
     }
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
-        return game.board.getAvailableSpacesOnLand(player)
+        return game.board.getAvailableSpacesOnLand(player, game)
             .filter(
                 (space) => game.board.getAdjacentSpaces(space).filter(
                     (adjacentSpace) => adjacentSpace.tile !== undefined &&

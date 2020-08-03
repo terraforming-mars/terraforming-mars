@@ -18,7 +18,7 @@ export class CommercialDistrict implements IProjectCard {
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 1 &&
-      game.board.getAvailableSpacesOnLand(player).length > 0;
+      game.board.getAvailableSpacesOnLand(player, game).length > 0;
     }
     public getVictoryPoints(_player: Player, game: Game) {
       const usedSpace = game.board.getSpaceByTileCard(this.name);
@@ -32,7 +32,7 @@ export class CommercialDistrict implements IProjectCard {
     public play(player: Player, game: Game) {
       return new SelectSpace(
           'Select space for special tile',
-          game.board.getAvailableSpacesOnLand(player),
+          game.board.getAvailableSpacesOnLand(player, game),
           (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, {
               tileType: TileType.COMMERCIAL_DISTRICT,

@@ -16,14 +16,14 @@ export class Gyropolis implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
-        if (game.board.getAvailableSpacesForCity(player).length === 0) return false;
+        if (game.board.getAvailableSpacesForCity(player, game).length === 0) return false;
         return player.getProduction(Resources.ENERGY) >= 2;
       }
     public play(player: Player, game: Game) {
         const tags: Array<Tags> = [Tags.VENUS, Tags.EARTH];
         player.setProduction(Resources.ENERGY,-2);
         player.setProduction(Resources.MEGACREDITS, player.getMultipleTagCount(tags));
-        return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
+        return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player, game), (space: ISpace) => {
             game.addCityTile(player, space.id);
             return undefined;
         }); 

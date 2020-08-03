@@ -20,7 +20,7 @@ describe("Algae", function () {
     });
 
     it("Should play", function () {
-        const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
+        const oceanSpaces = game.board.getAvailableSpacesForOcean(player, game);
         for (let i = 0; i < 5; i++) {
             oceanSpaces[i].tile = { tileType: TileType.OCEAN };
         }

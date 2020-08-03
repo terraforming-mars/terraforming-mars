@@ -18,7 +18,7 @@ export class ArcadianCommunities implements IActionCard, CorporationCard {
     public initialAction(player: Player, game: Game) {
         return new SelectSpace(
             "Select space for claim", 
-            game.board.getAvailableSpacesOnLand(player), 
+            game.board.getAvailableSpacesOnLand(player, game), 
             (foundSpace: ISpace) => {
                 foundSpace.player = player;
                 
@@ -34,13 +34,13 @@ export class ArcadianCommunities implements IActionCard, CorporationCard {
     }
 
     public canAct(player: Player, game: Game): boolean {
-        return game.board.getAvailableSpacesForMarker(player).length > 0; 
+        return game.board.getAvailableSpacesForMarker(player, game).length > 0; 
     }
 
     public action(player: Player, game: Game) {
         return new SelectSpace(
             "Select space for claim", 
-            game.board.getAvailableSpacesForMarker(player), 
+            game.board.getAvailableSpacesForMarker(player, game), 
             (foundSpace: ISpace) => {
                 foundSpace.player = player;
                 return undefined;

@@ -14,7 +14,7 @@ describe("EnergySaving", function () {
         const action = card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);
         expect(action).to.eq(undefined);
-        const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
+        const landSpace = game.board.getAvailableSpacesOnLand(player, game)[0];
         game.addCityTile(player, landSpace.id);
         card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(1); 

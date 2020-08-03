@@ -17,7 +17,7 @@ export class TharsisRepublic implements CorporationCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 40;
     public initialAction(player: Player, game: Game) {
-        return new SelectSpace("Select space on mars for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
+        return new SelectSpace("Select space on mars for city tile", game.board.getAvailableSpacesForCity(player, game), (space: ISpace) => {
             game.addCityTile(player, space.id);
             
             game.log(

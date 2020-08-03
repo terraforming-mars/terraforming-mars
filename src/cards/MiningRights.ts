@@ -19,7 +19,7 @@ export class MiningRights implements IProjectCard {
     public hasRequirements = false;
     public bonusResource: Resources | undefined = undefined;
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
-        return game.board.getAvailableSpacesOnLand(player)
+        return game.board.getAvailableSpacesOnLand(player, game)
                 .filter((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1);
     }
     public canPlay(player: Player, game: Game): boolean {

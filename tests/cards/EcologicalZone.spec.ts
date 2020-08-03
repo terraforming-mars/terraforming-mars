@@ -20,7 +20,7 @@ describe("EcologicalZone", function () {
     });
 
     it("Should play", function () {
-        const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
+        const landSpace = game.board.getAvailableSpacesOnLand(player, game)[0];
         game.addGreenery(player, landSpace.id);
         expect(card.canPlay(player, game)).to.eq(true);
 

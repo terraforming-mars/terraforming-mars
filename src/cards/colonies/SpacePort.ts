@@ -15,7 +15,7 @@ export class SpacePort implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public canPlay(player: Player, game: Game): boolean {
-        if (game.board.getAvailableSpacesForCity(player).length === 0) return false;
+        if (game.board.getAvailableSpacesForCity(player, game).length === 0) return false;
         let coloniesCount: number = 0;
         game.colonies.forEach(colony => { 
           coloniesCount += colony.colonies.filter(owner => owner === player.id).length;
@@ -27,7 +27,7 @@ export class SpacePort implements IProjectCard {
       player.setProduction(Resources.MEGACREDITS, 4);  
       player.setProduction(Resources.ENERGY, -1);
       player.fleetSize++;
-      return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
+      return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player, game), (space: ISpace) => {
         game.addCityTile(player, space.id);
         return undefined;
       }); 

@@ -30,7 +30,7 @@ describe("Capital", function () {
     });
 
     it("Should play", function () {
-        const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
+        const oceanSpaces = game.board.getAvailableSpacesForOcean(player, game);
         for (let i = 0; i < 4; i++) {
             oceanSpaces[i].tile = { tileType: TileType.OCEAN };
         }

@@ -3,6 +3,7 @@ import { SpaceName } from "./SpaceName";
 import { Board, Land, BoardColony } from "./Board";
 import { Player } from "./Player";
 import { ISpace } from "./ISpace";
+import { Game } from "./Game";
 
 export class HellasBoard extends Board{
     constructor(shuffleMapOption: boolean = false, seed: number = 0) {
@@ -172,25 +173,25 @@ export class HellasBoard extends Board{
         this.spaces.push(new BoardColony(SpaceName.STANFORD_TORUS));
     }    
 
-    public getAvailableSpacesForCity(player: Player): Array<ISpace> {
+    public getAvailableSpacesForCity(player: Player, game: Game): Array<ISpace> {
         // Check for special tile
-        if (player.canAfford(6)) return super.getAvailableSpacesForCity(player);
+        if (player.canAfford(6)) return super.getAvailableSpacesForCity(player, game);
 
-        return super.getAvailableSpacesForCity(player).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+        return super.getAvailableSpacesForCity(player, game).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
     }
 
-    public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
+    public getAvailableSpacesOnLand(player: Player, game: Game): Array<ISpace> {
         // Check for special tile
-        if (player.canAfford(6)) return super.getAvailableSpacesOnLand(player);
+        if (player.canAfford(6)) return super.getAvailableSpacesOnLand(player, game);
 
-        return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+        return super.getAvailableSpacesOnLand(player, game).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
     }
 
-    public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
+    public getAvailableSpacesForGreenery(player: Player, game: Game): Array<ISpace> {
         // Check for special tile
-        if (player.canAfford(6)) return super.getAvailableSpacesForGreenery(player);
+        if (player.canAfford(6)) return super.getAvailableSpacesForGreenery(player, game);
 
-        return super.getAvailableSpacesForGreenery(player).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+        return super.getAvailableSpacesForGreenery(player, game).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
     }
 
 }

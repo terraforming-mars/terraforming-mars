@@ -18,7 +18,7 @@ export class Plantation implements IProjectCard {
 
     public canPlay(player: Player, game: Game): boolean {
         const meetsTagRequirements = player.getTagCount(Tags.SCIENCE) >= 2;
-        const canPlaceTile = game.board.getAvailableSpacesOnLand(player).length > 0;
+        const canPlaceTile = game.board.getAvailableSpacesOnLand(player, game).length > 0;
         const oxygenMaxed = game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
     
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oxygenMaxed) {
@@ -29,7 +29,7 @@ export class Plantation implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        return new SelectSpace("Select space for greenery tile", game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
+        return new SelectSpace("Select space for greenery tile", game.board.getAvailableSpacesForGreenery(player, game), (space: ISpace) => {
             return game.addGreenery(player, space.id);
         });
     }

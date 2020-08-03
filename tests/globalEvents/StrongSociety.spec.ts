@@ -14,7 +14,7 @@ describe("StrongSociety", function () {
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
         const turmoil = new Turmoil(game);
-        game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
+        game.addCityTile(player, game.board.getAvailableSpacesOnLand(player, game)[0].id);
         turmoil.chairman = player2.id;
         turmoil.dominantParty = new Kelvinists();
         turmoil.dominantParty.partyLeader = player2.id;

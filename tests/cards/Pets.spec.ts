@@ -15,7 +15,7 @@ describe("Pets", function () {
         expect(action).to.eq(undefined);
         player.addResourceTo(card, 4);
         expect(card.getVictoryPoints()).to.eq(2);
-        game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
+        game.addCityTile(player, game.board.getAvailableSpacesOnLand(player, game)[0].id);
         expect(card.resourceCount).to.eq(6);
     });
 });

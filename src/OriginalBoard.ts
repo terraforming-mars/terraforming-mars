@@ -3,6 +3,7 @@ import { SpaceName } from "./SpaceName";
 import { Board, Land, BoardColony } from "./Board";
 import { Player } from "./Player";
 import { ISpace } from "./ISpace";
+import { Game } from "./Game";
 
 export class OriginalBoard extends Board {
 
@@ -136,8 +137,8 @@ export class OriginalBoard extends Board {
 
         this.spaces.push(new BoardColony(SpaceName.STANFORD_TORUS));
     }
-    public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
-        return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.NOCTIS_CITY);
+    public getAvailableSpacesOnLand(player: Player, game: Game): Array<ISpace> {
+        return super.getAvailableSpacesOnLand(player, game).filter((space) => space.id !== SpaceName.NOCTIS_CITY);
     }
     protected canPlaceTile(space: ISpace): boolean {
         return space !== undefined && space.tile === undefined && space instanceof Land && space.id !== SpaceName.NOCTIS_CITY;

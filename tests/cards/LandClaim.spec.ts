@@ -12,7 +12,7 @@ describe("LandClaim", function () {
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
-        const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
+        const landSpace = game.board.getAvailableSpacesOnLand(player, game)[0];
         action.cb(landSpace);
         expect(landSpace.player).to.eq(player);
         expect(landSpace.tile).to.eq(undefined);

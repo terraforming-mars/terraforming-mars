@@ -20,7 +20,7 @@ export class EcologicalZone implements IProjectCard, IResourceCard {
   public cardType: CardType = CardType.ACTIVE;
   public name: CardName = CardName.ECOLOGICAL_ZONE;
   private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
-    return game.board.getAvailableSpacesOnLand(player)
+    return game.board.getAvailableSpacesOnLand(player, game)
         .filter(
             (space) => game.board.getAdjacentSpaces(space).filter(
                 (adjacentSpace) => adjacentSpace.tile !== undefined &&
@@ -29,8 +29,8 @@ export class EcologicalZone implements IProjectCard, IResourceCard {
         );
   }
   private hasGreeneryTile(player: Player, game: Game): boolean {
-    return game.board.getSpaces(SpaceType.OCEAN)
-        .concat(game.board.getSpaces(SpaceType.LAND))
+    return game.board.getSpaces(SpaceType.OCEAN, player, game)
+        .concat(game.board.getSpaces(SpaceType.LAND, player, game))
         .filter(
             (space) => space.tile !== undefined &&
           space.tile.tileType === TileType.GREENERY &&

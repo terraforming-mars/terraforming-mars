@@ -19,7 +19,7 @@ export class NuclearZone implements IProjectCard {
     public hasRequirements = false;
     
     public canPlay(player: Player, game: Game): boolean {
-        const canPlaceTile = game.board.getAvailableSpacesOnLand(player).length > 0;
+        const canPlaceTile = game.board.getAvailableSpacesOnLand(player, game).length > 0;
         const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;
         const stepsRaised = Math.min(remainingTemperatureSteps, 2);
 
@@ -31,7 +31,7 @@ export class NuclearZone implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        return new SelectSpace("Select space for special tile", game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
+        return new SelectSpace("Select space for special tile", game.board.getAvailableSpacesOnLand(player, game), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.NUCLEAR_ZONE });
             return game.increaseTemperature(player, 2);
         });

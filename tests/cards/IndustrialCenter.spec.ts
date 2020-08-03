@@ -28,7 +28,7 @@ describe("IndustrialCenter", function () {
     });
 
     it("Should play", function () {
-        game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
+        game.addCityTile(player, game.board.getAvailableSpacesOnLand(player, game)[0].id);
         expect(game.getCitiesInPlayOnMars()).to.eq(1);
         
         const action = card.play(player, game);

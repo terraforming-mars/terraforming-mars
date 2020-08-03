@@ -23,19 +23,16 @@ export class PostgreSQL implements IDatabase {
             if (err) {
                 throw err;
             }
-            console.log("Connected to PostgreSQL");
         });
         this.client.query("CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)", (err) => {
             if (err) {
                 throw err;
             }
-            console.log("Connected to PostgreSQL");
         });
         this.client.query("CREATE INDEX IF NOT EXISTS games_i2 on games(created_time )", (err) => {
             if (err) {
                 throw err;
             }
-            console.log("Connected to PostgreSQL");
         });
     }
 

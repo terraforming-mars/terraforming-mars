@@ -19,6 +19,9 @@ import { ArcticAlgae } from "../src/cards/ArcticAlgae";
 import { Ecologist } from '../src/milestones/Ecologist';
 import { Dealer } from "../src/Dealer";
 import { OrOptions } from "../src/inputs/OrOptions";
+import { BoardName } from "../src/BoardName";
+import { SpaceType } from "../src/SpaceType";
+import { Helion } from "../src/cards/corporation/Helion";
 
 describe("Game", function () {
     it("should initialize with right defaults", function () {
@@ -309,5 +312,48 @@ describe("Game", function () {
         expect(ecologist.canClaim(player)).to.eq(false);
         player.playedCards.push(card1, card2);
         expect(ecologist.canClaim(player)).to.eq(true);
+    });
+
+    it("Removes Hellas bonus ocean space if player cannot pay", function () {
+        const player = new Player("test", Color.BLUE, false);
+        const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS}) as GameOptions;
+        const game = new Game("foobar", [player], player, gameOptions);
+        
+        // Cannot afford
+        player.megaCredits = 5;
+        let landSpaces = game.board.getSpaces(SpaceType.LAND, player, game);
+        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
+        let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player, game);
+        expect(availableSpacesOnLand.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
+
+        // Can afford
+        player.megaCredits = 6;
+        landSpaces = game.board.getSpaces(SpaceType.LAND, player, game);
+        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
+        availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player, game);
+        expect(availableSpacesOnLand.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
+    });
+
+    it("Removes Hellas bonus ocean space if Helion player cannot pay", function () {
+        const player = new Player("test", Color.BLUE, false);
+        const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS}) as GameOptions;
+        const game = new Game("foobar", [player], player, gameOptions);
+        player.corporationCard = new Helion();
+        player.canUseHeatAsMegaCredits = true;
+        
+        // Cannot afford
+        player.heat = 2;
+        player.megaCredits = 3;
+        let landSpaces = game.board.getSpaces(SpaceType.LAND, player, game);
+        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
+        let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player, game);
+        expect(availableSpacesOnLand.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
+
+        // Can afford
+        player.megaCredits += 1;
+        landSpaces = game.board.getSpaces(SpaceType.LAND, player, game);
+        expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
+        availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player, game);
+        expect(availableSpacesOnLand.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
     });
 });

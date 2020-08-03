@@ -6,7 +6,7 @@ import { SpaceBonus } from "./SpaceBonus";
 import { TileType } from "./TileType";
 import { Game } from "./Game";
 import { BoardName } from "./BoardName";
-import { MAX_OCEAN_TILES } from "./constants";
+import { MAX_OCEAN_TILES, HELLAS_BONUS_OCEAN_COST } from "./constants";
 
 export abstract class Space implements ISpace {
     constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
@@ -147,7 +147,7 @@ export abstract class Board {
         if (spaceType ===  SpaceType.LAND
             && this.getOceansOnBoard() < MAX_OCEAN_TILES
             && game.boardName === BoardName.HELLAS
-            && !player.canAfford(6)) {
+            && !player.canAfford(HELLAS_BONUS_OCEAN_COST)) {
             spaces = spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE)
         }
 

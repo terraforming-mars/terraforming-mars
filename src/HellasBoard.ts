@@ -4,6 +4,7 @@ import { Board, Land, BoardColony } from "./Board";
 import { Player } from "./Player";
 import { ISpace } from "./ISpace";
 import { Game } from "./Game";
+import { HELLAS_BONUS_OCEAN_COST } from "./constants";
 
 export class HellasBoard extends Board{
     constructor(shuffleMapOption: boolean = false, seed: number = 0) {
@@ -175,21 +176,21 @@ export class HellasBoard extends Board{
 
     public getAvailableSpacesForCity(player: Player, game: Game): Array<ISpace> {
         // Check for special tile
-        if (player.canAfford(6)) return super.getAvailableSpacesForCity(player, game);
+        if (player.canAfford(HELLAS_BONUS_OCEAN_COST)) return super.getAvailableSpacesForCity(player, game);
 
         return super.getAvailableSpacesForCity(player, game).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
     }
 
     public getAvailableSpacesOnLand(player: Player, game: Game): Array<ISpace> {
         // Check for special tile
-        if (player.canAfford(6)) return super.getAvailableSpacesOnLand(player, game);
+        if (player.canAfford(HELLAS_BONUS_OCEAN_COST)) return super.getAvailableSpacesOnLand(player, game);
 
         return super.getAvailableSpacesOnLand(player, game).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
     }
 
     public getAvailableSpacesForGreenery(player: Player, game: Game): Array<ISpace> {
         // Check for special tile
-        if (player.canAfford(6)) return super.getAvailableSpacesForGreenery(player, game);
+        if (player.canAfford(HELLAS_BONUS_OCEAN_COST)) return super.getAvailableSpacesForGreenery(player, game);
 
         return super.getAvailableSpacesForGreenery(player, game).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
     }

@@ -22,7 +22,7 @@ describe("Zeppelins", function () {
         (game as any).oxygenLevel = 5;
         expect(card.canPlay(player, game)).to.eq(true);
 
-        const lands = game.board.getAvailableSpacesOnLand(player, game);
+        const lands = game.board.getAvailableSpacesOnLand(player);
         game.addCityTile(player, lands[0].id);
         
         card.play(player, game);

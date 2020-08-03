@@ -15,7 +15,7 @@ describe("ImmigrationShuttles", function () {
         expect(action).to.eq(undefined);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
         for (var i = 0; i < 5; i++) {
-            game.addCityTile(player, game.board.getAvailableSpacesOnLand(player, game)[0].id);
+            game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
         }
         expect(game.getCitiesInPlay()).to.eq(5);
         expect(card.getVictoryPoints(player, game)).to.eq(1);

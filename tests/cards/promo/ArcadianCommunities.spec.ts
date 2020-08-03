@@ -17,13 +17,13 @@ describe("ArcadianCommunities", function () {
         expect(player.steel).to.eq(10);
         player.corporationCard = card;
 
-        const initLands = game.board.getAvailableSpacesForGreenery(player, game);
+        const initLands = game.board.getAvailableSpacesForGreenery(player);
         initLands[1].player = player;
         const action = card.action(player, game);
         expect(action instanceof SelectSpace).to.eq(true);
         if ( ! (action instanceof SelectSpace)) return;
         
-        const lands = game.board.getAvailableSpacesForMarker(player, game);
+        const lands = game.board.getAvailableSpacesForMarker(player);
         action.cb(lands[0]);
 
         game.addCityTile(player, lands[0].id);

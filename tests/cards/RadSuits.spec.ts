@@ -19,7 +19,7 @@ describe("RadSuits", function () {
     });
 
     it("Should play", function () {
-        const lands = game.board.getAvailableSpacesOnLand(player, game);
+        const lands = game.board.getAvailableSpacesOnLand(player);
         game.addCityTile(player, lands[0].id);
         game.addCityTile(player, lands[1].id);
 

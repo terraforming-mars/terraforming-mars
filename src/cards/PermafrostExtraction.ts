@@ -33,7 +33,7 @@ export class PermafrostExtraction implements IProjectCard {
             return undefined;
         }
 
-        return new SelectSpace("Select space for ocean tile", game.board.getAvailableSpacesForOcean(player, game), (space: ISpace) => {
+        return new SelectSpace("Select space for ocean tile", game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
             game.addOceanTile(player, space.id);
             return undefined;
         });

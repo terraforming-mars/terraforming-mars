@@ -24,7 +24,7 @@ describe("ArcticAlgae", function () {
         expect(player.plants).to.eq(1);
         player.playedCards.push(card);
 
-        game.addOceanTile(player2, game.board.getAvailableSpacesForOcean(player2, game)[0].id);
+        game.addOceanTile(player2, game.board.getAvailableSpacesForOcean(player2)[0].id);
         expect(player.plants).to.eq(3); 
     });
 });

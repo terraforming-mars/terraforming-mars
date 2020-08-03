@@ -4,9 +4,6 @@ import { SpaceType } from "./SpaceType";
 import { SpaceName } from "./SpaceName";
 import { SpaceBonus } from "./SpaceBonus";
 import { TileType } from "./TileType";
-import { Game } from "./Game";
-import { BoardName } from "./BoardName";
-import { MAX_OCEAN_TILES, HELLAS_BONUS_OCEAN_COST } from "./constants";
 
 export abstract class Space implements ISpace {
     constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
@@ -141,18 +138,10 @@ export abstract class Board {
         );
     }    
 
-    public getSpaces(spaceType: SpaceType, player: Player, game: Game): Array<ISpace> {
-        let spaces = this.spaces.filter((space) => space.spaceType === spaceType);
-
-        if (spaceType ===  SpaceType.LAND
-            && this.getOceansOnBoard() < MAX_OCEAN_TILES
-            && game.boardName === BoardName.HELLAS
-            && !player.canAfford(HELLAS_BONUS_OCEAN_COST)) {
-            spaces = spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE)
-        }
-
-        return spaces;
+    public getSpaces(spaceType: SpaceType, _player: Player): Array<ISpace> {
+        return this.spaces.filter((space) => space.spaceType === spaceType);
     }
+
     protected getRandomSpace(offset: number): ISpace {
         return this.spaces[Math.floor(Math.random() * 30) + offset];
     }
@@ -161,15 +150,15 @@ export abstract class Board {
         return this.spaces.filter((space) => space.tile === undefined);
     }
 
-    public getAvailableSpacesForCity(player: Player, game: Game): Array<ISpace> {
+    public getAvailableSpacesForCity(player: Player): Array<ISpace> {
         // A city cannot be adjacent to another city
-        return this.getAvailableSpacesOnLand(player, game).filter(
+        return this.getAvailableSpacesOnLand(player).filter(
         (space) => this.getAdjacentSpaces(space).filter((adjacentSpace) => Board.isCitySpace(adjacentSpace)).length === 0
         );
     } 
 
-    public getAvailableSpacesForMarker(player: Player, game: Game): Array<ISpace> {
-        let spaces =  this.getAvailableSpacesOnLand(player, game)
+    public getAvailableSpacesForMarker(player: Player): Array<ISpace> {
+        let spaces =  this.getAvailableSpacesOnLand(player)
         .filter(
             (space) => this.getAdjacentSpaces(space).find(
                 (adj) => adj.player === player
@@ -179,8 +168,8 @@ export abstract class Board {
         return spaces.filter((space,index) => spaces.indexOf(space) === index);
     }  
 
-    public getAvailableSpacesForGreenery(player: Player, game: Game): Array<ISpace> {
-        const spacesForGreenery = this.getAvailableSpacesOnLand(player, game)
+    public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
+        const spacesForGreenery = this.getAvailableSpacesOnLand(player)
             .filter((space) => this.getAdjacentSpaces(space).find((adj) => adj.tile !== undefined && adj.player === player && adj.tile.tileType !== TileType.OCEAN) !== undefined);
 
         // Spaces next to tiles you own
@@ -188,19 +177,19 @@ export abstract class Board {
             return spacesForGreenery;
         }
         // Place anywhere if no space owned
-        return this.getAvailableSpacesOnLand(player, game);
+        return this.getAvailableSpacesOnLand(player);
     }
 
-    public getAvailableSpacesForOcean(player: Player, game: Game): Array<ISpace> {
-        return this.getSpaces(SpaceType.OCEAN, player, game)
+    public getAvailableSpacesForOcean(player: Player): Array<ISpace> {
+        return this.getSpaces(SpaceType.OCEAN, player)
             .filter(
                 (space) => space.tile === undefined &&
                         (space.player === undefined || space.player === player)
             );
     }
 
-    public getAvailableSpacesOnLand(player: Player, game: Game): Array<ISpace> {
-        let landSpaces = this.getSpaces(SpaceType.LAND, player, game).filter(
+    public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
+        let landSpaces = this.getSpaces(SpaceType.LAND, player).filter(
             (space) => space.tile === undefined && (space.player === undefined || space.player === player)
         );
 

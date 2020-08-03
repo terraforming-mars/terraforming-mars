@@ -24,7 +24,7 @@ describe("ResearchOutpost", function () {
     });
 
     it("Can't play if no spaces available", function () {
-        const lands = game.board.getAvailableSpacesOnLand(player, game);
+        const lands = game.board.getAvailableSpacesOnLand(player);
         for (let i = 0; i < lands.length; i++) {
             game.addGreenery(player, lands[i].id);
         }

@@ -20,7 +20,7 @@ export class Philares implements CorporationCard {
 
     public initialAction(player: Player, game: Game) {
         return new SelectSpace("Select space for greenery tile", 
-        game.board.getAvailableSpacesForGreenery(player, game), (space: ISpace) => {
+        game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
             game.addGreenery(player, space.id);
             
             game.log(

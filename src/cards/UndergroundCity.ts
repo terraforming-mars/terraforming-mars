@@ -16,10 +16,10 @@ export class UndergroundCity implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     public canPlay(player: Player, game: Game): boolean {
-        return player.getProduction(Resources.ENERGY) >= 2 && game.board.getAvailableSpacesForCity(player, game).length > 0;
+        return player.getProduction(Resources.ENERGY) >= 2 && game.board.getAvailableSpacesForCity(player).length > 0;
     }
     public play(player: Player, game: Game) {
-        return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player, game), (foundSpace: ISpace) => {
+        return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (foundSpace: ISpace) => {
             game.addCityTile(player, foundSpace.id);
             player.setProduction(Resources.ENERGY,-2);
             player.setProduction(Resources.STEEL,2);

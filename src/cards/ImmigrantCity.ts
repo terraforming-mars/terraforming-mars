@@ -18,7 +18,7 @@ export class ImmigrantCity implements IProjectCard {
     public hasRequirements = false;
     public canPlay(player: Player,game: Game): boolean {
         const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 1;
-        const canPlaceCityOnMars = game.board.getAvailableSpacesForCity(player, game).length > 0;
+        const canPlaceCityOnMars = game.board.getAvailableSpacesForCity(player).length > 0;
         const canDecreaseMcProduction = player.getProduction(Resources.MEGACREDITS) >= -4 || player.isCorporation(CorporationName.THARSIS_REPUBLIC);
 
         return hasEnergyProduction && canDecreaseMcProduction && canPlaceCityOnMars;
@@ -30,7 +30,7 @@ export class ImmigrantCity implements IProjectCard {
         }
     }
     public play(player: Player, game: Game) {
-        return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player, game), (space: ISpace) => {
+        return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
             const mcProductionAfterDecrease = player.getProduction(Resources.MEGACREDITS) - 2;
             if (mcProductionAfterDecrease < -6) player.shouldTriggerCardEffect = false;
 

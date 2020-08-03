@@ -20,7 +20,7 @@ export class MiningArea implements IProjectCard {
     public name: CardName = CardName.MINING_AREA;
     public bonusResource: Resources | undefined = undefined;
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
-        return game.board.getAvailableSpacesOnLand(player, game)
+        return game.board.getAvailableSpacesOnLand(player)
                 .filter((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1)
                 .filter((space) => game.board.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType !== TileType.OCEAN && adjacentSpace.player === player).length > 0);
     }

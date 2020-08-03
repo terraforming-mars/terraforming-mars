@@ -294,7 +294,7 @@ describe("Game", function () {
     it("Does not assign player to ocean after placement", function() {
         const player1 = new Player("oc_p1", Color.BLUE, false);
         const game = new Game("oceanz", [player1], player1);
-        const spaceId: string = game.board.getAvailableSpacesForOcean(player1, game)[0].id;
+        const spaceId: string = game.board.getAvailableSpacesForOcean(player1)[0].id;
         game.addOceanTile(player1, spaceId);
 
         const space: ISpace = game.getSpace(spaceId);
@@ -321,16 +321,16 @@ describe("Game", function () {
         
         // Cannot afford
         player.megaCredits = 5;
-        let landSpaces = game.board.getSpaces(SpaceType.LAND, player, game);
+        let landSpaces = game.board.getSpaces(SpaceType.LAND, player);
         expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
-        let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player, game);
+        let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
 
         // Can afford
         player.megaCredits = 6;
-        landSpaces = game.board.getSpaces(SpaceType.LAND, player, game);
+        landSpaces = game.board.getSpaces(SpaceType.LAND, player);
         expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
-        availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player, game);
+        availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
     });
 
@@ -344,16 +344,16 @@ describe("Game", function () {
         // Cannot afford
         player.heat = 2;
         player.megaCredits = 3;
-        let landSpaces = game.board.getSpaces(SpaceType.LAND, player, game);
+        let landSpaces = game.board.getSpaces(SpaceType.LAND, player);
         expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
-        let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player, game);
+        let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
 
         // Can afford
         player.megaCredits += 1;
-        landSpaces = game.board.getSpaces(SpaceType.LAND, player, game);
+        landSpaces = game.board.getSpaces(SpaceType.LAND, player);
         expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
-        availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player, game);
+        availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
     });
 });

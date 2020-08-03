@@ -22,7 +22,7 @@ export class NoctisCity implements IProjectCard {
             return player.getProduction(Resources.ENERGY) >= 1;
         } else {
             return player.getProduction(Resources.ENERGY) >= 1 &&
-            game.board.getAvailableSpacesForCity(player, game).length > 0;;
+            game.board.getAvailableSpacesForCity(player).length > 0;;
         }
     }
     public play(player: Player, game: Game) {
@@ -33,7 +33,7 @@ export class NoctisCity implements IProjectCard {
           game.addCityTile(player, noctisSpace.id);
           return undefined;
         } else {
-            return new SelectSpace("Select space for Noctis city", game.board.getAvailableSpacesForCity(player, game), (space: ISpace) => {
+            return new SelectSpace("Select space for Noctis city", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
                 game.addCityTile(player, space.id);
                 return undefined;
             }); 

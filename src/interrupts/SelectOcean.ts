@@ -19,7 +19,7 @@ export class SelectOcean implements PlayerInterrupt {
         }
         this.playerInput = new SelectSpace(
             title,
-            game.board.getAvailableSpacesForOcean(player, game),
+            game.board.getAvailableSpacesForOcean(player),
             (space: ISpace) => {
                 game.addOceanTile(player, space.id, SpaceType.OCEAN, isWorldGov);
                 game.pendingOceans--;

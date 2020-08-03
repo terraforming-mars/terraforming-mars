@@ -22,7 +22,7 @@ describe("MiningArea", function () {
     });
 
     it("Should play", function () {
-        const lands = game.board.getAvailableSpacesOnLand(player, game);
+        const lands = game.board.getAvailableSpacesOnLand(player);
         for (let land of lands) {
             if (land.bonus.indexOf(SpaceBonus.STEEL) !== -1 || land.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
                 const adjacents = game.board.getAdjacentSpaces(land);

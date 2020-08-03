@@ -923,7 +923,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         action.options.push(
           new SelectSpace(
             "Add an ocean",
-            game.board.getAvailableSpacesForOcean(this, game), (space) => {
+            game.board.getAvailableSpacesForOcean(this), (space) => {
               game.addOceanTile(this, space.id, SpaceType.OCEAN, true);
               game.log(
                 LogMessageType.DEFAULT,
@@ -1589,7 +1589,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private convertPlantsIntoGreenery(game: Game): PlayerInput {
       return new SelectSpace(
           `Convert ${this.plantsNeededForGreenery} plants into greenery`,
-          game.board.getAvailableSpacesForGreenery(this, game),
+          game.board.getAvailableSpacesForGreenery(this),
           (space: ISpace) => {
             game.addGreenery(this, space.id);
             this.plants -= this.plantsNeededForGreenery;
@@ -1853,7 +1853,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         action.options.push(
             new SelectSpace(
                 "Select space for greenery",
-                game.board.getAvailableSpacesForGreenery(this, game), (space) => {
+                game.board.getAvailableSpacesForGreenery(this), (space) => {
                   // Do not raise oxygen or award TR for final greenery placements
                   game.addGreenery(this, space.id, SpaceType.LAND, false);
                   this.plants -= this.plantsNeededForGreenery;
@@ -1996,7 +1996,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       let greeneryCost = constants.GREENERY_COST
       if (redsAreRuling) greeneryCost += REDS_RULING_POLICY_COST;
 
-      if (this.canAfford(greeneryCost) && game.board.getAvailableSpacesForGreenery(this, game).length > 0) {
+      if (this.canAfford(greeneryCost) && game.board.getAvailableSpacesForGreenery(this).length > 0) {
         standardProjects.options.push(
             this.addGreenery(game)
         );
@@ -2004,7 +2004,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       if (
         this.canAfford(constants.CITY_COST) &&
-            game.board.getAvailableSpacesForCity(this, game).length > 0) {
+            game.board.getAvailableSpacesForCity(this).length > 0) {
         standardProjects.options.push(
             this.addCity(game)
         );
@@ -2157,7 +2157,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       if (
         this.plants >= this.plantsNeededForGreenery &&
-            game.board.getAvailableSpacesForGreenery(this, game).length > 0) {
+            game.board.getAvailableSpacesForGreenery(this).length > 0) {
         action.options.push(
             this.convertPlantsIntoGreenery(game)
         );

@@ -13,7 +13,7 @@ describe("Riots", function () {
         const game = new Game("foobar", [player], player);
         const turmoil = new Turmoil(game);
         turmoil.initGlobalEvent(game);
-        game.addCityTile(player, game.board.getAvailableSpacesOnLand(player, game)[0].id);
+        game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
         player.setResource(Resources.MEGACREDITS, 10);
         card.resolve(game, turmoil);
         expect(player.getResource(Resources.MEGACREDITS)).to.eq(6);

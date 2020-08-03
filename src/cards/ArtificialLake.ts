@@ -31,7 +31,7 @@ export class ArtificialLake implements IProjectCard {
 
       return new SelectSpace(
           'Select a land space to place an ocean',
-          game.board.getAvailableSpacesOnLand(player, game),
+          game.board.getAvailableSpacesOnLand(player),
           (foundSpace: ISpace) => {
             game.addOceanTile(player, foundSpace.id, SpaceType.LAND);
             return undefined;

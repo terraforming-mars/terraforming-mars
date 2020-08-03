@@ -18,7 +18,7 @@ export class WildlifeDome implements IProjectCard {
 
     public canPlay(player: Player, game: Game): boolean {
         if (game.turmoil !== undefined) {
-            const canPlaceTile = game.board.getAvailableSpacesForGreenery(player, game).length > 0;
+            const canPlaceTile = game.board.getAvailableSpacesForGreenery(player).length > 0;
             const meetsPartyRequirements = game.turmoil.canPlay(player, PartyName.GREENS);
             const oxygenMaxed = game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
@@ -32,7 +32,7 @@ export class WildlifeDome implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        return new SelectSpace("Select space for greenery tile", game.board.getAvailableSpacesForGreenery(player, game), (space: ISpace) => {
+        return new SelectSpace("Select space for greenery tile", game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
             return game.addGreenery(player, space.id);
         });
     }

@@ -1173,7 +1173,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public canPlaceGreenery(player: Player): boolean {
       return !this.donePlayers.has(player) &&
              player.plants >= player.plantsNeededForGreenery &&
-             this.board.getAvailableSpacesForGreenery(player, this).length > 0;
+             this.board.getAvailableSpacesForGreenery(player).length > 0;
     }
 
     public playerIsDoneWithGame(player: Player): void {

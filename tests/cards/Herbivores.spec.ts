@@ -56,11 +56,11 @@ describe("Herbivores", function () {
         player.playedCards.push(card);
         expect(card.resourceCount).to.eq(0);
 
-        game.addGreenery(player, game.board.getAvailableSpacesOnLand(player, game)[0].id);
-        game.addGreenery(player, game.board.getAvailableSpacesOnLand(player, game)[0].id);
+        game.addGreenery(player, game.board.getAvailableSpacesOnLand(player)[0].id);
+        game.addGreenery(player, game.board.getAvailableSpacesOnLand(player)[0].id);
         expect(card.resourceCount).to.eq(2);
 
-        game.addGreenery(player2, game.board.getAvailableSpacesOnLand(player2, game)[0].id);
+        game.addGreenery(player2, game.board.getAvailableSpacesOnLand(player2)[0].id);
         expect(card.resourceCount).to.eq(2); // i.e. not changed
 
         expect(card.getVictoryPoints()).to.eq(1);

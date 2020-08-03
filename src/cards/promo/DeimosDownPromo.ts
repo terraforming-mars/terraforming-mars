@@ -20,7 +20,7 @@ export class DeimosDownPromo implements IProjectCard {
     public hasRequirements = false;
 
     public canPlay(player: Player, game: Game): boolean {
-      const canPlaceTile = game.board.getAvailableSpacesForCity(player, game).length > 0;
+      const canPlaceTile = game.board.getAvailableSpacesForCity(player).length > 0;
       const remainingTemperatureSteps = (MAX_TEMPERATURE - game.getTemperature()) / 2;
       const stepsRaised = Math.min(remainingTemperatureSteps, 3);
 
@@ -36,7 +36,7 @@ export class DeimosDownPromo implements IProjectCard {
       game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 6);
       player.steel += 4;
 
-      const availableSpaces = game.board.getAvailableSpacesForCity(player, game);
+      const availableSpaces = game.board.getAvailableSpacesForCity(player);
       
       return new SelectSpace("Select space for tile", availableSpaces, (foundSpace: ISpace) => {
         game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.DEIMOS_DOWN });

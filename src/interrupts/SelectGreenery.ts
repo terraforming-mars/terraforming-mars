@@ -14,7 +14,7 @@ export class SelectGreenery implements PlayerInterrupt {
     ){
         this.playerInput = new SelectSpace(
             title,
-            game.board.getAvailableSpacesForGreenery(player, game),
+            game.board.getAvailableSpacesForGreenery(player),
             (space: ISpace) => {
                 game.addGreenery(player, space.id);
                 return undefined;

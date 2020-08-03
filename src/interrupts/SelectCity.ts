@@ -14,7 +14,7 @@ export class SelectCity implements PlayerInterrupt {
     ){
         this.playerInput = new SelectSpace(
             title,
-            game.board.getAvailableSpacesForCity(player, game),
+            game.board.getAvailableSpacesForCity(player),
             (space: ISpace) => {
                 game.addCityTile(player, space.id);
                 return undefined;

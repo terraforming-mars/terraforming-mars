@@ -204,10 +204,6 @@ export abstract class Board {
             (space) => space.tile === undefined && (space.player === undefined || space.player === player)
         );
 
-        if (this.getOceansOnBoard() < MAX_OCEAN_TILES && game.boardName === BoardName.HELLAS && !player.canAfford(6)) {
-            landSpaces = landSpaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE)
-        }
-        
         return landSpaces;
     }
 

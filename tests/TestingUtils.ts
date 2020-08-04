@@ -9,7 +9,7 @@ export const maxOutOceans = function(player: Player, game: Game, toValue: number
         toValue = constants.MAX_OCEAN_TILES;
     }
     
-    for (const space of game.board.getSpaces(SpaceType.OCEAN)) {
+    for (const space of game.board.getSpaces(SpaceType.OCEAN, player)) {
         if (space.tile !== undefined) continue;
         if (game.board.getOceansOnBoard() >= toValue) break;
         game.addOceanTile(player, space.id)

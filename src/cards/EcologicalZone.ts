@@ -29,8 +29,8 @@ export class EcologicalZone implements IProjectCard, IResourceCard {
         );
   }
   private hasGreeneryTile(player: Player, game: Game): boolean {
-    return game.board.getSpaces(SpaceType.OCEAN)
-        .concat(game.board.getSpaces(SpaceType.LAND))
+    return game.board.getSpaces(SpaceType.OCEAN, player)
+        .concat(game.board.getSpaces(SpaceType.LAND, player))
         .filter(
             (space) => space.tile !== undefined &&
           space.tile.tileType === TileType.GREENERY &&

@@ -138,9 +138,10 @@ export abstract class Board {
         );
     }    
 
-    public getSpaces(spaceType: SpaceType): Array<ISpace> {
+    public getSpaces(spaceType: SpaceType, _player: Player): Array<ISpace> {
         return this.spaces.filter((space) => space.spaceType === spaceType);
     }
+
     protected getRandomSpace(offset: number): ISpace {
         return this.spaces[Math.floor(Math.random() * 30) + offset];
     }
@@ -180,7 +181,7 @@ export abstract class Board {
     }
 
     public getAvailableSpacesForOcean(player: Player): Array<ISpace> {
-        return this.getSpaces(SpaceType.OCEAN)
+        return this.getSpaces(SpaceType.OCEAN, player)
             .filter(
                 (space) => space.tile === undefined &&
                         (space.player === undefined || space.player === player)
@@ -188,11 +189,11 @@ export abstract class Board {
     }
 
     public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
-        return this.getSpaces(SpaceType.LAND)
-            .filter(
-                (space) => space.tile === undefined &&
-                        (space.player === undefined || space.player === player)
-            );
+        let landSpaces = this.getSpaces(SpaceType.LAND, player).filter(
+            (space) => space.tile === undefined && (space.player === undefined || space.player === player)
+        );
+
+        return landSpaces;
     }
 
     protected shuffle(input: Array<ISpace>): Array<ISpace> {

@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { Color } from "../src/Color";
 import { OriginalBoard } from "../src/OriginalBoard";

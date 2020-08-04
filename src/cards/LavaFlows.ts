@@ -22,21 +22,21 @@ export class LavaFlows implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
     public static getVolcanicSpaces(player: Player, game: Game): Array<ISpace> {
         if (game.boardName === BoardName.ORIGINAL) {
-        return game.board.getSpaces(SpaceType.LAND)
+        return game.board.getSpaces(SpaceType.LAND, player)
                 .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
                 .filter((space) => space.id === SpaceName.THARSIS_THOLUS ||
                                    space.id === SpaceName.ASCRAEUS_MONS ||
                                    space.id === SpaceName.ARSIA_MONS ||
                                    space.id === SpaceName.PAVONIS_MONS);
         } else if (game.boardName === BoardName.ELYSIUM) {
-            return game.board.getSpaces(SpaceType.LAND)
+            return game.board.getSpaces(SpaceType.LAND, player)
             .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player))
             .filter((space) => space.id === SpaceName.HECATES_THOLUS ||
                                space.id === SpaceName.ELYSIUM_MONS ||
                                space.id === SpaceName.ARSIA_MONS_ELYSIUM ||
                                space.id === SpaceName.OLYMPUS_MONS);        
         } else {
-            return game.board.getSpaces(SpaceType.LAND)
+            return game.board.getSpaces(SpaceType.LAND, player)
             .filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
         }    
     }

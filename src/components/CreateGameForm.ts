@@ -1,10 +1,10 @@
 import Vue from "vue";
 import { Color } from "../Color";
-import { BoardName } from '../BoardName';
+import { BoardName } from "../BoardName";
 import { CardName } from "../CardName";
 import { CorporationsFilter } from "./CorporationsFilter";
 import { $t } from "../directives/i18n";
-import { IGameData } from '../database/IDatabase';
+import { IGameData } from "../database/IDatabase";
 
 interface CreateGameModel {
     firstIndex: number;
@@ -23,7 +23,8 @@ interface CreateGameModel {
     turmoil: boolean;
     customCorporationsList: Array<CardName>;
     showCorporationList: boolean;
-    isSoloModePage: boolean,
+    isSoloModePage: boolean;
+    isBeginnerCorpEnabled: boolean;
     board: BoardName | "random";
     seed: number;
     solarPhaseOption: boolean;
@@ -72,6 +73,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             customCorporationsList: [],
             showCorporationList: false,
             isSoloModePage: false,
+            isBeginnerCorpEnabled: false,
             board: BoardName.ORIGINAL,
             boards: [
                 BoardName.ORIGINAL,
@@ -96,7 +98,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
         "corporations-filter": CorporationsFilter,
     },
     mounted: function () {
-        if (window.location.pathname === '/solo') {
+        if (window.location.pathname === "/solo") {
             this.isSoloModePage = true;
         }
 
@@ -125,6 +127,9 @@ export const CreateGameForm = Vue.component("create-game-form", {
         getPlayers: function (): Array<NewPlayerModel> {
             const component = (this as any) as CreateGameModel;
             return component.players.slice(0, component.playersCount);
+        },
+        isBeginnerToggleEnabled: function(): Boolean {
+            return !(this.initialDraft || this.prelude || this.venusNext || this.colonies || this.turmoil)
         },
         createGame: function () {
             const component = (this as any) as CreateGameModel;
@@ -438,7 +443,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 </span>
                             </div>
                             <div>
-                                <label class="form-switch form-inline">
+                                <label v-if="isBeginnerToggleEnabled()" class="form-switch form-inline">
                                     <input type="checkbox" v-model="newPlayer.beginner">
                                     <i class="form-icon"></i> <span v-i18n>Beginner?</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#beginner-corporation" class="tooltip" target="_blank">&#9432;</a>
                                 </label>

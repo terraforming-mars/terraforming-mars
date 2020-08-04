@@ -1445,7 +1445,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
       
       this.tilePlaced(space);
-      LogHelper.logTilePlacement(this, player, space)
+      LogHelper.logTilePlacement(this, player, space, tile.tileType);
 
       if (tile.tileType === TileType.OCEAN) {
         space.player = undefined;

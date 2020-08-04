@@ -26,4 +26,21 @@ describe("Revolution", function () {
         expect(player.getTerraformRating()).to.eq(19);
         expect(player2.getTerraformRating()).to.eq(18);
     });
+    it("resolve play 2", function () {
+        const card = new Revolution();
+        const player = new Player("test", Color.BLUE, false);
+        const player2 = new Player("test2", Color.RED, false);
+        const game = new Game("foobar", [player,player2], player);
+        const turmoil = new Turmoil(game);
+        turmoil.initGlobalEvent(game);
+        player2.playedCards.push(new Sponsors());
+        turmoil.chairman = player2.id;
+        turmoil.dominantParty = new Kelvinists();
+        turmoil.dominantParty.partyLeader = player2.id;
+        
+        turmoil.dominantParty.delegates.push(player2.id);
+        card.resolve(game, turmoil);
+        expect(player.getTerraformRating()).to.eq(20);
+        expect(player2.getTerraformRating()).to.eq(18);
+    });
 });

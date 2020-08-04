@@ -24,7 +24,6 @@ interface CreateGameModel {
     customCorporationsList: Array<CardName>;
     showCorporationList: boolean;
     isSoloModePage: boolean;
-    isBeginnerCorpEnabled: boolean;
     board: BoardName | "random";
     seed: number;
     solarPhaseOption: boolean;
@@ -73,7 +72,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
             customCorporationsList: [],
             showCorporationList: false,
             isSoloModePage: false,
-            isBeginnerCorpEnabled: false,
             board: BoardName.ORIGINAL,
             boards: [
                 BoardName.ORIGINAL,

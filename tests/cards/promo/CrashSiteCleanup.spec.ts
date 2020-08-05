@@ -38,4 +38,13 @@ describe("CrashSiteCleanup", function () {
         action.options[1].cb();
         expect(player.steel).to.eq(2);
     });
+
+    it("Can play if removed plants from neutral player in solo mode", function () {
+        game = new Game("foobar", [player], player);
+        const smallAsteroid = new SmallAsteroid();
+        smallAsteroid.play(player, game);
+
+        expect(card.canPlay(player, game)).to.eq(true);
+        expect(game.someoneHasRemovedOtherPlayersPlants).to.eq(true);
+    });
 });

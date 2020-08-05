@@ -28,7 +28,7 @@ export class Revolution implements IGlobalEvent {
                 players[0].decreaseTerraformRatingSteps(2);
                 players.shift();
 
-                if (players.length === 1) {
+                if (players.length === 1 && this.getScore(players[0], turmoil) > 0) {
                     players[0].decreaseTerraformRating();   
                 }
                 else if (players.length > 1) {
@@ -40,7 +40,9 @@ export class Revolution implements IGlobalEvent {
                     else {
                         const score = this.getScore(players[0], turmoil);
                         while (players.length > 0 && this.getScore(players[0], turmoil) === score) {
-                            players[0].decreaseTerraformRating();
+                            if (this.getScore(players[0], turmoil) > 0) {
+                                players[0].decreaseTerraformRating();
+                            }
                             players.shift();
                         }
                     }
@@ -49,7 +51,9 @@ export class Revolution implements IGlobalEvent {
             } else {
                 const score = this.getScore(players[0], turmoil);
                 while (players.length > 0 && this.getScore(players[0], turmoil) === score) {
-                    players[0].decreaseTerraformRatingSteps(2);
+                    if (this.getScore(players[0], turmoil) > 0) {
+                        players[0].decreaseTerraformRatingSteps(2);
+                    }
                     players.shift();
                 }
             }

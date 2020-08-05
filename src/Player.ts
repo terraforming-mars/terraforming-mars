@@ -225,7 +225,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
 
         // Crash site cleanup hook
-        if (fromPlayer !== this && resource === Resources.PLANTS) {
+        if (fromPlayer !== this && resource === Resources.PLANTS && amount < 0) {
           game.someoneHasRemovedOtherPlayersPlants = true;
         }
 

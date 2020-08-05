@@ -592,8 +592,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public addResourceDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {
       if (this.soloMode) {
+        // Crash site cleanup hook
+        if (resource === Resources.PLANTS) this.someoneHasRemovedOtherPlayersPlants = true;
         return;
       }
+
       let candidates: Array<Player> = [];
       if (resource === Resources.PLANTS) {
         candidates = this.getPlayers().filter((p) => p.id !== player.id && !p.plantsAreProtected() && p.getResource(resource) > 0);

@@ -68,9 +68,9 @@
 
 input[type=checkbox]:checked + .filterDiv,
 input[type=radio]:checked + .filterDiv {
-  box-shadow: 0 0 0 2px #303030, 0 0 8px 8px #ee792b;
-  background: #fff;
-  background: linear-gradient(to bottom right, #fff, #ccc, #fff, #ddd, #eee, #fff, #ddd);
+  box-shadow: 0 0 0 2px #303030, 0 0 8px 8px #e28c22;
+  transform: translate(0px, -5px);
+  transition: 0.1s;
 }
 
 .filterDiv3 {
@@ -1249,25 +1249,26 @@ input[type=radio]:checked + .filterDiv {
   position: absolute;
   color: #020202;
   font-family: Prototype;
-  width: 62px;
-  height: 20px;
-  line-height: 20px;
+  width: 80px;
+  height: 30px;
+  line-height: 32px;
   text-align: center;
-  margin: 305px 0 0 30px;
-  font-size: 12px;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
-  background: #f5e500;
-  border-radius: 2px;
-  border-top: 2px solid rgb(221,221,221);
-  border-left: 2px solid rgb(221,221,221);
-  border-bottom: 2px solid rgb(137,137,137);
-  border-right: 2px solid rgb(137,137,137);
+  margin: 276px 0 0 -1px;
+  font-size: 14px;
+  background-color: rgb(255,204,100);
+  background: linear-gradient(to right,transparent,#666);
+  border-radius: 0px 20px 0px 16px;
+  border-top: 4px solid #dddddd;
+  border-left: 4px solid #dddddd;
+  border-bottom: 4px solid #898989;
+  border-right: 4px solid #898989;
   z-index: 3;
 }
 
 .card_resources_counter--number {
-  padding-left: 5px;
   z-index: 3;
+  font-size: 22px;
+  vertical-align: bottom;
 }
 
 

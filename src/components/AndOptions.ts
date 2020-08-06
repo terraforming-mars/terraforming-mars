@@ -52,7 +52,7 @@ export const AndOptions = Vue.component("and-options", {
                     domProps: { className: "btn btn-primary" }, 
                     on: { click: () => { this.saveData(); } } 
                 }, 
-                "Save"
+                playerInput.buttonLabel
             );
             children.push(
                 createElement("div", {"class": "wf-action"}, [saveBtn])

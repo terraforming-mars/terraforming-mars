@@ -785,6 +785,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       const result: AndOptions = new AndOptions(() => { this.playerHasPickedCorporationCard(player, corporation); return undefined; });
 
       result.title = " ";
+      result.buttonLabel = "Start";
       result.options.push(
         new SelectCard<CorporationCard>(
           "Select corporation", player.dealtCorporationCards,

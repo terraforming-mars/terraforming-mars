@@ -9,6 +9,7 @@ import { ICard } from "../cards/ICard";
 
 export class SelectOption implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_OPTION;
+    public buttonLabel: string = "Save";
     constructor(public title: string, public cb: () => SelectSpace | SelectHowToPay | AndOptions | SelectOption | SelectAmount | SelectCard<ICard> | undefined) {
     }
 }

@@ -15,6 +15,7 @@ export class OrOptions implements PlayerInput {
         return undefined;
     }
     public title: string = "Select one option";
+    public buttonLabel: string = "Save";
     public options: Array<PlayerInput>;
     public inputType: PlayerInputTypes = PlayerInputTypes.OR_OPTIONS;
     constructor(

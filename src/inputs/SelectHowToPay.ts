@@ -8,6 +8,7 @@ import { SelectOption } from "./SelectOption";
 
 export class SelectHowToPay implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_HOW_TO_PAY;
+    public buttonLabel: string = "Save";
     constructor(
         public title: string,
         public canUseSteel: boolean,

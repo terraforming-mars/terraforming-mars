@@ -27,7 +27,7 @@ import {ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILEST
 import {ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS} from "./awards/Awards";
 import {SpaceName} from "./SpaceName";
 import {BoardColony, Board} from "./Board";
-import {CorporationName} from "./CorporationName";
+import { CorporationName } from './CorporationName';
 import {ElysiumBoard} from "./ElysiumBoard";
 import {HellasBoard} from "./HellasBoard";
 import {BoardName} from "./BoardName";
@@ -131,6 +131,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public initialDraftRounds: number = 4;
     public randomMA: boolean = false;
     public seed: number = Math.random();
+    private gameOptions: GameOptions;
 
     constructor(
       public id: string,
@@ -165,6 +166,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           clonedGamedId: undefined
         } as GameOptions
       }
+      this.gameOptions = gameOptions;
       this.shuffleMapOption = gameOptions.shuffleMapOption;
       this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.venusNextExtension && gameOptions.includeVenusMA);
 
@@ -1170,6 +1172,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     private gotoEndGame(): void {
       Database.getInstance().cleanSaves(this.id, this.lastSaveId);
+      let scores:  Array<Array<String>> = [];
+      this.players.forEach(player => {
+        let result : Array<String> = [];
+        result.push(player.corporationCard!.name);
+        result.push(player.victoryPointsBreakdown.total.toString());
+        scores.push(result);
+      });
+
+      Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);
       if (this.phase === Phase.END) return;
       this.phase = Phase.END;
     }

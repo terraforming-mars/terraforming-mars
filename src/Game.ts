@@ -1175,7 +1175,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
       let scores:  Array<Array<String>> = [];
       this.players.forEach(player => {
         let result : Array<String> = [];
-        result.push(player.corporationCard!.name);
+        let corponame: String = "";
+        if (player.corporationCard !== undefined) {
+          corponame = player.corporationCard.name;
+        }
+        result.push(corponame);
         result.push(player.victoryPointsBreakdown.total.toString());
         scores.push(result);
       });

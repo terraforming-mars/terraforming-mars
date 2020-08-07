@@ -1179,11 +1179,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       Database.getInstance().cleanSaves(this.id, this.lastSaveId);
       let scores:  Array<Score> = [];
       this.players.forEach(player => {
-        let corponame: String = "";
-        if (player.corporationCard !== undefined) {
-          corponame = player.corporationCard.name;
-        }
-        scores.push({corporation: corponame, playerScore: player.victoryPointsBreakdown.total });
+        const corporation = player.corporationCard as CorporationCard;
+        scores.push({corporation: corporation.name, playerScore: player.victoryPointsBreakdown.total });
       });
 
       Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);

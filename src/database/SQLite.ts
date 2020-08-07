@@ -1,6 +1,6 @@
 import { IDatabase } from "./IDatabase";
-import { Game, GameOptions } from '../Game';
-import { IGameData } from './IDatabase';
+import { Game, GameOptions } from "../Game";
+import { IGameData } from "./IDatabase";
 
 import sqlite3 = require("sqlite3");
 const path = require("path");

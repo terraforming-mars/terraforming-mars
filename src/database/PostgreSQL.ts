@@ -1,6 +1,6 @@
 import { IDatabase } from "./IDatabase";
-import { Game, GameOptions } from '../Game';
-import { IGameData } from './IDatabase';
+import { Game, GameOptions } from "../Game";
+import { IGameData } from "./IDatabase";
 
 import { Client, ClientConfig } from "pg";
 

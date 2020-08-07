@@ -1,4 +1,4 @@
-import { Game, GameOptions } from '../Game';
+import { Game, GameOptions } from "../Game";
 
 export interface IGameData {
     gameId: string;

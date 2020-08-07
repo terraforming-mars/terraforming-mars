@@ -127,7 +127,7 @@ export class PostgreSQL implements IDatabase {
     }
 
     saveGameResults(game_id: string, players: number, generations: number, gameOptions: GameOptions, scores: Array<Array<String>>): void {
-        this.client.query("INSERT INTO game_results (game_id, seed_game_id, players, generations, game_options, scores) VALUES($1, $2, $3, $4, $5, $6)", [game_id, gameOptions.clonedGamedId, players, generations, gameOptions, scores], (err) => {
+        this.client.query("INSERT INTO game_results (game_id, seed_game_id, players, generations, game_options, scores) VALUES($1, $2, $3, $4, $5, $6)", [game_id, gameOptions.clonedGamedId, players, generations, gameOptions, JSON.stringify(scores)], (err) => {
             if (err) {
                 console.error("PostgreSQL:saveGameResults", err);
                 throw err;

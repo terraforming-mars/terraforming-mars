@@ -1,5 +1,5 @@
 import { IDatabase } from "./IDatabase";
-import { Game, GameOptions } from "../Game";
+import { Game, GameOptions, Score } from "../Game";
 import { IGameData } from "./IDatabase";
 
 import sqlite3 = require("sqlite3");
@@ -69,7 +69,7 @@ export class SQLite implements IDatabase {
         });
     }      
 
-    saveGameResults(_game_id: string, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Array<Array<String>>): void {
+    saveGameResults(_game_id: string, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Array<Score>): void {
         return;
     } 
 

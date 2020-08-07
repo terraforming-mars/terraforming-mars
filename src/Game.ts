@@ -58,6 +58,11 @@ import { OrOptions } from "./inputs/OrOptions";
 import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
 
+export interface Score {
+  corporation: String;
+  playerScore: number;
+}
+
 export interface GameOptions {
   draftVariant: boolean;
   corporateEra: boolean;
@@ -1172,16 +1177,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     private gotoEndGame(): void {
       Database.getInstance().cleanSaves(this.id, this.lastSaveId);
-      let scores:  Array<Array<String>> = [];
+      let scores:  Array<Score> = [];
       this.players.forEach(player => {
-        let result : Array<String> = [];
         let corponame: String = "";
         if (player.corporationCard !== undefined) {
           corponame = player.corporationCard.name;
         }
-        result.push(corponame);
-        result.push(player.victoryPointsBreakdown.total.toString());
-        scores.push(result);
+        scores.push({corporation: corponame, playerScore: player.victoryPointsBreakdown.total });
       });
 
       Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);

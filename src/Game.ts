@@ -1019,19 +1019,21 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public playerIsFinishedWithResearchPhase(player: Player): void {
       this.researchedPlayers.add(player.id);
-      if (this.allPlayersHaveFinishedResearch() && this.interrupts.length === 0) {
-        this.gotoActionPhase();
-      } else if (this.allPlayersHaveFinishedResearch() && this.interrupts.length > 0 ) {
+      if (this.allPlayersHaveFinishedResearch()) {
+        if (this.interrupts.length === 0) {
+          this.gotoActionPhase();
+        } else {
         // Resolve research interrupt (Helion player)
-        let interrupt = this.interrupts.shift();
-        if (interrupt !== undefined && interrupt.playerInput !== undefined) {
-          if (interrupt.beforeAction !== undefined) {
-            interrupt.beforeAction();
-          }
-          interrupt.player.setWaitingFor(interrupt.playerInput, () => {
-            this.playerIsFinishedWithResearchPhase(player);
-            return;
-          });
+          let interrupt = this.interrupts.shift();
+          if (interrupt !== undefined && interrupt.playerInput !== undefined) {
+            if (interrupt.beforeAction !== undefined) {
+              interrupt.beforeAction();
+            }
+            interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+              this.playerIsFinishedWithResearchPhase(player);
+              return;
+            });
+          }          
         }
       }
     }

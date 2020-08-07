@@ -1000,7 +1000,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       const payForCards = () => {
         const purchasedCardsCost = this.cardCost * selectedCards.length;
-        game.addSelectHowToPayInterrupt(this, purchasedCardsCost, false, false, "Select how to pay " + purchasedCardsCost + " for purchasing " + selectedCards.length + " card(s)");
+        if (selectedCards.length > 0) {
+          game.addSelectHowToPayInterrupt(this, purchasedCardsCost, false, false, "Select how to pay " + purchasedCardsCost + " for purchasing " + selectedCards.length + " card(s)");
+        }
         selectedCards.forEach((card) => {
           this.cardsInHand.push(card);
         });

@@ -1,6 +1,6 @@
 import { IDatabase } from "./IDatabase";
-import { Game } from "../Game";
-import { IGameData } from './IDatabase';
+import { Game, GameOptions, Score } from "../Game";
+import { IGameData } from "./IDatabase";
 
 import { Client, ClientConfig } from "pg";
 
@@ -24,6 +24,12 @@ export class PostgreSQL implements IDatabase {
                 throw err;
             }
         });
+        this.client.query("CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))", (err) => {
+            if (err) {
+                throw err;
+            }
+        });
+
         this.client.query("CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)", (err) => {
             if (err) {
                 throw err;
@@ -119,6 +125,15 @@ export class PostgreSQL implements IDatabase {
             return cb(err);
         });
     }
+
+    saveGameResults(game_id: string, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
+        this.client.query("INSERT INTO game_results (game_id, seed_game_id, players, generations, game_options, scores) VALUES($1, $2, $3, $4, $5, $6)", [game_id, gameOptions.clonedGamedId, players, generations, gameOptions, JSON.stringify(scores)], (err) => {
+            if (err) {
+                console.error("PostgreSQL:saveGameResults", err);
+                throw err;
+            }
+        });
+    }   
 
     cleanSaves(game_id: string, save_id: number): void {
         // DELETE all saves except initial and last one

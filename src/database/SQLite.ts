@@ -1,6 +1,6 @@
 import { IDatabase } from "./IDatabase";
-import {Game} from "../Game";
-import { IGameData } from './IDatabase';
+import { Game, GameOptions, Score } from "../Game";
+import { IGameData } from "./IDatabase";
 
 import sqlite3 = require("sqlite3");
 const path = require("path");
@@ -68,6 +68,10 @@ export class SQLite implements IDatabase {
             return cb(err);
         });
     }      
+
+    saveGameResults(_game_id: string, _players: number, _generations: number, _gameOptions: GameOptions, _scores: Array<Score>): void {
+        return;
+    } 
 
     restoreGameLastSave(game_id:string, game: Game, cb:(err: any) => void) {
         // Retrieve last save from database

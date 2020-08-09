@@ -4,7 +4,6 @@ import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
-import { SelectHowToPay } from '../../inputs/SelectHowToPay';
 import { OrOptions } from '../../inputs/OrOptions';
 import { SelectOption } from '../../inputs/SelectOption';
 import { Game } from '../../Game';
@@ -39,13 +38,13 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard, IResourceC
     public action(player: Player, game: Game) {
         var opts: Array<SelectOption> = [];
 
-        const addResource = new SelectOption("Pay 2 to add 1 floater to this card", () => this.addResource(player));
+        const addResource = new SelectOption("Pay 2 to add 1 floater to this card", () => this.addResource(player, game));
         const spendResource = new SelectOption("Remove 2 floaters to raise Venus 1 step", () => this.spendResource(player, game));
         const canAffordRed = !PartyHooks.shouldApplyPolicy(game, PartyName.REDS) || player.canAfford(REDS_RULING_POLICY_COST);
         if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE && canAffordRed) {
             opts.push(spendResource);
         } else {
-            return this.addResource(player);
+            return this.addResource(player, game);
         };
 
         if (player.canAfford(2)) {
@@ -57,25 +56,8 @@ export class ForcedPrecipitation implements IActionCard,IProjectCard, IResourceC
         return new OrOptions(...opts);
     }
 
-    private addResource(player: Player) {
-        if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-            return new SelectHowToPay(
-                "Select how to pay ", false, false,
-                player.canUseHeatAsMegaCredits,
-                2,
-                (htp) => {
-                    if (htp.heat + htp.megaCredits < 2) {
-                        throw new Error("Not enough for action");
-                    }
-                    player.megaCredits -= htp.megaCredits;
-                    player.heat -= htp.heat;
-                    this.resourceCount++;
-                    return undefined;
-                }
-            );
-        }
-
-        player.megaCredits -= 2;
+    private addResource(player: Player, game: Game) {
+        game.addSelectHowToPayInterrupt(player, 2, false, false, "Select how to pay for action");
         this.resourceCount++;
         return undefined;
     }

@@ -18,39 +18,15 @@ describe("AquiferPumping", function () {
     });
 
     it("Should action", function () {
-        const action = card.action(player, game);
-        expect(action).not.to.eq(undefined);
         player.megaCredits = 8;
+        const action = card.action(player, game);
+        expect(action).to.eq(undefined);
 
-        action.options[0].cb({
-            heat: 0,
-            steel: 0,
-            titanium: 0,
-            megaCredits: 8
-        });
-
-        action.cb();
         expect(player.megaCredits).to.eq(0);
 
-        action.options[0].cb({
-            heat: 0,
-            steel: 0,
-            titanium: 0,
-            megaCredits: 7
-        });
-        expect(function () { action.cb(); }).to.throw("Need to pay 8");
     });
 
     it("Cannot action if not enough to pay", function () {
         expect(card.canAct(player, game)).to.eq(false);
-        const action = card.action(player, game);
-        
-        action.options[0].cb({
-            heat: 0,
-            steel: 0,
-            titanium: 0,
-            megaCredits: 7
-        });
-        expect(function () { action.cb(); }).to.throw("Need to pay 8");
     });
 });

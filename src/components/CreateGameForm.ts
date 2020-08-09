@@ -18,6 +18,7 @@ interface CreateGameModel {
     randomMA: boolean;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
+    showTagOverviewOption: boolean;
     venusNext: boolean;
     colonies: boolean;
     turmoil: boolean;
@@ -66,6 +67,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             randomMA: false,
             randomFirstPlayer: true,
             showOtherPlayersVP: false,
+            showTagOverviewOption: false,
             venusNext: false,
             colonies: false,
             turmoil: false,
@@ -186,6 +188,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const initialDraftRounds = component.initialDraftRounds;
             const randomMA = component.randomMA;
             const showOtherPlayersVP = component.showOtherPlayersVP;
+            const showTagOverviewOption = component.showTagOverviewOption;
             const venusNext = component.venusNext;
             const colonies = component.colonies;
             const turmoil = component.turmoil;
@@ -217,6 +220,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 prelude,
                 draftVariant,
                 showOtherPlayersVP,
+                showTagOverviewOption,
                 venusNext,
                 colonies,
                 turmoil,
@@ -367,6 +371,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <label class="form-switch" v-if="playersCount > 1">
                                 <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP">
                                 <i class="form-icon"></i> <span v-i18n>Show real-time VP</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#show-real-time-vp" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+                            
+                            <label class="form-switch" v-if="playersCount > 1">
+                                <input type="checkbox" name="showTagOverview" v-model="showTagOverviewOption">
+                                <i class="form-icon"></i> <span v-i18n>Show players tag overview</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tag-overview" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <label class="form-switch">

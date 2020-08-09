@@ -72,6 +72,7 @@ export interface GameOptions {
   turmoilExtension: boolean;
   boardName: BoardName;
   showOtherPlayersVP: boolean;
+  showTagOverviewOption: boolean;
   customCorporationsList: Array<CardName>;
   solarPhaseOption: boolean;
   shuffleMapOption: boolean;
@@ -122,6 +123,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public turmoilExtension: boolean;
     public boardName: BoardName;
     public showOtherPlayersVP: boolean;
+    public showTagOverviewOption: boolean;
     private solarPhaseOption: boolean;
     public shuffleMapOption: boolean;
     public turmoil: Turmoil | undefined;
@@ -160,6 +162,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           turmoilExtension: false,
           boardName: BoardName.ORIGINAL,
           showOtherPlayersVP: false,
+          showTagOverviewOption: false,
           customCorporationsList: [],
           solarPhaseOption: false,
           shuffleMapOption: false,
@@ -189,6 +192,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.includeVenusMA = gameOptions.includeVenusMA;
       this.dealer = new Dealer(this.corporateEra, this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption, this.turmoilExtension, Math.random());
       this.showOtherPlayersVP = gameOptions.showOtherPlayersVP;
+      this.showTagOverviewOption = gameOptions.showTagOverviewOption;
       this.solarPhaseOption = gameOptions.solarPhaseOption;
       this.soloTR = gameOptions.soloTR;
       this.initialDraft = gameOptions.initialDraftVariant;
@@ -462,6 +466,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.boardName = gameToRebuild.boardName;
           game.board = gameToRebuild.board;
           game.showOtherPlayersVP = gameToRebuild.showOtherPlayersVP;
+          game.showTagOverviewOption = gameToRebuild.showTagOverviewOption;
           game.solarPhaseOption = gameToRebuild.solarPhaseOption;
           game.shuffleMapOption = gameToRebuild.shuffleMapOption;
           game.promoCardsOption = gameToRebuild.promoCardsOption;

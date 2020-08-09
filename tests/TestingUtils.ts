@@ -35,6 +35,7 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
         turmoilExtension: true,
         boardName: BoardName.ORIGINAL,
         showOtherPlayersVP: false,
+        showTagOverview: false,
         customCorporationsList: [],
         solarPhaseOption: false,
         shuffleMapOption: false,

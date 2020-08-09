@@ -2,7 +2,7 @@ import Vue from "vue";
 import {Tags} from "../cards/Tags";
 import {PlayerModel} from "../models/PlayerModel";
 
-export const TagsOverview = Vue.component("tags", {
+export const TagOverview = Vue.component("tags", {
     props: ["player"],
     methods: {
         getTags: function () {
@@ -31,7 +31,7 @@ export const TagsOverview = Vue.component("tags", {
                 <span class="player_name" >{{player.name}}</span>
              </div>
                 <template v-for="tag in getTags()">
-                    <div class="grid-item"><span>{{getTagCount(player, tag)}}</span></div>
+                    <div class="grid-item" :class="'player_tag_bg_color_'+player.color"><span>{{getTagCount(player, tag)}}</span></div>
                 </template>
             </template>
         </div>

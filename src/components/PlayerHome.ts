@@ -14,7 +14,7 @@ import { LogPanel } from "./LogPanel";
 import { PlayerMixin } from "./PlayerMixin";
 import { TagCount } from "./TagCount";
 import { Turmoil } from "./Turmoil";
-import {TagsOverview} from "./TagOverview";
+import { TagOverview } from "./TagOverview";
 
 const dialogPolyfill = require("dialog-polyfill");
 
@@ -28,7 +28,7 @@ export const PlayerHome = Vue.component("player-home", {
         "waiting-for": WaitingFor,
         "milestone": Milestone,
         "award": Award,
-        "tags": TagsOverview,
+        "tags": TagOverview,
         "preferences": Preferences,
         "colony": Colony,
         "log-panel": LogPanel,
@@ -112,19 +112,21 @@ export const PlayerHome = Vue.component("player-home", {
                         <award :awards_list="player.awards" />
                     </div>
                     
-                    <details class="accordion">
-                        <summary class="accordion-header">
-                            <div class="is-action">
-                                <i class="icon icon-arrow-right mr-1"></i>
-                                <span v-i18n>Tag Overview</span>
+                    <div v-if="player.players.length > 1 && player.showTagOverviewOption === true">
+                        <details class="accordion">
+                            <summary class="accordion-header">
+                                <div class="is-action">
+                                    <i class="icon icon-arrow-right mr-1"></i>
+                                    <span v-i18n>Tag Overview</span>
+                                </div>
+                            </summary>
+                            <div class="accordion-body">
+                                <div v-if="player.players.length > 1" class="player_home_block" >
+                                  <tags :player="player" />
+                                </div>
                             </div>
-                        </summary>
-                        <div class="accordion-body">
-                            <div v-if="player.players.length > 1" class="player_home_block" >
-                              <tags :player="player" />
-                            </div>
-                        </div>
-                    </details>
+                        </details>
+                    </div>
                 </div>
 
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">

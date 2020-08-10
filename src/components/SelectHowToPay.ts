@@ -163,6 +163,26 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
               htp.megaCredits = 0;
             }
 
+            if (requiredAmt > 0 && totalSpentAmt > requiredAmt) {
+                let diff = totalSpentAmt - requiredAmt;
+                if (htp.titanium && diff >= this.player.titaniumValue) {
+                    this.$data.warning = "You cannot overspend titanium";
+                    return;
+                }
+                if (htp.steel && diff >= this.player.steelValue) {
+                    this.$data.warning = "You cannot overspend steel";
+                    return;
+                }
+                if (htp.heat && diff >= 1) {
+                    this.$data.warning = "You cannot overspend heat";
+                    return;
+                }
+                if (htp.megaCredits && diff >= 1) {
+                    this.$data.warning = "You cannot overspend megaCredits";
+                    return;
+                }
+            }
+            
             const showAlert = PreferencesManager.loadValue("show_alerts") === "1";
 
             if (requiredAmt > 0 && totalSpentAmt > requiredAmt && showAlert) {

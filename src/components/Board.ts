@@ -109,8 +109,7 @@ export const Board = Vue.component("board", {
         oceansValue: function() {
             const leftover = constants.MAX_OCEAN_TILES - this.oceans_count;
             if (leftover == 0) {
-                // return `<img width="26" src="/assets/checkmark.png" alt="completed">`
-                return "Done"
+                return `<img width="26" src="/assets/checkmark.png" alt="completed">`
             } else {
                 return leftover
             }
@@ -142,7 +141,7 @@ export const Board = Vue.component("board", {
             </div>
 
             <div class="global-numbers-oceans">
-                <div class="global-numbers-value">{{ oceansValue() }}</div>
+                <div class="global-numbers-value" v-html="oceansValue()"></div>
             </div>
         </div>
 

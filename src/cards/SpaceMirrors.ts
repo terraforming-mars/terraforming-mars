@@ -4,9 +4,9 @@ import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
-import { SelectHowToPay } from "../inputs/SelectHowToPay";
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
+import { Game } from "../Game";
 
 export class SpaceMirrors implements IActionCard, IProjectCard {
     public cost: number = 3;
@@ -20,19 +20,8 @@ export class SpaceMirrors implements IActionCard, IProjectCard {
     public canAct(player: Player): boolean {
         return player.canAfford(7);
     }
-    public action(player: Player) {
-        if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-            return new SelectHowToPay("Select how to pay for action", false, false, true, 7, (htp) => {
-                if (htp.megaCredits + htp.heat < 7) {
-                    throw "Not enough spent";
-                }
-                player.megaCredits -= htp.megaCredits;
-                player.heat -= htp.heat;
-                player.setProduction(Resources.ENERGY);
-                return undefined;
-            });
-        }
-        player.megaCredits -= 7;
+    public action(player: Player, game: Game) {
+        game.addSelectHowToPayInterrupt(player, 7, false, false, "Select how to pay for action");
         player.setProduction(Resources.ENERGY);
         return undefined;
     }

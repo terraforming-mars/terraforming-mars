@@ -5,7 +5,6 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { TileType } from "../TileType";
-import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 import { Resources } from '../Resources';
@@ -34,19 +33,8 @@ export class IndustrialCenter implements IActionCard, IProjectCard {
     public canAct(player: Player): boolean {
         return player.canAfford(7);
     }
-    public action(player: Player, _game: Game) {
-        if (player.canUseHeatAsMegaCredits && player.heat > 0) {
-            return new SelectHowToPay("Select how to pay for action", false, false, true, 7, (htp) => {
-                if (htp.megaCredits + htp.heat < 7) {
-                    throw "Need to spend 7";
-                }
-                player.megaCredits -= htp.megaCredits;
-                player.heat -= htp.heat;
-                player.setProduction(Resources.STEEL);
-                return undefined;
-            });
-        }
-        player.megaCredits -= 7;
+    public action(player: Player, game: Game) {
+        game.addSelectHowToPayInterrupt(player, 7, false, false, "Select how to pay for action");
         player.setProduction(Resources.STEEL);
         return undefined;
     }

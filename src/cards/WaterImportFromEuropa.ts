@@ -5,9 +5,6 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import { AndOptions } from "../inputs/AndOptions";
-import { HowToPay } from "../inputs/HowToPay";
-import { SelectHowToPay } from "../inputs/SelectHowToPay";
 import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from '../constants';
 import { CardName } from '../CardName';
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
@@ -38,22 +35,8 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
         return player.canAfford(oceanCost, game, false, true);;
     }
     public action(player: Player, game: Game) {
-        let htp: HowToPay;
-        return new AndOptions(
-            () => {
-                if ((player.canUseHeatAsMegaCredits ? htp.heat : 0) + htp.megaCredits + (htp.titanium * player.getTitaniumValue(game)) < 12) {
-                    throw "Need to spend at least 12";
-                }
-                game.addOceanInterrupt(player);
-                player.titanium -= htp.titanium;
-                player.megaCredits -= htp.megaCredits;
-                player.heat -= htp.heat;
-                return undefined;
-            },
-            new SelectHowToPay("Select how to pay for action", false, true, player.canUseHeatAsMegaCredits, 12, (howToPay: HowToPay) => {
-                htp = howToPay;
-                return undefined;
-            })
-        );
+        game.addOceanInterrupt(player);
+        game.addSelectHowToPayInterrupt(player, 12, false, true, "Select how to pay for action");
+        return undefined;        
     }
 }

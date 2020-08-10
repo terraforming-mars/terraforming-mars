@@ -4,7 +4,6 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from '../../../src/Game';
 import { OrOptions } from '../../../src/inputs/OrOptions';
-import { SelectHowToPay } from '../../../src/inputs/SelectHowToPay';
 import { MAX_VENUS_SCALE } from "../../../src/constants";
 
 describe("RotatorImpacts", function () {
@@ -36,12 +35,8 @@ describe("RotatorImpacts", function () {
         expect(card.resourceCount).to.eq(0);
         expect(card.canAct(player, game)).to.eq(true);
 
-        const selectHowToPay = card.action(player,game) as SelectHowToPay;
-        expect(selectHowToPay instanceof SelectHowToPay).to.eq(true);
-        selectHowToPay.cb({ steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0, isResearchPhase: false });
+        card.action(player,game);
         expect(card.resourceCount).to.eq(1);
-        expect(player.megaCredits).to.eq(13);
-        expect(player.titanium).to.eq(1);
 
         // two possible actions: add resource or spend titanium
         const orOptions = card.action(player,game) as OrOptions;

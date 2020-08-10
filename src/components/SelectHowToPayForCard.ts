@@ -268,6 +268,34 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                 return;
             }
 
+            if (totalSpentAmt > this.getCardCost()) {
+                let diff = totalSpentAmt - this.getCardCost();
+                if (htp.titanium && diff >= this.player.titaniumValue) {
+                    this.$data.warning = "You cannot overspend titanium";
+                    return;
+                }
+                if (htp.steel && diff >= this.player.steelValue) {
+                    this.$data.warning = "You cannot overspend steel";
+                    return;
+                }
+                if (htp.floaters && diff >= 3) {
+                    this.$data.warning = "You cannot overspend floaters";
+                    return;
+                }
+                if (htp.microbes && diff >= 2) {
+                    this.$data.warning = "You cannot overspend microbes";
+                    return;
+                }
+                if (htp.heat && diff >= 1) {
+                    this.$data.warning = "You cannot overspend heat";
+                    return;
+                }
+                if (htp.megaCredits && diff >= 1) {
+                    this.$data.warning = "You cannot overspend megaCredits";
+                    return;
+                }
+            }
+
             const showAlert = PreferencesManager.loadValue("show_alerts") === "1";
             
             if (totalSpentAmt > this.getCardCost() && showAlert) {

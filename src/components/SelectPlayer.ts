@@ -24,7 +24,7 @@ export const SelectPlayer = Vue.component("select-player", {
     <i class="form-icon"></i>
     <select-player-row :player="players.find((otherPlayer) => otherPlayer.id === player)"></select-player-row>
   </label>
-  <button v-if="showsave === true" class="btn btn-lg btn-primary" v-on:click="saveData">Save</button>
+  <button v-if="showsave === true" class="btn btn-lg btn-primary" v-on:click="saveData">{{playerinput.buttonLabel}}</button>
 </div>`
 });
 

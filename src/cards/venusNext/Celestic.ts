@@ -2,11 +2,11 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { ResourceType } from '../../ResourceType';
-import { Game } from '../../Game';
-import { IActionCard, ICard, IResourceCard } from '../ICard';
-import { SelectCard } from '../../inputs/SelectCard';
-import { CardName } from '../../CardName';
+import { ResourceType } from "../../ResourceType";
+import { Game } from "../../Game";
+import { IActionCard, ICard, IResourceCard } from "../ICard";
+import { SelectCard } from "../../inputs/SelectCard";
+import { CardName } from "../../CardName";
 import { LogMessageType } from "../../LogMessageType";
 import { LogMessageData } from "../../LogMessageData";
 import { LogMessageDataType } from "../../LogMessageDataType";
@@ -92,7 +92,8 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
         }
 
         return new SelectCard(
-            'Select card to add 1 floater',
+            "Select card to add 1 floater",
+            "Add floater",
             floaterCards,
             (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 1);

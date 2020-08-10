@@ -1,14 +1,14 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { ResourceType } from '../../ResourceType';
+import { CardName } from "../../CardName";
+import { ResourceType } from "../../ResourceType";
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
-import { Game } from '../../Game';
-import { SelectTradeColony } from '../../interrupts/SelectTradeColony';
-import { IResourceCard } from '../ICard';
+import { Game } from "../../Game";
+import { SelectTradeColony } from "../../interrupts/SelectTradeColony";
+import { IResourceCard } from "../ICard";
 
 export class TitanFloatingLaunchPad implements IProjectCard,IResourceCard {
     public cost: number = 18;
@@ -24,12 +24,12 @@ export class TitanFloatingLaunchPad implements IProjectCard,IResourceCard {
 
     public action(player: Player, game: Game) {
         var opts: Array<SelectOption> = [];
-        const addResource = new SelectOption("Add 1 floater to a Jovian card", () => {
+        const addResource = new SelectOption("Add 1 floater to a Jovian card", "Add floater", () => {
             game.addResourceInterrupt(player, ResourceType.FLOATER, 1, undefined, Tags.JOVIAN);
             return undefined;
         });
 
-        const spendResource = new SelectOption("Remove 1 floater on this card to trade for free", () => {
+        const spendResource = new SelectOption("Remove 1 floater on this card to trade for free", "Remove floater", () => {
             this.resourceCount--;
             game.addInterrupt(new SelectTradeColony(player, game, openColonies, "Select colony to trade with for free")); 
             return undefined;

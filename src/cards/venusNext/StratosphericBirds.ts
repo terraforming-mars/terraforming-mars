@@ -1,12 +1,12 @@
 import { IProjectCard } from "../IProjectCard";
-import { IActionCard, IResourceCard } from '../ICard';
+import { IActionCard, IResourceCard } from "../ICard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
-import { Game } from '../../Game';
+import { Game } from "../../Game";
 import { SelectCard } from "../../inputs/SelectCard";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 
 export class StratosphericBirds implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 12;
@@ -51,6 +51,7 @@ export class StratosphericBirds implements IActionCard,IProjectCard, IResourceCa
 
         return new SelectCard(
             "Select card to remove 1 floater from", 
+            "Remove floater",
             cardsWithFloater,
             (foundCards) => {
                 player.removeResourceFrom(foundCards[0], 1)

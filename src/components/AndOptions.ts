@@ -28,6 +28,7 @@ export const AndOptions = Vue.component("and-options", {
     },
     render: function(createElement) {
         const playerInput: PlayerInputModel = this.playerinput as PlayerInputModel;
+        
         const children: Array<VNode> = [];
         this.$data.childComponents = [];
         this.$data.responded = [];

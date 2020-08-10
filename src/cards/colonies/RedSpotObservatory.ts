@@ -1,13 +1,13 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { ResourceType } from '../../ResourceType';
+import { CardName } from "../../CardName";
+import { ResourceType } from "../../ResourceType";
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
-import { Game } from '../../Game';
-import { IResourceCard } from '../ICard';
+import { Game } from "../../Game";
+import { IResourceCard } from "../ICard";
 
 export class RedSpotObservatory implements IProjectCard, IResourceCard {
     public cost: number = 17;
@@ -33,8 +33,8 @@ export class RedSpotObservatory implements IProjectCard, IResourceCard {
 
         var opts: Array<SelectOption> = [];
 
-        const addResource = new SelectOption("Add 1 floater on this card", () => this.addResource());
-        const spendResource = new SelectOption("Remove 1 floater on this card to draw a card", () => this.spendResource(player, game));
+        const addResource = new SelectOption("Add 1 floater on this card", "Add floater", () => this.addResource());
+        const spendResource = new SelectOption("Remove 1 floater on this card to draw a card", "Remove floater", () => this.spendResource(player, game));
 
         opts.push(spendResource);
         opts.push(addResource);

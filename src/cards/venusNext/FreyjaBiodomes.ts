@@ -3,11 +3,11 @@ import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
-import { Resources } from '../../Resources';
-import { ResourceType } from '../../ResourceType';
-import { SelectCard } from '../../inputs/SelectCard';
-import { ICard } from '../ICard';
-import { CardName } from '../../CardName';
+import { Resources } from "../../Resources";
+import { ResourceType } from "../../ResourceType";
+import { SelectCard } from "../../inputs/SelectCard";
+import { ICard } from "../ICard";
+import { CardName } from "../../CardName";
 import { LogHelper } from "../../components/LogHelper";
 
 export class FreyjaBiodomes implements IProjectCard {
@@ -29,7 +29,8 @@ export class FreyjaBiodomes implements IProjectCard {
 
         if (cards.length > 1) {
             return new SelectCard(
-                'Select card to add 2 resources',
+                "Select card to add 2 resources",
+                "Add resources",
                 cards,
                 (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], 2);

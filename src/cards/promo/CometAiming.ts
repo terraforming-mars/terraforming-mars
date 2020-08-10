@@ -1,18 +1,18 @@
-import { IProjectCard } from '../IProjectCard';
-import { IActionCard, IResourceCard, ICard } from '../ICard';
-import { CardName } from '../../CardName';
-import { CardType } from '../CardType';
-import { ResourceType } from '../../ResourceType';
-import { Tags } from '../Tags';
-import { Player } from '../../Player';
-import { SelectCard } from '../../inputs/SelectCard';
-import { Game } from '../../Game';
-import { SelectOption } from '../../inputs/SelectOption';
-import { OrOptions } from '../../inputs/OrOptions';
-import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from '../../constants';
-import { LogHelper } from '../../components/LogHelper';
-import { PartyHooks } from '../../turmoil/parties/PartyHooks';
-import { PartyName } from '../../turmoil/parties/PartyName';
+import { IProjectCard } from "../IProjectCard";
+import { IActionCard, IResourceCard, ICard } from "../ICard";
+import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
+import { ResourceType } from "../../ResourceType";
+import { Tags } from "../Tags";
+import { Player } from "../../Player";
+import { SelectCard } from "../../inputs/SelectCard";
+import { Game } from "../../Game";
+import { SelectOption } from "../../inputs/SelectOption";
+import { OrOptions } from "../../inputs/OrOptions";
+import { MAX_OCEAN_TILES, REDS_RULING_POLICY_COST } from "../../constants";
+import { LogHelper } from "../../components/LogHelper";
+import { PartyHooks } from "../../turmoil/parties/PartyHooks";
+import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
     public name: CardName = CardName.COMET_AIMING;
@@ -49,6 +49,7 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
 
         const addAsteroidToCard = new SelectCard(
             "Select card to add 1 asteroid", 
+            "Add asteroid",
             asteroidCards, 
             (foundCards: Array<ICard>) => { 
                 player.titanium--;
@@ -77,11 +78,11 @@ export class CometAiming implements IActionCard, IProjectCard, IResourceCard {
         const canPlaceOcean = game.board.getOceansOnBoard() < MAX_OCEAN_TILES;
         
         if (canPlaceOcean && !redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
-            availableActions.push(new SelectOption('Remove an asteroid resource to place an ocean', spendAsteroidResource));
+            availableActions.push(new SelectOption("Remove an asteroid resource to place an ocean", "Remove asteroid", spendAsteroidResource));
         } 
 
         if (asteroidCards.length === 1) {
-            availableActions.push(new SelectOption('Spend 1 titanium to gain 1 asteroid resource', addAsteroidToSelf));
+            availableActions.push(new SelectOption("Spend 1 titanium to gain 1 asteroid resource", "Spend titanium", addAsteroidToSelf));
         } else {
             availableActions.push(addAsteroidToCard);
         }

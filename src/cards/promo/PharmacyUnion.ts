@@ -83,7 +83,8 @@ export class PharmacyUnion implements CorporationCard {
 
             if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST * 3))) {
                 availableOptions.options.push(
-                    new SelectOption('Turn this card face down and gain 3 TR', () => {
+                    new SelectOption("Turn this card face down and gain 3 TR", 
+                    "Gain TR", () => {
                         this.isDisabled = true;
                         player.increaseTerraformRatingSteps(3, game);
                         game.log(
@@ -98,7 +99,7 @@ export class PharmacyUnion implements CorporationCard {
             }
 
             availableOptions.options.push(
-                new SelectOption("Do nothing", () => {
+                new SelectOption("Do nothing", "Confirm", () => {
                     this.runInterrupts(player, game, scienceTags - 1);
                     return undefined;
                 })

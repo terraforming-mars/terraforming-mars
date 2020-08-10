@@ -295,7 +295,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
               throw new Error("No corporation card dealt for player");
             }
           }
-
+     
           for (let i = 0; i < 10; i++) {
             player.dealtProjectCards.push(this.dealer.dealCard());
           }
@@ -618,11 +618,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
         if (resource === Resources.PLANTS) {
           this.addInterrupt({ player, playerInput: new OrOptions(
-            new SelectOption("Remove " + qtyToRemove + " plants from " + candidates[0].name, () => {
+            new SelectOption("Remove " + qtyToRemove + " plants from " + candidates[0].name, "Remove plants", () => {
               candidates[0].setResource(resource, -qtyToRemove, this, player);
               return undefined;
             }),
-            new SelectOption("Do nothing", () => {
+            new SelectOption("Skip removing plants", "Skip", () => {
               return undefined;
             })
           )});
@@ -635,7 +635,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           const removalOptions = candidates.map((candidate) => {
             let qtyToRemove = Math.min(candidate.plants, count);
   
-            return new SelectOption("Remove " + qtyToRemove + " plants from " + candidate.name, () => {
+            return new SelectOption("Remove " + qtyToRemove + " plants from " + candidate.name, "Remove plants", () => {
               candidate.setResource(resource, -qtyToRemove, this, player);
               return undefined;
             })
@@ -643,7 +643,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
   
           this.addInterrupt({ player, playerInput: new OrOptions(
             ...removalOptions,
-            new SelectOption("Do nothing", () => { return undefined; })
+            new SelectOption("Skip removing plants", "Skip", () => { return undefined; })
           )});
         } else {
           this.addInterrupt(new SelectResourceDecrease(player, candidates, this, resource, count, title));
@@ -793,9 +793,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       result.title = " ";
       result.buttonLabel = "Start";
+      
       result.options.push(
         new SelectCard<CorporationCard>(
-          "Select corporation", player.dealtCorporationCards,
+          "Select corporation", undefined, player.dealtCorporationCards,
           (foundCards: Array<CorporationCard>) => {
             corporation = foundCards[0];
             return undefined;
@@ -807,7 +808,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
         result.options.push(
           new SelectCard(
-            "Select 2 Prelude cards", player.dealtPreludeCards,
+            "Select 2 Prelude cards", undefined, player.dealtPreludeCards,
             (preludeCards: Array<IProjectCard>) => {
               player.preludeCardsInHand.push(preludeCards[0], preludeCards[1]);
               return undefined;
@@ -818,7 +819,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       result.options.push(
         new SelectCard(
-          "Select initial cards to buy", player.dealtProjectCards,
+          "Select initial cards to buy", undefined, player.dealtProjectCards,
           (foundCards: Array<IProjectCard>) => {
             for (const dealt of foundCards) {
               if (foundCards.find((foundCard) => foundCard.name === dealt.name)) {

@@ -6,8 +6,8 @@ import { SelectCard } from "./SelectCard";
 import { SelectPlayer } from "./SelectPlayer";
 import { SelectOption } from "./SelectOption";
 import { SelectHowToPay } from "./SelectHowToPay";
-import { ICard } from '../cards/ICard';
-import { IProjectCard } from '../cards/IProjectCard';
+import { ICard } from "../cards/ICard";
+import { IProjectCard } from "../cards/IProjectCard";
 import { SelectDelegate } from "./SelectDelegate";
 
 export class OrOptions implements PlayerInput {

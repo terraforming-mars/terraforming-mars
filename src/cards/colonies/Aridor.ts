@@ -1,14 +1,14 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { Game } from '../../Game';
-import { SelectOption } from '../../inputs/SelectOption';
-import { OrOptions } from '../../inputs/OrOptions';
-import { IProjectCard } from '../IProjectCard';
-import { Resources } from '../../Resources';
-import { CardType } from '../CardType';
-import { CardName } from '../../CardName';
-import { IColony } from '../../colonies/Colony';
+import { Game } from "../../Game";
+import { SelectOption } from "../../inputs/SelectOption";
+import { OrOptions } from "../../inputs/OrOptions";
+import { IProjectCard } from "../IProjectCard";
+import { Resources } from "../../Resources";
+import { CardType } from "../CardType";
+import { CardName } from "../../CardName";
+import { IColony } from "../../colonies/Colony";
 import { LogMessageType } from "../../LogMessageType";
 import { LogMessageData } from "../../LogMessageData";
 import { LogMessageDataType } from "../../LogMessageDataType";
@@ -26,6 +26,7 @@ export class Aridor implements CorporationCard {
         game.colonyDealer.discardedColonies.forEach(colony => {
           const colonySelect =  new SelectOption(
             colony.name + " - (" + colony.description + ")", 
+            "Add colony tile",
             () => {
                 game.colonies.push(colony);
                 game.colonies.sort((a,b) => (a.name > b.name) ? 1 : -1);

@@ -44,7 +44,7 @@ export class Virus implements IProjectCard {
             || p.id === player.id)
             && p.plants > 0).length;
         const remove5Plants = () => {
-            return new SelectOption("Remove up to 5 plants from a player", () =>
+            return new SelectOption("Remove up to 5 plants from a player", "Remove plants", () =>
             {
                 game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 5);
                 return undefined;
@@ -54,6 +54,7 @@ export class Virus implements IProjectCard {
         const removeAnimals = () => {
             return new SelectCard(
                 "Select card to remove up to 2 animals from", 
+                "Remove animals",
                 cards, (foundCard: Array<ICard>) => {
                     game.getCardPlayer(foundCard[0].name).removeResourceFrom(foundCard[0], 2, game, player);
                     return undefined;

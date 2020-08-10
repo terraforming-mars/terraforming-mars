@@ -7,8 +7,8 @@ import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
 import { ResourceType } from "../ResourceType";
-import { CardName } from '../CardName';
-import { IResourceCard } from './ICard';
+import { CardName } from "../CardName";
+import { IResourceCard } from "./ICard";
 
 export class OlympusConference implements IProjectCard, IResourceCard {
     public cost: number = 10;
@@ -33,13 +33,13 @@ export class OlympusConference implements IProjectCard, IResourceCard {
       }
 
       game.addInterrupt({ player, playerInput: new OrOptions(
-        new SelectOption("Remove a science resource from this card to draw a card", () => {
+        new SelectOption("Remove a science resource from this card to draw a card", "Remove resource", () => {
           player.removeResourceFrom(this);
           player.cardsInHand.push(game.dealer.dealCard());
           this.runInterrupts(player, game, scienceTags - 1);
           return undefined;
         }),
-        new SelectOption("Add a science resource to this card", () => {
+        new SelectOption("Add a science resource to this card", "Add resource", () => {
           this.resourceCount++;
           this.runInterrupts(player, game, scienceTags - 1);
           return undefined;

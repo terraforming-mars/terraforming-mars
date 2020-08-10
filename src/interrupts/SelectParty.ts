@@ -1,9 +1,9 @@
-import { Game } from '../Game';
-import { PlayerInput } from '../PlayerInput';
+import { Game } from "../Game";
+import { PlayerInput } from "../PlayerInput";
 import { Player, PlayerId } from "../Player";
-import { PlayerInterrupt } from './PlayerInterrupt';
-import { OrOptions } from '../inputs/OrOptions';
-import { SelectOption } from '../inputs/SelectOption';
+import { PlayerInterrupt } from "./PlayerInterrupt";
+import { OrOptions } from "../inputs/OrOptions";
+import { SelectOption } from "../inputs/SelectOption";
 import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
@@ -22,6 +22,7 @@ export class SelectParty implements PlayerInterrupt {
         const sendDelegate = new OrOptions();
         // Change the default title
         sendDelegate.title = title;
+        sendDelegate.buttonLabel = "Send delegate";
         let parties;
         if (replace) {
           parties = game.turmoil!.parties.filter(party => {
@@ -39,7 +40,8 @@ export class SelectParty implements PlayerInterrupt {
           parties = game.turmoil!.parties;
         }
         sendDelegate.options = parties.map(party => new SelectOption(
-              party.name + " - (" + party.description + ")", 
+              party.name + " - (" + party.description + ")",
+              "Send delegate",
               () => {
                 if (price) {
                   game.addSelectHowToPayInterrupt(player, price, false, false, "Select how to pay for send delegate action");

@@ -5,7 +5,7 @@ import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectCard } from "../inputs/SelectCard";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 export class InventionContest implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
@@ -19,7 +19,7 @@ export class InventionContest implements IProjectCard {
             game.dealer.dealCard(),
             game.dealer.dealCard()
         ];
-        return new SelectCard("Select card to take into hand", cardsDrawn, (foundCards: Array<IProjectCard>) => {
+        return new SelectCard("Select card to take into hand", "Take", cardsDrawn, (foundCards: Array<IProjectCard>) => {
             player.cardsInHand.push(foundCards[0]);
             cardsDrawn
                 .filter((c) => c !== foundCards[0])

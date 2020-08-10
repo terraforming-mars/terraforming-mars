@@ -1,11 +1,11 @@
-import { IGlobalEvent } from './IGlobalEvent';
-import { GlobalEventName } from './GlobalEventName';
-import { PartyName } from '../parties/PartyName';
-import { Game } from '../../Game';
-import { Turmoil } from '../Turmoil';
-import { RemoveOcean } from '../../interrupts/RemoveOcean';
-import { SelectResources } from '../../interrupts/SelectResources';
-import { MAX_OCEAN_TILES } from '../../constants';
+import { IGlobalEvent } from "./IGlobalEvent";
+import { GlobalEventName } from "./GlobalEventName";
+import { PartyName } from "../parties/PartyName";
+import { Game } from "../../Game";
+import { Turmoil } from "../Turmoil";
+import { RemoveOcean } from "../../interrupts/RemoveOcean";
+import { SelectResources } from "../../interrupts/SelectResources";
+import { MAX_OCEAN_TILES } from "../../constants";
 
 export class DryDeserts implements IGlobalEvent {
     public name = GlobalEventName.DRY_DESERTS;
@@ -17,7 +17,7 @@ export class DryDeserts implements IGlobalEvent {
         const canRemoveOcean = oceansPlaced > 0 && oceansPlaced !== MAX_OCEAN_TILES;
         
         if (canRemoveOcean) {
-            game.addInterrupt(new RemoveOcean(game.getPlayers()[0], game, 'Dry Deserts Global Event - Remove an Ocean tile from the board'));
+            game.addInterrupt(new RemoveOcean(game.getPlayers()[0], game, "Dry Deserts Global Event - Remove an Ocean tile from the board"));
         }
 
         game.getPlayers().forEach(player => {

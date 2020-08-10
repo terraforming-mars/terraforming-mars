@@ -1,13 +1,13 @@
-import { IProjectCard } from '../IProjectCard';
-import { CardName } from '../../CardName';
-import { CardType } from '../CardType';
-import { Tags } from '../Tags';
-import { Player } from '../../Player';
-import { SelectCard } from '../../inputs/SelectCard';
-import { Game } from '../../Game';
-import { LogMessageType } from '../../LogMessageType';
-import { LogMessageData } from '../../LogMessageData';
-import { LogMessageDataType } from '../../LogMessageDataType';
+import { IProjectCard } from "../IProjectCard";
+import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
+import { Tags } from "../Tags";
+import { Player } from "../../Player";
+import { SelectCard } from "../../inputs/SelectCard";
+import { Game } from "../../Game";
+import { LogMessageType } from "../../LogMessageType";
+import { LogMessageData } from "../../LogMessageData";
+import { LogMessageDataType } from "../../LogMessageDataType";
 import { OrOptions } from "../../inputs/OrOptions";
 
 export interface RobotCard {
@@ -55,7 +55,8 @@ export class SelfReplicatingRobots implements IProjectCard {
 
         if (selectableCards.length > 0) {
             orOptions.options.push(new SelectCard(
-                'Select card to link with Self-Replicating Robots', selectableCards,
+                "Select card to link with Self-Replicating Robots", 
+                "Link card", selectableCards,
                 (foundCards: Array<IProjectCard>) => {
                   const projectCardIndex = player.cardsInHand.findIndex((card) => card.name === foundCards[0].name);
                   player.cardsInHand.splice(projectCardIndex, 1);
@@ -83,7 +84,7 @@ export class SelfReplicatingRobots implements IProjectCard {
                 robotCards.push(targetCard.card);
             }            
             orOptions.options.push(new SelectCard(
-                'Select card to double robots resource', robotCards,
+                "Select card to double robots resource", "Double resource", robotCards,
                 (foundCards: Array<IProjectCard>) => {
                   let resourceCount = 0;
                   for (let targetCard of this.targetCards) {

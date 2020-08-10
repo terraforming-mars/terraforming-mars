@@ -1,14 +1,14 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { ResourceType } from '../../ResourceType';
+import { CardName } from "../../CardName";
+import { ResourceType } from "../../ResourceType";
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
-import { Game } from '../../Game';
+import { Game } from "../../Game";
 import { SelectAmount } from "../../inputs/SelectAmount";
-import { IResourceCard } from '../ICard';
+import { IResourceCard } from "../ICard";
 
 
 export class TitanShuttles implements IProjectCard, IResourceCard {
@@ -25,12 +25,12 @@ export class TitanShuttles implements IProjectCard, IResourceCard {
 
     public action(player: Player, game: Game) {
         var opts: Array<SelectOption | SelectAmount> = [];
-        const addResource = new SelectOption("Add 2 floaters to a Jovian card", () => {
+        const addResource = new SelectOption("Add 2 floaters to a Jovian card", "Add floaters", () => {
             game.addResourceInterrupt(player, ResourceType.FLOATER, 2, undefined, Tags.JOVIAN);
             return undefined;
         });
 
-        const spendResource = new SelectAmount("Remove X floaters on this card to gain X titanium", (amount: number) => {
+        const spendResource = new SelectAmount("Remove X floaters on this card to gain X titanium", "Remove floaters", (amount: number) => {
             player.removeResourceFrom(this, amount);
             player.titanium += amount; 
             return undefined;

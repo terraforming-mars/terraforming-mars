@@ -5,7 +5,7 @@ import { CorporationCard } from "./../corporation/CorporationCard";
 import { IProjectCard } from "../IProjectCard";
 import { Game } from "../../Game";
 import { SelectCard } from "../../inputs/SelectCard";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 
 export class ValleyTrust implements CorporationCard {
     public name: CardName = CardName.VALLEY_TRUST;
@@ -23,7 +23,7 @@ export class ValleyTrust implements CorporationCard {
                 game.dealer.dealPreludeCard(),
                 game.dealer.dealPreludeCard()
             ];
-            return new SelectCard("Choose prelude card to play", cardsDrawn, (foundCards: Array<IProjectCard>) => {
+            return new SelectCard("Choose prelude card to play", "Play", cardsDrawn, (foundCards: Array<IProjectCard>) => {
                 return player.playCard(game, foundCards[0]);
             }, 1, 1);
         }

@@ -2,10 +2,10 @@ import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
-import {SelectCard} from '../inputs/SelectCard';
+import {SelectCard} from "../inputs/SelectCard";
 import { IProjectCard } from "./IProjectCard";
 import { IActionCard } from "./ICard";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 import { LogHelper } from "../components/LogHelper";
 
 export class InventorsGuild implements IActionCard, IProjectCard {
@@ -25,6 +25,7 @@ export class InventorsGuild implements IActionCard, IProjectCard {
         const canSelectCard = player.canAfford(player.cardCost);
         return new SelectCard(
           canSelectCard ? "Select card to keep or none to discard" : "You cannot pay for this card" ,
+          "Save",
           [dealtCard],
           (cards: Array<IProjectCard>) => {
             if (cards.length === 0 || !canSelectCard) {

@@ -1,15 +1,15 @@
-import { IActionCard, ICard, IResourceCard } from './ICard';
-import {IProjectCard} from './IProjectCard';
-import {Tags} from './Tags';
-import {CardType} from './CardType';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import {SelectCard} from '../inputs/SelectCard';
-import {ResourceType} from '../ResourceType';
-import { CardName } from '../CardName';
-import { LogMessageType } from '../LogMessageType';
-import { LogMessageData } from '../LogMessageData';
-import { LogMessageDataType } from '../LogMessageDataType';
+import { IActionCard, ICard, IResourceCard } from "./ICard";
+import {IProjectCard} from "./IProjectCard";
+import {Tags} from "./Tags";
+import {CardType} from "./CardType";
+import {Player} from "../Player";
+import {Game} from "../Game";
+import {SelectCard} from "../inputs/SelectCard";
+import {ResourceType} from "../ResourceType";
+import { CardName } from "../CardName";
+import { LogMessageType } from "../LogMessageType";
+import { LogMessageData } from "../LogMessageData";
+import { LogMessageDataType } from "../LogMessageDataType";
 
 export class Ants implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 9;
@@ -58,7 +58,7 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
         return undefined;
       }
 
-      return new SelectCard('Select card to remove microbe', availableCards,
+      return new SelectCard("Select card to remove microbe", "Remove microbe", availableCards,
           (foundCards: Array<ICard>) => {
             game.getCardPlayer(foundCards[0].name).removeResourceFrom(foundCards[0], 1, game, player, false);
             player.addResourceTo(this);

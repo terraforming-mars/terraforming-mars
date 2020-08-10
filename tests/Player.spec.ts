@@ -9,7 +9,7 @@ import { IoMiningIndustries } from  "../src/cards/IoMiningIndustries";
 import { PowerSupplyConsortium } from "../src/cards/PowerSupplyConsortium";
 import { SaturnSystems } from "../src/cards/corporation/SaturnSystems";
 import { SelectOption } from "../src/inputs/SelectOption";
-import { Resources } from '../src/Resources';
+import { Resources } from "../src/Resources";
 
 describe("Player", function () {
     it("should initialize with right defaults", function () {
@@ -86,13 +86,13 @@ describe("Player", function () {
     it("Chains onend functions from player inputs", function (done) {
         const player = new Player("p1", Color.BLUE, false);
         const game = new Game("foobar", [player], player); 
-        const mockOption3 = new SelectOption("Mock select option 3", () => {
+        const mockOption3 = new SelectOption("Mock select option 3", "Save", () => {
             return undefined;
         });
-        const mockOption2 = new SelectOption("Mock select option 2", () => {
+        const mockOption2 = new SelectOption("Mock select option 2", "Save", () => {
             return mockOption3;
         });
-        const mockOption = new SelectOption("Mock select option", () => {
+        const mockOption = new SelectOption("Mock select option", "Save", () => {
             return mockOption2;
         });
         player.setWaitingFor(mockOption, () => done());

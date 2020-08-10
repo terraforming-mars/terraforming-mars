@@ -1,10 +1,10 @@
 
-import { Game } from '../Game';
-import { PlayerInput } from '../PlayerInput';
-import { Player } from '../Player';
-import { PlayerInterrupt } from './PlayerInterrupt';
-import { Resources } from '../Resources';
-import { SelectPlayer } from '../inputs/SelectPlayer';
+import { Game } from "../Game";
+import { PlayerInput } from "../PlayerInput";
+import { Player } from "../Player";
+import { PlayerInterrupt } from "./PlayerInterrupt";
+import { Resources } from "../Resources";
+import { SelectPlayer } from "../inputs/SelectPlayer";
 
 export class SelectResourceProductionDecrease implements PlayerInterrupt {
     public playerInput: PlayerInput;
@@ -19,6 +19,7 @@ export class SelectResourceProductionDecrease implements PlayerInterrupt {
         this.playerInput = new SelectPlayer(
             candidates,
             this.title,
+            "Decrease",
             (found: Player) => {
               found.setProduction(this.resource, -this.count, game, player);
               return undefined;

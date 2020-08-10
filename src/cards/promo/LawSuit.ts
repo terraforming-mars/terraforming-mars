@@ -19,7 +19,7 @@ export class LawSuit implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        return new SelectPlayer(game.getPlayersById(player.removingPlayers), "Select player to sue (steal 3 MC from)", (suedPlayer: Player) => {
+        return new SelectPlayer(game.getPlayersById(player.removingPlayers), "Select player to sue (steal 3 MC from)", "Steal MC", (suedPlayer: Player) => {
             player.setResource(Resources.MEGACREDITS, Math.min(3, suedPlayer.getResource(Resources.MEGACREDITS)));
             suedPlayer.setResource(Resources.MEGACREDITS, -3, game, player);
             const cardIndex = player.playedCards.findIndex((element) => element.name === this.name);

@@ -48,6 +48,7 @@ export class MarketManipulation implements IProjectCard {
               let description = "Increase " + c1.name + " (" + c1.description + ") and decrease " + c2.name + " (" + c2.description + ")"
               const colonySelect =  new SelectOption(
                 description,
+                "Select",
                 () => {
                   c1.increaseTrack();
                   c2.decreaseTrack();

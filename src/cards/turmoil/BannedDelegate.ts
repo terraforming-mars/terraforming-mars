@@ -54,6 +54,7 @@ export class BannedDelegate implements IProjectCard {
                 this.log(game, player, party);
                 return undefined;
               });
+              selectDelegate.buttonLabel = "Remove delegate";
               orOptions.push(selectDelegate);
             }
           }

@@ -1,15 +1,15 @@
 import { IProjectCard } from "../IProjectCard";
-import { IActionCard, ICard, IResourceCard } from '../ICard';
+import { IActionCard, ICard, IResourceCard } from "../ICard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { OrOptions } from "../../inputs/OrOptions";
-import { SelectOption } from '../../inputs/SelectOption';
-import { Game } from '../../Game';
-import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from '../../constants';
-import { SelectCard } from '../../inputs/SelectCard';
-import { CardName } from '../../CardName';
+import { SelectOption } from "../../inputs/SelectOption";
+import { Game } from "../../Game";
+import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from "../../constants";
+import { SelectCard } from "../../inputs/SelectCard";
+import { CardName } from "../../CardName";
 import { LogHelper } from "../../components/LogHelper";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
@@ -43,14 +43,15 @@ export class Thermophiles implements IActionCard,IProjectCard, IResourceCard {
 
         var opts: Array<SelectOption | SelectCard<ICard>> = [];
 
-        const spendResource = new SelectOption("Remove 2 microbes to raise Venus 1 step", () => {
+        const spendResource = new SelectOption("Remove 2 microbes to raise Venus 1 step", "Remove microbes", () => {
             player.removeResourceFrom(this, 2);
             game.increaseVenusScaleLevel(player, 1);
             return undefined;
         });
 
         const addResource = new SelectCard(
-            'Select a Venus card to add 1 microbe',
+            "Select a Venus card to add 1 microbe",
+            "Remove microbe",
             venusMicrobeCards,
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 1);
@@ -59,7 +60,7 @@ export class Thermophiles implements IActionCard,IProjectCard, IResourceCard {
             }
         );
 
-        const addResourceToSelf = new SelectOption("Add a microbe to this card", () => {
+        const addResourceToSelf = new SelectOption("Add a microbe to this card", "Add microbe", () => {
             player.addResourceTo(venusMicrobeCards[0], 1);
             LogHelper.logAddResource(game, player, this);
             return undefined;

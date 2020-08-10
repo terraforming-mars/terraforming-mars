@@ -24,7 +24,7 @@ export class HiTechLab implements IProjectCard {
     }
 
     public action(player: Player, game: Game) {
-        return new SelectAmount("Select amount of energy to spend", (amount: number) => {
+        return new SelectAmount("Select amount of energy to spend", "Spend energy", (amount: number) => {
             // 0 amount failsafe
             if (amount === 0 ) {
                 return undefined;

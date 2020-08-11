@@ -109,7 +109,7 @@ export const Board = Vue.component("board", {
         oceansValue: function() {
             const oceans_count = this.oceans_count || 0;
             const leftover = constants.MAX_OCEAN_TILES - oceans_count;
-            if (leftover == 0) {
+            if (leftover === 0) {
                 return `<img width="26" src="/assets/checkmark.png" alt="completed">`
             } else {
                 return leftover

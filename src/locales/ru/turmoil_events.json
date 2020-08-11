@@ -23,7 +23,7 @@
     "Lose 3 MC for each Building tag (max 5, then reduced by influence).": "Сбросьте 3 MC за каждую свою метку Здания (не более 5), уменьшая их количество на уровень своего влияния.",
     "Gain 1 steel for each steel production (max 5) and influence.": "Получите 1 сталь по уровню своего производства стали (не более 5) и уровню своего влияния.",
     "Lose 3 MC for each set of 5 TR over 10 (max 5 sets). Increase MC production 1 step per influence.": "Сбросьте 3 МС за каждые свои 5 РТ свыше 10 и не более 5 раз. Увеличьте своё производство МС на 1 по уровню своего влияния.",
-    "Count Earth tags and ADD(!) influence. The player(s) with most (at least 1) loses 2 TR, and 2nd most (at least 1) loses 1 TR. SOLO: Lose 2 TR if the sum is 4 or more.": "Посчитайте количество своих меток земли + уровень влияния. Победители уменьшает свой РТ на 2, 2-е место уменьшает свой РТ на 2.",
+    "Count Earth tags and ADD(!) influence. The player(s) with most (at least 1) loses 2 TR, and 2nd most (at least 1) loses 1 TR. SOLO: Lose 2 TR if the sum is 4 or more.": "Посчитайте количество своих меток земли + уровень влияния. Победители уменьшает свой РТ на 2, 2-е место уменьшает свой РТ на 1.",
     "Lose 4 MC for each City tile (max 5, then reduced by influence).": "Сбросьте 4 МС за каждый свой жетон города (не более 5), уменьшая их количество на уровень своего влияния.",
     "Decrease steel and energy production 1 step each. Gain 1 steel per influence.": "Уменьшите своё производство стали и энергии на 1. Получите одну сталь по уровню своего влияния.",
     "Decrease temperature 2 steps. Draw 1 card per influence.": "Уменьшите температуру на 2. Доберите одну карту по уровню своего влияния.",

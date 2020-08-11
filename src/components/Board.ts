@@ -82,7 +82,7 @@ export const Board = Vue.component("board", {
             for (let value: number = endValue; value >= startValue; value -= step) {
                 strValue = (targetParameter == "temperature" && value > 0) ? "+"+value : value.toString();
                 values.push(
-                    new GlobalParamLevel(value, value <= curValue, strValue)
+                    new GlobalParamLevel(value, value == curValue, strValue)
                 )
             }
             return values;
@@ -104,6 +104,14 @@ export const Board = Vue.component("board", {
                 return temperatureMaxed && oceansMaxed && oxygenMaxed && venusMaxed;
             } else {
                 return temperatureMaxed && oceansMaxed && oxygenMaxed;
+            }
+        },
+        oceansValue: function() {
+            const leftover = constants.MAX_OCEAN_TILES - this.oceans_count;
+            if (leftover == 0) {
+                return `<img width="26" src="/assets/checkmark.png" alt="completed">`
+            } else {
+                return leftover
             }
         }
     },
@@ -133,7 +141,7 @@ export const Board = Vue.component("board", {
             </div>
 
             <div class="global-numbers-oceans">
-                <div class="global-numbers-value">{{ oceans_count }}/{{ constants.MAX_OCEAN_TILES }}</div>
+                <div class="global-numbers-value" v-html="oceansValue()"></div>
             </div>
         </div>
 

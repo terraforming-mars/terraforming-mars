@@ -1,6 +1,6 @@
 
 import Vue from "vue";
-import * as constants from '../constants';
+import * as constants from "../constants";
 import { BoardSpace } from "./BoardSpace";
 import { SpaceModel } from "../models/SpaceModel";
 import { SpaceType } from "../SpaceType";
@@ -38,7 +38,7 @@ export const Board = Vue.component("board", {
             boardSpaces.sort(
                 (space1: SpaceModel, space2: SpaceModel) => {return parseInt(space1.id) - parseInt(space2.id)}
             );
-            return boardSpaces.filter((s: SpaceModel) => {return s.spaceType != SpaceType.COLONY})
+            return boardSpaces.filter((s: SpaceModel) => {return s.spaceType !== SpaceType.COLONY})
         },
         getSpaceById: function (spaceId: string) {
             for (let space of this.spaces) {
@@ -80,9 +80,9 @@ export const Board = Vue.component("board", {
             }
 
             for (let value: number = endValue; value >= startValue; value -= step) {
-                strValue = (targetParameter == "temperature" && value > 0) ? "+"+value : value.toString();
+                strValue = (targetParameter === "temperature" && value > 0) ? "+"+value : value.toString();
                 values.push(
-                    new GlobalParamLevel(value, value == curValue, strValue)
+                    new GlobalParamLevel(value, value === curValue, strValue)
                 )
             }
             return values;
@@ -107,7 +107,8 @@ export const Board = Vue.component("board", {
             }
         },
         oceansValue: function() {
-            const leftover = constants.MAX_OCEAN_TILES - this.oceans_count;
+            const oceans_count = this.oceans_count || 0;
+            const leftover = constants.MAX_OCEAN_TILES - oceans_count;
             if (leftover == 0) {
                 return `<img width="26" src="/assets/checkmark.png" alt="completed">`
             } else {

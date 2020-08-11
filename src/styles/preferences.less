@@ -79,7 +79,10 @@
     margin: -22px -15px 15px -15px;
 }
 
-
+.preferences_small_cards input[type=checkbox]:checked + .filterDiv,
+.preferences_small_cards input[type=radio]:checked + .filterDiv {
+    transform: scale(0.8);
+}
 
 /* Hide blocks */
 .preferences_hide_turnorder .player_home_block--turnorder,

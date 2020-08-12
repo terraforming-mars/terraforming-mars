@@ -9,11 +9,11 @@ import { PlayerResources } from "./PlayerResources";
 import { WaitingFor } from "./WaitingFor";
 import { Preferences } from "./Preferences"
 import { PlayerModel } from "../models/PlayerModel";
-import { Colony } from './Colony';
-import { LogPanel } from './LogPanel';
-import { PlayerMixin } from './PlayerMixin';
-import { TagCount } from './TagCount';
-import { Turmoil } from './Turmoil';
+import { Colony } from "./Colony";
+import { LogPanel } from "./LogPanel";
+import { PlayerMixin } from "./PlayerMixin";
+import { TagCount } from "./TagCount";
+import { Turmoil } from "./Turmoil";
 
 const dialogPolyfill = require("dialog-polyfill");
 
@@ -51,6 +51,12 @@ export const PlayerHome = Vue.component("player-home", {
             if (player.id === this.player.id) return;
 
             (this.$root as any).setVisibilityState("other_player_" + player.id, true);
+        },
+        hasPinIcon: (player: PlayerModel): boolean => {
+            console.log(player);
+            console.log(player.id)
+            console.log(window.location.href, "HREF");
+            return window.location.href.split("=")[1] !== player.id;
         },
         getFleetsCountRange: function(player: PlayerModel): Array<number> {
             const fleetsRange: Array<number> = [];
@@ -117,8 +123,11 @@ export const PlayerHome = Vue.component("player-home", {
                         <span class="help_tip" v-i18n>(click on player name to see details)</span>
                     </h2>
                     <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
-                        <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
-                            <span class="player_number">{{ idx+1 }}.</span><a v-on:click.prevent="showPlayerDetails(p)" class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</a>
+                        <div style="display:inline">
+                            <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
+                                <span class="player_number">{{ idx+1 }}.</span><a v-on:click.prevent="showPlayerDetails(p)" class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</a>
+                            </div>
+                            <span style="cursor: pointer;" v-if="hasPinIcon(p)"> (p)</span>
                         </div>
                         <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
                     </div>

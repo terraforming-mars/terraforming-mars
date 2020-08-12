@@ -6,7 +6,7 @@ import { Tags } from "./Tags";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectAmount } from "../inputs/SelectAmount";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 export class PowerInfrastructure implements IActionCard, IProjectCard {
     public name: CardName = CardName.POWER_INFRASTRUCTURE;
@@ -21,7 +21,7 @@ export class PowerInfrastructure implements IActionCard, IProjectCard {
         return player.energy > 0;
     }
     public action(player: Player, _game: Game) {
-        return new SelectAmount("Select amount of energy to spend", (amount: number) => {
+        return new SelectAmount("Select amount of energy to spend", "Spend energy", (amount: number) => {
             player.energy -= amount;
             player.megaCredits += amount;
             return undefined;

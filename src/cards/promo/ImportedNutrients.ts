@@ -1,11 +1,11 @@
-import {ICard} from './../ICard';
+import {ICard} from "./../ICard";
 import { IProjectCard } from "./../IProjectCard";
 import { Tags } from "./../Tags";
 import { CardType } from "./../CardType";
 import { Player } from "../../Player";
 import { SelectCard } from "../../inputs/SelectCard";
-import { ResourceType } from '../../ResourceType';
-import { CardName } from '../../CardName';
+import { ResourceType } from "../../ResourceType";
+import { CardName } from "../../CardName";
 
 export class ImportedNutrients implements IProjectCard {
     public cost: number = 14;
@@ -21,7 +21,7 @@ export class ImportedNutrients implements IProjectCard {
             player.addResourceTo(microbeCards[0], 4);
             return undefined;
         } else if (microbeCards.length > 1) {
-            return new SelectCard("Select card to add 4 microbes", microbeCards, (foundCards: Array<ICard>) => {
+            return new SelectCard("Select card to add 4 microbes", "Add microbes", microbeCards, (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 4);
                 return undefined;
             });

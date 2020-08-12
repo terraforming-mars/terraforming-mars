@@ -3,7 +3,7 @@ import { Tags } from "../Tags";
 import { CardName } from "../../CardName";
 import { CardType } from "../CardType";
 import { Player, PlayerId } from "../../Player";
-import { Game } from '../../Game';
+import { Game } from "../../Game";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectDelegate } from "../../inputs/SelectDelegate";
 import { IParty } from "../../turmoil/parties/IParty";
@@ -54,6 +54,7 @@ export class BannedDelegate implements IProjectCard {
                 this.log(game, player, party);
                 return undefined;
               });
+              selectDelegate.buttonLabel = "Remove delegate";
               orOptions.push(selectDelegate);
             }
           }

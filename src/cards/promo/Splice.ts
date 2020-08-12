@@ -2,11 +2,11 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { IProjectCard } from "../IProjectCard";
-import { CorporationCard } from '../corporation/CorporationCard';
+import { CorporationCard } from "../corporation/CorporationCard";
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
 import { ResourceType } from "../../ResourceType";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { LogMessageType } from "../../LogMessageType";
 import { LogMessageData } from "../../LogMessageData";
 import { LogMessageDataType } from "../../LogMessageDataType";
@@ -35,12 +35,12 @@ export class Splice implements CorporationCard {
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
         if (card.tags.indexOf(Tags.MICROBES) === -1) {return undefined;}
 
-        const addResource = new SelectOption("Add a microbe resource to this card", () => {
+        const addResource = new SelectOption("Add a microbe resource to this card", "Add microbe", () => {
             player.addResourceTo(card);
             return undefined;
         });
 
-        const getMegacredits = new SelectOption("Get 2 MC", () => {
+        const getMegacredits = new SelectOption("Gain 2 MC", "Gain MC", () => {
             player.megaCredits += 2;
             return undefined;
         });

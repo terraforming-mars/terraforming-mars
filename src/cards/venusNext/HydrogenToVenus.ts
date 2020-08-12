@@ -1,16 +1,16 @@
-import {ICard} from '../ICard';
+import {ICard} from "../ICard";
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { Game } from '../../Game';
-import { ResourceType } from '../../ResourceType';
-import { SelectCard } from '../../inputs/SelectCard';
-import { CardName } from '../../CardName';
-import { LogHelper } from '../../components/LogHelper';
-import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from '../../constants';
-import { PartyHooks } from '../../turmoil/parties/PartyHooks';
-import { PartyName } from '../../turmoil/parties/PartyName';
+import { Game } from "../../Game";
+import { ResourceType } from "../../ResourceType";
+import { SelectCard } from "../../inputs/SelectCard";
+import { CardName } from "../../CardName";
+import { LogHelper } from "../../components/LogHelper";
+import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from "../../constants";
+import { PartyHooks } from "../../turmoil/parties/PartyHooks";
+import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class HydrogenToVenus implements IProjectCard {
     public cost: number = 11;
@@ -52,7 +52,8 @@ export class HydrogenToVenus implements IProjectCard {
             }
             if (floatersCards.length > 1) {
                 return new SelectCard(
-                    'Select card to add ' + jovianTags + ' floater(s)',
+                    "Select card to add " + jovianTags + " floater(s)",
+                    "Add floater(s)",
                     floatersCards,
                     (foundCards: Array<ICard>) => {
                         player.addResourceTo(foundCards[0], jovianTags);

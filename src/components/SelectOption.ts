@@ -13,7 +13,7 @@ export const SelectOption = Vue.component("select-option", {
     },
     template: `<div class="wf-component wf-component--select-option">
         <div v-if="showtitle === true" class="wf-component-title" v-i18n>{{playerinput.title}}</div>
-        <button v-if="showsave === true" class="btn btn-lg btn-primary" v-on:click="saveData">Select</button>
+        <button v-if="showsave === true" class="btn btn-lg btn-primary" v-on:click="saveData">{{playerinput.buttonLabel}}</button>
     </div>`
 });
 

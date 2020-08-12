@@ -3,11 +3,11 @@ import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Resources } from "../../Resources";
-import { ResourceType } from '../../ResourceType';
-import { SelectCard } from '../../inputs/SelectCard';
-import { Game } from '../../Game';
-import { ICard } from '../ICard';
-import { CardName } from '../../CardName';
+import { ResourceType } from "../../ResourceType";
+import { SelectCard } from "../../inputs/SelectCard";
+import { Game } from "../../Game";
+import { ICard } from "../ICard";
+import { CardName } from "../../CardName";
 import { LogHelper } from "../../components/LogHelper";
 import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from "../../constants";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
@@ -44,7 +44,8 @@ export class VenusSoils implements IProjectCard {
         }
 
         return new SelectCard(
-            'Select card to add 2 microbes',
+            "Select card to add 2 microbes",
+            "Add microbe(s)",
             microbeCards,
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 2);

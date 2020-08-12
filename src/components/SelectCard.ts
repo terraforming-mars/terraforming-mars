@@ -31,7 +31,7 @@ export const SelectCard = Vue.component("select-card", {
             <card :card="card"></card>
         </label>
         <div v-if="showsave === true" class="nofloat">
-            <button class="btn btn-primary" v-on:click="saveData">Save</button>
+            <button class="btn btn-primary" v-on:click="saveData">{{playerinput.buttonLabel}}</button>
         </div>
     </div>`
 });

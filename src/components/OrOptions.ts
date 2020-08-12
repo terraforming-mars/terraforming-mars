@@ -29,7 +29,7 @@ export const OrOptions = Vue.component("or-options", {
         this.$data.childComponents = [];
         const children: Array<VNode> = [];
         if (this.showtitle) {
-            children.push(createElement('label', [createElement("div", $t(this.playerinput.title))]))
+            children.push(createElement("label", [createElement("div", $t(this.playerinput.title))]))
         }
         const optionElements: Array<VNode> = [];
         this.playerinput.options.forEach((option: any, idx: number) => {
@@ -59,7 +59,7 @@ export const OrOptions = Vue.component("or-options", {
             optionElements.push(subchildren[subchildren.length - 1]);
             children.push(createElement("div", subchildren));
             if (this.showsave && this.$data.selectedOption === idx) {
-                children.push(createElement("div", { style: {"margin": "5px 30px 10px"}, "class": "wf-action"}, [createElement("button", { domProps: { className: "btn btn-primary" }, on: { click: () => { this.saveData(); } } }, "Save")]));
+                children.push(createElement("div", { style: {"margin": "5px 30px 10px"}, "class": "wf-action"}, [createElement("button", { domProps: { className: "btn btn-primary" }, on: { click: () => { this.saveData(); } } }, $t(option.buttonLabel))]));
             }
         });
         return createElement("div", {"class": "wf-options"}, children);

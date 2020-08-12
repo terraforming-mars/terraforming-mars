@@ -25,7 +25,7 @@ export const SelectPartyPlayer = Vue.component("select-party-player", {
     <span v-if="player === 'NEUTRAL'" >Neutral</span>
     <select-player-row v-else :player="players.find((otherPlayer) => otherPlayer.id === player)"></select-player-row>
   </label>
-  <button v-if="showsave === true" class="btn btn-lg btn-primary" v-on:click="saveData">Save</button>
+  <button v-if="showsave === true" class="btn btn-lg btn-primary" v-on:click="saveData">{{playerinput.buttonLabel}}</button>
 </div>`
 });
 

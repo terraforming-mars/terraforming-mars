@@ -547,6 +547,7 @@ function getWaitingFor(
   }
   const result: PlayerInputModel = {
     title: waitingFor.title,
+    buttonLabel: waitingFor.buttonLabel,
     inputType: waitingFor.inputType,
     amount: undefined,
     options: undefined,

@@ -893,9 +893,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public worldGovernmentTerraforming(game: Game): void {
       const action: OrOptions = new OrOptions();
       action.title = "Select action for World Government Terraforming";
+      action.buttonLabel = "Confirm";
       if (game.getTemperature() < constants.MAX_TEMPERATURE) {
         action.options.push(
-          new SelectOption("Increase temperature", () => {
+          new SelectOption("Increase temperature", "Increase", () => {
             game.increaseTemperature(this,1, true);
             game.log(
               LogMessageType.DEFAULT,
@@ -908,7 +909,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
       if (game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL) {
         action.options.push(
-          new SelectOption("Increase oxygen", () => {
+          new SelectOption("Increase oxygen", "Increase", () => {
             game.increaseOxygenLevel(this,1, true);
             game.log(
               LogMessageType.DEFAULT,
@@ -937,7 +938,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
       if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE && game.venusNextExtension) {
         action.options.push(
-          new SelectOption("Increase Venus scale", () => {
+          new SelectOption("Increase Venus scale", "Increase", () => {
             game.increaseVenusScaleLevel(this,1, true);
             game.log(
               LogMessageType.DEFAULT,
@@ -971,6 +972,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       this.setWaitingFor(
         new SelectCard(
           "Select a card to keep and pass the rest to " + playerName,
+          "Keep",
           cards,
           (foundCards: Array<IProjectCard>) => {
             this.draftedCards.push(foundCards[0]);
@@ -1037,6 +1039,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.setWaitingFor(
             new SelectCard(
                 "Select which cards to take into hand",
+                "Buy",
                 dealtCards,
                 (foundCards: Array<IProjectCard>) => {
                   selectedCards = foundCards;
@@ -1106,6 +1109,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private playPreludeCard(game: Game): PlayerInput {
       return new SelectCard(
         "Select prelude card to play",
+        "Play",
         this.preludeCardsInHand,
         (foundCards: Array<IProjectCard>) => {
             return this.playCard(game, foundCards[0]);
@@ -1277,6 +1281,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private playActionCard(game: Game): PlayerInput {
       return new SelectCard(
           "Perform an action from a played card",
+          "Take action",
           this.getPlayableActionCards(game),
           (foundCards: Array<ICard>) => {
             const foundCard = foundCards[0];
@@ -1312,8 +1317,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
   }
 
   private sellPatents(game: Game): PlayerInput {
-      return new SelectCard(
+      let result = new SelectCard(
           "Sell patents",
+          "Sell",
           this.cardsInHand,
           (foundCards: Array<IProjectCard>) => {
 
@@ -1335,16 +1341,20 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
               new LogMessageData(LogMessageDataType.STRING, foundCards.length.toString()),
             );
             return undefined;
-          }, this.cardsInHand.length
-      );
+          }, this.cardsInHand.length,
+      ); 
+       
+      return result;
     }
 
     private buildColony(game: Game, openColonies: Array<IColony>): PlayerInput {
       let buildColony = new OrOptions();
       buildColony.title = "Build colony (" + constants.BUILD_COLONY_COST + " MC)";
+      buildColony.buttonLabel = "Build colony";
       openColonies.forEach(colony => {
         const colonySelect =  new SelectOption(
           colony.name + " - (" + colony.description + ")", 
+          "",
           () => {
             game.addSelectHowToPayInterrupt(this, constants.BUILD_COLONY_COST, false, false, "Select how to pay for Colony project");
             colony.onColonyPlaced(this, game);
@@ -1360,6 +1370,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private airScrapping(game: Game): PlayerInput {
       return new SelectOption(
         "Air scrapping (" + constants.AIR_SCRAPPING_COST + " MC)", 
+        "",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.AIR_SCRAPPING_COST, false, false, "Select how to pay for Air Scrapping project");
           game.increaseVenusScaleLevel(this, 1);
@@ -1378,6 +1389,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private bufferGas(game: Game): PlayerInput {
       return new SelectOption(
         "Buffer Gas (" + constants.BUFFER_GAS_COST + " MC)", 
+        "",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.BUFFER_GAS_COST, false, false, "Select how to pay for Buffer Gas project");
           this.increaseTerraformRatingSteps(1, game);
@@ -1396,6 +1408,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private buildPowerPlant(game: Game): PlayerInput {
       return new SelectOption(
         "Power plant (" + this.powerPlantCost + " MC)", 
+        "",
         () => {
           game.addSelectHowToPayInterrupt(this, this.powerPlantCost, false, false, "Select how to pay for Power Plant project");
           this.setProduction(Resources.ENERGY);
@@ -1414,6 +1427,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private asteroid(game: Game): PlayerInput {
       return new SelectOption(
         "Asteroid (" + constants.ASTEROID_COST + " MC)", 
+        "",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.ASTEROID_COST, false, false, "Select how to pay for Asteroid project");
           game.increaseTemperature(this, 1);
@@ -1432,6 +1446,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private aquifer(game: Game): PlayerInput {
       return new SelectOption(
         "Aquifer (" + constants.AQUIFER_COST + " MC)", 
+        "",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.AQUIFER_COST, false, false, "Select how to pay for Aquifer project");
           game.addOceanInterrupt(this, "Select space for ocean");
@@ -1450,6 +1465,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private addGreenery(game: Game): PlayerInput {
       return new SelectOption(
         "Greenery (" + constants.GREENERY_COST + " MC)", 
+        "",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.GREENERY_COST, false, false, "Select how to pay for Greenery project");
           game.addInterrupt(new SelectGreenery(this, game));
@@ -1468,6 +1484,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private addCity(game: Game): PlayerInput {
       return new SelectOption(
         "City (" + constants.CITY_COST + " MC)", 
+        "",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.CITY_COST, false, false, "Select how to pay for City project");
           game.addInterrupt(new SelectCity(this, game));
@@ -1489,6 +1506,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       openColonies.forEach(colony => {
         const colonySelect =  new SelectOption(
           colony.name + " - (" + colony.description + ")", 
+          "Trade",
           () => {
             colony.trade(this, game);
             game.log(
@@ -1504,16 +1522,17 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       });      
       let howToPayForTrade = new OrOptions();
       howToPayForTrade.title = "Trade with a colony";
+      howToPayForTrade.buttonLabel = "Pay trade fee"
 
-      const payWithMC = new SelectOption("Pay " + (9 - this.colonyTradeDiscount) +" MC", () => {
+      const payWithMC = new SelectOption("Pay " + (9 - this.colonyTradeDiscount) +" MC", "", () => {
         game.addSelectHowToPayInterrupt(this, 9 - this.colonyTradeDiscount, false, false, "Select how to pay " + (9 - this.colonyTradeDiscount) + " for colony trade");
         return selectColony;
       });
-      const payWithEnergy = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Energy", () => {
+      const payWithEnergy = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Energy", "", () => {
         this.energy -= (3 - this.colonyTradeDiscount);
         return selectColony;
       });  
-      const payWithTitanium = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Titanium", () => {
+      const payWithTitanium = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Titanium", "", () => {
         this.titanium -= (3 - this.colonyTradeDiscount);
         return selectColony;  
       });
@@ -1545,6 +1564,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private turmoilKelvinistsAction(game: Game): PlayerInput {
       return new SelectOption(
         "Pay 10 MC to increase your heat and energy production 1 step (Turmoil Kelvinists)", 
+        "Pay",
         () => {
           game.addSelectHowToPayInterrupt(this, 10, false, false, "Select how to pay for Turmoil Kelvinists action");
           this.setProduction(Resources.ENERGY);
@@ -1562,6 +1582,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private turmoilScientistsAction(game: Game): PlayerInput {
       return new SelectOption(
         "Pay 10 MC to draw 3 cards (Turmoil Scientists)", 
+        "Pay",
         () => {
           game.addSelectHowToPayInterrupt(this, 10, false, false, "Select how to pay for Turmoil Scientists draw");
           this.turmoilScientistsActionUsed = true;
@@ -1602,24 +1623,24 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             );
             return undefined;
           },
-          new SelectAmount("Select amount of heat to spend", (amount: number) => {
+          new SelectAmount("Select amount of heat to spend", "Spend heat", (amount: number) => {
             heatAmount = amount;
             return undefined;
           }, this.heat),
-          new SelectAmount("Select amount of floater on corporation to spend", (amount: number) => {
+          new SelectAmount("Select amount of floaters on corporation to spend", "Spend floaters", (amount: number) => {
             floaterAmount = amount;
             return undefined;
           }, this.getResourcesOnCorporation())
         );
         raiseTempOptions.title = "Select resource amounts to raise temp";
 
-        return new SelectOption("Convert 8 heat into temperature", () => {
+        return new SelectOption("Convert 8 heat into temperature", "Convert heat", () => {
           return raiseTempOptions;
         });
 
       } else {
 
-      return new SelectOption("Convert 8 heat into temperature", () => {
+      return new SelectOption("Convert 8 heat into temperature", "Convert heat",() => {
         game.increaseTemperature(this, 1);
         this.heat -= 8;
         game.log(
@@ -1633,7 +1654,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     private claimMilestone(milestone: IMilestone, game: Game): SelectOption {
-      return new SelectOption(milestone.name, () => {
+      return new SelectOption(milestone.name, "Claim - " + "("+ milestone.name + ")", () => {
         game.claimedMilestones.push({
           player: this,
           milestone: milestone
@@ -1650,7 +1671,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     private fundAward(award: IAward, game: Game): PlayerInput {
-      return new SelectOption(award.name, () => {
+      return new SelectOption(award.name, "Fund - " + "(" + award.name + ")",() => {
         game.addSelectHowToPayInterrupt(this, game.getAwardFundingCost(), false, false, "Select how to pay for award");
         game.fundAward(this, award);
         return undefined;
@@ -1709,7 +1730,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     private endTurnOption(game: Game): PlayerInput {
-      return new SelectOption("End Turn", () => {
+      return new SelectOption("End Turn", "End", () => {
         this.actionsTakenThisRound = 1;
         game.log(
           LogMessageType.DEFAULT,
@@ -1721,7 +1742,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     private passOption(game: Game): PlayerInput {
-      return new SelectOption("Pass for this generation", () => {
+      return new SelectOption("Pass for this generation", "Pass", () => {
         game.playerHasPassed(this);
         game.log(
           LogMessageType.DEFAULT,
@@ -1735,7 +1756,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     // Propose a new action to undo last action
     private undoTurnOption(game: Game): PlayerInput {
-      return new SelectOption("Undo Turn", () => {
+      return new SelectOption("Undo Turn", "Undo", () => {
         try {
           Database.getInstance().restoreGame(game.id, game.lastSaveId, game);
         }
@@ -1750,6 +1771,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (game.canPlaceGreenery(this)) {
         const action: OrOptions = new OrOptions();
         action.title = "Place any final greenery from plants";
+        action.buttonLabel = "Confirm";
         action.options.push(
             new SelectSpace(
                 "Select space for greenery",
@@ -1767,7 +1789,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             )
         );
         action.options.push(
-          new SelectOption("Don't place a greenery", () => {
+          new SelectOption("Don't place a greenery", "Confirm", () => {
             game.playerIsDoneWithGame(this);
             return undefined;
           })
@@ -1866,6 +1888,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public getAvailableStandardProjects(game: Game): OrOptions {
       const standardProjects = new OrOptions();
       standardProjects.title = "Pay for a Standard Project";
+      standardProjects.buttonLabel = "Confirm";
 
       const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
 
@@ -2028,6 +2051,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       const action: OrOptions = new OrOptions();
       action.title = "Take action for action phase, select one " +
                        "available action.";
+      action.buttonLabel = "Take action";
 
       if (this.getPlayableCards(game).length > 0) {
         action.options.push(
@@ -2089,6 +2113,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (this.canAfford(8) && !game.allMilestonesClaimed()) {
         const remainingMilestones = new OrOptions();
         remainingMilestones.title = "Claim a milestone";
+        remainingMilestones.title = "Confirm";
         remainingMilestones.options = game.milestones
             .filter(
                 (milestone: IMilestone) =>
@@ -2133,6 +2158,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             !game.allAwardsFunded()) {
         const remainingAwards = new OrOptions();
         remainingAwards.title = "Fund an award";
+        remainingAwards.buttonLabel = "Confirm";
         remainingAwards.options = game.awards
             .filter((award: IAward) => game.hasBeenFunded(award) === false)
             .map((award: IAward) => this.fundAward(award, game));

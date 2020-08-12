@@ -1,9 +1,9 @@
-import { Game } from '../Game';
-import { PlayerInput } from '../PlayerInput';
-import { Player } from '../Player';
-import { PlayerInterrupt } from './PlayerInterrupt';
-import { AndOptions } from '../inputs/AndOptions';
-import { SelectAmount } from '../inputs/SelectAmount';
+import { Game } from "../Game";
+import { PlayerInput } from "../PlayerInput";
+import { Player } from "../Player";
+import { PlayerInterrupt } from "./PlayerInterrupt";
+import { AndOptions } from "../inputs/AndOptions";
+import { SelectAmount } from "../inputs/SelectAmount";
 
 export class SelectResources implements PlayerInterrupt {
     public playerInput: PlayerInput;
@@ -20,27 +20,27 @@ export class SelectResources implements PlayerInterrupt {
         let energyAmount: number = 0;
         let heatAmount: number = 0;
         let selectResources: AndOptions;
-        const selectMegacredit = new SelectAmount("Megacredits", (amount: number) => {
+        const selectMegacredit = new SelectAmount("Megacredits", "Select", (amount: number) => {
             megacreditsAmount = amount;
             return undefined;
           }, this.count);
-          const selectSteel = new SelectAmount("Steel", (amount: number) => {
+          const selectSteel = new SelectAmount("Steel", "Select",  (amount: number) => {
             steelAmount = amount;
             return undefined;
           }, this.count); 
-          const selectTitanium = new SelectAmount("Titanium", (amount: number) => {
+          const selectTitanium = new SelectAmount("Titanium", "Select", (amount: number) => {
             titaniumAmount = amount;
             return undefined;
           }, this.count);
-          const selectPlants = new SelectAmount("Plants", (amount: number) => {
+          const selectPlants = new SelectAmount("Plants", "Select",  (amount: number) => {
             plantsAmount = amount;
             return undefined;
           }, this.count);
-          const selectEnergy = new SelectAmount("Energy", (amount: number) => {
+          const selectEnergy = new SelectAmount("Energy", "Select",  (amount: number) => {
             energyAmount = amount;
             return undefined;
           }, this.count);
-          const selectHeat = new SelectAmount("Heat", (amount: number) => {
+          const selectHeat = new SelectAmount("Heat", "Select",  (amount: number) => {
             heatAmount = amount;
             return undefined;
           }, this.count);

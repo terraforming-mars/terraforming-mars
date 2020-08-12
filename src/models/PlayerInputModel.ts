@@ -18,5 +18,6 @@ export interface PlayerInputModel {
     minCardsToSelect: number | undefined;
     players: Array<string> | undefined;
     title: string;
+    buttonLabel: string;
 }
 

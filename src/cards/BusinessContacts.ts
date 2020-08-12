@@ -1,11 +1,11 @@
 
-import {IProjectCard} from './IProjectCard';
-import {Tags} from './Tags';
-import {CardType} from './CardType';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import {SelectCard} from '../inputs/SelectCard';
-import { CardName } from '../CardName';
+import {IProjectCard} from "./IProjectCard";
+import {Tags} from "./Tags";
+import {CardType} from "./CardType";
+import {Player} from "../Player";
+import {Game} from "../Game";
+import {SelectCard} from "../inputs/SelectCard";
+import { CardName } from "../CardName";
 
 export class BusinessContacts implements IProjectCard {
     public cost: number = 7;
@@ -21,7 +21,8 @@ export class BusinessContacts implements IProjectCard {
         game.dealer.dealCard()
       ];
       return new SelectCard(
-          'Select cards to keep of top 4 cards from deck',
+          "Select cards to keep of top 4 cards from deck",
+          "Keep",
           cards,
           (found: Array<IProjectCard>) => {
             player.cardsInHand.push(found[0], found[1]);

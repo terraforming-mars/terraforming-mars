@@ -198,7 +198,7 @@ export class RoboticWorkforce implements IProjectCard {
             return undefined;
         }
 
-        return new SelectCard("Select builder card to copy", availableCards, (selectedCards: Array<ICard>) => {
+        return new SelectCard("Select builder card to copy", "Copy", availableCards, (selectedCards: Array<ICard>) => {
                 const foundCard: ICard = selectedCards[0];
                 // this cards require additional user input
                 if (foundCard.name === CardName.BIOMASS_COMBUSTORS) {

@@ -6,7 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectAmount } from "../inputs/SelectAmount";
 import { Resources } from "../Resources";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 
 export class Insulation implements IProjectCard {
@@ -17,7 +17,7 @@ export class Insulation implements IProjectCard {
 
     public play(player: Player, _game: Game) {
         if (player.getProduction(Resources.HEAT) < 1) return undefined;
-        return new SelectAmount("Select amount of heat production to decrease", (amount: number) => {
+        return new SelectAmount("Select amount of heat production to decrease", "Decrease", (amount: number) => {
             player.setProduction(Resources.HEAT, -amount);
             player.setProduction(Resources.MEGACREDITS,amount);
             return undefined;

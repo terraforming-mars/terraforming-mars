@@ -1,18 +1,18 @@
-import { IProjectCard } from '../IProjectCard';
+import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
-import { OrOptions } from '../../inputs/OrOptions';
-import { SelectOption } from '../../inputs/SelectOption';
-import { ResourceType } from '../../ResourceType';
-import { SelectCard } from '../../inputs/SelectCard';
-import { ICard } from '../ICard';
-import { CardName } from '../../CardName';
-import { LogHelper } from '../../components/LogHelper';
+import { OrOptions } from "../../inputs/OrOptions";
+import { SelectOption } from "../../inputs/SelectOption";
+import { ResourceType } from "../../ResourceType";
+import { SelectCard } from "../../inputs/SelectCard";
+import { ICard } from "../ICard";
+import { CardName } from "../../CardName";
+import { LogHelper } from "../../components/LogHelper";
 import * as constants from "./../../constants";
-import { PartyHooks } from '../../turmoil/parties/PartyHooks';
-import { PartyName } from '../../turmoil/parties/PartyName';
+import { PartyHooks } from "../../turmoil/parties/PartyHooks";
+import { PartyName } from "../../turmoil/parties/PartyName";
 
 export class Atmoscoop implements IProjectCard {
     public cost: number = 22;
@@ -41,13 +41,13 @@ export class Atmoscoop implements IProjectCard {
 
         if (floaterCards.length === 0) {
             if (!this.temperatureIsMaxed(game)) {
-                options.push(new SelectOption("Raise temperature 2 steps", () => {
+                options.push(new SelectOption("Raise temperature 2 steps", "Raise temperature", () => {
                     return game.increaseTemperature(player,2);
                 }));
             }
             
             if (!this.venusIsMaxed(game)) {
-                options.push(new SelectOption("Raise Venus 2 steps", () => {
+                options.push(new SelectOption("Raise Venus 2 steps", "Raise venus",() => {
                     return game.increaseVenusScaleLevel(player,2);
                 }));
             }
@@ -55,6 +55,7 @@ export class Atmoscoop implements IProjectCard {
             if (!this.temperatureIsMaxed(game)) {
                 options.push(new SelectOption(
                     "Raise temperature 2 steps and add 2 floaters to " + floaterCards[0].name,
+                    "Add floaters",
                     () => {
                         player.addResourceTo(floaterCards[0], 2);
                         LogHelper.logAddResource(game, player, floaterCards[0], 2);
@@ -65,6 +66,7 @@ export class Atmoscoop implements IProjectCard {
             if (!this.venusIsMaxed(game)) {
                 options.push(new SelectOption(
                     "Raise Venus 2 steps and add 2 floaters to " + floaterCards[0].name,
+                    "Add floaters",
                     () => {
                         player.addResourceTo(floaterCards[0], 2);
                         LogHelper.logAddResource(game, player, floaterCards[0], 2);
@@ -75,6 +77,7 @@ export class Atmoscoop implements IProjectCard {
             if (this.temperatureIsMaxed(game) && this.venusIsMaxed(game)) {
                 options.push(new SelectOption(
                     "Add 2 floaters to " + floaterCards[0].name,
+                    "Add floaters",
                     () => {
                         player.addResourceTo(floaterCards[0], 2);
                         LogHelper.logAddResource(game, player, floaterCards[0], 2);
@@ -85,6 +88,7 @@ export class Atmoscoop implements IProjectCard {
             if (!this.temperatureIsMaxed(game)) {
                 options.push(new SelectCard(
                     "Select card to add 2 floaters and raise temperature 2 steps",
+                    "Add floaters",
                     floaterCards,
                     (foundCards: Array<ICard>) => {
                         player.addResourceTo(foundCards[0], 2);
@@ -96,6 +100,7 @@ export class Atmoscoop implements IProjectCard {
             if (!this.venusIsMaxed(game)) {
                 options.push(new SelectCard(
                     "Select card to add 2 floaters and raise Venus 2 steps",
+                    "Add floaters",
                     floaterCards,
                     (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], 2);
@@ -107,6 +112,7 @@ export class Atmoscoop implements IProjectCard {
             if (this.temperatureIsMaxed(game) && this.venusIsMaxed(game)) {
                 options.push(new SelectCard(
                     "Select card to add 2 floaters",
+                    "Add floaters",
                     floaterCards,
                     (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], 2);

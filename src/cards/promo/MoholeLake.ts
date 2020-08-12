@@ -4,7 +4,7 @@ import { Tags } from "./../Tags";
 import { CardType } from "./../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { ResourceType } from "../../ResourceType";
 import { SelectCard } from "../../inputs/SelectCard";
 import { LogHelper } from "../../components/LogHelper";
@@ -52,7 +52,7 @@ export class MoholeLake implements IActionCard, IProjectCard {
           return undefined;
         }
         
-        return new SelectCard("Select card to add microbe or animal", availableCards, (foundCards: Array<ICard>) => {
+        return new SelectCard("Select card to add microbe or animal", "Add resource(s)", availableCards, (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0]);
           LogHelper.logAddResource(game, player, foundCards[0], 1);
           return undefined;

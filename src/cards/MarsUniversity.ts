@@ -7,7 +7,7 @@ import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectCard } from "../inputs/SelectCard";
 import { SelectOption } from "../inputs/SelectOption";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 
 export class MarsUniversity implements IProjectCard {
     public cost: number = 8;
@@ -23,14 +23,14 @@ export class MarsUniversity implements IProjectCard {
         return;
       }
       game.addInterrupt({ player, playerInput: new OrOptions(
-        new SelectCard("Select a card to discard", player.cardsInHand, (foundCards: Array<IProjectCard>) => {
+        new SelectCard("Select a card to discard", "Discard", player.cardsInHand, (foundCards: Array<IProjectCard>) => {
           player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);
           game.dealer.discard(foundCards[0]);
           player.cardsInHand.push(game.dealer.dealCard());
           this.runInterrupts(player, game, scienceTags - 1);
           return undefined;
         }),
-        new SelectOption("Do nothing", () => {
+        new SelectOption("Do nothing", "Confirm", () => {
           this.runInterrupts(player, game, scienceTags - 1);
           return undefined;
         })

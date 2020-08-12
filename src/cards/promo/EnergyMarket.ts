@@ -25,7 +25,7 @@ export class EnergyMarket implements IProjectCard {
     }
 
     private getEnergyOption(player: Player, game: Game, availableMC: number): SelectAmount {
-        return new SelectAmount("Select amount of energy to gain", (amount: number) => {
+        return new SelectAmount("Select amount of energy to gain", "Gain energy", (amount: number) => {
             if (player.canUseHeatAsMegaCredits) {
                 player.setResource(Resources.ENERGY, amount);
                 game.addSelectHowToPayInterrupt(player, (amount * 2), false, false);
@@ -47,10 +47,10 @@ export class EnergyMarket implements IProjectCard {
         const availableMC = (player.canUseHeatAsMegaCredits) ? player.getResource(Resources.MEGACREDITS) + player.getResource(Resources.HEAT) : player.getResource(Resources.MEGACREDITS);
         if (availableMC >= 2 && player.getProduction(Resources.ENERGY) >= 1) {
             return new OrOptions(
-                new SelectOption("Spend 2X MC to gain X energy", () => {
+                new SelectOption("Spend 2X MC to gain X energy", "Spend MC",() => {
                     return this.getEnergyOption(player, game, availableMC);
                 }),
-                new SelectOption("Decrease energy production 1 step to gain 8 MC", () => {
+                new SelectOption("Decrease energy production 1 step to gain 8 MC", "Decrease energy", () => {
                     return this.getMegacreditsOption(player);
                 })
             );

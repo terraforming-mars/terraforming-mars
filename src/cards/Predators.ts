@@ -1,4 +1,4 @@
-import { IActionCard, ICard, IResourceCard } from './ICard';
+import { IActionCard, ICard, IResourceCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -6,10 +6,10 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
 import { SelectCard } from "../inputs/SelectCard";
-import { CardName } from '../CardName';
-import { LogMessageType } from '../LogMessageType';
-import { LogMessageData } from '../LogMessageData';
-import { LogMessageDataType } from '../LogMessageDataType';
+import { CardName } from "../CardName";
+import { LogMessageType } from "../LogMessageType";
+import { LogMessageData } from "../LogMessageData";
+import { LogMessageDataType } from "../LogMessageDataType";
 
 export class Predators implements IProjectCard, IActionCard, IResourceCard {
     public cost: number = 14;
@@ -63,7 +63,8 @@ export class Predators implements IProjectCard, IActionCard, IResourceCard {
         }
 
         return new SelectCard(
-            "Select card to remove animal from", 
+            "Select card to remove animal from",
+            "Remove animal", 
             animalCards, 
             (foundCards: Array<ICard>) => {
                 this.doAction(foundCards[0], player, game)

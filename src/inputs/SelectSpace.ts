@@ -6,6 +6,7 @@ import { PlayerInputTypes } from "../PlayerInputTypes";
 
 export class SelectSpace implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_SPACE;
+    public buttonLabel: string = "Save"; //not used (for now)
     constructor(
         public title: string, 
         public availableSpaces: Array<ISpace>, 

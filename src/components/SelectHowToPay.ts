@@ -238,7 +238,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
     </div>
 
     <div v-if="showsave === true" class="payments_save">
-      <button class="btn btn-lg btn-primary" v-on:click="saveData">Save</button>
+      <button class="btn btn-lg btn-primary" v-on:click="saveData">{{playerinput.buttonLabel}}</button>
     </div>
 
   </section>

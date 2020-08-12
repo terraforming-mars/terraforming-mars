@@ -6,7 +6,7 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 import { ResourceType } from "../ResourceType";
 
 export class ViralEnhancers implements IProjectCard {
@@ -22,12 +22,12 @@ export class ViralEnhancers implements IProjectCard {
         game.interrupts.push({
             player: player,
             playerInput: new OrOptions(
-                new SelectOption("Add resource to card " + card.name, () => {
+                new SelectOption("Add resource to card " + card.name, "Add resource", () => {
                     player.addResourceTo(card);
                     this.applyCardBonus(player, game, card, resourceCount - 1);
                     return undefined;
                 }),
-                new SelectOption("Gain plant", () => {
+                new SelectOption("Gain plant", "Save",() => {
                     player.plants++;
                     this.applyCardBonus(player, game, card, resourceCount - 1);
                     return undefined;

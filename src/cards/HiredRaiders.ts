@@ -32,7 +32,7 @@ export class HiredRaiders implements IProjectCard {
         }
 
         return new OrOptions(
-            new SelectPlayer(game.getPlayers(), "Select player to steal up to 2 steel", "Steal STEEL", (selectedPlayer: Player) => {
+            new SelectPlayer(game.getPlayers(), "Select player to steal up to 2 steel", "Steal steel", (selectedPlayer: Player) => {
                 player.steel += Math.min(2, selectedPlayer.steel);
                 selectedPlayer.setResource(Resources.STEEL, -2, game, player);
                 return undefined;

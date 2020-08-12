@@ -28,7 +28,7 @@ export class Factorum implements IActionCard, CorporationCard {
     public action(player: Player, game: Game) {
         const increaseEnergy = new SelectOption(
             "Increase your energy production 1 step",
-            "Increase +energy",
+            "Increase production",
             () => {
               player.setProduction(Resources.ENERGY);
               return undefined;

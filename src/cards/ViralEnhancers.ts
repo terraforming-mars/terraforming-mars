@@ -27,7 +27,7 @@ export class ViralEnhancers implements IProjectCard {
                     this.applyCardBonus(player, game, card, resourceCount - 1);
                     return undefined;
                 }),
-                new SelectOption("Gain plant", "Gain",() => {
+                new SelectOption("Gain plant", "Save",() => {
                     player.plants++;
                     this.applyCardBonus(player, game, card, resourceCount - 1);
                     return undefined;

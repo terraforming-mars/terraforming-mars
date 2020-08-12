@@ -15,7 +15,7 @@ export class Vitor implements CorporationCard {
     public startingMegaCredits: number = 48; // It's 45 + 3 when this corp is played
 
     private selectAwardToFund(player: Player, game: Game, award: IAward): SelectOption {
-        return new SelectOption("Fund " + award.name + " award", "Fund", () => {
+        return new SelectOption("Fund " + award.name + " award", "", () => {
             game.fundAward(player, award);
             return undefined;
         });
@@ -28,6 +28,7 @@ export class Vitor implements CorporationCard {
         }
         const freeAward = new OrOptions();
         freeAward.title = "Select award to fund";
+        freeAward.buttonLabel = "Confirm";
         freeAward.options = game.awards.map((award) => this.selectAwardToFund(player, game, award));
         return freeAward;
     }

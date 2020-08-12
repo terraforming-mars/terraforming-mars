@@ -51,7 +51,7 @@ export class Stratopolis implements IActionCard, IProjectCard, IResourceCard {
 
         return new SelectCard(
             "Select card to add 2 floaters",
-            "Add floater",
+            "Add floater(s)",
             cards,
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 2);

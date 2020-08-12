@@ -32,7 +32,7 @@ export class CrashSiteCleanup implements IProjectCard {
 
         const gain2Steel = new SelectOption(
             "Gain 2 steel",
-            "Gains steel",
+            "Gain steel",
             () => {
               player.steel += 2;
               LogHelper.logGainStandardResource(game, player, Resources.STEEL, 2);

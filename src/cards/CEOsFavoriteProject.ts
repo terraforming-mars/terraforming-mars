@@ -21,7 +21,7 @@ export class CEOsFavoriteProject implements IProjectCard {
     public play(player: Player, game: Game) {
       return new SelectCard(
           "Select card to add resource",
-          "Add resourse",
+          "Add resource",
           player.getCardsWithResources(),
           (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0]);

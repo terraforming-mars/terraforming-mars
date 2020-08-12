@@ -20,7 +20,7 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
     }
     public action(player: Player) {
         let minimum = player.getProduction(Resources.MEGACREDITS);
-        let lowest: Array<SelectOption> = [new SelectOption("Increase MC production 1 step", "Increase +MC", () => {
+        let lowest: Array<SelectOption> = [new SelectOption("Increase MC production 1 step", "Increase production", () => {
             player.setProduction(Resources.MEGACREDITS);
             player.megaCredits -= 4;
             return undefined;
@@ -30,7 +30,7 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
             minimum = player.getProduction(Resources.STEEL);
         }
         if (player.getProduction(Resources.STEEL) === minimum) {
-            lowest.push(new SelectOption("Increase steel production 1 step", "Increase +steel", () => {
+            lowest.push(new SelectOption("Increase steel production 1 step", "Increase production", () => {
                 player.setProduction(Resources.STEEL);
                 player.megaCredits -= 4;
                 return undefined;
@@ -42,7 +42,7 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
         }
         if (player.getProduction(Resources.TITANIUM) === minimum) {
             lowest.push(new SelectOption("Increase titanium production 1 step", 
-            "Increase +titanium", () => {
+            "Increase production", () => {
                 player.setProduction(Resources.TITANIUM);
                 player.megaCredits -= 4;
                 return undefined;
@@ -53,7 +53,7 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
             minimum = player.getProduction(Resources.PLANTS);
         }
         if (player.getProduction(Resources.PLANTS) === minimum) {
-            lowest.push(new SelectOption("Increase plant production 1 step", "Increase +plants", () => {
+            lowest.push(new SelectOption("Increase plant production 1 step", "Increase production", () => {
                 player.setProduction(Resources.PLANTS);
                 player.megaCredits -= 4;
                 return undefined;
@@ -64,7 +64,7 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
             minimum = player.getProduction(Resources.ENERGY);
         }
         if (player.getProduction(Resources.ENERGY) === minimum) {
-            lowest.push(new SelectOption("Increase energy production 1 step", "Increase +energy", () => {
+            lowest.push(new SelectOption("Increase energy production 1 step", "Increase production", () => {
                 player.setProduction(Resources.ENERGY);
                 player.megaCredits -= 4;
                 return undefined;
@@ -75,7 +75,7 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
             minimum = player.getProduction(Resources.HEAT);
         }
         if (player.getProduction(Resources.HEAT) === minimum) {
-            lowest.push(new SelectOption("Increase heat production 1 step", "Increase +heat", () => {
+            lowest.push(new SelectOption("Increase heat production 1 step", "Increase production", () => {
                 player.setProduction(Resources.HEAT);
                 player.megaCredits -= 4;
                 return undefined;

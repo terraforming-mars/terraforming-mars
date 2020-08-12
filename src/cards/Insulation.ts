@@ -17,7 +17,7 @@ export class Insulation implements IProjectCard {
 
     public play(player: Player, _game: Game) {
         if (player.getProduction(Resources.HEAT) < 1) return undefined;
-        return new SelectAmount("Select amount of heat production to decrease", "Select", (amount: number) => {
+        return new SelectAmount("Select amount of heat production to decrease", "Decrease", (amount: number) => {
             player.setProduction(Resources.HEAT, -amount);
             player.setProduction(Resources.MEGACREDITS,amount);
             return undefined;

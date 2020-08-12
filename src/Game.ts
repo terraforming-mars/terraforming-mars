@@ -58,6 +58,7 @@ import { OrOptions } from "./inputs/OrOptions";
 import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
 
+ 
 export interface Score {
   corporation: String;
   playerScore: number;
@@ -137,6 +138,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public randomMA: boolean = false;
     public seed: number = Math.random();
     private gameOptions: GameOptions;
+    
 
     constructor(
       public id: string,
@@ -295,7 +297,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
               throw new Error("No corporation card dealt for player");
             }
           }
-     
+  
           for (let i = 0; i < 10; i++) {
             player.dealtProjectCards.push(this.dealer.dealCard());
           }
@@ -622,7 +624,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
               candidates[0].setResource(resource, -qtyToRemove, this, player);
               return undefined;
             }),
-            new SelectOption("Skip removing plants", "Skip", () => {
+            new SelectOption("Skip removing plants", "Confirm", () => {
               return undefined;
             })
           )});
@@ -643,7 +645,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
   
           this.addInterrupt({ player, playerInput: new OrOptions(
             ...removalOptions,
-            new SelectOption("Skip removing plants", "Skip", () => { return undefined; })
+            new SelectOption("Skip removing plants", "Confirm", () => { return undefined; })
           )});
         } else {
           this.addInterrupt(new SelectResourceDecrease(player, candidates, this, resource, count, title));

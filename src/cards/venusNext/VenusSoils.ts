@@ -45,7 +45,7 @@ export class VenusSoils implements IProjectCard {
 
         return new SelectCard(
             "Select card to add 2 microbes",
-            "Add microbe",
+            "Add microbe(s)",
             microbeCards,
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 2);

@@ -60,7 +60,7 @@ export class Flooding implements IProjectCard {
                 ),
                 new SelectOption(
                     "Don't remove mega credits from adjacent player",
-                    "Save",
+                    "Confirm",
                     () => {
                       return undefined;
                     }

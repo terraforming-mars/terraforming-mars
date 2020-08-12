@@ -36,6 +36,7 @@ interface CreateGameModel {
     soloTR: boolean;
     clonedGameData: IGameData | undefined;
     cloneGameData: Array<IGameData>;
+    seededGame: boolean;
 }
 
 interface NewPlayerModel {
@@ -205,13 +206,15 @@ export const CreateGameForm = Vue.component("create-game-form", {
             let clonedGamedId: undefined | string = undefined;
 
             // Clone game checks
-            if (component.clonedGameData !== undefined) {
+            if (component.clonedGameData !== undefined && component.seededGame) {
                 clonedGamedId = component.clonedGameData.gameId;
                 if (component.clonedGameData.playerCount !== players.length) {
                     alert("Player count mismatch ");
                     this.$data.playersCount = component.clonedGameData.playerCount;
                     return;
                 }
+            } else if (!component.seededGame) {
+                clonedGamedId = undefined;
             }
 
             const dataToSend = JSON.stringify({

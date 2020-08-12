@@ -64,8 +64,8 @@ export const PlayerHome = Vue.component("player-home", {
         dialogPolyfill.default.registerDialog(document.getElementById("dialog-default"));
     },
     template: `
-        <div id="player-home">
-           <h2 :class="'game-title player_color_'+ player.color" v-i18n>Terraforming Mars</h2>
+        <div id="player-home" :class="player.turmoil ? 'with-turmoil': ''">
+            <h2 :class="'game-title player_color_'+ player.color" v-i18n>Terraforming Mars</h2>
             <section>
                 <dialog id="dialog-default">
                     <form method="dialog">

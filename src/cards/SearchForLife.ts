@@ -18,11 +18,8 @@ export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
     public resourceType: ResourceType = ResourceType.SCIENCE;
     public resourceCount: number = 0;
     public name: CardName = CardName.SEARCH_FOR_LIFE;
-    public canPlay(player: Player, game: Game): boolean {
-        const oxyBelow6 = game.getOxygenLevel() <= 6 + player.getRequirementsBonus(game);
-        const stillSearching = this.resourceCount === 0;
-
-        return oxyBelow6 && stillSearching;
+    public canPlay(player: Player, game: Game): boolean { 
+        return game.getOxygenLevel() <= 6 + player.getRequirementsBonus(game);
     }
     public getVictoryPoints() {
         if (this.resourceCount > 0) {
@@ -34,7 +31,7 @@ export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
         return undefined;
     }
     public canAct(player: Player): boolean {
-        return player.canAfford(1);
+        return player.canAfford(1) && this.resourceCount === 0;
     }
     public action(player: Player, game: Game) {
                 const topCard = game.dealer.dealCard();

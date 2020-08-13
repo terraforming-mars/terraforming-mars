@@ -18,16 +18,17 @@ describe("SearchForLife", function () {
         expect(card.canAct(player)).to.eq(false);
     });
 
+    it("Can't act if found", function () {
+        player.megaCredits = 1;
+        card.resourceCount = 1;
+        expect(card.canAct(player)).to.eq(false);
+    });
+
     it("Can't play if oxygen level too high", function () {
         (game as any).oxygenLevel = 7;
         expect(card.canPlay(player, game)).to.eq(false);
     });
-
-    it("Can't play if contact made", function () {
-        card.resourceCount = 1;
-        expect(card.canPlay(player, game)).to.eq(false);
-    });
-
+  
     it("Should play", function () {
         (game as any).oxygenLevel = 6;
         expect(card.canPlay(player, game)).to.eq(true);

@@ -2079,20 +2079,26 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
       }
 
-      if (
-        this.plants >= this.plantsNeededForGreenery &&
-            game.board.getAvailableSpacesForGreenery(this).length > 0) {
+      const hasEnoughPlants = this.plants >= this.plantsNeededForGreenery;
+      const canPlaceGreenery = game.board.getAvailableSpacesForGreenery(this).length > 0;
+      const oxygenIsMaxed = game.getOxygenLevel() === constants.MAX_OXYGEN_LEVEL;
+
+      const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+      const canAffordReds = !redsAreRuling || (redsAreRuling && this.canAfford(REDS_RULING_POLICY_COST))
+
+      if (hasEnoughPlants && canPlaceGreenery && (oxygenIsMaxed || (!oxygenIsMaxed && canAffordReds))) {
         action.options.push(
             this.convertPlantsIntoGreenery(game)
         );
       }
 
-      if (
-        (this.heat >= constants.HEAT_FOR_TEMPERATURE || 
-          (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) &&
-           (this.getResourcesOnCorporation() * 2) + this.heat >= constants.HEAT_FOR_TEMPERATURE)
-           ) &&
-            game.getTemperature() + 2 <= constants.MAX_TEMPERATURE) {
+      const hasEnoughHeat = this.heat >= constants.HEAT_FOR_TEMPERATURE || 
+        (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) &&
+         this.getResourcesOnCorporation() * 2 + this.heat >= constants.HEAT_FOR_TEMPERATURE)
+
+      const temperatureIsMaxed = game.getTemperature() === constants.MAX_TEMPERATURE;
+
+      if (hasEnoughHeat && !temperatureIsMaxed && canAffordReds) {
         action.options.push(
             this.convertHeatIntoTemperature(game)
         );

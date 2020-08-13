@@ -23,6 +23,11 @@ describe("SearchForLife", function () {
         expect(card.canPlay(player, game)).to.eq(false);
     });
 
+    it("Can't play if contact made", function () {
+        card.resourceCount = 1;
+        expect(card.canPlay(player, game)).to.eq(false);
+    });
+
     it("Should play", function () {
         (game as any).oxygenLevel = 6;
         expect(card.canPlay(player, game)).to.eq(true);

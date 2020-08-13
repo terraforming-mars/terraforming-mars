@@ -1,12 +1,12 @@
 
-import { IActionCard, IResourceCard } from './ICard';
+import { IActionCard, IResourceCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
 import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
@@ -19,7 +19,10 @@ export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
     public resourceCount: number = 0;
     public name: CardName = CardName.SEARCH_FOR_LIFE;
     public canPlay(player: Player, game: Game): boolean {
-        return game.getOxygenLevel() <= 6 + player.getRequirementsBonus(game);
+        const oxyBelow6 = game.getOxygenLevel() <= 6 + player.getRequirementsBonus(game);
+        const stillSearching = this.resourceCount === 0;
+
+        return oxyBelow6 && stillSearching;
     }
     public getVictoryPoints() {
         if (this.resourceCount > 0) {

@@ -5,6 +5,7 @@ import { Game } from "../../../src/Game";
 import { CuttingEdgeTechnology } from "../../../src/cards/promo/CuttingEdgeTechnology";
 import { DustSeals } from "../../../src/cards/DustSeals";
 import { HeatTrappers } from "../../../src/cards/HeatTrappers";
+import { VoteOfNoConfidence } from "../../../src/cards/turmoil/VoteOfNoConfidence";
 
 describe("CuttingEdgeTechnology", function () {
     it("Should play", function () {
@@ -14,9 +15,11 @@ describe("CuttingEdgeTechnology", function () {
         card.play();
 
         const discountedCard = new DustSeals();
+        const discountedCard2 = new VoteOfNoConfidence();
         const undiscountedCard = new HeatTrappers();
 
         expect(card.getCardDiscount(player, game, discountedCard)).to.eq(2);
+        expect(card.getCardDiscount(player, game, discountedCard2)).to.eq(2);
         expect(card.getCardDiscount(player, game, undiscountedCard)).to.eq(0);
         expect(card.getVictoryPoints()).to.eq(1);
     });

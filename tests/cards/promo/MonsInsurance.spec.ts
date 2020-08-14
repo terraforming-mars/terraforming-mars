@@ -6,6 +6,8 @@ import { Game } from '../../../src/Game';
 import { Resources } from "../../../src/Resources";
 import { Sabotage } from '../../../src/cards/Sabotage';
 import { OrOptions } from "../../../src/inputs/OrOptions";
+import { Ants } from "../../../src/cards/Ants";
+import { Tardigrades } from "../../../src/cards/Tardigrades";
 
 describe("MonsInsurance", function () {
     let card : MonsInsurance, player : Player, player2: Player, player3: Player, game: Game;
@@ -40,5 +42,20 @@ describe("MonsInsurance", function () {
         expect(player2.titanium).to.eq(0);
         expect(player2.megaCredits).to.eq(2);
         expect(player.megaCredits).to.eq(0);
+    });
+
+    it("Doesn't trigger effect when player removes resources from self", function () {
+        card.play(player, game);
+        player.corporationCard = card;
+        player.megaCredits = 2;
+
+        const ants = new Ants();
+        const tardigrades = new Tardigrades();
+        player2.playedCards.push(ants, tardigrades);
+        tardigrades.resourceCount = 3;
+
+        ants.action(player2, game); // remove resource from own card
+        expect(player2.megaCredits).to.eq(0);
+        expect(player.megaCredits).to.eq(2);
     });
 });

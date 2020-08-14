@@ -434,7 +434,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         card.resourceCount = Math.max(card.resourceCount - count, 0);
         // Mons Insurance hook
         if (game !== undefined && removingPlayer !== undefined) {
-          this.resolveMonsInsurance(game);
+          if (removingPlayer !== this) this.resolveMonsInsurance(game);
 
           if (shouldLogAction) {
             game.log(

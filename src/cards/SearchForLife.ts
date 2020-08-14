@@ -21,6 +21,9 @@ export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
     public canPlay(player: Player, game: Game): boolean { 
         return game.getOxygenLevel() <= 6 + player.getRequirementsBonus(game);
     }
+    
+    public actionOrderWeight: number = 0;
+
     public getVictoryPoints() {
         if (this.resourceCount > 0) {
             return  3;
@@ -28,15 +31,17 @@ export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
         return 0;
     }
     public play() {
+        this.actionOrderWeight = 10;
         return undefined;
     }
     public canAct(player: Player): boolean {
-        return player.canAfford(1) && this.resourceCount === 0;
+        return player.canAfford(1);
     }
     public action(player: Player, game: Game) {
-                const topCard = game.dealer.dealCard();
+        const topCard = game.dealer.dealCard();
         if (topCard.tags.indexOf(Tags.MICROBES) !== -1) {
             this.resourceCount++;
+            this.actionOrderWeight = 0;
         }
 
         game.log(

@@ -5,4 +5,5 @@ export interface CardModel {
     resources: number | undefined;
     calculatedCost: number;
     cardType: CardType;
+    actionOrderWeight: number | undefined;
 }

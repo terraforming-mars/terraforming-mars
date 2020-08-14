@@ -17,13 +17,7 @@ describe("SearchForLife", function () {
     it("Can't act if no MC", function () {
         expect(card.canAct(player)).to.eq(false);
     });
-
-    it("Can't act if found", function () {
-        player.megaCredits = 1;
-        card.resourceCount = 1;
-        expect(card.canAct(player)).to.eq(false);
-    });
-
+ 
     it("Can't play if oxygen level too high", function () {
         (game as any).oxygenLevel = 7;
         expect(card.canPlay(player, game)).to.eq(false);
@@ -40,6 +34,15 @@ describe("SearchForLife", function () {
         expect(card.getVictoryPoints()).to.eq(3);
     });
 
+    it("Should start with 0 weight", function () {
+        expect(card.actionOrderWeight).to.eq(0);
+    });
+
+    it("Once played weight goes up", function () {
+        card.play();
+        expect(card.actionOrderWeight).to.eq(10);
+    });
+
     it("Should act", function () {
         player.playedCards.push(card);
 
@@ -50,6 +53,7 @@ describe("SearchForLife", function () {
             expect(player.megaCredits).to.eq(0);
         }
         
-        expect(card.resourceCount >= 1).to.eq(true);    
+        expect(card.resourceCount >= 1).to.eq(true);
+        expect(card.actionOrderWeight === 0);    
     });
 });

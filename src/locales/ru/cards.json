@@ -659,5 +659,15 @@
     "5 Science": "5 Науки",
     "Action: Draw 2 cards.": "Действие: Доберите 2 карты",
     "Requires 3 Science tags to play. Decrease your Energy production 1 step.": "У вас должно быть 3 метки Науки. Уменьшите ваше производство энергии на 1",
-    "Jovian": "Юпитер"
+    "Jovian": "Юпитер",
+    "Sell": "Продать",
+    "Project Requirement": "Требования пректа",
+    "PRELUDE": "ПРОЛОГ",
+    "EFFECT": "ЭФФЕКТ",
+    "Select prelude card to play": "Выберите карту Прологов, чтобы разыграть ее",
+    "Select space for ocean tile": "Выберите место для размещения океана",
+    "Venus Milestone/Award": "Награда/Достижение проекта Венера",
+
+    "${0} placed ${1} tile on (${2}, ${3}": "${0} разместил тайл \"${1}\" на координатах (${2}, ${3}"
+  
 }

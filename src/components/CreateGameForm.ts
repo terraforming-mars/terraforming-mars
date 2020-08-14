@@ -374,7 +374,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                             <label class="form-switch">
                                 <input type="checkbox" v-model="solarPhaseOption">
-                                <i class="form-icon"></i> <span v-i18n>Use Solar Phase</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#solar-phase" class="tooltip" target="_blank">&#9432;</a>
+                                <i class="form-icon"></i> <span v-i18n>World Government Terraforming</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#solar-phase" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <label class="form-switch">

@@ -1354,7 +1354,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       openColonies.forEach(colony => {
         const colonySelect =  new SelectOption(
           colony.name + " - (" + colony.description + ")", 
-          "",
+          "Confirm",
           () => {
             game.addSelectHowToPayInterrupt(this, constants.BUILD_COLONY_COST, false, false, "Select how to pay for Colony project");
             colony.onColonyPlaced(this, game);
@@ -1370,7 +1370,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private airScrapping(game: Game): PlayerInput {
       return new SelectOption(
         "Air scrapping (" + constants.AIR_SCRAPPING_COST + " MC)", 
-        "",
+        "Confirm",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.AIR_SCRAPPING_COST, false, false, "Select how to pay for Air Scrapping project");
           game.increaseVenusScaleLevel(this, 1);
@@ -1389,7 +1389,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private bufferGas(game: Game): PlayerInput {
       return new SelectOption(
         "Buffer Gas (" + constants.BUFFER_GAS_COST + " MC)", 
-        "",
+        "Confirm",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.BUFFER_GAS_COST, false, false, "Select how to pay for Buffer Gas project");
           this.increaseTerraformRatingSteps(1, game);
@@ -1408,7 +1408,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private buildPowerPlant(game: Game): PlayerInput {
       return new SelectOption(
         "Power plant (" + this.powerPlantCost + " MC)", 
-        "",
+        "Confirm",
         () => {
           game.addSelectHowToPayInterrupt(this, this.powerPlantCost, false, false, "Select how to pay for Power Plant project");
           this.setProduction(Resources.ENERGY);
@@ -1427,7 +1427,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private asteroid(game: Game): PlayerInput {
       return new SelectOption(
         "Asteroid (" + constants.ASTEROID_COST + " MC)", 
-        "",
+        "Confirm",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.ASTEROID_COST, false, false, "Select how to pay for Asteroid project");
           game.increaseTemperature(this, 1);
@@ -1446,7 +1446,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private aquifer(game: Game): PlayerInput {
       return new SelectOption(
         "Aquifer (" + constants.AQUIFER_COST + " MC)", 
-        "",
+        "Confirm",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.AQUIFER_COST, false, false, "Select how to pay for Aquifer project");
           game.addOceanInterrupt(this, "Select space for ocean");
@@ -1465,7 +1465,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private addGreenery(game: Game): PlayerInput {
       return new SelectOption(
         "Greenery (" + constants.GREENERY_COST + " MC)", 
-        "",
+        "Confirm",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.GREENERY_COST, false, false, "Select how to pay for Greenery project");
           game.addInterrupt(new SelectGreenery(this, game));
@@ -1484,7 +1484,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private addCity(game: Game): PlayerInput {
       return new SelectOption(
         "City (" + constants.CITY_COST + " MC)", 
-        "",
+        "Confirm",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.CITY_COST, false, false, "Select how to pay for City project");
           game.addInterrupt(new SelectCity(this, game));

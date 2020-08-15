@@ -30,37 +30,37 @@ export class UtopiaInvest implements IActionCard, CorporationCard {
 
         let options: Array<SelectOption> = [];
 
-        const reduceMegacredits = new SelectOption("Decrease MC production", "Decrease -MC", () => {
+        const reduceMegacredits = new SelectOption("Decrease MC production", "Decrease production", () => {
             player.setProduction(Resources.MEGACREDITS, -1);
             player.megaCredits += 4;
             return undefined;
         });
 
-        const reduceSteel = new SelectOption("Decrease steel production", "Decrease steel", () => {
+        const reduceSteel = new SelectOption("Decrease steel production", "Decrease production", () => {
             player.setProduction(Resources.STEEL, -1);
             player.steel += 4;
             return undefined;
         });
 
-        const reduceTitanium = new SelectOption("Decrease titanium production", "Decrease titanium", () => {
+        const reduceTitanium = new SelectOption("Decrease titanium production", "Decrease production", () => {
             player.setProduction(Resources.TITANIUM, -1);
             player.titanium += 4;
             return undefined;
         });
 
-        const reducePlants = new SelectOption("Decrease plants production", "Decrease plants", () => {
+        const reducePlants = new SelectOption("Decrease plants production", "Decrease production", () => {
             player.setProduction(Resources.PLANTS, -1);
             player.plants += 4;
             return undefined;
         });
 
-        const reduceEnergy = new SelectOption("Decrease energy production", "Decrease energy", () => {
+        const reduceEnergy = new SelectOption("Decrease energy production", "Decrease production", () => {
             player.setProduction(Resources.ENERGY, -1);
             player.energy += 4;
             return undefined;
         });
 
-        const reduceHeat = new SelectOption("Decrease heat production", "Decrease heat", () => {
+        const reduceHeat = new SelectOption("Decrease heat production", "Decrease production", () => {
             player.setProduction(Resources.HEAT, -1);
             player.heat += 4;
             return undefined;

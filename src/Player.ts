@@ -861,22 +861,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           result.push(playedCard);
         }
       }
-      
-      // this is a temporary workaround for undefined values which are given 10 weight a.k.a. played first
-      console.log(result, "PLAYABLE CARDS")
-      result.sort(function(a, b) {
-        if(a.actionOrderWeight === undefined && b.actionOrderWeight === undefined) return 0;
-        if(a.actionOrderWeight === undefined && b.actionOrderWeight !== undefined) {
-          return b.actionOrderWeight -  10;
-        } else if(a.actionOrderWeight !== undefined && b.actionOrderWeight === undefined) {
-          return 10 - a.actionOrderWeight;
-        } else if(a.actionOrderWeight !== undefined && b.actionOrderWeight !== undefined) {
-          return b.actionOrderWeight - a.actionOrderWeight;
-        } else {
-          return 0
-        }
-      })
-      // console.log(result, "PLAYABLE Sorted")
+       
       return result;
     }
 
@@ -1077,8 +1062,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                 resources: targetCard.resourceCount,
                 name: targetCard.card.name,
                 calculatedCost: this.getCardCost(game, targetCard.card),
-                cardType: card.cardType,
-                actionOrderWeight: 0
+                cardType: card.cardType 
               }            
             );
           }
@@ -2310,10 +2294,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         if(element.resourceCount && element.resourceCount > 0) {
           card.resourceCount = element.resourceCount;
         }  
-        if(element.actionOrderWeight && element.actionOrderWeight > 0) {
-          card.actionOrderWeight = element.actionOrderWeight;
-        }
-
+       
         if(card instanceof SelfReplicatingRobots) {
           let targetCards = (element as SelfReplicatingRobots).targetCards;
           if (targetCards !== undefined) {

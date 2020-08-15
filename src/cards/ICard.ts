@@ -41,5 +41,4 @@ export interface ICard {
     onTilePlaced?: (player: Player, space: ISpace, game: Game) => void;
     resourceType?: ResourceType;
     resourceCount?: number;
-    actionOrderWeight?: number;
 }

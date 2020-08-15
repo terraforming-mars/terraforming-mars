@@ -532,7 +532,7 @@ function getPlayer(player: Player, game: Game): string {
 function getCardsAsCardModel(cards: Array<ICard>, showResouces: boolean = true): Array<CardModel> {
   let result:Array<CardModel> = [];
   cards.forEach((card) => {
-    result.push({name: card.name, resources: (card.resourceCount !== undefined && showResouces ? card.resourceCount : undefined), calculatedCost : 0, cardType : CardType.AUTOMATED, actionOrderWeight: card.actionOrderWeight});
+    result.push({name: card.name, resources: (card.resourceCount !== undefined && showResouces ? card.resourceCount : undefined), calculatedCost : 0, cardType : CardType.AUTOMATED});
   });
 
   return result;
@@ -628,8 +628,7 @@ function getCards(
     resources: showResouces?player.getResourcesOnCard(card):undefined,
     name: card.name,
     calculatedCost: player.getCardCost(game, card),
-    cardType: card.cardType,
-    actionOrderWeight: card.actionOrderWeight
+    cardType: card.cardType
   }));
 }
 

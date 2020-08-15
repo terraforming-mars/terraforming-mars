@@ -17,7 +17,7 @@ export class Splice implements CorporationCard {
     public tags: Array<Tags> = [Tags.MICROBES];
     public startingMegaCredits: number = 48; // 44 + 4 as card resolution when played
 
-    public initialAction(player: Player, game: Game) {
+    public initialAction(player: Player, game: Game) { 
         player.cardsInHand.push(game.drawCardsByTag(Tags.MICROBES, 1)[0]);
         
         const drawnCards = game.getCardsInHandByTag(player, Tags.MICROBES).slice(-1);
@@ -45,8 +45,9 @@ export class Splice implements CorporationCard {
             return undefined;
         });
 
-        // Splice owner get 2MC
-        game.getCardPlayer(this.name).megaCredits += 2;
+        // Splice owner get 2MC per microbe tag
+        const microbeTagsCount = card.tags.filter(tag => tag === "microbe").length; 
+        game.getCardPlayer(this.name).megaCredits += microbeTagsCount * 2;
 
         // Card player choose between 2 MC and a microbe on card, if possible
         if (card.resourceType !== undefined && card.resourceType === ResourceType.MICROBE) {

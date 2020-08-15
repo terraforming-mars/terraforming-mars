@@ -62,7 +62,7 @@ export const Colony = Vue.component("colony", {
     template: `
     <div class="filterDiv colony-card colonies" :class="colony.name + '-background'" v-i18n>
     <div v-if="colony.visitor !== undefined" class="colony-spaceship">
-      <div :class="'colonies-fleet colonies-fleet-'+ colony.visitor.color"></div>
+      <div :class="'colonies-fleet colonies-fleet-'+ colony.visitor"></div>
     </div>
     <div v-if="colony.isActive" :style="'margin-left:' + getCubeXPosition(colony) + 'px; margin-top:' + getCubeYPosition(colony) + 'px;'" class="colony_cube"></div>
     <div v-if="colony.colonies.length > 0" :style="'margin-left: ' + getColonyXPosition(0) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board-cube board-cube--' + colony.colonies[0]"></div>

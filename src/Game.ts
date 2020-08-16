@@ -253,6 +253,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
         corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
       }  
 
+      // Add Promo stuff
+      if (this.promoCardsOption) {
+        corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
+      }  
+
       // Setup custom corporation list
       const minCorpsRequired = players.length * this.startingCorporations;
       if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
@@ -1480,6 +1485,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
             player.megaCredits += player.oceanBonus;
           }
         });
+      }else{
+        space.player = undefined;
       }
       
       this.tilePlaced(space);

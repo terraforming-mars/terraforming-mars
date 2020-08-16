@@ -581,7 +581,7 @@ function getWaitingFor(
       result.canUseHeat = (waitingFor as SelectHowToPayForCard).canUseHeat;
       break;
     case PlayerInputTypes.SELECT_CARD:
-      result.cards = getCardsAsCardModel((waitingFor as SelectCard<ICard>).cards);
+      result.cards = getCardsAsCardModel((waitingFor as SelectCard<ICard>).cards, false);
       result.maxCardsToSelect = (waitingFor as SelectCard<ICard>)
           .maxCardsToSelect;
       result.minCardsToSelect = (waitingFor as SelectCard<ICard>)

@@ -2119,7 +2119,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (this.canAfford(8) && !game.allMilestonesClaimed()) {
         const remainingMilestones = new OrOptions();
         remainingMilestones.title = "Claim a milestone";
-        remainingMilestones.title = "Confirm";
         remainingMilestones.options = game.milestones
             .filter(
                 (milestone: IMilestone) =>

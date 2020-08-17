@@ -19,7 +19,7 @@ export const StartScreen = Vue.component("start-screen", {
                 <a class="start-screen-link start-screen-link--board-game" href="https://boardgamegeek.com/boardgame/167791/terraforming-mars" v-i18n>Board game</a>
                 <a class="start-screen-link start-screen-link--about" href="https://github.com/bafolts/terraforming-mars" v-i18n>About us</a>
                 <a class="start-screen-link start-screen-link--changelog" href="https://github.com/bafolts/terraforming-mars/wiki/Changelog" v-i18n>Whats new?</a>
-                <a class="start-screen-link start-screen-link--chat" href="https://discord.gg/fWXE53K" target="_blank" v-i18n>Chat with us</a>
+                <a class="start-screen-link start-screen-link--chat" href="https://discord.gg/fWXE53K" target="_blank" v-i18n>Join us on Discord</a>
             </div>
         </div>
     `

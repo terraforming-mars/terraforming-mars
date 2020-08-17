@@ -42,6 +42,7 @@ describe("Splice", function () {
         player.corporationCard = card;
         const play2 = card2.play();
         player2.corporationCard = card2;
+        
         expect(play).to.eq(undefined);
         expect(play2).to.eq(undefined);
 

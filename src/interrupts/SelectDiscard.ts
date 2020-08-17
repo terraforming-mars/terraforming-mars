@@ -22,7 +22,7 @@ export class SelectDiscard implements PlayerInterrupt {
     public beforeAction(): void {
         if (this.drawBefore) {
             this.player.cardsInHand.push(this.game.dealer.dealCard());
-            this.playerInput = new SelectCard(this.title, "Save", this.player.cardsInHand, (foundCards: Array<IProjectCard>) => {
+            this.playerInput = new SelectCard(this.title, "Discard", this.player.cardsInHand, (foundCards: Array<IProjectCard>) => {
                 this.player.cardsInHand.splice(this.player.cardsInHand.indexOf(foundCards[0]), 1);
                 this.game.dealer.discard(foundCards[0]);
                 return undefined;

@@ -1508,13 +1508,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           colony.name + " - (" + colony.description + ")", 
           "Trade",
           () => {
-            colony.trade(this, game);
             game.log(
               LogMessageType.DEFAULT,
               "${0} traded with ${1}",
               new LogMessageData(LogMessageDataType.PLAYER, this.id),
               new LogMessageData(LogMessageDataType.COLONY, colony.name)
             );
+            colony.trade(this, game);
             return undefined;
           }
         );

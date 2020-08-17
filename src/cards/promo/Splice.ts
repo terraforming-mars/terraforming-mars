@@ -32,7 +32,7 @@ export class Splice implements CorporationCard {
         return undefined;
     }
 
-    public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
+    public onCardPlayed(player: Player, game: Game, card: IProjectCard | CorporationCard) {
         if (card.tags.indexOf(Tags.MICROBES) === -1) {return undefined;}
         const gainPerMicrobe = 2;
         const microbeTagsCount = card.tags.filter(tag => tag === Tags.MICROBES).length;

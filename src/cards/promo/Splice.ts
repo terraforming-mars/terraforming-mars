@@ -34,26 +34,28 @@ export class Splice implements CorporationCard {
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
         if (card.tags.indexOf(Tags.MICROBES) === -1) {return undefined;}
+        const gainPerMicrobe = 2;
+        const microbeTagsCount = card.tags.filter(tag => tag === Tags.MICROBES).length;
+        const megacreditsGain = microbeTagsCount * gainPerMicrobe;
 
         const addResource = new SelectOption("Add a microbe resource to this card", "Add microbe", () => {
             player.addResourceTo(card);
             return undefined;
         });
 
-        const getMegacredits = new SelectOption("Gain 2 MC", "Gain MC", () => {
-            player.megaCredits += 2;
+        const getMegacredits = new SelectOption(`Gain ${megacreditsGain} MC`, "Gain MC", () => {
+            player.megaCredits += megacreditsGain;
             return undefined;
         });
 
         // Splice owner get 2MC per microbe tag
-        const microbeTagsCount = card.tags.filter(tag => tag === "microbe").length; 
-        game.getCardPlayer(this.name).megaCredits += microbeTagsCount * 2;
+        game.getCardPlayer(this.name).megaCredits += megacreditsGain;
 
         // Card player choose between 2 MC and a microbe on card, if possible
         if (card.resourceType !== undefined && card.resourceType === ResourceType.MICROBE) {
             return new OrOptions(addResource, getMegacredits);
         } else {
-            player.megaCredits += 2;
+            player.megaCredits += megacreditsGain;
             return undefined;
         }    
     }

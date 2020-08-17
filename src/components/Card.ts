@@ -20,6 +20,7 @@ import { ALL_PRELUDE_CORPORATIONS,
          } from "../Dealer";
 import { HTML_DATA } from "../HTML_data";
 import { CardModel } from "../models/CardModel";
+import { CardName } from "../CardName";
 
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
@@ -109,10 +110,14 @@ export const Card = Vue.component("card", {
                 cssClass += " cards-action-was-used"
             }
             return cssClass;
+        },
+        lifeFound: function (card: CardModel): boolean {
+            return card.name === CardName.SEARCH_FOR_LIFE && card.resources !== undefined && card.resources > 0
         }
     },
     template: `
     <div :class="getCardCssClass(card)">
+        <img v-if="lifeFound(card)" class="little-green-men" src="assets/martian.png" />
         <div class="card_resources_counter" v-if="card.resources !== undefined">RES:<span class="card_resources_counter--number"> {{ card.resources }}</span></div>
         <div class="card-content-wrapper" v-i18n v-html=this.getCardContent()></div>
     </div>

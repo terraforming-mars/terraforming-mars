@@ -71,7 +71,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="tag tag1 tag-science "></div>
         <div class="card-number">005</div>
         <div class="content ">
-            <div class="points points-big">3/<div class="resource science"></div></div>
+            <div class="points points-big"><div class="resource science"></div>*:3</div>
             <div class="requirements requirements-max ">max 6% O2</div>
             <div class=" "><span class=" money resource ">1</span> <span class="red-arrow "></span> <span class="microbe resource "></span>*  :  <div class="resource science"></div> </div>
             <div class="description ">

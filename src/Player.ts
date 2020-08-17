@@ -861,6 +861,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           result.push(playedCard);
         }
       }
+       
       return result;
     }
 
@@ -1061,7 +1062,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                 resources: targetCard.resourceCount,
                 name: targetCard.card.name,
                 calculatedCost: this.getCardCost(game, targetCard.card),
-                cardType: card.cardType
+                cardType: card.cardType 
               }            
             );
           }
@@ -2291,7 +2292,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         let card = getProjectCardByName(element.name)!;
         if(element.resourceCount && element.resourceCount > 0) {
           card.resourceCount = element.resourceCount;
-        }
+        }  
+       
         if(card instanceof SelfReplicatingRobots) {
           let targetCards = (element as SelfReplicatingRobots).targetCards;
           if (targetCards !== undefined) {

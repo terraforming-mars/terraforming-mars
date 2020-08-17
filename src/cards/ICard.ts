@@ -13,13 +13,13 @@ import { SelectPlayer } from "../inputs/SelectPlayer";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { StandardProjectType } from "../StandardProjectType";
 import { OrOptions } from "../inputs/OrOptions";
-import { SelectOption } from '../inputs/SelectOption';
-import { ResourceType } from '../ResourceType';
+import { SelectOption } from "../inputs/SelectOption";
+import { ResourceType } from "../ResourceType";
 import { CardName } from "../CardName";
 
 export interface IActionCard {
     action: (player: Player, game: Game) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
-    canAct: (player: Player, game: Game) => boolean;
+    canAct: (player: Player, game: Game) => boolean; 
 }
 
 export interface IResourceCard {

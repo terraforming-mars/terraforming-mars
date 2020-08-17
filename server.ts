@@ -456,7 +456,7 @@ function getAwards(game: Game): Array<FundedAwardModel>  {
 }
 
 function getCorporationCard(player: Player): CardModel | undefined {
-  if (player.corporationCard == undefined) return undefined;
+  if (player.corporationCard === undefined) return undefined;
 
   return ({
     name: player.corporationCard.name,
@@ -531,7 +531,6 @@ function getPlayer(player: Player, game: Game): string {
 
 function getCardsAsCardModel(cards: Array<ICard>, showResouces: boolean = true): Array<CardModel> {
   let result:Array<CardModel> = [];
-
   cards.forEach((card) => {
     result.push({name: card.name, resources: (card.resourceCount !== undefined && showResouces ? card.resourceCount : undefined), calculatedCost : 0, cardType : CardType.AUTOMATED});
   });

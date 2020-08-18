@@ -16,10 +16,10 @@ describe("FloaterTechnology", function () {
         game = new Game("foobar", [player, player], player);
     });
 
-    it("Can play"), function () {
+    it("Can play", function () {
         const result = card.play();
         expect(result).to.eq(undefined);
-    }
+    });
 
     it("Cannot act without targets", function () {
         expect(card.canAct(player)).to.eq(false);

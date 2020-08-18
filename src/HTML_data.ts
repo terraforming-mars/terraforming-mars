@@ -71,7 +71,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="tag tag1 tag-science "></div>
         <div class="card-number">005</div>
         <div class="content ">
-            <div class="points points-big">3/<div class="resource science"></div></div>
+            <div class="points points-big"><div class="resource science"></div>*:3</div>
             <div class="requirements requirements-max ">max 6% O2</div>
             <div class=" "><span class=" money resource ">1</span> <span class="red-arrow "></span> <span class="microbe resource "></span>*  :  <div class="resource science"></div> </div>
             <div class="description ">
@@ -1662,7 +1662,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="content ">
             <div class="resource-tag tag-earth"></div> : <div class="money resource ">-3</div>
             <div class="description ">
-                (Effect: When you play an Earth card, you pay 3 MC less for it.)
+                (Effect: When you play an Earth tag, you pay 3 MC less for it.)
             </div>
         </div>
 `],
@@ -5337,7 +5337,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="resource-tag tag-earth"></div> :
         <div class="resource money">-3</div>
         <div class="description" style="text-align:center;margin-top:0px;">
-          (Effect: When playing an Earth card, you pay 3 MC less for it.)
+          (Effect: When you play an Earth tag, you pay 3 MC less for it.)
         </div>
       </div>
       <span style="font-size:34px;

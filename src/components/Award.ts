@@ -41,7 +41,7 @@ export const Award = Vue.component("award", {
                     <div class="ma-player" v-if="award.player_name"><i :title="award.player_name" :class="'board-cube board-cube--'+award.player_color" /></div>
                     <div class="ma-name--awards" :class="getNameCss(award.award.name)" v-i18n>
                         {{award.award.name}}
-                        <div class="ma-scores" class="player_home_block--milestones-and-awards-scores">
+                        <div class="ma-scores player_home_block--milestones-and-awards-scores">
                             <p v-for="score in award.scores.sort(
                                 (s1, s2) => s2.playerScore - s1.playerScore
                             )" :class="'ma-score player_bg_color_'+score.playerColor">{{ score.playerScore }}</p>

@@ -35,8 +35,8 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
         return player.canAfford(oceanCost, game, false, true);;
     }
     public action(player: Player, game: Game) {
-        game.addOceanInterrupt(player);
         game.addSelectHowToPayInterrupt(player, 12, false, true, "Select how to pay for action");
+        game.addOceanInterrupt(player);
         return undefined;        
     }
 }

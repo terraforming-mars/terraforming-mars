@@ -19,6 +19,7 @@
     "Blue": "Синий",
     "Black": "Черный",
     "Purple": "Фиолетовый",
+    "TR Boost": "Фора по РТ",
 
     "original": "База",
     "hellas": "Эллада",
@@ -28,7 +29,8 @@
     "Prelude": "Прологи",
     "Venus Next": "Венера",
     "Custom Corporation list": "Настроить корпорации",
-    "Use Solar Phase": "Помощь Солнечной системы",
+    "Custom Colonies list": "Настроить колонии",
+    "World Government Terraforming": "Правительственная поддержка",
 
     "NEXT CARD:": "СЛЕДУЮЩАЯ КАРТА:",
 
@@ -182,5 +184,20 @@
     "Alert when Terraforming completed": "Предупреждать о завершении терраформирования",
     "CORPORATION": "Корпорация",
     "Randomize board tiles": "Случайные места для тайлов",
-    "Go to main page": "На стартовую страницу"
+    "Go to main page": "На стартовую страницу",
+
+    "Confirm": "Ok",
+    "Pass": "Пас",
+    "BEGINNER CORPORATION": "Начинающая корпорация",
+    "Standard projects": "Стандартные проекты",
+    "Play card": "Разыграть карту",
+    "Take action": "Выполнить действие",
+    "Promos": "Промо",
+    "Pay trade fee": "Торговать",
+    "Trade": "Торговать",
+    "Pay 3 Titanium": "Заплатить 3 Титана",
+    "Select 2 Prelude cards": "Выберите 2 карты Прологов",
+    "Self-Replicating Robots cards": "Карты Роботов-саморепликантов",
+    "Remove colony": "Убрать колонию"
+
 }

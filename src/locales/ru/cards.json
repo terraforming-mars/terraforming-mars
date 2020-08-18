@@ -333,7 +333,7 @@
     "Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Действие: потратьте 4 энергии, чтобы получить 1 титан и повысить уровень кислорода на 1.",
 
     "Earth Office": "Офис на Земле",
-    "Effect: When you play an Earth card, you pay 3 MC less for it.": "Свойство: когда вы играете карту с символом Земли, вы платите на 3 MC меньше.",
+    "Effect: When you play an Earth tag, you pay 3 MC less for it.": "Свойство: когда вы играете карту с символом Земли, вы платите на 3 MC меньше.",
 
     "Acquired Company": "Приобретённая компания",
 
@@ -659,5 +659,15 @@
     "5 Science": "5 Науки",
     "Action: Draw 2 cards.": "Действие: Доберите 2 карты",
     "Requires 3 Science tags to play. Decrease your Energy production 1 step.": "У вас должно быть 3 метки Науки. Уменьшите ваше производство энергии на 1",
-    "Jovian": "Юпитер"
+    "Jovian": "Юпитер",
+    "Sell": "Продать",
+    "Project Requirement": "Требования пректа",
+    "PRELUDE": "ПРОЛОГ",
+    "EFFECT": "ЭФФЕКТ",
+    "Select prelude card to play": "Выберите карту Прологов, чтобы разыграть ее",
+    "Select space for ocean tile": "Выберите место для размещения океана",
+    "Venus Milestone/Award": "Награда/Достижение проекта Венера",
+
+    "${0} placed ${1} tile on (${2}, ${3}": "${0} разместил тайл \"${1}\" на координатах (${2}, ${3}"
+  
 }

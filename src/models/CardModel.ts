@@ -1,8 +1,8 @@
-import { CardType } from '../cards/CardType';
+import { CardType } from "../cards/CardType";
 
 export interface CardModel {
     name: string;
     resources: number | undefined;
     calculatedCost: number;
-    cardType: CardType;
+    cardType: CardType; 
 }

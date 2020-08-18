@@ -107,7 +107,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     constructor(
         public name: string,
         public color: Color,
-        public beginner: boolean) {
+        public beginner: boolean,
+        public handicap: number = 0) {
       this.id = this.generateId();
     }
 
@@ -434,7 +435,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         card.resourceCount = Math.max(card.resourceCount - count, 0);
         // Mons Insurance hook
         if (game !== undefined && removingPlayer !== undefined) {
-          this.resolveMonsInsurance(game);
+          if (removingPlayer !== this) this.resolveMonsInsurance(game);
 
           if (shouldLogAction) {
             game.log(
@@ -861,6 +862,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           result.push(playedCard);
         }
       }
+       
       return result;
     }
 
@@ -1061,7 +1063,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                 resources: targetCard.resourceCount,
                 name: targetCard.card.name,
                 calculatedCost: this.getCardCost(game, targetCard.card),
-                cardType: card.cardType
+                cardType: card.cardType 
               }            
             );
           }
@@ -1354,7 +1356,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       openColonies.forEach(colony => {
         const colonySelect =  new SelectOption(
           colony.name + " - (" + colony.description + ")", 
-          "",
+          "Confirm",
           () => {
             game.addSelectHowToPayInterrupt(this, constants.BUILD_COLONY_COST, false, false, "Select how to pay for Colony project");
             colony.onColonyPlaced(this, game);
@@ -1370,7 +1372,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private airScrapping(game: Game): PlayerInput {
       return new SelectOption(
         "Air scrapping (" + constants.AIR_SCRAPPING_COST + " MC)", 
-        "",
+        "Confirm",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.AIR_SCRAPPING_COST, false, false, "Select how to pay for Air Scrapping project");
           game.increaseVenusScaleLevel(this, 1);
@@ -1389,7 +1391,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private bufferGas(game: Game): PlayerInput {
       return new SelectOption(
         "Buffer Gas (" + constants.BUFFER_GAS_COST + " MC)", 
-        "",
+        "Confirm",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.BUFFER_GAS_COST, false, false, "Select how to pay for Buffer Gas project");
           this.increaseTerraformRatingSteps(1, game);
@@ -1408,7 +1410,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private buildPowerPlant(game: Game): PlayerInput {
       return new SelectOption(
         "Power plant (" + this.powerPlantCost + " MC)", 
-        "",
+        "Confirm",
         () => {
           game.addSelectHowToPayInterrupt(this, this.powerPlantCost, false, false, "Select how to pay for Power Plant project");
           this.setProduction(Resources.ENERGY);
@@ -1427,7 +1429,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private asteroid(game: Game): PlayerInput {
       return new SelectOption(
         "Asteroid (" + constants.ASTEROID_COST + " MC)", 
-        "",
+        "Confirm",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.ASTEROID_COST, false, false, "Select how to pay for Asteroid project");
           game.increaseTemperature(this, 1);
@@ -1446,7 +1448,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private aquifer(game: Game): PlayerInput {
       return new SelectOption(
         "Aquifer (" + constants.AQUIFER_COST + " MC)", 
-        "",
+        "Confirm",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.AQUIFER_COST, false, false, "Select how to pay for Aquifer project");
           game.addOceanInterrupt(this, "Select space for ocean");
@@ -1465,7 +1467,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private addGreenery(game: Game): PlayerInput {
       return new SelectOption(
         "Greenery (" + constants.GREENERY_COST + " MC)", 
-        "",
+        "Confirm",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.GREENERY_COST, false, false, "Select how to pay for Greenery project");
           game.addInterrupt(new SelectGreenery(this, game));
@@ -1484,7 +1486,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private addCity(game: Game): PlayerInput {
       return new SelectOption(
         "City (" + constants.CITY_COST + " MC)", 
-        "",
+        "Confirm",
         () => {
           game.addSelectHowToPayInterrupt(this, constants.CITY_COST, false, false, "Select how to pay for City project");
           game.addInterrupt(new SelectCity(this, game));
@@ -1508,13 +1510,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           colony.name + " - (" + colony.description + ")", 
           "Trade",
           () => {
-            colony.trade(this, game);
             game.log(
               LogMessageType.DEFAULT,
               "${0} traded with ${1}",
               new LogMessageData(LogMessageDataType.PLAYER, this.id),
               new LogMessageData(LogMessageDataType.COLONY, colony.name)
             );
+            colony.trade(this, game);
             return undefined;
           }
         );
@@ -2079,20 +2081,26 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
       }
 
-      if (
-        this.plants >= this.plantsNeededForGreenery &&
-            game.board.getAvailableSpacesForGreenery(this).length > 0) {
+      const hasEnoughPlants = this.plants >= this.plantsNeededForGreenery;
+      const canPlaceGreenery = game.board.getAvailableSpacesForGreenery(this).length > 0;
+      const oxygenIsMaxed = game.getOxygenLevel() === constants.MAX_OXYGEN_LEVEL;
+
+      const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+      const canAffordReds = !redsAreRuling || (redsAreRuling && this.canAfford(REDS_RULING_POLICY_COST))
+
+      if (hasEnoughPlants && canPlaceGreenery && (oxygenIsMaxed || (!oxygenIsMaxed && canAffordReds))) {
         action.options.push(
             this.convertPlantsIntoGreenery(game)
         );
       }
 
-      if (
-        (this.heat >= constants.HEAT_FOR_TEMPERATURE || 
-          (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) &&
-           (this.getResourcesOnCorporation() * 2) + this.heat >= constants.HEAT_FOR_TEMPERATURE)
-           ) &&
-            game.getTemperature() + 2 <= constants.MAX_TEMPERATURE) {
+      const hasEnoughHeat = this.heat >= constants.HEAT_FOR_TEMPERATURE || 
+        (this.isCorporation(CardName.STORMCRAFT_INCORPORATED) &&
+         this.getResourcesOnCorporation() * 2 + this.heat >= constants.HEAT_FOR_TEMPERATURE)
+
+      const temperatureIsMaxed = game.getTemperature() === constants.MAX_TEMPERATURE;
+
+      if (hasEnoughHeat && !temperatureIsMaxed && canAffordReds) {
         action.options.push(
             this.convertHeatIntoTemperature(game)
         );
@@ -2113,7 +2121,6 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (this.canAfford(8) && !game.allMilestonesClaimed()) {
         const remainingMilestones = new OrOptions();
         remainingMilestones.title = "Claim a milestone";
-        remainingMilestones.title = "Confirm";
         remainingMilestones.options = game.milestones
             .filter(
                 (milestone: IMilestone) =>
@@ -2286,7 +2293,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         let card = getProjectCardByName(element.name)!;
         if(element.resourceCount && element.resourceCount > 0) {
           card.resourceCount = element.resourceCount;
-        }
+        }  
+       
         if(card instanceof SelfReplicatingRobots) {
           let targetCards = (element as SelfReplicatingRobots).targetCards;
           if (targetCards !== undefined) {

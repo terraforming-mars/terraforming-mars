@@ -37,7 +37,7 @@ export const PlayerHome = Vue.component("player-home", {
         return {}
     },
     mixins: [PlayerMixin],
-    methods: {
+    methods: { 
         getPlayerCssForTurnOrder: (player: PlayerModel, highlightActive: boolean): string => {
             var ret: string = "highlighter_box player_bg_color_" + player.color;
             if (highlightActive) {
@@ -52,11 +52,28 @@ export const PlayerHome = Vue.component("player-home", {
 
             (this.$root as any).setVisibilityState("other_player_" + player.id, true);
         },
-        hasPinIcon: (player: PlayerModel): boolean => {
-            console.log(player);
-            console.log(player.id)
-            console.log(window.location.href, "HREF");
-            return window.location.href.split("=")[1] !== player.id;
+        pinPlayer: function(player: PlayerModel) {
+            //if (player.id === this.player.id) return;
+            const hiddenPlayers = this.player.players.filter((p:any) => {
+                return (p.id === this.player.id || player.id !== p.id)
+            })
+            // set current visibility to visible
+            (this.$root as any).setVisibilityState("other_player_" + player.id, true);
+            
+            // hide all other players
+            for(var i=0; i< hiddenPlayers.length; i++) {
+                (this.$root as any).setVisibilityState("other_player_" + hiddenPlayers[i].id, false);
+            }
+            // for(var i=0; i< this.player.players.length; i++) {
+
+            //     (this.$root as any).setVisibilityState("other_player_" + player.id, true);
+            // }
+        },
+        hasPinIcon: function(player: PlayerModel): boolean {
+            // console.log(player);
+            // console.log(player.id)
+            // console.log(window.location.href, "HREF");
+            return player.id !== this.player.id;
         },
         getFleetsCountRange: function(player: PlayerModel): Array<number> {
             const fleetsRange: Array<number> = [];
@@ -127,7 +144,7 @@ export const PlayerHome = Vue.component("player-home", {
                             <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
                                 <span class="player_number">{{ idx+1 }}.</span><a v-on:click.prevent="showPlayerDetails(p)" class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</a>
                             </div>
-                            <span style="cursor: pointer;" v-if="hasPinIcon(p)"> (p)</span>
+                            <span class="player_pin" v-on:click.prevent="pinPlayer(p)" v-if="hasPinIcon(p)"> [p]</span>
                         </div>
                         <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
                     </div>

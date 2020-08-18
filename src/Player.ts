@@ -108,7 +108,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         public name: string,
         public color: Color,
         public beginner: boolean,
-        public handicap: number) {
+        public handicap: number = 0) {
       this.id = this.generateId();
     }
 

@@ -56,14 +56,24 @@ export class ColonyDealer {
     public discard(card: IColony): void {
         this.discardedColonies.push(card);
     }
-    public drawColonies(players: number): Array<IColony> {
+    public drawColonies(players: number, allowList: Array<ColonyName> = []): Array<IColony> {
         let count: number = players + 2;
+        if (allowList.length === 0) {
+            ALL_COLONIES_TILES.forEach(e => allowList.push(e.colonyName))
+        }
         if (players === 1) {
             count = 4;
         } else if (players === 2) {
             count = 5;
         }
-        let tempDeck = this.shuffle(ALL_COLONIES_TILES.map((cf) => new cf.factory()));
+
+        let tempDeck = this.shuffle(
+            ALL_COLONIES_TILES.filter(
+                el => allowList.includes(el.colonyName)
+            ).map(
+                (cf) => new cf.factory()
+            )
+        );
         for (let i = 0; i < count; i++) {
             this.coloniesDeck.push(tempDeck.pop());
         }    

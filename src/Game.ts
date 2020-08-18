@@ -57,6 +57,7 @@ import { IParty } from "./turmoil/parties/IParty";
 import { OrOptions } from "./inputs/OrOptions";
 import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
+import { ColonyName } from "./colonies/ColonyName";
 
  
 export interface Score {
@@ -74,6 +75,7 @@ export interface GameOptions {
   boardName: BoardName;
   showOtherPlayersVP: boolean;
   customCorporationsList: Array<CardName>;
+  customColoniesList: Array<ColonyName>;
   solarPhaseOption: boolean;
   shuffleMapOption: boolean;
   promoCardsOption: boolean;
@@ -163,6 +165,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           boardName: BoardName.ORIGINAL,
           showOtherPlayersVP: false,
           customCorporationsList: [],
+          customColoniesList: [],
           solarPhaseOption: false,
           shuffleMapOption: false,
           promoCardsOption: false,
@@ -240,7 +243,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.coloniesExtension) {
         corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
         this.colonyDealer = new ColonyDealer();
-        this.colonies = this.colonyDealer.drawColonies(players.length);
+        this.colonies = this.colonyDealer.drawColonies(players.length, this.gameOptions.customColoniesList);
         if (this.players.length === 1) {
           players[0].setProduction(Resources.MEGACREDITS, -2);
           this.addInterrupt(new SelectRemoveColony(players[0], this));

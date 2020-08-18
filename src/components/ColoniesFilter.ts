@@ -28,10 +28,9 @@ let allColonies = [
 
 ];
 
-export const ColoniesFilter = Vue.component("corporations-filter", {
+export const ColoniesFilter = Vue.component("colonies-filter", {
     data: function () {
         return {
-            customCorporationsList: false,
             allColonies: allColonies.slice(),
             selectedColonies: allColonies.slice()
         }

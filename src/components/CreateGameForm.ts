@@ -43,6 +43,7 @@ interface NewPlayerModel {
     name: string;
     color: Color;
     beginner: boolean;
+    handicap: number;
     first: boolean;
 }
 
@@ -52,12 +53,12 @@ export const CreateGameForm = Vue.component("create-game-form", {
             firstIndex: 1,
             playersCount: 1,
             players: [
-                {index: 1, name: "", color: Color.RED, beginner: false, first: false},
-                {index: 2, name: "", color: Color.GREEN, beginner: false, first: false},
-                {index: 3, name: "", color: Color.YELLOW, beginner: false, first: false},
-                {index: 4, name: "", color: Color.BLUE, beginner: false, first: false},
-                {index: 5, name: "", color: Color.BLACK, beginner: false, first: false},
-                {index: 6, name: "", color: Color.PURPLE, beginner: false, first: false}
+                {index: 1, name: "", color: Color.RED, beginner: false, handicap: 0, first: false},
+                {index: 2, name: "", color: Color.GREEN, beginner: false, handicap: 0, first: false},
+                {index: 3, name: "", color: Color.YELLOW, beginner: false, handicap: 0, first: false},
+                {index: 4, name: "", color: Color.BLUE, beginner: false, handicap: 0, first: false},
+                {index: 5, name: "", color: Color.BLACK, beginner: false, handicap: 0, first: false},
+                {index: 6, name: "", color: Color.PURPLE, beginner: false, handicap: 0, first: false}
             ],
             corporateEra: true,
             prelude: false,
@@ -447,6 +448,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <label v-if="isBeginnerToggleEnabled()" class="form-switch form-inline">
                                     <input type="checkbox" v-model="newPlayer.beginner">
                                     <i class="form-icon"></i> <span v-i18n>Beginner?</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#beginner-corporation" class="tooltip" target="_blank">&#9432;</a>
+                                </label>
+
+                                <label class="form-label">
+                                    <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model="newPlayer.handicap" />
+                                    <i class="form-icon"></i><span v-i18n>TR Handicap</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-handicap" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
 
                                 <label class="form-radio form-inline" v-if="!randomFirstPlayer">

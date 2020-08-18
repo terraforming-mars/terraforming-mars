@@ -283,6 +283,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
         const player = players[i];
         const remainingPlayers = this.players.length - i;
         
+        player.increaseTerraformRatingSteps(player.handicap, this);
+        
         if (!player.beginner ||
           // Bypass beginner choice if any extension is choosen
               gameOptions.preludeExtension || 
@@ -438,8 +440,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     private cloneGame(gameId: string, game: Game): void {
       
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test2", Color.RED, false);
+        const player = new Player("test", Color.BLUE, false, 0);
+        const player2 = new Player("test2", Color.RED, false, 0);
         let gameToRebuild = new Game(gameId,[player,player2], player);
         Database.getInstance().restoreReferenceGame(gameId, gameToRebuild, function (err) {
           try{
@@ -1676,7 +1678,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.players[0].terraformRatingAtGenerationStart = 14;
       // Single player add neutral player
       // put 2 neutrals cities on board with adjacent forest
-      const neutral = new Player("neutral", Color.NEUTRAL, true);
+      const neutral = new Player("neutral", Color.NEUTRAL, true, 0);
       const space1 = this.board.getRandomCitySpace(0);
       this.addCityTile(neutral, space1.id, SpaceType.LAND);
       const fspace1 = this.board.getForestSpace(
@@ -1722,7 +1724,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Rebuild every player objects
       this.players = d.players.map((element: SerializedPlayer)  => {
-        let player = new Player(element.name, element.color, element.beginner);
+        let player = new Player(element.name, element.color, element.beginner, element.handicap);
         return player.loadFromJSON(element);
       });
       

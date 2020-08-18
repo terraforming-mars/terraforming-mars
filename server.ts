@@ -201,8 +201,8 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
       let game_id = gameReq.game_id;
 
-      const player = new Player("test", Color.BLUE, false);
-      const player2 = new Player("test2", Color.RED, false);
+      const player = new Player("test", Color.BLUE, false, 0);
+      const player2 = new Player("test2", Color.RED, false, 0);
       let gameToRebuild = new Game(game_id,[player,player2], player);
       Database.getInstance().restoreGameLastSave(game_id, gameToRebuild, function (err) {
         if (err) {
@@ -230,8 +230,8 @@ function loadAllGames(): void {
       return;
     }
     allGames.forEach((game_id)=> {
-      const player = new Player("test", Color.BLUE, false);
-      const player2 = new Player("test2", Color.RED, false);
+      const player = new Player("test", Color.BLUE, false, 0);
+      const player2 = new Player("test2", Color.RED, false, 0);
       let gameToRebuild = new Game(game_id,[player,player2], player);
       Database.getInstance().restoreGameLastSave(game_id, gameToRebuild, function (err) {
         if (err) {
@@ -350,7 +350,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       const gameReq = JSON.parse(body);
       const gameId = generateRandomGameId();
       const players = gameReq.players.map((obj: any) => {
-        return new Player(obj.name, obj.color, obj.beginner);
+        return new Player(obj.name, obj.color, obj.beginner, obj.handicap);
       });
       let firstPlayer = players[0];
       for (let i = 0; i < gameReq.players.length; i++) {

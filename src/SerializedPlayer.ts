@@ -10,6 +10,7 @@ export interface SerializedPlayer {
     name: string;
     color: Color;
     beginner: boolean;
+    handicap: number;
     canUseHeatAsMegaCredits: boolean;
     plantsNeededForGreenery: number;
     pickedCorporationCard: CorporationCard | undefined ;

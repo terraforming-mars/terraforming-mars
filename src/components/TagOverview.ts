@@ -15,6 +15,21 @@ export const TagOverview = Vue.component("tags", {
                 return tagCount.count;
             }
             return 0;
+        },
+        getCardCount: function (player: PlayerModel){
+            if (player.cardsInHandNbr){
+                return player.cardsInHandNbr;
+            }
+            return "0";
+        },
+        getVpCount: function (player: PlayerModel){
+            if (this.showVpCount(player)){
+                return player.victoryPointsBreakdown.total;
+            }
+            return "";
+        },
+        showVpCount: function (player: PlayerModel){
+            return player.showOtherPlayersVP;
         }
     },
     template: `
@@ -25,6 +40,8 @@ export const TagOverview = Vue.component("tags", {
             </div>
             
             <div v-for="tag in getTags()" class="tag-count" :class="'tag-'+ tag"></div>
+            <div class="tag-count card-count"></div>
+            <div class="tag-count vp-count" :class="{'hide_tag' : !showVpCount(player) }"><span>VP</span></div>
             
             <template v-for="player in player.players">
              <div class="player_name_cont highlighter_box" :class="'player_bg_color_'+player.color">
@@ -33,6 +50,10 @@ export const TagOverview = Vue.component("tags", {
                 <template v-for="tag in getTags()">
                     <div class="grid-item" :class="'player_tag_bg_color_'+player.color"><span>{{getTagCount(player, tag)}}</span></div>
                 </template>
+                
+                <div class="grid-item" :class="'player_tag_bg_color_'+player.color"><span>{{getCardCount(player)}}</span></div>
+                
+                <div class="grid-item" :class="[{'hide_tag' : !showVpCount(player) }, 'player_tag_bg_color_'+player.color]"><span>{{getVpCount(player)}}</span></div>
             </template>
         </div>
     </div>

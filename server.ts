@@ -83,7 +83,7 @@ function requestHandler(
       } else if (req.url.indexOf('/api/game') === 0) {
         apiGetGame(req, res);
       } else if (req.url.startsWith('/api/clonablegames')) {
-        getClonableGames(res);        
+        getClonableGames(res);
       } else {
         notFound(req, res);
       }
@@ -164,7 +164,7 @@ function getClonableGames(res: http.ServerResponse): void {
     res.write(JSON.stringify(allGames));
     res.end();
   });
-}  
+}
 
 function apiGetGames(req: http.IncomingMessage, res: http.ServerResponse): void {
 
@@ -369,7 +369,6 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         turmoilExtension: gameReq.turmoil,
         boardName: gameReq.board,
         showOtherPlayersVP: gameReq.showOtherPlayersVP,
-        showTagOverviewOption: gameReq.showTagOverviewOption,
         customCorporationsList: gameReq.customCorporationsList,
         solarPhaseOption: gameReq.solarPhaseOption,
         promoCardsOption: gameReq.promoCardsOption,
@@ -383,7 +382,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         randomMA: gameReq.randomMA,
         shuffleMapOption: gameReq.shuffleMapOption,
       } as GameOptions;
-    
+
       const game = new Game(gameId, players, firstPlayer, gameOptions);
       games.set(gameId, game);
       game.getPlayers().forEach((player) => {
@@ -424,7 +423,7 @@ function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
       scores
     });
   }
-  
+
   return milestoneModels;
 }
 
@@ -452,7 +451,7 @@ function getAwards(game: Game): Array<FundedAwardModel>  {
       scores: scores
     })
   }
-  
+
   return awardModels;
 }
 
@@ -515,7 +514,6 @@ function getPlayer(player: Player, game: Game): string {
     colonies: getColonies(game),
     tags: player.getAllTags(),
     showOtherPlayersVP: game.showOtherPlayersVP,
-    showTagOverviewOption: game.showTagOverviewOption,
     actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
     fleetSize: player.fleetSize,
     tradesThisTurn: player.tradesThisTurn,
@@ -610,7 +608,7 @@ function getWaitingFor(
           .players.map((player) => {
             if(player === "NEUTRAL") {
               return "NEUTRAL";
-            }  
+            }
             else {
               return player.id;
             }
@@ -715,15 +713,15 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
       }
       else {
         return {color: Color.NEUTRAL, number: number};
-      } 
+      }
     });
 
     let distant;
     if (game.turmoil.distantGlobalEvent) {
       distant = {
-        name: game.turmoil.distantGlobalEvent.name, 
+        name: game.turmoil.distantGlobalEvent.name,
         description: game.turmoil.distantGlobalEvent.description,
-        revealed: game.turmoil.distantGlobalEvent.revealedDelegate, 
+        revealed: game.turmoil.distantGlobalEvent.revealedDelegate,
         current: game.turmoil.distantGlobalEvent.currentDelegate
       };
     }
@@ -731,9 +729,9 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
     let comming;
     if (game.turmoil.commingGlobalEvent) {
       comming = {
-        name: game.turmoil.commingGlobalEvent.name, 
+        name: game.turmoil.commingGlobalEvent.name,
         description: game.turmoil.commingGlobalEvent.description,
-        revealed: game.turmoil.commingGlobalEvent.revealedDelegate, 
+        revealed: game.turmoil.commingGlobalEvent.revealedDelegate,
         current: game.turmoil.commingGlobalEvent.currentDelegate}
       ;
     }
@@ -741,20 +739,20 @@ function getTurmoil(game: Game): TurmoilModel | undefined {
     let current;
     if (game.turmoil.currentGlobalEvent) {
       current = {
-        name: game.turmoil.currentGlobalEvent.name, 
+        name: game.turmoil.currentGlobalEvent.name,
         description: game.turmoil.currentGlobalEvent.description,
-        revealed: game.turmoil.currentGlobalEvent.revealedDelegate, 
+        revealed: game.turmoil.currentGlobalEvent.revealedDelegate,
         current: game.turmoil.currentGlobalEvent.currentDelegate
       };
     }
 
     return {
-      chairman: chairman, 
-      ruling: ruling, 
-      dominant: dominant, 
-      parties: parties, 
-      lobby: lobby, 
-      reserve: reserve, 
+      chairman: chairman,
+      ruling: ruling,
+      dominant: dominant,
+      parties: parties,
+      lobby: lobby,
+      reserve: reserve,
       distant: distant,
       comming: comming,
       current: current
@@ -789,9 +787,9 @@ function getParties(game: Game): Array<PartyModel> | undefined{
         }
       }
       return {
-        name: party.name, 
-        description: party.description, 
-        partyLeader: partyLeader, 
+        name: party.name,
+        description: party.description,
+        partyLeader: partyLeader,
         delegates: delegates
       };
     });

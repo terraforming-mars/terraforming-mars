@@ -14,6 +14,7 @@ export const Preferences = Vue.component("preferences", {
             "hide_hand": false,
             "hide_cards": false,
             "hide_awards_and_milestones": false,
+            "hide_tag_overview": false,
             "hide_turnorder": false,
             "small_cards": false,
             "remove_background": false,
@@ -131,6 +132,12 @@ export const Preferences = Vue.component("preferences", {
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_awards_and_milestones" />
                             <i class="form-icon"></i> <span v-i18n>Hide awards and milestones</span>
+                        </label>
+                    </div>
+                   <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="hide_tag_overview" />
+                            <i class="form-icon"></i> <span v-i18n>Hide tag overview</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">

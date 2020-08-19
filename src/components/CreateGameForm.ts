@@ -18,7 +18,6 @@ interface CreateGameModel {
     randomMA: boolean;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
-    showTagOverviewOption: boolean;
     venusNext: boolean;
     colonies: boolean;
     turmoil: boolean;
@@ -68,7 +67,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
             randomMA: false,
             randomFirstPlayer: true,
             showOtherPlayersVP: false,
-            showTagOverviewOption: false,
             venusNext: false,
             colonies: false,
             turmoil: false,
@@ -110,7 +108,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
         fetch("/api/clonablegames")
         .then(response => response.json())
         .then(onSucces)
-        .catch(_ => alert("Unexpected server response"));        
+        .catch(_ => alert("Unexpected server response"));
     },
     watch: {
         playersCount: function (val) {
@@ -181,7 +179,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 const boards = Object.values(BoardName);
                 this.board = boards[Math.floor(Math.random() * boards.length)];
             }
-            
+
             const corporateEra = component.corporateEra;
             const prelude = component.prelude;
             const draftVariant = component.draftVariant;
@@ -189,7 +187,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const initialDraftRounds = component.initialDraftRounds;
             const randomMA = component.randomMA;
             const showOtherPlayersVP = component.showOtherPlayersVP;
-            const showTagOverviewOption = component.showTagOverviewOption;
             const venusNext = component.venusNext;
             const colonies = component.colonies;
             const turmoil = component.turmoil;
@@ -223,7 +220,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 prelude,
                 draftVariant,
                 showOtherPlayersVP,
-                showTagOverviewOption,
                 venusNext,
                 colonies,
                 turmoil,
@@ -376,11 +372,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <i class="form-icon"></i> <span v-i18n>Show real-time VP</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#show-real-time-vp" class="tooltip" target="_blank">&#9432;</a>
                             </label>
                             
-                            <label class="form-switch" v-if="playersCount > 1">
-                                <input type="checkbox" name="showTagOverview" v-model="showTagOverviewOption">
-                                <i class="form-icon"></i> <span v-i18n>Show players tag overview</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tag-overview" class="tooltip" target="_blank">&#9432;</a>
-                            </label>
-
                             <label class="form-switch">
                                 <input type="checkbox" v-model="solarPhaseOption">
                                 <i class="form-icon"></i> <span v-i18n>Use Solar Phase</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#solar-phase" class="tooltip" target="_blank">&#9432;</a>

@@ -112,7 +112,7 @@ export const PlayerHome = Vue.component("player-home", {
                         <award :awards_list="player.awards" />
                     </div>
                     
-                    <div v-if="player.players.length > 1 && player.showTagOverviewOption === true" class="tag-overview-cont">
+                    <div v-if="player.players.length > 1" class="tag-overview-cont">
                         <details class="accordion">
                             <summary class="accordion-header">
                                 <div class="is-action">

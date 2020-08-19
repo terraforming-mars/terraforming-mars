@@ -22,7 +22,6 @@ export interface SerializedGame {
     preludeExtension: boolean;
     draftVariant: boolean;
     showOtherPlayersVP: boolean;
-    showTagOverviewOption: boolean;
     venusNextExtension: boolean;
     coloniesExtension: boolean;
     customCorporationsList: boolean;

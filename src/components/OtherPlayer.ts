@@ -31,7 +31,7 @@ export const OtherPlayer = Vue.component("other-player", {
                     <span class="player_name" :class="'player_bg_color_' + player.color"> {{ player.name }} : {{player.cardsInHandNbr}} cards in hand </span>
                 </div>
 
-                <div v-if="player.showTagOverview" class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
+                <div class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
                     <div class="tag-display tags_item_cont tag-display-tags" v-if="player.tags.length > 0">
                         <div v-for="tag in player.tags">
                             <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>

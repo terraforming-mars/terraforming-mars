@@ -186,9 +186,21 @@
             text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
         }
     }
+    .pin_icon {
+        background: url("assets/not_pinned.png");
+        width: 40px;
+        height: 40px;
+    }
     .player_pin {
-        cursor: pointer;
-        // background: url("assets/pin.png");
+        cursor: pointer; 
+        vertical-align: middle;
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+    }
+
+    .player_pin:hover{
+        background: url("assets/pinned.png");
     }
 
     .player_separator {

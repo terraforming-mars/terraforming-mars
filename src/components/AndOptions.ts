@@ -28,6 +28,7 @@ export const AndOptions = Vue.component("and-options", {
     },
     render: function(createElement) {
         const playerInput: PlayerInputModel = this.playerinput as PlayerInputModel;
+        
         const children: Array<VNode> = [];
         this.$data.childComponents = [];
         this.$data.responded = [];
@@ -52,7 +53,7 @@ export const AndOptions = Vue.component("and-options", {
                     domProps: { className: "btn btn-primary" }, 
                     on: { click: () => { this.saveData(); } } 
                 }, 
-                "Save"
+                playerInput.buttonLabel
             );
             children.push(
                 createElement("div", {"class": "wf-action"}, [saveBtn])

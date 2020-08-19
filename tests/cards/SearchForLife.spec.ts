@@ -17,12 +17,12 @@ describe("SearchForLife", function () {
     it("Can't act if no MC", function () {
         expect(card.canAct(player)).to.eq(false);
     });
-
+ 
     it("Can't play if oxygen level too high", function () {
         (game as any).oxygenLevel = 7;
         expect(card.canPlay(player, game)).to.eq(false);
     });
-
+  
     it("Should play", function () {
         (game as any).oxygenLevel = 6;
         expect(card.canPlay(player, game)).to.eq(true);
@@ -34,6 +34,7 @@ describe("SearchForLife", function () {
         expect(card.getVictoryPoints()).to.eq(3);
     });
 
+      
     it("Should act", function () {
         player.playedCards.push(card);
 
@@ -44,6 +45,6 @@ describe("SearchForLife", function () {
             expect(player.megaCredits).to.eq(0);
         }
         
-        expect(card.resourceCount >= 1).to.eq(true);    
+        expect(card.resourceCount >= 1).to.eq(true); 
     });
 });

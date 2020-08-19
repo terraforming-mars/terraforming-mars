@@ -1,13 +1,13 @@
-import {Tags} from './Tags';
-import {CardType} from './CardType';
-import {Player} from '../Player';
-import {Game} from '../Game';
-import {SelectCard} from '../inputs/SelectCard';
-import {IActionCard} from './ICard';
-import {IProjectCard} from './IProjectCard';
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
-import { LogHelper } from '../components/LogHelper';
+import {Tags} from "./Tags";
+import {CardType} from "./CardType";
+import {Player} from "../Player";
+import {Game} from "../Game";
+import {SelectCard} from "../inputs/SelectCard";
+import {IActionCard} from "./ICard";
+import {IProjectCard} from "./IProjectCard";
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
+import { LogHelper } from "../components/LogHelper";
 
 export class BusinessNetwork implements IActionCard, IProjectCard {
     public cost: number = 4;
@@ -31,6 +31,7 @@ export class BusinessNetwork implements IActionCard, IProjectCard {
 
       return new SelectCard(
         canSelectCard ? "Select card to keep or none to discard" : "You cannot pay for this card" ,
+        canSelectCard ? "Select" : undefined,
         [dealtCard],
         (cards: Array<IProjectCard>) => {
           if (cards.length === 0 || !canSelectCard) {

@@ -47,6 +47,7 @@ export class ProjectInspection implements IProjectCard {
         }
         return new SelectCard(
             "Perform an action from a played card again",
+            "Take action",
             this.getActionCards(player, game),
             (foundCards: Array<ICard>) => {
                 const foundCard = foundCards[0];

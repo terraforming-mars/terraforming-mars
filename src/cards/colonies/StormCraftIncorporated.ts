@@ -1,10 +1,10 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { ResourceType } from '../../ResourceType';
-import { ICard, IActionCard, IResourceCard } from '../ICard';
-import { SelectCard } from '../../inputs/SelectCard';
-import { CardName } from '../../CardName';
+import { ResourceType } from "../../ResourceType";
+import { ICard, IActionCard, IResourceCard } from "../ICard";
+import { SelectCard } from "../../inputs/SelectCard";
+import { CardName } from "../../CardName";
 
 export class StormCraftIncorporated implements IActionCard, CorporationCard, IResourceCard {
     public name: CardName =  CardName.STORMCRAFT_INCORPORATED;
@@ -29,7 +29,8 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
         }
 
         return new SelectCard(
-            'Select card to add 1 floater',
+            "Select card to add 1 floater",
+            "Add floater",
             floaterCards,
             (foundCards: Array<ICard>) => {
                 player.addResourceTo(foundCards[0], 1);

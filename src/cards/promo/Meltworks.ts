@@ -4,7 +4,7 @@ import { Tags } from "./../Tags";
 import { CardType } from "./../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { AndOptions } from "../../inputs/AndOptions";
 import { SelectAmount } from "../../inputs/SelectAmount";
 
@@ -28,18 +28,18 @@ export class Meltworks implements IActionCard, IProjectCard {
           return new AndOptions(
               () => {
                 if (heatAmount + (floaterAmount * 2) < 5) {
-                  throw new Error('Need to pay 5 heat');
+                  throw new Error("Need to pay 5 heat");
                 }
                 player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
                 player.heat -= heatAmount;
                 player.steel += 3;
                 return undefined;
               },
-              new SelectAmount("Select amount of heat to spend", (amount: number) => {
+              new SelectAmount("Select amount of heat to spend", "Spend heat", (amount: number) => {
                 heatAmount = amount;
                 return undefined;
               }, player.heat),
-              new SelectAmount("Select amount of floater on corporation to spend", (amount: number) => {
+              new SelectAmount("Select amount of floaters on corporation to spend", "Spend floaters", (amount: number) => {
                 floaterAmount = amount;
                 return undefined;
               }, player.getResourcesOnCorporation()),

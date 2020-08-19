@@ -1,14 +1,14 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
-import { Game } from '../../Game';
-import { ResourceType } from '../../ResourceType';
-import { SelectCard } from '../../inputs/SelectCard';
-import { ICard } from '../ICard';
-import { SelectPlayer } from '../../inputs/SelectPlayer';
-import { Resources } from '../../Resources';
+import { CardName } from "../../CardName";
+import { Game } from "../../Game";
+import { ResourceType } from "../../ResourceType";
+import { SelectCard } from "../../inputs/SelectCard";
+import { ICard } from "../ICard";
+import { SelectPlayer } from "../../inputs/SelectPlayer";
+import { Resources } from "../../Resources";
 import { AndOptions } from "../../inputs/AndOptions";
 
 
@@ -27,7 +27,8 @@ export class AirRaid implements IProjectCard {
         let resourceCards = player.getCardsWithResources().filter(card => card.resourceType === ResourceType.FLOATER);
 
         const selectCard = new SelectCard(
-            'Select card to remove one floater from ',
+            "Select card to remove one floater from",
+            "Remove floater",
             resourceCards,
             (foundCards: Array<ICard>) => {
             player.removeResourceFrom(foundCards[0]);
@@ -48,7 +49,7 @@ export class AirRaid implements IProjectCard {
 
         const eligiblePlayers = game.getPlayers().filter(selectedPlayer => selectedPlayer !== player);
 
-        const selectPlayer = new SelectPlayer(eligiblePlayers, "Select player to steal up to 5 MC", (selectedPlayer: Player) => {
+        const selectPlayer = new SelectPlayer(eligiblePlayers, "Select player to steal up to 5 MC", "Remove MC", (selectedPlayer: Player) => {
             player.megaCredits += Math.min(5, selectedPlayer.megaCredits);
             selectedPlayer.setResource(Resources.MEGACREDITS, -5, game, player);
             return undefined;

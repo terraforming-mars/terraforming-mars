@@ -1,14 +1,14 @@
 import { IProjectCard } from "../IProjectCard";
-import { IActionCard, IResourceCard } from '../ICard';
+import { IActionCard, IResourceCard } from "../ICard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { OrOptions } from "../../inputs/OrOptions";
-import { SelectOption } from '../../inputs/SelectOption';
-import { Game } from '../../Game';
-import { SelectAmount } from '../../inputs/SelectAmount';
-import { CardName } from '../../CardName';
+import { SelectOption } from "../../inputs/SelectOption";
+import { Game } from "../../Game";
+import { SelectAmount } from "../../inputs/SelectAmount";
+import { CardName } from "../../CardName";
 
 export class SulphurEatingBacteria implements IActionCard,IProjectCard, IResourceCard {
     public cost: number = 6;
@@ -29,8 +29,8 @@ export class SulphurEatingBacteria implements IActionCard,IProjectCard, IResourc
     public action(player: Player) {
         var opts: Array<SelectOption | SelectAmount> = [];
 
-        const addResource = new SelectOption("Add 1 microbe to this card", () => this.addResource(player));
-        const spendResource = new SelectAmount("Remove any number of microbes to gain 3 MC per microbe removed", (amount: number) => this.spendResource(player, amount), this.resourceCount);
+        const addResource = new SelectOption("Add 1 microbe to this card", "Add microbe", () => this.addResource(player));
+        const spendResource = new SelectAmount("Remove any number of microbes to gain 3 MC per microbe removed", "Remove microbes",(amount: number) => this.spendResource(player, amount), this.resourceCount);
 
         if (this.resourceCount > 0) {
             opts.push(spendResource);

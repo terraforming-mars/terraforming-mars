@@ -1,14 +1,14 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { CorporationName } from '../../CorporationName';
-import { Game } from '../../Game';
+import { CorporationName } from "../../CorporationName";
+import { Game } from "../../Game";
 import { SelectSpace } from "../../inputs/SelectSpace";
-import { ISpace } from '../../ISpace';
-import { TileType } from '../../TileType';
-import { SelectAmount } from '../../inputs/SelectAmount';
-import { AndOptions } from '../../inputs/AndOptions';
-import { CardName } from '../../CardName';
+import { ISpace } from "../../ISpace";
+import { TileType } from "../../TileType";
+import { SelectAmount } from "../../inputs/SelectAmount";
+import { AndOptions } from "../../inputs/AndOptions";
+import { CardName } from "../../CardName";
 import { LogMessageType } from "../../LogMessageType";
 import { LogMessageData } from "../../LogMessageData";
 import { LogMessageDataType } from "../../LogMessageDataType";
@@ -41,27 +41,27 @@ export class Philares implements CorporationCard {
         let energyAmount: number = 0;
         let heatAmount: number = 0;
         let selectResources: AndOptions;
-        const selectMegacredit = new SelectAmount("Megacredits", (amount: number) => {
+        const selectMegacredit = new SelectAmount("Megacredits", "Select", (amount: number) => {
             megacreditsAmount = amount;
             return undefined;
           }, resourceCount);
-          const selectSteel = new SelectAmount("Steel", (amount: number) => {
+          const selectSteel = new SelectAmount("Steel", "Select", (amount: number) => {
             steelAmount = amount;
             return undefined;
           }, resourceCount); 
-          const selectTitanium = new SelectAmount("Titanium", (amount: number) => {
+          const selectTitanium = new SelectAmount("Titanium", "Select", (amount: number) => {
             titaniumAmount = amount;
             return undefined;
           }, resourceCount);
-          const selectPlants = new SelectAmount("Plants", (amount: number) => {
+          const selectPlants = new SelectAmount("Plants", "Select",  (amount: number) => {
             plantsAmount = amount;
             return undefined;
           }, resourceCount);
-          const selectEnergy = new SelectAmount("Energy", (amount: number) => {
+          const selectEnergy = new SelectAmount("Energy", "Select", (amount: number) => {
             energyAmount = amount;
             return undefined;
           }, resourceCount);
-          const selectHeat = new SelectAmount("Heat", (amount: number) => {
+          const selectHeat = new SelectAmount("Heat", "Select", (amount: number) => {
             heatAmount = amount;
             return undefined;
           }, resourceCount);

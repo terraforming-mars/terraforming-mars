@@ -57,6 +57,8 @@ import { IParty } from "./turmoil/parties/IParty";
 import { OrOptions } from "./inputs/OrOptions";
 import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
+import { ColonyName } from "./colonies/ColonyName";
+
 
 export interface Score {
   corporation: String;
@@ -73,6 +75,7 @@ export interface GameOptions {
   boardName: BoardName;
   showOtherPlayersVP: boolean;
   customCorporationsList: Array<CardName>;
+  customColoniesList: Array<ColonyName>;
   solarPhaseOption: boolean;
   shuffleMapOption: boolean;
   promoCardsOption: boolean;
@@ -138,6 +141,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public seed: number = Math.random();
     private gameOptions: GameOptions;
 
+
     constructor(
       public id: string,
       private players: Array<Player>,
@@ -161,6 +165,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           boardName: BoardName.ORIGINAL,
           showOtherPlayersVP: false,
           customCorporationsList: [],
+          customColoniesList: [],
           solarPhaseOption: false,
           shuffleMapOption: false,
           promoCardsOption: false,
@@ -238,7 +243,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.coloniesExtension) {
         corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
         this.colonyDealer = new ColonyDealer();
-        this.colonies = this.colonyDealer.drawColonies(players.length);
+        this.colonies = this.colonyDealer.drawColonies(players.length, this.gameOptions.customColoniesList);
         if (this.players.length === 1) {
           players[0].setProduction(Resources.MEGACREDITS, -2);
           this.addInterrupt(new SelectRemoveColony(players[0], this));
@@ -249,6 +254,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.turmoilExtension) {
         this.turmoil = new Turmoil(this);
         corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
+      }
+
+      // Add Promo stuff
+      if (this.promoCardsOption) {
+        corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
       }
 
       // Setup custom corporation list
@@ -275,6 +285,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       for (var i = 0; i < players.length; i++) {
         const player = players[i];
         const remainingPlayers = this.players.length - i;
+
+        player.increaseTerraformRatingSteps(player.handicap, this);
 
         if (!player.beginner ||
           // Bypass beginner choice if any extension is choosen
@@ -431,8 +443,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     private cloneGame(gameId: string, game: Game): void {
 
-        const player = new Player("test", Color.BLUE, false);
-        const player2 = new Player("test2", Color.RED, false);
+        const player = new Player("test", Color.BLUE, false, 0);
+        const player2 = new Player("test2", Color.RED, false, 0);
         let gameToRebuild = new Game(gameId,[player,player2], player);
         Database.getInstance().restoreReferenceGame(gameId, gameToRebuild, function (err) {
           try{
@@ -618,11 +630,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
         if (resource === Resources.PLANTS) {
           this.addInterrupt({ player, playerInput: new OrOptions(
-            new SelectOption("Remove " + qtyToRemove + " plants from " + candidates[0].name, () => {
+            new SelectOption("Remove " + qtyToRemove + " plants from " + candidates[0].name, "Remove plants", () => {
               candidates[0].setResource(resource, -qtyToRemove, this, player);
               return undefined;
             }),
-            new SelectOption("Do nothing", () => {
+            new SelectOption("Skip removing plants", "Confirm", () => {
               return undefined;
             })
           )});
@@ -635,7 +647,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           const removalOptions = candidates.map((candidate) => {
             let qtyToRemove = Math.min(candidate.plants, count);
 
-            return new SelectOption("Remove " + qtyToRemove + " plants from " + candidate.name, () => {
+            return new SelectOption("Remove " + qtyToRemove + " plants from " + candidate.name, "Remove plants", () => {
               candidate.setResource(resource, -qtyToRemove, this, player);
               return undefined;
             })
@@ -643,7 +655,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
           this.addInterrupt({ player, playerInput: new OrOptions(
             ...removalOptions,
-            new SelectOption("Do nothing", () => { return undefined; })
+            new SelectOption("Skip removing plants", "Confirm", () => { return undefined; })
           )});
         } else {
           this.addInterrupt(new SelectResourceDecrease(player, candidates, this, resource, count, title));
@@ -792,9 +804,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
       const result: AndOptions = new AndOptions(() => { this.playerHasPickedCorporationCard(player, corporation); return undefined; });
 
       result.title = " ";
+      result.buttonLabel = "Start";
+
       result.options.push(
         new SelectCard<CorporationCard>(
-          "Select corporation", player.dealtCorporationCards,
+          "Select corporation", undefined, player.dealtCorporationCards,
           (foundCards: Array<CorporationCard>) => {
             corporation = foundCards[0];
             return undefined;
@@ -806,7 +820,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
         result.options.push(
           new SelectCard(
-            "Select 2 Prelude cards", player.dealtPreludeCards,
+            "Select 2 Prelude cards", undefined, player.dealtPreludeCards,
             (preludeCards: Array<IProjectCard>) => {
               player.preludeCardsInHand.push(preludeCards[0], preludeCards[1]);
               return undefined;
@@ -817,7 +831,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       result.options.push(
         new SelectCard(
-          "Select initial cards to buy", player.dealtProjectCards,
+          "Select initial cards to buy", undefined, player.dealtProjectCards,
           (foundCards: Array<IProjectCard>) => {
             for (const dealt of foundCards) {
               if (foundCards.find((foundCard) => foundCard.name === dealt.name)) {
@@ -1476,6 +1490,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
             player.megaCredits += player.oceanBonus;
           }
         });
+      }else{
+        space.player = undefined;
       }
 
       this.tilePlaced(space);
@@ -1665,7 +1681,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.players[0].terraformRatingAtGenerationStart = 14;
       // Single player add neutral player
       // put 2 neutrals cities on board with adjacent forest
-      const neutral = new Player("neutral", Color.NEUTRAL, true);
+      const neutral = new Player("neutral", Color.NEUTRAL, true, 0);
       const space1 = this.board.getRandomCitySpace(0);
       this.addCityTile(neutral, space1.id, SpaceType.LAND);
       const fspace1 = this.board.getForestSpace(
@@ -1711,7 +1727,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Rebuild every player objects
       this.players = d.players.map((element: SerializedPlayer)  => {
-        let player = new Player(element.name, element.color, element.beginner);
+        let player = new Player(element.name, element.color, element.beginner, element.handicap);
         return player.loadFromJSON(element);
       });
 

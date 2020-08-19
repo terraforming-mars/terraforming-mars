@@ -1,11 +1,11 @@
 import { IProjectCard } from "../IProjectCard";
-import { ICard, IActionCard, IResourceCard } from '../ICard';
+import { ICard, IActionCard, IResourceCard } from "../ICard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
-import { SelectCard } from '../../inputs/SelectCard';
-import { CardName } from '../../CardName';
+import { SelectCard } from "../../inputs/SelectCard";
+import { CardName } from "../../CardName";
 import { Game } from "../../Game";
 import { LogHelper } from "../../components/LogHelper";
 
@@ -43,6 +43,7 @@ export class FloatingHabs implements IActionCard,IProjectCard, IResourceCard {
 
       return new SelectCard(
           "Spend 2 MC and select card to add 1 floater",
+          "Add floater",
           floaterCards,
           (foundCards: Array<ICard>) => {
             game.addSelectHowToPayInterrupt(player, 2, false, false, "Select how to pay for Floating Habs action");

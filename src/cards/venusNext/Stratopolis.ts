@@ -5,11 +5,11 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { SpaceName } from "../../SpaceName";
 import { SpaceType } from "../../SpaceType";
-import { Resources } from '../../Resources';
-import { IActionCard, ICard, IResourceCard } from '../ICard';
-import { ResourceType } from '../../ResourceType';
-import { SelectCard } from '../../inputs/SelectCard';
-import { CardName } from '../../CardName';
+import { Resources } from "../../Resources";
+import { IActionCard, ICard, IResourceCard } from "../ICard";
+import { ResourceType } from "../../ResourceType";
+import { SelectCard } from "../../inputs/SelectCard";
+import { CardName } from "../../CardName";
 import { LogHelper } from "../../components/LogHelper";
 
 export class Stratopolis implements IActionCard, IProjectCard, IResourceCard {
@@ -50,7 +50,8 @@ export class Stratopolis implements IActionCard, IProjectCard, IResourceCard {
         }
 
         return new SelectCard(
-            'Select card to add 2 floaters',
+            "Select card to add 2 floaters",
+            "Add floater(s)",
             cards,
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 2);

@@ -1,14 +1,14 @@
 import { IProjectCard } from "../IProjectCard";
-import { IActionCard, IResourceCard } from '../ICard';
+import { IActionCard, IResourceCard } from "../ICard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { OrOptions } from "../../inputs/OrOptions";
-import { SelectOption } from '../../inputs/SelectOption';
-import { Game } from '../../Game';
-import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from '../../constants';
-import { CardName } from '../../CardName';
+import { SelectOption } from "../../inputs/SelectOption";
+import { Game } from "../../Game";
+import { MAX_VENUS_SCALE, REDS_RULING_POLICY_COST } from "../../constants";
+import { CardName } from "../../CardName";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 
@@ -38,8 +38,8 @@ export class JetStreamMicroscrappers implements IActionCard,IProjectCard, IResou
     public action(player: Player, game: Game) {
         var opts: Array<SelectOption> = [];
 
-        const addResource = new SelectOption("Spend one titanium to add 2 floaters to this card", () => this.addResource(player));
-        const spendResource = new SelectOption("Remove 2 floaters to raise Venus 1 step", () => this.spendResource(player, game));
+        const addResource = new SelectOption("Spend one titanium to add 2 floaters to this card", "Spend titanium", () => this.addResource(player));
+        const spendResource = new SelectOption("Remove 2 floaters to raise Venus 1 step", "Remove floaters", () => this.spendResource(player, game));
 
         if (this.resourceCount > 1 && game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
             opts.push(spendResource);

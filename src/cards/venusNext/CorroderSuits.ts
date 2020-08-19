@@ -3,10 +3,10 @@ import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Resources } from "../../Resources";
-import { ResourceType } from '../../ResourceType';
-import { SelectCard } from '../../inputs/SelectCard';
-import { ICard } from '../ICard';
-import { CardName } from '../../CardName';
+import { ResourceType } from "../../ResourceType";
+import { SelectCard } from "../../inputs/SelectCard";
+import { ICard } from "../ICard";
+import { CardName } from "../../CardName";
 import { LogHelper } from "../../components/LogHelper";
 import { Game } from "../../Game";
 
@@ -29,7 +29,8 @@ export class CorroderSuits implements IProjectCard {
         }
 
         return new SelectCard(
-            'Select card to add 1 resource',
+            "Select card to add 1 resource",
+            "Add resource",
             this.getResCards(player),
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 1);

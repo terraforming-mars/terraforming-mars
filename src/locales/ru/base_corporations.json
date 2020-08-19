@@ -1,0 +1,8 @@
+{
+    "Effect: When you play an Science tag, you pay 2MC less for it.":"Эффект: Разыгрывая карту с меткой науки, получайте скидку 2МС за каждую метку на этой карте",
+    "You start with 37 MC. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.":"Вы начинаете с 37 МС. В качестве первого действия возьмите 3 карты Прологов и разыграйте одну из них. Две оставшиеся карты сбростье",
+
+    "You start with 47 MC.": "Вы начинаете с 47 МС",
+    "Action: Spend 4 MC to increase (one of) your LOWEST PRODUCTION 1 step.": "Действие: Потратьте 4 МС чтобы увеличить на 1 шаг ваше наименьшее производство",
+    "${0} drew ${1} and ${2}": "${0} добрал карту ${1} и ${2}"
+}

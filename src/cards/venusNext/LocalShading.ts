@@ -1,13 +1,13 @@
 import { IProjectCard } from "../IProjectCard";
-import { IActionCard, IResourceCard } from '../ICard';
+import { IActionCard, IResourceCard } from "../ICard";
 import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { OrOptions } from "../../inputs/OrOptions";
-import { SelectOption } from '../../inputs/SelectOption';
+import { SelectOption } from "../../inputs/SelectOption";
 import { Resources } from "../../Resources";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 
 export class LocalShading implements IActionCard,IProjectCard,IResourceCard {
     public cost: number = 4;
@@ -31,8 +31,8 @@ export class LocalShading implements IActionCard,IProjectCard,IResourceCard {
         
         var opts: Array<SelectOption> = [];
 
-        const addResource = new SelectOption("Add 1 floater to this card", () => this.addResource());
-        const spendResource = new SelectOption("Remove 1 floater to increase MC production 1 step", () => this.spendResource(player));
+        const addResource = new SelectOption("Add 1 floater to this card", "Add floater", () => this.addResource());
+        const spendResource = new SelectOption("Remove 1 floater to increase MC production 1 step", "Remove floater", () => this.spendResource(player));
 
         opts.push(spendResource);
         opts.push(addResource);

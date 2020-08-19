@@ -1,14 +1,14 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Player } from "../../Player";
 import { Tags } from "../Tags";
-import { ResourceType } from '../../ResourceType';
+import { ResourceType } from "../../ResourceType";
 import { Resources } from "../../Resources";
-import { Game } from '../../Game';
-import { IProjectCard } from '../IProjectCard';
+import { Game } from "../../Game";
+import { IProjectCard } from "../IProjectCard";
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
-import { CardName } from '../../CardName';
-import { IResourceCard } from '../ICard';
+import { CardName } from "../../CardName";
+import { IResourceCard } from "../ICard";
 
 
 export class Recyclon implements CorporationCard, IResourceCard {
@@ -30,12 +30,12 @@ export class Recyclon implements CorporationCard, IResourceCard {
             return undefined;
         }
 
-        const addResource = new SelectOption("Add a microbe resource to this card", () => {
+        const addResource = new SelectOption("Add a microbe resource to this card", "Add microbe", () => {
             player.addResourceTo(this);
             return undefined;
         });
 
-        const spendResource = new SelectOption("Remove 2 microbes on this card and increase plant production 1 step", () => {
+        const spendResource = new SelectOption("Remove 2 microbes on this card and increase plant production 1 step", "Remove microbes", () => {
             player.removeResourceFrom(this, 2);
             player.setProduction(Resources.PLANTS);
             return undefined;

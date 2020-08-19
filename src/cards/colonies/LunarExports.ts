@@ -1,8 +1,8 @@
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { CardType } from '../CardType';
+import { CardType } from "../CardType";
 import { Player } from "../../Player";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { Resources } from "../../Resources";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
@@ -15,11 +15,11 @@ export class LunarExports implements IProjectCard {
 
     public play(player: Player) {
         return new OrOptions(
-            new SelectOption("Increase your plant production by 2", () => {
+            new SelectOption("Increase your plant production by 2", "Increase +plants", () => {
                 player.setProduction(Resources.PLANTS,2);
                 return undefined;
             }),
-            new SelectOption("Increase your MC production by 5", () => {
+            new SelectOption("Increase your MC production by 5", "Increase +MC", () => {
                 player.setProduction(Resources.MEGACREDITS,5);
                 return undefined;
             })

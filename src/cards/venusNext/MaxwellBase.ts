@@ -6,11 +6,11 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { SpaceName } from "../../SpaceName";
 import { SpaceType } from "../../SpaceType";
-import { Resources } from '../../Resources';
-import { IActionCard, ICard } from '../ICard';
-import { ResourceType } from '../../ResourceType';
-import { SelectCard } from '../../inputs/SelectCard';
-import { CardName } from '../../CardName';
+import { Resources } from "../../Resources";
+import { IActionCard, ICard } from "../ICard";
+import { ResourceType } from "../../ResourceType";
+import { SelectCard } from "../../inputs/SelectCard";
+import { CardName } from "../../CardName";
 import { LogHelper } from "../../components/LogHelper";
 
 export class MaxwellBase implements IActionCard, IProjectCard {
@@ -51,7 +51,8 @@ export class MaxwellBase implements IActionCard, IProjectCard {
         }
 
         return new SelectCard(
-            'Select card to add 1 resource',
+            "Select card to add 1 resource",
+            "Add resource",
             cards,
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 1);

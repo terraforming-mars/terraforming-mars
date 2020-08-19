@@ -4,8 +4,8 @@ import { Player } from "../../Player";
 import { Game } from "../../Game";
 import { Tags } from "../Tags";
 import { ICard } from "../ICard";
-import {SelectCard} from '../../inputs/SelectCard';
-import { CardName } from '../../CardName';
+import {SelectCard} from "../../inputs/SelectCard";
+import { CardName } from "../../CardName";
 import { LogMessageType } from "../../LogMessageType";
 import { LogMessageData } from "../../LogMessageData";
 import { LogMessageDataType } from "../../LogMessageDataType";
@@ -39,7 +39,8 @@ export class Viron implements ICard, CorporationCard {
         }
  
         return new SelectCard(
-            'Perform again an action from a played card',
+            "Perform again an action from a played card",
+            "Take action",
             this.getActionCards(player, game),
             (foundCards: Array<ICard>) => {
               const foundCard = foundCards[0];

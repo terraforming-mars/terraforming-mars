@@ -3,8 +3,8 @@ import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { Game } from "../../Game";
-import { SelectCard } from '../../inputs/SelectCard';
-import { CardName } from '../../CardName';
+import { SelectCard } from "../../inputs/SelectCard";
+import { CardName } from "../../CardName";
 
 export class SponsoredAcademies implements IProjectCard {
     public cost: number = 9;
@@ -24,7 +24,8 @@ export class SponsoredAcademies implements IProjectCard {
 
     public play(player: Player, game: Game) {
         return new  SelectCard(
-            'Select 1 card to discard',
+            "Select 1 card to discard",
+            "Discard",
             player.cardsInHand.filter((c) => c.name !== this.name),
             (foundCards: Array<IProjectCard>) => {
               player.cardsInHand.splice(player.cardsInHand.indexOf(foundCards[0]), 1);

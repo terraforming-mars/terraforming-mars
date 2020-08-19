@@ -6,8 +6,8 @@ import { SelectCard } from "./SelectCard";
 import { SelectPlayer } from "./SelectPlayer";
 import { SelectOption } from "./SelectOption";
 import { SelectHowToPay } from "./SelectHowToPay";
-import { ICard } from '../cards/ICard';
-import { IProjectCard } from '../cards/IProjectCard';
+import { ICard } from "../cards/ICard";
+import { IProjectCard } from "../cards/IProjectCard";
 import { SelectDelegate } from "./SelectDelegate";
 
 export class OrOptions implements PlayerInput {
@@ -15,6 +15,7 @@ export class OrOptions implements PlayerInput {
         return undefined;
     }
     public title: string = "Select one option";
+    public buttonLabel: string = "Save";
     public options: Array<PlayerInput>;
     public inputType: PlayerInputTypes = PlayerInputTypes.OR_OPTIONS;
     constructor(

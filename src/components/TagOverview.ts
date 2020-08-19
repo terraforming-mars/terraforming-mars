@@ -51,9 +51,9 @@ export const TagOverview = Vue.component("tags", {
                     <div class="grid-item" :class="'player_tag_bg_color_'+player.color"><span>{{getTagCount(player, tag)}}</span></div>
                 </template>
                 
-                <div class="grid-item" :class="'player_tag_bg_color_'+player.color"><span>{{getCardCount(player)}}</span></div>
+                <div class="grid-item" :class="[{'grid_end' : !showVpCount(player) },'player_tag_bg_color_'+player.color]"><span>{{getCardCount(player)}}</span></div>
                 
-                <div class="grid-item" :class="[{'hide_tag' : !showVpCount(player) }, 'player_tag_bg_color_'+player.color]"><span>{{getVpCount(player)}}</span></div>
+                <div class="grid-item" :class="[{'grid_end' : showVpCount(player) }, {'hide_tag' : !showVpCount(player) }, 'player_tag_bg_color_'+player.color]"><span>{{getVpCount(player)}}</span></div>
             </template>
         </div>
     </div>

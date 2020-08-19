@@ -136,9 +136,10 @@ export const PlayerHome = Vue.component("player-home", {
                     </h2>
                     <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
                         <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
-                            <span class="player_number">{{ idx+1 }}.</span><a v-on:click.prevent="showPlayerDetails(p)" class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</a>
-                            <br/>
-                            <span class="corporation-name" v-if="p.corporationCard">{{ p.corporationCard.name }}</span>
+                            <a v-on:click.prevent="showPlayerDetails(p)" class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</a>
+                            <div class="player_home_block--corp-names">
+                                <span class="corporation-name" v-if="p.corporationCard">{{ p.corporationCard.name }}</span>
+                            </div>
                         </div>
                         <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
                     </div>

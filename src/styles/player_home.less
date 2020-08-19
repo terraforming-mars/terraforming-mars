@@ -254,8 +254,7 @@
         padding: 1px 5px;
         border-radius: 4px;
         font-weight: bold;
-
-        }
+   }
 
     .player_name_cont {
         max-width: 150px;
@@ -270,8 +269,14 @@
             text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
         }
 
-        .corporation-name {
-            font-size: 11px;
+        .corporation-name-cont {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            .corporation-name {
+                font-size: 11px;
+            }
         }
     }
 

@@ -14,7 +14,7 @@ export const TagOverview = Vue.component("tags", {
             if (tagCount) {
                 return tagCount.count;
             }
-            return 0;
+            return "-";
         },
         getCardCount: function (player: PlayerModel){
             if (player.cardsInHandNbr){

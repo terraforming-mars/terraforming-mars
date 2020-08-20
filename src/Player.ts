@@ -1919,7 +1919,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       let greeneryCost = constants.GREENERY_COST
-      if (redsAreRuling) greeneryCost += REDS_RULING_POLICY_COST;
+      const oxygenNotMaxed = game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL;
+      if (redsAreRuling && oxygenNotMaxed) greeneryCost += REDS_RULING_POLICY_COST;
 
       if (this.canAfford(greeneryCost) && game.board.getAvailableSpacesForGreenery(this).length > 0) {
         standardProjects.options.push(

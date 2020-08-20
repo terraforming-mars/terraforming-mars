@@ -63,6 +63,86 @@
     text-transform: uppercase;
 }
 
+.tag-overview-cont {
+    .accordion-body {
+        overflow-x: auto;
+    }
+}
+
+.tags-grid {
+    display: grid;
+    grid-template-columns: max-content repeat(15, 60px);
+
+    grid-row-gap: 20px;
+
+    margin-top: 15px;
+
+    .hide_tag {
+        visibility: hidden;
+    }
+
+    .grid_end {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+    }
+
+    .highlighter_box {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    .grid-item {
+        text-align: center;
+    }
+
+    .grid-item.player_tag_bg_color_black{
+        background-color: rgba(17, 17, 17, 0.20);
+    }
+
+    .grid-item.player_tag_bg_color_blue{
+        background-color: rgba(0, 102, 255, 0.20);
+    }
+
+    .grid-item.player_tag_bg_color_green{
+        background-color: rgba(0, 153, 0, 0.20)
+    }
+
+    .grid-item.player_tag_bg_color_purple{
+        background-color: rgba(140, 0, 255, 0.20);
+    }
+
+    .grid-item.player_tag_bg_color_red{
+        background-color: rgba(153, 17, 0, 0.20);
+    }
+
+    .grid-item.player_tag_bg_color_yellow{
+        background-color: rgba(170, 170, 0, 0.2)
+    }
+
+    .card-count {
+        background: url(assets/preferences_cards.png) center;
+    }
+
+    .vp-count{
+        background-image: url(assets/mars.png);
+        background-size: 65px;
+        background-position: center;
+
+        line-height: 1.7;
+        text-align: center;
+
+        color: black;
+        font-weight: bold;
+        text-shadow: 0 0 5px darkorange;
+    }
+
+    .player_name_cont {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
 .tag-count {
     box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
     position: relative;
@@ -174,16 +254,29 @@
         padding: 1px 5px;
         border-radius: 4px;
         font-weight: bold;
-
-        }
+   }
 
     .player_name_cont {
+        width: 150px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         display: inline-block;
         vertical-align: middle;
 
         .player_number {
             margin-right: 5px;
             text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
+        }
+
+        .corporation-name-cont {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            .corporation-name {
+                font-size: 11px;
+            }
         }
     }
 
@@ -237,7 +330,7 @@
             color: white;
             font-weight: normal;
         }
-    
+
         .ma-scores {
             display: inline-block;
             width: 156px;

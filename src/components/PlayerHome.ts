@@ -152,7 +152,7 @@ export const PlayerHome = Vue.component("player-home", {
                         <span class="help_tip" v-i18n>(click on player name to see details)</span>
                     </h2>
                     <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
-                        <span style="display:inline">
+                        <span>
                             <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
                                 <span class="player_number">{{ idx+1 }}.</span><a v-on:click.prevent="showPlayerDetails(p)" class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</a>
                             </div>

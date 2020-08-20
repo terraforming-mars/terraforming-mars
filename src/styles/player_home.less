@@ -186,8 +186,7 @@
             text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
         }
     }
-    .pin_icon {
-        background: url("assets/not_pinned.png");
+    .pin_icon { 
         width: 40px;
         height: 40px;
     }
@@ -198,9 +197,15 @@
         width: 40px;
         height: 40px;
     }
-
-    .player_pin:hover{
+    .player_pin_not_selected {
+        background: url("assets/not_pinned.png");
+    }
+    .player_pin_selected {
         background: url("assets/pinned.png");
+    }
+    .other_player {
+        display:flex;
+        flex-wrap:wrap;
     }
 
     .player_separator {

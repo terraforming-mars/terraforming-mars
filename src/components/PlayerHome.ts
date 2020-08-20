@@ -34,7 +34,9 @@ export const PlayerHome = Vue.component("player-home", {
         "turmoil": Turmoil
     },
     data: function () {
-        return {}
+        return {
+            pinnedPlayerId: ""
+        }
     },
     mixins: [PlayerMixin],
     methods: { 
@@ -53,7 +55,7 @@ export const PlayerHome = Vue.component("player-home", {
             (this.$root as any).setVisibilityState("other_player_" + player.id, true);
         },
         pinPlayer: function(player: PlayerModel) {
-            
+             
             let hiddenPlayers: Array<PlayerModel> = [];
  
             for(i =0; i< this.player.players.length; i++) {
@@ -62,18 +64,29 @@ export const PlayerHome = Vue.component("player-home", {
                     hiddenPlayers.push(p);
                 }
             }
-           
-            // set current visibility to visible
+            
+            // set current visibility to visible 
+            this.pinnedPlayerId = player.id; 
             (this.$root as any).setVisibilityState("other_player_" + player.id, true);
             
             // hide all other players
             for(var i=0; i< hiddenPlayers.length; i++) {
                 (this.$root as any).setVisibilityState("other_player_" + hiddenPlayers[i].id, false);
-            } 
+            }
+            
+            
         },
         hasPinIcon: function(player: PlayerModel): boolean { 
             return player.id !== this.player.id;
         },
+        getPinIsActiveClass: function(player: PlayerModel): string {
+            var ret: string = "player_pin_not_selected";
+            if(player.id === this.pinnedPlayerId) {
+                ret = "player_pin_selected";
+            }
+         
+            return ret;
+        }, 
         getFleetsCountRange: function(player: PlayerModel): Array<number> {
             const fleetsRange: Array<number> = [];
             for (var i=0; i < player.fleetSize - player.tradesThisTurn; i++) {
@@ -139,15 +152,15 @@ export const PlayerHome = Vue.component("player-home", {
                         <span class="help_tip" v-i18n>(click on player name to see details)</span>
                     </h2>
                     <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
-                        <div style="display:inline">
+                        <span style="display:inline">
                             <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
                                 <span class="player_number">{{ idx+1 }}.</span><a v-on:click.prevent="showPlayerDetails(p)" class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</a>
                             </div>
-                            <div class="player_pin" v-on:click.prevent="pinPlayer(p)" v-if="hasPinIcon(p)"><div class="pin_icon"></div></div>
+                            <div class="player_pin" :class="getPinIsActiveClass(p)" v-on:click.prevent="pinPlayer(p)" v-if="hasPinIcon(p)"><div class="pin_icon"></div></div>
                             <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
-                        </div> 
+                        </span> 
                     </div>
-                    <div v-if="player.players.length > 1" style="display:flex;flex-wrap:wrap;">
+                    <div class="other_player" v-if="player.players.length > 1">
                         <div v-for="otherPlayer in player.players" :key="otherPlayer.id">
                             <other-player v-if="otherPlayer.id !== player.id" :player="otherPlayer"></other-player>
                         </div>

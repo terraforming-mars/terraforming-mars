@@ -14,6 +14,7 @@ import { LogPanel } from "./LogPanel";
 import { PlayerMixin } from "./PlayerMixin";
 import { TagCount } from "./TagCount";
 import { Turmoil } from "./Turmoil";
+import { TagOverview } from "./TagOverview";
 
 const dialogPolyfill = require("dialog-polyfill");
 
@@ -27,6 +28,7 @@ export const PlayerHome = Vue.component("player-home", {
         "waiting-for": WaitingFor,
         "milestone": Milestone,
         "award": Award,
+        "tags": TagOverview,
         "preferences": Preferences,
         "colony": Colony,
         "log-panel": LogPanel,
@@ -144,6 +146,22 @@ export const PlayerHome = Vue.component("player-home", {
                         <milestone :milestones_list="player.milestones" />
                         <award :awards_list="player.awards" />
                     </div>
+                    
+                    <div v-if="player.players.length > 1" class="tag-overview-cont">
+                        <details class="accordion">
+                            <summary class="accordion-header">
+                                <div class="is-action">
+                                    <i class="icon icon-arrow-right mr-1"></i>
+                                    <span v-i18n>Tag Overview</span>
+                                </div>
+                            </summary>
+                            <div class="accordion-body">
+                                <div v-if="player.players.length > 1" class="player_home_block" >
+                                  <tags :player="player" />
+                                </div>
+                            </div>
+                        </details>
+                    </div>
                 </div>
 
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
@@ -155,10 +173,14 @@ export const PlayerHome = Vue.component("player-home", {
                         <span>
                             <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
                                 <span class="player_number">{{ idx+1 }}.</span><a v-on:click.prevent="showPlayerDetails(p)" class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</a>
+                                <div class="player_home_block--corp-names corporation-name-cont">
+                                <span class="corporation-name" v-if="p.corporationCard">{{ p.corporationCard.name }}</span>
+                            </div>
                             </div>
                             <div class="player_pin" :class="getPinIsActiveClass(p)" v-on:click.prevent="pinPlayer(p)" v-if="hasPinIcon(p)"><div class="pin_icon"></div></div>
                             <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
                         </span> 
+                        
                     </div>
                     <div class="other_player" v-if="player.players.length > 1">
                         <div v-for="otherPlayer in player.players" :key="otherPlayer.id">

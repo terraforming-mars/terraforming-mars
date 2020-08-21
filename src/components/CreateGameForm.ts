@@ -116,7 +116,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
         fetch("/api/clonablegames")
         .then(response => response.json())
         .then(onSucces)
-        .catch(_ => alert("Unexpected server response"));        
+        .catch(_ => alert("Unexpected server response"));
     },
     watch: {
         playersCount: function (val) {
@@ -191,7 +191,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 const boards = Object.values(BoardName);
                 this.board = boards[Math.floor(Math.random() * boards.length)];
             }
-            
+
             const corporateEra = component.corporateEra;
             const prelude = component.prelude;
             const draftVariant = component.draftVariant;
@@ -405,7 +405,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP">
                                 <i class="form-icon"></i> <span v-i18n>Show real-time VP</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#show-real-time-vp" class="tooltip" target="_blank">&#9432;</a>
                             </label>
-
+                            
                             <label class="form-switch">
                                 <input type="checkbox" v-model="solarPhaseOption">
                                 <i class="form-icon"></i> <span v-i18n>World Government Terraforming</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#solar-phase" class="tooltip" target="_blank">&#9432;</a>

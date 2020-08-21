@@ -34,12 +34,7 @@ export const PlayerHome = Vue.component("player-home", {
         "log-panel": LogPanel,
         "tag-count": TagCount,
         "turmoil": Turmoil
-    },
-    data: function () {
-        return {
-            pinnedPlayerId: ""
-        }
-    },
+    }, 
     mixins: [PlayerMixin],
     methods: { 
         getPlayerCssForTurnOrder: (player: PlayerModel, highlightActive: boolean): string => {
@@ -67,12 +62,13 @@ export const PlayerHome = Vue.component("player-home", {
                 }
             }
             
-            // set current visibility to visible 
-            this.pinnedPlayerId = player.id; 
+            // show selected player and select pin icon
+            (this.$root as any).setVisibilityState("show_pin_" + player.id, true);
             (this.$root as any).setVisibilityState("other_player_" + player.id, true);
             
-            // hide all other players
+            // hide all other players and deselect pins
             for(var i=0; i< hiddenPlayers.length; i++) {
+                (this.$root as any).setVisibilityState("show_pin_" + hiddenPlayers[i].id, false);
                 (this.$root as any).setVisibilityState("other_player_" + hiddenPlayers[i].id, false);
             }
             
@@ -82,16 +78,14 @@ export const PlayerHome = Vue.component("player-home", {
             return player.id !== this.player.id;
         },
         getPinIsActiveClass: function(player: PlayerModel): string {
-            var ret: string = "player_pin_not_selected";
-            if(player.id === this.pinnedPlayerId) {
-                ret = "player_pin_selected";
-            }
-         
+            let isPinned: boolean = (this.$root as any).getVisibilityState("show_pin_" + player.id);
+            let ret: string = isPinned ? "player_pin_selected": "player_pin_not_selected"; 
+
             return ret;
         }, 
         getFleetsCountRange: function(player: PlayerModel): Array<number> {
             const fleetsRange: Array<number> = [];
-            for (var i=0; i < player.fleetSize - player.tradesThisTurn; i++) {
+            for (let i=0; i < player.fleetSize - player.tradesThisTurn; i++) {
                 fleetsRange.push(i);
             }
             return fleetsRange

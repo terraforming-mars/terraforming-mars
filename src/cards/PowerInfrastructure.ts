@@ -1,4 +1,3 @@
-
 import { CardType } from "./CardType";
 import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
@@ -7,6 +6,8 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectAmount } from "../inputs/SelectAmount";
 import { CardName } from "../CardName";
+import { LogHelper } from "../components/LogHelper";
+import { Resources } from "../Resources";
 
 export class PowerInfrastructure implements IActionCard, IProjectCard {
     public name: CardName = CardName.POWER_INFRASTRUCTURE;
@@ -20,10 +21,11 @@ export class PowerInfrastructure implements IActionCard, IProjectCard {
     public canAct(player: Player): boolean {
         return player.energy > 0;
     }
-    public action(player: Player, _game: Game) {
+    public action(player: Player, game: Game) {
         return new SelectAmount("Select amount of energy to spend", "Spend energy", (amount: number) => {
             player.energy -= amount;
             player.megaCredits += amount;
+            LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS, amount);
             return undefined;
         }, player.energy);
     }

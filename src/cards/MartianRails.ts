@@ -1,4 +1,3 @@
-
 import { IActionCard } from "./ICard";
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
@@ -6,6 +5,8 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardName } from '../CardName';
+import { Resources } from "../Resources";
+import { LogHelper } from "../components/LogHelper";
 
 export class MartianRails implements IActionCard, IProjectCard {
     public cost: number = 13;
@@ -20,8 +21,11 @@ export class MartianRails implements IActionCard, IProjectCard {
         return player.energy >= 1;
     }
     public action(player: Player, game: Game) {
+        const gainedMC = game.getCitiesInPlayOnMars();
         player.energy--;
-        player.megaCredits += game.getCitiesInPlayOnMars();
+        player.megaCredits += gainedMC;
+        LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS, gainedMC);
+        
         return undefined;
     }
 }

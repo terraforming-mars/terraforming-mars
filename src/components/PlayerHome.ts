@@ -17,6 +17,17 @@ import { Turmoil } from "./Turmoil";
 import { TagOverview } from "./TagOverview";
 
 const dialogPolyfill = require("dialog-polyfill");
+const isPinned = (root: any, player: PlayerModel): boolean => {
+    return (root as any).getVisibilityState("show_pin_" + player.id);
+}
+const showPlayerData = (root: any, player: PlayerModel) => {
+    (root as any).setVisibilityState("show_pin_" + player.id, true);
+    (root as any).setVisibilityState("other_player_" + player.id, true);
+}
+export const hidePlayerData = (root: any, player: PlayerModel) => {
+    (root as any).setVisibilityState("show_pin_" + player.id, false);
+    (root as any).setVisibilityState("other_player_" + player.id, false);
+}
 
 export const PlayerHome = Vue.component("player-home", {
     props: ["player"],
@@ -54,35 +65,33 @@ export const PlayerHome = Vue.component("player-home", {
         pinPlayer: function(player: PlayerModel) {
              
             let hiddenPlayers: Array<PlayerModel> = [];
- 
-            for(i =0; i< this.player.players.length; i++) {
-                let p = this.player.players[i];
-                if(p.id === this.player.id || player.id !== p.id) {
-                    hiddenPlayers.push(p);
+            let playerPinned = isPinned(this.$root, player);
+
+            // if player is already pinned, on unpin add to hidden players
+            if(playerPinned) {
+                hiddenPlayers = this.player.players;
+            } else {
+                showPlayerData(this.$root, player);
+
+                for(i =0; i< this.player.players.length; i++) {
+                    let p = this.player.players[i];
+                    if(p.id === this.player.id || player.id !== p.id) {
+                        hiddenPlayers.push(p);
+                    }
                 }
             }
-            
-            // show selected player and select pin icon
-            (this.$root as any).setVisibilityState("show_pin_" + player.id, true);
-            (this.$root as any).setVisibilityState("other_player_" + player.id, true);
-            
-            // hide all other players and deselect pins
+             
             for(var i=0; i< hiddenPlayers.length; i++) {
-                (this.$root as any).setVisibilityState("show_pin_" + hiddenPlayers[i].id, false);
-                (this.$root as any).setVisibilityState("other_player_" + hiddenPlayers[i].id, false);
+                hidePlayerData(this.$root, hiddenPlayers[i]);
             }
-            
             
         },
         hasPinIcon: function(player: PlayerModel): boolean { 
             return player.id !== this.player.id;
         },
         getPinIsActiveClass: function(player: PlayerModel): string {
-            let isPinned: boolean = (this.$root as any).getVisibilityState("show_pin_" + player.id);
-            let ret: string = isPinned ? "player_pin_selected": "player_pin_not_selected"; 
-
-            return ret;
-        }, 
+            return isPinned(this.$root, player) ? "player_pin_selected": "player_pin_not_selected";;
+        },
         getFleetsCountRange: function(player: PlayerModel): Array<number> {
             const fleetsRange: Array<number> = [];
             for (let i=0; i < player.fleetSize - player.tradesThisTurn; i++) {

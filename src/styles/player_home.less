@@ -65,7 +65,7 @@
 
 .tag-overview-cont {
     .accordion-body {
-        overflow-x: auto;
+        overflow-x: auto;    
     }
 }
 
@@ -241,6 +241,10 @@
 .player_home_block {
     margin-bottom: 20px;
 
+    .accordion-header{
+        display: inline-block;
+    }
+    
     .player_item {
         display: inline-block;
         vertical-align: middle;
@@ -254,15 +258,19 @@
         padding: 1px 5px;
         border-radius: 4px;
         font-weight: bold;
-   }
-
+    }
+    .tags_cont .player_name_cont {
+        text-align: left;
+    }
     .player_name_cont {
+        text-align: center;
         width: 150px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         display: inline-block;
         vertical-align: middle;
+         
 
         .player_number {
             margin-right: 5px;
@@ -275,7 +283,7 @@
             text-overflow: ellipsis;
 
             .corporation-name {
-                font-size: 11px;
+                font-size: 16px;
             }
         }
     }

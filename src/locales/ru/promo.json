@@ -60,7 +60,7 @@
     
     "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.": "Повысьте температуру на 3 шага и получите 4 стали. Разместите дембу НЕ по соседству с городом. Удалите до 6 растений у любого игрока",
     
-    "Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Требует 4 океана. Увеличьте своё производство энергии на 2. Добавьте этот тайл на океаническую область",
+    "Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Требует 4 океана. Увеличьте своё производство энергии на 2. Добавьте этот тайл на область рядом с океаном",
     
     "Magnetic Field Generators": "Генераторы магнитного поля",
     "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.": "Уменьшите своё производство энергии на 4, увеличьте свое производство растений на 2. Увеличьте своё РТ на 3 и разместите этот тайл",
@@ -77,7 +77,7 @@
 
     "Asteroid Hollowing": "Полости в астероидах",
     "Action: Spend 1 titanium to add 1 asteroid resource here and increase MC production 1 step.": "Действие: потратьте 1 титан, чтобы добавить астероид сюда и увеличьте своё производство МС на 1",
-    "1 VP per 2 asteroid resources on this card.": "1 ПО за каджые 2 астероида здесь",
+    "1 VP per 2 asteroid resources on this card.": "1 ПО за каждые 2 астероида здесь",
 
     "Project Inspection": "Проверка проекта",
     "USE A CARD ACTION THAT HAS BEEN USED THIS GENERATION": "Выполните действие с карты, которое уже выполняли в этом поколении",

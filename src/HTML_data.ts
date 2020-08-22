@@ -975,7 +975,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.GREAT_ESCARPMENT_CONSORTIUM,`
-      <div class="title background-color-automated" style="font-size:14px;">Great Escarpment Consortium</div>
+      <div class="title background-color-automated">Great Escarpment Consortium</div>
       <div class="price">6</div>
       <div class="corporate-icon project-icon"></div>
       <div class="card-number">061</div>

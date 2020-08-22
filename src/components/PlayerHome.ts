@@ -150,21 +150,7 @@ export const PlayerHome = Vue.component("player-home", {
                         <award :awards_list="player.awards" />
                     </div>
                     
-                    <div v-if="player.players.length > 1" class="tag-overview-cont">
-                        <details class="accordion">
-                            <summary class="accordion-header">
-                                <div class="is-action">
-                                    <i class="icon icon-arrow-right mr-1"></i>
-                                    <span v-i18n>Tag Overview</span>
-                                </div>
-                            </summary>
-                            <div class="accordion-body">
-                                <div v-if="player.players.length > 1" class="player_home_block" >
-                                  <tags :player="player" />
-                                </div>
-                            </div>
-                        </details>
-                    </div>
+                    <tags :player="player" />
                 </div>
 
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">

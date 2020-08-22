@@ -69,9 +69,10 @@
     }
 }
 
+
 .tags-grid {
     display: grid;
-    grid-template-columns: max-content repeat(15, 60px);
+    grid-template-columns: max-content repeat(16, 60px);
 
     grid-row-gap: 20px;
 
@@ -120,7 +121,12 @@
     }
 
     .card-count {
-        background: url(assets/preferences_cards.png) center;
+        background: url(assets/preferences_cards.png) center no-repeat;
+    }
+
+    .rt-count {
+        background: url(assets/icon_rt.png) center no-repeat;
+        background-size: 22px;
     }
 
     .vp-count{
@@ -259,9 +265,16 @@
         border-radius: 4px;
         font-weight: bold;
     }
-    .tags_cont .player_name_cont {
-        text-align: left;
+
+    .tags_cont {
+        display: inline-block;
+        vertical-align: top;
+
+        .player_name_cont {
+            text-align: left;
+        }
     }
+
     .player_name_cont {
         text-align: center;
         width: 150px;
@@ -326,7 +339,7 @@
 }
 .awards-padding {padding: 3px 42px 3px 42px !important;}
 
-.milestones, .awards {
+.milestones, .awards, .tag-overview {
     .ma-clickable {
         font-family: Ubuntu, Sans;
         letter-spacing: 1px;
@@ -339,6 +352,9 @@
         border-radius: 20px 20px 0 0;
         text-decoration: none;
         cursor: pointer;
+        min-width: 180px;
+        display: inline-block;
+        text-align: center;
     }
 
     .ma-block {

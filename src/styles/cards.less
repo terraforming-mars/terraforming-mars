@@ -429,6 +429,12 @@ input[type=radio]:checked + .filterDiv {
   line-height: 20px;
   font-weight: bold;
   text-align: center;
+  
+}
+.content.hover-hide-res {
+  &:hover {
+    z-index: 4;
+  }
 }
 
 .contentCorporation {
@@ -1227,6 +1233,11 @@ input[type=radio]:checked + .filterDiv {
   box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
   background: linear-gradient(to bottom right, #cccccc,#919191, #dddddd,#cccccc,#aaaaaa,#cacaca, #919191,#cccccc);
 }
+.corporationEffectBox.hover-hide-res {
+  &:hover {
+    z-index: 4;
+  }
+}
 
 .corporationEffectBoxLabel {
   background-color: rgb(44,132,196);
@@ -1253,7 +1264,8 @@ input[type=radio]:checked + .filterDiv {
   height: 30px;
   line-height: 32px;
   text-align: center;
-  margin: 276px 0 0 -1px;
+  bottom: -4px;
+  left: -4px;
   font-size: 14px;
   background-color: rgb(255,204,100);
   background: linear-gradient(to right,#ddd,#666);

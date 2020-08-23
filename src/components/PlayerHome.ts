@@ -155,7 +155,7 @@ export const PlayerHome = Vue.component("player-home", {
                             <summary class="accordion-header">
                                 <div class="is-action">
                                     <i class="icon icon-arrow-right mr-1"></i>
-                                    <span v-i18n>Tag Overview</span>
+                                    <span v-i18n>Tags Overview</span>
                                 </div>
                             </summary>
                             <div class="accordion-body">

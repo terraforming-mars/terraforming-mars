@@ -129,7 +129,7 @@ export class Atmoscoop implements IProjectCard {
         }
 
         if (options.length === 1) {
-            if (options instanceof SelectOption) return (options[0] as SelectOption).cb();
+            if (options[0] instanceof SelectOption) return (options[0] as SelectOption).cb();
 
             const selectCard = options[0] as SelectCard<ICard>;
             if (floaterCards.length === 1) return selectCard.cb([floaterCards[0]]);

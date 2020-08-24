@@ -42,13 +42,15 @@ export class Atmoscoop implements IProjectCard {
         if (floaterCards.length === 0) {
             if (!this.temperatureIsMaxed(game)) {
                 options.push(new SelectOption("Raise temperature 2 steps", "Raise temperature", () => {
-                    return game.increaseTemperature(player,2);
+                    game.increaseTemperature(player,2);
+                    return undefined;
                 }));
             }
             
             if (!this.venusIsMaxed(game)) {
                 options.push(new SelectOption("Raise Venus 2 steps", "Raise venus",() => {
-                    return game.increaseVenusScaleLevel(player,2);
+                    game.increaseVenusScaleLevel(player,2);
+                    return undefined;
                 }));
             }
         } else if (floaterCards.length === 1) {
@@ -59,7 +61,8 @@ export class Atmoscoop implements IProjectCard {
                     () => {
                         player.addResourceTo(floaterCards[0], 2);
                         LogHelper.logAddResource(game, player, floaterCards[0], 2);
-                        return game.increaseTemperature(player,2);
+                        game.increaseTemperature(player,2);
+                        return undefined;
                 }));
             }
 
@@ -70,7 +73,8 @@ export class Atmoscoop implements IProjectCard {
                     () => {
                         player.addResourceTo(floaterCards[0], 2);
                         LogHelper.logAddResource(game, player, floaterCards[0], 2);
-                        return game.increaseVenusScaleLevel(player,2);
+                        game.increaseVenusScaleLevel(player,2);
+                        return undefined;
                 }));
             }
 
@@ -93,7 +97,8 @@ export class Atmoscoop implements IProjectCard {
                     (foundCards: Array<ICard>) => {
                         player.addResourceTo(foundCards[0], 2);
                         LogHelper.logAddResource(game, player, foundCards[0], 2);
-                        return game.increaseTemperature(player,2);
+                        game.increaseTemperature(player,2);
+                        return undefined;
                 }));
             }
 
@@ -105,7 +110,8 @@ export class Atmoscoop implements IProjectCard {
                     (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], 2);
                     LogHelper.logAddResource(game, player, foundCards[0], 2);
-                    return game.increaseVenusScaleLevel(player,2);
+                    game.increaseVenusScaleLevel(player,2);
+                    return undefined;
                 }));
             }
 

@@ -150,6 +150,7 @@ export const PlayerHome = Vue.component("player-home", {
                         <award :awards_list="player.awards" />
                     </div>
                     
+
                     <tags :player="player" />
                 </div>
 

@@ -23,7 +23,7 @@ export class VenusSoils implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
         const venusMaxed = game.getVenusScaleLevel() === MAX_VENUS_SCALE;
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !venusMaxed) {
-          return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST);
+          return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, false, false, true, true);
         }
   
         return true;

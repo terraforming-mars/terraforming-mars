@@ -21,7 +21,7 @@ export class OrbitalReflectors  implements IProjectCard {
         const stepsRaised = Math.min(remainingVenusSteps, 2);
         
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
-          return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * stepsRaised, game, false, true);
+          return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST * stepsRaised, game, false, true, true);
         }
   
         return true;

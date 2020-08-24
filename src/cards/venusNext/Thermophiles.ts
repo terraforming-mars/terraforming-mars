@@ -51,7 +51,7 @@ export class Thermophiles implements IActionCard,IProjectCard, IResourceCard {
 
         const addResource = new SelectCard(
             "Select a Venus card to add 1 microbe",
-            "Remove microbe",
+            "Add microbe",
             venusMicrobeCards,
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], 1);

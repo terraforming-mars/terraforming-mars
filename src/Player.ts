@@ -255,7 +255,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }      
 
       // Mons Insurance hook
-      if (game !== undefined && game.monsInsuranceOwner !== undefined && amount < 0 && fromPlayer !== undefined) {
+      if (game !== undefined && game.monsInsuranceOwner !== undefined && amount < 0 && fromPlayer !== undefined && fromPlayer !== this) {
         this.resolveMonsInsurance(game);
       }
     }
@@ -308,7 +308,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       // Mons Insurance hook  
-      if (game !== undefined && game.monsInsuranceOwner !== undefined && amount < 0 && fromPlayer !== undefined) {
+      if (game !== undefined && game.monsInsuranceOwner !== undefined && amount < 0 && fromPlayer !== undefined && fromPlayer !== this) {
         this.resolveMonsInsurance(game);
       }
 

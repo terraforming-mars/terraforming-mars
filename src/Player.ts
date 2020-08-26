@@ -141,7 +141,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         if (this.canAfford(REDS_RULING_POLICY_COST)) {
           game.addSelectHowToPayInterrupt(this, REDS_RULING_POLICY_COST, false, false, "Select how to pay for TR increase");
         } else {
-          this.megaCredits -= REDS_RULING_POLICY_COST;
+          // Cannot pay Reds, will not increase TR
+          return;
         }
         
         this.terraformRating++;
@@ -1874,16 +1875,28 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return playableCards;
     }
 
-    public canAfford(cost: number, game?: Game, canUseSteel: boolean = false, canUseTitanium: boolean = false): boolean {
+    public canAfford(cost: number, game?: Game, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false): boolean {
+      
+      let extraResource: number = 0;
+      if (canUseFloaters !== undefined && canUseFloaters) {
+        extraResource += this.getFloatersCanSpend() * 3;
+      }
+
+      if (canUseMicrobes !== undefined && canUseMicrobes) {
+        extraResource += this.getMicrobesCanSpend() * 2;
+      }
+      
       if (game !== undefined && canUseTitanium) {
         return (this.canUseHeatAsMegaCredits ? this.heat : 0) +
         (canUseSteel ? this.steel * this.steelValue : 0) +
         (canUseTitanium ? this.titanium * this.getTitaniumValue(game) : 0) +
+        extraResource +
           this.megaCredits >= cost;        
       }
       
       return (this.canUseHeatAsMegaCredits ? this.heat : 0) +
               (canUseSteel ? this.steel * this.steelValue : 0) +
+              extraResource +
                 this.megaCredits >= cost;
     }
 

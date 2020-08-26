@@ -26,9 +26,9 @@ export const ALL_PARTIES: Array<IPartyFactory<IParty>> = [
     { partyName: PartyName.MARS, factory: MarsFirst },
     { partyName: PartyName.SCIENTISTS, factory: Scientists },
     { partyName: PartyName.UNITY, factory: Unity },
-    { partyName: PartyName.KELVINISTS, factory: Kelvinists },
+    { partyName: PartyName.GREENS, factory: Greens },
     { partyName: PartyName.REDS, factory: Reds },
-    { partyName: PartyName.GREENS, factory: Greens }
+    { partyName: PartyName.KELVINISTS, factory: Kelvinists }
 ];
 
 export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {

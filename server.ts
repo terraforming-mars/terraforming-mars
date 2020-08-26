@@ -379,7 +379,6 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         soloTR: gameReq.soloTR,
         clonedGamedId: gameReq.clonedGamedId,
         initialDraftVariant: gameReq.initialDraft,
-        initialDraftRounds: parseInt(gameReq.initialDraftRounds),
         randomMA: gameReq.randomMA,
         shuffleMapOption: gameReq.shuffleMapOption,
       } as GameOptions;

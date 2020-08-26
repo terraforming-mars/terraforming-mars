@@ -85,7 +85,6 @@ export interface GameOptions {
   soloTR: boolean;
   clonedGamedId: string | undefined;
   initialDraftVariant: boolean;
-  initialDraftRounds?: number;
   randomMA: boolean;
 }
 
@@ -137,7 +136,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private clonedGamedId: string | undefined;
     public initialDraft: boolean = false;
     public someoneHasRemovedOtherPlayersPlants: boolean = false;
-    public initialDraftRounds: number = 4;
     public randomMA: boolean = false;
     public seed: number = Math.random();
     private gameOptions: GameOptions;
@@ -156,7 +154,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
         gameOptions = {
           draftVariant: false,
           initialDraftVariant: false,
-          initialDraftRounds: 4,
           corporateEra: true,
           randomMA: false,
           preludeExtension: false,
@@ -198,7 +195,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.solarPhaseOption = gameOptions.solarPhaseOption;
       this.soloTR = gameOptions.soloTR;
       this.initialDraft = gameOptions.initialDraftVariant;
-      this.initialDraftRounds = gameOptions.initialDraftRounds || 4;
       this.randomMA = gameOptions.randomMA;
 
       // Clone game
@@ -484,7 +480,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.includeVenusMA = gameToRebuild.includeVenusMA;
           game.soloTR = gameToRebuild.soloTR;
           game.initialDraft = gameToRebuild.initialDraft;
-          game.initialDraftRounds = gameToRebuild.initialDraftRounds || 4;
           game.randomMA = gameToRebuild.randomMA;
 
           // Update dealers

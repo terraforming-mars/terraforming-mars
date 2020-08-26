@@ -9,7 +9,7 @@ export class Ganymede extends Colony implements IColony {
     public name = ColonyName.GANYMEDE;
     public description: string = "Plants";
     public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player);
+        this.beforeTrade(this, player, game);
         const qty = this.trackPosition;
         player.plants += qty;
         LogHelper.logGainStandardResource(game, player, Resources.PLANTS, qty);

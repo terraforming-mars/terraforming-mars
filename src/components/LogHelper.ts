@@ -7,6 +7,7 @@ import { LogMessageDataType } from "../LogMessageDataType";
 import { Resources } from "../Resources";
 import { ISpace } from "../ISpace";
 import { TileType } from "../TileType";
+import { IColony } from "../colonies/Colony";
 
 export class LogHelper {
     static logAddResource(game: Game, player: Player, card: ICard, qty: number = 1): void {
@@ -102,6 +103,16 @@ export class LogHelper {
             new LogMessageData(LogMessageDataType.STRING, type),
             new LogMessageData(LogMessageDataType.STRING, space.x.toString()),
             new LogMessageData(LogMessageDataType.STRING, space.y.toString())
+        );
+    }
+
+    static logColonyTrackIncrease(game: Game, player: Player, colony: IColony) {
+        game.log(
+            LogMessageType.DEFAULT,
+            "${0} increased ${1} colony track ${2} step(s)",
+            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.STRING, colony.name),
+            new LogMessageData(LogMessageDataType.STRING, player.colonyTradeOffset.toString())
         );
     }
 }

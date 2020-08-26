@@ -9,7 +9,7 @@ export class Io extends Colony implements IColony {
     public name = ColonyName.IO;
     public description: string = "Heat";
     public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player);
+        this.beforeTrade(this, player, game);
         let qty : number;
         if (this.trackPosition === 1 || this.trackPosition === 6) {
             qty = (this.trackPosition * 2) + 1;

@@ -9,7 +9,7 @@ export class Callisto extends Colony implements IColony {
     public name = ColonyName.CALLISTO;
     public description: string = "Energy";
     public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player);
+        this.beforeTrade(this, player, game);
         const qty = Math.max(2, (2 * this.trackPosition) -1 + Math.max(this.trackPosition - 4, 0));
         player.energy += qty;
         LogHelper.logGainStandardResource(game, player, Resources.ENERGY, qty);

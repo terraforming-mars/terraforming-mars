@@ -10,7 +10,7 @@ export class Miranda extends Colony implements IColony {
     public isActive = false;
     public resourceType = ResourceType.ANIMAL;
     public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player);
+        this.beforeTrade(this, player, game);
         let animals: number = 0;
         if (this.trackPosition < 3) {
             animals = 1;

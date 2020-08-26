@@ -13,7 +13,7 @@ export class Europa extends Colony implements IColony {
     public trade(player: Player, game: Game): void {
         game.addInterrupt({ player, playerInput: new OrOptions(
             new SelectOption("Increase colony track", "Confirm", () => {
-                this.beforeTrade(this, player);
+                this.beforeTrade(this, player, game);
                 this.handleTrade(game, player);
                 return undefined;
             }),

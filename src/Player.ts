@@ -957,6 +957,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       });
     }
 
+    public dealCards(game: Game, quantity: number, cards: Array<IProjectCard>) {
+      for (let i = 0; i < quantity; i++) {
+        cards.push(game.dealer.dealCard());
+      }      
+    }
+
     public runDraftPhase(initialDraft: boolean, game: Game, playerName: String, passedCards?: Array<IProjectCard>): void {
       let cards: Array<IProjectCard> = [];
       if (passedCards === undefined) {
@@ -967,12 +973,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             game.dealer.dealCard(true),
             game.dealer.dealCard(true));
         } else {
-          cards.push(
-            game.dealer.dealCard(true),
-            game.dealer.dealCard(true),
-            game.dealer.dealCard(true),
-            game.dealer.dealCard(true),            
-            game.dealer.dealCard(true));
+          this.dealCards(game, 5, cards);
         }
       } else { cards = passedCards}      
 

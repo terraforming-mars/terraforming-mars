@@ -98,6 +98,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public awards: Array<IAward> = [];
     public generation: number = 1;
     private draftRound: number = 1;
+    private initialDraftIteration: number = 1;
     public phase: Phase = Phase.RESEARCH;
     private donePlayers: Set<Player> = new Set<Player>();
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
@@ -307,9 +308,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
               throw new Error("No corporation card dealt for player");
             }
           }
-
-          for (let i = 0; i < 10; i++) {
-            player.dealtProjectCards.push(this.dealer.dealCard());
+          if (!gameOptions.initialDraftVariant) {
+            for (let i = 0; i < 10; i++) {
+              player.dealtProjectCards.push(this.dealer.dealCard());
+            }
           }
           if (this.preludeExtension) {
             for (let i = 0; i < 4; i++) {
@@ -1065,7 +1067,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     private isLastActiveRoundOfDraft(initialDraft: boolean): boolean {
 
-      if (initialDraft && (this.draftRound === this.initialDraftRounds || this.draftRound === 9)) return true;
+      if (initialDraft && (this.draftRound === 4)) return true;
 
       if ( ! initialDraft && this.draftRound === 3) return true;
 
@@ -1094,13 +1096,21 @@ export class Game implements ILoadable<SerializedGame, Game> {
             player.draftedCards.push(...lastCards);
           }
           player.needsToDraft = undefined;
-
-          if (initialDraft) {
+        
+          if (initialDraft && this.initialDraftIteration === 2) {
             player.dealtProjectCards = player.draftedCards;
             player.draftedCards = [];
             player.setWaitingFor(this.pickCorporationCard(player), () => {});
           }
         });
+
+        if (initialDraft && this.initialDraftIteration === 1) {
+          this.initialDraftIteration++;
+          this.initialDraft = true;
+          this.draftRound = 1;
+          this.runDraftRound(true);
+          return;
+        }
 
         if ( ! initialDraft) {
           this.gotoResearchPhase();

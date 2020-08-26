@@ -967,7 +967,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             game.dealer.dealCard(true),
             game.dealer.dealCard(true));
         } else {
-          cards = this.dealtProjectCards;
+          cards.push(
+            game.dealer.dealCard(true),
+            game.dealer.dealCard(true),
+            game.dealer.dealCard(true),
+            game.dealer.dealCard(true),            
+            game.dealer.dealCard(true));
         }
       } else { cards = passedCards}      
 

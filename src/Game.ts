@@ -85,7 +85,6 @@ export interface GameOptions {
   soloTR: boolean;
   clonedGamedId: string | undefined;
   initialDraftVariant: boolean;
-  initialDraftRounds?: number;
   randomMA: boolean;
 }
 
@@ -98,6 +97,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public awards: Array<IAward> = [];
     public generation: number = 1;
     private draftRound: number = 1;
+    private initialDraftIteration: number = 1;
     public phase: Phase = Phase.RESEARCH;
     private donePlayers: Set<Player> = new Set<Player>();
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
@@ -136,7 +136,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private clonedGamedId: string | undefined;
     public initialDraft: boolean = false;
     public someoneHasRemovedOtherPlayersPlants: boolean = false;
-    public initialDraftRounds: number = 4;
     public randomMA: boolean = false;
     public seed: number = Math.random();
     private gameOptions: GameOptions;
@@ -155,7 +154,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
         gameOptions = {
           draftVariant: false,
           initialDraftVariant: false,
-          initialDraftRounds: 4,
           corporateEra: true,
           randomMA: false,
           preludeExtension: false,
@@ -197,7 +195,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.solarPhaseOption = gameOptions.solarPhaseOption;
       this.soloTR = gameOptions.soloTR;
       this.initialDraft = gameOptions.initialDraftVariant;
-      this.initialDraftRounds = gameOptions.initialDraftRounds || 4;
       this.randomMA = gameOptions.randomMA;
 
       // Clone game
@@ -307,9 +304,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
               throw new Error("No corporation card dealt for player");
             }
           }
-
-          for (let i = 0; i < 10; i++) {
-            player.dealtProjectCards.push(this.dealer.dealCard());
+          if (!gameOptions.initialDraftVariant) {
+            for (let i = 0; i < 10; i++) {
+              player.dealtProjectCards.push(this.dealer.dealCard());
+            }
           }
           if (this.preludeExtension) {
             for (let i = 0; i < 4; i++) {
@@ -482,7 +480,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.includeVenusMA = gameToRebuild.includeVenusMA;
           game.soloTR = gameToRebuild.soloTR;
           game.initialDraft = gameToRebuild.initialDraft;
-          game.initialDraftRounds = gameToRebuild.initialDraftRounds || 4;
           game.randomMA = gameToRebuild.randomMA;
 
           // Update dealers
@@ -1065,7 +1062,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     private isLastActiveRoundOfDraft(initialDraft: boolean): boolean {
 
-      if (initialDraft && (this.draftRound === this.initialDraftRounds || this.draftRound === 9)) return true;
+      if (initialDraft && (this.draftRound === 4)) return true;
 
       if ( ! initialDraft && this.draftRound === 3) return true;
 
@@ -1094,13 +1091,21 @@ export class Game implements ILoadable<SerializedGame, Game> {
             player.draftedCards.push(...lastCards);
           }
           player.needsToDraft = undefined;
-
-          if (initialDraft) {
+        
+          if (initialDraft && this.initialDraftIteration === 2) {
             player.dealtProjectCards = player.draftedCards;
             player.draftedCards = [];
             player.setWaitingFor(this.pickCorporationCard(player), () => {});
           }
         });
+
+        if (initialDraft && this.initialDraftIteration === 1) {
+          this.initialDraftIteration++;
+          this.initialDraft = true;
+          this.draftRound = 1;
+          this.runDraftRound(true);
+          return;
+        }
 
         if ( ! initialDraft) {
           this.gotoResearchPhase();
@@ -1124,6 +1129,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.generation%2 === 1) {
         nextPlayer = this.getPreviousPlayer(this.players, player);
       }
+      // Change initial draft direction on second iteration
+      if (this.initialDraftIteration === 2 && this.generation === 1) {
+        nextPlayer = this.getNextPlayer(this.players, player);
+      }
+
       if (nextPlayer !== undefined) {
         return nextPlayer;
       }

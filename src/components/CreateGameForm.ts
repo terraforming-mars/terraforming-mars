@@ -16,7 +16,6 @@ interface CreateGameModel {
     prelude: boolean;
     draftVariant: boolean;
     initialDraft: boolean;
-    initialDraftRounds: number;
     randomMA: boolean;
     randomFirstPlayer: boolean;
     showOtherPlayersVP: boolean;
@@ -68,7 +67,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
             prelude: false,
             draftVariant: true,
             initialDraft: false,
-            initialDraftRounds: 4,
             randomMA: false,
             randomFirstPlayer: true,
             showOtherPlayersVP: false,
@@ -117,11 +115,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
         .then(response => response.json())
         .then(onSucces)
         .catch(_ => alert("Unexpected server response"));
-    },
-    watch: {
-        playersCount: function (val) {
-          this.initialDraftRounds = val
-        }
     },
     methods: {
         getPlayerNamePlaceholder: function (player: NewPlayerModel): string {
@@ -196,7 +189,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const prelude = component.prelude;
             const draftVariant = component.draftVariant;
             const initialDraft = component.initialDraft;
-            const initialDraftRounds = component.initialDraftRounds;
             const randomMA = component.randomMA;
             const showOtherPlayersVP = component.showOtherPlayersVP;
             const venusNext = component.venusNext;
@@ -263,7 +255,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 soloTR,
                 clonedGamedId,
                 initialDraft,
-                initialDraftRounds,
                 randomMA,
                 shuffleMapOption,
             });
@@ -369,11 +360,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <label class="form-switch" v-if="playersCount > 1">
                                 <input type="checkbox" name="initialDraft" v-model="initialDraft">
                                 <i class="form-icon"></i> <span v-i18n>Initial Draft variant</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#initial-draft" class="tooltip" target="_blank">&#9432;</a>
-                            </label>
-
-                            <label class="form-label" v-if="playersCount > 1 && initialDraft">
-                                <i class="form-icon"></i> <span v-i18n>Initial Draft rounds:</span>
-                                <input type="number" class="form-input form-inline create-game-corporations-count" min="1" max="10" name="initialDraftRounds" v-model="initialDraftRounds">
                             </label>
 
                             <label class="form-switch">

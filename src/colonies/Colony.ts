@@ -9,6 +9,7 @@ import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
 import { LogHelper } from "../components/LogHelper";
+import { MAX_COLONY_TRACK_POSITION } from "../constants";
 
 export interface IColony {
     name: ColonyName;
@@ -44,7 +45,7 @@ export abstract class Colony  {
         } else {
             this.trackPosition += value;
         }    
-        if (this.trackPosition > 6) this.trackPosition = 6;
+        if (this.trackPosition > MAX_COLONY_TRACK_POSITION) this.trackPosition = MAX_COLONY_TRACK_POSITION;
     }
 
     public decreaseTrack(value?: number): void {

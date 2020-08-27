@@ -16,6 +16,7 @@ export const AIR_SCRAPPING_COST: number = 15;
 export const BUFFER_GAS_COST: number = 16;
 export const OCEAN_BONUS: number = 2;
 export const BUILD_COLONY_COST: number = 17;
+export const MAX_COLONY_TRACK_POSITION: number = 6;
 export const PLAYER_DELEGATES_COUNT: number = 7;
 export const REDS_RULING_POLICY_COST: number = 3;
 export const HELLAS_BONUS_OCEAN_COST: number = 6;

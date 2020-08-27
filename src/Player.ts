@@ -959,7 +959,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     public dealCards(game: Game, quantity: number, cards: Array<IProjectCard>) {
       for (let i = 0; i < quantity; i++) {
-        cards.push(game.dealer.dealCard());
+        cards.push(game.dealer.dealCard(true));
       }      
     }
 

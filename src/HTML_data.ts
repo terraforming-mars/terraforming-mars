@@ -1837,7 +1837,7 @@ export const HTML_DATA: Map<string, string> =
                 <div class="energy production "></div><div class="energy production "></div>
             </div>
             <div class="description ">
-                (Increase your energy production 2 step.)
+                (Increase your energy production 2 steps.)
             </div>
         </div>
 `],

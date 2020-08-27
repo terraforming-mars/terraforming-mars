@@ -30,14 +30,14 @@ export class TitanShuttles implements IProjectCard, IResourceCard {
 
         if (floaterCards.length === 1 && this.resourceCount === 0) {
             player.addResourceTo(floaterCards[0], 2);
-            LogHelper.logAddResource(game, player, floaterCards[0]);
+            LogHelper.logAddResource(game, player, floaterCards[0], 2);
             return undefined;
         }
 
         const addResource = new SelectOption("Add 2 floaters to a Jovian card", "Add floaters", () => {
             if (floaterCards.length === 1) {
                 player.addResourceTo(floaterCards[0], 2);
-                LogHelper.logAddResource(game, player, floaterCards[0]);
+                LogHelper.logAddResource(game, player, floaterCards[0], 2);
             } else if (floaterCards.length > 1) {
                 game.addResourceInterrupt(player, ResourceType.FLOATER, 2, undefined, Tags.JOVIAN);
             }

@@ -255,7 +255,11 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
                     <card :card="card"></card>
-                </div> 
+                </div>
+
+                <div v-for="card in player.dealtProjectCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
+                    <card :card="card"></card>
+                </div>     
 
                 <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">              
                     <h2 v-i18n>Drafted Cards</h2>

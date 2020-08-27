@@ -120,7 +120,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public soloMode: boolean = false;
     public corporateEra: boolean = true;
     private preludeExtension: boolean;
-    private preludeDraft: boolean = true;
     public venusNextExtension: boolean;
     public coloniesExtension: boolean;
     public turmoilExtension: boolean;
@@ -1066,7 +1065,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     private isLastActiveRoundOfDraft(initialDraft: boolean, preludeDraft: boolean = false): boolean {
 
-      if (initialDraft && !preludeDraft && this.draftRound === 4) return true; 
+      if (initialDraft && !preludeDraft && this.draftRound === 4) return true;
 
       if ( (!initialDraft || preludeDraft) && this.draftRound === 3) return true;
 
@@ -1101,7 +1100,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
             player.draftedCards = [];            
           }
 
-          if (initialDraft && this.initialDraftIteration === 2 && !this.preludeDraft) {
+          if (initialDraft && this.initialDraftIteration === 2 && !this.preludeExtension) {
             player.setWaitingFor(this.pickCorporationCard(player), () => {});
           }
 
@@ -1120,7 +1119,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           return;
         }
 
-        if (initialDraft && this.initialDraftIteration === 2 && this.preludeDraft) {
+        if (initialDraft && this.initialDraftIteration === 2 && this.preludeExtension) {
           this.initialDraftIteration++;
           this.initialDraft = true;
           this.draftRound = 1;

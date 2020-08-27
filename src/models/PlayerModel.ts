@@ -47,6 +47,7 @@ export interface PlayerModel {
     selfReplicatingRobotsCards: Array<CardModel>;
     dealtCorporationCards: Array<CorporationCard>;
     dealtPreludeCards:  Array<IProjectCard>;
+    dealtProjectCards:  Array<IProjectCard>;
     initialDraft: boolean;
     needsToDraft: boolean | undefined;
     deckSize: number;

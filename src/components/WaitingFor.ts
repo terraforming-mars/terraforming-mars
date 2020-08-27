@@ -13,6 +13,8 @@ import { SelectPlayer } from "./SelectPlayer";
 import { SelectSpace } from "./SelectSpace";
 import { $t } from "../directives/i18n";
 import { SelectPartyPlayer } from "./SelectPartyPlayer";
+import { PreferencesManager } from "./PreferencesManager";
+import { voiceForActivePlayer } from "../PlaySound";
 
 var ui_update_timeout_id: number | undefined = undefined;
 
@@ -49,14 +51,18 @@ export const WaitingFor = Vue.component("waiting-for", {
                         if (result["result"] === "GO") {
                             (vueApp as any).$root.updatePlayer();
 
-                            if (Notification.permission !== 'granted') {
+                            if (Notification.permission !== "granted") {
                                 Notification.requestPermission();
                             }
                             if (Notification.permission === "granted") {
-                                new Notification('Terraforming Mars Online', {
+                                new Notification("Terraforming Mars Online", {
                                     icon: "/favicon.ico",
                                     body: "It's your turn!",
                                 });
+                            }
+                            const voice_prompt = PreferencesManager.loadValue("voice_prompt") === "1";
+                            if(voice_prompt){
+                                voiceForActivePlayer();
                             }
 
                             // We don't need to wait anymore - it's our turn
@@ -97,7 +103,7 @@ export const WaitingFor = Vue.component("waiting-for", {
                         (window as any).location = (window as any).location;
                     }
 
-                } else if (xhr.status === 400 && xhr.responseType === 'json') {
+                } else if (xhr.status === 400 && xhr.responseType === "json") {
                     const element: HTMLElement | null = document.getElementById("dialog-default");
                     const message: HTMLElement | null = document.getElementById("dialog-default-message");
                     if (message !== null && element !== null && (element as HTMLDialogElement).showModal !== undefined) {

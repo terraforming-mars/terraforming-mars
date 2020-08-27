@@ -40,17 +40,17 @@ export class Flooding implements IProjectCard {
         "Select space for ocean tile",
         game.board.getAvailableSpacesForOcean(player),
         (space: ISpace) => {
-          const adjacentPlayers: Array<Player> = [];
+          const adjacentPlayers: Set<Player> = new Set<Player>();
           game.addOceanTile(player, space.id);
           game.board.getAdjacentSpaces(space).forEach((space) => {
             if (space.player && space.player !== player) {
-              adjacentPlayers.push(space.player);
+              adjacentPlayers.add(space.player);
             }
           });
-          if (adjacentPlayers.length > 0) {
+          if (adjacentPlayers.size > 0) {
             return new OrOptions(
                 new SelectPlayer(
-                    adjacentPlayers,
+                    Array.from(adjacentPlayers),
                     "Select adjacent player to remove 4 mega credits from",
                     "Remove credits",
                     (selectedPlayer: Player) => {

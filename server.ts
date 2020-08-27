@@ -521,6 +521,7 @@ function getPlayer(player: Player, game: Game): string {
     selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(game),
     dealtCorporationCards: player.dealtCorporationCards,
     dealtPreludeCards: player.dealtPreludeCards,
+    dealtProjectCards:  player.dealtProjectCards,
     initialDraft: game.initialDraft,
     needsToDraft: player.needsToDraft,
     deckSize: game.dealer.getDeckSize(),

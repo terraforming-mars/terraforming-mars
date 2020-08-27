@@ -865,12 +865,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.first = this.players[firstIndex];
     }
 
-    private runDraftRound(initialDraft: boolean = false): void {
+    private runDraftRound(initialDraft: boolean = false, preludeDraft: boolean = false): void {
       this.draftedPlayers.clear();
       this.players.forEach((player) => {
         player.needsToDraft = true;
-        if (this.draftRound === 1) {
+        if (this.draftRound === 1 && !preludeDraft) {
           player.runDraftPhase(initialDraft,this,this.getNextDraft(player).name);
+        }
+        else if (this.draftRound === 1 && preludeDraft) {
+          player.runDraftPhase(initialDraft,this,this.getNextDraft(player).name, player.dealtPreludeCards);
         } else {
           let cards = this.unDraftedCards.get(this.getDraftCardsFrom(player));
           this.unDraftedCards.delete(this.getDraftCardsFrom(player));
@@ -1060,11 +1063,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
     }
 
-    private isLastActiveRoundOfDraft(initialDraft: boolean): boolean {
+    private isLastActiveRoundOfDraft(initialDraft: boolean, preludeDraft: boolean = false): boolean {
 
-      if (initialDraft && (this.draftRound === 4)) return true;
+      if (initialDraft && !preludeDraft && this.draftRound === 4) return true;
 
-      if ( ! initialDraft && this.draftRound === 3) return true;
+      if ( (!initialDraft || preludeDraft) && this.draftRound === 3) return true;
 
       return false;
     }
@@ -1078,7 +1081,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return;
       }
 
-      if ( ! this.isLastActiveRoundOfDraft(initialDraft)) {
+      if ( ! this.isLastActiveRoundOfDraft(initialDraft, this.initialDraftIteration === 3 ? true : false)) {
         this.draftRound++;
         this.runDraftRound(initialDraft);
       } else {
@@ -1094,9 +1097,18 @@ export class Game implements ILoadable<SerializedGame, Game> {
         
           if (initialDraft && this.initialDraftIteration === 2) {
             player.dealtProjectCards = player.draftedCards;
-            player.draftedCards = [];
+            player.draftedCards = [];            
+          }
+
+          if (initialDraft && this.initialDraftIteration === 2 && !this.preludeExtension) {
             player.setWaitingFor(this.pickCorporationCard(player), () => {});
           }
+
+          if (initialDraft && this.initialDraftIteration === 3) {
+            player.dealtPreludeCards = player.draftedCards;
+            player.draftedCards = [];
+            player.setWaitingFor(this.pickCorporationCard(player), () => {});
+          }          
         });
 
         if (initialDraft && this.initialDraftIteration === 1) {
@@ -1106,6 +1118,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
           this.runDraftRound(true);
           return;
         }
+
+        if (initialDraft && this.initialDraftIteration === 2 && this.preludeExtension) {
+          this.initialDraftIteration++;
+          this.initialDraft = true;
+          this.draftRound = 1;
+          this.runDraftRound(true, true);
+          return;
+        }        
+        
 
         if ( ! initialDraft) {
           this.gotoResearchPhase();

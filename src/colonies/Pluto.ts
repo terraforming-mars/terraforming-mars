@@ -10,7 +10,7 @@ export class Pluto extends Colony implements IColony {
     public description: string = "Cards";
     public trade(player: Player, game: Game): void {
         let extraCards: number = 0;
-        this.beforeTrade(this, player);
+        this.beforeTrade(this, player, game);
         if (this.trackPosition === 2) {
             extraCards = 2;
         } else if (this.trackPosition < 5) {

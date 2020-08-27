@@ -9,7 +9,7 @@ export class Luna extends Colony implements IColony {
     public name = ColonyName.LUNA;
     public description: string = "MegaCredits";
     public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player);
+        this.beforeTrade(this, player, game);
         const qty = this.trackPosition * 2 + Math.max(this.trackPosition - 2, 0) + Math.max(this.trackPosition - 5, 0);
         player.megaCredits += qty;
         LogHelper.logGainStandardResource(game, player, Resources.MEGACREDITS, qty);

@@ -9,7 +9,7 @@ export class Triton extends Colony implements IColony {
     public name = ColonyName.TRITON;
     public description: string = "Titanium";
     public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player);
+        this.beforeTrade(this, player, game);
         const qty = Math.max(this.trackPosition - 1, 1);
         player.titanium += qty;
         LogHelper.logGainStandardResource(game, player, Resources.TITANIUM, qty);

@@ -10,7 +10,7 @@ export class Titan extends Colony implements IColony {
     public isActive = false;
     public resourceType: ResourceType = ResourceType.FLOATER;
     public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player);
+        this.beforeTrade(this, player, game);
         let floaters: number = 0;
         if (this.trackPosition < 5) {
             floaters = Math.max(this.trackPosition - 1, 1);

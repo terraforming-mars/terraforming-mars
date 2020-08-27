@@ -10,7 +10,7 @@ export class Enceladus extends Colony implements IColony {
     public isActive = false;
     public resourceType = ResourceType.MICROBE;
     public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player);
+        this.beforeTrade(this, player, game);
         let microbes: number = 0;
         if (this.trackPosition > 4) {
             microbes = this.trackPosition - 1;

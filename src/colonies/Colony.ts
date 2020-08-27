@@ -8,6 +8,8 @@ import { Resources } from '../Resources';
 import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
+import { LogHelper } from "../components/LogHelper";
+import { MAX_COLONY_TRACK_POSITION } from "../constants";
 
 export interface IColony {
     name: ColonyName;
@@ -43,7 +45,7 @@ export abstract class Colony  {
         } else {
             this.trackPosition += value;
         }    
-        if (this.trackPosition > 6) this.trackPosition = 6;
+        if (this.trackPosition > MAX_COLONY_TRACK_POSITION) this.trackPosition = MAX_COLONY_TRACK_POSITION;
     }
 
     public decreaseTrack(value?: number): void {
@@ -59,8 +61,9 @@ export abstract class Colony  {
         return this.colonies.length >= 3;
     }
 
-    public beforeTrade(colony: IColony, player: Player): void {
+    public beforeTrade(colony: IColony, player: Player, game: Game): void {
         if (player.colonyTradeOffset > 0) {
+            LogHelper.logColonyTrackIncrease(game, player, colony);
             colony.increaseTrack(player.colonyTradeOffset);
         }
     }    

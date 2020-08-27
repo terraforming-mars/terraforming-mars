@@ -11,17 +11,21 @@ export class Europa extends Colony implements IColony {
     public name = ColonyName.EUROPA;
     public description: string = "Production";
     public trade(player: Player, game: Game): void {
-        game.addInterrupt({ player, playerInput: new OrOptions(
-            new SelectOption("Increase colony track", "Confirm", () => {
-                this.beforeTrade(this, player, game);
-                this.handleTrade(game, player);
-                return undefined;
-            }),
-            new SelectOption("Do nothing", "Confirm", () => {
-                this.handleTrade(game, player);
-                return undefined;
-            })
-        )});
+        if (player.colonyTradeOffset > 0) {
+            game.addInterrupt({ player, playerInput: new OrOptions(
+                new SelectOption("Increase colony track", "Confirm", () => {
+                    this.beforeTrade(this, player, game);
+                    this.handleTrade(game, player);
+                    return undefined;
+                }),
+                new SelectOption("Do nothing", "Confirm", () => {
+                    this.handleTrade(game, player);
+                    return undefined;
+                })
+            )});
+        } else {
+            this.handleTrade(game, player);
+        }
     }
 
     private handleTrade(game: Game, player: Player) {

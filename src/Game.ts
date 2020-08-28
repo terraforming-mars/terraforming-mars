@@ -80,6 +80,7 @@ export interface GameOptions {
   shuffleMapOption: boolean;
   promoCardsOption: boolean;
   undoOption: boolean;
+  fastModeOption: boolean;
   includeVenusMA: boolean;
   startingCorporations: number;
   soloTR: boolean;
@@ -138,7 +139,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public someoneHasRemovedOtherPlayersPlants: boolean = false;
     public randomMA: boolean = false;
     public seed: number = Math.random();
-    private gameOptions: GameOptions;
+    public gameOptions: GameOptions;
 
 
     constructor(
@@ -168,6 +169,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           shuffleMapOption: false,
           promoCardsOption: false,
           undoOption: false,
+          fastModeOption: false,
           startingCorporations: 2,
           includeVenusMA: true,
           soloTR: false,
@@ -462,6 +464,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
 
           // Update game options
+          game.gameOptions = gameToRebuild.gameOptions;
           game.draftVariant = gameToRebuild.draftVariant;
           game.soloMode = gameToRebuild.soloMode;
           game.corporateEra = gameToRebuild.corporateEra;

@@ -33,6 +33,7 @@ interface CreateGameModel {
     shuffleMapOption: boolean;
     promoCardsOption: boolean;
     undoOption: boolean;
+    fastModeOption: boolean;
     includeVenusMA: boolean;
     startingCorporations: number;
     soloTR: boolean;
@@ -91,6 +92,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             shuffleMapOption: false,
             promoCardsOption: false,
             undoOption: false,
+            fastModeOption: false,
             includeVenusMA: true,
             startingCorporations: 2,
             soloTR: false,
@@ -202,6 +204,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const seed = component.seed;
             const promoCardsOption = component.promoCardsOption;
             const undoOption = component.undoOption;
+            const fastModeOption = component.fastModeOption;
             const includeVenusMA = component.includeVenusMA;
             const startingCorporations = component.startingCorporations;
             const soloTR = component.soloTR;
@@ -250,6 +253,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 solarPhaseOption,
                 promoCardsOption,
                 undoOption,
+                fastModeOption,
                 includeVenusMA,
                 startingCorporations,
                 soloTR,
@@ -401,6 +405,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <input type="checkbox" v-model="undoOption">
                                 <i class="form-icon"></i> <span v-i18n>Allow undo</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#allow-undo" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+
+                            <label class="form-switch">
+                                <input type="checkbox" v-model="fastModeOption">
+                                <i class="form-icon"></i> <span v-i18n>Fast mode</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#fast-mode" class="tooltip" target="_blank">&#9432;</a>
+                            </label>                            
 
                             <label class="form-switch">
                                 <input type="checkbox" v-model="shuffleMapOption">

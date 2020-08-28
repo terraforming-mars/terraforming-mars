@@ -1,5 +1,5 @@
 export enum BoardName {
-    ORIGINAL = "original",
+    ORIGINAL = "tharsis",
     HELLAS = "hellas",
     ELYSIUM = "elysium"
 }

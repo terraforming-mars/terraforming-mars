@@ -464,6 +464,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
 
           // Update game options
+          game.gameOptions = gameToRebuild.gameOptions;
           game.draftVariant = gameToRebuild.draftVariant;
           game.soloMode = gameToRebuild.soloMode;
           game.corporateEra = gameToRebuild.corporateEra;

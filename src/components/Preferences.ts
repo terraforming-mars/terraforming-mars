@@ -3,7 +3,6 @@ import Vue from "vue";
 import { PreferencesManager } from "./PreferencesManager";
 import { LANGUAGES } from "../constants";
 
-
 export const Preferences = Vue.component("preferences", {
     data: function () {
         return {
@@ -78,6 +77,12 @@ export const Preferences = Vue.component("preferences", {
                 this.$data[k] = PreferencesManager.preferencesValues.get(k);
                 this.setPreferencesCSS(this.$data[k], k);
             }
+        },
+        getColor: function() {
+            return "red"
+        },
+        getName: function() {
+            return "Player Name"
         }
 
     },
@@ -86,22 +91,23 @@ export const Preferences = Vue.component("preferences", {
     },
     template: `
         <div class="preferences_cont" :data="syncPreferences()">
-            <div class="preferences_item">
-                <a href="#board">
-                    <i class="preferences_icon preferences_icon--board"></i>
+                <div class="preferences_item preferences_title">TERRAFORMING MARS</div>
+                <div class="preferences_item preferences_player"><div class="preferences_player_inner" :class="'player_bg_color_' + getColor()">{{ getName() }}</div></div>
+                <a  href="#board">
+                    <div class="preferences_item">
+                        <i class="preferences_icon preferences_icon--board"></i>
+                    </div>
                 </a>
-            </div>
-            <div class="preferences_item">
-                <a href="#actions">
-                    <i class="preferences_icon preferences_icon--actions"></i>
+                <a  href="#actions">
+                    <div class="preferences_item">
+                        <i class="preferences_icon preferences_icon--actions"></i>
+                    </div>
                 </a>
-            </div>
-            <div class="preferences_item">
                 <a href="#cards">
-                    <i class="preferences_icon preferences_icon--cards"><slot></slot></i>
+                    <div class="preferences_item">
+                        <i class="preferences_icon preferences_icon--cards"><slot></slot></i>
+                    </div>
                 </a>
-            </div>
-
             <div class="preferences_item preferences_item--settings">
                 <i class="preferences_icon preferences_icon--settings" v-on:click="ui.preferences_panel_open = !ui.preferences_panel_open"></i>
                 <div class="preferences_panel" v-if="ui.preferences_panel_open">

@@ -149,28 +149,28 @@ export const Board = Vue.component("board", {
         <div class="board" id="main_board">
             <board-space :space="curSpace" :is_selectable="true" :key="'board-space-'+curSpace.id" v-for="curSpace in getAllSpacesOnMars()"></board-space>
             <svg id="board_legend" height="550" width="630" class="board-legend">
-                <g v-if="boardName === 'original'" id="ascraeus_mons" transform="translate(95, 192)">
+                <g v-if="boardName === 'tharsis'" id="ascraeus_mons" transform="translate(95, 192)">
                     <text class="board-caption">
                         <tspan dy="15">Ascraeus</tspan>
                         <tspan x="12" dy="12">Mons</tspan>
                     </text>
                 </g>
                 
-                <g v-if="boardName === 'original'" id="pavonis_mons" transform="translate(90, 230)">
+                <g v-if="boardName === 'tharsis'" id="pavonis_mons" transform="translate(90, 230)">
                     <text class="board-caption">
                         <tspan dy="15">Pavonis</tspan>
                         <tspan x="4" dy="12">Mons</tspan>
                     </text>
                 </g>
                 
-                <g v-if="boardName === 'original'" id="arsia_mons" transform="translate(77, 275)">
+                <g v-if="boardName === 'tharsis'" id="arsia_mons" transform="translate(77, 275)">
                     <text class="board-caption">
                         <tspan dy="15">Arsia</tspan>
                         <tspan x="-2" dy="12">Mons</tspan>
                     </text>
                 </g>
 
-                <g v-if="boardName === 'original'" id="tharsis_tholus" transform="translate(85, 175)">
+                <g v-if="boardName === 'tharsis'" id="tharsis_tholus" transform="translate(85, 175)">
                     <text class="board-caption" dx="47">
                         <tspan dy="-7">Tharsis</tspan>
                         <tspan dy="12" x="48">Tholus</tspan>
@@ -179,7 +179,7 @@ export const Board = Vue.component("board", {
                     <text x="158" y="5" class="board-caption board_caption--black">&#x25cf;</text>
                 </g>
                 
-                <g v-if="boardName === 'original'" id="noctis_city" transform="translate(85, 320)">
+                <g v-if="boardName === 'tharsis'" id="noctis_city" transform="translate(85, 320)">
                     <text class="board-caption">
                         <tspan dy="15">Noctis</tspan>
                         <tspan x="7" dy="12">City</tspan>

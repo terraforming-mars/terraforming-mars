@@ -4,6 +4,7 @@ import { PreferencesManager } from "./PreferencesManager";
 import { LANGUAGES } from "../constants";
 
 export const Preferences = Vue.component("preferences", {
+    props: ["player_name", "player_color"],
     data: function () {
         return {
             "ui": {
@@ -77,14 +78,7 @@ export const Preferences = Vue.component("preferences", {
                 this.$data[k] = PreferencesManager.preferencesValues.get(k);
                 this.setPreferencesCSS(this.$data[k], k);
             }
-        },
-        getColor: function() {
-            return "red"
-        },
-        getName: function() {
-            return "Player Name"
         }
-
     },
     mounted: function () {
         this.updatePreferencesFromStorage();
@@ -92,7 +86,7 @@ export const Preferences = Vue.component("preferences", {
     template: `
         <div class="preferences_cont" :data="syncPreferences()">
                 <div class="preferences_item preferences_title">TERRAFORMING MARS</div>
-                <div class="preferences_item preferences_player"><div class="preferences_player_inner" :class="'player_bg_color_' + getColor()">{{ getName() }}</div></div>
+                <div class="preferences_item preferences_player"><div class="preferences_player_inner" :class="'player_bg_color_' + player_color">{{ player_name }}</div></div>
                 <a  href="#board">
                     <div class="preferences_item">
                         <i class="preferences_icon preferences_icon--board"></i>

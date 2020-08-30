@@ -85,8 +85,8 @@ export const Preferences = Vue.component("preferences", {
     },
     template: `
         <div class="preferences_cont" :data="syncPreferences()">
-                <div class="preferences_item preferences_title">TERRAFORMING MARS</div>
-                <div class="preferences_item preferences_player"><div class="preferences_player_inner" :class="'player_bg_color_' + player_color">{{ player_name }}</div></div>
+                <div class="preferences_tm"></div>
+                <div class="preferences_item preferences_player"><div class="preferences_player_inner" :class="'player_bg_color_' + player_color"></div></div>
                 <a  href="#board">
                     <div class="preferences_item">
                         <i class="preferences_icon preferences_icon--board"></i>

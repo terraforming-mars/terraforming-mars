@@ -1,10 +1,11 @@
 .preferences_cont {
     white-space: nowrap;
     position: sticky;
+    width: 46px;
     left: 0;
     top: 8px;
     z-index: 99;
-    margin: -760px 0 0 -78px;
+    margin: -400px 0 0 -78px;
 }
 .preferences_item {
     width: 46px;
@@ -17,20 +18,22 @@
     font-family: Prototype;
 }
 
-.preferences_title {
-    writing-mode: vertical-rl;
-    transform: rotate(180deg);
-    line-height: 46px;
-    font-size: 20px;
-    color: #daab63;
-    font-size: 20px;
-    letter-spacing: 2px;
+.preferences_tm {
+    background: url(/assets/TM.png);
+    width: 46px;
+    height: 46px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    border-radius: 50%;
+    background-size: 50px 50px;
+    background-position: -2px;
+    box-shadow: 0 1px 1px 0px black;
 }
 
 .preferences_player {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
-    height: 180px;
+    padding: 10px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -38,12 +41,9 @@
 
 .preferences_player_inner {
     width: 26px;
-    line-height: 26px;
+    height: 26px;
     border-radius: 3px;
-    font-size: 18px;
-    letter-spacing: 1px;
-    margin-right: 10px;
-    text-shadow: 0 0 2px black;
+
 }
 
 .preferences_icon {

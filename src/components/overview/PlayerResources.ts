@@ -1,6 +1,5 @@
-
 import Vue from "vue";
-import {PlayerResource} from "./PlayerResource";
+import { PlayerResource } from "./PlayerResource";
 
 export const PlayerResources = Vue.component("player-resources", {
     props: ["player"],
@@ -8,7 +7,7 @@ export const PlayerResources = Vue.component("player-resources", {
         return {};
     },
     components: {
-        "player-resource": PlayerResource
+        "player-resource": PlayerResource,
     },
     template: `
         <div class="resource_items_cont">
@@ -20,5 +19,5 @@ export const PlayerResources = Vue.component("player-resources", {
             <player-resource type="energy" prod_label="" :count="player.energy" :production="player.energyProduction"></player-resource>
             <player-resource type="heat" prod_label="" :count="player.heat" :production="player.heatProduction"></player-resource>
         </div>
-    `
+    `,
 });

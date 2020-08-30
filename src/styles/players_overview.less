@@ -1,0 +1,43 @@
+.players-overview {
+    border: 1px solid blue;
+    position: relative;
+    .player-info {
+        border: 1px solid grey;
+        .player-status {
+            .top-row {
+                .player-view-status {
+                    display: none;
+                }
+                .player-name {
+                    color: #ccc;
+                    text-shadow: 1px 1px 1px #222, -1px -1px 1px #666;
+                    padding: 1px 5px;
+                    border-radius: 4px;
+                    font-weight: bold;
+                }
+                .player-turn-indicator {
+                    background: white;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 6px;
+                }
+            }
+            .player-corp {
+                font-size: 16px;
+            }
+            .player-action-status {
+                background: #ccc;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                padding: 2px;
+            }
+        }
+    }
+    .players-overview-settings {
+        border: 1px solid green;
+        position: absolute;
+        height: 40px;
+        top: -40px;
+        right: 0;
+    }
+}

@@ -1,18 +1,18 @@
 import Vue from "vue";
 
-import { PlayerResources } from "./PlayerResources";
+import { PlayerResources } from "./overview/PlayerResources";
 
 import { StackedCards } from "./StackedCards";
 import { PlayerMixin } from "./PlayerMixin";
 import { TagCount } from "./TagCount";
-import {hidePlayerData} from "../components/PlayerHome";
+import { hidePlayerData } from "./PlayerHome";
 
 export const OtherPlayer = Vue.component("other-player", {
     props: ["player"],
     components: {
         "player-resources": PlayerResources,
         "stacked-cards": StackedCards,
-        "tag-count": TagCount
+        "tag-count": TagCount,
     },
     mixins: [PlayerMixin],
     methods: {
@@ -20,8 +20,10 @@ export const OtherPlayer = Vue.component("other-player", {
             hidePlayerData(this.$root, this.player);
         },
         isVisible: function () {
-            return (this.$root as any).getVisibilityState("other_player_" + this.player.id);
-        }
+            return (this.$root as any).getVisibilityState(
+                "other_player_" + this.player.id
+            );
+        },
     },
     template: `
         <div> 
@@ -78,5 +80,5 @@ export const OtherPlayer = Vue.component("other-player", {
 
             </div>
         </div>
-    `
+    `,
 });

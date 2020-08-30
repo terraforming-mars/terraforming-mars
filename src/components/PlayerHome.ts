@@ -5,9 +5,10 @@ import { Card } from "./Card";
 import { Milestone } from "./Milestone";
 import { Award } from "./Award";
 import { OtherPlayer } from "./OtherPlayer";
-import { PlayerResources } from "./PlayerResources";
+import { PlayersOverview } from "./overview/PlayersOverview";
+import { PlayerResources } from "./overview/PlayerResources";
 import { WaitingFor } from "./WaitingFor";
-import { Preferences } from "./Preferences"
+import { Preferences } from "./Preferences";
 import { PlayerModel } from "../models/PlayerModel";
 import { Colony } from "./Colony";
 import { LogPanel } from "./LogPanel";
@@ -19,15 +20,15 @@ import { TagOverview } from "./TagOverview";
 const dialogPolyfill = require("dialog-polyfill");
 const isPinned = (root: any, player: PlayerModel): boolean => {
     return (root as any).getVisibilityState("show_pin_" + player.id);
-}
+};
 const showPlayerData = (root: any, player: PlayerModel) => {
     (root as any).setVisibilityState("show_pin_" + player.id, true);
     (root as any).setVisibilityState("other_player_" + player.id, true);
-}
+};
 export const hidePlayerData = (root: any, player: PlayerModel) => {
     (root as any).setVisibilityState("show_pin_" + player.id, false);
     (root as any).setVisibilityState("other_player_" + player.id, false);
-}
+};
 
 export const PlayerHome = Vue.component("player-home", {
     props: ["player"],
@@ -36,6 +37,7 @@ export const PlayerHome = Vue.component("player-home", {
         "card": Card,
         "other-player": OtherPlayer,
         "player-resources": PlayerResources,
+        "players-overview": PlayersOverview,
         "waiting-for": WaitingFor,
         "milestone": Milestone,
         "award": Award,
@@ -44,14 +46,20 @@ export const PlayerHome = Vue.component("player-home", {
         "colony": Colony,
         "log-panel": LogPanel,
         "tag-count": TagCount,
-        "turmoil": Turmoil
-    }, 
+        "turmoil": Turmoil,
+    },
     mixins: [PlayerMixin],
-    methods: { 
-        getPlayerCssForTurnOrder: (player: PlayerModel, highlightActive: boolean): string => {
+    methods: {
+        getPlayerCssForTurnOrder: (
+            player: PlayerModel,
+            highlightActive: boolean
+        ): string => {
             var ret: string = "highlighter_box player_bg_color_" + player.color;
             if (highlightActive) {
-                if (player.needsToDraft || (player.needsToDraft === undefined && player.isActive)) {
+                if (
+                    player.needsToDraft ||
+                    (player.needsToDraft === undefined && player.isActive)
+                ) {
                     ret += " player_is_active";
                 }
             }
@@ -60,48 +68,53 @@ export const PlayerHome = Vue.component("player-home", {
         showPlayerDetails: function (player: PlayerModel) {
             if (player.id === this.player.id) return;
 
-            (this.$root as any).setVisibilityState("other_player_" + player.id, true);
+            (this.$root as any).setVisibilityState(
+                "other_player_" + player.id,
+                true
+            );
         },
-        pinPlayer: function(player: PlayerModel) {
-             
+        pinPlayer: function (player: PlayerModel) {
             let hiddenPlayers: Array<PlayerModel> = [];
             let playerPinned = isPinned(this.$root, player);
 
             // if player is already pinned, on unpin add to hidden players
-            if(playerPinned) {
+            if (playerPinned) {
                 hiddenPlayers = this.player.players;
             } else {
                 showPlayerData(this.$root, player);
 
-                for(i =0; i< this.player.players.length; i++) {
+                for (i = 0; i < this.player.players.length; i++) {
                     let p = this.player.players[i];
-                    if(p.id === this.player.id || player.id !== p.id) {
+                    if (p.id === this.player.id || player.id !== p.id) {
                         hiddenPlayers.push(p);
                     }
                 }
             }
-             
-            for(var i=0; i< hiddenPlayers.length; i++) {
+
+            for (var i = 0; i < hiddenPlayers.length; i++) {
                 hidePlayerData(this.$root, hiddenPlayers[i]);
             }
-            
         },
-        hasPinIcon: function(player: PlayerModel): boolean { 
+        hasPinIcon: function (player: PlayerModel): boolean {
             return player.id !== this.player.id;
         },
-        getPinIsActiveClass: function(player: PlayerModel): string {
-            return isPinned(this.$root, player) ? "player_pin_selected": "player_pin_not_selected";;
+        getPinIsActiveClass: function (player: PlayerModel): string {
+            return isPinned(this.$root, player)
+                ? "player_pin_selected"
+                : "player_pin_not_selected";
         },
-        getFleetsCountRange: function(player: PlayerModel): Array<number> {
+        getFleetsCountRange: function (player: PlayerModel): Array<number> {
             const fleetsRange: Array<number> = [];
-            for (let i=0; i < player.fleetSize - player.tradesThisTurn; i++) {
+            for (let i = 0; i < player.fleetSize - player.tradesThisTurn; i++) {
                 fleetsRange.push(i);
             }
-            return fleetsRange
-        }
+            return fleetsRange;
+        },
     },
     mounted: function () {
-        dialogPolyfill.default.registerDialog(document.getElementById("dialog-default"));
+        dialogPolyfill.default.registerDialog(
+            document.getElementById("dialog-default")
+        );
     },
     template: `
         <div id="player-home" :class="player.turmoil ? 'with-turmoil': ''">
@@ -153,7 +166,9 @@ export const PlayerHome = Vue.component("player-home", {
 
                     <tags :player="player" />
                 </div>
-
+                
+                <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace />
+                 
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
                     <h2 :class="'player_color_'+ player.color">
                         <span v-i18n>Turn order</span>
@@ -319,5 +334,5 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
             </div>
         </div>
-    `
+    `,
 });

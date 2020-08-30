@@ -23,5 +23,5 @@ export const PlayerResource = Vue.component("player-resource", {
                 <div class="resource_item_stock_count">{{ count }}</div>
             </div>
         </div>
-    `
+    `,
 });

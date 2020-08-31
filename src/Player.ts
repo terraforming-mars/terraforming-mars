@@ -130,7 +130,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }    
 
     public increaseTerraformRating(game: Game) {
-      if (!game.turmoilExtension) {
+      if (!game.gameOptions.turmoilExtension) {
         this.terraformRating++;
         this.hasIncreasedTerraformRatingThisGeneration = true;
         return;
@@ -374,7 +374,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       });
 
       // Turmoil Victory Points
-      if (game.phase === Phase.END && game.turmoilExtension && game.turmoil){
+      if (game.phase === Phase.END && game.gameOptions.turmoilExtension && game.turmoil){
         this.victoryPointsBreakdown.setVictoryPoints("victoryPoints", game.turmoil.getPlayerVictoryPoints(this), "Turmoil Points");
       }
 
@@ -939,7 +939,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           )
         );
       }
-      if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE && game.venusNextExtension) {
+      if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE && game.gameOptions.venusNextExtension) {
         action.options.push(
           new SelectOption("Increase Venus scale", "Increase", () => {
             game.increaseVenusScaleLevel(this,1, true);
@@ -1206,7 +1206,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
 
         //Activate some colonies
-        if (game.coloniesExtension && selectedCard.resourceType !== undefined) {
+        if (game.gameOptions.coloniesExtension && selectedCard.resourceType !== undefined) {
             game.colonies.filter(colony => colony.resourceType !== undefined && colony.resourceType === selectedCard.resourceType).forEach(colony => {
                 colony.isActive = true;
             });
@@ -1949,7 +1949,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       let airScrappingCost = constants.AIR_SCRAPPING_COST
       if (redsAreRuling) airScrappingCost += REDS_RULING_POLICY_COST;
 
-      if (game.venusNextExtension
+      if (game.gameOptions.venusNextExtension
         && this.canAfford(airScrappingCost)
         && game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
         standardProjects.options.push(
@@ -1957,7 +1957,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
       }
 
-      if ( game.coloniesExtension &&
+      if ( game.gameOptions.coloniesExtension &&
         this.canAfford(constants.BUILD_COLONY_COST)) {
         let openColonies = game.colonies.filter(colony => colony.colonies.length < 3 
           && colony.colonies.indexOf(this.id) === -1
@@ -1972,7 +1972,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       let bufferGasCost = constants.BUFFER_GAS_COST
       if (redsAreRuling) bufferGasCost += REDS_RULING_POLICY_COST;
 
-      if (game.soloTR && this.canAfford(bufferGasCost)) {
+      if (game.gameOptions.soloTR && this.canAfford(bufferGasCost)) {
         standardProjects.options.push(
             this.bufferGas(game)
         );
@@ -2078,7 +2078,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
       }
 
-      if (game.coloniesExtension) {
+      if (game.gameOptions.coloniesExtension) {
         let openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor === undefined);
         if (openColonies.length > 0 
           && this.fleetSize > this.tradesThisTurn
@@ -2145,7 +2145,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       // If you can pay to send some in the Ara
-      if (game.turmoilExtension) {
+      if (game.gameOptions.turmoilExtension) {
         if (game.turmoil?.lobby.has(this.id)) {
           const selectParty = new SelectParty(this, game, "Send a delegate in an area (from lobby)");
           action.options.push(selectParty.playerInput);
@@ -2202,7 +2202,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       // Propose undo action only if you have done one action this turn
-      if (this.actionsTakenThisRound > 0 && game.undoOption) {
+      if (this.actionsTakenThisRound > 0 && game.gameOptions.undoOption) {
         action.options.push(this.undoTurnOption(game));
       }
 

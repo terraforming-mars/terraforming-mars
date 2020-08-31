@@ -30,7 +30,10 @@ export const TagOverview = Vue.component("tags", {
             return "-";
         },
         getCityCount: function (player: PlayerModel) {
-            return player.citiesCount;
+            let cityCount : number = player.citiesCount;
+            
+            if (cityCount > 0) return cityCount;
+            return "-";
         },
         getCardCount: function (player: PlayerModel){
             if (player.cardsInHandNbr){

@@ -13,6 +13,7 @@ export interface PlayerModel {
     playedCards: Array<CardModel>;
     cardCost: number;
     cardsInHandNbr: number;
+    citiesCount: number;
     colonies: Array<ColonyModel>;
     color: Color;
     energy: number;

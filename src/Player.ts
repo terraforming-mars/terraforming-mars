@@ -398,6 +398,18 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public getCitiesCount(game: Game) {
       return game.getSpaceCount(TileType.CITY, this) + game.getSpaceCount(TileType.CAPITAL, this);
     }
+
+    public getNoTagsCount() {
+      let noTagsCount: number = 0;
+
+      if (this.corporationCard !== undefined && this.corporationCard.tags.filter(tag => tag !== Tags.WILDCARD).length === 0) {
+          noTagsCount++;
+      }
+
+      noTagsCount += this.playedCards.filter((card) => card.cardType !== CardType.EVENT && card.tags.filter(tag => tag !== Tags.WILDCARD).length === 0).length
+
+      return noTagsCount;
+    }
         
     public getResourcesOnCard(card: ICard): number | undefined {
       if (card.resourceCount !== undefined) {

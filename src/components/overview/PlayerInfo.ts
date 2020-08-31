@@ -2,6 +2,7 @@ import Vue from "vue";
 import { PlayerResources } from "./PlayerResources";
 import { PlayerTags } from "./PlayerTags";
 import { PlayerStatus } from "./PlayerStatus";
+import { playerBgColorClass } from "../../utils/utils";
 
 export const PlayerInfo = Vue.component("player-info", {
     props: ["player"],
@@ -10,12 +11,18 @@ export const PlayerInfo = Vue.component("player-info", {
         "player-tags": PlayerTags,
         "player-status": PlayerStatus,
     },
-    methods: {},
+    methods: {
+        getClasses: function (): string {
+            let classes = ["player-info"];
+            classes.push(playerBgColorClass(this.player.color));
+            return classes.join(" ");
+        },
+    },
     mounted: function () {
-        console.log(this.player);
+        console.log(this.player, "1");
     },
     template: `
-        <div class="player-info">
+        <div :class="getClasses()">
             <player-status :player="player" v-trim-whitespace />
             <player-resources :player="player" v-trim-whitespace />
             <player-tags :player="player" v-trim-whitespace />

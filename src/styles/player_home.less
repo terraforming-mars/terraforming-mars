@@ -1,3 +1,10 @@
+@player_red: #910;
+@player_yellow: #aa0;
+@player_green: #090;
+@player_black: #aaa;
+@player_blue: #06f;
+@player_purple: #8c00ff;
+
 #player-home {
     padding-left: 20px;
     border-left: 1px solid #adacac;
@@ -5,53 +12,77 @@
 }
 
 .player_color_red {
-    text-shadow: -1px -1px 6px #910,1px 1px 1px #333a;
+    text-shadow: -1px -1px 6px @player_red, 1px 1px 1px #333a;
 }
 .player_color_yellow {
-    text-shadow: -1px -1px 6px #aa0,1px 1px 1px #333a;
+    text-shadow: -1px -1px 6px @player_yellow, 1px 1px 1px #333a;
 }
 .player_color_green {
-   text-shadow: -1px -1px 6px #090,1px 1px 1px #333a;
+    text-shadow: -1px -1px 6px @player_green, 1px 1px 1px #333a;
 }
 
 .player_color_black {
-   text-shadow: -1px -1px 6px #aaa,1px 1px 1px #333a;
+    text-shadow: -1px -1px 6px @player_black, 1px 1px 1px #333a;
 }
 .player_color_blue {
-   text-shadow: -1px -1px 6px #06f,1px 1px 1px #333a;
+    text-shadow: -1px -1px 6px @player_blue, 1px 1px 1px #333a;
 }
 .player_color_purple {
-    text-shadow: -1px -1px 6px #8c00ff,1px 1px 1px #333a;
- }
+    text-shadow: -1px -1px 6px @player_purple, 1px 1px 1px #333a;
+}
 
 .player_bg_color_red {
-    background-color: #910;
+    background-color: @player_red;
     max-width: 505px;
 }
 
 .player_bg_color_yellow {
-    background-color: #aa0;
+    background-color: @player_yellow;
     max-width: 505px;
 }
 
 .player_bg_color_green {
-    background-color: #090;
+    background-color: @player_green;
     max-width: 505px;
 }
 
 .player_bg_color_black {
-    background-color: #111;
+    background-color: @player_black;
     max-width: 505px;
 }
 
 .player_bg_color_blue {
-    background-color: #06f;
+    background-color: @player_blue;
     max-width: 505px;
 }
 
 .player_bg_color_purple {
-    background-color: #8c00ff;
+    background-color: @player_purple;
     max-width: 505px;
+}
+
+.player_overview_bg_color_red {
+    background-color: @player_red;
+}
+
+.player_overview_bg_color_yellow {
+    background-color: @player_yellow;
+}
+
+.player_overview_bg_color_green {
+    background-color: @player_green;
+}
+
+.player_overview_bg_color_black {
+    background-color: @player_black;
+}
+
+.player_overview_bg_color_blue {
+    background-color: @player_blue;
+}
+
+.player_overview_bg_color_purple {
+    background-color: @player_purple;
 }
 
 .game-title {
@@ -64,10 +95,9 @@
 
 .tag-overview-cont {
     .accordion-body {
-        overflow-x: auto;    
+        overflow-x: auto;
     }
 }
-
 
 .tags-grid {
     display: grid;
@@ -94,28 +124,28 @@
         text-align: center;
     }
 
-    .grid-item.player_tag_bg_color_black{
-        background-color: rgba(17, 17, 17, 0.20);
+    .grid-item.player_tag_bg_color_black {
+        background-color: rgba(17, 17, 17, 0.2);
     }
 
-    .grid-item.player_tag_bg_color_blue{
-        background-color: rgba(0, 102, 255, 0.20);
+    .grid-item.player_tag_bg_color_blue {
+        background-color: rgba(0, 102, 255, 0.2);
     }
 
-    .grid-item.player_tag_bg_color_green{
-        background-color: rgba(0, 153, 0, 0.20)
+    .grid-item.player_tag_bg_color_green {
+        background-color: rgba(0, 153, 0, 0.2);
     }
 
-    .grid-item.player_tag_bg_color_purple{
-        background-color: rgba(140, 0, 255, 0.20);
+    .grid-item.player_tag_bg_color_purple {
+        background-color: rgba(140, 0, 255, 0.2);
     }
 
-    .grid-item.player_tag_bg_color_red{
-        background-color: rgba(153, 17, 0, 0.20);
+    .grid-item.player_tag_bg_color_red {
+        background-color: rgba(153, 17, 0, 0.2);
     }
 
-    .grid-item.player_tag_bg_color_yellow{
-        background-color: rgba(170, 170, 0, 0.2)
+    .grid-item.player_tag_bg_color_yellow {
+        background-color: rgba(170, 170, 0, 0.2);
     }
 
     .card-count {
@@ -127,7 +157,7 @@
         background-size: 22px;
     }
 
-    .vp-count{
+    .vp-count {
         background-image: url(assets/mars.png);
         background-size: 65px;
         background-position: center;
@@ -148,7 +178,7 @@
 }
 
 .tag-count {
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
     position: relative;
     width: 40px;
     height: 40px;
@@ -156,10 +186,10 @@
     background-position: -1px -1px;
     text-align: center;
     border-radius: 50%;
-    border-top: 2px solid rgb(221,221,221);
-    border-left: 2px solid rgb(221,221,221);
-    border-bottom: 2px solid rgb(137,137,137);
-    border-right: 2px solid rgb(137,137,137);
+    border-top: 2px solid rgb(221, 221, 221);
+    border-left: 2px solid rgb(221, 221, 221);
+    border-bottom: 2px solid rgb(137, 137, 137);
+    border-right: 2px solid rgb(137, 137, 137);
     background-color: white;
     margin-top: -6px;
     margin-left: 3px;
@@ -173,11 +203,11 @@
 }
 
 .tag-display-tags {
-  float: left;
+    float: left;
 }
 
 .tag-display-vp {
-  margin-left: 20px;
+    margin-left: 20px;
 }
 
 .tag-count-display {
@@ -221,16 +251,16 @@
     position: sticky;
     top: -13px;
     z-index: 20;
- }
+}
 
- .player_home_anchor {
+.player_home_anchor {
     position: relative;
     top: -100px;
     visibility: hidden;
 }
 
 .highlighter_box {
-    text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
+    text-shadow: 1px 1px 1px #222, -1px -1px 1px #666;
     padding: 1px 10px;
     border-radius: 4px;
 }
@@ -240,15 +270,15 @@
     font-size: smaller;
     text-shadow: none;
     font-family: Ubuntu, Sans;
-    }
+}
 
 .player_home_block {
     margin-bottom: 20px;
 
-    .accordion-header{
+    .accordion-header {
         display: inline-block;
     }
-    
+
     .player_item {
         display: inline-block;
         vertical-align: middle;
@@ -258,7 +288,7 @@
 
     .player_name {
         color: #ccc;
-        text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
+        text-shadow: 1px 1px 1px #222, -1px -1px 1px #666;
         padding: 1px 5px;
         border-radius: 4px;
         font-weight: bold;
@@ -281,11 +311,10 @@
         text-overflow: ellipsis;
         display: inline-block;
         vertical-align: middle;
-         
 
         .player_number {
             margin-right: 5px;
-            text-shadow:1px 1px 1px #222, -1px -1px 1px #666;
+            text-shadow: 1px 1px 1px #222, -1px -1px 1px #666;
         }
 
         .corporation-name-cont {
@@ -298,12 +327,12 @@
             }
         }
     }
-    .pin_icon { 
+    .pin_icon {
         width: 40px;
         height: 40px;
     }
     .player_pin {
-        cursor: pointer; 
+        cursor: pointer;
         vertical-align: middle;
         display: inline-block;
         width: 40px;
@@ -316,8 +345,8 @@
         background: url("assets/pinned.png");
     }
     .other_player {
-        display:flex;
-        flex-wrap:wrap;
+        display: flex;
+        flex-wrap: wrap;
     }
 
     .player_separator {
@@ -325,7 +354,7 @@
         vertical-align: top;
         font-size: 20px;
         margin: 5px 0 0 10px;
-        color:#7e7c7c;
+        color: #7e7c7c;
     }
 
     .player_is_active {
@@ -333,11 +362,14 @@
         scale: 1.2;
         border: 2px solid #fff;
     }
-
 }
-.awards-padding {padding: 3px 42px 3px 42px !important;}
+.awards-padding {
+    padding: 3px 42px 3px 42px !important;
+}
 
-.milestones, .awards, .tag-overview {
+.milestones,
+.awards,
+.tag-overview {
     .ma-clickable {
         font-family: Ubuntu, Sans;
         letter-spacing: 1px;
@@ -469,7 +501,6 @@
             background-position: 0px -1552px;
         }
 
-
         .ma-name--landlord {
             background-position: 0px -52px;
         }
@@ -551,7 +582,8 @@
     }
 
     .pwned-item {
-        .ma-name, .ma-description {
+        .ma-name,
+        .ma-description {
             filter: grayscale(100%);
             opacity: 0.5;
         }
@@ -572,7 +604,8 @@
     margin-bottom: 5px;
 }
 
-.funded-award-inline, .claimed-milestone-inline {
+.funded-award-inline,
+.claimed-milestone-inline {
     white-space: nowrap;
     color: #000;
     text-transform: uppercase;
@@ -621,9 +654,7 @@
         vertical-align: top;
         margin: 0 25px 25px;
     }
-
 }
-
 
 .colonies-fleets-cont {
     position: absolute;
@@ -665,8 +696,6 @@
     &.colonies-fleet-purple {
         background-position: -342px 0;
     }
-
-
 }
 
 .deck-size {

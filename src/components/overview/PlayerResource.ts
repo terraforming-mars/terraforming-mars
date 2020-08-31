@@ -15,12 +15,12 @@ export const PlayerResource = Vue.component("player-resource", {
     },
     template: `
         <div class="resource_item" :class="mainCSS()">
-            <div class="resource_item_prod">
-                {{ prod_label }}<span class="resource_item_prod_count">{{ production }}</span>
-            </div>
             <div class="resource_item_stock">
                 <i class="resource_icon" :class="iconCSS()"></i>
                 <div class="resource_item_stock_count">{{ count }}</div>
+            </div>
+            <div class="resource_item_prod">
+                {{ prod_label }}<span class="resource_item_prod_count">{{ production }}</span>
             </div>
         </div>
     `,

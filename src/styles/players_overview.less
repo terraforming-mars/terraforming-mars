@@ -1,39 +1,72 @@
 .players-overview {
-    border: 1px solid blue;
     position: relative;
+    display: table-caption;
+    .player-divider {
+        height: 1px;
+        width: 100%;
+        border: 1px dashed #444;
+    }
+
     .player-info {
-        border: 1px solid grey;
+        display: inline-flex;
+        flex-flow: row;
+        padding: 8px;
+        margin-top: 12px;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        .player-tags {
+            display: flex;
+            flex-flow: row;
+            margin-left: 16px;
+        }
         .player-status {
+            width: 130px;
             .top-row {
+                display: flex;
+                flex-flow: row;
+                position: relative;
                 .player-view-status {
                     display: none;
                 }
                 .player-name {
                     color: #ccc;
                     text-shadow: 1px 1px 1px #222, -1px -1px 1px #666;
-                    padding: 1px 5px;
                     border-radius: 4px;
-                    font-weight: bold;
+                    font-size: 20px;
+                    width: 90px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
                 .player-turn-indicator {
                     background: white;
                     width: 30px;
                     height: 30px;
-                    border-radius: 6px;
+                    border-radius: 50%;
+                    position: absolute;
+                    right: -2px;
                 }
             }
             .player-corp {
                 font-size: 16px;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             .player-action-status {
                 background: #ccc;
                 border: 1px solid #ccc;
+                color: black;
                 border-radius: 4px;
-                padding: 2px;
+                font-size: 16px;
+                display: inline-block;
+                width: 100%;
+                text-align: center;
+                font-family: Prototype;
             }
         }
     }
     .players-overview-settings {
+        display: none;
         border: 1px solid green;
         position: absolute;
         height: 40px;

@@ -197,9 +197,19 @@
     z-index: 2;
 }
 
+.tag-size-big {
+    margin-top: 0px;
+    margin-left: 0px;
+    width: 50px;
+    height: 50px;
+    background-size: 50px 50px;
+    background-position: 0px 2px;
+}
+
 .tag-display {
-    display: inline-flex;
-    position: relative;
+    display: flex;
+    flex-flow: column;
+    margin-right: 8px;
 }
 
 .tag-display-tags {
@@ -211,24 +221,10 @@
 }
 
 .tag-count-display {
-    color: #000;
-    position: absolute;
-    left: 7px;
-    top: 25px;
-    height: 35px;
-    line-height: 44px;
+    color: #fff;
     text-align: center;
-    font-size: 18px;
-    width: 36px;
-    border-radius: 0 0 5px 5px;
-    border-top: 2px solid #bb8760;
-    border-left: 2px solid #bb8760;
-    border-bottom: 2px solid #744631;
-    border-right: 2px solid #744631;
-    background-image: url(assets/mars.png);
-    background-size: 60px 60px;
-    background-position: -13px -5px;
-    box-shadow: 0 1px 2px black;
+    font-size: 28px;
+    line-height: 34px;
 }
 
 .icon-vp {
@@ -288,7 +284,7 @@
 
     .player_name {
         color: #ccc;
-        text-shadow: 1px 1px 1px #222, -1px -1px 1px #666;
+        text-shadow: 1px 1px 1px #222, -1px -1px 2px #666;
         padding: 1px 5px;
         border-radius: 4px;
         font-weight: bold;

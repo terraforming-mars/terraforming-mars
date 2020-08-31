@@ -19,13 +19,13 @@ export const PlayerInfo = Vue.component("player-info", {
         },
     },
     mounted: function () {
-        console.log(this.player, "1");
+        // console.log(this.player, "1");
     },
-    template: `
+    template: ` 
         <div :class="getClasses()">
             <player-status :player="player" v-trim-whitespace />
             <player-resources :player="player" v-trim-whitespace />
-            <player-tags :player="player" v-trim-whitespace />
+            <player-tags v-if="player.tags.length > 0" :player="player" v-trim-whitespace />
         </div>
     `,
 });

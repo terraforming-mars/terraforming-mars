@@ -7,10 +7,8 @@ export const PlayerTags = Vue.component("player-tags", {
         "tag-count": TagCount,
     },
     template: `
-        <div class="player-tags">
-            <div v-for="tag in player.tags">
-                <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count" :size="'big'"/>
-            </div>
+        <div class="player-tags"> 
+            <tag-count v-for="tag in player.tags" :tag="tag.tag" :count="tag.count" :size="'big'"/>
         </div>
     `,
 });

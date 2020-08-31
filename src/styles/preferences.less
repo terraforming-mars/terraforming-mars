@@ -1,30 +1,47 @@
 .preferences_cont {
-    background: linear-gradient(to bottom right, #cccccc,#919191, #c9c9c9,#aaaaaa,#cacaca, #919191,#cccccc);
-    box-shadow: 0 3px 5px 3px rgba(0,0,0,.5);
-    border-top: 2px solid rgb(221,221,221);
-    border-left: 2px solid rgb(221,221,221);
-    border-bottom: 2px solid rgb(137,137,137);
-    /*border-right: 2px solid rgb(137,137,137);*/
-    border-radius: 10px 0 0 10px;
-    padding: 15px 15px 15px 5px;
     white-space: nowrap;
     position: sticky;
-    top: 35%;
-    left: 0;
-    z-index: 99;
     width: 46px;
-    margin: -258px 0 0 -68px;
+    left: 0;
+    top: 8px;
+    z-index: 99;
+    margin: -400px 0 0 -78px;
 }
 .preferences_item {
-    width: 36px;
-    border-bottom: 1px solid #868686;
-    padding-bottom: 5px;
+    width: 46px;
+    padding: 15px 0 15px 5px;
     margin-bottom: 5px;
+    margin-left: 5px;
+    background: black;
+    border-radius: 5px;
 }
 
-.preferences_item.preferences_item--settings {
-    border-bottom: none;
-    margin: 0;
+.preferences_tm {
+    background: url(/assets/TM.png);
+    width: 46px;
+    height: 46px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    border-radius: 50%;
+    background-size: 50px 50px;
+    background-position: -2px;
+    box-shadow: 0 1px 1px 0px black;
+}
+
+.preferences_player {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    padding: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.preferences_player_inner {
+    width: 26px;
+    height: 26px;
+    border-radius: 3px;
+
 }
 
 .preferences_icon {

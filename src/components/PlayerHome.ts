@@ -112,8 +112,6 @@ export const PlayerHome = Vue.component("player-home", {
         },
     },
     mounted: function () {
-        console.log(this.player, "PLAYER IN PLAYER HOME");
-
         dialogPolyfill.default.registerDialog(
             document.getElementById("dialog-default")
         );
@@ -166,12 +164,12 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                     
 
-                    <tags :player="player" />
+                    <tags style="display:none" :player="player" />
                 </div>
                 
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace />
                  
-                <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
+                <div style="display:none" class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
                     <h2 :class="'player_color_'+ player.color">
                         <span v-i18n>Turn order</span>
                         <span class="help_tip" v-i18n>(click on player name to see details)</span>
@@ -196,12 +194,12 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
 
-                <div class="tag-display tags_item_cont tag-display-tags" v-if="player.tags.length > 0">
+                <div style="display:none" class="tag-display tags_item_cont tag-display-tags" v-if="player.tags.length > 0">
                     <div v-for="tag in player.tags">
                         <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>
                     </div>
                 </div>
-                <div class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
+                <div style="display:none" class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
                     <div>
                         <div class="tag-display">
                             <div class="tag-count icon-vp">{{player.victoryPointsBreakdown.total}}</div>
@@ -209,7 +207,7 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
 
-                <div class="player_home_block player_home_block--resources nofloat">
+                <div style="display:none" class="player_home_block player_home_block--resources nofloat">
                     <player-resources :player="player" v-trim-whitespace></player-resources>
                 </div>
 

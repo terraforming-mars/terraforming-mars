@@ -47,14 +47,19 @@
                     display: none;
                 }
                 .player-name {
+                    cursor: pointer;
                     color: #ccc;
                     text-shadow: 1px 1px 1px #222, -1px -1px 1px #666;
                     border-radius: 4px;
                     font-size: 20px;
-                    width: 90px;
+                    max-width: 90px;
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
+                .player-name--inactive {
+                    cursor: default !important;
+                }
+
                 .icon-first-player-offset {
                     position: absolute;
                     right: -2px;

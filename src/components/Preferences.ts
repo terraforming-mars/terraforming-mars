@@ -103,7 +103,7 @@ export const Preferences = Vue.component("preferences", {
                     </div>
                 </a>
             <div class="preferences_item preferences_item--settings">
-                <i class="preferences_icon preferences_icon--settings" v-on:click="ui.preferences_panel_open = !ui.preferences_panel_open"></i>
+                <i class="preferences_icon preferences_icon--settings" :class="{'preferences_item--is-active': ui.preferences_panel_open}" v-on:click="ui.preferences_panel_open = !ui.preferences_panel_open"></i>
                 <div class="preferences_panel" v-if="ui.preferences_panel_open">
                     <div class="preferences_panel_item">
                         <label class="form-switch">

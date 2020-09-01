@@ -72,19 +72,24 @@
 }
 
 .preferences_panel {
-    background: linear-gradient(to bottom right, #cccccc,#919191, #c9c9c9,#aaaaaa,#cacaca, #919191,#cccccc);
-    box-shadow: 0 3px 5px 3px rgba(0,0,0,.5);
-    border-top: 2px solid rgb(221,221,221);
-    border-left: 2px solid rgb(221,221,221);
-    border-bottom: 2px solid rgb(137,137,137);
-    border-right: 2px solid rgb(137,137,137);
-    border-radius: 10px 10px 10px 10px;
     padding: 15px 15px 15px 20px;
     display: inline-block;
     position: absolute;
-    margin: -175px 0 0 13px;
-    white-space: nowrap;
-    color: #020202;
+    margin: -305px 0 0 12px;
+    color: #c6c6c6;
+    background: #000000;
+    max-height: calc(85vh);
+    overflow-y: scroll;
+}
+
+.preferences_item--is-active::after {
+    content: " ";
+    width: 10px;
+    height: 45px;
+    position: absolute;
+    background: #000;
+    margin: 0 0 0 40px;
+
 }
 
 /* Visual effects of changing settings */

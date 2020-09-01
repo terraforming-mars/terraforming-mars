@@ -467,7 +467,7 @@ function getCorporationCard(player: Player): CardModel | undefined {
   }) as CardModel
 }
 
-function getPlayer(player: Player, game: Game): string {
+function getPlayer(player: Player, game: Game): string { 
   const output = {
     cardsInHand: getCards(player, player.cardsInHand, game, false),
     draftedCards: getCards(player, player.draftedCards, game, false),
@@ -524,9 +524,11 @@ function getPlayer(player: Player, game: Game): string {
     dealtPreludeCards: player.dealtPreludeCards,
     dealtProjectCards:  player.dealtProjectCards,
     initialDraft: game.initialDraft,
-    needsToDraft: player.needsToDraft,
+    needsToDraft: player.needsToDraft,  
     deckSize: game.dealer.getDeckSize(),
-    randomMA: game.randomMA
+    randomMA: game.randomMA,
+    actionsTakenThisRound: player.actionsTakenThisRound,
+    passedPlayers: Array.from(game.passedPlayers), // JSON stringify does not honor sets
   } as PlayerModel;
   return JSON.stringify(output);
 }
@@ -635,7 +637,7 @@ function getCards(
 }
 
 function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
-  return players.map((player) => {
+  return players.map((player) => { 
     return {
       color: player.color,
       corporationCard: getCorporationCard(player),
@@ -672,7 +674,8 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       turmoil: getTurmoil(game),
       selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(game),
       needsToDraft: player.needsToDraft,
-      deckSize: game.dealer.getDeckSize()
+      deckSize: game.dealer.getDeckSize(), 
+      actionsTakenThisRound: player.actionsTakenThisRound,
     } as PlayerModel;
   });
 }

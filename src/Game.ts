@@ -103,7 +103,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private donePlayers: Set<Player> = new Set<Player>();
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
     private venusScaleLevel: number = constants.MIN_VENUS_SCALE;
-    private passedPlayers: Set<PlayerId> = new Set<PlayerId>();
+    public passedPlayers: Set<PlayerId> = new Set<PlayerId>();
     private researchedPlayers: Set<PlayerId> = new Set<PlayerId>();
     private draftedPlayers: Set<PlayerId> = new Set<PlayerId>();
     public board: Board;
@@ -953,7 +953,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.resolveTurmoilInterrupts();
         return;
       }
-
+      
       this.goToDraftOrResearch();
     }
 

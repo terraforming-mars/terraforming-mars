@@ -2,6 +2,21 @@ import Vue from "vue";
 import { PlayerInfo } from "./PlayerInfo";
 import { OverviewSettings } from "./OverviewSettings";
 import { Player } from "../../Player";
+import { PlayerModel } from "../../models/PlayerModel";
+import { ActionLabel } from "./ActionLabel";
+
+export const getCurrentPlayerIndex = (
+    player: Player | PlayerModel,
+    players: Array<Player>
+): number => {
+    let currentPlayerIndex: number = 0;
+    players.forEach((p: Player, index: number) => {
+        if (p.id === player.id) {
+            currentPlayerIndex = index;
+        }
+    });
+    return currentPlayerIndex;
+};
 
 export const PlayersOverview = Vue.component("players-overview", {
     props: ["player"],
@@ -22,27 +37,16 @@ export const PlayersOverview = Vue.component("players-overview", {
             )[0];
         },
         getIsFirstForGen: function (player: Player): boolean {
-            let currentPlayerIndex: number = 0;
-            this.player.players.forEach((p: Player, index: number) => {
-                if (p.id === player.id) {
-                    currentPlayerIndex = index;
-                }
-            });
-
-            return currentPlayerIndex === 0;
+            return getCurrentPlayerIndex(player, this.player.players) === 0;
         },
         getPlayersInOrder: function (): Array<Player> {
             const players = this.player.players;
-            const currentPlayerId: string = this.player.id;
             let result: Array<Player> = [];
-            let currentPlayerIndex: number = 0;
             let currentPlayerOffset: number = 0;
-
-            players.forEach((p: Player, index: number) => {
-                if (p.id === currentPlayerId) {
-                    currentPlayerIndex = index;
-                }
-            });
+            let currentPlayerIndex: number = getCurrentPlayerIndex(
+                this.player,
+                this.player.players
+            );
 
             // shift the array by putting the player on focus at the tail
             currentPlayerOffset = currentPlayerIndex + 1;
@@ -52,6 +56,35 @@ export const PlayersOverview = Vue.component("players-overview", {
             // return all but the focused user
             return result.slice(0, -1);
         },
+        getActionLabel(player: PlayerModel): string {
+            if (this.player.passedPlayers.includes(player.id))
+                return ActionLabel.PASSED;
+            if (player.isActive) return ActionLabel.ACTIVE;
+            const notPassedPlayers = this.player.players.filter(
+                (p: Player) => !this.player.passedPlayers.includes(p.id)
+            );
+
+            let currentPlayerIndex: number = getCurrentPlayerIndex(
+                player,
+                notPassedPlayers
+            );
+            const prevPlayerIndex =
+                currentPlayerIndex === 0
+                    ? notPassedPlayers.length - 1
+                    : currentPlayerIndex - 1;
+            const isNext = notPassedPlayers[prevPlayerIndex].isActive;
+
+            if (player.actionsTakenThisRound === 1)
+                return isNext ? `${ActionLabel.NEXT} (1)` : ActionLabel.ONE;
+            if (player.actionsTakenThisRound === 2)
+                return isNext ? `${ActionLabel.NEXT} (2)` : ActionLabel.TWO;
+
+            if (isNext) {
+                return ActionLabel.NEXT;
+            }
+
+            return ActionLabel.NONE;
+        },
     },
     mounted: function () {
         console.log(this.player);
@@ -59,9 +92,9 @@ export const PlayersOverview = Vue.component("players-overview", {
     template: `
         <div class="players-overview" v-if="hasPlayers()">
             <overview-settings /> 
-            <player-info v-for="player in getPlayersInOrder()" :player="player" :key="player.id" :firstForGen="getIsFirstForGen(player)"/>
+            <player-info v-for="player in getPlayersInOrder()" :player="player" :key="player.id" :firstForGen="getIsFirstForGen(player)" :actionLabel="getActionLabel(player)"/>
             <div class="player-divider" />
-            <player-info :player="getPlayerOnFocus()" :key="player.players.length - 1" :firstForGen="getIsFirstForGen(player)"/>
+            <player-info :player="getPlayerOnFocus()" :key="player.players.length - 1" :firstForGen="getIsFirstForGen(player)" :actionLabel="getActionLabel(player)"/>
         </div>
     `,
 });

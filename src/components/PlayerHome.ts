@@ -112,6 +112,8 @@ export const PlayerHome = Vue.component("player-home", {
         },
     },
     mounted: function () {
+        console.log(this.player, "PLAYER IN PLAYER HOME");
+
         dialogPolyfill.default.registerDialog(
             document.getElementById("dialog-default")
         );

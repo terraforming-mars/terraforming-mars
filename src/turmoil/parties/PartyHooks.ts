@@ -22,7 +22,7 @@ export class PartyHooks {
     }
 
     static shouldApplyPolicy(game: Game, partyName: PartyName) {
-        if (!game.gameOptions.turmoilExtension) return false;
+        if (!game.turmoilExtension) return false;
 
         const turmoil = game.turmoil!;
         if (!turmoil) return false;

@@ -39,7 +39,7 @@ describe("MarketManipulation", function () {
         let miranda = new Miranda();
         
         game.colonies.push(enceladus, miranda, luna);
-        game.gameOptions.coloniesExtension = true;
+        game.coloniesExtension = true;
         expect(card.canPlay(player, game)).to.eq(false);
 
         player.playCard(game, new Pets());

@@ -116,9 +116,9 @@ export class GlobalEventDealer {
 
     public initGlobalEvents(game: Game) {
         var events;
-        if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
+        if (game.venusNextExtension && game.coloniesExtension) {
             events = [...COLONY_ONLY_GLOBAL_EVENTS, ...VENUS_COLONY_GLOBAL_EVENTS, ...ALL_GLOBAL_EVENTS];
-        } else if (!game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
+        } else if (!game.venusNextExtension && game.coloniesExtension) {
             events = [...COLONY_ONLY_GLOBAL_EVENTS, ...ALL_GLOBAL_EVENTS];
         } else {
             events = [...ALL_GLOBAL_EVENTS];

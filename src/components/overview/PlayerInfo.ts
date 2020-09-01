@@ -5,7 +5,7 @@ import { PlayerStatus } from "./PlayerStatus";
 import { playerBgColorClass } from "../../utils/utils";
 
 export const PlayerInfo = Vue.component("player-info", {
-    props: ["player"],
+    props: ["player", "firstForGen"],
     components: {
         "player-resources": PlayerResources,
         "player-tags": PlayerTags,
@@ -23,7 +23,7 @@ export const PlayerInfo = Vue.component("player-info", {
     },
     template: ` 
         <div :class="getClasses()">
-            <player-status :player="player" v-trim-whitespace />
+            <player-status :player="player" :firstForGen="firstForGen" v-trim-whitespace />
             <player-resources :player="player" v-trim-whitespace />
             <player-tags v-if="player.tags.length > 0" :player="player" v-trim-whitespace />
         </div>

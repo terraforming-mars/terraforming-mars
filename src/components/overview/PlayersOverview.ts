@@ -13,15 +13,24 @@ export const PlayersOverview = Vue.component("players-overview", {
         return {};
     },
     methods: {
+        hasPlayers: function (): boolean {
+            return this.player.players.length > 0;
+        },
         getPlayerOnFocus: function (): Player {
             return this.player.players.filter(
                 (p: Player) => p.id === this.player.id
             )[0];
         },
-        hasPlayers: function (): boolean {
-            return this.player.players.length > 0;
+        getIsFirstForGen: function (player: Player): boolean {
+            let currentPlayerIndex: number = 0;
+            this.player.players.forEach((p: Player, index: number) => {
+                if (p.id === player.id) {
+                    currentPlayerIndex = index;
+                }
+            });
+
+            return currentPlayerIndex === 0;
         },
-        // put player on focus at the bottom
         getPlayersInOrder: function (): Array<Player> {
             const players = this.player.players;
             const currentPlayerId: string = this.player.id;
@@ -37,7 +46,6 @@ export const PlayersOverview = Vue.component("players-overview", {
 
             // shift the array by putting the player on focus at the tail
             currentPlayerOffset = currentPlayerIndex + 1;
-
             result = players
                 .slice(currentPlayerOffset)
                 .concat(players.slice(0, currentPlayerOffset));
@@ -51,9 +59,9 @@ export const PlayersOverview = Vue.component("players-overview", {
     template: `
         <div class="players-overview" v-if="hasPlayers()">
             <overview-settings /> 
-            <player-info v-for="player in getPlayersInOrder()" :player="player" :key="player.id"/>
+            <player-info v-for="player in getPlayersInOrder()" :player="player" :key="player.id" :firstForGen="getIsFirstForGen(player)"/>
             <div class="player-divider" />
-            <player-info :player="getPlayerOnFocus()" :key="player.players.length - 1"/>
+            <player-info :player="getPlayerOnFocus()" :key="player.players.length - 1" :firstForGen="getIsFirstForGen(player)"/>
         </div>
     `,
 });

@@ -6,11 +6,15 @@ export const PlayerResource = Vue.component("player-resource", {
         return {};
     },
     methods: {
-        "mainCSS": function (): string {
+        mainCSS: function (): string {
             return "resource_item--" + this.type;
         },
-        "iconCSS": function (): string {
+        iconCSS: function (): string {
             return "resource_icon--" + this.type;
+        },
+        productionSign: function (): string {
+            if (this.production > 0) return "+";
+            return "";
         },
     },
     template: `
@@ -20,7 +24,7 @@ export const PlayerResource = Vue.component("player-resource", {
                 <div class="resource_item_stock_count">{{ count }}</div>
             </div>
             <div class="resource_item_prod">
-                {{ prod_label }}<span class="resource_item_prod_count">{{ production }}</span>
+                {{ prod_label }}<span class="resource_item_prod_count">{{ productionSign() }}{{ production }}</span>
             </div>
         </div>
     `,

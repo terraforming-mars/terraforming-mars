@@ -60,13 +60,16 @@
     }
 }
 
-
 .tags-grid {
     display: grid;
-    grid-template-columns: max-content repeat(18, 50px);
+    grid-template-columns: max-content repeat(19, 50px);
 
     grid-row-gap: 10px;
     margin-top: 10px;
+
+    &.hide-colony-count {
+        grid-template-columns: max-content repeat(18, 50px);
+    }
 
     .hide_tag {
         visibility: hidden;
@@ -113,6 +116,11 @@
     .city-count {
         background: url(assets/icon_city.png) center no-repeat;
         filter: invert(100%) contrast(200%);
+    }
+
+    .colony-count {
+        background: url(assets/icon_colony.png) center no-repeat;
+        filter: contrast(200%);
     }
 
     .card-count {

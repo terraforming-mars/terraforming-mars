@@ -672,10 +672,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       } else if (pi instanceof OrOptions) {
         const waiting: OrOptions = pi;
         const optionIndex = parseInt(input[0][0]);
-        const remainingInput = input[0].slice();
-        // Remove option index to process option
-        remainingInput.shift();
-        this.runInput(game, [remainingInput], waiting.options[optionIndex]);
+        const remainingInput = [];
+        for (let i = 1; i < input.length; i++) {
+            remainingInput.push(input[i].slice());
+        }
+        this.runInput(game, remainingInput, waiting.options[optionIndex]);
       } else if (pi instanceof SelectHowToPayForCard) {
         if (input.length !== 1 || input[0].length !== 2) {
           throw new Error("Incorrect options provided");

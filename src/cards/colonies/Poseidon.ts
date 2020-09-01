@@ -12,7 +12,7 @@ export class Poseidon implements CorporationCard {
     public startingMegaCredits: number = 45;
 
     public initialAction(player: Player, game: Game) {
-        if (game.gameOptions.coloniesExtension) {
+        if (game.coloniesExtension) {
           let openColonies = game.colonies.filter(colony => colony.colonies.length < 3 
             && colony.colonies.indexOf(player.id) === -1 
             && colony.isActive);

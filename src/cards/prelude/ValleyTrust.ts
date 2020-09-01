@@ -17,7 +17,7 @@ export class ValleyTrust implements CorporationCard {
     }
 
     public initialAction(player: Player, game: Game) {
-        if (game.gameOptions.preludeExtension) {
+        if (game.getPreludeExtension()) {
             const cardsDrawn: Array<IProjectCard> = [
                 game.dealer.dealPreludeCard(),
                 game.dealer.dealPreludeCard(),

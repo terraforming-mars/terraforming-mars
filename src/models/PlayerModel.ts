@@ -17,6 +17,7 @@ export interface PlayerModel {
     coloniesCount: number;
     noTagsCount: number;
     colonies: Array<ColonyModel>;
+    coloniesExtension: boolean;
     color: Color;
     energy: number;
     energyProduction: number;

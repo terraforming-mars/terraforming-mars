@@ -410,6 +410,18 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       return noTagsCount;
     }
+
+    public getColoniesCount(game: Game) {
+      if (!game.gameOptions.coloniesExtension) return 0;
+      
+      let coloniesCount: number = 0;
+      
+      game.colonies.forEach(colony => {
+        coloniesCount += colony.colonies.filter(owner => owner === this.id).length;
+      });
+
+      return coloniesCount;
+    }
         
     public getResourcesOnCard(card: ICard): number | undefined {
       if (card.resourceCount !== undefined) {

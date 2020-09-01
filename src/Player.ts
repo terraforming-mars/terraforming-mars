@@ -668,10 +668,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       } else if (pi instanceof OrOptions) {
         const waiting: OrOptions = pi;
         const optionIndex = parseInt(input[0][0]);
-        const remainingInput = input[0].slice();
-        // Remove option index to process option
-        remainingInput.shift();
-        this.runInput(game, [remainingInput], waiting.options[optionIndex]);
+        const remainingInput = [];
+        for (let i = 1; i < input.length; i++) {
+            remainingInput.push(input[i].slice());
+        }
+        this.runInput(game, remainingInput, waiting.options[optionIndex]);
       } else if (pi instanceof SelectHowToPayForCard) {
         if (input.length !== 1 || input[0].length !== 2) {
           throw new Error("Incorrect options provided");
@@ -1514,11 +1515,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     } 
 
     private tradeWithColony(openColonies: Array<IColony>, game: Game): PlayerInput {
+      var opts: Array<OrOptions> = [];
       let selectColony = new OrOptions();
+      selectColony.title = "Select colony";
       openColonies.forEach(colony => {
         const colonySelect =  new SelectOption(
           colony.name + " - (" + colony.description + ")", 
-          "Trade",
+          "",
           () => {
             game.log(
               LogMessageType.DEFAULT,
@@ -1533,27 +1536,40 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         selectColony.options.push(colonySelect);
       });      
       let howToPayForTrade = new OrOptions();
-      howToPayForTrade.title = "Trade with a colony";
-      howToPayForTrade.buttonLabel = "Pay trade fee"
+      howToPayForTrade.title = "Pay trade fee";
+      howToPayForTrade.buttonLabel = "Pay";
 
       const payWithMC = new SelectOption("Pay " + (9 - this.colonyTradeDiscount) +" MC", "", () => {
         game.addSelectHowToPayInterrupt(this, 9 - this.colonyTradeDiscount, false, false, "Select how to pay " + (9 - this.colonyTradeDiscount) + " for colony trade");
-        return selectColony;
+        return undefined;
       });
       const payWithEnergy = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Energy", "", () => {
         this.energy -= (3 - this.colonyTradeDiscount);
-        return selectColony;
+        return undefined;
       });  
       const payWithTitanium = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Titanium", "", () => {
         this.titanium -= (3 - this.colonyTradeDiscount);
-        return selectColony;  
+        return undefined;
       });
 
       if (this.canAfford((9 - this.colonyTradeDiscount))) howToPayForTrade.options.push(payWithMC);
       if (this.energy >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithEnergy);
       if (this.titanium >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithTitanium);
 
-      return howToPayForTrade;
+      opts.push(howToPayForTrade);
+      opts.push(selectColony);
+
+      const trade = new AndOptions(
+        () => {
+          return undefined;
+        },
+        ...opts
+      );
+
+      trade.title = "Trade with a colony";
+      trade.buttonLabel = "Trade";
+
+      return trade;
     }
 
     private convertPlantsIntoGreenery(game: Game): PlayerInput {
@@ -2098,7 +2114,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             || this.energy >= (3 - this.colonyTradeDiscount) 
             || this.titanium >= (3 - this.colonyTradeDiscount)) 
           ) {
-          action.options.push(
+            action.options.push(
             this.tradeWithColony(openColonies, game)
           );
         }

@@ -51,9 +51,11 @@ export const OrOptions = Vue.component("or-options", {
                 createElement("span", $t(option.title))
             ]));
             this.$data.childComponents.push(new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, option, (out: Array<Array<string>>) => {
-                const copy = out[0].slice();
-                copy.unshift(String(idx));
-                this.onsave([copy]);
+                const copy = [[String(idx)]];
+                for (let i = 0; i < out.length; i++) {
+                    copy.push(out[i].slice());
+                }
+                this.onsave(copy);
             }, false, false));
             subchildren.push(createElement("div", { style: { display: displayStyle, marginLeft: "30px" } }, [this.$data.childComponents[this.$data.childComponents.length - 1]]));
             optionElements.push(subchildren[subchildren.length - 1]);

@@ -58,6 +58,7 @@ import { OrOptions } from "./inputs/OrOptions";
 import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
+import { Statistics } from "./Statistics";
 
 
 export interface Score {
@@ -133,6 +134,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
     ) {
 
       Database.getInstance();
+
+      let stats = new Statistics();
+      stats.updateStats();
 
       if (gameOptions === undefined) {
         gameOptions = {

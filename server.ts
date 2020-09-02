@@ -32,6 +32,7 @@ import { FundedAwardModel, IAwardScore } from "./src/models/FundedAwardModel";
 import { Database } from './src/database/Database';
 import { PartyModel, DelegatesModel, TurmoilModel } from './src/models/TurmoilModel';
 import { SelectDelegate } from './src/inputs/SelectDelegate';
+import { Statistics } from "./src/Statistics";
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
@@ -341,6 +342,7 @@ function apiGetPlayer(
 }
 
 function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
+  console.log("stats from create game " + stats.playersBreakdown);
   let body = '';
   req.on('data', function(data) {
     body += data.toString();
@@ -915,6 +917,8 @@ function serveResource(res: http.ServerResponse, s: Buffer): void {
 }
 
 loadAllGames();
+let stats = new Statistics();
+stats.updateStats();
 
 console.log('Starting server on port ' + (process.env.PORT || 8080));
 console.log('version 0.X');
@@ -924,3 +928,4 @@ server.listen(process.env.PORT || 8080);
 console.log('\nThe secret serverId for this server is \x1b[1m'+serverId+'\x1b[0m. Use it to access the following administrative routes:\n');
 console.log('* Overview of existing games: /games-overview?serverId='+serverId);
 console.log('* API for game IDs: /api/games?serverId='+serverId+'\n');
+

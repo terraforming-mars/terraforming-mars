@@ -3,6 +3,7 @@ import { Game, GameOptions, Score } from "../Game";
 import { IGameData } from "./IDatabase";
 
 import { Client, ClientConfig } from "pg";
+import { playersBreakdown } from "../Statistics";
 
 export class PostgreSQL implements IDatabase {
     private client: Client;
@@ -11,12 +12,13 @@ export class PostgreSQL implements IDatabase {
         const config: ClientConfig = {
             connectionString: process.env.POSTGRES_HOST
         };
-        if (config.connectionString !== undefined && config.connectionString.startsWith("postgres")) {
-            config.ssl = {
+        // TODO Uncomment when ready to merge
+        //if (config.connectionString !== undefined && config.connectionString.startsWith("postgres")) {
+        //    config.ssl = {
                 // heroku uses self-signed certificates
-                rejectUnauthorized: false
-            };
-        }
+        //        rejectUnauthorized: false
+        //    };
+        //}
         this.client = new Client(config);
         this.client.connect();
         this.client.query("CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default 'running', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))", (err) => {
@@ -65,6 +67,22 @@ export class PostgreSQL implements IDatabase {
         });
     }
 
+    getPlayersBreakdown(cb:(err: any, playersBreakdown:Array<playersBreakdown>)=> void) {
+        const playersBreakdown:Array<playersBreakdown> = [];
+        const sql: string = "SELECT players, count(*)::integer as count from game_results group by players order by 1";
+        this.client.query(sql, (err, res) => {
+            if (err) {
+                console.error("PostgreSQL:getPlayersBreakdown", err);
+                cb(err, []);
+                return;
+            }
+            for (const row of res.rows) {
+                playersBreakdown.push(row.players, row.count);
+            }
+            cb(undefined, playersBreakdown);
+        });
+    }
+    
     getGames(cb:(err: any, allGames:Array<string>)=> void) {
         const allGames:Array<string> = [];
         const sql: string = "SELECT distinct game_id game_id FROM games WHERE status = 'running' and save_id > 0";

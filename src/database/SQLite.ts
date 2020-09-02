@@ -1,6 +1,7 @@
 import { IDatabase } from "./IDatabase";
 import { Game, GameOptions, Score } from "../Game";
 import { IGameData } from "./IDatabase";
+import { playersBreakdown } from "../Statistics";
 
 import sqlite3 = require("sqlite3");
 const path = require("path");
@@ -136,4 +137,8 @@ export class SQLite implements IDatabase {
             }
         });
     }
+
+    getPlayersBreakdown(_cb:(err: any, playersBreakdown:Array<playersBreakdown>)=> void) {
+
+    }    
 }

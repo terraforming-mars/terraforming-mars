@@ -105,7 +105,6 @@ export const PlayerHome = Vue.component("player-home", {
     },
     template: `
         <div id="player-home" :class="player.turmoil ? 'with-turmoil': ''">
-            <h2 :class="'game-title player_color_'+ player.color" v-i18n>Terraforming Mars</h2>
             <section>
                 <dialog id="dialog-default">
                     <form method="dialog">
@@ -125,7 +124,7 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
             </div>
 
-            <preferences v-trim-whitespace>
+            <preferences v-trim-whitespace :player_name="player.name" :player_color="player.color" >
                 <div class="deck-size">{{ player.deckSize }}</div>
             </preferences>
 

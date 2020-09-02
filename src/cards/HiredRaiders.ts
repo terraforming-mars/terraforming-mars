@@ -1,11 +1,9 @@
-
 import { Game } from "../Game";
 import { Player } from "../Player";
 import { IProjectCard } from "./IProjectCard";
 import { CardType } from "./CardType";
 import { Tags } from "./Tags";
 import { OrOptions } from "../inputs/OrOptions";
-import { SelectPlayer } from "../inputs/SelectPlayer";
 import { SelectOption } from "../inputs/SelectOption";
 import { Resources } from "../Resources";
 import { CardName } from "../CardName";
@@ -17,7 +15,6 @@ export class HiredRaiders implements IProjectCard {
     public name: CardName = CardName.HIRED_RAIDERS;
 
     public play(player: Player, game: Game) {
-
         if (game.soloMode) {
             return new OrOptions(
                 new SelectOption("Steal 2 steel", "Steal steel", () => {
@@ -31,18 +28,35 @@ export class HiredRaiders implements IProjectCard {
             );
         }
 
-        return new OrOptions(
-            new SelectPlayer(game.getPlayers(), "Select player to steal up to 2 steel", "Steal steel", (selectedPlayer: Player) => {
-                player.steel += Math.min(2, selectedPlayer.steel);
-                selectedPlayer.setResource(Resources.STEEL, -2, game, player);
-                return undefined;
-            }),
-            new SelectPlayer(game.getPlayers(), "Select player to steal up to 3 mega credits", "Steal MC", (selectedPlayer: Player) => {
-                player.megaCredits += Math.min(3, selectedPlayer.megaCredits);
-                selectedPlayer.setResource(Resources.MEGACREDITS, -3, game, player);
-                return undefined;
-            })
-        );
+        const availablePlayerTargets = game.getPlayers().filter((p) => p.name !== player.name);
+        let availableActions = new OrOptions();
+
+        availablePlayerTargets.forEach((target) => {
+            if (target.steel > 0) {
+                const amountStolen = Math.min(2, target.steel);
+                const optionTitle = "Steal " + amountStolen + " steel from " + target.name
+
+                availableActions.options.push(new SelectOption(optionTitle, "Confirm", () => {
+                    player.steel += amountStolen;
+                    target.setResource(Resources.STEEL, -2, game, player);
+                    return undefined;
+                }))
+            }
+
+            if (target.megaCredits > 0) {
+                const amountStolen = Math.min(3, target.megaCredits);
+                const optionTitle = "Steal " + amountStolen + " MC from " + target.name
+
+                availableActions.options.push(new SelectOption(optionTitle, "Confirm", () => {
+                    player.megaCredits += amountStolen;
+                    target.setResource(Resources.MEGACREDITS, -3, game, player);
+                    return undefined;
+                }))
+            }
+        });
+
+        if (availableActions.options.length > 0) return availableActions;
+        return undefined;
     }
 }
 

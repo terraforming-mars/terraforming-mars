@@ -130,7 +130,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }    
 
     public increaseTerraformRating(game: Game) {
-      if (!game.gameOptions.turmoilExtension) {
+      if (!game.turmoilExtension) {
         this.terraformRating++;
         this.hasIncreasedTerraformRatingThisGeneration = true;
         return;
@@ -374,7 +374,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       });
 
       // Turmoil Victory Points
-      if (game.phase === Phase.END && game.gameOptions.turmoilExtension && game.turmoil){
+      if (game.phase === Phase.END && game.turmoilExtension && game.turmoil){
         this.victoryPointsBreakdown.setVictoryPoints("victoryPoints", game.turmoil.getPlayerVictoryPoints(this), "Turmoil Points");
       }
 
@@ -397,6 +397,30 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     
     public getCitiesCount(game: Game) {
       return game.getSpaceCount(TileType.CITY, this) + game.getSpaceCount(TileType.CAPITAL, this);
+    }
+
+    public getNoTagsCount() {
+      let noTagsCount: number = 0;
+
+      if (this.corporationCard !== undefined && this.corporationCard.tags.filter(tag => tag !== Tags.WILDCARD).length === 0) {
+          noTagsCount++;
+      }
+
+      noTagsCount += this.playedCards.filter((card) => card.cardType !== CardType.EVENT && card.tags.filter(tag => tag !== Tags.WILDCARD).length === 0).length
+
+      return noTagsCount;
+    }
+
+    public getColoniesCount(game: Game) {
+      if (!game.gameOptions.coloniesExtension) return 0;
+      
+      let coloniesCount: number = 0;
+      
+      game.colonies.forEach(colony => {
+        coloniesCount += colony.colonies.filter(owner => owner === this.id).length;
+      });
+
+      return coloniesCount;
     }
         
     public getResourcesOnCard(card: ICard): number | undefined {
@@ -656,10 +680,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       } else if (pi instanceof OrOptions) {
         const waiting: OrOptions = pi;
         const optionIndex = parseInt(input[0][0]);
-        const remainingInput = input[0].slice();
-        // Remove option index to process option
-        remainingInput.shift();
-        this.runInput(game, [remainingInput], waiting.options[optionIndex]);
+        const remainingInput = [];
+        for (let i = 1; i < input.length; i++) {
+            remainingInput.push(input[i].slice());
+        }
+        this.runInput(game, remainingInput, waiting.options[optionIndex]);
       } else if (pi instanceof SelectHowToPayForCard) {
         if (input.length !== 1 || input[0].length !== 2) {
           throw new Error("Incorrect options provided");
@@ -939,7 +964,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           )
         );
       }
-      if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE && game.gameOptions.venusNextExtension) {
+      if (game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE && game.venusNextExtension) {
         action.options.push(
           new SelectOption("Increase Venus scale", "Increase", () => {
             game.increaseVenusScaleLevel(this,1, true);
@@ -1206,7 +1231,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
 
         //Activate some colonies
-        if (game.gameOptions.coloniesExtension && selectedCard.resourceType !== undefined) {
+        if (game.coloniesExtension && selectedCard.resourceType !== undefined) {
             game.colonies.filter(colony => colony.resourceType !== undefined && colony.resourceType === selectedCard.resourceType).forEach(colony => {
                 colony.isActive = true;
             });
@@ -1502,11 +1527,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     } 
 
     private tradeWithColony(openColonies: Array<IColony>, game: Game): PlayerInput {
+      var opts: Array<OrOptions> = [];
       let selectColony = new OrOptions();
+      selectColony.title = "Select colony";
       openColonies.forEach(colony => {
         const colonySelect =  new SelectOption(
           colony.name + " - (" + colony.description + ")", 
-          "Trade",
+          "",
           () => {
             game.log(
               LogMessageType.DEFAULT,
@@ -1521,27 +1548,40 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         selectColony.options.push(colonySelect);
       });      
       let howToPayForTrade = new OrOptions();
-      howToPayForTrade.title = "Trade with a colony";
-      howToPayForTrade.buttonLabel = "Pay trade fee"
+      howToPayForTrade.title = "Pay trade fee";
+      howToPayForTrade.buttonLabel = "Pay";
 
       const payWithMC = new SelectOption("Pay " + (9 - this.colonyTradeDiscount) +" MC", "", () => {
         game.addSelectHowToPayInterrupt(this, 9 - this.colonyTradeDiscount, false, false, "Select how to pay " + (9 - this.colonyTradeDiscount) + " for colony trade");
-        return selectColony;
+        return undefined;
       });
       const payWithEnergy = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Energy", "", () => {
         this.energy -= (3 - this.colonyTradeDiscount);
-        return selectColony;
+        return undefined;
       });  
       const payWithTitanium = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Titanium", "", () => {
         this.titanium -= (3 - this.colonyTradeDiscount);
-        return selectColony;  
+        return undefined;
       });
 
       if (this.canAfford((9 - this.colonyTradeDiscount))) howToPayForTrade.options.push(payWithMC);
       if (this.energy >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithEnergy);
       if (this.titanium >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithTitanium);
 
-      return howToPayForTrade;
+      opts.push(howToPayForTrade);
+      opts.push(selectColony);
+
+      const trade = new AndOptions(
+        () => {
+          return undefined;
+        },
+        ...opts
+      );
+
+      trade.title = "Trade with a colony";
+      trade.buttonLabel = "Trade";
+
+      return trade;
     }
 
     private convertPlantsIntoGreenery(game: Game): PlayerInput {
@@ -1949,7 +1989,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       let airScrappingCost = constants.AIR_SCRAPPING_COST
       if (redsAreRuling) airScrappingCost += REDS_RULING_POLICY_COST;
 
-      if (game.gameOptions.venusNextExtension
+      if (game.venusNextExtension
         && this.canAfford(airScrappingCost)
         && game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE) {
         standardProjects.options.push(
@@ -1957,7 +1997,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
       }
 
-      if ( game.gameOptions.coloniesExtension &&
+      if ( game.coloniesExtension &&
         this.canAfford(constants.BUILD_COLONY_COST)) {
         let openColonies = game.colonies.filter(colony => colony.colonies.length < 3 
           && colony.colonies.indexOf(this.id) === -1
@@ -1972,7 +2012,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       let bufferGasCost = constants.BUFFER_GAS_COST
       if (redsAreRuling) bufferGasCost += REDS_RULING_POLICY_COST;
 
-      if (game.gameOptions.soloTR && this.canAfford(bufferGasCost)) {
+      if (game.soloTR && this.canAfford(bufferGasCost)) {
         standardProjects.options.push(
             this.bufferGas(game)
         );
@@ -2078,7 +2118,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         );
       }
 
-      if (game.gameOptions.coloniesExtension) {
+      if (game.coloniesExtension) {
         let openColonies = game.colonies.filter(colony => colony.isActive && colony.visitor === undefined);
         if (openColonies.length > 0 
           && this.fleetSize > this.tradesThisTurn
@@ -2086,7 +2126,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             || this.energy >= (3 - this.colonyTradeDiscount) 
             || this.titanium >= (3 - this.colonyTradeDiscount)) 
           ) {
-          action.options.push(
+            action.options.push(
             this.tradeWithColony(openColonies, game)
           );
         }
@@ -2145,7 +2185,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       // If you can pay to send some in the Ara
-      if (game.gameOptions.turmoilExtension) {
+      if (game.turmoilExtension) {
         if (game.turmoil?.lobby.has(this.id)) {
           const selectParty = new SelectParty(this, game, "Send a delegate in an area (from lobby)");
           action.options.push(selectParty.playerInput);
@@ -2202,7 +2242,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       // Propose undo action only if you have done one action this turn
-      if (this.actionsTakenThisRound > 0 && game.gameOptions.undoOption) {
+      if (this.actionsTakenThisRound > 0 && game.undoOption) {
         action.options.push(this.undoTurnOption(game));
       }
 

@@ -8,7 +8,7 @@ import { Game } from '../../../src/Game';
 import { AndOptions } from '../../../src/inputs/AndOptions';
 import { SelectCard } from '../../../src/inputs/SelectCard';
 import { ICard } from '../../../src/cards/ICard';
-import { SelectPlayer } from '../../../src/inputs/SelectPlayer';
+import { OrOptions } from "../../../src/inputs/OrOptions";
 
 describe("AirRaid", function () {
     let card : AirRaid, player : Player, player2 : Player, game : Game, corpo: StormCraftIncorporated;
@@ -40,12 +40,12 @@ describe("AirRaid", function () {
 
         const andOptions = card.play(player, game) as AndOptions;
         const option1 = andOptions.options[0] as SelectCard<ICard>;
-        const option2 = andOptions.options[1] as SelectPlayer;
+        const option2 = andOptions.options[1] as OrOptions;
 
         option1.cb([corpo]);
         expect(player.getResourcesOnCard(corpo)).to.eq(0);
 
-        option2.cb(player2);
+        option2.options[0].cb();
         expect(player2.megaCredits).to.eq(0);
         expect(player.megaCredits).to.eq(4);
     });

@@ -103,7 +103,7 @@ export class SQLite implements IDatabase {
             }
         });
         // Purge unfinished games older than 10 days
-        this.db.run("DELETE FROM games WHERE created_time < date('now', '-10 day') and status = 'running'", function(err: { message: any; }) {
+        this.db.run("DELETE FROM games WHERE created_time < strftime('%s',date('now', '-10 day')) and status = 'running'", function(err: { message: any; }) {
             if (err) {
             return console.warn(err.message);  
             }

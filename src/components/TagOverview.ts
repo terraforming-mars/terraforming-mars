@@ -23,6 +23,24 @@ export const TagOverview = Vue.component("tags", {
             }
             return "-";
         },
+        getNoTagsCount: function (player: PlayerModel) {
+            let tagCount : number = player.noTagsCount;
+            
+            if (tagCount > 0) return tagCount;
+            return "-";
+        },
+        getCityCount: function (player: PlayerModel) {
+            let cityCount : number = player.citiesCount;
+            
+            if (cityCount > 0) return cityCount;
+            return "-";
+        },
+        getColonyCount: function (player: PlayerModel) {
+            let coloniesCount : number = player.coloniesCount;
+
+            if (coloniesCount > 0) return coloniesCount;
+            return "-";
+        },
         getCardCount: function (player: PlayerModel){
             if (player.cardsInHandNbr){
                 return player.cardsInHandNbr;
@@ -40,6 +58,9 @@ export const TagOverview = Vue.component("tags", {
         },
         showVpCount: function (player: PlayerModel){
             return player.showOtherPlayersVP;
+        },
+        showColonyCount: function (player: PlayerModel) {
+            return player.coloniesExtension;
         }
     },
     template: `
@@ -49,13 +70,16 @@ export const TagOverview = Vue.component("tags", {
         </div>
         <div v-show="isVisible()">
             <div class="tags_cont" v-trim-whitespace>
-                <div class="tags-grid">
+                <div class="tags-grid" :class="{'hide-colony-count' : !showColonyCount(player) }">
                     <div>
                         <span v-i18n>Player</span>
                     </div>
 
                     <div class="tag-count card-count"></div>
                     <div v-for="tag in getTags()" class="tag-count" :class="'tag-'+ tag"></div>
+                    <div class="tag-count tag-none"></div>
+                    <div class="tag-count city-count"></div>
+                    <div v-if="showColonyCount(player)" class="tag-count colony-count"></div>
                     <div class="tag-count rt-count"></div>
                     <div class="tag-count vp-count" :class="{'hide_tag' : !showVpCount(player) }"><span>VP</span></div>
 
@@ -71,6 +95,18 @@ export const TagOverview = Vue.component("tags", {
                         <template v-for="tag in getTags()">
                             <div class="grid-item" :class="'player_tag_bg_color_'+player.color"><span>{{getTagCount(player, tag)}}</span></div>
                         </template>
+
+                        <div class="grid-item" :class="'player_tag_bg_color_'+player.color">
+                            <span>{{getNoTagsCount(player)}}</span>
+                        </div>
+
+                        <div class="grid-item" :class="'player_tag_bg_color_'+player.color">
+                            <span>{{getCityCount(player)}}</span>
+                        </div>
+
+                        <div v-if="showColonyCount(player)" class="grid-item" :class="'player_tag_bg_color_'+player.color">
+                            <span>{{getColonyCount(player)}}</span>
+                        </div>
 
                         <div class="grid-item" :class="[{'grid_end' : !showVpCount(player) },'player_tag_bg_color_'+player.color]">
                             <span>{{getRT(player)}}</span>

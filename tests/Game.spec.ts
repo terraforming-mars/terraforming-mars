@@ -28,7 +28,7 @@ describe("Game", function () {
         const player = new Player("test", Color.BLUE, false);
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
-        expect(game.gameOptions.corporateEra).to.eq(true);
+        expect(game.corporateEra).to.eq(true);
         expect(game.getGeneration()).to.eq(1);
     });
 
@@ -156,7 +156,7 @@ describe("Game", function () {
         const player = new Player("temp_test", Color.BLUE, false);
         const player2 = new Player("temp_test2", Color.RED, false);
         const game = new Game("draft_game", [player,player2], player);
-        game.gameOptions.venusNextExtension = false;
+        game.venusNextExtension = false;
         game.generation = 4;
         game.playerHasPassed(player);
         game.playerIsFinishedTakingActions();
@@ -169,7 +169,7 @@ describe("Game", function () {
         const player = new Player("temp_test", Color.BLUE, false);
         const player2 = new Player("temp_test2", Color.RED, false);
         const game = new Game("classic_game", [player,player2], player);
-        game.gameOptions.venusNextExtension = false;
+        game.venusNextExtension = false;
         game.generation = 2;
         game.playerHasPassed(player);
         game.playerIsFinishedTakingActions();
@@ -181,7 +181,7 @@ describe("Game", function () {
     it("Solo play next generation", function () {
         const player = new Player("temp_test", Color.BLUE, false);
         const game = new Game("draft_game", [player], player);
-        game.gameOptions.venusNextExtension = false;
+        game.venusNextExtension = false;
         game.playerHasPassed(player);
         game.playerIsFinishedTakingActions();
         expect(game.getGeneration()).to.eq(2);

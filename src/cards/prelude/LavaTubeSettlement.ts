@@ -18,7 +18,7 @@ export class LavaTubeSettlement implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
     private getSpacesForCity(player: Player, game: Game) {
-        if (game.gameOptions.boardName === BoardName.HELLAS) {
+        if (game.boardName === BoardName.HELLAS) {
             // https://boardgamegeek.com/thread/1953628/article/29627211#29627211
             return game.board.getAvailableSpacesForCity(player);
         }

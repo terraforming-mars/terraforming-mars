@@ -1765,11 +1765,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return player.loadFromJSON(element);
       });
 
+
       // Rebuild milestones, awards and board elements
-      if (d.boardName === BoardName.ELYSIUM) {
-        this.board = new ElysiumBoard(this.shuffleMapOption, this.seed);
-      } else if (d.boardName === BoardName.HELLAS) {
-        this.board = new HellasBoard(this.shuffleMapOption, this.seed);
+      if (this.gameOptions.boardName === BoardName.ELYSIUM) {
+        this.board = new ElysiumBoard(this.gameOptions.shuffleMapOption, this.seed);
+      } else if (this.gameOptions.boardName === BoardName.HELLAS) {
+        this.board = new HellasBoard(this.gameOptions.shuffleMapOption, this.seed);
       } else {
         this.board = new OriginalBoard(this.shuffleMapOption, this.seed);
       }

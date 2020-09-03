@@ -43,7 +43,8 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
         startingCorporations: 2,
         includeVenusMA: true,
         soloTR: false,
-        clonedGamedId: undefined
+        clonedGamedId: undefined,
+        cardsBlackList: []
       };
 
     return Object.assign(defaultOptions, options) as GameOptions;

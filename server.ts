@@ -371,6 +371,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         showOtherPlayersVP: gameReq.showOtherPlayersVP,
         customCorporationsList: gameReq.customCorporationsList,
         customColoniesList: gameReq.customColoniesList,
+        cardsBlackList: gameReq.cardsBlackList,
         solarPhaseOption: gameReq.solarPhaseOption,
         promoCardsOption: gameReq.promoCardsOption,
         undoOption: gameReq.undoOption,
@@ -467,7 +468,9 @@ function getCorporationCard(player: Player): CardModel | undefined {
   }) as CardModel
 }
 
-function getPlayer(player: Player, game: Game): string { 
+function getPlayer(player: Player, game: Game): string {
+  const turmoil = getTurmoil(game);
+
   const output = {
     cardsInHand: getCards(player, player.cardsInHand, game, false),
     draftedCards: getCards(player, player.draftedCards, game, false),
@@ -492,6 +495,11 @@ function getPlayer(player: Player, game: Game): string {
     plantProduction: player.getProduction(Resources.PLANTS),
     playedCards: getCards(player, player.playedCards, game),
     cardsInHandNbr: player.cardsInHand.length,
+    citiesCount: player.getCitiesCount(game),
+    coloniesCount: player.getColoniesCount(game),
+    noTagsCount: player.getNoTagsCount(),
+    influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
+    coloniesExtension: game.gameOptions.coloniesExtension,
     players: getPlayers(game.getPlayers(), game),
     spaces: getSpaces(game.board.spaces),
     steel: player.steel,
@@ -518,7 +526,7 @@ function getPlayer(player: Player, game: Game): string {
     actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
     fleetSize: player.fleetSize,
     tradesThisTurn: player.tradesThisTurn,
-    turmoil: getTurmoil(game),
+    turmoil: turmoil,
     selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(game),
     dealtCorporationCards: player.dealtCorporationCards,
     dealtPreludeCards: player.dealtPreludeCards,
@@ -637,7 +645,9 @@ function getCards(
 }
 
 function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
-  return players.map((player) => { 
+  const turmoil = getTurmoil(game);
+
+  return players.map((player) => {
     return {
       color: player.color,
       corporationCard: getCorporationCard(player),
@@ -653,6 +663,11 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       plantProduction: player.getProduction(Resources.PLANTS),
       playedCards: getCards(player, player.playedCards, game),
       cardsInHandNbr: player.cardsInHand.length,
+      citiesCount: player.getCitiesCount(game),
+      coloniesCount: player.getColoniesCount(game),
+      noTagsCount: player.getNoTagsCount(),
+      influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
+      coloniesExtension: game.gameOptions.coloniesExtension,
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),
       steelValue: player.steelValue,
@@ -671,7 +686,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
       fleetSize: player.fleetSize,
       tradesThisTurn: player.tradesThisTurn,
-      turmoil: getTurmoil(game),
+      turmoil: turmoil,
       selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(game),
       needsToDraft: player.needsToDraft,
       deckSize: game.dealer.getDeckSize(), 

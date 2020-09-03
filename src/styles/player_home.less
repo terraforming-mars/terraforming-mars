@@ -7,8 +7,8 @@
 
 #player-home {
     padding-left: 20px;
-    border-left: 1px solid #adacac;
-    background: url(assets/stars.jpg);
+    background: linear-gradient(transparent, #000), url(assets/stars.jpg);
+    background-attachment: fixed;
 }
 
 .player_color_red {
@@ -101,10 +101,22 @@
 
 .tags-grid {
     display: grid;
-    grid-template-columns: max-content repeat(16, 50px);
+    grid-template-columns: max-content repeat(20, 50px);
 
     grid-row-gap: 10px;
     margin-top: 10px;
+
+    &.hide-colony-count {
+        grid-template-columns: max-content repeat(19, 50px);
+    }
+
+    &.hide-influence-count {
+        grid-template-columns: max-content repeat(19, 50px);
+    }
+
+    &.hide-colony-influence-counts {
+        grid-template-columns: max-content repeat(18, 50px);
+    }
 
     .hide_tag {
         visibility: hidden;
@@ -146,6 +158,22 @@
 
     .grid-item.player_tag_bg_color_yellow {
         background-color: rgba(170, 170, 0, 0.2);
+    }
+
+    .city-count {
+        background: url(assets/icon_city.png) center no-repeat;
+        filter: invert(100%) contrast(200%);
+    }
+
+    .colony-count {
+        background: url(assets/icon_colony.png) center no-repeat;
+        background-size: 24px;
+    }
+
+    .influence-count {
+        background: url(assets/icon_influence.png) center no-repeat;
+        filter: invert(100%) contrast(200%);
+        background-size: 28px;
     }
 
     .card-count {
@@ -697,11 +725,9 @@
 .deck-size {
     position: absolute;
     width: 33px;
-    margin: 29px 0 0 0;
-
+    margin: 30px 0 0 0;
     font-family: Prototype;
-    font-size: 13px;
-    font-weight: bold;
+    font-size: 15px;
     text-align: center;
-    color: #666666de;
+    color: #fff;
 }

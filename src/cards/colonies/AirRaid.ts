@@ -7,9 +7,10 @@ import { Game } from "../../Game";
 import { ResourceType } from "../../ResourceType";
 import { SelectCard } from "../../inputs/SelectCard";
 import { ICard } from "../ICard";
-import { SelectPlayer } from "../../inputs/SelectPlayer";
 import { Resources } from "../../Resources";
 import { AndOptions } from "../../inputs/AndOptions";
+import { OrOptions } from "../../inputs/OrOptions";
+import { SelectOption } from "../../inputs/SelectOption";
 
 
 export class AirRaid implements IProjectCard {
@@ -48,14 +49,20 @@ export class AirRaid implements IProjectCard {
         }
 
         const eligiblePlayers = game.getPlayers().filter(selectedPlayer => selectedPlayer !== player);
+        let availableTargets = new OrOptions();
 
-        const selectPlayer = new SelectPlayer(eligiblePlayers, "Select player to steal up to 5 MC", "Remove MC", (selectedPlayer: Player) => {
-            player.megaCredits += Math.min(5, selectedPlayer.megaCredits);
-            selectedPlayer.setResource(Resources.MEGACREDITS, -5, game, player);
-            return undefined;
+        eligiblePlayers.forEach((target) => {
+            const amountStolen= Math.min(5, target.megaCredits);
+            const optionTitle = "Steal " + amountStolen + " MC from " + target.name;
+
+            availableTargets.options.push(new SelectOption(optionTitle, "Confirm", () => {
+                player.megaCredits += amountStolen;
+                target.setResource(Resources.MEGACREDITS, -5, game, player);
+                return undefined;
+            }))
         });
 
-        var options: Array<SelectPlayer | SelectCard<ICard>> = [];
+        var options: Array<OrOptions | SelectCard<ICard>> = [];
 
         if (resourceCards.length === 1) {
             player.removeResourceFrom(resourceCards[0]);
@@ -64,7 +71,7 @@ export class AirRaid implements IProjectCard {
         }
 
         if (eligiblePlayers.length > 1) {
-            options.push(selectPlayer);
+            options.push(availableTargets);
         } else {
             player.megaCredits += Math.min(5, eligiblePlayers[0].megaCredits);
             eligiblePlayers[0].setResource(Resources.MEGACREDITS, -5, game, player);

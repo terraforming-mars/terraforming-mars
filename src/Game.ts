@@ -76,6 +76,7 @@ export interface GameOptions {
   showOtherPlayersVP: boolean;
   customCorporationsList: Array<CardName>;
   customColoniesList: Array<ColonyName>;
+  cardsBlackList: Array<CardName>;
   solarPhaseOption: boolean;
   shuffleMapOption: boolean;
   promoCardsOption: boolean;
@@ -165,6 +166,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           showOtherPlayersVP: false,
           customCorporationsList: [],
           customColoniesList: [],
+          cardsBlackList: [],
           solarPhaseOption: false,
           shuffleMapOption: false,
           promoCardsOption: false,
@@ -192,7 +194,16 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.undoOption = gameOptions.undoOption;
       this.startingCorporations = gameOptions.startingCorporations;
       this.includeVenusMA = gameOptions.includeVenusMA;
-      this.dealer = new Dealer(this.corporateEra, this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption, this.turmoilExtension, Math.random());
+      this.dealer = new Dealer(
+        this.corporateEra,
+        this.preludeExtension,
+        this.venusNextExtension,
+        this.coloniesExtension,
+        this.promoCardsOption,
+        this.turmoilExtension,
+        Math.random(),
+        gameOptions.cardsBlackList
+      );
       this.showOtherPlayersVP = gameOptions.showOtherPlayersVP;
       this.solarPhaseOption = gameOptions.solarPhaseOption;
       this.soloTR = gameOptions.soloTR;
@@ -1765,11 +1776,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return player.loadFromJSON(element);
       });
 
+
       // Rebuild milestones, awards and board elements
-      if (d.boardName === BoardName.ELYSIUM) {
-        this.board = new ElysiumBoard(this.shuffleMapOption, this.seed);
-      } else if (d.boardName === BoardName.HELLAS) {
-        this.board = new HellasBoard(this.shuffleMapOption, this.seed);
+      if (this.gameOptions.boardName === BoardName.ELYSIUM) {
+        this.board = new ElysiumBoard(this.gameOptions.shuffleMapOption, this.seed);
+      } else if (this.gameOptions.boardName === BoardName.HELLAS) {
+        this.board = new HellasBoard(this.gameOptions.shuffleMapOption, this.seed);
       } else {
         this.board = new OriginalBoard(this.shuffleMapOption, this.seed);
       }

@@ -76,6 +76,7 @@ export interface GameOptions {
   showOtherPlayersVP: boolean;
   customCorporationsList: Array<CardName>;
   customColoniesList: Array<ColonyName>;
+  cardsBlackList: Array<CardName>;
   solarPhaseOption: boolean;
   shuffleMapOption: boolean;
   promoCardsOption: boolean;
@@ -165,6 +166,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           showOtherPlayersVP: false,
           customCorporationsList: [],
           customColoniesList: [],
+          cardsBlackList: [],
           solarPhaseOption: false,
           shuffleMapOption: false,
           promoCardsOption: false,
@@ -192,7 +194,16 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.undoOption = gameOptions.undoOption;
       this.startingCorporations = gameOptions.startingCorporations;
       this.includeVenusMA = gameOptions.includeVenusMA;
-      this.dealer = new Dealer(this.corporateEra, this.preludeExtension, this.venusNextExtension, this.coloniesExtension, this.promoCardsOption, this.turmoilExtension, Math.random());
+      this.dealer = new Dealer(
+        this.corporateEra,
+        this.preludeExtension,
+        this.venusNextExtension,
+        this.coloniesExtension,
+        this.promoCardsOption,
+        this.turmoilExtension,
+        Math.random(),
+        gameOptions.cardsBlackList
+      );
       this.showOtherPlayersVP = gameOptions.showOtherPlayersVP;
       this.solarPhaseOption = gameOptions.solarPhaseOption;
       this.soloTR = gameOptions.soloTR;

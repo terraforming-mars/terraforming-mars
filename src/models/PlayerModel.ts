@@ -16,6 +16,7 @@ export interface PlayerModel {
     citiesCount: number;
     coloniesCount: number;
     noTagsCount: number;
+    influence: number;
     colonies: Array<ColonyModel>;
     coloniesExtension: boolean;
     color: Color;

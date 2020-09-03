@@ -12,7 +12,7 @@ const allItems: Array<CardName> = [
     ...ALL_PROMO_PROJECTS_CARDS.map((cf) => cf.cardName),
     ...ALL_PROJECT_CARDS.map((cf) => cf.cardName),
     ...ALL_CORP_ERA_PROJECT_CARDS.map((cf) => cf.cardName)
-];
+].sort();
 
 interface CardsFilterModel {
     customCorporationsList: boolean;
@@ -33,11 +33,12 @@ export const CardsFilter = Vue.component("cards-filter", {
     },
     methods: {
         removeCard: function (cardNameToRemove: CardName) {
-            this.selectedCardNames = this.selectedCardNames.filter((curCardName) => curCardName === cardNameToRemove)
+            this.selectedCardNames = this.selectedCardNames.filter((curCardName) => curCardName === cardNameToRemove).sort();
         },
         addCard: function (cardNameToAdd: CardName) {
             if (this.selectedCardNames.includes(cardNameToAdd)) return;
             this.selectedCardNames.push(cardNameToAdd);
+            this.selectedCardNames = this.selectedCardNames.sort();
             this.searchTerm = "";
         },
         getCardsInputPlaceholder: function() {
@@ -53,13 +54,15 @@ export const CardsFilter = Vue.component("cards-filter", {
                 this.foundCardNames = [];
                 return;
             }
-            const newCardNames = allItems.filter((candidate: CardName) => ! this.selectedCardNames.includes(candidate) && candidate.toLowerCase().startsWith(value.toLowerCase()));
+            const newCardNames = allItems.filter(
+                (candidate: CardName) => ! this.selectedCardNames.includes(candidate) && candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1
+            ).sort();
             this.foundCardNames = newCardNames.slice(0, 5)
         }
     },
     template: `
     <div class="cards-filter">
-        <h2 v-i18n>Cards to exlude from the game</h2>
+        <h2 v-i18n>Cards to exclude from the game</h2>
         <div class="cards-filter-results-cont" v-if="selectedCardNames.length">
             <div class="cards-filter-result" v-for="cardName in selectedCardNames">
                 <label>{{ cardName }}</label>

@@ -371,7 +371,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         showOtherPlayersVP: gameReq.showOtherPlayersVP,
         customCorporationsList: gameReq.customCorporationsList,
         customColoniesList: gameReq.customColoniesList,
-        cardsBlackList: gameReq.customColoniesList,
+        cardsBlackList: gameReq.cardsBlackList,
         solarPhaseOption: gameReq.solarPhaseOption,
         promoCardsOption: gameReq.promoCardsOption,
         undoOption: gameReq.undoOption,

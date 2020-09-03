@@ -135,7 +135,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
         updateCardsBlackList: function (newCardsBlackList: Array<CardName>) {
             const component = (this as any) as CreateGameModel;
             component.cardsBlackList = newCardsBlackList;
-            console.log(newCardsBlackList);
         },
         updateCustomColoniesList: function (newCustomColoniesList: Array<ColonyName>) {
             const component = (this as any) as CreateGameModel;

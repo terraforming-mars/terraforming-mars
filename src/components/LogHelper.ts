@@ -77,7 +77,14 @@ export class LogHelper {
     }
 
     static logTilePlacement(game: Game, player: Player, space: ISpace, tileType: TileType) {
+
+        // Skip off-grid tiles
+        if (space.x === -1 && space.y === -1) return;
+
         let type : string;
+        let offset: number = Math.abs(space.y - 4);
+        let row: number = space.y + 1;
+        let position: number = space.x - offset + 1;
 
         switch (tileType) {
             case TileType.GREENERY:
@@ -99,11 +106,11 @@ export class LogHelper {
 
         game.log(
             LogMessageType.DEFAULT,
-            "${0} placed ${1} tile on (${2}, ${3})",
+            "${0} placed ${1} tile on row ${2} position ${3}",
             new LogMessageData(LogMessageDataType.PLAYER, player.id),
             new LogMessageData(LogMessageDataType.STRING, type),
-            new LogMessageData(LogMessageDataType.STRING, space.x.toString()),
-            new LogMessageData(LogMessageDataType.STRING, space.y.toString())
+            new LogMessageData(LogMessageDataType.STRING, row.toString()),
+            new LogMessageData(LogMessageDataType.STRING, position.toString())            
         );
     }
 

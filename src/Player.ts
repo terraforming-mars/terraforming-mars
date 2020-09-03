@@ -1564,9 +1564,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         return undefined;
       });
 
-      if (this.canAfford((9 - this.colonyTradeDiscount))) howToPayForTrade.options.push(payWithMC);
       if (this.energy >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithEnergy);
       if (this.titanium >= (3 - this.colonyTradeDiscount)) howToPayForTrade.options.push(payWithTitanium);
+      if (this.canAfford((9 - this.colonyTradeDiscount))) howToPayForTrade.options.push(payWithMC);
 
       opts.push(howToPayForTrade);
       opts.push(selectColony);

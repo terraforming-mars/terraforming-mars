@@ -33,7 +33,7 @@ export const CardsFilter = Vue.component("cards-filter", {
     },
     methods: {
         removeCard: function (cardNameToRemove: CardName) {
-            this.selectedCardNames = this.selectedCardNames.filter((curCardName) => curCardName === cardNameToRemove).sort();
+            this.selectedCardNames = this.selectedCardNames.filter((curCardName) => curCardName !== cardNameToRemove).sort();
         },
         addCard: function (cardNameToAdd: CardName) {
             if (this.selectedCardNames.includes(cardNameToAdd)) return;

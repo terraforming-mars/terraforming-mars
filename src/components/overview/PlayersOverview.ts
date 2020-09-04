@@ -88,9 +88,6 @@ export const PlayersOverview = Vue.component("players-overview", {
 
             return ActionLabel.NONE;
         },
-        getActivePlayerId: function (): number {
-            return this.player.id;
-        },
     },
     mounted: function () {
         // console.log(this.player);
@@ -103,9 +100,9 @@ export const PlayersOverview = Vue.component("players-overview", {
                     <other-player v-if="otherPlayer.id !== player.id" :player="otherPlayer" />
                 </div>
             </div>
-            <player-info v-for="p in getPlayersInOrder()" :activePlayerId="getActivePlayerId()" :player="p"  :key="p.id" :firstForGen="getIsFirstForGen(p)" :actionLabel="getActionLabel(p)"/>
+            <player-info v-for="p in getPlayersInOrder()" :activePlayer="player" :player="p"  :key="p.id" :firstForGen="getIsFirstForGen(p)" :actionLabel="getActionLabel(p)"/>
             <div class="player-divider" />
-            <player-info :player="getPlayerOnFocus()" :key="player.players.length - 1" :firstForGen="getIsFirstForGen(player)" :actionLabel="getActionLabel(player)"/>
+            <player-info :player="getPlayerOnFocus()" :activePlayer="player" :key="player.players.length - 1" :firstForGen="getIsFirstForGen(player)" :actionLabel="getActionLabel(player)"/>
         </div>
     `,
 });

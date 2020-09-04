@@ -1,4 +1,3 @@
-
 import Vue from "vue";
 import { PreferencesManager } from "./PreferencesManager";
 import { LANGUAGES } from "../constants";
@@ -8,7 +7,7 @@ export const Preferences = Vue.component("preferences", {
     data: function () {
         return {
             "ui": {
-                "preferences_panel_open": false
+                "preferences_panel_open": false,
             },
             "hide_corporation": false,
             "hide_hand": false,
@@ -25,24 +24,30 @@ export const Preferences = Vue.component("preferences", {
             "hide_ma_scores": false,
             "hide_non_blue_cards": false,
             "lang": "en",
-            "langs": LANGUAGES
+            "langs": LANGUAGES,
         };
     },
     methods: {
-        setPreferencesCSS: function(val: boolean | undefined, cssClassSuffix: string): void {
+        setPreferencesCSS: function (
+            val: boolean | undefined,
+            cssClassSuffix: string
+        ): void {
             let target = document.getElementById("ts-preferences-target");
-            if ( ! target) return;
+            if (!target) return;
             if (val) {
                 target.classList.add("preferences_" + cssClassSuffix);
             } else {
                 target.classList.remove("preferences_" + cssClassSuffix);
             }
 
-            if ( ! target.classList.contains("language-"+this.lang)) {
+            if (!target.classList.contains("language-" + this.lang)) {
                 target.classList.add("language-" + this.lang);
             }
         },
-        updatePreferencesFromStorage: function (): Map<string, boolean | string>  {
+        updatePreferencesFromStorage: function (): Map<
+            string,
+            boolean | string
+        > {
             for (let k of PreferencesManager.keys) {
                 let val = PreferencesManager.loadValue(k);
                 if (k === "lang") {
@@ -50,14 +55,14 @@ export const Preferences = Vue.component("preferences", {
                     this[k] = val || "en";
                     PreferencesManager.preferencesValues.set(k, val || "en");
                 } else {
-                    let boolVal = (val !== "") ? val === "1" : this.$data[k];
+                    let boolVal = val !== "" ? val === "1" : this.$data[k];
                     PreferencesManager.preferencesValues.set(k, val === "1");
                     this.$data[k] = boolVal;
                 }
             }
             return PreferencesManager.preferencesValues;
         },
-        updatePreferences: function (_evt: any):void {
+        updatePreferences: function (_evt: any): void {
             var strVal: string = "";
             for (let k of PreferencesManager.keys) {
                 let val = PreferencesManager.preferencesValues.get(k);
@@ -65,7 +70,7 @@ export const Preferences = Vue.component("preferences", {
                     if (k === "lang") {
                         strVal = this.$data[k];
                     } else {
-                        strVal = this.$data[k] ? "1": "0";
+                        strVal = this.$data[k] ? "1" : "0";
                     }
                     PreferencesManager.saveValue(k, strVal);
                     PreferencesManager.preferencesValues.set(k, this.$data[k]);
@@ -73,12 +78,12 @@ export const Preferences = Vue.component("preferences", {
                 }
             }
         },
-        syncPreferences: function(): void {
+        syncPreferences: function (): void {
             for (let k of PreferencesManager.keys) {
                 this.$data[k] = PreferencesManager.preferencesValues.get(k);
                 this.setPreferencesCSS(this.$data[k], k);
             }
-        }
+        },
     },
     mounted: function () {
         this.updatePreferencesFromStorage();
@@ -98,7 +103,7 @@ export const Preferences = Vue.component("preferences", {
                     </div>
                 </a>
                 <a href="#cards">
-                    <div class="preferences_item">
+                    <div class="preferences_item goto-cards">
                         <i class="preferences_icon preferences_icon--cards"><slot></slot></i>
                     </div>
                 </a>
@@ -198,5 +203,5 @@ export const Preferences = Vue.component("preferences", {
                 </div>
             </div>
         </div>
-    `
+    `,
 });

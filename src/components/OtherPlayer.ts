@@ -5,7 +5,7 @@ import { PlayerResources } from "./overview/PlayerResources";
 import { StackedCards } from "./StackedCards";
 import { PlayerMixin } from "./PlayerMixin";
 import { TagCount } from "./TagCount";
-import { hidePlayerData } from "./PlayerHome";
+import { hidePlayerData } from "./overview/PlayerStatus";
 
 export const OtherPlayer = Vue.component("other-player", {
     props: ["player"],

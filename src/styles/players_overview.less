@@ -1,19 +1,12 @@
 .icon-first-player {
-    text-shadow: 0 0 5px darkorange;
     color: #000;
-    width: 35px;
-    height: 35px;
-    line-height: 31px;
+    color: white;
     text-align: center;
-    font-size: 26px;
-    border-radius: 50%;
-    background-image: url(assets/mars.png);
-    background-size: 120px 120px;
-    background-position: 88px 92px;
-    border-top: 2px solid #bb8760;
-    border-left: 2px solid #bb8760;
-    border-bottom: 2px solid #744631;
-    border-right: 2px solid #744631;
+    font-size: 20px;
+    background: black;
+    font-family: Prototype;
+    padding: 1px 4px;
+    border-radius: 8px;
 }
 
 .players-overview {
@@ -38,31 +31,78 @@
             margin-left: 16px;
         }
         .player-status {
-            width: 130px;
-            .top-row {
-                display: flex;
-                flex-flow: row;
-                position: relative;
-                .player-view-status {
-                    display: none;
-                }
-                .player-name {
-                    cursor: pointer;
-                    color: #ccc;
-                    text-shadow: 1px 1px 1px #222, -1px -1px 1px #666;
-                    border-radius: 4px;
-                    font-size: 20px;
-                    max-width: 90px;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
-                .player-name--inactive {
-                    cursor: default !important;
-                }
+            display: flex;
+            .player-status-left {
+                width: 130px;
+                .top-row {
+                    display: flex;
+                    flex-flow: row;
+                    position: relative;
+                    .player-view-status {
+                        display: none;
+                    }
+                    .player-name {
+                        cursor: pointer;
+                        color: #ccc;
+                        text-shadow: 1px 1px 1px #222, -1px -1px 1px #666;
+                        border-radius: 4px;
+                        font-size: 20px;
+                        max-width: 90px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                    .player-name--inactive {
+                        cursor: default !important;
+                    }
 
-                .icon-first-player-offset {
-                    position: absolute;
-                    right: -2px;
+                    .icon-first-player-offset {
+                        position: absolute;
+                        right: -2px;
+                    }
+                }
+            }
+            .player-status-right {
+                margin-left: 8px;
+                .icons-and-count {
+                    display: flex;
+                    align-items: center;
+                    flex-flow: column;
+                    border-radius: 8px;
+                    padding: 4px;
+                    background: linear-gradient(
+                        #33200f 10%,
+                        rgba(0, 0, 0, 0.3) 50%
+                    );
+                    .played-cards-icons {
+                        display: flex;
+                        .played-cards-arrow {
+                            width: 15px;
+                            height: 23px;
+                            background: url("/assets/green-arrow-down-15x23.png");
+                        }
+                        .played-cards-icon {
+                            width: 28px;
+                            height: 20px;
+                            margin-left: 4px;
+                            margin-top: 2px;
+                            background: url("/assets/icon_card.png");
+                        }
+                    }
+                    .played-cards-count {
+                        font-size: 20px;
+                        font-family: Prototype;
+                        line-height: 1;
+                        margin-top: 3px;
+                        text-shadow: 0 1px 1px black;
+                    }
+                }
+                .played-cards-show {
+                    background: #5755d9;
+                    border-color: #4b48d6;
+                    color: #fff;
+                    cursor: pointer;
+                    height: 1.35rem;
+                    line-height: 0.75rem;
                 }
             }
             .player-corp {

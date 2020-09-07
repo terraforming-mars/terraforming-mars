@@ -38,8 +38,6 @@ import { VenusInfrastructure } from './VenusInfrastructure';
 import { CloudSocieties } from './CloudSocieties';
 import { MicrogravityHealthProblems } from "./MicrogravityHealthProblems";
 
-
-
 export interface IGlobalEventFactory<T> {
     globalEventName: GlobalEventName;
     factory: new () => T
@@ -56,57 +54,68 @@ export const VENUS_COLONY_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>
     { globalEventName: GlobalEventName.CLOUD_SOCIETIES , factory: CloudSocieties },  
 ];    
 
-// ALL GLOBAL EVENTS
-export const ALL_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
-    { globalEventName: GlobalEventName.GLOBAL_DUST_STORM , factory: GlobalDustStorm },
+// ALL POSITIVE GLOBAL EVENTS
+export const POSITIVE_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
     { globalEventName: GlobalEventName.SPONSORED_PROJECTS , factory: SponsoredProjects },
     { globalEventName: GlobalEventName.ASTEROID_MINING , factory: AsteroidMining },
     { globalEventName: GlobalEventName.GENEROUS_FUNDING , factory: GenerousFunding },
     { globalEventName: GlobalEventName.SUCCESSFUL_ORGANISMS , factory: SuccessfulOrganisms },
-    { globalEventName: GlobalEventName.ECO_SABOTAGE , factory: EcoSabotage },
     { globalEventName: GlobalEventName.PRODUCTIVITY , factory: Productivity },
     { globalEventName: GlobalEventName.HOMEWORLD_SUPPORT , factory: HomeworldSupport },
+    { globalEventName: GlobalEventName.VOLCANIC_ERUPTIONS , factory: VolcanicEruptions },
+    { globalEventName: GlobalEventName.DIVERSITY , factory: Diversity },
+    { globalEventName: GlobalEventName.IMPROVED_ENERGY_TEMPLATES , factory: ImprovedEnergyTemplates },
+    { globalEventName: GlobalEventName.INTERPLANETARY_TRADE , factory: InterplanetaryTrade },
+    { globalEventName: GlobalEventName.CELEBRITY_LEADERS , factory: CelebrityLeaders },
+    { globalEventName: GlobalEventName.SPINOFF_PRODUCTS , factory: SpinoffProducts },
+    { globalEventName: GlobalEventName.ELECTION , factory: Election },    
+    { globalEventName: GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL , factory: AquiferReleasedByPublicCouncil },
+    { globalEventName: GlobalEventName.SCIENTIFIC_COMMUNITY , factory: ScientificCommunity },
+    { globalEventName: GlobalEventName.STRONG_SOCIETY , factory: StrongSociety },
+    { globalEventName: GlobalEventName.VENUS_INFRASTRUCTURE , factory: VenusInfrastructure },  
+];
+
+// ALL NEGATIVE GLOBAL EVENTS
+export const NEGATIVE_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
+    { globalEventName: GlobalEventName.GLOBAL_DUST_STORM , factory: GlobalDustStorm },
+    { globalEventName: GlobalEventName.ECO_SABOTAGE , factory: EcoSabotage },
     { globalEventName: GlobalEventName.MINERS_ON_STRIKE , factory: MinersOnStrike },
     { globalEventName: GlobalEventName.MUD_SLIDES , factory: MudSlides },
     { globalEventName: GlobalEventName.REVOLUTION , factory: Revolution },
     { globalEventName: GlobalEventName.RIOTS , factory: Riots },
     { globalEventName: GlobalEventName.SABOTAGE , factory: Sabotage },
     { globalEventName: GlobalEventName.SNOW_COVER , factory: SnowCover },
-    { globalEventName: GlobalEventName.VOLCANIC_ERUPTIONS , factory: VolcanicEruptions },
-    { globalEventName: GlobalEventName.DIVERSITY , factory: Diversity },     
     { globalEventName: GlobalEventName.PANDEMIC , factory: Pandemic },        
-    { globalEventName: GlobalEventName.WAR_ON_EARTH , factory: WarOnEarth },    
-    { globalEventName: GlobalEventName.IMPROVED_ENERGY_TEMPLATES , factory: ImprovedEnergyTemplates },
-    { globalEventName: GlobalEventName.INTERPLANETARY_TRADE , factory: InterplanetaryTrade },
-    { globalEventName: GlobalEventName.CELEBRITY_LEADERS , factory: CelebrityLeaders },
-    { globalEventName: GlobalEventName.SPINOFF_PRODUCTS , factory: SpinoffProducts },
-    { globalEventName: GlobalEventName.ELECTION , factory: Election },    
-    { globalEventName: GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL , factory: AquiferReleasedByPublicCouncil },   
+    { globalEventName: GlobalEventName.WAR_ON_EARTH , factory: WarOnEarth },
     { globalEventName: GlobalEventName.PARADIGM_BREAKDOWN , factory: ParadigmBreakdown },
     { globalEventName: GlobalEventName.DRY_DESERTS , factory: DryDeserts },
-    { globalEventName: GlobalEventName.SCIENTIFIC_COMMUNITY , factory: ScientificCommunity },
     { globalEventName: GlobalEventName.RED_INFLUENCE , factory: RedInfluence },
     { globalEventName: GlobalEventName.SOLARNET_SHUTDOWN , factory: SolarnetShutdown },
-    { globalEventName: GlobalEventName.STRONG_SOCIETY , factory: StrongSociety },
     { globalEventName: GlobalEventName.SOLAR_FLARE , factory: SolarFlare },
-    { globalEventName: GlobalEventName.VENUS_INFRASTRUCTURE , factory: VenusInfrastructure },
-    
 ];
 
 // Function to return a global event object by its name
 export function getGlobalEventByName(globalEventName: string): IGlobalEvent | undefined {
-    let globalEventFactory = ALL_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
+    let globalEventFactory = POSITIVE_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
     if (globalEventFactory !== undefined) {
         return new globalEventFactory.factory();
     }
+
+    globalEventFactory = NEGATIVE_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
+    if (globalEventFactory !== undefined) {
+        return new globalEventFactory.factory();
+    }
+
     globalEventFactory = COLONY_ONLY_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
     if (globalEventFactory !== undefined) {
         return new globalEventFactory.factory();
     }
+
     globalEventFactory = VENUS_COLONY_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
     if (globalEventFactory !== undefined) {
         return new globalEventFactory.factory();
     }
+
     return undefined;
 }
 
@@ -115,14 +124,18 @@ export class GlobalEventDealer {
     public discardedGlobalEvents: Array<IGlobalEvent> = [];
 
     public initGlobalEvents(game: Game) {
-        var events;
-        if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
-            events = [...COLONY_ONLY_GLOBAL_EVENTS, ...VENUS_COLONY_GLOBAL_EVENTS, ...ALL_GLOBAL_EVENTS];
-        } else if (!game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
-            events = [...COLONY_ONLY_GLOBAL_EVENTS, ...ALL_GLOBAL_EVENTS];
-        } else {
-            events = [...ALL_GLOBAL_EVENTS];
+        var events = [...POSITIVE_GLOBAL_EVENTS];
+
+        if (!game.gameOptions.removeNegativeGlobalEventsOption) {
+            events.push(...NEGATIVE_GLOBAL_EVENTS);
         }
+
+        if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
+            events.push(...COLONY_ONLY_GLOBAL_EVENTS, ...VENUS_COLONY_GLOBAL_EVENTS);
+        } else if (!game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
+            events.push(...COLONY_ONLY_GLOBAL_EVENTS);
+        }
+
         this.globalEventsDeck = this.shuffle(events.map((cf) => new cf.factory()));
     };
 

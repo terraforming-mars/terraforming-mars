@@ -376,6 +376,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         promoCardsOption: gameReq.promoCardsOption,
         undoOption: gameReq.undoOption,
         fastModeOption: gameReq.fastModeOption,
+        removeNegativeGlobalEventsOption: gameReq.removeNegativeGlobalEventsOption,
         startingCorporations: gameReq.startingCorporations,
         includeVenusMA: gameReq.includeVenusMA,
         soloTR: gameReq.soloTR,

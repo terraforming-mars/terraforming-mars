@@ -20,7 +20,7 @@ export class Aridor implements CorporationCard {
     public allTags = new Set();
 
     public initialAction(player: Player, game: Game) {
-        if (game.colonyDealer === undefined || !game.coloniesExtension) return undefined;
+        if (game.colonyDealer === undefined || !game.gameOptions.coloniesExtension) return undefined;
         let addColony = new OrOptions();
         addColony.title = "Aridor first action - Select colony tile to add";
         game.colonyDealer.discardedColonies.forEach(colony => {

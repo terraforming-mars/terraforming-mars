@@ -82,6 +82,7 @@ export interface GameOptions {
   promoCardsOption: boolean;
   undoOption: boolean;
   fastModeOption: boolean;
+  removeNegativeGlobalEventsOption: boolean;
   includeVenusMA: boolean;
   startingCorporations: number;
   soloTR: boolean;
@@ -172,6 +173,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           promoCardsOption: false,
           undoOption: false,
           fastModeOption: false,
+          removeNegativeGlobalEventsOption: false,
           startingCorporations: 2,
           includeVenusMA: true,
           soloTR: false,

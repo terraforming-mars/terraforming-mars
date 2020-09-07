@@ -1153,6 +1153,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.generation%2 === 1) {
         nextPlayer = this.getNextPlayer(this.players, player);
       }
+      // Change initial draft direction on second iteration
+      if (this.initialDraftIteration === 2 && this.generation === 1) {
+        nextPlayer = this.getPreviousPlayer(this.players, player);
+      }
+      
       if (nextPlayer !== undefined) {
         return nextPlayer;
       }

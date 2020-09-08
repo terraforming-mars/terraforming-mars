@@ -101,36 +101,18 @@ export const NEGATIVE_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = 
 
 // Function to return a global event object by its name
 export function getGlobalEventByName(globalEventName: string): IGlobalEvent | undefined {
-    let globalEventFactory = POSITIVE_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
-    if (globalEventFactory !== undefined) {
-        return new globalEventFactory.factory();
-    }
+    const allEvents = [
+        ...POSITIVE_GLOBAL_EVENTS,
+        ...NEGATIVE_GLOBAL_EVENTS,
+        ...COLONY_ONLY_POSITIVE_GLOBAL_EVENTS,
+        ...COLONY_ONLY_NEGATIVE_GLOBAL_EVENTS,
+        ...VENUS_COLONY_POSITIVE_GLOBAL_EVENTS,
+        ...VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS
+    ];
+    
+    const globalEventFactory = allEvents.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
 
-    globalEventFactory = NEGATIVE_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
-    if (globalEventFactory !== undefined) {
-        return new globalEventFactory.factory();
-    }
-
-    globalEventFactory = COLONY_ONLY_POSITIVE_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
-    if (globalEventFactory !== undefined) {
-        return new globalEventFactory.factory();
-    }
-
-    globalEventFactory = COLONY_ONLY_NEGATIVE_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
-    if (globalEventFactory !== undefined) {
-        return new globalEventFactory.factory();
-    }
-
-    globalEventFactory = VENUS_COLONY_POSITIVE_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
-    if (globalEventFactory !== undefined) {
-        return new globalEventFactory.factory();
-    }
-
-    globalEventFactory = VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
-    if (globalEventFactory !== undefined) {
-        return new globalEventFactory.factory();
-    }
-
+    if (globalEventFactory !== undefined) return new globalEventFactory.factory();
     return undefined;
 }
 

@@ -1045,8 +1045,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.runDraftRound(initialDraft);
       } else {
         // Push last card for each player
-        this.gameOptions.initialDraftVariant = false;
-
         this.players.forEach((player) => {
           let lastCards  = this.unDraftedCards.get(this.getDraftCardsFrom(player));
           if (lastCards !== undefined) {
@@ -1060,12 +1058,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
 
           if (initialDraft && this.initialDraftIteration === 2 && !this.gameOptions.preludeExtension) {
+            this.gameOptions.initialDraftVariant = false;
             player.setWaitingFor(this.pickCorporationCard(player), () => {});
           }
 
           if (initialDraft && this.initialDraftIteration === 3) {
             player.dealtPreludeCards = player.draftedCards;
             player.draftedCards = [];
+            this.gameOptions.initialDraftVariant = false;
             player.setWaitingFor(this.pickCorporationCard(player), () => {});
           }          
         });

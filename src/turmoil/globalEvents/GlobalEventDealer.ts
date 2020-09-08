@@ -43,16 +43,21 @@ export interface IGlobalEventFactory<T> {
     factory: new () => T
 }
 
-// COLONY ONLY GLOBAL EVENT
-export const COLONY_ONLY_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
+export const COLONY_ONLY_POSITIVE_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
     { globalEventName: GlobalEventName.JOVIAN_TAX_RIGHTS , factory: JovianTaxRights },
-    { globalEventName: GlobalEventName.MICROGRAVITY_HEALTH_PROBLEMS , factory: MicrogravityHealthProblems },
-];    
+];
 
-export const VENUS_COLONY_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
-    { globalEventName: GlobalEventName.CORROSIVE_RAIN , factory: CorrosiveRain },
+export const COLONY_ONLY_NEGATIVE_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
+    { globalEventName: GlobalEventName.MICROGRAVITY_HEALTH_PROBLEMS , factory: MicrogravityHealthProblems },
+];
+
+export const VENUS_COLONY_POSITIVE_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
     { globalEventName: GlobalEventName.CLOUD_SOCIETIES , factory: CloudSocieties },  
-];    
+];
+
+export const VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
+    { globalEventName: GlobalEventName.CORROSIVE_RAIN , factory: CorrosiveRain },
+];
 
 // ALL POSITIVE GLOBAL EVENTS
 export const POSITIVE_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
@@ -106,12 +111,22 @@ export function getGlobalEventByName(globalEventName: string): IGlobalEvent | un
         return new globalEventFactory.factory();
     }
 
-    globalEventFactory = COLONY_ONLY_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
+    globalEventFactory = COLONY_ONLY_POSITIVE_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
     if (globalEventFactory !== undefined) {
         return new globalEventFactory.factory();
     }
 
-    globalEventFactory = VENUS_COLONY_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
+    globalEventFactory = COLONY_ONLY_NEGATIVE_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
+    if (globalEventFactory !== undefined) {
+        return new globalEventFactory.factory();
+    }
+
+    globalEventFactory = VENUS_COLONY_POSITIVE_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
+    if (globalEventFactory !== undefined) {
+        return new globalEventFactory.factory();
+    }
+
+    globalEventFactory = VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
     if (globalEventFactory !== undefined) {
         return new globalEventFactory.factory();
     }
@@ -128,12 +143,17 @@ export class GlobalEventDealer {
 
         if (!game.gameOptions.removeNegativeGlobalEventsOption) {
             events.push(...NEGATIVE_GLOBAL_EVENTS);
+            if (game.gameOptions.coloniesExtension) events.push(...COLONY_ONLY_NEGATIVE_GLOBAL_EVENTS);
+
+            if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
+                events.push(...VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS)
+            };
         }
 
+        if (game.gameOptions.coloniesExtension) events.push(...COLONY_ONLY_POSITIVE_GLOBAL_EVENTS);
+
         if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
-            events.push(...COLONY_ONLY_GLOBAL_EVENTS, ...VENUS_COLONY_GLOBAL_EVENTS);
-        } else if (!game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
-            events.push(...COLONY_ONLY_GLOBAL_EVENTS);
+            events.push(...VENUS_COLONY_POSITIVE_GLOBAL_EVENTS);
         }
 
         this.globalEventsDeck = this.shuffle(events.map((cf) => new cf.factory()));
@@ -153,5 +173,4 @@ export class GlobalEventDealer {
         if (globalEvent) return globalEvent;
         return undefined;
     }
-
 }    

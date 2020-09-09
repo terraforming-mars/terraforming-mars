@@ -27,7 +27,7 @@ export const PlayerInfo = Vue.component("player-info", {
         <div :class="getClasses()">
             <player-status :player="player" :activePlayer="activePlayer" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel"/>
             <player-resources :player="player" v-trim-whitespace />
-            <player-tags v-if="player.tags.length > 0" :player="player" v-trim-whitespace />
+            <player-tags :player="player" v-trim-whitespace />
         </div>
     `,
 });

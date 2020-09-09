@@ -1,13 +1,16 @@
 import Vue from "vue";
-import {Tags} from "../cards/Tags";
-import {PlayerModel} from "../models/PlayerModel";
+import { Tags } from "../cards/Tags";
+import { PlayerModel } from "../models/PlayerModel";
 
 export const TagOverview = Vue.component("tags", {
     props: ["player"],
     methods: {
         toggleMe: function () {
             let currentState: boolean = this.isVisible();
-            (this.$root as any).setVisibilityState("tags_overview", ! currentState);
+            (this.$root as any).setVisibilityState(
+                "tags_overview",
+                !currentState
+            );
         },
         isVisible: function () {
             return (this.$root as any).getVisibilityState("tags_overview");
@@ -16,7 +19,7 @@ export const TagOverview = Vue.component("tags", {
             return Tags;
         },
         getTagCount: function (player: PlayerModel, iTag: Tags) {
-            let tagCount = player.tags.find(({tag}) => tag === iTag);
+            let tagCount = player.tags.find(({ tag }) => tag === iTag);
 
             if (tagCount) {
                 return tagCount.count;
@@ -24,31 +27,31 @@ export const TagOverview = Vue.component("tags", {
             return "-";
         },
         getNoTagsCount: function (player: PlayerModel) {
-            let tagCount : number = player.noTagsCount;
-            
+            let tagCount: number = player.noTagsCount;
+
             if (tagCount > 0) return tagCount;
             return "-";
         },
         getCityCount: function (player: PlayerModel) {
-            let cityCount : number = player.citiesCount;
-            
+            let cityCount: number = player.citiesCount;
+
             if (cityCount > 0) return cityCount;
             return "-";
         },
         getColonyCount: function (player: PlayerModel) {
-            let coloniesCount : number = player.coloniesCount;
+            let coloniesCount: number = player.coloniesCount;
 
             if (coloniesCount > 0) return coloniesCount;
             return "-";
         },
         getInfluence: function (player: PlayerModel) {
-            let influence : number = player.influence;
+            let influence: number = player.influence;
 
             if (influence > 0) return influence;
             return "-";
         },
-        getCardCount: function (player: PlayerModel){
-            if (player.cardsInHandNbr){
+        getCardCount: function (player: PlayerModel) {
+            if (player.cardsInHandNbr) {
                 return player.cardsInHandNbr;
             }
             return "0";
@@ -56,13 +59,13 @@ export const TagOverview = Vue.component("tags", {
         getRT: function (player: PlayerModel): string {
             return player.terraformRating.toString();
         },
-        getVpCount: function (player: PlayerModel){
-            if (this.showVpCount(player)){
+        getVpCount: function (player: PlayerModel) {
+            if (this.showVpCount(player)) {
                 return player.victoryPointsBreakdown.total;
             }
             return "";
         },
-        showVpCount: function (player: PlayerModel){
+        showVpCount: function (player: PlayerModel) {
             return player.showOtherPlayersVP;
         },
         showColonyCount: function (player: PlayerModel) {
@@ -70,7 +73,7 @@ export const TagOverview = Vue.component("tags", {
         },
         showInfluence: function (player: PlayerModel) {
             return player.turmoil;
-        }
+        },
     },
     template: `
     <div v-if="player.players.length > 1" class="tag-overview-cont">
@@ -134,6 +137,5 @@ export const TagOverview = Vue.component("tags", {
             </div>
         </div>
     </div>
-    `
+    `,
 });
-

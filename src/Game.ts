@@ -1441,8 +1441,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
           && this.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES
           && this.gameOptions.boardName === BoardName.HELLAS) {
 
-          this.addOceanInterrupt(player, "Select space for ocean from placement bonus");
-          this.addSelectHowToPayInterrupt(player, 6, false, false, "Select how to pay for placement bonus ocean");
+          if (player.color !== Color.NEUTRAL) {
+            this.addOceanInterrupt(player, "Select space for ocean from placement bonus");
+            this.addSelectHowToPayInterrupt(player, 6, false, false, "Select how to pay for placement bonus ocean");
+          }
       }
 
       // Land claim a player can claim land for themselves

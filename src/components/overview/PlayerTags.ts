@@ -3,6 +3,7 @@ import { TagCount } from "../TagCount";
 import { ITagCount } from "../../ITagCount";
 import { Tags } from "../../cards/Tags";
 import { SpecialTags } from "../../cards/SpecialTags";
+import { isTagsViewConcise } from "./OverviewSettings";
 
 export const PlayerTags = Vue.component("player-tags", {
     props: ["player"],
@@ -45,10 +46,10 @@ export const PlayerTags = Vue.component("player-tags", {
         },
         showShortTags: function (): boolean {
             //return false && this.player.tags.length > 0;
-            return false;
+            return isTagsViewConcise(this.$root);
         },
         showLongTags: function (): boolean {
-            return true;
+            return !isTagsViewConcise(this.$root);
         },
         getTagCount(tagName: Tags | SpecialTags): number {
             if (tagName === SpecialTags.COLONY_COUNT && this.showColonyCount())

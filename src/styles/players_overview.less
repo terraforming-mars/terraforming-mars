@@ -12,6 +12,7 @@
 .players-overview {
     position: relative;
     display: table-caption;
+    margin-top: 40px;
     .player-divider {
         height: 1px;
         width: 100%;
@@ -140,11 +141,25 @@
         }
     }
     .players-overview-settings {
-        display: none;
-        border: 1px solid green;
+        //border: 1px solid green;
+        display: flex;
+        flex-flow: row;
         position: absolute;
-        height: 40px;
-        top: -40px;
-        right: 0;
+        top: -26px;
+        left: 0;
+        font-size: 16px;
+        align-items: center;
+        .setting-label {
+            text-transform: uppercase;
+            margin-right: 8px;
+        }
+        .setting-button {
+            padding: 2px 4px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            color: black;
+            background: #ccc;
+            cursor: pointer;
+        }
     }
 }

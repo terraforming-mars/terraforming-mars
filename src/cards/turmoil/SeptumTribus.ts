@@ -15,7 +15,7 @@ export class SeptumTribus implements IActionCard, CorporationCard {
     }
 
     public canAct(_player: Player, game: Game): boolean {
-        return game.turmoilExtension;
+        return game.gameOptions.turmoilExtension;
     }
 
     public action(player: Player, game: Game) {

@@ -17,7 +17,7 @@ export const hidePlayerData = (root: any, player: PlayerModel) => {
 export const PlayerStatus = Vue.component("player-status", {
     props: ["player", "activePlayer", "firstForGen", "actionLabel"],
     methods: {
-        showPlayerDetails: function () {
+        togglePlayerDetails: function () {
             // for active player => scroll to cards UI
             if (this.player.id === this.activePlayer.id) {
                 let el: HTMLElement = document.getElementsByClassName(
@@ -81,6 +81,9 @@ export const PlayerStatus = Vue.component("player-status", {
                 hidePlayerData(this.$root, hiddenPlayers[i]);
             }
         },
+        buttonLabel: function (): string {
+            return isPinned(this.$root, this.player) ? "hide" : "show";
+        },
     },
     mounted: function () {
         //console.log(this.player, "player");
@@ -91,7 +94,7 @@ export const PlayerStatus = Vue.component("player-status", {
             <div class="player-status-left">
                 <div class="top-row">
                     <div class="player-view-status" />
-                    <div :class="getPlayerNameClasses()" v-on:click.prevent="showPlayerDetails()" >{{ player.name }}</div>
+                    <div :class="getPlayerNameClasses()" v-on:click.prevent="togglePlayerDetails()" >{{ player.name }}</div>
                     <div class="icon-first-player-offset icon-first-player" v-if="firstForGen">1st</div>
                 </div>
                 <div class="player-corp">{{ player.corporationCard.name }}</div>
@@ -105,7 +108,7 @@ export const PlayerStatus = Vue.component("player-status", {
                     </div>
                     <div class="played-cards-count">{{ getNrPlayedCards() }}</div>
                 </div>
-                <button class="played-cards-show btn" v-on:click.prevent="showPlayerDetails()">show</button>
+                <button class="played-cards-show btn" v-on:click.prevent="togglePlayerDetails()">{{ buttonLabel()}}</button>
             </div>
         </div>
     `,

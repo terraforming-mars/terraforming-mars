@@ -8,7 +8,7 @@ Join us on Discord [here](https://discord.gg/fWXE53K).
 
 ## Demo
 
-You can try online [here](https://terraforming-mars.herokuapp.com/). Please post any issues found. If you plan on playing long running games it is recommended to host the game locally. This demo site is currently not stable and gets restarted during each push to `master`. As this repository is gaining in popularity we attempt to make this demo page stable but it can't be guaranteed that your game will not be lost. Running the game locally will always be straight forward and it is highly recommended to host the game locally and provide the server ip to other players.
+You can try online [here](https://terraforming-mars.herokuapp.com/). Please post any issues found. If you plan on playing long running games it is recommended to host the game locally. This demo site is currently not stable and gets restarted during each push to `master`. A multiplayer game will remain available for 10 days, after this delay it will be flushed from the database. Unfinished solo games are flushed after one day. As this repository is gaining in popularity we attempt to make this demo page stable but it can't be guaranteed that your game will not be lost. Running the game locally will always be straight forward and it is highly recommended to host the game locally and provide the server ip to other players.
 
 ## Running
 

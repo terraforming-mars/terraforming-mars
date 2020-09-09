@@ -69,6 +69,10 @@ describe("Herbivores", function () {
     it("Should be playable in solo mode", function () {
         const game = new Game("foobar_solo", [player], player);
         (game as any).oxygenLevel = 8;
+        player.setProduction(Resources.PLANTS);
+
         expect(card.canPlay(player, game)).to.eq(true);
+        card.play(player, game);
+        expect(player.getProduction(Resources.PLANTS)).to.eq(1); // should not decrease
     });
 });

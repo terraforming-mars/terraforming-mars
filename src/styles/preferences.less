@@ -27,6 +27,15 @@
     background-position: -2px;
     box-shadow: 0 1px 1px 0px black;
 }
+.preferences-gen-marker {
+    margin-left: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    font-family: "Prototype";
+}
 
 .preferences_player {
     writing-mode: vertical-rl;
@@ -41,7 +50,6 @@
     width: 26px;
     height: 26px;
     border-radius: 3px;
-
 }
 
 .preferences_icon {
@@ -89,20 +97,19 @@
     position: absolute;
     background: #000;
     margin: 0 0 0 40px;
-
 }
 
 /* Visual effects of changing settings */
 
 /* Reduce all cards size */
 .preferences_small_cards .filterDiv,
-.preferences_small_cards .filterDiv:hover{
+.preferences_small_cards .filterDiv:hover {
     transform: scale(0.8);
     margin: -22px -15px 15px -15px;
 }
 
-.preferences_small_cards input[type=checkbox]:checked + .filterDiv,
-.preferences_small_cards input[type=radio]:checked + .filterDiv {
+.preferences_small_cards input[type="checkbox"]:checked + .filterDiv,
+.preferences_small_cards input[type="radio"]:checked + .filterDiv {
     transform: scale(0.8);
 }
 
@@ -110,7 +117,8 @@
 .preferences_hide_turnorder .player_home_block--turnorder,
 .preferences_hide_corporation .player_home_block--corporation,
 .preferences_hide_hand .player_home_block--hand,
-.preferences_hide_awards_and_milestones .player_home_block--milestones-and-awards,
+.preferences_hide_awards_and_milestones
+    .player_home_block--milestones-and-awards,
 .preferences_hide_tag_overview .tag-overview-cont,
 .preferences_hide_corporation_names .player_home_block--corp-names,
 .preferences_hide_ma_scores .player_home_block--milestones-and-awards-scores,
@@ -130,8 +138,8 @@
 
 /* Card Magnification */
 .preferences_magnify_cards .filterDiv:hover {
-  transform: scale(1.20);
-  z-index: 2;
+    transform: scale(1.2);
+    z-index: 2;
 }
 
 .preferences_magnify_cards .cards-stack:hover,
@@ -142,7 +150,7 @@
 
 /* Magnify the wee little cards in a special way, if requested */
 .preferences_small_cards.preferences_magnify_cards .filterDiv:hover {
-        transform: scale(0.95);
+    transform: scale(0.95);
 }
 
 /* Description Magnification */
@@ -152,9 +160,7 @@
     border-radius: 5px;
     width: 150px;
     margin-left: 31px;
-    box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.6);
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.6);
     padding: 3px;
     z-index: 5;
 }
-
-

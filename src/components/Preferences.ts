@@ -3,7 +3,7 @@ import { PreferencesManager } from "./PreferencesManager";
 import { LANGUAGES } from "../constants";
 
 export const Preferences = Vue.component("preferences", {
-    props: ["player_name", "player_color"],
+    props: ["player_name", "player_color", "generation"],
     data: function () {
         return {
             "ui": {
@@ -84,6 +84,9 @@ export const Preferences = Vue.component("preferences", {
                 this.setPreferencesCSS(this.$data[k], k);
             }
         },
+        getGenMarker: function (): string {
+            return `gen ${this.generation}`;
+        },
     },
     mounted: function () {
         this.updatePreferencesFromStorage();
@@ -91,6 +94,7 @@ export const Preferences = Vue.component("preferences", {
     template: `
         <div class="preferences_cont" :data="syncPreferences()">
                 <div class="preferences_tm"></div>
+                <div class="preferences-gen-marker">{{ getGenMarker() }}</div>
                 <div class="preferences_item preferences_player"><div class="preferences_player_inner" :class="'player_bg_color_' + player_color"></div></div>
                 <a  href="#board">
                     <div class="preferences_item">

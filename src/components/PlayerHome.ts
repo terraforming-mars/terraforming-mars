@@ -100,7 +100,7 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
             </div>
 
-            <preferences v-trim-whitespace :player_name="player.name" :player_color="player.color" >
+            <preferences v-trim-whitespace :player_name="player.name" :player_color="player.color" :generation="player.generation">
                 <div class="deck-size">{{ player.deckSize }}</div>
             </preferences>
 

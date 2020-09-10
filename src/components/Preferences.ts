@@ -24,6 +24,7 @@ export const Preferences = Vue.component("preferences", {
             "show_alerts": true,
             "hide_ma_scores": false,
             "hide_non_blue_cards": false,
+            "hide_log": false,
             "lang": "en",
             "langs": LANGUAGES
         };
@@ -133,6 +134,12 @@ export const Preferences = Vue.component("preferences", {
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_awards_and_milestones" />
                             <i class="form-icon"></i> <span v-i18n>Hide awards and milestones</span>
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="hide_log" />
+                            <i class="form-icon"></i> <span v-i18n>Hide log</span>
                         </label>
                     </div>
                    <div class="preferences_panel_item">

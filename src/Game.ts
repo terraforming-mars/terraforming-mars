@@ -105,7 +105,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private donePlayers: Set<Player> = new Set<Player>();
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
     private venusScaleLevel: number = constants.MIN_VENUS_SCALE;
-    public passedPlayers: Set<PlayerId> = new Set<PlayerId>();
+    private passedPlayers: Set<PlayerId> = new Set<PlayerId>();
     private researchedPlayers: Set<PlayerId> = new Set<PlayerId>();
     private draftedPlayers: Set<PlayerId> = new Set<PlayerId>();
     public board: Board;
@@ -1391,6 +1391,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public getGeneration(): number {
       return this.generation;
     }
+
+    public getPassedPlayers():Set<PlayerId> {
+      return this.passedPlayers;
+    } 
 
     public getPlayer(name: string): Player {
       const found = this.players.filter((player) => player.name === name);

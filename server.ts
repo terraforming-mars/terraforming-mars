@@ -567,7 +567,7 @@ function getPlayer(player: Player, game: Game): string {
         deckSize: game.dealer.getDeckSize(),
         randomMA: game.gameOptions.randomMA,
         actionsTakenThisRound: player.actionsTakenThisRound,
-        passedPlayers: Array.from(game.passedPlayers), // JSON stringify does not honor sets
+        passedPlayers: Array.from(game.getPassedPlayers()), // JSON stringify does not honor sets
     } as PlayerModel;
     return JSON.stringify(output);
 }

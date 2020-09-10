@@ -57,7 +57,8 @@ export const PlayerTags = Vue.component("player-tags", {
                 return this.player.influence || 0;
             if (tagName === SpecialTags.CITY_COUNT)
                 return this.player.citiesCount || 0;
-            if (tagName === Tags.NONE) return this.player.noTagsCount || 0;
+            if (tagName === SpecialTags.NONE)
+                return this.player.noTagsCount || 0;
             const basicTagFound = this.player.tags.find(
                 (tag: ITagCount) => tag.tag === tagName
             );

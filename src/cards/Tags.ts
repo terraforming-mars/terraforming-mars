@@ -12,5 +12,4 @@ export enum Tags {
     CITY = "city",
     WILDCARD = "wild",
     EVENT = "event",
-    NONE = "none",
 }

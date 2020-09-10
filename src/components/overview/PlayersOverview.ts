@@ -76,21 +76,12 @@ export const PlayersOverview = Vue.component("players-overview", {
                     : currentPlayerIndex - 1;
             const isNext = notPassedPlayers[prevPlayerIndex].isActive;
 
-            /* TODO -> this will come once we get the values for actions w/o reset
-            if (player.actionsTakenThisRound === 1)
-                return isNext ? `${ActionLabel.NEXT} (1)` : ActionLabel.ONE;
-            if (player.actionsTakenThisRound === 2)
-                return isNext ? `${ActionLabel.NEXT} (2)` : ActionLabel.TWO; */
-
             if (isNext) {
                 return ActionLabel.NEXT;
             }
 
             return ActionLabel.NONE;
         },
-    },
-    mounted: function () {
-        // console.log(this.player);
     },
     template: `
         <div class="players-overview" v-if="hasPlayers()">

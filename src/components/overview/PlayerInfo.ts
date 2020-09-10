@@ -18,11 +18,6 @@ export const PlayerInfo = Vue.component("player-info", {
             return classes.join(" ");
         },
     },
-    mounted: function () {
-        // console.log(this.player, "PLAYER in INFO");
-        // console.log(this.activePlayer, "Active pl id");
-        // console.log(this.activePlayer, "ACTIVE PLAYER");
-    },
     template: ` 
         <div :class="getClasses()">
             <player-status :player="player" :activePlayer="activePlayer" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel"/>

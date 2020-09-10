@@ -45,7 +45,6 @@ export const PlayerTags = Vue.component("player-tags", {
             return this.player.showOtherPlayersVP;
         },
         showShortTags: function (): boolean {
-            //return false && this.player.tags.length > 0;
             return isTagsViewConcise(this.$root);
         },
         showLongTags: function (): boolean {

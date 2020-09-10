@@ -85,10 +85,6 @@ export const PlayerStatus = Vue.component("player-status", {
             return isPinned(this.$root, this.player) ? "hide" : "show";
         },
     },
-    mounted: function () {
-        //console.log(this.player, "player");
-        //console.log(this.activePlayer, "active player id");
-    },
     template: `
         <div class="player-status">
             <div class="player-status-left">

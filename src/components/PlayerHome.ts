@@ -18,15 +18,8 @@ import { Turmoil } from "./Turmoil";
 import { TagOverview } from "./TagOverview";
 
 const dialogPolyfill = require("dialog-polyfill");
-const isPinned = (root: any, player: PlayerModel): boolean => {
-    return (root as any).getVisibilityState("show_pin_" + player.id);
-};
-const showPlayerData = (root: any, player: PlayerModel) => {
-    (root as any).setVisibilityState("show_pin_" + player.id, true);
-    (root as any).setVisibilityState("other_player_" + player.id, true);
-};
+
 export const hidePlayerData = (root: any, player: PlayerModel) => {
-    (root as any).setVisibilityState("show_pin_" + player.id, false);
     (root as any).setVisibilityState("other_player_" + player.id, false);
 };
 
@@ -72,36 +65,6 @@ export const PlayerHome = Vue.component("player-home", {
                 "other_player_" + player.id,
                 true
             );
-        },
-        pinPlayer: function (player: PlayerModel) {
-            let hiddenPlayers: Array<PlayerModel> = [];
-            let playerPinned = isPinned(this.$root, player);
-
-            // if player is already pinned, on unpin add to hidden players
-            if (playerPinned) {
-                hiddenPlayers = this.player.players;
-            } else {
-                showPlayerData(this.$root, player);
-
-                for (i = 0; i < this.player.players.length; i++) {
-                    let p = this.player.players[i];
-                    if (p.id === this.player.id || player.id !== p.id) {
-                        hiddenPlayers.push(p);
-                    }
-                }
-            }
-
-            for (var i = 0; i < hiddenPlayers.length; i++) {
-                hidePlayerData(this.$root, hiddenPlayers[i]);
-            }
-        },
-        hasPinIcon: function (player: PlayerModel): boolean {
-            return player.id !== this.player.id;
-        },
-        getPinIsActiveClass: function (player: PlayerModel): string {
-            return isPinned(this.$root, player)
-                ? "player_pin_selected"
-                : "player_pin_not_selected";
         },
         getFleetsCountRange: function (player: PlayerModel): Array<number> {
             const fleetsRange: Array<number> = [];
@@ -160,56 +123,11 @@ export const PlayerHome = Vue.component("player-home", {
                     <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
                         <milestone :milestones_list="player.milestones" />
                         <award :awards_list="player.awards" />
-                    </div>
-                    
-
-                    <tags style="display:none" :player="player" />
+                    </div> 
                 </div>
                 
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace />
                  
-                <div style="display:none" class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
-                    <h2 :class="'player_color_'+ player.color">
-                        <span v-i18n>Turn order</span>
-                        <span class="help_tip" v-i18n>(click on player name to see details)</span>
-                    </h2>
-                    <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
-                        <span>
-                            <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
-                                <span class="player_number">{{ idx+1 }}.</span><a v-on:click.prevent="showPlayerDetails(p)" class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</a>
-                                <div class="player_home_block--corp-names corporation-name-cont">
-                                <span class="corporation-name" v-if="p.corporationCard">{{ p.corporationCard.name }}</span>
-                            </div>
-                            </div>
-                            <div class="player_pin" :class="getPinIsActiveClass(p)" v-on:click.prevent="pinPlayer(p)" v-if="hasPinIcon(p)"><div class="pin_icon"></div></div>
-                            <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
-                        </span> 
-                        
-                    </div>
-                    <div class="other_player" v-if="player.players.length > 1">
-                        <div v-for="otherPlayer in player.players" :key="otherPlayer.id">
-                            <other-player v-if="otherPlayer.id !== player.id" :player="otherPlayer"></other-player>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="display:none" class="tag-display tags_item_cont tag-display-tags" v-if="player.tags.length > 0">
-                    <div v-for="tag in player.tags">
-                        <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>
-                    </div>
-                </div>
-                <div style="display:none" class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
-                    <div>
-                        <div class="tag-display">
-                            <div class="tag-count icon-vp">{{player.victoryPointsBreakdown.total}}</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="display:none" class="player_home_block player_home_block--resources nofloat">
-                    <player-resources :player="player" v-trim-whitespace></player-resources>
-                </div>
-
                 <div class="player_home_block player_home_block--actions nofloat">
                     <a name="actions" class="player_home_anchor"></a>
                     <h2 :class="'player_color_'+ player.color" v-i18n>Actions</h2>

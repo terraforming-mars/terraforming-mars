@@ -91,7 +91,7 @@ export const PlayerStatus = Vue.component("player-status", {
                 <div class="top-row">
                     <div class="player-view-status" />
                     <div :class="getPlayerNameClasses()" v-on:click.prevent="togglePlayerDetails()" >{{ player.name }}</div>
-                    <div class="icon-first-player-offset icon-first-player" v-if="firstForGen">1st</div>
+                    <div class="icon-first-player-offset icon-first-player" v-if="firstForGen && activePlayer.players.length > 1">1st</div>
                 </div>
                 <div class="player-corp">{{ player.corporationCard.name }}</div>
                 <div v-if="showLabel()" :class="getLabelClasses()">{{ actionLabel }}</div>

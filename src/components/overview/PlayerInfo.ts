@@ -4,7 +4,7 @@ import { PlayerTags } from "./PlayerTags";
 import { PlayerStatus } from "./PlayerStatus";
 import { playerBgColorClass } from "../../utils/utils";
 
-const SM_BREAKPOINT = 960;
+const BREAKPOINT = 1620;
 
 export const PlayerInfo = Vue.component("player-info", {
     props: ["player", "activePlayer", "firstForGen", "actionLabel"],
@@ -29,14 +29,14 @@ export const PlayerInfo = Vue.component("player-info", {
         getClasses: function (): string {
             let classes = ["player-info"];
             classes.push(playerBgColorClass(this.player.color));
-            if (this.width < SM_BREAKPOINT) {
+            if (this.width < BREAKPOINT) {
                 classes.push("stack-tags-under");
             }
             return classes.join(" ");
         },
         getPlayerStatusAndResClasses: function (): string {
             let classes = ["player-status-and-res"];
-            if (this.width < SM_BREAKPOINT) {
+            if (this.width < BREAKPOINT) {
                 classes.push("stats-and-res-separator");
             }
             return classes.join(" ");

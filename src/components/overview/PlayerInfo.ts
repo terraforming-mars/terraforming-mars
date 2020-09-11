@@ -4,7 +4,7 @@ import { PlayerTags } from "./PlayerTags";
 import { PlayerStatus } from "./PlayerStatus";
 import { playerBgColorClass } from "../../utils/utils";
 
-const BREAKPOINT = 1620;
+const BREAKPOINT = 1740;
 
 export const PlayerInfo = Vue.component("player-info", {
     props: ["player", "activePlayer", "firstForGen", "actionLabel"],

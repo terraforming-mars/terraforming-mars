@@ -310,6 +310,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Save initial game state
       Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer), this.players.length);
 
+      // Print game_id if solo game
+      if (players.length === 1) {
+        this.log(
+          LogMessageType.DEFAULT,
+          "The id of this game is ${0}",
+          new LogMessageData(LogMessageDataType.STRING, this.id.toString())
+        );        
+      }      
+
       this.log(
         LogMessageType.NEW_GENERATION,
         "Generation ${0}",

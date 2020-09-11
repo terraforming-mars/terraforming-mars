@@ -79,7 +79,9 @@ export class LogHelper {
     static logTilePlacement(game: Game, player: Player, space: ISpace, tileType: TileType) {
 
         // Skip off-grid tiles
-        if (space.x === -1 && space.y === -1) return;
+        if (space.x === -1 && space.y === -1) return
+        // Skip solo play random tiles
+        if (player.name === "neutral") return;
 
         let type : string;
         let offset: number = Math.abs(space.y - 4);

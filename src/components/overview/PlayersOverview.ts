@@ -6,6 +6,8 @@ import { OtherPlayer } from "../OtherPlayer";
 import { PlayerModel } from "../../models/PlayerModel";
 import { ActionLabel } from "./ActionLabel";
 
+const SHOW_NEXT_LABEL_MIN = 2;
+
 export const getCurrentPlayerIndex = (
     player: Player | PlayerModel,
     players: Array<Player>
@@ -76,7 +78,7 @@ export const PlayersOverview = Vue.component("players-overview", {
                     : currentPlayerIndex - 1;
             const isNext = notPassedPlayers[prevPlayerIndex].isActive;
 
-            if (isNext) {
+            if (isNext && this.player.players.length > SHOW_NEXT_LABEL_MIN) {
                 return ActionLabel.NEXT;
             }
 

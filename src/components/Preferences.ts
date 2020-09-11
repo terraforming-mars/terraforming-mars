@@ -3,7 +3,7 @@ import { PreferencesManager } from "./PreferencesManager";
 import { LANGUAGES } from "../constants";
 
 export const Preferences = Vue.component("preferences", {
-    props: ["player_name", "player_color", "generation"],
+    props: ["player_name", "player_color", "generation", "coloniesCount"],
     data: function () {
         return {
             "ui": {
@@ -97,19 +97,25 @@ export const Preferences = Vue.component("preferences", {
                 <div class="preferences_tm"></div>
                 <div class="preferences-gen-marker">{{ getGenMarker() }}</div>
                 <div class="preferences_item preferences_player"><div class="preferences_player_inner" :class="'player_bg_color_' + player_color"></div></div>
+                <div class="preferences-divider" />
                 <a  href="#board">
-                    <div class="preferences_item">
+                    <div class="preferences_item preferences_item_shortcut">
                         <i class="preferences_icon preferences_icon--board"></i>
                     </div>
-                </a>
+                </a> 
                 <a  href="#actions">
-                    <div class="preferences_item">
+                    <div class="preferences_item preferences_item_shortcut">
                         <i class="preferences_icon preferences_icon--actions"></i>
                     </div>
                 </a>
                 <a href="#cards">
-                    <div class="preferences_item goto-cards">
+                    <div class="preferences_item goto-cards preferences_item_shortcut">
                         <i class="preferences_icon preferences_icon--cards"><slot></slot></i>
+                    </div>
+                </a>
+                <a v-if="coloniesCount > 0" href="#colonies">
+                    <div class="preferences_item preferences_item_shortcut">
+                        <i class="preferences_icon preferences_icon--colonies"></i>
                     </div>
                 </a>
             <div class="preferences_item preferences_item--settings">

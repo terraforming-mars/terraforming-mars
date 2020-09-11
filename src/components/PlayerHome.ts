@@ -100,7 +100,7 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
             </div>
 
-            <preferences v-trim-whitespace :player_name="player.name" :player_color="player.color" :generation="player.generation">
+            <preferences v-trim-whitespace :player_name="player.name" :player_color="player.color" :generation="player.generation" :coloniesCount="player.colonies.length">
                 <div class="deck-size">{{ player.deckSize }}</div>
             </preferences>
 
@@ -238,6 +238,7 @@ export const PlayerHome = Vue.component("player-home", {
             </div>
 
             <div v-if="player.colonies.length > 0" class="player_home_block">
+                <a name="colonies" class="player_home_anchor"></a>
                 <h2 :class="'player_color_'+ player.color" v-i18n>Colonies</h2>
                 <div class="colonies-fleets-cont" v-if="player.corporationCard">
                     <div class="colonies-player-fleets" v-for="colonyPlayer in player.players">

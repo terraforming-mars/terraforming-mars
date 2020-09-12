@@ -22,6 +22,7 @@ export interface IActionCard {
     canAct: (player: Player, game: Game) => boolean; 
 }
 
+// A card that stores resources on it.
 export interface IResourceCard {
     resourceType: ResourceType;
     resourceCount: number;

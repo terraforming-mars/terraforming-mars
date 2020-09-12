@@ -2011,6 +2011,25 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
+[CardName.ECOLOGICAL_ZONE_ARES,`
+      <div class="title background-color-active">Ecological Zone</div>
+      <div class="price">12</div>
+      <div class="tag tag1 tag-plant"></div>
+      <div class="tag tag2 tag-animal"></div>
+      <div class="card-number">128</div>
+      <div class="content">
+        <div class="points">1/2<div class="resource animal"></div></div>
+        <div class="requirements">Forest</div>
+        <div class="tag-animal resource-tag"></div> / <div class="tag-plant resource-tag"></div> : <div class="animal resource"></div>
+        <div class="description">
+          (Effect: When you play an animal or plant tag (including these), add an animal to this card.)
+        </div>
+        <div class="tile special-tile" style="margin-left:143px;">&#x1F43e;&#xFE0E;</div>
+        <div class="description" style="text-align:left;margin-top:-65px;width: 135px;">
+          (Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. The tile grants an <b>adjacency bonus</b> of 1 animal. 1 VP per 2 Animals on this card.)
+        </div>
+      </div>
+`],
 [CardName.ZEPPELINS,`
         <div class="title background-color-automated ">Zeppelins</div>
         <div class="price ">13</div>

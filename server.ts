@@ -374,7 +374,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         cardsBlackList: gameReq.cardsBlackList,
         solarPhaseOption: gameReq.solarPhaseOption,
         promoCardsOption: gameReq.promoCardsOption,
-        aresOption: gameReq.aresOption,
+        aresExtension: gameReq.aresExtension,
         undoOption: gameReq.undoOption,
         fastModeOption: gameReq.fastModeOption,
         removeNegativeGlobalEventsOption: gameReq.removeNegativeGlobalEventsOption,

@@ -35,7 +35,7 @@ interface CreateGameModel {
     solarPhaseOption: boolean;
     shuffleMapOption: boolean;
     promoCardsOption: boolean;
-    aresOption: boolean;
+    aresExtension: boolean;
     undoOption: boolean;
     fastModeOption: boolean;
     removeNegativeGlobalEventsOption: boolean;
@@ -98,7 +98,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             solarPhaseOption: false,
             shuffleMapOption: false,
             promoCardsOption: false,
-            aresOption: false,
+            aresExtension: false,
             undoOption: false,
             fastModeOption: false,
             removeNegativeGlobalEventsOption: false,
@@ -218,7 +218,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const board =  component.board;
             const seed = component.seed;
             const promoCardsOption = component.promoCardsOption;
-            const aresOption = component.aresOption;
+            const aresExtension = component.aresExtension;
             const undoOption = component.undoOption;
             const fastModeOption = component.fastModeOption;
             const removeNegativeGlobalEventsOption = this.removeNegativeGlobalEventsOption;
@@ -270,7 +270,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 seed,
                 solarPhaseOption,
                 promoCardsOption,
-                aresOption,
+                aresExtension: aresExtension,
                 undoOption,
                 fastModeOption,
                 removeNegativeGlobalEventsOption,
@@ -372,7 +372,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </label>
 
                             <label class="form-switch">
-                                <input type="checkbox" v-model="aresOption">
+                                <input type="checkbox" v-model="aresExtension">
                                 <i class="form-icon"></i> <span v-i18n>Ares</span>&nbsp;<a href="https://boardgamegeek.com/thread/2218211/tm-ares-fan-expansion-more-interaction-map-mars" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 

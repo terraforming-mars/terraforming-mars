@@ -1,4 +1,4 @@
-import { Player, PlayerId } from "./Player";
+import {Player, PlayerId } from "./Player";
 import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_CORP_ERA_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from "./Dealer";
 import {ISpace} from "./ISpace";
 import {SpaceType} from "./SpaceType";
@@ -80,7 +80,7 @@ export interface GameOptions {
   solarPhaseOption: boolean;
   shuffleMapOption: boolean;
   promoCardsOption: boolean;
-  aresOption: boolean;
+  aresExtension: boolean;
   undoOption: boolean;
   fastModeOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
@@ -155,7 +155,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           solarPhaseOption: false,
           shuffleMapOption: false,
           promoCardsOption: false,
-          aresOption: false,
+          aresExtension: false,
           undoOption: false,
           fastModeOption: false,
           removeNegativeGlobalEventsOption: false,

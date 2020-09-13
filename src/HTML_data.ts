@@ -740,7 +740,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="tile special-tile" style="font-size:30px;margin-left:20px;">&#x2642;</div>*
       <div class="description">
         (Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. 
-          The tile grants an grants an <b>adjacency bonus</b> of  of 1M€. Increase your MC production 1 step.)
+          The tile grants an <b>adjacency bonus</b> of  of 1M€. Increase your MC production 1 step.)
       </div>
     </div>
 `],

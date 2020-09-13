@@ -14,7 +14,8 @@
         "sourceMap": true,
         "target": "es5",
         "types": ["node", "mocha", "chai"],
-        "moduleResolution": "node"
+        "moduleResolution": "node",
+        "resolveJsonModule": true
     },
     "include": [
         "src/*.ts",
@@ -37,6 +38,5 @@
         "src/turmoil/*.ts",
         "src/turmoil/globalEvents*.ts",
         "src/components/overview/*.ts"
-    ],
-    "files": ["script.ts", "server.ts"]
+    ]
 }

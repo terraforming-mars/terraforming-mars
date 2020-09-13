@@ -1133,7 +1133,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-[CardName.MINING_RIGHTS,`
+[CardName.MINING_RIGHTS_ARES,`
       <div class="title background-color-automated">Mining Rights</div>
       <div class="price">9</div>
       <div class="tag tag1 tag-building"></div>
@@ -1649,7 +1649,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-[CardName.NUCLEAR_ZONE,`
+[CardName.NUCLEAR_ZONE_ARES,`
       <div class="title background-color-automated">Nuclear Zone</div>
       <div class="price">11</div>
       <div class="tag tag1 tag-earth"></div>

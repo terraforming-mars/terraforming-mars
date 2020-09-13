@@ -1,6 +1,6 @@
 import { CardName } from "../../CardName";
-import { MoholeArea as MA } from "../MoholeArea";
+import { MoholeArea } from "../MoholeArea";
 
-export class MoholeArea extends MA {
+export class MoholeAreaAres extends MoholeArea {
   public name: CardName = CardName.MOHOLE_AREA_ARES;
 }

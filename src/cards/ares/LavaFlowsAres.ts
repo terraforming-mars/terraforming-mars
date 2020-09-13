@@ -1,6 +1,6 @@
 import { CardName } from "../../CardName";
-import { LavaFlows as LF } from "../LavaFlows";
+import { LavaFlows } from "../LavaFlows";
 
-export class LavaFlows extends LF {
+export class LavaFlowsAres extends LavaFlows {
   public name: CardName = CardName.LAVA_FLOWS_ARES;
 }

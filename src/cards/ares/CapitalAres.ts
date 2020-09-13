@@ -1,6 +1,6 @@
 import { CardName } from "../../CardName";
-import { Capital as C } from "../Capital";
+import { Capital } from "../Capital";
 
-export class Capital extends C {
+export class CapitalAres extends Capital {
   public name: CardName = CardName.CAPITAL_ARES;
 }

@@ -1,6 +1,6 @@
 import { CardName } from "../../CardName";
-import { MiningRights as MR } from "../MiningRights";
+import { MiningRights } from "../MiningRights";
 
-export class MiningRights extends MR {
+export class MiningRightsAres extends MiningRights {
   public name: CardName = CardName.MINING_RIGHTS_ARES;
 }

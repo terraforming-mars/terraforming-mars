@@ -39,7 +39,7 @@ export class MiningArea implements IProjectCard {
             } else if (foundSpace.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
                 player.setProduction(Resources.TITANIUM);
                 this.bonusResource = Resources.TITANIUM;
-                this.addAdjacencyBonus(foundSpace, SpaceBonus.STEEL);
+                this.addAdjacencyBonus(foundSpace, SpaceBonus.TITANIUM);
                 LogHelper.logGainProduction(game, player, Resources.TITANIUM);
             }
             return undefined;

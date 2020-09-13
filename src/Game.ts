@@ -58,6 +58,7 @@ import { OrOptions } from "./inputs/OrOptions";
 import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
+import { IAdjacencyBonusHelper } from "./cards/ares/IAdjacenyBonus";
 
 
 export interface Score {
@@ -1473,6 +1474,37 @@ export class Game implements ILoadable<SerializedGame, Game> {
         );
       }
 
+      let extraCosts: number = 0;
+      this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
+        if (adjacentSpace.adjacency) {
+          extraCosts += adjacentSpace.adjacency.cost || 0;
+        }
+      });
+      if (extraCosts > 0) {
+        throw new Error("Implement making opponent pay " + extraCosts + " MC");
+      }
+
+      // From this point forward the tile can be placed.
+
+      this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
+        if (adjacentSpace.tile) {
+          if (adjacentSpace.tile.tileType === TileType.OCEAN) {
+            player.megaCredits += player.oceanBonus;
+          }
+
+          // Grant adjacency bonuses for cards from Ares.
+          if (adjacentSpace.tile.card) {
+            if (adjacentSpace.adjacency?.bonus) {
+              if (!adjacentSpace.player) {
+                throw new Error("With Ares, a tile with an adjacency bonus has to have its owner listed " + adjacentSpace);
+              }
+              adjacentSpace.player.megaCredits += 1;
+              adjacentSpace.adjacency?.bonus.giveAdjacencyBonus(player, this);
+            }
+          }
+        }
+      });
+
       space.player = player;
       space.tile = tile;
 
@@ -1492,12 +1524,25 @@ export class Game implements ILoadable<SerializedGame, Game> {
         });
 
         this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-          if (adjacentSpace.tile &&
-              adjacentSpace.tile.tileType === TileType.OCEAN) {
-            player.megaCredits += player.oceanBonus;
+          if (adjacentSpace.tile) {
+            if (adjacentSpace.tile.tileType === TileType.OCEAN) {
+              player.megaCredits += player.oceanBonus;
+            }
+
+            // Grant adjacency bonuses for cards from Ares.
+            if (adjacentSpace.tile.card) {
+              var card = this.getCard(adjacentSpace.tile.card);
+              if (IAdjacencyBonusHelper.isInstanceOf(card)) {
+                if (!adjacentSpace.player) {
+                  throw new Error("With Ares, a tile with an adjacency bonus has to have its owner listed " + adjacentSpace);
+                }
+                adjacentSpace.player.megaCredits += 1;
+                card.giveAdjacencyBonus(player, this);
+              }
+            }
           }
         });
-      }else{
+      } else {
         space.player = undefined;
       }
 

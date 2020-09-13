@@ -9,12 +9,15 @@ import { ISpace } from "../ISpace";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
+import { AdjacencyBonus } from "./ares/AdjacencyBonus";
 
 export class NaturalPreserve implements IProjectCard {
     public cost: number = 9;
     public tags: Array<Tags> = [Tags.SCIENCE, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: CardName = CardName.NATURAL_PRESERVE;
+    public adjacencyBonus?: AdjacencyBonus = undefined;
+
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.board.getAvailableSpacesOnLand(player)
                 .filter((space) => game.board.getAdjacentSpaces(space).filter((adjacentSpace) => adjacentSpace.tile !== undefined).length === 0);
@@ -25,6 +28,7 @@ export class NaturalPreserve implements IProjectCard {
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space for special tile next to no other tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.NATURAL_PRESERVE });
+            foundSpace.adjacency = { bonus: this.adjacencyBonus };
             player.setProduction(Resources.MEGACREDITS);
             return undefined;
         });

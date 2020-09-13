@@ -3,7 +3,7 @@ import { SpaceBonus } from "./SpaceBonus";
 import { SpaceType } from "./SpaceType";
 import { ITile } from "./ITile";
 import { Player } from "./Player";
-import { IAdjacencyBonus } from "./cards/ares/IAdjacenyBonus";
+import { AdjacencyBonus } from "./cards/ares/AdjacencyBonus";
 
 export interface ISpace {
     id: string;
@@ -12,7 +12,7 @@ export interface ISpace {
     player?: Player;
     bonus: Array<SpaceBonus>;
     adjacency?: {
-        bonus ?: IAdjacencyBonus,
+        bonus ?: AdjacencyBonus,
         cost ?: number,
     }
     x: number;

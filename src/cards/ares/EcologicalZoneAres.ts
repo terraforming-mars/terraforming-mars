@@ -1,15 +1,8 @@
 import { CardName } from "../../CardName";
-import { Game } from "../../Game";
-import { Player } from "../../Player";
 import { EcologicalZone } from "../EcologicalZone";
-import { IAdjacencyBonus, IAdjacencyBonusHelper } from "./IAdjacenyBonus";
+import { AdjacencyBonus, AresSpaceBonus } from "./AdjacencyBonus";
 
-export class EcologicalZoneAres extends EcologicalZone implements IAdjacencyBonus {
+export class EcologicalZoneAres extends EcologicalZone {
   public name: CardName = CardName.ECOLOGICAL_ZONE_ARES;
-
-  giveAdjacencyBonus(player: Player, game: Game) :void {
-    throw new Error("Not complete: add an animal");
-    // player.heat += 2;
-    // IAdjacencyBonusHelper.logAdjacency(game, player, "2 heat", this.name);
-  }
+  public adjacencyBonus: AdjacencyBonus = AdjacencyBonus.ofAresSpaceBonus(1, AresSpaceBonus.ANIMAL);
 }

@@ -1,14 +1,9 @@
 import { CardName } from "../../CardName";
-import { Game } from "../../Game";
-import { Player } from "../../Player";
+import { SpaceBonus } from "../../SpaceBonus";
 import { RestrictedArea } from "../RestrictedArea";
-import { IAdjacencyBonus, IAdjacencyBonusHelper } from "./IAdjacenyBonus";
+import { AdjacencyBonus } from "./AdjacencyBonus";
 
-export class RestrictedAreaAres extends RestrictedArea implements IAdjacencyBonus {
+export class RestrictedAreaAres extends RestrictedArea {
   public name: CardName = CardName.RESTRICTED_AREA_ARES;
-
-  giveAdjacencyBonus(player: Player, game: Game) :void {
-    player.cardsInHand.push(game.dealer.dealCard());
-    IAdjacencyBonusHelper.logAdjacency(game, player, "1 card", this.name);
-  }
+  public adjacencyBonus: AdjacencyBonus = AdjacencyBonus.ofSpaceBonus(1, SpaceBonus.DRAW_CARD);
 }

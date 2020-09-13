@@ -58,7 +58,7 @@ import { OrOptions } from "./inputs/OrOptions";
 import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
-import { IAdjacencyBonusHelper } from "./cards/ares/IAdjacenyBonus";
+import { AresSpaceBonus } from "./cards/ares/AdjacencyBonus";
 
 
 export interface Score {
@@ -1474,6 +1474,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
         );
       }
 
+      // From this point forward the tile can be placed.
+      space.player = player;
+      space.tile = tile;
+
       let extraCosts: number = 0;
       this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
         if (adjacentSpace.adjacency) {
@@ -1484,43 +1488,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
         throw new Error("Implement making opponent pay " + extraCosts + " MC");
       }
 
-      // From this point forward the tile can be placed.
 
-      this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-        if (adjacentSpace.tile) {
-          if (adjacentSpace.tile.tileType === TileType.OCEAN) {
-            player.megaCredits += player.oceanBonus;
-          }
-
-          // Grant adjacency bonuses for cards from Ares.
-          if (adjacentSpace.tile.card) {
-            if (adjacentSpace.adjacency?.bonus) {
-              if (!adjacentSpace.player) {
-                throw new Error("With Ares, a tile with an adjacency bonus has to have its owner listed " + adjacentSpace);
-              }
-              adjacentSpace.player.megaCredits += 1;
-              adjacentSpace.adjacency?.bonus.giveAdjacencyBonus(player, this);
-            }
-          }
-        }
-      });
-
-      space.player = player;
-      space.tile = tile;
 
       if (!isWorldGov) {
         space.bonus.forEach((spaceBonus) => {
-          if (spaceBonus === SpaceBonus.DRAW_CARD) {
-            player.cardsInHand.push(this.dealer.dealCard());
-          } else if (spaceBonus === SpaceBonus.PLANT) {
-            player.plants++;
-          } else if (spaceBonus === SpaceBonus.STEEL) {
-            player.steel++;
-          } else if (spaceBonus === SpaceBonus.TITANIUM) {
-            player.titanium++;
-          } else if (spaceBonus === SpaceBonus.HEAT) {
-            player.heat++;
-          }
+          this.grantSpaceBonus(player, spaceBonus);
         });
 
         this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
@@ -1529,22 +1501,44 @@ export class Game implements ILoadable<SerializedGame, Game> {
               player.megaCredits += player.oceanBonus;
             }
 
-            // Grant adjacency bonuses for cards from Ares.
-            if (adjacentSpace.tile.card) {
-              var card = this.getCard(adjacentSpace.tile.card);
-              if (IAdjacencyBonusHelper.isInstanceOf(card)) {
-                if (!adjacentSpace.player) {
-                  throw new Error("With Ares, a tile with an adjacency bonus has to have its owner listed " + adjacentSpace);
-                }
-                adjacentSpace.player.megaCredits += 1;
-                card.giveAdjacencyBonus(player, this);
+            if (adjacentSpace.adjacency?.bonus) {
+              var bonus = adjacentSpace.adjacency.bonus;
+              if (!adjacentSpace.player) {
+                throw new Error("A tile with an adjacency bonus must have an owner " + adjacentSpace);
               }
+              // adjacentSpace.player.megaCredits += 1;
+        
+              var typeToLog: string = "";
+              if (bonus.spaceBonus) {
+                typeToLog = bonus.spaceBonus.toString();
+                for (var idx = 0; idx < bonus.units ; idx++) {
+                  this.grantSpaceBonus(player, bonus.spaceBonus);
+                }
+              } else if (bonus.aresSpaceBonus) {
+                var type: AresSpaceBonus = bonus.aresSpaceBonus;
+                typeToLog = type.toString();
+                if (type === AresSpaceBonus.ANIMAL) {
+                  throw new Error("to do.");
+                } else {
+                  // player.megaCredits += bonus.units;
+                }
+              }
+              this.log(
+                LogMessageType.DEFAULT,
+                "{1} gains {2} {3} and {4} gains 1 M€ for placing next to {5}",
+                new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                new LogMessageData(LogMessageDataType.STRING, bonus.units.toString()),
+                new LogMessageData(LogMessageDataType.STRING, typeToLog),
+                new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""),);
             }
           }
         });
       } else {
         space.player = undefined;
       }
+
+
 
       this.tilePlaced(space);
       LogHelper.logTilePlacement(this, player, space, tile.tileType);
@@ -1554,6 +1548,19 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
     }
 
+    private grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {
+      if (spaceBonus === SpaceBonus.DRAW_CARD) {
+        player.cardsInHand.push(this.dealer.dealCard());
+      } else if (spaceBonus === SpaceBonus.PLANT) {
+        player.plants++;
+      } else if (spaceBonus === SpaceBonus.STEEL) {
+        player.steel++;
+      } else if (spaceBonus === SpaceBonus.TITANIUM) {
+        player.titanium++;
+      } else if (spaceBonus === SpaceBonus.HEAT) {
+        player.heat++;
+      }
+    }
     private tilePlaced(space: ISpace) {
       this.players.forEach((p) => {
         if (p.corporationCard !== undefined &&

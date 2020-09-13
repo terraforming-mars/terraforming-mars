@@ -1,14 +1,9 @@
 import { CardName } from "../../CardName";
-import { Game } from "../../Game";
-import { Player } from "../../Player";
+import { SpaceBonus } from "../../SpaceBonus";
 import { IndustrialCenter } from "../IndustrialCenter";
-import { IAdjacencyBonus, IAdjacencyBonusHelper } from "./IAdjacenyBonus";
+import { AdjacencyBonus } from "./AdjacencyBonus";
 
-export class IndustrialCenterAres extends IndustrialCenter implements IAdjacencyBonus {
+export class IndustrialCenterAres extends IndustrialCenter {
   public name: CardName = CardName.INDUSTRIAL_CENTER_ARES;
-
-  giveAdjacencyBonus(player: Player, game: Game) :void {
-    player.steel += 1;
-    IAdjacencyBonusHelper.logAdjacency(game, player, "2 steel", this.name);
-  }
+  public adjacencyBonus: AdjacencyBonus = AdjacencyBonus.ofSpaceBonus(2, SpaceBonus.STEEL);
 }

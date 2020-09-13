@@ -1,14 +1,9 @@
 import { CardName } from "../../CardName";
-import { Game } from "../../Game";
-import { Player } from "../../Player";
+import { SpaceBonus } from "../../SpaceBonus";
 import { LavaFlows } from "../LavaFlows";
-import { IAdjacencyBonus, IAdjacencyBonusHelper } from "./IAdjacenyBonus";
+import { AdjacencyBonus } from "./AdjacencyBonus";
 
-export class LavaFlowsAres extends LavaFlows implements IAdjacencyBonus {
+export class LavaFlowsAres extends LavaFlows {
   public name: CardName = CardName.LAVA_FLOWS_ARES;
-
-  giveAdjacencyBonus(player: Player, game: Game) :void {
-    player.heat += 2;
-    IAdjacencyBonusHelper.logAdjacency(game, player, "2 heat", this.name);
-  }
+  public adjacencyBonus: AdjacencyBonus = AdjacencyBonus.ofSpaceBonus(2, SpaceBonus.HEAT);
 }

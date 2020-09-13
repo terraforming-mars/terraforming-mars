@@ -1473,22 +1473,20 @@ export class Game implements ILoadable<SerializedGame, Game> {
             `Select a valid location ${space.spaceType} is not ${spaceType}`
         );
       }
+     
+      let extraCost: number = 0;
+      this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
+        if (adjacentSpace.adjacency) {
+          extraCost += adjacentSpace.adjacency.cost || 0;
+        }
+      });
+      if (extraCost > 0) {
+        throw new Error("Implement making opponent pay " + extraCost + " MC");
+      }
 
       // From this point forward the tile can be placed.
       space.player = player;
       space.tile = tile;
-
-      let extraCosts: number = 0;
-      this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-        if (adjacentSpace.adjacency) {
-          extraCosts += adjacentSpace.adjacency.cost || 0;
-        }
-      });
-      if (extraCosts > 0) {
-        throw new Error("Implement making opponent pay " + extraCosts + " MC");
-      }
-
-
 
       if (!isWorldGov) {
         space.bonus.forEach((spaceBonus) => {
@@ -1503,10 +1501,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
             if (adjacentSpace.adjacency?.bonus) {
               var bonus = adjacentSpace.adjacency.bonus;
+              var grantedUnits = bonus?.units;
               if (!adjacentSpace.player) {
                 throw new Error("A tile with an adjacency bonus must have an owner " + adjacentSpace);
               }
-              // adjacentSpace.player.megaCredits += 1;
+              adjacentSpace.player.megaCredits += 1;
         
               var typeToLog: string = "";
               if (bonus.spaceBonus) {
@@ -1518,16 +1517,35 @@ export class Game implements ILoadable<SerializedGame, Game> {
                 var type: AresSpaceBonus = bonus.aresSpaceBonus;
                 typeToLog = type.toString();
                 if (type === AresSpaceBonus.ANIMAL) {
-                  throw new Error("to do.");
+                  const availableAnimalCards = player.getResourceCards(ResourceType.ANIMAL);
+                  if (availableAnimalCards.length == 0) {
+                    grantedUnits = 0;
+                  } else if (availableAnimalCards.length == 1) {
+                    player.addResourceTo(availableAnimalCards[0], bonus!.units);
+                  } else if (availableAnimalCards.length > 1) {
+                    this.addInterrupt({
+                      player: player,
+                      playerInput:
+                        new SelectCard(
+                          "Select a card to add " + grantedUnits + " animals",
+                          "Add animals",
+                          availableAnimalCards,
+                          (selected: ICard[]) => {
+                            player.addResourceTo(selected[0], bonus!.units);
+                            LogHelper.logAddResource(this, player, selected[0], bonus!.units);
+                            return undefined;
+                          })
+                    });
+                  }
                 } else {
-                  // player.megaCredits += bonus.units;
+                  player.megaCredits += bonus.units;
                 }
               }
               this.log(
                 LogMessageType.DEFAULT,
                 "{1} gains {2} {3} and {4} gains 1 M€ for placing next to {5}",
                 new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                new LogMessageData(LogMessageDataType.STRING, bonus.units.toString()),
+                new LogMessageData(LogMessageDataType.STRING, grantedUnits.toString()),
                 new LogMessageData(LogMessageDataType.STRING, typeToLog),
                 new LogMessageData(LogMessageDataType.PLAYER, player.id),
                 new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""),);

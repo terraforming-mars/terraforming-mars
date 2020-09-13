@@ -26,6 +26,7 @@
     "src/components/*.ts",
     "src/directives/*.ts",
     "src/cards/*.ts",
+    "src/cards/ares/*.ts",
     "src/cards/corporation/*.ts",
     "src/cards/prelude/*.ts",
     "src/cards/venusNext/*.ts",    

@@ -1,0 +1,15 @@
+version: "3.7"  
+services:
+  terraforming-mars:
+    container_name: terraforming-mars
+    build: ./
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - ./:/home/node/app
+      - tm-db:/usr/src/app/db
+volumes:
+  tm-db:

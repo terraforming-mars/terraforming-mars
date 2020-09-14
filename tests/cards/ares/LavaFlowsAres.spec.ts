@@ -5,7 +5,7 @@ import { Game } from "../../../src/Game";
 import { TileType } from "../../../src/TileType";
 import { resetBoard } from "../../TestingUtils";
 import { LavaFlowsAres } from "../../../src/cards/ares/LavaFlowsAres";
-import { AdjacencyBonus } from "../../../src/cards/ares/AdjacencyBonus";
+import { AdjacencyBonus } from '../../../src/ares/AdjacencyBonus';
 import { SpaceBonus } from "../../../src/SpaceBonus";
 
 describe("LavaFlowsAres", function () {

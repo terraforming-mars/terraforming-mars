@@ -5,7 +5,7 @@ import { Game } from "../../../src/Game";
 import { TileType } from "../../../src/TileType";
 import { RestrictedAreaAres } from '../../../src/cards/ares/RestrictedAreaAres';
 import { SpaceBonus } from '../../../src/SpaceBonus';
-import { AdjacencyBonus } from '../../../src/cards/ares/AdjacencyBonus';
+import { AdjacencyBonus } from '../../../src/ares/AdjacencyBonus';
 
 describe("RestrictedAreaAres", function () {
     let card : RestrictedAreaAres, player : Player, game : Game;

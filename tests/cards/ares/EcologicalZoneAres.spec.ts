@@ -5,7 +5,8 @@ import { Game } from "../../../src/Game";
 import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { TileType } from "../../../src/TileType";
 import { EcologicalZoneAres } from '../../../src/cards/ares/EcologicalZoneAres';
-import { AdjacencyBonus, AresSpaceBonus } from '../../../src/cards/ares/AdjacencyBonus';
+import { AdjacencyBonus } from '../../../src/ares/AdjacencyBonus';
+import { AresSpaceBonus } from "../../../src/ares/AresSpaceBonus";
 
 describe("EcologicalZoneAres", function () {
     let card : EcologicalZoneAres, player : Player, game : Game;

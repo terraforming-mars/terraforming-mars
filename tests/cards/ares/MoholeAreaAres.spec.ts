@@ -7,7 +7,7 @@ import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { TileType } from "../../../src/TileType";
 import { MoholeAreaAres } from "../../../src/cards/ares/MoholeAreaAres";
 import { SpaceBonus } from "../../../src/SpaceBonus";
-import { AdjacencyBonus } from "../../../src/cards/ares/AdjacencyBonus";
+import { AdjacencyBonus } from '../../../src/ares/AdjacencyBonus';
 
 describe("MoholeAreaAres", function () {
     it("Should play", function () {

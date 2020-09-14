@@ -5,7 +5,8 @@ import { Game } from "../../../src/Game";
 import { TileType } from "../../../src/TileType";
 import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { NaturalPreserveAres } from "../../../src/cards/ares/NaturalPreserveAres";
-import { AresSpaceBonus, AdjacencyBonus } from "../../../src/cards/ares/AdjacencyBonus";
+import { AdjacencyBonus } from '../../../src/ares/AdjacencyBonus';
+import { AresSpaceBonus } from "../../../src/ares/AresSpaceBonus";
 
 describe("NaturalPreserveAres", function () {
     let card : NaturalPreserveAres, player : Player, game : Game;

@@ -7,7 +7,8 @@ import { SpaceType } from "../../../src/SpaceType";
 import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { Resources } from "../../../src/Resources";
 import { TileType } from "../../../src/TileType";
-import { AdjacencyBonus, AresSpaceBonus } from "../../../src/cards/ares/AdjacencyBonus";
+import { AdjacencyBonus } from '../../../src/ares/AdjacencyBonus';
+import { AresSpaceBonus } from "../../../src/ares/AresSpaceBonus";
 
 describe("CapitalAres", function () {
   let card : CapitalAres, player : Player, game : Game;
@@ -31,7 +32,6 @@ describe("CapitalAres", function () {
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
 
-    debugger;
     const citySpace = game.board.getAdjacentSpaces(oceanSpaces[0])[0];
     expect(citySpace.spaceType).to.eq(SpaceType.LAND); 
     action.cb(citySpace);

@@ -9,7 +9,7 @@ import { ISpace } from "../ISpace";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
-import { AdjacencyBonus } from "./ares/AdjacencyBonus";
+import { AdjacencyBonus } from "../ares/AdjacencyBonus";
 
 export class NaturalPreserve implements IProjectCard {
     public cost: number = 9;

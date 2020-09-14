@@ -13,7 +13,7 @@ import { CardName } from '../CardName';
 import { MAX_TEMPERATURE, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
-import { AdjacencyBonus } from "./ares/AdjacencyBonus";
+import { AdjacencyBonus } from "../ares/AdjacencyBonus";
 
 export class LavaFlows implements IProjectCard {
     public cost: number = 18;

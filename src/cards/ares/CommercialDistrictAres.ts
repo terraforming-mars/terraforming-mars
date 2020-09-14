@@ -1,6 +1,6 @@
 import { CardName } from "../../CardName";
 import { CommercialDistrict } from "../CommercialDistrict";
-import { AdjacencyBonus, AresSpaceBonus } from "./AdjacencyBonus";
+import { AdjacencyBonus, AresSpaceBonus } from "../../ares/AdjacencyBonus";
 
 export class CommercialDistrictAres extends CommercialDistrict {
   public name: CardName = CardName.COMMERCIAL_DISTRICT_ARES;

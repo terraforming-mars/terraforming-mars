@@ -11,7 +11,7 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../ISpace';
 import { CardName } from '../CardName';
 import { IResourceCard } from './ICard';
-import { AdjacencyBonus } from "./ares/AdjacencyBonus";
+import { AdjacencyBonus } from "../ares/AdjacencyBonus";
 
 export class EcologicalZone implements IProjectCard, IResourceCard {
   public cost: number = 12;

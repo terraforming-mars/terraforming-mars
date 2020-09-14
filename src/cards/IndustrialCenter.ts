@@ -10,7 +10,7 @@ import { ISpace } from "../ISpace";
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 import { Board } from "../Board";
-import { AdjacencyBonus } from "./ares/AdjacencyBonus";
+import { AdjacencyBonus } from "../ares/AdjacencyBonus";
 
 export class IndustrialCenter implements IActionCard, IProjectCard {
     public cost: number = 4;

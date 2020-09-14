@@ -1,4 +1,4 @@
-import { SpaceBonus } from "../../SpaceBonus";
+import { SpaceBonus } from "../SpaceBonus";
 
 export class AdjacencyBonus {
   units: number;

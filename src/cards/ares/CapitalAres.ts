@@ -1,6 +1,6 @@
 import { CardName } from "../../CardName";
 import { Capital } from "../Capital";
-import { AdjacencyBonus, AresSpaceBonus } from "./AdjacencyBonus";
+import { AdjacencyBonus, AresSpaceBonus } from "../../ares/AdjacencyBonus";
 
 export class CapitalAres extends Capital {
   public name: CardName = CardName.CAPITAL_ARES;

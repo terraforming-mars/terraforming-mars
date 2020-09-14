@@ -2,7 +2,7 @@ import { CardName } from "../../CardName";
 import { ISpace } from "../../ISpace";
 import { SpaceBonus } from "../../SpaceBonus";
 import { MiningArea } from "../MiningArea";
-import { AdjacencyBonus } from "./AdjacencyBonus";
+import { AdjacencyBonus } from "../../ares/AdjacencyBonus";
 
 export class MiningAreaAres extends MiningArea {
   public name: CardName = CardName.MINING_AREA_ARES;

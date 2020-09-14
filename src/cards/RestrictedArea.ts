@@ -9,7 +9,7 @@ import { TileType } from "../TileType";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 import { CardName } from "../CardName";
-import { AdjacencyBonus } from "./ares/AdjacencyBonus";
+import { AdjacencyBonus } from "../ares/AdjacencyBonus";
 
 export class RestrictedArea implements IActionCard, IProjectCard {
     public cost: number = 11;

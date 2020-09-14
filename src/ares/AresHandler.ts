@@ -1,0 +1,1 @@
+// Game.ts-specific behavior for Ares

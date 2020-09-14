@@ -1,4 +1,4 @@
-import { Player, PlayerId } from "./Player";
+import {Player, PlayerId } from "./Player";
 import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_CORP_ERA_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from "./Dealer";
 import {ISpace} from "./ISpace";
 import {SpaceType} from "./SpaceType";
@@ -80,6 +80,7 @@ export interface GameOptions {
   solarPhaseOption: boolean;
   shuffleMapOption: boolean;
   promoCardsOption: boolean;
+  aresExtension: boolean;
   undoOption: boolean;
   fastModeOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
@@ -154,6 +155,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           solarPhaseOption: false,
           shuffleMapOption: false,
           promoCardsOption: false,
+          aresExtension: false,
           undoOption: false,
           fastModeOption: false,
           removeNegativeGlobalEventsOption: false,
@@ -175,6 +177,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         gameOptions.coloniesExtension,
         gameOptions.promoCardsOption,
         gameOptions.turmoilExtension,
+        gameOptions.aresExtension,
         gameOptions.cardsBlackList
       );
 
@@ -1726,7 +1729,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       let o = Object.assign(this, d);
 
       // Rebuild dealer object to be sure that we will have cards in the same order
-      let dealer = new Dealer(this.gameOptions.corporateEra, this.gameOptions.preludeExtension, this.gameOptions.venusNextExtension, this.gameOptions.coloniesExtension, this.gameOptions.promoCardsOption, this.gameOptions.turmoilExtension);
+      let dealer = new Dealer(this.gameOptions.corporateEra, this.gameOptions.preludeExtension, this.gameOptions.venusNextExtension, this.gameOptions.coloniesExtension, this.gameOptions.promoCardsOption, this.gameOptions.turmoilExtension, this.gameOptions.aresExtension);
       this.dealer = dealer.loadFromJSON(d.dealer);
 
       // Rebuild every player objects

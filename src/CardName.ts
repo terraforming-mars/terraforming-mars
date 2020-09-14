@@ -2,7 +2,7 @@ export enum CardName {
     ACQUIRED_COMPANY = "Acquired Company",
     ADAPTATION_TECHNOLOGY = "Adaptation Technology",
     ADAPTED_LICHEN = "Adapted Lichen",
-    ADVANCED_ALLOYS ="Advanced Alloys",
+    ADVANCED_ALLOYS = "Advanced Alloys",
     ADVANCED_ECOSYSTEMS = "Advanced Ecosystems",
     AEROBRAKED_AMMONIA_ASTEROID = "Aerobraked Ammonia Asteroid",
     AI_CENTRAL = "AI Central",
@@ -39,7 +39,7 @@ export enum CardName {
     CARTEL = "Cartel",
     CEOS_FAVORITE_PROJECT = "CEOs Favorite Project",
     CLOUD_SEEDING = "Cloud Seeding",
-    COLONIZER_TRAINING_CAMP ="Colonizer Training Camp",
+    COLONIZER_TRAINING_CAMP = "Colonizer Training Camp",
     COMET = "Comet",
     COMMERCIAL_DISTRICT = "Commercial District",
     COMMUNITY_SERVICES = "Community Services",
@@ -440,5 +440,18 @@ export enum CardName {
     VOTE_OF_NO_CONFIDENCE = "Vote Of No Confidence",
     LAW_SUIT = "Law Suit",
     STANFORD_TORUS = "Stanford Torus",
-    SATURN_SURFING = "Saturn Surfing"
+    SATURN_SURFING = "Saturn Surfing",
+
+    // Ares expansion.
+    CAPITAL_ARES = "Capital:ares",
+    COMMERCIAL_DISTRICT_ARES = "Commercial District:ares",
+    ECOLOGICAL_ZONE_ARES = "Ecological Zone|ares",
+    INDUSTRIAL_CENTER_ARES = "Industrial Center:ares",
+    LAVA_FLOWS_ARES = "Lava Flows:ares",
+    MINING_AREA_ARES = "Mining Area:ares",
+    MINING_RIGHTS_ARES = "Mining Rights:ares",
+    MOHOLE_AREA_ARES = "Mohole Area:ares",
+    NATURAL_PRESERVE_ARES = "Natural Preserve:ares",
+    NUCLEAR_ZONE_ARES = "Nuclear Zone:ares",
+    RESTRICTED_AREA_ARES = "Restricted Area:ares",
 }

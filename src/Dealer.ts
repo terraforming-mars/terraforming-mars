@@ -460,6 +460,17 @@ import { Potatoes } from "./cards/promo/Potatoes";
 import { MeatIndustry } from "./cards/promo/MeatIndustry";
 import { PoliticalAlliance } from "./cards/turmoil/PoliticalAlliance";
 
+import { CapitalAres } from "./cards/ares/CapitalAres";
+import { CommercialDistrictAres } from "./cards/ares/CommercialDistrictAres";
+import { EcologicalZoneAres } from "./cards/ares/EcologicalZoneAres";
+import { IndustrialCenterAres } from "./cards/ares/IndustrialCenterAres";
+import { LavaFlowsAres } from "./cards/ares/LavaFlowsAres";
+import { MiningAreaAres } from "./cards/ares/MiningAreaAres";
+import { MiningRightsAres } from "./cards/ares/MiningRightsAres";
+import { MoholeAreaAres } from "./cards/ares/MoholeAreaAres";
+import { NaturalPreserveAres } from "./cards/ares/NaturalPreserveAres";
+import { NuclearZoneAres } from "./cards/ares/NuclearZoneAres";
+import { RestrictedAreaAres } from "./cards/ares/RestrictedAreaAres";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -952,6 +963,19 @@ export const ALL_CORP_ERA_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.VIRUS, factory: Virus },
 ]
 
+export const ALL_ARES_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
+    { cardName: CardName.CAPITAL_ARES, factory: CapitalAres },
+    { cardName: CardName.COMMERCIAL_DISTRICT_ARES, factory: CommercialDistrictAres },
+    { cardName: CardName.ECOLOGICAL_ZONE_ARES, factory: EcologicalZoneAres },
+    { cardName: CardName.INDUSTRIAL_CENTER_ARES, factory: IndustrialCenterAres },
+    { cardName: CardName.LAVA_FLOWS_ARES, factory: LavaFlowsAres },
+    { cardName: CardName.MINING_AREA_ARES, factory: MiningAreaAres },
+    { cardName: CardName.MINING_RIGHTS_ARES, factory: MiningRightsAres },
+    { cardName: CardName.MOHOLE_AREA_ARES, factory: MoholeAreaAres },
+    { cardName: CardName.NATURAL_PRESERVE_ARES, factory: NaturalPreserveAres },
+    { cardName: CardName.NUCLEAR_ZONE_ARES, factory: NuclearZoneAres },
+    { cardName: CardName.RESTRICTED_AREA_ARES, factory: RestrictedAreaAres },
+]
 // Function to return a card object by its name
 export function getProjectCardByName(cardName: string): IProjectCard | undefined {
     let cardFactory = ALL_PRELUDE_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
@@ -1035,6 +1059,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     private useColoniesNextExtension: boolean = false;
     private usePromoCards: boolean = false;
     private useTurmoilExtension: boolean = false;
+    private useAresExtension: boolean = false;
     constructor(
             useCorporateEra: boolean,
             usePreludeExtension: boolean,
@@ -1042,6 +1067,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
             useColoniesNextExtension : boolean,
             usePromoCards: boolean,
             useTurmoilExtension: boolean,
+            useAresExtension: boolean,
             cardsBlackList?: Array<CardName>
         ) {
         this.useCorporateEra = useCorporateEra;
@@ -1050,6 +1076,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         this.useColoniesNextExtension = useColoniesNextExtension;
         this.usePromoCards = usePromoCards;
         this.useTurmoilExtension = useTurmoilExtension;
+        this.useAresExtension = useAresExtension;
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS.map((cf) => new cf.factory()));
         if (this.useCorporateEra) {
             this.deck.push(...ALL_CORP_ERA_PROJECT_CARDS.map((cf) => new cf.factory()));
@@ -1077,6 +1104,25 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
             this.deck = this.deck.filter((card) => !cardsToReplace.includes(card.name));
 
             this.deck.push(...ALL_PROMO_PROJECTS_CARDS.map((cf) => new cf.factory()));
+            this.deck = this.shuffleCards<IProjectCard>(this.deck);
+        }
+        if (this.useAresExtension) {
+            const cardsToReplace = [
+                CardName.CAPITAL,
+                CardName.COMMERCIAL_DISTRICT,
+                CardName.ECOLOGICAL_ZONE,
+                CardName.INDUSTRIAL_CENTER,
+                CardName.LAVA_FLOWS,
+                CardName.MINING_AREA,
+                CardName.MINING_RIGHTS,
+                CardName.MOHOLE_AREA,
+                CardName.NATURAL_PRESERVE,
+                CardName.NUCLEAR_ZONE,
+                CardName.RESTRICTED_AREA,
+            ];
+            this.deck = this.deck.filter((card) => !cardsToReplace.includes(card.name));
+
+            this.deck.push(...ALL_ARES_PROJECT_CARDS.map((cf) => new cf.factory()));
             this.deck = this.shuffleCards<IProjectCard>(this.deck);
         }
         if (cardsBlackList) {

@@ -125,6 +125,28 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
+[CardName.CAPITAL_ARES,`
+        <div class="title background-color-automated ">Capital</div>
+        <div class="price ">26</div>
+        <div class="tag tag1 tag-building "></div>
+        <div class="tag tag2 tag-city "></div>
+        <div class="card-number">008</div>
+        <div class="content ">
+            <div class="points ">1/<span class="resource ocean-resource "></span></div>
+            <div class="requirements ">4 Oceans</div>
+            <div class="production-box production-box-size2a ">
+                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div><div class="energy production "></div><br>
+                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">5</div>
+            </div>
+            <div class="special-tile tile capitol ">&#x2302;&#xFE0E;</div>
+            <div class="description " style="text-align:left;">
+                (Requires 4 ocean tiles. Place this tile which grants an <b>adjacency bonus</b> of 2M€. Decrease your Energy production 2 steps and increase your MC production 5 steps.<br>
+                <div style="font-size:9px;line-height:12px;margin-top:10px; width: 140px;">
+                    1 ADDITIONAL VP FOR EACH OCEAN TILE ADJACENT TO THIS CITY TILE.
+                </div>
+            </div>
+        </div>
+`],
 [CardName.ASTEROID,`
         <div class="title background-color-events ">Asteroid</div>
         <div class="price ">14</div>
@@ -703,6 +725,25 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
+[CardName.NATURAL_PRESERVE_ARES,`
+    <div class="title background-color-automated">Natural Preserve</div>
+    <div class="price">9</div>
+    <div class="tag tag1 tag-building"></div>
+    <div class="tag tag2 tag-science"></div>
+    <div class="card-number">044</div>
+    <div class="content">
+      <div class="points points-big">1</div>
+      <div class="requirements requirements-max">max 4% O2</div>
+      <div class="production-box">
+        <div class="money production">1</div>
+      </div>
+      <div class="tile special-tile" style="font-size:30px;margin-left:20px;">&#x2642;</div>*
+      <div class="description">
+        (Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. 
+          The tile grants an <b>adjacency bonus</b> of  of 1M€. Increase your MC production 1 step.)
+      </div>
+    </div>
+`],
 [CardName.NUCLEAR_POWER,`
     <div class="title background-color-automated">Nuclear Power</div>
     <div class="price">10</div>
@@ -1033,6 +1074,24 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
+[CardName.MINING_AREA_ARES,`
+      <div class="title background-color-automated">Mining Area</div>
+      <div class="price">4</div>
+      <div class="tag tag1 tag-building"></div>
+      <div class="corporate-icon project-icon"></div>
+      <div class="card-number">064</div>
+      <div class="content">
+        <div class="tile special-tile" style="font-size:40px;color: rgb(73,54,40);">&#x2692;</div>*<br>
+        <div class="production-box production-box-size3">
+          <div class="steel production"></div> OR <div class="titanium production"></div>
+        </div> *
+        <div class="description">
+          (Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES.
+            Choose a tile that provides an <b>adjacency bonus</b> of the same resource as the area.
+            Increase your production of that resource 1 step.)
+        </div>
+      </div>
+`],
 [CardName.BUILDING_INDUSTRIES,`
       <div class="title background-color-automated">Building Industries</div>
       <div class="price">6</div>
@@ -1071,6 +1130,23 @@ export const HTML_DATA: Map<string, string> =
         </div> *
         <div class="description">
           (Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.)
+        </div>
+      </div>
+`],
+[CardName.MINING_RIGHTS_ARES,`
+      <div class="title background-color-automated">Mining Rights</div>
+      <div class="price">9</div>
+      <div class="tag tag1 tag-building"></div>
+      <div class="card-number">067</div>
+      <div class="content">
+        <div class="tile special-tile" style="font-size:40px;color: rgb(73,54,40);">&#x2692;</div>*<br>
+        <div class="production-box production-box-size3">
+          <div class="steel production"></div> OR <div class="titanium production"></div>
+        </div> *
+        <div class="description">
+          (Place one of these tiles on an area with a steel or titanium placement bonus.
+          Choose a tile that provides an <b>adjacency bonus</b> of the same resource as the area.
+          Increase your production of that resource 1 step.)      
         </div>
       </div>
 `],
@@ -1362,6 +1438,27 @@ export const HTML_DATA: Map<string, string> =
           </div>
         </div>
 `],
+[CardName.COMMERCIAL_DISTRICT_ARES,`
+        <div class="title background-color-automated ">Commercial District</div>
+        <div class="price ">16</div>
+        <div class="tag tag1 tag-building "></div>
+        <div class="corporate-icon project-icon"></div>
+      <div class="card-number">085</div>
+        <div class="content ">
+          <div class="points big">1/<div class="tile city-tile-small"></div></div>
+          <div class="production-box production-box-size1a">
+              <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div>
+              <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="money production">4</div>
+          </div>
+          <div class="description" style="margin-top:-5px">
+          (Decrease your energy production 1 step and increase your MC production 4 steps.)
+          </div>
+          <div class="tile special-tile">&#x20ac;</div>
+          <div class="description" style="text-align:left; width: 140px;">
+          (Place this tile which grants an <b>adjacency bonus</b> of 2M€. 1 VP PER ADJACENT CITY TILE.)
+          </div>
+        </div>
+`],
 [CardName.ROBOTIC_WORKFORCE,`
         <div class="title background-color-automated ">Robotic Workforce</div>
         <div class="price ">9</div>
@@ -1549,6 +1646,21 @@ export const HTML_DATA: Map<string, string> =
           <div class="tile temperature-tile"></div> <div class="tile temperature-tile"></div>
         <div class="description">
           (Place this tile and raise temperature 2 steps.)
+        </div>
+      </div>
+`],
+[CardName.NUCLEAR_ZONE_ARES,`
+      <div class="title background-color-automated">Nuclear Zone</div>
+      <div class="price">11</div>
+      <div class="tag tag1 tag-earth"></div>
+      <div class="card-number">097</div>
+      <div class="content">
+        <div class="points points-big">-2</div>
+          <div class="tile special-tile" style="font-size:40px;">&#x2622;</div><br>
+          <div class="tile temperature-tile"></div> <div class="tile temperature-tile"></div>
+        <div class="description">
+          (Raise the temperature two steps. Place this tile. Players must pay an additional 2M€
+            when they place a tile with their player marker on it adjacent to the Nuclear Zone.)
         </div>
       </div>
 `],
@@ -1936,6 +2048,23 @@ export const HTML_DATA: Map<string, string> =
             </div>
         </div>
 `],
+[CardName.INDUSTRIAL_CENTER_ARES,`
+        <div class="title background-color-active ">Industrial Center</div>
+        <div class="price ">4</div>
+        <div class="tag tag1 tag-building "></div>
+        <div class="corporate-icon project-icon"></div>
+        <div class="card-number">123</div>
+        <div class="content ">
+            <div class="money resource ">7</div> <div class="red-arrow "></div> <div class="production-box"><div class="steel production "></div></div>
+            <div class="description ">
+                (Action: Spend 7 MC to increase your steel production 1 step.)
+            </div><br>
+            <div class="tile special-tile">&#x1f3ed;</div>*
+            <div class="description ">
+                (Place this tile adjacent to a city tile. This tile grants an <b>adjacency bonus</b> of 1 steel.)
+            </div>
+        </div>
+`],
 [CardName.HIRED_RAIDERS,`
       <div class="title background-color-events">Hired Raiders</div>
       <div class="price">1</div>
@@ -2008,6 +2137,25 @@ export const HTML_DATA: Map<string, string> =
         <div class="tile special-tile" style="margin-left:143px;">&#x1F43e;&#xFE0E;</div>
         <div class="description" style="text-align:left;margin-top:-65px;width: 135px;">
           (Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. 1 VP per 2 Animals on this card.)
+        </div>
+      </div>
+`],
+[CardName.ECOLOGICAL_ZONE_ARES,`
+      <div class="title background-color-active">Ecological Zone</div>
+      <div class="price">12</div>
+      <div class="tag tag1 tag-plant"></div>
+      <div class="tag tag2 tag-animal"></div>
+      <div class="card-number">128</div>
+      <div class="content">
+        <div class="points">1/2<div class="resource animal"></div></div>
+        <div class="requirements">Forest</div>
+        <div class="tag-animal resource-tag"></div> / <div class="tag-plant resource-tag"></div> : <div class="animal resource"></div>
+        <div class="description">
+          (Effect: When you play an animal or plant tag (including these), add an animal to this card.)
+        </div>
+        <div class="tile special-tile" style="margin-left:143px;">&#x1F43e;&#xFE0E;</div>
+        <div class="description" style="text-align:left;margin-top:-65px;width: 135px;">
+          (Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. The tile grants an <b>adjacency bonus</b> of 1 animal. 1 VP per 2 Animals on this card.)
         </div>
       </div>
 `],
@@ -2198,6 +2346,20 @@ export const HTML_DATA: Map<string, string> =
                     </div>
                 </div>
 `],
+[CardName.LAVA_FLOWS_ARES,`
+                <div class="title background-color-events ">Lava Flows</div>
+                <div class="price ">18</div>
+                <div class="tag tag1 tag-event "></div>
+      <div class="card-number">140</div>
+                <div class="content ">
+                    <div class="tile temperature-tile "></div><div class="tile temperature-tile "></div><br>
+                    <div class="tile special-tile ">&#x1f30b;</div>*
+                    <div class="description ">
+                      (Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. 
+                      This tile grants an <b>adjacency bonus</b> of 2 heat.)
+                    </div>
+                </div>
+`],
 [CardName.POWER_PLANT,`
       <div class="title background-color-automated">Power Plant</div>
       <div class="price">4</div>
@@ -2224,6 +2386,22 @@ export const HTML_DATA: Map<string, string> =
           <div class="tile special-tile " style="font-size:40px;">&#x2668;</div>*
         <div class="description">
           (Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.)
+        </div>
+      </div>
+`],
+[CardName.MOHOLE_AREA_ARES,`
+      <div class="title background-color-automated">Mohole Area</div>
+      <div class="price">20</div>
+      <div class="tag tag1 tag-building"></div>
+      <div class="card-number">142</div>
+      <div class="content">
+        <div class="production-box production-box-size1a">
+          4 <div class="heat production"></div>
+        </div><br>
+          <div class="tile special-tile " style="font-size:40px;">&#x2668;</div>*
+        <div class="description">
+          (Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.
+           The tile grants an <b>adjacency bonus</b> of 2 heat.)
         </div>
       </div>
 `],
@@ -3105,6 +3283,25 @@ export const HTML_DATA: Map<string, string> =
               padding-left: 6px;"><div class="restricted-area-tile"></div></div>
               <div class="description ">
                 (Place this tile.)
+              </div>
+          </div>
+`],
+[CardName.RESTRICTED_AREA_ARES,`
+          <div class="title background-color-active ">Restricted Area</div>
+          <div class="price ">11</div>
+          <div class="tag tag1 tag-science "></div>
+          <div class="corporate-icon project-icon"></div>
+      <div class="card-number">199</div>
+          <div class="content ">
+              <div class="money resource ">2</div> <div class="red-arrow "></div> <div class="card resource "></div>
+              <div class="description ">
+                  (Action: Spend 2 MC to draw a card.)
+              </div><br>
+              <div class="tile special-tile" style="padding-top: 4px;
+              padding-bottom: 4px;
+              padding-left: 6px;"><div class="restricted-area-tile"></div></div>
+              <div class="description ">
+                (Place this tile which grants an <b>adjacency bonus</b> of 1 card.)
               </div>
           </div>
 `],

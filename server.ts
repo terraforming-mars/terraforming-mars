@@ -323,7 +323,15 @@ function apiGetPlayer(
     req: http.IncomingMessage,
     res: http.ServerResponse
 ): void {
-  const playerId: string = req.url!.substring('/api/player?id='.length);
+  const qs = req.url!.substring('/api/player?'.length);
+  const queryParams = querystring.parse(qs);
+  let playerId = queryParams['id'] as string | Array<string> | undefined;
+  if (Array.isArray(playerId)) {
+    playerId = playerId[0];
+  }
+  if (playerId === undefined) {
+    playerId = "";
+  }
   const game = playersToGame.get(playerId);
   if (game === undefined) {
     notFound(req, res);

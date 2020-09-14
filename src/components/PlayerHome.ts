@@ -215,7 +215,7 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <a name="cards" class="player_home_anchor"></a>
                 <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
-                    <h2 :class="'player_color_'+ player.color" v-i18n>Cards In Hand</h2>
+                    <h2 :class="'player_color_'+ player.color" v-i18n>Cards In Hand ({{player.cardsInHandNbr}})</h2>
                     <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
                         <card :card="card"></card>
                     </div>

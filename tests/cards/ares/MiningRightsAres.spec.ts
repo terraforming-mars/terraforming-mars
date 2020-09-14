@@ -7,7 +7,7 @@ import { SpaceBonus } from "../../../src/SpaceBonus";
 import { TileType } from "../../../src/TileType";
 import { Resources } from "../../../src/Resources";
 import { MiningRightsAres } from "../../../src/cards/ares/MiningRightsAres";
-import { AdjacencyBonus } from '../../../src/cards/ares/AdjacencyBonus';
+import { AdjacencyBonus } from '../../../src/ares/AdjacencyBonus';
 
 describe("MiningRightsAres", function () {
     let card : MiningRightsAres, player : Player, game : Game;

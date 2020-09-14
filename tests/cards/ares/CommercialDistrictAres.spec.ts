@@ -5,7 +5,8 @@ import { Game } from "../../../src/Game";
 import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { Resources } from "../../../src/Resources";
 import { CommercialDistrictAres } from '../../../src/cards/ares/CommercialDistrictAres';
-import { AdjacencyBonus, AresSpaceBonus } from "../../../src/cards/ares/AdjacencyBonus";
+import { AdjacencyBonus } from '../../../src/ares/AdjacencyBonus';
+import { AresSpaceBonus } from "../../../src/ares/AresSpaceBonus";
 
 describe("CommercialDistrictAres", function () {
     let card : CommercialDistrictAres, player : Player, game : Game;

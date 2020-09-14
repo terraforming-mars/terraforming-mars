@@ -1,4 +1,5 @@
 import { SpaceBonus } from "../SpaceBonus";
+import { AresSpaceBonus } from "./AresSpaceBonus";
 
 export class AdjacencyBonus {
   units: number;
@@ -17,9 +18,4 @@ export class AdjacencyBonus {
   static ofAresSpaceBonus(units: number, aresSpaceBonus: AresSpaceBonus) {
     return new AdjacencyBonus(units, undefined, aresSpaceBonus);
   }
-}
-
-export enum AresSpaceBonus {
-  MC,
-  ANIMAL,
 }

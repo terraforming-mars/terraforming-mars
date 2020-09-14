@@ -58,7 +58,7 @@ import { OrOptions } from "./inputs/OrOptions";
 import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
-import { AresSpaceBonus } from "./ares/AdjacencyBonus";
+import { AresHandler } from "./ares/AresHandler";
 
 
 export interface Score {
@@ -127,6 +127,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public someoneHasRemovedOtherPlayersPlants: boolean = false;
     public seed: number = Math.random();
     public gameOptions: GameOptions;
+    private aresHandler?: AresHandler;
 
 
     constructor(
@@ -311,6 +312,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
       }
 
+      if (gameOptions.aresExtension) {
+        this.aresHandler = new AresHandler(this);
+      }
       // Save initial game state
       Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer), this.players.length);
 
@@ -1474,19 +1478,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
         );
       }
 
-      if (this.gameOptions.aresExtension) {
-        let extraCost: number = 0;
-        this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-          if (adjacentSpace.adjacency) {
-            extraCost += adjacentSpace.adjacency.cost || 0;
-          }
-        });
-        if (extraCost > 0) {
-          // TODO(kberg): implement.
-          throw new Error("Implement making opponent pay " + extraCost + " MC");
-        }
-      }
-
       // From this point forward the tile can be placed.
       space.player = player;
       space.tile = tile;
@@ -1501,60 +1492,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
             if (adjacentSpace.tile.tileType === TileType.OCEAN) {
               player.megaCredits += player.oceanBonus;
             }
-
-            if (this.gameOptions.aresExtension) {
-              if (adjacentSpace.adjacency?.bonus) {
-                var bonus = adjacentSpace.adjacency.bonus;
-                var grantedUnits = bonus?.units;
-                if (!adjacentSpace.player) {
-                  throw new Error("A tile with an adjacency bonus must have an owner " + adjacentSpace);
-                }
-                adjacentSpace.player.megaCredits += 1;
-          
-                var typeToLog: string = "";
-                if (bonus.spaceBonus) {
-                  typeToLog = bonus.spaceBonus.toString();
-                  for (var idx = 0; idx < bonus.units ; idx++) {
-                    this.grantSpaceBonus(player, bonus.spaceBonus);
-                  }
-                } else if (bonus.aresSpaceBonus) {
-                  var type: AresSpaceBonus = bonus.aresSpaceBonus;
-                  typeToLog = type.toString();
-                  if (type === AresSpaceBonus.ANIMAL) {
-                    const availableAnimalCards = player.getResourceCards(ResourceType.ANIMAL);
-                    if (availableAnimalCards.length === 0) {
-                      grantedUnits = 0;
-                    } else if (availableAnimalCards.length === 1) {
-                      player.addResourceTo(availableAnimalCards[0], bonus!.units);
-                    } else if (availableAnimalCards.length > 1) {
-                      this.addInterrupt({
-                        player: player,
-                        playerInput:
-                          new SelectCard(
-                            "Select a card to add " + grantedUnits + " animals",
-                            "Add animals",
-                            availableAnimalCards,
-                            (selected: ICard[]) => {
-                              player.addResourceTo(selected[0], bonus!.units);
-                              LogHelper.logAddResource(this, player, selected[0], bonus!.units);
-                              return undefined;
-                            })
-                      });
-                    }
-                  } else {
-                    player.megaCredits += bonus.units;
-                  }
-                }
-                this.log(
-                  LogMessageType.DEFAULT,
-                  "{1} gains {2} {3} and {4} gains 1 M€ for placing next to {5}",
-                  new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                  new LogMessageData(LogMessageDataType.STRING, grantedUnits.toString()),
-                  new LogMessageData(LogMessageDataType.STRING, typeToLog),
-                  new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                  new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""),);
-              }
-            }
+            this.aresHandler?.handleAdjacentPlacement(adjacentSpace, player);
           }
         });
       } else {
@@ -1571,7 +1509,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
     }
 
-    private grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {
+    // TODO(kberg): move to SpaceBonus?
+    public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {
       if (spaceBonus === SpaceBonus.DRAW_CARD) {
         player.cardsInHand.push(this.dealer.dealCard());
       } else if (spaceBonus === SpaceBonus.PLANT) {

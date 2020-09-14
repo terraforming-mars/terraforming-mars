@@ -4,7 +4,7 @@ import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { TileType } from "../../../src/TileType";
 import { IndustrialCenterAres } from '../../../src/cards/ares/IndustrialCenterAres';
-import { AdjacencyBonus } from '../../../src/cards/ares/AdjacencyBonus';
+import { AdjacencyBonus } from '../../../src/ares/AdjacencyBonus';
 import { SpaceBonus } from "../../../src/SpaceBonus";
 
 describe("IndustrialCenterAres", function () {

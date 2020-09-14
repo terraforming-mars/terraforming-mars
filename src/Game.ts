@@ -1518,9 +1518,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
                 typeToLog = type.toString();
                 if (type === AresSpaceBonus.ANIMAL) {
                   const availableAnimalCards = player.getResourceCards(ResourceType.ANIMAL);
-                  if (availableAnimalCards.length == 0) {
+                  if (availableAnimalCards.length === 0) {
                     grantedUnits = 0;
-                  } else if (availableAnimalCards.length == 1) {
+                  } else if (availableAnimalCards.length === 1) {
                     player.addResourceTo(availableAnimalCards[0], bonus!.units);
                   } else if (availableAnimalCards.length > 1) {
                     this.addInterrupt({

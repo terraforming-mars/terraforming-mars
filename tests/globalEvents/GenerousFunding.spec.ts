@@ -27,7 +27,6 @@ describe("GenerousFunding", function () {
         player.setTerraformRating(25);
         player2.setTerraformRating(50);
         
-        player
         card.resolve(game, turmoil);
         expect(player.getResource(Resources.MEGACREDITS)).to.eq(14);
         expect(player2.getResource(Resources.MEGACREDITS)).to.eq(26);

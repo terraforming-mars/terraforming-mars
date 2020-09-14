@@ -16,6 +16,7 @@ import { PlayerMixin } from "./PlayerMixin";
 import { TagCount } from "./TagCount";
 import { Turmoil } from "./Turmoil";
 import { TagOverview } from "./TagOverview";
+import { playerBgColorClass } from "../utils/utils";
 
 const dialogPolyfill = require("dialog-polyfill");
 
@@ -47,16 +48,19 @@ export const PlayerHome = Vue.component("player-home", {
             player: PlayerModel,
             highlightActive: boolean
         ): string => {
-            var ret: string = "highlighter_box player_bg_color_" + player.color;
+            let classes = ["highlighter_box"];
+
             if (highlightActive) {
                 if (
                     player.needsToDraft ||
                     (player.needsToDraft === undefined && player.isActive)
                 ) {
-                    ret += " player_is_active";
+                    classes.push("player_is_active");
+                } else {
+                    classes.push(playerBgColorClass(player.color));
                 }
             }
-            return ret;
+            return classes.join(" ");
         },
         showPlayerDetails: function (player: PlayerModel) {
             if (player.id === this.player.id) return;

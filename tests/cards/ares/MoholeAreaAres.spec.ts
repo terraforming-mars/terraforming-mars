@@ -23,6 +23,6 @@ describe("MoholeAreaAres", function () {
         action.cb(space);
 
         expect(space.tile && space.tile.tileType).to.eq(TileType.MOHOLE_AREA);
-        expect(space.adjacency?.bonus).to.deep.eq(AdjacencyBonus.ofSpaceBonus(1, SpaceBonus.HEAT));
+        expect(space.adjacency?.bonus).to.deep.eq(AdjacencyBonus.ofSpaceBonus(2, SpaceBonus.HEAT));
     });
 });

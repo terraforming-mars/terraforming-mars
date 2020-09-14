@@ -5,5 +5,5 @@ import { AdjacencyBonus } from "./AdjacencyBonus";
 
 export class MoholeAreaAres extends MoholeArea {
   public name: CardName = CardName.MOHOLE_AREA_ARES;
-  public adjacencyBonus: AdjacencyBonus = AdjacencyBonus.ofSpaceBonus(1, SpaceBonus.HEAT);
+  public adjacencyBonus: AdjacencyBonus = AdjacencyBonus.ofSpaceBonus(2, SpaceBonus.HEAT);
 }

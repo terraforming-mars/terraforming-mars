@@ -8,8 +8,9 @@ import { Resources } from "../../../src/Resources";
 import { Tardigrades } from "../../../src/cards/Tardigrades";
 import { Fish } from "../../../src/cards/Fish";
 import { Ants } from "../../../src/cards/Ants";
-import { SelectResourceCard } from "../../../src/interrupts/SelectResourceCard";
 import { setCustomGameOptions } from "../../TestingUtils";
+import { SelectCard } from "../../../src/inputs/SelectCard";
+import { ICard } from '../../../src/cards/ICard';
 
 describe("EcologyResearch", function () {
     let card : EcologyResearch, player : Player, game : Game, colony1: Luna;
@@ -52,8 +53,8 @@ describe("EcologyResearch", function () {
         expect(game.interrupts.length).to.eq(1);
 
         // add two microbes to Ants
-        let selectResourceInterrupt = game.interrupts[0] as SelectResourceCard;
-        selectResourceInterrupt.playerInput.cb([ants]);
+        let selectResource = game.interrupts[0].playerInput as SelectCard<ICard>;
+        selectResource.cb([ants]);
         
         expect(ants.resourceCount).to.eq(2);
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);

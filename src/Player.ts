@@ -102,7 +102,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public colonyTradeDiscount: number = 0;
     private turmoilScientistsActionUsed: boolean = false;
     public removingPlayers: Array<PlayerId> = [];
-    public needsToDraft: boolean | undefined = undefined;
+    public needsToDraft: boolean | undefined = undefined; 
 
     constructor(
         public name: string,

@@ -921,7 +921,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.resolveTurmoilInterrupts();
         return;
       }
-
+      
       this.goToDraftOrResearch();
     }
 
@@ -1403,6 +1403,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public getGeneration(): number {
       return this.generation;
     }
+
+    public getPassedPlayers():Set<PlayerId> {
+      return this.passedPlayers;
+    } 
 
     public getPlayer(name: string): Player {
       const found = this.players.filter((player) => player.name === name);

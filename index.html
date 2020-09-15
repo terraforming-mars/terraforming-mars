@@ -2,21 +2,38 @@
 <html>
     <head>
         <title>Terraforming Mars</title>
-        <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet"> 
-        <link rel='stylesheet' type='text/css' media='all' href='/styles.css' />
+        <link
+            href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
     </head>
     <body id="ts-preferences-target">
         <div id="app" :class="'topmost-'+screen">
             <div class="main-container">
                 <start-screen v-if="screen === 'start-screen'"></start-screen>
-                <create-game-form v-if="screen === 'create-game-form'"></create-game-form>
+                <create-game-form
+                    v-if="screen === 'create-game-form'"
+                ></create-game-form>
                 <load-game-form v-if="screen === 'load'"></load-game-form>
-                <game-home v-if="screen === 'game-home'" :game="game"></game-home>
-                <player-home v-if="screen === 'player-home'" :player="player" :key="playerkey"></player-home>
-                <game-end v-if="screen === 'the-end'" :player="player" :game="game"></game-end>
-                <games-overview v-if="screen === 'games-overview'"></games-overview>
+                <game-home
+                    v-if="screen === 'game-home'"
+                    :game="game"
+                ></game-home>
+                <player-home
+                    v-if="screen === 'player-home'"
+                    :player="player"
+                    :key="playerkey"
+                ></player-home>
+                <game-end
+                    v-if="screen === 'the-end'"
+                    :player="player"
+                    :game="game"
+                ></game-end>
+                <games-overview
+                    v-if="screen === 'games-overview'"
+                ></games-overview>
             </div>
-
         </div>
         <script src="/main.js"></script>
     </body>

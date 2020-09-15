@@ -29,7 +29,7 @@ Additional information on how to setup the game server locally can be found [her
 
 ### Docker
 
-Additional information on how to setup the game with docker can be found [here](https://drive.google.com/file/d/14hOxxLrCjhWJimvCyuLc-2JRrXevFiR1/view?usp=sharing).
+Additional information on how to setup the game with docker can be found [here](https://docs.google.com/document/d/1a_xTU2kp1E7-VwIA8qLF16prAvFkleTv9iTtxHCzGtM/edit?usp=sharing).
 
 ### HTTPS
 

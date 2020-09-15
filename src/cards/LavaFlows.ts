@@ -13,6 +13,7 @@ import { CardName } from '../CardName';
 import { MAX_TEMPERATURE, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
+import { AdjacencyBonus } from "../ares/AdjacencyBonus";
 
 export class LavaFlows implements IProjectCard {
     public cost: number = 18;
@@ -20,6 +21,8 @@ export class LavaFlows implements IProjectCard {
     public name: CardName = CardName.LAVA_FLOWS;
     public hasRequirements = false;
     public cardType: CardType = CardType.EVENT;
+    public adjacencyBonus?: AdjacencyBonus = undefined;
+
     public static getVolcanicSpaces(player: Player, game: Game): Array<ISpace> {
         if (game.gameOptions.boardName === BoardName.ORIGINAL) {
         return game.board.getSpaces(SpaceType.LAND, player)
@@ -54,6 +57,7 @@ export class LavaFlows implements IProjectCard {
     public play(player: Player, game: Game) {
         return new SelectSpace("Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons", LavaFlows.getVolcanicSpaces(player, game), (space: ISpace) => {
             game.addTile(player, SpaceType.LAND, space, { tileType: TileType.LAVA_FLOWS });
+            space.adjacency = { bonus: this.adjacencyBonus };
             return game.increaseTemperature(player, 2);
         });
     }

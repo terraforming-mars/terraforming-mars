@@ -23,9 +23,11 @@
   },
   "include": [
     "src/*.ts",
+    "src/ares/*.ts",
     "src/components/*.ts",
     "src/directives/*.ts",
     "src/cards/*.ts",
+    "src/cards/ares/*.ts",
     "src/cards/corporation/*.ts",
     "src/cards/prelude/*.ts",
     "src/cards/venusNext/*.ts",    
@@ -40,7 +42,7 @@
     "src/interrupts/*.ts",
     "src/database/*.ts",
     "src/turmoil/*.ts",
-    "src/turmoil/globalEvents*.ts",    
+    "src/turmoil/globalEvents*.ts",  
   ],
   "files": [
     "script.ts",

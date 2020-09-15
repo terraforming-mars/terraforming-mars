@@ -58,6 +58,7 @@ import { OrOptions } from "./inputs/OrOptions";
 import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
+import { AresHandler } from "./ares/AresHandler";
 
 
 export interface Score {
@@ -126,6 +127,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public someoneHasRemovedOtherPlayersPlants: boolean = false;
     public seed: number = Math.random();
     public gameOptions: GameOptions;
+    private aresHandler?: AresHandler;
 
 
     constructor(
@@ -310,6 +312,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
       }
 
+      if (gameOptions.aresExtension) {
+        this.aresHandler = new AresHandler(this);
+      }
       // Save initial game state
       Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer), this.players.length);
 
@@ -1473,33 +1478,28 @@ export class Game implements ILoadable<SerializedGame, Game> {
         );
       }
 
+      // From this point forward the tile can be placed.
       space.player = player;
       space.tile = tile;
 
       if (!isWorldGov) {
         space.bonus.forEach((spaceBonus) => {
-          if (spaceBonus === SpaceBonus.DRAW_CARD) {
-            player.cardsInHand.push(this.dealer.dealCard());
-          } else if (spaceBonus === SpaceBonus.PLANT) {
-            player.plants++;
-          } else if (spaceBonus === SpaceBonus.STEEL) {
-            player.steel++;
-          } else if (spaceBonus === SpaceBonus.TITANIUM) {
-            player.titanium++;
-          } else if (spaceBonus === SpaceBonus.HEAT) {
-            player.heat++;
-          }
+          this.grantSpaceBonus(player, spaceBonus);
         });
 
         this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-          if (adjacentSpace.tile &&
-              adjacentSpace.tile.tileType === TileType.OCEAN) {
-            player.megaCredits += player.oceanBonus;
+          if (adjacentSpace.tile) {
+            if (adjacentSpace.tile.tileType === TileType.OCEAN) {
+              player.megaCredits += player.oceanBonus;
+            }
+            this.aresHandler?.handleAdjacentPlacement(adjacentSpace, player);
           }
         });
-      }else{
+      } else {
         space.player = undefined;
       }
+
+
 
       this.tilePlaced(space);
       LogHelper.logTilePlacement(this, player, space, tile.tileType);
@@ -1509,6 +1509,20 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
     }
 
+    // TODO(kberg): move to SpaceBonus?
+    public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {
+      if (spaceBonus === SpaceBonus.DRAW_CARD) {
+        player.cardsInHand.push(this.dealer.dealCard());
+      } else if (spaceBonus === SpaceBonus.PLANT) {
+        player.plants++;
+      } else if (spaceBonus === SpaceBonus.STEEL) {
+        player.steel++;
+      } else if (spaceBonus === SpaceBonus.TITANIUM) {
+        player.titanium++;
+      } else if (spaceBonus === SpaceBonus.HEAT) {
+        player.heat++;
+      }
+    }
     private tilePlaced(space: ISpace) {
       this.players.forEach((p) => {
         if (p.corporationCard !== undefined &&

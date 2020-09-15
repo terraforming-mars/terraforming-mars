@@ -1,22 +1,20 @@
 import { expect } from "chai";
-import { EcologicalZone } from "../../src/cards/EcologicalZone";
-import { Color } from "../../src/Color";
-import { Player } from "../../src/Player";
-import { Game } from "../../src/Game";
-import { SelectSpace } from "../../src/inputs/SelectSpace";
-import { TileType } from "../../src/TileType";
+import { Color } from "../../../src/Color";
+import { Player } from "../../../src/Player";
+import { Game } from "../../../src/Game";
+import { SelectSpace } from "../../../src/inputs/SelectSpace";
+import { TileType } from "../../../src/TileType";
+import { EcologicalZoneAres } from '../../../src/cards/ares/EcologicalZoneAres';
+import { AdjacencyBonus } from '../../../src/ares/AdjacencyBonus';
+import { AresSpaceBonus } from "../../../src/ares/AresSpaceBonus";
 
-describe("EcologicalZone", function () {
-    let card : EcologicalZone, player : Player, game : Game;
+describe("EcologicalZoneAres", function () {
+    let card : EcologicalZoneAres, player : Player, game : Game;
 
     beforeEach(function() {
-        card = new EcologicalZone();
+        card = new EcologicalZoneAres();
         player = new Player("test", Color.BLUE, false);
         game = new Game("foobar", [player, player], player);
-    });
-
-    it("Can't play", function () {
-        expect(card.canPlay(player, game)).to.eq(false);
     });
 
     it("Should play", function () {
@@ -34,7 +32,7 @@ describe("EcologicalZone", function () {
         card.onCardPlayed(player, game, card);
         expect(card.resourceCount).to.eq(2);
         expect(card.getVictoryPoints()).to.eq(1);
-        expect(adjacentSpace.adjacency?.bonus).eq(undefined);
+        expect(adjacentSpace.adjacency?.bonus).to.deep.eq(AdjacencyBonus.ofAresSpaceBonus(1, AresSpaceBonus.ANIMAL));
     });
 });
 

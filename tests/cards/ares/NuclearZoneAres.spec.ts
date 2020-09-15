@@ -1,14 +1,14 @@
 
 import { expect } from "chai";
-import { NuclearZone } from "../../src/cards/NuclearZone";
-import { Color } from "../../src/Color";
-import { Player } from "../../src/Player";
-import { Game } from "../../src/Game";
-import { TileType } from "../../src/TileType";
+import { Color } from "../../../src/Color";
+import { Player } from "../../../src/Player";
+import { Game } from "../../../src/Game";
+import { TileType } from "../../../src/TileType";
+import { NuclearZoneAres } from '../../../src/cards/ares/NuclearZoneAres';
 
-describe("NuclearZone", function () {
+describe("NuclearZoneAres", function () {
     it("Should play", function () {
-        const card = new NuclearZone();
+        const card = new NuclearZoneAres();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
         const action = card.play(player, game);
@@ -18,7 +18,7 @@ describe("NuclearZone", function () {
           expect(space.tile && space.tile.tileType).to.eq(TileType.NUCLEAR_ZONE);
           player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
           expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-2);
-          expect(space.adjacency?.cost).eq(0);
+          expect(space.adjacency?.cost).eq(2);
         }  
         expect(game.getTemperature()).to.eq(-26);
     });

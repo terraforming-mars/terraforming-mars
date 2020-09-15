@@ -50,6 +50,30 @@ describe("Turmoil", function () {
         expect(game.getPlayerById(greens.delegates[0])).to.eq(player);
     });
 
+    it("Counts influence correctly for dominant party", function () {
+        turmoil.parties.forEach((party) => party.delegates = []);
+
+        const greens = turmoil.getPartyByName(PartyName.GREENS)!;
+        turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+        expect(greens.delegates.length).to.eq(1);
+
+        // 1 influence: Leader of dominant party
+        const greensPartyLeader = game.getPlayerById(greens.partyLeader!);
+        expect(greensPartyLeader).to.eq(player);
+        expect(turmoil.getPlayerInfluence(player)).to.eq(1);
+
+        // 2 influence: Leader of dominant party + at least 1 non-leader delegate in party
+        turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+        expect(greens.delegates.length).to.eq(2);
+        expect(turmoil.getPlayerInfluence(player)).to.eq(2);
+    });
+
+    it("Chairman gives 1 influence", function () {
+        turmoil.parties.forEach((party) => party.delegates = []);
+        turmoil.chairman = player.id;
+        expect(turmoil.getPlayerInfluence(player)).to.eq(1);
+    });           
+
     it("Correctly set dominant party", function () {
         const greens = turmoil.getPartyByName(PartyName.GREENS)!;
         const reds = turmoil.getPartyByName(PartyName.REDS)!;

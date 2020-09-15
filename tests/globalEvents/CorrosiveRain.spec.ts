@@ -13,12 +13,16 @@ describe("CorrosiveRain", function () {
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
         const turmoil = new Turmoil(game);
+
         turmoil.chairman = player2.id;
         turmoil.dominantParty = new Kelvinists();
         turmoil.dominantParty.partyLeader = player2.id;
         turmoil.dominantParty.delegates.push(player2.id);
+        turmoil.dominantParty.delegates.push(player2.id);
+
         player.megaCredits = 15;
         player2.megaCredits = 15;
+        
         card.resolve(game, turmoil);
         expect(player2.cardsInHand.length).to.eq(3);
         expect(player.cardsInHand.length).to.eq(0);

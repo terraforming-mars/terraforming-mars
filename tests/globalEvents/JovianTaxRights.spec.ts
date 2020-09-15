@@ -16,16 +16,20 @@ describe("JovianTaxRights", function () {
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
         const turmoil = new Turmoil(game);
+
         let colony1 = new Luna();
         let colony2 = new Triton();
         colony1.colonies.push(player2.id);
         colony2.colonies.push(player2.id);
         game.colonies.push(colony1);
         game.colonies.push(colony2);
+
         turmoil.chairman = player2.id;
         turmoil.dominantParty = new Kelvinists();
         turmoil.dominantParty.partyLeader = player2.id;
         turmoil.dominantParty.delegates.push(player2.id);
+        turmoil.dominantParty.delegates.push(player2.id);
+
         card.resolve(game, turmoil);
         expect(player.getResource(Resources.TITANIUM)).to.eq(0);
         expect(player2.getResource(Resources.TITANIUM)).to.eq(3);

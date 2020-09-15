@@ -5,7 +5,6 @@ import { Game } from "../../../src/Game";
 import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { Resources } from "../../../src/Resources";
 import { CommercialDistrictAres } from '../../../src/cards/ares/CommercialDistrictAres';
-import { AdjacencyBonus } from '../../../src/ares/AdjacencyBonus';
 import { AresSpaceBonus } from "../../../src/ares/AresSpaceBonus";
 
 describe("CommercialDistrictAres", function () {
@@ -25,6 +24,6 @@ describe("CommercialDistrictAres", function () {
         expect(action instanceof SelectSpace);
         action.cb(action.availableSpaces[0]);
 
-        expect(action.availableSpaces[0].adjacency?.bonus).to.deep.eq(AdjacencyBonus.ofAresSpaceBonus(2, AresSpaceBonus.MC));
+        expect(action.availableSpaces[0].adjacency).to.deep.eq({bonus: [AresSpaceBonus.MC, AresSpaceBonus.MC]});
     });
 });

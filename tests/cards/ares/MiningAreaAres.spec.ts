@@ -7,7 +7,6 @@ import { SpaceBonus } from "../../../src/SpaceBonus";
 import { TileType } from "../../../src/TileType";
 import { Resources } from "../../../src/Resources";
 import { MiningAreaAres } from '../../../src/cards/ares/MiningAreaAres';
-import { AdjacencyBonus } from '../../../src/ares/AdjacencyBonus';
 
 describe("MiningAreaAres", function () {
     let card : MiningAreaAres, player : Player, game : Game;
@@ -41,7 +40,7 @@ describe("MiningAreaAres", function () {
         expect(titaniumSpace!.player).to.eq(player);
         expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.MINING_AREA);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
-        expect(titaniumSpace!.adjacency?.bonus).to.deep.eq(AdjacencyBonus.ofSpaceBonus(1, SpaceBonus.TITANIUM));
+        expect(titaniumSpace!.adjacency).to.deep.eq({bonus: [SpaceBonus.TITANIUM]});
 
         const steelSpace = action.availableSpaces.find((space) => space.bonus.indexOf(SpaceBonus.TITANIUM) === -1 && space.bonus.indexOf(SpaceBonus.STEEL) !== -1);
         expect(steelSpace).not.to.eq(undefined);
@@ -50,6 +49,6 @@ describe("MiningAreaAres", function () {
         expect(steelSpace!.player).to.eq(player);
         expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(TileType.MINING_AREA);
         expect(player.getProduction(Resources.TITANIUM)).to.eq(1); 
-        expect(steelSpace!.adjacency?.bonus).to.deep.eq(AdjacencyBonus.ofSpaceBonus(1, SpaceBonus.STEEL));
+        expect(steelSpace!.adjacency).to.deep.eq({bonus: [SpaceBonus.STEEL]});
     });
 });

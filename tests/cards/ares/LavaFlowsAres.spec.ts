@@ -5,7 +5,6 @@ import { Game } from "../../../src/Game";
 import { TileType } from "../../../src/TileType";
 import { resetBoard } from "../../TestingUtils";
 import { LavaFlowsAres } from "../../../src/cards/ares/LavaFlowsAres";
-import { AdjacencyBonus } from '../../../src/ares/AdjacencyBonus';
 import { SpaceBonus } from "../../../src/SpaceBonus";
 
 describe("LavaFlowsAres", function () {
@@ -27,6 +26,6 @@ describe("LavaFlowsAres", function () {
         expect(space.tile && space.tile.tileType).to.eq(TileType.LAVA_FLOWS);
         expect(space.player).to.eq(player);
         expect(game.getTemperature()).to.eq(-26);
-        expect(space.adjacency?.bonus).to.deep.eq(AdjacencyBonus.ofSpaceBonus(2, SpaceBonus.HEAT));
+        expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.HEAT, SpaceBonus.HEAT]});
     });
 });

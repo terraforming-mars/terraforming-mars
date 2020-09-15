@@ -5,7 +5,6 @@ import { Game } from "../../../src/Game";
 import { TileType } from "../../../src/TileType";
 import { RestrictedAreaAres } from '../../../src/cards/ares/RestrictedAreaAres';
 import { SpaceBonus } from '../../../src/SpaceBonus';
-import { AdjacencyBonus } from '../../../src/ares/AdjacencyBonus';
 
 describe("RestrictedAreaAres", function () {
     let card : RestrictedAreaAres, player : Player, game : Game;
@@ -24,6 +23,6 @@ describe("RestrictedAreaAres", function () {
 
         action.cb(space);
         expect(space.tile && space.tile.tileType).to.eq(TileType.RESTRICTED_AREA);
-        expect(space.adjacency?.bonus).to.deep.eq(AdjacencyBonus.ofSpaceBonus(1, SpaceBonus.DRAW_CARD));
+        expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.DRAW_CARD]});
     });
 });

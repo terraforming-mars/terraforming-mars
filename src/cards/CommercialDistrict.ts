@@ -9,7 +9,7 @@ import {ISpace} from '../ISpace';
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 import { Board } from '../Board';
-import { AdjacencyBonus } from "../ares/AdjacencyBonus";
+import { IAdjacencyBonus } from "../ares/AdjacencyBonus";
 
 export class CommercialDistrict implements IProjectCard {
     public cost: number = 16;
@@ -17,7 +17,7 @@ export class CommercialDistrict implements IProjectCard {
     public name: CardName = CardName.COMMERCIAL_DISTRICT;
     public cardType: CardType = CardType.AUTOMATED;
     public hasRequirements = false;
-    public adjacencyBonus?: AdjacencyBonus = undefined;
+    public adjacencyBonus?: IAdjacencyBonus = undefined;
 
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 1 &&
@@ -41,7 +41,7 @@ export class CommercialDistrict implements IProjectCard {
               tileType: TileType.COMMERCIAL_DISTRICT,
               card: this.name
             });
-            foundSpace.adjacency = { bonus: this.adjacencyBonus };
+            foundSpace.adjacency = this.adjacencyBonus;
             player.setProduction(Resources.ENERGY,-1);
             player.setProduction(Resources.MEGACREDITS,4);
             return undefined;

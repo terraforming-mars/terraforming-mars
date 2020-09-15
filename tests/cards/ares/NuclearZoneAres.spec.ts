@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
@@ -18,7 +17,7 @@ describe("NuclearZoneAres", function () {
           expect(space.tile && space.tile.tileType).to.eq(TileType.NUCLEAR_ZONE);
           player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
           expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-2);
-          expect(space.adjacency?.cost).eq(2);
+          expect(space.adjacency).deep.eq({bonus: [], cost: 2});
         }  
         expect(game.getTemperature()).to.eq(-26);
     });

@@ -10,7 +10,7 @@ import { ISpace } from "../ISpace";
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 import { Board } from "../Board";
-import { AdjacencyBonus } from "../ares/AdjacencyBonus";
+import { IAdjacencyBonus } from "../ares/AdjacencyBonus";
 
 export class IndustrialCenter implements IActionCard, IProjectCard {
     public cost: number = 4;
@@ -18,7 +18,7 @@ export class IndustrialCenter implements IActionCard, IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
     public name: CardName = CardName.INDUSTRIAL_CENTER;
     public hasRequirements = false;
-    public adjacencyBonus?: AdjacencyBonus = undefined;
+    public adjacencyBonus?: IAdjacencyBonus = undefined;
 
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.board.getAvailableSpacesOnLand(player)
@@ -30,7 +30,7 @@ export class IndustrialCenter implements IActionCard, IProjectCard {
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space adjacent to a city tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.INDUSTRIAL_CENTER });
-            foundSpace.adjacency = { bonus: this.adjacencyBonus };
+            foundSpace.adjacency = this.adjacencyBonus;
             return undefined;
         });
     }

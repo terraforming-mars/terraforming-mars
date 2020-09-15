@@ -9,14 +9,14 @@ import {SpaceType} from '../SpaceType';
 import {ISpace} from '../ISpace';
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
-import { AdjacencyBonus } from '../ares/AdjacencyBonus';
+import { IAdjacencyBonus } from '../ares/AdjacencyBonus';
 
 export class Capital implements IProjectCard {
     public cost: number = 26;
     public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: CardName = CardName.CAPITAL;
-    public adjacencyBonus?: AdjacencyBonus = undefined;
+    public adjacencyBonus?: IAdjacencyBonus = undefined;
 
     public canPlay(player: Player, game: Game): boolean {
       return player.getProduction(Resources.ENERGY) >= 2 &&
@@ -45,7 +45,7 @@ export class Capital implements IProjectCard {
               tileType: TileType.CAPITAL,
               card: this.name
             });
-            space.adjacency = { bonus: this.adjacencyBonus };
+            space.adjacency = this.adjacencyBonus;
             return undefined;
           }
       );

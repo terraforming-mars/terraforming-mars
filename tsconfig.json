@@ -19,6 +19,7 @@
       "chai"
     ],
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     
   },
   "include": [
@@ -28,10 +29,10 @@
     "src/cards/*.ts",
     "src/cards/corporation/*.ts",
     "src/cards/prelude/*.ts",
-    "src/cards/venusNext/*.ts",    
-    "src/cards/turmoil/*.ts",  
-    "src/cards/promo/*.ts",  
-    "src/cards/colonies/*.ts",           
+    "src/cards/venusNext/*.ts",
+    "src/cards/turmoil/*.ts",
+    "src/cards/promo/*.ts",
+    "src/cards/colonies/*.ts",
     "src/inputs/*.ts",
     "src/models/*.ts",
     "src/colonies/*.ts",
@@ -40,7 +41,7 @@
     "src/interrupts/*.ts",
     "src/database/*.ts",
     "src/turmoil/*.ts",
-    "src/turmoil/globalEvents*.ts",    
+    "src/turmoil/globalEvents*.ts",
   ],
   "files": [
     "script.ts",

@@ -21,8 +21,9 @@ export class AresHandler {
     this.game = game;
   }
 
-  isAresSpaceBonus = (a: SpaceBonus | AresSpaceBonus) : a is AresSpaceBonus => {
+  public static isAresSpaceBonus(a: SpaceBonus | AresSpaceBonus) : a is AresSpaceBonus {
     assert(Object.values(AresSpaceBonus).length == 2);
+    
     return a === AresSpaceBonus.ANIMAL || a === AresSpaceBonus.MC;
   }
 
@@ -34,7 +35,7 @@ export class AresHandler {
       }
 
       adjacentSpace.adjacency.bonus.forEach(bonus => {
-        if (this.isAresSpaceBonus(bonus)) {
+        if (AresHandler.isAresSpaceBonus(bonus)) {
           // TODO(kberg): group and sum. Right now cards only have one animal to place, so this isn't
           // a problem.
           if (bonus === AresSpaceBonus.ANIMAL) {

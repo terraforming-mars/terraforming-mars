@@ -1723,7 +1723,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       game.fundedAwards.forEach((fundedAward) => {
 
         // Awards are disabled for 1 player games
-        if (game.soloMode) return;
+        if (game.isSoloMode()) return;
 
         const players: Array<Player> = game.getPlayers().slice();
         players.sort(

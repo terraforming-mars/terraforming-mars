@@ -119,7 +119,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public colonyDealer: ColonyDealer | undefined = undefined;
     public pendingOceans: number = 0;
     public lastSaveId: number = 0;
-    public soloMode: boolean = false;
     public turmoil: Turmoil | undefined;
     private clonedGamedId: string | undefined;
     public someoneHasRemovedOtherPlayersPlants: boolean = false;
@@ -191,7 +190,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
       if (players.length === 1) {
-        this.soloMode = true;
         gameOptions.draftVariant = false;
         gameOptions.initialDraftVariant = false;
         gameOptions.randomMA = false;
@@ -330,6 +328,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.runDraftRound(true);
         return;
       }
+    }
+
+    public isSoloMode() :boolean {
+      if (this.players.length === 1) return true;
+      return false;
     }
 
     private setStartingProductions(player: Player) {
@@ -559,7 +562,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public addResourceProductionDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {
-      if (this.soloMode) return;
+      if (this.isSoloMode()) return;
 
       let candidates: Array<Player> = [];
       if (resource === Resources.MEGACREDITS) {
@@ -579,7 +582,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public addResourceDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {
-      if (this.soloMode) {
+      if (this.isSoloMode()) {
         // Crash site cleanup hook
         if (resource === Resources.PLANTS) this.someoneHasRemovedOtherPlayersPlants = true;
         return;
@@ -867,7 +870,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     private gameIsOver(): boolean {
       // Single player game is done after generation 14 or 12 with prelude
-      if (this.soloMode) {
+      if (this.isSoloMode()) {
         if (this.generation === 14 || (this.generation === 12 && this.gameOptions.preludeExtension)) {
             return true;
         }
@@ -1669,7 +1672,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {
       // in soloMode you don'thave to decrease resources
-      return this.getPlayers().filter((p) => p.getProduction(resource) >= minQuantity).length > 0 || this.soloMode ;
+      return this.getPlayers().filter((p) => p.getProduction(resource) >= minQuantity).length > 0 || this.isSoloMode() ;
     }
 
     public hasCardsWithTag(tag: Tags, requiredQuantity: number = 1) {

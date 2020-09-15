@@ -67,7 +67,7 @@ Thanks goes to these wonderful people:
     </td>    
     <td align="center">
       <a href="https://github.com/pocc"><img src="https://avatars1.githubusercontent.com/u/10995145?s=460&v=4" width="100px;" alt=""/><br />
-        <sub><b>nwai90</b></sub><br />He did that one thing one time</a>
+        <sub><b>Ross Jacobs</b></sub><br />He did that one thing one time</a>
     </td>    
   </tr>
 </table>

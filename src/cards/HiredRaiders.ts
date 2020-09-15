@@ -15,7 +15,7 @@ export class HiredRaiders implements IProjectCard {
     public name: CardName = CardName.HIRED_RAIDERS;
 
     public play(player: Player, game: Game) {
-        if (game.soloMode) {
+        if (game.isSoloMode()) {
             return new OrOptions(
                 new SelectOption("Steal 2 steel", "Steal steel", () => {
                     player.steel += 2;

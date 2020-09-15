@@ -28,7 +28,7 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
       return undefined;
     }
     public canAct(player: Player, game: Game): boolean {
-      if (game.soloMode) return true;
+      if (game.isSoloMode()) return true;
       return this.getAvailableCards(game, player).length > 0;
     }
     private getAvailableCards(game: Game, currentPlayer: Player): Array<ICard> {
@@ -43,7 +43,7 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
     }
     public action(player: Player, game: Game) {
       // Solo play, can always steal from immaginary opponent
-      if (game.soloMode) {
+      if (game.isSoloMode()) {
         player.addResourceTo(this);
         return undefined;
       }

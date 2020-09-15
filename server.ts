@@ -1,3 +1,6 @@
+require('dotenv').config();
+
+import * as https from 'https';
 import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -37,6 +40,7 @@ const serverId = generateRandomServerId();
 const styles = fs.readFileSync('styles.css');
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
+
 
 function requestHandler(
     req: http.IncomingMessage,
@@ -115,7 +119,24 @@ function requestHandler(
   }
 };
 
-const server: http.Server = http.createServer(requestHandler);
+let server: http.Server | https.Server
+
+// If they've set up https
+if (process.env.KEY_PATH && process.env.CERT_PATH) {
+  const httpsHowto = "https://nodejs.org/en/knowledge/HTTP/servers/how-to-create-a-HTTPS-server/";
+  if (!fs.existsSync(process.env.KEY_PATH)) {
+    console.error("TLS KEY_PATH is set in .env, but cannot find key! Check out " + httpsHowto);
+  } else if (!fs.existsSync(process.env.CERT_PATH)) {
+    console.error("TLS CERT_PATH is set in .env, but cannot find cert! Check out" + httpsHowto);
+  }
+  const options = {
+    key: fs.readFileSync(process.env.KEY_PATH),
+    cert: fs.readFileSync(process.env.CERT_PATH)
+  };
+  server = https.createServer(options, requestHandler);
+} else {
+  server = http.createServer(requestHandler);
+}
 
 function generateRandomGameId(): string {
   return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
@@ -323,7 +344,15 @@ function apiGetPlayer(
     req: http.IncomingMessage,
     res: http.ServerResponse
 ): void {
-  const playerId: string = req.url!.substring('/api/player?id='.length);
+  const qs = req.url!.substring('/api/player?'.length);
+  const queryParams = querystring.parse(qs);
+  let playerId = queryParams['id'] as string | Array<string> | undefined;
+  if (Array.isArray(playerId)) {
+    playerId = playerId[0];
+  }
+  if (playerId === undefined) {
+    playerId = "";
+  }
   const game = playersToGame.get(playerId);
   if (game === undefined) {
     notFound(req, res);

@@ -17,11 +17,4 @@ Vue.directive("i18n", {
     componentUpdated: translateTextNode
 });
 
-
-// preload translations
-fetch("/assets/translations.json")
-    .then(response => response.json())
-    .then(jsonData => {
-        (window as any).TM_translations = jsonData;
-        new Vue(mainAppSettings);
-    });
+new Vue(mainAppSettings);

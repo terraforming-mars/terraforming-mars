@@ -1,13 +1,21 @@
-let NAMES = ["TERRAFORMER", "MAYOR", "GARDENER", "BUILDER", "PLANNER",
-"GENERALIST", "SPECIALIST", "ECOLOGIST", "TYCOON", "LEGEND",
-"DIVERSIFIER", "TACTICIAN", "POLAR EXPLORER", "ENERGIZER", "RIM SETTLER",
-"HOVERLORD",
-"LANDLORD", "SCIENTIST", "BANKER", "THERMALIST", "MINER",
-"CELEBRITY", "INDUSTRIALIST", "DESERT SETTLER", "ESTATE DEALER", "BENEFACTOR",
-"CULTIVATOR", "MAGNATE", "SPACE BARON", "EXCENTRIC", "CONTRACTOR",
-"VENUPHILE"];
+import { ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS } from "./awards/Awards";
+import { IAward } from "./awards/IAward";
+import { IMilestone } from "./milestones/IMilestone";
+import { ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES } from "./milestones/Milestones";
 
-let SYNERGIES = [
+const MA_ITEMS = [
+    ...ORIGINAL_MILESTONES,
+    ...ELYSIUM_MILESTONES,
+    ...HELLAS_MILESTONES,
+    ...VENUS_MILESTONES,
+
+    ...ORIGINAL_AWARDS,
+    ...ELYSIUM_AWARDS,
+    ...HELLAS_AWARDS,
+    ...VENUS_AWARDS
+];
+
+const SYNERGIES = [
     [1000,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,  1,0,0,1,0,0,0,1,1,9,2,0,0,0,0,0],
     [0,1000,3,0,0,0,0,0,0,0,0,0,4,0,0,0,  6,0,0,0,0,0,0,4,4,0,6,0,0,0,0,0],
     [0,0,1000,0,0,0,0,1,0,0,0,0,4,0,0,0,  6,0,0,0,0,0,0,4,5,2,9,0,0,0,0,0],
@@ -59,25 +67,28 @@ function getNumbersRange(start: number, end: number): Array<number> {
 }
 
 export function getRandomMilestonesAndAwards(withVenusian: boolean = true, requiredQty: number = 5) {
-    const limit = 30;
-    let synergy = 1000;
+    const maxSynergyAllowed = 1;
+    let maxSynergyDetected = 1000;
     let output: Array<number> = [];
-    while(synergy > limit) {
-        synergy = 0;
-        let rows = shuffleArray(getNumbersRange(0, withVenusian ? 14: 15));
-        let cols = shuffleArray(getNumbersRange(16, withVenusian ? 30: 31));
+    while(maxSynergyDetected > maxSynergyAllowed) {
+        maxSynergyDetected = 0;
+        let rows = shuffleArray(getNumbersRange(0, withVenusian ? 15: 14));
+        let cols = shuffleArray(getNumbersRange(16, withVenusian ? 31: 30));
 
         output = [...rows.slice(0, requiredQty), ...cols.slice(0, requiredQty)].sort((a, b) => a - b);
         let bound = requiredQty * 2;
         for (let i=0; i<bound - 1; i++) {
             for (let j=i+1; j<bound; j++) {
-                synergy += SYNERGIES[output[i]][output[j]];
+                maxSynergyDetected = Math.max(
+                    SYNERGIES[output[i]][output[j]],
+                    maxSynergyDetected
+                )
             }
         }
     }
-    let finalNames = output.map(n => NAMES[n]);
+    let finalItems = output.map(n => MA_ITEMS[n]);
     return {
-        "milestones": finalNames.slice(0, requiredQty),
-        "awards": finalNames.slice(requiredQty),
+        "milestones": finalItems.slice(0, requiredQty) as Array<IMilestone>,
+        "awards": finalItems.slice(requiredQty) as Array<IAward>,
     }
 }

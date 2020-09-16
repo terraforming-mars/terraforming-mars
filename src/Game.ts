@@ -58,6 +58,7 @@ import { OrOptions } from "./inputs/OrOptions";
 import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
+import { getRandomMilestonesAndAwards } from "./MASynergy";
 
 
 export interface Score {
@@ -364,7 +365,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       if (boardName === BoardName.ELYSIUM) {
         if (randomMA) {
-          this.getRandomMilestonesAndAwards(hasVenus, requiredQty);
+          this.setRandomMilestonesAndAwards(hasVenus, requiredQty);
         } else {
           this.milestones.push(...ELYSIUM_MILESTONES);
           this.awards.push(...ELYSIUM_AWARDS);
@@ -373,7 +374,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return new ElysiumBoard(this.gameOptions.shuffleMapOption, this.seed);
       } else if (boardName === BoardName.HELLAS) {
         if (randomMA) {
-          this.getRandomMilestonesAndAwards(hasVenus, requiredQty);
+          this.setRandomMilestonesAndAwards(hasVenus, requiredQty);
         } else {
           this.milestones.push(...HELLAS_MILESTONES);
           this.awards.push(...HELLAS_AWARDS);
@@ -382,7 +383,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return new HellasBoard(this.gameOptions.shuffleMapOption, this.seed);
       } else {
         if (randomMA) {
-          this.getRandomMilestonesAndAwards(hasVenus, requiredQty);
+          this.setRandomMilestonesAndAwards(hasVenus, requiredQty);
         } else {
           this.milestones.push(...ORIGINAL_MILESTONES);
           this.awards.push(...ORIGINAL_AWARDS);
@@ -392,28 +393,23 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
     }
 
-    public getRandomMilestonesAndAwards(hasVenus: boolean, requiredQty: number) {
-      let availableMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES);
-      if (hasVenus) availableMilestones = availableMilestones.concat(VENUS_MILESTONES);
+    public setRandomMilestonesAndAwards(hasVenus: boolean, requiredQty: number) {
+      let MA_Info = getRandomMilestonesAndAwards(hasVenus, requiredQty)
 
-      availableMilestones = availableMilestones.filter((milestone) => !this.milestones.includes(milestone));
+      let availableMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES);
 
-      const shuffledMilestones = availableMilestones.sort(() => 0.5 - Math.random());
-      this.milestones.push(...shuffledMilestones.slice(0, requiredQty));
+      this.milestones.push(...availableMilestones.filter(m => MA_Info.milestones.includes(m.name.toUpperCase())));
 
-      let availableAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS);
-      if (hasVenus) availableAwards = availableAwards.concat(VENUS_AWARDS);
-
-      availableAwards = availableAwards.filter((award) => !this.awards.includes(award));
-
-      const shuffledAwards = availableAwards.sort(() => 0.5 - Math.random());
-      this.awards.push(...shuffledAwards.slice(0, requiredQty));
+      let availableAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS);
+      this.awards.push(...availableAwards.filter(m => MA_Info.milestones.includes(m.name.toUpperCase())));
     }
 
     // Add Venus Next board colonies and milestone / award
     public setVenusElements(randomMA: boolean, includeVenusMA: boolean) {
       if (randomMA && includeVenusMA) {
-        this.getRandomMilestonesAndAwards(true, 1);
+        this.milestones = []
+        this.awards = []
+        this.setRandomMilestonesAndAwards(true, 6);
       } else {
         if (includeVenusMA) this.milestones.push(...VENUS_MILESTONES);
         if (includeVenusMA) this.awards.push(...VENUS_AWARDS);

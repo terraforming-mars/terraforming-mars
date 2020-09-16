@@ -45,9 +45,9 @@ let SYNERGIES = [
 
 function shuffleArray(arr: Array<number>) {
     arr = arr.slice()
-    for (var i = arr.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var temp = arr[i];
+    for (let i = arr.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        let temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
@@ -59,10 +59,10 @@ function getNumbersRange(start: number, end: number): Array<number> {
 }
 
 export function getRandomMilestonesAndAwards(withVenusian: boolean = true, requiredQty: number = 5) {
-    var synergy = 0;
-    var limit = 30;
+    const limit = 30;
+    let synergy = 1000;
     let output: Array<number> = [];
-    while(synergy === 0 || synergy > limit) {
+    while(synergy > limit) {
         synergy = 0;
         let rows = shuffleArray(getNumbersRange(0, withVenusian ? 14: 15));
         let cols = shuffleArray(getNumbersRange(16, withVenusian ? 30: 31));

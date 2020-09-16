@@ -62,7 +62,7 @@ export function getRandomMilestonesAndAwards(withVenusian: boolean = true, requi
     var synergy = 0;
     var limit = 30;
     let output: Array<number> = [];
-    while(synergy == 0 || synergy > limit) {
+    while(synergy === 0 || synergy > limit) {
         synergy = 0;
         let rows = shuffleArray(getNumbersRange(0, withVenusian ? 14: 15));
         let cols = shuffleArray(getNumbersRange(16, withVenusian ? 30: 31));

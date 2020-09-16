@@ -401,7 +401,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.milestones.push(...availableMilestones.filter(m => MA_Info.milestones.includes(m.name.toUpperCase())));
 
       let availableAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS);
-      this.awards.push(...availableAwards.filter(m => MA_Info.milestones.includes(m.name.toUpperCase())));
+      this.awards.push(...availableAwards.filter(m => MA_Info.awards.includes(m.name.toUpperCase())));
     }
 
     // Add Venus Next board colonies and milestone / award

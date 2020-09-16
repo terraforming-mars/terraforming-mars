@@ -451,7 +451,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
       return requirementsBonus;
     }
-
+ 
     private generateId(): string {
       return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
     }

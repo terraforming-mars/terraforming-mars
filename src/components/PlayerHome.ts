@@ -146,26 +146,20 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
 
                 <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat" v-if="player.gameLog.length > 0">
-                    <h2 :class="'player_color_'+ player.color">
-                        <span v-i18n>Game log</span>
-                        <span class="label-additional">generation {{ player.generation }}</span>
-                    </h2>
+                    <h2 :class="'player_color_'+ player.color"><span v-i18n>Game log</span><span class="label-additional">generation {{ player.generation }}</span></h2>
                     <log-panel :messages="player.gameLog" :players="player.players"></log-panel>
                 </div>
 
                 <a name="cards" class="player_home_anchor"></a>
                 <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
-                    <h2 :class="'player_color_'+ player.color">
-                        <span v-i18n>Cards In Hand</span>
-                        <span class="label-additional">{{ player.cardsInHandNbr }}</span>
-                    </h2>
+                    <h2 :class="'player_color_'+ player.color"> <span v-i18n>Cards In Hand</span><span class="label-additional">{{ player.cardsInHandNbr }}</span></h2>
                     <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
                         <card :card="card"></card>
                     </div>
                 </div>
 
                 <div class="player_home_block player_home_block--cards">
-                    <h2 :class="'player_color_'+ player.color" v-i18n>Played Cards</h2>
+                    <h2 :class="'player_color_'+ player.color"><span>Played Cards</span><span class="label-additional">{{ getPlayerCardsPlayed(player, true) }}</span></h2>
 
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
                         <card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"></card>

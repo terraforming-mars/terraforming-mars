@@ -35,7 +35,7 @@ import {IColony} from "./colonies/Colony";
 import {ColonyDealer, getColonyByName} from "./colonies/ColonyDealer";
 import {PlayerInterrupt} from "./interrupts/PlayerInterrupt";
 import {SelectOcean} from "./interrupts/SelectOcean";
-import { SelectResourceCard } from './interrupts/SelectResourceCard';
+import { SelectResourceCard } from "./interrupts/SelectResourceCard";
 import {SelectColony} from "./interrupts/SelectColony";
 import {SelectRemoveColony} from "./interrupts/SelectRemoveColony";
 import {SelectResourceProductionDecrease} from "./interrupts/SelectResourceProductionDecrease";

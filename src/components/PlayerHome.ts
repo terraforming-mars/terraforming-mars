@@ -56,9 +56,8 @@ export const PlayerHome = Vue.component("player-home", {
                     (player.needsToDraft === undefined && player.isActive)
                 ) {
                     classes.push("player_is_active");
-                } else {
-                    classes.push(playerBgColorClass(player.color));
                 }
+                classes.push(playerBgColorClass(player.color));
             }
             return classes.join(" ");
         },

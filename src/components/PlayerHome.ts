@@ -159,7 +159,7 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
 
                 <div class="player_home_block player_home_block--cards">
-                    <h2 :class="'player_color_'+ player.color"><span>Played Cards</span><span class="label-additional">{{ getPlayerCardsPlayed(player, true) }}</span></h2>
+                    <h2 :class="'player_color_'+ player.color"><span v-i18n>Played Cards</span><span class="label-additional">{{ getPlayerCardsPlayed(player, true) }}</span></h2>
 
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
                         <card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"></card>

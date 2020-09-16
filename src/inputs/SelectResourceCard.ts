@@ -1,6 +1,6 @@
 import { Game } from "../Game";
 import { Player } from "../Player";
-import { SelectCard } from "../inputs/SelectCard";
+import { SelectCard } from "./SelectCard";
 import { ResourceType } from "../ResourceType";
 import { ICard } from "../cards/ICard";
 import { LogHelper } from "../components/LogHelper";

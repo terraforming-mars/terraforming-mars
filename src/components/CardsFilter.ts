@@ -1,17 +1,22 @@
 import Vue from "vue";
 
-import { ALL_PRELUDE_PROJECTS_CARDS, ALL_VENUS_PROJECTS_CARDS, ALL_COLONIES_PROJECTS_CARDS, ALL_TURMOIL_PROJECTS_CARDS, ALL_PROMO_PROJECTS_CARDS, ALL_PROJECT_CARDS, ALL_CORP_ERA_PROJECT_CARDS } from '../Dealer';
 import { CardName } from "../CardName";
+import { ColoniesCardManifest } from "../cards/colonies/ColoniesDeck";
+import { PreludeCardManifest } from "../cards/prelude/PreludeDeck";
+import { PromoCardManifest } from "../cards/promo/PromoDeck";
+import { BaseCardManifest, CorpEraCardManifest } from "../cards/StandardDecks";
+import { TurmoilCardManifest } from "../cards/turmoil/TurmoilDeck";
+import { VenusCardManifest } from "../cards/venusNext/VenusDeck";
 import { $t } from "../directives/i18n";
 
 const allItems: Array<CardName> = [
-    ...ALL_PRELUDE_PROJECTS_CARDS.map((cf) => cf.cardName),
-    ...ALL_VENUS_PROJECTS_CARDS.map((cf) => cf.cardName),
-    ...ALL_COLONIES_PROJECTS_CARDS.map((cf) => cf.cardName),
-    ...ALL_TURMOIL_PROJECTS_CARDS.map((cf) => cf.cardName),
-    ...ALL_PROMO_PROJECTS_CARDS.map((cf) => cf.cardName),
-    ...ALL_PROJECT_CARDS.map((cf) => cf.cardName),
-    ...ALL_CORP_ERA_PROJECT_CARDS.map((cf) => cf.cardName)
+    ...new PreludeCardManifest().projectCards.map((cf) => cf.cardName),
+    ...new VenusCardManifest().projectCards.map((cf) => cf.cardName),
+    ...new ColoniesCardManifest().projectCards.map((cf) => cf.cardName),
+    ...new TurmoilCardManifest().projectCards.map((cf) => cf.cardName),
+    ...new PromoCardManifest().projectCards.map((cf) => cf.cardName),
+    ...new BaseCardManifest().projectCards.map((cf) => cf.cardName),
+    ...new CorpEraCardManifest().projectCards.map((cf) => cf.cardName),
 ].sort();
 
 interface CardsFilterModel {

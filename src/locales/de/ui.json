@@ -1,7 +1,7 @@
 {
     "Terraforming Mars": "Terraforming Mars",
     "Create New Game": "Neues Spiel erstellen",
-    
+
     "Players count": "Spieleranzahl",
     "Expansions": "Erweiterungen",
     "Options": "Optionen",
@@ -130,6 +130,7 @@
     "Turn order": "Zugreihenfolge",
     "Actions": "Aktionen",
     "Last Actions": "Letzte Aktionen",
+    "Game Log": "Spielprotokoll",
     "Cards In Hand": "Handkarten",
     "Played Cards": "Gespielte Karten",
     "Game details": "Spieldetails",
@@ -169,7 +170,7 @@
     "Buffer Gas": "Puffergas",
     "Build colony": "Kolonie errichten",
     "Trade with a colony": "Mit einer Kolonie handeln",
- 
+
     "Place any final greenery from plants": "Übrige Pflanzen-Resourcen in Grünflächen umwandeln:",
     "Don't place a greenery": "KEINE Grünfläche platzieren",
     "Select space for greenery": "Grünfläche platzieren",

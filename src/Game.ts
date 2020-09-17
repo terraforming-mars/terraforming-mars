@@ -458,10 +458,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.colonies = gameToRebuild.colonies;
           game.turmoil = gameToRebuild.turmoil;
 
-          if(gameToRebuild.gameOptions.venusNextExtension) {
-            game.addVenusBoardSpaces();
-          }
-
           // Set active player
           let playerIndex = gameToRebuild.players.indexOf(gameToRebuild.first);
           game.first = game.players[playerIndex];

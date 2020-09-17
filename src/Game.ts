@@ -1,63 +1,63 @@
-import { Player, PlayerId } from "./Player";
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_CORP_ERA_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from "./Dealer";
-import {ISpace} from "./ISpace";
-import {SpaceType} from "./SpaceType";
-import {TileType} from "./TileType";
-import {SpaceBonus} from "./SpaceBonus";
-import {ITile} from "./ITile";
-import {IProjectCard} from "./cards/IProjectCard";
-import {BeginnerCorporation} from "./cards/corporation/BeginnerCorporation";
-import {CorporationCard} from "./cards/corporation/CorporationCard";
-import {OriginalBoard} from "./OriginalBoard";
-import {SelectCard} from "./inputs/SelectCard";
-import {SelectSpace} from "./inputs/SelectSpace";
-import {AndOptions} from "./inputs/AndOptions";
-import {PlayerInput} from "./PlayerInput";
-import {Phase} from "./Phase";
-import {ClaimedMilestone} from "./ClaimedMilestone";
-import {FundedAward} from "./FundedAward";
-import {IMilestone} from "./milestones/IMilestone";
-import {ResourceType} from "./ResourceType";
+import { ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS } from "./awards/Awards";
+import { IAward } from "./awards/IAward";
+import { Board, BoardColony } from "./Board";
+import { BoardName } from "./BoardName";
+import { CardName } from "./CardName";
+import { BeginnerCorporation } from "./cards/corporation/BeginnerCorporation";
+import { CorporationCard } from "./cards/corporation/CorporationCard";
+import { ICard } from "./cards/ICard";
+import { IProjectCard } from "./cards/IProjectCard";
+import { Tags } from "./cards/Tags";
+import { ClaimedMilestone } from "./ClaimedMilestone";
+import { IColony } from "./colonies/Colony";
+import { ColonyDealer, getColonyByName } from "./colonies/ColonyDealer";
+import { ColonyName } from "./colonies/ColonyName";
+import { Color } from "./Color";
+import { LogHelper } from "./components/LogHelper";
 import * as constants from "./constants";
-import {Color} from "./Color";
-import {IAward} from "./awards/IAward";
-import {Tags} from "./cards/Tags";
-import {Resources} from "./Resources";
-import {ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES} from "./milestones/Milestones";
-import {ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS} from "./awards/Awards";
-import {SpaceName} from "./SpaceName";
-import {BoardColony, Board} from "./Board";
 import { CorporationName } from "./CorporationName";
-import {ElysiumBoard} from "./ElysiumBoard";
-import {HellasBoard} from "./HellasBoard";
-import {BoardName} from "./BoardName";
-import {IColony} from "./colonies/Colony";
-import {ColonyDealer, getColonyByName} from "./colonies/ColonyDealer";
-import {PlayerInterrupt} from "./interrupts/PlayerInterrupt";
-import {SelectOcean} from "./interrupts/SelectOcean";
-import { SelectResourceCard } from "./inputs/SelectResourceCard";
-import {SelectColony} from "./interrupts/SelectColony";
-import {SelectRemoveColony} from "./interrupts/SelectRemoveColony";
-import {SelectResourceProductionDecrease} from "./interrupts/SelectResourceProductionDecrease";
-import {ICard} from "./cards/ICard";
-import {SelectResourceDecrease} from "./interrupts/SelectResourceDecrease";
-import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
+import { Database } from "./database/Database";
+import { Dealer } from "./Dealer";
+import { ElysiumBoard } from "./ElysiumBoard";
+import { FundedAward } from "./FundedAward";
+import { HellasBoard } from "./HellasBoard";
 import { ILoadable } from "./ILoadable";
-import {LogMessage} from "./LogMessage";
-import {LogMessageType} from "./LogMessageType";
-import {LogMessageData} from "./LogMessageData";
-import {LogMessageDataType} from "./LogMessageDataType";
-import {Database} from "./database/Database";
+import { AndOptions } from "./inputs/AndOptions";
+import { OrOptions } from "./inputs/OrOptions";
+import { SelectCard } from "./inputs/SelectCard";
+import { SelectOption } from "./inputs/SelectOption";
+import { SelectResourceCard } from "./inputs/SelectResourceCard";
+import { SelectSpace } from "./inputs/SelectSpace";
+import { PlayerInterrupt } from "./interrupts/PlayerInterrupt";
+import { SelectColony } from "./interrupts/SelectColony";
+import { SelectHowToPayInterrupt } from "./interrupts/SelectHowToPayInterrupt";
+import { SelectOcean } from "./interrupts/SelectOcean";
+import { SelectRemoveColony } from "./interrupts/SelectRemoveColony";
+import { SelectResourceDecrease } from "./interrupts/SelectResourceDecrease";
+import { SelectResourceProductionDecrease } from "./interrupts/SelectResourceProductionDecrease";
+import { ISpace } from "./ISpace";
+import { ITile } from "./ITile";
+import { LogMessage } from "./LogMessage";
+import { LogMessageData } from "./LogMessageData";
+import { LogMessageDataType } from "./LogMessageDataType";
+import { LogMessageType } from "./LogMessageType";
+import { IMilestone } from "./milestones/IMilestone";
+import { ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES } from "./milestones/Milestones";
+import { OriginalBoard } from "./OriginalBoard";
+import { Phase } from "./Phase";
+import { Player, PlayerId } from "./Player";
+import { PlayerInput } from "./PlayerInput";
+import { Resources } from "./Resources";
+import { ResourceType } from "./ResourceType";
 import { SerializedGame } from "./SerializedGame";
 import { SerializedPlayer } from "./SerializedPlayer";
-import { CardName } from "./CardName";
-import { Turmoil } from "./turmoil/Turmoil";
-import { PartyHooks } from "./turmoil/parties/PartyHooks";
+import { SpaceBonus } from "./SpaceBonus";
+import { SpaceName } from "./SpaceName";
+import { SpaceType } from "./SpaceType";
+import { TileType } from "./TileType";
 import { IParty } from "./turmoil/parties/IParty";
-import { OrOptions } from "./inputs/OrOptions";
-import { SelectOption } from "./inputs/SelectOption";
-import { LogHelper } from "./components/LogHelper";
-import { ColonyName } from "./colonies/ColonyName";
+import { PartyHooks } from "./turmoil/parties/PartyHooks";
+import { Turmoil } from "./turmoil/Turmoil";
 
 
 export interface Score {
@@ -199,27 +199,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.setupSolo();
       }
 
-      let corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
-
-      // Add Corporate Era corporation cards
-      if (gameOptions.corporateEra) {
-        corporationCards.push(...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => new cf.factory()));
-      }
-
-      // Add prelude corporations cards
-      if (gameOptions.preludeExtension) {
-        corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
-      }
-
       // Add Venus Next corporations cards, board colonies and milestone / award
       if (gameOptions.venusNextExtension) {
-        corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
         this.setVenusElements(gameOptions.randomMA, gameOptions.includeVenusMA);
       }
 
       // Add colonies stuff
       if (gameOptions.coloniesExtension) {
-        corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
         this.colonyDealer = new ColonyDealer();
         this.colonies = this.colonyDealer.drawColonies(players.length, this.gameOptions.customColoniesList);
         if (this.players.length === 1) {
@@ -231,28 +217,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Add Turmoil stuff
       if (gameOptions.turmoilExtension) {
         this.turmoil = new Turmoil(this);
-        corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
       }
 
-      // Add Promo stuff
-      if (gameOptions.promoCardsOption) {
-        corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
-      }
+      let corporationCards = this.dealer.corporationCards;
 
       // Setup custom corporation list
       const minCorpsRequired = players.length * gameOptions.startingCorporations;
       if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
 
-        // Init all available corporation cards to choose from
-        corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
-        corporationCards.push(...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
-
-        corporationCards = corporationCards.filter(
+        corporationCards = this.dealer.corporationCards.filter(
           (corpCard) => gameOptions !== undefined && gameOptions.customCorporationsList.includes(corpCard.name)
         );
       }

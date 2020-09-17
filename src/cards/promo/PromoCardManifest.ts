@@ -1,8 +1,6 @@
 import { CardName } from "../../CardName";
-import { ICardFactory } from "../../Dealer";
+import { GameModule } from "../../GameModule";
 import { CardManifest } from "../CardManifest";
-import { CorporationCard } from "../corporation/CorporationCard";
-import { IProjectCard } from "../IProjectCard";
 import { Advertising } from "./Advertising";
 import { ArcadianCommunities } from "./ArcadianCommunities";
 import { AsteroidDeflectionSystem } from "./AsteroidDeflectionSystem";
@@ -48,9 +46,9 @@ import { StanfordTorus } from "./StanfordTorus";
 import { SubCrustMeasurements } from "./SubCrustMeasurements";
 import { TopsoilContract } from "./TopsoilContract";
 
-export class PromoCardManifest
- extends CardManifest {
-    projectCards: Array<ICardFactory<IProjectCard>> = [
+export const PROMO_CARD_MANIFEST = new CardManifest({
+    module: GameModule.Promo,
+    projectCards: [
         { cardName: CardName.PENGUINS, factory: Penguins },
         { cardName: CardName.SELF_REPLICATING_ROBOTS, factory: SelfReplicatingRobots },
         { cardName: CardName.SMALL_ASTEROID, factory: SmallAsteroid },
@@ -87,14 +85,14 @@ export class PromoCardManifest
         { cardName: CardName.GREAT_DAM_PROMO, factory: GreatDamPromo },
         { cardName: CardName.MAGNETIC_FIELD_GENERATORS_PROMO, factory: MagneticFieldGeneratorsPromo },
         { cardName: CardName.SATURN_SURFING, factory: SaturnSurfing }
-        ];
+        ],
 
-        projectCardsToRemove = [
-            CardName.DEIMOS_DOWN,
-            CardName.GREAT_DAM,
-            CardName.MAGNETIC_FIELD_GENERATORS];
+    projectCardsToRemove: [
+        CardName.DEIMOS_DOWN,
+        CardName.GREAT_DAM,
+        CardName.MAGNETIC_FIELD_GENERATORS],
 
-    corporationCards: Array<ICardFactory<CorporationCard>> = [
+    corporationCards: [
         { cardName: CardName.ARCADIAN_COMMUNITIES, factory: ArcadianCommunities },
         { cardName: CardName.ASTRODRILL, factory: Astrodrill },
         { cardName: CardName.FACTORUM, factory: Factorum },
@@ -103,6 +101,4 @@ export class PromoCardManifest
         { cardName: CardName.MONS_INSURANCE, factory: MonsInsurance },
         { cardName: CardName.RECYCLON, factory: Recyclon },
         { cardName: CardName.SPLICE, factory: Splice }
-    ];
-
-}
+    ]});

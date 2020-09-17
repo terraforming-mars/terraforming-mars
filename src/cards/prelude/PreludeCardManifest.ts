@@ -1,8 +1,6 @@
 import { CardName } from "../../CardName";
-import { ICardFactory } from "../../Dealer";
+import { GameModule } from "../../GameModule";
 import { CardManifest } from "../CardManifest";
-import { CorporationCard } from "../corporation/CorporationCard";
-import { IProjectCard } from "../IProjectCard";
 import { AcquiredSpaceAgency } from "./AcquiredSpaceAgency";
 import { AlliedBanks } from "./AlliedBanks";
 import { AquiferTurbines } from "./AquiferTurbines";
@@ -51,8 +49,9 @@ import { UNMIContractor } from "./UNMIContractor";
 import { ValleyTrust } from "./ValleyTrust";
 import { Vitor } from "./Vitor";
 
-export class PreludeCardManifest extends CardManifest {
-    projectCards: Array<ICardFactory<IProjectCard>> = [
+export const PRELUDE_CARD_MANIFEST = new CardManifest({
+    module: GameModule.Prelude,
+    projectCards: [
         { cardName: CardName.SF_MEMORIAL, factory: SFMemorial },
         { cardName: CardName.HOUSE_PRINTING, factory: HousePrinting },
         { cardName: CardName.SPACE_HOTELS, factory: SpaceHotels },
@@ -60,18 +59,17 @@ export class PreludeCardManifest extends CardManifest {
         { cardName: CardName.RESEARCH_COORDINATION, factory: ResearchCoordination },
         { cardName: CardName.LAVA_TUBE_SETTLEMENT, factory: LavaTubeSettlement },
         { cardName: CardName.PSYCHROPHILES, factory: Psychrophiles }
-    ];
+    ],
 
-    corporationCards: Array<ICardFactory<CorporationCard>> = [
+    corporationCards: [
         { cardName: CardName.CHEUNG_SHING_MARS, factory: CheungShingMARS },
         { cardName: CardName.POINT_LUNA, factory: PointLuna },
         { cardName: CardName.ROBINSON_INDUSTRIES, factory: RobinsonIndustries },
         { cardName: CardName.VALLEY_TRUST, factory: ValleyTrust },
         { cardName: CardName.VITOR, factory: Vitor }
-    
-    ];
+    ],
 
-    preludeCards: Array<ICardFactory<IProjectCard>> = [
+    preludeCards: [
         { cardName: CardName.ALLIED_BANKS, factory: AlliedBanks },
         { cardName: CardName.BIOSPHERE_SUPPORT, factory: BiosphereSupport },
         { cardName: CardName.AQUIFER_TURBINES, factory: AquiferTurbines },
@@ -107,5 +105,4 @@ export class PreludeCardManifest extends CardManifest {
         { cardName: CardName.ECCENTRIC_SPONSOR, factory: EccentricSponsor },
         { cardName: CardName.ECOLOGY_EXPERTS, factory: EcologyExperts },
         { cardName: CardName.EXPERIMENTAL_FOREST, factory: ExperimentalForest }
-    ]
-}
+    ]});

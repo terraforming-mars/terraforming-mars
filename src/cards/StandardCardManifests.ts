@@ -1,5 +1,5 @@
 import { CardName } from "../CardName";
-import { ICardFactory } from "../Dealer";
+import { GameModule } from "../GameModule";
 import { AcquiredCompany } from "./AcquiredCompany";
 import { AdaptationTechnology } from "./AdaptationTechnology";
 import { AdaptedLichen } from "./AdaptedLichen";
@@ -42,7 +42,6 @@ import { Comet } from "./Comet";
 import { CommercialDistrict } from "./CommercialDistrict";
 import { ConvoyFromEuropa } from "./ConvoyFromEuropa";
 import { CorporateStronghold } from "./CorporateStronghold";
-import { CorporationCard } from "./corporation/CorporationCard";
 import { CrediCor } from "./corporation/CrediCor";
 import { EcoLine } from "./corporation/EcoLine";
 import { Helion } from "./corporation/Helion";
@@ -113,7 +112,6 @@ import { InventionContest } from "./InventionContest";
 import { InventorsGuild } from "./InventorsGuild";
 import { InvestmentLoan } from "./InvestmentLoan";
 import { IoMiningIndustries } from "./IoMiningIndustries";
-import { IProjectCard } from "./IProjectCard";
 import { Ironworks } from "./Ironworks";
 import { KelpFarming } from "./KelpFarming";
 import { LagrangeObservatory } from "./LagrangeObservatory";
@@ -224,8 +222,9 @@ import { Windmills } from "./Windmills";
 import { Worms } from "./Worms";
 import { Zeppelins } from "./Zeppelins";
 
-export class BaseCardManifest extends CardManifest {
-    projectCards: Array<ICardFactory<IProjectCard>> = [
+export const BASE_CARD_MANIFEST = new CardManifest ({
+    module: GameModule.Base,
+    projectCards: [
         { cardName: CardName.ADAPTATION_TECHNOLOGY , factory: AdaptationTechnology },
         { cardName: CardName.ADAPTED_LICHEN , factory: AdaptedLichen },
         { cardName: CardName.ADVANCED_ECOSYSTEMS, factory: AdvancedEcosystems },
@@ -363,9 +362,9 @@ export class BaseCardManifest extends CardManifest {
         { cardName: CardName.WINDMILLS, factory: Windmills },
         { cardName: CardName.WORMS, factory: Worms },
         { cardName: CardName.ZEPPELINS, factory: Zeppelins }
-        ];
+        ],
 
-    corporationCards: Array<ICardFactory<CorporationCard>> = [
+    corporationCards: [
         { cardName: CardName.CREDICOR, factory: CrediCor },
         { cardName: CardName.ECOLINE, factory: EcoLine },
         { cardName: CardName.HELION, factory: Helion },
@@ -376,12 +375,12 @@ export class BaseCardManifest extends CardManifest {
         { cardName: CardName.THARSIS_REPUBLIC, factory: TharsisRepublic },
         { cardName: CardName.THORGATE, factory: Thorgate },
         { cardName: CardName.UNITED_NATIONS_MARS_INITIATIVE, factory: UnitedNationsMarsInitiative }    
-    ];
-}
+    ]});
 
 
-export class CorpEraCardManifest extends CardManifest {
-    projectCards: Array<ICardFactory<IProjectCard>> = [
+export const CORP_ERA_CARD_MANIFEST = new CardManifest({
+    module: GameModule.CorpEra,
+    projectCards: [
         { cardName: CardName.ACQUIRED_COMPANY , factory: AcquiredCompany },
         { cardName: CardName.ADVANCED_ALLOYS, factory: AdvancedAlloys },
         { cardName: CardName.AI_CENTRAL, factory: AICentral },
@@ -453,10 +452,9 @@ export class CorpEraCardManifest extends CardManifest {
         { cardName: CardName.VESTA_SHIPYARD, factory: VestaShipyard },
         { cardName: CardName.VIRAL_ENHANCERS, factory: ViralEnhancers },
         { cardName: CardName.VIRUS, factory: Virus },
-        ];
+        ],
 
-    corporationCards: Array<ICardFactory<CorporationCard>> = [
+    corporationCards: [
         { cardName: CardName.SATURN_SYSTEMS, factory: SaturnSystems },
         { cardName: CardName.TERACTOR, factory: Teractor }    
-    ];
-}
+    ]});

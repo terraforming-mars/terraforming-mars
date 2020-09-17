@@ -1,8 +1,6 @@
 import { CardName } from "../../CardName";
-import { ICardFactory } from "../../Dealer";
+import { GameModule } from "../../GameModule";
 import { CardManifest } from "../CardManifest";
-import { CorporationCard } from "../corporation/CorporationCard";
-import { IProjectCard } from "../IProjectCard";
 import { AerialMappers } from "./AerialMappers";
 import { AerosportTournament } from "./AerosportTournament";
 import { AirScrappingExpedition } from "./AirScrappingExpedition";
@@ -58,8 +56,9 @@ import { VenusWaystation } from "./VenusWaystation";
 import { Viron } from "./Viron";
 import { WaterToVenus } from "./WaterToVenus";
 
-export class VenusCardManifest extends CardManifest {
-    projectCards: Array<ICardFactory<IProjectCard>> = [
+export const VENUS_CARD_MANIFEST = new CardManifest({
+    module: GameModule.Venus,
+    projectCards: [
         { cardName: CardName.AERIAL_MAPPERS, factory: AerialMappers },
         { cardName: CardName.AEROSPORT_TOURNAMENT, factory: AerosportTournament },
         { cardName: CardName.AIR_SCRAPPING_EXPEDITION, factory: AirScrappingExpedition },
@@ -109,13 +108,12 @@ export class VenusCardManifest extends CardManifest {
         { cardName: CardName.ORBITAL_REFLECTORS, factory: OrbitalReflectors },
         { cardName: CardName.OMNICOURT, factory: Omnicourt },
         { cardName: CardName.MINING_QUOTA, factory: MiningQuota }
-   ];
+   ],
 
-    corporations: Array<ICardFactory<CorporationCard>> = [
+    corporationCards: [
         { cardName: CardName.APHRODITE, factory: Aphrodite },
         { cardName: CardName.CELESTIC, factory: Celestic },
         { cardName: CardName.MANUTECH, factory: Manutech },
         { cardName: CardName.MORNING_STAR_INC, factory: MorningStarInc },
         { cardName: CardName.VIRON, factory: Viron }
-    ];
-}
+    ]});

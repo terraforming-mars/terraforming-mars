@@ -1,22 +1,23 @@
 import Vue from "vue";
 
 import { CardName } from "../CardName";
-import { ColoniesCardManifest } from "../cards/colonies/ColoniesDeck";
-import { PreludeCardManifest } from "../cards/prelude/PreludeDeck";
-import { PromoCardManifest } from "../cards/promo/PromoDeck";
-import { BaseCardManifest, CorpEraCardManifest } from "../cards/StandardDecks";
-import { TurmoilCardManifest } from "../cards/turmoil/TurmoilDeck";
-import { VenusCardManifest } from "../cards/venusNext/VenusDeck";
 import { $t } from "../directives/i18n";
+import { PRELUDE_CARD_MANIFEST } from "../cards/prelude/PreludeCardManifest";
+import { VENUS_CARD_MANIFEST } from "../cards/venusNext/VenusCardManifest";
+import { COLONIES_CARD_MANIFEST } from "../cards/colonies/ColoniesCardManifest";
+import { TURMOIL_CARD_MANIFEST } from "../cards/turmoil/TurmoilCardManifest";
+import { PROMO_CARD_MANIFEST } from "../cards/promo/PromoCardManifest";
+import { BASE_CARD_MANIFEST, CORP_ERA_CARD_MANIFEST } from "../cards/StandardCardManifests";
 
+// TODO(kberg): Use one fo the all-project-cards constants. (project + prelude, though.)
 const allItems: Array<CardName> = [
-    ...new PreludeCardManifest().projectCards.map((cf) => cf.cardName),
-    ...new VenusCardManifest().projectCards.map((cf) => cf.cardName),
-    ...new ColoniesCardManifest().projectCards.map((cf) => cf.cardName),
-    ...new TurmoilCardManifest().projectCards.map((cf) => cf.cardName),
-    ...new PromoCardManifest().projectCards.map((cf) => cf.cardName),
-    ...new BaseCardManifest().projectCards.map((cf) => cf.cardName),
-    ...new CorpEraCardManifest().projectCards.map((cf) => cf.cardName),
+    ...PRELUDE_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+    ...VENUS_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+    ...COLONIES_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+    ...TURMOIL_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+    ...PROMO_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+    ...BASE_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+    ...CORP_ERA_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
 ].sort();
 
 interface CardsFilterModel {

@@ -1,40 +1,25 @@
 import { CardName } from "./CardName";
-import { ColoniesCardManifest as ColoniesCardManifest } from "./cards/colonies/ColoniesDeck";
+import { CardManifest, ICardFactory } from "./cards/CardManifest";
+import { COLONIES_CARD_MANIFEST } from "./cards/colonies/ColoniesCardManifest";
 import { CorporationCard } from "./cards/corporation/CorporationCard";
-import { CardManifest } from "./cards/Deck";
 import { IProjectCard } from "./cards/IProjectCard";
-import { PreludeCardManifest } from "./cards/prelude/PreludeDeck";
-import { PromoCardManifest } from "./cards/promo/PromoDeck";
-import { BaseCardManifest, CorpEraCardManifest } from "./cards/StandardDecks";
-import { TurmoilCardManifest } from "./cards/turmoil/TurmoilDeck";
-import { VenusCardManifest } from "./cards/venusNext/VenusDeck";
+import { PRELUDE_CARD_MANIFEST } from "./cards/prelude/PreludeCardManifest";
+import { PROMO_CARD_MANIFEST } from "./cards/promo/PromoCardManifest";
+import { BASE_CARD_MANIFEST, CORP_ERA_CARD_MANIFEST } from "./cards/StandardCardManifests";
+import { TURMOIL_CARD_MANIFEST } from "./cards/turmoil/TurmoilCardManifest";
+import { VENUS_CARD_MANIFEST } from "./cards/venusNext/VenusCardManifest";
+import { Deck } from "./Deck";
 import { ILoadable } from "./ILoadable";
 import { SerializedDealer } from "./SerializedDealer";
 
-// Corporation Cards
-// Project Cards
-
-export interface ICardFactory<T> {
-    cardName: CardName;
-    factory: new () => T
-}
-
-const baseCardManifest = new BaseCardManifest();
-const corpEraCardManifest = new CorpEraCardManifest();
-const promoCardManifest = new PromoCardManifest();
-const venusCardManifest = new VenusCardManifest();
-const coloniesCardManifest = new ColoniesCardManifest();
-const preludeCardManifest = new PreludeCardManifest();
-const turmoilCardManifest = new TurmoilCardManifest();
-
-const decks: Array<CardManifest> = [
-    baseCardManifest,
-    corpEraCardManifest,
-    promoCardManifest,
-    venusCardManifest,
-    coloniesCardManifest,
-    preludeCardManifest,
-    turmoilCardManifest
+export const decks: Array<CardManifest> = [
+    BASE_CARD_MANIFEST,
+    CORP_ERA_CARD_MANIFEST,
+    PROMO_CARD_MANIFEST,
+    VENUS_CARD_MANIFEST,
+    COLONIES_CARD_MANIFEST,
+    PRELUDE_CARD_MANIFEST,
+    TURMOIL_CARD_MANIFEST
 ];
 
 // Function to return a card object by its name
@@ -42,31 +27,25 @@ const decks: Array<CardManifest> = [
 // TODO(kberg): Find the use cases where this is used to find Prelude cards and filter them out to
 //              another function, perhaps?
 export function getProjectCardByName(cardName: string): IProjectCard | undefined {
-    var found : (IProjectCard | undefined);
+    var found : (ICardFactory<IProjectCard> | undefined);
     decks.forEach(deck => {
-        found = deck.findProjectCardByName(cardName);
+        // Short circuit
+        if (found) {
+            return;
+        }
+        found = deck.projectCards.findByCardName(cardName);
         if (!found) {
-            found = deck.findPreludeCardByName(cardName);
+            found = deck.preludeCards.findByCardName(cardName);
         };
-        return found || false;
     });
-    return found;
-}
-
-// Function to return a corporation card object by its name
-export function getCorporationCardByName(cardName: string): CorporationCard | undefined {
-    var found : (CorporationCard | undefined);
-    decks.forEach(deck => {
-        found = deck.findCorporationCardByName(cardName);
-        return found || false;
-    });
-    return found;
+    return found ? new found.factory() : undefined;
 }
 
 export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     public deck: Array<IProjectCard> = [];
     public preludeDeck: Array<IProjectCard> = [];
     public discarded: Array<IProjectCard> = [];
+    public corporationCards: Array<CorporationCard> = [];
     private useCorporateEra: boolean = true;
     private usePreludeExtension: boolean = false;
     private useVenusNextExtension: boolean = false;   
@@ -92,35 +71,34 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         var deck:Array<IProjectCard> = [];
         var preludeDeck:Array<IProjectCard> = [];
         var projectCardsToRemove:Array<String> = [];
+        var corporationCards: Array<CorporationCard> = [];
 
-        function addToDeck<T>(deck: Array<T>, cards?: Array<ICardFactory<T>>): void {
-            if (cards) {
-                deck.push(...cards.map((cf) => new cf.factory()));                   
-            }
+        function addToDeck<T>(deck: Array<T>, cards: Deck<T>): void {
+            deck.push(...cards.cards.map((cf) => new cf.factory()));                   
         }
         function addToDecks(manifest: CardManifest) {
             addToDeck(deck, manifest.projectCards);
             addToDeck(preludeDeck, manifest.preludeCards);
             projectCardsToRemove.push(...manifest.projectCardsToRemove);
         }
-        addToDeck(deck, baseCardManifest.projectCards);
+        addToDecks(BASE_CARD_MANIFEST);
         if (this.useCorporateEra) {
-            addToDecks(corpEraCardManifest);
+            addToDecks(CORP_ERA_CARD_MANIFEST);
         }
         if (this.usePreludeExtension) {
-            addToDecks(preludeCardManifest);
+            addToDecks(PRELUDE_CARD_MANIFEST);
         }
         if (this.useVenusNextExtension) {
-            addToDecks(venusCardManifest);
+            addToDecks(VENUS_CARD_MANIFEST);
         }
         if (this.useColoniesNextExtension) {
-            addToDecks(coloniesCardManifest);
+            addToDecks(COLONIES_CARD_MANIFEST);
         }
         if (this.useTurmoilExtension) {
-            addToDecks(turmoilCardManifest);
+            addToDecks(TURMOIL_CARD_MANIFEST);
         }
         if (this.usePromoCards) {
-            addToDecks(promoCardManifest);
+            addToDecks(PROMO_CARD_MANIFEST);
         }
         if (cardsBlackList) {
             projectCardsToRemove.push(...cardsBlackList);
@@ -130,7 +108,9 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         if (this.usePreludeExtension) {
             this.preludeDeck = this.shuffleCards(preludeDeck);
         }
+        this.corporationCards = corporationCards;
     }
+
     public shuffleCards<T>(cards: Array<T>): Array<T> {
         const deck: Array<T> = [];
         const copy = cards.slice();

@@ -1,8 +1,6 @@
 import { CardName } from "../../CardName";
-import { ICardFactory } from "../../Dealer";
+import { GameModule } from "../../GameModule";
 import { CardManifest } from "../CardManifest";
-import { CorporationCard } from "../corporation/CorporationCard";
-import { IProjectCard } from "../IProjectCard";
 import { Airliners } from "./Airliners";
 import { AirRaid } from "./AirRaid";
 import { Aridor } from "./Aridor";
@@ -58,8 +56,10 @@ import { TradingColony } from "./TradingColony";
 import { UrbanDecomposers } from "./UrbanDecomposers";
 import { WarpDrive } from "./WarpDrive";
 
-export class ColoniesCardManifest extends CardManifest {
-    projectCards: Array<ICardFactory<IProjectCard>> = [
+export const COLONIES_CARD_MANIFEST = new CardManifest ({
+    module: GameModule.Colonies,
+
+    projectCards: [
         { cardName: CardName.AIRLINERS, factory: Airliners },
         { cardName: CardName.AIR_RAID, factory: AirRaid },
         { cardName: CardName.ATMO_COLLECTORS, factory: AtmoCollectors },
@@ -109,13 +109,12 @@ export class ColoniesCardManifest extends CardManifest {
         { cardName: CardName.TRADE_ENVOYS, factory: TradeEnvoys },
         { cardName: CardName.URBAN_DECOMPOSERS, factory: UrbanDecomposers },
         { cardName: CardName.WARP_DRIVE, factory: WarpDrive }
-    ];
+    ],
 
-    corporations : Array<ICardFactory<CorporationCard>> = [
+    corporationCards: [
         { cardName: CardName.ARIDOR, factory: Aridor },
         { cardName: CardName.ARKLIGHT, factory: Arklight },
         { cardName: CardName.POLYPHEMOS, factory: Polyphemos },
         { cardName: CardName.POSEIDON, factory: Poseidon },
         { cardName: CardName.STORMCRAFT_INCORPORATED, factory: StormCraftIncorporated }
-    ];
-}
+    ]});

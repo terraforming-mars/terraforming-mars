@@ -1,8 +1,6 @@
 import { CardName } from "../../CardName";
-import { ICardFactory } from "../../Dealer";
+import { GameModule } from "../../GameModule";
 import { CardManifest } from "../CardManifest";
-import { CorporationCard } from "../corporation/CorporationCard";
-import { IProjectCard } from "../IProjectCard";
 import { AerialLenses } from "./AerialLenses";
 import { BannedDelegate } from "./BannedDelegate";
 import { CulturalMetropolis } from "./CulturalMetropolis";
@@ -26,8 +24,9 @@ import { UtopiaInvest } from "./UtopiaInvest";
 import { VoteOfNoConfidence } from "./VoteOfNoConfidence";
 import { WildlifeDome } from "./WildlifeDome";
 
-export class TurmoilCardManifest extends CardManifest {
-    projectCards: Array<ICardFactory<IProjectCard>> = [
+export const TURMOIL_CARD_MANIFEST = new CardManifest({
+    module: GameModule.Turmoil,
+    projectCards: [
         { cardName: CardName.AERIAL_LENSES, factory: AerialLenses },
         { cardName: CardName.BANNED_DELEGATE, factory: BannedDelegate },
         { cardName: CardName.CULTURAL_METROPOLIS, factory: CulturalMetropolis },
@@ -45,14 +44,12 @@ export class TurmoilCardManifest extends CardManifest {
         { cardName: CardName.SUPPORTED_RESEARCH, factory: SupportedResearch },
         { cardName: CardName.WILDLIFE_DOME, factory: WildlifeDome },
         { cardName: CardName.VOTE_OF_NO_CONFIDENCE, factory: VoteOfNoConfidence },
-    ];
+    ],
 
-    corporations: Array<ICardFactory<CorporationCard>> = [
+    corporationCards: [
         { cardName: CardName.LAKEFRONT_RESORTS, factory: LakefrontResorts },
         { cardName: CardName.PRISTAR, factory: Pristar },
         { cardName: CardName.TERRALABS_RESEARCH, factory: TerralabsResearch },
         { cardName: CardName.UTOPIA_INVEST, factory: UtopiaInvest },
         { cardName: CardName.SEPTUM_TRIBUS, factory: SeptumTribus }
-    ];
-
-}
+    ]});

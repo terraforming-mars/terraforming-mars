@@ -60,6 +60,11 @@
   border-radius: 20px;
   box-shadow: 0 0 2px 1px black;
 }
+
+.filterDiv:hover {
+  filter: brightness(90%)
+}
+
 .filterDiv::after {
   content: "✓";
     position: absolute;
@@ -79,11 +84,6 @@
     box-shadow: 0 2px 2px 2px;
     clip-path: polygon(95% 0, 100% 50%, 100% 100%, 5% 100%, 0 50%, 0 0);
   }
-
-.clicked-card {
-  box-shadow: 0 0 1px 1px #444, 0 0 15px 5px white !important;
-  filter: grayscale(1);
-}
 
 input[type=checkbox]:checked + .filterDiv::after,
 input[type=radio]:checked + .filterDiv::after {

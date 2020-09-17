@@ -26,6 +26,7 @@ export const Preferences = Vue.component("preferences", {
             "hide_log": false,
             "lang": "en",
             "langs": LANGUAGES,
+            "enable_sounds": false
         };
     },
     methods: {
@@ -204,7 +205,13 @@ export const Preferences = Vue.component("preferences", {
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_ma_scores" />
                             <i class="form-icon"></i> <span v-i18n>Hide Milestones / Awards scores</span>
                         </label>
-                    </div>                                       
+                    </div>   
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="enable_sounds" />
+                            <i class="form-icon"></i> <span v-i18n>Enable sounds</span>
+                        </label>
+                    </div>                                     
                     <div class="preferences_panel_item form-group">
                         <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
                         <div class="preferences_panel_langs">

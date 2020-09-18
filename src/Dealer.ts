@@ -78,6 +78,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         }
         function addToDecks(manifest: CardManifest) {
             addToDeck(deck, manifest.projectCards);
+            addToDeck(corporationCards, manifest.corporationCards);
             addToDeck(preludeDeck, manifest.preludeCards);
             projectCardsToRemove.push(...manifest.projectCardsToRemove);
         }

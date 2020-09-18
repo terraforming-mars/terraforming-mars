@@ -2045,6 +2045,14 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return preludeCards.map((card) => card.bonusMc || 0).reduce((a, b) => Math.max(a, b));
     }
 
+    private allOtherPlayersPassed(game: Game): boolean {
+      const passedPlayers = game.getPassedPlayers();
+      if ((game.getPlayers().length - passedPlayers.size) > 1) return false;
+      if (passedPlayers.has(this.id)) return false;
+      return true;
+    }
+
+
     public takeAction(game: Game): void {
       if (this.hasInterrupt(game)) {
         this.runInterrupt(game, () => this.takeAction(game));
@@ -2097,7 +2105,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       if (game.hasPassedThisActionPhase(this) || this.actionsTakenThisRound >= 2) {
 
-        if ((game.getPlayers().length - game.getPassedPlayers().size) !== 1) {
+        if ( ! this.allOtherPlayersPassed(game)) {
           this.actionsTakenThisRound = 0;
           game.playerIsFinishedTakingActions();
           return;

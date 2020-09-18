@@ -1378,22 +1378,19 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     private buildColony(game: Game, openColonies: Array<IColony>): PlayerInput {
-      let buildColony = new OrOptions();
-      buildColony.title = "Build colony (" + constants.BUILD_COLONY_COST + " MC)";
-      buildColony.buttonLabel = "Build colony";
-      openColonies.forEach(colony => {
-        const colonySelect =  new SelectOption(
-          colony.name + " - (" + colony.description + ")", 
-          "Confirm",
-          () => {
+
+      let buildColony = new SelectColony("Build colony", "Build", openColonies, (colonyName: ColonyName) => {
+        openColonies.forEach(colony => {
+          if (colony.name === colonyName) {
             game.addSelectHowToPayInterrupt(this, constants.BUILD_COLONY_COST, false, false, "Select how to pay for Colony project");
             colony.onColonyPlaced(this, game);
             this.onStandardProject(StandardProjectType.BUILD_COLONY);
             return undefined;
           }
-        );
-        buildColony.options.push(colonySelect);
-      }); 
+          return undefined;
+        });
+        return undefined;
+      });
       return buildColony;
     }      
 

@@ -2096,9 +2096,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       if (game.hasPassedThisActionPhase(this) || this.actionsTakenThisRound >= 2) {
-        this.actionsTakenThisRound = 0;
-        game.playerIsFinishedTakingActions();
-        return;
+
+        if ((game.getPlayers().length - game.getPassedPlayers().size) !== 1) {
+          this.actionsTakenThisRound = 0;
+          game.playerIsFinishedTakingActions();
+          return;
+        }
       }         
 
       const action: OrOptions = new OrOptions();

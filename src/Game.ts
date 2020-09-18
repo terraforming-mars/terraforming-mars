@@ -1271,8 +1271,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private startActionsForPlayer(player: Player) {
-      this.activePlayer = player.id;
-      player.actionsTakenThisRound = 0;
+      if (this.activePlayer !== player.id) {
+        this.activePlayer = player.id;
+        player.actionsTakenThisRound = 0;
+      }
 
       // Save the game state after changing the current player
       // Increment the save id

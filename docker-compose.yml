@@ -1,9 +1,15 @@
-terraforming-mars:
-  image: lotooo/terraforming-mars
-  container_name: terraforming-mars
-  labels:
-    - "traefik.frontend.rule=Host:terraforming-mars.mydomain.com"
-    - "traefik.port=8080"
-    - "traefik.protocol=http"
-    - "traefik.backend=terraforming-mars"
-    - "com.centurylinklabs.watchtower.enable=true"
+version: "3.7"  
+services:
+  terraforming-mars:
+    container_name: terraforming-mars
+    build: ./
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - ./:/home/node/app
+      - tm-db:/usr/src/app/db
+volumes:
+  tm-db:

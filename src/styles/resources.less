@@ -1,18 +1,8 @@
 .resource_items_cont {
-    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.5);
-    border-top: 2px solid #bb8760;
-    border-left: 2px solid #bb8760;
-    border-bottom: 2px solid #744631;
-    border-right: 2px solid #744631;
-    border-radius: 20px;
-    padding: 10px 10px 10px 0px;
-    display: inline-block;
+    display: flex;
+    flex-flow: row;
     white-space: nowrap;
-    background: url(assets/mars.png);
-    background-size: 800px 800px;
-    background-repeat: no-repeat;
     filter: grayscale(0.3);
-    background-position: -145px -324px;
 }
 
 .tags_item_cont {
@@ -24,36 +14,35 @@
 }
 
 .resource_item {
-    display: inline-block;
+    display: flex;
     border-radius: 10px;
     vertical-align: top;
     font-family: Prototype;
-    background:linear-gradient(#33200f 10%,rgba(0, 0, 0, 0.3) 50%);
-    color:#e6e1e1;
+    background: linear-gradient(rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0.3) 50%);
+    color: #e6e1e1;
     margin-left: 10px;
+    min-width: 70px;
+    padding: 8px 0px 4px 8px;
+    box-sizing: border-box;
 }
 
 .resource_item_stock {
-    padding: 0px 10px 4px 10px;
     white-space: nowrap;
 }
 
 .resource_item_stock_count {
     font-size: 30px;
     text-align: center;
-    padding: 0 0 5px 0;
     line-height: 1;
     text-shadow: 0 2px 2px black;
 }
 
 .resource_item_prod {
     border-radius: 10px 10px 0 0;
-    font-size: 18px;
-    line-height: 20px;
-    padding-top: 2px;
-    text-align: center;
     color: #bb8760;
     text-shadow: 0 0 1px black;
+    min-width: 40px;
+    text-align: center;
 }
 
 .resource_item_prod_count {
@@ -76,7 +65,6 @@
 .resource_icon--megacredits {
     background-image: url(assets/tag-megacredits.png);
     border: 2px solid #b08f00;
-    margin: 0 10px 0 10px;
 }
 
 .resource_icon--microbe {
@@ -113,4 +101,3 @@
     background-image: url(assets/tag-heat.png);
     border: 2px solid #ae4422;
 }
-

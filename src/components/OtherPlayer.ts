@@ -1,18 +1,18 @@
 import Vue from "vue";
 
-import { PlayerResources } from "./PlayerResources";
+import { PlayerResources } from "./overview/PlayerResources";
 
 import { StackedCards } from "./StackedCards";
 import { PlayerMixin } from "./PlayerMixin";
 import { TagCount } from "./TagCount";
-import {hidePlayerData} from "../components/PlayerHome";
+import { hidePlayerData } from "./overview/PlayerStatus";
 
 export const OtherPlayer = Vue.component("other-player", {
     props: ["player"],
     components: {
         "player-resources": PlayerResources,
         "stacked-cards": StackedCards,
-        "tag-count": TagCount
+        "tag-count": TagCount,
     },
     mixins: [PlayerMixin],
     methods: {
@@ -20,38 +20,15 @@ export const OtherPlayer = Vue.component("other-player", {
             hidePlayerData(this.$root, this.player);
         },
         isVisible: function () {
-            return (this.$root as any).getVisibilityState("other_player_" + this.player.id);
-        }
+            return (this.$root as any).getVisibilityState(
+                "other_player_" + this.player.id
+            );
+        },
     },
     template: `
         <div> 
             <div v-show="isVisible()" class="other_player_cont menu">
                 <button class="btn btn-lg btn-error other_player_close" v-on:click="hideMe()"><i class="icon icon-cross"></i></button> 
-                <div class="player_home_block">
-                    <span class="player_name" :class="'player_bg_color_' + player.color"> {{ player.name }} : {{player.cardsInHandNbr}} cards in hand </span>
-                </div>
-
-                <div class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
-                    <div class="tag-display tags_item_cont tag-display-tags" v-if="player.tags.length > 0">
-                        <div v-for="tag in player.tags">
-                            <tag-count v-if="tag.count > 0" :tag="tag.tag" :count="tag.count"> </tag-count>
-                        </div>
-                    </div>
-                </div>
-
-                <div v-if="player.showOtherPlayersVP" class="tag-display tags_item_cont" :class="player.tags.length > 0 ? 'tag-display-vp': ''">
-                    <div>
-                        <div class="tag-display">
-                            <div class="tag-count icon-vp">{{player.victoryPointsBreakdown.total}}</div>
-                        </div>
-                    </div>
-                </div>
-                <div v-else class="nofloat"></div>
-
-                <div class="player_home_block">
-                    <player-resources :player="player"></player-resources>
-                </div>
-
                 <div v-if="player.playedCards.length > 0 || player.corporationCard !== undefined" class="player_home_block">
                     <span class="player_name" :class="'player_bg_color_' + player.color"> {{ player.name }} played cards </span>
                     <div>
@@ -78,5 +55,5 @@ export const OtherPlayer = Vue.component("other-player", {
 
             </div>
         </div>
-    `
+    `,
 });

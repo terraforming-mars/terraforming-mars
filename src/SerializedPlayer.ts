@@ -1,8 +1,8 @@
-import {IProjectCard} from "./cards/IProjectCard";
-import {CorporationCard} from "./cards/corporation/CorporationCard";
-import {PlayerInput} from "./PlayerInput";
-import {Color} from "./Color";
-import {VictoryPointsBreakdown} from "./VictoryPointsBreakdown";
+import { IProjectCard } from "./cards/IProjectCard";
+import { CorporationCard } from "./cards/corporation/CorporationCard";
+import { PlayerInput } from "./PlayerInput";
+import { Color } from "./Color";
+import { VictoryPointsBreakdown } from "./VictoryPointsBreakdown";
 
 export interface SerializedPlayer {
     corporationCard: CorporationCard | undefined;
@@ -13,7 +13,7 @@ export interface SerializedPlayer {
     handicap: number;
     canUseHeatAsMegaCredits: boolean;
     plantsNeededForGreenery: number;
-    pickedCorporationCard: CorporationCard | undefined ;
+    pickedCorporationCard: CorporationCard | undefined;
     dealtCorporationCards: Array<CorporationCard>;
     dealtProjectCards: Array<IProjectCard>;
     dealtPreludeCards: Array<IProjectCard>;
@@ -33,7 +33,7 @@ export interface SerializedPlayer {
     plants: number;
     plantProduction: number;
     cardsInHand: Array<IProjectCard>;
-    preludeCardsInHand: Array<IProjectCard>;    
+    preludeCardsInHand: Array<IProjectCard>;
     playedCards: Array<IProjectCard>;
     draftedCards: Array<IProjectCard>;
     generationPlayed: Map<string, number>;
@@ -55,4 +55,3 @@ export interface SerializedPlayer {
     removingPlayers: Array<string>;
     needsToDraft: boolean | undefined;
 }
-

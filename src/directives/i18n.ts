@@ -1,16 +1,19 @@
 
 import { PreferencesManager } from "../components/PreferencesManager";
+import * as raw_translations from "../../assets/translations.json";
+
+let TM_translations: any = raw_translations;
 
 export function translateText(englishText: string): string {
     let translatedText = englishText;
-    if ((window as any).TM_translations === undefined) return translatedText; 
+    if (TM_translations === undefined) return translatedText; 
     const lang = PreferencesManager.loadValue("lang") || "en";
     if (lang === "en") return englishText;
 
     englishText = normalizeText(englishText);
 
-    if ((window as any).TM_translations[lang][englishText]) {
-        translatedText = (window as any).TM_translations[lang][englishText]
+    if (TM_translations[lang][englishText]) {
+        translatedText = TM_translations[lang][englishText]
     } else {
         let stripedText = englishText.replace(/^\(|\)$/gm, "");
         if (stripedText && stripedText !== englishText) {
@@ -46,8 +49,8 @@ function translateChildren(node: any) {
 
 export function translateTextNode(el: any) {
     const lang = PreferencesManager.loadValue("lang") || "en";
-    if ((window as any).TM_translations === undefined) return;
-    if ((window as any).TM_translations[lang] === undefined) return;
+    if (TM_translations === undefined) return;
+    if (TM_translations[lang] === undefined) return;
 
     translateChildren(el);
 }

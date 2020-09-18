@@ -458,10 +458,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.colonies = gameToRebuild.colonies;
           game.turmoil = gameToRebuild.turmoil;
 
-          if(gameToRebuild.gameOptions.venusNextExtension) {
-            game.addVenusBoardSpaces();
-          }
-
           // Set active player
           let playerIndex = gameToRebuild.players.indexOf(gameToRebuild.first);
           game.first = game.players[playerIndex];
@@ -537,6 +533,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
     }
 
+    public addSelectResourceCardInterrupt(player: Player, count: number = 1, resourceType: ResourceType, resourceCards: Array<ICard>, title?: string): void {
+      if (resourceCards.length === 1) {
+        player.addResourceTo(resourceCards[0], count);
+        LogHelper.logAddResource(this, player, resourceCards[0], count);
+        return undefined;            
+      }
+      this.addInterrupt(new SelectResourceCard(player, this, resourceType, resourceCards, title));
+    }
+
     public addResourceInterrupt(player: Player, resourceType: ResourceType, count: number = 1, optionalCard : ICard | undefined, restrictedTag?: Tags, title?: string): void {
       let resourceCards = player.getResourceCards(resourceType);
       // Played card is not into playedCards array yet
@@ -549,7 +554,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (resourceCards.length === 0) {
         return;
       }
-      this.addInterrupt({player: player, playerInput: SelectResourceCard.newInstance(this, player, resourceType, resourceCards, count, title)});
+
+      if (resourceCards.length === 1) {
+        player.addResourceTo(resourceCards[0], count);
+        LogHelper.logAddResource(this, player, resourceCards[0], count);
+        return undefined;            
+      }
+
+      this.addInterrupt(new SelectResourceCard(player, this, resourceType, resourceCards, title, count));
     }
 
     public addResourceProductionDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {

@@ -19,6 +19,6 @@ describe("CloudSocieties", function () {
         turmoil.dominantParty.partyLeader = player.id;
         turmoil.dominantParty.delegates.push(player.id);
         card.resolve(game, turmoil);
-        expect(player.playedCards[0].resourceCount).to.eq(1);
+        expect(player.playedCards[0].resourceCount).to.eq(3);
     });
 });

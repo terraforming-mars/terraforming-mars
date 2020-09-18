@@ -42,6 +42,7 @@ import {
     TurmoilModel,
 } from "./src/models/TurmoilModel";
 import { SelectDelegate } from "./src/inputs/SelectDelegate";
+import { SelectColony } from "./src/inputs/SelectColony";
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync("styles.css");
@@ -650,6 +651,7 @@ function getWaitingFor(
         max: undefined,
         microbes: undefined,
         floaters: undefined,
+        colonies: undefined
     };
     switch (waitingFor.inputType) {
         case PlayerInputTypes.AND_OPTIONS:
@@ -683,6 +685,9 @@ function getWaitingFor(
                 ICard
             >).minCardsToSelect;
             break;
+        case PlayerInputTypes.SELECT_COLONY:
+            result.colonies = (waitingFor as SelectColony).colonies;
+            break;            
         case PlayerInputTypes.SELECT_HOW_TO_PAY:
             result.amount = (waitingFor as SelectHowToPay).amount;
             result.canUseSteel = (waitingFor as SelectHowToPay).canUseSteel;

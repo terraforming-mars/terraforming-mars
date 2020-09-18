@@ -29,6 +29,8 @@ export class PlayerInputFactory {
                 return "select-party";
             case PlayerInputTypes.SELECT_DELEGATE:
                 return "select-party-player";
+            case PlayerInputTypes.SELECT_COLONY:
+                return "select-colony";
             default:
                 throw "Unsupported input type";
         }

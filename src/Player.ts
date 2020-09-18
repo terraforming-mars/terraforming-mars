@@ -52,6 +52,8 @@ import { Board } from "./Board";
 import { PartyHooks } from "./turmoil/parties/PartyHooks";
 import { REDS_RULING_POLICY_COST } from "./constants";
 import { CardModel } from "./models/CardModel";
+import { SelectColony } from "./inputs/SelectColony";
+import { ColonyName } from "./colonies/ColonyName";
 
 export type PlayerId = string;
 
@@ -96,7 +98,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private waitingForCb?: () => void;
     public cardCost: number = constants.CARD_COST;
     public oceanBonus: number = constants.OCEAN_BONUS;
-    public fleetSize: number = 1;
+    public fleetSize: number = 2; // NEED FIX
     public tradesThisTurn: number = 0;
     public colonyTradeOffset: number = 0;
     public colonyTradeDiscount: number = 0;
@@ -677,6 +679,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.runInputCb(game, pi.cb(amount));
       } else if (pi instanceof SelectOption) {
         this.runInputCb(game, pi.cb());
+      } else if (pi instanceof SelectColony) {
+        const colony: ColonyName = (input[0][0]) as ColonyName;
+        this.runInputCb(game, pi.cb(colony));        
       } else if (pi instanceof OrOptions) {
         const waiting: OrOptions = pi;
         const optionIndex = parseInt(input[0][0]);
@@ -1527,14 +1532,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     } 
 
     private tradeWithColony(openColonies: Array<IColony>, game: Game): PlayerInput {
-      var opts: Array<OrOptions> = [];
-      let selectColony = new OrOptions();
-      selectColony.title = "Select colony";
-      openColonies.forEach(colony => {
-        const colonySelect =  new SelectOption(
-          colony.name + " - (" + colony.description + ")", 
-          "",
-          () => {
+      var opts: Array<OrOptions | SelectColony> = [];
+      let selectColony = new SelectColony("Select colony for trade", "trade", openColonies, (colonyName: ColonyName) => {
+        openColonies.forEach(colony => {
+          if (colony.name === colonyName) {
             game.log(
               LogMessageType.DEFAULT,
               "${0} traded with ${1}",
@@ -1544,9 +1545,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             colony.trade(this, game);
             return undefined;
           }
-        );
-        selectColony.options.push(colonySelect);
-      });      
+          return undefined;
+        });
+        return undefined;
+      }
+      );
+
       let howToPayForTrade = new OrOptions();
       howToPayForTrade.title = "Pay trade fee";
       howToPayForTrade.buttonLabel = "Pay";

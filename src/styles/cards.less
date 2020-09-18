@@ -68,9 +68,24 @@
 
 input[type=checkbox]:checked + .filterDiv,
 input[type=radio]:checked + .filterDiv {
-  box-shadow: 0 0 0 2px #303030, 0 0 8px 8px #e28c22;
-  transform: translate(0px, -5px);
-  transition: 0.1s;
+  box-shadow: 0 0 0 2px #303030, 0 0 0px 6px #c97e23;
+}
+
+input[type=checkbox]:checked + .filterDiv::after,
+input[type=radio]:checked + .filterDiv::after {
+  content: "✓";
+  position: absolute;
+  width: 252px;
+  height: 50px;
+  line-height: 50px;
+  top: 195px;
+  left: -6px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 36px;
+  background: linear-gradient(to right, #c97e23, #e28c22, #c97e23);
+  color: black;
+  border-bottom: 1px solid #222;
 }
 
 .filterDiv3 {
@@ -416,6 +431,29 @@ input[type=radio]:checked + .filterDiv {
 .tag-event {background-image: url("./assets/tag-event.png")}
 .tag-science {background-image: url("./assets/tag-science.png")}
 .tag-none {background-image: url("./assets/tag-none.png")}
+.tag-tr {background-image: url("./assets/tag-tr.png")}
+.tag-cards {
+  background-image: url("./assets/preferences_cards.png"); 
+  background-color: black !important;
+}
+.tag-vp {
+  background-image: url(./assets/icon_vp.png);
+}
+.tag-city-count {
+  background: url(assets/icon_city.png) center no-repeat;
+  filter: invert(100%) contrast(200%);
+}
+
+.tag-colony-count {
+  background: url(assets/icon_colony.png) center no-repeat;
+  background-size: 24px;
+}
+
+.tag-influence-count {
+  background: url(assets/icon_influence.png) center no-repeat;
+  filter: invert(100%) contrast(200%);
+  background-size: 28px;
+}
 
 
 /************** Style the Content ************/
@@ -1269,7 +1307,7 @@ input[type=radio]:checked + .filterDiv {
   font-size: 14px;
   background-color: rgb(255,204,100);
   background: linear-gradient(to right,#ddd,#666);
-  border-radius: 0px 20px 0px 16px;
+  border-radius: 0px 20px;
   border-top: 4px solid #dddddd;
   border-left: 4px solid #dddddd;
   border-bottom: 4px solid #898989;

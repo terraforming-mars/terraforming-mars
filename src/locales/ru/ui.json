@@ -67,7 +67,7 @@
     "Having a terraform rating of at least 35 or 26 with Turmoil.": "Ваш рейтинг терраформирования должен быть не менее 35 (26 c Кризисом)",
     "Tycoon": "Олигарх",
     "Requires that you have 15 project cards in play (blue and green cards)": "Разыграйте не менее 15 проектов (синих и зелёных карт)",
-    
+
     "Awards": "Награды",
     "Landlord": "Землевладелец",
     "Owning the most tiles in play": "Наибольшее количество своих тайлов в игре",
@@ -75,7 +75,7 @@
     "Having the highest MC production": "Наибольший уровень производства кредитов",
     "Scientist": "Ученый",
     "Having the most science tags in play": "Наибольшее количество карт с меткой наука",
-    "Thermalist": "Термалист",   
+    "Thermalist": "Термалист",
     "Having the most heat resource cubes": "Наибольшее количество ресурсов тепла",
     "Miner": "Металлург",
     "Having the most steel and titanium resource cubes": "Наибольшее количество ресурсов стали и титана",
@@ -106,6 +106,7 @@
     "Played Cards": "Сыгранные карты",
     "Cards In Hand": "Карты в руке",
     "Last Actions": "Лог",
+    "Game Log": "Лог",
     "Select initial cards:": "Выберите стартовые карты:",
     "Game details": "Детали игры",
     "Milestones and awards": "Достижения и награды",
@@ -200,5 +201,4 @@
     "Self-Replicating Robots cards": "Карты Роботов-саморепликантов",
     "Remove colony": "Убрать колонию",
     "Tags Overview": "Статистика"
-
 }

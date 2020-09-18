@@ -15,7 +15,10 @@ export class PreferencesManager {
         "hide_ma_scores",
         "hide_non_blue_cards",
         "hide_log",
-        "lang"];
+        "lang",
+        "enable_sounds"
+    ];
+
     static preferencesValues: Map<string, boolean | string> = new Map<string, boolean | string>();
     static localStorageSupported: boolean = typeof window["localStorage"] !== undefined && window["localStorage"] !== null;
 

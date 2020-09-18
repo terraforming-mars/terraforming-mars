@@ -1,31 +1,56 @@
 .preferences_cont {
     white-space: nowrap;
-    position: sticky;
-    width: 46px;
+    position: fixed; 
     left: 0;
-    top: 8px;
-    z-index: 99;
-    margin: -400px 0 0 -78px;
+    top: 0;
+    z-index: 99; 
+    width: 60px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    height: 100%;
+}
+.preferences-divider {
+    background: rgba(170, 170, 170, 0.3);
+    height: 2px;
+    width: 80%;
+    margin-bottom: 8px;
 }
 .preferences_item {
-    width: 46px;
-    padding: 15px 0 15px 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
+    width: 46px; 
     background: black;
-    border-radius: 5px;
+    border-radius: 5px; 
+    padding: 5px;
+    margin-bottom: 8px;
+}
+.preferences_item_shortcut {
+    height: 60px;
+}
+.preferences_item--settings {
+    position: absolute;
+    bottom: 0px;
+    height: 46px;
 }
 
 .preferences_tm {
     background: url(/assets/tm.png);
     width: 46px;
-    height: 46px;
-    margin-left: 5px;
-    margin-bottom: 5px;
+    height: 46px; 
+    margin-top: 8px;
+    margin-bottom: 8px;
     border-radius: 50%;
     background-size: 50px 50px;
     background-position: -2px;
     box-shadow: 0 1px 1px 0px black;
+}
+.preferences-gen-marker { 
+    font-size: 16px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    font-family: "Ubuntu";
 }
 
 .preferences_player {
@@ -41,7 +66,6 @@
     width: 26px;
     height: 26px;
     border-radius: 3px;
-
 }
 
 .preferences_icon {
@@ -52,6 +76,7 @@
 }
 
 .preferences_icon.preferences_icon--actions {
+    margin-top: 7px;
     background-image: url(assets/preferences_actions.png);
 }
 
@@ -60,11 +85,19 @@
 }
 
 .preferences_icon.preferences_icon--board {
+    margin-top: 7px;
     background-image: url(assets/preferences_board.png);
 }
 
 .preferences_icon.preferences_icon--settings {
     background-image: url(assets/preferences_settings.png);
+}
+.preferences_icon.preferences_icon--colonies {
+    background-image: url(assets/colony.png);
+    background-size: 25px;
+    width: 25px;
+    height: 46px;
+    margin-left: 5px;
 }
 
 .preferences_panel_actions {
@@ -75,34 +108,34 @@
     padding: 15px 15px 15px 20px;
     display: inline-block;
     position: absolute;
-    margin: -305px 0 0 12px;
+    bottom: 0px;
+    left: 53px;
     color: #c6c6c6;
     background: #000000;
     max-height: calc(85vh);
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .preferences_item--is-active::after {
     content: " ";
     width: 10px;
-    height: 45px;
+    height: 46px;
     position: absolute;
     background: #000;
-    margin: 0 0 0 40px;
-
+    margin: -5px 0 0 38px;
 }
 
 /* Visual effects of changing settings */
 
 /* Reduce all cards size */
 .preferences_small_cards .filterDiv,
-.preferences_small_cards .filterDiv:hover{
+.preferences_small_cards .filterDiv:hover {
     transform: scale(0.8);
     margin: -22px -15px 15px -15px;
 }
 
-.preferences_small_cards input[type=checkbox]:checked + .filterDiv,
-.preferences_small_cards input[type=radio]:checked + .filterDiv {
+.preferences_small_cards input[type="checkbox"]:checked + .filterDiv,
+.preferences_small_cards input[type="radio"]:checked + .filterDiv {
     transform: scale(0.8);
 }
 
@@ -110,7 +143,8 @@
 .preferences_hide_turnorder .player_home_block--turnorder,
 .preferences_hide_corporation .player_home_block--corporation,
 .preferences_hide_hand .player_home_block--hand,
-.preferences_hide_awards_and_milestones .player_home_block--milestones-and-awards,
+.preferences_hide_awards_and_milestones
+    .player_home_block--milestones-and-awards,
 .preferences_hide_tag_overview .tag-overview-cont,
 .preferences_hide_corporation_names .player_home_block--corp-names,
 .preferences_hide_ma_scores .player_home_block--milestones-and-awards-scores,
@@ -131,8 +165,8 @@
 
 /* Card Magnification */
 .preferences_magnify_cards .filterDiv:hover {
-  transform: scale(1.20);
-  z-index: 2;
+    transform: scale(1.2);
+    z-index: 2;
 }
 
 .preferences_magnify_cards .cards-stack:hover,
@@ -143,7 +177,7 @@
 
 /* Magnify the wee little cards in a special way, if requested */
 .preferences_small_cards.preferences_magnify_cards .filterDiv:hover {
-        transform: scale(0.95);
+    transform: scale(0.95);
 }
 
 /* Description Magnification */
@@ -153,9 +187,7 @@
     border-radius: 5px;
     width: 150px;
     margin-left: 31px;
-    box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.6);
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.6);
     padding: 3px;
     z-index: 5;
 }
-
-

@@ -15,7 +15,7 @@ export class Sabotage implements IProjectCard {
     public name: CardName = CardName.SABOTAGE;
 
     public play(player: Player, game: Game) {
-        if (game.soloMode) return undefined;
+        if (game.isSoloMode()) return undefined;
 
         const availablePlayerTargets = game.getPlayers().filter((p) => p.name !== player.name);
         let availableActions = new OrOptions();

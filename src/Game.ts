@@ -58,6 +58,7 @@ import { TileType } from "./TileType";
 import { IParty } from "./turmoil/parties/IParty";
 import { PartyHooks } from "./turmoil/parties/PartyHooks";
 import { Turmoil } from "./turmoil/Turmoil";
+import { getRandomMilestonesAndAwards } from "./MASynergy";
 
 
 export interface Score {
@@ -119,7 +120,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public colonyDealer: ColonyDealer | undefined = undefined;
     public pendingOceans: number = 0;
     public lastSaveId: number = 0;
-    public soloMode: boolean = false;
     public turmoil: Turmoil | undefined;
     private clonedGamedId: string | undefined;
     public someoneHasRemovedOtherPlayersPlants: boolean = false;
@@ -191,7 +191,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Single player game player starts with 14TR
       // and 2 neutral cities and forests on board
       if (players.length === 1) {
-        this.soloMode = true;
         gameOptions.draftVariant = false;
         gameOptions.initialDraftVariant = false;
         gameOptions.randomMA = false;
@@ -305,6 +304,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
     }
 
+    public isSoloMode() :boolean {
+      if (this.players.length === 1) return true;
+      return false;
+    }
+
     private setStartingProductions(player: Player) {
       if (!this.gameOptions.corporateEra) {
         player.setProduction(Resources.MEGACREDITS);
@@ -334,7 +338,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       if (boardName === BoardName.ELYSIUM) {
         if (randomMA) {
-          this.getRandomMilestonesAndAwards(hasVenus, requiredQty);
+          this.setRandomMilestonesAndAwards(hasVenus, requiredQty);
         } else {
           this.milestones.push(...ELYSIUM_MILESTONES);
           this.awards.push(...ELYSIUM_AWARDS);
@@ -343,7 +347,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return new ElysiumBoard(this.gameOptions.shuffleMapOption, this.seed);
       } else if (boardName === BoardName.HELLAS) {
         if (randomMA) {
-          this.getRandomMilestonesAndAwards(hasVenus, requiredQty);
+          this.setRandomMilestonesAndAwards(hasVenus, requiredQty);
         } else {
           this.milestones.push(...HELLAS_MILESTONES);
           this.awards.push(...HELLAS_AWARDS);
@@ -352,7 +356,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return new HellasBoard(this.gameOptions.shuffleMapOption, this.seed);
       } else {
         if (randomMA) {
-          this.getRandomMilestonesAndAwards(hasVenus, requiredQty);
+          this.setRandomMilestonesAndAwards(hasVenus, requiredQty);
         } else {
           this.milestones.push(...ORIGINAL_MILESTONES);
           this.awards.push(...ORIGINAL_AWARDS);
@@ -362,28 +366,18 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
     }
 
-    public getRandomMilestonesAndAwards(hasVenus: boolean, requiredQty: number) {
-      let availableMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES);
-      if (hasVenus) availableMilestones = availableMilestones.concat(VENUS_MILESTONES);
-
-      availableMilestones = availableMilestones.filter((milestone) => !this.milestones.includes(milestone));
-
-      const shuffledMilestones = availableMilestones.sort(() => 0.5 - Math.random());
-      this.milestones.push(...shuffledMilestones.slice(0, requiredQty));
-
-      let availableAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS);
-      if (hasVenus) availableAwards = availableAwards.concat(VENUS_AWARDS);
-
-      availableAwards = availableAwards.filter((award) => !this.awards.includes(award));
-
-      const shuffledAwards = availableAwards.sort(() => 0.5 - Math.random());
-      this.awards.push(...shuffledAwards.slice(0, requiredQty));
+    public setRandomMilestonesAndAwards(hasVenus: boolean, requiredQty: number) {
+      const MA_Info = getRandomMilestonesAndAwards(hasVenus, requiredQty);
+      this.milestones.push(...MA_Info.milestones);
+      this.awards.push(...MA_Info.awards);
     }
 
     // Add Venus Next board colonies and milestone / award
     public setVenusElements(randomMA: boolean, includeVenusMA: boolean) {
       if (randomMA && includeVenusMA) {
-        this.getRandomMilestonesAndAwards(true, 1);
+        this.milestones = []
+        this.awards = []
+        this.setRandomMilestonesAndAwards(true, 6);
       } else {
         if (includeVenusMA) this.milestones.push(...VENUS_MILESTONES);
         if (includeVenusMA) this.awards.push(...VENUS_AWARDS);
@@ -532,7 +526,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public addResourceProductionDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {
-      if (this.soloMode) return;
+      if (this.isSoloMode()) return;
 
       let candidates: Array<Player> = [];
       if (resource === Resources.MEGACREDITS) {
@@ -552,7 +546,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public addResourceDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {
-      if (this.soloMode) {
+      if (this.isSoloMode()) {
         // Crash site cleanup hook
         if (resource === Resources.PLANTS) this.someoneHasRemovedOtherPlayersPlants = true;
         return;
@@ -840,7 +834,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     private gameIsOver(): boolean {
       // Single player game is done after generation 14 or 12 with prelude
-      if (this.soloMode) {
+      if (this.isSoloMode()) {
         if (this.generation === 14 || (this.generation === 12 && this.gameOptions.preludeExtension)) {
             return true;
         }
@@ -891,7 +885,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.resolveTurmoilInterrupts();
         return;
       }
-
+      
       this.goToDraftOrResearch();
     }
 
@@ -1374,6 +1368,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.generation;
     }
 
+    public getPassedPlayers():Set<PlayerId> {
+      return this.passedPlayers;
+    } 
+
     public getPlayer(name: string): Player {
       const found = this.players.filter((player) => player.name === name);
       if (found.length === 0) {
@@ -1642,7 +1640,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {
       // in soloMode you don'thave to decrease resources
-      return this.getPlayers().filter((p) => p.getProduction(resource) >= minQuantity).length > 0 || this.soloMode ;
+      return this.getPlayers().filter((p) => p.getProduction(resource) >= minQuantity).length > 0 || this.isSoloMode() ;
     }
 
     public hasCardsWithTag(tag: Tags, requiredQuantity: number = 1) {

@@ -12,7 +12,7 @@ export class Revolution implements IGlobalEvent {
     public revealedDelegate = PartyName.UNITY;
     public currentDelegate = PartyName.MARS;
     public resolve(game: Game, turmoil: Turmoil) {
-        if(game.soloMode) {
+        if(game.isSoloMode()) {
             if(this.getScore(game.getPlayers()[0], turmoil) >= 4 ){
                 game.getPlayers()[0].decreaseTerraformRating();
                 game.getPlayers()[0].decreaseTerraformRating();

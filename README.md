@@ -19,14 +19,21 @@ npm install
 npm run start
 ```
 
-This will start the game server listening on the default port of 8080. If you then point a web browser to http://localhost:8080 you will be on the create game screen.
+This will start the game server listening on the default port of 8080. If you then point a web browser to http://localhost:8080 you will be on the create game screen. To change this port from 8080, add `PORT=<new port>` in your `.env` file. 
 
 Pointing your web browser to http://localhost:8080/games-overview?serverId=_SERVER-ID_ will provide a list of all games available on the server. The secret _SERVER-ID_ is available from the console after starting the server and required to access game administration pages like the games overview.
 
+### Local Setup
+
 Additional information on how to setup the game server locally can be found [here](https://docs.google.com/document/d/1r4GlqA6DkrSAtR6MMYmX_nmh6o4igVTqDUUETiJYGt8/edit?usp=sharing) (short version) and [here](https://docs.google.com/document/d/1y-QnffzkQtpasBkDAFQwBoqhLmUpVTzRPybtvmbktDQ/edit?usp=sharing) (detailed version).
 
-Additional information on how to setup the game with docker can be found [here](https://drive.google.com/file/d/14hOxxLrCjhWJimvCyuLc-2JRrXevFiR1/view?usp=sharing).
+### Docker
 
+Additional information on how to setup the game with docker can be found [here](https://docs.google.com/document/d/1a_xTU2kp1E7-VwIA8qLF16prAvFkleTv9iTtxHCzGtM/edit?usp=sharing).
+
+### HTTPS
+
+To set up an HTTPS sub/domain for use with this project, set the paths for `KEY_PATH` and `CERT_PATH` in your `.env`. If you do not have a TLS cert/key for your domain, you can get one for free from [certbot](https://certbot.eff.org/).
 
 ## Contributors ✨
 
@@ -57,6 +64,10 @@ Thanks goes to these wonderful people:
     <td align="center">
       <a href="https://github.com/nwai90"><img src="https://avatars1.githubusercontent.com/u/2408094?s=460&v=4" width="100px;" alt=""/><br />
         <sub><b>nwai90</b></sub><br />Helps with the things</a>
+    </td>    
+    <td align="center">
+      <a href="https://github.com/pocc"><img src="https://avatars1.githubusercontent.com/u/10995145?s=460&v=4" width="100px;" alt=""/><br />
+        <sub><b>Ross Jacobs</b></sub><br />He did that one thing one time</a>
     </td>    
   </tr>
 </table>

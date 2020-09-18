@@ -98,7 +98,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private waitingForCb?: () => void;
     public cardCost: number = constants.CARD_COST;
     public oceanBonus: number = constants.OCEAN_BONUS;
-    public fleetSize: number = 2; // NEED FIX
+    public fleetSize: number = 1;
     public tradesThisTurn: number = 0;
     public colonyTradeOffset: number = 0;
     public colonyTradeDiscount: number = 0;

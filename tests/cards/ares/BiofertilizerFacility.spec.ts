@@ -46,31 +46,30 @@ describe("BiofertilizerFacility", function () {
   });
 
   it("Play", function () {
+    // Set up the cards.
     // Adds the necessary Science tag.
     player.playCard(game, scienceTagCard);
     player.playCard(game, microbeHost);
-    expect(card.canPlay(player, game)).to.eq(true);
 
+    // Initial expectations that will change after playing the card.
     expect(player.getProduction(Resources.PLANTS)).is.eq(0);
     expect(microbeHost.resourceCount || 0).is.eq(0);
+    expect(game.interrupts).is.empty;
 
+    expect(card.canPlay(player, game)).to.eq(true);
     const action = card.play(player, game);
-
     expect(player.getProduction(Resources.PLANTS)).is.eq(1);
-    // TODO(kberg): uncomment and test this.
-    // expect(action).instanceOf(AndOptions);
-        
+
     const citySpace = game.board.getAvailableSpacesForCity(player)[0];
     action.cb(citySpace);
-    // TODO(kberg): uncomment and test this.
-    // action.options[0].cb(citySpace);
+
     expect(citySpace.player).to.eq(player);
     expect(citySpace.tile!.tileType).to.eq(TileType.BIOFERTILIZIER_FACILITY);
     expect(citySpace.adjacency).to.deep.eq({bonus: [SpaceBonus.PLANT, AresSpaceBonus.MICROBE]});
 
-    // TODO(kberg): uncomment and test this.
-    // action.options[1].cb([microbeHost]);
-    // expect(microbeHost.resourceCount).is.eq(2);
+    // No interrupts because there's only one card that can accept the microbes.
+    expect(game.interrupts).is.empty;
+    expect(microbeHost.resourceCount).is.eq(2);
   });
 
 });

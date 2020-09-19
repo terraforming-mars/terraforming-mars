@@ -651,7 +651,7 @@ function getWaitingFor(
         max: undefined,
         microbes: undefined,
         floaters: undefined,
-        colonies: undefined
+        coloniesModel: undefined
     };
     switch (waitingFor.inputType) {
         case PlayerInputTypes.AND_OPTIONS:
@@ -686,7 +686,7 @@ function getWaitingFor(
             >).minCardsToSelect;
             break;
         case PlayerInputTypes.SELECT_COLONY:
-            result.colonies = (waitingFor as SelectColony).colonies;
+            result.coloniesModel = (waitingFor as SelectColony).coloniesModel;
             break;            
         case PlayerInputTypes.SELECT_HOW_TO_PAY:
             result.amount = (waitingFor as SelectHowToPay).amount;

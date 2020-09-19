@@ -1,7 +1,7 @@
 
 import { PlayerInputTypes } from "../PlayerInputTypes";
 import { CardModel } from './CardModel';
-import { IColony } from "../colonies/Colony";
+import { ColonyModel } from "./ColonyModel";
 
 export interface PlayerInputModel {
     amount: number | undefined;
@@ -20,6 +20,6 @@ export interface PlayerInputModel {
     players: Array<string> | undefined;
     title: string;
     buttonLabel: string;
-    colonies: Array<IColony> | undefined;
+    coloniesModel : Array<ColonyModel> | undefined;
 }
 

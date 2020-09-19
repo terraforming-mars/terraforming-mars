@@ -17,12 +17,6 @@ import { AresSpaceBonus } from "./AresSpaceBonus";
 
 export class AresHandler {
 
-  private game: Game;
-
-  public constructor(game: Game) {
-    this.game = game;
-  }
-
   public static isAresSpaceBonus(a: SpaceBonus | AresSpaceBonus) : a is AresSpaceBonus {
     assert(Object.values(AresSpaceBonus).length === 4);
     switch(a) {
@@ -36,7 +30,7 @@ export class AresHandler {
   }
 
   // |player| placed a tile next to |adjacentSpace|.
-  public handleAdjacentPlacement (adjacentSpace: ISpace, player: Player) {
+  public handleAdjacentPlacement (game: Game, adjacentSpace: ISpace, player: Player) {
     if (adjacentSpace.adjacency?.bonus) {
       if (!adjacentSpace.player) {
         throw new Error("A tile with an adjacency bonus must have an owner " + adjacentSpace);
@@ -52,7 +46,7 @@ export class AresHandler {
             } else if (availableAnimalCards.length === 1) {
               player.addResourceTo(availableAnimalCards[0]);
             } else if (availableAnimalCards.length > 1) {
-              this.game.addInterrupt({
+              game.addInterrupt({
                 player: player,
                 playerInput:
                   new SelectCard(
@@ -61,7 +55,7 @@ export class AresHandler {
                     availableAnimalCards,
                     (selected: ICard[]) => {
                       player.addResourceTo(selected[0]);
-                      LogHelper.logAddResource(this.game, player, selected[0], 1);
+                      LogHelper.logAddResource(game, player, selected[0], 1);
                       return undefined;
                     })
               });
@@ -70,9 +64,9 @@ export class AresHandler {
             player.megaCredits += 1;
           }
         } else {
-          this.game.grantSpaceBonus(player, bonus);
+          game.grantSpaceBonus(player, bonus);
         }
-        this.game.log(
+        game.log(
           LogMessageType.DEFAULT,
           "{1} gains 1 {2} for placing next to {3}",
           new LogMessageData(LogMessageDataType.PLAYER, player.id),
@@ -85,7 +79,7 @@ export class AresHandler {
       // TODO(kberg): log.
     };
     adjacentSpace.player.megaCredits += 1;
-        this.game.log(
+        game.log(
             LogMessageType.DEFAULT,
             "{1} gains 1 M€ for a tile placed next to {2}",
             new LogMessageData(LogMessageDataType.PLAYER, adjacentSpace.player.id),
@@ -94,9 +88,9 @@ export class AresHandler {
   }
 
   // TODO(kberg): find the right space for this, vincentneko@ made a good suggestion.
-  public adjacentCost(space: ISpace) {
+  public adjacentCost(game: Game, space: ISpace) {
     let extraCost: number = 0;
-    this.game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
+    game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
       if (adjacentSpace?.adjacency?.cost) {
         extraCost += adjacentSpace.adjacency.cost || 0;
       }

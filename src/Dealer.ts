@@ -480,7 +480,8 @@ import { MarketingExperts } from "./cards/ares/MarketingExperts";
 import { ButterflyEffect } from "./cards/ares/ButterflyEffect";
 import { DesperateMeasures } from "./cards/ares/DesperateMeasures";
 import { GeologicalSurvey } from "./cards/ares/GeologicalSurvey";
-import { OceanFarm, OceanCity } from "./cards/ares/OceanCity";
+import { OceanCity } from "./cards/ares/OceanCity";
+import { OceanFarm } from "./cards/ares/OceanFarm";
 import { OceanSanctuary } from "./cards/ares/OceanSanctuary";
 
 export interface ICardFactory<T> {

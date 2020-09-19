@@ -8,7 +8,7 @@ export const SelectColony = Vue.component("select-colony", {
     props: ["player", "playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
-          selectedColony: ColonyName
+          selectedColony: undefined
         };
     },
     components: {

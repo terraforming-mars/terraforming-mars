@@ -681,6 +681,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.runInputCb(game, pi.cb());
       } else if (pi instanceof SelectColony) {
         const colony: ColonyName = (input[0][0]) as ColonyName;
+        if (colony === null) {
+          throw new Error("No colony selected");
+        }
         this.runInputCb(game, pi.cb(colony));        
       } else if (pi instanceof OrOptions) {
         const waiting: OrOptions = pi;

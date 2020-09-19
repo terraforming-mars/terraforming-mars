@@ -1,4 +1,3 @@
-
 import { expect } from "chai";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
@@ -7,7 +6,6 @@ import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { TileType } from "../../../src/TileType";
 import { MoholeAreaAres } from "../../../src/cards/ares/MoholeAreaAres";
 import { SpaceBonus } from "../../../src/SpaceBonus";
-import { AdjacencyBonus } from '../../../src/ares/AdjacencyBonus';
 
 describe("MoholeAreaAres", function () {
     it("Should play", function () {
@@ -23,6 +21,6 @@ describe("MoholeAreaAres", function () {
         action.cb(space);
 
         expect(space.tile && space.tile.tileType).to.eq(TileType.MOHOLE_AREA);
-        expect(space.adjacency?.bonus).to.deep.eq(AdjacencyBonus.ofSpaceBonus(2, SpaceBonus.HEAT));
+        expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.HEAT, SpaceBonus.HEAT]});
     });
 });

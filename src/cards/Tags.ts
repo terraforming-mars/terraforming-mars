@@ -1,4 +1,3 @@
-
 export enum Tags {
     STEEL = "building",
     SPACE = "space",
@@ -12,6 +11,5 @@ export enum Tags {
     ANIMAL = "animal",
     CITY = "city",
     WILDCARD = "wild",
-    EVENT = "event"
+    EVENT = "event",
 }
-

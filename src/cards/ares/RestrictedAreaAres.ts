@@ -1,9 +1,9 @@
 import { CardName } from "../../CardName";
 import { SpaceBonus } from "../../SpaceBonus";
 import { RestrictedArea } from "../RestrictedArea";
-import { AdjacencyBonus } from "../../ares/AdjacencyBonus";
+import { IAdjacencyBonus } from "../../ares/AdjacencyBonus";
 
 export class RestrictedAreaAres extends RestrictedArea {
   public name: CardName = CardName.RESTRICTED_AREA_ARES;
-  public adjacencyBonus: AdjacencyBonus = AdjacencyBonus.ofSpaceBonus(1, SpaceBonus.DRAW_CARD);
+  public adjacencyBonus: IAdjacencyBonus =  {bonus: [SpaceBonus.DRAW_CARD]};
 }

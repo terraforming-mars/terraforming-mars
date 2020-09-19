@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "lib": ["dom"], 
+    "lib": ["dom"],
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
@@ -13,13 +13,9 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "target": "es5",
-    "types": [
-      "node",
-      "mocha",
-      "chai"
-    ],
+    "types": ["node", "mocha", "chai"],
     "moduleResolution": "node",
-    
+    "resolveJsonModule": true,
   },
   "include": [
     "src/*.ts",
@@ -30,10 +26,10 @@
     "src/cards/ares/*.ts",
     "src/cards/corporation/*.ts",
     "src/cards/prelude/*.ts",
-    "src/cards/venusNext/*.ts",    
-    "src/cards/turmoil/*.ts",  
-    "src/cards/promo/*.ts",  
-    "src/cards/colonies/*.ts",           
+    "src/cards/venusNext/*.ts",
+    "src/cards/turmoil/*.ts",
+    "src/cards/promo/*.ts",
+    "src/cards/colonies/*.ts",
     "src/inputs/*.ts",
     "src/models/*.ts",
     "src/colonies/*.ts",
@@ -42,10 +38,7 @@
     "src/interrupts/*.ts",
     "src/database/*.ts",
     "src/turmoil/*.ts",
-    "src/turmoil/globalEvents*.ts",  
-  ],
-  "files": [
-    "script.ts",
-    "server.ts"
+    "src/turmoil/globalEvents*.ts",
+    "src/components/overview/*.ts"
   ]
 }

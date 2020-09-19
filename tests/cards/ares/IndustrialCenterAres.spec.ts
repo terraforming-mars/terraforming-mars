@@ -4,7 +4,6 @@ import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { TileType } from "../../../src/TileType";
 import { IndustrialCenterAres } from '../../../src/cards/ares/IndustrialCenterAres';
-import { AdjacencyBonus } from '../../../src/ares/AdjacencyBonus';
 import { SpaceBonus } from "../../../src/SpaceBonus";
 
 describe("IndustrialCenterAres", function () {
@@ -25,6 +24,6 @@ describe("IndustrialCenterAres", function () {
         action!.cb(space);
         expect(space.tile).not.to.eq(undefined);
         expect(space.tile && space.tile.tileType).to.eq(TileType.INDUSTRIAL_CENTER);
-        expect(space.adjacency?.bonus).to.deep.eq(AdjacencyBonus.ofSpaceBonus(2, SpaceBonus.STEEL));
+        expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.STEEL, SpaceBonus.STEEL]});
     });
 });

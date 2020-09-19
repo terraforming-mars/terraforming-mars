@@ -27,6 +27,7 @@
         "tests/milestones/*.spec.ts",
         "tests/awards/*.spec.ts",
         "tests/*.spec.ts",
+        "tests/ares/*.spec.ts",
         "tests/TestingUtils.ts",
         "tests/globalEvents/*.spec.ts"
     ],
@@ -430,6 +431,7 @@
         "tests/Game.spec.ts",
         "tests/OriginalBoard.spec.ts",
         "tests/Player.spec.ts",
+        "tests/ares/AresHandler.spec.ts",
         "tests/globalEvents/GlobalDustStorm.spec.ts",
         "tests/globalEvents/SponsoredProjects.spec.ts",
         "tests/globalEvents/AsteroidMining.spec.ts",

@@ -29,8 +29,6 @@ describe("NitrogenFromTitan", function () {
         player.playedCards.push(jovianLanterns);
 
         card.play(player, game);
-        const orOptions = game.interrupts[0].playerInput as SelectCard<ICard>;
-        orOptions.cb([jovianLanterns]);
         expect(jovianLanterns.resourceCount).to.eq(2);
     });
 

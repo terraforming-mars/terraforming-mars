@@ -15,16 +15,21 @@ describe("CelebrityLeaders", function () {
         const player2 = new Player("test2", Color.RED, false);
         const game = new Game("foobar", [player,player2], player);
         const turmoil = new Turmoil(game);
+
         turmoil.initGlobalEvent(game);
         player.playedCards.push(new Virus());
         player2.playedCards.push(new Virus());
         player2.playedCards.push(new Virus());
+
         turmoil.chairman = player2.id;
         turmoil.dominantParty = new Kelvinists();
         turmoil.dominantParty.partyLeader = player2.id;
         turmoil.dominantParty.delegates.push(player2.id);
+        turmoil.dominantParty.delegates.push(player2.id);
+
         player.megaCredits = 10;
         player2.megaCredits = 10;
+
         card.resolve(game, turmoil);
         expect(player.getResource(Resources.MEGACREDITS)).to.eq(12);
         expect(player2.getResource(Resources.MEGACREDITS)).to.eq(20);

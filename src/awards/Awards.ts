@@ -18,8 +18,8 @@ import { Contractor } from './Contractor';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
     new Landlord(),
-    new Banker(),
     new Scientist(),
+    new Banker(),
     new Thermalist(),
     new Miner()
 ]

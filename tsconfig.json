@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "lib": ["dom"], 
+    "lib": ["dom"],
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
@@ -13,14 +13,9 @@
     "skipLibCheck": true,
     "sourceMap": true,
     "target": "es5",
-    "types": [
-      "node",
-      "mocha",
-      "chai"
-    ],
+    "types": ["node", "mocha", "chai"],
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    
   },
   "include": [
     "src/*.ts",
@@ -44,9 +39,6 @@
     "src/database/*.ts",
     "src/turmoil/*.ts",
     "src/turmoil/globalEvents*.ts",
-  ],
-  "files": [
-    "script.ts",
-    "server.ts"
+    "src/components/overview/*.ts"
   ]
 }

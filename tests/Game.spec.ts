@@ -356,4 +356,21 @@ describe("Game", function () {
         availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
         expect(availableSpacesOnLand.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
     });
+
+    it("Generates random milestones and awards", function () {
+        const player = new Player("test", Color.BLUE, false);
+        const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS, randomMA: true}) as GameOptions;
+        const game = new Game("foobar", [player], player, gameOptions);
+
+        let prevMilestones = game.milestones.map(m => m.name).sort();
+        let prevAwards = game.awards.map(a => a.name).sort();
+
+        const game2 = new Game("foobar2", [player], player, gameOptions);
+
+        let milestones = game2.milestones.map(m => m.name).sort();
+        let awards = game2.awards.map(a => a.name).sort();
+
+        expect(prevMilestones).to.not.eq(milestones)
+        expect(prevAwards).to.not.eq(awards)
+    });
 });

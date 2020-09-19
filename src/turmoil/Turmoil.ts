@@ -279,8 +279,20 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
     public getPlayerInfluence(player: Player) {
         let influence: number = 0;
         if (this.chairman !== undefined && this.chairman === player.id) influence++;
-        if (this.dominantParty !== undefined && this.dominantParty.partyLeader === player.id) influence++;
-        if (this.dominantParty !== undefined && this.dominantParty.delegates.indexOf(player.id) !== -1) influence++;
+
+        if (this.dominantParty !== undefined) {
+            const dominantParty : IParty = this.dominantParty;
+            const isPartyLeader = dominantParty.partyLeader === player.id;
+            const delegateCount = dominantParty.delegates.filter((delegate) => delegate === player.id).length;
+
+            if (isPartyLeader) {
+                influence++;
+                if (delegateCount > 1) influence++; // at least 1 non-leader delegate
+            } else {
+                if (delegateCount > 0) influence++;
+            }
+        }
+
         if (this.playersInfluenceBonus.has(player.id)) {
             const bonus = this.playersInfluenceBonus.get(player.id);
             if (bonus) {

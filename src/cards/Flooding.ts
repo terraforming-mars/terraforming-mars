@@ -32,7 +32,7 @@ export class Flooding implements IProjectCard {
   }
 
   public play(player: Player, game: Game) {
-    if (game.soloMode) {
+    if (game.isSoloMode()) {
       game.addOceanInterrupt(player);
       return undefined;
     }

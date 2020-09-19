@@ -29,7 +29,7 @@ Additional information on how to setup the game server locally can be found [her
 
 ### Docker
 
-Additional information on how to setup the game with docker can be found [here](https://drive.google.com/file/d/14hOxxLrCjhWJimvCyuLc-2JRrXevFiR1/view?usp=sharing).
+Additional information on how to setup the game with docker can be found [here](https://docs.google.com/document/d/1a_xTU2kp1E7-VwIA8qLF16prAvFkleTv9iTtxHCzGtM/edit?usp=sharing).
 
 ### HTTPS
 
@@ -67,7 +67,7 @@ Thanks goes to these wonderful people:
     </td>    
     <td align="center">
       <a href="https://github.com/pocc"><img src="https://avatars1.githubusercontent.com/u/10995145?s=460&v=4" width="100px;" alt=""/><br />
-        <sub><b>nwai90</b></sub><br />He did that one thing one time</a>
+        <sub><b>Ross Jacobs</b></sub><br />He did that one thing one time</a>
     </td>    
   </tr>
 </table>

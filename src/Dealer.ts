@@ -460,6 +460,8 @@ import { Potatoes } from "./cards/promo/Potatoes";
 import { MeatIndustry } from "./cards/promo/MeatIndustry";
 import { PoliticalAlliance } from "./cards/turmoil/PoliticalAlliance";
 
+// Community corporations
+import { AgricolaInc } from "./cards/community/AgricolaInc";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -697,6 +699,10 @@ export const ALL_PROMO_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
     { cardName: CardName.MONS_INSURANCE, factory: MonsInsurance },
     { cardName: CardName.RECYCLON, factory: Recyclon },
     { cardName: CardName.SPLICE, factory: Splice }
+];
+
+export const ALL_COMMUNITY_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
+    { cardName: CardName.AGRICOLA_INC, factory: AgricolaInc }
 ];
 
 export const ALL_PROMO_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
@@ -1022,6 +1028,10 @@ export function getCorporationCardByName(cardName: string): CorporationCard | un
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
+    cardFactory = ALL_COMMUNITY_CORPORATIONS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
     return undefined;
 }
 
@@ -1035,6 +1045,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     private useColoniesNextExtension: boolean = false;
     private usePromoCards: boolean = false;
     private useTurmoilExtension: boolean = false;
+
     constructor(
             useCorporateEra: boolean,
             usePreludeExtension: boolean,
@@ -1050,6 +1061,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         this.useColoniesNextExtension = useColoniesNextExtension;
         this.usePromoCards = usePromoCards;
         this.useTurmoilExtension = useTurmoilExtension;
+
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS.map((cf) => new cf.factory()));
         if (this.useCorporateEra) {
             this.deck.push(...ALL_CORP_ERA_PROJECT_CARDS.map((cf) => new cf.factory()));

@@ -1,5 +1,5 @@
 import { Player, PlayerId } from "./Player";
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_CORP_ERA_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from "./Dealer";
+import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_CORP_ERA_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS, ALL_COMMUNITY_CORPORATIONS} from "./Dealer";
 import {ISpace} from "./ISpace";
 import {SpaceType} from "./SpaceType";
 import {TileType} from "./TileType";
@@ -81,6 +81,7 @@ export interface GameOptions {
   solarPhaseOption: boolean;
   shuffleMapOption: boolean;
   promoCardsOption: boolean;
+  communityCardsOption: boolean;
   undoOption: boolean;
   fastModeOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
@@ -154,6 +155,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           solarPhaseOption: false,
           shuffleMapOption: false,
           promoCardsOption: false,
+          communityCardsOption: false,
           undoOption: false,
           fastModeOption: false,
           removeNegativeGlobalEventsOption: false,
@@ -238,6 +240,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
         corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
       }
 
+      // Add Community corps
+      if (gameOptions.communityCardsOption) {
+        corporationCards.push(...ALL_COMMUNITY_CORPORATIONS.map((cf) => new cf.factory()));
+      }
+
       // Setup custom corporation list
       const minCorpsRequired = players.length * gameOptions.startingCorporations;
       if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
@@ -250,6 +257,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
         corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
         corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
+        corporationCards.push(...ALL_COMMUNITY_CORPORATIONS.map((cf) => new cf.factory()));
 
         corporationCards = corporationCards.filter(
           (corpCard) => gameOptions !== undefined && gameOptions.customCorporationsList.includes(corpCard.name)

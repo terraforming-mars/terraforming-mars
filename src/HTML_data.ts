@@ -7512,5 +7512,32 @@ export const HTML_DATA: Map<string, string> =
             (Add 1 floater here for every Earth tag you have, including this.)
         </div>
     </div>
-`]
+`],
+[CardName.AGRICOLA_INC,`
+      <div class="tag tag1 tag-plant"></div>
+      <div class="corporationLabel">CORPORATION</div>
+      <div class="corporation-icon"></div>
+      <div class="contentCorporation">
+        <div class="pointsCorporation">?</div>
+        <div class="corporationEffectBox">
+          <div class="corporationEffectBoxLabel">EFFECT</div>
+
+          <div class="description effect">
+            (Effect: At game end, score -2 / 0 / 1 / 2 VP per tag TYPE for 0 / 1-2 / 3 / 4+ tags, excluding wild and Event card tags.)
+          </div>
+        </div>
+      </div>
+
+      <div class="agricola">Agricola Inc</div>
+      <div class="resource money">40</div>
+
+      <div class="production-box production-box-size2">
+        <div class="money production ">1</div>
+        <div class="production plant"></div>
+      </div>
+      
+      <div class="description">
+        (You start with 1 plant production, 1 MC production and 40 MC.)
+      </div>
+`],
 ]);

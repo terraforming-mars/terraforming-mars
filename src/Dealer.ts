@@ -461,7 +461,7 @@ import { MeatIndustry } from "./cards/promo/MeatIndustry";
 import { PoliticalAlliance } from "./cards/turmoil/PoliticalAlliance";
 
 import { BioengineeringEnclosure } from "./cards/ares/BioengineeringEnclosure";
-import { BiofertilizerFacility} from "./cards/ares/BioFertilizerFacility";
+import { BiofertilizerFacility} from "./cards/ares/BiofertilizerFacility";
 import { CapitalAres } from "./cards/ares/CapitalAres";
 import { CommercialDistrictAres } from "./cards/ares/CommercialDistrictAres";
 import { EcologicalZoneAres } from "./cards/ares/EcologicalZoneAres";

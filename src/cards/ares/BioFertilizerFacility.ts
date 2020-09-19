@@ -9,9 +9,9 @@ import { ResourceType } from "../../ResourceType";
 import { SpaceBonus } from "../../SpaceBonus";
 import { SpaceType } from "../../SpaceType";
 import { TileType } from "../../TileType";
-import { CardType } from "./../CardType";
-import { IProjectCard } from "./../IProjectCard";
-import { Tags } from "./../Tags";
+import { CardType } from "../CardType";
+import { IProjectCard } from "../IProjectCard";
+import { Tags } from "../Tags";
 
 export class BiofertilizerFacility implements IProjectCard {
     public cost: number = 26;

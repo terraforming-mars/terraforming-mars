@@ -12,11 +12,11 @@ import { WaterImportFromEuropa } from "../src/cards/WaterImportFromEuropa";
 import { Phase } from "../src/Phase";
 import { maxOutOceans, setCustomGameOptions } from "./TestingUtils";
 import { SaturnSystems } from "../src/cards/corporation/SaturnSystems";
-import { Resources } from '../src/Resources';
+import { Resources } from "../src/Resources";
 import { ISpace } from "../src/ISpace";
-import { ResearchNetwork } from '../src/cards/prelude/ResearchNetwork';
+import { ResearchNetwork } from "../src/cards/prelude/ResearchNetwork";
 import { ArcticAlgae } from "../src/cards/ArcticAlgae";
-import { Ecologist } from '../src/milestones/Ecologist';
+import { Ecologist } from "../src/milestones/Ecologist";
 import { Dealer } from "../src/Dealer";
 import { OrOptions } from "../src/inputs/OrOptions";
 import { BoardName } from "../src/BoardName";
@@ -315,46 +315,60 @@ describe("Game", function () {
     });
 
     it("Removes Hellas bonus ocean space if player cannot pay", function () {
+        // NOTE: By setting up the two-player game, instead of a solo game as we regularly do
+        // the neutral player can't claim the bonus ocean space before our player has a
+        // chance.
         const player = new Player("test", Color.BLUE, false);
+        const secondPlayer = new Player("vestigial", Color.RED, false);
         const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS}) as GameOptions;
-        const game = new Game("foobar", [player], player, gameOptions);
-        
+        const game = new Game("foobar", [player, secondPlayer], player, gameOptions);
+
+        // Ensuring that HELLAS_OCEAN_TILE will be available for the test.
+        expect(game.board.getEmptySpaces().map(s => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
+
         // Cannot afford
         player.megaCredits = 5;
         let landSpaces = game.board.getSpaces(SpaceType.LAND, player);
         expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
         let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
-        expect(availableSpacesOnLand.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
+        expect(availableSpacesOnLand.map(s => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
 
         // Can afford
         player.megaCredits = 6;
         landSpaces = game.board.getSpaces(SpaceType.LAND, player);
         expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
         availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
-        expect(availableSpacesOnLand.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
+        expect(availableSpacesOnLand.map(s => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
     });
 
     it("Removes Hellas bonus ocean space if Helion player cannot pay", function () {
+        // NOTE: By setting up the two-player game, instead of a solo game as we regularly do
+        // the neutral player can't claim the bonus ocean space before our player has a
+        // chance.
         const player = new Player("test", Color.BLUE, false);
+        const secondPlayer = new Player("vestigial", Color.RED, false);
         const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS}) as GameOptions;
-        const game = new Game("foobar", [player], player, gameOptions);
+        const game = new Game("foobar", [player, secondPlayer], player, gameOptions);
         player.corporationCard = new Helion();
         player.canUseHeatAsMegaCredits = true;
-        
+
+        // Ensuring that HELLAS_OCEAN_TILE will be available for the test.
+        expect(game.board.getEmptySpaces().map(s => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
+
         // Cannot afford
         player.heat = 2;
         player.megaCredits = 3;
         let landSpaces = game.board.getSpaces(SpaceType.LAND, player);
         expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
         let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
-        expect(availableSpacesOnLand.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.eq(undefined);
+        expect(availableSpacesOnLand.map(s => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
 
         // Can afford
         player.megaCredits += 1;
         landSpaces = game.board.getSpaces(SpaceType.LAND, player);
         expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
         availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
-        expect(availableSpacesOnLand.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).not.to.eq(undefined);
+        expect(availableSpacesOnLand.map(s => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
     });
 
     it("Generates random milestones and awards", function () {

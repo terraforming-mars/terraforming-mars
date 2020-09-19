@@ -3,7 +3,7 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { TileType } from "../../../src/TileType";
-import { IndustrialCenterAres } from '../../../src/cards/ares/IndustrialCenterAres';
+import { IndustrialCenterAres } from "../../../src/cards/ares/IndustrialCenterAres";
 import { SpaceBonus } from "../../../src/SpaceBonus";
 
 describe("IndustrialCenterAres", function () {

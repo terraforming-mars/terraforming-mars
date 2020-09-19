@@ -460,17 +460,28 @@ import { Potatoes } from "./cards/promo/Potatoes";
 import { MeatIndustry } from "./cards/promo/MeatIndustry";
 import { PoliticalAlliance } from "./cards/turmoil/PoliticalAlliance";
 
+import { BioengineeringEnclosure } from "./cards/ares/BioengineeringEnclosure";
+import { BiofertilizerFacility} from "./cards/ares/BioFertilizerFacility";
 import { CapitalAres } from "./cards/ares/CapitalAres";
 import { CommercialDistrictAres } from "./cards/ares/CommercialDistrictAres";
 import { EcologicalZoneAres } from "./cards/ares/EcologicalZoneAres";
 import { IndustrialCenterAres } from "./cards/ares/IndustrialCenterAres";
 import { LavaFlowsAres } from "./cards/ares/LavaFlowsAres";
+import { MetallicAsteroid} from "./cards/ares/MetallicAsteroid";
 import { MiningAreaAres } from "./cards/ares/MiningAreaAres";
 import { MiningRightsAres } from "./cards/ares/MiningRightsAres";
 import { MoholeAreaAres } from "./cards/ares/MoholeAreaAres";
 import { NaturalPreserveAres } from "./cards/ares/NaturalPreserveAres";
 import { NuclearZoneAres } from "./cards/ares/NuclearZoneAres";
 import { RestrictedAreaAres } from "./cards/ares/RestrictedAreaAres";
+import { SolarFarm} from "./cards/ares/SolarFarm";
+import { EcologicalSurvey } from "./cards/ares/EcologicalSurvey";
+import { MarketingExperts } from "./cards/ares/MarketingExperts";
+import { ButterflyEffect } from "./cards/ares/ButterflyEffect";
+import { DesperateMeasures } from "./cards/ares/DesperateMeasures";
+import { GeologicalSurvey } from "./cards/ares/GeologicalSurvey";
+import { OceanFarm, OceanCity } from "./cards/ares/OceanCity";
+import { OceanSanctuary } from "./cards/ares/OceanSanctuary";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -964,17 +975,29 @@ export const ALL_CORP_ERA_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
 ]
 
 export const ALL_ARES_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
+    { cardName: CardName.BIOENGINEERING_ENCLOSURE, factory: BioengineeringEnclosure },
+    { cardName: CardName.BIOFERTILIZER_FACILITY, factory: BiofertilizerFacility },
+    { cardName: CardName.BUTTERFLY_EFFECT, factory: ButterflyEffect },
     { cardName: CardName.CAPITAL_ARES, factory: CapitalAres },
     { cardName: CardName.COMMERCIAL_DISTRICT_ARES, factory: CommercialDistrictAres },
+    { cardName: CardName.DESPERATE_MEASURES, factory: DesperateMeasures },
     { cardName: CardName.ECOLOGICAL_ZONE_ARES, factory: EcologicalZoneAres },
+    { cardName: CardName.ECOLOGICAL_SURVEY, factory: EcologicalSurvey },
+    { cardName: CardName.GEOLOGICAL_SURVEY, factory: GeologicalSurvey },
     { cardName: CardName.INDUSTRIAL_CENTER_ARES, factory: IndustrialCenterAres },
     { cardName: CardName.LAVA_FLOWS_ARES, factory: LavaFlowsAres },
+    { cardName: CardName.MARKETING_EXPERTS, factory: MarketingExperts },
+    { cardName: CardName.METALLIC_ASTEROID, factory: MetallicAsteroid },
     { cardName: CardName.MINING_AREA_ARES, factory: MiningAreaAres },
     { cardName: CardName.MINING_RIGHTS_ARES, factory: MiningRightsAres },
     { cardName: CardName.MOHOLE_AREA_ARES, factory: MoholeAreaAres },
     { cardName: CardName.NATURAL_PRESERVE_ARES, factory: NaturalPreserveAres },
     { cardName: CardName.NUCLEAR_ZONE_ARES, factory: NuclearZoneAres },
+    { cardName: CardName.OCEAN_CITY, factory: OceanCity },
+    { cardName: CardName.OCEAN_FARM, factory: OceanFarm },
+    { cardName: CardName.OCEAN_SANCTUARY, factory: OceanSanctuary },
     { cardName: CardName.RESTRICTED_AREA_ARES, factory: RestrictedAreaAres },
+    { cardName: CardName.SOLAR_FARM, factory: SolarFarm },
 ]
 // Function to return a card object by its name
 export function getProjectCardByName(cardName: string): IProjectCard | undefined {

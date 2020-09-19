@@ -74,6 +74,7 @@ export class AresHandler {
           new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""));
         });
 
+    // TODO(kberg): test.
     if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
       adjacentSpace.player.megaCredits += 1;
       // TODO(kberg): log.

@@ -21,6 +21,7 @@ describe("MetallicAsteroid", function () {
         const action = card.play(player, game);
         expect(game.getTemperature()).eq(-28);
         expect(player.titanium).eq(1);
+        // TODO(kberg): add test for
         // game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 4);
 
         const citySpace = game.board.getAvailableSpacesForCity(player)[0];

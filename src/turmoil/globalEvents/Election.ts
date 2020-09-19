@@ -14,7 +14,7 @@ export class Election implements IGlobalEvent {
     public currentDelegate = PartyName.MARS;
     public resolve(game: Game, turmoil: Turmoil) {
         // Solo
-        if(game.soloMode) {
+        if(game.isSoloMode()) {
             if(this.getScore(game.getPlayers()[0], turmoil, game) >= 10) {
                 game.getPlayers()[0].increaseTerraformRatingSteps(2, game);
             }

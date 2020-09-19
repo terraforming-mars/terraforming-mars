@@ -21,6 +21,7 @@ describe("SnowCover", function () {
         turmoil.dominantParty = new Kelvinists();
         turmoil.dominantParty.partyLeader = player2.id;
         turmoil.dominantParty.delegates.push(player2.id);
+        turmoil.dominantParty.delegates.push(player2.id);
     });
 
     it("resolve play", function () {

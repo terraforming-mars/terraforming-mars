@@ -29,7 +29,7 @@ export class CometForVenus implements IProjectCard {
     public play(player: Player, game: Game) {
         const venusTagPlayers = game.getPlayers().filter((otherPlayer) => otherPlayer.id !== player.id && otherPlayer.getTagCount(Tags.VENUS, false, false) > 0);
 
-        if (game.soloMode|| venusTagPlayers.length === 0) {
+        if (game.isSoloMode()|| venusTagPlayers.length === 0) {
             game.increaseVenusScaleLevel(player,1);
             return undefined;
         }

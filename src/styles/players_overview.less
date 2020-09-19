@@ -1,0 +1,175 @@
+.icon-first-player {
+    color: #000;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    background: black;
+    font-family: Prototype;
+    padding: 1px 4px;
+    border-radius: 8px;
+}
+
+.players-overview {
+    position: relative;
+    display: table-caption;
+    margin-top: 40px;
+    .player-divider {
+        height: 1px;
+        width: 100%;
+        border: 1px dashed #444;
+    }
+    .stack-tags-under {
+        flex-flow: column !important;
+    }
+    .player-info {
+        display: inline-flex;
+        flex-flow: row;
+        padding: 8px;
+        margin-top: 12px;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        .stats-and-res-separator {
+            margin-bottom: 8px;
+            border-bottom: 2px solid rgba(170, 170, 170, 0.2);
+            padding-bottom: 8px;
+        }
+
+        .player-tags {
+            display: flex;
+            flex-flow: row;
+            .player-tags-main,
+            .player-tags-secondary {
+                display: flex;
+                flex-flow: row;
+                margin-left: 16px;
+                align-items: center;
+            }
+        }
+        .player-status-and-res {
+            display: inline-flex;
+            .player-status {
+                display: flex;
+                .player-status-left {
+                    width: 130px;
+                    .top-row {
+                        display: flex;
+                        flex-flow: row;
+                        position: relative;
+                        .player-view-status {
+                            display: none;
+                        }
+                        .player-name {
+                            cursor: pointer;
+                            color: #ccc;
+                            text-shadow: 1px 1px 1px #222, -1px -1px 1px #666;
+                            border-radius: 4px;
+                            font-size: 20px;
+                            max-width: 90px;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                        .player-name--inactive {
+                            cursor: default !important;
+                        }
+
+                        .icon-first-player-offset {
+                            position: absolute;
+                            right: -2px;
+                        }
+                    }
+                }
+                .player-status-right {
+                    margin-left: 8px;
+                    .icons-and-count {
+                        display: flex;
+                        align-items: center;
+                        flex-flow: column;
+                        border-radius: 8px;
+                        padding: 4px 4px 2px 4px;
+                        background: linear-gradient(
+                            #33200f 10%,
+                            rgba(0, 0, 0, 0.3) 50%
+                        );
+                        .played-cards-icons {
+                            display: flex;
+                            .played-cards-arrow {
+                                width: 15px;
+                                height: 23px;
+                                background: url("/assets/green-arrow-down-15x23.png");
+                            }
+                            .played-cards-icon {
+                                width: 34px;
+                                height: 30px;
+                                margin-top: -5px;
+                                background-size: contain;
+                                background: url(/assets/preferences_cards.png);
+                            }
+                        }
+                        .played-cards-count {
+                            font-size: 20px;
+                            font-family: Prototype;
+                            line-height: 1;
+                            margin-top: 3px;
+                            text-shadow: 0 1px 1px black;
+                        }
+                    }
+                    .played-cards-show {
+                        background: #5755d9;
+                        border-color: #4b48d6;
+                        color: #fff;
+                        cursor: pointer;
+                        height: 1.35rem;
+                        line-height: 0.5rem;
+                    }
+                }
+                .player-corp {
+                    font-size: 16px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: 130px;
+                    white-space: pre;
+                }
+                .player-action-status {
+                    border-radius: 4px;
+                    font-size: 16px;
+                    display: inline-block;
+                    width: 100%;
+                    text-align: center;
+                    font-family: Prototype;
+                }
+                .player-action-status--active {
+                    background: #ccc;
+                    border: 1px solid #ccc;
+                    color: #000;
+                }
+                .player-action-status--passed {
+                    background: #000;
+                    border: 1px solid #000;
+                    color: #ccc;
+                    opacity: 0.3;
+                }
+            }
+        }
+    }
+    .players-overview-settings {
+        display: flex;
+        flex-flow: row;
+        position: absolute;
+        top: -26px;
+        left: 0;
+        font-size: 16px;
+        align-items: center;
+        .setting-label {
+            text-transform: uppercase;
+            margin-right: 8px;
+        }
+        .setting-button {
+            padding: 2px 4px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            color: black;
+            background: #ccc;
+            cursor: pointer;
+        }
+    }
+}

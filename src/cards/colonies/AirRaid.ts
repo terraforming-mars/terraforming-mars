@@ -37,7 +37,7 @@ export class AirRaid implements IProjectCard {
             }
         );
 
-        if (game.soloMode) {
+        if (game.isSoloMode()) {
             player.megaCredits += 5;
 
             if (resourceCards.length === 1) {

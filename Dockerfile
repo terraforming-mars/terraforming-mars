@@ -2,7 +2,7 @@ FROM node:lts-alpine
 
 EXPOSE 8080
 
-RUN mkdir -p /usr/src/app \
+RUN mkdir -p /usr/src/app/db \
    && addgroup -S tfm \
    && adduser -S -D -h /usr/src/app tfm tfm  
 

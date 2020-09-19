@@ -102,7 +102,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public colonyTradeDiscount: number = 0;
     private turmoilScientistsActionUsed: boolean = false;
     public removingPlayers: Array<PlayerId> = [];
-    public needsToDraft: boolean | undefined = undefined;
+    public needsToDraft: boolean | undefined = undefined; 
 
     constructor(
         public name: string,
@@ -451,7 +451,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
       return requirementsBonus;
     }
-
+ 
     private generateId(): string {
       return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
     }
@@ -1723,7 +1723,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       game.fundedAwards.forEach((fundedAward) => {
 
         // Awards are disabled for 1 player games
-        if (game.soloMode) return;
+        if (game.isSoloMode()) return;
 
         const players: Array<Player> = game.getPlayers().slice();
         players.sort(

@@ -2,10 +2,9 @@
 import Vue from "vue";
 
 import { Colony } from "./Colony";
-import { ColonyName } from "../colonies/ColonyName";
 
 export const SelectColony = Vue.component("select-colony", {
-    props: ["player", "playerinput", "onsave", "showsave", "showtitle"],
+    props: ["playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
           selectedColony: undefined

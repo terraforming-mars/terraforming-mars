@@ -24,6 +24,6 @@ describe("CommercialDistrictAres", function () {
         expect(action instanceof SelectSpace);
         action.cb(action.availableSpaces[0]);
 
-        expect(action.availableSpaces[0].adjacency).to.deep.eq({bonus: [AresSpaceBonus.MC, AresSpaceBonus.MC]});
+        expect(action.availableSpaces[0].adjacency).to.deep.eq({bonus: [AresSpaceBonus.MEGACREDITS, AresSpaceBonus.MEGACREDITS]});
     });
 });

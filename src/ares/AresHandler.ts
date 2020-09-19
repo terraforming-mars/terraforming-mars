@@ -1,17 +1,19 @@
 // Game.ts-specific behavior for Ares
+import { assert } from "console";
+
+import { CardName } from "../CardName";
 import { ICard } from "../cards/ICard";
 import { LogHelper } from "../components/LogHelper";
-import { Game } from '../Game';
+import { Game } from "../Game";
 import { SelectCard } from "../inputs/SelectCard";
-import { ISpace } from '../ISpace';
+import { ISpace } from "../ISpace";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
 import { LogMessageType } from "../LogMessageType";
-import { Player } from '../Player';
+import { Player } from "../Player";
 import { ResourceType } from "../ResourceType";
+import { SpaceBonus } from "../SpaceBonus";
 import { AresSpaceBonus } from "./AresSpaceBonus";
-import { SpaceBonus } from '../SpaceBonus';
-import { assert } from "console";
 
 export class AresHandler {
 
@@ -22,9 +24,15 @@ export class AresHandler {
   }
 
   public static isAresSpaceBonus(a: SpaceBonus | AresSpaceBonus) : a is AresSpaceBonus {
-    assert(Object.values(AresSpaceBonus).length == 2);
-    
-    return a === AresSpaceBonus.ANIMAL || a === AresSpaceBonus.MC;
+    assert(Object.values(AresSpaceBonus).length === 4);
+    switch(a) {
+      case AresSpaceBonus.ANIMAL:
+      case AresSpaceBonus.MEGACREDITS:
+      case AresSpaceBonus.MICROBE:
+      case AresSpaceBonus.POWER:
+            return true;
+    }
+    return false;
   }
 
   // |player| placed a tile next to |adjacentSpace|.
@@ -72,13 +80,16 @@ export class AresHandler {
           new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""));
         });
 
-        adjacentSpace.player.megaCredits += 1;
+    if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
+      adjacentSpace.player.megaCredits += 1;
+      // TODO(kberg): log.
+    };
+    adjacentSpace.player.megaCredits += 1;
         this.game.log(
             LogMessageType.DEFAULT,
             "{1} gains 1 M€ for a tile placed next to {2}",
             new LogMessageData(LogMessageDataType.PLAYER, adjacentSpace.player.id),
             new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""),);
-  
     }
   }
 

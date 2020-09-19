@@ -25,6 +25,6 @@ describe("NaturalPreserveAres", function () {
         const space = action.availableSpaces[0];
         action.cb(space);
         expect(space.tile && space.tile.tileType).to.eq(TileType.NATURAL_PRESERVE);
-        expect(space.adjacency).to.deep.eq({bonus: [AresSpaceBonus.MC]});
+        expect(space.adjacency).to.deep.eq({bonus: [AresSpaceBonus.MEGACREDITS]});
     }); 
 });

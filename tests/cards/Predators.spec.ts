@@ -7,6 +7,7 @@ import { Fish } from "../../src/cards/Fish";
 import { Pets } from "../../src/cards/Pets";
 import { ProtectedHabitats } from "../../src/cards/ProtectedHabitats";
 import { SmallAnimals } from "../../src/cards/SmallAnimals";
+import { BioengineeringEnclosure } from "../../src/cards/ares/BioengineeringEnclosure";
 
 describe("Predators", function () {
     let card : Predators, player : Player, player2 : Player, game : Game;
@@ -63,6 +64,25 @@ describe("Predators", function () {
         expect(card.resourceCount).to.eq(1);
         expect(player2.getResourcesOnCard(fish)).to.eq(0);
         expect(player2.getResourcesOnCard(pets)).to.eq(1);
+    });
+
+    it("Respects Bioengineering Enclosure", function () {
+        player.playedCards.push(card);
+        const fish = new Fish();
+        const bioengineeringEnclosure = new BioengineeringEnclosure();
+
+        player2.playedCards.push(bioengineeringEnclosure, fish);
+        player2.addResourceTo(bioengineeringEnclosure);
+        player2.addResourceTo(fish);
+
+        expect(card.canAct(player, game)).to.eq(true);
+        
+        const action = card.action(player, game);
+        expect(action).to.eq(undefined); // No option to choose BioEngineering Enclosure card provided
+
+        expect(card.resourceCount).to.eq(1);
+        expect(player2.getResourcesOnCard(fish)).to.eq(0);
+        expect(player2.getResourcesOnCard(bioengineeringEnclosure)).to.eq(1);
     });
 
     it("Respects protected habitats", function () {

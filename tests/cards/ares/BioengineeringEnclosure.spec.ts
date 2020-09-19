@@ -61,19 +61,21 @@ describe("BioengineeringEnclosure", function () {
   });
 
   it("Move animal", () => {
+    // Set up the cards.
     player.playCard(game, animalHost);
     player.playCard(game, card);
 
+    // Initial expectations that will change after playing the card.
     expect(card.canAct(player)).is.true;
     expect(card.resourceCount).eq(2);
     expect(animalHost.resourceCount).eq(0);
+    expect(game.interrupts).is.empty;
 
-    // const action = card.action(player, game);
+    card.action(player, game);
 
-    // TODO(kberg): addtest when BE is fixed.
-    // action.cb([animalHost]);
-
-    // expect(card.resourceCount).eq(1);
-    // expect(animalHost.resourceCount).eq(1);
+    // No interrupts because there's only one card that can accept the animals.
+    expect(game.interrupts).is.empty;
+    expect(card.resourceCount).eq(1);
+    expect(animalHost.resourceCount).eq(1);
   });
 });

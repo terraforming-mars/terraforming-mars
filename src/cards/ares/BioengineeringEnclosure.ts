@@ -31,23 +31,24 @@ export class BioengineeringEnclosure implements IProjectCard, IActionCard, IReso
   public canAct(player: Player): boolean {
     // >1 because this player already has bioengineering enclosure.
     return this.resourceCount > 0 &&
-      player.getResourceCards(ResourceType.ANIMAL).length > 1;
+      player.getResourceCards(this.resourceType).length > 1;
   }
 
   public action(player: Player, game: Game) {
-    // this code is a little brittle: if the player chooses not to select a
-    // card in the SelectResourceCard action,
-    // the player has still lost their animal.
+    // TODO(kberg): this code is a little brittle: if the player chooses not to select a
+    // card in the SelectResourceCard action, the player has still lost their animal.
     this.resourceCount--;
     game.log(
       LogMessageType.DEFAULT,
       "${0} removed 1 animal from Bioengineering Enclosure.",
       new LogMessageData(LogMessageDataType.PLAYER, player.id));
 
-    // TODO(kberg): select an animal.
+    game.addSelectResourceCardInterrupt(
+      player,
+      1,
+      this.resourceType,
+      // This filter is so the player doesn't have own card as an option.
+      player.getResourceCards(this.resourceType).filter(c => c.name !== this.name));
     return undefined;
-    // return SelectResourceCard.newInstance(
-    //   game, player, ResourceType.ANIMAL, player.playedCards, 1);
   }
-
 }

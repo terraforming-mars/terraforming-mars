@@ -36,7 +36,7 @@ import {ColonyDealer, getColonyByName} from "./colonies/ColonyDealer";
 import {PlayerInterrupt} from "./interrupts/PlayerInterrupt";
 import {SelectOcean} from "./interrupts/SelectOcean";
 import {SelectResourceCard} from "./interrupts/SelectResourceCard";
-import {SelectColony} from "./interrupts/SelectColony";
+import {SelectColonyInterrupt} from "./interrupts/SelectColonyInterrupt";
 import {SelectRemoveColony} from "./interrupts/SelectRemoveColony";
 import {SelectResourceProductionDecrease} from "./interrupts/SelectResourceProductionDecrease";
 import {ICard} from "./cards/ICard";
@@ -529,7 +529,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         && (colony.colonies.indexOf(player.id) === -1 || allowDuplicate)
         && colony.isActive);
       if (openColonies.length >0 ) {
-        this.addInterrupt(new SelectColony(player, this, openColonies, title));
+        this.addInterrupt(new SelectColonyInterrupt(player, this, openColonies, title));
       }
     }
 

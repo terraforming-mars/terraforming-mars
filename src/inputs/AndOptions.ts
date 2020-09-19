@@ -10,13 +10,14 @@ import { OrOptions } from "./OrOptions";
 import { SelectAmount } from "./SelectAmount";
 import { ICard } from "../cards/ICard";
 import { IProjectCard } from "../cards/IProjectCard";
+import { SelectColony } from "./SelectColony";
 
 export class AndOptions implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.AND_OPTIONS;
     public title: string = "";
     public buttonLabel: string = "Save";
     public options: Array<PlayerInput>;
-    constructor(public cb: () => PlayerInput | undefined, ...options: Array<OrOptions | SelectAmount | SelectPlayer | SelectHowToPay | SelectSpace | SelectCard<CorporationCard> | SelectCard<ICard> | SelectCard<IProjectCard>>) {
+    constructor(public cb: () => PlayerInput | undefined, ...options: Array<OrOptions | SelectAmount | SelectPlayer | SelectHowToPay | SelectSpace | SelectColony | SelectCard<CorporationCard> | SelectCard<ICard> | SelectCard<IProjectCard>>) {
         this.options = options;
     }
 }

@@ -1,34 +1,23 @@
 import { Game } from "../Game";
-import { PlayerInput } from "../PlayerInput";
 import { Player } from "../Player";
-import { PlayerInterrupt } from "./PlayerInterrupt";
-import { SelectCard } from "../inputs/SelectCard";
+import { SelectCard } from "./SelectCard";
 import { ResourceType } from "../ResourceType";
 import { ICard } from "../cards/ICard";
 import { LogHelper } from "../components/LogHelper";
-
-export class SelectResourceCard implements PlayerInterrupt {
-    public playerInput: PlayerInput;
-    constructor(
-        public player: Player,
-        public game: Game,
-        public resourceType: ResourceType,
-        public resourceCards: Array<ICard>,
-        public title: string | undefined,
-        public count: number = 1
-    ){
+export class SelectResourceCard {
+    public static newInstance(game: Game, player: Player, resourceType: ResourceType, cards: Array<ICard>, count: number, title?: string): SelectCard<ICard> {
         if (title === undefined) {
             title = "Select card to add " + count + " " + resourceType + " resource(s)";
         }
-        this.playerInput = new SelectCard(
+        return new SelectCard(
             title,
             "Add resource(s)",
-            resourceCards,
+            cards,
             (foundCards: Array<ICard>) => {
               player.addResourceTo(foundCards[0], count);
               LogHelper.logAddResource(game, player, foundCards[0], count);
               return undefined;
             }
           );
-    };
+    }
 }    

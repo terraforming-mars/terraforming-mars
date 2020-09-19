@@ -1,5 +1,5 @@
 import { Player, PlayerId } from "./Player";
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_CORP_ERA_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from "./Dealer";
+import {Dealer} from "./Dealer";
 import {ISpace} from "./ISpace";
 import {SpaceType} from "./SpaceType";
 import {TileType} from "./TileType";
@@ -35,7 +35,7 @@ import {IColony} from "./colonies/Colony";
 import {ColonyDealer, getColonyByName} from "./colonies/ColonyDealer";
 import {PlayerInterrupt} from "./interrupts/PlayerInterrupt";
 import {SelectOcean} from "./interrupts/SelectOcean";
-import {SelectResourceCard} from "./interrupts/SelectResourceCard";
+import { SelectResourceCard } from "./inputs/SelectResourceCard";
 import {SelectColony} from "./interrupts/SelectColony";
 import {SelectRemoveColony} from "./interrupts/SelectRemoveColony";
 import {SelectResourceProductionDecrease} from "./interrupts/SelectResourceProductionDecrease";
@@ -198,27 +198,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.setupSolo();
       }
 
-      let corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
-
-      // Add Corporate Era corporation cards
-      if (gameOptions.corporateEra) {
-        corporationCards.push(...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => new cf.factory()));
-      }
-
-      // Add prelude corporations cards
-      if (gameOptions.preludeExtension) {
-        corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
-      }
-
       // Add Venus Next corporations cards, board colonies and milestone / award
       if (gameOptions.venusNextExtension) {
-        corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
         this.setVenusElements(gameOptions.randomMA, gameOptions.includeVenusMA);
       }
 
       // Add colonies stuff
       if (gameOptions.coloniesExtension) {
-        corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
         this.colonyDealer = new ColonyDealer();
         this.colonies = this.colonyDealer.drawColonies(players.length, this.gameOptions.customColoniesList);
         if (this.players.length === 1) {
@@ -230,28 +216,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Add Turmoil stuff
       if (gameOptions.turmoilExtension) {
         this.turmoil = new Turmoil(this);
-        corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
       }
 
-      // Add Promo stuff
-      if (gameOptions.promoCardsOption) {
-        corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
-      }
+      let corporationCards = this.dealer.corporationCards;
 
       // Setup custom corporation list
       const minCorpsRequired = players.length * gameOptions.startingCorporations;
       if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
 
-        // Init all available corporation cards to choose from
-        corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
-        corporationCards.push(...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
-
-        corporationCards = corporationCards.filter(
+        corporationCards = this.dealer.corporationCards.filter(
           (corpCard) => gameOptions !== undefined && gameOptions.customCorporationsList.includes(corpCard.name)
         );
       }
@@ -458,6 +431,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
           game.colonies = gameToRebuild.colonies;
           game.turmoil = gameToRebuild.turmoil;
 
+          if(gameToRebuild.gameOptions.venusNextExtension) {
+            game.addVenusBoardSpaces();
+          }
+
           // Set active player
           let playerIndex = gameToRebuild.players.indexOf(gameToRebuild.first);
           game.first = game.players[playerIndex];
@@ -533,15 +510,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
     }
 
-    public addSelectResourceCardInterrupt(player: Player, count: number = 1, resourceType: ResourceType, resourceCards: Array<ICard>, title?: string): void {
-      if (resourceCards.length === 1) {
-        player.addResourceTo(resourceCards[0], count);
-        LogHelper.logAddResource(this, player, resourceCards[0], count);
-        return undefined;            
-      }
-      this.addInterrupt(new SelectResourceCard(player, this, resourceType, resourceCards, title));
-    }
-
     public addResourceInterrupt(player: Player, resourceType: ResourceType, count: number = 1, optionalCard : ICard | undefined, restrictedTag?: Tags, title?: string): void {
       let resourceCards = player.getResourceCards(resourceType);
       // Played card is not into playedCards array yet
@@ -554,14 +522,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (resourceCards.length === 0) {
         return;
       }
-
-      if (resourceCards.length === 1) {
-        player.addResourceTo(resourceCards[0], count);
-        LogHelper.logAddResource(this, player, resourceCards[0], count);
-        return undefined;            
-      }
-
-      this.addInterrupt(new SelectResourceCard(player, this, resourceType, resourceCards, title, count));
+      this.addInterrupt({player: player, playerInput: SelectResourceCard.newInstance(this, player, resourceType, resourceCards, count, title)});
     }
 
     public addResourceProductionDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {

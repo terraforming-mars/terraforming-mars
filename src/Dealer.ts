@@ -1035,6 +1035,10 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
+    cardFactory = ALL_ARES_PROJECT_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
     return undefined;
 }
 

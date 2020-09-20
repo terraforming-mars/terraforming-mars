@@ -12,6 +12,7 @@ import { LogMessageData } from "../../LogMessageData";
 import { LogMessageDataType } from "../../LogMessageDataType";
 import { SelectColony } from "../../inputs/SelectColony";
 import { ColonyName } from "../../colonies/ColonyName";
+import { ColonyModel } from "../../models/ColonyModel";
 
 export class Aridor implements CorporationCard {
     public name: CardName =  CardName.ARIDOR;
@@ -21,7 +22,8 @@ export class Aridor implements CorporationCard {
 
     public initialAction(player: Player, game: Game) {
         if (game.colonyDealer === undefined || !game.gameOptions.coloniesExtension) return undefined;
-        let selectColony = new SelectColony(game, "Aridor first action - Select colony tile to add", "Add colony tile", game.colonyDealer.discardedColonies, (colonyName: ColonyName) => {
+        let coloniesModel: Array<ColonyModel> = game.getColoniesModel(game.colonyDealer.discardedColonies);
+        let selectColony = new SelectColony(game, "Aridor first action - Select colony tile to add", "Add colony tile", coloniesModel, (colonyName: ColonyName) => {
             if (game.colonyDealer !== undefined) {
                 game.colonyDealer.discardedColonies.forEach(colony => {
                     if (colony.name === colonyName) {

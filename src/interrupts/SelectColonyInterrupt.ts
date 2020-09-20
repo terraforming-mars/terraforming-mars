@@ -5,6 +5,7 @@ import { PlayerInterrupt } from "./PlayerInterrupt";
 import { IColony } from "../colonies/Colony";
 import { SelectColony } from "../inputs/SelectColony";
 import { ColonyName } from "../colonies/ColonyName";
+import { ColonyModel } from "../models/ColonyModel";
 
 export class SelectColonyInterrupt implements PlayerInterrupt {
     public playerInput: PlayerInput;
@@ -14,7 +15,8 @@ export class SelectColonyInterrupt implements PlayerInterrupt {
         public openColonies: Array<IColony>,
         public tile: string = "Select where to build a colony"
     ){
-        let buildColony = new SelectColony(game, tile, "Build", openColonies, (colonyName: ColonyName) => {
+        let coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
+        let buildColony = new SelectColony(game, tile, "Build", coloniesModel, (colonyName: ColonyName) => {
                 openColonies.forEach(colony => {
                   if (colony.name === colonyName) {
                     colony.onColonyPlaced(player, game);

@@ -4,6 +4,7 @@ import { Player } from "../Player";
 import { PlayerInterrupt } from "./PlayerInterrupt";
 import { ColonyName } from "../colonies/ColonyName";
 import { SelectColony } from "../inputs/SelectColony";
+import { ColonyModel } from "../models/ColonyModel";
 
 export class SelectRemoveColony implements PlayerInterrupt {
     public playerInput: PlayerInput;
@@ -11,7 +12,8 @@ export class SelectRemoveColony implements PlayerInterrupt {
         public player: Player,
         public game: Game
     ){
-        let removeColony = new SelectColony(game, "Select colony to remove", "Remove colony", game.colonies, (colonyName: ColonyName) => {
+        let coloniesModel: Array<ColonyModel> = game.getColoniesModel(game.colonies);
+        let removeColony = new SelectColony(game, "Select colony to remove", "Remove colony", coloniesModel, (colonyName: ColonyName) => {
             game.colonies.forEach(colony => {
               if (colony.name === colonyName) {
                 game.colonies.splice(game.colonies.indexOf(colony),1);

@@ -60,6 +60,7 @@ import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
 import { getRandomMilestonesAndAwards } from "./MASynergy";
 import { CardType } from "./cards/CardType";
+import { ColonyModel } from "./models/ColonyModel";
 
 
 export interface Score {
@@ -649,6 +650,23 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public addInterrupt(interrupt: PlayerInterrupt): void {
         this.interrupts.push(interrupt);
+    }
+
+    public getColoniesModel(colonies: Array<IColony>) : Array<ColonyModel> {
+      return colonies.map(
+        (colony): ColonyModel => ({
+            colonies: colony.colonies.map(
+                (playerId): Color => this.getPlayerById(playerId).color
+            ),
+            isActive: colony.isActive,
+            name: colony.name,
+            trackPosition: colony.trackPosition,
+            visitor:
+                colony.visitor === undefined
+                    ? undefined
+                    : this.getPlayerById(colony.visitor).color,
+        })
+    );
     }
 
     public milestoneClaimed(milestone: IMilestone): boolean {

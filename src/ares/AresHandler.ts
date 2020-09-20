@@ -17,6 +17,8 @@ import { AresSpaceBonus } from "./AresSpaceBonus";
 
 export class AresHandler {
 
+  private constructor() { }
+
   public static isAresSpaceBonus(a: SpaceBonus | AresSpaceBonus) : a is AresSpaceBonus {
     switch(a) {
       case AresSpaceBonus.ANIMAL:
@@ -29,7 +31,7 @@ export class AresHandler {
   }
 
   // |player| placed a tile next to |adjacentSpace|.
-  public handleAdjacentPlacement (game: Game, adjacentSpace: ISpace, player: Player) {
+  public static handleAdjacentPlacement (game: Game, adjacentSpace: ISpace, player: Player) {
     if (adjacentSpace.adjacency?.bonus) {
       if (!adjacentSpace.player) {
         throw new Error("A tile with an adjacency bonus must have an owner " + adjacentSpace);
@@ -87,13 +89,13 @@ export class AresHandler {
     }
   }
 
-  public adjacencyCosts(game: Game, space: ISpace): number {
+  public static adjacencyCosts(game: Game, space: ISpace): number {
     return game.board.getAdjacentSpaces(space)
         .map((adjacentSpace) => adjacentSpace?.adjacency?.cost || 0)
         .reduce((prior, current) => prior + current, 0);
   }
 
-  public payAdjacencyCosts(game: Game, player: Player, space: ISpace) {
+  public static payAdjacencyCosts(game: Game, player: Player, space: ISpace) {
     const cost = this.adjacencyCosts(game, space);
 
     if (cost > player.getResource(Resources.MEGACREDITS)) {
@@ -120,7 +122,7 @@ export class AresHandler {
   //
   // This feature is part of Ecological Survey and Geological Survey.
   //
-  public beforeTilePlacement(player: Player): Map<Resources | ResourceType, number> {
+  public static beforeTilePlacement(player: Player): Map<Resources | ResourceType, number> {
     var map: Map<Resources | ResourceType, number> = new Map();
     if (player.playedCards.find(c => c.name === CardName.ECOLOGICAL_SURVEY)) {
       map.set(Resources.PLANTS, player.getResource(Resources.PLANTS));
@@ -136,26 +138,36 @@ export class AresHandler {
   }
 
   // Used with Ecological Survey and Geological Survey
-  public afterTilePlacement(game: Game, player: Player, startingResources?: Map<Resources | ResourceType, number>): void {
+  public static afterTilePlacement(game: Game, player: Player, startingResources?: Map<Resources | ResourceType, number>): void {
     if (!startingResources) {
       return;
     }
 
-    function giveBonus(start: number, current: number | undefined):boolean {
-      return (current && current > start) ? true : false;
+    function giveBonus(start: number | undefined, current: number):boolean {
+      return (current > (start || 0)) ? true : false;
     }
 
     // Although this bit of code goes through all six resource types, the expected input map will only contain
     // the three (or six) resources it is tracking.
+    // TODO(kberg): bonus placement logging is inconsistent.
     [Resources.PLANTS, Resources.STEEL, Resources.TITANIUM, Resources.HEAT].forEach(
       resource => {
-      if (giveBonus(player.getResource(resource), startingResources.get(resource))) {
+      if (giveBonus(startingResources.get(resource), player.getResource(resource))) {
         player.setResource(resource, 1);
-      }}
+
+        var cardName = resource === Resources.PLANTS ? CardName.ECOLOGICAL_SURVEY : CardName.GEOLOGICAL_SURVEY;
+        game.log(
+          LogMessageType.DEFAULT,
+          "${0} gained a bonus ${1} because of ${2}",
+          new LogMessageData(LogMessageDataType.PLAYER, player.id),
+          new LogMessageData(LogMessageDataType.STRING, resource),
+          new LogMessageData(LogMessageDataType.CARD, cardName));
+        }
+      }
     );
     [ResourceType.MICROBE, ResourceType.ANIMAL].forEach(
       resourceType => {
-        if (giveBonus(AresHandler.countResources(player, resourceType), startingResources.get(resourceType))) {
+        if (giveBonus(startingResources.get(resourceType), AresHandler.countResources(player, resourceType))) {
         game.addSelectResourceCardInterrupt(player, 1, resourceType, player.getResourceCards(resourceType));      
       }
     });

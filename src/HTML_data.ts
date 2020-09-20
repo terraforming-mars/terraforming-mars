@@ -7633,7 +7633,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="card-number">A08</div>
     <div class="content ">
         <div class="tile temperature-tile"></div>
-        <div class="titanium resource ">
+        <div class="titanium resource "></div>
         -4<div class="resource plant red-outline"></div>
         <div class="special-tile tile metallic-asteroid ">&#x2302;&#xFE0E;</div>
         <div class="description " style="text-align:left;">

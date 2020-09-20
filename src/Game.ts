@@ -126,7 +126,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public someoneHasRemovedOtherPlayersPlants: boolean = false;
     public seed: number = Math.random();
     public gameOptions: GameOptions;
-    private aresHandler?: AresHandler;
 
 
     constructor(
@@ -310,9 +309,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
       }
 
-      if (gameOptions.aresExtension) {
-        this.aresHandler = new AresHandler();
-      }
       // Save initial game state
       Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer), this.players.length);
 
@@ -1486,12 +1482,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
       }
 
-      this.aresHandler?.payAdjacencyCosts(this, player, space);
+      if (this.gameOptions.aresExtension) {
+        AresHandler.payAdjacencyCosts(this, player, space);
+      }
 
       // Part 3. Setup for bonuses
 
       var arcadianCommunityBonus = space.player === player && player.isCorporation(CorporationName.ARCADIAN_COMMUNITIES);
-      var startingResources = this.aresHandler?.beforeTilePlacement(player);
+      const startingResources = this.gameOptions.aresExtension ? AresHandler.beforeTilePlacement(player) : undefined;
 
       // Part 4. Place the tile
 
@@ -1515,7 +1513,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
             if (adjacentSpace.tile.tileType === TileType.OCEAN) {
               player.megaCredits += player.oceanBonus;
             }
-            this.aresHandler?.handleAdjacentPlacement(this, adjacentSpace, player);
+            if (this.gameOptions.aresExtension) {
+              AresHandler.handleAdjacentPlacement(this, adjacentSpace, player);
+            }
           }
         });
 
@@ -1541,7 +1541,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       });
 
       // Must occur after all other onTilePlaced operations.
-      this.aresHandler?.afterTilePlacement(this, player, startingResources);
+      if (this.gameOptions.aresExtension) {
+        AresHandler.afterTilePlacement(this, player, startingResources);
+      }
     }
 
     public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {

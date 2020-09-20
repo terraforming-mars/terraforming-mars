@@ -7516,7 +7516,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.AGRICOLA_INC,`
       <div class="tag tag1 tag-plant"></div>
       <div class="corporationLabel">CORPORATION</div>
-      <div class="corporation-icon"></div>
+      <div class="community-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="pointsCorporation">?</div>
         <div class="corporationEffectBox">
@@ -7543,7 +7543,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.PROJECT_WORKSHOP,`
       <div class="tag tag1 tag-earth"></div>
       <div class="corporationLabel">CORPORATION</div>
-      <div class="corporation-icon"></div>
+      <div class="community-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">ACTION</div>

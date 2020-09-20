@@ -320,6 +320,22 @@ input[type=radio]:checked + .filterDiv::after {
   content: "\25b2";
 }
 
+.community-icon:after {
+  position: absolute;
+  color:#222;
+  border: 1px solid black;
+  background: moccasin;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 14px;
+  width: 16px;
+  height:16px;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
+  content: "\2666";
+}
+
 .project-icon:after, .preludeCard-icon:after {
   margin-left: -235px;
   margin-top: 284px;
@@ -1494,6 +1510,7 @@ input[type=radio]:checked + .filterDiv::after {
   letter-spacing: 2px;
   text-align: center;
   margin-top: 5px;
+  margin-left: -30px;
   text-shadow: 0 0 1px limegreen, 0 2px 2px greenyellow;
   font-size: 32px;
 }

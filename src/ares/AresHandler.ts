@@ -1,5 +1,7 @@
 // Game.ts-specific behavior for Ares
 
+// TODO(kberg): milestones and awards.
+
 import { CardName } from "../CardName";
 import { ICard } from "../cards/ICard";
 import { LogHelper } from "../components/LogHelper";

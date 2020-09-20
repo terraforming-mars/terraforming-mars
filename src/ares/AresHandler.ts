@@ -267,8 +267,9 @@ function placeHazard(game: Game, tileType: TileType, direction: 1 | -1) {
     var card = game.dealer.dealCard();
     game.log(
         LogMessageType.DEFAULT,
-        "Dealt and discarded ${1} to place a hazard",
-        new LogMessageData(LogMessageDataType.CARD, card.name)
+        "Dealt and discarded ${0} (cost ${1}) to place a hazard",
+        new LogMessageData(LogMessageDataType.CARD, card.name),
+        new LogMessageData(LogMessageDataType.STRING, card.cost.toString())
     );
 
     var cost = card.cost;

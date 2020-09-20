@@ -1468,7 +1468,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Part 1, basic validation checks.
 
       if (space.tile !== undefined) {
-        throw new Error("Selected space is occupied");
+        if (!AresHandler.canCover(space.tile, tile)) {
+          throw new Error("Selected space is occupied");
+        }
       }
 
       // Land claim a player can claim land for themselves
@@ -1496,13 +1498,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       if (this.gameOptions.aresExtension) {
-        AresHandler.payAdjacencyCosts(this, player, space);
+          AresHandler.payAdjacencyAndHazardCosts(this, player, space);
       }
 
       // Part 3. Setup for bonuses
 
       var arcadianCommunityBonus = space.player === player && player.isCorporation(CorporationName.ARCADIAN_COMMUNITIES);
       const startingResources = this.gameOptions.aresExtension ? AresHandler.beforeTilePlacement(player) : undefined;
+      const initialTileTypeForAres = space.tile?.tileType;
 
       // Part 4. Place the tile
 
@@ -1552,6 +1555,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
         });
       });
+
+      AresHandler.grantBonusForRemovingHazard(this, player, initialTileTypeForAres);
 
       // Must occur after all other onTilePlaced operations.
       if (this.gameOptions.aresExtension) {
@@ -1608,7 +1613,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         player.increaseTerraformRating(this);
       }
       if (this.gameOptions.aresExtension) {
-        AresHandler.onOceanPlaced(this, isWorldGov ? undefined : player);
+        AresHandler.onOceanPlaced(this, player, isWorldGov);
       }
     }
 

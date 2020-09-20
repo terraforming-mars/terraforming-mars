@@ -1488,6 +1488,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Part 3. Setup for bonuses
       var arcadianCommunityBonus = space.player === player && player.isCorporation(CorporationName.ARCADIAN_COMMUNITIES);
+      var startingResources = this.aresHandler?.beforeTilePlacement(player);
 
       // Part 4. Place the tile
 
@@ -1535,6 +1536,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
         });
       });
+
+      // Must occur after all other onTilePlaced operations.
+      this.aresHandler?.afterTilePlacement(this, player, startingResources);
     }
 
     public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {

@@ -6,7 +6,6 @@ import { CardType } from "../CardType";
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 
-// TODO(kberg): implement effect.
 export class GeologicalSurvey implements IProjectCard {
   public cost: number = 8;
   public tags: Array<Tags> = [Tags.SCIENCE];

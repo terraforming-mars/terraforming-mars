@@ -11,6 +11,7 @@ import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
 import { LogMessageType } from "../LogMessageType";
 import { Player } from "../Player";
+import { Resources } from "../Resources";
 import { ResourceType } from "../ResourceType";
 import { SpaceBonus } from "../SpaceBonus";
 import { AresSpaceBonus } from "./AresSpaceBonus";
@@ -100,5 +101,62 @@ export class AresHandler {
       // TODO(kberg): implement.
       throw new Error("Implement making opponent pay " + extraCost + " MC");
     }
+  }
+
+  private static countResources(player: Player, resourceType: ResourceType) : number {
+    let count = player.playedCards
+        .map(c => resourceType === c.resourceType ? (c.resourceCount || 0) : 0)
+        .reduce((prior, current) => prior + current , 0);
+
+    if (resourceType === player.corporationCard?.resourceType) {
+      count += player.corporationCard.resourceCount || 0;
+    }
+    return count;
+  }
+
+  // Returns a map of resources and resource types to track, and the current count
+  // of each of these |player| has. Used with |rewardForPlacement|.
+  //
+  // This feature is part of Ecological Survey and Geological Survey.
+  //
+  public beforeTilePlacement(player: Player): Map<Resources | ResourceType, number> {
+    var map: Map<Resources | ResourceType, number> = new Map();
+    if (player.playedCards.find(c => c.name === CardName.ECOLOGICAL_SURVEY)) {
+      map.set(Resources.PLANTS, player.getResource(Resources.PLANTS));
+      map.set(ResourceType.ANIMAL, AresHandler.countResources(player, ResourceType.ANIMAL));
+      map.set(ResourceType.MICROBE, AresHandler.countResources(player, ResourceType.MICROBE));
+    }
+    if (player.playedCards.find(c => c.name === CardName.GEOLOGICAL_SURVEY)) {
+      map.set(Resources.STEEL, player.getResource(Resources.STEEL));
+      map.set(Resources.TITANIUM, player.getResource(Resources.TITANIUM));
+      map.set(Resources.HEAT, player.getResource(Resources.HEAT));
+    }
+    return map;
+  }
+
+  // Used with Ecological Survey and Geological Survey
+  public afterTilePlacement(game: Game, player: Player, startingResources?: Map<Resources | ResourceType, number>): void {
+    if (!startingResources) {
+      return;
+    }
+
+    function giveBonus(start: number, current: number | undefined):boolean {
+      return (current && current > start) ? true : false;
+    }
+
+    // Although this bit of code goes through all six resource types, the expected input map will only contain
+    // the three (or six) resources it is tracking.
+    [Resources.PLANTS, Resources.STEEL, Resources.TITANIUM, Resources.HEAT].forEach(
+      resource => {
+      if (giveBonus(player.getResource(resource), startingResources.get(resource))) {
+        player.setResource(resource, 1);
+      }}
+    );
+    [ResourceType.MICROBE, ResourceType.ANIMAL].forEach(
+      resourceType => {
+        if (giveBonus(AresHandler.countResources(player, resourceType), startingResources.get(resourceType))) {
+        game.addSelectResourceCardInterrupt(player, 1, resourceType, player.getResourceCards(resourceType));      
+      }
+    });
   }
 }

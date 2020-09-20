@@ -7720,7 +7720,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
     </div>
 `],
-// TODO(kberg): special tile.
+// TODO(kberg): special tile
 [CardName.OCEAN_SANCTUARY,`
     <div class="title background-color-active ">Ocean Sanctuary</div>
     <div class="price ">9</div>
@@ -7739,7 +7739,6 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
 // TODO(kberg): special tile.
-// TODO(kberg): add visualization of production bonuses.
 [CardName.SOLAR_FARM,`
     <div class="title background-color-automated ">Solar Farm</div>
     <div class="price ">12</div>

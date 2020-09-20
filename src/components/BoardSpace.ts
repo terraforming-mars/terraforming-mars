@@ -17,11 +17,35 @@ let tileTypeToCssClass = new Map<TileType, string>([
     [TileType.RESTRICTED_AREA, "restricted_area"],
     [TileType.DEIMOS_DOWN, "deimos_down"],
     [TileType.GREAT_DAM, "great_dam"],
-    [TileType.MAGNETIC_FIELD_GENERATORS, "magnetic_field_generators"]
+    [TileType.MAGNETIC_FIELD_GENERATORS, "magnetic_field_generators"],
+    [TileType.BIOFERTILIZIER_FACILITY, "biofertilizer_facility"],
+    [TileType.METALLIC_ASTEROID, "metallic_asteroid"],
+    [TileType.SOLAR_FARM, "solar_farm"],
+    [TileType.OCEAN_CITY, "ocean_city"],
+    [TileType.OCEAN_FARM, "ocean_farm"],
+    [TileType.OCEAN_SANCTUARY, "ocean-sanctuary"],
+    [TileType.DUST_STORM_MILD, "dust_storm_mild"],
+    [TileType.DUST_STORM_SEVERE, "dust_storm_severe"],
+    [TileType.EROSION_MILD, "erosion_mild"],
+    [TileType.EROSION_SEVERE, "erosion_severe"],
+]);
+
+let tileTypeToCssClassAresOverride = new Map<TileType, string>([
+    [TileType.COMMERCIAL_DISTRICT, "commercial_district_ares"],
+    [TileType.ECOLOGICAL_ZONE, "ecological_zone_ares"],
+    [TileType.INDUSTRIAL_CENTER, "industrial_center_ares"],
+    [TileType.LAVA_FLOWS, "lava_flows_ares"],
+    [TileType.MINING_AREA, "mining_area_ares"],
+    [TileType.MINING_RIGHTS, "mining_rights_ares"],
+    [TileType.CAPITAL, "capital_ares"],
+    [TileType.MOHOLE_AREA, "mohole_area_ares"],
+    [TileType.NATURAL_PRESERVE, "natural_preserve_ares"],
+    [TileType.NUCLEAR_ZONE, "nuclear_zone_ares"],
+    [TileType.RESTRICTED_AREA, "restricted_area_ares"],
 ]);
 
 export const BoardSpace = Vue.component("board-space", {
-    props: ["space", "text", "is_selectable"],
+    props: ["space", "text", "is_selectable", "aresExtension"],
     data: function () {
         return {}
     },
@@ -71,8 +95,9 @@ export const BoardSpace = Vue.component("board-space", {
             if (this.is_selectable) {
                 css += " board-space-selectable"
             }
-            if (this.space.tileType !== undefined) {
-                switch (this.space.tileType) {
+            var tileType = this.space.tileType;
+            if (tileType !== undefined) {
+                switch (tileType) {
                     case TileType.OCEAN:
                         css += " board-space-tile--ocean";
                         break;
@@ -83,7 +108,12 @@ export const BoardSpace = Vue.component("board-space", {
                         css += " board-space-tile--greenery";
                         break;
                     default:
-                        css += " board-space-tile--" + tileTypeToCssClass.get(this.space.tileType);
+
+                        let cssClass = tileTypeToCssClass.get(tileType);
+                        if (this.aresExtension && tileTypeToCssClassAresOverride.has(tileType)) {
+                            cssClass = tileTypeToCssClassAresOverride.get(tileType)
+                        }
+                        css += " board-space-tile--" + cssClass
                 }
             } else {
                 if (this.space.spaceType === "ocean") {

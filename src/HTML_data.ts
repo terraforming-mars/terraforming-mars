@@ -7542,7 +7542,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="plant production "></div><div class="plant production "></div>
         </div>
         <div class="microbe resource "></div><div class="microbe resource "></div>
-        <div class="special-tile tile biofertilizer-facility ">&#x2302;&#xFE0E;</div>
+        <div class="special-tile tile biofertilizer-facility ares-bonus ">&#x2302;&#xFE0E;</div>
         <div class="description " style="text-align:left;">
             (Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to any card. Place this tile which grants an <b>adjacency bonus</b> of 1 plant and 1 microbe.)<br>
         </div>
@@ -7635,7 +7635,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="tile temperature-tile"></div>
         <div class="titanium resource "></div>
         -4<div class="resource plant red-outline"></div>
-        <div class="special-tile tile metallic-asteroid ">&#x2302;&#xFE0E;</div>
+        <div class="special-tile tile metallic-asteroid ares-bonus ">&#x2302;&#xFE0E;</div>
         <div class="description " style="text-align:left;">
             (Raise temperature 1 step and gain 1 titanium. Remove up to 4 plants from any player. Place this tile which grants an <b>adjacency bonus</b> of 1 titanium.)<br>
         </div>
@@ -7649,7 +7649,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="card-number">A09</div>
     <div class="content ">
         <div class="requirements ">6 Oceans</div>
-        <div class="special-tile tile ocean-city ">&#x2302;&#xFE0E;</div>
+        <div class="special-tile tile ocean-city  ares-bonus ">&#x2302;&#xFE0E;</div>
         <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div><br>
         <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">3</div>
         <div class="description " style="text-align:left;">
@@ -7667,7 +7667,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="card-number">A10</div>
     <div class="content ">
         <div class="requirements ">4 Oceans</div>
-        <div class="special-tile tile ocean-farm ">&#x2302;&#xFE0E;</div>
+        <div class="special-tile tile ocean-farm ares-bonus ">&#x2302;&#xFE0E;</div>
         <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="heat production "></div>
         <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="plant production "></div>
         <div class="description " style="text-align:left;">
@@ -7690,7 +7690,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div><div class="energy production "></div><br>
             <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">5</div>
         </div>
-        <div class="special-tile tile capitol ">&#x2302;&#xFE0E;</div>
+        <div class="special-tile tile capitol ares-bonus ">&#x2302;&#xFE0E;</div>
         <div class="description " style="text-align:left;">
             (Requires 4 ocean tiles. Place this tile which grants an <b>adjacency bonus</b> of 2M€. Decrease your Energy production 2 steps and increase your MC production 5 steps.<br>
             <div style="font-size:9px;line-height:12px;margin-top:10px; width: 140px;">
@@ -7714,7 +7714,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="description" style="margin-top:-5px">
       (Decrease your energy production 1 step and increase your MC production 4 steps.)
       </div>
-      <div class="tile special-tile">&#x20ac;</div>
+      <div class="tile special-tile ares-bonus">&#x20ac;</div>
       <div class="description" style="text-align:left; width: 140px;">
       (Place this tile which grants an <b>adjacency bonus</b> of 2M€. 1 VP PER ADJACENT CITY TILE.)
       </div>
@@ -7729,7 +7729,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="content ">
         <div class="points big">1/<div class="resource animal"></div></div>
         <div class="requirements ">5 Oceans</div>
-        <div class="special-tile tile ocean-city ">&#x2302;&#xFE0E;</div>
+        <div class="special-tile tile ocean-city ares-bonus ">&#x2302;&#xFE0E;</div>
         <div class="resource animal "></div>
         <div class="description " style="text-align:left;">
             (Requires 5 ocean tiles. Place this tile on top of an existing ocean tile.
@@ -7747,7 +7747,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="tag tag2 tag-power "></div>
     <div class="card-number">A14</div>
     <div class="content ">
-        <div class="special-tile tile solar-farm ">&#x2302;&#xFE0E;</div>
+        <div class="special-tile tile solar-farm ares-bonus ">&#x2302;&#xFE0E;</div>
         <div class="description " style="text-align:left;">
             Place this tile which grants an <b>adjacency bonus</b> of 2 power. Increase your power production 1 step for each plant tag on the area where you place the tile.<br>
         </div>
@@ -7783,7 +7783,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="description ">
             (Action: Spend 7 MC to increase your steel production 1 step.)
         </div><br>
-        <div class="tile special-tile">&#x1f3ed;</div>*
+        <div class="tile special-tile ares-bonus">&#x1f3ed;</div>*
         <div class="description ">
             (Place this tile adjacent to a city tile. This tile grants an <b>adjacency bonus</b> of 1 steel.)
         </div>
@@ -7796,7 +7796,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="card-number">A17</div>
     <div class="content ">
         <div class="tile temperature-tile "></div><div class="tile temperature-tile "></div><br>
-        <div class="tile special-tile ">&#x1f30b;</div>*
+        <div class="tile special-tile ares-bonus ">&#x1f30b;</div>*
         <div class="description ">
           (Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. 
           This tile grants an <b>adjacency bonus</b> of 2 heat.)
@@ -7810,7 +7810,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="corporate-icon project-icon"></div>
     <div class="card-number">A18</div>
     <div class="content">
-      <div class="tile special-tile" style="font-size:40px;color: rgb(73,54,40);">&#x2692;</div>*<br>
+      <div class="tile special-tile ares-bonus" style="font-size:40px;color: rgb(73,54,40);">&#x2692;</div>*<br>
       <div class="production-box production-box-size3">
         <div class="steel production"></div> OR <div class="titanium production"></div>
       </div> *
@@ -7827,7 +7827,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="tag tag1 tag-building"></div>
     <div class="card-number">A19</div>
     <div class="content">
-      <div class="tile special-tile" style="font-size:40px;color: rgb(73,54,40);">&#x2692;</div>*<br>
+      <div class="tile special-tile ares-bonus" style="font-size:40px;color: rgb(73,54,40);">&#x2692;</div>*<br>
       <div class="production-box production-box-size3">
         <div class="steel production"></div> OR <div class="titanium production"></div>
       </div> *
@@ -7847,7 +7847,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="production-box production-box-size1a">
         4 <div class="heat production"></div>
       </div><br>
-        <div class="tile special-tile " style="font-size:40px;">&#x2668;</div>*
+        <div class="tile special-tile ares-bonus " style="font-size:40px;">&#x2668;</div>*
       <div class="description">
         (Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.
           The tile grants an <b>adjacency bonus</b> of 2 heat.)
@@ -7866,7 +7866,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="production-box">
         <div class="money production">1</div>
       </div>
-      <div class="tile special-tile" style="font-size:30px;margin-left:20px;">&#x2642;</div>*
+      <div class="tile special-tile ares-bonus" style="font-size:30px;margin-left:20px;">&#x2642;</div>*
       <div class="description">
         (Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. 
           The tile grants an <b>adjacency bonus</b> of  of 1M€. Increase your MC production 1 step.)
@@ -7880,7 +7880,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="card-number">A22</div>
     <div class="content">
       <div class="points points-big">-2</div>
-        <div class="tile special-tile" style="font-size:40px;">&#x2622;</div><br>
+        <div class="tile special-tile ares-cost" style="font-size:40px;">&#x2622;</div><br>
         <div class="tile temperature-tile"></div> <div class="tile temperature-tile"></div>
       <div class="description">
         (Raise the temperature two steps. Place this tile. Players must pay an additional 2M€
@@ -7899,7 +7899,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="description ">
             (Action: Spend 2 MC to draw a card.)
         </div><br>
-        <div class="tile special-tile" style="padding-top: 4px;
+        <div class="tile special-tile ares-bonus" style="padding-top: 4px;
         padding-bottom: 4px;
         padding-left: 6px;"><div class="restricted-area-tile"></div></div>
         <div class="description ">

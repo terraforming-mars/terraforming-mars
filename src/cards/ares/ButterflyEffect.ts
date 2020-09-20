@@ -5,6 +5,7 @@ import { CardType } from "../CardType";
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 
+// UNIMPLEMENTED
 export class ButterflyEffect implements IProjectCard {
     public cost: number = 8;
     public tags: Array<Tags> = [Tags.EVENT];

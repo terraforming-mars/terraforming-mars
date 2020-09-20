@@ -11,6 +11,7 @@ import { IResourceCard } from "../ICard";
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 
+// UNIMPLEMENTED
 export class OceanSanctuary implements IProjectCard, IResourceCard {
   public cost: number = 9;
   public resourceType: ResourceType = ResourceType.ANIMAL;

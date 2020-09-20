@@ -10,6 +10,7 @@ import { CardType } from "./../CardType";
 import { IProjectCard } from "./../IProjectCard";
 import { Tags } from "./../Tags";
 
+// UNIMPLEMENTED
 // TODO(kberg): Make ocean city act like a city.
 //   Player.getCitiesCount
 //   Game.getCitiesInPlayOnMars

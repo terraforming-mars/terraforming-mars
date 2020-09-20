@@ -5,6 +5,7 @@ import { CardType } from "../CardType";
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 
+// UNIMPLEMENTED
 export class DesperateMeasures implements IProjectCard {
     public cost: number = 1;
     public tags: Array<Tags> = [Tags.EVENT];

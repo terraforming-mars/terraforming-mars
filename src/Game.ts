@@ -1486,7 +1486,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
       }
 
+      this.aresHandler?.payAdjacencyCosts(this, player, space);
+
       // Part 3. Setup for bonuses
+
       var arcadianCommunityBonus = space.player === player && player.isCorporation(CorporationName.ARCADIAN_COMMUNITIES);
       var startingResources = this.aresHandler?.beforeTilePlacement(player);
 

@@ -87,17 +87,20 @@ export class AresHandler {
     }
   }
 
-  // TODO(kberg): find the right space for this, vincentneko@ made a good suggestion.
-  public adjacentCost(game: Game, space: ISpace) {
-    let extraCost: number = 0;
-    game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-      if (adjacentSpace?.adjacency?.cost) {
-        extraCost += adjacentSpace.adjacency.cost || 0;
-      }
-    });
-    if (extraCost > 0) {
-      // TODO(kberg): implement.
-      throw new Error("Implement making opponent pay " + extraCost + " MC");
+  public adjacencyCosts(game: Game, space: ISpace): number {
+    return game.board.getAdjacentSpaces(space)
+        .map((adjacentSpace) => adjacentSpace?.adjacency?.cost || 0)
+        .reduce((prior, current) => prior + current, 0);
+  }
+
+  public payAdjacencyCosts(game: Game, player: Player, space: ISpace) {
+    const cost = this.adjacencyCosts(game, space);
+
+    if (cost > player.getResource(Resources.MEGACREDITS)) {
+      throw new Error("Placing here costs " + cost + " M€")
+    }
+    if (cost > 0) {
+      game.addSelectHowToPayInterrupt(player, cost, false, false, "Select how to pay additional placement costs.");
     }
   }
 

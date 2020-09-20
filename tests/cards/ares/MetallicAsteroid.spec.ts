@@ -22,7 +22,7 @@ describe("MetallicAsteroid", function () {
 
         expect(player.titanium).eq(0);
         expect(game.getTemperature()).eq(-30);
-        expect(game.interrupts).is.length(1);
+        expect(game.interrupts).is.length(0);
 
         const action = card.play(player, game);
         expect(player.titanium).eq(1);

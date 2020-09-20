@@ -25,5 +25,7 @@ export enum TileType {
     SOLAR_FARM,
     OCEAN_CITY,
     OCEAN_FARM,
-    OCEAN_SANCTUARY
+    OCEAN_SANCTUARY,
+    DUST_STORM,
+    EROSION
 }

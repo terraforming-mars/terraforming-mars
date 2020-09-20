@@ -43,7 +43,7 @@ export class AresHandler {
         adjacentSpace: ISpace,
         player: Player
     ) {
-        if (adjacentSpace.adjacency?.bonus) {
+        if (adjacentSpace.adjacency?.bonus && adjacentSpace.adjacency.bonus.length > 0) {
             if (!adjacentSpace.player) {
                 throw new Error(
                     "A tile with an adjacency bonus must have an owner " +

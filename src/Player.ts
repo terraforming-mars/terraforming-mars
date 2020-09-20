@@ -539,6 +539,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return count;
     }
 
+    public getCardsByCardType(cardType: CardType) {
+      return this.playedCards.filter((card) => card.cardType === cardType);
+    }
+
     public getAllTags(): Array<ITagCount> {
       let tags: Array<ITagCount> = [];
       tags.push({tag : Tags.CITY, count : this.getTagCount(Tags.CITY, false, false)} as ITagCount);

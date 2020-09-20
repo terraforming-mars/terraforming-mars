@@ -444,4 +444,5 @@ export enum CardName {
     
     // Community corps
     AGRICOLA_INC = "Agricola Inc",
+    PROJECT_WORKSHOP = "Project Workshop",
 }

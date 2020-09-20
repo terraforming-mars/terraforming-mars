@@ -30,9 +30,9 @@ export class AgricolaInc implements CorporationCard {
 
             if (tagData === undefined) {
                 points -= 2;
-            } else if (tagData.count === 3) {
+            } else if (tagData.count === 3 || tagData.count === 4) {
                 points += 1;
-            } else if (tagData.count > 3) {
+            } else if (tagData.count > 4) {
                 points += 2;
             }
         });

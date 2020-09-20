@@ -20,6 +20,9 @@ export const PlayerInfo = Vue.component("player-info", {
         getPlayerStatusAndResClasses: function (): string {
             let classes = ["player-status-and-res"];
             return classes.join(" ");
+        },
+        getIsActivePlayer: function (): boolean {
+            return this.player.id === this.activePlayer.id;
         }
     },
     template: ` 
@@ -28,7 +31,7 @@ export const PlayerInfo = Vue.component("player-info", {
                 <player-status :player="player" :activePlayer="activePlayer" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel"/>
                 <player-resources :player="player" v-trim-whitespace />
             </div>
-            <player-tags :player="player" v-trim-whitespace /> 
+            <player-tags :player="player" v-trim-whitespace :isActivePlayer="getIsActivePlayer()"/> 
         </div>
     `,
 });

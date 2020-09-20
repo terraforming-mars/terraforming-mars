@@ -144,7 +144,7 @@ export class AresHandler {
     }
 
     function giveBonus(start: number | undefined, current: number):boolean {
-      return (current > (start || 0)) ? true : false;
+      return (start && current > start) ? true : false;
     }
 
     // Although this bit of code goes through all six resource types, the expected input map will only contain
@@ -168,8 +168,8 @@ export class AresHandler {
     [ResourceType.MICROBE, ResourceType.ANIMAL].forEach(
       resourceType => {
         if (giveBonus(startingResources.get(resourceType), AresHandler.countResources(player, resourceType))) {
-        game.addSelectResourceCardInterrupt(player, 1, resourceType, player.getResourceCards(resourceType));      
-      }
+          game.addSelectResourceCardInterrupt(player, 1, resourceType, player.getResourceCards(resourceType));      
+        }
     });
   }
 }

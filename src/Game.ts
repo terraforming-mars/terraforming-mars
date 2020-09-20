@@ -36,7 +36,7 @@ import {ColonyDealer, getColonyByName} from "./colonies/ColonyDealer";
 import {PlayerInterrupt} from "./interrupts/PlayerInterrupt";
 import {SelectOcean} from "./interrupts/SelectOcean";
 import {SelectResourceCard} from "./interrupts/SelectResourceCard";
-import {SelectColony} from "./interrupts/SelectColony";
+import {SelectColonyInterrupt} from "./interrupts/SelectColonyInterrupt";
 import {SelectRemoveColony} from "./interrupts/SelectRemoveColony";
 import {SelectResourceProductionDecrease} from "./interrupts/SelectResourceProductionDecrease";
 import {ICard} from "./cards/ICard";
@@ -60,7 +60,6 @@ import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
 import { AresHandler } from "./ares/AresHandler";
 import { getRandomMilestonesAndAwards } from "./MASynergy";
-
 
 export interface Score {
   corporation: String;
@@ -537,7 +536,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         && (colony.colonies.indexOf(player.id) === -1 || allowDuplicate)
         && colony.isActive);
       if (openColonies.length >0 ) {
-        this.addInterrupt(new SelectColony(player, this, openColonies, title));
+        this.addInterrupt(new SelectColonyInterrupt(player, this, openColonies, title));
       }
     }
 
@@ -1456,12 +1455,25 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public addTile(
         player: Player, spaceType: SpaceType,
         space: ISpace, tile: ITile, isWorldGov: boolean = false): void {
+
+      // Part 1, basic validation checks.
+
       if (space.tile !== undefined) {
         throw new Error("Selected space is occupied");
       }
 
-      // Turmoil Mars First ruling policy
-      PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType, isWorldGov);
+      // Land claim a player can claim land for themselves
+      if (space.player !== undefined && space.player !== player) {
+        throw new Error("This space is land claimed by " + space.player.name);
+      }
+
+      if (space.spaceType !== spaceType) {
+        throw new Error(
+            `Select a valid location ${space.spaceType} is not ${spaceType}`
+        );
+      }
+
+      // Part 2. Collect additional fees.
 
       // Hellas special requirements ocean tile
       if (space.id === SpaceName.HELLAS_OCEAN_TILE
@@ -1474,23 +1486,20 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
       }
 
-      // Land claim a player can claim land for themselves
-      if (space.player !== undefined && space.player !== player) {
-        throw new Error("This space is land claimed by " + space.player.name);
-      }
-      // Arcadian Communities
-      if (space.player !== undefined && space.player === player && player.isCorporation(CorporationName.ARCADIAN_COMMUNITIES)) {
-        player.megaCredits += 3;
-      }
-      if (space.spaceType !== spaceType) {
-        throw new Error(
-            `Select a valid location ${space.spaceType} is not ${spaceType}`
-        );
-      }
+      // Part 3. Setup for bonuses
+      var arcadianCommunityBonus = space.player === player && player.isCorporation(CorporationName.ARCADIAN_COMMUNITIES);
 
-      // From this point forward the tile can be placed.
-      space.player = player;
+      // Part 4. Place the tile
+
+      if (tile.tileType === TileType.OCEAN) {
+        space.player = undefined;
+      } else {
+        space.player = player;
+      }
       space.tile = tile;
+      LogHelper.logTilePlacement(this, player, space, tile.tileType);
+
+      // Part 5. Collect the bonuses
 
       if (!isWorldGov) {
         space.bonus.forEach((spaceBonus) => {
@@ -1505,21 +1514,29 @@ export class Game implements ILoadable<SerializedGame, Game> {
             this.aresHandler?.handleAdjacentPlacement(this, adjacentSpace, player);
           }
         });
+
+        PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType, isWorldGov);
+
+        if (arcadianCommunityBonus) {
+          player.megaCredits += 3;
+        }
       } else {
         space.player = undefined;
       }
 
-
-
-      this.tilePlaced(space);
-      LogHelper.logTilePlacement(this, player, space, tile.tileType);
-
-      if (tile.tileType === TileType.OCEAN) {
-        space.player = undefined;
-      }
+      this.players.forEach((p) => {
+        if (p.corporationCard !== undefined &&
+            p.corporationCard.onTilePlaced !== undefined) {
+          p.corporationCard.onTilePlaced(p, space, this);
+        }
+        p.playedCards.forEach((playedCard) => {
+          if (playedCard.onTilePlaced !== undefined) {
+            playedCard.onTilePlaced(p, space, this);
+          }
+        });
+      });
     }
 
-    // TODO(kberg): move to SpaceBonus?
     public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {
       if (spaceBonus === SpaceBonus.DRAW_CARD) {
         player.cardsInHand.push(this.dealer.dealCard());
@@ -1533,19 +1550,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         player.heat++;
       }
     }
-    private tilePlaced(space: ISpace) {
-      this.players.forEach((p) => {
-        if (p.corporationCard !== undefined &&
-            p.corporationCard.onTilePlaced !== undefined) {
-          p.corporationCard.onTilePlaced(p, space, this);
-        }
-        p.playedCards.forEach((playedCard) => {
-          if (playedCard.onTilePlaced !== undefined) {
-            playedCard.onTilePlaced(p, space, this);
-          }
-        });
-      });
-    }
+
     public addGreenery(
         player: Player, spaceId: string,
         spaceType: SpaceType = SpaceType.LAND,

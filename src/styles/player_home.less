@@ -404,10 +404,11 @@
         border: 2px solid #fff;
     }
 }
-.awards-padding {
-    padding: 3px 42px 3px 42px !important;
-}
 
+.milestones_cont, .awards_cont {
+    display: inline-block;
+    vertical-align: top;
+}
 
 .milestones,
 .awards,
@@ -417,32 +418,30 @@
         letter-spacing: 1px;
         font-size: 16px;
         font-weight: bold;
-        color: black;
+        color: #ffcc64;
         text-transform: uppercase;
-        background: linear-gradient(to right, #c97e23, #e28c22, #c97e23);
-        padding: 5px 19px 5px 19px;
-        border-radius: 10px;
+        background: #303030;
+        padding: 1px 5px 1px 10px;
+        border-radius: 2px;
         text-decoration: none;
+        width: 140px;
+        margin-left: 5px;
         cursor: pointer;
         display: inline-block;
         text-align: center;
-        border-top: 2px solid #dddddd;
-        border-left: 2px solid #dddddd;
-        border-bottom: 2px solid #898989;
-        border-right: 2px solid #898989;
     }
 
     .ma-block {
         display: inline-block;
-        width: 144px;
-        background: linear-gradient(115deg, #ccc, #999, #bbb, #aaa, #bbb, #aaa, #bbb);
-        border-top: 2px solid #dddddd;
-        border-left: 2px solid #dddddd;
-        border-bottom: 2px solid #898989;
-        border-right: 2px solid #898989;
+        width: 140px;
         border-radius: 0 0 5px 5px;
         border-radius: 10px;
         margin: 5px;
+        vertical-align: top;
+
+        .award-block {
+            border-radius: 10px !important;
+        }
 
         .ma-score {
             width: 25px;
@@ -472,14 +471,13 @@
         .ma-name {
             display: inline-block;
             width: 140px;
-            height: 86px;
+            height: 83px;
             color: transparent;
             padding-top: 62px;
             font-size: 13px;
             text-transform: uppercase;
             text-align: center;
             font-weight: bold;
-            background-size: 147px;
             background-size: 200px;
             background-position: -30px -5px;
             border-radius: 10px 10px 0 0;
@@ -487,10 +485,6 @@
 
         .ma-name--terraformer {
             background-image: url(assets/ma/terraformer.png);
-        }
-
-        .ma-name--terraformer26 {
-            background-image: url(assets/ma/terraformer26.png);
         }
 
         .ma-name--mayor {
@@ -619,13 +613,14 @@
 
         .ma-description {
             display: inline-block;
-            width: 156px;
+            width: 140px;
             height: 70px;
             color: #ddd;
-            padding: 5px 2px 0px 2px;
+            padding: 0px 2px 0px 2px;
             font-size: 14px;
             line-height: 15px;
             text-align: center;
+            
         }
 
         .ma-description-hidden {
@@ -644,7 +639,7 @@
 
 .with-turmoil {
     .ma-name--terraformer {
-        background-position: 0px -1752px !important;
+        background-image: url(assets/ma/terraformer26.png) !important;
     }
 }
 
@@ -652,18 +647,35 @@
     margin: 0 0 0 5px;
 }
 
-.funded-award-inline,
 .claimed-milestone-inline {
     white-space: nowrap;
     color: #000;
     text-transform: uppercase;
-    background: #c2c2c2;
+    background: linear-gradient(to right, #e28c22, #ffcc64, #ffcc64, #e28c22);
     padding: 1px 33px 1px 10px;
+    width: 140px;
+    text-align: center;
     font-size: 15px;
     line-height: 23px;
     font-weight: bold;
-    margin: 0 0 0 10px;
+    margin: 0 5px 0 5px;
+    border-radius: 2px;
+    display: inline-block;
+}
+.funded-award-inline {
+    white-space: nowrap;
+    color: #000;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #e28c22, #ffcc64, #ffcc64, #e28c22);
+    padding: 1px 33px 1px 10px;
+    width: 140px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 23px;
+    font-weight: bold;
+    margin: 0 5px 0 5px;
     border-radius: 20px;
+    font-style: italic;
     display: inline-block;
 }
 

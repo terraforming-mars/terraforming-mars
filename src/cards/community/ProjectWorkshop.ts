@@ -26,9 +26,8 @@ export class ProjectWorkshop implements CorporationCard {
     }
 
     public initialAction(player: Player, game: Game) {
-        player.cardsInHand.push(game.drawCardsByType(CardType.ACTIVE, 1)[0]);
-        
-        const drawnCard = game.getCardsInHandByType(player, CardType.ACTIVE).slice(-1)[0];
+        const drawnCard = game.drawCardsByType(CardType.ACTIVE, 1)[0];
+        player.cardsInHand.push(drawnCard);
         this.logCardDraw(game, player, drawnCard);
             
         return undefined;

@@ -207,7 +207,8 @@ export abstract class Board {
 
     public getAvailableSpacesOnLand(player?: Player): Array<ISpace> {
         let landSpaces = this.getSpaces(SpaceType.LAND, player).filter(
-            (space) => space.tile === undefined && (space.player === undefined || space.player === player)
+            // Players may place over hazards, it's just more expensive. Players may not place on spaces reserved for other players.
+            (space) => (space.tile === undefined || space.tile.hazard === true) && (space.player === undefined || space.player === player)
         );
 
         return landSpaces;

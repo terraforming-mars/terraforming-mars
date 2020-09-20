@@ -4,7 +4,6 @@ import { SpaceType } from "./SpaceType";
 import { SpaceName } from "./SpaceName";
 import { SpaceBonus } from "./SpaceBonus";
 import { TileType } from "./TileType";
-import { Color } from "./Color";
 
 export abstract class Space implements ISpace {
     constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
@@ -139,7 +138,7 @@ export abstract class Board {
         );
     }    
 
-    public getSpaces(spaceType: SpaceType, _player: Player): Array<ISpace> {
+    public getSpaces(spaceType: SpaceType, _player?: Player): Array<ISpace> {
         return this.spaces.filter((space) => space.spaceType === spaceType);
     }
 
@@ -158,8 +157,7 @@ export abstract class Board {
         // start from the other end of the map.
         var counted = 0;
         var idx = 0;
-        var fakePlayer = new Player("fake", Color.NEUTRAL, false);
-        var spaces = this.getAvailableSpacesOnLand(fakePlayer);
+        var spaces = this.getAvailableSpacesOnLand(undefined);
         while (counted < distance) {
             var space = spaces[idx];
             if (!space.tile) {
@@ -207,7 +205,7 @@ export abstract class Board {
             );
     }
 
-    public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
+    public getAvailableSpacesOnLand(player?: Player): Array<ISpace> {
         let landSpaces = this.getSpaces(SpaceType.LAND, player).filter(
             (space) => space.tile === undefined && (space.player === undefined || space.player === player)
         );

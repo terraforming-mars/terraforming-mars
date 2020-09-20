@@ -125,7 +125,8 @@ export class AresHandler {
             throw new Error("Placing here costs " + cost + " M€");
         }
         if (cost > 0) {
-            game.addSelectHowToPayInterrupt(player, cost, false, false,"Select how to pay additional placement costs.");
+            // TODO(kberg): ask to pay or abort.
+            game.addSelectHowToPayInterrupt(player, cost, false, false, "Select how to pay additional placement costs.");
         }
     }
 

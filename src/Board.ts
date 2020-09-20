@@ -152,18 +152,18 @@ export abstract class Board {
 
     // TODO(kberg): replace direction with enum
     // TODO(kberg): Make sure the array really lays out like I think it does.
-    public getAvailableSpaceByOffset(distance: number, _direction: -1 | 1) {
+    public getAvailableSpaceByOffset(distance: number, direction: -1 | 1) {
         // If direction is 1, start from space 0. If direction is -1,
         // start from the other end of the map.
         var counted = 0;
-        var idx = 0;
         var spaces = this.getAvailableSpacesOnLand(undefined);
+        var idx = (direction === 1) ? 0 : spaces.length;
         while (counted < distance) {
             var space = spaces[idx];
-            if (!space.tile) {
+            if (!space?.tile) {
                 counted++;
             }
-            idx++;
+            idx += direction;
         }
         return this.spaces[idx];
     }

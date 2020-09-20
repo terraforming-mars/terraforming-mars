@@ -16,7 +16,7 @@ export class SelectColonyInterrupt implements PlayerInterrupt {
         public tile: string = "Select where to build a colony"
     ){
         let coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
-        let buildColony = new SelectColony(game, tile, "Build", coloniesModel, (colonyName: ColonyName) => {
+        let buildColony = new SelectColony(tile, "Build", coloniesModel, (colonyName: ColonyName) => {
                 openColonies.forEach(colony => {
                   if (colony.name === colonyName) {
                     colony.onColonyPlaced(player, game);

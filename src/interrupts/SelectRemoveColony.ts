@@ -13,7 +13,7 @@ export class SelectRemoveColony implements PlayerInterrupt {
         public game: Game
     ){
         let coloniesModel: Array<ColonyModel> = game.getColoniesModel(game.colonies);
-        let removeColony = new SelectColony(game, "Select colony to remove", "Remove colony", coloniesModel, (colonyName: ColonyName) => {
+        let removeColony = new SelectColony("Select colony to remove", "Remove colony", coloniesModel, (colonyName: ColonyName) => {
             game.colonies.forEach(colony => {
               if (colony.name === colonyName) {
                 game.colonies.splice(game.colonies.indexOf(colony),1);

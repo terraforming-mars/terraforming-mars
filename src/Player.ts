@@ -1383,7 +1383,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     private buildColony(game: Game, openColonies: Array<IColony>): PlayerInput {
       let coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
-      let buildColony = new SelectColony(game, "Build colony (" + constants.BUILD_COLONY_COST + " MC)", "Build", coloniesModel, (colonyName: ColonyName) => {
+      let buildColony = new SelectColony("Build colony (" + constants.BUILD_COLONY_COST + " MC)", "Build", coloniesModel, (colonyName: ColonyName) => {
         openColonies.forEach(colony => {
           if (colony.name === colonyName) {
             game.addSelectHowToPayInterrupt(this, constants.BUILD_COLONY_COST, false, false, "Select how to pay for Colony project");
@@ -1535,7 +1535,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private tradeWithColony(openColonies: Array<IColony>, game: Game): PlayerInput {
       var opts: Array<OrOptions | SelectColony> = [];
       let coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
-      let selectColony = new SelectColony(game, "Select colony for trade", "trade", coloniesModel, (colonyName: ColonyName) => {
+      let selectColony = new SelectColony("Select colony for trade", "trade", coloniesModel, (colonyName: ColonyName) => {
         openColonies.forEach(colony => {
           if (colony.name === colonyName) {
             game.log(

@@ -60,6 +60,7 @@ import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
 import { AresHandler } from "./ares/AresHandler";
 import { getRandomMilestonesAndAwards } from "./MASynergy";
+import { HazardData } from "./ares/HazardData";
 
 export interface Score {
   corporation: String;
@@ -126,6 +127,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public someoneHasRemovedOtherPlayersPlants: boolean = false;
     public seed: number = Math.random();
     public gameOptions: GameOptions;
+    public hazardData?: HazardData;
 
 
     constructor(
@@ -199,6 +201,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
         gameOptions.randomMA = false;
         gameOptions.draftVariant = false;
         this.setupSolo();
+      }
+
+      if (gameOptions.aresExtension) {
+        this.hazardData = HazardData.initial();
+        AresHandler.setupHazards(this, players.length);
       }
 
       let corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
@@ -1300,6 +1307,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.oxygenLevel === 8 || (steps === 2 && this.oxygenLevel === 9)) {
         return this.increaseTemperature(player, 1, isWorldGov);
       }
+      if (this.gameOptions.aresExtension) {
+        AresHandler.onOxygenChange(this);
+      }
       return undefined;
     }
 
@@ -1386,7 +1396,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
               ) ||
               (steps === 3 && this.temperature === -16)
         ) {
-          player.setProduction(Resources.HEAT);;
+          player.setProduction(Resources.HEAT);
         }
       }
 
@@ -1399,6 +1409,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.addOceanInterrupt(player, "Select space for ocean from temperature increase", isWorldGov);
       }
 
+      if (this.gameOptions.aresExtension) {
+        AresHandler.onTemperatureChange(this);
+      }
       return undefined;
     }
 
@@ -1593,6 +1606,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }, isWorldGov);
       if (!isWorldGov) {
         player.increaseTerraformRating(this);
+      }
+      if (this.gameOptions.aresExtension) {
+        AresHandler.onOceanPlaced(this, isWorldGov ? undefined : player);
       }
     }
 

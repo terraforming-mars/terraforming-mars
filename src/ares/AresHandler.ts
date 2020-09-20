@@ -14,6 +14,7 @@ import { Resources } from "../Resources";
 import { ResourceType } from "../ResourceType";
 import { SpaceBonus } from "../SpaceBonus";
 import { AresSpaceBonus } from "./AresSpaceBonus";
+import { TileType } from "../TileType";
 
 export class AresHandler {
 
@@ -171,5 +172,65 @@ export class AresHandler {
           game.addSelectResourceCardInterrupt(player, 1, resourceType, player.getResourceCards(resourceType));      
         }
     });
+  }
+
+  public static setupHazards(game: Game, playerCount: number) {
+    // The number of dust storms depends on the player count.
+    // I made up that the solo player has 3 dust storms. The rules
+    // don't take solo into account.
+    var dustStorms = [3, 3, 3, 2, 1][playerCount - 1];
+
+    for (var idx = 0; idx < dustStorms; idx++) {
+      var card = game.dealer.dealCard();
+      var cost = card.cost;
+      var space = game.board.getAvailableSpaceByOffset(cost, 1);
+      space.player = undefined;
+      space.adjacency = { bonus: [], cost: 1 };
+      space.tile = { tileType: TileType.DUST_STORM_MILD };
+    }
+  }
+
+  private static makeSevere(game: Game, from: TileType, to: TileType) {
+    game.board.spaces
+    .filter(s => s.tile?.tileType === from)
+    .forEach(s => {
+      s.tile!.tileType = to;
+      s.adjacency!.cost = 2;
+    })
+  }
+  public static onTemperatureChange(game: Game) {
+    var constraint = game.hazardData!.severeErosionTemperature;
+    if (constraint.available && game.getTemperature() >= constraint.threshold) {
+      AresHandler.makeSevere(game, TileType.EROSION_MILD, TileType.EROSION_SEVERE);
+      constraint.available = false;
+    }
+  }
+
+  public static onOceanPlaced(game: Game, player?: Player) {
+    var constraint = game.hazardData!.erosionOceanCount;
+    if (constraint.available && game.board.getOceansOnBoard() >= constraint.threshold) {
+      // TODO(kberg): do it.
+      if (game.hazardData!.severeErosionTemperature === undefined) {
+        // TODO(kberg): place them severe side up.
+      }
+      constraint.available = false;
+    };
+
+    var constraint = game.hazardData!.removeDustStormsOceanCount;
+    if (constraint.available && game.board.getOceansOnBoard() >= constraint.threshold) {
+      // TODO(kberg): do it.
+      constraint.available = false;
+      if (player) {
+        player.increaseTerraformRating(game);
+      }
+    }
+  }
+
+  public static onOxygenChange(game: Game) {
+    var constraint = game.hazardData!.severeDustStormOxygen;
+    if (constraint.available && game.getOxygenLevel() >= constraint.threshold) {
+      AresHandler.makeSevere(game, TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE);
+      constraint.available = false;
+    }
   }
 }

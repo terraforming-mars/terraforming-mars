@@ -4,6 +4,7 @@ import { SpaceType } from "./SpaceType";
 import { SpaceName } from "./SpaceName";
 import { SpaceBonus } from "./SpaceBonus";
 import { TileType } from "./TileType";
+import { Color } from "./Color";
 
 export abstract class Space implements ISpace {
     constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
@@ -150,6 +151,24 @@ export abstract class Board {
         return this.spaces.filter((space) => space.tile === undefined);
     }
 
+    // TODO(kberg): replace direction with enum
+    // TODO(kberg): Make sure the array really lays out like I think it does.
+    public getAvailableSpaceByOffset(distance: number, _direction: -1 | 1) {
+        // If direction is 1, start from space 0. If direction is -1,
+        // start from the other end of the map.
+        var counted = 0;
+        var idx = 0;
+        var fakePlayer = new Player("fake", Color.NEUTRAL, false);
+        var spaces = this.getAvailableSpacesOnLand(fakePlayer);
+        while (counted < distance) {
+            var space = spaces[idx];
+            if (!space.tile) {
+                counted++;
+            }
+            idx++;
+        }
+        return this.spaces[idx];
+    }
     public getAvailableSpacesForCity(player: Player): Array<ISpace> {
         // A city cannot be adjacent to another city
         return this.getAvailableSpacesOnLand(player).filter(

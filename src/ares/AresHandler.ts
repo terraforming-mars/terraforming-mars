@@ -1,5 +1,4 @@
 // Game.ts-specific behavior for Ares
-import { assert } from "console";
 
 import { CardName } from "../CardName";
 import { ICard } from "../cards/ICard";
@@ -19,7 +18,6 @@ import { AresSpaceBonus } from "./AresSpaceBonus";
 export class AresHandler {
 
   public static isAresSpaceBonus(a: SpaceBonus | AresSpaceBonus) : a is AresSpaceBonus {
-    assert(Object.values(AresSpaceBonus).length === 4);
     switch(a) {
       case AresSpaceBonus.ANIMAL:
       case AresSpaceBonus.MEGACREDITS:
@@ -69,7 +67,7 @@ export class AresHandler {
         }
         game.log(
           LogMessageType.DEFAULT,
-          "{1} gains 1 {2} for placing next to {3}",
+          "${1} gains 1 ${2} for placing next to ${3}",
           new LogMessageData(LogMessageDataType.PLAYER, player.id),
           new LogMessageData(LogMessageDataType.STRING, bonus.toString()),
           new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""));
@@ -83,7 +81,7 @@ export class AresHandler {
     adjacentSpace.player.megaCredits += 1;
         game.log(
             LogMessageType.DEFAULT,
-            "{1} gains 1 M€ for a tile placed next to {2}",
+            "${1} gains 1 M€ for a tile placed next to ${2}",
             new LogMessageData(LogMessageDataType.PLAYER, adjacentSpace.player.id),
             new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""),);
     }

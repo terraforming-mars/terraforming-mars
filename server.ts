@@ -42,16 +42,14 @@ import {
     TurmoilModel,
 } from "./src/models/TurmoilModel";
 import { SelectDelegate } from "./src/inputs/SelectDelegate";
+import { SelectColony } from "./src/inputs/SelectColony";
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync("styles.css");
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
 
-function requestHandler(
-    req: http.IncomingMessage,
-    res: http.ServerResponse
-): void {
+function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
     if (req.url !== undefined) {
         if (req.method === "GET") {
             if (req.url.replace(/\?.*$/, "").startsWith("/games-overview")) {
@@ -124,6 +122,17 @@ function requestHandler(
         }
     } else {
         notFound(req, res);
+    }
+}
+
+function requestHandler(
+    req: http.IncomingMessage,
+    res: http.ServerResponse
+): void {
+    try {
+        processRequest(req, res);
+    } catch (error) {
+        internalServerError(res, error);
     }
 }
 
@@ -258,12 +267,10 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
             );
             res.setHeader("Content-Type", "application/json");
             res.write(getGame(gameToRebuild));
-        } catch (err) {
-            console.warn("error loading game", err);
-            res.writeHead(500);
-            res.write("Unable to load game");
+            res.end();
+        } catch (error) {
+            internalServerError(res, error);
         }
-        res.end();
     });
 }
 
@@ -454,12 +461,10 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
             });
             res.setHeader("Content-Type", "application/json");
             res.write(getGame(game));
-        } catch (err) {
-            console.warn("error creating game", err);
-            res.writeHead(500);
-            res.write("Unable to create game");
+            res.end();
+        } catch (error) {
+            internalServerError(res, error);
         }
-        res.end();
     });
 }
 
@@ -650,6 +655,7 @@ function getWaitingFor(
         max: undefined,
         microbes: undefined,
         floaters: undefined,
+        coloniesModel: undefined
     };
     switch (waitingFor.inputType) {
         case PlayerInputTypes.AND_OPTIONS:
@@ -683,6 +689,9 @@ function getWaitingFor(
                 ICard
             >).minCardsToSelect;
             break;
+        case PlayerInputTypes.SELECT_COLONY:
+            result.coloniesModel = (waitingFor as SelectColony).coloniesModel;
+            break;            
         case PlayerInputTypes.SELECT_HOW_TO_PAY:
             result.amount = (waitingFor as SelectHowToPay).amount;
             result.canUseSteel = (waitingFor as SelectHowToPay).canUseSteel;
@@ -953,6 +962,13 @@ function getGame(game: Game): string {
         players: game.getPlayers(),
     };
     return JSON.stringify(output);
+}
+
+function internalServerError(res: http.ServerResponse, err: unknown): void {
+    console.warn("internal server error", err);
+    res.writeHead(500);
+    res.write("Internal server error " + err);
+    res.end();
 }
 
 function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {

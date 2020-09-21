@@ -36,7 +36,7 @@ import {ColonyDealer, getColonyByName} from "./colonies/ColonyDealer";
 import {PlayerInterrupt} from "./interrupts/PlayerInterrupt";
 import {SelectOcean} from "./interrupts/SelectOcean";
 import { SelectResourceCard } from "./inputs/SelectResourceCard";
-import {SelectColony} from "./interrupts/SelectColony";
+import {SelectColonyInterrupt} from "./interrupts/SelectColonyInterrupt";
 import {SelectRemoveColony} from "./interrupts/SelectRemoveColony";
 import {SelectResourceProductionDecrease} from "./interrupts/SelectResourceProductionDecrease";
 import {ICard} from "./cards/ICard";
@@ -59,6 +59,7 @@ import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
 import { getRandomMilestonesAndAwards } from "./MASynergy";
+import { ColonyModel } from "./models/ColonyModel";
 
 
 export interface Score {
@@ -506,7 +507,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         && (colony.colonies.indexOf(player.id) === -1 || allowDuplicate)
         && colony.isActive);
       if (openColonies.length >0 ) {
-        this.addInterrupt(new SelectColony(player, this, openColonies, title));
+        this.addInterrupt(new SelectColonyInterrupt(player, this, openColonies, title));
       }
     }
 
@@ -601,6 +602,23 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public addInterrupt(interrupt: PlayerInterrupt): void {
         this.interrupts.push(interrupt);
+    }
+
+    public getColoniesModel(colonies: Array<IColony>) : Array<ColonyModel> {
+      return colonies.map(
+        (colony): ColonyModel => ({
+            colonies: colony.colonies.map(
+                (playerId): Color => this.getPlayerById(playerId).color
+            ),
+            isActive: colony.isActive,
+            name: colony.name,
+            trackPosition: colony.trackPosition,
+            visitor:
+                colony.visitor === undefined
+                    ? undefined
+                    : this.getPlayerById(colony.visitor).color,
+        })
+    );
     }
 
     public milestoneClaimed(milestone: IMilestone): boolean {

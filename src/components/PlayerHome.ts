@@ -4,18 +4,14 @@ import { Board } from "./Board";
 import { Card } from "./Card";
 import { Milestone } from "./Milestone";
 import { Award } from "./Award";
-import { OtherPlayer } from "./OtherPlayer";
 import { PlayersOverview } from "./overview/PlayersOverview";
-import { PlayerResources } from "./overview/PlayerResources";
 import { WaitingFor } from "./WaitingFor";
 import { Preferences } from "./Preferences";
 import { PlayerModel } from "../models/PlayerModel";
 import { Colony } from "./Colony";
 import { LogPanel } from "./LogPanel";
 import { PlayerMixin } from "./PlayerMixin";
-import { TagCount } from "./TagCount";
 import { Turmoil } from "./Turmoil";
-import { TagOverview } from "./TagOverview";
 import { playerBgColorClass } from "../utils/utils";
 
 const dialogPolyfill = require("dialog-polyfill");
@@ -29,17 +25,13 @@ export const PlayerHome = Vue.component("player-home", {
     components: {
         "board": Board,
         "card": Card,
-        "other-player": OtherPlayer,
-        "player-resources": PlayerResources,
         "players-overview": PlayersOverview,
         "waiting-for": WaitingFor,
         "milestone": Milestone,
         "award": Award,
-        "tags": TagOverview,
         "preferences": Preferences,
         "colony": Colony,
         "log-panel": LogPanel,
-        "tag-count": TagCount,
         "turmoil": Turmoil,
     },
     mixins: [PlayerMixin],

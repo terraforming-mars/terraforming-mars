@@ -14,6 +14,7 @@ import { $t } from "../directives/i18n";
 import { SelectPartyPlayer } from "./SelectPartyPlayer";
 import { PreferencesManager } from "./PreferencesManager";
 import { playActivePlayerSound } from "../SoundManager";
+import { SelectColony } from "./SelectColony";
 
 var ui_update_timeout_id: number | undefined = undefined;
 
@@ -32,7 +33,8 @@ export const WaitingFor = Vue.component("waiting-for", {
         "select-how-to-pay-for-card": SelectHowToPayForCard,
         "select-player": SelectPlayer,
         "select-space": SelectSpace,
-        "select-party-player": SelectPartyPlayer
+        "select-party-player": SelectPartyPlayer,
+        "select-colony": SelectColony
     },
     methods: {
         waitForUpdate: function () {

@@ -1,3 +1,4 @@
+import { expect } from "chai";
 import { GeologicalSurvey } from "../../../src/cards/ares/GeologicalSurvey";
 import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
@@ -12,10 +13,30 @@ describe("GeologicalSurvey", function () {
     game = new Game("foobar", [player, player], player);
   });
 
-  // TODO(kberg): implement
-  it("Placeholder test", function () {
-    card.play(player, game);
-  });
+  // Most of the meaningful behavior tests are in AresHandler.
+  it("Can play", function () {
+    addGreenery(game, player);
+    expect(card.canPlay(player, game)).is.true;
 
+    addGreenery(game, player);
+    expect(card.canPlay(player, game)).is.true;
+
+    addGreenery(game, player);
+    expect(card.canPlay(player, game)).is.true;
+
+    addGreenery(game, player);
+    expect(card.canPlay(player, game)).is.true;
+
+    addGreenery(game, player);
+    expect(card.canPlay(player, game)).is.true;
+
+    addGreenery(game, player);
+    expect(card.canPlay(player, game)).is.false;
+});
+
+function addGreenery(game: Game, player: Player) {
+  var spaces = game.board.getAvailableSpacesForGreenery(player);
+  game.addGreenery(player, spaces[0].id);
+}
 
 });

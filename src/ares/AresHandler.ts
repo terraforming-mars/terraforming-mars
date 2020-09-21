@@ -69,7 +69,7 @@ export class AresHandler {
         }
         game.log(
           LogMessageType.DEFAULT,
-          "${1} gains 1 ${2} for placing next to ${3}",
+          "${0} gains 1 ${1} for placing next to ${2}",
           new LogMessageData(LogMessageDataType.PLAYER, player.id),
           new LogMessageData(LogMessageDataType.STRING, bonus.toString()),
           new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""));
@@ -83,7 +83,7 @@ export class AresHandler {
     adjacentSpace.player.megaCredits += 1;
         game.log(
             LogMessageType.DEFAULT,
-            "${1} gains 1 M€ for a tile placed next to ${2}",
+            "${0} gains 1 M€ for a tile placed next to ${1}",
             new LogMessageData(LogMessageDataType.PLAYER, adjacentSpace.player.id),
             new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""),);
     }

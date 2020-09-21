@@ -1513,9 +1513,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
             if (adjacentSpace.tile.tileType === TileType.OCEAN) {
               player.megaCredits += player.oceanBonus;
             }
-            if (this.gameOptions.aresExtension) {
-              AresHandler.handleAdjacentPlacement(this, adjacentSpace, player);
-            }
+          }
+          if (this.gameOptions.aresExtension) {
+            AresHandler.handleAdjacentPlacement(this, adjacentSpace, player);
           }
         });
 

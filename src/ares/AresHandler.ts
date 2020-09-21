@@ -38,64 +38,76 @@ export class AresHandler {
     }
 
     // |player| placed a tile next to |adjacentSpace|.
-    public static handleAdjacentPlacement(game: Game, adjacentSpace: ISpace, player: Player) {
-        if (adjacentSpace.adjacency?.bonus && adjacentSpace.adjacency.bonus.length > 0) {
-            if (!adjacentSpace.player) {
-                throw new Error("A tile with an adjacency bonus must have an owner " + adjacentSpace);
+    public static handleAdjacentPlacement (game: Game, adjacentSpace: ISpace, player: Player) {
+        if (adjacentSpace.adjacency?.bonus) {
+          if (!adjacentSpace.player) {
+            throw new Error("A tile with an adjacency bonus must have an owner " + adjacentSpace);
+          }
+    
+          var addResourceToCard = function(game: Game, player: Player, resourceType: ResourceType, resourceAsText: string) {
+            const availableCards = player.getResourceCards(resourceType);
+            if (availableCards.length === 0) {
+            } else if (availableCards.length === 1) {
+              player.addResourceTo(availableCards[0]);
+            } else if (availableCards.length > 1) {
+              game.addInterrupt({
+                player: player,
+                playerInput:
+                  new SelectCard(
+                    "Select a card to add an " + resourceAsText,
+                    "Add " + resourceAsText + "s",
+                    availableCards,
+                    (selected: ICard[]) => {
+                      player.addResourceTo(selected[0]);
+                      LogHelper.logAddResource(game, player, selected[0], 1);
+                      return undefined;
+                    })
+              });
             }
-
-            adjacentSpace.adjacency.bonus.forEach((bonus) => {
-                if (AresHandler.isAresSpaceBonus(bonus)) {
-                    // TODO(kberg): group and sum. Right now cards only have one animal to place, so this isn't
-                    // a problem.
-                    if (bonus === AresSpaceBonus.ANIMAL) {
-                        const availableAnimalCards = player.getResourceCards(
-                            ResourceType.ANIMAL
-                        );
-                        if (availableAnimalCards.length === 0) {
-                        } else if (availableAnimalCards.length === 1) {
-                            player.addResourceTo(availableAnimalCards[0]);
-                        } else if (availableAnimalCards.length > 1) {
-                            game.addInterrupt({
-                                player: player,
-                                playerInput: new SelectCard(
-                                    "Select a card to add an animal",
-                                    "Add animals",
-                                    availableAnimalCards,
-                                    (selected: ICard[]) => {
-                                        player.addResourceTo(selected[0]);
-                                        LogHelper.logAddResource(game, player,selected[0], 1);
-                                        return undefined;
-                                    }
-                                ),
-                            });
-                        }
-                    } else {
-                        player.megaCredits += 1;
-                    }
-                } else {
-                    game.grantSpaceBonus(player, bonus);
-                }
+          };
+        
+          adjacentSpace.adjacency.bonus.forEach(bonus => {
+            if (AresHandler.isAresSpaceBonus(bonus)) {
+              // TODO(kberg): group and sum. Right now cards only have one animal to place, so this isn't
+              // a problem.
+              switch(bonus) {
+                case AresSpaceBonus.ANIMAL:
+                  addResourceToCard(game, player, ResourceType.ANIMAL, "animal");
+                  break;
+    
+                case AresSpaceBonus.MEGACREDITS:
+                  player.megaCredits++;
+                  break;
+    
+                case AresSpaceBonus.POWER:
+                  player.energy++;
+                  break;
+    
+                case AresSpaceBonus.MICROBE:
+                  addResourceToCard(game, player, ResourceType.MICROBE, "microbe");
+                  break;
+              }
+            } else {
+              game.grantSpaceBonus(player, bonus);
+            }
+            game.log(
+              LogMessageType.DEFAULT,
+              "${0} gains 1 ${1} for placing next to ${2}",
+              new LogMessageData(LogMessageDataType.PLAYER, player.id),
+              new LogMessageData(LogMessageDataType.STRING, bonus.toString()),
+              new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""));
+            });
+    
+            if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
+              adjacentSpace.player.megaCredits++;
+              // TODO(kberg): log.
+            };
+            adjacentSpace.player.megaCredits++;
                 game.log(
                     LogMessageType.DEFAULT,
-                    "${0} gains 1 ${1} for placing next to ${2}",
-                    new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                    new LogMessageData(LogMessageDataType.STRING, bonus.toString()),
-                    new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""));
-            });
-
-            // TODO(kberg): test.
-            if (adjacentSpace.player.playedCards.find((card) => card.name === CardName.MARKETING_EXPERTS)) {
-                adjacentSpace.player.megaCredits += 1;
-                // TODO(kberg): log.
-            }
-            adjacentSpace.player.megaCredits += 1;
-            game.log(
-                LogMessageType.DEFAULT,
-                "${0} gains 1 M€ for a tile placed next to ${1}",
-                new LogMessageData(LogMessageDataType.PLAYER, adjacentSpace.player.id),
-                new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || "")
-            );
+                    "${0} gains 1 M€ for a tile placed next to ${1}",
+                    new LogMessageData(LogMessageDataType.PLAYER, adjacentSpace.player.id),
+                    new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""),);
         }
     }
 
@@ -170,7 +182,7 @@ export class AresHandler {
         }
 
         function giveBonus(start: number | undefined, current: number): boolean {
-            return start && current > start ? true : false;
+            return start !== undefined && current > start;
         }
 
         // Although this bit of code goes through all six resource types, the expected input map will only contain

@@ -218,7 +218,7 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
 
-                <details class="accordion">
+                <details class="accordion board-accordion" open>
                     <summary class="accordion-header">
                         <div class="is-action">
                             <i class="icon icon-arrow-right mr-1"></i>

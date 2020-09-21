@@ -96,16 +96,18 @@ export class AresHandler {
               new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""));
             });
     
-            if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
+            if (adjacentSpace.player) {
+              if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
+                adjacentSpace.player.megaCredits++;
+                // TODO(kberg): log.
+              };
               adjacentSpace.player.megaCredits++;
-              // TODO(kberg): log.
-            };
-            adjacentSpace.player.megaCredits++;
-                game.log(
-                    LogMessageType.DEFAULT,
-                    "${0} gains 1 M€ for a tile placed next to ${1}",
-                    new LogMessageData(LogMessageDataType.PLAYER, adjacentSpace.player.id),
-                    new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""),);
+                  game.log(
+                      LogMessageType.DEFAULT,
+                      "${0} gains 1 M€ for a tile placed next to ${1}",
+                      new LogMessageData(LogMessageDataType.PLAYER, adjacentSpace.player.id),
+                      new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""),);
+            }
         }
     }
 
@@ -159,18 +161,18 @@ export class AresHandler {
     // This feature is part of Ecological Survey and Geological Survey.
     //
     public static beforeTilePlacement(player: Player): Map<Resources | ResourceType, number> {
-        var map: Map<Resources | ResourceType, number> = new Map();
-        if (player.playedCards.find((c) => c.name === CardName.ECOLOGICAL_SURVEY)) {
-            map.set(Resources.PLANTS, player.getResource(Resources.PLANTS));
-            map.set(ResourceType.ANIMAL, AresHandler.countResources(player, ResourceType.ANIMAL));
-            map.set(ResourceType.MICROBE, AresHandler.countResources(player, ResourceType.MICROBE));
-        }
-        if (player.playedCards.find((c) => c.name === CardName.GEOLOGICAL_SURVEY)) {
-            map.set(Resources.STEEL, player.getResource(Resources.STEEL));
-            map.set(Resources.TITANIUM, player.getResource(Resources.TITANIUM));
-            map.set(Resources.HEAT, player.getResource(Resources.HEAT));
-        }
-        return map;
+      var map: Map<Resources | ResourceType, number> = new Map();
+      if (player.playedCards.find((c) => c.name === CardName.ECOLOGICAL_SURVEY)) {
+          map.set(Resources.PLANTS, player.getResource(Resources.PLANTS));
+          map.set(ResourceType.ANIMAL, AresHandler.countResources(player, ResourceType.ANIMAL));
+          map.set(ResourceType.MICROBE, AresHandler.countResources(player, ResourceType.MICROBE));
+      }
+      if (player.playedCards.find((c) => c.name === CardName.GEOLOGICAL_SURVEY)) {
+          map.set(Resources.STEEL, player.getResource(Resources.STEEL));
+          map.set(Resources.TITANIUM, player.getResource(Resources.TITANIUM));
+          map.set(Resources.HEAT, player.getResource(Resources.HEAT));
+      }
+      return map;
     }
 
     // Used with Ecological  and Geological Survey

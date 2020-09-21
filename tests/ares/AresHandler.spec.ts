@@ -20,4 +20,12 @@ describe("AresHandler", function () {
         expect(AresHandler.isAresSpaceBonus(AresSpaceBonus.MICROBE)).is.true;
         expect(AresHandler.isAresSpaceBonus(AresSpaceBonus.POWER)).is.true;
     });
+
+    // Tests:
+    // Get adjacency bonus
+    // Adjacency bonus grants player 1MC
+    // Pay adjacency costs
+    // pay hazard costs
+    // Place tile over hazard
+
 });

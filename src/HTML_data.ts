@@ -7618,9 +7618,10 @@ export const HTML_DATA: Map<string, string> =
     <div class="card-number">A07</div>
     <div class="content ">
         <div><div class="resource none "></div><div class="resource none "></div>: <span class=" money resource ">1</span><br/>
+        <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">3</div>
         </div><br/>
         <div class="description " style="text-align:left;">
-            (Effect: When an <b>adjacency bonus</b> is collected from a tile you own, you gain 1M€.)<br>
+            (Effect: When an <b>adjacency bonus</b> is collected from a tile you own, you gain 1M€. Increase your M€ production 1 step.)<br>
         </div>
     </div>
 `],

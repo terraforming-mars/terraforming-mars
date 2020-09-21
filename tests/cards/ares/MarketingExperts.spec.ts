@@ -1,20 +1,23 @@
-import { BioengineeringEnclosure } from "../../../src/cards/ares/BioengineeringEnclosure";
+import { MarketingExperts } from "../../../src/cards/ares/MarketingExperts";
 import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
+import { Resources } from "../../../src/Resources";
+import { expect } from "chai";
 
-describe("BioengineeringEnclosure", function () {
-  let card : BioengineeringEnclosure, player : Player, game : Game;
+describe("MarketingExperts", function () {
+  let card : MarketingExperts, player : Player, game : Game;
 
   beforeEach(function() {
-    card = new BioengineeringEnclosure();
+    card = new MarketingExperts();
     player = new Player("test", Color.BLUE, false);
     game = new Game("foobar", [player, player], player);
   });
 
-  // TODO(kberg): implement
-  it("Placeholder test", function () {
+  it("Play", function () {
+    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
     card.play(player, game);
+    expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
   });
 
 });

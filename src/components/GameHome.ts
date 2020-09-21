@@ -1,10 +1,14 @@
-
 import Vue from "vue";
 
 export const GameHome = Vue.component("game-home", {
     props: ["game"],
     data: function () {
-        return {}
+        return {};
+    },
+    methods: {
+        getHref: function (type: string, id: number): string {
+            return `/${type}?id=${id}`;
+        },
     },
     template: `
         <div id="game-home">
@@ -12,12 +16,12 @@ export const GameHome = Vue.component("game-home", {
             <p v-i18n>Send players their links below. As game administrator pick your link to use.</p>
             <ul>
                 <li v-for="player in game.players">
-                        <span class="player_home_block nofloat">
-                            <span class="player_name" :class="'player_bg_color_'+ player.color"><a :href="'/player?id=' + player.id">{{player.name}}</a></span>
-                        </span>
+                    <span class="player_home_block nofloat">
+                        <span class="player_name" :class="'player_bg_color_'+ player.color"><a :href="getHref('player', player.id)">{{ player.name }}</a></span><span class="player-spectator"><a :href="getHref('spectate', player.id)">spectate</a></span>
+                    </span>
                 </li>
+            </span>
             </ul>
         </div>
-    `
+    `,
 });
-

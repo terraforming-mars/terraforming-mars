@@ -11,6 +11,7 @@ export const mainAppSettings = {
     "data": {
         screen: "empty",
         playerkey: 0,
+        spectating: false,
         componentsVisibility: {},
         game: {
             players: [],
@@ -63,8 +64,17 @@ export const mainAppSettings = {
                             );
                         }
                     } else {
-                        app.screen = "player-home";
-                        if (currentPathname !== "/player") {
+                        const isPlayerView = ["/player", "/spectate"].includes(
+                            currentPathname
+                        );
+                        if (isPlayerView) {
+                            app.screen = "player-home";
+                        }
+                        if (currentPathname === "/spectate") {
+                            app.spectating = true;
+                        }
+
+                        if (!isPlayerView) {
                             window.history.replaceState(
                                 xhr.response,
                                 "Teraforming Mars - Game",
@@ -83,7 +93,11 @@ export const mainAppSettings = {
     "mounted": function () {
         const currentPathname: string = window.location.pathname;
         let app = this as any;
-        if (currentPathname === "/player" || currentPathname === "/the-end") {
+        if (
+            currentPathname === "/player" ||
+            currentPathname === "/the-end" ||
+            currentPathname === "/spectate"
+        ) {
             app.updatePlayer();
         } else if (currentPathname === "/game") {
             app.screen = "game-home";

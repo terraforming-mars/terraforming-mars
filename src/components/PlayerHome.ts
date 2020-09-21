@@ -21,7 +21,7 @@ export const hidePlayerData = (root: any, player: PlayerModel) => {
 };
 
 export const PlayerHome = Vue.component("player-home", {
-    props: ["player"],
+    props: ["player", "spectating"],
     components: {
         "board": Board,
         "card": Card,
@@ -67,6 +67,23 @@ export const PlayerHome = Vue.component("player-home", {
                 fleetsRange.push(i);
             }
             return fleetsRange;
+        },
+        getWaitingFor: function (): boolean {
+            if (this.spectating) return false;
+
+            return this.player.waitingFor || false;
+        },
+        getWaitingForClasses: function (): string {
+            let classes = [
+                "player_home_block",
+                "player_home_block--actions",
+                "nofloat",
+            ];
+            if (this.spectating) {
+                classes.push("hidden");
+            }
+
+            return classes.join(" ");
         },
     },
     mounted: function () {
@@ -123,10 +140,10 @@ export const PlayerHome = Vue.component("player-home", {
                 
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace />
                  
-                <div class="player_home_block player_home_block--actions nofloat">
+                <div :class="getWaitingForClasses()">
                     <a name="actions" class="player_home_anchor"></a>
                     <h2 :class="'player_color_'+ player.color" v-i18n>Actions</h2>
-                    <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
+                    <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="getWaitingFor()"></waiting-for>
                 </div>
 
                 <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
@@ -196,8 +213,8 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
 
                 <h2 :class="'player_color_'+ player.color" v-i18n>Select initial cards:</h2>
-
-                <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
+                
+                <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="getWaitingFor()"></waiting-for>
 
                 <h2 :class="'player_color_'+ player.color" v-i18n>Game details</h2>
 

@@ -49,7 +49,10 @@ const styles = fs.readFileSync("styles.css");
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
 
-function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
+function processRequest(
+    req: http.IncomingMessage,
+    res: http.ServerResponse
+): void {
     if (req.url !== undefined) {
         if (req.method === "GET") {
             if (req.url.replace(/\?.*$/, "").startsWith("/games-overview")) {
@@ -65,6 +68,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
                 req.url.startsWith("/solo") ||
                 req.url.startsWith("/game?id=") ||
                 req.url.startsWith("/player?id=") ||
+                req.url.startsWith("/spectate?id=") ||
                 req.url.startsWith("/the-end?id=") ||
                 req.url.startsWith("/load")
             ) {
@@ -655,7 +659,7 @@ function getWaitingFor(
         max: undefined,
         microbes: undefined,
         floaters: undefined,
-        coloniesModel: undefined
+        coloniesModel: undefined,
     };
     switch (waitingFor.inputType) {
         case PlayerInputTypes.AND_OPTIONS:
@@ -691,7 +695,7 @@ function getWaitingFor(
             break;
         case PlayerInputTypes.SELECT_COLONY:
             result.coloniesModel = (waitingFor as SelectColony).coloniesModel;
-            break;            
+            break;
         case PlayerInputTypes.SELECT_HOW_TO_PAY:
             result.amount = (waitingFor as SelectHowToPay).amount;
             result.canUseSteel = (waitingFor as SelectHowToPay).canUseSteel;

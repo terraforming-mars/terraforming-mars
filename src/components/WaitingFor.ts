@@ -21,7 +21,7 @@ var ui_update_timeout_id: number | undefined = undefined;
 export const WaitingFor = Vue.component("waiting-for", {
     props: ["player", "players", "waitingfor"],
     data: function () {
-        return {}
+        return {};
     },
     components: {
         "and-options": AndOptions,
@@ -34,7 +34,7 @@ export const WaitingFor = Vue.component("waiting-for", {
         "select-player": SelectPlayer,
         "select-space": SelectSpace,
         "select-party-player": SelectPartyPlayer,
-        "select-colony": SelectColony
+        "select-colony": SelectColony,
     },
     methods: {
         waitForUpdate: function () {
@@ -42,7 +42,13 @@ export const WaitingFor = Vue.component("waiting-for", {
             clearTimeout(ui_update_timeout_id);
             const askForUpdate = () => {
                 const xhr = new XMLHttpRequest();
-                xhr.open("GET", "/api/waitingfor" + window.location.search + "&prev-game-age=" + this.player.gameAge.toString());
+                xhr.open(
+                    "GET",
+                    "/api/waitingfor" +
+                        window.location.search +
+                        "&prev-game-age=" +
+                        this.player.gameAge.toString()
+                );
                 xhr.onerror = function () {
                     alert("Error getting waitingfor data");
                 };
@@ -61,7 +67,10 @@ export const WaitingFor = Vue.component("waiting-for", {
                                     body: "It's your turn!",
                                 });
                             }
-                            const soundsEnabled = PreferencesManager.loadValue("enable_sounds") === "1";
+                            const soundsEnabled =
+                                PreferencesManager.loadValue(
+                                    "enable_sounds"
+                                ) === "1";
                             if (soundsEnabled) playActivePlayerSound();
 
                             // We don't need to wait anymore - it's our turn
@@ -75,50 +84,77 @@ export const WaitingFor = Vue.component("waiting-for", {
                     } else {
                         alert("Unexpected server response");
                     }
-                }
+                };
                 xhr.responseType = "json";
                 xhr.send();
-            }
-            ui_update_timeout_id = (setTimeout(askForUpdate, 5000) as any);
-        }
+            };
+            ui_update_timeout_id = setTimeout(askForUpdate, 5000) as any;
+        },
     },
     render: function (createElement) {
-        if (this.waitingfor === undefined) {
+        if (this.waitingfor === false) {
             (this as any).waitForUpdate();
-            return createElement("div", $t("Not your turn to take any actions"));
+            return createElement(
+                "div",
+                $t("Not your turn to take any actions")
+            );
         }
-        const input = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "/player/input?id=" + (this.$parent as any).player.id);
-            xhr.responseType = "json";
-            xhr.onload = () => {
-                if (xhr.status === 200) {
-                    const root = (this.$root as any);
-                    root.screen = "empty";
-                    root.player = xhr.response;
-                    root.playerkey++;
-                    root.screen = "player-home";
-                    if (root.player.phase == "end" && window.location.pathname !== "/the-end") {
-                        (window as any).location = (window as any).location;
-                    }
-
-                } else if (xhr.status === 400 && xhr.responseType === "json") {
-                    const element: HTMLElement | null = document.getElementById("dialog-default");
-                    const message: HTMLElement | null = document.getElementById("dialog-default-message");
-                    if (message !== null && element !== null && (element as HTMLDialogElement).showModal !== undefined) {
-                        message.innerHTML = xhr.response.message;
-                        (element as HTMLDialogElement).showModal();
+        const input = new PlayerInputFactory().getPlayerInput(
+            createElement,
+            this.players,
+            this.player,
+            this.waitingfor,
+            (out: Array<Array<string>>) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open(
+                    "POST",
+                    "/player/input?id=" + (this.$parent as any).player.id
+                );
+                xhr.responseType = "json";
+                xhr.onload = () => {
+                    if (xhr.status === 200) {
+                        const root = this.$root as any;
+                        root.screen = "empty";
+                        root.player = xhr.response;
+                        root.playerkey++;
+                        root.screen = "player-home";
+                        if (
+                            root.player.phase === "end" &&
+                            window.location.pathname !== "/the-end"
+                        ) {
+                            (window as any).location = (window as any).location;
+                        }
+                    } else if (
+                        xhr.status === 400 &&
+                        xhr.responseType === "json"
+                    ) {
+                        const element: HTMLElement | null = document.getElementById(
+                            "dialog-default"
+                        );
+                        const message: HTMLElement | null = document.getElementById(
+                            "dialog-default-message"
+                        );
+                        if (
+                            message !== null &&
+                            element !== null &&
+                            (element as HTMLDialogElement).showModal !==
+                                undefined
+                        ) {
+                            message.innerHTML = xhr.response.message;
+                            (element as HTMLDialogElement).showModal();
+                        } else {
+                            alert(xhr.response.message);
+                        }
                     } else {
-                        alert(xhr.response.message);
+                        alert("Error sending input");
                     }
-                } else {
-                    alert("Error sending input");
-                }
-            }
-            xhr.send(JSON.stringify(out));  
-        }, true, true);
+                };
+                xhr.send(JSON.stringify(out));
+            },
+            true,
+            true
+        );
 
-        return createElement("div", {"class": "wf-root"}, [input])
-    }
+        return createElement("div", { "class": "wf-root" }, [input]);
+    },
 });
-

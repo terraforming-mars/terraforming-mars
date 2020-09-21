@@ -33,10 +33,6 @@ export class AresHandler {
   // |player| placed a tile next to |adjacentSpace|.
   public static handleAdjacentPlacement (game: Game, adjacentSpace: ISpace, player: Player) {
     if (adjacentSpace.adjacency?.bonus) {
-      if (!adjacentSpace.player) {
-        throw new Error("A tile with an adjacency bonus must have an owner " + adjacentSpace);
-      }
-
       var addResourceToCard = function(game: Game, player: Player, resourceType: ResourceType, resourceAsText: string) {
         const availableCards = player.getResourceCards(resourceType);
         if (availableCards.length === 0) {
@@ -91,17 +87,18 @@ export class AresHandler {
           new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""));
         });
 
-    // TODO(kberg): test.
-    if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
-      adjacentSpace.player.megaCredits ++;
-      // TODO(kberg): log.
-    };
-    adjacentSpace.player.megaCredits ++;
-        game.log(
+        if (adjacentSpace.player) {
+          if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
+            adjacentSpace.player.megaCredits ++;
+            // TODO(kberg): log.
+          };
+          adjacentSpace.player.megaCredits ++;  
+          game.log(
             LogMessageType.DEFAULT,
             "${0} gains 1 M€ for a tile placed next to ${1}",
             new LogMessageData(LogMessageDataType.PLAYER, adjacentSpace.player.id),
             new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""),);
+        }
     }
   }
 

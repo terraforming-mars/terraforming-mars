@@ -7586,12 +7586,10 @@ export const HTML_DATA: Map<string, string> =
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
-          + <div class="influence"></div><br>
+          + <div class="influence"></div>
           <div class="delegate effect"></div> : <div class="money resource effect-money">-2</div>
           <div class="description effect">
-            (Effect: You have influence +1.<br>
-            When you send a delegate from<br>
-            the reserve, you pay 2 MC less.)
+            (Effect: You have influence +1. When you send a delegate from the reserve, you pay 2 MC less.)
           </div>
         </div>
       </div>
@@ -7601,8 +7599,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="delegate"></div><div class="delegate"></div>
       
       <div class="description start-text">
-        (You start with 32 MC. As your first action,<br>
-        place two delegates in one party.)
+        (You start with 32 MC. As your first action, place two delegates in one party.)
       </div>
 `],
 ]);

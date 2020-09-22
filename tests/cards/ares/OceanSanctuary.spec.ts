@@ -46,10 +46,6 @@ describe("OceanSanctuary", function () {
 
 
   it("Effect", function() {
-    // const oceanSpace = AresTestHelper.addOcean(game, player);
-
-    // const action = card.play(player, game);
-
     card.resourceCount = 4;
 
     expect(card.canAct(player, game)).is.true;

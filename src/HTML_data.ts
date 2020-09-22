@@ -7587,9 +7587,10 @@ export const HTML_DATA: Map<string, string> =
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
           + <div class="influence"></div>
+          <br>
           <div class="delegate effect"></div> : <div class="money resource effect-money">-2</div>
           <div class="description effect">
-            (Effect: You have influence +1. When you send a delegate from the reserve, you pay 2 MC less.)
+            (Effect: You have influence +1. When you send a delegate from the reserve, you pay 2 MC less for it.)
           </div>
         </div>
       </div>
@@ -7600,6 +7601,32 @@ export const HTML_DATA: Map<string, string> =
       
       <div class="description start-text">
         (You start with 32 MC. As your first action, place two delegates in one party.)
+      </div>
+`],
+[CardName.PLAYWRIGHTS,`
+      <div class="tag tag1 tag-power"></div>
+      <div class="corporationLabel">CORPORATION</div>
+      <div class="community-icon corporation-icon"></div>
+      <div class="contentCorporation">
+        <div class="corporationEffectBox">
+          <div class="corporationEffectBoxLabel">ACTION</div>
+          <div class="red-arrow"></div>
+          REPLAY &nbsp;<div class="resource card"><div class="card-icon card-icon-event"></div></div>
+          
+          <div class="description effect">
+            (Action: Replay a played event from any player at <strong>full cost in MC</strong>, then REMOVE IT FROM PLAY.)
+          </div>
+        </div>
+      </div>
+
+      <div class="playwrights">Playwrights</div>
+      <div class="resource money">38</div>
+      <div class="production-box">
+        <div class="production energy"></div>
+      </div>
+      
+      <div class="description start-text">
+        (You start with 38 MC and 1 Energy production.)
       </div>
 `],
 ]);

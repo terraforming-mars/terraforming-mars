@@ -464,6 +464,7 @@ import { PoliticalAlliance } from "./cards/turmoil/PoliticalAlliance";
 import { AgricolaInc } from "./cards/community/AgricolaInc";
 import { ProjectWorkshop } from "./cards/community/ProjectWorkshop";
 import { Incite } from "./cards/community/Incite";
+import { Playwrights } from "./cards/community/Playwrights";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -706,7 +707,8 @@ export const ALL_PROMO_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
 export const ALL_COMMUNITY_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
     { cardName: CardName.AGRICOLA_INC, factory: AgricolaInc },
     { cardName: CardName.PROJECT_WORKSHOP, factory: ProjectWorkshop },
-    { cardName: CardName.INCITE, factory: Incite }
+    { cardName: CardName.INCITE, factory: Incite },
+    { cardName: CardName.PLAYWRIGHTS, factory: Playwrights }
 ];
 
 export const ALL_PROMO_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [

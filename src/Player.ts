@@ -87,6 +87,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public preludeCardsInHand: Array<IProjectCard> = [];    
     public playedCards: Array<IProjectCard> = [];
     public draftedCards: Array<IProjectCard> = [];
+    public removedFromPlayCards: Array<IProjectCard> = [];
     private generationPlayed: Map<string, number> = new Map<string, number>();
     public actionsTakenThisRound: number = 0;
     private terraformRating: number = 20;
@@ -1121,6 +1122,14 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (this.corporationCard !== undefined && this.corporationCard.getCardDiscount !== undefined) {
         cost -= this.corporationCard.getCardDiscount(this, game, card);
       }
+
+      // Playwrights hook
+      this.removedFromPlayCards.forEach((removedFromPlayCard) => {
+        if (removedFromPlayCard.getCardDiscount !== undefined) {
+          cost -= removedFromPlayCard.getCardDiscount(this, game, card);
+        }
+      });
+
       return Math.max(cost, 0);
     }
 
@@ -1134,6 +1143,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       );
       this.lastCardPlayed = card;
       this.generationPlayed.set(card.name, game.generation);
+
+      // Playwrights hook for Conscription and Indentured Workers
+      this.removedFromPlayCards = this.removedFromPlayCards.filter((card) => card.getCardDiscount === undefined);
     }
 
     private canUseSteel(card: ICard): boolean {

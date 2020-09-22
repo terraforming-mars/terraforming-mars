@@ -7614,7 +7614,7 @@ export const HTML_DATA: Map<string, string> =
           REPLAY &nbsp;<div class="resource card"><div class="card-icon card-icon-event"></div></div>
           
           <div class="description effect">
-            (Action: Replay a played event from any player at <strong>full cost in MC</strong>, then REMOVE IT FROM PLAY.)
+            (Action: Replay a played event from any player at FULL COST IN MC, then REMOVE IT FROM PLAY.)
           </div>
         </div>
       </div>

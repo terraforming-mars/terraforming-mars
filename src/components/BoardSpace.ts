@@ -23,7 +23,7 @@ let tileTypeToCssClass = new Map<TileType, string>([
     [TileType.SOLAR_FARM, "solar_farm"],
     [TileType.OCEAN_CITY, "ocean_city"],
     [TileType.OCEAN_FARM, "ocean_farm"],
-    [TileType.OCEAN_SANCTUARY, "ocean-sanctuary"],
+    [TileType.OCEAN_SANCTUARY, "ocean_sanctuary"],
     [TileType.DUST_STORM_MILD, "dust_storm_mild"],
     [TileType.DUST_STORM_SEVERE, "dust_storm_severe"],
     [TileType.EROSION_MILD, "erosion_mild"],

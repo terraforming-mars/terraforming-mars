@@ -31,13 +31,30 @@ describe("OceanSanctuary", function () {
     expect(card.canPlay(player, game)).is.true;
   });
 
+  it("Play", function () {
+    // const action = card.play(player, game);
+
+    // const oceanSpace = AresTestHelper.addOcean(game, player);
+
+    // This is where the magic happens.
+
+    // action.cb(oceanSpace);
+    // expect(oceanSpace.player).to.eq(player);
+    // expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_SANCTUARY);
+    // expect(oceanSpace.adjacency).to.deep.eq({ bonus: [AresSpaceBonus.ANIMAL] });
+
+    // expect(card)
+  });
+
+
+  it("Effect", function() {
+  //    Effect: Add 1 animal to this card)
+
+  });
+
+  it("Victory Points", function() {
+    card.resourceCount = 7;
+    expect(card.getVictoryPoints()).eq(7);
+  });
 
 });
-//     <div class="special-tile tile ocean-city ares-bonus ">&#x2302;&#xFE0E;</div>
-//     <div class="resource animal "></div>
-//     <div class="description " style="text-align:left;">
-//         (Requires 5 ocean tiles. Place this tile on top of an existing ocean tile.
-//           The tile grants an <b>adjacency bonus</b> of 1 animal.
-//           Add 1 animal to this card. 1 VP per animal on this card.)
-//     </div>
-// </div>

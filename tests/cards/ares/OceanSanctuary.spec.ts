@@ -35,9 +35,7 @@ describe("OceanSanctuary", function () {
 
   it("Play", function () {
     const oceanSpace = AresTestHelper.addOcean(game, player);
-
     const action = card.play(player, game);
-
     action.cb(oceanSpace);
     expect(oceanSpace.player).to.eq(player);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_SANCTUARY);

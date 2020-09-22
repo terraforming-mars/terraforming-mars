@@ -2,7 +2,8 @@ import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
 import { OceanCity } from "../../../src/cards/ares/OceanCity";
-import { TileType } from "../../../src/TileType";
+import { AresTestHelper } from "../../ares/AresTestHelper";
+import { expect } from "chai";
 
 describe("OceanCity", function () {
   let card : OceanCity, player : Player, game : Game;
@@ -13,10 +14,26 @@ describe("OceanCity", function () {
     game = new Game("foobar", [player, player], player);
   });
 
-  // TODO(kberg): implement
-  it("Placeholder test", function () {
-    game.board.spaces[0].tile = { tileType: TileType.OCEAN };
-    card.play(player, game);
-  });
+  it("Can play", function () {
+    AresTestHelper.addOcean(game, player);
+    expect(card.canPlay(player, game)).is.false;
 
+    AresTestHelper.addOcean(game, player);
+    expect(card.canPlay(player, game)).is.false;
+
+    AresTestHelper.addOcean(game, player);
+    expect(card.canPlay(player, game)).is.false;
+
+    AresTestHelper.addOcean(game, player);
+    expect(card.canPlay(player, game)).is.false;
+
+    AresTestHelper.addOcean(game, player);
+    expect(card.canPlay(player, game)).is.false;
+
+    AresTestHelper.addOcean(game, player);
+    expect(card.canPlay(player, game)).is.true;
+  });
+// Decrease your Energy production 1 step and increase your MC production 3 steps.<br>
+// Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES.
+// The tile counts as a city as well as an ocean.)
 });

@@ -67,4 +67,9 @@ export const ARES_GAME_OPTIONS: GameOptions = {
         var spaces = game.board.getAvailableSpacesForGreenery(player);
         game.addGreenery(player, spaces[0].id);
     }
+    public static addOcean(game: Game, player: Player) {
+      var spaces = game.board.getAvailableSpacesForOcean(player);
+      game.addOceanTile(player, spaces[0].id);
+    }
+
   }

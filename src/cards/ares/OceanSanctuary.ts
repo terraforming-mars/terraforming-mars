@@ -7,11 +7,10 @@ import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { TileType } from "../../TileType";
 import { CardType } from "../CardType";
-import { IResourceCard } from "../ICard";
-import { IProjectCard } from "../IProjectCard";
+import { IResourceCard, IActionCard } from "../ICard";
 import { Tags } from "../Tags";
 
-export class OceanSanctuary implements IProjectCard, IResourceCard {
+export class OceanSanctuary implements IActionCard, IResourceCard {
   public cost: number = 9;
   public resourceType: ResourceType = ResourceType.ANIMAL;
   public resourceCount: number = 0;
@@ -27,18 +26,18 @@ export class OceanSanctuary implements IProjectCard, IResourceCard {
     return Math.floor(this.resourceCount);
   }
 
-    // TODO(kberg): deal with covering ocean spaces.
-    public play(player: Player, game: Game) {
-    return new SelectSpace(
-      "Select space for Ocean Sanctuary",
-      game.board.getOceansTiles(false),
-        (space: ISpace) => {
-          game.addTile(player, space.spaceType, space, {
-            tileType: TileType.OCEAN_SANCTUARY
-          });
-          space.adjacency = {bonus: [AresSpaceBonus.ANIMAL]};
-          return undefined;
-        }
-    );
+  public play(player: Player, game: Game) {
+  return new SelectSpace(
+    "Select space for Ocean Sanctuary",
+    game.board.getOceansTiles(false),
+      (space: ISpace) => {
+        game.removeTile(space.id);
+        game.addTile(player, space.spaceType, space, {
+          tileType: TileType.OCEAN_SANCTUARY
+        });
+        space.adjacency = {bonus: [AresSpaceBonus.ANIMAL]};
+        return undefined;
+      });
   }
+
 }

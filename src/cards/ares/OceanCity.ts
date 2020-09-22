@@ -29,11 +29,11 @@ export class OceanCity implements IProjectCard {
     player.setProduction(Resources.ENERGY, -1);
     player.setProduction(Resources.MEGACREDITS, 3);
 
-    // TODO(kberg): deal with covering ocean spaces.
     return new SelectSpace(
       "Select space for Ocean City",
       game.board.getOceansTiles(false),
       (space: ISpace) => {
+        game.removeTile(space.id);
         game.addTile(player, space.spaceType, space, {
           tileType: TileType.OCEAN_CITY,
           card: this.name

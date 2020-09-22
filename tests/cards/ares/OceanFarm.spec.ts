@@ -2,7 +2,8 @@ import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
 import { OceanFarm } from "../../../src/cards/ares/OceanFarm";
-import { TileType } from "../../../src/TileType";
+import { AresTestHelper, ARES_GAME_OPTIONS } from "../../ares/AresTestHelper";
+import { expect } from "chai";
 
 describe("OceanFarm", function () {
   let card : OceanFarm, player : Player, game : Game;
@@ -10,13 +11,25 @@ describe("OceanFarm", function () {
   beforeEach(function() {
     card = new OceanFarm();
     player = new Player("test", Color.BLUE, false);
-    game = new Game("foobar", [player, player], player);
+    game = new Game("foobar", [player, player], player, ARES_GAME_OPTIONS);
   });
 
-  // TODO(kberg): implement
-  it("Placeholder test", function () {
-    game.board.spaces[0].tile = { tileType: TileType.OCEAN };
-    card.play(player, game);
+  it("Can play", function () {
+    AresTestHelper.addOcean(game, player);
+    expect(card.canPlay(player, game)).is.false;
+
+    AresTestHelper.addOcean(game, player);
+    expect(card.canPlay(player, game)).is.false;
+
+    AresTestHelper.addOcean(game, player);
+    expect(card.canPlay(player, game)).is.false;
+
+    AresTestHelper.addOcean(game, player);
+    expect(card.canPlay(player, game)).is.true;
   });
 
 });
+
+// Increase your heat production 1 step and increase your
+// plant production 1 step.<br>Place this tile on top of an existing ocean tile.
+// The tile grants an <b>adjacency bonus</b> of 1 plant.)

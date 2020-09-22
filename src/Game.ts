@@ -1447,7 +1447,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
           (space) => space.tile !== undefined &&
                    ((space.tile.tileType === TileType.CITY &&
                    space.spaceType !== SpaceType.COLONY)
-                   || space.tile.tileType === TileType.CAPITAL)
+                   || space.tile.tileType === TileType.CAPITAL
+                   || space.tile.tileType === TileType.OCEAN_CITY)
       ).length;
     }
     public getCitiesInPlay(): number {
@@ -1526,7 +1527,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
         this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
           if (adjacentSpace.tile) {
-            if (adjacentSpace.tile.tileType === TileType.OCEAN) {
+            // TODO(kberg): this is the second time I've added this array test. New enhancements will not
+            // take this into account. Consider adding something like "isOceanLike" Where? Board?
+            if ([TileType.OCEAN, TileType.OCEAN, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY]. includes(adjacentSpace.tile.tileType)) {
               player.megaCredits += player.oceanBonus;
             }
           }

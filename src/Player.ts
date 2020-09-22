@@ -398,7 +398,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
     
     public getCitiesCount(game: Game) {
-      return game.getSpaceCount(TileType.CITY, this) + game.getSpaceCount(TileType.CAPITAL, this);
+      return game.getSpaceCount(TileType.CITY, this)
+          + game.getSpaceCount(TileType.CAPITAL, this)
+          + game.getSpaceCount(TileType.OCEAN_CITY, this);
     }
 
     public getNoTagsCount() {

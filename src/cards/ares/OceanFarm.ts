@@ -10,7 +10,6 @@ import { CardType } from "./../CardType";
 import { IProjectCard } from "./../IProjectCard";
 import { Tags } from "./../Tags";
 
-// UNIMPLEMENTED
 export class OceanFarm implements IProjectCard {
   public cost: number = 15;
   public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];
@@ -25,12 +24,11 @@ export class OceanFarm implements IProjectCard {
     player.setProduction(Resources.HEAT, 1);
     player.setProduction(Resources.PLANTS, 1);
 
-    // TODO(kberg): deal with covering ocean spaces.
     return new SelectSpace(
       "Select space for Ocean Farm",
-      // TODO(kberg): Oceans with tiles on them can't be placed, either.
-      game.board.getOceansTiles(),
+      game.board.getOceansTiles(false),
       (space: ISpace) => {
+        game.removeTile(space.id);
         game.addTile(player, space.spaceType, space, {
           tileType: TileType.OCEAN_FARM,
           card: this.name

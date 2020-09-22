@@ -20,7 +20,6 @@ describe("GeologicalSurvey", function () {
     game.board = new EmptyBoard();
   });
 
-  // Most of the meaningful behavior tests are in AresHandler.
   it("Can play", function () {
     AresTestHelper.addGreenery(game, player);
     expect(card.canPlay(player, game)).is.true;

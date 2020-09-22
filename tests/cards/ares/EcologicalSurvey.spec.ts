@@ -3,7 +3,7 @@ import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
 import { expect } from "chai";
-import { ALL_ADJACENCY_BONUSES, ARES_GAME_OPTIONS } from "../../ares/AresTestHelper";
+import { ALL_ADJACENCY_BONUSES, ARES_GAME_OPTIONS, AresTestHelper } from "../../ares/AresTestHelper";
 import { TileType } from "../../../src/TileType";
 import { Ants } from "../../../src/cards/Ants";
 import { Pets } from "../../../src/cards/Pets";
@@ -19,17 +19,16 @@ describe("EcologicalSurvey", function () {
     game.board = new EmptyBoard();
   });
 
-  // // Most of the meaningful behavior tests are in AresHandler.
-  // it("Can play", function () {
-  //     AresTestHelper.addGreenery(game, player);
-  //     expect(card.canPlay(player, game)).is.false;
+  it("Can play", function () {
+      AresTestHelper.addGreenery(game, player);
+      expect(card.canPlay(player, game)).is.false;
 
-  //     AresTestHelper.addGreenery(game, player);
-  //     expect(card.canPlay(player, game)).is.false;
+      AresTestHelper.addGreenery(game, player);
+      expect(card.canPlay(player, game)).is.false;
 
-  //     AresTestHelper.addGreenery(game, player);
-  //     expect(card.canPlay(player, game)).is.true;
-  // });
+      AresTestHelper.addGreenery(game, player);
+      expect(card.canPlay(player, game)).is.true;
+  });
 
   // This doesn't test anything about this card, but about the behavior this card provides, from
   // AresHandler.

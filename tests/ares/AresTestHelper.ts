@@ -7,6 +7,7 @@ import { Resources } from "../../src/Resources";
 import { SpaceBonus } from "../../src/SpaceBonus";
 import { SpaceType } from "../../src/SpaceType";
 import { TileType } from "../../src/TileType";
+import { ISpace } from "../../src/ISpace";
 
 export const ARES_GAME_OPTIONS: GameOptions = {
 
@@ -63,13 +64,16 @@ export const ARES_GAME_OPTIONS: GameOptions = {
         expect(player.getResource(Resources.MEGACREDITS)).is.eq(expectedMc);
     }
 
-    public static addGreenery(game: Game, player: Player) {
-        var spaces = game.board.getAvailableSpacesForGreenery(player);
-        game.addGreenery(player, spaces[0].id);
+    public static addGreenery(game: Game, player: Player): ISpace {
+        var space = game.board.getAvailableSpacesForGreenery(player)[0];
+        game.addGreenery(player, space.id);
+        return space;
     }
-    public static addOcean(game: Game, player: Player) {
-      var spaces = game.board.getAvailableSpacesForOcean(player);
-      game.addOceanTile(player, spaces[0].id);
+
+    public static addOcean(game: Game, player: Player): ISpace {
+      var space = game.board.getAvailableSpacesForOcean(player)[0];
+      game.addOceanTile(player, space.id);
+      return space;
     }
 
   }

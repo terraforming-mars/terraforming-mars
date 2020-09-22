@@ -4,7 +4,7 @@ node_modules/
 *.swp
 .nyc_output/
 styles.css
-.vscode/symbols.json
+.vscode
 db/*
 assets/translations.json
 .env

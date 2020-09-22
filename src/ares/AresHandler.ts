@@ -287,8 +287,8 @@ function placeHazard(game: Game, tileType: TileType, direction: 1 | -1) {
         new LogMessageData(LogMessageDataType.STRING, card.cost.toString())
     );
 
-    var cost = card.cost;
-    var space = game.board.getAvailableSpaceByOffset(cost, direction);
+    var distance = card.cost - 1;
+    var space = game.board.getAvailableSpaceByOffset(distance, direction);
     space.player = undefined;
     space.adjacency = { bonus: [], cost: 1 };
     space.tile = { tileType: tileType, hazard: true };

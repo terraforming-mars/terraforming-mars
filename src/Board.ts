@@ -150,23 +150,14 @@ export abstract class Board {
         return this.spaces.filter((space) => space.tile === undefined);
     }
 
-    // TODO(kberg): replace direction with enum
-    // TODO(kberg): Make sure the array really lays out like I think it does.
+    // If direction is 1, count from the top left. If -1, count from the other end of the map.
     public getAvailableSpaceByOffset(distance: number, direction: -1 | 1) {
-        // If direction is 1, start from space 0. If direction is -1,
-        // start from the other end of the map.
-        var counted = 0;
-        var spaces = this.getAvailableSpacesOnLand(undefined);
-        var idx = (direction === 1) ? 0 : spaces.length;
-        while (counted < distance) {
-            var space = spaces[idx];
-            if (!space?.tile) {
-                counted++;
-            }
-            idx += direction;
-        }
-        return this.spaces[idx];
+        // By doing an additional filter on space.tile, it skips over hazards.
+        var spaces = this.getAvailableSpacesOnLand(undefined).filter(space => !space.tile);
+        var idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
+        return spaces[idx];
     }
+
     public getAvailableSpacesForCity(player: Player): Array<ISpace> {
         // A city cannot be adjacent to another city
         return this.getAvailableSpacesOnLand(player).filter(
@@ -237,7 +228,9 @@ export abstract class Board {
     }
 
     protected canPlaceTile(space: ISpace): boolean {
-        return space !== undefined && space.tile === undefined && space instanceof Land;
+        return space !== undefined &&
+            (space.tile === undefined || (space.tile.hazard || true)) &&
+            space instanceof Land;
     }
 
     public getForestSpace(spaces: Array<ISpace>): ISpace {

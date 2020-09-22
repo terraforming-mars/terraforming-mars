@@ -29,6 +29,7 @@ export class Capital implements IProjectCard {
         return game.board.getAdjacentSpaces(usedSpace)
             .filter(
                 (s) => s.tile !== undefined &&
+                // TODO(kberg): ocean-like
                 s.tile.tileType === TileType.OCEAN
             ).length;
       }

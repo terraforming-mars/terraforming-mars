@@ -10,7 +10,6 @@ import { CardType } from "./../CardType";
 import { IProjectCard } from "./../IProjectCard";
 import { Tags } from "./../Tags";
 
-// UNIMPLEMENTED
 export class OceanFarm implements IProjectCard {
   public cost: number = 15;
   public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];

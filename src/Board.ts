@@ -126,16 +126,22 @@ export abstract class Board {
         );
     }
 
-    public getOceansOnBoard(): number {
-        return this.spaces.filter((space) => space.tile !== undefined &&
-                    space.tile.tileType === TileType.OCEAN
-        ).length;
+    // TODO(kberg): remove the default value from |countUpgradedOceans| to inspect every use case.
+    public getOceansOnBoard(countUpgradedOceans: boolean = true): number {
+        return this.getOceansTiles(countUpgradedOceans).length;
     }
 
-    public getOceansTiles(): Array<ISpace> {
-        return this.spaces.filter((space) => space.tile !== undefined &&
-                    space.tile.tileType === TileType.OCEAN
-        );
+    ALL_OCEAN_TILE_TYPES = [TileType.OCEAN, TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
+    public getOceansTiles(countUpgradedOceans: boolean): Array<ISpace> {
+        if (!countUpgradedOceans) {
+            return this.spaces.filter((space) => space.tile !== undefined &&
+                        space.tile.tileType === TileType.OCEAN
+            );
+        } else {
+            // TODO(kberg): add test for getOceansTiles(true)
+            return this.spaces.filter((space) => space.tile !== undefined &&
+                this.ALL_OCEAN_TILE_TYPES.indexOf(space.tile.tileType) >= 0);
+        }
     }    
 
     public getSpaces(spaceType: SpaceType, _player?: Player): Array<ISpace> {

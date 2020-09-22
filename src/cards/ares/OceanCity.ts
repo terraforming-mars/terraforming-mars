@@ -32,8 +32,7 @@ export class OceanCity implements IProjectCard {
     // TODO(kberg): deal with covering ocean spaces.
     return new SelectSpace(
       "Select space for Ocean City",
-      // TODO(kberg): Oceans with tiles on them can't be placed, either.
-      game.board.getOceansTiles(),
+      game.board.getOceansTiles(false),
       (space: ISpace) => {
         game.addTile(player, space.spaceType, space, {
           tileType: TileType.OCEAN_CITY,

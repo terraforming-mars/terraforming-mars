@@ -11,7 +11,6 @@ import { IResourceCard } from "../ICard";
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 
-// UNIMPLEMENTED
 export class OceanSanctuary implements IProjectCard, IResourceCard {
   public cost: number = 9;
   public resourceType: ResourceType = ResourceType.ANIMAL;
@@ -32,8 +31,7 @@ export class OceanSanctuary implements IProjectCard, IResourceCard {
     public play(player: Player, game: Game) {
     return new SelectSpace(
       "Select space for Ocean Sanctuary",
-      // TODO(kberg): Oceans with tiles on them can't be placed, either.
-      game.board.getOceansTiles(),
+      game.board.getOceansTiles(false),
         (space: ISpace) => {
           game.addTile(player, space.spaceType, space, {
             tileType: TileType.OCEAN_SANCTUARY

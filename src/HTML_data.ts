@@ -7735,7 +7735,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="description " style="text-align:left;">
             (Requires 5 ocean tiles. Place this tile on top of an existing ocean tile.
               The tile grants an <b>adjacency bonus</b> of 1 animal.
-              Add 1 animal to this card. 1 VP per animal on this card.)
+              Action: Add 1 animal to this card. 1 VP per animal on this card.)
         </div>
     </div>
 `],

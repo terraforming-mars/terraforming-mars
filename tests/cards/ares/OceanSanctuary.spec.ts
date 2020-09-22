@@ -1,9 +1,11 @@
 import { expect } from "chai";
+import { AresSpaceBonus } from "../../../src/ares/AresSpaceBonus";
 import { OceanSanctuary } from "../../../src/cards/ares/OceanSanctuary";
 import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
-import { AresTestHelper } from "../../ares/AresTestHelper";
+import { TileType } from "../../../src/TileType";
+import { AresTestHelper, ARES_GAME_OPTIONS } from "../../ares/AresTestHelper";
 
 describe("OceanSanctuary", function () {
   let card : OceanSanctuary, player : Player, game : Game;
@@ -11,7 +13,7 @@ describe("OceanSanctuary", function () {
   beforeEach(function() {
     card = new OceanSanctuary();
     player = new Player("test", Color.BLUE, false);
-    game = new Game("foobar", [player, player], player);
+    game = new Game("foobar", [player, player], player, ARES_GAME_OPTIONS);
   });
 
   it("Can play", function () {
@@ -32,24 +34,28 @@ describe("OceanSanctuary", function () {
   });
 
   it("Play", function () {
-    // const action = card.play(player, game);
+    const oceanSpace = AresTestHelper.addOcean(game, player);
 
-    // const oceanSpace = AresTestHelper.addOcean(game, player);
+    const action = card.play(player, game);
 
-    // This is where the magic happens.
-
-    // action.cb(oceanSpace);
-    // expect(oceanSpace.player).to.eq(player);
-    // expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_SANCTUARY);
-    // expect(oceanSpace.adjacency).to.deep.eq({ bonus: [AresSpaceBonus.ANIMAL] });
-
-    // expect(card)
+    action.cb(oceanSpace);
+    expect(oceanSpace.player).to.eq(player);
+    expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_SANCTUARY);
+    expect(oceanSpace.adjacency).to.deep.eq({ bonus: [AresSpaceBonus.ANIMAL] });
   });
 
 
   it("Effect", function() {
-  //    Effect: Add 1 animal to this card)
+    // const oceanSpace = AresTestHelper.addOcean(game, player);
 
+    // const action = card.play(player, game);
+
+    card.resourceCount = 4;
+
+    expect(card.canAct(player, game)).is.true;
+    card.action(player, game);
+
+    expect(card.resourceCount).eq(5);
   });
 
   it("Victory Points", function() {

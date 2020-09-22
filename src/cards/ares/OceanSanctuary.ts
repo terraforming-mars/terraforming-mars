@@ -27,17 +27,25 @@ export class OceanSanctuary implements IActionCard, IResourceCard {
   }
 
   public play(player: Player, game: Game) {
-  return new SelectSpace(
-    "Select space for Ocean Sanctuary",
-    game.board.getOceansTiles(false),
-      (space: ISpace) => {
-        game.removeTile(space.id);
-        game.addTile(player, space.spaceType, space, {
-          tileType: TileType.OCEAN_SANCTUARY
+    return new SelectSpace(
+      "Select space for Ocean Sanctuary",
+      game.board.getOceansTiles(false),
+        (space: ISpace) => {
+          game.removeTile(space.id);
+          game.addTile(player, space.spaceType, space, {
+            tileType: TileType.OCEAN_SANCTUARY
+          });
+          space.adjacency = {bonus: [AresSpaceBonus.ANIMAL]};
+          return undefined;
         });
-        space.adjacency = {bonus: [AresSpaceBonus.ANIMAL]};
-        return undefined;
-      });
   }
 
+  public canAct(_player: Player, _game: Game) {
+    return true;
+  } 
+
+  public action(_player: Player, _game: Game) {
+    this.resourceCount++;
+    return undefined;
+  }
 }

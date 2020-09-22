@@ -10,11 +10,6 @@ import { CardType } from "./../CardType";
 import { IProjectCard } from "./../IProjectCard";
 import { Tags } from "./../Tags";
 
-// UNIMPLEMENTED
-// TODO(kberg): Make ocean city act like a city.
-//   Player.getCitiesCount
-//   Game.getCitiesInPlayOnMars
-//   Board.isCitySpace
 export class OceanCity implements IProjectCard {
   public cost: number = 18;
   public tags: Array<Tags> = [Tags.CITY, Tags.STEEL];

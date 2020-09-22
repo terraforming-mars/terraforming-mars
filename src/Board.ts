@@ -248,7 +248,7 @@ export abstract class Board {
     }
 
     public static isCitySpace(space: ISpace): boolean {
-        const cityTileTypes = [TileType.CITY, TileType.CAPITAL];
+        const cityTileTypes = [TileType.CITY, TileType.CAPITAL, TileType.OCEAN_CITY];
         return space.tile !== undefined && cityTileTypes.includes(space.tile.tileType);
     }
 }  

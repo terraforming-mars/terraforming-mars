@@ -2,7 +2,7 @@ import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
 import { OceanFarm } from "../../../src/cards/ares/OceanFarm";
-import { AresTestHelper } from "../../ares/AresTestHelper";
+import { AresTestHelper, ARES_GAME_OPTIONS } from "../../ares/AresTestHelper";
 import { expect } from "chai";
 
 describe("OceanFarm", function () {
@@ -11,7 +11,7 @@ describe("OceanFarm", function () {
   beforeEach(function() {
     card = new OceanFarm();
     player = new Player("test", Color.BLUE, false);
-    game = new Game("foobar", [player, player], player);
+    game = new Game("foobar", [player, player], player, ARES_GAME_OPTIONS);
   });
 
   it("Can play", function () {

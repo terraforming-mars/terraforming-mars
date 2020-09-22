@@ -1,17 +1,3 @@
-@player_red: rgb(153, 17, 0);
-@player_yellow: rgb(170, 170, 0);
-@player_green: rgb(0, 153, 0);
-@player_black: rgb(170, 170, 170);
-@player_blue: rgb(0, 102, 255);
-@player_purple: rgb(140, 0, 255);
-
-@player_red_bg: rgba(153, 17, 0, 0.7);
-@player_yellow_bg: rgba(170, 170, 0, 0.7);
-@player_green_bg: rgba(0, 153, 0, 0.7);
-@player_black_bg: rgba(170, 170, 170, 0.7);
-@player_blue_bg: rgba(0, 102, 255, 0.7);
-@player_purple_bg: rgba(140, 0, 255, 0.7);
-
 #player-home {
     padding-left: 20px;
     padding-top: 20px;
@@ -19,26 +5,27 @@
     background-attachment: fixed;
 }
 
-.player_color_red {
+// text shadows
+.player_shadow_color_red {
     text-shadow: -1px -1px 6px @player_red, 1px 1px 1px #333a;
 }
-.player_color_yellow {
+.player_shadow_color_yellow {
     text-shadow: -1px -1px 6px @player_yellow, 1px 1px 1px #333a;
 }
-.player_color_green {
+.player_shadow_color_green {
     text-shadow: -1px -1px 6px @player_green, 1px 1px 1px #333a;
 }
-
-.player_color_black {
+.player_shadow_color_black {
     text-shadow: -1px -1px 6px @player_black, 1px 1px 1px #333a;
 }
-.player_color_blue {
+.player_shadow_color_blue {
     text-shadow: -1px -1px 6px @player_blue, 1px 1px 1px #333a;
 }
-.player_color_purple {
+.player_shadow_color_purple {
     text-shadow: -1px -1px 6px @player_purple, 1px 1px 1px #333a;
 }
 
+// normal backgrounds
 .player_bg_color_red {
     background-color: @player_red;
 }
@@ -63,28 +50,29 @@
     background-color: @player_purple;
 }
 
+// backgroungs with opacity
 .player_overview_bg_color_red {
-    background-color: @player_red_bg;
+    .player_red_bg();
 }
 
 .player_overview_bg_color_yellow {
-    background-color: @player_yellow_bg;
+    .player_yellow_bg();
 }
 
 .player_overview_bg_color_green {
-    background-color: @player_green_bg;
+    .player_green_bg();
 }
 
 .player_overview_bg_color_black {
-    background-color: @player_black_bg;
+    .player_black_bg();
 }
 
 .player_overview_bg_color_blue {
-    background-color: @player_blue_bg;
+    .player_blue_bg();
 }
 
 .player_overview_bg_color_purple {
-    background-color: @player_purple_bg;
+    .player_purple_bg();
 }
 
 .game-title {

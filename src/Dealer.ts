@@ -480,9 +480,9 @@ import { MarketingExperts } from "./cards/ares/MarketingExperts";
 // import { ButterflyEffect } from "./cards/ares/ButterflyEffect";
 // import { DesperateMeasures } from "./cards/ares/DesperateMeasures";
 import { GeologicalSurvey } from "./cards/ares/GeologicalSurvey";
-// import { OceanCity } from "./cards/ares/OceanCity";
-// import { OceanFarm } from "./cards/ares/OceanFarm";
-// import { OceanSanctuary } from "./cards/ares/OceanSanctuary";
+import { OceanCity } from "./cards/ares/OceanCity";
+import { OceanFarm } from "./cards/ares/OceanFarm";
+import { OceanSanctuary } from "./cards/ares/OceanSanctuary";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -994,9 +994,9 @@ export const ALL_ARES_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.MOHOLE_AREA_ARES, factory: MoholeAreaAres },
     { cardName: CardName.NATURAL_PRESERVE_ARES, factory: NaturalPreserveAres },
     { cardName: CardName.NUCLEAR_ZONE_ARES, factory: NuclearZoneAres },
-    // { cardName: CardName.OCEAN_CITY, factory: OceanCity },
-    // { cardName: CardName.OCEAN_FARM, factory: OceanFarm },
-    // { cardName: CardName.OCEAN_SANCTUARY, factory: OceanSanctuary },
+    { cardName: CardName.OCEAN_CITY, factory: OceanCity },
+    { cardName: CardName.OCEAN_FARM, factory: OceanFarm },
+    { cardName: CardName.OCEAN_SANCTUARY, factory: OceanSanctuary },
     { cardName: CardName.RESTRICTED_AREA_ARES, factory: RestrictedAreaAres },
     { cardName: CardName.SOLAR_FARM, factory: SolarFarm },
 ]

@@ -38,7 +38,7 @@ export class BiofertilizerFacility implements IProjectCard {
             game.board.getAvailableSpacesForCity(player),
             (space: ISpace) => {
                 game.addTile(player, SpaceType.LAND, space, {
-                    tileType: TileType.BIOFERTILIZIER_FACILITY,
+                    tileType: TileType.BIOFERTILIZER_FACILITY,
                     card: this.name,
                 });
                 space.adjacency = {

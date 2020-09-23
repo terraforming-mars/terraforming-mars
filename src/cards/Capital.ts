@@ -10,6 +10,7 @@ import {ISpace} from '../ISpace';
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
 import { IAdjacencyBonus } from '../ares/AdjacencyBonus';
+import { Board } from "../Board";
 
 export class Capital implements IProjectCard {
     public cost: number = 26;
@@ -27,10 +28,7 @@ export class Capital implements IProjectCard {
       const usedSpace = game.board.getSpaceByTileCard(this.name);
       if (usedSpace !== undefined) {
         return game.board.getAdjacentSpaces(usedSpace)
-            .filter(
-                (s) => s.tile !== undefined &&
-                [TileType.OCEAN, TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY].includes(s.tile.tileType)
-            ).length;
+            .filter((s) => Board.isOceanSpace(s)).length;
       }
       return 0;
     }

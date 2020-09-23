@@ -131,7 +131,6 @@ export abstract class Board {
         return this.getOceansTiles(countUpgradedOceans).length;
     }
 
-    ALL_OCEAN_TILE_TYPES = [TileType.OCEAN, TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
     public getOceansTiles(countUpgradedOceans: boolean): Array<ISpace> {
         if (!countUpgradedOceans) {
             return this.spaces.filter((space) => space.tile !== undefined &&
@@ -139,8 +138,7 @@ export abstract class Board {
             );
         } else {
             // TODO(kberg): add test for getOceansTiles(true)
-            return this.spaces.filter((space) => space.tile !== undefined &&
-                this.ALL_OCEAN_TILE_TYPES.indexOf(space.tile.tileType) >= 0);
+            return this.spaces.filter((space) => Board.isOceanSpace(space));
         }
     }    
 
@@ -250,5 +248,10 @@ export abstract class Board {
     public static isCitySpace(space: ISpace): boolean {
         const cityTileTypes = [TileType.CITY, TileType.CAPITAL, TileType.OCEAN_CITY];
         return space.tile !== undefined && cityTileTypes.includes(space.tile.tileType);
+    }
+
+    public static isOceanSpace(space: ISpace): boolean {
+        const oceanTileTypes = [TileType.OCEAN, TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
+        return space.tile !== undefined && oceanTileTypes.includes(space.tile.tileType);
     }
 }  

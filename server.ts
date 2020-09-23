@@ -605,6 +605,7 @@ function getPlayer(player: Player, game: Game): string {
         randomMA: game.gameOptions.randomMA,
         actionsTakenThisRound: player.actionsTakenThisRound,
         passedPlayers: Array.from(game.getPassedPlayers()), // JSON stringify does not honor sets
+        aresExtension: game.gameOptions.aresExtension,
     } as PlayerModel;
     return JSON.stringify(output);
 }

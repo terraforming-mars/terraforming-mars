@@ -8,6 +8,7 @@ import { TileType } from "../../../src/TileType";
 import { SpaceBonus } from "../../../src/SpaceBonus";
 import { Resources } from "../../../src/Resources";
 import { SpaceType } from "../../../src/SpaceType";
+import { AresHandler } from "../../../src/ares/AresHandler";
 
 describe("OceanFarm", function () {
   let card : OceanFarm, player : Player, otherPlayer: Player, game : Game;
@@ -17,8 +18,6 @@ describe("OceanFarm", function () {
     player = new Player("test", Color.BLUE, false);
     otherPlayer = new Player("test", Color.RED, false);
     game = new Game("foobar", [player, otherPlayer], player, ARES_GAME_OPTIONS);
-    // Clear out spaces so they don't cost anything.
-    game.board.spaces.forEach(space => {space.adjacency = { bonus: [], cost: 0 }});
   });
 
   it("Can play", function () {
@@ -59,7 +58,7 @@ describe("OceanFarm", function () {
     action.cb(oceanSpace);
     var greenery = game.board.getAdjacentSpaces(oceanSpace).filter(space => space.spaceType === SpaceType.LAND)[0];
 
-    expect(player.megaCredits).eq(0);
+    expect(otherPlayer.megaCredits).eq(0);
 
     game.addGreenery(otherPlayer, greenery.id);
 

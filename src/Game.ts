@@ -1522,16 +1522,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       if (!isWorldGov) {
         space.bonus.forEach((spaceBonus) => {
+          // TODO(kberg): this shouldn't happen when placing on top of a tile (upgrading ocean, placing hazard.)
           this.grantSpaceBonus(player, spaceBonus);
         });
 
         this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
-          if (adjacentSpace.tile) {
-            // TODO(kberg): this is the second time I've added this array test. New enhancements will not
-            // take this into account. Consider adding something like "isOceanLike" Where? Board?
-            if ([TileType.OCEAN, TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY]. includes(adjacentSpace.tile.tileType)) {
-              player.megaCredits += player.oceanBonus;
-            }
+          if (Board.isOceanSpace(adjacentSpace)) {
+            player.megaCredits += player.oceanBonus;
           }
           if (this.gameOptions.aresExtension) {
             AresHandler.handleAdjacentPlacement(this, adjacentSpace, player);

@@ -7,6 +7,8 @@ import { expect } from "chai";
 import { Resources } from "../../../src/Resources";
 import { TileType } from "../../../src/TileType";
 import { SpaceType } from "../../../src/SpaceType";
+import { Capital } from "../../../src/cards/Capital";
+import { AresHandler } from "../../../src/ares/AresHandler";
 
 describe("OceanCity", function () {
   let card : OceanCity, player : Player, game : Game;
@@ -15,8 +17,6 @@ describe("OceanCity", function () {
     card = new OceanCity();
     player = new Player("test", Color.BLUE, false);
     game = new Game("foobar", [player, player], player, ARES_GAME_OPTIONS);
-    // Clear out spaces so they don't cost anything.
-    game.board.spaces.forEach(space => {space.adjacency = { bonus: [], cost: 0 }; space.tile = undefined; });
   });
 
   it("Can play", function () {
@@ -121,4 +121,27 @@ describe("OceanCity", function () {
     expect(player.getVictoryPoints(game).city).eq(1);
   });
 
+  it("Ocean City counts as VP for Capital", function() {
+    var oceanSpace = game.board.getAvailableSpacesForOcean(player)[0];
+
+    var capital = new Capital();
+    const capitalAction = capital.play(player, game);
+    player.playedCards = [capital];
+
+    var capitalSpace = game.board.getAdjacentSpaces(oceanSpace).filter(space => space.spaceType === SpaceType.LAND)[0];
+    capitalAction.cb(capitalSpace);
+
+    // In a real game Capital couldn't be placed without an ocean on the board, but this test
+    // works around that to guarantee zero points.
+    expect(player.getVictoryPoints(game).victoryPoints).to.eq(0);
+
+    // And now adds the tile.
+    game.addOceanTile(player, oceanSpace.id);
+    const oceanCityAction = card.play(player, game);
+
+    oceanCityAction.cb(oceanSpace);
+    expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
+
+    expect(player.getVictoryPoints(game).victoryPoints).to.eq(1);
+  })
 });

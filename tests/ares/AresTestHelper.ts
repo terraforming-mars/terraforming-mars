@@ -8,6 +8,7 @@ import { SpaceBonus } from "../../src/SpaceBonus";
 import { SpaceType } from "../../src/SpaceType";
 import { TileType } from "../../src/TileType";
 import { ISpace } from "../../src/ISpace";
+import { Board } from "../../src/Board";
 
 export const ARES_GAME_OPTIONS: GameOptions = {
 
@@ -76,4 +77,18 @@ export const ARES_GAME_OPTIONS: GameOptions = {
       return space;
     }
 
+    public static clearGameOfHazards(game: Game) {
+      // Free the board of adjacency costs and placement costs.
+      game.board.spaces.forEach(space => {
+        space.adjacency = undefined;
+        if (space.tile && space.tile.hazard) {
+          space.tile = undefined;
+        }
+      });
+
+      game.hazardData.erosionOceanCount.available = false;
+      game.hazardData.removeDustStormsOceanCount.available = false;
+      game.hazardData.severeDustStormOxygen.available = false;
+      game.hazardData.severeErosionTemperature.available = false;
+    }
   }

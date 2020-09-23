@@ -7,14 +7,16 @@ import { expect } from "chai";
 import { TileType } from "../../../src/TileType";
 import { SpaceBonus } from "../../../src/SpaceBonus";
 import { Resources } from "../../../src/Resources";
+import { SpaceType } from "../../../src/SpaceType";
 
 describe("OceanFarm", function () {
-  let card : OceanFarm, player : Player, game : Game;
+  let card : OceanFarm, player : Player, otherPlayer: Player, game : Game;
 
   beforeEach(function() {
     card = new OceanFarm();
     player = new Player("test", Color.BLUE, false);
-    game = new Game("foobar", [player, player], player, ARES_GAME_OPTIONS);
+    otherPlayer = new Player("test", Color.RED, false);
+    game = new Game("foobar", [player, otherPlayer], player, ARES_GAME_OPTIONS);
     // Clear out spaces so they don't cost anything.
     game.board.spaces.forEach(space => {space.adjacency = { bonus: [], cost: 0 }});
   });
@@ -50,4 +52,17 @@ describe("OceanFarm", function () {
     expect(oceanSpace.adjacency).to.deep.eq({ bonus: [SpaceBonus.PLANT] });
   });
 
+  
+  it("Ocean Farm counts as ocean for adjacency", function() {
+    const oceanSpace = AresTestHelper.addOcean(game, player);
+    const action = card.play(player, game);
+    action.cb(oceanSpace);
+    var greenery = game.board.getAdjacentSpaces(oceanSpace).filter(space => space.spaceType === SpaceType.LAND)[0];
+
+    expect(player.megaCredits).eq(0);
+
+    game.addGreenery(otherPlayer, greenery.id);
+
+    expect(otherPlayer.megaCredits).eq(2);
+  });
 });

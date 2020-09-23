@@ -14,6 +14,8 @@ describe("OceanSanctuary", function () {
     card = new OceanSanctuary();
     player = new Player("test", Color.BLUE, false);
     game = new Game("foobar", [player, player], player, ARES_GAME_OPTIONS);
+    // Clear out spaces so they don't cost anything.
+    game.board.spaces.forEach(space => {space.adjacency = { bonus: [], cost: 0 }});
   });
 
   it("Can play", function () {

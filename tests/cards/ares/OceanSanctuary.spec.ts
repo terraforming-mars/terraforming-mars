@@ -4,16 +4,20 @@ import { OceanSanctuary } from "../../../src/cards/ares/OceanSanctuary";
 import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
+import { SpaceType } from "../../../src/SpaceType";
 import { TileType } from "../../../src/TileType";
 import { AresTestHelper, ARES_GAME_OPTIONS } from "../../ares/AresTestHelper";
 
 describe("OceanSanctuary", function () {
-  let card : OceanSanctuary, player : Player, game : Game;
+  let card : OceanSanctuary, player : Player, otherPlayer: Player, game : Game;
 
   beforeEach(function() {
     card = new OceanSanctuary();
     player = new Player("test", Color.BLUE, false);
-    game = new Game("foobar", [player, player], player, ARES_GAME_OPTIONS);
+    otherPlayer = new Player("test", Color.RED, false);
+    game = new Game("foobar", [player, otherPlayer], player, ARES_GAME_OPTIONS);
+    // Clear out spaces so they don't cost anything.
+    game.board.spaces.forEach(space => {space.adjacency = { bonus: [], cost: 0 }});
   });
 
   it("Can play", function () {
@@ -50,6 +54,19 @@ describe("OceanSanctuary", function () {
     card.action(player, game);
 
     expect(card.resourceCount).eq(5);
+  });
+
+  it("Ocean Sanctuary counts as ocean for adjacency", function() {
+    const oceanSpace = AresTestHelper.addOcean(game, player);
+    const action = card.play(player, game);
+    action.cb(oceanSpace);
+    var greenery = game.board.getAdjacentSpaces(oceanSpace).filter(space => space.spaceType === SpaceType.LAND)[0];
+
+    expect(player.megaCredits).eq(0);
+
+    game.addGreenery(otherPlayer, greenery.id);
+
+    expect(otherPlayer.megaCredits).eq(2);
   });
 
   it("Victory Points", function() {

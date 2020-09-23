@@ -4,7 +4,6 @@ import { SelectSpace } from "../../inputs/SelectSpace";
 import { ISpace } from "../../ISpace";
 import { Player } from "../../Player";
 import { Resources } from "../../Resources";
-import { SpaceBonus } from "../../SpaceBonus";
 import { TileType } from "../../TileType";
 import { CardType } from "./../CardType";
 import { IProjectCard } from "./../IProjectCard";
@@ -17,7 +16,8 @@ export class OceanCity implements IProjectCard {
   public name: CardName = CardName.OCEAN_CITY;
 
   public canPlay(player: Player, game: Game): boolean {
-    return game.board.getOceansOnBoard() >= 6 - player.getRequirementsBonus(game);
+    return (player.getProduction(Resources.ENERGY) > 0)
+        && (game.board.getOceansOnBoard() >= 6 - player.getRequirementsBonus(game));
   }
 
   public play(player: Player, game: Game) {
@@ -33,7 +33,6 @@ export class OceanCity implements IProjectCard {
           tileType: TileType.OCEAN_CITY,
           card: this.name
         });
-        space.adjacency = { bonus: [SpaceBonus.PLANT] }
         return undefined;
       }
     );

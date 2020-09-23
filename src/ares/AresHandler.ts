@@ -118,6 +118,7 @@ export class AresHandler {
             .reduce((prior, current) => prior + current, 0);
     }
 
+    // TODO(kberg): add tests
     public static payAdjacencyAndHazardCosts(game: Game, player: Player, space: ISpace) {
         var cost = this.adjacencyCosts(game, space);
 
@@ -251,6 +252,7 @@ export class AresHandler {
         );
     }
 
+    // TODO(kberg): add tests
     // Returns true if |newTile| can cover |boardTile|.
     public static canCover(boardTile: ITile, newTile: ITile): boolean {
         if (boardTile.hazard) {
@@ -262,6 +264,7 @@ export class AresHandler {
         return false;
     }
 
+    // TODO(kberg): add tests
     public static grantBonusForRemovingHazard(game: Game, player: Player, initialTileType?: TileType) {
         // TODO(kberg): log for increasing the rating?
         switch (initialTileType) {
@@ -300,6 +303,7 @@ function makeSevere(game: Game, from: TileType, to: TileType) {
         .filter((s) => s.tile?.tileType === from)
         .forEach((s) => {
             s.tile!.tileType = to;
+            // TODO(kberg): this doesn't work.
             s.adjacency!.cost = 2;
         });
 }

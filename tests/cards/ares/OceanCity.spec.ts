@@ -8,7 +8,6 @@ import { Resources } from "../../../src/Resources";
 import { TileType } from "../../../src/TileType";
 import { SpaceType } from "../../../src/SpaceType";
 import { Capital } from "../../../src/cards/Capital";
-import { AresHandler } from "../../../src/ares/AresHandler";
 
 describe("OceanCity", function () {
   let card : OceanCity, player : Player, game : Game;

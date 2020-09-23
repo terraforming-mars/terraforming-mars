@@ -7,7 +7,6 @@ import { Player } from "../../../src/Player";
 import { SpaceType } from "../../../src/SpaceType";
 import { TileType } from "../../../src/TileType";
 import { AresTestHelper, ARES_GAME_OPTIONS } from "../../ares/AresTestHelper";
-import { AresHandler } from "../../../src/ares/AresHandler";
 
 describe("OceanSanctuary", function () {
   let card : OceanSanctuary, player : Player, otherPlayer: Player, game : Game;

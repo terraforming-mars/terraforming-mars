@@ -13,6 +13,7 @@ import { Board } from "../../src/Board";
 export const ARES_GAME_OPTIONS: GameOptions = {
 
     aresExtension: true,
+    useAresHazards: false,
 
     draftVariant: false,
     initialDraftVariant: false,

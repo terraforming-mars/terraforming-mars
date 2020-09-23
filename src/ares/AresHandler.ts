@@ -234,7 +234,7 @@ export class AresHandler {
 
     public static onTemperatureChange(game: Game) {
         testConstraint(
-            game.hazardData!.severeErosionTemperature,
+            game.aresData!.hazardData.severeErosionTemperature,
             game.getTemperature(),
             () => { makeSevere(game, TileType.EROSION_MILD, TileType.EROSION_SEVERE); }
         );
@@ -246,7 +246,7 @@ export class AresHandler {
     }
 
     public static onOxygenChange(game: Game) {
-        testConstraint(game.hazardData!.severeDustStormOxygen, game.getOxygenLevel(), () => {
+        testConstraint(game.aresData!.hazardData.severeDustStormOxygen, game.getOxygenLevel(), () => {
                 makeSevere( game, TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE);
             }
         );
@@ -324,7 +324,7 @@ function testConstraint(constraint: HazardConstraint, testValue: number, cb: () 
 
 function testToRemoveDustStorms(game: Game, player: Player, isWorldGov: boolean) {
     testConstraint(
-        game.hazardData!.removeDustStormsOceanCount,
+        game.aresData!.hazardData.removeDustStormsOceanCount,
         game.board.getOceansOnBoard(),
         () => {
             // TODO(kberg): Take DESPERATE_MEASURES into account.
@@ -349,11 +349,11 @@ function testToRemoveDustStorms(game: Game, player: Player, isWorldGov: boolean)
 
 function testToPlaceErosionTiles(game: Game, player: Player) {
     testConstraint(
-        game.hazardData!.erosionOceanCount,
+        game.aresData!.hazardData.erosionOceanCount,
         game.board.getOceansOnBoard(),
         () => {
             let type = TileType.EROSION_MILD;
-            if (game.hazardData!.severeErosionTemperature === undefined) {
+            if (game.aresData!.hazardData.severeErosionTemperature === undefined) {
                 type = TileType.EROSION_SEVERE;
             }
 

@@ -38,6 +38,7 @@ describe("AresHandler", function () {
         expect(AresHandler.isAresSpaceBonus(SpaceBonus.HEAT)).is.false;
         expect(AresHandler.isAresSpaceBonus(SpaceBonus.OCEAN)).is.false;
     });
+
     it("IsAresSpaceBonus", function () {
         expect(AresHandler.isAresSpaceBonus(AresSpaceBonus.ANIMAL)).is.true;
         expect(AresHandler.isAresSpaceBonus(AresSpaceBonus.MEGACREDITS)).is.true;

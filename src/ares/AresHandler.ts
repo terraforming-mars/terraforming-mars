@@ -37,9 +37,9 @@ export class AresHandler {
 
     // |player| placed a tile next to |adjacentSpace|.
     public static handleAdjacentPlacement (game: Game, adjacentSpace: ISpace, player: Player) {
-        if (adjacentSpace.adjacency?.bonus) {
+        if (adjacentSpace.adjacency !== undefined && adjacentSpace.adjacency.bonus.length > 0) {
           if (!adjacentSpace.player) {
-            throw new Error("A tile with an adjacency bonus must have an owner " + adjacentSpace);
+            throw new Error(`A tile with an adjacency bonus must have an owner (${adjacentSpace.x}, ${adjacentSpace.y}, ${adjacentSpace.adjacency.bonus}`);
           }
     
           var addResourceToCard = function(game: Game, player: Player, resourceType: ResourceType, resourceAsText: string) {
@@ -288,7 +288,11 @@ function placeHazard(game: Game, tileType: TileType, direction: 1 | -1) {
     );
 
     var distance = card.cost - 1;
+    distance = Math.max(distance, 0); // Some cards cost zero.
     var space = game.board.getAvailableSpaceByOffset(distance, direction);
+    if (space === undefined) {
+        throw new Error("Couldn't find space when card cost is " + card.cost);
+    }
     space.player = undefined;
     space.adjacency = { bonus: [], cost: 1 };
     space.tile = { tileType: tileType, hazard: true };

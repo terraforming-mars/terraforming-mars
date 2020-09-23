@@ -11,6 +11,7 @@ import { TileType } from "../../src/TileType";
 export const ARES_GAME_OPTIONS: GameOptions = {
 
     aresExtension: true,
+    useAresHazards: false,
 
     draftVariant: false,
     initialDraftVariant: false,

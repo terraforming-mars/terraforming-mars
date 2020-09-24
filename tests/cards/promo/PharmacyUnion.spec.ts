@@ -27,8 +27,7 @@ describe("PharmacyUnion", function () {
     });
 
     it("Should play", function () {
-        card.initialAction(player, game);
-        card.play();
+        card.play(player, game);
 
         expect(card.resourceCount).to.eq(2);
         expect(player.cardsInHand.length).to.eq(1);
@@ -38,7 +37,7 @@ describe("PharmacyUnion", function () {
     it("Gains diseases and removes MC when ANY player plays microbe cards", function () {
         player.megaCredits = 8;
         player2.megaCredits = 8;
-        card.play();
+        card.play(player, game);
 
         const ants = new Ants();
         player.playedCards.push(ants);
@@ -55,7 +54,7 @@ describe("PharmacyUnion", function () {
     });
     
     it("Removes diseases and gives TR only when corp owner plays science cards", function () {
-        card.play();
+        card.play(player, game);
 
         const searchForLife = new SearchForLife();
         player.playedCards.push(searchForLife);
@@ -71,7 +70,7 @@ describe("PharmacyUnion", function () {
     });
 
     it("Works correctly with Research", function () {
-        card.play();
+        card.play(player, game);
         expect(card.resourceCount).to.eq(2);
 
         const research = new Research();

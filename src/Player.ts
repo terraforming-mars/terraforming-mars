@@ -23,7 +23,7 @@ import * as constants from "./constants";
 import {IAward} from "./awards/IAward";
 import {VictoryPointsBreakdown} from "./VictoryPointsBreakdown";
 import {Resources} from "./Resources";
-import {ResourceType} from "./ResourceType";
+import { ResourceType } from "./ResourceType";
 import {CardName} from "./CardName";
 import {CorporationName} from "./CorporationName";
 import {IColony} from "./colonies/Colony";
@@ -965,7 +965,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
               game.addOceanTile(this, space.id, SpaceType.OCEAN, true);
               game.log(
                 LogMessageType.DEFAULT,
-                "${0} acted as World Government and increased oceans",
+                "${0} acted as World Government and placed an ocean",
                 new LogMessageData(LogMessageDataType.PLAYER, this.id)
               );
               return undefined;
@@ -1534,6 +1534,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     private tradeWithColony(openColonies: Array<IColony>, game: Game): PlayerInput {
       var opts: Array<OrOptions | SelectColony> = [];
+      let payWith: Resources | undefined = undefined; 
       let coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
       let selectColony = new SelectColony("Select colony for trade", "trade", coloniesModel, (colonyName: ColonyName) => {
         openColonies.forEach(colony => {
@@ -1544,6 +1545,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
               new LogMessageData(LogMessageDataType.PLAYER, this.id),
               new LogMessageData(LogMessageDataType.COLONY, colony.name)
             );
+            if (payWith === Resources.MEGACREDITS) {
+              game.addSelectHowToPayInterrupt(this, 9 - this.colonyTradeDiscount, false, false, "Select how to pay " + (9 - this.colonyTradeDiscount) + " for colony trade");
+            } else if (payWith === Resources.ENERGY) {
+              this.energy -= (3 - this.colonyTradeDiscount);
+            } else if (payWith === Resources.TITANIUM) {
+              this.titanium -= (3 - this.colonyTradeDiscount);
+            }
             colony.trade(this, game);
             return undefined;
           }
@@ -1558,15 +1566,15 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       howToPayForTrade.buttonLabel = "Pay";
 
       const payWithMC = new SelectOption("Pay " + (9 - this.colonyTradeDiscount) +" MC", "", () => {
-        game.addSelectHowToPayInterrupt(this, 9 - this.colonyTradeDiscount, false, false, "Select how to pay " + (9 - this.colonyTradeDiscount) + " for colony trade");
+        payWith = Resources.MEGACREDITS;
         return undefined;
       });
       const payWithEnergy = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Energy", "", () => {
-        this.energy -= (3 - this.colonyTradeDiscount);
+        payWith = Resources.ENERGY;
         return undefined;
       });  
       const payWithTitanium = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Titanium", "", () => {
-        this.titanium -= (3 - this.colonyTradeDiscount);
+        payWith = Resources.TITANIUM;
         return undefined;
       });
 

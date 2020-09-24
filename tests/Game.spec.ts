@@ -373,13 +373,14 @@ describe("Game", function () {
 
     it("Generates random milestones and awards", function () {
         const player = new Player("test", Color.BLUE, false);
+        const player2 = new Player("test2", Color.RED, false);
         const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS, randomMA: true}) as GameOptions;
-        const game = new Game("foobar", [player], player, gameOptions);
+        const game = new Game("foobar", [player, player2], player, gameOptions);
 
         let prevMilestones = game.milestones.map(m => m.name).sort();
         let prevAwards = game.awards.map(a => a.name).sort();
 
-        const game2 = new Game("foobar2", [player], player, gameOptions);
+        const game2 = new Game("foobar2", [player, player2], player, gameOptions);
 
         let milestones = game2.milestones.map(m => m.name).sort();
         let awards = game2.awards.map(a => a.name).sort();

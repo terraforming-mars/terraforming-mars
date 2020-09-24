@@ -50,7 +50,7 @@ export const AndOptions = Vue.component("and-options", {
             const saveBtn = createElement(
                 "button", 
                 {
-                    domProps: { className: "btn btn-primary" }, 
+                    domProps: { className: "btn btn-primary btn-submit" }, 
                     on: { click: () => { this.saveData(); } } 
                 }, 
                 playerInput.buttonLabel

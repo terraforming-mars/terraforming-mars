@@ -8,7 +8,6 @@ import { TileType } from "../../../src/TileType";
 import { SpaceBonus } from "../../../src/SpaceBonus";
 import { Resources } from "../../../src/Resources";
 import { SpaceType } from "../../../src/SpaceType";
-import { AresHandler } from "../../../src/ares/AresHandler";
 
 describe("OceanFarm", function () {
   let card : OceanFarm, player : Player, otherPlayer: Player, game : Game;

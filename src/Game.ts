@@ -60,7 +60,7 @@ import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
 import { AresHandler } from "./ares/AresHandler";
 import { getRandomMilestonesAndAwards } from "./MASynergy";
-import { HazardData } from "./ares/HazardData";
+import { AresData } from "./ares/AresData";
 
 export interface Score {
   corporation: String;
@@ -83,6 +83,7 @@ export interface GameOptions {
   shuffleMapOption: boolean;
   promoCardsOption: boolean;
   aresExtension: boolean;
+  useAresHazards: boolean;
   undoOption: boolean;
   fastModeOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
@@ -127,7 +128,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public someoneHasRemovedOtherPlayersPlants: boolean = false;
     public seed: number = Math.random();
     public gameOptions: GameOptions;
-    public hazardData?: HazardData;
+    public aresData: AresData | undefined;
 
 
     constructor(
@@ -158,6 +159,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           shuffleMapOption: false,
           promoCardsOption: false,
           aresExtension: false,
+          useAresHazards: true,
           undoOption: false,
           fastModeOption: false,
           removeNegativeGlobalEventsOption: false,
@@ -204,8 +206,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       if (gameOptions.aresExtension) {
-        this.hazardData = HazardData.initial();
-        AresHandler.setupHazards(this, players.length);
+        this.aresData = new AresData(gameOptions.aresExtension, gameOptions.useAresHazards);
+          if (gameOptions.useAresHazards) {
+            AresHandler.setupHazards(this, players.length);
+          }
       }
 
       let corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());

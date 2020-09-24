@@ -13,12 +13,6 @@ import { TileType } from "../../src/TileType";
 import { ITile } from "../../src/ITile";
 import { SpaceType } from "../../src/SpaceType";
 
-
-// TODO(kberg): remaining tests.
-// Pay adjacency costs
-// pay hazard costs
-// Place tile over hazard
-
 describe("AresHandler", function () {
     let player : Player, otherPlayer: Player, game : Game;
 
@@ -94,4 +88,92 @@ describe("AresHandler", function () {
             {tile: {tileType: TileType.DUST_STORM_MILD, hazard: true}, x: 8, y: 0},
             {tile: {tileType: TileType.DUST_STORM_MILD, hazard: true}, x: 6, y: 8}]);
    });
+
+    it("Pay Adjacency Costs", function() {
+        var firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+        firstSpace.adjacency = { bonus: [ ], cost: 2 };
+        game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
+
+        player.megaCredits = 2;
+        otherPlayer.megaCredits = 0;
+
+        var adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
+        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+
+        // player who placed next to Nuclear zone, loses two money.
+        expect(player.megaCredits).is.eq(0);
+
+        // player who owns Nuclear zone doesn't get an adjacency bonus.
+        expect(otherPlayer.megaCredits).is.eq(0);
+    })
+
+    it("Can't afford adjacency costs", function() {
+        var firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+        firstSpace.adjacency = { bonus: [ ], cost: 2 };
+        game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
+
+        otherPlayer.megaCredits = 0;
+
+        var adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
+
+        try {
+            game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+        } catch(err) {
+            expect(err.toString().includes("Placing here costs 2 M€")).is.true;
+        }
+    });
+
+    it("pay adjacent hazard costs - mild", function() {
+        var firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+        AresHandler.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
+
+        player.megaCredits = 2;
+        otherPlayer.megaCredits = 0;
+
+        var adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
+        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+
+        // Placing next to a mild dust storm costs 1 MC.
+        expect(player.megaCredits).is.eq(1);
+    });
+
+    it("pay adjacent hazard costs - severe", function() {
+        var firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
+        AresHandler.putHazardAt(firstSpace, TileType.DUST_STORM_SEVERE); 
+
+        player.megaCredits = 2;
+        otherPlayer.megaCredits = 0;
+
+        var adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
+        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+
+        // Placing next to a severe dust storm costs 1 MC.
+        expect(player.megaCredits).is.eq(0);
+    });
+
+    it("cover mild hazard", function() {
+        var space = game.board.getAvailableSpacesOnLand(player)[0];
+        AresHandler.putHazardAt(space, TileType.EROSION_MILD);
+        player.megaCredits = 8;
+        expect(player.getTerraformRating()).eq(20);
+
+        game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
+
+        expect(space.tile!.tileType).eq(TileType.GREENERY);
+        expect(player.megaCredits).is.eq(0);
+        expect(player.getTerraformRating()).eq(21);
+    });
+
+    it("cover severe hazard", function() {
+        var space = game.board.getAvailableSpacesOnLand(player)[0];
+        AresHandler.putHazardAt(space, TileType.EROSION_SEVERE);
+        player.megaCredits = 16;
+        expect(player.getTerraformRating()).eq(20);
+
+        game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
+
+        expect(space.tile!.tileType).eq(TileType.GREENERY);
+        expect(player.megaCredits).is.eq(0);
+        expect(player.getTerraformRating()).eq(22);
+    });
 });

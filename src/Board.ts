@@ -126,7 +126,6 @@ export abstract class Board {
         );
     }
 
-    // TODO(kberg): remove the default value from |countUpgradedOceans| to inspect every use case.
     public getOceansOnBoard(countUpgradedOceans: boolean = true): number {
         return this.getOceansTiles(countUpgradedOceans).length;
     }
@@ -137,7 +136,6 @@ export abstract class Board {
                         space.tile.tileType === TileType.OCEAN
             );
         } else {
-            // TODO(kberg): add test for getOceansTiles(true)
             return this.spaces.filter((space) => Board.isOceanSpace(space));
         }
     }    

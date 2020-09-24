@@ -7649,8 +7649,12 @@ export const HTML_DATA: Map<string, string> =
     <div class="content ">
         <div class="requirements ">6 Oceans</div>
         <div class="ares-tile board-space-tile--ocean_city"></div>
-        <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div><br>
-        <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">3</div>
+        
+        <div class="production-box production-box-size2 ">
+            <div class="production-prefix ">➖︎</div><div class="energy production "></div><br>
+            <div class="production-prefix ">➕︎</div><div class="money production ">3</div>
+        </div>
+
         <div class="description " style="text-align:left;">
           (Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your MC production 3 steps.<br>
             Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES.

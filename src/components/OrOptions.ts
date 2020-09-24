@@ -61,7 +61,7 @@ export const OrOptions = Vue.component("or-options", {
             optionElements.push(subchildren[subchildren.length - 1]);
             children.push(createElement("div", subchildren));
             if (this.showsave && this.$data.selectedOption === idx) {
-                children.push(createElement("div", { style: {"margin": "5px 30px 10px"}, "class": "wf-action"}, [createElement("button", { domProps: { className: "btn btn-primary" }, on: { click: () => { this.saveData(); } } }, $t(option.buttonLabel))]));
+                children.push(createElement("div", { style: {"margin": "5px 30px 10px"}, "class": "wf-action"}, [createElement("button", { domProps: { className: "btn btn-primary btn-submit" }, on: { click: () => { this.saveData(); } } }, $t(option.buttonLabel))]));
             }
         });
         return createElement("div", {"class": "wf-options"}, children);

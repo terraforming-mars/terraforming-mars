@@ -23,7 +23,7 @@ import * as constants from "./constants";
 import {IAward} from "./awards/IAward";
 import {VictoryPointsBreakdown} from "./VictoryPointsBreakdown";
 import {Resources} from "./Resources";
-import {ResourceType} from "./ResourceType";
+import { ResourceType } from "./ResourceType";
 import {CardName} from "./CardName";
 import {CorporationName} from "./CorporationName";
 import {IColony} from "./colonies/Colony";
@@ -52,6 +52,9 @@ import { Board } from "./Board";
 import { PartyHooks } from "./turmoil/parties/PartyHooks";
 import { REDS_RULING_POLICY_COST } from "./constants";
 import { CardModel } from "./models/CardModel";
+import { SelectColony } from "./inputs/SelectColony";
+import { ColonyName } from "./colonies/ColonyName";
+import { ColonyModel } from "./models/ColonyModel";
 
 export type PlayerId = string;
 
@@ -677,6 +680,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.runInputCb(game, pi.cb(amount));
       } else if (pi instanceof SelectOption) {
         this.runInputCb(game, pi.cb());
+      } else if (pi instanceof SelectColony) {
+        const colony: ColonyName = (input[0][0]) as ColonyName;
+        if (colony === null) {
+          throw new Error("No colony selected");
+        }
+        this.runInputCb(game, pi.cb(colony));        
       } else if (pi instanceof OrOptions) {
         const waiting: OrOptions = pi;
         const optionIndex = parseInt(input[0][0]);
@@ -956,7 +965,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
               game.addOceanTile(this, space.id, SpaceType.OCEAN, true);
               game.log(
                 LogMessageType.DEFAULT,
-                "${0} acted as World Government and increased oceans",
+                "${0} acted as World Government and placed an ocean",
                 new LogMessageData(LogMessageDataType.PLAYER, this.id)
               );
               return undefined;
@@ -1373,22 +1382,19 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     private buildColony(game: Game, openColonies: Array<IColony>): PlayerInput {
-      let buildColony = new OrOptions();
-      buildColony.title = "Build colony (" + constants.BUILD_COLONY_COST + " MC)";
-      buildColony.buttonLabel = "Build colony";
-      openColonies.forEach(colony => {
-        const colonySelect =  new SelectOption(
-          colony.name + " - (" + colony.description + ")", 
-          "Confirm",
-          () => {
+      let coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
+      let buildColony = new SelectColony("Build colony (" + constants.BUILD_COLONY_COST + " MC)", "Build", coloniesModel, (colonyName: ColonyName) => {
+        openColonies.forEach(colony => {
+          if (colony.name === colonyName) {
             game.addSelectHowToPayInterrupt(this, constants.BUILD_COLONY_COST, false, false, "Select how to pay for Colony project");
             colony.onColonyPlaced(this, game);
             this.onStandardProject(StandardProjectType.BUILD_COLONY);
             return undefined;
           }
-        );
-        buildColony.options.push(colonySelect);
-      }); 
+          return undefined;
+        });
+        return undefined;
+      });
       return buildColony;
     }      
 
@@ -1527,40 +1533,48 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     } 
 
     private tradeWithColony(openColonies: Array<IColony>, game: Game): PlayerInput {
-      var opts: Array<OrOptions> = [];
-      let selectColony = new OrOptions();
-      selectColony.title = "Select colony";
-      openColonies.forEach(colony => {
-        const colonySelect =  new SelectOption(
-          colony.name + " - (" + colony.description + ")", 
-          "",
-          () => {
+      var opts: Array<OrOptions | SelectColony> = [];
+      let payWith: Resources | undefined = undefined; 
+      let coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
+      let selectColony = new SelectColony("Select colony for trade", "trade", coloniesModel, (colonyName: ColonyName) => {
+        openColonies.forEach(colony => {
+          if (colony.name === colonyName) {
             game.log(
               LogMessageType.DEFAULT,
               "${0} traded with ${1}",
               new LogMessageData(LogMessageDataType.PLAYER, this.id),
               new LogMessageData(LogMessageDataType.COLONY, colony.name)
             );
+            if (payWith === Resources.MEGACREDITS) {
+              game.addSelectHowToPayInterrupt(this, 9 - this.colonyTradeDiscount, false, false, "Select how to pay " + (9 - this.colonyTradeDiscount) + " for colony trade");
+            } else if (payWith === Resources.ENERGY) {
+              this.energy -= (3 - this.colonyTradeDiscount);
+            } else if (payWith === Resources.TITANIUM) {
+              this.titanium -= (3 - this.colonyTradeDiscount);
+            }
             colony.trade(this, game);
             return undefined;
           }
-        );
-        selectColony.options.push(colonySelect);
-      });      
+          return undefined;
+        });
+        return undefined;
+      }
+      );
+
       let howToPayForTrade = new OrOptions();
       howToPayForTrade.title = "Pay trade fee";
       howToPayForTrade.buttonLabel = "Pay";
 
       const payWithMC = new SelectOption("Pay " + (9 - this.colonyTradeDiscount) +" MC", "", () => {
-        game.addSelectHowToPayInterrupt(this, 9 - this.colonyTradeDiscount, false, false, "Select how to pay " + (9 - this.colonyTradeDiscount) + " for colony trade");
+        payWith = Resources.MEGACREDITS;
         return undefined;
       });
       const payWithEnergy = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Energy", "", () => {
-        this.energy -= (3 - this.colonyTradeDiscount);
+        payWith = Resources.ENERGY;
         return undefined;
       });  
       const payWithTitanium = new SelectOption("Pay " + (3 - this.colonyTradeDiscount) +" Titanium", "", () => {
-        this.titanium -= (3 - this.colonyTradeDiscount);
+        payWith = Resources.TITANIUM;
         return undefined;
       });
 

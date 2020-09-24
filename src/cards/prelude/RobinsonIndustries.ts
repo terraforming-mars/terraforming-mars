@@ -23,23 +23,20 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
 
     public action(player: Player, game: Game) {
         let minimum = player.getProduction(Resources.MEGACREDITS);
-        let lowest: Array<SelectOption> = [new SelectOption("Increase MC production 1 step", "Select", () => {
-            this.increaseAndLogProduction(game, player, Resources.MEGACREDITS);
-            return undefined;
-        })];
+        let lowest: Array<SelectOption> = [];
 
-        [Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT].forEach((resource) => {
+        [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT].forEach((resource) => {
+            const option = new SelectOption("Increase " + resource +  " production 1 step", "Select", () => {
+                this.increaseAndLogProduction(game, player, resource);
+                return undefined;
+            });
+            
             if (player.getProduction(resource) < minimum) {
                 lowest = [];
                 minimum = player.getProduction(resource);
             }
 
-            if (player.getProduction(resource) === minimum) {
-                lowest.push(new SelectOption("Increase " + resource +  " production 1 step", "Select", () => {
-                    this.increaseAndLogProduction(game, player, resource);
-                    return undefined;
-                }));
-            }
+            if (player.getProduction(resource) === minimum) lowest.push(option);
         });
 
         const result = new OrOptions();

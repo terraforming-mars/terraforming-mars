@@ -965,7 +965,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
               game.addOceanTile(this, space.id, SpaceType.OCEAN, true);
               game.log(
                 LogMessageType.DEFAULT,
-                "${0} acted as World Government and increased oceans",
+                "${0} acted as World Government and placed an ocean",
                 new LogMessageData(LogMessageDataType.PLAYER, this.id)
               );
               return undefined;

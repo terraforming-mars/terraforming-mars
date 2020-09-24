@@ -118,7 +118,6 @@ export class AresHandler {
             .reduce((prior, current) => prior + current, 0);
     }
 
-    // TODO(kberg): add tests
     public static payAdjacencyAndHazardCosts(game: Game, player: Player, space: ISpace) {
         var cost = this.adjacencyCosts(game, space);
 
@@ -221,14 +220,14 @@ export class AresHandler {
         // don't take solo into account, nor if you played with more than
         // five players.
         if (playerCount >= 5) {
-            placeHazard(game, TileType.DUST_STORM_MILD, 1);
+            randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1);
         } else if (playerCount === 4) {
-            placeHazard(game, TileType.DUST_STORM_MILD, 1);
-            placeHazard(game, TileType.DUST_STORM_MILD, -1);
+            randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1);
+            randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, -1);
         } else if (playerCount <= 3) {
-            placeHazard(game, TileType.DUST_STORM_MILD, 1);
-            placeHazard(game, TileType.DUST_STORM_MILD, 1);
-            placeHazard(game, TileType.DUST_STORM_MILD, -1);
+            randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1);
+            randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, 1);
+            randomlyPlaceHazard(game, TileType.DUST_STORM_MILD, -1);
         }
     }
 
@@ -252,7 +251,6 @@ export class AresHandler {
         );
     }
 
-    // TODO(kberg): add tests
     // Returns true if |newTile| can cover |boardTile|.
     public static canCover(boardTile: ITile, newTile: ITile): boolean {
         if (boardTile.hazard) {
@@ -264,7 +262,6 @@ export class AresHandler {
         return false;
     }
 
-    // TODO(kberg): add tests
     public static grantBonusForRemovingHazard(game: Game, player: Player, initialTileType?: TileType) {
         // TODO(kberg): log for increasing the rating?
         switch (initialTileType) {
@@ -279,9 +276,32 @@ export class AresHandler {
                 break;
         }
     }
+
+
+    public static putHazardAt(space: ISpace, tileType: TileType) {
+        var cost;
+        switch(tileType) {
+            case TileType.DUST_STORM_MILD:
+            case TileType.EROSION_MILD:
+                cost = 1;
+                break;
+
+            case TileType.DUST_STORM_SEVERE:
+            case TileType.EROSION_SEVERE:
+                cost = 2;
+                break;
+
+            default:
+                throw new Error(`Tile type ${tileType} is not a hazard.`);
+        }
+
+        space.player = undefined;
+        space.adjacency = { bonus: [], cost: cost };
+        space.tile = { tileType: tileType, hazard: true };
+    }
 }
 
-function placeHazard(game: Game, tileType: TileType, direction: 1 | -1) {
+function randomlyPlaceHazard(game: Game, tileType: TileType, direction: 1 | -1) {
     var card = game.dealer.dealCard();
     game.log(
         LogMessageType.DEFAULT,
@@ -296,9 +316,7 @@ function placeHazard(game: Game, tileType: TileType, direction: 1 | -1) {
     if (space === undefined) {
         throw new Error("Couldn't find space when card cost is " + card.cost);
     }
-    space.player = undefined;
-    space.adjacency = { bonus: [], cost: 1 };
-    space.tile = { tileType: tileType, hazard: true };
+    AresHandler.putHazardAt(space, tileType);
     return space;
 }
 
@@ -306,9 +324,7 @@ function makeSevere(game: Game, from: TileType, to: TileType) {
     game.board.spaces
         .filter((s) => s.tile?.tileType === from)
         .forEach((s) => {
-            s.tile!.tileType = to;
-            // TODO(kberg): this doesn't work.
-            s.adjacency!.cost = 2;
+            AresHandler.putHazardAt(s, to);
         });
 }
 
@@ -357,8 +373,8 @@ function testToPlaceErosionTiles(game: Game, player: Player) {
                 type = TileType.EROSION_SEVERE;
             }
 
-            var space1 = placeHazard(game, type, 1);
-            var space2 = placeHazard(game, type, -1);
+            var space1 = randomlyPlaceHazard(game, type, 1);
+            var space2 = randomlyPlaceHazard(game, type, -1);
             [space1, space2].forEach((space) => {
                 LogHelper.logTilePlacement(game, player, space, type);
             });

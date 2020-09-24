@@ -140,6 +140,12 @@ export const PlayerHome = Vue.component("player-home", {
                 
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace />
                  
+                
+                <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat" v-if="player.gameLog.length > 0">
+                    <h2 :class="'player_color_'+ player.color"><span v-i18n>Game log</span><span class="label-additional">generation {{ player.generation }}</span></h2>
+                    <log-panel :messages="player.gameLog" :players="player.players"></log-panel>
+                </div>
+
                 <div :class="getWaitingForClasses()">
                     <a name="actions" class="player_home_anchor"></a>
                     <h2 :class="'player_color_'+ player.color" v-i18n>Actions</h2>
@@ -151,11 +157,6 @@ export const PlayerHome = Vue.component("player-home", {
                     <div v-for="card in player.draftedCards" :key="card.name" class="cardbox">
                         <card :card="card"></card>
                     </div>
-                </div>
-
-                <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat" v-if="player.gameLog.length > 0">
-                    <h2 :class="'player_color_'+ player.color"><span v-i18n>Game log</span><span class="label-additional">generation {{ player.generation }}</span></h2>
-                    <log-panel :messages="player.gameLog" :players="player.players"></log-panel>
                 </div>
 
                 <a name="cards" class="player_home_anchor"></a>
@@ -235,7 +236,7 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
                 </div>
 
-                <details class="accordion">
+                <details class="accordion board-accordion" open>
                     <summary class="accordion-header">
                         <div class="is-action">
                             <i class="icon icon-arrow-right mr-1"></i>

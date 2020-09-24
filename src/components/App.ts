@@ -12,7 +12,10 @@ export const mainAppSettings = {
         screen: "empty",
         playerkey: 0,
         spectating: false,
-        componentsVisibility: {},
+        componentsVisibility: {
+            "millestones_list": true,
+            "awards_list": true,
+        },
         game: {
             players: [],
         },

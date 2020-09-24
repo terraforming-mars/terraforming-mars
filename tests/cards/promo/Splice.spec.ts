@@ -40,7 +40,7 @@ describe("Splice", function () {
         const game = new Game("foobar2", [player,player2], player);
         const play = card.play();
         player.corporationCard = card;
-        const play2 = card2.play();
+        const play2 = card2.play(player, game);
         player2.corporationCard = card2;
         expect(play).to.eq(undefined);
         expect(play2).to.eq(undefined);

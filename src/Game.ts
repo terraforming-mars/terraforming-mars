@@ -83,7 +83,7 @@ export interface GameOptions {
   shuffleMapOption: boolean;
   promoCardsOption: boolean;
   aresExtension: boolean;
-  useAresHazards: boolean;
+  aresHazards: boolean;
   undoOption: boolean;
   fastModeOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
@@ -159,7 +159,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           shuffleMapOption: false,
           promoCardsOption: false,
           aresExtension: false,
-          useAresHazards: true,
+          aresHazards: true,
           undoOption: false,
           fastModeOption: false,
           removeNegativeGlobalEventsOption: false,
@@ -206,8 +206,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       if (gameOptions.aresExtension) {
-        this.aresData = new AresData(gameOptions.aresExtension, gameOptions.useAresHazards);
-          if (gameOptions.useAresHazards) {
+        this.aresData = new AresData(gameOptions.aresExtension, gameOptions.aresHazards);
+          // this test is because hazard selection isn't activaly part of game options, but needs
+          // to be configurable for tests.
+          if (gameOptions.aresHazards !== false) {
             AresHandler.setupHazards(this, players.length);
           }
       }

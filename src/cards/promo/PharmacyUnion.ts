@@ -24,12 +24,9 @@ export class PharmacyUnion implements CorporationCard {
     public resourceCount: number = 0;
     public isDisabled: boolean = false;
 
-    public play() {
+    public play(player: Player, game: Game) {
         this.resourceCount = 2;
-        return undefined;
-    }
 
-    public initialAction(player: Player, game: Game) {
         player.cardsInHand.push(game.drawCardsByTag(Tags.SCIENCE, 1)[0]);
         const drawnCard = game.getCardsInHandByTag(player, Tags.SCIENCE).slice(-1)[0];
 
@@ -39,7 +36,7 @@ export class PharmacyUnion implements CorporationCard {
             new LogMessageData(LogMessageDataType.PLAYER, player.id),
             new LogMessageData(LogMessageDataType.CARD, drawnCard.name)
         );
-        
+
         return undefined;
     }
 

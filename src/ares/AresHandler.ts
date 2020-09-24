@@ -1,34 +1,34 @@
 // Game.ts-specific behavior for Ares
+
+import { CardName } from "../CardName";
 import { ICard } from "../cards/ICard";
 import { LogHelper } from "../components/LogHelper";
-import { Game } from '../Game';
+import { Game } from "../Game";
 import { SelectCard } from "../inputs/SelectCard";
-import { ISpace } from '../ISpace';
+import { ISpace } from "../ISpace";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
 import { LogMessageType } from "../LogMessageType";
-import { Player } from '../Player';
+import { Player } from "../Player";
 import { ResourceType } from "../ResourceType";
+import { SpaceBonus } from "../SpaceBonus";
 import { AresSpaceBonus } from "./AresSpaceBonus";
-import { SpaceBonus } from '../SpaceBonus';
-import { assert } from "console";
 
 export class AresHandler {
 
-  private game: Game;
-
-  public constructor(game: Game) {
-    this.game = game;
-  }
-
   public static isAresSpaceBonus(a: SpaceBonus | AresSpaceBonus) : a is AresSpaceBonus {
-    assert(Object.values(AresSpaceBonus).length == 2);
-    
-    return a === AresSpaceBonus.ANIMAL || a === AresSpaceBonus.MC;
+    switch(a) {
+      case AresSpaceBonus.ANIMAL:
+      case AresSpaceBonus.MEGACREDITS:
+      case AresSpaceBonus.MICROBE:
+      case AresSpaceBonus.POWER:
+            return true;
+    }
+    return false;
   }
 
   // |player| placed a tile next to |adjacentSpace|.
-  public handleAdjacentPlacement (adjacentSpace: ISpace, player: Player) {
+  public handleAdjacentPlacement (game: Game, adjacentSpace: ISpace, player: Player) {
     if (adjacentSpace.adjacency?.bonus) {
       if (!adjacentSpace.player) {
         throw new Error("A tile with an adjacency bonus must have an owner " + adjacentSpace);
@@ -44,7 +44,7 @@ export class AresHandler {
             } else if (availableAnimalCards.length === 1) {
               player.addResourceTo(availableAnimalCards[0]);
             } else if (availableAnimalCards.length > 1) {
-              this.game.addInterrupt({
+              game.addInterrupt({
                 player: player,
                 playerInput:
                   new SelectCard(
@@ -53,7 +53,7 @@ export class AresHandler {
                     availableAnimalCards,
                     (selected: ICard[]) => {
                       player.addResourceTo(selected[0]);
-                      LogHelper.logAddResource(this.game, player, selected[0], 1);
+                      LogHelper.logAddResource(game, player, selected[0], 1);
                       return undefined;
                     })
               });
@@ -62,30 +62,34 @@ export class AresHandler {
             player.megaCredits += 1;
           }
         } else {
-          this.game.grantSpaceBonus(player, bonus);
+          game.grantSpaceBonus(player, bonus);
         }
-        this.game.log(
+        game.log(
           LogMessageType.DEFAULT,
-          "{1} gains 1 {2} for placing next to {3}",
+          "${1} gains 1 ${2} for placing next to ${3}",
           new LogMessageData(LogMessageDataType.PLAYER, player.id),
           new LogMessageData(LogMessageDataType.STRING, bonus.toString()),
           new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""));
         });
 
-        adjacentSpace.player.megaCredits += 1;
-        this.game.log(
+    // TODO(kberg): test.
+    if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
+      adjacentSpace.player.megaCredits += 1;
+      // TODO(kberg): log.
+    };
+    adjacentSpace.player.megaCredits += 1;
+        game.log(
             LogMessageType.DEFAULT,
-            "{1} gains 1 M€ for a tile placed next to {2}",
+            "${1} gains 1 M€ for a tile placed next to ${2}",
             new LogMessageData(LogMessageDataType.PLAYER, adjacentSpace.player.id),
             new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""),);
-  
     }
   }
 
   // TODO(kberg): find the right space for this, vincentneko@ made a good suggestion.
-  public adjacentCost(space: ISpace) {
+  public adjacentCost(game: Game, space: ISpace) {
     let extraCost: number = 0;
-    this.game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
+    game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
       if (adjacentSpace?.adjacency?.cost) {
         extraCost += adjacentSpace.adjacency.cost || 0;
       }

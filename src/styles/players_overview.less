@@ -18,9 +18,6 @@
         width: 100%;
         border: 1px dashed #444;
     }
-    .stack-tags-under {
-        flex-flow: column !important;
-    }
     .player-info {
         display: inline-flex;
         flex-flow: row;
@@ -28,11 +25,6 @@
         margin-top: 12px;
         border-radius: 8px;
         margin-bottom: 12px;
-        .stats-and-res-separator {
-            margin-bottom: 8px;
-            border-bottom: 2px solid rgba(170, 170, 170, 0.2);
-            padding-bottom: 8px;
-        }
 
         .player-tags {
             display: flex;
@@ -47,6 +39,7 @@
         }
         .player-status-and-res {
             display: inline-flex;
+            min-width: 770px;
             .player-status {
                 display: flex;
                 .player-status-left {
@@ -170,6 +163,20 @@
             color: black;
             background: #ccc;
             cursor: pointer;
+        }
+    }
+}
+
+@media only screen and (max-width: 1740px)  {
+    .players-overview {
+        .player-status-and-res {
+            margin-bottom: 8px;
+            border-bottom: 2px solid rgba(170, 170, 170, 0.2);
+            padding-bottom: 8px;
+        }
+
+        .player-info {
+            flex-flow: column !important;
         }
     }
 }

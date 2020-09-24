@@ -12,7 +12,7 @@ import { ISpace } from "../../src/ISpace";
 export const ARES_GAME_OPTIONS: GameOptions = {
 
     aresExtension: true,
-    useAresHazards: false,
+    aresHazards: false,
 
     draftVariant: false,
     initialDraftVariant: false,

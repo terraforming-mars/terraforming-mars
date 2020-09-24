@@ -3,7 +3,7 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { TileType } from "../../../src/TileType";
-import { NuclearZoneAres } from '../../../src/cards/ares/NuclearZoneAres';
+import { NuclearZoneAres } from "../../../src/cards/ares/NuclearZoneAres";
 
 describe("NuclearZoneAres", function () {
     it("Should play", function () {
@@ -15,7 +15,7 @@ describe("NuclearZoneAres", function () {
           const space = action.availableSpaces[0]; 
           action.cb(space);
           expect(space.tile && space.tile.tileType).to.eq(TileType.NUCLEAR_ZONE);
-          player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+          player.victoryPointsBreakdown.setVictoryPoints("victoryPoints", card.getVictoryPoints());
           expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-2);
           expect(space.adjacency).deep.eq({bonus: [], cost: 2});
         }  

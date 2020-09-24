@@ -312,7 +312,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       if (gameOptions.aresExtension) {
-        this.aresHandler = new AresHandler(this);
+        this.aresHandler = new AresHandler();
       }
       // Save initial game state
       Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer), this.players.length);
@@ -1502,7 +1502,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
             if (adjacentSpace.tile.tileType === TileType.OCEAN) {
               player.megaCredits += player.oceanBonus;
             }
-            this.aresHandler?.handleAdjacentPlacement(adjacentSpace, player);
+            this.aresHandler?.handleAdjacentPlacement(this, adjacentSpace, player);
           }
         });
       } else {

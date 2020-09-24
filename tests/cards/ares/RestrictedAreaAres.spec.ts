@@ -3,8 +3,8 @@ import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from "../../../src/Game";
 import { TileType } from "../../../src/TileType";
-import { RestrictedAreaAres } from '../../../src/cards/ares/RestrictedAreaAres';
-import { SpaceBonus } from '../../../src/SpaceBonus';
+import { RestrictedAreaAres } from "../../../src/cards/ares/RestrictedAreaAres";
+import { SpaceBonus } from "../../../src/SpaceBonus";
 
 describe("RestrictedAreaAres", function () {
     let card : RestrictedAreaAres, player : Player, game : Game;

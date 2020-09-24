@@ -54,4 +54,5 @@ export interface SerializedPlayer {
     turmoilScientistsActionUsed: boolean;
     removingPlayers: Array<string>;
     needsToDraft: boolean | undefined;
+    hasConceded: boolean;
 }

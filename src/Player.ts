@@ -55,6 +55,7 @@ import { CardModel } from "./models/CardModel";
 import { SelectColony } from "./inputs/SelectColony";
 import { ColonyName } from "./colonies/ColonyName";
 import { ColonyModel } from "./models/ColonyModel";
+import { CrashingGanymedeIntoMars } from "./cards/community/CrashingGanymedeIntoMars";
 
 export type PlayerId = string;
 
@@ -106,7 +107,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public colonyTradeDiscount: number = 0;
     private turmoilScientistsActionUsed: boolean = false;
     public removingPlayers: Array<PlayerId> = [];
-    public needsToDraft: boolean | undefined = undefined; 
+    public needsToDraft: boolean | undefined = undefined;
+    public hasConceded: boolean = false;
 
     constructor(
         public name: string,
@@ -2075,7 +2077,24 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return preludeCards.map((card) => card.bonusMc || 0).reduce((a, b) => Math.max(a, b));
     }
 
+    public concedeGame(game: Game) {
+      const crashingGanymedeIntoMars = new CrashingGanymedeIntoMars();
+      crashingGanymedeIntoMars.play(this, game);
+      return undefined;
+    }
+
     public takeAction(game: Game): void {
+      // Concede game check for 2p
+      const players = game.getPlayers();
+      
+      if (players.length === 2) {
+        const someoneHasConceded = players.findIndex((p) => p.hasConceded);
+        if (someoneHasConceded !== -1) {
+          game.playerIsFinishedTakingActions();
+          return;
+        }
+      }
+
       if (this.hasInterrupt(game)) {
         this.runInterrupt(game, () => this.takeAction(game));
         return;

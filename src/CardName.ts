@@ -447,4 +447,7 @@ export enum CardName {
     PROJECT_WORKSHOP = "Project Workshop",
     INCITE = "Incite",
     PLAYWRIGHTS = "Playwrights",
+    
+    // Community cards
+    CRASHING_GANYMEDE_INTO_MARS = "Crashing Ganymede into Mars",
 }

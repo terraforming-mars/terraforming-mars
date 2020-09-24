@@ -7629,4 +7629,18 @@ export const HTML_DATA: Map<string, string> =
         (You start with 38 MC and 1 Energy production.)
       </div>
 `],
+[CardName.CRASHING_GANYMEDE_INTO_MARS,`
+      <div class="title background-color-events">Crashing Ganymede into Mars</div>
+      <div class="price">0</div>
+      <div class="tag tag1 tag-event"></div>
+      <div class="tag tag2 tag-space"></div>
+      <div class="community-icon project-icon"></div>
+
+      <div class="content">
+        <div class="points points-big">-99</div>
+        <div class="description">
+          (Immediately end the game.)
+        </div>
+      </div>
+`],
 ]);

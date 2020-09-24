@@ -68,6 +68,14 @@ export const PlayerHome = Vue.component("player-home", {
             }
             return fleetsRange;
         },
+        concedeGame: function () {
+            if (confirm("Warning: You are conceding this game")) {
+                // TODO: Call player.concedeGame(game) here
+                return undefined;
+            } else {
+                return;
+            }
+        }
     },
     mounted: function () {
         dialogPolyfill.default.registerDialog(
@@ -130,7 +138,7 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <div class="player_home_block player_home_block--actions nofloat">
                     <a name="actions" class="player_home_anchor"></a>
-                    <h2 :class="'player_color_'+ player.color" v-i18n>Actions</h2>
+                    <h2 :class="'player_color_'+ player.color" v-i18n>Actions<button class="concede" v-if="player.players.length === 2" v-on:click="concedeGame()">Concede</button></h2>
                     <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
 

@@ -49,10 +49,7 @@ const styles = fs.readFileSync("styles.css");
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
 
-function requestHandler(
-    req: http.IncomingMessage,
-    res: http.ServerResponse
-): void {
+function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
     if (req.url !== undefined) {
         if (req.method === "GET") {
             if (req.url.replace(/\?.*$/, "").startsWith("/games-overview")) {
@@ -125,6 +122,17 @@ function requestHandler(
         }
     } else {
         notFound(req, res);
+    }
+}
+
+function requestHandler(
+    req: http.IncomingMessage,
+    res: http.ServerResponse
+): void {
+    try {
+        processRequest(req, res);
+    } catch (error) {
+        internalServerError(res, error);
     }
 }
 
@@ -259,12 +267,10 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
             );
             res.setHeader("Content-Type", "application/json");
             res.write(getGame(gameToRebuild));
-        } catch (err) {
-            console.warn("error loading game", err);
-            res.writeHead(500);
-            res.write("Unable to load game");
+            res.end();
+        } catch (error) {
+            internalServerError(res, error);
         }
-        res.end();
     });
 }
 
@@ -428,6 +434,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                 venusNextExtension: gameReq.venusNext,
                 coloniesExtension: gameReq.colonies,
                 turmoilExtension: gameReq.turmoil,
+                aresExtension: gameReq.aresExtension,
                 boardName: gameReq.board,
                 showOtherPlayersVP: gameReq.showOtherPlayersVP,
                 customCorporationsList: gameReq.customCorporationsList,
@@ -455,12 +462,10 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
             });
             res.setHeader("Content-Type", "application/json");
             res.write(getGame(game));
-        } catch (err) {
-            console.warn("error creating game", err);
-            res.writeHead(500);
-            res.write("Unable to create game");
+            res.end();
+        } catch (error) {
+            internalServerError(res, error);
         }
-        res.end();
     });
 }
 
@@ -958,6 +963,13 @@ function getGame(game: Game): string {
         players: game.getPlayers(),
     };
     return JSON.stringify(output);
+}
+
+function internalServerError(res: http.ServerResponse, err: unknown): void {
+    console.warn("internal server error", err);
+    res.writeHead(500);
+    res.write("Internal server error " + err);
+    res.end();
 }
 
 function notFound(req: http.IncomingMessage, res: http.ServerResponse): void {

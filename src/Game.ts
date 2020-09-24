@@ -60,6 +60,7 @@ import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
 import { AresHandler } from "./ares/AresHandler";
 import { getRandomMilestonesAndAwards } from "./MASynergy";
+import { ColonyModel } from "./models/ColonyModel";
 
 
 export interface Score {
@@ -312,7 +313,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       if (gameOptions.aresExtension) {
-        this.aresHandler = new AresHandler(this);
+        this.aresHandler = new AresHandler();
       }
       // Save initial game state
       Database.getInstance().saveGameState(this.id, this.lastSaveId,JSON.stringify(this,this.replacer), this.players.length);
@@ -648,6 +649,23 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public addInterrupt(interrupt: PlayerInterrupt): void {
         this.interrupts.push(interrupt);
+    }
+
+    public getColoniesModel(colonies: Array<IColony>) : Array<ColonyModel> {
+      return colonies.map(
+        (colony): ColonyModel => ({
+            colonies: colony.colonies.map(
+                (playerId): Color => this.getPlayerById(playerId).color
+            ),
+            isActive: colony.isActive,
+            name: colony.name,
+            trackPosition: colony.trackPosition,
+            visitor:
+                colony.visitor === undefined
+                    ? undefined
+                    : this.getPlayerById(colony.visitor).color,
+        })
+    );
     }
 
     public milestoneClaimed(milestone: IMilestone): boolean {
@@ -1502,7 +1520,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
             if (adjacentSpace.tile.tileType === TileType.OCEAN) {
               player.megaCredits += player.oceanBonus;
             }
-            this.aresHandler?.handleAdjacentPlacement(adjacentSpace, player);
+            this.aresHandler?.handleAdjacentPlacement(this, adjacentSpace, player);
           }
         });
       } else {

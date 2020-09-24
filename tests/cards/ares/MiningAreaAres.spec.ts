@@ -6,7 +6,7 @@ import { SelectSpace } from "../../../src/inputs/SelectSpace";
 import { SpaceBonus } from "../../../src/SpaceBonus";
 import { TileType } from "../../../src/TileType";
 import { Resources } from "../../../src/Resources";
-import { MiningAreaAres } from '../../../src/cards/ares/MiningAreaAres';
+import { MiningAreaAres } from "../../../src/cards/ares/MiningAreaAres";
 
 describe("MiningAreaAres", function () {
     let card : MiningAreaAres, player : Player, game : Game;

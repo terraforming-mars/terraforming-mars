@@ -62,6 +62,8 @@ function shuffleArray(arr: Array<number>) {
     return arr
 }
 
+// Returns an array from [start... end]
+// eg (4, 11) returns [4, 5, 6, 7, 8, 9, 10, 11]
 function getNumbersRange(start: number, end: number): Array<number> {
     return Array.from(Array(end + 1 - start).keys()).map(n => n + start)
 }
@@ -72,7 +74,13 @@ export function getRandomMilestonesAndAwards(withVenusian: boolean = true, requi
     let output: Array<number> = [];
     while(maxSynergyDetected > maxSynergyAllowed) {
         maxSynergyDetected = 0;
+
+        // A random ordering of elements from 0 to 15 (or 14)
+        // This is managed because the venusian milestone and awards are a single element at the end
+        // of the lists of lists above.
         let rows = shuffleArray(getNumbersRange(0, withVenusian ? 15: 14));
+
+        // A random ordering of elements from 16 to 31 (or 30)
         let cols = shuffleArray(getNumbersRange(16, withVenusian ? 31: 30));
 
         output = [...rows.slice(0, requiredQty), ...cols.slice(0, requiredQty)].sort((a, b) => a - b);

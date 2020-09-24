@@ -4,6 +4,7 @@ import { OriginalBoard } from "../src/OriginalBoard";
 import { Player } from "../src/Player";
 import { TileType } from "../src/TileType";
 import { ISpace } from "../src/ISpace";
+import { SpaceType } from "../src/SpaceType";
 
 describe("Board", function () {
     let board : OriginalBoard, player : Player, player2 : Player;
@@ -67,7 +68,7 @@ describe("Board", function () {
         // - - - - - -    - means land
         //  - - - - o     o means ocean
 
-      expectSpace(board.getAvailableSpaceByOffset(0, -1), "62", 7, 8);
+        expectSpace(board.getAvailableSpaceByOffset(0, -1), "62", 7, 8);
         expectSpace(board.getAvailableSpaceByOffset(1, -1), "61", 6, 8);
         expectSpace(board.getAvailableSpaceByOffset(2, -1), "60", 5, 8);
         expectSpace(board.getAvailableSpaceByOffset(3, -1), "59", 4, 8);
@@ -85,5 +86,23 @@ describe("Board", function () {
         expectSpace(board.getAvailableSpaceByOffset(2, 1), "08", 3, 1);
         space.tile = { tileType: TileType.DUST_STORM_MILD, hazard: true };
         expectSpace(board.getAvailableSpaceByOffset(2, 1), "09", 4, 1);
+    });
+
+    it("getOceansOnBoard", function() {
+        expect(board.getOceansOnBoard()).eq(0);
+
+        var space = board.spaces[1];
+        space.spaceType = SpaceType.OCEAN;
+        space.tile = { tileType: TileType.OCEAN };
+
+        expect(board.getOceansOnBoard(true)).eq(1);
+        expect(board.getOceansOnBoard(false)).eq(1);
+
+        var space = board.spaces[2];
+        space.spaceType = SpaceType.OCEAN;
+        space.tile = { tileType: TileType.OCEAN_SANCTUARY };
+
+        expect(board.getOceansOnBoard(true)).eq(2);
+        expect(board.getOceansOnBoard(false)).eq(1);
     });
 });

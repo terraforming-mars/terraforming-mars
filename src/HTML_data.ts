@@ -7512,5 +7512,121 @@ export const HTML_DATA: Map<string, string> =
             (Add 1 floater here for every Earth tag you have, including this.)
         </div>
     </div>
-`]
+`],
+[CardName.AGRICOLA_INC,`
+      <div class="tag tag1 tag-plant"></div>
+      <div class="corporationLabel">CORPORATION</div>
+      <div class="community-icon corporation-icon"></div>
+      <div class="contentCorporation">
+        <div class="pointsCorporation">?</div>
+        <div class="corporationEffectBox">
+          <div class="corporationEffectBoxLabel">EFFECT</div>
+
+          <div class="description effect">
+            (Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags. Wild tags and non-Event tags on Event cards do not count.)
+          </div>
+        </div>
+      </div>
+
+      <div class="agricola">Agricola Inc</div>
+      <div class="resource money">40</div>
+
+      <div class="production-box production-box-size2">
+        <div class="money production ">1</div>
+        <div class="production plant"></div>
+      </div>
+      
+      <div class="description">
+        (You start with 1 plant production, 1 MC production and 40 MC.)
+      </div>
+`],
+[CardName.PROJECT_WORKSHOP,`
+      <div class="tag tag1 tag-earth"></div>
+      <div class="corporationLabel">CORPORATION</div>
+      <div class="community-icon corporation-icon"></div>
+      <div class="contentCorporation">
+        <div class="corporationEffectBox">
+          <div class="corporationEffectBoxLabel">ACTION</div>
+
+          <div style="margin-top:-2px">
+            FLIP <div class="resource card card-small"><div class="card-icon card-icon-blue"></div></div>
+            <div class="red-arrow "></div>
+            ? <div class="tile rating"></div>
+            <div class="resource card card-small"></div>
+            <div class="resource card card-small"></div>
+          </div>
+
+          <div>
+            OR <div class="money production">3</div>
+            <div class="red-arrow "></div>
+            <div class="resource card card-small"><div class="card-icon card-icon-blue"></div></div>
+          </div>
+
+          <div class="description">
+            (Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 MC to draw a blue card.)
+          </div>
+        </div>
+      </div>
+
+      <div class="project_workshop">PROJECT WORKSHOP</div>
+      <div class="resource money">39</div>
+      <div class="resource steel"></div>
+      <div class="resource titanium"></div>
+      <div class="resource card card-medium"><div class="card-icon card-icon-blue"></div></div>
+      
+      <div class="description">
+        (You start with 39 MC, 1 steel and 1 titanium.<br>
+        As your first action, draw a blue card.)
+      </div>
+`],
+[CardName.INCITE,`
+      <div class="tag tag1 tag-science"></div>
+      <div class="corporationLabel">CORPORATION</div>
+      <div class="community-icon corporation-icon"></div>
+      <div class="contentCorporation">
+        <div class="corporationEffectBox">
+          <div class="corporationEffectBoxLabel">EFFECT</div>
+          + <div class="influence"></div>
+          <br>
+          <div class="delegate effect"></div> : <div class="money resource effect-money">-2</div>
+          <div class="description effect">
+            (Effect: You have influence +1. When you send a delegate from the reserve, you pay 2 MC less for it.)
+          </div>
+        </div>
+      </div>
+
+      <div class="incite">INCITE</div>
+      <div class="resource money">32</div>
+      <div class="delegate"></div><div class="delegate"></div>
+      
+      <div class="description start-text">
+        (You start with 32 MC. As your first action, place two delegates in one party.)
+      </div>
+`],
+[CardName.PLAYWRIGHTS,`
+      <div class="tag tag1 tag-power"></div>
+      <div class="corporationLabel">CORPORATION</div>
+      <div class="community-icon corporation-icon"></div>
+      <div class="contentCorporation">
+        <div class="corporationEffectBox">
+          <div class="corporationEffectBoxLabel">ACTION</div>
+          <div class="red-arrow"></div>
+          REPLAY &nbsp;<div class="resource card"><div class="card-icon card-icon-event"></div></div>
+          
+          <div class="description effect">
+            (Action: Replay a played event from any player at FULL COST IN MC, then REMOVE IT FROM PLAY.)
+          </div>
+        </div>
+      </div>
+
+      <div class="playwrights">Playwrights</div>
+      <div class="resource money">38</div>
+      <div class="production-box">
+        <div class="production energy"></div>
+      </div>
+      
+      <div class="description start-text">
+        (You start with 38 MC and 1 Energy production.)
+      </div>
+`],
 ]);

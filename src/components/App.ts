@@ -36,10 +36,6 @@ export const mainAppSettings = {
     },
     "methods": {
         setVisibilityState: function (targetVar: string, isVisible: boolean) {
-            console.log(
-                this.getVisibilityState(targetVar),
-                "GET VISIBILITY STATE for" + targetVar
-            );
             if (isVisible === this.getVisibilityState(targetVar)) return;
             (this as any).componentsVisibility[targetVar] = isVisible;
         },

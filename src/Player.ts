@@ -107,6 +107,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private turmoilScientistsActionUsed: boolean = false;
     public removingPlayers: Array<PlayerId> = [];
     public needsToDraft: boolean | undefined = undefined; 
+    public cardDiscount: number = 0;
 
     constructor(
         public name: string,
@@ -1112,6 +1113,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     public getCardCost(game: Game, card: IProjectCard): number {
       let cost: number = card.cost;
+      cost -= this.cardDiscount;
+      
       this.playedCards.forEach((playedCard) => {
         if (playedCard.getCardDiscount !== undefined) {
           cost -= playedCard.getCardDiscount(this, game, card);

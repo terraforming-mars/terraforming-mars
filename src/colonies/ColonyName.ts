@@ -9,5 +9,8 @@ export enum ColonyName {
     MIRANDA = "Miranda",
     PLUTO = "Pluto",
     TITAN = "Titan",
-    TRITON = "Triton"
+    TRITON = "Triton",
+
+    // Community
+    IAPETUS = "Iapetus",
 }

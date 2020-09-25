@@ -11,7 +11,7 @@ import { Titan } from "../colonies/Titan";
 import { Triton } from "../colonies/Triton";
 import { Enceladus } from "../colonies/Enceladus";
 import { ColonyName } from "../colonies/ColonyName";
-
+import { Iapetus } from "../cards/community/Iapetus";
 
 let allColonies = [
     new Callisto(),
@@ -24,8 +24,8 @@ let allColonies = [
     new Miranda(),
     new Pluto(),
     new Titan(),
-    new Triton()
-
+    new Triton(),
+    new Iapetus()
 ];
 
 export const ColoniesFilter = Vue.component("colonies-filter", {

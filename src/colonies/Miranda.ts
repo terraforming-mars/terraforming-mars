@@ -9,8 +9,9 @@ export class Miranda extends Colony implements IColony {
     public description: string = "Animals";
     public isActive = false;
     public resourceType = ResourceType.ANIMAL;
-    public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player, game);
+    public trade(player: Player, game: Game, usesTradeFleet: boolean = true): void {
+        if (usesTradeFleet) this.beforeTrade(this, player, game);
+
         let animals: number = 0;
         if (this.trackPosition < 3) {
             animals = 1;
@@ -19,8 +20,9 @@ export class Miranda extends Colony implements IColony {
         } else {
             animals = 3;
         }
+
         game.addResourceInterrupt(player, ResourceType.ANIMAL, animals, undefined);
-        this.afterTrade(this, player, game);
+        if (usesTradeFleet) this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);

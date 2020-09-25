@@ -8,8 +8,8 @@ export class Iapetus extends Colony implements IColony {
     public name = ColonyName.IAPETUS;
     public description: string = "TR";
 
-    public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player, game);
+    public trade(player: Player, game: Game, usesTradeFleet: boolean = true): void {
+        if (usesTradeFleet) this.beforeTrade(this, player, game);
         let qty : number = 0;
 
         if (this.trackPosition === MAX_COLONY_TRACK_POSITION) {
@@ -21,7 +21,7 @@ export class Iapetus extends Colony implements IColony {
         }
 
         player.megaCredits += qty;
-        this.afterTrade(this, player, game);
+        if (usesTradeFleet) this.afterTrade(this, player, game);
     }
 
     public onColonyPlaced(player: Player, game: Game): undefined {

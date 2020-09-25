@@ -19,7 +19,7 @@ export interface IColony {
     trackPosition: number;
     colonies: Array<PlayerId>;
     resourceType?: ResourceType;
-    trade: (player: Player, game: Game) => void;
+    trade: (player: Player, game: Game, usesTradeFleet?: boolean) => void;
     onColonyPlaced: (player: Player, game: Game) => undefined | SelectSpace;
     giveTradeBonus: (player: Player, game: Game) => void;
     endGeneration: () => void;

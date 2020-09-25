@@ -5,18 +5,18 @@ import { PlayerMixin } from "./PlayerMixin";
 import { hidePlayerData } from "./overview/PlayerStatus";
 
 export const OtherPlayer = Vue.component("other-player", {
-    props: ["player"],
+    props: ["player", "playerIndex"],
     components: {
-        "stacked-cards": StackedCards
+        "stacked-cards": StackedCards,
     },
     mixins: [PlayerMixin],
     methods: {
         hideMe: function () {
-            hidePlayerData(this.$root, this.player);
+            hidePlayerData(this.$root, this.playerIndex);
         },
         isVisible: function () {
             return (this.$root as any).getVisibilityState(
-                "other_player_" + this.player.id
+                "pinned_player_" + this.playerIndex
             );
         },
     },

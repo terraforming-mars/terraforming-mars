@@ -1,5 +1,5 @@
-import {Player, PlayerId } from "./Player";
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_CORP_ERA_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS} from "./Dealer";
+import { Player, PlayerId } from "./Player";
+import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_CORP_ERA_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS, ALL_COMMUNITY_CORPORATIONS} from "./Dealer";
 import {ISpace} from "./ISpace";
 import {SpaceType} from "./SpaceType";
 import {TileType} from "./TileType";
@@ -60,6 +60,7 @@ import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
 import { AresHandler } from "./ares/AresHandler";
 import { getRandomMilestonesAndAwards } from "./MASynergy";
+import { CardType } from "./cards/CardType";
 import { AresData } from "./ares/AresData";
 import { ColonyModel } from "./models/ColonyModel";
 
@@ -84,6 +85,7 @@ export interface GameOptions {
   solarPhaseOption: boolean;
   shuffleMapOption: boolean;
   promoCardsOption: boolean;
+  communityCardsOption: boolean;
   aresExtension: boolean;
   useAresHazards: boolean;
   undoOption: boolean;
@@ -160,6 +162,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           solarPhaseOption: false,
           shuffleMapOption: false,
           promoCardsOption: false,
+          communityCardsOption: false,
           aresExtension: false,
           useAresHazards: true,
           undoOption: false,
@@ -254,6 +257,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
         corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
       }
 
+      // Add Community corps
+      if (gameOptions.communityCardsOption) {
+        corporationCards.push(...ALL_COMMUNITY_CORPORATIONS.map((cf) => new cf.factory()));
+      }
+
       // Setup custom corporation list
       const minCorpsRequired = players.length * gameOptions.startingCorporations;
       if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
@@ -266,6 +274,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
         corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
         corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
+        corporationCards.push(...ALL_COMMUNITY_CORPORATIONS.map((cf) => new cf.factory()));
 
         corporationCards = corporationCards.filter(
           (corpCard) => gameOptions !== undefined && gameOptions.customCorporationsList.includes(corpCard.name)
@@ -1736,12 +1745,41 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return result;
     }
 
+    public drawCardsByType(cardType: CardType, total: number): Array<IProjectCard> {
+      let cardsToDraw = 0;
+      const result: Array<IProjectCard> = [];
+      const discardedCards: Array<IProjectCard> = [];
+
+      while (cardsToDraw < total) {
+        const projectCard = this.dealer.dealCard();
+        if (projectCard.cardType === cardType) {
+          cardsToDraw++;
+          result.push(projectCard);
+        } else {
+          discardedCards.push(projectCard);
+          this.dealer.discard(projectCard);
+        }
+      }
+
+      this.log(
+        LogMessageType.DEFAULT,
+        discardedCards.length + " card(s) were discarded",
+       ...discardedCards.map((card) => new LogMessageData(LogMessageDataType.CARD, card.name)),
+      );
+
+      return result;
+    }
+
     public getCardsInHandByTag(player: Player, tag: Tags) {
       return player.cardsInHand.filter((card) => card.tags.includes(tag));
     }
 
     public getCardsInHandByResource(player: Player, resourceType: ResourceType) {
       return player.cardsInHand.filter((card) => card.resourceType === resourceType);
+    }
+
+    public getCardsInHandByType(player: Player, cardType: CardType) {
+      return player.cardsInHand.filter((card) => card.cardType === cardType);
     }
 
     public log(type: LogMessageType, message: string, ...data: LogMessageData[]) {

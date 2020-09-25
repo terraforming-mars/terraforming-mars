@@ -320,6 +320,22 @@ input[type=radio]:checked + .filterDiv::after {
   content: "\25b2";
 }
 
+.community-icon:after {
+  position: absolute;
+  color:#222;
+  border: 1px solid black;
+  background: moccasin;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 14px;
+  width: 16px;
+  height:16px;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
+  content: "\2666";
+}
+
 .project-icon:after, .preludeCard-icon:after {
   margin-left: -235px;
   margin-top: 284px;
@@ -1045,6 +1061,17 @@ input[type=radio]:checked + .filterDiv::after {
   border: 1px solid #444;
 }
 
+.card-icon-event {
+  background-image: url("./assets/tag-event.png");
+  border-radius: 50%;
+}
+
+.card-icon-blue {
+  margin-left: 17px;
+  background: rgb(23, 111, 228);
+  border-radius: 50%;
+}
+
 .card-footer {
   display: inline-block;
   vertical-align: middle;
@@ -1481,6 +1508,170 @@ input[type=radio]:checked + .filterDiv::after {
   margin-top: 5px;
   text-shadow: 0 0 1px orange, 0 2px 2px darkorange;
   font-size: 32px;
+}
+
+.agricola {
+  color: seagreen;
+  font-family: 'Trebuchet MS', Arial, sans-serif;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-top: 5px;
+  margin-left: -30px;
+  text-shadow: 0 0 1px limegreen, 0 2px 2px greenyellow;
+  font-size: 32px;
+}
+
+.card-agricola-inc {
+  .corporationEffectBox {
+    margin-top: 160px;
+    height: 124px;
+  }
+
+  .pointsCorporation {
+    margin-top: 245px;
+  }
+
+  .description {
+    text-align:center;
+  }
+
+  .effect {
+    margin-top:-3px;
+    font-weight:bold;
+  }
+
+  .resource.money {
+    margin-left:50px;
+  }
+
+  .production-box {
+    margin-top:5px;
+  }
+}
+
+.project_workshop {
+  color:navy;
+  font-family: Tahoma, sans-serif;
+  font-weight: bold;
+  letter-spacing: 1px;
+  line-height: 25px;
+  text-align: left;
+  margin-left: 20px;
+  margin-top: -12px;
+  text-shadow: 0 0 1px skyblue, 0 2px 2px white;
+  font-size: 24px;
+}
+
+.card-project-workshop {
+  .corporationEffectBox {
+    height: 142px;
+    margin-top: 145px;
+  }
+
+  .description {
+    text-align: center;
+  }
+
+  .resource.money {
+    margin-top: 12px;
+    margin-left: 42px;
+  }
+
+  .tile {
+    margin:0 -6px;
+    transform:scale(0.7,0.7);
+  }
+
+  .card-small {
+    margin: -12px -6px 2px;
+    transform:scale(0.7,0.7);
+  }
+
+  .card-medium {
+    transform:scale(0.9,0.9);
+  }
+}
+
+.incite {
+  color: ghostwhite;
+  font-family: Impact, sans-serif;
+  letter-spacing: 6px;
+  text-align: center;
+  margin: -15px 0 5px -30px;
+  text-shadow: 0 0 1px black, 0 2px 2px rgb(61, 54, 54);
+  font-size: 36px;
+}
+
+.card-incite {
+  .description {
+    margin-top: -12px;
+    text-align:center;
+
+    &.effect { margin-top: -3px; }
+  }
+
+  .start-text {
+    margin-top: 10px;
+  }
+  
+  .resource.money {
+    margin-left: 42px;
+    margin-top: -10px;
+
+    &.effect-money { margin-left: 4px; margin-top: 10px; }
+  }
+
+  .delegate.effect { transform:scale(0.8,0.8); }
+
+  .corporationEffectBox {
+    height: 135px;
+    margin-top: 150px;
+  }
+}
+
+.playwrights {
+  color: brown;
+  font-family: Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-align: center;
+  margin-top: 5px;
+  margin-left: -30px;
+  text-shadow: 0 0 1px orchid, 0 2px 2px purple;
+  font-size: 30px;
+}
+
+.card-playwrights {
+  .description {
+    text-align:center;
+    margin-top: 5px;
+
+    &.start-text { margin-top: 0px; }
+  }
+
+  .resource.money {
+    margin: 20px 5px 0 50px;
+
+    &.effect-money { margin-left: 4px; margin-top: 10px; }
+    &.discount { font-size: 10px; margin-left: 5px;}
+  }
+
+  .card {
+    margin-left: -5px;
+    transform:scale(0.8,0.8);
+  }
+
+  .corporationEffectBox {
+    height: 130px;
+    margin-top: 150px;
+  }
+
+  .production-box-size1a { margin-left: 5px; }
+
+  .effect {
+    margin-top:-1px;
+    font-size: 10.5px;
+  }
 }
 
 .card-technology-demonstration {

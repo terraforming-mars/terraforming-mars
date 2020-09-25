@@ -2,11 +2,18 @@
 @import (inline) "../../node_modules/spectre.css/dist/spectre-exp.min.css";
 @import (inline) "../../node_modules//spectre.css/dist/spectre-icons.min.css";
 @import (inline) "../../node_modules/dialog-polyfill/dialog-polyfill.css";
+@import "./variables.less";
+@import "./mixins.less";
 
 html,
 body {
     height: 100%;
     margin: 0px;
+}
+.btn {
+    color: @text_action !important;
+    background: @bg_action !important;
+    border-color: @boder_action !important;
 }
 
 .capitalized {
@@ -43,15 +50,13 @@ a:active {
 }
 
 body {
-    background: #303030;
-    color: #dddddd;
-    font-family: Ubuntu, Sans;
-    font-size: 23px;
+    background: @bg_main;
+    color: @text_main;
+    font-family: @font_family_main;
+    font-size: @font_size_big;
 }
 
 h1 {
-    color: #ddd;
-    font-family: Ubuntu, Sans;
     filter: drop-shadow(4px 4px 4px black);
     text-shadow: -1px -1px 1px #aaaa, 1px 1px 1px #333a;
     padding: 1px 15px;
@@ -59,8 +64,6 @@ h1 {
 }
 
 h2 {
-    color: #ddd;
-    font-family: Ubuntu, Sans;
     filter: drop-shadow(4px 4px 4px black);
     text-shadow: -1px -1px 6px #aaa4;
 }

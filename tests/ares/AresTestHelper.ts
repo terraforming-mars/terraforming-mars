@@ -36,7 +36,8 @@ export const ARES_GAME_OPTIONS: GameOptions = {
     startingCorporations: 2,
     includeVenusMA: true,
     soloTR: false,
-    clonedGamedId: undefined
+    clonedGamedId: undefined,
+    communityCardsOption: false
   };
 
   export const ALL_ADJACENCY_BONUSES = [

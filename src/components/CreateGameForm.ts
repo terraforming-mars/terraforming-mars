@@ -35,6 +35,7 @@ interface CreateGameModel {
     solarPhaseOption: boolean;
     shuffleMapOption: boolean;
     promoCardsOption: boolean;
+    communityCardsOption: boolean;
     aresExtension: boolean;
     undoOption: boolean;
     fastModeOption: boolean;
@@ -98,6 +99,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             solarPhaseOption: false,
             shuffleMapOption: false,
             promoCardsOption: false,
+            communityCardsOption: false,
             aresExtension: false,
             undoOption: false,
             fastModeOption: false,
@@ -218,6 +220,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             const board =  component.board;
             const seed = component.seed;
             const promoCardsOption = component.promoCardsOption;
+            const communityCardsOption = component.communityCardsOption;
             const aresExtension = component.aresExtension;
             const undoOption = component.undoOption;
             const fastModeOption = component.fastModeOption;
@@ -270,6 +273,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 seed,
                 solarPhaseOption,
                 promoCardsOption,
+                communityCardsOption,
                 aresExtension: aresExtension,
                 undoOption,
                 fastModeOption,
@@ -370,12 +374,16 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <input type="checkbox" v-model="promoCardsOption">
                                 <i class="form-icon"></i> <span v-i18n>Promos</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
                             </label>
+                            
+                            <label class="form-switch">
+                            <input type="checkbox" v-model="communityCardsOption">
+                            <i class="form-icon"></i> <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community-corps" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
 
                             <label class="form-switch">
                                 <input type="checkbox" v-model="aresExtension">
                                 <i class="form-icon"></i> <span v-i18n>Ares</span>&nbsp;<a href="https://boardgamegeek.com/thread/2218211/tm-ares-fan-expansion-more-interaction-map-mars" class="tooltip" target="_blank">&#9432;</a>
                             </label>
-
                         </div>
 
                         <div class="create-game-options-block col3 col-sm-6">
@@ -537,6 +545,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 v-bind:colonies="colonies"
                 v-bind:turmoil="turmoil"
                 v-bind:promoCardsOption="promoCardsOption"
+                v-bind:communityCardsOption="communityCardsOption"
             ></corporations-filter>
 
             <colonies-filter

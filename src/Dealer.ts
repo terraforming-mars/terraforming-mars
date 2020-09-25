@@ -460,6 +460,12 @@ import { Potatoes } from "./cards/promo/Potatoes";
 import { MeatIndustry } from "./cards/promo/MeatIndustry";
 import { PoliticalAlliance } from "./cards/turmoil/PoliticalAlliance";
 
+// Community corporations
+import { AgricolaInc } from "./cards/community/AgricolaInc";
+import { ProjectWorkshop } from "./cards/community/ProjectWorkshop";
+import { Incite } from "./cards/community/Incite";
+import { Playwrights } from "./cards/community/Playwrights";
+
 import { BioengineeringEnclosure } from "./cards/ares/BioengineeringEnclosure";
 import { BiofertilizerFacility} from "./cards/ares/BiofertilizerFacility";
 import { CapitalAres } from "./cards/ares/CapitalAres";
@@ -720,6 +726,13 @@ export const ALL_PROMO_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
     { cardName: CardName.MONS_INSURANCE, factory: MonsInsurance },
     { cardName: CardName.RECYCLON, factory: Recyclon },
     { cardName: CardName.SPLICE, factory: Splice }
+];
+
+export const ALL_COMMUNITY_CORPORATIONS: Array<ICardFactory<CorporationCard>> = [
+    { cardName: CardName.AGRICOLA_INC, factory: AgricolaInc },
+    { cardName: CardName.PROJECT_WORKSHOP, factory: ProjectWorkshop },
+    { cardName: CardName.INCITE, factory: Incite },
+    { cardName: CardName.PLAYWRIGHTS, factory: Playwrights }
 ];
 
 export const ALL_PROMO_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
@@ -1067,6 +1080,10 @@ export function getCorporationCardByName(cardName: string): CorporationCard | un
         return new cardFactory.factory();
     }
     cardFactory = ALL_TURMOIL_CORPORATIONS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_COMMUNITY_CORPORATIONS.find((cf) => cf.cardName === cardName);
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }

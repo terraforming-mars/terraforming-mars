@@ -12,10 +12,6 @@ export class MarketingExperts implements IProjectCard {
   public cardType: CardType = CardType.ACTIVE;
   public name: CardName = CardName.MARKETING_EXPERTS;
 
-  public canPlay(player: Player, _game: Game): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 1;
-  }
-
   public play(player: Player, _game: Game) {
     player.setProduction(Resources.MEGACREDITS, 1)
     return undefined;

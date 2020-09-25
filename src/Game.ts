@@ -87,7 +87,7 @@ export interface GameOptions {
   promoCardsOption: boolean;
   communityCardsOption: boolean;
   aresExtension: boolean;
-  useAresHazards: boolean;
+  aresHazards: boolean;
   undoOption: boolean;
   fastModeOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
@@ -164,7 +164,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           promoCardsOption: false,
           communityCardsOption: false,
           aresExtension: false,
-          useAresHazards: true,
+          aresHazards: true,
           undoOption: false,
           fastModeOption: false,
           removeNegativeGlobalEventsOption: false,
@@ -211,8 +211,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       if (gameOptions.aresExtension) {
-        this.aresData = new AresData(gameOptions.aresExtension, gameOptions.useAresHazards);
-          if (gameOptions.useAresHazards) {
+        this.aresData = new AresData(gameOptions.aresExtension, gameOptions.aresHazards);
+          if (gameOptions.aresHazards) {
             AresHandler.setupHazards(this, players.length);
           }
       }

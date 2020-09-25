@@ -435,6 +435,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                 coloniesExtension: gameReq.colonies,
                 turmoilExtension: gameReq.turmoil,
                 aresExtension: gameReq.aresExtension,
+                aresHazards: true, // Not a runtime option.
                 boardName: gameReq.board,
                 showOtherPlayersVP: gameReq.showOtherPlayersVP,
                 customCorporationsList: gameReq.customCorporationsList,
@@ -446,7 +447,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                 undoOption: gameReq.undoOption,
                 fastModeOption: gameReq.fastModeOption,
                 removeNegativeGlobalEventsOption:
-                    gameReq.removeNegativeGlobalEventsOption,
+                gameReq.removeNegativeGlobalEventsOption,
                 startingCorporations: gameReq.startingCorporations,
                 includeVenusMA: gameReq.includeVenusMA,
                 soloTR: gameReq.soloTR,
@@ -611,6 +612,7 @@ function getPlayer(player: Player, game: Game): string {
         actionsTakenThisRound: player.actionsTakenThisRound,
         passedPlayers: Array.from(game.getPassedPlayers()), // JSON stringify does not honor sets
         aresExtension: game.gameOptions.aresExtension,
+        aresHazards: game.gameOptions.aresHazards,
     } as PlayerModel;
     return JSON.stringify(output);
 }

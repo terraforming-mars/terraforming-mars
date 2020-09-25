@@ -127,4 +127,13 @@ export class LogHelper {
             new LogMessageData(LogMessageDataType.STRING, stepsIncreased.toString())
         );
     }
+
+    static logTRIncrease(game: Game, player: Player, steps: number) {
+        game.log(
+            LogMessageType.DEFAULT,
+            "${0} gained ${1} TR",
+            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.STRING, steps.toString())
+        );
+    }
 }

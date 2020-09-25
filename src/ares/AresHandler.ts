@@ -93,20 +93,22 @@ export class AresHandler {
               "${0} gains 1 ${1} for placing next to ${2}",
               new LogMessageData(LogMessageDataType.PLAYER, player.id),
               new LogMessageData(LogMessageDataType.STRING, bonus.toString()),
-              new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""));
+              new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(adjacentSpace.tile?.tileType)));
             });
     
+            var ownerBonus = 1;
             if (adjacentSpace.player) {
               if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
-                adjacentSpace.player.megaCredits++;
-                // TODO(kberg): log.
+                  ownerBonus = 2;
               };
-              adjacentSpace.player.megaCredits++;
-                  game.log(
-                      LogMessageType.DEFAULT,
-                      "${0} gains 1 M€ for a tile placed next to ${1}",
-                      new LogMessageData(LogMessageDataType.PLAYER, adjacentSpace.player.id),
-                      new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""),);
+              
+              adjacentSpace.player.megaCredits += ownerBonus;
+              game.log(
+                LogMessageType.DEFAULT,
+                "${0} gains {$1} M€ for a tile placed next to ${2}",
+                new LogMessageData(LogMessageDataType.PLAYER, adjacentSpace.player.id),
+                new LogMessageData(LogMessageDataType.STRING, ownerBonus.toString()),
+                new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""),);
             }
         }
     }
@@ -263,18 +265,27 @@ export class AresHandler {
     }
 
     public static grantBonusForRemovingHazard(game: Game, player: Player, initialTileType?: TileType) {
-        // TODO(kberg): log for increasing the rating?
+        var steps: number;
         switch (initialTileType) {
             case TileType.DUST_STORM_MILD:
             case TileType.EROSION_MILD:
-                player.increaseTerraformRating(game);
+                steps = 1;
                 break;
 
             case TileType.DUST_STORM_SEVERE:
             case TileType.EROSION_SEVERE:
-                player.increaseTerraformRatingSteps(2, game);
+                steps = 2;
                 break;
+        
+            default:
+                return;
         }
+        player.increaseTerraformRatingSteps(steps, game);
+        game.log(LogMessageType.DEFAULT,
+            "${0}'s TR increases ${1} step(s) for removing {2}",
+            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.STRING, steps.toString()),
+            new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(initialTileType)));
     }
 
 
@@ -326,6 +337,11 @@ function makeSevere(game: Game, from: TileType, to: TileType) {
         .forEach((s) => {
             AresHandler.putHazardAt(s, to);
         });
+
+    game.log(LogMessageType.DEFAULT,
+        "${1} have upgraded to {2}",
+        new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(from)),
+        new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(to)));
 }
 
 function testConstraint(constraint: HazardConstraint, testValue: number, cb: () => void) {
@@ -358,6 +374,9 @@ function testToRemoveDustStorms(game: Game, player: Player, isWorldGov: boolean)
 
             if (!isWorldGov) {
                 player.increaseTerraformRating(game);
+                game.log(LogMessageType.DEFAULT,
+                    "${0}'s TR increases 1 step for eliminating dust storms.",
+                    new LogMessageData(LogMessageDataType.PLAYER, player.id));        
             }
         }
     );
@@ -382,3 +401,43 @@ function testToPlaceErosionTiles(game: Game, player: Player) {
     );
 }
 
+// TODO(kberg): convert to a log message type
+const tileTypeToStringMap: Map<TileType, string> = new Map([
+    [TileType.GREENERY, "greenery"],
+    [TileType.OCEAN, "ocean"],
+    [TileType.CITY, "city"],
+
+    [TileType.CAPITAL, CardName.CAPITAL],
+    [TileType.COMMERCIAL_DISTRICT, CardName.COMMERCIAL_DISTRICT],
+    [TileType.ECOLOGICAL_ZONE, CardName.ECOLOGICAL_ZONE],
+    [TileType.INDUSTRIAL_CENTER, CardName.INDUSTRIAL_CENTER],
+    [TileType.LAVA_FLOWS, CardName.LAVA_FLOWS],
+    [TileType.MINING_AREA, CardName.MINING_AREA],
+    [TileType.MINING_RIGHTS, CardName.MINING_RIGHTS],
+    [TileType.MOHOLE_AREA, CardName.MOHOLE_AREA],
+    [TileType.NATURAL_PRESERVE, CardName.NATURAL_PRESERVE],
+    [TileType.NUCLEAR_ZONE, CardName.NUCLEAR_ZONE],
+    [TileType.RESTRICTED_AREA, CardName.RESTRICTED_AREA],
+
+    // DEIMOS_DOWN, "",
+    // GREAT_DAM, "",
+    // MAGNETIC_FIELD_GENERATORS, "",
+
+    [TileType.BIOFERTILIZER_FACILITY, CardName.BIOFERTILIZER_FACILITY],
+    [TileType.METALLIC_ASTEROID, CardName.METALLIC_ASTEROID],
+    [TileType.SOLAR_FARM, CardName.SOLAR_FARM],
+    [TileType.OCEAN_CITY, CardName.OCEAN_CITY],
+    [TileType.OCEAN_FARM, CardName.OCEAN_FARM],
+    [TileType.OCEAN_SANCTUARY, CardName.OCEAN_SANCTUARY],
+    [TileType.DUST_STORM_MILD, "Mild Dust Storm"],
+    [TileType.DUST_STORM_SEVERE, "Severe Dust Storm"],
+    [TileType.EROSION_MILD, "Mild Erosion"],
+    [TileType.EROSION_SEVERE, "Severe Erosion"],
+    [TileType.MINING_STEEL_BONUS, "Mining (Steel)"],
+    [TileType.MINING_TITANIUM_BONUS, "Mining (Titanium)"],
+]);
+
+function tileTypeAsString(tileType: TileType | undefined): string {
+    if (tileType === undefined) { return "undefined" };
+    return tileTypeToStringMap.get(tileType)|| "special";
+}

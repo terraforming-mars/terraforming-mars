@@ -14,7 +14,7 @@ import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
 
 export class BiofertilizerFacility implements IProjectCard {
-    public cost: number = 26;
+    public cost: number = 12;
     public tags: Array<Tags> = [Tags.MICROBES, Tags.STEEL];
     public cardType: CardType = CardType.AUTOMATED;
     public name: CardName = CardName.BIOFERTILIZER_FACILITY;

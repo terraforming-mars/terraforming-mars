@@ -59,7 +59,7 @@ export class Mercury extends Colony implements IColony {
 
             game.interrupts.push({
                 player: player,
-                playerInput: new SelectColony("Select colony to gain trade bonus", "Select", coloniesModel, (colonyName: ColonyName) => {
+                playerInput: new SelectColony("Select colony to gain trade income from", "Select", coloniesModel, (colonyName: ColonyName) => {
                     openColonies.forEach((colony) => {
                       if (colony.name === colonyName) {
                         game.log(

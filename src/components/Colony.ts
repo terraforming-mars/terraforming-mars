@@ -116,12 +116,16 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getTriton()" class="resource titanium" style="margin-left:20px;"></div>
       <div v-if="colony.name === getCeres()" class="resource steel" style="margin-left:20px;"></div>
       <div v-if="colony.name === getLuna()" class="resource money" style="margin-left:20px;">&nbsp;</div>
-      <div v-if="colony.name === getIapetus()" class="resource money" style="margin-left:20px;">&nbsp;</div>
+      <div v-if="colony.name === getIapetus()" class="tile rating" style="margin-left:20px; transform: scale(0.8); margin-top:-10px;"></div>
       <div v-if="colony.name === getIo()" class="resource heat" style="margin-left:20px;"></div>
       <div v-if="colony.name === getMiranda()" class="resource animal" style="margin-left:20px;margin-top:-10px;"></div>
       <div v-if="colony.name === getPluto()" class="resource card" style="margin-left:20px;transform: scale(0.8);margin-top:-10px;"></div>
-      <div v-if="colony.name !== getEuropa() && colony.name !== getMercury()" class="white-x"></div>
-      <span v-if="colony.name !== getEuropa() && colony.name !== getMercury()" class="colony-background-color">
+      <div v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus()" class="white-x"></div>
+      <div v-if="colony.name === getIapetus()" class="white-x" style="margin-left:-42px;"></div>
+      <span v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus()" class="colony-background-color">
+        Trade Income
+      </span>
+      <span v-if="colony.name === getIapetus()" class="colony-background-color" style="position:relative;top:-8px;left:30px">
         Trade Income
       </span>
       <span v-if="colony.name === getEuropa() || colony.name === getMercury()" class="colony-background-color" style="margin-left: 3px;">
@@ -252,12 +256,12 @@ export const Colony = Vue.component("colony", {
     </div>
     <div v-if="colony.name === getIapetus()" class="colony-grid-container2">
       <div>0</div>
+      <div>0</div>
+      <div>0</div>
+      <div>1</div>
+      <div>1</div>
       <div>1</div>
       <div>2</div>
-      <div>4</div>
-      <div>8</div>
-      <div>12</div>
-      <div>16</div>
     </div>
 
     <div v-if="colony.name === getCeres()" class="colony-grid-container">

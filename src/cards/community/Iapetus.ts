@@ -3,6 +3,7 @@ import { Player } from '../../Player';
 import { Game } from '../../Game';
 import { ColonyName } from '../../colonies/ColonyName';
 import { MAX_COLONY_TRACK_POSITION } from '../../constants';
+import { LogHelper } from '../../components/LogHelper';
 
 export class Iapetus extends Colony implements IColony {
     public name = ColonyName.IAPETUS;
@@ -10,17 +11,19 @@ export class Iapetus extends Colony implements IColony {
 
     public trade(player: Player, game: Game, usesTradeFleet: boolean = true): void {
         if (usesTradeFleet) this.beforeTrade(this, player, game);
-        let qty : number = 0;
+        let steps : number = 0;
 
         if (this.trackPosition === MAX_COLONY_TRACK_POSITION) {
-            qty = 16;
-        } else if (this.trackPosition === MAX_COLONY_TRACK_POSITION - 1) {
-            qty = 12;
-        } else if (this.trackPosition >= 1) {
-            qty = Math.pow(2, this.trackPosition - 1);
+            steps = 2;
+        } else if (this.trackPosition > 2) {
+            steps = 1;
         }
 
-        player.megaCredits += qty;
+        if (steps > 0) {
+            player.increaseTerraformRatingSteps(steps, game)
+            LogHelper.logTRIncrease(game, player, steps);
+        };
+
         if (usesTradeFleet) this.afterTrade(this, player, game);
     }
 

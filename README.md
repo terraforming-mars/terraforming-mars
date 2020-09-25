@@ -1,14 +1,14 @@
 # terraforming-mars
 
-Terraforming Mars Boardgame
+**Terraforming Mars Board Game**
 
-The board game is great, this repository highly recommends purchasing [it](https://www.amazon.com/Stronghold-Games-6005SG-Terraforming-Board/dp/B01GSYA4K2) for personal use. If you want to play with people online, you can use this tool.
+The board game is great and this repository highly recommends purchasing [it](https://www.amazon.com/Stronghold-Games-6005SG-Terraforming-Board/dp/B01GSYA4K2) for personal use. If you want to play with people online, you can use this web app.
 
 Join us on Discord [here](https://discord.gg/fWXE53K).
 
 ## Demo
 
-You can try online [here](https://terraforming-mars.herokuapp.com/). Please post any issues found. If you plan on playing long running games it is recommended to host the game locally. This demo site is currently not stable and gets restarted during each push to `master`. A multiplayer game will remain available for 10 days, after this delay it will be flushed from the database. Unfinished solo games are flushed after one day. As this repository is gaining in popularity we attempt to make this demo page stable but it can't be guaranteed that your game will not be lost. Running the game locally will always be straight forward and it is highly recommended to host the game locally and provide the server ip to other players.
+You can demo this web app online [here](https://terraforming-mars.herokuapp.com/). If you find a bug or have a feature request, please add it as one in issues tab. If you plan on playing long-running games, it is recommended that you host the game locally. This demo site is currently not stable and gets restarted during each push to `master`. A multiplayer game will remain available for 10 days, after which it will be flushed from the database. Unfinished solo games are flushed after one day. As this repository is gaining in popularity, we will attempt to make this demo page stable but cannot guarantee that your game will not be lost. It is highly recommended to host the game locally, and it's dead simple: run `npm install` and then `npm run start`.
 
 ## Running
 
@@ -67,7 +67,12 @@ Thanks goes to these wonderful people:
     </td>    
     <td align="center">
       <a href="https://github.com/pocc"><img src="https://avatars1.githubusercontent.com/u/10995145?s=460&v=4" width="100px;" alt=""/><br />
-        <sub><b>Ross Jacobs</b></sub><br />He did that one thing one time</a>
+        <sub><b>Pocc</b></sub><br />He did that one thing one time</a>
     </td>    
   </tr>
 </table>
+
+
+## LICENSE
+
+GPLv3

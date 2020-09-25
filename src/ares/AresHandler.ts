@@ -137,10 +137,12 @@ export class AresHandler {
             }
         }
 
-        if (cost > player.getResource(Resources.MEGACREDITS)) {
-            throw new Error("Placing here costs " + cost + " M€");
-        }
         if (cost > 0) {
+            game.log(LogMessageType.DEFAULT,
+                "${0} placing a tile here costs ${1} M€",
+                new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                new LogMessageData(LogMessageDataType.STRING, cost.toString()));
+
             // TODO(kberg): ask to pay or abort.
             game.addSelectHowToPayInterrupt(player, cost, false, false, "Select how to pay additional placement costs.");
         }

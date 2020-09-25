@@ -31,6 +31,6 @@ export class Iapetus extends Colony implements IColony {
     }
     
     public giveTradeBonus(player: Player): void {
-        player.cardDiscount = 1;
+        player.cardDiscount += 1;
     }   
 }

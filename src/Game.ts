@@ -224,7 +224,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (gameOptions.coloniesExtension) {
         corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
 
-        const communityColoniesSelected = gameOptions.customColoniesList.includes(ColonyName.IAPETUS) || gameOptions.customColoniesList.includes(ColonyName.MERCURY);
+        const communityColoniesSelected = gameOptions.customColoniesList && (gameOptions.customColoniesList.includes(ColonyName.IAPETUS) || gameOptions.customColoniesList.includes(ColonyName.MERCURY));
         const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
 
         this.colonyDealer = new ColonyDealer();

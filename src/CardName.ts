@@ -441,6 +441,12 @@ export enum CardName {
     LAW_SUIT = "Law Suit",
     STANFORD_TORUS = "Stanford Torus",
     SATURN_SURFING = "Saturn Surfing",
+    
+    // Community corps
+    AGRICOLA_INC = "Agricola Inc",
+    PROJECT_WORKSHOP = "Project Workshop",
+    INCITE = "Incite",
+    PLAYWRIGHTS = "Playwrights",
 
     // Ares expansion.
     BIOENGINEERING_ENCLOSURE = "Bioengineering Enclosure",

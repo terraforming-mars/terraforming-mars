@@ -107,7 +107,7 @@ export class AresHandler {
               adjacentSpace.player.megaCredits += ownerBonus;
               game.log(
                 LogMessageType.DEFAULT,
-                "${0} gains {$1} M€ for a tile placed next to ${2}",
+                "${0} gains ${1} M€ for a tile placed next to ${2}",
                 new LogMessageData(LogMessageDataType.PLAYER, adjacentSpace.player.id),
                 new LogMessageData(LogMessageDataType.STRING, ownerBonus.toString()),
                 new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""),);

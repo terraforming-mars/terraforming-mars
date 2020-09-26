@@ -7632,6 +7632,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.BIOENGINEERING_ENCLOSURE,`
     <div class="title background-color-active ">Bioengineering Enclosure</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price ">7</div>
     <div class="tag tag1 tag-animal "></div>
     <div class="card-number">A01</div>
@@ -7648,6 +7649,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.BIOFERTILIZER_FACILITY,`
     <div class="title background-color-automated ">Biofertilizer Facility</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price ">12</div>
     <div class="tag tag1 tag-microbe "></div>
     <div class="tag tag2 tag-building "></div>
@@ -7667,6 +7669,7 @@ export const HTML_DATA: Map<string, string> =
 // TODO(kberg): lots of icons.
 [CardName.BUTTERFLY_EFFECT,`
     <div class="title background-color-action ">Butterfly Effect</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price ">8</div>
     <div class="tag tag1 tag-event "></div>
     <div class="card-number">A03</div>
@@ -7680,6 +7683,7 @@ export const HTML_DATA: Map<string, string> =
 // TODO(kberg): lots of icons.
 [CardName.DESPERATE_MEASURES,`
     <div class="title background-color-action ">Desperate Measures</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price ">1</div>
     <div class="tag tag1 tag-event "></div>
     <div class="card-number">A04</div>
@@ -7694,6 +7698,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.ECOLOGICAL_SURVEY,`
     <div class="title background-color-active ">Ecological Survey</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price ">9</div>
     <div class="tag tag1 tag-science "></div>
     <div class="card-number">A05</div>
@@ -7726,6 +7731,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.MARKETING_EXPERTS,`
     <div class="title background-color-active ">Marketing Experts</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price ">5</div>
     <div class="tag tag1 tag-earth "></div>
     <div class="card-number">A07</div>
@@ -7743,6 +7749,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.METALLIC_ASTEROID,`
     <div class="title background-color-automated ">Metallic Asteroid</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price ">13</div>
     <div class="tag tag1 tag-space "></div>
     <div class="tag tag2 tag-event "></div>
@@ -7759,6 +7766,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.OCEAN_CITY,`
     <div class="title background-color-automated ">Ocean City</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price ">18</div>
     <div class="tag tag1 tag-city "></div>
     <div class="tag tag2 tag-building "></div>
@@ -7781,6 +7789,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.OCEAN_FARM,`
     <div class="title background-color-automated ">Ocean Farm</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price ">15</div>
     <div class="tag tag1 tag-plant "></div>
     <div class="tag tag2 tag-building "></div>
@@ -7799,6 +7808,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.CAPITAL_ARES,`
     <div class="title background-color-automated ">Capital</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price ">26</div>
     <div class="tag tag1 tag-building "></div>
     <div class="tag tag2 tag-city "></div>
@@ -7821,6 +7831,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.COMMERCIAL_DISTRICT_ARES,`
     <div class="title background-color-automated ">Commercial District</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price ">16</div>
     <div class="tag tag1 tag-building "></div>
     <div class="corporate-icon project-icon"></div>
@@ -7842,6 +7853,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.OCEAN_SANCTUARY,`
     <div class="title background-color-active ">Ocean Sanctuary</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price ">9</div>
     <div class="tag tag1 tag-animal "></div>
     <div class="card-number">A13</div>
@@ -7859,6 +7871,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.SOLAR_FARM,`
     <div class="title background-color-automated ">Solar Farm</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price ">12</div>
     <div class="tag tag1 tag-building "></div>
     <div class="tag tag2 tag-power "></div>
@@ -7872,6 +7885,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.ECOLOGICAL_ZONE_ARES,`
     <div class="title background-color-active">Ecological Zone</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price">12</div>
     <div class="tag tag1 tag-plant"></div>
     <div class="tag tag2 tag-animal"></div>
@@ -7891,6 +7905,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.INDUSTRIAL_CENTER_ARES,`
     <div class="title background-color-active ">Industrial Center</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price ">4</div>
     <div class="tag tag1 tag-building "></div>
     <div class="corporate-icon project-icon"></div>
@@ -7908,6 +7923,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.LAVA_FLOWS_ARES,`
     <div class="title background-color-events ">Lava Flows</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price ">18</div>
     <div class="tag tag1 tag-event "></div>
     <div class="card-number">A17</div>
@@ -7922,6 +7938,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.MINING_AREA_ARES,`
     <div class="title background-color-automated">Mining Area</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price">4</div>
     <div class="tag tag1 tag-building"></div>
     <div class="corporate-icon project-icon"></div>
@@ -7940,6 +7957,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.MINING_RIGHTS_ARES,`
     <div class="title background-color-automated">Mining Rights</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price">9</div>
     <div class="tag tag1 tag-building"></div>
     <div class="card-number">A19</div>
@@ -7957,6 +7975,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.MOHOLE_AREA_ARES,`
     <div class="title background-color-automated">Mohole Area</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price">20</div>
     <div class="tag tag1 tag-building"></div>
     <div class="card-number">A20</div>
@@ -7973,6 +7992,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.NATURAL_PRESERVE_ARES,`
     <div class="title background-color-automated">Natural Preserve</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price">9</div>
     <div class="tag tag1 tag-building"></div>
     <div class="tag tag2 tag-science"></div>
@@ -7992,6 +8012,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.NUCLEAR_ZONE_ARES,`
     <div class="title background-color-automated">Nuclear Zone</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price">11</div>
     <div class="tag tag1 tag-earth"></div>
     <div class="card-number">A22</div>
@@ -8007,6 +8028,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.RESTRICTED_AREA_ARES,`
     <div class="title background-color-active ">Restricted Area</div>
+    <div class="ares-icon project-icon"></div>
     <div class="price ">11</div>
     <div class="tag tag1 tag-science "></div>
     <div class="corporate-icon project-icon"></div>
@@ -8014,7 +8036,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="content ">
         <div class="money resource ">2</div> <div class="red-arrow "></div> <div class="card resource "></div>
         <div class="description ">
-            (Action: Spend 2 MC to draw a card.)
+            (Action: Spend 2 M€ to draw a card.)
         </div><br>
         <div class="ares-tile board-space-tile--restricted_area_ares"></div>
         <div class="description ">

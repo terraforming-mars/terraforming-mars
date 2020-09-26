@@ -1069,7 +1069,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         if (this.interrupts.length === 0) {
           this.gotoActionPhase();
         } else {
-        // Resolve research interrupt (Helion player)
+          // Resolve research interrupt (Helion player)
           let interrupt = this.interrupts.shift();
           if (interrupt !== undefined && interrupt.playerInput !== undefined) {
             if (interrupt.beforeAction !== undefined) {
@@ -1522,7 +1522,16 @@ export class Game implements ILoadable<SerializedGame, Game> {
         );
       }
 
+      if (this.gameOptions.aresExtension) {
+        AresHandler.assertCanPay(this, player, space);
+      }
+
       // Part 2. Collect additional fees.
+
+      // Adjacency costs are before the hellas ocean tile because this is a mandatory cost.
+      if (this.gameOptions.aresExtension) {
+        AresHandler.payAdjacencyAndHazardCosts(this, player, space);
+      }
 
       // Hellas special requirements ocean tile
       if (space.id === SpaceName.HELLAS_OCEAN_TILE
@@ -1533,10 +1542,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
             this.addOceanInterrupt(player, "Select space for ocean from placement bonus");
             this.addSelectHowToPayInterrupt(player, 6, false, false, "Select how to pay for placement bonus ocean");
           }
-      }
-
-      if (this.gameOptions.aresExtension) {
-          AresHandler.payAdjacencyAndHazardCosts(this, player, space);
       }
 
       // Part 3. Setup for bonuses
@@ -1569,7 +1574,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
             player.megaCredits += player.oceanBonus;
           }
           if (this.gameOptions.aresExtension) {
-            AresHandler.handleAdjacentPlacement(this, adjacentSpace, player);
+            AresHandler.earnAdacencyBonuses(this, adjacentSpace, player);
           }
         });
 

@@ -19,6 +19,7 @@ import { AresSpaceBonus } from "./AresSpaceBonus";
 import { TileType } from "../TileType";
 import { ITile } from "../ITile";
 import { HazardConstraint } from "./AresData";
+import { IAdjacencyCost } from "./IAdjacencyCost";
 
 export const OCEAN_UPGRADE_TILES = [TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
 export const HAZARD_TILES = [TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE];
@@ -38,7 +39,7 @@ export class AresHandler {
     }
 
     // |player| placed a tile next to |adjacentSpace|.
-    public static handleAdjacentPlacement (game: Game, adjacentSpace: ISpace, player: Player) {
+    public static earnAdacencyBonuses (game: Game, adjacentSpace: ISpace, player: Player) {
         if (adjacentSpace.adjacency !== undefined && adjacentSpace.adjacency.bonus.length > 0) {
           if (!adjacentSpace.player) {
             throw new Error(`A tile with an adjacency bonus must have an owner (${adjacentSpace.x}, ${adjacentSpace.y}, ${adjacentSpace.adjacency.bonus}`);
@@ -115,37 +116,67 @@ export class AresHandler {
         }
     }
 
-    public static adjacencyCosts(game: Game, space: ISpace): number {
-        return game.board
-            .getAdjacentSpaces(space)
-            .map((adjacentSpace) => adjacentSpace?.adjacency?.cost || 0)
-            .reduce((prior, current) => prior + current, 0);
+    private static isMild(tile: ITile): boolean {
+        if (tile.tileType === TileType.DUST_STORM_MILD || tile.tileType === TileType.EROSION_MILD) {
+            return true;
+        }
+        if (tile.tileType === TileType.DUST_STORM_SEVERE || tile.tileType === TileType.EROSION_SEVERE) {
+            return false;
+        }
+        throw new Error("Not a hazard tile: " + tile.tileType);
+    }
+
+    private static computeAdjacencyCosts(game: Game, space: ISpace): IAdjacencyCost {
+        // Summing up production cost isn't really the way to do it, because each tile could
+        // reduce different production costs. Oh well.
+        var megaCreditCost = 0;
+        var productionCost = 0;
+        game.board.getAdjacentSpaces(space).forEach(adjacentSpace => {
+          megaCreditCost += adjacentSpace?.adjacency?.cost || 0;
+          if (adjacentSpace.tile?.hazard) {
+            productionCost += AresHandler.isMild(adjacentSpace.tile) ? 1 : 2;
+          }
+        });
+
+        if (space.tile?.hazard) {
+            megaCreditCost += AresHandler.isMild(space.tile) ? 8 : 16;
+        }
+
+        return { megacredits: megaCreditCost, production: productionCost };
+    }
+
+    public static assertCanPay(game: Game, player: Player, space: ISpace): IAdjacencyCost {
+        var cost = AresHandler.computeAdjacencyCosts(game, space);
+
+        // Make this more sophisticated, a player can pay for different adjacencies
+        // with different production units, and, a severe hazard can't split payments.
+        var productionUnits = (player.getProduction(Resources.MEGACREDITS) + 5)
+            + player.getProduction(Resources.STEEL)
+            + player.getProduction(Resources.TITANIUM)
+            + player.getProduction(Resources.PLANTS)
+            + player.getProduction(Resources.ENERGY)
+            + player.getProduction(Resources.HEAT);
+
+        if (productionUnits >= cost.production && player.canAfford(cost.megacredits)) {
+           return cost;
+        } 
+        throw new Error(`Placing here costs ${cost.production} of production and ${cost.megacredits} M€`);
     }
 
     public static payAdjacencyAndHazardCosts(game: Game, player: Player, space: ISpace) {
-        var cost = this.adjacencyCosts(game, space);
 
-        if (space.tile?.hazard) {
-            switch (space.tile.tileType) {
-                case TileType.DUST_STORM_MILD:
-                case TileType.EROSION_MILD:
-                    cost += 8;
-                    break;
+        var cost = this.assertCanPay(game, player, space);
 
-                case TileType.DUST_STORM_SEVERE:
-                case TileType.EROSION_SEVERE:
-                    cost += 16;
-                    break;
-            }
+        if (cost.production > 0) {
+            // game.addResourceProductionDecreaseInterrupt();
         }
-
-        if (cost > 0) {
+        if (cost.megacredits > 0) {
             game.log(LogMessageType.DEFAULT,
                 "${0} placing a tile here costs ${1} M€",
                 new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                new LogMessageData(LogMessageDataType.STRING, cost.toString()));
+                new LogMessageData(LogMessageDataType.STRING, cost.megacredits.toString()));
 
-            game.addSelectHowToPayInterrupt(player, cost, false, false, "Select how to pay additional placement costs.");
+            game.addSelectHowToPayInterrupt(player, cost.megacredits, false, false, "Select how to pay additional placement costs.");
         }
     }
 
@@ -292,24 +323,7 @@ export class AresHandler {
 
 
     public static putHazardAt(space: ISpace, tileType: TileType) {
-        var cost;
-        switch(tileType) {
-            case TileType.DUST_STORM_MILD:
-            case TileType.EROSION_MILD:
-                cost = 1;
-                break;
-
-            case TileType.DUST_STORM_SEVERE:
-            case TileType.EROSION_SEVERE:
-                cost = 2;
-                break;
-
-            default:
-                throw new Error(`Tile type ${tileType} is not a hazard.`);
-        }
-
         space.player = undefined;
-        space.adjacency = { bonus: [], cost: cost };
         space.tile = { tileType: tileType, hazard: true };
     }
 }

@@ -9,7 +9,7 @@ import {SpaceType} from '../SpaceType';
 import {ISpace} from '../ISpace';
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
-import { IAdjacencyBonus } from '../ares/AdjacencyBonus';
+import { IAdjacencyBonus } from '../ares/IAdjacencyBonus';
 import { Board } from "../Board";
 
 export class Capital implements IProjectCard {

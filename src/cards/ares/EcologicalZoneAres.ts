@@ -1,6 +1,6 @@
 import { CardName } from "../../CardName";
 import { EcologicalZone } from "../EcologicalZone";
-import { IAdjacencyBonus } from "../../ares/AdjacencyBonus";
+import { IAdjacencyBonus } from "../../ares/IAdjacencyBonus";
 import { AresSpaceBonus } from "../../ares/AresSpaceBonus";
 
 export class EcologicalZoneAres extends EcologicalZone {

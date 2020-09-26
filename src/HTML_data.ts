@@ -7658,7 +7658,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="plant production "></div><div class="plant production "></div>
         </div>
         <div class="microbe resource "></div><div class="microbe resource "></div>
-        <div class="ares-tile board-space-tile--biofertilizer-facility"></div>
+        <div class="ares-tile board-space-tile--biofertilizer_facility"></div>
         <div class="description " style="text-align:left;">
             (Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to any card. Place this tile which grants an <b>adjacency bonus</b> of 1 plant and 1 microbe.)<br>
         </div>

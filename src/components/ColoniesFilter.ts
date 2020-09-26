@@ -13,6 +13,7 @@ import { Enceladus } from "../colonies/Enceladus";
 import { ColonyName } from "../colonies/ColonyName";
 import { Iapetus } from "../cards/community/Iapetus";
 import { Mercury } from "../cards/community/Mercury";
+import { Hygiea } from "../cards/community/Hygiea";
 
 let allColonies = [
     new Callisto(),
@@ -27,7 +28,8 @@ let allColonies = [
     new Titan(),
     new Triton(),
     new Iapetus(),
-    new Mercury()
+    new Mercury(),
+    new Hygiea()
 ];
 
 export const ColoniesFilter = Vue.component("colonies-filter", {

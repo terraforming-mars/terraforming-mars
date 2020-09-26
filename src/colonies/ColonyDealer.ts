@@ -13,6 +13,7 @@ import { Enceladus } from './Enceladus';
 import { Iapetus } from '../cards/community/Iapetus';
 import { Mercury } from '../cards/community/Mercury';
 import { ColonyName } from './ColonyName';
+import { Hygiea } from '../cards/community/Hygiea';
 
 export interface IColonyFactory<T> {
     colonyName: ColonyName;
@@ -37,6 +38,7 @@ export const ALL_COLONIES_TILES: Array<IColonyFactory<IColony>> = [
 export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<IColony>> = [
     { colonyName: ColonyName.IAPETUS, factory: Iapetus },
     { colonyName: ColonyName.MERCURY, factory: Mercury },
+    { colonyName: ColonyName.HYGIEA, factory: Hygiea },
 ];
 
 // Function to return a card object by its name

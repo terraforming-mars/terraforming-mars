@@ -224,7 +224,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (gameOptions.coloniesExtension) {
         corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
 
-        const communityColoniesSelected = gameOptions.customColoniesList && (gameOptions.customColoniesList.includes(ColonyName.IAPETUS) || gameOptions.customColoniesList.includes(ColonyName.MERCURY));
+        const communityColoniesSelected = this.checkForCommunityColonies(gameOptions);
         const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
 
         this.colonyDealer = new ColonyDealer();
@@ -343,6 +343,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.runDraftRound(true);
         return;
       }
+    }
+
+    public checkForCommunityColonies(gameOptions: GameOptions) : boolean {
+      if (!gameOptions.customColoniesList) return false;
+      if (gameOptions.customColoniesList.includes(ColonyName.IAPETUS)) return true;
+      if (gameOptions.customColoniesList.includes(ColonyName.MERCURY)) return true;
+      if (gameOptions.customColoniesList.includes(ColonyName.HYGIEA)) return true;
+
+      return false;
     }
 
     public isSoloMode() :boolean {

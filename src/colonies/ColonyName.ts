@@ -14,4 +14,5 @@ export enum ColonyName {
     // Community
     IAPETUS = "Iapetus",
     MERCURY = "Mercury",
+    HYGIEA = "Hygiea",
 }

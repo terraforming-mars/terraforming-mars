@@ -22,7 +22,7 @@ export const Colony = Vue.component("colony", {
         },
         getCubeYPosition: (colony: ColonyModel): number => {
             if (colony.name === ColonyName.IAPETUS) return 185;
-            if (colony.name === ColonyName.EUROPA || colony.name === ColonyName.MERCURY) return 145;
+            if (colony.name === ColonyName.EUROPA || colony.name === ColonyName.MERCURY || colony.name === ColonyName.HYGIEA) return 145;
             if (colony.name === ColonyName.MIRANDA || colony.name === ColonyName.PLUTO ) return 180;
             return 165;
         },
@@ -64,6 +64,9 @@ export const Colony = Vue.component("colony", {
         },
         getMercury:(): string => {
           return ColonyName.MERCURY;
+        },
+        getHygiea:(): string => {
+          return ColonyName.HYGIEA;
         }
     },
     template: `
@@ -100,6 +103,7 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getIapetus()" class="resource money">-1</div>
 
       <div v-if="colony.name === getMercury()" class="resource money">2</div>
+      <div v-if="colony.name === getHygiea()" class="resource money">1</div>
 
       <span v-if="colony.name === getPluto()" class="white-char" style="margin-left:5px;">+</span>
       <div v-if="colony.name === getPluto()" class="resource card" style="transform: scale(0.8);margin-left:-2px;"></div>
@@ -120,9 +124,9 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getIo()" class="resource heat" style="margin-left:20px;"></div>
       <div v-if="colony.name === getMiranda()" class="resource animal" style="margin-left:20px;margin-top:-10px;"></div>
       <div v-if="colony.name === getPluto()" class="resource card" style="margin-left:20px;transform: scale(0.8);margin-top:-10px;"></div>
-      <div v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus()" class="white-x"></div>
+      <div v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea()" class="white-x"></div>
       <div v-if="colony.name === getIapetus()" class="white-x" style="margin-left:-42px;"></div>
-      <span v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus()" class="colony-background-color">
+      <span v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea()" class="colony-background-color">
         Trade Income
       </span>
       <span v-if="colony.name === getIapetus()" class="colony-background-color" style="position:relative;top:-8px;left:30px">
@@ -130,6 +134,9 @@ export const Colony = Vue.component("colony", {
       </span>
       <span v-if="colony.name === getEuropa() || colony.name === getMercury()" class="colony-background-color" style="margin-left: 3px;">
         Trade Income: Gain the indicated production
+      </span>
+      <span v-if="colony.name === getHygiea()" class="colony-background-color" style="margin-left: 3px;">
+        Trade Income: Steal 3 indicated resources
       </span>
 
     <div v-if="colony.name === getEnceladus()" class="colony-grid-container">
@@ -385,6 +392,31 @@ export const Colony = Vue.component("colony", {
     <div><div class="production-box"><div class="production steel"></div></div></div>
     <div><div class="production-box"><div class="production titanium"></div></div></div>
     <div><div class="production-box"><div class="production titanium"></div></div></div>
+  </div>
+
+  <div v-if="colony.name === getHygiea()" class="colony-grid-container">
+    <div>
+      <div class="resource card red-outline" style="margin-left: 5px; margin-top: 2px; transform: scale(0.8);"></div>
+    </div>
+    <div>
+      <div class="resource card red-outline" style="margin-left: 5px; margin-top: 2px; transform: scale(0.8);"></div>
+    </div>
+    <div>
+      <div class="resource card red-outline" style="margin-left: 5px; margin-top: 2px; transform: scale(0.8);"></div>
+    </div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div v-if="colony.name === getHygiea()" class="colony-grid-container2">
+    <div><div class="resource money red-outline" style="margin-top: 16px"></div></div>
+    <div><div class="resource money red-outline" style="margin-top: 16px"></div></div>
+    <div><div class="resource heat red-outline"></div></div>
+    <div><div class="resource energy red-outline"></div></div>
+    <div><div class="resource plant red-outline"></div></div>
+    <div><div class="resource steel red-outline"></div></div>
+    <div><div class="resource titanium red-outline"></div></div>
   </div>
 
   <div v-if="colony.name === getTitan()" class="colony-grid-container">

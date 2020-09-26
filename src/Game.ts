@@ -61,7 +61,7 @@ import { ColonyName } from "./colonies/ColonyName";
 import { AresHandler } from "./ares/AresHandler";
 import { getRandomMilestonesAndAwards } from "./MASynergy";
 import { CardType } from "./cards/CardType";
-import { AresData } from "./ares/AresData";
+import { AresData, initialAresData } from "./ares/AresData";
 import { ColonyModel } from "./models/ColonyModel";
 
 
@@ -211,7 +211,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       if (gameOptions.aresExtension) {
-        this.aresData = new AresData(gameOptions.aresExtension, gameOptions.aresHazards);
+        this.aresData = initialAresData(gameOptions.aresExtension, gameOptions.aresHazards);
           // this test is because hazard selection isn't activaly part of game options, but needs
           // to be configurable for tests.
           if (gameOptions.aresHazards !== false) {
@@ -1902,10 +1902,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       d.board.spaces.forEach((element: ISpace) => {
+
+        let space = this.getSpace(element.id);
         if(element.tile) {
-          let space = this.getSpace(element.id);
           let tileType = element.tile.tileType;
           let tileCard = element.tile.card;
+          let hazard = element.tile.hazard;
           if (element.player){
             const player = this.players.find((player) => player.id === element.player!.id);
             // Prevent loss of "neutral" player tile ownership across reloads
@@ -1913,17 +1915,22 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
           space.tile = {
             tileType: tileType,
-            card: tileCard
+            card: tileCard,
+            hazard: hazard
           };
         }
         // Correct Land Claim
         else if(element.player) {
-          const space = this.getSpace(element.id);
           const player = this.players.find((player) => player.id === element.player!.id);
           space.player = player;
         }
+
+        space.adjacency = element.adjacency;
       });
 
+      if (this.gameOptions.aresExtension) {
+        this.aresData = d.aresData;
+      }
       // Reload colonies elements if needed
       if (this.gameOptions.coloniesExtension) {
         this.colonyDealer = new ColonyDealer();

@@ -17,8 +17,8 @@ import { ResourceType } from "../ResourceType";
 import { SpaceBonus } from "../SpaceBonus";
 import { AresSpaceBonus } from "./AresSpaceBonus";
 import { TileType } from "../TileType";
-import { HazardConstraint } from "./HazardData";
 import { ITile } from "../ITile";
+import { HazardConstraint } from "./AresData";
 
 export const OCEAN_UPGRADE_TILES = [TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
 export const HAZARD_TILES = [TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE];
@@ -110,7 +110,7 @@ export class AresHandler {
                 "${0} gains ${1} M€ for a tile placed next to ${2}",
                 new LogMessageData(LogMessageDataType.PLAYER, adjacentSpace.player.id),
                 new LogMessageData(LogMessageDataType.STRING, ownerBonus.toString()),
-                new LogMessageData(LogMessageDataType.STRING, adjacentSpace.tile?.tileType.toString() || ""),);
+                new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(adjacentSpace.tile?.tileType)));
             }
         }
     }
@@ -286,7 +286,7 @@ export class AresHandler {
         }
         player.increaseTerraformRatingSteps(steps, game);
         game.log(LogMessageType.DEFAULT,
-            "${0}'s TR increases ${1} step(s) for removing {2}",
+            "${0}'s TR increases ${1} step(s) for removing ${2}",
             new LogMessageData(LogMessageDataType.PLAYER, player.id),
             new LogMessageData(LogMessageDataType.STRING, steps.toString()),
             new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(initialTileType)));
@@ -343,7 +343,7 @@ function makeSevere(game: Game, from: TileType, to: TileType) {
         });
 
     game.log(LogMessageType.DEFAULT,
-        "${1} have upgraded to {2}",
+        "${1} have upgraded to ${2}",
         new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(from)),
         new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(to)));
 }

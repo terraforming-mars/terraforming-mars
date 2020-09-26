@@ -67,6 +67,9 @@ export const Colony = Vue.component("colony", {
         },
         getHygiea:(): string => {
           return ColonyName.HYGIEA;
+        },
+        getTitania:(): string => {
+          return ColonyName.TITANIA;
         }
     },
     template: `
@@ -104,15 +107,20 @@ export const Colony = Vue.component("colony", {
 
       <div v-if="colony.name === getMercury()" class="resource money">2</div>
       <div v-if="colony.name === getHygiea()" class="resource money">1</div>
+      <div v-if="colony.name === getTitania()" class="resource money">-3</div>
 
       <span v-if="colony.name === getPluto()" class="white-char" style="margin-left:5px;">+</span>
       <div v-if="colony.name === getPluto()" class="resource card" style="transform: scale(0.8);margin-left:-2px;"></div>
       <span v-if="colony.name === getPluto()" class="white-char">-</span>
       <div v-if="colony.name === getPluto()" class="resource card" style="transform: scale(0.8);margin-left:-2px;"></div>
       
-      <span class="colony-background-color">
+      <span v-if="colony.name !== getTitania()" class="colony-background-color">
         Colony Bonus
-        </span><br>
+      </span>
+      <span v-if="colony.name === getTitania()" class="colony-background-color">
+        Colony Fee
+      </span>
+      <br>
       <div v-if="colony.name === getGanymede()" class="resource plant" style="margin-left:20px;"></div>
       <div v-if="colony.name === getTitan()" class="resource floater" style="margin-left:20px;"></div>
       <div v-if="colony.name === getEnceladus()" class="resource microbe" style="margin-left:20px;"></div>
@@ -124,12 +132,17 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getIo()" class="resource heat" style="margin-left:20px;"></div>
       <div v-if="colony.name === getMiranda()" class="resource animal" style="margin-left:20px;margin-top:-10px;"></div>
       <div v-if="colony.name === getPluto()" class="resource card" style="margin-left:20px;transform: scale(0.8);margin-top:-10px;"></div>
-      <div v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea()" class="white-x"></div>
+      <div v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea() && colony.name !== getTitania()" class="white-x"></div>
       <div v-if="colony.name === getIapetus()" class="white-x" style="margin-left:-42px;"></div>
-      <span v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea()" class="colony-background-color">
+      <div v-if="colony.name === getTitania()" class="white-x" style="margin-left:42px;"></div>
+      <div v-if="colony.name === getTitania()" class="points points-big" style="margin-left: 10px; margin-top: -53px; transform: scale(0.5); height: 50px; width: 50px">&nbsp;</div>
+      <span v-if="colony.name !== getEuropa() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea() && colony.name !== getTitania()" class="colony-background-color">
         Trade Income
       </span>
       <span v-if="colony.name === getIapetus()" class="colony-background-color" style="position:relative;top:-8px;left:30px">
+        Trade Income
+      </span>
+      <span v-if="colony.name === getTitania()" class="colony-background-color" style="position:relative;top:-14px;left:12px">
         Trade Income
       </span>
       <span v-if="colony.name === getEuropa() || colony.name === getMercury()" class="colony-background-color" style="margin-left: 3px;">
@@ -417,6 +430,25 @@ export const Colony = Vue.component("colony", {
     <div><div class="resource plant red-outline"></div></div>
     <div><div class="resource steel red-outline"></div></div>
     <div><div class="resource titanium red-outline"></div></div>
+  </div>
+
+  <div v-if="colony.name === getTitania()" class="colony-grid-container">
+    <div><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">4</div></div>
+    <div><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">3</div></div>
+    <div><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">2</div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <div v-if="colony.name === getTitania()" class="colony-grid-container2">
+    <div>2</div>
+    <div>2</div>
+    <div>2</div>
+    <div>1</div>
+    <div>1</div>
+    <div>0</div>
+    <div>0</div>
   </div>
 
   <div v-if="colony.name === getTitan()" class="colony-grid-container">

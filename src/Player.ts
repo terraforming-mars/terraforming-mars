@@ -108,6 +108,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public removingPlayers: Array<PlayerId> = [];
     public needsToDraft: boolean | undefined = undefined; 
     public cardDiscount: number = 0;
+    public colonyVictoryPoints: number = 0;
 
     constructor(
         public name: string,
@@ -383,6 +384,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.victoryPointsBreakdown.setVictoryPoints("victoryPoints", game.turmoil.getPlayerVictoryPoints(this), "Turmoil Points");
       }
 
+      // Titania Colony VP
+      if (this.colonyVictoryPoints > 0) {
+        this.victoryPointsBreakdown.setVictoryPoints("victoryPoints", this.colonyVictoryPoints, "Colony VP");
+      }
+      
       this.victoryPointsBreakdown.updateTotal();
       return this.victoryPointsBreakdown;
     }

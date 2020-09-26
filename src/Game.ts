@@ -1560,6 +1560,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (!isWorldGov) {
         space.bonus.forEach((spaceBonus) => {
           // TODO(kberg): this shouldn't happen when placing on top of a tile (upgrading ocean, placing hazard.)
+          // This can get a little tricky if data has to be serialized.
           this.grantSpaceBonus(player, spaceBonus);
         });
 

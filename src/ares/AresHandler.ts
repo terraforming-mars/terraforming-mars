@@ -145,7 +145,6 @@ export class AresHandler {
                 new LogMessageData(LogMessageDataType.PLAYER, player.id),
                 new LogMessageData(LogMessageDataType.STRING, cost.toString()));
 
-            // TODO(kberg): ask to pay or abort.
             game.addSelectHowToPayInterrupt(player, cost, false, false, "Select how to pay additional placement costs.");
         }
     }
@@ -193,7 +192,6 @@ export class AresHandler {
 
         // Although this bit of code goes through all six resource types, the expected input map will only contain
         // the three (or six) resources it is tracking.
-        // TODO(kberg): bonus placement logging is inconsistent.
         [Resources.PLANTS, Resources.STEEL, Resources.TITANIUM, Resources.HEAT].forEach((resource) => {
             if (giveBonus(startingResources.get(resource), player.getResource(resource))) {
                 player.setResource(resource, 1);

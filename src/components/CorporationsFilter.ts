@@ -10,6 +10,7 @@ import { CORP_ERA_CARD_MANIFEST, BASE_CARD_MANIFEST } from "../cards/StandardCar
 import { PROMO_CARD_MANIFEST } from "../cards/promo/PromoCardManifest";
 import { TURMOIL_CARD_MANIFEST } from "../cards/turmoil/TurmoilCardManifest";
 import { CardManifest } from "../cards/CardManifest";
+import { COMMUNITY_CARD_MANIFEST } from "../cards/venusNext/CommunityCardManifest";
 
 const allItems: Array<CardName> =
     ALL_CORPORATION_DECKS.map((deck) => deck.cards.map((cf) => cf.cardName))
@@ -19,7 +20,7 @@ function corporateCardNames(cardManifest: CardManifest) : Array<CardName> {
     return cardManifest.corporationCards.cards.map((cf) => cf.cardName);
 }
 export const CorporationsFilter = Vue.component("corporations-filter", {
-    props: ["corporateEra", "prelude", "venusNext", "colonies", "turmoil", "promoCardsOption"],
+    props: ["corporateEra", "prelude", "venusNext", "colonies", "turmoil", "promoCardsOption", "communityCardsOption"],
     data: function () {
         const corpCardNames = {
             original: corporateCardNames(BASE_CARD_MANIFEST).concat(corporateCardNames(CORP_ERA_CARD_MANIFEST)),
@@ -27,7 +28,8 @@ export const CorporationsFilter = Vue.component("corporations-filter", {
             venus: corporateCardNames(VENUS_CARD_MANIFEST),
             colonies: corporateCardNames(COLONIES_CARD_MANIFEST),
             turmoil: corporateCardNames(TURMOIL_CARD_MANIFEST),
-            promo: corporateCardNames(PROMO_CARD_MANIFEST)
+            promo: corporateCardNames(PROMO_CARD_MANIFEST),
+            community: corporateCardNames(COMMUNITY_CARD_MANIFEST),
         };
 
         return {
@@ -46,7 +48,8 @@ export const CorporationsFilter = Vue.component("corporations-filter", {
                 {"title": CorporationGroup.VENUS_NEXT, "items": corpCardNames.venus},
                 {"title": CorporationGroup.COLONIES, "items": corpCardNames.colonies},
                 {"title": CorporationGroup.TURMOIL, "items": corpCardNames.turmoil},
-                {"title": CorporationGroup.PROMO, "items": corpCardNames.promo}
+                {"title": CorporationGroup.PROMO, "items": corpCardNames.promo},
+                {"title": CorporationGroup.COMMUNITY, "items": corpCardNames.community}
             ]
         }
     },
@@ -112,6 +115,9 @@ export const CorporationsFilter = Vue.component("corporations-filter", {
         },
         promoCardsOption: function (enabled) {
             enabled ? this.selectAll(CorporationGroup.PROMO) : this.selectNone(CorporationGroup.PROMO);
+        },
+        communityCardsOption: function (enabled) {
+            enabled ? this.selectAll(CorporationGroup.COMMUNITY) : this.selectNone(CorporationGroup.COMMUNITY);
         }
     },
     template: `

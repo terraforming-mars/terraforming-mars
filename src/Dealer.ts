@@ -10,7 +10,8 @@ import { TURMOIL_CARD_MANIFEST } from "./cards/turmoil/TurmoilCardManifest";
 import { VENUS_CARD_MANIFEST } from "./cards/venusNext/VenusCardManifest";
 import { Deck } from "./Deck";
 import { ILoadable } from "./ILoadable";
-import { SerializedDealer } from "./SerializedDealer";
+import { SerializedDealer } from "./SerializedDealer"; 
+import { COMMUNITY_CARD_MANIFEST } from "./cards/venusNext/CommunityCardManifest";
 
 export const decks: Array<CardManifest> = [
     BASE_CARD_MANIFEST,
@@ -19,7 +20,8 @@ export const decks: Array<CardManifest> = [
     VENUS_CARD_MANIFEST,
     COLONIES_CARD_MANIFEST,
     PRELUDE_CARD_MANIFEST,
-    TURMOIL_CARD_MANIFEST
+    TURMOIL_CARD_MANIFEST,
+    COMMUNITY_CARD_MANIFEST,
 ];
 
 // Function to return a card object by its name
@@ -52,6 +54,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     private useColoniesNextExtension: boolean = false;
     private usePromoCards: boolean = false;
     private useTurmoilExtension: boolean = false;
+
     constructor(
             useCorporateEra: boolean,
             usePreludeExtension: boolean,

@@ -6,5 +6,6 @@ export enum GameModule {
     Venus,
     Colonies,
     Prelude,
-    Turmoil
+    Turmoil,
+    Community,
 }

@@ -440,5 +440,11 @@ export enum CardName {
     VOTE_OF_NO_CONFIDENCE = "Vote Of No Confidence",
     LAW_SUIT = "Law Suit",
     STANFORD_TORUS = "Stanford Torus",
-    SATURN_SURFING = "Saturn Surfing"
+    SATURN_SURFING = "Saturn Surfing",
+    
+    // Community corps
+    AGRICOLA_INC = "Agricola Inc",
+    PROJECT_WORKSHOP = "Project Workshop",
+    INCITE = "Incite",
+    PLAYWRIGHTS = "Playwrights",
 }

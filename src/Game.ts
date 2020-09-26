@@ -59,6 +59,7 @@ import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
 import { getRandomMilestonesAndAwards } from "./MASynergy";
+import { CardType } from "./cards/CardType";
 import { ColonyModel } from "./models/ColonyModel";
 
 
@@ -82,6 +83,7 @@ export interface GameOptions {
   solarPhaseOption: boolean;
   shuffleMapOption: boolean;
   promoCardsOption: boolean;
+  communityCardsOption: boolean;
   undoOption: boolean;
   fastModeOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
@@ -155,6 +157,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           solarPhaseOption: false,
           shuffleMapOption: false,
           promoCardsOption: false,
+          communityCardsOption: false,
           undoOption: false,
           fastModeOption: false,
           removeNegativeGlobalEventsOption: false,
@@ -1640,12 +1643,41 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return result;
     }
 
+    public drawCardsByType(cardType: CardType, total: number): Array<IProjectCard> {
+      let cardsToDraw = 0;
+      const result: Array<IProjectCard> = [];
+      const discardedCards: Array<IProjectCard> = [];
+
+      while (cardsToDraw < total) {
+        const projectCard = this.dealer.dealCard();
+        if (projectCard.cardType === cardType) {
+          cardsToDraw++;
+          result.push(projectCard);
+        } else {
+          discardedCards.push(projectCard);
+          this.dealer.discard(projectCard);
+        }
+      }
+
+      this.log(
+        LogMessageType.DEFAULT,
+        discardedCards.length + " card(s) were discarded",
+       ...discardedCards.map((card) => new LogMessageData(LogMessageDataType.CARD, card.name)),
+      );
+
+      return result;
+    }
+
     public getCardsInHandByTag(player: Player, tag: Tags) {
       return player.cardsInHand.filter((card) => card.tags.includes(tag));
     }
 
     public getCardsInHandByResource(player: Player, resourceType: ResourceType) {
       return player.cardsInHand.filter((card) => card.resourceType === resourceType);
+    }
+
+    public getCardsInHandByType(player: Player, cardType: CardType) {
+      return player.cardsInHand.filter((card) => card.cardType === cardType);
     }
 
     public log(type: LogMessageType, message: string, ...data: LogMessageData[]) {

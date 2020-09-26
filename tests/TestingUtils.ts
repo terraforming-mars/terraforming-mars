@@ -39,6 +39,7 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
         solarPhaseOption: false,
         shuffleMapOption: false,
         promoCardsOption: false,
+        communityCardsOption: false,
         undoOption: false,
         startingCorporations: 2,
         includeVenusMA: true,

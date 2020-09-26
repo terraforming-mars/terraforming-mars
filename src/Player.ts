@@ -52,7 +52,7 @@ import { CardModel } from "./models/CardModel";
 import { SelectColony } from "./inputs/SelectColony";
 import { ColonyName } from "./colonies/ColonyName";
 import { ColonyModel } from "./models/ColonyModel";
-import { ChainLog } from "./ChainLog";
+import { LogBuilder } from "./LogBuilder";
 
 export type PlayerId = string;
 
@@ -201,11 +201,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.megaCredits += retribution;
         game.getPlayerById(game.monsInsuranceOwner).setResource(Resources.MEGACREDITS,-3);
         if (retribution > 0) {
-          new ChainLog("${0} received ${1} MC from ${2} owner (${3})")
-              .playerParam(this)
-              .numberParam(retribution)
-              .cardNameParam(CardName.MONS_INSURANCE)
-              .playerIdParam(game.monsInsuranceOwner)
+          new LogBuilder("${0} received ${1} MC from ${2} owner (${3})")
+              .player(this)
+              .number(retribution)
+              .cardName(CardName.MONS_INSURANCE)
+              .playerId(game.monsInsuranceOwner)
               .log(game);
         }
       }  
@@ -231,22 +231,22 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           game.someoneHasRemovedOtherPlayersPlants = true;
         }
 
-        new ChainLog("${0}'s ${1} amount ${2} by ${3} by ${4}")
-            .playerParam(this)
-            .stringParam(resource)
-            .stringParam(modifier)
-            .numberParam(Math.abs(amount))
-            .playerParam(fromPlayer)
+        new LogBuilder("${0}'s ${1} amount ${2} by ${3} by ${4}")
+            .player(this)
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount))
+            .player(fromPlayer)
             .log(game);
       }
 
       // Global event logging
       if (game !== undefined && globalEvent && amount !== 0) {
-        new ChainLog("${0}'s ${1} amount ${2} by ${3} by Global Event")
-            .playerParam(this)
-            .stringParam(resource)
-            .stringParam(modifier)
-            .numberParam(Math.abs(amount))
+        new LogBuilder("${0}'s ${1} amount ${2} by ${3} by Global Event")
+            .player(this)
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount))
             .log(game);
       }      
 
@@ -270,22 +270,22 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer.id) === -1) {
           this.removingPlayers.push(fromPlayer.id);
         }
-        new ChainLog("${0}'s ${1} production ${2} by ${3} by ${4}")
-            .playerParam(this)
-            .stringParam(resource)
-            .stringParam(modifier)
-            .numberParam(Math.abs(amount))
-            .playerParam(fromPlayer)
+        new LogBuilder("${0}'s ${1} production ${2} by ${3} by ${4}")
+            .player(this)
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount))
+            .player(fromPlayer)
             .log(game);
       }
       
       // Global event logging
       if (game !== undefined && globalEvent && amount !== 0) {
-        new ChainLog("${0}'s ${1} production ${2} by ${3} by Global Event")
-            .playerParam(this)
-            .stringParam(resource)
-            .stringParam(modifier)
-            .numberParam(Math.abs(amount))
+        new LogBuilder("${0}'s ${1} production ${2} by ${3} by Global Event")
+            .player(this)
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount))
             .log(game);
       }
 
@@ -455,11 +455,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           if (removingPlayer !== this) this.resolveMonsInsurance(game);
 
           if (shouldLogAction) {
-            new ChainLog("${0} loses ${1} resource(s) on ${2} by ${3}")
-                  .playerParam(this)
-                  .numberParam(count)
-                  .cardParam(card)
-                  .playerParam(removingPlayer)
+            new LogBuilder("${0} loses ${1} resource(s) on ${2} by ${3}")
+                  .player(this)
+                  .number(count)
+                  .card(card)
+                  .player(removingPlayer)
                   .log(game);
           }
         }
@@ -926,8 +926,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         action.options.push(
           new SelectOption("Increase temperature", "Increase", () => {
             game.increaseTemperature(this,1, true);
-            new ChainLog("${0} acted as World Government and increased temperature")
-              .playerParam(this)
+            new LogBuilder("${0} acted as World Government and increased temperature")
+              .player(this)
               .log(game);
             return undefined;
           })
@@ -937,8 +937,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         action.options.push(
           new SelectOption("Increase oxygen", "Increase", () => {
             game.increaseOxygenLevel(this,1, true);
-            new ChainLog("${0} acted as World Government and increased oxygen level")
-              .playerParam(this)
+            new LogBuilder("${0} acted as World Government and increased oxygen level")
+              .player(this)
               .log(game);
             return undefined;
           })
@@ -950,8 +950,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             "Add an ocean",
             game.board.getAvailableSpacesForOcean(this), (space) => {
               game.addOceanTile(this, space.id, SpaceType.OCEAN, true);
-              new ChainLog("${0} acted as World Government and placed an ocean")
-                .playerParam(this)
+              new LogBuilder("${0} acted as World Government and placed an ocean")
+                .player(this)
                 .log(game);
               return undefined;
             }
@@ -962,8 +962,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         action.options.push(
           new SelectOption("Increase Venus scale", "Increase", () => {
             game.increaseVenusScaleLevel(this,1, true);
-            new ChainLog("${0} acted as World Government and increased Venus scale")
-              .playerParam(this)
+            new LogBuilder("${0} acted as World Government and increased Venus scale")
+              .player(this)
               .log(game);
             return undefined;
           })
@@ -1036,9 +1036,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             .forEach((card) => {
               game.dealer.discard(card);
             });
-        new ChainLog("${0} bought ${1} card(s)")
-          .playerParam(this)
-          .numberParam(selectedCards.length)
+        new LogBuilder("${0} bought ${1} card(s)")
+          .player(this)
+          .number(selectedCards.length)
           .log(game);
         game.playerIsFinishedWithResearchPhase(this);
       };
@@ -1111,9 +1111,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     private addPlayedCard(game: Game, card: IProjectCard): void {
       this.playedCards.push(card);
-      new ChainLog("${0} played ${1}")
-        .playerParam(this)
-        .cardParam(card)
+      new LogBuilder("${0} played ${1}")
+        .player(this)
+        .card(card)
         .log(game);
       this.lastCardPlayed = card;
       this.generationPlayed.set(card.name, game.generation);
@@ -1317,9 +1317,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                 });
             }
             this.actionsThisGeneration.add(foundCard.name);
-            new ChainLog("${0} used ${1} action")
-              .playerParam(this)
-              .cardParam(foundCard)
+            new LogBuilder("${0} used ${1} action")
+              .player(this)
+              .card(foundCard)
               .log(game);
             return undefined;
           }
@@ -1356,9 +1356,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
               }
               game.dealer.discard(card);
             });
-            new ChainLog("${0} sold ${1} patents")
-              .playerParam(this)
-              .numberParam(foundCards.length)
+            new LogBuilder("${0} sold ${1} patents")
+              .player(this)
+              .number(foundCards.length)
               .log(game);
             return undefined;
           }, this.cardsInHand.length,
@@ -1392,9 +1392,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           game.addSelectHowToPayInterrupt(this, constants.AIR_SCRAPPING_COST, false, false, "Select how to pay for Air Scrapping project");
           game.increaseVenusScaleLevel(this, 1);
           this.onStandardProject(StandardProjectType.AIR_SCRAPPING);
-          new ChainLog("${0} used ${1} standard project")
-            .playerParam(this)
-            .standardProjectParam("Air Scrapping")
+          new LogBuilder("${0} used ${1} standard project")
+            .player(this)
+            .standardProject("Air Scrapping")
             .log(game);
           return undefined;
         }
@@ -1409,9 +1409,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           game.addSelectHowToPayInterrupt(this, constants.BUFFER_GAS_COST, false, false, "Select how to pay for Buffer Gas project");
           this.increaseTerraformRatingSteps(1, game);
           this.onStandardProject(StandardProjectType.BUFFER_GAS);
-          new ChainLog("${0} used ${1} standard project")
-            .playerParam(this)
-            .standardProjectParam("Buffer Gas")
+          new LogBuilder("${0} used ${1} standard project")
+            .player(this)
+            .standardProject("Buffer Gas")
             .log(game);
           return undefined;
         }
@@ -1426,9 +1426,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           game.addSelectHowToPayInterrupt(this, this.powerPlantCost, false, false, "Select how to pay for Power Plant project");
           this.setProduction(Resources.ENERGY);
           this.onStandardProject(StandardProjectType.POWER_PLANT);
-          new ChainLog("${0} used ${1} standard project")
-            .playerParam(this)
-            .standardProjectParam("Power plant")
+          new LogBuilder("${0} used ${1} standard project")
+            .player(this)
+            .standardProject("Power plant")
             .log(game);
           return undefined;
         }
@@ -1443,9 +1443,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           game.addSelectHowToPayInterrupt(this, constants.ASTEROID_COST, false, false, "Select how to pay for Asteroid project");
           game.increaseTemperature(this, 1);
           this.onStandardProject(StandardProjectType.ASTEROID);
-          new ChainLog("${0} used ${1} standard project")
-              .playerParam(this)
-              .standardProjectParam("Asteroid")
+          new LogBuilder("${0} used ${1} standard project")
+              .player(this)
+              .standardProject("Asteroid")
               .log(game);
           return undefined;
         }
@@ -1460,9 +1460,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           game.addSelectHowToPayInterrupt(this, constants.AQUIFER_COST, false, false, "Select how to pay for Aquifer project");
           game.addOceanInterrupt(this, "Select space for ocean");
           this.onStandardProject(StandardProjectType.AQUIFER);
-          new ChainLog("${0} used ${1} standard project")
-              .playerParam(this)
-              .standardProjectParam("Aquifer")
+          new LogBuilder("${0} used ${1} standard project")
+              .player(this)
+              .standardProject("Aquifer")
               .log(game);
           return undefined;
         }
@@ -1477,9 +1477,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           game.addSelectHowToPayInterrupt(this, constants.GREENERY_COST, false, false, "Select how to pay for Greenery project");
           game.addInterrupt(new SelectGreenery(this, game));
           this.onStandardProject(StandardProjectType.GREENERY);
-          new ChainLog("${0} used ${1} standard project")
-            .playerParam(this)
-            .standardProjectParam("Greenery")
+          new LogBuilder("${0} used ${1} standard project")
+            .player(this)
+            .standardProject("Greenery")
             .log(game);
           return undefined;
         }
@@ -1495,9 +1495,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           game.addInterrupt(new SelectCity(this, game));
           this.onStandardProject(StandardProjectType.CITY);
           this.setProduction(Resources.MEGACREDITS);
-          new ChainLog("${0} used ${1} standard project")
-            .playerParam(this)
-            .standardProjectParam("City")
+          new LogBuilder("${0} used ${1} standard project")
+            .player(this)
+            .standardProject("City")
             .log(game);
           return undefined;
         }
@@ -1511,9 +1511,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       let selectColony = new SelectColony("Select colony for trade", "trade", coloniesModel, (colonyName: ColonyName) => {
         openColonies.forEach(colony => {
           if (colony.name === colonyName) {
-            new ChainLog("${0} traded with ${1}")
-              .playerParam(this)
-              .colonyParam(colony)
+            new LogBuilder("${0} traded with ${1}")
+              .player(this)
+              .colony(colony)
               .log(game);
             if (payWith === Resources.MEGACREDITS) {
               game.addSelectHowToPayInterrupt(this, 9 - this.colonyTradeDiscount, false, false, "Select how to pay " + (9 - this.colonyTradeDiscount) + " for colony trade");
@@ -1575,8 +1575,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           (space: ISpace) => {
             game.addGreenery(this, space.id);
             this.plants -= this.plantsNeededForGreenery;
-            new ChainLog("${0} converted plants into a greenery")
-              .playerParam(this)
+            new LogBuilder("${0} converted plants into a greenery")
+              .player(this)
               .log(game);
             return undefined;
           }
@@ -1591,8 +1591,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           game.addSelectHowToPayInterrupt(this, 10, false, false, "Select how to pay for Turmoil Kelvinists action");
           this.setProduction(Resources.ENERGY);
           this.setProduction(Resources.HEAT);
-          new ChainLog("${0} used Turmoil Kelvinists action")
-            .playerParam(this)
+          new LogBuilder("${0} used Turmoil Kelvinists action")
+            .player(this)
             .log(game);
 
           return undefined;
@@ -1612,8 +1612,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             game.dealer.dealCard(),
             game.dealer.dealCard()
           );
-          new ChainLog("${0} used Turmoil Scientists draw action")
-            .playerParam(this)
+          new LogBuilder("${0} used Turmoil Scientists draw action")
+            .player(this)
             .log(game);
           return undefined;
         }
@@ -1635,8 +1635,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             this.removeResourceFrom(this.corporationCard as ICard, floaterAmount);
             this.heat -= heatAmount;
             game.increaseTemperature(this, 1);
-            new ChainLog("${0} converted heat into temperature")
-              .playerParam(this)
+            new LogBuilder("${0} converted heat into temperature")
+              .player(this)
               .log(game);
             return undefined;
           },
@@ -1660,8 +1660,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return new SelectOption("Convert 8 heat into temperature", "Convert heat",() => {
         game.increaseTemperature(this, 1);
         this.heat -= 8;
-        new ChainLog("${0} converted heat into temperature")
-          .playerParam(this)
+        new LogBuilder("${0} converted heat into temperature")
+          .player(this)
           .log(game);
         return undefined;
       });
@@ -1675,9 +1675,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           milestone: milestone
         });
         game.addSelectHowToPayInterrupt(this, 8, false, false, "Select how to pay for milestone");
-        new ChainLog("${0} claimed ${1} milestone")
-          .playerParam(this)
-          .milestoneParam(milestone)
+        new LogBuilder("${0} claimed ${1} milestone")
+          .player(this)
+          .milestone(milestone)
           .log(game);
         return undefined;
       });
@@ -1745,8 +1745,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private endTurnOption(game: Game): PlayerInput {
       return new SelectOption("End Turn", "End", () => {
         this.actionsTakenThisRound = 1;
-        new ChainLog("${0} ended turn")
-          .playerParam(this)
+        new LogBuilder("${0} ended turn")
+          .player(this)
           .log(game);
         return undefined;
       });
@@ -1755,8 +1755,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     private passOption(game: Game): PlayerInput {
       return new SelectOption("Pass for this generation", "Pass", () => {
         game.playerHasPassed(this);
-        new ChainLog("${0} passed")
-          .playerParam(this)
+        new LogBuilder("${0} passed")
+          .player(this)
           .log(game);
         this.lastCardPlayed = undefined;
         return undefined;

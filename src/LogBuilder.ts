@@ -10,7 +10,7 @@ import { IMilestone } from "./milestones/IMilestone";
 import { IColony } from "./colonies/Colony";
 import { IParty } from "./turmoil/parties/IParty";
 
-export class ChainLog {
+export class LogBuilder {
     private message: string;
     private parameters: Array<LogMessageData>;
     private type: LogMessageType;
@@ -21,60 +21,60 @@ export class ChainLog {
         this.type = LogMessageType.DEFAULT;
     }
 
-    public forNewGeneration(): ChainLog {
+    public forNewGeneration(): LogBuilder {
         this.type = LogMessageType.NEW_GENERATION;
         return this;
     }
 
-    public stringParam(value: string): ChainLog {
+    public string(value: string): LogBuilder {
         this.parameters.push(new LogMessageData(LogMessageDataType.STRING, value));
         return this;
     }
 
-    public numberParam(value: number): ChainLog {
+    public number(value: number): LogBuilder {
         this.parameters.push(new LogMessageData(LogMessageDataType.STRING, value.toString()));
         return this;
     }
 
-    public playerParam(value: Player): ChainLog {
-        return this.playerIdParam(value.id);
+    public player(value: Player): LogBuilder {
+        return this.playerId(value.id);
     }
 
-    public playerIdParam(value: string): ChainLog {
+    public playerId(value: string): LogBuilder {
         this.parameters.push(new LogMessageData(LogMessageDataType.PLAYER, value));
         return this;
     }
 
-    public cardParam(value: ICard): ChainLog {
-        return this.cardNameParam(value.name);
+    public card(value: ICard): LogBuilder {
+        return this.cardName(value.name);
     }
 
-    public cardNameParam(value: CardName): ChainLog {
+    public cardName(value: CardName): LogBuilder {
         this.parameters.push(new LogMessageData(LogMessageDataType.CARD, value));
         return this;
     }
   
-    public awardParam(value: IAward): ChainLog {
+    public award(value: IAward): LogBuilder {
         this.parameters.push(new LogMessageData(LogMessageDataType.AWARD, value.name));
         return this;
     }
 
-    public milestoneParam(value: IMilestone): ChainLog {
+    public milestone(value: IMilestone): LogBuilder {
         this.parameters.push(new LogMessageData(LogMessageDataType.MILESTONE, value.name));
         return this;
     }
 
-    public colonyParam(value: IColony): ChainLog {
+    public colony(value: IColony): LogBuilder {
         this.parameters.push(new LogMessageData(LogMessageDataType.MILESTONE, value.name));
         return this;
     }
 
-    public standardProjectParam(value: string): ChainLog {
+    public standardProject(value: string): LogBuilder {
         this.parameters.push(new LogMessageData(LogMessageDataType.STANDARD_PROJECT, value));
         return this;
     }
 
-    public partyParam(value: IParty): ChainLog {
+    public party(value: IParty): LogBuilder {
         this.parameters.push(new LogMessageData(LogMessageDataType.PARTY, value.name));
         return this;
     }

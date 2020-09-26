@@ -60,7 +60,7 @@ import { ColonyName } from "./colonies/ColonyName";
 import { getRandomMilestonesAndAwards } from "./MASynergy";
 import { CardType } from "./cards/CardType";
 import { ColonyModel } from "./models/ColonyModel";
-import { ChainLog } from "./ChainLog";
+import { LogBuilder } from "./LogBuilder";
 import { LogMessageDataType } from "./LogMessageDataType";
 
 
@@ -322,14 +322,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Print game_id if solo game
       if (players.length === 1) {
-        new ChainLog("The id of this game is ${0}")
-            .stringParam(this.id)
+        new LogBuilder("The id of this game is ${0}")
+            .string(this.id)
             .log(this);
       }      
 
-      new ChainLog("Generation ${0}")
+      new LogBuilder("Generation ${0}")
         .forNewGeneration()
-        .numberParam(this.generation)
+        .number(this.generation)
         .log(this);
 
       // Initial Draft
@@ -706,9 +706,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.allAwardsFunded()) {
         throw new Error("All awards already funded");
       }
-      new ChainLog("${0} funded ${1} award")
-        .playerParam(player)
-        .awardParam(award)
+      new LogBuilder("${0} funded ${1} award")
+        .player(player)
+        .award(award)
         .log(this);
 
       this.fundedAwards.push({
@@ -918,9 +918,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.gotoFinalGreeneryPlacement();
         // Log id or cloned game id
         if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith("#")) {
-          new ChainLog("This game was a clone from game " + this.clonedGamedId).log(this);
+          new LogBuilder("This game was a clone from game " + this.clonedGamedId).log(this);
         } else {
-          new ChainLog("This game id was " + this.id).log(this);
+          new LogBuilder("This game id was " + this.id).log(this);
         }
         return;
       }
@@ -973,8 +973,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private goToDraftOrResearch() {
 
       this.generation++;
-      new ChainLog("Generation ${0}").forNewGeneration()
-        .numberParam(this.generation)
+      new LogBuilder("Generation ${0}").forNewGeneration()
+        .number(this.generation)
         .log(this);
       this.incrementFirstPlayer();
 

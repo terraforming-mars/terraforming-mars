@@ -1,5 +1,4 @@
 import { LogMessageData } from "./LogMessageData";
-import { Game } from "./Game";
 import { LogMessageDataType } from "./LogMessageDataType";
 import { LogMessageType } from "./LogMessageType";
 import { Player } from "./Player";
@@ -9,6 +8,7 @@ import { IAward } from "./awards/IAward";
 import { IMilestone } from "./milestones/IMilestone";
 import { IColony } from "./colonies/Colony";
 import { IParty } from "./turmoil/parties/IParty";
+import { LogMessage } from "./LogMessage";
 
 export class LogBuilder {
     private message: string;
@@ -79,7 +79,7 @@ export class LogBuilder {
         return this;
     }
 
-    public log(game: Game) {
-        game.log(this.type, this.message, ...this.parameters);
+    public logMessage(): LogMessage {
+        return new LogMessage(this.type, this.message, this.parameters);
     }
 }

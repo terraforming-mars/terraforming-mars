@@ -10,7 +10,6 @@ import { IColony } from "../../colonies/Colony";
 import { SelectColony } from "../../inputs/SelectColony";
 import { ColonyName } from "../../colonies/ColonyName";
 import { ColonyModel } from "../../models/ColonyModel";
-import { LogBuilder } from "../../LogBuilder";
 
 export class Aridor implements CorporationCard {
     public name: CardName =  CardName.ARIDOR;
@@ -27,10 +26,7 @@ export class Aridor implements CorporationCard {
                     if (colony.name === colonyName) {
                       game.colonies.push(colony);
                       game.colonies.sort((a,b) => (a.name > b.name) ? 1 : -1);
-                      new LogBuilder("${0} added a new Colony tile: ${1}")
-                          .player(player)
-                          .colony(colony)
-                          .log(game);
+                      game.newLog("${0} added a new Colony tile: ${1}", b => b.player(player).colony(colony));
                       this.checkActivation(colony, game);
                       return undefined;
                     }

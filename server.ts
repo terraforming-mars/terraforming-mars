@@ -613,7 +613,7 @@ function getPlayer(player: Player, game: Game): string {
         actionsTakenThisRound: player.actionsTakenThisRound,
         passedPlayers: Array.from(game.getPassedPlayers()), // JSON stringify does not honor sets
         aresExtension: game.gameOptions.aresExtension,
-        aresHazards: game.gameOptions.aresHazards,
+        aresData: game.aresData,
     } as PlayerModel;
     return JSON.stringify(output);
 }

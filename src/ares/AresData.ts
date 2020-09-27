@@ -1,3 +1,4 @@
+// TODO(kberg): rename to IAresData, et cetera, and rename this file, too.
 export interface AresData {
     active: boolean;
     includeHazards: boolean;

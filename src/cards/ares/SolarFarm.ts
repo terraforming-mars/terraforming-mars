@@ -19,9 +19,9 @@ export class SolarFarm implements IProjectCard {
     public name: CardName = CardName.SOLAR_FARM;
     public play(player: Player, game: Game) {
       return new SelectSpace(
-          "Select space for special city tile",
-          game.board.getAvailableSpacesForCity(player),
-          (space: ISpace) => {
+        "Select space for Solar Farm tile",
+        game.board.getAvailableSpacesOnLand(player),
+      (space: ISpace) => {
             game.addTile(player, SpaceType.LAND, space, {
               tileType: TileType.SOLAR_FARM,
               card: this.name

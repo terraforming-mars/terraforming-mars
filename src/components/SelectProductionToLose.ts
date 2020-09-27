@@ -31,22 +31,22 @@ export const SelectProductionToLose = Vue.component("select-production-to-lose",
     mixins: [PaymentWidgetMixin], //for getCssClassFor. Seems over-importish
     methods: {
         canDeductMegaCredits: function() {
-            return this.playerinput.payProduction.megacredits > -5;
+            return this.playerinput.payProduction.units.megacredits > -5;
         },
         canDeductSteel: function() {
-            return this.playerinput.payProduction.steel > 0;
+            return this.playerinput.payProduction.units.steel > 0;
         },
         canDeductTitanium: function() {
-            return this.playerinput.payProduction.titanium > 0;
+            return this.playerinput.payProduction.units.titanium > 0;
         },
         canDeductPlants: function() {
-            return this.playerinput.payProduction.plants > 0;
+            return this.playerinput.payProduction.units.plants > 0;
         },
         canDeductEnergy: function() {
-            return this.playerinput.payProduction.energy > 0;
+            return this.playerinput.payProduction.units.energy > 0;
         },
         canDeductHeat: function() {
-            return this.playerinput.payProduction.heat > 0;
+            return this.playerinput.payProduction.units.heat > 0;
         },
         hasWarning: function () {
             return this.$data.warning !== undefined;
@@ -94,7 +94,7 @@ export const SelectProductionToLose = Vue.component("select-production-to-lose",
                 this.$data.heat;
 
             if (sum !== this.playerinput.payProduction.cost) {
-                this.$data.warning = `Pay a total of ${this.$data.cost} production units`;
+                this.$data.warning = `Pay a total of ${this.playerinput.payProduction.cost} production units`;
                 return;
             }
 

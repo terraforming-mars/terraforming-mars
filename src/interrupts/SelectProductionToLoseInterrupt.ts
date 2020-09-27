@@ -9,7 +9,7 @@ export class SelectProductionToLoseInterrupt implements PlayerInterrupt {
     constructor(
         public player: Player,
         public unitsToLose: number,
-        public title: string = `Select how to pay for ${unitsToLose} units of production`,
+        public title: string = `Choose ${unitsToLose} unit(s) of production to lose`,
     ){
         this.playerInput = new SelectProductionToLose(
             title,

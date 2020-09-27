@@ -11,5 +11,6 @@ export enum PlayerInputTypes {
     SELECT_SPACE,
     SELECT_DELEGATE,
     SELECT_PARTY,
-    SELECT_COLONY
+    SELECT_COLONY,
+    SELECT_PRODUCTION_TO_LOSE
 }

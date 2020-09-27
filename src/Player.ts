@@ -12,7 +12,7 @@ import {Game} from "./Game";
 import {HowToPay} from "./inputs/HowToPay";
 import {SelectSpace} from "./inputs/SelectSpace";
 import {ISpace} from "./ISpace";
-import {SelectHowToPayForCard} from "./inputs/SelectHowToPayForCard";
+import { SelectHowToPayForCard } from "./inputs/SelectHowToPayForCard";
 import {SelectHowToPay} from "./inputs/SelectHowToPay";
 import { SelectAmount } from "./inputs/SelectAmount";
 import {SelectOption} from "./inputs/SelectOption";
@@ -55,6 +55,8 @@ import { ColonyModel } from "./models/ColonyModel";
 import { Board } from "./Board";
 import { CardModel } from "./models/CardModel";
 import { PartyHooks } from "./turmoil/parties/PartyHooks";
+import { SelectProductionToLose } from "./inputs/SelectProductionToLose";
+import { IProductionUnits } from "./inputs/IProductionUnits";
 
 export type PlayerId = string;
 
@@ -880,6 +882,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           throw new Error("Unable to parse input " + err);
         }
         this.runInputCb(game, pi.cb(payMethod));
+      } else if (pi instanceof SelectProductionToLose) {
+        // TODO(kberg): I'm sure there's some input validation required.
+        var parsedInput = JSON.parse(input[0][0]);
+        var units: IProductionUnits = parsedInput;
+        pi.cb(units);
       } else {
         throw new Error("Unsupported waitingFor");
       }

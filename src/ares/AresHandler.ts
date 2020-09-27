@@ -20,6 +20,7 @@ import { TileType } from "../TileType";
 import { ITile } from "../ITile";
 import { HazardConstraint } from "./AresData";
 import { IAdjacencyCost } from "./IAdjacencyCost";
+import { SelectProductionToLoseInterrupt } from "../interrupts/SelectProductionToLoseInterrupt";
 
 export const OCEAN_UPGRADE_TILES = [TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
 export const HAZARD_TILES = [TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE];
@@ -132,9 +133,9 @@ export class AresHandler {
         var megaCreditCost = 0;
         var productionCost = 0;
         game.board.getAdjacentSpaces(space).forEach(adjacentSpace => {
-          megaCreditCost += adjacentSpace?.adjacency?.cost || 0;
-          if (adjacentSpace.tile?.hazard) {
-            productionCost += AresHandler.isMild(adjacentSpace.tile) ? 1 : 2;
+          megaCreditCost += adjacentSpace.adjacency?.cost || 0;
+          if (adjacentSpace.tile?.hazard === true) {
+            productionCost += this.isMild(adjacentSpace.tile) ? 1 : 2;
           }
         });
 
@@ -150,17 +151,21 @@ export class AresHandler {
 
         // Make this more sophisticated, a player can pay for different adjacencies
         // with different production units, and, a severe hazard can't split payments.
-        var productionUnits = (player.getProduction(Resources.MEGACREDITS) + 5)
+        var avaialbleProductionUnits = (player.getProduction(Resources.MEGACREDITS) + 5)
             + player.getProduction(Resources.STEEL)
             + player.getProduction(Resources.TITANIUM)
             + player.getProduction(Resources.PLANTS)
             + player.getProduction(Resources.ENERGY)
             + player.getProduction(Resources.HEAT);
 
-        if (productionUnits >= cost.production && player.canAfford(cost.megacredits)) {
+        if (avaialbleProductionUnits >= cost.production && player.canAfford(cost.megacredits)) {
            return cost;
         } 
-        throw new Error(`Placing here costs ${cost.production} of production and ${cost.megacredits} M€`);
+        if (cost.production > 0) {
+            throw new Error(`Placing here costs ${cost.production} units of production and ${cost.megacredits} M€`);
+        } else {
+            throw new Error(`Placing here costs ${cost.megacredits} M€`);
+        }
     }
 
     public static payAdjacencyAndHazardCosts(game: Game, player: Player, space: ISpace) {
@@ -168,7 +173,8 @@ export class AresHandler {
         var cost = this.assertCanPay(game, player, space);
 
         if (cost.production > 0) {
-            // game.addResourceProductionDecreaseInterrupt();
+            // TODO(kberg): don't send interrupt if total is available.
+            game.addInterrupt(new SelectProductionToLoseInterrupt(player, cost.production));
         }
         if (cost.megacredits > 0) {
             game.log(LogMessageType.DEFAULT,
@@ -281,9 +287,8 @@ export class AresHandler {
 
     public static onOxygenChange(game: Game) {
         testConstraint(game.aresData!.hazardData.severeDustStormOxygen, game.getOxygenLevel(), () => {
-                makeSevere( game, TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE);
-            }
-        );
+            makeSevere( game, TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE);
+            });
     }
 
     // Returns true if |newTile| can cover |boardTile|.
@@ -378,13 +383,8 @@ function testToRemoveDustStorms(game: Game, player: Player, isWorldGov: boolean)
             // TODO(kberg): Take DESPERATE_MEASURES into account.
             // This isn't as simple as using tile.player, because that field allows players to place over it.
             game.board.spaces.forEach((space) => {
-                if (space.tile?.tileType === TileType.DUST_STORM_MILD) {
+                if (space.tile?.tileType === TileType.DUST_STORM_MILD || space.tile?.tileType === TileType.DUST_STORM_SEVERE) {
                     space.tile.tileType === undefined;
-                    space.adjacency!.cost! -= -1;
-                }
-                if (space.tile?.tileType === TileType.DUST_STORM_SEVERE) {
-                    space.tile.tileType === undefined;
-                    space.adjacency!.cost! -= -2;
                 }
             });
 

@@ -2,6 +2,7 @@
 import { PlayerInputTypes } from "../PlayerInputTypes";
 import { CardModel } from './CardModel';
 import { ColonyModel } from "./ColonyModel";
+import { IPayProductionModel } from "./IPayProductionUnitsModel";
 
 export interface PlayerInputModel {
     amount: number | undefined;
@@ -21,5 +22,6 @@ export interface PlayerInputModel {
     title: string;
     buttonLabel: string;
     coloniesModel : Array<ColonyModel> | undefined;
+    payProduction : IPayProductionModel | undefined;
 }
 

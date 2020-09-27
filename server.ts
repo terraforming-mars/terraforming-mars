@@ -43,6 +43,7 @@ import {
 } from "./src/models/TurmoilModel";
 import { SelectDelegate } from "./src/inputs/SelectDelegate";
 import { SelectColony } from "./src/inputs/SelectColony";
+import { SelectProductionToLose } from "./src/inputs/SelectProductionToLose";
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync("styles.css");
@@ -660,7 +661,8 @@ function getWaitingFor(
         max: undefined,
         microbes: undefined,
         floaters: undefined,
-        coloniesModel: undefined
+        coloniesModel: undefined,
+        payProduction: undefined
     };
     switch (waitingFor.inputType) {
         case PlayerInputTypes.AND_OPTIONS:
@@ -684,15 +686,9 @@ function getWaitingFor(
             result.canUseHeat = (waitingFor as SelectHowToPayForCard).canUseHeat;
             break;
         case PlayerInputTypes.SELECT_CARD:
-            result.cards = getCardsAsCardModel(
-                (waitingFor as SelectCard<ICard>).cards
-            );
-            result.maxCardsToSelect = (waitingFor as SelectCard<
-                ICard
-            >).maxCardsToSelect;
-            result.minCardsToSelect = (waitingFor as SelectCard<
-                ICard
-            >).minCardsToSelect;
+            result.cards = getCardsAsCardModel((waitingFor as SelectCard<ICard>).cards);
+            result.maxCardsToSelect = (waitingFor as SelectCard<ICard>).maxCardsToSelect;
+            result.minCardsToSelect = (waitingFor as SelectCard<ICard>).minCardsToSelect;
             break;
         case PlayerInputTypes.SELECT_COLONY:
             result.coloniesModel = (waitingFor as SelectColony).coloniesModel;
@@ -726,6 +722,20 @@ function getWaitingFor(
                     }
                 }
             );
+            break;
+        case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:
+            var _player = (waitingFor as SelectProductionToLose).player;
+            result.payProduction = {
+                cost: (waitingFor as SelectProductionToLose).unitsToLose,
+                units: {
+                  megacredits: _player.getProduction(Resources.MEGACREDITS),
+                  steel: _player.getProduction(Resources.STEEL),
+                  titanium: _player.getProduction(Resources.TITANIUM),
+                  plants: _player.getProduction(Resources.PLANTS),
+                  energy: _player.getProduction(Resources.ENERGY),
+                  heat: _player.getProduction(Resources.HEAT)
+                }
+            };
             break;
     }
     return result;

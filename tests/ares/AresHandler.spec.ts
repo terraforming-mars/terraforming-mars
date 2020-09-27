@@ -12,6 +12,10 @@ import { EmptyBoard } from "./EmptyBoard";
 import { TileType } from "../../src/TileType";
 import { ITile } from "../../src/ITile";
 import { SpaceType } from "../../src/SpaceType";
+import { Resources } from "../../src/Resources";
+import { SelectProductionToLoseInterrupt } from "../../src/interrupts/SelectProductionToLoseInterrupt";
+import { SelectProductionToLose } from "../../src/inputs/SelectProductionToLose";
+import { IProductionUnits } from "../../src/inputs/IProductionUnits";
 
 describe("AresHandler", function () {
     let player : Player, otherPlayer: Player, game : Game;
@@ -123,32 +127,56 @@ describe("AresHandler", function () {
         }
     });
 
-    it("pay adjacent hazard costs - mild", function() {
+    it("Pay adjacent hazard costs - mild", function() {
         var firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
         AresHandler.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
 
-        player.megaCredits = 2;
-        otherPlayer.megaCredits = 0;
+        // No resources available to play the tile.
+        player.setProduction(Resources.MEGACREDITS, -5);
 
         var adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+        try {
+            game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+        } catch(err) {
+            expect(err.toString()).includes("Placing here costs 1 units of production");
+        }
 
-        // Placing next to a mild dust storm costs 1 MC.
-        expect(player.megaCredits).is.eq(1);
+        player.setProduction(Resources.PLANTS, 7);
+        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+        expect(game.interrupts).has.lengthOf(1);
+        expect(game.interrupts[0]).instanceOf(SelectProductionToLoseInterrupt);
+
+        var interrupt = game.interrupts[0] as SelectProductionToLoseInterrupt;
+        var input = interrupt.playerInput as SelectProductionToLose;
+        expect(input.unitsToLose).eq(1);
+        input.cb({ plants: 1 } as IProductionUnits)
+        expect(player.getProduction(Resources.PLANTS)).eq(6);
     });
 
     it("pay adjacent hazard costs - severe", function() {
         var firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
         AresHandler.putHazardAt(firstSpace, TileType.DUST_STORM_SEVERE); 
 
-        player.megaCredits = 2;
-        otherPlayer.megaCredits = 0;
+        // No resources available to play the tile.
+        player.setProduction(Resources.MEGACREDITS, -5);
 
         var adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+        try {
+            game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+        } catch(err) {
+            expect(err.toString()).includes("Placing here costs 2 units of production");
+        }
 
-        // Placing next to a severe dust storm costs 1 MC.
-        expect(player.megaCredits).is.eq(0);
+        player.setProduction(Resources.PLANTS, 7);
+        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+        expect(game.interrupts).has.lengthOf(1);
+        expect(game.interrupts[0]).instanceOf(SelectProductionToLoseInterrupt);
+
+        var interrupt = game.interrupts[0] as SelectProductionToLoseInterrupt;
+        var input = interrupt.playerInput as SelectProductionToLose;
+        expect(input.unitsToLose).eq(2);
+        input.cb({ plants: 2 } as IProductionUnits)
+        expect(player.getProduction(Resources.PLANTS)).eq(5);
     });
 
     it("cover mild hazard", function() {

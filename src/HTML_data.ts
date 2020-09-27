@@ -5143,7 +5143,7 @@ export const HTML_DATA: Map<string, string> =
                   MINING<br>GUILD
               </span><br>
       <div class="resource money" style="margin-left:35px;">30</div>&nbsp;&nbsp;
-      5<div class="production steel"></div>
+      5<div class="resource steel"></div>
       <div class="production-box" style="margin-top:5px;margin-left:20px;">
         <div class="production steel"></div>
       </div>

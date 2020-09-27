@@ -1,9 +1,9 @@
-import { PlayerInterrupt } from "../../../../git/terraforming-mars/src/interrupts/PlayerInterrupt";
 import { SelectProductionToLose } from "../inputs/SelectProductionToLose";
 import { Player } from "../Player";
 import { PlayerInput } from "../PlayerInput";
 import { IProductionUnits } from "../inputs/IProductionUnits";
 import { Resources } from "../Resources";
+import { PlayerInterrupt } from "./PlayerInterrupt";
 export class SelectProductionToLoseInterrupt implements PlayerInterrupt {
     public playerInput: PlayerInput;
     constructor(

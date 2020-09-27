@@ -1010,8 +1010,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">063</div>
         <div class="content ">
           <div class="tile oxygen-tile"></div><br>
-            <div class="resource steel"></div><div class="resource steel"></div>
-            <div class="resource plant red-outline"></div><div class="resource plant red-outline"></div>
+          - <div class="resource plant red-outline"></div><div class="resource plant red-outline"></div>
+          <div class="resource steel"></div><div class="resource steel"></div>
             <div class="description ">
                 (Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel.)
             </div>

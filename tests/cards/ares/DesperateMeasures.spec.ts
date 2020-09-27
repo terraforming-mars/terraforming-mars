@@ -14,7 +14,8 @@ describe("DesperateMeasures", function () {
 
   // TODO(kberg): implement
   it("Placeholder test", function () {
-      card.play(player, game);
+    console.log(player, game, card);
+      // card.play(player, game);
   });
 
 });

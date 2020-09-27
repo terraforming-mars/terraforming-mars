@@ -34,8 +34,8 @@ export class BiofertilizerFacility implements IProjectCard {
         );
 
         return new SelectSpace(
-            "Select space for special city tile",
-            game.board.getAvailableSpacesForCity(player),
+            "Select space for Biofertilizer Facility tile",
+            game.board.getAvailableSpacesOnLand(player),
             (space: ISpace) => {
                 game.addTile(player, SpaceType.LAND, space, {
                     tileType: TileType.BIOFERTILIZER_FACILITY,

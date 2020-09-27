@@ -1505,10 +1505,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Part 1, basic validation checks.
 
-      if (space.tile !== undefined) {
-        if (!AresHandler.canCover(space.tile, tile)) {
-          throw new Error("Selected space is occupied");
-        }
+      if (!AresHandler.canCover(space, tile)) {
+        throw new Error("Selected space is occupied");
       }
 
       // Land claim a player can claim land for themselves

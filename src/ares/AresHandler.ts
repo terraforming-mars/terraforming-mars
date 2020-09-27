@@ -292,11 +292,15 @@ export class AresHandler {
     }
 
     // Returns true if |newTile| can cover |boardTile|.
-    public static canCover(boardTile: ITile, newTile: ITile): boolean {
-        if (boardTile.hazard) {
-            // TODO(kberg): Take desperate measures into account.
+    public static canCover(space: ISpace, newTile: ITile): boolean {
+        if (space.tile === undefined) {
             return true;
-        } else if (boardTile.tileType === TileType.OCEAN && OCEAN_UPGRADE_TILES.includes(newTile.tileType)) {
+        }
+
+        // A hazard with a player's token on it used Desperate measures.
+        if (space.tile.hazard && hasDesperateMeasuresMarker(space) === false) {
+            return true;
+        } else if (space.tile.tileType === TileType.OCEAN && OCEAN_UPGRADE_TILES.includes(newTile.tileType)) {
             return true;
         }
         return false;
@@ -380,11 +384,11 @@ function testToRemoveDustStorms(game: Game, player: Player, isWorldGov: boolean)
         game.aresData!.hazardData.removeDustStormsOceanCount,
         game.board.getOceansOnBoard(),
         () => {
-            // TODO(kberg): Take DESPERATE_MEASURES into account.
-            // This isn't as simple as using tile.player, because that field allows players to place over it.
             game.board.spaces.forEach((space) => {
                 if (space.tile?.tileType === TileType.DUST_STORM_MILD || space.tile?.tileType === TileType.DUST_STORM_SEVERE) {
-                    space.tile.tileType === undefined;
+                    if (!hasDesperateMeasuresMarker(space)) {
+                        space.tile.tileType === undefined;
+                    }
                 }
             });
 
@@ -415,6 +419,15 @@ function testToPlaceErosionTiles(game: Game, player: Player) {
             });
         }
     );
+}
+
+function hasDesperateMeasuresMarker(space: ISpace): boolean {
+    if (space.player) {
+      if (space.tile && space.tile.hazard && space.tile.hazard === true) {
+          return true;
+      }
+    }
+    return false;
 }
 
 // TODO(kberg): convert to a log message type

@@ -484,7 +484,7 @@ import { SolarFarm} from "./cards/ares/SolarFarm";
 import { EcologicalSurvey } from "./cards/ares/EcologicalSurvey";
 import { MarketingExperts } from "./cards/ares/MarketingExperts";
 // import { ButterflyEffect } from "./cards/ares/ButterflyEffect";
-// import { DesperateMeasures } from "./cards/ares/DesperateMeasures";
+import { DesperateMeasures } from "./cards/ares/DesperateMeasures";
 import { GeologicalSurvey } from "./cards/ares/GeologicalSurvey";
 import { OceanCity } from "./cards/ares/OceanCity";
 import { OceanFarm } from "./cards/ares/OceanFarm";
@@ -994,7 +994,7 @@ export const ALL_ARES_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     // { cardName: CardName.BUTTERFLY_EFFECT, factory: ButterflyEffect },
     { cardName: CardName.CAPITAL_ARES, factory: CapitalAres },
     { cardName: CardName.COMMERCIAL_DISTRICT_ARES, factory: CommercialDistrictAres },
-    // { cardName: CardName.DESPERATE_MEASURES, factory: DesperateMeasures },
+    { cardName: CardName.DESPERATE_MEASURES, factory: DesperateMeasures },
     { cardName: CardName.ECOLOGICAL_ZONE_ARES, factory: EcologicalZoneAres },
     { cardName: CardName.ECOLOGICAL_SURVEY, factory: EcologicalSurvey },
     { cardName: CardName.GEOLOGICAL_SURVEY, factory: GeologicalSurvey },

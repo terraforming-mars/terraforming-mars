@@ -6749,7 +6749,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 
       <div class="description card-effect-text">
-        (You start with 54 MC. As your first action, draw a Science card.)
+        (You start with 54 MC. When this corporation is revealed, draw a Science card.)
       </div>
 
       <div class="corporationEffectBox hover-hide-res">

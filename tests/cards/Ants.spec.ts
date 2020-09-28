@@ -41,7 +41,7 @@ describe("Ants", function () {
         player.playedCards.push(card);
         expect(card.canAct(player, game)).to.eq(false);
 
-        player.playedCards.push(tardigrades, nitriteReducingBacteria);
+        player2.playedCards.push(tardigrades, nitriteReducingBacteria);
         tardigrades.resourceCount++;
         nitriteReducingBacteria.resourceCount++;
         

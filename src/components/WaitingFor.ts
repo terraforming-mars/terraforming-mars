@@ -16,6 +16,7 @@ import { PreferencesManager } from "./PreferencesManager";
 import { playActivePlayerSound } from "../SoundManager";
 import { SelectColony } from "./SelectColony";
 import { SelectProductionToLose } from "./SelectProductionToLose";
+import { ShiftAresGlobalParameters } from "./ShiftAresGlobalParameters";
 
 var ui_update_timeout_id: number | undefined = undefined;
 
@@ -37,6 +38,7 @@ export const WaitingFor = Vue.component("waiting-for", {
         "select-party-player": SelectPartyPlayer,
         "select-colony": SelectColony,
         "select-production-to-lose": SelectProductionToLose,
+        "shift-ares-global-parameters": ShiftAresGlobalParameters,
     },
     methods: {
         waitForUpdate: function () {

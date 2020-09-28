@@ -483,7 +483,7 @@ import { RestrictedAreaAres } from "./cards/ares/RestrictedAreaAres";
 import { SolarFarm} from "./cards/ares/SolarFarm";
 import { EcologicalSurvey } from "./cards/ares/EcologicalSurvey";
 import { MarketingExperts } from "./cards/ares/MarketingExperts";
-// import { ButterflyEffect } from "./cards/ares/ButterflyEffect";
+import { ButterflyEffect } from "./cards/ares/ButterflyEffect";
 import { DesperateMeasures } from "./cards/ares/DesperateMeasures";
 import { GeologicalSurvey } from "./cards/ares/GeologicalSurvey";
 import { OceanCity } from "./cards/ares/OceanCity";
@@ -991,7 +991,7 @@ export const ALL_CORP_ERA_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
 export const ALL_ARES_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.BIOENGINEERING_ENCLOSURE, factory: BioengineeringEnclosure },
     { cardName: CardName.BIOFERTILIZER_FACILITY, factory: BiofertilizerFacility },
-    // { cardName: CardName.BUTTERFLY_EFFECT, factory: ButterflyEffect },
+    { cardName: CardName.BUTTERFLY_EFFECT, factory: ButterflyEffect },
     { cardName: CardName.CAPITAL_ARES, factory: CapitalAres },
     { cardName: CardName.COMMERCIAL_DISTRICT_ARES, factory: CommercialDistrictAres },
     { cardName: CardName.DESPERATE_MEASURES, factory: DesperateMeasures },

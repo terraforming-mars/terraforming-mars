@@ -61,8 +61,8 @@ import { ColonyName } from "./colonies/ColonyName";
 import { AresHandler } from "./ares/AresHandler";
 import { getRandomMilestonesAndAwards } from "./MASynergy";
 import { CardType } from "./cards/CardType";
-import { AresData, initialAresData } from "./ares/AresData";
 import { ColonyModel } from "./models/ColonyModel";
+import { IAresData } from "./ares/IAresData";
 
 
 export interface Score {
@@ -132,7 +132,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public someoneHasRemovedOtherPlayersPlants: boolean = false;
     public seed: number = Math.random();
     public gameOptions: GameOptions;
-    public aresData: AresData | undefined;
+    public aresData: IAresData | undefined;
 
 
     constructor(
@@ -211,7 +211,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       if (gameOptions.aresExtension) {
-        this.aresData = initialAresData(gameOptions.aresExtension, gameOptions.aresHazards);
+        this.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards);
           // this test is because hazard selection isn't activaly part of game options, but needs
           // to be configurable for tests.
           if (gameOptions.aresHazards !== false) {

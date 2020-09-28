@@ -57,6 +57,8 @@ import { CardModel } from "./models/CardModel";
 import { PartyHooks } from "./turmoil/parties/PartyHooks";
 import { SelectProductionToLose } from "./inputs/SelectProductionToLose";
 import { IProductionUnits } from "./inputs/IProductionUnits";
+import { ShiftAresGlobalParameters } from "./inputs/ShiftAresGlobalParameters";
+import { IAresGlobalParametersResponse } from "./interrupts/ShiftAresGlobalParametersInterrupt";
 
 export type PlayerId = string;
 
@@ -887,6 +889,11 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         var parsedInput = JSON.parse(input[0][0]);
         var units: IProductionUnits = parsedInput;
         pi.cb(units);
+      } else if (pi instanceof ShiftAresGlobalParameters) {
+        // TODO(kberg): I'm sure there's some input validation required.
+        var parsedInput = JSON.parse(input[0][0]);
+        var response: IAresGlobalParametersResponse = parsedInput;
+        pi.cb(response);
       } else {
         throw new Error("Unsupported waitingFor");
       }

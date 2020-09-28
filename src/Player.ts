@@ -645,7 +645,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public getCard(cards: Array<IProjectCard>, cardName: string): IProjectCard {
       const foundCards = cards.filter((card) => card.name === cardName);
       if (foundCards.length === 0) {
-        throw new Error("Card not found");
+        throw new Error("Card not found: " + cardName);
       }
       return foundCards[0];
     }

@@ -7,7 +7,7 @@ import { TurmoilModel } from "./TurmoilModel";
 import { IProjectCard } from "../cards/IProjectCard";
 import { CorporationCard } from "../cards/corporation/CorporationCard";
 import { PlayerId } from "../Player";
-import { AresData } from "../ares/AresData";
+import { IAresData } from "../ares/IAresData";
 
 export interface PlayerModel {
     boardName: string;
@@ -53,7 +53,7 @@ export interface PlayerModel {
     tradesThisTurn: number;
     selfReplicatingRobotsCards: Array<CardModel>;
     aresExtension: boolean;
-    aresData: AresData;
+    aresData: IAresData;
     dealtCorporationCards: Array<CorporationCard>;
     dealtPreludeCards: Array<IProjectCard>;
     dealtProjectCards: Array<IProjectCard>;

@@ -2,7 +2,7 @@ import { PlayerInput } from "../PlayerInput";
 import { PlayerInputTypes } from "../PlayerInputTypes";
 import { Player } from "../Player";
 import { IAresGlobalParametersResponse } from "../interrupts/ShiftAresGlobalParametersInterrupt";
-import { AresData } from "../ares/AresData";
+import { IAresData } from "../ares/IAresData";
 
 export class ShiftAresGlobalParameters implements PlayerInput {
     public inputType = PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS;
@@ -11,7 +11,7 @@ export class ShiftAresGlobalParameters implements PlayerInput {
 
     constructor(
         public player: Player,
-        public aresData: AresData,
+        public aresData: IAresData,
         public cb: (units: IAresGlobalParametersResponse) => undefined) {}
 
 }

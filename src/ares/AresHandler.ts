@@ -18,7 +18,7 @@ import { SpaceBonus } from "../SpaceBonus";
 import { AresSpaceBonus } from "./AresSpaceBonus";
 import { TileType } from "../TileType";
 import { ITile } from "../ITile";
-import { HazardConstraint } from "./AresData";
+import { IAresData, IHazardConstraint } from "./IAresData";
 import { IAdjacencyCost } from "./IAdjacencyCost";
 import { SelectProductionToLoseInterrupt } from "../interrupts/SelectProductionToLoseInterrupt";
 
@@ -37,6 +37,19 @@ export class AresHandler {
                 return true;
         }
         return false;
+    }
+
+    public static initialData(active: boolean, includeHazards: boolean): IAresData {
+        return {
+            active: active,
+            includeHazards: includeHazards,
+            hazardData: {
+                erosionOceanCount: { threshold: 3, available: true }, // oceans: add erosion tiles
+                removeDustStormsOceanCount: { threshold: 6, available: true }, // oceans: remove dust storms
+                severeErosionTemperature: { threshold: -4, available: true }, // temperatore: severe erosion
+                severeDustStormOxygen: { threshold: 5, available: true } // oxygen: severe dust storms
+            }
+        };
     }
 
     // |player| placed a tile next to |adjacentSpace|.
@@ -371,7 +384,7 @@ function makeSevere(game: Game, from: TileType, to: TileType) {
         new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(to)));
 }
 
-function testConstraint(constraint: HazardConstraint, testValue: number, cb: () => void) {
+function testConstraint(constraint: IHazardConstraint, testValue: number, cb: () => void) {
     if (!constraint.available) {
         return;
     }

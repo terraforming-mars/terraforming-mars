@@ -273,6 +273,8 @@ export class AresHandler {
     }
 
     public static onTemperatureChange(game: Game) {
+        // This will have no effect if the erosions don't exist, but that's OK --
+        // the check for placing erosions will take this into account.
         testConstraint(
             game.aresData!.hazardData.severeErosionTemperature,
             game.getTemperature(),

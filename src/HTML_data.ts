@@ -7950,7 +7950,7 @@ export const HTML_DATA: Map<string, string> =
       </div> *
       <div class="description">
         (Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES.
-          Choose a tile that provides an <b>adjacency bonus</b> of the same resource as the area.
+          This tile provides an <b>adjacency bonus</b> of the same resource as the area.
           Increase your production of that resource 1 step.)
       </div>
     </div>
@@ -7968,7 +7968,7 @@ export const HTML_DATA: Map<string, string> =
       </div> *
       <div class="description">
         (Place one of these tiles on an area with a steel or titanium placement bonus.
-        Choose a tile that provides an <b>adjacency bonus</b> of the same resource as the area.
+        This tile provides an <b>adjacency bonus</b> of the same resource as the area.
         Increase your production of that resource 1 step.)      
       </div>
     </div>

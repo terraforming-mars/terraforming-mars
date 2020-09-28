@@ -15,6 +15,7 @@ import { Magnate } from './Magnate';
 import { SpaceBaron } from './SpaceBaron';
 import { Excentric } from './Excentric';
 import { Contractor } from './Contractor';
+import { Entrepeneur } from "./Entrepeneur";
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
     new Landlord(),
@@ -44,3 +45,6 @@ export const HELLAS_AWARDS: Array<IAward> = [
     new Contractor()
 ] 
 
+export const ARES_AWARDS: Array<IAward> = [
+    new Entrepeneur()
+];

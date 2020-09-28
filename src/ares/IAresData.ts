@@ -2,6 +2,7 @@ export interface IAresData {
     active: boolean;
     includeHazards: boolean;
     hazardData: IHazardData;
+    milestoneResults: Array<IMilestoneCount>;
 }
 
 export interface IHazardConstraint {
@@ -15,3 +16,8 @@ export interface IHazardData {
     severeErosionTemperature: IHazardConstraint,
     severeDustStormOxygen: IHazardConstraint
 };
+
+export interface IMilestoneCount {
+    id: string;
+    count: number;
+}

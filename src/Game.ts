@@ -23,8 +23,8 @@ import {Color} from "./Color";
 import {IAward} from "./awards/IAward";
 import {Tags} from "./cards/Tags";
 import {Resources} from "./Resources";
-import {ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES} from "./milestones/Milestones";
-import {ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS} from "./awards/Awards";
+import { ORIGINAL_MILESTONES, VENUS_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, ARES_MILESTONES } from "./milestones/Milestones";
+import {ORIGINAL_AWARDS, VENUS_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, ARES_AWARDS} from "./awards/Awards";
 import {SpaceName} from "./SpaceName";
 import {BoardColony, Board} from "./Board";
 import { CorporationName } from "./CorporationName";
@@ -175,7 +175,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         } as GameOptions
       }
       this.gameOptions = gameOptions;
-      this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.venusNextExtension && gameOptions.includeVenusMA);
+      this.board = this.boardConstructor(gameOptions.boardName, gameOptions.randomMA, gameOptions.venusNextExtension && gameOptions.includeVenusMA, gameOptions.aresExtension);
 
       this.activePlayer = first.id;
 
@@ -211,7 +211,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       if (gameOptions.aresExtension) {
-        this.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards);
+        this.aresData = AresHandler.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
           // this test is because hazard selection isn't activaly part of game options, but needs
           // to be configurable for tests.
           if (gameOptions.aresHazards !== false) {
@@ -387,7 +387,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     // Function to construct the board and milestones/awards list
-    public boardConstructor(boardName: BoardName, randomMA: boolean, hasVenus: boolean): Board {
+    public boardConstructor(boardName: BoardName, randomMA: boolean, hasVenus: boolean, hasAres: boolean): Board {
       const requiredQty = 5;
 
       if (boardName === BoardName.ELYSIUM) {
@@ -397,7 +397,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
           this.milestones.push(...ELYSIUM_MILESTONES);
           this.awards.push(...ELYSIUM_AWARDS);
         }
-
+        if (hasAres) {
+          AresHandler.setupMilestonesAwards(this);
+        }
         return new ElysiumBoard(this.gameOptions.shuffleMapOption, this.seed);
       } else if (boardName === BoardName.HELLAS) {
         if (randomMA) {
@@ -405,6 +407,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
         } else {
           this.milestones.push(...HELLAS_MILESTONES);
           this.awards.push(...HELLAS_AWARDS);
+        }
+        if (hasAres) {
+          AresHandler.setupMilestonesAwards(this);
         }
 
         return new HellasBoard(this.gameOptions.shuffleMapOption, this.seed);
@@ -414,6 +419,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
         } else {
           this.milestones.push(...ORIGINAL_MILESTONES);
           this.awards.push(...ORIGINAL_AWARDS);
+        }
+        if (hasAres) {
+          AresHandler.setupMilestonesAwards(this);
         }
 
         return new OriginalBoard(this.gameOptions.shuffleMapOption, this.seed);
@@ -1571,10 +1579,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
           if (Board.isOceanSpace(adjacentSpace)) {
             player.megaCredits += player.oceanBonus;
           }
-          if (this.gameOptions.aresExtension) {
-            AresHandler.earnAdacencyBonuses(this, adjacentSpace, player);
-          }
         });
+
+        if (this.gameOptions.aresExtension) {
+            AresHandler.earnAdjacencyBonuses(this, player, space);
+        }
 
         PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType, isWorldGov);
 
@@ -1880,7 +1889,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.milestones = [];
       this.awards = [];
 
-      let allMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES);
+      let allMilestones = ELYSIUM_MILESTONES.concat(HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES, ARES_MILESTONES);
 
       d.milestones.forEach((element: IMilestone) => {
         allMilestones.forEach((ms: IMilestone) => {
@@ -1890,7 +1899,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         });
       });
 
-      let allAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS);
+      let allAwards = ELYSIUM_AWARDS.concat(HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS, ARES_AWARDS);
 
       d.awards.forEach((element: IAward) => {
         allAwards.forEach((award: IAward) => {

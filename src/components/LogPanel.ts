@@ -116,9 +116,12 @@ export const LogPanel = Vue.component("log-panel", {
             datas.forEach((data: LogMessageData) => {
                 if (data.type !== undefined && data.value !== undefined) {
                     if (data.type === LogMessageDataType.CARD) {
-                        let card_name = data.value;    
-                        if (!this.cards.includes(card_name)) {
+                        let card_name = data.value;
+                        var index = this.cards.indexOf(card_name);
+                        if (index === -1) {
                             this.cards.push(card_name);
+                        } else {
+                            this.cards.splice(index, 1);
                         }
                     }
                 }

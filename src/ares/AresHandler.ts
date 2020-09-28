@@ -1,7 +1,5 @@
 // Game.ts-specific behavior for Ares
 
-// TODO(kberg): milestones and awards.
-
 import { CardName } from "../CardName";
 import { ICard } from "../cards/ICard";
 import { LogHelper } from "../components/LogHelper";
@@ -18,9 +16,11 @@ import { SpaceBonus } from "../SpaceBonus";
 import { AresSpaceBonus } from "./AresSpaceBonus";
 import { TileType } from "../TileType";
 import { ITile } from "../ITile";
-import { IAresData, IHazardConstraint } from "./IAresData";
+import { IAresData, IHazardConstraint, IMilestoneCount } from "./IAresData";
 import { IAdjacencyCost } from "./IAdjacencyCost";
 import { SelectProductionToLoseInterrupt } from "../interrupts/SelectProductionToLoseInterrupt";
+import { ARES_MILESTONES } from "../milestones/Milestones";
+import { ARES_AWARDS } from "../awards/Awards";
 
 export const OCEAN_UPGRADE_TILES = [TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
 export const HAZARD_TILES = [TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE];
@@ -39,7 +39,7 @@ export class AresHandler {
         return false;
     }
 
-    public static initialData(active: boolean, includeHazards: boolean): IAresData {
+    public static initialData(active: boolean, includeHazards: boolean, players: Player[]): IAresData {
         return {
             active: active,
             includeHazards: includeHazards,
@@ -48,86 +48,113 @@ export class AresHandler {
                 removeDustStormsOceanCount: { threshold: 6, available: true }, // oceans: remove dust storms
                 severeErosionTemperature: { threshold: -4, available: true }, // temperatore: severe erosion
                 severeDustStormOxygen: { threshold: 5, available: true } // oxygen: severe dust storms
-            }
+            },
+            milestoneResults: players.map(p => {
+                return {id: p.id, count: 0};
+            })
         };
     }
 
-    // |player| placed a tile next to |adjacentSpace|.
-    public static earnAdacencyBonuses (game: Game, adjacentSpace: ISpace, player: Player) {
-        if (adjacentSpace.adjacency !== undefined && adjacentSpace.adjacency.bonus.length > 0) {
-          if (!adjacentSpace.player) {
-            throw new Error(`A tile with an adjacency bonus must have an owner (${adjacentSpace.x}, ${adjacentSpace.y}, ${adjacentSpace.adjacency.bonus}`);
-          }
-    
-          var addResourceToCard = function(game: Game, player: Player, resourceType: ResourceType, resourceAsText: string) {
-            const availableCards = player.getResourceCards(resourceType);
-            if (availableCards.length === 0) {
-            } else if (availableCards.length === 1) {
-              player.addResourceTo(availableCards[0]);
-            } else if (availableCards.length > 1) {
-              game.addInterrupt({
-                player: player,
-                playerInput:
-                  new SelectCard(
-                    "Select a card to add an " + resourceAsText,
-                    "Add " + resourceAsText + "s",
-                    availableCards,
-                    (selected: ICard[]) => {
-                      player.addResourceTo(selected[0]);
-                      LogHelper.logAddResource(game, player, selected[0], 1);
-                      return undefined;
-                    })
-              });
+    public static setupMilestonesAwards(game: Game) {
+        game.milestones.push(...ARES_MILESTONES);
+        game.awards.push(...ARES_AWARDS)
+    }
+
+    public static earnAdjacencyBonuses(game: Game, player: Player, space: ISpace) {
+        var incrementMilestone = false;
+
+        game.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
+            if (this.earnAdacencyBonus(game, adjacentSpace, player)) {
+                incrementMilestone = true;
             }
-          };
-        
-          adjacentSpace.adjacency.bonus.forEach(bonus => {
-            if (AresHandler.isAresSpaceBonus(bonus)) {
-              // TODO(kberg): group and sum. Right now cards only have one animal to place, so this isn't
-              // a problem.
-              switch(bonus) {
-                case AresSpaceBonus.ANIMAL:
-                  addResourceToCard(game, player, ResourceType.ANIMAL, "animal");
-                  break;
-    
-                case AresSpaceBonus.MEGACREDITS:
-                  player.megaCredits++;
-                  break;
-    
-                case AresSpaceBonus.POWER:
-                  player.energy++;
-                  break;
-    
-                case AresSpaceBonus.MICROBE:
-                  addResourceToCard(game, player, ResourceType.MICROBE, "microbe");
-                  break;
-              }
-            } else {
-              game.grantSpaceBonus(player, bonus);
+        });
+        if (incrementMilestone) {
+            var milestoneResults = game.aresData!.milestoneResults;
+            var entry : IMilestoneCount | undefined = milestoneResults.find(e => e.id === player.id);
+            if (entry === undefined) {
+                throw new Error("Player ID not in the Ares milestone results map: " + player.id);
             }
-            game.log(
-              LogMessageType.DEFAULT,
-              "${0} gains 1 ${1} for placing next to ${2}",
-              new LogMessageData(LogMessageDataType.PLAYER, player.id),
-              new LogMessageData(LogMessageDataType.STRING, bonus.toString()),
-              new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(adjacentSpace.tile?.tileType)));
-            });
-    
-            var ownerBonus = 1;
-            if (adjacentSpace.player) {
-              if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
-                  ownerBonus = 2;
-              };
-              
-              adjacentSpace.player.megaCredits += ownerBonus;
-              game.log(
-                LogMessageType.DEFAULT,
-                "${0} gains ${1} M€ for a tile placed next to ${2}",
-                new LogMessageData(LogMessageDataType.PLAYER, adjacentSpace.player.id),
-                new LogMessageData(LogMessageDataType.STRING, ownerBonus.toString()),
-                new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(adjacentSpace.tile?.tileType)));
-            }
+            entry.count++;
         }
+    }
+    // |player| placed a tile next to |adjacentSpace|.
+    public static earnAdacencyBonus(game: Game, adjacentSpace: ISpace, player: Player): boolean {
+        if (adjacentSpace.adjacency === undefined || adjacentSpace.adjacency.bonus.length === 0) {
+            return false;
+        }
+        if (!adjacentSpace.player) {
+            throw new Error(`A tile with an adjacency bonus must have an owner (${adjacentSpace.x}, ${adjacentSpace.y}, ${adjacentSpace.adjacency.bonus}`);
+        }
+
+        var addResourceToCard = function(game: Game, player: Player, resourceType: ResourceType, resourceAsText: string) {
+        const availableCards = player.getResourceCards(resourceType);
+        if (availableCards.length === 0) {
+        } else if (availableCards.length === 1) {
+            player.addResourceTo(availableCards[0]);
+        } else if (availableCards.length > 1) {
+            game.addInterrupt({
+            player: player,
+            playerInput:
+                new SelectCard(
+                "Select a card to add an " + resourceAsText,
+                "Add " + resourceAsText + "s",
+                availableCards,
+                (selected: ICard[]) => {
+                    player.addResourceTo(selected[0]);
+                    LogHelper.logAddResource(game, player, selected[0], 1);
+                    return undefined;
+                })
+            });
+        }
+        };
+    
+        adjacentSpace.adjacency.bonus.forEach(bonus => {
+        if (AresHandler.isAresSpaceBonus(bonus)) {
+            // TODO(kberg): group and sum. Right now cards only have one animal to place, so this isn't
+            // a problem.
+            switch(bonus) {
+            case AresSpaceBonus.ANIMAL:
+                addResourceToCard(game, player, ResourceType.ANIMAL, "animal");
+                break;
+
+            case AresSpaceBonus.MEGACREDITS:
+                player.megaCredits++;
+                break;
+
+            case AresSpaceBonus.POWER:
+                player.energy++;
+                break;
+
+            case AresSpaceBonus.MICROBE:
+                addResourceToCard(game, player, ResourceType.MICROBE, "microbe");
+                break;
+            }
+        } else {
+            game.grantSpaceBonus(player, bonus);
+        }
+        game.log(
+            LogMessageType.DEFAULT,
+            "${0} gains 1 ${1} for placing next to ${2}",
+            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.STRING, bonus.toString()),
+            new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(adjacentSpace.tile?.tileType)));
+        });
+
+        var ownerBonus = 1;
+        if (adjacentSpace.player) {
+            if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
+                ownerBonus = 2;
+            };
+            
+            adjacentSpace.player.megaCredits += ownerBonus;
+            game.log(
+            LogMessageType.DEFAULT,
+            "${0} gains ${1} M€ for a tile placed next to ${2}",
+            new LogMessageData(LogMessageDataType.PLAYER, adjacentSpace.player.id),
+            new LogMessageData(LogMessageDataType.STRING, ownerBonus.toString()),
+            new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(adjacentSpace.tile?.tileType)));
+        }
+        return true;
     }
 
     private static isMild(tile: ITile): boolean {
@@ -345,7 +372,6 @@ export class AresHandler {
             new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(initialTileType)));
     }
 
-
     public static putHazardAt(space: ISpace, tileType: TileType) {
         space.player = undefined;
         space.tile = { tileType: tileType, hazard: true };
@@ -379,7 +405,7 @@ function makeSevere(game: Game, from: TileType, to: TileType) {
         });
 
     game.log(LogMessageType.DEFAULT,
-        "${1} have upgraded to ${2}",
+        "${0} have upgraded to ${1}",
         new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(from)),
         new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(to)));
 }
@@ -402,7 +428,7 @@ function testToRemoveDustStorms(game: Game, player: Player, isWorldGov: boolean)
             game.board.spaces.forEach((space) => {
                 if (space.tile?.tileType === TileType.DUST_STORM_MILD || space.tile?.tileType === TileType.DUST_STORM_SEVERE) {
                     if (!hasDesperateMeasuresMarker(space)) {
-                        space.tile.tileType === undefined;
+                        space.tile = undefined;
                     }
                 }
             });

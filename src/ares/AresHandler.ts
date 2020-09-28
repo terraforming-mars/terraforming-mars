@@ -379,7 +379,7 @@ function makeSevere(game: Game, from: TileType, to: TileType) {
         });
 
     game.log(LogMessageType.DEFAULT,
-        "${1} have upgraded to ${2}",
+        "${0} have upgraded to ${1}",
         new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(from)),
         new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(to)));
 }
@@ -402,7 +402,7 @@ function testToRemoveDustStorms(game: Game, player: Player, isWorldGov: boolean)
             game.board.spaces.forEach((space) => {
                 if (space.tile?.tileType === TileType.DUST_STORM_MILD || space.tile?.tileType === TileType.DUST_STORM_SEVERE) {
                     if (!hasDesperateMeasuresMarker(space)) {
-                        space.tile.tileType === undefined;
+                        space.tile = undefined;
                     }
                 }
             });

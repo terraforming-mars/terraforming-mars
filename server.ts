@@ -44,6 +44,7 @@ import {
 import { SelectDelegate } from "./src/inputs/SelectDelegate";
 import { SelectColony } from "./src/inputs/SelectColony";
 import { SelectProductionToLose } from "./src/inputs/SelectProductionToLose";
+import { ShiftAresGlobalParameters } from "./src/inputs/ShiftAresGlobalParameters";
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync("styles.css");
@@ -613,7 +614,7 @@ function getPlayer(player: Player, game: Game): string {
         actionsTakenThisRound: player.actionsTakenThisRound,
         passedPlayers: Array.from(game.getPassedPlayers()), // JSON stringify does not honor sets
         aresExtension: game.gameOptions.aresExtension,
-        aresHazards: game.gameOptions.aresHazards,
+        aresData: game.aresData,
     } as PlayerModel;
     return JSON.stringify(output);
 }
@@ -662,7 +663,8 @@ function getWaitingFor(
         microbes: undefined,
         floaters: undefined,
         coloniesModel: undefined,
-        payProduction: undefined
+        payProduction: undefined,
+        aresData: undefined,
     };
     switch (waitingFor.inputType) {
         case PlayerInputTypes.AND_OPTIONS:
@@ -736,6 +738,9 @@ function getWaitingFor(
                   heat: _player.getProduction(Resources.HEAT)
                 }
             };
+            break;
+        case PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS:
+            result.aresData = (waitingFor as ShiftAresGlobalParameters).aresData
             break;
     }
     return result;

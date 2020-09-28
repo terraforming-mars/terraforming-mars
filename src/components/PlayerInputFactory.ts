@@ -33,6 +33,8 @@ export class PlayerInputFactory {
                 return "select-colony";
             case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:
                 return "select-production-to-lose";
+            case PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS:
+                return "shift-ares-global-parameters";
             default:
             throw "Unsupported input type";
         }

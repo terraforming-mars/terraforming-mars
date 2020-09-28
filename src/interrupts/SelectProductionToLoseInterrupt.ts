@@ -37,4 +37,4 @@ export class SelectProductionToLoseInterrupt implements PlayerInterrupt {
                 return undefined;
             });
     };
-}    
+}

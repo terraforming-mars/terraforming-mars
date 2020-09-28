@@ -1,5 +1,12 @@
-export const playerTextColorClass = (color: string): string =>
-    `player_text_color_${color}`;
+export const playerColorClass = (
+    color: string,
+    type: "shadow" | "bg" | "bg_transparent"
+): string => {
+    let prefix = {
+        shadow: "player_shadow_color_",
+        bg_transparent: "player_overview_bg_color_",
+        bg: "player_bg_color_",
+    }[type];
 
-export const playerBgColorClass = (color: string): string =>
-    `player_overview_bg_color_${color}`;
+    return `${prefix}${color}`;
+};

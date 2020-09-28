@@ -159,6 +159,6 @@ export class Hygiea extends Colony implements IColony {
     }
     
     public giveTradeBonus(player: Player): void {
-        player.megaCredits += 1;
+        player.megaCredits += 3;
     }   
 }

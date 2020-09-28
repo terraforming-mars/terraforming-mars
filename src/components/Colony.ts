@@ -110,7 +110,7 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getIapetus()" class="resource money">-1</div>
 
       <div v-if="colony.name === getMercury()" class="resource money">2</div>
-      <div v-if="colony.name === getHygiea()" class="resource money">1</div>
+      <div v-if="colony.name === getHygiea()" class="resource money">3</div>
       <div v-if="colony.name === getTitania()" class="resource money">-3</div>
       <div v-if="colony.name === getVenus()" class="resource" style="background:white;margin:15px 10px 10px 20px;">?<div class="card-icon card-icon-venus" style="color: white;margin-top: -36px;margin-left: 16px;">V</div></div>
 

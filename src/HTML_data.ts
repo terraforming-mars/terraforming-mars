@@ -5864,7 +5864,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="poseidon">POSEIDON</div>
         <div class="resource money" style="margin-left:50px;margin-right:20px;">45</div> <div class="triangle triangle-black"></div>
         <div class="description" style="text-align:center;margin-top:0px;">
-          (You start with 45MC. As your first acton, place a colony.)
+          (You start with 45MC. As your first action, place a colony.)
         </div>
       </div>
 `],

@@ -7834,7 +7834,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="ares-icon project-icon"></div>
     <div class="price ">16</div>
     <div class="tag tag1 tag-building "></div>
-    <div class="corporate-icon project-icon"></div>
     <div class="card-number">A12</div>
     <div class="content ">
       <div class="points big">1/<div class="tile city-tile-small"></div></div>
@@ -7908,7 +7907,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="ares-icon project-icon"></div>
     <div class="price ">4</div>
     <div class="tag tag1 tag-building "></div>
-    <div class="corporate-icon project-icon"></div>
     <div class="card-number">A16</div>
     <div class="content ">
         <div class="money resource ">7</div> <div class="red-arrow "></div> <div class="production-box"><div class="steel production "></div></div>
@@ -7941,7 +7939,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="ares-icon project-icon"></div>
     <div class="price">4</div>
     <div class="tag tag1 tag-building"></div>
-    <div class="corporate-icon project-icon"></div>
     <div class="card-number">A18</div>
     <div class="content">
       <div class="ares-tile board-space-tile--mining_area_ares"></div>
@@ -8031,7 +8028,6 @@ export const HTML_DATA: Map<string, string> =
     <div class="ares-icon project-icon"></div>
     <div class="price ">11</div>
     <div class="tag tag1 tag-science "></div>
-    <div class="corporate-icon project-icon"></div>
     <div class="card-number">A23</div>
     <div class="content ">
         <div class="money resource ">2</div> <div class="red-arrow "></div> <div class="card resource "></div>

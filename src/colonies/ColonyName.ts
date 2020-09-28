@@ -16,4 +16,5 @@ export enum ColonyName {
     MERCURY = "Mercury",
     HYGIEA = "Hygiea",
     TITANIA = "Titania",
+    VENUS = "Venus",
 }

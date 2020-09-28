@@ -1269,6 +1269,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             game.colonies.filter(colony => colony.resourceType !== undefined && colony.resourceType === selectedCard.resourceType).forEach(colony => {
                 colony.isActive = true;
             });
+
+            // Check for Venus colony
+            if (selectedCard.tags.includes(Tags.VENUS)) {
+              const venusColony = game.colonies.find((colony) => colony.name === ColonyName.VENUS);
+              if (venusColony) venusColony.isActive = true;
+            }
         }
 
         // Play the card
@@ -2040,12 +2046,17 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.canAfford(constants.BUILD_COLONY_COST)) {
         let openColonies = game.colonies.filter(colony => colony.colonies.length < 3 
           && colony.colonies.indexOf(this.id) === -1
-          && colony.isActive);      
-          if (openColonies.length > 0) {
-            standardProjects.options.push(
-                this.buildColony(game, openColonies)
-            );
-          }
+          && colony.isActive);
+
+        if (redsAreRuling && !this.canAfford(constants.BUILD_COLONY_COST + constants.REDS_RULING_POLICY_COST)) {
+          openColonies = openColonies.filter((colony) => colony.name !== ColonyName.VENUS);
+        }
+          
+        if (openColonies.length > 0) {
+          standardProjects.options.push(
+              this.buildColony(game, openColonies)
+          );
+        }
       }
 
       let bufferGasCost = constants.BUFFER_GAS_COST

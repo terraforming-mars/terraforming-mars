@@ -89,11 +89,20 @@ export const WaitingFor = Vue.component("waiting-for", {
         }
         const input = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
             const xhr = new XMLHttpRequest();
+            const root = (this.$root as any);
+            if (root.isServerSideRequestInProgress) return;
+            let els  = window.document.querySelectorAll(".wf-root .btn-submit");
+            els.forEach(
+                (el) => {
+                    el.classList.add("loading");
+                    (el as any).disabled = "disabled";
+                }
+            );
+            root.isServerSideRequestInProgress = true;
             xhr.open("POST", "/player/input?id=" + (this.$parent as any).player.id);
             xhr.responseType = "json";
             xhr.onload = () => {
                 if (xhr.status === 200) {
-                    const root = (this.$root as any);
                     root.screen = "empty";
                     root.player = xhr.response;
                     root.playerkey++;
@@ -114,6 +123,7 @@ export const WaitingFor = Vue.component("waiting-for", {
                 } else {
                     alert("Error sending input");
                 }
+                root.isServerSideRequestInProgress = false;
             }
             xhr.send(JSON.stringify(out));  
         }, true, true);

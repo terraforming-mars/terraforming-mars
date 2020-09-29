@@ -30,6 +30,6 @@ export const DynamicTitle = Vue.component("dynamic-title", {
     },
 
     template: `
-        <span :class="getClasses()"><span v-i18n>{{ title }}</span><span v-if="withAdditional" class="label-additional">{{ additional }}</span></span>
+        <div :class="getClasses()"><span v-i18n>{{ title }}</span><span v-if="withAdditional" class="label-additional">{{ additional }}</span></div>
     `,
 });

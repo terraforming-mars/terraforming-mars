@@ -69,13 +69,21 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
     }
 
     private logCardAction(game: Game, player: Player, card?: ICard) {
-      const target = card ? new LogMessageData(LogMessageDataType.CARD, card.name) : new LogMessageData(LogMessageDataType.STRING, "Neutral Player");
-
-      game.log(
-        LogMessageType.DEFAULT,
-        "${0} removed a microbe from ${1}",
-        new LogMessageData(LogMessageDataType.PLAYER, player.id),
-        target
-      );
+      if (card) {
+        var otherPlayer = game.getCardPlayer(card.name);
+        game.log(
+          LogMessageType.DEFAULT,
+          "${0} removed a microbe from ${1}'s ${2}",
+          new LogMessageData(LogMessageDataType.PLAYER, player.id),
+          new LogMessageData(LogMessageDataType.PLAYER, otherPlayer.id),
+          new LogMessageData(LogMessageDataType.CARD, card.name)
+        );  
+      } else {
+        game.log(
+          LogMessageType.DEFAULT,
+          "${0} removed a microbe from ${1}",
+          new LogMessageData(LogMessageDataType.PLAYER, player.id),
+          new LogMessageData(LogMessageDataType.STRING, "Neutral Player"));
+      }
     }
 }

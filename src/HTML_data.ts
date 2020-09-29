@@ -5864,7 +5864,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="poseidon">POSEIDON</div>
         <div class="resource money" style="margin-left:50px;margin-right:20px;">45</div> <div class="triangle triangle-black"></div>
         <div class="description" style="text-align:center;margin-top:0px;">
-          (You start with 45MC. As your first acton, place a colony.)
+          (You start with 45MC. As your first action, place a colony.)
         </div>
       </div>
 `],
@@ -6749,7 +6749,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 
       <div class="description card-effect-text">
-        (You start with 54 MC. As your first action, draw a Science card.)
+        (You start with 54 MC. When this corporation is revealed, draw a Science card.)
       </div>
 
       <div class="corporationEffectBox hover-hide-res">
@@ -7656,8 +7656,8 @@ export const HTML_DATA: Map<string, string> =
     <div class="card-number">A02</div>
     <div class="content ">
         <div class="requirements ">1 Science</div>
-        <div class="production-box production-box-size2a ">
-            <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="plant production "></div><div class="plant production "></div>
+        <div class="production-box production-box-size1a ">
+            <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="plant production "></div>
         </div>
         <div class="microbe resource "></div><div class="microbe resource "></div>
         <div class="ares-tile board-space-tile--biofertilizer_facility"></div>

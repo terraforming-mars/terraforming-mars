@@ -28,6 +28,8 @@ let tileTypeToCssClass = new Map<TileType, string>([
     [TileType.DUST_STORM_SEVERE, "dust_storm_severe"],
     [TileType.EROSION_MILD, "erosion_mild"],
     [TileType.EROSION_SEVERE, "erosion_severe"],
+    [TileType.MINING_STEEL_BONUS, "mining_steel"],
+    [TileType.MINING_TITANIUM_BONUS, "mining_titanium"],
 ]);
 
 let tileTypeToCssClassAresOverride = new Map<TileType, string>([

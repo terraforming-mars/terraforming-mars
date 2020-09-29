@@ -109,6 +109,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public needsToDraft: boolean | undefined = undefined; 
     public cardDiscount: number = 0;
     public colonyVictoryPoints: number = 0;
+    public scienceTagCount: number = 0;
 
     constructor(
         public name: string,
@@ -573,15 +574,23 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     
     public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeWildcardTags:boolean = true): number {
       let tagCount = 0;
+
       this.playedCards.forEach((card: IProjectCard) => {
         if ( ! includeEventsTags && card.cardType === CardType.EVENT) return;
         tagCount += card.tags.filter((cardTag) => cardTag === tag).length;
       });
+
       if (this.corporationCard !== undefined && !this.corporationCard.isDisabled) {
         tagCount += this.corporationCard.tags.filter(
             (cardTag) => cardTag === tag
         ).length;
       }
+
+      // Leavitt Station hook
+      if (tag === Tags.SCIENCE && this.scienceTagCount > 0) {
+        tagCount += this.scienceTagCount;
+      }
+
       if (tag === Tags.WILDCARD) {
         return tagCount;
       };

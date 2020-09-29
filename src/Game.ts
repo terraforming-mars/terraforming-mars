@@ -1581,9 +1581,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         if (arcadianCommunityBonus) {
           player.megaCredits += 3;
         }
-      } else {
-        space.player = undefined;
-      }
+    }
 
       this.players.forEach((p) => {
         if (p.corporationCard !== undefined &&

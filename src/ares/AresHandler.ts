@@ -78,6 +78,7 @@ export class AresHandler {
         }
     }
     // |player| placed a tile next to |adjacentSpace|.
+    // Returns true if the adjacent space contains a bonus for adjacency.
     public static earnAdacencyBonus(game: Game, adjacentSpace: ISpace, player: Player): boolean {
         if (adjacentSpace.adjacency === undefined || adjacentSpace.adjacency.bonus.length === 0) {
             return false;
@@ -136,7 +137,7 @@ export class AresHandler {
             LogMessageType.DEFAULT,
             "${0} gains 1 ${1} for placing next to ${2}",
             new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.STRING, bonus.toString()),
+            new LogMessageData(LogMessageDataType.STRING, bonusAsString(bonus)),
             new LogMessageData(LogMessageDataType.STRING, tileTypeAsString(adjacentSpace.tile?.tileType)));
         });
 
@@ -511,3 +512,29 @@ function tileTypeAsString(tileType: TileType | undefined): string {
     if (tileType === undefined) { return "undefined" };
     return tileTypeToStringMap.get(tileType)|| "special";
 }
+
+
+const bonusToStringMap: Map<SpaceBonus, string> = new Map([
+    [SpaceBonus.TITANIUM, "Titanium"],
+    [SpaceBonus.STEEL, "Steel"],
+    [SpaceBonus.PLANT, "Plant"],
+    [SpaceBonus.DRAW_CARD, "Card"],
+    [SpaceBonus.HEAT, "Heat"],
+    [SpaceBonus.OCEAN, "Ocean"],
+]);
+
+const spaceBonusToStringMap: Map< AresSpaceBonus, string> = new Map([
+    [AresSpaceBonus.MEGACREDITS, "MC"],
+    [AresSpaceBonus.ANIMAL, "Animal"],
+    [AresSpaceBonus.MICROBE, "Microbe"],
+    [AresSpaceBonus.POWER, "Power"],
+]);
+
+function bonusAsString(bonus: SpaceBonus | AresSpaceBonus | undefined): string {
+    if (bonus === undefined) { return "undefined" };
+    if (AresHandler.isAresSpaceBonus(bonus)) {
+        return spaceBonusToStringMap.get(bonus)|| "special";
+    }
+    return bonusToStringMap.get(bonus)|| "special";
+}
+

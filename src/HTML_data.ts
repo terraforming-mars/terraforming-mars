@@ -7656,8 +7656,8 @@ export const HTML_DATA: Map<string, string> =
     <div class="card-number">A02</div>
     <div class="content ">
         <div class="requirements ">1 Science</div>
-        <div class="production-box production-box-size2a ">
-            <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="plant production "></div><div class="plant production "></div>
+        <div class="production-box production-box-size1a ">
+            <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="plant production "></div>
         </div>
         <div class="microbe resource "></div><div class="microbe resource "></div>
         <div class="ares-tile board-space-tile--biofertilizer_facility"></div>

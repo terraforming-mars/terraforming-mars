@@ -128,7 +128,7 @@ export const SelectProductionToLose = Vue.component("select-production-to-lose",
           <button class="btn btn-primary" v-on:click="delta('titanium', 1)" :class="getCssClassFor('>', 'titanium')"><i class="icon icon-plus" /></button>
         </div >
         <div class="payments_type input-group" v-if="canDeductPlants()" >
-          <div class="production-box"><div class="production plants"></div></div>
+          <div class="production-box"><div class="production plant"></div></div>
           <button class="btn btn-primary" v-on:click="delta('plants', -1)" :class="getCssClassFor('<', 'plants')"><i class="icon icon-minus" /></button>
           <input class="form-input form-inline payments_input" v-model.number="plants" />
           <button class="btn btn-primary" v-on:click="delta('plants', 1)" :class="getCssClassFor('>', 'plants')"><i class="icon icon-plus" /></button>

@@ -2389,7 +2389,9 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">153</div>
       <div class="content">
         <div class="points points-big">1</div>
-        <div class="tile background-color-corporation" style="width:100px;text-shadow:none;color:black;font-size:11px;padding-top:5px;padding-bottom:5px;">Temp / O2 / Ocean</div>: +/- 2
+        <div class="card-content-requirements">
+          <div class="globals-box">Temp / O2 / Ocean</div>: +/- 2
+        </div>
         <div class="description">
           (Effect: Your global requirements are +2 or -2 steps, your choice in each case.)
         </div>
@@ -2434,7 +2436,9 @@ export const HTML_DATA: Map<string, string> =
       <div class="corporate-icon project-icon"></div>
       <div class="card-number">156</div>
       <div class="content">
-        <div class="tile" style="width:100px;text-shadow:none;color:black;font-size:14px;line-height:17px;vertical-align:middle;background-color: rgb(255,204,100);padding:5px;">Standard projects</div> : <div class="money resource">3</div>
+        <div class="card-content-requirements">
+          <div class="globals-box">Standard projects</div> : <div class="money resource">3</div>
+        </div>
         <div class="description">
           (Effect: After you pay for a standard project, except selling patents, you gain 3 MC.)
         </div>

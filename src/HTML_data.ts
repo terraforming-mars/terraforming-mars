@@ -179,7 +179,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="card-number">012</div>
         <div class="content ">
             <div class="points points-big">1/<span class="tag-jovian resource-tag"></span></div>
-            <div class=" money resource ">12</div> (<span class="titanium " style="margin:0px;padding:1px;padding-top:3px;border-radius:5px; "></span>)
+            <div class=" money resource ">12</div> (<span class="titanium resource"></span>)
             <span class="red-arrow "></span> <div class="ocean-tile tile "></div>
             <div class="description ">
                 (Action: Pay 12 MC to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.)<br><br>
@@ -2546,9 +2546,11 @@ export const HTML_DATA: Map<string, string> =
           <div class="tag tag1 tag-event "></div>
           <div class="tag tag2 tag-space "></div>
           <div class="tag tag3 tag-earth "></div>
-      <div class="card-number">163</div>
+          <div class="card-number">163</div>
           <div class="content ">
-            <div class="rating tile"></div> 4<div class="plant resource"></div> 3<div class="microbe resource"></div>* 2<div class="animal resource"></div>*
+              <div class="nowrap">
+                <div class="rating tile"></div> 4<div class="plant resource"></div> 3<div class="microbe resource"></div>* 2<div class="animal resource"></div>*
+              </div>
               <div class="description ">
                 (Raise your TR 1 step and gain 4 Plants. Add 3 Microbes to ANOTHER card and 2 Animals to ANOTHER card.)
               </div>

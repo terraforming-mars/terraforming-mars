@@ -1065,7 +1065,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="tag tag1 tag-building"></div>
       <div class="card-number">067</div>
       <div class="content">
-        <div class="tile special-tile" style="font-size:40px;color: rgb(73,54,40);">&#x2692;</div>*<br>
+        <div class="tile special-tile">&#x2692;</div>*<br>
         <div class="production-box production-box-size3">
           <div class="steel production"></div> OR <div class="titanium production"></div>
         </div> *

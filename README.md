@@ -27,11 +27,15 @@ Pointing your web browser to http://localhost:8080/games-overview?serverId=_SERV
 
 Additional information on how to setup the game server locally can be found [here](https://docs.google.com/document/d/1r4GlqA6DkrSAtR6MMYmX_nmh6o4igVTqDUUETiJYGt8/edit?usp=sharing) (short version) and [here](https://docs.google.com/document/d/1y-QnffzkQtpasBkDAFQwBoqhLmUpVTzRPybtvmbktDQ/edit?usp=sharing) (detailed version).
 
-### Docker
+### Deployment
 
-Additional information on how to setup the game with docker can be found [here](https://docs.google.com/document/d/1a_xTU2kp1E7-VwIA8qLF16prAvFkleTv9iTtxHCzGtM/edit?usp=sharing).
+If you are looking for a dead simple deployment, use Heroku, instructions are are on the [wiki](../../wiki/Heroku-Setup). For Docker, read below.
 
-### HTTPS
+#### Docker
+
+Additional information on how to setup the game with Docker can be found [here](https://docs.google.com/document/d/1a_xTU2kp1E7-VwIA8qLF16prAvFkleTv9iTtxHCzGtM/edit?usp=sharing).
+
+#### HTTPS
 
 To set up an HTTPS sub/domain for use with this project, set the paths for `KEY_PATH` and `CERT_PATH` in your `.env`. If you do not have a TLS cert/key for your domain, you can get one for free from [certbot](https://certbot.eff.org/).
 

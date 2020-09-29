@@ -70,7 +70,7 @@ export const PlayerHome = Vue.component("player-home", {
         },
         getGenerationText: function (): string {
             if (this.player.players.length === 1) {
-                const MAX_GEN = 2; // this.player.preludeExtension ? 12 : 14;
+                const MAX_GEN = this.player.preludeExtension ? 12 : 14;
                 let retText = "generation " + this.player.generation + " of " + MAX_GEN;
                 if (MAX_GEN === this.player.generation) {
                     retText = "<span class='last-generation blink-animation'>" + retText + "</span>"

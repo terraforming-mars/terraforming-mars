@@ -51,10 +51,10 @@ export const ShiftAresGlobalParameters = Vue.component("shift-ares-global-parame
 
     <div v-if="hazardData.severeErosionTemperature.available">
         Amplify erosions at:&nbsp;
-        <label class="form-radio form-inline ares-global-parameter-label" v-for="value in [ -2, 0, 2 ]">
+        <label class="form-radio form-inline ares-global-parameter-label" v-for="value in [ -1, 0, 1 ]">
           <input type="radio" :value="value" name="temperatureDelta" v-model="temperatureDelta">
           <i class="form-icon"></i>
-          <div class="ares-global-parameter-option">{{ value + hazardData.severeErosionTemperature.threshold }} °C</div>
+          <div class="ares-global-parameter-option">{{ (2 * value) + hazardData.severeErosionTemperature.threshold }} °C</div>
         </label>
     </div>
 

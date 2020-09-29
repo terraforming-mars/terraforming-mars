@@ -92,7 +92,7 @@ export const PlayerHome = Vue.component("player-home", {
             
             <div v-if="player.phase === 'end'">
                 <div class="player_home_block">
-                    <dynamic-title :title="This game is over!" :color="player.color"/>
+                    <dynamic-title title="This game is over!" :color="player.color"/>
                     <a :href="'/the-end?id='+ player.id" v-i18n>Go to game results</a>
                 </div>
             </div>
@@ -126,18 +126,18 @@ export const PlayerHome = Vue.component("player-home", {
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace />
                  
                 <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat" v-if="player.gameLog.length > 0">
-                    <dynamic-title :title="Game log" :color="player.color" :withAdditional="true" :additional="'generation' + player.generation" />
+                    <dynamic-title title="Game log" :color="player.color" :withAdditional="true" :additional="'generation' + player.generation" />
                     <log-panel :messages="player.gameLog" :players="player.players"></log-panel>
                 </div>
 
                 <div class="player_home_block player_home_block--actions nofloat">
                     <a name="actions" class="player_home_anchor"></a>
-                    <dynamic-title :title="Actions" :color="player.color" />
+                    <dynamic-title title="Actions" :color="player.color" />
                     <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
 
                 <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
-                    <dynamic-title :title="Drafted cards" :color="player.color" />
+                    <dynamic-title title="Drafted cards" :color="player.color" />
                     <div v-for="card in player.draftedCards" :key="card.name" class="cardbox">
                         <card :card="card"></card>
                     </div>
@@ -145,14 +145,14 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <a name="cards" class="player_home_anchor"></a>
                 <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
-                    <dynamic-title :title="Cards In Hand" :color="player.color" :withAdditional="true" :additional="player.cardsInHandNbr" />
+                    <dynamic-title title="Cards In Hand" :color="player.color" :withAdditional="true" :additional="player.cardsInHandNbr" />
                     <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
                         <card :card="card"></card>
                     </div>
                 </div>
 
                 <div class="player_home_block player_home_block--cards">
-                    <dynamic-title :title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true)" />
+                    <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true)" />
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
                         <card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"></card>
                     </div>
@@ -165,7 +165,7 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
 
                 <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">
-                    <dynamic-title :title="Self-Replicating Robots cards" :color="player.color"/>
+                    <dynamic-title title="Self-Replicating Robots cards" :color="player.color"/>
                     <div>
                         <div v-for="card in getCardsByType(player.selfReplicatingRobotsCards, [getActiveCardType()])" :key="card.name" class="cardbox">
                             <card :card="card"></card>
@@ -190,16 +190,16 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>     
 
                 <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
-                    <dynamic-title :title="Drafted Cards" :color="player.color"/>
+                    <dynamic-title title="Drafted Cards" :color="player.color"/>
                     <div v-for="card in player.draftedCards" :key="card.name" class="cardbox">
                         <card :card="card"></card>
                     </div>
                 </div>
 
-                <dynamic-title :title="Select initial cards:" :color="player.color"/>
+                <dynamic-title title="Select initial cards:" :color="player.color"/>
                 <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
 
-                <dynamic-title :title="Game details" :color="player.color"/>
+                <dynamic-title title="Game details" :color="player.color"/>
                 
 
                 <div class="player_home_block" v-if="player.players.length > 1">
@@ -208,7 +208,7 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
 
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
-                    <dynamic-title :title="Turn order" :color="player.color"/>
+                    <dynamic-title title="Turn order" :color="player.color"/>
                     <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
                         <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
                             <span class="player_number">{{ idx+1 }}.</span><span class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</span>
@@ -233,7 +233,7 @@ export const PlayerHome = Vue.component("player-home", {
 
             <div v-if="player.colonies.length > 0" class="player_home_block">
                 <a name="colonies" class="player_home_anchor"></a>
-                <dynamic-title :title="Colonies" :color="player.color"/>
+                <dynamic-title title="Colonies" :color="player.color"/>
                 <div class="colonies-fleets-cont" v-if="player.corporationCard">
                     <div class="colonies-player-fleets" v-for="colonyPlayer in player.players">
                         <div :class="'colonies-fleet colonies-fleet-'+ colonyPlayer.color" v-for="idx in getFleetsCountRange(colonyPlayer)"></div>

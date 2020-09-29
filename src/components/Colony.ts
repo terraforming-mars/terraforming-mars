@@ -408,9 +408,9 @@ export const Colony = Vue.component("colony", {
   </div>
 
   <div v-if="colony.name === getMercury()" class="colony-grid-container">
-    <div><div class="triangle triangle-black" style="margin: 10px 0 0 3px"></div></div>
-    <div><div class="triangle triangle-black" style="margin: 10px 0 0 3px"></div></div>
-    <div><div class="triangle triangle-black" style="margin: 10px 0 0 3px"></div></div>
+    <div><div class="copy-trade-box">Copy Trade</div></div>
+    <div><div class="copy-trade-box">Copy Trade</div></div>
+    <div><div class="copy-trade-box">Copy Trade</div></div>
     <div></div>
     <div></div>
     <div></div>

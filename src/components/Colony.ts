@@ -118,7 +118,7 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getVenus()" class="resource" style="background:white;margin:15px 10px 10px 20px;">?<div class="card-icon card-icon-venus" style="color: white;margin-top: -36px;margin-left: 16px;">V</div></div>
 
       <span v-if="colony.name === getLeavitt()" style="display: inline-block;margin-left: 10px;font-size: 14px;">REVEAL TOP CARD OF DECK.</span>
-      <br>
+      <span v-if="colony.name === getLeavitt()"><br></span>
       <span v-if="colony.name === getLeavitt()" style="font-size: 14px; margin-left: 10px;">BUY OR DISCARD IT.</span>
 
       <span v-if="colony.name === getPluto()" class="white-char" style="margin-left:5px;">+</span>

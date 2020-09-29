@@ -245,15 +245,17 @@ export const HTML_DATA: Map<string, string> =
         <div class="content ">
             <div class="points points-big ">1</div>
             <div class="requirements requirements-max ">max 7% O2</div>
-            <div class="production-box production-box-size1a " style="margin-bottom:5px;">
-                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div>
-                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">3</div>
+            <div class="production-box production-box-size1a">
+                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production"></div>
+                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production">3</div>
             </div>
-            <div class="tile city-tile " style="margin-left:20px;margin-bottom:5px;"></div><br>
+            <div class="tile city-tile"></div>
+            <div class="card-content-plants">
             <div class="plant resource "></div><div class="plant resource "></div><div class="plant resource "></div>
-            <div class="description " style="margin-top:-5px;font-size:11px;text-align: left; line-height: 12px;">
+            </div>
+            <div class="description">
                 <div>Oxygen must be 7% or less.</div>
-                <div style="width:140px;">Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.</div>
+                <div>Gain 3 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 3 steps.</div>
             </div>
         </div>
 `],
@@ -3211,7 +3213,9 @@ export const HTML_DATA: Map<string, string> =
         <div class="tag tag2 tag-science"></div>
       <div class="card-number">206</div>
         <div class="content">
-          <div class="tile background-color-corporation" style="width:100px;text-shadow:none;color:black;font-size:11px;padding-top:5px;padding-bottom:5px;">Temp / O2 / Ocean</div>: +/- 2
+          <div class="card-content-requirements">
+            <div class="globals-box">Temp / O2 / Ocean</div>: +/- 2
+          </div>
           <div class="description">
             (The next card you play this generation is +2 or -2 steps in global requirements, your choice.)
           </div>

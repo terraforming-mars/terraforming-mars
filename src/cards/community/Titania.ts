@@ -8,8 +8,6 @@ export class Titania extends Colony implements IColony {
     public description: string = "VP";
 
     public trade(player: Player, game: Game, usesTradeFleet: boolean = true): void {
-        if (usesTradeFleet) this.beforeTrade(this, player, game);
-        
         if (this.trackPosition <= 2) {
             player.colonyVictoryPoints += 2;
         } else if (this.trackPosition <= 4) {

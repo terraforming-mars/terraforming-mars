@@ -5197,9 +5197,13 @@ export const HTML_DATA: Map<string, string> =
       <div class="corporationLabel ">CORPORATION</div>
       <div class="contentCorporation ">
           <div class="corporationEffectBox ">
-              <div class="corporationEffectBoxLabel ">EFFECT</div>
-                <div class="tile background-color-corporation" style="width:100px;text-shadow:none;color:black;font-size:11px;padding-top:5px;padding-bottom:5px;">Temp / O2 / Ocean</div>: +/- 2
-              <div class="description " style="text-align:center;margin-top:0px; ">
+              <div class="corporationEffectBoxLabel">EFFECT</div>
+              
+              <div class="corporation-ability">
+                <div class="globals-box">Temp / O2 / Ocean</div>: +/- 2
+              </div>
+              
+              <div class="description ">
                   (Effect: Your temperature, oxygen and ocean requirements are +2 or -2 steps, your choice in each case.)
               </div>
           </div>

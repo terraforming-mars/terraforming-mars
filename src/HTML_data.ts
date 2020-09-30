@@ -3269,11 +3269,13 @@ export const HTML_DATA: Map<string, string> =
           <div class="card-number">210</div>
           <div class="content ">
             <div class="requirements">2 Science</div>
-            <div class="red-arrow "></div>
-            <div class="resource card"><div class="production" style="position:absolute;background:white;color:black;margin-left:-4px;margin-top:7px;">2</div><div class="card-icon card-icon-space">&#x2734;</div><div class="card-icon card-icon-building" style="margin-left:37px">&#x2617;</div></div>
-            &nbsp;&nbsp;&nbsp;OR&nbsp;&nbsp;&nbsp;
-            <div class="red-arrow "></div>
-            <div class="production" style="background:white;color:black;vertical-align:middle">X</div> x2
+            <div class="nowrap">
+              <div class="red-arrow "></div>
+              <div class="resource card"><div class="cards-count">2</div><div class="card-icon card-icon-space">&#x2734;</div><div class="card-icon card-icon-building" style="margin-left:37px">&#x2617;</div></div>
+              &nbsp;&nbsp;&nbsp;OR&nbsp;&nbsp;&nbsp;
+              <div class="red-arrow "></div>
+              <div class="production" style="background:white;color:black;vertical-align:middle">X</div> x2
+            </div>
             <div class="description">
               (Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.) <br>
               (Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.)<br>

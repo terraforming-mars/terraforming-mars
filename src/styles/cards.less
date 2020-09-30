@@ -649,12 +649,12 @@ input[type=radio]:checked + .filterDiv::after {
 .production-prefix {
   display: inline-block;
   position: relative;
-  color: black;
+  color: #001 !important;
   width: 23px;
   vertical-align: central;
   line-height: 10px;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 20px;
 }
 
 
@@ -904,6 +904,7 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
   background-image: url(./assets/resources/fighter.png);
 }
 .asteroid {
+  color: #0000 !important;
   background-image: url(./assets/resources/asteroid.png);
 }
 .pristar {
@@ -923,7 +924,7 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
 .card-icon {
   position: absolute;
   margin-left: 15px;
-  margin-top: -14px;
+  margin-top: -10px;
   width: 20px;
   height: 20px;
   line-height: 20px;
@@ -2009,5 +2010,31 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
 
   .requirements {
     margin-bottom: 20px;
+  }
+}
+
+.card-dusk-laser-mining {
+  .res-count-wrapper {
+    display: inline-block;
+    vertical-align: top;
+    margin: 20px 0 0 15px;
+  }
+}
+
+.card-atmo-collectors {
+  .card-effect-line {
+    margin-left: -3px;
+    font-size: 14px;
+  }
+}
+
+.card-titan-floater-launch-pad {
+  .content .description {
+
+    margin-bottom: 7px;
+
+    &.description--2 {
+      width: 120px;
+    }
   }
 }

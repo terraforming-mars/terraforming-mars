@@ -7,6 +7,7 @@ import { BeginnerCorporation } from "../cards/corporation/BeginnerCorporation";
 import { ALL_PRELUDE_CORPORATIONS,
          ALL_CORPORATION_CARDS,
          ALL_CORP_ERA_CORPORATION_CARDS,
+         ALL_COMMUNITY_CORPORATIONS,
          ALL_PROJECT_CARDS,
          ALL_CORP_ERA_PROJECT_CARDS,
          ALL_PRELUDE_CARDS,
@@ -16,7 +17,8 @@ import { ALL_PRELUDE_CORPORATIONS,
          ALL_VENUS_PROJECTS_CARDS,
          ALL_COLONIES_PROJECTS_CARDS,
          ALL_TURMOIL_PROJECTS_CARDS,
-         ALL_PROMO_PROJECTS_CARDS, ALL_COMMUNITY_CORPORATIONS
+         ALL_PROMO_PROJECTS_CARDS,
+         ALL_ARES_PROJECT_CARDS,
          } from "../Dealer";
 import { HTML_DATA } from "../HTML_data";
 import { CardModel } from "../models/CardModel";
@@ -84,6 +86,10 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
         return new cardFactory.factory();
     }
     cardFactory = ALL_PROMO_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_ARES_PROJECT_CARDS.find((cf) => cf.cardName === cardName);
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }    

@@ -10,7 +10,7 @@ import { CardName } from "../CardName";
 import { MAX_TEMPERATURE, REDS_RULING_POLICY_COST } from "../constants";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
-import { IAdjacencyBonus } from '../ares/AdjacencyBonus';
+import { IAdjacencyBonus } from '../ares/IAdjacencyBonus';
 
 export class NuclearZone implements IProjectCard {
     public cost: number = 10;

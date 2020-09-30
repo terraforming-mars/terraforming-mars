@@ -456,7 +456,7 @@ export enum CardName {
     COMMERCIAL_DISTRICT_ARES = "Commercial District:ares",
     DESPERATE_MEASURES = "DesperateMeasures",
     ECOLOGICAL_SURVEY = "Ecological Survey",
-    ECOLOGICAL_ZONE_ARES = "Ecological Zone|ares",
+    ECOLOGICAL_ZONE_ARES = "Ecological Zone:ares",
     GEOLOGICAL_SURVEY = "Geological Survey",
     INDUSTRIAL_CENTER_ARES = "Industrial Center:ares",
     LAVA_FLOWS_ARES = "Lava Flows:ares",

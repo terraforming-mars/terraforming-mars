@@ -1,4 +1,4 @@
-import { IAdjacencyBonus } from "../../ares/AdjacencyBonus";
+import { IAdjacencyBonus } from "../../ares/IAdjacencyBonus";
 import { AresSpaceBonus } from "../../ares/AresSpaceBonus";
 import { CardName } from "../../CardName";
 import { Capital } from "../Capital";

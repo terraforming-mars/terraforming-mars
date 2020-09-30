@@ -10,7 +10,7 @@ import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
 import { Resources } from '../Resources';
 import { CardName } from '../CardName';
-import { IAdjacencyBonus } from "../ares/AdjacencyBonus";
+import { IAdjacencyBonus } from "../ares/IAdjacencyBonus";
 
 export class MoholeArea implements IProjectCard {
     public cost: number = 20;

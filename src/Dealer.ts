@@ -1013,6 +1013,7 @@ export const ALL_ARES_PROJECT_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.RESTRICTED_AREA_ARES, factory: RestrictedAreaAres },
     { cardName: CardName.SOLAR_FARM, factory: SolarFarm },
 ]
+
 // Function to return a card object by its name
 export function getProjectCardByName(cardName: string): IProjectCard | undefined {
     let cardFactory = ALL_PRELUDE_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
@@ -1044,6 +1045,10 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
         return new cardFactory.factory();
     }
     cardFactory = ALL_PROMO_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_ARES_PROJECT_CARDS.find((cf) => cf.cardName === cardName);
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }

@@ -18,7 +18,8 @@ export class RemoveOcean implements PlayerInterrupt {
         }
         this.playerInput = new SelectSpace(
             title,
-            game.board.getOceansTiles(),
+            // false: don't include upgraded oceans.
+            game.board.getOceansTiles(false),
             (space: ISpace) => {
                 game.removeTile(space.id);
                 return undefined;

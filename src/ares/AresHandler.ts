@@ -258,7 +258,7 @@ export class AresHandler {
       return map;
     }
 
-    // Used with Ecological  and Geological Survey
+    // Used with Ecological and Geological Survey
     public static afterTilePlacement(game: Game, player: Player, startingResources?: Map<Resources | ResourceType, number>): void {
         if (!startingResources) {
             return;

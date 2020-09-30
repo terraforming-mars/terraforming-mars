@@ -8,42 +8,17 @@ import { SpaceBonus } from "../../src/SpaceBonus";
 import { SpaceType } from "../../src/SpaceType";
 import { TileType } from "../../src/TileType";
 import { ISpace } from "../../src/ISpace";
+import { setCustomGameOptions } from "../TestingUtils";
 
-export const ARES_OPTIONS_NO_HAZARDS: GameOptions = {
-
+export const ARES_OPTIONS_NO_HAZARDS = setCustomGameOptions({
     aresExtension: true,
     aresHazards: false,
+});
 
-    draftVariant: false,
-    initialDraftVariant: false,
-    corporateEra: true,
-    randomMA: false,
-    preludeExtension: false,
-    venusNextExtension: false,
-    coloniesExtension: false,
-    turmoilExtension: false,
-    boardName: BoardName.ORIGINAL,
-    showOtherPlayersVP: false,
-    customCorporationsList: [],
-    customColoniesList: [],
-    cardsBlackList: [],
-    solarPhaseOption: false,
-    shuffleMapOption: false,
-    promoCardsOption: false,
-    undoOption: false,
-    fastModeOption: false,
-    removeNegativeGlobalEventsOption: false,
-    startingCorporations: 2,
-    includeVenusMA: true,
-    soloTR: false,
-    clonedGamedId: undefined,
-    communityCardsOption: false
-  };
-
-  export const ARES_OPTIONS_WITH_HAZARDS: GameOptions = {
-    ...ARES_OPTIONS_NO_HAZARDS,
+  export const ARES_OPTIONS_WITH_HAZARDS = setCustomGameOptions({
+    aresExtension: true,
     aresHazards: true,
-  };
+});
 
   export const ALL_ADJACENCY_BONUSES = [
     SpaceBonus.TITANIUM,

@@ -6052,25 +6052,30 @@ export const HTML_DATA: Map<string, string> =
           <div class="promo-icon corporation-icon"></div>
           <div class="contentCorporation">
             <div class="corporationEffectBox">
-              <div class="corporationEffectBoxLabel" style="margin-bottom:5px">ACTION</div>
-              <div class="red-arrow"></div><div class="production-box">
-                <div class="production energy"></div>
-              </div> * OR
-              <div class="resource money">3</div><div class="red-arrow"></div><div class="resource card">
-                <div class="card-icon card-icon-building" style="margin-top:-17px;">&#x2617;</div>
+              <div class="corporationEffectBoxLabel">ACTION</div>
+
+              <div class="corporation-action-icons nowrap">
+                <div class="red-arrow"></div><div class="production-box">
+                  <div class="production energy"></div>
+                </div> * OR
+                <div class="resource money">3</div><div class="red-arrow"></div><div class="resource card">
+                  <div class="card-icon card-icon-building">&#x2617;</div>
+                </div>
               </div>
-              <div class="description" style="text-align:center;margin-top:0px;">
+
+              <div class="description">
                 (Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.)
               </div>
             </div>
-            <div class="factorum">
-              FACTORUM
+
+            <div class="factorum">FACTORUM</div>
+            <div class="corporation-starts-with">
+              <div class="resource money">37</div>
+              <div class="production-box">
+                <div class="production steel"></div>
+              </div>
             </div>
-            <div class="resource money" style="margin-left:35px;margin-right:20px;margin-top:20px;">37</div>
-            <div class="production-box">
-              <div class="production steel"></div>
-            </div>
-            <div class="description" style="text-align:center;">
+            <div class="description">
               (You start with 37 MC. Increase your steel production 1 step.)
             </div>
           </div>
@@ -6099,17 +6104,17 @@ export const HTML_DATA: Map<string, string> =
       <div class="corporationLabel">CORPORATION</div>
       <div class="promo-icon corporation-icon"></div>
       <div class="contentCorporation">
-        <div class="corporationEffectBox hover-hide-res" style="height:160px;margin-top:130px">
+        <div class="corporationEffectBox hover-hide-res" style="height:165px;margin-top:127px">
           <div class="corporationEffectBoxLabel" >ACTION</div>
-          <div class="red-arrow"></div> <div class="asteroid resource">A</div> * / <div class="resource " style="background:white;">?</div> OR <br>
-          <div class="asteroid resource">A</div><div class="red-arrow"></div> 3 <div class="resource titanium"></div>
+          <div class="red-arrow"></div> <div class="asteroid resource"></div> * / <div class="resource " style="background:white;">?</div> OR <br>
+          <div class="asteroid resource"></div><div class="red-arrow"></div> 3 <div class="resource titanium"></div>
           <div class="description" style="text-align:center;">
             (Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.)<br>
           </div>
         </div>
         <div class="astrodrill">Astrodrill</div>
         <div class="resource money" style="margin:3px 40px 0px 50px">38</div>
-        3 <div class="asteroid resource">A</div>
+        3 <div class="asteroid resource"></div>
         <div class="description" style="text-align:center">
           (You start with 38 MC and 3 asteroid resources.)
         </div>

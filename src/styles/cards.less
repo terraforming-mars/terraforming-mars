@@ -966,7 +966,7 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
 }
 
 .card-icon-science {
-  background-image: url("./assets/tag-science.png");
+  background-image: url("./assets/tags/science.png");
   border-radius: 50%;
 }
 
@@ -1074,7 +1074,7 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
 }
 
 .asteroid {
-    background:black;
+    background-color:black;
     color:#bbb;
 }
 
@@ -1619,7 +1619,7 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
 
   .card-effect-icons {
     position: absolute;
-    margin: -10px 0 0 0;
+    margin: -5px 0 0 11px;
   }
 
   .card-effect-text {
@@ -1632,6 +1632,7 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
 
     .description {
       font-size: 9.5px;
+      line-height: 11px;
     }
   }
 
@@ -1969,6 +1970,24 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
     }
     &.money {
       margin: 0 8px 0 15px;
+    }
+  }
+}
+
+.card-factorum {
+  .corporation-starts-with {
+    .resource.money {
+      margin-left:60px;
+      margin-right:25px;
+    }
+  }
+
+  .corporationEffectBox {
+    width: 227px;
+    margin-left: -5px;
+
+    .corporation-action-icons {
+      font-size: 12px;
     }
   }
 }

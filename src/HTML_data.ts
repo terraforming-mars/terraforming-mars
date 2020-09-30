@@ -495,7 +495,9 @@ export const HTML_DATA: Map<string, string> =
         <div class="tag tag1 tag-space "></div>
         <div class="card-number">031</div>
         <div class="content ">
-            <div class="resource-tag tag-space "></div> <div class="resource-tag tag-event "></div> : <div class="resource money ">3</div><div class="resource heat "></div><div class="resource heat "></div><div class="resource heat "></div>
+            <div class="nowrap">
+              <div class="resource-tag tag-space "></div> <div class="resource-tag tag-event "></div> : <div class="resource money ">3</div><div class="resource heat "></div><div class="resource heat "></div><div class="resource heat "></div>
+            </div>
             <div class="description ">
                 (Effect: When you play a Space Event, you gain 3 MC and 3 heat.)
             </div>
@@ -2980,7 +2982,9 @@ export const HTML_DATA: Map<string, string> =
           <div class="tag tag1 tag-event "></div>
       <div class="card-number">190</div>
           <div class="content ">
+              <div class="nowrap">
               -5<div class="resource heat" style="margin-right:15px;"></div> + &nbsp;&nbsp;&nbsp;4<div class="resource plant"></div> OR 2<div class="resource animal"></div>*
+              </div>
               <div class="description ">
                 (Spend 5 heat to gain either 4 Plants, or to add 2 Animals to ANOTHER card.)
               </div>
@@ -3309,8 +3313,10 @@ export const HTML_DATA: Map<string, string> =
           <div class="card-number">213</div>
           <div class="content">
             <div class="points points-big">1</div>
-            <div class="red-arrow"></div>
-            <div class="floater resource"></div>* OR <div class="floater resource"></div> <div class="red-arrow"></div> <div class="card resource"></div><br>
+            <div class="nowrap">
+              <div class="red-arrow"></div>
+              <div class="floater resource"></div>* OR <div class="floater resource"></div> <div class="red-arrow"></div> <div class="card resource"></div>
+            </div>
             <div class="description">
               (Action: Add 1 Floater to ANY card or spend 1 Floater here to draw 1 card)
             </div>
@@ -3340,9 +3346,9 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">215</div>
             <div class="content ">
               <div class="tile venus-tile">V</div> &nbsp;&nbsp;
-                <div class="resource floater"><div class="card-icon card-icon-venus">V</div></div>
-                  <div class="resource floater"><div class="card-icon card-icon-venus">V</div></div>
-                    <div class="resource floater"><div class="card-icon card-icon-venus">V</div></div>
+                <div class="resource floater"><div class="card-icon tag-venus"></div></div>
+                  <div class="resource floater"><div class="card-icon tag-venus"></div></div>
+                    <div class="resource floater"><div class="card-icon tag-venus"></div></div>
                 <div class="description">
                   (Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD)
                 </div>
@@ -3374,9 +3380,11 @@ export const HTML_DATA: Map<string, string> =
             <div class="content ">
               <div class="points points-big">1</div>
               <div class="requirements">3 Science</div>
-              <div class="tile temperature-tile" style="width:24px"></div><div class="tile temperature-tile" style="width:24px"></div> OR
-              <div class="tile venus-tile" style="width:20px">V</div><div class="tile venus-tile" style="width:20px">V</div>
-              <span>*</span><div class="resource floater" style="margin-left:8px;"></div><div class="resource floater"></div>
+              <div class="nowrap">
+                <div class="tile temperature-tile"></div><div class="tile temperature-tile"></div> OR
+                <div class="tile venus-tile"></div><div class="tile venus-tile"></div>
+              </div>
+              <span>*</span><div class="resource floater"></div><div class="resource floater"></div>
               <div class="description" style="text-align:left;position:absolute;margin-top:-8px;">
                 (Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card)
               </div>
@@ -3541,9 +3549,9 @@ export const HTML_DATA: Map<string, string> =
             <div class="content ">
               <div class="points points-big">2</div>
                 <div class="requirements">10% Venus</div>
-               <div class="resource microbe"><div class="card-icon card-icon-venus" style="color: white;margin-top: -36px;font-weight:bold;">V</div></div> <div class="resource microbe"><div class="card-icon card-icon-venus" style="font-weight:bold;color: white;margin-top: -36px;">V</div></div>
+               <div class="resource microbe"><div class="card-icon tag-venus"></div></div> <div class="resource microbe"><div class="card-icon tag-venus"></div></div>
               &nbsp;&nbsp;  OR &nbsp;&nbsp;
-               <div class="resource animal"><div class="card-icon card-icon-venus" style="color: white;margin-top: -36px;font-weight:bold;">V</div></div> <div class="resource animal"><div class="card-icon card-icon-venus" style="font-weight:bold;color: white;margin-top: -36px;">V</div></div>
+               <div class="resource animal"><div class="card-icon tag-venus"></div></div> <div class="resource animal"><div class="card-icon tag-venus"></div></div>
                <div class="production-box production-box-size1a" style="margin-left:135px;">
                    <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div>
                    <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="money production">2</div>
@@ -3805,7 +3813,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="card-number">243</div>
             <div class="content hover-hide-res">
                 <div class="requirements requirements-max">max 14% Venus</div>
-                <div class=" money resource ">6</div> (<span class="titanium " style="margin:0px;padding:1px;padding-top:3px;border-radius:5px; "></span>)
+                <div class=" money resource ">6</div> (<span class="resource titanium"></span>)
                 <span class="red-arrow "></span> <div class="resource" style="background:black;color:#bbb;">A</div> <br>
                 OR <div class="resource" style="background:black;color:#bbb;">A</div> <span class="red-arrow "></span> <div class="tile venus-tile">V</div>
                 <div class="description ">
@@ -4125,9 +4133,9 @@ export const HTML_DATA: Map<string, string> =
             <div class="content ">
               <div class="points points-big">1</div>
               <div class="requirements">16% Venus</div>
-              <div class="tile venus-tile">V</div>
-              <br><div class="microbe resource"><div class="card-icon card-icon-venus" style="color: white;margin-top: -36px;font-weight:bold;">V</div></div> OR
-              <div class="animal resource"><div class="card-icon card-icon-venus" style="color: white;margin-top: -36px;font-weight:bold;">V</div></div>
+              <div class="tile venus-tile"></div>
+              <br><div class="microbe resource"><div class="card-icon tag-venus"></div></div> OR
+              <div class="animal resource"><div class="card-icon tag-venus"></div></div>
               <div class="description">
                 (Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 Animal to ANOTHER VENUS CARD)
               </div>
@@ -4279,8 +4287,10 @@ export const HTML_DATA: Map<string, string> =
             <div class="colonies-icon project-icon"></div>
             <div class="card-number">C03</div>
             <div class="content ">
-              <div class="red-arrow "></div> <div class="floater resource "></div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OR <br>
-              <div class="floater resource "></div> <div class="red-arrow "></div> 2<div class="titanium resource "></div> / 3<div class="energy resource "></div> / 4<div class="heat resource "></div>
+              <div class="red-arrow "></div> <div class="floater resource "></div> OR
+              <div class="card-effect-line nowrap">
+                <div class="floater resource "></div> <div class="red-arrow "></div> 2<div class="titanium resource "></div> / 3<div class="energy resource "></div> / 4<div class="heat resource "></div>
+              </div>
               <div class="description ">
                 (Action: Add 1 floater here, or spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.)
               </div>
@@ -4951,9 +4961,9 @@ export const HTML_DATA: Map<string, string> =
                 <div class="description ">
                   (Action: Add 1 floater to ANY JOVIAN CARD, or spend 1 floater here to trade for free.)
                 </div>
-                <div class="resource floater" style="margin-left:-130px;margin-top:15px;"><div class="card-icon tag-jovian"></div></div>
                 <div class="resource floater"><div class="card-icon tag-jovian"></div></div>
-                <div class="description" style="position: absolute; margin-left: 87px; margin-top: -36px;">
+                <div class="resource floater"><div class="card-icon tag-jovian"></div></div>
+                <div class="description description--2">
                   (Add two floaters to ANY JOVIAN CARD.)
                 </div>
               </div>
@@ -6706,7 +6716,9 @@ export const HTML_DATA: Map<string, string> =
             <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="production energy"></div><br/>
             <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="production titanium"></div>
         </div>
-        <span style="font-size: 18px; margin-left: 20px; font-family: Prototype">4</span> <div class="production titanium"></div>
+        <div class="res-count-wrapper">
+          <span>4</span> <div class="resource titanium"></div>
+        </div>
         <div class="description">
             (Requires 2 Science tags.
             Decrease your energy production 1 step, and increase your titanium production 1 step.
@@ -7513,11 +7525,13 @@ export const HTML_DATA: Map<string, string> =
     <div class="card-number">X11</div>
     <div class="content">
         <div class="points points-big">1</div>
-        <div class="floater resource"></div>
-        <span class="red-arrow"></span>
-        <div class="money resource">1</div> / <div class="resource floater"></div> * max 5
+        <div class="nowrap">
+          <div class="floater resource"></div>
+          <span class="red-arrow"></span>
+          <div class="money resource">1</div> / <div class="resource floater"></div> * max 5
+        </div>
         <div class="description" style="margin-bottom:10px;">
-            (Action: Spend 1 floater from here to gain 1 MC from each floater here, INCLUDING THE PAID FLOATER. Max 5.)
+          (Action: Spend 1 floater from here to gain 1 MC from each floater here, INCLUDING THE PAID FLOATER. Max 5.)
         </div>
         <div class="floater resource"></div> / <div class="resource-tag tag-earth"></div>
         <div class="description">

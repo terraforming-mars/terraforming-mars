@@ -5907,23 +5907,18 @@ export const HTML_DATA: Map<string, string> =
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">ACTION</div>
-          <div style="font-size:10px;line-height:12px;margin-top:-5px;margin-bottom:10px;"><span class="red-arrow"></span>ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS</div>
-          <div class="corporationEffectBoxLabel" style="margin-top:-3px">EFFECT</div>
-            <div style="font-size:10px;line-height:12px;margin-top:-5px;">EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 MC</div>
+          <div class="corporation-action-text"><span class="red-arrow"></span>ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS</div>
+          <div class="corporationEffectBoxLabel">EFFECT</div>
+            <div class="corporation-effect-text">EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 MC</div>
         </div>
-        <div style="font-size:20px;
-        padding-left:3px;width:147px;background:#eeeeee;box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 3px 3px 3px grey;margin-left:10px;border-radius:5px;
-        margin-bottom:4px;
-        border-top: 2px solid rgb(221,221,221);
-        border-left: 2px solid rgb(221,221,221);
-        border-bottom: 2px solid rgb(137,137,137);
-        border-right: 2px solid rgb(137,137,137);">
-                    &nbsp;&nbsp;&nbsp;ARCADIAN <br>COMMUNITIES
-                </div>
-                <div class="resource money" style="margin-left:15px;margin-right:15px;">40</div>
-                10<div class="resource steel" style="margin-right:20px;"></div>
-                <div class="resource" style="background: linear-gradient(orange, orangered);">&nbsp;</div>*
-        <div class="description" style="margin-top:-5px;text-align:center;">(You start with 40 MC and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA.)</div>
+        <div class="corporation-logo">ARCADIAN COMMUNITIES</div>
+
+        <div class="corporation-startswith nowrap">
+          <div class="resource money">40</div>
+          10<div class="resource steel"></div>
+          <div class="resource special">&nbsp;</div>*
+        </div>
+        <div class="description" >(You start with 40 MC and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA.)</div>
       </div>
 `],
 [CardName.BEGINNER_CORPORATION,`
@@ -5943,9 +5938,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
-          <div class="tile empty-tile-small red-outline" style="
-            padding: 6px; margin-right: -3px;
-          "></div><div class="tile empty-tile-small"></div>
+          <div class="tile empty-tile-small red-outline"></div><div class="tile empty-tile-small"></div>
           : <div class="resource" style="background:white;">?</div>
           <div class="description" style="text-align:center;margin-top:0px;">
             (Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice (regardless of who just placed a tile).)

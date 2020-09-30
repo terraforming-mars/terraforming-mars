@@ -1921,3 +1921,54 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
     }
   }
 }
+
+.card-arcadian-communities {
+  .corporation-logo {
+    font-size: 20px;
+    padding: 0 5px;
+    width: 147px;
+    background: #eeeeee;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 3px 3px 3px grey;
+    margin: 5px 10px;
+    border-radius: 5px;
+    border-top: 2px solid rgb(221,221,221);
+    border-left: 2px solid rgb(221,221,221);
+    border-bottom: 2px solid rgb(137,137,137);
+    border-right: 2px solid rgb(137,137,137);
+    font-family: Arial;
+    text-align: center;
+    line-height: 25px;
+  }
+
+  .contentCorporation {
+    .corporationEffectBox {
+      font-size: 9px;
+      line-height: 12px;
+
+      .corporation-action-text {
+        text-indent: 30px;
+        margin: -3px 0 5px 0;
+      }
+    }
+
+    .red-arrow {
+      position: absolute;
+      margin: -9px 0 0 -31px
+    }
+    
+    .description {
+      font-size: 10px;
+      line-height: 12px;
+    }
+  }
+
+  .resource {
+    &.special {
+      background: linear-gradient(orange, orangered);
+      margin-left: 15px;
+    }
+    &.money {
+      margin: 0 8px 0 15px;
+    }
+  }
+}

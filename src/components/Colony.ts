@@ -115,18 +115,18 @@ export const Colony = Vue.component("colony", {
       </span>
 
     <div v-if="colony.name === getEnceladus()" class="colony-grid-container">
-      <div><div class="resource microbe resource-stacked " style="positon:absolute;margin-bottom:0px;margin-top:6px;z-index:1;"></div>
-          <div class="resource microbe resource-stacked " style="positon:absolute;margin-top:-20px;"></div>
-          <div class="resource microbe resource-stacked " style="positon:absolute;margin-top:-20px;margin-left:-5px;"></div>
+      <div>
+        <div class="colony-placement-bonus resource microbe white-x white-x--3"></div>
       </div>
-      <div><div class="resource microbe resource-stacked " style="positon:absolute;margin-bottom:0px;margin-top:6px;z-index:1;"></div>
-          <div class="resource microbe resource-stacked " style="positon:absolute;margin-top:-20px;"></div>
-          <div class="resource microbe resource-stacked " style="positon:absolute;margin-top:-20px;margin-left:-5px;"></div>
+
+      <div>
+        <div class="colony-placement-bonus resource microbe white-x white-x--3"></div>
       </div>
-      <div><div class="resource microbe resource-stacked " style="positon:absolute;margin-bottom:0px;margin-top:6px;z-index:1;"></div>
-          <div class="resource microbe resource-stacked " style="positon:absolute;margin-top:-20px;"></div>
-          <div class="resource microbe resource-stacked " style="positon:absolute;margin-top:-20px;margin-left:-5px;"></div>
+
+      <div>
+        <div class="colony-placement-bonus resource microbe white-x white-x--3"></div>
       </div>
+
       <div></div>
       <div></div>
       <div></div>
@@ -247,17 +247,16 @@ export const Colony = Vue.component("colony", {
     </div>
 
     <div v-if="colony.name === getTriton()" class="colony-grid-container">
-      <div><div class="resource titanium resource-stacked " style="positon:absolute;margin-bottom:0px;margin-top:6px;z-index:1;"></div>
-          <div class="resource titanium resource-stacked " style="positon:absolute;margin-top:-20px;"></div>
-          <div class="resource titanium resource-stacked " style="positon:absolute;margin-top:-20px;margin-left:-5px;"></div>
+      <div>
+        <div class="colony-placement-bonus resource titanium white-x white-x--3"></div>
       </div>
-      <div><div class="resource titanium resource-stacked " style="positon:absolute;margin-bottom:0px;margin-top:6px;z-index:1;"></div>
-          <div class="resource titanium resource-stacked " style="positon:absolute;margin-top:-20px;"></div>
-          <div class="resource titanium resource-stacked " style="positon:absolute;margin-top:-20px;margin-left:-5px;"></div>
+
+      <div>
+        <div class="colony-placement-bonus resource titanium white-x white-x--3"></div>
       </div>
-      <div><div class="resource titanium resource-stacked " style="positon:absolute;margin-bottom:0px;margin-top:6px;z-index:1;"></div>
-          <div class="resource titanium resource-stacked " style="positon:absolute;margin-top:-20px;"></div>
-          <div class="resource titanium resource-stacked " style="positon:absolute;margin-top:-20px;margin-left:-5px;"></div>
+
+      <div>
+        <div class="colony-placement-bonus resource titanium white-x white-x--3"></div>
       </div>
       <div></div>
       <div></div>
@@ -332,17 +331,16 @@ export const Colony = Vue.component("colony", {
   </div>
 
   <div v-if="colony.name === getTitan()" class="colony-grid-container">
-    <div><div class="resource floater resource-stacked " style="positon:absolute;margin-bottom:0px;margin-top:6px;z-index:1;"></div>
-        <div class="resource floater resource-stacked " style="positon:absolute;margin-top:-20px;"></div>
-        <div class="resource floater resource-stacked " style="positon:absolute;margin-top:-20px;margin-left:-5px;"></div>
+    <div>
+      <div class="colony-placement-bonus resource floater white-x white-x--3"></div>
     </div>
-    <div><div class="resource floater resource-stacked " style="positon:absolute;margin-bottom:0px;margin-top:6px;z-index:1;"></div>
-        <div class="resource floater resource-stacked " style="positon:absolute;margin-top:-20px;"></div>
-        <div class="resource floater resource-stacked " style="positon:absolute;margin-top:-20px;margin-left:-5px;"></div>
+
+    <div>
+      <div class="colony-placement-bonus resource floater white-x white-x--3"></div>
     </div>
-    <div><div class="resource floater resource-stacked " style="positon:absolute;margin-bottom:0px;margin-top:6px;z-index:1;"></div>
-        <div class="resource floater resource-stacked " style="positon:absolute;margin-top:-20px;"></div>
-        <div class="resource floater resource-stacked " style="positon:absolute;margin-top:-20px;margin-left:-5px;"></div>
+
+    <div>
+      <div class="colony-placement-bonus resource floater white-x white-x--3"></div>
     </div>
     <div></div>
     <div></div>

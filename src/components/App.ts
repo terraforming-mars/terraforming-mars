@@ -5,6 +5,7 @@ import { GamesOverview } from "./GamesOverview";
 import { PlayerHome } from "./PlayerHome";
 import { StartScreen } from "./StartScreen";
 import { LoadGameForm } from "./LoadGameForm";
+import { DebugUI } from "./DebugUI";
 
 export const mainAppSettings = {
     "el": "#app",
@@ -27,6 +28,7 @@ export const mainAppSettings = {
         "player-home": PlayerHome,
         "player-end": GameEnd,
         "games-overview": GamesOverview,
+        "debug-ui": DebugUI,
     },
     "methods": {
         setVisibilityState: function (targetVar: string, isVisible: boolean) {
@@ -118,6 +120,8 @@ export const mainAppSettings = {
             app.screen = "create-game-form";
         } else if (currentPathname === "/load") {
             app.screen = "load";
+        } else if (currentPathname === "/debug-ui") {
+            app.screen = "debug-ui";
         } else {
             app.screen = "start-screen";
         }

@@ -1,17 +1,15 @@
 import Vue from "vue";
 
-import { ColonyModel } from '../models/ColonyModel';
-import { ColonyName } from '../colonies/ColonyName';
+import { ColonyModel } from "../models/ColonyModel";
+import { ColonyName } from "../colonies/ColonyName";
 
 export const Colony = Vue.component("colony", {
-    props: [
-        "colony"
-    ],
+    props: ["colony"],
     data: function () {
-      return {
-        PLUTO : ColonyName.PLUTO,
-        GANYMEDE: ColonyName.GANYMEDE
-      };
+        return {
+            PLUTO: ColonyName.PLUTO,
+            GANYMEDE: ColonyName.GANYMEDE,
+        };
     },
     methods: {
         getCubeXPosition: (colony: ColonyModel): number => {
@@ -22,42 +20,43 @@ export const Colony = Vue.component("colony", {
         },
         getCubeYPosition: (colony: ColonyModel): number => {
             if (colony.name === ColonyName.EUROPA) return 145;
-            if (colony.name === ColonyName.MIRANDA || colony.name === ColonyName.PLUTO ) return 180;
-            return 165;
+            if (colony.name === ColonyName.PLUTO) return 194;
+            if (colony.name === ColonyName.MIRANDA) return 180;
+            return 168;
         },
-        getGanymede:(): string => {
-          return ColonyName.GANYMEDE;
+        getGanymede: (): string => {
+            return ColonyName.GANYMEDE;
         },
-        getEuropa:(): string => {
-          return ColonyName.EUROPA;
+        getEuropa: (): string => {
+            return ColonyName.EUROPA;
         },
-        getCeres:(): string => {
-          return ColonyName.CERES;
+        getCeres: (): string => {
+            return ColonyName.CERES;
         },
-        getPluto:(): string => {
-          return ColonyName.PLUTO;
+        getPluto: (): string => {
+            return ColonyName.PLUTO;
         },
-        getEnceladus:(): string => {
-          return ColonyName.ENCELADUS;
+        getEnceladus: (): string => {
+            return ColonyName.ENCELADUS;
         },
-        getIo:(): string => {
-          return ColonyName.IO;
+        getIo: (): string => {
+            return ColonyName.IO;
         },
-        getTriton:(): string => {
-          return ColonyName.TRITON;
+        getTriton: (): string => {
+            return ColonyName.TRITON;
         },
-        getTitan:(): string => {
-          return ColonyName.TITAN;
+        getTitan: (): string => {
+            return ColonyName.TITAN;
         },
-        getLuna:(): string => {
-          return ColonyName.LUNA;
+        getLuna: (): string => {
+            return ColonyName.LUNA;
         },
-        getMiranda:(): string => {
-          return ColonyName.MIRANDA;
-        },        
-        getCallisto:(): string => {
-          return ColonyName.CALLISTO;
-        }
+        getMiranda: (): string => {
+            return ColonyName.MIRANDA;
+        },
+        getCallisto: (): string => {
+            return ColonyName.CALLISTO;
+        },
     },
     template: `
     <div class="filterDiv colony-card colonies" :class="colony.name + '-background'" v-i18n>
@@ -104,8 +103,8 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getCeres()" class="resource steel" style="margin-left:20px;"></div>
       <div v-if="colony.name === getLuna()" class="resource money" style="margin-left:20px;">&nbsp;</div>
       <div v-if="colony.name === getIo()" class="resource heat" style="margin-left:20px;"></div>
-      <div v-if="colony.name === getMiranda()" class="resource animal" style="margin-left:20px;margin-top:-10px;"></div>
-      <div v-if="colony.name === getPluto()" class="resource card" style="margin-left:20px;transform: scale(0.8);margin-top:-10px;"></div>
+      <div v-if="colony.name === getMiranda()" class="resource animal" style="margin-left:20px;"></div>
+      <div v-if="colony.name === getPluto()" class="resource card" style="margin-left:20px;transform: scale(0.8);"></div>
       <div v-if="colony.name !== getEuropa()" class="white-x"></div>
       <span v-if="colony.name !== getEuropa()" class="colony-background-color">
         Trade Income
@@ -361,5 +360,5 @@ export const Colony = Vue.component("colony", {
 
   </div>
 </div>
-    `
+    `,
 });

@@ -2940,7 +2940,7 @@ export const HTML_DATA: Map<string, string> =
           <div class="tag tag1 tag-building "></div>
       <div class="card-number">187</div>
           <div class="content ">
-              <div class=" money resource ">8</div> (<span class="steel " style="margin:0px;padding:2px;padding-top:3px;border-radius:5px; "></span>)
+              <div class=" money resource ">8</div> (<span class="steel resource"></span>)
               <span class="red-arrow "></span> <div class="ocean-tile tile "></div>
               <div class="description ">
                 (Action: Spend 8 MC to place 1 ocean tile. STEEL MAY BE USED as if you were playing a Building card.)

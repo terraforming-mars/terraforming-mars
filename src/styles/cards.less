@@ -141,23 +141,20 @@ input[type=radio]:checked + .filterDiv::after {
 
 .price {
   float: left;
-  color: black;
   font-family: Prototype;
   font-size: 26px;
-  border-top: 2px solid rgb(221,221,221);
-  border-left: 2px solid rgb(221,221,221);
-  border-bottom: 2px solid rgb(137,137,137);
-  border-right: 2px solid rgb(137,137,137);
-  background: rgb(255,228,4);
-  background: linear-gradient(rgb(255,208,4),rgb(255,255,104),rgb(255,208,4),rgb(255,208,4));
-  width: 44px;
-  height: 44px;
-  line-height: 44px;
+  width: 50px;
+  height: 50px;
+  line-height: 48px;
   border-radius: 10px;
   text-align: center;
-  margin-top: -76px;
-  margin-left: -7px;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
+  margin-top: -77px;
+  margin-left: -10px;
+  background-image: url(./assets/resources/megacredit.png);
+  background-size: 50px;
+  filter: drop-shadow(0px 0px 1px black);
+  font-family: Prototype;
+  color: #000;
 }
 
 .number {
@@ -356,8 +353,8 @@ input[type=radio]:checked + .filterDiv::after {
   position: absolute;
   width: 40px;
   height: 40px;
-  background-size: 42px 42px;
-  background-position: -1px -1px;
+  background-size: 50px;
+  background-position: -5px;
   text-align: center;
   border-radius: 50%;
   border-top: 2px solid rgb(221,221,221);
@@ -366,6 +363,7 @@ input[type=radio]:checked + .filterDiv::after {
   border-right: 2px solid rgb(137,137,137);
   background-color: white;
   margin-top: -6px;
+  filter: brightness(0.9);
 }
 
 .tag1 {
@@ -389,10 +387,9 @@ input[type=radio]:checked + .filterDiv::after {
   margin-top: 36px;
   margin-left: -1px;
   width: 100%;
-  border: 1px solid black;
-  border-radius: 4px;
+  border-bottom: 2px solid rgba(0,0,0,0.2);
+  border-radius: 0 0 30% 30%;
   line-height: 30px;
-  text-align: center;
   font-size: 16px;
   text-align: center;
   font-weight: bold;
@@ -418,43 +415,49 @@ input[type=radio]:checked + .filterDiv::after {
   cursor: pointer;
 }
 /*********** Background colors************/
-.background-color-corporation { background-color: rgb(255,204,100);}
+.background-color-corporation { background:linear-gradient(-60deg, rgb(255,204,100) 10%, rgba(255,204,100,.4), rgb(255,204,100) 90%)}
 
-.background-color-automated { background: #09aa09;}
+.background-color-automated { background:linear-gradient(-60deg,  #089108 10%,  #08910888,  #089108 90%)}
 
-.background-color-active { background: #3b9ae3;}
+.background-color-active { background: linear-gradient(-60deg,  #208cdf 10%,  #208cdf88,  #208cdf 90%);}
 
-.background-color-events {background:#ee792b;}
+.background-color-events {background: linear-gradient(-60deg, #ec6a13 10%, #ec6a1388, #ec6a13 90%)}
 
-.background-color-prelude { background-color: rgb(235,118,171);}
+.background-color-prelude { background:linear-gradient(-60deg, rgb(235,118,171) 10%, rgba(235,118,171,0.6), rgb(235,118,171) 90%)}
 
-.background-color-colony { background-color: rgb(158,145,128);}
+.background-color-colony { background:linear-gradient(-60deg, rgb(158,145,128) 10%, rgba(158,145,128,0.6), rgb(158,145,128) 90%)}
 
-.background-color-global { background-color: #fff;}
+.background-color-global { background: linear-gradient(-60deg, #43afa5 10%, #43afa588, #43afa5 90%);}
+
 
 
 /*********** Style the tags ************/
-.tag-wild {background-image: url("./assets/tag-wild.png")}
-.tag-building {background-image: url("./assets/tag-building.png")}
-.tag-space {background-image: url("./assets/tag-space.png")}
-.tag-power {background-image: url("./assets/tag-power.png")}
-.tag-jovian {background-image: url("./assets/tag-jovian.png")}
-.tag-venus {background-image: url("./assets/tag-venus.png")}
-.tag-earth { background-image: url("./assets/tag-earth.png");}
-.tag-city { background-image: url("./assets/tag-city.png");}
-.tag-microbe {background-image: url("./assets/tag-microbe.png")}
-.tag-plant {background-image: url("./assets/tag-plant.png")}
-.tag-animal {background-image: url("./assets/tag-animal.png")}
-.tag-event {background-image: url("./assets/tag-event.png")}
-.tag-science {background-image: url("./assets/tag-science.png")}
-.tag-none {background-image: url("./assets/tag-none.png")}
-.tag-tr {background-image: url("./assets/tag-tr.png")}
+.tag-wild {background-image: url("../assets/tags/wild.png")}
+.tag-building {background-image: url("./assets/tags/building.png");}
+.tag-space {background-image: url("./assets/tags/space.png");}
+.tag-power {background-image: url("./assets/tags/power.png");}
+.tag-jovian {background-image: url("./assets/tags/jovian.png");}
+.tag-venus {background-image: url("./assets/tags/venus.png");}
+.tag-earth { background-image: url("./assets/tags/earth.png");}
+.tag-city { background-image: url("./assets/tags/city.png");}
+.tag-microbe {background-image: url("./assets/tags/microbe.png");}
+.tag-plant {background-image: url("./assets/tags/plant.png");}
+.tag-animal {background-image: url("./assets/tags/animal.png");}
+.tag-event {background-image: url("./assets/tags/event.png");  }
+.tag-science {background-image: url("./assets/tags/science.png");}
+.tag-none {background-image: url("./assets/tags/tag-none.png");}
 .tag-cards {
   background-image: url("./assets/preferences_cards.png"); 
   background-color: black !important;
 }
 .tag-vp {
   background-image: url(./assets/icon_vp.png);
+}
+.tag-tr {
+  background-image: url(assets/resources/tr.png);
+  background-image: url(assets/resources/tr.png);
+  background-size: 43px 38px !important;
+  background-position: -4px -2px !important;
 }
 .tag-city-count {
   background: url(assets/icon_city.png) center no-repeat;
@@ -518,6 +521,7 @@ input[type=radio]:checked + .filterDiv::after {
   font-weight: bold;
   font-size: 15px;
   box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
+  font-family: Ubuntu;
 }
 
 .requirements-max {
@@ -592,13 +596,14 @@ input[type=radio]:checked + .filterDiv::after {
   border-bottom: 2px solid rgb(137,137,137);
   border-right: 2px solid rgb(137,137,137);
   box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
-  background-color: rgb(128, 87, 0);
-  background: linear-gradient(to bottom left,rgb(162,113,71),rgb(128, 87, 0), rgb(162,113,71), rgb(128, 87, 0), rgb(162,113,71), rgb(128, 87, 0), rgb(162,113,71), rgb(128, 87, 0), rgb(162,113,71), rgb(128, 87, 0), rgb(162,113,71), rgb(128, 87, 0), rgb(162,113,71), rgb(128, 87, 0), rgb(162,113,71));
   padding-top: 4px;
-  padding-bottom: 4px;
   text-align: center;
   margin-bottom: 10px;
   margin-top: 2px;
+  padding-bottom: 4px;
+  line-height: 32px;
+  background-image: url(./assets/misc/production.png);
+  background-size: 120px;
 }
 
 .production-box-size1a {
@@ -632,13 +637,13 @@ input[type=radio]:checked + .filterDiv::after {
 .production {
   display: inline-block;
   position: relative;
-  width: 28px;
-  height: 25px;
-  line-height: 25px;
-  margin: 3px;
+  width: 30px;
+  height: 30px;
+  background-size: 30px;
+  line-height: 30px;
+  margin: 2px;
   text-align: center;
-  border-radius: 2px;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
+  vertical-align: bottom;
 }
 
 .production-prefix {
@@ -668,160 +673,140 @@ input[type=radio]:checked + .filterDiv::after {
 }
 
 .red-outline {
-  border: 2px solid red !important;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3), inset 0 0 0px 1px #444 !important;
+  filter: drop-shadow(1px 0px 1px #c33) drop-shadow(-1px 0px 1px #c33) 
+    drop-shadow(0px 1px 1px #c33) drop-shadow(0px -1px 1px #c33) !important;
 }
 
 /************** Tiles**************/
 .tile {
   position: relative;
+  vertical-align: middle;
   display: inline-block;
   width: 40px;
+  height: 46px;
+  background-size: 40px 46px;
   line-height: 16px;
   text-align: center;
   margin-bottom: 10px;
   margin-left: 5px;
   margin-right: 5px;
   margin-top: 5px;
-  border-style: outset;
-  border-radius: 5px;
-  padding: 5px;
-  padding-top: 10px;
-  padding-bottom: 12px;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
+  filter: drop-shadow(0px 0px 1px black);
+  background-image: url(./assets/tiles/empty.png);
 }
 
 .temperature-tile {
-  background:linear-gradient(#ff4d4d,#ff4d4d,#2d56d2);
-  font-size: 26px;
-  line-height: 26px;
-  font-weight: normal;
-  padding-top: 7px;
-  padding-bottom:11px;
-  width: 30px;
-  text-align: center;
-}
+background-image: url(./assets/global-parameters/temperature.png);
+width: 14px;
+background-size: 14px 46px;
 
-.temperature-tile:after {
-    content: "\1f321\FE0E ";
 }
 
 .greenery-tile {
-  background: linear-gradient(#0bda0b,#09aa09,#09aa09);
-  color: darkgreen;
-  line-height:24px;
-  vertical-align:middle;
-  font-size: 30px;
-}
-
-.greenery-tile:after {
-  content: "\1F333";
+background-image: url(./assets/tiles/greenery.png);
+background-size: 50px 46px;
+width: 50px;
 }
 
 .ocean-tile {
-  background: linear-gradient(#3b9ae3,#1970b3);
-  padding-top: 14px;
-  padding-bottom: 14px;
-  color: rgb(46,87,143);
-  font-size: 20px;
-}
-
-.ocean-tile:after {
-    content: "\1f4a7\FE0E";
+background-image: url(./assets/tiles/ocean.png);
 }
 
 .ocean-resource {
-  background: linear-gradient(#3b9ae3,#1970b3);
-  color: rgb(46,87,143);
-  padding: 2px;
-}
-
-.ocean-resource:after {
-  content: "\1f4a7\FE0E";
+background-image: url(./assets/tiles/ocean.png);
+width: 30px !important;
+height: 32px !important;
+background-size: 30px 32px !important;
+vertical-align: middle !important;
+box-shadow: none !important;
+background-repeat: no-repeat;
 }
 
 .city-tile {
-  background-color: rgb(190,190,190);
-  color: rgb(50,50,50);
-  font-weight: normal;
-}
-
-.city-tile:before {
-  content: "\1f3d9\FE0E";
-  font-size: 26px;
-  display: inline-block;
-  -webkit-transform: scale(1.6,1); /* Safari and Chrome */
-  -moz-transform: scale(1.6,1); /* Firefox */
-  -ms-transform: scale(1.6,1); /* IE 9 */
-  -o-transform: scale(1.6,1); /* Opera */
-  transform: scale(1.6,1); /* W3C */
+background-image: url(./assets/tiles/city.png);
+filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0,0,0,.5));
 }
 
 .city-tile-small {
-  background-color: rgb(190,190,190);
-  color: rgb(50,50,50);
-  font-weight: normal;
-  vertical-align: middle;
-  width:20px;
-  padding:5px;
-  padding-top: 3px;
+background-image: url(./assets/tiles/city.png);
+filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0,0,0,.5));
+width: 30px;
+height: 32px;
+background-size: 30px 32px;
 }
 
-.city-tile-small:before {
-  content: "\1f3d9\FE0E";
-  font-size: 16px;
-  display: inline-block;
-  -webkit-transform: scale(1.6,1); /* Safari and Chrome */
-  -moz-transform: scale(1.6,1); /* Firefox */
-  -ms-transform: scale(1.6,1); /* IE 9 */
-  -o-transform: scale(1.6,1); /* Opera */
-  transform: scale(1.6,1); /* W3C */
+.empty-tile-small {
+  background-image: url(./assets/tiles/empty.png);
+  width: 30px;
+  height: 32px;
+  background-size: 30px 32px;
 }
 
 
 .special-tile {
-  background:linear-gradient(#c5936d,#a46c41);
+  background-image: url(./assets/tiles/special.png);
   color: rgb(73,54,40);
-  padding-top:15px;
-  padding-bottom: 15px;
-  width: 40px;
   font-size: 30px;
   font-weight: bold;
+  line-height: 44px;
 }
 
 .oxygen-tile {
-  background-color: rgb(246,241,175);
-  color: #cc3333;
-  font-size: 24px;
-  width: 30px;
+background-image: url(./assets/global-parameters/oxygen.png);
+width: 46px;
+background-size: 46px;
 }
-
-.oxygen-tile:after {
-  content: "O\2082\FE0E";
-  font-family: Prototype;
-  font-weight: normal;
-}
-
 
 .venus-tile {
-  background-color: rgb(255,204,100);
-  background: linear-gradient(to right, #b36b00,#e28c22,rgb(255,204,100),yellow,yellow,#cccc33, #80cc33,#598f24);
-  color:white;
-  padding:3px;
-  padding-top:4px;
-  line-height: 24px;
-  font-size:30px;
-  vertical-align: middle;
-  text-shadow: 0 0 5px black;
-
+background-image: url(./assets/global-parameters/venus.png);
+width: 60px;
+height: 40px;
+background-size: 60px 40px;
 }
 
-.capitol {
-  background: white;
-  margin-left: 20px;
-  font-size: 50px;
-  padding-top: 12px;
-  padding-bottom: 20px;
+.rating {
+background-image: url(./assets/resources/tr.png);
+width: 50px;
+height: 40px;
+background-size: 50px 40px;
+}
+
+.globals-box {
+width: 100px;
+text-shadow: none;
+font-size: 12px;
+font-weight: bold;
+line-height: 17px;
+display: inline-block;
+vertical-align: middle;
+padding-top: 5px;
+border-radius: 5px;
+height: 40px;
+background-image: url(./assets/requisites/min_big.png);
+background-size: 114px 60px;
+background-position: -9px -9px;
+}
+
+.colony {
+background-image: url(./assets/tiles/colony.png);
+height: 40px;
+width: 46px;
+background-size: 46px;
+}
+
+.trade {
+background-image: url(./assets/tiles/trade.png);
+height: 40px;
+width: 48px;
+background-size: 48px;
+}
+
+.fleet {
+background-image: url(./assets/tiles/trade.png);
+height: 40px;
+width: 48px;
+background-size: 48px;
+filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0px rgba(0,0,0,0.5));
 }
 
 
@@ -831,16 +816,17 @@ input[type=radio]:checked + .filterDiv::after {
   font-family: Prototype;
   position: relative;
   display: inline-block;
-  text-align: center;
-  line-height: 25px;
   margin-top: 5px;
   margin-left: 3px;
   margin-right: 3px;
   margin-bottom: 10px;
-  border-radius: 3px;
-  font-size: 16px;
-  min-width: 28px;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
+  width: 30px;
+  height: 30px;
+  font-size: 22px;
+  line-height: 30px;
+  background-size: 30px;
+  filter: drop-shadow(0px 0px 1px black);
+  vertical-align: middle;
 }
 
 .resource-tag {
@@ -848,143 +834,90 @@ input[type=radio]:checked + .filterDiv::after {
   display: inline-block;
   text-align: center;
   border-radius: 50%;
-  width: 28px;
-  height: 28px;
-  background-size: 30px 30px;
-  background-position: -1px -1px;
+  width: 30px;
+  height: 30px;
+  background-size: 34px 34px;
+  background-position: -2px -2px;
   line-height: 28px;
   box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
-  border-top: 1px solid rgb(221,221,221);
-  border-left: 1px solid rgb(221,221,221);
-  border-bottom: 1px solid rgb(137,137,137);
-  border-right: 1px solid rgb(137,137,137);
+  vertical-align: middle;
+  margin-bottom: 5px;
+  filter: brightness(0.9);
 }
 
 .resource-tag::after {
   content: "\00A0";
 }
 
+.production-tag {
+  margin-bottom: 2px;
+}
+
 .money {
-  font-family: Prototype;
-  color:black;
-  background-color: rgb(255,228,4);
-  background: linear-gradient(rgb(255,208,4),rgb(255,255,104),rgb(255,208,4),rgb(255,208,4));
-  font-weight: normal;
-  font-size: 18px;
-  height: 26px;
-  border-radius: 5px;
+    font-family: Prototype;
+    color:black;
+    background-image: url(./assets/resources/megacredit.png);
+    font-weight: normal;
+    font-size: 18px;
+    text-align: center;
 }
 
 .steel {
-  background: linear-gradient(rgb(162,113,71),#593e27);
-  color: rgb(73,54,40);
-}
-
-.steel:after {
-  content: "\2692";
-  font-size: 20px;
+  background-image: url(./assets/resources/steel.png);
 }
 
 .titanium {
-  background: linear-gradient(#555555,black);
-  color: yellow;
-}
-
-.titanium:after {
-  content: "\2606\FE0E";
-  font-weight: normal;
-  font-size: 20px;
+  background-image: url(./assets/resources/titanium.png);
 }
 
 .plant {
-  background: linear-gradient(#0bda0b,#09aa09);
-  color: rgb(63,112,58);
-  font-weight: normal;
+  background-image: url(./assets/resources/plant.png);
 }
-
-.plant:before {
-  content: "\1F331\FE0E";
-  font-size: 18px;
-}
-
 .energy {
-  background: linear-gradient(#cf66ff,rgb(174,0,255));
-  color: white;
-  text-shadow: 0 0 3px black;
-  font-weight: bold;
-  font-size: 18px;
+  background-image: url(./assets/resources/power.png);
 }
-
-.energy:after {
-  content: "\26A1\FE0E";
-}
-
-
 
 .heat {
-  background:#f25540;
+  background-image: url(./assets/resources/heat.png);
 }
-
-.heat:after {
-  font-family: Arial;
-  content: "III";
-  color: yellow;
-  font-size: 18px;
-}
-
 
 .microbe {
-  background: linear-gradient(#bce444, #8cb319);
-  color: rgb(63,112,58);
-  font-weight: normal;
-}
+  background-image: url(./assets/resources/microbe.png);
 
-.microbe:before {
-  content: "\2042";
-  font-size: 19px;
 }
-
 .animal {
-  background: linear-gradient(#36862d,#1f4d19);
-  font-weight: normal;
-  color: darkseagreen;
-}
+  background-image: url(./assets/resources/animal.png);
 
-.animal:before {
-  content: "\1F43e\FE0E";
-  font-size: 20px;
 }
-
 .science {
-  display: inline-block;
-  background-color: white;
-  font-size: 26px;
-  font-weight: normal;
+  background-image: url(./assets/resources/science.png);
+}
+
+.floater{
+  background-image: url(./assets/resources/floater.png);
+}
+.wild{
+  background-image: url(./assets/resources/wild.png);
+}
+.fighter {
+  background-image: url(./assets/resources/fighter.png);
+}
+.asteroid {
+  background-image: url(./assets/resources/asteroid.png);
+}
+.pristar {
+  background-image: url(./assets/resources/pristar.png);
+} 
+
+.card {
+  background: url("./assets/resources/card.png");
+  height: 40px;
+  width: 30px;
+  background-size: 30px 40px;
   vertical-align: middle;
 }
 
-.science:after {
-    content: "\269b";
-    text-shadow: none;
-  }
 
-.card {
-  position: relative;
-  background-color: rgb(44,44,44);
-  background: linear-gradient(to right, black, rgb(60,60,60), rgb(150,150,150), rgb(60,60,60), rgb(60,60,60),black);
-  color: white;
-  font-weight: bold;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 3px;
-  padding-right: 3px;
-  border-radius: 2px;
-  box-shadow: 0 1px 1px 1px rgba(0,0,0,1);
-}
-.card:after, .card-footer:after {
-  content: "\1F30F\FE0E";
-  font-size: 20px;
-}
 
 .card-icon {
   position: absolute;
@@ -1054,7 +987,7 @@ input[type=radio]:checked + .filterDiv::after {
 }
 
 .card-icon-jovian {
-  background: url("images/tag-jovian.png");
+  background: url("./assets/resources/tag-jovian.png");
   border-radius: 50%;
   margin-top: -10px;
   box-shadow: 0 0 1px black;
@@ -1140,16 +1073,6 @@ input[type=radio]:checked + .filterDiv::after {
   font-weight: normal;
 }
 
-.floater{
-  background: rgb(255,204,100);
-  color:white;
-  text-shadow: 0 1px 1px black, -1px 0 1px black, 1px 0 1px black, 0 -1px 1px black;
-}
-
-.floater:after {
-  content: "\2601";
-}
-
 .asteroid {
     background:black;
     color:#bbb;
@@ -1188,31 +1111,39 @@ input[type=radio]:checked + .filterDiv::after {
   box-shadow: 0 2px 2px 1px rgba(0,0,0,.8);
 }
 
-.rating {
-  background-color: rgb(240,100,00);
-  background: linear-gradient(orange, orangered);
-  font-size: 28px;
-  font-weight: normal;
-  padding-bottom: 7px;
-  padding-left: 5px;
-  vertical-align: middle;
-}
-
-.rating:after {
-  content: "\1F30F\FE0E";
-}
-
 /************** Extras ************/
 .red-arrow {
+  background-image: url(./assets/misc/arrow.png);
+  background-size: 30px;
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
   display: inline-block;
-  font-size: 16px;
-  width:20px;
+  margin-bottom: 5px;
+  background-repeat: no-repeat;
+  background-position: 0px;
 }
 
-.red-arrow:before {
-  position: relative;
-  color: red;
-  content: "\27a1";
+.plus {
+  background-image: url(/assetss/misc/plus.png);
+  background-size: 15px;
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+  display: inline-block;
+  margin-bottom: 5px;
+  background-repeat: no-repeat;
+}
+
+.minus {
+  background-image: url(/assetss/misc/minus.png);
+  background-size: 15px;
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+  display: inline-block;
+  margin-bottom: 4px;
+  background-repeat: no-repeat;
 }
 
 .triangle {
@@ -1286,18 +1217,14 @@ input[type=radio]:checked + .filterDiv::after {
 
 .corporationEffectBox {
   position: absolute;
-  border-top: 2px solid rgb(221,221,221);
-  border-left: 2px solid rgb(221,221,221);
-  border-bottom: 2px solid rgb(137,137,137);
-  border-right: 2px solid rgb(137,137,137);
   height: 130px;
-  width: 212px;
+  width: 216px;
   margin-top: 160px;
   padding: 3px;
   border-radius: 10px;
   text-align: center;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
-  background: linear-gradient(to bottom right, #cccccc,#919191, #dddddd,#cccccc,#aaaaaa,#cacaca, #919191,#cccccc);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(to bottom right, #cccccc, #919191, #dddddd, #cccccc, #aaaaaa, #cacaca, #919191, #cccccc);
 }
 .corporationEffectBox.hover-hide-res {
   &:hover {
@@ -1700,7 +1627,7 @@ input[type=radio]:checked + .filterDiv::after {
   }
 
   .corporationEffectBox {
-    height:150px;
+    height:155px;
     margin-top:10px;
 
     .description {
@@ -1927,6 +1854,10 @@ input[type=radio]:checked + .filterDiv::after {
     line-height: 0;
 }
 
+.card-content-requirements {
+  margin-bottom: 15px;
+}
+
 
 .card-beginner-corporation {
 
@@ -1958,12 +1889,35 @@ input[type=radio]:checked + .filterDiv::after {
 
 .restricted-area-tile {
   width: 38px;
-  background: url(assets/cancel38x38.png) 0 0 no-repeat;	
   height: 38px;
+  background: url(assets/cancel38x38.png) 0 0 no-repeat;
+  transform: scale(.6);
+  margin: 4px 0 0 1px;
 }
+
 .little-green-men {
   position: absolute;
   z-index: 1000;
   top: 100px;
   left: 70px;
+}
+
+.card-domed-crater {
+  .content {
+    .description {
+      width: 155px;
+      line-height: 11px;
+      margin-top: -5px;
+    }
+
+    .points {
+      width: 55px;
+      margin-left: 163px;
+    }
+
+    .city-tile {
+      margin-top: 20px;
+      vertical-align: top;
+    }
+  }
 }

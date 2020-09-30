@@ -16,13 +16,19 @@ export const Colony = Vue.component("colony", {
             return colony.trackPosition * 56 + 27;
         },
         getColonyXPosition: (index: number): number => {
-            return index * 56 + 27;
+            let offset: number = 5;
+            return index * 56 + 27 + offset;
         },
-        getCubeYPosition: (colony: ColonyModel): number => {
-            if (colony.name === ColonyName.EUROPA) return 150;
-            if (colony.name === ColonyName.PLUTO) return 169;
-            if (colony.name === ColonyName.MIRANDA) return 180;
-            return 168;
+        getCubeYPosition: (
+            colony: ColonyModel,
+            isColonyCube: boolean
+        ): number => {
+            let offset: number = 0;
+            if (isColonyCube !== true) offset = 7;
+            if (colony.name === ColonyName.EUROPA) return 150 + offset;
+            if (colony.name === ColonyName.PLUTO) return 169 + offset;
+            if (colony.name === ColonyName.MIRANDA) return 180 + offset;
+            return 168 + offset;
         },
         getGanymede: (): string => {
             return ColonyName.GANYMEDE;
@@ -58,7 +64,11 @@ export const Colony = Vue.component("colony", {
             return ColonyName.CALLISTO;
         },
         getColonyContentOffset: (colony: ColonyModel): number => {
-            if (colony.name === ColonyName.PLUTO) return -12;
+            if (
+                colony.name === ColonyName.PLUTO ||
+                colony.name === ColonyName.MIRANDA
+            )
+                return -12;
             return 0;
         },
     },
@@ -67,7 +77,7 @@ export const Colony = Vue.component("colony", {
     <div v-if="colony.visitor !== undefined" class="colony-spaceship">
       <div :class="'colonies-fleet colonies-fleet-'+ colony.visitor"></div>
     </div>
-    <div v-if="colony.isActive" :style="'margin-left:' + getCubeXPosition(colony) + 'px; margin-top:' + getCubeYPosition(colony) + 'px;'" class="colony_cube"></div>
+    <div v-if="colony.isActive" :style="'margin-left:' + getCubeXPosition(colony, true) + 'px; margin-top:' + getCubeYPosition(colony, true) + 'px;'" class="colony_cube"></div>
     <div v-if="colony.colonies.length > 0" :style="'margin-left: ' + getColonyXPosition(0) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board-cube board-cube--' + colony.colonies[0]"></div>
     <div v-if="colony.colonies.length > 1" :style="'margin-left: ' + getColonyXPosition(1) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board-cube board-cube--' + colony.colonies[1]"></div>
     <div v-if="colony.colonies.length > 2" :style="'margin-left: ' + getColonyXPosition(2) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board-cube board-cube--' + colony.colonies[2]"></div>

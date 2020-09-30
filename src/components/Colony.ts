@@ -132,15 +132,15 @@ export const Colony = Vue.component("colony", {
 
     <div v-if="colony.name === getEnceladus()" class="colony-grid-container">
       <div>
-        <div class="colony-placement-bonus resource microbe white-x white-x--3"></div>
+        <div class="colony-placement-bonus triple-res resource microbe white-x white-x--3"></div>
       </div>
 
       <div>
-        <div class="colony-placement-bonus resource microbe white-x white-x--3"></div>
+        <div class="colony-placement-bonus triple-res resource microbe white-x white-x--3"></div>
       </div>
 
       <div>
-        <div class="colony-placement-bonus resource microbe white-x white-x--3"></div>
+        <div class="colony-placement-bonus triple-res resource microbe white-x white-x--3"></div>
       </div>
 
       <div></div>
@@ -264,15 +264,15 @@ export const Colony = Vue.component("colony", {
 
     <div v-if="colony.name === getTriton()" class="colony-grid-container">
       <div>
-        <div class="colony-placement-bonus resource titanium white-x white-x--3"></div>
+        <div class="colony-placement-bonus resource triple-res titanium white-x white-x--3"></div>
       </div>
 
       <div>
-        <div class="colony-placement-bonus resource titanium white-x white-x--3"></div>
+        <div class="colony-placement-bonus resource triple-res titanium white-x white-x--3"></div>
       </div>
 
       <div>
-        <div class="colony-placement-bonus resource titanium white-x white-x--3"></div>
+        <div class="colony-placement-bonus resource triple-res titanium white-x white-x--3"></div>
       </div>
       <div></div>
       <div></div>
@@ -348,15 +348,15 @@ export const Colony = Vue.component("colony", {
 
   <div v-if="colony.name === getTitan()" class="colony-grid-container">
     <div>
-      <div class="colony-placement-bonus resource floater white-x white-x--3"></div>
+      <div class="colony-placement-bonus triple-res resource floater white-x white-x--3"></div>
     </div>
 
     <div>
-      <div class="colony-placement-bonus resource floater white-x white-x--3"></div>
+      <div class="colony-placement-bonus triple-res resource floater white-x white-x--3"></div>
     </div>
 
     <div>
-      <div class="colony-placement-bonus resource floater white-x white-x--3"></div>
+      <div class="colony-placement-bonus triple-res resource floater white-x white-x--3"></div>
     </div>
     <div></div>
     <div></div>

@@ -14,7 +14,6 @@ export class MiningGuild implements CorporationCard {
     public onTilePlaced(player: Player, space: ISpace) {
         if (
             player.isCorporation(this.name)
-            && space.player === player
             && (space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1)) {
             player.setProduction(Resources.STEEL);
         }

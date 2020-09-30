@@ -1,7 +1,6 @@
 import { expect } from "chai";
 import { AresSpaceBonus } from "../../src/ares/AresSpaceBonus";
-import { BoardName } from "../../src/BoardName";
-import { Game, GameOptions } from "../../src/Game";
+import { Game } from "../../src/Game";
 import { Player } from "../../src/Player";
 import { Resources } from "../../src/Resources";
 import { SpaceBonus } from "../../src/SpaceBonus";
@@ -15,12 +14,12 @@ export const ARES_OPTIONS_NO_HAZARDS = setCustomGameOptions({
     aresHazards: false,
 });
 
-  export const ARES_OPTIONS_WITH_HAZARDS = setCustomGameOptions({
+export const ARES_OPTIONS_WITH_HAZARDS = setCustomGameOptions({
     aresExtension: true,
     aresHazards: true,
 });
 
-  export const ALL_ADJACENCY_BONUSES = [
+export const ALL_ADJACENCY_BONUSES = [
     SpaceBonus.TITANIUM,
     SpaceBonus.STEEL,
     SpaceBonus.PLANT,
@@ -30,8 +29,9 @@ export const ARES_OPTIONS_NO_HAZARDS = setCustomGameOptions({
     AresSpaceBonus.MEGACREDITS,
     AresSpaceBonus.MICROBE,
     AresSpaceBonus.POWER
-  ]
-  export class AresTestHelper {
+]
+
+export class AresTestHelper {
 
     // provides shared testing between Ecological Survey and Geological Survey
     public static testSurveyBonus(game: Game, player: Player, bonus: SpaceBonus | AresSpaceBonus, expectedMc: number) {
@@ -110,4 +110,4 @@ export const ARES_OPTIONS_NO_HAZARDS = setCustomGameOptions({
       return map;
     }
 
-  }
+}

@@ -1,5 +1,3 @@
-// Simple sanity test for the moment.
-
 import { expect } from "chai";
 import { AresHandler } from "../../src/ares/AresHandler";
 import { SpaceBonus } from "../../src/SpaceBonus";
@@ -16,6 +14,7 @@ import { Resources } from "../../src/Resources";
 import { SelectProductionToLoseInterrupt } from "../../src/interrupts/SelectProductionToLoseInterrupt";
 import { SelectProductionToLose } from "../../src/inputs/SelectProductionToLose";
 import { IProductionUnits } from "../../src/inputs/IProductionUnits";
+import { OriginalBoard } from "../../src/OriginalBoard";
 
 describe("AresHandler", function () {
     let player : Player, otherPlayer: Player, game : Game;
@@ -299,5 +298,22 @@ describe("AresHandler", function () {
         tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
         expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(0);
         expect(tiles.get(TileType.EROSION_SEVERE)).has.lengthOf(2);
+    });
+
+    it("Placing on top of an ocean doesn't regrant bonuses", function() {
+        game.board = new OriginalBoard();
+        var space = game.board.getSpaces(SpaceType.OCEAN).find(space => {
+             return space.bonus.length > 0 && space.bonus[0] === SpaceBonus.PLANT;
+        })!;
+        var spaceId = space.id;
+        expect(otherPlayer.plants).eq(0);
+        expect(player.plants).eq(0);
+
+        game.addOceanTile(otherPlayer, spaceId);
+        // Placing an Ocean City on top of the ocean will not grant player plants.
+        game.addTile(player, SpaceType.OCEAN, space, { tileType: TileType.OCEAN_CITY });
+
+        expect(otherPlayer.plants).greaterThan(0);
+        expect(player.plants).eq(0);
     });
 });

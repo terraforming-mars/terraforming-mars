@@ -7,7 +7,7 @@ import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
 import { SpaceType } from "../../../src/SpaceType";
 import { TileType } from "../../../src/TileType";
-import { ALL_ADJACENCY_BONUSES, AresTestHelper, ARES_GAME_OPTIONS } from "../../ares/AresTestHelper";
+import { ALL_ADJACENCY_BONUSES, AresTestHelper, ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
 import { EmptyBoard } from "../../ares/EmptyBoard";
 
 describe("GeologicalSurvey", function () {
@@ -16,7 +16,7 @@ describe("GeologicalSurvey", function () {
   beforeEach(function() {
     card = new GeologicalSurvey();
     player = new Player("test", Color.BLUE, false);
-    game = new Game("foobar", [player, player], player, ARES_GAME_OPTIONS);
+    game = new Game("foobar", [player, player], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = new EmptyBoard();
   });
 

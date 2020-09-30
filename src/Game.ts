@@ -1590,7 +1590,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         if (arcadianCommunityBonus) {
           player.megaCredits += 3;
         }
-    }
+      }
 
       this.players.forEach((p) => {
         if (p.corporationCard !== undefined &&
@@ -1608,6 +1608,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Must occur after all other onTilePlaced operations.
       if (this.gameOptions.aresExtension) {
+        // Erasing the bonus means that overplacing doesn't regrant the bonus, or, for instance, make hazard spaces
+        // available for Mining Area or Solar Farm.
+        space.bonus = [];
         AresHandler.afterTilePlacement(this, player, startingResources);
       }
     }
@@ -1941,7 +1944,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       if (this.gameOptions.aresExtension) {
         this.aresData = d.aresData;
+        // Spaces with tiles no longer have the underlying bonuses. If there's overplacement, erasing them
+        // won't regrant them, nor will they be avialable for options like Mining Area.
+        this.board.spaces.forEach(space => {
+          if (space.tile !== undefined) {
+            space.bonus = [];
+          }
+        });
       }
+
       // Reload colonies elements if needed
       if (this.gameOptions.coloniesExtension) {
         this.colonyDealer = new ColonyDealer();

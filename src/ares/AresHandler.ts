@@ -258,7 +258,7 @@ export class AresHandler {
       return map;
     }
 
-    // Used with Ecological  and Geological Survey
+    // Used with Ecological and Geological Survey
     public static afterTilePlacement(game: Game, player: Player, startingResources?: Map<Resources | ResourceType, number>): void {
         if (!startingResources) {
             return;
@@ -450,7 +450,7 @@ function testToPlaceErosionTiles(game: Game, player: Player) {
         game.board.getOceansOnBoard(),
         () => {
             let type = TileType.EROSION_MILD;
-            if (game.aresData!.hazardData.severeErosionTemperature === undefined) {
+            if (game.aresData!.hazardData.severeErosionTemperature.available !== true) {
                 type = TileType.EROSION_SEVERE;
             }
 

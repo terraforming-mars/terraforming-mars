@@ -3,7 +3,7 @@ import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
 import { expect } from "chai";
-import { ALL_ADJACENCY_BONUSES, ARES_GAME_OPTIONS, AresTestHelper } from "../../ares/AresTestHelper";
+import { ALL_ADJACENCY_BONUSES, ARES_OPTIONS_NO_HAZARDS, AresTestHelper } from "../../ares/AresTestHelper";
 import { TileType } from "../../../src/TileType";
 import { Ants } from "../../../src/cards/Ants";
 import { Pets } from "../../../src/cards/Pets";
@@ -15,7 +15,7 @@ describe("EcologicalSurvey", function () {
   beforeEach(function() {
     card = new EcologicalSurvey();
     player = new Player("test", Color.BLUE, false);
-    game = new Game("foobar", [player, player], player, ARES_GAME_OPTIONS);
+    game = new Game("foobar", [player, player], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = new EmptyBoard();
   });
 

@@ -6,7 +6,7 @@ import { Resources } from "../../../src/Resources";
 import { expect } from "chai";
 import { SpaceType } from "../../../src/SpaceType";
 import { TileType } from "../../../src/TileType";
-import { ARES_GAME_OPTIONS } from "../../ares/AresTestHelper";
+import { ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
 import { SpaceBonus } from "../../../src/SpaceBonus";
 import { EmptyBoard } from "../../ares/EmptyBoard";
 
@@ -17,7 +17,7 @@ describe("MarketingExperts", function () {
     card = new MarketingExperts();
     player = new Player("test", Color.BLUE, false);
     otherPlayer = new Player("other", Color.RED, false);
-    game = new Game("foobar", [player, otherPlayer], player, ARES_GAME_OPTIONS);
+    game = new Game("foobar", [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = new EmptyBoard();
   });
 

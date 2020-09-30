@@ -25,7 +25,7 @@ export const Colony = Vue.component("colony", {
         ): number => {
             let offset: number = 0;
             if (isColonyCube !== true) offset = 7;
-            if (colony.name === ColonyName.EUROPA) return 150 + offset;
+            if (colony.name === ColonyName.EUROPA) return 170 + offset;
             if (colony.name === ColonyName.PLUTO) return 169 + offset;
             if (colony.name === ColonyName.MIRANDA) return 180 + offset;
             return 168 + offset;
@@ -119,6 +119,7 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getIo()" class="resource heat" style="margin-left:20px;"></div>
       <div v-if="colony.name === getMiranda()" class="resource animal" style="margin-left:20px;"></div>
       <div v-if="colony.name === getPluto()" class="resource card" style="margin-left:20px;transform: scale(0.8);margin-top: -8px;"></div>
+      <div v-if="colony.name === getEuropa()" style="height: 20px; visibility: hidden;display: block;" />
       <div v-if="colony.name !== getEuropa()" class="white-x"></div>
       <span v-if="colony.name !== getEuropa() && colony.name !== getPluto()" class="colony-background-color">
         Trade Income
@@ -126,7 +127,7 @@ export const Colony = Vue.component("colony", {
       <span v-if="colony.name === getPluto()" class="colony-background-color" style="position:relative; top:-3px">
         Trade Income
       </span> 
-      <span v-if="colony.name === getEuropa()" class="colony-background-color" style="margin-left: 3px;">
+      <span v-if="colony.name === getEuropa()" class="colony-background-color" style="margin-left: 3px;position: relative;top: -12px;">
         Trade Income: Gain the indicated production
       </span>
 

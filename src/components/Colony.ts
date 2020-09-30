@@ -13,13 +13,13 @@ export const Colony = Vue.component("colony", {
     },
     methods: {
         getCubeXPosition: (colony: ColonyModel): number => {
-            return colony.trackPosition * 56 + 26;
+            return colony.trackPosition * 56 + 27;
         },
         getColonyXPosition: (index: number): number => {
-            return index * 56 + 26;
+            return index * 56 + 27;
         },
         getCubeYPosition: (colony: ColonyModel): number => {
-            if (colony.name === ColonyName.EUROPA) return 145;
+            if (colony.name === ColonyName.EUROPA) return 150;
             if (colony.name === ColonyName.PLUTO) return 194;
             if (colony.name === ColonyName.MIRANDA) return 180;
             return 168;

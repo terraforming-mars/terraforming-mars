@@ -68,6 +68,19 @@ export const PlayerHome = Vue.component("player-home", {
             }
             return fleetsRange;
         },
+        getGenerationText: function (): string {
+            if (this.player.players.length === 1) {
+                const MAX_GEN = this.player.preludeExtension ? 12 : 14;
+                let retText = "generation " + this.player.generation + " of " + MAX_GEN;
+                if (MAX_GEN === this.player.generation) {
+                    retText = "<span class='last-generation blink-animation'>" + retText + "</span>"
+                }
+
+                return retText
+            }
+
+            return "generation " + this.player.generation;
+        }
     },
     mounted: function () {
         dialogPolyfill.default.registerDialog(
@@ -124,7 +137,10 @@ export const PlayerHome = Vue.component("player-home", {
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace />
                  
                 <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat" v-if="player.gameLog.length > 0">
-                    <h2 :class="'player_color_'+ player.color"><span v-i18n>Game log</span><span class="label-additional">generation {{ player.generation }}</span></h2>
+                    <h2 :class="'player_color_'+ player.color">
+                        <span v-i18n>Game log</span>
+                        <span class="label-additional" v-html="getGenerationText()"></span>
+                    </h2>
                     <log-panel :messages="player.gameLog" :players="player.players"></log-panel>
                 </div>
 

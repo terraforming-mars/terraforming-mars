@@ -756,3 +756,17 @@
 .btn-max {
     margin-top: -4px;
 }
+
+.last-generation {
+    color: red;
+}
+
+@keyframes smoth-fade-animation {
+    from { opacity: 1.0; }
+    50% { opacity: 0.2; }
+    to { opacity: 1.0; }
+}
+
+.blink-animation {
+  animation:smoth-fade-animation 2000ms infinite;
+}

@@ -2940,7 +2940,7 @@ export const HTML_DATA: Map<string, string> =
           <div class="tag tag1 tag-building "></div>
       <div class="card-number">187</div>
           <div class="content ">
-              <div class=" money resource ">8</div> (<span class="steel " style="margin:0px;padding:2px;padding-top:3px;border-radius:5px; "></span>)
+              <div class=" money resource ">8</div> (<span class="steel resource"></span>)
               <span class="red-arrow "></span> <div class="ocean-tile tile "></div>
               <div class="description ">
                 (Action: Spend 8 MC to place 1 ocean tile. STEEL MAY BE USED as if you were playing a Building card.)
@@ -3269,11 +3269,13 @@ export const HTML_DATA: Map<string, string> =
           <div class="card-number">210</div>
           <div class="content ">
             <div class="requirements">2 Science</div>
-            <div class="red-arrow "></div>
-            <div class="resource card"><div class="production" style="position:absolute;background:white;color:black;margin-left:-4px;margin-top:7px;">2</div><div class="card-icon card-icon-space">&#x2734;</div><div class="card-icon card-icon-building" style="margin-left:37px">&#x2617;</div></div>
-            &nbsp;&nbsp;&nbsp;OR&nbsp;&nbsp;&nbsp;
-            <div class="red-arrow "></div>
-            <div class="production" style="background:white;color:black;vertical-align:middle">X</div> x2
+            <div class="nowrap">
+              <div class="red-arrow "></div>
+              <div class="resource card"><div class="cards-count">2</div><div class="card-icon card-icon-space">&#x2734;</div><div class="card-icon card-icon-building" style="margin-left:37px">&#x2617;</div></div>
+              &nbsp;&nbsp;&nbsp;OR&nbsp;&nbsp;&nbsp;
+              <div class="red-arrow "></div>
+              <div class="production" style="background:white;color:black;vertical-align:middle">X</div> x2
+            </div>
             <div class="description">
               (Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.) <br>
               (Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.)<br>
@@ -5197,9 +5199,13 @@ export const HTML_DATA: Map<string, string> =
       <div class="corporationLabel ">CORPORATION</div>
       <div class="contentCorporation ">
           <div class="corporationEffectBox ">
-              <div class="corporationEffectBoxLabel ">EFFECT</div>
-                <div class="tile background-color-corporation" style="width:100px;text-shadow:none;color:black;font-size:11px;padding-top:5px;padding-bottom:5px;">Temp / O2 / Ocean</div>: +/- 2
-              <div class="description " style="text-align:center;margin-top:0px; ">
+              <div class="corporationEffectBoxLabel">EFFECT</div>
+              
+              <div class="corporation-ability">
+                <div class="globals-box">Temp / O2 / Ocean</div>: +/- 2
+              </div>
+              
+              <div class="description ">
                   (Effect: Your temperature, oxygen and ocean requirements are +2 or -2 steps, your choice in each case.)
               </div>
           </div>
@@ -5903,23 +5909,18 @@ export const HTML_DATA: Map<string, string> =
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">ACTION</div>
-          <div style="font-size:10px;line-height:12px;margin-top:-5px;margin-bottom:10px;"><span class="red-arrow"></span>ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS</div>
-          <div class="corporationEffectBoxLabel" style="margin-top:-3px">EFFECT</div>
-            <div style="font-size:10px;line-height:12px;margin-top:-5px;">EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 MC</div>
+          <div class="corporation-action-text"><span class="red-arrow"></span>ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS</div>
+          <div class="corporationEffectBoxLabel">EFFECT</div>
+            <div class="corporation-effect-text">EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 MC</div>
         </div>
-        <div style="font-size:20px;
-        padding-left:3px;width:147px;background:#eeeeee;box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 3px 3px 3px grey;margin-left:10px;border-radius:5px;
-        margin-bottom:4px;
-        border-top: 2px solid rgb(221,221,221);
-        border-left: 2px solid rgb(221,221,221);
-        border-bottom: 2px solid rgb(137,137,137);
-        border-right: 2px solid rgb(137,137,137);">
-                    &nbsp;&nbsp;&nbsp;ARCADIAN <br>COMMUNITIES
-                </div>
-                <div class="resource money" style="margin-left:15px;margin-right:15px;">40</div>
-                10<div class="resource steel" style="margin-right:20px;"></div>
-                <div class="resource" style="background: linear-gradient(orange, orangered);">&nbsp;</div>*
-        <div class="description" style="margin-top:-5px;text-align:center;">(You start with 40 MC and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA.)</div>
+        <div class="corporation-logo">ARCADIAN COMMUNITIES</div>
+
+        <div class="corporation-startswith nowrap">
+          <div class="resource money">40</div>
+          10<div class="resource steel"></div>
+          <div class="resource special">&nbsp;</div>*
+        </div>
+        <div class="description" >(You start with 40 MC and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA.)</div>
       </div>
 `],
 [CardName.BEGINNER_CORPORATION,`
@@ -5939,9 +5940,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
-          <div class="tile empty-tile-small red-outline" style="
-            padding: 6px; margin-right: -3px;
-          "></div><div class="tile empty-tile-small"></div>
+          <div class="tile empty-tile-small red-outline"></div><div class="tile empty-tile-small"></div>
           : <div class="resource" style="background:white;">?</div>
           <div class="description" style="text-align:center;margin-top:0px;">
             (Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice (regardless of who just placed a tile).)
@@ -6055,25 +6054,30 @@ export const HTML_DATA: Map<string, string> =
           <div class="promo-icon corporation-icon"></div>
           <div class="contentCorporation">
             <div class="corporationEffectBox">
-              <div class="corporationEffectBoxLabel" style="margin-bottom:5px">ACTION</div>
-              <div class="red-arrow"></div><div class="production-box">
-                <div class="production energy"></div>
-              </div> * OR
-              <div class="resource money">3</div><div class="red-arrow"></div><div class="resource card">
-                <div class="card-icon card-icon-building" style="margin-top:-17px;">&#x2617;</div>
+              <div class="corporationEffectBoxLabel">ACTION</div>
+
+              <div class="corporation-action-icons nowrap">
+                <div class="red-arrow"></div><div class="production-box">
+                  <div class="production energy"></div>
+                </div> * OR
+                <div class="resource money">3</div><div class="red-arrow"></div><div class="resource card">
+                  <div class="card-icon card-icon-building">&#x2617;</div>
+                </div>
               </div>
-              <div class="description" style="text-align:center;margin-top:0px;">
+
+              <div class="description">
                 (Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.)
               </div>
             </div>
-            <div class="factorum">
-              FACTORUM
+
+            <div class="factorum">FACTORUM</div>
+            <div class="corporation-starts-with">
+              <div class="resource money">37</div>
+              <div class="production-box">
+                <div class="production steel"></div>
+              </div>
             </div>
-            <div class="resource money" style="margin-left:35px;margin-right:20px;margin-top:20px;">37</div>
-            <div class="production-box">
-              <div class="production steel"></div>
-            </div>
-            <div class="description" style="text-align:center;">
+            <div class="description">
               (You start with 37 MC. Increase your steel production 1 step.)
             </div>
           </div>
@@ -6102,17 +6106,17 @@ export const HTML_DATA: Map<string, string> =
       <div class="corporationLabel">CORPORATION</div>
       <div class="promo-icon corporation-icon"></div>
       <div class="contentCorporation">
-        <div class="corporationEffectBox hover-hide-res" style="height:160px;margin-top:130px">
+        <div class="corporationEffectBox hover-hide-res" style="height:165px;margin-top:127px">
           <div class="corporationEffectBoxLabel" >ACTION</div>
-          <div class="red-arrow"></div> <div class="asteroid resource">A</div> * / <div class="resource " style="background:white;">?</div> OR <br>
-          <div class="asteroid resource">A</div><div class="red-arrow"></div> 3 <div class="resource titanium"></div>
+          <div class="red-arrow"></div> <div class="asteroid resource"></div> * / <div class="resource " style="background:white;">?</div> OR <br>
+          <div class="asteroid resource"></div><div class="red-arrow"></div> 3 <div class="resource titanium"></div>
           <div class="description" style="text-align:center;">
             (Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.)<br>
           </div>
         </div>
         <div class="astrodrill">Astrodrill</div>
         <div class="resource money" style="margin:3px 40px 0px 50px">38</div>
-        3 <div class="asteroid resource">A</div>
+        3 <div class="asteroid resource"></div>
         <div class="description" style="text-align:center">
           (You start with 38 MC and 3 asteroid resources.)
         </div>
@@ -6827,7 +6831,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="tag tag1 tag-space"></div>
     <div class="promo-icon project-icon"></div>
     <div class="content">
-        <div class=" money resource">6</div> (<span class="titanium"></span>)
+        <div class=" money resource">6</div> (<span class="titanium resource"></span>)
         <span class="red-arrow"></span>
         <div class="asteroid resource">A</div>*
         <br>

@@ -94,6 +94,19 @@
 .resource-stacked {
     min-width: 20px;
     line-height: 18px;
+    position: absolute;
+
+    &.resource-stacked--1 {
+        margin: -60px 0 0 -15px;
+    }
+
+    &.resource-stacked--2 {
+        margin: -60px 0 0 -15px;
+    }
+
+    &.resource-stacked--3 {
+        margin: -60px 0 0 -15px;
+    }
 }
 
 .ocean-tile-colony {
@@ -122,6 +135,11 @@
     font-weight: bold;
     margin-left: -38px;
     content: "X";
+}
+
+.white-x--3::after {
+    content: "3" !important;
+    margin-left: -30px !important;
 }
 
 .white-char {

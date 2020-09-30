@@ -6,7 +6,7 @@ import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
 import { SpaceType } from "../../../src/SpaceType";
 import { TileType } from "../../../src/TileType";
-import { AresTestHelper, ARES_GAME_OPTIONS } from "../../ares/AresTestHelper";
+import { AresTestHelper, ARES_OPTIONS_NO_HAZARDS } from "../../ares/AresTestHelper";
 
 describe("OceanSanctuary", function () {
   let card : OceanSanctuary, player : Player, otherPlayer: Player, game : Game;
@@ -15,7 +15,7 @@ describe("OceanSanctuary", function () {
     card = new OceanSanctuary();
     player = new Player("test", Color.BLUE, false);
     otherPlayer = new Player("test", Color.RED, false);
-    game = new Game("foobar", [player, otherPlayer], player, ARES_GAME_OPTIONS);
+    game = new Game("foobar", [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
   it("Can play", function () {

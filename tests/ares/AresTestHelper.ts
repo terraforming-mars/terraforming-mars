@@ -9,7 +9,7 @@ import { SpaceType } from "../../src/SpaceType";
 import { TileType } from "../../src/TileType";
 import { ISpace } from "../../src/ISpace";
 
-export const ARES_GAME_OPTIONS: GameOptions = {
+export const ARES_OPTIONS_NO_HAZARDS: GameOptions = {
 
     aresExtension: true,
     aresHazards: false,
@@ -38,6 +38,11 @@ export const ARES_GAME_OPTIONS: GameOptions = {
     soloTR: false,
     clonedGamedId: undefined,
     communityCardsOption: false
+  };
+
+  export const ARES_OPTIONS_WITH_HAZARDS: GameOptions = {
+    ...ARES_OPTIONS_NO_HAZARDS,
+    aresHazards: true,
   };
 
   export const ALL_ADJACENCY_BONUSES = [
@@ -77,4 +82,57 @@ export const ARES_GAME_OPTIONS: GameOptions = {
       game.addOceanTile(player, space.id);
       return space;
     }
+
+    public static getHazards(game: Game): Array<ISpace> {
+      return game.board.getSpaces(SpaceType.LAND).filter(space => space.tile?.hazard === true);
+    }
+
+    public static byTileType(spaces: Array<ISpace>): Map<number, Array<ISpace>> {
+      // Got a better way to initialize this? LMK.
+      var map: Map<number, Array<ISpace>> = new Map([
+        [TileType.GREENERY, []],
+        [TileType.OCEAN, []],
+        [TileType.CITY, []],
+    
+        [TileType.CAPITAL, []],
+        [TileType.COMMERCIAL_DISTRICT, []],
+        [TileType.ECOLOGICAL_ZONE, []],
+        [TileType.INDUSTRIAL_CENTER, []],
+        [TileType.LAVA_FLOWS, []],
+        [TileType.MINING_AREA, []],
+        [TileType.MINING_RIGHTS, []],
+        [TileType.MOHOLE_AREA, []],
+        [TileType.NATURAL_PRESERVE, []],
+        [TileType.NUCLEAR_ZONE, []],
+        [TileType.RESTRICTED_AREA, []],
+    
+        [TileType.DEIMOS_DOWN, []],
+        [TileType.GREAT_DAM, []],
+        [TileType.MAGNETIC_FIELD_GENERATORS, []],
+    
+        [TileType.BIOFERTILIZER_FACILITY, []],
+        [TileType.METALLIC_ASTEROID, []],
+        [TileType.SOLAR_FARM, []],
+        [TileType.OCEAN_CITY, []],
+        [TileType.OCEAN_FARM, []],
+        [TileType.OCEAN_SANCTUARY, []],
+        [TileType.DUST_STORM_MILD, []],
+        [TileType.DUST_STORM_SEVERE, []],
+        [TileType.EROSION_MILD, []],
+        [TileType.EROSION_SEVERE, []],
+        [TileType.MINING_STEEL_BONUS, []],
+        [TileType.MINING_TITANIUM_BONUS, []],
+      ]);
+    
+      spaces.forEach(space => {
+        if (space.tile) {
+          var tileType: TileType = space.tile.tileType;
+          var e = map.get(tileType) || [];
+          e.push(space);
+          map.set(tileType, e);
+        }
+      })
+      return map;
+    }
+
   }

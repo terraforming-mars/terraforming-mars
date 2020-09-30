@@ -2051,7 +2051,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       const temperatureIsMaxed = game.getTemperature() === constants.MAX_TEMPERATURE;
 
-      if (hasEnoughHeat && !temperatureIsMaxed && canAffordReds) {
+      const canAffordRedsForHeatConversion =
+        !redsAreRuling || (!this.isCorporation(CorporationName.HELION) && this.canAfford(REDS_RULING_POLICY_COST)) || this.canAfford(REDS_RULING_POLICY_COST + 8);
+
+      if (hasEnoughHeat && !temperatureIsMaxed && canAffordRedsForHeatConversion) {
         action.options.push(
             this.convertHeatIntoTemperature(game)
         );

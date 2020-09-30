@@ -20,7 +20,7 @@ export const Colony = Vue.component("colony", {
         },
         getCubeYPosition: (colony: ColonyModel): number => {
             if (colony.name === ColonyName.EUROPA) return 150;
-            if (colony.name === ColonyName.PLUTO) return 194;
+            if (colony.name === ColonyName.PLUTO) return 169;
             if (colony.name === ColonyName.MIRANDA) return 180;
             return 168;
         },
@@ -57,6 +57,10 @@ export const Colony = Vue.component("colony", {
         getCallisto: (): string => {
             return ColonyName.CALLISTO;
         },
+        getColonyContentOffset: (colony: ColonyModel): number => {
+            if (colony.name === ColonyName.PLUTO) return -12;
+            return 0;
+        },
     },
     template: `
     <div class="filterDiv colony-card colonies" :class="colony.name + '-background'" v-i18n>
@@ -71,7 +75,7 @@ export const Colony = Vue.component("colony", {
     <div class="colony-card-title-div">
       <span class="colony-card-title-span" :class="colony.name + '-title'">{{colony.name}}</span>
     </div>
-    <div class="colony-content">
+    <div class="colony-content" :style="'margin-top: ' + getColonyContentOffset(colony) + 'px;'">
       <div v-if="colony.name === getGanymede()" class="resource plant"></div>
       <div v-if="colony.name === getEuropa()" class="resource money">1</div>
       <div v-if="colony.name === getTitan()" class="resource floater"></div>
@@ -104,11 +108,14 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getLuna()" class="resource money" style="margin-left:20px;">&nbsp;</div>
       <div v-if="colony.name === getIo()" class="resource heat" style="margin-left:20px;"></div>
       <div v-if="colony.name === getMiranda()" class="resource animal" style="margin-left:20px;"></div>
-      <div v-if="colony.name === getPluto()" class="resource card" style="margin-left:20px;transform: scale(0.8);"></div>
+      <div v-if="colony.name === getPluto()" class="resource card" style="margin-left:20px;transform: scale(0.8);margin-top: -8px;"></div>
       <div v-if="colony.name !== getEuropa()" class="white-x"></div>
-      <span v-if="colony.name !== getEuropa()" class="colony-background-color">
+      <span v-if="colony.name !== getEuropa() && colony.name !== getPluto()" class="colony-background-color">
         Trade Income
       </span>
+      <span v-if="colony.name === getPluto()" class="colony-background-color" style="position:relative; top:-3px">
+        Trade Income
+      </span> 
       <span v-if="colony.name === getEuropa()" class="colony-background-color" style="margin-left: 3px;">
         Trade Income: Gain the indicated production
       </span>

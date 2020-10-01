@@ -210,6 +210,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
       <button class="btn btn-primary" v-on:click="reduceValue('steel', 1)" :class="getCssClassFor('<', 'steel')"><i class="icon icon-minus" /></button>
       <input class="form-input form-inline payments_input" v-model.number="steel" />
       <button class="btn btn-primary" v-on:click="addValue('steel', 1)" :class="getCssClassFor('>', 'steel')"><i class="icon icon-plus" /></button>
+      <button class="btn btn-primary max_button" v-on:click="setMaxValue('steel')">MAX</button>
     </div>
 
     <div class="payments_type input-group" v-if="playerinput.canUseTitanium">
@@ -217,6 +218,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
       <button class="btn btn-primary" v-on:click="reduceValue('titanium', 1)" :class="getCssClassFor('<', 'titanium')"><i class="icon icon-minus" /></button>
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
       <button class="btn btn-primary" v-on:click="addValue('titanium', 1)" :class="getCssClassFor('>', 'titanium')"><i class="icon icon-plus" /></button>
+      <button class="btn btn-primary max_button" v-on:click="setMaxValue('titanium')">MAX</button>
     </div>
 
     <div class="payments_type input-group" v-if="playerinput.canUseHeat">
@@ -224,6 +226,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
       <button class="btn btn-primary" v-on:click="reduceValue('heat', 1)" :class="getCssClassFor('<', 'heat')"><i class="icon icon-minus" /></button>
       <input class="form-input form-inline payments_input" v-model.number="heat" />
       <button class="btn btn-primary" v-on:click="addValue('heat', 1)" :class="getCssClassFor('>', 'heat')"><i class="icon icon-plus" /></button>
+      <button class="btn btn-primary max_button" v-on:click="setMaxValue('heat')">MAX</button>
     </div>
 
     <div class="payments_type input-group">

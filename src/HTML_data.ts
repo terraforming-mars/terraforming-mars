@@ -7559,7 +7559,7 @@ export const HTML_DATA: Map<string, string> =
           <div class="corporationEffectBoxLabel">EFFECT</div>
 
           <div class="description effect">
-            (Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags. Wild tags and non-Event tags on Event cards do not count.)
+            (Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.)
           </div>
         </div>
       </div>

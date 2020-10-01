@@ -26,7 +26,7 @@ export class Philares implements CorporationCard {
             game.log(
               LogMessageType.DEFAULT,
               "${0} placed a Greenery tile",
-              new LogMessageData(LogMessageDataType.PLAYER, player.id)
+              new LogMessageData(LogMessageDataType.PLAYER, player.color)
             );
             
             return undefined;

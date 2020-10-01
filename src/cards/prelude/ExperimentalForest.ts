@@ -24,7 +24,7 @@ export class ExperimentalForest extends PreludeCard implements IProjectCard {
             game.log(
                 LogMessageType.DEFAULT,
                 "${0} drew ${1} and ${2}",
-                new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                new LogMessageData(LogMessageDataType.PLAYER, player.color),
                 new LogMessageData(LogMessageDataType.CARD, drawnCards[0].name),
                 new LogMessageData(LogMessageDataType.CARD, drawnCards[1].name)
             );

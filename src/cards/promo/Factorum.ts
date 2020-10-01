@@ -44,7 +44,7 @@ export class Factorum implements IActionCard, CorporationCard {
             game.log(
                 LogMessageType.DEFAULT,
                 "${0} drew ${1}",
-                new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                new LogMessageData(LogMessageDataType.PLAYER, player.color),
                 new LogMessageData(LogMessageDataType.CARD, drawnCard.name)
             );
 

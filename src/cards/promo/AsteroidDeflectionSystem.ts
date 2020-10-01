@@ -40,7 +40,7 @@ export class AsteroidDeflectionSystem implements IActionCard, IProjectCard, IRes
         game.log(
             LogMessageType.DEFAULT,
             "${0} revealed and discarded ${1}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.PLAYER, player.color),
             new LogMessageData(LogMessageDataType.CARD, topCard.name)
         );
             

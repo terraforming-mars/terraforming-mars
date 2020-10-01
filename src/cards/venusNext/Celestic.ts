@@ -56,7 +56,7 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
             game.log(
                 LogMessageType.DEFAULT,
                 "${0} drew ${1} and ${2}",
-                new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                new LogMessageData(LogMessageDataType.PLAYER, player.color),
                 new LogMessageData(LogMessageDataType.CARD, floaterCards[0]),
                 new LogMessageData(LogMessageDataType.CARD, floaterCards[1])
             );

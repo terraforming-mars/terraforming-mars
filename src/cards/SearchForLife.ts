@@ -41,14 +41,14 @@ export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
             game.log(
                 LogMessageType.DEFAULT,
                 "${0} found life!",
-                new LogMessageData(LogMessageDataType.PLAYER, player.id)
+                new LogMessageData(LogMessageDataType.PLAYER, player.color)
             );
         }
 
         game.log(
             LogMessageType.DEFAULT,
             "${0} revealed and discarded ${1}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.PLAYER, player.color),
             new LogMessageData(LogMessageDataType.CARD, topCard.name)
         );
         

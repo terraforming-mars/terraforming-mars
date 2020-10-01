@@ -65,7 +65,7 @@ export class SelectParty implements PlayerInterrupt {
                 game.log(
                   LogMessageType.DEFAULT,
                   "${0} sent "+ nbr + " delegate(s) in ${1} area",
-                  new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                  new LogMessageData(LogMessageDataType.PLAYER, player.color),
                   new LogMessageData(LogMessageDataType.PARTY, party.name)
                 );
                 return undefined;

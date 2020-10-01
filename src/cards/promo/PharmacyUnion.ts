@@ -33,7 +33,7 @@ export class PharmacyUnion implements CorporationCard {
         game.log(
             LogMessageType.DEFAULT,
             "${0} drew ${1}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.PLAYER, player.color),
             new LogMessageData(LogMessageDataType.CARD, drawnCard.name)
         );
 
@@ -69,7 +69,7 @@ export class PharmacyUnion implements CorporationCard {
             game.log(
                 LogMessageType.DEFAULT,
                 "${0} removed a disease from ${1} to gain 1 TR",
-                new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                new LogMessageData(LogMessageDataType.PLAYER, player.color),
                 new LogMessageData(LogMessageDataType.CARD, this.name)
             );
             this.runInterrupts(player, game, scienceTags - 1);
@@ -87,7 +87,7 @@ export class PharmacyUnion implements CorporationCard {
                         game.log(
                             LogMessageType.DEFAULT,
                             "${0} turned ${1} face down to gain 3 TR",
-                            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                            new LogMessageData(LogMessageDataType.PLAYER, player.color),
                             new LogMessageData(LogMessageDataType.CARD, this.name)
                         );
                         return undefined;

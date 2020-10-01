@@ -338,7 +338,7 @@ export class RoboticWorkforce implements IProjectCard {
                 game.log(
                   LogMessageType.DEFAULT,
                   "${0} copied ${1} production with ${2}",
-                  new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                  new LogMessageData(LogMessageDataType.PLAYER, player.color),
                   new LogMessageData(LogMessageDataType.CARD, result.name),
                   new LogMessageData(LogMessageDataType.CARD, this.name)
                 );

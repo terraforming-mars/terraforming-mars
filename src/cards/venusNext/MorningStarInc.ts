@@ -24,7 +24,7 @@ export class MorningStarInc implements CorporationCard {
             game.log(
                 LogMessageType.DEFAULT,
                 "${0} drew ${1}, ${2} and ${3}",
-                new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                new LogMessageData(LogMessageDataType.PLAYER, player.color),
                 new LogMessageData(LogMessageDataType.CARD, drawnCards[0].name),
                 new LogMessageData(LogMessageDataType.CARD, drawnCards[1].name),
                 new LogMessageData(LogMessageDataType.CARD, drawnCards[2].name)

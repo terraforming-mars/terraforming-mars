@@ -21,7 +21,7 @@ export class LogHelper {
         game.log(
             LogMessageType.DEFAULT,
             "${0} added ${1} ${2} to ${3}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.PLAYER, player.color),
             new LogMessageData(LogMessageDataType.STRING, qty.toString()),
             new LogMessageData(LogMessageDataType.STRING, resourceType),
             new LogMessageData(LogMessageDataType.CARD, card.name)
@@ -38,7 +38,7 @@ export class LogHelper {
         game.log(
             LogMessageType.DEFAULT,
             "${0} removed ${1} ${2} from ${3} to ${4}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.PLAYER, player.color),
             new LogMessageData(LogMessageDataType.STRING, qty.toString()),
             new LogMessageData(LogMessageDataType.STRING, resourceType),
             new LogMessageData(LogMessageDataType.CARD, card.name),
@@ -50,7 +50,7 @@ export class LogHelper {
         game.log(
             LogMessageType.DEFAULT,
             "${0} gained ${1} ${2}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.PLAYER, player.color),
             new LogMessageData(LogMessageDataType.STRING, qty.toString()),
             new LogMessageData(LogMessageDataType.STRING, resource)
         );
@@ -60,7 +60,7 @@ export class LogHelper {
         game.log(
             LogMessageType.DEFAULT,
             "${0}'s ${1} production increased by ${2}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.PLAYER, player.color),
             new LogMessageData(LogMessageDataType.STRING, resource),
             new LogMessageData(LogMessageDataType.STRING, qty.toString())
         );
@@ -70,7 +70,7 @@ export class LogHelper {
         game.log(
             LogMessageType.DEFAULT,
             "${0} ${1} ${2} card(s)",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.PLAYER, player.color),
             new LogMessageData(LogMessageDataType.STRING, effect),
             new LogMessageData(LogMessageDataType.STRING, qty.toString())
         );
@@ -109,7 +109,7 @@ export class LogHelper {
         game.log(
             LogMessageType.DEFAULT,
             "${0} placed ${1} tile on row ${2} position ${3}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.PLAYER, player.color),
             new LogMessageData(LogMessageDataType.STRING, type),
             new LogMessageData(LogMessageDataType.STRING, row.toString()),
             new LogMessageData(LogMessageDataType.STRING, position.toString())            
@@ -122,7 +122,7 @@ export class LogHelper {
         game.log(
             LogMessageType.DEFAULT,
             "${0} increased ${1} colony track ${2} step(s)",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.PLAYER, player.color),
             new LogMessageData(LogMessageDataType.STRING, colony.name),
             new LogMessageData(LogMessageDataType.STRING, stepsIncreased.toString())
         );
@@ -132,7 +132,7 @@ export class LogHelper {
         game.log(
             LogMessageType.DEFAULT,
             "${0} gained ${1} TR",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.PLAYER, player.color),
             new LogMessageData(LogMessageDataType.STRING, steps.toString())
         );
     }

@@ -199,12 +199,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         let retribution: number = Math.min(game.getPlayerById(game.monsInsuranceOwner).megaCredits, 3);
         this.megaCredits += retribution;
         game.getPlayerById(game.monsInsuranceOwner).setResource(Resources.MEGACREDITS,-3);
+        let color = game.getPlayerById(game.monsInsuranceOwner).color;
         if (retribution > 0) {
           game.newLog("${0} received ${1} MC from ${2} owner (${3})", b =>
               b.player(this)
               .number(retribution)
               .cardName(CardName.MONS_INSURANCE)
-              .playerId(game.monsInsuranceOwner!));
+              .playerId(color));
         }
       }  
     }
@@ -775,7 +776,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           throw new Error("Invalid players array provided");
         }
         const foundPlayer = pi.players.find(
-            (player) => player.id === input[0][0]
+            (player) => player.color === input[0][0]
         );
         if (foundPlayer === undefined) {
           throw new Error("Player not available");

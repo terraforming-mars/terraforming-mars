@@ -54,7 +54,7 @@ export class ProjectInspection implements IProjectCard {
                 game.log(
                     LogMessageType.DEFAULT,
                     "${0} used ${1} action with ${2}",
-                    new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                    new LogMessageData(LogMessageDataType.PLAYER, player.color),
                     new LogMessageData(LogMessageDataType.CARD, foundCard.name),
                     new LogMessageData(LogMessageDataType.CARD, this.name)
                 );

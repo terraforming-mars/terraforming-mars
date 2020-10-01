@@ -25,7 +25,7 @@ export class ArcadianCommunities implements IActionCard, CorporationCard {
                 game.log(
                     LogMessageType.DEFAULT,
                     "${0} placed a Community (player marker)",
-                    new LogMessageData(LogMessageDataType.PLAYER, player.id)
+                    new LogMessageData(LogMessageDataType.PLAYER, player.color)
                 );
 
                 return undefined;

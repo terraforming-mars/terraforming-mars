@@ -69,7 +69,7 @@ export class SelfReplicatingRobots implements IProjectCard {
                   game.log(
                     LogMessageType.DEFAULT,
                     "${0} linked ${1} with ${2}",
-                    new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                    new LogMessageData(LogMessageDataType.PLAYER, player.color),
                     new LogMessageData(LogMessageDataType.CARD, foundCards[0].name),
                     new LogMessageData(LogMessageDataType.CARD, this.name)
                   );             
@@ -96,7 +96,7 @@ export class SelfReplicatingRobots implements IProjectCard {
                   game.log(
                     LogMessageType.DEFAULT,
                     "${0} doubled resources on ${1} from ${2} to ${3}",
-                    new LogMessageData(LogMessageDataType.PLAYER, player.id),
+                    new LogMessageData(LogMessageDataType.PLAYER, player.color),
                     new LogMessageData(LogMessageDataType.CARD, foundCards[0].name),
                     new LogMessageData(LogMessageDataType.STRING, resourceCount.toString()),
                     new LogMessageData(LogMessageDataType.STRING, (resourceCount * 2).toString()),

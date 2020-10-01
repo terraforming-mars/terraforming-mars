@@ -89,7 +89,7 @@ export abstract class Colony  {
         game.log(
             LogMessageType.DEFAULT,
             "${0} built a colony on ${1}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
+            new LogMessageData(LogMessageDataType.PLAYER, player.color),
             new LogMessageData(LogMessageDataType.COLONY, colony.name)
           );
 

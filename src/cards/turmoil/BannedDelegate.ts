@@ -73,7 +73,7 @@ export class BannedDelegate implements IProjectCard {
       game.log(
         LogMessageType.DEFAULT,
         "${0} removed a delegate from ${1}",
-        new LogMessageData(LogMessageDataType.PLAYER, player.id),
+        new LogMessageData(LogMessageDataType.PLAYER, player.color),
         new LogMessageData(LogMessageDataType.PARTY, party.name)
       );
     }

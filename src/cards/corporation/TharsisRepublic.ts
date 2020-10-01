@@ -23,7 +23,7 @@ export class TharsisRepublic implements CorporationCard {
             game.log(
                 LogMessageType.DEFAULT,
                 "${0} placed a City tile",
-                new LogMessageData(LogMessageDataType.PLAYER, player.id)
+                new LogMessageData(LogMessageDataType.PLAYER, player.color)
             );
             
             return undefined;

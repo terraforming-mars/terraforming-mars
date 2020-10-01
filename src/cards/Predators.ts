@@ -79,7 +79,7 @@ export class Predators implements IProjectCard, IActionCard, IResourceCard {
         game.log(
           LogMessageType.DEFAULT,
           "${0} removed an animal from ${1}",
-          new LogMessageData(LogMessageDataType.PLAYER, player.id),
+          new LogMessageData(LogMessageDataType.PLAYER, player.color),
           target
         );
       }

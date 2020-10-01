@@ -6022,10 +6022,11 @@ export const HTML_DATA: Map<string, string> =
             <div class="contentCorporation ">
                 <div class="corporationEffectBox" style="height:140px;margin-top:150px">
                     <div class="corporationEffectBoxLabel" style="margin-bottom:4px;">EFFECT</div>
-                    <div class="resource ocean-resource red-outline"></div>*: <div class="production-box"><div class="production money">1</div></div>&nbsp;&nbsp;
+                    <div class="nowrap">
+                      <div class="resource ocean-resource red-outline"></div>*: <div class="production-box"><div class="production money">1</div></div>
                       <div class="resource" style="height:29px;width:30px;background:#eee"></div>
-                      <div class="resource ocean-resource" style="position:absolute;margin-left:-39px;margin-top:36px;"></div>
-                      :<div class="resource money">3</div>
+                      <div class="resource ocean-resource" style="margin-left:-3px;"></div>:<div class="resource money">3</div>
+                    </div>
                     <div class="description " style="text-align:center;margin-top:0px; ">
                         (Effect: When any ocean tile is placed, increase your MC production 1 step. Your bonus for placing adjacent to oceans is 3MC instead of 2MC.)
                     </div>

@@ -8,6 +8,7 @@ import { IGameData } from "../database/IDatabase";
 import { ColoniesFilter } from "./ColoniesFilter";
 import { ColonyName } from "../colonies/ColonyName";
 import { CardsFilter } from "./CardsFilter";
+import { Button } from "../components/common/Button";
 
 interface CreateGameModel {
     firstIndex: number;
@@ -112,7 +113,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
     components: {
         "corporations-filter": CorporationsFilter,
         "colonies-filter": ColoniesFilter,
-        "cards-filter": CardsFilter
+        "cards-filter": CardsFilter,
+        "Button": Button
     },
     mounted: function () {
         if (window.location.pathname === "/solo") {
@@ -482,8 +484,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </label>
                         </div>
 
-                        <div class="create-game-action">			
-                            <button class="btn btn-lg btn-success" v-on:click="createGame" v-i18n>Create Game</button> 
+                        <div class="create-game-action">
+                            <Button title="Create game" size="big" :onClick="createGame"/>
                         </div>  
                     </div>
                 </div>

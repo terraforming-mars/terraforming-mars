@@ -91,13 +91,15 @@ export const WaitingFor = Vue.component("waiting-for", {
             const xhr = new XMLHttpRequest();
             const root = (this.$root as any);
             if (root.isServerSideRequestInProgress) return;
+            /* 
+            #TODO remove
             let els  = window.document.querySelectorAll(".wf-root .btn-submit");
             els.forEach(
                 (el) => {
                     el.classList.add("loading");
                     (el as any).disabled = "disabled";
                 }
-            );
+            ); */
             root.isServerSideRequestInProgress = true;
             xhr.open("POST", "/player/input?id=" + (this.$parent as any).player.id);
             xhr.responseType = "json";
@@ -107,7 +109,7 @@ export const WaitingFor = Vue.component("waiting-for", {
                     root.player = xhr.response;
                     root.playerkey++;
                     root.screen = "player-home";
-                    if (root.player.phase == "end" && window.location.pathname !== "/the-end") {
+                    if (root.player.phase === "end" && window.location.pathname !== "/the-end") {
                         (window as any).location = (window as any).location;
                     }
 

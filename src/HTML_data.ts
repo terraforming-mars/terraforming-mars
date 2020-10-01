@@ -26,8 +26,8 @@ export const HTML_DATA: Map<string, string> =
             <div class="points points-big ">1</div>
             <div class="requirements ">Titanium production</div>
             <div class="production-box production-box-size1a ">
-                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="titanium production red-outline "></div><br>
-                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="titanium production "></div>
+                <div class="production-prefix minus"></div><div class="titanium production red-outline "></div><br>
+                <div class="production-prefix plus"></div><div class="titanium production "></div>
             </div>
             <div class="description " style="margin-top:0px;">
                 (Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.)
@@ -57,8 +57,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="content ">
             <div class="requirements ">3 Oceans</div>
             <div class="production-box production-box-size2a ">
-                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="money production ">1</div><div class="heat production red-outline "></div><br>
-                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="plant production "></div><div class="plant production "></div>
+                <div class="production-prefix minus"></div><div class="money production ">1</div><div class="heat production red-outline "></div><br>
+                <div class="production-prefix plus"></div><div class="plant production "></div><div class="plant production "></div>
             </div>
             <div class="description ">
               (Requires 3 ocean tiles. Decrease your MC production 1 step and any heat production 1 step. Increase your Plant production 2 steps.)
@@ -113,8 +113,8 @@ export const HTML_DATA: Map<string, string> =
             <div class="points ">1/<span class="resource ocean-resource "></span></div>
             <div class="requirements ">4 Oceans</div>
             <div class="production-box production-box-size2a ">
-                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div><div class="energy production "></div><br>
-                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">5</div>
+                <div class="production-prefix minus"></div><div class="energy production "></div><div class="energy production "></div><br>
+                <div class="production-prefix plus"></div><div class="money production ">5</div>
             </div>
             <div class="special-tile tile capitol ">&#x2302;&#xFE0E;</div>
             <div class="description " style="text-align:left;">
@@ -227,7 +227,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="card-number">015</div>
         <div class="content ">
             <div class="production-box production-box-size1a ">
-                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div>
+                <div class="production-prefix minus"></div><div class="energy production "></div>
             </div>
             <span class="red-arrow " style="margin-left:5px; "></span>
             <div class="rating tile "></div>
@@ -246,8 +246,8 @@ export const HTML_DATA: Map<string, string> =
             <div class="points points-big ">1</div>
             <div class="requirements requirements-max ">max 7% O2</div>
             <div class="production-box production-box-size1a">
-                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production"></div>
-                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production">3</div>
+                <div class="production-prefix minus"></div><div class="energy production"></div>
+                <div class="production-prefix plus"></div><div class="money production">3</div>
             </div>
             <div class="tile city-tile"></div>
             <div class="card-content-plants">
@@ -267,8 +267,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="card-number">017</div>
         <div class="content ">
             <div class="production-box production-box-size1a ">
-                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div>
-                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">3</div>
+                <div class="production-prefix minus"></div><div class="energy production "></div>
+                <div class="production-prefix plus"></div><div class="money production ">3</div>
             </div>
             <div class="tile city-tile " style="margin-left:20px "></div><br>
             <div class="description ">
@@ -349,8 +349,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="card-number">022</div>
         <div class="content ">
             <div class="production-box production-box-size3a ">
-                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="money production ">2</div><br>
-                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="heat production "></div><div class="heat production "></div><div class="heat production "></div>
+                <div class="production-prefix minus"></div><div class="money production ">2</div><br>
+                <div class="production-prefix plus"></div><div class="heat production "></div><div class="heat production "></div><div class="heat production "></div>
             </div>
             <div class="tile ocean-tile "></div>
             <div class="description ">
@@ -463,8 +463,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="content ">
             <div class="requirements requirements-max ">max 9% O2</div>
             <div class="production-box production-box-size1a ">
-                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div>
-                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">3</div>
+                <div class="production-prefix minus"></div><div class="energy production "></div>
+                <div class="production-prefix plus"></div><div class="money production ">3</div>
             </div>
             <div class="tile city-tile " style="margin-left:20px "></div>
             <div class="description ">
@@ -480,9 +480,9 @@ export const HTML_DATA: Map<string, string> =
         <div class="card-number">030</div>
         <div class="content ">
             <div class="production-box production-box-size2a ">
-                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="money production ">2</div><br>
-                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="heat production "></div><div class="heat production "></div><br>
-                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="energy production "></div><div class="energy production "></div>
+                <div class="production-prefix minus"></div><div class="money production ">2</div><br>
+                <div class="production-prefix plus"></div><div class="heat production "></div><div class="heat production "></div><br>
+                <div class="production-prefix plus"></div><div class="energy production "></div><div class="energy production "></div>
             </div>
             <div class="description ">
                 (Decrease your MC production 2 steps and increase your heat production and Energy production 2 steps each.)
@@ -511,8 +511,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="card-number">032</div>
         <div class="content ">
             <div class="production-box production-box-size2a ">
-                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div><div class="energy production "></div>
-                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="steel production "></div><div class="steel production "></div>
+                <div class="production-prefix minus"></div><div class="energy production "></div><div class="energy production "></div>
+                <div class="production-prefix plus"></div><div class="steel production "></div><div class="steel production "></div>
             </div>
             <div class="tile city-tile " style="margin-left:20px "></div>
             <div class="description ">
@@ -651,8 +651,8 @@ export const HTML_DATA: Map<string, string> =
     <div class="content">
       <div class="points points-big">1</div>
       <div class="production-box production-box-size1a">
-        <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production"></div>
-        <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="money production">4</div>
+        <div class="production-prefix minus"></div><div class="plant production"></div>
+        <div class="production-prefix plus"></div><div class="money production">4</div>
       </div>
       <div class="description">
         (Decrease your Plant production 1 step and increase your MC production 4 steps.)
@@ -681,8 +681,8 @@ export const HTML_DATA: Map<string, string> =
     <div class="card-number">043</div>
     <div class="content">
       <div class="production-box production-box-size3a">
-        <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div><br>
-        <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="heat production"></div><div class="heat production"></div><div class="heat production"></div>
+        <div class="production-prefix minus"></div><div class="energy production"></div><br>
+        <div class="production-prefix plus"></div><div class="heat production"></div><div class="heat production"></div><div class="heat production"></div>
       </div>
       <div class="description">
         (Decrease your Energy production 1 step and increase your heat production 3 steps.)
@@ -715,8 +715,8 @@ export const HTML_DATA: Map<string, string> =
     <div class="card-number">045</div>
     <div class="content">
       <div class="production-box production-box-size3a">
-        <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="money production">2</div><br>
-        <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="energy production"></div><div class="energy production"></div><div class="energy production"></div>
+        <div class="production-prefix minus"></div><div class="money production">2</div><br>
+        <div class="production-prefix plus"></div><div class="energy production"></div><div class="energy production"></div><div class="energy production"></div>
       </div>
       <div class="description">
         (Decrease your MC production 2 steps and increase your Energy production 3 steps.)
@@ -833,7 +833,7 @@ export const HTML_DATA: Map<string, string> =
           (Action: Add 1 Animal to this card.)
         </div><br>
         <div class="production-box production-box-size1a" style="margin-top:-10px;">
-          <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div>
+          <div class="production-prefix minus"></div><div class="plant production red-outline"></div>
         </div>
         <div class="description description-half">
           (Requires +2 C or warmer. Decrease any Plant production 1 step. 1 VP for each Animal on this card.)
@@ -869,7 +869,7 @@ export const HTML_DATA: Map<string, string> =
           (Action: Add 1 Animal to this card.)
         </div>
         <div class="production-box production-box-size1a">
-          <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div>
+          <div class="production-prefix minus"></div><div class="plant production red-outline"></div>
         </div>
         <div class="description" style="text-align:left;">
           <div>Requires 6% oxygen.</div>
@@ -986,8 +986,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="content">
         <div class="requirements">Steel production</div>
         <div class="production-box production-box-size1a">
-          <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="production steel red-outline"></div><br>
-          <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="production steel"></div>
+          <div class="production-prefix minus"></div><div class="production steel red-outline"></div><br>
+          <div class="production-prefix plus"></div><div class="production steel"></div>
         </div>
         <div class="description">
           (Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.)
@@ -1045,8 +1045,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">065</div>
       <div class="content">
         <div class="production-box production-box-size2a">
-          <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production"></div><br>
-          <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="steel production"></div><div class="steel production"></div>
+          <div class="production-prefix minus"></div><div class="energy production"></div><br>
+          <div class="production-prefix plus"></div><div class="steel production"></div><div class="steel production"></div>
         </div>
         <div class="description">
           (Decrease your Energy production 1 step and increase your steel production 2 steps.)
@@ -1107,7 +1107,7 @@ export const HTML_DATA: Map<string, string> =
           (Action: Spend 1 plant or 1 steel to gain 7MC.)
         </div>
         <div class="production-box production-box-size1a">
-          <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production"></div>
+          <div class="production-prefix minus"></div><div class="energy production"></div>
         </div>
         <div class="description" style="text-align:left;">
           (Oxygen must be 8% or less. Decrease your energy production 1 step.)
@@ -1155,7 +1155,7 @@ export const HTML_DATA: Map<string, string> =
                 (Action: Add an animal to this card.)
             </div>
             <div class="production-box production-box-size2a">
-              <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div><div class="plant production red-outline"></div>
+              <div class="production-prefix minus"></div><div class="plant production red-outline"></div><div class="plant production red-outline"></div>
             </div>
             <div class="description"  style="margin-top:-5px;">
                 (Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card.)
@@ -1354,8 +1354,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="content ">
           <div class="points big">1/<div class="tile city-tile-small"></div></div>
           <div class="production-box production-box-size1a">
-              <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div>
-              <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="money production">4</div>
+              <div class="production-prefix minus"></div><div class="energy production"></div>
+              <div class="production-prefix plus"></div><div class="money production">4</div>
           </div>
           <div class="description" style="margin-top:-5px">
           (Decrease your energy production 1 step and increase your MC production 4 steps.)
@@ -1419,8 +1419,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">089</div>
       <div class="content">
         <div class="production-box production-box-size2a">
-          <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="money production">1</div><br>
-          <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="energy production"></div><div class="energy production"></div>
+          <div class="production-prefix minus"></div><div class="money production">1</div><br>
+          <div class="production-prefix plus"></div><div class="energy production"></div><div class="energy production"></div>
         </div>
         <div class="description">
           (Decrease your MC production 1 step and increase your Energy production 2 steps.)
@@ -1565,8 +1565,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="content">
         <div class="points points-big">2</div>
         <div class="production-box production-box-size2a">
-          <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="heat production"></div><div class="heat production"></div><br>
-          <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production">3</div>
+          <div class="production-prefix minus"></div><div class="heat production"></div><div class="heat production"></div><br>
+          <div class="production-prefix plus"></div><div class="money production">3</div>
         </div>
         <div class="description">
           (Reduce your heat production 2 steps and increase your MC production 3 steps.)
@@ -1596,8 +1596,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">100</div>
       <div class="content">
         <div class="production-box production-box-size1a">
-          <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="money production">1</div><br>
-          <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="energy production"></div>
+          <div class="production-prefix minus"></div><div class="money production">1</div><br>
+          <div class="production-prefix plus"></div><div class="energy production"></div>
         </div>
         <div class="description">
           (Decrease your MC production 1 step and increase your Energy production 1 steps.)
@@ -1708,8 +1708,8 @@ export const HTML_DATA: Map<string, string> =
             <div class="points points-big ">1</div>
             <div class="requirements">12% O2</div>
             <div class="production-box production-box-size1a " style="margin-bottom:5px;">
-                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div>
-                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">4</div>
+                <div class="production-prefix minus"></div><div class="energy production "></div>
+                <div class="production-prefix plus"></div><div class="money production ">4</div>
             </div>
             <div class="tile city-tile " style="margin-left:20px;margin-bottom:5px; "></div><br>
             <div class="plant resource "></div><div class="plant resource "></div>
@@ -1884,8 +1884,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">120</div>
         <div class="content ">
             <div class="production-box production-box-size1a ">
-                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div>
-                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">2</div>
+                <div class="production-prefix minus"></div><div class="energy production "></div>
+                <div class="production-prefix plus"></div><div class="money production ">2</div>
             </div>
             <div class="tile city-tile " style="margin-left:20px "></div>*<br>
             <div class="description ">
@@ -1961,8 +1961,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="content ">
           <div class="points points-big">-1</div>
             <div class="production-box production-box-size2a ">
-                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div><div class="money production red-outline">2</div>
-                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">2</div>
+                <div class="production-prefix minus"></div><div class="energy production "></div><div class="money production red-outline">2</div>
+                <div class="production-prefix plus"></div><div class="money production ">2</div>
             </div>
             <div class="description ">
                 (Decrease your energy production 1 step and any MC production 2 steps. increase your MC production 2 steps.
@@ -1976,8 +1976,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">126</div>
       <div class="content">
         <div class="production-box production-box-size2">
-          <div class="production-prefix">&#x2796;&#xFE0E;</div>&nbsp;&nbsp;<div class="energy production"></div><br>
-          <div class="production-prefix">&#x2795;&#xFE0E;</div>4 <div class="heat production"></div>
+          <div class="production-prefix minus"></div>&nbsp;&nbsp;<div class="energy production"></div><br>
+          <div class="production-prefix plus"></div>4 <div class="heat production"></div>
         </div>
         <div class="description">
           (Decrease your Energy production 1 step and increase your heat production 4 steps.)
@@ -2164,8 +2164,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">138</div>
         <div class="content ">
             <div class="production-box production-box-size3a ">
-                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div><div class="energy production "></div><br>
-                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="steel production "></div><div class="steel production "></div><div class="titanium production "></div>
+                <div class="production-prefix minus"></div><div class="energy production "></div><div class="energy production "></div><br>
+                <div class="production-prefix plus"></div><div class="steel production "></div><div class="steel production "></div><div class="titanium production "></div>
             </div><br>
             <div class="tile oxygen-tile "></div><div class="tile oxygen-tile "></div>
             <div class="description ">
@@ -2309,7 +2309,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
             <div class="animal resource " style="margin-left:105px;"></div>
             <div class="production-box production-box-size1a" style="margin-top:2px;">
-                <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div>
+                <div class="production-prefix minus"></div><div class="plant production red-outline"></div>
             </div>
             <div class="description" style="position:absolute;text-align:left;margin-top:-25px; width: 130px;">
               (Requires 8% oxygen. Add 1 Animal to this card. Decrease any Plant production 1 step. 1 VP per 2 Animals on this card.)
@@ -2505,8 +2505,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="content">
           <div class="requirements">2 Power</div>
           <div class="production-box production-box-size1a">
-              <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production red-outline"></div>
-              <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="energy production"></div>
+              <div class="production-prefix minus"></div><div class="energy production red-outline"></div>
+              <div class="production-prefix plus"></div><div class="energy production"></div>
           </div>
           <div class="description">
             (Requires 2 Power tags. Decrease any Energy production 1 step and increase your own 1 step.)
@@ -2578,8 +2578,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">165</div>
         <div class="content">
           <div class="production-box production-box-size2a">
-            <div class="production-prefix">&#x2796;&#xFE0E;</div> 4 <div class="energy production"></div><br>
-            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="plant production"></div><div class="plant production"></div>
+            <div class="production-prefix minus"></div> 4 <div class="energy production"></div><br>
+            <div class="production-prefix plus"></div><div class="plant production"></div><div class="plant production"></div>
           </div> <br>
            <div class="tile rating"></div> <div class="tile rating"></div> <div class="tile rating"></div>
           <div class="description">
@@ -2600,8 +2600,8 @@ export const HTML_DATA: Map<string, string> =
                   (Effect: When you play a Space card, you pay 2 MC less for it.)
               </div>
               <div class="production-box production-box-size1a" style="margin-top:10px;margin-right:130px;">
-                 <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div>
-                   <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="money production">2</div>
+                 <div class="production-prefix minus"></div><div class="energy production"></div>
+                   <div class="production-prefix plus"></div><div class="money production">2</div>
               </div>
               <div class="description " style="position:absolute;margin-top:-90px;text-align:left;margin-left:86px;">
                 (Requires 5% oxygen. Decrease your Energy production 1 step and increase your MC production 2 steps.)
@@ -2682,8 +2682,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="card-number">171</div>
         <div class="content">
           <div class="production-box production-box-size2a">
-            <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div><div class="energy production"></div><br>
-            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="plant production"></div>
+            <div class="production-prefix minus"></div><div class="energy production"></div><div class="energy production"></div><br>
+            <div class="production-prefix plus"></div><div class="plant production"></div>
           </div>
            &nbsp;&nbsp;&nbsp;<div class="tile rating"></div>
           <div class="description">
@@ -2793,8 +2793,8 @@ export const HTML_DATA: Map<string, string> =
           <div class="content ">
             <div class="points points-big">-1</div>
               <div class="production-box production-box-size2a">
-                <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="heat production red-outline "></div><div class="heat production red-outline "></div>
-                  <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="energy production "></div>
+                <div class="production-prefix minus"></div><div class="heat production red-outline "></div><div class="heat production red-outline "></div>
+                  <div class="production-prefix plus"></div><div class="energy production "></div>
               </div>
               <div class="description ">
                 (Decrease any heat production 2 steps and increase your Energy production 1 step.)
@@ -2809,8 +2809,8 @@ export const HTML_DATA: Map<string, string> =
           <div class="content ">
             <div class="points points-big ">1</div>
               <div class="production-box production-box-size1a">
-                <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production  "></div>
-                  <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="plant production "></div>
+                <div class="production-prefix minus"></div><div class="energy production  "></div>
+                  <div class="production-prefix plus"></div><div class="plant production "></div>
               </div>
               <div class="description ">
                 (Decrease your Energy production 1 step and increase your Plant production 1 step.)
@@ -2825,8 +2825,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">180</div>
           <div class="content ">
               <div class="production-box production-box-size2a">
-                <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production  "></div><br>
-                  <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="titanium production "></div><div class="money production ">1</div>
+                <div class="production-prefix minus"></div><div class="energy production  "></div><br>
+                  <div class="production-prefix plus"></div><div class="titanium production "></div><div class="money production ">1</div>
               </div>
               <div class="description ">
                 (Decrease your Energy production 1 step and increase your titanium and your MC production 1 step each.)
@@ -2856,8 +2856,8 @@ export const HTML_DATA: Map<string, string> =
           <div class="content ">
             <div class="points points-big">-2</div>
               <div class="production-box production-box-size1a ">
-                  <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div>
-                  <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">3</div>
+                  <div class="production-prefix minus"></div><div class="energy production "></div>
+                  <div class="production-prefix plus"></div><div class="money production ">3</div>
               </div>
               <div class="tile city-tile " style="margin-left:20px "></div><br>
               <div class="description ">
@@ -2875,8 +2875,8 @@ export const HTML_DATA: Map<string, string> =
           <div class="points points-big">-1</div>
           <div class="requirements">6% O2</div>
           <div class="production-box production-box-size2a">
-            <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div><br>
-            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="energy production"></div><div class="energy production"></div>
+            <div class="production-prefix minus"></div><div class="plant production red-outline"></div><br>
+            <div class="production-prefix plus"></div><div class="energy production"></div><div class="energy production"></div>
           </div>
           <div class="description">
             (Requires 6% oxygen. Decrease any Plant production 1 step and increase your Energy production 2 steps.)
@@ -2898,8 +2898,8 @@ export const HTML_DATA: Map<string, string> =
             (Action: Add 1 Animal to this card.)
           </div>
           <div class="production-box production-box-size1a" style="margin-top:10px;margin-right:150px;">
-            <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production"></div>
-            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="money production">2</div>
+            <div class="production-prefix minus"></div><div class="plant production"></div>
+            <div class="production-prefix plus"></div><div class="money production">2</div>
           </div>
           <div class="description" style="position:absolute;margin-top:-85px;text-align:left;margin-left:80px;font-size:10px;">
             (Requires 9% oxygen. Decrease your Plant production 1 step and increase your MC production 2 steps. 1 VP for each Animal on this card.
@@ -3130,7 +3130,7 @@ export const HTML_DATA: Map<string, string> =
                 (Effect: When a City tile is placed, including this, increase your MC production 1 step.)
               </div><br>
               <div class="production-box production-box-size2a">
-                  <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="production energy"></div><div class="production money">-2</div>
+                  <div class="production-prefix minus"></div><div class="production energy"></div><div class="production money">-2</div>
               </div> <div class="tile city-tile "></div>
               <div class="description ">
                 (Decrease your Energy production 1 step and decrease your MC production 2 steps. Place a City tile.)
@@ -3146,8 +3146,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="content">
           <div class="points points-big">-1</div>
           <div class="production-box production-box-size1a">
-              <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production red-outline"></div>
-              <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="energy production"></div>
+              <div class="production-prefix minus"></div><div class="energy production red-outline"></div>
+              <div class="production-prefix plus"></div><div class="energy production"></div>
           </div>
           <div class="description">
             (Decrease any Energy production 1 step and increase your own 1 step.)
@@ -3205,8 +3205,11 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">205</div>
         <div class="content">
           <div class="production-box production-box-size1a">
-            <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div><br>
-          </div><br> <div class="tile rating"></div><div class="tile rating"></div>
+            <div class="production-prefix minus"></div><div class="energy production"></div><br>
+          </div>
+          <div class="nowrap">
+            <div class="tile rating"></div><div class="tile rating"></div>
+          </div>
           <div class="description">
             (Decrease your Energy production 1 step. Raise your TR 2 steps.)
           </div>
@@ -3259,7 +3262,7 @@ export const HTML_DATA: Map<string, string> =
                   (Action: Draw 2 cards.)
               </div>
               <div class="production-box production-box-size1a" style="margin-right:135px;margin-top:10px;">
-                  <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div>
+                  <div class="production-prefix minus"></div><div class="energy production"></div>
               </div>
               <div class="description" style="position:absolute;text-align:left;margin-top:-53px;margin-left:85px;">
                 (Requires 3 Science tags to play. Decrease your Energy production 1 step.)
@@ -3430,8 +3433,8 @@ export const HTML_DATA: Map<string, string> =
               <div class="points points-big">3</div>
                 <div class="requirements">4 Science</div>
                   <div class="production-box production-box-size1a">
-                      <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div>
-                      <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="titanium production"></div>
+                      <div class="production-prefix minus"></div><div class="energy production"></div>
+                      <div class="production-prefix plus"></div><div class="titanium production"></div>
                   </div> <div class="tile city-tile" style="margin-left:20px"></div>*
               <div class="description" style="margin-top:-5px;">
                 (Requires 4 Science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a City tile on the RESERVED AREA)
@@ -3553,8 +3556,8 @@ export const HTML_DATA: Map<string, string> =
               &nbsp;&nbsp;  OR &nbsp;&nbsp;
                <div class="resource animal"><div class="card-icon tag-venus"></div></div> <div class="resource animal"><div class="card-icon tag-venus"></div></div>
                <div class="production-box production-box-size1a" style="margin-left:135px;">
-                   <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div>
-                   <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="money production">2</div>
+                   <div class="production-prefix minus"></div><div class="energy production"></div>
+                   <div class="production-prefix plus"></div><div class="money production">2</div>
                </div>
                <div class="description" style="position:absolute;margin-top:-90px;margin-left:10px;text-align:left; width: 120px">
                  (Requires 10% Venus. Add 2 Microbes or 2 Animals to another Venus card. Decrease your energy production 1 step and increase your MC production 2 steps)
@@ -3601,9 +3604,9 @@ export const HTML_DATA: Map<string, string> =
             <div class="card-number">230</div>
             <div class="content ">
               <div class="production-box production-box-size3">
-                  <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div><div class="energy production"></div>
-                  <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="money production">1</div> / <div class="resource-tag tag-venus"></div>
-                  <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="money production">1</div> / <div class="resource-tag tag-earth"></div>
+                  <div class="production-prefix minus"></div><div class="energy production"></div><div class="energy production"></div>
+                  <div class="production-prefix plus"></div><div class="money production">1</div> / <div class="resource-tag tag-venus"></div>
+                  <div class="production-prefix plus"></div><div class="money production">1</div> / <div class="resource-tag tag-earth"></div>
               </div>
               <div class="tile city-tile" style="margin-left:20px"></div>
                <div class="description">
@@ -3733,7 +3736,7 @@ export const HTML_DATA: Map<string, string> =
                   (Action: Add 1 resource to ANOTHER VENUS CARD)
                 </div>
               <div class="production-box production-box-size1a">
-                    <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div>
+                    <div class="production-prefix minus"></div><div class="energy production"></div>
               </div>
               <div class="tile city-tile" style="margin-left:20px"></div>*
               <div class="description" style="text-align:left;margin-top:-8px; width: 223px">
@@ -4043,7 +4046,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="content ">
               <div class="requirements">10% Venus</div>
                 <div class="production-box production-box-size1a ">
-                    <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div>
+                    <div class="production-prefix minus"></div><div class="energy production "></div>
                 </div>
                 <span class="red-arrow " style="margin-left:5px; "></span>
                 <div class="tile venus-tile ">V</div>
@@ -4166,8 +4169,8 @@ export const HTML_DATA: Map<string, string> =
             <div class="card-number">P37</div>
             <div class="content ">
               <div class="production-box production-box-size1a">
-                <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div><br>
-                <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">2</div>
+                <div class="production-prefix minus"></div><div class="energy production "></div><br>
+                <div class="production-prefix plus"></div><div class="money production ">2</div>
               </div><br>
               <div class="tile city-tile"></div>*
               <div class="description">
@@ -4357,7 +4360,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="card-number">C07</div>
               <div class="content ">
                 <div class="points points-big ">1</div>
-                  <div class="triangle triangle-white"></div> : <div class="resource " style="background:white">-1</div>
+                  <div class="tile trade"></div> : <div class="resource resource--white">-1</div>
                   <div class="description ">
                       (Effect: When you trade, you pay 1 less resource for it.)
                   </div>
@@ -4392,7 +4395,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="content ">
               <div class="points points-big ">1</div>
               <div class="production-box production-box-size2a">
-                <div class="plant production"></div> / <div class="triangle triangle-black"></div>
+                <div class="plant production"></div> / <div class="tile trade"></div>
               </div><br>
               <div class="resource animal"></div>* <div class="resource microbe" style="margin-left:20px;"></div><div class="resource microbe"></div>*
               <div class="description">
@@ -4479,7 +4482,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="colonies-icon project-icon"></div>
             <div class="card-number">C15</div>
             <div class="content ">
-              <div class="triangle triangle-black"></div> <div class="tile ocean-tile" style="margin-left:20px;"></div>
+              <div class="tile colony"></div> <div class="tile ocean-tile"></div>
               <div class="description">
                 (Place 1 colony and 1 ocean tile.)
               </div>
@@ -4511,8 +4514,8 @@ export const HTML_DATA: Map<string, string> =
               <div class="card-number">C17</div>
               <div class="content ">
                 <br>
-                <div class="triangle triangle-black"></div><br><br>
-                  <div class="description ">
+                <div class="tile colony"></div>
+                  <div class="description mt-10">
                     (Place a colony.)
                   </div>
               </div>
@@ -4642,7 +4645,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="production-box">
                 <div class="production titanium"></div>
               </div>
-              <div class="triangle triangle-black" style="margin-left:20px;"></div>
+              <div class="tile colony"></div>
               <div class="description" >
                 (Increase your titanium production 1 step. Place a colony.)
               </div>
@@ -4658,7 +4661,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="production-box">
                 <div class="production money">-2</div>
               </div>
-              <div class="triangle triangle-black" style="margin-left:20px;"></div>
+              <div class="tile colony"></div>
               <div class="description" >
                 (Decrease your MC production 2 steps. Place a colony.)
               </div>
@@ -4672,11 +4675,15 @@ export const HTML_DATA: Map<string, string> =
               <div class="card-number">C27</div>
               <div class="content ">
                 <div class="points points-big ">1</div>
-                  <div class="resource money">1</div> / <div class="tile city-tile-small red-outline"></div> <br>
-                  <div class="resource money" style="margin-left:-14px;">1</div> / <div class="triangle triangle-red"></div>
-                  <div class="description ">
-                      <p>(Gain 1MC for each city tile in play.)</p>
-                      <p>(Gain 1MC for each colony in play.)</p>
+                  <div class="nowrap">
+                    <div class="resource money">1</div> / <div class="tile city-tile-small red-outline"></div>
+                  </div>
+                  <div class="nowrap">
+                    <div class="resource money">1</div> / <div class="colony tile red-outline"></div>
+                  </div>
+                  <div class="description mt-10">
+                      <div>(Gain 1MC for each city tile in play.)</div>
+                      <div>(Gain 1MC for each colony in play.)</div>
                   </div>
               </div>
 `],
@@ -4709,7 +4716,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="production-box">
                 <div class="production money">-2</div>
               </div>
-              <div class="triangle triangle-black" style="margin-left:20px;"></div>
+              <div class="tile colony"></div>
               <div class="description" >
                 (Requires that you have no more than 1 colony. Decrease your MC production 2 steps. Place a colony.)
               </div>
@@ -4732,8 +4739,8 @@ export const HTML_DATA: Map<string, string> =
             <div class="content ">
               <div class="points points-big ">1</div>
               <div class="requirements">4 Science</div>
-              <div class="production-box production-box-size2a">
-                <div class="money production">1</div> / <div class="triangle triangle-red"></div>
+              <div class="production-box production-box-size3a">
+                <div class="money production">1</div> / <div class="tile colony red-outline"></div>
               </div><br>
               <div class="description">
                 (Requires 4 Science tags. Increase your MC production 1 step for each colony in play.)
@@ -4769,7 +4776,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="content ">
                   <div class="points points-big">1/<div class="resource camp" style="vertical-align:middle;"></div></div>
                   <div class="production-box production-box-size1a ">
-                      <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="money production ">1</div>
+                      <div class="production-prefix minus"></div><div class="money production ">1</div>
                   </div>
                   <span class="red-arrow " style="margin-left:5px; "></span>
                   <div class="resource camp"></div>
@@ -4787,8 +4794,8 @@ export const HTML_DATA: Map<string, string> =
             <div class="colonies-icon project-icon"></div>
             <div class="card-number">C34</div>
             <div class="content ">
-              <div class="triangle triangle-black"></div>* <div class="resource card" style="margin-left:20px;"></div><div class="resource card"></div>
-              <div class="description" >
+              <div class="tile colony"></div>* <div class="resource card first"></div><div class="resource card"></div>
+              <div class="description mt-10" >
                 (Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.)
               </div>
             </div>
@@ -4800,7 +4807,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="colonies-icon project-icon"></div>
               <div class="card-number">C35</div>
               <div class="content ">
-                  <div class="triangle triangle-white"></div> : <div class="resource " style="background:white">-1</div>
+                  <div class="tile trade"></div> : <div class="resource resource--white">-1</div>
                   <div class="description ">
                       (Effect: When you trade, you pay 1 less resource for it.)
                   </div>
@@ -4819,8 +4826,8 @@ export const HTML_DATA: Map<string, string> =
                   : <span class="money resource ">-1</span>
                   <div class="description ">
                       (Effect: When you play a card, you pay 1 MC less for it.)
-                  </div><br>
-                  <div class="triangle triangle-white"></div>
+                  </div>
+                  <div class="tile fleet"></div>
                   <div class="description ">
                       (Requires 2 Earth tags. Gain 1 Trade Fleet.)
                   </div>
@@ -4868,11 +4875,11 @@ export const HTML_DATA: Map<string, string> =
               <div class="content ">
                 <div class="requirements">Colony</div>
                   <div class="production-box production-box-size1a ">
-                      <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div>
-                      <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">4</div>
+                      <div class="production-prefix minus"></div><div class="energy production "></div>
+                      <div class="production-prefix plus"></div><div class="money production ">4</div>
                   </div>
-                  <div class="tile city-tile " style="margin-left:10px "></div> <div class="triangle triangle-white" style="margin-left:10px "></div><br>
-                  <div class="description ">
+                  <div class="tile city-tile "></div> <div class="tile fleet"></div>
+                  <div class="description mt-10">
                       (Requires 1 colony. Decrease your Energy production 1 step and increase your MC production 4 steps. Place a City tile. Gain 1 Trade Fleet.)
                   </div>
               </div>
@@ -4884,10 +4891,10 @@ export const HTML_DATA: Map<string, string> =
               <div class="colonies-icon project-icon"></div>
               <div class="card-number">C40</div>
               <div class="content ">
-                <div class="points">1/2<div class="triangle triangle-red" style="vertical-align:middle;"></div></div>
+                <div class="points">1/2<div class="tile colony red-outline"></div></div>
                 <div class="requirements">Colony</div>
-                  <div class="triangle triangle-black"></div>* <div class="triangle triangle-white" style="margin-left:20px "></div><br>
-                  <div class="description ">
+                  <div class="tile colony"></div>* <div class="tile fleet"></div>
+                  <div class="description mt-10">
                       (Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet. 1VP per 2 colonies in play.)
                   </div>
               </div>
@@ -4925,7 +4932,7 @@ export const HTML_DATA: Map<string, string> =
                 (Action: Add 1 Animal to this card.)
               </div>
               <div class="production-box production-box-size1a">
-                <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="plant production red-outline"></div>
+                <div class="production-prefix minus"></div><div class="plant production red-outline"></div>
               </div>
               <div class="description" style="text-align:left;">
                 (Requires -6 C. Decrease any Plant production 1 step. 1 VP per 2 Animals on this card.)
@@ -4956,8 +4963,10 @@ export const HTML_DATA: Map<string, string> =
             <div class="content ">
                 <div class="points points-big">1</div>
                 <div class="red-arrow "></div>
-                <div class="resource floater"><div class="card-icon tag-jovian"></div></div> <br>
-                OR <div class="resource floater"></div> <div class="red-arrow "></div> <div class="triangle triangle-white"></div>
+                <div class="resource floater"><div class="card-icon tag-jovian"></div></div>
+                <div class="nowrap second-line">
+                  OR <div class="resource floater"></div> <div class="red-arrow "></div> <div class="tile trade"></div>
+                </div>
                 <div class="description ">
                   (Action: Add 1 floater to ANY JOVIAN CARD, or spend 1 floater here to trade for free.)
                 </div>
@@ -4987,35 +4996,35 @@ export const HTML_DATA: Map<string, string> =
               </div>
 `],
 [CardName.TRADE_ENVOYS,`
-              <div class="title background-color-active ">Trade Envoys</div>
-              <div class="price ">6</div>
-              <div class="colonies-icon project-icon"></div>
-              <div class="card-number">C46</div>
-              <div class="content ">
-                  <div class="triangle triangle-white"></div> : <span style="font-family:Prototype;font-size:23px;font-weight:normal;vertical-align:middle">+1</span>
-                  <div class="description " style="margin-top:5px">
-                      (Effect: When you trade, you may first increase that Colony Tile track 1 step.)
-                  </div>
-              </div>
+            <div class="title background-color-active ">Trade Envoys</div>
+            <div class="price ">6</div>
+            <div class="colonies-icon project-icon"></div>
+            <div class="card-number">C46</div>
+            <div class="content ">
+                <div class="tile trade"></div> : <span class="card-sign">+1</span>
+                <div class="description mt-10">
+                    (Effect: When you trade, you may first increase that Colony Tile track 1 step.)
+                </div>
+            </div>
 `],
 [CardName.TRADING_COLONY,`
-              <div class="title background-color-active ">Trading Colony</div>
-              <div class="price ">18</div>
-              <div class="tag tag1 tag-space "></div>
-              <div class="colonies-icon project-icon"></div>
-              <div class="card-number">C47</div>
-              <div class="content ">
-                <div class="triangle triangle-white"></div> : <span style="font-family:Prototype;font-size:23px;font-weight:normal;vertical-align:middle">+1</span>
-                  <br>
-                  <div class="description " style="margin-top:5px;margin-bottom:5px">
-                      (Effect: When you trade, you may first increase that Colony Tile track 1 step.)
-                  </div>
-                  <div class="triangle triangle-black"></div>
-                  <br>
-                  <div class="description " style="margin-top:5px">
-                      (Place a colony.)
-                  </div>
-              </div>
+            <div class="title background-color-active ">Trading Colony</div>
+            <div class="price ">18</div>
+            <div class="tag tag1 tag-space "></div>
+            <div class="colonies-icon project-icon"></div>
+            <div class="card-number">C47</div>
+            <div class="content ">
+                <div class="tile trade"></div> : <span class="card-sign">+1</span>
+                <div class="description mt-10">
+                  (Effect: When you trade, you may first increase that Colony Tile track 1 step.)
+                </div>
+                <div class="mt-10">
+                  <div class="tile colony mt-10"></div>
+                </div>
+                <div class="description mt-10">
+                    (Place a colony.)
+                </div>
+            </div>
 `],
 [CardName.URBAN_DECOMPOSERS,`
             <div class="title background-color-automated">Urban Decomposers</div>
@@ -5886,7 +5895,7 @@ export const HTML_DATA: Map<string, string> =
           </div>
         </div>
         <div class="poseidon">POSEIDON</div>
-        <div class="resource money" style="margin-left:50px;margin-right:20px;">45</div> <div class="triangle triangle-black"></div>
+        <div class="resource money" style="margin-left:50px;margin-right:20px;">45</div> <div class="tile colony"></div>
         <div class="description" style="text-align:center;margin-top:0px;">
           (You start with 45MC. As your first action, place a colony.)
         </div>
@@ -6016,10 +6025,11 @@ export const HTML_DATA: Map<string, string> =
             <div class="contentCorporation ">
                 <div class="corporationEffectBox" style="height:140px;margin-top:150px">
                     <div class="corporationEffectBoxLabel" style="margin-bottom:4px;">EFFECT</div>
-                    <div class="resource ocean-resource red-outline"></div>*: <div class="production-box"><div class="production money">1</div></div>&nbsp;&nbsp;
+                    <div class="nowrap">
+                      <div class="resource ocean-resource red-outline"></div>*: <div class="production-box"><div class="production money">1</div></div>
                       <div class="resource" style="height:29px;width:30px;background:#eee"></div>
-                      <div class="resource ocean-resource" style="position:absolute;margin-left:-39px;margin-top:36px;"></div>
-                      :<div class="resource money">3</div>
+                      <div class="resource ocean-resource" style="margin-left:-3px;"></div>:<div class="resource money">3</div>
+                    </div>
                     <div class="description " style="text-align:center;margin-top:0px; ">
                         (Effect: When any ocean tile is placed, increase your MC production 1 step. Your bonus for placing adjacent to oceans is 3MC instead of 2MC.)
                     </div>
@@ -6205,8 +6215,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">P05</div>
       <div class="content">
         <div class="production-box production-box-size2a">
-          <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="production money">1</div><br>
-          <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="production plant"></div><div class="production plant"></div>
+          <div class="production-prefix minus"></div><div class="production money">1</div><br>
+          <div class="production-prefix plus"></div><div class="production plant"></div><div class="production plant"></div>
         </div><br>
         <div class="description">
           Increase your plant production 2 steps. Decrease your MC production 1 step.
@@ -6379,7 +6389,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">P17</div>
       <div class="content">
         <div class="production-box production-box-size1a">
-          <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="money production">2</div>
+          <div class="production-prefix minus"></div><div class="money production">2</div>
         </div><br>
         <div class="resource money">30</div>
         <div class="description">
@@ -6713,8 +6723,8 @@ export const HTML_DATA: Map<string, string> =
     <div class="content">
         <div class="requirements">2 Science</div>
         <div class="production-box production-box-size1a">
-            <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="production energy"></div><br/>
-            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="production titanium"></div>
+            <div class="production-prefix minus"></div><div class="production energy"></div><br/>
+            <div class="production-prefix plus"></div><div class="production titanium"></div>
         </div>
         <div class="res-count-wrapper">
           <span>4</span> <div class="resource titanium"></div>
@@ -6865,8 +6875,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="promo-icon project-icon"></div>
         <div class="content">
             <div class="production-box production-box-size1a">
-            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="money production">2</div>
-            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="energy production"></div>
+              <div class="production-prefix plus"></div><div class="money production">2</div>
+              <div class="production-prefix plus"></div><div class="energy production"></div>
             </div>
             <div class="tile city-tile"></div><br>
             <div class="plant resource"></div><div class="plant resource"></div><div class="plant resource"></div>
@@ -6984,7 +6994,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
       <br>
       <div class="production-box production-box-size1a">
-        <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div><br>
+        <div class="production-prefix minus"></div><div class="energy production"></div><br>
       </div>
       <div class="description bottom" >
         (Decrease your energy production 1 step. 1 VP per asteroid on this card.)
@@ -7096,8 +7106,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="promo-icon project-icon"></div>
         <div class="content">
           <div class="production-box production-box-size2a">
-            <div class="production-prefix">&#x2796;&#xFE0E;</div> 4 <div class="energy production"></div><br>
-            <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="plant production"></div><div class="plant production"></div>
+            <div class="production-prefix minus"></div> 4 <div class="energy production"></div><br>
+            <div class="production-prefix plus"></div><div class="plant production"></div><div class="plant production"></div>
           </div> <br>
            3 <div class="tile rating"></div>*&nbsp;&nbsp;<div class="tile special-tile"><span class="tile-icon">&#x25C9;</span></div>
           <div class="description">
@@ -7203,7 +7213,7 @@ export const HTML_DATA: Map<string, string> =
     <div class="card-number">X03</div>
     <div class="content ">
         <div class="money resource">2X</div> <div class="red-arrow"></div> X <div class="energy resource"></div><br/>
-        OR <div class="production-box production-box-size1a"><div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div></div> <div class="red-arrow"></div> <div class="money resource">8</div>
+        OR <div class="production-box production-box-size1a"><div class="production-prefix minus"></div><div class="energy production "></div></div> <div class="red-arrow"></div> <div class="money resource">8</div>
         <div class="description">
             (Action: Spend 2X MC to gain X energy, or decrease energy production 1 step to gain 8 MC.)
         </div>
@@ -7251,8 +7261,8 @@ export const HTML_DATA: Map<string, string> =
   <div class="content ">
       <div class="requirements"><span class="party">Unity</span></div>
       <div class="production-box production-box-size1a ">
-          <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div>
-          <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">3</div>
+          <div class="production-prefix minus"></div><div class="energy production "></div>
+          <div class="production-prefix plus"></div><div class="money production ">3</div>
       </div>
       <div class="tile city-tile " style="margin-left:10px "></div>
       <div class="delegate"></div><div class="delegate"></div>

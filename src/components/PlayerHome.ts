@@ -16,10 +16,6 @@ import { playerBgColorClass } from "../utils/utils";
 
 const dialogPolyfill = require("dialog-polyfill");
 
-export const hidePlayerData = (root: any, player: PlayerModel) => {
-    (root as any).setVisibilityState("other_player_" + player.id, false);
-};
-
 export const PlayerHome = Vue.component("player-home", {
     props: ["player"],
     components: {
@@ -52,14 +48,6 @@ export const PlayerHome = Vue.component("player-home", {
                 classes.push(playerBgColorClass(player.color));
             }
             return classes.join(" ");
-        },
-        showPlayerDetails: function (player: PlayerModel) {
-            if (player.id === this.player.id) return;
-
-            (this.$root as any).setVisibilityState(
-                "other_player_" + player.id,
-                true
-            );
         },
         getFleetsCountRange: function (player: PlayerModel): Array<number> {
             const fleetsRange: Array<number> = [];

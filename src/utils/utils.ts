@@ -3,3 +3,5 @@ export const playerTextColorClass = (color: string): string =>
 
 export const playerBgColorClass = (color: string): string =>
     `player_overview_bg_color_${color}`;
+
+export const range = (n: number): Array<Number> => Array.from(Array(n).keys());

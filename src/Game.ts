@@ -46,7 +46,6 @@ import { ILoadable } from "./ILoadable";
 import {LogMessage} from "./LogMessage";
 import {LogMessageType} from "./LogMessageType";
 import {LogMessageData} from "./LogMessageData";
-import {LogMessageDataType} from "./LogMessageDataType";
 import {Database} from "./database/Database";
 import { SerializedGame } from "./SerializedGame";
 import { SerializedPlayer } from "./SerializedPlayer";
@@ -61,7 +60,8 @@ import { ColonyName } from "./colonies/ColonyName";
 import { getRandomMilestonesAndAwards } from "./MASynergy";
 import { CardType } from "./cards/CardType";
 import { ColonyModel } from "./models/ColonyModel";
-
+import { LogBuilder } from "./LogBuilder";
+import { LogMessageDataType } from "./LogMessageDataType";
 
 export interface Score {
   corporation: String;
@@ -325,18 +325,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Print game_id if solo game
       if (players.length === 1) {
-        this.log(
-          LogMessageType.DEFAULT,
-          "The id of this game is ${0}",
-          new LogMessageData(LogMessageDataType.STRING, this.id.toString())
-        );        
+        this.newLog("The id of this game is ${0}", b => b.string(this.id));
       }      
 
-      this.log(
-        LogMessageType.NEW_GENERATION,
-        "Generation ${0}",
-        new LogMessageData(LogMessageDataType.STRING, this.generation.toString())
-      );
+      this.newLog("Generation ${0}", b =>
+        b.forNewGeneration()
+        .number(this.generation));
 
       // Initial Draft
       if (gameOptions.initialDraftVariant) {
@@ -724,12 +718,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.allAwardsFunded()) {
         throw new Error("All awards already funded");
       }
-      this.log(
-        LogMessageType.DEFAULT,
-        "${0} funded ${1} award",
-        new LogMessageData(LogMessageDataType.PLAYER, player.id),
-        new LogMessageData(LogMessageDataType.AWARD, award.name)
-      );
+      this.newLog("${0} funded ${1} award",
+          (b) => b.player(player).award(award));
+
       this.fundedAwards.push({
         award: award,
         player: player
@@ -938,9 +929,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.gotoFinalGreeneryPlacement();
         // Log id or cloned game id
         if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith("#")) {
-          this.log(LogMessageType.DEFAULT, "This game was a clone from game " + this.clonedGamedId);
+          this.newLog("This game was a clone from game " + this.clonedGamedId);
         } else {
-          this.log(LogMessageType.DEFAULT, "This game id was " + this.id);
+          this.newLog("This game id was " + this.id);
         }
         return;
       }
@@ -993,11 +984,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private goToDraftOrResearch() {
 
       this.generation++;
-      this.log(
-        LogMessageType.NEW_GENERATION,
-        "Generation ${0}",
-        new LogMessageData(LogMessageDataType.STRING, this.generation.toString())
-      );
+      this.newLog("Generation ${0}", (b) => b.forNewGeneration().number(this.generation));
       this.incrementFirstPlayer();
 
       this.players.forEach((player) => {
@@ -1492,12 +1479,25 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public addTile(
         player: Player, spaceType: SpaceType,
         space: ISpace, tile: ITile, isWorldGov: boolean = false): void {
+
+      // Part 1, basic validation checks.
+
       if (space.tile !== undefined) {
         throw new Error("Selected space is occupied");
       }
 
-      // Turmoil Mars First ruling policy
-      PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType, isWorldGov);
+      // Land claim a player can claim land for themselves
+      if (space.player !== undefined && space.player !== player) {
+        throw new Error("This space is land claimed by " + space.player.name);
+      }
+
+      if (space.spaceType !== spaceType) {
+        throw new Error(
+            `Select a valid location ${space.spaceType} is not ${spaceType}`
+        );
+      }
+
+      // Part 2. Collect additional fees.
 
       // Hellas special requirements ocean tile
       if (space.id === SpaceName.HELLAS_OCEAN_TILE
@@ -1510,22 +1510,21 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
       }
 
-      // Land claim a player can claim land for themselves
-      if (space.player !== undefined && space.player !== player) {
-        throw new Error("This space is land claimed by " + space.player.name);
-      }
-      // Arcadian Communities
-      if (space.player !== undefined && space.player === player && player.isCorporation(CorporationName.ARCADIAN_COMMUNITIES)) {
-        player.megaCredits += 3;
-      }
-      if (space.spaceType !== spaceType) {
-        throw new Error(
-            `Select a valid location ${space.spaceType} is not ${spaceType}`
-        );
-      }
 
-      space.player = player;
+      // Part 3. Setup for bonuses
+      var arcadianCommunityBonus = space.player === player && player.isCorporation(CorporationName.ARCADIAN_COMMUNITIES);
+
+      // Part 4. Place the tile
+
+      if (tile.tileType === TileType.OCEAN) {
+        space.player = undefined;
+      } else {
+        space.player = player;
+      }
       space.tile = tile;
+      LogHelper.logTilePlacement(this, player, space, tile.tileType);
+
+      // Part 5. Collect the bonuses
 
       if (!isWorldGov) {
         space.bonus.forEach((spaceBonus) => {
@@ -1548,19 +1547,16 @@ export class Game implements ILoadable<SerializedGame, Game> {
             player.megaCredits += player.oceanBonus;
           }
         });
-      }else{
+
+        PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType, isWorldGov);
+
+        if (arcadianCommunityBonus) {
+          player.megaCredits += 3;
+        }
+      } else {
         space.player = undefined;
       }
 
-      this.tilePlaced(space);
-      LogHelper.logTilePlacement(this, player, space, tile.tileType);
-
-      if (tile.tileType === TileType.OCEAN) {
-        space.player = undefined;
-      }
-    }
-
-    private tilePlaced(space: ISpace) {
       this.players.forEach((p) => {
         if (p.corporationCard !== undefined &&
             p.corporationCard.onTilePlaced !== undefined) {
@@ -1573,6 +1569,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         });
       });
     }
+
     public addGreenery(
         player: Player, spaceId: string,
         spaceType: SpaceType = SpaceType.LAND,
@@ -1740,6 +1737,18 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public getCardsInHandByType(player: Player, cardType: CardType) {
       return player.cardsInHand.filter((card) => card.cardType === cardType);
+    }
+
+    public newLog(message: string, f?: (builder: LogBuilder) => void) {
+      var builder = new LogBuilder(message);
+      if (f) {
+        f(builder);
+      }
+      this.gameLog.push(builder.logMessage());
+      this.gameAge++;
+      if (this.gameLog.length > 50 ) {
+        (this.gameLog.shift());
+      }
     }
 
     public log(type: LogMessageType, message: string, ...data: LogMessageData[]) {

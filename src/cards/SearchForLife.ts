@@ -38,6 +38,11 @@ export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
         const topCard = game.dealer.dealCard();
         if (topCard.tags.indexOf(Tags.MICROBES) !== -1) {
             this.resourceCount++; 
+            game.log(
+                LogMessageType.DEFAULT,
+                "${0} found life!",
+                new LogMessageData(LogMessageDataType.PLAYER, player.id)
+            );
         }
 
         game.log(

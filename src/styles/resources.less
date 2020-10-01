@@ -15,7 +15,7 @@
 
 .resource_item {
     display: flex;
-    border-radius: 10px;
+    border-radius: 5px;
     vertical-align: top;
     font-family: Prototype;
     background: linear-gradient(rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0.3) 50%);
@@ -57,47 +57,49 @@
 }
 
 .resource_icon--rating {
-    background-image: url(assets/tag-tr.png);
-    border: 2px solid #ca3f1a;
-    margin: 0 10px 0 10px;
+    background-image: url(assets/resources/tr.png);
 }
 
 .resource_icon--megacredits {
-    background-image: url(assets/tag-megacredits.png);
-    border: 2px solid #b08f00;
+    background-image: url(assets/resources/megacredit.png);
+}
+.resource_icon--megacredits::after {
+    position: absolute;
+    content: "€";
+    color: rgba(0,0,0,.3);
+    font-style: normal;
+    font-family: Arial;
+    font-weight: bold;
+    width: 36px;
+    height: 36px;
+    text-align: center;
+    line-height: 36px;
 }
 
 .resource_icon--microbe {
-    background-image: url(assets/tag-microbe.png);
-    border: 2px solid #050;
+    background-image: url(assets/resources/microbe.png);
 }
 
 .resource_icon--floater {
-    background-image: url(assets/tag-floater.png);
-    border: 2px solid #be9749;
+    background-image: url(assets/resources/floater.png);
 }
 
 .resource_icon--titanium {
-    background-image: url(assets/titanium.png);
-    border: 2px solid #3c3c3c;
+    background-image: url(assets/resources/titanium.png);
 }
 
 .resource_icon--steel {
-    background-image: url(assets/steel.png);
-    border: 2px solid #4b392d;
+    background-image: url(assets/resources/steel.png);
 }
 
 .resource_icon--plants {
-    background-image: url(assets/tag-plant.png);
-    border: 2px solid #050;
+    background-image: url(assets/resources/plant.png);
 }
 
 .resource_icon--energy {
-    background-image: url(assets/tag-power.png);
-    border: 2px solid #7700a6;
+    background-image: url(assets/resources/power.png);
 }
 
 .resource_icon--heat {
-    background-image: url(assets/tag-heat.png);
-    border: 2px solid #ae4422;
+    background-image: url(assets/resources/heat.png);
 }

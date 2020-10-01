@@ -78,6 +78,18 @@ export const PaymentWidgetMixin = {
               } else {
                 (this as any)["megaCredits"] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
               }
-        }
+        },
+        setMaxValue: function (target: string): void {
+            let currentValue: number = (this as any)[target];
+            let maxValue: number = (this as any).player[target];
+
+            if (target === "microbes") maxValue = (this as any).playerinput.microbes;
+            if (target === "floaters") maxValue = (this as any).playerinput.floaters;
+
+            while (currentValue < maxValue) {
+                this.addValue(target, 1);
+                currentValue++;
+            }
+        },
     }
 }

@@ -59,6 +59,10 @@ export const VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlo
     { globalEventName: GlobalEventName.CORROSIVE_RAIN , factory: CorrosiveRain },
 ];
 
+export const VENUS_POSITIVE_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
+    { globalEventName: GlobalEventName.VENUS_INFRASTRUCTURE , factory: VenusInfrastructure },
+];
+
 // ALL POSITIVE GLOBAL EVENTS
 export const POSITIVE_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = [
     { globalEventName: GlobalEventName.SPONSORED_PROJECTS , factory: SponsoredProjects },
@@ -77,7 +81,6 @@ export const POSITIVE_GLOBAL_EVENTS: Array<IGlobalEventFactory<IGlobalEvent>> = 
     { globalEventName: GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL , factory: AquiferReleasedByPublicCouncil },
     { globalEventName: GlobalEventName.SCIENTIFIC_COMMUNITY , factory: ScientificCommunity },
     { globalEventName: GlobalEventName.STRONG_SOCIETY , factory: StrongSociety },
-    { globalEventName: GlobalEventName.VENUS_INFRASTRUCTURE , factory: VenusInfrastructure },  
 ];
 
 // ALL NEGATIVE GLOBAL EVENTS
@@ -107,7 +110,8 @@ export function getGlobalEventByName(globalEventName: string): IGlobalEvent | un
         ...COLONY_ONLY_POSITIVE_GLOBAL_EVENTS,
         ...COLONY_ONLY_NEGATIVE_GLOBAL_EVENTS,
         ...VENUS_COLONY_POSITIVE_GLOBAL_EVENTS,
-        ...VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS
+        ...VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS,
+        ...VENUS_POSITIVE_GLOBAL_EVENTS
     ];
     
     const globalEventFactory = allEvents.find((globalEventFactory) => globalEventFactory.globalEventName === globalEventName);
@@ -131,6 +135,8 @@ export class GlobalEventDealer {
                 events.push(...VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS)
             };
         }
+
+        if (game.gameOptions.venusNextExtension) events.push(...VENUS_POSITIVE_GLOBAL_EVENTS);
 
         if (game.gameOptions.coloniesExtension) events.push(...COLONY_ONLY_POSITIVE_GLOBAL_EVENTS);
 

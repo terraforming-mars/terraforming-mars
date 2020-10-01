@@ -7,9 +7,6 @@ import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
 import { SelectCard } from "../inputs/SelectCard";
 import { CardName } from "../CardName";
-import { LogMessageType } from "../LogMessageType";
-import { LogMessageData } from "../LogMessageData";
-import { LogMessageDataType } from "../LogMessageDataType";
 
 export class Predators implements IProjectCard, IActionCard, IResourceCard {
     public cost: number = 14;
@@ -74,13 +71,12 @@ export class Predators implements IProjectCard, IActionCard, IResourceCard {
     }
 
     private logCardAction(game: Game, player: Player, card?: ICard) {
-        const target = card ? new LogMessageData(LogMessageDataType.CARD, card.name) : new LogMessageData(LogMessageDataType.STRING, "Neutral Player");
-
-        game.log(
-          LogMessageType.DEFAULT,
-          "${0} removed an animal from ${1}",
-          new LogMessageData(LogMessageDataType.PLAYER, player.id),
-          target
-        );
+        game.newLog("${0} removed an animal from ${1}", b => {
+            if (card) {
+                b.player(player).card(card);
+            } else {
+                b.player(player).string("Neutral Player")
+            }
+        });
       }
 }

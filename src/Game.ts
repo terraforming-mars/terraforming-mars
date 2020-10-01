@@ -44,8 +44,6 @@ import {SelectResourceDecrease} from "./interrupts/SelectResourceDecrease";
 import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
 import { ILoadable } from "./ILoadable";
 import {LogMessage} from "./LogMessage";
-import {LogMessageType} from "./LogMessageType";
-import {LogMessageData} from "./LogMessageData";
 import {Database} from "./database/Database";
 import { SerializedGame } from "./SerializedGame";
 import { SerializedPlayer } from "./SerializedPlayer";
@@ -61,7 +59,6 @@ import { getRandomMilestonesAndAwards } from "./MASynergy";
 import { CardType } from "./cards/CardType";
 import { ColonyModel } from "./models/ColonyModel";
 import { LogBuilder } from "./LogBuilder";
-import { LogMessageDataType } from "./LogMessageDataType";
 
 export interface Score {
   corporation: String;
@@ -1651,11 +1648,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
       }
 
-      this.log(
-        LogMessageType.DEFAULT,
-        discardedCards.length + " card(s) were discarded",
-       ...discardedCards.map((card) => new LogMessageData(LogMessageDataType.CARD, card.name)),
-      );
+      LogHelper.logDiscardedCards(this, discardedCards);
 
       return result;
     }
@@ -1676,11 +1669,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
       }
 
-      this.log(
-        LogMessageType.DEFAULT,
-        discardedCards.length + " card(s) were discarded",
-       ...discardedCards.map((card) => new LogMessageData(LogMessageDataType.CARD, card.name)),
-      );
+      LogHelper.logDiscardedCards(this, discardedCards);
 
       return result;
     }
@@ -1701,11 +1690,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         }
       }
 
-      this.log(
-        LogMessageType.DEFAULT,
-        discardedCards.length + " card(s) were discarded",
-       ...discardedCards.map((card) => new LogMessageData(LogMessageDataType.CARD, card.name)),
-      );
+      LogHelper.logDiscardedCards(this, discardedCards);
 
       return result;
     }
@@ -1728,14 +1713,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
         f(builder);
       }
       this.gameLog.push(builder.logMessage());
-      this.gameAge++;
-      if (this.gameLog.length > 50 ) {
-        (this.gameLog.shift());
-      }
-    }
-
-    public log(type: LogMessageType, message: string, ...data: LogMessageData[]) {
-      this.gameLog.push(new LogMessage(type, message, data));
       this.gameAge++;
       if (this.gameLog.length > 50 ) {
         (this.gameLog.shift());

@@ -7,9 +7,6 @@ import {Game} from "../Game";
 import {SelectCard} from "../inputs/SelectCard";
 import {ResourceType} from "../ResourceType";
 import { CardName } from "../CardName";
-import { LogMessageType } from "../LogMessageType";
-import { LogMessageData } from "../LogMessageData";
-import { LogMessageDataType } from "../LogMessageDataType";
 
 export class Ants implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 9;
@@ -71,19 +68,9 @@ export class Ants implements IActionCard, IProjectCard, IResourceCard {
     private logCardAction(game: Game, player: Player, card?: ICard) {
       if (card) {
         var otherPlayer = game.getCardPlayer(card.name);
-        game.log(
-          LogMessageType.DEFAULT,
-          "${0} removed a microbe from ${1}'s ${2}",
-          new LogMessageData(LogMessageDataType.PLAYER, player.id),
-          new LogMessageData(LogMessageDataType.PLAYER, otherPlayer.id),
-          new LogMessageData(LogMessageDataType.CARD, card.name)
-        );  
+        game.newLog("${0} removed a microbe from ${1}'s ${2}", b => b.player(player).player(otherPlayer).card(card));
       } else {
-        game.log(
-          LogMessageType.DEFAULT,
-          "${0} removed a microbe from ${1}",
-          new LogMessageData(LogMessageDataType.PLAYER, player.id),
-          new LogMessageData(LogMessageDataType.STRING, "Neutral Player"));
+        game.newLog("${0} removed a microbe from ${1}'s ${2}", b => b.player(player).string("Neutral Player"));
       }
     }
 }

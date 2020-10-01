@@ -8,9 +8,6 @@ import { LogHelper } from "../../components/LogHelper";
 import { IProjectCard } from "../IProjectCard";
 import { SelectCard } from "../../inputs/SelectCard";
 import { ICard } from "../ICard";
-import { LogMessageData } from "../../LogMessageData";
-import { LogMessageDataType } from "../../LogMessageDataType";
-import { LogMessageType } from "../../LogMessageType";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectOption } from "../../inputs/SelectOption";
 
@@ -101,11 +98,6 @@ export class ProjectWorkshop implements CorporationCard {
     }
 
     private logCardDraw(game: Game, player: Player, drawnCard: IProjectCard) {
-        game.log(
-            LogMessageType.DEFAULT,
-            "${0} drew ${1}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.CARD, drawnCard.name)
-        );
+        game.newLog("${0} drew ${1}", b => b.player(player).card(drawnCard));
     }
 }

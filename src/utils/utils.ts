@@ -10,3 +10,5 @@ export const playerColorClass = (
 
     return `${prefix}${color}`;
 };
+
+export const range = (n: number): Array<Number> => Array.from(Array(n).keys());

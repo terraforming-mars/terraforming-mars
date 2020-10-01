@@ -17,10 +17,6 @@ import { DynamicTitle } from "./common/DynamicTitle";
 
 const dialogPolyfill = require("dialog-polyfill");
 
-export const hidePlayerData = (root: any, player: PlayerModel) => {
-    (root as any).setVisibilityState("other_player_" + player.id, false);
-};
-
 export const PlayerHome = Vue.component("player-home", {
     props: ["player"],
     components: {
@@ -55,20 +51,29 @@ export const PlayerHome = Vue.component("player-home", {
             }
             return classes.join(" ");
         },
-        showPlayerDetails: function (player: PlayerModel) {
-            if (player.id === this.player.id) return;
-
-            (this.$root as any).setVisibilityState(
-                "other_player_" + player.id,
-                true
-            );
-        },
         getFleetsCountRange: function (player: PlayerModel): Array<number> {
             const fleetsRange: Array<number> = [];
             for (let i = 0; i < player.fleetSize - player.tradesThisTurn; i++) {
                 fleetsRange.push(i);
             }
             return fleetsRange;
+        },
+        getGenerationText: function (): string {
+            if (this.player.players.length === 1) {
+                const MAX_GEN = this.player.preludeExtension ? 12 : 14;
+                let retText =
+                    "generation " + this.player.generation + " of " + MAX_GEN;
+                if (MAX_GEN === this.player.generation) {
+                    retText =
+                        "<span class='last-generation blink-animation'>" +
+                        retText +
+                        "</span>";
+                }
+
+                return retText;
+            }
+
+            return "generation " + this.player.generation;
         },
     },
     mounted: function () {
@@ -126,7 +131,11 @@ export const PlayerHome = Vue.component("player-home", {
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace />
                  
                 <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat" v-if="player.gameLog.length > 0">
-                    <dynamic-title title="Game log" :color="player.color" :withAdditional="true" :additional="'generation' + player.generation" />
+                    <dynamic-title v-if="player.players.length > 1" title="Game log" :color="player.color" :withAdditional="true" :additional="'generation' + player.generation" />
+                    <h2 v-if="player.players.length === 1" :class="'player_color_'+ player.color">
+                        <span v-i18n>Game log</span>
+                        <span class="label-additional" v-html="getGenerationText()"></span>
+                    </h2>
                     <log-panel :messages="player.gameLog" :players="player.players"></log-panel>
                 </div>
 

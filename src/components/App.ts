@@ -5,6 +5,7 @@ import { GamesOverview } from "./GamesOverview";
 import { PlayerHome } from "./PlayerHome";
 import { StartScreen } from "./StartScreen";
 import { LoadGameForm } from "./LoadGameForm";
+import { DebugUI } from "./DebugUI";
 
 export const mainAppSettings = {
     "el": "#app",
@@ -15,6 +16,12 @@ export const mainAppSettings = {
         componentsVisibility: {
             "millestones_list": true,
             "awards_list": true,
+            "tags_concise": false,
+            "pinned_player_0": false,
+            "pinned_player_1": false,
+            "pinned_player_2": false,
+            "pinned_player_3": false,
+            "pinned_player_4": false,
         },
         game: {
             players: [],
@@ -28,12 +35,12 @@ export const mainAppSettings = {
         "player-home": PlayerHome,
         "player-end": GameEnd,
         "games-overview": GamesOverview,
+        "debug-ui": DebugUI,
     },
     "methods": {
         setVisibilityState: function (targetVar: string, isVisible: boolean) {
             if (isVisible === this.getVisibilityState(targetVar)) return;
             (this as any).componentsVisibility[targetVar] = isVisible;
-            (this as any).playerkey++;
         },
         getVisibilityState: function (targetVar: string): boolean {
             return (this as any).componentsVisibility[targetVar] ? true : false;
@@ -119,6 +126,8 @@ export const mainAppSettings = {
             app.screen = "create-game-form";
         } else if (currentPathname === "/load") {
             app.screen = "load";
+        } else if (currentPathname === "/debug-ui") {
+            app.screen = "debug-ui";
         } else {
             app.screen = "start-screen";
         }

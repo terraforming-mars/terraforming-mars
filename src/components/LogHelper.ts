@@ -15,7 +15,7 @@ export class LogHelper {
             resourceType = card.resourceType.toLowerCase() + "(s)";
         }
 
-        game.newLog("${0} added ${1} ${2} to ${3}", b =>
+        game.log("${0} added ${1} ${2} to ${3}", b =>
             b.player(player).number(qty).string(resourceType).card(card));
     }
 
@@ -26,20 +26,20 @@ export class LogHelper {
             resourceType = card.resourceType.toLowerCase() + "(s)";
         }
 
-        game.newLog("${0} removed ${1} ${2} from ${3} to ${4}", b =>
+        game.log("${0} removed ${1} ${2} from ${3} to ${4}", b =>
             b.player(player).number(qty).string(resourceType).card(card).string(effect));
     }
 
     static logGainStandardResource(game: Game, player: Player, resource: Resources, qty: number = 1) {
-        game.newLog("${0} gained ${1} ${2}", b => b.player(player).number(qty).string(resource));
+        game.log("${0} gained ${1} ${2}", b => b.player(player).number(qty).string(resource));
     }
 
     static logGainProduction(game: Game, player: Player, resource: Resources, qty: number = 1) {
-        game.newLog("${0}'s ${1} production increased by ${2}", b => b.player(player).string(resource).number(qty));
+        game.log("${0}'s ${1} production increased by ${2}", b => b.player(player).string(resource).number(qty));
     }
 
     static logCardChange(game: Game, player: Player, effect: string, qty: number = 1) {
-        game.newLog("${0} ${1} ${2} card(s)", b => b.player(player).string(effect).number(qty));
+        game.log("${0} ${1} ${2} card(s)", b => b.player(player).string(effect).number(qty));
     }
 
     static logTilePlacement(game: Game, player: Player, space: ISpace, tileType: TileType) {
@@ -72,23 +72,23 @@ export class LogHelper {
                 break;
         }
 
-        game.newLog("${0} placed ${1} tile on row ${2} position ${3}", b =>
+        game.log("${0} placed ${1} tile on row ${2} position ${3}", b =>
             b.player(player).string(type).number(row).number(position));
     }
 
     static logColonyTrackIncrease(game: Game, player: Player, colony: IColony) {
         const stepsIncreased = Math.min(player.colonyTradeOffset, MAX_COLONY_TRACK_POSITION - colony.trackPosition);
         
-        game.newLog("${0} increased ${1} colony track ${2} step(s)", b =>
+        game.log("${0} increased ${1} colony track ${2} step(s)", b =>
             b.player(player).colony(colony).number(stepsIncreased));
     }
 
     static logTRIncrease(game: Game, player: Player, steps: number) {
-        game.newLog("${0} gained ${1} TR", b => b.player(player).number(steps));
+        game.log("${0} gained ${1} TR", b => b.player(player).number(steps));
     }
 
     static logDiscardedCards(game: Game, discardedCards: Array<ICard>) {
-        game.newLog(discardedCards.length + " card(s) were discarded", b => {
+        game.log(discardedCards.length + " card(s) were discarded", b => {
             discardedCards.forEach(card => b.card(card));
         });    
     }

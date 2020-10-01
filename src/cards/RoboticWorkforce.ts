@@ -332,7 +332,7 @@ export class RoboticWorkforce implements IProjectCard {
                 player.setProduction(Resources.PLANTS,result.plantProduction);
                 player.setProduction(Resources.HEAT,result.heatProduction);
 
-                game.newLog("${0} copied ${1} production with ${2}", b =>
+                game.log("${0} copied ${1} production with ${2}", b =>
                     b.player(player).cardName(result.name).card(this));
 
                 return undefined;

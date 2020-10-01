@@ -38,7 +38,7 @@ export class Factorum implements IActionCard, CorporationCard {
 
             const drawnCard = game.getCardsInHandByTag(player, Tags.STEEL).slice(-1)[0];
 
-            game.newLog("${0} drew ${1}", b => b.player(player).card(drawnCard));
+            game.log("${0} drew ${1}", b => b.player(player).card(drawnCard));
 
             return undefined;
         });

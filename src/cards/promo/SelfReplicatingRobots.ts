@@ -63,7 +63,7 @@ export class SelfReplicatingRobots implements IProjectCard {
                         resourceCount: 2
                       }
                   );    
-                  game.newLog("${0} linked ${1} with ${2}", b => b.player(player).card(foundCards[0]).card(this));
+                  game.log("${0} linked ${1} with ${2}", b => b.player(player).card(foundCards[0]).card(this));
                   return undefined;
                 }
             ));
@@ -84,7 +84,7 @@ export class SelfReplicatingRobots implements IProjectCard {
                       targetCard.resourceCount = targetCard.resourceCount * 2;
                     }
                   }
-                  game.newLog("${0} doubled resources on ${1} from ${2} to ${3}", b => {
+                  game.log("${0} doubled resources on ${1} from ${2} to ${3}", b => {
                     b.player(player).card(foundCards[0]).number(resourceCount).number(resourceCount * 2)
                   });
                   return undefined;

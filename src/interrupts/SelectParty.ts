@@ -59,7 +59,7 @@ export class SelectParty implements PlayerInterrupt {
                 }
 
                 
-                game.newLog("${0} sent ${1} delegate(s) in ${2} area", b => b.player(player).number(nbr).party(party));
+                game.log("${0} sent ${1} delegate(s) in ${2} area", b => b.player(player).number(nbr).party(party));
                 return undefined;
               }
             ));

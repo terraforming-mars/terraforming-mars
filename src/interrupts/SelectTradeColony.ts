@@ -19,7 +19,7 @@ export class SelectTradeColony implements PlayerInterrupt {
             colony.name + " - (" + colony.description + ")", 
             "Trade",
             () => {
-              game.newLog("${0} traded with ${1}", b => b.player(player).colony(colony));
+              game.log("${0} traded with ${1}", b => b.player(player).colony(colony));
               colony.trade(player, game);              
               return undefined;
             }

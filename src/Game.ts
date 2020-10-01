@@ -318,10 +318,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Print game_id if solo game
       if (players.length === 1) {
-        this.newLog("The id of this game is ${0}", b => b.string(this.id));
+        this.log("The id of this game is ${0}", b => b.string(this.id));
       }      
 
-      this.newLog("Generation ${0}", b =>
+      this.log("Generation ${0}", b =>
         b.forNewGeneration()
         .number(this.generation));
 
@@ -699,7 +699,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.allAwardsFunded()) {
         throw new Error("All awards already funded");
       }
-      this.newLog("${0} funded ${1} award",
+      this.log("${0} funded ${1} award",
           (b) => b.player(player).award(award));
 
       this.fundedAwards.push({
@@ -909,9 +909,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.gotoFinalGreeneryPlacement();
         // Log id or cloned game id
         if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith("#")) {
-          this.newLog("This game was a clone from game " + this.clonedGamedId);
+          this.log("This game was a clone from game " + this.clonedGamedId);
         } else {
-          this.newLog("This game id was " + this.id);
+          this.log("This game id was " + this.id);
         }
         return;
       }
@@ -964,7 +964,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private goToDraftOrResearch() {
 
       this.generation++;
-      this.newLog("Generation ${0}", (b) => b.forNewGeneration().number(this.generation));
+      this.log("Generation ${0}", (b) => b.forNewGeneration().number(this.generation));
       this.incrementFirstPlayer();
 
       this.players.forEach((player) => {
@@ -1707,7 +1707,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return player.cardsInHand.filter((card) => card.cardType === cardType);
     }
 
-    public newLog(message: string, f?: (builder: LogBuilder) => void) {
+    public log(message: string, f?: (builder: LogBuilder) => void) {
       var builder = new LogBuilder(message);
       if (f) {
         f(builder);

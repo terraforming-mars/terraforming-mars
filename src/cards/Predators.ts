@@ -71,7 +71,7 @@ export class Predators implements IProjectCard, IActionCard, IResourceCard {
     }
 
     private logCardAction(game: Game, player: Player, card?: ICard) {
-        game.newLog("${0} removed an animal from ${1}", b => {
+        game.log("${0} removed an animal from ${1}", b => {
             if (card) {
                 b.player(player).card(card);
             } else {

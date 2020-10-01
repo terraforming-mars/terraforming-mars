@@ -19,7 +19,7 @@ export class Splice implements CorporationCard {
         
         const drawnCards = game.getCardsInHandByTag(player, Tags.MICROBES).slice(-1);
 
-        game.newLog("${0} drew ${1}", b => b.player(player).card(drawnCards[0]));
+        game.log("${0} drew ${1}", b => b.player(player).card(drawnCards[0]));
         
         return undefined;
     }

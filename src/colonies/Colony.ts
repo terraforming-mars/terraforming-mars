@@ -83,7 +83,7 @@ export abstract class Colony  {
             colony.trackPosition = colony.colonies.length;
         }
 
-        game.newLog("${0} built a colony on ${1}", b => b.player(player).colony(colony));
+        game.log("${0} built a colony on ${1}", b => b.player(player).colony(colony));
 
         // Poseidon hook
         let poseidon = game.getPlayers().filter(player => player.isCorporation(CorporationName.POSEIDON));

@@ -57,6 +57,6 @@ export class ElectroCatapult implements IActionCard, IProjectCard {
     }
     
     private log(game: Game, player: Player, resource: Resources) {
-      game.newLog("${0} spent 1 ${1} to gain 7 MC", b => b.player(player).string(resource));
+      game.log("${0} spent 1 ${1} to gain 7 MC", b => b.player(player).string(resource));
     }
 }

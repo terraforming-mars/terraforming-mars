@@ -27,7 +27,7 @@ export class PharmacyUnion implements CorporationCard {
         player.cardsInHand.push(game.drawCardsByTag(Tags.SCIENCE, 1)[0]);
         const drawnCard = game.getCardsInHandByTag(player, Tags.SCIENCE).slice(-1)[0];
 
-        game.newLog("${0} drew ${1}", b => b.player(player).card(drawnCard));
+        game.log("${0} drew ${1}", b => b.player(player).card(drawnCard));
 
         return undefined;
     }
@@ -58,7 +58,7 @@ export class PharmacyUnion implements CorporationCard {
         if (this.resourceCount > 0) {
             this.resourceCount--;
             player.increaseTerraformRating(game);
-            game.newLog("${0} removed a disease from ${1} to gain 1 TR", b => b.player(player).card(this));
+            game.log("${0} removed a disease from ${1} to gain 1 TR", b => b.player(player).card(this));
             this.runInterrupts(player, game, scienceTags - 1);
             return undefined;
         } else {
@@ -71,7 +71,7 @@ export class PharmacyUnion implements CorporationCard {
                     "Gain TR", () => {
                         this.isDisabled = true;
                         player.increaseTerraformRatingSteps(3, game);
-                        game.newLog("${0} turned ${1} face down to gain 3 TR", b => b.player(player).card(this));
+                        game.log("${0} turned ${1} face down to gain 3 TR", b => b.player(player).card(this));
                         return undefined;
                     })
                 );

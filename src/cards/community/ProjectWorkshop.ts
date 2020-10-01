@@ -98,6 +98,6 @@ export class ProjectWorkshop implements CorporationCard {
     }
 
     private logCardDraw(game: Game, player: Player, drawnCard: IProjectCard) {
-        game.newLog("${0} drew ${1}", b => b.player(player).card(drawnCard));
+        game.log("${0} drew ${1}", b => b.player(player).card(drawnCard));
     }
 }

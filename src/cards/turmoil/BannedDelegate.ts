@@ -67,6 +67,6 @@ export class BannedDelegate implements IProjectCard {
     }
 
     private log(game: Game, player: Player, party: IParty) {
-      game.newLog("${0} removed a delegate from ${1}", b => b.player(player).party(party));
+      game.log("${0} removed a delegate from ${1}", b => b.player(player).party(party));
     }
 }

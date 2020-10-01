@@ -18,7 +18,7 @@ export class MorningStarInc implements CorporationCard {
 
             const drawnCards = game.getCardsInHandByTag(player, Tags.VENUS).slice(-3);
 
-            game.newLog("${0} drew ${1}, ${2} and ${3}", b =>
+            game.log("${0} drew ${1}, ${2} and ${3}", b =>
                 b.player(player).card(drawnCards[0]).card(drawnCards[1]).card(drawnCards[2]));
         }
 

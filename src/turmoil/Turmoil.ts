@@ -230,7 +230,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
         if (this.distantGlobalEvent) {
             this.sendDelegateToParty("NEUTRAL", this.distantGlobalEvent.revealedDelegate, game);
         }
-        game.newLog("Turmoil phase has been resolved");
+        game.log("Turmoil phase has been resolved");
     }
 
     // Ruling Party changes
@@ -249,7 +249,7 @@ export class Turmoil implements ILoadable<SerializedTurmoil, Turmoil> {
                 if (this.chairman !== "NEUTRAL") {
                     const player = game.getPlayerById(this.chairman);
                     player.increaseTerraformRating(game);
-                    game.newLog("${0} is the new chairman and got 1 TR increase", b => b.player(player));
+                    game.log("${0} is the new chairman and got 1 TR increase", b => b.player(player));
                 }
             }
             else {

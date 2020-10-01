@@ -41,7 +41,7 @@ export class Viron implements ICard, CorporationCard {
             this.getActionCards(player, game),
             (foundCards: Array<ICard>) => {
               const foundCard = foundCards[0];
-              game.newLog("${0} used ${1} action with ${2}", b => b.player(player).card(foundCard).card(this));
+              game.log("${0} used ${1} action with ${2}", b => b.player(player).card(foundCard).card(this));
               return foundCard.action!(player, game);
             }
         );

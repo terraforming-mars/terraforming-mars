@@ -35,10 +35,10 @@ export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
         const topCard = game.dealer.dealCard();
         if (topCard.tags.indexOf(Tags.MICROBES) !== -1) {
             this.resourceCount++; 
-            game.newLog("${0} found life!", b => b.player(player));
+            game.log("${0} found life!", b => b.player(player));
         }
 
-        game.newLog("${0} revealed and discarded ${1}", b => b.player(player).card(topCard));
+        game.log("${0} revealed and discarded ${1}", b => b.player(player).card(topCard));
         
         game.dealer.discard(topCard);
         game.addSelectHowToPayInterrupt(player, 1, false, false, "Select how to pay for action");

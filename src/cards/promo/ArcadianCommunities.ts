@@ -19,7 +19,7 @@ export class ArcadianCommunities implements IActionCard, CorporationCard {
             (foundSpace: ISpace) => {
                 foundSpace.player = player;
                 
-                game.newLog("${0} placed a Community (player marker)", b => b.player(player));
+                game.log("${0} placed a Community (player marker)", b => b.player(player));
 
                 return undefined;
             }

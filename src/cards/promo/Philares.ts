@@ -20,7 +20,7 @@ export class Philares implements CorporationCard {
         game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
             game.addGreenery(player, space.id);
             
-            game.newLog("${0} placed a Greenery tile", b => b.player(player));
+            game.log("${0} placed a Greenery tile", b => b.player(player));
             
             return undefined;
         });

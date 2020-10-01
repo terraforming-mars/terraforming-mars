@@ -50,7 +50,7 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
                 }
             }
 
-            game.newLog("${0} drew ${1} and ${2}", b => b.player(player).cardName(floaterCards[0]).cardName(floaterCards[1]));
+            game.log("${0} drew ${1} and ${2}", b => b.player(player).cardName(floaterCards[0]).cardName(floaterCards[1]));
 
             LogHelper.logDiscardedCards(game, discardedCards);
         }

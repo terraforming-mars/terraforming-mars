@@ -1632,14 +1632,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return undefined;
     }
 
-    public drawCardsByTag(tag: Tags, total: number): Array<IProjectCard> {
+    public drawProjectCardByCondition(total: number, include: (card: IProjectCard) => boolean) {
       let cardsToDraw = 0;
       const result: Array<IProjectCard> = [];
       const discardedCards: Array<IProjectCard> = [];
 
       while (cardsToDraw < total) {
         const projectCard = this.dealer.dealCard();
-        if (projectCard.tags.includes(tag)) {
+        if (include(projectCard)) {
           cardsToDraw++;
           result.push(projectCard);
         } else {
@@ -1651,48 +1651,18 @@ export class Game implements ILoadable<SerializedGame, Game> {
       LogHelper.logDiscardedCards(this, discardedCards);
 
       return result;
+    }
+
+    public drawCardsByTag(tag: Tags, total: number): Array<IProjectCard> {
+      return this.drawProjectCardByCondition(total, card => card.tags.includes(tag));
     }
 
     public drawCardsByResource(resource: ResourceType, total: number): Array<IProjectCard> {
-      let cardsToDraw = 0;
-      const result: Array<IProjectCard> = [];
-      const discardedCards: Array<IProjectCard> = [];
-
-      while (cardsToDraw < total) {
-        const projectCard = this.dealer.dealCard();
-        if (projectCard.resourceType !== undefined && projectCard.resourceType === resource ) {
-          cardsToDraw++;
-          result.push(projectCard);
-        } else {
-          discardedCards.push(projectCard);
-          this.dealer.discard(projectCard);
-        }
-      }
-
-      LogHelper.logDiscardedCards(this, discardedCards);
-
-      return result;
+      return this.drawProjectCardByCondition(total, card => card.resourceType !== undefined && card.resourceType === resource);
     }
 
     public drawCardsByType(cardType: CardType, total: number): Array<IProjectCard> {
-      let cardsToDraw = 0;
-      const result: Array<IProjectCard> = [];
-      const discardedCards: Array<IProjectCard> = [];
-
-      while (cardsToDraw < total) {
-        const projectCard = this.dealer.dealCard();
-        if (projectCard.cardType === cardType) {
-          cardsToDraw++;
-          result.push(projectCard);
-        } else {
-          discardedCards.push(projectCard);
-          this.dealer.discard(projectCard);
-        }
-      }
-
-      LogHelper.logDiscardedCards(this, discardedCards);
-
-      return result;
+      return this.drawProjectCardByCondition(total, card => card.cardType === cardType);
     }
 
     public getCardsInHandByTag(player: Player, tag: Tags) {

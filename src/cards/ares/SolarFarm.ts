@@ -15,19 +15,20 @@ import { Tags } from "../Tags";
 export class SolarFarm implements IProjectCard {
     public cost: number = 12;
     public tags: Array<Tags> = [Tags.ENERGY, Tags.STEEL];
-    public cardType: CardType = CardType.EVENT;
+    public cardType: CardType = CardType.AUTOMATED;
     public name: CardName = CardName.SOLAR_FARM;
     public play(player: Player, game: Game) {
       return new SelectSpace(
         "Select space for Solar Farm tile",
         game.board.getAvailableSpacesOnLand(player),
-      (space: ISpace) => {
+        (space: ISpace) => {
+            const plantsOnSpace = space.bonus.filter((b) => b === SpaceBonus.PLANT).length;
+            player.setProduction(Resources.ENERGY, plantsOnSpace, game);
+
             game.addTile(player, SpaceType.LAND, space, {
               tileType: TileType.SOLAR_FARM,
               card: this.name
             });
-            const plantsOnSpace = space.bonus.filter((b) => b === SpaceBonus.PLANT).length;
-            player.setProduction(Resources.ENERGY, plantsOnSpace, game);
             space.adjacency = {bonus: [AresSpaceBonus.POWER, AresSpaceBonus.POWER]}
             return undefined;
           }

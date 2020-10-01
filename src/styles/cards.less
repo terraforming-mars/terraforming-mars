@@ -604,6 +604,7 @@ input[type=radio]:checked + .filterDiv::after {
   font-size: 18px;
   width: 44px;
   display: inline-block;
+  vertical-align: middle;
   text-shadow: none;
   border-top: 2px solid rgb(221,221,221);
   border-left: 2px solid rgb(221,221,221);
@@ -618,6 +619,11 @@ input[type=radio]:checked + .filterDiv::after {
   line-height: 32px;
   background-image: url(./assets/misc/production.png);
   background-size: 120px;
+
+  div {
+    display: inline-block;
+    vertical-align: middle;
+  }
 }
 
 .production-box-size1a {
@@ -842,6 +848,10 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
   background-size: 30px;
   filter: drop-shadow(0px 0px 1px black);
   vertical-align: middle;
+
+  &.resource--white {
+    background: white;
+  }
 }
 
 .resource-tag {
@@ -1087,6 +1097,13 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
   border: 2px solid #222;
   font-size: 14px;
   font-weight: normal;
+}
+
+.card-sign {
+  font-family:Prototype;
+  font-size:23px;
+  font-weight:normal;
+  vertical-align:middle;
 }
 
 .asteroid {
@@ -2050,5 +2067,57 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
     &.description--2 {
       width: 120px;
     }
+  }
+}
+
+
+.card-ecology-research {
+  .production-box-size2a {
+    white-space: nowrap;
+    width: 130px;
+
+    .tile.trade {
+      margin: 0 !important;
+    }
+
+    .plant.production {
+      margin-right: 5px;
+    }
+  }
+}
+
+.card-research-colony {
+  .content .first {
+    margin-left: 30px;
+  }
+}
+
+.card-sky-docks {
+  .tile.fleet {
+    margin-top: 0 !important;
+  }
+}
+
+.card-space-port-colony {
+  .tile.fleet {
+    margin-left: 30px;
+  }
+
+  .points {
+    padding: 5px 0 0 5px;
+    margin: 173px 0 0 133px;
+
+    .tile {
+      vertical-align: middle !important;
+      width: 26px !important;
+      height: 23px !important;
+      background-size: 26px !important;
+    }
+  }
+}
+
+.card-titan-floater-launch-pad {
+  .second-line {
+    margin-top: -10px;
   }
 }

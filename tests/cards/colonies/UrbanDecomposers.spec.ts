@@ -8,7 +8,8 @@ import { TileType } from "../../../src/TileType";
 import { Luna } from "../../../src/colonies/Luna";
 import { Decomposers } from "../../../src/cards/Decomposers";
 import { Ants } from "../../../src/cards/Ants";
-import { SelectResourceCard } from "../../../src/interrupts/SelectResourceCard";
+import { ICard } from "../../../src/cards/ICard";
+import { SelectCard } from "../../../src/inputs/SelectCard";
 
 describe("UrbanDecomposers", function () {
     let card : UrbanDecomposers, player : Player, game : Game;
@@ -65,8 +66,8 @@ describe("UrbanDecomposers", function () {
         expect(game.interrupts.length).to.eq(1);
 
         // add two microbes to Ants
-        let selectResourceInterrupt = game.interrupts[0] as SelectResourceCard;
-        selectResourceInterrupt.playerInput.cb([ants]);
+        let selectResource = game.interrupts[0].playerInput as SelectCard<ICard>;
+        selectResource.cb([ants]);
         expect(ants.resourceCount).to.eq(2);
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     });

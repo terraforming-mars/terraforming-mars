@@ -5,7 +5,8 @@ import { Player } from "../../../src/Player";
 import { OrOptions } from "../../../src/inputs/OrOptions";
 import { Game } from '../../../src/Game';
 import { TitanFloatingLaunchPad } from "../../../src/cards/colonies/TitanFloatingLaunchPad";
-import { SelectResourceCard } from "../../../src/interrupts/SelectResourceCard";
+import { SelectCard } from "../../../src/inputs/SelectCard";
+import { ICard } from "../../../src/cards/ICard";
 
 describe("TitanShuttles", function () {
     let card : TitanShuttles, player : Player, game : Game;
@@ -44,8 +45,8 @@ describe("TitanShuttles", function () {
         card.action(player, game);
         expect(game.interrupts.length).to.eq(1);
 
-        let selectResourceInterrupt = game.interrupts[0] as SelectResourceCard;
-        selectResourceInterrupt.playerInput.cb([card]);
+        let selectResource = game.interrupts[0].playerInput as SelectCard<ICard>;
+        selectResource.cb([card]);
         expect(card.resourceCount).to.eq(2);
     });
 
@@ -67,8 +68,8 @@ describe("TitanShuttles", function () {
         orOptions!.options[1].cb();
         expect(game.interrupts.length).to.eq(1);
 
-        let selectResourceInterrupt = game.interrupts[0] as SelectResourceCard;
-        selectResourceInterrupt.playerInput.cb([card2]);
+        let selectResource = game.interrupts[0].playerInput as SelectCard<ICard>;
+        selectResource.cb([card2]);
         expect(card2.resourceCount).to.eq(2);
     });
 });

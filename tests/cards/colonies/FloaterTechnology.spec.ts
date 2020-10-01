@@ -3,9 +3,10 @@ import { FloaterTechnology } from "../../../src/cards/colonies/FloaterTechnology
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from '../../../src/Game';
-import { SelectResourceCard } from "../../../src/interrupts/SelectResourceCard";
 import { Dirigibles } from "../../../src/cards/venusNext/Dirigibles";
 import { FloatingHabs } from "../../../src/cards/venusNext/FloatingHabs";
+import { SelectCard } from "../../../src/inputs/SelectCard";
+import { ICard } from "../../../src/cards/ICard";
 
 describe("FloaterTechnology", function () {
     let card : FloaterTechnology, player : Player, game : Game;
@@ -41,8 +42,8 @@ describe("FloaterTechnology", function () {
         card.action(player, game);
         expect(game.interrupts.length).to.eq(1);
 
-        let selectResourceInterrupt = game.interrupts[0] as SelectResourceCard;
-        selectResourceInterrupt.playerInput.cb([floatingHabs]);
+        let selectResource = game.interrupts[0].playerInput as SelectCard<ICard>;
+        selectResource.cb([floatingHabs]);
         expect(floatingHabs.resourceCount).to.eq(1);
         expect(dirigibles.resourceCount).to.eq(0);
     });

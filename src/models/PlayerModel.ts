@@ -59,4 +59,5 @@ export interface PlayerModel {
     passedPlayers: Array<PlayerId>;
     actionsTakenThisRound: number;
     deckSize: number;
+    preludeExtension: boolean;
 }

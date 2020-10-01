@@ -37,6 +37,8 @@
         "src/database/*.ts",
         "src/turmoil/*.ts",
         "src/turmoil/globalEvents*.ts",
-        "src/components/overview/*.ts"
+        "src/components/overview/*.ts",
+        "src/components/log/*.ts",
+        "src/components/common/*.ts"
     ]
 }

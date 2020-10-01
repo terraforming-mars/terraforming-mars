@@ -7,6 +7,7 @@ import { SelectPlayer } from "../../src/inputs/SelectPlayer";
 import { SelectSpace } from "../../src/inputs/SelectSpace";
 import { SpaceType } from "../../src/SpaceType";
 import { OrOptions } from "../../src/inputs/OrOptions";
+import { LandClaim } from "../../src/cards/LandClaim";
 
 describe("Flooding", function () {
     let card : Flooding, player : Player, player2 : Player, game : Game;
@@ -63,5 +64,19 @@ describe("Flooding", function () {
         const subActionSelectPlayer: SelectPlayer = subActions.options[0] as SelectPlayer;
         expect(subActionSelectPlayer.players.length).to.eq(1);
         expect(subActionSelectPlayer.players[0]).to.eq(player2);
+    });
+
+    it("Does not suggest player who played Land Claim", function() {
+        const landClaim = new LandClaim();
+        const landClaimAction = landClaim.play(player2, game);
+        const adjacentSpace = game.board.getAvailableSpacesOnLand(player).filter((space) => space.id === "03")[0];
+
+        landClaimAction.cb(adjacentSpace);
+        expect(adjacentSpace.player).to.eq(player2);
+        expect(adjacentSpace.tile).to.eq(undefined);
+
+        const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
+        const action = card.play(player, game) as SelectSpace;
+        expect(action.cb(oceanSpaces[0])).to.eq(undefined);
     });
 });

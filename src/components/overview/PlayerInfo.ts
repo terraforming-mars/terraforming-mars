@@ -2,7 +2,7 @@ import Vue from "vue";
 import { PlayerResources } from "./PlayerResources";
 import { PlayerTags } from "./PlayerTags";
 import { PlayerStatus } from "./PlayerStatus";
-import { playerBgColorClass } from "../../utils/utils";
+import { playerColorClass } from "../../utils/utils";
 
 export const PlayerInfo = Vue.component("player-info", {
     props: [
@@ -20,7 +20,7 @@ export const PlayerInfo = Vue.component("player-info", {
     methods: {
         getClasses: function (): string {
             let classes = ["player-info"];
-            classes.push(playerBgColorClass(this.player.color));
+            classes.push(playerColorClass(this.player.color, "bg_transparent"));
             return classes.join(" ");
         },
         getPlayerStatusAndResClasses: function (): string {

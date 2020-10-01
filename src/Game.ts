@@ -46,7 +46,6 @@ import { ILoadable } from "./ILoadable";
 import {LogMessage} from "./LogMessage";
 import {LogMessageType} from "./LogMessageType";
 import {LogMessageData} from "./LogMessageData";
-import {LogMessageDataType} from "./LogMessageDataType";
 import {Database} from "./database/Database";
 import { SerializedGame } from "./SerializedGame";
 import { SerializedPlayer } from "./SerializedPlayer";
@@ -63,7 +62,8 @@ import { getRandomMilestonesAndAwards } from "./MASynergy";
 import { CardType } from "./cards/CardType";
 import { ColonyModel } from "./models/ColonyModel";
 import { IAresData } from "./ares/IAresData";
-
+import { LogBuilder } from "./LogBuilder";
+import { LogMessageDataType } from "./LogMessageDataType";
 
 export interface Score {
   corporation: String;
@@ -338,18 +338,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Print game_id if solo game
       if (players.length === 1) {
-        this.log(
-          LogMessageType.DEFAULT,
-          "The id of this game is ${0}",
-          new LogMessageData(LogMessageDataType.STRING, this.id.toString())
-        );        
+        this.newLog("The id of this game is ${0}", b => b.string(this.id));
       }      
 
-      this.log(
-        LogMessageType.NEW_GENERATION,
-        "Generation ${0}",
-        new LogMessageData(LogMessageDataType.STRING, this.generation.toString())
-      );
+      this.newLog("Generation ${0}", b =>
+        b.forNewGeneration()
+        .number(this.generation));
 
       // Initial Draft
       if (gameOptions.initialDraftVariant) {
@@ -736,12 +730,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.allAwardsFunded()) {
         throw new Error("All awards already funded");
       }
-      this.log(
-        LogMessageType.DEFAULT,
-        "${0} funded ${1} award",
-        new LogMessageData(LogMessageDataType.PLAYER, player.id),
-        new LogMessageData(LogMessageDataType.AWARD, award.name)
-      );
+      this.newLog("${0} funded ${1} award",
+          (b) => b.player(player).award(award));
+
       this.fundedAwards.push({
         award: award,
         player: player
@@ -949,9 +940,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.gotoFinalGreeneryPlacement();
         // Log id or cloned game id
         if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith("#")) {
-          this.log(LogMessageType.DEFAULT, "This game was a clone from game " + this.clonedGamedId);
+          this.newLog("This game was a clone from game " + this.clonedGamedId);
         } else {
-          this.log(LogMessageType.DEFAULT, "This game id was " + this.id);
+          this.newLog("This game id was " + this.id);
         }
         return;
       }
@@ -1004,11 +995,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     private goToDraftOrResearch() {
 
       this.generation++;
-      this.log(
-        LogMessageType.NEW_GENERATION,
-        "Generation ${0}",
-        new LogMessageData(LogMessageDataType.STRING, this.generation.toString())
-      );
+      this.newLog("Generation ${0}", (b) => b.forNewGeneration().number(this.generation));
       this.incrementFirstPlayer();
 
       this.players.forEach((player) => {
@@ -1797,6 +1784,18 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public getCardsInHandByType(player: Player, cardType: CardType) {
       return player.cardsInHand.filter((card) => card.cardType === cardType);
+    }
+
+    public newLog(message: string, f?: (builder: LogBuilder) => void) {
+      var builder = new LogBuilder(message);
+      if (f) {
+        f(builder);
+      }
+      this.gameLog.push(builder.logMessage());
+      this.gameAge++;
+      if (this.gameLog.length > 50 ) {
+        (this.gameLog.shift());
+      }
     }
 
     public log(type: LogMessageType, message: string, ...data: LogMessageData[]) {

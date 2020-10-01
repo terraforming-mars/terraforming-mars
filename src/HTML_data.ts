@@ -7646,11 +7646,12 @@ export const HTML_DATA: Map<string, string> =
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">ACTION</div>
+          <div class="resource money effect-money">?</div>
           <div class="red-arrow"></div>
-          REPLAY &nbsp;<div class="resource card"><div class="card-icon card-icon-event"></div></div>
+          REPLAY &nbsp;<div class="resource card red-outline"><div class="card-icon tag-event"></div></div>&nbsp;*
           
           <div class="description effect">
-            (Action: Replay a played event from any player at FULL COST IN MC, then REMOVE IT FROM PLAY.)
+            (Action: Replay a played event from any player by paying its cost ONLY in MC (discounts and rebates apply), then REMOVE IT FROM PLAY.)
           </div>
         </div>
       </div>

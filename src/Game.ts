@@ -1654,7 +1654,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public drawCardsByTag(tag: Tags, total: number): Array<IProjectCard> {
-<<<<<<< HEAD
       return this.drawProjectCardsByCondition(total, card => card.tags.includes(tag));
     }
 
@@ -1664,17 +1663,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     public drawCardsByType(cardType: CardType, total: number): Array<IProjectCard> {
       return this.drawProjectCardsByCondition(total, card => card.cardType === cardType);
-=======
-      return this.drawProjectCardByCondition(total, card => card.tags.includes(tag));
-    }
-
-    public drawCardsByResource(resource: ResourceType, total: number): Array<IProjectCard> {
-      return this.drawProjectCardByCondition(total, card => card.resourceType !== undefined && card.resourceType === resource);
-    }
-
-    public drawCardsByType(cardType: CardType, total: number): Array<IProjectCard> {
-      return this.drawProjectCardByCondition(total, card => card.cardType === cardType);
->>>>>>> 57488b0a7f5fdda92b2b86cdf05dac971bfa75e0
     }
 
     public getCardsInHandByTag(player: Player, tag: Tags) {

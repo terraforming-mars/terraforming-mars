@@ -460,8 +460,16 @@ input[type=radio]:checked + .filterDiv::after {
   background-position: -4px -2px !important;
 }
 .tag-city-count {
-  background: url(assets/icon_city.png) center no-repeat;
-  filter: invert(100%) contrast(200%);
+  background-image: url(assets/tiles/city.png);
+  background-image: url(assets/tiles/city.png);
+  border-radius: 0px !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: none !important;
+  filter: brightness(0.8);
+  background-size: 30px 34px !important;
+  width: 30px !important;
+  height: 34px !important;
 }
 
 .tag-colony-count {
@@ -470,9 +478,15 @@ input[type=radio]:checked + .filterDiv::after {
 }
 
 .tag-influence-count {
-  background: url(assets/icon_influence.png) center no-repeat;
-  filter: invert(100%) contrast(200%);
-  background-size: 28px;
+  background-image: url(assets/misc/influence.png);
+  background-color: transparent;
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  background-size: 34px !important;
+  width: 34px !important;
+  height: 36px !important;
+  filter: brightness(0.8);
 }
 
 
@@ -649,12 +663,12 @@ input[type=radio]:checked + .filterDiv::after {
 .production-prefix {
   display: inline-block;
   position: relative;
-  color: black;
+  color: #001 !important;
   width: 23px;
   vertical-align: central;
   line-height: 10px;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 20px;
 }
 
 
@@ -762,6 +776,7 @@ background-image: url(./assets/global-parameters/venus.png);
 width: 60px;
 height: 40px;
 background-size: 60px 40px;
+color: #0000;
 }
 
 .rating {
@@ -903,6 +918,7 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
   background-image: url(./assets/resources/fighter.png);
 }
 .asteroid {
+  color: #0000 !important;
   background-image: url(./assets/resources/asteroid.png);
 }
 .pristar {
@@ -922,7 +938,7 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
 .card-icon {
   position: absolute;
   margin-left: 15px;
-  margin-top: -14px;
+  margin-top: -10px;
   width: 20px;
   height: 20px;
   line-height: 20px;
@@ -966,7 +982,7 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
 }
 
 .card-icon-science {
-  background-image: url("./assets/tag-science.png");
+  background-image: url("./assets/tags/science.png");
   border-radius: 50%;
 }
 
@@ -1074,7 +1090,7 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
 }
 
 .asteroid {
-    background:black;
+    background-color:black;
     color:#bbb;
 }
 
@@ -1619,7 +1635,7 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
 
   .card-effect-icons {
     position: absolute;
-    margin: -10px 0 0 0;
+    margin: -5px 0 0 11px;
   }
 
   .card-effect-text {
@@ -1632,6 +1648,7 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
 
     .description {
       font-size: 9.5px;
+      line-height: 11px;
     }
   }
 
@@ -1854,7 +1871,7 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
     line-height: 0;
 }
 
-.card-content-requirements {
+.card-content-requirements, .corporation-ability {
   margin-bottom: 15px;
 }
 
@@ -1918,6 +1935,120 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
     .city-tile {
       margin-top: 20px;
       vertical-align: top;
+    }
+  }
+}
+
+.card-arcadian-communities {
+  .corporation-logo {
+    font-size: 20px;
+    padding: 0 5px;
+    width: 147px;
+    background: #eeeeee;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 3px 3px 3px grey;
+    margin: 5px 10px;
+    border-radius: 5px;
+    border-top: 2px solid rgb(221,221,221);
+    border-left: 2px solid rgb(221,221,221);
+    border-bottom: 2px solid rgb(137,137,137);
+    border-right: 2px solid rgb(137,137,137);
+    font-family: Arial;
+    text-align: center;
+    line-height: 25px;
+  }
+
+  .contentCorporation {
+    .corporationEffectBox {
+      font-size: 9px;
+      line-height: 12px;
+
+      .corporation-action-text {
+        text-indent: 30px;
+        margin: -3px 0 5px 0;
+      }
+    }
+
+    .red-arrow {
+      position: absolute;
+      margin: -9px 0 0 -31px
+    }
+    
+    .description {
+      font-size: 10px;
+      line-height: 12px;
+    }
+  }
+
+  .resource {
+    &.special {
+      background: linear-gradient(orange, orangered);
+      margin-left: 15px;
+    }
+    &.money {
+      margin: 0 8px 0 15px;
+    }
+  }
+}
+
+.card-factorum {
+  .corporation-starts-with {
+    .resource.money {
+      margin-left:60px;
+      margin-right:25px;
+    }
+  }
+
+  .corporationEffectBox {
+    width: 227px;
+    margin-left: -5px;
+
+    .corporation-action-icons {
+      font-size: 12px;
+    }
+  }
+}
+
+.card-self-replicating-robots {
+  .cards-count {
+    position: absolute;
+    background: #ffffffb3;
+    color: black;
+    margin-left: 3px;
+    width: 24px;
+    height: 20px;
+    line-height: 20px;
+    margin-top: 16px;
+    border-radius: 5px;
+    font-size: 17px;
+  }
+
+  .requirements {
+    margin-bottom: 20px;
+  }
+}
+
+.card-dusk-laser-mining {
+  .res-count-wrapper {
+    display: inline-block;
+    vertical-align: top;
+    margin: 20px 0 0 15px;
+  }
+}
+
+.card-atmo-collectors {
+  .card-effect-line {
+    margin-left: -3px;
+    font-size: 14px;
+  }
+}
+
+.card-titan-floater-launch-pad {
+  .content .description {
+
+    margin-bottom: 7px;
+
+    &.description--2 {
+      width: 120px;
     }
   }
 }

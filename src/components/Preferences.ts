@@ -87,7 +87,7 @@ export const Preferences = Vue.component("preferences", {
             }
         },
         getGenMarker: function (): string {
-            return `gen ${this.generation}`;
+            return `${this.generation}`;
         },
     },
     mounted: function () {
@@ -95,8 +95,10 @@ export const Preferences = Vue.component("preferences", {
     },
     template: `
         <div class="preferences_cont" :data="syncPreferences()">
-                <div class="preferences_tm"></div>
-                <div class="preferences-gen-marker">{{ getGenMarker() }}</div>
+                <div class="preferences_tm">
+                    <div class="preferences-gen-text">GEN</div>
+                    <div class="preferences-gen-marker">{{ getGenMarker() }}</div>
+                </div>
                 <div class="preferences_item preferences_player"><div class="preferences_player_inner" :class="'player_bg_color_' + player_color"></div></div>
                 <div class="preferences-divider" />
                 <a  href="#board">

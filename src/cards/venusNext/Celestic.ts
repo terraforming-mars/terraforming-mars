@@ -5,6 +5,7 @@ import { Tags } from "../Tags";
 import { ResourceType } from "../../ResourceType";
 import { Game } from "../../Game";
 import { IActionCard, ICard, IResourceCard } from "../ICard";
+import { IProjectCard } from "../IProjectCard";
 import { SelectCard } from "../../inputs/SelectCard";
 import { CardName } from "../../CardName";
 import { LogHelper } from "../../components/LogHelper";
@@ -33,9 +34,25 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public initialAction(player: Player, game: Game) {
         const requiredCardsCount = 2;
         if (game.hasCardsWithResource(ResourceType.FLOATER, requiredCardsCount)) {
-            var drawn = game.drawProjectCardsByCondition(requiredCardsCount,
-                card => { return Celestic.floaterCards.has(card.name) || card.resourceType === ResourceType.FLOATER })
-            player.cardsInHand.push(...drawn);
+            let drawnCount = 0;
+            let floaterCards: Array<CardName> = [];
+            let discardedCards: Array<IProjectCard> = [];
+
+            while (drawnCount < requiredCardsCount) {
+                let card = game.dealer.dealCard();
+                if (Celestic.floaterCards.has(card.name) || card.resourceType === ResourceType.FLOATER) {
+                    player.cardsInHand.push(card);
+                    drawnCount++;
+                    floaterCards.push(card.name);
+                } else {
+                    discardedCards.push(card);
+                    game.dealer.discard(card);
+                }
+            }
+
+            game.log("${0} drew ${1} and ${2}", b => b.player(player).cardName(floaterCards[0]).cardName(floaterCards[1]));
+
+            LogHelper.logDiscardedCards(game, discardedCards);
         }
         
         return undefined;

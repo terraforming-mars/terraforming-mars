@@ -72,10 +72,11 @@ export class ColonyDealer {
     public discard(card: IColony): void {
         this.discardedColonies.push(card);
     }
-    public drawColonies(players: number, allowList: Array<ColonyName> = [], addCommunityColonies: boolean = false): Array<IColony> {
+    public drawColonies(players: number, allowList: Array<ColonyName> = [], venusNextExtension: boolean, addCommunityColonies: boolean = false): Array<IColony> {
         let count: number = players + 2;
         let colonyTiles = ALL_COLONIES_TILES;
         if (addCommunityColonies) colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
+        if (!venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
 
         if (allowList.length === 0) {
             colonyTiles.forEach(e => allowList.push(e.colonyName))

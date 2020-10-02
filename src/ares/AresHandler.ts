@@ -6,9 +6,6 @@ import { LogHelper } from "../components/LogHelper";
 import { Game } from "../Game";
 import { SelectCard } from "../inputs/SelectCard";
 import { ISpace } from "../ISpace";
-import { LogMessageData } from "../LogMessageData";
-import { LogMessageDataType } from "../LogMessageDataType";
-import { LogMessageType } from "../LogMessageType";
 import { Player } from "../Player";
 import { Resources } from "../Resources";
 import { ResourceType } from "../ResourceType";
@@ -21,6 +18,7 @@ import { IAdjacencyCost } from "./IAdjacencyCost";
 import { SelectProductionToLoseInterrupt } from "../interrupts/SelectProductionToLoseInterrupt";
 import { ARES_MILESTONES } from "../milestones/Milestones";
 import { ARES_AWARDS } from "../awards/Awards";
+import { Multiset } from "../utils/Multiset";
 
 export const OCEAN_UPGRADE_TILES = [TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
 export const HAZARD_TILES = [TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE];
@@ -109,10 +107,12 @@ export class AresHandler {
         }
         };
     
+        var bonuses = new Multiset<AresSpaceBonus | SpaceBonus>();
+
         adjacentSpace.adjacency.bonus.forEach(bonus => {
+            bonuses.add(bonus);
             if (AresHandler.isAresSpaceBonus(bonus)) {
-                // TODO(kberg): group and sum. Right now cards only have one animal to place, so this isn't
-                // a problem.
+
                 switch(bonus) {
                 case AresSpaceBonus.ANIMAL:
                     addResourceToCard(game, player, ResourceType.ANIMAL, "animal");
@@ -133,19 +133,22 @@ export class AresHandler {
             } else {
                 game.grantSpaceBonus(player, bonus);
             }
-            game.newLog("${0} gains 1 ${1} for placing next to ${2}",
-                b => b.player(player).string(bonusAsString(bonus)).string(tileTypeAsString(adjacentSpace.tile?.tileType)));
-
-            var ownerBonus = 1;
-            if (adjacentSpace.player) {
-                if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
-                    ownerBonus = 2;
-                };
-                
-                adjacentSpace.player.megaCredits += ownerBonus;
-                game.newLog("${0} gains ${1} M€ for a tile placed next to ${2}", b => b.player(adjacentSpace.player!).string(ownerBonus.toString()).string(tileTypeAsString(adjacentSpace.tile?.tileType)));
-            }
         });
+
+        var bonusText = bonuses.entries().map((elem) => `${elem[1]} ${bonusAsString(elem[0])}`).join(", ");
+        var tileText = tileTypeAsString(adjacentSpace.tile?.tileType);
+        game.newLog("${0} gains ${1} for placing next to ${2}", b => b.player(player).string(bonusText).string(tileText));
+
+        var ownerBonus = 1;
+        if (adjacentSpace.player !== undefined) {
+            if (adjacentSpace.player.playedCards.find(card => card.name === CardName.MARKETING_EXPERTS)) {
+                ownerBonus = 2;
+            };
+            
+            adjacentSpace.player.megaCredits += ownerBonus;
+            game.newLog("${0} gains ${1} M€ for a tile placed next to ${2}", b => b.player(adjacentSpace.player!).number(ownerBonus).string(tileText));
+        }
+
         return true;
     }
 
@@ -231,23 +234,23 @@ export class AresHandler {
     //
     // This feature is part of Ecological Survey and Geological Survey.
     //
-    public static beforeTilePlacement(player: Player): Map<Resources | ResourceType, number> {
-      var map: Map<Resources | ResourceType, number> = new Map();
+    public static beforeTilePlacement(player: Player): Multiset<Resources | ResourceType> {
+      var multiset: Multiset<Resources | ResourceType> = new Multiset();
       if (player.playedCards.find((c) => c.name === CardName.ECOLOGICAL_SURVEY)) {
-          map.set(Resources.PLANTS, player.getResource(Resources.PLANTS));
-          map.set(ResourceType.ANIMAL, AresHandler.countResources(player, ResourceType.ANIMAL));
-          map.set(ResourceType.MICROBE, AresHandler.countResources(player, ResourceType.MICROBE));
+          multiset.add(Resources.PLANTS, player.getResource(Resources.PLANTS));
+          multiset.add(ResourceType.ANIMAL, AresHandler.countResources(player, ResourceType.ANIMAL));
+          multiset.add(ResourceType.MICROBE, AresHandler.countResources(player, ResourceType.MICROBE));
       }
       if (player.playedCards.find((c) => c.name === CardName.GEOLOGICAL_SURVEY)) {
-          map.set(Resources.STEEL, player.getResource(Resources.STEEL));
-          map.set(Resources.TITANIUM, player.getResource(Resources.TITANIUM));
-          map.set(Resources.HEAT, player.getResource(Resources.HEAT));
+          multiset.add(Resources.STEEL, player.getResource(Resources.STEEL));
+          multiset.add(Resources.TITANIUM, player.getResource(Resources.TITANIUM));
+          multiset.add(Resources.HEAT, player.getResource(Resources.HEAT));
       }
-      return map;
+      return multiset;
     }
 
     // Used with Ecological and Geological Survey
-    public static afterTilePlacement(game: Game, player: Player, startingResources?: Map<Resources | ResourceType, number>): void {
+    public static afterTilePlacement(game: Game, player: Player, startingResources?: Multiset<Resources | ResourceType>): void {
         if (!startingResources) {
             return;
         }

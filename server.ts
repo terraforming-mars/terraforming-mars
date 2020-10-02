@@ -531,13 +531,13 @@ function getAwards(game: Game): Array<FundedAwardModel> {
 }
 
 function getCorporationCard(player: Player): CardModel | undefined {
-    if (player.corporationCard === undefined) return undefined;
-
+    if (player.corporationCard === undefined) return undefined; 
     return {
         name: player.corporationCard.name,
         resources: player.getResourcesOnCard(player.corporationCard),
         calculatedCost: 0,
         cardType: CardType.CORPORATION,
+        tags: player.corporationCard.tags
     } as CardModel;
 }
 
@@ -628,7 +628,8 @@ function getCardsAsCardModel(
                     ? card.resourceCount
                     : undefined,
             calculatedCost: 0,
-            cardType: CardType.AUTOMATED,
+            cardType: CardType.AUTOMATED, 
+            tags: card.tags
         });
     });
 
@@ -739,7 +740,8 @@ function getCards(
         resources: showResouces ? player.getResourcesOnCard(card) : undefined,
         name: card.name,
         calculatedCost: player.getCardCost(game, card),
-        cardType: card.cardType,
+        cardType: card.cardType, 
+        tags: card.tags
     }));
 }
 

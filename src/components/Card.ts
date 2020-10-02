@@ -21,6 +21,7 @@ import { ALL_PRELUDE_CORPORATIONS,
 import { HTML_DATA } from "../HTML_data";
 import { CardModel } from "../models/CardModel";
 import { CardName } from "../CardName";
+import { CardTitle } from "./card/CardTitle"
 
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
@@ -97,11 +98,12 @@ function getCardContent(cardName: string): string {
 }
 
 export const Card = Vue.component("card", {
+    components: {
+        "card-title": CardTitle
+    },
     props: [
         "card",
-        "actionUsed",
-        "card-title",
-        "card-tags"
+        "actionUsed", 
     ],
     methods: {
         getCardContent: function() {
@@ -122,15 +124,14 @@ export const Card = Vue.component("card", {
         }
     },
     mounted: function() {
-        console.log(this)
+        console.log(this.card)
     },
     template: `
     <div :class="getCardCssClass(card)">
         <img v-if="lifeFound(card)" class="little-green-men" src="assets/martian.png" />
         <div class="card_resources_counter" v-if="card.resources !== undefined">RES:<span class="card_resources_counter--number"> {{ card.resources }}</span></div>
         <div class="card-content-wrapper" v-i18n>
-            <card-title title="card.title" type="card.type"/>
-            <card-tags :tags="card.tags"/>
+            <card-title :title="card.name" :type="card.cardType"/>
             <div class="content" v-html=this.getCardContent() />
         </div>
     </div>

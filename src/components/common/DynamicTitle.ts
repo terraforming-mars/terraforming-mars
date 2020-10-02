@@ -16,7 +16,7 @@ export const DynamicTitle = Vue.component("dynamic-title", {
             default: false,
         },
         additional: {
-            type: String,
+            type: [String, Number],
             default: "",
         },
     },

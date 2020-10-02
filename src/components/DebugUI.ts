@@ -1,7 +1,12 @@
 import Vue from "vue";
 import { Card } from "./Card";
-import { ALL_PRELUDE_PROJECTS_CARDS, ALL_VENUS_PROJECTS_CARDS, ALL_COLONIES_PROJECTS_CARDS, ALL_TURMOIL_PROJECTS_CARDS, ALL_PROMO_PROJECTS_CARDS, ALL_PROJECT_CARDS, ALL_CORP_ERA_PROJECT_CARDS } from '../Dealer';
 import { CardName } from "../CardName";
+import { PRELUDE_CARD_MANIFEST } from "../cards/prelude/PreludeCardManifest";
+import { VENUS_CARD_MANIFEST } from "../cards/venusNext/VenusCardManifest";
+import { COLONIES_CARD_MANIFEST } from "../cards/colonies/ColoniesCardManifest";
+import { TURMOIL_CARD_MANIFEST } from "../cards/turmoil/TurmoilCardManifest";
+import { PROMO_CARD_MANIFEST } from "../cards/promo/PromoCardManifest";
+import { BASE_CARD_MANIFEST, CORP_ERA_CARD_MANIFEST } from "../cards/StandardCardManifests";
 
 export const DebugUI = Vue.component("debug-ui", {
     components: {
@@ -10,14 +15,14 @@ export const DebugUI = Vue.component("debug-ui", {
     methods: {
         getAllCards: function () {
             const allItems: Array<CardName> = [
-                ...ALL_PRELUDE_PROJECTS_CARDS.map((cf) => cf.cardName),
-                ...ALL_VENUS_PROJECTS_CARDS.map((cf) => cf.cardName),
-                ...ALL_COLONIES_PROJECTS_CARDS.map((cf) => cf.cardName),
-                ...ALL_TURMOIL_PROJECTS_CARDS.map((cf) => cf.cardName),
-                ...ALL_PROMO_PROJECTS_CARDS.map((cf) => cf.cardName),
-                ...ALL_PROJECT_CARDS.map((cf) => cf.cardName),
-                ...ALL_CORP_ERA_PROJECT_CARDS.map((cf) => cf.cardName)
-            ].sort();
+                ...PRELUDE_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+                ...VENUS_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+                ...COLONIES_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+                ...TURMOIL_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+                ...PROMO_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+                ...BASE_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+                ...CORP_ERA_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+            ];
             return allItems;
         }
     },

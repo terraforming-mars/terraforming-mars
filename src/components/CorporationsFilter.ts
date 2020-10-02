@@ -1,42 +1,56 @@
 import Vue from "vue";
 
-import { ALL_VENUS_CORPORATIONS, ALL_PRELUDE_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS, ALL_CORP_ERA_CORPORATION_CARDS, ALL_COMMUNITY_CORPORATIONS } from '../Dealer';
 import { CardName } from "../CardName";
 import { CorporationGroup } from "../CorporationName";
+import { ALL_CORPORATION_DECKS } from "../cards/AllCards";
+import { PRELUDE_CARD_MANIFEST } from "../cards/prelude/PreludeCardManifest";
+import { VENUS_CARD_MANIFEST } from "../cards/venusNext/VenusCardManifest";
+import { COLONIES_CARD_MANIFEST } from "../cards/colonies/ColoniesCardManifest";
+import { CORP_ERA_CARD_MANIFEST, BASE_CARD_MANIFEST } from "../cards/StandardCardManifests";
+import { PROMO_CARD_MANIFEST } from "../cards/promo/PromoCardManifest";
+import { TURMOIL_CARD_MANIFEST } from "../cards/turmoil/TurmoilCardManifest";
+import { CardManifest } from "../cards/CardManifest";
+import { COMMUNITY_CARD_MANIFEST } from "../cards/community/CommunityCardManifest";
 
-const allItems: Array<CardName> = [
-    ...ALL_CORPORATION_CARDS.map((cf) => cf.cardName),
-    ...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => cf.cardName),
-    ...ALL_PRELUDE_CORPORATIONS.map((cf) => cf.cardName),
-    ...ALL_VENUS_CORPORATIONS.map((cf) => cf.cardName),
-    ...ALL_COLONIES_CORPORATIONS.map((cf) => cf.cardName),
-    ...ALL_TURMOIL_CORPORATIONS.map((cf) => cf.cardName),
-    ...ALL_PROMO_CORPORATIONS.map((cf) => cf.cardName),
-    ...ALL_COMMUNITY_CORPORATIONS.map((cf) => cf.cardName)
-];
+
+const allItems: Array<CardName> =
+    ALL_CORPORATION_DECKS.map((deck) => deck.cards.map((cf) => cf.cardName))
+        .reduce((accumulator, cards) => accumulator.concat(cards));
+
+function corporateCardNames(cardManifest: CardManifest) : Array<CardName> {
+    return cardManifest.corporationCards.cards.map((cf) => cf.cardName);
+}
 
 export const CorporationsFilter = Vue.component("corporations-filter", {
     props: ["corporateEra", "prelude", "venusNext", "colonies", "turmoil", "promoCardsOption", "communityCardsOption"],
     data: function () {
+        const corpCardNames = {
+            original: corporateCardNames(BASE_CARD_MANIFEST).concat(corporateCardNames(CORP_ERA_CARD_MANIFEST)),
+            prelude:  corporateCardNames(PRELUDE_CARD_MANIFEST),
+            venus: corporateCardNames(VENUS_CARD_MANIFEST),
+            colonies: corporateCardNames(COLONIES_CARD_MANIFEST),
+            turmoil: corporateCardNames(TURMOIL_CARD_MANIFEST),
+            promo: corporateCardNames(PROMO_CARD_MANIFEST),
+            community: corporateCardNames(COMMUNITY_CARD_MANIFEST),
+        };
         return {
             customCorporationsList: false,
             selectedCorporations: [
-                ...this.corporateEra ? ALL_CORPORATION_CARDS.concat(ALL_CORP_ERA_CORPORATION_CARDS).map((cf) => cf.cardName) : [],
-                ...this.prelude ? ALL_PRELUDE_CORPORATIONS.map((cf) => cf.cardName) : [],
-                ...this.venusNext ? ALL_VENUS_CORPORATIONS.map((cf) => cf.cardName) : [],
-                ...this.colonies ? ALL_COLONIES_CORPORATIONS.map((cf) => cf.cardName) : [],
-                ...this.turmoil ? ALL_TURMOIL_CORPORATIONS.map((cf) => cf.cardName) : [],
-                ...this.promoCardsOption ? ALL_PROMO_CORPORATIONS.map((cf) => cf.cardName) : [],
-                ...this.communityCardsOption ? ALL_COMMUNITY_CORPORATIONS.map((cf) => cf.cardName) : []
+                ...this.corporateEra ? corpCardNames.original : [],
+                ...this.prelude ? corpCardNames.prelude : [],
+                ...this.venusNext ? corpCardNames.venus : [],
+                ...this.colonies ? corpCardNames.colonies : [],
+                ...this.turmoil ? corpCardNames.turmoil : [],
+                ...this.promoCardsOption ? corpCardNames.promo : [],
             ],
             corporationGroups: [
-                {"title": CorporationGroup.ORIGINAL, "items": ALL_CORPORATION_CARDS.concat(ALL_CORP_ERA_CORPORATION_CARDS).map((cf) => cf.cardName)},
-                {"title": CorporationGroup.PRELUDE, "items": ALL_PRELUDE_CORPORATIONS.map((cf) => cf.cardName)},
-                {"title": CorporationGroup.VENUS_NEXT, "items": ALL_VENUS_CORPORATIONS.map((cf) => cf.cardName)},
-                {"title": CorporationGroup.COLONIES, "items": ALL_COLONIES_CORPORATIONS.map((cf) => cf.cardName)},
-                {"title": CorporationGroup.TURMOIL, "items": ALL_TURMOIL_CORPORATIONS.map((cf) => cf.cardName)},
-                {"title": CorporationGroup.PROMO, "items": ALL_PROMO_CORPORATIONS.map((cf) => cf.cardName)},
-                {"title": CorporationGroup.COMMUNITY, "items": ALL_COMMUNITY_CORPORATIONS.map((cf) => cf.cardName)}
+                {"title": CorporationGroup.ORIGINAL, "items": corpCardNames.original},
+                {"title": CorporationGroup.PRELUDE, "items": corpCardNames.prelude},
+                {"title": CorporationGroup.VENUS_NEXT, "items": corpCardNames.venus},
+                {"title": CorporationGroup.COLONIES, "items": corpCardNames.colonies},
+                {"title": CorporationGroup.TURMOIL, "items": corpCardNames.turmoil},
+                {"title": CorporationGroup.PROMO, "items": corpCardNames.promo},
+                {"title": CorporationGroup.COMMUNITY, "items": corpCardNames.community}
             ]
         }
     },

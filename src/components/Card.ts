@@ -91,7 +91,7 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
 }
 
 function getCardContent(cardName: string): string {
-    let htmlData : string | undefined = '';
+    let htmlData : string | undefined = "";
     htmlData = HTML_DATA.get(cardName);
     return htmlData || "";
 }
@@ -99,7 +99,9 @@ function getCardContent(cardName: string): string {
 export const Card = Vue.component("card", {
     props: [
         "card",
-        "actionUsed"
+        "actionUsed",
+        "card-title",
+        "card-tags"
     ],
     methods: {
         getCardContent: function() {
@@ -119,11 +121,18 @@ export const Card = Vue.component("card", {
             return card.name === CardName.SEARCH_FOR_LIFE && card.resources !== undefined && card.resources > 0
         }
     },
+    mounted: function() {
+        console.log(this)
+    },
     template: `
     <div :class="getCardCssClass(card)">
         <img v-if="lifeFound(card)" class="little-green-men" src="assets/martian.png" />
         <div class="card_resources_counter" v-if="card.resources !== undefined">RES:<span class="card_resources_counter--number"> {{ card.resources }}</span></div>
-        <div class="card-content-wrapper" v-i18n v-html=this.getCardContent()></div>
+        <div class="card-content-wrapper" v-i18n>
+            <card-title title="card.title" type="card.type"/>
+            <card-tags :tags="card.tags"/>
+            <div class="content" v-html=this.getCardContent() />
+        </div>
     </div>
     `
 });

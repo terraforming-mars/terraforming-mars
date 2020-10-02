@@ -1418,8 +1418,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.generation;
     }
 
-    public getPassedPlayers():Set<PlayerId> {
-      return this.passedPlayers;
+    public getPassedPlayers():Array<Color> {
+      let passedPlayersColors: Array<Color> = [];
+      this.passedPlayers.forEach(player => {
+        passedPlayersColors.push(this.getPlayerById(player).color);
+      });
+      return passedPlayersColors;
     } 
 
     public getPlayer(name: string): Player {

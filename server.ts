@@ -720,7 +720,7 @@ function getWaitingFor(
                     if (player === "NEUTRAL") {
                         return "NEUTRAL";
                     } else {
-                        return player.id;
+                        return player.color;
                     }
                 }
             );

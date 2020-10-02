@@ -16,12 +16,17 @@ body {
     border-color: @boder_action !important;
 }
 
+.dynamic-title {
+    font-size: @font_size_huge;
+    margin-bottom: 16px;
+}
+
 .capitalized {
     text-transform: capitalize;
 }
 
 .main-container {
-    margin: 0 60px;
+    margin: 0 0 0 80px;
 }
 
 .hidden {
@@ -64,6 +69,7 @@ h1 {
 }
 
 h2 {
+    font-size: @font_size_huge;
     filter: drop-shadow(4px 4px 4px black);
     text-shadow: -1px -1px 6px #aaa4;
 }
@@ -85,6 +91,14 @@ input[type="radio"]:checked + label {
 
 .nowrap {
     white-space: nowrap;
+}
+
+.mt-5 {
+    margin-top: 5px;
+}
+
+.mt-10 {
+    margin-top: 10px;
 }
 
 @import "./language_switcher.less";

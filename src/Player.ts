@@ -775,7 +775,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           throw new Error("Invalid players array provided");
         }
         const foundPlayer = pi.players.find(
-            (player) => player.color === input[0][0] || player.id === [0][0].toString()
+            (player) => player.color === input[0][0] || player.id === input[0][0]
         );
         if (foundPlayer === undefined) {
           throw new Error("Player not available");

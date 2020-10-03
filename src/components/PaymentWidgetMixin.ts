@@ -81,12 +81,20 @@ export const PaymentWidgetMixin = {
         },
         setMaxValue: function (target: string): void {
             let currentValue: number = (this as any)[target];
-            let maxValue: number = (this as any).player[target];
+            let cardCost: number = (this as any).$data.cost;
+            let amountHave: number = (this as any).player[target];
 
-            if (target === "microbes") maxValue = (this as any).playerinput.microbes;
-            if (target === "floaters") maxValue = (this as any).playerinput.floaters;
+            let amountNeed: number = -1;
+            if (["titanium", "steel", "microbes", "floaters"].includes(target)) {
+                amountNeed = Math.floor(cardCost/this.getResourceRate(target));
+            } else if (target === "heat") {
+                amountNeed = cardCost;
+            }
 
-            while (currentValue < maxValue) {
+            if (target === "microbes") amountHave = (this as any).playerinput.microbes;
+            if (target === "floaters") amountHave = (this as any).playerinput.floaters;
+
+            while (currentValue < amountHave && currentValue < amountNeed) {
                 this.addValue(target, 1);
                 currentValue++;
             }

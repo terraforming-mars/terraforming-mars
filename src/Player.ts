@@ -1058,7 +1058,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                 resources: targetCard.resourceCount,
                 name: targetCard.card.name,
                 calculatedCost: this.getCardCost(game, targetCard.card),
-                cardType: card.cardType 
+                cardType: card.cardType,
+                isDisabled: false
               }            
             );
           }

@@ -14,7 +14,7 @@ export const getCurrentPlayerIndex = (
 ): number => {
     let currentPlayerIndex: number = 0;
     players.forEach((p: Player, index: number) => {
-        if (p.id === player.color) {
+        if (p.color === player.color) {
             currentPlayerIndex = index;
         }
     });
@@ -37,7 +37,7 @@ export const PlayersOverview = Vue.component("players-overview", {
         },
         getPlayerOnFocus: function (): Player {
             return this.player.players.filter(
-                (p: Player) => p.id === this.player.color
+                (p: Player) => p.color === this.player.color
             )[0];
         },
         getIsFirstForGen: function (player: Player): boolean {

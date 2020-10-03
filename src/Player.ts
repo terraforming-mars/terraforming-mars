@@ -199,13 +199,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         let retribution: number = Math.min(game.getPlayerById(game.monsInsuranceOwner).megaCredits, 3);
         this.megaCredits += retribution;
         game.getPlayerById(game.monsInsuranceOwner).setResource(Resources.MEGACREDITS,-3);
-        let color = game.getPlayerById(game.monsInsuranceOwner).color;
         if (retribution > 0) {
           game.log("${0} received ${1} MC from ${2} owner (${3})", b =>
               b.player(this)
               .number(retribution)
               .cardName(CardName.MONS_INSURANCE)
-              .playerId(color));
+              .player(game.getPlayerById(game.monsInsuranceOwner!)));
         }
       }  
     }
@@ -795,7 +794,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
         else {
           pi.players.forEach(player => {
-            if (player instanceof Player && player.id === input[0][0]) {
+            if (player instanceof Player && (player.id === input[0][0] || player.color === input[0][0])) {
               foundPlayer = player;
             }
           });

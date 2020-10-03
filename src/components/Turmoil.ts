@@ -28,7 +28,7 @@ export const Turmoil = Vue.component("turmoil", {
         else if (party === PartyName.KELVINISTS) {
           return `<div class="resource money party-resource">1</div> / 
           <div class="production-box party-production-box">
-            <div class="heat party-production"></div>
+            <div class="heat production"></div>
           </div>`;
         }
         else if (party === PartyName.REDS) {

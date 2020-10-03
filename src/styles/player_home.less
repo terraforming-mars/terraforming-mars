@@ -1,17 +1,3 @@
-@player_red: rgb(153, 17, 0);
-@player_yellow: rgb(170, 170, 0);
-@player_green: rgb(0, 153, 0);
-@player_black: rgb(170, 170, 170);
-@player_blue: rgb(0, 102, 255);
-@player_purple: rgb(140, 0, 255);
-
-@player_red_bg: rgba(153, 17, 0, 0.7);
-@player_yellow_bg: rgba(170, 170, 0, 0.7);
-@player_green_bg: rgba(0, 153, 0, 0.7);
-@player_black_bg: rgba(170, 170, 170, 0.7);
-@player_blue_bg: rgba(0, 102, 255, 0.7);
-@player_purple_bg: rgba(140, 0, 255, 0.7);
-
 #player-home {
     padding-left: 20px;
     padding-top: 20px;
@@ -19,26 +5,27 @@
     background-attachment: fixed;
 }
 
-.player_color_red {
+// text shadows
+.player_shadow_color_red {
     text-shadow: -1px -1px 6px @player_red, 1px 1px 1px #333a;
 }
-.player_color_yellow {
+.player_shadow_color_yellow {
     text-shadow: -1px -1px 6px @player_yellow, 1px 1px 1px #333a;
 }
-.player_color_green {
+.player_shadow_color_green {
     text-shadow: -1px -1px 6px @player_green, 1px 1px 1px #333a;
 }
-
-.player_color_black {
+.player_shadow_color_black {
     text-shadow: -1px -1px 6px @player_black, 1px 1px 1px #333a;
 }
-.player_color_blue {
+.player_shadow_color_blue {
     text-shadow: -1px -1px 6px @player_blue, 1px 1px 1px #333a;
 }
-.player_color_purple {
+.player_shadow_color_purple {
     text-shadow: -1px -1px 6px @player_purple, 1px 1px 1px #333a;
 }
 
+// normal backgrounds
 .player_bg_color_red {
     background-color: @player_red;
 }
@@ -63,28 +50,29 @@
     background-color: @player_purple;
 }
 
+// backgroungs with opacity
 .player_overview_bg_color_red {
-    background-color: @player_red_bg;
+    .player_red_bg();
 }
 
 .player_overview_bg_color_yellow {
-    background-color: @player_yellow_bg;
+    .player_yellow_bg();
 }
 
 .player_overview_bg_color_green {
-    background-color: @player_green_bg;
+    .player_green_bg();
 }
 
 .player_overview_bg_color_black {
-    background-color: @player_black_bg;
+    .player_black_bg();
 }
 
 .player_overview_bg_color_blue {
-    background-color: @player_blue_bg;
+    .player_blue_bg();
 }
 
 .player_overview_bg_color_purple {
-    background-color: @player_purple_bg;
+    .player_purple_bg();
 }
 
 .game-title {
@@ -212,10 +200,6 @@
     background-position: -1px -1px;
     text-align: center;
     border-radius: 50%;
-    border-top: 1px solid rgb(221, 221, 221);
-    border-left: 1px solid rgb(221, 221, 221);
-    border-bottom: 1px solid rgb(137, 137, 137);
-    border-right: 1px solid rgb(137, 137, 137);
     background-color: white;
     margin-top: -6px;
     margin-left: 3px;
@@ -232,9 +216,10 @@
 }
 
 .tag-type-secondary {
-    width: 32px;
-    height: 32px;
-    background-size: 32px;
+    width: 34px;
+    height: 34px;
+    background-size: 38px;
+    background-position: -2px -2px !important;
 }
 
 .tag-size-big {
@@ -405,8 +390,10 @@
         border: 2px solid #fff;
     }
 }
-.awards-padding {
-    padding: 3px 42px 3px 42px !important;
+
+.milestones_cont, .awards_cont {
+    display: inline-block;
+    vertical-align: top;
 }
 
 .milestones,
@@ -417,40 +404,49 @@
         letter-spacing: 1px;
         font-size: 16px;
         font-weight: bold;
-        color: #303030;
+        color: #ffcc64;
         text-transform: uppercase;
-        background: lightblue;
-        padding: 3px 26px 3px 26px;
-        border-radius: 20px 20px 0 0;
+        background: #303030;
+        padding: 1px 5px 1px 10px;
+        border-radius: 2px;
         text-decoration: none;
+        width: 140px;
+        margin-left: 5px;
         cursor: pointer;
-        min-width: 180px;
         display: inline-block;
         text-align: center;
     }
 
     .ma-block {
         display: inline-block;
+        width: 140px;
+        border-radius: 0 0 5px 5px;
+        border-radius: 10px;
+        margin: 5px;
         vertical-align: top;
-        width: 156px;
-        cursor: pointer;
+
+        .award-block {
+            border-radius: 10px !important;
+        }
 
         .ma-score {
+            width: 24px;
+            height: 18px;
+            line-height: 18px;
+            border-radius: 2px;
+            margin: 5px 2px 0px 2px;
             display: inline-block;
-            color: white;
-            width: 20px;
-            height: 20px;
-            line-height: 20px;
-            border-radius: 50%;
-            margin: 6px 2px 0 2px;
-            display: inline-block;
-            color: white;
+            font-size: 15px;
+            font-family: Prototype;
+            color: black;
             font-weight: normal;
+            box-shadow: 0 0 1px 1px black;
         }
 
         .ma-scores {
             display: inline-block;
-            width: 156px;
+            width: 144px;
+            margin-left: -2px;
         }
 
         .ma-player {
@@ -460,162 +456,157 @@
 
         .ma-name {
             display: inline-block;
-            width: 156px;
-            height: 99px;
-
-            color: #000000b0;
-            padding-top: 62px;
-            font-size: 13px;
+            width: 140px;
+            height: 83px;
+            color: black;
+            padding-top: 60px;
+            font-size: 15px;
             text-transform: uppercase;
             text-align: center;
             font-weight: bold;
-        }
-
-        .ma-name--awards {
-            background: url(assets/awards_bg.png) 0px -52px;
-        }
-
-        .ma-name--milestones {
-            background: url(assets/milestones_bg.png) 0px -52px;
+            background-size: 200px;
+            background-position: -30px -5px;
+            border-radius: 10px 10px 0 0;
         }
 
         .ma-name--terraformer {
-            background-position: 0px -52px;
+            background-image: url(assets/ma/terraformer.png);
         }
 
         .ma-name--mayor {
-            background-position: 0px -152px;
+            background-image: url(assets/ma/mayor.png);
         }
 
         .ma-name--gardener {
-            background-position: 0px -252px;
+            background-image: url(assets/ma/gardener.png);
         }
 
         .ma-name--builder {
-            background-position: 0px -352px;
+            background-image: url(assets/ma/builder.png);
         }
 
         .ma-name--planner {
-            background-position: 0px -452px;
+            background-image: url(assets/ma/planner.png);
         }
 
         .ma-name--generalist {
-            background-position: 0px -552px;
+            background-image: url(assets/ma/generalist.png);
         }
 
         .ma-name--specialist {
-            background-position: 0px -652px;
+            background-image: url(assets/ma/specialist.png);
         }
 
         .ma-name--ecologist {
-            background-position: 0px -752px;
+            background-image: url(assets/ma/ecologist.png);
         }
 
         .ma-name--tycoon {
-            background-position: 0px -852px;
+            background-image: url(assets/ma/tycoon.png);
         }
 
         .ma-name--legend {
-            background-position: 0px -952px;
+            background-image: url(assets/ma/legend.png);
         }
 
         .ma-name--diversifier {
-            background-position: 0px -1052px;
+            background-image: url(assets/ma/diversifier.png);
         }
 
         .ma-name--tactician {
-            background-position: 0px -1152px;
+            background-image: url(assets/ma/tactician.png);
         }
 
         .ma-name--polar-explorer {
-            background-position: 0px -1252px;
+            background-image: url(assets/ma/polar_explorer.png);
         }
 
         .ma-name--energizer {
-            background-position: 0px -1352px;
+            background-image: url(assets/ma/energizer.png);
         }
 
         .ma-name--rim-settler {
-            background-position: 0px -1452px;
+            background-image: url(assets/ma/rim_settler.png);
         }
 
         .ma-name--hoverlord {
-            background-position: 0px -1552px;
+            background-image: url(assets/ma/hoverlord.png);
         }
 
         .ma-name--landlord {
-            background-position: 0px -52px;
+            background-image: url(assets/ma/landlord.png);
         }
 
         .ma-name--banker {
-            background-position: 0px -252px;
+            background-image: url(assets/ma/banker.png);
         }
 
         .ma-name--scientist {
-            background-position: 0px -152px;
+            background-image: url(assets/ma/scientist.png);
         }
 
         .ma-name--thermalist {
-            background-position: 0px -352px;
+            background-image: url(assets/ma/thermalist.png);
         }
 
         .ma-name--miner {
-            background-position: 0px -452px;
+            background-image: url(assets/ma/miner.png);
         }
 
         .ma-name--celebrity {
-            background-position: 0px -552px;
+            background-image: url(assets/ma/celebrity.png);
         }
 
         .ma-name--industrialist {
-            background-position: 0px -652px;
+            background-image: url(assets/ma/industrialist.png);
         }
 
         .ma-name--desert-settler {
-            background-position: 0px -752px;
+            background-image: url(assets/ma/desert_settler.png);
         }
 
         .ma-name--estate-dealer {
-            background-position: 0px -852px;
+            background-image: url(assets/ma/estate_dealer.png);
         }
 
         .ma-name--benefactor {
-            background-position: 0px -952px;
+            background-image: url(assets/ma/benefactor.png);
         }
 
         .ma-name--cultivator {
-            background-position: 0px -1052px;
+            background-image: url(assets/ma/cultivator.png);
         }
 
         .ma-name--magnate {
-            background-position: 0px -1152px;
+            background-image: url(assets/ma/magnate.png);
         }
 
         .ma-name--space-baron {
-            background-position: 0px -1252px;
+            background-image: url(assets/ma/space_baron.png);
         }
 
         .ma-name--excentric {
-            background-position: 0px -1352px;
+            background-image: url(assets/ma/excentric.png);
         }
 
         .ma-name--contractor {
-            background-position: 0px -1452px;
+            background-image: url(assets/ma/contractor.png);
         }
 
         .ma-name--venuphile {
-            background-position: 0px -1552px;
+            background-image: url(assets/ma/venuphile.png);
         }
 
         .ma-description {
             display: inline-block;
-            width: 156px;
+            width: 140px;
             height: 70px;
             color: #ddd;
-            padding: 5px 2px 0px 2px;
+            padding: 0px 2px 0px 2px;
             font-size: 14px;
             line-height: 15px;
             text-align: center;
+            
         }
 
         .ma-description-hidden {
@@ -634,7 +625,7 @@
 
 .with-turmoil {
     .ma-name--terraformer {
-        background-position: 0px -1752px !important;
+        background-image: url(assets/ma/terraformer26.png) !important;
     }
 }
 
@@ -642,22 +633,35 @@
     margin: 0 0 0 5px;
 }
 
-.milestones .ma-block {
-    margin-bottom: 5px;
-}
-
-.funded-award-inline,
 .claimed-milestone-inline {
     white-space: nowrap;
     color: #000;
     text-transform: uppercase;
-    background: #c2c2c2;
+    background: linear-gradient(to right, #e28c22, #ffcc64, #ffcc64, #e28c22);
     padding: 1px 33px 1px 10px;
+    width: 140px;
+    text-align: center;
     font-size: 15px;
     line-height: 23px;
     font-weight: bold;
-    margin: 0 0 0 10px;
+    margin: 0 5px 0 5px;
+    border-radius: 2px;
+    display: inline-block;
+}
+.funded-award-inline {
+    white-space: nowrap;
+    color: #000;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #e28c22, #ffcc64, #ffcc64, #e28c22);
+    padding: 1px 33px 1px 10px;
+    width: 140px;
+    text-align: center;
+    font-size: 15px;
+    line-height: 23px;
+    font-weight: bold;
+    margin: 0 5px 0 5px;
     border-radius: 20px;
+    font-style: italic;
     display: inline-block;
 }
 
@@ -770,4 +774,18 @@
 }
 .btn-max {
     margin-top: -4px;
+}
+
+.last-generation {
+    color: red;
+}
+
+@keyframes smoth-fade-animation {
+    from { opacity: 1.0; }
+    50% { opacity: 0.2; }
+    to { opacity: 1.0; }
+}
+
+.blink-animation {
+  animation:smoth-fade-animation 2000ms infinite;
 }

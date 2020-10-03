@@ -4,9 +4,6 @@ import { Player, PlayerId } from "../Player";
 import { PlayerInterrupt } from "./PlayerInterrupt";
 import { OrOptions } from "../inputs/OrOptions";
 import { SelectOption } from "../inputs/SelectOption";
-import { LogMessageType } from "../LogMessageType";
-import { LogMessageData } from "../LogMessageData";
-import { LogMessageDataType } from "../LogMessageDataType";
 
 export class SelectParty implements PlayerInterrupt {
     public playerInput: PlayerInput;
@@ -62,12 +59,7 @@ export class SelectParty implements PlayerInterrupt {
                 }
 
                 
-                game.log(
-                  LogMessageType.DEFAULT,
-                  "${0} sent "+ nbr + " delegate(s) in ${1} area",
-                  new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                  new LogMessageData(LogMessageDataType.PARTY, party.name)
-                );
+                game.log("${0} sent ${1} delegate(s) in ${2} area", b => b.player(player).number(nbr).party(party));
                 return undefined;
               }
             ));

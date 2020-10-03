@@ -2,10 +2,16 @@ import Vue from "vue";
 import { PlayerResources } from "./PlayerResources";
 import { PlayerTags } from "./PlayerTags";
 import { PlayerStatus } from "./PlayerStatus";
-import { playerBgColorClass } from "../../utils/utils";
+import { playerColorClass } from "../../utils/utils";
 
 export const PlayerInfo = Vue.component("player-info", {
-    props: ["player", "activePlayer", "firstForGen", "actionLabel"],
+    props: [
+        "player",
+        "activePlayer",
+        "firstForGen",
+        "actionLabel",
+        "playerIndex",
+    ],
     components: {
         "player-resources": PlayerResources,
         "player-tags": PlayerTags,
@@ -14,7 +20,7 @@ export const PlayerInfo = Vue.component("player-info", {
     methods: {
         getClasses: function (): string {
             let classes = ["player-info"];
-            classes.push(playerBgColorClass(this.player.color));
+            classes.push(playerColorClass(this.player.color, "bg_transparent"));
             return classes.join(" ");
         },
         getPlayerStatusAndResClasses: function (): string {
@@ -23,12 +29,12 @@ export const PlayerInfo = Vue.component("player-info", {
         },
         getIsActivePlayer: function (): boolean {
             return this.player.id === this.activePlayer.id;
-        }
+        },
     },
     template: ` 
         <div :class="getClasses()">
             <div :class="getPlayerStatusAndResClasses()">
-                <player-status :player="player" :activePlayer="activePlayer" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel"/>
+                <player-status :player="player" :activePlayer="activePlayer" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" :playerIndex="playerIndex"/>
                 <player-resources :player="player" v-trim-whitespace />
             </div>
             <player-tags :player="player" v-trim-whitespace :isActivePlayer="getIsActivePlayer()"/> 

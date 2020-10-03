@@ -66,7 +66,8 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
                 req.url.startsWith("/game?id=") ||
                 req.url.startsWith("/player?id=") ||
                 req.url.startsWith("/the-end?id=") ||
-                req.url.startsWith("/load")
+                req.url.startsWith("/load") ||
+                req.url.startsWith("/debug-ui")
             ) {
                 serveApp(res);
             } else if (req.url.startsWith("/api/player?id=")) {
@@ -441,6 +442,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                 cardsBlackList: gameReq.cardsBlackList,
                 solarPhaseOption: gameReq.solarPhaseOption,
                 promoCardsOption: gameReq.promoCardsOption,
+                communityCardsOption: gameReq.communityCardsOption,
                 undoOption: gameReq.undoOption,
                 fastModeOption: gameReq.fastModeOption,
                 removeNegativeGlobalEventsOption:
@@ -608,6 +610,7 @@ function getPlayer(player: Player, game: Game): string {
         randomMA: game.gameOptions.randomMA,
         actionsTakenThisRound: player.actionsTakenThisRound,
         passedPlayers: Array.from(game.getPassedPlayers()), // JSON stringify does not honor sets
+        preludeExtension: game.gameOptions.preludeExtension,
     } as PlayerModel;
     return JSON.stringify(output);
 }
@@ -791,6 +794,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
             needsToDraft: player.needsToDraft,
             deckSize: game.dealer.getDeckSize(),
             actionsTakenThisRound: player.actionsTakenThisRound,
+            preludeExtension: game.gameOptions.preludeExtension,
         } as PlayerModel;
     });
 }

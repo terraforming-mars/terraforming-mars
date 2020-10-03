@@ -2,11 +2,23 @@
 @import (inline) "../../node_modules/spectre.css/dist/spectre-exp.min.css";
 @import (inline) "../../node_modules//spectre.css/dist/spectre-icons.min.css";
 @import (inline) "../../node_modules/dialog-polyfill/dialog-polyfill.css";
+@import "./variables.less";
+@import "./mixins.less";
 
 html,
 body {
     height: 100%;
     margin: 0px;
+}
+.btn {
+    color: @text_action !important;
+    background: @bg_action !important;
+    border-color: @boder_action !important;
+}
+
+.dynamic-title {
+    font-size: @font_size_huge;
+    margin-bottom: 16px;
 }
 
 .capitalized {
@@ -14,7 +26,7 @@ body {
 }
 
 .main-container {
-    margin: 0 60px;
+    margin: 0 0 0 80px;
 }
 
 .hidden {
@@ -43,15 +55,13 @@ a:active {
 }
 
 body {
-    background: #303030;
-    color: #dddddd;
-    font-family: Ubuntu, Sans;
-    font-size: 23px;
+    background: @bg_main;
+    color: @text_main;
+    font-family: @font_family_main;
+    font-size: @font_size_big;
 }
 
 h1 {
-    color: #ddd;
-    font-family: Ubuntu, Sans;
     filter: drop-shadow(4px 4px 4px black);
     text-shadow: -1px -1px 1px #aaaa, 1px 1px 1px #333a;
     padding: 1px 15px;
@@ -59,8 +69,7 @@ h1 {
 }
 
 h2 {
-    color: #ddd;
-    font-family: Ubuntu, Sans;
+    font-size: @font_size_huge;
     filter: drop-shadow(4px 4px 4px black);
     text-shadow: -1px -1px 6px #aaa4;
 }
@@ -78,6 +87,18 @@ input[type="radio"]:checked + label {
 .is-action {
     color: lightblue;
     cursor: pointer;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.mt-5 {
+    margin-top: 5px;
+}
+
+.mt-10 {
+    margin-top: 10px;
 }
 
 @import "./language_switcher.less";

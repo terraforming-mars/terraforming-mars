@@ -4,12 +4,10 @@ import { CardType } from "./CardType";
 import { Player } from "../Player";
 import { Game } from "../Game";
 import { CardName } from '../CardName';
-import { LogMessageType } from "../LogMessageType";
-import { LogMessageData } from "../LogMessageData";
-import { LogMessageDataType } from "../LogMessageDataType";
 import { PartyHooks } from "../turmoil/parties/PartyHooks";
 import { PartyName } from "../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../constants";
+import { LogHelper } from "../components/LogHelper";
 
 export class TerraformingGanymede implements IProjectCard {
     public cost: number = 33;
@@ -31,12 +29,8 @@ export class TerraformingGanymede implements IProjectCard {
     public play(player: Player, game: Game) {
         const steps = 1 + player.getTagCount(Tags.JOVIAN);
         player.increaseTerraformRatingSteps(steps, game);
-        game.log(
-            LogMessageType.DEFAULT,
-            "${0} gained ${1} TR",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.STRING, steps.toString())
-        );
+        LogHelper.logTRIncrease(game, player, steps);
+
         return undefined;
     }
     public getVictoryPoints() {

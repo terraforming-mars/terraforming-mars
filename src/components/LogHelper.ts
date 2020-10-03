@@ -1,9 +1,6 @@
 import { Game } from "../Game";
 import { Player } from "../Player";
 import { ICard } from "../cards/ICard";
-import { LogMessageType } from "../LogMessageType";
-import { LogMessageData } from "../LogMessageData";
-import { LogMessageDataType } from "../LogMessageDataType";
 import { Resources } from "../Resources";
 import { ISpace } from "../ISpace";
 import { TileType } from "../TileType";
@@ -18,14 +15,8 @@ export class LogHelper {
             resourceType = card.resourceType.toLowerCase() + "(s)";
         }
 
-        game.log(
-            LogMessageType.DEFAULT,
-            "${0} added ${1} ${2} to ${3}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.STRING, qty.toString()),
-            new LogMessageData(LogMessageDataType.STRING, resourceType),
-            new LogMessageData(LogMessageDataType.CARD, card.name)
-        );
+        game.log("${0} added ${1} ${2} to ${3}", b =>
+            b.player(player).number(qty).string(resourceType).card(card));
     }
 
     static logRemoveResource(game: Game, player: Player, card: ICard, qty: number = 1, effect: string): void {
@@ -35,45 +26,20 @@ export class LogHelper {
             resourceType = card.resourceType.toLowerCase() + "(s)";
         }
 
-        game.log(
-            LogMessageType.DEFAULT,
-            "${0} removed ${1} ${2} from ${3} to ${4}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.STRING, qty.toString()),
-            new LogMessageData(LogMessageDataType.STRING, resourceType),
-            new LogMessageData(LogMessageDataType.CARD, card.name),
-            new LogMessageData(LogMessageDataType.STRING, effect)
-        );
+        game.log("${0} removed ${1} ${2} from ${3} to ${4}", b =>
+            b.player(player).number(qty).string(resourceType).card(card).string(effect));
     }
 
     static logGainStandardResource(game: Game, player: Player, resource: Resources, qty: number = 1) {
-        game.log(
-            LogMessageType.DEFAULT,
-            "${0} gained ${1} ${2}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.STRING, qty.toString()),
-            new LogMessageData(LogMessageDataType.STRING, resource)
-        );
+        game.log("${0} gained ${1} ${2}", b => b.player(player).number(qty).string(resource));
     }
 
     static logGainProduction(game: Game, player: Player, resource: Resources, qty: number = 1) {
-        game.log(
-            LogMessageType.DEFAULT,
-            "${0}'s ${1} production increased by ${2}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.STRING, resource),
-            new LogMessageData(LogMessageDataType.STRING, qty.toString())
-        );
+        game.log("${0}'s ${1} production increased by ${2}", b => b.player(player).string(resource).number(qty));
     }
 
     static logCardChange(game: Game, player: Player, effect: string, qty: number = 1) {
-        game.log(
-            LogMessageType.DEFAULT,
-            "${0} ${1} ${2} card(s)",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.STRING, effect),
-            new LogMessageData(LogMessageDataType.STRING, qty.toString())
-        );
+        game.log("${0} ${1} ${2} card(s)", b => b.player(player).string(effect).number(qty));
     }
 
     static logTilePlacement(game: Game, player: Player, space: ISpace, tileType: TileType) {
@@ -106,25 +72,24 @@ export class LogHelper {
                 break;
         }
 
-        game.log(
-            LogMessageType.DEFAULT,
-            "${0} placed ${1} tile on row ${2} position ${3}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.STRING, type),
-            new LogMessageData(LogMessageDataType.STRING, row.toString()),
-            new LogMessageData(LogMessageDataType.STRING, position.toString())            
-        );
+        game.log("${0} placed ${1} tile on row ${2} position ${3}", b =>
+            b.player(player).string(type).number(row).number(position));
     }
 
     static logColonyTrackIncrease(game: Game, player: Player, colony: IColony) {
         const stepsIncreased = Math.min(player.colonyTradeOffset, MAX_COLONY_TRACK_POSITION - colony.trackPosition);
         
-        game.log(
-            LogMessageType.DEFAULT,
-            "${0} increased ${1} colony track ${2} step(s)",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.STRING, colony.name),
-            new LogMessageData(LogMessageDataType.STRING, stepsIncreased.toString())
-        );
+        game.log("${0} increased ${1} colony track ${2} step(s)", b =>
+            b.player(player).colony(colony).number(stepsIncreased));
+    }
+
+    static logTRIncrease(game: Game, player: Player, steps: number) {
+        game.log("${0} gained ${1} TR", b => b.player(player).number(steps));
+    }
+
+    static logDiscardedCards(game: Game, discardedCards: Array<ICard>) {
+        game.log(discardedCards.length + " card(s) were discarded", b => {
+            discardedCards.forEach(card => b.card(card));
+        });    
     }
 }

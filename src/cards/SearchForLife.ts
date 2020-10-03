@@ -7,9 +7,6 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { ResourceType } from "../ResourceType";
 import { CardName } from "../CardName";
-import { LogMessageType } from "../LogMessageType";
-import { LogMessageData } from "../LogMessageData";
-import { LogMessageDataType } from "../LogMessageDataType";
 
 export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
     public cost: number = 3;
@@ -38,14 +35,10 @@ export class SearchForLife implements IActionCard, IProjectCard, IResourceCard {
         const topCard = game.dealer.dealCard();
         if (topCard.tags.indexOf(Tags.MICROBES) !== -1) {
             this.resourceCount++; 
+            game.log("${0} found life!", b => b.player(player));
         }
 
-        game.log(
-            LogMessageType.DEFAULT,
-            "${0} revealed and discarded ${1}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.CARD, topCard.name)
-        );
+        game.log("${0} revealed and discarded ${1}", b => b.player(player).card(topCard));
         
         game.dealer.discard(topCard);
         game.addSelectHowToPayInterrupt(player, 1, false, false, "Select how to pay for action");

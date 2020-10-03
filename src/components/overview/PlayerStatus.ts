@@ -1,21 +1,25 @@
 import Vue from "vue";
 import { ActionLabel } from "./ActionLabel";
-import { PlayerModel } from "../../models/PlayerModel";
+import { range } from "../../utils/utils";
 
-const isPinned = (root: any, player: PlayerModel): boolean => {
-    return (root as any).getVisibilityState("pinned_player_" + player.id);
+const isPinned = (root: any, playerIndex: string): boolean => {
+    return (root as any).getVisibilityState("pinned_player_" + playerIndex);
 };
-const showPlayerData = (root: any, player: PlayerModel) => {
-    (root as any).setVisibilityState("pinned_player_" + player.id, true);
-    (root as any).setVisibilityState("other_player_" + player.id, true);
+const showPlayerData = (root: any, playerIndex: string) => {
+    (root as any).setVisibilityState("pinned_player_" + playerIndex, true);
 };
-export const hidePlayerData = (root: any, player: PlayerModel) => {
-    (root as any).setVisibilityState("pinned_player_" + player.id, false);
-    (root as any).setVisibilityState("other_player_" + player.id, false);
+export const hidePlayerData = (root: any, playerIndex: string) => {
+    (root as any).setVisibilityState("pinned_player_" + playerIndex, false);
 };
 
 export const PlayerStatus = Vue.component("player-status", {
-    props: ["player", "activePlayer", "firstForGen", "actionLabel"],
+    props: [
+        "player",
+        "activePlayer",
+        "firstForGen",
+        "actionLabel",
+        "playerIndex",
+    ],
     methods: {
         togglePlayerDetails: function () {
             // for active player => scroll to cards UI
@@ -57,32 +61,25 @@ export const PlayerStatus = Vue.component("player-status", {
             return this.player.playedCards.length;
         },
         pinPlayer: function () {
-            const player = this.player;
-            const players = this.activePlayer.players;
+            let hiddenPlayersIndexes: Array<Number> = [];
+            let playerPinned = isPinned(this.$root, this.playerIndex);
 
-            let hiddenPlayers: Array<PlayerModel> = [];
-            let playerPinned = isPinned(this.$root, player);
-
-            // if player is already pinned, on unpin add to hidden players
-            if (playerPinned) {
-                hiddenPlayers = players;
-            } else {
-                showPlayerData(this.$root, player);
-
-                for (i = 0; i < players.length; i++) {
-                    let p = players[i];
-                    if (p.id === this.activePlayer.id || player.id !== p.id) {
-                        hiddenPlayers.push(p);
-                    }
-                }
+            // if player is already pinned, add to hidden players (toggle)
+            hiddenPlayersIndexes = range(this.activePlayer.players.length - 1);
+            if (!playerPinned) {
+                showPlayerData(this.$root, this.playerIndex);
+                hiddenPlayersIndexes = hiddenPlayersIndexes.filter(
+                    (index) => index !== this.playerIndex
+                );
             }
-
-            for (var i = 0; i < hiddenPlayers.length; i++) {
-                hidePlayerData(this.$root, hiddenPlayers[i]);
+            for (var i = 0; i < hiddenPlayersIndexes.length; i++) {
+                if (hiddenPlayersIndexes.includes(i)) {
+                    hidePlayerData(this.$root, i.toString());
+                }
             }
         },
         buttonLabel: function (): string {
-            return isPinned(this.$root, this.player) ? "hide" : "show";
+            return isPinned(this.$root, this.playerIndex) ? "hide" : "show";
         },
     },
     template: `
@@ -93,7 +90,7 @@ export const PlayerStatus = Vue.component("player-status", {
                     <div :class="getPlayerNameClasses()" v-on:click.prevent="togglePlayerDetails()" >{{ player.name }}</div>
                     <div class="icon-first-player-offset icon-first-player" v-if="firstForGen && activePlayer.players.length > 1">1st</div>
                 </div>
-                <div class="player-corp">{{ player.corporationCard.name }}</div>
+                <div :title="player.corporationCard.name" class="player-corp">{{ player.corporationCard.name }}</div>
                 <div v-if="showLabel()" :class="getLabelClasses()">{{ actionLabel }}</div>
             </div>
             <div class="player-status-right">

@@ -22,7 +22,7 @@ interface CardsFilterModel {
 }
 
 export const CardsFilter = Vue.component("cards-filter", {
-    props: ["corporateEra", "prelude", "venusNext", "colonies", "turmoil", "promoCardsOption"],
+    props: ["corporateEra", "prelude", "venusNext", "colonies", "turmoil", "promoCardsOption", "communityCardsOption"],
     data: function () {
         return {
             customCorporationsList: false,

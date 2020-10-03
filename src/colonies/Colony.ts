@@ -5,9 +5,6 @@ import { ColonyName } from './ColonyName';
 import { ResourceType } from '../ResourceType';
 import { CorporationName } from '../CorporationName';
 import { Resources } from '../Resources';
-import { LogMessageType } from "../LogMessageType";
-import { LogMessageData } from "../LogMessageData";
-import { LogMessageDataType } from "../LogMessageDataType";
 import { LogHelper } from "../components/LogHelper";
 import { MAX_COLONY_TRACK_POSITION } from "../constants";
 
@@ -86,12 +83,7 @@ export abstract class Colony  {
             colony.trackPosition = colony.colonies.length;
         }
 
-        game.log(
-            LogMessageType.DEFAULT,
-            "${0} built a colony on ${1}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.COLONY, colony.name)
-          );
+        game.log("${0} built a colony on ${1}", b => b.player(player).colony(colony));
 
         // Poseidon hook
         let poseidon = game.getPlayers().filter(player => player.isCorporation(CorporationName.POSEIDON));

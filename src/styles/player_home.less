@@ -214,14 +214,74 @@
     width: 34px;
     height: 34px;
     background-size: 38px;
-    background-position: -2px -2px !important;
 }
 
 .tag-size-big {
     margin-top: 0px;
     margin-left: 0px;
-    background-position: 0px 0px;
+    background-position: -2px;
 }
+
+.tag-cards {
+    background-image: url("./assets/misc/preferences_cards.png"); 
+    background-color: black !important;
+    background-position: 0px;
+}
+.tag-vp {
+    background: linear-gradient(#cc8b00, #805700, #805700) !important;
+    background-position: 0px !important;
+} 
+.tag-vp::after {
+    position: absolute;
+    content: "VP";
+    font-family: Prototype;
+    color: black;
+    font-size: 20px;
+    text-shadow: 0 0 5px darkorange;
+    text-align: center;
+    top: 3px;
+    left: 4px;
+}
+
+.tag-tr {
+    background-image: url(assets/resources/tr.png);
+    background-image: url(assets/resources/tr.png);
+    background-size: 43px 38px !important;
+    background-position: -4px -2px !important;
+}
+.tag-city-count {
+    background-image: url(assets/tiles/city.png);
+    background-image: url(assets/tiles/city.png);
+    border-radius: 0px !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    filter: brightness(0.8);
+    background-size: 30px 34px !important;
+    width: 30px !important;
+    height: 34px !important;
+    background-position: 0px;
+}
+  
+.tag-colony-count {
+    background: url(assets/tiles/colony.png) no-repeat;
+    background-size: 34px;
+    border-radius: 0px;
+    box-shadow: none;
+}
+  
+  .tag-influence-count {
+    background-image: url(assets/misc/influence.png);
+    border: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    background-size: 34px !important;
+    width: 34px !important;
+    height: 34px !important;
+    filter: brightness(0.8);
+    border-radius: 0px !important;
+    background-position: 0px !important;
+  }
 
 .tag-display {
     display: flex;

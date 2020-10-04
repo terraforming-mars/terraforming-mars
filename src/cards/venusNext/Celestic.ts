@@ -5,10 +5,10 @@ import { Tags } from "../Tags";
 import { ResourceType } from "../../ResourceType";
 import { Game } from "../../Game";
 import { IActionCard, ICard, IResourceCard } from "../ICard";
+import { IProjectCard } from "../IProjectCard";
 import { SelectCard } from "../../inputs/SelectCard";
 import { CardName } from "../../CardName";
 import { LogHelper } from "../../components/LogHelper";
-import { IProjectCard } from "../IProjectCard";
 
 export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public name: CardName = CardName.CELESTIC;

@@ -1729,7 +1729,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.log("Dealt and discarded ${0} (cost ${1}) to place a ${2}", b => b.card(card).number(card.cost).string(type));
   
       const distance = Math.max(card.cost-1, 0); // Some cards cost zero.
-      const space = this.board.getNthAvailableLandSpace(distance, direction,
+      const space = this.board.getNthAvailableLandSpace(distance, direction, undefined /* player */,
         space => {
           const adjacentSpaces = this.board.getAdjacentSpaces(space);
           return adjacentSpaces.filter(sp => sp.tile?.tileType === TileType.CITY).length === 0 && // no cities nearby

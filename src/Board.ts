@@ -142,10 +142,6 @@ export abstract class Board {
         return this.spaces.filter((space) => space.spaceType === spaceType);
     }
 
-    // protected getRandomSpace(offset: number): ISpace {
-    //     return this.spaces[Math.floor(Math.random() * 30) + offset];
-    // }
-
     public getEmptySpaces(): Array<ISpace> {
         return this.spaces.filter((space) => space.tile === undefined);
     }
@@ -209,8 +205,11 @@ export abstract class Board {
     public getNthAvailableLandSpace(
         distance: number, 
         direction: -1 | 1,
+        player: Player | undefined = undefined,
         predicate: (value: ISpace) =>  boolean = _x => true) {
-        const spaces = this.spaces.filter((space) => space.spaceType === SpaceType.LAND && space.tile === undefined).filter(predicate);
+        const spaces = this.spaces.filter((space) => {
+            return this.canPlaceTile(space) && (space.player === undefined || space.player === player);
+        }).filter(predicate);
         const idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
         return spaces[idx];
     }

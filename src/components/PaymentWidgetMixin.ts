@@ -84,11 +84,9 @@ export const PaymentWidgetMixin = {
             const cardCost: number = (this as any).$data.cost;
             let amountHave: number = (this as any).player[target];
 
-            let amountNeed: number = -1;
+            let amountNeed: number = cardCost;
             if (["titanium", "steel", "microbes", "floaters"].includes(target)) {
                 amountNeed = Math.floor(cardCost/this.getResourceRate(target));
-            } else if (target === "heat") {
-                amountNeed = cardCost;
             }
 
             if (target === "microbes") amountHave = (this as any).playerinput.microbes;

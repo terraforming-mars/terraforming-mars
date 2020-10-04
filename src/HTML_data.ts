@@ -116,7 +116,13 @@ export const HTML_DATA: Map<string, string> =
                 <div class="production-prefix minus"></div><div class="energy production "></div><div class="energy production "></div><br>
                 <div class="production-prefix plus"></div><div class="money production ">5</div>
             </div>
-            <div class="special-tile tile capitol ">&#x2302;&#xFE0E;</div>
+            <div class="tile city-tile" style="
+                width: 60px;
+                height: 69px;
+                background-size: 60px 69px;
+                filter:none;
+                ">
+            </div>
             <div class="description " style="text-align:left;">
                 (Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.<br>
                 <div style="font-size:9px;line-height:12px;margin-top:10px; width: 140px;">
@@ -7294,7 +7300,7 @@ export const HTML_DATA: Map<string, string> =
   <div class="card-number">#T05</div>
   <div class="content ">
     <div class="requirements"><span class="party">Scientists</span></div>
-    + <div class="influence"></div><br>
+    <div class="plus"></div> <div class="influence"></div><br>
     <div class="description" style="margin-top:5px;">
       (Effect: You have influence +1.)
     </div>
@@ -7412,7 +7418,7 @@ export const HTML_DATA: Map<string, string> =
   <div class="tag tag1 tag-event "></div>
   <div class="card-number">#T11</div>
   <div class="content ">
-    - <div class="delegate delegate-red"></div>* &nbsp;&nbsp; + <div class="delegate"></div>
+    <div class="minus"></div> <div class="delegate delegate-red"></div>* &nbsp;&nbsp; <div class="plus"></div> <div class="delegate"></div>
       <div class="description ">
         (Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.)
       </div>
@@ -7487,7 +7493,7 @@ export const HTML_DATA: Map<string, string> =
   <div class="tag tag1 tag-event "></div>
   <div class="card-number">#T16</div>
   <div class="content ">
-    - <div class="chairman" style="box-shadow:1px 0 1px red, -1px 0 1px red"></div> * &nbsp;&nbsp; + <div class="chairman"></div>
+    <div class="minus"></div> <div class="chairman red-outline"></div> * &nbsp;&nbsp; <div class="plus"></div> <div class="leader"></div>
     <br>
     <div class="tile rating"></div>
       <div class="description ">

@@ -7,9 +7,6 @@ import { Resources } from '../../Resources';
 import { OrOptions } from '../../inputs/OrOptions';
 import { SelectOption } from '../../inputs/SelectOption';
 import { SelectColony } from '../../inputs/SelectColony';
-import { LogMessageData } from '../../LogMessageData';
-import { LogMessageDataType } from '../../LogMessageDataType';
-import { LogMessageType } from '../../LogMessageType';
 import { ColonyModel } from '../../models/ColonyModel';
 
 export class Mercury extends Colony implements IColony {
@@ -63,10 +60,8 @@ export class Mercury extends Colony implements IColony {
                     openColonies.forEach((colony) => {
                       if (colony.name === colonyName) {
                         game.log(
-                          LogMessageType.DEFAULT,
-                          "${0} gained ${1} trade bonus",
-                          new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                          new LogMessageData(LogMessageDataType.COLONY, colony.name)
+                            "${0} gained ${1} trade bonus", 
+                            b => b.player(player).colony(colony)
                         );
         
                         colony.trade(player, game, false);

@@ -1923,7 +1923,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       if ( game.gameOptions.coloniesExtension &&
         this.canAfford(constants.BUILD_COLONY_COST)) {
-        const openColonies = game.colonies.filter(colony => colony.colonies.length < 3
+        let openColonies = game.colonies.filter(colony => colony.colonies.length < 3
           && colony.colonies.indexOf(this.id) === -1
           && colony.isActive);
 

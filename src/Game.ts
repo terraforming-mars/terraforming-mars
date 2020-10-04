@@ -1434,7 +1434,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public getPassedPlayers():Array<Color> {
-      let passedPlayersColors: Array<Color> = [];
+      const passedPlayersColors: Array<Color> = [];
       this.passedPlayers.forEach(player => {
         passedPlayersColors.push(this.getPlayerById(player).color);
       });

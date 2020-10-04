@@ -7,6 +7,11 @@ export const DebugUI = Vue.component("debug-ui", {
     components: {
         Card,
     },
+    data: function() {
+        return {
+          filterText: ""
+        }
+    },
     methods: {
         getAllCards: function () {
             const allItems: Array<CardName> = [
@@ -16,17 +21,20 @@ export const DebugUI = Vue.component("debug-ui", {
                 ...ALL_TURMOIL_PROJECTS_CARDS.map((cf) => cf.cardName),
                 ...ALL_PROMO_PROJECTS_CARDS.map((cf) => cf.cardName),
                 ...ALL_PROJECT_CARDS.map((cf) => cf.cardName),
-                ...ALL_CORP_ERA_PROJECT_CARDS.map((cf) => cf.cardName)
+                ...ALL_CORP_ERA_PROJECT_CARDS.map((cf) => cf.cardName),
             ].sort();
             return allItems;
+        },
+        filtered: function(cardName: string):boolean {
+            return this.$data.filterText.length == 0 || cardName.toUpperCase().indexOf(this.$data.filterText.toUpperCase()) > -1;
         }
     },
     template: `
         <div class="debug-ui-container">
             <section class="debug-ui-cards-list">
-                <h2>Cards list</h2>
+                <h2>Cards list <input placeholder="filter" v-model="filterText"></h2> 
                 <div style="display: inline-block; vertical-align: top;" v-for="card in getAllCards()">
-                    <Card :card="{'name': card}" />
+                    <Card v-show="filtered(card)" :card="{'name': card}" />
                 </div>
             </section>
         </div>

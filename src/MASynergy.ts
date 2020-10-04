@@ -195,12 +195,12 @@ function _dumpSynergy() {
 function shuffleArray(arr: Array<number>) {
     arr = arr.slice()
     for (let i = arr.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        let temp = arr[i];
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
-    return arr
+    return arr;
 }
 
 // Returns an array from [start... end]
@@ -212,24 +212,24 @@ function getNumbersRange(start: number, end: number): Array<number> {
 export function getRandomMilestonesAndAwards(withVenusian: boolean = true, count: number) {
     const maxSynergyAllowed = 1;
     let maxSynergyDetected = 1000;
-    let output: Array<number> = [];
+    let candidateIdxs: Array<number> = [];
     while(maxSynergyDetected > maxSynergyAllowed) {
         // selects indexes of |count| random milestones and |count| random awards.
         // For example, if count is 3, output looks like this [m1, m2, m3, a1, a2, a3]
         // where the first three entries are milestone indexes, and the next three are
         // award indexes.
-        let rows = shuffleArray(getNumbersRange(0, withVenusian ? 15: 14));
-        let cols = shuffleArray(getNumbersRange(16, withVenusian ? 31: 30));
-        output = [...rows.slice(0, count), ...cols.slice(0, count)].sort((a, b) => a - b);
+        const rows = shuffleArray(getNumbersRange(0, withVenusian ? 15: 14));
+        const cols = shuffleArray(getNumbersRange(16, withVenusian ? 31: 30));
+        candidateIdxs = [...rows.slice(0, count), ...cols.slice(0, count)].sort((a, b) => a - b);
 
         // Search through all pairs of [m1, m2, m3, a1, a2, a3], reading the synergy of
         // each. In this way the maximum synergy is computed between the n*(n-1) pairs.
-        maxSynergyDetected = computeSynergy(output);
+        maxSynergyDetected = computeSynergy(candidateIdxs);
 
         // After this, the while loop kicks in again. maxSynergyAllowed is 1. So, if any pairs of
         // [m1, m2, m3, a1, a2, a3] have synergy > 1, the option is rejected and the loop restarts.
     }
-    let finalItems = output.map(n => MA_ITEMS[n]);
+    const finalItems = candidateIdxs.map(n => MA_ITEMS[n]);
     return {
         "milestones": finalItems.slice(0, count) as Array<IMilestone>,
         "awards": finalItems.slice(count) as Array<IAward>,

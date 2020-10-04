@@ -13,8 +13,8 @@ export class HellasBoard extends Board{
         this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY));
         this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));
 
-        let is_ocean = [];
-        let bonus = [];
+        const is_ocean = [];
+        const bonus = [];
         // y=0
         is_ocean.push(true, false, false, false, false);
         bonus.push([SpaceBonus.PLANT, SpaceBonus.PLANT], [SpaceBonus.PLANT, SpaceBonus.PLANT], [SpaceBonus.PLANT, SpaceBonus.PLANT], [SpaceBonus.PLANT, SpaceBonus.STEEL], [SpaceBonus.PLANT]);

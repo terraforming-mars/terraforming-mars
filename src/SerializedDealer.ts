@@ -7,4 +7,5 @@ export interface SerializedDealer {
     usePreludeExtension: boolean;
     useVenusNextExtension: boolean;   
     useColoniesNextExtension: boolean;
+    useAresExtension: boolean;
 }

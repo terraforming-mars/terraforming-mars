@@ -12,7 +12,7 @@ import {Game} from "./Game";
 import {HowToPay} from "./inputs/HowToPay";
 import {SelectSpace} from "./inputs/SelectSpace";
 import {ISpace} from "./ISpace";
-import {SelectHowToPayForCard} from "./inputs/SelectHowToPayForCard";
+import { SelectHowToPayForCard } from "./inputs/SelectHowToPayForCard";
 import {SelectHowToPay} from "./inputs/SelectHowToPay";
 import { SelectAmount } from "./inputs/SelectAmount";
 import {SelectOption} from "./inputs/SelectOption";
@@ -45,13 +45,17 @@ import { Aridor } from "./cards/colonies/Aridor";
 import { MiningArea } from "./cards/MiningArea";
 import { MiningRights } from "./cards/MiningRights";
 import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
-import { Board } from "./Board";
-import { PartyHooks } from "./turmoil/parties/PartyHooks";
 import { REDS_RULING_POLICY_COST } from "./constants";
-import { CardModel } from "./models/CardModel";
 import { SelectColony } from "./inputs/SelectColony";
 import { ColonyName } from "./colonies/ColonyName";
 import { ColonyModel } from "./models/ColonyModel";
+import { Board } from "./Board";
+import { CardModel } from "./models/CardModel";
+import { PartyHooks } from "./turmoil/parties/PartyHooks";
+import { SelectProductionToLose } from "./inputs/SelectProductionToLose";
+import { IProductionUnits } from "./inputs/IProductionUnits";
+import { ShiftAresGlobalParameters } from "./inputs/ShiftAresGlobalParameters";
+import { IAresGlobalParametersResponse } from "./interrupts/ShiftAresGlobalParametersInterrupt";
 
 export type PlayerId = string;
 
@@ -382,7 +386,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
     
     public getCitiesCount(game: Game) {
-      return game.getSpaceCount(TileType.CITY, this) + game.getSpaceCount(TileType.CAPITAL, this);
+      return game.getSpaceCount(TileType.CITY, this)
+          + game.getSpaceCount(TileType.CAPITAL, this)
+          + game.getSpaceCount(TileType.OCEAN_CITY, this);
     }
 
     public getNoTagsCount() {
@@ -408,7 +414,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       return coloniesCount;
     }
-        
+
     public getResourcesOnCard(card: ICard): number | undefined {
       if (card.resourceCount !== undefined) {
         return card.resourceCount;
@@ -618,7 +624,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public getCard(cards: Array<IProjectCard>, cardName: string): IProjectCard {
       const foundCards = cards.filter((card) => card.name === cardName);
       if (foundCards.length === 0) {
-        throw new Error("Card not found");
+        throw new Error("Card not found: " + cardName);
       }
       return foundCards[0];
     }
@@ -857,6 +863,16 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           throw new Error("Unable to parse input " + err);
         }
         this.runInputCb(game, pi.cb(payMethod));
+      } else if (pi instanceof SelectProductionToLose) {
+        // TODO(kberg): I'm sure there's some input validation required.
+        var parsedInput = JSON.parse(input[0][0]);
+        var units: IProductionUnits = parsedInput;
+        pi.cb(units);
+      } else if (pi instanceof ShiftAresGlobalParameters) {
+        // TODO(kberg): I'm sure there's some input validation required.
+        var parsedInput = JSON.parse(input[0][0]);
+        var response: IAresGlobalParametersResponse = parsedInput;
+        pi.cb(response);
       } else {
         throw new Error("Unsupported waitingFor");
       }

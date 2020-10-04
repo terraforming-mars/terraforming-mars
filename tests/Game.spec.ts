@@ -34,11 +34,11 @@ describe("Game", function () {
 
     it("correctly separates 71 corporate era cards", function() {
         // include corporate era
-        const dealer = new Dealer(true, false, false, false, false, false);
+        const dealer = new Dealer(true, false, false, false, false, false, false);
         expect(dealer.getDeckSize()).to.eq(208);
 
         // exclude corporate era
-        const dealer2 = new Dealer(false, false, false, false, false, false);
+        const dealer2 = new Dealer(false, false, false, false, false, false, false);
         expect(dealer2.getDeckSize()).to.eq(137);
     });
 

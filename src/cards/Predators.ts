@@ -29,8 +29,11 @@ export class Predators implements IProjectCard, IActionCard, IResourceCard {
         const result: Array<ICard> = [];
         game.getPlayers().forEach((p) => {
             if (p.hasProtectedHabitats() && player.id !== p.id) return;
+            // TODO(kberg): the list of cards that can't have animals removed is now 2.
+            // This logic is duplicated in Predators.ts.
             result.push(...p.getCardsWithResources().filter(card => card.resourceType === ResourceType.ANIMAL 
                                                                 && card.name !== CardName.PETS
+                                                                && card.name !== CardName.BIOENGINEERING_ENCLOSURE
                                                                 && card.name !== this.name));
         });
         return result;

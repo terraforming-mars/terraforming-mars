@@ -22,8 +22,12 @@ describe("RestrictedArea", function () {
     it("Should play", function () {
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
-        action.cb(action.availableSpaces[0]);
-        expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.RESTRICTED_AREA);
+
+        const space = action.availableSpaces[0];
+
+        action.cb(space);
+        expect(space.tile && space.tile.tileType).to.eq(TileType.RESTRICTED_AREA);
+        expect(space.adjacency?.bonus).eq(undefined);
     });
 
     it("Should act", function () {

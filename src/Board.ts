@@ -126,19 +126,21 @@ export abstract class Board {
         );
     }
 
-    public getOceansOnBoard(): number {
-        return this.spaces.filter((space) => space.tile !== undefined &&
-                    space.tile.tileType === TileType.OCEAN
-        ).length;
+    public getOceansOnBoard(countUpgradedOceans: boolean = true): number {
+        return this.getOceansTiles(countUpgradedOceans).length;
     }
 
-    public getOceansTiles(): Array<ISpace> {
-        return this.spaces.filter((space) => space.tile !== undefined &&
-                    space.tile.tileType === TileType.OCEAN
-        );
+    public getOceansTiles(countUpgradedOceans: boolean): Array<ISpace> {
+        if (!countUpgradedOceans) {
+            return this.spaces.filter((space) => space.tile !== undefined &&
+                        space.tile.tileType === TileType.OCEAN
+            );
+        } else {
+            return this.spaces.filter((space) => Board.isOceanSpace(space));
+        }
     }    
 
-    public getSpaces(spaceType: SpaceType, _player: Player): Array<ISpace> {
+    public getSpaces(spaceType: SpaceType, _player?: Player): Array<ISpace> {
         return this.spaces.filter((space) => space.spaceType === spaceType);
     }
 
@@ -148,6 +150,14 @@ export abstract class Board {
 
     public getEmptySpaces(): Array<ISpace> {
         return this.spaces.filter((space) => space.tile === undefined);
+    }
+
+    // If direction is 1, count from the top left. If -1, count from the other end of the map.
+    public getAvailableSpaceByOffset(distance: number, direction: -1 | 1) {
+        // By doing an additional filter on space.tile, it skips over hazards.
+        var spaces = this.getAvailableSpacesOnLand(undefined).filter(space => !space.tile);
+        var idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
+        return spaces[idx];
     }
 
     public getAvailableSpacesForCity(player: Player): Array<ISpace> {
@@ -188,9 +198,10 @@ export abstract class Board {
             );
     }
 
-    public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
+    public getAvailableSpacesOnLand(player?: Player): Array<ISpace> {
         const landSpaces = this.getSpaces(SpaceType.LAND, player).filter(
-            (space) => space.tile === undefined && (space.player === undefined || space.player === player)
+            // Players may place over hazards, it's just more expensive. Players may not place on spaces reserved for other players.
+            (space) => (space.tile === undefined || space.tile.hazard === true) && (space.player === undefined || space.player === player)
         );
 
         return landSpaces;
@@ -219,7 +230,9 @@ export abstract class Board {
     }
 
     protected canPlaceTile(space: ISpace): boolean {
-        return space !== undefined && space.tile === undefined && space instanceof Land;
+        return space !== undefined &&
+            (space.tile === undefined || (space.tile.hazard || true)) &&
+            space instanceof Land;
     }
 
     public getForestSpace(spaces: Array<ISpace>): ISpace {
@@ -231,7 +244,12 @@ export abstract class Board {
     }
 
     public static isCitySpace(space: ISpace): boolean {
-        const cityTileTypes = [TileType.CITY, TileType.CAPITAL];
+        const cityTileTypes = [TileType.CITY, TileType.CAPITAL, TileType.OCEAN_CITY];
         return space.tile !== undefined && cityTileTypes.includes(space.tile.tileType);
+    }
+
+    public static isOceanSpace(space: ISpace): boolean {
+        const oceanTileTypes = [TileType.OCEAN, TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
+        return space.tile !== undefined && oceanTileTypes.includes(space.tile.tileType);
     }
 }  

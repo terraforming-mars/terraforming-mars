@@ -1,6 +1,6 @@
 import Vue from "vue";
 
-import { ALL_PRELUDE_PROJECTS_CARDS, ALL_VENUS_PROJECTS_CARDS, ALL_COLONIES_PROJECTS_CARDS, ALL_TURMOIL_PROJECTS_CARDS, ALL_PROMO_PROJECTS_CARDS, ALL_PROJECT_CARDS, ALL_CORP_ERA_PROJECT_CARDS } from '../Dealer';
+import { ALL_PRELUDE_PROJECTS_CARDS, ALL_VENUS_PROJECTS_CARDS, ALL_COLONIES_PROJECTS_CARDS, ALL_TURMOIL_PROJECTS_CARDS, ALL_PROMO_PROJECTS_CARDS, ALL_PROJECT_CARDS, ALL_CORP_ERA_PROJECT_CARDS, ALL_ARES_PROJECT_CARDS } from '../Dealer';
 import { CardName } from "../CardName";
 import { $t } from "../directives/i18n";
 
@@ -11,6 +11,7 @@ const allItems: Array<CardName> = [
     ...ALL_TURMOIL_PROJECTS_CARDS.map((cf) => cf.cardName),
     ...ALL_PROMO_PROJECTS_CARDS.map((cf) => cf.cardName),
     ...ALL_PROJECT_CARDS.map((cf) => cf.cardName),
+    ...ALL_ARES_PROJECT_CARDS.map((cf) => cf.cardName),
     ...ALL_CORP_ERA_PROJECT_CARDS.map((cf) => cf.cardName)
 ].sort();
 
@@ -22,7 +23,7 @@ interface CardsFilterModel {
 }
 
 export const CardsFilter = Vue.component("cards-filter", {
-    props: ["corporateEra", "prelude", "venusNext", "colonies", "turmoil", "promoCardsOption", "communityCardsOption"],
+    props: ["corporateEra", "prelude", "venusNext", "colonies", "turmoil", "promoCardsOption", "communityCardsOption", "ares"],
     data: function () {
         return {
             customCorporationsList: false,

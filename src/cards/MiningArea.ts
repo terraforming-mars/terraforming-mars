@@ -19,6 +19,7 @@ export class MiningArea implements IProjectCard {
     public hasRequirements = false;
     public name: CardName = CardName.MINING_AREA;
     public bonusResource: Resources | undefined = undefined;
+
     private getAvailableSpaces(player: Player, game: Game): Array<ISpace> {
         return game.board.getAvailableSpacesOnLand(player)
                 .filter((space) => space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1)
@@ -33,14 +34,21 @@ export class MiningArea implements IProjectCard {
             if (foundSpace.bonus.indexOf(SpaceBonus.STEEL) !== -1) {
                 player.setProduction(Resources.STEEL);
                 this.bonusResource = Resources.STEEL;
+                this.setAdjacencyBonus(foundSpace, SpaceBonus.STEEL);
                 LogHelper.logGainProduction(game, player, Resources.STEEL);
             } else if (foundSpace.bonus.indexOf(SpaceBonus.TITANIUM) !== -1) {
                 player.setProduction(Resources.TITANIUM);
                 this.bonusResource = Resources.TITANIUM;
+                this.setAdjacencyBonus(foundSpace, SpaceBonus.TITANIUM);
                 LogHelper.logGainProduction(game, player, Resources.TITANIUM);
             }
             return undefined;
         });
+    }
+
+    // This is not the standard way adjacency bonuses are handled, but this is a special
+    // case where the bonus type depends on this subclass. Same goes for Mining Rights.
+    protected setAdjacencyBonus(_space: ISpace, _bonusType: SpaceBonus) {
     }
 }
 

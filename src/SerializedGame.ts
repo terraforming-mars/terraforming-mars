@@ -15,6 +15,7 @@ import { SerializedDealer } from "./SerializedDealer";
 import { SerializedTurmoil } from "./turmoil/SerializedTurmoil";
 import { PlayerId } from "./Player";
 import { GameOptions } from "./Game";
+import { IAresData } from "./ares/IAresData";
 
 export interface SerializedGame {
     id: string;
@@ -56,6 +57,7 @@ export interface SerializedGame {
     pendingOceans: number;
     lastSaveId: number;
     turmoil: SerializedTurmoil;
+    aresData: IAresData;
     someoneHasRemovedOtherPlayersPlants: boolean;
     gameOptions: GameOptions;
 }

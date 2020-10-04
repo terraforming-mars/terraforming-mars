@@ -204,7 +204,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
               b.player(this)
               .number(retribution)
               .cardName(CardName.MONS_INSURANCE)
-              .playerId(game.monsInsuranceOwner!));
+              .player(game.getPlayerById(game.monsInsuranceOwner!)));
         }
       }  
     }
@@ -775,7 +775,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           throw new Error("Invalid players array provided");
         }
         const foundPlayer = pi.players.find(
-            (player) => player.id === input[0][0]
+            (player) => player.color === input[0][0] || player.id === input[0][0]
         );
         if (foundPlayer === undefined) {
           throw new Error("Player not available");
@@ -794,7 +794,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
         else {
           pi.players.forEach(player => {
-            if (player instanceof Player && player.id === input[0][0]) {
+            if (player instanceof Player && (player.id === input[0][0] || player.color === input[0][0])) {
               foundPlayer = player;
             }
           });

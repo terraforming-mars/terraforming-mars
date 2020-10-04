@@ -609,7 +609,7 @@ function getPlayer(player: Player, game: Game): string {
         deckSize: game.dealer.getDeckSize(),
         randomMA: game.gameOptions.randomMA,
         actionsTakenThisRound: player.actionsTakenThisRound,
-        passedPlayers: Array.from(game.getPassedPlayers()), // JSON stringify does not honor sets
+        passedPlayers: game.getPassedPlayers(),
         preludeExtension: game.gameOptions.preludeExtension,
     } as PlayerModel;
     return JSON.stringify(output);
@@ -703,7 +703,7 @@ function getWaitingFor(
             break;
         case PlayerInputTypes.SELECT_PLAYER:
             result.players = (waitingFor as SelectPlayer).players.map(
-                (player) => player.id
+                (player) => player.color
             );
             break;
         case PlayerInputTypes.SELECT_SPACE:
@@ -720,7 +720,7 @@ function getWaitingFor(
                     if (player === "NEUTRAL") {
                         return "NEUTRAL";
                     } else {
-                        return player.id;
+                        return player.color;
                     }
                 }
             );
@@ -754,7 +754,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
             energyProduction: player.getProduction(Resources.ENERGY),
             heat: player.heat,
             heatProduction: player.getProduction(Resources.HEAT),
-            id: player.id,
+            id: player.color,
             megaCredits: player.megaCredits,
             megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
             name: player.name,

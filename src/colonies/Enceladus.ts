@@ -9,8 +9,8 @@ export class Enceladus extends Colony implements IColony {
     public description: string = "Microbes";
     public isActive = false;
     public resourceType = ResourceType.MICROBE;
-    public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player, game);
+    public trade(player: Player, game: Game, usesTradeFleet: boolean = true): void {
+        if (usesTradeFleet) this.beforeTrade(this, player, game);
         let microbes: number = 0;
         if (this.trackPosition > 4) {
             microbes = this.trackPosition - 1;
@@ -18,7 +18,7 @@ export class Enceladus extends Colony implements IColony {
             microbes = this.trackPosition;
         }
         game.addResourceInterrupt(player, ResourceType.MICROBE, microbes, undefined);
-        this.afterTrade(this, player, game);
+        if (usesTradeFleet) this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);

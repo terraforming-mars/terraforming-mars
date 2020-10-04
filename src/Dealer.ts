@@ -1141,7 +1141,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     // Function used to rebuild each objects
     public loadFromJSON(d: SerializedDealer): Dealer {
         // Assign each attributes
-        let o = Object.assign(this, d);
+        const o = Object.assign(this, d);
 
         // Rebuild deck
         this.deck = d.deck.map((element: IProjectCard)  => {

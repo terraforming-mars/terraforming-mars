@@ -3,6 +3,7 @@ import { Playwrights } from "../../../src/cards/community/Playwrights";
 import { Color } from "../../../src/Color";
 import { Player } from "../../../src/Player";
 import { Game } from '../../../src/Game';
+import { ReleaseOfInertGases} from "../../../src/cards/ReleaseOfInertGases";
 import { TechnologyDemonstration } from "../../../src/cards/TechnologyDemonstration";
 import { SelectCard } from "../../../src/inputs/SelectCard";
 import { Resources } from "../../../src/Resources";
@@ -31,19 +32,20 @@ describe("Playwrights", function () {
     });
 
     it("Can replay own event", function () {
-        const techDemo = new TechnologyDemonstration();
-        techDemo.play(player, game);
-        player.playedCards.push(techDemo);
+        const event = new ReleaseOfInertGases();
+        let tr = player.getTerraformRating();
+        event.play(player, game);
+        player.playedCards.push(event);
 
-        expect(player.cardsInHand.length).to.eq(2);
+        expect(player.getTerraformRating()).to.eq(tr + 2);
         expect(card.canAct(player, game)).to.eq(false);
 
-        player.megaCredits = 5;
+        player.megaCredits = event.cost;
         expect(card.canAct(player, game)).to.eq(true);
 
         const selectCard = card.action(player, game) as SelectCard<ICard>;
-        selectCard.cb([techDemo]);
-        expect(player.cardsInHand.length).to.eq(4);
+        selectCard.cb([event]);
+        expect(player.getTerraformRating()).to.eq(tr + 4);
         expect(player.megaCredits).eq(0);
         expect(player.playedCards.length).to.eq(0);
         expect(player.removedFromPlayCards.length).to.eq(1);
@@ -56,7 +58,6 @@ describe("Playwrights", function () {
 
         player.megaCredits = 5;
         expect(card.canAct(player, game)).to.eq(true);
-
         const selectCard = card.action(player, game) as SelectCard<ICard>;
         selectCard.cb([techDemo]);
         expect(player.cardsInHand.length).to.eq(2);

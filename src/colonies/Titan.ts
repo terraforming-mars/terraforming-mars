@@ -9,16 +9,18 @@ export class Titan extends Colony implements IColony {
     public description: string = "Floaters";
     public isActive = false;
     public resourceType: ResourceType = ResourceType.FLOATER;
-    public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player, game);
+    public trade(player: Player, game: Game, usesTradeFleet: boolean = true): void {
+        if (usesTradeFleet) this.beforeTrade(this, player, game);
+        
         let floaters: number = 0;
         if (this.trackPosition < 5) {
             floaters = Math.max(this.trackPosition - 1, 1);
         } else {
             floaters = this.trackPosition - 2;
         }
+
         game.addResourceInterrupt(player, ResourceType.FLOATER, floaters, undefined);
-        this.afterTrade(this, player, game);
+        if (usesTradeFleet) this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);

@@ -36,15 +36,15 @@ export class BoardBuilder {
     }
 
     build(): Array<ISpace> {
-        let tilesPerRow = [5,6,7,8,9,8,7,6,5];
-        let idOffset = this.spaces.length + 1;
+        const tilesPerRow = [5,6,7,8,9,8,7,6,5];
+        const idOffset = this.spaces.length + 1;
         let idx = 0;
 
-        for (var row = 0; row < 9; row++) {
-            var tilesInThisRow = tilesPerRow[row];
-            var xOffset = 9 - tilesInThisRow;
-            for (var i = 0; i < tilesInThisRow; i++) {
-                var space = this.newTile(idx + idOffset, xOffset + i, row, this.oceans[idx], this.bonuses[idx]);
+        for (let row = 0; row < 9; row++) {
+            const tilesInThisRow = tilesPerRow[row];
+            const xOffset = 9 - tilesInThisRow;
+            for (let i = 0; i < tilesInThisRow; i++) {
+                const space = this.newTile(idx + idOffset, xOffset + i, row, this.oceans[idx], this.bonuses[idx]);
                 this.spaces.push(space);
                 idx++;
             }  
@@ -56,15 +56,15 @@ export class BoardBuilder {
     }
 
     public shuffleArray(array: Array<Object>): void {
-        var sorted = this.unshufflableSpaces.sort((a, b) =>  a < b ? a : b);
+        const sorted = this.unshufflableSpaces.sort((a, b) =>  a < b ? a : b);
         // Reverseing the indexes so the elements are pulled from the right.
         // Revering the result so elements are listed left to right.
-        var spliced = sorted.reverse().map(idx => array.splice(idx, 1)).reverse();
+        const spliced = sorted.reverse().map(idx => array.splice(idx, 1)).reverse();
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(this.rng.next() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
         }
-        for (var idx = 0; idx < sorted.length; idx++) {
+        for (let idx = 0; idx < sorted.length; idx++) {
             array.splice(sorted[idx], 0, spliced[idx]);
         }
         console.log(array);
@@ -83,7 +83,7 @@ export class BoardBuilder {
                 const land_id = Number(land) - 3;
                 while (this.oceans[land_id]) {
                     satisfy = false;
-                    let idx = Math.floor(this.rng.next() * (this.oceans.length + 1));
+                    const idx = Math.floor(this.rng.next() * (this.oceans.length + 1));
                     [this.oceans[land_id], this.oceans[idx]] = [this.oceans[idx], this.oceans[land_id]];
                 }
             }

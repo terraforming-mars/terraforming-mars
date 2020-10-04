@@ -1171,7 +1171,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">073</div>
         <div class="content ">
           <div class="points points-big">1</div>
-            <div class="resource-tag science"></div> : - <span class="card resource "></span> + <span class="card resource "></span>
+            <div class="resource-tag tag-science"></div> : - <span class="card resource "></span> + <span class="card resource "></span>
             <div class="description ">
                 (Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.)
             </div>
@@ -2916,7 +2916,7 @@ export const HTML_DATA: Map<string, string> =
           <div class="card-number">185</div>
           <div class="content ">
             <div class="points points-big">1</div>
-              <div class="resource-tag science"></div> : <div class="resource science"></div> OR -<div class="resource science"></div>+<div class="card resource "></div>
+              <div class="resource-tag tag-science"></div> : <div class="resource science"></div> OR -<div class="resource science"></div>+<div class="card resource "></div>
               <div class="description ">
                 (When you play a Science tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.)
               </div>
@@ -4101,7 +4101,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="content ">
                 <div class="points">1/<div class="animal resource "></div></div>
                 <div class="requirements">18% Venus</div>
-                <div class="resource-tag science"></div> : <div class="animal resource "></div>
+                <div class="resource-tag tag-science"></div> : <div class="animal resource "></div>
                 <div class="description ">
                   (Effect: when you play a Science tag, including this, add 1 Animal to this card)
                 </div>
@@ -4844,7 +4844,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="content ">
                 <div class="points points-big">1</div>
                   <div class="resource card"></div> /
-                    <div class="resource-tag science"></div><div class="resource-tag science" style="margin-left:-10px"></div><div class="resource-tag science" style="margin-left:-10px"></div>
+                    <div class="resource-tag tag-science"></div><div class="resource-tag tag-science" style="margin-left:-10px"></div><div class="resource-tag tag-science" style="margin-left:-10px"></div>
                   <div class="description ">
                       (Draw 1 card for every 3 science tags you have, including this.)
                   </div>
@@ -6778,7 +6778,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-effect-icons">
         <div class="resource money startmc">54</div>
         <div class="resource card">
-          <div class="card-icon card-icon-science"></div>
+          <div class="card-icon tag-science" style="background-position:0"></div>
         </div>
       </div>
 

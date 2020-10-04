@@ -112,7 +112,7 @@ export abstract class Board {
     } 
 
     public getAvailableSpacesForMarker(player: Player): Array<ISpace> {
-        let spaces =  this.getAvailableSpacesOnLand(player)
+        const spaces =  this.getAvailableSpacesOnLand(player)
         .filter(
             (space) => this.getAdjacentSpaces(space).find(
                 (adj) => adj.player === player
@@ -142,10 +142,9 @@ export abstract class Board {
             );
     }
 
-    public getAvailableSpacesOnLand(player?: Player): Array<ISpace> {
-        let landSpaces = this.getSpaces(SpaceType.LAND, player).filter(
-            // Players may place over hazards, it's just more expensive. Players may not place on spaces reserved for other players.
-            (space) => (space.tile === undefined) && (space.player === undefined || space.player === player)
+    public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
+        const landSpaces = this.getSpaces(SpaceType.LAND, player).filter(
+            (space) => space.tile === undefined && (space.player === undefined || space.player === player)
         );
 
         return landSpaces;
@@ -164,7 +163,7 @@ export abstract class Board {
         let safety = 0;
         // avoid bugs which would lock node process
         while (safety < 1000) {
-            let space = this.getRandomSpace(offset);
+            const space = this.getRandomSpace(offset);
             if (this.canPlaceTile(space) && this.getAdjacentSpaces(space).filter(sp => sp.tile?.tileType === TileType.CITY).length === 0 && this.getAdjacentSpaces(space).find(sp => this.canPlaceTile(sp)) !== undefined) {
                 return space;
             }

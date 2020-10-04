@@ -37,7 +37,7 @@ export class LogBuilder {
     }
 
     public player(value: Player): LogBuilder {
-        return this.playerId(value.id);
+        return this.playerId(value.color);
     }
 
     public playerId(value: string): LogBuilder {

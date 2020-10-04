@@ -10,7 +10,7 @@ export class OriginalBoard extends Board {
     constructor(shuffleMapOption: boolean = false, seed: number = 0) {
         super();
 
-        var builder = new BoardBuilder(seed);
+        const builder = new BoardBuilder(seed);
 
         const PLANT = SpaceBonus.PLANT;
         const STEEL = SpaceBonus.STEEL;

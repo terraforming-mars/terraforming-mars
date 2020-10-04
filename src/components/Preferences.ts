@@ -100,6 +100,7 @@ export const Preferences = Vue.component("preferences", {
                     <div class="preferences-gen-marker">{{ getGenMarker() }}</div>
                 </div>
                 <div class="preferences_item preferences_player"><div class="preferences_player_inner" :class="'player_bg_color_' + player_color"></div></div>
+                <div class="preferences_global_params"></div>
                 <div class="preferences-divider" />
                 <a  href="#board">
                     <div class="preferences_item preferences_item_shortcut">

@@ -103,6 +103,10 @@ export const PlayerHome = Vue.component("player-home", {
             </div>
 
             <preferences v-trim-whitespace :player_name="player.name" :player_color="player.color" :generation="player.generation" :coloniesCount="player.colonies.length">
+                <div class="global-parameters global-parameters--temperature">{{ player.temperature }}</div>
+                <div class="global-parameters global-parameters--oxygen">{{ player.oxygenLevel }}</div>
+                <div class="global-parameters global-parameters--ocean">{{ player.oceans }}</div>
+                <div class="global-parameters global-parameters--venus" v-if="player.venusNextExtension">{{ player.venusScaleLevel }}</div>
                 <div class="deck-size">{{ player.deckSize }}</div>
             </preferences>
 

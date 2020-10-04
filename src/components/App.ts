@@ -15,6 +15,12 @@ export const mainAppSettings = {
         componentsVisibility: {
             "millestones_list": true,
             "awards_list": true,
+            "tags_concise": false,
+            "pinned_player_0": false,
+            "pinned_player_1": false,
+            "pinned_player_2": false,
+            "pinned_player_3": false,
+            "pinned_player_4": false,
         },
         game: {
             players: [],
@@ -34,7 +40,6 @@ export const mainAppSettings = {
         setVisibilityState: function (targetVar: string, isVisible: boolean) {
             if (isVisible === this.getVisibilityState(targetVar)) return;
             (this as any).componentsVisibility[targetVar] = isVisible;
-            (this as any).playerkey++;
         },
         getVisibilityState: function (targetVar: string): boolean {
             return (this as any).componentsVisibility[targetVar] ? true : false;

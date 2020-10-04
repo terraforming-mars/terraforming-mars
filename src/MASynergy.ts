@@ -54,12 +54,12 @@ const SYNERGIES = [
 function shuffleArray(arr: Array<number>) {
     arr = arr.slice()
     for (let i = arr.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        let temp = arr[i];
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
-    return arr
+    return arr;
 }
 
 function getNumbersRange(start: number, end: number): Array<number> {
@@ -72,11 +72,11 @@ export function getRandomMilestonesAndAwards(withVenusian: boolean = true, requi
     let output: Array<number> = [];
     while(maxSynergyDetected > maxSynergyAllowed) {
         maxSynergyDetected = 0;
-        let rows = shuffleArray(getNumbersRange(0, withVenusian ? 15: 14));
-        let cols = shuffleArray(getNumbersRange(16, withVenusian ? 31: 30));
+        const rows = shuffleArray(getNumbersRange(0, withVenusian ? 15: 14));
+        const cols = shuffleArray(getNumbersRange(16, withVenusian ? 31: 30));
 
         output = [...rows.slice(0, requiredQty), ...cols.slice(0, requiredQty)].sort((a, b) => a - b);
-        let bound = requiredQty * 2;
+        const bound = requiredQty * 2;
         for (let i=0; i<bound - 1; i++) {
             for (let j=i+1; j<bound; j++) {
                 maxSynergyDetected = Math.max(
@@ -86,7 +86,7 @@ export function getRandomMilestonesAndAwards(withVenusian: boolean = true, requi
             }
         }
     }
-    let finalItems = output.map(n => MA_ITEMS[n]);
+    const finalItems = output.map(n => MA_ITEMS[n]);
     return {
         "milestones": finalItems.slice(0, requiredQty) as Array<IMilestone>,
         "awards": finalItems.slice(requiredQty) as Array<IAward>,

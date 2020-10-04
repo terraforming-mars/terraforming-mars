@@ -26,7 +26,7 @@ export class Aridor implements CorporationCard {
                     if (colony.name === colonyName) {
                       game.colonies.push(colony);
                       game.colonies.sort((a,b) => (a.name > b.name) ? 1 : -1);
-                      game.newLog("${0} added a new Colony tile: ${1}", b => b.player(player).colony(colony));
+                      game.log("${0} added a new Colony tile: ${1}", b => b.player(player).colony(colony));
                       this.checkActivation(colony, game);
                       return undefined;
                     }

@@ -25,14 +25,14 @@ export class Deck<T> {
 
 export class Decks {
     public static findByName<T>(decks: Array<Deck<T>>, cardName: string): T | undefined {
-        var found: T | undefined;
+        let found: T | undefined;
 
         decks.forEach((deck) => {
             // Short circuit
             if (found) {
                 return;
             }
-            let cf = deck.findByCardName(cardName);
+            const cf = deck.findByCardName(cardName);
             if (cf) {
                 found = new cf.factory();
             }

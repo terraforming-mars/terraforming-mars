@@ -30,7 +30,7 @@ export const decks: Array<CardManifest> = [
 // TODO(kberg): Find the use cases where this is used to find Prelude cards and filter them out to
 //              another function, perhaps?
 export function getProjectCardByName(cardName: string): IProjectCard | undefined {
-    var found : (ICardFactory<IProjectCard> | undefined);
+    let found : (ICardFactory<IProjectCard> | undefined);
     decks.forEach(deck => {
         // Short circuit
         if (found) {
@@ -72,10 +72,10 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         this.usePromoCards = usePromoCards;
         this.useTurmoilExtension = useTurmoilExtension;
 
-        var deck:Array<IProjectCard> = [];
-        var preludeDeck:Array<IProjectCard> = [];
-        var projectCardsToRemove:Array<String> = [];
-        var corporationCards: Array<CorporationCard> = [];
+        const deck:Array<IProjectCard> = [];
+        const preludeDeck:Array<IProjectCard> = [];
+        const projectCardsToRemove:Array<String> = [];
+        const corporationCards: Array<CorporationCard> = [];
 
         function addToDeck<T>(deck: Array<T>, cards: Deck<T>): void {
             deck.push(...cards.cards.map((cf) => new cf.factory()));                   
@@ -108,7 +108,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         if (cardsBlackList) {
             projectCardsToRemove.push(...cardsBlackList);
         }
-        var filteredDeck = deck.filter((card) => !projectCardsToRemove.includes(card.name));
+        const filteredDeck = deck.filter((card) => !projectCardsToRemove.includes(card.name));
         this.deck = this.shuffleCards(filteredDeck);
         if (this.usePreludeExtension) {
             this.preludeDeck = this.shuffleCards(preludeDeck);
@@ -157,7 +157,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     // Function used to rebuild each objects
     public loadFromJSON(d: SerializedDealer): Dealer {
         // Assign each attributes
-        let o = Object.assign(this, d);
+        const o = Object.assign(this, d);
 
         // Rebuild deck
         this.deck = d.deck.map((element: IProjectCard)  => {

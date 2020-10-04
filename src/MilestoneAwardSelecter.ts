@@ -46,6 +46,11 @@ const MA_ITEMS = [
     ...VENUS_AWARDS
 ];
 
+export interface IDrawnMilestonesAndAwards {
+    milestones: Array<IMilestone>,
+    awards: Array<IAward>
+};
+
 export function buildSynergies(): Array<Array<number>> {
     var array: Array<Array<number>> = new Array(MA_ITEMS.length);
     for (var idx = 0; idx < MA_ITEMS.length; idx++) {
@@ -209,7 +214,9 @@ function getNumbersRange(start: number, end: number): Array<number> {
     return Array.from(Array(end + 1 - start).keys()).map(n => n + start)
 }
 
-export function getRandomMilestonesAndAwards(withVenusian: boolean = true, count: number) {
+// Selects |count| milestones and |count| awards 
+//
+export function getRandomMilestonesAndAwards(withVenusian: boolean = true, count: number): IDrawnMilestonesAndAwards {
     const maxSynergyAllowed = 1;
     let maxSynergyDetected = 1000;
     let candidateIdxs: Array<number> = [];
@@ -231,8 +238,8 @@ export function getRandomMilestonesAndAwards(withVenusian: boolean = true, count
     }
     const finalItems = candidateIdxs.map(n => MA_ITEMS[n]);
     return {
-        "milestones": finalItems.slice(0, count) as Array<IMilestone>,
-        "awards": finalItems.slice(count) as Array<IAward>,
+        milestones: finalItems.slice(0, count) as Array<IMilestone>,
+        awards: finalItems.slice(count) as Array<IAward>,
     }
 }
 

@@ -54,7 +54,7 @@ describe("Capital", function () {
     });
 
     it("Capital special tile counts as a city", function () {
-        const space = game.board.getRandomCitySpace(0);
+        const space = game.board.getNthAvailableLandSpace(2, 1, player);
         game.addTile(player, SpaceType.LAND, space, {
             tileType: TileType.CAPITAL,
             card: card.name

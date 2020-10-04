@@ -462,8 +462,8 @@ export const Colony = Vue.component("colony", {
     <div></div>
   </div>
   <div v-if="colony.name === getHygiea()" class="colony-grid-container2">
-    <div><div class="resource money red-outline" style="margin-top: 16px"></div></div>
-    <div><div class="resource money red-outline" style="margin-top: 16px"></div></div>
+    <div><div class="resource money red-outline"></div></div>
+    <div><div class="resource money red-outline"></div></div>
     <div><div class="resource heat red-outline"></div></div>
     <div><div class="resource energy red-outline"></div></div>
     <div><div class="resource plant red-outline"></div></div>

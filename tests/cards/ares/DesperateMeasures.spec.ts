@@ -1,7 +1,10 @@
+import { expect } from "chai";
 import { DesperateMeasures } from "../../../src/cards/ares/DesperateMeasures";
 import { Color } from "../../../src/Color";
 import { Game } from "../../../src/Game";
 import { Player } from "../../../src/Player";
+import { TileType } from "../../../src/TileType";
+import { AresTestHelper, ARES_OPTIONS_WITH_HAZARDS } from "../../ares/AresTestHelper";
 
 describe("DesperateMeasures", function () {
   let card : DesperateMeasures, player : Player, game : Game;
@@ -9,13 +12,46 @@ describe("DesperateMeasures", function () {
   beforeEach(function() {
     card = new DesperateMeasures();
     player = new Player("test", Color.BLUE, false);
-    game = new Game("foobar", [player, player], player);
+    game = new Game("foobar", [player, player], player, ARES_OPTIONS_WITH_HAZARDS);
   });
 
-  // TODO(kberg): implement
-  it("Placeholder test", function () {
-    console.log(player, game, card);
-      // card.play(player, game);
+  it("play on top of dust storm", function () {
+    let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
+    const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
+
+    var priorTr = player.getTerraformRating();
+
+    card.play(player, game).cb(protectedDustStorm);
+
+    expect(player.getTerraformRating()).eq(priorTr + 1);
+    expect(game.getOxygenLevel()).eq(1);
   });
 
+  it("play on top of erosion tile", function () {
+    // 3 oceans brings out the erosion tiles
+    AresTestHelper.addOcean(game, player);
+    AresTestHelper.addOcean(game, player);
+    AresTestHelper.addOcean(game, player);
+
+    let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
+    const protectedErosion = tiles.get(TileType.EROSION_MILD)![0];
+
+    var priorTr = player.getTerraformRating();
+    var priorTemp = game.getTemperature();
+
+    card.play(player, game).cb(protectedErosion);
+
+    expect(player.getTerraformRating()).eq(priorTr + 1);
+    expect(game.getTemperature()).eq(priorTemp + 2);
+  });
+
+  it("hazard tile with player marker can't be played on", function() {
+    let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
+    const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
+    expect(game.board.getAvailableSpacesOnLand(player).map(s => s.id)).contains(protectedDustStorm.id);
+
+    card.play(player, game).cb(protectedDustStorm);
+
+    expect(game.board.getAvailableSpacesOnLand(player).map(s => s.id)).not.contains(protectedDustStorm.id);
+  });
 });

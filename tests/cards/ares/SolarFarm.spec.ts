@@ -9,6 +9,7 @@ import { Player } from "../../../src/Player";
 import { Resources } from "../../../src/Resources";
 import { SpaceBonus } from "../../../src/SpaceBonus";
 import { TileType } from "../../../src/TileType";
+import { ARES_OPTIONS_WITH_HAZARDS } from "../../ares/AresTestHelper";
 
 describe("SolarFarm", function () {
     let card: SolarFarm, player: Player, game: Game;
@@ -16,7 +17,7 @@ describe("SolarFarm", function () {
     beforeEach(function () {
         card = new SolarFarm();
         player = new Player("test", Color.BLUE, false);
-        game = new Game("foobar", [player, player], player);
+        game = new Game("foobar", [player, player], player, ARES_OPTIONS_WITH_HAZARDS);
     });
 
     it("Play", function () {
@@ -39,7 +40,7 @@ describe("SolarFarm", function () {
         expect(action instanceof SelectSpace).to.eq(true);
 
         expect(player.getProduction(Resources.ENERGY)).eq(0);
-        const citySpace = game.board.getAvailableSpacesForCity(player)[0];
+        const citySpace = game.board.getAvailableSpacesOnLand(player)[0];
         action.cb(citySpace);
         expect(citySpace.player).to.eq(player);
         expect(citySpace.tile!.tileType).to.eq(TileType.SOLAR_FARM);

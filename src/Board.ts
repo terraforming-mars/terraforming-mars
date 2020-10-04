@@ -142,9 +142,9 @@ export abstract class Board {
         return this.spaces.filter((space) => space.spaceType === spaceType);
     }
 
-    protected getRandomSpace(offset: number): ISpace {
-        return this.spaces[Math.floor(Math.random() * 30) + offset];
-    }
+    // protected getRandomSpace(offset: number): ISpace {
+    //     return this.spaces[Math.floor(Math.random() * 30) + offset];
+    // }
 
     public getEmptySpaces(): Array<ISpace> {
         return this.spaces.filter((space) => space.tile === undefined);
@@ -205,20 +205,17 @@ export abstract class Board {
         return out;
     }
 
-    public getRandomCitySpace(offset: number): Space {
-        let safety = 0;
-        // avoid bugs which would lock node process
-        while (safety < 1000) {
-            const space = this.getRandomSpace(offset);
-            if (this.canPlaceTile(space) && this.getAdjacentSpaces(space).filter(sp => sp.tile?.tileType === TileType.CITY).length === 0 && this.getAdjacentSpaces(space).find(sp => this.canPlaceTile(sp)) !== undefined) {
-                return space;
-            }
-            safety++;
-        }
-        throw new Error("space not found for getRandomCitySpace");
+    // If direction is 1, count from the top left. If -1, count from the other end of the map.
+    public getNthAvailableLandSpace(
+        distance: number, 
+        direction: -1 | 1,
+        predicate: (value: ISpace) =>  boolean = _x => true) {
+        const spaces = this.spaces.filter((space) => space.spaceType === SpaceType.LAND && space.tile === undefined).filter(predicate);
+        const idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
+        return spaces[idx];
     }
-
-    protected canPlaceTile(space: ISpace): boolean {
+    
+    public canPlaceTile(space: ISpace): boolean {
         return space !== undefined && space.tile === undefined && space instanceof Land;
     }
 

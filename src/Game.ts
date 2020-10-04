@@ -1706,24 +1706,40 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Single player add neutral player
       // put 2 neutrals cities on board with adjacent forest
       const neutral = new Player("neutral", Color.NEUTRAL, true, 0);
-      const space1 = this.board.getRandomCitySpace(0);
-      this.addCityTile(neutral, space1.id, SpaceType.LAND);
-      const fspace1 = this.board.getForestSpace(
-          this.board.getAdjacentSpaces(space1)
-      );
-      this.addTile(neutral, SpaceType.LAND, fspace1, {
-        tileType: TileType.GREENERY
-      });
-      const space2 = this.board.getRandomCitySpace(30);
-      this.addCityTile(neutral, space2.id, SpaceType.LAND);
-      const fspace2 = this.board.getForestSpace(
-          this.board.getAdjacentSpaces(space2)
-      );
-      this.addTile(neutral, SpaceType.LAND, fspace2, {
-        tileType: TileType.GREENERY
-      });
+
+      function placeCityAndForest(game: Game, direction: -1 | 1) {
+        const space1 = game.getSpaceByOffset(direction);
+        game.addCityTile(neutral, space1.id, SpaceType.LAND);
+        const fspace1 = game.board.getForestSpace(
+            game.board.getAdjacentSpaces(space1)
+        );
+        game.addTile(neutral, SpaceType.LAND, fspace1, {
+          tileType: TileType.GREENERY
+        });
+      }
+
+      placeCityAndForest(this, 1);
+      placeCityAndForest(this, -1);
+
       return undefined;
     }
+
+    public getSpaceByOffset(direction: -1 | 1, type = "tile") {
+      const card = this.dealer.dealCard();
+      this.log("Dealt and discarded ${0} (cost ${1}) to place a ${2}", b => b.card(card).number(card.cost).string(type));
+  
+      const distance = Math.max(card.cost-1, 0); // Some cards cost zero.
+      const space = this.board.getNthAvailableLandSpace(distance, direction,
+        space => {
+          const adjacentSpaces = this.board.getAdjacentSpaces(space);
+          return adjacentSpaces.filter(sp => sp.tile?.tileType === TileType.CITY).length === 0 && // no cities nearby
+             adjacentSpaces.find(sp => this.board.canPlaceTile(sp)) !== undefined;  // can place forest nearby
+        });
+      if (space === undefined) {
+          throw new Error("Couldn't find space when card cost is " + card.cost);
+      }
+      return space;
+  }
 
     // Custom replacer to transform Map and Set to Array
     public replacer(key: any, value: any) {

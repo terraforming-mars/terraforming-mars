@@ -37,9 +37,25 @@ describe("Board", function () {
         const availableSpaces = board.getAvailableSpacesForGreenery(player);
         expect(availableSpaces.length).to.eq(1);
     });
-    
-    it("doesnt block node process when bug with getRandomCitySpace", function () {
-        (board as any).canPlaceTile = function () { return false; };
-        expect(function () { board.getRandomCitySpace(0); }).to.throw("space not found for getRandomCitySpace");
+    it("getNthAvailableLandSpace", function() {
+        // board spaces start at 03, and the top of the map looks like this
+        //
+        //    l o l o o
+        //   l l l l l o
+        expect(board.getNthAvailableLandSpace(0, 1).id).eq("03");
+        expect(board.getNthAvailableLandSpace(1, 1).id).eq("05");
+        expect(board.getNthAvailableLandSpace(2, 1).id).eq("08");
+        expect(board.getNthAvailableLandSpace(3, 1).id).eq("09");
+        // Filter changes available spaces.
+        expect(board.getNthAvailableLandSpace(3, 1, s => s.id !== "09").id).eq("10");
+
+        // bottom ends at 63 and looks like this
+        //
+        //  l l l l l l
+        //   l l l l o
+        expect(board.getNthAvailableLandSpace(0, -1).id).eq("62");
+        expect(board.getNthAvailableLandSpace(1, -1).id).eq("61");
+        expect(board.getNthAvailableLandSpace(2, -1).id).eq("60");
+        expect(board.getNthAvailableLandSpace(3, -1).id).eq("59");
     });
 });

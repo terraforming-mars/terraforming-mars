@@ -176,6 +176,10 @@ function generateRandomServerId(): string {
 }
 
 function generateAppVersion(): string {
+    // assumes SOURCE_VERSION is git hash
+    if (process.env.SOURCE_VERSION) {
+        return process.env.SOURCE_VERSION.substring(0, 7) + " deployed " + new Date().toISOString();
+    }
     try {
         return child_process.execSync(`git log -1 --pretty=format:"%h %cD"`).toString();
     } catch (error) {

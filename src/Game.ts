@@ -220,8 +220,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Add colonies stuff
       if (gameOptions.coloniesExtension) {
         corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
+
+        const communityColoniesSelected = this.checkForCommunityColonies(gameOptions);
+        const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
+
         this.colonyDealer = new ColonyDealer();
-        this.colonies = this.colonyDealer.drawColonies(players.length, this.gameOptions.customColoniesList);
+        this.colonies = this.colonyDealer.drawColonies(players.length, this.gameOptions.customColoniesList, this.gameOptions.venusNextExtension, allowCommunityColonies);
         if (this.players.length === 1) {
           players[0].setProduction(Resources.MEGACREDITS, -2);
           this.addInterrupt(new SelectRemoveColony(players[0], this));
@@ -330,6 +334,18 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.runDraftRound(true);
         return;
       }
+    }
+
+    public checkForCommunityColonies(gameOptions: GameOptions) : boolean {
+      if (!gameOptions.customColoniesList) return false;
+      if (gameOptions.customColoniesList.includes(ColonyName.IAPETUS)) return true;
+      if (gameOptions.customColoniesList.includes(ColonyName.MERCURY)) return true;
+      if (gameOptions.customColoniesList.includes(ColonyName.HYGIEA)) return true;
+      if (gameOptions.customColoniesList.includes(ColonyName.TITANIA)) return true;
+      if (gameOptions.customColoniesList.includes(ColonyName.VENUS)) return true;
+      if (gameOptions.customColoniesList.includes(ColonyName.LEAVITT)) return true;
+
+      return false;
     }
 
     public isSoloMode() :boolean {
@@ -900,6 +916,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.passedPlayers.clear();
       this.someoneHasRemovedOtherPlayersPlants = false;
       this.players.forEach((player) => {
+        player.cardDiscount = 0; // Iapetus reset hook
         player.runProductionPhase();
       });
 

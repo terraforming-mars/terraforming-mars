@@ -8,12 +8,14 @@ import { LogHelper } from '../components/LogHelper';
 export class Ganymede extends Colony implements IColony {
     public name = ColonyName.GANYMEDE;
     public description: string = "Plants";
-    public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player, game);
+    public trade(player: Player, game: Game, usesTradeFleet: boolean = true): void {
+        if (usesTradeFleet) this.beforeTrade(this, player, game);
+
         const qty = this.trackPosition;
         player.plants += qty;
         LogHelper.logGainStandardResource(game, player, Resources.PLANTS, qty);
-        this.afterTrade(this, player, game);
+        
+        if (usesTradeFleet) this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);

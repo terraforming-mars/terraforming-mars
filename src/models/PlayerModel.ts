@@ -6,7 +6,6 @@ import { ITagCount } from "../ITagCount";
 import { TurmoilModel } from "./TurmoilModel";
 import { IProjectCard } from "../cards/IProjectCard";
 import { CorporationCard } from "../cards/corporation/CorporationCard";
-import { PlayerId } from "../Player";
 import { IAresData } from "../ares/IAresData";
 
 export interface PlayerModel {
@@ -59,7 +58,7 @@ export interface PlayerModel {
     dealtProjectCards: Array<IProjectCard>;
     initialDraft: boolean;
     needsToDraft: boolean | undefined;
-    passedPlayers: Array<PlayerId>;
+    passedPlayers: Array<Color>;
     actionsTakenThisRound: number;
     deckSize: number;
     preludeExtension: boolean;

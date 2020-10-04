@@ -8,8 +8,8 @@ import { LogHelper } from '../components/LogHelper';
 export class Ceres extends Colony implements IColony {
     public name = ColonyName.CERES;
     public description: string = "Steel";
-    public trade(player: Player, game: Game): void {
-        this.beforeTrade(this, player, game);
+    public trade(player: Player, game: Game, usesTradeFleet: boolean = true): void {
+        if (usesTradeFleet) this.beforeTrade(this, player, game);
         let qty : number;
         if (this.trackPosition === 2) {
             qty = 3;
@@ -19,7 +19,7 @@ export class Ceres extends Colony implements IColony {
 
         player.steel += qty;
         LogHelper.logGainStandardResource(game, player, Resources.STEEL, qty);
-        this.afterTrade(this, player, game);
+        if (usesTradeFleet) this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);

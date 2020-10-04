@@ -116,7 +116,13 @@ export const HTML_DATA: Map<string, string> =
                 <div class="production-prefix minus"></div><div class="energy production "></div><div class="energy production "></div><br>
                 <div class="production-prefix plus"></div><div class="money production ">5</div>
             </div>
-            <div class="special-tile tile capitol ">&#x2302;&#xFE0E;</div>
+            <div class="tile city-tile" style="
+                width: 60px;
+                height: 69px;
+                background-size: 60px 69px;
+                filter:none;
+                ">
+            </div>
             <div class="description " style="text-align:left;">
                 (Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.<br>
                 <div style="font-size:9px;line-height:12px;margin-top:10px; width: 140px;">
@@ -1171,7 +1177,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">073</div>
         <div class="content ">
           <div class="points points-big">1</div>
-            <div class="resource-tag science"></div> : - <span class="card resource "></span> + <span class="card resource "></span>
+            <div class="resource-tag tag-science"></div> : - <span class="card resource "></span> + <span class="card resource "></span>
             <div class="description ">
                 (Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.)
             </div>
@@ -2916,7 +2922,7 @@ export const HTML_DATA: Map<string, string> =
           <div class="card-number">185</div>
           <div class="content ">
             <div class="points points-big">1</div>
-              <div class="resource-tag science"></div> : <div class="resource science"></div> OR -<div class="resource science"></div>+<div class="card resource "></div>
+              <div class="resource-tag tag-science"></div> : <div class="resource science"></div> OR -<div class="resource science"></div>+<div class="card resource "></div>
               <div class="description ">
                 (When you play a Science tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.)
               </div>
@@ -4101,7 +4107,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="content ">
                 <div class="points">1/<div class="animal resource "></div></div>
                 <div class="requirements">18% Venus</div>
-                <div class="resource-tag science"></div> : <div class="animal resource "></div>
+                <div class="resource-tag tag-science"></div> : <div class="animal resource "></div>
                 <div class="description ">
                   (Effect: when you play a Science tag, including this, add 1 Animal to this card)
                 </div>
@@ -4844,7 +4850,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="content ">
                 <div class="points points-big">1</div>
                   <div class="resource card"></div> /
-                    <div class="resource-tag science"></div><div class="resource-tag science" style="margin-left:-10px"></div><div class="resource-tag science" style="margin-left:-10px"></div>
+                    <div class="resource-tag tag-science"></div><div class="resource-tag tag-science" style="margin-left:-10px"></div><div class="resource-tag tag-science" style="margin-left:-10px"></div>
                   <div class="description ">
                       (Draw 1 card for every 3 science tags you have, including this.)
                   </div>
@@ -6778,7 +6784,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-effect-icons">
         <div class="resource money startmc">54</div>
         <div class="resource card">
-          <div class="card-icon card-icon-science"></div>
+          <div class="card-icon tag-science" style="background-position:0"></div>
         </div>
       </div>
 
@@ -7294,7 +7300,7 @@ export const HTML_DATA: Map<string, string> =
   <div class="card-number">#T05</div>
   <div class="content ">
     <div class="requirements"><span class="party">Scientists</span></div>
-    + <div class="influence"></div><br>
+    <div class="plus"></div> <div class="influence"></div><br>
     <div class="description" style="margin-top:5px;">
       (Effect: You have influence +1.)
     </div>
@@ -7412,7 +7418,7 @@ export const HTML_DATA: Map<string, string> =
   <div class="tag tag1 tag-event "></div>
   <div class="card-number">#T11</div>
   <div class="content ">
-    - <div class="delegate delegate-red"></div>* &nbsp;&nbsp; + <div class="delegate"></div>
+    <div class="minus"></div> <div class="delegate delegate-red"></div>* &nbsp;&nbsp; <div class="plus"></div> <div class="delegate"></div>
       <div class="description ">
         (Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.)
       </div>
@@ -7487,7 +7493,7 @@ export const HTML_DATA: Map<string, string> =
   <div class="tag tag1 tag-event "></div>
   <div class="card-number">#T16</div>
   <div class="content ">
-    - <div class="chairman" style="box-shadow:1px 0 1px red, -1px 0 1px red"></div> * &nbsp;&nbsp; + <div class="chairman"></div>
+    <div class="minus"></div> <div class="chairman red-outline"></div> * &nbsp;&nbsp; <div class="plus"></div> <div class="leader"></div>
     <br>
     <div class="tile rating"></div>
       <div class="description ">

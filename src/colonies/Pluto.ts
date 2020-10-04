@@ -8,9 +8,10 @@ import { LogHelper } from '../components/LogHelper';
 export class Pluto extends Colony implements IColony {
     public name = ColonyName.PLUTO;
     public description: string = "Cards";
-    public trade(player: Player, game: Game): void {
+    public trade(player: Player, game: Game, usesTradeFleet: boolean = true): void {
         let extraCards: number = 0;
-        this.beforeTrade(this, player, game);
+        if (usesTradeFleet) this.beforeTrade(this, player, game);
+
         if (this.trackPosition === 2) {
             extraCards = 2;
         } else if (this.trackPosition < 5) {
@@ -21,8 +22,9 @@ export class Pluto extends Colony implements IColony {
         for (let i = 0; i < extraCards; i++) {
             player.cardsInHand.push(game.dealer.dealCard());
         }
+
         LogHelper.logCardChange(game, player, "drew", extraCards);
-        this.afterTrade(this, player, game);
+        if (usesTradeFleet) this.afterTrade(this, player, game);
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);

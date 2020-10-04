@@ -1,4 +1,4 @@
-import { Board, Land } from "../../src/Board";
+import { Board } from "../../src/Board";
 import { ISpace } from "../../src/ISpace";
 import { Player } from "../../src/Player";
 import { SpaceBonus } from "../../src/SpaceBonus";
@@ -76,9 +76,6 @@ export class EmptyBoard extends Board {
     }
     public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
         return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.NOCTIS_CITY);
-    }
-    protected canPlaceTile(space: ISpace): boolean {
-        return space !== undefined && space.tile === undefined && space instanceof Land && space.id !== SpaceName.NOCTIS_CITY;
     }
     public getForestSpace(spaces: Array<ISpace>): ISpace {
         const space = super.shuffle(spaces).find((s) => this.canPlaceTile(s));

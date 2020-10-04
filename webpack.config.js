@@ -1,8 +1,5 @@
 'use strict'
 
-const child_process = require("child_process");
-const version = child_process.execSync("git log -1 --pretty=format:\"%h %cD\"").toString();
-
 module.exports = {
   devtool: "source-map",
   mode: 'production',

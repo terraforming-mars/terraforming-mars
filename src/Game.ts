@@ -900,7 +900,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.runDraftRound();
     }
 
-    private gameIsOver(): boolean {
+    public gameIsOver(): boolean {
       // Single player game is done after generation 14 or 12 with prelude
       if (this.isSoloMode()) {
         if (this.generation === 14 || (this.generation === 12 && this.gameOptions.preludeExtension)) {

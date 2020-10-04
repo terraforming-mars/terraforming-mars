@@ -363,7 +363,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       });
 
       // Turmoil Victory Points
-      if (game.phase === Phase.END && game.gameOptions.turmoilExtension && game.turmoil){
+      const includeTurmoilVP : boolean = game.gameIsOver() || game.phase === Phase.END;
+      
+      if (includeTurmoilVP && game.gameOptions.turmoilExtension && game.turmoil) {
         this.victoryPointsBreakdown.setVictoryPoints("victoryPoints", game.turmoil.getPlayerVictoryPoints(this), "Turmoil Points");
       }
 

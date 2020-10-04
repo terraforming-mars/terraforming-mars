@@ -112,6 +112,9 @@ export const Card = Vue.component("card", {
         getCard: function () {
             return getProjectCardByName(this.card.name) || getCorporationCardByName(this.card.name);
         },
+        getTags: function (): Array<String> | undefined {
+            return this.getCard()?.tags;
+        },
         getCardCssClass: function (card: CardModel): string {
             var cssClass = "filterDiv card-" + card.name.toLowerCase().replace(/ /g, "-");
             if (this.actionUsed) {
@@ -125,6 +128,7 @@ export const Card = Vue.component("card", {
     },
     mounted: function() {
         console.log(this.card)
+        console.log(this.getTags(), "TAGS");
     },
     template: `
     <div :class="getCardCssClass(card)">

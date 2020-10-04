@@ -55,7 +55,7 @@ import { OrOptions } from "./inputs/OrOptions";
 import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
-import { getRandomMilestonesAndAwards } from "./MilestoneAwardSelecter";
+import { getRandomMilestonesAndAwards } from "./MilestoneAwardSelector";
 import { CardType } from "./cards/CardType";
 import { ColonyModel } from "./models/ColonyModel";
 import { LogBuilder } from "./LogBuilder";

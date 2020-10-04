@@ -5,9 +5,6 @@ import { ColonyName } from '../../colonies/ColonyName';
 import { SelectFromCards } from '../../interrupts/SelectFromCards';
 import { IProjectCard } from '../IProjectCard';
 import { SelectCard } from '../../inputs/SelectCard';
-import { LogMessageData } from '../../LogMessageData';
-import { LogMessageDataType } from '../../LogMessageDataType';
-import { LogMessageType } from '../../LogMessageType';
 
 export class Leavitt extends Colony implements IColony {
     public name = ColonyName.LEAVITT;
@@ -63,11 +60,8 @@ export class Leavitt extends Colony implements IColony {
 
     private logColonyBonusCard(player: Player, game: Game, action: string, card: IProjectCard) {
         game.log(
-            LogMessageType.DEFAULT,
-            "${0} ${1} ${2}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.STRING, action),
-            new LogMessageData(LogMessageDataType.CARD, card.name)
+            "${0} ${1} ${2}", 
+            b => b.player(player).string(action).card(card)
         );
     }
 }

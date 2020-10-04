@@ -9,9 +9,6 @@ import { TileType } from "../../TileType";
 import { SelectAmount } from "../../inputs/SelectAmount";
 import { AndOptions } from "../../inputs/AndOptions";
 import { CardName } from "../../CardName";
-import { LogMessageType } from "../../LogMessageType";
-import { LogMessageData } from "../../LogMessageData";
-import { LogMessageDataType } from "../../LogMessageDataType";
 
 export class Philares implements CorporationCard {
     public name: CardName = CardName.PHILARES;
@@ -23,11 +20,7 @@ export class Philares implements CorporationCard {
         game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
             game.addGreenery(player, space.id);
             
-            game.log(
-              LogMessageType.DEFAULT,
-              "${0} placed a Greenery tile",
-              new LogMessageData(LogMessageDataType.PLAYER, player.id)
-            );
+            game.log("${0} placed a Greenery tile", b => b.player(player));
             
             return undefined;
         });

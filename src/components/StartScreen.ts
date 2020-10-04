@@ -22,7 +22,7 @@ export const StartScreen = Vue.component("start-screen", {
     <a class="start-screen-link start-screen-link--chat" href="https://discord.gg/fWXE53K" target="_blank" v-i18n>Join us on Discord</a>
     <div class="start-screen-header start-screen-link--languages">
       <language-switcher />
-      <div>{{version}}</div>
+      <div class="start-version">version: {{version}}</div>
     </div>
   </div>
 </div>`

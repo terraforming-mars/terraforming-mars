@@ -81,7 +81,7 @@ export const PaymentWidgetMixin = {
         },
         setMaxValue: function (target: string): void {
             let currentValue: number = (this as any)[target];
-            let cardCost: number = (this as any).$data.cost;
+            const cardCost: number = (this as any).$data.cost;
             let amountHave: number = (this as any).player[target];
 
             let amountNeed: number = -1;

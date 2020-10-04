@@ -19,7 +19,8 @@ export const CardTitle = Vue.component("card-title", {
             return this.type === CardType.CORPORATION
         },
         getClasses: function (): string {
-            let classes: Array<String> = ["title"];
+            const classes: Array<String> = ["title"];
+            
             if(this.type === CardType.AUTOMATED) {
                 classes.push("background-color-automated");    
             } else if(this.type === CardType.ACTIVE) {

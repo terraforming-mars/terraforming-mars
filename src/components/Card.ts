@@ -1,74 +1,96 @@
-
 import Vue from "vue";
 
 import { IProjectCard } from "../cards/IProjectCard";
 import { ICard } from "../cards/ICard";
 import { BeginnerCorporation } from "../cards/corporation/BeginnerCorporation";
-import { ALL_PRELUDE_CORPORATIONS,
-         ALL_CORPORATION_CARDS,
-         ALL_CORP_ERA_CORPORATION_CARDS,
-         ALL_PROJECT_CARDS,
-         ALL_CORP_ERA_PROJECT_CARDS,
-         ALL_PRELUDE_CARDS,
-         ALL_PRELUDE_PROJECTS_CARDS,
-         ALL_PROMO_CORPORATIONS,
-         ALL_VENUS_CORPORATIONS,
-         ALL_VENUS_PROJECTS_CARDS,
-         ALL_COLONIES_PROJECTS_CARDS,
-         ALL_TURMOIL_PROJECTS_CARDS,
-         ALL_PROMO_PROJECTS_CARDS, ALL_COMMUNITY_CORPORATIONS
-         } from "../Dealer";
+import {
+    ALL_PRELUDE_CORPORATIONS,
+    ALL_CORPORATION_CARDS,
+    ALL_CORP_ERA_CORPORATION_CARDS,
+    ALL_PROJECT_CARDS,
+    ALL_CORP_ERA_PROJECT_CARDS,
+    ALL_PRELUDE_CARDS,
+    ALL_PRELUDE_PROJECTS_CARDS,
+    ALL_PROMO_CORPORATIONS,
+    ALL_VENUS_CORPORATIONS,
+    ALL_VENUS_PROJECTS_CARDS,
+    ALL_COLONIES_PROJECTS_CARDS,
+    ALL_TURMOIL_PROJECTS_CARDS,
+    ALL_PROMO_PROJECTS_CARDS,
+    ALL_COMMUNITY_CORPORATIONS,
+} from "../Dealer";
 import { HTML_DATA } from "../HTML_data";
 import { CardModel } from "../models/CardModel";
 import { CardName } from "../CardName";
-import { CardTitle } from "./card/CardTitle"
-
+import { CardTitle } from "./card/CardTitle";
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
-    if (cardName === (new BeginnerCorporation()).name) {
+    if (cardName === new BeginnerCorporation().name) {
         return new BeginnerCorporation();
     }
-    let cardFactory = ALL_CORPORATION_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
+    let cardFactory = ALL_CORPORATION_CARDS.find(
+        (cardFactory) => cardFactory.cardName === cardName
+    );
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
-    cardFactory = ALL_CORP_ERA_CORPORATION_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
+    cardFactory = ALL_CORP_ERA_CORPORATION_CARDS.find(
+        (cardFactory) => cardFactory.cardName === cardName
+    );
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
-    cardFactory = ALL_PRELUDE_CORPORATIONS.find((cardFactory) => cardFactory.cardName === cardName);
+    cardFactory = ALL_PRELUDE_CORPORATIONS.find(
+        (cardFactory) => cardFactory.cardName === cardName
+    );
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
-    cardFactory = ALL_VENUS_CORPORATIONS.find((cardFactory) => cardFactory.cardName === cardName);
+    cardFactory = ALL_VENUS_CORPORATIONS.find(
+        (cardFactory) => cardFactory.cardName === cardName
+    );
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
-    cardFactory = ALL_PROMO_CORPORATIONS.find((cardFactory) => cardFactory.cardName === cardName);
+    cardFactory = ALL_PROMO_CORPORATIONS.find(
+        (cardFactory) => cardFactory.cardName === cardName
+    );
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
-    cardFactory = ALL_COMMUNITY_CORPORATIONS.find((cardFactory) => cardFactory.cardName === cardName);
+    cardFactory = ALL_COMMUNITY_CORPORATIONS.find(
+        (cardFactory) => cardFactory.cardName === cardName
+    );
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
     return undefined;
 }
 
-export function getProjectCardByName(cardName: string): IProjectCard | undefined {
-    let cardFactory = ALL_PRELUDE_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
+export function getProjectCardByName(
+    cardName: string
+): IProjectCard | undefined {
+    let cardFactory = ALL_PRELUDE_CARDS.find(
+        (cardFactory) => cardFactory.cardName === cardName
+    );
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
-    cardFactory = ALL_PRELUDE_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
+    cardFactory = ALL_PRELUDE_PROJECTS_CARDS.find(
+        (cf) => cf.cardName === cardName
+    );
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
-    cardFactory = ALL_VENUS_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
+    cardFactory = ALL_VENUS_PROJECTS_CARDS.find(
+        (cf) => cf.cardName === cardName
+    );
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
-    cardFactory = ALL_COLONIES_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
+    cardFactory = ALL_COLONIES_PROJECTS_CARDS.find(
+        (cf) => cf.cardName === cardName
+    );
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
@@ -76,58 +98,69 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
-    cardFactory = ALL_CORP_ERA_PROJECT_CARDS.find((cf) => cf.cardName === cardName);
+    cardFactory = ALL_CORP_ERA_PROJECT_CARDS.find(
+        (cf) => cf.cardName === cardName
+    );
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
-    cardFactory = ALL_TURMOIL_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
+    cardFactory = ALL_TURMOIL_PROJECTS_CARDS.find(
+        (cf) => cf.cardName === cardName
+    );
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
-    cardFactory = ALL_PROMO_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
+    cardFactory = ALL_PROMO_PROJECTS_CARDS.find(
+        (cf) => cf.cardName === cardName
+    );
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
-    }    
+    }
     return undefined;
 }
 
 function getCardContent(cardName: string): string {
-    let htmlData : string | undefined = "";
+    let htmlData: string | undefined = "";
     htmlData = HTML_DATA.get(cardName);
     return htmlData || "";
 }
 
 export const Card = Vue.component("card", {
     components: {
-        "card-title": CardTitle
+        "card-title": CardTitle,
     },
-    props: [
-        "card",
-        "actionUsed", 
-    ],
+    props: ["card", "actionUsed"],
     methods: {
-        getCardContent: function() {
+        getCardContent: function () {
             return getCardContent(this.card.name);
         },
         getCard: function () {
-            return getProjectCardByName(this.card.name) || getCorporationCardByName(this.card.name);
+            return (
+                getProjectCardByName(this.card.name) ||
+                getCorporationCardByName(this.card.name)
+            );
         },
         getTags: function (): Array<String> | undefined {
             return this.getCard()?.tags;
         },
         getCardCssClass: function (card: CardModel): string {
-            var cssClass = "filterDiv card-" + card.name.toLowerCase().replace(/ /g, "-");
+            let cssClass =
+                "filterDiv card-" + card.name.toLowerCase().replace(/ /g, "-");
             if (this.actionUsed) {
-                cssClass += " cards-action-was-used"
+                cssClass += " cards-action-was-used";
             }
             return cssClass;
         },
         lifeFound: function (card: CardModel): boolean {
-            return card.name === CardName.SEARCH_FOR_LIFE && card.resources !== undefined && card.resources > 0
-        }
+            return (
+                card.name === CardName.SEARCH_FOR_LIFE &&
+                card.resources !== undefined &&
+                card.resources > 0
+            );
+        },
     },
-    mounted: function() {
-        console.log(this.card)
+    mounted: function () {
+        console.log(this.card);
         console.log(this.getTags(), "TAGS");
     },
     template: `
@@ -136,8 +169,9 @@ export const Card = Vue.component("card", {
         <div class="card_resources_counter" v-if="card.resources !== undefined">RES:<span class="card_resources_counter--number"> {{ card.resources }}</span></div>
         <div class="card-content-wrapper" v-i18n>
             <card-title :title="card.name" :type="card.cardType"/>
+            <card-tags :tags="getTags()" />
             <div class="content" v-html=this.getCardContent() />
         </div>
     </div>
-    `
+    `,
 });

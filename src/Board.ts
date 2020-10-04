@@ -155,8 +155,8 @@ export abstract class Board {
     // If direction is 1, count from the top left. If -1, count from the other end of the map.
     public getAvailableSpaceByOffset(distance: number, direction: -1 | 1) {
         // By doing an additional filter on space.tile, it skips over hazards.
-        var spaces = this.getAvailableSpacesOnLand(undefined).filter(space => !space.tile);
-        var idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
+        const spaces = this.getAvailableSpacesOnLand(undefined).filter(space => !space.tile);
+        const idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
         return spaces[idx];
     }
 

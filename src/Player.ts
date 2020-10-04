@@ -865,13 +865,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         this.runInputCb(game, pi.cb(payMethod));
       } else if (pi instanceof SelectProductionToLose) {
         // TODO(kberg): I'm sure there's some input validation required.
-        var parsedInput = JSON.parse(input[0][0]);
-        var units: IProductionUnits = parsedInput;
+        const parsedInput = JSON.parse(input[0][0]);
+        const units: IProductionUnits = parsedInput;
         pi.cb(units);
       } else if (pi instanceof ShiftAresGlobalParameters) {
         // TODO(kberg): I'm sure there's some input validation required.
-        var parsedInput = JSON.parse(input[0][0]);
-        var response: IAresGlobalParametersResponse = parsedInput;
+        const parsedInput = JSON.parse(input[0][0]);
+        const response: IAresGlobalParametersResponse = parsedInput;
         pi.cb(response);
       } else {
         throw new Error("Unsupported waitingFor");

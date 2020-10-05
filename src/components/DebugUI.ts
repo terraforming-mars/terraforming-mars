@@ -34,7 +34,7 @@ export const DebugUI = Vue.component("debug-ui", {
         <div class="debug-ui-container">
             Filter: <input v-model="filterText">
             <section class="debug-ui-cards-list">
-                <h2>Cards list</h2>
+                <h2>Cards list <input placeholder="filter" v-model="filterText"></h2> 
                 <div style="display: inline-block; vertical-align: top;" v-for="card in getAllCards()">
                     <Card v-show="filtered(card)" :card="{'name': card}" />
                 </div>

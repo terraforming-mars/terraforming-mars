@@ -5,9 +5,6 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { SelectCard } from "../../inputs/SelectCard";
 import { Game } from "../../Game";
-import { LogMessageType } from "../../LogMessageType";
-import { LogMessageData } from "../../LogMessageData";
-import { LogMessageDataType } from "../../LogMessageDataType";
 import { OrOptions } from "../../inputs/OrOptions";
 
 export interface RobotCard {
@@ -66,13 +63,7 @@ export class SelfReplicatingRobots implements IProjectCard {
                         resourceCount: 2
                       }
                   );    
-                  game.log(
-                    LogMessageType.DEFAULT,
-                    "${0} linked ${1} with ${2}",
-                    new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                    new LogMessageData(LogMessageDataType.CARD, foundCards[0].name),
-                    new LogMessageData(LogMessageDataType.CARD, this.name)
-                  );             
+                  game.log("${0} linked ${1} with ${2}", b => b.player(player).card(foundCards[0]).card(this));
                   return undefined;
                 }
             ));
@@ -93,14 +84,9 @@ export class SelfReplicatingRobots implements IProjectCard {
                       targetCard.resourceCount = targetCard.resourceCount * 2;
                     }
                   }
-                  game.log(
-                    LogMessageType.DEFAULT,
-                    "${0} doubled resources on ${1} from ${2} to ${3}",
-                    new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                    new LogMessageData(LogMessageDataType.CARD, foundCards[0].name),
-                    new LogMessageData(LogMessageDataType.STRING, resourceCount.toString()),
-                    new LogMessageData(LogMessageDataType.STRING, (resourceCount * 2).toString()),
-                  );             
+                  game.log("${0} doubled resources on ${1} from ${2} to ${3}", b => {
+                    b.player(player).card(foundCards[0]).number(resourceCount).number(resourceCount * 2)
+                  });
                   return undefined;
                 }
             ));            

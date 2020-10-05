@@ -42,7 +42,7 @@ export abstract class Board {
     // https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
     // generate random float in [0,1) with seed
     protected mulberry32(): number {
-        var t = this.seed += 0x6D2B79F5;
+        let t = this.seed += 0x6D2B79F5;
         t = Math.imul(t ^ t >>> 15, t | 1);
         t ^= t + Math.imul(t ^ t >>> 7, t | 61);
         return ((t ^ t >>> 14) >>> 0) / 4294967296;
@@ -71,7 +71,7 @@ export abstract class Board {
                 const land_id = Number(land) - 3;
                 while (oceans[land_id]) {
                     satisfy = false;
-                    let idx = Math.floor(this.mulberry32() * (oceans.length + 1));
+                    const idx = Math.floor(this.mulberry32() * (oceans.length + 1));
                     [oceans[land_id], oceans[idx]] = [oceans[idx], oceans[land_id]];
                 }
             }
@@ -142,10 +142,6 @@ export abstract class Board {
         return this.spaces.filter((space) => space.spaceType === spaceType);
     }
 
-    protected getRandomSpace(offset: number): ISpace {
-        return this.spaces[Math.floor(Math.random() * 30) + offset];
-    }
-
     public getEmptySpaces(): Array<ISpace> {
         return this.spaces.filter((space) => space.tile === undefined);
     }
@@ -158,7 +154,7 @@ export abstract class Board {
     } 
 
     public getAvailableSpacesForMarker(player: Player): Array<ISpace> {
-        let spaces =  this.getAvailableSpacesOnLand(player)
+        const spaces =  this.getAvailableSpacesOnLand(player)
         .filter(
             (space) => this.getAdjacentSpaces(space).find(
                 (adj) => adj.player === player
@@ -189,7 +185,7 @@ export abstract class Board {
     }
 
     public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
-        let landSpaces = this.getSpaces(SpaceType.LAND, player).filter(
+        const landSpaces = this.getSpaces(SpaceType.LAND, player).filter(
             (space) => space.tile === undefined && (space.player === undefined || space.player === player)
         );
 
@@ -205,20 +201,20 @@ export abstract class Board {
         return out;
     }
 
-    public getRandomCitySpace(offset: number): Space {
-        let safety = 0;
-        // avoid bugs which would lock node process
-        while (safety < 1000) {
-            let space = this.getRandomSpace(offset);
-            if (this.canPlaceTile(space) && this.getAdjacentSpaces(space).filter(sp => sp.tile?.tileType === TileType.CITY).length === 0 && this.getAdjacentSpaces(space).find(sp => this.canPlaceTile(sp)) !== undefined) {
-                return space;
-            }
-            safety++;
-        }
-        throw new Error("space not found for getRandomCitySpace");
+    // If direction is 1, count from the top left. If -1, count from the other end of the map.
+    public getNthAvailableLandSpace(
+        distance: number, 
+        direction: -1 | 1,
+        player: Player | undefined = undefined,
+        predicate: (value: ISpace) =>  boolean = _x => true) {
+        const spaces = this.spaces.filter((space) => {
+            return this.canPlaceTile(space) && (space.player === undefined || space.player === player);
+        }).filter(predicate);
+        const idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
+        return spaces[idx];
     }
-
-    protected canPlaceTile(space: ISpace): boolean {
+    
+    public canPlaceTile(space: ISpace): boolean {
         return space !== undefined && space.tile === undefined && space instanceof Land;
     }
 

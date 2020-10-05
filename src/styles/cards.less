@@ -415,23 +415,23 @@ input[type=radio]:checked + .filterDiv::after {
   cursor: pointer;
 }
 /*********** Background colors************/
-.background-color-corporation { background:linear-gradient(-60deg, rgb(255,204,100) 10%, rgba(255,204,100,.4), rgb(255,204,100) 90%)}
 
-.background-color-automated { background:linear-gradient(-60deg,  #089108 10%,  #08910888,  #089108 90%)}
+.background-color-corporation { background:linear-gradient(-60deg, rgb(255,204,100) 10%,#ffdd99, rgb(255,204,100) 90%)}
 
-.background-color-active { background: linear-gradient(-60deg,  #208cdf 10%,  #208cdf88,  #208cdf 90%);}
+.background-color-automated { background:linear-gradient(-60deg,  #089108 10%,  #0ac20a,  #089108 90%)}
 
-.background-color-events {background: linear-gradient(-60deg, #ec6a13 10%, #ec6a1388, #ec6a13 90%)}
+.background-color-active { background: linear-gradient(-60deg,  #208cdf 10%,  #4da3e6,  #208cdf 90%);}
 
-.background-color-prelude { background:linear-gradient(-60deg, rgb(235,118,171) 10%, rgba(235,118,171,0.6), rgb(235,118,171) 90%)}
+.background-color-events {background: linear-gradient(-60deg, #ec6a13 10%, #f08842, #ec6a13 90%)}
+
+.background-color-prelude { background:linear-gradient(-60deg, rgb(235,118,171) 10%, #f2a6c8, rgb(235,118,171) 90%)}
 
 .background-color-colony { background:linear-gradient(-60deg, rgb(158,145,128) 10%, rgba(158,145,128,0.6), rgb(158,145,128) 90%)}
 
 .background-color-global { background: linear-gradient(-60deg, #43afa5 10%, #43afa588, #43afa5 90%);}
 
-
-
 /*********** Style the tags ************/
+
 .tag-wild {background-image: url("../assets/tags/wild.png")}
 .tag-building {background-image: url("./assets/tags/building.png");}
 .tag-space {background-image: url("./assets/tags/space.png");}
@@ -444,51 +444,8 @@ input[type=radio]:checked + .filterDiv::after {
 .tag-plant {background-image: url("./assets/tags/plant.png");}
 .tag-animal {background-image: url("./assets/tags/animal.png");}
 .tag-event {background-image: url("./assets/tags/event.png");  }
-.tag-science {background-image: url("./assets/tags/science.png");}
+.tag-science {background-image: url("./assets/tags/science.png"); background-size: 46px; background-position: -3px;}
 .tag-none {background-image: url("./assets/tags/tag-none.png");}
-.tag-cards {
-  background-image: url("./assets/preferences_cards.png"); 
-  background-color: black !important;
-}
-.tag-vp {
-  background-image: url(./assets/icon_vp.png);
-}
-.tag-tr {
-  background-image: url(assets/resources/tr.png);
-  background-image: url(assets/resources/tr.png);
-  background-size: 43px 38px !important;
-  background-position: -4px -2px !important;
-}
-.tag-city-count {
-  background-image: url(assets/tiles/city.png);
-  background-image: url(assets/tiles/city.png);
-  border-radius: 0px !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
-  filter: brightness(0.8);
-  background-size: 30px 34px !important;
-  width: 30px !important;
-  height: 34px !important;
-}
-
-.tag-colony-count {
-  background: url(assets/icon_colony.png) center no-repeat;
-  background-size: 24px;
-}
-
-.tag-influence-count {
-  background-image: url(assets/misc/influence.png);
-  background-color: transparent;
-  border: none !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  background-size: 34px !important;
-  width: 34px !important;
-  height: 36px !important;
-  filter: brightness(0.8);
-}
-
 
 /************** Style the Content ************/
 .content {
@@ -519,27 +476,27 @@ input[type=radio]:checked + .filterDiv::after {
 }
 
 .requirements {
-  color: #020202;
-  background-color: rgb(255,204,100);
-  background: linear-gradient(to right, #e28c22, rgb(255,204,100),rgb(255,204,100), #e28c22);
-  border-top: 2px solid rgb(221,221,221);
-  border-left: 2px solid rgb(221,221,221);
-  border-bottom: 2px solid rgb(137,137,137);
-  border-right: 2px solid rgb(137,137,137);
   width: 70%;
-  margin-left: 30px;
+  margin-left: 33px;
   margin-bottom: 10px;
   height: 25px;
   line-height: 25px;
   text-align: center;
-  font-weight: bold;
+  font-weight: normal;
   font-size: 15px;
   box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
+  background-image: url(./assets/requisites/min_big.png);
+  background-size: 180px 38px;
+  background-position: -15px -4px;
   font-family: Ubuntu;
+  font-weight: bold;
 }
 
 .requirements-max {
-  background: linear-gradient(to right,#fa2525,#fb7272, #fb7272, #fa2525);
+  background-image: url(./assets/requisites/max_big.png);
+  background-size: 164px 34px;
+  background-position: -4px -4px;
+  filter: grayscale(0.2);
 }
 
 .points {
@@ -618,15 +575,14 @@ input[type=radio]:checked + .filterDiv::after {
   padding-bottom: 4px;
   line-height: 32px;
   background-image: url(./assets/misc/production.png);
-  background-size: 120px;
+  background-size: cover;
 
   div {
     display: inline-block;
-    vertical-align: middle;
   }
 
   .resource-tag {
-    margin-bottom: 0 !important;
+    margin-bottom: 2px !important;
   }
 }
 
@@ -721,43 +677,43 @@ input[type=radio]:checked + .filterDiv::after {
 }
 
 .temperature-tile {
-background-image: url(./assets/global-parameters/temperature.png);
-width: 14px;
-background-size: 14px 46px;
+  background-image: url(./assets/global-parameters/temperature.png);
+  width: 14px;
+  background-size: 14px 46px;
 
 }
 
 .greenery-tile {
-background-image: url(./assets/tiles/greenery.png);
-background-size: 50px 46px;
-width: 50px;
+  background-image: url(./assets/tiles/greenery.png);
+  background-size: 50px 46px;
+  width: 50px;
 }
 
 .ocean-tile {
-background-image: url(./assets/tiles/ocean.png);
+  background-image: url(./assets/tiles/ocean.png);
 }
 
 .ocean-resource {
-background-image: url(./assets/tiles/ocean.png);
-width: 30px !important;
-height: 32px !important;
-background-size: 30px 32px !important;
-vertical-align: middle !important;
-box-shadow: none !important;
-background-repeat: no-repeat;
+  background-image: url(./assets/tiles/ocean.png);
+  width: 30px !important;
+  height: 32px !important;
+  background-size: 30px 32px !important;
+  vertical-align: middle !important;
+  box-shadow: none !important;
+  background-repeat: no-repeat;
 }
 
 .city-tile {
-background-image: url(./assets/tiles/city.png);
-filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0,0,0,.5));
+  background-image: url(./assets/tiles/city.png);
+  filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0,0,0,.5));
 }
 
 .city-tile-small {
-background-image: url(./assets/tiles/city.png);
-filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0,0,0,.5));
-width: 30px;
-height: 32px;
-background-size: 30px 32px;
+  background-image: url(./assets/tiles/city.png);
+  filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0,0,0,.5));
+  width: 30px;
+  height: 32px;
+  background-size: 30px 32px;
 }
 
 .empty-tile-small {
@@ -777,62 +733,64 @@ background-size: 30px 32px;
 }
 
 .oxygen-tile {
-background-image: url(./assets/global-parameters/oxygen.png);
-width: 46px;
-background-size: 46px;
+  background-image: url(./assets/global-parameters/oxygen.png);
+  width: 46px;
+  background-size: 46px;
 }
 
 .venus-tile {
-background-image: url(./assets/global-parameters/venus.png);
-width: 60px;
-height: 40px;
-background-size: 60px 40px;
-color: #0000;
+  background-image: url(./assets/global-parameters/venus.png);
+  width: 60px;
+  height: 40px;
+  background-size: 60px 40px;
+  color: #0000;
 }
 
 .rating {
-background-image: url(./assets/resources/tr.png);
-width: 50px;
-height: 40px;
-background-size: 50px 40px;
+  background-image: url(./assets/resources/tr.png);
+  width: 50px;
+  height: 40px;
+  background-size: 50px 40px;
 }
 
 .globals-box {
-width: 100px;
-text-shadow: none;
-font-size: 12px;
-font-weight: bold;
-line-height: 17px;
-display: inline-block;
-vertical-align: middle;
-padding-top: 5px;
-border-radius: 5px;
-height: 40px;
-background-image: url(./assets/requisites/min_big.png);
-background-size: 114px 60px;
-background-position: -9px -9px;
+  width: 100px;
+  text-shadow: none;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 17px;
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+  height: 40px;
+  background-image: url(./assets/requisites/min_big.png);
+  background-size: 114px 60px;
+  background-position: -9px -9px;
+  filter: drop-shadow(0px 0px 1px black);
 }
 
 .colony {
-background-image: url(./assets/tiles/colony.png);
-height: 40px;
-width: 46px;
-background-size: 46px;
+  background-image: url(./assets/tiles/colony.png);
+  height: 40px;
+  width: 46px;
+  background-size: 46px;
 }
 
 .trade {
-background-image: url(./assets/tiles/trade.png);
-height: 40px;
-width: 48px;
-background-size: 48px;
+  background-image: url(./assets/tiles/trade.png);
+  height: 40px;
+  width: 48px;
+  background-size: 48px;
 }
 
 .fleet {
-background-image: url(./assets/tiles/trade.png);
-height: 40px;
-width: 48px;
-background-size: 48px;
-filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0px rgba(0,0,0,0.5));
+  background-image: url(./assets/tiles/trade.png);
+  height: 40px;
+  width: 48px;
+  background-size: 48px;
+  filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0px rgba(0,0,0,0.5));
 }
 
 
@@ -873,14 +831,6 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
   vertical-align: middle;
   margin-bottom: 5px;
   filter: brightness(0.9);
-}
-
-.resource-tag::after {
-  content: "\00A0";
-}
-
-.production-tag {
-  margin-bottom: 2px;
 }
 
 .money {
@@ -1612,9 +1562,9 @@ filter: invert(1) drop-shadow(0px 1px 1px rgba(0,0,0,0.5)) drop-shadow(0px 1px 0
   }
 
   .resource.money {
-    margin: 20px 5px 0 50px;
+    margin: 0px 5px 0 50px;
 
-    &.effect-money { margin-left: 4px; margin-top: 10px; }
+    &.effect-money { margin-left: 0; }
     &.discount { font-size: 10px; margin-left: 5px;}
   }
 

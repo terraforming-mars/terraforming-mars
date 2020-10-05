@@ -5,6 +5,8 @@ import * as http from "http";
 import * as fs from "fs";
 import * as path from "path";
 import * as querystring from "querystring";
+import * as child_process from "child_process";
+
 import { AndOptions } from "./src/inputs/AndOptions";
 import { CardModel } from "./src/models/CardModel";
 import { ColonyModel } from "./src/models/ColonyModel";
@@ -48,6 +50,7 @@ const serverId = generateRandomServerId();
 const styles = fs.readFileSync("styles.css");
 const games: Map<string, Game> = new Map<string, Game>();
 const playersToGame: Map<string, Game> = new Map<string, Game>();
+const appVersion = generateAppVersion();
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
     if (req.url !== undefined) {
@@ -84,7 +87,8 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
             } else if (
                 req.url.startsWith("/assets/") ||
                 req.url === "/favicon.ico" ||
-                req.url === "/main.js"
+                req.url === "/main.js" ||
+                req.url === "/main.js.map"
             ) {
                 serveAsset(req, res);
             } else if (req.url.startsWith("/api/games")) {
@@ -169,6 +173,19 @@ function generateRandomGameId(): string {
 
 function generateRandomServerId(): string {
     return generateRandomGameId();
+}
+
+function generateAppVersion(): string {
+    // assumes SOURCE_VERSION is git hash
+    if (process.env.SOURCE_VERSION) {
+        return process.env.SOURCE_VERSION.substring(0, 7) + " deployed " + new Date().toISOString();
+    }
+    try {
+        return child_process.execSync(`git log -1 --pretty=format:"%h %cD"`).toString();
+    } catch (error) {
+        console.warn("unable to generate app version", error);
+        return "unknown version";
+    }
 }
 
 function processInput(
@@ -538,6 +555,7 @@ function getCorporationCard(player: Player): CardModel | undefined {
         resources: player.getResourcesOnCard(player.corporationCard),
         calculatedCost: 0,
         cardType: CardType.CORPORATION,
+        isDisabled: player.corporationCard.isDisabled
     } as CardModel;
 }
 
@@ -609,7 +627,7 @@ function getPlayer(player: Player, game: Game): string {
         deckSize: game.dealer.getDeckSize(),
         randomMA: game.gameOptions.randomMA,
         actionsTakenThisRound: player.actionsTakenThisRound,
-        passedPlayers: Array.from(game.getPassedPlayers()), // JSON stringify does not honor sets
+        passedPlayers: game.getPassedPlayers(),
         preludeExtension: game.gameOptions.preludeExtension,
     } as PlayerModel;
     return JSON.stringify(output);
@@ -629,6 +647,7 @@ function getCardsAsCardModel(
                     : undefined,
             calculatedCost: 0,
             cardType: CardType.AUTOMATED,
+            isDisabled: false
         });
     });
 
@@ -703,7 +722,7 @@ function getWaitingFor(
             break;
         case PlayerInputTypes.SELECT_PLAYER:
             result.players = (waitingFor as SelectPlayer).players.map(
-                (player) => player.id
+                (player) => player.color
             );
             break;
         case PlayerInputTypes.SELECT_SPACE:
@@ -720,7 +739,7 @@ function getWaitingFor(
                     if (player === "NEUTRAL") {
                         return "NEUTRAL";
                     } else {
-                        return player.id;
+                        return player.color;
                     }
                 }
             );
@@ -740,6 +759,7 @@ function getCards(
         name: card.name,
         calculatedCost: player.getCardCost(game, card),
         cardType: card.cardType,
+        isDisabled: false
     }));
 }
 
@@ -754,7 +774,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
             energyProduction: player.getProduction(Resources.ENERGY),
             heat: player.heat,
             heatProduction: player.getProduction(Resources.HEAT),
-            id: player.id,
+            id: player.color,
             megaCredits: player.megaCredits,
             megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
             name: player.name,
@@ -1007,24 +1027,31 @@ function isServerIdValid(req: http.IncomingMessage): boolean {
 }
 
 function serveApp(res: http.ServerResponse): void {
-    res.setHeader("Content-Type", "text/html; charset=utf-8");
-    res.write(fs.readFileSync("index.html"));
-    res.end();
+    fs.readFile("index.html", function (err, data) {
+        if (err) {
+            return internalServerError(res, err);
+        }
+        res.setHeader("Content-Type", "text/html; charset=utf-8");
+        res.write(data.toString().replace("$$APP_VERSION$$", appVersion));
+        res.end();
+    });
 }
 
 function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
     if (req.url === undefined) throw new Error("Empty url");
 
+    let file: string | undefined;
+
     if (req.url === "/favicon.ico") {
         res.setHeader("Content-Type", "image/x-icon");
-        res.write(fs.readFileSync("favicon.ico"));
-    } else if (req.url === "/main.js") {
+        file = "favicon.ico";
+    } else if (req.url === "/main.js" || req.url === "/main.js.map") {
         res.setHeader("Content-Type", "text/javascript");
-        res.write(fs.readFileSync("dist/main.js"));
+        file = "dist" + req.url;
     } else if (req.url === "/assets/Prototype.ttf") {
-        res.write(fs.readFileSync("assets/Prototype.ttf"));
+        file = "assets/Prototype.ttf";
     } else if (req.url === "/assets/futureforces.ttf") {
-        res.write(fs.readFileSync("assets/futureforces.ttf"));
+        file = "assets/futureforces.ttf";
     } else if (req.url.endsWith(".png")) {
         const assetsRoot = path.resolve("./assets");
         const reqFile = path.resolve(path.normalize(req.url).slice(1));
@@ -1034,7 +1061,7 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
             return notFound(req, res);
         }
         res.setHeader("Content-Type", "image/png");
-        res.write(fs.readFileSync(reqFile));
+        file = reqFile;
     } else if (req.url.endsWith(".jpg")) {
         const assetsRoot = path.resolve("./assets");
         const reqFile = path.resolve(path.normalize(req.url).slice(1));
@@ -1044,10 +1071,17 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
             return notFound(req, res);
         }
         res.setHeader("Content-Type", "image/jpeg");
-        res.write(fs.readFileSync(reqFile));
+        file = reqFile;
+    } else {
+        return notFound(req, res);
     }
-
-    res.end();
+    fs.readFile(file, function (err, data) {
+        if (err) {
+            return internalServerError(res, err);
+        }
+        res.write(data);
+        res.end();
+    });
 }
 
 function serveResource(res: http.ServerResponse, s: Buffer): void {

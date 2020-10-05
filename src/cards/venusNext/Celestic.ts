@@ -5,13 +5,10 @@ import { Tags } from "../Tags";
 import { ResourceType } from "../../ResourceType";
 import { Game } from "../../Game";
 import { IActionCard, ICard, IResourceCard } from "../ICard";
+import { IProjectCard } from "../IProjectCard";
 import { SelectCard } from "../../inputs/SelectCard";
 import { CardName } from "../../CardName";
-import { LogMessageType } from "../../LogMessageType";
-import { LogMessageData } from "../../LogMessageData";
-import { LogMessageDataType } from "../../LogMessageDataType";
 import { LogHelper } from "../../components/LogHelper";
-import { IProjectCard } from "../IProjectCard";
 
 export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public name: CardName = CardName.CELESTIC;
@@ -53,19 +50,9 @@ export class Celestic implements IActionCard, CorporationCard, IResourceCard {
                 }
             }
 
-            game.log(
-                LogMessageType.DEFAULT,
-                "${0} drew ${1} and ${2}",
-                new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                new LogMessageData(LogMessageDataType.CARD, floaterCards[0]),
-                new LogMessageData(LogMessageDataType.CARD, floaterCards[1])
-            );
+            game.log("${0} drew ${1} and ${2}", b => b.player(player).cardName(floaterCards[0]).cardName(floaterCards[1]));
 
-            game.log(
-                LogMessageType.DEFAULT,
-                discardedCards.length + " card(s) were discarded",
-               ...discardedCards.map((card) => new LogMessageData(LogMessageDataType.CARD, card.name)),
-            );
+            LogHelper.logDiscardedCards(game, discardedCards);
         }
         
         return undefined;

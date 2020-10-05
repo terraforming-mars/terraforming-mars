@@ -3,7 +3,7 @@ import { PreferencesManager } from "./PreferencesManager";
 import { LANGUAGES } from "../constants";
 
 export const Preferences = Vue.component("preferences", {
-    props: ["player_name", "player_color", "generation", "coloniesCount"],
+    props: ["player_name", "player_color", "generation", "coloniesCount", "temperature", "oxygen", "oceans", "venus", "venusNextExtension"],
     data: function () {
         return {
             "ui": {
@@ -87,7 +87,7 @@ export const Preferences = Vue.component("preferences", {
             }
         },
         getGenMarker: function (): string {
-            return `gen ${this.generation}`;
+            return `${this.generation}`;
         },
     },
     mounted: function () {
@@ -95,15 +95,30 @@ export const Preferences = Vue.component("preferences", {
     },
     template: `
         <div class="preferences_cont" :data="syncPreferences()">
-                <div class="preferences_tm"></div>
-                <div class="preferences-gen-marker">{{ getGenMarker() }}</div>
-                <div class="preferences_item preferences_player"><div class="preferences_player_inner" :class="'player_bg_color_' + player_color"></div></div>
-                <div class="preferences-divider" />
+                <div class="preferences_tm">
+                    <div class="preferences-gen-text">GEN</div>
+                    <div class="preferences-gen-marker">{{ getGenMarker() }}</div>
+                </div>
+                <div class="preferences_global_params">
+                  <div class="preferences_temperature-tile"></div>
+                  <div class="preferences_global_params_value">{{ temperature }}</div>
+                  <div class="preferences_oxygen-tile"></div>
+                  <div class="preferences_global_params_value">{{ oxygen }}</div>
+                  <div class="preferences_ocean-tile"></div>
+                  <div class="preferences_global_params_value">{{ oceans }}</div>
+                  <div v-if="venusNextExtension">
+                    <div class="preferences_venus-tile"></div>
+                    <div class="preferences_global_params_value">{{ venus }}</div>
+                  </div>
+                </div>
+                <div class="preferences_item preferences_player">
+                  <div class="preferences_player_inner" :class="'player_bg_color_' + player_color"></div>
+                </div>
                 <a  href="#board">
                     <div class="preferences_item preferences_item_shortcut">
                         <i class="preferences_icon preferences_icon--board"></i>
                     </div>
-                </a> 
+                </a>
                 <a  href="#actions">
                     <div class="preferences_item preferences_item_shortcut">
                         <i class="preferences_icon preferences_icon--actions"></i>
@@ -145,7 +160,7 @@ export const Preferences = Vue.component("preferences", {
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_non_blue_cards" />
                             <i class="form-icon"></i> <span v-i18n>Hide non-blue played cards</span>
                         </label>
-                    </div>                    
+                    </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_awards_and_milestones" />
@@ -205,13 +220,13 @@ export const Preferences = Vue.component("preferences", {
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_ma_scores" />
                             <i class="form-icon"></i> <span v-i18n>Hide Milestones / Awards scores</span>
                         </label>
-                    </div>   
+                    </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="enable_sounds" />
                             <i class="form-icon"></i> <span v-i18n>Enable sounds</span>
                         </label>
-                    </div>                                     
+                    </div>
                     <div class="preferences_panel_item form-group">
                         <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
                         <div class="preferences_panel_langs">

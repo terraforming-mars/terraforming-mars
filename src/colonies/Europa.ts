@@ -10,25 +10,25 @@ import { SelectOption } from '../inputs/SelectOption';
 export class Europa extends Colony implements IColony {
     public name = ColonyName.EUROPA;
     public description: string = "Production";
-    public trade(player: Player, game: Game): void {
-        if (player.colonyTradeOffset > 0) {
+    public trade(player: Player, game: Game, usesTradeFleet: boolean = true): void {
+        if (player.colonyTradeOffset > 0 && usesTradeFleet) {
             game.addInterrupt({ player, playerInput: new OrOptions(
                 new SelectOption("Increase colony track", "Confirm", () => {
                     this.beforeTrade(this, player, game);
-                    this.handleTrade(game, player);
+                    this.handleTrade(game, player, usesTradeFleet);
                     return undefined;
                 }),
                 new SelectOption("Do nothing", "Confirm", () => {
-                    this.handleTrade(game, player);
+                    this.handleTrade(game, player, usesTradeFleet);
                     return undefined;
                 })
             )});
         } else {
-            this.handleTrade(game, player);
+            this.handleTrade(game, player, usesTradeFleet);
         }
     }
 
-    private handleTrade(game: Game, player: Player) {
+    private handleTrade(game: Game, player: Player, usesTradeFleet: boolean) {
         if (this.trackPosition < 2) {
             player.setProduction(Resources.MEGACREDITS);
             LogHelper.logGainProduction(game, player, Resources.MEGACREDITS);
@@ -39,7 +39,7 @@ export class Europa extends Colony implements IColony {
             player.setProduction(Resources.PLANTS);
             LogHelper.logGainProduction(game, player, Resources.PLANTS);
         }
-        this.afterTrade(this, player, game);
+        if (usesTradeFleet) this.afterTrade(this, player, game);
     }
 
 

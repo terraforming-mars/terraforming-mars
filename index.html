@@ -12,31 +12,29 @@
     <body id="ts-preferences-target">
         <div id="app" :class="'topmost-'+screen">
             <div class="main-container">
-                <start-screen v-if="screen === 'start-screen'"></start-screen>
+                <start-screen v-if="screen === 'start-screen'" version="$$APP_VERSION$$"></start-screen>
                 <create-game-form
-                    v-if="screen === 'create-game-form'"
+                    v-else-if="screen === 'create-game-form'"
                 ></create-game-form>
-                <load-game-form v-if="screen === 'load'"></load-game-form>
+                <load-game-form v-else-if="screen === 'load'"></load-game-form>
                 <game-home
-                    v-if="screen === 'game-home'"
+                    v-else-if="screen === 'game-home'"
                     :game="game"
                 ></game-home>
                 <player-home
-                    v-if="screen === 'player-home'"
+                    v-else-if="screen === 'player-home'"
                     :player="player"
                     :key="playerkey"
                 ></player-home>
                 <game-end
-                    v-if="screen === 'the-end'"
+                    v-else-if="screen === 'the-end'"
                     :player="player"
                     :game="game"
                 ></game-end>
                 <games-overview
-                    v-if="screen === 'games-overview'"
+                    v-else-if="screen === 'games-overview'"
                 ></games-overview>
-                <debug-ui 
-                v-if="screen === 'debug-ui'"
-                ></debug-ui>
+                <debug-ui v-else-if="screen === 'debug-ui'"></debug-ui>
             </div>
         </div>
         <script src="/main.js"></script>

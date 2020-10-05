@@ -7,9 +7,6 @@ import { Resources } from "../../Resources";
 import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
 import { CardName } from "../../CardName";
-import { LogMessageType } from "../../LogMessageType";
-import { LogMessageData } from "../../LogMessageData";
-import { LogMessageDataType } from "../../LogMessageDataType";
 
 export class Factorum implements IActionCard, CorporationCard {
     public name: CardName = CardName.FACTORUM;
@@ -41,12 +38,7 @@ export class Factorum implements IActionCard, CorporationCard {
 
             const drawnCard = game.getCardsInHandByTag(player, Tags.STEEL).slice(-1)[0];
 
-            game.log(
-                LogMessageType.DEFAULT,
-                "${0} drew ${1}",
-                new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                new LogMessageData(LogMessageDataType.CARD, drawnCard.name)
-            );
+            game.log("${0} drew ${1}", b => b.player(player).card(drawnCard));
 
             return undefined;
         });

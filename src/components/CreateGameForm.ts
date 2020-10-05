@@ -106,7 +106,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
             startingCorporations: 2,
             soloTR: false,
             clonedGameData: undefined,
-            cloneGameData: []
+            cloneGameData: [],
+            allOfficialExpansions: false
         } as CreateGameModel
     },
     components: {
@@ -124,9 +125,9 @@ export const CreateGameForm = Vue.component("create-game-form", {
         }
 
         fetch("/api/clonablegames")
-        .then(response => response.json())
-        .then(onSucces)
-        .catch(_ => alert("Unexpected server response"));
+            .then(response => response.json())
+            .then(onSucces)
+            .catch(_ => alert("Unexpected server response"));
     },
     methods: {
         getPlayerNamePlaceholder: function (player: NewPlayerModel): string {
@@ -150,6 +151,14 @@ export const CreateGameForm = Vue.component("create-game-form", {
         },
         isBeginnerToggleEnabled: function(): Boolean {
             return !(this.initialDraft || this.prelude || this.venusNext || this.colonies || this.turmoil)
+        },
+        selectAll: function() {
+            this.corporateEra = this.$data.allOfficialExpansions;
+            this.prelude = this.$data.allOfficialExpansions;
+            this.venusNext = this.$data.allOfficialExpansions;
+            this.colonies = this.$data.allOfficialExpansions;
+            this.turmoil = this.$data.allOfficialExpansions;
+            this.promoCardsOption = this.$data.allOfficialExpansions;
         },
         createGame: function () {
             const component = (this as any) as CreateGameModel;
@@ -342,6 +351,12 @@ export const CreateGameForm = Vue.component("create-game-form", {
                         <div class="create-game-options-block col3 col-sm-6">
                             <h4 v-i18n>Expansions</h4>
                             <div class="expansion-label">Official</div>
+
+                            <label class="form-switch">
+                                <input type="checkbox" name="allOfficialExpansions" v-model="allOfficialExpansions" v-on:change="selectAll()">
+                                <i class="form-icon"></i> <span v-i18n>All</span>
+                            </label>
+
                             <label class="form-switch">
                                 <input type="checkbox" name="corporateEra" v-model="corporateEra">
                                 <i class="form-icon"></i> <span v-i18n>Corporate Era</span>

@@ -1,6 +1,6 @@
 import Vue from "vue";
 import { Card } from "./Card";
-import { ALL_PRELUDE_PROJECTS_CARDS, ALL_VENUS_PROJECTS_CARDS, ALL_COLONIES_PROJECTS_CARDS, ALL_TURMOIL_PROJECTS_CARDS, ALL_PROMO_PROJECTS_CARDS, ALL_PROJECT_CARDS, ALL_CORP_ERA_PROJECT_CARDS } from '../Dealer';
+import { ALL_PRELUDE_PROJECTS_CARDS, ALL_VENUS_PROJECTS_CARDS, ALL_COLONIES_PROJECTS_CARDS, ALL_TURMOIL_PROJECTS_CARDS, ALL_PROMO_PROJECTS_CARDS, ALL_PROJECT_CARDS, ALL_CORP_ERA_PROJECT_CARDS, ALL_ARES_PROJECT_CARDS } from '../Dealer';
 import { CardName } from "../CardName";
 
 export const DebugUI = Vue.component("debug-ui", {
@@ -16,7 +16,8 @@ export const DebugUI = Vue.component("debug-ui", {
                 ...ALL_TURMOIL_PROJECTS_CARDS.map((cf) => cf.cardName),
                 ...ALL_PROMO_PROJECTS_CARDS.map((cf) => cf.cardName),
                 ...ALL_PROJECT_CARDS.map((cf) => cf.cardName),
-                ...ALL_CORP_ERA_PROJECT_CARDS.map((cf) => cf.cardName)
+                ...ALL_CORP_ERA_PROJECT_CARDS.map((cf) => cf.cardName),
+                ...ALL_ARES_PROJECT_CARDS.map((cf) => cf.cardName)
             ].sort();
             return allItems;
         }

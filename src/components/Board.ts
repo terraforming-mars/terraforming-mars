@@ -112,7 +112,7 @@ export const Board = Vue.component("board", {
             if (leftover === 0) {
                 return `<img width="26" src="/assets/checkmark.png" alt="completed">`
             } else {
-                return leftover
+                return `${oceans_count}/${constants.MAX_OCEAN_TILES}`
             }
         }
     },
@@ -141,8 +141,7 @@ export const Board = Vue.component("board", {
                 <div :class="getScaleCSS(lvl)" v-for="lvl in getValuesForParameter('venus')">{{ lvl.strValue }}</div>
             </div>
 
-            <div class="global-numbers-oceans">
-                <div class="global-numbers-value" v-html="oceansValue()"></div>
+            <div class="global-numbers-oceans" v-html="oceansValue()">
             </div>
         </div>
 

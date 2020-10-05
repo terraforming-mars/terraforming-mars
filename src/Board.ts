@@ -42,7 +42,7 @@ export abstract class Board {
     // https://stackoverflow.com/questions/521295/seeding-the-random-number-generator-in-javascript
     // generate random float in [0,1) with seed
     protected mulberry32(): number {
-        var t = this.seed += 0x6D2B79F5;
+        let t = this.seed += 0x6D2B79F5;
         t = Math.imul(t ^ t >>> 15, t | 1);
         t ^= t + Math.imul(t ^ t >>> 7, t | 61);
         return ((t ^ t >>> 14) >>> 0) / 4294967296;
@@ -71,7 +71,7 @@ export abstract class Board {
                 const land_id = Number(land) - 3;
                 while (oceans[land_id]) {
                     satisfy = false;
-                    let idx = Math.floor(this.mulberry32() * (oceans.length + 1));
+                    const idx = Math.floor(this.mulberry32() * (oceans.length + 1));
                     [oceans[land_id], oceans[idx]] = [oceans[idx], oceans[land_id]];
                 }
             }
@@ -144,10 +144,6 @@ export abstract class Board {
         return this.spaces.filter((space) => space.spaceType === spaceType);
     }
 
-    protected getRandomSpace(offset: number): ISpace {
-        return this.spaces[Math.floor(Math.random() * 30) + offset];
-    }
-
     public getEmptySpaces(): Array<ISpace> {
         return this.spaces.filter((space) => space.tile === undefined);
     }
@@ -155,8 +151,8 @@ export abstract class Board {
     // If direction is 1, count from the top left. If -1, count from the other end of the map.
     public getAvailableSpaceByOffset(distance: number, direction: -1 | 1) {
         // By doing an additional filter on space.tile, it skips over hazards.
-        var spaces = this.getAvailableSpacesOnLand(undefined).filter(space => !space.tile);
-        var idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
+        const spaces = this.getAvailableSpacesOnLand(undefined).filter(space => !space.tile);
+        const idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
         return spaces[idx];
     }
 
@@ -168,7 +164,7 @@ export abstract class Board {
     } 
 
     public getAvailableSpacesForMarker(player: Player): Array<ISpace> {
-        let spaces =  this.getAvailableSpacesOnLand(player)
+        const spaces =  this.getAvailableSpacesOnLand(player)
         .filter(
             (space) => this.getAdjacentSpaces(space).find(
                 (adj) => adj.player === player
@@ -199,10 +195,16 @@ export abstract class Board {
     }
 
     public getAvailableSpacesOnLand(player?: Player): Array<ISpace> {
-        let landSpaces = this.getSpaces(SpaceType.LAND, player).filter(
-            // Players may place over hazards, it's just more expensive. Players may not place on spaces reserved for other players.
-            (space) => (space.tile === undefined || space.tile.hazard === true) && (space.player === undefined || space.player === player)
-        );
+        const landSpaces = this.getSpaces(SpaceType.LAND, player).filter(space => {
+            const hasPlayerMarker = space.player !== undefined;
+            // A space is available if it doesn't have a player marker on it or it belongs to |player|
+            const safeForPlayer = !hasPlayerMarker || space.player === player;
+            // And also, if it doesn't have a tile. Unless it's a hazard tile. And if it does have a
+            const playableSpace = space.tile === undefined || space.tile.hazard === true;
+            // hazard tile, a player marker on it means it's protected by Desperate Measures.
+            const blockedByDesperateMeasures = space.tile?.hazard === true && hasPlayerMarker;
+            return safeForPlayer && playableSpace && !blockedByDesperateMeasures;
+        });
 
         return landSpaces;
     }
@@ -216,23 +218,25 @@ export abstract class Board {
         return out;
     }
 
-    public getRandomCitySpace(offset: number): Space {
-        let safety = 0;
-        // avoid bugs which would lock node process
-        while (safety < 1000) {
-            let space = this.getRandomSpace(offset);
-            if (this.canPlaceTile(space) && this.getAdjacentSpaces(space).filter(sp => sp.tile?.tileType === TileType.CITY).length === 0 && this.getAdjacentSpaces(space).find(sp => this.canPlaceTile(sp)) !== undefined) {
-                return space;
-            }
-            safety++;
-        }
-        throw new Error("space not found for getRandomCitySpace");
+    // |distance| represents the number of eligible spaces from the top left (or bottom right)
+    // to count. So distance 0 means the first available space.
+    // If |direction| is 1, count from the top left. If -1, count from the other end of the map.
+    // |player| will be an additional space filter (which basically supports Land Claim)
+    // |predicate| allows callers to provide additional filtering of eligible spaces.
+    public getNthAvailableLandSpace(
+        distance: number, 
+        direction: -1 | 1,
+        player: Player | undefined = undefined,
+        predicate: (value: ISpace) =>  boolean = _x => true) {
+        const spaces = this.spaces.filter((space) => {
+            return this.canPlaceTile(space) && (space.player === undefined || space.player === player);
+        }).filter(predicate);
+        const idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
+        return spaces[idx];
     }
-
-    protected canPlaceTile(space: ISpace): boolean {
-        return space !== undefined &&
-            (space.tile === undefined || (space.tile.hazard || true)) &&
-            space instanceof Land;
+    
+    public canPlaceTile(space: ISpace): boolean {
+        return space !== undefined && space.tile === undefined && space instanceof Land;
     }
 
     public getForestSpace(spaces: Array<ISpace>): ISpace {

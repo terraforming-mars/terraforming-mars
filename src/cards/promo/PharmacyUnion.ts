@@ -8,9 +8,6 @@ import { OrOptions } from "../../inputs/OrOptions";
 import { Game } from "../../Game";
 import { IProjectCard } from "../IProjectCard";
 import { CorporationName } from "../../CorporationName";
-import { LogMessageType } from "../../LogMessageType";
-import { LogMessageData } from "../../LogMessageData";
-import { LogMessageDataType } from "../../LogMessageDataType";
 import { ICard } from "../ICard";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
@@ -30,12 +27,7 @@ export class PharmacyUnion implements CorporationCard {
         player.cardsInHand.push(game.drawCardsByTag(Tags.SCIENCE, 1)[0]);
         const drawnCard = game.getCardsInHandByTag(player, Tags.SCIENCE).slice(-1)[0];
 
-        game.log(
-            LogMessageType.DEFAULT,
-            "${0} drew ${1}",
-            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-            new LogMessageData(LogMessageDataType.CARD, drawnCard.name)
-        );
+        game.log("${0} drew ${1}", b => b.player(player).card(drawnCard));
 
         return undefined;
     }
@@ -66,12 +58,7 @@ export class PharmacyUnion implements CorporationCard {
         if (this.resourceCount > 0) {
             this.resourceCount--;
             player.increaseTerraformRating(game);
-            game.log(
-                LogMessageType.DEFAULT,
-                "${0} removed a disease from ${1} to gain 1 TR",
-                new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                new LogMessageData(LogMessageDataType.CARD, this.name)
-            );
+            game.log("${0} removed a disease from ${1} to gain 1 TR", b => b.player(player).card(this));
             this.runInterrupts(player, game, scienceTags - 1);
             return undefined;
         } else {
@@ -84,12 +71,7 @@ export class PharmacyUnion implements CorporationCard {
                     "Gain TR", () => {
                         this.isDisabled = true;
                         player.increaseTerraformRatingSteps(3, game);
-                        game.log(
-                            LogMessageType.DEFAULT,
-                            "${0} turned ${1} face down to gain 3 TR",
-                            new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                            new LogMessageData(LogMessageDataType.CARD, this.name)
-                        );
+                        game.log("${0} turned ${1} face down to gain 3 TR", b => b.player(player).card(this));
                         return undefined;
                     })
                 );

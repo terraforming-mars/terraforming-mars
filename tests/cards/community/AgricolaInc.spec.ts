@@ -26,9 +26,9 @@ describe("AgricolaInc", function () {
     });
 
     it("Scores endgame VP correctly", function () {
-        expect(card.getVictoryPoints(player, game)).to.eq(-20);
+        expect(card.getVictoryPoints(player, game)).to.eq(-18);
 
         player.playedCards.push(new SolarWindPower(), new Research(), new CoronaExtractor());
-        expect(card.getVictoryPoints(player, game)).to.eq(-13);
+        expect(card.getVictoryPoints(player, game)).to.eq(-11);
     });
 });

@@ -542,6 +542,7 @@ function getCorporationCard(player: Player): CardModel | undefined {
         resources: player.getResourcesOnCard(player.corporationCard),
         calculatedCost: 0,
         cardType: CardType.CORPORATION,
+        isDisabled: player.corporationCard.isDisabled
     } as CardModel;
 }
 
@@ -613,7 +614,7 @@ function getPlayer(player: Player, game: Game): string {
         deckSize: game.dealer.getDeckSize(),
         randomMA: game.gameOptions.randomMA,
         actionsTakenThisRound: player.actionsTakenThisRound,
-        passedPlayers: Array.from(game.getPassedPlayers()), // JSON stringify does not honor sets
+        passedPlayers: game.getPassedPlayers(),
         aresExtension: game.gameOptions.aresExtension,
         aresData: game.aresData,
         preludeExtension: game.gameOptions.preludeExtension,
@@ -635,6 +636,7 @@ function getCardsAsCardModel(
                     : undefined,
             calculatedCost: 0,
             cardType: CardType.AUTOMATED,
+            isDisabled: false
         });
     });
 
@@ -705,7 +707,7 @@ function getWaitingFor(
             break;
         case PlayerInputTypes.SELECT_PLAYER:
             result.players = (waitingFor as SelectPlayer).players.map(
-                (player) => player.id
+                (player) => player.color
             );
             break;
         case PlayerInputTypes.SELECT_SPACE:
@@ -722,7 +724,7 @@ function getWaitingFor(
                     if (player === "NEUTRAL") {
                         return "NEUTRAL";
                     } else {
-                        return player.id;
+                        return player.color;
                     }
                 }
             );
@@ -759,6 +761,7 @@ function getCards(
         name: card.name,
         calculatedCost: player.getCardCost(game, card),
         cardType: card.cardType,
+        isDisabled: false
     }));
 }
 
@@ -773,7 +776,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
             energyProduction: player.getProduction(Resources.ENERGY),
             heat: player.heat,
             heatProduction: player.getProduction(Resources.HEAT),
-            id: player.id,
+            id: player.color,
             megaCredits: player.megaCredits,
             megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
             name: player.name,

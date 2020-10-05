@@ -17,6 +17,8 @@ module.exports = {
   ],
   'rules': {
     'eqeqeq': ['error', 'always'],
-    'quotes': ['error', 'double']
+    'quotes': ['error', 'double'],
+    'no-var': 'error',
+    'prefer-const': 'error'
   },
 };

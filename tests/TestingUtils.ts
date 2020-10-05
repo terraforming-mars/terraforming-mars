@@ -41,12 +41,13 @@ export const setCustomGameOptions = function(options: object = {}): GameOptions 
         promoCardsOption: false,
         communityCardsOption: false,
         aresExtension: false,
+        aresHazards: false,
         undoOption: false,
         startingCorporations: 2,
         includeVenusMA: true,
         soloTR: false,
         clonedGamedId: undefined,
-        cardsBlackList: []
+        cardsBlackList: [],
       };
 
     return Object.assign(defaultOptions, options) as GameOptions;

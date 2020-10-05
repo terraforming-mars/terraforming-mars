@@ -4,5 +4,6 @@ export interface CardModel {
     name: string;
     resources: number | undefined;
     calculatedCost: number;
-    cardType: CardType; 
+    cardType: CardType;
+    isDisabled: boolean;
 }

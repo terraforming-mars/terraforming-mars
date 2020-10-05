@@ -6,9 +6,6 @@ import { Game } from "../../Game";
 import { CardName } from "../../CardName";
 import { ICard } from "../ICard";
 import { SelectCard } from "../../inputs/SelectCard";
-import { LogMessageData } from "../../LogMessageData";
-import { LogMessageDataType } from "../../LogMessageDataType";
-import { LogMessageType } from "../../LogMessageType";
 
 export class ProjectInspection implements IProjectCard {
 
@@ -51,13 +48,7 @@ export class ProjectInspection implements IProjectCard {
             this.getActionCards(player, game),
             (foundCards: Array<ICard>) => {
                 const foundCard = foundCards[0];
-                game.log(
-                    LogMessageType.DEFAULT,
-                    "${0} used ${1} action with ${2}",
-                    new LogMessageData(LogMessageDataType.PLAYER, player.id),
-                    new LogMessageData(LogMessageDataType.CARD, foundCard.name),
-                    new LogMessageData(LogMessageDataType.CARD, this.name)
-                );
+                game.log("${0} used ${1} action with ${2}", b => b.player(player).card(foundCard).card(this));
                 return foundCard.action!(player, game);
             }
         );

@@ -1,14 +1,11 @@
 import { CardName } from "../../CardName";
 import { Game } from "../../Game";
-import { LogMessageType } from "../../LogMessageType";
 import { Player } from "../../Player";
 import { ResourceType } from "../../ResourceType";
 import { CardType } from "../CardType";
 import { IActionCard, IResourceCard } from "../ICard";
 import { IProjectCard } from "../IProjectCard";
 import { Tags } from "../Tags";
-import { LogMessageData } from "../../LogMessageData";
-import { LogMessageDataType } from "../../LogMessageDataType";
 
 export class BioengineeringEnclosure implements IProjectCard, IActionCard, IResourceCard {
   public cost: number = 7;
@@ -38,10 +35,7 @@ export class BioengineeringEnclosure implements IProjectCard, IActionCard, IReso
     // TODO(kberg): this code is a little brittle: if the player chooses not to select a
     // card in the SelectResourceCard action, the player has still lost their animal.
     this.resourceCount--;
-    game.log(
-      LogMessageType.DEFAULT,
-      "${0} removed 1 animal from Bioengineering Enclosure.",
-      new LogMessageData(LogMessageDataType.PLAYER, player.id));
+    game.log("${0} removed 1 animal from Bioengineering Enclosure.", b => b.player(player));
 
     game.addSelectResourceCardInterrupt(
       player,

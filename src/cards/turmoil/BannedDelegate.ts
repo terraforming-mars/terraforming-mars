@@ -7,9 +7,6 @@ import { Game } from "../../Game";
 import { OrOptions } from "../../inputs/OrOptions";
 import { SelectDelegate } from "../../inputs/SelectDelegate";
 import { IParty } from "../../turmoil/parties/IParty";
-import { LogMessageType } from "../../LogMessageType";
-import { LogMessageData } from "../../LogMessageData";
-import { LogMessageDataType } from "../../LogMessageDataType";
 
 export class BannedDelegate implements IProjectCard {
     public cost: number = 0;
@@ -70,11 +67,6 @@ export class BannedDelegate implements IProjectCard {
     }
 
     private log(game: Game, player: Player, party: IParty) {
-      game.log(
-        LogMessageType.DEFAULT,
-        "${0} removed a delegate from ${1}",
-        new LogMessageData(LogMessageDataType.PLAYER, player.id),
-        new LogMessageData(LogMessageDataType.PARTY, party.name)
-      );
+      game.log("${0} removed a delegate from ${1}", b => b.player(player).party(party));
     }
 }

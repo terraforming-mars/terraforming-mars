@@ -137,7 +137,7 @@ export class AresHandler {
 
         var bonusText = bonuses.entries().map((elem) => `${elem[1]} ${bonusAsString(elem[0])}`).join(", ");
         var tileText = tileTypeAsString(adjacentSpace.tile?.tileType);
-        game.newLog("${0} gains ${1} for placing next to ${2}", b => b.player(player).string(bonusText).string(tileText));
+        game.log("${0} gains ${1} for placing next to ${2}", b => b.player(player).string(bonusText).string(tileText));
 
         var ownerBonus = 1;
         if (adjacentSpace.player !== undefined) {
@@ -146,7 +146,7 @@ export class AresHandler {
             };
             
             adjacentSpace.player.megaCredits += ownerBonus;
-            game.newLog("${0} gains ${1} M€ for a tile placed next to ${2}", b => b.player(adjacentSpace.player!).number(ownerBonus).string(tileText));
+            game.log("${0} gains ${1} M€ for a tile placed next to ${2}", b => b.player(adjacentSpace.player!).number(ownerBonus).string(tileText));
         }
 
         return true;
@@ -212,7 +212,7 @@ export class AresHandler {
             game.addInterrupt(new SelectProductionToLoseInterrupt(player, cost.production));
         }
         if (cost.megacredits > 0) {
-            game.newLog("${0} placing a tile here costs ${1} M€", b => b.player(player).number(cost.megacredits));
+            game.log("${0} placing a tile here costs ${1} M€", b => b.player(player).number(cost.megacredits));
 
             game.addSelectHowToPayInterrupt(player, cost.megacredits, false, false, "Select how to pay additional placement costs.");
         }
@@ -266,7 +266,7 @@ export class AresHandler {
                 player.setResource(resource, 1);
 
                 var cardName = resource === Resources.PLANTS ? CardName.ECOLOGICAL_SURVEY : CardName.GEOLOGICAL_SURVEY;
-                game.newLog("${0} gained a bonus ${1} because of ${2}", b => b.player(player).string(resource).cardName(cardName));
+                game.log("${0} gained a bonus ${1} because of ${2}", b => b.player(player).string(resource).cardName(cardName));
             }
         });
         [ResourceType.MICROBE, ResourceType.ANIMAL].forEach((resourceType) => {
@@ -351,7 +351,7 @@ export class AresHandler {
                 return;
         }
         player.increaseTerraformRatingSteps(steps, game);
-        game.newLog("${0}'s TR increases ${1} step(s) for removing ${2}", b => b.player(player).number(steps).string(tileTypeAsString(initialTileType)));
+        game.log("${0}'s TR increases ${1} step(s) for removing ${2}", b => b.player(player).number(steps).string(tileTypeAsString(initialTileType)));
     }
 
     public static putHazardAt(space: ISpace, tileType: TileType) {
@@ -362,7 +362,7 @@ export class AresHandler {
 
 function randomlyPlaceHazard(game: Game, tileType: TileType, direction: 1 | -1) {
     var card = game.dealer.dealCard();
-    game.newLog("Dealt and discarded ${0} (cost ${1}) to place a hazard", b => b.card(card).number(card.cost));
+    game.log("Dealt and discarded ${0} (cost ${1}) to place a hazard", b => b.card(card).number(card.cost));
 
     var distance = card.cost - 1;
     distance = Math.max(distance, 0); // Some cards cost zero.
@@ -381,7 +381,7 @@ function makeSevere(game: Game, from: TileType, to: TileType) {
             AresHandler.putHazardAt(s, to);
         });
 
-    game.newLog("${0} have upgraded to ${1}", b => b.string(tileTypeAsString(from)).string(tileTypeAsString(to)));
+    game.log("${0} have upgraded to ${1}", b => b.string(tileTypeAsString(from)).string(tileTypeAsString(to)));
 }
 
 function testConstraint(constraint: IHazardConstraint, testValue: number, cb: () => void) {
@@ -409,7 +409,7 @@ function testToRemoveDustStorms(game: Game, player: Player, isWorldGov: boolean)
 
             if (!isWorldGov) {
                 player.increaseTerraformRating(game);
-                game.newLog("${0}'s TR increases 1 step for eliminating dust storms.", b => b.player(player));
+                game.log("${0}'s TR increases 1 step for eliminating dust storms.", b => b.player(player));
             }
         }
     );

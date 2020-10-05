@@ -341,6 +341,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                         <div class="create-game-options-block col3 col-sm-6">
                             <h4 v-i18n>Expansions</h4>
+                            <div class="expansion-label">Official</div>
                             <label class="form-switch">
                                 <input type="checkbox" name="corporateEra" v-model="corporateEra">
                                 <i class="form-icon"></i> <span v-i18n>Corporate Era</span>
@@ -371,6 +372,9 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <i class="form-icon"></i> <span v-i18n>Promos</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
+                            <div class="create-game-divider" />
+
+                            <div class="expansion-label">Fan-made</div>
                             <label class="form-switch">
                                 <input type="checkbox" v-model="communityCardsOption">
                                 <i class="form-icon"></i> <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community-corps" class="tooltip" target="_blank">&#9432;</a>

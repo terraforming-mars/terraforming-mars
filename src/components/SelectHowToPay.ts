@@ -3,6 +3,7 @@ import Vue from "vue";
 import { HowToPay } from "../inputs/HowToPay";
 import { PaymentWidgetMixin } from "./PaymentWidgetMixin";
 import { PreferencesManager } from "./PreferencesManager";
+import { Button } from "../components/common/Button";
 
 interface SelectHowToPayModel {
     heat: number;
@@ -15,6 +16,9 @@ interface SelectHowToPayModel {
 }
 
 export const SelectHowToPay = Vue.component("select-how-to-pay", {
+    components: {
+       "Button": Button    
+    },
     props: ["player", "playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
@@ -197,7 +201,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
             } else {
               this.onsave([[JSON.stringify(htp)]]);
             }
-        }
+        } 
     },
     template: `<div class="payments_cont">
   <section v-trim-whitespace>
@@ -205,35 +209,34 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
     <h3 class="payments_title">{{playerinput.title}}</h3>
 
     <div class="payments_type input-group" v-if="playerinput.canUseSteel">
-
       <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('steel', 1)" :class="getCssClassFor('<', 'steel')"><i class="icon icon-minus" /></button>
+      <Button type="minus" :onClick="reduceValue.bind(null, 'steel', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="steel" />
-      <button class="btn btn-primary" v-on:click="addValue('steel', 1)" :class="getCssClassFor('>', 'steel')"><i class="icon icon-plus" /></button>
-      <button class="btn btn-primary max_button" v-on:click="setMaxValue('steel')">MAX</button>
+      <Button type="plus" :onClick="addValue.bind(null, 'steel', 1)" />
+      <Button type="max" :onClick="setMaxValue.bind(null, 'steel')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="playerinput.canUseTitanium">
       <i class="resource_icon resource_icon--titanium payments_type_icon" title="Pay by Titanium"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('titanium', 1)" :class="getCssClassFor('<', 'titanium')"><i class="icon icon-minus" /></button>
+      <Button type="minus" :onClick="reduceValue.bind(null, 'titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
-      <button class="btn btn-primary" v-on:click="addValue('titanium', 1)" :class="getCssClassFor('>', 'titanium')"><i class="icon icon-plus" /></button>
-      <button class="btn btn-primary max_button" v-on:click="setMaxValue('titanium')">MAX</button>
+      <Button type="plus" :onClick="addValue.bind(null, 'titanium', 1)" />
+      <Button type="max" :onClick="setMaxValue.bind(null, 'titanium')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="playerinput.canUseHeat">
       <i class="resource_icon resource_icon--heat payments_type_icon" title="Pay by Heat"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('heat', 1)" :class="getCssClassFor('<', 'heat')"><i class="icon icon-minus" /></button>
+      <Button type="minus" :onClick="reduceValue.bind(null, 'heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
-      <button class="btn btn-primary" v-on:click="addValue('heat', 1)" :class="getCssClassFor('>', 'heat')"><i class="icon icon-plus" /></button>
-      <button class="btn btn-primary max_button" v-on:click="setMaxValue('heat')">MAX</button>
+      <Button type="plus" :onClick="addValue.bind(null, 'heat', 1)" />
+      <Button type="max" :onClick="setMaxValue.bind(null, 'heat')" title="MAX" /> 
     </div>
 
     <div class="payments_type input-group">
       <i class="resource_icon resource_icon--megacredits payments_type_icon" title="Pay by Megacredits"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('megaCredits', 1)" :class="getCssClassFor('<', 'megaCredits')"><i class="icon icon-minus" /></button>
+      <Button type="minus" :onClick="reduceValue.bind(null, 'megaCredits', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
-      <button class="btn btn-primary" v-on:click="addValue('megaCredits', 1)" :class="getCssClassFor('>', 'megaCredits')"><i class="icon icon-plus" /></button>
+      <Button type="plus" :onClick="addValue.bind(null, 'megaCredits', 1)" />
     </div>
 
     <div v-if="hasWarning()" class="tm-warning">
@@ -241,7 +244,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
     </div>
 
     <div v-if="showsave === true" class="payments_save">
-      <button class="btn btn-lg btn-primary" v-on:click="saveData">{{playerinput.buttonLabel}}</button>
+      <Button size="big" :onClick="saveData" :title="playerinput.buttonLabel" />
     </div>
 
   </section>

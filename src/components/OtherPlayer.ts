@@ -19,11 +19,14 @@ export const OtherPlayer = Vue.component("other-player", {
                 "pinned_player_" + this.playerIndex
             );
         },
+        getCrossHtml: function() {
+            return "<i class='icon icon-cross' /i>";
+        }
     },
     template: `
         <div> 
             <div v-show="isVisible()" class="other_player_cont menu">
-                <button class="btn btn-lg btn-error other_player_close" v-on:click="hideMe()"><i class="icon icon-cross"></i></button> 
+                <Button size="big" type="close" :onClick="hideMe" align="right" />
                 <div v-if="player.playedCards.length > 0 || player.corporationCard !== undefined" class="player_home_block">
                     <span class="player_name" :class="'player_bg_color_' + player.color"> {{ player.name }} played cards </span>
                     <div>

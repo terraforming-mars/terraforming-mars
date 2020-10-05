@@ -25,7 +25,7 @@ export const SelectColony = Vue.component("select-colony", {
             <colony :colony="colony"></colony>
         </label>
         <div v-if="showsave === true" class="nofloat">
-            <button class="btn btn-primary" v-on:click="saveData">{{playerinput.buttonLabel}}</button>
+            <Button :onClick="saveData" :title="playerinput.buttonLabel" /> 
         </div>
     </div>`
 });

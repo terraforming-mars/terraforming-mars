@@ -1,7 +1,8 @@
 import Vue from "vue";
 import { PlayerModel } from "../models/PlayerModel";
 import { Board } from "./Board";
-import { LogPanel } from './LogPanel';
+import { LogPanel } from "./LogPanel";
+import { Button } from "../components/common/Button";
 
 export const GameEnd = Vue.component("game-end", {
     props: ["player", "game"],
@@ -11,6 +12,7 @@ export const GameEnd = Vue.component("game-end", {
     components: {
         "board": Board,
         "log-panel": LogPanel,
+        "Button": Button
     },
     methods: {
         isSoloGame: function (): boolean {
@@ -28,7 +30,7 @@ export const GameEnd = Vue.component("game-end", {
                 return 0;
             });
             return this.player.players.reverse();
-        }
+        } 
     },
     template: `
         <div id="game-end" class="game_end_cont">
@@ -69,9 +71,7 @@ export const GameEnd = Vue.component("game-end", {
                 </div>
                 <div class="game_end_go_home">
                     <a href="/" v-i18n>
-                        <button class="btn btn-primary btn-action btn-lg">
-                            <i class="icon icon-back"></i>
-                        </button>
+                        <Button size="big" type="back" />
                         Go to main page
                     </a>
                 </div>

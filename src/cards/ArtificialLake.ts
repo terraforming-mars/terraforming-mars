@@ -19,19 +19,32 @@ export class ArtificialLake implements IProjectCard {
     public canPlay(player: Player, game: Game): boolean {
       const meetsTemperatureRequirements = game.getTemperature() >= -6 - (player.getRequirementsBonus(game) * 2);
       const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+      const maxRebate = player.getMaxOceanPlacementBonus(game);
 
       if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !oceansMaxed) {
-        return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST, game, true) && meetsTemperatureRequirements;
+        return player.canAfford(player.getCardCost(game, this) + REDS_RULING_POLICY_COST - maxRebate, game, true) && meetsTemperatureRequirements;
       }
 
-      return meetsTemperatureRequirements;
+      return player.canAfford(player.getCardCost(game, this) - maxRebate, game, true) && meetsTemperatureRequirements;
     }
+
     public play(player: Player, game: Game) {
       if (game.board.getOceansOnBoard() >= MAX_OCEAN_TILES) return undefined;
 
+      const costWithRedsTax = player.getCardCost(game, this) + REDS_RULING_POLICY_COST;
+      let spaces = game.board.getAvailableSpacesOnLand(player);
+
+      if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS) && !player.canAfford(costWithRedsTax)) {
+        spaces = spaces.filter((space) => {
+          const adjacentSpaces = game.board.getAdjacentSpaces(space);
+          const oceanAdjacencyBonus = adjacentSpaces.map((s) => s.spaceType === SpaceType.OCEAN && s.tile ? player.oceanBonus : 0).reduce((acc, val) => acc + val);
+          return oceanAdjacencyBonus >= REDS_RULING_POLICY_COST;
+        });
+      }
+      
       return new SelectSpace(
           'Select a land space to place an ocean',
-          game.board.getAvailableSpacesOnLand(player),
+          spaces,
           (foundSpace: ISpace) => {
             game.addOceanTile(player, foundSpace.id, SpaceType.LAND);
             return undefined;

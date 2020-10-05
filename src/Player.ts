@@ -1112,6 +1112,20 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return Math.max(cost, 0);
     }
 
+    public getMaxOceanPlacementBonus(game: Game) : number {
+      const spaces = game.board.getAvailableSpacesOnLand(this);
+      let maxRebate = 0;
+
+      spaces.forEach((space) => {
+        const adjacentSpaces = game.board.getAdjacentSpaces(space);
+        const oceanAdjacencyBonus = adjacentSpaces.map((s) => s.spaceType === SpaceType.OCEAN && s.tile ? this.oceanBonus : 0).reduce((acc, val) => acc + val);
+        
+        if (oceanAdjacencyBonus > maxRebate) maxRebate = oceanAdjacencyBonus;
+      })
+
+      return maxRebate;
+    }
+
     private addPlayedCard(game: Game, card: IProjectCard): void {
       this.playedCards.push(card);
       game.log("${0} played ${1}", b => b.player(this).card(card));
@@ -1830,6 +1844,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
 
         maxPay += this.megaCredits;
+
         return maxPay >= this.getCardCost(game, card) &&
                    (card.canPlay === undefined || card.canPlay(this, game));
       });

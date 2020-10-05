@@ -100,16 +100,16 @@ export const Preferences = Vue.component("preferences", {
                     <div class="preferences-gen-marker">{{ getGenMarker() }}</div>
                 </div>
                 <div class="preferences_global_params">
-                  <div v-if="venusNextExtension">
-                    <div class="preferences_venus-tile"></div>
-                    <div class="preferences_global_params_value">{{ venus }}</div>
-                  </div>
                   <div class="preferences_temperature-tile"></div>
                   <div class="preferences_global_params_value">{{ temperature }}</div>
                   <div class="preferences_oxygen-tile"></div>
                   <div class="preferences_global_params_value">{{ oxygen }}</div>
                   <div class="preferences_ocean-tile"></div>
                   <div class="preferences_global_params_value">{{ oceans }}</div>
+                  <div v-if="venusNextExtension">
+                    <div class="preferences_venus-tile"></div>
+                    <div class="preferences_global_params_value">{{ venus }}</div>
+                  </div>
                 </div>
                 <div class="preferences_item preferences_player">
                   <div class="preferences_player_inner" :class="'player_bg_color_' + player_color"></div>

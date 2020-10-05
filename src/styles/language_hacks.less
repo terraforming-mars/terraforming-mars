@@ -94,3 +94,116 @@
         }
     }
 }
+
+.language-fr {
+    /***
+    Cards titles font size
+    ***/
+
+    .card-artificial-photosynthesis .title,
+    .card-building-industries .title,
+    .card-callisto-penal-mines .title,
+    .card-designed-micro-organisms .title,
+    .card-equatorial-magnetizer .title,
+    .card-electro-catapult .title,
+    .card-import-of-advanced-ghg .title,
+    .card-magnetic-field-dome .title,
+    .card-ore-processor .title,
+    .card-power-infrastructure .title,
+    .card-power-supply-consortium .title,
+    .card-terraforming-ganymede .title,
+    .card-tundra-farming .title,
+    .card-water-import-from-europa .title {
+        font-size: 14px;
+    }
+    .card-ghg-producing-bacteria .title,
+    .card-ice-cap-melting .title,
+    .card-research-coordination .title,
+    .card-technology-demonstration .title {
+        font-size: 13px;
+    }
+    .card-great-escarpment-consortium .title,
+    .card-indentured-workers .title,
+    .card-magnetic-field-generators .title {
+        font-size: 11px;
+    }
+
+
+    /***
+    Cards specific modifications
+    ***/
+
+    /* Catapulte Électromagnétique */
+    .card-electro-catapult .content .points {
+        width: 55px;
+        margin-left: 163px;
+    }
+    .card-electro-catapult .content .description {
+        width: 155px;
+    }
+
+    /* Réserve du Chasma d'Eos */
+    .card-eos-chasma-national-park .description {
+        text-align: left;
+        margin-top: -5px;
+        width: 141px;
+    }
+
+    /* Herbivores */
+    .card-herbivores .description:last-child {
+        margin-top: -14px !important;
+        font-size: 10px;
+        line-height: 11px;
+    }
+
+    /* Bétail */
+    .card-livestock .description:last-child {
+        margin-top: -95px !important;
+    }
+
+    /* Ville Ouverte */
+    .card-open-city .city-tile {
+        margin-left: 8px !important;
+    }
+    .card-open-city .city-tile + br {
+        display: none;
+    }
+    .card-open-city .plant.resource {
+        margin-bottom: 5px;
+    }
+    .card-open-city .description {
+        margin-top: 10px !important;
+    }
+    .card-open-city .description div + div {
+        width: 130px !important;
+        margin-top: 5px;
+    }
+
+    /* Animaux Domestiques */
+    .card-pets .description-half {
+        margin-top: 0 !important;
+        width: 130px !important;
+    }
+
+    /* Navettes */
+    .card-shuttles .content .points {
+        width: 65px;
+        margin-left: 153px;
+    }
+
+    /* Cratère Couvert */
+    .card-domed-crater .card-content-plants {
+        display: inline-block;
+        right: 0;
+        position: absolute;
+        margin-top: 88px;
+        margin-right: 8px;
+    }
+    .card-domed-crater .description > div:first-child {
+        width: 100px;
+        margin-top: 5px;
+    }
+    .card-domed-crater .description > div + div {
+        margin-top: 10px;
+    }
+}

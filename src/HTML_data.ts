@@ -7709,33 +7709,37 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-// TODO(kberg): lots of icons.
 [CardName.BUTTERFLY_EFFECT,`
-    <div class="title background-color-action ">Butterfly Effect</div>
+    <div class="title background-color-events ">Butterfly Effect</div>
     <div class="ares-icon project-icon"></div>
     <div class="price ">8</div>
     <div class="tag tag1 tag-event "></div>
     <div class="card-number">A03</div>
     <div class="content ">
         <div class="tile rating"></div><br/>
+        <div class="card-content-requirements">
+          <div class="globals-box">All four hazard markers</div>: -1 / 0 / +1
+        </div>
         <div class="description " style="text-align:left;">
             (Effect: Gain 1 TR. Move each individual hazard marker up to 1 step up or down.)<br>
         </div>
     </div>
 `],
-// TODO(kberg): lots of icons.
 [CardName.DESPERATE_MEASURES,`
-    <div class="title background-color-action ">Desperate Measures</div>
+    <div class="title background-color-events ">Desperate Measures</div>
     <div class="ares-icon project-icon"></div>
     <div class="price ">1</div>
     <div class="tag tag1 tag-event "></div>
     <div class="card-number">A04</div>
     <div class="content ">
         <div class="points ">-2</span></div>
+        <div class="tile temperature-tile"></div> / <div class="tile oxygen-tile"></div>
         <div class="description " style="text-align:left;">
             (Effect: Place a bronze cube on a dust storm tile and raise oxygen
               1 step, or place a bronze cube on an erosion tile and raise the
-              temperature 1 step. The hazard tile with the bronze cube cannot be removed.)<br>
+              temperature 1 step. The hazard tile with the bronze cube cannot be removed.)<br><br>
+            (Note: For now, this is the player's marker, with all the benefits of a player
+            marker on a tile.)
         </div>
     </div>
 `],
@@ -7860,8 +7864,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="points ">1/<span class="resource ocean-resource "></span></div>
         <div class="requirements ">4 Oceans</div>
         <div class="production-box production-box-size2a ">
-            <div class="production-prefix ">&#x2796;&#xFE0E;</div><div class="energy production "></div><div class="energy production "></div><br>
-            <div class="production-prefix ">&#x2795;&#xFE0E;</div><div class="money production ">5</div>
+            <div class="production-prefix minus"></div><div class="energy production "></div><div class="energy production "></div><br>
+            <div class="production-prefix plus"></div><div class="money production ">5</div>
         </div>
         <div class="ares-tile board-space-tile--capital_ares"></div>
         <div class="description " style="text-align:left;">
@@ -7881,15 +7885,14 @@ export const HTML_DATA: Map<string, string> =
     <div class="content ">
       <div class="points big">1/<div class="tile city-tile-small"></div></div>
       <div class="production-box production-box-size1a">
-          <div class="production-prefix">&#x2796;&#xFE0E;</div><div class="energy production"></div>
-          <div class="production-prefix">&#x2795;&#xFE0E;</div><div class="money production">4</div>
-      </div>
-      <div class="description" style="margin-top:-5px">
-      (Decrease your energy production 1 step and increase your MC production 4 steps.)
+          <div class="production-prefix minus"></div><div class="energy production"></div>
+          <div class="production-prefix plus"></div><div class="money production">4</div>
       </div>
       <div class="ares-tile board-space-tile--commercial_district_ares"></div>
-      <div class="description" style="text-align:left; width: 140px;">
-      (Place this tile which grants an <b>adjacency bonus</b> of 2M€. 1 VP PER ADJACENT CITY TILE.)
+      <div class="description" style="margin-top:-5px">
+      (Decrease your energy production 1 step and increase your MC production 4 steps.
+      <br/><br/>
+      Place this tile which grants an <b>adjacency bonus</b> of 2M€. 1 VP PER ADJACENT CITY TILE.)
       </div>
     </div>
 `],
@@ -7919,6 +7922,9 @@ export const HTML_DATA: Map<string, string> =
     <div class="tag tag2 tag-power "></div>
     <div class="card-number">A14</div>
     <div class="content ">
+        <div class="production-box production-box-size2a">
+          <div class="energy production"></div> / <div class="resource-tag tag-plant"></div>
+        </div>
         <div class="ares-tile board-space-tile--solar_farm"></div>
         <div class="description " style="text-align:left;">
             Place this tile which grants an <b>adjacency bonus</b> of 2 power. Increase your power production 1 step for each plant tag on the area where you place the tile.<br>
@@ -7936,12 +7942,10 @@ export const HTML_DATA: Map<string, string> =
       <div class="points">1/2<div class="resource animal"></div></div>
       <div class="requirements">Forest</div>
       <div class="tag-animal resource-tag"></div> / <div class="tag-plant resource-tag"></div> : <div class="animal resource"></div>
-      <div class="description">
-        (Effect: When you play an animal or plant tag (including these), add an animal to this card.)
-      </div>
       <div class="ares-tile board-space-tile--ecological_zone_ares"></div>
-      <div class="description" style="text-align:left;margin-top:-65px;width: 135px;">
-        (Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. The tile grants an <b>adjacency bonus</b> of 1 animal. 1 VP per 2 Animals on this card.)
+      <div class="description">
+        (Effect: When you play an animal or plant tag (including these), add an animal to this card.<br/><br/>
+        Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. The tile grants an <b>adjacency bonus</b> of 1 animal. 1 VP per 2 Animals on this card.)
       </div>
     </div>
 `],

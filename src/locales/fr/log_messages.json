@@ -1,5 +1,6 @@
 {
     "The id of this game is ${0}": "L'identifiant de cette partie est ${0}",
+    "Dealt and discarded ${0} (cost ${1}) to place a ${2}": "A révélé et défaussé ${0} (coût ${1}) pour placer une ${2}",
     "Generation ${0}": "Génération ${0}",
     "${0} played ${1}": "${0} a joué ${1}",
     "${0} used ${1} action": "${0} a utilisé l'action de ${1}",

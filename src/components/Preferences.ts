@@ -92,28 +92,28 @@ export const Preferences = Vue.component("preferences", {
         },
         getOceanCount: function(): string{
             if (this.oceans === MAX_OCEAN_TILES){
-                return `<img width="18" src="/assets/checkmark.png" alt="completed">`;
+                return `<img width="18" src="/assets/checkmark.png" style="filter: hue-rotate(280deg);" alt="completed">`;
             } else {
                 return `${this.oceans}`;
             } 
         },
         getTemperatureCount: function(): string{
             if (this.temperature === MAX_TEMPERATURE){
-                return `<img width="18" src="/assets/checkmark.png" alt="completed">`;
+                return `<img width="18" src="/assets/checkmark.png" style="filter: hue-rotate(280deg);" alt="completed" style="">`;
             } else {
                 return `${this.temperature}`;
             } 
         },
         getOxygenCount: function(): string{
             if (this.oxygen === MAX_OXYGEN_LEVEL){
-                return `<img width="18" src="/assets/checkmark.png" alt="completed">`;
+                return `<img width="18" src="/assets/checkmark.png" style="filter: hue-rotate(280deg);" alt="completed">`;
             } else {
                 return `${this.oxygen}`;
             } 
         },
         getVenusCount: function(): string{
             if (this.venus === MAX_VENUS_SCALE){
-                return `<img width="18" src="/assets/checkmark.png" alt="completed">`;
+                return `<img width="18" src="/assets/checkmark.png" style="filter: hue-rotate(280deg);" alt="completed">`;
             } else {
                 return `${this.venus}`;
             } 

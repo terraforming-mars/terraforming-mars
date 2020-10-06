@@ -66,7 +66,7 @@ export class BoardBuilder {
         this.unshufflableSpaces.sort((a, b) =>  a < b ? a : b);
         // Reverseing the indexes so the elements are pulled from the right.
         // Revering the result so elements are listed left to right.
-        const spliced = this.unshufflableSpaces.reverse().map(idx => array.splice(idx, 1)).reverse();
+        const spliced = this.unshufflableSpaces.reverse().map(idx => array.splice(idx, 1)[0]).reverse();
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(this.rng.next() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];

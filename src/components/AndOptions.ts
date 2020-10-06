@@ -17,7 +17,7 @@ export const AndOptions = Vue.component("and-options", {
     },
     methods: {
         saveData: function () {
-            for (var i = 0; i < this.$data.childComponents.length; i++) {
+            for (let i = 0; i < this.$data.childComponents.length; i++) {
                 const componentInstance = this.$data.childComponents[i]
                     .componentInstance;
                 if (componentInstance !== undefined) {
@@ -76,7 +76,9 @@ export const AndOptions = Vue.component("and-options", {
                     title: playerInput.buttonLabel,
                     type: "submit",
                     size: "normal",
-                    onClick: this.saveData,
+                    onClick: () => {
+                        this.saveData();
+                    },
                 },
             });
             children.push(

@@ -117,7 +117,9 @@ export const OrOptions = Vue.component("or-options", {
                                     title: $t(option.buttonLabel),
                                     type: "submit",
                                     size: "normal",
-                                    onClick: this.saveData,
+                                    onClick: () => {
+                                        this.saveData();
+                                    },
                                 },
                             }),
                         ]

@@ -2400,7 +2400,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="content">
         <div class="points points-big">1</div>
         <div class="card-content-requirements">
-          <div class="globals-box">Temp / O2 / Ocean</div>: +/- 2
+          <div class="globals-box">Global requirements</div>: +/- 2
         </div>
         <div class="description">
           (Effect: Your global requirements are +2 or -2 steps, your choice in each case.)
@@ -3229,7 +3229,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">206</div>
         <div class="content">
           <div class="card-content-requirements">
-            <div class="globals-box">Temp / O2 / Ocean</div>: +/- 2
+            <div class="globals-box">Global requirements</div>: +/- 2
           </div>
           <div class="description">
             (The next card you play this generation is +2 or -2 steps in global requirements, your choice.)
@@ -5227,11 +5227,11 @@ export const HTML_DATA: Map<string, string> =
               <div class="corporationEffectBoxLabel">EFFECT</div>
               
               <div class="corporation-ability">
-                <div class="globals-box">Temp / O2 / Ocean</div>: +/- 2
+                <div class="globals-box">Global requirements</div>: +/- 2
               </div>
               
               <div class="description ">
-                  (Effect: Your temperature, oxygen and ocean requirements are +2 or -2 steps, your choice in each case.)
+                  (Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.)
               </div>
           </div>
           <span style="color: #020202;

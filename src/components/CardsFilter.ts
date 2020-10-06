@@ -44,11 +44,7 @@ export const CardsFilter = Vue.component("cards-filter", {
         },
         getCardsInputPlaceholder: function() {
             return $t("Start typing the card name to exclude");
-        }
-        ,
-        getCrossHtml: function(): string {
-            return "<i class='icon icon-cross'></i>";
-        }
+        }   
     },
     watch: {
         selectedCardNames: function (value) {
@@ -71,7 +67,7 @@ export const CardsFilter = Vue.component("cards-filter", {
         <div class="cards-filter-results-cont" v-if="selectedCardNames.length">
             <div class="cards-filter-result" v-for="cardName in selectedCardNames">
                 <label>{{ cardName }}</label>
-                <Button size="small" type="error" :onClick="removeCard.bind(null, cardName)" v-html="getCrossHtml()" /> 
+                <Button size="small" type="close" :onClick="removeCard.bind(null, cardName)" /> 
             </div>
         </div>
         <div class="cards-filter-input">

@@ -1,6 +1,7 @@
 import Vue from "vue";
 import { PreferencesManager } from "./PreferencesManager";
 import { LANGUAGES } from "../constants";
+import { MAX_OCEAN_TILES, MAX_TEMPERATURE, MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE } from "../constants";
 
 export const Preferences = Vue.component("preferences", {
     props: ["player_name", "player_color", "generation", "coloniesCount", "temperature", "oxygen", "oceans", "venus", "venusNextExtension"],
@@ -90,28 +91,28 @@ export const Preferences = Vue.component("preferences", {
             return `${this.generation}`;
         },
         getOceanCount: function(): string{
-            if (this.oceans === 9){
+            if (this.oceans === MAX_OCEAN_TILES){
                 return `<img width="18" src="/assets/checkmark.png" alt="completed">`;
             } else {
                 return `${this.oceans}`;
             } 
         },
         getTemperatureCount: function(): string{
-            if (this.temperature === 8){
+            if (this.temperature === MAX_TEMPERATURE){
                 return `<img width="18" src="/assets/checkmark.png" alt="completed">`;
             } else {
                 return `${this.temperature}`;
             } 
         },
         getOxygenCount: function(): string{
-            if (this.oxygen === 14){
+            if (this.oxygen === MAX_OXYGEN_LEVEL){
                 return `<img width="18" src="/assets/checkmark.png" alt="completed">`;
             } else {
                 return `${this.oxygen}`;
             } 
         },
         getVenusCount: function(): string{
-            if (this.venus === 30){
+            if (this.venus === MAX_VENUS_SCALE){
                 return `<img width="18" src="/assets/checkmark.png" alt="completed">`;
             } else {
                 return `${this.venus}`;

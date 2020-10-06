@@ -5231,7 +5231,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
               
               <div class="description ">
-                  (Effect: Your temperature, oxygen, ocean, and venus requirements are +2 or -2 steps, your choice in each case.)
+                  (Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.)
               </div>
           </div>
           <span style="color: #020202;

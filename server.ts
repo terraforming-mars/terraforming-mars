@@ -13,6 +13,7 @@ import { ColonyModel } from "./src/models/ColonyModel";
 import { Color } from "./src/Color";
 import { Game, GameOptions } from "./src/Game";
 import { GameLogs } from "./src/routes/GameLogs";
+import { GameReloader } from "./src/database/GameReloader";
 import { Route } from "./src/routes/Route";
 import { ICard } from "./src/cards/ICard";
 import { IProjectCard } from "./src/cards/IProjectCard";
@@ -299,34 +300,6 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
     });
 }
 
-function loadAllGames(): void {
-    Database.getInstance().getGames(function (err, allGames) {
-        if (err) {
-            return;
-        }
-        allGames.forEach((game_id) => {
-            const player = new Player("test", Color.BLUE, false, 0);
-            const player2 = new Player("test2", Color.RED, false, 0);
-            let gameToRebuild = new Game(game_id, [player, player2], player);
-            Database.getInstance().restoreGameLastSave(
-                game_id,
-                gameToRebuild,
-                function (err) {
-                    if (err) {
-                        console.error("unable to load game " + game_id, err);
-                        return;
-                    }
-                    console.log("load game " + game_id);
-                    games.set(gameToRebuild.id, gameToRebuild);
-                    gameToRebuild.getPlayers().forEach((player) => {
-                        playersToGame.set(player.id, gameToRebuild);
-                    });
-                }
-            );
-        });
-    });
-}
-
 function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
     const routeRegExp: RegExp = /^\/api\/game\?id\=([0-9abcdef]+)$/i;
 
@@ -352,17 +325,18 @@ function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
     const gameId: string = matches[1];
 
-    const game = games.get(gameId);
+    gameReloader.getByGameId(gameId, (game: Game | undefined) => {
 
-    if (game === undefined) {
-        console.warn("game is undefined");
-        route.notFound(req, res);
-        return;
-    }
+        if (game === undefined) {
+            console.warn("game is undefined");
+            route.notFound(req, res);
+            return;
+        }
 
-    res.setHeader("Content-Type", "application/json");
-    res.write(getGame(game));
-    res.end();
+        res.setHeader("Content-Type", "application/json");
+        res.write(getGame(game));
+        res.end();
+    });
 }
 
 function apiGetWaitingFor(
@@ -1073,7 +1047,8 @@ function serveResource(res: http.ServerResponse, s: Buffer): void {
     res.end();
 }
 
-loadAllGames();
+const gameReloader = new GameReloader(games, playersToGame);
+gameReloader.start();
 
 console.log("Starting server on port " + (process.env.PORT || 8080));
 console.log("version 0.X");

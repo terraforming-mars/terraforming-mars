@@ -20,7 +20,7 @@ export class ElysiumBoard extends Board {
         // y=2
         builder.land(TITANIUM, TITANIUM).land().land(DRAW_CARD).land().ocean(PLANT).ocean().land(DRAW_CARD, DRAW_CARD, DRAW_CARD);      
         // y=3
-        builder.land(PLANT).land(PLANT).land(PLANT, PLANT).ocean(PLANT).land(PLANT).ocean(PLANT).ocean(PLANT).land(PLANT, STEEL);
+        builder.land(PLANT).land(PLANT).land(PLANT).ocean(PLANT, PLANT).land(PLANT).ocean(PLANT).ocean(PLANT).land(PLANT, STEEL);
         // y=4
         builder.land(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT).ocean(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT, PLANT).land(PLANT, PLANT).land(PLANT, PLANT).land(PLANT, TITANIUM);
         // y=5

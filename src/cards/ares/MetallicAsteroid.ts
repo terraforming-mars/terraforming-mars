@@ -22,9 +22,9 @@ export class MetallicAsteroid implements IProjectCard {
       game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 4);
 
       return new SelectSpace(
-          "Select space for special city tile",
-          game.board.getAvailableSpacesForCity(player),
-          (space: ISpace) => {
+        "Select space for Biofertilizer Facility tile",
+        game.board.getAvailableSpacesOnLand(player),
+         (space: ISpace) => {
             game.addTile(player, SpaceType.LAND, space, {
               tileType: TileType.METALLIC_ASTEROID,
               card: this.name

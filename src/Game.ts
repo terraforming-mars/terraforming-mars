@@ -1531,15 +1531,16 @@ export class Game implements ILoadable<SerializedGame, Game> {
         );
       }
 
+      // No need to test for payment in world government.
       if (this.gameOptions.aresExtension) {
-        AresHandler.assertCanPay(this, player, space);
+        AresHandler.assertCanPay(this, player, space, isWorldGov);
       }
 
       // Part 2. Collect additional fees.
 
       // Adjacency costs are before the hellas ocean tile because this is a mandatory cost.
       if (this.gameOptions.aresExtension) {
-        AresHandler.payAdjacencyAndHazardCosts(this, player, space);
+        AresHandler.payAdjacencyAndHazardCosts(this, player, space, isWorldGov);
       }
 
       // Hellas special requirements ocean tile
@@ -1605,7 +1606,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         });
       });
 
-      AresHandler.grantBonusForRemovingHazard(this, player, initialTileTypeForAres);
+      AresHandler.grantBonusForRemovingHazard(this, player, initialTileTypeForAres, isWorldGov);
 
       // Must occur after all other onTilePlaced operations.
       if (this.gameOptions.aresExtension) {

@@ -59,6 +59,7 @@ export const CardsFilter = Vue.component("cards-filter", {
                 (candidate: CardName) => ! this.selectedCardNames.includes(candidate) && candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1
             ).sort();
             this.foundCardNames = newCardNames.slice(0, 5)
+             
         } 
     },
     template: `
@@ -67,7 +68,7 @@ export const CardsFilter = Vue.component("cards-filter", {
         <div class="cards-filter-results-cont" v-if="selectedCardNames.length">
             <div class="cards-filter-result" v-for="cardName in selectedCardNames">
                 <label>{{ cardName }}</label>
-                <Button size="small" type="close" :onClick="removeCard.bind(null, cardName)" /> 
+                <Button size="small" type="close" :onClick="_=>removeCard(cardName)" /> 
             </div>
         </div>
         <div class="cards-filter-input">

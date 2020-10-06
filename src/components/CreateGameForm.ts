@@ -561,6 +561,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             <colonies-filter
                 v-if="showColoniesList"
                 v-on:colonies-list-changed="updateCustomColoniesList"
+                v-bind:communityCardsOption="communityCardsOption"
             ></colonies-filter>
 
             <cards-filter

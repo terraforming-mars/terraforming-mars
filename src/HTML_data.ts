@@ -7604,7 +7604,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="resource card card-small"><div class="card-icon card-icon-blue"></div></div>
           </div>
 
-          <div class="description">
+          <div class="effect description">
             (Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 MC to draw a blue card.)
           </div>
         </div>

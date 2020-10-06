@@ -110,6 +110,7 @@
 	"generation ${0} of ${1}": "Génération ${0} sur ${1}",
 
 	"Actions": "Actions",
+	"Take action for action phase, select one available action.": "Phase d'Actions. Sélectionnez une des actions disponibles.",
 	"Select prelude card to play": "Sélectionnez une carte Prélude à jouer",
 	"Claim a milestone": "Valider un objectif",
 	"Perform an action from a played card": "Utiliser l'action d'une carte Action (bleue)",

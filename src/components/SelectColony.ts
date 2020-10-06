@@ -1,7 +1,7 @@
-
 import Vue from "vue";
 
 import { Colony } from "./Colony";
+import { Button } from "../components/common/Button";
 
 export const SelectColony = Vue.component("select-colony", {
     props: ["playerinput", "onsave", "showsave", "showtitle"],
@@ -11,7 +11,8 @@ export const SelectColony = Vue.component("select-colony", {
         };
     },
     components: {
-        "colony": Colony
+        "colony": Colony,
+        "Button": Button
     },
     methods: {
         saveData: function () {

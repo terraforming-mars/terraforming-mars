@@ -89,6 +89,34 @@ export const Preferences = Vue.component("preferences", {
         getGenMarker: function (): string {
             return `${this.generation}`;
         },
+        getOceanCount: function(): string{
+            if (this.oceans === 9){
+                return `<img width="18" src="/assets/checkmark.png" alt="completed">`;
+            } else {
+                return `${this.oceans}`;
+            } 
+        },
+        getTemperatureCount: function(): string{
+            if (this.temperature === 8){
+                return `<img width="18" src="/assets/checkmark.png" alt="completed">`;
+            } else {
+                return `${this.temperature}`;
+            } 
+        },
+        getOxygenCount: function(): string{
+            if (this.oxygen === 14){
+                return `<img width="18" src="/assets/checkmark.png" alt="completed">`;
+            } else {
+                return `${this.oxygen}`;
+            } 
+        },
+        getVenusCount: function(): string{
+            if (this.venus === 30){
+                return `<img width="18" src="/assets/checkmark.png" alt="completed">`;
+            } else {
+                return `${this.venus}`;
+            } 
+        }
     },
     mounted: function () {
         this.updatePreferencesFromStorage();
@@ -101,14 +129,14 @@ export const Preferences = Vue.component("preferences", {
                 </div>
                 <div class="preferences_global_params">
                   <div class="preferences_temperature-tile"></div>
-                  <div class="preferences_global_params_value">{{ temperature }}</div>
+                  <div class="preferences_global_params_value" v-html="getTemperatureCount()"></div>
                   <div class="preferences_oxygen-tile"></div>
-                  <div class="preferences_global_params_value">{{ oxygen }}</div>
+                  <div class="preferences_global_params_value" v-html="getOxygenCount()"></div>
                   <div class="preferences_ocean-tile"></div>
-                  <div class="preferences_global_params_value">{{ oceans }}</div>
+                  <div class="preferences_global_params_value" v-html="getOceanCount()"></div>
                   <div v-if="venusNextExtension">
                     <div class="preferences_venus-tile"></div>
-                    <div class="preferences_global_params_value">{{ venus }}</div>
+                    <div class="preferences_global_params_value" v-html="getVenusCount()"></div>
                   </div>
                 </div>
                 <div class="preferences_item preferences_player">

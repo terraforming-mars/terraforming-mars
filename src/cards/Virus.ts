@@ -1,4 +1,3 @@
-
 import { IProjectCard } from "./IProjectCard";
 import { Tags } from "./Tags";
 import { CardType } from "./CardType";
@@ -19,12 +18,8 @@ export class Virus implements IProjectCard {
     public name: CardName = CardName.VIRUS;
     public cardType: CardType = CardType.EVENT;
     public hasRequirements = false;
-    public canPlay(player: Player, game: Game): boolean {
-        return this.getPossibleTargetCards(player, game).length +
-            game.getPlayers().filter((p) => 
-                ((p.id !== player.id && !p.plantsAreProtected()) 
-                || p.id === player.id)
-                && p.plants > 0).length > 0;
+    public canPlay(): boolean {
+        return true;
     }
 
     private getPossibleTargetCards(player: Player, game: Game): Array<ICard> {

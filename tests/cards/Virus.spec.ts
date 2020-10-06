@@ -48,5 +48,5 @@ describe("Virus", function () {
 
     it("Should play", function () {
         expect(card.canPlay()).to.eq(true);
-    }
+    });
 });

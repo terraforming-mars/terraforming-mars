@@ -6,7 +6,14 @@ import { SpaceName } from "./SpaceName";
 
 export class BoardBuilder {
     private rng: Random;
-    // This builder assumes the map has nine rows, of growing tiles [5,6,7,8,9,8,7,6,5].
+
+    // This builder assumes the map has nine rows, of tile counts [5,6,7,8,9,8,7,6,5].
+    //
+    // "Son I am able, " she said "though you scare me."
+    // "Watch, " said I
+    // "Beloved, " I said "watch me scare you though." said she,
+    // "Able am I, Son."
+
     private oceans: Array<boolean> = [];
     private bonuses: Array<Array<SpaceBonus>> = [];
     private spaces: Array<ISpace> = [];
@@ -56,18 +63,17 @@ export class BoardBuilder {
     }
 
     public shuffleArray(array: Array<Object>): void {
-        const sorted = this.unshufflableSpaces.sort((a, b) =>  a < b ? a : b);
+        this.unshufflableSpaces.sort((a, b) =>  a < b ? a : b);
         // Reverseing the indexes so the elements are pulled from the right.
         // Revering the result so elements are listed left to right.
-        const spliced = sorted.reverse().map(idx => array.splice(idx, 1)).reverse();
+        const spliced = this.unshufflableSpaces.reverse().map(idx => array.splice(idx, 1)).reverse();
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(this.rng.next() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
         }
-        for (let idx = 0; idx < sorted.length; idx++) {
-            array.splice(sorted[idx], 0, spliced[idx]);
+        for (let idx = 0; idx < this.unshufflableSpaces.length; idx++) {
+            array.splice(this.unshufflableSpaces[idx], 0, spliced[idx]);
         }
-        console.log(array);
     }
 
     // Shuffle the ocean spaces and bonus spaces. But protect the land spaces supplied by

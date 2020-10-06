@@ -47,13 +47,12 @@ export const Button = Vue.component("Button", {
     },
     methods: {
         getClasses: function (): string {
-            const classes: Array<String> = ["btn"];
+            const classes: Array<string> = ["btn"];
 
             //size
             if (this.size === "tiny") {
                 classes.push("btn-tiny");
-            }
-            if (this.size === "small") {
+            } else if (this.size === "small") {
                 classes.push("btn-sm");
             } else if (this.size === "big") {
                 classes.push("btn-lg");

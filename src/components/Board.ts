@@ -114,10 +114,13 @@ export const Board = Vue.component("board", {
             } else {
                 return `${oceans_count}/${constants.MAX_OCEAN_TILES}`
             }
+        },
+        getGameBoardClassName: function():string {
+            return this.venusNextExtension ? "board-cont board-with-venus" : "board-cont board-without-venus";
         }
     },
     template: `
-    <div class="board-cont">
+    <div :class="getGameBoardClassName()">
         <div class="board-outer-spaces">
             <board-space :space="getSpaceById('01')" text="Ganymede Colony"></board-space>
             <board-space :space="getSpaceById('02')" text="Phobos Space Haven"></board-space>

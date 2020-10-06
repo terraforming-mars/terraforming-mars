@@ -92,28 +92,28 @@ export const Preferences = Vue.component("preferences", {
         },
         getOceanCount: function(): string{
             if (this.oceans === MAX_OCEAN_TILES){
-                return `<img width="18" src="/assets/checkmark.png" style="filter: hue-rotate(280deg);" alt="completed">`;
+                return `<img src="/assets/checkmark.png" class="preferences_checkmark" alt="$t('Completed!')">`;
             } else {
                 return `${this.oceans}`;
             } 
         },
         getTemperatureCount: function(): string{
             if (this.temperature === MAX_TEMPERATURE){
-                return `<img width="18" src="/assets/checkmark.png" style="filter: hue-rotate(280deg);" alt="completed" style="">`;
+                return `<img src="/assets/checkmark.png" class="preferences_checkmark" alt="$t('Completed!')">`;
             } else {
                 return `${this.temperature}`;
             } 
         },
         getOxygenCount: function(): string{
             if (this.oxygen === MAX_OXYGEN_LEVEL){
-                return `<img width="18" src="/assets/checkmark.png" style="filter: hue-rotate(280deg);" alt="completed">`;
+                return `<img src="/assets/checkmark.png" class="preferences_checkmark" alt="$t('Completed!')">`;
             } else {
                 return `${this.oxygen}`;
             } 
         },
         getVenusCount: function(): string{
-            if (this.venus === MAX_VENUS_SCALE || this.venus === 2){
-                return `<div class="preferences_checkmark" />`;
+            if (this.venus === MAX_VENUS_SCALE){
+                return `<img src="/assets/checkmark.png" class="preferences_checkmark" alt="$t('Completed!')">`;
             } else {
                 return `${this.venus}`;
             } 

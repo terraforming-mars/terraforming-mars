@@ -21,6 +21,7 @@ export const mainAppSettings = {
             "pinned_player_2": false,
             "pinned_player_3": false,
             "pinned_player_4": false,
+            "turmoil_parties": false,
         },
         game: {
             players: [],

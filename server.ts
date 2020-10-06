@@ -64,7 +64,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
                     route.notAuthorized(req, res);
                     return;
                 } else {
-                    serveApp(res);
+                    serveApp(req, res);
                 }
             } else if (
                 req.url === "/" ||
@@ -76,7 +76,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
                 req.url.startsWith("/load") ||
                 req.url.startsWith("/debug-ui")
             ) {
-                serveApp(res);
+                serveApp(req, res);
             } else if (req.url.startsWith("/api/player?id=")) {
                 apiGetPlayer(req, res);
             } else if (req.url.startsWith("/api/waitingfor?id=")) {
@@ -1005,10 +1005,10 @@ function isServerIdValid(req: http.IncomingMessage): boolean {
     return true;
 }
 
-function serveApp(res: http.ServerResponse): void {
+function serveApp(req: http.IncomingMessage, res: http.ServerResponse): void {
     fs.readFile("index.html", function (err, data) {
         if (err) {
-            return internalServerError(res, err);
+            return route.internalServerError(req, res, err);
         }
         res.setHeader("Content-Type", "text/html; charset=utf-8");
         res.write(data.toString().replace("$$APP_VERSION$$", appVersion));
@@ -1052,11 +1052,11 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
         res.setHeader("Content-Type", "image/jpeg");
         file = reqFile;
     } else {
-        return notFound(req, res);
+        return route.notFound(req, res);
     }
     fs.readFile(file, function (err, data) {
         if (err) {
-            return internalServerError(res, err);
+            return route.internalServerError(req, res, err);
         }
         res.write(data);
         res.end();

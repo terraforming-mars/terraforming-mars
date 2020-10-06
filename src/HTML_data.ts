@@ -7099,7 +7099,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="production-box production-box-size2">
           <div class="energy production"></div><div class="energy production"></div>
         </div>
-        *&nbsp;<div class="tile special-tile">&#x23DA;</div>
+        <div class="tile special-tile">&#x23DA;</div>*
         <div class="description">
           (Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.)
         </div>

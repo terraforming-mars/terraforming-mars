@@ -112,8 +112,8 @@ export const Preferences = Vue.component("preferences", {
             } 
         },
         getVenusCount: function(): string{
-            if (this.venus === MAX_VENUS_SCALE){
-                return `<img width="18" src="/assets/checkmark.png" style="filter: hue-rotate(280deg);" alt="completed">`;
+            if (this.venus === MAX_VENUS_SCALE || this.venus === 2){
+                return `<div class="preferences_checkmark" />`;
             } else {
                 return `${this.venus}`;
             } 

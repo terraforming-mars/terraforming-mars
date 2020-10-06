@@ -5,6 +5,8 @@ import { BoardSpace } from "./BoardSpace";
 import { SpaceModel } from "../models/SpaceModel";
 import { SpaceType } from "../SpaceType";
 import { PreferencesManager } from "./PreferencesManager";
+// @ts-ignore
+import { $t } from "../directives/i18n";
 
 class GlobalParamLevel {
     constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -110,7 +112,7 @@ export const Board = Vue.component("board", {
             const oceans_count = this.oceans_count || 0;
             const leftover = constants.MAX_OCEAN_TILES - oceans_count;
             if (leftover === 0) {
-                return `<img width="26" src="/assets/checkmark.png" alt="completed">`
+                return `<img width="26" src="/assets/circle-checkmark.png" :alt="$t('Completed!')">`
             } else {
                 return `${oceans_count}/${constants.MAX_OCEAN_TILES}`
             }

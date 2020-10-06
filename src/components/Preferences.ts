@@ -2,6 +2,8 @@ import Vue from "vue";
 import { PreferencesManager } from "./PreferencesManager";
 import { LANGUAGES } from "../constants";
 import { MAX_OCEAN_TILES, MAX_TEMPERATURE, MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE } from "../constants";
+// @ts-ignore
+import { $t } from "../directives/i18n";
 
 export const Preferences = Vue.component("preferences", {
     props: ["player_name", "player_color", "generation", "coloniesCount", "temperature", "oxygen", "oceans", "venus", "venusNextExtension"],
@@ -92,28 +94,28 @@ export const Preferences = Vue.component("preferences", {
         },
         getOceanCount: function(): string{
             if (this.oceans === MAX_OCEAN_TILES){
-                return `<img src="/assets/checkmark.png" class="preferences_checkmark" alt="$t('Completed!')">`;
+                return `<img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t('Completed!')">`;
             } else {
                 return `${this.oceans}`;
             } 
         },
         getTemperatureCount: function(): string{
             if (this.temperature === MAX_TEMPERATURE){
-                return `<img src="/assets/checkmark.png" class="preferences_checkmark" alt="$t('Completed!')">`;
+                return `<img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t('Completed!')">`;
             } else {
                 return `${this.temperature}`;
             } 
         },
         getOxygenCount: function(): string{
             if (this.oxygen === MAX_OXYGEN_LEVEL){
-                return `<img src="/assets/checkmark.png" class="preferences_checkmark" alt="$t('Completed!')">`;
+                return `<img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t('Completed!')">`;
             } else {
                 return `${this.oxygen}`;
             } 
         },
         getVenusCount: function(): string{
             if (this.venus === MAX_VENUS_SCALE){
-                return `<img src="/assets/checkmark.png" class="preferences_checkmark" alt="$t('Completed!')">`;
+                return `<img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t('Completed!')">`;
             } else {
                 return `${this.venus}`;
             } 

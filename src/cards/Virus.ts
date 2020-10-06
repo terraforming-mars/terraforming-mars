@@ -18,7 +18,7 @@ export class Virus implements IProjectCard {
     public name: CardName = CardName.VIRUS;
     public cardType: CardType = CardType.EVENT;
     public hasRequirements = false;
-    public canPlay(player: Player, game: Game): boolean {
+    public canPlay(): boolean {
         return true;
     }
 

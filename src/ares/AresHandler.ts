@@ -181,7 +181,10 @@ export class AresHandler {
         return { megacredits: megaCreditCost, production: productionCost };
     }
 
-    public static assertCanPay(game: Game, player: Player, space: ISpace): IAdjacencyCost {
+    public static assertCanPay(game: Game, player: Player, space: ISpace, isWorldGov: boolean): IAdjacencyCost {
+        if (isWorldGov) {
+            return {megacredits: 0, production: 0 };
+        }
         var cost = AresHandler.computeAdjacencyCosts(game, space);
 
         // Make this more sophisticated, a player can pay for different adjacencies
@@ -203,9 +206,9 @@ export class AresHandler {
         }
     }
 
-    public static payAdjacencyAndHazardCosts(game: Game, player: Player, space: ISpace) {
+    public static payAdjacencyAndHazardCosts(game: Game, player: Player, space: ISpace, isWorldGov: boolean) {
 
-        var cost = this.assertCanPay(game, player, space);
+        var cost = this.assertCanPay(game, player, space, isWorldGov);
 
         if (cost.production > 0) {
             // TODO(kberg): don't send interrupt if total is available.
@@ -334,7 +337,10 @@ export class AresHandler {
         return false;
     }
 
-    public static grantBonusForRemovingHazard(game: Game, player: Player, initialTileType?: TileType) {
+    public static grantBonusForRemovingHazard(game: Game, player: Player, initialTileType: TileType | undefined, isWorldGov: boolean) {
+        if (isWorldGov) {
+            return;
+        }
         var steps: number;
         switch (initialTileType) {
             case TileType.DUST_STORM_MILD:

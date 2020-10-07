@@ -5,7 +5,7 @@ import { CardName } from "../CardName";
 
 export const DebugUI = Vue.component("debug-ui", {
     components: {
-        Card,
+        Card
     },
     data: function() {
         return {

@@ -1,205 +1,69 @@
 import { SpaceBonus } from "./SpaceBonus";
 import { SpaceName } from "./SpaceName";
-import { Board, Land, BoardColony } from "./Board";
+import { Board } from "./Board";
 import { Player } from "./Player";
 import { ISpace } from "./ISpace";
 import { HELLAS_BONUS_OCEAN_COST } from "./constants";
 import { SpaceType } from "./SpaceType";
+import { BoardBuilder } from "./BoardBuilder";
 
 export class HellasBoard extends Board{
     constructor(shuffleMapOption: boolean = false, seed: number = 0) {
         super();
-        this.seed = Math.floor(seed * 4294967296)
-        this.spaces.push(new BoardColony(SpaceName.GANYMEDE_COLONY));
-        this.spaces.push(new BoardColony(SpaceName.PHOBOS_SPACE_HAVEN));
 
-        const is_ocean = [];
-        const bonus = [];
+        const builder = new BoardBuilder(seed);
+
+        const PLANT = SpaceBonus.PLANT;
+        const STEEL = SpaceBonus.STEEL;
+        const DRAW_CARD = SpaceBonus.DRAW_CARD;
+        const HEAT = SpaceBonus.HEAT;
+        const TITANIUM = SpaceBonus.TITANIUM;
+        const TWO_PLANTS = [ PLANT, PLANT ];
+
         // y=0
-        is_ocean.push(true, false, false, false, false);
-        bonus.push([SpaceBonus.PLANT, SpaceBonus.PLANT], [SpaceBonus.PLANT, SpaceBonus.PLANT], [SpaceBonus.PLANT, SpaceBonus.PLANT], [SpaceBonus.PLANT, SpaceBonus.STEEL], [SpaceBonus.PLANT]);
+        builder.ocean(...TWO_PLANTS).land(...TWO_PLANTS).land(...TWO_PLANTS).land(PLANT, STEEL).land(PLANT);
         // y=1
-        is_ocean.push(true, false, false, false, false, false);
-        bonus.push([SpaceBonus.PLANT, SpaceBonus.PLANT],
-            [SpaceBonus.PLANT, SpaceBonus.PLANT],
-            [SpaceBonus.PLANT, SpaceBonus.STEEL],
-            [SpaceBonus.PLANT],
-            [SpaceBonus.PLANT],
-            [SpaceBonus.PLANT]);
-
+        builder.ocean(...TWO_PLANTS).land(...TWO_PLANTS).land(PLANT, STEEL).land(PLANT).land(PLANT).land(PLANT);
         // y=2
-        is_ocean.push(true, false, false, false, false, false, false);
-        bonus.push([SpaceBonus.PLANT],
-            [SpaceBonus.PLANT],
-            [SpaceBonus.STEEL],
-            [SpaceBonus.STEEL],
-            [],
-            [SpaceBonus.PLANT, SpaceBonus.PLANT],
-            [SpaceBonus.PLANT, SpaceBonus.DRAW_CARD]);
-
+        builder.ocean(PLANT).land(PLANT).land(STEEL).land(STEEL).land().land(...TWO_PLANTS).land(PLANT, DRAW_CARD);
         // y=3
-        is_ocean.push(true, false, false, false, false, true, true, false);
-        bonus.push(
-            [SpaceBonus.PLANT],
-            [SpaceBonus.PLANT],
-            [SpaceBonus.STEEL],
-            [SpaceBonus.STEEL, SpaceBonus.STEEL],
-            [SpaceBonus.STEEL],
-            [SpaceBonus.PLANT],
-            [SpaceBonus.PLANT],
-            [SpaceBonus.PLANT],
-        );
+        builder.ocean(PLANT).land(PLANT).land(STEEL).land(STEEL, STEEL).land(STEEL).ocean(PLANT).ocean(PLANT).land(PLANT);
         // y=4
-        is_ocean.push(false, false, false, false, false, true, true, true, false);
-        bonus.push(
-            [SpaceBonus.DRAW_CARD],
-            [],
-            [],
-            [SpaceBonus.STEEL, SpaceBonus.STEEL],
-            [],
-            [SpaceBonus.DRAW_CARD],
-            [SpaceBonus.HEAT, SpaceBonus.HEAT, SpaceBonus.HEAT],
-            [],
-            [SpaceBonus.PLANT],
-        );
+        builder.land(DRAW_CARD).land().land().land(STEEL, STEEL).land().ocean(DRAW_CARD).ocean(HEAT, HEAT, HEAT).ocean().land(PLANT);
         // y=5
-        is_ocean.push(false, false, false, false, false, true, true, false);
-        bonus.push(
-            [SpaceBonus.TITANIUM],
-            [],
-            [SpaceBonus.STEEL],
-            [],
-            [],
-            [],
-            [SpaceBonus.STEEL],
-            [],
-        );
+        builder.land(TITANIUM).land().land(STEEL).land().land().ocean().ocean(STEEL).land();
         //y=6
-        is_ocean.push(true, false, false, false, false, false, false);
-        bonus.push([SpaceBonus.TITANIUM, SpaceBonus.TITANIUM],
-            [],
-            [],
-            [SpaceBonus.DRAW_CARD],
-            [],
-            [],
-            [SpaceBonus.TITANIUM]);
+        builder.ocean(TITANIUM, TITANIUM).land().land().land(DRAW_CARD).land().land().land(TITANIUM);
         //y=7
-        is_ocean.push(false, false, false, false, false, false);
-        bonus.push([SpaceBonus.STEEL],
-            [SpaceBonus.DRAW_CARD],
-            [SpaceBonus.HEAT, SpaceBonus.HEAT],
-            [SpaceBonus.HEAT, SpaceBonus.HEAT],
-            [SpaceBonus.TITANIUM],
-            [SpaceBonus.TITANIUM]);
+        builder.land(STEEL).land(DRAW_CARD).land(HEAT, HEAT).land(HEAT, HEAT).land(TITANIUM).land(TITANIUM);
         // y=8
-        is_ocean.push(false, false, 
-            false, false);
-        bonus.push(
-            [], [SpaceBonus.HEAT, SpaceBonus.HEAT], 
-            [SpaceBonus.HEAT, SpaceBonus.HEAT], []);
+        builder.land().land(HEAT, HEAT).land(SpaceBonus.OCEAN).doNotShuffleLastSpace().land(HEAT, HEAT).land();
         
         if (shuffleMapOption) {
-            this.shuffleArray(is_ocean);
-            this.shuffleArray(bonus);
+            builder.shuffle();
         }
 
-        let idx = 3, me_id = 0;
-        
-        let pos_x = 4, pos_y=0;
-        for (let i = 0; i < 5; ++i) {
-            this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
-            me_id++;
-        }
-
-        pos_x = 3; pos_y=1;
-
-        for (let i = 0; i < 6; ++i) {
-            this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
-            me_id++;
-        }
-        
-        pos_x = 2; pos_y = 2;
-        for (let i = 0; i < 7; ++i) {
-            this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
-            me_id++;
-        }
-
-        pos_x = 1; pos_y=3;
-
-        for (let i = 0; i < 8; ++i) {
-            this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
-            me_id++;
-        }
-
-        pos_x = 0; pos_y=4;
-
-        for (let i = 0; i < 9; ++i) {
-            this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
-            me_id++;
-        }
-
-        pos_x = 1; pos_y=5;
-
-        for (let i = 0; i < 8; ++i) {
-            this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
-            me_id++;
-        }
-
-        pos_x = 2; pos_y=6;
-
-        for (let i = 0; i < 7; ++i) {
-            this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
-            me_id++;
-        }
-
-        pos_x = 3; pos_y=7;
-
-        for (let i = 0; i < 6; ++i) {
-            this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
-            me_id++;
-        }
-
-        pos_x = 4; pos_y=8;
-
-        for (let i = 0; i < 2; ++i) {
-            this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
-            me_id++;
-        }
-        this.spaces.push(new Land(idx++, pos_x++, pos_y, [SpaceBonus.OCEAN]))
-        for (let i = 0; i < 2; ++i) {
-            this.spaces.push(this.newTile(idx++, pos_x++, pos_y, is_ocean[me_id], bonus[me_id]));
-            me_id++;
-        }
-
-        this.spaces.push(new BoardColony(SpaceName.STANFORD_TORUS));
+        this.spaces = builder.build();
     }
     
-    public getSpaces(spaceType: SpaceType, player: Player): Array<ISpace> {
-        // Check for special tile
-        if (player.canAfford(HELLAS_BONUS_OCEAN_COST)) return this.spaces.filter((space) => space.spaceType === spaceType);
+    private filterHellas(player: Player, spaces: Array<ISpace>) {
+        return player.canAfford(HELLAS_BONUS_OCEAN_COST) ? spaces : spaces.filter(space => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+    }
 
-        return super.getSpaces(spaceType, player).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+    public getSpaces(spaceType: SpaceType, player: Player): Array<ISpace> {
+        return this.filterHellas(player, super.getSpaces(spaceType, player));
     }
 
     public getAvailableSpacesForCity(player: Player): Array<ISpace> {
-        // Check for special tile
-        if (player.canAfford(HELLAS_BONUS_OCEAN_COST)) return super.getAvailableSpacesForCity(player);
-
-        return super.getAvailableSpacesForCity(player).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+        return this.filterHellas(player, super.getAvailableSpacesForCity(player));
     }
 
     public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
-        // Check for special tile
-        if (player.canAfford(HELLAS_BONUS_OCEAN_COST)) return super.getAvailableSpacesOnLand(player);
-
-        return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+        return this.filterHellas(player, super.getAvailableSpacesOnLand(player));
     }
 
     public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
-        // Check for special tile
-        if (player.canAfford(HELLAS_BONUS_OCEAN_COST)) return super.getAvailableSpacesForGreenery(player);
-
-        return super.getAvailableSpacesForGreenery(player).filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+        return this.filterHellas(player, super.getAvailableSpacesForGreenery(player));
     }
 
 }

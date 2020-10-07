@@ -1,20 +1,29 @@
-
 import Vue, { VNode } from "vue";
 import { PlayerInputFactory } from "./PlayerInputFactory";
 import { PlayerInputModel } from "../models/PlayerInputModel";
+import { Button } from "../components/common/Button";
 
 export const AndOptions = Vue.component("and-options", {
-    props: ["player", "players", "playerinput", "onsave", "showsave", "showtitle"],
+    props: [
+        "player",
+        "players",
+        "playerinput",
+        "onsave",
+        "showsave",
+        "showtitle",
+    ],
     data: function () {
-        return {
-        };
+        return {};
     },
     methods: {
         saveData: function () {
-            for (var i = 0; i < this.$data.childComponents.length; i++) {
-                const componentInstance = this.$data.childComponents[i].componentInstance;
+            for (let i = 0; i < this.$data.childComponents.length; i++) {
+                const componentInstance = this.$data.childComponents[i]
+                    .componentInstance;
                 if (componentInstance !== undefined) {
-                    if ((componentInstance as any).saveData instanceof Function) {
+                    if (
+                        (componentInstance as any).saveData instanceof Function
+                    ) {
                         (componentInstance as any).saveData();
                     }
                 }
@@ -24,43 +33,58 @@ export const AndOptions = Vue.component("and-options", {
                 res.push(this.$data.responded["" + i]);
             }
             this.onsave(res);
-        }
+        },
     },
-    render: function(createElement) {
-        const playerInput: PlayerInputModel = this.playerinput as PlayerInputModel;
-        
+    render: function (createElement) {
+        const playerInput: PlayerInputModel = this
+            .playerinput as PlayerInputModel;
+
         const children: Array<VNode> = [];
         this.$data.childComponents = [];
         this.$data.responded = [];
         if (this.showtitle) {
-            children.push(createElement("div", {"class": "wf-title"}, playerInput.title));
+            children.push(
+                createElement("div", { "class": "wf-title" }, playerInput.title)
+            );
         }
         if (playerInput.options !== undefined) {
             const options = playerInput.options;
             options.forEach((option, idx: number) => {
                 if (this.$data.responded[idx] === undefined) {
-                    children.push(new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, option, (out: Array<Array<string>>) => {
-                        this.$data.responded[idx] = out[0];
-                    }, false, true));
-                    this.$data.childComponents.push(children[children.length - 1]);
+                    children.push(
+                        new PlayerInputFactory().getPlayerInput(
+                            createElement,
+                            this.players,
+                            this.player,
+                            option,
+                            (out: Array<Array<string>>) => {
+                                this.$data.responded[idx] = out[0];
+                            },
+                            false,
+                            true
+                        )
+                    );
+                    this.$data.childComponents.push(
+                        children[children.length - 1]
+                    );
                 }
             });
         }
         if (this.showsave) {
-            const saveBtn = createElement(
-                "button", 
-                {
-                    domProps: { className: "btn btn-primary btn-submit" }, 
-                    on: { click: () => { this.saveData(); } } 
-                }, 
-                playerInput.buttonLabel
-            );
+            const saveBtn = createElement(Button, {
+                props: {
+                    title: playerInput.buttonLabel,
+                    type: "submit",
+                    size: "normal",
+                    onClick: () => {
+                        this.saveData();
+                    },
+                },
+            });
             children.push(
-                createElement("div", {"class": "wf-action"}, [saveBtn])
+                createElement("div", { "class": "wf-action" }, [saveBtn])
             );
         }
-        return createElement("div", {"class": "wf-options"}, children);
-    }
+        return createElement("div", { "class": "wf-options" }, children);
+    },
 });
-
-

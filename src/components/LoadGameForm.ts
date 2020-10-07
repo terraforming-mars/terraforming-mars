@@ -1,10 +1,14 @@
 
 import Vue from "vue";
+import { Button } from "../components/common/Button";
 
 export const LoadGameForm = Vue.component("load-game-form", {
+    components: {
+        "Button": Button
+    },
     data: function () {
         return {
-            gameId: '',
+            gameId: "",
         }
     },
     methods: {
@@ -43,7 +47,7 @@ export const LoadGameForm = Vue.component("load-game-form", {
                 <div class="container load-game-options">
                     <div>
                         <input class="form-input form-inline load-game-id" :placeholder="'Game Id'" v-model="gameId" />
-                        <button class="btn btn-lg btn-success" v-on:click="loadGame" v-i18n>Load Game</button> 
+                        <Button title="Load Game" size="big" type="success" :onClick="loadGame" /> 
                     </div>
                 </div>
             </div>

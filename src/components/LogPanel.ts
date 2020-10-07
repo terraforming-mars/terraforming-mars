@@ -131,6 +131,9 @@ export const LogPanel = Vue.component("log-panel", {
         hideMe: function () {
             this.cards = new Array<string>();
         },
+        getCrossHtml: function() {
+            return "<i class='icon icon-cross' /i>";
+        }
     },
     mounted: function () {
         fetch(`/api/game/logs?id=${this.id}&limit=50`)
@@ -154,7 +157,7 @@ export const LogPanel = Vue.component("log-panel", {
             </div>
         </div>
         <div class="card-panel" v-if="cards.length > 0">
-            <button class="btn btn-sm btn-error other_player_close" v-on:click="hideMe()"><i class="icon icon-cross"></i></button>
+            <Button size="big" type="close" :onClick="hideMe" align="right" />
             <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="index">
                 <card :card="{name: card}"></card>
             </div>

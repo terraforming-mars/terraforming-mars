@@ -12,6 +12,7 @@ export const mainAppSettings = {
     "data": {
         screen: "empty",
         playerkey: 0,
+        isServerSideRequestInProgress: false,
         componentsVisibility: {
             "millestones_list": true,
             "awards_list": true,

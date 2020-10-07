@@ -14,6 +14,7 @@ import { PlayerMixin } from "./PlayerMixin";
 import { Turmoil } from "./Turmoil";
 import { playerColorClass } from "../utils/utils";
 import { DynamicTitle } from "./common/DynamicTitle";
+import { Button } from "../components/common/Button";
 
 const dialogPolyfill = require("dialog-polyfill");
 
@@ -31,6 +32,7 @@ export const PlayerHome = Vue.component("player-home", {
         "colony": Colony,
         "log-panel": LogPanel,
         "turmoil": Turmoil,
+        "Button": Button,
     },
     mixins: [PlayerMixin],
     methods: {
@@ -88,7 +90,7 @@ export const PlayerHome = Vue.component("player-home", {
                     <form method="dialog">
                         <p class="title" v-i18n>Error with input</p>
                         <p id="dialog-default-message"></p>
-                        <menu class="dialog-menu">
+                        <menu class="dialog-menu centered-content">
                             <button class="btn btn-lg btn-primary">OK</button>
                         </menu>
                     </form>
@@ -163,14 +165,14 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <a name="cards" class="player_home_anchor"></a>
                 <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
-                    <dynamic-title title="Cards In Hand" :color="player.color" :withAdditional="true" :additional="player.cardsInHandNbr" />
+                    <dynamic-title title="Cards In Hand" :color="player.color" :withAdditional="true" :additional="player.cardsInHandNbr.toString()" />
                     <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
                         <card :card="card"></card>
                     </div>
                 </div>
 
                 <div class="player_home_block player_home_block--cards">
-                    <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true)" />
+                    <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true).toString()" />
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
                         <card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"></card>
                     </div>

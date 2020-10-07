@@ -7716,4 +7716,19 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
+[CardName.AEROSPACE_MISSION,`
+      <div class="title background-color-prelude">Aerospace Mission</div>
+      <div class="prelude-label">PRELUDE</div>
+      <div class="tag tag1 tag-space"></div>
+      <div class="prelude-icon preludeCard-icon"></div>
+      <div class="content">
+        <div style="margin: 20px 0">
+          <div class="triangle triangle-black"></div>
+          <div class="triangle triangle-white"></div>
+        </div>
+        <div class="description">
+          Place a colony. Gain 1 trade fleet.
+        </div>
+      </div>
+`],
 ]);

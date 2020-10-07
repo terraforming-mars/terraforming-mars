@@ -453,4 +453,5 @@ export enum CardName {
     VALUABLE_GASES = "Valuable Gases",
     VENUS_FIRST = "Venus First",
     RESEARCH_GRANT = "Research Grant",
+    AEROSPACE_MISSION = "Aerospace Mission",
 }

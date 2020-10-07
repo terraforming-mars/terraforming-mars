@@ -30,7 +30,7 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
 
             if (drawnCard) {
                 player.cardsInHand.push(drawnCard);
-                game.newLog("${0} drew ${1}", b => b.player(player).card(drawnCard));
+                game.log("${0} drew ${1}", b => b.player(player).card(drawnCard));
             }
         }
 

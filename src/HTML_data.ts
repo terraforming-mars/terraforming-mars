@@ -7681,7 +7681,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="content">
         <div class="resource money">10</div>
         <div class="resource card" style="margin-left:10px">
-          <div class="card-icon card-icon-venus">V</div>
+          <div class="card-icon tag-venus"></div>
         </div>
         &nbsp;: +4 <div class="resource floater"></div>
         <div class="description">
@@ -7698,8 +7698,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="tile venus-tile">V</div>
         <div class="tile venus-tile">V</div>
         <br>
-        <div class="resource card"><div class="card-icon card-icon-venus">V</div></div>
-        <div class="resource card"><div class="card-icon card-icon-venus">V</div></div>
+        <div class="resource card"><div class="card-icon tag-venus"></div></div>
+        <div class="resource card"><div class="card-icon tag-venus"></div></div>
         <div class="description">
           Raise Venus 2 steps. Draw 2 Venus cards from the deck.
         </div>

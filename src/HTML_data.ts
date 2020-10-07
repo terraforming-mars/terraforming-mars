@@ -7731,4 +7731,20 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
+[CardName.TRADE_ADVANCE,`
+      <div class="title background-color-prelude">Trade Advance</div>
+      <div class="prelude-label">PRELUDE</div>
+      <div class="tag tag1 tag-earth"></div>
+      <div class="prelude-icon preludeCard-icon"></div>
+      <div class="content">
+        <div class="resource money">2</div> &nbsp;(SOLO: <div class="resource money">10</div>)
+        <div style="margin: 10px 0 20px">
+          Trade all with <div class="triangle triangle-white"></div> : <span style="font-family:Prototype;font-size:24px;">+1</span>
+        </div>
+        <div class="description">
+          Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each trade.
+          <br><br>Gain 2 MC (SOLO: Gain 10 MC).
+        </div>
+      </div>
+`],
 ]);

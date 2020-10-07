@@ -472,6 +472,7 @@ import { ValuableGases } from "./cards/community/ValuableGases";
 import { VenusFirst } from "./cards/community/VenusFirst";
 import { ResearchGrant } from "./cards/community/ResearchGrant";
 import { AerospaceMission } from "./cards/community/AerospaceMission";
+import { TradeAdvance } from "./cards/community/TradeAdvance";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -527,6 +528,7 @@ export const ALL_COMMUNITY_VENUS_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>
 
 export const ALL_COMMUNITY_COLONY_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.AEROSPACE_MISSION, factory: AerospaceMission },
+    { cardName: CardName.TRADE_ADVANCE, factory: TradeAdvance },
 ];
 
 export const ALL_CORPORATION_CARDS: Array<ICardFactory<CorporationCard>> = [

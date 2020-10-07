@@ -5124,26 +5124,16 @@ export const HTML_DATA: Map<string, string> =
         <div class="corporationEffectBoxLabel">EFFECT</div>
         X<div class="resource heat"></div> :
         <div class="resource money">X</div>
-        <div class="description" style="text-align:center;margin-top:0px;">
+        <div class="description helion-effect">
           (Effect: Your may use heat as MC. You may not use MC as heat.)
         </div>
       </div>
-      <div style="font-size:34px;
-                      width:140px;
-                      text-align: center;
-                      color: #020202;
-                      margin-top:5px;
-                      border:2px solid black;
-                      margin-left:8px;
-                      background: #e6e600;
-                      box-shadow: 6px 6px 6px grey;
-                      border-radius:2px;">
-                  helion</div><br>
-      <div class="production-box production-box-size3" style="margin-left:20px;margin-top:-50px;">
+      <div class="helion">helion</div><br>
+      <div class="production-box production-box-size3 helion-production">
         <div class="production heat"></div><div class="production heat"></div><div class="production heat"></div>
       </div>
-        <div class="resource money" style="margin-left:20px;">42</div>
-      <div class="description" style="text-align:center;">
+        <div class="resource money helion-mc">42</div>
+      <div class="description helion-resource-description">
         (You start with 3 heat production and 42 MC.)
       </div>
     </div>
@@ -5480,8 +5470,8 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div><br>
         <div class="resource money" style="margin-left:30px;">42</div>
-        <div class="resource card" style="margin-left:15px;"><div class="card-icon card-icon-floater">&#x2601;</div></div>
-        <div class="resource card"><div class="card-icon card-icon-floater">&#x2601;</div></div>
+        <div class="resource card"><div class="card-icon-box floater"></div></div>
+        <div class="resource card"><div class="card-icon-box floater"></div></div>
         <div class="description" style="text-align:center;margin-top:-3px;font-size:10px;">
           (You start with 42 MC. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take those 2 cards into hand and discard the rest.)
         </div>
@@ -5494,9 +5484,9 @@ export const HTML_DATA: Map<string, string> =
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
           <div class="production-box">
-            <div class="production" style="background:white;">?</div>
+          <div class="production wild"></div>
           </div> :
-          <div class="resource" style="background:white;">?</div>
+          <div class="resource wild"></div>
           <div class="description" style="text-align:center;margin-top:0px;">
             (Effect: For each step you increase the production of a resource, including this, you also gain that resource.)
           </div>
@@ -5533,9 +5523,9 @@ export const HTML_DATA: Map<string, string> =
                     MORNING STAR INC.
                 </div><br>
         <div class="resource money" style="margin-left:10px;">50</div>
-        <div class="resource card" style="margin-left:15px;"><div class="card-icon card-icon-venus">V</div></div>
-        <div class="resource card"><div class="card-icon card-icon-venus">V</div></div>
-        <div class="resource card"><div class="card-icon card-icon-venus">V</div></div>
+        <div class="resource card"><div class="card-icon tag-venus"></div></div>
+        <div class="resource card"><div class="card-icon tag-venus"></div></div>
+        <div class="resource card"><div class="card-icon tag-venus"></div></div>
         <div class="description" style="text-align:center;margin-top:-4px;">
           (You start with 50 MC. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.)
         </div>
@@ -5636,7 +5626,7 @@ export const HTML_DATA: Map<string, string> =
           <div class="resource money">4</div>
           <div class="red-arrow"></div>
           <div class="production-box">
-            <div class="production" style="background:white;">?</div>
+          <div class="production wild"></div>
           </div>
           <div class="description" style="text-align:center;margin-top:0px;">
             (Action: Spend 4 MC to increase (one of) your LOWEST PRODUCTION 1 step.)
@@ -5752,9 +5742,9 @@ export const HTML_DATA: Map<string, string> =
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
           <div class="production-box" style="width:50px;margin-left:-2px">
-            -<div class="production red-outline" style="background:white;">?</div>
+          -<div class="resource wild"></div>
           </div>
-          OR - <div class="resource red-outline" style="background:white;">?</div>:
+          OR - <div class="resource wild red-outline"></div>:
           PAY<div class="resource money" style="margin-right:-2px">3</div>
           <div class="description" style="text-align:center;margin-top:-2px;">
             (Effect: When a player causes another player to decrease production or lose resources, pay 3MC to the victim,
@@ -5868,10 +5858,10 @@ export const HTML_DATA: Map<string, string> =
   <div class="corporationEffectBox">
     <div class="corporationEffectBoxLabel">ACTION</div>
     <div class="production-box">
-      <div class="production" style="background:white;">?</div>
+      <div class="resource wild"></div>
     </div>
     <div class="red-arrow"></div>
-    4<div class="resource" style="background:white;">?</div>
+    4<div class="resource wild"></div>
     <div class="description" style="text-align:center;margin-top:0px;">
       (Action: Decrease any production to gain 4 resources of that kind.)
     </div>
@@ -5966,7 +5956,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
           <div class="tile empty-tile-small red-outline"></div><div class="tile empty-tile-small"></div>
-          : <div class="resource" style="background:white;">?</div>
+          : <div class="resource wild"></div>
           <div class="description" style="text-align:center;margin-top:0px;">
             (Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice (regardless of who just placed a tile).)
           </div>
@@ -6020,7 +6010,7 @@ export const HTML_DATA: Map<string, string> =
                     <div STYLE="font-size:10px">TACTICAL GENOMICS</div>
                 </div>
                 <div class="resource money" style="margin-left:60px;margin-right:25px;">44</div>
-                <div class="resource card" style="margin-left:20px;"><div class="card-icon card-icon-microbe">&#x2042;</div></div>
+        <div class="resource card"><div class="card-icon microbe"></div></div>
         <div class="description" style="margin-top:-2px;margin-left:-7px;margin-right:-7px;text-align:center;">(You start with 44 MC. As your first action, reveal cards until you have revealed a microbe tag. Take that card into hand and discard the rest.)</div>
       </div>
 `],
@@ -6033,7 +6023,7 @@ export const HTML_DATA: Map<string, string> =
                     <div class="corporationEffectBoxLabel" style="margin-bottom:4px;">EFFECT</div>
                     <div class="nowrap">
                       <div class="resource ocean-resource red-outline"></div>*: <div class="production-box"><div class="production money">1</div></div>
-                      <div class="resource" style="height:29px;width:30px;background:#eee"></div>
+                      <div class="tile empty-tile-small"></div>
                       <div class="resource ocean-resource" style="margin-left:-3px;"></div>:<div class="resource money">3</div>
                     </div>
                     <div class="description " style="text-align:center;margin-top:0px; ">
@@ -6086,9 +6076,8 @@ export const HTML_DATA: Map<string, string> =
                 <div class="red-arrow"></div><div class="production-box">
                   <div class="production energy"></div>
                 </div> * OR
-                <div class="resource money">3</div><div class="red-arrow"></div><div class="resource card">
-                  <div class="card-icon card-icon-building">&#x2617;</div>
-                </div>
+                <div class="resource money">3</div><div class="red-arrow"></div>
+                <div class="resource card"><div class="card-icon tag-building"></div></div>
               </div>
 
               <div class="description">
@@ -6134,7 +6123,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="contentCorporation">
         <div class="corporationEffectBox hover-hide-res" style="height:165px;margin-top:127px">
           <div class="corporationEffectBoxLabel" >ACTION</div>
-          <div class="red-arrow"></div> <div class="asteroid resource"></div> * / <div class="resource " style="background:white;">?</div> OR <br>
+          <div class="red-arrow"></div> <div class="asteroid resource"></div> * / <div class="resource wild"></div> OR <br>
           <div class="asteroid resource"></div><div class="red-arrow"></div> 3 <div class="resource titanium"></div>
           <div class="description" style="text-align:center;">
             (Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.)<br>
@@ -6783,9 +6772,7 @@ export const HTML_DATA: Map<string, string> =
 
       <div class="card-effect-icons">
         <div class="resource money startmc">54</div>
-        <div class="resource card">
-          <div class="card-icon tag-science" style="background-position:0"></div>
-        </div>
+        <div class="resource card"><div class="card-icon tag-science"></div></div>
       </div>
 
       <div class="description card-effect-text">

@@ -16,12 +16,12 @@ describe("MagneticFieldGeneratorsPromo", function () {
     });
 
     it("Cannot play without enough energy production", function () {
-        player.setProduction(Resources.ENERGY,3);
+        player.addProduction(Resources.ENERGY,3);
         expect(card.canPlay(player, game)).to.eq(false);
     });
 
     it("Should play", function () {
-        player.setProduction(Resources.ENERGY,4);
+        player.addProduction(Resources.ENERGY,4);
         expect(card.canPlay(player, game)).to.eq(true);
 
         const action = card.play(player, game);

@@ -26,7 +26,7 @@ describe("VenusMagnetizer", function () {
     });
 
     it("Should act", function () {
-        player.setProduction(Resources.ENERGY,2);
+        player.addProduction(Resources.ENERGY,2);
         player.playedCards.push(card);
         
         card.action(player,game);

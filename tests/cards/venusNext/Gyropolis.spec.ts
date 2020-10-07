@@ -18,7 +18,7 @@ describe("Gyropolis", function () {
         const card2 = new LunaGovernor();
 
         player.playedCards.push(card1, card2);
-        player.setProduction(Resources.ENERGY,2);
+        player.addProduction(Resources.ENERGY,2);
         expect(card.canPlay(player, game)).to.eq(true);
         const action = card.play(player, game) as SelectSpace;
         expect(action).not.to.eq(undefined);

@@ -325,9 +325,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.log("The id of this game is ${0}", b => b.string(this.id));
       }      
 
-      this.log("Generation ${0}", b =>
-        b.forNewGeneration()
-        .number(this.generation));
+      this.log("Generation ${0}", b => b.forNewGeneration().number(this.generation));
 
       // Initial Draft
       if (gameOptions.initialDraftVariant) {

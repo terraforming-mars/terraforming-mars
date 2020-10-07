@@ -34,7 +34,7 @@ export class ProtectedValley implements IProjectCard {
             "Select space reserved for ocean to place greenery tile", 
             game.board.getAvailableSpacesForOcean(player), 
             (space: ISpace) => {
-                player.setProduction(Resources.MEGACREDITS,2);
+                player.addProduction(Resources.MEGACREDITS,2);
                 return game.addGreenery(player, space.id, SpaceType.OCEAN);
             }
         );

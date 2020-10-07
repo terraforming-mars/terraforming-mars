@@ -11,7 +11,7 @@ export class Aphrodite implements CorporationCard {
     public startingMegaCredits: number = 47;
 
     public play(player: Player) {
-        player.setProduction(Resources.PLANTS);
+        player.addProduction(Resources.PLANTS);
         return undefined;
     }
 }

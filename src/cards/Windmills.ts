@@ -17,7 +17,7 @@ export class Windmills implements IProjectCard {
         return game.getOxygenLevel() >= 7 - player.getRequirementsBonus(game);
     }
     public play(player: Player): PlayerInput | undefined {
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         return undefined;
     }
     public getVictoryPoints() {

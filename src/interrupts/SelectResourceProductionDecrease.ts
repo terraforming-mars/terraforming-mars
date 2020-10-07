@@ -21,7 +21,7 @@ export class SelectResourceProductionDecrease implements PlayerInterrupt {
             this.title,
             "Decrease",
             (found: Player) => {
-              found.setProduction(this.resource, -this.count, game, player);
+              found.addProduction(this.resource, -this.count, game, player);
               return undefined;
             }
         );

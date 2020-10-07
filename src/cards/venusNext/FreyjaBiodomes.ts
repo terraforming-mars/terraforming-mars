@@ -34,8 +34,8 @@ export class FreyjaBiodomes implements IProjectCard {
                 cards,
                 (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], 2);
-                    player.setProduction(Resources.ENERGY,-1);
-                    player.setProduction(Resources.MEGACREDITS,2);
+                    player.addProduction(Resources.ENERGY,-1);
+                    player.addProduction(Resources.MEGACREDITS,2);
                     LogHelper.logAddResource(game, player, foundCards[0], 2);
                     return undefined;
                 }
@@ -47,8 +47,8 @@ export class FreyjaBiodomes implements IProjectCard {
             LogHelper.logAddResource(game, player, cards[0], 2);
         }
         
-        player.setProduction(Resources.ENERGY,-1);
-        player.setProduction(Resources.MEGACREDITS,2);
+        player.addProduction(Resources.ENERGY,-1);
+        player.addProduction(Resources.MEGACREDITS,2);
         return undefined;
     }    
 

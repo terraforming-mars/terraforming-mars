@@ -16,7 +16,7 @@ export class NoctisFarming implements IProjectCard {
         return game.getTemperature() >= -20 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player) {
-        player.setProduction(Resources.MEGACREDITS);
+        player.addProduction(Resources.MEGACREDITS);
         player.plants += 2;
         return undefined;
     }

@@ -26,7 +26,7 @@ export class RadChemFactory implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        player.setProduction(Resources.ENERGY,-1);
+        player.addProduction(Resources.ENERGY,-1);
         player.increaseTerraformRatingSteps(2, game);
         return undefined;
     }

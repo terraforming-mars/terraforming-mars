@@ -19,7 +19,7 @@ export class RadSuits implements IProjectCard {
         if (game.getCitiesInPlay() < 2) {
             throw "Must have 2 cities in play";
         }
-        player.setProduction(Resources.MEGACREDITS);
+        player.addProduction(Resources.MEGACREDITS);
         return undefined;
     }
     public getVictoryPoints() {

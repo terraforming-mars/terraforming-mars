@@ -19,8 +19,8 @@ export class LightningHarvest implements IProjectCard {
         if (player.getTagCount(Tags.SCIENCE) < 3) {
             throw "Requires 3 science tags";
         }
-        player.setProduction(Resources.ENERGY);
-        player.setProduction(Resources.MEGACREDITS);
+        player.addProduction(Resources.ENERGY);
+        player.addProduction(Resources.MEGACREDITS);
         return undefined;
     }
     public getVictoryPoints() {

@@ -16,8 +16,8 @@ export class Farming implements IProjectCard {
     return game.getTemperature() >= 4 - (2 * player.getRequirementsBonus(game));
   }
   public play(player: Player) {
-    player.setProduction(Resources.MEGACREDITS,2);
-    player.setProduction(Resources.PLANTS,2);
+    player.addProduction(Resources.MEGACREDITS,2);
+    player.addProduction(Resources.PLANTS,2);
     player.plants += 2;
     return undefined;
   }

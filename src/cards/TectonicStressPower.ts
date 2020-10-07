@@ -18,7 +18,7 @@ export class TectonicStressPower implements IProjectCard {
         if (player.getTagCount(Tags.SCIENCE) < 2) {
             throw "Requires 2 science tags";
         }
-        player.setProduction(Resources.ENERGY,3);
+        player.addProduction(Resources.ENERGY,3);
         return undefined;
     }
     public getVictoryPoints() {

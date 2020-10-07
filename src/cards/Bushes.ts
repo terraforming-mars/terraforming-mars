@@ -18,7 +18,7 @@ export class Bushes implements IProjectCard {
       );
     }
     public play(player: Player) {
-      player.setProduction(Resources.PLANTS,2);
+      player.addProduction(Resources.PLANTS,2);
       player.plants += 2;
       return undefined;
     }

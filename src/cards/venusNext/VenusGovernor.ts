@@ -14,7 +14,7 @@ export class VenusGovernor implements IProjectCard {
         return player.getTagCount(Tags.VENUS) >= 2 ;
       }
     public play(player: Player) {
-        player.setProduction(Resources.MEGACREDITS,2);
+        player.addProduction(Resources.MEGACREDITS,2);
         return undefined;
     }
 }

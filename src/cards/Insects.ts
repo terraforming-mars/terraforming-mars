@@ -16,7 +16,7 @@ export class Insects implements IProjectCard {
         return game.getOxygenLevel() >= 6 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
-        player.setProduction(Resources.PLANTS, player.getTagCount(Tags.PLANT));
+        player.addProduction(Resources.PLANTS, player.getTagCount(Tags.PLANT));
         return undefined;
     }
 }

@@ -16,8 +16,8 @@ export class TropicalResort implements IProjectCard {
         return player.getProduction(Resources.HEAT) >= 2;
     }
     public play(player: Player) {
-        player.setProduction(Resources.HEAT,-2);
-        player.setProduction(Resources.MEGACREDITS,3);
+        player.addProduction(Resources.HEAT,-2);
+        player.addProduction(Resources.MEGACREDITS,3);
         return undefined;
     }
     public getVictoryPoints() {

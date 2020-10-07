@@ -38,7 +38,7 @@ export class EnergyMarket implements IProjectCard {
     }
 
     private getMegacreditsOption(player: Player) {
-        player.setProduction(Resources.ENERGY, -1);
+        player.addProduction(Resources.ENERGY, -1);
         player.setResource(Resources.MEGACREDITS, 8);
         return undefined;
     }

@@ -16,7 +16,7 @@ export class Heather implements IProjectCard {
         return game.getTemperature() >= -14 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player) {
-        player.setProduction(Resources.PLANTS);
+        player.addProduction(Resources.PLANTS);
         player.plants++;
         return undefined;
     }

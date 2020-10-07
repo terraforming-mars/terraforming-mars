@@ -38,8 +38,8 @@ export class CommercialDistrict implements IProjectCard {
               tileType: TileType.COMMERCIAL_DISTRICT,
               card: this.name
             });
-            player.setProduction(Resources.ENERGY,-1);
-            player.setProduction(Resources.MEGACREDITS,4);
+            player.addProduction(Resources.ENERGY,-1);
+            player.addProduction(Resources.MEGACREDITS,4);
             return undefined;
           }
       );

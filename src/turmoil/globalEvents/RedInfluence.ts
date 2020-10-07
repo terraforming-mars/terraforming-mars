@@ -16,7 +16,7 @@ export class RedInfluence implements IGlobalEvent {
             if (amount > 0) {
                 player.setResource(Resources.MEGACREDITS, amount * -3, game, undefined, true);
             }
-            player.setProduction(Resources.MEGACREDITS, turmoil.getPlayerInfluence(player), game, undefined, true);
+            player.addProduction(Resources.MEGACREDITS, turmoil.getPlayerInfluence(player), game, undefined, true);
         });    
     }
 }    

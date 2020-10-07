@@ -16,7 +16,7 @@ export class Lichen implements IProjectCard {
         return game.getTemperature() >= -24 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player) {
-        player.setProduction(Resources.PLANTS);
+        player.addProduction(Resources.PLANTS);
         return undefined;
     }
 }

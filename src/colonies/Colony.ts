@@ -88,7 +88,7 @@ export abstract class Colony  {
         // Poseidon hook
         let poseidon = game.getPlayers().filter(player => player.isCorporation(CorporationName.POSEIDON));
         if (poseidon.length > 0) {
-          poseidon[0].setProduction(Resources.MEGACREDITS);
+          poseidon[0].addProduction(Resources.MEGACREDITS);
         }
     }    
 }    

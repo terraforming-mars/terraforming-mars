@@ -5,6 +5,8 @@ import { BoardSpace } from "./BoardSpace";
 import { SpaceModel } from "../models/SpaceModel";
 import { SpaceType } from "../SpaceType";
 import { PreferencesManager } from "./PreferencesManager";
+// @ts-ignore
+import { $t } from "../directives/i18n";
 
 class GlobalParamLevel {
     constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -110,14 +112,17 @@ export const Board = Vue.component("board", {
             const oceans_count = this.oceans_count || 0;
             const leftover = constants.MAX_OCEAN_TILES - oceans_count;
             if (leftover === 0) {
-                return `<img width="26" src="/assets/checkmark.png" alt="completed">`
+                return `<img width="26" src="/assets/misc/circle-checkmark.png" class="board-ocean-checkmark" :alt="$t('Completed!')">`
             } else {
                 return `${oceans_count}/${constants.MAX_OCEAN_TILES}`
             }
+        },
+        getGameBoardClassName: function():string {
+            return this.venusNextExtension ? "board-cont board-with-venus" : "board-cont board-without-venus";
         }
     },
     template: `
-    <div class="board-cont">
+    <div :class="getGameBoardClassName()">
         <div class="board-outer-spaces">
             <board-space :space="getSpaceById('01')" text="Ganymede Colony"></board-space>
             <board-space :space="getSpaceById('02')" text="Phobos Space Haven"></board-space>

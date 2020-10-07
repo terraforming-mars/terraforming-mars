@@ -1,7 +1,8 @@
 'use strict'
 
 module.exports = {
-  mode: 'development',
+  devtool: "source-map",
+  mode: 'production',
   entry: [
     './dist/script.js'
   ],
@@ -9,5 +10,8 @@ module.exports = {
     alias: {
         'vue$': 'vue/dist/vue.esm.js' // 'vue/dist/vue.common.js' for webpack 1
     }
+  },
+  stats: {
+    warnings: false
   }
 }

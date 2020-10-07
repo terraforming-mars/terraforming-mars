@@ -45,4 +45,8 @@ describe("Virus", function () {
         expect(game.interrupts.length).to.eq(0);
         expect(player.plants).to.eq(5);
     });
+
+    it("Should play", function () {
+        expect(card.canPlay()).to.eq(true);
+    });
 });

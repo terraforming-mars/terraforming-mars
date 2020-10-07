@@ -32,10 +32,10 @@ describe("MetallicAsteroid", function () {
         // exposing more from the source method.
         expect(game.interrupts).is.length(1);
 
-        const citySpace = game.board.getAvailableSpacesForCity(player)[0];
-        action.cb(citySpace);
-        expect(citySpace.player).to.eq(player);
-        expect(citySpace.tile!.tileType).to.eq(TileType.METALLIC_ASTEROID);
-        expect(citySpace.adjacency).to.deep.eq({ bonus: [SpaceBonus.STEEL] });
+        const space = game.board.getAvailableSpacesOnLand(player)[0];
+        action.cb(space);
+        expect(space.player).to.eq(player);
+        expect(space.tile!.tileType).to.eq(TileType.METALLIC_ASTEROID);
+        expect(space.adjacency).to.deep.eq({ bonus: [SpaceBonus.STEEL] });
     });
 });

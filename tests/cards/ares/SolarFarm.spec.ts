@@ -40,7 +40,7 @@ describe("SolarFarm", function () {
         expect(action instanceof SelectSpace).to.eq(true);
 
         expect(player.getProduction(Resources.ENERGY)).eq(0);
-        const citySpace = game.board.getAvailableSpacesOnLand(player)[0];
+        const citySpace = game.board.getAvailableSpacesOnLand(player).filter(s => s.tile?.hazard !== true)[0];
         action.cb(citySpace);
         expect(citySpace.player).to.eq(player);
         expect(citySpace.tile!.tileType).to.eq(TileType.SOLAR_FARM);

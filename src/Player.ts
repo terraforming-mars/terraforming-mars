@@ -1305,6 +1305,32 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
                 });
             }
         }
+
+        if (selectedCard.name === CardName.VALUABLE_GASES) {
+            const playableCards = this.cardsInHand.filter((card) => card.resourceType === ResourceType.FLOATER);
+            
+            if (playableCards.length > 0) {
+                game.interrupts.push({
+                    player: this,
+                    playerInput: new SelectCard(
+                      "Select floater card to play and add 5 floaters",
+                      "Save",
+                      playableCards,
+                      (cards: Array<IProjectCard>) => {
+                        const canUseSteel = cards[0].tags.indexOf(Tags.STEEL) !== -1;
+                        const canUseTitanium = cards[0].tags.indexOf(Tags.SPACE) !== -1;
+                        const cardCost = this.getCardCost(game, cards[0]);
+
+                        game.addSelectHowToPayInterrupt(this, cardCost, canUseSteel, canUseTitanium, "Select how to pay for card");
+                        this.playCard(game, cards[0]);
+                        this.addResourceTo(cards[0], 5);
+                        return undefined;
+                      }
+                    )
+                });
+            }
+        }
+
         return undefined;
     }
 

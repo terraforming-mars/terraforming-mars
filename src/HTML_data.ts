@@ -7672,4 +7672,19 @@ export const HTML_DATA: Map<string, string> =
         (You start with 120 MC. Lower your TR 7 steps.)
       </div>
 `],
+[CardName.VALUABLE_GASES,`
+      <div class="title background-color-prelude">Valuable Gases</div>
+      <div class="prelude-label">PRELUDE</div>
+      <div class="tag tag1 tag-venus"></div>
+      <div class="tag tag2 tag-jovian"></div>
+      <div class="prelude-icon preludeCard-icon"></div>
+      <div class="content">
+        <div class="resource money">10</div>
+        <div class="resource card" style="margin-left:10px"><div class="card-icon card-icon-floater">&#x2601;</div></div>
+        &nbsp;: +5 <div class="resource floater"></div>
+        <div class="description">
+          Gain 10 MC. Play a card that collects floaters from hand and add 5 floaters to it.
+        </div>
+      </div>
+`],
 ]);

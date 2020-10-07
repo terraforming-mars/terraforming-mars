@@ -176,6 +176,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         gameOptions.coloniesExtension,
         gameOptions.promoCardsOption,
         gameOptions.turmoilExtension,
+        gameOptions.communityCardsOption,
         gameOptions.cardsBlackList
       );
 
@@ -1780,7 +1781,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       const o = Object.assign(this, d);
 
       // Rebuild dealer object to be sure that we will have cards in the same order
-      const dealer = new Dealer(this.gameOptions.corporateEra, this.gameOptions.preludeExtension, this.gameOptions.venusNextExtension, this.gameOptions.coloniesExtension, this.gameOptions.promoCardsOption, this.gameOptions.turmoilExtension);
+      const dealer = new Dealer(this.gameOptions.corporateEra, this.gameOptions.preludeExtension, this.gameOptions.venusNextExtension, this.gameOptions.coloniesExtension, this.gameOptions.promoCardsOption, this.gameOptions.turmoilExtension, this.gameOptions.communityCardsOption);
       this.dealer = dealer.loadFromJSON(d.dealer);
 
       // Rebuild every player objects

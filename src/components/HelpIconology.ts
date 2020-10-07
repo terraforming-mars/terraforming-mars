@@ -11,28 +11,28 @@ export const HelpIconology = Vue.component("help-iconology", {
     template: `
         <div class="help-iconology-container">
             <div class="row" style="display: flex;">
-                <div class="column" style="flex: 25%; padding: 10px;">
+                <div class="column">
                     <section class="help-iconology-tags">
                     <h2>Card Tags</h2>
-                        <div class="resource-tag tag-building"></div> : Building tag<br>
-                        <div class="resource-tag tag-space"></div> : Space tag<br>
-                        <div class="resource-tag tag-science"></div> : Science tag<br>
-                        <div class="resource-tag tag-power"></div> : Power tag<br>
-                        <div class="resource-tag tag-earth"></div> : Earth tag<br>
-                        <div class="resource-tag tag-jovian"></div> : Jovian tag<br>
-                        <div class="resource-tag tag-venus"></div> : Venus tag<br>
-                        <div class="resource-tag tag-plant"></div> : Plant tag<br>
-                        <div class="resource-tag tag-microbe"></div> : Microbe tag<br>
-                        <div class="resource-tag tag-animal"></div> : Animal tag<br>
-                        <div class="resource-tag tag-city"></div> : City tag<br>
-                        <div class="resource-tag tag-wild"></div> : Wild tag<br>
-                        <div class="resource-tag tag-event"></div> : Event tag<br>
+                        <div class="resource-tag tag-building"></div> : Building<br>
+                        <div class="resource-tag tag-space"></div> : Space<br>
+                        <div class="resource-tag tag-science"></div> : Science<br>
+                        <div class="resource-tag tag-power"></div> : Power<br>
+                        <div class="resource-tag tag-earth"></div> : Earth<br>
+                        <div class="resource-tag tag-jovian"></div> : Jovian<br>
+                        <div class="resource-tag tag-venus"></div> : Venus<br>
+                        <div class="resource-tag tag-plant"></div> : Plant<br>
+                        <div class="resource-tag tag-microbe"></div> : Microbe<br>
+                        <div class="resource-tag tag-animal"></div> : Animal<br>
+                        <div class="resource-tag tag-city"></div> : City<br>
+                        <div class="resource-tag tag-wild"></div> : Wild<br>
+                        <div class="resource-tag tag-event"></div> : Event<br>
                     </section>
                 </div>
-                <div class="column" style="flex: 25%; padding: 10px;">                        
+                <div class="column">                        
                     <section class="help-iconology-resources">
                     <h2>Resources</h2>
-                        <div class="resource money"></div> : Mega credits<br>
+                        <div class="resource money"></div> : Megacredits<br>
                         <div class="resource steel"></div> : Steel<br>
                         <div class="resource titanium"></div> : Titanium<br>
                         <div class="resource plant"></div> : Plant<br>
@@ -50,7 +50,7 @@ export const HelpIconology = Vue.component("help-iconology", {
                         <div class="tile fleet"></div> : Trade Fleet<br>
                     </section>
                 </div>
-                <div class="column" style="flex: 25%; padding: 10px;">                        
+                <div class="column">                        
                     <section class="help-iconology-tiles">
                     <h2>Tiles</h2>
                         <div class="tile greenery-no-O2-tile"></div> : Greenery<br>
@@ -59,13 +59,13 @@ export const HelpIconology = Vue.component("help-iconology", {
                         <div class="tile special-tile"></div> : Special<br>
                     </section>
                 </div>
-                <div class="column" style="flex: 25%; padding: 10px;">                        
+                <div class="column">                        
                     <section class="help-iconology-parameters">
                     <h2>Global Parameters</h2>
-                        <div class="tile temperature-tile"></div> : Temperature<br>
-                        <div class="tile oxygen-tile"></div> : Oxygen<br>
-                        <div class="tile ocean-tile"></div> : Ocean<br>
-                        <div class="tile venus-tile"></div> : Venus<br>
+                        <div class="help-iconology-param-box"><div class="tile temperature-tile"></div></div> : Temperature<br>
+                        <div class="help-iconology-param-box"><div class="tile oxygen-tile"></div></div> : Oxygen<br>
+                        <div class="help-iconology-param-box"><div class="tile ocean-tile"></div></div> : Ocean<br>
+                        <div class="help-iconology-param-box"><div class="tile venus-tile"></div></div> : Venus<br>
                     </section>
                 </div>
             </div>

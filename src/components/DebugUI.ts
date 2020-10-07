@@ -13,7 +13,7 @@ export const DebugUI = Vue.component("debug-ui", {
         Card,
     },
     methods: {
-        getAllCards: function () {
+        getAllProjectCards: function () {
             const allItems: Array<CardName> = [
                 ...PRELUDE_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
                 ...VENUS_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
@@ -29,8 +29,22 @@ export const DebugUI = Vue.component("debug-ui", {
     template: `
         <div class="debug-ui-container">
             <section class="debug-ui-cards-list">
-                <h2>Cards list</h2>
-                <div style="display: inline-block; vertical-align: top;" v-for="card in getAllCards()">
+                <h2>Project Cards</h2>
+                <div style="display: inline-block; vertical-align: top;" v-for="card in getAllProjectCards()">
+                    <Card :card="{'name': card}" />
+                </div>
+            </section>
+            <br>
+            <section class="debug-ui-cards-list">
+                <h2>Corporations</h2>
+                <div style="display: inline-block; vertical-align: top;" v-for="card in getAllCorporationCards()">
+                    <Card :card="{'name': card}" />
+                </div>
+            </section>
+            <br>
+            <section class="debug-ui-cards-list">
+                <h2>Preludes</h2>
+                <div style="display: inline-block; vertical-align: top;" v-for="card in getAllPreludeCards()">
                     <Card :card="{'name': card}" />
                 </div>
             </section>

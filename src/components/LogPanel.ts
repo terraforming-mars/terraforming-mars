@@ -10,10 +10,11 @@ import { $t } from "../directives/i18n";
 import { getProjectCardByName } from "./../Dealer";
 
 export const LogPanel = Vue.component("log-panel", {
-    props: ["messages", "players"],
+    props: ["id", "players"],
     data: function () {
         return {
             cards: new Array<string>(),
+            messages: new Array<LogMessage>()
         }
     },
     components: {
@@ -132,7 +133,16 @@ export const LogPanel = Vue.component("log-panel", {
         },
     },
     mounted: function () {
-        this.$nextTick(this.scrollToEnd);
+        fetch(`/api/game/logs?id=${this.id}&limit=50`)
+            .then((response) => response.json())
+            .then((messages) => {
+                this.messages.splice(0, this.messages.length);
+                this.messages.push(...messages);
+                this.$nextTick(this.scrollToEnd);
+            })
+            .catch((error) => {
+                console.error("error updating messages", error);
+            });
     },
     template: `
     <div>

@@ -1669,9 +1669,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
       this.gameLog.push(builder.logMessage());
       this.gameAge++;
-      if (this.gameLog.length > 50 ) {
-        (this.gameLog.shift());
-      }
     }
 
     public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {

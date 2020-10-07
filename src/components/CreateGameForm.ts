@@ -392,7 +392,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <div class="expansion-label">Fan-made</div>
                             <label class="form-switch">
                                 <input type="checkbox" v-model="communityCardsOption">
-                                <i class="form-icon"></i> <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community-corps" class="tooltip" target="_blank">&#9432;</a>
+                                <i class="form-icon"></i> <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community" class="tooltip" target="_blank">&#9432;</a>
                             </label>
                         </div>
 
@@ -561,6 +561,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             <colonies-filter
                 v-if="showColoniesList"
                 v-on:colonies-list-changed="updateCustomColoniesList"
+                v-bind:communityCardsOption="communityCardsOption"
             ></colonies-filter>
 
             <cards-filter

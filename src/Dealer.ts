@@ -473,6 +473,8 @@ import { VenusFirst } from "./cards/community/VenusFirst";
 import { ResearchGrant } from "./cards/community/ResearchGrant";
 import { AerospaceMission } from "./cards/community/AerospaceMission";
 import { TradeAdvance } from "./cards/community/TradeAdvance";
+import { PoliticalUprising } from "./cards/community/PoliticalUprising";
+import { ByElection } from "./cards/community/ByElection";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -529,6 +531,11 @@ export const ALL_COMMUNITY_VENUS_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>
 export const ALL_COMMUNITY_COLONY_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.AEROSPACE_MISSION, factory: AerospaceMission },
     { cardName: CardName.TRADE_ADVANCE, factory: TradeAdvance },
+];
+
+export const ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>> = [
+    { cardName: CardName.POLITICAL_UPRISING, factory: PoliticalUprising },
+    { cardName: CardName.BY_ELECTION, factory: ByElection },
 ];
 
 export const ALL_CORPORATION_CARDS: Array<ICardFactory<CorporationCard>> = [
@@ -1005,6 +1012,10 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
+    cardFactory = ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
     cardFactory = ALL_PRELUDE_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
@@ -1118,6 +1129,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
                 preludes = preludes.concat(ALL_COMMUNITY_PRELUDE_CARDS);
                 if (this.useVenusNextExtension) preludes = preludes.concat(ALL_COMMUNITY_VENUS_PRELUDE_CARDS);
                 if (this.useColoniesNextExtension) preludes = preludes.concat(ALL_COMMUNITY_COLONY_PRELUDE_CARDS);
+                if (this.useTurmoilExtension) preludes = preludes.concat(ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS);
             }
             
             this.preludeDeck = this.shuffleCards<IProjectCard>(preludes.map((cf) => new cf.factory()));

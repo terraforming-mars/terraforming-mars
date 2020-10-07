@@ -7752,4 +7752,35 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
+[CardName.POLITICAL_UPRISING,`
+      <div class="title background-color-prelude">Political Uprising</div>
+      <div class="prelude-label">PRELUDE</div>
+      <div class="prelude-icon preludeCard-icon"></div>
+      <div class="content">
+        <div class="delegate"></div>
+        <div class="delegate"></div>
+        <div class="delegate"></div>
+        <div class="delegate"></div>
+        <br>
+        <div class="resource card">
+          <div class="turmoil-icon"></div>
+        </div>
+        <div class="description">
+          Place 4 delegates. Draw a Turmoil card.
+        </div>
+      </div>
+`],
+[CardName.BY_ELECTION,`
+      <div class="title background-color-prelude">By-Election</div>
+      <div class="prelude-label">PRELUDE</div>
+      <div class="tag tag1 tag-wild"></div>
+      <div class="prelude-icon preludeCard-icon"></div>
+      <div class="content">
+        <div class="set-party-text">SET RULING PARTY</div>
+        + <div class="influence"></div>
+        <div class="description">
+          Set the ruling party to one of your choice. Gain +1 influence.
+        </div>
+      </div>
+`],
 ]);

@@ -455,4 +455,6 @@ export enum CardName {
     RESEARCH_GRANT = "Research Grant",
     AEROSPACE_MISSION = "Aerospace Mission",
     TRADE_ADVANCE = "Trade Advance",
+    POLITICAL_UPRISING = "Political Uprising",
+    BY_ELECTION = "By-Election",
 }

@@ -110,8 +110,11 @@
 	"generation ${0} of ${1}": "Génération ${0} sur ${1}",
 
 	"Actions": "Actions",
+	"Take action for action phase, select one available action.": "Phase d'Actions. Sélectionnez une des actions disponibles.",
 	"Select prelude card to play": "Sélectionnez une carte Prélude à jouer",
 	"Claim a milestone": "Valider un objectif",
+	"Convert 8 heat into temperature": "Convertir 8 chaleurs en température",
+	"Convert 8 plants into greenery": "Convertir 8 plantes en Forêt",
 	"Perform an action from a played card": "Utiliser l'action d'une carte Action (bleue)",
 	"Play project card": "Jouer une carte de votre main",
 	"Trade with a colony": "Commercez avec une colonie",
@@ -218,9 +221,11 @@
 
 
 	"Buy": "Acheter",
-	"Confirm": "OK",
+	"Confirm": "Confirmer",
 	"Pass": "Passer",
+	"End": "Terminer",
 	"Keep": "Conserver",
+	"Convert heat": "Convertir",
 	"Save": "Enregistrer",
 	"Play": "Jouer",
 	"Sell": "Vendre",

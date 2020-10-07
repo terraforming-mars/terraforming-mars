@@ -5124,26 +5124,16 @@ export const HTML_DATA: Map<string, string> =
         <div class="corporationEffectBoxLabel">EFFECT</div>
         X<div class="resource heat"></div> :
         <div class="resource money">X</div>
-        <div class="description" style="text-align:center;margin-top:0px;">
+        <div class="description helion-effect">
           (Effect: Your may use heat as MC. You may not use MC as heat.)
         </div>
       </div>
-      <div style="font-size:34px;
-                      width:140px;
-                      text-align: center;
-                      color: #020202;
-                      margin-top:5px;
-                      border:2px solid black;
-                      margin-left:8px;
-                      background: #e6e600;
-                      box-shadow: 6px 6px 6px grey;
-                      border-radius:2px;">
-                  helion</div><br>
-      <div class="production-box production-box-size3" style="margin-left:20px;margin-top:-10px;">
+      <div class="helion">helion</div><br>
+      <div class="production-box production-box-size3 helion-production">
         <div class="production heat"></div><div class="production heat"></div><div class="production heat"></div>
       </div>
-        <div class="resource money" style="margin-left:20px;">42</div>
-      <div class="description" style="text-align:center;">
+        <div class="resource money helion-mc">42</div>
+      <div class="description helion-resource-description">
         (You start with 3 heat production and 42 MC.)
       </div>
     </div>

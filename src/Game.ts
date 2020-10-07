@@ -55,7 +55,7 @@ import { OrOptions } from "./inputs/OrOptions";
 import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
-import { getRandomMilestonesAndAwards } from "./MASynergy";
+import { getRandomMilestonesAndAwards } from "./MilestoneAwardSelector";
 import { CardType } from "./cards/CardType";
 import { ColonyModel } from "./models/ColonyModel";
 import { LogBuilder } from "./LogBuilder";
@@ -409,9 +409,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public setRandomMilestonesAndAwards(hasVenus: boolean, requiredQty: number) {
-      const MA_Info = getRandomMilestonesAndAwards(hasVenus, requiredQty);
-      this.milestones.push(...MA_Info.milestones);
-      this.awards.push(...MA_Info.awards);
+      const drawnMilestonesAndAwards = getRandomMilestonesAndAwards(hasVenus, requiredQty);
+      this.milestones.push(...drawnMilestonesAndAwards.milestones);
+      this.awards.push(...drawnMilestonesAndAwards.awards);
     }
 
     // Add Venus Next board colonies and milestone / award
@@ -1703,9 +1703,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
       this.gameLog.push(builder.logMessage());
       this.gameAge++;
-      if (this.gameLog.length > 50 ) {
-        (this.gameLog.shift());
-      }
     }
 
     public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {

@@ -1,7 +1,6 @@
 import Vue from "vue";
 import { PlayerInfo } from "./PlayerInfo";
 import { OverviewSettings } from "./OverviewSettings";
-import { Player } from "../../Player";
 import { OtherPlayer } from "../OtherPlayer";
 import { PlayerModel } from "../../models/PlayerModel";
 import { ActionLabel } from "./ActionLabel";
@@ -9,11 +8,11 @@ import { ActionLabel } from "./ActionLabel";
 const SHOW_NEXT_LABEL_MIN = 2;
 
 export const getCurrentPlayerIndex = (
-    player: Player | PlayerModel,
-    players: Array<Player>
+    player: PlayerModel,
+    players: Array<PlayerModel>
 ): number => {
     let currentPlayerIndex: number = 0;
-    players.forEach((p: Player, index: number) => {
+    players.forEach((p: PlayerModel, index: number) => {
         if (p.color === player.color) {
             currentPlayerIndex = index;
         }
@@ -35,17 +34,17 @@ export const PlayersOverview = Vue.component("players-overview", {
         hasPlayers: function (): boolean {
             return this.player.players.length > 0;
         },
-        getPlayerOnFocus: function (): Player {
+        getPlayerOnFocus: function (): PlayerModel {
             return this.player.players.filter(
-                (p: Player) => p.color === this.player.color
+                (p: PlayerModel) => p.color === this.player.color
             )[0];
         },
-        getIsFirstForGen: function (player: Player): boolean {
+        getIsFirstForGen: function (player: PlayerModel): boolean {
             return getCurrentPlayerIndex(player, this.player.players) === 0;
         },
-        getPlayersInOrder: function (): Array<Player> {
+        getPlayersInOrder: function (): Array<PlayerModel> {
             const players = this.player.players;
-            let result: Array<Player> = [];
+            let result: Array<PlayerModel> = [];
             let currentPlayerOffset: number = 0;
             let currentPlayerIndex: number = getCurrentPlayerIndex(
                 this.player,
@@ -65,7 +64,7 @@ export const PlayersOverview = Vue.component("players-overview", {
                 return ActionLabel.PASSED;
             if (player.isActive) return ActionLabel.ACTIVE;
             const notPassedPlayers = this.player.players.filter(
-                (p: Player) => !this.player.passedPlayers.includes(p.color)
+                (p: PlayerModel) => !this.player.passedPlayers.includes(p.color)
             );
 
             let currentPlayerIndex: number = getCurrentPlayerIndex(

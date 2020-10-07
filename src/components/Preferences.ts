@@ -1,9 +1,12 @@
 import Vue from "vue";
 import { PreferencesManager } from "./PreferencesManager";
 import { LANGUAGES } from "../constants";
+import { MAX_OCEAN_TILES, MAX_TEMPERATURE, MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE } from "../constants";
+// @ts-ignore
+import { $t } from "../directives/i18n";
 
 export const Preferences = Vue.component("preferences", {
-    props: ["player_name", "player_color", "generation", "coloniesCount"],
+    props: ["player_name", "player_color", "generation", "coloniesCount", "temperature", "oxygen", "oceans", "venus", "venusNextExtension"],
     data: function () {
         return {
             "ui": {
@@ -89,6 +92,34 @@ export const Preferences = Vue.component("preferences", {
         getGenMarker: function (): string {
             return `${this.generation}`;
         },
+        getOceanCount: function(): string{
+            if (this.oceans === MAX_OCEAN_TILES){
+                return `<img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t('Completed!')">`;
+            } else {
+                return `${this.oceans}`;
+            } 
+        },
+        getTemperatureCount: function(): string{
+            if (this.temperature === MAX_TEMPERATURE){
+                return `<img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t('Completed!')">`;
+            } else {
+                return `${this.temperature}`;
+            } 
+        },
+        getOxygenCount: function(): string{
+            if (this.oxygen === MAX_OXYGEN_LEVEL){
+                return `<img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t('Completed!')">`;
+            } else {
+                return `${this.oxygen}`;
+            } 
+        },
+        getVenusCount: function(): string{
+            if (this.venus === MAX_VENUS_SCALE){
+                return `<img src="/assets/misc/checkmark.png" class="preferences_checkmark" :alt="$t('Completed!')">`;
+            } else {
+                return `${this.venus}`;
+            } 
+        }
     },
     mounted: function () {
         this.updatePreferencesFromStorage();
@@ -99,13 +130,26 @@ export const Preferences = Vue.component("preferences", {
                     <div class="preferences-gen-text">GEN</div>
                     <div class="preferences-gen-marker">{{ getGenMarker() }}</div>
                 </div>
-                <div class="preferences_item preferences_player"><div class="preferences_player_inner" :class="'player_bg_color_' + player_color"></div></div>
-                <div class="preferences-divider" />
+                <div class="preferences_global_params">
+                  <div class="preferences_temperature-tile"></div>
+                  <div class="preferences_global_params_value" v-html="getTemperatureCount()"></div>
+                  <div class="preferences_oxygen-tile"></div>
+                  <div class="preferences_global_params_value" v-html="getOxygenCount()"></div>
+                  <div class="preferences_ocean-tile"></div>
+                  <div class="preferences_global_params_value" v-html="getOceanCount()"></div>
+                  <div v-if="venusNextExtension">
+                    <div class="preferences_venus-tile"></div>
+                    <div class="preferences_global_params_value" v-html="getVenusCount()"></div>
+                  </div>
+                </div>
+                <div class="preferences_item preferences_player">
+                  <div class="preferences_player_inner" :class="'player_bg_color_' + player_color"></div>
+                </div>
                 <a  href="#board">
                     <div class="preferences_item preferences_item_shortcut">
                         <i class="preferences_icon preferences_icon--board"></i>
                     </div>
-                </a> 
+                </a>
                 <a  href="#actions">
                     <div class="preferences_item preferences_item_shortcut">
                         <i class="preferences_icon preferences_icon--actions"></i>
@@ -147,7 +191,7 @@ export const Preferences = Vue.component("preferences", {
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_non_blue_cards" />
                             <i class="form-icon"></i> <span v-i18n>Hide non-blue played cards</span>
                         </label>
-                    </div>                    
+                    </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_awards_and_milestones" />
@@ -207,13 +251,13 @@ export const Preferences = Vue.component("preferences", {
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_ma_scores" />
                             <i class="form-icon"></i> <span v-i18n>Hide Milestones / Awards scores</span>
                         </label>
-                    </div>   
+                    </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="enable_sounds" />
                             <i class="form-icon"></i> <span v-i18n>Enable sounds</span>
                         </label>
-                    </div>                                     
+                    </div>
                     <div class="preferences_panel_item form-group">
                         <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
                         <div class="preferences_panel_langs">

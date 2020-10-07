@@ -7659,4 +7659,17 @@ export const HTML_DATA: Map<string, string> =
         (You start with 38 MC and 1 Energy production.)
       </div>
 `],
+[CardName.MIDAS,`
+      <div class="corporationLabel">CORPORATION</div>
+      <div class="community-icon corporation-icon"></div>
+
+      <div class="midas">Midas</div>
+      <div class="resource money">120</div>
+      <span class="start-tr-text">-7</span>
+      <div class="tile rating"></div>
+
+      <div class="description">
+        (You start with 120 MC. Lower your TR 7 steps.)
+      </div>
+`],
 ]);

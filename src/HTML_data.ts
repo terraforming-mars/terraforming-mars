@@ -7680,10 +7680,12 @@ export const HTML_DATA: Map<string, string> =
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="resource money">10</div>
-        <div class="resource card" style="margin-left:10px"><div class="card-icon card-icon-floater">&#x2601;</div></div>
-        &nbsp;: +5 <div class="resource floater"></div>
+        <div class="resource card" style="margin-left:10px">
+          <div class="card-icon card-icon-venus">V</div>
+        </div>
+        &nbsp;: +4 <div class="resource floater"></div>
         <div class="description">
-          Gain 10 MC. Play a card that collects floaters from hand and add 5 floaters to it.
+          Gain 10 MC. Play a Venus card that collects floaters from hand and add 4 floaters to it.
         </div>
       </div>
 `],
@@ -7722,12 +7724,14 @@ export const HTML_DATA: Map<string, string> =
       <div class="tag tag1 tag-space"></div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
-        <div style="margin: 20px 0">
+        <div style="margin: 20px 0 10px">
           <div class="triangle triangle-black"></div>
-          <div class="triangle triangle-white"></div>
+          <div class="triangle triangle-black"></div>
+          <br>
+          - <div class="resource money" style="margin-top: 20px">12</div>
         </div>
         <div class="description">
-          Place a colony. Gain 1 trade fleet.
+          Place 2 colonies. Pay 12 MC.
         </div>
       </div>
 `],
@@ -7739,7 +7743,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="content">
         <div class="resource money">2</div> &nbsp;(SOLO: <div class="resource money">10</div>)
         <div style="margin: 10px 0 20px">
-          Trade all with <div class="triangle triangle-white"></div> : <span style="font-family:Prototype;font-size:24px;">+1</span>
+          <div style="margin: 10px 0">Trade all colonies with</div>
+          <div class="triangle triangle-white"></div> : <span style="font-family:Prototype;font-size:24px;">+1</span>
         </div>
         <div class="description">
           Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each trade.

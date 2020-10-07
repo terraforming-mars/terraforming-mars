@@ -1307,13 +1307,13 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
 
         if (selectedCard.name === CardName.VALUABLE_GASES) {
-            const playableCards = this.cardsInHand.filter((card) => card.resourceType === ResourceType.FLOATER);
+            const playableCards = this.cardsInHand.filter((card) => card.resourceType === ResourceType.FLOATER && card.tags.indexOf(Tags.VENUS) !== -1);
             
             if (playableCards.length > 0) {
                 game.interrupts.push({
                     player: this,
                     playerInput: new SelectCard(
-                      "Select floater card to play and add 5 floaters",
+                      "Select Venus floater card to play and add 4 floaters",
                       "Save",
                       playableCards,
                       (cards: Array<IProjectCard>) => {
@@ -1323,7 +1323,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
                         game.addSelectHowToPayInterrupt(this, cardCost, canUseSteel, canUseTitanium, "Select how to pay for card");
                         this.playCard(game, cards[0]);
-                        this.addResourceTo(cards[0], 5);
+                        this.addResourceTo(cards[0], 4);
                         return undefined;
                       }
                     )

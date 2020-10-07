@@ -4,9 +4,8 @@ import { PreludeCard } from "../prelude/PreludeCard";
 import { IProjectCard } from "../IProjectCard";
 import { CardName } from '../../CardName';
 import { Game } from "../../Game";
-import { ColonyName } from "../../colonies/ColonyName";
-import { SelectColony } from "../../inputs/SelectColony";
-import { ColonyModel } from "../../models/ColonyModel";
+import { OrOptions } from "../../inputs/OrOptions";
+import { SelectOption } from "../../inputs/SelectOption";
 
 export class AerospaceMission extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
@@ -14,25 +13,34 @@ export class AerospaceMission extends PreludeCard implements IProjectCard {
 
     public play(player: Player, game: Game) {
         let openColonies = game.colonies.filter(colony => colony.isActive);
-        let coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
+        let selectColonies = new OrOptions();
+        selectColonies.title = "Select colonies to build";
 
-        game.interrupts.push({
-            player: player,
-            playerInput: new SelectColony("Select where to build colony", "Build", coloniesModel, (colonyName: ColonyName) => {
-                openColonies.forEach(colony => {
-                  if (colony.name === colonyName) {
-                    colony.onColonyPlaced(player, game);
-                    return undefined;
-                  }
-
+        openColonies.forEach(function(c1){
+          openColonies.slice(1).forEach(function(c2){
+            if (c1.name !== c2.name) {
+              let description = "Build colonies on " + c1.name + " (" + c1.description + ") and " + c2.name + " (" + c2.description + ")"
+              const colonySelect =  new SelectOption(
+                description,
+                "Select",
+                () => {
+                  c1.onColonyPlaced(player, game);
+                  c2.onColonyPlaced(player, game);
                   return undefined;
-                });
-                return undefined;
-              })
+                }
+              );
+
+              selectColonies.options.push(colonySelect);
+            };
+          });
         });
 
-        player.fleetSize++;
+        game.interrupts.push({
+          player: player,
+          playerInput: selectColonies
+        });
+
+        player.megaCredits -= 12;
         return undefined;
     }
 }
-

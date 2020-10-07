@@ -47,7 +47,7 @@ import { MiningRights } from "./cards/MiningRights";
 import { PharmacyUnion } from "./cards/promo/PharmacyUnion";
 import { Board } from "./Board";
 import { PartyHooks } from "./turmoil/parties/PartyHooks";
-import { REDS_RULING_POLICY_COST } from "./constants";
+import { MAX_FLEET_SIZE, REDS_RULING_POLICY_COST } from "./constants";
 import { CardModel } from "./models/CardModel";
 import { SelectColony } from "./inputs/SelectColony";
 import { ColonyName } from "./colonies/ColonyName";
@@ -2329,6 +2329,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       });
       
       return o;
+    }
+
+    public increaseFleetSize() {
+      if (this.fleetSize < MAX_FLEET_SIZE) this.fleetSize++;
     }
 }
 

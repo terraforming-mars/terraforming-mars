@@ -7724,11 +7724,11 @@ export const HTML_DATA: Map<string, string> =
       <div class="tag tag1 tag-space"></div>
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
-        <div style="margin: 20px 0 10px">
-          <div class="triangle triangle-black"></div>
-          <div class="triangle triangle-black"></div>
+        <div>
+          <div class="tile colony"></div>
+          <div class="tile colony"></div>
           <br>
-          - <div class="resource money" style="margin-top: 20px">12</div>
+          - <div class="resource money">12</div>
         </div>
         <div class="description">
           Place 2 colonies. Pay 12 MC.
@@ -7742,10 +7742,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="prelude-icon preludeCard-icon"></div>
       <div class="content">
         <div class="resource money">2</div> &nbsp;(SOLO: <div class="resource money">10</div>)
-        <div style="margin: 10px 0 20px">
-          <div style="margin: 10px 0">Trade all colonies with</div>
-          <div class="triangle triangle-white"></div> : <span style="font-family:Prototype;font-size:24px;">+1</span>
-        </div>
+        <div>Trade all colonies with</div>
+        <div class="tile trade"></div> : <span class="card-sign">+1</span>
         <div class="description">
           Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each trade.
           <br><br>Gain 2 MC (SOLO: Gain 10 MC).

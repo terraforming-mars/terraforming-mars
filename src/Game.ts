@@ -366,7 +366,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     // Function to retrieve a player by it's id
     public getPlayerById(id: string): Player {
-      return this.players.filter(p => p.id === id)[0];
+      const player = this.players.find(p => p.id === id);
+      if (player === undefined) {
+        throw new Error(`player ${id} does not exist on game ${this.id}`);
+      }
+      return player;
     }
 
     // Function to return an array of players from an array of player ids

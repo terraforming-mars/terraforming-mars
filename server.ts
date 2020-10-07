@@ -51,11 +51,10 @@ import { SelectColony } from "./src/inputs/SelectColony";
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync("styles.css");
-const games: Map<string, Game> = new Map<string, Game>();
-const playersToGame: Map<string, Game> = new Map<string, Game>();
 const appVersion = generateAppVersion();
+const gameReloader = new GameReloader();
 const route = new Route();
-const gameLogs = new GameLogs(playersToGame);
+const gameLogs = new GameLogs(gameReloader);
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
     if (req.url !== undefined) {
@@ -119,17 +118,18 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
             const playerId: string = req.url.substring(
                 "/player/input?id=".length
             );
-            const game = playersToGame.get(playerId);
-            if (game === undefined) {
-                route.notFound(req, res);
-                return;
-            }
-            const player = game.getPlayers().find((p) => p.id === playerId);
-            if (player === undefined) {
-                route.notFound(req, res);
-                return;
-            }
-            processInput(req, res, player, game);
+            gameReloader.getByPlayerId(playerId, (game) => {
+                if (game === undefined) {
+                    route.notFound(req, res);
+                    return;
+                }
+                const player = game.getPlayers().find((p) => p.id === playerId);
+                if (player === undefined) {
+                    route.notFound(req, res);
+                    return;
+                }
+                processInput(req, res, player, game);
+            });
         } else {
             route.notFound(req, res);
         }
@@ -247,20 +247,8 @@ function apiGetGames(
         route.notAuthorized(req, res);
         return;
     }
-
-    if (games === undefined) {
-        route.notFound(req, res);
-        return;
-    }
-
-    const answer: Array<string> = [];
-
-    for (let key of Array.from(games.keys())) {
-        answer.push(key);
-    }
-
     res.setHeader("Content-Type", "application/json");
-    res.write(JSON.stringify(answer));
+    res.write(JSON.stringify(gameReloader.getGameIds()));
     res.end();
 }
 
@@ -285,10 +273,7 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                     if (err) {
                         return;
                     }
-                    games.set(gameToRebuild.id, gameToRebuild);
-                    gameToRebuild.getPlayers().forEach((player) => {
-                        playersToGame.set(player.id, gameToRebuild);
-                    });
+                    gameReloader.addGame(gameToRebuild);
                 }
             );
             res.setHeader("Content-Type", "application/json");
@@ -347,29 +332,30 @@ function apiGetWaitingFor(
     let queryParams = querystring.parse(qs);
     const playerId = (queryParams as any)["id"];
     const prevGameAge = parseInt((queryParams as any)["prev-game-age"]);
-    const game = playersToGame.get(playerId);
-    if (game === undefined) {
-        route.notFound(req, res);
-        return;
-    }
-    const player = game.getPlayers().find((player) => player.id === playerId);
-    if (player === undefined) {
-        route.notFound(req, res);
-        return;
-    }
+    gameReloader.getByPlayerId(playerId, (game) => {
+        if (game === undefined) {
+            route.notFound(req, res);
+            return;
+        }
+        const player = game.getPlayerById(playerId);
+        if (player === undefined) {
+            route.notFound(req, res);
+            return;
+        }
 
-    res.setHeader("Content-Type", "application/json");
-    const answer = {
-        "result": "WAIT",
-        "player": game.getPlayerById(game.activePlayer).name,
-    };
-    if (player.getWaitingFor() !== undefined || game.phase === Phase.END) {
-        answer["result"] = "GO";
-    } else if (game.gameAge > prevGameAge) {
-        answer["result"] = "REFRESH";
-    }
-    res.write(JSON.stringify(answer));
-    res.end();
+        res.setHeader("Content-Type", "application/json");
+        const answer = {
+            "result": "WAIT",
+            "player": game.getPlayerById(game.activePlayer).name,
+        };
+        if (player.getWaitingFor() !== undefined || game.phase === Phase.END) {
+            answer["result"] = "GO";
+        } else if (game.gameAge > prevGameAge) {
+            answer["result"] = "REFRESH";
+        }
+        res.write(JSON.stringify(answer));
+        res.end();
+    });
 }
 
 function apiGetPlayer(
@@ -385,20 +371,20 @@ function apiGetPlayer(
     if (playerId === undefined) {
         playerId = "";
     }
-    const game = playersToGame.get(playerId);
-    if (game === undefined) {
-        route.notFound(req, res);
-        return;
-    }
-    const player = game.getPlayers().find((player) => player.id === playerId);
-    if (player === undefined) {
-        route.notFound(req, res);
-        return;
-    }
-
-    res.setHeader("Content-Type", "application/json");
-    res.write(getPlayer(player, game));
-    res.end();
+    gameReloader.getByPlayerId(playerId as string, (game) => {
+        if (game === undefined) {
+            route.notFound(req, res);
+            return;
+        }
+        const player = game.getPlayerById(playerId as string);
+        if (player === undefined) {
+            route.notFound(req, res);
+            return;
+        }
+        res.setHeader("Content-Type", "application/json");
+        res.write(getPlayer(player, game));
+        res.end();
+    });
 }
 
 function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -455,10 +441,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
             } as GameOptions;
 
             const game = new Game(gameId, players, firstPlayer, gameOptions);
-            games.set(gameId, game);
-            game.getPlayers().forEach((player) => {
-                playersToGame.set(player.id, game);
-            });
+            gameReloader.addGame(game);
             res.setHeader("Content-Type", "application/json");
             res.write(getGame(game));
             res.end();
@@ -1047,7 +1030,6 @@ function serveResource(res: http.ServerResponse, s: Buffer): void {
     res.end();
 }
 
-const gameReloader = new GameReloader(games, playersToGame);
 gameReloader.start();
 
 console.log("Starting server on port " + (process.env.PORT || 8080));

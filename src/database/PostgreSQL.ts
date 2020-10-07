@@ -92,7 +92,7 @@ export class PostgreSQL implements IDatabase {
                 return cb(new Error("Game not found"));
             }
             // Transform string to json
-            let gameToRestore = JSON.parse(res.rows[0].game);
+            const gameToRestore = JSON.parse(res.rows[0].game);
 
             // Rebuild each objects
             game.loadFromJSON(gameToRestore);
@@ -112,7 +112,7 @@ export class PostgreSQL implements IDatabase {
                 return cb(new Error("Game not found"));
             }
             // Transform string to json
-            let gameToRestore = JSON.parse(res.rows[0].game);
+            const gameToRestore = JSON.parse(res.rows[0].game);
 
             // Rebuild each objects
             try {
@@ -176,7 +176,7 @@ export class PostgreSQL implements IDatabase {
             }
 
             // Transform string to json
-            let gameToRestore = JSON.parse(res.rows[0].game);
+            const gameToRestore = JSON.parse(res.rows[0].game);
 
             // Rebuild each objects
             game.loadFromJSON(gameToRestore);

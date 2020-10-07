@@ -5,25 +5,37 @@ import { Game } from "../Game";
 import { Player } from "../Player";
 
 export class GameReloader {
-    private loaded = false;
-    private loading = false;
+    private loadedGames = false;
+    private loadingGames = false;
+    private readonly games = new Map<string, Game>();
     private readonly pendingGame = new Map<string, Array<(game: Game | undefined) => void>>();
     private readonly pendingPlayer = new Map<string, Array<(game: Game | undefined) => void>>();
-    constructor (private games: Map<string, Game>, private playersToGame: Map<string, Game>) {}
+    private readonly playersToGame = new Map<string, Game>();
 
     public start(): void {
-        if (this.loaded === true) {
+        if (this.loadedGames === true) {
             console.warn("already loaded, ignoring");
-        } else if (this.loading === true) {
+        } else if (this.loadingGames === true) {
             console.warn("already loading, ignoring");
             return;
         }
-        this.loading = true;
+        this.loadingGames = true;
         this.loadAllGames();
     }
 
+    public addGame(game: Game): void {
+        this.games.set(game.id, game);
+        for (const player of game.getPlayers()) {
+            this.playersToGame.set(player.id, game);
+        }
+    }
+
+    public getGameIds(): Array<string> {
+        return Array.from(this.games.keys());
+    }
+
     public getByGameId(gameId: string, cb: (game: Game | undefined) => void): void {
-        if (this.loaded === true) {
+        if (this.loadedGames === true) {
             cb(this.games.get(gameId));
             return;
         }
@@ -36,7 +48,7 @@ export class GameReloader {
     }
 
     public getByPlayerId(playerId: string, cb: (game: Game | undefined) => void): void {
-        if (this.loaded === true) {
+        if (this.loadedGames === true) {
             cb(this.playersToGame.get(playerId));
             return;
         }
@@ -66,8 +78,12 @@ export class GameReloader {
     }
 
     private onAllGamesLoaded(): void {
-        this.loading = false;
-        this.loaded = true;
+        // TODO any pendingPlayer or pendingGame callbacks
+        // are waiting for a train that is never coming
+        // send them packing. call their callbacks with
+        // undefined and remove from pending
+        this.loadingGames = false;
+        this.loadedGames = true;
     }
 
     private loadAllGames(): void {

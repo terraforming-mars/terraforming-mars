@@ -6,7 +6,7 @@ import { PlayerHome } from "./PlayerHome";
 import { StartScreen } from "./StartScreen";
 import { LoadGameForm } from "./LoadGameForm";
 import { DebugUI } from "./DebugUI";
-import {HelpIconology} from "./HelpIconology";
+import { HelpIconology } from "./HelpIconology";
 
 export const mainAppSettings = {
     "el": "#app",

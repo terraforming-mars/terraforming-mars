@@ -3,6 +3,7 @@ import { Tags } from "../Tags";
 import { CardType } from "../CardType";
 import { Player } from "../../Player";
 import { CardName } from '../../CardName';
+import { MAX_FLEET_SIZE } from "../../constants";
 
 export class SkyDocks implements IProjectCard {
     public cost: number = 18;
@@ -15,8 +16,8 @@ export class SkyDocks implements IProjectCard {
     }
 
     public play(player: Player) {
-        player.fleetSize++;
-      return undefined;
+        if (player.fleetSize < MAX_FLEET_SIZE) player.fleetSize++;
+        return undefined;
     }
 
     public getCardDiscount() {

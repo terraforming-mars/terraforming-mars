@@ -7,6 +7,7 @@ import { Resources } from "../../Resources";
 import { Game } from '../../Game';
 import { SelectSpace } from "../../inputs/SelectSpace";
 import { ISpace } from '../../ISpace';
+import { MAX_FLEET_SIZE } from "../../constants";
 
 export class SpacePort implements IProjectCard {
     public cost: number = 22;
@@ -26,7 +27,9 @@ export class SpacePort implements IProjectCard {
     public play(player: Player, game: Game) {
       player.setProduction(Resources.MEGACREDITS, 4);  
       player.setProduction(Resources.ENERGY, -1);
-      player.fleetSize++;
+      
+      if (player.fleetSize < MAX_FLEET_SIZE) player.fleetSize++;
+
       return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
         game.addCityTile(player, space.id);
         return undefined;

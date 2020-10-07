@@ -4,6 +4,7 @@ import { CardType } from '../CardType';
 import { Player } from "../../Player";
 import { CardName } from '../../CardName';
 import { Game } from '../../Game';
+import { MAX_FLEET_SIZE } from "../../constants";
 
 export class SpacePortColony implements IProjectCard {
     public cost: number = 27;
@@ -21,7 +22,7 @@ export class SpacePortColony implements IProjectCard {
 
     public play(player: Player, game: Game) {
       game.addColonyInterrupt(player, true, "Select colony for Space Port Colony");
-      player.fleetSize++;
+      if (player.fleetSize < MAX_FLEET_SIZE) player.fleetSize++;
       return undefined;
     }
 

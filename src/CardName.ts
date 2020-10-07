@@ -451,4 +451,5 @@ export enum CardName {
 
     // Community preludes
     VALUABLE_GASES = "Valuable Gases",
+    VENUS_FIRST = "Venus First",
 }

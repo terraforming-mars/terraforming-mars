@@ -7687,4 +7687,20 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
+[CardName.VENUS_FIRST,`
+      <div class="title background-color-prelude">Venus First</div>
+      <div class="prelude-label">PRELUDE</div>
+      <div class="tag tag1 tag-venus"></div>
+      <div class="prelude-icon preludeCard-icon"></div>
+      <div class="content">
+        <div class="tile venus-tile">V</div>
+        <div class="tile venus-tile">V</div>
+        <br>
+        <div class="resource card"><div class="card-icon card-icon-venus">V</div></div>
+        <div class="resource card"><div class="card-icon card-icon-venus">V</div></div>
+        <div class="description">
+          Raise Venus 2 steps. Draw 2 Venus cards from the deck.
+        </div>
+      </div>
+`],
 ]);

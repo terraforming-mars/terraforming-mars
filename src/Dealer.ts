@@ -469,6 +469,7 @@ import { Midas } from "./cards/community/Midas";
 
 // Community preludes
 import { ValuableGases } from "./cards/community/ValuableGases";
+import { VenusFirst } from "./cards/community/VenusFirst";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -515,6 +516,7 @@ export const ALL_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>> = [
 
 export const ALL_COMMUNITY_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.VALUABLE_GASES, factory: ValuableGases },
+    { cardName: CardName.VENUS_FIRST, factory: VenusFirst },
 ];
 
 export const ALL_CORPORATION_CARDS: Array<ICardFactory<CorporationCard>> = [

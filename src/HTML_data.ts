@@ -7703,4 +7703,17 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
+[CardName.RESEARCH_GRANT,`
+      <div class="title background-color-prelude">Research Grant</div>
+      <div class="prelude-label">PRELUDE</div>
+      <div class="tag tag1 tag-science"></div>
+      <div class="tag tag2 tag-science"></div>
+      <div class="prelude-icon preludeCard-icon"></div>
+      <div class="content">
+        <div class="resource money">8</div>
+        <div class="description">
+          Gain 8 MC.
+        </div>
+      </div>
+`],
 ]);

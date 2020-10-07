@@ -470,6 +470,7 @@ import { Midas } from "./cards/community/Midas";
 // Community preludes
 import { ValuableGases } from "./cards/community/ValuableGases";
 import { VenusFirst } from "./cards/community/VenusFirst";
+import { ResearchGrant } from "./cards/community/ResearchGrant";
 
 export interface ICardFactory<T> {
     cardName: CardName;
@@ -515,6 +516,10 @@ export const ALL_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>> = [
 ];
 
 export const ALL_COMMUNITY_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>> = [
+    { cardName: CardName.RESEARCH_GRANT, factory: ResearchGrant },
+];
+
+export const ALL_COMMUNITY_VENUS_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.VALUABLE_GASES, factory: ValuableGases },
     { cardName: CardName.VENUS_FIRST, factory: VenusFirst },
 ];
@@ -985,6 +990,10 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
+    cardFactory = ALL_COMMUNITY_VENUS_PRELUDE_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
     cardFactory = ALL_PRELUDE_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
@@ -1093,7 +1102,11 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         }
         if (this.usePreludeExtension) {
             let preludes = ALL_PRELUDE_CARDS;
-            if (this.useCommunityCards && this.useVenusNextExtension) preludes = preludes.concat(ALL_COMMUNITY_PRELUDE_CARDS);
+            
+            if (this.useCommunityCards) {
+                preludes = preludes.concat(ALL_COMMUNITY_PRELUDE_CARDS);
+                if (this.useVenusNextExtension) preludes = preludes.concat(ALL_COMMUNITY_VENUS_PRELUDE_CARDS);
+            }
             
             this.preludeDeck = this.shuffleCards<IProjectCard>(preludes.map((cf) => new cf.factory()));
             this.deck.push(...ALL_PRELUDE_PROJECTS_CARDS.map((cf) => new cf.factory()));

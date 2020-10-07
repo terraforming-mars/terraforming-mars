@@ -11,6 +11,7 @@ import { ALL_PRELUDE_CORPORATIONS,
          ALL_CORP_ERA_PROJECT_CARDS,
          ALL_PRELUDE_CARDS,
          ALL_COMMUNITY_PRELUDE_CARDS,
+         ALL_COMMUNITY_VENUS_PRELUDE_CARDS,
          ALL_PRELUDE_PROJECTS_CARDS,
          ALL_PROMO_CORPORATIONS,
          ALL_VENUS_CORPORATIONS,
@@ -62,6 +63,10 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
         return new cardFactory.factory();
     }
     cardFactory = ALL_COMMUNITY_PRELUDE_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_COMMUNITY_VENUS_PRELUDE_CARDS.find((cf) => cf.cardName === cardName);
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }

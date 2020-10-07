@@ -30,6 +30,7 @@
         "src/cards/colonies/*.ts",
         "src/inputs/*.ts",
         "src/models/*.ts",
+        "src/routes/*.ts",
         "src/colonies/*.ts",
         "script.ts",
         "server.ts",

@@ -41,9 +41,9 @@ export const PlayerMixin = {
             player: PlayerModel
         ): boolean {
             return (
-                player !== undefined &&
+                (player !== undefined &&
                 player.actionsThisGeneration !== undefined &&
-                player.actionsThisGeneration.indexOf(card.name) !== -1
+                player.actionsThisGeneration.indexOf(card.name) !== -1) || card.isDisabled
             );
         },
     },

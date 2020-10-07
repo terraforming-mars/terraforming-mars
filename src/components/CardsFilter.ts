@@ -32,8 +32,9 @@ export const CardsFilter = Vue.component("cards-filter", {
         } as CardsFilterModel
     },
     methods: {
-        removeCard: function (cardNameToRemove: CardName) {
+        removeCard: function (cardNameToRemove: CardName) { 
             this.selectedCardNames = this.selectedCardNames.filter((curCardName) => curCardName !== cardNameToRemove).sort();
+            
         },
         addCard: function (cardNameToAdd: CardName) {
             if (this.selectedCardNames.includes(cardNameToAdd)) return;
@@ -43,7 +44,7 @@ export const CardsFilter = Vue.component("cards-filter", {
         },
         getCardsInputPlaceholder: function() {
             return $t("Start typing the card name to exclude");
-        }
+        }   
     },
     watch: {
         selectedCardNames: function (value) {
@@ -58,7 +59,8 @@ export const CardsFilter = Vue.component("cards-filter", {
                 (candidate: CardName) => ! this.selectedCardNames.includes(candidate) && candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1
             ).sort();
             this.foundCardNames = newCardNames.slice(0, 5)
-        }
+             
+        } 
     },
     template: `
     <div class="cards-filter">
@@ -66,7 +68,7 @@ export const CardsFilter = Vue.component("cards-filter", {
         <div class="cards-filter-results-cont" v-if="selectedCardNames.length">
             <div class="cards-filter-result" v-for="cardName in selectedCardNames">
                 <label>{{ cardName }}</label>
-                <button class="btn btn-error btn-sm" v-on:click.prevent="removeCard(cardName)"><i class="icon icon-cross"></i></button> 
+                <Button size="small" type="close" :onClick="_=>removeCard(cardName)" /> 
             </div>
         </div>
         <div class="cards-filter-input">

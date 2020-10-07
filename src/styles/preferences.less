@@ -1,9 +1,9 @@
 .preferences_cont {
     white-space: nowrap;
-    position: fixed; 
-    left: 10px;
+    position: fixed;
+    left: 0px;
     top: 5px;
-    z-index: 99; 
+    z-index: 99;
     width: 60px;
     display: flex;
     flex-flow: column;
@@ -13,13 +13,13 @@
 .preferences-divider {
     background: rgba(170, 170, 170, 0.3);
     height: 2px;
-    width: 80%;
-    margin-bottom: 8px;
+    width: 80%;	
+    margin-bottom: 8px;	
 }
 .preferences_item {
-    width: 46px; 
+    width: 46px;
     background: black;
-    border-radius: 5px; 
+    border-radius: 5px;
     padding: 5px;
     margin-bottom: 8px;
 }
@@ -33,24 +33,24 @@
 }
 
 .preferences_tm {
-    background: url(/assets/mars-icon.png);
-    width: 60px;
-    height: 60px;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    border-radius: 50%;
-    background-size: 62px;
-    box-shadow: 0 2px 2px 0px black;
-    font-family: Prototype;
-    text-align: center;
-    line-height: 20px;
-    color: black;
+  background: url(/assets/mars.png);
+  width: 50px;
+  height: 50px;
+  margin-top: 3px;
+  border-radius: 50%;
+  box-shadow: 0 1px 1px 1px black;
+  font-family: Prototype;
+  text-align: center;
+  line-height: 20px;
+  color: black;
+  background-size: 100px;
+  background-position: -26px -20px;
 }
-.preferences-gen-text { 
+.preferences-gen-text {
     font-size: 14px;
-    margin-top: 5px;
+    margin-top: 2px;
 }
-.preferences-gen-marker { 
+.preferences-gen-marker {
     font-size: 34px;
 }
 
@@ -69,6 +69,60 @@
     border-radius: 3px;
 }
 
+.preferences_global_params {
+    width: 60px;
+    margin-bottom: 5px;
+}
+
+.preferences_checkmark{
+    display: inline-block;
+    filter: invert(92%) sepia(11%) saturate(1093%) hue-rotate(46deg) brightness(98%) contrast(85%);
+    width: 18px;
+    height: 18px;
+}
+
+.preferences_venus-tile {
+    background-image: url(./assets/global-parameters/venus.png);
+    width: 40px;
+    height: 26px;
+    background-size: 40px 26px;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.preferences_temperature-tile {
+  background-image: url(./assets/global-parameters/temperature.png);
+  width: 16px;
+  height: 46px;
+  background-size: 16px 46px;
+  margin-left: 22px;
+  margin-top: 10px;
+}
+
+.preferences_oxygen-tile {
+  background-image: url(./assets/global-parameters/oxygen.png);
+  width: 40px;
+  height: 40px;
+  background-size: 40px;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.preferences_ocean-tile {
+  background-image: url(./assets/tiles/ocean.png);
+  width: 32px;
+  height: 36px;
+  background-size: 32px 36px;
+  margin-left: 14px;
+  margin-top: 10px;
+}
+
+.preferences_global_params_value {
+  text-align: center;
+  font-family: "Prototype";
+  margin-top: -5px;
+}
+
 .preferences_icon {
     width: 36px;
     height: 36px;
@@ -82,7 +136,7 @@
 }
 
 .preferences_icon.preferences_icon--cards {
-    background-image: url(assets/preferences_cards.png);
+    background-image: url(assets/misc/preferences_cards.png);
 }
 
 .preferences_icon.preferences_icon--board {

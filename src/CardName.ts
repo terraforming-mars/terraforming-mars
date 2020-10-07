@@ -447,4 +447,5 @@ export enum CardName {
     PROJECT_WORKSHOP = "Project Workshop",
     INCITE = "Incite",
     PLAYWRIGHTS = "Playwrights",
+    MIDAS = "Midas",
 }

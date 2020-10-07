@@ -14,6 +14,7 @@ import { PlayerMixin } from "./PlayerMixin";
 import { Turmoil } from "./Turmoil";
 import { playerColorClass } from "../utils/utils";
 import { DynamicTitle } from "./common/DynamicTitle";
+import { Button } from "../components/common/Button";
 
 const dialogPolyfill = require("dialog-polyfill");
 
@@ -31,6 +32,7 @@ export const PlayerHome = Vue.component("player-home", {
         "colony": Colony,
         "log-panel": LogPanel,
         "turmoil": Turmoil,
+        "Button": Button,
     },
     mixins: [PlayerMixin],
     methods: {
@@ -88,13 +90,13 @@ export const PlayerHome = Vue.component("player-home", {
                     <form method="dialog">
                         <p class="title" v-i18n>Error with input</p>
                         <p id="dialog-default-message"></p>
-                        <menu class="dialog-menu">
+                        <menu class="dialog-menu centered-content">
                             <button class="btn btn-lg btn-primary">OK</button>
                         </menu>
                     </form>
                 </dialog>
             </section>
-            
+
             <div v-if="player.phase === 'end'">
                 <div class="player_home_block">
                     <dynamic-title title="This game is over!" :color="player.color"/>
@@ -102,7 +104,16 @@ export const PlayerHome = Vue.component("player-home", {
                 </div>
             </div>
 
-            <preferences v-trim-whitespace :player_name="player.name" :player_color="player.color" :generation="player.generation" :coloniesCount="player.colonies.length">
+            <preferences v-trim-whitespace
+              :player_name="player.name"
+              :player_color="player.color"
+              :generation="player.generation"
+              :coloniesCount="player.colonies.length"
+              :temperature = "player.temperature"
+              :oxygen = "player.oxygenLevel"
+              :oceans = "player.oceans"
+              :venus = "player.venusScaleLevel"
+              :venusNextExtension ="player.venusNextExtension">
                 <div class="deck-size">{{ player.deckSize }}</div>
             </preferences>
 
@@ -110,13 +121,13 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <div class="player_home_block">
                     <a name="board" class="player_home_anchor"></a>
-                    <board 
-                        :spaces="player.spaces" 
-                        :venusNextExtension="player.venusNextExtension" 
-                        :venusScaleLevel="player.venusScaleLevel" 
+                    <board
+                        :spaces="player.spaces"
+                        :venusNextExtension="player.venusNextExtension"
+                        :venusScaleLevel="player.venusScaleLevel"
                         :boardName ="player.boardName"
-                        :oceans_count="player.oceans" 
-                        :oxygen_level="player.oxygenLevel" 
+                        :oceans_count="player.oceans"
+                        :oxygen_level="player.oxygenLevel"
                         :temperature="player.temperature"
                         :shouldNotify="true"></board>
 
@@ -125,18 +136,18 @@ export const PlayerHome = Vue.component("player-home", {
                     <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
                         <milestone :milestones_list="player.milestones" />
                         <award :awards_list="player.awards" />
-                    </div> 
+                    </div>
                 </div>
-                
+
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace />
-                 
-                <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat" v-if="player.gameLog.length > 0">
+
+                <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat">
                     <dynamic-title v-if="player.players.length > 1" title="Game log" :color="player.color" :withAdditional="true" :additional="'generation' + player.generation" />
                     <h2 v-else :class="'player_color_'+ player.color">
                         <span v-i18n>Game log</span>
                         <span class="label-additional" v-html="getGenerationText()"></span>
                     </h2>
-                    <log-panel :messages="player.gameLog" :players="player.players"></log-panel>
+                    <log-panel :id="player.id" :players="player.players"></log-panel>
                 </div>
 
                 <div class="player_home_block player_home_block--actions nofloat">
@@ -154,14 +165,14 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <a name="cards" class="player_home_anchor"></a>
                 <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
-                    <dynamic-title title="Cards In Hand" :color="player.color" :withAdditional="true" :additional="player.cardsInHandNbr" />
+                    <dynamic-title title="Cards In Hand" :color="player.color" :withAdditional="true" :additional="player.cardsInHandNbr.toString()" />
                     <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
                         <card :card="card"></card>
                     </div>
                 </div>
 
                 <div class="player_home_block player_home_block--cards">
-                    <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true)" />
+                    <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true).toString()" />
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
                         <card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"></card>
                     </div>
@@ -170,7 +181,7 @@ export const PlayerHome = Vue.component("player-home", {
                     </div>
 
                     <stacked-cards class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
-                    <stacked-cards class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>                    
+                    <stacked-cards class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
                 </div>
 
                 <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">
@@ -196,7 +207,7 @@ export const PlayerHome = Vue.component("player-home", {
 
                 <div v-for="card in player.dealtProjectCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
                     <card :card="card"></card>
-                </div>     
+                </div>
 
                 <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
                     <dynamic-title title="Drafted Cards" :color="player.color"/>
@@ -209,7 +220,7 @@ export const PlayerHome = Vue.component("player-home", {
                 <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :waitingfor="player.waitingFor"></waiting-for>
 
                 <dynamic-title title="Game details" :color="player.color"/>
-                
+
 
                 <div class="player_home_block" v-if="player.players.length > 1">
                     <milestone :milestones_list="player.milestones" />

@@ -10,10 +10,11 @@ import { $t } from "../directives/i18n";
 import { getProjectCardByName } from "./../Dealer";
 
 export const LogPanel = Vue.component("log-panel", {
-    props: ["messages", "players"],
+    props: ["id", "players"],
     data: function () {
         return {
             cards: new Array<string>(),
+            messages: new Array<LogMessage>()
         }
     },
     components: {
@@ -48,7 +49,7 @@ export const LogPanel = Vue.component("log-panel", {
             if (data.type !== undefined && data.value !== undefined) {
                 if (data.type === LogMessageDataType.PLAYER) {
                     for (let player of this.players) {
-                        if (data.value === player.id) {
+                        if (data.value === player.color || data.value === player.id) {
                             return "<log-player class=\"player_bg_color_"+player.color+"\">"+player.name+"</log-player>";
                         }
                     }
@@ -130,9 +131,21 @@ export const LogPanel = Vue.component("log-panel", {
         hideMe: function () {
             this.cards = new Array<string>();
         },
+        getCrossHtml: function() {
+            return "<i class='icon icon-cross' /i>";
+        }
     },
     mounted: function () {
-        this.$nextTick(this.scrollToEnd);
+        fetch(`/api/game/logs?id=${this.id}&limit=50`)
+            .then((response) => response.json())
+            .then((messages) => {
+                this.messages.splice(0, this.messages.length);
+                this.messages.push(...messages);
+                this.$nextTick(this.scrollToEnd);
+            })
+            .catch((error) => {
+                console.error("error updating messages", error);
+            });
     },
     template: `
     <div>
@@ -144,7 +157,7 @@ export const LogPanel = Vue.component("log-panel", {
             </div>
         </div>
         <div class="card-panel" v-if="cards.length > 0">
-            <button class="btn btn-sm btn-error other_player_close" v-on:click="hideMe()"><i class="icon icon-cross"></i></button>
+            <Button size="big" type="close" :onClick="hideMe" align="right" />
             <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="index">
                 <card :card="{name: card}"></card>
             </div>

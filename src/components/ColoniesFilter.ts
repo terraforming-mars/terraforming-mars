@@ -11,9 +11,14 @@ import { Titan } from "../colonies/Titan";
 import { Triton } from "../colonies/Triton";
 import { Enceladus } from "../colonies/Enceladus";
 import { ColonyName } from "../colonies/ColonyName";
+import { Iapetus } from "../cards/community/Iapetus";
+import { Mercury } from "../cards/community/Mercury";
+import { Hygiea } from "../cards/community/Hygiea";
+import { Titania } from "../cards/community/Titania";
+import { Venus } from "../cards/community/Venus";
+import { Leavitt } from "../cards/community/Leavitt";
 
-
-let allColonies = [
+const officialColonies = [
     new Callisto(),
     new Ceres(),
     new Enceladus(),
@@ -24,15 +29,29 @@ let allColonies = [
     new Miranda(),
     new Pluto(),
     new Titan(),
-    new Triton()
+    new Triton(),
+];
 
+const communityColonies = [
+    new Iapetus(),
+    new Mercury(),
+    new Hygiea(),
+    new Titania(),
+    new Venus(),
+    new Leavitt()
 ];
 
 export const ColoniesFilter = Vue.component("colonies-filter", {
+    props: ["communityCardsOption"],
     data: function () {
         return {
-            allColonies: allColonies.slice(),
-            selectedColonies: allColonies.slice()
+            allColonies: officialColonies.concat(communityColonies),
+            officialColonies: officialColonies,
+            communityColonies: communityColonies,
+            selectedColonies: [
+                ...officialColonies,
+                ...this.communityCardsOption ? communityColonies: []
+            ]
         }
     },
     watch: {
@@ -41,6 +60,9 @@ export const ColoniesFilter = Vue.component("colonies-filter", {
             value.forEach(function (el: any) { colonyNames.push(el.name)} );
             this.$emit("colonies-list-changed", colonyNames);
         },
+        communityCardsOption: function (enabled) {
+            this.selectedColonies = enabled ? officialColonies.concat(communityColonies).slice() : officialColonies.slice();
+        }
     },
     template: `
     <div class="colonies-filter">
@@ -48,10 +70,18 @@ export const ColoniesFilter = Vue.component("colonies-filter", {
             <h2 v-i18n>Colonies</h2>
         </div>
         <div class="colonies-filter-list">
-            <label class="form-checkbox" v-for="colony in allColonies">
+            <h2>Official</h2>
+            <label class="form-checkbox" v-for="colony in officialColonies">
                 <input type="checkbox" v-model="selectedColonies" :value="colony"/>
                 <i class="form-icon"></i><span v-i18n>{{ colony.name }} - ({{ colony.description }})</span>
-            </label>    
+            </label> 
+        </div>
+        <div class="colonies-filter-list">
+            <h2>Community</h2>
+            <label class="form-checkbox" v-for="colony in communityColonies">
+                <input type="checkbox" v-model="selectedColonies" :value="colony"/>
+                <i class="form-icon"></i><span v-i18n>{{ colony.name }} - ({{ colony.description }})</span>
+            </label> 
         </div>
     </div>
     `

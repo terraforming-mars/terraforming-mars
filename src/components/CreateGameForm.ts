@@ -8,6 +8,7 @@ import { IGameData } from "../database/IDatabase";
 import { ColoniesFilter } from "./ColoniesFilter";
 import { ColonyName } from "../colonies/ColonyName";
 import { CardsFilter } from "./CardsFilter";
+import { Button } from "../components/common/Button";
 
 interface CreateGameModel {
     firstIndex: number;
@@ -106,13 +107,15 @@ export const CreateGameForm = Vue.component("create-game-form", {
             startingCorporations: 2,
             soloTR: false,
             clonedGameData: undefined,
-            cloneGameData: []
+            cloneGameData: [],
+            allOfficialExpansions: false
         } as CreateGameModel
     },
     components: {
         "corporations-filter": CorporationsFilter,
         "colonies-filter": ColoniesFilter,
-        "cards-filter": CardsFilter
+        "cards-filter": CardsFilter,
+        "Button": Button
     },
     mounted: function () {
         if (window.location.pathname === "/solo") {
@@ -124,11 +127,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
         }
 
         fetch("/api/clonablegames")
-        .then(response => response.json())
-        .then(onSucces)
-        .catch(_ => alert("Unexpected server response"));
+            .then(response => response.json())
+            .then(onSucces)
+            .catch(_ => alert("Unexpected server response"));
     },
-    methods: {
+    methods: { 
         getPlayerNamePlaceholder: function (player: NewPlayerModel): string {
             return $t("Player " + player.index + " name");
         },
@@ -150,6 +153,14 @@ export const CreateGameForm = Vue.component("create-game-form", {
         },
         isBeginnerToggleEnabled: function(): Boolean {
             return !(this.initialDraft || this.prelude || this.venusNext || this.colonies || this.turmoil)
+        },
+        selectAll: function() {
+            this.corporateEra = this.$data.allOfficialExpansions;
+            this.prelude = this.$data.allOfficialExpansions;
+            this.venusNext = this.$data.allOfficialExpansions;
+            this.colonies = this.$data.allOfficialExpansions;
+            this.turmoil = this.$data.allOfficialExpansions;
+            this.promoCardsOption = this.$data.allOfficialExpansions;
         },
         createGame: function () {
             const component = (this as any) as CreateGameModel;
@@ -341,6 +352,13 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                         <div class="create-game-options-block col3 col-sm-6">
                             <h4 v-i18n>Expansions</h4>
+                            <div class="expansion-label">Official</div>
+
+                            <label class="form-switch">
+                                <input type="checkbox" name="allOfficialExpansions" v-model="allOfficialExpansions" v-on:change="selectAll()">
+                                <i class="form-icon"></i> <span v-i18n>All</span>
+                            </label>
+
                             <label class="form-switch">
                                 <input type="checkbox" name="corporateEra" v-model="corporateEra">
                                 <i class="form-icon"></i> <span v-i18n>Corporate Era</span>
@@ -371,9 +389,12 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <i class="form-icon"></i> <span v-i18n>Promos</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
+                            <div class="create-game-divider" />
+
+                            <div class="expansion-label">Fan-made</div>
                             <label class="form-switch">
                                 <input type="checkbox" v-model="communityCardsOption">
-                                <i class="form-icon"></i> <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community-corps" class="tooltip" target="_blank">&#9432;</a>
+                                <i class="form-icon"></i> <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community" class="tooltip" target="_blank">&#9432;</a>
                             </label>
                         </div>
 
@@ -482,8 +503,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </label>
                         </div>
 
-                        <div class="create-game-action">			
-                            <button class="btn btn-lg btn-success" v-on:click="createGame" v-i18n>Create Game</button> 
+                        <div class="create-game-action">
+                            <Button title="Create game" size="big" :onClick="createGame"/>
                         </div>  
                     </div>
                 </div>
@@ -542,6 +563,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             <colonies-filter
                 v-if="showColoniesList"
                 v-on:colonies-list-changed="updateCustomColoniesList"
+                v-bind:communityCardsOption="communityCardsOption"
             ></colonies-filter>
 
             <cards-filter

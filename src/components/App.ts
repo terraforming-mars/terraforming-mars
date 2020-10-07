@@ -12,6 +12,7 @@ export const mainAppSettings = {
     "data": {
         screen: "empty",
         playerkey: 0,
+        isServerSideRequestInProgress: false,
         componentsVisibility: {
             "millestones_list": true,
             "awards_list": true,
@@ -21,6 +22,7 @@ export const mainAppSettings = {
             "pinned_player_2": false,
             "pinned_player_3": false,
             "pinned_player_4": false,
+            "turmoil_parties": false,
         },
         game: {
             players: [],

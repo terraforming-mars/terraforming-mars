@@ -55,7 +55,7 @@ import { OrOptions } from "./inputs/OrOptions";
 import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
-import { getRandomMilestonesAndAwards } from "./MASynergy";
+import { getRandomMilestonesAndAwards } from "./MilestoneAwardSelector";
 import { CardType } from "./cards/CardType";
 import { ColonyModel } from "./models/ColonyModel";
 import { LogBuilder } from "./LogBuilder";
@@ -220,8 +220,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Add colonies stuff
       if (gameOptions.coloniesExtension) {
         corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
+
+        const communityColoniesSelected = this.checkForCommunityColonies(gameOptions);
+        const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
+
         this.colonyDealer = new ColonyDealer();
-        this.colonies = this.colonyDealer.drawColonies(players.length, this.gameOptions.customColoniesList);
+        this.colonies = this.colonyDealer.drawColonies(players.length, this.gameOptions.customColoniesList, this.gameOptions.venusNextExtension, allowCommunityColonies);
         if (this.players.length === 1) {
           players[0].setProduction(Resources.MEGACREDITS, -2);
           this.addInterrupt(new SelectRemoveColony(players[0], this));
@@ -332,6 +336,18 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
     }
 
+    public checkForCommunityColonies(gameOptions: GameOptions) : boolean {
+      if (!gameOptions.customColoniesList) return false;
+      if (gameOptions.customColoniesList.includes(ColonyName.IAPETUS)) return true;
+      if (gameOptions.customColoniesList.includes(ColonyName.MERCURY)) return true;
+      if (gameOptions.customColoniesList.includes(ColonyName.HYGIEA)) return true;
+      if (gameOptions.customColoniesList.includes(ColonyName.TITANIA)) return true;
+      if (gameOptions.customColoniesList.includes(ColonyName.VENUS)) return true;
+      if (gameOptions.customColoniesList.includes(ColonyName.LEAVITT)) return true;
+
+      return false;
+    }
+
     public isSoloMode() :boolean {
       if (this.players.length === 1) return true;
       return false;
@@ -393,9 +409,9 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public setRandomMilestonesAndAwards(hasVenus: boolean, requiredQty: number) {
-      const MA_Info = getRandomMilestonesAndAwards(hasVenus, requiredQty);
-      this.milestones.push(...MA_Info.milestones);
-      this.awards.push(...MA_Info.awards);
+      const drawnMilestonesAndAwards = getRandomMilestonesAndAwards(hasVenus, requiredQty);
+      this.milestones.push(...drawnMilestonesAndAwards.milestones);
+      this.awards.push(...drawnMilestonesAndAwards.awards);
     }
 
     // Add Venus Next board colonies and milestone / award
@@ -884,7 +900,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.runDraftRound();
     }
 
-    private gameIsOver(): boolean {
+    public gameIsOver(): boolean {
       // Single player game is done after generation 14 or 12 with prelude
       if (this.isSoloMode()) {
         if (this.generation === 14 || (this.generation === 12 && this.gameOptions.preludeExtension)) {
@@ -900,6 +916,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.passedPlayers.clear();
       this.someoneHasRemovedOtherPlayersPlants = false;
       this.players.forEach((player) => {
+        player.cardDiscount = 0; // Iapetus reset hook
         player.runProductionPhase();
       });
 
@@ -1416,8 +1433,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.generation;
     }
 
-    public getPassedPlayers():Set<PlayerId> {
-      return this.passedPlayers;
+    public getPassedPlayers():Array<Color> {
+      const passedPlayersColors: Array<Color> = [];
+      this.passedPlayers.forEach(player => {
+        passedPlayersColors.push(this.getPlayerById(player).color);
+      });
+      return passedPlayersColors;
     } 
 
     public getPlayer(name: string): Player {
@@ -1682,9 +1703,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
       this.gameLog.push(builder.logMessage());
       this.gameAge++;
-      if (this.gameLog.length > 50 ) {
-        (this.gameLog.shift());
-      }
     }
 
     public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {
@@ -1706,24 +1724,40 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Single player add neutral player
       // put 2 neutrals cities on board with adjacent forest
       const neutral = new Player("neutral", Color.NEUTRAL, true, 0);
-      const space1 = this.board.getRandomCitySpace(0);
-      this.addCityTile(neutral, space1.id, SpaceType.LAND);
-      const fspace1 = this.board.getForestSpace(
-          this.board.getAdjacentSpaces(space1)
-      );
-      this.addTile(neutral, SpaceType.LAND, fspace1, {
-        tileType: TileType.GREENERY
-      });
-      const space2 = this.board.getRandomCitySpace(30);
-      this.addCityTile(neutral, space2.id, SpaceType.LAND);
-      const fspace2 = this.board.getForestSpace(
-          this.board.getAdjacentSpaces(space2)
-      );
-      this.addTile(neutral, SpaceType.LAND, fspace2, {
-        tileType: TileType.GREENERY
-      });
+
+      function placeCityAndForest(game: Game, direction: -1 | 1) {
+        const space1 = game.getSpaceByOffset(direction);
+        game.addCityTile(neutral, space1.id, SpaceType.LAND);
+        const fspace1 = game.board.getForestSpace(
+            game.board.getAdjacentSpaces(space1)
+        );
+        game.addTile(neutral, SpaceType.LAND, fspace1, {
+          tileType: TileType.GREENERY
+        });
+      }
+
+      placeCityAndForest(this, 1);
+      placeCityAndForest(this, -1);
+
       return undefined;
     }
+
+    public getSpaceByOffset(direction: -1 | 1, type = "tile") {
+      const card = this.dealer.dealCard();
+      this.log("Dealt and discarded ${0} (cost ${1}) to place a ${2}", b => b.card(card).number(card.cost).string(type));
+  
+      const distance = Math.max(card.cost-1, 0); // Some cards cost zero.
+      const space = this.board.getNthAvailableLandSpace(distance, direction, undefined /* player */,
+        space => {
+          const adjacentSpaces = this.board.getAdjacentSpaces(space);
+          return adjacentSpaces.filter(sp => sp.tile?.tileType === TileType.CITY).length === 0 && // no cities nearby
+             adjacentSpaces.find(sp => this.board.canPlaceTile(sp)) !== undefined;  // can place forest nearby
+        });
+      if (space === undefined) {
+          throw new Error("Couldn't find space when card cost is " + card.cost);
+      }
+      return space;
+  }
 
     // Custom replacer to transform Map and Set to Array
     public replacer(key: any, value: any) {

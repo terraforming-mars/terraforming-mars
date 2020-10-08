@@ -9,67 +9,204 @@ export const HelpIconology = Vue.component("help-iconology", {
         
     },
     template: `
-        <div class="help-iconology-container">
-            <div class="row" style="display: flex;">
-                <div class="column">
-                    <section class="help-iconology-tags">
-                    <h2>Card Tags</h2>
-                        <div class="resource-tag tag-building"></div> : Building<br>
-                        <div class="resource-tag tag-space"></div> : Space<br>
-                        <div class="resource-tag tag-science"></div> : Science<br>
-                        <div class="resource-tag tag-power"></div> : Power<br>
-                        <div class="resource-tag tag-earth"></div> : Earth<br>
-                        <div class="resource-tag tag-jovian"></div> : Jovian<br>
-                        <div class="resource-tag tag-venus"></div> : Venus<br>
-                        <div class="resource-tag tag-plant"></div> : Plant<br>
-                        <div class="resource-tag tag-microbe"></div> : Microbe<br>
-                        <div class="resource-tag tag-animal"></div> : Animal<br>
-                        <div class="resource-tag tag-city"></div> : City<br>
-                        <div class="resource-tag tag-wild"></div> : Wild<br>
-                        <div class="resource-tag tag-event"></div> : Event<br>
-                    </section>
-                </div>
-                <div class="column">                        
-                    <section class="help-iconology-resources">
-                    <h2>Resources</h2>
-                        <div class="resource money"></div> : Megacredits<br>
-                        <div class="resource steel"></div> : Steel<br>
-                        <div class="resource titanium"></div> : Titanium<br>
-                        <div class="resource plant"></div> : Plant<br>
-                        <div class="resource energy"></div> : Energy<br>
-                        <div class="resource heat"></div> : Heat<br>
-                        <br>
-                        <div class="resource animal"></div> : Animal<br>
-                        <div class="resource microbe"></div> : Microbe<br>
-                        <div class="resource science"></div> : Science<br>
-                        <div class="resource fighter"></div> : Fighter<br>
-                        <div class="resource floater"></div> : Floater<br>
-                        <br>
-                        <div class="tile rating"></div> : Terraforming Rating (TR)<br>
-                        <div class="tile colony"></div> : Colony<br>
-                        <div class="tile fleet"></div> : Trade Fleet<br>
-                    </section>
-                </div>
-                <div class="column">                        
-                    <section class="help-iconology-tiles">
-                    <h2>Tiles</h2>
-                        <div class="tile greenery-no-O2-tile"></div> : Greenery<br>
-                        <div class="tile city-tile"></div> : City<br>
-                        <div class="tile ocean-tile"></div> : Ocean<br>
-                        <div class="tile special-tile"></div> : Special<br>
-                    </section>
-                </div>
-                <div class="column">                        
-                    <section class="help-iconology-parameters">
-                    <h2>Global Parameters</h2>
-                        <div class="help-iconology-param-box"><div class="tile temperature-tile"></div></div> : Temperature<br>
-                        <div class="help-iconology-param-box"><div class="tile oxygen-tile"></div></div> : Oxygen<br>
-                        <div class="help-iconology-param-box"><div class="tile ocean-tile"></div></div> : Ocean<br>
-                        <div class="help-iconology-param-box"><div class="tile venus-tile"></div></div> : Venus<br>
-                    </section>
-                </div>
+    <div class="help-page-container">
+        <div class="help-page-column">
+            <div>
+                <div class="help-page-section-title">Card Tags</div>
             </div>
-
+            <div>
+                <div class="resource-tag tag-building"></div>
+                <div class="help-page-label" v-i18n>Building</div>
+            </div>
+            <div>
+                <div class="resource-tag tag-space"></div>
+                <div class="help-page-label" v-i18n>Space</div>
+            </div>
+            <div>
+                <div class="resource-tag tag-science"></div>
+                <div class="help-page-label" v-i18n>Science</div>
+            </div>
+            <div>
+                <div class="resource-tag tag-power"></div>
+                <div class="help-page-label" v-i18n>Power</div>
+            </div>
+            <div>
+                <div class="resource-tag tag-earth"></div>
+                <div class="help-page-label" v-i18n>Earth</div>
+            </div>
+            <div>
+                <div class="resource-tag tag-jovian"></div>
+                <div class="help-page-label" v-i18n>Jovian</div>
+                </div>
+            <div>
+                <div class="resource-tag tag-venus"></div>
+                <div class="help-page-label" v-i18n>Venus</div>
+                <div class="expansion-icon expansion-icon-venus"></div>
+            </div>
+            <div>
+                <div class="resource-tag tag-plant"></div>
+                <div class="help-page-label" v-i18n>Plant</div>
+            </div>
+            <div>
+                <div class="resource-tag tag-microbe"></div>
+                <div class="help-page-label" v-i18n>Microbe</div>
+            </div>
+            <div>
+                <div class="resource-tag tag-animal"></div>
+                <div class="help-page-label" v-i18n>Animal</div>
+            </div>
+            <div>
+                <div class="resource-tag tag-city"></div>
+                <div class="help-page-label" v-i18n>City</div>
+            </div>
+            <br>
+            <div>
+                <div class="resource-tag tag-wild"></div>
+                <div class="help-page-label" v-i18n>Wild</div>
+            </div>
+            <div>
+                <div class="resource-tag tag-event"></div>
+                <div class="help-page-label" v-i18n>Event</div>
+            </div>
         </div>
+        
+        <div class="help-page-column">
+            <div>
+                <div class="help-page-section-title">Resources</div>
+            </div>
+            <div class="help-page-sublabel">
+                Standard Resources
+            </div>
+            <div>
+                <div class="help-page-resource money"><div class="help-page-mc-font">€</div></div>
+                <div class="help-page-label" v-i18n>MegaCredits (M€)</div>
+            </div>
+            <div>
+                <div class="help-page-resource steel"></div>
+                <div class="help-page-label" v-i18n>Steel</div>
+            </div>
+            <div>
+                <div class="help-page-resource titanium"></div>
+                <div class="help-page-label" v-i18n>Titanium</div>
+            </div>
+            <div>
+                <div class="help-page-resource plant"></div>
+                <div class="help-page-label" v-i18n>Plant</div>
+            </div>
+            <div>
+                <div class="help-page-resource energy"></div>
+                <div class="help-page-label" v-i18n>Energy</div>
+            </div>
+            <div>
+                <div class="help-page-resource heat"></div>
+                <div class="help-page-label" v-i18n>Heat</div>
+            </div>
+            <div class="help-page-sublabel">
+                Resources on Cards
+            </div>
+            <div>
+                <div class="help-page-resource animal"></div>
+                <div class="help-page-label" v-i18n>Animal</div>
+            </div>
+            <div>
+                <div class="help-page-resource microbe"></div>
+                <div class="help-page-label" v-i18n>Microbe</div>
+            </div>
+            <div>
+                <div class="help-page-resource science"></div>
+                <div class="help-page-label" v-i18n>Science</div>
+            </div>
+            <div>
+                <div class="help-page-resource floater"></div>
+                <div class="help-page-label" v-i18n>Floater</div>
+            </div>
+            <div>
+                <div class="help-page-resource asteroid"></div>
+                <div class="help-page-label" v-i18n>Asteroid</div>
+            </div>
+        </div>
+        
+        <div class="help-page-column">
+            <div>
+                <div class="help-page-section-title">Tiles</div>
+            </div>
+            <div>
+                <div class="tile greenery-no-O2-tile"></div>
+                <div class="help-page-label" v-i18n>Greenery</div>
+            </div>
+            <div>
+                <div class="tile city-tile"></div>
+                <div class="help-page-label" v-i18n>City</div>
+            </div>
+            <div>
+                <div class="tile ocean-tile"></div>
+                <div class="help-page-label" v-i18n>Ocean</div>
+            </div>
+            <div>
+                <div class="tile special-tile"></div>
+                <div class="help-page-label" v-i18n>Special</div>
+            </div>
+        </div>
+        
+        <div class="help-page-column">
+            <div>
+                <div class="help-page-section-title">Global Parameters</div>
+            </div>
+            <div>
+                <div class="tile help-page-param-box-temperature"></div>
+                <div class="help-page-label" v-i18n>Temperature</div>
+            </div>
+            <div>
+                <div class="tile help-page-param-box-oxygen"></div>
+                <div class="help-page-label" v-i18n>Oxygen</div>
+            </div>
+            <div>
+                <div class="tile help-page-param-box-ocean"></div>
+                <div class="help-page-label" v-i18n>Oceans</div>
+            </div>
+            <div>
+                <div class="tile help-page-param-box-venus"></div>
+                <div class="help-page-label" v-i18n>Venus</div>
+            </div>
+        </div>
+        
+        <div class="help-page-column">
+            <div>
+                <div class="help-page-section-title">Others</div>
+            </div>
+            <div>
+                <div class="help-page-victory-point">?</div>
+                <div class="help-page-label" v-i18n>Victory Point (VP)</div>
+            </div>
+            <div>
+                <div class="tile rating"></div>
+                <div class="help-page-label" v-i18n>Terraform Rating (TR)</div>
+            </div>
+            <div>
+                <div class="help-page-card card"></div>
+                <div class="help-page-label" v-i18n>Project Card</div>
+            </div>
+            <div>
+                <div class="tile colony"></div>
+                <div class="help-page-label" v-i18n>Colony</div>
+            </div>
+            <div>
+                <div class="tile trade"></div>
+                <div class="help-page-label" v-i18n>Trade</div>
+            </div>
+            <div>
+                <div class="tile fleet"></div>
+                <div class="help-page-label" v-i18n>Trade Fleet</div>
+            </div>
+            <div>
+                <div class="help-page-delegate"></div>
+                <div class="help-page-label" v-i18n>Delegate</div>
+            </div>
+            <div>
+                <div class="help-page-influence influence"></div>
+                <div class="help-page-label" v-i18n>Influence</div>
+            </div>
+        </div>
+    </div>
     `
 })

@@ -89,11 +89,13 @@ export class GameReloader {
                 cb(undefined);
             }
         }
+        this.pendingGame.clear();
         for (const pendingPlayer of Array.from(this.pendingPlayer.values())) {
             for (const cb of pendingPlayer) {
                 cb(undefined);
             }
         }
+        this.pendingPlayer.clear();
     }
 
     private loadAllGames(): void {

@@ -28,6 +28,7 @@ export const LogPanel = Vue.component("log-panel", {
             }
         },
         parseCardType: function(cardType: CardType, cardName: string) {
+            cardName = $t(cardName);
             if (cardType === CardType.EVENT) {
                 return "<log-card class=\"background-color-events\">"+cardName+"</log-card>";
             } else if (cardType === CardType.ACTIVE) {
@@ -42,9 +43,12 @@ export const LogPanel = Vue.component("log-panel", {
         },
         parseData: function(data: LogMessageData) {
             const translatableMessageDataTypes = [
+                LogMessageDataType.STRING,
                 LogMessageDataType.STANDARD_PROJECT,
                 LogMessageDataType.MILESTONE,
-                LogMessageDataType.AWARD
+                LogMessageDataType.AWARD,
+                LogMessageDataType.COLONY,
+                LogMessageDataType.PARTY
             ];
             if (data.type !== undefined && data.value !== undefined) {
                 if (data.type === LogMessageDataType.PLAYER) {
@@ -56,7 +60,7 @@ export const LogPanel = Vue.component("log-panel", {
                 } else if (data.type === LogMessageDataType.CARD) {
                     for (let player of this.players) {
                         if (player.corporationCard !== undefined && data.value === player.corporationCard.name) {
-                            return "<log-card class=\"background-color-corporation\">"+data.value+"</log-card>";
+                            return "<log-card class=\"background-color-corporation\">" + $t(data.value) + "</log-card>";
                         } else {
                             let cards = player.playedCards.concat(player.selfReplicatingRobotsCards);
                             for (let card of cards) {

@@ -206,9 +206,6 @@ export const Card = Vue.component("card", {
             return getCardContent(this.card.name);
         },
         getCardExpansion: function (): string {
-            if (this.card.name === "AI Central") {
-                console.log(getCardExtensionByName(this.card.name));
-            }
             return getCardExtensionByName(this.card.name);
         },
         getCard: function (): ICard | undefined {
@@ -220,8 +217,12 @@ export const Card = Vue.component("card", {
         getTags: function (): Array<String> | undefined {
             return this.getCard()?.tags;
         },
-        getCost: function (): number {
-            return this.getCard()?.cost || 0;
+        getCost: function (): number | null {
+            const cost = this.getCard()?.cost;
+            const type = this.getCardType();
+            return cost === undefined || type === CardType.PRELUDE
+                ? null
+                : cost;
         },
         getCardType: function (): CardType | undefined {
             return this.getCard()?.cardType;
@@ -239,22 +240,17 @@ export const Card = Vue.component("card", {
             return card.resources !== undefined ? card.resources : 0;
         },
     },
-    mounted: function () {
-        // console.log(this.card);
-        // console.log(this.getCard());
-        // console.log(this.getTags(), "TAGS");
-    },
     template: `
         <div :class="getCardClasses(card)">
             <div class="card-content-wrapper" v-i18n>
                 <div class="card-cost-and-tags">
-                    <CardCost v-if="getCost() > 0" :amount="getCost()" />
+                    <CardCost :amount="getCost()" />
                     <CardTags :tags="getTags()" />
                 </div>
                 <CardTitle :title="card.name" :type="getCardType()"/>
-                <CardExpansion :expansion="getCardExpansion()" />
-                <div class="content" v-html=this.getCardContent() />
+                <div v-html=this.getCardContent() />
             </div>
+            <CardExpansion :expansion="getCardExpansion()" />
             <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />
             <CardExtraContent :card="card" />
         </div>

@@ -355,6 +355,8 @@ input[type="radio"]:checked + .filterDiv::after {
 .preludeCard-icon:after {
     margin-left: -235px;
     margin-top: 284px;
+    bottom: 8px;
+    left: 8px;
 }
 
 .corporation-icon:after {
@@ -2311,6 +2313,12 @@ input[type="radio"]:checked + .filterDiv::after {
 
 /* refactored */
 .card-container {
+    .project-icon:after,
+    .preludeCard-icon:after {
+        bottom: 8px;
+        left: 8px;
+        margin: 0px;
+    }
     .card-content-wrapper {
         position: relative;
         .card-cost-and-tags {
@@ -2374,6 +2382,26 @@ input[type="radio"]:checked + .filterDiv::after {
             white-space: nowrap;
             margin-top: -6px;
             padding-top: 3px;
+            .prelude-label {
+                position: absolute;
+                text-transform: uppercase;
+                top: 15px;
+                left: 4px;
+                margin: 0px;
+                width: 80px;
+                height: 20px;
+                line-height: 22px;
+                text-align: center;
+                font-size: 12px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6),
+                    0 0 0 2px rgba(0, 0, 0, 0.3);
+                background-color: rgb(235, 118, 171);
+                border-radius: 14px 2px 2px 2px;
+                border-top: 2px solid rgb(221, 221, 221);
+                border-left: 2px solid rgb(221, 221, 221);
+                border-bottom: 2px solid rgb(137, 137, 137);
+                border-right: 2px solid rgb(137, 137, 137);
+            }
         }
         .card-expansion {
             position: absolute;

@@ -7,7 +7,16 @@ export const CardCost = Vue.component("CardCost", {
             required: true,
         },
     },
+    methods: {
+        getClasses: function (): string {
+            const classes = ["card-cost"];
+            if (this.amount === null || this.amount === undefined) {
+                classes.push("visibility-hidden");
+            }
+            return classes.join(" ");
+        },
+    },
     template: `
-        <div class="card-cost">{{ amount }}</div>
+        <div :class="getClasses()">{{ amount === null ? 0 : amount }}</div>
     `,
 });

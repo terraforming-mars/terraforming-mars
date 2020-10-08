@@ -1,7 +1,7 @@
 import Vue from "vue";
 import { CardType } from "../../cards/CardType";
 
-export const CardTitle = Vue.component("card-title", {
+export const CardTitle = Vue.component("CardTitle", {
     props: {
         title: {
             type: String,

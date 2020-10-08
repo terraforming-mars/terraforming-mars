@@ -21,8 +21,8 @@ import {
 } from "../Dealer";
 import { HTML_DATA } from "../HTML_data";
 import { CardModel } from "../models/CardModel";
-import { CardName } from "../CardName";
 import { CardTitle } from "./card/CardTitle";
+import { CardResourceCounter } from "./card/CardResourceCounter";
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
     if (cardName === new BeginnerCorporation().name) {
@@ -127,12 +127,13 @@ function getCardContent(cardName: string): string {
 
 export const Card = Vue.component("card", {
     components: {
-        "card-title": CardTitle,
+        CardTitle,
+        CardResourceCounter,
     },
     props: {
         "card": {
             type: Object as () => ICard,
-            required: true, 
+            required: true,
         },
         "actionUsed": {
             type: Function,
@@ -151,20 +152,17 @@ export const Card = Vue.component("card", {
         getTags: function (): Array<String> | undefined {
             return this.getCard()?.tags;
         },
-        getCardCssClass: function (card: CardModel): string {
-            let cssClass =
-                "filterDiv card-" + card.name.toLowerCase().replace(/ /g, "-");
+        getCardClasses: function (card: CardModel): string {
+            const classes = ["filterDiv"];
+            classes.push(`card-${card.name.toLowerCase().replace(/ /g, "-")}`);
+
             if (this.actionUsed) {
-                cssClass += " cards-action-was-used";
+                classes.push("cards-action-was-used");
             }
-            return cssClass;
+            return classes.join(" ");
         },
-        lifeFound: function (card: CardModel): boolean {
-            return (
-                card.name === CardName.SEARCH_FOR_LIFE &&
-                card.resources !== undefined &&
-                card.resources > 0
-            );
+        getResourceAmount: function (card: CardModel): number {
+            return card.resources !== undefined ? card.resources : 0;
         },
     },
     mounted: function () {
@@ -172,14 +170,14 @@ export const Card = Vue.component("card", {
         console.log(this.getTags(), "TAGS");
     },
     template: `
-    <div :class="getCardCssClass(card)">
-        <img v-if="lifeFound(card)" class="little-green-men" src="assets/martian.png" />
-        <div class="card_resources_counter" v-if="card.resources !== undefined">RES:<span class="card_resources_counter--number"> {{ card.resources }}</span></div>
-        <div class="card-content-wrapper" v-i18n>
-            <card-title :title="card.name" :type="card.cardType"/>
-            <card-tags :tags="getTags()" />
-            <div class="content" v-html=this.getCardContent() />
+        <div :class="getCardClasses(card)">
+            <div class="card-content-wrapper" v-i18n>
+                <CardTitle :title="card.name" :type="card.cardType"/>
+                <CardTags :tags="getTags()" />
+                <div class="content" v-html=this.getCardContent() />
+            </div>
+            <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />
+            <CardExtraContent :card="card" />
         </div>
-    </div>
     `,
 });

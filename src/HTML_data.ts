@@ -3490,7 +3490,7 @@ export const HTML_DATA: Map<string, string> =
               </div>
 `],
 [CardName.CREDICOR,`
-      <div class="corporation-label">corporation</div>
+      
       <div class="contentCorporation ">
           <div class="corporationEffectBox ">
               <div class="corporationEffectBoxLabel ">EFFECT</div>
@@ -3511,7 +3511,7 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.ECOLINE,`
      
-    <div class="corporation-label">corporation</div>
+    
     <div class="contentCorporation">
       <div class="corporationEffectBox">
         <div class="corporationEffectBoxLabel">EFFECT</div>
@@ -3539,7 +3539,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
 [CardName.HELION,` 
-    <div class="corporation-label">corporation</div>
+    
     <div class="contentCorporation">
       <div class="corporationEffectBox">
         <div class="corporationEffectBoxLabel">EFFECT</div>
@@ -3560,7 +3560,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
 [CardName.MINING_GUILD,` 
-    <div class="corporation-label">corporation</div>
+    
     <div class="contentCorporation">
       <div class="corporationEffectBox">
         <div class="corporationEffectBoxLabel">EFFECT</div>
@@ -3597,7 +3597,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
 [CardName.INTERPLANETARY_CINEMATICS,` 
-      <div class="corporation-label">corporation</div>
+      
       <div class="contentCorporation ">
           <div class="corporationEffectBox ">
               <div class="corporationEffectBoxLabel ">EFFECT</div>
@@ -3628,7 +3628,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.INVENTRIX,` 
-      <div class="corporation-label">corporation</div>
+      
       <div class="contentCorporation ">
           <div class="corporationEffectBox ">
               <div class="corporationEffectBoxLabel">EFFECT</div>
@@ -3656,7 +3656,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.PHOBOLOG,` 
-    <div class="corporation-label">corporation</div>
+    
     <div class="contentCorporation">
       <div class="corporationEffectBox">
         <div class="corporationEffectBoxLabel">EFFECT</div>
@@ -3693,7 +3693,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
 [CardName.THARSIS_REPUBLIC,` 
-      <div class="corporation-label">corporation</div>
+      
       <div class="contentCorporation ">
           <div class="corporationEffectBox ">
               <div class="corporationEffectBoxLabel ">EFFECT</div>
@@ -3713,7 +3713,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.THORGATE,` 
-    <div class="corporation-label">corporation</div>
+    
     <div class="contentCorporation">
       <div class="corporationEffectBox">
         <div class="corporationEffectBoxLabel">EFFECT</div>
@@ -3740,7 +3740,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
 [CardName.UNITED_NATIONS_MARS_INITIATIVE,` 
-    <div class="corporation-label">corporation</div>
+    
     <div class="contentCorporation">
       <div class="corporationEffectBox">
         <div class="corporationEffectBoxLabel">ACTION</div>
@@ -3770,7 +3770,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
 [CardName.TERACTOR,` 
-    <div class="corporation-label">corporation</div>
+    
     <div class="corporate-icon corporation-icon"></div>
     <div class="contentCorporation">
       <div class="corporationEffectBox">
@@ -3794,7 +3794,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
 [CardName.SATURN_SYSTEMS,` 
-    <div class="corporation-label">corporation</div>
+    
     <div class="corporate-icon corporation-icon"></div>
     <div class="contentCorporation">
       <div class="corporationEffectBox">
@@ -3831,7 +3831,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
 [CardName.APHRODITE,` 
-    <div class="corporation-label">corporation</div>
+    
     <div class="venus-icon corporation-icon"></div>
     <div class="contentCorporation">
       <div class="corporationEffectBox">
@@ -3858,7 +3858,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
 `],
 [CardName.CELESTIC,` 
-      <div class="corporation-label">corporation</div>
+      
       <div class="venus-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="pointsCorporation">1/3<div class="resource floater"></div></div>
@@ -3885,7 +3885,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
 `],
 [CardName.MANUTECH,` 
-      <div class="corporation-label">corporation</div>
+      
       <div class="venus-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">
@@ -3913,7 +3913,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.MORNING_STAR_INC,` 
-      <div class="corporation-label">corporation</div>
+      
       <div class="venus-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">
@@ -3938,7 +3938,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.VIRON,` 
-      <div class="corporation-label">corporation</div>
+      
       <div class="venus-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">
@@ -3960,7 +3960,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.CHEUNG_SHING_MARS,` 
-      <div class="corporation-label">corporation</div>
+      
       <div class="prelude-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">
@@ -3988,7 +3988,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.POINT_LUNA,` 
-        <div class="corporation-label">corporation</div>
+        
         <div class="prelude-icon corporation-icon"></div>
         <div class="contentCorporation ">
             <div class="corporationEffectBox ">
@@ -4020,7 +4020,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
 `],
 [CardName.ROBINSON_INDUSTRIES,`
-      <div class="corporation-label">corporation</div>
+      
       <div class="prelude-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">
@@ -4043,7 +4043,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
 `],
 [CardName.VALLEY_TRUST,` 
-        <div class="corporation-label">corporation</div>
+        
         <div class="prelude-icon corporation-icon"></div>
         <div class="contentCorporation ">
             <div class="corporationEffectBox ">
@@ -4064,7 +4064,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
 `],
 [CardName.VITOR,` 
-        <div class="corporation-label">corporation</div>
+        
         <div class="prelude-icon corporation-icon"></div>
         <div class="contentCorporation ">
             <div class="corporationEffectBox ">
@@ -4171,7 +4171,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.ARKLIGHT,` 
-      <div class="corporation-label">corporation</div>
+      
       <div class="colonies-icon corporation-icon"></div>
       <div class="contentCorporation">
          <div class="pointsCorporation">1/2<div class="resource animal"></div></div>
@@ -4246,7 +4246,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.UTOPIA_INVEST,` 
-<div class="corporation-label">corporation</div>
+
 <div class="turmoil-icon corporation-icon"></div>
 <div class="contentCorporation">
   <div class="corporationEffectBox">
@@ -4274,7 +4274,7 @@ export const HTML_DATA: Map<string, string> =
 </div>
 `],
 [CardName.POSEIDON,`
-      <div class="corporation-label">corporation</div>
+      
       <div class="colonies-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">
@@ -4292,7 +4292,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.STORMCRAFT_INCORPORATED,` 
-      <div class="corporation-label">corporation</div>
+      
       <div class="colonies-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox hover-hide-res" style="margin-top: 136px; height: 149px">
@@ -4312,7 +4312,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.ARCADIAN_COMMUNITIES,`
-      <div class="corporation-label">corporation</div>
+      
       <div class="promo-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">
@@ -4332,7 +4332,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.BEGINNER_CORPORATION,`
-      <div class="corporation-label">corporation</div>
+      
       <div class="contentCorporation">
         <div class="corporation-frame">BEGINNER CORPORATION</div>
         <div class="resource money">42</div>
@@ -4342,7 +4342,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.PHILARES,` 
-      <div class="corporation-label">corporation</div>
+      
       <div class="promo-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">
@@ -4365,7 +4365,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.RECYCLON,` 
-      <div class="corporation-label">corporation</div>
+      
       <div class="promo-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox hover-hide-res">
@@ -4383,8 +4383,7 @@ export const HTML_DATA: Map<string, string> =
                 <div class="production-box" style="margin-left:20px;"><div class="production steel"></div></div>
         <div class="description" style="margin-top:0px;text-align:center;">(You start with 38 MC and 1 steel production.)</div>
 `],
-[CardName.SPLICE,` 
-      <div class="corporation-label">corporation</div>
+[CardName.SPLICE,`
       <div class="promo-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">
@@ -4403,8 +4402,7 @@ export const HTML_DATA: Map<string, string> =
         <div class="description" style="margin-top:-2px;margin-left:-7px;margin-right:-7px;text-align:center;">(You start with 44 MC. As your first action, reveal cards until you have revealed a microbe tag. Take that card into hand and discard the rest.)</div>
       </div>
 `],
-[CardName.LAKEFRONT_RESORTS,` 
-            <div class="corporation-label">corporation</div>
+[CardName.LAKEFRONT_RESORTS,`
             <div class="turmoil-icon corporation-icon"></div>
             <div class="contentCorporation ">
                 <div class="corporationEffectBox" style="height:140px;margin-top:150px">
@@ -4428,8 +4426,7 @@ export const HTML_DATA: Map<string, string> =
                 </div>
             </div>
 `],
-[CardName.TERRALABS_RESEARCH,` 
-  <div class="corporation-label">corporation</div>
+[CardName.TERRALABS_RESEARCH,`
   <div class="turmoil-icon corporation-icon"></div>
   <div class="contentCorporation ">
       <div class="corporationEffectBox ">
@@ -4449,8 +4446,7 @@ export const HTML_DATA: Map<string, string> =
       </div>
   </div>
 `],
-[CardName.FACTORUM,` 
-          <div class="corporation-label">corporation</div>
+[CardName.FACTORUM,`
           <div class="promo-icon corporation-icon"></div>
           <div class="contentCorporation">
             <div class="corporationEffectBox">
@@ -4481,8 +4477,7 @@ export const HTML_DATA: Map<string, string> =
             </div>
           </div>
           `],
-[CardName.SEPTUM_TRIBUS,` 
-      <div class="corporation-label">corporation</div>
+[CardName.SEPTUM_TRIBUS,`
       <div class="turmoil-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">
@@ -4499,8 +4494,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-[CardName.ASTRODRILL,` 
-      <div class="corporation-label">corporation</div>
+[CardName.ASTRODRILL,`
       <div class="promo-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox hover-hide-res" style="height:165px;margin-top:127px">
@@ -4948,8 +4942,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
       </div>
 `],
-[CardName.PHARMACY_UNION,` 
-    <div class="corporation-label">corporation</div>
+[CardName.PHARMACY_UNION,`
     <div class="promo-icon corporation-icon"></div>
     <div class="contentCorporation">
 
@@ -5519,8 +5512,7 @@ export const HTML_DATA: Map<string, string> =
         (You start with 1 plant production, 1 MC production and 40 MC.)
       </div>
 `],
-[CardName.PROJECT_WORKSHOP,` 
-      <div class="corporation-label">corporation</div>
+[CardName.PROJECT_WORKSHOP,`
       <div class="community-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">
@@ -5557,8 +5549,7 @@ export const HTML_DATA: Map<string, string> =
         As your first action, draw a blue card.)
       </div>
 `],
-[CardName.INCITE,` 
-      <div class="corporation-label">corporation</div>
+[CardName.INCITE,`
       <div class="community-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">
@@ -5580,8 +5571,7 @@ export const HTML_DATA: Map<string, string> =
         (You start with 32 MC. As your first action, place two delegates in one party.)
       </div>
 `],
-[CardName.PLAYWRIGHTS,` 
-      <div class="corporation-label">corporation</div>
+[CardName.PLAYWRIGHTS,`
       <div class="community-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="corporationEffectBox">
@@ -5607,7 +5597,6 @@ export const HTML_DATA: Map<string, string> =
       </div>
 `],
 [CardName.MIDAS,`
-      <div class="corporation-label">corporation</div>
       <div class="community-icon corporation-icon"></div>
 
       <div class="midas">Midas</div>

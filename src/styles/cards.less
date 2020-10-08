@@ -2382,6 +2382,31 @@ input[type="radio"]:checked + .filterDiv::after {
             white-space: nowrap;
             margin-top: -6px;
             padding-top: 3px;
+            .corporation-label {
+                text-transform: uppercase;
+                float: left;
+                top: 8px;
+                position: absolute;
+                color: #020202;
+                width: 115px;
+                height: 14px;
+                line-height: 15px;
+                text-align: center;
+                font-size: 13px;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6),
+                    0 0 0 2px rgba(0, 0, 0, 0.3);
+                background: #cccccc;
+                background-color: rgb(255, 204, 100);
+                background: linear-gradient(
+                    to right,
+                    #e28c22,
+                    rgb(255, 204, 100),
+                    rgb(255, 204, 100),
+                    #e28c22
+                );
+                border-radius: 7px 7px 2px 2px;
+                text-transform: uppercase;
+            }
             .prelude-label {
                 position: absolute;
                 text-transform: uppercase;
@@ -2412,6 +2437,15 @@ input[type="radio"]:checked + .filterDiv::after {
             background-size: 24px 24px;
             background-position: center;
             box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6);
+        }
+        .contentCorporation {
+            color: #020202;
+            position: relative;
+            display: inline-block;
+            font-weight: bold;
+            padding: 8px;
+            top: -40px;
+            color: #020202;
         }
     }
 }

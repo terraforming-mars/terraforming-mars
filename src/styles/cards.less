@@ -676,6 +676,12 @@ input[type=radio]:checked + .filterDiv::after {
   background-image: url(./assets/tiles/empty.png);
 }
 
+.global-param-same-size{
+  width: 50px;
+  height: 50px;
+  align-self: center;
+}
+
 .temperature-tile {
   background-image: url(./assets/global-parameters/temperature.png);
   width: 14px;
@@ -687,6 +693,10 @@ input[type=radio]:checked + .filterDiv::after {
   background-image: url(./assets/tiles/greenery.png);
   background-size: 50px 46px;
   width: 50px;
+}
+
+.greenery-no-O2-tile {
+  background-image: url(./assets/tiles/greenery_no_O2.png);
 }
 
 .ocean-tile {
@@ -2145,4 +2155,22 @@ input[type=radio]:checked + .filterDiv::after {
   .second-line {
     margin-top: -10px;
   }
+}
+
+/*********** Prelude Styles ************/
+
+.prelude-ecology-experts-requirement-box{
+  margin-left:31px; 
+  width:70%;
+}
+
+.prelude-ecology-experts-crossout{
+  color:red;
+  font-size:56px;
+  display:inline-block;
+}
+
+.prelude-ecology-experts-requirement-text{
+  margin-top:-42px;
+  font-size: 14px;
 }

@@ -34,13 +34,13 @@ describe("RobinsonIndustries", function () {
     });
 
     it("Only allows to choose from lowest production(s)", function () {
-        player.setProduction(Resources.MEGACREDITS, -1);
+        player.addProduction(Resources.MEGACREDITS, -1);
         let result = card.action(player, game) as OrOptions;
         expect(result.options.length).to.eq(1);
 
-        player.setProduction(Resources.MEGACREDITS, 5);
-        player.setProduction(Resources.TITANIUM, 1);
-        player.setProduction(Resources.PLANTS, 2);
+        player.addProduction(Resources.MEGACREDITS, 5);
+        player.addProduction(Resources.TITANIUM, 1);
+        player.addProduction(Resources.PLANTS, 2);
 
         result = card.action(player, game) as OrOptions;
         expect(result.options.length).to.eq(3);

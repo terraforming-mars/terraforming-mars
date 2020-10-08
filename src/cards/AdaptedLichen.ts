@@ -12,7 +12,7 @@ export class AdaptedLichen implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
     public name: CardName = CardName.ADAPTED_LICHEN;
     public play(player: Player) {
-      player.setProduction(Resources.PLANTS);
+      player.addProduction(Resources.PLANTS);
       return undefined;
     }
 }

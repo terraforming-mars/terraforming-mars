@@ -19,7 +19,7 @@ export class Ganymede extends Colony implements IColony {
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);
-        player.setProduction(Resources.PLANTS);
+        player.addProduction(Resources.PLANTS);
         return undefined;
     }
     public giveTradeBonus(player: Player): void {

@@ -27,8 +27,8 @@ export class NoctisCity implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         const noctisSpace = game.getSpace(SpaceName.NOCTIS_CITY);
-        player.setProduction(Resources.ENERGY,-1);
-        player.setProduction(Resources.MEGACREDITS,3);
+        player.addProduction(Resources.ENERGY,-1);
+        player.addProduction(Resources.MEGACREDITS,3);
         if (game.gameOptions.boardName === BoardName.ORIGINAL) {
           game.addCityTile(player, noctisSpace.id);
           return undefined;

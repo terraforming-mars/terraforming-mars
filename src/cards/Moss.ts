@@ -21,7 +21,7 @@ export class Moss implements IProjectCard {
     }
     public play(player: Player) {
         player.plants--;
-        player.setProduction(Resources.PLANTS);
+        player.addProduction(Resources.PLANTS);
         return undefined;
     }
 }

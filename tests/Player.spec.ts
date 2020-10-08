@@ -28,8 +28,8 @@ describe("Player", function () {
         const player2 = new Player("test2", Color.RED, false);
         const player3 = new Player("test3", Color.YELLOW, false);
         const game = new Game("foobar", [player, player2, player3], player);
-        player2.setProduction(Resources.ENERGY,2);
-        player3.setProduction(Resources.ENERGY,2);
+        player2.addProduction(Resources.ENERGY,2);
+        player3.addProduction(Resources.ENERGY,2);
         player.playedCards.push(new LunarBeam());
         player.playedCards.push(new LunarBeam());
         const action = card.play(player, new Game("foobar", [player, player2, player3], player));
@@ -57,7 +57,7 @@ describe("Player", function () {
     it("Should run select amount for Insulation", function () {
         const card = new Insulation();
         const player = new Player("test", Color.BLUE, false);
-        player.setProduction(Resources.HEAT,2);
+        player.addProduction(Resources.HEAT,2);
         const game = new Game("foobar", [player], player);
         const action = card.play(player, new Game("foobar", [player,player], player));
         expect(action).not.to.eq(undefined);

@@ -23,7 +23,7 @@ export class UrbanDecomposers implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        player.setProduction(Resources.PLANTS, 1);
+        player.addProduction(Resources.PLANTS, 1);
 
         const microbeCards = player.getResourceCards(ResourceType.MICROBE);
 

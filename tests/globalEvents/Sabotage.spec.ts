@@ -16,8 +16,8 @@ describe("Sabotage", function () {
         const turmoil = new Turmoil(game);
 
         turmoil.initGlobalEvent(game);
-        player.setProduction(Resources.ENERGY, 1);
-        player2.setProduction(Resources.STEEL, 3);
+        player.addProduction(Resources.ENERGY, 1);
+        player2.addProduction(Resources.STEEL, 3);
 
         turmoil.chairman = player2.id;
         turmoil.dominantParty = new Kelvinists();

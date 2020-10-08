@@ -9,7 +9,7 @@ export class Supplier extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY];
     public name: CardName = CardName.SUPPLIER;
     public play(player: Player) {
-        player.setProduction(Resources.ENERGY,2);
+        player.addProduction(Resources.ENERGY,2);
         player.steel +=4;
         return undefined;
     }

@@ -5,7 +5,12 @@ import { CardName } from "../CardName";
 
 export const DebugUI = Vue.component("debug-ui", {
     components: {
-        Card,
+        Card
+    },
+    data: function() {
+        return {
+          filterText: ""
+        }
     },
     methods: {
         getAllProjectCards: function () {
@@ -38,28 +43,33 @@ export const DebugUI = Vue.component("debug-ui", {
                 ...ALL_PRELUDE_CARDS.map((cf) => cf.cardName),
             ].sort();
             return allItems;
+        },
+        filtered: function(cardName: string):boolean {
+            return this.$data.filterText.length == 0 || cardName.toUpperCase().indexOf(this.$data.filterText.toUpperCase()) > -1;
         }
     },
     template: `
         <div class="debug-ui-container">
+            <input class="form-input form-input-line" placeholder="filter" v-model="filterText">
+            <div class="cardbox"" v-for="card in getAllProjectCards()"></div>
             <section class="debug-ui-cards-list">
                 <h2>Project Cards</h2>
-                <div style="display: inline-block; vertical-align: top;" v-for="card in getAllProjectCards()">
-                    <Card :card="{'name': card}" />
+                <div class="cardbox"" v-for="card in getAllProjectCards()">
+                    <Card v-show="filtered(card)" :card="{'name': card}" />
                 </div>
             </section>
             <br>
             <section class="debug-ui-cards-list">
                 <h2>Corporations</h2>
-                <div style="display: inline-block; vertical-align: top;" v-for="card in getAllCorporationCards()">
-                    <Card :card="{'name': card}" />
+                <div class="cardbox"" v-for="card in getAllCorporationCards()">
+                    <Card v-show="filtered(card)" :card="{'name': card}" />
                 </div>
             </section>
             <br>
             <section class="debug-ui-cards-list">
                 <h2>Preludes</h2>
-                <div style="display: inline-block; vertical-align: top;" v-for="card in getAllPreludeCards()">
-                    <Card :card="{'name': card}" />
+                <div class="cardbox"" v-for="card in getAllPreludeCards()">
+                    <Card v-show="filtered(card)" :card="{'name': card}" />
                 </div>
             </section>
         </div>

@@ -17,7 +17,7 @@ export class InvestmentLoan implements IProjectCard {
         return player.getProduction(Resources.MEGACREDITS) >= -4;
     }
     public play(player: Player, _game: Game) {
-        player.setProduction(Resources.MEGACREDITS,-1);
+        player.addProduction(Resources.MEGACREDITS,-1);
         player.megaCredits += 10;
         return undefined;
     }

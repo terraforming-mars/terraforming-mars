@@ -10,7 +10,7 @@ export class Polyphemos implements CorporationCard {
     public startingMegaCredits: number = 50;
 
     public play(player: Player) {
-        player.setProduction(Resources.MEGACREDITS, 5);
+        player.addProduction(Resources.MEGACREDITS, 5);
         player.titanium = 5;
         player.cardCost = 5;
         return undefined;

@@ -21,7 +21,7 @@ describe("RefugeeCamps", function () {
     });
 
     it("Can't act", function () {
-        player.setProduction(Resources.MEGACREDITS, -5);
+        player.addProduction(Resources.MEGACREDITS, -5);
         expect(card.canAct(player)).to.eq(false);
     });
 

@@ -16,7 +16,7 @@ export class Playwrights implements CorporationCard {
     public startingMegaCredits: number = 38;
 
     public play(player: Player) {
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         return undefined;
     }
 

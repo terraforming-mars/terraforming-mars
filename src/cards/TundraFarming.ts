@@ -16,8 +16,8 @@ export class TundraFarming implements IProjectCard {
         return game.getTemperature() >= -6 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player) {
-        player.setProduction(Resources.PLANTS);
-        player.setProduction(Resources.MEGACREDITS,2);
+        player.addProduction(Resources.PLANTS);
+        player.addProduction(Resources.MEGACREDITS,2);
         player.plants++;
         return undefined;
     }

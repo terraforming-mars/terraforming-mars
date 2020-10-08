@@ -16,7 +16,7 @@ export class EcologyExperts extends PreludeCard implements IProjectCard {
         return 0;
     }
     public play(player: Player) {
-        player.setProduction(Resources.PLANTS);
+        player.addProduction(Resources.PLANTS);
         return undefined;
     }
 }

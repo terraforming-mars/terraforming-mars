@@ -16,7 +16,7 @@ describe("SmallAnimals", function () {
     });
 
     it("Can't play if oxygen level too low", function () {
-        player2.setProduction(Resources.PLANTS);
+        player2.addProduction(Resources.PLANTS);
         (game as any).oxygenLevel = 5;
         expect(card.canPlay(player, game)).to.eq(false);
     });
@@ -34,7 +34,7 @@ describe("SmallAnimals", function () {
 
     it("Should play", function () {
         (game as any).oxygenLevel = 6;
-        player2.setProduction(Resources.PLANTS);
+        player2.addProduction(Resources.PLANTS);
         expect(card.canPlay(player, game)).to.eq(true);
         
         player.playedCards.push(card);

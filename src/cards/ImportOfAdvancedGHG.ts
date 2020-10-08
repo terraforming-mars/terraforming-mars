@@ -14,7 +14,7 @@ export class ImportOfAdvancedGHG implements IProjectCard {
     public name: CardName = CardName.IMPORT_OF_ADVANCED_GHG;
 
     public play(player: Player, _game: Game) {
-        player.setProduction(Resources.HEAT,2);
+        player.addProduction(Resources.HEAT,2);
         return undefined;
     }
 }

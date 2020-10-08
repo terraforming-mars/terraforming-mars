@@ -14,7 +14,7 @@ export class Factorum implements IActionCard, CorporationCard {
     public startingMegaCredits: number = 37;
 
     public play(player: Player) {
-        player.setProduction(Resources.STEEL);
+        player.addProduction(Resources.STEEL);
         return undefined;
     }
 
@@ -27,7 +27,7 @@ export class Factorum implements IActionCard, CorporationCard {
             "Increase your energy production 1 step",
             "Increase production",
             () => {
-              player.setProduction(Resources.ENERGY);
+              player.addProduction(Resources.ENERGY);
               return undefined;
             }
         );

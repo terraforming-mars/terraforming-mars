@@ -22,14 +22,14 @@ describe("Shuttles", function () {
     });
 
     it("Can't play if oxygen level too low", function () {
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         (game as any).oxygenLevel = 4;
         expect(card.canPlay(player, game)).to.eq(false);
     });
 
     it("Should play", function () {
         (game as any).oxygenLevel = 5;
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         expect(card.canPlay(player, game)).to.eq(true);
 
         card.play(player);

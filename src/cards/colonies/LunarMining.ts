@@ -12,7 +12,7 @@ export class LunarMining implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {
-      player.setProduction(Resources.TITANIUM, Math.floor((player.getTagCount(Tags.EARTH)+1) / 2));  
+      player.addProduction(Resources.TITANIUM, Math.floor((player.getTagCount(Tags.EARTH)+1) / 2));  
       return undefined;
     }
 }

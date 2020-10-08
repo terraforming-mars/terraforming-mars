@@ -16,8 +16,8 @@ export class FoodFactory implements IProjectCard {
     return player.getProduction(Resources.PLANTS) >= 1;
   }
   public play(player: Player) {
-    player.setProduction(Resources.PLANTS,-1);
-    player.setProduction(Resources.MEGACREDITS,4);
+    player.addProduction(Resources.PLANTS,-1);
+    player.addProduction(Resources.MEGACREDITS,4);
     return undefined;
   }
   public getVictoryPoints() {

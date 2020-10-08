@@ -13,7 +13,7 @@ export class Mine implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {
-        player.setProduction(Resources.STEEL);
+        player.addProduction(Resources.STEEL);
         return undefined;
     }
 }

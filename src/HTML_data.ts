@@ -6010,7 +6010,7 @@ export const HTML_DATA: Map<string, string> =
                     <div STYLE="font-size:10px">TACTICAL GENOMICS</div>
                 </div>
                 <div class="resource money" style="margin-left:60px;margin-right:25px;">44</div>
-        <div class="resource card"><div class="card-icon microbe"></div></div>
+        <div class="resource card"><div class="card-icon tag-microbe"></div></div>
         <div class="description" style="margin-top:-2px;margin-left:-7px;margin-right:-7px;text-align:center;">(You start with 44 MC. As your first action, reveal cards until you have revealed a microbe tag. Take that card into hand and discard the rest.)</div>
       </div>
 `],
@@ -6289,7 +6289,10 @@ export const HTML_DATA: Map<string, string> =
         <div class="production-box">
           <div class="production plant"></div>
         </div><br>
-        <div class="requirements" style="margin-left:31px; width:70%;"><div style="color:red;font-size:56px;display:inline-block;">X</div><div style="position:absolute;margin-top:-40px;margin-left:6px;">Project Requirements</div></div>
+        <div class="requirements prelude-ecology-experts-requirement-box">
+          <div class="prelude-ecology-experts-crossout">X</div>
+          <div class="prelude-ecology-experts-requirement-text">Project Requirements</div>
+        </div>
         <div class="description">
           Increase your plant production 1 step. Play a card from hand, ignoring global requirements.
         </div>
@@ -6315,7 +6318,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">P12</div>
       <div class="content">
         <div class="tile greenery-tile"></div>
-        <div class="resource card"><div class="card-icon card-icon-plant">&#x1F331;&#xFE0E;</div></div> <div class="resource card"><div class="card-icon card-icon-plant">&#x1F331;&#xFE0E;</div></div>
+        <div class="resource card"><div class="card-icon tag-plant"></div></div><div class="resource card"><div class="card-icon tag-plant"></div></div>
         <div class="description">
           Place 1 Greenery Tile. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.
         </div>
@@ -6654,7 +6657,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="card-number">P35</div>
       <div class="content">
         <div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div><div class="resource titanium"></div>
-        <div class="resource card"><div class="card-icon card-icon-space">&#x2734;</div></div> <div class="resource card"><div class="card-icon card-icon-space">&#x2734;</div></div>
+        <div class="resource card"><div class="card-icon tag-space"></div></div><div class="resource card"><div class="card-icon tag-space"></div></div>
         <div class="description">
           Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.
         </div>

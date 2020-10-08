@@ -14,7 +14,7 @@ export class ImportedGHG implements IProjectCard {
     public cardType: CardType = CardType.EVENT;
 
     public play(player: Player, _game: Game) {
-        player.setProduction(Resources.HEAT);
+        player.addProduction(Resources.HEAT);
         player.heat += 3;
         return undefined;
     }

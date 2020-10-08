@@ -19,7 +19,7 @@ export class GeneRepair implements IProjectCard {
         if (player.getTagCount(Tags.SCIENCE) < 3) {
             throw "Requires 3 science tags.";
         }
-        player.setProduction(Resources.MEGACREDITS,2);
+        player.addProduction(Resources.MEGACREDITS,2);
         return undefined;
     }
     public getVictoryPoints() {

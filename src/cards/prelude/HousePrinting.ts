@@ -14,7 +14,7 @@ export class HousePrinting implements IProjectCard {
 
 
     public play(player: Player) {
-        player.setProduction(Resources.STEEL);
+        player.addProduction(Resources.STEEL);
         return undefined;
     }
     public getVictoryPoints() {

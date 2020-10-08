@@ -22,7 +22,7 @@ export class ParliamentHall implements IProjectCard {
 
     public play(player: Player) {
         let amount = Math.floor((player.getTagCount(Tags.STEEL) + 1) / 3);
-        player.setProduction(Resources.MEGACREDITS, amount);
+        player.addProduction(Resources.MEGACREDITS, amount);
         return undefined;
     }
 

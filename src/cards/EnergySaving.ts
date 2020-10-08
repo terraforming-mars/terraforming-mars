@@ -14,7 +14,7 @@ export class EnergySaving implements IProjectCard {
     public name: CardName = CardName.ENERGY_SAVING;
 
     public play(player: Player, game: Game) {
-      player.setProduction(Resources.ENERGY,game.getCitiesInPlay());
+      player.addProduction(Resources.ENERGY,game.getCitiesInPlay());
       return undefined;
     }
 }

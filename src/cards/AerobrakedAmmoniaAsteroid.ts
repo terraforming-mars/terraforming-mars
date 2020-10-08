@@ -18,8 +18,8 @@ export class AerobrakedAmmoniaAsteroid implements IProjectCard {
 
     public play(player: Player, game: Game) {
       const cardsToPick = player.getResourceCards(ResourceType.MICROBE);
-      player.setProduction(Resources.HEAT,3);
-      player.setProduction(Resources.PLANTS);
+      player.addProduction(Resources.HEAT,3);
+      player.addProduction(Resources.PLANTS);
 
       if (cardsToPick.length < 1) return undefined;
 

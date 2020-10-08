@@ -10,7 +10,7 @@ export class EcoLine implements CorporationCard {
     public tags: Array<Tags> = [Tags.PLANT];
     public startingMegaCredits: number = 36;
     public play(player: Player) {
-        player.setProduction(Resources.PLANTS,2);
+        player.addProduction(Resources.PLANTS,2);
         player.plants = 3;
         player.plantsNeededForGreenery = 7;
         return undefined;

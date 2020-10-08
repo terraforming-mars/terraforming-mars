@@ -20,8 +20,8 @@ export class Hackers implements IProjectCard {
 
     public play(player: Player, game: Game) {
         game.addResourceProductionDecreaseInterrupt(player, Resources.MEGACREDITS, 2);
-        player.setProduction(Resources.MEGACREDITS,2);
-        player.setProduction(Resources.ENERGY,-1);
+        player.addProduction(Resources.MEGACREDITS,2);
+        player.addProduction(Resources.ENERGY,-1);
         return undefined;
     }
 

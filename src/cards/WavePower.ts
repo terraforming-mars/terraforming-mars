@@ -16,7 +16,7 @@ export class WavePower implements IProjectCard {
         return game.board.getOceansOnBoard() >= 3 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         return undefined;
     }
     public getVictoryPoints() {

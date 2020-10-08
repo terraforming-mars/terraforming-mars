@@ -14,7 +14,7 @@ export class NitrogenDelivery extends PreludeCard implements IProjectCard {
     public play(player: Player, game: Game) {     
         player.megaCredits += this.bonusMc;
         player.increaseTerraformRating(game);
-        player.setProduction(Resources.PLANTS);
+        player.addProduction(Resources.PLANTS);
         return undefined;
     }
 }

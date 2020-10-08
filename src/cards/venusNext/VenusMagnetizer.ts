@@ -33,7 +33,7 @@ export class VenusMagnetizer implements IActionCard,IProjectCard {
         return hasEnergyProduction && !venusMaxed;
     }   
     public action(player: Player, game: Game) {
-        player.setProduction(Resources.ENERGY,-1);
+        player.addProduction(Resources.ENERGY,-1);
         game.increaseVenusScaleLevel(player,1);
         return undefined;
     }

@@ -30,7 +30,7 @@ export class VenusSoils implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        player.setProduction(Resources.PLANTS);
+        player.addProduction(Resources.PLANTS);
         game.increaseVenusScaleLevel(player,1);
 
         const microbeCards = player.getResourceCards(ResourceType.MICROBE);

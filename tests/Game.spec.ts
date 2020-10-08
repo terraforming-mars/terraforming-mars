@@ -77,10 +77,10 @@ describe("Game", function () {
         game.fundAward(player, award);
 
         // Set second player to win Banker award
-        player2.setProduction(Resources.MEGACREDITS,10);
+        player2.addProduction(Resources.MEGACREDITS,10);
   
         // Our testing player will be 2nd Banker in the game
-        player.setProduction(Resources.MEGACREDITS,7);
+        player.addProduction(Resources.MEGACREDITS,7);
 
         // Two other players will share Thermalist award
         award = new Thermalist();

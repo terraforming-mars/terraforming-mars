@@ -17,7 +17,7 @@ export class GreatEscarpmentConsortium implements IProjectCard {
     }
     public play(player: Player, game: Game) {
         game.addResourceProductionDecreaseInterrupt(player, Resources.STEEL, 1);
-        player.setProduction(Resources.STEEL);
+        player.addProduction(Resources.STEEL);
         return undefined;
     }
 }

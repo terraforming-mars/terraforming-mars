@@ -65,7 +65,7 @@ export class Aridor implements CorporationCard {
             let currentSize = this.allTags.size;
             this.allTags.add(tag);
             if (this.allTags.size > currentSize) {
-                player.setProduction(Resources.MEGACREDITS);
+                player.addProduction(Resources.MEGACREDITS);
             }
         }
         return undefined;

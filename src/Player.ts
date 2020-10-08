@@ -255,7 +255,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
     }
 
-    public setProduction(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
+    public addProduction(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
       if (resource === Resources.MEGACREDITS) this.megaCreditProduction = Math.max(-5, this.megaCreditProduction + amount);
       if (resource === Resources.STEEL) this.steelProduction = Math.max(0, this.steelProduction + amount);
       if (resource === Resources.TITANIUM) this.titaniumProduction = Math.max(0, this.titaniumProduction + amount);
@@ -1443,7 +1443,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Confirm",
         () => {
           game.addSelectHowToPayInterrupt(this, this.powerPlantCost, false, false, "Select how to pay for Power Plant project");
-          this.setProduction(Resources.ENERGY);
+          this.addProduction(Resources.ENERGY);
           this.onStandardProject(StandardProjectType.POWER_PLANT);
           game.log("${0} used ${1} standard project", b => b.player(this).standardProject("Power plant"));
           return undefined;
@@ -1501,7 +1501,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           game.addSelectHowToPayInterrupt(this, constants.CITY_COST, false, false, "Select how to pay for City project");
           game.addInterrupt(new SelectCity(this, game));
           this.onStandardProject(StandardProjectType.CITY);
-          this.setProduction(Resources.MEGACREDITS);
+          this.addProduction(Resources.MEGACREDITS);
           game.log("${0} used ${1} standard project", b => b.player(this).standardProject("City"));
           return undefined;
         }
@@ -1587,8 +1587,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         "Pay",
         () => {
           game.addSelectHowToPayInterrupt(this, 10, false, false, "Select how to pay for Turmoil Kelvinists action");
-          this.setProduction(Resources.ENERGY);
-          this.setProduction(Resources.HEAT);
+          this.addProduction(Resources.ENERGY);
+          this.addProduction(Resources.HEAT);
           game.log("${0} used Turmoil Kelvinists action", b => b.player(this));
           return undefined;
         }

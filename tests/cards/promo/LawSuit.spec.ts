@@ -26,13 +26,13 @@ describe("LawSuit", function () {
     });
 
     it("Can play if production decreased this turn by other player", function () {
-        player.setProduction(Resources.MEGACREDITS, -1, game, player2);
+        player.addProduction(Resources.MEGACREDITS, -1, game, player2);
         expect(card.canPlay(player)).to.eq(true);
     })
 
     it("Should play", function () {
         player.setResource(Resources.MEGACREDITS, -1, game, player2);
-        player.setProduction(Resources.MEGACREDITS, -1, game, player2);
+        player.addProduction(Resources.MEGACREDITS, -1, game, player2);
         
         const play = card.play(player, game);
         expect(play instanceof SelectPlayer).to.eq(true);

@@ -26,8 +26,8 @@ export class DomedCrater implements IProjectCard {
           (space: ISpace) => {
             game.addCityTile(player, space.id);
             player.plants += 3;
-            player.setProduction(Resources.ENERGY,-1);
-            player.setProduction(Resources.MEGACREDITS,3);
+            player.addProduction(Resources.ENERGY,-1);
+            player.addProduction(Resources.MEGACREDITS,3);
             return undefined;
           }
       );

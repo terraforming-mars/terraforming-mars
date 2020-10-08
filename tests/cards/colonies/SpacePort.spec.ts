@@ -17,7 +17,7 @@ describe("SpacePort", function () {
     });
 
     it("Can't play without colony", function () {
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         expect(card.canPlay(player,game)).to.eq(false);
     });
 
@@ -29,7 +29,7 @@ describe("SpacePort", function () {
     });
 
     it("Should play", function () {
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         let colony = new Ceres();
         colony.colonies.push(player.id);
         game.colonies.push(colony);

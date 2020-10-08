@@ -13,10 +13,10 @@ describe("LunarBeam", function () {
     });
 
     it("Can play", function () {
-        player.setProduction(Resources.MEGACREDITS,-4);
+        player.addProduction(Resources.MEGACREDITS,-4);
         expect(card.canPlay(player)).to.eq(false);
 
-        player.setProduction(Resources.MEGACREDITS);
+        player.addProduction(Resources.MEGACREDITS);
         expect(card.canPlay(player)).to.eq(true);
     });
 

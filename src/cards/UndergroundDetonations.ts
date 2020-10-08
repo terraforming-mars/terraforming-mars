@@ -19,7 +19,7 @@ export class UndergroundDetonations implements IActionCard, IProjectCard {
     }
     public action(player: Player, game: Game) {
         game.addSelectHowToPayInterrupt(player, 10, false, false, "Select how to pay for action");
-        player.setProduction(Resources.HEAT,2);
+        player.addProduction(Resources.HEAT,2);
         return undefined;
     }
     public play() {

@@ -16,8 +16,8 @@ export class CarbonateProcessing implements IProjectCard {
       return player.getProduction(Resources.ENERGY) >= 1;
     }
     public play(player: Player) {
-      player.setProduction(Resources.ENERGY,-1);
-      player.setProduction(Resources.HEAT,3);
+      player.addProduction(Resources.ENERGY,-1);
+      player.addProduction(Resources.HEAT,3);
       return undefined;
     }
 }

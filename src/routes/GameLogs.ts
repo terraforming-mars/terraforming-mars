@@ -30,7 +30,7 @@ export class GameLogs extends Route {
             return;
         }
 
-        this.gameReloader.getByGameId(id, (game) => {
+        this.gameReloader.getByPlayerId(id, (game) => {
             if (game === undefined) {
                 console.warn("game not found");
                 this.notFound(req, res);

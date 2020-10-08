@@ -1962,9 +1962,14 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         if (interrupt !== undefined && interrupt.beforeAction !== undefined) {
           interrupt.beforeAction();
         }
-        this.setWaitingFor(game.interrupts.splice(interruptIndex, 1)[0].playerInput, () => {
+        if (interrupt.playerInput !== undefined) {
+          this.setWaitingFor(game.interrupts.splice(interruptIndex, 1)[0].playerInput, () => {
+            cb();
+          });
+        } else {
+          game.interrupts.splice(interruptIndex, 1);
           cb();
-        });
+        }
       } else {
         cb();
       }
@@ -2209,7 +2214,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return this.waitingFor;
     }
 
-    public setWaitingFor(input: PlayerInput, cb: () => void): void {
+    public setWaitingFor(input: PlayerInput | undefined, cb: () => void): void {
       this.waitingFor = input;
       this.waitingForCb = cb;
     }

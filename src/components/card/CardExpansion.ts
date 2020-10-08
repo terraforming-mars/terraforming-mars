@@ -6,13 +6,11 @@ export const CardExpansion = Vue.component("CardExpansion", {
         expansion: {
             type: String,
             required: true,
-            validator: (exp: CorporationGroup) =>
-                Object.values(CorporationGroup).includes(exp),
         },
     },
     methods: {
         getClasses: function (): string {
-            const classes = ["project-icon"];
+            const classes = ["card-expansion", "project-icon"];
             if (this.expansion === CorporationGroup.PROMO) {
                 classes.push("promo-icon");
             } else if (this.expansion === CorporationGroup.COLONIES) {
@@ -25,6 +23,8 @@ export const CardExpansion = Vue.component("CardExpansion", {
                 classes.push("community-icon");
             } else if (this.expansion === CorporationGroup.PRELUDE) {
                 classes.push("prelude-icon");
+            } else if (this.expansion === "corporation") {
+                classes.push("corporate-icon");
             }
 
             return classes.join(" ");

@@ -139,7 +139,12 @@ export function getProjectCardByName(
     return undefined;
 }
 
-export function getCardExtensionByName(cardName: string): CorporationGroup {
+export function getCardExtensionByName(cardName: string): string {
+    //promo
+    if (ALL_CORP_ERA_PROJECT_CARDS.find((c) => c.cardName === cardName))
+        return "corporation";
+    if (ALL_CORP_ERA_CORPORATION_CARDS.find((c) => c.cardName === cardName))
+        return "corporation";
     //prelude
     if (ALL_PRELUDE_CORPORATIONS.find((c) => c.cardName === cardName))
         return CorporationGroup.PRELUDE;
@@ -200,7 +205,10 @@ export const Card = Vue.component("card", {
         getCardContent: function () {
             return getCardContent(this.card.name);
         },
-        getCardExpansion: function (): CorporationGroup {
+        getCardExpansion: function (): string {
+            if (this.card.name === "AI Central") {
+                console.log(getCardExtensionByName(this.card.name));
+            }
             return getCardExtensionByName(this.card.name);
         },
         getCard: function (): ICard | undefined {
@@ -216,11 +224,10 @@ export const Card = Vue.component("card", {
             return this.getCard()?.cost || 0;
         },
         getCardType: function (): CardType | undefined {
-            console.log(this.getCard());
             return this.getCard()?.cardType;
         },
         getCardClasses: function (card: CardModel): string {
-            const classes = ["filterDiv"];
+            const classes = ["card-container", "filterDiv"];
             classes.push("card-" + card.name.toLowerCase().replace(/ /g, "-"));
 
             if (this.actionUsed) {
@@ -240,9 +247,11 @@ export const Card = Vue.component("card", {
     template: `
         <div :class="getCardClasses(card)">
             <div class="card-content-wrapper" v-i18n>
+                <div class="card-cost-and-tags">
+                    <CardCost v-if="getCost() > 0" :amount="getCost()" />
+                    <CardTags :tags="getTags()" />
+                </div>
                 <CardTitle :title="card.name" :type="getCardType()"/>
-                <CardCost v-if="getCost() > 0" :amount="getCost()" />
-                <CardTags :tags="getTags()" />
                 <CardExpansion :expansion="getCardExpansion()" />
                 <div class="content" v-html=this.getCardContent() />
             </div>

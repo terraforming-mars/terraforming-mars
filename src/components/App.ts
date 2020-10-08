@@ -6,6 +6,7 @@ import { PlayerHome } from "./PlayerHome";
 import { StartScreen } from "./StartScreen";
 import { LoadGameForm } from "./LoadGameForm";
 import { DebugUI } from "./DebugUI";
+import { HelpIconology } from "./HelpIconology";
 
 export const mainAppSettings = {
     "el": "#app",
@@ -37,6 +38,7 @@ export const mainAppSettings = {
         "player-end": GameEnd,
         "games-overview": GamesOverview,
         "debug-ui": DebugUI,
+        "help-iconology": HelpIconology,
     },
     "methods": {
         setVisibilityState: function (targetVar: string, isVisible: boolean) {
@@ -129,6 +131,8 @@ export const mainAppSettings = {
             app.screen = "load";
         } else if (currentPathname === "/debug-ui") {
             app.screen = "debug-ui";
+        } else if (currentPathname === "/help-iconology") {
+            app.screen = "help-iconology";
         } else {
             app.screen = "start-screen";
         }

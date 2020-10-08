@@ -322,7 +322,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Print game_id if solo game
       if (players.length === 1) {
-        this.log("The id of this game is ${0}", b => b.string(this.id));
+        this.log("The id of this game is ${0}", b => b.raw_string(this.id));
       }      
 
       this.log("Generation ${0}", b => b.forNewGeneration().number(this.generation));

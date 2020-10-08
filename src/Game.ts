@@ -1154,9 +1154,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
           if (interrupt.beforeAction !== undefined) {
             interrupt.beforeAction();
           }
-          interrupt.player.setWaitingFor(interrupt.playerInput, () => {
-            this.playerIsFinishedTakingActions();
-          });
+          if (interrupt.playerInput !== undefined) {
+              interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+                  this.playerIsFinishedTakingActions();
+              });
+          } else {
+              this.playerIsFinishedTakingActions();
+          }
           return;
         }
       }

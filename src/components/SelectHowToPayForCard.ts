@@ -35,7 +35,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         } as SelectHowToPayForCardModel;
     },
     components: {
-        "card": Card,
+        Card,
         "Button": Button   
     },
     mixins: [PaymentWidgetMixin],
@@ -326,7 +326,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
 
   <label v-for="availableCard in playerinput.cards" class="payments_cards">
     <input class="hidden" type="radio" v-model="card" v-on:change="cardChanged()" :value="availableCard" />
-    <card class="cardbox" :card="availableCard" />
+    <Card class="cardbox" :card="availableCard" />
   </label>
 
   <section v-trim-whitespace>

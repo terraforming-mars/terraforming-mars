@@ -129,7 +129,15 @@ export const Card = Vue.component("card", {
     components: {
         "card-title": CardTitle,
     },
-    props: ["card", "actionUsed"],
+    props: {
+        "card": {
+            type: Object as () => ICard,
+            required: true, 
+        },
+        "actionUsed": {
+            type: Function,
+        },
+    },
     methods: {
         getCardContent: function () {
             return getCardContent(this.card.name);

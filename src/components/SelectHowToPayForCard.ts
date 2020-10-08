@@ -1,5 +1,6 @@
 
 import Vue from "vue";
+import { Button } from "../components/common/Button";
 
 interface SelectHowToPayForCardModel {
     card: string | undefined;
@@ -34,7 +35,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         } as SelectHowToPayForCardModel;
     },
     components: {
-        "card": Card
+        "card": Card,
+        "Button": Button   
     },
     mixins: [PaymentWidgetMixin],
     mounted: function () {
@@ -52,7 +54,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
     },
     methods: {
         getCardCost: function () {
-            let cards = this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards);
+            const cards = this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards);
             for (const icard of cards) {
                 if (this.$data.card.name === icard.name) {
                     return icard.calculatedCost
@@ -62,8 +64,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultMicrobesValue: function() {
             // automatically use available microbes to pay if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseMicrobes()) {
-                let remainingCostToPay = this.$data.cost - this.player.megaCredits;
-                let requiredMicrobes = Math.ceil(remainingCostToPay / 2);
+                const remainingCostToPay = this.$data.cost - this.player.megaCredits;
+                const requiredMicrobes = Math.ceil(remainingCostToPay / 2);
 
                 if (requiredMicrobes > this.playerinput.microbes) {
                     this.$data.microbes = this.playerinput.microbes;
@@ -71,7 +73,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                     this.$data.microbes = requiredMicrobes;
                 }
 
-                let discountedCost = this.$data.cost - (this.$data.microbes * 2);
+                const discountedCost = this.$data.cost - (this.$data.microbes * 2);
                 this.$data.megaCredits = Math.max(discountedCost, 0);
             } else {
                 this.$data.microbes = 0;
@@ -80,8 +82,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultFloatersValue: function() {
             // automatically use available floaters to pay if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseFloaters()) {
-                let remainingCostToPay = this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2);
-                let requiredFloaters = Math.ceil(Math.max(remainingCostToPay, 0) / 3)
+                const remainingCostToPay = this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2);
+                const requiredFloaters = Math.ceil(Math.max(remainingCostToPay, 0) / 3)
 
                 if (requiredFloaters > this.playerinput.floaters) {
                     this.$data.floaters = this.playerinput.floaters;
@@ -89,7 +91,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                     this.$data.floaters = requiredFloaters;
                 }
 
-                let discountedCost = this.$data.cost - (this.$data.microbes * 2) - (this.$data.floaters * 3);
+                const discountedCost = this.$data.cost - (this.$data.microbes * 2) - (this.$data.floaters * 3);
                 this.$data.megaCredits = Math.max(discountedCost, 0);
             } else {
                 this.$data.floaters = 0;
@@ -98,7 +100,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultSteelValue: function() {
             // automatically use available steel to pay if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseSteel()) {
-                let remainingCostToPay = this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3);
+                const remainingCostToPay = this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3);
                 let requiredSteelQty = Math.ceil(Math.max(remainingCostToPay, 0) / this.player.steelValue);
                 
                 if (requiredSteelQty > this.player.steel) {
@@ -114,7 +116,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                     this.$data.steel = requiredSteelQty;
                 }
 
-                let discountedCost = this.$data.cost - (this.$data.microbes * 2) - (this.$data.floaters * 3) - (this.$data.steel * this.player.steelValue);
+                const discountedCost = this.$data.cost - (this.$data.microbes * 2) - (this.$data.floaters * 3) - (this.$data.steel * this.player.steelValue);
                 this.$data.megaCredits = Math.max(discountedCost, 0);
             } else {
                 this.$data.steel = 0;
@@ -123,7 +125,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultTitaniumValue: function() {
             // automatically use available titanium to pay if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseTitanium()) {
-                let remainingCostToPay = this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3) - (this.$data.steel * this.player.steelValue);
+                const remainingCostToPay = this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3) - (this.$data.steel * this.player.steelValue);
                 let requiredTitaniumQty = Math.ceil(Math.max(remainingCostToPay, 0) / this.player.titaniumValue);
                 
                 if (requiredTitaniumQty > this.player.titanium) {
@@ -139,7 +141,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                     this.$data.titanium = requiredTitaniumQty;
                 }
 
-                let discountedCost = this.$data.cost - (this.$data.microbes * 2) - (this.$data.floaters * 3) - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue);
+                const discountedCost = this.$data.cost - (this.$data.microbes * 2) - (this.$data.floaters * 3) - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue);
                 this.$data.megaCredits = Math.max(discountedCost, 0);
             } else {
                 this.$data.titanium = 0;
@@ -148,8 +150,8 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         setDefaultHeatValue: function() {
             // automatically use available heat for Helion if not enough MC
             if (!this.canAffordWithMcOnly() && this.canUseHeat()) {
-                let remainingCostToPay = this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3) - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue);
-                let requiredHeat = Math.max(remainingCostToPay, 0);
+                const remainingCostToPay = this.$data.cost - this.player.megaCredits - (this.$data.microbes * 2) - (this.$data.floaters * 3) - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue);
+                const requiredHeat = Math.max(remainingCostToPay, 0);
                 
                 if (requiredHeat > this.player.heat) {
                     this.$data.heat = this.player.heat;
@@ -157,7 +159,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
                     this.$data.heat = requiredHeat;
                 }
 
-                let discountedCost = this.$data.cost - (this.$data.microbes * 2) - (this.$data.floaters * 3) - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue) - this.$data.heat;
+                const discountedCost = this.$data.cost - (this.$data.microbes * 2) - (this.$data.floaters * 3) - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue) - this.$data.heat;
                 this.$data.megaCredits = Math.max(discountedCost, 0);
             } else {
                 this.$data.heat = 0;
@@ -269,7 +271,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             }
 
             if (totalSpentAmt > this.getCardCost()) {
-                let diff = totalSpentAmt - this.getCardCost();
+                const diff = totalSpentAmt - this.getCardCost();
                 if (htp.titanium && diff >= this.player.titaniumValue) {
                     this.$data.warning = "You cannot overspend titanium";
                     return;
@@ -299,7 +301,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
             const showAlert = PreferencesManager.loadValue("show_alerts") === "1";
             
             if (totalSpentAmt > this.getCardCost() && showAlert) {
-                let diff = totalSpentAmt - this.getCardCost();
+                const diff = totalSpentAmt - this.getCardCost();
   
                 if (confirm("Warning: You are overpaying by " + diff + " MC")) {
                     this.onsave([[
@@ -333,49 +335,49 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
 
     <div class="payments_type input-group" v-if="canUseSteel()">
       <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('steel', 1)" :class="getCssClassFor('<', 'steel')"><i class="icon icon-minus" /></button>
+      <Button type="minus" :onClick="_=>reduceValue('steel', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="steel" />
-      <button class="btn btn-primary" v-on:click="addValue('steel', 1)" :class="getCssClassFor('>', 'steel')"><i class="icon icon-plus" /></button>
-      <button class="btn btn-primary max_button" v-on:click="setMaxValue('steel')">MAX</button>
+      <Button type="plus" :onClick="_=>addValue('steel', 1)" />
+      <Button type="max" :onClick="_=>setMaxValue('steel')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="canUseTitanium()">
       <i class="resource_icon resource_icon--titanium payments_type_icon" title="Pay by Titanium"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('titanium', 1)" :class="getCssClassFor('<', 'titanium')"><i class="icon icon-minus" /></button>
+      <Button type="minus" :onClick="_=>reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
-      <button class="btn btn-primary" v-on:click="addValue('titanium', 1)" :class="getCssClassFor('>', 'titanium')"><i class="icon icon-plus" /></button>
-      <button class="btn btn-primary max_button" v-on:click="setMaxValue('titanium')">MAX</button>
+      <Button type="plus" :onClick="_=>addValue('titanium', 1)" />
+      <Button type="max" :onClick="_=>setMaxValue('titanium')" title="MAX" />   
     </div>
 
     <div class="payments_type input-group" v-if="canUseHeat()">
       <i class="resource_icon resource_icon--heat payments_type_icon" title="Pay by Heat"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('heat', 1)" :class="getCssClassFor('<', 'heat')"><i class="icon icon-minus" /></button>
+      <Button type="minus" :onClick="_=>reduceValue('heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
-      <button class="btn btn-primary" v-on:click="addValue('heat', 1)" :class="getCssClassFor('>', 'heat')"><i class="icon icon-plus" /></button>
-      <button class="btn btn-primary max_button" v-on:click="setMaxValue('heat')">MAX</button>
+      <Button type="plus" :onClick="_=>addValue('heat', 1)" />
+      <Button type="max" :onClick="_=>setMaxValue('heat')" title="MAX" /> 
     </div>
 
     <div class="payments_type input-group" v-if="canUseMicrobes()">
       <i class="resource_icon resource_icon--microbe payments_type_icon" title="Pay by Microbes"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('microbes', 1)" :class="getCssClassFor('<', 'microbes')"><i class="icon icon-minus" /></button>
+      <Button type="minus" :onClick="_=>reduceValue('microbes', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="microbes" />
-      <button class="btn btn-primary" v-on:click="addValue('microbes', 1)" :class="getCssClassFor('>', 'microbes')"><i class="icon icon-plus" /></button>
-      <button class="btn btn-primary max_button" v-on:click="setMaxValue('microbes')">MAX</button>
+      <Button type="plus" :onClick="_=>addValue('microbes', 1)" />
+      <Button type="max" :onClick="_=>setMaxValue('microbes')" title="MAX" /> 
     </div>
 
     <div class="payments_type input-group" v-if="canUseFloaters()">
       <i class="resource_icon resource_icon--floater payments_type_icon" title="Pay by Floaters"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('floaters', 1)" :class="getCssClassFor('<', 'floaters')"><i class="icon icon-minus" /></button>
+      <Button type="minus" :onClick="_=>reduceValue('floaters', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="floaters" />
-      <button class="btn btn-primary" v-on:click="addValue('floaters', 1)" :class="getCssClassFor('>', 'floaters')"><i class="icon icon-plus" /></button>
-      <button class="btn btn-primary max_button" v-on:click="setMaxValue('floaters')">MAX</button>
+      <Button type="plus" :onClick="_=>addValue('floaters', 1)" />
+      <Button type="max" :onClick="_=>setMaxValue('floaters')" title="MAX" />
     </div>
 
     <div class="payments_type input-group">
       <i class="resource_icon resource_icon--megacredits payments_type_icon" title="Pay by Megacredits"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('megaCredits', 1)" :class="getCssClassFor('<', 'megaCredits')"><i class="icon icon-minus" /></button>
+      <Button type="minus" :onClick="_=>reduceValue('megaCredits', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
-      <button class="btn btn-primary" v-on:click="addValue('megaCredits', 1)" :class="getCssClassFor('>', 'megaCredits')"><i class="icon icon-plus" /></button>
+      <Button type="plus" :onClick="_=>addValue('megaCredits', 1)" />
     </div>
 
     <div v-if="hasWarning()" class="tm-warning">
@@ -383,7 +385,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
     </div>
 
     <div v-if="showsave === true" class="payments_save">
-      <button class="btn btn-lg btn-primary" v-on:click="saveData">{{playerinput.buttonLabel}}</button>
+      <Button size="big" :onClick="saveData" :title="playerinput.buttonLabel" />
     </div>
   </section>
 </div>`

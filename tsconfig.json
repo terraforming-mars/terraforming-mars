@@ -40,6 +40,6 @@
         "src/turmoil/globalEvents*.ts",
         "src/components/overview/*.ts",
         "src/components/log/*.ts",
-        "src/components/common/*.ts"
+        "src/components/common/*.ts",
     ]
 }

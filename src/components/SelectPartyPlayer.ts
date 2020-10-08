@@ -1,6 +1,7 @@
 
 import Vue from "vue";
 import { SelectPlayerRow } from "./SelectPlayerRow";
+import { Button } from "../components/common/Button";
 
 export const SelectPartyPlayer = Vue.component("select-party-player", {
     props: ["players", "playerinput", "onsave", "showsave", "showtitle"],
@@ -10,6 +11,7 @@ export const SelectPartyPlayer = Vue.component("select-party-player", {
         };
     },
     components: {
+        "Button": Button,
         "select-player-row": SelectPlayerRow
     },
     methods: {
@@ -25,7 +27,7 @@ export const SelectPartyPlayer = Vue.component("select-party-player", {
     <span v-if="player === 'NEUTRAL'" >Neutral</span>
     <select-player-row v-else :player="players.find((otherPlayer) => otherPlayer.id === player)"></select-player-row>
   </label>
-  <button v-if="showsave === true" class="btn btn-lg btn-primary" v-on:click="saveData">{{playerinput.buttonLabel}}</button>
+  <Button v-if="showsave === true" size="big" :onClick="saveData" :title="playerinput.buttonLabel" />
 </div>`
 });
 

@@ -50,7 +50,7 @@ export const DebugUI = Vue.component("debug-ui", {
     },
     template: `
         <div class="debug-ui-container">
-            <input placeholder="filter" v-model="filterText">
+            <input class="form-input form-input-line" placeholder="filter" v-model="filterText">
             <div class="cardbox"" v-for="card in getAllProjectCards()"></div>
             <section class="debug-ui-cards-list">
                 <h2>Project Cards</h2>

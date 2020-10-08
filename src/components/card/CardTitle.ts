@@ -15,26 +15,32 @@ export const CardTitle = Vue.component("CardTitle", {
         },
     },
     methods: {
-        isCorporation: function(): boolean {
-            return this.type === CardType.CORPORATION
+        isCorporation: function (): boolean {
+            return this.type === CardType.CORPORATION;
+        },
+        isPrelude: function (): boolean {
+            return this.type === CardType.PRELUDE;
         },
         getClasses: function (): string {
             const classes: Array<String> = ["title"];
-            
-            if(this.type === CardType.AUTOMATED) {
-                classes.push("background-color-automated");    
-            } else if(this.type === CardType.ACTIVE) {
-                classes.push("background-color-active"); 
-            } else if(this.type === CardType.EVENT) {
-                classes.push("background-color-events")
-            } else if(this.type === CardType.PRELUDE) {
-                classes.push("background-color-prelude")
+            console.log(this.type);
+            if (this.type === CardType.AUTOMATED) {
+                classes.push("background-color-automated");
+            } else if (this.type === CardType.ACTIVE) {
+                classes.push("background-color-active");
+            } else if (this.type === CardType.EVENT) {
+                classes.push("background-color-events");
+            } else if (this.type === CardType.PRELUDE) {
+                classes.push("background-color-prelude");
             }
             return classes.join(" ");
         },
     },
     template: `
-        <div v-if="isCorporation()" class="corporationLabel">CORPORATION</div>
-        <div v-else :class="getClasses()">{{ title }}</div>
+        <div class="card-title">
+            <div v-if="isPrelude()" class="prelude-label">prelude</div>
+            <div v-if="isCorporation()" class="corporation-label">corporation</div>
+            <div v-else :class="getClasses()">{{ title }}</div>
+        </div>
     `,
 });

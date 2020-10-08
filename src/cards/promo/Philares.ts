@@ -9,11 +9,13 @@ import { TileType } from "../../TileType";
 import { SelectAmount } from "../../inputs/SelectAmount";
 import { AndOptions } from "../../inputs/AndOptions";
 import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
 
 export class Philares implements CorporationCard {
     public name: CardName = CardName.PHILARES;
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 47;
+    public cardType: CardType = CardType.CORPORATION;
 
     public initialAction(player: Player, game: Game) {
         return new SelectSpace("Select space for greenery tile", 

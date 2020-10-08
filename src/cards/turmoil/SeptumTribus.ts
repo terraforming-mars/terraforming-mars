@@ -1,15 +1,16 @@
 import { IActionCard } from "../ICard";
 import { Tags } from "../Tags";
 import { Player } from "../../Player";
-import {Game} from '../../Game';
+import { Game } from "../../Game";
 import { CorporationCard } from "../corporation/CorporationCard";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
 
 export class SeptumTribus implements IActionCard, CorporationCard {
     public name: CardName = CardName.SEPTUM_TRIBUS;
     public tags: Array<Tags> = [Tags.WILDCARD];
     public startingMegaCredits: number = 36;
-
+    public cardType: CardType = CardType.CORPORATION; 
     public play() {
         return undefined;
     }

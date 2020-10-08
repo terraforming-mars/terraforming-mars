@@ -1,22 +1,31 @@
 import Vue from "vue";
+import { Tags } from "../../cards/Tags";
 
 export const CardTag = Vue.component("CardTag", {
     props: {
-        title: {
-            type: String,
+        index: {
+            type: Number,
             required: true,
+            validator: (i) => i < 4,
         },
         type: {
             type: String,
             required: true,
+            validator: (type: Tags) => Object.values(Tags).includes(type),
         },
     },
     methods: {
         getClasses: function (): string {
-            return ["title"].join(" ");
+            const classes = ["tag"];
+            if (this.index > 0) {
+                classes.push(`tag-${this.index}`);
+            }
+            classes.push(`tag-${this.type.toLocaleLowerCase()}`);
+
+            return classes.join(" ");
         },
     },
     template: `
-        <div :class="getClasses()"><span v-i18n>{{ title }}</div>
+        <div :class="getClasses()" />
     `,
 });

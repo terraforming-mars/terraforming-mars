@@ -11,11 +11,13 @@ import {
     ALL_CORP_ERA_PROJECT_CARDS,
     ALL_PRELUDE_CARDS,
     ALL_PRELUDE_PROJECTS_CARDS,
-    ALL_PROMO_CORPORATIONS,
     ALL_VENUS_CORPORATIONS,
     ALL_VENUS_PROJECTS_CARDS,
+    ALL_COLONIES_CORPORATIONS,
     ALL_COLONIES_PROJECTS_CARDS,
+    ALL_TURMOIL_CORPORATIONS,
     ALL_TURMOIL_PROJECTS_CARDS,
+    ALL_PROMO_CORPORATIONS,
     ALL_PROMO_PROJECTS_CARDS,
     ALL_COMMUNITY_CORPORATIONS,
 } from "../Dealer";
@@ -23,6 +25,12 @@ import { HTML_DATA } from "../HTML_data";
 import { CardModel } from "../models/CardModel";
 import { CardTitle } from "./card/CardTitle";
 import { CardResourceCounter } from "./card/CardResourceCounter";
+import { CorporationGroup } from "../CorporationName";
+import { CardCost } from "./card/CardCost";
+import { CardExtraContent } from "./card/CardExtraContent";
+import { CardExpansion } from "./card/CardExpansion";
+import { CardTags } from "./card/CardTags";
+import { CardType } from "../cards/CardType";
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
     if (cardName === new BeginnerCorporation().name) {
@@ -47,6 +55,18 @@ function getCorporationCardByName(cardName: string): ICard | undefined {
         return new cardFactory.factory();
     }
     cardFactory = ALL_VENUS_CORPORATIONS.find(
+        (cardFactory) => cardFactory.cardName === cardName
+    );
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_COLONIES_CORPORATIONS.find(
+        (cardFactory) => cardFactory.cardName === cardName
+    );
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_TURMOIL_CORPORATIONS.find(
         (cardFactory) => cardFactory.cardName === cardName
     );
     if (cardFactory !== undefined) {
@@ -119,6 +139,39 @@ export function getProjectCardByName(
     return undefined;
 }
 
+export function getCardExtensionByName(cardName: string): CorporationGroup {
+    //prelude
+    if (ALL_PRELUDE_CORPORATIONS.find((c) => c.cardName === cardName))
+        return CorporationGroup.PRELUDE;
+    if (ALL_PRELUDE_CARDS.find((c) => c.cardName === cardName))
+        return CorporationGroup.PRELUDE;
+    //venus
+    if (ALL_VENUS_CORPORATIONS.find((c) => c.cardName === cardName))
+        return CorporationGroup.VENUS_NEXT;
+    if (ALL_VENUS_PROJECTS_CARDS.find((c) => c.cardName === cardName))
+        return CorporationGroup.VENUS_NEXT;
+    //colonies
+    if (ALL_COLONIES_CORPORATIONS.find((c) => c.cardName === cardName))
+        return CorporationGroup.COLONIES;
+    if (ALL_COLONIES_PROJECTS_CARDS.find((c) => c.cardName === cardName))
+        return CorporationGroup.COLONIES;
+    //turmoil
+    if (ALL_TURMOIL_CORPORATIONS.find((c) => c.cardName === cardName))
+        return CorporationGroup.TURMOIL;
+    if (ALL_TURMOIL_PROJECTS_CARDS.find((c) => c.cardName === cardName))
+        return CorporationGroup.TURMOIL;
+    //promo
+    if (ALL_PROMO_CORPORATIONS.find((c) => c.cardName === cardName))
+        return CorporationGroup.PROMO;
+    if (ALL_PROMO_PROJECTS_CARDS.find((c) => c.cardName === cardName))
+        return CorporationGroup.PROMO;
+    //community
+    if (ALL_COMMUNITY_CORPORATIONS.find((c) => c.cardName === cardName))
+        return CorporationGroup.COMMUNITY;
+
+    return CorporationGroup.ORIGINAL;
+}
+
 function getCardContent(cardName: string): string {
     let htmlData: string | undefined = "";
     htmlData = HTML_DATA.get(cardName);
@@ -129,6 +182,10 @@ export const Card = Vue.component("card", {
     components: {
         CardTitle,
         CardResourceCounter,
+        CardCost,
+        CardExtraContent,
+        CardExpansion,
+        CardTags,
     },
     props: {
         "card": {
@@ -143,7 +200,10 @@ export const Card = Vue.component("card", {
         getCardContent: function () {
             return getCardContent(this.card.name);
         },
-        getCard: function () {
+        getCardExpansion: function (): CorporationGroup {
+            return getCardExtensionByName(this.card.name);
+        },
+        getCard: function (): ICard | undefined {
             return (
                 getProjectCardByName(this.card.name) ||
                 getCorporationCardByName(this.card.name)
@@ -152,9 +212,16 @@ export const Card = Vue.component("card", {
         getTags: function (): Array<String> | undefined {
             return this.getCard()?.tags;
         },
+        getCost: function (): number {
+            return this.getCard()?.cost || 0;
+        },
+        getCardType: function (): CardType | undefined {
+            console.log(this.getCard());
+            return this.getCard()?.cardType;
+        },
         getCardClasses: function (card: CardModel): string {
             const classes = ["filterDiv"];
-            classes.push(`card-${card.name.toLowerCase().replace(/ /g, "-")}`);
+            classes.push("card-" + card.name.toLowerCase().replace(/ /g, "-"));
 
             if (this.actionUsed) {
                 classes.push("cards-action-was-used");
@@ -166,14 +233,17 @@ export const Card = Vue.component("card", {
         },
     },
     mounted: function () {
-        console.log(this.card);
-        console.log(this.getTags(), "TAGS");
+        // console.log(this.card);
+        // console.log(this.getCard());
+        // console.log(this.getTags(), "TAGS");
     },
     template: `
         <div :class="getCardClasses(card)">
             <div class="card-content-wrapper" v-i18n>
-                <CardTitle :title="card.name" :type="card.cardType"/>
+                <CardTitle :title="card.name" :type="getCardType()"/>
+                <CardCost v-if="getCost() > 0" :amount="getCost()" />
                 <CardTags :tags="getTags()" />
+                <CardExpansion :expansion="getCardExpansion()" />
                 <div class="content" v-html=this.getCardContent() />
             </div>
             <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />

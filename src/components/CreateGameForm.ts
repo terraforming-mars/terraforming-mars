@@ -518,7 +518,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <div>
                                 <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(newPlayer)" v-model="newPlayer.name" />
                             </div>
-                            <div>
+                            <div class="flex">
                                 <label class="form-label form-inline create-game-color-label" v-i18n>Color:</label>
                                 <span class="create-game-colors-cont">
                                 <label class="form-radio form-inline create-game-color" v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">

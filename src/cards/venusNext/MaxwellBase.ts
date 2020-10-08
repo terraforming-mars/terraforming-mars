@@ -22,7 +22,7 @@ export class MaxwellBase implements IActionCard, IProjectCard {
         return player.getProduction(Resources.ENERGY) >= 1 && game.getVenusScaleLevel() >= 12 - (2 * player.getRequirementsBonus(game, true));
     }
     public play(player: Player, game: Game) {
-        player.setProduction(Resources.ENERGY,-1);
+        player.addProduction(Resources.ENERGY,-1);
         game.addCityTile(player, SpaceName.MAXWELL_BASE, SpaceType.COLONY);
         return undefined;
     }

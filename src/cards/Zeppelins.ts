@@ -16,7 +16,7 @@ export class Zeppelins implements IProjectCard {
         return game.getOxygenLevel() >= 5 - player.getRequirementsBonus(game);
     }
     public play(player: Player, game: Game) {
-        player.setProduction(Resources.MEGACREDITS, game.getCitiesInPlayOnMars());
+        player.addProduction(Resources.MEGACREDITS, game.getCitiesInPlayOnMars());
         return undefined; 
     }
     public getVictoryPoints() {

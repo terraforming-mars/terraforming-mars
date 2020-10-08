@@ -16,7 +16,7 @@ export class Worms implements IProjectCard {
         return game.getOxygenLevel() >= 4 - player.getRequirementsBonus(game);
     }
     public play(player: Player) {
-        player.setProduction(Resources.PLANTS, Math.floor((player.getTagCount(Tags.MICROBES) + 1) / 2));
+        player.addProduction(Resources.PLANTS, Math.floor((player.getTagCount(Tags.MICROBES) + 1) / 2));
         return undefined;
     }
 }

@@ -17,7 +17,7 @@ export class ArchaeBacteria implements IProjectCard {
       );
     }
     public play(player: Player) {
-      player.setProduction(Resources.PLANTS);
+      player.addProduction(Resources.PLANTS);
       return undefined;
     }
 }

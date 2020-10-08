@@ -13,7 +13,7 @@ export class GiantSpaceMirror implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {
-        player.setProduction(Resources.ENERGY,3);
+        player.addProduction(Resources.ENERGY,3);
         return undefined;
     }
 }

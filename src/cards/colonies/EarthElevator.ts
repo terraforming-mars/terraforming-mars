@@ -12,7 +12,7 @@ export class EarthElevator implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {
-      player.setProduction(Resources.TITANIUM, 3);  
+      player.addProduction(Resources.TITANIUM, 3);  
       return undefined;
     }
     public getVictoryPoints() {

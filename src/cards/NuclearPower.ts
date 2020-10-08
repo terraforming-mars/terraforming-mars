@@ -20,8 +20,8 @@ export class NuclearPower implements IProjectCard {
         if (player.getProduction(Resources.MEGACREDITS) < -3) {
             throw "Not enough mega credit production";
         }
-        player.setProduction(Resources.MEGACREDITS,-2);
-        player.setProduction(Resources.ENERGY,3);
+        player.addProduction(Resources.MEGACREDITS,-2);
+        player.addProduction(Resources.ENERGY,3);
         return undefined;
     }
 }

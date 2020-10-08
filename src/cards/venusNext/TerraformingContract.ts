@@ -14,7 +14,7 @@ export class TerraformingContract implements IProjectCard {
         return player.getTerraformRating() >= 25 ;
       }
     public play(player: Player) {
-        player.setProduction(Resources.MEGACREDITS,4);
+        player.addProduction(Resources.MEGACREDITS,4);
         return undefined;
     }
 }

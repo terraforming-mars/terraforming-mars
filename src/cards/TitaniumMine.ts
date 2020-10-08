@@ -14,7 +14,7 @@ export class TitaniumMine implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, _game: Game) {
-        player.setProduction(Resources.TITANIUM);
+        player.addProduction(Resources.TITANIUM);
         return undefined;
     }
 }

@@ -30,7 +30,7 @@ export class EquatorialMagnetizer implements IActionCard, IProjectCard {
       return hasEnergyProduction;
     }
     public action(player: Player, game: Game) {
-      player.setProduction(Resources.ENERGY,-1);
+      player.addProduction(Resources.ENERGY,-1);
       player.increaseTerraformRating(game);
       return undefined;
     }

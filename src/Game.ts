@@ -227,7 +227,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.colonyDealer = new ColonyDealer();
         this.colonies = this.colonyDealer.drawColonies(players.length, this.gameOptions.customColoniesList, this.gameOptions.venusNextExtension, allowCommunityColonies);
         if (this.players.length === 1) {
-          players[0].setProduction(Resources.MEGACREDITS, -2);
+          players[0].addProduction(Resources.MEGACREDITS, -2);
           this.addInterrupt(new SelectRemoveColony(players[0], this));
         }
       }
@@ -325,9 +325,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.log("The id of this game is ${0}", b => b.string(this.id));
       }      
 
-      this.log("Generation ${0}", b =>
-        b.forNewGeneration()
-        .number(this.generation));
+      this.log("Generation ${0}", b => b.forNewGeneration().number(this.generation));
 
       // Initial Draft
       if (gameOptions.initialDraftVariant) {
@@ -355,12 +353,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     private setStartingProductions(player: Player) {
       if (!this.gameOptions.corporateEra) {
-        player.setProduction(Resources.MEGACREDITS);
-        player.setProduction(Resources.STEEL);
-        player.setProduction(Resources.TITANIUM);
-        player.setProduction(Resources.PLANTS);
-        player.setProduction(Resources.ENERGY);
-        player.setProduction(Resources.HEAT);
+        player.addProduction(Resources.MEGACREDITS);
+        player.addProduction(Resources.STEEL);
+        player.addProduction(Resources.TITANIUM);
+        player.addProduction(Resources.PLANTS);
+        player.addProduction(Resources.ENERGY);
+        player.addProduction(Resources.HEAT);
       }
     }
 
@@ -506,7 +504,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
             // Special case solo play and Colonies
             if (game.players.length === 1 && game.gameOptions.coloniesExtension) {
-              player.setProduction(Resources.MEGACREDITS, -2);
+              player.addProduction(Resources.MEGACREDITS, -2);
               game.addInterrupt(new SelectRemoveColony(player, game));
             }
             if (!game.gameOptions.initialDraftVariant) {
@@ -592,7 +590,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (candidates.length === 0) {
         return;
       } else if (candidates.length === 1) {
-        candidates[0].setProduction(resource, -count, this, player);
+        candidates[0].addProduction(resource, -count, this, player);
         return undefined;
       } else {
         this.addInterrupt(new SelectResourceProductionDecrease(player, candidates, this, resource, count, title));
@@ -1401,7 +1399,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
       if (!isWorldGov) {
         if (steps === 3 && this.temperature === -20) {
-          player.setProduction(Resources.HEAT, 2);
+          player.addProduction(Resources.HEAT, 2);
         } else if (this.temperature === -24 || this.temperature === -20 ||
               (
                 (steps === 2 || steps === 3) &&
@@ -1409,7 +1407,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
               ) ||
               (steps === 3 && this.temperature === -16)
         ) {
-          player.setProduction(Resources.HEAT);;
+          player.addProduction(Resources.HEAT);;
         }
       }
 

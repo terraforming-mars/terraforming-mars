@@ -49,7 +49,7 @@ export class ElectroCatapult implements IActionCard, IProjectCard {
       return undefined;
     }
     public play(player: Player) {
-      player.setProduction(Resources.ENERGY,-1);
+      player.addProduction(Resources.ENERGY,-1);
       return undefined;
     }
     public getVictoryPoints() {

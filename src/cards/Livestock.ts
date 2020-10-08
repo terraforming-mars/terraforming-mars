@@ -23,8 +23,8 @@ export class Livestock implements IActionCard, IProjectCard, IResourceCard {
         return this.resourceCount;
     }
     public play(player: Player) {
-        player.setProduction(Resources.PLANTS,-1);
-        player.setProduction(Resources.MEGACREDITS,2);
+        player.addProduction(Resources.PLANTS,-1);
+        player.addProduction(Resources.MEGACREDITS,2);
         return undefined;
     }
     public canAct(): boolean {

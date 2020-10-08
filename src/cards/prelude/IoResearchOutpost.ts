@@ -10,7 +10,7 @@ export class IoResearchOutpost extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.JOVIAN, Tags.SCIENCE];
     public name: CardName = CardName.IO_RESEARCH_OUTPOST;
     public play(player: Player, game: Game) {     
-        player.setProduction(Resources.TITANIUM);
+        player.addProduction(Resources.TITANIUM);
         player.cardsInHand.push(game.dealer.dealCard());
         return undefined;
     }

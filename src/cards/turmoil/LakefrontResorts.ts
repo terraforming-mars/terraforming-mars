@@ -17,7 +17,7 @@ export class LakefrontResorts implements CorporationCard {
     }
     public onTilePlaced(player: Player, space: ISpace) {
         if (space.tile !== undefined && space.tile.tileType === TileType.OCEAN) {
-          player.setProduction(Resources.MEGACREDITS);
+          player.addProduction(Resources.MEGACREDITS);
         }
     }
 }

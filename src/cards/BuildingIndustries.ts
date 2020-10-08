@@ -16,8 +16,8 @@ export class BuildingIndustries implements IProjectCard {
       return player.getProduction(Resources.ENERGY) >= 1;
     }
     public play(player: Player) {
-      player.setProduction(Resources.ENERGY,-1);
-      player.setProduction(Resources.STEEL,2);
+      player.addProduction(Resources.ENERGY,-1);
+      player.addProduction(Resources.STEEL,2);
       return undefined;
     }
 }

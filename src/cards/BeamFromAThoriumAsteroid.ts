@@ -15,8 +15,8 @@ export class BeamFromAThoriumAsteroid implements IProjectCard {
       return player.getTagCount(Tags.JOVIAN) >= 1;
     }
     public play(player: Player) {
-      player.setProduction(Resources.HEAT,3);
-      player.setProduction(Resources.ENERGY,3);
+      player.addProduction(Resources.HEAT,3);
+      player.addProduction(Resources.ENERGY,3);
       return undefined;
     }
     public getVictoryPoints() {

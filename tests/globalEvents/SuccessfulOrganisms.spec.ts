@@ -22,8 +22,8 @@ describe("SuccessfulOrganisms", function () {
         turmoil.dominantParty.delegates.push(player2.id);
         turmoil.dominantParty.delegates.push(player2.id);
 
-        player.setProduction(Resources.PLANTS, 3);
-        player2.setProduction(Resources.PLANTS, 3);       
+        player.addProduction(Resources.PLANTS, 3);
+        player2.addProduction(Resources.PLANTS, 3);       
 
         card.resolve(game, turmoil);
         expect(player.getResource(Resources.PLANTS)).to.eq(3);

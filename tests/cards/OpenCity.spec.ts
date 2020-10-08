@@ -19,13 +19,13 @@ describe("OpenCity", function () {
     });
 
     it("Can't play if oxygen level too low", function () {
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         (game as any).oxygenLevel = 11;
         expect(card.canPlay(player, game)).to.eq(false);
     });
 
     it("Should play", function () {
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         (game as any).oxygenLevel = 12;
         expect(card.canPlay(player, game)).to.eq(true);
 

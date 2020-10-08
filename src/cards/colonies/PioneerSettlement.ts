@@ -22,7 +22,7 @@ export class PioneerSettlement implements IProjectCard {
 
     public play(player: Player, game: Game) {
       game.addColonyInterrupt(player, false, "Select colony for Pioneer Settlement");
-      player.setProduction(Resources.MEGACREDITS, -2); 
+      player.addProduction(Resources.MEGACREDITS, -2); 
       return undefined;
     }
 

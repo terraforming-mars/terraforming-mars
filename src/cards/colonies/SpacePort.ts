@@ -24,8 +24,8 @@ export class SpacePort implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      player.setProduction(Resources.MEGACREDITS, 4);  
-      player.setProduction(Resources.ENERGY, -1);
+      player.addProduction(Resources.MEGACREDITS, 4);  
+      player.addProduction(Resources.ENERGY, -1);
       player.fleetSize++;
       return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
         game.addCityTile(player, space.id);

@@ -14,7 +14,7 @@ export class SisterPlanetSupport implements IProjectCard {
         return  player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH]);
       }
     public play(player: Player) {
-        player.setProduction(Resources.MEGACREDITS,3);
+        player.addProduction(Resources.MEGACREDITS,3);
         return undefined;
     }
 }

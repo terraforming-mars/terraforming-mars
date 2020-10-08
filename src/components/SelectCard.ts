@@ -30,7 +30,7 @@ export const SelectCard = Vue.component("select-card", {
         <label v-for="card in playerinput.cards" class="cardbox">
             <input v-if="playerinput.maxCardsToSelect === 1 && playerinput.minCardsToSelect === 1" type="radio" v-model="cards" :value="card" />
             <input v-else type="checkbox" v-model="cards" :value="card" :disabled="cards.length >= playerinput.maxCardsToSelect && cards.indexOf(card) === -1" />
-            <card :card="card"></card>
+            <card :card="card" />
         </label>
         <div v-if="showsave === true" class="nofloat">
             <Button type="submit" :onClick="saveData" :title="playerinput.buttonLabel" />

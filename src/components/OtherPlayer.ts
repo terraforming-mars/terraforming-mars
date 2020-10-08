@@ -31,10 +31,10 @@ export const OtherPlayer = Vue.component("other-player", {
                     <span class="player_name" :class="'player_bg_color_' + player.color"> {{ player.name }} played cards </span>
                     <div>
                         <div v-if="player.corporationCard !== undefined" class="cardbox">
-                            <card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"></card>
+                            <card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"/>
                         </div>
                         <div v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
-                            <card :card="card" :actionUsed="isCardActivated(card, player)"></card>
+                            <card :card="card" :actionUsed="isCardActivated(card, player)"/>
                         </div>
 
                         <stacked-cards class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" :player="player"></stacked-cards>
@@ -46,7 +46,7 @@ export const OtherPlayer = Vue.component("other-player", {
                     <span> Self-Replicating Robots cards </span>
                     <div>
                         <div v-for="card in getCardsByType(player.selfReplicatingRobotsCards, [getActiveCardType()])" :key="card.name" class="cardbox">
-                            <card :card="card"></card>
+                            <card :card="card" />
                         </div>
                     </div>
                 </div>                

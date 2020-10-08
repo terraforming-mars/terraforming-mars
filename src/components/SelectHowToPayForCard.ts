@@ -40,7 +40,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
     },
     mixins: [PaymentWidgetMixin],
     mounted: function () {
-        let app = this;
+        const app = this;
         Vue.nextTick(function () {
             app.$data.cost = app.getCardCost();
             app.$data.megaCredits = (app as any).getMegaCreditsMax();
@@ -326,7 +326,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
 
   <label v-for="availableCard in playerinput.cards" class="payments_cards">
     <input class="hidden" type="radio" v-model="card" v-on:change="cardChanged()" :value="availableCard" />
-    <card class="cardbox" :card="availableCard"></card>
+    <card class="cardbox" :card="availableCard" />
   </label>
 
   <section v-trim-whitespace>

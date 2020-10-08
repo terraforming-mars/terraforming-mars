@@ -18,7 +18,7 @@ export class BusinessEmpire extends PreludeCard implements IProjectCard {
     }
     public play(player: Player) {
 	    player.megaCredits -= 6;
-        player.setProduction(Resources.MEGACREDITS,6);
+        player.addProduction(Resources.MEGACREDITS,6);
         return undefined;
     }
 }

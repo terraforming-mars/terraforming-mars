@@ -23,7 +23,7 @@ export class Ceres extends Colony implements IColony {
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);
-        player.setProduction(Resources.STEEL);
+        player.addProduction(Resources.STEEL);
         return undefined;
     }
     public giveTradeBonus(player: Player): void {

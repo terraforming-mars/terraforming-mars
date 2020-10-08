@@ -34,13 +34,13 @@ describe("EnergyMarket", function () {
     });
 
     it("Can act when energy production available", function () {
-        player.setProduction(Resources.ENERGY, 1);
+        player.addProduction(Resources.ENERGY, 1);
         expect(card.canAct(player)).to.eq(true);
     });
 
     it("Should act and provide options when enough MC resources and energy production available", function () {
         player.setResource(Resources.MEGACREDITS, 2);
-        player.setProduction(Resources.ENERGY, 1);
+        player.addProduction(Resources.ENERGY, 1);
         expect(card.canAct(player)).to.eq(true);
 
         const result = card.action(player, game);
@@ -54,7 +54,7 @@ describe("EnergyMarket", function () {
     });
 
     it("Should act when energy production available", function () {
-        player.setProduction(Resources.ENERGY, 1);
+        player.addProduction(Resources.ENERGY, 1);
         const result = card.action(player, game);
         expect(result).to.eq(undefined);
         

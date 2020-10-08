@@ -21,12 +21,12 @@ describe("Livestock", function () {
 
     it("Can't play if oxygen level too low", function () {
         (game as any).oxygenLevel = 8;
-        player.setProduction(Resources.PLANTS);
+        player.addProduction(Resources.PLANTS);
         expect(card.canPlay(player, game)).to.eq(false);
     });
 
     it("Should play", function () {
-        player.setProduction(Resources.PLANTS);
+        player.addProduction(Resources.PLANTS);
         (game as any).oxygenLevel = 9;
         expect(card.canPlay(player, game)).to.eq(true);
 

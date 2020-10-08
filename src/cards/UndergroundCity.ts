@@ -21,8 +21,8 @@ export class UndergroundCity implements IProjectCard {
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (foundSpace: ISpace) => {
             game.addCityTile(player, foundSpace.id);
-            player.setProduction(Resources.ENERGY,-2);
-            player.setProduction(Resources.STEEL,2);
+            player.addProduction(Resources.ENERGY,-2);
+            player.addProduction(Resources.STEEL,2);
             return undefined;
         });
     }

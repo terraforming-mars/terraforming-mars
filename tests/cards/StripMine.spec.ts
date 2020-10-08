@@ -15,12 +15,12 @@ describe("StripMine", function () {
     });
 
     it("Can't play", function () {
-        player.setProduction(Resources.ENERGY, 1);
+        player.addProduction(Resources.ENERGY, 1);
         expect(card.canPlay(player, game)).to.eq(false);
     });
 
     it("Should play", function () {
-        player.setProduction(Resources.ENERGY, 2);
+        player.addProduction(Resources.ENERGY, 2);
         expect(card.canPlay(player, game)).to.eq(true);
 
         card.play(player, game);

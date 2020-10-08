@@ -17,7 +17,7 @@ export class PhobosSpaceHaven implements IProjectCard {
 
     public play(player: Player, game: Game) {
         game.addCityTile(player, SpaceName.PHOBOS_SPACE_HAVEN, SpaceType.COLONY);
-        player.setProduction(Resources.TITANIUM);
+        player.addProduction(Resources.TITANIUM);
         return undefined;
     }
     public getVictoryPoints() {

@@ -16,8 +16,8 @@ export class SoilFactory implements IProjectCard {
         return player.getProduction(Resources.ENERGY) >= 1;
     }
     public play(player: Player) {
-        player.setProduction(Resources.ENERGY,-1);
-        player.setProduction(Resources.PLANTS);
+        player.addProduction(Resources.ENERGY,-1);
+        player.addProduction(Resources.PLANTS);
         return undefined;
     }
     public getVictoryPoints() {

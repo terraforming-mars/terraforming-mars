@@ -21,8 +21,8 @@ export class Gyropolis implements IProjectCard {
       }
     public play(player: Player, game: Game) {
         const tags: Array<Tags> = [Tags.VENUS, Tags.EARTH];
-        player.setProduction(Resources.ENERGY,-2);
-        player.setProduction(Resources.MEGACREDITS, player.getMultipleTagCount(tags));
+        player.addProduction(Resources.ENERGY,-2);
+        player.addProduction(Resources.MEGACREDITS, player.getMultipleTagCount(tags));
         return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
             return undefined;

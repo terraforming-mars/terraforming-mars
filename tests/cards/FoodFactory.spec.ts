@@ -17,7 +17,7 @@ describe("FoodFactory", function () {
     });
 
     it("Should play", function () {
-        player.setProduction(Resources.PLANTS);
+        player.addProduction(Resources.PLANTS);
         expect(card.canPlay(player)).to.eq(true);
 
         card.play(player);

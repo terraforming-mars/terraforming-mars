@@ -16,7 +16,7 @@ export class Grass implements IProjectCard {
         return game.getTemperature() >= -16 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player) {
-        player.setProduction(Resources.PLANTS);
+        player.addProduction(Resources.PLANTS);
         player.plants += 3;
         return undefined;
     }

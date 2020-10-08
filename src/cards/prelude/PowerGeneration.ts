@@ -9,7 +9,7 @@ export class PowerGeneration extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY];
     public name: CardName = CardName.POWER_GENERATION;
     public play(player: Player) {     
-        player.setProduction(Resources.ENERGY,3);
+        player.addProduction(Resources.ENERGY,3);
         return undefined;
     }
 }

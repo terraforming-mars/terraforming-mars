@@ -21,7 +21,7 @@ export class Potatoes implements IProjectCard {
 
     public play(player: Player) {
         player.plants -= 2;
-        player.setProduction(Resources.MEGACREDITS,2);
+        player.addProduction(Resources.MEGACREDITS,2);
         return undefined;
     }
 }

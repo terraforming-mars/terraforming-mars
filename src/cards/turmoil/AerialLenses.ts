@@ -22,7 +22,7 @@ export class AerialLenses implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-      player.setProduction(Resources.HEAT,2);
+      player.addProduction(Resources.HEAT,2);
       game.addResourceDecreaseInterrupt(player, Resources.PLANTS, 2);
       return undefined;
     }

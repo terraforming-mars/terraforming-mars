@@ -12,7 +12,7 @@ export class CommunityServices implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {
-        player.setProduction(Resources.MEGACREDITS, player.getNoTagsCount() + 1);
+        player.addProduction(Resources.MEGACREDITS, player.getNoTagsCount() + 1);
         return undefined;
     }
 

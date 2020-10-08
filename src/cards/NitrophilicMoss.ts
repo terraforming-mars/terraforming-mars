@@ -21,7 +21,7 @@ export class NitrophilicMoss implements IProjectCard {
     }
     public play(player: Player) {
         player.plants -= 2;
-        player.setProduction(Resources.PLANTS,2);
+        player.addProduction(Resources.PLANTS,2);
         return undefined;
     }
 }

@@ -25,8 +25,8 @@ export class CorporateStronghold implements IProjectCard {
           game.board.getAvailableSpacesForCity(player),
           (space: ISpace) => {
             game.addCityTile(player, space.id);
-            player.setProduction(Resources.ENERGY,-1);
-            player.setProduction(Resources.MEGACREDITS,3);
+            player.addProduction(Resources.ENERGY,-1);
+            player.addProduction(Resources.MEGACREDITS,3);
             return undefined;
           }
       );

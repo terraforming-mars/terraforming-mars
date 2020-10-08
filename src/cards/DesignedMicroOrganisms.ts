@@ -18,7 +18,7 @@ export class DesignedMicroOrganisms implements IProjectCard {
       );
     }
     public play(player: Player) {
-      player.setProduction(Resources.PLANTS,2);
+      player.addProduction(Resources.PLANTS,2);
       return undefined;
     }
 }

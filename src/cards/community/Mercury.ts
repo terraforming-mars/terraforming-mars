@@ -33,13 +33,13 @@ export class Mercury extends Colony implements IColony {
 
     private handleTrade(game: Game, player: Player, usesTradeFleet: boolean) {
         if (this.trackPosition < 3) {
-            player.setProduction(Resources.HEAT);
+            player.addProduction(Resources.HEAT);
             LogHelper.logGainProduction(game, player, Resources.HEAT);
         } else if (this.trackPosition < 5) {
-            player.setProduction(Resources.STEEL);
+            player.addProduction(Resources.STEEL);
             LogHelper.logGainProduction(game, player, Resources.STEEL);
         } else {
-            player.setProduction(Resources.TITANIUM);
+            player.addProduction(Resources.TITANIUM);
             LogHelper.logGainProduction(game, player, Resources.TITANIUM);
         }
         

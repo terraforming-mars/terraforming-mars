@@ -19,7 +19,7 @@ export class Luna extends Colony implements IColony {
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);
-        player.setProduction(Resources.MEGACREDITS, 2);
+        player.addProduction(Resources.MEGACREDITS, 2);
         return undefined;
     }
     public giveTradeBonus(player: Player): void {

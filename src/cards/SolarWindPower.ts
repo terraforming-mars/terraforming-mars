@@ -13,7 +13,7 @@ export class SolarWindPower implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         player.titanium += 2;
         return undefined;
     }

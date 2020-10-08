@@ -12,7 +12,7 @@ export class AcquiredCompany implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {
-      player.setProduction(Resources.MEGACREDITS,3);
+      player.addProduction(Resources.MEGACREDITS,3);
       return undefined;
     }
 }

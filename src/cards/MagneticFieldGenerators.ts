@@ -27,8 +27,8 @@ export class MagneticFieldGenerators implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        player.setProduction(Resources.ENERGY,-4);
-        player.setProduction(Resources.PLANTS,2);
+        player.addProduction(Resources.ENERGY,-4);
+        player.addProduction(Resources.PLANTS,2);
         player.increaseTerraformRatingSteps(3, game);
         return undefined;
     }

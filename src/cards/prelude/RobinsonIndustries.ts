@@ -45,7 +45,7 @@ export class RobinsonIndustries implements IActionCard, CorporationCard {
     }
 
     private increaseAndLogProduction(game: Game, player: Player, resource: Resources) {
-        player.setProduction(resource);
+        player.addProduction(resource);
         player.megaCredits -= 4;
         LogHelper.logGainProduction(game, player, resource);
     }

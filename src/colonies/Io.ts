@@ -24,7 +24,7 @@ export class Io extends Colony implements IColony {
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);
-        player.setProduction(Resources.HEAT);
+        player.addProduction(Resources.HEAT);
         return undefined;
     }
     public giveTradeBonus(player: Player): void {

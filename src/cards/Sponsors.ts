@@ -13,7 +13,7 @@ export class Sponsors implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {
-        player.setProduction(Resources.MEGACREDITS,2);
+        player.addProduction(Resources.MEGACREDITS,2);
         return undefined;
     }
 }

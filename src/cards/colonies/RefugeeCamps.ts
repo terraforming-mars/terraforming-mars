@@ -20,7 +20,7 @@ export class RefugeeCamps implements IProjectCard, IResourceCard {
     } 
 
     public action(player: Player) {
-        player.setProduction(Resources.MEGACREDITS, -1);
+        player.addProduction(Resources.MEGACREDITS, -1);
         this.resourceCount++;
         return undefined;
     } 

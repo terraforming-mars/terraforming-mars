@@ -19,7 +19,7 @@ describe("RadChemFactory", function () {
     });
 
     it("Should play", function () {
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         expect(card.canPlay(player, game)).to.eq(true);
 
         card.play(player, game);

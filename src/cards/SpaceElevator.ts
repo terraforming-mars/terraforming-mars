@@ -15,7 +15,7 @@ export class SpaceElevator implements IActionCard, IProjectCard {
     public cardType: CardType = CardType.ACTIVE;
 
     public play(player: Player, _game: Game) {
-        player.setProduction(Resources.TITANIUM);
+        player.addProduction(Resources.TITANIUM);
         return undefined;
     }
     public canAct(player: Player): boolean {

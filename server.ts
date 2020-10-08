@@ -123,7 +123,12 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
                     route.notFound(req, res);
                     return;
                 }
-                const player = game.getPlayers().find((p) => p.id === playerId);
+                let player: Player | undefined;
+                try {
+                    player = game.getPlayerById(playerId);
+                } catch (err) {
+                    console.warn(`unable to find player ${playerId}`, err);
+                }
                 if (player === undefined) {
                     route.notFound(req, res);
                     return;
@@ -337,7 +342,12 @@ function apiGetWaitingFor(
             route.notFound(req, res);
             return;
         }
-        const player = game.getPlayerById(playerId);
+        let player: Player | undefined;
+        try {
+            player = game.getPlayerById(playerId);
+        } catch (err) {
+            console.warn(`unable to find player ${playerId}`, err);
+        }
         if (player === undefined) {
             route.notFound(req, res);
             return;
@@ -376,7 +386,12 @@ function apiGetPlayer(
             route.notFound(req, res);
             return;
         }
-        const player = game.getPlayerById(playerId as string);
+        let player: Player | undefined;
+        try {
+            player = game.getPlayerById(playerId as string);
+        } catch (err) {
+            console.warn(`unable to find player ${playerId}`, err);
+        }
         if (player === undefined) {
             route.notFound(req, res);
             return;

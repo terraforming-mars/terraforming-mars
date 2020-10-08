@@ -78,12 +78,22 @@ export class GameReloader {
     }
 
     private onAllGamesLoaded(): void {
-        // TODO any pendingPlayer or pendingGame callbacks
+        this.loadingGames = false;
+        this.loadedGames = true;
+        // any pendingPlayer or pendingGame callbacks
         // are waiting for a train that is never coming
         // send them packing. call their callbacks with
         // undefined and remove from pending
-        this.loadingGames = false;
-        this.loadedGames = true;
+        for (const pendingGame of Array.from(this.pendingGame.values())) {
+            for (const cb of pendingGame) {
+                cb(undefined);
+            }
+        }
+        for (const pendingPlayer of Array.from(this.pendingPlayer.values())) {
+            for (const cb of pendingPlayer) {
+                cb(undefined);
+            }
+        }
     }
 
     private loadAllGames(): void {

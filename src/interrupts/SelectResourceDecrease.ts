@@ -9,7 +9,7 @@ import { SelectOption } from "../inputs/SelectOption"
 import { SelectPlayer } from "../inputs/SelectPlayer";
 
 export class SelectResourceDecrease implements PlayerInterrupt {
-    public playerInput: PlayerInput;
+    public playerInput: PlayerInput | undefined;
     constructor(
         public player: Player,
         public candidates: Array<Player>,
@@ -37,7 +37,7 @@ export class SelectResourceDecrease implements PlayerInterrupt {
 		}
 
 		if (this.candidates.length === 0) {
-			return;
+			this.playerInput = undefined;
 		} else if (this.candidates.length === 1) {
 			const qtyToRemove = Math.min(this.candidates[0].plants, this.count);
 			if (this.resource === Resources.PLANTS) {
@@ -52,7 +52,7 @@ export class SelectResourceDecrease implements PlayerInterrupt {
 				);
 			} else {
 				this.candidates[0].setResource(this.resource, -qtyToRemove, this.game, this.player);
-				return;
+				this.playerInput = undefined;
 			}
 		} else {
 			if (this.resource === Resources.PLANTS) {

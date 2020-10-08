@@ -52,7 +52,6 @@ import { Turmoil } from "./turmoil/Turmoil";
 import { PartyHooks } from "./turmoil/parties/PartyHooks";
 import { IParty } from "./turmoil/parties/IParty";
 import { OrOptions } from "./inputs/OrOptions";
-import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
 import { getRandomMilestonesAndAwards } from "./MilestoneAwardSelector";
@@ -603,52 +602,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         if (resource === Resources.PLANTS) this.someoneHasRemovedOtherPlayersPlants = true;
         return;
       }
-
-      let candidates: Array<Player> = [];
-      if (resource === Resources.PLANTS) {
-        candidates = this.getPlayers().filter((p) => p.id !== player.id && !p.plantsAreProtected() && p.getResource(resource) > 0);
-      } else {
-        candidates = this.getPlayers().filter((p) => p.id !== player.id && p.getResource(resource) > 0);
-      }
-
-      if (candidates.length === 0) {
-        return;
-      } else if (candidates.length === 1) {
-        const qtyToRemove = Math.min(candidates[0].plants, count);
-
-        if (resource === Resources.PLANTS) {
-          this.addInterrupt({ player, playerInput: new OrOptions(
-            new SelectOption("Remove " + qtyToRemove + " plants from " + candidates[0].name, "Remove plants", () => {
-              candidates[0].setResource(resource, -qtyToRemove, this, player);
-              return undefined;
-            }),
-            new SelectOption("Skip removing plants", "Confirm", () => {
-              return undefined;
-            })
-          )});
-        } else {
-          candidates[0].setResource(resource, -qtyToRemove, this, player);
-          return;
-        }
-      } else {
-        if (resource === Resources.PLANTS) {
-          const removalOptions = candidates.map((candidate) => {
-            const qtyToRemove = Math.min(candidate.plants, count);
-
-            return new SelectOption("Remove " + qtyToRemove + " plants from " + candidate.name, "Remove plants", () => {
-              candidate.setResource(resource, -qtyToRemove, this, player);
-              return undefined;
-            })
-          });
-
-          this.addInterrupt({ player, playerInput: new OrOptions(
-            ...removalOptions,
-            new SelectOption("Skip removing plants", "Confirm", () => { return undefined; })
-          )});
-        } else {
-          this.addInterrupt(new SelectResourceDecrease(player, candidates, this, resource, count, title));
-        }
-      }
+      this.addInterrupt(new SelectResourceDecrease(player, [], this, resource, count, title));
     }
 
     public addInterrupt(interrupt: PlayerInterrupt): void {

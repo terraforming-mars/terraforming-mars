@@ -341,7 +341,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                     </div>
 
                     <div class="columns">
-                        <div class="create-game-options-block col3 col-sm-6" v-if="! isSoloModePage">
+                        <div class="create-game-options-block" v-if="! isSoloModePage">
                             <h4 v-i18n>Players count</h4>
 
                             <label class="form-radio" v-for="pCount in [1,2,3,4,5,6]">
@@ -350,7 +350,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </label>
                         </div>
 
-                        <div class="create-game-options-block col3 col-sm-6">
+                        <div class="create-game-options-block">
                             <h4 v-i18n>Expansions</h4>
                             <div class="expansion-label">Official</div>
 
@@ -398,7 +398,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </label>
                         </div>
 
-                        <div class="create-game-options-block col3 col-sm-6">
+                        <div class="create-game-options-block">
                             <h4 v-i18n>Options</h4>
 
                             <label class="form-switch" v-if="playersCount > 1">
@@ -494,7 +494,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </div>
                         </div>
 
-                        <div class="create-game-options-block col3 col-sm-6">
+                        <div class="create-game-options-block">
                             <h4 v-i18n>Board</h4>
 
                             <label class="form-radio" v-for="boardName in boards">

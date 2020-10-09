@@ -96,7 +96,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             ],
             seed: Math.random(),
             seededGame: false,
-            solarPhaseOption: false,
+            solarPhaseOption: true,
             shuffleMapOption: false,
             promoCardsOption: false,
             communityCardsOption: false,
@@ -365,7 +365,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                         <div class="create-game-page-column">
                             <h4 v-i18n>Expansions</h4>
-                            <div class="expansion-label">Official</div>
 
                             <input type="checkbox" name="allOfficialExpansions" id="allOfficialExpansions-checkbox" v-model="allOfficialExpansions" v-on:change="selectAll()">
                             <label for="allOfficialExpansions-checkbox">

@@ -7688,7 +7688,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
         &nbsp;: +4 <div class="resource floater"></div>
         <div class="description">
-          Gain 10 MC. Play a Venus card that collects floaters from hand and add 4 floaters to it.
+          Gain 10 MC. Play a Venus card from your hand that collects floaters and add 4 floaters to it.
         </div>
       </div>
 `],

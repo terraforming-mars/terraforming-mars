@@ -3272,7 +3272,8 @@ export const HTML_DATA: Map<string, string> =
               </div>
             </div>
 `],
-[CardName.RED_SPOT_OBSERVATORY,` 
+[CardName.RED_SPOT_OBSERVATORY,`
+              <div class="content ">
                 <div class="points points-big">2</div>
                 <div class="requirements">3 Science</div>
                 <div class="red-arrow "></div> <div class="resource floater"></div> OR
@@ -3862,7 +3863,7 @@ export const HTML_DATA: Map<string, string> =
       <div class="venus-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="pointsCorporation">1/3<div class="resource floater"></div></div>
-        <div class="corporationEffectBox hover-hide-res">
+        <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">ACTION</div>
           <div class="red-arrow"></div> <div class="resource floater"></div>*
           <div class="description" style="text-align:center;margin-top:0px;">
@@ -3877,11 +3878,13 @@ export const HTML_DATA: Map<string, string> =
           style="background:linear-gradient(to right,rgb(23,185,236),rgb(251,192,137))">ES</span><span style="background:rgb(251,192,137);padding-right:5px;">TIC</span>
         </div>
       </div><br>
-        <div class="resource money" style="margin-left:30px;">42</div>
-        <div class="resource card"><div class="card-icon-box floater"></div></div>
-        <div class="resource card"><div class="card-icon-box floater"></div></div>
-        <div class="description" style="text-align:center;margin-top:-3px;font-size:10px;">
+        <div class="celestic-fix">
+          <div class="resource money" style="margin-left:30px;">42</div>
+          <div class="resource card"><div class="card-icon-box floater"></div></div>
+          <div class="resource card"><div class="card-icon-box floater"></div></div>
+          <div class="description" style="text-align:center;margin-top:-3px;font-size:10px;">
           (You start with 42 MC. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take those 2 cards into hand and discard the rest.)
+        </div>
         </div>
 `],
 [CardName.MANUTECH,` 
@@ -3998,20 +4001,7 @@ export const HTML_DATA: Map<string, string> =
                     (Effect: When you play an Earth tag, including this, draw a card.)
                 </div>
             </div>
-            <div class="point luna" style="font-size:22px;
-            font-family: Prototype;
-            font-weight: normal;
-            display:inline-block;
-            margin-top: 35px;
-            margin-bottom: 5px;
-            text-decoration: underline;
-            margin-left: 40px;
-            -webkit-transform:scale(1.5,1); /* Safari and Chrome */
-            -moz-transform:scale(1.5,1); /* Firefox */
-            -ms-transform:scale(1.5,1); /* IE 9 */
-            -o-transform:scale(1.5,1); /* Opera */
-            transform:scale(1.5,1); /* W3C */
-            ">POINT<span>&nbsp;</span>LUNA</div>
+            <div class="luna-fix">POINT<span>&nbsp;</span>LUNA</div>
             </div>
             <div class="description " style="text-align:center;margin-top:0px ">
             <div class="production-box" style="margin-left:-30px;margin-top:-5px;margin-bottom:-5px;"><div class="production titanium"></div></div>
@@ -4375,13 +4365,13 @@ export const HTML_DATA: Map<string, string> =
           <div class="description" style="margin-top:-3px;text-align:center;">(Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.)
         </div>
         </div>
-        <div  style="font-size:20px;margin-top:5px;margin-bottom:5px; border-radius:25px;padding:10px;font-weight:bold;
-        background:red;color:white; box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3), 3px 3px 3px #444; font-family: Prototype;
-        font-weight: normal;text-shadow: 0 0 1px black;"> RECYCLON</div>
-                </div>
-                <div class="resource money" style="margin-left:60px;margin-right:25px;">38</div>
-                <div class="production-box" style="margin-left:20px;"><div class="production steel"></div></div>
+        <div class="recyclon-fix"> RECYCLON</div>
+      </div>
+      <div class="recyclon-fix-2">
+        <div class="resource money" style="margin-left:60px;margin-right:25px;">38</div>
+        <div class="production-box" style="margin-left:20px;"><div class="production steel"></div></div>
         <div class="description" style="margin-top:0px;text-align:center;">(You start with 38 MC and 1 steel production.)</div>
+      </div>
 `],
 [CardName.SPLICE,`
       <div class="promo-icon corporation-icon"></div>
@@ -5489,6 +5479,7 @@ export const HTML_DATA: Map<string, string> =
     </div>
 `],
 [CardName.AGRICOLA_INC,` 
+      <div class="community-icon corporation-icon"></div>
       <div class="contentCorporation">
         <div class="pointsCorporation">?</div>
         <div class="corporationEffectBox">

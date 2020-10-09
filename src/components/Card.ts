@@ -139,7 +139,7 @@ export function getProjectCardByName(
     return undefined;
 }
 
-export function getCardExtensionByName(cardName: string): string {
+export function getCardExpansionByName(cardName: string): string {
     //promo
     if (ALL_CORP_ERA_PROJECT_CARDS.find((c) => c.cardName === cardName))
         return CorporationGroup.CORPORATION;
@@ -206,7 +206,7 @@ export const Card = Vue.component("card", {
             return getCardContent(this.card.name);
         },
         getCardExpansion: function (): string {
-            return getCardExtensionByName(this.card.name);
+            return getCardExpansionByName(this.card.name);
         },
         getCard: function (): ICard | undefined {
             return (
@@ -239,6 +239,9 @@ export const Card = Vue.component("card", {
         getResourceAmount: function (card: CardModel): number {
             return card.resources !== undefined ? card.resources : 0;
         },
+        isCorporationCard: function (): boolean {
+            return getCorporationCardByName(this.card.name) !== undefined;
+        },
     },
     template: `
         <div :class="getCardClasses(card)">
@@ -248,9 +251,9 @@ export const Card = Vue.component("card", {
                     <CardTags :tags="getTags()" />
                 </div>
                 <CardTitle :title="card.name" :type="getCardType()"/>
-                <div v-html=this.getCardContent() />
+                <div class="temporary-content-wrapper" v-html=this.getCardContent() />
             </div>
-            <CardExpansion :expansion="getCardExpansion()" />
+            <CardExpansion v-if="!isCorporationCard()" :expansion="getCardExpansion()" />
             <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />
             <CardExtraContent :card="card" />
         </div>

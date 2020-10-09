@@ -23,7 +23,7 @@ export const PlayerHome = Vue.component("player-home", {
     components: {
         "board": Board,
         "dynamic-title": DynamicTitle,
-        Card,
+        "Card": Card,
         "players-overview": PlayersOverview,
         "waiting-for": WaitingFor,
         "milestone": Milestone,

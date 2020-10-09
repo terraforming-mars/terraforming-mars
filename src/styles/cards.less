@@ -359,11 +359,6 @@ input[type="radio"]:checked + .filterDiv::after {
     left: 8px;
 }
 
-.corporation-icon:after {
-    margin-top: 47px;
-    margin-left: 214px;
-}
-
 .button-icon:after {
     margin-top: -9px;
     margin-left: -9px;
@@ -1566,7 +1561,7 @@ input[type="radio"]:checked + .filterDiv::after {
     font-family: "Trebuchet MS", Arial, sans-serif;
     letter-spacing: 2px;
     text-align: center;
-    margin-top: 5px;
+    margin-top: -35px;
     margin-left: -30px;
     text-shadow: 0 0 1px limegreen, 0 2px 2px greenyellow;
     font-size: 32px;
@@ -1656,7 +1651,7 @@ input[type="radio"]:checked + .filterDiv::after {
     font-family: Impact, sans-serif;
     letter-spacing: 6px;
     text-align: center;
-    margin: -15px 0 5px -30px;
+    margin: -57px 0 5px -30px;
     text-shadow: 0 0 1px black, 0 2px 2px rgb(61, 54, 54);
     font-size: 36px;
 }
@@ -1700,7 +1695,7 @@ input[type="radio"]:checked + .filterDiv::after {
     font-weight: bold;
     letter-spacing: 2px;
     text-align: center;
-    margin-top: 5px;
+    margin-top: -34px;
     margin-left: -30px;
     text-shadow: 0 0 1px orchid, 0 2px 2px purple;
     font-size: 30px;
@@ -2351,6 +2346,14 @@ input[type="radio"]:checked + .filterDiv::after {
     }
     .card-content-wrapper {
         position: relative;
+        .temporary-content-wrapper {
+            position: relative;
+            .corporation-icon {
+                position: absolute;
+                top: 9px;
+                right: 26px;
+            }
+        }
         .card-cost-and-tags {
             display: flex;
             align-items: center;
@@ -2402,7 +2405,6 @@ input[type="radio"]:checked + .filterDiv::after {
             color: #020202;
             text-transform: uppercase;
             width: 100%;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.4);
             border-radius: 0 0 30% 30%;
             line-height: 30px;
             font-size: 16px;
@@ -2478,4 +2480,45 @@ input[type="radio"]:checked + .filterDiv::after {
             color: #020202;
         }
     }
+}
+.celestic-fix {
+    position: absolute;
+    top: 18px;
+}
+.luna-fix {
+    position: absolute;
+    font-size: 22px;
+    font-family: Prototype;
+    font-weight: normal;
+    display: inline-block;
+    margin-top: 25px;
+    margin-bottom: 30px;
+    text-decoration: underline;
+    margin-left: 40px;
+    -webkit-transform: scale(1.5, 1); /* Safari and Chrome */
+    -moz-transform: scale(1.5, 1); /* Firefox */
+    -ms-transform: scale(1.5, 1); /* IE 9 */
+    -o-transform: scale(1.5, 1); /* Opera */
+    transform: scale(1.5, 1); /* W3C */
+}
+
+.recyclon-fix {
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 25px;
+    padding: 10px;
+    font-weight: bold;
+    background: red;
+    color: white;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3),
+        3px 3px 3px #444;
+    font-family: Prototype;
+    font-weight: normal;
+    text-shadow: 0 0 1px black;
+}
+.recyclon-fix-2 {
+    position: absolute;
+    top: 48px;
+    left: 8px;
 }

@@ -23,7 +23,7 @@ export const CardExpansion = Vue.component("CardExpansion", {
                 classes.push("community-icon");
             } else if (this.expansion === CorporationGroup.PRELUDE) {
                 classes.push("prelude-icon");
-            } else if (this.expansion === "corporation") {
+            } else if (this.expansion === CorporationGroup.CORPORATION) {
                 classes.push("corporate-icon");
             }
 

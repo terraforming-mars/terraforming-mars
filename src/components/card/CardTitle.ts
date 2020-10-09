@@ -38,7 +38,7 @@ export const CardTitle = Vue.component("CardTitle", {
     template: `
         <div class="card-title">
             <div v-if="isPrelude()" class="prelude-label">prelude</div>
-            <div v-if="isCorporation()" class="corporation-label">corporation</div>
+            <div v-if-else="isCorporation()" class="corporation-label">corporation</div>
             <div v-else :class="getClasses()">{{ title }}</div>
         </div>
     `,

@@ -8,7 +8,7 @@ export const CardResourceCounter = Vue.component("CardResourceCounter", {
     },
     template: `
         <div class="card-resources-counter">
-            <span class="card-resources-counter-label>res:</span><span class="card-resources-counter-number"> {{ amount }}</span>
+            <span class="card-resources-counter-label">res:</span><span class="card-resources-counter-number"> {{ amount }}</span>
         </div>
     `,
 });

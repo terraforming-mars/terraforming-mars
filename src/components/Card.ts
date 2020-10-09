@@ -142,9 +142,9 @@ export function getProjectCardByName(
 export function getCardExtensionByName(cardName: string): string {
     //promo
     if (ALL_CORP_ERA_PROJECT_CARDS.find((c) => c.cardName === cardName))
-        return "corporation";
+        return CorporationGroup.CORPORATION;
     if (ALL_CORP_ERA_CORPORATION_CARDS.find((c) => c.cardName === cardName))
-        return "corporation";
+        return CorporationGroup.CORPORATION;
     //prelude
     if (ALL_PRELUDE_CORPORATIONS.find((c) => c.cardName === cardName))
         return CorporationGroup.PRELUDE;

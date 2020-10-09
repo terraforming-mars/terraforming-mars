@@ -923,7 +923,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     private doneWorldGovernmentTerraforming(game: Game): void {
       if (this.hasInterrupt(game)) {
-        this.runInterrupt(game, () => this.doneWorldGovernmentTerraforming(game));
+        this.runOwnNextInterrupt(game, () => this.doneWorldGovernmentTerraforming(game));
       } else {
         game.doneWorldGovernmentTerraforming();
       }
@@ -1770,21 +1770,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     private resolveFinalGreeneryInterrupts(game: Game) {
-      if (game.interrupts.length > 0) {
-        const interrupt = game.interrupts.shift();
-        if (interrupt) {
-          if (interrupt.generatePlayerInput !== undefined) {
-            interrupt.generatePlayerInput();
-          }
-          if (interrupt.playerInput !== undefined) {
-            interrupt.player.setWaitingFor(interrupt.playerInput, () => {
-              this.resolveFinalGreeneryInterrupts(game);
-            });
-          } else {
-            this.resolveFinalGreeneryInterrupts(game);
-          }
-          return;
-        }
+      if (game.runNextInterrupt(() => { this.resolveFinalGreeneryInterrupts(game) })) {
+        return;
       }
 
       // All final greenery interrupts have been resolved, continue game flow
@@ -1958,27 +1945,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       return game.interrupts.find(interrupt => interrupt.player === this) !== undefined;
     }
 
-    private runInterrupt(game: Game, cb: () => void): void {
+    private runOwnNextInterrupt(game: Game, cb: () => void): void {
       //Interrupt action
-      const interruptIndex: number = game.interrupts.findIndex(interrupt => interrupt.player === this);
-      if (interruptIndex !== -1) {
-        const interrupt = game.interrupts[interruptIndex];
-        if (interrupt) {
-          if (interrupt.generatePlayerInput !== undefined) {
-            interrupt.generatePlayerInput();
-          }
-          const nextInterrupt = game.interrupts.splice(interruptIndex, 1)[0];
-          if (nextInterrupt.playerInput !== undefined) {
-            this.setWaitingFor(nextInterrupt.playerInput, () => {
-              cb();
-            });
-          } else {
-            cb();
-          }
-        } else {
-          cb();
-        }
-      } else {
+      if (game.runNextInterrupt(() => { cb() }, this) === false) {
         cb();
       }
     }
@@ -1989,7 +1958,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
     public takeAction(game: Game): void {
       if (this.hasInterrupt(game)) {
-        this.runInterrupt(game, () => this.takeAction(game));
+        this.runOwnNextInterrupt(game, () => this.takeAction(game));
         return;
       }
  
@@ -2140,7 +2109,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           selectParty = new SelectParty(this, game, "Send a delegate in an area (5 MC)", 1, undefined, 5, false);
         }
         if (selectParty) {
-          if (selectParty.generatePlayerInput !== undefined) {
+          if (selectParty.generatePlayerInput() !== undefined) {
             selectParty.generatePlayerInput();
           }
           if (selectParty.playerInput !== undefined) {

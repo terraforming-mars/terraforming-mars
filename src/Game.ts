@@ -560,6 +560,36 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.interrupts.push(interrupt);
     }
 
+    public runNextInterrupt(cb: () => void, findByPlayer?: Player): boolean {
+      if (this.interrupts.length < 0) {
+        return false;
+      }
+      let interrupt;
+      if (findByPlayer !== undefined) {
+        const interruptIndex: number = this.interrupts.findIndex(interrupt => interrupt.player === findByPlayer);
+        if (interruptIndex < 0) {
+          return false;
+        }
+        interrupt = this.interrupts.splice(interruptIndex, 1)[0];
+      } else {
+        interrupt = this.interrupts.shift();
+      }
+      if (interrupt === undefined) {
+        return false;
+      }
+      if (interrupt.generatePlayerInput !== undefined) {
+        interrupt.generatePlayerInput();
+      }
+      if (!interrupt.playerInput) {
+        cb();
+        return true;
+      }
+      interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+        cb();
+      });
+      return true;
+    }
+
     public getColoniesModel(colonies: Array<IColony>) : Array<ColonyModel> {
       return colonies.map(
         (colony): ColonyModel => ({
@@ -862,21 +892,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private resolveTurmoilInterrupts() {
-      if (this.interrupts.length > 0) {
-        const interrupt = this.interrupts.shift();
-        if (interrupt) {
-          if (interrupt.generatePlayerInput !== undefined) {
-            interrupt.generatePlayerInput();
-          }
-          if (interrupt.playerInput !== undefined) {
-            interrupt.player.setWaitingFor(interrupt.playerInput, () => {
-              this.resolveTurmoilInterrupts();
-            });
-          } else {
-            this.resolveTurmoilInterrupts();
-          }
-          return;
-        }
+      if (this.runNextInterrupt(() => { this.resolveTurmoilInterrupts() })) {
+        return;
       }
 
       // All turmoil interrupts have been resolved, continue game flow
@@ -952,25 +969,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public playerIsFinishedWithResearchPhase(player: Player): void {
       this.researchedPlayers.add(player.id);
       if (this.allPlayersHaveFinishedResearch()) {
-        if (this.interrupts.length === 0) {
-          this.gotoActionPhase();
-        } else {
-        // Resolve research interrupt (Helion player)
-          const interrupt = this.interrupts.shift();
-          if (interrupt) {
-            if (interrupt.generatePlayerInput !== undefined) {
-              interrupt.generatePlayerInput();
-            }
-            if (interrupt.playerInput !== undefined) {
-              interrupt.player.setWaitingFor(interrupt.playerInput, () => {
-                this.playerIsFinishedWithResearchPhase(player);
-              });
-            } else {
-              this.playerIsFinishedWithResearchPhase(player);
-            }
-            return;
-          }
+        if (this.runNextInterrupt(() => { this.playerIsFinishedWithResearchPhase(player) })) {
+          return;
         }
+        this.gotoActionPhase();
       }
     }
 
@@ -1108,18 +1110,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Interrupt hook
       if (this.interrupts.length > 0) {
-        const interrupt = this.interrupts.shift();
-        if (interrupt) {
-          if (interrupt.generatePlayerInput !== undefined) {
-            interrupt.generatePlayerInput();
-          }
-          if (interrupt.playerInput !== undefined) {
-            interrupt.player.setWaitingFor(interrupt.playerInput, () => {
-              this.playerIsFinishedTakingActions();
-            });
-          } else {
-            this.playerIsFinishedTakingActions();
-          }
+        if (this.runNextInterrupt(() => { this.playerIsFinishedTakingActions() })) {
           return;
         }
       }

@@ -1,5 +1,6 @@
 export enum LogMessageDataType {
-	STRING,
+    STRING,
+    RAW_STRING,
     PLAYER,
     CARD,
     AWARD,

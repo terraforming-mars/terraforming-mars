@@ -2,11 +2,11 @@
 import * as http from "http";
 import * as querystring from "querystring";
 
-import { Game } from "../Game";
+import { GameLoader } from "../database/GameLoader";
 import { Route } from "./Route";
 
 export class GameLogs extends Route {
-    constructor(private games: Map<string, Game>) {
+    constructor(private gameLoader: GameLoader) {
         super();
     }
     public canHandle(url: string): boolean {
@@ -30,29 +30,29 @@ export class GameLogs extends Route {
             return;
         }
 
-        const game = this.games.get(id);
-
-        if (game === undefined) {
-            console.warn("game not found");
-            this.notFound(req, res);
-            return;
-        }
-
-        let log = game.gameLog;
-
-        if (limit !== undefined && !Array.isArray(limit)) {
-            const theLimit = parseInt(limit);
-            if (isNaN(theLimit)) {
-                this.badRequest(req, res);
+        this.gameLoader.getGameByPlayerId(id, (game) => {
+            if (game === undefined) {
+                console.warn("game not found");
+                this.notFound(req, res);
                 return;
             }
-            if (log.length > theLimit) {
-                log.splice(0, log.length - theLimit);
-            }
-        }
 
-        res.setHeader("Content-Type", "application/json");
-        res.write(JSON.stringify(log));
-        res.end();
+            let log = game.gameLog;
+
+            if (limit !== undefined && !Array.isArray(limit)) {
+                const theLimit = parseInt(limit);
+                if (isNaN(theLimit)) {
+                    this.badRequest(req, res);
+                    return;
+                }
+                if (log.length > theLimit) {
+                    log.splice(0, log.length - theLimit);
+                }
+            }
+
+            res.setHeader("Content-Type", "application/json");
+            res.write(JSON.stringify(log));
+            res.end();
+        });
     }
 }

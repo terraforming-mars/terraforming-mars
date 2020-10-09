@@ -1511,7 +1511,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
       }
 
-
       // Part 3. Setup for bonuses
       const arcadianCommunityBonus = space.player === player && player.isCorporation(CorporationName.ARCADIAN_COMMUNITIES);
 
@@ -1530,7 +1529,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (!isWorldGov) {
         space.bonus.forEach((spaceBonus) => {
           if (spaceBonus === SpaceBonus.DRAW_CARD) {
-            player.cardsInHand.push(this.dealer.dealCard());
+            player.cardsEarned++;
           } else if (spaceBonus === SpaceBonus.PLANT) {
             player.plants++;
           } else if (spaceBonus === SpaceBonus.STEEL) {
@@ -1653,7 +1652,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return undefined;
     }
 
-    public drawProjectCardsByCondition(total: number, include: (card: IProjectCard) => boolean) {
+    private drawProjectCardsByCondition(total: number, include: (card: IProjectCard) => boolean) {
       let cardsToDraw = 0;
       const result: Array<IProjectCard> = [];
       const discardedCards: Array<IProjectCard> = [];

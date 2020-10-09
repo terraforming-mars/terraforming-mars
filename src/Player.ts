@@ -107,6 +107,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     public cardDiscount: number = 0;
     public colonyVictoryPoints: number = 0;
     public scienceTagCount: number = 0;
+    public cardsEarned: number = 0;
 
     constructor(
         public name: string,
@@ -1975,6 +1976,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
     }
 
     public takeAction(game: Game): void {
+      this.cardsEarned = 0;
       if (this.hasInterrupt(game)) {
         this.runInterrupt(game, () => this.takeAction(game));
         return;
@@ -2181,6 +2183,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       }
 
       this.setWaitingFor(action, () => {
+        while (this.cardsEarned > 0) {
+          this.cardsInHand.push(game.dealer.dealCard());
+          this.cardsEarned--;
+        }
         this.actionsTakenThisRound++;
         this.takeAction(game);
       });

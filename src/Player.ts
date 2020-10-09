@@ -56,57 +56,86 @@ import { ColonyModel } from "./models/ColonyModel";
 export type PlayerId = string;
 
 export class Player implements ILoadable<SerializedPlayer, Player>{
-    public corporationCard: CorporationCard | undefined = undefined;
     public id: PlayerId;
-    public canUseHeatAsMegaCredits: boolean = false;
-    public shouldTriggerCardEffect: boolean = true;
-    public plantsNeededForGreenery: number = 8;
+    private waitingFor?: PlayerInput;
+    private waitingForCb?: () => void;
+  
+    // Corporate identity
+    public corporationCard: CorporationCard | undefined = undefined;
+    // Used only during set-up
     public pickedCorporationCard: CorporationCard | undefined = undefined;
-    public dealtCorporationCards: Array<CorporationCard> = [];
-    public dealtProjectCards: Array<IProjectCard> = [];
-    public dealtPreludeCards: Array<IProjectCard> = [];
-    public powerPlantCost: number = 11;
-    private titaniumValue: number = 3;
-    public steelValue: number = 2;
+
+    // Terraforming Rating
+    private terraformRating: number = 20;
+    public hasIncreasedTerraformRatingThisGeneration: boolean = false;
+    public terraformRatingAtGenerationStart: number = 20;
+
+    // Resources
     public megaCredits: number = 0;
     private megaCreditProduction: number = 0;
     public steel: number = 0;
-    public titanium: number = 0;
-    public energy: number = 0;
     private steelProduction: number = 0;
+    public titanium: number = 0;
     private titaniumProduction: number = 0;
+    public plants: number = 0;
+    private plantProduction: number = 0;
+    public energy: number = 0;
     private energyProduction: number = 0;
     public heat: number = 0;
     private heatProduction: number = 0;
-    public plants: number = 0;
-    private plantProduction: number = 0;
+
+    // Resource values
+    private titaniumValue: number = 3;
+    public steelValue: number = 2;
+    // Helion
+    public canUseHeatAsMegaCredits: boolean = false;
+
+    // This generation / this round
+    public actionsTakenThisRound: number = 0;
+    private actionsThisGeneration: Set<string> = new Set<string>();
+    public lastCardPlayed: IProjectCard | undefined;
+
+    // Cards
+    public dealtCorporationCards: Array<CorporationCard> = [];
+    public dealtProjectCards: Array<IProjectCard> = [];
+    public dealtPreludeCards: Array<IProjectCard> = [];
     public cardsInHand: Array<IProjectCard> = [];
     public preludeCardsInHand: Array<IProjectCard> = [];    
     public playedCards: Array<IProjectCard> = [];
     public draftedCards: Array<IProjectCard> = [];
     public removedFromPlayCards: Array<IProjectCard> = [];
+    // TODO(kberg): Recast to Map<CardName, number>, make sure it survives JSONification.
     private generationPlayed: Map<string, number> = new Map<string, number>();
-    public actionsTakenThisRound: number = 0;
-    private terraformRating: number = 20;
-    public hasIncreasedTerraformRatingThisGeneration: boolean = false;
-    public terraformRatingAtGenerationStart: number = 20;
-    public victoryPointsBreakdown = new VictoryPointsBreakdown();
-    private actionsThisGeneration: Set<string> = new Set<string>();
-    public lastCardPlayed: IProjectCard | undefined;
-    private waitingFor?: PlayerInput;
-    private waitingForCb?: () => void;
     public cardCost: number = constants.CARD_COST;
-    public oceanBonus: number = constants.OCEAN_BONUS;
+    public needsToDraft: boolean | undefined = undefined; 
+    public cardDiscount: number = 0;
+
+    // Colonies
     public fleetSize: number = 1;
     public tradesThisTurn: number = 0;
     public colonyTradeOffset: number = 0;
     public colonyTradeDiscount: number = 0;
-    private turmoilScientistsActionUsed: boolean = false;
-    public removingPlayers: Array<PlayerId> = [];
-    public needsToDraft: boolean | undefined = undefined; 
-    public cardDiscount: number = 0;
     public colonyVictoryPoints: number = 0;
+    
+    // Turmoil
+    private turmoilScientistsActionUsed: boolean = false;
+
+    // Controlled by cards with effects that might be called a second time recursively, I think.
+    // They set this to false in order to prevent card effects from triggering twice.
+    // Not sure this is clear.
+    public shouldTriggerCardEffect: boolean = true;
+
+    public powerPlantCost: number = 11;
+    public victoryPointsBreakdown = new VictoryPointsBreakdown();
+    public oceanBonus: number = constants.OCEAN_BONUS;
+    
+    // Custom cards
+    // Leavitt Station.
     public scienceTagCount: number = 0;
+    // Ecoline
+    public plantsNeededForGreenery: number = 8;
+    // Lawsuit
+    public removingPlayers: Array<PlayerId> = [];
 
     constructor(
         public name: string,

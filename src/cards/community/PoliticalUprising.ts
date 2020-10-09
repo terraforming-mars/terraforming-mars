@@ -12,29 +12,25 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
     public name: CardName = CardName.POLITICAL_UPRISING;
 
     public play(player: Player, game: Game) {
-        if (game.gameOptions.turmoilExtension) {
-            this.drawTurmoilCard(player, game);
+        this.drawTurmoilCard(player, game);
 
-            for (let i = 0; i < 4; i++) {
-                game.addInterrupt(new SelectParty(player, game, "Select where to send delegate", 1, undefined, undefined, false));
-            }
+        for (let i = 0; i < 4; i++) {
+            game.addInterrupt(new SelectParty(player, game, "Select where to send delegate", 1, undefined, undefined, false));
         }
 
         return undefined;
     }
 
     private drawTurmoilCard(player: Player, game: Game) {
-        if (game.gameOptions.turmoilExtension) {
-            const turmoilCards = ALL_TURMOIL_PROJECTS_CARDS.map((c) => c.cardName);
-            const drawnCard = game.dealer.deck.find((card) => turmoilCards.includes(card.name));
+        const turmoilCards = ALL_TURMOIL_PROJECTS_CARDS.map((c) => c.cardName);
+        const drawnCard = game.dealer.deck.find((card) => turmoilCards.includes(card.name));
 
-            if (drawnCard) {
-                const cardIndex = game.dealer.deck.findIndex((c) => c.name === drawnCard.name);
-                game.dealer.deck.splice(cardIndex, 1);
+        if (drawnCard) {
+            const cardIndex = game.dealer.deck.findIndex((c) => c.name === drawnCard.name);
+            game.dealer.deck.splice(cardIndex, 1);
 
-                player.cardsInHand.push(drawnCard);
-                game.log("${0} drew ${1}", b => b.player(player).card(drawnCard));
-            }
+            player.cardsInHand.push(drawnCard);
+            game.log("${0} drew ${1}", b => b.player(player).card(drawnCard));
         }
 
         return undefined;

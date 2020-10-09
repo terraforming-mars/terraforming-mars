@@ -26,7 +26,7 @@ describe("AerospaceMission", function () {
         options.cb();
 
         const openColonies = game.colonies.filter(colony => colony.isActive);
-        expect(openColonies[0].colonies.find((c) => c === player.id)).not.to.eq(undefined);
-        expect(openColonies[1].colonies.find((c) => c === player.id)).not.to.eq(undefined);
+        expect(openColonies[0].colonies.find((c) => c === player.id)).is.not.undefined;
+        expect(openColonies[1].colonies.find((c) => c === player.id)).is.not.undefined;
     });
 });

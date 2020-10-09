@@ -13,21 +13,18 @@ export class ByElection extends PreludeCard implements IProjectCard {
     public name: CardName = CardName.BY_ELECTION;
 
     public play(player: Player, game: Game) {
-        if (game.gameOptions.turmoilExtension) {
-            game.turmoil!.addInfluenceBonus(player);
-
-            const setRulingParty = new OrOptions();
+        game.turmoil!.addInfluenceBonus(player);
+        const setRulingParty = new OrOptions();
             
-            setRulingParty.title = "Select new ruling party";
-            setRulingParty.options = [...ALL_PARTIES.map((p) => new SelectOption(
-                p.partyName, "Select", () => {
-                game.turmoil!.rulingParty = game.turmoil!.getPartyByName(p.partyName);
-                return undefined;
-              })
-            )];
+        setRulingParty.title = "Select new ruling party";
+        setRulingParty.options = [...ALL_PARTIES.map((p) => new SelectOption(
+            p.partyName, "Select", () => {
+            game.turmoil!.rulingParty = game.turmoil!.getPartyByName(p.partyName);
+            return undefined;
+            })
+        )];
 
-            game.addInterrupt({ player, playerInput: setRulingParty });
-        }
+        game.addInterrupt({ player, playerInput: setRulingParty });
 
         return undefined;
     }

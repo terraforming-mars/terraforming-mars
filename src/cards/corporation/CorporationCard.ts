@@ -30,5 +30,5 @@ export interface CorporationCard extends ICard {
     resourceType?: ResourceType;
     onProductionPhase?: (player: Player) => undefined;
     isDisabled?: boolean;
-    cardType?: CardType;
+    cardType: CardType;
 }

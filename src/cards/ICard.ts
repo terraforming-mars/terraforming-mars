@@ -42,5 +42,5 @@ export interface ICard {
     resourceType?: ResourceType;
     resourceCount?: number;
     cost?: number;
-    cardType?: CardType;
+    cardType: CardType;
 }

@@ -96,7 +96,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             ],
             seed: Math.random(),
             seededGame: false,
-            solarPhaseOption: true,
+            solarPhaseOption: false,
             shuffleMapOption: false,
             promoCardsOption: false,
             communityCardsOption: false,
@@ -161,6 +161,9 @@ export const CreateGameForm = Vue.component("create-game-form", {
             this.colonies = this.$data.allOfficialExpansions;
             this.turmoil = this.$data.allOfficialExpansions;
             this.promoCardsOption = this.$data.allOfficialExpansions;
+        },
+        venusClickWGTon: function() {
+            this.solarPhaseOption = true;
         },
         getBoardColor: function(boardName: String): String {
             if (boardName === BoardName.ORIGINAL){
@@ -383,7 +386,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <span v-i18n>Prelude</span>
                             </label>
 
-                            <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext">
+                            <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext" v-on:change="venusClickWGTON()">
                             <label for="venusNext-checkbox" class="expansion-button">
                             <div class="expansion-icon expansion-icon-venus"></div>
                                 <span v-i18n>Venus Next</span>

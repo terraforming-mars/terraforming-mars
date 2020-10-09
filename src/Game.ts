@@ -66,66 +66,87 @@ export interface Score {
 }
 
 export interface GameOptions {
-  draftVariant: boolean;
-  corporateEra: boolean;
-  preludeExtension: boolean;
-  venusNextExtension: boolean;
-  coloniesExtension: boolean;
-  turmoilExtension: boolean;
   boardName: BoardName;
-  showOtherPlayersVP: boolean;
-  customCorporationsList: Array<CardName>;
-  customColoniesList: Array<ColonyName>;
-  cardsBlackList: Array<CardName>;
-  solarPhaseOption: boolean;
-  shuffleMapOption: boolean;
-  promoCardsOption: boolean;
-  communityCardsOption: boolean;
+  clonedGamedId: string | undefined;
+
+  // Configuration
   undoOption: boolean;
   fastModeOption: boolean;
+  showOtherPlayersVP: boolean;
+  
+  // Extensions
+  corporateEra: boolean;
+  venusNextExtension: boolean;
+  coloniesExtension: boolean;
+  preludeExtension: boolean;
+  turmoilExtension: boolean;
+  promoCardsOption: boolean;
+  communityCardsOption: boolean;
+  solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
   includeVenusMA: boolean;
-  startingCorporations: number;
-  soloTR: boolean;
-  clonedGamedId: string | undefined;
+  
+  // Variants
+  draftVariant: boolean;
   initialDraftVariant: boolean;
+  startingCorporations: number;
+  shuffleMapOption: boolean;
   randomMA: boolean;
+  soloTR: boolean; // Solo victory by getting TR 63 by game end
+  customCorporationsList: Array<CardName>;
+  cardsBlackList: Array<CardName>;
+  customColoniesList: Array<ColonyName>;
 }
 
 export class Game implements ILoadable<SerializedGame, Game> {
-    public activePlayer: PlayerId;
-    public claimedMilestones: Array<ClaimedMilestone> = [];
-    public milestones: Array<IMilestone> = [];
-    public dealer: Dealer;
-    public fundedAwards: Array<FundedAward> = [];
-    public awards: Array<IAward> = [];
+    // Game-level data
+    public lastSaveId: number = 0;
+    private clonedGamedId: string | undefined;
+    public seed: number = Math.random();
+    public interrupts: Array<PlayerInterrupt> = [];
+    public gameAge: number = 0; // Each log event increases it
+    public gameLog: Array<LogMessage> = [];
+    
     public generation: number = 1;
-    private draftRound: number = 1;
-    private initialDraftIteration: number = 1;
     public phase: Phase = Phase.RESEARCH;
-    private donePlayers: Set<Player> = new Set<Player>();
+    public dealer: Dealer;
+    public board: Board;
+    public gameOptions: GameOptions;
+
+    // Global parameters
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
+    private temperature: number = constants.MIN_TEMPERATURE;
+    public pendingOceans: number = 0;
     private venusScaleLevel: number = constants.MIN_VENUS_SCALE;
+    
+    // Player data
+    public activePlayer: PlayerId;
+    private donePlayers: Set<Player> = new Set<Player>();
     private passedPlayers: Set<PlayerId> = new Set<PlayerId>();
     private researchedPlayers: Set<PlayerId> = new Set<PlayerId>();
     private draftedPlayers: Set<PlayerId> = new Set<PlayerId>();
-    public board: Board;
-    private temperature: number = constants.MIN_TEMPERATURE;
-    public gameLog: Array<LogMessage> = [];
-    public gameAge: number = 0; // Each log event increases it
+
+    // Drafting
+    private draftRound: number = 1;
+    private initialDraftIteration: number = 1;
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
-    public interrupts: Array<PlayerInterrupt> = [];
-    public monsInsuranceOwner: PlayerId | undefined = undefined;
+
+    // Milestones and awards
+    public claimedMilestones: Array<ClaimedMilestone> = [];
+    public milestones: Array<IMilestone> = [];
+    public fundedAwards: Array<FundedAward> = [];
+    public awards: Array<IAward> = [];   
+
+    // Expansion-specific data
     public colonies: Array<IColony> = [];
     public colonyDealer: ColonyDealer | undefined = undefined;
-    public pendingOceans: number = 0;
-    public lastSaveId: number = 0;
     public turmoil: Turmoil | undefined;
-    private clonedGamedId: string | undefined;
-    public someoneHasRemovedOtherPlayersPlants: boolean = false;
-    public seed: number = Math.random();
-    public gameOptions: GameOptions;
 
+    // Card-specific data
+    // Mons Insurance promo corp
+    public monsInsuranceOwner: PlayerId | undefined = undefined;
+    // Crash Site promo project
+    public someoneHasRemovedOtherPlayersPlants: boolean = false;
 
     constructor(
       public id: string,
@@ -138,30 +159,33 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       if (gameOptions === undefined) {
         gameOptions = {
-          draftVariant: false,
-          initialDraftVariant: false,
-          corporateEra: true,
-          randomMA: false,
-          preludeExtension: false,
-          venusNextExtension: false,
-          coloniesExtension: false,
-          turmoilExtension: false,
           boardName: BoardName.ORIGINAL,
-          showOtherPlayersVP: false,
-          customCorporationsList: [],
-          customColoniesList: [],
-          cardsBlackList: [],
-          solarPhaseOption: false,
-          shuffleMapOption: false,
-          promoCardsOption: false,
-          communityCardsOption: false,
+          clonedGamedId: undefined,
+
           undoOption: false,
           fastModeOption: false,
+          showOtherPlayersVP: false,
+
+          corporateEra: true,
+          venusNextExtension: false,
+          coloniesExtension: false,
+          preludeExtension: false,
+          turmoilExtension: false,
+          promoCardsOption: false,
+          communityCardsOption: false,
+          solarPhaseOption: false,
           removeNegativeGlobalEventsOption: false,
-          startingCorporations: 2,
           includeVenusMA: true,
+
+          draftVariant: false,
+          initialDraftVariant: false,
+          startingCorporations: 2,
+          shuffleMapOption: false,
+          randomMA: false,
           soloTR: false,
-          clonedGamedId: undefined
+          customCorporationsList: [],
+          cardsBlackList: [],
+          customColoniesList: [],
         } as GameOptions
       }
       this.gameOptions = gameOptions;

@@ -163,7 +163,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
             this.promoCardsOption = this.$data.allOfficialExpansions;
         },
         venusClickWGTon: function() {
-            this.solarPhaseOption = true;
+            this.solarPhaseOption = this.$data.venusNext;
         },
         getBoardColor: function(boardName: String): String {
             if (boardName === BoardName.ORIGINAL){
@@ -386,7 +386,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <span v-i18n>Prelude</span>
                             </label>
 
-                            <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext" v-on:change="venusClickWGTON()">
+                            <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext" v-on:change="venusClickWGTon()">
                             <label for="venusNext-checkbox" class="expansion-button">
                             <div class="expansion-icon expansion-icon-venus"></div>
                                 <span v-i18n>Venus Next</span>

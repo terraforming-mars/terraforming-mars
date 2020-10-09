@@ -34,7 +34,7 @@
     "extends": "@istanbuljs/nyc-config-typescript"
   },
   "scripts": {
-    "build": "node make_locales.js && eslint src/*.ts && lessc src/styles/common.less styles.css && tsc --build tsconfig.json && webpack --config webpack.config.js",
+    "build": "node make_locales.js && eslint src/*.ts src/database/**/*.ts && lessc src/styles/common.less styles.css && tsc --build tsconfig.json && webpack --config webpack.config.js",
     "start": "node make_locales.js && lessc src/styles/common.less styles.css && tsc --build tsconfig.json && webpack --config webpack.config.js && node dist/server.js",
     "pretest": "tsc --build tsconfig-test.json",
     "test": "mocha --recursive dist/tests",

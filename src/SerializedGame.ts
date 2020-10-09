@@ -53,7 +53,6 @@ export interface SerializedGame {
     monsInsuranceOwner: PlayerId | undefined;
     colonies: Array<IColony>;
     colonyDealer: ColonyDealer | undefined;
-    pendingOceans: number;
     lastSaveId: number;
     turmoil: SerializedTurmoil;
     someoneHasRemovedOtherPlayersPlants: boolean;

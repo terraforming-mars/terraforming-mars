@@ -52,7 +52,6 @@ import { Turmoil } from "./turmoil/Turmoil";
 import { PartyHooks } from "./turmoil/parties/PartyHooks";
 import { IParty } from "./turmoil/parties/IParty";
 import { OrOptions } from "./inputs/OrOptions";
-import { SelectOption } from "./inputs/SelectOption";
 import { LogHelper } from "./components/LogHelper";
 import { ColonyName } from "./colonies/ColonyName";
 import { getRandomMilestonesAndAwards } from "./MilestoneAwardSelector";
@@ -118,7 +117,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
     public monsInsuranceOwner: PlayerId | undefined = undefined;
     public colonies: Array<IColony> = [];
     public colonyDealer: ColonyDealer | undefined = undefined;
-    public pendingOceans: number = 0;
     public lastSaveId: number = 0;
     public turmoil: Turmoil | undefined;
     private clonedGamedId: string | undefined;
@@ -524,20 +522,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public addSelectHowToPayInterrupt(player: Player, amount: number, canUseSteel: boolean, canUseTitanium: boolean, title?: string): void {
-      if ((!player.canUseHeatAsMegaCredits || player.heat === 0) &&
-          (!canUseSteel || player.steel === 0) &&
-          (!canUseTitanium || player.titanium === 0)) {
-            player.megaCredits -= amount;
-            return;
-      }
       this.addInterrupt(new SelectHowToPayInterrupt(player, amount, title, canUseSteel, canUseTitanium));
     }
 
     public addOceanInterrupt(player: Player, title?: string, isWorldGov: boolean = false): void {
-      if (this.board.getOceansOnBoard() + this.pendingOceans  >= constants.MAX_OCEAN_TILES) {
-        return;
-      }
-      this.pendingOceans++;
       this.addInterrupt(new SelectOcean(player, this, title, isWorldGov));
     }
 
@@ -550,55 +538,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
     }
 
-    public addSelectResourceCardInterrupt(player: Player, count: number = 1, resourceType: ResourceType, resourceCards: Array<ICard>, title?: string): void {
-      if (resourceCards.length === 1) {
-        player.addResourceTo(resourceCards[0], count);
-        LogHelper.logAddResource(this, player, resourceCards[0], count);
-        return undefined;            
-      }
-      this.addInterrupt(new SelectResourceCard(player, this, resourceType, resourceCards, title));
-    }
-
     public addResourceInterrupt(player: Player, resourceType: ResourceType, count: number = 1, optionalCard : ICard | undefined, restrictedTag?: Tags, title?: string): void {
-      let resourceCards = player.getResourceCards(resourceType);
-      // Played card is not into playedCards array yet
-      if (optionalCard !== undefined) {
-        resourceCards.push(optionalCard);
-      }
-      if (restrictedTag !== undefined) {
-        resourceCards = resourceCards.filter(card => card.tags.indexOf(restrictedTag) !== -1);
-      }
-      if (resourceCards.length === 0) {
-        return;
-      }
-
-      if (resourceCards.length === 1) {
-        player.addResourceTo(resourceCards[0], count);
-        LogHelper.logAddResource(this, player, resourceCards[0], count);
-        return undefined;            
-      }
-
-      this.addInterrupt(new SelectResourceCard(player, this, resourceType, resourceCards, title, count));
+      this.addInterrupt(new SelectResourceCard(player, this, resourceType, title, count, optionalCard, restrictedTag));
     }
 
     public addResourceProductionDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {
       if (this.isSoloMode()) return;
-
-      let candidates: Array<Player> = [];
-      if (resource === Resources.MEGACREDITS) {
-        candidates = this.getPlayers().filter((p) => p.getProduction(resource) >= count - 5);
-      } else {
-        candidates = this.getPlayers().filter((p) => p.getProduction(resource) >= count);
-      }
-
-      if (candidates.length === 0) {
-        return;
-      } else if (candidates.length === 1) {
-        candidates[0].addProduction(resource, -count, this, player);
-        return undefined;
-      } else {
-        this.addInterrupt(new SelectResourceProductionDecrease(player, candidates, this, resource, count, title));
-      }
+      this.addInterrupt(new SelectResourceProductionDecrease(player, this, resource, count, title));
     }
 
     public addResourceDecreaseInterrupt(player: Player, resource: Resources, count: number = 1, title?: string): void {
@@ -607,52 +553,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         if (resource === Resources.PLANTS) this.someoneHasRemovedOtherPlayersPlants = true;
         return;
       }
-
-      let candidates: Array<Player> = [];
-      if (resource === Resources.PLANTS) {
-        candidates = this.getPlayers().filter((p) => p.id !== player.id && !p.plantsAreProtected() && p.getResource(resource) > 0);
-      } else {
-        candidates = this.getPlayers().filter((p) => p.id !== player.id && p.getResource(resource) > 0);
-      }
-
-      if (candidates.length === 0) {
-        return;
-      } else if (candidates.length === 1) {
-        const qtyToRemove = Math.min(candidates[0].plants, count);
-
-        if (resource === Resources.PLANTS) {
-          this.addInterrupt({ player, playerInput: new OrOptions(
-            new SelectOption("Remove " + qtyToRemove + " plants from " + candidates[0].name, "Remove plants", () => {
-              candidates[0].setResource(resource, -qtyToRemove, this, player);
-              return undefined;
-            }),
-            new SelectOption("Skip removing plants", "Confirm", () => {
-              return undefined;
-            })
-          )});
-        } else {
-          candidates[0].setResource(resource, -qtyToRemove, this, player);
-          return;
-        }
-      } else {
-        if (resource === Resources.PLANTS) {
-          const removalOptions = candidates.map((candidate) => {
-            const qtyToRemove = Math.min(candidate.plants, count);
-
-            return new SelectOption("Remove " + qtyToRemove + " plants from " + candidate.name, "Remove plants", () => {
-              candidate.setResource(resource, -qtyToRemove, this, player);
-              return undefined;
-            })
-          });
-
-          this.addInterrupt({ player, playerInput: new OrOptions(
-            ...removalOptions,
-            new SelectOption("Skip removing plants", "Confirm", () => { return undefined; })
-          )});
-        } else {
-          this.addInterrupt(new SelectResourceDecrease(player, candidates, this, resource, count, title));
-        }
-      }
+      this.addInterrupt(new SelectResourceDecrease(player, this, resource, count, title));
     }
 
     public addInterrupt(interrupt: PlayerInterrupt): void {
@@ -964,12 +865,16 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (this.interrupts.length > 0) {
         const interrupt = this.interrupts.shift();
         if (interrupt) {
-          if (interrupt.beforeAction !== undefined) {
-            interrupt.beforeAction();
+          if (interrupt.generatePlayerInput !== undefined) {
+            interrupt.generatePlayerInput();
           }
-          interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+          if (interrupt.playerInput !== undefined) {
+            interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+              this.resolveTurmoilInterrupts();
+            });
+          } else {
             this.resolveTurmoilInterrupts();
-          });
+          }
           return;
         }
       }
@@ -1052,14 +957,18 @@ export class Game implements ILoadable<SerializedGame, Game> {
         } else {
         // Resolve research interrupt (Helion player)
           const interrupt = this.interrupts.shift();
-          if (interrupt !== undefined && interrupt.playerInput !== undefined) {
-            if (interrupt.beforeAction !== undefined) {
-              interrupt.beforeAction();
+          if (interrupt) {
+            if (interrupt.generatePlayerInput !== undefined) {
+              interrupt.generatePlayerInput();
             }
-            interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+            if (interrupt.playerInput !== undefined) {
+              interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+                this.playerIsFinishedWithResearchPhase(player);
+              });
+            } else {
               this.playerIsFinishedWithResearchPhase(player);
-              return;
-            });
+            }
+            return;
           }
         }
       }
@@ -1200,13 +1109,17 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Interrupt hook
       if (this.interrupts.length > 0) {
         const interrupt = this.interrupts.shift();
-        if (interrupt !== undefined && interrupt.playerInput !== undefined) {
-          if (interrupt.beforeAction !== undefined) {
-            interrupt.beforeAction();
+        if (interrupt) {
+          if (interrupt.generatePlayerInput !== undefined) {
+            interrupt.generatePlayerInput();
           }
-          interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+          if (interrupt.playerInput !== undefined) {
+            interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+              this.playerIsFinishedTakingActions();
+            });
+          } else {
             this.playerIsFinishedTakingActions();
-          });
+          }
           return;
         }
       }

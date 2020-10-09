@@ -1773,12 +1773,16 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       if (game.interrupts.length > 0) {
         const interrupt = game.interrupts.shift();
         if (interrupt) {
-          if (interrupt.beforeAction !== undefined) {
-            interrupt.beforeAction();
+          if (interrupt.generatePlayerInput !== undefined) {
+            interrupt.generatePlayerInput();
           }
-          interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+          if (interrupt.playerInput !== undefined) {
+            interrupt.player.setWaitingFor(interrupt.playerInput, () => {
+              this.resolveFinalGreeneryInterrupts(game);
+            });
+          } else {
             this.resolveFinalGreeneryInterrupts(game);
-          });
+          }
           return;
         }
       }
@@ -1959,12 +1963,21 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       const interruptIndex: number = game.interrupts.findIndex(interrupt => interrupt.player === this);
       if (interruptIndex !== -1) {
         const interrupt = game.interrupts[interruptIndex];
-        if (interrupt !== undefined && interrupt.beforeAction !== undefined) {
-          interrupt.beforeAction();
-        }
-        this.setWaitingFor(game.interrupts.splice(interruptIndex, 1)[0].playerInput, () => {
+        if (interrupt) {
+          if (interrupt.generatePlayerInput !== undefined) {
+            interrupt.generatePlayerInput();
+          }
+          const nextInterrupt = game.interrupts.splice(interruptIndex, 1)[0];
+          if (nextInterrupt.playerInput !== undefined) {
+            this.setWaitingFor(nextInterrupt.playerInput, () => {
+              cb();
+            });
+          } else {
+            cb();
+          }
+        } else {
           cb();
-        });
+        }
       } else {
         cb();
       }
@@ -2118,15 +2131,21 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       // If you can pay to send some in the Ara
       if (game.gameOptions.turmoilExtension) {
+        let selectParty;
         if (game.turmoil?.lobby.has(this.id)) {
-          const selectParty = new SelectParty(this, game, "Send a delegate in an area (from lobby)");
-          action.options.push(selectParty.playerInput);
+          selectParty = new SelectParty(this, game, "Send a delegate in an area (from lobby)");
         } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && game.turmoil!.getDelegates(this.id) > 0) {
-          const selectParty = new SelectParty(this, game, "Send a delegate in an area (3 MC)", 1, undefined, 3, false);
-          action.options.push(selectParty.playerInput);
+          selectParty = new SelectParty(this, game, "Send a delegate in an area (3 MC)", 1, undefined, 3, false);
         } else if (this.canAfford(5) && game.turmoil!.getDelegates(this.id) > 0){
-          const selectParty = new SelectParty(this, game, "Send a delegate in an area (5 MC)", 1, undefined, 5, false);
-          action.options.push(selectParty.playerInput);
+          selectParty = new SelectParty(this, game, "Send a delegate in an area (5 MC)", 1, undefined, 5, false);
+        }
+        if (selectParty) {
+          if (selectParty.generatePlayerInput !== undefined) {
+            selectParty.generatePlayerInput();
+          }
+          if (selectParty.playerInput !== undefined) {
+            action.options.push(selectParty.playerInput);
+          }
         }
       }
 

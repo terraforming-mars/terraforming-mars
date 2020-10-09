@@ -2,11 +2,11 @@
 import * as http from "http";
 import * as querystring from "querystring";
 
-import { GameReloader } from "../database/GameReloader";
+import { GameLoader } from "../database/GameLoader";
 import { Route } from "./Route";
 
 export class GameLogs extends Route {
-    constructor(private gameReloader: GameReloader) {
+    constructor(private gameLoader: GameLoader) {
         super();
     }
     public canHandle(url: string): boolean {
@@ -30,7 +30,7 @@ export class GameLogs extends Route {
             return;
         }
 
-        this.gameReloader.getByPlayerId(id, (game) => {
+        this.gameLoader.getGameByPlayerId(id, (game) => {
             if (game === undefined) {
                 console.warn("game not found");
                 this.notFound(req, res);

@@ -12,8 +12,8 @@ import { CardModel } from "./src/models/CardModel";
 import { ColonyModel } from "./src/models/ColonyModel";
 import { Color } from "./src/Color";
 import { Game, GameOptions } from "./src/Game";
+import { GameLoader } from "./src/database/GameLoader";
 import { GameLogs } from "./src/routes/GameLogs";
-import { GameReloader } from "./src/database/GameReloader";
 import { Route } from "./src/routes/Route";
 import { ICard } from "./src/cards/ICard";
 import { IProjectCard } from "./src/cards/IProjectCard";
@@ -52,9 +52,9 @@ import { SelectColony } from "./src/inputs/SelectColony";
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync("styles.css");
 const appVersion = generateAppVersion();
-const gameReloader = new GameReloader();
+const gameLoader = new GameLoader();
 const route = new Route();
-const gameLogs = new GameLogs(gameReloader);
+const gameLogs = new GameLogs(gameLoader);
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
     if (req.url !== undefined) {
@@ -118,7 +118,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
             const playerId: string = req.url.substring(
                 "/player/input?id=".length
             );
-            gameReloader.getByPlayerId(playerId, (game) => {
+            gameLoader.getGameByPlayerId(playerId, (game) => {
                 if (game === undefined) {
                     route.notFound(req, res);
                     return;
@@ -253,7 +253,7 @@ function apiGetGames(
         return;
     }
     res.setHeader("Content-Type", "application/json");
-    res.write(JSON.stringify(gameReloader.getGameIds()));
+    res.write(JSON.stringify(gameLoader.getLoadedGameIds()));
     res.end();
 }
 
@@ -278,7 +278,7 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                     if (err) {
                         return;
                     }
-                    gameReloader.addGame(gameToRebuild);
+                    gameLoader.addGame(gameToRebuild);
                 }
             );
             res.setHeader("Content-Type", "application/json");
@@ -315,7 +315,7 @@ function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
     const gameId: string = matches[1];
 
-    gameReloader.getByGameId(gameId, (game: Game | undefined) => {
+    gameLoader.getGameByGameId(gameId, (game: Game | undefined) => {
 
         if (game === undefined) {
             console.warn("game is undefined");
@@ -337,7 +337,7 @@ function apiGetWaitingFor(
     let queryParams = querystring.parse(qs);
     const playerId = (queryParams as any)["id"];
     const prevGameAge = parseInt((queryParams as any)["prev-game-age"]);
-    gameReloader.getByPlayerId(playerId, (game) => {
+    gameLoader.getGameByPlayerId(playerId, (game) => {
         if (game === undefined) {
             route.notFound(req, res);
             return;
@@ -381,7 +381,7 @@ function apiGetPlayer(
     if (playerId === undefined) {
         playerId = "";
     }
-    gameReloader.getByPlayerId(playerId as string, (game) => {
+    gameLoader.getGameByPlayerId(playerId as string, (game) => {
         if (game === undefined) {
             route.notFound(req, res);
             return;
@@ -456,7 +456,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
             } as GameOptions;
 
             const game = new Game(gameId, players, firstPlayer, gameOptions);
-            gameReloader.addGame(game);
+            gameLoader.addGame(game);
             res.setHeader("Content-Type", "application/json");
             res.write(getGame(game));
             res.end();
@@ -1045,7 +1045,7 @@ function serveResource(res: http.ServerResponse, s: Buffer): void {
     res.end();
 }
 
-gameReloader.start();
+gameLoader.start();
 
 console.log("Starting server on port " + (process.env.PORT || 8080));
 console.log("version 0.X");

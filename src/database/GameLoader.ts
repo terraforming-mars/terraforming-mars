@@ -4,17 +4,18 @@ import { Database } from "./Database";
 import { Game } from "../Game";
 import { Player } from "../Player";
 
-export class GameReloader {
+export class GameLoader {
     private loadedGames = false;
     private loadingGames = false;
     private readonly games = new Map<string, Game>();
     private readonly pendingGame = new Map<string, Array<(game: Game | undefined) => void>>();
     private readonly pendingPlayer = new Map<string, Array<(game: Game | undefined) => void>>();
-    private readonly playersToGame = new Map<string, Game>();
+    private readonly playerToGame = new Map<string, Game>();
 
     public start(): void {
         if (this.loadedGames === true) {
             console.warn("already loaded, ignoring");
+            return;
         } else if (this.loadingGames === true) {
             console.warn("already loading, ignoring");
             return;
@@ -26,16 +27,16 @@ export class GameReloader {
     public addGame(game: Game): void {
         this.games.set(game.id, game);
         for (const player of game.getPlayers()) {
-            this.playersToGame.set(player.id, game);
+            this.playerToGame.set(player.id, game);
         }
     }
 
-    public getGameIds(): Array<string> {
+    public getLoadedGameIds(): Array<string> {
         return Array.from(this.games.keys());
     }
 
-    public getByGameId(gameId: string, cb: (game: Game | undefined) => void): void {
-        if (this.loadedGames === true) {
+    public getGameByGameId(gameId: string, cb: (game: Game | undefined) => void): void {
+        if (this.loadedGames === true || this.games.has(gameId)) {
             cb(this.games.get(gameId));
             return;
         }
@@ -47,9 +48,9 @@ export class GameReloader {
         }
     }
 
-    public getByPlayerId(playerId: string, cb: (game: Game | undefined) => void): void {
-        if (this.loadedGames === true) {
-            cb(this.playersToGame.get(playerId));
+    public getGameByPlayerId(playerId: string, cb: (game: Game | undefined) => void): void {
+        if (this.loadedGames === true || this.playerToGame.has(playerId)) {
+            cb(this.playerToGame.get(playerId));
             return;
         }
         const pendingPlayer = this.pendingPlayer.get(playerId);
@@ -71,7 +72,7 @@ export class GameReloader {
         const pendingPlayers = this.pendingPlayer.get(playerId);
         if (pendingPlayers !== undefined) {
             for (const pendingPlayer of pendingPlayers) {
-                pendingPlayer(this.playersToGame.get(playerId));
+                pendingPlayer(this.playerToGame.get(playerId));
             }
             this.pendingPlayer.delete(playerId);
         }
@@ -117,13 +118,13 @@ export class GameReloader {
                         loaded++;
                         if (err) {
                             console.error(`unable to load game ${game_id}`, err);
-                            return;
-                        }
-                        console.log(`load game ${game_id}`);
-                        this.games.set(gameToRebuild.id, gameToRebuild);
-                        for (const player of gameToRebuild.getPlayers()) {
-                            this.playersToGame.set(player.id, gameToRebuild);
-                            this.onGameLoaded(gameToRebuild.id, player.id);
+                        } else {
+                            console.log(`load game ${game_id}`);
+                            this.games.set(gameToRebuild.id, gameToRebuild);
+                            for (const player of gameToRebuild.getPlayers()) {
+                                this.playerToGame.set(player.id, gameToRebuild);
+                                this.onGameLoaded(gameToRebuild.id, player.id);
+                            }
                         }
                         if (loaded === allGames.length) {
                             this.onAllGamesLoaded();

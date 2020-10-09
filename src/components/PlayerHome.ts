@@ -1,7 +1,7 @@
 import Vue from "vue";
 
 import { Board } from "./Board";
-import { Card } from "./Card";
+import { Card } from "./card/Card";
 import { Milestone } from "./Milestone";
 import { Award } from "./Award";
 import { PlayersOverview } from "./overview/PlayersOverview";
@@ -23,7 +23,7 @@ export const PlayerHome = Vue.component("player-home", {
     components: {
         "board": Board,
         "dynamic-title": DynamicTitle,
-        "Card": Card,
+        Card,
         "players-overview": PlayersOverview,
         "waiting-for": WaitingFor,
         "milestone": Milestone,

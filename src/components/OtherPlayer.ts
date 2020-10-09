@@ -3,7 +3,7 @@ import Vue from "vue";
 import { StackedCards } from "./StackedCards";
 import { PlayerMixin } from "./PlayerMixin";
 import { hidePlayerData } from "./overview/PlayerStatus";
-import { Card } from "./Card";
+import { Card } from "./card/Card";
 
 export const OtherPlayer = Vue.component("other-player", {
     props: ["player", "playerIndex"],

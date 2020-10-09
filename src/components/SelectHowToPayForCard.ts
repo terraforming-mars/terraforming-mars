@@ -14,7 +14,7 @@ interface SelectHowToPayForCardModel {
 }
 
 import { HowToPay } from "../inputs/HowToPay";
-import { getProjectCardByName, Card } from "./Card";
+import { getProjectCardByName, Card } from "./card/Card";
 import { Tags } from "../cards/Tags";
 import { PaymentWidgetMixin } from "./PaymentWidgetMixin";
 import { PreferencesManager } from "./PreferencesManager";

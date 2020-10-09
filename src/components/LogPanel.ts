@@ -5,7 +5,7 @@ import { LogMessage } from "../LogMessage";
 import { LogMessageType } from "../LogMessageType";
 import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
-import { Card } from "./Card";
+import { Card } from "./card/Card";
 import { $t } from "../directives/i18n";
 import { getProjectCardByName } from "./../Dealer";
 

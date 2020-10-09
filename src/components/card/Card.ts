@@ -1,8 +1,8 @@
 import Vue from "vue";
 
-import { IProjectCard } from "../cards/IProjectCard";
-import { ICard } from "../cards/ICard";
-import { BeginnerCorporation } from "../cards/corporation/BeginnerCorporation";
+import { IProjectCard } from "../../cards/IProjectCard";
+import { ICard } from "../../cards/ICard";
+import { BeginnerCorporation } from "../../cards/corporation/BeginnerCorporation";
 import {
     ALL_PRELUDE_CORPORATIONS,
     ALL_CORPORATION_CARDS,
@@ -20,17 +20,17 @@ import {
     ALL_PROMO_CORPORATIONS,
     ALL_PROMO_PROJECTS_CARDS,
     ALL_COMMUNITY_CORPORATIONS,
-} from "../Dealer";
-import { HTML_DATA } from "../HTML_data";
-import { CardModel } from "../models/CardModel";
-import { CardTitle } from "./card/CardTitle";
-import { CardResourceCounter } from "./card/CardResourceCounter";
-import { CorporationGroup } from "../CorporationName";
-import { CardCost } from "./card/CardCost";
-import { CardExtraContent } from "./card/CardExtraContent";
-import { CardExpansion } from "./card/CardExpansion";
-import { CardTags } from "./card/CardTags";
-import { CardType } from "../cards/CardType";
+} from "../../Dealer";
+import { HTML_DATA } from "../../HTML_data";
+import { CardModel } from "../../models/CardModel";
+import { CardTitle } from "./CardTitle";
+import { CardResourceCounter } from "./CardResourceCounter";
+import { CorporationGroup } from "../../CorporationName";
+import { CardCost } from "./CardCost";
+import { CardExtraContent } from "./CardExtraContent";
+import { CardExpansion } from "./CardExpansion";
+import { CardTags } from "./CardTags";
+import { CardType } from "../../cards/CardType";
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
     if (cardName === new BeginnerCorporation().name) {

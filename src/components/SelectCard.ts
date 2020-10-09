@@ -6,7 +6,7 @@ interface SelectCardModel {
     cards: Array<CardModel>;
 }
 
-import { Card } from "./Card";
+import { Card } from "./card/Card";
 import { CardModel } from "../models/CardModel";
 
 export const SelectCard = Vue.component("select-card", { 

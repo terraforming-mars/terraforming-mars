@@ -44,7 +44,6 @@
 
 .create-game-form {
     margin: 0 25px 25px 0;
-    max-width: 1002px;
     padding-top: 5px;
 }
 
@@ -94,7 +93,7 @@
 .create-game-divider {
     background:rgb(148, 148, 148);
     height: 3px;
-    width: 80%;	
+    width: 100%;	
     margin-top: 16px;
     margin-bottom: 8px;	
 }
@@ -105,19 +104,13 @@
     padding-bottom: 10px;
 }
 
-/********************************************
-    Style for turning game creation to flex
-********************************************/
-
 .create-game-page-container {
-  margin: 10px;
   display: flex;
   flex-flow: row wrap;
   background-color: black;
 }
 
 .create-game-page-column {
-  margin: 10px;
   display: flex;
   flex-flow: column wrap;
   padding: 20px 10px;
@@ -135,9 +128,9 @@
 }
 
 .create-game-page-column label {
-  color: white;
+  color: #ccc;
   display: inline-block;
-  background-color: #444;
+  background-color: #303030;
   padding: 10px 20px 10px 20px;
   font-family: sans-serif, Arial;
   font-size: 16px;
@@ -149,7 +142,6 @@
 
 .create-game-page-column .expansion-button {
     text-align: left;
-    padding-left: 10px;
   }
 
 .create-game-page-column label:hover {
@@ -157,74 +149,44 @@
   cursor: pointer;
 }
 
-/*
-.create-game-page-column input[type="radio"]:focus + label {
-  border: 2px dashed rgb(177, 177, 177);
-}
-*/
-
 .create-game-page-column input[type="radio"]:checked + label {
   background-color: rgb(199, 199, 199);
   color: black;
 }
-
-/*
-.create-game-page-column input[type="checkbox"]:focus + label {
-  border: 2px dashed rgb(177, 177, 177);
-}
-*/
 
 .create-game-page-column input[type="checkbox"]:checked + label {
   background-color: rgb(199, 199, 199);
   color: black;
 }
 
-// Just for game baord
-
-.create-game-page-board-column {
-    margin: 10px;
-    display: flex;
-    flex-flow: column wrap;
-    padding: 20px 10px;
+.create-game-page-column .create-game-tharsis {
+    color: @board-tharsis;
+    margin-right: 10px;
+    vertical-align: text-bottom;
+}
+.create-game-page-column .create-game-hellas {
+    color: @board-hellas;
+    margin-right: 10px;
+    vertical-align: text-bottom;
+}
+.create-game-page-column .create-game-elysium {
+    color: @board-elysium;
+    margin-right: 10px;
+    vertical-align: text-bottom;
+}
+.create-game-page-column .create-game-random {
+    color: rgb(106,106,106);
+    margin-right: 10px;
+    vertical-align: text-bottom;
 }
 
-  .create-game-page-board-column input[type="radio"] {
-    opacity: 0;
-    position: fixed;
-    width: 0;
-}
-
-.create-game-page-board-column label {
-    color: white;
+.create-game-expansion-icon {
     display: inline-block;
-    padding: 10px 20px 10px 20px;
-    font-family: sans-serif, Arial;
-    font-size: 16px;
-    border-radius: 8px;
-    text-align: center;
-    margin: 4px;
-    min-width: 125px;
-    border: 3px solid black;
-}
-
-.create-game-page-board-column label:hover {
-    border: 3px dashed gray;
-    cursor:pointer;
-}
-
-.create-game-page-board-column .create-game-tharsis {
-    background-color: rgba(238, 121, 43, 0.5);
-}
-.create-game-page-board-column .create-game-hellas {
-    background-color: rgba(59, 154, 227, 0.5);
-}
-.create-game-page-board-column .create-game-elysium {
-    background-color: rgba(9, 170, 9, 0.5);
-}
-.create-game-page-board-column .create-game-random {
-    background-color: rgba(145, 145, 145, 0.5);
-}
-
-.create-game-page-board-column input[type="radio"]:checked + label {
-    border: 3px solid white;
+    width: 20px;
+    height: 20px;
+    background-size: 20px 20px;
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    margin: 0px 10px;
   }

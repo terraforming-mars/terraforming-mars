@@ -486,7 +486,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <input type="checkbox" v-model="removeNegativeGlobalEventsOption">
                                 <span v-i18n>Remove negative Global Events</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#remove-negative-global-events" class="tooltip" target="_blank">&#9432;</a>
                             </label>
-
+                            </template>
 
                             <input type="checkbox" v-model="seededGame" id="seeded-checkbox">
                             <label for="seeded-checkbox">

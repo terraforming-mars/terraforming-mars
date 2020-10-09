@@ -1143,7 +1143,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       );
     }
 
-    private playProjectCard(game: Game): PlayerInput {
+    public playProjectCard(game: Game): PlayerInput {
       const cb = (selectedCard: IProjectCard, howToPay: HowToPay) => {
         const cardCost: number = this.getCardCost(game, selectedCard);
         let totalToPay: number = 0;
@@ -1297,16 +1297,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             }
         }
 
-        if (selectedCard.name === CardName.ECOLOGY_EXPERTS || selectedCard.name === CardName.ECCENTRIC_SPONSOR) {
-            if (this.getPlayableCards(game).length > 0) {
-                game.interrupts.push({
-                    player: this,
-                    playerInput: this.playProjectCard(game)
-                });
-            }
-        }
+        const preludesWithPlayCardEffects = [CardName.ECOLOGY_EXPERTS, CardName.ECCENTRIC_SPONSOR, CardName.VALUABLE_GASES];
 
-        if (selectedCard.name === CardName.VALUABLE_GASES) {
+        if (preludesWithPlayCardEffects.includes(selectedCard.name)) {
             selectedCard.addPlayCardInterrupt!(this, game);
         }
 
@@ -1792,7 +1785,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       this.takeActionForFinalGreenery(game);
     }
 
-    private getPlayableCards(game: Game): Array<IProjectCard> {
+    public getPlayableCards(game: Game): Array<IProjectCard> {
       const candidateCards: Array<IProjectCard> = [...this.cardsInHand];
       // Self Replicating robots check
       const card = this.playedCards.find(card => card.name === CardName.SELF_REPLICATING_ROBOTS);

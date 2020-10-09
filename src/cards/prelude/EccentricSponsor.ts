@@ -19,5 +19,14 @@ export class EccentricSponsor extends PreludeCard implements IProjectCard {
     public play() {
         return undefined;
     }
+
+    public addPlayCardInterrupt(player: Player, game: Game) {
+        if (player.getPlayableCards(game).length > 0) {
+            game.interrupts.push({
+                player: player,
+                playerInput: player.playProjectCard(game)
+            });
+        }
+    }
 }
 

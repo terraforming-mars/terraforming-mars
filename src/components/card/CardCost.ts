@@ -10,7 +10,7 @@ export const CardCost = Vue.component("CardCost", {
     methods: {
         getClasses: function (): string {
             const classes = ["card-cost"];
-            if (this.amount === null || this.amount === undefined) {
+            if (this.amount === undefined) {
                 classes.push("visibility-hidden");
             }
             return classes.join(" ");

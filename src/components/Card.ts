@@ -217,11 +217,11 @@ export const Card = Vue.component("card", {
         getTags: function (): Array<String> | undefined {
             return this.getCard()?.tags;
         },
-        getCost: function (): number | null {
+        getCost: function (): number | undefined {
             const cost = this.getCard()?.cost;
             const type = this.getCardType();
             return cost === undefined || type === CardType.PRELUDE
-                ? null
+                ? undefined
                 : cost;
         },
         getCardType: function (): CardType | undefined {

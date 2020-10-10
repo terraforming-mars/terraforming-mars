@@ -17,7 +17,7 @@ import { ISpace } from "../src/ISpace";
 import { ResearchNetwork } from "../src/cards/prelude/ResearchNetwork";
 import { ArcticAlgae } from "../src/cards/ArcticAlgae";
 import { Ecologist } from "../src/milestones/Ecologist";
-import { Dealer } from "../src/Dealer";
+import { ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS, Dealer, getProjectCardByName } from "../src/Dealer";
 import { OrOptions } from "../src/inputs/OrOptions";
 import { BoardName } from "../src/BoardName";
 import { SpaceType } from "../src/SpaceType";
@@ -40,6 +40,17 @@ describe("Game", function () {
         // exclude corporate era
         const dealer2 = new Dealer(false, false, false, false, false, false);
         expect(dealer2.getDeckSize()).to.eq(137);
+    });
+
+    it("excludes expansion-specific preludes if those expansions are not selected ", function() {
+        const dealer = new Dealer(true, false, false, false, false, false, true);
+        const preludeDeck = dealer.preludeDeck;
+
+        const turmoilPreludes = ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS.map((c) => c.cardName);
+        turmoilPreludes.forEach((preludeName) => {
+            const preludeCard = getProjectCardByName(preludeName)!;
+            expect(preludeDeck.includes(preludeCard)).to.eq(false)
+        });
     });
 
     it("sets starting production if corporate era not selected", function() {

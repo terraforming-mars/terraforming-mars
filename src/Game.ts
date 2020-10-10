@@ -577,9 +577,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (interrupt === undefined) {
         return false;
       }
-      if (interrupt.generatePlayerInput !== undefined) {
-        interrupt.generatePlayerInput();
-      }
+      interrupt.generatePlayerInput?.();
       if (interrupt.playerInput) {
         interrupt.player.setWaitingFor(interrupt.playerInput, () => {
           cb();

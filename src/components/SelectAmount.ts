@@ -1,6 +1,10 @@
 import Vue from "vue";
+import { Button } from "../components/common/Button";
 
 export const SelectAmount = Vue.component("select-amount", {
+    components: {
+        "Button": Button
+    },
     props: ["playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
@@ -15,10 +19,13 @@ export const SelectAmount = Vue.component("select-amount", {
             this.$data.amount = this.playerinput.max;
         },
     },
-    template: `<div>
-  <div v-if="showtitle === true">{{playerinput.title}}</div>
-  <input type="number" class="nes-input" value="0" min="0" :max="playerinput.max" v-model="amount" />
-  <button class="btn btn-lg btn-primary btn-max" v-on:click="setMaxValue">MAX</button>
-  <button v-if="showsave === true" class="btn btn-lg btn-primary" v-on:click="saveData">{{playerinput.buttonLabel}}</button> 
-</div>`,
+    template: `
+    <div>
+        <div v-if="showtitle === true">{{playerinput.title}}</div>
+        <div class="flex">
+            <input type="number" class="nes-input" value="0" min="0" :max="playerinput.max" v-model="amount" />
+            <Button size="big" type="max" :onClick="setMaxValue" title="MAX" />
+            <Button v-if="showsave === true" size="big" :onClick="saveData" :title="playerinput.buttonLabel" />
+        </div>
+    </div>`,
 });

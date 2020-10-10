@@ -15,7 +15,7 @@ export function translateText(englishText: string): string {
     if (TM_translations[lang][englishText]) {
         translatedText = TM_translations[lang][englishText]
     } else {
-        let stripedText = englishText.replace(/^\(|\)$/gm, "");
+        let stripedText = englishText.replace(/^\((.*)\)$/gm, "$1");
         if (stripedText && stripedText !== englishText) {
             stripedText = translateText(stripedText);
             if (stripedText !== englishText) {

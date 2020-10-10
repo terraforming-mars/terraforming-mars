@@ -447,6 +447,17 @@ export enum CardName {
     PROJECT_WORKSHOP = "Project Workshop",
     INCITE = "Incite",
     PLAYWRIGHTS = "Playwrights",
+    MIDAS = "Midas",
+
+    
+    // Community preludes
+    VALUABLE_GASES = "Valuable Gases",
+    VENUS_FIRST = "Venus First",
+    RESEARCH_GRANT = "Research Grant",
+    AEROSPACE_MISSION = "Aerospace Mission",
+    TRADE_ADVANCE = "Trade Advance",
+    POLITICAL_UPRISING = "Political Uprising",
+    BY_ELECTION = "By-Election",
 
     // Ares expansion.
     BIOENGINEERING_ENCLOSURE = "Bioengineering Enclosure",

@@ -47,7 +47,7 @@ export class LocalShading implements IActionCard,IProjectCard,IResourceCard {
 
     private spendResource(player: Player) {
         player.removeResourceFrom(this);
-        player.setProduction(Resources.MEGACREDITS);
+        player.addProduction(Resources.MEGACREDITS);
         return undefined;
     }
 }

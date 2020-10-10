@@ -25,7 +25,7 @@ describe("AICentral", function () {
 
     it("Should play", function () {
         player.playedCards.push(card, card, card);
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
 
         card.play(player);
         expect(player.getProduction(Resources.ENERGY)).to.eq(0);

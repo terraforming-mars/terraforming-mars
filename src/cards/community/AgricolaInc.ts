@@ -12,8 +12,8 @@ export class AgricolaInc implements CorporationCard {
     public startingMegaCredits: number = 40;
 
     public play(player: Player) {
-        player.setProduction(Resources.MEGACREDITS, 1);
-        player.setProduction(Resources.PLANTS, 1);
+        player.addProduction(Resources.MEGACREDITS, 1);
+        player.addProduction(Resources.PLANTS, 1);
 
         return undefined;
     }

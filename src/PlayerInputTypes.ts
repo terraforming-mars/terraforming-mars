@@ -14,5 +14,4 @@ export enum PlayerInputTypes {
     SELECT_COLONY,
     SELECT_PRODUCTION_TO_LOSE,
     SHIFT_ARES_GLOBAL_PARAMETERS,
-
 }

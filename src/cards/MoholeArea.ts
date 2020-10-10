@@ -23,7 +23,7 @@ export class MoholeArea implements IProjectCard {
         return new SelectSpace("Select an ocean space for special tile", game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
             game.addTile(player, SpaceType.OCEAN, space, { tileType: TileType.MOHOLE_AREA });
             space.adjacency = this.adjacencyBonus;
-            player.setProduction(Resources.HEAT,4);
+            player.addProduction(Resources.HEAT,4);
             return undefined;
         });
     }

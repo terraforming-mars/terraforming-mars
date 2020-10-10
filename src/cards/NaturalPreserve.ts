@@ -29,7 +29,7 @@ export class NaturalPreserve implements IProjectCard {
         return new SelectSpace("Select space for special tile next to no other tile", this.getAvailableSpaces(player, game), (foundSpace: ISpace) => {
             game.addTile(player, foundSpace.spaceType, foundSpace, { tileType: TileType.NATURAL_PRESERVE });
             foundSpace.adjacency = this.adjacencyBonus;
-            player.setProduction(Resources.MEGACREDITS);
+            player.addProduction(Resources.MEGACREDITS);
             return undefined;
         });
     }

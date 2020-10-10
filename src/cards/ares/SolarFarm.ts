@@ -23,7 +23,7 @@ export class SolarFarm implements IProjectCard {
         game.board.getAvailableSpacesOnLand(player),
         (space: ISpace) => {
             const plantsOnSpace = space.bonus.filter((b) => b === SpaceBonus.PLANT).length;
-            player.setProduction(Resources.ENERGY, plantsOnSpace, game);
+            player.addProduction(Resources.ENERGY, plantsOnSpace, game);
 
             game.addTile(player, SpaceType.LAND, space, {
               tileType: TileType.SOLAR_FARM,

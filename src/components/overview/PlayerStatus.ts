@@ -1,6 +1,8 @@
 import Vue from "vue";
 import { ActionLabel } from "./ActionLabel";
-import { range } from "../../utils/utils";
+import { range } from "../../utils/utils"; 
+import { Button } from "../common/Button";
+
 
 const isPinned = (root: any, playerIndex: string): boolean => {
     return (root as any).getVisibilityState("pinned_player_" + playerIndex);
@@ -20,6 +22,9 @@ export const PlayerStatus = Vue.component("player-status", {
         "actionLabel",
         "playerIndex",
     ],
+    components: {
+        "Button": Button
+    },
     methods: {
         togglePlayerDetails: function () {
             // for active player => scroll to cards UI
@@ -100,8 +105,8 @@ export const PlayerStatus = Vue.component("player-status", {
                         <div class="played-cards-icon" />
                     </div>
                     <div class="played-cards-count">{{ getNrPlayedCards() }}</div>
-                </div>
-                <button class="played-cards-show btn" v-on:click.prevent="togglePlayerDetails()">{{ buttonLabel()}}</button>
+                </div> 
+                <Button size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
             </div>
         </div>
     `,

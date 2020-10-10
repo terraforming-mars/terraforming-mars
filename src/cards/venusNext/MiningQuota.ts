@@ -16,7 +16,7 @@ export class MiningQuota implements IProjectCard {
     }
     
     public play(player: Player) {
-      player.setProduction(Resources.STEEL, 2);
+      player.addProduction(Resources.STEEL, 2);
       return undefined;
     }
 }

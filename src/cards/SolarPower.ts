@@ -13,7 +13,7 @@ export class SolarPower implements IProjectCard {
     public name: CardName = CardName.SOLAR_POWER;
 
     public play(player: Player) {
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         return undefined;
     }
     public getVictoryPoints() {

@@ -19,7 +19,7 @@ describe("MagneticFieldGenerators", function () {
     });
 
     it("Should play", function () {
-        player.setProduction(Resources.ENERGY, 4);
+        player.addProduction(Resources.ENERGY, 4);
         expect(card.canPlay(player, game)).to.eq(true);
 
         card.play(player, game);

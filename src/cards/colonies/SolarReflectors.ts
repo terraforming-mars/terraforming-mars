@@ -12,7 +12,7 @@ export class SolarReflectors implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {
-      player.setProduction(Resources.HEAT, 5);  
+      player.addProduction(Resources.HEAT, 5);  
       return undefined;
     }
 }

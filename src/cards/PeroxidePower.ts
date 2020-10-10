@@ -16,8 +16,8 @@ export class PeroxidePower implements IProjectCard {
         return player.getProduction(Resources.MEGACREDITS) >= -4;
     }
     public play(player: Player) {
-        player.setProduction(Resources.MEGACREDITS,-1);
-        player.setProduction(Resources.ENERGY,2);
+        player.addProduction(Resources.MEGACREDITS,-1);
+        player.addProduction(Resources.ENERGY,2);
         return undefined;
     }
 }

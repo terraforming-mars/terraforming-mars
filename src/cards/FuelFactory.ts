@@ -16,9 +16,9 @@ export class FuelFactory implements IProjectCard {
     return player.getProduction(Resources.ENERGY) >= 1;
   }
   public play(player: Player) {
-    player.setProduction(Resources.ENERGY,-1);
-    player.setProduction(Resources.TITANIUM);
-    player.setProduction(Resources.MEGACREDITS);
+    player.addProduction(Resources.ENERGY,-1);
+    player.addProduction(Resources.TITANIUM);
+    player.addProduction(Resources.MEGACREDITS);
     return undefined;
   }
 }

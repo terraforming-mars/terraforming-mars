@@ -16,7 +16,7 @@ export class Trees implements IProjectCard {
         return game.getTemperature() >= -4 - (2 * player.getRequirementsBonus(game));
     }
     public play(player: Player) {
-        player.setProduction(Resources.PLANTS,3);
+        player.addProduction(Resources.PLANTS,3);
         player.plants++;
         return undefined;
     }

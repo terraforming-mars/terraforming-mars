@@ -487,7 +487,7 @@ input[type=radio]:checked + .filterDiv::after {
   box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
   background-image: url(./assets/requisites/min_big.png);
   background-size: 180px 38px;
-  background-position: -15px -4px;
+  background-position: -15px -6px;
   font-family: Ubuntu;
   font-weight: bold;
 }
@@ -676,6 +676,12 @@ input[type=radio]:checked + .filterDiv::after {
   background-image: url(./assets/tiles/empty.png);
 }
 
+.global-param-same-size{
+  width: 50px;
+  height: 50px;
+  align-self: center;
+}
+
 .temperature-tile {
   background-image: url(./assets/global-parameters/temperature.png);
   width: 14px;
@@ -687,6 +693,10 @@ input[type=radio]:checked + .filterDiv::after {
   background-image: url(./assets/tiles/greenery.png);
   background-size: 50px 46px;
   width: 50px;
+}
+
+.greenery-no-O2-tile {
+  background-image: url(./assets/tiles/greenery_no_O2.png);
 }
 
 .ocean-tile {
@@ -748,13 +758,13 @@ input[type=radio]:checked + .filterDiv::after {
 
 .rating {
   background-image: url(./assets/resources/tr.png);
-  width: 50px;
+  width: 55px;
   height: 40px;
-  background-size: 50px 40px;
+  background-size: 55px 40px;
 }
 
 .globals-box {
-  width: 100px;
+  width: 130px;
   text-shadow: none;
   font-size: 12px;
   font-weight: bold;
@@ -764,10 +774,10 @@ input[type=radio]:checked + .filterDiv::after {
   padding-top: 5px;
   margin-right: 5px;
   border-radius: 5px;
-  height: 40px;
+  height: 20px;
   background-image: url(./assets/requisites/min_big.png);
-  background-size: 114px 60px;
-  background-position: -9px -9px;
+  background-size: 180px 60px;
+  background-position: -16px -9px;
   filter: drop-shadow(0px 0px 1px black);
 }
 
@@ -882,6 +892,9 @@ input[type=radio]:checked + .filterDiv::after {
 .fighter {
   background-image: url(./assets/resources/fighter.png);
 }
+.camp {
+  background-image: url(./assets/resources/camp.png);
+}
 .asteroid {
   color: #0000 !important;
   background-image: url(./assets/resources/asteroid.png);
@@ -908,7 +921,20 @@ input[type=radio]:checked + .filterDiv::after {
   height: 20px;
   line-height: 20px;
   border-radius: 10px;
-  background-size: 20px 20px;
+  background-size: 24px 24px;
+  background-position: center;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.6);
+}
+
+.card-icon-box {
+  position: absolute;
+  margin-left: 15px;
+  margin-top: -10px;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  background-size: 24px 24px;
+  background-position: center;
   box-shadow: 0 0 0 1px rgba(0,0,0,0.6);
 }
 
@@ -1436,7 +1462,7 @@ input[type=radio]:checked + .filterDiv::after {
 .card-agricola-inc {
   .corporationEffectBox {
     margin-top: 160px;
-    height: 124px;
+    height: 130px;
   }
 
   .pointsCorporation {
@@ -1495,12 +1521,20 @@ input[type=radio]:checked + .filterDiv::after {
   }
 
   .card-small {
-    margin: -12px -6px 2px;
+    margin: -2px -6px;
     transform:scale(0.7,0.7);
   }
 
   .card-medium {
     transform:scale(0.9,0.9);
+  }
+
+  .money.production {
+    vertical-align: middle;
+  }
+
+  .effect.description {
+    margin: 2px 0;
   }
 }
 
@@ -1523,21 +1557,20 @@ input[type=radio]:checked + .filterDiv::after {
   }
 
   .start-text {
-    margin-top: 10px;
+    margin-top: 0px;
   }
   
   .resource.money {
     margin-left: 42px;
-    margin-top: -10px;
 
-    &.effect-money { margin-left: 4px; margin-top: 10px; }
+    &.effect-money { margin-left: 4px; margin-top: 5px; }
   }
 
   .delegate.effect { transform:scale(0.8,0.8); }
 
   .corporationEffectBox {
-    height: 135px;
-    margin-top: 150px;
+    height: 150px;
+    margin-top: 140px;
   }
 }
 
@@ -1578,12 +1611,63 @@ input[type=radio]:checked + .filterDiv::after {
     margin-top: 150px;
   }
 
-  .production-box-size1a { margin-left: 5px; }
+  .production-box { margin-top: 8px; }
 
   .effect {
     margin-top:-1px;
     font-size: 10.5px;
   }
+}
+
+.midas {
+  color: goldenrod;
+  text-shadow: 0 2px 2px brown;
+  -webkit-text-stroke: 2px black;
+  text-transform: uppercase;
+  font-family: 'Lucida Sans', 'Lucida Sans Unicode', 'Lucida Grande', Arial;
+  font-weight: bold;
+  letter-spacing: 4px;
+  text-align: center;
+  margin: 0 0 40px -20px;
+  font-size: 50px;
+  position: relative;
+  top: 10px;
+}
+
+.card-midas {
+  .resource.money {
+    margin-left: 50px;
+    font-size: 16px;
+    transform: scale(1.5);
+  }
+
+  .start-tr-text {
+    color: black;
+    font-size: 20px;
+    font-family: Prototype;
+    margin-left: 10px;
+    margin-right: -5px;
+  }
+
+  .description { margin-top: 20px; text-align: center; }
+}
+
+.card-political-uprising {
+  .turmoil-icon {
+    position: absolute;
+    margin-left: 20px;
+    margin-top: -10px;
+  }
+
+  .delegate { margin: 10px 0; }
+  .description { margin-top: 10px; }
+
+  .resource.card { margin-top: 15px; }
+}
+
+.card-by-election {
+  .set-party-text { margin: 10px 0; }
+  .description{ margin-top: 15px; }
 }
 
 .card-technology-demonstration {
@@ -1790,17 +1874,6 @@ input[type=radio]:checked + .filterDiv::after {
   box-shadow: 0 0 0 1px rgba(0,0,0,0.2), 3px 3px 3px grey;
 }
 
-.pristar {
-  background: radial-gradient(orange, orangered);
-  font-weight: normal;
-  color: black;
-}
-
-.pristar:before {
-  content: "P";
-  font-size: 20px;
-}
-
 .poseidon {
   display:inline-block;
   font-family: "Times New Roman", Arial;
@@ -1834,6 +1907,34 @@ input[type=radio]:checked + .filterDiv::after {
   margin-top: 10px;
   margin-bottom: 10px;
 } 
+
+.helion {
+  font-size:34px;
+  width:140px;
+  text-align: center;
+  color: #020202;
+  margin-top:5px;
+  border:2px solid black;
+  margin-left:8px;
+  background: #e6e600;
+  box-shadow: 6px 6px 6px grey;
+  border-radius:2px;
+}
+.helion-effect{
+  text-align:center;
+  margin-top:0px;
+}
+.helion-production{
+  margin-left:20px;
+  margin-top:-10px;
+}
+.helion-mc{
+  margin-left:20px;
+  margin-top:-8px;
+}
+.helion-resource-description{
+  text-align:center;
+}
 
 .card-number {
     visibility: hidden;
@@ -2072,4 +2173,53 @@ input[type=radio]:checked + .filterDiv::after {
   .second-line {
     margin-top: -10px;
   }
+}
+
+/*********** Prelude Styles ************/
+
+.prelude-ecology-experts-requirement-box{
+  margin-left:31px; 
+  width:70%;
+}
+
+.prelude-ecology-experts-crossout{
+  color:red;
+  font-size:56px;
+  display:inline-block;
+}
+
+.prelude-ecology-experts-requirement-text{
+  margin-top:-42px;
+  font-size: 14px;
+}
+
+/*********** Expansion Styles ************/
+
+
+.expansion-icon {
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background-size: 25px 25px;
+  background-position: 0px 0px;
+  filter: drop-shadow(0px 0px 1px black);
+  background-repeat: no-repeat;
+  vertical-align: middle;
+  margin-bottom: 5px;
+}
+
+.expansion-icon-venus{
+  background-image: url(./assets/expansion_icons/expansion_icon_venus.png);
+}
+
+.expansion-icon-prelude{
+  background-image: url(./assets/expansion_icons/expansion_icon_prelude.png);
+}
+
+.expansion-icon-colony{
+  background-image: url(./assets/expansion_icons/expansion_icon_colony.png);
+}
+
+.expansion-icon-turmoil{
+  background-image: url(./assets/expansion_icons/expansion_icon_turmoil.png);
 }

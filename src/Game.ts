@@ -68,69 +68,90 @@ export interface Score {
 }
 
 export interface GameOptions {
-  draftVariant: boolean;
+  boardName: BoardName;
+  clonedGamedId: string | undefined;
+
+  // Configuration
+  undoOption: boolean;
+  fastModeOption: boolean;
+  showOtherPlayersVP: boolean;
+  
+  // Extensions
   corporateEra: boolean;
-  preludeExtension: boolean;
   venusNextExtension: boolean;
   coloniesExtension: boolean;
+  preludeExtension: boolean;
   turmoilExtension: boolean;
-  boardName: BoardName;
-  showOtherPlayersVP: boolean;
-  customCorporationsList: Array<CardName>;
-  customColoniesList: Array<ColonyName>;
-  cardsBlackList: Array<CardName>;
-  solarPhaseOption: boolean;
-  shuffleMapOption: boolean;
   promoCardsOption: boolean;
   communityCardsOption: boolean;
   aresExtension: boolean;
   aresHazards: boolean;
-  undoOption: boolean;
-  fastModeOption: boolean;
+  solarPhaseOption: boolean;
   removeNegativeGlobalEventsOption: boolean;
   includeVenusMA: boolean;
-  startingCorporations: number;
-  soloTR: boolean;
-  clonedGamedId: string | undefined;
+  
+  // Variants
+  draftVariant: boolean;
   initialDraftVariant: boolean;
+  startingCorporations: number;
+  shuffleMapOption: boolean;
   randomMA: boolean;
+  soloTR: boolean; // Solo victory by getting TR 63 by game end
+  customCorporationsList: Array<CardName>;
+  cardsBlackList: Array<CardName>;
+  customColoniesList: Array<ColonyName>;
 }
 
 export class Game implements ILoadable<SerializedGame, Game> {
-    public activePlayer: PlayerId;
-    public claimedMilestones: Array<ClaimedMilestone> = [];
-    public milestones: Array<IMilestone> = [];
-    public dealer: Dealer;
-    public fundedAwards: Array<FundedAward> = [];
-    public awards: Array<IAward> = [];
+    // Game-level data
+    public lastSaveId: number = 0;
+    private clonedGamedId: string | undefined;
+    public seed: number = Math.random();
+    public interrupts: Array<PlayerInterrupt> = [];
+    public gameAge: number = 0; // Each log event increases it
+    public gameLog: Array<LogMessage> = [];
+    
     public generation: number = 1;
-    private draftRound: number = 1;
-    private initialDraftIteration: number = 1;
     public phase: Phase = Phase.RESEARCH;
-    private donePlayers: Set<Player> = new Set<Player>();
+    public dealer: Dealer;
+    public board: Board;
+    public gameOptions: GameOptions;
+
+    // Global parameters
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
+    private temperature: number = constants.MIN_TEMPERATURE;
+    public pendingOceans: number = 0;
     private venusScaleLevel: number = constants.MIN_VENUS_SCALE;
+    
+    // Player data
+    public activePlayer: PlayerId;
+    private donePlayers: Set<Player> = new Set<Player>();
     private passedPlayers: Set<PlayerId> = new Set<PlayerId>();
     private researchedPlayers: Set<PlayerId> = new Set<PlayerId>();
     private draftedPlayers: Set<PlayerId> = new Set<PlayerId>();
-    public board: Board;
-    private temperature: number = constants.MIN_TEMPERATURE;
-    public gameLog: Array<LogMessage> = [];
-    public gameAge: number = 0; // Each log event increases it
+
+    // Drafting
+    private draftRound: number = 1;
+    private initialDraftIteration: number = 1;
     private unDraftedCards: Map<Player, Array<IProjectCard>> = new Map ();
-    public interrupts: Array<PlayerInterrupt> = [];
-    public monsInsuranceOwner: PlayerId | undefined = undefined;
+
+    // Milestones and awards
+    public claimedMilestones: Array<ClaimedMilestone> = [];
+    public milestones: Array<IMilestone> = [];
+    public fundedAwards: Array<FundedAward> = [];
+    public awards: Array<IAward> = [];   
+
+    // Expansion-specific data
     public colonies: Array<IColony> = [];
     public colonyDealer: ColonyDealer | undefined = undefined;
-    public pendingOceans: number = 0;
-    public lastSaveId: number = 0;
     public turmoil: Turmoil | undefined;
-    private clonedGamedId: string | undefined;
-    public someoneHasRemovedOtherPlayersPlants: boolean = false;
-    public seed: number = Math.random();
-    public gameOptions: GameOptions;
     public aresData: IAresData | undefined;
 
+    // Card-specific data
+    // Mons Insurance promo corp
+    public monsInsuranceOwner: PlayerId | undefined = undefined;
+    // Crash Site promo project
+    public someoneHasRemovedOtherPlayersPlants: boolean = false;
 
     constructor(
       public id: string,
@@ -143,32 +164,35 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       if (gameOptions === undefined) {
         gameOptions = {
-          draftVariant: false,
-          initialDraftVariant: false,
+          boardName: BoardName.ORIGINAL,
+          clonedGamedId: undefined,
+
+          undoOption: false,
+          fastModeOption: false,
+          showOtherPlayersVP: false,
+
           corporateEra: true,
-          randomMA: false,
-          preludeExtension: false,
           venusNextExtension: false,
           coloniesExtension: false,
+          preludeExtension: false,
           turmoilExtension: false,
-          boardName: BoardName.ORIGINAL,
-          showOtherPlayersVP: false,
-          customCorporationsList: [],
-          customColoniesList: [],
-          cardsBlackList: [],
-          solarPhaseOption: false,
-          shuffleMapOption: false,
           promoCardsOption: false,
           communityCardsOption: false,
           aresExtension: false,
           aresHazards: true,
-          undoOption: false,
-          fastModeOption: false,
+          solarPhaseOption: false,
           removeNegativeGlobalEventsOption: false,
-          startingCorporations: 2,
           includeVenusMA: true,
+
+          draftVariant: false,
+          initialDraftVariant: false,
+          startingCorporations: 2,
+          shuffleMapOption: false,
+          randomMA: false,
           soloTR: false,
-          clonedGamedId: undefined
+          customCorporationsList: [],
+          cardsBlackList: [],
+          customColoniesList: [],
         } as GameOptions
       }
       this.gameOptions = gameOptions;
@@ -184,6 +208,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         gameOptions.promoCardsOption,
         gameOptions.turmoilExtension,
         gameOptions.aresExtension,
+        gameOptions.communityCardsOption,
         gameOptions.cardsBlackList
       );
 
@@ -244,7 +269,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.colonyDealer = new ColonyDealer();
         this.colonies = this.colonyDealer.drawColonies(players.length, this.gameOptions.customColoniesList, this.gameOptions.venusNextExtension, allowCommunityColonies);
         if (this.players.length === 1) {
-          players[0].setProduction(Resources.MEGACREDITS, -2);
+          players[0].addProduction(Resources.MEGACREDITS, -2);
           this.addInterrupt(new SelectRemoveColony(players[0], this));
         }
       }
@@ -339,12 +364,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Print game_id if solo game
       if (players.length === 1) {
-        this.log("The id of this game is ${0}", b => b.string(this.id));
+        this.log("The id of this game is ${0}", b => b.raw_string(this.id));
       }      
 
-      this.log("Generation ${0}", b =>
-        b.forNewGeneration()
-        .number(this.generation));
+      this.log("Generation ${0}", b => b.forNewGeneration().number(this.generation));
 
       // Initial Draft
       if (gameOptions.initialDraftVariant) {
@@ -372,18 +395,22 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
     private setStartingProductions(player: Player) {
       if (!this.gameOptions.corporateEra) {
-        player.setProduction(Resources.MEGACREDITS);
-        player.setProduction(Resources.STEEL);
-        player.setProduction(Resources.TITANIUM);
-        player.setProduction(Resources.PLANTS);
-        player.setProduction(Resources.ENERGY);
-        player.setProduction(Resources.HEAT);
+        player.addProduction(Resources.MEGACREDITS);
+        player.addProduction(Resources.STEEL);
+        player.addProduction(Resources.TITANIUM);
+        player.addProduction(Resources.PLANTS);
+        player.addProduction(Resources.ENERGY);
+        player.addProduction(Resources.HEAT);
       }
     }
 
     // Function to retrieve a player by it's id
     public getPlayerById(id: string): Player {
-      return this.players.filter(p => p.id === id)[0];
+      const player = this.players.find(p => p.id === id);
+      if (player === undefined) {
+        throw new Error(`player ${id} does not exist on game ${this.id}`);
+      }
+      return player;
     }
 
     // Function to return an array of players from an array of player ids
@@ -531,7 +558,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
             // Special case solo play and Colonies
             if (game.players.length === 1 && game.gameOptions.coloniesExtension) {
-              player.setProduction(Resources.MEGACREDITS, -2);
+              player.addProduction(Resources.MEGACREDITS, -2);
               game.addInterrupt(new SelectRemoveColony(player, game));
             }
             if (!game.gameOptions.initialDraftVariant) {
@@ -620,7 +647,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       if (candidates.length === 0) {
         return;
       } else if (candidates.length === 1) {
-        candidates[0].setProduction(resource, -count, this, player);
+        candidates[0].addProduction(resource, -count, this, player);
         return undefined;
       } else {
         this.addInterrupt(new SelectResourceProductionDecrease(player, candidates, this, resource, count, title));
@@ -1432,7 +1459,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
       if (!isWorldGov) {
         if (steps === 3 && this.temperature === -20) {
-          player.setProduction(Resources.HEAT, 2);
+          player.addProduction(Resources.HEAT, 2);
         } else if (this.temperature === -24 || this.temperature === -20 ||
               (
                 (steps === 2 || steps === 3) &&
@@ -1440,7 +1467,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
               ) ||
               (steps === 3 && this.temperature === -16)
         ) {
-          player.setProduction(Resources.HEAT);
+          player.addProduction(Resources.HEAT);;
         }
       }
 
@@ -1768,9 +1795,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
       this.gameLog.push(builder.logMessage());
       this.gameAge++;
-      if (this.gameLog.length > 50 ) {
-        (this.gameLog.shift());
-      }
     }
 
     public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {
@@ -1848,7 +1872,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
       const o = Object.assign(this, d);
 
       // Rebuild dealer object to be sure that we will have cards in the same order
-      const dealer = new Dealer(this.gameOptions.corporateEra, this.gameOptions.preludeExtension, this.gameOptions.venusNextExtension, this.gameOptions.coloniesExtension, this.gameOptions.promoCardsOption, this.gameOptions.turmoilExtension, this.gameOptions.aresExtension);
+      const dealer = new Dealer(
+        this.gameOptions.corporateEra,
+        this.gameOptions.preludeExtension,
+        this.gameOptions.venusNextExtension,
+        this.gameOptions.coloniesExtension,
+        this.gameOptions.promoCardsOption,
+        this.gameOptions.turmoilExtension,
+        this.gameOptions.aresExtension,
+        this.gameOptions.communityCardsOption);
       this.dealer = dealer.loadFromJSON(d.dealer);
 
       // Rebuild every player objects

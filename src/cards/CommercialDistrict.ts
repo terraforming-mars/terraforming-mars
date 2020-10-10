@@ -42,8 +42,8 @@ export class CommercialDistrict implements IProjectCard {
               card: this.name
             });
             foundSpace.adjacency = this.adjacencyBonus;
-            player.setProduction(Resources.ENERGY,-1);
-            player.setProduction(Resources.MEGACREDITS,4);
+            player.addProduction(Resources.ENERGY,-1);
+            player.addProduction(Resources.MEGACREDITS,4);
             return undefined;
           }
       );

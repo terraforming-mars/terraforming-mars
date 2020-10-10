@@ -1,25 +1,25 @@
 {
-  "compilerOptions": {
-    "module": "commonjs",
-    "lib": ["dom"],
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "outDir": "dist",
-    "strict": true,
-    "removeComments": true,
-    "preserveConstEnums": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "target": "es5",
-    "types": ["node", "mocha", "chai"],
-    "moduleResolution": "node",
-    "resolveJsonModule": true
-  },
-  "include": [
-    "src/**/*.ts",
-    "script.ts",
-    "server.ts",
-  ]
+    "compilerOptions": {
+        "module": "commonjs",
+        "lib": ["dom"],
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "outDir": "dist",
+        "strict": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "target": "es5",
+        "types": ["node", "mocha", "chai"],
+        "moduleResolution": "node",
+        "resolveJsonModule": true
+    },
+    "include": [
+        "src/**/*.ts",
+        "script.ts",
+        "server.ts",
+    ]
 }

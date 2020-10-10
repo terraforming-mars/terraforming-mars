@@ -17,22 +17,22 @@ export class SelectProductionToLoseInterrupt implements PlayerInterrupt {
             player,
             (units: IProductionUnits) => {
                 if (units.megacredits > 0) {
-                    player.setProduction(Resources.MEGACREDITS, -units.megacredits);
+                    player.addProduction(Resources.MEGACREDITS, -units.megacredits);
                 }
                 if (units.steel > 0) {
-                    player.setProduction(Resources.STEEL, -units.steel);
+                    player.addProduction(Resources.STEEL, -units.steel);
                 }
                 if (units.titanium > 0) {
-                    player.setProduction(Resources.TITANIUM, -units.titanium);
+                    player.addProduction(Resources.TITANIUM, -units.titanium);
                 }
                 if (units.plants > 0) {
-                    player.setProduction(Resources.PLANTS, -units.plants);
+                    player.addProduction(Resources.PLANTS, -units.plants);
                 }
                 if (units.energy > 0) {
-                    player.setProduction(Resources.ENERGY, -units.energy);
+                    player.addProduction(Resources.ENERGY, -units.energy);
                 }
                 if (units.heat > 0) {
-                    player.setProduction(Resources.HEAT, -units.heat);
+                    player.addProduction(Resources.HEAT, -units.heat);
                 }
                 return undefined;
             });

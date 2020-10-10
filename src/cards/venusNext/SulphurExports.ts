@@ -26,7 +26,7 @@ export class SulphurExports implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        player.setProduction(Resources.MEGACREDITS,player.getTagCount(Tags.VENUS) + 1 );
+        player.addProduction(Resources.MEGACREDITS,player.getTagCount(Tags.VENUS) + 1 );
         game.increaseVenusScaleLevel(player,1);
         return undefined;
     }

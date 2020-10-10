@@ -78,8 +78,8 @@ export const PlayerTags = Vue.component("player-tags", {
                 <tag-count :tag="'cards'" :count="getCardCount()" :size="'big'" :type="'main'"/>
             </div>
             <div class="player-tags-secondary">
-                <tag-count v-if="showShortTags()" v-for="tag in player.tags" :tag="tag.tag" :count="tag.count" :size="'big'" :type="'secondary'"/>
-                <tag-count v-if="showLongTags()" v-for="tagName in getTagsPlaceholders()" :tag="tagName" :count="getTagCount(tagName)" :size="'big'" :type="'secondary'"/>
+                <tag-count v-if="showShortTags()" v-for="tag in player.tags" :key="tag.tag" :tag="tag.tag" :count="tag.count" :size="'big'" :type="'secondary'"/>
+                <tag-count v-if="showLongTags()" v-for="tagName in getTagsPlaceholders()" :key="tagName" :tag="tagName" :count="getTagCount(tagName)" :size="'big'" :type="'secondary'"/>
             </div>
         </div>
     `,

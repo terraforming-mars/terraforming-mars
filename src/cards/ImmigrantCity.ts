@@ -25,7 +25,7 @@ export class ImmigrantCity implements IProjectCard {
     }
     public onTilePlaced(player: Player, space: ISpace) {
         if (Board.isCitySpace(space)) {
-            if (player.shouldTriggerCardEffect) player.setProduction(Resources.MEGACREDITS);
+            if (player.shouldTriggerCardEffect) player.addProduction(Resources.MEGACREDITS);
             if (!player.isCorporation(CorporationName.THARSIS_REPUBLIC)) player.shouldTriggerCardEffect = true; // reset value
         }
     }
@@ -35,8 +35,8 @@ export class ImmigrantCity implements IProjectCard {
             if (mcProductionAfterDecrease < -6) player.shouldTriggerCardEffect = false;
 
             game.addCityTile(player, space.id);
-            player.setProduction(Resources.ENERGY,-1);
-            player.setProduction(Resources.MEGACREDITS, -2);
+            player.addProduction(Resources.ENERGY,-1);
+            player.addProduction(Resources.MEGACREDITS, -2);
             return undefined;
         });
     }

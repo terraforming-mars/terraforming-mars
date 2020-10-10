@@ -1,5 +1,6 @@
 
 import Vue from "vue";
+import { Button } from "../components/common/Button";
 
 interface SelectCardModel {
     cards: Array<CardModel>;
@@ -8,7 +9,7 @@ interface SelectCardModel {
 import { Card } from "./Card";
 import { CardModel } from "../models/CardModel";
 
-export const SelectCard = Vue.component("select-card", {
+export const SelectCard = Vue.component("select-card", { 
     props: ["playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
@@ -16,7 +17,8 @@ export const SelectCard = Vue.component("select-card", {
         } as SelectCardModel;
     },
     components: {
-        "card": Card
+        "card": Card,
+        "Button": Button
     },
     methods: {
         saveData: function () {
@@ -31,7 +33,7 @@ export const SelectCard = Vue.component("select-card", {
             <card :card="card"></card>
         </label>
         <div v-if="showsave === true" class="nofloat">
-            <button class="btn btn-primary btn-submit" v-on:click="saveData">{{playerinput.buttonLabel}}</button>
+            <Button type="submit" :onClick="saveData" :title="playerinput.buttonLabel" />
         </div>
     </div>`
 });

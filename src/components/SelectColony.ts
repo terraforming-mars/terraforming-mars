@@ -1,7 +1,7 @@
-
 import Vue from "vue";
 
 import { Colony } from "./Colony";
+import { Button } from "../components/common/Button";
 
 export const SelectColony = Vue.component("select-colony", {
     props: ["playerinput", "onsave", "showsave", "showtitle"],
@@ -11,7 +11,8 @@ export const SelectColony = Vue.component("select-colony", {
         };
     },
     components: {
-        "colony": Colony
+        "colony": Colony,
+        "Button": Button
     },
     methods: {
         saveData: function () {
@@ -25,7 +26,7 @@ export const SelectColony = Vue.component("select-colony", {
             <colony :colony="colony"></colony>
         </label>
         <div v-if="showsave === true" class="nofloat">
-            <button class="btn btn-primary" v-on:click="saveData">{{playerinput.buttonLabel}}</button>
+            <Button :onClick="saveData" :title="playerinput.buttonLabel" /> 
         </div>
     </div>`
 });

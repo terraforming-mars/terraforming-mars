@@ -22,10 +22,11 @@ describe("PoliticalUprising", function () {
         card.play(player, game);
         expect(game.interrupts.length).to.eq(4);
 
-        while (game.interrupts.length > 0) {
-            const orOptions = game.interrupts.pop()!.playerInput as OrOptions;
-            const options = orOptions.options[0] as OrOptions;
-            options.cb();
+        while (game.interrupts.length) {
+            game.interrupts[0].generatePlayerInput?.();
+            const orOptions = game.interrupts[0].playerInput as OrOptions;
+            orOptions.options[0].cb();
+            game.interrupts.shift();
         }
 
         const turmoil = game.turmoil!;

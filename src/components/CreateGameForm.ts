@@ -311,6 +311,11 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 .catch(_ => alert("Unexpected server response"));
         }
     },
+    watch: {
+        venusNext: function (enabled) {
+            this.solarPhaseOption = enabled;
+        }
+    },
     template: `
         <div id="create-game">
             <h1><span v-i18n>Terraforming Mars</span> — <span v-i18n>Create New Game</span></h1>

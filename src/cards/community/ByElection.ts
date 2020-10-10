@@ -11,15 +11,21 @@ import { OrOptions } from "../../inputs/OrOptions";
 export class ByElection extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.WILDCARD];
     public name: CardName = CardName.BY_ELECTION;
-
+    public canPlay(__player: Player, game: Game) {
+        return game.turmoil !== undefined;
+    }
     public play(player: Player, game: Game) {
-        game.turmoil!.addInfluenceBonus(player);
+        const turmoil = game.turmoil;
+        if (turmoil === undefined){
+            return;
+        }
+        turmoil.addInfluenceBonus(player);
         const setRulingParty = new OrOptions();
             
         setRulingParty.title = "Select new ruling party";
         setRulingParty.options = [...ALL_PARTIES.map((p) => new SelectOption(
             p.partyName, "Select", () => {
-            game.turmoil!.rulingParty = game.turmoil!.getPartyByName(p.partyName);
+            turmoil.rulingParty = turmoil.getPartyByName(p.partyName);
             return undefined;
             })
         )];

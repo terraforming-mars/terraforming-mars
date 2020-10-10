@@ -90,5 +90,5 @@ export abstract class Colony  {
         if (poseidon.length > 0) {
           poseidon[0].addProduction(Resources.MEGACREDITS);
         }
-    }    
+    }  
 }    

@@ -21,7 +21,7 @@ export class SpacePortColony implements IProjectCard {
 
     public play(player: Player, game: Game) {
       game.addColonyInterrupt(player, true, "Select colony for Space Port Colony");
-      player.fleetSize++;
+      player.increaseFleetSize();
       return undefined;
     }
 

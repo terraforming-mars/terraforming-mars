@@ -20,6 +20,10 @@ import {
     ALL_PROMO_CORPORATIONS,
     ALL_PROMO_PROJECTS_CARDS,
     ALL_COMMUNITY_CORPORATIONS,
+    ALL_COMMUNITY_PRELUDE_CARDS,
+    ALL_COMMUNITY_VENUS_PRELUDE_CARDS,
+    ALL_COMMUNITY_COLONY_PRELUDE_CARDS,
+    ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS,
 } from "../../Dealer";
 import { HTML_DATA } from "../../HTML_data";
 import { CardModel } from "../../models/CardModel";
@@ -102,6 +106,30 @@ export function getProjectCardByName(
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
+    cardFactory = ALL_COMMUNITY_PRELUDE_CARDS.find(
+        (cf) => cf.cardName === cardName
+    );
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_COMMUNITY_VENUS_PRELUDE_CARDS.find(
+        (cf) => cf.cardName === cardName
+    );
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_COMMUNITY_COLONY_PRELUDE_CARDS.find(
+        (cf) => cf.cardName === cardName
+    );
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS.find(
+        (cf) => cf.cardName === cardName
+    );
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    } 
     cardFactory = ALL_VENUS_PROJECTS_CARDS.find(
         (cf) => cf.cardName === cardName
     );

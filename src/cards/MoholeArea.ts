@@ -8,8 +8,8 @@ import { Game } from "../Game";
 import { Tags } from "./Tags";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
-import { Resources } from '../Resources';
-import { CardName } from '../CardName';
+import { Resources } from "../Resources";
+import { CardName } from "../CardName";
 
 export class MoholeArea implements IProjectCard {
     public cost: number = 20;

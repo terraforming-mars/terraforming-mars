@@ -15,8 +15,8 @@ export class SkyDocks implements IProjectCard {
     }
 
     public play(player: Player) {
-        player.fleetSize++;
-      return undefined;
+        player.increaseFleetSize();
+        return undefined;
     }
 
     public getCardDiscount() {

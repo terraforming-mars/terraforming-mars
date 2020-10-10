@@ -7675,4 +7675,113 @@ export const HTML_DATA: Map<string, string> =
         (You start with 120 MC. Lower your TR 7 steps.)
       </div>
 `],
+[CardName.VALUABLE_GASES,`
+      <div class="title background-color-prelude">Valuable Gases</div>
+      <div class="prelude-label">PRELUDE</div>
+      <div class="tag tag1 tag-venus"></div>
+      <div class="tag tag2 tag-jovian"></div>
+      <div class="prelude-icon preludeCard-icon"></div>
+      <div class="content">
+        <div class="resource money">10</div>
+        <div class="resource card" style="margin-left:10px">
+          <div class="card-icon tag-venus"></div>
+        </div>
+        &nbsp;: +4 <div class="resource floater"></div>
+        <div class="description">
+          Gain 10 MC. Play a Venus card from your hand that collects floaters and add 4 floaters to it.
+        </div>
+      </div>
+`],
+[CardName.VENUS_FIRST,`
+      <div class="title background-color-prelude">Venus First</div>
+      <div class="prelude-label">PRELUDE</div>
+      <div class="tag tag1 tag-venus"></div>
+      <div class="prelude-icon preludeCard-icon"></div>
+      <div class="content">
+        <div class="tile venus-tile">V</div>
+        <div class="tile venus-tile">V</div>
+        <br>
+        <div class="resource card"><div class="card-icon tag-venus"></div></div>
+        <div class="resource card"><div class="card-icon tag-venus"></div></div>
+        <div class="description">
+          Raise Venus 2 steps. Draw 2 Venus cards from the deck.
+        </div>
+      </div>
+`],
+[CardName.RESEARCH_GRANT,`
+      <div class="title background-color-prelude">Research Grant</div>
+      <div class="prelude-label">PRELUDE</div>
+      <div class="tag tag1 tag-science"></div>
+      <div class="tag tag2 tag-science"></div>
+      <div class="prelude-icon preludeCard-icon"></div>
+      <div class="content">
+        <div class="resource money">8</div>
+        <div class="description">
+          Gain 8 MC.
+        </div>
+      </div>
+`],
+[CardName.AEROSPACE_MISSION,`
+      <div class="title background-color-prelude">Aerospace Mission</div>
+      <div class="prelude-label">PRELUDE</div>
+      <div class="tag tag1 tag-space"></div>
+      <div class="prelude-icon preludeCard-icon"></div>
+      <div class="content">
+        <div>
+          <div class="tile colony"></div>
+          <div class="tile colony"></div>
+          <br>
+          - <div class="resource money">12</div>
+        </div>
+        <div class="description">
+          Place 2 colonies. Pay 12 MC.
+        </div>
+      </div>
+`],
+[CardName.TRADE_ADVANCE,`
+      <div class="title background-color-prelude">Trade Advance</div>
+      <div class="prelude-label">PRELUDE</div>
+      <div class="tag tag1 tag-earth"></div>
+      <div class="prelude-icon preludeCard-icon"></div>
+      <div class="content">
+        <div class="resource money">2</div> &nbsp;(SOLO: <div class="resource money">10</div>)
+        <div>Trade all colonies with</div>
+        <div class="tile trade"></div> : <span class="card-sign">+1</span>
+        <div class="description">
+          Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each trade.
+          <br><br>Gain 2 MC (SOLO: Gain 10 MC).
+        </div>
+      </div>
+`],
+[CardName.POLITICAL_UPRISING,`
+      <div class="title background-color-prelude">Political Uprising</div>
+      <div class="prelude-label">PRELUDE</div>
+      <div class="prelude-icon preludeCard-icon"></div>
+      <div class="content">
+        <div class="delegate"></div>
+        <div class="delegate"></div>
+        <div class="delegate"></div>
+        <div class="delegate"></div>
+        <br>
+        <div class="resource card">
+          <div class="turmoil-icon"></div>
+        </div>
+        <div class="description">
+          Place 4 delegates. Draw a Turmoil card.
+        </div>
+      </div>
+`],
+[CardName.BY_ELECTION,`
+      <div class="title background-color-prelude">By-Election</div>
+      <div class="prelude-label">PRELUDE</div>
+      <div class="tag tag1 tag-wild"></div>
+      <div class="prelude-icon preludeCard-icon"></div>
+      <div class="content">
+        <div class="set-party-text">SET RULING PARTY</div>
+        + <div class="influence"></div>
+        <div class="description">
+          Set the ruling party to one of your choice. Gain +1 influence.
+        </div>
+      </div>
+`],
 ]);

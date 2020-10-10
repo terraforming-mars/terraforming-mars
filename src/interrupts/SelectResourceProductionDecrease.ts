@@ -29,7 +29,7 @@ export class SelectResourceProductionDecrease implements PlayerInterrupt {
         } else if (candidates.length === 1) {
             candidates[0].addProduction(this.resource, -this.count, this.game, this.player);
             this.playerInput = undefined;
-            return
+            return;
         } else {
             this.playerInput = new SelectPlayer(
                 candidates,

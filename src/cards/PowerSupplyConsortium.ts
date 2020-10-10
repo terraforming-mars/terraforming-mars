@@ -11,10 +11,11 @@ export class PowerSupplyConsortium implements IProjectCard {
     public tags: Array<Tags> = [Tags.ENERGY];
     public name: CardName = CardName.POWER_SUPPLY_CONSORTIUM;
     public cardType: CardType = CardType.AUTOMATED;
-
-    public canPlay(player: Player, game: Game): boolean {
-        return player.getTagCount(Tags.ENERGY) >= 2 && game.someoneHasResourceProduction(Resources.ENERGY,1); 
+    public canPlay(player: Player): boolean {
+        return player.getTagCount(Tags.ENERGY) >= 2;
     }
+
+
     public play(player: Player, game: Game) {
         if ( ! game.isSoloMode()) {
             game.addResourceProductionDecreaseInterrupt(player, Resources.ENERGY, 1);

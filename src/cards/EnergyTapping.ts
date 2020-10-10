@@ -13,9 +13,6 @@ export class EnergyTapping implements IProjectCard {
   public name: CardName = CardName.ENERGY_TAPPING;
   public cardType: CardType = CardType.AUTOMATED;
   public hasRequirements = false;
-  public canPlay(_player: Player, game: Game): boolean {
-    return game.someoneHasResourceProduction(Resources.ENERGY,1)
-  }
 
   public play(player: Player, game: Game) {
     game.addResourceProductionDecreaseInterrupt(player, Resources.ENERGY, 1);

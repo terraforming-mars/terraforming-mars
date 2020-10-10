@@ -20,7 +20,15 @@ export class AerospaceMission extends PreludeCard implements IProjectCard {
             openColonies.slice(1).forEach(function (c2) {
                 if (c1.name !== c2.name) {
                     const description =
-                        "Build colonies on ${c1.name} (${c1.description}) and ${c2.name} (${c2.description})";
+                        "Build colonies on " +
+                        c1.name +
+                        " (" +
+                        c1.description +
+                        ") and " +
+                        c2.name +
+                        " (" +
+                        c2.description +
+                        ")";
 
                     const colonySelect = new SelectOption(
                         description,

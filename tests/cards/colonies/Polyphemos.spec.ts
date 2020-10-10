@@ -23,6 +23,7 @@ describe("Polyphemos", function () {
         expect(action).not.to.eq(undefined);
         expect(action instanceof SelectCard).to.eq(true);
         (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
+        game.runNextInterrupt(() => {});
         expect(player.megaCredits).to.eq(5);
         expect(player.cardsInHand.length).to.eq(1);
     });

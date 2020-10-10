@@ -91,16 +91,18 @@
     text-decoration: none;
 }
 .create-game-divider {
-    background:rgb(148, 148, 148);
+    background:rgba(148, 148, 148, 0.5);
     height: 3px;
+    line-height: 3px;
     width: 100%;	
     margin-top: 16px;
     margin-bottom: 8px;	
 }
 
-.expansion-label {
-    font-size: 15px;
+.create-game-subsection-label {
+    font-size: 20px;
     color: gray;
+    padding-top: 10px;
     padding-bottom: 10px;
 }
 
@@ -115,6 +117,11 @@
   flex-flow: column wrap;
   padding: 20px 10px;
 }
+
+.create-game-page-column-row {
+    display: flex;
+    flex-flow: row nowrap;
+  }
 
 .create-game-page-column input[type="checkbox"] {
   opacity: 0;

@@ -357,7 +357,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                     <div class="create-game-page-container">
                         <div class="create-game-page-column" v-if="! isSoloModePage">
-                            <h4 v-i18n>Players count</h4>
+                            <h4 v-i18n># of Players</h4>
                                 <template v-for="pCount in [1,2,3,4,5,6]">
                                     <input type="radio" :value="pCount" name="playersCount" v-model="playersCount" :id="pCount+'-radio'">
                                     <label :for="pCount+'-radio'">
@@ -410,9 +410,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <span v-i18n>Promos</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
-                            <div class="create-game-divider" />
-
-                            <div class="expansion-label">Fan-made</div>
+                            <div class="create-game-subsection-label">Fan-made</div>
 
                             <input type="checkbox" name="fan-made" id="fan-made-checkbox" v-model="communityCardsOption">
                             <label for="fan-made-checkbox">
@@ -456,8 +454,26 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <span v-i18n>Allow undo</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#allow-undo" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
-                            <div class="create-game-divider" />
-                            <div class="expansion-label">Customize deck</div>
+                            <input type="checkbox" v-model="shuffleMapOption" id="shuffleMap-checkbox">
+                            <label for="shuffleMap-checkbox">
+                                    <span v-i18n>Randomize board tiles</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#randomize-board-tiles" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
+                            <input type="checkbox" v-model="seededGame" id="seeded-checkbox">
+                            <label for="seeded-checkbox">
+                                <span v-i18n>Set Predefined Game</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#set-predefined-game" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
+                            <div v-if="seededGame">
+                                <select name="clonedGamedId" v-model="clonedGameData">
+                                    <option v-for="game in cloneGameData" :value="game" :key="game.gameId">
+                                        {{ game.gameId }} - {{ game.playerCount }} player(s)
+                                    </option>
+                                </select>
+                            </div>
+
+
+                            <div class="create-game-subsection-label">Filter</div>
 
                             <input type="checkbox" v-model="showCorporationList" id="customCorps-checkbox">
                             <label for="customCorps-checkbox">
@@ -475,11 +491,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                     <span v-i18n>Custom Colonies list</span>
                                 </label>
                             </template>
-
-                            <input type="checkbox" v-model="shuffleMapOption" id="shuffleMap-checkbox">
-                            <label for="shuffleMap-checkbox">
-                                    <span v-i18n>Randomize board tiles</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#randomize-board-tiles" class="tooltip" target="_blank">&#9432;</a>
-                            </label>
                             
                             <template v-if="turmoil">
                             <label class="form-switch">
@@ -488,33 +499,23 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </label>
                             </template>
 
-                            <input type="checkbox" v-model="seededGame" id="seeded-checkbox">
-                            <label for="seeded-checkbox">
-                                <span v-i18n>Set Predefined Game</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#set-predefined-game" class="tooltip" target="_blank">&#9432;</a>
-                            </label>
-
-                            <div v-if="seededGame">
-                                <select name="clonedGamedId" v-model="clonedGameData">
-                                    <option v-for="game in cloneGameData" :value="game" :key="game.gameId">
-                                        {{ game.gameId }} - {{ game.playerCount }} player(s)
-                                    </option>
-                                </select>
-                            </div>
                         </div>
 
 
                         <div class="create-game-page-column" v-if="playersCount > 1">
                             <h4 v-i18n>Multiplayer Options</h4>
 
-                            <input type="checkbox" name="draftVariant" v-model="draftVariant" id="draft-checkbox">
-                            <label for="draft-checkbox">
-                                <span v-i18n>Draft variant</span>
-                            </label>
+                            <div class="create-game-page-column-row">
+                                <input type="checkbox" name="draftVariant" v-model="draftVariant" id="draft-checkbox">
+                                <label for="draft-checkbox">
+                                    <span v-i18n>Draft variant</span>
+                                </label>
 
-                            <input type="checkbox" name="initialDraft" v-model="initialDraft" id="initialDraft-checkbox">
-                            <label for="initialDraft-checkbox">
-                                <span v-i18n>Initial Draft variant</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#initial-draft" class="tooltip" target="_blank">&#9432;</a>
-                            </label>
+                                <input type="checkbox" name="initialDraft" v-model="initialDraft" id="initialDraft-checkbox">
+                                <label for="initialDraft-checkbox">
+                                    <span v-i18n>Initial Draft variant</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#initial-draft" class="tooltip" target="_blank">&#9432;</a>
+                                </label>
+                            </div>
 
                             <input type="checkbox" v-model="randomFirstPlayer" id="randomFirstPlayer-checkbox">
                             <label for="randomFirstPlayer-checkbox">

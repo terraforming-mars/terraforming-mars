@@ -2109,9 +2109,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
           selectParty = new SelectParty(this, game, "Send a delegate in an area (5 MC)", 1, undefined, 5, false);
         }
         if (selectParty) {
-          if (selectParty.generatePlayerInput() !== undefined) {
-            selectParty.generatePlayerInput();
-          }
+          selectParty.generatePlayerInput();
           if (selectParty.playerInput !== undefined) {
             action.options.push(selectParty.playerInput);
           }

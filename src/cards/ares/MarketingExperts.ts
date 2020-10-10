@@ -13,7 +13,7 @@ export class MarketingExperts implements IProjectCard {
   public name: CardName = CardName.MARKETING_EXPERTS;
 
   public play(player: Player, _game: Game) {
-    player.setProduction(Resources.MEGACREDITS, 1)
+    player.addProduction(Resources.MEGACREDITS, 1)
     return undefined;
   }
 }

@@ -15,7 +15,7 @@ export class IshtarMining implements IProjectCard {
         return game.getVenusScaleLevel() >= 8 - (2 * player.getRequirementsBonus(game, true));
     }
     public play(player: Player) {
-        player.setProduction(Resources.TITANIUM);
+        player.addProduction(Resources.TITANIUM);
         return undefined;
     }
 }

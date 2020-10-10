@@ -17,7 +17,7 @@ describe("CommercialDistrictAres", function () {
     });
 
     it("Should play", function () {
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         expect(card.canPlay(player, game)).to.eq(true);
 
         const action = card.play(player, game);

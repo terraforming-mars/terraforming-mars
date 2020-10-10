@@ -23,7 +23,7 @@ describe("CapitalAres", function () {
     for (let i = 0; i < 4; i++) {
         oceanSpaces[i].tile = { tileType: TileType.OCEAN };
     }
-    player.setProduction(Resources.ENERGY,2);
+    player.addProduction(Resources.ENERGY,2);
     expect(card.canPlay(player, game)).to.eq(true);
 
     const action = card.play(player, game);

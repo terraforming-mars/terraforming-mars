@@ -17,7 +17,7 @@ export class CheungShingMARS implements CorporationCard {
     }
 	    
     public play(player: Player) {
-        player.setProduction(Resources.MEGACREDITS,3);
+        player.addProduction(Resources.MEGACREDITS,3);
         return undefined;
     }
 }

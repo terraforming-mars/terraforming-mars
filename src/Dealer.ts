@@ -465,6 +465,16 @@ import { AgricolaInc } from "./cards/community/AgricolaInc";
 import { ProjectWorkshop } from "./cards/community/ProjectWorkshop";
 import { Incite } from "./cards/community/Incite";
 import { Playwrights } from "./cards/community/Playwrights";
+import { Midas } from "./cards/community/Midas";
+
+// Community preludes
+import { ValuableGases } from "./cards/community/ValuableGases";
+import { VenusFirst } from "./cards/community/VenusFirst";
+import { ResearchGrant } from "./cards/community/ResearchGrant";
+import { AerospaceMission } from "./cards/community/AerospaceMission";
+import { TradeAdvance } from "./cards/community/TradeAdvance";
+import { PoliticalUprising } from "./cards/community/PoliticalUprising";
+import { ByElection } from "./cards/community/ByElection";
 
 import { BioengineeringEnclosure } from "./cards/ares/BioengineeringEnclosure";
 import { BiofertilizerFacility} from "./cards/ares/BiofertilizerFacility";
@@ -531,6 +541,25 @@ export const ALL_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>> = [
     { cardName: CardName.ECCENTRIC_SPONSOR, factory: EccentricSponsor },
     { cardName: CardName.ECOLOGY_EXPERTS, factory: EcologyExperts },
     { cardName: CardName.EXPERIMENTAL_FOREST, factory: ExperimentalForest }
+];
+
+export const ALL_COMMUNITY_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>> = [
+    { cardName: CardName.RESEARCH_GRANT, factory: ResearchGrant },
+];
+
+export const ALL_COMMUNITY_VENUS_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>> = [
+    { cardName: CardName.VALUABLE_GASES, factory: ValuableGases },
+    { cardName: CardName.VENUS_FIRST, factory: VenusFirst },
+];
+
+export const ALL_COMMUNITY_COLONY_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>> = [
+    { cardName: CardName.AEROSPACE_MISSION, factory: AerospaceMission },
+    { cardName: CardName.TRADE_ADVANCE, factory: TradeAdvance },
+];
+
+export const ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS: Array<ICardFactory<IProjectCard>> = [
+    { cardName: CardName.POLITICAL_UPRISING, factory: PoliticalUprising },
+    { cardName: CardName.BY_ELECTION, factory: ByElection },
 ];
 
 export const ALL_CORPORATION_CARDS: Array<ICardFactory<CorporationCard>> = [
@@ -732,7 +761,8 @@ export const ALL_COMMUNITY_CORPORATIONS: Array<ICardFactory<CorporationCard>> = 
     { cardName: CardName.AGRICOLA_INC, factory: AgricolaInc },
     { cardName: CardName.PROJECT_WORKSHOP, factory: ProjectWorkshop },
     { cardName: CardName.INCITE, factory: Incite },
-    { cardName: CardName.PLAYWRIGHTS, factory: Playwrights }
+    { cardName: CardName.PLAYWRIGHTS, factory: Playwrights },
+    { cardName: CardName.MIDAS, factory: Midas },
 ];
 
 export const ALL_PROMO_PROJECTS_CARDS: Array<ICardFactory<IProjectCard>> = [
@@ -1020,6 +1050,22 @@ export function getProjectCardByName(cardName: string): IProjectCard | undefined
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
     }
+    cardFactory = ALL_COMMUNITY_PRELUDE_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_COMMUNITY_VENUS_PRELUDE_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_COMMUNITY_COLONY_PRELUDE_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
+    cardFactory = ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS.find((cf) => cf.cardName === cardName);
+    if (cardFactory !== undefined) {
+        return new cardFactory.factory();
+    }
     cardFactory = ALL_PRELUDE_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
     if (cardFactory !== undefined) {
         return new cardFactory.factory();
@@ -1106,6 +1152,8 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
     private usePromoCards: boolean = false;
     private useTurmoilExtension: boolean = false;
     private useAresExtension: boolean = false;
+    private useCommunityCards: boolean = false;
+
     constructor(
             useCorporateEra: boolean,
             usePreludeExtension: boolean,
@@ -1114,6 +1162,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
             usePromoCards: boolean,
             useTurmoilExtension: boolean,
             useAresExtension: boolean,
+            useCommunityCards: boolean = false,
             cardsBlackList?: Array<CardName>
         ) {
         this.useCorporateEra = useCorporateEra;
@@ -1123,13 +1172,24 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         this.usePromoCards = usePromoCards;
         this.useTurmoilExtension = useTurmoilExtension;
         this.useAresExtension = useAresExtension;
+        this.useCommunityCards = useCommunityCards;
+
         this.deck = this.shuffleCards(ALL_PROJECT_CARDS.map((cf) => new cf.factory()));
         if (this.useCorporateEra) {
             this.deck.push(...ALL_CORP_ERA_PROJECT_CARDS.map((cf) => new cf.factory()));
             this.deck = this.shuffleCards<IProjectCard>(this.deck);
         }
         if (this.usePreludeExtension) {
-            this.preludeDeck = this.shuffleCards<IProjectCard>(ALL_PRELUDE_CARDS.map((cf) => new cf.factory()));
+            let preludes = ALL_PRELUDE_CARDS;
+            
+            if (this.useCommunityCards) {
+                preludes = preludes.concat(ALL_COMMUNITY_PRELUDE_CARDS);
+                if (this.useVenusNextExtension) preludes = preludes.concat(ALL_COMMUNITY_VENUS_PRELUDE_CARDS);
+                if (this.useColoniesNextExtension) preludes = preludes.concat(ALL_COMMUNITY_COLONY_PRELUDE_CARDS);
+                if (this.useTurmoilExtension) preludes = preludes.concat(ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS);
+            }
+            
+            this.preludeDeck = this.shuffleCards<IProjectCard>(preludes.map((cf) => new cf.factory()));
             this.deck.push(...ALL_PRELUDE_PROJECTS_CARDS.map((cf) => new cf.factory()));
             this.deck = this.shuffleCards<IProjectCard>(this.deck);
         }

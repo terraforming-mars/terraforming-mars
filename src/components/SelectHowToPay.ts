@@ -3,6 +3,7 @@ import Vue from "vue";
 import { HowToPay } from "../inputs/HowToPay";
 import { PaymentWidgetMixin } from "./PaymentWidgetMixin";
 import { PreferencesManager } from "./PreferencesManager";
+import { Button } from "../components/common/Button";
 
 interface SelectHowToPayModel {
     heat: number;
@@ -15,6 +16,9 @@ interface SelectHowToPayModel {
 }
 
 export const SelectHowToPay = Vue.component("select-how-to-pay", {
+    components: {
+       "Button": Button    
+    },
     props: ["player", "playerinput", "onsave", "showsave", "showtitle"],
     data: function () {
         return {
@@ -30,7 +34,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
     },
     mixins: [PaymentWidgetMixin],
     mounted: function () {
-      let app = this;
+      const app = this;
       Vue.nextTick(function () {
         app.$data.isResearchPhase = app.playerinput.title === "Select how to pay for cards";
         app.setInitialCost();
@@ -70,7 +74,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                   this.$data.steel = requiredSteelQty;
               }
               
-              let discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue);
+              const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue);
               this.$data.megaCredits = Math.max(discountedCost, 0);
           } else {
               this.$data.steel = 0;
@@ -94,7 +98,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
                   this.$data.titanium = requiredTitaniumQty;
               }
               
-              let discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue);
+              const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue);
               this.$data.megaCredits = Math.max(discountedCost, 0);
           } else {
               this.$data.titanium = 0;
@@ -107,7 +111,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
           } else {
               this.$data.heat = 0;
           }
-          let discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue) - this.$data.heat;
+          const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue) - this.$data.heat;
           this.$data.megaCredits = Math.max(discountedCost, 0);
         },
         canAffordWithMcOnly: function() {
@@ -164,7 +168,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
             }
 
             if (requiredAmt > 0 && totalSpentAmt > requiredAmt) {
-                let diff = totalSpentAmt - requiredAmt;
+                const diff = totalSpentAmt - requiredAmt;
                 if (htp.titanium && diff >= this.player.titaniumValue) {
                     this.$data.warning = "You cannot overspend titanium";
                     return;
@@ -186,7 +190,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
             const showAlert = PreferencesManager.loadValue("show_alerts") === "1";
 
             if (requiredAmt > 0 && totalSpentAmt > requiredAmt && showAlert) {
-              let diff = totalSpentAmt - requiredAmt;
+              const diff = totalSpentAmt - requiredAmt;
 
               if (confirm("Warning: You are overpaying by " + diff + " MC")) {
                 this.onsave([[JSON.stringify(htp)]]);    
@@ -197,7 +201,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
             } else {
               this.onsave([[JSON.stringify(htp)]]);
             }
-        }
+        } 
     },
     template: `<div class="payments_cont">
   <section v-trim-whitespace>
@@ -205,35 +209,34 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
     <h3 class="payments_title">{{playerinput.title}}</h3>
 
     <div class="payments_type input-group" v-if="playerinput.canUseSteel">
-
       <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('steel', 1)" :class="getCssClassFor('<', 'steel')"><i class="icon icon-minus" /></button>
+      <Button type="minus" :onClick="_=>reduceValue('steel', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="steel" />
-      <button class="btn btn-primary" v-on:click="addValue('steel', 1)" :class="getCssClassFor('>', 'steel')"><i class="icon icon-plus" /></button>
-      <button class="btn btn-primary max_button" v-on:click="setMaxValue('steel')">MAX</button>
+      <Button type="plus" :onClick="_=>addValue('steel', 1)" />
+      <Button type="max" :onClick="_=>setMaxValue('steel')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="playerinput.canUseTitanium">
       <i class="resource_icon resource_icon--titanium payments_type_icon" title="Pay by Titanium"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('titanium', 1)" :class="getCssClassFor('<', 'titanium')"><i class="icon icon-minus" /></button>
+      <Button type="minus" :onClick="_=>reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
-      <button class="btn btn-primary" v-on:click="addValue('titanium', 1)" :class="getCssClassFor('>', 'titanium')"><i class="icon icon-plus" /></button>
-      <button class="btn btn-primary max_button" v-on:click="setMaxValue('titanium')">MAX</button>
+      <Button type="plus" :onClick="_=>addValue('titanium', 1)" />
+      <Button type="max" :onClick="_=>setMaxValue('titanium')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="playerinput.canUseHeat">
       <i class="resource_icon resource_icon--heat payments_type_icon" title="Pay by Heat"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('heat', 1)" :class="getCssClassFor('<', 'heat')"><i class="icon icon-minus" /></button>
+      <Button type="minus" :onClick="_=>reduceValue('heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
-      <button class="btn btn-primary" v-on:click="addValue('heat', 1)" :class="getCssClassFor('>', 'heat')"><i class="icon icon-plus" /></button>
-      <button class="btn btn-primary max_button" v-on:click="setMaxValue('heat')">MAX</button>
+      <Button type="plus" :onClick="_=>addValue('heat', 1)" />
+      <Button type="max" :onClick="_=>setMaxValue('heat')" title="MAX" /> 
     </div>
 
     <div class="payments_type input-group">
       <i class="resource_icon resource_icon--megacredits payments_type_icon" title="Pay by Megacredits"></i>
-      <button class="btn btn-primary" v-on:click="reduceValue('megaCredits', 1)" :class="getCssClassFor('<', 'megaCredits')"><i class="icon icon-minus" /></button>
+      <Button type="minus" :onClick="_=>reduceValue('megaCredits', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
-      <button class="btn btn-primary" v-on:click="addValue('megaCredits', 1)" :class="getCssClassFor('>', 'megaCredits')"><i class="icon icon-plus" /></button>
+      <Button type="plus" :onClick="_=>addValue('megaCredits', 1)" />
     </div>
 
     <div v-if="hasWarning()" class="tm-warning">
@@ -241,7 +244,7 @@ export const SelectHowToPay = Vue.component("select-how-to-pay", {
     </div>
 
     <div v-if="showsave === true" class="payments_save">
-      <button class="btn btn-lg btn-primary" v-on:click="saveData">{{playerinput.buttonLabel}}</button>
+      <Button size="big" :onClick="saveData" :title="playerinput.buttonLabel" />
     </div>
 
   </section>

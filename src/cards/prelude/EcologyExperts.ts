@@ -4,6 +4,7 @@ import { Player } from "../../Player";
 import { PreludeCard } from "./PreludeCard";
 import { IProjectCard } from "../IProjectCard";
 import { Resources } from '../../Resources';
+import { Game } from "../../Game";
 
 export class EcologyExperts extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT, Tags.MICROBES];
@@ -16,8 +17,17 @@ export class EcologyExperts extends PreludeCard implements IProjectCard {
         return 0;
     }
     public play(player: Player) {
-        player.setProduction(Resources.PLANTS);
+        player.addProduction(Resources.PLANTS);
         return undefined;
+    }
+
+    public addPlayCardInterrupt(player: Player, game: Game) {
+        if (player.getPlayableCards(game).length > 0) {
+            game.interrupts.push({
+                player: player,
+                playerInput: player.playProjectCard(game)
+            });
+        }
     }
 }
 

@@ -21,8 +21,8 @@ export class OceanFarm implements IProjectCard {
   }
 
   public play(player: Player, game: Game) {
-    player.setProduction(Resources.HEAT, 1);
-    player.setProduction(Resources.PLANTS, 1);
+    player.addProduction(Resources.HEAT, 1);
+    player.addProduction(Resources.PLANTS, 1);
 
     return new SelectSpace(
       "Select space for Ocean Farm",

@@ -37,13 +37,13 @@ describe("OceanCity", function () {
         AresTestHelper.addOcean(game, player);
         expect(card.canPlay(player, game)).is.false;
 
-        player.setProduction(Resources.ENERGY, 1);
+        player.addProduction(Resources.ENERGY, 1);
         expect(card.canPlay(player, game)).is.true;
     });
 
     it("play", function () {
         const oceanSpace = AresTestHelper.addOcean(game, player);
-        player.setProduction(Resources.ENERGY, 1);
+        player.addProduction(Resources.ENERGY, 1);
 
         const action = card.play(player, game);
 
@@ -63,7 +63,7 @@ describe("OceanCity", function () {
 
     it("Cannot place a city next to Ocean City", function () {
         const oceanSpace = AresTestHelper.addOcean(game, player);
-        player.setProduction(Resources.ENERGY, 1);
+        player.addProduction(Resources.ENERGY, 1);
 
         const action = card.play(player, game);
 
@@ -81,7 +81,7 @@ describe("OceanCity", function () {
 
     it("Can place Ocean City next to a city", function () {
         const oceanSpace = AresTestHelper.addOcean(game, player);
-        player.setProduction(Resources.ENERGY, 1);
+        player.addProduction(Resources.ENERGY, 1);
 
         var citySpace = game.board
             .getAdjacentSpaces(oceanSpace)

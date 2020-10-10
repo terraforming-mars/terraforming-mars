@@ -19,7 +19,7 @@ export class Callisto extends Colony implements IColony {
     }
     public onColonyPlaced(player: Player, game: Game): undefined {
         super.addColony(this, player, game);
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         return undefined;
     }
     public giveTradeBonus(player: Player): void {

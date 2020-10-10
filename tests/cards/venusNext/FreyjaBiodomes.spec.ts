@@ -24,7 +24,7 @@ describe("FreyjaBiodomes", function () {
     });
 
     it("Can't play if Venus requirement not met", function () {
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         (game as any).venusScaleLevel = 8;
         expect(card.canPlay(player, game)).to.eq(false);
     });
@@ -33,7 +33,7 @@ describe("FreyjaBiodomes", function () {
         const card2 = new Extremophiles();
         player.playedCards.push(card2);
 
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         (game as any).venusScaleLevel = 10;
         expect(card.canPlay(player, game)).to.eq(true);
 
@@ -46,7 +46,7 @@ describe("FreyjaBiodomes", function () {
     it("Should play - multiple targets", function () {
         const card2 = new Extremophiles();
         const card3 = new VenusianAnimals();
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         player.playedCards.push(card2, card3);
 
         const action = card.play(player, game)  as SelectCard<ICard>;

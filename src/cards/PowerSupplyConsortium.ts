@@ -19,7 +19,7 @@ export class PowerSupplyConsortium implements IProjectCard {
         if ( ! game.isSoloMode()) {
             game.addResourceProductionDecreaseInterrupt(player, Resources.ENERGY, 1);
         }
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         return undefined;
     }
 }

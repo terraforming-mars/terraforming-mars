@@ -13,7 +13,7 @@ export class Cartel implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {
-      player.setProduction(Resources.MEGACREDITS, player.getTagCount(Tags.EARTH) + 1);
+      player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.EARTH) + 1);
       return undefined;
     }
 }

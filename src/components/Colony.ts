@@ -23,9 +23,9 @@ export const Colony = Vue.component("colony", {
             colony: ColonyModel,
             isColonyCube: boolean
         ): number => {
-            if (colony.name === ColonyName.IAPETUS) return 185;
-            if (colony.name === ColonyName.VENUS || colony.name === ColonyName.LEAVITT) return 180;
-            if (colony.name === ColonyName.MERCURY || colony.name === ColonyName.HYGIEA) return 145;
+            if (colony.name === ColonyName.IAPETUS || colony.name === ColonyName.LEAVITT) return 185;
+            if (colony.name === ColonyName.VENUS) return 190;
+            if (colony.name === ColonyName.MERCURY || colony.name === ColonyName.HYGIEA) return 148;
 
             let offset: number = 0;
             if (isColonyCube !== true) offset = 7;
@@ -130,7 +130,7 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getMercury()" class="resource money">2</div>
       <div v-if="colony.name === getHygiea()" class="resource money">3</div>
       <div v-if="colony.name === getTitania()" class="resource money">-3</div>
-      <div v-if="colony.name === getVenus()" class="resource" style="background:white;margin:15px 10px 10px 20px;">?<div class="card-icon card-icon-venus" style="color: white;margin-top: -36px;margin-left: 16px;">V</div></div>
+      <div v-if="colony.name === getVenus()" class="resource" style="background:white;margin:15px 10px 10px 20px;">?<div class="card-icon tag-venus" style="color: white;margin-top: -36px;margin-left: 16px;"></div></div>
 
       <span v-if="colony.name === getLeavitt()" style="display: inline-block;margin-left: 10px;font-size: 14px;">REVEAL TOP CARD OF DECK.</span>
       <span v-if="colony.name === getLeavitt()"><br></span>
@@ -165,7 +165,7 @@ export const Colony = Vue.component("colony", {
       <div v-if="colony.name === getTitania()" class="white-x" style="margin-left:42px;"></div>
       <div v-if="colony.name === getTitania()" class="points points-big" style="margin-left: 10px; margin-top: -53px; transform: scale(0.5); height: 50px; width: 50px">&nbsp;</div>
       <div v-if="colony.name === getVenus()" class="white-x" style="margin-left:45px; margin-bottom:4px;"></div>
-      <div v-if="colony.name === getVenus()" class="resource" style="background:white;margin:10px 10px 10px -20px;">?<div class="card-icon card-icon-venus" style="color: white;margin-top: -36px;margin-left: 16px;">V</div></div>
+      <div v-if="colony.name === getVenus()" class="resource" style="background:white;margin:10px 10px 10px -20px;">?<div class="card-icon tag-venus" style="color: white;margin-top: -36px;margin-left: 16px;"></div></div>
       <div v-if="colony.name === getLeavitt()" class="resource card" style="margin-left:5px;transform: scale(0.8)"></div>
       <span v-if="colony.name !== getEuropa() && colony.name !== getPluto() && colony.name !== getMercury() && colony.name !== getIapetus() && colony.name !== getHygiea() && colony.name !== getTitania() && colony.name !== getLeavitt()" class="colony-background-color">
         Trade Income
@@ -437,13 +437,13 @@ export const Colony = Vue.component("colony", {
     <div></div>
   </div>
   <div v-if="colony.name === getMercury()" class="colony-grid-container2">
-    <div><div class="production-box"><div class="production heat"></div></div></div>
-    <div><div class="production-box"><div class="production heat"></div></div></div>
-    <div><div class="production-box"><div class="production heat"></div></div></div>
-    <div><div class="production-box"><div class="production steel"></div></div></div>
-    <div><div class="production-box"><div class="production steel"></div></div></div>
-    <div><div class="production-box"><div class="production titanium"></div></div></div>
-    <div><div class="production-box"><div class="production titanium"></div></div></div>
+    <div><div class="production-box mercury-production-box"><div class="production heat"></div></div></div>
+    <div><div class="production-box mercury-production-box"><div class="production heat"></div></div></div>
+    <div><div class="production-box mercury-production-box"><div class="production heat"></div></div></div>
+    <div><div class="production-box mercury-production-box"><div class="production steel"></div></div></div>
+    <div><div class="production-box mercury-production-box"><div class="production steel"></div></div></div>
+    <div><div class="production-box mercury-production-box"><div class="production titanium"></div></div></div>
+    <div><div class="production-box mercury-production-box"><div class="production titanium"></div></div></div>
   </div>
 
   <div v-if="colony.name === getHygiea()" class="colony-grid-container">
@@ -491,9 +491,9 @@ export const Colony = Vue.component("colony", {
   </div>
 
   <div v-if="colony.name === getVenus()" class="colony-grid-container" style="margin-top:5px;">
-    <div><div class="tile venus-tile" style="transform: scale(0.8); margin-left: 0px">V</div></div>
-    <div><div class="tile venus-tile" style="transform: scale(0.8); margin-left: 0px">V</div></div>
-    <div><div class="tile venus-tile" style="transform: scale(0.8); margin-left: 0px">V</div></div>
+    <div><div class="tile venus-tile venus-colony-bonus"></div></div>
+    <div><div class="tile venus-tile venus-colony-bonus"></div></div>
+    <div><div class="tile venus-tile venus-colony-bonus"></div></div>
     <div></div>
     <div></div>
     <div></div>

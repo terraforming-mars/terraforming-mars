@@ -17,12 +17,12 @@ describe("PowerSupplyConsortium", function () {
     });
 
     it("Can't play without power tags", function () {
-        player.setProduction(Resources.ENERGY, 3);
+        player.addProduction(Resources.ENERGY, 3);
         expect(card.canPlay(player, game)).to.eq(false);
     });
 
     it("Can play - single target", function () {
-        player2.setProduction(Resources.ENERGY, 3);
+        player2.addProduction(Resources.ENERGY, 3);
         player.playedCards.push(card, card);
         expect(card.canPlay(player, game)).to.eq(true);
 
@@ -33,8 +33,8 @@ describe("PowerSupplyConsortium", function () {
     });
 
     it("Can play - multiple targets", function () {
-        player.setProduction(Resources.ENERGY);
-        player2.setProduction(Resources.ENERGY, 3);
+        player.addProduction(Resources.ENERGY);
+        player2.addProduction(Resources.ENERGY, 3);
 
         card.play(player, game);
         expect(player.getProduction(Resources.ENERGY)).to.eq(2);

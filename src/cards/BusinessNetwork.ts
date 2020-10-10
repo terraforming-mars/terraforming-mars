@@ -19,7 +19,7 @@ export class BusinessNetwork implements IActionCard, IProjectCard {
       return player.getProduction(Resources.MEGACREDITS) >= -4;
     }
     public play(player: Player) {
-      player.setProduction(Resources.MEGACREDITS,-1);
+      player.addProduction(Resources.MEGACREDITS,-1);
       return undefined;
     }
     public canAct(): boolean {

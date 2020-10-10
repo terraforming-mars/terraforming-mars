@@ -21,8 +21,8 @@ export class OceanCity implements IProjectCard {
   }
 
   public play(player: Player, game: Game) {
-    player.setProduction(Resources.ENERGY, -1);
-    player.setProduction(Resources.MEGACREDITS, 3);
+    player.addProduction(Resources.ENERGY, -1);
+    player.addProduction(Resources.MEGACREDITS, 3);
 
     return new SelectSpace(
       "Select space for Ocean City",

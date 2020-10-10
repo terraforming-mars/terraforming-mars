@@ -15,12 +15,12 @@ describe("UndergroundCity", function () {
     });
 
     it("Can't play", function () {
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         expect(card.canPlay(player,game)).to.eq(false);
     });
     
     it("Should play", function () {
-        player.setProduction(Resources.ENERGY, 2);
+        player.addProduction(Resources.ENERGY, 2);
         expect(card.canPlay(player,game)).to.eq(true);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);

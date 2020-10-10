@@ -7,6 +7,7 @@ import { ResourceType } from "../ResourceType";
 import { Resources } from '../Resources';
 
 export interface IProjectCard extends ICard {
+    addPlayCardInterrupt?: Function;
     canPlay?: (player: Player, game: Game, bonusMc?: number) => boolean;
     cardType: CardType;
     cost: number;

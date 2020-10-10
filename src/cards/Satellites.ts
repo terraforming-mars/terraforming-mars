@@ -13,7 +13,7 @@ export class Satellites implements IProjectCard {
     public name: CardName = CardName.SATELLITES;
 
     public play(player: Player) {
-        player.setProduction(Resources.MEGACREDITS, 1 + player.getTagCount(Tags.SPACE));
+        player.addProduction(Resources.MEGACREDITS, 1 + player.getTagCount(Tags.SPACE));
         return undefined;
     }
 }

@@ -30,13 +30,13 @@ export class Europa extends Colony implements IColony {
 
     private handleTrade(game: Game, player: Player, usesTradeFleet: boolean) {
         if (this.trackPosition < 2) {
-            player.setProduction(Resources.MEGACREDITS);
+            player.addProduction(Resources.MEGACREDITS);
             LogHelper.logGainProduction(game, player, Resources.MEGACREDITS);
         } else if (this.trackPosition < 4) {
-            player.setProduction(Resources.ENERGY);
+            player.addProduction(Resources.ENERGY);
             LogHelper.logGainProduction(game, player, Resources.ENERGY);
         } else {
-            player.setProduction(Resources.PLANTS);
+            player.addProduction(Resources.PLANTS);
             LogHelper.logGainProduction(game, player, Resources.PLANTS);
         }
         if (usesTradeFleet) this.afterTrade(this, player, game);

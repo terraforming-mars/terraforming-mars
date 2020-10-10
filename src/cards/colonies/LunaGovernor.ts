@@ -16,7 +16,7 @@ export class LunaGovernor implements IProjectCard {
     }
 
     public play(player: Player) {
-      player.setProduction(Resources.MEGACREDITS, 2);  
+      player.addProduction(Resources.MEGACREDITS, 2);  
       return undefined;
     }
 }

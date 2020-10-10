@@ -15,12 +15,12 @@ export class MiningGuild implements CorporationCard {
         if (
             player.isCorporation(this.name)
             && (space.bonus.indexOf(SpaceBonus.STEEL) !== -1 || space.bonus.indexOf(SpaceBonus.TITANIUM) !== -1)) {
-            player.setProduction(Resources.STEEL);
+            player.addProduction(Resources.STEEL);
         }
     }
     public play(player: Player) {
         player.steel = 5;
-        player.setProduction(Resources.STEEL);
+        player.addProduction(Resources.STEEL);
         return undefined;
     }
 }

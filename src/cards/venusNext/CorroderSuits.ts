@@ -17,7 +17,7 @@ export class CorroderSuits implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player, game: Game) {
-        player.setProduction(Resources.MEGACREDITS,2);
+        player.addProduction(Resources.MEGACREDITS,2);
         const cards = this.getResCards(player);
 
         if (cards.length === 0) return undefined;

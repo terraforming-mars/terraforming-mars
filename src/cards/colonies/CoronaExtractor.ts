@@ -16,7 +16,7 @@ export class CoronaExtractor implements IProjectCard {
     }
 
     public play(player: Player) {
-      player.setProduction(Resources.ENERGY, 4);  
+      player.addProduction(Resources.ENERGY, 4);  
       return undefined;
     }
 }

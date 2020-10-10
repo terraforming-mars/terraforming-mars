@@ -17,8 +17,8 @@ export class SnowAlgae implements IProjectCard {
     }
 
     public play(player: Player) {
-        player.setProduction(Resources.PLANTS);
-        player.setProduction(Resources.HEAT);
+        player.addProduction(Resources.PLANTS);
+        player.addProduction(Resources.HEAT);
         return undefined;
     }
 

@@ -16,7 +16,7 @@ export class Algae implements IProjectCard {
     }
     public play(player: Player) {
       player.plants++;
-      player.setProduction(Resources.PLANTS,2);
+      player.addProduction(Resources.PLANTS,2);
       return undefined;
     }
 }

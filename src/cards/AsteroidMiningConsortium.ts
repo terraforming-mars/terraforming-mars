@@ -17,7 +17,7 @@ export class AsteroidMiningConsortium implements IProjectCard {
     }
     public play(player: Player, game: Game) {
       game.addResourceProductionDecreaseInterrupt(player, Resources.TITANIUM, 1);
-      player.setProduction(Resources.TITANIUM);
+      player.addProduction(Resources.TITANIUM);
       return undefined;
     }
     public getVictoryPoints() {

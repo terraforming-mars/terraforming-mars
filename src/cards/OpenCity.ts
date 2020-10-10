@@ -20,8 +20,8 @@ export class OpenCity implements IProjectCard {
     public play(player: Player, game: Game) {
         return new SelectSpace("Select space for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
             game.addCityTile(player, space.id);
-            player.setProduction(Resources.ENERGY,-1);
-            player.setProduction(Resources.MEGACREDITS,4);
+            player.addProduction(Resources.ENERGY,-1);
+            player.addProduction(Resources.MEGACREDITS,4);
             player.plants += 2;
             return undefined;
         });

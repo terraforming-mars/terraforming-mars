@@ -15,13 +15,17 @@ import { ALL_PRELUDE_PROJECTS_CARDS,
     ALL_TURMOIL_CORPORATIONS,
     ALL_PROMO_CORPORATIONS,
     ALL_COMMUNITY_CORPORATIONS,
+    ALL_COMMUNITY_PRELUDE_CARDS,
+    ALL_COMMUNITY_VENUS_PRELUDE_CARDS,
+    ALL_COMMUNITY_COLONY_PRELUDE_CARDS,
+    ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS,
     ALL_PRELUDE_CARDS,
     ALL_ARES_PROJECT_CARDS } from '../Dealer';
 import { CardName } from "../CardName";
 
 export const DebugUI = Vue.component("debug-ui", {
     components: {
-        Card,
+        Card
     },
     data: function() {
         return {
@@ -58,6 +62,10 @@ export const DebugUI = Vue.component("debug-ui", {
         getAllPreludeCards: function () {
             const allItems: Array<CardName> = [
                 ...ALL_PRELUDE_CARDS.map((cf) => cf.cardName),
+                ...ALL_COMMUNITY_PRELUDE_CARDS.map((cf) => cf.cardName),
+                ...ALL_COMMUNITY_VENUS_PRELUDE_CARDS.map((cf) => cf.cardName),
+                ...ALL_COMMUNITY_COLONY_PRELUDE_CARDS.map((cf) => cf.cardName),
+                ...ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS.map((cf) => cf.cardName),
             ].sort();
             return allItems;
         },
@@ -67,25 +75,26 @@ export const DebugUI = Vue.component("debug-ui", {
     },
     template: `
         <div class="debug-ui-container">
-            Filter: <input v-model="filterText">
+            <input class="form-input form-input-line" placeholder="filter" v-model="filterText">
+            <div class="cardbox"" v-for="card in getAllProjectCards()"></div>
             <section class="debug-ui-cards-list">
                 <h2>Project Cards</h2>
-                <div style="display: inline-block; vertical-align: top;" v-show="filtered(card)" v-for="card in getAllProjectCards()">
-                    <Card :card="{'name': card}" />
+                <div class="cardbox"" v-for="card in getAllProjectCards()">
+                    <Card v-show="filtered(card)" :card="{'name': card}" />
                 </div>
             </section>
             <br>
             <section class="debug-ui-cards-list">
                 <h2>Corporations</h2>
-                <div style="display: inline-block; vertical-align: top;" v-show="filtered(card)" v-for="card in getAllCorporationCards()">
-                    <Card :card="{'name': card}" />
+                <div class="cardbox"" v-for="card in getAllCorporationCards()">
+                    <Card v-show="filtered(card)" :card="{'name': card}" />
                 </div>
             </section>
             <br>
             <section class="debug-ui-cards-list">
                 <h2>Preludes</h2>
-                <div style="display: inline-block; vertical-align: top;" v-show="filtered(card)" v-for="card in getAllPreludeCards()">
-                    <Card :card="{'name': card}" />
+                <div class="cardbox"" v-for="card in getAllPreludeCards()">
+                    <Card v-show="filtered(card)" :card="{'name': card}" />
                 </div>
             </section>
         </div>

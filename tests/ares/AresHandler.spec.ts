@@ -134,7 +134,7 @@ describe("AresHandler", function () {
         AresHandler.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
 
         // No resources available to play the tile.
-        player.setProduction(Resources.MEGACREDITS, -5);
+        player.addProduction(Resources.MEGACREDITS, -5);
 
         const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
         try {
@@ -144,7 +144,7 @@ describe("AresHandler", function () {
             expect(err.toString()).includes("Placing here costs 1 units of production");
         }
 
-        player.setProduction(Resources.PLANTS, 7);
+        player.addProduction(Resources.PLANTS, 7);
         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
         expect(game.interrupts).has.lengthOf(1);
         expect(game.interrupts[0]).instanceOf(SelectProductionToLoseInterrupt);
@@ -161,7 +161,7 @@ describe("AresHandler", function () {
         AresHandler.putHazardAt(firstSpace, TileType.DUST_STORM_SEVERE); 
 
         // No resources available to play the tile.
-        player.setProduction(Resources.MEGACREDITS, -5);
+        player.addProduction(Resources.MEGACREDITS, -5);
 
         const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
         try {
@@ -170,7 +170,7 @@ describe("AresHandler", function () {
             expect(err.toString()).includes("Placing here costs 2 units of production");
         }
 
-        player.setProduction(Resources.PLANTS, 7);
+        player.addProduction(Resources.PLANTS, 7);
         game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
         expect(game.interrupts).has.lengthOf(1);
         expect(game.interrupts[0]).instanceOf(SelectProductionToLoseInterrupt);

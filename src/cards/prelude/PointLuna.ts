@@ -20,7 +20,7 @@ export class PointLuna implements CorporationCard {
         }
     }
     public play(player: Player, game: Game) {
-        player.setProduction(Resources.TITANIUM);
+        player.addProduction(Resources.TITANIUM);
 		player.cardsInHand.push(game.dealer.dealCard());
         return undefined;
     }

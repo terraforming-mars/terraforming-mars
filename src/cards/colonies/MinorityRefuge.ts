@@ -20,7 +20,7 @@ export class MinorityRefuge implements IProjectCard {
 
     public play(player: Player, game: Game) {
       game.addColonyInterrupt(player, false, "Select colony for Minority Refuge");
-      player.setProduction(Resources.MEGACREDITS, -2); 
+      player.addProduction(Resources.MEGACREDITS, -2); 
       return undefined;
     }
 }

@@ -13,6 +13,7 @@ import { SerializedDealer } from "./SerializedDealer";
 import { CardManifest } from "./cards/CardManifest";
 import { ICardFactory } from "./cards/ICardFactory";
 import { Deck } from "./Deck";
+import { Expansion } from "./Expansion";
 
 export const decks: Array<CardManifest> = [
     BASE_CARD_MANIFEST,
@@ -63,6 +64,7 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
             useColoniesNextExtension : boolean,
             usePromoCards: boolean,
             useTurmoilExtension: boolean,
+            useCommunityCards: boolean = false,
             cardsBlackList?: Array<CardName>
         ) {
         this.useCorporateEra = useCorporateEra;
@@ -77,8 +79,26 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         const projectCardsToRemove:Array<String> = [];
         const corporationCards: Array<CorporationCard> = [];
 
+        function include(cf: ICardFactory<any>) : boolean {
+            const expansion = cf.compatibility;
+            switch(expansion) {
+                case undefined:
+                    return true;
+                case Expansion.Venus:
+                    return useVenusNextExtension;
+                case Expansion.Colonies:
+                    return useColoniesNextExtension;
+                case Expansion.Turmoil:
+                    return useTurmoilExtension;
+                default:
+                    throw("Unhandled expansion type: " + expansion);                    
+            }
+        }
         function addToDeck<T>(deck: Array<T>, cards: Deck<T>): void {
-            deck.push(...cards.cards.map((cf) => new cf.factory()));                   
+            const cardInstances = cards.cards
+                .filter(cf => include(cf))
+                .map(cf => new cf.factory());
+            deck.push(...cardInstances);
         }
         function addToDecks(manifest: CardManifest) {
             addToDeck(deck, manifest.projectCards);
@@ -104,6 +124,9 @@ export class Dealer implements ILoadable<SerializedDealer, Dealer>{
         }
         if (this.usePromoCards) {
             addToDecks(PROMO_CARD_MANIFEST);
+        }
+        if (useCommunityCards) {
+            addToDecks(COMMUNITY_CARD_MANIFEST);
         }
         if (cardsBlackList) {
             projectCardsToRemove.push(...cardsBlackList);

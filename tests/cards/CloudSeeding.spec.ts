@@ -19,13 +19,13 @@ describe("CloudSeeding", function () {
 
     it("Can't play if cannot reduce MC production", function () { 
         maxOutOceans(player, game, 3);
-        player.setProduction(Resources.MEGACREDITS, -5);
+        player.addProduction(Resources.MEGACREDITS, -5);
         expect(card.canPlay(player, game)).to.eq(false);
     });
 
     it("Can't play if ocean requirements not met", function () { 
         maxOutOceans(player, game, 2);
-        player.setProduction(Resources.HEAT);
+        player.addProduction(Resources.HEAT);
         expect(card.canPlay(player, game)).to.eq(false);
     });
 
@@ -36,7 +36,7 @@ describe("CloudSeeding", function () {
 
     it("Should play - auto select if single target", function () {
         // Meet requirements
-        player2.setProduction(Resources.HEAT);
+        player2.addProduction(Resources.HEAT);
         maxOutOceans(player, game, 3);
         expect(card.canPlay(player, game)).to.eq(true);
         
@@ -49,8 +49,8 @@ describe("CloudSeeding", function () {
     });
 
     it("Should play - multiple targets", function () {
-        player.setProduction(Resources.HEAT);
-        player2.setProduction(Resources.HEAT);
+        player.addProduction(Resources.HEAT);
+        player2.addProduction(Resources.HEAT);
         
         card.play(player, game);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);

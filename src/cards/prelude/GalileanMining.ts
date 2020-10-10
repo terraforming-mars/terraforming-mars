@@ -14,7 +14,7 @@ export class GalileanMining extends PreludeCard implements IProjectCard {
         return requiredPayment <= 0 ? true : player.canAfford(requiredPayment);
     }
     public play(player: Player) {
-        player.setProduction(Resources.TITANIUM,2);
+        player.addProduction(Resources.TITANIUM,2);
         player.megaCredits -= 5;
         return undefined;
     }

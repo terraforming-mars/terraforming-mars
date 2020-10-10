@@ -26,7 +26,7 @@ export class TharsisRepublic implements CorporationCard {
                 player.megaCredits += 3;
             }
             if (space.spaceType !== SpaceType.COLONY) {
-                if (player.shouldTriggerCardEffect) player.setProduction(Resources.MEGACREDITS);
+                if (player.shouldTriggerCardEffect) player.addProduction(Resources.MEGACREDITS);
                 player.shouldTriggerCardEffect = true; // reset value
             }
         }
@@ -34,7 +34,7 @@ export class TharsisRepublic implements CorporationCard {
     public play(player: Player, game: Game) {
         if (game.getPlayers().length == 1) {
             // Get bonus for 2 neutral cities
-            player.setProduction(Resources.MEGACREDITS,2);
+            player.addProduction(Resources.MEGACREDITS,2);
         }
         return undefined;
     }

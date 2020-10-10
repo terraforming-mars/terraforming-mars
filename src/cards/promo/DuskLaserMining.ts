@@ -16,8 +16,8 @@ export class DuskLaserMining implements IProjectCard {
     }
 
     public play(player: Player) {
-        player.setProduction(Resources.ENERGY, -1);
-        player.setProduction(Resources.TITANIUM);
+        player.addProduction(Resources.ENERGY, -1);
+        player.addProduction(Resources.TITANIUM);
         player.titanium += 4;
         return undefined;
     }

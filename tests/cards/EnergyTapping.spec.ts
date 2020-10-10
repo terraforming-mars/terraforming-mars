@@ -21,7 +21,7 @@ describe("EnergyTapping", function () {
     });
 
     it("Should play - auto select if single target", function () {
-        player2.setProduction(Resources.ENERGY, 3);
+        player2.addProduction(Resources.ENERGY, 3);
         expect(card.canPlay(player, game)).to.eq(true);
 
         card.play(player, game);
@@ -31,8 +31,8 @@ describe("EnergyTapping", function () {
     });
 
     it("Should play - multiple targets", function () {
-        player.setProduction(Resources.ENERGY, 3);
-        player2.setProduction(Resources.ENERGY, 3);
+        player.addProduction(Resources.ENERGY, 3);
+        player2.addProduction(Resources.ENERGY, 3);
         expect(card.canPlay(player, game)).to.eq(true);
 
         card.play(player, game);

@@ -11,7 +11,7 @@ export class Helion implements CorporationCard {
     public startingMegaCredits: number = 42;
     public play(player: Player) {
         player.canUseHeatAsMegaCredits = true;
-        player.setProduction(Resources.HEAT,3);
+        player.addProduction(Resources.HEAT,3);
         return undefined;
     }
 }

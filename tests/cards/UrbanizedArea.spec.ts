@@ -26,7 +26,7 @@ describe("UrbanizedArea", function () {
 
     it("Can't play without available space between two cities", function () {
         game.addCityTile(player, lands[0].id);
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         expect(card.canPlay(player, game)).to.eq(false);
     });
 
@@ -34,7 +34,7 @@ describe("UrbanizedArea", function () {
         game.addCityTile(player, lands[0].id);
         game.addCityTile(player, lands[1].id);
 
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         expect(card.canPlay(player, game)).to.eq(true);
 
         const action = card.play(player, game);

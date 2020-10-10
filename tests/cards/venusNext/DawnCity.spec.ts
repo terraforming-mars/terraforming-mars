@@ -13,7 +13,7 @@ describe("DawnCity", function () {
 
         const gameOptions = setCustomGameOptions() as GameOptions;
         const game = new Game("foobar", [player,player], player, gameOptions);
-        player.setProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY);
         expect(card.canPlay(player)).to.eq(false);
         
         const action = card.play(player,game);

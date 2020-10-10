@@ -19,7 +19,7 @@ describe("Generalist", function () {
 
   it("Can claim with +1 of each production in game with corp era", function () {
     const game = new Game("foobar", [player, player2], player);
-    resources.forEach((resource) => player.setProduction(resource));
+    resources.forEach((resource) => player.addProduction(resource));
 
     expect(milestone.canClaim(player, game)).to.eq(true);
   });
@@ -35,7 +35,7 @@ describe("Generalist", function () {
   it("Can claim with +2 of each production in game without corp era", function () {
     const gameOptions = setCustomGameOptions({corporateEra: false}) as GameOptions;
     const game = new Game("foobar", [player, player2], player, gameOptions);
-    resources.forEach((resource) => player.setProduction(resource));
+    resources.forEach((resource) => player.addProduction(resource));
     
     resources.forEach((resource) => expect(player.getProduction(resource)).to.eq(2));
     expect(milestone.canClaim(player, game)).to.eq(true);

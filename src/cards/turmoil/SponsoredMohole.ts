@@ -22,7 +22,7 @@ export class SponsoredMohole implements IProjectCard {
     }
 
     public play(player: Player) {
-        player.setProduction(Resources.HEAT,2);
+        player.addProduction(Resources.HEAT,2);
         return undefined;
     }
 }

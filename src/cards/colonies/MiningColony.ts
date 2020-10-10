@@ -14,7 +14,7 @@ export class MiningColony implements IProjectCard {
 
     public play(player: Player, game: Game) {
       game.addColonyInterrupt(player, false, "Select colony for Mining Colony");
-      player.setProduction(Resources.TITANIUM); 
+      player.addProduction(Resources.TITANIUM); 
       return undefined;
     }
 }

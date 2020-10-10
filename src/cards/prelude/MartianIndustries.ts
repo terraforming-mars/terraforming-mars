@@ -11,8 +11,8 @@ export class MartianIndustries extends PreludeCard implements IProjectCard {
     public bonusMc: number = 6;
 
     public play(player: Player) {
-        player.setProduction(Resources.ENERGY);
-        player.setProduction(Resources.STEEL);
+        player.addProduction(Resources.ENERGY);
+        player.addProduction(Resources.STEEL);
         player.megaCredits += this.bonusMc;
         return undefined;
     }

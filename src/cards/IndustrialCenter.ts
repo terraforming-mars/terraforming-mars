@@ -35,7 +35,7 @@ export class IndustrialCenter implements IActionCard, IProjectCard {
     }
     public action(player: Player, game: Game) {
         game.addSelectHowToPayInterrupt(player, 7, false, false, "Select how to pay for action");
-        player.setProduction(Resources.STEEL);
+        player.addProduction(Resources.STEEL);
         return undefined;
     }
 }

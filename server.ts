@@ -12,6 +12,7 @@ import { CardModel } from "./src/models/CardModel";
 import { ColonyModel } from "./src/models/ColonyModel";
 import { Color } from "./src/Color";
 import { Game, GameOptions } from "./src/Game";
+import { GameLoader } from "./src/database/GameLoader";
 import { GameLogs } from "./src/routes/GameLogs";
 import { Route } from "./src/routes/Route";
 import { ICard } from "./src/cards/ICard";
@@ -50,11 +51,10 @@ import { SelectColony } from "./src/inputs/SelectColony";
 
 const serverId = generateRandomServerId();
 const styles = fs.readFileSync("styles.css");
-const games: Map<string, Game> = new Map<string, Game>();
-const playersToGame: Map<string, Game> = new Map<string, Game>();
 const appVersion = generateAppVersion();
+const gameLoader = new GameLoader();
 const route = new Route();
-const gameLogs = new GameLogs(playersToGame);
+const gameLogs = new GameLogs(gameLoader);
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
     if (req.url !== undefined) {
@@ -118,17 +118,23 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
             const playerId: string = req.url.substring(
                 "/player/input?id=".length
             );
-            const game = playersToGame.get(playerId);
-            if (game === undefined) {
-                route.notFound(req, res);
-                return;
-            }
-            const player = game.getPlayers().find((p) => p.id === playerId);
-            if (player === undefined) {
-                route.notFound(req, res);
-                return;
-            }
-            processInput(req, res, player, game);
+            gameLoader.getGameByPlayerId(playerId, (game) => {
+                if (game === undefined) {
+                    route.notFound(req, res);
+                    return;
+                }
+                let player: Player | undefined;
+                try {
+                    player = game.getPlayerById(playerId);
+                } catch (err) {
+                    console.warn(`unable to find player ${playerId}`, err);
+                }
+                if (player === undefined) {
+                    route.notFound(req, res);
+                    return;
+                }
+                processInput(req, res, player, game);
+            });
         } else {
             route.notFound(req, res);
         }
@@ -246,20 +252,8 @@ function apiGetGames(
         route.notAuthorized(req, res);
         return;
     }
-
-    if (games === undefined) {
-        route.notFound(req, res);
-        return;
-    }
-
-    const answer: Array<string> = [];
-
-    for (let key of Array.from(games.keys())) {
-        answer.push(key);
-    }
-
     res.setHeader("Content-Type", "application/json");
-    res.write(JSON.stringify(answer));
+    res.write(JSON.stringify(gameLoader.getLoadedGameIds()));
     res.end();
 }
 
@@ -284,10 +278,7 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                     if (err) {
                         return;
                     }
-                    games.set(gameToRebuild.id, gameToRebuild);
-                    gameToRebuild.getPlayers().forEach((player) => {
-                        playersToGame.set(player.id, gameToRebuild);
-                    });
+                    gameLoader.addGame(gameToRebuild);
                 }
             );
             res.setHeader("Content-Type", "application/json");
@@ -296,34 +287,6 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         } catch (error) {
             route.internalServerError(req, res, error);
         }
-    });
-}
-
-function loadAllGames(): void {
-    Database.getInstance().getGames(function (err, allGames) {
-        if (err) {
-            return;
-        }
-        allGames.forEach((game_id) => {
-            const player = new Player("test", Color.BLUE, false, 0);
-            const player2 = new Player("test2", Color.RED, false, 0);
-            let gameToRebuild = new Game(game_id, [player, player2], player);
-            Database.getInstance().restoreGameLastSave(
-                game_id,
-                gameToRebuild,
-                function (err) {
-                    if (err) {
-                        console.error("unable to load game " + game_id, err);
-                        return;
-                    }
-                    console.log("load game " + game_id);
-                    games.set(gameToRebuild.id, gameToRebuild);
-                    gameToRebuild.getPlayers().forEach((player) => {
-                        playersToGame.set(player.id, gameToRebuild);
-                    });
-                }
-            );
-        });
     });
 }
 
@@ -352,17 +315,18 @@ function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
 
     const gameId: string = matches[1];
 
-    const game = games.get(gameId);
+    gameLoader.getGameByGameId(gameId, (game: Game | undefined) => {
 
-    if (game === undefined) {
-        console.warn("game is undefined");
-        route.notFound(req, res);
-        return;
-    }
+        if (game === undefined) {
+            console.warn("game is undefined");
+            route.notFound(req, res);
+            return;
+        }
 
-    res.setHeader("Content-Type", "application/json");
-    res.write(getGame(game));
-    res.end();
+        res.setHeader("Content-Type", "application/json");
+        res.write(getGame(game));
+        res.end();
+    });
 }
 
 function apiGetWaitingFor(
@@ -373,29 +337,35 @@ function apiGetWaitingFor(
     let queryParams = querystring.parse(qs);
     const playerId = (queryParams as any)["id"];
     const prevGameAge = parseInt((queryParams as any)["prev-game-age"]);
-    const game = playersToGame.get(playerId);
-    if (game === undefined) {
-        route.notFound(req, res);
-        return;
-    }
-    const player = game.getPlayers().find((player) => player.id === playerId);
-    if (player === undefined) {
-        route.notFound(req, res);
-        return;
-    }
+    gameLoader.getGameByPlayerId(playerId, (game) => {
+        if (game === undefined) {
+            route.notFound(req, res);
+            return;
+        }
+        let player: Player | undefined;
+        try {
+            player = game.getPlayerById(playerId);
+        } catch (err) {
+            console.warn(`unable to find player ${playerId}`, err);
+        }
+        if (player === undefined) {
+            route.notFound(req, res);
+            return;
+        }
 
-    res.setHeader("Content-Type", "application/json");
-    const answer = {
-        "result": "WAIT",
-        "player": game.getPlayerById(game.activePlayer).name,
-    };
-    if (player.getWaitingFor() !== undefined || game.phase === Phase.END) {
-        answer["result"] = "GO";
-    } else if (game.gameAge > prevGameAge) {
-        answer["result"] = "REFRESH";
-    }
-    res.write(JSON.stringify(answer));
-    res.end();
+        res.setHeader("Content-Type", "application/json");
+        const answer = {
+            "result": "WAIT",
+            "player": game.getPlayerById(game.activePlayer).name,
+        };
+        if (player.getWaitingFor() !== undefined || game.phase === Phase.END) {
+            answer["result"] = "GO";
+        } else if (game.gameAge > prevGameAge) {
+            answer["result"] = "REFRESH";
+        }
+        res.write(JSON.stringify(answer));
+        res.end();
+    });
 }
 
 function apiGetPlayer(
@@ -411,20 +381,25 @@ function apiGetPlayer(
     if (playerId === undefined) {
         playerId = "";
     }
-    const game = playersToGame.get(playerId);
-    if (game === undefined) {
-        route.notFound(req, res);
-        return;
-    }
-    const player = game.getPlayers().find((player) => player.id === playerId);
-    if (player === undefined) {
-        route.notFound(req, res);
-        return;
-    }
-
-    res.setHeader("Content-Type", "application/json");
-    res.write(getPlayer(player, game));
-    res.end();
+    gameLoader.getGameByPlayerId(playerId as string, (game) => {
+        if (game === undefined) {
+            route.notFound(req, res);
+            return;
+        }
+        let player: Player | undefined;
+        try {
+            player = game.getPlayerById(playerId as string);
+        } catch (err) {
+            console.warn(`unable to find player ${playerId}`, err);
+        }
+        if (player === undefined) {
+            route.notFound(req, res);
+            return;
+        }
+        res.setHeader("Content-Type", "application/json");
+        res.write(getPlayer(player, game));
+        res.end();
+    });
 }
 
 function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -453,38 +428,38 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
             }
 
             const gameOptions = {
-                draftVariant: gameReq.draftVariant,
-                corporateEra: gameReq.corporateEra,
-                preludeExtension: gameReq.prelude,
-                venusNextExtension: gameReq.venusNext,
-                coloniesExtension: gameReq.colonies,
-                turmoilExtension: gameReq.turmoil,
                 boardName: gameReq.board,
-                showOtherPlayersVP: gameReq.showOtherPlayersVP,
-                customCorporationsList: gameReq.customCorporationsList,
-                customColoniesList: gameReq.customColoniesList,
-                cardsBlackList: gameReq.cardsBlackList,
-                solarPhaseOption: gameReq.solarPhaseOption,
-                promoCardsOption: gameReq.promoCardsOption,
-                communityCardsOption: gameReq.communityCardsOption,
+                clonedGamedId: gameReq.clonedGamedId,
+
                 undoOption: gameReq.undoOption,
                 fastModeOption: gameReq.fastModeOption,
+                showOtherPlayersVP: gameReq.showOtherPlayersVP,
+
+                corporateEra: gameReq.corporateEra,
+                venusNextExtension: gameReq.venusNext,
+                coloniesExtension: gameReq.colonies,
+                preludeExtension: gameReq.prelude,
+                turmoilExtension: gameReq.turmoil,
+                promoCardsOption: gameReq.promoCardsOption,
+                communityCardsOption: gameReq.communityCardsOption,
+                solarPhaseOption: gameReq.solarPhaseOption,
                 removeNegativeGlobalEventsOption:
                     gameReq.removeNegativeGlobalEventsOption,
-                startingCorporations: gameReq.startingCorporations,
                 includeVenusMA: gameReq.includeVenusMA,
-                soloTR: gameReq.soloTR,
-                clonedGamedId: gameReq.clonedGamedId,
+                
+                draftVariant: gameReq.draftVariant,
                 initialDraftVariant: gameReq.initialDraft,
-                randomMA: gameReq.randomMA,
+                startingCorporations: gameReq.startingCorporations,
                 shuffleMapOption: gameReq.shuffleMapOption,
+                randomMA: gameReq.randomMA,
+                soloTR: gameReq.soloTR,
+                customCorporationsList: gameReq.customCorporationsList,
+                cardsBlackList: gameReq.cardsBlackList,
+                customColoniesList: gameReq.customColoniesList,
             } as GameOptions;
 
             const game = new Game(gameId, players, firstPlayer, gameOptions);
-            games.set(gameId, game);
-            game.getPlayers().forEach((player) => {
-                playersToGame.set(player.id, game);
-            });
+            gameLoader.addGame(game);
             res.setHeader("Content-Type", "application/json");
             res.write(getGame(game));
             res.end();
@@ -1073,7 +1048,7 @@ function serveResource(res: http.ServerResponse, s: Buffer): void {
     res.end();
 }
 
-loadAllGames();
+gameLoader.start();
 
 console.log("Starting server on port " + (process.env.PORT || 8080));
 console.log("version 0.X");

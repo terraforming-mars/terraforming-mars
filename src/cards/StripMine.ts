@@ -27,9 +27,9 @@ export class StripMine implements IProjectCard {
         return hasEnergyProduction;
     }
     public play(player: Player, game: Game) {
-        player.setProduction(Resources.ENERGY,-2);
-        player.setProduction(Resources.STEEL,2);
-        player.setProduction(Resources.TITANIUM);
+        player.addProduction(Resources.ENERGY,-2);
+        player.addProduction(Resources.STEEL,2);
+        player.addProduction(Resources.TITANIUM);
         return game.increaseOxygenLevel(player, 2);
     }
 }

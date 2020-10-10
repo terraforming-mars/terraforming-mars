@@ -15,7 +15,7 @@ export class SpaceHotels implements IProjectCard {
        return player.getTagCount(Tags.EARTH) >= 2; 
     }
     public play(player: Player) {
-        player.setProduction(Resources.MEGACREDITS,4);
+        player.addProduction(Resources.MEGACREDITS,4);
         return undefined;
     }
 }

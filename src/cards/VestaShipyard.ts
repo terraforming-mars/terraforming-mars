@@ -16,7 +16,7 @@ export class VestaShipyard implements IProjectCard {
         return 1;
     }
     public play(player: Player, _game: Game): undefined {
-        player.setProduction(Resources.TITANIUM);
+        player.addProduction(Resources.TITANIUM);
         return undefined;
     }
 }

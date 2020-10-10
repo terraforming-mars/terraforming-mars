@@ -11,7 +11,7 @@ describe("Insulation", function () {
         const card = new Insulation();
         const player = new Player("test", Color.BLUE, false);
         const game = new Game("foobar", [player,player], player);
-        player.setProduction(Resources.HEAT);
+        player.addProduction(Resources.HEAT);
         const action = card.play(player, game);
         expect(action).not.to.eq(undefined);
         if (action === undefined) return;

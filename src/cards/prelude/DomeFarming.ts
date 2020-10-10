@@ -9,8 +9,8 @@ export class DomeFarming extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.PLANT, Tags.STEEL];
     public name: CardName = CardName.DOME_FARMING;
     public play(player: Player) {     
-        player.setProduction(Resources.PLANTS);
-        player.setProduction(Resources.MEGACREDITS,2);
+        player.addProduction(Resources.PLANTS);
+        player.addProduction(Resources.MEGACREDITS,2);
         return undefined;
     }
 }

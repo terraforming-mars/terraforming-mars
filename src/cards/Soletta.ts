@@ -14,7 +14,7 @@ export class Soletta implements IProjectCard {
     public name: CardName = CardName.SOLETTA;
 
     public play(player: Player, _game: Game) {
-        player.setProduction(Resources.HEAT,7);
+        player.addProduction(Resources.HEAT,7);
         return undefined;
     }
 }

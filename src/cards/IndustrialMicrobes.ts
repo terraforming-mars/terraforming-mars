@@ -14,8 +14,8 @@ export class IndustrialMicrobes implements IProjectCard {
     public name: CardName = CardName.INDUSTRIAL_MICROBES;
 
     public play(player: Player, _game: Game) {
-        player.setProduction(Resources.ENERGY);
-        player.setProduction(Resources.STEEL);
+        player.addProduction(Resources.ENERGY);
+        player.addProduction(Resources.STEEL);
         return undefined;
     }
 }

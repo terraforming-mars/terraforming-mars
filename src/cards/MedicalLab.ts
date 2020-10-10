@@ -13,7 +13,7 @@ export class MedicalLab implements IProjectCard {
     public name: CardName = CardName.MEDICAL_LAB;
 
     public play(player: Player) {
-        player.setProduction(Resources.MEGACREDITS, Math.floor((player.getTagCount(Tags.STEEL) + 1) / 2));
+        player.addProduction(Resources.MEGACREDITS, Math.floor((player.getTagCount(Tags.STEEL) + 1) / 2));
         return undefined;
     }
     public getVictoryPoints() {

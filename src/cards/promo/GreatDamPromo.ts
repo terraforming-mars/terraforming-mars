@@ -21,7 +21,7 @@ export class GreatDamPromo implements IProjectCard {
         return meetsOceanRequirements && canPlaceTile;
     }
     public play(player: Player, game: Game) {
-        player.setProduction(Resources.ENERGY,2);
+        player.addProduction(Resources.ENERGY,2);
 
         const availableSpaces = this.getAvailableSpaces(player, game);
         if (availableSpaces.length < 1) return undefined;

@@ -13,7 +13,7 @@ export class GeothermalPower implements IProjectCard {
     public name: CardName = CardName.GEOTHERMAL_POWER;
 
     public play(player: Player) {
-        player.setProduction(Resources.ENERGY,2);
+        player.addProduction(Resources.ENERGY,2);
         return undefined;
     }
 }

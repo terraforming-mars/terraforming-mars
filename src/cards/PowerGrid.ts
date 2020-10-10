@@ -13,7 +13,7 @@ export class PowerGrid implements IProjectCard {
     public cardType: CardType = CardType.AUTOMATED;
 
     public play(player: Player) {
-        player.setProduction(Resources.ENERGY,1 + player.getTagCount(Tags.ENERGY));
+        player.addProduction(Resources.ENERGY,1 + player.getTagCount(Tags.ENERGY));
         return undefined;
     }
 }

@@ -11,7 +11,7 @@ export class AlliedBanks extends PreludeCard implements IProjectCard {
     public bonusMc: number = 3;
 
     public play(player: Player) {
-        player.setProduction(Resources.MEGACREDITS,4);
+        player.addProduction(Resources.MEGACREDITS,4);
 	    player.megaCredits += this.bonusMc; 
 	    return undefined;   
     }

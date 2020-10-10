@@ -26,7 +26,7 @@ export class GHGImportFromVenus implements IProjectCard {
     }
 
     public play(player: Player, game: Game) {
-        player.setProduction(Resources.HEAT,3);
+        player.addProduction(Resources.HEAT,3);
         game.increaseVenusScaleLevel(player,1);
         return undefined;
     }

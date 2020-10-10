@@ -29,7 +29,7 @@ export class OrbitalReflectors  implements IProjectCard {
 
     public play(player: Player, game: Game) {
         game.increaseVenusScaleLevel(player,2);
-        player.setProduction(Resources.HEAT, 2);
+        player.addProduction(Resources.HEAT, 2);
         return undefined;
     }
 }

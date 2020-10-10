@@ -11,7 +11,7 @@ export class Manutech implements CorporationCard {
     public startingMegaCredits: number = 35;
 
     public play(player: Player) {
-        player.setProduction(Resources.STEEL);
+        player.addProduction(Resources.STEEL);
         return undefined;
     }
 }

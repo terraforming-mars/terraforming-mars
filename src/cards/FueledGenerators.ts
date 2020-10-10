@@ -16,8 +16,8 @@ export class FueledGenerators implements IProjectCard {
     return player.getProduction(Resources.MEGACREDITS) >= -4;
   }
   public play(player: Player) {
-    player.setProduction(Resources.MEGACREDITS,-1);
-    player.setProduction(Resources.ENERGY);
+    player.addProduction(Resources.MEGACREDITS,-1);
+    player.addProduction(Resources.ENERGY);
     return undefined;
   }
 }

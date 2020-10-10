@@ -34,8 +34,8 @@ export class LavaTubeSettlement implements IProjectCard {
             this.getSpacesForCity(player, game), 
             (space: ISpace) => {
                 game.addCityTile(player, space.id);
-                player.setProduction(Resources.MEGACREDITS,2);
-                player.setProduction(Resources.ENERGY,-1);
+                player.addProduction(Resources.MEGACREDITS,2);
+                player.addProduction(Resources.ENERGY,-1);
                 return undefined;
             }
         );

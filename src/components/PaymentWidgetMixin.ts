@@ -1,4 +1,5 @@
 // Common code for SelectHowToPay and SelectHowToPayForCard
+import { CardName } from "../CardName";
 
 export const PaymentWidgetMixin = {
     "methods": {
@@ -55,7 +56,12 @@ export const PaymentWidgetMixin = {
             }
             
             if (target === "microbes") maxValue = (this as any).playerinput.microbes;
-            if (target === "floaters") maxValue = (this as any).playerinput.floaters;
+            if (target === "floaters") {
+                maxValue = (this as any).playerinput.floaters;
+                if ((this as any).$data.card.name === CardName.STRATOSPHERIC_BIRDS) {
+                    maxValue--;
+                }
+            }
             if (currentValue === maxValue) return;
 
             const realTo = (currentValue + to <= maxValue) ? to : maxValue - currentValue;
@@ -90,7 +96,12 @@ export const PaymentWidgetMixin = {
             }
 
             if (target === "microbes") amountHave = (this as any).playerinput.microbes;
-            if (target === "floaters") amountHave = (this as any).playerinput.floaters;
+            if (target === "floaters") {
+                amountHave = (this as any).playerinput.floaters;
+                if ((this as any).$data.card.name === CardName.STRATOSPHERIC_BIRDS) {
+                    amountHave--;
+                }
+            }
 
             while (currentValue < amountHave && currentValue < amountNeed) {
                 this.addValue(target, 1);

@@ -1203,6 +1203,9 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         }
 
         if (howToPay.floaters !== undefined) {
+          if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && howToPay.floaters === this.getFloatersCanSpend()) {
+            throw new Error("Cannot spend all floaters to play Stratospheric Birds");
+          }
           totalToPay += howToPay.floaters * 3;
         }
 
@@ -1851,7 +1854,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         if (dirigibles !== undefined 
            && dirigibles.resourceCount
            && card.tags.indexOf(Tags.VENUS) !== -1) {
-            maxPay += dirigibles.resourceCount * 3;
+            maxPay += (dirigibles.resourceCount - +(card.name === CardName.STRATOSPHERIC_BIRDS)) * 3;
         }
 
         maxPay += this.megaCredits;

@@ -79,16 +79,19 @@ describe("StratosphericBirds", function () {
         // 9 MC + 1 Dirigibles floater: Cannot play
         expect(card.canPlay(player,game)).to.eq(false);
 
-        // 12 MC + 1 Dirigibles floater: Can play
+
+        // 12 MC + 1 Dirigibles floater: Card is playable
         player.megaCredits = 12;
+        const selectHowToPayForCard = player.playProjectCard(game);
         expect(card.canPlay(player,game)).to.eq(true);
 
-        // Use floater as payment for Stratospheric Birds
-        player.removeResourceFrom(dirigibles, 1);
-        expect(dirigibles.resourceCount).to.eq(0);
+        // Try to spend floater to pay for card: Throw an error
+        expect(function(){
+            selectHowToPayForCard.cb(card, { steel: 0, heat: 0, titanium: 0, megaCredits: 9, microbes: 0, floaters: 1 });
+        }).to.throw('Cannot spend all floaters to play Stratospheric Birds');
 
-        // Should play and remove 3 MC from player
-        card.play(player);
-        expect(player.megaCredits).to.eq(9);
+        // Pay with MC only: Can play
+        selectHowToPayForCard.cb(card, { steel: 0, heat: 0, titanium: 0, megaCredits: 12, microbes: 0, floaters: 0 });
+        expect(dirigibles.resourceCount).to.eq(0);
     });
 });

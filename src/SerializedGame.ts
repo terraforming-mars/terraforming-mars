@@ -4,12 +4,12 @@ import {ClaimedMilestone} from "./ClaimedMilestone";
 import {FundedAward} from "./FundedAward";
 import {IMilestone} from "./milestones/IMilestone";
 import {IAward} from "./awards/IAward";
-import {IColony} from "./colonies/Colony";
 import {ColonyDealer} from "./colonies/ColonyDealer";
 import {PlayerInterrupt} from "./interrupts/PlayerInterrupt";
 import {Board} from "./Board";
 import { CardName } from "./CardName";
 import { BoardName } from "./BoardName";
+import { SerializedColony } from "./SerializedColony";
 import { SerializedPlayer } from "./SerializedPlayer";
 import { SerializedDealer } from "./SerializedDealer";
 import { SerializedTurmoil } from "./turmoil/SerializedTurmoil";
@@ -56,7 +56,7 @@ export interface SerializedGame {
 
     venusNextExtension: boolean;
     coloniesExtension: boolean;
-    colonies: Array<IColony>;
+    colonies: Array<SerializedColony>;
     colonyDealer: ColonyDealer | undefined;
     preludeExtension: boolean;
     turmoil: SerializedTurmoil;

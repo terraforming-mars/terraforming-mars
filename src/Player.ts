@@ -1103,6 +1103,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             cards.push(
               {
                 resources: targetCard.resourceCount,
+                resourceType: undefined,
                 name: targetCard.card.name,
                 calculatedCost: this.getCardCost(game, targetCard.card),
                 cardType: card.cardType,

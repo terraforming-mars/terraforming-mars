@@ -1,6 +1,6 @@
 // Common code for SelectHowToPay and SelectHowToPayForCard
-import { ICard } from "../cards/ICard";
 import { CardName } from "../CardName";
+import { CardModel } from "../models/CardModel"
 import { ResourceType } from "../ResourceType";
 
 export const PaymentWidgetMixin = {
@@ -99,12 +99,6 @@ export const PaymentWidgetMixin = {
             if (target === "floaters") {
                 amountHave = (this as any).playerinput.floaters;
                 if (this.isStratosphericBirdsEdgeCase()) amountHave--;
-                if ((this as any).$data.card.name === CardName.STRATOSPHERIC_BIRDS) {
-                    const cardsWithResources = (this as any).player.getCardsWithResources() as Array<ICard>;
-                    if (cardsWithResources.filter(card => card.resourceType === ResourceType.FLOATER).length === 1) {
-                        amountHave--;
-                    }
-                }
             }
 
             while (currentValue < amountHave && currentValue < amountNeed) {
@@ -114,8 +108,11 @@ export const PaymentWidgetMixin = {
         },
         isStratosphericBirdsEdgeCase: function(): boolean {
             if ((this as any).$data.card.name === CardName.STRATOSPHERIC_BIRDS) {
-                const cardsWithResources = (this as any).player.getCardsWithResources() as Array<ICard>;
-                return (cardsWithResources.filter(card => card.resourceType === ResourceType.FLOATER).length === 1);
+                const playedCards = (this as any).player.playedCards as Array<CardModel>;
+                const cardsWithFloaters = playedCards.filter((card) =>
+                    card.resourceType !== undefined && card.resourceType === ResourceType.FLOATER && card.resources && card.resources > 0
+                );
+                return (cardsWithFloaters.length === 1);
             }
             return false;
         },

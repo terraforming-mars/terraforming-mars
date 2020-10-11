@@ -626,6 +626,7 @@ function getCardsAsCardModel(
                 card.resourceCount !== undefined && showResouces
                     ? card.resourceCount
                     : undefined,
+            resourceType: card.resourceType,
             calculatedCost: 0,
             cardType: CardType.AUTOMATED,
             isDisabled: false
@@ -737,6 +738,7 @@ function getCards(
 ): Array<CardModel> {
     return cards.map((card) => ({
         resources: showResouces ? player.getResourcesOnCard(card) : undefined,
+        resourceType: card.resourceType,
         name: card.name,
         calculatedCost: player.getCardCost(game, card),
         cardType: card.cardType,

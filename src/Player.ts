@@ -1302,7 +1302,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
         this.addPlayedCard(game, selectedCard);
 
-        for (const playedCard of this.playedCards) {
+        const playedCardsOrdered = this.playedCards.filter((card) => card.onCardPlayed !== undefined)
+            .sort((a, b) => ((a.onCardPlayedPriority || 999) < (b.onCardPlayedPriority || 999) ? -1 : 1));
+
+        for (const playedCard of playedCardsOrdered) {
             if (playedCard.onCardPlayed !== undefined) {
                 const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, game, selectedCard);
                 if (actionFromPlayedCard !== undefined) {

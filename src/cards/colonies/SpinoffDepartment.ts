@@ -11,6 +11,7 @@ export class SpinoffDepartment implements IProjectCard {
     public tags: Array<Tags> = [Tags.STEEL];
     public name: CardName = CardName.SPINOFF_DEPARTMENT
     public cardType: CardType = CardType.ACTIVE;
+    public onCardPlayerPriority: number = 10;
 
     public onCardPlayed(player: Player, game: Game, card: IProjectCard) {
         if (card.cost >= 20) {

@@ -17,6 +17,7 @@ export class OlympusConference implements IProjectCard, IResourceCard {
     public resourceType: ResourceType = ResourceType.SCIENCE;
     public resourceCount: number = 0;
     public name: CardName = CardName.OLYMPUS_CONFERENCE;
+    public onCardPlayedPriority: number = 10;
 
     private runInterrupts(player: Player, game: Game, scienceTags: number): void {
 

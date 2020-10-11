@@ -1,5 +1,7 @@
 // Common code for SelectHowToPay and SelectHowToPayForCard
+import { ICard } from "../cards/ICard";
 import { CardName } from "../CardName";
+import { ResourceType } from "../ResourceType";
 
 export const PaymentWidgetMixin = {
     "methods": {
@@ -58,9 +60,7 @@ export const PaymentWidgetMixin = {
             if (target === "microbes") maxValue = (this as any).playerinput.microbes;
             if (target === "floaters") {
                 maxValue = (this as any).playerinput.floaters;
-                if ((this as any).$data.card.name === CardName.STRATOSPHERIC_BIRDS) {
-                    maxValue--;
-                }
+                if (this.isStratosphericBirdsEdgeCase()) maxValue--;
             }
             if (currentValue === maxValue) return;
 
@@ -98,8 +98,12 @@ export const PaymentWidgetMixin = {
             if (target === "microbes") amountHave = (this as any).playerinput.microbes;
             if (target === "floaters") {
                 amountHave = (this as any).playerinput.floaters;
+                if (this.isStratosphericBirdsEdgeCase()) amountHave--;
                 if ((this as any).$data.card.name === CardName.STRATOSPHERIC_BIRDS) {
-                    amountHave--;
+                    const cardsWithResources = (this as any).player.getCardsWithResources() as Array<ICard>;
+                    if (cardsWithResources.filter(card => card.resourceType === ResourceType.FLOATER).length === 1) {
+                        amountHave--;
+                    }
                 }
             }
 
@@ -107,6 +111,13 @@ export const PaymentWidgetMixin = {
                 this.addValue(target, 1);
                 currentValue++;
             }
+        },
+        isStratosphericBirdsEdgeCase: function(): boolean {
+            if ((this as any).$data.card.name === CardName.STRATOSPHERIC_BIRDS) {
+                const cardsWithResources = (this as any).player.getCardsWithResources() as Array<ICard>;
+                return (cardsWithResources.filter(card => card.resourceType === ResourceType.FLOATER).length === 1);
+            }
+            return false;
         },
     }
 }

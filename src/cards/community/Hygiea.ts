@@ -15,7 +15,7 @@ export class Hygiea extends Colony implements IColony {
         if (usesTradeFleet) this.beforeTrade(this, player, game);
 
         const isSoloMode = game.isSoloMode();
-        let availableTargets = game.getPlayers().filter((p) => p.name !== player.name);
+        let availableTargets = game.getPlayers().filter((p) => p.id !== player.id);
         
         if (this.trackPosition <= 1) {
             if (isSoloMode) {

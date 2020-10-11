@@ -109,10 +109,8 @@ export const PaymentWidgetMixin = {
         isStratosphericBirdsEdgeCase: function(): boolean {
             if ((this as any).$data.card.name === CardName.STRATOSPHERIC_BIRDS) {
                 const playedCards = (this as any).player.playedCards as Array<CardModel>;
-                const cardsWithFloaters = playedCards.filter((card) =>
-                    card.resourceType !== undefined && card.resourceType === ResourceType.FLOATER && card.resources && card.resources > 0
-                );
-                return (cardsWithFloaters.length === 1);
+                const cardsWithFloaters = playedCards.filter((card) => card.resourceType === ResourceType.FLOATER && card.resources);
+                return cardsWithFloaters.length === 1;
             }
             return false;
         },

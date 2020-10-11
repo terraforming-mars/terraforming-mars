@@ -1854,7 +1854,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
         if (dirigibles !== undefined 
            && dirigibles.resourceCount
            && card.tags.indexOf(Tags.VENUS) !== -1) {
-            maxPay += (dirigibles.resourceCount - +(card.name === CardName.STRATOSPHERIC_BIRDS)) * 3;
+            maxPay += dirigibles.resourceCount * 3;
         }
 
         maxPay += this.megaCredits;

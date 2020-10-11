@@ -4,111 +4,22 @@ import Vue from "vue";
 import { IProjectCard } from "../cards/IProjectCard";
 import { ICard } from "../cards/ICard";
 import { BeginnerCorporation } from "../cards/corporation/BeginnerCorporation";
-import { ALL_PRELUDE_CORPORATIONS,
-         ALL_CORPORATION_CARDS,
-         ALL_CORP_ERA_CORPORATION_CARDS,
-         ALL_PROJECT_CARDS,
-         ALL_CORP_ERA_PROJECT_CARDS,
-         ALL_PRELUDE_CARDS,
-         ALL_COMMUNITY_PRELUDE_CARDS,
-         ALL_COMMUNITY_VENUS_PRELUDE_CARDS,
-         ALL_COMMUNITY_COLONY_PRELUDE_CARDS,
-         ALL_PRELUDE_PROJECTS_CARDS,
-         ALL_PROMO_CORPORATIONS,
-         ALL_VENUS_CORPORATIONS,
-         ALL_VENUS_PROJECTS_CARDS,
-         ALL_COLONIES_PROJECTS_CARDS,
-         ALL_TURMOIL_PROJECTS_CARDS,
-         ALL_PROMO_PROJECTS_CARDS,
-         ALL_COMMUNITY_CORPORATIONS,
-         ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS,
-         } from "../Dealer";
 import { HTML_DATA } from "../HTML_data";
 import { CardModel } from "../models/CardModel";
 import { CardName } from "../CardName";
+import { Decks } from "../Deck";
+import { ALL_CORPORATION_DECKS, ALL_PRELUDE_DECKS, ALL_PROJECT_DECKS } from "../cards/AllCards";
 
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
     if (cardName === (new BeginnerCorporation()).name) {
         return new BeginnerCorporation();
     }
-    let cardFactory = ALL_CORPORATION_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_CORP_ERA_CORPORATION_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_PRELUDE_CORPORATIONS.find((cardFactory) => cardFactory.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_VENUS_CORPORATIONS.find((cardFactory) => cardFactory.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_PROMO_CORPORATIONS.find((cardFactory) => cardFactory.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_COMMUNITY_CORPORATIONS.find((cardFactory) => cardFactory.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    return undefined;
+    return Decks.findByName(ALL_CORPORATION_DECKS, cardName);
 }
 
 export function getProjectCardByName(cardName: string): IProjectCard | undefined {
-    let cardFactory = ALL_PRELUDE_CARDS.find((cardFactory) => cardFactory.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_COMMUNITY_PRELUDE_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_COMMUNITY_VENUS_PRELUDE_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_COMMUNITY_COLONY_PRELUDE_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_PRELUDE_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_VENUS_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_COLONIES_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_PROJECT_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_CORP_ERA_PROJECT_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_TURMOIL_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }
-    cardFactory = ALL_PROMO_PROJECTS_CARDS.find((cf) => cf.cardName === cardName);
-    if (cardFactory !== undefined) {
-        return new cardFactory.factory();
-    }    
-    return undefined;
+    return Decks.findByName(ALL_PROJECT_DECKS.concat(ALL_PRELUDE_DECKS), cardName);
 }
 
 function getCardContent(cardName: string): string {

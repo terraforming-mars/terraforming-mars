@@ -18,7 +18,9 @@ export class VenusFirst extends PreludeCard implements IProjectCard {
             }
 
             const drawnCards = game.getCardsInHandByTag(player, Tags.VENUS).slice(-2);
-            game.log("${0} drew ${1} and ${2}", b => b.player(player).card(drawnCards[0]).card(drawnCards[1]));
+            if (drawnCards.length > 1) {
+                game.log("${0} drew ${1} and ${2}", b => b.player(player).card(drawnCards[0]).card(drawnCards[1]));
+            }
         }
 
         return undefined;

@@ -5,7 +5,6 @@ import { PlayerInterrupt } from "./PlayerInterrupt";
 import { SelectCard } from "../inputs/SelectCard";
 import { ResourceType } from "../ResourceType";
 import { ICard } from "../cards/ICard";
-//import { Tags } from "../cards/Tags";
 import { LogHelper } from "../components/LogHelper";
 
 export class SelectResourceCard implements PlayerInterrupt {

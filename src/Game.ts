@@ -587,7 +587,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public runNextInterrupt(cb: () => void, findByPlayer?: Player): boolean {
-      if (this.interrupts.length < 0) {
+      if (this.interrupts.length === 0) {
         return false;
       }
       let interrupt;

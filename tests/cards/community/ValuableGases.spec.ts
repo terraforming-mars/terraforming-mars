@@ -13,6 +13,6 @@ describe("ValuableGases", function () {
 
     it("Should play", function () {
         card.play(player);
-        expect(player.megaCredits).to.eq(10);
+        expect(player.megaCredits).to.eq(6);
     });
 });

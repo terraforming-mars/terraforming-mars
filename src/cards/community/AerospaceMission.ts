@@ -11,6 +11,13 @@ export class AerospaceMission extends PreludeCard implements IProjectCard {
     public tags: Array<Tags> = [Tags.SPACE];
     public name: CardName = CardName.AEROSPACE_MISSION;
 
+    public canPlay(player: Player, _game: Game, bonusMc?: number) {
+      const requiredPayment = 14 - (bonusMc || 0);
+      
+      if (requiredPayment <= 0) return true;
+      return player.canAfford(requiredPayment);
+    }
+
     public play(player: Player, game: Game) {
         const openColonies = game.colonies.filter((colony) => colony.isActive);
         const selectColonies = new OrOptions();
@@ -50,7 +57,7 @@ export class AerospaceMission extends PreludeCard implements IProjectCard {
             playerInput: selectColonies,
         });
 
-        player.megaCredits -= 12;
+        player.megaCredits -= 14;
         return undefined;
     }
 }

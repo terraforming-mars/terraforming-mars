@@ -5601,13 +5601,13 @@ export const HTML_DATA: Map<string, string> =
 `],
 [CardName.VALUABLE_GASES,`
       <div class="content">
-        <div class="resource money">10</div>
+        <div class="resource money">6</div>
         <div class="resource card" style="margin-left:10px">
           <div class="card-icon tag-venus"></div>
         </div>
         &nbsp;: +4 <div class="resource floater"></div>
         <div class="description">
-          Gain 10 MC. Play a Venus card from your hand that collects floaters and add 4 floaters to it.
+          Gain 6 MC. Play a Venus card from your hand that collects floaters and add 4 floaters to it.
         </div>
       </div>
 `],
@@ -5637,10 +5637,10 @@ export const HTML_DATA: Map<string, string> =
           <div class="tile colony"></div>
           <div class="tile colony"></div>
           <br>
-          - <div class="resource money">12</div>
+          - <div class="resource money">14</div>
         </div>
         <div class="description">
-          Place 2 colonies. Pay 12 MC.
+          Place 2 colonies. Pay 14 MC.
         </div>
       </div>
 `],

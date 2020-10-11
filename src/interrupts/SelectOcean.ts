@@ -17,7 +17,7 @@ export class SelectOcean implements PlayerInterrupt {
     ){}
 
     public generatePlayerInput() {
-        if (this.game.board.getOceansOnBoard() + 1 >= constants.MAX_OCEAN_TILES) {
+        if (this.game.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES) {
             this.playerInput = undefined;
             return;
         }

@@ -34,7 +34,6 @@ export interface SerializedGame {
     
     oxygenLevel: number;
     temperature: number;
-    pendingOceans: number;
     venusScaleLevel: number;
 
     first: SerializedPlayer;

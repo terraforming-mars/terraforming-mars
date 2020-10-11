@@ -115,7 +115,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
     // Global parameters
     private oxygenLevel: number = constants.MIN_OXYGEN_LEVEL;
     private temperature: number = constants.MIN_TEMPERATURE;
-    public pendingOceans: number = 0;
     private venusScaleLevel: number = constants.MIN_VENUS_SCALE;
     
     // Player data
@@ -592,7 +591,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
       let interrupt;
       if (findByPlayer !== undefined) {
-        const interruptIndex: number = this.interrupts.findIndex(interrupt => interrupt.player === findByPlayer);
+        const interruptIndex: number = this.interrupts.findIndex(interrupt => interrupt.player.id === findByPlayer.id);
         if (interruptIndex < 0) {
           return false;
         }

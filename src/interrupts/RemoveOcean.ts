@@ -15,6 +15,10 @@ export class RemoveOcean implements PlayerInterrupt {
     ){}
 
     public generatePlayerInput() {
+        if (this.game.board.getOceansOnBoard() === 0) {
+            this.playerInput = undefined;
+            return;
+        }
         this.playerInput = new SelectSpace(
             this.title,
             this.game.board.getOceansTiles(),

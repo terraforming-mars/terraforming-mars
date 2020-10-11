@@ -1328,10 +1328,8 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
             }
         }
 
-        const preludesWithPlayCardEffects = [CardName.ECOLOGY_EXPERTS, CardName.ECCENTRIC_SPONSOR, CardName.VALUABLE_GASES];
-
-        if (preludesWithPlayCardEffects.includes(selectedCard.name)) {
-            selectedCard.addPlayCardInterrupt!(this, game);
+        if (selectedCard.addPlayCardInterrupt !== undefined) {
+            selectedCard.addPlayCardInterrupt(this, game);
         }
 
         return undefined;

@@ -53,7 +53,7 @@ export const DebugUI = Vue.component("debug-ui", {
             return allItems;
         },
         filtered: function(cardName: string):boolean {
-            return this.$data.filterText.length == 0 || cardName.toUpperCase().indexOf(this.$data.filterText.toUpperCase()) > -1;
+            return this.$data.filterText.length === 0 || cardName.toUpperCase().indexOf(this.$data.filterText.toUpperCase()) > -1;
         }
     },
     template: `

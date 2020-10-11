@@ -45,6 +45,7 @@ import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
 import { ILoadable } from "./ILoadable";
 import {LogMessage} from "./LogMessage";
 import {Database} from "./database/Database";
+import { SerializedColony } from "./SerializedColony";
 import { SerializedGame } from "./SerializedGame";
 import { SerializedPlayer } from "./SerializedPlayer";
 import { CardName } from "./CardName";
@@ -1767,6 +1768,24 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return value;
     }
 
+    private loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<IColony> {
+      const result: Array<IColony> = [];
+      for (const serialized of colonies) {
+        const colony = getColonyByName(serialized.name);
+        if (colony !== undefined) {
+          colony.isActive = serialized.isActive;
+          colony.visitor = serialized.visitor;
+          colony.trackPosition = serialized.trackPosition;
+          colony.colonies = serialized.colonies;
+          colony.resourceType = serialized.resourceType;
+          result.push(colony);
+        } else {
+          console.warn(`colony ${serialized.name} not found`);
+        }
+      }
+      return result;
+    }
+
     // Function used to rebuild each objects
     public loadFromJSON(d: SerializedGame): Game {
       // Assign each attributes
@@ -1846,24 +1865,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Reload colonies elements if needed
       if (this.gameOptions.coloniesExtension) {
         this.colonyDealer = new ColonyDealer();
-        this.colonies = new Array<IColony>();
 
-        d.colonyDealer?.discardedColonies.forEach((element: IColony) => {
-          if(this.colonyDealer !== undefined) {
-            this.colonyDealer.discardedColonies.push(element);
-          }
-        });
+        if (d.colonyDealer !== undefined) {
+          this.colonyDealer.discardedColonies = this.loadColoniesFromJSON(d.colonyDealer.discardedColonies);
+        }
 
-        d.colonies.forEach((element: IColony) => {
-          const colony = getColonyByName(element.name);
-
-          // Assign each attributes
-          Object.assign(colony, element);
-
-          if (colony !== undefined) {
-            this.colonies.push(colony);
-          }
-        });
+        this.colonies = this.loadColoniesFromJSON(d.colonies);
       }
 
       // Reload turmoil elements if needed

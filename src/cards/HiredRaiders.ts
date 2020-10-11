@@ -28,7 +28,7 @@ export class HiredRaiders implements IProjectCard {
             );
         }
 
-        const availablePlayerTargets = game.getPlayers().filter((p) => p.name !== player.name);
+        const availablePlayerTargets = game.getPlayers().filter((p) => p.id !== player.id);
         let availableActions = new OrOptions();
 
         availablePlayerTargets.forEach((target) => {

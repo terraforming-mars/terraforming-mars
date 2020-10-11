@@ -585,10 +585,6 @@ function getPlayer(player: Player, game: Game): string {
         titaniumValue: player.getTitaniumValue(game),
         victoryPointsBreakdown: player.getVictoryPoints(game),
         waitingFor: getWaitingFor(player.getWaitingFor()),
-        // DEPRECATED, included for transition to game log route
-        // remove after few days once most users have loaded
-        // new client
-        gameLog: game.gameLog.length > 50 ? game.gameLog.slice(game.gameLog.length - 50) : game.gameLog,
         isSoloModeWin: game.isSoloModeWin(),
         gameAge: game.gameAge,
         isActive: player.id === game.activePlayer,

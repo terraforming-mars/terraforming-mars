@@ -1547,6 +1547,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         space.player = undefined;
       }
 
+      // Mining Guild tile placement effects should resolve before removing space.player for Oceans
       this.players.forEach((p) => {
         if (p.corporationCard !== undefined &&
             p.corporationCard.onTilePlaced !== undefined) {

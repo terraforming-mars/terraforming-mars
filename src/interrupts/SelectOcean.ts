@@ -1,10 +1,10 @@
-import { Game } from '../Game';
-import { PlayerInput } from '../PlayerInput';
-import { Player } from '../Player';
-import { SelectSpace } from '../inputs/SelectSpace';
-import { ISpace } from '../ISpace';
-import { PlayerInterrupt } from './PlayerInterrupt';
-import { SpaceType } from '../SpaceType';
+import { Game } from "../Game";
+import { PlayerInput } from "../PlayerInput";
+import { Player } from "../Player";
+import { SelectSpace } from "../inputs/SelectSpace";
+import { ISpace } from "../ISpace";
+import { PlayerInterrupt } from "./PlayerInterrupt";
+import { SpaceType } from "../SpaceType";
 
 export class SelectOcean implements PlayerInterrupt {
     public playerInput: PlayerInput;
@@ -12,16 +12,15 @@ export class SelectOcean implements PlayerInterrupt {
         public player: Player,
         public game: Game,
         public title?: string,
-        public isWorldGov: boolean = false
     ){
         if (title === undefined) {
-            title = 'Select space for ocean tile';
+            title = "Select space for ocean tile";
         }
         this.playerInput = new SelectSpace(
             title,
             game.board.getAvailableSpacesForOcean(player),
             (space: ISpace) => {
-                game.addOceanTile(player, space.id, SpaceType.OCEAN, isWorldGov);
+                game.addOceanTile(player, space.id, SpaceType.OCEAN);
                 game.pendingOceans--;
                 return undefined;
             }

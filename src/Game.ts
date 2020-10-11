@@ -797,12 +797,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
 
       player.corporationCard = corporationCard;
-      corporationCard.play(player, this);
       player.megaCredits = corporationCard.startingMegaCredits;
       if (corporationCard.name !== new BeginnerCorporation().name) {
         const cardsToPayFor: number = player.cardsInHand.length;
         player.megaCredits -= cardsToPayFor * player.cardCost;
       }
+      corporationCard.play(player, this);
 
       // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
       for (const somePlayer of this.getPlayers()) {

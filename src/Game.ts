@@ -800,7 +800,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       player.megaCredits = corporationCard.startingMegaCredits;
       if (corporationCard.name !== new BeginnerCorporation().name) {
         const cardsToPayFor: number = player.cardsInHand.length;
-        player.megaCredits -= cardsToPayFor * player.cardCost;
+        player.megaCredits -= cardsToPayFor * cardCost;
       }
       corporationCard.play(player, this);
 

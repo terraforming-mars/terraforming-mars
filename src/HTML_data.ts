@@ -4800,7 +4800,7 @@ export const HTML_DATA: Map<string, string> =
         </div><br>
         <div class="tile city-tile"></div>
         <div class="description">
-          Increase your money production 2 step. Place a City tile.
+          Increase your money production 2 steps. Place a City tile.
         </div>
       </div>
 `],

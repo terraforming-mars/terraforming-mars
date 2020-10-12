@@ -1,28 +1,13 @@
 import Vue from "vue";
 import { Card } from "./card/Card";
-import {
-    ALL_PRELUDE_PROJECTS_CARDS,
-    ALL_VENUS_PROJECTS_CARDS,
-    ALL_COLONIES_PROJECTS_CARDS,
-    ALL_TURMOIL_PROJECTS_CARDS,
-    ALL_PROMO_PROJECTS_CARDS,
-    ALL_PROJECT_CARDS,
-    ALL_CORP_ERA_PROJECT_CARDS,
-    ALL_CORPORATION_CARDS,
-    ALL_CORP_ERA_CORPORATION_CARDS,
-    ALL_VENUS_CORPORATIONS,
-    ALL_PRELUDE_CORPORATIONS,
-    ALL_COLONIES_CORPORATIONS,
-    ALL_TURMOIL_CORPORATIONS,
-    ALL_PROMO_CORPORATIONS,
-    ALL_COMMUNITY_CORPORATIONS,
-    ALL_PRELUDE_CARDS,
-    ALL_COMMUNITY_PRELUDE_CARDS,
-    ALL_COMMUNITY_VENUS_PRELUDE_CARDS,
-    ALL_COMMUNITY_COLONY_PRELUDE_CARDS,
-    ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS,
-} from "../Dealer";
 import { CardName } from "../CardName";
+import { PRELUDE_CARD_MANIFEST } from "../cards/prelude/PreludeCardManifest";
+import { VENUS_CARD_MANIFEST } from "../cards/venusNext/VenusCardManifest";
+import { COLONIES_CARD_MANIFEST } from "../cards/colonies/ColoniesCardManifest";
+import { TURMOIL_CARD_MANIFEST } from "../cards/turmoil/TurmoilCardManifest";
+import { PROMO_CARD_MANIFEST } from "../cards/promo/PromoCardManifest";
+import { BASE_CARD_MANIFEST, CORP_ERA_CARD_MANIFEST } from "../cards/StandardCardManifests";
+import { COMMUNITY_CARD_MANIFEST } from "../cards/community/CommunityCardManifest";
 
 export const DebugUI = Vue.component("debug-ui", {
     components: {
@@ -36,36 +21,34 @@ export const DebugUI = Vue.component("debug-ui", {
     methods: {
         getAllProjectCards: function () {
             const allItems: Array<CardName> = [
-                ...ALL_PRELUDE_PROJECTS_CARDS.map((cf) => cf.cardName),
-                ...ALL_VENUS_PROJECTS_CARDS.map((cf) => cf.cardName),
-                ...ALL_COLONIES_PROJECTS_CARDS.map((cf) => cf.cardName),
-                ...ALL_TURMOIL_PROJECTS_CARDS.map((cf) => cf.cardName),
-                ...ALL_PROMO_PROJECTS_CARDS.map((cf) => cf.cardName),
-                ...ALL_PROJECT_CARDS.map((cf) => cf.cardName),
-                ...ALL_CORP_ERA_PROJECT_CARDS.map((cf) => cf.cardName),
+                ...PRELUDE_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+                ...VENUS_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+                ...COLONIES_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+                ...TURMOIL_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+                ...PROMO_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+                ...BASE_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+                ...CORP_ERA_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+                ...COMMUNITY_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName)
             ].sort();
             return allItems;
         },
         getAllCorporationCards: function () {
             const allItems: Array<CardName> = [
-                ...ALL_CORPORATION_CARDS.map((cf) => cf.cardName),
-                ...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => cf.cardName),
-                ...ALL_VENUS_CORPORATIONS.map((cf) => cf.cardName),
-                ...ALL_PRELUDE_CORPORATIONS.map((cf) => cf.cardName),
-                ...ALL_COLONIES_CORPORATIONS.map((cf) => cf.cardName),
-                ...ALL_TURMOIL_CORPORATIONS.map((cf) => cf.cardName),
-                ...ALL_PROMO_CORPORATIONS.map((cf) => cf.cardName),
-                ...ALL_COMMUNITY_CORPORATIONS.map((cf) => cf.cardName),
+                ...PRELUDE_CARD_MANIFEST.corporationCards.cards.map((cf) => cf.cardName),
+                ...VENUS_CARD_MANIFEST.corporationCards.cards.map((cf) => cf.cardName),
+                ...COLONIES_CARD_MANIFEST.corporationCards.cards.map((cf) => cf.cardName),
+                ...TURMOIL_CARD_MANIFEST.corporationCards.cards.map((cf) => cf.cardName),
+                ...PROMO_CARD_MANIFEST.corporationCards.cards.map((cf) => cf.cardName),
+                ...BASE_CARD_MANIFEST.corporationCards.cards.map((cf) => cf.cardName),
+                ...CORP_ERA_CARD_MANIFEST.corporationCards.cards.map((cf) => cf.cardName),
+                ...COMMUNITY_CARD_MANIFEST.corporationCards.cards.map((cf) => cf.cardName)
             ].sort();
             return allItems;
         },
         getAllPreludeCards: function () {
             const allItems: Array<CardName> = [
-                ...ALL_PRELUDE_CARDS.map((cf) => cf.cardName),
-                ...ALL_COMMUNITY_PRELUDE_CARDS.map((cf) => cf.cardName),
-                ...ALL_COMMUNITY_VENUS_PRELUDE_CARDS.map((cf) => cf.cardName),
-                ...ALL_COMMUNITY_COLONY_PRELUDE_CARDS.map((cf) => cf.cardName),
-                ...ALL_COMMUNITY_TURMOIL_PRELUDE_CARDS.map((cf) => cf.cardName),
+                ...PRELUDE_CARD_MANIFEST.preludeCards.cards.map((cf) => cf.cardName),
+                ...COMMUNITY_CARD_MANIFEST.preludeCards.cards.map((cf) => cf.cardName),
             ].sort();
             return allItems;
         },

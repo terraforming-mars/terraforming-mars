@@ -1,17 +1,23 @@
 import Vue from "vue";
 
-import { ALL_PRELUDE_PROJECTS_CARDS, ALL_VENUS_PROJECTS_CARDS, ALL_COLONIES_PROJECTS_CARDS, ALL_TURMOIL_PROJECTS_CARDS, ALL_PROMO_PROJECTS_CARDS, ALL_PROJECT_CARDS, ALL_CORP_ERA_PROJECT_CARDS } from '../Dealer';
 import { CardName } from "../CardName";
 import { $t } from "../directives/i18n";
+import { PRELUDE_CARD_MANIFEST } from "../cards/prelude/PreludeCardManifest";
+import { VENUS_CARD_MANIFEST } from "../cards/venusNext/VenusCardManifest";
+import { COLONIES_CARD_MANIFEST } from "../cards/colonies/ColoniesCardManifest";
+import { TURMOIL_CARD_MANIFEST } from "../cards/turmoil/TurmoilCardManifest";
+import { PROMO_CARD_MANIFEST } from "../cards/promo/PromoCardManifest";
+import { BASE_CARD_MANIFEST, CORP_ERA_CARD_MANIFEST } from "../cards/StandardCardManifests";
 
+// TODO(kberg): Use one of the all-project-cards constants. (project + prelude, though.)
 const allItems: Array<CardName> = [
-    ...ALL_PRELUDE_PROJECTS_CARDS.map((cf) => cf.cardName),
-    ...ALL_VENUS_PROJECTS_CARDS.map((cf) => cf.cardName),
-    ...ALL_COLONIES_PROJECTS_CARDS.map((cf) => cf.cardName),
-    ...ALL_TURMOIL_PROJECTS_CARDS.map((cf) => cf.cardName),
-    ...ALL_PROMO_PROJECTS_CARDS.map((cf) => cf.cardName),
-    ...ALL_PROJECT_CARDS.map((cf) => cf.cardName),
-    ...ALL_CORP_ERA_PROJECT_CARDS.map((cf) => cf.cardName)
+    ...PRELUDE_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+    ...VENUS_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+    ...COLONIES_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+    ...TURMOIL_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+    ...PROMO_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+    ...BASE_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
+    ...CORP_ERA_CARD_MANIFEST.projectCards.cards.map((cf) => cf.cardName),
 ].sort();
 
 interface CardsFilterModel {

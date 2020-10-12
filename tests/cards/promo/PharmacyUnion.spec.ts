@@ -13,6 +13,7 @@ import { AdvancedEcosystems } from "../../../src/cards/AdvancedEcosystems";
 import { Fish } from "../../../src/cards/Fish";
 import { Lichen } from "../../../src/cards/Lichen";
 import { Research } from "../../../src/cards/Research";
+import { AndOptions } from "../../../src/inputs/AndOptions";
 
 describe("PharmacyUnion", function () {
     let card : PharmacyUnion, player : Player, player2 : Player, game : Game;
@@ -27,9 +28,15 @@ describe("PharmacyUnion", function () {
     });
 
     it("Should play", function () {
-        card.play(player, game);
+        game = new Game("foobar", [player], player);
+        const pi = player.getWaitingFor() as AndOptions;
+        pi.options[0].cb([card]);
+        pi.options[1].cb([]);
+        pi.cb();
 
         expect(card.resourceCount).to.eq(2);
+        // Should not pay for the free Science card
+        expect(player.megaCredits).to.eq(46);
         expect(player.cardsInHand.length).to.eq(1);
         expect(player.cardsInHand[0].tags.includes(Tags.SCIENCE)).to.eq(true);
     });

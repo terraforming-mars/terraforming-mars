@@ -13,51 +13,63 @@ import { CardExtraContent } from "./CardExtraContent";
 import { CardExpansion } from "./CardExpansion";
 import { CardTags } from "./CardTags";
 import { CardType } from "../../cards/CardType";
-import { ALL_CARD_MANIFESTS, ALL_CORPORATION_DECKS, ALL_PRELUDE_DECKS, ALL_PROJECT_DECKS } from "../../cards/AllCards";
+import {
+    ALL_CARD_MANIFESTS,
+    ALL_CORPORATION_DECKS,
+    ALL_PRELUDE_DECKS,
+    ALL_PROJECT_DECKS,
+} from "../../cards/AllCards";
 import { Deck, Decks } from "../../Deck";
-import { ICardFactory } from "../../cards/ICardFactory";
 import { GameModule } from "../../GameModule";
-import { MiningExpedition } from "../../cards/MiningExpedition";
 
 function getCorporationCardByName(cardName: string): ICard | undefined {
-    if (cardName === (new BeginnerCorporation()).name) {
+    if (cardName === new BeginnerCorporation().name) {
         return new BeginnerCorporation();
     }
     return Decks.findByName(ALL_CORPORATION_DECKS, cardName);
 }
 
-export function getProjectCardByName(cardName: string): IProjectCard | undefined {
-    return Decks.findByName(ALL_PROJECT_DECKS.concat(ALL_PRELUDE_DECKS), cardName);
+export function getProjectCardByName(
+    cardName: string
+): IProjectCard | undefined {
+    return Decks.findByName(
+        ALL_PROJECT_DECKS.concat(ALL_PRELUDE_DECKS),
+        cardName
+    );
 }
 
 export function getCardExpansionByName(cardName: string): string {
-    let manifest = ALL_CARD_MANIFESTS.find(manifest => {
-        const decks: Array<Deck<any>> = [manifest.corporationCards, manifest.projectCards, manifest.preludeCards];
-        return Decks.findByName(decks, name);
+    const manifest = ALL_CARD_MANIFESTS.find((manifest) => {
+        const decks: Array<Deck<any>> = [
+            manifest.corporationCards,
+            manifest.projectCards,
+            manifest.preludeCards,
+        ];
+        return Decks.findByName(decks, cardName);
     });
 
     if (manifest === undefined) {
         throw new Error(`Can't find card ${cardName}`);
     }
-    switch(manifest.module) {
-    case GameModule.Base:
-        return CorporationGroup.ORIGINAL;
-    case GameModule.CorpEra:
-        return CorporationGroup.CORPORATION;
-    case GameModule.Promo:
-        return CorporationGroup.PROMO
-    case GameModule.Venus:
-        return CorporationGroup.VENUS_NEXT
-    case GameModule.Colonies:
-        return CorporationGroup.CORPORATION;
-    case GameModule.Prelude:
-        return CorporationGroup.PRELUDE;
-    case GameModule.Turmoil:
-        return CorporationGroup.TURMOIL;
-    case GameModule.Community:
-        return CorporationGroup.COMMUNITY;
-    default:
-        throw new Error(`unknown module ${module} for card ${cardName}`);
+    switch (manifest.module) {
+        case GameModule.Base:
+            return CorporationGroup.ORIGINAL;
+        case GameModule.CorpEra:
+            return CorporationGroup.CORPORATION;
+        case GameModule.Promo:
+            return CorporationGroup.PROMO;
+        case GameModule.Venus:
+            return CorporationGroup.VENUS_NEXT;
+        case GameModule.Colonies:
+            return CorporationGroup.CORPORATION;
+        case GameModule.Prelude:
+            return CorporationGroup.PRELUDE;
+        case GameModule.Turmoil:
+            return CorporationGroup.TURMOIL;
+        case GameModule.Community:
+            return CorporationGroup.COMMUNITY;
+        default:
+            throw new Error(`unknown module ${module} for card ${cardName}`);
     }
 }
 

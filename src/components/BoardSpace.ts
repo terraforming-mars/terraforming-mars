@@ -3,7 +3,7 @@ import {Bonus} from "./Bonus";
 import { TileType } from "../TileType";
 import { $t } from "../directives/i18n";
 
-let tileTypeToCssClass = new Map<TileType, string>([
+const tileTypeToCssClass = new Map<TileType, string>([
     [TileType.COMMERCIAL_DISTRICT, "commercial_district"],
     [TileType.ECOLOGICAL_ZONE, "ecological_zone"],
     [TileType.INDUSTRIAL_CENTER, "industrial_center"],
@@ -32,7 +32,7 @@ let tileTypeToCssClass = new Map<TileType, string>([
     [TileType.MINING_TITANIUM_BONUS, "mining_titanium"],
 ]);
 
-let tileTypeToCssClassAresOverride = new Map<TileType, string>([
+const tileTypeToCssClassAresOverride = new Map<TileType, string>([
     [TileType.COMMERCIAL_DISTRICT, "commercial_district_ares"],
     [TileType.ECOLOGICAL_ZONE, "ecological_zone_ares"],
     [TileType.INDUSTRIAL_CENTER, "industrial_center_ares"],
@@ -121,7 +121,7 @@ export const BoardSpace = Vue.component("board-space", {
             if (this.is_selectable) {
                 css += " board-space-selectable"
             }
-            var tileType = this.space.tileType;
+            const tileType = this.space.tileType;
             if (tileType !== undefined) {
                 switch (tileType) {
                     case TileType.OCEAN:

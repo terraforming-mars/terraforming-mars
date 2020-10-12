@@ -962,6 +962,9 @@ function getColor(space: ISpace): Color | undefined {
     ) {
         return space.player.color;
     }
+    if (space.tile?.protectedHazard === true) {
+        return Color.BRONZE;
+    }
     return undefined;
 }
 

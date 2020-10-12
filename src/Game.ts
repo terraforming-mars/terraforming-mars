@@ -1510,10 +1510,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Part 1, basic validation checks.
 
-      if (!AresHandler.canCover(space, tile)) {
-        throw new Error("Selected space is occupied");
-      }
-
       // Land claim a player can claim land for themselves
       if (space.player !== undefined && space.player !== player) {
         throw new Error("This space is land claimed by " + space.player.name);
@@ -1524,6 +1520,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
             `Select a valid location ${space.spaceType} is not ${spaceType}`
         );
       }
+
+      if (!AresHandler.canCover(space, tile)) {
+        throw new Error("Selected space is occupied");
+      }
+
 
       // No need to test for payment in world government.
       if (this.gameOptions.aresExtension) {
@@ -1918,7 +1919,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         if(element.tile) {
           const tileType = element.tile.tileType;
           const tileCard = element.tile.card;
-          const hazard = element.tile.hazard;
+          const protectedHazard = element.tile.protectedHazard;
           if (element.player){
             const player = this.players.find((player) => player.id === element.player!.id);
             // Prevent loss of "neutral" player tile ownership across reloads
@@ -1927,7 +1928,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           space.tile = {
             tileType: tileType,
             card: tileCard,
-            hazard: hazard
+            protectedHazard: protectedHazard
           };
         }
         // Correct Land Claim

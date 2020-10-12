@@ -9,12 +9,14 @@ import { IProjectCard } from "../IProjectCard";
 import { SelectCard } from "../../inputs/SelectCard";
 import { CardName } from "../../CardName";
 import { LogHelper } from "../../components/LogHelper";
+import { CardType } from "../CardType";
 
 export class Celestic implements IActionCard, CorporationCard, IResourceCard {
     public name: CardName = CardName.CELESTIC;
     public tags: Array<Tags> = [Tags.VENUS];
     public startingMegaCredits: number = 42;
     public resourceType: ResourceType = ResourceType.FLOATER;
+    public cardType: CardType = CardType.CORPORATION;
     public resourceCount: number = 0;
 
     private static readonly floaterCards: Set<CardName> = new Set<CardName>([

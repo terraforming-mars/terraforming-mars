@@ -6,7 +6,8 @@ import { Player } from "../Player";
 import { Game } from "../Game";
 import { SelectSpace } from "../inputs/SelectSpace";
 import { ISpace } from "../ISpace";
-import { CardName } from '../CardName';
+import { CardName } from "../CardName";
+import { LogHelper } from "../components/LogHelper";
 
 export class LandClaim implements IProjectCard {
     public cost: number = 1;
@@ -23,6 +24,7 @@ export class LandClaim implements IProjectCard {
             game.board.getAvailableSpacesOnLand(player), 
             (foundSpace: ISpace) => {
                 foundSpace.player = player;
+                LogHelper.logBoardPlacement(game, player, foundSpace, "land claim");
                 return undefined;
             }
         );

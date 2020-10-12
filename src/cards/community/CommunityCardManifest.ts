@@ -12,6 +12,7 @@ import { AerospaceMission } from "./AerospaceMission";
 import { TradeAdvance } from "./TradeAdvance";
 import { PoliticalUprising } from "./PoliticalUprising";
 import { ByElection } from "./ByElection";
+import { Midas } from "./Midas";
 import { Expansion } from "../../Expansion";
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
@@ -21,15 +22,40 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
         { cardName: CardName.AGRICOLA_INC, factory: AgricolaInc },
         { cardName: CardName.PROJECT_WORKSHOP, factory: ProjectWorkshop },
         { cardName: CardName.INCITE, factory: Incite },
-        { cardName: CardName.PLAYWRIGHTS, factory: Playwrights }
+        { cardName: CardName.PLAYWRIGHTS, factory: Playwrights },
+        { cardName: CardName.MIDAS, factory: Midas },
     ],
     preludeCards: [
         { cardName: CardName.RESEARCH_GRANT, factory: ResearchGrant },
-        { cardName: CardName.VALUABLE_GASES, factory: ValuableGases, compatibility: Expansion.Venus },
-        { cardName: CardName.VENUS_FIRST, factory: VenusFirst, compatibility: Expansion.Venus },
-        { cardName: CardName.AEROSPACE_MISSION, factory: AerospaceMission, compatibility: Expansion.Colonies },
-        { cardName: CardName.TRADE_ADVANCE, factory: TradeAdvance, compatibility: Expansion.Colonies },
-        { cardName: CardName.POLITICAL_UPRISING, factory: PoliticalUprising, compatibility: Expansion.Turmoil  },
-        { cardName: CardName.BY_ELECTION, factory: ByElection, compatibility: Expansion.Turmoil  },
-    ]
-})
+        {
+            cardName: CardName.VALUABLE_GASES,
+            factory: ValuableGases,
+            compatibility: Expansion.Venus,
+        },
+        {
+            cardName: CardName.VENUS_FIRST,
+            factory: VenusFirst,
+            compatibility: Expansion.Venus,
+        },
+        {
+            cardName: CardName.AEROSPACE_MISSION,
+            factory: AerospaceMission,
+            compatibility: Expansion.Colonies,
+        },
+        {
+            cardName: CardName.TRADE_ADVANCE,
+            factory: TradeAdvance,
+            compatibility: Expansion.Colonies,
+        },
+        {
+            cardName: CardName.POLITICAL_UPRISING,
+            factory: PoliticalUprising,
+            compatibility: Expansion.Turmoil,
+        },
+        {
+            cardName: CardName.BY_ELECTION,
+            factory: ByElection,
+            compatibility: Expansion.Turmoil,
+        },
+    ],
+});

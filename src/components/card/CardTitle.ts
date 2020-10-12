@@ -34,20 +34,26 @@ export const CardTitle = Vue.component("CardTitle", {
                 classes.push("background-color-prelude");
             }
 
-            if (title.length > 26) {
+            const trimmedTitle = this.getCardTitleWithoutPromoText(title);
+
+            if (trimmedTitle.length > 26) {
                 classes.push("title-smaller");
-            } else if (title.length > 23) {
+            } else if (trimmedTitle.length > 23) {
                 classes.push("title-small");
             }
 
             return classes.join(" ");
         },
+        getCardTitleWithoutPromoText(title: string): string {
+            if (title.toLowerCase().includes("promo")) return title.substring(0, title.length - 6);
+            return title;
+        }
     },
     template: `
         <div class="card-title">
             <div v-if="isPrelude()" class="prelude-label">prelude</div>
             <div v-if="isCorporation()" class="corporation-label">corporation</div>
-            <div v-else :class="getClasses(title)">{{ title }}</div>
+            <div v-else :class="getClasses(title)">{{ getCardTitleWithoutPromoText(title) }}</div>
         </div>
     `,
 });

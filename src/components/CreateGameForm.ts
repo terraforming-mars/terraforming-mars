@@ -361,7 +361,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                     <div class="create-game-page-container">
                         <div class="create-game-page-column" v-if="! isSoloModePage">
-                            <h4 v-i18n># of Players</h4>
+                            <h4 v-i18n>№ of Players</h4>
                                 <template v-for="pCount in [1,2,3,4,5,6]">
                                     <input type="radio" :value="pCount" name="playersCount" v-model="playersCount" :id="pCount+'-radio'">
                                     <label :for="pCount+'-radio'">

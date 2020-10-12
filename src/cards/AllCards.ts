@@ -1,4 +1,5 @@
 import { Decks } from "../Deck";
+import { ARES_CARD_MANIFEST } from "./ares/AresCardManifest";
 import { CardManifest } from "./CardManifest";
 import { COLONIES_CARD_MANIFEST } from "./colonies/ColoniesCardManifest";
 import { COMMUNITY_CARD_MANIFEST } from "./community/CommunityCardManifest";
@@ -20,6 +21,7 @@ export const ALL_CARD_MANIFESTS: Array<CardManifest> = [
     PRELUDE_CARD_MANIFEST,
     TURMOIL_CARD_MANIFEST,
     COMMUNITY_CARD_MANIFEST,
+    ARES_CARD_MANIFEST,
 ];
 
 export const ALL_PROJECT_DECKS = ALL_CARD_MANIFESTS.map(

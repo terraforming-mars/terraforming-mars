@@ -21,8 +21,9 @@ export const CardTitle = Vue.component("CardTitle", {
         isPrelude: function (): boolean {
             return this.type === CardType.PRELUDE;
         },
-        getClasses: function (): string {
+        getClasses: function (title: string): string {
             const classes: Array<String> = ["card-title"];
+
             if (this.type === CardType.AUTOMATED) {
                 classes.push("background-color-automated");
             } else if (this.type === CardType.ACTIVE) {
@@ -32,6 +33,13 @@ export const CardTitle = Vue.component("CardTitle", {
             } else if (this.type === CardType.PRELUDE) {
                 classes.push("background-color-prelude");
             }
+
+            if (title.length > 26) {
+                classes.push("title-smaller");
+            } else if (title.length > 23) {
+                classes.push("title-small");
+            }
+
             return classes.join(" ");
         },
     },
@@ -39,7 +47,7 @@ export const CardTitle = Vue.component("CardTitle", {
         <div class="card-title">
             <div v-if="isPrelude()" class="prelude-label">prelude</div>
             <div v-if="isCorporation()" class="corporation-label">corporation</div>
-            <div v-else :class="getClasses()">{{ title }}</div>
+            <div v-else :class="getClasses(title)">{{ title }}</div>
         </div>
     `,
 });

@@ -1,3 +1,5 @@
+import { DH_UNABLE_TO_CHECK_GENERATOR } from "constants";
+import { CardName } from "./CardName";
 import { ICardFactory } from "./cards/ICardFactory";
 
 export class Deck<T> {
@@ -38,5 +40,10 @@ export class Decks {
             }
         });
         return found;
+    }
+
+    public static allCardNames(decks: Array<Deck<any>>): Array<CardName> {
+        const arrays: Array<Array<CardName>> = decks.map(deck => deck.cards.map(cf => cf.cardName));
+        return ([] as Array<CardName>).concat(...arrays);
     }
 }

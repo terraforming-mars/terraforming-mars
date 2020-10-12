@@ -1,3 +1,4 @@
+import { Decks } from "../Deck";
 import { CardManifest } from "./CardManifest";
 import { COLONIES_CARD_MANIFEST } from "./colonies/ColoniesCardManifest";
 import { PRELUDE_CARD_MANIFEST } from "./prelude/PreludeCardManifest";
@@ -20,3 +21,7 @@ export const ALL_CARD_MANIFESTS: Array<CardManifest> = [
 export const ALL_PROJECT_DECKS = ALL_CARD_MANIFESTS.map(deck => deck.projectCards);
 export const ALL_CORPORATION_DECKS = ALL_CARD_MANIFESTS.map(deck => deck.corporationCards);
 export const ALL_PRELUDE_DECKS = ALL_CARD_MANIFESTS.map(deck => deck.preludeCards);
+
+export const ALL_PROJECT_CARD_NAMES = Decks.allCardNames(ALL_PROJECT_DECKS);
+export const ALL_CORPORATION_CARD_NAMES = Decks.allCardNames(ALL_CORPORATION_DECKS);
+export const ALL_PRELUDE_CARD_NAMES = Decks.allCardNames(ALL_PRELUDE_DECKS);

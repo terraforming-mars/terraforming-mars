@@ -1,4 +1,3 @@
-import { DH_UNABLE_TO_CHECK_GENERATOR } from "constants";
 import { CardName } from "./CardName";
 import { ICardFactory } from "./cards/ICardFactory";
 

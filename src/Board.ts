@@ -3,6 +3,7 @@ import { Player } from "./Player";
 import { SpaceType } from "./SpaceType";
 import { SpaceBonus } from "./SpaceBonus";
 import { TileType } from "./TileType";
+import { AresHandler } from "./ares/AresHandler";
 
 export abstract class Space implements ISpace {
     constructor(public id: string, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
@@ -156,9 +157,9 @@ export abstract class Board {
             // A space is available if it doesn't have a player marker on it or it belongs to |player|
             const safeForPlayer = !hasPlayerMarker || space.player === player;
             // And also, if it doesn't have a tile. Unless it's a hazard tile. And if it does have a
-            const playableSpace = space.tile === undefined || space.tile.hazard === true;
+            const playableSpace = space.tile === undefined || AresHandler.hasHazardTile(space) 
             // hazard tile, a player marker on it means it's protected by Desperate Measures.
-            const blockedByDesperateMeasures = space.tile?.hazard === true && hasPlayerMarker;
+            const blockedByDesperateMeasures = space.tile?.protectedHazard === true;
             return safeForPlayer && playableSpace && !blockedByDesperateMeasures;
         });
 

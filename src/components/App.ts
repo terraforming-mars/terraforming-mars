@@ -51,7 +51,7 @@ export const mainAppSettings = {
         updatePlayer: function () {
             const currentPathname: string = window.location.pathname;
             const xhr = new XMLHttpRequest();
-            let app = this as any;
+            const app = this as any;
             xhr.open(
                 "GET",
                 "/api/player" +
@@ -96,7 +96,7 @@ export const mainAppSettings = {
     },
     "mounted": function () {
         const currentPathname: string = window.location.pathname;
-        let app = this as any;
+        const app = this as any;
         if (currentPathname === "/player" || currentPathname === "/the-end") {
             app.updatePlayer();
         } else if (currentPathname === "/game") {

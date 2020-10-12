@@ -1,4 +1,5 @@
 import { expect } from "chai";
+import { AresHandler } from "../../../src/ares/AresHandler";
 
 import { AresSpaceBonus } from "../../../src/ares/AresSpaceBonus";
 import { SolarFarm } from "../../../src/cards/ares/SolarFarm";
@@ -22,7 +23,7 @@ describe("SolarFarm", function () {
 
     it("Play", function () {
         // Find the first spot to place a city.
-        var space = game.board.getAvailableSpacesForCity(player)[0];
+        const space = game.board.getAvailableSpacesForCity(player)[0];
         // Hack the space to have a large number of plants, just to show a matching
         // energy production bump - seven.
         space.bonus = [
@@ -40,7 +41,7 @@ describe("SolarFarm", function () {
         expect(action instanceof SelectSpace).to.eq(true);
 
         expect(player.getProduction(Resources.ENERGY)).eq(0);
-        const citySpace = game.board.getAvailableSpacesOnLand(player).filter(s => s.tile?.hazard !== true)[0];
+        const citySpace = game.board.getAvailableSpacesOnLand(player).filter(s => !AresHandler.hasHazardTile(s))[0];
         action.cb(citySpace);
         expect(citySpace.player).to.eq(player);
         expect(citySpace.tile!.tileType).to.eq(TileType.SOLAR_FARM);

@@ -1,5 +1,5 @@
 import { Player, PlayerId } from "./Player";
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_CORP_ERA_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS, ALL_COMMUNITY_CORPORATIONS} from "./Dealer";
+import {Dealer} from "./Dealer";
 import {ISpace} from "./ISpace";
 import {SpaceType} from "./SpaceType";
 import {TileType} from "./TileType";
@@ -242,28 +242,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
       }
 
-      let corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
-
-      // Add Corporate Era corporation cards
-      if (gameOptions.corporateEra) {
-        corporationCards.push(...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => new cf.factory()));
-      }
-
-      // Add prelude corporations cards
-      if (gameOptions.preludeExtension) {
-        corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
-      }
-
-      // Add Venus Next corporations cards, board colonies and milestone / award
+      // Add Venus Next board colonies and milestone / award
       if (gameOptions.venusNextExtension) {
-        corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
         this.setVenusElements(gameOptions.randomMA, gameOptions.includeVenusMA);
       }
 
       // Add colonies stuff
       if (gameOptions.coloniesExtension) {
-        corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
-
         const communityColoniesSelected = this.checkForCommunityColonies(gameOptions);
         const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
 
@@ -278,34 +263,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Add Turmoil stuff
       if (gameOptions.turmoilExtension) {
         this.turmoil = new Turmoil(this);
-        corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
-      }
-
-      // Add Promo stuff
-      if (gameOptions.promoCardsOption) {
-        corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
-      }
-
-      // Add Community corps
-      if (gameOptions.communityCardsOption) {
-        corporationCards.push(...ALL_COMMUNITY_CORPORATIONS.map((cf) => new cf.factory()));
       }
 
       // Setup custom corporation list
+      let corporationCards = this.dealer.corporationCards;
+
       const minCorpsRequired = players.length * gameOptions.startingCorporations;
       if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
 
-        // Init all available corporation cards to choose from
-        corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
-        corporationCards.push(...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_COMMUNITY_CORPORATIONS.map((cf) => new cf.factory()));
-
-        corporationCards = corporationCards.filter(
+        corporationCards = this.dealer.corporationCards.filter(
           (corpCard) => gameOptions !== undefined && gameOptions.customCorporationsList.includes(corpCard.name)
         );
       }
@@ -1544,10 +1510,6 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // Part 1, basic validation checks.
 
-      if (!AresHandler.canCover(space, tile)) {
-        throw new Error("Selected space is occupied");
-      }
-
       // Land claim a player can claim land for themselves
       if (space.player !== undefined && space.player !== player) {
         throw new Error("This space is land claimed by " + space.player.name);
@@ -1558,6 +1520,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
             `Select a valid location ${space.spaceType} is not ${spaceType}`
         );
       }
+
+      if (!AresHandler.canCover(space, tile)) {
+        throw new Error("Selected space is occupied");
+      }
+
 
       // No need to test for payment in world government.
       if (this.gameOptions.aresExtension) {
@@ -1952,7 +1919,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         if(element.tile) {
           const tileType = element.tile.tileType;
           const tileCard = element.tile.card;
-          const hazard = element.tile.hazard;
+          const protectedHazard = element.tile.protectedHazard;
           if (element.player){
             const player = this.players.find((player) => player.id === element.player!.id);
             // Prevent loss of "neutral" player tile ownership across reloads
@@ -1961,7 +1928,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           space.tile = {
             tileType: tileType,
             card: tileCard,
-            hazard: hazard
+            protectedHazard: protectedHazard
           };
         }
         // Correct Land Claim

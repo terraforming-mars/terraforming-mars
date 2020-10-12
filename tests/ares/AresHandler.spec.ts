@@ -90,8 +90,8 @@ describe("AresHandler", function () {
             .map(space => {const x: SpaceToTest = {tile: space.tile!, x: space.x, y: space.y}; return x});
 
         expect(spacesWithTiles).to.deep.eq([
-            {tile: {tileType: TileType.DUST_STORM_MILD, hazard: true}, x: 8, y: 0},
-            {tile: {tileType: TileType.DUST_STORM_MILD, hazard: true}, x: 6, y: 8}]);
+            {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 8, y: 0},
+            {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 6, y: 8}]);
    });
 
     it("Pay Adjacency Costs", function() {

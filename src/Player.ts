@@ -32,7 +32,7 @@ import {SelectCity} from "./interrupts/SelectCity";
 import {SpaceType} from "./SpaceType";
 import {ITagCount} from "./ITagCount";
 import {TileType} from "./TileType";
-import {getProjectCardByName, getCorporationCardByName} from "./Dealer";
+import {getProjectCardByName} from "./Dealer";
 import {ILoadable} from "./ILoadable";
 import {Database} from "./database/Database";
 import {SerializedPlayer} from "./SerializedPlayer";
@@ -56,6 +56,8 @@ import { SelectProductionToLose } from "./inputs/SelectProductionToLose";
 import { IProductionUnits } from "./inputs/IProductionUnits";
 import { ShiftAresGlobalParameters } from "./inputs/ShiftAresGlobalParameters";
 import { IAresGlobalParametersResponse } from "./interrupts/ShiftAresGlobalParametersInterrupt";
+import { ALL_CORPORATION_DECKS } from "./cards/AllCards";
+import { Decks } from "./Deck";
 
 export type PlayerId = string;
 
@@ -2255,6 +2257,10 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       this.waitingForCb = cb;
     }
 
+    private getCorporationCardByName(name: string) {
+        return Decks.findByName(ALL_CORPORATION_DECKS, name);
+    }
+
     // Function used to rebuild each objects
     public loadFromJSON(d: SerializedPlayer): Player {
       // Assign each attributes
@@ -2267,12 +2273,12 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
       this.actionsThisGeneration = new Set<string>(d.actionsThisGeneration);
 
       if(d.pickedCorporationCard !== undefined){
-        this.pickedCorporationCard = getCorporationCardByName(d.pickedCorporationCard.name);
+        this.pickedCorporationCard = this.getCorporationCardByName(d.pickedCorporationCard.name);
       }
 
       // Rebuild corporation card
       if (d.corporationCard !== undefined) {
-        this.corporationCard = getCorporationCardByName(d.corporationCard.name);
+        this.corporationCard = this.getCorporationCardByName(d.corporationCard.name);
         if(d.corporationCard.resourceCount && d.corporationCard.resourceCount > 0) {
           this.corporationCard!.resourceCount = d.corporationCard.resourceCount;
         }
@@ -2291,7 +2297,7 @@ export class Player implements ILoadable<SerializedPlayer, Player>{
 
       // Rebuild dealt corporation array
       this.dealtCorporationCards = d.dealtCorporationCards.map((element: CorporationCard)  => {
-        return getCorporationCardByName(element.name)!;
+        return this.getCorporationCardByName(element.name)!;
       });     
 
       // Rebuild dealt prelude array

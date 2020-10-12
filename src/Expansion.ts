@@ -2,5 +2,6 @@ export enum Expansion {
     Venus = "venus",
     Colonies = "colonies",
     Prelude = "prelude",
-    Turmoil = "colonies",
+    Turmoil = "turmoil",
+    Ares = "ares",
 }

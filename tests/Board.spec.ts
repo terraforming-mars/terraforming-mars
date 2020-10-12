@@ -96,32 +96,32 @@ describe("Board", function () {
     });
 
     it("getAvailableSpaceByOffset skips tiles", function() {
-        var space = board.getAvailableSpaceByOffset(2, 1);
+        const space = board.getAvailableSpaceByOffset(2, 1);
         expectSpace(board.getAvailableSpaceByOffset(2, 1), "08", 3, 1);
         space.tile = { tileType: TileType.GREENERY };
         expectSpace(board.getAvailableSpaceByOffset(2, 1), "09", 4, 1);
     });
 
     it("getAvailableSpaceByOffset skips hazard tiles", function() {
-        var space = board.getAvailableSpaceByOffset(2, 1);
+        const space = board.getAvailableSpaceByOffset(2, 1);
         expectSpace(board.getAvailableSpaceByOffset(2, 1), "08", 3, 1);
-        space.tile = { tileType: TileType.DUST_STORM_MILD, hazard: true };
+        space.tile = { tileType: TileType.DUST_STORM_MILD };
         expectSpace(board.getAvailableSpaceByOffset(2, 1), "09", 4, 1);
     });
 
     it("getOceansOnBoard", function() {
         expect(board.getOceansOnBoard()).eq(0);
 
-        var space = board.spaces[1];
-        space.spaceType = SpaceType.OCEAN;
-        space.tile = { tileType: TileType.OCEAN };
+        const space1 = board.spaces[1];
+        space1.spaceType = SpaceType.OCEAN;
+        space1.tile = { tileType: TileType.OCEAN };
 
         expect(board.getOceansOnBoard(true)).eq(1);
         expect(board.getOceansOnBoard(false)).eq(1);
 
-        var space = board.spaces[2];
-        space.spaceType = SpaceType.OCEAN;
-        space.tile = { tileType: TileType.OCEAN_SANCTUARY };
+        const space2 = board.spaces[2];
+        space2.spaceType = SpaceType.OCEAN;
+        space2.tile = { tileType: TileType.OCEAN_SANCTUARY };
 
         expect(board.getOceansOnBoard(true)).eq(2);
         expect(board.getOceansOnBoard(false)).eq(1);

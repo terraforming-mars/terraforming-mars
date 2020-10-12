@@ -57,7 +57,7 @@ export class Atmoscoop implements IProjectCard {
             if (!this.temperatureIsMaxed(game)) {
                 options.push(new SelectOption(
                     "Raise temperature 2 steps and add 2 floaters to " + floaterCards[0].name,
-                    "Raise temperature and Add floaters",
+                    "Raise temperature and add floaters",
                     () => {
                         player.addResourceTo(floaterCards[0], 2);
                         LogHelper.logAddResource(game, player, floaterCards[0], 2);
@@ -69,7 +69,7 @@ export class Atmoscoop implements IProjectCard {
             if (!this.venusIsMaxed(game)) {
                 options.push(new SelectOption(
                     "Raise Venus 2 steps and add 2 floaters to " + floaterCards[0].name,
-                    "Raise Venus and Add floaters",
+                    "Raise Venus and add floaters",
                     () => {
                         player.addResourceTo(floaterCards[0], 2);
                         LogHelper.logAddResource(game, player, floaterCards[0], 2);
@@ -92,7 +92,7 @@ export class Atmoscoop implements IProjectCard {
             if (!this.temperatureIsMaxed(game)) {
                 options.push(new SelectCard(
                     "Raise temperature 2 steps and select card to add 2 floaters",
-                    "Raise temperature and Add floaters",
+                    "Raise temperature and add floaters",
                     floaterCards,
                     (foundCards: Array<ICard>) => {
                         player.addResourceTo(foundCards[0], 2);
@@ -105,7 +105,7 @@ export class Atmoscoop implements IProjectCard {
             if (!this.venusIsMaxed(game)) {
                 options.push(new SelectCard(
                     "Raise Venus 2 steps and select card to add 2 floaters",
-                    "Raise Venus and Add floaters",
+                    "Raise Venus and add floaters",
                     floaterCards,
                     (foundCards: Array<ICard>) => {
                     player.addResourceTo(foundCards[0], 2);

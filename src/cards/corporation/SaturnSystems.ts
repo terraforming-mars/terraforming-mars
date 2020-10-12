@@ -21,7 +21,7 @@ export class SaturnSystems implements CorporationCard {
     }
 
     public onCorpCardPlayed(_player: Player, game: Game, card: CorporationCard) {
-        this.onCardPlayed(_player,game,card as ICard as IProjectCard);
+        return this.onCardPlayed(_player,game,card as ICard as IProjectCard);
     }
 
     public play(player: Player) {

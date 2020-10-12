@@ -3,7 +3,7 @@ import { AquiferPumping } from "../../src/cards/AquiferPumping";
 import { Color } from "../../src/Color";
 import { Player } from "../../src/Player";
 import { Game } from "../../src/Game";
-import { maxOutOceans } from "../TestingUtils"
+import { maxOutOceans } from "../TestingUtils";
 
 describe("AquiferPumping", function () {
     let card : AquiferPumping, player : Player, game : Game;

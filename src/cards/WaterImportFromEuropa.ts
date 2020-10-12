@@ -24,9 +24,9 @@ export class WaterImportFromEuropa implements IActionCard, IProjectCard {
     }
     public canAct(player: Player, game: Game): boolean {
         const oceansMaxed = game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
-        if (oceansMaxed) return false;
-  
         let oceanCost = 12;
+
+        if (oceansMaxed) return player.canAfford(oceanCost, game, false, true);
   
         if (PartyHooks.shouldApplyPolicy(game, PartyName.REDS)) {
           return player.canAfford(oceanCost + REDS_RULING_POLICY_COST, game, false, true);

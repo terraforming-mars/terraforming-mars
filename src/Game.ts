@@ -1,5 +1,5 @@
 import { Player, PlayerId } from "./Player";
-import {Dealer, ALL_VENUS_CORPORATIONS, ALL_CORPORATION_CARDS, ALL_CORP_ERA_CORPORATION_CARDS, ALL_PRELUDE_CORPORATIONS, ALL_COLONIES_CORPORATIONS, ALL_TURMOIL_CORPORATIONS, ALL_PROMO_CORPORATIONS, ALL_COMMUNITY_CORPORATIONS} from "./Dealer";
+import {Dealer} from "./Dealer";
 import {ISpace} from "./ISpace";
 import {SpaceType} from "./SpaceType";
 import {TileType} from "./TileType";
@@ -45,6 +45,7 @@ import {SelectHowToPayInterrupt} from "./interrupts/SelectHowToPayInterrupt";
 import { ILoadable } from "./ILoadable";
 import {LogMessage} from "./LogMessage";
 import {Database} from "./database/Database";
+import { SerializedColony } from "./SerializedColony";
 import { SerializedGame } from "./SerializedGame";
 import { SerializedPlayer } from "./SerializedPlayer";
 import { CardName } from "./CardName";
@@ -224,28 +225,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
         this.setupSolo();
       }
 
-      let corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
-
-      // Add Corporate Era corporation cards
-      if (gameOptions.corporateEra) {
-        corporationCards.push(...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => new cf.factory()));
-      }
-
-      // Add prelude corporations cards
-      if (gameOptions.preludeExtension) {
-        corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
-      }
-
       // Add Venus Next corporations cards, board colonies and milestone / award
       if (gameOptions.venusNextExtension) {
-        corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
         this.setVenusElements(gameOptions.randomMA, gameOptions.includeVenusMA);
       }
 
       // Add colonies stuff
       if (gameOptions.coloniesExtension) {
-        corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
-
         const communityColoniesSelected = this.checkForCommunityColonies(gameOptions);
         const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
 
@@ -260,34 +246,15 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Add Turmoil stuff
       if (gameOptions.turmoilExtension) {
         this.turmoil = new Turmoil(this);
-        corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
-      }
-
-      // Add Promo stuff
-      if (gameOptions.promoCardsOption) {
-        corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
-      }
-
-      // Add Community corps
-      if (gameOptions.communityCardsOption) {
-        corporationCards.push(...ALL_COMMUNITY_CORPORATIONS.map((cf) => new cf.factory()));
       }
 
       // Setup custom corporation list
+      let corporationCards = this.dealer.corporationCards;
+
       const minCorpsRequired = players.length * gameOptions.startingCorporations;
       if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
 
-        // Init all available corporation cards to choose from
-        corporationCards = ALL_CORPORATION_CARDS.map((cf) => new cf.factory());
-        corporationCards.push(...ALL_CORP_ERA_CORPORATION_CARDS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_PRELUDE_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_VENUS_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_COLONIES_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_TURMOIL_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_PROMO_CORPORATIONS.map((cf) => new cf.factory()));
-        corporationCards.push(...ALL_COMMUNITY_CORPORATIONS.map((cf) => new cf.factory()));
-
-        corporationCards = corporationCards.filter(
+        corporationCards = this.dealer.corporationCards.filter(
           (corpCard) => gameOptions !== undefined && gameOptions.customCorporationsList.includes(corpCard.name)
         );
       }
@@ -1801,6 +1768,24 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return value;
     }
 
+    private loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<IColony> {
+      const result: Array<IColony> = [];
+      for (const serialized of colonies) {
+        const colony = getColonyByName(serialized.name);
+        if (colony !== undefined) {
+          colony.isActive = serialized.isActive;
+          colony.visitor = serialized.visitor;
+          colony.trackPosition = serialized.trackPosition;
+          colony.colonies = serialized.colonies;
+          colony.resourceType = serialized.resourceType;
+          result.push(colony);
+        } else {
+          console.warn(`colony ${serialized.name} not found`);
+        }
+      }
+      return result;
+    }
+
     // Function used to rebuild each objects
     public loadFromJSON(d: SerializedGame): Game {
       // Assign each attributes
@@ -1880,24 +1865,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       // Reload colonies elements if needed
       if (this.gameOptions.coloniesExtension) {
         this.colonyDealer = new ColonyDealer();
-        this.colonies = new Array<IColony>();
 
-        d.colonyDealer?.discardedColonies.forEach((element: IColony) => {
-          if(this.colonyDealer !== undefined) {
-            this.colonyDealer.discardedColonies.push(element);
-          }
-        });
+        if (d.colonyDealer !== undefined) {
+          this.colonyDealer.discardedColonies = this.loadColoniesFromJSON(d.colonyDealer.discardedColonies);
+        }
 
-        d.colonies.forEach((element: IColony) => {
-          const colony = getColonyByName(element.name);
-
-          // Assign each attributes
-          Object.assign(colony, element);
-
-          if (colony !== undefined) {
-            this.colonies.push(colony);
-          }
-        });
+        this.colonies = this.loadColoniesFromJSON(d.colonies);
       }
 
       // Reload turmoil elements if needed

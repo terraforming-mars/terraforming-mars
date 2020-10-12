@@ -774,7 +774,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       for (const somePlayer of this.getPlayers()) {
         if (somePlayer !== player && somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
             const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCorpCardPlayed(player, this, corporationCard);
-            if (actionFromPlayedCard !== undefined) {  // always be undefined for the present
+            if (actionFromPlayedCard !== undefined) {
                 this.interrupts.push({
                     player: player,
                     playerInput: actionFromPlayedCard

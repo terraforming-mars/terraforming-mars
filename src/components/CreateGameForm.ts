@@ -416,8 +416,8 @@ export const CreateGameForm = Vue.component("create-game-form", {
 
                             <div class="create-game-subsection-label">Fan-made</div>
 
-                            <input type="checkbox" name="fan-made" id="fan-made-checkbox" v-model="communityCardsOption">
-                            <label for="fan-made-checkbox">
+                            <input type="checkbox" name="community" id="communityCards-checkbox" v-model="communityCardsOption">
+                            <label for="communityCards-checkbox">
                                 <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community" class="tooltip" target="_blank">&#9432;</a>
                             </label>
                         </div>

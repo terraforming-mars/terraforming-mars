@@ -12,6 +12,7 @@ import { AerospaceMission } from "./AerospaceMission";
 import { TradeAdvance } from "./TradeAdvance";
 import { PoliticalUprising } from "./PoliticalUprising";
 import { ByElection } from "./ByElection";
+import { Midas } from "./Midas";
 import { Expansion } from "../../Expansion";
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
@@ -21,7 +22,8 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
         { cardName: CardName.AGRICOLA_INC, factory: AgricolaInc },
         { cardName: CardName.PROJECT_WORKSHOP, factory: ProjectWorkshop },
         { cardName: CardName.INCITE, factory: Incite },
-        { cardName: CardName.PLAYWRIGHTS, factory: Playwrights }
+        { cardName: CardName.PLAYWRIGHTS, factory: Playwrights },
+        { cardName: CardName.MIDAS, factory: Midas },
     ],
     preludeCards: [
         { cardName: CardName.RESEARCH_GRANT, factory: ResearchGrant },

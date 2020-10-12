@@ -1,6 +1,6 @@
 import Vue from "vue";
 import { Card } from "./Card";
-import { ALL_CORPORATION_DECKS, ALL_PRELUDE_CARD_NAMES, ALL_PROJECT_CARD_NAMES } from "../cards/AllCards";
+import { ALL_CORPORATION_CARD_NAMES, ALL_PRELUDE_CARD_NAMES, ALL_PROJECT_CARD_NAMES } from "../cards/AllCards";
 
 export const DebugUI = Vue.component("debug-ui", {
     components: {
@@ -16,7 +16,7 @@ export const DebugUI = Vue.component("debug-ui", {
             return ALL_PROJECT_CARD_NAMES.sort();
         },
         getAllCorporationCards: function () {
-            return ALL_CORPORATION_DECKS.sort();
+            return ALL_CORPORATION_CARD_NAMES.sort();
         },
         getAllPreludeCards: function () {
             return ALL_PRELUDE_CARD_NAMES.sort();

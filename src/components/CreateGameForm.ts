@@ -9,6 +9,7 @@ import { ColoniesFilter } from "./ColoniesFilter";
 import { ColonyName } from "../colonies/ColonyName";
 import { CardsFilter } from "./CardsFilter";
 import { Button } from "../components/common/Button";
+import { playerColorClass } from "../utils/utils";
 
 interface CreateGameModel {
     firstIndex: number;
@@ -178,6 +179,12 @@ export const CreateGameForm = Vue.component("create-game-form", {
             } else {
                 return "create-game-random";
             }
+        },
+        getPlayerCubeColorClass: function(color: string): string{
+            return playerColorClass(color.toLowerCase(), "bg");
+        },
+        getPlayerContainerColorClass: function(color: string): string{
+            return playerColorClass(color.toLowerCase(), "bg_transparent");
         },
         createGame: function () {
             const component = (this as any) as CreateGameModel;
@@ -559,7 +566,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 <div class="container">
                     <div class="columns">
                         <template v-for="newPlayer in getPlayers()">
-                        <div :class="'form-group col6 create-game-player create-game--block create-game-playerblock-'+newPlayer.color">
+                        <div :class="'form-group col6 create-game-player create-game--block '+getPlayerContainerColorClass(newPlayer.color)">
                             <div>
                                 <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(newPlayer)" v-model="newPlayer.name" />
                             </div>
@@ -567,7 +574,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                                 <template v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple']">
                                     <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color" :id="'radioBox' + color + newPlayer.index">
                                     <label :for="'radioBox' + color + newPlayer.index">
-                                        <div :class="'create-game-colorbox create-game-colorbox-'+color.toLowerCase()"></div>
+                                        <div :class="'create-game-colorbox '+getPlayerCubeColorClass(color)"></div>
                                     </label>
                                 </template>
                             </div>

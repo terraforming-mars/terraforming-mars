@@ -207,11 +207,6 @@ export const CreateGameForm = Vue.component("create-game-form", {
                 return player;
             });
 
-            if (component.board === "random") {
-                const boards = Object.values(BoardName);
-                this.board = boards[Math.floor(Math.random() * boards.length)];
-            }
-
             const corporateEra = component.corporateEra;
             const prelude = component.prelude;
             const draftVariant = component.draftVariant;

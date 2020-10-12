@@ -5,6 +5,7 @@ import { ResourceType } from "../../ResourceType";
 import { ICard, IActionCard, IResourceCard } from "../ICard";
 import { SelectCard } from "../../inputs/SelectCard";
 import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
 
 export class StormCraftIncorporated implements IActionCard, CorporationCard, IResourceCard {
     public name: CardName =  CardName.STORMCRAFT_INCORPORATED;
@@ -12,6 +13,7 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
     public startingMegaCredits: number = 48;
     public resourceType: ResourceType = ResourceType.FLOATER;
     public resourceCount: number = 0;
+    public cardType: CardType = CardType.CORPORATION;
 
     public play() {
         return undefined;

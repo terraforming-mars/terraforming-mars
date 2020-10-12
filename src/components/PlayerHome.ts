@@ -1,7 +1,7 @@
 import Vue from "vue";
 
 import { Board } from "./Board";
-import { Card } from "./Card";
+import { Card } from "./card/Card";
 import { Milestone } from "./Milestone";
 import { Award } from "./Award";
 import { PlayersOverview } from "./overview/PlayersOverview";
@@ -24,7 +24,7 @@ export const PlayerHome = Vue.component("player-home", {
     components: {
         "board": Board,
         "dynamic-title": DynamicTitle,
-        "card": Card,
+        Card,
         "players-overview": PlayersOverview,
         "waiting-for": WaitingFor,
         "milestone": Milestone,
@@ -42,7 +42,7 @@ export const PlayerHome = Vue.component("player-home", {
             player: PlayerModel,
             highlightActive: boolean
         ): string => {
-            let classes = ["highlighter_box"];
+            const classes = ["highlighter_box"];
 
             if (highlightActive) {
                 if (
@@ -163,7 +163,7 @@ export const PlayerHome = Vue.component("player-home", {
                 <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
                     <dynamic-title title="Drafted cards" :color="player.color" />
                     <div v-for="card in player.draftedCards" :key="card.name" class="cardbox">
-                        <card :card="card"></card>
+                        <Card :card="card"/>
                     </div>
                 </div>
 
@@ -171,17 +171,17 @@ export const PlayerHome = Vue.component("player-home", {
                 <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0">
                     <dynamic-title title="Cards In Hand" :color="player.color" :withAdditional="true" :additional="player.cardsInHandNbr.toString()" />
                     <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
-                        <card :card="card"></card>
+                        <Card :card="card"/>
                     </div>
                 </div>
 
                 <div class="player_home_block player_home_block--cards">
                     <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true).toString()" />
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
-                        <card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"></card>
+                        <Card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"/>
                     </div>
                     <div v-for="card in getCardsByType(player.playedCards, [getActiveCardType()])" :key="card.name" class="cardbox">
-                        <card :card="card" :actionUsed="isCardActivated(card, player)"> </card>
+                        <Card :card="card" :actionUsed="isCardActivated(card, player)"/> 
                     </div>
 
                     <stacked-cards class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
@@ -192,7 +192,7 @@ export const PlayerHome = Vue.component("player-home", {
                     <dynamic-title title="Self-Replicating Robots cards" :color="player.color"/>
                     <div>
                         <div v-for="card in getCardsByType(player.selfReplicatingRobotsCards, [getActiveCardType()])" :key="card.name" class="cardbox">
-                            <card :card="card"></card>
+                            <Card :card="card"/>
                         </div>
                     </div>
                 </div>
@@ -202,21 +202,21 @@ export const PlayerHome = Vue.component("player-home", {
             <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
 
                 <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
-                    <card :card="card"></card>
+                    <Card :card="card"/>
                 </div>
 
                 <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
-                    <card :card="card"></card>
+                    <Card :card="card"/>
                 </div>
 
                 <div v-for="card in player.dealtProjectCards" :key="card.name" class="cardbox" v-if="player.initialDraft">
-                    <card :card="card"></card>
+                    <Card :card="card"/>
                 </div>
 
                 <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
                     <dynamic-title title="Drafted Cards" :color="player.color"/>
                     <div v-for="card in player.draftedCards" :key="card.name" class="cardbox">
-                        <card :card="card"></card>
+                        <Card :card="card"/>
                     </div>
                 </div>
 

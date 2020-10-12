@@ -74,11 +74,11 @@ describe("DirectedImpactors", function () {
         expect(player.titanium).to.eq(0);
     });
 
-    it("Cannot spend resource to raise temperature if max", function () {
+    it("Can still spend resource even if temperature is max", function () {
         player.playedCards.push(card);
         card.resourceCount = 1;
         (game as any).temperature = MAX_TEMPERATURE;
 
-        expect(card.canAct(player, game)).to.eq(false);
+        expect(card.canAct(player, game)).to.eq(true);
     });
 });

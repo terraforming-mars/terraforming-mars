@@ -488,10 +488,10 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </template>
                             
                             <template v-if="turmoil">
-                            <label class="form-switch">
-                                <input type="checkbox" v-model="removeNegativeGlobalEventsOption">
-                                <span v-i18n>Remove negative Global Events</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#remove-negative-global-events" class="tooltip" target="_blank">&#9432;</a>
-                            </label>
+                                <input type="checkbox" v-model="removeNegativeGlobalEventsOption" id="removeNegativeEvent-checkbox">
+                                <label for="removeNegativeEvent-checkbox">
+                                    <span v-i18n>Remove negative Global Events</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#remove-negative-global-events" class="tooltip" target="_blank">&#9432;</a>
+                                </label>
                             </template>
 
                         </div>

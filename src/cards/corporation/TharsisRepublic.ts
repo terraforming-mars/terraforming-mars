@@ -5,14 +5,18 @@ import { Game } from "../../Game";
 import { SelectSpace } from "../../inputs/SelectSpace";
 import { SpaceType } from "../../SpaceType";
 import { ISpace } from "../../ISpace";
-import { Resources } from '../../Resources';
-import { CardName } from '../../CardName';
+import { Resources } from "../../Resources";
+import { CardName } from "../../CardName";
 import { Board } from "../../Board";
+import { CardType } from "../CardType";
+
 
 export class TharsisRepublic implements CorporationCard {
     public name: CardName = CardName.THARSIS_REPUBLIC;
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 40;
+    public cardType: CardType = CardType.CORPORATION;
+
     public initialAction(player: Player, game: Game) {
         return new SelectSpace("Select space on mars for city tile", game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
             game.addCityTile(player, space.id);

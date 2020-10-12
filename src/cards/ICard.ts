@@ -1,4 +1,4 @@
-
+import { CardType } from "./CardType";
 import { AndOptions } from "../inputs/AndOptions";
 import { IProjectCard } from "../cards/IProjectCard";
 import { ISpace } from "../ISpace";
@@ -29,7 +29,7 @@ export interface IResourceCard {
 
 export interface ICard {
     name: CardName;
-    tags: Array<Tags>;
+    tags: Array<Tags>; 
     play: (player: Player, game: Game) => PlayerInput | undefined;
     action?: (player: Player, game: Game) =>  OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
     canAct?: (player: Player, game: Game) => boolean;
@@ -41,4 +41,6 @@ export interface ICard {
     onTilePlaced?: (player: Player, space: ISpace, game: Game) => void;
     resourceType?: ResourceType;
     resourceCount?: number;
+    cost?: number;
+    cardType: CardType;
 }

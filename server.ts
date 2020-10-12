@@ -8,6 +8,7 @@ import * as querystring from "querystring";
 import * as child_process from "child_process";
 
 import { AndOptions } from "./src/inputs/AndOptions";
+import { BoardName } from "./src/BoardName";
 import { CardModel } from "./src/models/CardModel";
 import { ColonyModel } from "./src/models/ColonyModel";
 import { Color } from "./src/Color";
@@ -427,6 +428,11 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                 }
             }
 
+            if (gameReq.board === "random") {
+                const boards = Object.values(BoardName);
+                gameReq.board = boards[Math.floor(Math.random() * boards.length)];
+            }
+
             const gameOptions = {
                 boardName: gameReq.board,
                 clonedGamedId: gameReq.clonedGamedId,
@@ -530,8 +536,7 @@ function getAwards(game: Game): Array<FundedAwardModel> {
 }
 
 function getCorporationCard(player: Player): CardModel | undefined {
-    if (player.corporationCard === undefined) return undefined;
-
+    if (player.corporationCard === undefined) return undefined; 
     return {
         name: player.corporationCard.name,
         resources: player.getResourcesOnCard(player.corporationCard),

@@ -9,6 +9,7 @@ import { SelectOption } from "../../inputs/SelectOption";
 import { OrOptions } from "../../inputs/OrOptions";
 import { CardName } from "../../CardName";
 import { IResourceCard } from "../ICard";
+import { CardType } from "../CardType";
 
 
 export class Recyclon implements CorporationCard, IResourceCard {
@@ -17,6 +18,7 @@ export class Recyclon implements CorporationCard, IResourceCard {
     public startingMegaCredits: number = 38;
     public resourceType: ResourceType = ResourceType.MICROBE;
     public resourceCount: number = 0;
+    public cardType: CardType = CardType.CORPORATION;
 
     public play(player: Player) {
         player.addProduction(Resources.STEEL);

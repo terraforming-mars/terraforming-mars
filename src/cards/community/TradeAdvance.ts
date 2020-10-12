@@ -2,7 +2,7 @@ import { Tags } from "../Tags";
 import { Player } from "../../Player";
 import { PreludeCard } from "../prelude/PreludeCard";
 import { IProjectCard } from "../IProjectCard";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
 import { Game } from "../../Game";
 import { ColonyName } from "../../colonies/ColonyName";
 import { OrOptions } from "../../inputs/OrOptions";

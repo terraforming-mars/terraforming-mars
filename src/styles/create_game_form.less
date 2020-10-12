@@ -44,13 +44,13 @@
 
 .create-game-form {
     margin: 0 25px 25px 0;
-    max-width: 1002px;
     padding-top: 5px;
 }
 
 .create-game-action {
-    margin: 40px auto;
-    text-align: center;
+    margin: 40px 5px;
+    padding-left: 15px;
+    text-align: left;
     width: 100%;
 }
 
@@ -92,14 +92,109 @@
     text-decoration: none;
 }
 .create-game-divider {
-    background:rgb(148, 148, 148);
+    background:rgba(148, 148, 148, 0.5);
     height: 3px;
-    width: 80%;	
+    line-height: 3px;
+    width: 100%;	
     margin-top: 16px;
     margin-bottom: 8px;	
 }
 
-.expansion-label {
+.create-game-subsection-label {
     font-size: 20px;
     color: gray;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
+
+.create-game-page-container {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: black;
+}
+
+.create-game-page-column {
+  display: flex;
+  flex-flow: column wrap;
+  padding: 20px 10px;
+}
+
+.create-game-page-column-row {
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+.create-game-page-column input[type="checkbox"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+.create-game-page-column input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+
+.create-game-page-column label {
+  color: #ccc;
+  display: inline-block;
+  background-color: #303030;
+  padding: 10px 20px 10px 20px;
+  font-family: sans-serif, Arial;
+  font-size: 16px;
+  border-radius: 8px;
+  text-align: center;
+  margin: 4px;
+  min-width: 125px;
+}
+
+.create-game-page-column .expansion-button {
+    text-align: left;
+  }
+
+.create-game-page-column label:hover {
+  background-color: rgb(104, 104, 104);
+  cursor: pointer;
+}
+
+.create-game-page-column input[type="radio"]:checked + label {
+  background-color: rgb(199, 199, 199);
+  color: black;
+}
+
+.create-game-page-column input[type="checkbox"]:checked + label {
+  background-color: rgb(199, 199, 199);
+  color: black;
+}
+
+.create-game-page-column .create-game-tharsis {
+    color: @board-tharsis;
+    margin-right: 10px;
+    vertical-align: text-bottom;
+}
+.create-game-page-column .create-game-hellas {
+    color: @board-hellas;
+    margin-right: 10px;
+    vertical-align: text-bottom;
+}
+.create-game-page-column .create-game-elysium {
+    color: @board-elysium;
+    margin-right: 10px;
+    vertical-align: text-bottom;
+}
+.create-game-page-column .create-game-random {
+    color: rgb(106,106,106);
+    margin-right: 10px;
+    vertical-align: text-bottom;
+}
+
+.create-game-expansion-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-size: 20px 20px;
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    margin: 0px 10px;
+  }

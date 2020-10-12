@@ -8,6 +8,7 @@ import * as querystring from "querystring";
 import * as child_process from "child_process";
 
 import { AndOptions } from "./src/inputs/AndOptions";
+import { BoardName } from "./src/BoardName";
 import { CardModel } from "./src/models/CardModel";
 import { ColonyModel } from "./src/models/ColonyModel";
 import { Color } from "./src/Color";
@@ -425,6 +426,11 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
                     firstPlayer = players[i];
                     break;
                 }
+            }
+
+            if (gameReq.board === "random") {
+                const boards = Object.values(BoardName);
+                gameReq.board = boards[Math.floor(Math.random() * boards.length)];
             }
 
             const gameOptions = {

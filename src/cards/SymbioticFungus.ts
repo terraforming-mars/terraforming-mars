@@ -20,11 +20,12 @@ export class SymbioticFungus implements IActionCard, IProjectCard {
     public play() {
         return undefined;
     }
-    public canAct(player: Player): boolean {
-        return player.getResourceCards(ResourceType.MICROBE).length > 0;
+    public canAct(): boolean {
+        return true;
     }
     public action(player: Player, game: Game) {
         const availableCards = player.getResourceCards(ResourceType.MICROBE);
+        if (availableCards.length === 0) return undefined;
 
         if (availableCards.length === 1) {
             player.addResourceTo(availableCards[0]);

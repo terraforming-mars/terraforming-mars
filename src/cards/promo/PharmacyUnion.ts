@@ -12,12 +12,14 @@ import { ICard } from "../ICard";
 import { PartyHooks } from "../../turmoil/parties/PartyHooks";
 import { PartyName } from "../../turmoil/parties/PartyName";
 import { REDS_RULING_POLICY_COST } from "../../constants";
+import { CardType } from "../CardType";
 
 export class PharmacyUnion implements CorporationCard {
     public name: CardName = CardName.PHARMACY_UNION;
     public tags: Array<Tags> = [Tags.MICROBES, Tags.MICROBES];
     public startingMegaCredits: number = 46; // 54 minus 8 for the 2 deseases
     public resourceType: ResourceType = ResourceType.DISEASE;
+    public cardType: CardType = CardType.CORPORATION;
     public resourceCount: number = 0;
     public isDisabled: boolean = false;
 

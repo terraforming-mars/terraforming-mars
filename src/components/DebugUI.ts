@@ -1,15 +1,19 @@
 import Vue from "vue";
-import { Card } from "./Card";
-import { ALL_CORPORATION_CARD_NAMES, ALL_PRELUDE_CARD_NAMES, ALL_PROJECT_CARD_NAMES } from "../cards/AllCards";
+import { Card } from "./card/Card";
+import {
+    ALL_CORPORATION_CARD_NAMES,
+    ALL_PRELUDE_CARD_NAMES,
+    ALL_PROJECT_CARD_NAMES,
+} from "../cards/AllCards";
 
 export const DebugUI = Vue.component("debug-ui", {
     components: {
-        Card
+        Card,
     },
-    data: function() {
+    data: function () {
         return {
-          filterText: ""
-        }
+            filterText: "",
+        };
     },
     methods: {
         getAllProjectCards: function () {
@@ -21,9 +25,14 @@ export const DebugUI = Vue.component("debug-ui", {
         getAllPreludeCards: function () {
             return ALL_PRELUDE_CARD_NAMES.sort();
         },
-        filtered: function(cardName: string):boolean {
-            return this.$data.filterText.length === 0 || cardName.toUpperCase().indexOf(this.$data.filterText.toUpperCase()) > -1;
-        }
+        filtered: function (cardName: string): boolean {
+            return (
+                this.$data.filterText.length === 0 ||
+                cardName
+                    .toUpperCase()
+                    .indexOf(this.$data.filterText.toUpperCase()) > -1
+            );
+        },
     },
     template: `
         <div class="debug-ui-container">
@@ -50,5 +59,5 @@ export const DebugUI = Vue.component("debug-ui", {
                 </div>
             </section>
         </div>
-    `
-})
+    `,
+});

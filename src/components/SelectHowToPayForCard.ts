@@ -14,7 +14,7 @@ interface SelectHowToPayForCardModel {
 }
 
 import { HowToPay } from "../inputs/HowToPay";
-import { getProjectCardByName, Card } from "./Card";
+import { getProjectCardByName, Card } from "./card/Card";
 import { Tags } from "../cards/Tags";
 import { PaymentWidgetMixin } from "./PaymentWidgetMixin";
 import { PreferencesManager } from "./PreferencesManager";
@@ -35,12 +35,12 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
         } as SelectHowToPayForCardModel;
     },
     components: {
-        "card": Card,
+        Card,
         "Button": Button   
     },
     mixins: [PaymentWidgetMixin],
     mounted: function () {
-        let app = this;
+        const app = this;
         Vue.nextTick(function () {
             app.$data.cost = app.getCardCost();
             app.$data.megaCredits = (app as any).getMegaCreditsMax();
@@ -326,7 +326,7 @@ export const SelectHowToPayForCard = Vue.component("select-how-to-pay-for-card",
 
   <label v-for="availableCard in playerinput.cards" class="payments_cards">
     <input class="hidden" type="radio" v-model="card" v-on:change="cardChanged()" :value="availableCard" />
-    <card class="cardbox" :card="availableCard"></card>
+    <Card class="cardbox" :card="availableCard" />
   </label>
 
   <section v-trim-whitespace>

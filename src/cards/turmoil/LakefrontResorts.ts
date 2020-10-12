@@ -1,15 +1,17 @@
 import { CorporationCard } from "../corporation/CorporationCard";
 import { Tags } from "../Tags";
-import { Player } from '../../Player';
+import { Player } from "../../Player";
 import { ISpace } from "../../ISpace";
 import { TileType } from "../../TileType";
 import { Resources } from "../../Resources";
-import { CardName } from '../../CardName';
+import { CardName } from "../../CardName";
+import { CardType } from "../CardType";
 
 export class LakefrontResorts implements CorporationCard {
     public name: CardName = CardName.LAKEFRONT_RESORTS;
     public tags: Array<Tags> = [Tags.STEEL];
     public startingMegaCredits: number = 54;
+    public cardType: CardType = CardType.CORPORATION;
 
     public play(player: Player) {
         player.oceanBonus = 3;

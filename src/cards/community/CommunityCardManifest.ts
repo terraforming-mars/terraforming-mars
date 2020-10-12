@@ -27,11 +27,35 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     ],
     preludeCards: [
         { cardName: CardName.RESEARCH_GRANT, factory: ResearchGrant },
-        { cardName: CardName.VALUABLE_GASES, factory: ValuableGases, compatibility: Expansion.Venus },
-        { cardName: CardName.VENUS_FIRST, factory: VenusFirst, compatibility: Expansion.Venus },
-        { cardName: CardName.AEROSPACE_MISSION, factory: AerospaceMission, compatibility: Expansion.Colonies },
-        { cardName: CardName.TRADE_ADVANCE, factory: TradeAdvance, compatibility: Expansion.Colonies },
-        { cardName: CardName.POLITICAL_UPRISING, factory: PoliticalUprising, compatibility: Expansion.Turmoil  },
-        { cardName: CardName.BY_ELECTION, factory: ByElection, compatibility: Expansion.Turmoil  },
-    ]
-})
+        {
+            cardName: CardName.VALUABLE_GASES,
+            factory: ValuableGases,
+            compatibility: Expansion.Venus,
+        },
+        {
+            cardName: CardName.VENUS_FIRST,
+            factory: VenusFirst,
+            compatibility: Expansion.Venus,
+        },
+        {
+            cardName: CardName.AEROSPACE_MISSION,
+            factory: AerospaceMission,
+            compatibility: Expansion.Colonies,
+        },
+        {
+            cardName: CardName.TRADE_ADVANCE,
+            factory: TradeAdvance,
+            compatibility: Expansion.Colonies,
+        },
+        {
+            cardName: CardName.POLITICAL_UPRISING,
+            factory: PoliticalUprising,
+            compatibility: Expansion.Turmoil,
+        },
+        {
+            cardName: CardName.BY_ELECTION,
+            factory: ByElection,
+            compatibility: Expansion.Turmoil,
+        },
+    ],
+});

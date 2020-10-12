@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { Card } from "./Card";
+import { Card } from "./card/Card";
 
 export const HelpIconology = Vue.component("help-iconology", {
     components: {

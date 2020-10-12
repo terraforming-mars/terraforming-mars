@@ -21,12 +21,16 @@ export interface CorporationCard extends ICard {
         player: Player,
         game: Game
     ) => OrOptions | SelectCard<ICard> | SelectOption | SelectSpace | undefined;
-    onCardPlayed?: (player: Player, game: Game, card: IProjectCard) => void;
+    onCardPlayed?: (
+        player: Player,
+        game: Game,
+        card: IProjectCard
+    ) => OrOptions | void;
     onCorpCardPlayed?: (
         player: Player,
         game: Game,
         card: CorporationCard
-    ) => void;
+    ) => OrOptions | void;
     resourceType?: ResourceType;
     onProductionPhase?: (player: Player) => undefined;
     isDisabled?: boolean;

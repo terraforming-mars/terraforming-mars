@@ -50,8 +50,8 @@ export class PharmacyUnion implements CorporationCard {
         }
     }
 
-    public onCorpCardPlayed(player: Player, game: Game, card: CorporationCard): void {
-         this.onCardPlayed(player,game,card as ICard as IProjectCard);
+    public onCorpCardPlayed(player: Player, game: Game, card: CorporationCard) {
+        return this.onCardPlayed(player,game,card as ICard as IProjectCard);
     }
 
     private runInterrupts(player: Player, game: Game, scienceTags: number): void {

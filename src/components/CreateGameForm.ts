@@ -428,7 +428,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             <template v-for="boardName in boards">
                                 <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'">
                                 <label :for="boardName+'-checkbox'" class="expansion-button">
-                                    <span :class="getBoardColorClass(boardName)">&#x2B22;</span><span class="capitalized" v-i18n>{{ boardName }}</span>
+                                    <span :class="'create-game-board-hexagon '+getBoardColorClass(boardName)">&#x2B22;</span><span class="capitalized" v-i18n>{{ boardName }}</span>
                                 </label>
                             </template>
                         </div>
@@ -580,7 +580,7 @@ export const CreateGameForm = Vue.component("create-game-form", {
                             </div>
                             <div>
                                 <template v-if="beginnerOption">
-                                    <label v-if="isBeginnerToggleEnabled()" class="form-switch form-inline">
+                                    <label v-if="isBeginnerToggleEnabled()" class="form-switch form-inline create-game-beginner-option-label">
                                         <input type="checkbox" v-model="newPlayer.beginner">
                                         <i class="form-icon"></i> <span v-i18n>Beginner?</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#beginner-corporation" class="tooltip" target="_blank">&#9432;</a>
                                     </label>

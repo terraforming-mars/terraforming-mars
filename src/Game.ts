@@ -1510,13 +1510,8 @@ export class Game implements ILoadable<SerializedGame, Game> {
       const arcadianCommunityBonus = space.player === player && player.isCorporation(CorporationName.ARCADIAN_COMMUNITIES);
 
       // Part 4. Place the tile
-
-      if (tile.tileType === TileType.OCEAN) {
-        space.player = undefined;
-      } else {
-        space.player = player;
-      }
       space.tile = tile;
+      space.player = player;
       LogHelper.logTilePlacement(this, player, space, tile.tileType);
 
       // Part 5. Collect the bonuses
@@ -1552,6 +1547,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
         space.player = undefined;
       }
 
+      // Mining Guild tile placement effects should resolve before removing space.player for Oceans
       this.players.forEach((p) => {
         if (p.corporationCard !== undefined &&
             p.corporationCard.onTilePlaced !== undefined) {
@@ -1563,6 +1559,10 @@ export class Game implements ILoadable<SerializedGame, Game> {
           }
         });
       });
+
+      if (tile.tileType === TileType.OCEAN) {
+        space.player = undefined;
+      }
     }
 
     public addGreenery(

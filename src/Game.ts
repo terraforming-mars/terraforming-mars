@@ -62,10 +62,6 @@ import { CardType } from "./cards/CardType";
 import { ColonyModel } from "./models/ColonyModel";
 import { IAresData } from "./ares/IAresData";
 import { LogBuilder } from "./LogBuilder";
-import { MiningAreaAres } from "./cards/ares/MiningAreaAres";
-import { LandClaim } from "./cards/LandClaim";
-import { DesperateMeasures } from "./cards/ares/DesperateMeasures";
-import { MiningRightsAres } from "./cards/ares/MiningRightsAres";
 
 export interface Score {
   corporation: String;

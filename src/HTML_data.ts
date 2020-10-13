@@ -3036,7 +3036,7 @@ export const HTML_DATA: Map<string, string> =
             <div class="content ">
               <div class="points points-big ">1</div>
               <div class="production-box production-box-size2a">
-                <div class="plant production"></div> / <div class="tile trade"></div>
+                <div class="plant production"></div> / <div class="colony colony-icon-small"></div>
               </div><br>
               <div class="resource animal"></div>* <div class="resource microbe" style="margin-left:20px;"></div><div class="resource microbe"></div>*
               <div class="description">

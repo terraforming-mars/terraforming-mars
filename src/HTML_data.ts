@@ -4882,7 +4882,7 @@ export const HTML_DATA: Map<string, string> =
         </div>
     </div>
 `],
-[CardName.SNOW_ALGAE,` 
+[CardName.OW_ALGAE,` 
     <div class="content">
         <div class="requirements">2 Oceans</div>
         <div class="production-box production-box-size2">
@@ -5858,8 +5858,8 @@ export const HTML_DATA: Map<string, string> =
         <div class="resource animal "></div>
         <div class="description " style="text-align:left;">
             (Requires 5 ocean tiles. Place this tile on top of an existing ocean tile.
-              The tile grants an <b>adjacency bonus</b> of 1 animal.
-              Action: Add 1 animal to this card. 1 VP per animal on this card.)
+              The tile grants an <b>adjacency bonus</b> of 1 animal.<br/>
+              Add 1 animal to this card. 1 VP per animal on this card.)
         </div>
     </div>
 `],

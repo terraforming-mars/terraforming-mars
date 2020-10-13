@@ -42,16 +42,7 @@ describe("OceanSanctuary", function () {
     expect(oceanSpace.player).to.eq(player);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_SANCTUARY);
     expect(oceanSpace.adjacency).to.deep.eq({ bonus: [AresSpaceBonus.ANIMAL] });
-  });
-
-
-  it("Effect", function() {
-    card.resourceCount = 4;
-
-    expect(card.canAct(player, game)).is.true;
-    card.action(player, game);
-
-    expect(card.resourceCount).eq(5);
+    expect(card.resourceCount).is.eq(1);
   });
 
   it("Ocean Sanctuary counts as ocean for adjacency", function() {

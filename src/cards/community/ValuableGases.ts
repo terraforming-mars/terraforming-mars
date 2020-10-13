@@ -12,7 +12,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     public name: CardName = CardName.VALUABLE_GASES;
 
     public play(player: Player) {     
-        player.megaCredits += 10;
+        player.megaCredits += 6;
         return undefined;
     }
 

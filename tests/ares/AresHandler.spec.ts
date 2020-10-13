@@ -17,6 +17,7 @@ import { IProductionUnits } from "../../src/inputs/IProductionUnits";
 import { OriginalBoard } from "../../src/OriginalBoard";
 import { DesperateMeasures } from "../../src/cards/ares/DesperateMeasures";
 import { fail } from "assert";
+import { Phase } from "../../src/Phase";
 
 describe("AresHandler", function () {
     let player : Player, otherPlayer: Player, game : Game;
@@ -351,14 +352,15 @@ describe("AresHandler", function () {
         const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
         firstSpace.adjacency = { bonus: [ SpaceBonus.DRAW_CARD ] };
         game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.RESTRICTED_AREA});
-        
+        game.phase = Phase.SOLAR;
+
         player.megaCredits = 0;
         player.cardsInHand = [];
         otherPlayer.megaCredits = 0;
         otherPlayer.cardsInHand = [];
 
         const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY}, true);
+        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
 
         // Neither player gets money or a card.
         expect(player.megaCredits).is.eq(0);
@@ -371,12 +373,13 @@ describe("AresHandler", function () {
         const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
         firstSpace.adjacency = { bonus: [ ], cost: 2 };
         game.addTile(otherPlayer, SpaceType.LAND, firstSpace, {tileType: TileType.NUCLEAR_ZONE});
+        game.phase = Phase.SOLAR;
 
         player.megaCredits = 2;
         otherPlayer.megaCredits = 0;
 
         const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY}, true);
+        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
 
         // player who placed next to Nuclear zone, loses nothing.
         expect(player.megaCredits).is.eq(2);
@@ -385,9 +388,10 @@ describe("AresHandler", function () {
     it("No adjacency hazard costs during WGT", function() {
         const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
         AresHandler.putHazardAt(firstSpace, TileType.DUST_STORM_MILD);
+        game.phase = Phase.SOLAR;
 
         const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY}, true);
+        game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
 
         // Not asking you which production to lose.
         expect(game.interrupts).has.lengthOf(0);
@@ -398,8 +402,9 @@ describe("AresHandler", function () {
         AresHandler.putHazardAt(space, TileType.EROSION_SEVERE);
         player.megaCredits = 8;
         expect(player.getTerraformRating()).eq(20);
+        game.phase = Phase.SOLAR;
 
-        game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY}, true);
+        game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
 
         expect(space.tile!.tileType).eq(TileType.GREENERY);
 

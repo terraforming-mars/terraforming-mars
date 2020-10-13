@@ -7,7 +7,8 @@ import { LogMessageData } from "../LogMessageData";
 import { LogMessageDataType } from "../LogMessageDataType";
 import { Card } from "./card/Card";
 import { $t } from "../directives/i18n";
-import { getProjectCardByName } from "./../Dealer";
+import { Decks } from "../Deck";
+import { ALL_PRELUDE_DECKS, ALL_PROJECT_DECKS } from "../cards/AllCards";
 
 export const LogPanel = Vue.component("log-panel", {
     props: ["id", "players"],
@@ -70,7 +71,7 @@ export const LogPanel = Vue.component("log-panel", {
                             }
                         }
                     }
-                    const card = getProjectCardByName(data.value)
+                    const card = Decks.findByName(ALL_PROJECT_DECKS.concat(ALL_PRELUDE_DECKS), data.value);
                     if (card && card.cardType) return this.parseCardType(card.cardType, data.value);
                 } else if (translatableMessageDataTypes.includes(data.type)) {
                     return $t(data.value);

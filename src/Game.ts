@@ -550,12 +550,12 @@ export class Game implements ILoadable<SerializedGame, Game> {
       this.addInterrupt(new SelectHowToPayInterrupt(player, amount, title, canUseSteel, canUseTitanium));
     }
 
-    public addOceanInterrupt(player: Player, title?: string, isWorldGov: boolean = false): void {
+    public addOceanInterrupt(player: Player, title?: string): void {
       if (this.board.getOceansOnBoard() + this.pendingOceans  >= constants.MAX_OCEAN_TILES) {
         return;
       }
       this.pendingOceans++;
-      this.addInterrupt(new SelectOcean(player, this, title, isWorldGov));
+      this.addInterrupt(new SelectOcean(player, this, title));
     }
 
     public addColonyInterrupt(player: Player, allowDuplicate: boolean = false, title: string): void {
@@ -954,6 +954,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
       }
       // solar Phase Option
       if (this.gameOptions.solarPhaseOption && ! this.marsIsTerraformed()) {
+        this.phase = Phase.SOLAR;
         this.gotoWorldGovernmentTerraforming();
         return;
       }
@@ -961,6 +962,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     private gotoEndGeneration() {
+      this.phase = Phase.INTERGENERATION
       if (this.gameOptions.coloniesExtension) {
         this.colonies.forEach(colony => {
           colony.endGeneration();
@@ -1331,7 +1333,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
 
     public increaseOxygenLevel(
-        player: Player, steps: 1 | 2, isWorldGov: boolean = false): undefined {
+        player: Player, steps: 1 | 2): undefined {
       if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
         return undefined;
       }
@@ -1339,11 +1341,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return this.increaseOxygenLevel(player, 1);
       }
       this.oxygenLevel += steps;
-      if (!isWorldGov) {
+      if (this.phase !== Phase.SOLAR) {
         player.increaseTerraformRatingSteps(steps, this);
       }
       if (this.oxygenLevel === 8 || (steps === 2 && this.oxygenLevel === 9)) {
-        return this.increaseTemperature(player, 1, isWorldGov);
+        return this.increaseTemperature(player, 1);
       }
       if (this.gameOptions.aresExtension) {
         AresHandler.onOxygenChange(this);
@@ -1355,42 +1357,42 @@ export class Game implements ILoadable<SerializedGame, Game> {
       return this.oxygenLevel;
     }
 
-    public increaseVenusScaleLevel(
-      player: Player, steps: 1 | 2 | 3, isWorldGov: boolean = false): SelectSpace | undefined {
-    if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
-      return undefined;
-    }
-    if (steps > 1 && this.venusScaleLevel + 2 * steps > constants.MAX_VENUS_SCALE) {
-      steps = (steps === 3) ? 2 : 1; // typing disallows decrement
-      return this.increaseVenusScaleLevel(player, steps);
-    }
-    this.venusScaleLevel += 2 * steps;
-    if (!isWorldGov) {
-      player.increaseTerraformRatingSteps(steps, this);
-    }
-
-    // Check for Aphrodite corporation
-    this.players.forEach((player) => {
-      if (player.isCorporation(CorporationName.APHRODITE)) {
-        player.megaCredits += 2 * steps;
+    public increaseVenusScaleLevel(player: Player, steps: 1 | 2 | 3): SelectSpace | undefined {
+      if (this.venusScaleLevel >= constants.MAX_VENUS_SCALE) {
+        return undefined;
       }
-    });
+      if (steps > 1 && this.venusScaleLevel + 2 * steps > constants.MAX_VENUS_SCALE) {
+        steps = (steps === 3) ? 2 : 1; // typing disallows decrement
+        return this.increaseVenusScaleLevel(player, steps);
+      }
+      this.venusScaleLevel += 2 * steps;
+      if (this.phase !== Phase.SOLAR) {
+        player.increaseTerraformRatingSteps(steps, this);
+      }
 
-    if ((!isWorldGov) && this.venusScaleLevel === 8
-        || ((steps === 2 || steps === 3) && this.venusScaleLevel === 10)
-        || (steps === 3 && this.venusScaleLevel === 12)
-    ) {
-      player.cardsInHand.push(this.dealer.dealCard());
-    }
+      // Check for Aphrodite corporation
+      this.players.forEach((player) => {
+        if (player.isCorporation(CorporationName.APHRODITE)) {
+          player.megaCredits += 2 * steps;
+        }
+      });
 
-    if ((!isWorldGov) && this.venusScaleLevel === 16
-        || ((steps === 2 || steps === 3) && this.venusScaleLevel === 18)
-        || (steps === 3 && this.venusScaleLevel === 20)
-    ) {
-      player.increaseTerraformRating(this);
-    }
+      if (this.phase !== Phase.SOLAR) {
+        if (this.venusScaleLevel === 8
+            || ((steps === 2 || steps === 3) && this.venusScaleLevel === 10)
+            || (steps === 3 && this.venusScaleLevel === 12)
+        ) {
+          player.cardsInHand.push(this.dealer.dealCard());
+        }
 
-    return undefined;
+        if (this.venusScaleLevel === 16
+            || ((steps === 2 || steps === 3) && this.venusScaleLevel === 18)
+            || (steps === 3 && this.venusScaleLevel === 20)
+        ) {
+          player.increaseTerraformRating(this);
+        }
+      }
+      return undefined;
   }
 
   public getVenusScaleLevel(): number {
@@ -1398,7 +1400,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
   }
 
     public increaseTemperature(
-        player: Player, steps: -2 | 1 | 2 | 3, isWorldGov: boolean = false): undefined {
+        player: Player, steps: -2 | 1 | 2 | 3): undefined {
       if (steps === -2) {
         if (this.temperature >= constants.MIN_TEMPERATURE + 4) {
           this.temperature -= 4;
@@ -1420,11 +1422,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
         return;
       }
       this.temperature += 2 * steps;
-      if (!isWorldGov) {
+      if (this.phase !== Phase.SOLAR) {
         player.increaseTerraformRatingSteps(steps, this);
       }
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
-      if (!isWorldGov) {
+      if (this.phase !== Phase.SOLAR) {
         if (steps === 3 && this.temperature === -20) {
           player.addProduction(Resources.HEAT, 2);
         } else if (this.temperature === -24 || this.temperature === -20 ||
@@ -1444,7 +1446,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
           ((steps === 2 || steps === 3) && this.temperature === 2) ||
           (steps === 3 && this.temperature === 4)
       ) {
-        this.addOceanInterrupt(player, "Select space for ocean from temperature increase", isWorldGov);
+        this.addOceanInterrupt(player, "Select space for ocean from temperature increase");
       }
 
       if (this.gameOptions.aresExtension) {
@@ -1506,7 +1508,7 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
     public addTile(
         player: Player, spaceType: SpaceType,
-        space: ISpace, tile: ITile, isWorldGov: boolean = false): void {
+        space: ISpace, tile: ITile): void {
 
       // Part 1, basic validation checks.
 
@@ -1528,14 +1530,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
 
       // No need to test for payment in world government.
       if (this.gameOptions.aresExtension) {
-        AresHandler.assertCanPay(this, player, space, isWorldGov);
+        AresHandler.assertCanPay(this, player, space);
       }
 
       // Part 2. Collect additional fees.
 
       // Adjacency costs are before the hellas ocean tile because this is a mandatory cost.
       if (this.gameOptions.aresExtension) {
-        AresHandler.payAdjacencyAndHazardCosts(this, player, space, isWorldGov);
+        AresHandler.payAdjacencyAndHazardCosts(this, player, space);
       }
 
       // Hellas special requirements ocean tile
@@ -1556,18 +1558,13 @@ export class Game implements ILoadable<SerializedGame, Game> {
       const initialTileTypeForAres = space.tile?.tileType;
 
       // Part 4. Place the tile
-
-      if (tile.tileType === TileType.OCEAN) {
-        space.player = undefined;
-      } else {
-        space.player = player;
-      }
       space.tile = tile;
+      space.player = player;
       LogHelper.logTilePlacement(this, player, space, tile.tileType);
 
       // Part 5. Collect the bonuses
 
-      if (!isWorldGov) {
+      if (this.phase !== Phase.SOLAR) {
         space.bonus.forEach((spaceBonus) => {
           this.grantSpaceBonus(player, spaceBonus);
         });
@@ -1582,13 +1579,14 @@ export class Game implements ILoadable<SerializedGame, Game> {
             AresHandler.earnAdjacencyBonuses(this, player, space);
         }
 
-        PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType, isWorldGov);
+        PartyHooks.applyMarsFirstRulingPolicy(this, player, spaceType);
 
         if (arcadianCommunityBonus) {
           player.megaCredits += 3;
         }
       }
 
+      // Mining Guild tile placement effects should resolve before removing space.player for Oceans
       this.players.forEach((p) => {
         if (p.corporationCard !== undefined &&
             p.corporationCard.onTilePlaced !== undefined) {
@@ -1601,7 +1599,11 @@ export class Game implements ILoadable<SerializedGame, Game> {
         });
       });
 
-      AresHandler.grantBonusForRemovingHazard(this, player, initialTileTypeForAres, isWorldGov);
+      if (tile.tileType === TileType.OCEAN) {
+        space.player = undefined;
+      }
+
+      AresHandler.grantBonusForRemovingHazard(this, player, initialTileTypeForAres);
 
       // Must occur after all other onTilePlaced operations.
       if (this.gameOptions.aresExtension) {
@@ -1650,18 +1652,18 @@ export class Game implements ILoadable<SerializedGame, Game> {
     }
     public addOceanTile(
         player: Player, spaceId: string,
-        spaceType: SpaceType = SpaceType.OCEAN, isWorldGov: boolean = false): void {
+        spaceType: SpaceType = SpaceType.OCEAN): void {
       if (this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES) {
         return;
       }
       this.addTile(player, spaceType, this.getSpace(spaceId), {
         tileType: TileType.OCEAN
-      }, isWorldGov);
-      if (!isWorldGov) {
+      });
+      if (this.phase !== Phase.SOLAR) {
         player.increaseTerraformRating(this);
       }
       if (this.gameOptions.aresExtension) {
-        AresHandler.onOceanPlaced(this, player, isWorldGov);
+        AresHandler.onOceanPlaced(this, player);
       }
     }
 

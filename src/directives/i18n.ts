@@ -12,7 +12,7 @@ export function translateText(englishText: string): string {
     englishText = normalizeText(englishText);
 
     const languages = TM_translations[englishText];
- 
+
     if (languages !== undefined && languages[lang] !== undefined) {
         translatedText = languages[lang];
     } else {

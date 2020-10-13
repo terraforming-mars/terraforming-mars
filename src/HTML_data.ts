@@ -1083,7 +1083,7 @@ export const HTML_DATA: Map<string, string> =
 [CardName.NUCLEAR_ZONE,` 
       <div class="content">
         <div class="points points-big">-2</div>
-          <div class="tile special-tile" style="font-size:40px;">&#x2622;</div><br>
+          <div class="tile special-tile" style="font-size:28px;line-height:50px">&#x2622;</div><br>
           <div class="tile temperature-tile"></div> <div class="tile temperature-tile"></div>
         <div class="description">
           (Place this tile and raise temperature 2 steps.)
@@ -1194,11 +1194,10 @@ export const HTML_DATA: Map<string, string> =
                 <div class="production-prefix minus"></div><div class="energy production "></div>
                 <div class="production-prefix plus"></div><div class="money production ">4</div>
             </div>
-            <div class="tile city-tile " style="margin-left:20px;margin-bottom:5px; "></div><br>
+            <div class="tile city-tile " style="margin-left:20px;margin-bottom:5px; "></div>
             <div class="plant resource "></div><div class="plant resource "></div>
-            <div class="description " style="margin-top:-8px;font-size:11px;text-align: left">
-                <div>Requires 12% oxygen. Gain 2 plants. Place a City tile.</div>
-                <div style="width: 135px">Decrease your Energy production 1 step and increase your MC production 4 steps.</div>
+            <div class="description " style="margin-top:15px;font-size:11px;text-align: left">
+                <div style="width: 120px">Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 4 steps.</div>
             </div>
         </div>
 `],
@@ -3220,7 +3219,7 @@ export const HTML_DATA: Map<string, string> =
               <div class="content ">
                 <div class="points points-big ">1</div>
                   <div class="nowrap">
-                    <div class="resource money">1</div> / <div class="tile city-tile-small red-outline"></div>
+                    <div class="resource money">1</div> / <div class="tile city-tile red-outline"></div>
                   </div>
                   <div class="nowrap">
                     <div class="resource money">1</div> / <div class="colony tile red-outline"></div>
@@ -4129,8 +4128,8 @@ export const HTML_DATA: Map<string, string> =
       <div class="contentCorporation">
         <div class="corporationEffectBox">
           <div class="corporationEffectBoxLabel">EFFECT</div>
-          <div class="production-box" style="width:50px;margin-left:-2px">
-          -<div class="resource wild"></div>
+          <div class="production-box corp-effect-box">
+          -<div class="resource wild corp-effect"></div>
           </div>
           OR - <div class="resource wild red-outline"></div>:
           PAY<div class="resource money" style="margin-right:-2px">3</div>
